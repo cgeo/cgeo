@@ -1,52 +1,29 @@
-Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.<br> (Mogelijk wil je een [snelkoppeling configureren](cgeo-setting://quicklaunchitems_sorted) of [navigatie onderin aanpassen](cgeo-setting://custombnitem) voor eenvoudig gebruik, hiervoor is het nodig eerst de uitgebreide instellingen aan te zetten.)
-
 ### Kaart
-- Nieuw: Kaartthema opslaan per tegelprovider (UnifiedMap)
-- Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
-- Nieuw: Voeg scheidingsteken toe tussen offline en online kaart bronnen
-- Nieuw: Ondersteun Mapsforge als alternatief voor VTM in UnifiedMap, zie [Instellingen => Map Bronnen => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
-- Wijziging: 'Toon hoogtekaart' verplaatst naar het lange tik menu (UnifiedMap)
-- Wijziging: Gebruik nieuwe reliëfweergave algoritme voor Mapsforge offline kaarten
-- Nieuw: Reliëfweergave ondersteuning voor UnifiedMap Mapsforge offline kaarten
-- Nieuw: Reliëfweergave ondersteuning voor UnifiedMap VTM kaarten (vereist online verbinding)
-- Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
-- Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
-- Wijziging: Maak de lang drukken speld meer in de stijl van c:geo
-- Wijziging: Offline data management functies (download kaarten, controleer op ontbrekende routering / hoogte gegevens) verplaatst naar map selectie menu => "Beheer offline gegevens"
-- Oplossing: Kaart wordt niet bijgewerkt met gewijzigde caches
+- Nieuw: Ondersteun verhoging Winter thema in kaart download
+- Nieuw: Adaptieve Hoogtelijnen, optionele hoge kwaliteit modus (UnifiedMap Mapsforge)
+- Wijziging: Houd de huidige viewport op de kaart van een lijst, als alle caches passen in de huidige viewport
+- Nieuw: Herontworpen routes/track van het dialoogvenster snelle instellingen
+- Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
+- Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
+- Nieuw: Toon geofences voor lab stadia (UnifiedMap) - "Circles" inschakelen in kaart snelle instellingen om ze te tonen
+- Nieuw: Optie om cirkels met individuele straal in te stellen op waypoints ("geofence" contextoptie)
+- Oplossing: Kaartweergave niet bijgewerkt bij het verwijderen van cache van de huidig getoonde lijst
+- Oplossing: Aantal caches in lijst kiezer niet bijgewerkt bij wijziging lijst inhoud
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Cache details
-- Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
-- Nieuw: Sta grote getallen toe in formules
-- Nieuw: Ondersteun meer constellaties voor variabelen in formules
-- Fix: Meerdere afbeeldingen in persoonlijke notitie niet toegevoegd aan het tabblad afbeeldingen
-- Oplossing: Behandeling van projecties in waypoints en persoonlijke notities
-- Nieuw: Lange tik op datum in het logboek haalt vorige log datum op
-- Oplossing: Het resetten van een cache naar oorspronkelijke coördinaten verwijderd niet de "aangepaste coördinaten" vlag
-- Nieuw: Bevestig het overschrijven van log op snelle offline log
-- Nieuw: Update cache status bij het versturen van een log
-- Nieuw: Gekleurde HTML-bronweergave van cache details
-- Oplossing: checksum(0) retourneert foutieve waarde
-- Oplossing: Log wijzigen verwijderd "vrienden" status
+- Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
+- Oplossing: Spraakservice onderbroken bij scherm rotatie
+- Oplossing: Cache details: Lijsten voor cache niet bijgewerkt na het tikken op de lijstnaam en verwijderen uit die lijst
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Algemeen
-- Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
-- Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
-- Nieuw: Unieke pictogrammen voor geocaching.com blockparty en HQ gebeurtenistypes
-- Nieuw: Stel voorkeur in voor afbeeldingsgrootte voor afbeeldingen geladen vanuit geocaching.com caches en trackables
-- Oplossing: "Open in browser" werkt niet voor trackable logs
-- Nieuw: Optie om gedownloade bestanden te beheren (kaarten, thema's, routering en reliëfweergave gegevens)
-- Nieuw: Optie om een cache uit alle lijsten te verwijderen (= markeer als te verwijderen)
-- Oplossing: Herstel coördinaten niet gedetecteerd door c:geo voor niet opgeslagen caches
-- Nieuw: Sta het wissen van het filter toe als er geen benoemd filter is opgeslagen
-- Oplossing: "Lege lijst" bevestiging popt up bij het starten van een pocket query download in een nieuw gemaakte lijst
-- Wijziging: Eigen caches met offline logs tonen offline log indicator
-- Nieuw: Configureerbare datumnotatie (bijv: cache logs), zie [Instellingen => Uiterlijk => Datumformaat](cgeo-settings://short_date_format)
-- Nieuw: Leid informatie over connectoren op het startscherm om naar een connector specifiek voorkeurenscherm
-- Nieuw: Extra emojis voor cachepictogrammen
-- Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebration, block party en maze
-- Wijziging: Cache type filter "Anders" bevat GCHQ, APE en onbekende types
-- Oplossing: Geschiedenis lengte en nabijheidsinstellingen delen schuifregelaar waarden
-- Oplossing: Trackable logpagina toont tijd/coördinaat invoervelden voor trackables die dit niet ondersteunen
-- Oplossing: Enkele crashes
-- Oplossing: Sommige schuifregelaars in instellingen hebben problemen met niet-geïnitialiseerde waarden
+- Nieuw: opnieuw ontworpen zoekpagina
+- Nieuw: Inhoud telling filter
+- Nieuw: Ondersteuning voor coördinaten in DD,DDDDDDD formaat
+- Nieuw: Toon laatst gebruikte filternaam in filter dialoogvenster
+- Nieuw: Ondersteuning voor het openen van lokale Wherigo-bestanden
+- Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
+- Oplossing: Kleurproblemen met menupictogrammen in lichte modus
+- Oplossing: Nabijgelegen afstandslimiet instelling werkt niet goed voor kleine waarden
+- New: Coordinate calculator: Function to replace "x" with multiplication symbol
