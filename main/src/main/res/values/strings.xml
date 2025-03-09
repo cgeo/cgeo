@@ -383,6 +383,7 @@
     <string name="translator_language_detection_error">Failed to initialize language detection</string>
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
+    <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
