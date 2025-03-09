@@ -758,7 +758,7 @@ checkstyle {
     // assign the checkstyle version explicitly here
     // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
     // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.20.1'
+    toolVersion = '10.21.1'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
