@@ -378,7 +378,7 @@ public final class StoredList extends AbstractList {
             final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
             final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
 
-            final String current = defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim();
+            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
 
             final List<String> hierarchies = DataStore.getListHierarchy();
             final boolean hasHierarchies = hierarchies.size() > 1;
@@ -387,7 +387,7 @@ public final class StoredList extends AbstractList {
                     hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
                 }
                 listprefix.setVisibility(View.VISIBLE);
-                listprefixView.setText(defaultValue.substring(0, defaultValue.length() - current.length()));
+                listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
                 listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
             } else {
                 listprefix.setVisibility(View.GONE);
