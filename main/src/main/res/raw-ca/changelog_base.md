@@ -26,4 +26,4 @@
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
 - Solució: problemes de color amb les icones del menú en mode de llum
 - Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Novetat: Calculadora de coordenades: funció per substituir "x" pel símbol de multiplicació
