@@ -13,4 +13,4 @@
 - Fix: c:geo finns inte i Play Store för GPS-lösa enheter
 - Fix: c:geo kraschar tyst vid val av folder i vissa konfigurationer
 - Förändring: Gör extremcaching.com till en offline-kontakt (deras tjänst har upphört)
-- Fix: Update status info in map on zoom level changes
+- Fix: Uppdatera statusinformation i kartan på förändringar på zoomnivå
