@@ -33,7 +33,8 @@ public class ConnectorFactoryTest {
 
     @Test
     public void testGeocodeOpenCaching() {
-        assertThat(ConnectorFactory.getConnector("OZ12345")).isInstanceOf(OCConnector.class); // opencaching CZ
+        assertThat(ConnectorFactory.getConnector("OZ12345")).isInstanceOf(OCCZConnector.class); // opencaching CZ
+        assertThat(ConnectorFactory.getConnector("OZ12345")).isNotInstanceOf(OCConnector.class); // opencaching CZ got is no longer subclassed from OCConnector
         assertThat(ConnectorFactory.getConnector("OC12345")).isInstanceOf(OCConnector.class); // opencaching DE
         assertThat(ConnectorFactory.getConnector("OU12345")).isInstanceOf(OCConnector.class); // opencaching US
         assertThat(ConnectorFactory.getConnector("OK12345")).isInstanceOf(OCConnector.class); // opencaching UK
@@ -69,7 +70,7 @@ public class ConnectorFactoryTest {
 
     @Test
     public void testTrim() {
-        assertThat(ConnectorFactory.getConnector("   OZ12345   ")).isInstanceOf(OCConnector.class); // opencaching CZ
+        assertThat(ConnectorFactory.getConnector("   OZ12345   ")).isInstanceOf(OCCZConnector.class); // opencaching CZ
         assertThat(ConnectorFactory.getConnector("   OZ 12345   ")).isInstanceOf(UnknownConnector.class);
     }
 
