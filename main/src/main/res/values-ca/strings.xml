@@ -1717,6 +1717,8 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
+    <string name="calccoord_remove_spaces">Elimina espais</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
     <string name="calccoord_paste_from_clipboard">Enganxa des del porta-retalls</string>
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
@@ -2747,4 +2749,5 @@
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
     <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
     <string name="dbi_search_title">Buscar per</string>
+    <string name="dbi_search_columnSelection">Restringir a</string>
 </resources>
