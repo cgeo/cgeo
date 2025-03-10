@@ -256,7 +256,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 105;
+    private static final int dbVersion = 106;
     public static final int customListIdOffset = 10;
 
     /**
@@ -297,7 +297,8 @@ public class DataStore {
             102, // add projection attributes to waypoints
             103, // add more projection attributes to waypoints
             104,  // add geofence radius for lab stages
-            105  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
+            105,  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
+            106  // Update lab caches DT rating to zero from minus one
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -1916,6 +1917,16 @@ public class DataStore {
                             }
                         } catch (final SQLException e) {
                             onUpgradeError(e, 105);
+                        }
+                    }
+
+                    // Update lab cache DT values
+                    if (oldVersion < 106) {
+                        try {
+                            db.execSQL("UPDATE " + dbTableCaches + " SET difficulty = 0 WHERE difficulty < 0");
+                            db.execSQL("UPDATE " + dbTableCaches + " SET terrain = 0 WHERE terrain < 0");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 106);
                         }
                     }
 
