@@ -1860,10 +1860,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 } else {
                     binding.hint.setText(cache.getHint());
                 }
-                binding.descriptionTranslateNote.setText(R.string.translator_language_detected, sourceLng);
+                binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_language_detected), sourceLng));
                 return;
             }
-            
+
             cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
 
             OfflineTranslateUtils.getTranslator(cda, sourceLng,
@@ -1884,7 +1884,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     };
                     OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.description.getText().toString(), translatedText -> {
                         displayDescription(getActivity(), cache, translatedText, binding.description);
-                        binding.descriptionTranslateNote.setText(R.string.translator_translation_success, sourceLng);
+                        binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), sourceLng));
                     }, errorConsumer);
                     OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.hint.getText().toString(), binding.hint::setText, errorConsumer);
                 });
