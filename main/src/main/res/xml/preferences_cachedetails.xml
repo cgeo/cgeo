@@ -18,6 +18,16 @@
         android:summary="@string/init_summary_openlastdetailspage"
         android:title="@string/init_openlastdetailspage"
         app:iconSpaceReserved="false" />
+    <ListPreference
+        android:key="@string/pref_translation_language"
+        android:title="@string/translator_preference_target_lng"
+        android:summary="@string/translator_preference_target_lng_summary"
+        app:iconSpaceReserved="false" />
+    <MultiSelectListPreference
+        android:key="@string/pref_translation_notranslate"
+        android:title="@string/translator_preference_nottranslate_lng"
+        android:summary="@string/translator_preference_nottranslate_lng_summary"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="@string/pref_livelist"

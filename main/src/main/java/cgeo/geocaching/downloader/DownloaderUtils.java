@@ -27,9 +27,11 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_LANGUAGE_MODEL;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_MAPS;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_THEMES;
 
@@ -62,6 +64,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.mlkit.common.model.RemoteModelManager;
+import com.google.mlkit.nl.translate.TranslateRemoteModel;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -409,7 +413,17 @@ public class DownloaderUtils {
         for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_HILLSHADING_TILES)) {
             offlineItems.add(new Pair<>(DOWNLOADTYPE_HILLSHADING_TILES.id, offlineItem.localFile));
         }
+        RemoteModelManager.getInstance().getDownloadedModels(TranslateRemoteModel.class).addOnSuccessListener(remoteModels -> {
+            for (TranslateRemoteModel model : remoteModels) {
+                if (!model.getLanguage().equalsIgnoreCase(OfflineTranslateUtils.LANGUAGE_UNDELETABLE)) {
+                    offlineItems.add(new Pair<>(DOWNLOADTYPE_LANGUAGE_MODEL.id, model.getLanguage()));
+                }
+            }
+            showDialog(activity, offlineItems);
+        }).addOnFailureListener(e -> showDialog(activity, offlineItems));
+    }
 
+    private static void showDialog(final Activity activity, final List<Pair<Integer, String>> offlineItems) {
         // confirmation dialog (grouped by type)
         final SimpleDialog.ItemSelectModel<Pair<Integer, String>> model = new SimpleDialog.ItemSelectModel<>();
         model
@@ -419,8 +433,8 @@ public class DownloaderUtils {
             .setDisplayMapper((item, itemGroup) -> TextParam.text(item.second), (item, itemGroup) -> String.valueOf(item.first), null)
             .activateGrouping(item -> activity.getString(Download.DownloadType.getFromId(item.first).getTypeNameResId()))
             .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
-            .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).first).getIconResId()))
-        ;
+            .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).first).getIconResId()));
+
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_items))
             .setPositiveButton(TextParam.id(R.string.delete))
             .selectMultiple(model, (selected) -> {
@@ -439,6 +453,9 @@ public class DownloaderUtils {
                         folder = PersistableFolder.ROUTING_TILES;
                     } else if (offlineItem.first == DOWNLOADTYPE_HILLSHADING_TILES.id) {
                         folder = PersistableFolder.OFFLINE_MAP_SHADING;
+                    } else if (offlineItem.first == DOWNLOADTYPE_LANGUAGE_MODEL.id) {
+                        OfflineTranslateUtils.deleteLanguageModel(offlineItem.second);
+                        filesDeleted++;
                     }
                     if (folder != null) {
                         final List<ContentStorage.FileInformation> files = cs.list(folder);
@@ -455,9 +472,7 @@ public class DownloaderUtils {
                 // update map lists in case something has changed there
                 MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
                 TileProviderFactory.buildTileProviderList(true);
-            })
-        ;
-
+            });
     }
 
     /**

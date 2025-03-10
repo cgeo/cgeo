@@ -70,6 +70,9 @@
                     android:id="@+id/menu_update_mapdata"
                     android:title="@string/menu_update_mapdata"/>
                 <item
+                    android:id="@+id/menu_download_language"
+                    android:title="@string/translator_model_download_select"/>
+                <item
                     android:id="@+id/menu_delete_offline_data"
                     android:title="@string/menu_delete_offline_data"/>
             </menu>

@@ -104,6 +104,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
@@ -174,6 +175,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.core.Observable;
@@ -1701,7 +1703,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         private Geocache cache;
 
-
         @Override
         public CachedetailDescriptionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             return CachedetailDescriptionPageBinding.inflate(getLayoutInflater(), container, false);
@@ -1847,6 +1848,48 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         }
 
+        private void translateListing() {
+            final CacheDetailActivity cda = (CacheDetailActivity) getActivity();
+            final OfflineTranslateUtils.Language sourceLng = cda.translationStatus.getSourceLanguage();
+
+            if (cda.translationStatus.isTranslated()) {
+                cda.translationStatus.setNotTranslated();
+                reloadDescription(cda, cache, true, 0, cda.descriptionStyle);
+                if (TextUtils.containsHtml(cache.getHint())) {
+                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
+                } else {
+                    binding.hint.setText(cache.getHint());
+                }
+                binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_language_detected), sourceLng));
+                return;
+            }
+
+            cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
+
+            OfflineTranslateUtils.getTranslator(cda, sourceLng,
+                unsupportedLng -> {
+                    cda.translationStatus.abortTranslation();
+                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
+                }, modelDownloading -> {
+                    binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification);
+                }, translator -> {
+                    if (null == translator) {
+                        binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
+                        return;
+                    }
+
+                    final Consumer<Exception> errorConsumer = error -> {
+                        binding.descriptionTranslateNote.setText(getResources().getText(R.string.translator_translation_error, error.getMessage()));
+                        binding.descriptionTranslateButton.setEnabled(false);
+                    };
+                    OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.description.getText().toString(), translatedText -> {
+                        displayDescription(getActivity(), cache, translatedText, binding.description);
+                        binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), sourceLng));
+                    }, errorConsumer);
+                    OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.hint.getText().toString(), binding.hint::setText, errorConsumer);
+                });
+        }
+
         @Override
         public void onDestroy() {
             super.onDestroy();
@@ -1887,6 +1930,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
                 createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle), p -> {
                     displayDescription(activity, cache, p.first, binding.description);
+
+                    OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString(), this::translateListing);
+
                     // we need to use post, so that the textview is layouted before scrolling gets called
                     if (((CacheDetailActivity) activity).lastActionWasEditNote) {
                         ((CacheDetailActivity) activity).scrollToBottom();
