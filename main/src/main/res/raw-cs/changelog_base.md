@@ -16,6 +16,7 @@
 - Oprava: Přerušení hlasové služby při otáčení obrazovky
 - Oprava: Podrobnosti o kešce: Seznamy kešek se neaktualizují po klepnutí na název seznamu a odebrání dané kešky z tohoto seznamu
 - Oprava: Uživatelská poznámka se ztratí při obnovení dobrodružství v Lab Adventures
+- New: Offline translation of listing text and logs (experimental)
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
@@ -27,3 +28,4 @@
 - Oprava: Problémy s ikonami menu ve světlém režimu
 - Oprava: Nastavení omezení vzdálenosti v blízkosti nefunguje správně pro malé hodnoty
 - Novinka: Souřadnicová kalkulačka: Funkce pro nahrazení symbolu "x" symbolem násobení
+- Oprava: Lab kešky vyloučené O/T filtrem i s aktivním "zahrnout nejisté"
