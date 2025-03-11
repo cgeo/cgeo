@@ -16,6 +16,7 @@
 - Oplossing: Spraakservice onderbroken bij scherm rotatie
 - Oplossing: Cache details: Lijsten voor cache niet bijgewerkt na het tikken op de lijstnaam en verwijderen uit die lijst
 - Oplossing: Gebruikersnotitie gaat verloren door het vernieuwen van een lab avontuur
+- Nieuw: Offline vertaling van tekst en logs (experimenteel)
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
@@ -27,3 +28,4 @@
 - Oplossing: Kleurproblemen met menupictogrammen in lichte modus
 - Oplossing: Nabijgelegen afstandslimiet instelling werkt niet goed voor kleine waarden
 - Nieuw: Coördinaatberekenaar: Functie om "x" te vervangen door het vermenigvuldigingssymbool
+- Oplossing: Lab caches uitgesloten door D/T filter zelfs met actieve "inclusief onzeker"
