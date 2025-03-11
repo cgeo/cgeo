@@ -16,6 +16,7 @@
 - Fix: Speech service interrupted on screen rotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: User note gets lost on refreshing a lab adventure
+- New: Offline translation of listing text and logs (experimental)
 
 ### Bendras
 - New: Redesigned search page
@@ -27,3 +28,4 @@
 - Fix: Color issues with menu icons in light mode
 - Fix: Nearby distance limit setting not working properly for small values
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
