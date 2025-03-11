@@ -120,8 +120,6 @@
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">ترجمة إلى %s</string>
-    <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
     <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
