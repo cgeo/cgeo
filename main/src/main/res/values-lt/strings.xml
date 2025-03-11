@@ -204,9 +204,6 @@
     <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
     <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
     <!-- translation -->
-    <string name="translate">Išversti</string>
-    <string name="translate_to_sys_lang">Išversti į %s</string>
-    <string name="translate_to_english">Išversti į anglų</string>
     <string name="translate_length_warning">Vertimas gali nepavykti jei tekstas labai ilgas.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
