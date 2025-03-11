@@ -221,9 +221,9 @@
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- translation -->
-    <string name="translate">Tradueix</string>
-    <string name="translate_to_sys_lang">Tradueix a %s</string>
-    <string name="translate_to_english">Tradueix a l\'anglès</string>
+    <string name="translate">Tradueix a l\'aplicació Google Translate</string>
+    <string name="translate_to_sys_lang">Tradueix a %s (Web)</string>
+    <string name="translate_to_english">Traduir a l\'anglès (web)</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -341,6 +341,28 @@
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Bàsic</string>
+    <string name="translator_preference_target_lng">Idioma de traducció fora de línia</string>
+    <string name="translator_preference_target_lng_summary">Idioma objectiu per al traductor fora de línia</string>
+    <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
+    <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
+    <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
+    <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
+    <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
+    <string name="translator_model_download_notification">S\'ha iniciat la descàrrega del model de traducció</string>
+    <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
+    <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
+    <string name="translator_model">Model de traducció</string>
+    <string name="translator_tooltip">Traducció fora de línia</string>
+    <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
+    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
+    <string name="translator_language_missing">Falta el paquet d\'idioma %s</string>
+    <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
+    <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_language_detection_error">No s\'ha pogut inicialitzar la detecció d\'idioma</string>
+    <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
+    <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
+    <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
