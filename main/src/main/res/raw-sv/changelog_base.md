@@ -16,6 +16,7 @@
 - Fix: Talservice avbryts vid skärmrotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: Användaranteckning tappas när du laddar upp ett lab adventure
+- New: Offline translation of listing text and logs (experimental)
 
 ### Allmänt
 - New: Redesigned search page
@@ -27,3 +28,4 @@
 - Fix: Färg-problem med menyikoner i ljust läge
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
