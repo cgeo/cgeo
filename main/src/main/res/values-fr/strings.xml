@@ -219,9 +219,6 @@
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
     <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- translation -->
-    <string name="translate">Traduire</string>
-    <string name="translate_to_sys_lang">Traduire en %s</string>
-    <string name="translate_to_english">Traduire en anglais</string>
     <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
