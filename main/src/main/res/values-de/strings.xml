@@ -221,9 +221,6 @@
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- translation -->
-    <string name="translate">Übersetzen</string>
-    <string name="translate_to_sys_lang">Übersetze in %s</string>
-    <string name="translate_to_english">Übersetze in Englisch</string>
     <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
