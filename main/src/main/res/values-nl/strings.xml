@@ -221,9 +221,9 @@
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
     <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
     <!-- translation -->
-    <string name="translate">Vertalen</string>
-    <string name="translate_to_sys_lang">%s</string>
-    <string name="translate_to_english">Engels</string>
+    <string name="translate">Vertalen in de Google Translate App</string>
+    <string name="translate_to_sys_lang">Vertalen naar %s (Web)</string>
+    <string name="translate_to_english">Vertalen naar Engels (Web)</string>
     <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -340,6 +340,28 @@
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basis</string>
+    <string name="translator_preference_target_lng">Offline vertalen taal</string>
+    <string name="translator_preference_target_lng_summary">Doeltaal voor offline vertaler</string>
+    <string name="translator_preference_nottranslate_lng">Genegeerde talen</string>
+    <string name="translator_preference_nottranslate_lng_summary">Brontalen om geen vertaling voor aan te bieden</string>
+    <string name="translator_preference_disable">&lt;Schakel vertalen uit&gt;</string>
+    <string name="translator_model_download_select">Download offline vertalen taal</string>
+    <string name="translator_model_download_confirm_title">Bevestig taaldownload</string>
+    <string name="translator_model_download_confirm_txt">Vertaalmodel voor %s moet worden gedownload. Het model is grofweg 20-40 MB.</string>
+    <string name="translator_model_download_notification">Downloaden van vertaalmodel gestart</string>
+    <string name="translator_model_download_success">Vertaalmodel voor %s gedownload</string>
+    <string name="translator_model_download_error">Downloaden van vertaalmodel %1$s: %2$s is mislukt</string>
+    <string name="translator_model">Vertaal model</string>
+    <string name="translator_tooltip">Offline vertalen</string>
+    <string name="translator_language_select">Selecteer brontaal</string>
+    <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
+    <string name="translator_language_missing">Taalpakket ontbreekt %s</string>
+    <string name="translator_language_unknown">Kan taal niet identificeren</string>
+    <string name="translator_language_detected">Vertalen van \"%s\"</string>
+    <string name="translator_language_detection_error">Taaldetectie initialiseren mislukt</string>
+    <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
+    <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
+    <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
     <!-- location service -->
     <string name="loc_last">Laatst bekende</string>
     <string name="loc_net">Netwerk</string>
