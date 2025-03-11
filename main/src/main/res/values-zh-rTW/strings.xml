@@ -171,9 +171,6 @@
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">翻譯</string>
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为</string>
     <string name="translate_length_warning">文字太多，翻譯失敗。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
