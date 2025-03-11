@@ -120,8 +120,6 @@
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Isalin sa %s</string>
-    <string name="translate_to_english">Isalin sa Ingles</string>
     <string name="translate_length_warning">Ang pagsasalin ay pwedeng mabigo na may malaking halaga ng teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Nabigong mag-parse sa pag-login ng pahina</string>
