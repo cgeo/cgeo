@@ -218,9 +218,6 @@
     <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
     <string name="contact_multiple_matches">Контакт: Несколько совпадений</string>
     <!-- translation -->
-    <string name="translate">Переводить</string>
-    <string name="translate_to_sys_lang">Перевести на %s</string>
-    <string name="translate_to_english">Перевести на английский</string>
     <string name="translate_length_warning">Перевод может произойти неисправно из-за большого количество текста.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
