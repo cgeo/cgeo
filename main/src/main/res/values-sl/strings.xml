@@ -139,8 +139,6 @@
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Prevedi v: %s</string>
-    <string name="translate_to_english">Prevedi v: angleščino</string>
     <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
