@@ -16,6 +16,7 @@
 - Correcció: el servei de veu s'ha interromput en la rotació de la pantalla
 - Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
 - Correcció: la nota de l'usuari es perd en actualitzar una lab adventure
+- Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
 
 ### General
 - Nou: pàgina de cerca redissenyada
@@ -27,3 +28,4 @@
 - Solució: problemes de color amb les icones del menú en mode de llum
 - Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
 - Novetat: Calculadora de coordenades: funció per substituir "x" pel símbol de multiplicació
+- Correcció: El catxés Lab excloses pel filtre D/T fins i tot amb "inclou incert" actiu
