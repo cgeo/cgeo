@@ -16,6 +16,7 @@
 - Naprawiono: Usługa mowy była przerywana po obrócaniu ekranu
 - Naprawiono: Szczegóły skrytki: Listy skrytek nie aktualizowały się po dotknięciu na nazwę listy przy usuwaniu tej skrytki z listy
 - Naprawiono: Notatka użytkownika była tracona podczas odświeżania skrytki lab
+- Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
@@ -27,3 +28,4 @@
 - Naprawiono: Problemy z kolorami ikon menu w trybie jasnym
 - Naprawiono: Ustawienie limitu szukania w pobliżu nie działało poprawnie dla małych wartości
 - Nowość: Kalkulator współrzędnych: Funkcja do zastępowania „x” symbolem mnożenia
+- Naprawiono: Skrytki lab były wyłączone przez filtr D/T nawet z aktywnym „dołącz niepewność”
