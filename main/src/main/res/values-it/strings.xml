@@ -221,9 +221,6 @@
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
     <string name="contact_multiple_matches">Contatto: risultati multipli</string>
     <!-- translation -->
-    <string name="translate">Traduci</string>
-    <string name="translate_to_sys_lang">Traduci in %s</string>
-    <string name="translate_to_english">Traduci in inglese</string>
     <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
