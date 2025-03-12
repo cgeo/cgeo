@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 public class SearchCardView extends com.google.android.material.card.MaterialCardView {
 
@@ -31,7 +32,7 @@ public class SearchCardView extends com.google.android.material.card.MaterialCar
 
     public void setIcon(final int icon) {
         final ImageView img = findViewById(R.id.icon);
-        img.setImageDrawable(getResources().getDrawable(icon));
+        img.setImageDrawable(AppCompatResources.getDrawable(getContext(), icon));
     }
 
     public SearchCardView addOnClickListener(final Runnable runnable) {
