@@ -221,9 +221,6 @@
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
     <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
     <!-- translation -->
-    <string name="translate">Översätt</string>
-    <string name="translate_to_sys_lang">Översätt till %s</string>
-    <string name="translate_to_english">Översätt till engelska</string>
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -1711,6 +1708,8 @@
     <string name="calccoord_guided_value">Värde</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
+    <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Ersätt \'x\' med \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Klistra in från urklipp</string>
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
@@ -2694,4 +2693,5 @@
     <string name="dbi_edit_error">Fel vid uppdatering av fält</string>
     <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
     <string name="dbi_search_title">Sök efter</string>
+    <string name="dbi_search_columnSelection">Begränsa till</string>
 </resources>

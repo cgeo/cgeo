@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Перекласти на %s</string>
-    <string name="translate_to_english">Переклад англійською мовою</string>
     <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>

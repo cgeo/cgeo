@@ -184,9 +184,6 @@
     <string name="contact_not_found">Kontakt s aliasom/prezývkou %s sa nenašiel. Najprv si ho pridaj do kontaktov.</string>
     <string name="contact_multiple_matches">Kontakt: Viac zhôd</string>
     <!-- translation -->
-    <string name="translate">Preložiť</string>
-    <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
-    <string name="translate_to_english">Preložiť do angličtiny</string>
     <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>

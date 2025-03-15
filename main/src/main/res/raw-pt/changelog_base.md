@@ -16,6 +16,7 @@
 - Correcção: Serviço de fala interrompido na rotação do ecrã
 - Correcção: Detalhes da cache: Listas para a cache não eram actualizadas depois de tocar no nome da lista e remover essa cache dessa lista
 - Fix: User note gets lost on refreshing a lab adventure
+- New: Offline translation of listing text and logs (experimental)
 
 ### Geral
 - Novo: Página de pesquisa redesenhada
@@ -27,3 +28,4 @@
 - Correcção: problemas de cor com os ícones do menu no modo claro
 - Correcção: Configuração de limite de distância próxima não funcionava correctamente para valores pequenos
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Fix: Lab caches excluded by D/T filter even with active "include uncertain"

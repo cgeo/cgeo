@@ -115,8 +115,6 @@
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
-    <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
     <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>

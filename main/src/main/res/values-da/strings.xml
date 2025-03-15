@@ -178,9 +178,6 @@
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Oversæt</string>
-    <string name="translate_to_sys_lang">Oversæt til %s</string>
-    <string name="translate_to_english">Oversæt til engelsk</string>
     <string name="translate_length_warning">Oversættelse af lange tekster kan fejle.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
