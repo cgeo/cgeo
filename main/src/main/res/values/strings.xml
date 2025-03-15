@@ -3126,5 +3126,14 @@
     <string name="dbi_search_title">Search for</string>
     <string name="dbi_search_columnSelection">Restrict to</string>
 
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Recently used</string>
+    <string name="emoji_category_symbols">Symbols</string>
+    <string name="emoji_category_dots">Dots</string>
+    <string name="emoji_category_places">Places</string>
+    <string name="emoji_category_food">Food &amp; Beverage</string>
+    <string name="emoji_category_activity">Activity</string>
+    <string name="emoji_category_people">People</string>
+    <string name="emoji_category_numbers">Numbers</string>
 
 </resources>
