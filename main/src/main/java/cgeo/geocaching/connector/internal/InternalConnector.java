@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
@@ -78,6 +79,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     @NonNull
     public String getName() {
         return "Internal";
+    }
+
+    @Override
+    @NonNull
+    public String getDisplayName() {
+        return LocalizationUtils.getStringWithFallback(R.string.internal_connector_name, "User Defined Caches");
     }
 
     @Override

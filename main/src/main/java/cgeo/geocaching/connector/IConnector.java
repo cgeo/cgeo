@@ -23,6 +23,10 @@ public interface IConnector {
     @NonNull
     String getName();
 
+    @NonNull
+    String getDisplayName();
+
+
     /**
      * Check if this connector is responsible for the given geocode.
      *

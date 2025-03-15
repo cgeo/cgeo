@@ -24,7 +24,7 @@ public class OriginGeocacheFilter extends ValueGroupGeocacheFilter<IConnector, I
     }
 
     public String valueToUserDisplayableValue(final IConnector value) {
-        return value.getName();
+        return value.getDisplayName();
     }
 
     @Override

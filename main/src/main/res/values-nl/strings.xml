@@ -1607,6 +1607,7 @@
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
+    <string name="internal_connector_name">Gebruiker gedefinieerde caches</string>
     <!-- html styles -->
     <string name="html_style_default">Standaard</string>
     <string name="html_style_default_no_contrast_fix">Standaard zonder contrastcorrectie</string>
