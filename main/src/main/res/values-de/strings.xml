@@ -1603,6 +1603,7 @@
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
+    <string name="internal_connector_name">Benutzerdefinierte Caches</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard ohne Kontrastkorrektur</string>

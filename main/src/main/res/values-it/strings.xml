@@ -1552,6 +1552,7 @@
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
+    <string name="internal_connector_name">Cache definiti dall\'utente</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinito</string>
     <string name="html_style_monochrome">Monocromatico</string>

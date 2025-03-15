@@ -1535,6 +1535,7 @@
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
+    <string name="internal_connector_name">Caches personnalisées</string>
     <!-- html styles -->
     <string name="html_style_default">Par défaut</string>
     <string name="html_style_monochrome">Monochrome</string>
