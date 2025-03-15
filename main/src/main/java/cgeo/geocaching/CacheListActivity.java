@@ -582,8 +582,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
+
+            MenuUtils.setVisible(menu, R.id.menu_move_to_list, containsStoredCaches());
+            setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
+            MenuUtils.setVisible(menu, R.id.menu_copy_to_list, containsStoredCaches());
+            setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
+
             MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
@@ -599,8 +603,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-                setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
-                setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
