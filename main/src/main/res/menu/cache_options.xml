@@ -158,7 +158,7 @@
     <item
         android:id="@+id/menu_advanced"
         android:title="@string/cache_advanced"
-        android:icon="@drawable/settings_advanced"
+        android:icon="@drawable/ic_menu_more"
         app:showAsAction="never"
         android:visible="false">
         <menu>
