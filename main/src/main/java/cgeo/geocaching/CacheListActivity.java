@@ -586,7 +586,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
             MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_delete_events, isOffline, containsPastEvents());
+            MenuUtils.setVisible(menu, R.id.menu_delete_events, containsStoredPastEvents());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
@@ -644,9 +644,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return false;
     }
 
-    private boolean containsPastEvents() {
+    private boolean containsStoredPastEvents() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (CalendarUtils.isPastEvent(cache)) {
+            if (cache.isOffline() && CalendarUtils.isPastEvent(cache)) {
                 return true;
             }
         }
