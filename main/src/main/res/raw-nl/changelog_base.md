@@ -10,6 +10,7 @@
 - Oplossing: Kaartweergave niet bijgewerkt bij het verwijderen van cache van de huidig getoonde lijst
 - Oplossing: Aantal caches in lijst kiezer niet bijgewerkt bij wijziging lijst inhoud
 - Nieuw: Volg mijn locatie in de hoogte kaart (UnifiedMap)
+- Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
