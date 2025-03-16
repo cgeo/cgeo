@@ -10,6 +10,7 @@
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
 - Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
 - New: Follow my location in elevation chart (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
 
 ### Cache-Details
 - Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
