@@ -10,6 +10,7 @@
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
 - Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
