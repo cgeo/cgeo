@@ -10,6 +10,7 @@
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - Nyhet: Följ min plats i höjddiagram (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
