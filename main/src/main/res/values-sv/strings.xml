@@ -221,6 +221,9 @@
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
     <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
     <!-- translation -->
+    <string name="translate">Översätt i appen Google Translate</string>
+    <string name="translate_to_sys_lang">Översätt till %s (Webb)</string>
+    <string name="translate_to_english">Översätt till engelska (Webb)</string>
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -337,6 +340,28 @@
     <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Grundläggande</string>
+    <string name="translator_preference_target_lng">Offline översättningsspråk</string>
+    <string name="translator_preference_target_lng_summary">Målspråk för översättare offline</string>
+    <string name="translator_preference_nottranslate_lng">Ignorerade språk</string>
+    <string name="translator_preference_nottranslate_lng_summary">Källspråk att inte erbjuda översättning för</string>
+    <string name="translator_preference_disable">&lt;Avaktivera översättning&gt;</string>
+    <string name="translator_model_download_select">Ladda ned översättningsspråk offline</string>
+    <string name="translator_model_download_confirm_title">Bekräfta språknedladdning</string>
+    <string name="translator_model_download_confirm_txt">Översättningsmodell för språk %s måste laddas ner. Modellens storlek är ungefär 20-40 MB.</string>
+    <string name="translator_model_download_notification">Nedladdning av översättningsmodell startad</string>
+    <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
+    <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
+    <string name="translator_model">Översättningsmodell</string>
+    <string name="translator_tooltip">Översätt offline</string>
+    <string name="translator_language_select">Välj källspråk</string>
+    <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning.</string>
+    <string name="translator_language_missing">Språkpaket %s saknas</string>
+    <string name="translator_language_unknown">Det gick inte att identifiera språk</string>
+    <string name="translator_language_detected">Översätt från \"%s\"</string>
+    <string name="translator_language_detection_error">Det gick inte att initiera språkdetektering</string>
+    <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
+    <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
+    <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
     <!-- location service -->
     <string name="loc_last">Senast kända</string>
     <string name="loc_net">Nätverk</string>
