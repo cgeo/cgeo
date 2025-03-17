@@ -205,7 +205,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
     public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
     public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
-    public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocachig.speechServiceRunning";
+    public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocaching.speechServiceRunning";
 
 
     // Store Geocode here, as 'cache' is loaded Async.
