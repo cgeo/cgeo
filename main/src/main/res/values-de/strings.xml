@@ -2738,4 +2738,5 @@
     <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
     <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
     <string name="dbi_search_title">Suche nach</string>
+    <!-- emoji categories -->
 </resources>
