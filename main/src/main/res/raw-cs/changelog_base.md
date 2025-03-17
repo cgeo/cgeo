@@ -18,6 +18,7 @@
 - Oprava: Podrobnosti o kešce: Seznamy kešek se neaktualizují po klepnutí na název seznamu a odebrání dané kešky z tohoto seznamu
 - Oprava: Uživatelská poznámka se ztratí při obnovení dobrodružství v Lab Adventures
 - New: Offline translation of listing text and logs (experimental)
+- Change: Log-date related placeholders will use chosen date instead of current date
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
