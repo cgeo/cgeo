@@ -2770,4 +2770,5 @@
     <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
     <string name="dbi_search_title">Zoek naar</string>
     <string name="dbi_search_columnSelection">Beperken tot</string>
+    <!-- emoji categories -->
 </resources>
