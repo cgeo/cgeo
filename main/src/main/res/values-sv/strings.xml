@@ -2719,4 +2719,13 @@
     <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
     <string name="dbi_search_title">Sök efter</string>
     <string name="dbi_search_columnSelection">Begränsa till</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Senast använda</string>
+    <string name="emoji_category_symbols">Symboler</string>
+    <string name="emoji_category_dots">Prickar</string>
+    <string name="emoji_category_places">Platser</string>
+    <string name="emoji_category_food">Mat &amp; dryck</string>
+    <string name="emoji_category_activity">Aktivitet</string>
+    <string name="emoji_category_people">Människor</string>
+    <string name="emoji_category_numbers">Siffror</string>
 </resources>
