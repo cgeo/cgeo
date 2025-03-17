@@ -17,12 +17,14 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -63,6 +65,8 @@ import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class TrackableActivity extends TabbedViewPagerActivity {
+
+    public static final String STATE_TRANSLATION_LANGUAGE_SOURCE = "cgeo.geocaching.translation.languageSource";
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -196,9 +200,27 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             message = res.getString(R.string.trackable);
         }
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_TRANSLATION_LANGUAGE_SOURCE)) {
+                final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
+                if (newLanguage.isValid()) {
+                    translationStatus.setSourceLanguage(newLanguage);
+                }
+            }
+        }
+
         createViewPager(Page.DETAILS.id, getOrderedPages(), null, true);
 
         refreshTrackable(message);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (this.translationStatus.isTranslated()) {
+            outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.getSourceLanguage().getCode());
+        }
     }
 
     @Override
@@ -603,6 +625,11 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             }
 
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
+
+            final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
+            if (currentTranslationStatus.getSourceLanguage().isValid() && !currentTranslationStatus.isInProgress()) {
+                translateListing();
+            }
         }
 
         private void translateListing() {
