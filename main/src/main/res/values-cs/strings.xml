@@ -2809,4 +2809,5 @@
     <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
+    <!-- emoji categories -->
 </resources>
