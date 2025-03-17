@@ -10,7 +10,7 @@
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
 - Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
+- Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
@@ -18,6 +18,7 @@
 - Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
 - Correcció: la nota de l'usuari es perd en actualitzar una lab adventure
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
+- Canvi: els marcadors de posició relacionats amb la data de registre utilitzaran la data escollida en lloc de la data actual
 
 ### General
 - Nou: pàgina de cerca redissenyada
