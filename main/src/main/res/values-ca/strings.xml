@@ -2772,4 +2772,13 @@
     <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
     <string name="dbi_search_title">Buscar per</string>
     <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Usat recentment</string>
+    <string name="emoji_category_symbols">Símbols</string>
+    <string name="emoji_category_dots">Punts</string>
+    <string name="emoji_category_places">Llocs</string>
+    <string name="emoji_category_food">Menjar &amp; Beguda</string>
+    <string name="emoji_category_activity">Activitat</string>
+    <string name="emoji_category_people">Gent</string>
+    <string name="emoji_category_numbers">Nombres</string>
 </resources>
