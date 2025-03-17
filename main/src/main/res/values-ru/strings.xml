@@ -2606,4 +2606,5 @@
     <string name="dbi_edit_error">Ошибка при обновлении поля</string>
     <string name="dbi_edit_error_pkfield">"%s\" является частью первичного ключа, не подлежит редактированию"</string>
     <string name="dbi_search_title">Искать</string>
+    <!-- emoji categories -->
 </resources>
