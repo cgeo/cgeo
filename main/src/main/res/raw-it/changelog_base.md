@@ -18,6 +18,7 @@
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: User note gets lost on refreshing a lab adventure
 - New: Offline translation of listing text and logs (experimental)
+- Change: Log-date related placeholders will use chosen date instead of current date
 
 ### Generale
 - New: Redesigned search page
