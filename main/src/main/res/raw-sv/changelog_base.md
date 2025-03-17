@@ -10,7 +10,7 @@
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - Nyhet: Följ min plats i höjddiagram (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
+- Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
@@ -18,6 +18,7 @@
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: Användaranteckning tappas när du laddar upp ett lab adventure
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
+- Ändra: Loggdatum-relaterade platshållare kommer att använda valt datum istället för aktuellt datum
 
 ### Allmänt
 - New: Redesigned search page
