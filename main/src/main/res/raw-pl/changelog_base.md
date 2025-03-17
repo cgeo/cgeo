@@ -18,6 +18,7 @@
 - Naprawiono: Szczegóły skrytki: Listy skrytek nie aktualizowały się po dotknięciu na nazwę listy przy usuwaniu tej skrytki z listy
 - Naprawiono: Notatka użytkownika była tracona podczas odświeżania skrytki lab
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
+- Zmiana: Teksty zastępcze związane z datą logowania będą używały wybranej daty zamiast bieżącej daty
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
