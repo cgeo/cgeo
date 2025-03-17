@@ -908,7 +908,7 @@
     <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
-    <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
+    <string name="init_template_help">Teksty zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
@@ -2834,4 +2834,13 @@
     <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
     <string name="dbi_search_title">Szukaj</string>
     <string name="dbi_search_columnSelection">Ogranicz do</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Ostatnio używane</string>
+    <string name="emoji_category_symbols">Symbole</string>
+    <string name="emoji_category_dots">Kropki</string>
+    <string name="emoji_category_places">Miejsca</string>
+    <string name="emoji_category_food">Jedzenie i napoje</string>
+    <string name="emoji_category_activity">Aktywność</string>
+    <string name="emoji_category_people">Ludzie</string>
+    <string name="emoji_category_numbers">Liczby</string>
 </resources>
