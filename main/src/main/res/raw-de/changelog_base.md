@@ -18,6 +18,7 @@
 - Korrektur: Cache-Details: Listen für den Cache nicht aktualisiert, nachdem auf den Listennamen getippt und der Cache von dieser Liste entfernt wurde
 - Fix: User note gets lost on refreshing a lab adventure
 - New: Offline translation of listing text and logs (experimental)
+- Change: Log-date related placeholders will use chosen date instead of current date
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
