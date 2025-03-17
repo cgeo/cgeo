@@ -2745,4 +2745,5 @@
     <string name="dbi_edit_error_pkfield">"%s\" fa parte della chiave primaria, non può essere modificato"</string>
     <string name="dbi_search_title">Cerca per</string>
     <string name="dbi_search_columnSelection">Limita a</string>
+    <!-- emoji categories -->
 </resources>
