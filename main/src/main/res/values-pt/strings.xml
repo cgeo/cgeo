@@ -2738,4 +2738,5 @@
     <string name="dbi_edit_error">Erro ao actualizar o campo</string>
     <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
     <string name="dbi_search_title">Pesquisar por</string>
+    <!-- emoji categories -->
 </resources>
