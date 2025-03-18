@@ -2,20 +2,20 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
-import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -28,10 +28,12 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
 
     private ContinuousRangeSlider slider;
     private CheckBox useCurrentPosition;
-    private EditText coordinate;
+    private Geopoint location = new Geopoint(33.3,-111.1); // DUMMY FOR TESTING
+    private Button setCoordsButton;
 
     @Override
     public View createView() {
+
 
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
@@ -39,9 +41,16 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null);
         useCurrentPosition.setChecked(true);
 
-        final Pair<View, EditText> coordField = ViewUtils.createTextField(getActivity(), null, TextParam.id(R.string.cache_filter_distance_coordinates), null, -1, 1, 1);
-        coordinate = coordField.second;
-        ll.addView(coordField.first);
+        setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates));
+        setCoordsButton.setLines(2);
+        setCoordsButton.setSingleLine(false);
+        setCoordsButton.setPadding(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
+        setCoordsButton.setTextSize(16);
+        ViewGroup.LayoutParams ll1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setCoordsButton.setLayoutParams(ll1);
+        ViewUtils.setCoordinates(location, setCoordsButton);
+        setCoordsButton.setOnClickListener(v -> setCoordinates());
+        ll.addView(setCoordsButton);
 
         slider = new ContinuousRangeSlider(getActivity());
         slider.setScale(-0.2f, maxDistance + 0.2f, f -> {
@@ -65,7 +74,13 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
     @Override
     public void setViewFromFilter(final DistanceGeocacheFilter filter) {
         useCurrentPosition.setChecked(filter.isUseCurrentPosition());
-        coordinate.setText(filter.getCoordinate() == null ? "" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, filter.getCoordinate()));
+        if (filter.getCoordinate() != null) {
+            location = filter.getCoordinate();
+        }
+        else {
+            location = new Geopoint(33.3,-111.1); // DUMMY FOR TESTING
+        }
+        ViewUtils.setCoordinates(location, setCoordsButton);
         slider.setRange(
                 filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
                 filter.getMaxRangeValue() == null ? maxDistance + 500f : filter.getMaxRangeValue() / conversion);
@@ -75,9 +90,20 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
     public DistanceGeocacheFilter createFilterFromView() {
         final DistanceGeocacheFilter filter = createFilter();
         filter.setUseCurrentPosition(useCurrentPosition.isChecked());
-        filter.setCoordinate(GeopointParser.parse(coordinate.getText().toString(), null));
+        filter.setCoordinate(location);
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(range.left, range.right , 0f, (float) maxDistance, value -> (float) Math.round(value * conversion));
         return filter;
+    }
+
+    private void setCoordinates() {
+        NewCoordinateInputDialog dialog = new NewCoordinateInputDialog(getActivity(), this::onDialogClosed);
+        dialog.show(location);
+    }
+
+    public void onDialogClosed(String input) {
+        // Handle the data from the dialog - temp parse it until full UI is in place
+        this.location = GeopointParser.parse(input, null);
+        ViewUtils.setCoordinates(location, setCoordsButton);
     }
 }
