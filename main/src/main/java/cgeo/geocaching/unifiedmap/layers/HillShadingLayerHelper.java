@@ -1,5 +1,9 @@
 package cgeo.geocaching.unifiedmap.layers;
 
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+
 import android.content.Context;
 import android.graphics.Color;
 
@@ -13,10 +17,6 @@ import org.oscim.map.Map;
 import org.oscim.map.Viewport;
 import org.oscim.tiling.ITileCache;
 import org.oscim.tiling.source.hills.HillshadingTileSource;
-
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PersistableFolder;
 
 public class HillShadingLayerHelper {
 

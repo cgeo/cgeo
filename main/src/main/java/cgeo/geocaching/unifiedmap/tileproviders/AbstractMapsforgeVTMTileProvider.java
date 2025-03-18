@@ -53,10 +53,9 @@ public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvi
         return super.getId() + ":" + mapUri.getLastPathSegment();
     }
 
-    // Hide HS for VTM unless pref_rapidapiKeyMapilion is set (required for online sourcing of HS layer)
     @Override
     public boolean supportsHillshading() {
-        return this.supportsHillshading && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty();
+        return this.supportsHillshading;
     }
 
 }

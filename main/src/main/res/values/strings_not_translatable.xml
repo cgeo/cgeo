@@ -57,8 +57,6 @@
     <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
     <string translatable="false" name="map_source_osm_opentopomap">OpenTopoMap</string>
-    <string translatable="false" name="map_source_mapilion_hillshading">Mapilion Hillshading</string>
-    <string translatable="false" name="map_source_maptoolkit_hillshading">MapToolkit Hillshading</string>
 
     <!-- edit waypoint -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
