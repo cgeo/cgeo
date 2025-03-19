@@ -2771,4 +2771,12 @@
     <string name="dbi_search_title">Zoek naar</string>
     <string name="dbi_search_columnSelection">Beperken tot</string>
     <!-- emoji categories -->
+    <string name="emoji_category_recent">Recent gebruikt</string>
+    <string name="emoji_category_symbols">Symbolen</string>
+    <string name="emoji_category_dots">Stippen</string>
+    <string name="emoji_category_places">Plaatsen</string>
+    <string name="emoji_category_food">Eten &amp; drinken</string>
+    <string name="emoji_category_activity">Activiteit</string>
+    <string name="emoji_category_people">Mensen</string>
+    <string name="emoji_category_numbers">Nummers</string>
 </resources>
