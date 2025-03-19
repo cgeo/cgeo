@@ -18,7 +18,7 @@
 - Oplossing: Cache details: Lijsten voor cache niet bijgewerkt na het tikken op de lijstnaam en verwijderen uit die lijst
 - Oplossing: Gebruikersnotitie gaat verloren door het vernieuwen van een lab avontuur
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
-- Change: Log-date related placeholders will use chosen date instead of current date
+- Wijziging: Log-datum gerelateerde variabelen zullen de gekozen datum gebruiken in plaats van de huidige datum
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
