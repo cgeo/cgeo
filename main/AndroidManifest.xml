@@ -312,6 +312,19 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
             </intent-filter>
+            <intent-filter> <!-- Android API 31+ version with better name filtering -->
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="content" />
+                <data android:pathSuffix=".map" />
+                <data android:pathSuffix=".gwc" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CacheListActivity"
@@ -336,6 +349,18 @@
                 <data android:pathPattern=".*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+            </intent-filter>
+            <intent-filter> <!-- Android API 31+ version with better name filtering -->
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="content" />
+                <data android:pathSuffix=".gpx" />
             </intent-filter>
 
             <!-- intent filter for all gpx links, independent of mime types -->
