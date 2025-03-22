@@ -147,7 +147,7 @@ public class FilterViewHolderCreator {
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
                                 .setSelectableValues(ConnectorFactory.getConnectors())
-                                .setValueDisplayTextGetter(IConnector::getName)
+                                .setValueDisplayTextGetter(IConnector::getDisplayName)
                                 .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)), 1,
                         new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;

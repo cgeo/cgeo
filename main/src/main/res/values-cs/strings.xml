@@ -1635,6 +1635,7 @@
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
+    <string name="internal_connector_name">Uživatelem definované kešky</string>
     <!-- html styles -->
     <string name="html_style_default">Výchozí</string>
     <string name="html_style_default_no_contrast_fix">Výchozí bez opravy kontrastu</string>

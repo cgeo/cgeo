@@ -1818,6 +1818,7 @@
     <string name="goto_targets_list">User-defined caches</string>
     <string name="clear_goto_history_title">Clear goto history</string>
     <string name="clear_goto_history">This will delete all historical waypoints except the five most recent</string>
+    <string name="internal_connector_name">User-defined caches</string>
 
     <!-- html styles -->
     <string name="html_style_default">Default</string>

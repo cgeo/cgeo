@@ -1604,6 +1604,7 @@
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
+    <string name="internal_connector_name">Caches internas</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinição</string>
     <string name="html_style_default_no_contrast_fix">Padrão sem correcção de contraste</string>

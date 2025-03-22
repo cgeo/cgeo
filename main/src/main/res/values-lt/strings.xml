@@ -1474,6 +1474,7 @@
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
+    <string name="internal_connector_name">Vartotojo nustatytos slėptuvės</string>
     <!-- html styles -->
     <string name="html_style_default">Numatytas</string>
     <string name="html_style_monochrome">Vienspalvė</string>
