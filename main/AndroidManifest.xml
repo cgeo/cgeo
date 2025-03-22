@@ -303,6 +303,7 @@
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
                 <data android:mimeType="*/*" />
+                <data android:scheme="file" />
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.map" />
                 <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
