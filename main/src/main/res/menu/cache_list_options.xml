@@ -78,7 +78,7 @@
             <item
                 android:id="@+id/menu_delete_events"
                 android:title="@string/caches_delete_events"
-                android:enabled="false"
+                android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_upload_bookmarklist"
