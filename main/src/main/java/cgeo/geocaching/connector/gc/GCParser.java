@@ -1631,7 +1631,7 @@ public final class GCParser {
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
-        if (StringUtils.isBlank(cache.getGuid())) {
+        if (StringUtils.isBlank(cache.getGuid()) || !Settings.isStoreLogImages() /* see #16778 */) {
             return;
         }
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
