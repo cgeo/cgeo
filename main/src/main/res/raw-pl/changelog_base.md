@@ -10,12 +10,15 @@
 - Naprawiono: Widok mapy nie zaktualizował się podczas usuwania skrytki z aktualnie wyświetlanej listy
 - Naprawiono: Liczba skrytek w wyborze listy nie była aktualizowana po zmianie zawartości listy
 - Nowość: Śledź moją lokalizację na wykresie wysokości (UnifiedMap)
+- Nowość: Przytrzymaj dłużej przycisk „włącz online", aby załadować skrytki zapisane lokalnie
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
 - Naprawiono: Usługa mowy była przerywana po obrócaniu ekranu
 - Naprawiono: Szczegóły skrytki: Listy skrytek nie aktualizowały się po dotknięciu na nazwę listy przy usuwaniu tej skrytki z listy
 - Naprawiono: Notatka użytkownika była tracona podczas odświeżania skrytki lab
+- Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
+- Zmiana: Teksty zastępcze związane z datą logowania będą używały wybranej daty zamiast bieżącej daty
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
@@ -27,3 +30,4 @@
 - Naprawiono: Problemy z kolorami ikon menu w trybie jasnym
 - Naprawiono: Ustawienie limitu szukania w pobliżu nie działało poprawnie dla małych wartości
 - Nowość: Kalkulator współrzędnych: Funkcja do zastępowania „x” symbolem mnożenia
+- Naprawiono: Skrytki lab były wyłączone przez filtr D/T nawet z aktywnym „dołącz niepewność”

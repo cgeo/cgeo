@@ -10,12 +10,15 @@
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - New: Follow my location in elevation chart (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
 
 ### Cachedetaljer
 - New: Option to share cache with user data (coordinates, personal note)
 - Fix: Speech service interrupted on screen rotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: User note gets lost on refreshing a lab adventure
+- New: Offline translation of listing text and logs (experimental)
+- Change: Log-date related placeholders will use chosen date instead of current date
 
 ### Generelt
 - New: Redesigned search page
@@ -27,3 +30,4 @@
 - Fix: Color issues with menu icons in light mode
 - Fix: Nearby distance limit setting not working properly for small values
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
