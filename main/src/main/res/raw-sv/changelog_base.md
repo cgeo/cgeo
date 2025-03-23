@@ -11,6 +11,7 @@
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - Nyhet: Följ min plats i höjddiagram (UnifiedMap)
 - Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
+- Nytt: Aktivera "flytta till" / "kopiera till" åtgärder för "visa som lista"
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
