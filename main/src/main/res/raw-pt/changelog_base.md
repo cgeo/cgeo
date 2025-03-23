@@ -11,6 +11,7 @@
 - Correcção: Número de caches no selector de lista não era actualizado ao alterar o conteúdo da lista
 - New: Follow my location in elevation chart (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
+- New: Enable "move to" / "copy to" actions for "show as list"
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
