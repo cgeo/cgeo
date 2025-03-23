@@ -11,6 +11,7 @@
 - Oprava: Číslo kešky ve výběrovém seznamu se neaktualizuje při změně obsahu seznamu
 - Novinka: Sledování mé polohy v grafu nadmořské výšky (Sjednocená mapa)
 - New: Long tap on "enable live button" to load offline caches
+- New: Enable "move to" / "copy to" actions for "show as list"
 
 ### Detaily kešky
 - Novinka: Možnost sdílení kešky s uživatelskými daty (souřadnice, osobní poznámka)
