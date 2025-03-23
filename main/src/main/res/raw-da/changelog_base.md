@@ -11,6 +11,7 @@
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - New: Follow my location in elevation chart (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
+- New: Enable "move to" / "copy to" actions for "show as list"
 
 ### Cachedetaljer
 - New: Option to share cache with user data (coordinates, personal note)
