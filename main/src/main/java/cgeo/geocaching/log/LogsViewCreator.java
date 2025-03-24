@@ -163,7 +163,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                                 if (!result.isOk()) {
                                     SimpleDialog.of(activity)
                                         .setTitle(R.string.info_log_delete_failed)
-                                        .setMessage(TextParam.id(R.string.info_log_post_failed_reason, result.getErrorString()).setMovement(true))
+                                        .setMessage(TextParam.id(R.string.info_log_delete_failed_simple_reason))
                                         .show();
                                 }
                             })
