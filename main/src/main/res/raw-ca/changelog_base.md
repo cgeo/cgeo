@@ -11,7 +11,7 @@
 - Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
 - Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
-- New: Enable "move to" / "copy to" actions for "show as list"
+- Nou: habiliteu les accions "mou a" / "copiar a" per a "mostrar com a llista"
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
@@ -32,3 +32,5 @@
 - Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
 - Novetat: Calculadora de coordenades: funció per substituir "x" pel símbol de multiplicació
 - Correcció: El catxés Lab excloses pel filtre D/T fins i tot amb "inclou incert" actiu
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
