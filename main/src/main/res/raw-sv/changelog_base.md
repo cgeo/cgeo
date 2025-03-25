@@ -32,3 +32,5 @@
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
 - Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
