@@ -310,7 +310,6 @@
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
     <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
-    <string name="info_log_post_failed_reason">Ursache: %s</string>
     <string name="info_log_post_retry">Wiederholen</string>
     <string name="info_log_post_save">Offline speichern</string>
     <string name="info_log_cleared">Log wurde geleert.</string>
@@ -2739,4 +2738,12 @@
     <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
     <string name="dbi_search_title">Suche nach</string>
     <!-- emoji categories -->
+    <string name="emoji_category_recent">Zuletzt verwendet</string>
+    <string name="emoji_category_symbols">Symbole</string>
+    <string name="emoji_category_dots">Punkte</string>
+    <string name="emoji_category_places">Orte</string>
+    <string name="emoji_category_food">Essen &amp; Trinken</string>
+    <string name="emoji_category_activity">Aktivität</string>
+    <string name="emoji_category_people">Personen</string>
+    <string name="emoji_category_numbers">Zahlen</string>
 </resources>
