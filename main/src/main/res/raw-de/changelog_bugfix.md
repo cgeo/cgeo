@@ -1,4 +1,8 @@
-#
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+
+##
 - Korrektur: Wherigo: Zonen mit ungültigen/zu nahen Koordinaten handhaben
 - Korrektur: c:geo versuchte, lokale ".map"-Dateien als GPX zu importieren
 - Korrektur: Bearbeitete Benutzernotizen aus Popup gehen manchmal verloren
