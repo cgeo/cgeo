@@ -32,3 +32,5 @@
 - Naprawiono: Ustawienie limitu szukania w pobliżu nie działało poprawnie dla małych wartości
 - Nowość: Kalkulator współrzędnych: Funkcja do zastępowania „x” symbolem mnożenia
 - Naprawiono: Skrytki lab były wyłączone przez filtr D/T nawet z aktywnym „dołącz niepewność”
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
