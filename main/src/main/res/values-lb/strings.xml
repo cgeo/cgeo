@@ -224,7 +224,6 @@
     <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
     <string name="info_log_saved">c:geo huet de Log erfollegräich gespäichert.</string>
     <string name="info_log_post_failed">Publizéieren vum Log feelgeschloen.</string>
-    <string name="info_log_post_failed_reason">Grond: %s</string>
     <string name="info_log_post_retry">Nees probéieren</string>
     <string name="info_log_post_save">Offline späicheren</string>
     <string name="info_log_cleared">Log ass geläscht.</string>
