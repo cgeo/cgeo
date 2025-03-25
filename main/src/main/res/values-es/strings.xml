@@ -267,7 +267,6 @@
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
     <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Reintentar</string>
     <string name="info_log_post_save">Guardar sin conexión</string>
     <string name="info_log_cleared">Registro borrado.</string>
