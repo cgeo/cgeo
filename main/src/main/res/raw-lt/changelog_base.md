@@ -32,3 +32,5 @@
 - Fix: Nearby distance limit setting not working properly for small values
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
 - Fix: Lab caches excluded by D/T filter even with active "include uncertain"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
