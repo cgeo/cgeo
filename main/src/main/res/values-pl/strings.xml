@@ -313,7 +313,6 @@
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_reason">Powód: %s</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
