@@ -1,16 +1,20 @@
-#
-- Fix: Wherigo: Handle zones with invalid/too-close coordinates
-- Fix: c:geo tries to import local ".map" files as GPX
-- Fix: Edited user notes from popup sometimes get lost
-- Fix: Editing log shows "report problem" option
-- Fix: Live Filter 'Does not contain' fails to return any caches
-- Fix: Crashes on pausing a UnifiedMap online map
-- Fix: Outdated app "GPS Bluethooth" in useful apps list
-- Fix: Variables and/or values are deleted erroneously when editing personal note
-- Fix: Wherigo: Wrong altitude info
-- Fix: Wherigo: All button texts are capitalized
-- Fix: Crash in settings
-- Fix: c:geo not listed in Play Store for GPS-less devices
-- Fix: c:geo crashing silently on folder selection in certain configurations
-- Change: Make extremcaching.com an offline connector (their service has ceised)
-- Fix: Update status info in map on zoom level changes
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+
+##
+- Исправлено: Wherigo: Управление зонами с неверными/слишком близкими координатами
+- Исправлено: c:geo пытался импортировать локальные ".map" файлы как GPX
+- Исправлено: отредактированные заметки пользователя из всплывающего окна иногда терялись
+- Исправлено: отображение опции "сообщить о проблеме" при редактировании записи
+- Исправлено: фильтр "не содержит", работающий в реальном времени, не возвращал никаких тайников
+- Исправлено: Сбой при приостановке работы онлайн-карты ЕдинаяКарта
+- Исправлено: устаревшее приложение "GPS Bluetooth" в списке полезных приложений
+- Исправлено: переменные и/или значения ошибочно удалялись при редактировании личной заметки
+- Исправлено: Wherigo: Неверная информация о высоте
+- Исправлено: Wherigo: Все тексты кнопок написаны с заглавной буквы
+- Исправлено: Сбой в настройках
+- Исправлено: c:geo не указан в Play Store для устройств без GPS
+- Исправлено: c:geo зависал при выборе папки в определенных конфигурациях
+- Изменение: extremcaching.com отмечен "оффлайн" (их сервис заблокирован)
+- Исправлено: информация о состоянии карты обновлялась при изменении уровня масштабирования
