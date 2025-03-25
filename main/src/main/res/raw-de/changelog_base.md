@@ -9,15 +9,15 @@
 - Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
 - Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
+- Neu: Folge meinem Standort im Höhendiagramm (UnifiedMap)
+- Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
 - New: Enable "move to" / "copy to" actions for "show as list"
 
 ### Cache-Details
 - Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
 - Korrektur: Sprachdienst wurde bei der Bildschirmrotation unterbrochen
 - Korrektur: Cache-Details: Listen für den Cache nicht aktualisiert, nachdem auf den Listennamen getippt und der Cache von dieser Liste entfernt wurde
-- Fix: User note gets lost on refreshing a lab adventure
+- Korrektur: Persönliche Notiz geht beim Aktualisieren eines Lab Caches verloren
 - New: Offline translation of listing text and logs (experimental)
 - Change: Log-date related placeholders will use chosen date instead of current date
 
@@ -30,5 +30,7 @@
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
 - Korrektur: Farbprobleme bei Menü-Symbolen im hellen Design
 - Korrektur: Einstellung der Annäherungswerte funktioniert nicht bei kleinen Entfernungen
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Neu: Koordinatenrechner: Funktion zum Ersetzen von "x" durch Multiplikationssymbol
 - Fix: Lab caches excluded by D/T filter even with active "include uncertain"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
