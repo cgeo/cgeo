@@ -1,4 +1,8 @@
-#
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+
+##
 - Fix: Wherigo: Hantera zoner med ogiltiga/alltför nära koordinater
 - Fix: c:geo försöker importera lokala ".map"-filer som GPX
 - Fix: Redigerade användaranteckningar från popup försvinner ibland
