@@ -1,6 +1,6 @@
 ##
-- Fix: Wherigo links without host name not detected
-- Fix: Non-legible error message when posting a log
+- Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
+- Correcció: missatge d'error no llegible en publicar un registre
 
 ##
 - Correcció: Wherigo: maneja zones amb coordenades no vàlides o massa properes
