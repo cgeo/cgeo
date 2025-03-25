@@ -32,5 +32,5 @@
 - Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
 - Novetat: Calculadora de coordenades: funció per substituir "x" pel símbol de multiplicació
 - Correcció: El catxés Lab excloses pel filtre D/T fins i tot amb "inclou incert" actiu
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
+- Nou: afegiu "Elimina els esdeveniments passats" per llistar "tots"
+- Novetat: mostra el connector pels "Catxés definits per l'usuari" com a actiu al filtre font
