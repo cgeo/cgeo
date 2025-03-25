@@ -310,7 +310,6 @@
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
     <string name="info_log_delete_failed">Eliminazione del log fallita.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Riprova</string>
     <string name="info_log_post_save">Salva offline</string>
     <string name="info_log_cleared">Il log è stato azzerato.</string>
