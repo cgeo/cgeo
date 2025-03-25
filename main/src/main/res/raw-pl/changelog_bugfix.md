@@ -1,4 +1,8 @@
-#
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+
+##
 - Naprawiono: Wherigo: Obsługa stref z nieważnymi/zbyt bliskimi współrzędnymi
 - Naprawiono: c:geo próbował importować lokalne pliki „.map” jako GPX
 - Naprawiono: Edycja notatek użytkownika z wyskakującego okienka czasami była tracona
