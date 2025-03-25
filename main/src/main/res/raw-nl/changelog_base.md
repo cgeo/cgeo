@@ -32,3 +32,5 @@
 - Oplossing: Nabijgelegen afstandslimiet instelling werkt niet goed voor kleine waarden
 - Nieuw: Coördinaatberekenaar: Functie om "x" te vervangen door het vermenigvuldigingssymbool
 - Oplossing: Lab caches uitgesloten door D/T filter zelfs met actieve "inclusief onzeker"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
