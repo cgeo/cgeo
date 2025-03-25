@@ -312,7 +312,6 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
-    <string name="info_log_post_failed_reason">Orsak: %s</string>
     <string name="info_log_post_retry">Försök igen</string>
     <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
