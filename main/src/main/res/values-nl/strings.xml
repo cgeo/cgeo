@@ -221,9 +221,9 @@
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
     <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
     <!-- translation -->
-    <string name="translate">Vertalen</string>
-    <string name="translate_to_sys_lang">%s</string>
-    <string name="translate_to_english">Engels</string>
+    <string name="translate">Vertalen in de Google Translate App</string>
+    <string name="translate_to_sys_lang">Vertalen naar %s (Web)</string>
+    <string name="translate_to_english">Vertalen naar Engels (Web)</string>
     <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -313,7 +313,8 @@
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
     <string name="info_log_delete_failed">Log verwijderen is mislukt.</string>
-    <string name="info_log_post_failed_reason">Reden: %s</string>
+    <string name="info_log_post_failed_simple_reason">Controleer of je correct bent ingelogd en een werkende internetverbinding hebt.</string>
+    <string name="info_log_delete_failed_simple_reason">Controleer of je correct bent ingelogd, een werkende internetverbinding hebt en het logboek nog niet is verwijderd.</string>
     <string name="info_log_post_retry">Probeer opnieuw</string>
     <string name="info_log_post_save">Off line opslaan</string>
     <string name="info_log_cleared">Log is gewist.</string>
@@ -340,6 +341,28 @@
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basis</string>
+    <string name="translator_preference_target_lng">Offline vertalen taal</string>
+    <string name="translator_preference_target_lng_summary">Doeltaal voor offline vertaler</string>
+    <string name="translator_preference_nottranslate_lng">Genegeerde talen</string>
+    <string name="translator_preference_nottranslate_lng_summary">Brontalen om geen vertaling voor aan te bieden</string>
+    <string name="translator_preference_disable">&lt;Schakel vertalen uit&gt;</string>
+    <string name="translator_model_download_select">Download offline vertalen taal</string>
+    <string name="translator_model_download_confirm_title">Bevestig taaldownload</string>
+    <string name="translator_model_download_confirm_txt">Vertaalmodel voor %s moet worden gedownload. Het model is grofweg 20-40 MB.</string>
+    <string name="translator_model_download_notification">Downloaden van vertaalmodel gestart</string>
+    <string name="translator_model_download_success">Vertaalmodel voor %s gedownload</string>
+    <string name="translator_model_download_error">Downloaden van vertaalmodel %1$s: %2$s is mislukt</string>
+    <string name="translator_model">Vertaal model</string>
+    <string name="translator_tooltip">Offline vertalen</string>
+    <string name="translator_language_select">Selecteer brontaal</string>
+    <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
+    <string name="translator_language_missing">Taalpakket ontbreekt %s</string>
+    <string name="translator_language_unknown">Kan taal niet identificeren</string>
+    <string name="translator_language_detected">Vertalen van \"%s\"</string>
+    <string name="translator_language_detection_error">Taaldetectie initialiseren mislukt</string>
+    <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
+    <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
+    <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
     <!-- location service -->
     <string name="loc_last">Laatst bekende</string>
     <string name="loc_net">Netwerk</string>
@@ -1717,6 +1740,8 @@
     <string name="calccoord_guided_value">Waarde</string>
     <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
     <string name="calccoord_plain_tools_title">Eenvoudig gereedschap</string>
+    <string name="calccoord_remove_spaces">Verwijder spaties</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Vervang \'x\' door \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Plakken vanaf klembord</string>
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
@@ -2746,4 +2771,14 @@
     <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
     <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
     <string name="dbi_search_title">Zoek naar</string>
+    <string name="dbi_search_columnSelection">Beperken tot</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Recent gebruikt</string>
+    <string name="emoji_category_symbols">Symbolen</string>
+    <string name="emoji_category_dots">Stippen</string>
+    <string name="emoji_category_places">Plaatsen</string>
+    <string name="emoji_category_food">Eten &amp; drinken</string>
+    <string name="emoji_category_activity">Activiteit</string>
+    <string name="emoji_category_people">Mensen</string>
+    <string name="emoji_category_numbers">Nummers</string>
 </resources>
