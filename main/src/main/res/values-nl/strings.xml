@@ -312,6 +312,8 @@
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
     <string name="info_log_delete_failed">Log verwijderen is mislukt.</string>
+    <string name="info_log_post_failed_simple_reason">Controleer of je correct bent ingelogd en een werkende internetverbinding hebt.</string>
+    <string name="info_log_delete_failed_simple_reason">Controleer of je correct bent ingelogd, een werkende internetverbinding hebt en het logboek nog niet is verwijderd.</string>
     <string name="info_log_post_retry">Probeer opnieuw</string>
     <string name="info_log_post_save">Off line opslaan</string>
     <string name="info_log_cleared">Log is gewist.</string>
