@@ -230,7 +230,6 @@
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
     <string name="info_log_saved">c:geo 成功保存日志。</string>
     <string name="info_log_post_failed">发布日志失败。</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重试</string>
     <string name="info_log_post_save">离线保存</string>
     <string name="info_log_cleared">日志已清除</string>

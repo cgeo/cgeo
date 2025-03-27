@@ -192,7 +192,6 @@
     <string name="info_log_posted">ang c:geo ay matagumpay na isinumite ang log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na na-save ang log.</string>
     <string name="info_log_post_failed">Nabigo ang pagpapapost ng log.</string>
-    <string name="info_log_post_failed_reason">Ang rason: %s</string>
     <string name="info_log_post_retry">Subukan muli</string>
     <string name="info_log_post_save">I-save ng offline</string>
     <string name="info_log_cleared">Nabura na ang mga log.</string>

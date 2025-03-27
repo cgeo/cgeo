@@ -1,52 +1,52 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Новое: Встроенный проигрыватель Wherigo (бета) - смотрите пункт меню на главном экране.<br> (Возможно, вы захотите [настроить элемент быстрого запуска](cgeo-setting://quicklaunchitems_sorted) или [настроить отображение внизу экрана](cgeo-setting://custombnitem) для упрощения доступа, необходимо перед этим включить расширенные настройки)
 
 ### Карта
 - Новое: Сохранение темы карты для каждого поставщика карт (ЕдинаяКарта)
 - Новое: Подсветка выбранного тайника/путевой точки (ЕдинаяКарта)
-- New: Add separator between offline and online map sources
-- New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
-- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
-- Change: Use new hillshading algorithm for Mapsforge offline maps
-- New: Hillshading support for UnifiedMap Mapsforge offline maps
-- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
-- Fix: Address search not considering live mode (UnifiedMap)
-- Change: "follow my location" moved to the map, giving more space for "live mode" button
-- Change: Make long-press pin more c:geo-like
-- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
-- Fix: Map not updating changed caches
+- Новое: Добавлен разделитель между оффлайн и онлайн источниками карт
+- Новое: Поддержка Mapsforge в качестве альтернативы VTM в ЕдинойКарте, см. [Настройки => Источники карты => Единая Карта](cgeo-setting://useMapsforgeInUnifiedMap)
+- Изменение: "Показать диаграмму высот" перемещено в меню длительного нажатия (ЕдинаяКарта)
+- Изменение: Используйте новый алгоритм затенения высот для автономных карт Mapsforge
+- Новое: Поддержка затенения высот для оффлайн-карт Mapsforge ЕдинойКарты
+- Новое: Поддержка затенения высот для карт VTM ЕдинойКарты (требуется подключение к Интернет)
+- Исправлено: поиск по адресу не учитывал режим работы с онлайн-картами (ЕдинаяКарта)
+- Изменение: "следить за моим местоположением" перенесено на карту, предоставив больше места для кнопки "режим реального времени"
+- Изменение: долгое нажатие пина сделано в стиле c:geo
+- Изменение: Функции автономного управления данными (загрузка карт, проверка отсутствия данных о маршрутах/затенении высот) перемещены в меню выбора карты => "Управление автономными данными"
+- Исправлено: Карта не обновлялась с учетом изменений в тайниках
 
 ### Детали тайника
-- New: Not yet existing variables used in projection get created in variable list
-- New: Allow large integers in formulas
-- New: Support more constellations for variables in formulas
-- Fix: Multiple images in personal note not added to images tab
-- Fix: Handling of projections in waypoints and personal notes
-- New: Long tap on date in logging retrieves previous log date
-- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
-- New: Confirm overwriting log on quick offline log
-- New: Update cache status on sending a log
-- New: Colored HTML source view of cache details
-- Fix: checksum(0) returning wrong value
-- Fix: Editing logs removes "friends" status
+- Новое: Еще не существующие переменные, используемые в проекте, будут созданы в списке переменных
+- Новое: Разрешать использование больших целых чисел в формулах
+- Новое: Поддержка большего количества группировок для переменных в формулах
+- Исправлено: при множественной загрузке изображений в личной заметке они не добавлялись на вкладку "Фото"
+- Исправлено: Обработка проекций точек в путевых точках и личных заметках
+- Новое: Длительное нажатие на дату в отчете о посещении извлекает дату предыдущей записи
+- Исправлено: Сброс тайника к исходным координатам не удалял флаг "измененные координаты"
+- Новое: Подтверждение перезаписи отчета в быстром автономном отчете
+- Новое: Обновление состояния тайника кэша при отправке записи
+- Новое: Цветное отображение исходного HTML с деталями тайника
+- Исправлено: checksum(0) возвращало неправильное значение
+- Исправлено: Редактирование записей удаляло статус "друзья"
 
 ### Общее
-- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- Изменение: Использование высоты над уровнем моря (если доступно и только для Android 14+)
 - Новое: Разрешить использование нескольких уровней иерархии в списках тайников
-- New: Dedicated icons for geocaching.com blockparty and HQ event types
-- New: Set preferred image size for images loaded from geocaching.com caches and trackables
-- Fix: "Open in browser" not working for trackable logs
-- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
-- New: Option to remove a cache from all lists (= mark it as to be deleted)
-- Fix: Reset coordinates not detected by c:geo for unsaved caches
-- New: Allow clearing filter if no named filter is stored
-- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
-- Change: Owned caches with offline logs show offline log marker
-- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
-- New: Point connector info on home screen to connector-specific preference screen
-- New: Additional emojis for cache icons
-- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
-- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
-- Fix: History length and proximity settings sharing slider values
-- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
-- Fix: Some crashes
-- Fix: Some sliders in settings having problems with uninitialized values
+- Новое: Специальные значки для мероприятий geocaching.com типа blockparty и HQ
+- Новое: Установите предпочтительный размер для изображений, загруженных из тайников geocaching.com и трекаблов
+- Исправлено: "Открыть в браузере" не работало для записей в трекаблах
+- Новое: Возможность управлять загруженными файлами (картами, темами, маршрутами и затенениями высот)
+- Новое: Возможность удалить тайник из всех списков (= пометить его для удаления)
+- Исправлено: Сброс координат не обнаруженных c: geo для несохраненных тайников
+- Новое: Разрешить очистку фильтра, если именованный фильтр не сохранен
+- Исправлено: при запуске загрузки Выборки (pocket query в geocaching.com) во вновь созданном списке появлялось сообщение "Пустой список"
+- Изменение: Ваши тайники с автономными записями отображают маркер автономной записи
+- Новое: Настраиваемый формат даты (например для записи в тайниках), см. [Настройки => Внешний вид => Формат даты](cgeo-settings://short_date_format)
+- Новое: При нажатии на главном экране на область Ник-Количество найденных-Логин на сайте геокешинга вы будете перенаправлены на страницу настройки конкретного сайта геокешинга к которому вы подключились
+- Новое: Дополнительные эмодзи для значков тайников
+- Изменение: Фильтр по типу тайника "Особые" включает в себя события: mega, giga, встречи сообщества (community celebration), HQ celebration, block party и головоломки (maze)
+- Изменение: Фильтр типа тайника "Прочие" включает GCHQ, APE и неизвестные типы
+- Исправлено: Совместное использование позиции ползунка для настроек длины истории и приближения
+- Исправлено: Страница записей трекаблов показывала поля ввода времени/координат для трекаблов, не поддерживающих это
+- Исправлено: Были некоторые сбои
+- Исправлено: у некоторых ползунков в Настройках были проблемы с неинициализированными значениями

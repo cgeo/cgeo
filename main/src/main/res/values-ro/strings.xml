@@ -234,7 +234,6 @@
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
     <string name="info_log_post_failed">Publicarea însemnării a eşuat.</string>
-    <string name="info_log_post_failed_reason">Motivul: %s</string>
     <string name="info_log_post_retry">Încearcă din nou</string>
     <string name="info_log_post_save">Salvează local</string>
     <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>

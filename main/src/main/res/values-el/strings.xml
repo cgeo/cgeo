@@ -267,7 +267,6 @@
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
     <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
-    <string name="info_log_post_failed_reason">Αιτία: %s</string>
     <string name="info_log_post_retry">Επανάληψη</string>
     <string name="info_log_post_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>

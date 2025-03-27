@@ -255,7 +255,6 @@
     <string name="info_log_posted">成功發布日誌</string>
     <string name="info_log_saved">成功儲存日誌。</string>
     <string name="info_log_post_failed">發布日誌失敗</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重試</string>
     <string name="info_log_post_save">離線儲存</string>
     <string name="info_log_cleared">已清除日誌</string>

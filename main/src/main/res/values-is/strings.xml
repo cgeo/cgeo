@@ -153,7 +153,6 @@
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
     <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
-    <string name="info_log_post_failed_reason">Ástæða: %s</string>
     <string name="info_log_post_retry">Reyna aftur</string>
     <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>

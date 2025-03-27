@@ -224,7 +224,6 @@
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
     <string name="info_log_saved">c:geo успішно збережено журнал.</string>
     <string name="info_log_post_failed">Журнал змін не вдалося.</string>
-    <string name="info_log_post_failed_reason">(Причина: %s)</string>
     <string name="info_log_post_retry">Повторити спробу</string>
     <string name="info_log_post_save">Збережено офлайн</string>
     <string name="info_log_cleared">Журнали очищено.</string>

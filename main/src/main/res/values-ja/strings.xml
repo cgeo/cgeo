@@ -265,7 +265,6 @@
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
     <string name="info_log_post_failed">ログの投稿に失敗しました</string>
-    <string name="info_log_post_failed_reason">原因: %s</string>
     <string name="info_log_post_retry">再試行</string>
     <string name="info_log_post_save">オフライン保存</string>
     <string name="info_log_cleared">ログを削除しました</string>

@@ -185,7 +185,6 @@
     <string name="info_log_posted">ang c:geo ay matagumpay ang pagsusumite ng log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na nai-seyb ang log.</string>
     <string name="info_log_post_failed">Nabigo ang pagpopost ng log.</string>
-    <string name="info_log_post_failed_reason">Dahilan: %s</string>
     <string name="info_log_post_retry">Muling subukan</string>
     <string name="info_log_post_save">I-seyb ng offline</string>
     <string name="info_log_cleared">Nalinis na ang mag log.</string>

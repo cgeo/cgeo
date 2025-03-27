@@ -187,7 +187,6 @@
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
     <string name="info_log_post_failed">Posting log gagal.</string>
-    <string name="info_log_post_failed_reason">Alasan: %s</string>
     <string name="info_log_post_retry">Coba kembali</string>
     <string name="info_log_post_save">Simpan offline</string>
     <string name="info_log_cleared">Log dibersihkan.</string>

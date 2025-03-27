@@ -199,7 +199,6 @@
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
     <string name="info_log_post_failed">פירסום הלוג נכשל.</string>
-    <string name="info_log_post_failed_reason">סיבה:%s</string>
     <string name="info_log_post_retry">נסה שנית</string>
     <string name="info_log_post_save">שמור באופן לא מקוון</string>
     <string name="info_log_cleared">הלוג נוקה.</string>
