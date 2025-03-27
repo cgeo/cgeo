@@ -1,6 +1,6 @@
 ##
-- Fix: Wherigo links without host name not detected
-- Fix: Non-legible error message when posting a log
+- Oplossing: Wherigo links zonder host naam niet gedetecteerd
+- Oplossing: Niet-leesbare foutmelding bij het plaatsen van een log
 
 ##
 - Oplossing: Wherigo: Behandeling zones met ongeldig/te-nabije coördinaten
