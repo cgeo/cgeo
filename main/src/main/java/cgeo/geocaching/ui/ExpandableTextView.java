@@ -4,10 +4,14 @@ import cgeo.geocaching.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+
+import androidx.annotation.Nullable;
 
 public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextView {
-    private static final int MAX_LINES = 5;
+    private static final int MAX_LINES = 15;
     private boolean isCollapsible = false;
+    private View.OnClickListener stackedOnClickListener = null;
 
     public ExpandableTextView(final Context context) {
         this(context, null);
@@ -20,12 +24,12 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
     public ExpandableTextView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         setCollapse(true);
-        this.setOnLongClickListener(v -> {
-            final boolean isCollapsed = isCollapsed();
-            if (isCollapsed) {
+        super.setOnClickListener(v -> {
+            if (isCollapsed()) {
                 setCollapse(false);
+            } else if (stackedOnClickListener != null) {
+                stackedOnClickListener.onClick(this);
             }
-            return isCollapsed;
         });
     }
 
@@ -48,5 +52,10 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
     public void setCollapse(final boolean collapse) {
         setMaxLines(collapse ? MAX_LINES : Integer.MAX_VALUE);
         setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, collapse ? R.drawable.ic_menu_more : 0);
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable final OnClickListener l) {
+        stackedOnClickListener = l;
     }
 }
