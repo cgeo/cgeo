@@ -20,6 +20,7 @@
 - Fix: User note gets lost on refreshing a lab adventure
 - New: Offline translation of listing text and logs (experimental)
 - Change: Log-date related placeholders will use chosen date instead of current date
+- New: Collapse long log entries per default
 
 ### General
 - New: Redesigned search page
