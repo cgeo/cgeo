@@ -172,6 +172,11 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
             }
 
+            // expand/collapse
+            if (holder.binding.log.isCollapsible()) {
+                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log, holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more, it -> holder.binding.log.setCollapse(!holder.binding.log.isCollapsed()));
+            }
+
             //Copy to clipboard
             ctxMenu.addItem(LocalizationUtils.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
                 ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());

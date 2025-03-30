@@ -64,7 +64,7 @@
                 android:layout_gravity="left"
                 android:textSize="@dimen/textSize_detailsPrimary" />
 
-            <TextView
+            <cgeo.geocaching.ui.ExpandableTextView
                 android:id="@+id/log"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
