@@ -1,4 +1,9 @@
-#
+##
+- Korrektur: Wherigo-Links ohne Hostname nicht erkannt
+- Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
+- Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)
+
+##
 - Korrektur: Wherigo: Zonen mit ungültigen/zu nahen Koordinaten handhaben
 - Korrektur: c:geo versuchte, lokale ".map"-Dateien als GPX zu importieren
 - Korrektur: Bearbeitete Benutzernotizen aus Popup gehen manchmal verloren
