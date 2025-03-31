@@ -215,9 +215,6 @@
     <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
     <string name="contact_multiple_matches">연락처: 여러 일치 항목</string>
     <!-- translation -->
-    <string name="translate">번역</string>
-    <string name="translate_to_sys_lang">%s로 번역하기</string>
-    <string name="translate_to_english">영어로 번역하기</string>
     <string name="translate_length_warning">내용이 긴 경우 번역이 되지 않을수 도 있습니다.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
@@ -307,7 +304,6 @@
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
     <string name="info_log_post_failed">로그 올리기가 실패했습니다.</string>
     <string name="info_log_delete_failed">로그 삭제 실패했습니다.</string>
-    <string name="info_log_post_failed_reason">사유 : %s</string>
     <string name="info_log_post_retry">재시도</string>
     <string name="info_log_post_save">오프라인 저장</string>
     <string name="info_log_cleared">로그를 비웠습니다.</string>
@@ -1508,7 +1504,6 @@
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
-    <string name="internal_connector_name">사용자 정의 캐시</string>
     <!-- html styles -->
     <string name="html_style_default">기본</string>
     <string name="html_style_monochrome">흑백크롬</string>
@@ -2489,4 +2484,5 @@
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
