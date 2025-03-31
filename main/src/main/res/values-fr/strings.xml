@@ -219,9 +219,6 @@
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
     <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- translation -->
-    <string name="translate">Traduire</string>
-    <string name="translate_to_sys_lang">Traduire en %s</string>
-    <string name="translate_to_english">Traduire en anglais</string>
     <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
@@ -311,7 +308,6 @@
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
     <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
     <string name="info_log_delete_failed">La suppression du log a échoué.</string>
-    <string name="info_log_post_failed_reason">Raison : %s</string>
     <string name="info_log_post_retry">Réessayer</string>
     <string name="info_log_post_save">Sauver hors-ligne</string>
     <string name="info_log_cleared">La visite a été effacée.</string>
@@ -1535,7 +1531,6 @@
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
-    <string name="internal_connector_name">Caches personnalisées</string>
     <!-- html styles -->
     <string name="html_style_default">Par défaut</string>
     <string name="html_style_monochrome">Monochrome</string>
@@ -2551,4 +2546,5 @@
     <string name="dbi_edit_error">Erreur lors de la mise à jour du champ</string>
     <string name="dbi_edit_error_pkfield">"%s\" fait partie de la clé primaire, ne peut pas être modifié"</string>
     <string name="dbi_search_title">Rechercher</string>
+    <!-- emoji categories -->
 </resources>
