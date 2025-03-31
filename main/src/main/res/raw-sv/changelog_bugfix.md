@@ -1,4 +1,9 @@
-#
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
+
+##
 - Fix: Wherigo: Hantera zoner med ogiltiga/alltför nära koordinater
 - Fix: c:geo försöker importera lokala ".map"-filer som GPX
 - Fix: Redigerade användaranteckningar från popup försvinner ibland
@@ -13,4 +18,4 @@
 - Fix: c:geo finns inte i Play Store för GPS-lösa enheter
 - Fix: c:geo kraschar tyst vid val av folder i vissa konfigurationer
 - Förändring: Gör extremcaching.com till en offline-kontakt (deras tjänst har upphört)
-- Fix: Update status info in map on zoom level changes
+- Fix: Uppdatera statusinformation i kartan på förändringar på zoomnivå
