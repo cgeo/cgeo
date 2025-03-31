@@ -285,15 +285,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         notifyDataSetChanged();
     }
 
-    public void showAttributes() {
+    public void showAttributes(final Collection<Geocache> caches) {
         final Context context = getContext();
 
         // collect attributes and counters
         final Map<String, Integer> attributes = new HashMap<>();
         CacheAttribute ca;
-        final int max = list.size();
-        for (int i = 0; i < max; i++) {
-            for (String attr : list.get(i).getAttributes()) {
+        for (final Geocache cache : caches) {
+            for (String attr : cache.getAttributes()) {
                 // OC attributes are always positive, to count them with GC attributes append "_yes"
                 final String attrVal;
                 ca = CacheAttribute.getByName(attr);
