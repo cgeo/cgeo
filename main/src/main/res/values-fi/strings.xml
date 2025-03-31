@@ -215,9 +215,6 @@
     <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
     <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
     <!-- translation -->
-    <string name="translate">Käännä</string>
-    <string name="translate_to_sys_lang">Käännä kielelle %s</string>
-    <string name="translate_to_english">Käännä englanniksi</string>
     <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -307,7 +304,6 @@
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
     <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
     <string name="info_log_delete_failed">Lokin poisto epäonnistui.</string>
-    <string name="info_log_post_failed_reason">Syy: %s</string>
     <string name="info_log_post_retry">Yritä uudelleen</string>
     <string name="info_log_post_save">Offline-tallennus</string>
     <string name="info_log_cleared">Loki tyhjennetty.</string>
@@ -1485,7 +1481,6 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
-    <string name="internal_connector_name">Sisäiset kätköt</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
@@ -2452,4 +2447,5 @@
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
