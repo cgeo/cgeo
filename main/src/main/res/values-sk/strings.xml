@@ -184,9 +184,6 @@
     <string name="contact_not_found">Kontakt s aliasom/prezývkou %s sa nenašiel. Najprv si ho pridaj do kontaktov.</string>
     <string name="contact_multiple_matches">Kontakt: Viac zhôd</string>
     <!-- translation -->
-    <string name="translate">Preložiť</string>
-    <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
-    <string name="translate_to_english">Preložiť do angličtiny</string>
     <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -272,7 +269,6 @@
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
     <string name="info_log_saved">c:geo úspešne uložilo log.</string>
     <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
-    <string name="info_log_post_failed_reason">Dôvod: %s</string>
     <string name="info_log_post_retry">Opakovať</string>
     <string name="info_log_post_save">Uložiť offline</string>
     <string name="info_log_cleared">Log bol vyprázdnený.</string>
@@ -1395,7 +1391,6 @@
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
-    <string name="internal_connector_name">Interné kešky</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupne</string>
@@ -2354,4 +2349,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
