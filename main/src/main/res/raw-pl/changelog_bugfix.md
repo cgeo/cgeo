@@ -1,6 +1,7 @@
 ##
-- Fix: Wherigo links without host name not detected
-- Fix: Non-legible error message when posting a log
+- Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
+- Naprawiono: Nieczytelny komunikat o błędzie podczas publikowania wpisu dziennika
+- Cofnięto: Wykrywanie lokalnych plików .map (ze względu na niepożądane efekty uboczne)
 
 ##
 - Naprawiono: Wherigo: Obsługa stref z nieważnymi/zbyt bliskimi współrzędnymi
