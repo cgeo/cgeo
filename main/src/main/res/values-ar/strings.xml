@@ -120,8 +120,6 @@
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">ترجمة إلى %s</string>
-    <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
     <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
@@ -193,7 +191,6 @@
     <string name="info_log_posted">c:geo قام بنجاح بتقديم سجل زيارتك.</string>
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
     <string name="info_log_post_failed">فشل في نشر سجل الزيارة.</string>
-    <string name="info_log_post_failed_reason">السبب: %s</string>
     <string name="info_log_post_retry">أعد المحاولة</string>
     <string name="info_log_post_save">حفظ في وضع عدم الاتصال</string>
     <string name="info_log_cleared">تم مسح سجل تسجيل الزيارة.</string>
@@ -1049,4 +1046,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
