@@ -139,8 +139,6 @@
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Prevedi v: %s</string>
-    <string name="translate_to_english">Prevedi v: angleščino</string>
     <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
@@ -210,7 +208,6 @@
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
     <string name="info_log_post_failed">Objava zapisa ni uspela.</string>
-    <string name="info_log_post_failed_reason">Razlog: %s</string>
     <string name="info_log_post_retry">Poizkusi ponovno</string>
     <string name="info_log_post_save">Shrani za delo brez povezave</string>
     <string name="info_log_cleared">Zapis je izbrisan.</string>
@@ -1012,4 +1009,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
