@@ -1,6 +1,7 @@
 ##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
 - Correcció: missatge d'error no llegible en publicar un registre
+- Revertit: detecció de fitxers .map local (a causa d'efectes secundaris no desitjats)
 
 ##
 - Correcció: Wherigo: maneja zones amb coordenades no vàlides o massa properes
