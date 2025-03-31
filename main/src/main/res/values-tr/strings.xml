@@ -197,9 +197,6 @@
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Çeviri</string>
-    <string name="translate_to_sys_lang">%s\'e çevir</string>
-    <string name="translate_to_english">İngilizceye Çevir</string>
     <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
@@ -283,7 +280,6 @@
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
     <string name="info_log_saved">c: geo, kayıdınızı başarıyla kaydetti.</string>
     <string name="info_log_post_failed">Kayıt gönderilemedi.</string>
-    <string name="info_log_post_failed_reason">Sebep: %s</string>
     <string name="info_log_post_retry">Tekrar Dene</string>
     <string name="info_log_post_save">Çevrimdışı kaydet</string>
     <string name="info_log_cleared">Kayıt temizlendi.</string>
@@ -1295,7 +1291,6 @@
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
-    <string name="internal_connector_name">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
@@ -2151,4 +2146,5 @@
         <item>120px</item>
     </string-array>
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
