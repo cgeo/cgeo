@@ -182,9 +182,6 @@
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Μετάφραση</string>
-    <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
-    <string name="translate_to_english">Μετάφραση στα Αγγλικά</string>
     <string name="translate_length_warning">Η μετάφραση ενδέχεται να αποτύχει σε μεγάλα κείμενα.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
@@ -267,7 +264,6 @@
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
     <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
-    <string name="info_log_post_failed_reason">Αιτία: %s</string>
     <string name="info_log_post_retry">Επανάληψη</string>
     <string name="info_log_post_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
@@ -1296,7 +1292,6 @@
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
-    <string name="internal_connector_name">Κρύπτες ορισμένες από τον χρήστη</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Μοίρες</string>
@@ -2188,4 +2183,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
