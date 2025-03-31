@@ -312,6 +312,8 @@
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
+    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
