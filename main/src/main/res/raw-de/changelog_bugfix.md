@@ -1,6 +1,7 @@
 ##
-- Fix: Wherigo links without host name not detected
-- Fix: Non-legible error message when posting a log
+- Korrektur: Wherigo-Links ohne Hostname nicht erkannt
+- Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
+- Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)
 
 ##
 - Korrektur: Wherigo: Zonen mit ungültigen/zu nahen Koordinaten handhaben
