@@ -115,8 +115,6 @@
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
-    <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
     <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>
@@ -187,7 +185,6 @@
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
     <string name="info_log_post_failed">Posting log gagal.</string>
-    <string name="info_log_post_failed_reason">Alasan: %s</string>
     <string name="info_log_post_retry">Coba kembali</string>
     <string name="info_log_post_save">Simpan offline</string>
     <string name="info_log_cleared">Log dibersihkan.</string>
@@ -1071,4 +1068,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
