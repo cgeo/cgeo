@@ -221,9 +221,7 @@
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- translation -->
-    <string name="translate">Übersetzen</string>
-    <string name="translate_to_sys_lang">Übersetze in %s</string>
-    <string name="translate_to_english">Übersetze in Englisch</string>
+    <string name="translate">In Google Translate App übersetzen</string>
     <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -313,7 +311,8 @@
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
     <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
-    <string name="info_log_post_failed_reason">Ursache: %s</string>
+    <string name="info_log_post_failed_simple_reason">Überprüfe, ob du korrekt angemeldet bist und eine funktionierende Internetverbindung hast.</string>
+    <string name="info_log_delete_failed_simple_reason">Überprüfe, ob du korrekt eingeloggt bist, eine funktionierende Internetverbindung hast und das Log noch nicht gelöscht wurde.</string>
     <string name="info_log_post_retry">Wiederholen</string>
     <string name="info_log_post_save">Offline speichern</string>
     <string name="info_log_cleared">Log wurde geleert.</string>
@@ -1090,6 +1089,7 @@
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_geofencecolor">Farbe für Geo-Begrenzung</string>
+    <string name="init_geofencecolor_summary">Farbe und Deckkraft für die Geo-Begrenzung wählen. Kreise werden zur Anzeige der Geo-Begrenzung verwendet, die für Wegpunkte definiert ist (üblicherweise für Wegpunkte von geocaching.com Lab-Caches)</string>
     <string name="init_accuracycirclecolor">Genauigkeitskreis: Farbe der Linie</string>
     <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
@@ -1599,6 +1599,7 @@
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="init_autozoom_consider_lastcenter">Kartenposition bei Anzeige einer Liste wiederherstellen</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Bei Anzeige einer Liste auf der Karte: Verändere Zoom nur, wenn nicht alle Caches in den zuletzt verwendeten Kartenausschnitt passen.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">Wenn eine Liste von Caches auf der Karte angezeigt wird, setze Zoom und Ausschnitt so, dass alle Caches gezeigt werden.</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
@@ -1713,6 +1714,8 @@
     <string name="calccoord_guided_value">Wert</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
+    <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">\'x\' durch \'*\' ersetzen</string>
     <string name="calccoord_paste_from_clipboard">Aus Zwischenablage einfügen</string>
     <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
@@ -2742,4 +2745,14 @@
     <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
     <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
     <string name="dbi_search_title">Suche nach</string>
+    <string name="dbi_search_columnSelection">Beschränken auf</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Zuletzt verwendet</string>
+    <string name="emoji_category_symbols">Symbole</string>
+    <string name="emoji_category_dots">Punkte</string>
+    <string name="emoji_category_places">Orte</string>
+    <string name="emoji_category_food">Essen &amp; Trinken</string>
+    <string name="emoji_category_activity">Aktivität</string>
+    <string name="emoji_category_people">Personen</string>
+    <string name="emoji_category_numbers">Zahlen</string>
 </resources>
