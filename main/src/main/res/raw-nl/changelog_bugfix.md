@@ -1,6 +1,7 @@
 ##
 - Oplossing: Wherigo links zonder host naam niet gedetecteerd
 - Oplossing: Niet-leesbare foutmelding bij het plaatsen van een log
+- Reverted: Local .map file detection (due to unwanted side-effects)
 
 ##
 - Oplossing: Wherigo: Behandeling zones met ongeldig/te-nabije coördinaten
