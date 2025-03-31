@@ -815,7 +815,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             clearOfflineLogs(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_show_attributes) {
-            adapter.showAttributes();
+            adapter.showAttributes(adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_make_list_unique) {
             new MakeListUniqueCommand(this, listId) {
 
