@@ -1,6 +1,7 @@
 ##
 - Fix: Wherigo links without host name not detected
 - Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
 
 ##
 - Fix: Wherigo: Hantera zoner med ogiltiga/alltför nära koordinater
