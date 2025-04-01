@@ -17,8 +17,9 @@ public final class WMParser {
             return "";
         }
 
-        if (!loginHtml.contains("<a href=\"./default.aspx?RESET=Y\">")) {
-            Log.w("WMParser: could not retrieve username (not on right page?)");
+        if (!loginHtml.contains("ctl00_ContentBody_lbMessageText")) {
+            Log.w("WMParser: could not retrieve username (element not found)");
+            Log.w(loginHtml);
             return "";
         }
 

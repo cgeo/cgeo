@@ -112,7 +112,13 @@ public class WMLogin extends AbstractLogin {
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
-            final String loginData = postCredentials(credentials, requestVerificationToken);
+            final String viewState = extractViewState(tryLoggedInData);
+            if (StringUtils.isEmpty(viewState)) {
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
+                return StatusCode.LOGIN_PARSE_ERROR;
+            }
+
+            final String loginData = postCredentials(credentials, requestVerificationToken, viewState);
             if (StringUtils.isBlank(loginData)) {
                 logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
@@ -195,15 +201,31 @@ public class WMLogin extends AbstractLogin {
     @Nullable
     private String extractRequestVerificationToken(final String page) {
         final Document document = Jsoup.parse(page);
-        final String value = document.select("form > input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
+        final String value = document.select("form input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
+        return StringUtils.isNotEmpty(value) ? value : null;
+    }
+
+    @Nullable
+    private String extractViewState(final String page) {
+        final Document document = Jsoup.parse(page);
+        final String value = document.select("form input[name=\"__VIEWSTATE\"]").attr("value");
         return StringUtils.isNotEmpty(value) ? value : null;
     }
 
     @WorkerThread
-    private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
+    private String postCredentials(final Credentials credentials, final String requestVerificationToken, final String viewState) {
         Log.iForce("WMLogin: post credentials");
-        final Parameters params = new Parameters("ctl00$ContentBody$myUsername", credentials.getUserName(),
-                "ctl00$ContentBody$myPassword", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "__VIEWSTATE", "",
+                "__VIEWSTATEGENERATOR", "",
+                REQUEST_VERIFICATION_TOKEN, requestVerificationToken,
+                "ctl00$ContentBody$myUsername", credentials.getUserName(),
+                "ctl00$ContentBody$myPassword", credentials.getPassword(),
+                "ctl00$ContentBody$Button1", "Log+In",
+                "ctl00$ContentBody$cookie", "on"
+        );
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 
