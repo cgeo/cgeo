@@ -82,7 +82,7 @@ public final class ConnectorFactory {
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
             new TerraCachingConnector(),
-            new WaymarkingConnector(),
+            WaymarkingConnector.getInstance(),
             SuConnector.getInstance(),
             InternalConnector.getInstance(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one

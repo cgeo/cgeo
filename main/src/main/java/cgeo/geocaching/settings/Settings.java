@@ -700,6 +700,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorALActive, true);
     }
 
+    public static boolean isWMConnectorActive() {
+        return getBoolean(R.string.pref_connectorWMActive, false);
+    }
+
     public static boolean isSUConnectorActive() {
         return getBoolean(R.string.pref_connectorSUActive, false);
     }
