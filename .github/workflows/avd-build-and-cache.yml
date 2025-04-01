@@ -8,10 +8,10 @@ on:
       JDK_VERSION:
         description: The JDK version to use
         type: number
-        default: 11
+        default: 17
 
 env:
-  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
 
 jobs:
   avd-cache-update:
