@@ -9,10 +9,10 @@ on:
       JDK_VERSION:
         description: The JDK version to use
         type: number
-        default: 11
+        default: 17
 
 env:
-  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
 
 jobs:
   dex-count:
@@ -58,16 +58,14 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run countBasicDebugDexMethods
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:countBasicDebugDexMethods
+        run: ./gradlew --no-daemon --scan :main:countBasicDebugDexMethods -Dorg.gradle.debug=true
 
 
 
@@ -114,18 +112,16 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run checkstyle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:checkstyle
+        run: ./gradlew --no-configuration-cache --no-daemon --scan checkstyle
 
-      - uses: lcollins/checkstyle-github-action@v2.0.0
+      - uses: lcollins/checkstyle-github-action@v3.1.0
         with:
           path: 'main/build/reports/checkstyle/checkstyle.xml'
 
@@ -174,17 +170,14 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run lintBasicDebug
-        continue-on-error: true
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:lintBasicDebug
+        run: ./gradlew --no-configuration-cache --no-daemon --scan lintBasicDebug
 
       - name: Check and report lint results
         uses: hidakatsuya/action-report-android-lint@v1
@@ -201,11 +194,10 @@ jobs:
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       fail-fast: false
       matrix:
-        api-level: [26, 29]
-        # Unit tests are having issues with API 30, so disabling until fixed
-        # api-level: [26, 29, 30]
+        api-level: [26, 29, 30]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
@@ -253,8 +245,8 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
@@ -296,7 +288,8 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew testDebug --stacktrace --no-daemon --scan -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            ./gradlew testDebug --no-configuration-cache --stacktrace --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            killall -INT crashpad_handler || true
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
@@ -305,8 +298,8 @@ jobs:
           report_paths: '**/build/test-results/**/*.xml'
 
       - name: Upload resulting APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: apk
-          path: '*/build/outputs/apk/**/cgeo*.apk'
+          name: "cgeo-apk-api${{ matrix.api-level }}"
+          path: '*/build/outputs/apk/basic/**/cgeo*.apk'
