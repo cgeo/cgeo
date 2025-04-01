@@ -4,6 +4,7 @@ on:
   push:
     branches: [ "master", "androidci" ]
   pull_request:
+    types: [labeled]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
@@ -72,9 +73,12 @@ jobs:
 
   checkstyle:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup cgeo preferences and keystore
         uses: ./.github/actions/cgeo-preferences
@@ -130,9 +134,12 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup cgeo preferences and keystore
         uses: ./.github/actions/cgeo-preferences
@@ -193,6 +200,7 @@ jobs:
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
     strategy:
       max-parallel: 1
       fail-fast: false
@@ -201,6 +209,8 @@ jobs:
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
