@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
@@ -185,6 +186,20 @@ public class GCLogin extends AbstractLogin {
             Settings.setLastLoginErrorGC(status + retryMarker);
         }
         Log.w("Login.login: " + status + " (retry=" + retry + ") [" + additionalLogInfo + "]");
+    }
+
+    private void resetLoginStatus() {
+        Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
+        Cookies.clearCookies();
+
+        setActualLoginStatus(false);
+    }
+
+    private void clearLoginInfo() {
+        resetLoginStatus();
+
+        setActualCachesFound(-1);
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
     }
 
     @WorkerThread

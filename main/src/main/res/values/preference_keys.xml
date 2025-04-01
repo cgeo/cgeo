@@ -527,6 +527,10 @@
     <string translatable="false" name="pref_gcLastLoginError">gcLastLoginError</string>
     <string translatable="false" name="pref_gcLastLoginSuccess">gcLastLoginSuccess</string>
 
+    <string translatable="false" name="pref_wmLastLoginErrorStatus">wmLastLoginErrorStatus</string>
+    <string translatable="false" name="pref_wmLastLoginError">wmLastLoginError</string>
+    <string translatable="false" name="pref_wmLastLoginSuccess">wmLastLoginSuccess</string>
+
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
     <string translatable="false" name="pref_ocde_tokenpublic">ocde_tokenpublic</string>
     <string translatable="false" name="pref_temp_ocde_token_secret">ocde-temp-token-secret</string>

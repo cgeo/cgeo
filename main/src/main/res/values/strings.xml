@@ -250,6 +250,7 @@
     <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to login with c:geo.</string>
     <string name="err_server_general">Unable to contact geocaching server. The website may be down or your internet connection not working.</string>
     <string name="err_server_gc">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
+    <!--TODO Translate--><string name="err_server_wm">Unable to contact Waymarking.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_lc">Unable to contact labs.geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
@@ -1500,6 +1501,11 @@
     <string name="err_auth_gc_unknown_error_generic">Unknown error</string>
     <string name="err_auth_gc_communication_error">Communication error</string>
     <string name="err_auth_gc_manual_error">Manual login error: %s</string>
+
+    <!-- auth WM -->
+    <string name="err_auth_wm_error_text">Failed to login to waymarking.com as %s because: %s</string>
+    <!--TODO translate--><string name="err_auth_wm_unknown_error">Failed to log in waymarking.com as %s for some unknown reason</string>
+    <string name="err_auth_wm_finds_error">Failed to retrieve find data from waymarking.com</string>
 
     <!-- cache -->
     <plurals name="cache_counts">

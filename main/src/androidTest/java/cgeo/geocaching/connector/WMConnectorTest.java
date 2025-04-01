@@ -5,7 +5,7 @@ import java.util.Set;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class WaymarkingConnectorTest {
+public class WMConnectorTest {
 
     private static IConnector getWaymarkingConnector() {
         final IConnector wmConnector = ConnectorFactory.getConnector("WM1234");

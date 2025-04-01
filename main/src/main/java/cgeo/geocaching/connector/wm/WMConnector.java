@@ -2,10 +2,13 @@ package cgeo.geocaching.connector.wm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
@@ -16,11 +19,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WaymarkingConnector extends AbstractConnector /*TODO implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort*/ {
+public class WMConnector extends AbstractConnector implements ILogin /*TODO implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort*/ {
 
     private final String name;
 
-    private WaymarkingConnector() {
+    private WMConnector() {
         // singleton
         name = LocalizationUtils.getString(R.string.init_wm);
         prefKey = R.string.preference_screen_wm;
@@ -30,12 +33,12 @@ public class WaymarkingConnector extends AbstractConnector /*TODO implements ISe
      * initialization on demand holder pattern
      */
     private static class Holder {
-        @NonNull private static final WaymarkingConnector INSTANCE = new WaymarkingConnector();
+        @NonNull private static final WMConnector INSTANCE = new WMConnector();
     }
 
     @NonNull
-    public static WaymarkingConnector getInstance() {
-        return WaymarkingConnector.Holder.INSTANCE;
+    public static WMConnector getInstance() {
+        return WMConnector.Holder.INSTANCE;
     }
 
     @Override
@@ -93,16 +96,6 @@ public class WaymarkingConnector extends AbstractConnector /*TODO implements ISe
     @Override
     public boolean supportsLogging() {
         return true;
-    }
-
-    @Override
-    public boolean canEditLog(final Geocache cache, final LogEntry logEntry) {
-        return false; // TODO
-    }
-
-    @Override
-    public boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
-        return false; // TODO
     }
 
     @Override
@@ -168,5 +161,45 @@ public class WaymarkingConnector extends AbstractConnector /*TODO implements ISe
         // waymarking URLs https://www.waymarking.com/waymarks/WMNCDT_American_Legion_Flagpole_1983_University_of_Oregon
         final String waymark = StringUtils.substringBetween(url, "waymarks/", "_");
         return waymark != null && canHandle(waymark) ? waymark : null;
+    }
+
+    @Override
+    public boolean login() {
+        // login
+        final StatusCode status = WMLogin.getInstance().login();
+        // update cache counter
+        FoundNumCounter.getAndUpdateFoundNum(this);
+
+        return status == StatusCode.NO_ERROR;
+    }
+
+    @Override
+    public void logout() {
+        WMLogin.getInstance().logout();
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return WMLogin.getInstance().isActualLoginStatus();
+    }
+
+    @Override
+    public String getLoginStatusString() {
+        return WMLogin.getInstance().getActualStatus();
+    }
+
+    @Override
+    public String getUserName() {
+        return WMLogin.getInstance().getActualUserName();
+    }
+
+    @Override
+    public int getCachesFound() {
+        return WMLogin.getInstance().getActualCachesFound();
+    }
+
+    @Override
+    public void increaseCachesFound(int by) {
+        WMLogin.getInstance().increaseActualCachesFound(by);
     }
 }
