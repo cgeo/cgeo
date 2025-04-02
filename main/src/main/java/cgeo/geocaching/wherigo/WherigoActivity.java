@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Zone;
+import org.apache.commons.lang3.StringUtils;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 
@@ -124,12 +125,24 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         //see if we have a guid from url
         final Uri uri = getIntent().getData();
         if (uri != null) {
-            String guidCandidate = uri.getQueryParameter("CGUID");
-            if (guidCandidate == null) {
-                guidCandidate = uri.getQueryParameter("cguid");
-            }
-            if (guidCandidate != null) {
-                guid = guidCandidate;
+            if (StringUtils.equalsAnyIgnoreCase(uri.getHost(), "www.wherigofoundation.com", "wherigofoundation.com")) {
+                String guidCandidate = uri.getQueryParameter("WP");
+                if (guidCandidate == null) {
+                    guidCandidate = uri.getQueryParameter("wp");
+                }
+                if (guidCandidate != null) {
+                    guid = guidCandidate;
+                } else if (uri.getLastPathSegment() != null && uri.getLastPathSegment().startsWith("WG")) {
+                    guid = uri.getLastPathSegment().substring(2);
+                }
+            } else {
+                String guidCandidate = uri.getQueryParameter("CGUID");
+                if (guidCandidate == null) {
+                    guidCandidate = uri.getQueryParameter("cguid");
+                }
+                if (guidCandidate != null) {
+                    guid = guidCandidate;
+                }
             }
         }
         if (guid != null) {
