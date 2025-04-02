@@ -19,7 +19,7 @@ env:
   JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
 
 permissions:
-  contents: read
+  contents: write
   checks: write
   pull-requests: write
 
@@ -158,7 +158,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
     strategy:
-      max-parallel: 1
       fail-fast: false
       matrix:
         api-level: [26, 29, 30]
@@ -238,6 +237,16 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
+
+      # Allow only one job at a time (prevent errors on live GC tests)
+      - uses: suzuki-shunsuke/lock-action@latest
+        with:
+          mode: lock
+          key: unit-test
+          # Try to acquire a lock every 30 seconds until acquiring a lock or 30 minutes pass.
+          max_wait_seconds: "1800"
+          wait_interval_seconds: "30"
+          post_unlock: "true"
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
