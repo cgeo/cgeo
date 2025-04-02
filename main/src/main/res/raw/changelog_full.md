@@ -3,6 +3,14 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.04.02 Bugfix Release
+
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.03.06 Bugfix Release
 
 - Fix: Wherigo: Handle zones with invalid/too-close coordinates
