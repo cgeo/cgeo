@@ -109,8 +109,6 @@
     <string name="log_problem_other_label">Annað</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Þýtt að %s</string>
-    <string name="translate_to_english">Þýða yfir á ensku</string>
     <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
@@ -153,7 +151,6 @@
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
     <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
-    <string name="info_log_post_failed_reason">Ástæða: %s</string>
     <string name="info_log_post_retry">Reyna aftur</string>
     <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>
@@ -688,4 +685,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

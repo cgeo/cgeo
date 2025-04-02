@@ -171,9 +171,6 @@
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">翻譯</string>
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为</string>
     <string name="translate_length_warning">文字太多，翻譯失敗。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -255,7 +252,6 @@
     <string name="info_log_posted">成功發布日誌</string>
     <string name="info_log_saved">成功儲存日誌。</string>
     <string name="info_log_post_failed">發布日誌失敗</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重試</string>
     <string name="info_log_post_save">離線儲存</string>
     <string name="info_log_cleared">已清除日誌</string>
@@ -1017,7 +1013,6 @@
     <string name="goto_targets_list">玩家自訂cache</string>
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
-    <string name="internal_connector_name">玩家自訂cache</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">角度</string>
@@ -1580,4 +1575,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

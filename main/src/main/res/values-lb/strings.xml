@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
-    <string name="translate_to_english">Iwwersetzen op Englesch</string>
     <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -224,7 +222,6 @@
     <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
     <string name="info_log_saved">c:geo huet de Log erfollegräich gespäichert.</string>
     <string name="info_log_post_failed">Publizéieren vum Log feelgeschloen.</string>
-    <string name="info_log_post_failed_reason">Grond: %s</string>
     <string name="info_log_post_retry">Nees probéieren</string>
     <string name="info_log_post_save">Offline späicheren</string>
     <string name="info_log_cleared">Log ass geläscht.</string>
@@ -589,4 +586,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -1,4 +1,9 @@
-#
+##
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
+
+##
 - Correcção: Wherigo: Suporte de zonas com coordenadas inválidas/muito próximas
 - Correção: c:geo tenta importar ficheiros locais ".map" como GPX
 - Correcção: Notas de utilizador editadas do popup, às vezes são perdidas

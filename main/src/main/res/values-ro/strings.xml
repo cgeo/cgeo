@@ -156,8 +156,6 @@
     <string name="log_image_titleprefix">Imagine</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Tradu în limba %s</string>
-    <string name="translate_to_english">Tradu în limba engleză</string>
     <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -234,7 +232,6 @@
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
     <string name="info_log_post_failed">Publicarea însemnării a eşuat.</string>
-    <string name="info_log_post_failed_reason">Motivul: %s</string>
     <string name="info_log_post_retry">Încearcă din nou</string>
     <string name="info_log_post_save">Salvează local</string>
     <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>
@@ -1151,4 +1148,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

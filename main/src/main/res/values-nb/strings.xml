@@ -202,9 +202,6 @@
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
     <!-- translation -->
-    <string name="translate">Oversett</string>
-    <string name="translate_to_sys_lang">Oversett til %s</string>
-    <string name="translate_to_english">Oversett til engelsk</string>
     <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -290,7 +287,6 @@
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
     <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
     <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
-    <string name="info_log_post_failed_reason">Grunn: %s</string>
     <string name="info_log_post_retry">Prøv på nytt</string>
     <string name="info_log_post_save">Lagre lokalt</string>
     <string name="info_log_cleared">Loggen ble slettet.</string>
@@ -1195,7 +1191,6 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
-    <string name="internal_connector_name">Interne cacher</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1998,4 +1993,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

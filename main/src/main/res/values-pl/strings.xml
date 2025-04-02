@@ -221,9 +221,9 @@
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
     <string name="contact_multiple_matches">Kontakt: wiele pasujących</string>
     <!-- translation -->
-    <string name="translate">Tłumacz</string>
-    <string name="translate_to_sys_lang">Przetłumacz na %s</string>
-    <string name="translate_to_english">Przetłumacz na angielski</string>
+    <string name="translate">Tłumacz w aplikacji Google Translate</string>
+    <string name="translate_to_sys_lang">Przetłumacz na %s (Web)</string>
+    <string name="translate_to_english">Przetłumacz na angielski (Web)</string>
     <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -313,7 +313,8 @@
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_reason">Powód: %s</string>
+    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
@@ -340,6 +341,28 @@
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Podstawowy</string>
+    <string name="translator_preference_target_lng">Język tłumaczenia offline</string>
+    <string name="translator_preference_target_lng_summary">Język docelowy dla tłumacza offline</string>
+    <string name="translator_preference_nottranslate_lng">Ignorowane języki</string>
+    <string name="translator_preference_nottranslate_lng_summary">Języki źródłowe nie oferują tłumaczenia dla</string>
+    <string name="translator_preference_disable">&lt;Wyłącz tłumaczenie&gt;</string>
+    <string name="translator_model_download_select">Pobierz język tłumaczenia offline</string>
+    <string name="translator_model_download_confirm_title">Potwierdź pobranie języka</string>
+    <string name="translator_model_download_confirm_txt">Należy pobrać model tłumaczenia dla języka %s. Rozmiar modelu wynosi około 20-40 MB.</string>
+    <string name="translator_model_download_notification">Rozpoczęto pobieranie modelu tłumaczenia</string>
+    <string name="translator_model_download_success">Model tłumaczenia dla %s pobrany</string>
+    <string name="translator_model_download_error">Nie udało się pobrać modelu tłumaczenia %1$s: %2$s</string>
+    <string name="translator_model">Model tłumaczenia</string>
+    <string name="translator_tooltip">Tłumaczenie offline</string>
+    <string name="translator_language_select">Wybierz język źródłowy</string>
+    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany dla tłumaczenia.</string>
+    <string name="translator_language_missing">Brakuje pakietu językowego %s</string>
+    <string name="translator_language_unknown">Nie można zidentyfikować języka</string>
+    <string name="translator_language_detected">Przetłumacz z \"%s\"</string>
+    <string name="translator_language_detection_error">Nie udało się zainicjować wykrywania języka</string>
+    <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
+    <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
+    <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
     <!-- location service -->
     <string name="loc_last">Ostatnia pozycja</string>
     <string name="loc_net">Sieć</string>
@@ -886,7 +909,7 @@
     <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
-    <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
+    <string name="init_template_help">Teksty zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
@@ -1515,6 +1538,8 @@
     <string name="cache_menu_ignore">Ignoruj skrytkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
     <string name="cache_log_menu_edit">Edytuj wpis</string>
+    <string name="menu_expand_log">Rozwiń dziennik</string>
+    <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
@@ -2813,4 +2838,13 @@
     <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
     <string name="dbi_search_title">Szukaj</string>
     <string name="dbi_search_columnSelection">Ogranicz do</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Ostatnio używane</string>
+    <string name="emoji_category_symbols">Symbole</string>
+    <string name="emoji_category_dots">Kropki</string>
+    <string name="emoji_category_places">Miejsca</string>
+    <string name="emoji_category_food">Jedzenie i napoje</string>
+    <string name="emoji_category_activity">Aktywność</string>
+    <string name="emoji_category_people">Ludzie</string>
+    <string name="emoji_category_numbers">Liczby</string>
 </resources>

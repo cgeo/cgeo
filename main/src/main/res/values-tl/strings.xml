@@ -120,8 +120,6 @@
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Isalin sa %s</string>
-    <string name="translate_to_english">Isalin sa Ingles</string>
     <string name="translate_length_warning">Ang pagsasalin ay pwedeng mabigo na may malaking halaga ng teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Nabigong mag-parse sa pag-login ng pahina</string>
@@ -192,7 +190,6 @@
     <string name="info_log_posted">ang c:geo ay matagumpay na isinumite ang log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na na-save ang log.</string>
     <string name="info_log_post_failed">Nabigo ang pagpapapost ng log.</string>
-    <string name="info_log_post_failed_reason">Ang rason: %s</string>
     <string name="info_log_post_retry">Subukan muli</string>
     <string name="info_log_post_save">I-save ng offline</string>
     <string name="info_log_cleared">Nabura na ang mga log.</string>
@@ -1084,4 +1081,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

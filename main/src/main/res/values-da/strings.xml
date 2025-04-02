@@ -178,9 +178,6 @@
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Oversæt</string>
-    <string name="translate_to_sys_lang">Oversæt til %s</string>
-    <string name="translate_to_english">Oversæt til engelsk</string>
     <string name="translate_length_warning">Oversættelse af lange tekster kan fejle.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -263,7 +260,6 @@
     <string name="info_log_posted">Logbeskeden blev sendt.</string>
     <string name="info_log_saved">Logbeskeden blev gemt.</string>
     <string name="info_log_post_failed">Afsendelse af logbesked fejlede.</string>
-    <string name="info_log_post_failed_reason">Årsag: %s</string>
     <string name="info_log_post_retry">Prøv igen</string>
     <string name="info_log_post_save">Gem offline</string>
     <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
@@ -1016,7 +1012,6 @@
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
-    <string name="internal_connector_name">Brugerdefinerede caches</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1658,4 +1653,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

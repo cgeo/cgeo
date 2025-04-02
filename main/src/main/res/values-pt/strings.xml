@@ -221,9 +221,6 @@
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
     <string name="contact_multiple_matches">Contacto: Múltiplas correspondências</string>
     <!-- translation -->
-    <string name="translate">Traduzir</string>
-    <string name="translate_to_sys_lang">Traduzir para %s</string>
-    <string name="translate_to_english">Traduzir para Inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -313,7 +310,6 @@
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
     <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Tentar novamente</string>
     <string name="info_log_post_save">Guardar offline</string>
     <string name="info_log_cleared">O registo foi limpo.</string>
@@ -1604,7 +1600,6 @@
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
-    <string name="internal_connector_name">Caches internas</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinição</string>
     <string name="html_style_default_no_contrast_fix">Padrão sem correcção de contraste</string>
@@ -2742,4 +2737,5 @@
     <string name="dbi_edit_error">Erro ao actualizar o campo</string>
     <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
     <string name="dbi_search_title">Pesquisar por</string>
+    <!-- emoji categories -->
 </resources>

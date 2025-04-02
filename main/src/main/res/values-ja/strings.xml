@@ -179,9 +179,6 @@
     <string name="datetime_nodateset_display">未設定</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">翻訳</string>
-    <string name="translate_to_sys_lang">%sに翻訳</string>
-    <string name="translate_to_english">英語に翻訳</string>
     <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -265,7 +262,6 @@
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
     <string name="info_log_post_failed">ログの投稿に失敗しました</string>
-    <string name="info_log_post_failed_reason">原因: %s</string>
     <string name="info_log_post_retry">再試行</string>
     <string name="info_log_post_save">オフライン保存</string>
     <string name="info_log_cleared">ログを削除しました</string>
@@ -1207,7 +1203,6 @@
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
-    <string name="internal_connector_name">ユーザー定義キャッシュ</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">度</string>
@@ -2044,4 +2039,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Перекласти на %s</string>
-    <string name="translate_to_english">Переклад англійською мовою</string>
     <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
@@ -224,7 +222,6 @@
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
     <string name="info_log_saved">c:geo успішно збережено журнал.</string>
     <string name="info_log_post_failed">Журнал змін не вдалося.</string>
-    <string name="info_log_post_failed_reason">(Причина: %s)</string>
     <string name="info_log_post_retry">Повторити спробу</string>
     <string name="info_log_post_save">Збережено офлайн</string>
     <string name="info_log_cleared">Журнали очищено.</string>
@@ -796,7 +793,6 @@
     <string name="goto_targets_list">Визначений користувачем кеш</string>
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
-    <string name="internal_connector_name">Визначений користувачем кеш</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градуси</string>
@@ -1377,4 +1373,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

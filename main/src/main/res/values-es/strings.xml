@@ -182,9 +182,6 @@
     <string name="datetime_nodateset_display">No hay fecha fijada</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Traducir</string>
-    <string name="translate_to_sys_lang">Traducir al %s</string>
-    <string name="translate_to_english">Traducir al inglés</string>
     <string name="translate_length_warning">La traducción podría fallar con un texto muy largo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Aceptar</string>
@@ -267,7 +264,6 @@
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
     <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Reintentar</string>
     <string name="info_log_post_save">Guardar sin conexión</string>
     <string name="info_log_cleared">Registro borrado.</string>
@@ -1227,7 +1223,6 @@
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
-    <string name="internal_connector_name">Cachés definidos por el usuario</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grados</string>
@@ -2065,4 +2060,5 @@ Nombre de archivo:%2$s</string>
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

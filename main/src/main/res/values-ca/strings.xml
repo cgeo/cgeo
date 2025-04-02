@@ -221,9 +221,9 @@
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- translation -->
-    <string name="translate">Tradueix</string>
-    <string name="translate_to_sys_lang">Tradueix a %s</string>
-    <string name="translate_to_english">Tradueix a l\'anglès</string>
+    <string name="translate">Tradueix a l\'aplicació Google Translate</string>
+    <string name="translate_to_sys_lang">Tradueix a %s (Web)</string>
+    <string name="translate_to_english">Traduir a l\'anglès (web)</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -314,7 +314,8 @@
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
-    <string name="info_log_post_failed_reason">Raó: %s</string>
+    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
+    <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
     <string name="info_log_post_retry">Anterior</string>
     <string name="info_log_post_save">Guarda-ho  fora de línia</string>
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
@@ -341,6 +342,28 @@
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Bàsic</string>
+    <string name="translator_preference_target_lng">Idioma de traducció fora de línia</string>
+    <string name="translator_preference_target_lng_summary">Idioma objectiu per al traductor fora de línia</string>
+    <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
+    <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
+    <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
+    <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
+    <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
+    <string name="translator_model_download_notification">S\'ha iniciat la descàrrega del model de traducció</string>
+    <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
+    <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
+    <string name="translator_model">Model de traducció</string>
+    <string name="translator_tooltip">Traducció fora de línia</string>
+    <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
+    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
+    <string name="translator_language_missing">Falta el paquet d\'idioma %s</string>
+    <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
+    <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_language_detection_error">No s\'ha pogut inicialitzar la detecció d\'idioma</string>
+    <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
+    <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
+    <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
@@ -1488,6 +1511,8 @@
     <string name="cache_menu_ignore">Ignora el catxé</string>
     <string name="cache_log_menu_decrypt">Desxifra / Xifra</string>
     <string name="cache_log_menu_edit">Edita el registre</string>
+    <string name="menu_expand_log">Amplia el registre</string>
+    <string name="menu_collapse_log">Redueix el registre</string>
     <string name="cache_log_menu_delete">Suprimeix el registre</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
@@ -1608,7 +1633,7 @@
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
-    <string name="internal_connector_name">Catxé definit per l\'usuari</string>
+    <string name="internal_connector_name">Catxés definits per l\'usuari</string>
     <!-- html styles -->
     <string name="html_style_default">Per defecte</string>
     <string name="html_style_default_no_contrast_fix">Per defecte sense correcció de contrast</string>
@@ -1718,6 +1743,8 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
+    <string name="calccoord_remove_spaces">Elimina espais</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
     <string name="calccoord_paste_from_clipboard">Enganxa des del porta-retalls</string>
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
@@ -2748,4 +2775,14 @@
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
     <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
     <string name="dbi_search_title">Buscar per</string>
+    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Usat recentment</string>
+    <string name="emoji_category_symbols">Símbols</string>
+    <string name="emoji_category_dots">Punts</string>
+    <string name="emoji_category_places">Llocs</string>
+    <string name="emoji_category_food">Menjar &amp; Beguda</string>
+    <string name="emoji_category_activity">Activitat</string>
+    <string name="emoji_category_people">Gent</string>
+    <string name="emoji_category_numbers">Nombres</string>
 </resources>

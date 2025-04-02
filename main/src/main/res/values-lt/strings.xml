@@ -204,9 +204,6 @@
     <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
     <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
     <!-- translation -->
-    <string name="translate">Išversti</string>
-    <string name="translate_to_sys_lang">Išversti į %s</string>
-    <string name="translate_to_english">Išversti į anglų</string>
     <string name="translate_length_warning">Vertimas gali nepavykti jei tekstas labai ilgas.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
@@ -292,7 +289,6 @@
     <string name="info_log_posted">c:geo sėkmingai paskelbė įrašą.</string>
     <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
     <string name="info_log_post_failed">Paskelbti įrašo nepavyko.</string>
-    <string name="info_log_post_failed_reason">Priežastis: %s</string>
     <string name="info_log_post_retry">Kartoti</string>
     <string name="info_log_post_save">Išsaugoti neprisijungus</string>
     <string name="info_log_cleared">Įrašas išvalytas.</string>
@@ -1474,7 +1470,6 @@
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
-    <string name="internal_connector_name">Vartotojo nustatytos slėptuvės</string>
     <!-- html styles -->
     <string name="html_style_default">Numatytas</string>
     <string name="html_style_monochrome">Vienspalvė</string>
@@ -2446,4 +2441,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

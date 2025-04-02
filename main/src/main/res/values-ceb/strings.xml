@@ -109,8 +109,6 @@
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
-    <string name="translate_to_english">Ang paghubad sa Inglis</string>
     <string name="translate_length_warning">Ang paghubad kay mahimon nga mapakyas sa usa ka dako nga kantidad sa teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Napakyas nga pagpasulod sa parsing nga panid</string>
@@ -181,7 +179,6 @@
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
     <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
-    <string name="info_log_post_failed_reason">Rason: %s</string>
     <string name="info_log_post_retry">Suwayi og balik</string>
     <string name="info_log_post_save">I-save sa offline</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
@@ -1046,4 +1043,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

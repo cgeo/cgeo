@@ -221,9 +221,6 @@
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- translation -->
-    <string name="translate">Přeložit</string>
-    <string name="translate_to_sys_lang">Přeložit do %s</string>
-    <string name="translate_to_english">Přeložit do angličtiny</string>
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -313,7 +310,6 @@
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
     <string name="info_log_delete_failed">Odstranění logu se nezdařilo.</string>
-    <string name="info_log_post_failed_reason">Důvod: %s</string>
     <string name="info_log_post_retry">Opakovat</string>
     <string name="info_log_post_save">Uložit offline</string>
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
@@ -1635,7 +1631,6 @@
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
-    <string name="internal_connector_name">Uživatelem definované kešky</string>
     <!-- html styles -->
     <string name="html_style_default">Výchozí</string>
     <string name="html_style_default_no_contrast_fix">Výchozí bez opravy kontrastu</string>
@@ -2813,4 +2808,5 @@
     <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
+    <!-- emoji categories -->
 </resources>
