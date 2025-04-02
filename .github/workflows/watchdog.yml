@@ -76,7 +76,6 @@ jobs:
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: AVD cache

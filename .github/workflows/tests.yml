@@ -2,7 +2,7 @@ name: Unit tests
 
 on:
   push:
-    branches: [ "master", "androidci" ]
+    branches: [ "master", "release" ]
   pull_request:
     types: [labeled]
   workflow_dispatch:
@@ -65,7 +65,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run checkstyle
@@ -126,7 +126,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run lintBasicDebug
@@ -204,7 +204,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: AVD cache
