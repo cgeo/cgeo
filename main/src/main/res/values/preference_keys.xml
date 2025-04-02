@@ -77,6 +77,7 @@
     <string translatable="false" name="preference_screen_wm">preference_screen_wm</string>
     <string translatable="false" name="pref_connectorWMActive">connectorWMActive</string>
     <string translatable="false" name="pref_fakekey_wm_website">fakekey_wm_website</string>
+    <string translatable="false" name="pref_fakekey_wm_refresh">fakekey_wm_refresh</string>
 
     <!-- settings for opencaching.de screen -->
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>

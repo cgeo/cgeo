@@ -9,8 +9,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.wm.WMConnector;
+import cgeo.geocaching.connector.wm.WMLogin;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -27,6 +31,16 @@ public class PreferenceServiceWaymarkingFragment extends PreferenceFragmentCompa
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
+            return true;
+        });
+
+        final Preference refreshLogin = findPreference(getString(R.string.pref_fakekey_wm_refresh));
+        PreferenceUtils.setOnPreferenceClickListener(refreshLogin, preference -> {
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+                final WMLogin wmLogin = WMLogin.getInstance();
+                wmLogin.logout();
+                wmLogin.login(GCConnector.getInstance().getCredentials());
+            });
             return true;
         });
 

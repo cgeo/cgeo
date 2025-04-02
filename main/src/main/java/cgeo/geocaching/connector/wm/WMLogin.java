@@ -11,25 +11,28 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class WMLogin extends AbstractLogin {
 
     private static final String LOGIN_URI = "https://www.waymarking.com/login/default.aspx";
     private static final String STATS_URI = "https://www.waymarking.com/users/profile.aspx?mypage=6&gt=1";
-    private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
 
     private static class StatusException extends RuntimeException {
         private static final long serialVersionUID = 7488972529232227358L;
@@ -54,6 +57,7 @@ public class WMLogin extends AbstractLogin {
     }
 
     private void resetLoginStatus() {
+        Cookies.removeCookies(WMConnector.getInstance().getHostUrl());
         setActualLoginStatus(false);
     }
 
@@ -66,14 +70,13 @@ public class WMLogin extends AbstractLogin {
 
     @NonNull
     @Override
-    protected StatusCode login(boolean retry) {
+    protected StatusCode login(final boolean retry) {
         return login(retry, Settings.getCredentials(GCConnector.getInstance()));
     }
 
     @NonNull
     @Override
-    @WorkerThread
-    protected StatusCode login(boolean retry, @NonNull Credentials credentials) {
+    protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         final StatusCode status = loginInternal(retry, credentials);
         if (status != StatusCode.NO_ERROR) {
             resetLoginStatus();
@@ -81,7 +84,10 @@ public class WMLogin extends AbstractLogin {
         return status;
     }
 
-    protected StatusCode loginInternal(boolean retry, @NonNull Credentials credentials) {
+    @WorkerThread
+    protected StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
+        Logger.getLogger(OkHttpClient.class.getName()).setLevel(Level.FINE);
+
         final Context ctx = CgeoApplication.getInstance();
 
         if (credentials.isInvalid()) {
@@ -106,19 +112,33 @@ public class WMLogin extends AbstractLogin {
                 return completeLoginProcess();
             }
 
-            final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
+            final Document document = Jsoup.parse(tryLoggedInData);
+
+            final String requestVerificationToken = extractFormField("__RequestVerificationToken", document);
             if (StringUtils.isEmpty(requestVerificationToken)) {
                 logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
-            final String viewState = extractViewState(tryLoggedInData);
+            final String viewState = extractFormField("__VIEWSTATE", document);
             if (StringUtils.isEmpty(viewState)) {
                 logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
-            final String loginData = postCredentials(credentials, requestVerificationToken, viewState);
+            final String viewStateGenerator = extractFormField("__VIEWSTATEGENERATOR", document);
+            if (StringUtils.isEmpty(viewStateGenerator)) {
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
+                return StatusCode.LOGIN_PARSE_ERROR;
+            }
+
+            final Parameters parameters = new Parameters(
+                "__VIEWSTATE", viewState,
+                "__VIEWSTATEGENERATOR", viewStateGenerator,
+                "__RequestVerificationToken", requestVerificationToken
+            );
+
+            final String loginData = postCredentials(credentials, parameters);
             if (StringUtils.isBlank(loginData)) {
                 logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
@@ -158,8 +178,8 @@ public class WMLogin extends AbstractLogin {
             return StatusCode.UNKNOWN_ERROR;
         } catch (final StatusException status) {
             return status.statusCode;
-        } catch (final Exception ignored) {
-            logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry);
+        } catch (final Exception exception) {
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry, exception.toString());
             return StatusCode.CONNECTION_FAILED_WM;
         }
     }
@@ -198,34 +218,20 @@ public class WMLogin extends AbstractLogin {
         return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
 
-    @Nullable
-    private String extractRequestVerificationToken(final String page) {
-        final Document document = Jsoup.parse(page);
-        final String value = document.select("form input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
-        return StringUtils.isNotEmpty(value) ? value : null;
-    }
-
-    @Nullable
-    private String extractViewState(final String page) {
-        final Document document = Jsoup.parse(page);
-        final String value = document.select("form input[name=\"__VIEWSTATE\"]").attr("value");
-        return StringUtils.isNotEmpty(value) ? value : null;
+    @NonNull
+    private String extractFormField(final String field, final Document document) {
+        return document.select("form input[name=\"" + field + "\"]").attr("value");
     }
 
     @WorkerThread
-    private String postCredentials(final Credentials credentials, final String requestVerificationToken, final String viewState) {
+    private String postCredentials(final Credentials credentials, final Parameters params) {
         Log.iForce("WMLogin: post credentials");
-        final Parameters params = new Parameters(
-                "__EVENTTARGET", "",
-                "__EVENTARGUMENT", "",
-                "__VIEWSTATE", "",
-                "__VIEWSTATEGENERATOR", "",
-                REQUEST_VERIFICATION_TOKEN, requestVerificationToken,
-                "ctl00$ContentBody$myUsername", credentials.getUserName(),
-                "ctl00$ContentBody$myPassword", credentials.getPassword(),
-                "ctl00$ContentBody$Button1", "Log+In",
-                "ctl00$ContentBody$cookie", "on"
-        );
+        params.add("__EVENTTARGET", "");
+        params.add("__EVENTARGUMENT", "");
+        params.add("ctl00$ContentBody$myUsername", credentials.getUserName());
+        params.add("ctl00$ContentBody$myPassword", credentials.getPassword());
+        params.add("ctl00$ContentBody$Button1", "Log+In");
+        params.add("ctl00$ContentBody$cookie", "on");
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 

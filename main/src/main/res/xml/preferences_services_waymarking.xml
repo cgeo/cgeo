@@ -17,6 +17,11 @@
         <Preference
             app:summary="@string/settings_wm_gc_note"
             app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_wm_refresh"
+            android:title="@string/settings_wm_refresh_login"
+            app:summary="@string/settings_wm_refresh_login_note"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

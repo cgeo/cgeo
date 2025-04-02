@@ -190,7 +190,7 @@ public class GCLogin extends AbstractLogin {
 
     private void resetLoginStatus() {
         Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
-        Cookies.clearCookies();
+        Cookies.removeCookies(GCConnector.getInstance().getHostUrl());
 
         setActualLoginStatus(false);
     }

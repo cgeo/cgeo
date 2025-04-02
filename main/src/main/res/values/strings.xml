@@ -979,6 +979,8 @@
     <string name="lc_default_description">This is a geocaching.com Adventure Lab Cache. Adventures can only be played with the Groundspeak Adventure Lab App. Tap on the Adventure Lab icon on the \"Details\" page to open/install the Adventure Lab App for this adventure from there.\nIf you don\'t want to see Adenture Lab caches on your map and search, you can deactivate using the \"settings\" menu - Services - Geocaching.com Adventure Lab</string>
     <string name="settings_wm_description">Load waymarks from waymarking.com</string>
     <string name="settings_wm_gc_note">(Requires an activated "Geocaching.com" service.)</string>
+    <string name="settings_wm_refresh_login">Refresh authorization</string>
+    <string name="settings_wm_refresh_login_note">This will use your Geocaching.com authorization data.</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
     <string name="init_summary_oc_pl">Load caches from opencaching.pl</string>
