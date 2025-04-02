@@ -1510,6 +1510,8 @@
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
     <string name="cache_log_menu_edit">Log bewerken</string>
+    <string name="menu_expand_log">Logboek uitklappen</string>
+    <string name="menu_collapse_log">Logboek inklappen</string>
     <string name="cache_log_menu_delete">Logs wissen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
     <string name="cache_log_delete_reason_default">Log is verwijderd met c:geo</string>
