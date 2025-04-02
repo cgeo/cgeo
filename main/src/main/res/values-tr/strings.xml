@@ -282,7 +282,6 @@
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
     <string name="info_log_saved">c: geo, kayıdınızı başarıyla kaydetti.</string>
     <string name="info_log_post_failed">Kayıt gönderilemedi.</string>
-    <string name="info_log_post_failed_reason">Sebep: %s</string>
     <string name="info_log_post_retry">Tekrar Dene</string>
     <string name="info_log_post_save">Çevrimdışı kaydet</string>
     <string name="info_log_cleared">Kayıt temizlendi.</string>

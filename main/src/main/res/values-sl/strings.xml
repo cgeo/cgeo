@@ -210,7 +210,6 @@
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
     <string name="info_log_post_failed">Objava zapisa ni uspela.</string>
-    <string name="info_log_post_failed_reason">Razlog: %s</string>
     <string name="info_log_post_retry">Poizkusi ponovno</string>
     <string name="info_log_post_save">Shrani za delo brez povezave</string>
     <string name="info_log_cleared">Zapis je izbrisan.</string>
