@@ -314,7 +314,8 @@
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
-    <string name="info_log_post_failed_reason">Raó: %s</string>
+    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
+    <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
     <string name="info_log_post_retry">Anterior</string>
     <string name="info_log_post_save">Guarda-ho  fora de línia</string>
     <string name="info_log_cleared">El registre ha estat esborrat.</string>

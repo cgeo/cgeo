@@ -35,6 +35,8 @@
     <string name="advlab">Cache Adventure Lab</string>
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
+    <string name="other">Altro</string>
+    <string name="event_special">Speciali</string>
     <string name="all_types_short">Tutti</string>
     <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
@@ -310,7 +312,6 @@
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
     <string name="info_log_delete_failed">Eliminazione del log fallita.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Riprova</string>
     <string name="info_log_post_save">Salva offline</string>
     <string name="info_log_cleared">Il log è stato azzerato.</string>
@@ -890,6 +891,9 @@
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_select_language">Seleziona lingua</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
+    <string name="init_date_format">Formato data</string>
+    <string name="init_date_format_description">Formato da usare per date brevi, ad esempio nella visualizzazione log</string>
+    <string name="system_default">Predefinito di Sistema</string>
     <string name="init_showwaypoints">Mostra i waypoint</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
@@ -938,6 +942,7 @@
     <string name="init_units">Usa sistema imperiale</string>
     <string name="init_summary_units">Usa miglia/piedi invece del sistema metrico</string>
     <string name="init_cachelists">Liste di cache</string>
+    <string name="init_localization">Localizzazione</string>
     <string name="init_log_offline">Log offline</string>
     <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
     <string name="init_choose_list">Chiedi lista</string>
@@ -1212,6 +1217,8 @@
     <string name="contentstorage_err_list_failed">I file nella cartella «%s» non possono essere elencati</string>
     <string name="contentstorage_err_folder_access_failed">Impossibile accedere alla cartella \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Il file \'%1$s\' non può essere copiato/spostato in \'%2$s\' (sposta=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Errore nel selezionare file/cartella</string>
+    <string name="contentstorage_err_activity_not_found_message">Il sistema non fornisce un componente per selezionare file/cartelle: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definito dall\'utente</string>
     <string name="persistablefolder_usertype_default">Predefinito</string>
@@ -1281,6 +1288,17 @@
     <string name="err_auth_geokrety_bad_password">Il tuo nome utente o password non sembrano validi.</string>
     <string name="err_auth_geokrety_unknown">%1$s ha risposto: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Nessuna informazione di accesso memorizzata</string>
+    <string name="err_auth_gc_loginpage1">Impossibile recuperare la pagina di login (primo)</string>
+    <string name="err_auth_gc_loginpage2">Impossibile recuperare la pagina di login (secondo)</string>
+    <string name="err_auth_gc_verification_token">Impossibile trovare il token di verifica richiesto</string>
+    <string name="err_auth_gc_captcha">Accesso a geocaching.com non riuscito a causa del captcha richiesto</string>
+    <string name="err_auth_gc_bad_login">Accesso a geocaching.com come %s non riuscito a causa di un errato nome utente/password</string>
+    <string name="err_auth_gc_not_validated">Accesso a Geocaching.com come %s non riuscito, perché prima è necessario convalidare l\'account</string>
+    <string name="err_auth_gc_unknown_error">Accesso a Geocaching.com come %s non riuscito per qualche motivo sconosciuto</string>
+    <string name="err_auth_gc_unknown_error_generic">Errore sconosciuto</string>
+    <string name="err_auth_gc_communication_error">Errore di comunicazione</string>
+    <string name="err_auth_gc_manual_error">Errore di accesso manuale: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
@@ -1325,6 +1343,7 @@
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_log_image_default_title">Foto</string>
+    <string name="cache_set_coordinates">Imposta coordinate</string>
     <string name="cache_personal_note">Note personali</string>
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
@@ -1511,6 +1530,10 @@
     <string name="cachedetails_progress_unwatch">Rimosso dalla watchlist</string>
     <string name="cachedetails_progress_favorite">Aggiunto ai preferiti</string>
     <string name="cachedetails_progress_unfavorite">Rimosso dai preferiti</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Cartucce multiple di Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consultare la descrizione del cache per ulteriori informazioni sulle cartucce.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - non scaricato</string>
+    <string name="cache_wherigo_start">Scarica e riproduci questo Wherigo usando il lettore interno di c:geo</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
     <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
@@ -1555,7 +1578,9 @@
     <string name="internal_connector_name">Cache definiti dall\'utente</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinito</string>
+    <string name="html_style_default_no_contrast_fix">Correzione predefinita senza contrasto</string>
     <string name="html_style_monochrome">Monocromatico</string>
+    <string name="html_style_source_formatted">Sorgente Html Formattato</string>
     <string name="html_style_source">Sorgente HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">gradi</string>
@@ -1646,6 +1671,8 @@
     <string name="variables_scanlisting_nopatternfound">Pattern non trovato</string>
     <string name="variables_tidyup">Riordina</string>
     <string name="variables_deleteall">Elimina tutto</string>
+    <string name="variables_add">Aggiungi variabile</string>
+    <string name="variables_add_next">Aggiungi variabile successiva</string>
     <string name="variables_deleteall_confirm_text">Vuoi veramente cancellare tutte le variabili per questo cache?</string>
     <string name="variables_info">Aiuto</string>
     <string name="variables_varname_dialog_title">Nome della variabile</string>
@@ -2139,6 +2166,7 @@
     <string name="attribute_blind_people_no">Handicap: non adatto ai ciechi</string>
     <string name="attribute_unknown">Attributo sconosciuto</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Stato del cache</string>
     <string name="cat_tools">Attrezzatura</string>
     <string name="cat_type">Tipo</string>
     <string name="cat_location">Posizione del cache</string>
@@ -2537,7 +2565,16 @@
     <string name="wherigo_controls_mapzones_hint">Mostra sulla mappa le zone di una partita in corso</string>
     <string name="wherigo_controls_downloadcartridge_hint">Scarica una cartuccia (necessario cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Segnala un problema con il gestore di wherigo</string>
+    <string name="wherigo_controls_cache_context">Contesto Cache</string>
+    <string name="wherigo_controls_cache_link">Vai ai dettagli del cache</string>
+    <string name="wherigo_sound_title">Controlli del suono</string>
+    <string name="wherigo_sound_continue">Continua</string>
+    <string name="wherigo_sound_restart">Riavvia dall\'inizio</string>
+    <string name="wherigo_sound_pause">Pausa</string>
+    <string name="wherigo_sound_mute">Silenzioso</string>
+    <string name="wherigo_sound_unmute">Riattiva l\'audio</string>
     <string name="wherigo_controls_resume_paused_dialog">Riprendi la finestra in pausa</string>
+    <string name="wherigo_dialog_pause_info">Riprendi la finestra di dialogo in Wherigo toccando \"Riprendi la finestra in pausa\"</string>
     <string name="wherigo_no_game_running">Nessun gioco wherigo è attualmente in esecuzione</string>
     <string name="wherigo_currently_playing">Attualmente in corso</string>
     <string name="wherigo_cartridge_details">Dettagli della cartuccia</string>
@@ -2569,18 +2606,31 @@
     <string name="wherigo_download_progress_login">Accesso in corso…</string>
     <string name="wherigo_download_progress_started">Scaricamento avviato</string>
     <string name="wherigo_download_progress_download_status">Scaricato %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
+    <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
+    <string name="wherigo_error_game_error">Errore segnalato da Wherigo:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Usa \'Invia per email\' per segnalare un problema relativo a wherigo al nostro team di supporto.</string>
+    <string name="wherigo_error_email">Segnalazione problema Wherigo\n\nErrore: %1$s\n\n info Wherigo: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
     <string name="wherigo_confirm_stop_running_game_message">Un gioco è attualmente in esecuzione per \"%s\". Vuoi interrompere questo gioco?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Elimina Cartuccia Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Vuoi davvero eliminare la cartuccia \"%1$s\" inclusi %2$s giochi salvati?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Elimina salvataggio Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Vuoi davvero eliminare il salvataggio \"%2$s\" della cartuccia \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Salva i progressi del gioco Wherigo</string>
+    <string name="wherigo_save_game_message">Salva i tuoi progressi nel gioco per la cartuccia \"%1$s\" in \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Inserisci nome (opzionale)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Attenzione: procedendo sovrascriverai il salvataggio esistente da \"%1$s\"</string>
     <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo sta eseguendo un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" ti sta aspettando!</string>
+    <string name="wherigo_bar_resume_dialog">Riprendi</string>
     <string name="wherigo_toast_check_game">Wherigo: controlla le modifiche al tuo gioco</string>
     <string name="wherigo_toast_check_things">Wherigo: controlla il tuo %s per le modifiche</string>
     <string name="wherigo_otm_shortcuts_title">Scorciatoie Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Se desideri utilizzare il gestore c:geo Wherigo regolarmente, considera la creazione di un pulsante di avvio rapido o di un menu personalizzato Impostazioni -&gt; Aspetto</string>
+    <string name="wherigo_map_supported_for_unified_map_only">La visualizzazione delle posizioni di Wherigo non è supportata per le impostazioni della mappa. Passa alla mappa unificata in Impostazioni -&gt; Sorgenti mappa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>

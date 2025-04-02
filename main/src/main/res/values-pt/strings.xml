@@ -313,7 +313,6 @@
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
     <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Tentar novamente</string>
     <string name="info_log_post_save">Guardar offline</string>
     <string name="info_log_cleared">O registo foi limpo.</string>
