@@ -199,7 +199,12 @@ public class WMConnector extends AbstractConnector implements ILogin /*TODO impl
     }
 
     @Override
-    public void increaseCachesFound(int by) {
+    public void increaseCachesFound(final int by) {
         WMLogin.getInstance().increaseActualCachesFound(by);
+    }
+
+    @Override
+    public int getFindsQuantityString() {
+        return R.plurals.user_visits;
     }
 }

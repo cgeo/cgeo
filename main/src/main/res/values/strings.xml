@@ -554,6 +554,14 @@
         <item quantity="many">%d caches stored</item>
         <item quantity="other">%d caches stored</item>
     </plurals>
+    <plurals name="user_visits">
+        <item quantity="zero">%d visits</item>
+        <item quantity="one">%d visit</item>
+        <item quantity="two">%d visits</item>
+        <item quantity="few">%d visits</item>
+        <item quantity="many">%d visits</item>
+        <item quantity="other">%d visits</item>
+    </plurals>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>

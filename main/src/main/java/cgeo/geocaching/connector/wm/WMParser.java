@@ -43,7 +43,7 @@ public final class WMParser {
         }
 
         final Document document = Jsoup.parse(statsHtml);
-        final String value = document.select("div#BasicFinds").text();
+        final String value = document.select("div#BasicFinds").html();
 
         final Matcher distinctMatcher = Pattern.compile("\\(\\D*(\\d+)\\D*\\)").matcher(value);
         if (distinctMatcher.find()) {
@@ -55,7 +55,7 @@ public final class WMParser {
             return Integer.parseInt(Objects.requireNonNull(strongMatcher.group(1)));
         }
 
-        Log.w("WMParser: could not retrieve waymarking visits data (no match)");
-        return 0;
+        Log.w("WMParser: could not retrieve waymarking visits data (no match) in " + value);
+        return -1;
     }
 }
