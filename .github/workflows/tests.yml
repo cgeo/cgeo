@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
     steps:
+
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
@@ -217,6 +218,18 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
           add-job-summary-as-pr-comment: always  # Valid values are 'never' (default), 'always', and 'on-failure'
 
+      - name: Build binary
+        run: |
+          ./gradlew --no-configuration-cache --scan packageBasicDebug
+          ./gradlew --no-configuration-cache packageBasicDebugAndroidTest
+
+      - name: Upload resulting APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: "cgeo-apk-api${{ matrix.api-level }}"
+          path: '*/build/outputs/apk/basic/**/cgeo*.apk'
+          overwrite: true
+
       - name: AVD cache
         uses: actions/cache@v4
         id: avd-cache
@@ -239,7 +252,8 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       # Allow only one job at a time (prevent errors on live GC tests)
-      - uses: suzuki-shunsuke/lock-action@latest
+      - name: Wait for lock on live tests
+        uses: suzuki-shunsuke/lock-action@latest
         with:
           mode: lock
           key: unit-test
@@ -264,7 +278,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew testDebug --no-configuration-cache --stacktrace --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            ./gradlew --no-configuration-cache --stacktrace --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
             killall -INT crashpad_handler || true
 
       - name: Publish Test Report
@@ -272,10 +286,3 @@ jobs:
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/build/test-results/**/*.xml'
-
-      - name: Upload resulting APK
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: "cgeo-apk-api${{ matrix.api-level }}"
-          path: '*/build/outputs/apk/basic/**/cgeo*.apk'
