@@ -20,7 +20,7 @@
 - Oplossing: Gebruikersnotitie gaat verloren door het vernieuwen van een lab avontuur
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
 - Wijziging: Log-datum gerelateerde variabelen zullen de gekozen datum gebruiken in plaats van de huidige datum
-- New: Collapse long log entries per default
+- Nieuw: Lange logboekvermeldingen standaard inklappen
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
