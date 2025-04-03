@@ -1507,6 +1507,7 @@
     <string name="cache_menu_ignore">Ignorera cache</string>
     <string name="cache_log_menu_decrypt">Dekryptera/kryptera</string>
     <string name="cache_log_menu_edit">Redigera logg</string>
+    <string name="menu_expand_log">Expandera logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
