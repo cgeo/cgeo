@@ -28,7 +28,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
 
     private ContinuousRangeSlider slider;
     private CheckBox useCurrentPosition;
-    private Geopoint location = new Geopoint(33.3,-111.1); // DUMMY FOR TESTING
+    private Geopoint location = new Geopoint(33.3, -111.1); // DUMMY FOR TESTING
     private Button setCoordsButton;
 
     @Override
@@ -46,7 +46,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         setCoordsButton.setSingleLine(false);
         setCoordsButton.setPadding(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
         setCoordsButton.setTextSize(16);
-        ViewGroup.LayoutParams ll1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final ViewGroup.LayoutParams ll1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setCoordsButton.setLayoutParams(ll1);
         ViewUtils.setCoordinates(location, setCoordsButton);
         setCoordsButton.setOnClickListener(v -> setCoordinates());
@@ -77,9 +77,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         if (filter.getCoordinate() != null) {
             location = filter.getCoordinate();
         }
-        else {
-            location = new Geopoint(33.3,-111.1); // DUMMY FOR TESTING
-        }
+
         ViewUtils.setCoordinates(location, setCoordsButton);
         slider.setRange(
                 filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
@@ -97,11 +95,11 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
     }
 
     private void setCoordinates() {
-        NewCoordinateInputDialog dialog = new NewCoordinateInputDialog(getActivity(), this::onDialogClosed);
+        final NewCoordinateInputDialog dialog = new NewCoordinateInputDialog(getActivity(), this::onDialogClosed);
         dialog.show(location);
     }
 
-    public void onDialogClosed(String input) {
+    public void onDialogClosed(final String input) {
         // Handle the data from the dialog - temp parse it until full UI is in place
         this.location = GeopointParser.parse(input, null);
         ViewUtils.setCoordinates(location, setCoordsButton);

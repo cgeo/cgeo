@@ -1,6 +1,10 @@
 package cgeo.geocaching.ui.dialog;
 
-import static cgeo.geocaching.settings.Settings.CoordInputFormatEnum.Plain;
+import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.EditUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,18 +24,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.sensors.LocationDataProvider;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.EditUtils;
-
+import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the existing coordinate dialog
 public class NewCoordinateInputDialog {
@@ -48,7 +45,7 @@ public class NewCoordinateInputDialog {
     private List<EditText> orderedInputs;
     private Geopoint gp;
 
-    public NewCoordinateInputDialog(Context context, DialogCallback callback) {
+    public NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
 
         this.context = context;
         this.callback = callback;
@@ -60,17 +57,17 @@ public class NewCoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
-    public void show(Geopoint location) {
+    public void show(final Geopoint location) {
 
         gp = new Geopoint(location.getLatitude(), location.getLongitude());
 
-        LayoutInflater inflater = LayoutInflater.from(context);
+        final LayoutInflater inflater = LayoutInflater.from(context);
         final View theView = inflater.inflate(R.layout.new_coordinate_input_dialog, null);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(theView);
 
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
 
         // Show title and action buttons
@@ -79,8 +76,9 @@ public class NewCoordinateInputDialog {
         toolbar.inflateMenu(R.menu.menu_ok_cancel);
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
-               if (saveAndFinishDialog())
+               if (saveAndFinishDialog()) {
                    dialog.dismiss();
+               }
             } else {
                dialog.dismiss();
             }
@@ -96,14 +94,14 @@ public class NewCoordinateInputDialog {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
                 currentFormat = Settings.CoordInputFormatEnum.fromInt(position);
                 Settings.setCoordInputFormat(currentFormat);
-                UpdateGui();
+                updateGui();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(final AdapterView<?> parent) {
                 Toast.makeText(context, "Nothing Selected", Toast.LENGTH_SHORT).show();
             }
         });
@@ -131,18 +129,20 @@ public class NewCoordinateInputDialog {
         // Handle the hemisphere buttons
         bLatitude.setOnClickListener(v -> {
             final CharSequence text = bLatitude.getText();
-            if (text.equals("N"))
+            if (text.equals("N")) {
                 bLatitude.setText("S");
-            else
+            } else {
                 bLatitude.setText("N");
+            }
         });
 
         bLongitude.setOnClickListener(v -> {
                     final CharSequence text = bLongitude.getText();
-                    if (text.equals("E"))
+                    if (text.equals("E")) {
                         bLongitude.setText("W");
-                    else
+                    } else {
                         bLongitude.setText("E");
+                    }
         });
 
         orderedInputs = Arrays.asList(latitudeDegree, latitudeMinutes, latitudeSeconds, latitudeFraction,
@@ -158,7 +158,7 @@ public class NewCoordinateInputDialog {
 
     private boolean saveAndFinishDialog() {
 
-        String result = ReadGui();
+        final String result = readGui();
 
         try {
             final Geopoint entered = new Geopoint(result);
@@ -167,17 +167,16 @@ public class NewCoordinateInputDialog {
                 callback.onDialogClosed(result);
                 return true;
             }
-        }
-        catch (Geopoint.ParseException e) {
+        } catch (Geopoint.ParseException e) {
             Toast.makeText(context, e.resource, Toast.LENGTH_SHORT).show();
             return false;
         }
         return false;
     }
 
-    private String ReadGui(){
+    private String readGui() {
 
-        if (currentFormat.equals(Plain)) {
+        if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
             return plainLatitude.getText().toString() + " " + plainLongitude.getText().toString();
         }
 
@@ -193,8 +192,8 @@ public class NewCoordinateInputDialog {
                 lon += " " + longitudeMinutes.getText() + "." + longitudeFraction.getText();
                 break;
             case Sec:
-                lat += " " + latitudeMinutes.getText() + " " + latitudeSeconds.getText()+ "." + latitudeFraction.getText();
-                lon += " " + longitudeMinutes.getText() + " " + longitudeSeconds.getText()+ "." + longitudeFraction.getText();
+                lat += " " + latitudeMinutes.getText() + " " + latitudeSeconds.getText() + "." + latitudeFraction.getText();
+                lon += " " + longitudeMinutes.getText() + " " + longitudeSeconds.getText() + "." + longitudeFraction.getText();
                 break;
             case Deg:
                 lat += "." + latitudeFraction.getText();
@@ -204,9 +203,9 @@ public class NewCoordinateInputDialog {
         return lat + " " + lon;
     }
 
-    private void UpdateGui() {
+    private void updateGui() {
 
-        if (currentFormat.equals(Plain)) {
+        if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
             plainLatitude.setVisibility(View.VISIBLE);
             plainLongitude.setVisibility(View.VISIBLE);
             plainLatitude.setText(String.valueOf(gp.getLatitude()));
@@ -232,26 +231,26 @@ public class NewCoordinateInputDialog {
         switch (currentFormat) {
             case Min:
                 latitudeDegree.setVisibility(View.VISIBLE);
-                latitudeDegree.setText(addZeros(gp.getDecMinuteLatDeg(),2));
+                latitudeDegree.setText(addZeros(gp.getDecMinuteLatDeg(), 2));
 
                 latitudeMinutes.setVisibility(View.VISIBLE);
-                latitudeMinutes.setText(addZeros(gp.getDecMinuteLatMin(),2));
+                latitudeMinutes.setText(addZeros(gp.getDecMinuteLatMin(), 2));
 
                 latitudeSeconds.setVisibility(View.GONE);
 
                 latitudeFraction.setVisibility(View.VISIBLE);
-                latitudeFraction.setText(addZeros(gp.getDecMinuteLatMinFrac(),3));
+                latitudeFraction.setText(addZeros(gp.getDecMinuteLatMinFrac(), 3));
 
                 longitudeDegree.setVisibility(View.VISIBLE);
-                longitudeDegree.setText(addZeros(gp.getDecMinuteLonDeg(),3));
+                longitudeDegree.setText(addZeros(gp.getDecMinuteLonDeg(), 3));
 
                 longitudeMinutes.setVisibility(View.VISIBLE);
-                longitudeMinutes.setText(addZeros(gp.getDecMinuteLonMin(),2));
+                longitudeMinutes.setText(addZeros(gp.getDecMinuteLonMin(), 2));
 
                 longitudeSeconds.setVisibility(View.GONE);
 
                 longitudeFraction.setVisibility(View.VISIBLE);
-                longitudeFraction.setText(addZeros(gp.getDecMinuteLonMinFrac(),3));
+                longitudeFraction.setText(addZeros(gp.getDecMinuteLonMinFrac(), 3));
                 break;
 
             case Sec:
@@ -259,46 +258,46 @@ public class NewCoordinateInputDialog {
                 latitudeDegree.setText(addZeros(gp.getDecDegreeLatDeg(), 2));
 
                 latitudeMinutes.setVisibility(View.VISIBLE);
-                latitudeMinutes.setText(addZeros(gp.getDMSLatMin(),2));
+                latitudeMinutes.setText(addZeros(gp.getDMSLatMin(), 2));
 
                 latitudeSeconds.setVisibility(View.VISIBLE);
                 latitudeSeconds.setText(addZeros(gp.getDMSLatSec(), 2));
 
                 latitudeFraction.setVisibility(View.VISIBLE);
-                latitudeFraction.setText(addZeros(gp.getDMSLatSecFrac(),3));
+                latitudeFraction.setText(addZeros(gp.getDMSLatSecFrac(), 3));
 
                 longitudeDegree.setVisibility(View.VISIBLE);
-                longitudeDegree.setText(addZeros(gp.getDMSLonDeg(),3));
+                longitudeDegree.setText(addZeros(gp.getDMSLonDeg(), 3));
 
                 longitudeMinutes.setVisibility(View.VISIBLE);
-                longitudeMinutes.setText(addZeros(gp.getDMSLonMin(),2));
+                longitudeMinutes.setText(addZeros(gp.getDMSLonMin(), 2));
 
                 longitudeSeconds.setVisibility(View.VISIBLE);
-                longitudeSeconds.setText(addZeros(gp.getDMSLonSec(),2));
+                longitudeSeconds.setText(addZeros(gp.getDMSLonSec(), 2));
 
                 longitudeFraction.setVisibility(View.VISIBLE);
-                longitudeFraction.setText(addZeros(gp.getDMSLonSecFrac(),3));
+                longitudeFraction.setText(addZeros(gp.getDMSLonSecFrac(), 3));
                 break;
 
             case Deg:
             default:
                 latitudeDegree.setVisibility(View.VISIBLE);
-                latitudeDegree.setText(addZeros(gp.getDecDegreeLatDeg(),2));
+                latitudeDegree.setText(addZeros(gp.getDecDegreeLatDeg(), 2));
 
                 latitudeMinutes.setVisibility(View.GONE);
                 latitudeSeconds.setVisibility(View.GONE);
 
                 latitudeFraction.setVisibility(View.VISIBLE);
-                latitudeFraction.setText(addZeros(gp.getDecDegreeLatDegFrac(),5));
+                latitudeFraction.setText(addZeros(gp.getDecDegreeLatDegFrac(), 5));
 
                 longitudeDegree.setVisibility(View.VISIBLE);
-                longitudeDegree.setText(addZeros(gp.getDecDegreeLonDeg(),3));
+                longitudeDegree.setText(addZeros(gp.getDecDegreeLonDeg(), 3));
 
                 longitudeMinutes.setVisibility(View.GONE);
                 longitudeSeconds.setVisibility(View.GONE);
 
                 longitudeFraction.setVisibility(View.VISIBLE);
-                longitudeFraction.setText(addZeros(gp.getDecDegreeLonDegFrac(),5));
+                longitudeFraction.setText(addZeros(gp.getDecDegreeLonDegFrac(), 5));
                 break;
         }
     }
