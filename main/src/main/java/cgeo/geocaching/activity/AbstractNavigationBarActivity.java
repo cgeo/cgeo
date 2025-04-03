@@ -146,7 +146,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private boolean onMapLongClicked() {
-        if (!Settings.useUnifiedMap()) {
+        if (Settings.useLegacyMaps()) {
             return false;
         }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {

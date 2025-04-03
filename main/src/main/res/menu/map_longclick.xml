@@ -2,30 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_add_waypoint"
-        android:title="@string/cache_waypoints_add">
-    </item>
+        android:title="@string/cache_waypoints_add"/>
     <item
         android:id="@+id/menu_udc"
-        android:title="@string/create_internal_cache">
-    </item>
+        android:title="@string/create_internal_cache"/>
     <item
         android:id="@+id/menu_add_to_route"
-        android:title="@string/context_map_add_to_route">
-    </item>
+        android:title="@string/context_map_add_to_route"/>
     <item
         android:id="@+id/menu_add_to_route_start"
-        android:title="@string/context_map_add_to_route_start">
-    </item>
+        android:title="@string/context_map_add_to_route_start"/>
     <item
         android:id="@+id/menu_coords"
-        android:title="@string/selected_position">
-    </item>
+        android:title="@string/selected_position"/>
     <item
         android:id="@+id/menu_target"
-        android:title="@string/cache_menu_target">
-    </item>
+        android:title="@string/cache_menu_target"/>
     <item
         android:id="@+id/menu_navigate"
-        android:title="@string/cache_menu_navigate">
-    </item>
+        android:title="@string/cache_menu_navigate"/>
 </menu>

@@ -10,6 +10,8 @@
 
     <color name="colorTextHeadline">#88000000</color>
     <color name="colorTextHintActionBar">#FFAAAAAA</color>
+    <color name="colorIconActionBar">#FFFFFFFF</color>
+    <color name="colorIconMenu">#FF1B1B1B</color>
 
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>

@@ -7,21 +7,18 @@
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/trackable_log_touch"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_browser_trackable"
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/trackable_browser_open"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_refresh_trackable"
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/trackable_refresh"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
 
 </menu>

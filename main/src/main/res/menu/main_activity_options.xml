@@ -10,95 +10,85 @@
         android:title="@string/search_bar_hint"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
-        app:showAsAction="collapseActionView|always" />
+        app:showAsAction="collapseActionView|always"/>
     <item
         android:id="@+id/menu_paste_search"
         android:icon="@drawable/ic_menu_paste_search"
         android:title="@string/menu_search_clipboard"
         android:visible="false"
-        app:showAsAction="always">
-    </item>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
         android:title="@string/menu_history_longstring"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_goto"
         android:icon="@drawable/ic_menu_goto"
-        android:title="@string/any_button">
-    </item>
+        android:title="@string/any_button"/>
     <item
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_pocket_query"
         android:title="@string/menu_lists_pocket_queries"
-        android:visible="false">
-    </item>
+        android:visible="false"/>
     <item
         android:id="@+id/menu_bookmarklists"
         android:icon="@drawable/ic_menu_bookmarks"
         android:title="@string/menu_lists_bookmarklists"
-        android:visible="false">
-    </item>
+        android:visible="false"/>
     <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_external_link"
-        android:title="@string/menu_helpers">
-    </item>
+        android:title="@string/menu_helpers"/>
 
     <item
         android:id="@+id/menu_wherigo"
         android:icon="@drawable/type_wherigo"
-        android:title="@string/wherigo_player">
-    </item>
+        android:title="@string/wherigo_player"/>
 
     <group android:id="@+id/menu_group_settings">
         <item
             android:id="@+id/menu_wizard"
             android:icon="@drawable/ic_menu_preferences"
-            android:title="@string/wizard">
-        </item>
+            android:title="@string/wizard"/>
         <item
             android:id="@+id/menu_settings"
             android:icon="@drawable/ic_menu_preferences"
-            android:title="@string/menu_settings">
-        </item>
+            android:title="@string/menu_settings"/>
         <item
             android:id="@+id/menu_backup"
             android:icon="@drawable/ic_menu_rotate"
-            android:title="@string/menu_backup">
-        </item>
+            android:title="@string/menu_backup"/>
         <item
             android:title="@string/menu_manage_offline_data"
             android:icon="@drawable/ic_menu_refresh">
             <menu>
                 <item
                     android:id="@+id/menu_update_routingdata"
-                    android:title="@string/menu_update_routingdata" />
+                    android:title="@string/menu_update_routingdata"/>
                 <item
                     android:id="@+id/menu_update_mapdata"
-                    android:title="@string/menu_update_mapdata" />
+                    android:title="@string/menu_update_mapdata"/>
+                <item
+                    android:id="@+id/menu_download_language"
+                    android:title="@string/translator_model_download_select"/>
                 <item
                     android:id="@+id/menu_delete_offline_data"
-                    android:title="@string/menu_delete_offline_data" />
+                    android:title="@string/menu_delete_offline_data"/>
             </menu>
         </item>
         <item
             android:id="@+id/menu_pending_downloads"
-            android:title="@string/downloader_pending_downloads">
-        </item>
+            android:title="@string/downloader_pending_downloads"/>
     </group>
     <group android:id="@+id/menu_group_about">
         <item
             android:id="@+id/menu_about"
             android:icon="@drawable/ic_menu_info_details"
-            android:title="@string/menu_about">
-        </item>
+            android:title="@string/menu_about"/>
         <item
             android:id="@+id/menu_report_problem"
             android:icon="@drawable/ic_menu_bug_report"
-            android:title="@string/debug_user_error_report_title">
-        </item>
+            android:title="@string/debug_user_error_report_title"/>
     </group>
 </menu>

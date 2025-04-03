@@ -317,7 +317,7 @@ public class CgeoApplicationTest {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, GeocacheFilter)}
      */
     @MediumTest
     @Test
@@ -330,7 +330,7 @@ public class CgeoApplicationTest {
             final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
             // check coords
-            final SearchResult search = ConnectorFactory.searchByViewport(viewport);
+            final SearchResult search = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
             final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);

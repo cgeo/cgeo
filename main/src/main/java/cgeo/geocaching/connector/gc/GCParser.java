@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -58,7 +59,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TimeZone;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -176,8 +181,9 @@ public final class GCParser {
         return new SearchResult(cache);
     }
 
+    //method is only used in AndroidTests
     @NonNull
-    static SearchResult parseAndSaveCacheFromText(final IConnector con, @Nullable final String page, @Nullable final DisposableHandler handler) {
+    static SearchResult testParseAndSaveCacheFromText(final IConnector con, @Nullable final String page, @Nullable final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         final SearchResult result = new SearchResult(con, parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
@@ -404,6 +410,14 @@ public final class GCParser {
         if (StringUtils.isNotEmpty(relatedWebPage)) {
             relatedWebPage = String.format("<br/><br/><a href=\"%s\"><b>%s</b></a>", relatedWebPage, relatedWebPage);
         }
+        String galleryImageLink = StringUtils.EMPTY;
+        final int galleryImages = getGalleryCount(page);
+        if (galleryImages > 0) {
+            galleryImageLink = String.format("<br/><br/><a href=\"%s\"><b>%s</b></a>",
+                "https://www.geocaching.com/seek/gallery.aspx?guid=" + cache.getGuid(),
+                CgeoApplication.getInstance().getString(R.string.link_gallery, galleryImages));
+        }
+        Log.d("Gallery image link: " + galleryImageLink);
         String gcChecker = StringUtils.EMPTY;
         if (page.contains(GCConstants.PATTERN_GC_CHECKER)) {
             gcChecker = "<!--" + CgeoApplication.getInstance().getString(R.string.link_gc_checker) + "-->";
@@ -461,14 +475,16 @@ public final class GCParser {
         if (matcherBackgroundImage.find()) {
             final String url = matcherBackgroundImage.group(1);
             boolean present = false;
-            for (final Image image : cache.getSpoilers()) {
+            for (final Image image : cacheSpoilers) {
                 if (StringUtils.equals(image.getUrl(), url)) {
                     present = true;
                     break;
                 }
             }
             if (!present) {
-                cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(CgeoApplication.getInstance().getString(R.string.cache_image_background)).build());
+                cacheSpoilers.add(new Image.Builder().setUrl(url)
+                    .setTitle(LocalizationUtils.getString(R.string.image_listing_background))
+                    .setDescription(LocalizationUtils.getString(R.string.cache_image_background)).build());
             }
         }
         cache.setSpoilers(cacheSpoilers);
@@ -609,21 +625,20 @@ public final class GCParser {
     public static List<Image> parseSpoiler(final String html) {
         final List<Image> cacheSpoilers = new ArrayList<>();
         final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, html);
-
         while (matcherSpoilersInside.find()) {
             final String url = matcherSpoilersInside.group(1);
 
             String title = null;
             if (matcherSpoilersInside.group(2) != null) {
                 title = matcherSpoilersInside.group(2);
+            } else {
+                title = LocalizationUtils.getString(R.string.image_listing_spoiler);
             }
-            String description = null;
+            String description = LocalizationUtils.getString(R.string.image_listing_spoiler);
             if (matcherSpoilersInside.group(3) != null) {
-                description = matcherSpoilersInside.group(3);
+                description += ": " + matcherSpoilersInside.group(3);
             }
-            if (title != null) {
-                cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
-            }
+            cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
         }
         return cacheSpoilers;
     }
@@ -1011,7 +1026,16 @@ public final class GCParser {
      * @return Number of people watching geocache, -1 when error
      */
     static int getWatchListCount(final String page) {
-        final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
+        return getCount(page, GCConstants.PATTERN_WATCHLIST_COUNT, 1);
+    }
+
+    static int getGalleryCount(final String page) {
+        return getCount(page, GCConstants.PATTERN_GALLERY_COUNT, 1);
+    }
+
+    private static int getCount(final String page, final Pattern pattern, final int group) {
+
+        final String sCount = TextUtils.getMatch(page, pattern, true, group, "notFound", false);
         if ("notFound".equals(sCount)) {
             return -1;
         }
@@ -1022,6 +1046,8 @@ public final class GCParser {
             return -1;
         }
     }
+
+
 
     /**
      * Removes the cache from the watch list
@@ -1587,6 +1613,9 @@ public final class GCParser {
             });
         }
 
+        //add gallery images if wanted
+        addImagesFromGallery(cache, handler);
+
         if (Settings.isRatingWanted() && !DisposableHandler.isDisposed(handler)) {
             DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
             final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
@@ -1599,6 +1628,53 @@ public final class GCParser {
 
         // Wait for completion of logs parsing, retrieving and merging
         mergedLogs.ignoreElement().blockingAwait();
+    }
+
+    private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
+        if (StringUtils.isBlank(cache.getGuid()) || !Settings.isStoreLogImages() /* see #16778 */) {
+            return;
+        }
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
+        //load page
+        //https://www.geocaching.com/seek/gallery.aspx?guid=0e670e6a-4b38-45c7-97b7-fa5da0f367a2
+        final String galleryFirstPage = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/gallery.aspx", new Parameters("guid", cache.getGuid()));
+        if (galleryFirstPage == null) {
+            return;
+        }
+
+        //get existing Image URls
+        final Set<String> existingUrls = cache.getSpoilers().stream().map(Image::getUrl).collect(Collectors.toSet());
+        //collect new Images
+        final List<Image> newImages = parseGalleryImages(galleryFirstPage, url -> !existingUrls.contains(url));
+        newImages.addAll(0, cache.getSpoilers());
+        cache.setSpoilers(newImages);
+    }
+
+    public static List<Image> parseGalleryImages(final String html, final Predicate<String> take) {
+        final List<Image> images = new ArrayList<>();
+        final MatcherWrapper matcherImage = new MatcherWrapper(GCConstants.PATTERN_GALLERY_IMAGE, html);
+
+        while (matcherImage.find()) {
+            final String date = matcherImage.group(1);
+            final String url = matcherImage.group(2);
+            final String title = matcherImage.group(3);
+
+            String description = LocalizationUtils.getString(R.string.image_listing_gallery);
+            if (!StringUtils.isBlank(date)) {
+                description += ": " + date;
+            }
+
+            if (!take.test(url)) {
+                continue;
+            }
+
+            images.add(new Image.Builder().setCategory(Image.ImageCategory.LISTING)
+                .setUrl(url)
+                .setTitle(title)
+                .setDescription(description).build());
+
+        }
+        return images;
     }
 
     @WorkerThread

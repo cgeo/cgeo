@@ -15,7 +15,6 @@ import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
-import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
@@ -184,10 +183,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             if (filters.isEmpty()) {
                 SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title).setMessage(R.string.cache_filter_storage_load_delete_nofilter_message).show();
             } else {
-                final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
+                final SimpleDialog.ItemSelectModel<GeocacheFilter> model = FilterUtils.getGroupedFilterList(filters);
                 model
-                    .setItems(filters)
-                    .setDisplayMapper((f) -> TextParam.text(f.getName()))
                     .setItemActionIconMapper((f) -> ImageParam.id(R.drawable.ic_menu_delete))
                     .setItemActionListener((f) -> {
                         //DELETE action was tapped for a filter
@@ -201,8 +198,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                                         binding.filterStorageName.setText("");
                                     }
                                 });
-                    })
-                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+                    });
 
                 SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title)
                                 .selectSingle(model, (f) -> fillViewFromFilter(f.toConfig(), isAdvancedView()));

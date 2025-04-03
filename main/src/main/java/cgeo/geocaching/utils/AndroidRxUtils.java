@@ -5,6 +5,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 import androidx.fragment.app.Fragment;
 
 import java.lang.ref.WeakReference;
@@ -20,7 +22,9 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.BiFunction;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -133,6 +137,60 @@ public class AndroidRxUtils {
 
     public static Disposable disposeOnCallbacksScheduler(final Runnable runnable) {
         return Disposable.fromRunnable(() -> looperCallbacksScheduler.scheduleDirect(runnable));
+    }
+
+    /**
+     * executes a list of tasks in parallel for a list of given items. Warning: function BLOCKS and returns when all tasks are
+     * executed. Provides fail-safety for executions: failing (=exceution-throwing) functions lead to ignoring their result.
+     *
+     * @param items list of values for which to start parallel execution. null values are ignored
+     * @param parallelFunction function which is executed in parallel for each value in items. null results are ignored
+     * @param initialCombinerValue initial value for combined result. Must be non-null
+     * @param combiner function which is executed to combine results with each other
+     * @return combined result
+     * @param <I> type of initial value
+     * @param <R> type of result of parallel execution
+     * @param <F> type of result of combining parallel execution result
+     */
+    @WorkerThread
+    @NonNull
+    public static <I, R, F> F executeParallelThenCombine(@NonNull final Iterable<I> items, @NonNull final Function<I, R> parallelFunction,
+                                                         @NonNull final F initialCombinerValue, @NonNull final BiFunction<F, R, F> combiner) {
+
+        final String logPraefix = "executeParallelThenCombine:";
+        return Observable.fromIterable(items).flatMapMaybe((Function<I, Maybe<R>>) item -> {
+            try {
+                if (item == null) {
+                    return Maybe.empty();
+                }
+                return Maybe.fromCallable(() -> {
+                    try {
+                        final R result =  parallelFunction.apply(item);
+                        if (result == null) {
+                            Log.w(logPraefix + "null item returned for function for item " + item);
+                        }
+                        return result;
+                    } catch (final Throwable t) {
+                        Log.w(logPraefix + ".function: swallowing error from item " + item, t);
+                        return null;
+                    }
+                }).subscribeOn(AndroidRxUtils.networkScheduler);
+            } catch (Throwable t) {
+                Log.w(logPraefix + ".maybe-creation: swallowing error from item " + item, t);
+                return Maybe.empty();
+            }
+        }).reduce(initialCombinerValue, (result1, result2) -> {
+            try {
+                final F combinedResult = combiner.apply(result1, result2);
+                if (combinedResult == null) {
+                    Log.w(logPraefix + "combining " + result1 + " and " + result2 + " leads to null, ignore combined result");
+                }
+                return combinedResult == null ? result1 : combinedResult;
+            } catch (final Throwable t) {
+                Log.w(logPraefix + ".reduce: swallowing error combining " + result1 + " and " + result2, t);
+                return result1;
+            }
+        }).blockingGet();
     }
 
     /**

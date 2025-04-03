@@ -181,7 +181,6 @@
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
     <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
-    <string name="info_log_post_failed_reason">Rason: %s</string>
     <string name="info_log_post_retry">Suwayi og balik</string>
     <string name="info_log_post_save">I-save sa offline</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
@@ -232,7 +231,6 @@
     <string name="caches_sort_name">Pangalan</string>
     <string name="caches_sort_rating">Grado</string>
     <string name="caches_sort_vote">Botar (Kaugalingon na Grado)</string>
-    <string name="caches_sort_inventory">Ihap sa imbentaryo</string>
     <string name="caches_sort_date_hidden">Ang gitagoan na petsa</string>
     <string name="caches_sort_finds">Napangita</string>
     <string name="caches_sort_state">Estado</string>
@@ -553,7 +551,6 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_status_attended">Nitambong</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_status_archived">Ge-arkibo</string>
@@ -669,7 +666,6 @@
     <string name="search_tb_button">Mangita og mga trackable</string>
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>
-    <string name="search_own_caches">Pangitaa ang akong mga cache</string>
     <!-- trackable -->
     <string name="trackable">Masundan</string>
     <string name="trackable_details_loading">Ga load pa ang gisundang mga detalye…</string>
@@ -720,7 +716,6 @@
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
-    <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
     <!-- export -->
     <string name="export">I-export</string>
     <string name="export_progress">I-export: %1$s</string>
@@ -768,9 +763,7 @@
     <string name="attribute_climbing_yes">Malisod nga pagsaka</string>
     <string name="attribute_climbing_no">Walay lisud sa pagkatkat</string>
     <string name="attribute_wading_yes">Basin kinahanglan ug wading</string>
-    <string name="attribute_wading_no">Basin guro dile kinahanglan ug wading</string>
     <string name="attribute_swimming_yes">Basin kinahanglan ug paglangoy</string>
-    <string name="attribute_swimming_no">Basin guro dile kinahanglan ug paglangoy</string>
     <string name="attribute_available_yes">Available pirme bisan unsang orasa</string>
     <string name="attribute_available_no">Dile available bisan unsang orasa</string>
     <string name="attribute_night_yes">Girekomendar sa gabie</string>
@@ -780,7 +773,6 @@
     <string name="attribute_stealth_yes">Kinahanglan ang stealth</string>
     <string name="attribute_stealth_no">Dile kinahanglan ang stealth</string>
     <string name="attribute_firstaid_yes">Kinahanglan ug tigmintinar</string>
-    <string name="attribute_firstaid_no">Dile na kinahangalan ug tingtiminar</string>
     <string name="attribute_cow_yes">Tan-awa sa ang binuhi</string>
     <string name="attribute_cow_no">Walay binuhi</string>
     <string name="attribute_field_puzzle_yes">Talan-awon sa uma</string>
@@ -810,49 +802,32 @@
     <string name="attribute_partnership_yes">Panag-uban nga cache</string>
     <string name="attribute_partnership_no">Dili panag-uban nga cache</string>
     <string name="attribute_fee_yes">Akses o bayad sa parking kay kinahanglan</string>
-    <string name="attribute_fee_no">Akses o bayad sa parking kay dili kinahanglan</string>
     <string name="attribute_rappelling_yes">Engranahe sa pagsaka kay kinahanglan</string>
-    <string name="attribute_rappelling_no">Dili kinahanglan og engranahe sa pagsaka</string>
     <string name="attribute_boat_yes">Kinahanglan og barko</string>
-    <string name="attribute_boat_no">Dili kinahanglan og barko</string>
     <string name="attribute_scuba_yes">Kinahanglan og scuba gear</string>
-    <string name="attribute_scuba_no">Dili kinahanglan og scuba gear</string>
     <string name="attribute_flashlight_yes">Kinahanglan og espat</string>
-    <string name="attribute_flashlight_no">Dili kinahanglan og espat</string>
     <string name="attribute_uv_yes">Kinahanglan og UV nga suga</string>
     <string name="attribute_uv_no">Dili kinahanglan og UV nga suga</string>
     <string name="attribute_snowshoes_yes">Kinahanglan og snowshoes</string>
-    <string name="attribute_snowshoes_no">Dili kinahanglan og snowshoes</string>
     <string name="attribute_skiis_yes">Krus country nga mga ski kay kinahanglan</string>
-    <string name="attribute_skiis_no">Dili kinahanglan og mga krus country nga mga ski</string>
     <string name="attribute_s_tool_yes">Kinahanglan og espesyal nga mga hiramenta</string>
-    <string name="attribute_s_tool_no">Dili kinahanglan og espesyal na mga hiramenta</string>
     <string name="attribute_wirelessbeacon_yes">Wayirless na banwag</string>
-    <string name="attribute_wirelessbeacon_no">Walay wayirless na banwag</string>
     <string name="attribute_treeclimbing_yes">Kinahanglan ang pagsaka sa kahoy</string>
     <string name="attribute_treeclimbing_no">Dili kinahanglan ang pagsaka sa kahoy</string>
     <string name="attribute_poisonoak_yes">Makahilo na mga tanom</string>
     <string name="attribute_poisonoak_no">Walay makahilo na tanom</string>
     <string name="attribute_dangerousanimals_yes">Peligroso na mga hayop</string>
-    <string name="attribute_dangerousanimals_no">Walay peligroso na mga hayop</string>
     <string name="attribute_ticks_yes">Mga kato</string>
-    <string name="attribute_ticks_no">Walay mga kato</string>
     <string name="attribute_mine_yes">Gi-abandonar na mga mina</string>
-    <string name="attribute_mine_no">Walay gi-abandonar na mga mina</string>
     <string name="attribute_cliff_yes">Pangpang / Nangahulog na mga bato</string>
-    <string name="attribute_cliff_no">Walay pangpang / nangahulog na mga bato</string>
     <string name="attribute_hunting_yes">Pangayam</string>
-    <string name="attribute_hunting_no">Walay pangayam</string>
     <string name="attribute_danger_yes">Peligroso na lugar</string>
-    <string name="attribute_danger_no">Dili peligroso na lugar</string>
     <string name="attribute_thorn_yes">Mga tunok</string>
-    <string name="attribute_thorn_no">Walay tunok</string>
     <string name="attribute_wheelchair_yes">Naay maagian sa wiltsir</string>
     <string name="attribute_wheelchair_no">Dili maagian og wiltsir</string>
     <string name="attribute_parking_yes">Aduna\'y parking</string>
     <string name="attribute_parking_no">Walay magamit na parking</string>
     <string name="attribute_public_yes">Pampubliko nga transportasyon</string>
-    <string name="attribute_public_no">Walay pampubliko nga transportasyon</string>
     <string name="attribute_water_yes">Imnanan og tubig sa duol</string>
     <string name="attribute_water_no">Walay imnanan og tubig sa duol</string>
     <string name="attribute_restrooms_yes">Pampubliko nga banyo sa duol</string>

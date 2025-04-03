@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -54,11 +53,6 @@ public class XmlUtilsTest {
     public void testSkipIllegalChars() throws Exception {
         XmlUtils.simpleText(xml, "", "tag", "Vom\u0001 Gasthaus\u000f zur \u000bPyramide\u0020aus \u0018Glas\u0009");
         assertXmlEquals("<tag>Vom Gasthaus zur Pyramide\u0020aus Glas\u0009</tag>");
-    }
-
-    @Test
-    public void testCreatePullParser() throws Exception {
-        final XmlPullParser xpp = XmlUtils.createParser(null, true);
     }
 
 }

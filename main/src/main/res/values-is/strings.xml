@@ -153,7 +153,6 @@
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
     <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
-    <string name="info_log_post_failed_reason">Ástæða: %s</string>
     <string name="info_log_post_retry">Reyna aftur</string>
     <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>
@@ -421,7 +420,6 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
-    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -564,7 +562,6 @@
     <string name="attribute_winter_yes">Í boði yfir veturinn</string>
     <string name="attribute_winter_no">Ekki í boði yfir veturinn</string>
     <string name="attribute_firstaid_yes">Þarfnast viðhalds</string>
-    <string name="attribute_firstaid_no">Þarfnast ekki viðhalds</string>
     <string name="attribute_cow_yes">Fylgist með búfé</string>
     <string name="attribute_cow_no">Ekkert búfé</string>
     <string name="attribute_nightcache_yes">Næturkassi</string>
@@ -585,17 +582,12 @@
     <string name="attribute_teamwork_yes">Krefst teymisvinnu</string>
     <string name="attribute_teamwork_no">Krefst ekki teymisvinnu</string>
     <string name="attribute_fee_yes">Aðgangs- eða bílastæðagjald</string>
-    <string name="attribute_fee_no">Aðgangs- eða bílastæðagjalds ekki krafist</string>
     <string name="attribute_rappelling_yes">Krefst klifurbúnaðar</string>
-    <string name="attribute_rappelling_no">Krefst ekki klifurbúnaðar</string>
     <string name="attribute_boat_yes">Krefst báts</string>
-    <string name="attribute_boat_no">Báts ekki krafist</string>
     <string name="attribute_flashlight_yes">Krefst vasaljóss</string>
-    <string name="attribute_flashlight_no">Krefst ekki vasaljóss</string>
     <string name="attribute_uv_yes">Krefst útfjólublás ljóss</string>
     <string name="attribute_uv_no">Krefst ekki útfjólublás ljóss</string>
     <string name="attribute_ticks_yes">Mítlar</string>
-    <string name="attribute_ticks_no">Engir mítlar</string>
     <string name="attribute_danger_yes">Hættulegt svæði</string>
     <string name="attribute_stroller_yes">Aðgengilegt barnavögnum</string>
     <string name="attribute_stroller_no">Ekki aðgengilegt barnavögnum</string>

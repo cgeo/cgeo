@@ -52,7 +52,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
             R.string.pref_persistablefolder_offlinemaps,
             R.string.pref_fakekey_info_offline_mapthemes, R.string.pref_persistablefolder_offlinemapthemes,
-            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden, R.string.pref_useUnifiedMap,
+            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden, R.string.pref_useLegacyMap,
             // map content & behavior
             R.string.pref_maptrail,
             R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,

@@ -82,6 +82,10 @@
         <item name="tint">@color/colorTextActionBar</item>
     </style>
 
+    <style name="actionBarActionOverflow2" parent="actionBarActionOverflow">
+        <item name="tint">@color/colorText</item>
+    </style>
+
     <style name="tool_bar" parent="actionBarStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
@@ -292,6 +296,11 @@
     <style name="textinput_edittext_singleline" parent="textinput_edittext">
         <item name="android:singleLine">true</item>
         <item name="endIconMode">clear_text</item>
+    </style>
+
+    <style name="textinput_dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:padding">6dip</item>
+        <item name="android:textAppearance">@style/text_default</item>
     </style>
 
     <!-- for AutoCompleteTextView or EditText embedded in material TextInputLayout -->

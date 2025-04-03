@@ -96,6 +96,18 @@
     </LinearLayout>
 
     <LinearLayout
+        style="@style/map_shadowcontainer"
+        android:layout_marginLeft="13dp"
+        android:layout_below="@+id/map_compassrosecontainer">
+        <ImageView
+            android:id="@+id/live_map_status"
+            app:tint="@color/just_white"
+            style="@style/map_overlaybutton_bg"
+            android:visibility="gone"
+            android:background="@drawable/map_bearing_background" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/container_rotationmenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

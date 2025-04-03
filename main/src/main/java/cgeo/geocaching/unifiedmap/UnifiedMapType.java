@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
@@ -21,17 +22,22 @@ public class UnifiedMapType implements Parcelable {
     public static final String BUNDLE_MAPTYPE = "maptype";
 
     public enum UnifiedMapTypeType {
-        UMTT_Undefined,         // invalid state
-        UMTT_PlainMap,          // open map (from bottom navigation)
-        UMTT_Viewport,          // open map, shows and scales to a given Viewport
-        UMTT_TargetGeocode,     // set cache or waypoint as target
-        UMTT_TargetCoords,      // set coords as target
-        UMTT_List,              // display list contents
-        UMTT_SearchResult       // show and scale to searchresult
+        UMTT_PlainMap(MapMode.LIVE),          // open map (from bottom navigation)
+        UMTT_Viewport(MapMode.LIVE),          // open map, shows and scales to a given Viewport
+        UMTT_TargetGeocode(MapMode.SINGLE),     // set cache or waypoint as target
+        UMTT_TargetCoords(MapMode.COORDS),      // set coords as target
+        UMTT_List(MapMode.LIST),              // display list contents
+        UMTT_SearchResult(MapMode.LIST);       // show and scale to searchresult
         // to be extended
+
+        public final MapMode compatibilityMapMode;
+
+        UnifiedMapTypeType(final MapMode compatibilityMapMode) {
+            this.compatibilityMapMode = compatibilityMapMode;
+        }
     }
 
-    public UnifiedMapTypeType type = UnifiedMapTypeType.UMTT_Undefined;
+    public UnifiedMapTypeType type;
     public String target = null;
     public Geopoint coords = null;
     public SearchResult searchResult = null;
@@ -99,6 +105,14 @@ public class UnifiedMapType implements Parcelable {
         this.title = title;
     }
 
+    /** show and scale to search result with marked coordinates */
+    public UnifiedMapType(final SearchResult searchResult, final String title, final Geopoint coords) {
+        type = UnifiedMapTypeType.UMTT_SearchResult;
+        this.searchResult = searchResult;
+        this.title = title;
+        this.coords = coords;
+    }
+
     /** get launch intent */
     public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
@@ -113,6 +127,10 @@ public class UnifiedMapType implements Parcelable {
 
     public boolean enableLiveMap() {
         return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
+    }
+
+    public boolean isSingleCacheView() {
+        return type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_TargetGeocode;
     }
     // ========================================================================
     // parcelable methods

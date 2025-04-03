@@ -37,9 +37,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
         initMapSourcePreference();
 
-        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
-        useUnified.setChecked(Settings.useUnifiedMap());
-
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
         // new unified map providers
         final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
@@ -65,6 +62,19 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
+
+        // UnifiedMap/legacy maps switch
+        final CheckBoxPreference useLegacyMap = findPreference(getString(R.string.pref_useLegacyMap));
+        useLegacyMap.setOnPreferenceChangeListener((preference, newValue) -> {
+            final boolean useUnifiedMap = !((boolean) newValue);
+            findPreference(getString(R.string.pref_tileprovider)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_tileprovider_hidden)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_unifiedMapVariants)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_mapsource)).setEnabled(!useUnifiedMap);
+            return true;
+        });
+        useLegacyMap.setChecked(Settings.useLegacyMaps());
     }
 
     @Override
@@ -78,9 +88,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
 
         initPublicFolders(this, activity.getCsah());
-
-        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
-        useUnified.setChecked(Settings.useUnifiedMap());
     }
 
     /**

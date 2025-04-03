@@ -290,7 +290,6 @@
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
     <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
     <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
-    <string name="info_log_post_failed_reason">Grunn: %s</string>
     <string name="info_log_post_retry">Prøv på nytt</string>
     <string name="info_log_post_save">Lagre lokalt</string>
     <string name="info_log_cleared">Loggen ble slettet.</string>
@@ -364,7 +363,6 @@
     <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Rangering</string>
     <string name="caches_sort_vote">Avstemming (egen rangering)</string>
-    <string name="caches_sort_inventory">Antall sporbare</string>
     <string name="caches_sort_date_hidden">Dato gjemt</string>
     <string name="caches_sort_finds">Antall funn</string>
     <string name="caches_sort_state">Status</string>
@@ -807,12 +805,8 @@
     <string name="init_summary_maptrail">Vis spor på kart</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
-    <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
-    <string name="init_circlefillcolor_summary">Velg fyllfarge og gjennomsiktighet for sirklene</string>
     <string name="init_accuracycirclecolor">Farge på presisjonssirkellinje</string>
     <string name="init_accuracycirclecolor_summary">Velg farge og gjennomsiktighet for presisjonssirkel. Presisjonssirkel brukes for å vise hvor nøyaktig posisjonssignalene er.</string>
-    <string name="init_accuracycirclefillcolor">Farge i presisjonssirkel</string>
-    <string name="init_accuracycirclefillcolor_summary">Velg farge og gjennomsiktighet for sirklene</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
     <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>
@@ -1139,7 +1133,6 @@
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
-    <string name="cache_status_attended">Deltok</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
     <string name="cache_status_archived">Arkivert</string>
@@ -1193,7 +1186,6 @@
     <string name="create_internal_cache">Opprett en brukerdefinert cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Bruk gjeldende liste</string>
-    <string name="internal_cache_default_name">Brukerdefinert cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brukerdefinert cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå til\'-mål</string>
@@ -1202,6 +1194,7 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
+    <string name="internal_connector_name">Interne cacher</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1290,7 +1283,6 @@
     <string name="calccoord_guided_value">Verdi</string>
     <string name="calccoord_convert_to_plain">Konverter til ren koordinat</string>
     <string name="calccoord_plain_tools_title">Vanlige verktøy</string>
-    <string name="calccoord_remove_spaces">Fjern mellomrom</string>
     <string name="calccoord_paste_from_clipboard">Lim inn fra utklippstavlen</string>
     <string name="calccoord_generate_title">Generer veipunkter</string>
     <string name="calccoord_generate_showonmap">Vis på kartet</string>
@@ -1363,7 +1355,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1383,7 +1374,6 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
@@ -1392,7 +1382,6 @@
     <string name="add_target_to">Legg til mål til</string>
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
-    <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_bookmark_list">Bokmerk liste</string>
     <string name="search_pocket_is_new">ny</string>
@@ -1471,7 +1460,6 @@
     <string name="helper_gps_locker_description">GPS Locker holder GPS-signalet aktivt når du skifter mellom apper og når skjermen er av.</string>
     <string name="helper_google_translate_title">Google Oversetter</string>
     <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
-    <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Wherigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lar deg lese av data fra ANT+/Garmin chirp-tagger, som er nødvendig for ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="share_export">Del / Eksporter</string>
@@ -1531,9 +1519,7 @@
     <string name="attribute_climbing_yes">Vanskelig klatring</string>
     <string name="attribute_climbing_no">Ingen vanskelig klatring</string>
     <string name="attribute_wading_yes">Kan kreve vading</string>
-    <string name="attribute_wading_no">Krever ikke vading</string>
     <string name="attribute_swimming_yes">Kan kreve svømming</string>
-    <string name="attribute_swimming_no">Krever ikke svømming</string>
     <string name="attribute_available_yes">Tilgjengelig til alle tider</string>
     <string name="attribute_available_no">Ikke tilgjengelig til alle tider</string>
     <string name="attribute_night_yes">Anbefales på natten</string>
@@ -1543,7 +1529,6 @@
     <string name="attribute_stealth_yes">Stealth kreves</string>
     <string name="attribute_stealth_no">Stealth kreves ikke</string>
     <string name="attribute_firstaid_yes">Trenger vedlikehold</string>
-    <string name="attribute_firstaid_no">Trenger ikke vedlikehold</string>
     <string name="attribute_cow_yes">Se opp for husdyr</string>
     <string name="attribute_cow_no">Ingen fare for husdyr</string>
     <string name="attribute_field_puzzle_yes">Oppgave på stedet</string>
@@ -1573,49 +1558,32 @@
     <string name="attribute_partnership_yes">Partnership-cache</string>
     <string name="attribute_partnership_no">Ikke partnership-cache</string>
     <string name="attribute_fee_yes">Inngangs- eller parkeringsavgift</string>
-    <string name="attribute_fee_no">Inngang- eller parkeringsavgift ikke nødvendig</string>
     <string name="attribute_rappelling_yes">Klatreutstyr nødvendig</string>
-    <string name="attribute_rappelling_no">Klatreutstyr ikke nødvendig</string>
     <string name="attribute_boat_yes">Båt kreves</string>
-    <string name="attribute_boat_no">Båt ikke nødvendig</string>
     <string name="attribute_scuba_yes">Dykkerutstyr kreves</string>
-    <string name="attribute_scuba_no">Dykkerutstyr ikke nødvendig</string>
     <string name="attribute_flashlight_yes">Lommelykt kreves</string>
-    <string name="attribute_flashlight_no">Lommelykt ikke nødvendig</string>
     <string name="attribute_uv_yes">UV-lys kreves</string>
     <string name="attribute_uv_no">UV-lys ikke nødvendig</string>
     <string name="attribute_snowshoes_yes">Truger nødvendig</string>
-    <string name="attribute_snowshoes_no">Truger ikke nødvendig</string>
     <string name="attribute_skiis_yes">Ski er nødvendig</string>
-    <string name="attribute_skiis_no">Ski er ikke nødvendig</string>
     <string name="attribute_s_tool_yes">Spesialverktøy kreves</string>
-    <string name="attribute_s_tool_no">Spesialverktøy ikke nødvendig</string>
     <string name="attribute_wirelessbeacon_yes">Trådløs sender</string>
-    <string name="attribute_wirelessbeacon_no">Ikke trådløs sender</string>
     <string name="attribute_treeclimbing_yes">Treklatring er nødvendig</string>
     <string name="attribute_treeclimbing_no">Treklatring er ikke nødvendig</string>
     <string name="attribute_poisonoak_yes">Giftige planter</string>
     <string name="attribute_poisonoak_no">Ingen giftige planter</string>
     <string name="attribute_dangerousanimals_yes">Farlige dyr</string>
-    <string name="attribute_dangerousanimals_no">Ingen farlige dyr</string>
     <string name="attribute_ticks_yes">Flått</string>
-    <string name="attribute_ticks_no">Ikke flått</string>
     <string name="attribute_mine_yes">Forlatte gruver</string>
-    <string name="attribute_mine_no">Ingen forlatte gruver</string>
     <string name="attribute_cliff_yes">Klippe / fallende steiner</string>
-    <string name="attribute_cliff_no">Ingen klippe / fallende steiner</string>
     <string name="attribute_hunting_yes">Jaktområde</string>
-    <string name="attribute_hunting_no">Ikke jaktområde</string>
     <string name="attribute_danger_yes">Farlig område</string>
-    <string name="attribute_danger_no">Ikke et farlig område</string>
     <string name="attribute_thorn_yes">Torner</string>
-    <string name="attribute_thorn_no">Ingen torner</string>
     <string name="attribute_wheelchair_yes">Tilgjengelig med rullestol</string>
     <string name="attribute_wheelchair_no">Ikke tilgjengelig med rullestol</string>
     <string name="attribute_parking_yes">Parkering tilgjengelig</string>
     <string name="attribute_parking_no">Ingen parkgering tilgjengelig</string>
     <string name="attribute_public_yes">Kollektivtransport</string>
-    <string name="attribute_public_no">Ingen kollektivtransport</string>
     <string name="attribute_water_yes">Drikkevann i nærheten</string>
     <string name="attribute_water_no">Ikke drikkevann i nærheten</string>
     <string name="attribute_restrooms_yes">Offentlig toalett i nærheten</string>
@@ -1727,13 +1695,9 @@
     <string name="attribute_offset_cache_yes">Offset-cache</string>
     <string name="attribute_offset_cache_no">Ikke offset-cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">Ingen bonus cache</string>
     <string name="attribute_powertrail_yes">Del av en power trail</string>
-    <string name="attribute_powertrail_no">Ikke del av en power trail</string>
     <string name="attribute_challengecache_yes">Utfordringscache</string>
-    <string name="attribute_challengecache_no">Ikke utfordringscache</string>
     <string name="attribute_hqsolutionchecker_yes">Aktivert Geocaching.com løsningssjekker</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com løsningssjekker er ikke aktivert</string>
     <string name="attribute_handicaching_yes">Rangert på Handicaching.com</string>
     <string name="attribute_handicaching_no">Ikke rangert på Handicaching.com</string>
     <string name="attribute_munzee_yes">Inneholder en Munzee</string>
@@ -1887,12 +1851,9 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
-    <string name="map_export_individual_route">Eksporter egendefinert rute</string>
-    <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
     <string name="map_autotarget_individual_route">Sett rutestart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Sett rutestart som mål\" er deaktivert</string>
-    <string name="map_clear_manual_targets">Slett manuelle mål</string>
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/veipunkter fra din individuelle rute?</string>

@@ -307,7 +307,6 @@
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
     <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
     <string name="info_log_delete_failed">Lokin poisto epäonnistui.</string>
-    <string name="info_log_post_failed_reason">Syy: %s</string>
     <string name="info_log_post_retry">Yritä uudelleen</string>
     <string name="info_log_post_save">Offline-tallennus</string>
     <string name="info_log_cleared">Loki tyhjennetty.</string>
@@ -407,7 +406,6 @@
     <string name="caches_sort_geocode">Geokoodi</string>
     <string name="caches_sort_rating">Arviointi</string>
     <string name="caches_sort_vote">Ääni (oma arviointi)</string>
-    <string name="caches_sort_inventory">Matkaajien määrä</string>
     <string name="caches_sort_date_hidden">Piilotuspäivä</string>
     <string name="caches_sort_finds">Löydöt</string>
     <string name="caches_sort_state">Tila</string>
@@ -1035,12 +1033,8 @@
     <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
-    <string name="init_circlefillcolor">Ympyräviivan leveys</string>
-    <string name="init_circlefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla ympyräviiva täytetään</string>
     <string name="init_accuracycirclecolor">Tarkkuusympyrän viivan väri</string>
     <string name="init_accuracycirclecolor_summary">Valitse tarkkuusympyrän viivan väri ja läpinäkyvyys. Tarkkuusympyrää käytetään sijaintisi signaalin tarkkuuden näyttämiseksi.</string>
-    <string name="init_accuracycirclefillcolor">Tarkkuusympyrän täyttöväri</string>
-    <string name="init_accuracycirclefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla tarkkuusympyrä täytetään</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
@@ -1117,7 +1111,6 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
-    <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
     <string name="localstorage_migrate_status_major">Versio %1$d</string>
     <!-- proximity notification -->
@@ -1398,7 +1391,6 @@
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
-    <string name="cache_status_attended">Osallistui</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
     <string name="cache_status_archived">Arkistoitu</string>
@@ -1479,7 +1471,6 @@
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
-    <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
     <string name="internal_goto_targets_title">Kohteet joihin siirrytään</string>
@@ -1493,6 +1484,7 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
+    <string name="internal_connector_name">Sisäiset kätköt</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
@@ -1586,7 +1578,6 @@
     <string name="calccoord_guided_value">Arvo</string>
     <string name="calccoord_convert_to_plain">Muunna peruskoordinaattimuotoon</string>
     <string name="calccoord_plain_tools_title">Perustyökalut</string>
-    <string name="calccoord_remove_spaces">Poista välilyönnit</string>
     <string name="calccoord_paste_from_clipboard">Liitä leikepöydältä</string>
     <string name="calccoord_generate_title">Luo reittipisteet</string>
     <string name="calccoord_generate_showonmap">Näytä kartalla</string>
@@ -1686,7 +1677,6 @@
     <string name="google_maps_option_group_map">Karttavalinnat</string>
     <string name="google_maps_option_show_traffic">Näytä liikenne</string>
     <string name="google_maps_option_show_buildings">Näytä 3D-rakennukset</string>
-    <string name="google_maps_option_group_theme">Teeman asetukset</string>
     <string name="google_maps_option_show_feature_theme">Näytä teeman ominaisuudet</string>
     <string name="google_maps_option_show_feature_administrative_all">Näytä hallinoiva</string>
     <string name="google_maps_option_show_feature_landscape_all">Näytä vaakataso</string>
@@ -1715,7 +1705,6 @@
     <string name="search_finder">Löytänyt</string>
     <string name="search_finder_prefill">Löytäjä</string>
     <string name="search_finder_button">Etsi löytäjän mukaan</string>
-    <string name="search_filter">Suodatin</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
@@ -1725,7 +1714,6 @@
     <string name="add_target_to">Lisää kohde kohteeseen</string>
     <string name="search_address_started">Etsitään paikkoja</string>
     <string name="search_address_result">Löydetyt paikat</string>
-    <string name="search_own_caches">Etsi minun kätköni</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Kirjanmerkit</string>
     <string name="search_pocket_is_new">uusi</string>
@@ -1805,7 +1793,6 @@
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
-    <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
     <string name="helper_gcwizard_description">GC Wizard sisältää lukuisia työkaluja yksinkertaisiin salauksiin, geodeettiset ja tieteelliset laskelmat sekä satoja eri symbolisarjoja.</string>
@@ -1867,9 +1854,7 @@
     <string name="attribute_climbing_yes">Vaikea kiipeily</string>
     <string name="attribute_climbing_no">Ei vaikeaa kiipeilyä</string>
     <string name="attribute_wading_yes">Saattaa vaatia kahlausta</string>
-    <string name="attribute_wading_no">Ei vaadi kahlausta</string>
     <string name="attribute_swimming_yes">Saattaa vaatia uintia</string>
-    <string name="attribute_swimming_no">Ei vaadi uintia</string>
     <string name="attribute_available_yes">Löydettävissä kaikkina aikoina</string>
     <string name="attribute_available_no">Ei saatavilla kaikkina aikoina</string>
     <string name="attribute_night_yes">Suositellaan haettavaksi yöllä</string>
@@ -1879,7 +1864,6 @@
     <string name="attribute_stealth_yes">Vaatii huomaamatonta toimintaa</string>
     <string name="attribute_stealth_no">Ei vaadi huomaamatonta toimintaa</string>
     <string name="attribute_firstaid_yes">Tarvitsee huoltoa</string>
-    <string name="attribute_firstaid_no">Ei tarvitse huoltoa</string>
     <string name="attribute_cow_yes">Varo karjaa</string>
     <string name="attribute_cow_no">Ei karjaa</string>
     <string name="attribute_field_puzzle_yes">Kenttämysteeri</string>
@@ -1909,49 +1893,32 @@
     <string name="attribute_partnership_yes">Tiimityökätkö</string>
     <string name="attribute_partnership_no">Ei tiimityökätkö</string>
     <string name="attribute_fee_yes">Pääsy- tai pysäköintimaksu</string>
-    <string name="attribute_fee_no">Ei pääsy- tai pysäköintimaksua</string>
     <string name="attribute_rappelling_yes">Vaatii kiipeilyvälineitä</string>
-    <string name="attribute_rappelling_no">Ei vaadi kiipeilyvälineitä</string>
     <string name="attribute_boat_yes">Tarvitaan vene</string>
-    <string name="attribute_boat_no">Ei tarvita venettä</string>
     <string name="attribute_scuba_yes">Vaatii sukellusvälineitä</string>
-    <string name="attribute_scuba_no">Ei vaadi sukellusvälineitä</string>
     <string name="attribute_flashlight_yes">Tarvitaan taskulamppu</string>
-    <string name="attribute_flashlight_no">Ei tarvita taskulamppua</string>
     <string name="attribute_uv_yes">UV-valo tarvitaan</string>
     <string name="attribute_uv_no">UV-valoa ei tarvita</string>
     <string name="attribute_snowshoes_yes">Tarvitaan lumikengät</string>
-    <string name="attribute_snowshoes_no">Ei tarvita lumikenkiä</string>
     <string name="attribute_skiis_yes">Vaatii sukset</string>
-    <string name="attribute_skiis_no">Ei vaadi suksia</string>
     <string name="attribute_s_tool_yes">Tarvitaan erikoistyökaluja</string>
-    <string name="attribute_s_tool_no">Erikoistyökaluja ei tarvita</string>
     <string name="attribute_wirelessbeacon_yes">Langaton lähetin</string>
-    <string name="attribute_wirelessbeacon_no">Ei langatonta lähetintä</string>
     <string name="attribute_treeclimbing_yes">Vaatii puuhun kiipeämistä</string>
     <string name="attribute_treeclimbing_no">Ei vaadi puuhun kiipeämistä</string>
     <string name="attribute_poisonoak_yes">Myrkyllisiä kasveja</string>
     <string name="attribute_poisonoak_no">Ei myrkyllisiä kasveja</string>
     <string name="attribute_dangerousanimals_yes">Vaarallisia eläimiä</string>
-    <string name="attribute_dangerousanimals_no">Ei vaarallisia eläimiä</string>
     <string name="attribute_ticks_yes">Punkkeja</string>
-    <string name="attribute_ticks_no">Ei punkkeja</string>
     <string name="attribute_mine_yes">Hylättyjä kaivoksia</string>
-    <string name="attribute_mine_no">Ei hylättyjä kaivoksia</string>
     <string name="attribute_cliff_yes">Jyrkänne / putoavia kiviä</string>
-    <string name="attribute_cliff_no">Ei jyrkännettä / putoavia kiviä</string>
     <string name="attribute_hunting_yes">Metsästysalue</string>
-    <string name="attribute_hunting_no">Ei metsästystä</string>
     <string name="attribute_danger_yes">Vaarallinen alue</string>
-    <string name="attribute_danger_no">Vaaraton alue</string>
     <string name="attribute_thorn_yes">Piikkejä</string>
-    <string name="attribute_thorn_no">Ei piikkejä</string>
     <string name="attribute_wheelchair_yes">Pyörätuolilla saavutettavissa</string>
     <string name="attribute_wheelchair_no">Ei saavutettavissa pyörätuolilla</string>
     <string name="attribute_parking_yes">Pysäköintimahdollisuus</string>
     <string name="attribute_parking_no">Ei pysäköintimahdollisuutta</string>
     <string name="attribute_public_yes">Pääsee julkisilla kulkuvälineillä</string>
-    <string name="attribute_public_no">Ei julkista liikennettä</string>
     <string name="attribute_water_yes">Juomavettä lähistöllä</string>
     <string name="attribute_water_no">Ei juomavettä lähistöllä</string>
     <string name="attribute_restrooms_yes">Yleinen WC lähistöllä</string>
@@ -2063,13 +2030,9 @@
     <string name="attribute_offset_cache_yes">Monivaiheinen kätkö</string>
     <string name="attribute_offset_cache_no">Ei ole monivaiheinen kätkö</string>
     <string name="attribute_bonuscache_yes">Bonuskätkö</string>
-    <string name="attribute_bonuscache_no">Ei bonuskätkö</string>
     <string name="attribute_powertrail_yes">Osa powertrailia</string>
-    <string name="attribute_powertrail_no">Ei osa powertrailia</string>
     <string name="attribute_challengecache_yes">Haastekätkö</string>
-    <string name="attribute_challengecache_no">Ei haastekätkö</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com:in tarkistin saatavilla</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com:in tarkistin ei saatavilla</string>
     <string name="attribute_handicaching_yes">Arvosteltu Handicaching.comissa</string>
     <string name="attribute_handicaching_no">Ei arvosteltu Handicaching.comissa</string>
     <string name="attribute_munzee_yes">Sisältää Munzeen</string>
@@ -2258,12 +2221,9 @@
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
     <string name="map_refresh_individual_route">Päivitä</string>
-    <string name="map_export_individual_route">Vie yksittäinen reitti</string>
-    <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
     <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
-    <string name="map_clear_manual_targets">Tyhjennä manuaaliset kohteet</string>
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
     <string name="map_clear_individual_route_confirm">Haluatko poistaa kaikki kätköt / reittipisteet yksittäiseltä reittiltäsi?</string>

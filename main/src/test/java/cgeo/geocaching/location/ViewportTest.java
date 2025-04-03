@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -65,6 +66,20 @@ public class ViewportTest {
         assertThat(vpRef.contains(Geopoint.ZERO)).isTrue();
         assertThat(vpRef.contains(new Geopoint(-1.0, -2.0))).isTrue();
         assertThat(vpRef.contains(new Geopoint(3.0, 4.0))).isTrue();
+    }
+
+    @Test
+    public void testIntersect() {
+        final Viewport vp1 = Viewport.forE6(0, 0, 100, 100);
+        final Viewport vp2 = Viewport.forE6(50, 50, 150, 150);
+        final Viewport vp3 = Viewport.forE6(25, 25, 75, 75);
+        assertThat(Viewport.intersect(vp1, vp2)).isEqualTo(Viewport.forE6(50, 50, 100, 100));
+        assertThat(Viewport.intersect(Arrays.asList(vp1, vp2, vp3))).isEqualTo(Viewport.forE6(50, 50, 75, 75));
+
+        assertThat(Viewport.intersect(vp1, null)).isNull();
+        assertThat(Viewport.intersect(null)).isNull();
+        assertThat(Viewport.intersect(Arrays.asList(vp1, vp2, vp3, null))).isNull();
+
     }
 
     @SuppressLint("DefaultLocale")

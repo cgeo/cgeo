@@ -261,7 +261,6 @@
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
     <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
     <string name="info_log_post_failed">Log küldése sikertelen.</string>
-    <string name="info_log_post_failed_reason">Oka: %s</string>
     <string name="info_log_post_retry">Újra</string>
     <string name="info_log_post_save">Offline mentés</string>
     <string name="info_log_cleared">A bejegyzés törölve.</string>
@@ -317,7 +316,6 @@
     <string name="caches_sort_name">Név</string>
     <string name="caches_sort_rating">Értékelés</string>
     <string name="caches_sort_vote">Saját értékelés</string>
-    <string name="caches_sort_inventory">Utazók száma</string>
     <string name="caches_sort_date_hidden">Rejtés dátuma</string>
     <string name="caches_sort_finds">Találatok száma</string>
     <string name="caches_sort_state">Állapot</string>
@@ -775,7 +773,6 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
-    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -884,7 +881,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -899,7 +895,6 @@
     <string name="search_tb_button">Utazó keresése</string>
     <string name="search_address_started">Helyek keresése</string>
     <string name="search_address_result">Megtalált helyek</string>
-    <string name="search_own_caches">Saját ládák keresése</string>
     <string name="search_pocket_title">Pocket lekérdezés</string>
     <!-- trackable -->
     <string name="trackable">Utazó</string>
@@ -953,7 +948,6 @@
     <string name="helper_gps_locker_description">A GPS Locker stabil GPS-jelről gondoskodik alkalmazások közötti váltáskor és készüléked képernyőjének kikapcsolása után is.</string>
     <string name="helper_google_translate_title">Google Fordító</string>
     <string name="helper_google_translate_description">A Google Fordító alkalmazáshoz letöltött fordítócsomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
-    <string name="helper_where_you_go_description">A WhereYouGo lehetővé teszi Wherigo ládák keresését és játszását. A c:geo képes automatikusan elindítani a cartridge fájlok létöltését a programon belül.</string>
     <!-- export -->
     <string name="export">Exportálás</string>
     <string name="export_progress">Exportálás: %1$s</string>
@@ -1010,9 +1004,7 @@
     <string name="attribute_climbing_yes">Nehéz mászás</string>
     <string name="attribute_climbing_no">Nincs nehéz mászás</string>
     <string name="attribute_wading_yes">Szükséges lehet vízben gázolni</string>
-    <string name="attribute_wading_no">Nem kell vízben gázolni</string>
     <string name="attribute_swimming_yes">Úszás szükséges</string>
-    <string name="attribute_swimming_no">Úszás nem szükséges</string>
     <string name="attribute_available_yes">Mindig hozzáférhető</string>
     <string name="attribute_available_no">Nem mindig férhető hozzá</string>
     <string name="attribute_night_yes">Éjszaka ajánlott</string>
@@ -1022,7 +1014,6 @@
     <string name="attribute_stealth_yes">Rejtőzködés szükséges</string>
     <string name="attribute_stealth_no">Rejtőzködés nem szükséges</string>
     <string name="attribute_firstaid_yes">Karbantartás szükséges</string>
-    <string name="attribute_firstaid_no">Karbantartás nem szükséges</string>
     <string name="attribute_cow_yes">Figyelni kell a haszonállatokra</string>
     <string name="attribute_cow_no">Nincsenek haszonállatok</string>
     <string name="attribute_field_puzzle_yes">Helyszíni rejtvény</string>
@@ -1052,49 +1043,32 @@
     <string name="attribute_partnership_yes">Társasági láda</string>
     <string name="attribute_partnership_no">Nem társasági láda</string>
     <string name="attribute_fee_yes">Belépő- vagy parkolódíj szükséges</string>
-    <string name="attribute_fee_no">Belépő- vagy parkolódíj nem szükséges</string>
     <string name="attribute_rappelling_yes">Mászófelszerelés szükséges</string>
-    <string name="attribute_rappelling_no">Mászófelszerelés nem szükséges</string>
     <string name="attribute_boat_yes">Hajó szükséges</string>
-    <string name="attribute_boat_no">Hajó nem szükséges</string>
     <string name="attribute_scuba_yes">Búvárfelszerelés szükséges</string>
-    <string name="attribute_scuba_no">Búvárfelszerelés nem szükséges</string>
     <string name="attribute_flashlight_yes">Zseblámpa szükséges</string>
-    <string name="attribute_flashlight_no">Zseblámpa nem szükséges</string>
     <string name="attribute_uv_yes">UV lámpa szükséges</string>
     <string name="attribute_uv_no">UV lámpa nem szükséges</string>
     <string name="attribute_snowshoes_yes">Hótaposó szükséges</string>
-    <string name="attribute_snowshoes_no">Hótaposó nem szükséges</string>
     <string name="attribute_skiis_yes">Sífutóléc szükséges</string>
-    <string name="attribute_skiis_no">Sífutóléc nem szükséges</string>
     <string name="attribute_s_tool_yes">Speciális szerszám szükséges</string>
-    <string name="attribute_s_tool_no">Speciális szerszám nem szükséges</string>
     <string name="attribute_wirelessbeacon_yes">Vezeték nélküli jeladó</string>
-    <string name="attribute_wirelessbeacon_no">Nincs vezeték nélküli jeladó</string>
     <string name="attribute_treeclimbing_yes">Fáramászás szükséges</string>
     <string name="attribute_treeclimbing_no">Fáramászás nem szükséges</string>
     <string name="attribute_poisonoak_yes">Mérgező növények</string>
     <string name="attribute_poisonoak_no">Nincsenek mérgező növények</string>
     <string name="attribute_dangerousanimals_yes">Veszélyes állatok</string>
-    <string name="attribute_dangerousanimals_no">Nincsenek veszélyes állatok</string>
     <string name="attribute_ticks_yes">Kullancsveszély</string>
-    <string name="attribute_ticks_no">Nincs kullancsveszély</string>
     <string name="attribute_mine_yes">Elhagyott bánya</string>
-    <string name="attribute_mine_no">Nem elhagyott bánya</string>
     <string name="attribute_cliff_yes">Szakadék / leeső sziklák</string>
-    <string name="attribute_cliff_no">Nincs szakadék / leeső szikla</string>
     <string name="attribute_hunting_yes">Vadászat</string>
-    <string name="attribute_hunting_no">Nincs vadászat</string>
     <string name="attribute_danger_yes">Veszélyes terület</string>
-    <string name="attribute_danger_no">Nem veszélyes terület</string>
     <string name="attribute_thorn_yes">Tüskék</string>
-    <string name="attribute_thorn_no">Nincsenek tüskék</string>
     <string name="attribute_wheelchair_yes">Kerekesszékkel hozzáférhető</string>
     <string name="attribute_wheelchair_no">Kerekesszékkel nem hozzáférhető</string>
     <string name="attribute_parking_yes">Van parkolóhely</string>
     <string name="attribute_parking_no">Nincs parkolóhely</string>
     <string name="attribute_public_yes">Tömegközlekedéssel hozzáférhető</string>
-    <string name="attribute_public_no">Tömegközlekedéssel nem hozzáférhető</string>
     <string name="attribute_water_yes">Ivóvíz a közelben</string>
     <string name="attribute_water_no">Nincs ivóvíz a közelben</string>
     <string name="attribute_restrooms_yes">Nyilvános pihenőhely a közelben</string>

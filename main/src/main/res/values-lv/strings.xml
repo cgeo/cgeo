@@ -224,7 +224,6 @@
     <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
     <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
     <string name="info_log_post_failed">Ieraksta publicēšana neizdevās.</string>
-    <string name="info_log_post_failed_reason">Iemesls: %s</string>
     <string name="info_log_post_retry">Mēģināt vēlreiz</string>
     <string name="info_log_post_save">Saglabāt bezsaistes režīmā</string>
     <string name="info_log_cleared">Ieraksts tika dzēsts.</string>
@@ -285,7 +284,6 @@
     <string name="caches_sort_name">Vēc nosaukuma</string>
     <string name="caches_sort_rating">Pēc vērtējuma</string>
     <string name="caches_sort_vote">Balsojums (paša vērtējums)</string>
-    <string name="caches_sort_inventory">Pēc krājumu skaita</string>
     <string name="caches_sort_date_hidden">Pēc paslēpšanas datuma</string>
     <string name="caches_sort_finds">Pēc atradumu skaita</string>
     <string name="caches_sort_state">Pēc valsts</string>
@@ -505,7 +503,6 @@
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
     <string name="init_circlecolor">Apļa līnijas krāsa</string>
-    <string name="init_circlefillcolor">Apļa aizpildījuma krāsa</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
     <string name="init_trackautovisit">Ceļotāju automātiska atzīmēšana</string>
     <string name="init_summary_trackautovisit">Pēc noklusējuma uzlikt ceļotājam statusu \"Apmeklējis\" (\"VIsited\")</string>
@@ -721,7 +718,6 @@
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
-    <string name="cache_status_attended">Piedalījos</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
     <string name="cache_status_archived">Arhivēts</string>
@@ -759,12 +755,12 @@
     <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>
-    <string name="internal_cache_default_name">Lietotāja definēts slēpnis #%1$d</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\"Iet uz\" (\'Go to\') mērķi</string>
     <string name="goto_targets_list">Lietotāja definēti slēpņi</string>
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
+    <string name="internal_connector_name">Lietotāja definēti slēpņi</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grādi</string>
@@ -854,7 +850,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
-    <string name="google_maps_option_group_theme">Kartes motīva iestatījumi</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
@@ -869,7 +864,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="search_tb_button">Meklēt ceļotāju</string>
     <string name="search_address_started">Meklē vietu</string>
     <string name="search_address_result">Atrastās vietas</string>
-    <string name="search_own_caches">Meklēt manus slēpņus</string>
     <string name="search_pocket_title">Slēpņu atlase (PQ)</string>
     <!-- trackable -->
     <string name="trackable">Ceļotājs</string>
@@ -927,7 +921,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
-    <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
     <!-- export -->
     <string name="export">Eksportēt</string>
     <string name="export_progress">Eksportē: %1$s</string>
@@ -984,9 +977,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_climbing_yes">Grūti uzkāpt</string>
     <string name="attribute_climbing_no">Nav grūti uzkāpt</string>
     <string name="attribute_wading_yes">Iespējams nāksies bradāt</string>
-    <string name="attribute_wading_no">Nav nepieciešams bradāt</string>
     <string name="attribute_swimming_yes">Var būt nepieciešams peldēt</string>
-    <string name="attribute_swimming_no">Var nebūt nepieciešams peldēt</string>
     <string name="attribute_available_yes">Pieejams jebkurā laikā</string>
     <string name="attribute_available_no">Nav pieejams visos laikos</string>
     <string name="attribute_night_yes">Ieteicams naktī</string>
@@ -996,7 +987,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_stealth_yes">Nepieciešama maskēšanās</string>
     <string name="attribute_stealth_no">Nav nepieciešama maskēšanās</string>
     <string name="attribute_firstaid_yes">Nepieciešama apkope</string>
-    <string name="attribute_firstaid_no">Nav nepieciešama apkope</string>
     <string name="attribute_cow_yes">Uzmanīties no mājlopiem</string>
     <string name="attribute_cow_no">Nav mājlopu</string>
     <string name="attribute_field_puzzle_yes">Lauka puzzle (Field puzzle)</string>
@@ -1026,49 +1016,32 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_partnership_yes">Sadarbības slēpnis</string>
     <string name="attribute_partnership_no">Nav sadarbības slēpnis</string>
     <string name="attribute_fee_yes">Maksas stāvvieta</string>
-    <string name="attribute_fee_no">Bezmaksas stāvvieta</string>
     <string name="attribute_rappelling_yes">Nepieciešams kāpšanas ekipējums</string>
-    <string name="attribute_rappelling_no">Nav nepieciešams kāpšanas ekipējums</string>
     <string name="attribute_boat_yes">Nepieciešama laiva</string>
-    <string name="attribute_boat_no">Nav nepieciešama laiva</string>
     <string name="attribute_scuba_yes">Nepieciešams niršanas aprīkojums</string>
-    <string name="attribute_scuba_no">Nav nepieciešams niršanas aprīkojums</string>
     <string name="attribute_flashlight_yes">Nepieciešams lukturītis</string>
-    <string name="attribute_flashlight_no">Nav nepieciešams Lukturis</string>
     <string name="attribute_uv_yes">Nepieciešama UV gaisma</string>
     <string name="attribute_uv_no">Nav nepieciešama UV gaisma</string>
     <string name="attribute_snowshoes_yes">Nepieciešami sniega zābaki</string>
-    <string name="attribute_snowshoes_no">Nav nepieciešami sniega zābaki</string>
     <string name="attribute_skiis_yes">Nepieciešamas distanču slēpes</string>
-    <string name="attribute_skiis_no">Nav nepieciešamas distanču slēpes</string>
     <string name="attribute_s_tool_yes">Nepieciešami speciāli rīki</string>
-    <string name="attribute_s_tool_no">Nav nepieciešami speciāli rīki</string>
     <string name="attribute_wirelessbeacon_yes">Bezvadu raidītājs</string>
-    <string name="attribute_wirelessbeacon_no">Nav bezvadu raidītājs</string>
     <string name="attribute_treeclimbing_yes">Nepieciešams kāpt kokā</string>
     <string name="attribute_treeclimbing_no">Nav nepieciešams kāpt kokā</string>
     <string name="attribute_poisonoak_yes">Indīgi augi</string>
     <string name="attribute_poisonoak_no">Nav indīgu augu</string>
     <string name="attribute_dangerousanimals_yes">Bīstami dzīvnieki</string>
-    <string name="attribute_dangerousanimals_no">Nav bīstamu dzīvnieku</string>
     <string name="attribute_ticks_yes">Ērces</string>
-    <string name="attribute_ticks_no">Nav kaitīgu kukaiņu</string>
     <string name="attribute_mine_yes">Pamestas raktuves</string>
-    <string name="attribute_mine_no">Nav pamestu raktuvju</string>
     <string name="attribute_cliff_yes">Krauja / nogruvums</string>
-    <string name="attribute_cliff_no">Nav kraujas / nogruvuma</string>
     <string name="attribute_hunting_yes">Medības</string>
-    <string name="attribute_hunting_no">Aizliegts medīt</string>
     <string name="attribute_danger_yes">Bīstama zona</string>
-    <string name="attribute_danger_no">Nav bīstama zona</string>
     <string name="attribute_thorn_yes">Ērkšķi</string>
-    <string name="attribute_thorn_no">Nav ērkšķu</string>
     <string name="attribute_wheelchair_yes">Pieejams ratiņkrēslā</string>
     <string name="attribute_wheelchair_no">Nav pieejams ratiņkrēslā</string>
     <string name="attribute_parking_yes">Pieejams stāvlaukums</string>
     <string name="attribute_parking_no">Nav pieejams stāvlaukums</string>
     <string name="attribute_public_yes">Pieejams sabiedriskais transports</string>
-    <string name="attribute_public_no">Nav pieejams sabiedriskais transports</string>
     <string name="attribute_water_yes">Tuvumā dzeramais ūdens</string>
     <string name="attribute_water_no">Tuvumā dzeramā ūdens nav</string>
     <string name="attribute_restrooms_yes">Publiskās tualetes tuvumā</string>

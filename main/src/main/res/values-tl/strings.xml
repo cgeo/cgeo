@@ -192,7 +192,6 @@
     <string name="info_log_posted">ang c:geo ay matagumpay na isinumite ang log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na na-save ang log.</string>
     <string name="info_log_post_failed">Nabigo ang pagpapapost ng log.</string>
-    <string name="info_log_post_failed_reason">Ang rason: %s</string>
     <string name="info_log_post_retry">Subukan muli</string>
     <string name="info_log_post_save">I-save ng offline</string>
     <string name="info_log_cleared">Nabura na ang mga log.</string>
@@ -245,7 +244,6 @@
     <string name="caches_sort_name">Ang pangalan</string>
     <string name="caches_sort_rating">Marka</string>
     <string name="caches_sort_vote">Boto (sariling Marka)</string>
-    <string name="caches_sort_inventory">Bilang ng imbentaryo</string>
     <string name="caches_sort_date_hidden">Nakatago ang petsa</string>
     <string name="caches_sort_finds">Hinahanap</string>
     <string name="caches_sort_state">Estado</string>
@@ -581,7 +579,6 @@
     <string name="ignore_confirm_message">Ang pag-ignore sa cache ay nangangahulugang ang cache na ito hindi na magaganap pa habang nagloload ng datos mula sa geocaching.com. Maaari mo lang makitang muli ang cache sa pag-unignore nito sa website.</string>
     <string name="cache_status">Katayuan</string>
     <string name="cache_status_offline_log">Naka-save na Log</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
     <string name="cache_status_archived">Naka-archive</string>
@@ -699,7 +696,6 @@
     <string name="search_tb_button">Magsaliksik para sa trackable</string>
     <string name="search_address_started">Ang pagsasaliksik para sa mga lugar</string>
     <string name="search_address_result">Natagpuang mga lugar</string>
-    <string name="search_own_caches">Saliksikin ang aking mga cache</string>
     <string name="search_pocket_title">Tanong sa bulsa</string>
     <!-- trackable -->
     <string name="trackable">Nasasala</string>
@@ -755,7 +751,6 @@
     <string name="helper_gpsstatus_description">Maaari mong gamitin ang radar sa aplikasyong ito kasabay ng c:geo. Ito rin ay mga nag-aalok ng maraming uri ng GPS kaugnay sa impormasyon.</string>
     <string name="helper_google_translate_title">Ang pagsasalin ng google</string>
     <string name="helper_google_translate_description">Kung ikaw ay nag-download ng pakite ng pagsasalin ng google na aplikasyon,magiging madali na ang iyong pagsasalin ng cache na paglalarawan sa c:geo sa pamamagitan ng mahabang paghanap ng paglalarawan na teksto ( ng walang koneksiyon sa internet).</string>
-    <string name="helper_where_you_go_description">Saankapupunta ay payagan mong maglaro at magsaliksik ng geocache sa uri na Wherigo. c:geo awtomatikong maghuhudyat ang di-nownload na cartridges sa aplikasyon na ito.</string>
     <!-- export -->
     <string name="export">I-luwas</string>
     <string name="export_progress">Pagluwas ng: %1$s</string>
@@ -803,9 +798,7 @@
     <string name="attribute_climbing_yes">Mahirap na pag-akyat</string>
     <string name="attribute_climbing_no">Hindi mahirap na pag-akyat</string>
     <string name="attribute_wading_yes">Maaaring mangailangan ng paglubog</string>
-    <string name="attribute_wading_no">Maaaring hindi nangangailangan ng paglubog</string>
     <string name="attribute_swimming_yes">Maaaring mangailangan ng paglangoy</string>
-    <string name="attribute_swimming_no">Maaaring hindi nangangailangan ng paglangoy</string>
     <string name="attribute_available_yes">Magagamit sa lahat ng oras</string>
     <string name="attribute_available_no">Hindi magagamit sa lahat ng oras</string>
     <string name="attribute_night_yes">Inirerekomenda sa gabi</string>
@@ -815,7 +808,6 @@
     <string name="attribute_stealth_yes">Kinakailangan ang stealth</string>
     <string name="attribute_stealth_no">Hindi kinakailangan ang stealth</string>
     <string name="attribute_firstaid_yes">Kailangan ng pagpapanatili</string>
-    <string name="attribute_firstaid_no">Hindi kailangan ng pagpapanatili</string>
     <string name="attribute_cow_yes">Manood ng mga hayop</string>
     <string name="attribute_cow_no">Walang hayop</string>
     <string name="attribute_field_puzzle_yes">Ang larangan ng palaisipan</string>
@@ -845,49 +837,32 @@
     <string name="attribute_partnership_yes">Ang sosyohan ng cache</string>
     <string name="attribute_partnership_no">Hindi sosyohan ng cache</string>
     <string name="attribute_fee_yes">Kinakailangan ang pag-access o parking fee</string>
-    <string name="attribute_fee_no">Hindi kinakailangan ang pag-access o parking fee</string>
     <string name="attribute_rappelling_yes">Kinakailangan ang suot na pang-akyat</string>
-    <string name="attribute_rappelling_no">Hindi kinakailangan ang suot na pang-akyat</string>
     <string name="attribute_boat_yes">Kinakailangan ang bangka</string>
-    <string name="attribute_boat_no">Hindi kinakailangan ang bangka</string>
     <string name="attribute_scuba_yes">Kinakailangan ang damit na pang scuba</string>
-    <string name="attribute_scuba_no">Hindi kinakailangan ang damit na pang scuba</string>
     <string name="attribute_flashlight_yes">Aang Flashlight ay kinkailangan</string>
-    <string name="attribute_flashlight_no">Ang Flaslight ay hindi kinakailangan</string>
     <string name="attribute_uv_yes">Ang UV light ay kinakailangan</string>
     <string name="attribute_uv_no">Ang UV light ay hindi kinakailangan</string>
     <string name="attribute_snowshoes_yes">Ang Snowshoes ay kinakailangan</string>
-    <string name="attribute_snowshoes_no">Ang Snowshoes ay kinakailangan</string>
     <string name="attribute_skiis_yes">Ang mag-iski sa Cross country ay kinakailangan</string>
-    <string name="attribute_skiis_no">Ang mag-iski sa Cross country ay hindi kinakailangan</string>
     <string name="attribute_s_tool_yes">Ang espesyal na mga kagamitan ay kinakailangan</string>
-    <string name="attribute_s_tool_no">Ang espesyal na kagamitan ay kinakailangan</string>
     <string name="attribute_wirelessbeacon_yes">Ang Walang kable na parola</string>
-    <string name="attribute_wirelessbeacon_no">Walang kable sa parola</string>
     <string name="attribute_treeclimbing_yes">Ang pag-akyat sa puno ay kinakailangan</string>
     <string name="attribute_treeclimbing_no">Ang pag-akyat sa puno ay hindi kinakailangan</string>
     <string name="attribute_poisonoak_yes">Nakakalason na mga Halaman</string>
     <string name="attribute_poisonoak_no">Hindi nakakalason na mga halaman</string>
     <string name="attribute_dangerousanimals_yes">Delekado na mga hayop</string>
-    <string name="attribute_dangerousanimals_no">Hindi delekado na mga hayop</string>
     <string name="attribute_ticks_yes">Mga tick</string>
-    <string name="attribute_ticks_no">Hindi mga tick</string>
     <string name="attribute_mine_yes">Abandunadong minahan</string>
-    <string name="attribute_mine_no">Walang abandonado na mga minahan</string>
     <string name="attribute_cliff_yes">Ang talampas / nalalaglag na mga bato</string>
-    <string name="attribute_cliff_no">Walang talampas / nalalaglag na mga bato</string>
     <string name="attribute_hunting_yes">Pangangaso</string>
-    <string name="attribute_hunting_no">Hindi na ngangaso</string>
     <string name="attribute_danger_yes">Delekado na lugar</string>
-    <string name="attribute_danger_no">Hindi delekado na lugar</string>
     <string name="attribute_thorn_yes">Ang mga tinik</string>
-    <string name="attribute_thorn_no">Walang mga tinik</string>
     <string name="attribute_wheelchair_yes">Ang upuan na degulong ay nagagamit</string>
     <string name="attribute_wheelchair_no">Walang upuan na degulong ang magagamit</string>
     <string name="attribute_parking_yes">Ang Parking ay magagamit</string>
     <string name="attribute_parking_no">Walang parking na magagamit</string>
     <string name="attribute_public_yes">Pampublikong transportasyon</string>
-    <string name="attribute_public_no">Walang pampublikong transportasyon</string>
     <string name="attribute_water_yes">Uminom ng tubig sa malapit</string>
     <string name="attribute_water_no">Walang mainom na tubig sa malapit</string>
     <string name="attribute_restrooms_yes">Malapit sa mga pampublikong banyo</string>

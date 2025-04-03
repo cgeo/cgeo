@@ -2,12 +2,15 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,11 +70,36 @@ public class CompanionFileUtils {
                 prop.setProperty(PROP_LOCALFILE, localFilename);
                 prop.setProperty(PROP_DISPLAYNAME, displayName);
 
-                prop.store(output, null);
+                prop.store(output, "set displayname property to a name of your choice to change name in list. Charset is ISO-8859-1, use \\u#### for Unicode characters");
             } catch (IOException io) {
                 // ignore
             }
         }
+    }
+
+    @Nullable
+    public static DownloadedFileData readData(final Folder folder, final String filename) {
+        if (filename.endsWith(INFOFILE_SUFFIX)) {
+            try (InputStream input = ContentStorage.get().openForRead(folder, filename)) {
+                if (input != null) {
+                    final DownloadedFileData offlineMapData = new DownloadedFileData();
+                    final Properties prop = new Properties();
+                    prop.load(input);
+                    offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
+                    offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
+                    offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
+                    offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
+                    offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
+                    offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
+                    return offlineMapData;
+                } else {
+                    Log.d("Cannot open property file " + filename + " for reading: ");
+                }
+            } catch (IOException | NumberFormatException | NullPointerException e) {
+                Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
+            }
+        }
+        return null;
     }
 
     /**
@@ -101,31 +129,9 @@ public class CompanionFileUtils {
         if (downloader.useCompanionFiles) {
             for (ContentStorage.FileInformation fi : files) {
                 final String filename = fi.name;
-                if (!filename.endsWith(INFOFILE_SUFFIX)) {
-                    continue;
-                }
-                try (InputStream input = ContentStorage.get().openForRead(downloader.targetFolder.getFolder(), filename)) {
-                    if (input != null) {
-                        final DownloadedFileData offlineMapData = new DownloadedFileData();
-                        final Properties prop = new Properties();
-                        prop.load(input);
-                        offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
-                        if (offlineMapData.remoteParsetype == filter.id) {
-                            offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
-                            offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
-                            offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
-                            offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
-                            offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
-
-                            if (StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
-                                result.add(offlineMapData);
-                            }
-                        }
-                    } else {
-                        Log.d("Cannot open property file " + filename + " for reading");
-                    }
-                } catch (IOException | NumberFormatException | NullPointerException e) {
-                    Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
+                final DownloadedFileData offlineMapData = readData(downloader.targetFolder.getFolder(), filename);
+                if (offlineMapData != null && offlineMapData.remoteParsetype == filter.id && StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
+                    result.add(offlineMapData);
                 }
             }
         } else {
@@ -164,6 +170,19 @@ public class CompanionFileUtils {
             pos = name.indexOf("-", pos + 1);
         }
         return tempName;
+    }
+
+    @Nullable
+    public static String getDisplaynameForMap(final Uri uri) {
+        String f = uri.getLastPathSegment();
+        if (f != null) {
+            f = f.substring(f.lastIndexOf('/') + 1) + INFOFILE_SUFFIX;
+            final DownloadedFileData temp = readData(PersistableFolder.OFFLINE_MAPS.getFolder(), f);
+            if (temp != null && StringUtils.isNotBlank(temp.displayName)) {
+                return temp.displayName;
+            }
+        }
+        return null;
     }
 
 }

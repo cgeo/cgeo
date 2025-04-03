@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Välj bilder från lagring</string>
     <string name="log_image_camera_tooltip">Ta bild med kamera</string>
     <string name="log_image_selectfromown_tooltip">Välj bilder från egna bilder</string>
+    <string name="log_inventory">Innehåll</string>
     <string name="log_problem_none">Inga problem</string>
     <string name="log_problem_needs_maintenance_label">Behöver underhåll</string>
     <string name="log_problem_needs_maintenance_text">Denna geocacharen rapporterade att det finns ett problem med denna cache.</string>
@@ -312,7 +313,6 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
-    <string name="info_log_post_failed_reason">Orsak: %s</string>
     <string name="info_log_post_retry">Försök igen</string>
     <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
@@ -416,7 +416,7 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Betyg (GC-vote)</string>
     <string name="caches_sort_vote">Betyg (eget)</string>
-    <string name="caches_sort_inventory">Antal trackable</string>
+    <string name="caches_sort_inventory">Antal spårbara objekt</string>
     <string name="caches_sort_date_hidden">Datum för utplacering</string>
     <string name="caches_sort_date_logged">Logg-datum (egen logg)</string>
     <string name="caches_sort_finds">Antal som hittat</string>
@@ -454,6 +454,7 @@
     <string name="caches_map_locus_export">Exportera till Locus</string>
     <string name="caches_filter_menuitem">Filtrera</string>
     <string name="caches_filter_title">Filtrera efter</string>
+    <string name="caches_filter_select_last">Föregående filter</string>
     <string name="caches_removing_from_history">Tar bort från historik…</string>
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
@@ -485,6 +486,9 @@
     <string name="list_menu_create">Skapa en ny lista</string>
     <string name="list_menu_drop">Ta bort aktuell lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>
+    <string name="list_menu_rename_list_prefix">Byt namn på listprefix</string>
+    <string name="rename_from">Byt namn från</string>
+    <string name="rename_to">Byt namn till</string>
     <string name="list_menu_import">Importera</string>
     <string name="list_title">Välj en lista</string>
     <string name="lists_title">Välj listorna</string>
@@ -502,6 +506,10 @@
     <string name="list_dialog_rename_title">Byt namn på listan</string>
     <string name="list_dialog_rename">Byt namn</string>
     <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
+    <string name="list_parent_list">Överordnad lista</string>
+    <string name="list_name">Listnamn</string>
+    <string name="list_confirm_rename">Byter namn från \"%1$s\" till \"%2$s\"\n%3$s\nDenna åtgärd kan inte ångras!</string>
+    <string name="list_confirm_no_hierarchy">\nIngen \":\" hittad - alla matchande listor kommer att omvandlas till topplistor\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avancerat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Ändra till Basic</string>
@@ -532,6 +540,7 @@
     <string name="cache_filter_hidden">Gömd datum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Antal loggar</string>
+    <string name="cache_filter_inventory_count">Antal spårbara objekt</string>
     <string name="cache_filter_last_found">Senast hittad</string>
     <string name="cache_filter_log_entry">Loggpost</string>
     <string name="cache_filter_location">Plats</string>
@@ -1049,8 +1058,12 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
+    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.\nInte kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
+    <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
+    <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
+    <string name="init_mapsource_select_legacy">Välj kartkälla (Äldre)</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
@@ -1074,12 +1087,10 @@
     <string name="init_trackappearance_summary">Välj färg, ogenomskinlighet och linjebredd för spår/ruttlinje. En spår/rutt består av flera waypoints och kan laddas via en GPX-spår/ruttfil.</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
-    <string name="init_circlefillcolor">Färg inuti cirklar</string>
-    <string name="init_circlefillcolor_summary">Välj färg och ogenomskinlighet för fyllningen av cirklar</string>
+    <string name="init_geofencecolor">Geofence cirkelfärg</string>
+    <string name="init_geofencecolor_summary">Välj färg och genomskinlighet för geofence-cirkel. Cirklar används som en visuell representation för geofence definierad för vägpunkter (vanligtvis gäller geocaching.com lab äventyr-steg)</string>
     <string name="init_accuracycirclecolor">Färg på cirkel för noggrannhet</string>
     <string name="init_accuracycirclecolor_summary">Välj färg och genomskinlighet för cirkeln för noggrannhet. Cirkeln används som en visuell representation för GPS-signalens noggrannhet.</string>
-    <string name="init_accuracycirclefillcolor">Färg på fyllning av cirkel för noggrannhet</string>
-    <string name="init_accuracycirclefillcolor_summary">Välj färg och ogenomskinlighet för fyllningen av cirklar för noggrannhet</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
@@ -1171,9 +1182,9 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
-    <string name="category_unifiedMap">Unified Map (beta)</string>
-    <string name="init_title_useUnifiedMap">Använd enhetlig karta</string>
-    <string name="init_summary_useUnifiedMap">Använd ny unified map istället för inbyggda kartor från Google Map / Mapsforge (OSM)</string>
+    <string name="init_title_useLegacyMap">Använd äldre karta</string>
+    <string name="init_summary_useLegacyMap">Använd äldre versioner av kartor från Google Map / Mapsforge (OSM) istället för UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1350,6 +1361,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Spårbara objekt</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
@@ -1420,6 +1432,8 @@
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
     <string name="cache_menu_speechDeactivate">Sluta prata</string>
     <string name="cache_menu_speechActivate">Börja prata</string>
+    <string name="talking_disabled">Talande inaktiverat</string>
+    <string name="talking_enabled">Talande aktiverad</string>
     <string name="cache_menu_navigate">Navigera</string>
     <string name="cache_menu_target">Ange som mål</string>
     <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
@@ -1460,6 +1474,7 @@
     <string name="cache_menu_details">Detaljer</string>
     <string name="cache_menu_refresh">Uppdatera</string>
     <string name="cache_menu_share">Skicka länk</string>
+    <string name="cache_menu_share_with_data">Dela inkl. användardata</string>
     <string name="cache_menu_move_list">Flytta till annan lista</string>
     <string name="cache_menu_copy_list">Kopiera till annan lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1554,6 +1569,9 @@
     <string name="image_category_own">Egen</string>
     <string name="image_category_listing">Listning</string>
     <string name="image_category_log">Logg</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Bakgrund</string>
+    <string name="image_listing_gallery">Galleri</string>
     <string name="context_map_add_to_route">Lägg till rutt</string>
     <string name="context_map_add_to_route_start">Lägg till i början av rutt</string>
     <string name="context_map_remove_from_route_start">Ta bort från start</string>
@@ -1566,7 +1584,7 @@
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Använd aktuell lista</string>
-    <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
+    <string name="internal_cache_default_names">Användardefinierad cache #%1$s</string>
     <string name="internal_cache_default_description">Detta är en egen-definierad cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
@@ -1579,9 +1597,13 @@
     <string name="init_summary_show_routing_menu">Långtryck på en cache visar en meny med avancerade alternativ för att lägga till/ta bort cachen till/från en rutt. Om inaktiverad läggs cachen till / tas bort till/från rutten.</string>
     <string name="init_ActionbarAutohide">Dölj verktygsfältet vid tryck</string>
     <string name="init_summary_ActionbarAutohide">Tryck på tomt kartutrymme för att dölja/visa verktygsfältet</string>
+    <string name="init_autozoom_consider_lastcenter">Återställ kartpositionen vid kartläggning av en lista</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">När en lista med cacher visas på karta, och kartan har tidigare lämnats inom listans gränser återställ förhandsgranskningsposition, annars zooma för att passa alla cacher.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">När en lista med cacher visas på karta, sätt zoom och gränser för att passa alla cacher.</string>
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <string name="internal_connector_name">Interna cacher</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
@@ -1628,6 +1650,8 @@
     <string name="waypoint_my_coordinates_accuracy">Mina koordinater (±%s)</string>
     <string name="waypoint_name">Namn</string>
     <string name="waypoint_edit">Redigera</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Ange radie för geofence (i meter)</string>
     <string name="waypoint_copy_coordinates">Kopiera koordinater</string>
     <string name="waypoint_clear_coordinates">Rensa koordinater</string>
     <string name="waypoint_delete">Ta bort</string>
@@ -1687,7 +1711,6 @@
     <string name="calccoord_guided_value">Värde</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
-    <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
     <string name="calccoord_paste_from_clipboard">Klistra in från urklipp</string>
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
@@ -1824,7 +1847,7 @@
     <string name="search_finder">Hittad av</string>
     <string name="search_finder_prefill">Vem som hittat</string>
     <string name="search_finder_button">Sök baserat på hittare</string>
-    <string name="search_filter">Filtrera</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
@@ -1834,7 +1857,7 @@
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
     <string name="search_address_result">Hittade platser</string>
-    <string name="search_own_caches">Sök egna cacher</string>
+    <string name="search_own_caches">Mina cacher</string>
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_bookmark_list">Bokmärkeslista</string>
     <string name="search_pocket_is_new">ny</string>
@@ -1914,7 +1937,6 @@
     <string name="helper_gps_locker_description">GPS Locker håller GPS-signalen aktiv när du växlar mellan applikationer och när enhetens skärm är avstängd.</string>
     <string name="helper_google_translate_title">Google Översätt</string>
     <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
-    <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf låter dig läsa data från ANT+/Garmin chirp tags, vilket behövs för ANT+/chirp geocacher.</string>
     <string name="helper_alc_description">Adventure Lab-appen för din telefon eller surfplatta.</string>
     <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
@@ -1976,19 +1998,18 @@
     <string name="attribute_climbing_yes">Svår klättring</string>
     <string name="attribute_climbing_no">Ingen svår klättring</string>
     <string name="attribute_wading_yes">Kan kräva vadning</string>
-    <string name="attribute_wading_no">Kräver inte vadning</string>
     <string name="attribute_swimming_yes">Kan kräva simning</string>
-    <string name="attribute_swimming_no">Ingen simning</string>
     <string name="attribute_available_yes">Alltid tillgänglig</string>
     <string name="attribute_available_no">Inte alltid tillgänglig</string>
     <string name="attribute_night_yes">Rekommenderas på natten</string>
     <string name="attribute_night_no">Rekommenderas inte på natten</string>
     <string name="attribute_winter_yes">Tillgänglig under vintern</string>
+    <string name="attribute_cacti_yes">Kaktusar i närheten</string>
+    <string name="attribute_cacti_no">Ingen kaktusar i närheten</string>
     <string name="attribute_winter_no">Inte tillgänglig under vintern</string>
     <string name="attribute_stealth_yes">Stealth krävs</string>
     <string name="attribute_stealth_no">Stealth krävs inte</string>
     <string name="attribute_firstaid_yes">Behöver underhåll</string>
-    <string name="attribute_firstaid_no">Behöver inget underhåll</string>
     <string name="attribute_cow_yes">Se för boskap</string>
     <string name="attribute_cow_no">Ingen boskap</string>
     <string name="attribute_field_puzzle_yes">Fältpussel</string>
@@ -2018,49 +2039,32 @@
     <string name="attribute_partnership_yes">Partnerskapscache</string>
     <string name="attribute_partnership_no">Inte en partnerskapscache</string>
     <string name="attribute_fee_yes">Entré- eller parkeringavgift krävs</string>
-    <string name="attribute_fee_no">Entré- eller parkeringavgift krävs inte</string>
     <string name="attribute_rappelling_yes">Klätterutrustning krävs</string>
-    <string name="attribute_rappelling_no">Klätterutrustning krävs inte</string>
     <string name="attribute_boat_yes">Båt krävs</string>
-    <string name="attribute_boat_no">Båt krävs inte</string>
     <string name="attribute_scuba_yes">Dykutrustning krävs</string>
-    <string name="attribute_scuba_no">Dykutrustning krävs inte</string>
     <string name="attribute_flashlight_yes">Ficklampa krävs</string>
-    <string name="attribute_flashlight_no">Ficklampa krävs inte</string>
     <string name="attribute_uv_yes">UV-ljus krävs</string>
     <string name="attribute_uv_no">UV-ljus krävs inte</string>
     <string name="attribute_snowshoes_yes">Snöskor krävs</string>
-    <string name="attribute_snowshoes_no">Snöskor krävs inte</string>
     <string name="attribute_skiis_yes">Längdskidor krävs</string>
-    <string name="attribute_skiis_no">Längdskidor krävs inte</string>
     <string name="attribute_s_tool_yes">Specialverktyg krävs</string>
-    <string name="attribute_s_tool_no">Specialverktyg krävs inte</string>
     <string name="attribute_wirelessbeacon_yes">Trådlös beacon</string>
-    <string name="attribute_wirelessbeacon_no">Ingen trådlös beacon</string>
     <string name="attribute_treeclimbing_yes">Trädklättring krävs</string>
     <string name="attribute_treeclimbing_no">Trädklättring krävs inte</string>
     <string name="attribute_poisonoak_yes">Giftiga växter</string>
     <string name="attribute_poisonoak_no">Inga giftiga växter</string>
     <string name="attribute_dangerousanimals_yes">Farliga djur</string>
-    <string name="attribute_dangerousanimals_no">Inga farliga djur</string>
     <string name="attribute_ticks_yes">Fästingar</string>
-    <string name="attribute_ticks_no">Inga fästingar</string>
     <string name="attribute_mine_yes">Övergivna gruvor</string>
-    <string name="attribute_mine_no">Inga övergivna gruvor</string>
     <string name="attribute_cliff_yes">Klippor / fallande stenar</string>
-    <string name="attribute_cliff_no">Inga klippor / fallande stenar</string>
     <string name="attribute_hunting_yes">Jakt</string>
-    <string name="attribute_hunting_no">Ingen jakt</string>
     <string name="attribute_danger_yes">Farligt område</string>
-    <string name="attribute_danger_no">Inte ett farligt område</string>
     <string name="attribute_thorn_yes">Taggar</string>
-    <string name="attribute_thorn_no">Inga taggar</string>
     <string name="attribute_wheelchair_yes">Tillgänglig med rullstol</string>
     <string name="attribute_wheelchair_no">Inte tillgänglig med rullstol</string>
     <string name="attribute_parking_yes">Parkering</string>
     <string name="attribute_parking_no">Ingen parkering</string>
     <string name="attribute_public_yes">Kollektivtrafik</string>
-    <string name="attribute_public_no">Ingen kollektivtrafik</string>
     <string name="attribute_water_yes">Dricksvatten i närheten</string>
     <string name="attribute_water_no">Inget dricksvatten i närheten</string>
     <string name="attribute_restrooms_yes">Offentliga toaletter i närheten</string>
@@ -2172,13 +2176,9 @@
     <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">Ingen offset cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">Ingen bonus cache</string>
     <string name="attribute_powertrail_yes">Ingår i ett power trail</string>
-    <string name="attribute_powertrail_no">Inte en del av en power trail</string>
     <string name="attribute_challengecache_yes">Challenge cache</string>
-    <string name="attribute_challengecache_no">Ingen challenge cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com lösningkontroll är aktiverad</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com lösningkontroll är inte aktiverad</string>
     <string name="attribute_handicaching_yes">Betygsatt på Handicaching.com</string>
     <string name="attribute_handicaching_no">Inte betygsatt på Handicaching.com</string>
     <string name="attribute_munzee_yes">Innehåller en Munzee</string>
@@ -2315,12 +2315,16 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
+    <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
+    <string name="live_map_status_normal">Laddar data utan problem: %s</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
         <item quantity="other">%d punkter har extraherats</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com koordinat kontroll är tillgänglig via webbläsare</string>
+    <string name="link_gallery">Bilder som finns i galleriet (%d)</string>
     <string name="geochecker_available">Geochecker tillgänglig via webbläsare</string>
     <!-- calendar adder -->
     <string name="event_fail">Det gick inte att lägga till event cache i kalender</string>
@@ -2371,12 +2375,13 @@
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
     <string name="map_refresh_individual_route">Uppdatera</string>
-    <string name="map_export_individual_route">Exportera individuell rutt</string>
-    <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
+    <string name="map_export_route">Exportera som rutt</string>
+    <string name="map_export_track">Exportera som spår</string>
+    <string name="map_load_individual_route">Ladda från GPX</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
-    <string name="map_clear_manual_targets">Rensa manuella mål</string>
+    <string name="map_clear_manual_targets">Rensa rutt-mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_clear_individual_route_confirm">Vill du ta bort alla cacher/punkter från din individuella rutt?</string>
@@ -2436,6 +2441,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="show_all">Visa alla</string>
+    <string name="lists_only_new">Endast ny</string>
+    <string name="pq_only_dl">Nedladdningsbara</string>
     <string name="routingmode_straight">Rakt</string>
     <string name="routingmode_walk">Promenera</string>
     <string name="routingmode_bike">Cykel</string>
@@ -2534,7 +2541,7 @@
     <string name="brouter_info">Offline rutt-tjänst</string>
     <string name="hillshading_info">Offline terrängskuggning</string>
     <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
-    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offline-kartor (kräver omstart)</string>
+    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offlinekartor (endast VTM, kräver omstart)</string>
     <string name="maptheme_scale_map_title">Skalfaktor karta</string>
     <string name="maptheme_scale_map_summary">Skalar karta; 100% = ingen skalning</string>
     <string name="maptheme_scale_text_title">Skalfaktor text</string>

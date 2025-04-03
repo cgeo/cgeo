@@ -20,7 +20,6 @@ public class InternalConnectorTest {
     public void testPrefix() {
         assertThat(InternalConnector.PREFIX).isEqualTo("ZZ");
         assertThat(InternalConnector.GEOCODE_HISTORY_CACHE).isEqualTo("ZZ0");
-        assertThat(InternalConnector.geocodeFromId(7)).isEqualTo("ZZ7");
     }
 
     @Test
@@ -28,6 +27,7 @@ public class InternalConnectorTest {
         assertCanHandle("ZZ0").isTrue();
         assertCanHandle("GC12345").isFalse();
         assertCanHandle("ZZ1000").isTrue();
+        assertCanHandle("ZZA2C4").isTrue();
     }
 
     @Test

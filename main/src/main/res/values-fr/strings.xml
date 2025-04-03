@@ -311,7 +311,6 @@
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
     <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
     <string name="info_log_delete_failed">La suppression du log a échoué.</string>
-    <string name="info_log_post_failed_reason">Raison : %s</string>
     <string name="info_log_post_retry">Réessayer</string>
     <string name="info_log_post_save">Sauver hors-ligne</string>
     <string name="info_log_cleared">La visite a été effacée.</string>
@@ -411,7 +410,6 @@
     <string name="caches_sort_geocode">Géocode</string>
     <string name="caches_sort_rating">Évaluation</string>
     <string name="caches_sort_vote">Votre évaluation personnelle</string>
-    <string name="caches_sort_inventory">Nombre d\'objets dans l\'inventaire</string>
     <string name="caches_sort_date_hidden">Date de création</string>
     <string name="caches_sort_date_logged">Date loguée (dans ses propores logs)</string>
     <string name="caches_sort_finds">Trouvées</string>
@@ -1054,12 +1052,8 @@
     <string name="init_trackappearance_summary">Sélectionnez la couleur, l\'opacité et la largeur du trait pour la trace ou la route. Une trace ou une route est composée de plusieurs points de passage et peut être chargée via un fichier de trace GPX.</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
     <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
-    <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
-    <string name="init_circlefillcolor_summary">Sélectionnez la couleur et l\'opacité de l\'intérieur des cercles</string>
     <string name="init_accuracycirclecolor">Couleur de la ligne du cercle de précision</string>
     <string name="init_accuracycirclecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne du cercle de précision. Le cercle de précision est une représentation visuelle de la précision du signal de positionnement GPS.</string>
-    <string name="init_accuracycirclefillcolor">Couleur de la ligne du cercle de précision</string>
-    <string name="init_accuracycirclefillcolor_summary">Sélectionnez la couleur et l\'opacité à utiliser pour la ligne du cercle de précision</string>
     <string name="init_include_found_status">Inclure le statut \"Trouvé\"</string>
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
@@ -1149,9 +1143,6 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
-    <string name="category_unifiedMap">Carte unifiée (bêta)</string>
-    <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
-    <string name="init_summary_useUnifiedMap">Utiliser une nouvelle carte unifiée au lieu des cartes Google Map / Mapsforge (OSM) intégrées</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1443,7 +1434,6 @@
     <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
     <string name="cache_status">Statut</string>
     <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
-    <string name="cache_status_attended">A participé</string>
     <string name="cache_status_found">Trouvée</string>
     <string name="cache_not_status_found">Non trouvée</string>
     <string name="cache_status_archived">Archivée</string>
@@ -1529,7 +1519,6 @@
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
-    <string name="internal_cache_default_name">Cache personnalisée #%1$d</string>
     <string name="internal_cache_default_description">Ceci est une cache personnelle</string>
     <string name="internal_cache_default_owner">Vous</string>
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
@@ -1545,6 +1534,7 @@
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
+    <string name="internal_connector_name">Caches personnalisées</string>
     <!-- html styles -->
     <string name="html_style_default">Par défaut</string>
     <string name="html_style_monochrome">Monochrome</string>
@@ -1648,7 +1638,6 @@
     <string name="calccoord_guided_value">Valeur</string>
     <string name="calccoord_convert_to_plain">Convertir en coordonnées simples</string>
     <string name="calccoord_plain_tools_title">Outils simples</string>
-    <string name="calccoord_remove_spaces">Supprimer les espaces</string>
     <string name="calccoord_paste_from_clipboard">Coller depuis le presse-papiers</string>
     <string name="calccoord_generate_title">Générer des Waypoints</string>
     <string name="calccoord_generate_showonmap">Afficher sur la carte</string>
@@ -1794,7 +1783,6 @@
     <string name="add_target_to">Ajouter la cible à</string>
     <string name="search_address_started">Rechercher le lieu</string>
     <string name="search_address_result">Lieux trouvés</string>
-    <string name="search_own_caches">Chercher mes caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Liste des favoris</string>
     <string name="search_pocket_is_new">nouveau</string>
@@ -1874,7 +1862,6 @@
     <string name="helper_gps_locker_description">Le verrouillage GPS conserve le signal GPS actif lors du basculement entre les applications ou si l\'écran de votre appareil s\'éteint.</string>
     <string name="helper_google_translate_title">Google Traduction</string>
     <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un appui long sur le texte de la description (même sans connexion Internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo permet de rechercher et de jouer avec les caches de type Wherigo. c:geo peut automatiquement lancer le téléchargement de cartouches utilisables ensuite dans l\'application WhereYouGo.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vous permet de lire les données des balises ANT+/Garmin chirp, ce qui est nécessaire pour les géocaches ANT+/chirp.</string>
     <string name="helper_alc_description">Application Adventure Lab pour votre téléphone ou tablette.</string>
     <string name="helper_gcwizard_description">GC Wizard contient de nombreux outils pour la cryptographie simple, les calculs géodésiques et scientifiques ainsi que des centaines de jeux de symboles divers.</string>
@@ -1936,9 +1923,7 @@
     <string name="attribute_climbing_yes">Escalade difficile</string>
     <string name="attribute_climbing_no">Pas d\'escalade difficile</string>
     <string name="attribute_wading_yes">Peut demander à barboter</string>
-    <string name="attribute_wading_no">Ne demande pas à barboter</string>
     <string name="attribute_swimming_yes">Peut demander à nager</string>
-    <string name="attribute_swimming_no">Ne demande pas à nager</string>
     <string name="attribute_available_yes">Disponible à toute heure</string>
     <string name="attribute_available_no">Pas disponible à toute heure</string>
     <string name="attribute_night_yes">Recommandé de nuit</string>
@@ -1948,7 +1933,6 @@
     <string name="attribute_stealth_yes">Discrétion nécessaire</string>
     <string name="attribute_stealth_no">Discrétion pas nécessaire</string>
     <string name="attribute_firstaid_yes">Nécessite une maintenance</string>
-    <string name="attribute_firstaid_no">Ne nécessite pas de maintenance</string>
     <string name="attribute_cow_yes">Attention au bétail</string>
     <string name="attribute_cow_no">Pas de bétail</string>
     <string name="attribute_field_puzzle_yes">Puzzle de terrain</string>
@@ -1978,49 +1962,32 @@
     <string name="attribute_partnership_yes">Cache en partenariat</string>
     <string name="attribute_partnership_no">Pas de cache en partenariat</string>
     <string name="attribute_fee_yes">Parking payant</string>
-    <string name="attribute_fee_no">Pas de parking payant</string>
     <string name="attribute_rappelling_yes">Matériel d\'escalade nécessaire</string>
-    <string name="attribute_rappelling_no">Matériel d\'escalade pas nécessaire</string>
     <string name="attribute_boat_yes">Bateau nécessaire</string>
-    <string name="attribute_boat_no">Pas de bateau nécessaire</string>
     <string name="attribute_scuba_yes">Matériel de plongée nécessaire</string>
-    <string name="attribute_scuba_no">Matériel de plongée pas nécessaire</string>
     <string name="attribute_flashlight_yes">Torche nécessaire</string>
-    <string name="attribute_flashlight_no">Torche pas nécessaire</string>
     <string name="attribute_uv_yes">Lumière UV nécessaire</string>
     <string name="attribute_uv_no">Lumière UV pas nécessaire</string>
     <string name="attribute_snowshoes_yes">Chaussures de neige nécessaires</string>
-    <string name="attribute_snowshoes_no">Chaussures de neige pas nécessaires</string>
     <string name="attribute_skiis_yes">Skis de fond nécessaires</string>
-    <string name="attribute_skiis_no">Skis de fond pas nécessaires</string>
     <string name="attribute_s_tool_yes">Outils spéciaux nécessaires</string>
-    <string name="attribute_s_tool_no">Outils spéciaux pas nécessaires</string>
     <string name="attribute_wirelessbeacon_yes">Balise sans fil</string>
-    <string name="attribute_wirelessbeacon_no">Pas de balise sans fil</string>
     <string name="attribute_treeclimbing_yes">Escalade d\'arbre nécessaire</string>
     <string name="attribute_treeclimbing_no">Pas d\'escalade d\'arbre nécessaire</string>
     <string name="attribute_poisonoak_yes">Plantes toxiques</string>
     <string name="attribute_poisonoak_no">Pas de plantes toxiques</string>
     <string name="attribute_dangerousanimals_yes">Animaux dangereux</string>
-    <string name="attribute_dangerousanimals_no">Pas d\'animaux dangereux</string>
     <string name="attribute_ticks_yes">Tiques</string>
-    <string name="attribute_ticks_no">Pas de tique</string>
     <string name="attribute_mine_yes">Mines abandonnées</string>
-    <string name="attribute_mine_no">Pas de mine abandonnée</string>
     <string name="attribute_cliff_yes">Chutes de pierres</string>
-    <string name="attribute_cliff_no">Pas de chute de pierres</string>
     <string name="attribute_hunting_yes">Chasse</string>
-    <string name="attribute_hunting_no">Pas de chasse</string>
     <string name="attribute_danger_yes">Zone dangereuse</string>
-    <string name="attribute_danger_no">Pas de zone dangereuse</string>
     <string name="attribute_thorn_yes">Épines</string>
-    <string name="attribute_thorn_no">Pas d\'épine</string>
     <string name="attribute_wheelchair_yes">Accessible en fauteuil roulant</string>
     <string name="attribute_wheelchair_no">Pas accessible en fauteuil roulant</string>
     <string name="attribute_parking_yes">Parking possible</string>
     <string name="attribute_parking_no">Pas de parking possible</string>
     <string name="attribute_public_yes">Transport public</string>
-    <string name="attribute_public_no">Pas de transport public</string>
     <string name="attribute_water_yes">Eau potable proche</string>
     <string name="attribute_water_no">Pas d\'eau potable proche</string>
     <string name="attribute_restrooms_yes">Toilettes publiques proches</string>
@@ -2132,13 +2099,9 @@
     <string name="attribute_offset_cache_yes">Cache relative</string>
     <string name="attribute_offset_cache_no">Pas de cache relative</string>
     <string name="attribute_bonuscache_yes">Cache bonus</string>
-    <string name="attribute_bonuscache_no">N\'est pas une cache bonus</string>
     <string name="attribute_powertrail_yes">Fait partie d\'un power trail</string>
-    <string name="attribute_powertrail_no">Ne fait pas partie d\'un power trail</string>
     <string name="attribute_challengecache_yes">Cache Challenge</string>
-    <string name="attribute_challengecache_no">N\'est pas une cache challenge</string>
     <string name="attribute_hqsolutionchecker_yes">Checker Geocaching.com activé</string>
-    <string name="attribute_hqsolutionchecker_no">Checker Geocaching.com désactivé</string>
     <string name="attribute_handicaching_yes">Évalué sur Handicaching.com</string>
     <string name="attribute_handicaching_no">Non évalué sur Handicaching.com</string>
     <string name="attribute_munzee_yes">Contient un Munzee</string>
@@ -2330,12 +2293,9 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
     <string name="map_refresh_individual_route">Actualiser</string>
-    <string name="map_export_individual_route">Exporter un itinéraire individuel</string>
-    <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
     <string name="map_disable_autotarget_individual_route">\"Définir le départ de l\'itinéraire comme cible\" désactivé</string>
-    <string name="map_clear_manual_targets">Supprimer les cibles manuelles</string>
     <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
     <string name="map_clear_individual_route_confirm">Voulez-vous supprimer toutes les caches/points de passage de votre itinéraire individuel ?</string>
@@ -2480,7 +2440,6 @@
     <string name="mapserver_hylly_themes_info">Thème de carte détaillé et optimisé pour les cartes \"Hylly\"</string>
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <string name="maptheme_elevate_categoryinfo">Pertinent pour : [A] Zones, [P] POI, [R] Itinéraires, [W] Voies</string>
-    <string name="maptheme_vtm_scaling_summary">Options de mise à l\'échelle pour les cartes hors ligne (redémarrage nécessaire)</string>
     <string name="maptheme_scale_map_title">Facteur d\'échelle pour la carte</string>
     <string name="maptheme_scale_map_summary">Met la carte à l\'échelle ; 100% = sans mise à l\'échelle</string>
     <string name="maptheme_scale_text_title">Facteur de mise à l\'échelle du texte</string>

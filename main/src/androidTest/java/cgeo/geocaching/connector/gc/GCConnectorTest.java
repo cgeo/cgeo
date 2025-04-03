@@ -23,7 +23,7 @@ public class GCConnectorTest  {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport);
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(searchResult).isNotNull();
             assertThat(searchResult.isEmpty()).isFalse();
             assertThat(searchResult.getGeocodes()).contains("GC58BD1");
@@ -32,18 +32,18 @@ public class GCConnectorTest  {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 51° 36.000 E 7° 50.500"), new Geopoint("N 51° 37.350 E7° 51.500"));
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport);
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(searchResult).isNotNull();
             assertThat(searchResult.getGeocodes()).contains("GC75NF6"); // N 51° 37.320 E 007° 50.600
 
             // redo search with a smaller viewport completely contained in the last one - should lead to an identical searchResult due to caching
             final Viewport viewport2 = new Viewport(new Geopoint("N 51° 36.500 E 7° 51.200"), new Geopoint("N 51° 36.750 E7° 51.400"));
-            final SearchResult searchResult2 = ConnectorFactory.searchByViewport(viewport2);
+            final SearchResult searchResult2 = ConnectorFactory.searchByViewport(viewport2, null);
             assertThat(searchResult.equals(searchResult2));
 
             // redo search with a way bigger viewport - caching does not help here, so a new searchResult should be delivered
             final Viewport viewport3 = new Viewport(new Geopoint("N 51° 35.000 E 7° 50.000"), new Geopoint("N 51° 38.000 E7° 52.000"));
-            final SearchResult searchResult3 = ConnectorFactory.searchByViewport(viewport3);
+            final SearchResult searchResult3 = ConnectorFactory.searchByViewport(viewport3, null);
             assertThat(!searchResult.equals(searchResult3));
         }
     }

@@ -64,7 +64,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.sorting.GeocacheSortContext;
-import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -73,8 +72,10 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -101,6 +102,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Pair;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -115,7 +117,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
-import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
@@ -522,37 +523,29 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         super.onPause();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        final SortActionProvider sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
-        assert sortProvider != null;  // We set it in the XML file
-        sortProvider.setSortContext(sortContext);
-        sortProvider.setClickListener(sortType -> {
-            sortContext.getSort().setAndToggle(sortType);
-            sortContext.save();
-            adapter.forceSort();
-            updateSortBar();
-            refreshCurrentList();
-            //for online searches, restart search with new sort argument
-            if (type.isOnline && type != CacheListType.POCKET) {
-                restartCacheLoader(false, null);
-            }
-        });
-
-        final View sortView = this.findViewById(R.id.sort_bar);
-        sortView.setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
-        sortView.setOnLongClickListener(v -> sortProvider.onSortTypeSelection(sortContext.getSort().getType()));
+        ViewUtils.setForParentAndChildren(this.findViewById(R.id.sort_bar),
+                v -> openSortDialog(),
+                v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
+        MenuUtils.enableIconsInOverflowMenu(menu);
+        MenuUtils.tintToolbarAndOverflowIcons(menu);
 
         return true;
     }
 
     public void updateSelectSwitchMenuItem(final MenuItem item) {
         ToggleItemType.SELECT_MODE.toggleMenuItem(item, adapter.isSelectMode());
+    }
+
+    public Geopoint getReferencePoint() {
+        return this.coords;
     }
 
 
@@ -589,11 +582,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
+
+            MenuUtils.setVisible(menu, R.id.menu_move_to_list, containsStoredCaches());
+            setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
+            MenuUtils.setVisible(menu, R.id.menu_copy_to_list, containsStoredCaches());
+            setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
+
             MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
+            MenuUtils.setVisible(menu, R.id.menu_delete_events, containsStoredPastEvents());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
@@ -606,8 +603,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-                setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
-                setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
@@ -621,6 +616,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisible(menu, R.id.menu_lists, isOffline);
             MenuUtils.setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
+            MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
@@ -636,6 +632,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
+        MenuUtils.tintToolbarAndOverflowIcons(menu);
 
         return true;
     }
@@ -649,9 +646,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return false;
     }
 
-    private boolean containsPastEvents() {
+    private boolean containsStoredPastEvents() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (CalendarUtils.isPastEvent(cache)) {
+            if (cache.isOffline() && CalendarUtils.isPastEvent(cache)) {
                 return true;
             }
         }
@@ -754,6 +751,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_rename_list) {
             renameList();
+        } else if (menuItem == R.id.menu_rename_list_prefix) {
+            new StoredList.UserInterface(this).promptForListPrefixRename(() -> {
+                refreshCurrentList();
+                invalidateOptionsMenuCompatible();
+            });
         } else if (menuItem == R.id.menu_invert_selection) {
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
@@ -763,6 +765,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.selectNextCaches(100);
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu();
+        } else if (menuItem == R.id.menu_sort) {
+            openSortDialog();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -889,7 +893,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean showSavedFilterList() {
         return FilterUtils.openFilterList(this, currentCacheFilter);
     }
-
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
@@ -1178,15 +1181,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         view.setOnClickListener(clickListener);
     }
 
+    private void setView(final TextView view, final String text, final View.OnClickListener clickListener, final View.OnLongClickListener longClickListener) {
+        setView(view, text, clickListener);
+    }
+
     private void updateSortBar() {
         final View sortView = this.findViewById(R.id.sort_bar);
         final GeocacheSort.SortType st = sortContext.getSort().getType();
         if (st == null || GeocacheSort.SortType.AUTO.equals(st) || CacheListType.HISTORY.equals(type)) {
             sortView.setVisibility(View.GONE);
         } else {
-            final TextView filterTextView = findViewById(R.id.sort_text);
-            filterTextView.setText(sortContext.getSort().getDisplayName());
             sortView.setVisibility(View.VISIBLE);
+            final TextView sortTextView = findViewById(R.id.sort_text);
+            sortTextView.setText(sortContext.getSort().getDisplayName());
         }
     }
 
@@ -1521,10 +1528,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        if (Settings.useUnifiedMap() && listId != 0) {
-            DefaultMap.startActivityList(this, listId, currentCacheFilter);
-        } else {
+        if (Settings.useLegacyMaps() || listId == 0) {
             DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+        } else {
+            DefaultMap.startActivityList(this, listId, currentCacheFilter);
         }
         ActivityMixin.overrideTransitionToFade(this);
     }
@@ -1962,5 +1969,42 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
         final ListView list = getListView();
         list.setVisibility(loading ? View.GONE : View.VISIBLE);
+    }
+
+    private boolean openSortDialog() {
+        final List<Pair<GeocacheSort.SortType, String>> availableTypes = sortContext.getSort().getAvailableTypes();
+        final List<GeocacheSort.SortType> typeList = new ArrayList<>();
+        final HashMap<GeocacheSort.SortType, String> typeToString = new HashMap<>();
+        for (Pair<GeocacheSort.SortType, String> entry : availableTypes) {
+            typeToString.put(entry.first, entry.second);
+            typeList.add(entry.first);
+        }
+
+        final SimpleDialog.ItemSelectModel<GeocacheSort.SortType> model = new SimpleDialog.ItemSelectModel<>();
+        model
+                .setScrollAnchor(sortContext.getSort().getType())
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO)
+                .setItems(typeList)
+                .setSelectedItems(Collections.singleton(sortContext.getSort().getType()))
+                .setDisplayMapper((f) -> TextParam.text(typeToString.get(f)));
+
+        SimpleDialog.of(this).setTitle(R.string.caches_sort)
+                .selectSingle(model, this::refreshWithSortType);
+
+        return true;
+    }
+
+    private boolean refreshWithSortType(final GeocacheSort.SortType sortType) {
+        sortContext.getSort().setAndToggle(sortType);
+        sortContext.save();
+        adapter.forceSort();
+        updateSortBar();
+        refreshCurrentList();
+        //for online searches, restart search with new sort argument
+        if (type.isOnline && type != CacheListType.POCKET) {
+            restartCacheLoader(false, null);
+        }
+
+        return true;
     }
 }

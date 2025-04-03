@@ -175,6 +175,7 @@
     <string name="log_oc_team_comment">OC Ekibi Yorumu</string>
     <string name="log_your_saved_log">Saklanan kaydınız</string>
     <string name="log_empty_logbook">Bu Geocache\'in kayıt defteri boş.</string>
+    <string name="log_inventory">Envanter</string>
     <string name="log_problem_none">Sorun Yok</string>
     <string name="log_problem_needs_maintenance_label">Bakım Gerekli</string>
     <string name="log_problem_needs_maintenance_text">Bu Geocacher bu kutu ile ilgili bir sorun olduğunu bildirdi.</string>
@@ -282,7 +283,6 @@
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
     <string name="info_log_saved">c: geo, kayıdınızı başarıyla kaydetti.</string>
     <string name="info_log_post_failed">Kayıt gönderilemedi.</string>
-    <string name="info_log_post_failed_reason">Sebep: %s</string>
     <string name="info_log_post_retry">Tekrar Dene</string>
     <string name="info_log_post_save">Çevrimdışı kaydet</string>
     <string name="info_log_cleared">Kayıt temizlendi.</string>
@@ -371,7 +371,6 @@
     <string name="caches_sort_geocode">Geokod</string>
     <string name="caches_sort_rating">Puanlama</string>
     <string name="caches_sort_vote">Oy (Puanlamanız)</string>
-    <string name="caches_sort_inventory">İçindeki TB Sayısı</string>
     <string name="caches_sort_date_hidden">Yerleştirme tarihi</string>
     <string name="caches_sort_finds">Bulunanlar</string>
     <string name="caches_sort_state">Durum</string>
@@ -892,12 +891,8 @@
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
-    <string name="init_circlefillcolor">Daire dolgu rengi</string>
-    <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
     <string name="init_accuracycirclecolor">Sinyal çemberi çizgisi rengi</string>
     <string name="init_accuracycirclecolor_summary">Sinyal doğruluk çemberi çizgisi için renk ve opaklığı seçin. Doğruluk çemberi, konum sinyalinin doğruluğunun görsel gösterimidir.</string>
-    <string name="init_accuracycirclefillcolor">Sinyal çemberi dolgusu rengi</string>
-    <string name="init_accuracycirclefillcolor_summary">Sinyal doğruluk çemberinin doldurulacağı rengi ve opaklığını seçin</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
@@ -1120,7 +1115,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Envanter</string>
     <string name="cache_log_image_default_title">Görsel</string>
     <string name="cache_personal_note">Kişisel not</string>
     <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
@@ -1228,7 +1222,6 @@
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
-    <string name="cache_status_attended">Katıldım</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
     <string name="cache_status_archived">Arşivlendi</string>
@@ -1293,7 +1286,6 @@
     <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
     <string name="create_internal_cache_short">Yeni Geocache</string>
     <string name="create_internal_cache_currentlist">Mevcut listeyi kullan</string>
-    <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_description">Bu, kullanıcı tanımlı bir Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
@@ -1302,6 +1294,7 @@
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
+    <string name="internal_connector_name">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
@@ -1383,7 +1376,6 @@
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Rehber Modu</string>
     <string name="calccoord_guided_value">Değer</string>
-    <string name="calccoord_remove_spaces">boşlukları sil</string>
     <string name="calccoord_generate_title">Yol noktası Oluştur</string>
     <string name="calccoord_generate_showonmap">Haritada göster</string>
     <string name="calccoord_generate_waypointnameprefix">Oluşturuldu</string>
@@ -1448,7 +1440,6 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
-    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1469,7 +1460,6 @@
     <string name="search_finder">Bulan</string>
     <string name="search_finder_prefill">Bulan</string>
     <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
@@ -1479,7 +1469,6 @@
     <string name="add_target_to">Hedef ekle</string>
     <string name="search_address_started">Yerler aranıyor</string>
     <string name="search_address_result">Bulunan yerler</string>
-    <string name="search_own_caches">Geocache\'lerimi ara</string>
     <string name="search_pocket_title">Sorgulama Kaydı</string>
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
@@ -1558,7 +1547,6 @@
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
-    <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <string name="helper_alc_description">Telefonunuz ve tabletiniz için Adventure Lab uygulaması.</string>
     <!-- export -->
@@ -1619,9 +1607,7 @@
     <string name="attribute_climbing_yes">Zorlu tırmanış</string>
     <string name="attribute_climbing_no">Zorlu tımanış yok</string>
     <string name="attribute_wading_yes">Suda yürüme gerektirebilir</string>
-    <string name="attribute_wading_no">Suda yürüme gerektirmez</string>
     <string name="attribute_swimming_yes">Yüzme gerektirebilir</string>
-    <string name="attribute_swimming_no">Yüzme gerektirmez</string>
     <string name="attribute_available_yes">7/24 ulaşılabilir</string>
     <string name="attribute_available_no">7/24 ulaşılabilir değil</string>
     <string name="attribute_night_yes">Gece bulunması tavsiye edilir</string>
@@ -1631,7 +1617,6 @@
     <string name="attribute_stealth_yes">Gizlilik gerekli</string>
     <string name="attribute_stealth_no">Gizlilik gerekli değil</string>
     <string name="attribute_firstaid_yes">Bakım gerekli</string>
-    <string name="attribute_firstaid_no">Bakım gerekli değil</string>
     <string name="attribute_cow_yes">Besi hayvanlarına dikkat edin</string>
     <string name="attribute_cow_no">Besi hayvanı yok</string>
     <string name="attribute_field_puzzle_yes">Saha bulmacası</string>
@@ -1661,49 +1646,32 @@
     <string name="attribute_partnership_yes">Ortaklık Cache\'i</string>
     <string name="attribute_partnership_no">Ortaklık Cache\'i değil</string>
     <string name="attribute_fee_yes">Giriş veya park ücreti gereklidir</string>
-    <string name="attribute_fee_no">Giriş veya park ücreti gerekli değildir</string>
     <string name="attribute_rappelling_yes">Tırmanış ekipmanı gerekli</string>
-    <string name="attribute_rappelling_no">Tırmanış ekipmanı gerekli değil</string>
     <string name="attribute_boat_yes">Tekne gerekli</string>
-    <string name="attribute_boat_no">Tekne gerekli değil</string>
     <string name="attribute_scuba_yes">Tüplü dalış ekipmanı gerekli</string>
-    <string name="attribute_scuba_no">Tüplü dalış ekipmanı gerekli değil</string>
     <string name="attribute_flashlight_yes">Fener gerekli</string>
-    <string name="attribute_flashlight_no">Fener gerekli değil</string>
     <string name="attribute_uv_yes">UV lambası gerekli</string>
     <string name="attribute_uv_no">UV lambası gerekli değil</string>
     <string name="attribute_snowshoes_yes">Kar ayakkabısı gerekebilir</string>
-    <string name="attribute_snowshoes_no">Kar ayakkabısına gerek yok</string>
     <string name="attribute_skiis_yes">Kayak gerekebilir</string>
-    <string name="attribute_skiis_no">Kayak gerektirmez</string>
     <string name="attribute_s_tool_yes">Özel alet gerekli</string>
-    <string name="attribute_s_tool_no">Özel alet gerekli değil</string>
     <string name="attribute_wirelessbeacon_yes">Kablosuz alıcı gerekli</string>
-    <string name="attribute_wirelessbeacon_no">Kablosuz alıcı gerekli değil</string>
     <string name="attribute_treeclimbing_yes">Ağaç tırmanışı gerekli</string>
     <string name="attribute_treeclimbing_no">Ağaç tırmanışı gerekli değil</string>
     <string name="attribute_poisonoak_yes">Zehirli bitkiler</string>
     <string name="attribute_poisonoak_no">Zehirli bitkiler yok</string>
     <string name="attribute_dangerousanimals_yes">Tehlikeli hayvanlar</string>
-    <string name="attribute_dangerousanimals_no">Tehlikeli hayvan yok</string>
     <string name="attribute_ticks_yes">Kene</string>
-    <string name="attribute_ticks_no">Kene yok</string>
     <string name="attribute_mine_yes">Terk edilmiş madenler</string>
-    <string name="attribute_mine_no">Terkedilmiş maden yok</string>
     <string name="attribute_cliff_yes">Uçurum/ taş düşmesi</string>
-    <string name="attribute_cliff_no">Uçurum/ taş düşmesi yok</string>
     <string name="attribute_hunting_yes">Avlanma bölgesi</string>
-    <string name="attribute_hunting_no">Avlanmak yasak</string>
     <string name="attribute_danger_yes">Tehlikeli bölge</string>
-    <string name="attribute_danger_no">Tehlikeli olmayan bölge</string>
     <string name="attribute_thorn_yes">Dikenler</string>
-    <string name="attribute_thorn_no">Diken yok</string>
     <string name="attribute_wheelchair_yes">Tekerlekli sandalye ile ulaşılabilir</string>
     <string name="attribute_wheelchair_no">Tekerlekli sandalye ile ulaşılamaz</string>
     <string name="attribute_parking_yes">Park alanı mevcut</string>
     <string name="attribute_parking_no">Park alanı mevcut değil</string>
     <string name="attribute_public_yes">Toplu taşıma mevcut</string>
-    <string name="attribute_public_no">Toplu taşıma yok</string>
     <string name="attribute_water_yes">İçme suyu yakınında</string>
     <string name="attribute_water_no">İçme suyu yok</string>
     <string name="attribute_restrooms_yes">Umimu tuvalet yakınında</string>
@@ -1815,13 +1783,9 @@
     <string name="attribute_offset_cache_yes">Konumlamalı Cache</string>
     <string name="attribute_offset_cache_no">Konumlamalı Cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">Bonus cache değil</string>
     <string name="attribute_powertrail_yes">Bir güç yolunun parçası</string>
-    <string name="attribute_powertrail_no">Güç yolunun parçası değil</string>
     <string name="attribute_challengecache_yes">Challenge Geocache\'i</string>
-    <string name="attribute_challengecache_no">Challenge Geocache değil</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com çözüm denetleyicisi etkinleştirildi</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com çözüm denetleyicisi etkin değil</string>
     <string name="attribute_handicaching_yes">Handicaching.com\'da derecelendirildi</string>
     <string name="attribute_handicaching_no">Handicaching.com\'da derecelendirilmedi</string>
     <string name="attribute_munzee_yes">Bir Munzee içerir</string>
@@ -1982,12 +1946,9 @@
     <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
-    <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
-    <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
     <string name="map_disable_autotarget_individual_route">\"Rota başlangıcını hedef olarak ayarla\" devre dışı bırakıldı</string>
-    <string name="map_clear_manual_targets">Elle girilen hedefleri temizle</string>
     <string name="map_manual_targets_cleared">Elle seçilmiş hedefler temizlendi</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
     <string name="map_clear_individual_route_confirm">Özel rotanızdan tüm cache/yol noktalarını kaldırmak istediğinize emin misiniz?</string>

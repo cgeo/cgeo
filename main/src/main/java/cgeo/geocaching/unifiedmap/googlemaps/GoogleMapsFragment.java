@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
@@ -36,7 +37,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import org.oscim.core.BoundingBox;
 
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -108,7 +108,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private void onMapAndActivityReady() {
         applyTheme();
         if (position != null) {
-            setCenter(position);
+            ViewUtils.runOnUiThread(true, () -> setCenter(position));
         }
         setZoom(zoomLevel);
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
@@ -131,7 +131,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         });
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
-            viewModel.mapCenter.setValue(getCenter());
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
         });
@@ -187,6 +186,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setCenter(final Geopoint geopoint) {
+        this.position = geopoint;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(geopoint.getLatitude(), geopoint.getLongitude())));
         }
@@ -202,13 +202,13 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
+    @Nullable
+    public Viewport getViewport() {
         if (lastBounds == null) {
-            return new BoundingBox(0, 0, 0, 0);
+            return null;
         }
         // mMap.getProjection() needs to be called on UI thread
-        return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
+        return new Viewport(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
 
@@ -234,10 +234,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setZoom(final int zoomLevel) {
+        this.zoomLevel = zoomLevel;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
-        } else {
-            this.zoomLevel = zoomLevel;
         }
     }
 

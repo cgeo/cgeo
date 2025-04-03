@@ -488,11 +488,11 @@ public class ViewUtils {
         return Thread.currentThread() == Looper.getMainLooper().getThread();
     }
 
-    public static void runOnUiThread(final Runnable action) {
+    public static void runOnUiThread(final boolean forcePost, final Runnable action) {
         if (action == null) {
             return;
         }
-        if (currentThreadIsUiThread()) {
+        if (!forcePost && currentThreadIsUiThread()) {
             action.run();
         } else {
             AndroidRxUtils.runOnUi(action);
@@ -527,7 +527,7 @@ public class ViewUtils {
      * @param shortToast set to true if this should be a short toast
      */
     public static void showToast(@Nullable final Context context, final TextParam text, final boolean shortToast) {
-        runOnUiThread(() -> {
+        runOnUiThread(false, () -> {
             final Context toastContext = wrap(context == null || (context instanceof Activity && ((Activity) context).isFinishing()) ?
                     CgeoApplication.getInstance() : context);
             final int toastDuration = shortToast ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
@@ -611,6 +611,17 @@ public class ViewUtils {
         return ((ViewGroup) v.getParent()).indexOfChild(v);
     }
 
+    public static void setForParentAndChildren(final View view, final View.OnClickListener clickListener, final View.OnLongClickListener onLongClickListener) {
+        if (view == null) {
+            return;
+        }
+
+        walkViewTree(view, viewItem -> {
+            viewItem.setOnClickListener(clickListener);
+            viewItem.setOnLongClickListener(onLongClickListener);
+            return true;
+        }, null);
+    }
 
     public static Bitmap drawableToBitmap(final Drawable drawable) {
         final Bitmap bitmap;

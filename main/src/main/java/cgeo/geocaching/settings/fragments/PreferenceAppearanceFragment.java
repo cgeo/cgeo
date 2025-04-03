@@ -81,6 +81,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     public void onResume() {
         super.onResume();
         requireActivity().setTitle(R.string.settings_title_appearance);
+        findPreference(getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
     }
 
     private void configCustomBNitemPreference() {

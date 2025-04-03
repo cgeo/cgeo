@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Wybierz obrazy z pamięci</string>
     <string name="log_image_camera_tooltip">Zrób zdjęcie za pomocą aparatu</string>
     <string name="log_image_selectfromown_tooltip">Wybierz obrazy z własnych obrazów</string>
+    <string name="log_inventory">Inwentarz</string>
     <string name="log_problem_none">Brak problemów</string>
     <string name="log_problem_needs_maintenance_label">Wymagany serwis skrytki</string>
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
@@ -312,7 +313,8 @@
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_reason">Powód: %s</string>
+    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
@@ -420,7 +422,7 @@
     <string name="caches_sort_geocode">Geokod</string>
     <string name="caches_sort_rating">Ocena</string>
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
-    <string name="caches_sort_inventory">Liczebność inwentarza</string>
+    <string name="caches_sort_inventory">Liczba przedmiotów podróżnych</string>
     <string name="caches_sort_date_hidden">Data ukrycia</string>
     <string name="caches_sort_date_logged">Data zalogowania (własny wpis)</string>
     <string name="caches_sort_finds">Ile razy znaleziona</string>
@@ -458,6 +460,7 @@
     <string name="caches_map_locus_export">Eksportuj do Locus</string>
     <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtruj według</string>
+    <string name="caches_filter_select_last">Poprzedni filtr</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -495,6 +498,9 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
+    <string name="list_menu_rename_list_prefix">Zmień nazwę prefiksu listy</string>
+    <string name="rename_from">Zmień nazwę z</string>
+    <string name="rename_to">Zmień nazwę na</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Wybierz listę</string>
     <string name="lists_title">Wybierz listy</string>
@@ -512,6 +518,10 @@
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
+    <string name="list_parent_list">Lista nadrzędna</string>
+    <string name="list_name">Nazwa listy</string>
+    <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
+    <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Zaawansowany</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Przełącz na tryb podstawowy</string>
@@ -542,6 +552,7 @@
     <string name="cache_filter_hidden">Data ukrycia</string>
     <string name="cache_filter_eventdate">Data wydarzenia</string>
     <string name="cache_filter_logs_count">Liczba wpisów</string>
+    <string name="cache_filter_inventory_count">Liczba przedmiotów podróżnych</string>
     <string name="cache_filter_last_found">Data ostatniego znalezienia</string>
     <string name="cache_filter_log_entry">Wpis w dzienniku</string>
     <string name="cache_filter_location">Lokalizacja</string>
@@ -876,7 +887,7 @@
     <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
-    <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
+    <string name="init_template_help">Teksty zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
@@ -1062,9 +1073,12 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
+    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.\nNiekompatybilne z wariantem VTM UnifiedMap.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
+    <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
+    <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
+    <string name="init_mapsource_select_legacy">Wybierz źródło mapy (Legacy)</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
     <string name="init_map_directory_description">Folder z mapami offline</string>
@@ -1088,12 +1102,10 @@
     <string name="init_trackappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla śladu/trasy. Ślad/trasa składa się z kilku punktów nawigacji i może być załadowana przez plik śladu/trasy GPX.</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgu. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrytki lub fizycznego punktu nawigacji, gdzie nie jest dozwolona żadna inna skrytka lub fizyczny punkt nawigacji. (Dotyczy geocaching.com)</string>
-    <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
-    <string name="init_circlefillcolor_summary">Wybierz kolor i nieprzezroczystość okręgów, które mają być wypełnione</string>
+    <string name="init_geofencecolor">Kolor okręgu geofence (udzielania odpowiedzi)</string>
+    <string name="init_geofencecolor_summary">Wybierz kolor i nieprzezroczystość dla okręgu geofence. Okręgi są używane jako wizualna reprezentacja geofence zdefiniowana dla punktów nawigacji (dotyczy zwykle etapów skrytek przygodowych geocaching.com)</string>
     <string name="init_accuracycirclecolor">Kolor linii okręgu dokładności</string>
     <string name="init_accuracycirclecolor_summary">Wybierz kolor i poziom przezroczystości dla linii okręgu dokładności. Okręg dokładności jest używany jako wizualna reprezentacja dokładności sygnału lokalizacji.</string>
-    <string name="init_accuracycirclefillcolor">Kolor wypełnienia okręgu dokładności</string>
-    <string name="init_accuracycirclefillcolor_summary">Wybierz kolor i poziom przezroczystości dla wypełniania okręgów dokładności</string>
     <string name="init_include_found_status">Uwzględnij status „Znalezione”</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
@@ -1185,9 +1197,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="category_unifiedMap">Ujednolicona mapa (beta)</string>
-    <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
+    <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
+    <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1380,7 +1392,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Inwentarz</string>
+    <string name="cache_inventory">Przedmioty podróżne</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_set_coordinates">Ustaw współrzędne</string>
     <string name="cache_personal_note">Notatka osobista</string>
@@ -1451,6 +1463,8 @@
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
     <string name="cache_menu_speechDeactivate">Przestań mówić</string>
     <string name="cache_menu_speechActivate">Zacznij mówić</string>
+    <string name="talking_disabled">Rozmawianie wyłączone</string>
+    <string name="talking_enabled">Rozmawianie włączone</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
@@ -1491,6 +1505,7 @@
     <string name="cache_menu_details">Szczegóły</string>
     <string name="cache_menu_refresh">Odśwież</string>
     <string name="cache_menu_share">Udostępnij skrytkę</string>
+    <string name="cache_menu_share_with_data">Udostępnij, łącznie z danymi użytkownika</string>
     <string name="cache_menu_move_list">Przenieś do innej listy</string>
     <string name="cache_menu_copy_list">Skopiuj do innej listy</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1508,7 +1523,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1587,6 +1602,9 @@
     <string name="image_category_own">Własne</string>
     <string name="image_category_listing">Z opisu</string>
     <string name="image_category_log">Z dziennika</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Tło</string>
+    <string name="image_listing_gallery">Galeria</string>
     <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
     <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
     <string name="context_map_remove_from_route_start">Usuń z początku</string>
@@ -1599,7 +1617,7 @@
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
-    <string name="internal_cache_default_name">Skrytka zdefiniowana przez użytkownika #%1$d</string>
+    <string name="internal_cache_default_names">Skrytka zdefiniowana przez użytkownika #%1$s</string>
     <string name="internal_cache_default_description">To jest skrytka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele „Idź do”</string>
@@ -1612,9 +1630,13 @@
     <string name="init_summary_show_routing_menu">Długie dotknięcie na skrytce pokazuje menu z zaawansowanymi opcjami dodawania/usuwania skrytki do/z trasy. Jeśli opcja jest wyłączona, wtedy skrytka jest po prostu dodawana/usuwana do/z trasy.</string>
     <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
     <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
+    <string name="init_autozoom_consider_lastcenter">Przywróć pozycję mapy na mapowaniu listy</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Gdy lista skrytek jest mapowana i mapa została poprzednio pozostawiona na liście, granice mapy zostaną przywrócone, w przeciwnym razie należy zmienić powiększenie, aby zmieścić wszystkie skrytki.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Gdy lista skrytek jest mapowana ustaw powiększenie i granice mapy, aby zmieścić wszystkie skrytki.</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
     <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
+    <string name="internal_connector_name">Skrytki zdefiniowane przez użytkownika</string>
     <!-- html styles -->
     <string name="html_style_default">Domyślny</string>
     <string name="html_style_default_no_contrast_fix">Domyślne bez korekty kontrastu</string>
@@ -1663,6 +1685,8 @@
     <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
     <string name="waypoint_name">Nazwa</string>
     <string name="waypoint_edit">Edytuj</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Ustaw promień dla geofence (w metrach)</string>
     <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
     <string name="waypoint_clear_coordinates">Wyczyść współrzędne</string>
     <string name="waypoint_delete">Usuń</string>
@@ -1725,6 +1749,7 @@
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>
     <string name="calccoord_paste_from_clipboard">Wklej ze schowka</string>
     <string name="calccoord_generate_title">Wygeneruj punkty nawigacji</string>
     <string name="calccoord_generate_showonmap">Pokaż na mapie</string>
@@ -1871,7 +1896,7 @@
     <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>
     <string name="search_address_result">Znalezione miejsca</string>
-    <string name="search_own_caches">Szukaj moich skrytek</string>
+    <string name="search_own_caches">Moje skrytki</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
@@ -1951,7 +1976,6 @@
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
     <string name="helper_google_translate_title">Tłumacz Google</string>
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrytek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
-    <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrytek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <string name="helper_alc_description">Aplikacja Adventure Lab na twój telefon lub tablet.</string>
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
@@ -2015,19 +2039,18 @@
     <string name="attribute_climbing_yes">Trudna wspinaczka</string>
     <string name="attribute_climbing_no">Nietrudna wspinaczka</string>
     <string name="attribute_wading_yes">Może wymagać brodzenia</string>
-    <string name="attribute_wading_no">Nie wymaga brodzenia</string>
     <string name="attribute_swimming_yes">Może wymagać pływania</string>
-    <string name="attribute_swimming_no">Nie wymaga pływania</string>
     <string name="attribute_available_yes">Dostępna przez cały czas</string>
     <string name="attribute_available_no">Niedostępna przez cały czas</string>
     <string name="attribute_night_yes">Zalecana w nocy</string>
     <string name="attribute_night_no">Niezalecana w nocy</string>
     <string name="attribute_winter_yes">Dostępna zimą</string>
+    <string name="attribute_cacti_yes">Kaktusy w pobliżu</string>
+    <string name="attribute_cacti_no">Brak kaktusów w pobliżu</string>
     <string name="attribute_winter_no">Niedostępna zimą</string>
     <string name="attribute_stealth_yes">Wymagana konspiracja</string>
     <string name="attribute_stealth_no">Niewymagana konspiracja</string>
     <string name="attribute_firstaid_yes">Wymagany serwis skrytki</string>
-    <string name="attribute_firstaid_no">Niewymagany serwis skrytki</string>
     <string name="attribute_cow_yes">Uważaj na zwierzęta gospodarskie</string>
     <string name="attribute_cow_no">Bez zwierząt gospodarskich</string>
     <string name="attribute_field_puzzle_yes">Zagadka terenowa</string>
@@ -2057,49 +2080,32 @@
     <string name="attribute_partnership_yes">Skrytka partnerska</string>
     <string name="attribute_partnership_no">Skrytka nie jest partnerska</string>
     <string name="attribute_fee_yes">Opłata za wejście lub parking</string>
-    <string name="attribute_fee_no">Bez opłaty za wejście lub parking</string>
     <string name="attribute_rappelling_yes">Sprzęt wspinaczkowy potrzebny</string>
-    <string name="attribute_rappelling_no">Sprzęt wspinaczkowy niepotrzebny</string>
     <string name="attribute_boat_yes">Łódź potrzebna</string>
-    <string name="attribute_boat_no">Łódź niepotrzebna</string>
     <string name="attribute_scuba_yes">Sprzęt do nurkowania potrzebny</string>
-    <string name="attribute_scuba_no">Sprzęt do nurkowania niepotrzebny</string>
     <string name="attribute_flashlight_yes">Latarka potrzebna</string>
-    <string name="attribute_flashlight_no">Latarka niepotrzebna</string>
     <string name="attribute_uv_yes">Światło UV potrzebne</string>
     <string name="attribute_uv_no">Światło UV niepotrzebne</string>
     <string name="attribute_snowshoes_yes">Rakiety śnieżne potrzebne</string>
-    <string name="attribute_snowshoes_no">Rakiety śnieżne niepotrzebne</string>
     <string name="attribute_skiis_yes">Narty biegowe potrzebne</string>
-    <string name="attribute_skiis_no">Narty biegowe niepotrzebne</string>
     <string name="attribute_s_tool_yes">Specjalne narzędzia potrzebne</string>
-    <string name="attribute_s_tool_no">Specjalne narzędzia niepotrzebne</string>
     <string name="attribute_wirelessbeacon_yes">Bezprzewodowe nadajniki</string>
-    <string name="attribute_wirelessbeacon_no">Bez bezprzewodowych nadajników</string>
     <string name="attribute_treeclimbing_yes">Wspinaczka na drzewo</string>
     <string name="attribute_treeclimbing_no">Bez wspinaczki na drzewo</string>
     <string name="attribute_poisonoak_yes">Trujące rośliny</string>
     <string name="attribute_poisonoak_no">Bez trujących roślin</string>
     <string name="attribute_dangerousanimals_yes">Niebezpieczne zwierzęta</string>
-    <string name="attribute_dangerousanimals_no">Bez niebezpiecznych zwierząt</string>
     <string name="attribute_ticks_yes">Kleszcze</string>
-    <string name="attribute_ticks_no">Bez kleszczy</string>
     <string name="attribute_mine_yes">Opuszczone kopalnie</string>
-    <string name="attribute_mine_no">Bez opuszczonych kopalń</string>
     <string name="attribute_cliff_yes">Klif / spadające kamienie</string>
-    <string name="attribute_cliff_no">Bez klifów / bez spadających kamieni</string>
     <string name="attribute_hunting_yes">Polowania</string>
-    <string name="attribute_hunting_no">Bez polowań</string>
     <string name="attribute_danger_yes">Niebezpieczny obszar</string>
-    <string name="attribute_danger_no">Bez niebezpiecznego obszaru</string>
     <string name="attribute_thorn_yes">Kolce</string>
-    <string name="attribute_thorn_no">Bez kolców</string>
     <string name="attribute_wheelchair_yes">Dostępne dla wózków inwalidzkich</string>
     <string name="attribute_wheelchair_no">Niedostępne dla wózków inwalidzkich</string>
     <string name="attribute_parking_yes">Parking dostępny</string>
     <string name="attribute_parking_no">Parking niedostępny</string>
     <string name="attribute_public_yes">Transport publiczny</string>
-    <string name="attribute_public_no">Bez transportu publicznego</string>
     <string name="attribute_water_yes">Woda pitna w pobliżu</string>
     <string name="attribute_water_no">Bez wody pitnej w pobliżu</string>
     <string name="attribute_restrooms_yes">Toalety publiczne w pobliżu</string>
@@ -2211,13 +2217,9 @@
     <string name="attribute_offset_cache_yes">Skrytka Offset</string>
     <string name="attribute_offset_cache_no">Nie jest to skrytka Offset</string>
     <string name="attribute_bonuscache_yes">Skrytka bonusowa</string>
-    <string name="attribute_bonuscache_no">Bez skrytki bonusowej</string>
     <string name="attribute_powertrail_yes">Część power trail</string>
-    <string name="attribute_powertrail_no">Nie jest częścią power trail</string>
     <string name="attribute_challengecache_yes">Skrytka wyzwanie</string>
-    <string name="attribute_challengecache_no">To nie skrytka wyzwanie</string>
     <string name="attribute_hqsolutionchecker_yes">Narzędzie do sprawdzania rozwiązań Geocaching.com włączone</string>
-    <string name="attribute_hqsolutionchecker_no">Narzędzie do sprawdzania rozwiązań Geocaching.com wyłączone</string>
     <string name="attribute_handicaching_yes">Oceniono na Handicaching.com</string>
     <string name="attribute_handicaching_no">Nie oceniono na Handicaching.com</string>
     <string name="attribute_munzee_yes">Zawiera Munzee</string>
@@ -2378,6 +2380,10 @@
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
+    <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
+    <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
+    <string name="live_map_status_partial">Częściowe wyniki (przybliż, aby zmniejszyć liczbę skrytek do wczytania): %s</string>
+    <string name="live_map_status_normal">Wczytywanie danych bez problemów: %s</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
@@ -2386,6 +2392,7 @@
         <item quantity="other">%d punktów nawigacji zostało wyciągniętych</item>
     </plurals>
     <string name="link_gc_checker">sprawdzanie współrzędnych w serwisie geocaching.com dostępne jest przez przeglądarkę</string>
+    <string name="link_gallery">Obrazy dostępne w galerii (%d)</string>
     <string name="geochecker_available">Geochecker dostępny przez przeglądarkę</string>
     <!-- calendar adder -->
     <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
@@ -2436,12 +2443,13 @@
     <string name="individual_route_error_single_waypoint_mode">Niedostępne w trybie pojedynczego punktu nawigacji</string>
     <string name="map_sort_individual_route">Sortuj indywidualną trasę</string>
     <string name="map_refresh_individual_route">Odśwież</string>
-    <string name="map_export_individual_route">Eksportuj indywidualną trasę</string>
-    <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
+    <string name="map_export_route">Eksportuj jako trasę</string>
+    <string name="map_export_track">Eksportuj jako ślad</string>
+    <string name="map_load_individual_route">Wczytaj z GPX</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
-    <string name="map_clear_manual_targets">Wyczyść ręczne cele</string>
+    <string name="map_clear_manual_targets">Wyczyść cel trasy</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_clear_individual_route_confirm">Czy chcesz usunąć wszystkie skrytki/punkty nawigacji z Twojej trasy?</string>
@@ -2503,6 +2511,8 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="show_all">Pokaż wszystko</string>
+    <string name="lists_only_new">Tylko nowe</string>
+    <string name="pq_only_dl">Do pobrania</string>
     <string name="routingmode_straight">Prosto</string>
     <string name="routingmode_walk">Pieszo</string>
     <string name="routingmode_bike">Rower</string>
@@ -2605,7 +2615,7 @@
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="hillshading_info">Cieniowanie szczytów offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
-    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (wymaga ponownego uruchomienia)</string>
+    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (tylko VTM, wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>
@@ -2803,4 +2813,5 @@
     <string name="dbi_edit_error">Błąd podczas aktualizacji pola</string>
     <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
     <string name="dbi_search_title">Szukaj</string>
+    <string name="dbi_search_columnSelection">Ogranicz do</string>
 </resources>

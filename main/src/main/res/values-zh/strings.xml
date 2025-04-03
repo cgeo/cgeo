@@ -230,7 +230,6 @@
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
     <string name="info_log_saved">c:geo 成功保存日志。</string>
     <string name="info_log_post_failed">发布日志失败。</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重试</string>
     <string name="info_log_post_save">离线保存</string>
     <string name="info_log_cleared">日志已清除</string>
@@ -290,7 +289,6 @@
     <string name="caches_sort_name">应用名</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
-    <string name="caches_sort_inventory">库存计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
@@ -558,12 +556,8 @@
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
-    <string name="init_circlefillcolor">圆环填充颜色</string>
-    <string name="init_circlefillcolor_summary">选择要填充的圆环的颜色和不透明度</string>
     <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
     <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
-    <string name="init_accuracycirclefillcolor">精度圆环填充颜色</string>
-    <string name="init_accuracycirclefillcolor_summary">选择填充精度圆环的颜色和不透明度</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">访问可追踪物</string>
     <string name="init_summary_trackautovisit">默认情况下将可追踪物设置为 “已访问”</string>
@@ -641,7 +635,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
-    <string name="cache_status_attended">已参加</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->

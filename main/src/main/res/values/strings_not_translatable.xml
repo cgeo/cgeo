@@ -261,7 +261,6 @@
     <string translatable="false" name="helper_locus_title">Locus</string>
     <string translatable="false" name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string translatable="false" name="helper_gps_locker_title">GPS Locker</string>
-    <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
     <string translatable="false" name="helper_chirpwolf">Chirp Wolf</string>
     <string translatable="false" name="helper_alc">Adventure Lab</string>
     <string translatable="false" name="helper_gcwizard">GC Wizard</string>
@@ -301,9 +300,8 @@
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
     <string translatable="false" name="mapserver_openandromaps_themes_name">OpenAndroMaps Theme</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_voluntary_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/voluntary/downloads/</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/elevate/</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_base_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
     <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string><!-- cannot use https: here due to certificate not valid for subdomain -->

@@ -45,10 +45,10 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -728,6 +728,10 @@ public class Settings {
         return getBoolean(R.string.pref_vtm_marker_atlas_usage, false);
     }
 
+    public static boolean enableFeatureUnifiedDebug() {
+        return getBoolean(R.string.pref_feature_unified_debug, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
@@ -1224,6 +1228,21 @@ public class Settings {
         }
     }
 
+    public static void setPreviousTileProvider(final AbstractTileProvider tileProvider) {
+        if (tileProvider != null) {
+            putString(R.string.pref_previous_tileprovider, tileProvider.getId());
+        }
+    }
+
+    public static AbstractTileProvider getPreviousTileProvider() {
+        final String tileProviderId = getString(R.string.pref_previous_tileprovider, null);
+        tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
+        if (tileProvider == null) {
+            tileProvider = TileProviderFactory.getAnyTileProvider();
+        }
+        return tileProvider;
+    }
+
     public static Set<String> getHideTileproviders() {
         final Set<String> empty = Collections.emptySet();
         if (sharedPrefs == null) {
@@ -1252,14 +1271,9 @@ public class Settings {
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
-    /** display UnifiedMap icon on home screen? */
-    public static boolean showUnifiedMap() {
-        return getBoolean(R.string.pref_showUnifiedMap, false);
-    }
-
-    /** use UnifiedMap as default map in certain places */
-    public static boolean useUnifiedMap() {
-        return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
+    /** use legacy maps **/
+    public static boolean useLegacyMaps() {
+        return getBoolean(R.string.pref_useLegacyMap, false);
     }
 
     /** use Mapsforge as map view for UnifiedMap */
@@ -1277,7 +1291,7 @@ public class Settings {
         try {
             return Integer.parseInt(getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
         } catch (NumberFormatException ignore) {
-            return UNIFIEDMAP_VARIANT_VTM;
+            return UNIFIEDMAP_VARIANT_MAPSFORGE;
         }
     }
 
@@ -1303,6 +1317,10 @@ public class Settings {
 
     public static boolean getMapDownloadsKeepTemporaryFiles() {
         return getBoolean(R.string.pref_mapDownloadsKeepTemporaryFiles, false);
+    }
+
+    public static boolean getMapDownloaderAutoRename() {
+        return getBoolean(R.string.pref_autorenameDownloads, true);
     }
 
     public static boolean dbNeedsCleanup() {
@@ -1955,6 +1973,19 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
+    public static String[] getHistoryList(final int prefKey) {
+        final List<String> history = getStringList(prefKey, StringUtils.EMPTY);
+        return history.subList(0, Math.min(HISTORY_SIZE, history.size())).toArray(new String[0]);
+    }
+
+    public static void addToHistoryList(final int prefKey, final String historyValue) {
+        final List<String> history = new ArrayList(Arrays.asList(getHistoryList(prefKey)));
+        // bring entry to front, if it already existed
+        history.remove(historyValue);
+        history.add(0, historyValue);
+        putStringList(prefKey, history);
+    }
+
     public static void clearRecentlyViewedHistory() {
         putStringList(R.string.pref_caches_history, new ArrayList<>());
     }
@@ -2465,12 +2496,12 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
-    public static boolean getMapShadingEnabled() {
-        return getBoolean(R.string.pref_maphillshading, false);
-    }
-
     public static boolean getMapShadingShowLayer() {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
+    }
+
+    public static boolean getMapShadingHq() {
+        return getBoolean(R.string.pref_maphillshading_hq, false);
     }
 
     public static void setMapShadingShowLayer(final boolean show) {
@@ -2507,5 +2538,26 @@ public class Settings {
 
     public static String getShortDateFormat() {
         return getString(R.string.pref_short_date_format, "");
+    }
+
+    public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
+        final String lngCode = getString(R.string.pref_translation_language, getApplicationLocale().getLanguage());
+        if (!lngCode.isEmpty()) {
+            final OfflineTranslateUtils.Language lng = new OfflineTranslateUtils.Language(lngCode);
+            if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
+                return lng;
+            }
+        }
+        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
+    }
+
+    public static @NonNull Set<String> getLanguagesToNotTranslate() {
+        final Set<String> lngs = new HashSet<>();
+        if (sharedPrefs == null) {
+            return lngs;
+        }
+        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), lngs));
+        lngs.add(getTranslationTargetLanguage().getCode());
+        return lngs;
     }
 }

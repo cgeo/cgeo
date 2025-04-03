@@ -56,6 +56,10 @@ public final class GCConstants {
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
+
+    //example gallery count:
+    //<li><a href="/seek/gallery.aspx?guid=3d6f0c14-7d72-43a2-a704-dc4a2b879c73">View gallery (1885)</a></li>
+    static final Pattern PATTERN_GALLERY_COUNT = Pattern.compile("<a href=\"/seek/gallery.aspx\\?guid=[^(]+?\\((\\d+)\\)</a>");
     // matches: the inner JSON Code (w/o {}) of "currentGeocache":{"id":123,"referenceCode":"GCxyz","name":"somename"}
     static final Pattern PATTERN_TB_CURRENT_GEOCACHE_JSON = Pattern.compile("\"currentGeocache\":\\{([^}]+)\\}");
 
@@ -70,8 +74,18 @@ public final class GCConstants {
      */
     static final Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
     private static final String IMAGE_FORMATS = "jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP";
+    private static final String IMAGE_URL = "<a href=[\"'](https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))[\"'][^>]+>(?:[^>]*</strong>[^>]+>)?";
     //Example HTML to match: <a href="https://img.geocaching.com/cache/large/1711f8a1-796a-405b-82ba-8685f2e9f024.jpg" class="owner-image" rel="owner_image_group" data-title="<strong>indy mit text netz Kopie</strong>">indy mit text netz Kopie</a></li>
-    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))\"[^>]+>(?:[^>]+</strong>[^>]+>)?" + "([^<]*)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
+    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile(IMAGE_URL + "([^<]*)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
+
+    //gallery image example:
+    //<td>
+    //        <span class="date-stamp">15.01.2025</span>
+    //        <a href='https://img.geocaching.com/cache/log/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' data-title='&lt;span class=&quot;LogImgTitle&quot;&gt;Image 2&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;https://www.geocaching.com/seek/log.aspx?LUID=7f9ba457-022d-4269-a6f9-e15721fdf0c2&IID=3b8ffe04-f32e-4ec8-833e-f8ffd647187c&quot;>View Log&lt;/a&gt; &lt;a href=&quot;https://img.geocaching.com/cache/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;' class="imageLink" rel="gallery">
+    //            <img src='https://img.geocaching.com/cache/log/thumb/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' alt='View Image' /></a>
+    //            <span>Image 2 </span>
+    //    </td>
+    static final Pattern PATTERN_GALLERY_IMAGE = Pattern.compile("<span(?: [^>+]+)>([^>]+)</span>\\s*?" + IMAGE_URL + ".*?<span>([^<]*)</span>", Pattern.DOTALL);
     static final Pattern PATTERN_INVENTORY = Pattern.compile("ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">.*?WidgetBody(.*?)<div");
     static final Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/(?:track|hide)\\/details\\.aspx\\?(guid|TB)=([0-9a-zA-Z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     static final Pattern PATTERN_WATCHLIST = Pattern.compile("data-cacheonwatchlist=\"True\"");

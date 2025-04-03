@@ -187,7 +187,6 @@
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
     <string name="info_log_post_failed">Posting log gagal.</string>
-    <string name="info_log_post_failed_reason">Alasan: %s</string>
     <string name="info_log_post_retry">Coba kembali</string>
     <string name="info_log_post_save">Simpan offline</string>
     <string name="info_log_cleared">Log dibersihkan.</string>
@@ -239,7 +238,6 @@
     <string name="caches_sort_name">Nama</string>
     <string name="caches_sort_rating">Peringkat</string>
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
-    <string name="caches_sort_inventory">Jumlah persedian</string>
     <string name="caches_sort_date_hidden">Tanggal Disembunyikan</string>
     <string name="caches_sort_finds">Menemukan</string>
     <string name="caches_sort_state">Keadaan</string>
@@ -577,7 +575,6 @@
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
-    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -695,7 +692,6 @@
     <string name="search_tb_button">Cari untuk dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
-    <string name="search_own_caches">Pencarian cache saya</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
     <!-- trackable -->
     <string name="trackable">Bisa dilacak</string>
@@ -751,7 +747,6 @@
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo memungkinkan bermain dan mencari geocaches dari tipe Wherigo. c:geo secara otomatis dapat memicu download kartrid dalam aplikasi ini.</string>
     <!-- export -->
     <string name="export">Ekspor</string>
     <string name="export_progress">Ekspor: %1$s</string>
@@ -802,9 +797,7 @@
     <string name="attribute_climbing_yes">Sulit mendaki</string>
     <string name="attribute_climbing_no">Tidak sulit mendaki</string>
     <string name="attribute_wading_yes">Mungkin membutuhkan rendam</string>
-    <string name="attribute_wading_no">Mungkin tidak perlu mengarungi</string>
     <string name="attribute_swimming_yes">Mungkin memerlukan kolam</string>
-    <string name="attribute_swimming_no">Mungkin tidak memerlukan kolam</string>
     <string name="attribute_available_yes">Tersedia pada semua waktu</string>
     <string name="attribute_available_no">Tidak tersedia di semua waktu</string>
     <string name="attribute_night_yes">Dianjurkan di malam hari</string>
@@ -814,7 +807,6 @@
     <string name="attribute_stealth_yes">Stealth diperlukan</string>
     <string name="attribute_stealth_no">Stealth tidak diperlukan</string>
     <string name="attribute_firstaid_yes">Kebutuhan pemeliharaan</string>
-    <string name="attribute_firstaid_no">Tidak membutuhkan pemeliharaan</string>
     <string name="attribute_cow_yes">Perhatikan ternak</string>
     <string name="attribute_cow_no">Tidak ada ternak</string>
     <string name="attribute_field_puzzle_yes">Bidang teka-teki</string>
@@ -844,49 +836,32 @@
     <string name="attribute_partnership_yes">Cache Kemitraan</string>
     <string name="attribute_partnership_no">Bukan cache kemitraan</string>
     <string name="attribute_fee_yes">Akses atau biaya parkir yang diperlukan</string>
-    <string name="attribute_fee_no">Akses atau biaya parkir tidak diperlukan</string>
     <string name="attribute_rappelling_yes">Peralatan mendaki diperlukan</string>
-    <string name="attribute_rappelling_no">Peralatan mendaki tidak diperlukan</string>
     <string name="attribute_boat_yes">Perahu diperlukan</string>
-    <string name="attribute_boat_no">Perahu tidak diperlukan</string>
     <string name="attribute_scuba_yes">Peralatan selam diperlukan</string>
-    <string name="attribute_scuba_no">Peralatan selam tidak diperlukan</string>
     <string name="attribute_flashlight_yes">Senter diperlukan</string>
-    <string name="attribute_flashlight_no">Senter tidak diperlukan</string>
     <string name="attribute_uv_yes">Sinar UV diperlukan</string>
     <string name="attribute_uv_no">Sinar UV tidak diperlukan</string>
     <string name="attribute_snowshoes_yes">Sepatu salju diperlukan</string>
-    <string name="attribute_snowshoes_no">Sepatu salju tidak diperlukan</string>
     <string name="attribute_skiis_yes">Ski lintas negara diperlukan</string>
-    <string name="attribute_skiis_no">Ski lintas negara tidak diperlukan</string>
     <string name="attribute_s_tool_yes">Alat-alat khusus diperlukan</string>
-    <string name="attribute_s_tool_no">Alat-alat khusus tidak diperlukan</string>
     <string name="attribute_wirelessbeacon_yes">Beacon nirkabel</string>
-    <string name="attribute_wirelessbeacon_no">Tidak ada beacon nirkabel</string>
     <string name="attribute_treeclimbing_yes">Memanjat pohon diperlukan</string>
     <string name="attribute_treeclimbing_no">Tidak perlu memanjat pohon</string>
     <string name="attribute_poisonoak_yes">Tanaman beracun</string>
     <string name="attribute_poisonoak_no">Tidak ada tanaman beracun</string>
     <string name="attribute_dangerousanimals_yes">Hewan yang Berbahaya</string>
-    <string name="attribute_dangerousanimals_no">Bukan Hewan Berbahaya</string>
     <string name="attribute_ticks_yes">Kutu</string>
-    <string name="attribute_ticks_no">Tidak kutu</string>
     <string name="attribute_mine_yes">Tambang ditinggalkan</string>
-    <string name="attribute_mine_no">Tidak ada tambang yang ditinggalkan</string>
     <string name="attribute_cliff_yes">Tebing / batu jatuh</string>
-    <string name="attribute_cliff_no">Tidak ada tebing / jatuhnya batu</string>
     <string name="attribute_hunting_yes">Berburu</string>
-    <string name="attribute_hunting_no">Tidak berburu</string>
     <string name="attribute_danger_yes">Daerah berbahaya</string>
-    <string name="attribute_danger_no">Bukan daerah berbahaya</string>
     <string name="attribute_thorn_yes">Duri</string>
-    <string name="attribute_thorn_no">Tidak ada duri</string>
     <string name="attribute_wheelchair_yes">Kursi roda dapat diakses</string>
     <string name="attribute_wheelchair_no">Kursi roda tidak dapat diakses</string>
     <string name="attribute_parking_yes">Parkir tersedia</string>
     <string name="attribute_parking_no">Parkir tidak tersedia</string>
     <string name="attribute_public_yes">Kendaraan umum</string>
-    <string name="attribute_public_no">Tidak ada kendaraan umum</string>
     <string name="attribute_water_yes">Minum air di dekatnya</string>
     <string name="attribute_water_no">Tidak ada air minum di dekatnya</string>
     <string name="attribute_restrooms_yes">Dekat toilet umum</string>

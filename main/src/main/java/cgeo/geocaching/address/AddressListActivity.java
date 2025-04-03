@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -63,12 +64,14 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     @Override
     public void onClickAddress(@NonNull final Address address) {
+        Settings.addToHistoryList(R.string.pref_search_history_address, StringUtils.defaultString(address.getAddressLine(0).replace(",", "")));
         CacheListActivity.startActivityAddress(this, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
         ActivityMixin.finishWithFadeTransition(this);
     }
 
     @Override
     public void onClickMapIcon(@NonNull final Address address) {
+        Settings.addToHistoryList(R.string.pref_search_history_address, StringUtils.defaultString(address.getAddressLine(0).replace(",", "")));
         DefaultMap.startActivityInitialCoords(this, new Geopoint(address.getLatitude(), address.getLongitude()));
         ActivityMixin.finishWithFadeTransition(this);
     }

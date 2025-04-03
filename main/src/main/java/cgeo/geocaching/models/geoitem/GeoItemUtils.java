@@ -103,7 +103,6 @@ public final class GeoItemUtils {
         return (lineWidthPx + 1) / 2;
     }
 
-
     private static boolean touchesLine(final int[] tappedPt, final int[] p1Pt, final int[] p2Pt, final int lineWidthPxHalf) {
 
         if (pointsEqual(p1Pt, p2Pt)) {
@@ -181,8 +180,9 @@ public final class GeoItemUtils {
         return result;
     }
 
-
     private static boolean pointsEqual(final int[] pt1, final int[] pt2) {
         return Arrays.equals(pt1, pt2);
     }
+
+
 }

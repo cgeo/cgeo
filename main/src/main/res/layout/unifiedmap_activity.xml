@@ -23,6 +23,7 @@
         <include layout="@layout/map_zoom_control" />
         <include layout="@layout/map_progressbar" />
         <include layout="@layout/map_detailsfragment" />
+
     </RelativeLayout>
 
     <RelativeLayout

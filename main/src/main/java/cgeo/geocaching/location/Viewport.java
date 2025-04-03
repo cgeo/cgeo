@@ -4,7 +4,11 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.JsonUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,14 +17,39 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public final class Viewport implements Parcelable {
 
+    public static final Viewport EMPTY = new Viewport(0, 0, 0, 0);
+
     @NonNull public final Geopoint center;
-    @NonNull public final Geopoint bottomLeft;
-    @NonNull public final Geopoint topRight;
+    @NonNull public final Geopoint bottomLeft; //contains the MINIMUM lat and lon
+    @NonNull public final Geopoint topRight; // contains the MAXIMUM lat and lon
+
+    public Viewport(final double lat1, final double lon1, final double lat2, final double lon2) {
+        this.bottomLeft = new Geopoint(Math.min(lat1, lat2), Math.min(lon1, lon2));
+        this.topRight = new Geopoint(Math.max(lat1, lat2), Math.max(lon1, lon2));
+        this.center = new Geopoint((lat1 + lat2) / 2, (lon1 + lon2) / 2);
+    }
+
+    private Viewport(final int lat1E6, final int lon1E6, final int lat2E6, final int lon2E6, final Object dummy) {
+        this.bottomLeft = Geopoint.forE6(Math.min(lat1E6, lat2E6), Math.min(lon1E6, lon2E6));
+        this.topRight = Geopoint.forE6(Math.max(lat1E6, lat2E6), Math.max(lon1E6, lon2E6));
+        this.center = Geopoint.forE6(((lat1E6 + lat2E6) / 2), ((lon1E6 + lon2E6) / 2));
+    }
+
+    public static Viewport forE6(final int lat1E6, final int lon1E6, final int lat2E6, final int lon2E6) {
+        return new Viewport(lat1E6, lon1E6, lat2E6, lon2E6, null);
+    }
 
     public Viewport(@NonNull final ICoordinate point1, @NonNull final ICoordinate point2) {
         final Geopoint gp1 = point1.getCoords();
@@ -58,6 +87,32 @@ public final class Viewport implements Parcelable {
         this.bottomLeft = this.center.project(180, radiusInKilometers).project(270, radiusInKilometers);
     }
 
+    @Nullable
+    public static Viewport forJson(final JsonNode node) {
+        final Geopoint bottomLeft = Geopoint.forJson(JsonUtils.get(node, "bottomLeft"));
+        final Geopoint topRight = Geopoint.forJson(JsonUtils.get(node, "topRight"));
+        if (bottomLeft == null || topRight == null) {
+            return null;
+        }
+        return new Viewport(bottomLeft, topRight);
+    }
+
+    public ObjectNode toJson() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.set(node, "bottomLeft", bottomLeft.toJson());
+        JsonUtils.set(node, "topRight", topRight.toJson());
+        return node;
+    }
+
+    @Nullable
+    public GeoItem toGeoItem(final GeoStyle style, final int zLevel) {
+        if (!isValid(this)) {
+            return null;
+        }
+        final List<Geopoint> points = Arrays.asList(getBottomRight(), bottomLeft, getTopLeft(), topRight);
+        return GeoPrimitive.createPolygon(points, style).buildUpon().setZLevel(zLevel).build();
+    }
+
     public double getLatitudeMin() {
         return bottomLeft.getLatitude();
     }
@@ -86,6 +141,15 @@ public final class Viewport implements Parcelable {
     public double getLongitudeSpan() {
         return getLongitudeMax() - getLongitudeMin();
     }
+
+    public Geopoint getBottomRight() {
+        return Geopoint.forE6(bottomLeft.getLatitudeE6(), topRight.getLongitudeE6());
+    }
+
+    public Geopoint getTopLeft() {
+        return Geopoint.forE6(topRight.getLatitudeE6(), bottomLeft.getLongitudeE6());
+    }
+
 
     /**
      * Check whether a point is contained in this viewport.
@@ -194,7 +258,7 @@ public final class Viewport implements Parcelable {
      */
     @Nullable
     public static Viewport containing(final Collection<? extends ICoordinate> points) {
-        return containing(points, false, false);
+        return containing(points, false, null);
     }
 
     /**
@@ -206,7 +270,8 @@ public final class Viewport implements Parcelable {
      */
     @Nullable
     public static Viewport containingGCliveCaches(final Collection<Geocache> geocaches) {
-        return containing(geocaches, false, true);
+        final GCConnector conn = GCConnector.getInstance();
+        return containing(geocaches, false, cache -> conn.canHandle(cache.getGeocode()) && !cache.inDatabase());
     }
 
     /**
@@ -217,7 +282,7 @@ public final class Viewport implements Parcelable {
      */
     @Nullable
     public static Viewport containingCachesAndWaypoints(final Collection<Geocache> geocaches) {
-        return containing(geocaches, true, false);
+        return containing(geocaches, true, null);
     }
 
     /**
@@ -227,11 +292,10 @@ public final class Viewport implements Parcelable {
      * - containingCachesAndWaypoints(Geocaches)
      */
     @Nullable
-    private static Viewport containing(final Collection<? extends ICoordinate> points, final boolean withWaypoints, final boolean gcLiveOnly) {
+    private static <T extends ICoordinate> Viewport containing(final Iterable<T> points, final boolean withWaypoints, final Predicate<T> test) {
         final ContainingViewportBuilder cb = new ContainingViewportBuilder();
-        final GCConnector conn = GCConnector.getInstance();
-        for (final ICoordinate point : points) {
-            if (point != null && (!gcLiveOnly || (conn.canHandle(((Geocache) point).getGeocode()) && !((Geocache) point).inDatabase()))) {
+        for (final T point : points) {
+            if (point != null && (test == null || test.test(point))) {
                 cb.add(point);
                 if (withWaypoints && ((Geocache) point).hasWaypoints()) {
                     for (final Waypoint waypoint : ((Geocache) point).getWaypoints()) {
@@ -243,6 +307,46 @@ public final class Viewport implements Parcelable {
             }
         }
         return cb.getViewport();
+    }
+
+    public static Viewport intersect(final Viewport vp1, final Viewport vp2) {
+        return intersect(Arrays.asList(vp1, vp2));
+    }
+
+    public static Viewport intersect(final Iterable<Viewport> vps) {
+        return intersect(vps, vp -> vp);
+    }
+
+    public static <T> Viewport intersect(final Iterable<T> source, final Function<T, Viewport> mapper) {
+        if (source == null) {
+            return null;
+        }
+        int maxLowerLon = Integer.MIN_VALUE;
+        int maxLowerLat = Integer.MIN_VALUE;
+        int minHigherLon = Integer.MAX_VALUE;
+        int minHigherLat = Integer.MAX_VALUE;
+        for (T src : source) {
+            if (src == null) {
+                return null;
+            }
+            final Viewport vp = mapper.apply(src);
+            if (vp == null) {
+                return null;
+            }
+            maxLowerLon = Math.max(maxLowerLon, vp.bottomLeft.getLongitudeE6());
+            maxLowerLat = Math.max(maxLowerLat, vp.bottomLeft.getLatitudeE6());
+            minHigherLon = Math.min(minHigherLon, vp.topRight.getLongitudeE6());
+            minHigherLat = Math.min(minHigherLat, vp.topRight.getLatitudeE6());
+        }
+        if (maxLowerLon == Integer.MIN_VALUE) {
+            return null;
+        }
+        // There might not be any overlap at all
+        if (minHigherLon <= maxLowerLon || minHigherLat <= maxLowerLat) {
+            return null;
+        }
+
+        return new Viewport(maxLowerLat, maxLowerLon, minHigherLat, minHigherLon, null);
     }
 
     /** Helper class to build Viewports without instanciating too many helper objects */
@@ -322,6 +426,10 @@ public final class Viewport implements Parcelable {
 
     public boolean isJustADot() {
         return bottomLeft.equals(topRight);
+    }
+
+    public static boolean isValid(final Viewport viewport) {
+        return viewport != null && !viewport.isJustADot();
     }
 
     @Override

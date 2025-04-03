@@ -27,7 +27,10 @@ import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.oscim.core.BoundingBox;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public abstract class AbstractMapFragment extends Fragment {
     protected static final String BUNDLE_ZOOMLEVEL = "zoomlevel";
@@ -39,6 +42,50 @@ public abstract class AbstractMapFragment extends Fragment {
 
     protected AbstractTileProvider currentTileProvider;
     protected UnifiedMapViewModel viewModel;
+    private ViewportUpdater viewportUpdater;
+
+    private final class ViewportUpdater implements Runnable {
+
+        private static final int CHECK_RATE_MS = 250;
+        private static final int IDLE_STABLE_RATE_MS = 500;
+        private static final int IDLE_MOVING_RATE_MS = 1000;
+
+        private final Disposable disposable;
+        private Viewport lastViewport;
+        private Viewport lastIdleViewport;
+        private long viewportStableSince = -1;
+        private long lastIdleViewportTime;
+
+        @Override
+        public void run() {
+            final Viewport viewport = getViewport();
+            if (!Viewport.isValid(viewport)) {
+                return;
+            }
+            final long currentTime = System.currentTimeMillis();
+            //if viewport changed, then set it
+            if (!viewport.equals(lastViewport)) {
+                viewModel.viewport.postValue(viewport);
+                lastViewport = viewport;
+                viewportStableSince = currentTime;
+            }
+            //if viewport remained stable for some time OR a long time has passed then change it
+
+            if (!viewport.equals(lastIdleViewport) && ((currentTime - viewportStableSince > IDLE_STABLE_RATE_MS) || (currentTime - lastIdleViewportTime > IDLE_MOVING_RATE_MS))) {
+                viewModel.viewportIdle.postValue(viewport);
+                lastIdleViewport = viewport;
+                lastIdleViewportTime = currentTime;
+            }
+        }
+
+        private ViewportUpdater() {
+            this.disposable = Schedulers.newThread().schedulePeriodicallyDirect(this, 0, CHECK_RATE_MS, TimeUnit.MILLISECONDS);
+        }
+
+        public void destroy() {
+            this.disposable.dispose();
+        }
+    }
 
 
     public AbstractMapFragment(final @LayoutRes int contentLayoutId) {
@@ -87,6 +134,13 @@ public abstract class AbstractMapFragment extends Fragment {
             position = savedInstanceState.getParcelable(BUNDLE_POSITION);
             zoomLevel = savedInstanceState.getInt(BUNDLE_ZOOMLEVEL);
         }
+        viewportUpdater = new ViewportUpdater();
+    }
+
+    @Override
+    public void onDestroyView() {
+        viewportUpdater.destroy();
+        super.onDestroyView();
     }
 
     // ========================================================================
@@ -131,12 +185,17 @@ public abstract class AbstractMapFragment extends Fragment {
     public abstract Geopoint getCenter();
 
     @NonNull
-    public abstract BoundingBox getBoundingBox();
-
-    public Viewport getViewport() {
-        final BoundingBox bb = getBoundingBox();
-        return new Viewport(new Geopoint(bb.getMinLatitude(), bb.getMinLongitude()), new Geopoint(bb.getMaxLatitude(), bb.getMaxLongitude()));
+    public Viewport getViewportNonNull() {
+        final Viewport raw = getViewport();
+        return raw == null ? Viewport.EMPTY : raw;
     }
+
+    @Nullable
+    public abstract Viewport getViewport();
+//    {
+//        final BoundingBox bb = getBoundingBox();
+//        return new Viewport(new Geopoint(bb.getMinLatitude(), bb.getMinLongitude()), new Geopoint(bb.getMaxLatitude(), bb.getMaxLongitude()));
+//    }
 
     /** map "center" should be at app. 25% from bottom if in driving mode (if supported by map), centered otherwise */
     public void setDrivingMode(final boolean enabled) {

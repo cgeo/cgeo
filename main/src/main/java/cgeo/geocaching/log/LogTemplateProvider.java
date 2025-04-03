@@ -137,21 +137,34 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatFullDate(System.currentTimeMillis());
+                if (null != context.logEntry) {
+                    return Formatter.formatFullDate(context.logEntry.date);
+                } else {
+                    return Formatter.formatFullDate(System.currentTimeMillis());
+                }
             }
         });
         templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatTime(System.currentTimeMillis());
+                if (null != context.logEntry) {
+                    return Formatter.formatTime(context.logEntry.date);
+                } else {
+                    return Formatter.formatTime(System.currentTimeMillis());
+                }
             }
         });
         templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
             @Override
             public String getValue(final LogContext context) {
-                final long currentTime = System.currentTimeMillis();
+                final long currentTime;
+                if (null != context.logEntry) {
+                    currentTime = context.logEntry.date;
+                } else {
+                    currentTime = System.currentTimeMillis();
+                }
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
@@ -159,7 +172,11 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatDayOfWeek(System.currentTimeMillis());
+                if (null != context.logEntry) {
+                    return Formatter.formatDayOfWeek(context.logEntry.date);
+                } else {
+                    return Formatter.formatDayOfWeek(System.currentTimeMillis());
+                }
             }
         });
         templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {

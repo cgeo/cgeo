@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -97,7 +98,10 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
 
     @Override
     protected String toVisibleFilename(final String filename) {
-        return toInfixedString(CompanionFileUtils.getDisplayName((filename.startsWith("Freizeitkarte_") ? filename.substring(14) : filename).toLowerCase(Locale.getDefault())), " (FZK)");
+        if (Settings.getMapDownloaderAutoRename()) {
+            return toInfixedString(CompanionFileUtils.getDisplayName((filename.startsWith("Freizeitkarte_") ? filename.substring(14) : filename).toLowerCase(Locale.getDefault())), " (FZK)");
+        }
+        return filename;
     }
 
     @Override

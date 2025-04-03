@@ -35,6 +35,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ import java.util.Map;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.BiConsumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
@@ -346,19 +348,22 @@ public final class ConnectorFactory {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 
-    /**
-     * @see ISearchByViewPort#searchByViewport
-     */
-    @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return searchByViewport(viewport, null);
-    }
-
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
-        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport, filter));
         AmendmentUtils.amendCachesForViewport(result, viewport, filter);
         return result;
+    }
+
+    public static void searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter, @NonNull final BiConsumer<IConnector, SearchResult> callback) {
+        SearchResult.parallelCombineActive(searchByViewPortConns, connector -> {
+            Log.iForce("ConnectorFactory: START request for " + connector.getName());
+            final long startTs = System.currentTimeMillis();
+            final SearchResult sr = connector.searchByViewport(viewport, filter);
+            AmendmentUtils.amendCachesForViewport(sr, viewport, filter);
+            Log.iForce("ConnectorFactory: END request for " + connector.getName() + " (" + (System.currentTimeMillis() - startTs) + "ms)");
+            return sr;
+        }, callback::accept);
     }
 
     @Nullable

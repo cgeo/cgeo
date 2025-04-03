@@ -1,55 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_waypoint_reset_cache_coords"
-        android:title="@string/waypoint_reset_cache_coords">
-    </item>
+        android:title="@string/waypoint_reset_cache_coords"/>
     <item
         android:id="@+id/menu_waypoint_edit"
-        android:title="@string/waypoint_edit">
-    </item>
+        android:title="@string/waypoint_edit"/>
+    <item
+        android:id="@+id/menu_waypoint_geofence"
+        android:title="@string/waypoint_geofence"/>
     <item
         android:id="@+id/menu_waypoint_visited"
-        android:title="@string/waypoint_visited">
-    </item>
+        android:title="@string/waypoint_visited"/>
     <item
         android:id="@+id/menu_waypoint_copy_coordinates"
-        android:title="@string/waypoint_copy_coordinates">
-    </item>
+        android:title="@string/waypoint_copy_coordinates"/>
     <item
         android:id="@+id/menu_waypoint_clear_coordinates"
-        android:title="@string/waypoint_clear_coordinates">
-    </item>
+        android:title="@string/waypoint_clear_coordinates"/>
     <item
         android:id="@+id/menu_waypoint_duplicate"
-        android:title="@string/waypoint_duplicate">
-    </item>
+        android:title="@string/waypoint_duplicate"/>
     <item
         android:id="@+id/menu_waypoint_toclipboard"
         android:title="@string/waypoint_toclipboard"
-        android:visible="false">
-    </item>
+        android:visible="false"/>
     <item
         android:id="@+id/menu_waypoint_delete"
-        android:title="@string/waypoint_delete">
-    </item>
+        android:title="@string/waypoint_delete"/>
     <item
         android:id="@+id/menu_waypoint_navigate_default"
-        android:title="@null">
-    </item>
+        android:title="@null"/>
     <item
         android:id="@+id/menu_waypoint_navigate"
-        android:title="@string/cache_menu_navigate">
-    </item>
+        android:title="@string/cache_menu_navigate"/>
     <item
         android:id="@+id/menu_waypoint_caches_around"
-        android:title="@string/cache_menu_around">
-    </item>
+        android:title="@string/cache_menu_around"/>
     <item
         android:id="@+id/menu_waypoint_open_geochecker"
-        android:title="@string/waypoint_open_geochecker">
-    </item>
+        android:title="@string/waypoint_open_geochecker"/>
 
 </menu>

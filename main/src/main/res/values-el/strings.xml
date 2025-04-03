@@ -267,7 +267,6 @@
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
     <string name="info_log_post_failed">Η καταχώρηση αρχείου καταγραφής απέτυχε.</string>
-    <string name="info_log_post_failed_reason">Αιτία: %s</string>
     <string name="info_log_post_retry">Επανάληψη</string>
     <string name="info_log_post_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
@@ -349,7 +348,6 @@
     <string name="caches_sort_geocode">Γεωκωδικός</string>
     <string name="caches_sort_rating">Βαθμολογία</string>
     <string name="caches_sort_vote">Ψηφίστε (δικη σας)</string>
-    <string name="caches_sort_inventory">Καταμέτρηση αποθέματος</string>
     <string name="caches_sort_date_hidden">Ημερομηνία απόκρυψης</string>
     <string name="caches_sort_finds">Ευρέσεις</string>
     <string name="caches_sort_state">Κατάσταση</string>
@@ -877,12 +875,8 @@
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
-    <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
-    <string name="init_circlefillcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια των κύκλων</string>
     <string name="init_accuracycirclecolor">Χρώμα γραμμής κύκλου ακριβείας</string>
     <string name="init_accuracycirclecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την ακρίβεια γραμμή κύκλου. Ο κύκλος ακρίβειας χρησιμοποιείται ως οπτική αναπαράσταση για την ακρίβεια του σήματος τοποθεσίας.</string>
-    <string name="init_accuracycirclefillcolor">Χρώμα γεμίσματος κύκλου ακρίβειας</string>
-    <string name="init_accuracycirclefillcolor_summary">Επιλέξτε αδιαφάνεια και χρώμα γεμίσματος, των κύκλων ακρίβειας</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
     <string name="init_summary_trackautovisit">Ορίστε προεπιλογή \"επίσκεψη\" στα ανιχνεύσιμα</string>
@@ -956,7 +950,6 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
-    <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
     <string name="localstorage_migrate_status_major">Έκδοση %1$d</string>
     <!-- proximity notification -->
@@ -1225,7 +1218,6 @@
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
-    <string name="cache_status_attended">Συμμετείχα</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
@@ -1294,7 +1286,6 @@
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
     <string name="create_internal_cache_short">Νέα κρύπτη</string>
     <string name="create_internal_cache_currentlist">Χρήση τρέχουσας λίστας</string>
-    <string name="internal_cache_default_name">Κρύπτη ορισμένη από τον χρήστη #%1$d</string>
     <string name="internal_cache_default_description">Αυτή είναι μια user-defined κρύπτη</string>
     <string name="internal_cache_default_owner">Εσείς</string>
     <string name="internal_goto_targets_title">\'Πήγαινε σε\' σημεία</string>
@@ -1304,6 +1295,7 @@
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
+    <string name="internal_connector_name">Κρύπτες ορισμένες από τον χρήστη</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Μοίρες</string>
@@ -1394,7 +1386,6 @@
     <string name="calccoord_guided_value">Τιμή</string>
     <string name="calccoord_convert_to_plain">Μετατροπή σε απλή Συντεταγμένη</string>
     <string name="calccoord_plain_tools_title">Απλά Εργαλεία</string>
-    <string name="calccoord_remove_spaces">Αφαίρεση καινών</string>
     <string name="calccoord_paste_from_clipboard">Επικόλληση από το πρόχειρο</string>
     <string name="calccoord_generate_title">Δημιουργία Σημείων Πορείας</string>
     <string name="calccoord_generate_showonmap">Εμφάνιση στο χάρτη</string>
@@ -1488,7 +1479,6 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
-    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -1509,7 +1499,6 @@
     <string name="search_finder">Βρέθηκε από</string>
     <string name="search_finder_prefill">Το βρήκε</string>
     <string name="search_finder_button">Αναζήτηση με το όνομα του παίκτη</string>
-    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
@@ -1519,7 +1508,6 @@
     <string name="add_target_to">Προσθήκη στόχου σε</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
-    <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
     <string name="search_pocket_title">Προσωπική Αναζήτηση</string>
     <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
     <string name="search_pocket_is_new">νέο</string>
@@ -1598,7 +1586,6 @@
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
-    <string name="helper_where_you_go_description">Το WhereYouGo επιτρέπει την αναζήτηση κρυπτών του τύπου Wherigo, Το c:geo αυτόματα ενεργοποιεί τη φόρτωση των cartridges μέσα στην εφαρμογή.</string>
     <string name="helper_chirpwolf_description">Το Chirp Wolf σας επιτρέπει να διαβάσετε δεδομένα από ANT+/Garmin chirp ταμπέλες, οι οποιες χρειάζονται για κρύπτες ANT+/chirp.</string>
     <string name="helper_alc_description">Adventure Lab Player app για το τηλέφωνο ή το tablet σας.</string>
     <string name="helper_gcwizard_description">GC Wizard περιέχει πολλά εργαλεία για απλή κρυπτογραφία, γεωδαιτικούς και επιστημονικούς υπολογισμούς, καθώς και εκατοντάδες σύνολα διαφόρων συμβόλων.</string>
@@ -1660,9 +1647,7 @@
     <string name="attribute_climbing_yes">Δύσκολο σκαρφάλωμα</string>
     <string name="attribute_climbing_no">Χωρίς δύσκολο σκαρφάλωμα</string>
     <string name="attribute_wading_yes">Μπορεί να χρειαστεί να μπείτε στο νερό</string>
-    <string name="attribute_wading_no">Δεν χρειάζεται να μπείτε στο νερό</string>
     <string name="attribute_swimming_yes">Μπορεί να χρειαστεί κολύμπι</string>
-    <string name="attribute_swimming_no">Δεν χρειάζεται κολύμπι</string>
     <string name="attribute_available_yes">Διαθέσιμο κάθε στιγμή</string>
     <string name="attribute_available_no">Μη διαθέσιμο κάθε στιγμή</string>
     <string name="attribute_night_yes">Συνιστάται το βράδυ</string>
@@ -1672,7 +1657,6 @@
     <string name="attribute_stealth_yes">Απαιτείται διακριτικότητα</string>
     <string name="attribute_stealth_no">Δεν απαιτείται διακριτικότητα</string>
     <string name="attribute_firstaid_yes">Χρειάζεται συντήρηση</string>
-    <string name="attribute_firstaid_no">Δεν χρειάζεται συντήρηση</string>
     <string name="attribute_cow_yes">Προσοχή στα ζώα</string>
     <string name="attribute_cow_no">Δεν έχει ζώα κοντά</string>
     <string name="attribute_field_puzzle_yes">Γρίφος πεδίου</string>
@@ -1702,49 +1686,32 @@
     <string name="attribute_partnership_yes">Συνεταιρική κρύπτη</string>
     <string name="attribute_partnership_no">Μη συνεταιρική κρύπτη</string>
     <string name="attribute_fee_yes">Πρόσβαση ή στάθμευση με χρέωση</string>
-    <string name="attribute_fee_no">Πρόσβαση ή στάθμευση χωρίς χρέωση</string>
     <string name="attribute_rappelling_yes">Απαιτείται αναρριχητικός εξοπλισμός</string>
-    <string name="attribute_rappelling_no">Δεν απαιτείται αναρριχητικός εξοπλισμός</string>
     <string name="attribute_boat_yes">Απαιτείται σκάφος</string>
-    <string name="attribute_boat_no">Δεν απαιτείται σκάφος</string>
     <string name="attribute_scuba_yes">Απαιτείται καταδυτικός εξοπλισμός</string>
-    <string name="attribute_scuba_no">Δεν απαιτείται καταδυτικός εξοπλισμός</string>
     <string name="attribute_flashlight_yes">Φακός απαραίτητος</string>
-    <string name="attribute_flashlight_no">Φακός μη απαραίτητος</string>
     <string name="attribute_uv_yes">Υπεριώδης φακός απαραίτητος</string>
     <string name="attribute_uv_no">Υπεριώδης φακός μη απαραίτητος</string>
     <string name="attribute_snowshoes_yes">Χιονοπάπουτσα απαραίτητα</string>
-    <string name="attribute_snowshoes_no">Χιονοπάπουτσα μη απαραίτητα</string>
     <string name="attribute_skiis_yes">Ορειβατικά σκι απαραίτητα</string>
-    <string name="attribute_skiis_no">Ορειβατικά σκι μη απαραίτητα</string>
     <string name="attribute_s_tool_yes">Ειδικά εργαλεία απαραίτητα</string>
-    <string name="attribute_s_tool_no">Ειδικά εργαλεία μη απαραίτητα</string>
     <string name="attribute_wirelessbeacon_yes">Ασύρματος ραδιοφάρος</string>
-    <string name="attribute_wirelessbeacon_no">Όχι ασύρματος ραδιοφάρος</string>
     <string name="attribute_treeclimbing_yes">Απαραίτητο το σκαρφάλωμα σε δένδρο</string>
     <string name="attribute_treeclimbing_no">Μη απαραίτητο το σκαρφάλωμα σε δένδρο</string>
     <string name="attribute_poisonoak_yes">Δηλητηριώδη φυτά</string>
     <string name="attribute_poisonoak_no">Μη δηλητηριώδη φυτά</string>
     <string name="attribute_dangerousanimals_yes">Επικίνδυνα ζώα</string>
-    <string name="attribute_dangerousanimals_no">Μη επικίνδυνα ζώα</string>
     <string name="attribute_ticks_yes">Τσιμπούρια</string>
-    <string name="attribute_ticks_no">Χωρίς τσιμπούρια</string>
     <string name="attribute_mine_yes">Εγκαταλελειμμένα ορυχεία</string>
-    <string name="attribute_mine_no">Δεν υπάρχουν εγκαταλελειμμένα ορυχεία</string>
     <string name="attribute_cliff_yes">Γκρεμός / πτώσεις βράχων</string>
-    <string name="attribute_cliff_no">Δεν υπάρχει γκρεμός / πτώσεις βράχων</string>
     <string name="attribute_hunting_yes">Κυνήγι</string>
-    <string name="attribute_hunting_no">Απαγορεύεται το κυνήγι</string>
     <string name="attribute_danger_yes">Επικίνδυνη περιοχή</string>
-    <string name="attribute_danger_no">Μη επικίνδυνη περιοχή</string>
     <string name="attribute_thorn_yes">Αγκάθια</string>
-    <string name="attribute_thorn_no">Χωρίς αγκάθια</string>
     <string name="attribute_wheelchair_yes">Προσβάσιμη με αναπηρική καρέκλα</string>
     <string name="attribute_wheelchair_no">Μη προσβάσιμη με αναπηρική καρέκλα</string>
     <string name="attribute_parking_yes">Διαθέτει χώρο στάθμευσης</string>
     <string name="attribute_parking_no">Δεν διαθέτει χώρο στάθμευσης</string>
     <string name="attribute_public_yes">Δημόσιες συγκοινωνίες</string>
-    <string name="attribute_public_no">Χωρίς δημόσιες συγκοινωνίες</string>
     <string name="attribute_water_yes">Κοντά σε πόσιμο νερό</string>
     <string name="attribute_water_no">Δεν υπάρχει πόσιμο νερό κοντά</string>
     <string name="attribute_restrooms_yes">Κοντά σε δημόσιες τουαλέτες</string>
@@ -1856,13 +1823,9 @@
     <string name="attribute_offset_cache_yes">Μετατοπισμένη κρύπτη</string>
     <string name="attribute_offset_cache_no">Μη μετατοπισμένη κρύπτη</string>
     <string name="attribute_bonuscache_yes">Κρύπτη Δώρο</string>
-    <string name="attribute_bonuscache_no">Χωρίς Κρύπτη Δώρο</string>
     <string name="attribute_powertrail_yes">Τμήμα ενός power trail</string>
-    <string name="attribute_powertrail_no">Δεν είναι τμήμα ενός power trail</string>
     <string name="attribute_challengecache_yes">Κρύπτη Challenge</string>
-    <string name="attribute_challengecache_no">Δεν είναι Κρύπτη Challenge</string>
     <string name="attribute_hqsolutionchecker_yes">Ενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
-    <string name="attribute_hqsolutionchecker_no">Απενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
     <string name="attribute_handicaching_yes">Αξιολογημένο στο Handicaching.com</string>
     <string name="attribute_handicaching_no">Μη αξιολογημένο στο Handicaching.com</string>
     <string name="attribute_munzee_yes">Περιέχει ένα Munzee</string>
@@ -2026,12 +1989,9 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
-    <string name="map_export_individual_route">Εξαγωγή μεμονωμένης διαδρομής</string>
-    <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
     <string name="map_disable_autotarget_individual_route">Ορισμός Εναρξης διαδρομής ως \'στόχο\' απενεργοποιημένη</string>
-    <string name="map_clear_manual_targets">Εκκαθάριση χειροκίνητων στόχων</string>
     <string name="map_manual_targets_cleared">Έγινε εκκαθάριση των χειροκίνητων στόχων</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>

@@ -272,7 +272,6 @@
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
     <string name="info_log_saved">c:geo úspešne uložilo log.</string>
     <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
-    <string name="info_log_post_failed_reason">Dôvod: %s</string>
     <string name="info_log_post_retry">Opakovať</string>
     <string name="info_log_post_save">Uložiť offline</string>
     <string name="info_log_cleared">Log bol vyprázdnený.</string>
@@ -374,7 +373,6 @@
     <string name="caches_sort_geocode">Geokód</string>
     <string name="caches_sort_rating">hodnotenia</string>
     <string name="caches_sort_vote">vlastného hodnotenia</string>
-    <string name="caches_sort_inventory">počtu položiek v skrýši</string>
     <string name="caches_sort_date_hidden">dátumu skrytia</string>
     <string name="caches_sort_finds">počtu nájdení</string>
     <string name="caches_sort_state">stavu</string>
@@ -944,12 +942,8 @@
     <string name="init_trackappearance_summary">Vyberte farbu., nepriehľadnosť a šírku čiary stopy/trasy. Stopa/trasa pozostáva z viacerých bodov a možno ju načítať cez súbor GPX pre stopu/trasu.</string>
     <string name="init_circlecolor">Farba linky kruhu</string>
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
-    <string name="init_circlefillcolor">Farba výplne kruhu</string>
-    <string name="init_circlefillcolor_summary">Vyberte farbu a priehľadnosť vyplnenia kruhu</string>
     <string name="init_accuracycirclecolor">Farba čiary kruhu presnosti</string>
     <string name="init_accuracycirclecolor_summary">Vyberte farbu a priehľadnosť pre čiaru kruhu presnosti. Kruh presnosti sa používa ako vizuálna reprezentácia presnosti signálu polohy.</string>
-    <string name="init_accuracycirclefillcolor">Farba výplne kruhu presnosti</string>
-    <string name="init_accuracycirclefillcolor_summary">Vyberte farbu a priehľadnosť výplne kruhov presnosti</string>
     <string name="init_include_found_status">Zahrnúť stav \"Nájdené\"</string>
     <string name="init_trackautovisit">Návšteva TB</string>
     <string name="init_summary_trackautovisit">Nastaviť trasovateľné predmety (trackables) automaticky na „navštívené“</string>
@@ -1025,7 +1019,6 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
-    <string name="init_title_useUnifiedMap">Použiť zjednotenú mapu</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
     <string name="localstorage_migrate_status_major">Verzia %1$d</string>
     <!-- proximity notification -->
@@ -1316,7 +1309,6 @@
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Uložený log</string>
-    <string name="cache_status_attended">Zúčastnil/a sa</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
     <string name="cache_status_archived">Archivovaná</string>
@@ -1391,7 +1383,6 @@
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použiť aktuálny zoznam</string>
-    <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
@@ -1403,6 +1394,7 @@
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
+    <string name="internal_connector_name">Interné kešky</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupne</string>
@@ -1495,7 +1487,6 @@
     <string name="calccoord_guided_value">Hodnota</string>
     <string name="calccoord_convert_to_plain">Prevod na obyčajné súradnice</string>
     <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
-    <string name="calccoord_remove_spaces">Odstrániť medzery</string>
     <string name="calccoord_paste_from_clipboard">Vložiť zo schránky</string>
     <string name="calccoord_generate_title">Generovať body trasy</string>
     <string name="calccoord_generate_showonmap">Zobraziť na mape</string>
@@ -1590,7 +1581,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
-    <string name="google_maps_option_group_theme">Nastavenia Témy</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
@@ -1611,7 +1601,6 @@
     <string name="search_finder">Nájdené kým</string>
     <string name="search_finder_prefill">Nálezca</string>
     <string name="search_finder_button">Hľadať podľa mena nálezcu</string>
-    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>
@@ -1621,7 +1610,6 @@
     <string name="add_target_to">Pridať cieľ do</string>
     <string name="search_address_started">Vyhľadávanie miest</string>
     <string name="search_address_result">Nájdené miesta</string>
-    <string name="search_own_caches">Hľadať v mojich skrýšach</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Zoznam záložiek</string>
     <string name="search_pocket_is_new">nové</string>
@@ -1700,7 +1688,6 @@
     <string name="helper_gps_locker_description">Zámok GPS udržiava signál GPS aktívny pri prechádzaní medzi aplikáciami a pri zhasnutej obrazovke zariadenia.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
-    <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umožňuje čítať údaje z chirp tagov ANT+/Garmin, ktoré sú potrebné pre kešky ANT+/chirp.</string>
     <string name="helper_alc_description">Aplikácia Adventure Lab pre váš telefón alebo tablet.</string>
     <string name="helper_gcwizard_description">Aplikácia GC Wizard obsahuje množstvo nástrojov na jednoduché šifrovanie, geodéziu a vedecké výpočty, ako aj stovky setov rôznych symbolov.</string>
@@ -1764,9 +1751,7 @@
     <string name="attribute_climbing_yes">Náročný výstup</string>
     <string name="attribute_climbing_no">Nie je náročný výstup</string>
     <string name="attribute_wading_yes">Môže vyžadovať brodenie</string>
-    <string name="attribute_wading_no">Nemusí vyžadovať brodenie</string>
     <string name="attribute_swimming_yes">Môže vyžadovať plávanie</string>
-    <string name="attribute_swimming_no">Nemusí vyžadovať plávanie</string>
     <string name="attribute_available_yes">Dostupné kedykoľvek</string>
     <string name="attribute_available_no">Nie je dostupné kedykoľvek</string>
     <string name="attribute_night_yes">Odporúčané v noci</string>
@@ -1776,7 +1761,6 @@
     <string name="attribute_stealth_yes">Vyžadované nenápadné hľadanie</string>
     <string name="attribute_stealth_no">Nie je vyžadované nenápadné hľadanie</string>
     <string name="attribute_firstaid_yes">Potrebuje údržbu</string>
-    <string name="attribute_firstaid_no">Nepotrebuje údržbu</string>
     <string name="attribute_cow_yes">Pozor na dobytok</string>
     <string name="attribute_cow_no">Bez dobytku</string>
     <string name="attribute_field_puzzle_yes">Puzzle na mieste</string>
@@ -1806,49 +1790,32 @@
     <string name="attribute_partnership_yes">Partnerská cache</string>
     <string name="attribute_partnership_no">Nie je \"Partnerská cache\"</string>
     <string name="attribute_fee_yes">Poplatok za vstup alebo parkovanie</string>
-    <string name="attribute_fee_no">Bez poplatku za vstup alebo parkovanie</string>
     <string name="attribute_rappelling_yes">Vyžadované lezecké vybavenie</string>
-    <string name="attribute_rappelling_no">Nie je vyžadované lezecké vybavenie</string>
     <string name="attribute_boat_yes">Vyžadovaná loď</string>
-    <string name="attribute_boat_no">Nie je vyžadovaná loď</string>
     <string name="attribute_scuba_yes">Vyžadované potápačské vybavenie</string>
-    <string name="attribute_scuba_no">Nie je vyžadované potápačské vybavenie</string>
     <string name="attribute_flashlight_yes">Vyžadovaná baterka</string>
-    <string name="attribute_flashlight_no">Nie je vyžadovaná baterka</string>
     <string name="attribute_uv_yes">Vyžadovaná UV lampa </string>
     <string name="attribute_uv_no">Nie je vyžadovaná UV lampa</string>
     <string name="attribute_snowshoes_yes">Vyžadované snežnice</string>
-    <string name="attribute_snowshoes_no">Nie sú vyžadované snežnice</string>
     <string name="attribute_skiis_yes">Vyžadované bežecké lyže</string>
-    <string name="attribute_skiis_no">Nie sú vyžadované bežecké lyže</string>
     <string name="attribute_s_tool_yes">Vyžadované špeciálne nástroje</string>
-    <string name="attribute_s_tool_no">Nie sú vyžadované špeciálne nástroje</string>
     <string name="attribute_wirelessbeacon_yes">Bezdrôtový maják</string>
-    <string name="attribute_wirelessbeacon_no">Bez bezdrôtového majáku</string>
     <string name="attribute_treeclimbing_yes">Vyžadované šplhanie na strom</string>
     <string name="attribute_treeclimbing_no">Nie je vyžadované šplhanie na strom</string>
     <string name="attribute_poisonoak_yes">Jedovaté rastliny</string>
     <string name="attribute_poisonoak_no">Bez jedovatých rastlín</string>
     <string name="attribute_dangerousanimals_yes">Nebezpečné zvieratá</string>
-    <string name="attribute_dangerousanimals_no">Bez nebezpečných zvierat</string>
     <string name="attribute_ticks_yes">Kliešte</string>
-    <string name="attribute_ticks_no">Bez kliešťov</string>
     <string name="attribute_mine_yes">Opustené míny</string>
-    <string name="attribute_mine_no">Bez opustených mín</string>
     <string name="attribute_cliff_yes">Útes/padajúce skaly</string>
-    <string name="attribute_cliff_no">Bez útesu/padajúcich skál</string>
     <string name="attribute_hunting_yes">Oblasť pre lov</string>
-    <string name="attribute_hunting_no">Nie je oblasťou pre lov</string>
     <string name="attribute_danger_yes">Nebezpečné územie</string>
-    <string name="attribute_danger_no">Nie je nebezpečné územie</string>
     <string name="attribute_thorn_yes">Tŕne</string>
-    <string name="attribute_thorn_no">Bez tŕňov</string>
     <string name="attribute_wheelchair_yes">Prístupné pre vozíčkarov</string>
     <string name="attribute_wheelchair_no">Neprístupné pre vozíčkarov</string>
     <string name="attribute_parking_yes">Dostupné parkovanie</string>
     <string name="attribute_parking_no">Bez dostupného parkovania</string>
     <string name="attribute_public_yes">Verejná doprava</string>
-    <string name="attribute_public_no">Bez verejnej dopravy</string>
     <string name="attribute_water_yes">Neďaleko dostupná pitná voda</string>
     <string name="attribute_water_no">Bez pitnej vody</string>
     <string name="attribute_restrooms_yes">Neďaleko dostupné verejné záchody</string>
@@ -1960,13 +1927,9 @@
     <string name="attribute_offset_cache_yes">Offset keška</string>
     <string name="attribute_offset_cache_no">Nie je offset cache</string>
     <string name="attribute_bonuscache_yes">Bonusová keška</string>
-    <string name="attribute_bonuscache_no">Nie bonusová keška</string>
     <string name="attribute_powertrail_yes">Časť powertrailu</string>
-    <string name="attribute_powertrail_no">Nie časť powetrailu</string>
     <string name="attribute_challengecache_yes">Challenge keška</string>
-    <string name="attribute_challengecache_no">Nie challenge keška</string>
     <string name="attribute_hqsolutionchecker_yes">Overovač na geocaching.com povolený</string>
-    <string name="attribute_hqsolutionchecker_no">Overovač na geocaching.com zakázaný</string>
     <string name="attribute_handicaching_yes">Hodnotené na Handicaching.com</string>
     <string name="attribute_handicaching_no">Nehodnotené na Handicaching.com</string>
     <string name="attribute_munzee_yes">Obsahuje Munzee</string>
@@ -2167,12 +2130,9 @@
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
     <string name="map_refresh_individual_route">Obnoviť</string>
-    <string name="map_export_individual_route">Exportovať individuálnu trasu</string>
-    <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
     <string name="map_disable_autotarget_individual_route">Funkcia \"Nastaviť začiatok trasy ako cieľ\" vypnutá</string>
-    <string name="map_clear_manual_targets">Vymazať ručné ciele</string>
     <string name="map_manual_targets_cleared">Ručné ciele vymazané</string>
     <string name="map_clear_individual_route">Vymazať individuálnu trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete zo svojej indiviulduálnej trasy odstrániť všetky kešky/body trasy?</string>

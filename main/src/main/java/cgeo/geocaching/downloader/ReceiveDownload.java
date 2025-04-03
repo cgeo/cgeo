@@ -103,7 +103,8 @@ class ReceiveDownload {
     }
 
     // try to guess a filename, otherwise chose randomized filename
-    private boolean guessFilename(final String preset) {
+    private boolean guessFilename(final String preset1) {
+        final String preset = StringUtils.isNotBlank(preset1) ? preset1 : ContentStorage.get().getName(uri);
         filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
         if (filename != null) {
             filename = FileUtils.getFilenameFromPath(filename);
@@ -122,6 +123,16 @@ class ReceiveDownload {
 
     private Worker.Result handleMapFile(final Context context, final NotificationManagerCompat notificationManager, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification,
                                final boolean isZipFile, final String nameWithinZip) {
+        // try to preserve displayName (if download supports that)
+        String displayName = "";
+        if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
+            final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapTypeId);
+            final CompanionFileUtils.DownloadedFileData old = downloader == null ? null : CompanionFileUtils.readData(downloader.targetFolder.getFolder(), filename + CompanionFileUtils.INFOFILE_SUFFIX);
+            if (old != null && StringUtils.isNotBlank(old.displayName)) {
+                displayName = old.displayName;
+            }
+        }
+
         cleanupFolder();
 
         Worker.Result resultId = Worker.Result.failure();
@@ -144,7 +155,7 @@ class ReceiveDownload {
             case SUCCESS:
                 resultMsg = String.format(context.getString(R.string.receivedownload_success), fileinfo);
                 if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
-                    CompanionFileUtils.writeInfo(sourceURL, filename, CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
+                    CompanionFileUtils.writeInfo(sourceURL, filename, StringUtils.isNotBlank(displayName) ? displayName : CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                 }
                 TileProviderFactory.buildTileProviderList(true);
                 resultId = Worker.Result.success();

@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.InventoryCountFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
 import cgeo.geocaching.filters.core.LocationGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
@@ -47,6 +48,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -156,6 +158,8 @@ public class GeocacheFilterTest {
         assertThat(filterFromJson.getName()).isEqualTo(filter.getName());
         assertThat(filterFromJson.isIncludeInconclusive()).isEqualTo(filter.isIncludeInconclusive());
         assertThat(filterFromJson.isOpenInAdvancedMode()).isEqualTo(filter.isOpenInAdvancedMode());
+        assertThat(filterFromJson.isFiltering()).isEqualTo(filter.isFiltering());
+        assertThat(filterFromJson.toUserDisplayableString()).isEqualTo(filter.toUserDisplayableString());
 
         //legacy
         assertThat(LegacyFilterConfig.toLegacyConfig(filterFromJson)).isEqualTo(LegacyFilterConfig.toLegacyConfig(filter));
@@ -257,8 +261,20 @@ public class GeocacheFilterTest {
             case TIER:
                 ((TierGeocacheFilter) filter).setValues(Arrays.asList(Tier.BC_BLUE, Tier.BC_GOLD));
                 break;
+            case INVENTORY_COUNT:
+                ((InventoryCountFilter) filter).setRangeFromValues(Arrays.asList(), 1, 10);
+                break;
+            case DIFFICULTY:
+            case TERRAIN:
+            case INDIVIDUAL_ROUTE:
+            case NAMED_FILTER:
+            case LOGICAL_FILTER_GROUP:
+            case LIST_ID:
+            case VIEWPORT:
+                // nothing to do
+                break;
             default:
-                //do nothing
+                Assert.fail(String.format("Filter %s missing", type.getTypeId()));
                 break;
         }
         return filter;

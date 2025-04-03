@@ -423,5 +423,9 @@ public abstract class AbstractConnector implements IConnector {
         return getName().hashCode();
     }
 
-
+    @Override
+    @NonNull
+    public String getDisplayName() {
+        return getName();
+    }
 }

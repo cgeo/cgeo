@@ -255,7 +255,6 @@
     <string name="info_log_posted">成功發布日誌</string>
     <string name="info_log_saved">成功儲存日誌。</string>
     <string name="info_log_post_failed">發布日誌失敗</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重試</string>
     <string name="info_log_post_save">離線儲存</string>
     <string name="info_log_cleared">已清除日誌</string>
@@ -318,7 +317,6 @@
     <string name="caches_sort_name">应用名</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票</string>
-    <string name="caches_sort_inventory">存貨數量</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
@@ -693,7 +691,6 @@
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_circlecolor">圓邊框顏色</string>
-    <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">造訪TBs</string>
     <string name="init_summary_trackautovisit">預設是把旅行蟲設定成已拜訪</string>
@@ -968,7 +965,6 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
-    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -1013,7 +1009,6 @@
     <string name="create_internal_cache">建立玩家自訂cache</string>
     <string name="create_internal_cache_short">新的cache</string>
     <string name="create_internal_cache_currentlist">使用目前的列表</string>
-    <string name="internal_cache_default_name">玩家自訂的寶藏 #%1$d</string>
     <string name="internal_cache_default_description">這是玩家自訂cache</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">來去目標</string>
@@ -1021,6 +1016,7 @@
     <string name="goto_targets_list">玩家自訂cache</string>
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
+    <string name="internal_connector_name">玩家自訂cache</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">角度</string>
@@ -1117,7 +1113,6 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
@@ -1129,7 +1124,6 @@
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
-    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_tb_hint">旅行蟲識別</string>
     <string name="search_tb_button">搜尋旅行蟲</string>
@@ -1137,7 +1131,6 @@
     <string name="add_target_to">新增目標到</string>
     <string name="search_address_started">搜尋位置</string>
     <string name="search_address_result">找到的地點</string>
-    <string name="search_own_caches">搜尋我的cache</string>
     <string name="search_bookmark_list">書籤列表</string>
     <string name="search_pocket_is_new">新的</string>
     <!-- trackable -->
@@ -1246,9 +1239,7 @@
     <string name="attribute_climbing_yes">困難的攀爬</string>
     <string name="attribute_climbing_no">不困難的攀爬</string>
     <string name="attribute_wading_yes">可能需要涉水</string>
-    <string name="attribute_wading_no">可能不需要涉水</string>
     <string name="attribute_swimming_yes">可能需要游泳</string>
-    <string name="attribute_swimming_no">可能不需要游泳</string>
     <string name="attribute_available_yes">隨時都可找</string>
     <string name="attribute_available_no">有時間限制的</string>
     <string name="attribute_night_yes">適合夜間</string>
@@ -1256,7 +1247,6 @@
     <string name="attribute_winter_yes">冬季才開放</string>
     <string name="attribute_winter_no">冬季不開放</string>
     <string name="attribute_firstaid_yes">需要維護</string>
-    <string name="attribute_firstaid_no">不需要維護</string>
     <string name="attribute_cow_yes">注意動物</string>
     <string name="attribute_field_puzzle_yes">實地解謎</string>
     <string name="attribute_field_puzzle_no">無實地解謎</string>
@@ -1281,44 +1271,30 @@
     <string name="attribute_teamwork_yes">需要團隊合作</string>
     <string name="attribute_teamwork_no">不需要團隊合作</string>
     <string name="attribute_fee_yes">過路費或停車費</string>
-    <string name="attribute_fee_no">不需過路費或停車費</string>
     <string name="attribute_rappelling_yes">需要攀登器材</string>
-    <string name="attribute_rappelling_no">不需要攀登器材</string>
     <string name="attribute_boat_yes">需要船</string>
-    <string name="attribute_boat_no">不需要船</string>
     <string name="attribute_scuba_yes">需要潛水用具</string>
-    <string name="attribute_scuba_no">不需要潛水用具</string>
     <string name="attribute_flashlight_yes">需要手電筒</string>
-    <string name="attribute_flashlight_no">不需要手電筒</string>
     <string name="attribute_uv_yes">需要紫外光手電筒</string>
     <string name="attribute_uv_no">不需要紫外光手電筒</string>
     <string name="attribute_snowshoes_yes">需要雪靴</string>
-    <string name="attribute_snowshoes_no">不需要雪靴</string>
     <string name="attribute_s_tool_yes">需要特殊工具</string>
-    <string name="attribute_s_tool_no">不需要特殊工具</string>
     <string name="attribute_treeclimbing_yes">需爬樹</string>
     <string name="attribute_treeclimbing_no">不需要爬樹</string>
     <string name="attribute_poisonoak_yes">有毒植物</string>
     <string name="attribute_poisonoak_no">無有毒植物</string>
     <string name="attribute_dangerousanimals_yes">危險的動物</string>
-    <string name="attribute_dangerousanimals_no">沒有危險的動物</string>
     <string name="attribute_ticks_yes">蜱蟲</string>
     <string name="attribute_mine_yes">廢棄礦坑</string>
-    <string name="attribute_mine_no">不是廢棄礦坑</string>
     <string name="attribute_cliff_yes">懸崖 / 落石</string>
-    <string name="attribute_cliff_no">無懸崖/落石</string>
     <string name="attribute_hunting_yes">狩獵</string>
-    <string name="attribute_hunting_no">不可狩獵</string>
     <string name="attribute_danger_yes">危險區域</string>
-    <string name="attribute_danger_no">不是危險區域</string>
     <string name="attribute_thorn_yes">有刺植物</string>
-    <string name="attribute_thorn_no">不是有刺植物</string>
     <string name="attribute_wheelchair_yes">可通行輪椅</string>
     <string name="attribute_wheelchair_no">不可通行輪椅</string>
     <string name="attribute_parking_yes">可停車的</string>
     <string name="attribute_parking_no">不可停車的</string>
     <string name="attribute_public_yes">大眾運輸可到</string>
-    <string name="attribute_public_no">大眾運輸不可到</string>
     <string name="attribute_water_yes">附近有飲水機</string>
     <string name="attribute_water_no">附近無飲水機</string>
     <string name="attribute_restrooms_yes">附近有公廁</string>
@@ -1404,11 +1380,8 @@
     <string name="attribute_offset_cache_yes">座標飄移型藏寶</string>
     <string name="attribute_offset_cache_no">不是座標飄移型藏寶</string>
     <string name="attribute_bonuscache_yes">加分寶</string>
-    <string name="attribute_bonuscache_no">不是加分寶</string>
     <string name="attribute_challengecache_yes">挑戰型寶藏</string>
-    <string name="attribute_challengecache_no">不是挑戰型寶藏</string>
     <string name="attribute_hqsolutionchecker_yes">開啟解題檢查器</string>
-    <string name="attribute_hqsolutionchecker_no">關閉解題檢查器</string>
     <string name="attribute_military_area_yes">軍事訓練地區</string>
     <string name="attribute_military_area_no">不是軍事訓練地區</string>
     <string name="attribute_historic_yes">廢墟</string>
@@ -1503,7 +1476,6 @@
     <string name="individual_route_added">新增至路徑</string>
     <string name="individual_route_removed">從航線中移除</string>
     <string name="map_sort_individual_route">排列個別的路徑</string>
-    <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
     <!-- changed permissions one time message -->

@@ -11,7 +11,6 @@ import cgeo.geocaching.filters.core.DifficultyTerrainMatrixGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
@@ -57,11 +56,11 @@ public class GCMap {
      */
     @NonNull
     @WorkerThread
-    public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
+    public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            final GCWebAPI.WebApiSearch search = createSearchForFilter(con, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
+            final GCWebAPI.WebApiSearch search = createSearchForFilter(con, filter);
             if (search == null) {
                 return new SearchResult();
             }
@@ -109,14 +108,16 @@ public class GCMap {
     }
 
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @Nullable final GeocacheFilter filter) {
         return createSearchForFilter(connector, filter, new GeocacheSort(), 200, 0);
     }
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort, final int take, final int skip) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @Nullable final GeocacheFilter pFilter, @NonNull final GeocacheSort sort, final int take, final int skip) {
 
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setPage(take, skip);
+
+        final GeocacheFilter filter = pFilter != null ? pFilter : GeocacheFilter.createEmpty();
 
         //special case: if origin filter is present and excludes GCConnector, then skip search
         final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);

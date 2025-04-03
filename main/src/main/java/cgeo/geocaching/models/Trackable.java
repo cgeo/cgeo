@@ -419,10 +419,13 @@ public class Trackable implements IGeoObject {
         if (StringUtils.isNotBlank(image)) {
             images.add(new Image.Builder().setUrl(image).setTitle(StringUtils.defaultIfBlank(name, geocode)).setCategory(Image.ImageCategory.LISTING).build());
         }
-        ImageUtils.addImagesFromHtml(images, geocode, getDetails());
+        images.addAll(ImageUtils.getImagesFromHtml((url, builder) -> builder.setTitle(geocode).setCategory(Image.ImageCategory.LISTING), getDetails()));
         for (final LogEntry log : getLogs()) {
             images.addAll(log.logImages);
         }
+        // Deduplicate images and return them in requested size
+        ImageUtils.deduplicateImageList(images);
+
         return images;
     }
 

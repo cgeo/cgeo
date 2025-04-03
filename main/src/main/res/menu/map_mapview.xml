@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group
         android:id="@+id/menu_group_map_sources"
@@ -13,36 +12,30 @@
             android:id="@+id/menu_hillshading"
             android:title="@string/settings_hillshading_enable"
             android:icon="@drawable/ic_menu_hills"
-            app:iconTint="@color/colorText"
             android:checkable="true"
-            android:visible="false" />
+            android:visible="false"/>
         <item
             android:orderInCategory="91"
             android:id="@+id/menu_manage_offline_maps"
             android:icon="@drawable/wherigo_download"
-            app:iconTint="@color/colorText"
             android:title="@string/menu_manage_offline_data">
             <menu>
                 <item
                     android:id="@+id/menu_download_offlinemap"
                     android:title="@string/downloadmap_title"
-                    android:icon="@drawable/ic_menu_mapmode"
-                    app:iconTint="@color/colorText" />
+                    android:icon="@drawable/ic_menu_mapmode"/>
                 <item
                     android:id="@+id/menu_check_routingdata"
-                    android:icon="@drawable/ic_menu_route"
-                    app:iconTint="@color/colorText"
-                    android:title="@string/check_tiles_menu" />
+                    android:title="@string/check_tiles_menu"
+                    android:icon="@drawable/ic_menu_route"/>
                 <item
                     android:id="@+id/menu_check_hillshadingdata"
-                    android:icon="@drawable/ic_menu_hills"
                     android:title="@string/check_hillshading_tiles_menu"
-                    app:iconTint="@color/colorText" />
+                    android:icon="@drawable/ic_menu_hills"/>
                 <item
                     android:id="@+id/menu_delete_offline_data"
-                    android:icon="@drawable/ic_menu_delete"
                     android:title="@string/menu_delete_offline_data"
-                    app:iconTint="@color/colorText" />
+                    android:icon="@drawable/ic_menu_delete"/>
             </menu>
         </item>
     </group>

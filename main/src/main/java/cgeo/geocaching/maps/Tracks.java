@@ -93,6 +93,14 @@ public class Tracks {
         }
     }
 
+    public void find(final IGeoItemSupplier route, final Action2<String, IGeoItemSupplier> action) {
+        for (Track track : data) {
+            if (track.getRoute().equals(route)) {
+                action.call(track.trackfile.getKey(), track.route);
+            }
+        }
+    }
+
     public String add(final Activity activity, final Uri uri, final UpdateTrack updateTrack) {
         final String key = Trackfiles.createTrackfile(activity, uri);
         for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {

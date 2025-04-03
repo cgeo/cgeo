@@ -265,7 +265,6 @@
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
     <string name="info_log_post_failed">ログの投稿に失敗しました</string>
-    <string name="info_log_post_failed_reason">原因: %s</string>
     <string name="info_log_post_retry">再試行</string>
     <string name="info_log_post_save">オフライン保存</string>
     <string name="info_log_cleared">ログを削除しました</string>
@@ -350,7 +349,6 @@
     <string name="caches_sort_geocode">GCコード</string>
     <string name="caches_sort_rating">評価</string>
     <string name="caches_sort_vote">評価済み</string>
-    <string name="caches_sort_inventory">目録の数</string>
     <string name="caches_sort_date_hidden">設置日</string>
     <string name="caches_sort_finds">発見した数</string>
     <string name="caches_sort_state">状態</string>
@@ -810,12 +808,8 @@
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度を選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
-    <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
-    <string name="init_circlefillcolor_summary">0.1マイル円の内側の色と不透明度を選択</string>
     <string name="init_accuracycirclecolor">精度円の線色</string>
     <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度を選択。精度円は位置測位の精度を表しています</string>
-    <string name="init_accuracycirclefillcolor">精度円の内側の色</string>
-    <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度を選択</string>
     <string name="init_include_found_status">「発見した」ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブルの「訪れた」設定</string>
     <string name="init_summary_trackautovisit">「発見」したログを書く時にトラッカブルを自動的に「訪れた」にする</string>
@@ -1138,7 +1132,6 @@
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
-    <string name="cache_status_attended">参加した</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>
@@ -1204,7 +1197,6 @@
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="create_internal_cache_short">新しいキャッシュ</string>
     <string name="create_internal_cache_currentlist">現在のリストを使用</string>
-    <string name="internal_cache_default_name">ユーザー定義キャッシュ #%1$d</string>
     <string name="internal_cache_default_description">これはユーザー定義キャッシュです</string>
     <string name="internal_cache_default_owner">あなた</string>
     <string name="internal_goto_targets_title">「移動」の行先</string>
@@ -1214,6 +1206,7 @@
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
+    <string name="internal_connector_name">ユーザー定義キャッシュ</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">度</string>
@@ -1303,7 +1296,6 @@
     <string name="calccoord_guided_value">数値</string>
     <string name="calccoord_convert_to_plain">プレーン座標に変換</string>
     <string name="calccoord_plain_tools_title">プレーンツール</string>
-    <string name="calccoord_remove_spaces">空白を削除</string>
     <string name="calccoord_paste_from_clipboard">クリップボードから貼付け</string>
     <string name="calccoord_generate_title">ウェイポイントを作成</string>
     <!-- Formula -->
@@ -1381,7 +1373,6 @@
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
-    <string name="google_maps_option_group_theme">テーマのオプション</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1401,7 +1392,6 @@
     <string name="search_finder">発見したユーザー名</string>
     <string name="search_finder_prefill">ユーザー名</string>
     <string name="search_finder_button">発見したユーザー名で検索</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1410,7 +1400,6 @@
     <string name="search_destination">c:geo</string>
     <string name="search_address_started">所在地を検索中</string>
     <string name="search_address_result">検索結果:所在地</string>
-    <string name="search_own_caches">自分のキャッシュを検索</string>
     <string name="search_pocket_title">ポケット・クエリ</string>
     <string name="search_bookmark_list">ブックマークリスト</string>
     <string name="search_pocket_is_new">新着</string>
@@ -1489,7 +1478,6 @@
     <string name="helper_google_translate_title">Google 翻訳</string>
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
-    <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。ANT+/Garmin chirpを含むジオキャッシュには必要です</string>
     <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <string name="helper_gcwizard_description">GC Wizardは簡単な暗号、測地系や科学系の計算のための多数のツールが含まれています。また、様々なシンボルの一覧を見ることができます。</string>
@@ -1550,9 +1538,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_climbing_yes">難しい登坂あり</string>
     <string name="attribute_climbing_no">難しい登坂なし</string>
     <string name="attribute_wading_yes">水域を渡る可能性あり</string>
-    <string name="attribute_wading_no">水域を渡る可能性なし</string>
     <string name="attribute_swimming_yes">泳ぐ可能性あり</string>
-    <string name="attribute_swimming_no">泳ぐ可能性なし</string>
     <string name="attribute_available_yes">常時探索可</string>
     <string name="attribute_available_no">常時探索可ではない</string>
     <string name="attribute_night_yes">夜間推奨</string>
@@ -1562,7 +1548,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_stealth_yes">隠密行動必要</string>
     <string name="attribute_stealth_no">隠密行動必要ではない</string>
     <string name="attribute_firstaid_yes">要メンテナンス</string>
-    <string name="attribute_firstaid_no">要メンテナンスではない</string>
     <string name="attribute_cow_yes">家畜注意</string>
     <string name="attribute_cow_no">家畜はいません</string>
     <string name="attribute_field_puzzle_yes">フィールド・パズル</string>
@@ -1592,49 +1577,32 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_partnership_yes">スポンサー提携キャッシュ</string>
     <string name="attribute_partnership_no">スポンサー提携キャッシュではない</string>
     <string name="attribute_fee_yes">入場料や駐車料必要</string>
-    <string name="attribute_fee_no">入場料や駐車料必要ではない</string>
     <string name="attribute_rappelling_yes">ロック・クライミング用具必須</string>
-    <string name="attribute_rappelling_no">ロック・クライミング用具必須ではない</string>
     <string name="attribute_boat_yes">ボート必要</string>
-    <string name="attribute_boat_no">ボート必要ではない</string>
     <string name="attribute_scuba_yes">潜水用具必須</string>
-    <string name="attribute_scuba_no">潜水用具必須ではない</string>
     <string name="attribute_flashlight_yes">懐中電灯必須</string>
-    <string name="attribute_flashlight_no">懐中電灯必須ではない</string>
     <string name="attribute_uv_yes">紫外線(ブラックライト)必須</string>
     <string name="attribute_uv_no">紫外線(ブラックライト)必須ではない</string>
     <string name="attribute_snowshoes_yes">カンジキ必須</string>
-    <string name="attribute_snowshoes_no">カンジキ必須ではない</string>
     <string name="attribute_skiis_yes">クロスカントリー・スキー必須</string>
-    <string name="attribute_skiis_no">クロスカントリー・スキー必須ではない</string>
     <string name="attribute_s_tool_yes">特別な道具が必要</string>
-    <string name="attribute_s_tool_no">特別な道具は不要</string>
     <string name="attribute_wirelessbeacon_yes">無線ビーコン受信機必須</string>
-    <string name="attribute_wirelessbeacon_no">無線ビーコン受信機必須ではない</string>
     <string name="attribute_treeclimbing_yes">木登り必要</string>
     <string name="attribute_treeclimbing_no">木登り必要ではない</string>
     <string name="attribute_poisonoak_yes">有毒植物あり</string>
     <string name="attribute_poisonoak_no">有毒植物なし</string>
     <string name="attribute_dangerousanimals_yes">危険な動物がいる</string>
-    <string name="attribute_dangerousanimals_no">危険な動物はいない</string>
     <string name="attribute_ticks_yes">ダニがいる</string>
-    <string name="attribute_ticks_no">ダニはいない</string>
     <string name="attribute_mine_yes">廃坑あり</string>
-    <string name="attribute_mine_no">廃坑なし</string>
     <string name="attribute_cliff_yes">崖・落石あり</string>
-    <string name="attribute_cliff_no">崖・落石なし</string>
     <string name="attribute_hunting_yes">狩猟エリア</string>
-    <string name="attribute_hunting_no">狩猟エリアではない</string>
     <string name="attribute_danger_yes">危険区域</string>
-    <string name="attribute_danger_no">危険区域ではない</string>
     <string name="attribute_thorn_yes">トゲ植物あり</string>
-    <string name="attribute_thorn_no">トゲ植物なし</string>
     <string name="attribute_wheelchair_yes">車椅子可</string>
     <string name="attribute_wheelchair_no">車椅子不可</string>
     <string name="attribute_parking_yes">駐車場あり</string>
     <string name="attribute_parking_no">駐車場なし</string>
     <string name="attribute_public_yes">公共交通機関あり</string>
-    <string name="attribute_public_no">公共交通機関なし</string>
     <string name="attribute_water_yes">飲料水あり</string>
     <string name="attribute_water_no">飲料水なし</string>
     <string name="attribute_restrooms_yes">近くに公衆トイレあり</string>
@@ -1746,13 +1714,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_offset_cache_yes">オフセットキャッシュ</string>
     <string name="attribute_offset_cache_no">オフセットキャッシュではない</string>
     <string name="attribute_bonuscache_yes">ボーナスキャッシュ</string>
-    <string name="attribute_bonuscache_no">ボーナスキャッシュでない</string>
     <string name="attribute_powertrail_yes">パワートレイルの一部</string>
-    <string name="attribute_powertrail_no">パワートレイルの一部ではない</string>
     <string name="attribute_challengecache_yes">チャレンジキャッシュ</string>
-    <string name="attribute_challengecache_no">チャレンジキャッシュではない</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com解答チェッカーが有効</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com解答チェッカーが有効でない</string>
     <string name="attribute_handicaching_yes">Handicaching.comで評価されてる</string>
     <string name="attribute_handicaching_no">Handicaching.comで評価されてない</string>
     <string name="attribute_munzee_yes">Munzeeを含む</string>
@@ -1901,12 +1865,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="individual_route_error_toggling_waypoint">ルートポイントの切替エラー</string>
     <string name="individual_route_error_single_waypoint_mode">一つだけのウェイポイントでは利用できません</string>
     <string name="map_sort_individual_route">個別ルートの編集</string>
-    <string name="map_export_individual_route">個別ルートのエクスポート</string>
-    <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_autotarget_individual_route">ルートの開始地点を目的地に設定</string>
     <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地に設定」は無効になっています</string>
-    <string name="map_clear_manual_targets">目的地を削除</string>
     <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>

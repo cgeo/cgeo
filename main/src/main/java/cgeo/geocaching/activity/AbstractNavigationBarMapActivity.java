@@ -5,15 +5,24 @@ import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
+import cgeo.geocaching.network.HttpRequest;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +40,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     private static final String TAG_MAPDETAILS_FRAGMENT = "mapdetails_fragment";
     private static final String TAG_SWIPE_FRAGMENT = "swipetoopen_fragment";
+    private static long close429warning = 0;
 
     private final ViewTreeObserver.OnGlobalLayoutListener[] layoutListeners = new ViewTreeObserver.OnGlobalLayoutListener[1];
 
@@ -196,4 +206,36 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         sheetShowDetails(sheetInfo);
     }
 
+    // handling of http429 warning message
+    protected void add429observer() {
+        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, HttpRequest.HTTP429) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                synchronized (this) {
+                    if (close429warning == 0) {
+                        final ImageView v = findViewById(R.id.live_map_status);
+                        if (v != null) {
+                            v.setImageResource(R.drawable.warning);
+                            v.getBackground().setTint(getResources().getColor(R.color.colorAccent));
+                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_http429), intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
+                            new Handler(Looper.getMainLooper()).post(() -> v.setVisibility(View.VISIBLE));
+                        }
+                    }
+                    close429warning = System.currentTimeMillis() + 1000; // show for 1s
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        synchronized (this) {
+                            if (System.currentTimeMillis() > close429warning) {
+                                final View v = findViewById(R.id.live_map_status);
+                                if (v != null) {
+                                    v.setVisibility(View.GONE);
+                                }
+                                close429warning = 0;
+                            }
+                        }
+                    }, 5000);
+                }
+            }
+        });
+
+    }
 }

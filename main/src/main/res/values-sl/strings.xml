@@ -210,7 +210,6 @@
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
     <string name="info_log_post_failed">Objava zapisa ni uspela.</string>
-    <string name="info_log_post_failed_reason">Razlog: %s</string>
     <string name="info_log_post_retry">Poizkusi ponovno</string>
     <string name="info_log_post_save">Shrani za delo brez povezave</string>
     <string name="info_log_cleared">Zapis je izbrisan.</string>
@@ -261,7 +260,6 @@
     <string name="caches_sort_name">Imenu</string>
     <string name="caches_sort_rating">Glasovih</string>
     <string name="caches_sort_vote">Mojih glasovih</string>
-    <string name="caches_sort_inventory">Številu sledljivčkov</string>
     <string name="caches_sort_date_hidden">Datum objave</string>
     <string name="caches_sort_finds">Število najdb</string>
     <string name="caches_sort_state">Država</string>
@@ -554,7 +552,6 @@
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
-    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
@@ -669,7 +666,6 @@
     <string name="search_tb_button">Iskanje sledljivčka</string>
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>
-    <string name="search_own_caches">Iskanje mojih zakladov</string>
     <!-- trackable -->
     <string name="trackable">Sledljivček</string>
     <string name="trackable_details_loading">Nalaganje podatkov o sledljivčku…</string>
@@ -717,7 +713,6 @@
     <string name="helper_gpsstatus_description">Aplikacija GPS Status vam omogoča prikaz radarja in uporabljate jo lahko z aplikacijo c:geo. Omogoča tudi prikaz veliko drugih informacij povezanih z GPS in njihovimi orodji.</string>
     <string name="helper_google_translate_title">Prevajalnik Google</string>
     <string name="helper_google_translate_description">Če prenesete pakete prevodov znotraj Google Translate aplikacije, lahko prevajate opise zakladov v c:geo tudi brez povezave z dolgim pritiskom na tekst.</string>
-    <string name="helper_where_you_go_description">WhereYouGo omogoča igranje in iskanje geocaches vrste Wherigo. c:Geo lahko samodejno sprožijo prenos kartuš v to app.</string>
     <!-- export -->
     <string name="export">Izvozi</string>
     <string name="export_progress">Izvozi: %1$s</string>
@@ -764,9 +759,7 @@
     <string name="attribute_climbing_yes">Težje plezanje</string>
     <string name="attribute_climbing_no">Ni težje plezanje</string>
     <string name="attribute_wading_yes">Lahko zahteva hojo po vodi</string>
-    <string name="attribute_wading_no">Hoja po vodi ni potrebna</string>
     <string name="attribute_swimming_yes">Lahko zahteva plavanje</string>
-    <string name="attribute_swimming_no">Plavanje ni potrebno</string>
     <string name="attribute_available_yes">Dosegljivo v vseh časih</string>
     <string name="attribute_available_no">Ni dosegljivo v vseh časih</string>
     <string name="attribute_night_yes">Priporočeno ponoči</string>
@@ -776,7 +769,6 @@
     <string name="attribute_stealth_yes">Bodi neopazen</string>
     <string name="attribute_stealth_no">Ni potrebe biti neopazen</string>
     <string name="attribute_firstaid_yes">Potrebuje vzdrževanje</string>
-    <string name="attribute_firstaid_no">Ne potrebuje vzdrževanja</string>
     <string name="attribute_cow_yes">Živinoreja v bližini</string>
     <string name="attribute_cow_no">Ni živinoreje v bližini</string>
     <string name="attribute_field_puzzle_yes">Uganka na terenu</string>
@@ -806,49 +798,32 @@
     <string name="attribute_partnership_yes">Sponzoriran zaklad</string>
     <string name="attribute_partnership_no">Ni sponzoriran zaklad</string>
     <string name="attribute_fee_yes">Parkirnina ali vstopnina</string>
-    <string name="attribute_fee_no">Ni parkirnine ali vstopnine</string>
     <string name="attribute_rappelling_yes">Potrebna plezalna oprema</string>
-    <string name="attribute_rappelling_no">Plezalna oprema ni potrebna</string>
     <string name="attribute_boat_yes">Potreben čoln</string>
-    <string name="attribute_boat_no">Čoln ni potreben</string>
     <string name="attribute_scuba_yes">Potrebna potapljaška oprema</string>
-    <string name="attribute_scuba_no">Potapljaška oprema ni potrebna</string>
     <string name="attribute_flashlight_yes">Potrebna svetilka</string>
-    <string name="attribute_flashlight_no">Svetilka ni potrebna</string>
     <string name="attribute_uv_yes">Potrebna UV lučka</string>
     <string name="attribute_uv_no">UV lučka ni potrebna</string>
     <string name="attribute_snowshoes_yes">Potrebna snežna obutev</string>
-    <string name="attribute_snowshoes_no">Snežna obutev ni potrebna</string>
     <string name="attribute_skiis_yes">Potrebne smuči</string>
-    <string name="attribute_skiis_no">Smuči niso potrebne</string>
     <string name="attribute_s_tool_yes">Potrebna posebna orodja</string>
-    <string name="attribute_s_tool_no">Posebna orodja niso potrebna</string>
     <string name="attribute_wirelessbeacon_yes">Brezžični signal</string>
-    <string name="attribute_wirelessbeacon_no">Ni brezžični signal</string>
     <string name="attribute_treeclimbing_yes">Potrebno plezanje po drevesih</string>
     <string name="attribute_treeclimbing_no">Ni potrebno plezanje po drevesih</string>
     <string name="attribute_poisonoak_yes">Strupene rastilne</string>
     <string name="attribute_poisonoak_no">Ni strupenih rastlin</string>
     <string name="attribute_dangerousanimals_yes">Nevarne živali</string>
-    <string name="attribute_dangerousanimals_no">Ni nevarnih živai</string>
     <string name="attribute_ticks_yes">Klopi</string>
-    <string name="attribute_ticks_no">Ni klopov</string>
     <string name="attribute_mine_yes">Zapuščeni rudniki</string>
-    <string name="attribute_mine_no">Ni zapuščenih rudnikov</string>
     <string name="attribute_cliff_yes">Padajoče kamenje / prepad</string>
-    <string name="attribute_cliff_no">Ni prepadov ali padajočih kamnov</string>
     <string name="attribute_hunting_yes">Lov</string>
-    <string name="attribute_hunting_no">Ni lova</string>
     <string name="attribute_danger_yes">Nevarno območje</string>
-    <string name="attribute_danger_no">Ni nevarno območje</string>
     <string name="attribute_thorn_yes">Trnje</string>
-    <string name="attribute_thorn_no">Ni trnja</string>
     <string name="attribute_wheelchair_yes">Dostopno z invalidskim vozičkom</string>
     <string name="attribute_wheelchair_no">Ni dostopno z invalidskim vozičkom</string>
     <string name="attribute_parking_yes">Parkirišče na voljo</string>
     <string name="attribute_parking_no">Ni parkirišč na voljo</string>
     <string name="attribute_public_yes">Javni prevoz</string>
-    <string name="attribute_public_no">Ni javnega prevoza</string>
     <string name="attribute_water_yes">Pitna voda blizu</string>
     <string name="attribute_water_no">Pitne vode ni blizu</string>
     <string name="attribute_restrooms_yes">Javne sanitarije blizu</string>

@@ -12,9 +12,7 @@ public interface CacheComparator extends Comparator<Geocache> {
 
     String getSortableSection(@NonNull Geocache cache);
 
-    /**
-     * Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)}
-     */
+    /** Sorts the given list of caches using this comparator. */
     void sort(List<Geocache> list);
 
     default void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {

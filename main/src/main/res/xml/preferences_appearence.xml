@@ -171,11 +171,12 @@
             app:defaultColor="@color/default_circlecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
+
         <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_circlefillcolor"
-            android:summary="@string/init_circlefillcolor_summary"
-            android:title="@string/init_circlefillcolor"
-            app:defaultColor="@color/default_circlefillcolor"
+            android:key="@string/pref_mapline_geofencecolor"
+            android:title="@string/init_geofencecolor"
+            android:summary="@string/init_geofencecolor_summary"
+            app:defaultColor="@color/default_geofencecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
 
@@ -186,17 +187,11 @@
             app:defaultColor="@color/default_accuracycirclecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_accuracycirclefillcolor"
-            android:summary="@string/init_accuracycirclefillcolor_summary"
-            android:title="@string/init_accuracycirclefillcolor"
-            app:defaultColor="@color/default_accuracycirclefillcolor"
-            app:showOpaquenessSlider="true"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 
-    <PreferenceCategory
+    <cgeo.geocaching.settings.PreferenceCategory
+        android:key="@string/pref_fakekey_vtmScaling"
         android:title="@string/category_unifiedMap"
         android:summary="@string/maptheme_vtm_scaling_summary"
         app:iconSpaceReserved="false">
@@ -224,5 +219,5 @@
             app:max="200"
             app:defaultValue="100"
             app:iconSpaceReserved="false" />
-    </PreferenceCategory>
+    </cgeo.geocaching.settings.PreferenceCategory>
 </PreferenceScreen>

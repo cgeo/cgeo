@@ -26,7 +26,6 @@ import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
-import static cgeo.geocaching.utils.EmojiUtils.NUMBER_START;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -194,7 +193,7 @@ public final class MapMarkerUtils {
         }
         // top-right: DT marker / sync / stored
         if (Settings.isDTMarkerEnabled()) {
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.supportsDifficultyTerrain(), cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
         } else if (CacheDownloaderService.isDownloadPending(cache)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
@@ -299,16 +298,11 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         if (cache != null && cache.isLinearAlc()) {
-            int stageCounter = 0;
             try {
-                stageCounter = Integer.parseInt(waypoint.getPrefix());
+                insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, Integer.parseInt(waypoint.getPrefix()), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             } catch (NumberFormatException ignore) {
-                // ignored, value defaults to 0
+                insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(ViewUtils.getDrawable(waypointType.markerId, true), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             }
-            while (stageCounter > 9) {
-                stageCounter = stageCounter - 10;
-            }
-            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
             final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
@@ -699,13 +693,13 @@ public final class MapMarkerUtils {
         return result;
     }
 
-    private static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
+    private static Drawable getDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).append(supportsRating).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain, applyScaling));
+                marker = new CacheMarker(hashcode, createDTRatingMarker(res, supportsRating, difficulty, terrain, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -719,20 +713,20 @@ public final class MapMarkerUtils {
      * @param terrain       Terrain rating
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
-    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        return createDTRatingMarker(res, difficulty, terrain, getCacheScalingFactor(applyScaling));
+    private static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        return createDTRatingMarker(res, supportsRating, difficulty, terrain, getCacheScalingFactor(applyScaling));
     }
 
-    public static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final float scaling) {
+    public static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final float scaling) {
         final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), scaling);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
-        if (difficulty == -1 && terrain == -1) {
+        if (!supportsRating) {
             layers = 2;
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, scaling));
-        } else if (difficulty == 0 && terrain == 0) {
+        } else if (difficulty < 0.5 && terrain < 0.5) {
             layers = 2;
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, scaling));
         } else {
@@ -751,6 +745,16 @@ public final class MapMarkerUtils {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
+    }
+
+    @SuppressWarnings("DiscouragedApi")
+    private static Drawable getStageNumberMarker(final Resources res, final int stageNum, final float scaling) {
+        int counter = stageNum;
+        while (counter > 10) {
+            counter = counter - 10;
+        }
+        final String packageName = CgeoApplication.getInstance().getPackageName();
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_stagenum_" + counter, "drawable", packageName), null), scaling);
     }
 
     private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {

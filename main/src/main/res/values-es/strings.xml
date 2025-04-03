@@ -267,7 +267,6 @@
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
     <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Reintentar</string>
     <string name="info_log_post_save">Guardar sin conexión</string>
     <string name="info_log_cleared">Registro borrado.</string>
@@ -355,7 +354,6 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Valoración</string>
     <string name="caches_sort_vote">Votos (valoración propia)</string>
-    <string name="caches_sort_inventory">Número de rastreables</string>
     <string name="caches_sort_date_hidden">Fecha escondido</string>
     <string name="caches_sort_finds">Encontrados</string>
     <string name="caches_sort_state">Estado</string>
@@ -837,12 +835,8 @@
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
-    <string name="init_circlefillcolor">Color de relleno de círculo</string>
-    <string name="init_circlefillcolor_summary">Seleccione el color y la opacidad de los círculos a rellenar</string>
     <string name="init_accuracycirclecolor">Color de línea de círculo de precisión</string>
     <string name="init_accuracycirclecolor_summary">Seleccione color y opacidad para la línea del círculo de precisión. El círculo de precisión se utiliza como una representación visual para la precisión de la señal de ubicación.</string>
-    <string name="init_accuracycirclefillcolor">Color de relleno de círculo de precisión</string>
-    <string name="init_accuracycirclefillcolor_summary">Selecciona color y opacidad con la que se rellenan los círculos de precisión</string>
     <string name="init_include_found_status">Incluir estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Convertir TBs a Visitado</string>
     <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"Visitado\"</string>
@@ -1171,7 +1165,6 @@
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
     <string name="cache_status_offline_log">Registro guardado</string>
-    <string name="cache_status_attended">Asistí</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
     <string name="cache_status_archived">Archivado</string>
@@ -1224,7 +1217,6 @@
     <string name="create_internal_cache">Crear caché definido por el usuario</string>
     <string name="create_internal_cache_short">Nuevo caché</string>
     <string name="create_internal_cache_currentlist">Utilizar lista actual</string>
-    <string name="internal_cache_default_name">Caché definido por el usuario #%1$d</string>
     <string name="internal_cache_default_description">Este es un caché definido por el usuario</string>
     <string name="internal_cache_default_owner">Tú</string>
     <string name="internal_goto_targets_title">Objetivos \"Ir a\"</string>
@@ -1234,6 +1226,7 @@
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
+    <string name="internal_connector_name">Cachés definidos por el usuario</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grados</string>
@@ -1323,7 +1316,6 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a Coordenadas simples</string>
     <string name="calccoord_plain_tools_title">Herramientas simples</string>
-    <string name="calccoord_remove_spaces">Quitar espacios</string>
     <string name="calccoord_paste_from_clipboard">Pegar desde el portapapeles</string>
     <string name="calccoord_generate_title">Generar Waypoints</string>
     <string name="calccoord_generate_showonmap">Mostrar en el mapa</string>
@@ -1390,7 +1382,6 @@
     <string name="map_show_other_title">Mostrar otros:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
-    <string name="google_maps_option_group_theme">Opciones de Temas</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
@@ -1411,7 +1402,6 @@
     <string name="search_finder">Encontrado por</string>
     <string name="search_finder_prefill">Buscador</string>
     <string name="search_finder_button">Buscar por nombre del buscador</string>
-    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Buscar por filtro</string>
     <string name="search_filter_info_message" formatted="false">**Buscar por filtro** busca cachés en todos los servicios activos en línea (por ejemplo, geocaching.com) usando un filtro proporcionado. Sin embargo, las capacidades de búsqueda de estos servicios suelen ser más limitadas que las capacidades de filtro de c:geo.\n\n- Todos los servicios sólo soportan filtros AND (no hay filtros OR ni inversión de filtros).\n- Los filtros más básicos como **tipo de caché** o **tamaño de caché** son compatibles con todos los servicios. Los filtros más complicados a menudo no son compatibles o tienen algunas restricciones, por ejemplo, **favoritos** o **fecha oculta**.\n- Una lista detallada sobre los filtros soportados por servicio puede ser encontrada [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLos filtros no soportados por el servicio online serán aplicados por c:geo en los resultados recibidos.</string>
     <string name="search_tb">Rastreable</string>
@@ -1421,7 +1411,6 @@
     <string name="add_target_to">Añadir objetivo a</string>
     <string name="search_address_started">Buscando lugares</string>
     <string name="search_address_result">Lugares encontrados</string>
-    <string name="search_own_caches">Buscar mis cachés</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">nuevo</string>
@@ -1501,7 +1490,6 @@
     <string name="helper_gps_locker_description">GPS Locker mantiene activa la señal GPS al cambiar entre aplicaciones y cuando la pantalla de tu dispositivo está apagada.</string>
     <string name="helper_google_translate_title">Traductor de Google</string>
     <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Wherigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf te permite leer los datos de las etiquetas de chirp ANT+/Garmin, que son necesarias para los cachés ANT+/chirp.</string>
     <string name="helper_alc_description">Aplicación Adventure Lab Player para tu teléfono o tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard contiene numerosas herramientas para cifrado simple, cálculo geográfico y científico, así como cientos de conjuntos de diversos símbolos.</string>
@@ -1564,9 +1552,7 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_climbing_yes">Ascensión difícil</string>
     <string name="attribute_climbing_no">No es una ascensión difícil</string>
     <string name="attribute_wading_yes">Puede requerir vadear</string>
-    <string name="attribute_wading_no">No requiere vadear</string>
     <string name="attribute_swimming_yes">Puede requerir nadar</string>
-    <string name="attribute_swimming_no">No requiere nadar</string>
     <string name="attribute_available_yes">Siempre disponible</string>
     <string name="attribute_available_no">No siempre disponible</string>
     <string name="attribute_night_yes">Recomendado por la noche</string>
@@ -1576,7 +1562,6 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_stealth_yes">Es necesario ser sigiloso</string>
     <string name="attribute_stealth_no">No es necesario ser sigiloso</string>
     <string name="attribute_firstaid_yes">Necesita mantenimiento</string>
-    <string name="attribute_firstaid_no">No necesita mantenimiento</string>
     <string name="attribute_cow_yes">Hay que tener cuidado con el ganado</string>
     <string name="attribute_cow_no">No hay que tener cuidado con el ganado</string>
     <string name="attribute_field_puzzle_yes">Puzzle en el lugar</string>
@@ -1606,49 +1591,32 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_partnership_yes">Caché asociado</string>
     <string name="attribute_partnership_no">No es un caché asociado</string>
     <string name="attribute_fee_yes">Cuota de aparcamiento o acceso requerida</string>
-    <string name="attribute_fee_no">Cuota de aparcamiento o acceso no requerida</string>
     <string name="attribute_rappelling_yes">Material de escalada necesario</string>
-    <string name="attribute_rappelling_no">Material de escalada no necesario</string>
     <string name="attribute_boat_yes">Embarcación requerida</string>
-    <string name="attribute_boat_no">Embarcación no requerida</string>
     <string name="attribute_scuba_yes">Equipo de buceo requerido</string>
-    <string name="attribute_scuba_no">Equipo de buceo no requerido</string>
     <string name="attribute_flashlight_yes">Linterna requerida</string>
-    <string name="attribute_flashlight_no">Linterna no requerida</string>
     <string name="attribute_uv_yes">Luz ultavioleta requerida</string>
     <string name="attribute_uv_no">Luz ultavioleta no requerida</string>
     <string name="attribute_snowshoes_yes">Raquetas de nieve necesarias</string>
-    <string name="attribute_snowshoes_no">Raquetas de nieve no necesarias</string>
     <string name="attribute_skiis_yes">Esquís necesarios</string>
-    <string name="attribute_skiis_no">Esquís no necesarios</string>
     <string name="attribute_s_tool_yes">Herramientas especiales requeridas</string>
-    <string name="attribute_s_tool_no">Herramientas especiales no requeridas</string>
     <string name="attribute_wirelessbeacon_yes">Baliza inalámbrica requerida</string>
-    <string name="attribute_wirelessbeacon_no">Baliza inalámbrica no requerida</string>
     <string name="attribute_treeclimbing_yes">Es necesario trepar árboles</string>
     <string name="attribute_treeclimbing_no">No es necesario trepar árboles</string>
     <string name="attribute_poisonoak_yes">Plantas venenosas</string>
     <string name="attribute_poisonoak_no">No hay plantas venenosas</string>
     <string name="attribute_dangerousanimals_yes">Animales peligrosos</string>
-    <string name="attribute_dangerousanimals_no">No hay animales peligrosos</string>
     <string name="attribute_ticks_yes">Garrapatas</string>
-    <string name="attribute_ticks_no">No hay garrapatas</string>
     <string name="attribute_mine_yes">Minas abandonadas</string>
-    <string name="attribute_mine_no">No hay minas abandonadas</string>
     <string name="attribute_cliff_yes">Precipicio/Caída de rocas</string>
-    <string name="attribute_cliff_no">No hay peligro de precipicio o caída de rocas</string>
     <string name="attribute_hunting_yes">Cacería</string>
-    <string name="attribute_hunting_no">No hay cacerías</string>
     <string name="attribute_danger_yes">Zona peligrosa</string>
-    <string name="attribute_danger_no">Zona no peligrosa</string>
     <string name="attribute_thorn_yes">Espinas</string>
-    <string name="attribute_thorn_no">No hay espinas</string>
     <string name="attribute_wheelchair_yes">Accesible en silla de ruedas</string>
     <string name="attribute_wheelchair_no">No accesible en silla de ruedas</string>
     <string name="attribute_parking_yes">Aparcamiento disponible</string>
     <string name="attribute_parking_no">Aparcamiento no disponible</string>
     <string name="attribute_public_yes">Trasporte público</string>
-    <string name="attribute_public_no">No hay trasporte público</string>
     <string name="attribute_water_yes">Agua potable cerca</string>
     <string name="attribute_water_no">No hay agua potable cerca</string>
     <string name="attribute_restrooms_yes">Aseos públicos cerca</string>
@@ -1760,13 +1728,9 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_offset_cache_yes">Caché offset</string>
     <string name="attribute_offset_cache_no">No es caché offset</string>
     <string name="attribute_bonuscache_yes">Caché bonus</string>
-    <string name="attribute_bonuscache_no">No hay caché bonus</string>
     <string name="attribute_powertrail_yes">Parte de un power trail</string>
-    <string name="attribute_powertrail_no">No es parte de un power trail</string>
     <string name="attribute_challengecache_yes">Caché de retos</string>
-    <string name="attribute_challengecache_no">No hay caché de retos</string>
     <string name="attribute_hqsolutionchecker_yes">Verificador de soluciones de Geocaching.com habilitado</string>
-    <string name="attribute_hqsolutionchecker_no">Verificador de soluciones de Geocaching.com no activado</string>
     <string name="attribute_handicaching_yes">Puntuado en Handicaching.com</string>
     <string name="attribute_handicaching_no">Sin puntuar en Handicaching.com</string>
     <string name="attribute_munzee_yes">Contiene un Munzee</string>
@@ -1926,12 +1890,9 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_sort_individual_route">Ordenar ruta individual</string>
-    <string name="map_export_individual_route">Exportar ruta individual</string>
-    <string name="map_load_individual_route">Cargar ruta individual</string>
     <string name="map_load_individual_route_confirm">¿Sobrescribir ruta existente?</string>
     <string name="map_autotarget_individual_route">Establecer el inicio de la ruta como objetivo</string>
     <string name="map_disable_autotarget_individual_route">\"Establecer inicio de ruta como objetivo\" desactivado</string>
-    <string name="map_clear_manual_targets">Borrar objetivos manuales</string>
     <string name="map_manual_targets_cleared">Objetivos manuales borrados</string>
     <string name="map_clear_individual_route">Borrar ruta individual</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>

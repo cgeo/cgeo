@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     private long[] orderedPages;
     private ViewPager2 viewPager = null;
     private Action1<Long> onPageChangeListener = null;
+    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
 
     /**
      * The {@link SwipeRefreshLayout} for this activity. Might be null if page is not refreshable.

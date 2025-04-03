@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.StringRes;
+import androidx.preference.Preference;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,11 +44,20 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
             MapMarkerUtils.clearCachedItems();
             return true;
         });
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_autozoom_consider_lastcenter)), (preference, newValue) -> {
+            setAutozoomSummary(preference, (Boolean) newValue);
+            return true;
+        });
+        setAutozoomSummary(findPreference(getString(R.string.pref_autozoom_consider_lastcenter)), Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false));
     }
 
     public void updateNotificationAudioInfo() {
         setButton(true);
         setButton(false);
+    }
+
+    private void setAutozoomSummary(final Preference pref, final boolean value) {
+        pref.setSummary(value ? R.string.init_summary_autozoom_consider_lastcenter_on : R.string.init_summary_autozoom_consider_lastcenter_off);
     }
 
     private void setButton(final boolean first) {

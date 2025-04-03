@@ -40,7 +40,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
     private void toggleAttributeIcon(final CacheAttribute ca) {
         final Boolean state = getAttributeIconState(ca);
-        final Boolean newState = state == null ? Boolean.TRUE : (state ? Boolean.FALSE : null);
+        final Boolean newState = state == null ? Boolean.TRUE : ((state && isAttributeFilterSourcesGC(sourcesState) && ca.stringIdNo != 0) ? Boolean.FALSE : null);
         setAttributeState(ca, newState);
     }
 

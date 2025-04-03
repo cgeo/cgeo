@@ -5,5 +5,6 @@ public enum FileType {
     LOC,
     GPX,
     ZIP,
-    MAP
+    MAP,
+    WHERIGO
 }

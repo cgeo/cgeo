@@ -3,11 +3,14 @@ package cgeo.geocaching.list;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -15,10 +18,17 @@ import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -27,10 +37,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
 public final class StoredList extends AbstractList {
@@ -39,7 +52,7 @@ public final class StoredList extends AbstractList {
     public static final int STANDARD_LIST_ID = 1;
     public final int markerId;
     public final boolean preventAskForDeletion;
-    private final int count; // this value is only valid as long as the list is not changed by other database operations
+    private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
         super(id, title);
@@ -360,12 +373,43 @@ public final class StoredList extends AbstractList {
             if (activity == null) {
                 return;
             }
-            SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
-                    .input(new SimpleDialog.InputOptions().setInitialValue(defaultValue), input -> {
-                        if (StringUtils.isNotBlank(input)) {
-                            runnable.call(input);
-                        }
-                    });
+
+            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+            final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
+            final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+
+            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
+
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            final boolean hasHierarchies = hierarchies.size() > 1;
+            if (hasHierarchies) {
+                if (StringUtils.isEmpty(hierarchies.get(0))) {
+                    hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
+                }
+                listprefix.setVisibility(View.VISIBLE);
+                listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+                listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
+            } else {
+                listprefix.setVisibility(View.GONE);
+            }
+
+            ((EditText) menu.findViewById(R.id.title)).setText(current);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+                    .setTitle(dialogTitle)
+                    .setPositiveButton(buttonTitle, ((d, which) -> {
+                            String prefix = "";
+                            if (hasHierarchies) {
+                                final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                                if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                                    prefix = temp;
+                                }
+                            }
+                            runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
+                        }))
+                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                    .setView(menu);
+            Keyboard.show(activity, menu.findViewById(R.id.title));
+            builder.show();
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -374,6 +418,59 @@ public final class StoredList extends AbstractList {
                 DataStore.renameList(listId, listName);
                 runAfterRename.run();
             });
+        }
+
+        public void promptForListPrefixRename(final Runnable runAfterRename) {
+            final Activity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            if (hierarchies.size() == 1) {
+                return;
+            }
+
+            if (StringUtils.isEmpty(hierarchies.get(0))) {
+                hierarchies.remove(0);
+            }
+
+            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+            final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
+            final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText title = menu.findViewById(R.id.title);
+
+            listprefix.setVisibility(View.VISIBLE);
+            listprefix.setHint(R.string.rename_from);
+            listprefixView.setText(hierarchies.get(0));
+            listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
+
+            ((TextInputLayout) menu.findViewById(R.id.titleWrapper)).setHint(R.string.rename_to);
+            title.setText(hierarchies.get(0));
+
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+                    .setTitle(R.string.list_menu_rename_list_prefix)
+                    .setPositiveButton(android.R.string.ok, ((d, which) -> {
+                        final String from = listprefixView.getText().toString();
+                        final String to = title.getText().toString();
+                        if (!StringUtils.equals(from, to)) {
+                            SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
+                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(":") < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                ).confirm(() -> {
+                                    DataStore.renameListPrefix(from, to);
+                                    runAfterRename.run();
+                                });
+                            }
+                        }))
+                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                    .setView(menu);
+            Keyboard.show(activity, title);
+            final AlertDialog dialog = builder.show();
+
+            listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                ((EditText) menu.findViewById(R.id.title)).setText(s);
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+            }));
         }
 
     }
@@ -390,6 +487,11 @@ public final class StoredList extends AbstractList {
     @Override
     public int getNumberOfCaches() {
         return count;
+    }
+
+    @Override
+    public void updateNumberOfCaches() {
+        count = DataStore.getList(id).count;
     }
 
     /**

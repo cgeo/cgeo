@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Selecteer afbeeldingen uit opslag</string>
     <string name="log_image_camera_tooltip">Foto maken met camera</string>
     <string name="log_image_selectfromown_tooltip">Afbeeldingen selecteren uit eigen afbeeldingen</string>
+    <string name="log_inventory">Inventaris</string>
     <string name="log_problem_none">Geen Probleem</string>
     <string name="log_problem_needs_maintenance_label">Heeft onderhoud nodig</string>
     <string name="log_problem_needs_maintenance_text">Deze geocacher meldt dat er een probleem is met deze cache.</string>
@@ -312,7 +313,8 @@
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
     <string name="info_log_delete_failed">Log verwijderen is mislukt.</string>
-    <string name="info_log_post_failed_reason">Reden: %s</string>
+    <string name="info_log_post_failed_simple_reason">Controleer of je correct bent ingelogd en een werkende internetverbinding hebt.</string>
+    <string name="info_log_delete_failed_simple_reason">Controleer of je correct bent ingelogd, een werkende internetverbinding hebt en het logboek nog niet is verwijderd.</string>
     <string name="info_log_post_retry">Probeer opnieuw</string>
     <string name="info_log_post_save">Off line opslaan</string>
     <string name="info_log_cleared">Log is gewist.</string>
@@ -416,7 +418,7 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Waardering</string>
     <string name="caches_sort_vote">Stemmen (eigen waardering)</string>
-    <string name="caches_sort_inventory">Aantal items</string>
+    <string name="caches_sort_inventory">Aantal trackables</string>
     <string name="caches_sort_date_hidden">Datum geplaatst</string>
     <string name="caches_sort_date_logged">Datum gelogd (eigen log)</string>
     <string name="caches_sort_finds">Aantal keer gevonden</string>
@@ -454,6 +456,7 @@
     <string name="caches_map_locus_export">Exporteer naar Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter op</string>
+    <string name="caches_filter_select_last">Vorige filter</string>
     <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
@@ -485,6 +488,9 @@
     <string name="list_menu_create">Maak nieuwe lijst</string>
     <string name="list_menu_drop">Verwijder huidige lijst</string>
     <string name="list_menu_rename">Hernoem huidige lijst</string>
+    <string name="list_menu_rename_list_prefix">Lijst voorvoegsel hernoemen</string>
+    <string name="rename_from">Hernoemen van</string>
+    <string name="rename_to">Hernoem naar</string>
     <string name="list_menu_import">Importeer</string>
     <string name="list_title">Selecteer een lijst</string>
     <string name="lists_title">Kies de lijsten</string>
@@ -502,6 +508,10 @@
     <string name="list_dialog_rename_title">Hernoem lijst</string>
     <string name="list_dialog_rename">Hernoem</string>
     <string name="list_not_available">Lijst is niet langer beschikbaar, wissel naar standaard lijst</string>
+    <string name="list_parent_list">Bovenliggende lijst</string>
+    <string name="list_name">Lijstnaam</string>
+    <string name="list_confirm_rename">Hernoemen van \"%1$s\" naar \"%2$s\"\n%3$s\nDeze actie kan niet ongedaan worden gemaakt!</string>
+    <string name="list_confirm_no_hierarchy">\nGeen \":\" gevonden - alle overeenkomende lijsten zullen worden omgezet naar top-niveau lijsten\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Geavanceerd</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Overschakelen naar Basis</string>
@@ -532,6 +542,7 @@
     <string name="cache_filter_hidden">Verstopt op</string>
     <string name="cache_filter_eventdate">Evenement datum</string>
     <string name="cache_filter_logs_count">Aantal logs</string>
+    <string name="cache_filter_inventory_count">Aantal trackables</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
     <string name="cache_filter_location">Locatie</string>
@@ -1050,9 +1061,12 @@
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="settings_info_hillshading_title">Informatie over Reliëfweergave</string>
-    <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
+    <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen donker/licht worden weergegeven om een 3D-effect te genereren.\nDe reliëfweergave bronbestanden kunnen worden gedownload uit het kaarten menu.\nNiet compatible met Unifiedmap VTM variant.</string>
     <string name="settings_hillshading_enable">Reliëfweergave</string>
+    <string name="init_hillshading_hq">Hoge kwaliteit reliëfweergave</string>
+    <string name="init_summary_hillshading_hq">Meer gedetailleerde reliëfweergave overlay maar ~50%% langzamere weergave bij het uitzoomen</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
+    <string name="init_mapsource_select_legacy">Selecteer Kaart Bron (Verouderd)</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
@@ -1076,12 +1090,10 @@
     <string name="init_trackappearance_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
-    <string name="init_circlefillcolor">Cirkel opvulkleur</string>
-    <string name="init_circlefillcolor_summary">Selecteer kleur en doorzichtigheid voor de cirkels die ingevuld moeten worden</string>
+    <string name="init_geofencecolor">Geofence cirkel kleur</string>
+    <string name="init_geofencecolor_summary">Selecteer kleur en doorzichtigheid voor geofence cirkel. Cirkels worden gebruikt als een visuele representatie voor de geofence voor waypoints (meestal van toepassing op geocaching.com lab avontuurlijke stadia)</string>
     <string name="init_accuracycirclecolor">Nauwkeurigheidscirkel lijnkleur</string>
     <string name="init_accuracycirclecolor_summary">Selecteer kleur en doorzichtigheid voor nauwkeurigheidscirkellijn. Nauwkeurigheidscirkel wordt gebruikt als visuele representatie voor de nauwkeurigheid van locatiesignaal.</string>
-    <string name="init_accuracycirclefillcolor">Nauwkeurigheidscirkel opvulkleur</string>
-    <string name="init_accuracycirclefillcolor_summary">Selecteer kleur en doorzichtigheid voor de nauwkeurigheidscirkels opvulkleur</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
     <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
@@ -1173,9 +1185,9 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
-    <string name="category_unifiedMap">Unified Map (bèta)</string>
-    <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
-    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten</string>
+    <string name="init_title_useLegacyMap">Oudere kaart gebruiken</string>
+    <string name="init_summary_useLegacyMap">Gebruik oude versies van Google Map / Mapsforge (OSM) kaarten in plaats van UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1352,7 +1364,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Inventaris</string>
+    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Stel coördinaten in</string>
     <string name="cache_personal_note">Persoonlijke notitie</string>
@@ -1423,6 +1435,8 @@
     <string name="cache_dialog_offline_drop_message">Verwijder cache uit geheugen…</string>
     <string name="cache_menu_speechDeactivate">Stop met praten</string>
     <string name="cache_menu_speechActivate">Begin met praten</string>
+    <string name="talking_disabled">Praten uitgeschakeld</string>
+    <string name="talking_enabled">Praten ingeschakeld</string>
     <string name="cache_menu_navigate">Navigeer</string>
     <string name="cache_menu_target">Instellen als doel</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
@@ -1463,6 +1477,7 @@
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Verversen</string>
     <string name="cache_menu_share">Deel cache</string>
+    <string name="cache_menu_share_with_data">Delen incl. gebruikersgegevens</string>
     <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
     <string name="cache_menu_copy_list">Naar een andere lijst kopiëren</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1480,7 +1495,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1559,6 +1574,9 @@
     <string name="image_category_own">Eigen</string>
     <string name="image_category_listing">Lijst</string>
     <string name="image_category_log">Log</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Achtergrond</string>
+    <string name="image_listing_gallery">Galerij</string>
     <string name="context_map_add_to_route">Toevoegen aan route</string>
     <string name="context_map_add_to_route_start">Toevoegen aan route (vooraan)</string>
     <string name="context_map_remove_from_route_start">Verwijder vanaf begin</string>
@@ -1571,7 +1589,7 @@
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
-    <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
+    <string name="internal_cache_default_names">Door gebruiker gedefinieerde cache #%1$s</string>
     <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
@@ -1584,9 +1602,13 @@
     <string name="init_summary_show_routing_menu">Lange tik op een cache toont een menu met geavanceerde opties om de cache naar/van een route toe te voegen/te verwijderen. Indien uitgeschakeld wordt de cache enkel toegevoegd/verwijderd aan/van de route.</string>
     <string name="init_ActionbarAutohide">Werkbalk verbergen bij tik</string>
     <string name="init_summary_ActionbarAutohide">Tik op vrije kaart ruimte om de werkbalk te verbergen/tonen</string>
+    <string name="init_autozoom_consider_lastcenter">Herstel kaartpositie bij het in kaart brengen van een lijst</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Wanneer een lijst van caches in kaart is gebracht en de kaart was eerder in de lijstgrenzen verlaten in de previewpositie, anders zoomen om alle caches te laten passen.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Wanneer een lijst van caches in kaart is gebracht, stel kaart zoomniveau en grenzen in om alle caches te laten passen.</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
+    <string name="internal_connector_name">Gebruiker gedefinieerde caches</string>
     <!-- html styles -->
     <string name="html_style_default">Standaard</string>
     <string name="html_style_default_no_contrast_fix">Standaard zonder contrastcorrectie</string>
@@ -1633,6 +1655,8 @@
     <string name="waypoint_my_coordinates_accuracy">Mijn coördinaten (±%s)</string>
     <string name="waypoint_name">Naam</string>
     <string name="waypoint_edit">Bewerken</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Stel de straal in voor geofence (in meters)</string>
     <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
     <string name="waypoint_clear_coordinates">Coördinaten wissen</string>
     <string name="waypoint_delete">Verwijderen</string>
@@ -1694,7 +1718,6 @@
     <string name="calccoord_guided_value">Waarde</string>
     <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
     <string name="calccoord_plain_tools_title">Eenvoudig gereedschap</string>
-    <string name="calccoord_remove_spaces">Spaties Verwijderen</string>
     <string name="calccoord_paste_from_clipboard">Plakken vanaf klembord</string>
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
@@ -1802,7 +1825,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -1841,7 +1864,7 @@
     <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
     <string name="search_address_result">Gevonden plaatsen</string>
-    <string name="search_own_caches">Zoek mijn eigen caches</string>
+    <string name="search_own_caches">Mijn caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
@@ -1921,7 +1944,6 @@
     <string name="helper_gps_locker_description">GPS Locker houdt het GPS signaal actief bij het schakelen tussen apps en wanneer het scherm van je apparaat is uitgeschakeld.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
-    <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
@@ -1983,19 +2005,18 @@
     <string name="attribute_climbing_yes">Moeilijke beklimming</string>
     <string name="attribute_climbing_no">Geen moeilijke beklimming</string>
     <string name="attribute_wading_yes">Mogelijk lopen door water nodig</string>
-    <string name="attribute_wading_no">Lopen door water niet nodig</string>
     <string name="attribute_swimming_yes">Mogelijk zwemmen nodig</string>
-    <string name="attribute_swimming_no">Zwemmen niet nodig</string>
     <string name="attribute_available_yes">Alle tijden beschikbaar</string>
     <string name="attribute_available_no">Niet altijd beschikbaar</string>
     <string name="attribute_night_yes">\'s nachts aanbevolen</string>
     <string name="attribute_night_no">Niet \'s nachts aanbevolen</string>
     <string name="attribute_winter_yes">Beschikbaar in de winter</string>
+    <string name="attribute_cacti_yes">Cactussen in de buurt</string>
+    <string name="attribute_cacti_no">Geen Cactussen in de buurt</string>
     <string name="attribute_winter_no">Niet beschikbaar in de winter</string>
     <string name="attribute_stealth_yes">Stealth noodzakelijk</string>
     <string name="attribute_stealth_no">Stealth niet noodzakelijk</string>
     <string name="attribute_firstaid_yes">Heeft onderhoud nodig</string>
-    <string name="attribute_firstaid_no">Geen onderhoud nodig</string>
     <string name="attribute_cow_yes">Pas op voor vee</string>
     <string name="attribute_cow_no">Geen vee</string>
     <string name="attribute_field_puzzle_yes">Veldpuzzel</string>
@@ -2025,49 +2046,32 @@
     <string name="attribute_partnership_yes">Partnership cache</string>
     <string name="attribute_partnership_no">Geen partnership cache</string>
     <string name="attribute_fee_yes">Toegang- of parkeerkosten van toepassing</string>
-    <string name="attribute_fee_no">Geen toegang- of parkeerkosten van toepassing</string>
     <string name="attribute_rappelling_yes">Klimuitrusting benodigd</string>
-    <string name="attribute_rappelling_no">Geen klimuitrusting nodig</string>
     <string name="attribute_boat_yes">Boot benodigd</string>
-    <string name="attribute_boat_no">Geen boot nodig</string>
     <string name="attribute_scuba_yes">Duikuitrusting nodig</string>
-    <string name="attribute_scuba_no">Geen duikuitrusting nodig</string>
     <string name="attribute_flashlight_yes">Zaklamp benodigd</string>
-    <string name="attribute_flashlight_no">Geen zaklamp nodig</string>
     <string name="attribute_uv_yes">UV lamp benodigd</string>
     <string name="attribute_uv_no">Geen UV lamp nodig</string>
     <string name="attribute_snowshoes_yes">Sneeuwschoenen benodigd</string>
-    <string name="attribute_snowshoes_no">Geen sneeuwschoenen nodig</string>
     <string name="attribute_skiis_yes">Langlaufski\'s nodig</string>
-    <string name="attribute_skiis_no">Langlaufski\'s niet nodig</string>
     <string name="attribute_s_tool_yes">Speciale gereedschappen nodig</string>
-    <string name="attribute_s_tool_no">Geen speciale gereedschappen nodig</string>
     <string name="attribute_wirelessbeacon_yes">Draadloos baken</string>
-    <string name="attribute_wirelessbeacon_no">Geen draadloos baken</string>
     <string name="attribute_treeclimbing_yes">Boomklimmen noodzakelijk</string>
     <string name="attribute_treeclimbing_no">Boomklimmen niet nodig</string>
     <string name="attribute_poisonoak_yes">Giftige planten</string>
     <string name="attribute_poisonoak_no">Geen giftige planten</string>
     <string name="attribute_dangerousanimals_yes">Gevaarlijke dieren</string>
-    <string name="attribute_dangerousanimals_no">Geen gevaarlijke dieren</string>
     <string name="attribute_ticks_yes">Teken</string>
-    <string name="attribute_ticks_no">Geen teken</string>
     <string name="attribute_mine_yes">Verlaten mijnen</string>
-    <string name="attribute_mine_no">Geen verlaten mijnen</string>
     <string name="attribute_cliff_yes">Rotswand / vallende rotsen</string>
-    <string name="attribute_cliff_no">Geen rotswand / vallende rotsen</string>
     <string name="attribute_hunting_yes">Jacht</string>
-    <string name="attribute_hunting_no">Geen jacht</string>
     <string name="attribute_danger_yes">Gevaarlijk gebied</string>
-    <string name="attribute_danger_no">Geen gevaarlijk gebied</string>
     <string name="attribute_thorn_yes">Doornen</string>
-    <string name="attribute_thorn_no">Geen doornen</string>
     <string name="attribute_wheelchair_yes">Rolstoel toegankelijk</string>
     <string name="attribute_wheelchair_no">Niet rolstoel toegankelijk</string>
     <string name="attribute_parking_yes">Parkeerplaats beschikbaar</string>
     <string name="attribute_parking_no">Geen parkeergelegenheid</string>
     <string name="attribute_public_yes">Openbaar vervoer</string>
-    <string name="attribute_public_no">Geen openbaar vervoer</string>
     <string name="attribute_water_yes">Drinkwater in de buurt</string>
     <string name="attribute_water_no">Geen drinkwater in de buurt</string>
     <string name="attribute_restrooms_yes">Toilet beschikbaar in de buurt</string>
@@ -2179,13 +2183,9 @@
     <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">Geen offset cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">Geen bonus cache</string>
     <string name="attribute_powertrail_yes">Deel van een powertrail</string>
-    <string name="attribute_powertrail_no">Geen deel van een powertrail</string>
     <string name="attribute_challengecache_yes">Challenge cache</string>
-    <string name="attribute_challengecache_no">Geen challenge cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com oplossing checker ingeschakeld</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com oplossing checker niet ingeschakeld</string>
     <string name="attribute_handicaching_yes">Beoordeeld op Handicaching.com</string>
     <string name="attribute_handicaching_no">Niet beoordeeld op Handicaching.com</string>
     <string name="attribute_munzee_yes">Bevat een Munzee</string>
@@ -2322,12 +2322,17 @@
         <item quantity="other">Cache pictogrammen %d instellen</item>
     </plurals>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
+    <string name="live_map_status_http429">Niet zo snel, te veel aanvragen naar %s</string>
+    <string name="live_map_status_error">Fout bij het laden van kaartgegevens: %s</string>
+    <string name="live_map_status_partial">Gedeeltelijke resultaten (zoom in om het aantal te laden caches te verminderen): %s</string>
+    <string name="live_map_status_normal">Gegevens laden zonder problemen: %s</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint geëxtraheerd</item>
         <item quantity="other">%d waypoints geëxtraheerd</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coördinaat checker beschikbaar via browser</string>
+    <string name="link_gallery">Afbeeldingen beschikbaar in de galerij (%d)</string>
     <string name="geochecker_available">Geochecker beschikbaar via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
@@ -2378,12 +2383,13 @@
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
     <string name="map_refresh_individual_route">Verversen</string>
-    <string name="map_export_individual_route">Individuele route exporteren</string>
-    <string name="map_load_individual_route">Individuele route laden</string>
+    <string name="map_export_route">Exporteer als route</string>
+    <string name="map_export_track">Exporteer als track</string>
+    <string name="map_load_individual_route">Laad vanuit GPX</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Handmatige doelen wissen</string>
+    <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2443,6 +2449,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="show_all">Alles weergeven</string>
+    <string name="lists_only_new">Alleen nieuwe</string>
+    <string name="pq_only_dl">Downloadbaar</string>
     <string name="routingmode_straight">Recht</string>
     <string name="routingmode_walk">Lopen</string>
     <string name="routingmode_bike">Fiets</string>
@@ -2543,7 +2551,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (herstart vereist)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>

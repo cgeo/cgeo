@@ -8,6 +8,7 @@ import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -18,6 +19,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
@@ -30,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
@@ -42,6 +45,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
+    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
 
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -159,13 +163,18 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                                 if (!result.isOk()) {
                                     SimpleDialog.of(activity)
                                         .setTitle(R.string.info_log_delete_failed)
-                                        .setMessage(TextParam.id(R.string.info_log_post_failed_reason, result.getErrorString()).setMovement(true))
+                                        .setMessage(TextParam.id(R.string.info_log_delete_failed_simple_reason))
                                         .show();
                                 }
                             })
                             .deleteLog(cache, log));
                 }
 
+            }
+
+            // expand/collapse
+            if (holder.binding.log.isCollapsible()) {
+                ctxMenu.addItem(holder.binding.log.isCollapsed() ? R.string.menu_expand_log : R.string.menu_collapse_log, holder.binding.log.isCollapsed() ? R.drawable.expand_less : R.drawable.expand_more, it -> holder.binding.log.setCollapse(!holder.binding.log.isCollapsed()));
             }
 
             //Copy to clipboard
@@ -187,6 +196,21 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                     ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
                             TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
                 }
+            }
+            if (Settings.getTranslationTargetLanguage().isValid()) {
+                ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
+                    if (translationStatus.isTranslated()) {
+                        translationStatus.setNotTranslated();
+                        fillViewHolder(null, holder, log);
+                    } else {
+                        final String logText = HtmlUtils.extractText(log.log);
+                        translationStatus.startTranslation(1, null, null);
+                        OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), logText,
+                                unsupportedLng -> Toast.makeText(getContext(), getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
+                                downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
+                                translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, holder.binding.log::setText, e -> Toast.makeText(getContext(), getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
+                        }
+                });
             }
 
             // share

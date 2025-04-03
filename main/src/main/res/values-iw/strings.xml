@@ -199,7 +199,6 @@
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
     <string name="info_log_post_failed">פירסום הלוג נכשל.</string>
-    <string name="info_log_post_failed_reason">סיבה:%s</string>
     <string name="info_log_post_retry">נסה שנית</string>
     <string name="info_log_post_save">שמור באופן לא מקוון</string>
     <string name="info_log_cleared">הלוג נוקה.</string>
@@ -255,7 +254,6 @@
     <string name="caches_sort_name">שם</string>
     <string name="caches_sort_rating">דירוג</string>
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
-    <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
@@ -381,7 +379,6 @@
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
-    <string name="cache_status_attended">השתתף</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>

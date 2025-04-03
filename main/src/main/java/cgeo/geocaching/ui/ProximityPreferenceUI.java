@@ -30,7 +30,7 @@ public class ProximityPreferenceUI extends SeekbarUI {
 
     @Override
     public int progressToValue(final int progress) {
-        final int value = (int) Math.pow(10, (double) progress / 250.0) - 1;
+        final int value = (int) Math.round(Math.pow(10, (double) progress / 250.0)) - 1;
         return Math.max(value, 0);
     }
 

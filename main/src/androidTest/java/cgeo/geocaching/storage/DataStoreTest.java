@@ -72,6 +72,7 @@ public class DataStoreTest {
 
             // get list
             final StoredList list1 = DataStore.getList(listId1);
+            final List<StoredList> lists = DataStore.getLists();
             assertThat(list1).isNotNull();
             assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
 

@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/menu_search_own_caches"
-        android:icon="@drawable/ic_menu_owned"
-        android:title="@string/search_own_caches"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        android:id="@+id/menu_gosearch"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/search_bar_hint"
+        app:actionViewClass="android.widget.AutoCompleteTextView"
+        app:iconifiedByDefault="true"
+        android:visible="false"
+        app:showAsAction="collapseActionView|always"/>
+    <item
+        android:id="@+id/menu_gosearch_icon"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/search_bar_hint"
+        android:visible="false"
+        app:showAsAction="always"/>
 
 </menu>

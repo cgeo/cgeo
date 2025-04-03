@@ -103,7 +103,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                 if (Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                     viewModel.followMyLocation.setValue(false);
                 }
-                viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
             }
             if (event == Map.SCALE_EVENT || event == Map.POSITION_EVENT) {
                 ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getMapPosition().zoomLevel);
@@ -130,7 +129,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         renderer.setOffset(30 * CanvasAdapter.getScale(), 0); // make room for attribution
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
 
-        if (Settings.getMapShadingEnabled() && Settings.getMapShadingShowLayer() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()) {
+        if (Settings.getMapShadingShowLayer() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()) {
             addLayer(2, new MapilionVTMHillshadingSource().getBitmapTileLayer(mMap));
             //addLayer(2, new MapToolkitVTMHillshadingSource().getBitmapTileLayer(mMap));
         }
@@ -299,9 +298,13 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
-        return mMap == null ? new BoundingBox(0, 0, 0, 0) : mMap.getBoundingBox(0);
+    @Nullable
+    public Viewport getViewport() {
+        final BoundingBox bb = mMap == null ? null : mMap.getBoundingBox(0);
+        if (bb == null) {
+            return null;
+        }
+        return Viewport.forE6(bb.minLatitudeE6, bb.minLongitudeE6, bb.maxLatitudeE6, bb.maxLongitudeE6);
     }
 
     @Override

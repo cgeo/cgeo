@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -759,77 +760,85 @@ public class GCWebAPI {
     static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
         final SearchResult result = new SearchResult();
 
-        final MapSearchResultSet mapSearchResultSet = search.execute();
-        result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
-        final List<Geocache> foundCaches = new ArrayList<>();
+        try {
 
-        if (mapSearchResultSet.results != null) {
-            for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+            final MapSearchResultSet mapSearchResultSet = search.execute();
+            result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
+            result.setPartialResult(con, search.getTake() > 0 && mapSearchResultSet.results.size() == search.getTake());
+            final List<Geocache> foundCaches = new ArrayList<>();
 
-                final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
+            if (mapSearchResultSet.results != null) {
+                for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
 
-                final Geocache c = new Geocache();
-                c.setDetailed(false);
-                c.setGeocode(r.code);
-                c.setName(r.name);
-                if (r.userCorrectedCoordinates != null) {
-                    c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
-                    c.setUserModifiedCoords(true);
-                } else if (cacheCoord != null) {
-                    c.setCoords(cacheCoord);
-                    c.setUserModifiedCoords(false);
-                } else {
-                    //this can only happen for PREMIUM caches when searched by BASIC members.
-                    //Open issue: what to do with those?
-                    c.setCoords(null);
-                }
-                c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
-                c.setDifficulty(r.difficulty);
-                c.setTerrain(r.terrain);
-                c.setSize(CacheSize.getByGcId(r.containerType));
-                c.setPremiumMembersOnly(r.premiumOnly);
-                c.setHidden(r.placedDate);
-                c.setLastFound(r.lastFoundDate);
-                c.setInventoryItems(r.trackableCount);
-                c.setLocation(r.region + ", " + r.country);
+                    final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
 
-                //Only set found if the map returns a "found",
-                //the map API will possibly lag behind and break
-                //cache merging if "not found" is set
-                if (r.userFound) {
-                    c.setFound(true);
-                } else if (r.userDidNotFind) {
-                    c.setDNF(true);
-                }
-
-                c.setFavoritePoints(r.favoritePoints);
-                c.setDisabled(r.cacheStatus == 1);
-                c.setArchived(r.cacheStatus == 2);
-                if (r.owner != null) {
-                    c.setOwnerDisplayName(r.owner.username);
-                    c.setOwnerUserId(r.owner.username);
-                }
-
-                // parse attributes
-                final List<String> attributes = new ArrayList<>();
-                if (r.attributes != null) {
-                    for (Attribute attribute : r.attributes) {
-                        attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                    final Geocache c = new Geocache();
+                    c.setDetailed(false);
+                    c.setGeocode(r.code);
+                    c.setName(r.name);
+                    if (r.userCorrectedCoordinates != null) {
+                        c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
+                        c.setUserModifiedCoords(true);
+                    } else if (cacheCoord != null) {
+                        c.setCoords(cacheCoord);
+                        c.setUserModifiedCoords(false);
+                    } else {
+                        //this can only happen for PREMIUM caches when searched by BASIC members.
+                        //Open issue: what to do with those?
+                        c.setCoords(null);
                     }
-                }
-                c.setAttributes(attributes);
+                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
+                    c.setDifficulty(r.difficulty);
+                    c.setTerrain(r.terrain);
+                    c.setSize(CacheSize.getByGcId(r.containerType));
+                    c.setPremiumMembersOnly(r.premiumOnly);
+                    c.setHidden(r.placedDate);
+                    c.setLastFound(r.lastFoundDate);
+                    c.setInventoryItems(r.trackableCount);
+                    c.setLocation(r.region + ", " + r.country);
 
-                foundCaches.add(c);
+                    //Only set found if the map returns a "found",
+                    //the map API will possibly lag behind and break
+                    //cache merging if "not found" is set
+                    if (r.userFound) {
+                        c.setFound(true);
+                    } else if (r.userDidNotFind) {
+                        c.setDNF(true);
+                    }
+
+                    c.setFavoritePoints(r.favoritePoints);
+                    c.setDisabled(r.cacheStatus == 1);
+                    c.setArchived(r.cacheStatus == 2);
+                    if (r.owner != null) {
+                        c.setOwnerDisplayName(r.owner.username);
+                        c.setOwnerUserId(r.owner.username);
+                    }
+
+                    // parse attributes
+                    final List<String> attributes = new ArrayList<>();
+                    if (r.attributes != null) {
+                        for (Attribute attribute : r.attributes) {
+                            attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                        }
+                    }
+                    c.setAttributes(attributes);
+
+                    foundCaches.add(c);
+                }
+
             }
 
+            tryGuessMissingDistances(foundCaches, search);
+
+            result.addAndPutInCache(foundCaches);
+            if (includeGcVote) {
+                GCVote.loadRatings(foundCaches);
+            }
+        } catch (RuntimeException re) {
+            Log.w("GCWebAPI: problem executing search", re);
+            result.setError(GCConnector.getInstance(), StatusCode.COMMUNICATION_ERROR);
         }
 
-        tryGuessMissingDistances(foundCaches, search);
-
-        result.addAndPutInCache(foundCaches);
-        if (includeGcVote) {
-            GCVote.loadRatings(foundCaches);
-        }
         return result;
     }
 

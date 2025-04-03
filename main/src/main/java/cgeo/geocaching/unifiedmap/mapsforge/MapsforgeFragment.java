@@ -94,8 +94,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
                 if (Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                     viewModel.followMyLocation.setValue(false);
                 }
-                final LatLong center = mMapView.getModel().mapViewPosition.getCenter();
-                viewModel.mapCenter.setValue(new Geopoint(center.getLatitude(), center.getLongitude()));
             }
 
             @Override
@@ -245,16 +243,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     public Geopoint getCenter() {
         final LatLong pos = mMapView.getModel().mapViewPosition.getMapPosition().latLong;
         return new Geopoint(pos.getLatitude(), pos.getLongitude());
-    }
-
-    @NonNull
-    @Override
-    public BoundingBox getBoundingBox() {
-        if (mMapView == null) {
-            return new BoundingBox(0, 0, 0, 0);
-        }
-        final Viewport viewport = getViewport();
-        return new BoundingBox(viewport.getLatitudeMin(), viewport.getLongitudeMin(), viewport.getLatitudeMax(), viewport.getLongitudeMax());
     }
 
     @Override

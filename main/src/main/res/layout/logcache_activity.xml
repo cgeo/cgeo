@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:dividerAbove="true"
-                    android:text="@string/cache_inventory" />
+                    android:text="@string/log_inventory" />
 
                 <ListView
                     android:id="@+id/inventory"

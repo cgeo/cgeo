@@ -97,21 +97,21 @@ public void testOpenAndroMaps() {
 
     @Test
     public void testOpenAndroMapsThemes() {
-        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl));
+        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl));
 
         // number of themes
-        assertThat(list.size()).isEqualTo(2);
+        assertThat(list.size()).isEqualTo(3);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(2);
+        assertThat(count(list, false)).isEqualTo(3);
 
         // check one named entry
         final Download d = findByName(list, "Elevate");
         assertThat(d).isNotNull();
-        assertThat(d.getSizeInfo()).isBlank(); // no size info available
+        assertThat(d.getSizeInfo()).isNotBlank();
     }
 
     @Test

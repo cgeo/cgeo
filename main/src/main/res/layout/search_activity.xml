@@ -1,221 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    tools:context=".SearchActivity" >
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flipper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:id="@+id/grid_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:elevation="0dp"
+            android:orientation="horizontal"
+            android:padding="8dp" />
+    </ScrollView>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Filter -->
-        <cgeo.geocaching.ui.SectionHeader
+        <LinearLayout
+            android:id="@+id/clipboardGeocode"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search_filter" />
+            android:orientation="vertical">
 
-        <RelativeLayout style="@style/search_content_group">
-
-            <Button
-                android:id="@+id/search_filter"
-                style="@style/button_full"
-                android:text="@string/search_filter_button"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/search_filter_info"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/search_filter_info"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                app:srcCompat="@drawable/ic_menu_help"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:tooltipText="@string/tap_icon_more_info"
-                android:contentDescription="@string/tap_icon_more_info"/>
-        </RelativeLayout>
-
-        <!-- Geocode -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_geo" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/geocode_input_layout"
-                style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/display_geocode"
-                android:hint="@string/search_geo" android:labelFor="@id/geocode">
-                <AutoCompleteTextView
-                    android:id="@+id/geocode"
-                    style="@style/textinput_embedded_singleline_go"
-                    android:text="GC"
-                    tools:ignore="HardcodedText"
-                    android:inputType="textVisiblePassword"
-                    android:importantForAutofill="no" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/display_geocode"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-        <!-- Coordinates -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_coordinates" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <Button
-                android:id="@+id/buttonLatLongitude"
-                style="@style/button_full_double"
-                android:layout_toLeftOf="@+id/search_coordinates"
-                android:hint="@string/latlongitude" />
-
-            <Button
-                android:id="@+id/search_coordinates"
-                android:tooltipText="@string/search_coordinates_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-        <!-- Address -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_address" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/search_address"
-                android:hint="@string/search_address" android:labelFor="@id/address">
-                <AutoCompleteTextView
-                    android:id="@+id/address"
-                    style="@style/textinput_embedded_singleline_go" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/search_address"
-                android:tooltipText="@string/search_address_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-        <!-- Keyword -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_kw" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/search_keyword"
-                android:hint="@string/search_kw_prefill" android:labelFor="@id/keyword">
-                <AutoCompleteTextView
-                    android:id="@+id/keyword"
-                    style="@style/textinput_embedded_singleline_go" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/search_keyword"
-                android:tooltipText="@string/search_kw_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-
-            <TextView
-                android:id="@+id/search_keyword_disabled_hint"
+            <include
+                android:layout_height="48dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dip"
-                android:layout_marginRight="6dip"
-                android:text="@string/search_kw_disabled_hint"
-                android:visibility="gone" />
-        </RelativeLayout>
+                layout="@layout/cacheslist_item_select"
+                />
 
-        <!-- Hidden by -->
-        <cgeo.geocaching.ui.SectionHeader
+            <View
+                android:id="@+id/line"
+                style="@style/separator_horizontal" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/suggestion_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_hbu" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/search_owner"
-                android:hint="@string/search_hbu_prefill" android:labelFor="@id/owner">
-                <AutoCompleteTextView
-                    android:id="@+id/owner"
-                    style="@style/textinput_embedded_singleline_go" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/search_owner"
-                android:tooltipText="@string/search_hbu_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-        <!-- Found by -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_finder" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/search_finder"
-                android:hint="@string/search_finder_prefill" android:labelFor="@id/finder">
-                <AutoCompleteTextView
-                    android:id="@+id/finder"
-                    style="@style/textinput_embedded_singleline_go" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/search_finder"
-                android:tooltipText="@string/search_finder_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-        <!-- TB -->
-        <cgeo.geocaching.ui.SectionHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_tb" />
-
-        <RelativeLayout style="@style/search_content_group">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/display_trackable"
-                android:hint="@string/search_tb_hint" android:labelFor="@id/trackable">
-                <AutoCompleteTextView
-                    android:id="@+id/trackable"
-                    style="@style/textinput_embedded_singleline_go"
-                    android:inputType="textVisiblePassword"
-                    android:importantForAutofill="no" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/display_trackable"
-                android:tooltipText="@string/search_tb_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
-</ScrollView>
+</ViewFlipper>

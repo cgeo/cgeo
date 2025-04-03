@@ -526,7 +526,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
-                mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget));
+                mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget, null));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -754,7 +754,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
-            MapUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
@@ -820,7 +819,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 || DownloaderUtils.onOptionsItemSelected(activity, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget);
+            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget, null);
         } else {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -1265,7 +1264,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             // live mode search result
             if (mapOptions.isLiveEnabled) {
-                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport()));
+                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(), null));
             }
 
             downloaded = true;

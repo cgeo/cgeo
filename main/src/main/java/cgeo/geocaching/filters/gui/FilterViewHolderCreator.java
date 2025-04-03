@@ -65,6 +65,9 @@ public class FilterViewHolderCreator {
             case OFFLINE_LOG:
                 result = new StringFilterViewHolder<>();
                 break;
+            case INVENTORY_COUNT:
+                result = new NumberCountFilterViewHolder(0, 100);
+                break;
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
@@ -144,7 +147,7 @@ public class FilterViewHolderCreator {
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
                                 .setSelectableValues(ConnectorFactory.getConnectors())
-                                .setValueDisplayTextGetter(IConnector::getName)
+                                .setValueDisplayTextGetter(IConnector::getDisplayName)
                                 .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)), 1,
                         new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;

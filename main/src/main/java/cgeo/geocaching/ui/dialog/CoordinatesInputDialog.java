@@ -60,6 +60,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Provides a dialog to enter coordinates in different formats.
+ * Usage:
+ * 1. open the coordinate selection dialog: call CoordinatesInputDialog.show(getSupportFragmentManager(), null, null);
+ * 2. in your activity implement CoordinatesInputDialog.CoordinateUpdate, closing the dialog calls public void updateCoordinates(@NonNull final Geopoint gp)
+ */
 public class CoordinatesInputDialog extends DialogFragment {
 
     private CoordinateInputData inputData;

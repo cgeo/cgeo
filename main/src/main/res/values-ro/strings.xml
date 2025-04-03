@@ -234,7 +234,6 @@
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
     <string name="info_log_post_failed">Publicarea însemnării a eşuat.</string>
-    <string name="info_log_post_failed_reason">Motivul: %s</string>
     <string name="info_log_post_retry">Încearcă din nou</string>
     <string name="info_log_post_save">Salvează local</string>
     <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>
@@ -286,7 +285,6 @@
     <string name="caches_sort_name">Nume</string>
     <string name="caches_sort_rating">Voturi</string>
     <string name="caches_sort_vote">Vot (propriul vot)</string>
-    <string name="caches_sort_inventory">Total inventar</string>
     <string name="caches_sort_date_hidden">Data ascunderii</string>
     <string name="caches_sort_finds">Găsite</string>
     <string name="caches_sort_state">Stare</string>
@@ -637,7 +635,6 @@
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
-    <string name="cache_status_attended">A participat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_status_archived">Arhivată</string>
@@ -755,7 +752,6 @@
     <string name="search_tb_button">Caută obiect călător</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
-    <string name="search_own_caches">Caută cutiile mele</string>
     <!-- trackable -->
     <string name="trackable">Obiecte călătoare</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
@@ -808,7 +804,6 @@
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <!-- export -->
     <string name="export">Exportă</string>
     <string name="export_exportedto">exportat către</string>
@@ -860,9 +855,7 @@
     <string name="attribute_climbing_yes">Căţărare dificilă</string>
     <string name="attribute_climbing_no">Căţărare uşoară</string>
     <string name="attribute_wading_yes">Poate fi necesară traversare prin apă</string>
-    <string name="attribute_wading_no">Nu este necesară traversarea prin apă</string>
     <string name="attribute_swimming_yes">S-ar putea să fie necesar înotul</string>
-    <string name="attribute_swimming_no">Înotul nu este necesar</string>
     <string name="attribute_available_yes">Disponibilă permanent</string>
     <string name="attribute_available_no">Nu este disponibilă tot timul</string>
     <string name="attribute_night_yes">Recomandat noaptea</string>
@@ -872,7 +865,6 @@
     <string name="attribute_stealth_yes">Trebuie să fii discret</string>
     <string name="attribute_stealth_no">Discreţia nu este necesară</string>
     <string name="attribute_firstaid_yes">Are nevoie de întreţinere</string>
-    <string name="attribute_firstaid_no">Nu are nevoie de întreţinere</string>
     <string name="attribute_cow_yes">Atenţie la animale domestice mari (vite)</string>
     <string name="attribute_cow_no">Nu sunt prezente animale domestice mari (vite)</string>
     <string name="attribute_field_puzzle_yes">Se rezolvă la faţa locului</string>
@@ -902,49 +894,32 @@
     <string name="attribute_partnership_yes">Geocutie parteneriat</string>
     <string name="attribute_partnership_no">Nu e geocutie parteneriat</string>
     <string name="attribute_fee_yes">Parcare cu plată sau taxa de intrare</string>
-    <string name="attribute_fee_no">Fără taxă de parcare sau de intrare</string>
     <string name="attribute_rappelling_yes">Necesită echipament de alpinism</string>
-    <string name="attribute_rappelling_no">Nu necesită echipament de alpinism</string>
     <string name="attribute_boat_yes">Necesită barcă</string>
-    <string name="attribute_boat_no">Nu este necesară o barcă</string>
     <string name="attribute_scuba_yes">Necesită echipament de scufundare</string>
-    <string name="attribute_scuba_no">Nu este necesar echipament de scufundare</string>
     <string name="attribute_flashlight_yes">Necesită lanternă</string>
-    <string name="attribute_flashlight_no">Nu este necesară lanterna</string>
     <string name="attribute_uv_yes">Necesită lanternă UV</string>
     <string name="attribute_uv_no">Nu este necesară lanterna UV</string>
     <string name="attribute_snowshoes_yes">Ai nevoie de încălţări de zăpadă</string>
-    <string name="attribute_snowshoes_no">Nu ai nevoie de încălţări de zăpadă</string>
     <string name="attribute_skiis_yes">Este necesar practicare de ski fond</string>
-    <string name="attribute_skiis_no">Practicarea de ski fond nu este necesară</string>
     <string name="attribute_s_tool_yes">Necesită unelte speciale</string>
-    <string name="attribute_s_tool_no">Nu sunt necesare unelte speciale</string>
     <string name="attribute_wirelessbeacon_yes">Baliză radio</string>
-    <string name="attribute_wirelessbeacon_no">Nu e baliză radio</string>
     <string name="attribute_treeclimbing_yes">Trebuie urcat într-un copac</string>
     <string name="attribute_treeclimbing_no">Nu trebuie urcat în copac</string>
     <string name="attribute_poisonoak_yes">Plante otrăvitoare</string>
     <string name="attribute_poisonoak_no">Nu există plante otrăvitoare</string>
     <string name="attribute_dangerousanimals_yes">Animale periculoase</string>
-    <string name="attribute_dangerousanimals_no">Nu există animale periculoase</string>
     <string name="attribute_ticks_yes">Căpuşe</string>
-    <string name="attribute_ticks_no">Nu există căpuşe</string>
     <string name="attribute_mine_yes">Mine abandonate</string>
-    <string name="attribute_mine_no">Nu există mine abandonate</string>
     <string name="attribute_cliff_yes">Stânci / cad pietre</string>
-    <string name="attribute_cliff_no">Nu există stânci / nu cad pietre</string>
     <string name="attribute_hunting_yes">Teren de vânătoare</string>
-    <string name="attribute_hunting_no">Nu este teren de vânătoare</string>
     <string name="attribute_danger_yes">Zonă periculoasă</string>
-    <string name="attribute_danger_no">Nu este o zonă periculoasă</string>
     <string name="attribute_thorn_yes">Spini</string>
-    <string name="attribute_thorn_no">Nu există spini</string>
     <string name="attribute_wheelchair_yes">Accesibilă din scan cu rotile</string>
     <string name="attribute_wheelchair_no">Nu este accesibilă din scaun cu rotile</string>
     <string name="attribute_parking_yes">Parcare</string>
     <string name="attribute_parking_no">Nu există parcare</string>
     <string name="attribute_public_yes">Transport public</string>
-    <string name="attribute_public_no">Nu există transport în comun</string>
     <string name="attribute_water_yes">În apropiere există apă potabilă</string>
     <string name="attribute_water_no">Nu există apă potabilă în apropiere</string>
     <string name="attribute_restrooms_yes">În apropiere există toalete publice</string>

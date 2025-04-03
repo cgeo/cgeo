@@ -1,6 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -61,6 +62,8 @@ public class Waypoint implements INamedGeoCoordinate {
 
     @Nullable
     private Geopoint preprojectedCoords = null;
+    @Nullable
+    private Float geofence; // radius in meters
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -132,6 +135,9 @@ public class Waypoint implements INamedGeoCoordinate {
         }
         if (preprojectedCoords == null) {
             preprojectedCoords = old.preprojectedCoords;
+        }
+        if (geofence == null) {
+            geofence = old.geofence;
         }
 
         // keep note only for user-defined waypoints
@@ -302,6 +308,20 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public Geopoint getPreprojectedCoords() {
         return preprojectedCoords;
+    }
+
+    @Nullable
+    public Float getGeofence() {
+        return geofence;
+    }
+
+    public boolean canChangeGeofence() {
+        // currently geofence value is used by AL connector only, so you may set it manually for every other connector
+        return !ALConnector.getInstance().canHandle(geocode);
+    }
+
+    public void setGeofence(@Nullable final Float geofence) {
+        this.geofence = geofence;
     }
 
     public void setCoords(final Geopoint coords) {

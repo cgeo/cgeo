@@ -232,8 +232,7 @@ public class ColorPickerUI {
         return itemView;
     }
 
-    public static void setViewColor(final ImageView imageView, final int color, final boolean selected) {
-        final Drawable current = imageView.getDrawable();
+    public static Drawable getViewImage(final Drawable current, final int color, final boolean selected) {
         final GradientDrawable drawable;
         if (current instanceof GradientDrawable) {
             drawable = (GradientDrawable) current;
@@ -244,7 +243,11 @@ public class ColorPickerUI {
         drawable.setCornerRadii(radii);
         drawable.setColor(color);
         drawable.setStroke(strokeWidth, Color.rgb(Color.red(color) * 224 / 256, Color.green(color) * 224 / 256, Color.blue(color) * 224 / 256));
-        imageView.setImageDrawable(drawable);
+        return drawable;
+    }
+
+    public static void setViewColor(final ImageView imageView, final int color, final boolean selected) {
+        imageView.setImageDrawable(getViewImage(imageView.getDrawable(), color, selected));
     }
 
     private int getColorScheme() {

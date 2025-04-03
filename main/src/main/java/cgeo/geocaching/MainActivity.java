@@ -35,7 +35,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
@@ -44,6 +43,7 @@ import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
@@ -331,14 +331,9 @@ public class MainActivity extends AbstractNavigationBarActivity {
         binding.quicklaunchitems.setVisibility(View.GONE);
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
-            if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
+            if (QuickLaunchItem.conditionsFulfilled(item)) {
                 addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
             }
-        }
-
-        // temporarily add button for unified map, if enabled in settings
-        if (Settings.showUnifiedMap()) {
-            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map", null);
         }
     }
 
@@ -528,6 +523,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_download_language) {
+            OfflineTranslateUtils.downloadLanguageModels(this);
         } else if (id == R.id.menu_delete_offline_data) {
             DownloaderUtils.deleteOfflineData(this);
         } else if (id == R.id.menu_pending_downloads) {

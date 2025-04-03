@@ -510,7 +510,7 @@ public class SimpleDialog {
         if (model.selectSetSupplier != null) {
             this.setNeutralButton(model.selectSetActionText);
         }
-        if (!selectionConfirmedViaButton) {
+        if (!selectionConfirmedViaButton && buttonClickAction == null) {
             //remove "negative/positive" buttons
             setPositiveButton(null);
             setNegativeButton(null);

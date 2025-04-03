@@ -307,7 +307,6 @@
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
     <string name="info_log_post_failed">로그 올리기가 실패했습니다.</string>
     <string name="info_log_delete_failed">로그 삭제 실패했습니다.</string>
-    <string name="info_log_post_failed_reason">사유 : %s</string>
     <string name="info_log_post_retry">재시도</string>
     <string name="info_log_post_save">오프라인 저장</string>
     <string name="info_log_cleared">로그를 비웠습니다.</string>
@@ -405,7 +404,6 @@
     <string name="caches_sort_geocode">지오코드</string>
     <string name="caches_sort_rating">평점</string>
     <string name="caches_sort_vote">투표(자체 평점)</string>
-    <string name="caches_sort_inventory">목록 갯수</string>
     <string name="caches_sort_date_hidden">숨긴 날짜</string>
     <string name="caches_sort_finds">찾음</string>
     <string name="caches_sort_state">상태</string>
@@ -1042,12 +1040,8 @@
     <string name="init_trackappearance_summary">트랙/경로선의 색상, 불투명도 및 선폭을 선택합니다. 경로는 여러 지점으로 구성되며 GPX 경로 파일을 통해 로딩할 수 있습니다.</string>
     <string name="init_circlecolor">원형선 색상</string>
     <string name="init_circlecolor_summary">원형선의 색상과 불투명도를 선택합니다. 원형은 캐시 또는 물리적 지점 주변의 최소 반경에 대한 시각적 표현으로 사용되며 다른 캐시 또는 물리적 지점은 허용되지 않습니다. (geocaching.com에 적용)</string>
-    <string name="init_circlefillcolor">원형 내부 색상</string>
-    <string name="init_circlefillcolor_summary">채울 원형의 색상 및 불투명도를 선택하십시오.</string>
     <string name="init_accuracycirclecolor">정확도 원 선 색상</string>
     <string name="init_accuracycirclecolor_summary">정확한 원 선을 위해 색상과 불투명도를 선택합니다. 정확도 원은 위치 신호 정확도에 대한 시각적 표현으로 사용됩니다.</string>
-    <string name="init_accuracycirclefillcolor">정확도 원 내부 색상</string>
-    <string name="init_accuracycirclefillcolor_summary">채울 정확도 원의 색상 및 불투명도를 선택하십시오.</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
@@ -1134,9 +1128,6 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
-    <string name="category_unifiedMap">통합 지도 (베타)</string>
-    <string name="init_title_useUnifiedMap">통합 지도 사용</string>
-    <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도를 사용합니다.</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
     <string name="localstorage_migrate_status_major">버전 %1$d</string>
     <!-- proximity notification -->
@@ -1416,7 +1407,6 @@
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
     <string name="cache_status_offline_log">저장된 로그</string>
-    <string name="cache_status_attended">참가했음</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
     <string name="cache_status_archived">영구보관됨</string>
@@ -1502,7 +1492,6 @@
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
-    <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
     <string name="internal_cache_default_owner">당신</string>
     <string name="internal_goto_targets_title">\'이동으로\' 목표</string>
@@ -1518,6 +1507,7 @@
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
+    <string name="internal_connector_name">사용자 정의 캐시</string>
     <!-- html styles -->
     <string name="html_style_default">기본</string>
     <string name="html_style_monochrome">흑백크롬</string>
@@ -1620,7 +1610,6 @@
     <string name="calccoord_guided_value">값</string>
     <string name="calccoord_convert_to_plain">일반 좌표로 변환</string>
     <string name="calccoord_plain_tools_title">일반 도구</string>
-    <string name="calccoord_remove_spaces">공백 제거</string>
     <string name="calccoord_paste_from_clipboard">클립보드에서 붙여넣기</string>
     <string name="calccoord_generate_title">지점 생성</string>
     <string name="calccoord_generate_showonmap">지도에 표시</string>
@@ -1763,7 +1752,6 @@
     <string name="add_target_to">대상 추가</string>
     <string name="search_address_started">장소 검색 중</string>
     <string name="search_address_result">장소 찾기</string>
-    <string name="search_own_caches">내 캐시 검색</string>
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
@@ -1843,7 +1831,6 @@
     <string name="helper_gps_locker_description">GPS Locker는 다른 응용으로 전환하거나, 화면을 끈 상태에서도 GPS 신호를 활성으로 유지합니다.</string>
     <string name="helper_google_translate_title">구글 번역</string>
     <string name="helper_google_translate_description">구글 번역(Google Translate)앱을 다운로드 받으면 c:geo에서 캐시 설명을 쉽게 번역할 수 있습니다. 캐시 설명문을 길게 누르시면 됩니다.(인터넷 연결 필요없음)</string>
-    <string name="helper_where_you_go_description">WhereYouGo를 사용하면 Wherigo 유형의 지오캐시를 검색하고 즐길 수 있습니다. c:geo는 자동적으로 카트리지를 다운로드 받습니다.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf를 사용하면 ANT+/처프 지오캐시에 필요한 ANT+/Garmin 처프 태그에서 데이터를 읽을 수 있습니다.</string>
     <string name="helper_alc_description">휴대폰 또는 태블릿 용 어드벤처 랩 앱</string>
     <string name="helper_gcwizard_description">GC Wizard에는 수백 가지의 다양한 기호 집합뿐만 아니라 간단한 암호화, 측지학 및 과학적 계산을 위한 수많은 도구가 포함되어 있습니다.</string>
@@ -1904,9 +1891,7 @@
     <string name="attribute_climbing_yes">어려운 등반</string>
     <string name="attribute_climbing_no">쉬운 등반</string>
     <string name="attribute_wading_yes">물을 건너야 함</string>
-    <string name="attribute_wading_no">물을 건널 필요 없음</string>
     <string name="attribute_swimming_yes">수영이 필요함</string>
-    <string name="attribute_swimming_no">수영 필요없음</string>
     <string name="attribute_available_yes">항상 접근 가능</string>
     <string name="attribute_available_no">접근가능하지 않을 수 있음</string>
     <string name="attribute_night_yes">야간에 권장</string>
@@ -1916,7 +1901,6 @@
     <string name="attribute_stealth_yes">은밀함이 필요</string>
     <string name="attribute_stealth_no">은밀함이 필요 없음</string>
     <string name="attribute_firstaid_yes">유지보수가 필요함</string>
-    <string name="attribute_firstaid_no">유지보수 필요없음</string>
     <string name="attribute_cow_yes">가축 조심</string>
     <string name="attribute_cow_no">가축 없음</string>
     <string name="attribute_field_puzzle_yes">현장 퍼즐</string>
@@ -1946,49 +1930,32 @@
     <string name="attribute_partnership_yes">제휴 캐시</string>
     <string name="attribute_partnership_no">제휴캐시 아님</string>
     <string name="attribute_fee_yes">입장료 또는 주차료 필요</string>
-    <string name="attribute_fee_no">입장료 또는 주차료 없음</string>
     <string name="attribute_rappelling_yes">등산 장비 필요</string>
-    <string name="attribute_rappelling_no">등산 장비 필요 없음</string>
     <string name="attribute_boat_yes">보트 필요</string>
-    <string name="attribute_boat_no">보트 필요없음</string>
     <string name="attribute_scuba_yes">스쿠버 장비 필요</string>
-    <string name="attribute_scuba_no">스쿠버 장비 필요 없음</string>
     <string name="attribute_flashlight_yes">플래시 필요</string>
-    <string name="attribute_flashlight_no">플래시 필요없음</string>
     <string name="attribute_uv_yes">UV 라이트 필요</string>
     <string name="attribute_uv_no">UV 라이트 필요없음</string>
     <string name="attribute_snowshoes_yes">설상화 필요</string>
-    <string name="attribute_snowshoes_no">설상화 필요없음</string>
     <string name="attribute_skiis_yes">크로스컨트리 스키 필요</string>
-    <string name="attribute_skiis_no">크로스컨트리 스키 필요 없음</string>
     <string name="attribute_s_tool_yes">특별한 도구가 필요함</string>
-    <string name="attribute_s_tool_no">특별한 도구가 필요없음</string>
     <string name="attribute_wirelessbeacon_yes">무선 비이콘</string>
-    <string name="attribute_wirelessbeacon_no">무선 비이콘 없음</string>
     <string name="attribute_treeclimbing_yes">나무를 올라야 함</string>
     <string name="attribute_treeclimbing_no">나무를 오를 필요 없음</string>
     <string name="attribute_poisonoak_yes">독성 식물</string>
     <string name="attribute_poisonoak_no">독성 식물 없음</string>
     <string name="attribute_dangerousanimals_yes">위험한 동물</string>
-    <string name="attribute_dangerousanimals_no">위험한 동물없음</string>
     <string name="attribute_ticks_yes">진드기</string>
-    <string name="attribute_ticks_no">진드기 없음</string>
     <string name="attribute_mine_yes">버려진 광산</string>
-    <string name="attribute_mine_no">버려진 광산 아님</string>
     <string name="attribute_cliff_yes">절벽 / 바위 구름</string>
-    <string name="attribute_cliff_no">절벽 / 바위 없음</string>
     <string name="attribute_hunting_yes">수렵장</string>
-    <string name="attribute_hunting_no">수렵장 아님</string>
     <string name="attribute_danger_yes">위험 지역</string>
-    <string name="attribute_danger_no">위험한 지역 아님</string>
     <string name="attribute_thorn_yes">가시풀</string>
-    <string name="attribute_thorn_no">가시풀 없음</string>
     <string name="attribute_wheelchair_yes">휠체어 접근가능</string>
     <string name="attribute_wheelchair_no">휠체어 접근 불가</string>
     <string name="attribute_parking_yes">주차 가능</string>
     <string name="attribute_parking_no">주차 불가능</string>
     <string name="attribute_public_yes">대중 교통</string>
-    <string name="attribute_public_no">대중 교통 없음</string>
     <string name="attribute_water_yes">근처에 식수</string>
     <string name="attribute_water_no">근처 식수 없음</string>
     <string name="attribute_restrooms_yes">근처 공공 화장실</string>
@@ -2100,13 +2067,9 @@
     <string name="attribute_offset_cache_yes">오프셋 캐시</string>
     <string name="attribute_offset_cache_no">오프셋 캐시 아님</string>
     <string name="attribute_bonuscache_yes">보너스 캐시</string>
-    <string name="attribute_bonuscache_no">보너스 캐시 없음</string>
     <string name="attribute_powertrail_yes">파워 트레일의 일부</string>
-    <string name="attribute_powertrail_no">파워 트레일의 일부 아님</string>
     <string name="attribute_challengecache_yes">챌린지 캐시</string>
-    <string name="attribute_challengecache_no">챌린지 캐시 아님</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com 솔루션 체커 활성화됨</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com 솔루션 체커 없음</string>
     <string name="attribute_handicaching_yes">Handicaching.com에서 평가</string>
     <string name="attribute_handicaching_no">Handicaching.com 평가 없음</string>
     <string name="attribute_munzee_yes">Munzee 포함</string>
@@ -2283,12 +2246,9 @@
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
     <string name="map_refresh_individual_route">새로 고침</string>
-    <string name="map_export_individual_route">개별 경로 내보내기</string>
-    <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_autotarget_individual_route">경로 시작을 대상으로 설정</string>
     <string name="map_disable_autotarget_individual_route">\"경로 시작을 대상으로 설정\" 비활성화</string>
-    <string name="map_clear_manual_targets">수동 목표 지우기</string>
     <string name="map_manual_targets_cleared">수동 목표가 삭제되었습니다.</string>
     <string name="map_clear_individual_route">개인 경로 지우기</string>
     <string name="map_clear_individual_route_confirm">개별 경로에서 모든 캐시/지점을 제거 하시겠습니까?</string>
@@ -2430,7 +2390,6 @@
     <string name="mapserver_hylly_themes_info">\"Hylly\"지도를 위해 제작 된 상세한지도 테마</string>
     <string name="brouter_info">오프라인 라우팅 서비스</string>
     <string name="maptheme_elevate_categoryinfo">관련 항목: [A] 지역, [P] 관심 지점, [R] 경로, [W] 길</string>
-    <string name="maptheme_vtm_scaling_summary">오프라인 지도의 크기 조정 옵션(다시 시작해야 함)</string>
     <string name="maptheme_scale_map_title">지도 축척 비율</string>
     <string name="maptheme_scale_map_summary">지도 축척; 100% = 축척 없음</string>
     <string name="maptheme_scale_text_title">문자 축척 비율</string>

@@ -10,7 +10,10 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
@@ -93,6 +96,28 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                 ShareUtils.shareLink(activity, cache.getShareSubject(), cache.getUrl());
             }
             return true;
+        } else if (menuItem == R.id.menu_share_with_data) {
+            if (cache != null && activity != null) {
+                final StringBuilder shareText = new StringBuilder().append(cache.getShareSubject()).append("\n").append(cache.getUrl()).append("\n\n");
+                final int shareCoordText;
+                final Geopoint shareCoords;
+                if (cache.hasUserModifiedCoords()) {
+                    shareCoordText = R.string.export_modifiedcoords;
+                    shareCoords = cache.getCoords();
+                } else if (cache.hasFinalDefined()) {
+                    shareCoordText = R.string.wp_final;
+                    shareCoords = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
+                } else {
+                    shareCoordText = R.string.cache_coordinates_original;
+                    shareCoords = cache.getCoords();
+                }
+                shareText.append(activity.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
+                if (null != cache.getPersonalNote()) {
+                    shareText.append("\n").append(activity.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
+                }
+                ShareUtils.sharePlainText(activity, shareText.toString());
+            }
+            return true;
         } else if (menuItem == R.id.menu_calendar) {
             if (cache != null && activity != null) {
                 CalendarAdder.addToCalendar(activity, cache);
@@ -152,6 +177,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords);
         menu.findItem(R.id.menu_upload_bookmarklist).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember() && ConnectorFactory.getConnector(cache) instanceof GCConnector);
+        menu.findItem(R.id.menu_share_with_data).setVisible(cache.hasUserModifiedCoords() || cache.hasFinalDefined() || null != cache.getPersonalNote());
     }
 
     public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache, final boolean fromPopup) {

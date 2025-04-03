@@ -113,7 +113,7 @@ public class Geocache implements INamedGeoCoordinate {
     private long detailedUpdate = 0;
     private long visitedDate = 0;
     @NonNull
-    private Set<Integer> lists = new HashSet<>();
+    private final Set<Integer> lists = new HashSet<>();
     private boolean detailed = false;
 
     @NonNull
@@ -513,6 +513,10 @@ public class Geocache implements INamedGeoCoordinate {
         return inventoryItems > 0;
     }
 
+    public int getTrackableCount() {
+        return inventoryItems;
+    }
+
     public boolean canBeAddedToCalendar() {
         // Is event type with event date set?
         return isEventCache() && hidden != null;
@@ -720,8 +724,12 @@ public class Geocache implements INamedGeoCoordinate {
         return getConnector().getLoggingManager(this);
     }
 
+    public boolean supportsDifficultyTerrain() {
+        return getConnector().supportsDifficultyTerrain();
+    }
+
     public float getDifficulty() {
-        return getConnector().supportsDifficultyTerrain() ? difficulty : -1;
+        return difficulty;
     }
 
     @Override
@@ -752,7 +760,7 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public float getTerrain() {
-        return getConnector().supportsDifficultyTerrain() ? terrain : -1;
+        return terrain;
     }
 
     public boolean isArchived() {
@@ -1032,8 +1040,7 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public Map<LogType, Integer> getLogCounts() {
         if (logCounts.isEmpty() && inDatabase()) {
-            @Nullable
-            final Map<LogType, Integer> savedLogCounts = DataStore.loadLogCounts(getGeocode());
+            @Nullable final Map<LogType, Integer> savedLogCounts = DataStore.loadLogCounts(getGeocode());
             if (MapUtils.isNotEmpty(savedLogCounts)) {
                 logCounts = savedLogCounts;
             }
@@ -1102,10 +1109,14 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setLists(final Set<Integer> lists) {
-        // Create a new set to allow immutable structures such as SingletonSet to be
-        // given by the caller. We want the value returned by getLists() to be mutable
-        // since remove or add operations may be done on it.
-        this.lists = new HashSet<>(lists);
+        //special case: own list is passed. Ignore that. See #16505
+        if (lists == this.lists || this.lists.equals(lists)) {
+            return;
+        }
+        this.lists.clear();
+        if (lists != null) {
+            this.lists.addAll(lists);
+        }
     }
 
     public boolean isDetailed() {
@@ -1825,10 +1836,10 @@ public class Geocache implements INamedGeoCoordinate {
      * Detect cache artefacts (waypoints+variables) in the given text and add them to user-defined waypoints
      * or updates existing ones with meta information.
      *
-     * @param text            text which might contain coordinates
-     * @param updateDb        if true the added waypoints are stored in DB right away
-     * @param namePrefix      prefix for default waypoint names (if names cannot be extracted from text)
-     * @param forceExtraction if extraction should be enforced, regardless of cache setting
+     * @param text                 text which might contain coordinates
+     * @param updateDb             if true the added waypoints are stored in DB right away
+     * @param namePrefix           prefix for default waypoint names (if names cannot be extracted from text)
+     * @param forceExtraction      if extraction should be enforced, regardless of cache setting
      * @param previousAllUserNotes if given, then a parse of previous notes is used to help in deciding which values potentially to overwrite
      */
     public boolean addCacheArtefactsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction, @Nullable final String previousAllUserNotes) {
@@ -2012,6 +2023,7 @@ public class Geocache implements INamedGeoCoordinate {
         lists.clear();
         lists.addAll(listIds);
         storeCache(this, null, lists, false, handler);
+        notifyChange();
     }
 
     @Override
@@ -2081,11 +2093,11 @@ public class Geocache implements INamedGeoCoordinate {
     /**
      * Download and store a cache synchronous
      *
-     * @param origCache the cache which should be refreshed, can be null
-     * @param geocode the geocode of the cache which should be downloaded
-     * @param lists to which lists the cache should be added
+     * @param origCache       the cache which should be refreshed, can be null
+     * @param geocode         the geocode of the cache which should be downloaded
+     * @param lists           to which lists the cache should be added
      * @param forceRedownload whether the cache should be re-downloaded, even if it's already stored offline
-     * @param handler a handler to receive status updates, can be null
+     * @param handler         a handler to receive status updates, can be null
      * @return true, if the cache was stored successfully
      */
     @WorkerThread
@@ -2168,6 +2180,7 @@ public class Geocache implements INamedGeoCoordinate {
             imgGetter.waitForEndCompletable(null).blockingAwait();
 
             cache.setLists(lists);
+
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (DisposableHandler.isDisposed(handler)) {
@@ -2252,24 +2265,24 @@ public class Geocache implements INamedGeoCoordinate {
 
     @NonNull
     public Collection<Image> getImages() {
-        final List<Image> result = new LinkedList<>(getSpoilers());
-        ImageUtils.addImagesFromText(result, getPersonalNote());
-        ImageUtils.addImagesFromHtml(result, geocode, getShortDescription(), getDescription());
+        final List<Image> images = new LinkedList<>();
+        //the order of adding imgaes will determine which duplicates will be removed. prio is to images further up
         for (final LogEntry log : getLogs()) {
-            result.addAll(log.logImages);
+            images.addAll(log.logImages);
         }
-        addLocalSpoilersTo(result);
+        images.addAll(ImageUtils.getImagesFromText(
+                (url, imgBuilder) -> imgBuilder.setCategory(Image.ImageCategory.NOTE),
+                getPersonalNote()));
+        images.addAll(ImageUtils.getImagesFromHtml(
+                (url, imgBuilder) -> imgBuilder.setCategory(Image.ImageCategory.LISTING),
+                getShortDescription(), getDescription()));
+        images.addAll(getSpoilers()); //for gc.com this includes gallery images, spoilers and background
+        addLocalSpoilersTo(images);
 
         // Deduplicate images and return them in requested size
-        final List<Image> uniqueImages = new LinkedList<>();
-        final List<String> uniqueUrls = new ArrayList<>();
-        for (final Image img : result) {
-            if (!uniqueUrls.contains(img.getUrl())) {
-                uniqueUrls.add(img.getUrl());
-                uniqueImages.add(img.buildUpon().setUrl(img.getUrl()).build());
-            }
-        }
-        return uniqueImages;
+        ImageUtils.deduplicateImageList(images);
+
+        return images;
     }
 
     @NonNull

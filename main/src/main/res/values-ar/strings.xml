@@ -193,7 +193,6 @@
     <string name="info_log_posted">c:geo قام بنجاح بتقديم سجل زيارتك.</string>
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
     <string name="info_log_post_failed">فشل في نشر سجل الزيارة.</string>
-    <string name="info_log_post_failed_reason">السبب: %s</string>
     <string name="info_log_post_retry">أعد المحاولة</string>
     <string name="info_log_post_save">حفظ في وضع عدم الاتصال</string>
     <string name="info_log_cleared">تم مسح سجل تسجيل الزيارة.</string>
@@ -246,7 +245,6 @@
     <string name="caches_sort_name">الاسم</string>
     <string name="caches_sort_rating">التقييم</string>
     <string name="caches_sort_vote">التصويت (التقييم الخاص)</string>
-    <string name="caches_sort_inventory">حساب المخزون</string>
     <string name="caches_sort_date_hidden">تاريخ مخفي</string>
     <string name="caches_sort_finds">إيجاد</string>
     <string name="caches_sort_state">الوضع</string>
@@ -577,7 +575,6 @@
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
-    <string name="cache_status_attended">تم حضورها</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
     <string name="cache_status_archived">تم أرشفته</string>
@@ -695,7 +692,6 @@
     <string name="search_tb_button">البحث بواسطة أمتعة السفر</string>
     <string name="search_address_started">البحث عن الأماكن</string>
     <string name="search_address_result">الأماكن المعثور عليها</string>
-    <string name="search_own_caches">البحث عن المخبآت الخاص بي</string>
     <string name="search_pocket_title">الاستفسارات</string>
     <!-- trackable -->
     <string name="trackable">أمتعة السفر</string>
@@ -751,7 +747,6 @@
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
-    <string name="helper_where_you_go_description">WhereYouGo تتيج تشغيل و البحث عن المخبىت من نوع Wherigo. و c:geo يمكنه أن يقوم إلى التحميل التلقائي للخراطيش داخل هذا التطبيق.</string>
     <!-- export -->
     <string name="export">تصدير</string>
     <string name="export_progress">تصدير: %1$s</string>
@@ -799,9 +794,7 @@
     <string name="attribute_climbing_yes">تسلق صعب</string>
     <string name="attribute_climbing_no">لا يوجد تسلق صعب</string>
     <string name="attribute_wading_yes">قد لا تتطلب الاجتياز بصعوبة</string>
-    <string name="attribute_wading_no">قد لا تتطلب الاجتياز بصعوبة</string>
     <string name="attribute_swimming_yes">قد تتطلب السباحة</string>
-    <string name="attribute_swimming_no">قد لا تتطلب السباحة</string>
     <string name="attribute_available_yes">متوفر في جميع الأوقات</string>
     <string name="attribute_available_no">غير متوفر في جميع الأوقات</string>
     <string name="attribute_night_yes">موصي به في الليل</string>
@@ -811,7 +804,6 @@
     <string name="attribute_stealth_yes">التسلل مطلوب</string>
     <string name="attribute_stealth_no">التسلل غير مطلوب</string>
     <string name="attribute_firstaid_yes">يحتاج إلى صيانة</string>
-    <string name="attribute_firstaid_no">لا يحتاج إلى صيانة</string>
     <string name="attribute_cow_yes">مشاهدة الماشية</string>
     <string name="attribute_cow_no">لا يوجد ماشية</string>
     <string name="attribute_field_puzzle_yes">لغز الحقل</string>
@@ -841,49 +833,32 @@
     <string name="attribute_partnership_yes">مخبئ شراكة</string>
     <string name="attribute_partnership_no">ليس مخبئ شراكة</string>
     <string name="attribute_fee_yes">الوصول أو رسوم التوقف مطلوبة</string>
-    <string name="attribute_fee_no">الوصول أو رسوم التوقف ليست مطلوبة</string>
     <string name="attribute_rappelling_yes">عتاد التسلق مطلوب</string>
-    <string name="attribute_rappelling_no">عتاد التسلق ليس مطلوب</string>
     <string name="attribute_boat_yes">القارب مطلوب</string>
-    <string name="attribute_boat_no">القارب ليس مطلوب</string>
     <string name="attribute_scuba_yes">معدات الغوص مطلوبة</string>
-    <string name="attribute_scuba_no">معدات الغوص ليست مطلوبة</string>
     <string name="attribute_flashlight_yes">المصباح اليدوي مطلوب</string>
-    <string name="attribute_flashlight_no">المصباح اليدوي ليس مطلوب</string>
     <string name="attribute_uv_yes">مصباح الأشعة فوق بنفسجية مطلوب</string>
     <string name="attribute_uv_no">مصباح الأشعة فوق بنفسجية ليس مطلوب</string>
     <string name="attribute_snowshoes_yes">الحذاء الثلجي مطلوب</string>
-    <string name="attribute_snowshoes_no">الحذاء الثلجي ليس مطلوب</string>
     <string name="attribute_skiis_yes">الزلاجات مطلوبة</string>
-    <string name="attribute_skiis_no">الزلاجات ليست مطلوبة</string>
     <string name="attribute_s_tool_yes">الأدوات الخاصة مطلوبة</string>
-    <string name="attribute_s_tool_no">الأدوات الخاصة ليست مطلوبة</string>
     <string name="attribute_wirelessbeacon_yes">منارة لاسلكية</string>
-    <string name="attribute_wirelessbeacon_no">لا يوجد منارة لاسلكية</string>
     <string name="attribute_treeclimbing_yes">تسلق الشجرة مطلوب</string>
     <string name="attribute_treeclimbing_no">تسلق الشجرة ليس مطلوب</string>
     <string name="attribute_poisonoak_yes">النباتات السامة</string>
     <string name="attribute_poisonoak_no">لا يوجد نباتات سامة</string>
     <string name="attribute_dangerousanimals_yes">حيوانات خطرة</string>
-    <string name="attribute_dangerousanimals_no">لا يوجد حيوانات خطرة</string>
     <string name="attribute_ticks_yes">علامات</string>
-    <string name="attribute_ticks_no">لا يوجد علامات</string>
     <string name="attribute_mine_yes">مناجم مهجورة</string>
-    <string name="attribute_mine_no">لا يوجد مناجم مهجورة</string>
     <string name="attribute_cliff_yes">جرف/ سقوط صخور</string>
-    <string name="attribute_cliff_no">لا يوجد جرف/ سقوط صخور</string>
     <string name="attribute_hunting_yes">الصيد</string>
-    <string name="attribute_hunting_no">لا يوجد صيد</string>
     <string name="attribute_danger_yes">منطقة خطرة</string>
-    <string name="attribute_danger_no">ليست منطقة خطرة</string>
     <string name="attribute_thorn_yes">أشواك</string>
-    <string name="attribute_thorn_no">لا يوجد أشواك</string>
     <string name="attribute_wheelchair_yes">وصول كرسي المعاقين</string>
     <string name="attribute_wheelchair_no">لا يمكن وصول كرسي المعاقين</string>
     <string name="attribute_parking_yes">التوقف متاح</string>
     <string name="attribute_parking_no">التوقف غير متاح</string>
     <string name="attribute_public_yes">النقل العام</string>
-    <string name="attribute_public_no">لا يوجد نقل عام</string>
     <string name="attribute_water_yes">مياه للشرب بالجوار</string>
     <string name="attribute_water_no">لا يوجد مياه للشرب بالجوار</string>
     <string name="attribute_restrooms_yes">حمامات عامة بالجوار</string>
