@@ -36,6 +36,7 @@
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="advlab">Adventure Lab Cache</string>
+    <string name="waymark">Waymark</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
     <string name="other">Others</string>
@@ -62,6 +63,7 @@
     <string name="block_short">GCHQ Block</string>
     <string name="locationless_short">Locationless</string>
     <string name="advlab_short">Adv Lab</string>
+    <string name="waymark_short">Waymark</string>
     <string name="userdefined_short">Userdefined</string>
     <string name="unknown_short">Unknown</string>
 

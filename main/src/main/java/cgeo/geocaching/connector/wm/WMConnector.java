@@ -132,22 +132,22 @@ public class WMConnector extends AbstractConnector implements ILogin /*TODO impl
 
     @Override
     public int getCacheMapMarkerId() {
-        return R.drawable.marker;
+        return R.drawable.marker_wm;
     }
 
     @Override
     public int getCacheMapMarkerBackgroundId() {
-        return R.drawable.background_gc;
+        return R.drawable.background_wm;
     }
 
     @Override
     public int getCacheMapDotMarkerId() {
-        return R.drawable.dot_marker;
+        return R.drawable.dot_marker_wm;
     }
 
     @Override
     public int getCacheMapDotMarkerBackgroundId() {
-        return R.drawable.dot_background_gc;
+        return R.drawable.dot_background_wm;
     }
 
     @Override
