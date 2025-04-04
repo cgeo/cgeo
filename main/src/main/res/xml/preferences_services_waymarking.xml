@@ -9,7 +9,7 @@
         android:title="@string/settings_settings"
         app:iconSpaceReserved="false" >
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="@string/pref_connectorWMActive"
             android:title="@string/settings_service_activate"
             android:summary="@string/settings_wm_description"
