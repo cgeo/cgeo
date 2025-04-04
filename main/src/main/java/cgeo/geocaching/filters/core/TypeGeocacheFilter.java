@@ -16,7 +16,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         addDisplayValues(CacheType.UNKNOWN, CacheType.UNKNOWN, CacheType.GCHQ, CacheType.PROJECT_APE);
         addDisplayValues(CacheType.COMMUN_CELEBRATION, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
                 CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
-        addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
+        addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS, CacheType.WAYMARK);
     }
 
     @Override

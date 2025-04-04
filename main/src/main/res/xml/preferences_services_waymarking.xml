@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_wm"
+    android:title="@string/init_wm" >
+
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_connectorWMActive"
+            android:title="@string/settings_service_activate"
+            android:summary="@string/settings_wm_description"
+            app:iconSpaceReserved="false" />
+        <Preference
+            app:summary="@string/settings_wm_gc_note"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_wm_refresh"
+            android:title="@string/settings_wm_refresh_login"
+            app:summary="@string/settings_wm_refresh_login_note"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
+        <Preference
+            app:summary="@string/settings_wm_filter_note"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_wm_website"
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.CapabilitiesPreference
+            android:title="@string/settings_features"
+            app:connector="WM"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

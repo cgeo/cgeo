@@ -234,6 +234,7 @@
     <string translatable="false" name="settings_title_gc">Geocaching.com</string>
     <string translatable="false" name="settings_title_ec">Extremcaching.com</string>
     <string translatable="false" name="settings_title_lc">Geocaching.com Adventure Lab</string>
+    <string translatable="false" name="init_wm">Waymarking.com</string>
     <string translatable="false" name="init_oc">Opencaching.de</string>
     <string translatable="false" name="auth_ocde">opencaching.de</string>
     <string translatable="false" name="init_oc_pl">Opencaching.pl</string>

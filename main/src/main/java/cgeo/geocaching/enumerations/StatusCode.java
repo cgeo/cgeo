@@ -12,6 +12,7 @@ public enum StatusCode {
     LOGIN_PARSE_ERROR(R.string.err_parse),
     LOGIN_CAPTCHA_ERROR(R.string.err_captcha),
     CONNECTION_FAILED_GC(R.string.err_server_gc),
+    CONNECTION_FAILED_WM(R.string.err_server_wm),
     CONNECTION_FAILED_EC(R.string.err_server_ec),
     CONNECTION_FAILED_LC(R.string.err_server_lc),
     CONNECTION_FAILED_SU(R.string.err_server_su),
