@@ -28,6 +28,9 @@
         android:title="@string/settings_information"
         app:iconSpaceReserved="false" >
         <Preference
+            app:summary="@string/settings_wm_filter_note"
+            app:iconSpaceReserved="false" />
+        <Preference
             android:key="@string/pref_fakekey_wm_website"
             android:title="@string/settings_open_website"
             app:iconSpaceReserved="false" />
