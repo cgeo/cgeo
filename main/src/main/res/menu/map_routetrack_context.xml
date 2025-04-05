@@ -81,6 +81,6 @@
     <item
         android:id="@+id/indivroute_load"
         android:icon="@drawable/ic_menu_import"
-        android:title="@string/map_load_individual_route"
+        android:title="@string/map_load_from_GPX"
         app:showAsAction="never"/>
 </menu>

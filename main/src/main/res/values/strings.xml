@@ -2715,7 +2715,8 @@
     <string name="map_refresh_individual_route">Refresh</string>
     <string name="map_export_route">Export as route</string>
     <string name="map_export_track">Export as track</string>
-    <string name="map_load_individual_route">Load from GPX</string>
+    <string name="map_load_from_GPX">Load from GPX</string>
+    <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_autotarget_individual_route">Set route start as target</string>
     <string name="map_disable_autotarget_individual_route">\"Set route start as target\" disabled</string>

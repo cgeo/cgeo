@@ -2445,7 +2445,7 @@
     <string name="map_refresh_individual_route">Odśwież</string>
     <string name="map_export_route">Eksportuj jako trasę</string>
     <string name="map_export_track">Eksportuj jako ślad</string>
-    <string name="map_load_individual_route">Wczytaj z GPX</string>
+    <string name="map_load_from_GPX">Wczytaj z GPX</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>

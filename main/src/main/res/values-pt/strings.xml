@@ -2379,7 +2379,7 @@
     <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_route">Exportar como rota</string>
     <string name="map_export_track">Exportar como percurso</string>
-    <string name="map_load_individual_route">Carregar de GPX</string>
+    <string name="map_load_from_GPX">Carregar de GPX</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>

@@ -2385,7 +2385,7 @@
     <string name="map_refresh_individual_route">Verversen</string>
     <string name="map_export_route">Exporteer als route</string>
     <string name="map_export_track">Exporteer als track</string>
-    <string name="map_load_individual_route">Laad vanuit GPX</string>
+    <string name="map_load_from_GPX">Laad vanuit GPX</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
