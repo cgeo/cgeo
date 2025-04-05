@@ -427,6 +427,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     @Override
     public void setPreferredLanguage(final String language) {
         currentTileProvider.setPreferredLanguage(language);
+        requireActivity().recreate();
     }
 
 
