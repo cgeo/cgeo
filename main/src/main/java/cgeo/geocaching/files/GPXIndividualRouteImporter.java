@@ -1,11 +1,13 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -37,8 +39,10 @@ public class GPXIndividualRouteImporter {
             } catch (final Exception e) {
                 //
             }
-        }, () -> ViewUtils.showShortToast(context, size.get() > 0 ? LocalizationUtils.getPlural(R.plurals.individual_route_loaded, size.get()) : LocalizationUtils.getString(R.string.load_individual_route_error))
-        );
+        }, () -> {
+            ViewUtils.showShortToast(context, size.get() > 0 ? LocalizationUtils.getPlural(R.plurals.individual_route_loaded, size.get()) : LocalizationUtils.getString(R.string.load_individual_route_error));
+            LifecycleAwareBroadcastReceiver.sendBroadcast(context, Intents.ACTION_INDIVIDUALROUTE_CHANGED);
+        });
     }
 
     // returns the length of the parsed route / 0 on empty or error

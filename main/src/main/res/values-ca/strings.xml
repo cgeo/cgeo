@@ -2387,7 +2387,7 @@
     <string name="map_refresh_individual_route">Actualització</string>
     <string name="map_export_route">Exporta com a ruta</string>
     <string name="map_export_track">Exporta com a track</string>
-    <string name="map_load_individual_route">Carrega des de GPX</string>
+    <string name="map_load_from_GPX">Carrega des de GPX</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
     <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>

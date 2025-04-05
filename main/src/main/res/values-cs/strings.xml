@@ -2443,7 +2443,7 @@
     <string name="map_refresh_individual_route">Obnovit</string>
     <string name="map_export_route">Exportovat jako trasu</string>
     <string name="map_export_track">Exportovat jako stopu</string>
-    <string name="map_load_individual_route">Načíst z GPX</string>
+    <string name="map_load_from_GPX">Načíst z GPX</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
