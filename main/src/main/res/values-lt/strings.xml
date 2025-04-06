@@ -1679,7 +1679,6 @@
     <string name="search_address">Adresas</string>
     <string name="search_address_button">Paieška pagal adresą</string>
     <string name="search_geo">Geokodas</string>
-    <string name="search_geo_button">Paieška pagal geokodą</string>
     <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
@@ -2110,12 +2109,6 @@
         <item quantity="many">Prieš %d dienų</item>
         <item quantity="other">Prieš %d dienų</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Per %d dieną</item>
-        <item quantity="few">Per %d dienas</item>
-        <item quantity="many">Per %d dienų</item>
-        <item quantity="other">Per %d dienų</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo nuoroda</string>
     <string name="create_shortcut">Sukurti nuorodą</string>
@@ -2219,6 +2212,7 @@
     <string name="individual_route_error_single_waypoint_mode">Negalima naudoti vieno kelio taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
     <string name="map_refresh_individual_route">Atnaujinti</string>
+    <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
     <string name="map_autotarget_individual_route">Nustatyti maršruto pradžią kaip tikslą</string>
     <string name="map_disable_autotarget_individual_route">\"Nustatyti maršruto pradžią kaip tikslą\" išjungta</string>
