@@ -41,6 +41,7 @@ public class OsmNogoPolygonTest {
         }
     }
 
+    /** @noinspection EmptyMethod*/
     @AfterClass
     public static void tearDown() throws Exception {
         // empty
