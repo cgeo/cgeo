@@ -1850,7 +1850,6 @@
     <string name="search_address">Adres</string>
     <string name="search_address_button">Szukaj według adresu</string>
     <string name="search_geo">Geokod</string>
-    <string name="search_geo_button">Szukaj po geokodzie</string>
     <string name="search_geocode_from_clipboard">Geokod został wklejony ze schowka.</string>
     <string name="search_kw">Słowo kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
@@ -2312,12 +2311,6 @@
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d dzień</item>
-        <item quantity="few">Za %d dni</item>
-        <item quantity="many">Za %d dni</item>
-        <item quantity="other">Za %d dni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
@@ -2682,7 +2675,6 @@
     <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie \"Wznów wstrzymane okno dialogowe\"</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
-    <string name="wherigo_cartridge_details">Szczegóły kartridża</string>
     <string name="wherigo_locate_on_center">Umieść na środku</string>
     <string name="wherigo_revoke_fixed_location">Unieważnij stałą lokalizację</string>
     <string name="wherigo_thingtype_location">Lokalizacje</string>
