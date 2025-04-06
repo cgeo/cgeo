@@ -1848,7 +1848,6 @@
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hledat podle adresy</string>
     <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Hledat podle geokódu</string>
     <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
     <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
@@ -2310,12 +2309,6 @@
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d den</item>
-        <item quantity="few">Za %d dní</item>
-        <item quantity="many">Za %d dní</item>
-        <item quantity="other">Za %d dní</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
@@ -2680,7 +2673,6 @@
     <string name="wherigo_dialog_pause_info">Pokračovat v dialogovém okně Wherigo přehrávače klepnutím na \"Pokračovat v pozastaveném dialogu\"</string>
     <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
     <string name="wherigo_currently_playing">Právě se hraje</string>
-    <string name="wherigo_cartridge_details">Podrobnosti cartridge</string>
     <string name="wherigo_locate_on_center">Vycentrovat</string>
     <string name="wherigo_revoke_fixed_location">Zrušit zafixovanou polohu</string>
     <string name="wherigo_thingtype_location">Místa</string>
