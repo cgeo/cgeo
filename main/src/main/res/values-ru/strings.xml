@@ -1894,7 +1894,6 @@
     <string name="search_address">Адрес</string>
     <string name="search_address_button">Поиск по адресу</string>
     <string name="search_geo">Код тайника</string>
-    <string name="search_geo_button">Поиск по коду</string>
     <string name="search_geocode_from_clipboard">Геокод был вставлен из буфера обмена.</string>
     <string name="search_kw">Ключевое слово</string>
     <string name="search_kw_prefill">Ключевое слово</string>
@@ -2333,12 +2332,6 @@
         <item quantity="many">%d дней назад</item>
         <item quantity="other">%d дней назад</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Через %d день</item>
-        <item quantity="few">Через %d дня</item>
-        <item quantity="many">Через %d дней</item>
-        <item quantity="other">Через %d дней</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>
@@ -2465,7 +2458,7 @@
     <string name="map_refresh_individual_route">Обновить</string>
     <string name="map_export_route">Экспортировать как маршрут</string>
     <string name="map_export_track">Экспортировать как трек</string>
-    <string name="map_load_individual_route">Загрузить из GPX</string>
+    <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
     <string name="map_disable_autotarget_individual_route">\"Установить начало маршрута как цель\" отключено</string>
@@ -2711,7 +2704,6 @@
     <string name="wherigo_dialog_pause_info">Возобновить диалог в Wherigo Player, нажав «Возобновить приостановленный диалог»</string>
     <string name="wherigo_no_game_running">Игра wherigo в данный момент не запущена</string>
     <string name="wherigo_currently_playing">Идёт игра</string>
-    <string name="wherigo_cartridge_details">Детали картриджа</string>
     <string name="wherigo_locate_on_center">Расположение по центру</string>
     <string name="wherigo_revoke_fixed_location">Отменить фиксированное местоположение</string>
     <string name="wherigo_thingtype_location">Локации</string>
