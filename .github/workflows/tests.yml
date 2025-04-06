@@ -1,13 +1,13 @@
 name: Unit tests
 
 concurrency:
-  group: ci-tests-${{ github.ref }}
-  cancel-in-progress: true
+  group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
+  cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
 
 on:
   push:
-  pull_request:
-    types: [labeled]
+  pull_request_target:
+    types: [labeled, opened, synchronize]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
@@ -24,12 +24,43 @@ permissions:
   pull-requests: write
 
 jobs:
+  check-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug concurrency-group
+        run: |
+          # concurrency:
+          #   group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
+          #   cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
+
+      - name: Debug
+        uses: raven-actions/debug@v1
+
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.KEY_STORE }}" ]; then
+            echo "::error::No secret defined or no access to secrets"
+            exit 1
+          fi
+          echo "::notice::Secrets seems available"
+
+      - name: Get User Permission
+        id: checkAccess
+        uses: actions-cool/check-user-permission@v2
+        with:
+          require: write
+          username: ${{ github.triggering_actor }}
+
+      - name: Check User Permission
+        if: steps.checkAccess.outputs.require-result == 'false' && !contains(github.event.pull_request.labels.*.name, 'safe to test')
+        run: |
+          echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
+          exit 1
 
   checkstyle:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
+    needs: check-secrets
     steps:
-
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
@@ -90,7 +121,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
+    needs: check-secrets
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
@@ -157,7 +188,7 @@ jobs:
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'safe to test')
+    needs: check-secrets
     strategy:
       fail-fast: false
       matrix:

@@ -19,9 +19,21 @@ env:
   API_LEVEL: ${{ inputs.API_LEVEL || '26' }}
 
 jobs:
-  watchdog-tests:
+  check-secrets:
     runs-on: ubuntu-latest
     if: github.repository == 'cgeo/cgeo'
+    steps:
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.KEY_STORE }}" ]; then
+            echo "::error::No secret defined or no access to secrets"
+            exit 1
+          fi
+          echo "::notice::Secrets seems available"
+
+  watchdog-tests:
+    runs-on: ubuntu-latest
+    needs: check-secrets
     strategy:
       matrix:
         branch: [ "master", "release" ]
