@@ -1859,7 +1859,6 @@
     <string name="search_address">Adress</string>
     <string name="search_address_button">Sök med adress</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Sök med Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>
@@ -2286,10 +2285,6 @@
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">om %d dag</item>
-        <item quantity="other">om %d dagar</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
     <string name="create_shortcut">Skapa genväg</string>
@@ -2401,7 +2396,7 @@
     <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_route">Exportera som rutt</string>
     <string name="map_export_track">Exportera som spår</string>
-    <string name="map_load_individual_route">Ladda från GPX</string>
+    <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
