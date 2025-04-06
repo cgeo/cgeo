@@ -1484,7 +1484,6 @@
     <string name="search_address">Διεύθυνση</string>
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
-    <string name="search_geo_button">Αναζήτηση ανά γεωκωδικό</string>
     <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
@@ -1985,6 +1984,7 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
+    <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
     <string name="map_disable_autotarget_individual_route">Ορισμός Εναρξης διαδρομής ως \'στόχο\' απενεργοποιημένη</string>
