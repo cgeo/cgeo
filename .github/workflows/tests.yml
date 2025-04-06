@@ -1,7 +1,7 @@
 name: Unit tests
 
 concurrency:
-  group: ci-tests-${{ github.ref }}
+  group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
   cancel-in-progress: true
 
 on:
@@ -30,8 +30,9 @@ jobs:
       - name: Debug concurrency-group
         run: |
           # concurrency:
-          #   group: ci-tests-${{ github.ref }}
+          #   group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
           #   cancel-in-progress: true
+          #
 
       - name: Debug
         uses: raven-actions/debug@v1
