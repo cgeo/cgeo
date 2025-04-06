@@ -1726,7 +1726,6 @@
     <string name="search_address">주소</string>
     <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
-    <string name="search_geo_button">지오코드로 검색</string>
     <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
@@ -2142,9 +2141,6 @@
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="other">%d일 후</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>
@@ -2242,6 +2238,7 @@
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
     <string name="map_refresh_individual_route">새로 고침</string>
+    <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_autotarget_individual_route">경로 시작을 대상으로 설정</string>
     <string name="map_disable_autotarget_individual_route">\"경로 시작을 대상으로 설정\" 비활성화</string>
