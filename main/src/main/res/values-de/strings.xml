@@ -1840,7 +1840,6 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Suche nach Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
     <string name="search_kw">Stichwort</string>
     <string name="search_kw_prefill">Stichwörter</string>
@@ -2267,10 +2266,6 @@
         <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">In %d Tag</item>
-        <item quantity="other">In %d Tagen</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
@@ -2383,7 +2378,7 @@
     <string name="map_refresh_individual_route">Aktualisieren</string>
     <string name="map_export_route">Als Route exportieren</string>
     <string name="map_export_track">Als Track exportieren</string>
-    <string name="map_load_individual_route">Aus GPX laden</string>
+    <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
     <string name="map_disable_autotarget_individual_route">\"Routenstart als Ziel festlegen\" deaktiviert</string>
@@ -2625,7 +2620,6 @@
     <string name="wherigo_dialog_pause_info">Dialog in Wherigo Player fortsetzen, indem Sie auf \"Fortsetzen\" tippen</string>
     <string name="wherigo_no_game_running">Es läuft momentan kein Wherigo Spiel</string>
     <string name="wherigo_currently_playing">Aktuelles Spiel</string>
-    <string name="wherigo_cartridge_details">Cartridge Details</string>
     <string name="wherigo_locate_on_center">Ins Zentrum positionieren</string>
     <string name="wherigo_revoke_fixed_location">Festen Standort widerrufen</string>
     <string name="wherigo_thingtype_location">Orte</string>
