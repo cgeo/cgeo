@@ -1,4 +1,7 @@
 ##
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+
+##
 - Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
 - Naprawiono: Nieczytelny komunikat o błędzie podczas publikowania wpisu dziennika
 - Cofnięto: Wykrywanie lokalnych plików .map (ze względu na niepożądane efekty uboczne)
