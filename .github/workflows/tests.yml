@@ -2,7 +2,7 @@ name: Unit tests
 
 concurrency:
   group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
         run: |
           # concurrency:
           #   group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
-          #   cancel-in-progress: true
+          #   cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
 
       - name: Debug
         uses: raven-actions/debug@v1
