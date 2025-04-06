@@ -1757,7 +1757,6 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Géocode</string>
-    <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
@@ -2180,10 +2179,6 @@
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dans %d jour</item>
-        <item quantity="other">Dans %d jours</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
     <string name="create_shortcut">Créer un raccourci</string>
@@ -2289,6 +2284,7 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
     <string name="map_refresh_individual_route">Actualiser</string>
+    <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
     <string name="map_disable_autotarget_individual_route">\"Définir le départ de l\'itinéraire comme cible\" désactivé</string>
