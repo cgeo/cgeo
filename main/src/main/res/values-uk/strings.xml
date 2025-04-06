@@ -1288,6 +1288,7 @@
     <string name="individual_route_error_toggling_waypoint">помилка перемикання точки</string>
     <string name="individual_route_error_single_waypoint_mode">Не доступно в режимі однієї точки</string>
     <string name="map_sort_individual_route">Сортувати за окремим маршрутом</string>
+    <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
