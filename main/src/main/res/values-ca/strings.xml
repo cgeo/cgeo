@@ -1821,7 +1821,6 @@
     <string name="search_address">Adreça</string>
     <string name="search_address_button">Cerca per l\'adreça</string>
     <string name="search_geo">Geocodi</string>
-    <string name="search_geo_button">Cerca per geocodi</string>
     <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
     <string name="search_kw">Paraula clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
@@ -2272,10 +2271,6 @@
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">D\'aquí a %d dia</item>
-        <item quantity="other">D\'aquí a %d dies</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>
@@ -2622,7 +2617,6 @@
     <string name="wherigo_dialog_pause_info">Reprèn el diàleg a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
     <string name="wherigo_currently_playing">Actualment jugant</string>
-    <string name="wherigo_cartridge_details">Detalls del cartutx</string>
     <string name="wherigo_locate_on_center">Situar al centre</string>
     <string name="wherigo_revoke_fixed_location">Revoca la ubicació fixa</string>
     <string name="wherigo_thingtype_location">Ubicacions</string>
