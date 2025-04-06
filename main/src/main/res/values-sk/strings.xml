@@ -2057,12 +2057,6 @@
         <item quantity="many">pred %d dňami</item>
         <item quantity="other">pred %d dňami</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">O %d deň</item>
-        <item quantity="few">O %d dni</item>
-        <item quantity="many">O %d dňa</item>
-        <item quantity="other">O %d dní</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
     <string name="create_shortcut">Vytvoriť odkaz</string>

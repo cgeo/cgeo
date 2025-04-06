@@ -923,7 +923,7 @@
     <string name="init_brouterProfileCar">Профиль «Автомобиль»</string>
     <string name="init_brouterProfileUserNumber">Пользовательский профиль %d</string>
     <string name="init_removeFromRouteOnLog">Удалить из маршрута после записи в блокноте</string>
-    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить 
+    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить
 тайник из текущего маршрута.</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="brouter_missing_data">Откройте BRouter для загрузки недостающих данных маршрутизации (%s)</string>
@@ -2310,12 +2310,6 @@
         <item quantity="few">%d дня назад</item>
         <item quantity="many">%d дней назад</item>
         <item quantity="other">%d дней назад</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Через %d день</item>
-        <item quantity="few">Через %d дня</item>
-        <item quantity="many">Через %d дней</item>
-        <item quantity="other">Через %d дней</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>

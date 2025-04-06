@@ -2310,12 +2310,6 @@
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d den</item>
-        <item quantity="few">Za %d dní</item>
-        <item quantity="many">Za %d dní</item>
-        <item quantity="other">Za %d dní</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>

@@ -2268,10 +2268,6 @@
         <item quantity="one">%d giorno fa</item>
         <item quantity="other">%d giorni fa</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Tra %d giorno</item>
-        <item quantity="other">Tra %d giorni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
