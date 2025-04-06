@@ -1818,7 +1818,6 @@
     <string name="search_address">Indirizzo</string>
     <string name="search_address_button">Cerca per indirizzo</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Cerca per geocode</string>
     <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
     <string name="search_kw">Parola chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
@@ -2268,10 +2267,6 @@
         <item quantity="one">%d giorno fa</item>
         <item quantity="other">%d giorni fa</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Tra %d giorno</item>
-        <item quantity="other">Tra %d giorni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
@@ -2618,7 +2613,6 @@
     <string name="wherigo_dialog_pause_info">Riprendi la finestra di dialogo in Wherigo toccando \"Riprendi la finestra in pausa\"</string>
     <string name="wherigo_no_game_running">Nessun gioco wherigo è attualmente in esecuzione</string>
     <string name="wherigo_currently_playing">Attualmente in corso</string>
-    <string name="wherigo_cartridge_details">Dettagli della cartuccia</string>
     <string name="wherigo_locate_on_center">Posiziona al centro</string>
     <string name="wherigo_revoke_fixed_location">Revoca posizione fissa</string>
     <string name="wherigo_thingtype_location">Posizioni</string>
