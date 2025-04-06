@@ -1359,7 +1359,6 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søk med adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Søk med geokode</string>
     <string name="search_geocode_from_clipboard">Geokode ble limt inn fra utklippstavlen.</string>
     <string name="search_kw">Nøkkelord</string>
     <string name="search_kw_prefill">Nøkkelord</string>
@@ -1847,6 +1846,7 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
+    <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
     <string name="map_autotarget_individual_route">Sett rutestart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Sett rutestart som mål\" er deaktivert</string>
