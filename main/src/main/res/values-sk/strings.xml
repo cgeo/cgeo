@@ -1586,7 +1586,6 @@
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hľadať podľa adresy</string>
     <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Hľadať podľa geokódu</string>
     <string name="search_geocode_from_clipboard">Geokód bol vložený zo schránky.</string>
     <string name="search_kw">Kľúčové slovo</string>
     <string name="search_kw_prefill">Kľúčové slovo</string>
@@ -2017,12 +2016,6 @@
         <item quantity="many">pred %d dňami</item>
         <item quantity="other">pred %d dňami</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">O %d deň</item>
-        <item quantity="few">O %d dni</item>
-        <item quantity="many">O %d dňa</item>
-        <item quantity="other">O %d dní</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
     <string name="create_shortcut">Vytvoriť odkaz</string>
@@ -2126,6 +2119,7 @@
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
     <string name="map_refresh_individual_route">Obnoviť</string>
+    <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
     <string name="map_disable_autotarget_individual_route">Funkcia \"Nastaviť začiatok trasy ako cieľ\" vypnutá</string>
