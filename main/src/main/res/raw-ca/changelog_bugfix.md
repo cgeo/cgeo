@@ -1,4 +1,7 @@
 ##
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+
+##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
 - Correcció: missatge d'error no llegible en publicar un registre
 - Revertit: detecció de fitxers .map local (a causa d'efectes secundaris no desitjats)
