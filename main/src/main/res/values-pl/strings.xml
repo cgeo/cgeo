@@ -2312,12 +2312,6 @@
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d dzień</item>
-        <item quantity="few">Za %d dni</item>
-        <item quantity="many">Za %d dni</item>
-        <item quantity="other">Za %d dni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
