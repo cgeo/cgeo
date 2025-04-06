@@ -2271,10 +2271,6 @@
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">D\'aquí a %d dia</item>
-        <item quantity="other">D\'aquí a %d dies</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>

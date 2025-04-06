@@ -2114,10 +2114,6 @@
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">%d päivässä</item>
-        <item quantity="other">%d päivässä</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>

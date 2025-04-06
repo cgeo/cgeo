@@ -54,6 +54,7 @@ public class CommonUtilsTest {
 
     }
 
+    /** @noinspection EmptyMethod*/
     private static void staticMethod() {
         //do nothing
     }

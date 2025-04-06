@@ -46,11 +46,11 @@ public class CacheUtils {
         });
     }
 
-    @Nullable
     /**
      * Find links to Adventure Labs in Listing of a cache. Returns URL if exactly 1 link target is found, else null.
      * 3 types of URLs possible: https://adventurelab.page.link/Cw3L, https://labs.geocaching.com/goto/Theater, https://labs.geocaching.com/goto/a4b45b7b-fa76-4387-a54f-045875ffee0c
      */
+    @Nullable
     public static String findAdvLabUrl(final Geocache cache) {
         final Pattern patternAdvLabUrl = Pattern.compile("(https?://labs.geocaching.com/goto/[a-zA-Z0-9-_]{1,36}|https?://adventurelab.page.link/[a-zA-Z0-9]{4})");
         final Matcher matcher = patternAdvLabUrl.matcher(cache.getShortDescription() + " " + cache.getDescription());

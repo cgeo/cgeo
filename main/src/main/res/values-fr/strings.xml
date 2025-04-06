@@ -2184,10 +2184,6 @@
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dans %d jour</item>
-        <item quantity="other">Dans %d jours</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
     <string name="create_shortcut">Créer un raccourci</string>

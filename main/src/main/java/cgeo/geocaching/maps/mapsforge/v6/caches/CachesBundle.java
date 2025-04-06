@@ -140,7 +140,7 @@ public class CachesBundle {
     /**
      * Enables the stored cache layer. No disabling again!
      *
-     * @param enable true - enable stored layer, false - leave untouched
+     * @param mapOptions isStoreEnabled true - enable stored layer, false - leave untouched
      */
     public void handleStoredLayers(final NewMap map, @NonNull final MapOptions mapOptions) {
         if (!mapOptions.isStoredEnabled || this.storedOverlay != null) {

@@ -2265,10 +2265,6 @@
         <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">In %d Tag</item>
-        <item quantity="other">In %d Tagen</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>

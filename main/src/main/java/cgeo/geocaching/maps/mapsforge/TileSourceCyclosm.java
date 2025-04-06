@@ -9,7 +9,7 @@ import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 public class TileSourceCyclosm extends AbstractTileSource {
     /**
      * A tile source which fetches cyclosm tiles from OpenStreetMap.fr.
-     * Requires a valid HTTP User-Agent identifying application: https://operations.osmfoundation.org/policies/tiles/
+     * Requires a valid HTTP User-Agent identifying application: <a href="https://operations.osmfoundation.org/policies/tiles/">policies</a>
      */
     public static final TileSourceCyclosm INSTANCE = new TileSourceCyclosm(new String[]{
             "a.tile-cyclosm.openstreetmap.fr", "b.tile-cyclosm.openstreetmap.fr", "c.tile-cyclosm.openstreetmap.fr"}, 443);

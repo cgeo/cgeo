@@ -2262,10 +2262,6 @@
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">om %d dag</item>
-        <item quantity="other">om %d dagar</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
     <string name="create_shortcut">Skapa genväg</string>

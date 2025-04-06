@@ -2264,10 +2264,6 @@
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dentro de %d dia</item>
-        <item quantity="other">Dentro de %d dias</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>

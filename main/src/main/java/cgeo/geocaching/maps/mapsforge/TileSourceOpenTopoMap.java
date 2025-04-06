@@ -10,7 +10,7 @@ public class TileSourceOpenTopoMap extends AbstractTileSource {
     /**
      * A tile source which fetches tiles from OpenTopoMap.org.
      * License is CC-BY-SA
-     * https://opentopomap.org/about
+     * <a href="https://opentopomap.org/about">OpenTopoMap</a>
      */
     public static final TileSourceOpenTopoMap INSTANCE = new TileSourceOpenTopoMap(new String[]{"a.tile.opentopomap.org", "b.tile.opentopomap.org", "c.tile.opentopomap.org"}, 443);
     private static final int PARALLEL_REQUESTS_LIMIT = 8;

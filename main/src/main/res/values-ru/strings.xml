@@ -2275,12 +2275,6 @@
         <item quantity="many">%d дней назад</item>
         <item quantity="other">%d дней назад</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Через %d день</item>
-        <item quantity="few">Через %d дня</item>
-        <item quantity="many">Через %d дней</item>
-        <item quantity="other">Через %d дней</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>

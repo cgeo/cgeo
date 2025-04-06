@@ -5,7 +5,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class OAuthTest {
 
-    /**
+    /*
      * Test example from https://dev.twitter.com/oauth/overview/creating-signatures
      */
     @Test
