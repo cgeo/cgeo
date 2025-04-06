@@ -2,9 +2,7 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
