@@ -1740,7 +1740,6 @@
     <string name="search_address">주소</string>
     <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
-    <string name="search_geo_button">지오코드로 검색</string>
     <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
@@ -2181,9 +2180,6 @@
     <string name="clipboard_copy_ok">클립보드에 복사됨</string>
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="other">%d일 후</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
