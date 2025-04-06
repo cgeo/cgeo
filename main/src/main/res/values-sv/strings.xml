@@ -1811,7 +1811,6 @@
     <string name="search_address">Adress</string>
     <string name="search_address_button">Sök med adress</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Sök med Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>
@@ -2260,10 +2259,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">om %d dag</item>
-        <item quantity="other">om %d dagar</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
