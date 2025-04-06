@@ -370,11 +370,11 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
     /**
      * Sets a new filter.
-     *
+     * <br />
      * If notifyInsertRemove is true, then RecyclerView is notified with a series of insert/remove
      * events with the goal to preserve existing views as much as possible. However, this will throw
      * IndexOutOfBoundsExceptions if used LayoutManager has "supportsPredictiveItemAnimations" enabled.
-     * See https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
+     * See <a href="https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in">SO article</a>
      */
     public void setFilter(final Predicate<T> filter, final boolean notifyInsertRemove) {
 

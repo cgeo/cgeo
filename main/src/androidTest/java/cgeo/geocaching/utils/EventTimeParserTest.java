@@ -85,7 +85,7 @@ public class EventTimeParserTest {
     }
 
     /**
-     * see https://www.geocaching.com/geocache/GC7MZG3_ludwigsburger-stammtisch-50
+     * see <a href="https://www.geocaching.com/geocache/GC7MZG3_ludwigsburger-stammtisch-50">event Ludwigsburger Stammtisch used as example</a>
      */
     @Test
     public void testEventTimeStandardFormatCSS() {

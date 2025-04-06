@@ -577,7 +577,7 @@ public class GCWebAPI {
 
     }
 
-    /**
+    /*
      * [{"referenceCode":"TB....","iconUrl":"http://www.geocaching.com/images/wpttypes/4433.gif","name":"Some-Geocoin","distanceTraveledInMiles":13350.6100050281,"distanceTraveledInKilometers":21485.7241079319425664,"currentGoal":"Goal of the owner.","description":"","dateReleased":"2011-08-31T12:00:00","locationReleased":{"state":"Hessen","country":"Germany","isoCountryCode":"DE"},"allowedToBeCollected":true,"owner":{"avatarUrl":"https://img.geocaching.com/avatar/...jpg","membershipTypeId":3,"code":"PR...","publicGuid":"...","userName":"..."},"holder":{"avatarUrl":"https://img.geocaching.com/avatar/...jpg","membershipTypeId":3,"code":"PR...","publicGuid":"...","userName":"..."},"inHolderCollection":false,"isMissing":false,"isActive":true,"isLocked":false,"journeyStepsCount":1638,"ownerImagesCount":0,"activityImagesCount":0,"activityCount":1688,"trackingNumber":"...","trackingNumberSha512Hash":"...","trackableType":{"id":4433,"name":"...-Geocoin","imageName":"4433.gif"}}]
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -881,7 +881,7 @@ public class GCWebAPI {
         }
     }
 
-    /**
+    /*
      * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
     @NonNull
@@ -899,7 +899,7 @@ public class GCWebAPI {
         return trackableInventoryEntries;
     }
 
-    /**
+    /*
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */
     static Single<Integer> getAvailableFavoritePoints(final String profile) {

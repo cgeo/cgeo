@@ -42,15 +42,15 @@ public interface ILogin extends IConnector {
 
     /**
      * Name the user has in this connector or empty string if not applicable.
-     * It might be necessary to execute {@link #login(Handler, Activity)} before this information is valid.
+     * It might be necessary to execute {@link #login()} before this information is valid.
      */
     String getUserName();
 
     /**
      * Number of caches the user has found in this connector.
-     * Normally retrieved/updated with {@link #login(Handler, Activity)}.
+     * Normally retrieved/updated with {@link #login()}.
      * Might be stale as changes on the connectors site are generally not notified.
-     *
+     * <br />
      * Consider using {@link cgeo.geocaching.storage.extension.FoundNumCounter#getAndUpdateFoundNum(ILogin)} instead, which provides cached data if user has no internet connection.
      */
     int getCachesFound();

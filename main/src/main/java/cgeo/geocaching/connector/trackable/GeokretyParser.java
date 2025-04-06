@@ -280,7 +280,7 @@ class GeokretyParser {
         }
 
         /**
-         * Convert states from GK to c:geo spotted types. See: http://geokrety.org/api.php
+         * Convert states from GK to c:geo spotted types. See: <a href="https://geokrety.org/api.php">GeoKrety API</a>
          *
          * @param state the GK state read from xml
          * @return The spotted types as defined in Trackables
