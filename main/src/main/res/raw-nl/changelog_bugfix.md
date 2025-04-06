@@ -1,4 +1,7 @@
 ##
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+
+##
 - Oplossing: Wherigo links zonder host naam niet gedetecteerd
 - Oplossing: Niet-leesbare foutmelding bij het plaatsen van een log
 - Teruggedraaid: Lokale .map bestandsdetectie (vanwege ongewenste bijwerkingen)
