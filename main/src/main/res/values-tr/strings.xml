@@ -1445,7 +1445,6 @@
     <string name="search_address">Adres</string>
     <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geokod</string>
-    <string name="search_geo_button">Geocode\'a göre ara</string>
     <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelime</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
@@ -1942,6 +1941,7 @@
     <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
+    <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
     <string name="map_disable_autotarget_individual_route">\"Rota başlangıcını hedef olarak ayarla\" devre dışı bırakıldı</string>
