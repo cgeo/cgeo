@@ -1693,7 +1693,6 @@
     <string name="search_address">Adresas</string>
     <string name="search_address_button">Paieška pagal adresą</string>
     <string name="search_geo">Geokodas</string>
-    <string name="search_geo_button">Paieška pagal geokodą</string>
     <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
@@ -2150,12 +2149,6 @@
         <item quantity="few">Prieš %d dienas</item>
         <item quantity="many">Prieš %d dienų</item>
         <item quantity="other">Prieš %d dienų</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Per %d dieną</item>
-        <item quantity="few">Per %d dienas</item>
-        <item quantity="many">Per %d dienų</item>
-        <item quantity="other">Per %d dienų</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo nuoroda</string>
