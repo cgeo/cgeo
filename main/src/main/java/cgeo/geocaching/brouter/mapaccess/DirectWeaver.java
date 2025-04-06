@@ -52,6 +52,7 @@ public final class DirectWeaver extends ByteDataWriter {
         for (int n = 0; n < size; n++) {
             final long id = expandId(faid[n]);
             final int ilon = (int) (id >> 32);
+            //noinspection PointlessBitwiseExpression
             final int ilat = (int) (id & 0xffffffff);
             OsmNode node = hollowNodes.get(ilon, ilat);
             if (node == null) {
