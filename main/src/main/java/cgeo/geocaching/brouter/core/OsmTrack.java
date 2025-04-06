@@ -388,6 +388,7 @@ public final class OsmTrack {
         return detourMap.get(id);
     }
 
+    /** @noinspection EmptyMethod*/
     public void prepareSpeedProfile(final RoutingContext rc) {
         // sendSpeedProfile = rc.keyValues != null && rc.keyValues.containsKey("vmax");
     }

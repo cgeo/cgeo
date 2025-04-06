@@ -117,6 +117,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
+        /** @noinspection EmptyMethod*/
         @Override
         public void updateGeoData(final GeoData geo) {
             // Do nothing explicit, listening to location updates is sufficient

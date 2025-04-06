@@ -62,6 +62,7 @@ public abstract class AbstractMapFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(UnifiedMapViewModel.class);
     }
 
+    /** @noinspection EmptyMethod*/
     @Override
     public void onResume() {
         super.onResume();

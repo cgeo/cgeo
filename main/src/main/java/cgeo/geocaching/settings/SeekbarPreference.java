@@ -97,6 +97,7 @@ public class SeekbarPreference extends Preference {
         init();
     }
 
+    /** @noinspection EmptyMethod*/
     protected void init() {
         // init method gets called once by the constructor,
         // so override and put initialization stuff in there (if needed)
