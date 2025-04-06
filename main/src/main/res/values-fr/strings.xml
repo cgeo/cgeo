@@ -1771,7 +1771,6 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Géocode</string>
-    <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
@@ -2219,10 +2218,6 @@
     <plurals name="days_ago">
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dans %d jour</item>
-        <item quantity="other">Dans %d jours</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
