@@ -1833,7 +1833,6 @@
     <string name="search_address">Endereço</string>
     <string name="search_address_button">Pesquisar por endereço</string>
     <string name="search_geo">Geo-código</string>
-    <string name="search_geo_button">Pesquisar por geo-código</string>
     <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
@@ -2260,10 +2259,6 @@
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dentro de %d dia</item>
-        <item quantity="other">Dentro de %d dias</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
@@ -2375,7 +2370,7 @@
     <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_route">Exportar como rota</string>
     <string name="map_export_track">Exportar como percurso</string>
-    <string name="map_load_individual_route">Carregar de GPX</string>
+    <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>
@@ -2617,7 +2612,6 @@
     <string name="wherigo_dialog_pause_info">Retome o diálogo no reprodutor Wherigo tocando em \"Retomar diálogo pausado\"</string>
     <string name="wherigo_no_game_running">Não está nenhum jogo Wherigo em execução</string>
     <string name="wherigo_currently_playing">Em execução</string>
-    <string name="wherigo_cartridge_details">Detalhes do cartucho</string>
     <string name="wherigo_locate_on_center">Localizar no centro</string>
     <string name="wherigo_revoke_fixed_location">Revogar localização fixa</string>
     <string name="wherigo_thingtype_location">Locais</string>
