@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import android.app.AlertDialog;
@@ -43,6 +44,7 @@ public class NewCoordinateInputDialog {
     private EditText longitudeDegree, longitudeMinutes, longitudeSeconds, longitudeFraction;
     private EditText latitudeDegree, latitudeMinutes, latitudeSeconds, latitudeFraction;
     private List<EditText> orderedInputs;
+    private Button copyFromClipboard, useCurrentLocation;
     private Geopoint gp;
 
     public NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
@@ -154,6 +156,22 @@ public class NewCoordinateInputDialog {
             EditUtils.disableSuggestions(editText);
         }
 
+        copyFromClipboard = theView.findViewById(R.id.clipboard);
+        useCurrentLocation = theView.findViewById(R.id.current);
+
+        copyFromClipboard.setOnClickListener(v -> {
+            try {
+                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                updateGui();
+            } catch (final Geopoint.ParseException ignored) {
+                //ignore
+            }
+        });
+
+        useCurrentLocation.setOnClickListener(v -> {
+            gp = currentCoords();
+            updateGui();
+        });
     }
 
     private boolean saveAndFinishDialog() {
