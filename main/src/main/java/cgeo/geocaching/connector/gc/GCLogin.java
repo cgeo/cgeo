@@ -70,7 +70,7 @@ public class GCLogin extends AbstractLogin {
         }
     }
 
-    /**
+    /*
      * <pre>
      * var serverParameters = {
      *   "user:info": {

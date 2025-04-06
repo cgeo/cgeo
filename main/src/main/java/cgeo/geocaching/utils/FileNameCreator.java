@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Instances of this class are meant to create filename.
  * <br>
- * Static method {@link #forName(String, String)} can be used for constant names, while various predefined instances of this
+ * Static method {@link #forName(String)} can be used for constant names, while various predefined instances of this
  * class can be used to create unique filenames for certain file types (e.g. {@link #LOGFILE}).
  */
 public class FileNameCreator {
