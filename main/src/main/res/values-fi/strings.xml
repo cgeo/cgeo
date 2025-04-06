@@ -1689,7 +1689,6 @@
     <string name="search_address">Osoite</string>
     <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">Geokoodi</string>
-    <string name="search_geo_button">Hae geokoodilla</string>
     <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusana</string>
     <string name="search_kw_prefill">Hakusana</string>
@@ -2110,10 +2109,6 @@
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">%d päivässä</item>
-        <item quantity="other">%d päivässä</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>
@@ -2217,6 +2212,7 @@
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
     <string name="map_refresh_individual_route">Päivitä</string>
+    <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
     <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
