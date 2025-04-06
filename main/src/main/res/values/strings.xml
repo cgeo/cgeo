@@ -2036,7 +2036,6 @@
     <string name="search_address">Address</string>
     <string name="search_address_button">Search by address</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Search by geocode</string>
     <string name="search_geocode_from_clipboard">Geocode was pasted from clipboard.</string>
     <string name="search_kw">Keyword</string>
     <string name="search_kw_prefill">Keyword</string>
@@ -2526,15 +2525,6 @@
         <item quantity="other">%d days ago</item>
     </plurals>
 
-    <plurals name="days_ahead">
-        <item quantity="zero">In %d days</item>
-        <item quantity="one">In %d day</item>
-        <item quantity="two">In %d days</item>
-        <item quantity="few">In %d days</item>
-        <item quantity="many">In %d days</item>
-        <item quantity="other">In %d days</item>
-    </plurals>
-
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
@@ -2950,7 +2940,6 @@
     <string name="wherigo_dialog_pause_info">Resume dialog in Wherigo Player by tapping \"Resume paused dialog\"</string>
     <string name="wherigo_no_game_running">No wherigo game is currently running</string>
     <string name="wherigo_currently_playing">Currently playing</string>
-    <string name="wherigo_cartridge_details">Cartridge details</string>
     <string name="wherigo_locate_on_center">Locate on center</string>
     <string name="wherigo_revoke_fixed_location">Revoke fixed location</string>
 
