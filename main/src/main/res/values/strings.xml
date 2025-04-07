@@ -494,6 +494,8 @@
     <string name="caches_remove_selected">Remove selected from list</string>
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
+    <string name="caches_remove_from_other_lists_selected">Remove selected from other lists</string>
+    <string name="caches_remove_from_other_lists_all">Remove all from other lists</string>
     <string name="caches_append_to_route_selected">Append selected to individual route</string>
     <string name="caches_append_to_route_all">Append all to individual route</string>
     <string name="caches_appended_to_route">Caches appended to route</string>

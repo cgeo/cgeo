@@ -68,6 +68,11 @@
                 android:title="@string/caches_remove_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_remove_from_other_lists"
+                android:title="@string/caches_remove_from_other_lists_all"
+                android:enabled="true"
+                app:showAsAction="never|withText"/>
+            <item
                 android:id="@+id/menu_drop_caches_all_lists"
                 android:title="@string/caches_remove_all_completely"
                 app:showAsAction="ifRoom|withText"/>
