@@ -1,5 +1,5 @@
 ##
-- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Oplossing: Favoriet status gaat verloren bij het uitvoeren van een afbeeldingsselectie tijdens het voorbereiden van een log
 
 ##
 - Oplossing: Wherigo links zonder host naam niet gedetecteerd
