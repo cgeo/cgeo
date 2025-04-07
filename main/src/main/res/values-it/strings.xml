@@ -312,6 +312,8 @@
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
     <string name="info_log_delete_failed">Eliminazione del log fallita.</string>
+    <string name="info_log_post_failed_simple_reason">Controlla di aver correttamente eseguito il login e che ci sia una buona connessione internet.</string>
+    <string name="info_log_delete_failed_simple_reason">Controlla che il tuo login sia corretto, hai una connessione internet valida e che il log non sia già stato eliminato.</string>
     <string name="info_log_post_retry">Riprova</string>
     <string name="info_log_post_save">Salva offline</string>
     <string name="info_log_cleared">Il log è stato azzerato.</string>
