@@ -229,13 +229,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public int getCheckedCount() {
-        int checked = 0;
+        if (!isSelectMode()) {
+            return 0;
+        }
+
+        int checkedCount = 0;
         for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
-                checked++;
+                checkedCount++;
             }
         }
-        return checked;
+        return checkedCount;
     }
 
     public int getOriginalListCount() {
@@ -442,7 +446,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         holder.binding.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
         holder.binding.checkbox.setChecked(cache.isStatusChecked());
-        holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
+        holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache, this));
 
         distances.add(holder.binding.distance);
         holder.binding.distance.setCacheData(cache.getCoords(), cache.getDistance());
@@ -524,15 +528,21 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private static class SelectionCheckBoxListener implements View.OnClickListener {
 
         private final Geocache cache;
+        @NonNull private final WeakReference<CacheListAdapter> adapterRef;
 
-        SelectionCheckBoxListener(final Geocache cache) {
+        SelectionCheckBoxListener(final Geocache cache, @NonNull final CacheListAdapter adapter) {
             this.cache = cache;
+            adapterRef = new WeakReference<>(adapter);
         }
 
         @Override
         public void onClick(final View view) {
             final boolean checkNow = ((CheckBox) view).isChecked();
             cache.setStatusChecked(checkNow);
+            final CacheListAdapter adapter = adapterRef.get();
+            if (adapter == null) {
+                return;
+            }
         }
     }
 

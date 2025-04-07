@@ -82,7 +82,7 @@
                 app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_upload_bookmarklist"
-                android:title="@string/caches_upload_bookmarklist"
+                android:title="@string/caches_upload_bookmarklist_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_upload_modifiedcoords"
@@ -95,15 +95,15 @@
             <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
-                android:enabled="false"
+                android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_show_attributes"
-                android:title="@string/caches_show_attributes"
+                android:title="@string/caches_show_attributes_all"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/menu_set_cache_icon"
-                android:title="@string/caches_set_cache_icon"
+                android:title="@string/caches_set_cache_icon_all"
                 android:enabled="false"
                 app:showAsAction="never"/>
             <item

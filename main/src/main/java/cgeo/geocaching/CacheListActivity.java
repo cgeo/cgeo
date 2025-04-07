@@ -5,7 +5,6 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.cachelist.CacheListApp;
 import cgeo.geocaching.apps.cachelist.CacheListAppUtils;
 import cgeo.geocaching.apps.cachelist.CacheListApps;
 import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
@@ -557,12 +556,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
+        final boolean isSelectMode = adapter.isSelectMode();
         final boolean isHistory = type == CacheListType.HISTORY;
         final boolean isOffline = type == CacheListType.OFFLINE;
-        final boolean isEmpty = adapter.isEmpty();
         final boolean isConcrete = isConcreteList();
         final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
-        final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
+
+        final boolean isEmpty = adapter.isEmpty();
+        final Collection<Geocache> caches = adapter.getCheckedOrAllCaches();
+        final boolean containsOfflineLogs = containsOfflineLogs(caches);
+        final boolean containsStoredPastEvents = containsStoredPastEvents(caches);
+        final boolean containsStoredCaches = containsStoredCaches(caches);
+
+        final boolean isGcConnectorActive = Settings.isGCConnectorActive();
+        final boolean isGcPremiumMember = isGcConnectorActive && Settings.isGCPremiumMember();
+
+        final boolean hasListNavigationApps = CacheListApps.getActiveApps().size() > 1;
+        final int checkedCount = adapter.getCheckedCount();
+
 
         try {
             // toplevel menu items
@@ -571,64 +582,68 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             MenuUtils.setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
             updateSelectSwitchMenuItem(menu.findItem(R.id.menu_switch_select_mode));
-            MenuUtils.setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
-            MenuUtils.setVisible(menu, R.id.menu_select_next20, adapter.isSelectMode()); // same here
-            MenuUtils.setVisible(menu, R.id.menu_select_next100, adapter.isSelectMode()); // same here
+            MenuUtils.setVisible(menu, R.id.menu_invert_selection, isSelectMode); // exception to the general rule: only show in select mode
+            MenuUtils.setVisible(menu, R.id.menu_select_next20, isSelectMode); // same here
+            MenuUtils.setVisible(menu, R.id.menu_select_next100, isSelectMode); // same here
 
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, hasListNavigationApps, !isEmpty);
 
             // Manage Caches submenu
             MenuUtils.setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
-            if (!isOffline && !isHistory) {
-                menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
+            if (isOffline || isHistory) { // only offline list
+                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all, checkedCount);
+            } else { // search and global list (all other than offline and history)
+                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline, checkedCount);
             }
 
-            MenuUtils.setVisible(menu, R.id.menu_move_to_list, containsStoredCaches());
-            setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
-            MenuUtils.setVisible(menu, R.id.menu_copy_to_list, containsStoredCaches());
-            setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
+            MenuUtils.setVisible(menu, R.id.menu_move_to_list, containsStoredCaches);
+            setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all, checkedCount);
+            MenuUtils.setVisible(menu, R.id.menu_copy_to_list, containsStoredCaches);
+            setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all, checkedCount);
 
             MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
-            setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
-            MenuUtils.setVisible(menu, R.id.menu_delete_events, containsStoredPastEvents());
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
+            setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all, checkedCount);
+            MenuUtils.setVisible(menu, R.id.menu_delete_events, containsStoredPastEvents);
+            MenuUtils.setVisible(menu, R.id.menu_clear_offline_logs, containsOfflineLogs);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
-            setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
+            setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history, checkedCount);
 
             final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, (isHistory || containsStoredCaches()) && !removeFromDevice, !isEmpty);
-            setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches(), !isEmpty);
-            setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, (isHistory || containsStoredCaches) && !removeFromDevice, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely, checkedCount);
 
-            if (isOffline || type == CacheListType.HISTORY) { // only offline list
-                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-            } else { // search and global list (all other than offline and history)
-                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
-            }
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, Settings.isGCConnectorActive() && Settings.isGCPremiumMember(), !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, Settings.isGCConnectorActive(), !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, Settings.isGCConnectorActive(), !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_upload_bookmarklist, R.string.caches_upload_bookmarklist_selected, R.string.caches_upload_bookmarklist_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, isGcConnectorActive, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, isGcConnectorActive, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_upload_allcoords, R.string.caches_upload_allcoords, R.string.caches_upload_allcoords, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_set_cache_icon, R.string.caches_set_cache_icon_selected, R.string.caches_set_cache_icon_all, checkedCount);
 
             // Manage Lists submenu
-            MenuUtils.setVisible(menu, R.id.menu_lists, isOffline);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_lists, isOffline, !isSelectMode);
             MenuUtils.setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
-            MenuUtils.setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
-            MenuUtils.setEnabled(menu, R.id.menu_set_askfordeletion, preventAskForDeletion);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_set_askfordeletion, isNonDefaultList, preventAskForDeletion);
 
             // Import submenu
-            MenuUtils.setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
-            MenuUtils.setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
-            MenuUtils.setEnabled(menu, R.id.menu_bookmarklists, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id, !isSelectMode);
+            MenuUtils.setEnabled(menu, R.id.menu_import_pq, isGcPremiumMember);
+            MenuUtils.setEnabled(menu, R.id.menu_bookmarklists, isGcPremiumMember);
 
             // Export
             MenuUtils.setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_export_gpx, R.string.export_gpx, R.string.export_gpx, checkedCount);
+            setMenuItemLabel(menu, R.id.menu_export_fieldnotes, R.string.export_fieldnotes, R.string.export_fieldnotes, checkedCount);
+            setMenuItemLabel(menu, R.id.menu_export_persnotes, R.string.export_persnotes, R.string.export_persnotes, checkedCount);
+
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
@@ -637,8 +652,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
-    private boolean containsStoredCaches() {
-        for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
+    private boolean containsStoredCaches(final Collection<Geocache> caches) {
+        for (final Geocache cache : caches) {
             if (cache.isOffline()) {
                 return true;
             }
@@ -646,17 +661,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return false;
     }
 
-    private boolean containsStoredPastEvents() {
-        for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (cache.isOffline() && CalendarUtils.isPastEvent(cache)) {
+    private boolean containsStoredPastEvents(final Collection<Geocache> caches) {
+        for (final Geocache cache : caches) {
+            if (CalendarUtils.isPastEvent(cache)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean containsOfflineLogs() {
-        for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
+    private boolean containsOfflineLogs(final Collection<Geocache> caches) {
+        for (final Geocache cache : caches) {
             if (cache.hasLogOffline()) {
                 return true;
             }
@@ -664,14 +679,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return false;
     }
 
-    private void setMenuItemLabel(final Menu menu, final int menuId, @StringRes final int resIdSelection, @StringRes final int resId) {
+    private void setMenuItemLabel(final Menu menu, final int menuId, @StringRes final int resIdSelection, @StringRes final int resId, final int checkedCount) {
         final MenuItem menuItem = menu.findItem(menuId);
         if (menuItem == null) {
             return;
         }
-        final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
+
+        final boolean hasSelection = checkedCount > 0;
         if (hasSelection) {
-            menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getCheckedCount() + ")");
+            menuItem.setTitle(res.getString(resIdSelection) + " (" + checkedCount + ")");
         } else {
             menuItem.setTitle(res.getString(resId));
         }
@@ -791,12 +807,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             copyCachesToOtherList(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_delete_events) {
-            deletePastEvents();
+            deletePastEvents(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_internal_cache) {
             InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId), false);
         } else if (menuItem == R.id.menu_clear_offline_logs) {
-            clearOfflineLogs();
+            clearOfflineLogs(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_show_attributes) {
             adapter.showAttributes();
@@ -861,9 +877,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return new SearchResult(Geocache.getGeocodes(adapter.getFilteredList()));
     }
 
-    private void deletePastEvents() {
+    private void deletePastEvents(final Collection<Geocache> caches) {
         final List<Geocache> deletion = new ArrayList<>();
-        for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
+        for (final Geocache cache : caches) {
             if (CalendarUtils.isPastEvent(cache)) {
                 deletion.add(cache);
             }
@@ -871,10 +887,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         deleteCaches(deletion, false);
     }
 
-    private void clearOfflineLogs() {
+    private void clearOfflineLogs(final Collection<Geocache> caches) {
         SimpleDialog.of(this).setTitle(R.string.caches_clear_offlinelogs).setMessage(R.string.caches_clear_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
             progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
-            clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
+            clearOfflineLogs(clearOfflineLogsHandler, caches);
         });
     }
 
@@ -1265,11 +1281,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void removeFromHistoryCheck() {
         final int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
                 : R.string.cache_clear_history;
-        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(this::removeFromHistory);
+        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> removeFromHistory(adapter.getCheckedOrAllCaches()));
     }
 
-    private void removeFromHistory() {
-        final List<Geocache> caches = adapter.getCheckedOrAllCaches();
+    private void removeFromHistory(final Collection<Geocache> caches) {
         final Collection<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             geocodes.add(cache.getGeocode());
@@ -1388,7 +1403,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private static void clearOfflineLogs(final Handler handler, final List<Geocache> selectedCaches) {
+    private static void clearOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
         Schedulers.io().scheduleDirect(() -> {
             DataStore.clearLogsOffline(selectedCaches);
             handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
