@@ -1,7 +1,6 @@
 package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -24,18 +23,21 @@ import java.util.Set;
 public abstract class MakeListUniqueCommand extends AbstractCommand {
 
     private final int listId;
+    private final Set<String> cacheList;
     @NonNull
     private final Map<String, Set<Integer>> oldLists = new HashMap<>();
 
-    public MakeListUniqueCommand(@NonNull final Activity context, final int listId) {
+    public MakeListUniqueCommand(@NonNull final Activity context, final int listId, final Set<String> cacheList) {
         super(context);
         this.listId = listId;
+        this.cacheList = cacheList;
     }
 
     @Override
     protected void doCommand() {
-        final SearchResult search = DataStore.getBatchOfStoredCaches(null, listId);
-        final Set<Geocache> caches = DataStore.loadCaches(search.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<String> geocodesList = cacheList.isEmpty() ? DataStore.getBatchOfStoredCaches(null, listId).getGeocodes() : cacheList;
+
+        final Set<Geocache> caches = DataStore.loadCaches(geocodesList, LoadFlags.LOAD_CACHE_OR_DB);
 
         for (final Geocache geocache : caches) {
             final HashSet<Integer> backupOfLists = new HashSet<>(geocache.getLists());
