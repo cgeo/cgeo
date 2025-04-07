@@ -1,5 +1,5 @@
 ##
-- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Correcció: l'estat favorit es perd en seleccionar una imatge mentre es prepara un registre
 
 ##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
