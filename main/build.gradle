@@ -70,6 +70,10 @@ android {
 
     buildFeatures {
         viewBinding true
+        // Enable aidl, some modules in this project appear to be using AIDL
+        aidl true
+        // Enable buildConfig build feature
+        buildConfig true
     }
 
     buildTypes {
@@ -83,7 +87,8 @@ android {
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            testCoverageEnabled isContinuousIntegrationServer()
+            enableUnitTestCoverage isContinuousIntegrationServer()
+            enableAndroidTestCoverage isContinuousIntegrationServer()
 
             // replace in AndroidManifest.xml
             manifestPlaceholders = [
@@ -343,9 +348,9 @@ dependencies {
     implementation 'com.github.moving-bits:dbinspection:v0.1.1'
 
     // Jackson XML processing
-    // Jackson 2.14++ needs minSdk 26
+    // Jackson 2.13++ needs minSdk 24 (see https://github.com/FasterXML/jackson-databind?tab=readme-ov-file#android)
     //noinspection GradleDependency
-    String jacksonVersion = '2.14.3'
+    String jacksonVersion = '2.12.7'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
