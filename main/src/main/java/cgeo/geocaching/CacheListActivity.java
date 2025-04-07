@@ -623,6 +623,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_set_cache_icon, R.string.caches_set_cache_icon_selected, R.string.caches_set_cache_icon_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_other_lists, isOffline && listId != PseudoList.ALL_LIST.id, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_remove_from_other_lists, R.string.caches_remove_from_other_lists_selected, R.string.caches_remove_from_other_lists_all, checkedCount);
 
             // Manage Lists submenu
             MenuUtils.setVisibleEnabled(menu, R.id.menu_lists, isOffline, !isSelectMode);
@@ -816,8 +818,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_show_attributes) {
             adapter.showAttributes(adapter.getCheckedOrAllCaches());
-        } else if (menuItem == R.id.menu_make_list_unique) {
-            new MakeListUniqueCommand(this, listId) {
+        } else if (menuItem == R.id.menu_make_list_unique || menuItem == R.id.menu_remove_from_other_lists) {
+            new MakeListUniqueCommand(this, listId, Geocache.getGeocodes(menuItem == R.id.menu_remove_from_other_lists ? adapter.getCheckedOrAllCaches() : new ArrayList<>())) {
 
                 @Override
                 protected void onFinished() {
