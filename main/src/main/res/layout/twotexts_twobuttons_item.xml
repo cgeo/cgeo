@@ -41,12 +41,12 @@
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
         tools:text="detail info" />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_left"
         style="@style/button_icon"
         android:layout_toLeftOf="@id/button_right"
         android:visibility="gone" />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_right"
         style="@style/button_icon"
         android:layout_alignParentRight="true"
