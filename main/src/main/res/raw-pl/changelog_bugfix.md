@@ -1,5 +1,5 @@
 ##
-- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Naprawiono: Status ulubionej skrytki był tracony podczas wybierania obrazu podczas przygotowywania wpisu
 
 ##
 - Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
