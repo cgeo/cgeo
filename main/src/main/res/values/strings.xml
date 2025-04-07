@@ -498,6 +498,8 @@
     <string name="waypoints_appended_to_route">Waypoints appended to route</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_bookmarklist">Add to bookmark list</string>
+    <string name="caches_upload_bookmarklist_all">Add all to bookmark list</string>
+    <string name="caches_upload_bookmarklist_selected">Add selected to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -519,8 +521,11 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
-    <string name="caches_show_attributes">Show attribute overview</string>
+    <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
+    <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
+    <string name="caches_set_cache_icon_all">Set cache icon for all caches</string>
+    <string name="caches_set_cache_icon_selected">Set cache icon for selected caches</string>
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
