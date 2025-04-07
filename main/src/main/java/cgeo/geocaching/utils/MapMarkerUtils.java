@@ -754,6 +754,7 @@ public final class MapMarkerUtils {
             counter = counter - 10;
         }
         final String packageName = CgeoApplication.getInstance().getPackageName();
+        // if we are ever going to remove this feature, the corresponding drawables must be removed manually (as they have set tools:ignore="UnusedResources" to avoid false warnings)
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_stagenum_" + counter, "drawable", packageName), null), scaling);
     }
 

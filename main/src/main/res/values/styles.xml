@@ -221,11 +221,6 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="button_icon_search" parent="button_icon">
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-    </style>
-
     <style name="quicklaunch_button" parent="button_icon_accent">
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
         <item name="backgroundTint">#38808080</item>
@@ -317,10 +312,6 @@
 
     <style name="textinput_embedded_singleline" parent="textinput_embedded">
         <item name="android:imeOptions">flagNoFullscreen</item>
-    </style>
-
-    <style name="textinput_embedded_singleline_go" parent="textinput_embedded_singleline">
-        <item name="android:imeOptions">flagNoFullscreen|actionGo</item>
     </style>
 
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
@@ -474,13 +465,6 @@
         <item name="android:background">@color/colorSeparator</item>
         <item name="android:layout_marginTop">6dp</item>
         <item name="android:layout_marginBottom">2dp</item>
-    </style>
-
-    <style name="search_content_group">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:paddingRight">4dp</item>
     </style>
 
     <!-- images -->

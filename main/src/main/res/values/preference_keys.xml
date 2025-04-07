@@ -670,6 +670,4 @@
     <string translatable="false" name="pref_legacy_filter_config_migrated">legacy_filter_config_migrated</string>
     <string translatable="false" name="pref_last_used_date">last_used_logdate</string>
 
-    <string translatable="false" name="pref_debug_tinticons">debug_tinticons</string>
-
 </resources>
