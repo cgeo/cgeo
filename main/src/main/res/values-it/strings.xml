@@ -221,6 +221,9 @@
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
     <string name="contact_multiple_matches">Contatto: risultati multipli</string>
     <!-- translation -->
+    <string name="translate">Traduci con l\'app Google Translate</string>
+    <string name="translate_to_sys_lang">Traduci in %s (Web)</string>
+    <string name="translate_to_english">Traduci in inglese (Web)</string>
     <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -310,6 +313,8 @@
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
     <string name="info_log_delete_failed">Eliminazione del log fallita.</string>
+    <string name="info_log_post_failed_simple_reason">Controlla di aver correttamente eseguito il login e che ci sia una buona connessione internet.</string>
+    <string name="info_log_delete_failed_simple_reason">Controlla che il tuo login sia corretto, hai una connessione internet valida e che il log non sia già stato eliminato.</string>
     <string name="info_log_post_retry">Riprova</string>
     <string name="info_log_post_save">Salva offline</string>
     <string name="info_log_cleared">Il log è stato azzerato.</string>
@@ -336,6 +341,28 @@
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Base</string>
+    <string name="translator_preference_target_lng">Lingua di traduzione offline</string>
+    <string name="translator_preference_target_lng_summary">Lingua di destinazione per traduttore offline</string>
+    <string name="translator_preference_nottranslate_lng">Lingue ignorate</string>
+    <string name="translator_preference_nottranslate_lng_summary">Lingue di origine per le quali non offrire traduzione</string>
+    <string name="translator_preference_disable">&lt;Disattva traduzione&gt;</string>
+    <string name="translator_model_download_select">Scarica lingua di traduzione offline</string>
+    <string name="translator_model_download_confirm_title">Conferma download della lingua</string>
+    <string name="translator_model_download_confirm_txt">Il modello di traduzione per la lingua %s deve essere scaricato. La dimensione del modello è di circa 20-40 MB.</string>
+    <string name="translator_model_download_notification">Download del modello di traduzione avviato</string>
+    <string name="translator_model_download_success">Modello di traduzione per %s scaricato</string>
+    <string name="translator_model_download_error">Download del modello di traduzione non riuscito: %1$s: %2$s</string>
+    <string name="translator_model">Modello di traduzione</string>
+    <string name="translator_tooltip">Traduttore offline</string>
+    <string name="translator_language_select">Seleziona la lingua di origine</string>
+    <string name="translator_language_unsupported">Lingua (%s) non supportata per la traduzione.</string>
+    <string name="translator_language_missing">Pacchetto lingua mancante %s</string>
+    <string name="translator_language_unknown">Impossibile identificare la lingua</string>
+    <string name="translator_language_detected">Traduci da \"%s\"</string>
+    <string name="translator_language_detection_error">Impossibile avviare il rilevamento della lingua</string>
+    <string name="translator_translation_error">Traduzione del testo non riuscita: %s</string>
+    <string name="translator_translation_initerror">Impossibile avviare il traduttore</string>
+    <string name="translator_translation_success">Tradotto da \"%s\", tocca il pulsante per ripristinare il testo originale</string>
     <!-- location service -->
     <string name="loc_last">Ultima nota</string>
     <string name="loc_net">Rete</string>
@@ -1483,6 +1510,8 @@
     <string name="cache_menu_ignore">Ignora cache</string>
     <string name="cache_log_menu_decrypt">Decifra/Cifra</string>
     <string name="cache_log_menu_edit">Modifica Log</string>
+    <string name="menu_expand_log">Espandi log</string>
+    <string name="menu_collapse_log">Comprimi log</string>
     <string name="cache_log_menu_delete">Cancella Log</string>
     <string name="cache_log_menu_popup_title">Registro di %s</string>
     <string name="cache_log_delete_reason_default">Il log è stato eliminato usando c:geo</string>
@@ -1603,6 +1632,7 @@
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
+    <string name="internal_connector_name">Cache definiti dall\'utente</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinito</string>
     <string name="html_style_default_no_contrast_fix">Correzione predefinita senza contrasto</string>
@@ -2376,6 +2406,7 @@
     <string name="map_refresh_individual_route">Aggiorna</string>
     <string name="map_export_route">Esporta come percorso</string>
     <string name="map_export_track">Esporta come traccia</string>
+    <string name="map_load_from_GPX">Carica da GPX</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
@@ -2739,4 +2770,12 @@
     <string name="dbi_search_title">Cerca per</string>
     <string name="dbi_search_columnSelection">Limita a</string>
     <!-- emoji categories -->
+    <string name="emoji_category_recent">Usato di recente</string>
+    <string name="emoji_category_symbols">Simboli</string>
+    <string name="emoji_category_dots">Punti</string>
+    <string name="emoji_category_places">Luoghi</string>
+    <string name="emoji_category_food">Cibi e bevande</string>
+    <string name="emoji_category_activity">Attività</string>
+    <string name="emoji_category_people">Persone</string>
+    <string name="emoji_category_numbers">Numeri</string>
 </resources>
