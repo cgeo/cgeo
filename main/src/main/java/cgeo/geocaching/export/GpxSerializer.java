@@ -153,8 +153,12 @@ public final class GpxSerializer {
 
             XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
 
-            writeLogs(cache);
-            writeTravelBugs(cache);
+            if (Settings.getIncludeLogs()) {
+                writeLogs(cache);
+            }
+            if (Settings.getIncludeTravelBugs()) {
+                writeTravelBugs(cache);
+            }
 
             gpx.endTag(NS_GROUNDSPEAK, "cache");
 
