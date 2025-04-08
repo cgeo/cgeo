@@ -13,4 +13,14 @@
         android:id="@+id/include_found_status"
         style="@style/checkbox_full"
         android:text="@string/init_include_found_status" />
+
+    <CheckBox
+        android:id="@+id/include_logs"
+        style="@style/checkbox_full"
+        android:text="@string/init_include_logs" />
+
+    <CheckBox
+        android:id="@+id/include_travelbugs"
+        style="@style/checkbox_full"
+        android:text="@string/init_include_travelbugs" />
 </LinearLayout>

@@ -627,6 +627,8 @@
     <string translatable="false" name="pref_trackableaction">trackableaction</string>
     <string translatable="false" name="pref_trackable_inventory_sort">trackableComparator</string>
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
+    <string translatable="false" name="pref_includelogs">includelogs</string>
+    <string translatable="false" name="pref_includetravelbugs">includetravelbugs</string>
     <string translatable="false" name="pref_cleartrailafterexportstatus">cleartrailafterexportstatus</string>
     <string translatable="false" name="pref_logImageScale">logImageScale</string>
     <string translatable="false" name="pref_fieldNoteExportDate">fieldnoteExportDate</string>
