@@ -26,23 +26,16 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import cgeo.geocaching.utils.NetworkUtils;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class WMLogin extends AbstractLogin {
 
     private static final String LOGIN_URI = "https://www.waymarking.com/login/default.aspx";
+    private static final String LOGOUT_URI = "https://www.waymarking.com/login/default.aspx?RESET=Y";
     private static final String STATS_URI = "https://www.waymarking.com/users/profile.aspx?mypage=6&gt=1";
-
-    private static class StatusException extends RuntimeException {
-        private static final long serialVersionUID = 7488972529232227358L;
-        final StatusCode statusCode;
-
-        StatusException(final StatusCode statusCode) {
-            super("Status code: " + statusCode);
-            this.statusCode = statusCode;
-        }
-    }
 
     private WMLogin() {
         // singleton
@@ -176,7 +169,7 @@ public class WMLogin extends AbstractLogin {
 
             logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
             return StatusCode.UNKNOWN_ERROR;
-        } catch (final StatusException status) {
+        } catch (final NetworkUtils.StatusException status) {
             return status.statusCode;
         } catch (final Exception exception) {
             logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry, exception.toString());
@@ -187,8 +180,8 @@ public class WMLogin extends AbstractLogin {
     @WorkerThread
     public StatusCode logout() {
         try {
-            getResponseBodyOrStatus(Network.getRequest("https://www.waymarking.com/login/default.aspx?RESET=Y", null).blockingGet());
-        } catch (final StatusException status) {
+            NetworkUtils.getResponseBodyOrStatus(Network.getRequest(LOGOUT_URI, null).blockingGet());
+        } catch (final NetworkUtils.StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
         }
@@ -197,25 +190,10 @@ public class WMLogin extends AbstractLogin {
         return StatusCode.NO_ERROR;
     }
 
-    private String getResponseBodyOrStatus(final Response response) {
-        final String body;
-        try {
-            body = response.body().string();
-        } catch (final IOException ignore) {
-            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
-        }
-        if (response.code() == 503 /*&& TextUtils.matches(body, GCConstants.PATTERN_MAINTENANCE)*/) {
-            throw new StatusException(StatusCode.MAINTENANCE);
-        } else if (!response.isSuccessful()) {
-            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
-        }
-        return body;
-    }
-
     @WorkerThread
     private String getLoginPage() {
         Log.iForce("WMLogin: get login Page");
-        return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
+        return NetworkUtils.getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
 
     @NonNull
@@ -232,7 +210,7 @@ public class WMLogin extends AbstractLogin {
         params.add("ctl00$ContentBody$myPassword", credentials.getPassword());
         params.add("ctl00$ContentBody$Button1", "Log+In");
         params.add("ctl00$ContentBody$cookie", "on");
-        return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
+        return NetworkUtils.getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 
     /**
@@ -257,7 +235,7 @@ public class WMLogin extends AbstractLogin {
             // As a matter of fact almost no page tells us that.
             // The profile page is close, but it has the text embedded in an image.
             // We need to send a second request to the stats page to get the number of finds.
-            final String statsData = getResponseBodyOrStatus(Network.getRequest(STATS_URI).blockingGet());
+            final String statsData = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(STATS_URI).blockingGet());
             final int waymarksCount = WMParser.getFindsCount(statsData);
 
             if (waymarksCount == -1) {

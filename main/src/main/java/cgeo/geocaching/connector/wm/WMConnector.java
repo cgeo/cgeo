@@ -1,15 +1,21 @@
 package cgeo.geocaching.connector.wm;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.LocalizationUtils;
+
+import cgeo.geocaching.utils.ShareUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WMConnector extends AbstractConnector implements ILogin /*TODO implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort*/ {
+public class WMConnector extends AbstractConnector implements ILogin, ISearchByGeocode /*TODO ISearchByFilter, ISearchByViewPort*/ {
+
+    private static final String USER_PROFILE_URI = "https://www.waymarking.com/users/profile.aspx?f=1&guid=%s";
+    private static final String USER_EMAIL_URI = "https://www.waymarking.com/users/email.aspx?f=1&guid=%s";
 
     private final String name;
 
@@ -80,12 +89,6 @@ public class WMConnector extends AbstractConnector implements ILogin /*TODO impl
     @NonNull
     public String getNameAbbreviated() {
         return "WM";
-    }
-
-    @Override
-    @NonNull
-    public String getExtraDescription() {
-        return ""; //TODO maybe visit log requirements?
     }
 
     @Override
@@ -206,5 +209,25 @@ public class WMConnector extends AbstractConnector implements ILogin /*TODO impl
     @Override
     public int getFindsQuantityString() {
         return R.plurals.user_visits;
+    }
+
+    @NonNull
+    @Override
+    public List<UserAction> getUserActions(final UserAction.UAContext user) {
+        final List<UserAction> actions = super.getUserActions(user);
+        actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_PROFILE_URI, context.userGUID))));
+        actions.add(new UserAction(R.string.user_menu_send_email, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_EMAIL_URI, context.userGUID))));
+        return actions;
+    }
+
+    @Override
+    public SearchResult searchByGeocode(@Nullable String geocode, @Nullable String guid, DisposableHandler handler) {
+        if (geocode == null) {
+            return null;
+        }
+
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
+        final Geocache cache = WMApi.searchByGeocode(geocode);
+        return cache != null ? new SearchResult(cache) : null;
     }
 }
