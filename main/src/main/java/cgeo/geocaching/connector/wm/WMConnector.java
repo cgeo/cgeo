@@ -226,8 +226,7 @@ public class WMConnector extends AbstractConnector implements ILogin, ISearchByG
             return null;
         }
 
-        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
-        final Geocache cache = WMApi.searchByGeocode(geocode);
+        final Geocache cache = WMApi.searchByGeocode(geocode, handler);
         return cache != null ? new SearchResult(cache) : null;
     }
 }
