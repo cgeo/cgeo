@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.capability;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 
 import android.content.Context;
@@ -52,6 +53,14 @@ public interface ILogin extends IConnector {
      * Consider using {@link cgeo.geocaching.storage.extension.FoundNumCounter#getAndUpdateFoundNum(ILogin)} instead, which provides cached data if user has no internet connection.
      */
     int getCachesFound();
+
+    default int getFindsQuantityString() {
+        return R.plurals.user_finds;
+    }
+
+    default int getOfflineFindsQuantityString() {
+        return R.plurals.user_finds_offline;
+    }
 
     /** increases the (internally stored) number of caches found for this connector (not synchronized to server) */
     void increaseCachesFound(int by);

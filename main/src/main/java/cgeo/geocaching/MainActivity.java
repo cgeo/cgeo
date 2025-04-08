@@ -169,12 +169,12 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
                                         final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
                                         if (count >= 0) {
-                                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
+                                            userFoundCount.append(activity.getResources().getQuantityString(conn.getFindsQuantityString(), count, count));
 
                                             if (Settings.isDisplayOfflineLogsHomescreen()) {
                                                 final int offlinefounds = DataStore.getFoundsOffline(conn);
                                                 if (offlinefounds > 0) {
-                                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(conn.getOfflineFindsQuantityString(), offlinefounds, offlinefounds));
                                                 }
                                             }
                                         }

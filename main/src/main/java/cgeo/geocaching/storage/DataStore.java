@@ -238,7 +238,8 @@ public class DataStore {
                     "cg_caches.owner_guid," +  // 44
                     "cg_caches.emoji," +       // 45
                     "cg_caches.alcMode," +       // 46
-                    "cg_caches.tier"; // 47
+                    "cg_caches.tier," +  // 47
+                    "cg_caches.wmCategory"; // 48
 
     /**
      * The list of fields needed for mapping.
@@ -256,7 +257,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 106;
+    private static final int dbVersion = 107;
     public static final int customListIdOffset = 10;
 
     /**
@@ -298,7 +299,8 @@ public class DataStore {
             103, // add more projection attributes to waypoints
             104,  // add geofence radius for lab stages
             105,  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
-            106  // Update lab caches DT rating to zero from minus one
+            106,  // Update lab caches DT rating to zero from minus one
+            107  // add wmCategory for waymark caches
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -412,7 +414,8 @@ public class DataStore {
             + "owner_guid TEXT NOT NULL DEFAULT '',"
             + "emoji INTEGER DEFAULT 0,"
             + "alcMode INTEGER DEFAULT 0,"
-            + "tier TEXT"
+            + "tier TEXT,"
+            + "wmCategory TEXT DEFAULT ''"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -1930,6 +1933,14 @@ public class DataStore {
                         }
                     }
 
+                    // add wmCategory to cg_caches
+                    if (oldVersion < 107) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "wmCategory TEXT DEFAULT ''");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 107);
+                        }
+                    }
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2487,6 +2498,7 @@ public class DataStore {
             values.put("emoji", cache.getAssignedEmoji());
             values.put("alcMode", cache.getAlcMode());
             values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
+            values.put("wmCategory", cache.getWmCategory());
 
             init();
 
@@ -3279,6 +3291,7 @@ public class DataStore {
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
         cache.setTier(Tier.getByName(cursor.getString(47)));
+        cache.setWmCategory(cursor.getString(48));
 
         return cache;
     }

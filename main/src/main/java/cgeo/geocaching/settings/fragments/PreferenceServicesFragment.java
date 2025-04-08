@@ -20,6 +20,7 @@ public class PreferenceServicesFragment extends BasePreferenceFragment {
         // display connectors' activation status
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_gc_authorization, Settings.isGCConnectorActive());
         setPrefSummaryActiveStatus(this, R.string.pref_connectorALActive, Settings.isGCConnectorActive() && Settings.isALConnectorActive());
+        setPrefSummaryActiveStatus(this, R.string.pref_connectorWMActive, Settings.isGCConnectorActive() && Settings.isWMConnectorActive());
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_ocde_authorization, Settings.isOCConnectorActive(R.string.pref_connectorOCActive));
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_ocpl_authorization, Settings.isOCConnectorActive(R.string.pref_connectorOCPLActive));
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_ocnl_authorization, Settings.isOCConnectorActive(R.string.pref_connectorOCNLActive));
