@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.wm;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,19 +20,23 @@ import java.util.regex.Pattern;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
-public final class WMParser {
+import kotlin.Triple;
 
+public final class WMParser {
 
     private static final Pattern PATTERN_FINDS_DISTINCT = Pattern.compile("\\(\\D*(\\d+)\\D*\\)");
     private static final Pattern PATTERN_FINDS_TOTAL = Pattern.compile("<strong>(\\d+)</strong>");
     private static final Pattern PATTERN_GUID = Pattern.compile("guid=([0-9a-z\\-]+)");
     private static final Pattern PATTERN_NUMBER = Pattern.compile("\\d+");
+    private static final Pattern PATTERN_LOG_AUTHOR = Pattern.compile("^(.*) (?:wrote comment for|visited) .*?$");
 
     public static String getUsername(final String loginHtml) {
         if (StringUtils.isBlank(loginHtml)) {
@@ -84,7 +86,7 @@ public final class WMParser {
         return -1;
     }
 
-    public static Pair<Geocache, Integer> parseCoreWaymark(final String listingHtml) {
+    public static Triple<Geocache, Integer, Integer> parseCoreWaymark(final String listingHtml) {
         if (StringUtils.isBlank(listingHtml)) {
             Log.w("WMParser: could not retrieve waymark (blank)");
             return null;
@@ -109,13 +111,22 @@ public final class WMParser {
             }
         }
         if (guidElement != null) { // also gallery element at this point
-            imagesCount = Integer.parseInt(TextUtils.getMatch(guidElement.text(), PATTERN_NUMBER, false, 0, "", false));
+            imagesCount = Integer.parseInt(TextUtils.getMatch(guidElement.text(), PATTERN_NUMBER, false, 0, "0", false));
         } else {
             // attempt 2 to get guid: main content (missing for waymarks with 0 images)
             guidElement = waymarkDocument.select("#ctl00_ContentBody_WaymarkControl1_PhotoControl1_lnkGallery").first();
             if (guidElement == null) {
                 // attempt 3 to get guid: view all logs (missing for waymarks with 0 logs)
                 guidElement = waymarkDocument.select("#ctl00_ContentBody_WaymarkControl1_ExpandedWaymarkDetailsControl1_lnkViewAll").first();
+            }
+        }
+        // try to get log count
+        int logsCount = 0;
+        for (final Element linkOptionElement : linkOptionElements) {
+            final Element a = linkOptionElement.select("a").first();
+            if (a.attr("href").contains("logs/default")) {
+                logsCount = Integer.parseInt(TextUtils.getMatch(a.text(), PATTERN_NUMBER, false, 0, "0", false));
+                break;
             }
         }
 
@@ -144,7 +155,13 @@ public final class WMParser {
         cache.setUserModifiedCoords(false);
         cache.setDetailedUpdatedNow();
 
-        return Pair.create(cache, imagesCount);
+        return new Triple<>(cache, imagesCount, logsCount);
+    }
+
+    public static boolean getFoundState(final String logPageHtml) {
+        // first time I'm using words to detect something on a page (no other good selector)
+        // I am now making the assumption that this website is only available in english
+        return logPageHtml.contains("You have already visited this waymark.");
     }
 
     public static List<Image> getImages(final String galleryHtml) {
@@ -170,10 +187,40 @@ public final class WMParser {
         return result;
     }
 
-    public static boolean getFoundState(final String logPageHtml) {
-        // first time I'm using words to detect something on a page (no other good selector)
-        // I am now making the assumption that this website is only available in english
-        return logPageHtml.contains("You have already visited this waymark.");
+    public static List<LogEntry> getLogs(final String logsHtml) {
+        if (StringUtils.isBlank(logsHtml)) {
+            Log.w("WMParser: could not retrieve waymarking logs (blank)");
+            return List.of();
+        }
+
+        final List<LogEntry> result = new ArrayList<>();
+
+        final Document logsDocument = Jsoup.parse(logsHtml);
+        final Elements rows = logsDocument.select("table#ctl00_ContentBody_LogSimpleDisplayControl1_dlLogs table > tbody > tr");
+        for (int i = 2; i < rows.size(); i += 4) {
+            final Element header = rows.get(i);
+            final Element message = rows.get(i + 1);
+
+            final LogEntry.Builder builder = new LogEntry.Builder();
+
+            if (header.child(0).html().contains("icon_footprint")) {
+                builder.setLogType(LogType.WM_VISITED);
+            } else {
+                builder.setLogType(LogType.NOTE);
+            }
+            String author = TextUtils.getMatch(header.child(1).text(), PATTERN_LOG_AUTHOR, false, 1, "", false);
+            if (StringUtils.isEmpty(author)) {
+                Log.w("WM unparsable log " + header.html() + "\n\n" + message.html());
+                continue;
+            }
+            builder.setAuthor(author);
+            builder.setDate(parseDate(header.child(3).text().trim()).getTime());
+            builder.setLog(message.child(1).text().trim());
+
+            result.add(builder.build());
+        }
+
+        return result;
     }
 
     @NonNull

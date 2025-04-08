@@ -215,8 +215,10 @@ public class WMConnector extends AbstractConnector implements ILogin, ISearchByG
     @Override
     public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = super.getUserActions(user);
-        actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_PROFILE_URI, context.userGUID))));
-        actions.add(new UserAction(R.string.user_menu_send_email, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_EMAIL_URI, context.userGUID))));
+        if (!StringUtils.isEmpty(user.userGUID)) {
+            actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_PROFILE_URI, context.userGUID))));
+            actions.add(new UserAction(R.string.user_menu_send_email, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), String.format(USER_EMAIL_URI, context.userGUID))));
+        }
         return actions;
     }
 

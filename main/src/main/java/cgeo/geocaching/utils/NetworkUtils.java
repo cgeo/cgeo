@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import java.io.IOException;
 
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import okhttp3.Response;
@@ -28,7 +29,7 @@ public final class NetworkUtils {
         } catch (final IOException ignore) {
             throw new StatusException(StatusCode.COMMUNICATION_ERROR);
         }
-        if (response.code() == 503 /*&& TextUtils.matches(body, GCConstants.PATTERN_MAINTENANCE)*/) {
+        if (response.code() == 503 && TextUtils.matches(body, GCConstants.PATTERN_MAINTENANCE)) {
             throw new StatusException(StatusCode.MAINTENANCE);
         } else if (!response.isSuccessful()) {
             throw new StatusException(StatusCode.COMMUNICATION_ERROR);
