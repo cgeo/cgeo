@@ -24,41 +24,41 @@ import cgeo.geocaching.utils.NetworkUtils;
 final class WMApi {
     private static final String WAYMARK_URI = "https://www.waymarking.com/waymarks/%s";
     private static final String GALLERY_URI = "https://www.waymarking.com/gallery/default.aspx?f=1&gid=2&guid=%s";
+    private static final String LOG_URI = "https://www.waymarking.com/logs/add.aspx?f=1&logtype=1&guid=%s";
 
     @Nullable
     public static Geocache searchByGeocode(@NonNull final String geocode, final DisposableHandler handler) {
         try {
+            // Get core waymark data
             DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
-
             final String waymarkUri = String.format(WAYMARK_URI, geocode);
             final String waymarkHtml = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(waymarkUri).blockingGet());
             final Pair<Geocache, Integer> cachePair = WMParser.parseCoreWaymark(waymarkHtml);
             if (cachePair == null) return null;
 
             final Geocache cache = cachePair.first;
-            final int imageCount = cachePair.second;
-
             final String cacheId = cache.getCacheId();
-            if (imageCount > 0 && !StringUtils.isEmpty(cacheId)) {
-                DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
-                final String galleryUri = String.format(GALLERY_URI, cacheId);
-                final String galleryHtml = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(galleryUri).blockingGet());
+            if (!StringUtils.isEmpty(cacheId)) {
+                // Get found state
+                DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
+                final String logUri = String.format(LOG_URI, cacheId);
+                final String logHtml = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(logUri).blockingGet());
+                final boolean found = WMParser.getFoundState(logHtml);
+                cache.setFound(found);
 
-                final List<Image> spoilers = new ArrayList<>();
-                final List<String> imagePageUris = WMParser.getImagePageUris(galleryHtml);
-                for (final String imagePageUri : imagePageUris) {
-                    final String imagePageHtml = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(imagePageUri).blockingGet());
-                    final Image image = WMParser.parseImage(imagePageHtml);
-                    if (image != null) {
-                        spoilers.add(image);
-                    }
+                // Get images
+                final int imageCount = cachePair.second;
+                if (imageCount > 0) {
+                    DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
+                    final String galleryUri = String.format(GALLERY_URI, cacheId);
+                    final String galleryHtml = NetworkUtils.getResponseBodyOrStatus(Network.getRequest(galleryUri).blockingGet());
+                    final List<Image> images = WMParser.getImages(galleryHtml);
+                    cache.setSpoilers(images);
                 }
-                cache.setSpoilers(spoilers);
             }
 
             //TODO logs
-            //TODO found state
 
             DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
             return cache;

@@ -13,7 +13,6 @@ import org.jsoup.select.Elements;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -22,11 +21,9 @@ import java.util.regex.Pattern;
 
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
@@ -95,26 +92,37 @@ public final class WMParser {
 
         final Document waymarkDocument = Jsoup.parse(listingHtml);
 
-        // TODO: I dont know if any waymarks might not have these details
-
         final Geocache cache = new Geocache();
         final Element nameElement = waymarkDocument.select("#wm_name").first();
         final Element imageElement = waymarkDocument.select(".wm_photo img").first();
         final String imageLink = imageElement != null ? "<img src=\"" + imageElement.attr("src") + "\"></img><p><p>" : "";
         final Element ownerElement = waymarkDocument.select("#wm_postedby a").last();
         final Elements linkOptionElements = waymarkDocument.select("li.category_linkoption");
-        Element galleryElement = null;
+        Element guidElement = null;
+        int imagesCount = 0;
+        // attempt 1 to get gallery and guid: right side panel (missing for archived waymarks)
         for (final Element linkOptionElement : linkOptionElements) {
             final Element a = linkOptionElement.select("a").first();
             if (a.attr("href").contains("gallery")) {
-                galleryElement = a;
+                guidElement = a;
                 break;
             }
         }
-        final int imagesCount = Integer.parseInt(TextUtils.getMatch(galleryElement.text(), PATTERN_NUMBER, false, 0, "", false));
+        if (guidElement != null) { // also gallery element at this point
+            imagesCount = Integer.parseInt(TextUtils.getMatch(guidElement.text(), PATTERN_NUMBER, false, 0, "", false));
+        } else {
+            // attempt 2 to get guid: main content (missing for waymarks with 0 images)
+            guidElement = waymarkDocument.select("#ctl00_ContentBody_WaymarkControl1_PhotoControl1_lnkGallery").first();
+            if (guidElement == null) {
+                // attempt 3 to get guid: view all logs (missing for waymarks with 0 logs)
+                guidElement = waymarkDocument.select("#ctl00_ContentBody_WaymarkControl1_ExpandedWaymarkDetailsControl1_lnkViewAll").first();
+            }
+        }
 
         cache.setGeocode(waymarkDocument.select("#wm_code strong").first().nextSibling().toString().trim());
-        cache.setCacheId(TextUtils.getMatch(galleryElement.attr("href"), PATTERN_GUID, false, 1, "", false));
+        if (guidElement != null) {
+            cache.setCacheId(TextUtils.getMatch(guidElement.attr("href"), PATTERN_GUID, false, 1, "", false));
+        }
         cache.setName(nameElement.select("img").first() != null ? nameElement.select("img").first().nextSibling().toString().trim() : nameElement.text());
         cache.setWmCategory(waymarkDocument.select("#wm_category a").text());
         cache.setShortDescription(waymarkDocument.select("#wm_quickdesc").html() + "<p>");
@@ -139,7 +147,7 @@ public final class WMParser {
         return Pair.create(cache, imagesCount);
     }
 
-    public static List<String> getImagePageUris(final String galleryHtml) {
+    public static List<Image> getImages(final String galleryHtml) {
         if (StringUtils.isBlank(galleryHtml)) {
             Log.w("WMParser: could not retrieve waymarking images (blank)");
             return List.of();
@@ -152,25 +160,20 @@ public final class WMParser {
             return List.of();
         }
 
-        final List<String> result = new ArrayList<>();
+        final List<Image> result = new ArrayList<>();
         for (final Element image : images) {
-            final String imageUrl = image.select("a").first().attr("href");
-            result.add(WMConnector.getInstance().getHostUrl() + imageUrl);
+            final String imageUrl = image.select("a img").first().attr("src");
+            final Image img = new Image.Builder().setUrl(imageUrl).build();
+            result.add(img);
         }
 
         return result;
     }
 
-    public static Image parseImage(final String imagePageHtml) {
-        if (StringUtils.isBlank(imagePageHtml)) {
-            Log.w("WMParser: could not retrieve gallery image (blank)");
-            return null;
-        }
-
-        final Document imagePageDocument = Jsoup.parse(imagePageHtml);
-        final String imageUri = imagePageDocument.select("#largephoto img").attr("src").toString();
-
-        return new Image.Builder().setUrl(imageUri).setCategory(Image.ImageCategory.LISTING).build();
+    public static boolean getFoundState(final String logPageHtml) {
+        // first time I'm using words to detect something on a page (no other good selector)
+        // I am now making the assumption that this website is only available in english
+        return logPageHtml.contains("You have already visited this waymark.");
     }
 
     @NonNull
