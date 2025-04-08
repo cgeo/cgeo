@@ -99,7 +99,8 @@ public final class WMParser {
 
         final Geocache cache = new Geocache();
         final Element nameElement = waymarkDocument.select("#wm_name").first();
-        final String imageLink = waymarkDocument.select(".wm_photo img").first().attr("src");
+        final Element imageElement = waymarkDocument.select(".wm_photo img").first();
+        final String imageLink = imageElement != null ? "<img src=\"" + imageElement.attr("src") + "\"></img><p><p>" : "";
         final Element ownerElement = waymarkDocument.select("#wm_postedby a").last();
         final Elements linkOptionElements = waymarkDocument.select("li.category_linkoption");
         Element galleryElement = null;
@@ -115,8 +116,9 @@ public final class WMParser {
         cache.setGeocode(waymarkDocument.select("#wm_code strong").first().nextSibling().toString().trim());
         cache.setCacheId(TextUtils.getMatch(galleryElement.attr("href"), PATTERN_GUID, false, 1, "", false));
         cache.setName(nameElement.select("img").first() != null ? nameElement.select("img").first().nextSibling().toString().trim() : nameElement.text());
+        cache.setWmCategory(waymarkDocument.select("#wm_category a").text());
         cache.setShortDescription(waymarkDocument.select("#wm_quickdesc").html() + "<p>");
-        cache.setDescription("<img src=\"" + imageLink + "\"></img><p><p>" +
+        cache.setDescription(imageLink +
                 waymarkDocument.select("#wm_longdesc").html() + "<p><hr><p>" +
                 waymarkDocument.select("#wm_variables").html().replaceAll("<img[^>]*?images/spacer.gif[^>]*?>", "<p>") + "<p><hr><p>" +
                 waymarkDocument.select("#wm_loginstructions").html());

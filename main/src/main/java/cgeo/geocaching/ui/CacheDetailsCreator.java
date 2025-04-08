@@ -221,6 +221,12 @@ public final class CacheDetailsCreator {
         }
     }
 
+    public void addWmCategory(final Geocache cache) {
+        if (!StringUtils.isEmpty(cache.getWmCategory())) {
+            add(R.string.cache_category, cache.getWmCategory());
+        }
+    }
+
     public void addDifficulty(final Geocache cache) {
         if (cache.getDifficulty() > 0) {
             addStars(R.string.cache_difficulty, cache.getDifficulty());

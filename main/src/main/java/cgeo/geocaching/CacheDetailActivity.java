@@ -1254,6 +1254,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }));
             }
 
+            if (cache.getType() == CacheType.WAYMARK) {
+                details.addWmCategory(cache);
+            }
             details.add(R.string.cache_type, cache.getType().getL10n());
             if (cache.getType() == CacheType.ADVLAB) {
                 details.addAlcMode(cache);
