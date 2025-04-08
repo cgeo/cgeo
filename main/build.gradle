@@ -440,7 +440,7 @@ dependencies {
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:19.0.1'
-    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-maps:19.1.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
