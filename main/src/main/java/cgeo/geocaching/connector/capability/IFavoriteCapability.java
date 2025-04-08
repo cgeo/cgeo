@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 /**
  * Connector interface to implement possibility to give recommendations (aka Favorite Points) to
  * caches.
- * See {@link cgeo.geocaching.connector.ILoggingWithFavorites} for possibility to give favorite point
- * directly on logging screen.
  */
 public interface IFavoriteCapability extends IConnector {
 

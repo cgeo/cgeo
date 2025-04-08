@@ -307,7 +307,6 @@
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
     <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
     <string name="info_log_delete_failed">Lokin poisto epäonnistui.</string>
-    <string name="info_log_post_failed_reason">Syy: %s</string>
     <string name="info_log_post_retry">Yritä uudelleen</string>
     <string name="info_log_post_save">Offline-tallennus</string>
     <string name="info_log_cleared">Loki tyhjennetty.</string>
@@ -2114,10 +2113,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">%d päivässä</item>
-        <item quantity="other">%d päivässä</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>

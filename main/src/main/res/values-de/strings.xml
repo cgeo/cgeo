@@ -313,7 +313,8 @@
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
     <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
-    <string name="info_log_post_failed_reason">Ursache: %s</string>
+    <string name="info_log_post_failed_simple_reason">Überprüfe, ob du korrekt angemeldet bist und eine funktionierende Internetverbindung hast.</string>
+    <string name="info_log_delete_failed_simple_reason">Überprüfe, ob du korrekt eingeloggt bist, eine funktionierende Internetverbindung hast und das Log noch nicht gelöscht wurde.</string>
     <string name="info_log_post_retry">Wiederholen</string>
     <string name="info_log_post_save">Offline speichern</string>
     <string name="info_log_cleared">Log wurde geleert.</string>
@@ -2264,10 +2265,6 @@
         <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">In %d Tag</item>
-        <item quantity="other">In %d Tagen</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
@@ -2380,7 +2377,7 @@
     <string name="map_refresh_individual_route">Aktualisieren</string>
     <string name="map_export_route">Als Route exportieren</string>
     <string name="map_export_track">Als Track exportieren</string>
-    <string name="map_load_individual_route">Aus GPX laden</string>
+    <string name="map_load_from_GPX">Aus GPX laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
     <string name="map_disable_autotarget_individual_route">\"Routenstart als Ziel festlegen\" deaktiviert</string>

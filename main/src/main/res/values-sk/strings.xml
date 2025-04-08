@@ -272,7 +272,6 @@
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
     <string name="info_log_saved">c:geo úspešne uložilo log.</string>
     <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
-    <string name="info_log_post_failed_reason">Dôvod: %s</string>
     <string name="info_log_post_retry">Opakovať</string>
     <string name="info_log_post_save">Uložiť offline</string>
     <string name="info_log_cleared">Log bol vyprázdnený.</string>
@@ -2021,12 +2020,6 @@
         <item quantity="few">pred %d dňami</item>
         <item quantity="many">pred %d dňami</item>
         <item quantity="other">pred %d dňami</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">O %d deň</item>
-        <item quantity="few">O %d dni</item>
-        <item quantity="many">O %d dňa</item>
-        <item quantity="other">O %d dní</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>

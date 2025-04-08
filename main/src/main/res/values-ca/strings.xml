@@ -314,7 +314,8 @@
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
     <string name="info_log_delete_failed">No s\'ha pogut suprimir el registre.</string>
-    <string name="info_log_post_failed_reason">Raó: %s</string>
+    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
+    <string name="info_log_delete_failed_simple_reason">Comproveu que heu iniciat sessió correctament, que teniu una connexió a Internet vàlida i que el registre encara no s\'hagi esborrat.</string>
     <string name="info_log_post_retry">Anterior</string>
     <string name="info_log_post_save">Guarda-ho  fora de línia</string>
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
@@ -2270,10 +2271,6 @@
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">D\'aquí a %d dia</item>
-        <item quantity="other">D\'aquí a %d dies</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>
@@ -2386,7 +2383,7 @@
     <string name="map_refresh_individual_route">Actualització</string>
     <string name="map_export_route">Exporta com a ruta</string>
     <string name="map_export_track">Exporta com a track</string>
-    <string name="map_load_individual_route">Carrega des de GPX</string>
+    <string name="map_load_from_GPX">Carrega des de GPX</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
     <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>

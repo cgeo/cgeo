@@ -50,6 +50,7 @@ public class OsmNode extends OsmLink implements OsmPos {
 
     public OsmNode(final long id) {
         ilon = (int) (id >> 32);
+        //noinspection PointlessBitwiseExpression
         ilat = (int) (id & 0xffffffff);
     }
 

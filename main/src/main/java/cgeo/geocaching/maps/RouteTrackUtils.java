@@ -268,7 +268,7 @@ public class RouteTrackUtils {
                 if (((Route) route).getNumSegments() == 0) {
                     startFileSelectorIndividualRoute();
                 } else {
-                    SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
+                    SimpleDialog.of(activity).setTitle(R.string.map_load_from_GPX).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
                 }
         } else {
             return false;
@@ -291,8 +291,16 @@ public class RouteTrackUtils {
         if (dialog == null) {
             return;
         }
-        if (isRouteNonEmpty(individualRoute)) {
-            dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
+        final boolean hasIndividualRoute = isRouteNonEmpty(individualRoute);
+        dialog.findViewById(R.id.indivroute).setVisibility(hasIndividualRoute ? View.VISIBLE : View.GONE);
+        final View v = dialog.findViewById(R.id.indivroute_load);
+        v.setVisibility(hasIndividualRoute ? View.GONE : View.VISIBLE);
+        v.setOnClickListener(hasIndividualRoute ? null : (view) -> {
+            startFileSelectorIndividualRoute();
+            this.dialog.dismiss();
+        });
+
+        if (hasIndividualRoute) {
             final Toolbar tb = dialog.findViewById(R.id.routes_track_item);
             if (tb.getMenu() == null || tb.getMenu().size() == 0) {
                 tb.inflateMenu(R.menu.map_routetrack_context);
@@ -307,8 +315,6 @@ public class RouteTrackUtils {
                 setAutotargetIndividualRoute(activity, individualRoute, !Settings.isAutotargetIndividualRoute());
                 updateDialogClearTargets(popup, individualRoute, setTarget, showElevationChart);
             });
-        } else {
-            dialog.findViewById(R.id.indivroute).setVisibility(View.GONE);
         }
         updateDialogClearTargets(dialog, individualRoute, setTarget, showElevationChart);
     }

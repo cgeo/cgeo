@@ -313,7 +313,6 @@
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
     <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
-    <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Tentar novamente</string>
     <string name="info_log_post_save">Guardar offline</string>
     <string name="info_log_cleared">O registo foi limpo.</string>
@@ -2265,10 +2264,6 @@
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Dentro de %d dia</item>
-        <item quantity="other">Dentro de %d dias</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
@@ -2380,7 +2375,7 @@
     <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_route">Exportar como rota</string>
     <string name="map_export_track">Exportar como percurso</string>
-    <string name="map_load_individual_route">Carregar de GPX</string>
+    <string name="map_load_from_GPX">Carregar de GPX</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>

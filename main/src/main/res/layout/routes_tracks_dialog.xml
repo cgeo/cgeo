@@ -7,6 +7,12 @@
 
     <!-- Individual routes -->
 
+    <Button
+        android:id="@+id/indivroute_load"
+        android:text="@string/map_load_individual_route"
+        style="@style/button_full"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:id="@+id/indivroute"
         android:layout_width="match_parent"

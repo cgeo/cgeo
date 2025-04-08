@@ -28,10 +28,8 @@ public final class CheapRulerHelper {
         // utility class
     }
 
-    /**
-     * build the cache of cosine values.
-     */
     static {
+        // build the cache of cosine values.
         for (int i = 0; i < SCALE_CACHE_LENGTH; i++) {
             SCALE_CACHE[i] = calcKxKyFromILat(i * SCALE_CACHE_INCREMENT + SCALE_CACHE_INCREMENT / 2);
         }

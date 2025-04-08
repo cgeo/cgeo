@@ -313,7 +313,8 @@
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
     <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
-    <string name="info_log_post_failed_reason">Powód: %s</string>
+    <string name="info_log_post_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany i masz prawidłowe połączenie z internetem.</string>
+    <string name="info_log_delete_failed_simple_reason">Sprawdź, czy jesteś poprawnie zalogowany, masz poprawne połączenie z internetem i czy dziennik nie został już usunięty.</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
     <string name="info_log_cleared">Wpis został usunięty.</string>
@@ -886,7 +887,7 @@
     <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
-    <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
+    <string name="init_template_help">Teksty zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
@@ -2312,12 +2313,6 @@
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d dzień</item>
-        <item quantity="few">Za %d dni</item>
-        <item quantity="many">Za %d dni</item>
-        <item quantity="other">Za %d dni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
@@ -2444,7 +2439,7 @@
     <string name="map_refresh_individual_route">Odśwież</string>
     <string name="map_export_route">Eksportuj jako trasę</string>
     <string name="map_export_track">Eksportuj jako ślad</string>
-    <string name="map_load_individual_route">Wczytaj z GPX</string>
+    <string name="map_load_from_GPX">Wczytaj z GPX</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>

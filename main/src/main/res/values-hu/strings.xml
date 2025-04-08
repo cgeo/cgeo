@@ -261,7 +261,6 @@
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
     <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
     <string name="info_log_post_failed">Log küldése sikertelen.</string>
-    <string name="info_log_post_failed_reason">Oka: %s</string>
     <string name="info_log_post_retry">Újra</string>
     <string name="info_log_post_save">Offline mentés</string>
     <string name="info_log_cleared">A bejegyzés törölve.</string>

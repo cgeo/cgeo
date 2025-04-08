@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-/**
+/*
  * Test the UTMPoint class with testcases from an Excel sheet provided here: http://www.uwgb.edu/dutchs/UsefulData/UTMFormulas.htm
  *
  * Other Tools to verify results:

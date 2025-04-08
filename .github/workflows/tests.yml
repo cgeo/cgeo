@@ -1,82 +1,70 @@
 name: Unit tests
 
+concurrency:
+  group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
+  cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
+
 on:
   push:
-    branches: [ "master", "androidci" ]
-  pull_request:
+  pull_request_target:
+    types: [labeled, opened, synchronize]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
         description: The JDK version to use
         type: number
-        default: 11
+        default: 17
 
 env:
-  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
 
 jobs:
-  dex-count:
-    name: DEX count
+  check-secrets:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the latest code
-        uses: actions/checkout@v4
+      - name: Debug concurrency-group
+        run: |
+          # concurrency:
+          #   group: ci-tests-${{ github.event.pull_request.head.label || github.ref }}
+          #   cancel-in-progress: ${{ !((github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release') && github.event_name == 'push') }}
 
-      - name: Setup cgeo preferences and keystore
-        uses: ./.github/actions/cgeo-preferences
+      - name: Debug
+        uses: raven-actions/debug@v1
+
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.KEY_STORE }}" ]; then
+            echo "::error::No secret defined or no access to secrets"
+            exit 1
+          fi
+          echo "::notice::Secrets seems available"
+
+      - name: Get User Permission
+        id: checkAccess
+        uses: actions-cool/check-user-permission@v2
         with:
-          KEY_STORE: ${{ secrets.KEY_STORE }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
-          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
-          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
-          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
-          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
-          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
-          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
-          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
-          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
-          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
-          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
-          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
-          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
-          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
-          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
-          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
-          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
-          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
-          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
-          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
-          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
-          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+          require: write
+          username: ${{ github.triggering_actor }}
 
-      - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JDK_VERSION }}
-          distribution: temurin
-
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-
-      - name: Run countBasicDebugDexMethods
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:countBasicDebugDexMethods
-
-
-
+      - name: Check User Permission
+        if: steps.checkAccess.outputs.require-result == 'false' && !contains(github.event.pull_request.labels.*.name, 'safe to test')
+        run: |
+          echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
+          exit 1
 
   checkstyle:
     runs-on: ubuntu-latest
+    needs: check-secrets
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup cgeo preferences and keystore
         uses: ./.github/actions/cgeo-preferences
@@ -114,18 +102,17 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          add-job-summary-as-pr-comment: always  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run checkstyle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:checkstyle
+        run: ./gradlew --no-configuration-cache --no-daemon --scan checkstyle
 
-      - uses: lcollins/checkstyle-github-action@v2.0.0
+      - uses: lcollins/checkstyle-github-action@v3.1.0
         with:
           path: 'main/build/reports/checkstyle/checkstyle.xml'
 
@@ -134,9 +121,12 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    needs: check-secrets
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup cgeo preferences and keystore
         uses: ./.github/actions/cgeo-preferences
@@ -174,17 +164,15 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          add-job-summary-as-pr-comment: always  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run lintBasicDebug
-        continue-on-error: true
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: --no-daemon --scan :main:lintBasicDebug
+        run: ./gradlew --no-configuration-cache --no-daemon --scan lintBasicDebug
 
       - name: Check and report lint results
         uses: hidakatsuya/action-report-android-lint@v1
@@ -200,15 +188,16 @@ jobs:
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
+    needs: check-secrets
     strategy:
       fail-fast: false
       matrix:
-        api-level: [26, 29]
-        # Unit tests are having issues with API 30, so disabling until fixed
-        # api-level: [26, 29, 30]
+        api-level: [26, 29, 30]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
@@ -253,11 +242,24 @@ jobs:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
-      - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          add-job-summary-as-pr-comment: always  # Valid values are 'never' (default), 'always', and 'on-failure'
+
+      - name: Build binary
+        run: |
+          ./gradlew --no-configuration-cache --scan packageBasicDebug
+          ./gradlew --no-configuration-cache packageBasicDebugAndroidTest
+
+      - name: Upload resulting APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: "cgeo-apk-api${{ matrix.api-level }}"
+          path: '*/build/outputs/apk/basic/**/cgeo*.apk'
+          overwrite: true
 
       - name: AVD cache
         uses: actions/cache@v4
@@ -280,6 +282,17 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
+      # Allow only one job at a time (prevent errors on live GC tests)
+      - name: Wait for lock on live tests
+        uses: suzuki-shunsuke/lock-action@latest
+        with:
+          mode: lock
+          key: unit-test
+          # Try to acquire a lock every 30 seconds until acquiring a lock or 30 minutes pass.
+          max_wait_seconds: "1800"
+          wait_interval_seconds: "30"
+          post_unlock: "true"
+
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
         env:
@@ -296,17 +309,11 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew testDebug --stacktrace --no-daemon --scan -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            ./gradlew --no-configuration-cache --stacktrace --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
+            killall -INT crashpad_handler || true
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/build/test-results/**/*.xml'
-
-      - name: Upload resulting APK
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: apk
-          path: '*/build/outputs/apk/**/cgeo*.apk'

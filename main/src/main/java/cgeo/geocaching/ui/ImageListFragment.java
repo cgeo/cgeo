@@ -191,6 +191,7 @@ public class ImageListFragment extends Fragment {
         outState.putBundle(SAVED_STATE_IMAGEHELPER, imageHelper.getState());
     }
 
+    /** @noinspection EmptyMethod*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -458,7 +458,7 @@ public final class TextUtils {
      * @param text       text to search in
      * @param startToken starttoken. if blank then "starttoken" is assumed to be start of text
      * @param endToken   starttoken. if blank then "endtoken" is assumed to be end of text
-     * @return array of found matches
+     * @return list of found matches
      */
     @NonNull
     public static List<String> getAll(final String text, final String startToken, final String endToken) {
