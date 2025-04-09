@@ -1660,6 +1660,22 @@ public class Settings {
         putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
     }
 
+    public static boolean getIncludeLogs() {
+        return getBoolean(R.string.pref_includelogs, true);
+    }
+
+    public static void setIncludeLogs(final boolean includeLogs) {
+        putBoolean(R.string.pref_includelogs, includeLogs);
+    }
+
+    public static boolean getIncludeTravelBugs() {
+        return getBoolean(R.string.pref_includetravelbugs, true);
+    }
+
+    public static void setIncludeTravelBugs(final boolean includeTravelBugs) {
+        putBoolean(R.string.pref_includetravelbugs, includeTravelBugs);
+    }
+
     public static boolean getClearTrailAfterExportStatus() {
         return getBoolean(R.string.pref_cleartrailafterexportstatus, false);
     }

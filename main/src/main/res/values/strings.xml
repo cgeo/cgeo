@@ -1247,6 +1247,8 @@
     <string name="init_accuracycirclecolor">Accuracy circle line color</string>
     <string name="init_accuracycirclecolor_summary">Select color and opaqueness for accuracy circle line. Accuracy circle is used as a visual representation for location signal accuracy.</string>
     <string name="init_include_found_status">Include \"Found\" status</string>
+    <string name="init_include_logs">Include Logs</string>
+    <string name="init_include_travelbugs">Include Travel Bugs</string>
     <string name="init_trackautovisit">Visit TBs</string>
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
