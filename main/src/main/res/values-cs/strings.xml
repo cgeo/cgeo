@@ -221,6 +221,9 @@
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- translation -->
+    <string name="translate">Přeložit v aplikaci Překladač Google</string>
+    <string name="translate_to_sys_lang">Přeložit do %s (Web)</string>
+    <string name="translate_to_english">Přeložit do angličtiny (Web)</string>
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -310,6 +313,8 @@
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
     <string name="info_log_delete_failed">Odstranění logu se nezdařilo.</string>
+    <string name="info_log_post_failed_simple_reason">Zkontrolujte, zda jste správně přihlášeni a máte funkční připojení k internetu.</string>
+    <string name="info_log_delete_failed_simple_reason">Zkontrolujte, zda jste se správně přihlásili, máte funkční připojení k internetu a že log již není smazán.</string>
     <string name="info_log_post_retry">Opakovat</string>
     <string name="info_log_post_save">Uložit offline</string>
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
@@ -336,6 +341,28 @@
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Základní</string>
+    <string name="translator_preference_target_lng">Offline jazyk překladu</string>
+    <string name="translator_preference_target_lng_summary">Cílový jazyk pro offline překladač</string>
+    <string name="translator_preference_nottranslate_lng">Ignorované jazyky</string>
+    <string name="translator_preference_nottranslate_lng_summary">Zdrojové jazyky, pro které se nenabízí překlad</string>
+    <string name="translator_preference_disable">&lt;Vypnout překlad&gt;</string>
+    <string name="translator_model_download_select">Stáhnout offline jazyk překladu</string>
+    <string name="translator_model_download_confirm_title">Potvrdit stažení jazyka</string>
+    <string name="translator_model_download_confirm_txt">Překladaový model pro jazyk %s je třeba stáhnout. Velikost modelu je přibližně 20-40 MB.</string>
+    <string name="translator_model_download_notification">Stažení překladového modelu začalo</string>
+    <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
+    <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
+    <string name="translator_model">Překladový model</string>
+    <string name="translator_tooltip">Offline překlad</string>
+    <string name="translator_language_select">Vybrat zdrojový jazyk</string>
+    <string name="translator_language_unsupported">Jazyk (%s) není podporován pro překlad.</string>
+    <string name="translator_language_missing">Chybějící jazykový balíček %s</string>
+    <string name="translator_language_unknown">Jazyk nelze identifikovat</string>
+    <string name="translator_language_detected">Přeložit z \"%s\"</string>
+    <string name="translator_language_detection_error">Nepodařilo se inicializovat detekci jazyka</string>
+    <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
+    <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
+    <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -1511,6 +1538,8 @@
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
     <string name="cache_log_menu_edit">Upravit log</string>
+    <string name="menu_expand_log">Rozbalit log</string>
+    <string name="menu_collapse_log">Sbalit log</string>
     <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
     <string name="cache_log_delete_reason_default">Log byl odstraněn pomocí c:geo</string>
@@ -1631,6 +1660,7 @@
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
+    <string name="internal_connector_name">Uživatelem definované kešky</string>
     <!-- html styles -->
     <string name="html_style_default">Výchozí</string>
     <string name="html_style_default_no_contrast_fix">Výchozí bez opravy kontrastu</string>
@@ -2432,6 +2462,7 @@
     <string name="map_refresh_individual_route">Obnovit</string>
     <string name="map_export_route">Exportovat jako trasu</string>
     <string name="map_export_track">Exportovat jako stopu</string>
+    <string name="map_load_from_GPX">Načíst z GPX</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
@@ -2801,4 +2832,12 @@
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
     <!-- emoji categories -->
+    <string name="emoji_category_recent">Naposledy použito</string>
+    <string name="emoji_category_symbols">Symboly</string>
+    <string name="emoji_category_dots">Body</string>
+    <string name="emoji_category_places">Místa</string>
+    <string name="emoji_category_food">Jídlo &amp; Nápoje</string>
+    <string name="emoji_category_activity">Aktivita</string>
+    <string name="emoji_category_people">Lidé</string>
+    <string name="emoji_category_numbers">Čísla</string>
 </resources>
