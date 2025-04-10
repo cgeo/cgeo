@@ -31,15 +31,9 @@ public class InverseComparator implements CacheComparator {
 
     @Override
     public void sort(final List<Geocache> list) {
-        if (originalComparator instanceof AbstractCacheComparator) {
-            ((AbstractCacheComparator) originalComparator).beforeSort(list);
-        }
-
+        originalComparator.beforeSort(list);
         Collections.sort(list, this);
-
-        if (originalComparator instanceof AbstractCacheComparator) {
-            ((AbstractCacheComparator) originalComparator).afterSort(list);
-        }
+        originalComparator.afterSort(list);
     }
 
     @Override
