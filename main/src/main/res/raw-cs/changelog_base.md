@@ -10,17 +10,17 @@
 - Oprava: Zobrazení mapy se neaktualizuje při odebrání kešky z aktuálně zobrazeného seznamu
 - Oprava: Číslo kešky ve výběrovém seznamu se neaktualizuje při změně obsahu seznamu
 - Novinka: Sledování mé polohy v grafu nadmořské výšky (Sjednocená mapa)
-- New: Long tap on "enable live button" to load offline caches
-- New: Enable "move to" / "copy to" actions for "show as list"
+- Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
+- Novinka: Povolit akce "přesunout do" / "kopírovat do" pro "zobrazit jako seznam"
 
 ### Detaily kešky
 - Novinka: Možnost sdílení kešky s uživatelskými daty (souřadnice, osobní poznámka)
 - Oprava: Přerušení hlasové služby při otáčení obrazovky
 - Oprava: Podrobnosti o kešce: Seznamy kešek se neaktualizují po klepnutí na název seznamu a odebrání dané kešky z tohoto seznamu
 - Oprava: Uživatelská poznámka se ztratí při obnovení dobrodružství v Lab Adventures
-- New: Offline translation of listing text and logs (experimental)
-- Change: Log-date related placeholders will use chosen date instead of current date
-- New: Collapse long log entries per default
+- Nový: Offline překlad textu a logů (experimentální)
+- Změna: zástupné symboly budou namísto aktuálního data používat zvolené datum
+- Novinka: Sbalení dloouhých logů je nyní ve výchozím nastavení
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
@@ -33,5 +33,5 @@
 - Oprava: Nastavení omezení vzdálenosti v blízkosti nefunguje správně pro malé hodnoty
 - Novinka: Souřadnicová kalkulačka: Funkce pro nahrazení symbolu "x" symbolem násobení
 - Oprava: Lab kešky vyloučené O/T filtrem i s aktivním "zahrnout nejisté"
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
+- Novinka: Přidat "Odstranit minulé události" do seznamu "Vše"
+- Novinka: Zobrazit konektor pro "uživatelem definované kešky" jako aktivní ve zdrojovém filtru
