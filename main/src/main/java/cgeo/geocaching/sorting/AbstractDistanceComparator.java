@@ -18,7 +18,7 @@ public abstract class AbstractDistanceComparator extends AbstractCacheComparator
     protected Geopoint coords = Geopoint.ZERO; // will be overwritten
 
     @Override
-    protected void beforeSort(final List<Geocache> list) {
+    public void beforeSort(final List<Geocache> list) {
         super.beforeSort(list);
         // calculate all distances only once to avoid costly re-calculation of the same distance during sorting
         for (final Geocache cache : list) {
