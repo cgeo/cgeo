@@ -312,6 +312,8 @@
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
     <string name="info_log_delete_failed">Odstranění logu se nezdařilo.</string>
+    <string name="info_log_post_failed_simple_reason">Zkontrolujte, zda jste správně přihlášeni a máte funkční připojení k internetu.</string>
+    <string name="info_log_delete_failed_simple_reason">Zkontrolujte, zda jste se správně přihlásili, máte funkční připojení k internetu a že log již není smazán.</string>
     <string name="info_log_post_retry">Opakovat</string>
     <string name="info_log_post_save">Uložit offline</string>
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
