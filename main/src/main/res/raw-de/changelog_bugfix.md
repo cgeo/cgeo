@@ -1,4 +1,7 @@
 ##
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+
+##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
 - Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
 - Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)

@@ -1389,7 +1389,6 @@
     <string name="search_address">住所</string>
     <string name="search_address_button">住所で検索</string>
     <string name="search_geo">GCコード</string>
-    <string name="search_geo_button">GCコードで検索</string>
     <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
     <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
