@@ -202,6 +202,9 @@ android {
         // necessary as we changing locales at runtime (CgeoApplication.initApplicationLocale())
         disable 'AppBundleLocaleChanges'
 
+        // move UnsafeImplicitIntentLaunch error to warning until fixed, see https://github.com/cgeo/cgeo/issues/16838
+        warning 'UnsafeImplicitIntentLaunch'
+
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
         checkDependencies true
