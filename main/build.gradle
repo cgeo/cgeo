@@ -759,10 +759,10 @@ apply plugin: 'de.mobilej.unmock'
 apply plugin: 'checkstyle'
 
 checkstyle {
-    // assign the checkstyle version explicitly here
-    // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
-    // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.21.1'
+    // align checkstyle with codacy (https://github.com/codacy/codacy-checkstyle)
+    // - assign the checkstyle version explicitly here
+    // - and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
+    toolVersion = '10.21.4'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
