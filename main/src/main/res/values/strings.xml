@@ -1963,7 +1963,7 @@
     <string name="calccoord_generate_title">Generate Waypoints</string>
     <string name="calccoord_generate_showonmap">Show on Map</string>
     <string name="calccoord_generate_waypointnameprefix">Generated</string>
-    <string name="calccoord_generate_error_novarwithrange">No valid variable with ranges found</string>
+    <string name="calccoord_generate_error_novarwithrange">No valid variable with ranges found (eg: [:0-9] or [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">No combination returned valid coordinates</string>
     <string name="calccoord_generate_error_nogeopointselected">No Coordinate selected</string>
 
