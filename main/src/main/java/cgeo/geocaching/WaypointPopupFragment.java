@@ -116,9 +116,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 ViewUtils.showShortToast(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited);
             });
 
-            binding.edit.setOnClickListener(arg0 -> {
-                EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
-            });
+            binding.edit.setOnClickListener(arg0 -> EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId()));
 
             binding.moreDetails.setOnClickListener(arg0 -> {
                 CacheDetailActivity.startActivity(getActivity(), geocode);

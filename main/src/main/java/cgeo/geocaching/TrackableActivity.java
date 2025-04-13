@@ -621,9 +621,8 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                     unsupportedLng -> {
                         cda.translationStatus.abortTranslation();
                         binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
-                    }, modelDownloading -> {
-                        binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification);
-                    }, translator -> {
+                    }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
+        translator -> {
                         if (null == translator) {
                             binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
                             return;

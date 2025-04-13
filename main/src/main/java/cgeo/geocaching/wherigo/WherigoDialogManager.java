@@ -124,9 +124,7 @@ public class WherigoDialogManager {
 
     /** displays a dialog directly on top of an activity. This will NOT close an existing displayed dialog */
     public static void displayDirect(final Activity activity, final IWherigoDialogProvider dialogProvider) {
-        WherigoViewUtils.ensureRunOnUi(() -> {
-            WherigoDialogControl.createAndShowDialog(activity, dialogProvider, null);
-        });
+        WherigoViewUtils.ensureRunOnUi(() -> WherigoDialogControl.createAndShowDialog(activity, dialogProvider, null));
     }
 
     public State getState() {
@@ -188,23 +186,21 @@ public class WherigoDialogManager {
         //create a unique dialog id to check in callbacks if this is still the right dialog
         final int dialogId = currentDialogId.addAndGet(1);
 
-        currentDialogControl = WherigoDialogControl.createAndShowDialog(activity, currentDialogProvider, isPause -> {
-            executeAction(() -> {
-                if (currentDialogId.get() == dialogId) {
-                    closeCurrentDialog();
-                    if (isPause) {
-                        state = State.DIALOG_PAUSED;
-                        final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
-                        if (currentActivity != null) {
-                            ViewUtils.showToast(null, R.string.wherigo_dialog_pause_info);
-                        }
-                    } else {
-                        this.currentDialogProvider = null;
-                        state = State.NO_DIALOG;
+        currentDialogControl = WherigoDialogControl.createAndShowDialog(activity, currentDialogProvider, isPause -> executeAction(() -> {
+            if (currentDialogId.get() == dialogId) {
+                closeCurrentDialog();
+                if (isPause) {
+                    state = State.DIALOG_PAUSED;
+                    final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
+                    if (currentActivity != null) {
+                        ViewUtils.showToast(null, R.string.wherigo_dialog_pause_info);
                     }
+                } else {
+                    this.currentDialogProvider = null;
+                    state = State.NO_DIALOG;
                 }
-            });
-        });
+            }
+        }));
         state = State.DIALOG_DISPLAYED;
     }
 

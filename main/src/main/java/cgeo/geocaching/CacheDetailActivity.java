@@ -1758,12 +1758,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             activity.addShareAction(binding.personalnote);
             TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
-            binding.editPersonalnote.setOnClickListener(v -> {
-                editPersonalNote(cache, activity);
-            });
-            binding.personalnote.setOnClickListener(v -> {
-                editPersonalNote(cache, activity);
-            });
+            binding.editPersonalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
+            binding.personalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
             binding.storewaypointsPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
@@ -1870,9 +1866,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 unsupportedLng -> {
                     cda.translationStatus.abortTranslation();
                     binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
-                }, modelDownloading -> {
-                    binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification);
-                }, translator -> {
+                }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
+    translator -> {
                     if (null == translator) {
                         binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
                         return;

@@ -186,17 +186,11 @@ public final class WherigoViewUtils {
 
     public static Dialog getQuickViewDialog(final Activity activity) {
         final WherigoMapQuickinfosBinding binding = WherigoMapQuickinfosBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
-        final SimpleItemListModel<WherigoThingType> model = createThingTypeTable(activity, binding.wherigoThingTypeList, thing -> {
-            displayThing(activity, thing, false);
-        });
+        final SimpleItemListModel<WherigoThingType> model = createThingTypeTable(activity, binding.wherigoThingTypeList, thing -> displayThing(activity, thing, false));
         binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
-        binding.cacheContextGotocache.setOnClickListener(v -> {
-            CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode());
-        });
-        binding.goToWherigo.setOnClickListener(v -> {
-            WherigoActivity.start(activity, false);
-        });
+        binding.cacheContextGotocache.setOnClickListener(v -> CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode()));
+        binding.goToWherigo.setOnClickListener(v -> WherigoActivity.start(activity, false));
 
         final Runnable refreshGui = () -> {
             updateThingTypeTable(model, binding.wherigoThingTypeList);
@@ -205,15 +199,11 @@ public final class WherigoViewUtils {
             binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName());
         };
 
-        final int wherigoListenerId = WherigoGame.get().addListener(nt -> {
-            refreshGui.run();
-        });
+        final int wherigoListenerId = WherigoGame.get().addListener(nt -> refreshGui.run());
         refreshGui.run();
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, binding.getRoot(), WherigoGame.get().getCartridgeName());
-        dialog.setOnDismissListener(dl -> {
-            WherigoGame.get().removeListener(wherigoListenerId);
-        });
+        dialog.setOnDismissListener(dl -> WherigoGame.get().removeListener(wherigoListenerId));
 
         return dialog;
     }

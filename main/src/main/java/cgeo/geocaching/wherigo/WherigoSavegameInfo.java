@@ -29,25 +29,22 @@ public class WherigoSavegameInfo {
 
     private static final Pattern GEOCODE_PATTERN = Pattern.compile("\\s((?:GC|OC)[0-9A-Z]{1,6})\\s");
 
-    public static final Comparator<WherigoSavegameInfo> DEFAULT_COMPARATOR = CommonUtils.getNullHandlingComparator(new Comparator<WherigoSavegameInfo>() {
-        @Override
-        public int compare(final WherigoSavegameInfo o1, final WherigoSavegameInfo o2) {
-            if (Objects.equals(o1.nameId, o2.nameId)) {
-                return Long.compare((o1.saveDate == null ? -1 : o1.saveDate.getTime()), (o2.saveDate == null ? -1 : o2.saveDate.getTime()));
-            }
-            if (o1.nameId == null || o2.nameId == null) {
-                return o1.nameId == null ? -1 : 1;
-            }
-            if (AUTOSAVE_NAME.equals(o1.nameId) || AUTOSAVE_NAME.equals(o2.nameId)) {
-                return AUTOSAVE_NAME.equals(o1.nameId) ? -1 : 1;
-            }
-            final int i1 = o1.getNameIdAsNumber();
-            final int i2 = o2.getNameIdAsNumber();
-            if (i1 != i2) {
-                return Integer.compare(i1 <= 0 ? Integer.MAX_VALUE : i1, i2 <= 0 ? Integer.MAX_VALUE : i2);
-            }
-            return o1.nameId.compareTo(o2.nameId);
+    public static final Comparator<WherigoSavegameInfo> DEFAULT_COMPARATOR = CommonUtils.getNullHandlingComparator((o1, o2) -> {
+        if (Objects.equals(o1.nameId, o2.nameId)) {
+            return Long.compare((o1.saveDate == null ? -1 : o1.saveDate.getTime()), (o2.saveDate == null ? -1 : o2.saveDate.getTime()));
         }
+        if (o1.nameId == null || o2.nameId == null) {
+            return o1.nameId == null ? -1 : 1;
+        }
+        if (AUTOSAVE_NAME.equals(o1.nameId) || AUTOSAVE_NAME.equals(o2.nameId)) {
+            return AUTOSAVE_NAME.equals(o1.nameId) ? -1 : 1;
+        }
+        final int i1 = o1.getNameIdAsNumber();
+        final int i2 = o2.getNameIdAsNumber();
+        if (i1 != i2) {
+            return Integer.compare(i1 <= 0 ? Integer.MAX_VALUE : i1, i2 <= 0 ? Integer.MAX_VALUE : i2);
+        }
+        return o1.nameId.compareTo(o2.nameId);
     }, true);
 
     @NonNull public final ContentStorage.FileInformation cartridgeFileInfo;

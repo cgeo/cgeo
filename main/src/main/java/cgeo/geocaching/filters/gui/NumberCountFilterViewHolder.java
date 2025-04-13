@@ -67,7 +67,7 @@ public class NumberCountFilterViewHolder<F extends NumberRangeGeocacheFilter<Int
     public F createFilterFromView() {
         final F filter = createFilter();
         final ImmutablePair<Float, Float> range = slider.getRange();
-        filter.setMinMaxRange(range.left, range.right, minValue.floatValue(), maxValue.floatValue(), value -> Math.round(value));
+        filter.setMinMaxRange(range.left, range.right, minValue.floatValue(), maxValue.floatValue(), Math::round);
         return filter;
     }
 }

@@ -36,9 +36,7 @@ public class SearchCardView extends com.google.android.material.card.MaterialCar
     }
 
     public SearchCardView addOnClickListener(final Runnable runnable) {
-        setOnClickListener(v -> {
-            runnable.run();
-        });
+        setOnClickListener(v -> runnable.run());
         return this;
     }
 
