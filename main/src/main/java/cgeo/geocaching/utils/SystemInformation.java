@@ -349,14 +349,14 @@ public final class SystemInformation {
         body.append("\n")
             .append("\nWherigo")
             .append("\n-------")
-            .append("\n- playing:").append(game.isPlaying() + ", debug:" + game.isDebugMode() + ", debugFC:" + game.isDebugModeForCartridge())
-            .append("\n- Name: " + game.getCartridgeName() + " (" + game.getCGuid() + ")")
-            .append("\n- Cache context: " + game.getContextGeocacheName())
-            .append("\n- Last Error: " + game.getLastError())
-            .append("\n- Last Played: " + game.getLastPlayedCGuid() + " / " + game.getLastSetContextGeocode())
-            .append("\n- Visible things: " + visibleThingsCounts)
-            .append("\n- Cartridge File: " + cartridgeFileInfo)
-            .append("\n- Load Slots: " + loadFileInfo);
+            .append("\n- playing:").append(game.isPlaying()).append(", debug:").append(game.isDebugMode()).append(", debugFC:").append(game.isDebugModeForCartridge())
+            .append("\n- Name: ").append(game.getCartridgeName()).append(" (").append(game.getCGuid()).append(")")
+            .append("\n- Cache context: ").append(game.getContextGeocacheName())
+            .append("\n- Last Error: ").append(game.getLastError())
+            .append("\n- Last Played: ").append(game.getLastPlayedCGuid()).append(" / ").append(game.getLastSetContextGeocode())
+            .append("\n- Visible things: ").append(visibleThingsCounts)
+            .append("\n- Cartridge File: ").append(cartridgeFileInfo)
+            .append("\n- Load Slots: ").append(loadFileInfo);
     }
 
     private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {
