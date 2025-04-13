@@ -682,16 +682,8 @@
     <string name="map_select_multiple_items">Pumili ng aytem</string>
     <!-- search -->
     <string name="search_coordinates">Ang mga koordinado</string>
-    <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
     <string name="search_address">Ang Address</string>
-    <string name="search_address_button">Sinaliksik sa pamamagitan ng address</string>
-    <string name="search_kw_prefill">Mga Keyword</string>
-    <string name="search_kw_button">Sinaliksik sa pamamagitan ng keyword</string>
-    <string name="search_hbu_prefill">Ang may-ari</string>
-    <string name="search_hbu_button">Sinaliksik sa pamamagitan ng sariling pangalan</string>
     <string name="search_tb">Nasasala</string>
-    <string name="search_tb_hint">Maaaring matukoy ang pagkakasunud-sunod</string>
-    <string name="search_tb_button">Magsaliksik para sa trackable</string>
     <string name="search_address_started">Ang pagsasaliksik para sa mga lugar</string>
     <string name="search_address_result">Natagpuang mga lugar</string>
     <string name="search_pocket_title">Tanong sa bulsa</string>
@@ -807,7 +799,6 @@
     <string name="attribute_stealth_no">Hindi kinakailangan ang stealth</string>
     <string name="attribute_firstaid_yes">Kailangan ng pagpapanatili</string>
     <string name="attribute_cow_yes">Manood ng mga hayop</string>
-    <string name="attribute_cow_no">Walang hayop</string>
     <string name="attribute_field_puzzle_yes">Ang larangan ng palaisipan</string>
     <string name="attribute_field_puzzle_no">Walang palaisipan sa larangan</string>
     <string name="attribute_nightcache_yes">Cache ng gabi</string>
@@ -840,7 +831,6 @@
     <string name="attribute_scuba_yes">Kinakailangan ang damit na pang scuba</string>
     <string name="attribute_flashlight_yes">Aang Flashlight ay kinkailangan</string>
     <string name="attribute_uv_yes">Ang UV light ay kinakailangan</string>
-    <string name="attribute_uv_no">Ang UV light ay hindi kinakailangan</string>
     <string name="attribute_snowshoes_yes">Ang Snowshoes ay kinakailangan</string>
     <string name="attribute_skiis_yes">Ang mag-iski sa Cross country ay kinakailangan</string>
     <string name="attribute_s_tool_yes">Ang espesyal na mga kagamitan ay kinakailangan</string>
