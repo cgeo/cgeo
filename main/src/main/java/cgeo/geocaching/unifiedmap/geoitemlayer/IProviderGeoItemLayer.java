@@ -14,7 +14,7 @@ public interface IProviderGeoItemLayer<C> {
 
     /**
      * Called once to initialize the map layer.
-     *
+     * <br />
      * Implementor is expected to set up necessary initialization within its concrete map viewer implementation.
      * Framework guarantees that this method is called only once, before any call to other methods of this interface
      */

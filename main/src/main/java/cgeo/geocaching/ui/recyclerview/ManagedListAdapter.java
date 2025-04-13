@@ -29,7 +29,7 @@ import java.util.TreeMap;
  * Adapter for {@link RecyclerView} which also maintains the list of current elements inside it.
  * If provides helper methods to access and modify these items. Usage of these methods will also trigger
  * the necessary "notify" methods on adapter (unless set otherwise in configuration) so list animations can work as expected.
- *
+ * <br />
  * Adapter supports following additional features: <ul>
  * <li>Support for swapping whole lists using {@link #setItems(List)} methods</li>
  * <li>Support for lists where view also changed when position of item is NOT changed (using {@link Config#setNotifyOnPositionChange(boolean)}</li>
