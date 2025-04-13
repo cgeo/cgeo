@@ -47,8 +47,8 @@ public class LegacyCalculatedCoordinateMigrator {
         SEC(CalculatedCoordinateType.DEGREE_MINUTE_SEC, "**°**'**.--***\"", "***°**'**.--***\"");
 
         public final CalculatedCoordinateType type;
-        public String latPattern;
-        public String lonPattern;
+        public final String latPattern;
+        public final String lonPattern;
 
         MigrationCalculatedCoordinateType(final CalculatedCoordinateType type, final String latPattern, final String lonPattern) {
             this.type = type;
