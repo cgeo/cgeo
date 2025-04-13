@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Handler;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
