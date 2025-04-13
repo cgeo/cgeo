@@ -81,7 +81,7 @@ public class DebugUtils {
 
 
     public static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
-        final AtomicReference<Uri> result = new AtomicReference(null);
+        final AtomicReference<Uri> result = new AtomicReference<>(null);
 
         final File file = ContentStorage.get().createTempFile();
 

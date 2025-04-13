@@ -50,9 +50,9 @@ public class FilterUtils {
         final boolean hasValidLastFilter = null != previousFilter && previousFilter.isFiltering();
 
         if (hasValidLastFilter) {
-            return new Pair(TextParam.id(R.string.caches_filter_select_last), previousFilter);
+            return new Pair<>(TextParam.id(R.string.caches_filter_select_last), previousFilter);
         }
-        return new Pair(null, null);
+        return new Pair<>(null, null);
     }
 
     public static <T extends AbstractActivity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {

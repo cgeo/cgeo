@@ -555,14 +555,14 @@ final class OkapiClient {
             params.add("search_params", JsonUtils.writer.writeValueAsString(valueMap));
         } catch (final JsonProcessingException e) {
             Log.e("requestCaches", e);
-            return new Pair(Collections.emptyList(), false);
+            return new Pair<>(Collections.emptyList(), false);
         }
         addRetrieveParams(params, connector);
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data;
 
         if (data == null) {
-            return new Pair(Collections.emptyList(), false);
+            return new Pair<>(Collections.emptyList(), false);
         }
 
         return parseCaches(data);
@@ -747,7 +747,7 @@ final class OkapiClient {
             // Check for empty result
             final JsonNode results = response.path("results");
             if (!results.isObject()) {
-                return new Pair(Collections.emptyList(), more);
+                return new Pair<>(Collections.emptyList(), more);
             }
 
             // Get and iterate result list
@@ -755,11 +755,11 @@ final class OkapiClient {
             for (final JsonNode cache : results) {
                 caches.add(parseSmallCache((ObjectNode) cache));
             }
-            return new Pair(caches, more);
+            return new Pair<>(caches, more);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCachesResult", e);
         }
-        return new Pair(Collections.emptyList(), false);
+        return new Pair<>(Collections.emptyList(), false);
     }
 
     @NonNull

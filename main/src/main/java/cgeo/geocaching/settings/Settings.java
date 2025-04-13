@@ -1995,7 +1995,7 @@ public class Settings {
     }
 
     public static void addToHistoryList(final int prefKey, final String historyValue) {
-        final List<String> history = new ArrayList(Arrays.asList(getHistoryList(prefKey)));
+        final List<String> history = new ArrayList<>(Arrays.asList(getHistoryList(prefKey)));
         // bring entry to front, if it already existed
         history.remove(historyValue);
         history.add(0, historyValue);
