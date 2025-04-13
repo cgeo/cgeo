@@ -514,17 +514,6 @@ public class DownloaderUtils {
     public static void startReceive(final Context context, final DownloadManager downloadManager, final long id, final PendingDownload pendingDownload) {
         PendingDownload.remove(id);
 
-        /*
-        final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
-        final Uri uri = downloadManager.getUriForDownloadedFile(id);
-        copyFileIntent.setData(uri);
-        copyFileIntent.putExtra(Intents.EXTRA_FILENAME, pendingDownload.getFilename());
-        copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, pendingDownload.getRemoteUrl());
-        copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, pendingDownload.getDate());
-        copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, pendingDownload.getOfflineMapTypeId());
-        ContextCompat.startForegroundService(context, copyFileIntent);
-        */
-
         final Data data = new Data.Builder()
                 .putString(Intents.EXTRA_ADDRESS, downloadManager.getUriForDownloadedFile(id).toString())
                 .putString(Intents.EXTRA_FILENAME, pendingDownload.getFilename())

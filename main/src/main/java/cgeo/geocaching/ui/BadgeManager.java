@@ -19,10 +19,8 @@ public class BadgeManager {
 
     private static final BadgeManager INSTANCE = new BadgeManager();
 
-    //private static final int COLOR_PRIO_HIGH = 0xffff0000; // red
-    //private static final int COLOR_PRIO_LOW = 0xff0a67e2;  // blue
     private static final int COLOR_PRIO_HIGH = Color.RED; // red
-    private static final int COLOR_PRIO_LOW = 0xFFF5981D;  // orange, ascent color
+    private static final int COLOR_PRIO_LOW = 0xFFF5981D;  // orange, accent color
 
 
     private final Object mutex = new Object();

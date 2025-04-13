@@ -74,16 +74,6 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         finish();
     }
 
-    /*
-    private void continueWithExternal(final String component, final String clazz, final Intent intent) {
-        final Intent forwarder = new Intent(intent);
-        forwarder.setComponent(new ComponentName(component, clazz));
-        forwarder.setAction(clazz);
-        startActivity(forwarder);
-        finish();
-    }
-    */
-
     /**
      * copy uri to wherigo folder
      * <br />

@@ -467,8 +467,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                 lookupData2[num] = 1; // 1 == unknown
                 if (bFoundAsterix) {
                     // found value for lookup *
-                    //System.out.println( "add unknown " + name + "  " + value );
-//                    String org = value;
                     try {
                         // remove some unused characters
                         valueMutable = valueMutable.replaceAll(",", ".");
