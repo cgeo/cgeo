@@ -197,19 +197,19 @@ public final class Routing {
         try {
             Xml.parse(gpx, new DefaultHandler() {
                 @Override
-                public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
+                public void startElement(final String uri, final String localName, final String qName, final Attributes atts) {
                     if (qName.equalsIgnoreCase("ele")) {
                         inElevationElement[0] = true;
                     }
                 }
 
                 @Override
-                public void endElement(final String uri, final String localName, final String qName) throws SAXException {
+                public void endElement(final String uri, final String localName, final String qName) {
                     inElevationElement[0] = false;
                 }
 
                 @Override
-                public void characters(final char[] ch, final int start, final int length) throws SAXException {
+                public void characters(final char[] ch, final int start, final int length) {
                     if (inElevationElement[0]) {
                         result[0] = Float.parseFloat(String.valueOf(ch));
                     }

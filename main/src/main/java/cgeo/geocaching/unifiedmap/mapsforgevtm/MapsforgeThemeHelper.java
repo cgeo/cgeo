@@ -138,11 +138,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
                 */
                 mTheme = map.setTheme(xmlRenderTheme);
-            } catch (final IOException e) {
-                Log.w("Failed to set render theme", e);
-                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
-                applyDefaultTheme(map, tileProvider);
-                selectedTheme = null;
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
@@ -172,7 +167,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
     }
 
-    private ThemeFile createThemeFor(@NonNull final ThemeData theme) throws IOException {
+    private ThemeFile createThemeFor(@NonNull final ThemeData theme) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 

@@ -58,17 +58,17 @@ public class WherigoSaveFileHandler implements FileHandle {
     }
 
     @Override
-    public void create() throws IOException {
+    public void create() {
         //do nothing, files are created on-the-fly as necessary
     }
 
     @Override
-    public void delete() throws IOException {
+    public void delete() {
         //do nothing, savefiles are never deleted via Wherigo-Methods
     }
 
     @Override
-    public boolean exists() throws IOException {
+    public boolean exists() {
         //existance is handles elsewhere, just return true
         return true;
     }
@@ -110,7 +110,7 @@ public class WherigoSaveFileHandler implements FileHandle {
     }
 
     @Override
-    public void truncate(final long len) throws IOException {
+    public void truncate(final long len) {
         //used by OpenWIG to reduce an existing savefile to 0. Handles, elsewhere, can be ignored here
         Log.d("truncate(" + len + ") not supported");
     }

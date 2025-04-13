@@ -114,7 +114,7 @@ public final class LocParser extends FileParser {
 
     @Override
     @NonNull
-    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException {
         final int maxSize = stream.available();
         final Map<String, Geocache> coords = parseLoc(stream);
         final List<Geocache> caches = new ArrayList<>();

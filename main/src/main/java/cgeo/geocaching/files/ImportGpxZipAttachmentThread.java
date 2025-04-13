@@ -24,7 +24,7 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
     }
 
     @Override
-    protected InputStream getInputStream() throws IOException {
+    protected InputStream getInputStream() {
         try {
             return contentResolver.openInputStream(uri);
         } catch (final FileNotFoundException e) {

@@ -31,7 +31,7 @@ class FileContentAccessor extends AbstractContentAccessor {
     }
 
     @Override
-    public Uri rename(@NonNull final Uri uri, @NonNull final String newName) throws IOException {
+    public Uri rename(@NonNull final Uri uri, @NonNull final String newName) {
         final File current = new File(uri.getPath());
         final File newFile = new File(current.getParent(), newName);
         return (current.renameTo(newFile) ? Uri.fromFile(newFile) : null);
