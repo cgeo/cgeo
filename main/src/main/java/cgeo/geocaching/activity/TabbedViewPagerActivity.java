@@ -91,12 +91,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
 
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
-        /*
-        @Override
-        public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        }
-        */
 
         @Override
         public void onPageSelected(final int position) {
@@ -306,7 +300,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     // ---------------------------------------------------------------------------------
-    // ab hier lifecycle logging only
+    // lifecycle logging only - for testing purposes
     // ---------------------------------------------------------------------------------
 
     /*

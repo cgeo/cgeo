@@ -290,13 +290,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         return result;
     }
 
-    /** set new theme and report result, gets called after successful download of a new theme */
-    /* @todo
-    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
-        return setSelectedMapThemeInternal(themeIdCandidate) != null;
-    }
-    */
-
     /**
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
