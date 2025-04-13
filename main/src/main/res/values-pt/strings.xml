@@ -1821,10 +1821,10 @@
     <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
-    <string name="search_kw_button">Pesquisar por palavra-chave</string>
+    <string name="search_kw_button">Pesquisa por palavra-chave</string>
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
-    <string name="search_hbu_prefill">Proprietário</string>
+    <string name="search_hbu_prefill">Dono</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
