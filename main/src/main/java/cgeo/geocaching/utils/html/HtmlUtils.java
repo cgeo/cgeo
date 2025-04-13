@@ -35,6 +35,7 @@ import androidx.core.text.HtmlCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -123,7 +124,7 @@ public final class HtmlUtils {
         //don't make images clickable which are surrounded by a clickable span, this would suppress the "original" click
         //(most prominent example: <a href> links with an <img> tag inside, e.g. for challenge checkers)
         final List<URLSpan> links = new ArrayList<>(Arrays.asList(spannable.getSpans(0, spannable.length(), URLSpan.class)));
-        Collections.sort(links, (l1, l2) -> Integer.compare(spannable.getSpanStart(l1), spannable.getSpanStart(l2)));
+        Collections.sort(links, Comparator.comparingInt(spannable::getSpanStart));
         int start = 0;
         for (URLSpan link : links) {
             final int end = spannable.getSpanStart(link);
