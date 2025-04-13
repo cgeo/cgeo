@@ -1774,10 +1774,10 @@
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
-    <string name="search_kw_button">Rechercher par Mot-clé</string>
+    <string name="search_kw_button">Rechercher le mot-clé</string>
     <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
     <string name="search_hbu">Cachée par</string>
-    <string name="search_hbu_prefill">Nom d\'utilisateur</string>
+    <string name="search_hbu_prefill">Propriétaire</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_finder">Trouvée par</string>
     <string name="search_finder_prefill">Découvreur</string>
