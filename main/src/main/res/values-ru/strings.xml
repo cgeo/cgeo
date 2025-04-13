@@ -1852,7 +1852,7 @@
     <string name="search_geocode_from_clipboard">Геокод был вставлен из буфера обмена.</string>
     <string name="search_kw">Ключевое слово</string>
     <string name="search_kw_prefill">Ключевое слово</string>
-    <string name="search_kw_button">Искать по ключевым словам</string>
+    <string name="search_kw_button">Поиск по ключевым словам</string>
     <string name="search_kw_disabled_hint">Отключено, так как это не поддерживается geocaching.com для базовых аккаунтов</string>
     <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
