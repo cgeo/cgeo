@@ -682,16 +682,8 @@
     <string name="map_select_multiple_items">Pumili ng gamit</string>
     <!-- search -->
     <string name="search_coordinates">Ang mga Coordinate</string>
-    <string name="search_coordinates_button">Ang Magsaliksik sa pamamagitan ng mga Coordinate</string>
     <string name="search_address">Ang Address</string>
-    <string name="search_address_button">Magsaliksik sa pamamagitan ng address</string>
-    <string name="search_kw_prefill">Ang Keyword</string>
-    <string name="search_kw_button">Ang Magsaliksik sa pamamagitan ng keyword</string>
-    <string name="search_hbu_prefill">Ang May-ari</string>
-    <string name="search_hbu_button">Magsaliksik ayon sa pangalan ng may-ari</string>
     <string name="search_tb">Ang Pagsusubaybay</string>
-    <string name="search_tb_hint">Pagkakakilanlan ng pagsusubaybay</string>
-    <string name="search_tb_button">Ang Hanapin para sa pagsusubaybay</string>
     <string name="search_address_started">Ang pagsasaliksik para sa mga lugar</string>
     <string name="search_address_result">Ang matagpuan na mga lugar</string>
     <string name="search_pocket_title">Ang Pocket Query</string>
@@ -807,7 +799,6 @@
     <string name="attribute_stealth_no">Ang Stealth ay hindi kinakailangan</string>
     <string name="attribute_firstaid_yes">Kailangan ng pagpapanatili</string>
     <string name="attribute_cow_yes">Abangan ang hayop na inaalaga</string>
-    <string name="attribute_cow_no">Walang inaalagang hayop</string>
     <string name="attribute_field_puzzle_yes">Palaisipan sa larangan</string>
     <string name="attribute_field_puzzle_no">Walang palaisipan sa field</string>
     <string name="attribute_nightcache_yes">Cache sa gabi</string>
@@ -840,7 +831,6 @@
     <string name="attribute_scuba_yes">Ang gamit sa pag eskuba ay kinakailangan</string>
     <string name="attribute_flashlight_yes">Kinakailangan ang flashlight</string>
     <string name="attribute_uv_yes">Kinakailangan ang UV light</string>
-    <string name="attribute_uv_no">Hindi kinakailangan ang UV light</string>
     <string name="attribute_snowshoes_yes">Kailangan ang sapatos na pang snow</string>
     <string name="attribute_skiis_yes">Kinakailangan ang cross country skis</string>
     <string name="attribute_s_tool_yes">Kinakailangan ng espesyal na kasangkapan</string>
