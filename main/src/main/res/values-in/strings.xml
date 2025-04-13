@@ -678,16 +678,8 @@
     <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
     <string name="search_coordinates">Koordinat</string>
-    <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
-    <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_kw_prefill">Kata kunci</string>
-    <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
-    <string name="search_hbu_prefill">Pemilik</string>
-    <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
     <string name="search_tb">Dilacak</string>
-    <string name="search_tb_hint">Identifikasi dilacak</string>
-    <string name="search_tb_button">Cari untuk dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
@@ -806,7 +798,6 @@
     <string name="attribute_stealth_no">Stealth tidak diperlukan</string>
     <string name="attribute_firstaid_yes">Kebutuhan pemeliharaan</string>
     <string name="attribute_cow_yes">Perhatikan ternak</string>
-    <string name="attribute_cow_no">Tidak ada ternak</string>
     <string name="attribute_field_puzzle_yes">Bidang teka-teki</string>
     <string name="attribute_field_puzzle_no">Tidak ada bidang teka-teki</string>
     <string name="attribute_nightcache_yes">Cache malam</string>
@@ -839,7 +830,6 @@
     <string name="attribute_scuba_yes">Peralatan selam diperlukan</string>
     <string name="attribute_flashlight_yes">Senter diperlukan</string>
     <string name="attribute_uv_yes">Sinar UV diperlukan</string>
-    <string name="attribute_uv_no">Sinar UV tidak diperlukan</string>
     <string name="attribute_snowshoes_yes">Sepatu salju diperlukan</string>
     <string name="attribute_skiis_yes">Ski lintas negara diperlukan</string>
     <string name="attribute_s_tool_yes">Alat-alat khusus diperlukan</string>
