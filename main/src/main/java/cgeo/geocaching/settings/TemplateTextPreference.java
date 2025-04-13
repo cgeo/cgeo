@@ -23,6 +23,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import java.util.List;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,6 +39,7 @@ public class TemplateTextPreference extends Preference {
 
     public TemplateTextPreference(final Context context) {
         super(context);
+        setWidgetLayoutResource(R.layout.button_icon_view);
     }
 
     public TemplateTextPreference(final Context context, final AttributeSet attrs) {
@@ -57,17 +59,14 @@ public class TemplateTextPreference extends Preference {
                 launchEditTemplateDialog();
                 return false;
             });
-        }
-        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
-        if (!isSignature) {
-            holder.itemView.setOnLongClickListener(v -> {
-                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
+            if (!getKey().equals(getContext().getString(R.string.pref_signature))) {
+                final MaterialButton button = (MaterialButton) holder.findViewById(R.id.iconview);
+                button.setIconResource(R.drawable.ic_menu_delete);
+                button.setOnClickListener(v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
                     Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
                     callChangeListener(null);
-                });
-                return true;
-            });
-
+                }));
+            }
         }
     }
 
