@@ -183,7 +183,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         DisplayModel.symbolScale = symbolScale / 100f;
     }
 
-    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) throws IOException {
+    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 

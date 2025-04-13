@@ -204,7 +204,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     }
 
-    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) throws IOException {
+    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 

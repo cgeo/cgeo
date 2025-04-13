@@ -43,7 +43,7 @@ public class RxOkHttpUtils {
                 }
 
                 @Override
-                public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
+                public void onResponse(@NonNull final Call call, @NonNull final Response response) {
                     completed.set(true);
                     singleEmitter.onSuccess(response);
                 }

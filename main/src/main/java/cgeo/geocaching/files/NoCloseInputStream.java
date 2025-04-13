@@ -16,7 +16,7 @@ public class NoCloseInputStream extends FilterInputStream {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         in = closedInputStream;
     }
 

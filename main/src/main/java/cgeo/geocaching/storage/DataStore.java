@@ -3724,7 +3724,7 @@ public class DataStore {
         });
     }
 
-    private static void insertRouteItemHelper(final SQLiteStatement statement, final RouteItem item, final int precedence) throws Exception {
+    private static void insertRouteItemHelper(final SQLiteStatement statement, final RouteItem item, final int precedence) {
         final Geopoint point = item.getPoint();
         statement.bindLong(1, precedence);
         statement.bindLong(2, item.getType().ordinal());

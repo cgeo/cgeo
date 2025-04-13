@@ -66,7 +66,7 @@ class GeokretyParser {
 
         @Override
         public final void startElement(final String uri, final String localName, final String qName,
-                                       final Attributes attributes) throws SAXException {
+                                       final Attributes attributes) {
             content = "";
             if (localName.equalsIgnoreCase("geokret")) {
 
@@ -182,8 +182,7 @@ class GeokretyParser {
         }
 
         @Override
-        public final void endElement(final String uri, final String localName, final String qName)
-                throws SAXException {
+        public final void endElement(final String uri, final String localName, final String qName) {
             try {
                 if (localName.equalsIgnoreCase("geokret")) {
                     if (StringUtils.isNotEmpty(content) && StringUtils.isBlank(trackable.getName())) {
@@ -269,8 +268,7 @@ class GeokretyParser {
         }
 
         @Override
-        public final void characters(final char[] ch, final int start, final int length)
-                throws SAXException {
+        public final void characters(final char[] ch, final int start, final int length) {
             final String text = new String(ch, start, length);
             if (isMultiline) {
                 content = StringUtils.join(content, text.replaceAll("(\r\n|\n)", "<br />"));
