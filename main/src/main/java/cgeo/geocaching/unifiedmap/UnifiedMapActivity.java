@@ -620,11 +620,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final StringBuilder normals = new StringBuilder();
         for (LiveMapGeocacheLoader.ConnectorState data : status.connectorStates.values()) {
             if (data.isError()) {
-                errors.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                errors.append("\n- ").append(data.toUserDisplayableStringWithMarkup());
             } else if (data.isPartialFor(viewport)) {
-                partials.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                partials.append("\n- ").append(data.toUserDisplayableStringWithMarkup());
             } else {
-                normals.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                normals.append("\n- ").append(data.toUserDisplayableStringWithMarkup());
             }
         }
         final String errorMsg = errors.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_error, errors);
