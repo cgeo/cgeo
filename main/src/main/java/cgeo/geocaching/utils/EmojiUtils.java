@@ -329,7 +329,7 @@ public class EmojiUtils {
 
     static class EmojiViewAdapter extends RecyclerView.Adapter<EmojiViewAdapter.ViewHolder> {
 
-        private enum EmojiViewType { VIEW_TITLE, VIEW_ITEM };
+        private enum EmojiViewType { VIEW_TITLE, VIEW_ITEM }
 
         static class EmojiDataType {
             public int viewType;

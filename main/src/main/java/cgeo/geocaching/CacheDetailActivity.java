@@ -2975,12 +2975,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else {
             storeCache(false);
         }
-    };
+    }
 
     @Override
     public boolean supportsNullCoordinates() {
         return false;
-    };
+    }
 
     @Override
     public boolean supportsCalculatedCoordinates() {
