@@ -92,6 +92,8 @@ public class GpxExport extends AbstractExport {
 
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
             Settings.setIncludeFoundStatus(includeFoundStatus.isChecked());
+            Settings.setIncludeLogs(includeLogs.isChecked());
+            Settings.setIncludeTravelBugs(includeTravelBugs.isChecked());
             dialog.dismiss();
             new GpxExportTask(activity, getProgressTitle(), fileName, getName()).execute(geocodes);
         });
