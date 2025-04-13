@@ -878,17 +878,9 @@
     <string name="quick_settings">Швидкі налаштування</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
-    <string name="search_coordinates_button">Пошук за координатами</string>
     <string name="search_address">Адреса</string>
-    <string name="search_address_button">Пошук адреси</string>
-    <string name="search_kw_prefill">Ключове слово</string>
-    <string name="search_kw_button">пошук за ключовим словом</string>
     <string name="search_hbu">прихований</string>
-    <string name="search_hbu_prefill">Власник</string>
-    <string name="search_hbu_button">пошук за іменем користувача</string>
     <string name="search_tb">відстежуваний</string>
-    <string name="search_tb_hint">Відстежена ідентифікація</string>
-    <string name="search_tb_button">пошук відстежуваного</string>
     <string name="search_destination">відкрите місце призначення в c: geo</string>
     <string name="add_target_to">додати метy до</string>
     <string name="search_address_started">пошук місць</string>
@@ -1026,7 +1018,6 @@
     <string name="attribute_stealth_no">стелс не потрібен</string>
     <string name="attribute_firstaid_yes">потребує обслуговування</string>
     <string name="attribute_cow_yes">Спостереження за тваринами</string>
-    <string name="attribute_cow_no">Без домашньої худоби</string>
     <string name="attribute_field_puzzle_yes">польова головоломка</string>
     <string name="attribute_field_puzzle_no">Без головоломки</string>
     <string name="attribute_nightcache_yes">Нічний кеш</string>
@@ -1059,7 +1050,6 @@
     <string name="attribute_scuba_yes">Потрібне підводне спорядження</string>
     <string name="attribute_flashlight_yes">Потрібен ліхтарик</string>
     <string name="attribute_uv_yes">Потрібне УФ-світло</string>
-    <string name="attribute_uv_no">Ліхтарик не потрібен</string>
     <string name="attribute_snowshoes_yes">Потрібні сніжки для взуття</string>
     <string name="attribute_skiis_yes">Потрібні бігові лижі</string>
     <string name="attribute_s_tool_yes">потрібні спеціальні інструменти</string>
