@@ -1441,25 +1441,13 @@
     <string name="search_bar_hint">Cache/trackable ara</string>
     <string name="search_bar_hint_settings">Arama ayarları</string>
     <string name="search_coordinates">Koordinatlar</string>
-    <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
-    <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geokod</string>
-    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelime</string>
-    <string name="search_kw_prefill">Anahtar kelime</string>
-    <string name="search_kw_button">Anahtar kelimeye göre ara</string>
     <string name="search_hbu">Saklayan</string>
-    <string name="search_hbu_prefill">Sahibi</string>
-    <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_finder">Bulan</string>
-    <string name="search_finder_prefill">Bulan</string>
-    <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Trackable kimliği</string>
-    <string name="search_tb_button">Trackable ara</string>
     <string name="search_destination">Hedefi c:geo olarak aç</string>
     <string name="add_target_to">Hedef ekle</string>
     <string name="search_address_started">Yerler aranıyor</string>
@@ -1613,7 +1601,6 @@
     <string name="attribute_stealth_no">Gizlilik gerekli değil</string>
     <string name="attribute_firstaid_yes">Bakım gerekli</string>
     <string name="attribute_cow_yes">Besi hayvanlarına dikkat edin</string>
-    <string name="attribute_cow_no">Besi hayvanı yok</string>
     <string name="attribute_field_puzzle_yes">Saha bulmacası</string>
     <string name="attribute_field_puzzle_no">Saha bulmacası yok</string>
     <string name="attribute_nightcache_yes">Gece Cache\'i</string>
@@ -1646,7 +1633,6 @@
     <string name="attribute_scuba_yes">Tüplü dalış ekipmanı gerekli</string>
     <string name="attribute_flashlight_yes">Fener gerekli</string>
     <string name="attribute_uv_yes">UV lambası gerekli</string>
-    <string name="attribute_uv_no">UV lambası gerekli değil</string>
     <string name="attribute_snowshoes_yes">Kar ayakkabısı gerekebilir</string>
     <string name="attribute_skiis_yes">Kayak gerekebilir</string>
     <string name="attribute_s_tool_yes">Özel alet gerekli</string>
@@ -1965,7 +1951,6 @@
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="routes_tracks_change_name">Adı değiştir</string>
-    <string name="route">Rota</string>
     <string name="track">İz</string>
     <string name="make_visible">Görünür yap</string>
     <string name="hide">Sakla</string>
