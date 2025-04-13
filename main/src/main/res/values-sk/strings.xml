@@ -1582,25 +1582,13 @@
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
     <string name="search_bar_hint_settings">Nastavenie vyhľadávania</string>
     <string name="search_coordinates">Súradnice</string>
-    <string name="search_coordinates_button">Hľadať podľa súradníc</string>
     <string name="search_address">Adresa</string>
-    <string name="search_address_button">Hľadať podľa adresy</string>
     <string name="search_geo">Geokód</string>
-    <string name="search_geocode_from_clipboard">Geokód bol vložený zo schránky.</string>
     <string name="search_kw">Kľúčové slovo</string>
-    <string name="search_kw_prefill">Kľúčové slovo</string>
-    <string name="search_kw_button">Hľadať podľa kľúčových slov</string>
     <string name="search_hbu">Ukryl</string>
-    <string name="search_hbu_prefill">Vlastník</string>
-    <string name="search_hbu_button">Hľadať podľa vlastníka</string>
     <string name="search_finder">Nájdené kým</string>
-    <string name="search_finder_prefill">Nálezca</string>
-    <string name="search_finder_button">Hľadať podľa mena nálezcu</string>
-    <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>
-    <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
-    <string name="search_tb_button">Hľadať trasov. predmety</string>
     <string name="search_destination">Otvoriť cieľ v c:geo</string>
     <string name="add_target_to">Pridať cieľ do</string>
     <string name="search_address_started">Vyhľadávanie miest</string>
@@ -1757,7 +1745,6 @@
     <string name="attribute_stealth_no">Nie je vyžadované nenápadné hľadanie</string>
     <string name="attribute_firstaid_yes">Potrebuje údržbu</string>
     <string name="attribute_cow_yes">Pozor na dobytok</string>
-    <string name="attribute_cow_no">Bez dobytku</string>
     <string name="attribute_field_puzzle_yes">Puzzle na mieste</string>
     <string name="attribute_field_puzzle_no">Bez puzzle na mieste</string>
     <string name="attribute_nightcache_yes">Nočná cache</string>
@@ -1790,7 +1777,6 @@
     <string name="attribute_scuba_yes">Vyžadované potápačské vybavenie</string>
     <string name="attribute_flashlight_yes">Vyžadovaná baterka</string>
     <string name="attribute_uv_yes">Vyžadovaná UV lampa </string>
-    <string name="attribute_uv_no">Nie je vyžadovaná UV lampa</string>
     <string name="attribute_snowshoes_yes">Vyžadované snežnice</string>
     <string name="attribute_skiis_yes">Vyžadované bežecké lyže</string>
     <string name="attribute_s_tool_yes">Vyžadované špeciálne nástroje</string>
@@ -2156,8 +2142,6 @@
     <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte farbu</string>
-    <string name="unload_route_track">Zrušiť trasu/stopu</string>
-    <string name="route">Trasa</string>
     <string name="track">Stopa</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
