@@ -89,18 +89,12 @@ public class OfflineTranslateUtils {
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
         // identify listing language
         LanguageIdentification.getClient().identifyLanguage(text)
-                .addOnSuccessListener(lngCode -> {
-                    successConsumer.accept(new Language(lngCode));
-                })
-                .addOnFailureListener(e -> {
-                    errorConsumer.accept(e.getMessage());
-                });
+                .addOnSuccessListener(lngCode -> successConsumer.accept(new Language(lngCode)))
+                .addOnFailureListener(e -> errorConsumer.accept(e.getMessage()));
     }
 
     public static void translateTextAutoDetectLng(final Activity activity, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
-        detectLanguage(text, lng -> {
-            getTranslator(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
-        }, e -> {
+        detectLanguage(text, lng -> getTranslator(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer), e -> {
 
         });
     }
@@ -164,9 +158,7 @@ public class OfflineTranslateUtils {
         final Translator translator = Translation.getClient(options);
 
         translator.downloadModelIfNeeded(new DownloadConditions.Builder().build())
-                .addOnSuccessListener(b -> {
-                    consumer.accept(translator);
-                })
+                .addOnSuccessListener(b -> consumer.accept(translator))
                 .addOnFailureListener(e -> {
                     Log.e("Failed to initialize MLKit Translator", e);
                     consumer.accept(null);
@@ -185,9 +177,7 @@ public class OfflineTranslateUtils {
 
     public static void deleteLanguageModel(final String lngCode) {
         final TranslateRemoteModel model = new TranslateRemoteModel.Builder(lngCode).build();
-        RemoteModelManager.getInstance().deleteDownloadedModel(model).addOnFailureListener(e -> {
-            Log.e("Failed to delete TranslateRemoteModel", e);
-        });
+        RemoteModelManager.getInstance().deleteDownloadedModel(model).addOnFailureListener(e -> Log.e("Failed to delete TranslateRemoteModel", e));
     }
 
     public static void downloadLanguageModels(final Context context) {

@@ -73,7 +73,7 @@ public class FilterViewHolderCreator {
                         ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
                                 .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                                         CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
-                                .setValueDisplayTextGetter(ct -> TypeGeocacheFilter.valueDisplayTextGetter(ct))
+                                .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
                                 .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
                         2, null);
                 break;
