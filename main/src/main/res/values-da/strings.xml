@@ -1105,20 +1105,11 @@
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
     <string name="search_coordinates">Koordinater</string>
-    <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Søg adresse</string>
     <string name="search_kw">Nøgleord</string>
-    <string name="search_kw_prefill">Nøgleord</string>
-    <string name="search_kw_button">Søg efter nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
-    <string name="search_hbu_prefill">Ejer</string>
-    <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
-    <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Trackable id</string>
-    <string name="search_tb_button">Søg trackable</string>
     <string name="search_destination">Åbn destinationen i c:geo</string>
     <string name="search_address_started">Søger efter steder</string>
     <string name="search_address_result">Fundne steder</string>
@@ -1255,7 +1246,6 @@
     <string name="attribute_stealth_no">Diskretion ikke påkrævet</string>
     <string name="attribute_firstaid_yes">Kræver vedligeholdelse</string>
     <string name="attribute_cow_yes">Pas på kreaturer</string>
-    <string name="attribute_cow_no">Ingen kreaturer</string>
     <string name="attribute_field_puzzle_yes">Feltopgave</string>
     <string name="attribute_field_puzzle_no">Ikke feltopgave</string>
     <string name="attribute_nightcache_yes">Natcache</string>
@@ -1288,7 +1278,6 @@
     <string name="attribute_scuba_yes">Dykkerudstyr påkrævet</string>
     <string name="attribute_flashlight_yes">Lommelygte nødvendig</string>
     <string name="attribute_uv_yes">UV-lys nødvendigt</string>
-    <string name="attribute_uv_no">UV-lys ikke nødvendigt</string>
     <string name="attribute_snowshoes_yes">Snesko nødvendige</string>
     <string name="attribute_skiis_yes">Langrendski nødvendige</string>
     <string name="attribute_s_tool_yes">Specialredskab nødvendigt</string>
