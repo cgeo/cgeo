@@ -25,6 +25,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public abstract class GeoDirHandler {
 
+    /** @noinspection PointlessBitwiseExpression*/
     public static final int UPDATE_GEODATA = 1 << 0;
     public static final int UPDATE_DIRECTION = 1 << 1;
     public static final int UPDATE_GEODIR = 1 << 2;

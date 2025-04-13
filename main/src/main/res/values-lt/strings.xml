@@ -2114,12 +2114,6 @@
         <item quantity="many">Prieš %d dienų</item>
         <item quantity="other">Prieš %d dienų</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Per %d dieną</item>
-        <item quantity="few">Per %d dienas</item>
-        <item quantity="many">Per %d dienų</item>
-        <item quantity="other">Per %d dienų</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo nuoroda</string>
     <string name="create_shortcut">Sukurti nuorodą</string>

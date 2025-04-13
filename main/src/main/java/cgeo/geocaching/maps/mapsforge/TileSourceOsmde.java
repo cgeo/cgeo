@@ -9,7 +9,7 @@ import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 public class TileSourceOsmde extends AbstractTileSource {
     /**
      * A tile source which fetches Mapnik german style tiles from OpenStreetMap.de.
-     * Requires a valid HTTP User-Agent identifying application: https://operations.osmfoundation.org/policies/tiles/
+     * Requires a valid HTTP User-Agent identifying application: <a href="https://operations.osmfoundation.org/policies/tiles/">policies</a>
      */
     public static final TileSourceOsmde INSTANCE = new TileSourceOsmde(new String[]{"tile.openstreetmap.de"}, 443);
     private static final int PARALLEL_REQUESTS_LIMIT = 8;

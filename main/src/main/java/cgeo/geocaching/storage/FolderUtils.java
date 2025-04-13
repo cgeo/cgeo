@@ -109,7 +109,7 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0l, true, null);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0L, true, null);
 
         public final int fileCount;
         public final int dirCount;

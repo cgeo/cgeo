@@ -2146,9 +2146,6 @@
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="other">%d일 후</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>

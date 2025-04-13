@@ -151,7 +151,7 @@ public final class NavigationAppFactory {
      * Default way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
-     * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean)} with
+     * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean, int)} with
      * {@code showInternalMap = true} and {@code showDefaultNavigation = false}
      */
     public static void showNavigationMenu(final Activity activity,

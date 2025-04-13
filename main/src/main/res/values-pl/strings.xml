@@ -2313,12 +2313,6 @@
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Za %d dzień</item>
-        <item quantity="few">Za %d dni</item>
-        <item quantity="many">Za %d dni</item>
-        <item quantity="other">Za %d dni</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
@@ -2445,7 +2439,7 @@
     <string name="map_refresh_individual_route">Odśwież</string>
     <string name="map_export_route">Eksportuj jako trasę</string>
     <string name="map_export_track">Eksportuj jako ślad</string>
-    <string name="map_load_individual_route">Wczytaj z GPX</string>
+    <string name="map_load_from_GPX">Wczytaj z GPX</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
