@@ -652,16 +652,8 @@
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <!-- search -->
     <string name="search_coordinates">Mga koordinate</string>
-    <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
     <string name="search_address">Lugar</string>
-    <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
-    <string name="search_kw_prefill">Importanteng letra</string>
-    <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
-    <string name="search_hbu_prefill">Tag-iya</string>
-    <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>
     <string name="search_tb">Masundan</string>
-    <string name="search_tb_hint">Idintipikasyon sa trackable</string>
-    <string name="search_tb_button">Mangita og mga trackable</string>
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>
     <!-- trackable -->
@@ -772,7 +764,6 @@
     <string name="attribute_stealth_no">Dile kinahanglan ang stealth</string>
     <string name="attribute_firstaid_yes">Kinahanglan ug tigmintinar</string>
     <string name="attribute_cow_yes">Tan-awa sa ang binuhi</string>
-    <string name="attribute_cow_no">Walay binuhi</string>
     <string name="attribute_field_puzzle_yes">Talan-awon sa uma</string>
     <string name="attribute_field_puzzle_no">Walay talan-awon sa uma</string>
     <string name="attribute_nightcache_yes">Cache sa pang-gabie</string>
@@ -805,7 +796,6 @@
     <string name="attribute_scuba_yes">Kinahanglan og scuba gear</string>
     <string name="attribute_flashlight_yes">Kinahanglan og espat</string>
     <string name="attribute_uv_yes">Kinahanglan og UV nga suga</string>
-    <string name="attribute_uv_no">Dili kinahanglan og UV nga suga</string>
     <string name="attribute_snowshoes_yes">Kinahanglan og snowshoes</string>
     <string name="attribute_skiis_yes">Krus country nga mga ski kay kinahanglan</string>
     <string name="attribute_s_tool_yes">Kinahanglan og espesyal nga mga hiramenta</string>
