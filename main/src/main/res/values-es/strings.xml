@@ -1383,25 +1383,13 @@
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
     <string name="search_bar_hint_settings">Configuración de búsqueda</string>
     <string name="search_coordinates">Coordenadas</string>
-    <string name="search_coordinates_button">Buscar por coordenadas</string>
     <string name="search_address">Dirección</string>
-    <string name="search_address_button">Buscar por dirección</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geocode_from_clipboard">El Geocode se ha pegado desde el portapapeles.</string>
     <string name="search_kw">Palabra clave</string>
-    <string name="search_kw_prefill">Palabra clave</string>
-    <string name="search_kw_button">Buscar por palabra clave</string>
     <string name="search_hbu">Escondido por</string>
-    <string name="search_hbu_prefill">Propietario</string>
-    <string name="search_hbu_button">Buscar por propietario</string>
     <string name="search_finder">Encontrado por</string>
-    <string name="search_finder_prefill">Buscador</string>
-    <string name="search_finder_button">Buscar por nombre del buscador</string>
-    <string name="search_filter_button">Buscar por filtro</string>
     <string name="search_filter_info_message" formatted="false">**Buscar por filtro** busca cachés en todos los servicios activos en línea (por ejemplo, geocaching.com) usando un filtro proporcionado. Sin embargo, las capacidades de búsqueda de estos servicios suelen ser más limitadas que las capacidades de filtro de c:geo.\n\n- Todos los servicios sólo soportan filtros AND (no hay filtros OR ni inversión de filtros).\n- Los filtros más básicos como **tipo de caché** o **tamaño de caché** son compatibles con todos los servicios. Los filtros más complicados a menudo no son compatibles o tienen algunas restricciones, por ejemplo, **favoritos** o **fecha oculta**.\n- Una lista detallada sobre los filtros soportados por servicio puede ser encontrada [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLos filtros no soportados por el servicio online serán aplicados por c:geo en los resultados recibidos.</string>
     <string name="search_tb">Rastreable</string>
-    <string name="search_tb_hint">Identificación del rastreable</string>
-    <string name="search_tb_button">Buscar rastreables</string>
     <string name="search_destination">Abrir destino en c:geo</string>
     <string name="add_target_to">Añadir objetivo a</string>
     <string name="search_address_started">Buscando lugares</string>
@@ -1558,7 +1546,6 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_stealth_no">No es necesario ser sigiloso</string>
     <string name="attribute_firstaid_yes">Necesita mantenimiento</string>
     <string name="attribute_cow_yes">Hay que tener cuidado con el ganado</string>
-    <string name="attribute_cow_no">No hay que tener cuidado con el ganado</string>
     <string name="attribute_field_puzzle_yes">Puzzle en el lugar</string>
     <string name="attribute_field_puzzle_no">No es puzzle en el lugar</string>
     <string name="attribute_nightcache_yes">Caché nocturno</string>
@@ -1591,7 +1578,6 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_scuba_yes">Equipo de buceo requerido</string>
     <string name="attribute_flashlight_yes">Linterna requerida</string>
     <string name="attribute_uv_yes">Luz ultavioleta requerida</string>
-    <string name="attribute_uv_no">Luz ultavioleta no requerida</string>
     <string name="attribute_snowshoes_yes">Raquetas de nieve necesarias</string>
     <string name="attribute_skiis_yes">Esquís necesarios</string>
     <string name="attribute_s_tool_yes">Herramientas especiales requeridas</string>
