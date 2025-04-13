@@ -493,6 +493,9 @@ dependencies {
     // Settings Library
     implementation 'androidx.preference:preference:1.2.1'
 
+    // Altitude above MSL
+    implementation 'androidx.core:core-location-altitude:1.0.0-alpha03'
+
     // Support Annotations. use same version for the main app and the test app
     String annotationVersion = '1.9.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
