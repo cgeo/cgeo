@@ -31,7 +31,9 @@ public class InverseComparator implements CacheComparator {
 
     @Override
     public void sort(final List<Geocache> list) {
+        originalComparator.beforeSort(list);
         Collections.sort(list, this);
+        originalComparator.afterSort(list);
     }
 
     @Override
