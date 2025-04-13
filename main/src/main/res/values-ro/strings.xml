@@ -738,16 +738,8 @@
     <string name="map_select_multiple_items">Selectează un element</string>
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
-    <string name="search_coordinates_button">Caută după coordonate</string>
     <string name="search_address">Adresă</string>
-    <string name="search_address_button">Caută după adresă</string>
-    <string name="search_kw_prefill">Cuvânt cheie</string>
-    <string name="search_kw_button">Caută după cuvânt cheie</string>
-    <string name="search_hbu_prefill">Proprietar</string>
-    <string name="search_hbu_button">Caută după numele proprietarului</string>
     <string name="search_tb">Obiect călător</string>
-    <string name="search_tb_hint">Codul obiectului călător</string>
-    <string name="search_tb_button">Caută obiect călător</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
     <!-- trackable -->
@@ -864,7 +856,6 @@
     <string name="attribute_stealth_no">Discreţia nu este necesară</string>
     <string name="attribute_firstaid_yes">Are nevoie de întreţinere</string>
     <string name="attribute_cow_yes">Atenţie la animale domestice mari (vite)</string>
-    <string name="attribute_cow_no">Nu sunt prezente animale domestice mari (vite)</string>
     <string name="attribute_field_puzzle_yes">Se rezolvă la faţa locului</string>
     <string name="attribute_field_puzzle_no">Nu se rezolvă la faţa locului</string>
     <string name="attribute_nightcache_yes">Cutie de noapte</string>
@@ -897,7 +888,6 @@
     <string name="attribute_scuba_yes">Necesită echipament de scufundare</string>
     <string name="attribute_flashlight_yes">Necesită lanternă</string>
     <string name="attribute_uv_yes">Necesită lanternă UV</string>
-    <string name="attribute_uv_no">Nu este necesară lanterna UV</string>
     <string name="attribute_snowshoes_yes">Ai nevoie de încălţări de zăpadă</string>
     <string name="attribute_skiis_yes">Este necesar practicare de ski fond</string>
     <string name="attribute_s_tool_yes">Necesită unelte speciale</string>
