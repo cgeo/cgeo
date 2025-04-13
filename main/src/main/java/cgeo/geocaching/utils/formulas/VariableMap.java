@@ -165,7 +165,7 @@ public class VariableMap {
 
     /**
      * Removes a variable from this map.
-     *
+     * <br />
      * Note that the variable may still be represented in this Map after removal with an empty state.
      * This will be the case if another variable's formula depends on the removed variable.
      */

@@ -144,7 +144,7 @@ public class SqlBuilder {
 
     /**
      * Returns SQL as currently defined by this builder.
-     *
+     * <br />
      * Method does not change the classes state. It may return incomplete SQL e.g. if not all where's are closed yet
      */
     @NonNull

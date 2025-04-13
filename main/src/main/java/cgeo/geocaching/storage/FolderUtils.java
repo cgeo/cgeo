@@ -539,7 +539,7 @@ public class FolderUtils {
 
     /**
      * Copies the content of one folder into another. Source and target folder itself remain untouched.
-     *
+     * <br />
      * Implementation supports handling of case when source and target point to same folder (maybe via different APIs e.g. File vs Document)
      * as well as when source folder is inside target or vice versa
      *

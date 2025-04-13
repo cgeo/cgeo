@@ -14,7 +14,7 @@ public interface ILogin extends IConnector {
     /**
      * Contacts the server the connector belongs to and verifies/establishes authentication and retrieves information
      * about the current user (Name, found caches) if applicable.
-     *
+     * <br />
      * Should involve {@link cgeo.geocaching.storage.extension.FoundNumCounter#getAndUpdateFoundNum(ILogin)} to store the found count if gathered while login.
      *
      * @return true in case of success, false in case of failure
