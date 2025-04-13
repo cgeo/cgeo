@@ -1753,27 +1753,15 @@
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
     <string name="search_bar_hint_settings">Paramètres de recherche</string>
     <string name="search_coordinates">Coordonnées</string>
-    <string name="search_coordinates_button">Rechercher par Coordonnées</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Géocode</string>
-    <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mot-clé</string>
-    <string name="search_kw_prefill">Mot-clé</string>
-    <string name="search_kw_button">Rechercher par Mot-clé</string>
     <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
     <string name="search_hbu">Cachée par</string>
-    <string name="search_hbu_prefill">Nom d\'utilisateur</string>
-    <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_finder">Trouvée par</string>
-    <string name="search_finder_prefill">Découvreur</string>
-    <string name="search_finder_button">Rechercher par nom du découvreur</string>
     <string name="search_filter">Filtrer</string>
-    <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
     <string name="search_tb">Objet voyageur</string>
-    <string name="search_tb_hint">Code de l\'objet voyageur</string>
-    <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
     <string name="search_destination">Ouvrir la destination dans c:geo</string>
     <string name="add_target_to">Ajouter la cible à</string>
     <string name="search_address_started">Rechercher le lieu</string>
@@ -1929,7 +1917,6 @@
     <string name="attribute_stealth_no">Discrétion pas nécessaire</string>
     <string name="attribute_firstaid_yes">Nécessite une maintenance</string>
     <string name="attribute_cow_yes">Attention au bétail</string>
-    <string name="attribute_cow_no">Pas de bétail</string>
     <string name="attribute_field_puzzle_yes">Puzzle de terrain</string>
     <string name="attribute_field_puzzle_no">Pas de puzzle de terrain</string>
     <string name="attribute_nightcache_yes">Cache de nuit</string>
@@ -1962,7 +1949,6 @@
     <string name="attribute_scuba_yes">Matériel de plongée nécessaire</string>
     <string name="attribute_flashlight_yes">Torche nécessaire</string>
     <string name="attribute_uv_yes">Lumière UV nécessaire</string>
-    <string name="attribute_uv_no">Lumière UV pas nécessaire</string>
     <string name="attribute_snowshoes_yes">Chaussures de neige nécessaires</string>
     <string name="attribute_skiis_yes">Skis de fond nécessaires</string>
     <string name="attribute_s_tool_yes">Outils spéciaux nécessaires</string>
@@ -2325,8 +2311,6 @@
     <string name="routes_tracks_color">Sélectionner la couleur</string>
     <string name="routes_tracks_change_name">Changer de nom</string>
     <string name="center">Centrer</string>
-    <string name="unload_route_track">Décharger la trace</string>
-    <string name="route">Itinéraire</string>
     <string name="track">Trace</string>
     <string name="make_visible">Rendre visible</string>
     <string name="hide">Cacher</string>
