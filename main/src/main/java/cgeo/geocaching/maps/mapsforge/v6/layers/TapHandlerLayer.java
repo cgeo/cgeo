@@ -8,8 +8,6 @@ import android.content.Context;
 
 import androidx.core.content.res.ResourcesCompat;
 
-import java.lang.ref.WeakReference;
-
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.BoundingBox;
@@ -26,11 +24,8 @@ public class TapHandlerLayer extends Layer {
     private LatLong longTapLatLong;
     private Bitmap markerBitmap;
 
-    private final WeakReference<Context> wrContext;
-
     public TapHandlerLayer(final TapHandler tapHandler, final Context context) {
         this.tapHandler = tapHandler;
-        this.wrContext = new WeakReference<>(context);
     }
 
     @Override
