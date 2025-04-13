@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -258,7 +259,7 @@ public class ContentStorage {
             final List<FileInformation> result = getAccessorFor(folder).list(folder);
             cLog.add("#" + result.size());
             if (sortByName) {
-                Collections.sort(result, (fi1, fi2) -> fi1.name.compareTo(fi2.name));
+                Collections.sort(result, Comparator.comparing(fi -> fi.name));
             }
             return result;
         } catch (IOException ioe) {

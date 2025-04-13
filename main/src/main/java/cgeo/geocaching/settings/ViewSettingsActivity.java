@@ -36,6 +36,7 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -94,7 +95,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 allItems.add(new KeyValue(key, value.toString(), type));
             }
         }
-        Collections.sort(allItems, (o1, o2) -> o1.key.compareTo(o2.key));
+        Collections.sort(allItems, Comparator.comparing(o -> o.key));
         filteredItems = new ArrayList<>();
         filteredItems.addAll(allItems);
 

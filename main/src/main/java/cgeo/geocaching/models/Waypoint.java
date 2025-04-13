@@ -84,7 +84,7 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) (left, right) -> left.order() - right.order();
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)

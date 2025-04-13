@@ -31,10 +31,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         put(keyValues);
     }
 
-    private static final Comparator<ImmutablePair<String, String>> comparator = (nv1, nv2) -> {
-        final int comparedKeys = nv1.left.compareTo(nv2.left);
-        return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
-    };
+    private static final Comparator<ImmutablePair<String, String>> comparator = Comparator.comparing((ImmutablePair<String, String> nv) -> nv.left).thenComparing(nv -> nv.right);
 
     /**
      * Percent encode following <a href="http://tools.ietf.org/html/rfc5849#section-3.6">...</a>
