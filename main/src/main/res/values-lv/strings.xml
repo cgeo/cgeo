@@ -859,7 +859,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
     <string name="search_address">Adrese</string>
     <string name="search_address_button">Meklēt pēc adreses</string>
-    <string name="search_kw_prefill">Atslēgvārds</string>
     <string name="search_kw_button">Meklēt pēc atslēgvārda</string>
     <string name="search_hbu_prefill">Īpašnieks</string>
     <string name="search_hbu_button">Meklēt pēc īpašnieka vārda</string>
