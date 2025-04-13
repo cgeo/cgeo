@@ -47,7 +47,6 @@ import org.oscim.theme.ThemeFile;
 import org.oscim.theme.XmlRenderThemeMenuCallback;
 import org.oscim.theme.XmlRenderThemeStyleLayer;
 import org.oscim.theme.XmlRenderThemeStyleMenu;
-import org.oscim.theme.XmlThemeResourceProvider;
 import org.oscim.theme.ZipRenderTheme;
 import org.oscim.theme.ZipXmlThemeResourceProvider;
 
@@ -78,9 +77,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
-
-    // cache most recent resource provider
-    private XmlThemeResourceProvider resourceProvider = null;
 
     private static class ThemeData {
         public final String id;
@@ -210,7 +206,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
             }
-            resourceProvider = xmlRenderTheme == null ? null : xmlRenderTheme.getResourceProvider();
         } catch (Exception ex) {
             Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
             xmlRenderTheme = null;

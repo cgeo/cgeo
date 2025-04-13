@@ -54,7 +54,6 @@ import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
-import org.mapsforge.map.rendertheme.XmlThemeResourceProvider;
 import org.mapsforge.map.rendertheme.ZipRenderTheme;
 import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
 import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
@@ -98,9 +97,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
-
-    // cache most recent resource provider
-    private XmlThemeResourceProvider resourceProvider = null;
 
     private static MapThemeFolderSynchronizer syncTask = null;
 
@@ -242,7 +238,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
             }
-            resourceProvider = xmlRenderTheme == null ? null : xmlRenderTheme.getResourceProvider();
         } catch (Exception ex) {
             Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
             xmlRenderTheme = null;
