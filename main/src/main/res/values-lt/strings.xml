@@ -1675,25 +1675,13 @@
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
     <string name="search_bar_hint_settings">Paieškos nustatymai</string>
     <string name="search_coordinates">Koordinatės</string>
-    <string name="search_coordinates_button">Paieška pagal koordinates</string>
     <string name="search_address">Adresas</string>
-    <string name="search_address_button">Paieška pagal adresą</string>
     <string name="search_geo">Geokodas</string>
-    <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
-    <string name="search_kw_prefill">Raktinis žodis</string>
-    <string name="search_kw_button">Paieška pagal raktinį žodį</string>
     <string name="search_hbu">Slėpėjas</string>
-    <string name="search_hbu_prefill">Savininkas</string>
-    <string name="search_hbu_button">Paieška pagal savininko vardą</string>
     <string name="search_finder">Surado</string>
-    <string name="search_finder_prefill">Radėjas</string>
-    <string name="search_finder_button">Ieškokite pagal ieškotojo vardą</string>
-    <string name="search_filter_button">Ieškoti pagal filtrą</string>
     <string name="search_filter_info_message" formatted="false">**Ieškoti pagal filtrą** ieško visų aktyvių internetinių paslaugų (pvz., geocaching.com) slėptuvių, naudodama pateiktą filtrą. Tačiau šių paslaugų paieškos galimybės paprastai yra labiau ribotos nei c:geo filtrų galimybės.\n\n- Visos paslaugos palaiko tik filtrus IR (jokių ARBA filtrų ir jokios filtro inversijos).\n- Paprastesni filtrai, pvz., ** slėptuvės tipą** arba **slėptuvės dydį** palaiko visos paslaugos. Sudėtingesni filtrai dažnai nepalaikomi arba turi tam tikrų apribojimų, pvz. **mėgstamiausi** arba **paslėpimo data**.\n- Išsamų kiekvienos paslaugos palaikomų filtrų sąrašą rasite [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltrus, kurių nepalaiko internetinė paslauga, c:geo taikys gautuose rezultatuose.</string>
     <string name="search_tb">Keliauninkas</string>
-    <string name="search_tb_hint">Keliauninko identifikavimas</string>
-    <string name="search_tb_button">Ieškoti keliauninko</string>
     <string name="search_destination">Atidaryti tikslą su c:geo</string>
     <string name="add_target_to">Pridėti tikslą į</string>
     <string name="search_address_started">Ieškoma vietų</string>
@@ -1850,7 +1838,6 @@
     <string name="attribute_stealth_no">Nereikalingas slaptumas</string>
     <string name="attribute_firstaid_yes">Reikalingas remontas</string>
     <string name="attribute_cow_yes">Saugotis gyvulių</string>
-    <string name="attribute_cow_no">Gyvulių nėra</string>
     <string name="attribute_field_puzzle_yes">Lauko galvosūkis</string>
     <string name="attribute_field_puzzle_no">Nelauko galvosūkis</string>
     <string name="attribute_nightcache_yes">Naktinė slėptuvė</string>
@@ -1883,7 +1870,6 @@
     <string name="attribute_scuba_yes">Reikalinga nardymo įranga</string>
     <string name="attribute_flashlight_yes">Reikalingas žibintuvėlis</string>
     <string name="attribute_uv_yes">Reikalinga UV šviesa</string>
-    <string name="attribute_uv_no">UV šviesa nereikalinga</string>
     <string name="attribute_snowshoes_yes">Reikalingi sniegbačiai</string>
     <string name="attribute_skiis_yes">Reikalingos lygumų slidės</string>
     <string name="attribute_s_tool_yes">Reikalingi specialūs įrankiai</string>
@@ -2249,8 +2235,6 @@
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="routes_tracks_color">Pasirinkite spalvą</string>
-    <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
-    <string name="route">Maršrutas</string>
     <string name="track">Pėdsakas</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
