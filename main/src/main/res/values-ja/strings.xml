@@ -1373,25 +1373,13 @@
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
     <string name="search_coordinates">座標</string>
-    <string name="search_coordinates_button">座標で検索</string>
     <string name="search_address">住所</string>
-    <string name="search_address_button">住所で検索</string>
     <string name="search_geo">GCコード</string>
-    <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
     <string name="search_kw">キーワード</string>
-    <string name="search_kw_prefill">キーワード</string>
-    <string name="search_kw_button">キーワードで検索</string>
     <string name="search_hbu">設置したオーナー名</string>
-    <string name="search_hbu_prefill">オーナー名</string>
-    <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_finder">発見したユーザー名</string>
-    <string name="search_finder_prefill">ユーザー名</string>
-    <string name="search_finder_button">発見したユーザー名で検索</string>
-    <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
-    <string name="search_tb_hint">トラッカブルコード</string>
-    <string name="search_tb_button">トラッカブルを検索</string>
     <string name="search_destination">c:geo</string>
     <string name="search_address_started">所在地を検索中</string>
     <string name="search_address_result">検索結果:所在地</string>
@@ -1544,7 +1532,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_stealth_no">隠密行動必要ではない</string>
     <string name="attribute_firstaid_yes">要メンテナンス</string>
     <string name="attribute_cow_yes">家畜注意</string>
-    <string name="attribute_cow_no">家畜はいません</string>
     <string name="attribute_field_puzzle_yes">フィールド・パズル</string>
     <string name="attribute_field_puzzle_no">フィールド・パズルはない</string>
     <string name="attribute_nightcache_yes">ナイト・キャッシュ</string>
@@ -1577,7 +1564,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_scuba_yes">潜水用具必須</string>
     <string name="attribute_flashlight_yes">懐中電灯必須</string>
     <string name="attribute_uv_yes">紫外線(ブラックライト)必須</string>
-    <string name="attribute_uv_no">紫外線(ブラックライト)必須ではない</string>
     <string name="attribute_snowshoes_yes">カンジキ必須</string>
     <string name="attribute_skiis_yes">クロスカントリー・スキー必須</string>
     <string name="attribute_s_tool_yes">特別な道具が必要</string>
@@ -1883,8 +1869,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
     <string name="routes_tracks_menu">ルート/トラック</string>
-    <string name="unload_route_track">ルート/トラックを削除</string>
-    <string name="route">ルート</string>
     <string name="track">トラック</string>
     <!-- distance units -->
     <!-- switch settings -->
