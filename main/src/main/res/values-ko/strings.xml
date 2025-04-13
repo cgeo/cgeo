@@ -1722,27 +1722,15 @@
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
     <string name="search_bar_hint_settings">설정 검색</string>
     <string name="search_coordinates">좌표</string>
-    <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
-    <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
-    <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
-    <string name="search_kw_prefill">키워드</string>
-    <string name="search_kw_button">키워드로 검색</string>
     <string name="search_kw_disabled_hint">기본 회원의 경우 geocaching.com에서 지원하지 않으므로 사용할 수 없음</string>
     <string name="search_hbu">숨겨진 사용자</string>
-    <string name="search_hbu_prefill">소유주</string>
-    <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_finder">찾은 사용자</string>
-    <string name="search_finder_prefill">찾은 사용자</string>
-    <string name="search_finder_button">찾은 사용자명으로 검색</string>
     <string name="search_filter">필터</string>
-    <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
-    <string name="search_tb_hint">추적 코드</string>
-    <string name="search_tb_button">추적아이템 검색</string>
     <string name="search_destination">c:geo에서 대상 열기</string>
     <string name="add_target_to">대상 추가</string>
     <string name="search_address_started">장소 검색 중</string>
@@ -1897,7 +1885,6 @@
     <string name="attribute_stealth_no">은밀함이 필요 없음</string>
     <string name="attribute_firstaid_yes">유지보수가 필요함</string>
     <string name="attribute_cow_yes">가축 조심</string>
-    <string name="attribute_cow_no">가축 없음</string>
     <string name="attribute_field_puzzle_yes">현장 퍼즐</string>
     <string name="attribute_field_puzzle_no">현장 퍼즐 없음</string>
     <string name="attribute_nightcache_yes">야간 캐시</string>
@@ -1930,7 +1917,6 @@
     <string name="attribute_scuba_yes">스쿠버 장비 필요</string>
     <string name="attribute_flashlight_yes">플래시 필요</string>
     <string name="attribute_uv_yes">UV 라이트 필요</string>
-    <string name="attribute_uv_no">UV 라이트 필요없음</string>
     <string name="attribute_snowshoes_yes">설상화 필요</string>
     <string name="attribute_skiis_yes">크로스컨트리 스키 필요</string>
     <string name="attribute_s_tool_yes">특별한 도구가 필요함</string>
@@ -2278,8 +2264,6 @@
     <string name="routes_tracks_color">색상 선택</string>
     <string name="routes_tracks_change_name">이름 변경</string>
     <string name="center">중앙</string>
-    <string name="unload_route_track">경로/트랙 내리기</string>
-    <string name="route">경로</string>
     <string name="track">트랙</string>
     <string name="make_visible">보이게 함</string>
     <string name="hide">숨기기</string>
