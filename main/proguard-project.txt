@@ -18,7 +18,6 @@
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
 # action providers are only referenced from XML
--keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
 
