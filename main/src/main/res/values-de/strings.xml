@@ -1822,8 +1822,8 @@
     <string name="search_geo">Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
     <string name="search_kw">Stichwort</string>
-    <string name="search_kw_prefill">Stichwörter</string>
-    <string name="search_kw_button">Suche nach Stichwörtern</string>
+    <string name="search_kw_prefill">Stichwort</string>
+    <string name="search_kw_button">Stichwortsuche</string>
     <string name="search_kw_disabled_hint">Deaktiviert, da von geocaching.com nicht für Basismitglieder unterstützt</string>
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
