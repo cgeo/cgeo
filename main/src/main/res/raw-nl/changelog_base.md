@@ -35,3 +35,5 @@
 - Oplossing: Lab caches uitgesloten door D/T filter zelfs met actieve "inclusief onzeker"
 - Nieuw: Voeg "Verwijder voorgaande gebeurtenissen" toe om "Alle" te tonen
 - Nieuw: Toon connector voor "user-defined caches" als actief in bronfilter
+- Nieuw: GPX export: export logs/trackables optioneel gemaakt
+- Oplossing: Sorteren van cachelijsten op afstand aflopend werken niet correct
