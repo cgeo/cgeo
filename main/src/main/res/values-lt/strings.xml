@@ -428,7 +428,6 @@
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
-    <string name="caches_show_attributes">Rodyti savybių apžvalgą</string>
     <string name="caches_set_cache_icon">Nustatykite slėptuvės piktogramą</string>
     <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
@@ -1578,7 +1577,6 @@
     <string name="calccoord_generate_title">Sugeneruokite kelio taškus</string>
     <string name="calccoord_generate_showonmap">Rodyti žemėlapyje</string>
     <string name="calccoord_generate_waypointnameprefix">Sugeneruoti</string>
-    <string name="calccoord_generate_error_novarwithrange">Nerasta tinkamų kintamųjų su diapazonais</string>
     <string name="calccoord_generate_error_novalidgeopoints">Joks derinys nepateikė galiojančių koordinačių</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinatės nepasirinktos</string>
     <string name="calccoord_migrate_title">Kelio taško perkėlimas</string>
