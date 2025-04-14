@@ -393,7 +393,6 @@
     <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
-    <string name="caches_show_attributes">Vis oversikt over attributter</string>
     <string name="caches_set_cache_icon">Angi cacheikon</string>
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikon</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
