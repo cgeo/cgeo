@@ -35,3 +35,5 @@
 - Korrektur: Lab-Caches durch D/T-Filter selbst bei "Caches ohne D/T einbeziehen" ausgeschlossen
 - Neu: "Vergangene Events löschen" in Liste "alle"
 - Neu: Konnektor für "benutzerdefinierte Caches" als aktiv im "Herkunft"-Filter anzeigen
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
