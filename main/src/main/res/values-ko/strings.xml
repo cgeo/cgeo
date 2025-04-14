@@ -441,7 +441,6 @@
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
-    <string name="caches_show_attributes">속성 개요 표시</string>
     <string name="caches_set_cache_icon">캐시 아이콘 설정</string>
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
@@ -1610,7 +1609,6 @@
     <string name="calccoord_generate_title">지점 생성</string>
     <string name="calccoord_generate_showonmap">지도에 표시</string>
     <string name="calccoord_generate_waypointnameprefix">생성됨</string>
-    <string name="calccoord_generate_error_novarwithrange">범위가 있는 유효한 변수가 없습니다.</string>
     <string name="calccoord_generate_error_novalidgeopoints">유효한 좌표를 반환한 조합이 없습니다.</string>
     <string name="calccoord_generate_error_nogeopointselected">선택한 좌표 없음</string>
     <string name="calccoord_migrate_title">지점 이전</string>
