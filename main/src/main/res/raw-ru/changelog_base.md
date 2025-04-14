@@ -35,3 +35,5 @@
 - Исправлено: Тайники Adv Lab (Лаборатории Приключений) исключались фильтром D/T даже при активном "включать неопределенные"
 - New: Add "Remove past events" to list "all"
 - New: Show connector for "user-defined caches" as active in source filter
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
