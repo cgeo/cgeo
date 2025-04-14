@@ -384,7 +384,6 @@
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
     <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
-    <string name="caches_show_attributes">Mostrar resumen de atributos</string>
     <string name="caches_set_cache_icon">Establecer icono del caché</string>
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
@@ -1316,7 +1315,6 @@
     <string name="calccoord_generate_title">Generar Waypoints</string>
     <string name="calccoord_generate_showonmap">Mostrar en el mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generado</string>
-    <string name="calccoord_generate_error_novarwithrange">No se encontró ninguna variable válida con rangos</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ninguna combinación devuelve coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">No hay Coordenadas seleccionadas</string>
     <string name="calccoord_migrate_title">Migración de Waypoint</string>
