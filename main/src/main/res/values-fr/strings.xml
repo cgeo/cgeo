@@ -448,7 +448,6 @@
     <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
     <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
     <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
-    <string name="caches_show_attributes">Afficher la liste des attributs</string>
     <string name="caches_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="caches_reset_cache_icons_title">Réinitialiser l\'icône de la cache</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
@@ -1638,7 +1637,6 @@
     <string name="calccoord_generate_title">Générer des Waypoints</string>
     <string name="calccoord_generate_showonmap">Afficher sur la carte</string>
     <string name="calccoord_generate_waypointnameprefix">Généré</string>
-    <string name="calccoord_generate_error_novarwithrange">Pas de variable valide correspondant avec les plages définies</string>
     <string name="calccoord_generate_error_novalidgeopoints">Aucune combinaison n\'a retourné de coordonnées valides</string>
     <string name="calccoord_generate_error_nogeopointselected">Aucune coordonnées sélectionnées</string>
     <string name="calccoord_migrate_title">Migration de Waypoint</string>
