@@ -408,7 +408,6 @@
     <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
-    <string name="caches_show_attributes">Zobraziť prehľad atribútov</string>
     <string name="caches_set_cache_icon">Nastaviť ikonu kešky</string>
     <string name="caches_reset_cache_icons_title">Obnoviť ikonu kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
@@ -1487,7 +1486,6 @@
     <string name="calccoord_generate_title">Generovať body trasy</string>
     <string name="calccoord_generate_showonmap">Zobraziť na mape</string>
     <string name="calccoord_generate_waypointnameprefix">Vygenerované</string>
-    <string name="calccoord_generate_error_novarwithrange">Nenašla sa žiadna platná premenná s rozsahmi</string>
     <string name="calccoord_generate_error_novalidgeopoints">Žiadna kombinácia neviedla k platným súradniciam</string>
     <string name="calccoord_generate_error_nogeopointselected">Nie sú zvolené žiadne súradnice</string>
     <string name="calccoord_migrate_title">Prenos bodu trasy</string>
