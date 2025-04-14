@@ -35,3 +35,5 @@
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
 - New: Add "Remove past events" to list "all"
 - New: Show connector for "user-defined caches" as active in source filter
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
