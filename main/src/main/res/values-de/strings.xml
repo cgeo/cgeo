@@ -461,7 +461,6 @@
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_overwrite_offline_log">Offline-Log überschreiben</string>
     <string name="caches_overwrite_offline_log_question">Vorhandenes Offline-Log vom Typ \"%1$s\" mit seinem Logtext überschreiben?</string>
-    <string name="caches_show_attributes">Attributübersicht anzeigen</string>
     <string name="caches_set_cache_icon">Cache-Symbol wählen</string>
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
@@ -1720,7 +1719,6 @@
     <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
     <string name="calccoord_generate_waypointnameprefix">Erzeugt</string>
-    <string name="calccoord_generate_error_novarwithrange">Keine gültige Variable mit Bereichsdefinition gefunden</string>
     <string name="calccoord_generate_error_novalidgeopoints">Keine Kombination ergab gültige Koordinaten</string>
     <string name="calccoord_generate_error_nogeopointselected">Keine Koordinate ausgewählt</string>
     <string name="calccoord_migrate_title">Wegpunkt-Migration</string>
