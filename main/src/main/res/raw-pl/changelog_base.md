@@ -35,3 +35,5 @@
 - Naprawiono: Skrytki lab były wyłączone przez filtr D/T nawet z aktywnym „dołącz niepewność”
 - Nowość: Dodaj „Usuń przeszłe wydarzenia” do listy „wszystkie”
 - Nowość: Pokaż konektor dla „skrytek zdefiniowanych przez użytkownika” jako aktywny w filtrze źródłeł
+- Nowość: Eksport GPX: eksport dzienników / przedmiotów podróżnych jest teraz opcjonalny
+- Naprawiono: Sortowanie list skrytek według odległości malejąco nie działało poprawnie
