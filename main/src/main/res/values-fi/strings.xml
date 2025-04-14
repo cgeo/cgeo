@@ -443,7 +443,6 @@
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
-    <string name="caches_show_attributes">Näytä attribuuttien yleisnäkymä</string>
     <string name="caches_set_cache_icon">Aseta kätkökuvake</string>
     <string name="caches_reset_cache_icons_title">Nollaa kätkökuvake</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
@@ -1578,7 +1577,6 @@
     <string name="calccoord_generate_title">Luo reittipisteet</string>
     <string name="calccoord_generate_showonmap">Näytä kartalla</string>
     <string name="calccoord_generate_waypointnameprefix">Luotu</string>
-    <string name="calccoord_generate_error_novarwithrange">Kelvollisia muuttujia väleillä ei löytynyt</string>
     <string name="calccoord_generate_error_novalidgeopoints">Mikään yhdistelmä ei palauttanut kelvollisia koordinaatteja</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinaatteja ei ole valittu</string>
     <string name="calccoord_migrate_title">Reittipisteen siirto</string>
