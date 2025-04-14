@@ -485,7 +485,6 @@
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
     <string name="caches_overwrite_offline_log">Перезаписать офлайновую запись</string>
     <string name="caches_overwrite_offline_log_question">В тайнике есть офлайн запись типа \"%1$s\" с текстом. Вы хотите перезаписать эту запись?</string>
-    <string name="caches_show_attributes">Показать атрибуты</string>
     <string name="caches_set_cache_icon">Установить иконку тайника</string>
     <string name="caches_reset_cache_icons_title">Сбросить иконку тайника</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
@@ -1772,7 +1771,6 @@
     <string name="calccoord_generate_title">Создать путевые точки</string>
     <string name="calccoord_generate_showonmap">Показать на карте</string>
     <string name="calccoord_generate_waypointnameprefix">Создано</string>
-    <string name="calccoord_generate_error_novarwithrange">Не найдена допустимая переменная с диапазонами</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ни одна комбинация не вернула корректные координаты</string>
     <string name="calccoord_generate_error_nogeopointselected">Координаты не выбраны</string>
     <string name="calccoord_migrate_title">Миграция путевых точек</string>
