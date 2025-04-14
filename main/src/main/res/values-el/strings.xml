@@ -380,7 +380,6 @@
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
-    <string name="caches_show_attributes">Εμφάνιση επισκόπησης ιδιοτήτων</string>
     <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίου κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
@@ -1386,7 +1385,6 @@
     <string name="calccoord_generate_title">Δημιουργία Σημείων Πορείας</string>
     <string name="calccoord_generate_showonmap">Εμφάνιση στο χάρτη</string>
     <string name="calccoord_generate_waypointnameprefix">Δημιουργήθηκε</string>
-    <string name="calccoord_generate_error_novarwithrange">Δεν βρέθηκε έγκυρη μεταβλητή με εύρη</string>
     <string name="calccoord_generate_error_novalidgeopoints">Κανένας συνδυασμός δεν επέστρεψε έγκυρες συντεταγμένες</string>
     <string name="calccoord_generate_error_nogeopointselected">Δεν επιλέχθηκε συντεταγμένη</string>
     <string name="calccoord_migrate_title">Σύνθεση σημείων διαδρομής</string>
