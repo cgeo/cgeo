@@ -481,7 +481,6 @@
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
     <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
-    <string name="caches_show_attributes">Visa attributöversikt</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
@@ -1737,7 +1736,6 @@
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
     <string name="calccoord_generate_waypointnameprefix">genererad</string>
-    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
     <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
     <string name="calccoord_migrate_title">Migrera waypoints</string>
