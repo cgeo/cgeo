@@ -460,12 +460,16 @@
     <string name="caches_remove_selected">Usuń wybrane z listy</string>
     <string name="caches_remove_all_completely">Usuń wszystkie z urządzenia</string>
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
+    <string name="caches_remove_from_other_lists_selected">Usuń wybrane z innych list</string>
+    <string name="caches_remove_from_other_lists_all">Usuń wszystkie z innych list</string>
     <string name="caches_append_to_route_selected">Dołącz wybrane do indywidualnej trasy</string>
     <string name="caches_append_to_route_all">Dołącz wszystkie do indywidualnej trasy</string>
     <string name="caches_appended_to_route">Skrytki dołączone do trasy</string>
     <string name="waypoints_appended_to_route">Punkty nawigacji dołączone do trasy</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
+    <string name="caches_upload_bookmarklist_all">Dodaj wszystkie do listy zakładek</string>
+    <string name="caches_upload_bookmarklist_selected">Dodaj wybrane do listy zakładek</string>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać zmodyfikowane współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
@@ -487,8 +491,11 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_overwrite_offline_log">Nadpisz dziennik offline</string>
     <string name="caches_overwrite_offline_log_question">Skrytka ma istniejący dziennik offline typu \"%1$s\" z wpisem. Czy chcesz nadpisać ten wpis?</string>
-    <string name="caches_show_attributes">Pokaż przegląd atrybutów</string>
+    <string name="caches_show_attributes_all">Pokaż przegląd atrybutów dla wszystkich skrytek</string>
+    <string name="caches_show_attributes_selected">Pokaż przegląd atrybutów dla wybranych skrytek</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
+    <string name="caches_set_cache_icon_all">Ustaw ikonę slrytki dla wszystkich skrytek</string>
+    <string name="caches_set_cache_icon_selected">Ustaw ikonę skrytki dla wybranych skrytek</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
@@ -1127,6 +1134,8 @@
     <string name="init_accuracycirclecolor">Kolor linii okręgu dokładności</string>
     <string name="init_accuracycirclecolor_summary">Wybierz kolor i poziom przezroczystości dla linii okręgu dokładności. Okręg dokładności jest używany jako wizualna reprezentacja dokładności sygnału lokalizacji.</string>
     <string name="init_include_found_status">Uwzględnij status „Znalezione”</string>
+    <string name="init_include_logs">Dołącz dzienniki</string>
+    <string name="init_include_travelbugs">Dołącz przedmioty podróżne</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
@@ -1776,7 +1785,7 @@
     <string name="calccoord_generate_title">Wygeneruj punkty nawigacji</string>
     <string name="calccoord_generate_showonmap">Pokaż na mapie</string>
     <string name="calccoord_generate_waypointnameprefix">Wygenerowane</string>
-    <string name="calccoord_generate_error_novarwithrange">Nie znaleziono poprawnej zmiennej z zakresami</string>
+    <string name="calccoord_generate_error_novarwithrange">Nie znaleziono prawidłowej zmiennej z zakresami (np. [:0-9] lub [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Żadna kombinacja nie zwróciła prawidłowych współrzędnych</string>
     <string name="calccoord_generate_error_nogeopointselected">Nie wybrano współrzędnych</string>
     <string name="calccoord_migrate_title">Migracja punktu nawigacji</string>
