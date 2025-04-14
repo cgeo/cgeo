@@ -456,12 +456,16 @@
     <string name="caches_remove_selected">Verwijder geselecteerden</string>
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
+    <string name="caches_remove_from_other_lists_selected">Selectie uit andere lijsten verwijderen</string>
+    <string name="caches_remove_from_other_lists_all">Verwijder alle uit andere lijsten</string>
     <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
     <string name="caches_append_to_route_all">Voeg alle geselecteerden aan individuele route toe</string>
     <string name="caches_appended_to_route">Caches toegevoegd aan route</string>
     <string name="waypoints_appended_to_route">Waypoints toegevoegd aan route</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
+    <string name="caches_upload_bookmarklist_all">Alles aan bladwijzerlijst toevoegen</string>
+    <string name="caches_upload_bookmarklist_selected">Selectie aan bladwijzerlijst toevoegen</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -483,8 +487,11 @@
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
     <string name="caches_overwrite_offline_log">Offline log overschrijven</string>
     <string name="caches_overwrite_offline_log_question">Cache heeft een offline log van type \"%1$s\" met een logtekst. Wil je deze log overschrijven?</string>
-    <string name="caches_show_attributes">Toon attribuut overzicht</string>
+    <string name="caches_show_attributes_all">Toon attribuut overzicht voor alle caches</string>
+    <string name="caches_show_attributes_selected">Toon attribuut overzicht voor geselecteerde caches</string>
     <string name="caches_set_cache_icon">Cache pictogram instellen</string>
+    <string name="caches_set_cache_icon_all">Cache pictogram instellen voor alle caches</string>
+    <string name="caches_set_cache_icon_selected">Cache pictogram instellen voor geselecteerde caches</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
@@ -1115,6 +1122,8 @@
     <string name="init_accuracycirclecolor">Nauwkeurigheidscirkel lijnkleur</string>
     <string name="init_accuracycirclecolor_summary">Selecteer kleur en doorzichtigheid voor nauwkeurigheidscirkellijn. Nauwkeurigheidscirkel wordt gebruikt als visuele representatie voor de nauwkeurigheid van locatiesignaal.</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
+    <string name="init_include_logs">Logs toevoegen</string>
+    <string name="init_include_travelbugs">Inclusief TravelBugs</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
     <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
     <string name="init_sigautoinsert">Voeg automatisch toe</string>
@@ -1746,7 +1755,7 @@
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
     <string name="calccoord_generate_waypointnameprefix">Gegenereerd</string>
-    <string name="calccoord_generate_error_novarwithrange">Geen geldige variabele met bereik gevonden</string>
+    <string name="calccoord_generate_error_novarwithrange">Geen geldige variabele gevonden met bereik (bijv. [:0-9] of [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Geen combinatie gaf geldige coördinaten terug</string>
     <string name="calccoord_generate_error_nogeopointselected">Geen Coördinaat geselecteerd</string>
     <string name="calccoord_migrate_title">Waypoint Migratie</string>
