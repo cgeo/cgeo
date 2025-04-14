@@ -378,7 +378,6 @@
     <string name="caches_clear_offlinelogs">すべてのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
-    <string name="caches_show_attributes">キャッシュ属性の概要</string>
     <string name="caches_set_cache_icon">キャッシュアイコン設定</string>
     <string name="caches_reset_cache_icons_title">キャッシュアイコンをリセット</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
