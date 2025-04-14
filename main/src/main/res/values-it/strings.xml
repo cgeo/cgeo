@@ -483,7 +483,6 @@
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
     <string name="caches_overwrite_offline_log">Sovrascrivi log offline</string>
     <string name="caches_overwrite_offline_log_question">Il cache ha già un log offline di tipo \"%1$s\" con un testo. Vuoi sovrascrivere questo log?</string>
-    <string name="caches_show_attributes">Mostra la panoramica degli attributi</string>
     <string name="caches_set_cache_icon">Imposta icona cache</string>
     <string name="caches_reset_cache_icons_title">Reimposta icona cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
@@ -1746,7 +1745,6 @@
     <string name="calccoord_generate_title">Genera Waypoint</string>
     <string name="calccoord_generate_showonmap">Mostra sulla Mappa</string>
     <string name="calccoord_generate_waypointnameprefix">Generato</string>
-    <string name="calccoord_generate_error_novarwithrange">Nessuna variabile valida con gli intervalli trovati</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nessuna combinazione restituisce coordinate valide</string>
     <string name="calccoord_generate_error_nogeopointselected">Nessuna coordinata selezionata</string>
     <string name="calccoord_migrate_title">Migrazione Waypoint</string>
