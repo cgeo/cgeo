@@ -458,7 +458,6 @@
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_overwrite_offline_log">Sobrescrever o registo offline</string>
     <string name="caches_overwrite_offline_log_question">A cache possui registo offline do tipo \"%1$s\" com um texto de registo. Deseja substituir este registo?</string>
-    <string name="caches_show_attributes">Mostrar visão geral de atributos</string>
     <string name="caches_set_cache_icon">Definir ícone da cache</string>
     <string name="caches_reset_cache_icons_title">Repor ícone da cache</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
@@ -1713,7 +1712,6 @@
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
     <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Gerada</string>
-    <string name="calccoord_generate_error_novarwithrange">Não foi encontrada qualquer variável válida, com o intervalo definido</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nenhuma combinação devolveu coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">Nenhuma coordenada seleccionada</string>
     <string name="calccoord_migrate_title">Migração de Pontos Adicionais</string>
