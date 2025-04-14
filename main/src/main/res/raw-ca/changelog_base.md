@@ -35,3 +35,5 @@
 - Correcció: El catxés Lab excloses pel filtre D/T fins i tot amb "inclou incert" actiu
 - Nou: afegiu "Elimina els esdeveniments passats" per llistar "tots"
 - Novetat: mostra el connector pels "Catxés definits per l'usuari" com a actiu al filtre font
+- Novetat: exportació GPX: exportació de registres / rastrejables es fa opcional
+- Correcció: l'ordenació de les llistes de catxés per distància descendent no funciona correctament
