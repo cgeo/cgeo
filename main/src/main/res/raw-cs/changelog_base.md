@@ -35,3 +35,5 @@
 - Oprava: Lab kešky vyloučené O/T filtrem i s aktivním "zahrnout nejisté"
 - Novinka: Přidat "Odstranit minulé události" do seznamu "Vše"
 - Novinka: Zobrazit konektor pro "uživatelem definované kešky" jako aktivní ve zdrojovém filtru
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
