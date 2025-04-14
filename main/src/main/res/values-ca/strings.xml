@@ -457,12 +457,16 @@
     <string name="caches_remove_selected">Elimina els seleccionats de la llista</string>
     <string name="caches_remove_all_completely">Elimina tot del dispositiu</string>
     <string name="caches_remove_selected_completely">Esborra la selecció del dispositiu</string>
+    <string name="caches_remove_from_other_lists_selected">Elimina els seleccionats d\'altres llistes</string>
+    <string name="caches_remove_from_other_lists_all">Suprimeix-ho tot de les altres llistes</string>
     <string name="caches_append_to_route_selected">Afegeix la selecció triada a la ruta individual</string>
     <string name="caches_append_to_route_all">Afegiu-ho tot a la ruta individual</string>
     <string name="caches_appended_to_route">S\'han adjuntat catxés a la ruta</string>
     <string name="waypoints_appended_to_route">Waypoints afegits a la ruta</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
     <string name="caches_upload_bookmarklist">Afegeix a la llista de marcadors</string>
+    <string name="caches_upload_bookmarklist_all">Afegeix-ho tot a la llista d\'adreces d\'interès</string>
+    <string name="caches_upload_bookmarklist_selected">Afegeix els seleccionats a la llista d\'adreces d\'interès</string>
     <string name="caches_upload_modifiedcoords">Coordenades modificades</string>
     <string name="caches_upload_modifiedcoords_warning">Vols modificar les coordenades de tots els catxés seleccionats i sobreescriure les existents al servidor? No podràs desfer-ho.</string>
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
@@ -484,8 +488,11 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
     <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
-    <string name="caches_show_attributes">Mostra la visió general d\'atributs</string>
+    <string name="caches_show_attributes_all">Mostra la visió general d\'atributs per a tots els catxés</string>
+    <string name="caches_show_attributes_selected">Mostra la visió general d\'atributs per els catxés seleccionats</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
+    <string name="caches_set_cache_icon_all">Estableix la icona de catxé per a tots els catxés</string>
+    <string name="caches_set_cache_icon_selected">Estableix la icona de catxé per els catxés seleccionats</string>
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
@@ -1116,6 +1123,8 @@
     <string name="init_accuracycirclecolor">Color línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
+    <string name="init_include_logs">Inclou registres</string>
+    <string name="init_include_travelbugs">Inclou Travel Bugs</string>
     <string name="init_trackautovisit">Visita TBs</string>
     <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
     <string name="init_sigautoinsert">Insereix automàticament</string>
@@ -1747,7 +1756,7 @@
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
-    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals</string>
+    <string name="calccoord_generate_error_novarwithrange">Cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
