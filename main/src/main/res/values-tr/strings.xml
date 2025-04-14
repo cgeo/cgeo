@@ -401,7 +401,6 @@
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
-    <string name="caches_show_attributes">Özellikleri göster</string>
     <string name="caches_set_cache_icon">Geocache simgesi seç</string>
     <string name="caches_reset_cache_icons_title">Cache simgesini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
