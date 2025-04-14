@@ -1924,6 +1924,7 @@
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
 
     <!-- Projection -->
     <string name="projection_type_none">No projection</string>
@@ -2950,7 +2951,7 @@
     <string name="wherigo_controls_stopgame_hint">Stop a runninggame</string>
     <string name="wherigo_controls_mapzones_hint">Show zones of a running game on map</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download a cartridge (cguid needed)</string>
-    <string name="wherigo_controls_reportproblem_hint">Report a problem with the wherigo player</string>
+    <string name="wherigo_controls_reportproblem_hint">Show last Wherigo problem</string>
     <string name="wherigo_controls_cache_context">Cache Context</string>
     <string name="wherigo_controls_cache_link">Go to cache details</string>
 
@@ -3003,7 +3004,6 @@
     <string name="wherigo_error_title">Wherigo Problem report</string>
     <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
     <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Use \'Send by email\' to report a wherigo related problem to our support team.</string>
     <string name="wherigo_error_email">Wherigo Problem report\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine reported an error. Open bug dialog for details.</string>
 
@@ -3049,6 +3049,7 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="play">Play</string>
+    <string name="copy">Copy</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
