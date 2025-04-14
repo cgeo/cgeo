@@ -288,8 +288,8 @@ jobs:
         with:
           mode: lock
           key: unit-test
-          # Try to acquire a lock every 30 seconds until acquiring a lock or 30 minutes pass.
-          max_wait_seconds: "1800"
+          # Try to acquire a lock every 30 seconds until acquiring a lock or 2 hours pass.
+          max_wait_seconds: "7200"
           wait_interval_seconds: "30"
           post_unlock: "true"
 
