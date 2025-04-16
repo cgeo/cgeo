@@ -73,6 +73,14 @@
 # this does not exist on jdk6 and is only loaded dynamically by jackson if needed
 -dontwarn java.nio.file.Path*
 
+# suggestion at https://github.com/FasterXML/jackson-docs/wiki/JacksonOnAndroid#proguard
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class com.fasterxml.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepclassmembers class * {
+     @com.fasterxml.jackson.annotation.* *;
+}
+
 # Junit -------------------------------------------------------------------------------------------
 
 # the Junit 4 library used for local tests conflicts with the Android bundled Junit 3 library
