@@ -67,6 +67,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -1656,8 +1657,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private void updateWherigoBox(final CacheDetailActivity activity) {
             final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
             binding.wherigoBox.setVisibility(!wherigoGuis.isEmpty() ? View.VISIBLE : View.GONE);
-            binding.playInCgeo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
-                WherigoActivity.startForGuid(activity, guid, cache.getGeocode(), true)));
+            binding.wherigoText.setText(wherigoGuis.isEmpty() || Settings.hasGCCredentials() ? R.string.cache_wherigo_start : R.string.cache_wherigo_credentials);
+            binding.playInCgeo.setOnClickListener(v -> {
+                    if (Settings.hasGCCredentials()) {
+                        WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
+                                WherigoActivity.startForGuid(activity, guid, cache.getGeocode(), true));
+                    } else {
+                        SettingsActivity.openForScreen(R.string.preference_screen_gc, activity);
+                    }
+            });
         }
 
         private void updateChirpWolfBox(final CacheDetailActivity activity) {
