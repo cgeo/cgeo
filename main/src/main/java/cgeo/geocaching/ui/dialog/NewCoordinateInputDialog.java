@@ -175,8 +175,8 @@ public class NewCoordinateInputDialog {
         }
 
         // User copy/paste buttons
-        Button copyFromClipboard = binding.clipboard;
-        Button useCurrentLocation = binding.current;
+        final Button copyFromClipboard = binding.clipboard;
+        final Button useCurrentLocation = binding.current;
 
         copyFromClipboard.setOnClickListener(v -> {
             try {
