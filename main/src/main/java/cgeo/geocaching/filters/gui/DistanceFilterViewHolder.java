@@ -5,6 +5,7 @@ import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.IConversion;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
 import cgeo.geocaching.ui.TextParam;
@@ -28,18 +29,18 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
 
     private ContinuousRangeSlider slider;
     private CheckBox useCurrentPosition;
-    private Geopoint location = new Geopoint(33.3, -111.1); // DUMMY FOR TESTING
+    private Geopoint location;
     private Button setCoordsButton;
 
     @Override
     public View createView() {
-
 
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
         useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null);
         useCurrentPosition.setChecked(true);
+        location = LocationDataProvider.getInstance().currentGeo().getCoords();
 
         setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates));
         setCoordsButton.setLines(2);
