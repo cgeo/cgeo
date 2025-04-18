@@ -21,6 +21,7 @@
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
 - Änderung: Logdatum-bezogene Platzhalter verwenden gewähltes statt des aktuellen Datums
 - Neu: Lange Logeinträge standardmäßig verkürzt anzeigen
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
@@ -35,5 +36,8 @@
 - Korrektur: Lab-Caches durch D/T-Filter selbst bei "Caches ohne D/T einbeziehen" ausgeschlossen
 - Neu: "Vergangene Events löschen" in Liste "alle"
 - Neu: Konnektor für "benutzerdefinierte Caches" als aktiv im "Herkunft"-Filter anzeigen
-- New: GPX export: exporting logs / trackables made optional
-- Fix: Sorting of cache lists by distance descending not working correctly
+- Neu: GPX-Export: Exportieren von Logs / Trackables optional
+- Korrektur: Sortierung der Cachelisten nach Entfernung absteigend funktioniert nicht korrekt
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
