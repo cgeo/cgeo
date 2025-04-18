@@ -21,6 +21,7 @@
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
 - Canvi: els marcadors de posició relacionats amb la data de registre utilitzaran la data escollida en lloc de la data actual
 - Nou: redueix les entrades de registre llargues per defecte
+- New: Integrated Wherigo player checking for missing credentials
 
 ### General
 - Nou: pàgina de cerca redissenyada
@@ -37,3 +38,6 @@
 - Novetat: mostra el connector pels "Catxés definits per l'usuari" com a actiu al filtre font
 - Novetat: exportació GPX: exportació de registres / rastrejables es fa opcional
 - Correcció: l'ordenació de les llistes de catxés per distància descendent no funciona correctament
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
