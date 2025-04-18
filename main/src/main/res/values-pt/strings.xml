@@ -2580,7 +2580,6 @@
     <string name="wherigo_controls_stopgame_hint">Parar um jogo</string>
     <string name="wherigo_controls_mapzones_hint">Mostrar no mapa as zonas de um jogo em execução</string>
     <string name="wherigo_controls_downloadcartridge_hint">Transferir um cartucho (necessário CGUID)</string>
-    <string name="wherigo_controls_reportproblem_hint">Reportar um problema com o leitor de wherigo</string>
     <string name="wherigo_controls_cache_context">Contexto da Cache</string>
     <string name="wherigo_controls_cache_link">Ir para os detalhes da cache</string>
     <string name="wherigo_sound_title">Controlos de som</string>
@@ -2624,7 +2623,6 @@
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor Wherigo:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Utilize \'Enviar por e-mail\' para reportar um problema relacionado com o wherigo para a nossa equipa de apoio.</string>
     <string name="wherigo_error_email">Relatório de problema no Wherigo\n\nErro: %1$s\n\nInformação Wherigo: %2$s</string>
     <string name="wherigo_error_toast">O motor do Wherigo reportou um erro. Abra o diálogo de erros para ver os detalhes.</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
