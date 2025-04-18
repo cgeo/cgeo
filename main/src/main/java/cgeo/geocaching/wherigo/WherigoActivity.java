@@ -201,7 +201,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
         final Viewport viewport = WherigoUtils.getZonesViewport(zones);
         if (viewport != null && !viewport.isJustADot()) {
-            DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName());
+            DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
         }
     }
 

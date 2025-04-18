@@ -388,6 +388,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     mapFragment.setCenter(mapType.viewport.getCenter());
                     mapFragment.zoomToBounds(mapType.viewport);
                 }
+                if (!isTargetSet() && mapType.coords != null && mapType.viewport.contains(mapType.coords)) {
+                    onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(mapType.coords,
+                            StringUtils.isNotBlank(mapType.title) ? mapType.title : "---"));
+                }
                 break;
             case UMTT_TargetGeocode: // can be either a cache or a waypoint
                 // load cache/waypoint, focus map on it, and set it as target
@@ -1152,7 +1156,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             }
-            if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX)) {
+            if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX) && !isLongTap) {
                 result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())),
                         key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), // Zone name
                         WherigoGame.get().getCartridgeName(), // Wherigo

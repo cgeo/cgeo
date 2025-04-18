@@ -260,6 +260,13 @@ public final class WherigoUtils {
         return distance + " " + direction;
     }
 
+    public static Geopoint getNearestPointTo(final Zone zone) {
+        if (zone == null) {
+            return Geopoint.ZERO;
+        }
+        return zone.nearestPoint != null ? GP_CONVERTER.from(zone.nearestPoint) : getZoneCenter(zone);
+    }
+
     public static String getDisplayableDistanceTo(final Zone zone) {
         if (zone == null) {
             return "?";
@@ -268,7 +275,7 @@ public final class WherigoUtils {
             return LocalizationUtils.getString(R.string.wherigo_zone_inside);
         }
         if (zone.nearestPoint != null) {
-            final Geopoint current = new Geopoint(WherigoLocationProvider.get().getLatitude(), WherigoLocationProvider.get().getLongitude());
+            final Geopoint current = WherigoLocationProvider.get().getLocation();
             return getDisplayableDistance(current, GP_CONVERTER.from(zone.nearestPoint)) + (zone.contain == Zone.PROXIMITY ? " (" + LocalizationUtils.getString(R.string.wherigo_zone_near) + ")" : "");
         }
         final Geopoint center = getZoneCenter(zone);

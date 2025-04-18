@@ -1,11 +1,15 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,6 +33,8 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
+        COMPASS(TextParam.id(R.string.wherigo_zone_navigate_compass).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_compass))),
+        COPY_CENTER(TextParam.id(R.string.wherigo_zone_copy_coordinates).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_copy))),
         LOCATE_ON_CENTER(TextParam.id(R.string.wherigo_locate_on_center).setAllCaps(true).setImage(ImageParam.id(R.drawable.map_followmylocation_btn))),
         CLOSE(WherigoUtils.TP_CLOSE_BUTTON);
 
@@ -85,6 +91,8 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         }
         if (eventTable instanceof Zone) {
             actions.add(ThingAction.DISPLAY_ON_MAP);
+            actions.add(ThingAction.COMPASS);
+            actions.add(ThingAction.COPY_CENTER);
             if (WherigoGame.get().isDebugModeForCartridge()) {
                 actions.add(ThingAction.LOCATE_ON_CENTER);
             }
@@ -105,7 +113,15 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
                             control.dismiss();
-                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)), eventTable.name);
+                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
+                            break;
+                        case COMPASS:
+                            control.dismiss();
+                            CompassActivity.startActivityPoint(activity, WherigoUtils.getNearestPointTo((Zone) eventTable), eventTable.name);
+                            break;
+                        case COPY_CENTER:
+                            ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(WherigoUtils.getZoneCenter((Zone) eventTable).toString()));
+                            ViewUtils.showShortToast(activity, R.string.clipboard_copy_ok);
                             break;
                         case LOCATE_ON_CENTER:
                             control.dismiss();

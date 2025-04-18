@@ -153,7 +153,7 @@ public final class DefaultMap {
         }
     }
 
-    public static void startActivityWherigoMap(final Activity fromActivity, final Viewport viewport, final String mapTitle) {
+    public static void startActivityWherigoMap(final Activity fromActivity, final Viewport viewport, final String mapTitle, final Geopoint coords) {
         if (Settings.useLegacyMaps()) {
             final String unifiedMapCategory = LocalizationUtils.getString(R.string.category_unifiedMap);
             SimpleDialog.of(fromActivity)
@@ -163,6 +163,7 @@ public final class DefaultMap {
         } else {
             Log.d("Launching UnifiedMap in viewport mode, viewport=" + viewport + ")");
             final UnifiedMapType mapType = viewport == null ? new UnifiedMapType() : new UnifiedMapType(viewport, mapTitle);
+            mapType.coords = coords;
             mapType.launchMap(fromActivity);
         }
     }
