@@ -889,8 +889,7 @@
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
     <string name="search_address">Cím</string>
     <string name="search_address_button">Keresés címmel</string>
-    <string name="search_kw_prefill">Kulcsszó</string>
-    <string name="search_kw_button">Keresés kulcsszóval</string>
+    <string name="search_kw_button">Keresés kulcsszó alapján</string>
     <string name="search_hbu_prefill">Tulajdonos</string>
     <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
     <string name="search_tb">Utazó</string>

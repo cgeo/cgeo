@@ -1,4 +1,7 @@
 ##
+- Korrektur: Favoriten-Status geht verloren, wenn während der Erstellung eines Logs ein Bild ausgewählt wird
+
+##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
 - Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
 - Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)

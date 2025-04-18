@@ -889,7 +889,6 @@
     <string name="search_coordinates_button">Пошук за координатами</string>
     <string name="search_address">Адреса</string>
     <string name="search_address_button">Пошук адреси</string>
-    <string name="search_kw_prefill">Ключове слово</string>
     <string name="search_kw_button">пошук за ключовим словом</string>
     <string name="search_hbu">прихований</string>
     <string name="search_hbu_prefill">Власник</string>

@@ -659,9 +659,8 @@
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
     <string name="search_address">Naslov</string>
     <string name="search_address_button">Iskanje po naslovu</string>
-    <string name="search_kw_prefill">Ključna beseda</string>
-    <string name="search_kw_button">Iskanje po ključnih besedah</string>
-    <string name="search_hbu_prefill">Lastnik</string>
+    <string name="search_kw_button">Išči po ključnih besedah</string>
+    <string name="search_hbu_prefill">Uporabniško ime lastnika zaklada</string>
     <string name="search_hbu_button">Iskanje po imenu lastnika</string>
     <string name="search_tb">Sledljivčki</string>
     <string name="search_tb_hint">Koda sledljivčka</string>

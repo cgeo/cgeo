@@ -1820,11 +1820,10 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Suche nach Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
     <string name="search_kw">Stichwort</string>
-    <string name="search_kw_prefill">Stichwörter</string>
-    <string name="search_kw_button">Suche nach Stichwörtern</string>
+    <string name="search_kw_prefill">Stichwort</string>
+    <string name="search_kw_button">Stichwortsuche</string>
     <string name="search_kw_disabled_hint">Deaktiviert, da von geocaching.com nicht für Basismitglieder unterstützt</string>
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
@@ -2616,7 +2615,6 @@
     <string name="wherigo_dialog_pause_info">Dialog in Wherigo Player fortsetzen, indem Sie auf \"Fortsetzen\" tippen</string>
     <string name="wherigo_no_game_running">Es läuft momentan kein Wherigo Spiel</string>
     <string name="wherigo_currently_playing">Aktuelles Spiel</string>
-    <string name="wherigo_cartridge_details">Cartridge Details</string>
     <string name="wherigo_locate_on_center">Ins Zentrum positionieren</string>
     <string name="wherigo_revoke_fixed_location">Festen Standort widerrufen</string>
     <string name="wherigo_thingtype_location">Orte</string>

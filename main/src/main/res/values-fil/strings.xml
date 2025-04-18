@@ -689,8 +689,7 @@
     <string name="search_coordinates_button">Ang Magsaliksik sa pamamagitan ng mga Coordinate</string>
     <string name="search_address">Ang Address</string>
     <string name="search_address_button">Magsaliksik sa pamamagitan ng address</string>
-    <string name="search_kw_prefill">Ang Keyword</string>
-    <string name="search_kw_button">Ang Magsaliksik sa pamamagitan ng keyword</string>
+    <string name="search_kw_button">Maghilap ayon sa keyword</string>
     <string name="search_hbu_prefill">Ang May-ari</string>
     <string name="search_hbu_button">Magsaliksik ayon sa pangalan ng may-ari</string>
     <string name="search_tb">Ang Pagsusubaybay</string>

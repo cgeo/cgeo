@@ -685,8 +685,7 @@
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
     <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_kw_prefill">Kata kunci</string>
-    <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
+    <string name="search_kw_button">Cari dengan kata kunci</string>
     <string name="search_hbu_prefill">Pemilik</string>
     <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
     <string name="search_tb">Dilacak</string>

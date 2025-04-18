@@ -1849,11 +1849,10 @@
     <string name="search_address">Адрес</string>
     <string name="search_address_button">Поиск по адресу</string>
     <string name="search_geo">Код тайника</string>
-    <string name="search_geo_button">Поиск по коду</string>
     <string name="search_geocode_from_clipboard">Геокод был вставлен из буфера обмена.</string>
     <string name="search_kw">Ключевое слово</string>
     <string name="search_kw_prefill">Ключевое слово</string>
-    <string name="search_kw_button">Искать по ключевым словам</string>
+    <string name="search_kw_button">Поиск по ключевым словам</string>
     <string name="search_kw_disabled_hint">Отключено, так как это не поддерживается geocaching.com для базовых аккаунтов</string>
     <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
@@ -2675,7 +2674,6 @@
     <string name="wherigo_dialog_pause_info">Возобновить диалог в Wherigo Player, нажав «Возобновить приостановленный диалог»</string>
     <string name="wherigo_no_game_running">Игра wherigo в данный момент не запущена</string>
     <string name="wherigo_currently_playing">Идёт игра</string>
-    <string name="wherigo_cartridge_details">Детали картриджа</string>
     <string name="wherigo_locate_on_center">Расположение по центру</string>
     <string name="wherigo_revoke_fixed_location">Отменить фиксированное местоположение</string>
     <string name="wherigo_thingtype_location">Локации</string>
