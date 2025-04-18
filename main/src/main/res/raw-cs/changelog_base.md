@@ -21,6 +21,7 @@
 - Nový: Offline překlad textu a logů (experimentální)
 - Změna: zástupné symboly budou namísto aktuálního data používat zvolené datum
 - Novinka: Sbalení dloouhých logů je nyní ve výchozím nastavení
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
@@ -37,3 +38,6 @@
 - Novinka: Zobrazit konektor pro "uživatelem definované kešky" jako aktivní ve zdrojovém filtru
 - New: GPX export: exporting logs / trackables made optional
 - Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
