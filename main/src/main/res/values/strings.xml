@@ -2980,6 +2980,8 @@
     <string name="wherigo_author">Author</string>
     <string name="wherigo_zone_inside">inside</string>
     <string name="wherigo_zone_near">near</string>
+    <string name="wherigo_zone_navigate_compass">Compass to center</string>
+    <string name="wherigo_zone_copy_coordinates">Copy center coordinates</string>
 
     <string name="wherigo_choose_cartridge">Choose cartridge</string>
     <string name="wherigo_choose_new_loadgame">Choose new game or game to load</string>
