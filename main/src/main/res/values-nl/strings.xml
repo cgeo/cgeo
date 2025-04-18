@@ -2626,7 +2626,6 @@
     <string name="wherigo_controls_stopgame_hint">Stop een lopend spel</string>
     <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
-    <string name="wherigo_controls_reportproblem_hint">Meld een probleem met de wherigo speler</string>
     <string name="wherigo_controls_cache_context">Cache Context</string>
     <string name="wherigo_controls_cache_link">Ga naar de cache details</string>
     <string name="wherigo_sound_title">Volumeregeling</string>
@@ -2670,7 +2669,6 @@
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
     <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Gebruik \'Per e-mail verzenden\' om een probleem met betrekking tot de wherigo te melden aan ons supportteam.</string>
     <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
