@@ -21,6 +21,7 @@
 - New: Offline translation of listing text and logs (experimental)
 - Change: Log-date related placeholders will use chosen date instead of current date
 - New: Collapse long log entries per default
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Generelt
 - New: Redesigned search page
@@ -37,3 +38,6 @@
 - New: Show connector for "user-defined caches" as active in source filter
 - New: GPX export: exporting logs / trackables made optional
 - Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
