@@ -21,6 +21,7 @@
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
 - Zmiana: Teksty zastępcze związane z datą logowania będą używały wybranej daty zamiast bieżącej daty
 - Nowość: Domyślne zwijanie długich wpisów dziennika
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
@@ -37,3 +38,6 @@
 - Nowość: Pokaż konektor dla „skrytek zdefiniowanych przez użytkownika” jako aktywny w filtrze źródłeł
 - Nowość: Eksport GPX: eksport dzienników / przedmiotów podróżnych jest teraz opcjonalny
 - Naprawiono: Sortowanie list skrytek według odległości malejąco nie działało poprawnie
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
