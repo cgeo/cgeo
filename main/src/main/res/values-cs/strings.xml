@@ -2675,7 +2675,6 @@
     <string name="wherigo_controls_stopgame_hint">Zastavit spuštěnou hru</string>
     <string name="wherigo_controls_mapzones_hint">Zobrazit zóny spuštěné hry na mapě</string>
     <string name="wherigo_controls_downloadcartridge_hint">Stáhnout cartridge (je potřebný cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Nahlásit problém s Wherigo Player</string>
     <string name="wherigo_controls_cache_context">Kontext kešky</string>
     <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
     <string name="wherigo_sound_title">Ovládání zvuku</string>
@@ -2719,7 +2718,6 @@
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
     <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Enginem:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Chcete-li našemu týmu podpory nahlásit problém související s Wherigo, použijte možnost „Odeslat e-mailem“.</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
