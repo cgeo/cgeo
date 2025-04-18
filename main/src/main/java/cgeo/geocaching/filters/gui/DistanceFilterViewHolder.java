@@ -40,6 +40,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
 
         useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null);
         useCurrentPosition.setChecked(true);
+        useCurrentPosition.setOnClickListener(v -> toggleCurrent());
         location = LocationDataProvider.getInstance().currentGeo().getCoords();
 
         setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates));
@@ -47,6 +48,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         setCoordsButton.setSingleLine(false);
         setCoordsButton.setPadding(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
         setCoordsButton.setTextSize(16);
+        setCoordsButton.setEnabled(false);
         final ViewGroup.LayoutParams ll1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setCoordsButton.setLayoutParams(ll1);
         ViewUtils.setCoordinates(location, setCoordsButton);
@@ -78,7 +80,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         if (filter.getCoordinate() != null) {
             location = filter.getCoordinate();
         }
-
+        setCoordsButton.setEnabled(!filter.isUseCurrentPosition());
         ViewUtils.setCoordinates(location, setCoordsButton);
         slider.setRange(
                 filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
@@ -93,6 +95,16 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(range.left, range.right , 0f, (float) maxDistance, value -> (float) Math.round(value * conversion));
         return filter;
+    }
+
+    private void toggleCurrent() {
+        if (useCurrentPosition.isChecked()) {
+            location = LocationDataProvider.getInstance().currentGeo().getCoords();
+            ViewUtils.setCoordinates(location, setCoordsButton);
+            setCoordsButton.setEnabled(false);
+        } else {
+            setCoordsButton.setEnabled(true);
+        }
     }
 
     private void setCoordinates() {
