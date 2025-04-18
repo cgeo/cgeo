@@ -1,7 +1,9 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -44,8 +46,7 @@ public class NewCoordinateInputDialog {
     private EditText longitudeDegree, longitudeMinutes, longitudeSeconds, longitudeFraction;
     private EditText latitudeDegree, latitudeMinutes, latitudeSeconds, latitudeFraction;
     private List<EditText> orderedInputs;
-    private Button copyFromClipboard, useCurrentLocation;
-    private Geopoint gp;
+    private Geopoint gp, cacheCoords;
 
     public NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
 
@@ -59,9 +60,23 @@ public class NewCoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
+    // Will be used later by GeoKrety TB page
+    public void show(final Geopoint location, final Geocache cache) {
+
+        if (cache != null) {
+            cacheCoords = cache.getCoords();
+        }
+        show(location);
+    }
+
+    // Main entry point for distance filter and user defined cache coordinates
     public void show(final Geopoint location) {
 
-        gp = new Geopoint(location.getLatitude(), location.getLongitude());
+        if (location != null) {
+            gp = location;
+        } else {
+            gp = currentCoords();
+        }
 
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View theView = inflater.inflate(R.layout.new_coordinate_input_dialog, null);
@@ -72,8 +87,10 @@ public class NewCoordinateInputDialog {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
+        final NewCoordinateInputDialogBinding binding = NewCoordinateInputDialogBinding.bind(theView);
+
         // Show title and action buttons
-        final Toolbar toolbar = theView.findViewById(R.id.actionbar);
+        final Toolbar toolbar = binding.actionbar.toolbar;
         toolbar.setTitle(R.string.cache_coordinates);
         toolbar.inflateMenu(R.menu.menu_ok_cancel);
         toolbar.setOnMenuItemClickListener(item -> {
@@ -88,7 +105,7 @@ public class NewCoordinateInputDialog {
         });
 
         // Populate the spinner with options
-        spinner = theView.findViewById(R.id.dialogSpinner);
+        spinner = binding.dialogSpinner;
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.waypoint_coordinate_formats, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -109,24 +126,24 @@ public class NewCoordinateInputDialog {
         });
 
         // Populate the text fields
-        plainLatitude = theView.findViewById(R.id.latitude);
-        plainLongitude = theView.findViewById(R.id.longitude);
+        plainLatitude = binding.latitude;
+        plainLongitude = binding.longitude;
 
-        configurableLatitude = theView.findViewById(R.id.configurableLatitude);
-        configurableLongitude = theView.findViewById(R.id.configurableLongitude);
+        configurableLatitude = binding.configurableLatitude;
+        configurableLongitude = binding.configurableLongitude;
 
-        bLatitude = theView.findViewById(R.id.hemisphereLatitude);
-        bLongitude = theView.findViewById(R.id.hemisphereLongitude);
+        bLatitude = binding.hemisphereLatitude;
+        bLongitude = binding.hemisphereLongitude;
 
-        latitudeDegree = theView.findViewById(R.id.editTextLatDegrees);
-        latitudeMinutes = theView.findViewById(R.id.editTextLatMinutes);
-        latitudeSeconds = theView.findViewById(R.id.editTextLatSeconds);
-        latitudeFraction = theView.findViewById(R.id.editTextLatFraction);
+        latitudeDegree = binding.editTextLatDegrees;
+        latitudeMinutes = binding.editTextLatMinutes;
+        latitudeSeconds = binding.editTextLatSeconds;
+        latitudeFraction = binding.editTextLatFraction;
 
-        longitudeDegree = theView.findViewById(R.id.editTextLonDegrees);
-        longitudeMinutes = theView.findViewById(R.id.editTextLonMinutes);
-        longitudeSeconds = theView.findViewById(R.id.editTextLonSeconds);
-        longitudeFraction = theView.findViewById(R.id.editTextLonFraction);
+        longitudeDegree = binding.editTextLonDegrees;
+        longitudeMinutes = binding.editTextLonMinutes;
+        longitudeSeconds = binding.editTextLonSeconds;
+        longitudeFraction = binding.editTextLonFraction;
 
         // Handle the hemisphere buttons
         bLatitude.setOnClickListener(v -> {
@@ -147,6 +164,7 @@ public class NewCoordinateInputDialog {
                     }
         });
 
+        // Handle the text fields
         orderedInputs = Arrays.asList(latitudeDegree, latitudeMinutes, latitudeSeconds, latitudeFraction,
                   longitudeDegree, longitudeMinutes, longitudeSeconds, longitudeFraction);
 
@@ -156,8 +174,9 @@ public class NewCoordinateInputDialog {
             EditUtils.disableSuggestions(editText);
         }
 
-        copyFromClipboard = theView.findViewById(R.id.clipboard);
-        useCurrentLocation = theView.findViewById(R.id.current);
+        // User copy/paste buttons
+        Button copyFromClipboard = binding.clipboard;
+        Button useCurrentLocation = binding.current;
 
         copyFromClipboard.setOnClickListener(v -> {
             try {
@@ -174,6 +193,7 @@ public class NewCoordinateInputDialog {
         });
     }
 
+    // Close dialog and return selected coordinates to caller
     private boolean saveAndFinishDialog() {
 
         final String result = readGui();
@@ -192,6 +212,7 @@ public class NewCoordinateInputDialog {
         return false;
     }
 
+    // Extract coordinates from the data fields
     private String readGui() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
@@ -221,6 +242,7 @@ public class NewCoordinateInputDialog {
         return lat + " " + lon;
     }
 
+    // Refresh the text fields according to the selected coordinate format
     private void updateGui() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
@@ -320,8 +342,7 @@ public class NewCoordinateInputDialog {
         }
     }
 
-    // Following methods lifted from existing code ###########################
-
+    // Following methods lifted from existing code with minimal changes
     private static String addZeros(final int value, final int len) {
 
         return StringUtils.leftPad(Integer.toString(value), len, '0');
