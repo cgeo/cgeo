@@ -2686,7 +2686,6 @@
     <string name="wherigo_controls_stopgame_hint">Zatrzymaj uruchomioną grę</string>
     <string name="wherigo_controls_mapzones_hint">Pokaż strefy uruchomionej gry na mapie</string>
     <string name="wherigo_controls_downloadcartridge_hint">Pobierz kartridż (potrzebny cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Zgłoś problem z wherigo playerem</string>
     <string name="wherigo_controls_cache_context">Kontekst skrytki</string>
     <string name="wherigo_controls_cache_link">Przejdź do szczegółów skrytki</string>
     <string name="wherigo_sound_title">Kontrola dźwięku</string>
@@ -2730,7 +2729,6 @@
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Użyj \'Wyślij przez e-mail\', aby zgłosić problem związany z wherigo naszemu zespołowi pomocy technicznej.</string>
     <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
