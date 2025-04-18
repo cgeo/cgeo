@@ -2670,7 +2670,6 @@
     <string name="wherigo_controls_stopgame_hint">Остановить запущенную игру</string>
     <string name="wherigo_controls_mapzones_hint">Показывать зоны запущенной игры на карте</string>
     <string name="wherigo_controls_downloadcartridge_hint">Скачать картридж (нужен cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Сообщить о проблеме с wherigo player</string>
     <string name="wherigo_controls_cache_context">Контекст тайника</string>
     <string name="wherigo_controls_cache_link">Перейти к деталям тайника</string>
     <string name="wherigo_sound_title">Управление звуком</string>
@@ -2714,7 +2713,6 @@
     <string name="wherigo_error_title">Отчет по проблеме Wherigo</string>
     <string name="wherigo_error_game_noerror">Движок Wherigo не сообщает об ошибках.</string>
     <string name="wherigo_error_game_error">Движок Wherigo выдал ошибку:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Используйте \"Отправить по электронной почте\", чтобы сообщить нашей службе поддержки о проблеме, связанной с Wherigo.</string>
     <string name="wherigo_error_email">Отчет о проблеме Wherigo\n\nОшибка Движка: %1$s\n\nИнформация Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Движок Wherigo сообщил об ошибке. Откройте диалоговое окно с ошибкой для получения подробной информации.</string>
     <string name="wherigo_confirm_stop_running_game_title">Остановка Игры Wherigo</string>
