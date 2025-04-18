@@ -21,6 +21,7 @@
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
 - Wijziging: Log-datum gerelateerde variabelen zullen de gekozen datum gebruiken in plaats van de huidige datum
 - Nieuw: Lange logboekvermeldingen standaard inklappen
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
@@ -37,3 +38,6 @@
 - Nieuw: Toon connector voor "user-defined caches" als actief in bronfilter
 - Nieuw: GPX export: export logs/trackables optioneel gemaakt
 - Oplossing: Sorteren van cachelijsten op afstand aflopend werken niet correct
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
