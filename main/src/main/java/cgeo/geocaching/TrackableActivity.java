@@ -642,7 +642,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             final OfflineTranslateUtils.Language sourceLng = cda.translationStatus.getSourceLanguage();
             cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
 
-            OfflineTranslateUtils.getTranslator(cda, sourceLng,
+            OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                     unsupportedLng -> {
                         cda.translationStatus.abortTranslation();
                         binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
