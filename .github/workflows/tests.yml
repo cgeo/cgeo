@@ -309,7 +309,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew --no-configuration-cache --stacktrace --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
+            ./gradlew --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
       - name: Publish Test Report
