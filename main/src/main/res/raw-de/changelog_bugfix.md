@@ -1,5 +1,5 @@
 ##
-- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Korrektur: Favoriten-Status geht verloren, wenn während der Erstellung eines Logs ein Bild ausgewählt wird
 
 ##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
