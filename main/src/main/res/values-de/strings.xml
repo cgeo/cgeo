@@ -222,6 +222,8 @@
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- translation -->
     <string name="translate">In Google Translate App übersetzen</string>
+    <string name="translate_to_sys_lang">Übersetze nach %s</string>
+    <string name="translate_to_english">Übersetze nach Englisch (Web)</string>
     <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -339,6 +341,20 @@
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basis</string>
+    <string name="translator_preference_target_lng">Sprache für Offline-Übersetzung</string>
+    <string name="translator_preference_target_lng_summary">Zielsprache für Offline-Übersetzer</string>
+    <string name="translator_preference_nottranslate_lng">Ignorierte Sprachen</string>
+    <string name="translator_preference_nottranslate_lng_summary">Sprachen, für die keine Übersetzung angeboten werden soll</string>
+    <string name="translator_preference_disable">&lt;Übersetzung deaktivieren&gt;</string>
+    <string name="translator_model_download_select">Sprache für Offline-Übersetzung herunterladen</string>
+    <string name="translator_model_download_confirm_title">Sprachdownload bestätigen</string>
+    <string name="translator_model_download_confirm_txt">Übersetzungsmodell für Sprache %s muss heruntergeladen werden. Modellgröße beträgt etwa 20-40 MB.</string>
+    <string name="translator_model_download_notification">Download des Übersetzungsmodells gestartet</string>
+    <string name="translator_model_download_success">Übersetzungsmodell für %s heruntergeladen</string>
+    <string name="translator_language_detected">Übersetze von \"%s\"</string>
+    <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
+    <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
+    <string name="translator_translation_success">Übersetzt von \"%s\", tippe auf Schaltfläche, um das Original wiederherzustellen</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>
@@ -434,12 +450,16 @@
     <string name="caches_remove_selected">Ausgewählte aus Liste entfernen</string>
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
+    <string name="caches_remove_from_other_lists_selected">Ausgewählte aus anderen Listen entfernen</string>
+    <string name="caches_remove_from_other_lists_all">Alle aus anderen Listen entfernen</string>
     <string name="caches_append_to_route_selected">Ausgewählte an Route anhängen</string>
     <string name="caches_append_to_route_all">Alle an Route anhängen</string>
     <string name="caches_appended_to_route">Caches an Route angehängt</string>
     <string name="waypoints_appended_to_route">Wegpunkte an die Route angehängt</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
+    <string name="caches_upload_bookmarklist_all">Alle zu Lesezeichenliste hinzufügen</string>
+    <string name="caches_upload_bookmarklist_selected">Ausgewählte zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
@@ -461,7 +481,11 @@
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_overwrite_offline_log">Offline-Log überschreiben</string>
     <string name="caches_overwrite_offline_log_question">Vorhandenes Offline-Log vom Typ \"%1$s\" mit seinem Logtext überschreiben?</string>
+    <string name="caches_show_attributes_all">Attributübersicht für alle Caches anzeigen</string>
+    <string name="caches_show_attributes_selected">Attributübersicht für ausgewählte Caches anzeigen</string>
     <string name="caches_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="caches_set_cache_icon_all">Cache-Symbol für alle Caches festlegen</string>
+    <string name="caches_set_cache_icon_selected">Cache-Symbol für ausgewählte Caches festlegen</string>
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
@@ -1092,6 +1116,8 @@
     <string name="init_accuracycirclecolor">Genauigkeitskreis: Farbe der Linie</string>
     <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
+    <string name="init_include_logs">Logs einbeziehen</string>
+    <string name="init_include_travelbugs">Travel Bugs einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
     <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
     <string name="init_sigautoinsert">Automatisch einfügen</string>
@@ -1483,6 +1509,8 @@
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
     <string name="cache_log_menu_edit">Log bearbeiten</string>
+    <string name="menu_expand_log">Log erweitern</string>
+    <string name="menu_collapse_log">Log einklappen</string>
     <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
     <string name="cache_log_delete_reason_default">Log wurde mit c:geo gelöscht</string>
@@ -1719,6 +1747,7 @@
     <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
     <string name="calccoord_generate_waypointnameprefix">Erzeugt</string>
+    <string name="calccoord_generate_error_novarwithrange">Keine gültige Variable mit Bereichen gefunden (z. B.: [:0-9] oder [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Keine Kombination ergab gültige Koordinaten</string>
     <string name="calccoord_generate_error_nogeopointselected">Keine Koordinate ausgewählt</string>
     <string name="calccoord_migrate_title">Wegpunkt-Migration</string>
@@ -2361,6 +2390,7 @@
     <string name="map_refresh_individual_route">Aktualisieren</string>
     <string name="map_export_route">Als Route exportieren</string>
     <string name="map_export_track">Als Track exportieren</string>
+    <string name="map_load_from_GPX">Aus GPX laden</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
@@ -2588,7 +2618,6 @@
     <string name="wherigo_controls_stopgame_hint">Laufendes Spiel stoppen</string>
     <string name="wherigo_controls_mapzones_hint">Zonen eines laufenden Spiels auf der Karte anzeigen</string>
     <string name="wherigo_controls_downloadcartridge_hint">Manuelles Herunterladen einer Cartridge (cguid erforderlich)</string>
-    <string name="wherigo_controls_reportproblem_hint">Melde ein Problem mit dem Wherigo Player</string>
     <string name="wherigo_controls_cache_context">Geocache Kontext</string>
     <string name="wherigo_controls_cache_link">Gehe zu Cache-Details</string>
     <string name="wherigo_sound_title">Sound-Steuerung</string>
@@ -2632,7 +2661,6 @@
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
     <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Benutzen Sie \'Per E-Mail senden\', um ein Problem für ein Wherigo Spiel an unser Support-Team zu melden.</string>
     <string name="wherigo_error_email">Wherigo Problembericht\n\nEnginefehler: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
