@@ -2615,7 +2615,6 @@
     <string name="wherigo_controls_stopgame_hint">Ferma una partita in corso</string>
     <string name="wherigo_controls_mapzones_hint">Mostra sulla mappa le zone di una partita in corso</string>
     <string name="wherigo_controls_downloadcartridge_hint">Scarica una cartuccia (necessario cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Segnala un problema con il gestore di wherigo</string>
     <string name="wherigo_controls_cache_context">Contesto Cache</string>
     <string name="wherigo_controls_cache_link">Vai ai dettagli del cache</string>
     <string name="wherigo_sound_title">Controlli del suono</string>
@@ -2659,7 +2658,6 @@
     <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
     <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
     <string name="wherigo_error_game_error">Errore segnalato da Wherigo:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Usa \'Invia per email\' per segnalare un problema relativo a wherigo al nostro team di supporto.</string>
     <string name="wherigo_error_email">Segnalazione problema Wherigo\n\nErrore: %1$s\n\n info Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
