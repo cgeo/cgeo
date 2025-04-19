@@ -66,20 +66,6 @@ public abstract class AbstractLogin {
         return actualCachesFound;
     }
 
-    protected void resetLoginStatus() {
-        Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
-        Cookies.clearCookies();
-
-        setActualLoginStatus(false);
-    }
-
-    protected void clearLoginInfo() {
-        resetLoginStatus();
-
-        setActualCachesFound(-1);
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
-    }
-
     @NonNull
     @WorkerThread
     public StatusCode login() {
