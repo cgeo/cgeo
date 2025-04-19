@@ -206,7 +206,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
     public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
     public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
-    public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocachig.speechServiceRunning";
+    public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocaching.speechServiceRunning";
+    public static final String STATE_TRANSLATION_LANGUAGE_SOURCE = "cgeo.geocaching.translation.languageSource";
 
 
     // Store Geocode here, as 'cache' is loaded Async.
@@ -364,6 +365,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
             }
             restartSpeechService = (savedInstanceState.getInt(STATE_SPEECHSERVICE_RUNNING, 0) > 0);
+
+            if (savedInstanceState.containsKey(STATE_TRANSLATION_LANGUAGE_SOURCE)) {
+                final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
+                if (newLanguage.isValid()) {
+                    translationStatus.setSourceLanguage(newLanguage);
+                }
+            }
         }
 
         imageGalleryState = savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_IMAGE_GALLERY);
@@ -427,6 +435,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
         outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
+
+        if (this.translationStatus.isTranslated()) {
+            outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.getSourceLanguage().getCode());
+        }
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -1850,6 +1862,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             //register for changes of variableslist -> state of variable sync may change
             cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
+            final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
+            if (currentTranslationStatus.getSourceLanguage().isValid() && !currentTranslationStatus.isInProgress()) {
+                translateListing();
+            }
         }
 
         private void translateListing() {
