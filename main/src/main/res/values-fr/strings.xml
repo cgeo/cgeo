@@ -219,9 +219,6 @@
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
     <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- translation -->
-    <string name="translate">Traduire</string>
-    <string name="translate_to_sys_lang">Traduire en %s</string>
-    <string name="translate_to_english">Traduire en anglais</string>
     <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
@@ -451,7 +448,6 @@
     <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
     <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
     <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
-    <string name="caches_show_attributes">Afficher la liste des attributs</string>
     <string name="caches_set_cache_icon">Définir l\'icône de la cache</string>
     <string name="caches_reset_cache_icons_title">Réinitialiser l\'icône de la cache</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
@@ -1534,7 +1530,6 @@
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
-    <string name="internal_connector_name">Caches personnalisées</string>
     <!-- html styles -->
     <string name="html_style_default">Par défaut</string>
     <string name="html_style_monochrome">Monochrome</string>
@@ -1642,7 +1637,6 @@
     <string name="calccoord_generate_title">Générer des Waypoints</string>
     <string name="calccoord_generate_showonmap">Afficher sur la carte</string>
     <string name="calccoord_generate_waypointnameprefix">Généré</string>
-    <string name="calccoord_generate_error_novarwithrange">Pas de variable valide correspondant avec les plages définies</string>
     <string name="calccoord_generate_error_novalidgeopoints">Aucune combinaison n\'a retourné de coordonnées valides</string>
     <string name="calccoord_generate_error_nogeopointselected">Aucune coordonnées sélectionnées</string>
     <string name="calccoord_migrate_title">Migration de Waypoint</string>
@@ -1757,28 +1751,15 @@
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
     <string name="search_bar_hint_settings">Paramètres de recherche</string>
     <string name="search_coordinates">Coordonnées</string>
-    <string name="search_coordinates_button">Rechercher par Coordonnées</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Géocode</string>
-    <string name="search_geo_button">Rechercher par géocode</string>
-    <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mot-clé</string>
-    <string name="search_kw_prefill">Mot-clé</string>
-    <string name="search_kw_button">Rechercher par Mot-clé</string>
     <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
     <string name="search_hbu">Cachée par</string>
-    <string name="search_hbu_prefill">Nom d\'utilisateur</string>
-    <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_finder">Trouvée par</string>
-    <string name="search_finder_prefill">Découvreur</string>
-    <string name="search_finder_button">Rechercher par nom du découvreur</string>
     <string name="search_filter">Filtrer</string>
-    <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
     <string name="search_tb">Objet voyageur</string>
-    <string name="search_tb_hint">Code de l\'objet voyageur</string>
-    <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
     <string name="search_destination">Ouvrir la destination dans c:geo</string>
     <string name="add_target_to">Ajouter la cible à</string>
     <string name="search_address_started">Rechercher le lieu</string>
@@ -1934,7 +1915,6 @@
     <string name="attribute_stealth_no">Discrétion pas nécessaire</string>
     <string name="attribute_firstaid_yes">Nécessite une maintenance</string>
     <string name="attribute_cow_yes">Attention au bétail</string>
-    <string name="attribute_cow_no">Pas de bétail</string>
     <string name="attribute_field_puzzle_yes">Puzzle de terrain</string>
     <string name="attribute_field_puzzle_no">Pas de puzzle de terrain</string>
     <string name="attribute_nightcache_yes">Cache de nuit</string>
@@ -1967,7 +1947,6 @@
     <string name="attribute_scuba_yes">Matériel de plongée nécessaire</string>
     <string name="attribute_flashlight_yes">Torche nécessaire</string>
     <string name="attribute_uv_yes">Lumière UV nécessaire</string>
-    <string name="attribute_uv_no">Lumière UV pas nécessaire</string>
     <string name="attribute_snowshoes_yes">Chaussures de neige nécessaires</string>
     <string name="attribute_skiis_yes">Skis de fond nécessaires</string>
     <string name="attribute_s_tool_yes">Outils spéciaux nécessaires</string>
@@ -2289,6 +2268,7 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
     <string name="map_refresh_individual_route">Actualiser</string>
+    <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
     <string name="map_disable_autotarget_individual_route">\"Définir le départ de l\'itinéraire comme cible\" désactivé</string>
@@ -2329,8 +2309,6 @@
     <string name="routes_tracks_color">Sélectionner la couleur</string>
     <string name="routes_tracks_change_name">Changer de nom</string>
     <string name="center">Centrer</string>
-    <string name="unload_route_track">Décharger la trace</string>
-    <string name="route">Itinéraire</string>
     <string name="track">Trace</string>
     <string name="make_visible">Rendre visible</string>
     <string name="hide">Cacher</string>
@@ -2546,4 +2524,5 @@
     <string name="dbi_edit_error">Erreur lors de la mise à jour du champ</string>
     <string name="dbi_edit_error_pkfield">"%s\" fait partie de la clé primaire, ne peut pas être modifié"</string>
     <string name="dbi_search_title">Rechercher</string>
+    <!-- emoji categories -->
 </resources>

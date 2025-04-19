@@ -148,8 +148,6 @@
     <string name="log_image_titleprefix">图片</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为英语</string>
     <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -705,4 +703,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

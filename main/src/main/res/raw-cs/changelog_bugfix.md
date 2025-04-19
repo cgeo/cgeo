@@ -1,7 +1,10 @@
 ##
-- Fix: Wherigo links without host name not detected
-- Fix: Non-legible error message when posting a log
-- Reverted: Local .map file detection (due to unwanted side-effects)
+- Oprava: Stav oblíbených se ztratí při výběru obrázku při přípravě logu
+
+##
+- Oprava: Wherigo odkazy bez názvu hostitele nebyly zjištěny
+- Oprava: Nečitelná chybová zpráva při odesílání logu
+- Vráceno: Detekce lokálního .map souboru (kvůli nežádoucím vedlejším účinkům)
 
 ##
 - Oprava: Wherigo: Zpracování zón s neplatnými/příliš blízkými souřadnicemi

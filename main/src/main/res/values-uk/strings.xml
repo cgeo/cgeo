@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Перекласти на %s</string>
-    <string name="translate_to_english">Переклад англійською мовою</string>
     <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
@@ -795,7 +793,6 @@
     <string name="goto_targets_list">Визначений користувачем кеш</string>
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
-    <string name="internal_connector_name">Визначений користувачем кеш</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градуси</string>
@@ -881,17 +878,9 @@
     <string name="quick_settings">Швидкі налаштування</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
-    <string name="search_coordinates_button">Пошук за координатами</string>
     <string name="search_address">Адреса</string>
-    <string name="search_address_button">Пошук адреси</string>
-    <string name="search_kw_prefill">Ключове слово</string>
-    <string name="search_kw_button">пошук за ключовим словом</string>
     <string name="search_hbu">прихований</string>
-    <string name="search_hbu_prefill">Власник</string>
-    <string name="search_hbu_button">пошук за іменем користувача</string>
     <string name="search_tb">відстежуваний</string>
-    <string name="search_tb_hint">Відстежена ідентифікація</string>
-    <string name="search_tb_button">пошук відстежуваного</string>
     <string name="search_destination">відкрите місце призначення в c: geo</string>
     <string name="add_target_to">додати метy до</string>
     <string name="search_address_started">пошук місць</string>
@@ -1029,7 +1018,6 @@
     <string name="attribute_stealth_no">стелс не потрібен</string>
     <string name="attribute_firstaid_yes">потребує обслуговування</string>
     <string name="attribute_cow_yes">Спостереження за тваринами</string>
-    <string name="attribute_cow_no">Без домашньої худоби</string>
     <string name="attribute_field_puzzle_yes">польова головоломка</string>
     <string name="attribute_field_puzzle_no">Без головоломки</string>
     <string name="attribute_nightcache_yes">Нічний кеш</string>
@@ -1062,7 +1050,6 @@
     <string name="attribute_scuba_yes">Потрібне підводне спорядження</string>
     <string name="attribute_flashlight_yes">Потрібен ліхтарик</string>
     <string name="attribute_uv_yes">Потрібне УФ-світло</string>
-    <string name="attribute_uv_no">Ліхтарик не потрібен</string>
     <string name="attribute_snowshoes_yes">Потрібні сніжки для взуття</string>
     <string name="attribute_skiis_yes">Потрібні бігові лижі</string>
     <string name="attribute_s_tool_yes">потрібні спеціальні інструменти</string>
@@ -1291,6 +1278,7 @@
     <string name="individual_route_error_toggling_waypoint">помилка перемикання точки</string>
     <string name="individual_route_error_single_waypoint_mode">Не доступно в режимі однієї точки</string>
     <string name="map_sort_individual_route">Сортувати за окремим маршрутом</string>
+    <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
@@ -1376,4 +1364,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

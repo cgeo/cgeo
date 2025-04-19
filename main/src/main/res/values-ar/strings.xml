@@ -120,8 +120,6 @@
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">ترجمة إلى %s</string>
-    <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
     <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
@@ -680,16 +678,8 @@
     <string name="map_select_multiple_items">حدد العنصر</string>
     <!-- search -->
     <string name="search_coordinates">الإحداثيات</string>
-    <string name="search_coordinates_button">البحث بواسطة الإحدثيات</string>
     <string name="search_address">العنوان</string>
-    <string name="search_address_button">البحث بواسطة العنوان</string>
-    <string name="search_kw_prefill">كلمة مفتاحية</string>
-    <string name="search_kw_button">البحث بواسطة الكلمة المفتاحية</string>
-    <string name="search_hbu_prefill">المالك</string>
-    <string name="search_hbu_button">البحث بواسطة اسم المالك</string>
     <string name="search_tb">أمتعة السفر</string>
-    <string name="search_tb_hint">تعريف أمتعة السفر</string>
-    <string name="search_tb_button">البحث بواسطة أمتعة السفر</string>
     <string name="search_address_started">البحث عن الأماكن</string>
     <string name="search_address_result">الأماكن المعثور عليها</string>
     <string name="search_pocket_title">الاستفسارات</string>
@@ -805,7 +795,6 @@
     <string name="attribute_stealth_no">التسلل غير مطلوب</string>
     <string name="attribute_firstaid_yes">يحتاج إلى صيانة</string>
     <string name="attribute_cow_yes">مشاهدة الماشية</string>
-    <string name="attribute_cow_no">لا يوجد ماشية</string>
     <string name="attribute_field_puzzle_yes">لغز الحقل</string>
     <string name="attribute_field_puzzle_no">لا يوجد لغز الحقل</string>
     <string name="attribute_nightcache_yes">المخبئ الليلي</string>
@@ -838,7 +827,6 @@
     <string name="attribute_scuba_yes">معدات الغوص مطلوبة</string>
     <string name="attribute_flashlight_yes">المصباح اليدوي مطلوب</string>
     <string name="attribute_uv_yes">مصباح الأشعة فوق بنفسجية مطلوب</string>
-    <string name="attribute_uv_no">مصباح الأشعة فوق بنفسجية ليس مطلوب</string>
     <string name="attribute_snowshoes_yes">الحذاء الثلجي مطلوب</string>
     <string name="attribute_skiis_yes">الزلاجات مطلوبة</string>
     <string name="attribute_s_tool_yes">الأدوات الخاصة مطلوبة</string>
@@ -1048,4 +1036,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

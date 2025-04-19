@@ -204,9 +204,6 @@
     <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
     <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
     <!-- translation -->
-    <string name="translate">Išversti</string>
-    <string name="translate_to_sys_lang">Išversti į %s</string>
-    <string name="translate_to_english">Išversti į anglų</string>
     <string name="translate_length_warning">Vertimas gali nepavykti jei tekstas labai ilgas.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
@@ -431,7 +428,6 @@
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
-    <string name="caches_show_attributes">Rodyti savybių apžvalgą</string>
     <string name="caches_set_cache_icon">Nustatykite slėptuvės piktogramą</string>
     <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
@@ -1473,7 +1469,6 @@
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
-    <string name="internal_connector_name">Vartotojo nustatytos slėptuvės</string>
     <!-- html styles -->
     <string name="html_style_default">Numatytas</string>
     <string name="html_style_monochrome">Vienspalvė</string>
@@ -1582,7 +1577,6 @@
     <string name="calccoord_generate_title">Sugeneruokite kelio taškus</string>
     <string name="calccoord_generate_showonmap">Rodyti žemėlapyje</string>
     <string name="calccoord_generate_waypointnameprefix">Sugeneruoti</string>
-    <string name="calccoord_generate_error_novarwithrange">Nerasta tinkamų kintamųjų su diapazonais</string>
     <string name="calccoord_generate_error_novalidgeopoints">Joks derinys nepateikė galiojančių koordinačių</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinatės nepasirinktos</string>
     <string name="calccoord_migrate_title">Kelio taško perkėlimas</string>
@@ -1679,26 +1673,13 @@
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
     <string name="search_bar_hint_settings">Paieškos nustatymai</string>
     <string name="search_coordinates">Koordinatės</string>
-    <string name="search_coordinates_button">Paieška pagal koordinates</string>
     <string name="search_address">Adresas</string>
-    <string name="search_address_button">Paieška pagal adresą</string>
     <string name="search_geo">Geokodas</string>
-    <string name="search_geo_button">Paieška pagal geokodą</string>
-    <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
-    <string name="search_kw_prefill">Raktinis žodis</string>
-    <string name="search_kw_button">Paieška pagal raktinį žodį</string>
     <string name="search_hbu">Slėpėjas</string>
-    <string name="search_hbu_prefill">Savininkas</string>
-    <string name="search_hbu_button">Paieška pagal savininko vardą</string>
     <string name="search_finder">Surado</string>
-    <string name="search_finder_prefill">Radėjas</string>
-    <string name="search_finder_button">Ieškokite pagal ieškotojo vardą</string>
-    <string name="search_filter_button">Ieškoti pagal filtrą</string>
     <string name="search_filter_info_message" formatted="false">**Ieškoti pagal filtrą** ieško visų aktyvių internetinių paslaugų (pvz., geocaching.com) slėptuvių, naudodama pateiktą filtrą. Tačiau šių paslaugų paieškos galimybės paprastai yra labiau ribotos nei c:geo filtrų galimybės.\n\n- Visos paslaugos palaiko tik filtrus IR (jokių ARBA filtrų ir jokios filtro inversijos).\n- Paprastesni filtrai, pvz., ** slėptuvės tipą** arba **slėptuvės dydį** palaiko visos paslaugos. Sudėtingesni filtrai dažnai nepalaikomi arba turi tam tikrų apribojimų, pvz. **mėgstamiausi** arba **paslėpimo data**.\n- Išsamų kiekvienos paslaugos palaikomų filtrų sąrašą rasite [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltrus, kurių nepalaiko internetinė paslauga, c:geo taikys gautuose rezultatuose.</string>
     <string name="search_tb">Keliauninkas</string>
-    <string name="search_tb_hint">Keliauninko identifikavimas</string>
-    <string name="search_tb_button">Ieškoti keliauninko</string>
     <string name="search_destination">Atidaryti tikslą su c:geo</string>
     <string name="add_target_to">Pridėti tikslą į</string>
     <string name="search_address_started">Ieškoma vietų</string>
@@ -1855,7 +1836,6 @@
     <string name="attribute_stealth_no">Nereikalingas slaptumas</string>
     <string name="attribute_firstaid_yes">Reikalingas remontas</string>
     <string name="attribute_cow_yes">Saugotis gyvulių</string>
-    <string name="attribute_cow_no">Gyvulių nėra</string>
     <string name="attribute_field_puzzle_yes">Lauko galvosūkis</string>
     <string name="attribute_field_puzzle_no">Nelauko galvosūkis</string>
     <string name="attribute_nightcache_yes">Naktinė slėptuvė</string>
@@ -1888,7 +1868,6 @@
     <string name="attribute_scuba_yes">Reikalinga nardymo įranga</string>
     <string name="attribute_flashlight_yes">Reikalingas žibintuvėlis</string>
     <string name="attribute_uv_yes">Reikalinga UV šviesa</string>
-    <string name="attribute_uv_no">UV šviesa nereikalinga</string>
     <string name="attribute_snowshoes_yes">Reikalingi sniegbačiai</string>
     <string name="attribute_skiis_yes">Reikalingos lygumų slidės</string>
     <string name="attribute_s_tool_yes">Reikalingi specialūs įrankiai</string>
@@ -2217,6 +2196,7 @@
     <string name="individual_route_error_single_waypoint_mode">Negalima naudoti vieno kelio taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
     <string name="map_refresh_individual_route">Atnaujinti</string>
+    <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
     <string name="map_autotarget_individual_route">Nustatyti maršruto pradžią kaip tikslą</string>
     <string name="map_disable_autotarget_individual_route">\"Nustatyti maršruto pradžią kaip tikslą\" išjungta</string>
@@ -2253,8 +2233,6 @@
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="routes_tracks_color">Pasirinkite spalvą</string>
-    <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
-    <string name="route">Maršrutas</string>
     <string name="track">Pėdsakas</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -2439,4 +2417,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

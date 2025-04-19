@@ -171,9 +171,6 @@
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">翻譯</string>
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为</string>
     <string name="translate_length_warning">文字太多，翻譯失敗。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -1016,7 +1013,6 @@
     <string name="goto_targets_list">玩家自訂cache</string>
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
-    <string name="internal_connector_name">玩家自訂cache</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">角度</string>
@@ -1116,17 +1112,9 @@
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
-    <string name="search_coordinates_button">用座標搜尋</string>
     <string name="search_address">地址</string>
-    <string name="search_address_button">使用地址搜尋</string>
-    <string name="search_kw_prefill">關鍵字</string>
-    <string name="search_kw_button">用關鍵字搜尋</string>
     <string name="search_hbu">由藏寶</string>
-    <string name="search_hbu_prefill">寶主</string>
-    <string name="search_hbu_button">用寶主名稱來搜尋</string>
     <string name="search_tb">旅行蟲</string>
-    <string name="search_tb_hint">旅行蟲識別</string>
-    <string name="search_tb_button">搜尋旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>
     <string name="search_address_started">搜尋位置</string>
@@ -1276,7 +1264,6 @@
     <string name="attribute_scuba_yes">需要潛水用具</string>
     <string name="attribute_flashlight_yes">需要手電筒</string>
     <string name="attribute_uv_yes">需要紫外光手電筒</string>
-    <string name="attribute_uv_no">不需要紫外光手電筒</string>
     <string name="attribute_snowshoes_yes">需要雪靴</string>
     <string name="attribute_s_tool_yes">需要特殊工具</string>
     <string name="attribute_treeclimbing_yes">需爬樹</string>
@@ -1476,6 +1463,7 @@
     <string name="individual_route_added">新增至路徑</string>
     <string name="individual_route_removed">從航線中移除</string>
     <string name="map_sort_individual_route">排列個別的路徑</string>
+    <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
     <!-- changed permissions one time message -->
@@ -1579,4 +1567,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
-    <string name="translate_to_english">Iwwersetzen op Englesch</string>
     <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -588,4 +586,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -179,9 +179,6 @@
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Fordítás</string>
-    <string name="translate_to_sys_lang">Fordítás erre: %s</string>
-    <string name="translate_to_english">Fordítás angolra</string>
     <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -883,16 +880,8 @@
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
-    <string name="search_coordinates_button">Keresés koordinátákkal</string>
     <string name="search_address">Cím</string>
-    <string name="search_address_button">Keresés címmel</string>
-    <string name="search_kw_prefill">Kulcsszó</string>
-    <string name="search_kw_button">Keresés kulcsszóval</string>
-    <string name="search_hbu_prefill">Tulajdonos</string>
-    <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
     <string name="search_tb">Utazó</string>
-    <string name="search_tb_hint">Utazó azonosítója</string>
-    <string name="search_tb_button">Utazó keresése</string>
     <string name="search_address_started">Helyek keresése</string>
     <string name="search_address_result">Megtalált helyek</string>
     <string name="search_pocket_title">Pocket lekérdezés</string>
@@ -1015,7 +1004,6 @@
     <string name="attribute_stealth_no">Rejtőzködés nem szükséges</string>
     <string name="attribute_firstaid_yes">Karbantartás szükséges</string>
     <string name="attribute_cow_yes">Figyelni kell a haszonállatokra</string>
-    <string name="attribute_cow_no">Nincsenek haszonállatok</string>
     <string name="attribute_field_puzzle_yes">Helyszíni rejtvény</string>
     <string name="attribute_field_puzzle_no">Nem helyszíni rejtvény</string>
     <string name="attribute_nightcache_yes">Éjszakai láda</string>
@@ -1048,7 +1036,6 @@
     <string name="attribute_scuba_yes">Búvárfelszerelés szükséges</string>
     <string name="attribute_flashlight_yes">Zseblámpa szükséges</string>
     <string name="attribute_uv_yes">UV lámpa szükséges</string>
-    <string name="attribute_uv_no">UV lámpa nem szükséges</string>
     <string name="attribute_snowshoes_yes">Hótaposó szükséges</string>
     <string name="attribute_skiis_yes">Sífutóléc szükséges</string>
     <string name="attribute_s_tool_yes">Speciális szerszám szükséges</string>
@@ -1299,4 +1286,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -178,9 +178,6 @@
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Oversæt</string>
-    <string name="translate_to_sys_lang">Oversæt til %s</string>
-    <string name="translate_to_english">Oversæt til engelsk</string>
     <string name="translate_length_warning">Oversættelse af lange tekster kan fejle.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -372,7 +369,6 @@
     <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
-    <string name="caches_show_attributes">Vis attribut oversigt</string>
     <string name="caches_set_cache_icon">Sæt cache-ikon</string>
     <string name="caches_reset_cache_icons_title">Nulstil cache-ikon</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
@@ -1015,7 +1011,6 @@
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
-    <string name="internal_connector_name">Brugerdefinerede caches</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1109,21 +1104,11 @@
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
     <string name="search_coordinates">Koordinater</string>
-    <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Søg adresse</string>
-    <string name="search_geo_button">Søg efter geokode</string>
     <string name="search_kw">Nøgleord</string>
-    <string name="search_kw_prefill">Nøgleord</string>
-    <string name="search_kw_button">Søg efter nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
-    <string name="search_hbu_prefill">Ejer</string>
-    <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
-    <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Trackable id</string>
-    <string name="search_tb_button">Søg trackable</string>
     <string name="search_destination">Åbn destinationen i c:geo</string>
     <string name="search_address_started">Søger efter steder</string>
     <string name="search_address_result">Fundne steder</string>
@@ -1260,7 +1245,6 @@
     <string name="attribute_stealth_no">Diskretion ikke påkrævet</string>
     <string name="attribute_firstaid_yes">Kræver vedligeholdelse</string>
     <string name="attribute_cow_yes">Pas på kreaturer</string>
-    <string name="attribute_cow_no">Ingen kreaturer</string>
     <string name="attribute_field_puzzle_yes">Feltopgave</string>
     <string name="attribute_field_puzzle_no">Ikke feltopgave</string>
     <string name="attribute_nightcache_yes">Natcache</string>
@@ -1293,7 +1277,6 @@
     <string name="attribute_scuba_yes">Dykkerudstyr påkrævet</string>
     <string name="attribute_flashlight_yes">Lommelygte nødvendig</string>
     <string name="attribute_uv_yes">UV-lys nødvendigt</string>
-    <string name="attribute_uv_no">UV-lys ikke nødvendigt</string>
     <string name="attribute_snowshoes_yes">Snesko nødvendige</string>
     <string name="attribute_skiis_yes">Langrendski nødvendige</string>
     <string name="attribute_s_tool_yes">Specialredskab nødvendigt</string>
@@ -1548,6 +1531,7 @@
     <string name="individual_route_error_toggling_waypoint">fejl ved valg af rutepunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgængelig i enkelt rutepunkt-tilstand</string>
     <string name="map_sort_individual_route">Sorter individuel rute</string>
+    <string name="map_load_individual_route">Indlæs individuel rute</string>
     <string name="map_load_individual_route_confirm">Overskriv individuel rute?</string>
     <string name="map_clear_individual_route">Ryd individuel rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/rutepunkter fra din individuelle rute?</string>
@@ -1657,4 +1641,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

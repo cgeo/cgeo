@@ -139,8 +139,6 @@
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Prevedi v: %s</string>
-    <string name="translate_to_english">Prevedi v: angleščino</string>
     <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
@@ -654,16 +652,8 @@
     <string name="map_select_multiple_items">Izberite element</string>
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
-    <string name="search_coordinates_button">Iskanje po koordinatah</string>
     <string name="search_address">Naslov</string>
-    <string name="search_address_button">Iskanje po naslovu</string>
-    <string name="search_kw_prefill">Ključna beseda</string>
-    <string name="search_kw_button">Iskanje po ključnih besedah</string>
-    <string name="search_hbu_prefill">Lastnik</string>
-    <string name="search_hbu_button">Iskanje po imenu lastnika</string>
     <string name="search_tb">Sledljivčki</string>
-    <string name="search_tb_hint">Koda sledljivčka</string>
-    <string name="search_tb_button">Iskanje sledljivčka</string>
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>
     <!-- trackable -->
@@ -770,7 +760,6 @@
     <string name="attribute_stealth_no">Ni potrebe biti neopazen</string>
     <string name="attribute_firstaid_yes">Potrebuje vzdrževanje</string>
     <string name="attribute_cow_yes">Živinoreja v bližini</string>
-    <string name="attribute_cow_no">Ni živinoreje v bližini</string>
     <string name="attribute_field_puzzle_yes">Uganka na terenu</string>
     <string name="attribute_field_puzzle_no">Ni uganka na terenu</string>
     <string name="attribute_nightcache_yes">Nočni zaklad</string>
@@ -803,7 +792,6 @@
     <string name="attribute_scuba_yes">Potrebna potapljaška oprema</string>
     <string name="attribute_flashlight_yes">Potrebna svetilka</string>
     <string name="attribute_uv_yes">Potrebna UV lučka</string>
-    <string name="attribute_uv_no">UV lučka ni potrebna</string>
     <string name="attribute_snowshoes_yes">Potrebna snežna obutev</string>
     <string name="attribute_skiis_yes">Potrebne smuči</string>
     <string name="attribute_s_tool_yes">Potrebna posebna orodja</string>
@@ -1011,4 +999,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -197,9 +197,6 @@
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Çeviri</string>
-    <string name="translate_to_sys_lang">%s\'e çevir</string>
-    <string name="translate_to_english">İngilizceye Çevir</string>
     <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
@@ -404,7 +401,6 @@
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
-    <string name="caches_show_attributes">Özellikleri göster</string>
     <string name="caches_set_cache_icon">Geocache simgesi seç</string>
     <string name="caches_reset_cache_icons_title">Cache simgesini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
@@ -1294,7 +1290,6 @@
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
-    <string name="internal_connector_name">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
@@ -1445,26 +1440,13 @@
     <string name="search_bar_hint">Cache/trackable ara</string>
     <string name="search_bar_hint_settings">Arama ayarları</string>
     <string name="search_coordinates">Koordinatlar</string>
-    <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
-    <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geokod</string>
-    <string name="search_geo_button">Geocode\'a göre ara</string>
-    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelime</string>
-    <string name="search_kw_prefill">Anahtar kelime</string>
-    <string name="search_kw_button">Anahtar kelimeye göre ara</string>
     <string name="search_hbu">Saklayan</string>
-    <string name="search_hbu_prefill">Sahibi</string>
-    <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_finder">Bulan</string>
-    <string name="search_finder_prefill">Bulan</string>
-    <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Trackable kimliği</string>
-    <string name="search_tb_button">Trackable ara</string>
     <string name="search_destination">Hedefi c:geo olarak aç</string>
     <string name="add_target_to">Hedef ekle</string>
     <string name="search_address_started">Yerler aranıyor</string>
@@ -1618,7 +1600,6 @@
     <string name="attribute_stealth_no">Gizlilik gerekli değil</string>
     <string name="attribute_firstaid_yes">Bakım gerekli</string>
     <string name="attribute_cow_yes">Besi hayvanlarına dikkat edin</string>
-    <string name="attribute_cow_no">Besi hayvanı yok</string>
     <string name="attribute_field_puzzle_yes">Saha bulmacası</string>
     <string name="attribute_field_puzzle_no">Saha bulmacası yok</string>
     <string name="attribute_nightcache_yes">Gece Cache\'i</string>
@@ -1651,7 +1632,6 @@
     <string name="attribute_scuba_yes">Tüplü dalış ekipmanı gerekli</string>
     <string name="attribute_flashlight_yes">Fener gerekli</string>
     <string name="attribute_uv_yes">UV lambası gerekli</string>
-    <string name="attribute_uv_no">UV lambası gerekli değil</string>
     <string name="attribute_snowshoes_yes">Kar ayakkabısı gerekebilir</string>
     <string name="attribute_skiis_yes">Kayak gerekebilir</string>
     <string name="attribute_s_tool_yes">Özel alet gerekli</string>
@@ -1946,6 +1926,7 @@
     <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
+    <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
     <string name="map_disable_autotarget_individual_route">\"Rota başlangıcını hedef olarak ayarla\" devre dışı bırakıldı</string>
@@ -1969,7 +1950,6 @@
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="routes_tracks_change_name">Adı değiştir</string>
-    <string name="route">Rota</string>
     <string name="track">İz</string>
     <string name="make_visible">Görünür yap</string>
     <string name="hide">Sakla</string>
@@ -2150,4 +2130,5 @@
         <item>120px</item>
     </string-array>
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

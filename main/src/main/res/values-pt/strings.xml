@@ -221,9 +221,6 @@
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
     <string name="contact_multiple_matches">Contacto: Múltiplas correspondências</string>
     <!-- translation -->
-    <string name="translate">Traduzir</string>
-    <string name="translate_to_sys_lang">Traduzir para %s</string>
-    <string name="translate_to_english">Traduzir para Inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -461,7 +458,6 @@
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_overwrite_offline_log">Sobrescrever o registo offline</string>
     <string name="caches_overwrite_offline_log_question">A cache possui registo offline do tipo \"%1$s\" com um texto de registo. Deseja substituir este registo?</string>
-    <string name="caches_show_attributes">Mostrar visão geral de atributos</string>
     <string name="caches_set_cache_icon">Definir ícone da cache</string>
     <string name="caches_reset_cache_icons_title">Repor ícone da cache</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
@@ -1603,7 +1599,6 @@
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
-    <string name="internal_connector_name">Caches internas</string>
     <!-- html styles -->
     <string name="html_style_default">Predefinição</string>
     <string name="html_style_default_no_contrast_fix">Padrão sem correcção de contraste</string>
@@ -1717,7 +1712,6 @@
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
     <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Gerada</string>
-    <string name="calccoord_generate_error_novarwithrange">Não foi encontrada qualquer variável válida, com o intervalo definido</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nenhuma combinação devolveu coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">Nenhuma coordenada seleccionada</string>
     <string name="calccoord_migrate_title">Migração de Pontos Adicionais</string>
@@ -1833,28 +1827,15 @@
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
     <string name="search_bar_hint_settings">Definições de pesquisa</string>
     <string name="search_coordinates">Coordenadas</string>
-    <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
-    <string name="search_address_button">Pesquisar por endereço</string>
     <string name="search_geo">Geo-código</string>
-    <string name="search_geo_button">Pesquisar por geo-código</string>
-    <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
-    <string name="search_kw_prefill">Palavra-chave</string>
-    <string name="search_kw_button">Pesquisar por palavra-chave</string>
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
-    <string name="search_hbu_prefill">Proprietário</string>
-    <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_finder">Encontrada por</string>
-    <string name="search_finder_prefill">Quem encontrou</string>
-    <string name="search_finder_button">Pesquisa por quem encontrou</string>
     <string name="search_filter">Filtro</string>
-    <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Identificação do trackable</string>
-    <string name="search_tb_button">Pesquisar por trackable</string>
     <string name="search_destination">Abrir pasta de destino no c:geo</string>
     <string name="add_target_to">Adicionar destino a</string>
     <string name="search_address_started">Pesquisar por lugares</string>
@@ -2007,13 +1988,11 @@
     <string name="attribute_night_no">Não recomendada à noite</string>
     <string name="attribute_winter_yes">Disponível no Inverno</string>
     <string name="attribute_cacti_yes">Cactos por perto</string>
-    <string name="attribute_cacti_no">Sem Cactos por perto</string>
     <string name="attribute_winter_no">Não está disponível no Inverno</string>
     <string name="attribute_stealth_yes">É necessário ser discreto</string>
     <string name="attribute_stealth_no">Não é necessário ser discreto</string>
     <string name="attribute_firstaid_yes">Precisa de manutenção</string>
     <string name="attribute_cow_yes">Cuidado com o gado</string>
-    <string name="attribute_cow_no">Gado inexistente</string>
     <string name="attribute_field_puzzle_yes">Quebra-cabeças a resolver no local</string>
     <string name="attribute_field_puzzle_no">Não é quebra-cabeças a resolver no local</string>
     <string name="attribute_nightcache_yes">Cache nocturna</string>
@@ -2046,7 +2025,6 @@
     <string name="attribute_scuba_yes">Requer equipamento de mergulho</string>
     <string name="attribute_flashlight_yes">Requer lanterna</string>
     <string name="attribute_uv_yes">Requer luz UV</string>
-    <string name="attribute_uv_no">Não requer luz UV</string>
     <string name="attribute_snowshoes_yes">Requer calçado de neve</string>
     <string name="attribute_skiis_yes">Requer o uso de esquis</string>
     <string name="attribute_s_tool_yes">Requer ferramentas especiais</string>
@@ -2375,7 +2353,7 @@
     <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_route">Exportar como rota</string>
     <string name="map_export_track">Exportar como percurso</string>
-    <string name="map_load_from_GPX">Carregar de GPX</string>
+    <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>
@@ -2417,8 +2395,6 @@
     <string name="routes_tracks_color">Seleccionar cor</string>
     <string name="routes_tracks_change_name">Alterar o nome</string>
     <string name="center">Centrar</string>
-    <string name="unload_route_track">Remover rota/percurso</string>
-    <string name="route">Rota</string>
     <string name="track">Percurso</string>
     <string name="make_visible">Tornar visível</string>
     <string name="hide">Ocultar</string>
@@ -2604,7 +2580,6 @@
     <string name="wherigo_controls_stopgame_hint">Parar um jogo</string>
     <string name="wherigo_controls_mapzones_hint">Mostrar no mapa as zonas de um jogo em execução</string>
     <string name="wherigo_controls_downloadcartridge_hint">Transferir um cartucho (necessário CGUID)</string>
-    <string name="wherigo_controls_reportproblem_hint">Reportar um problema com o leitor de wherigo</string>
     <string name="wherigo_controls_cache_context">Contexto da Cache</string>
     <string name="wherigo_controls_cache_link">Ir para os detalhes da cache</string>
     <string name="wherigo_sound_title">Controlos de som</string>
@@ -2617,7 +2592,6 @@
     <string name="wherigo_dialog_pause_info">Retome o diálogo no reprodutor Wherigo tocando em \"Retomar diálogo pausado\"</string>
     <string name="wherigo_no_game_running">Não está nenhum jogo Wherigo em execução</string>
     <string name="wherigo_currently_playing">Em execução</string>
-    <string name="wherigo_cartridge_details">Detalhes do cartucho</string>
     <string name="wherigo_locate_on_center">Localizar no centro</string>
     <string name="wherigo_revoke_fixed_location">Revogar localização fixa</string>
     <string name="wherigo_thingtype_location">Locais</string>
@@ -2649,7 +2623,6 @@
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor Wherigo:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Utilize \'Enviar por e-mail\' para reportar um problema relacionado com o wherigo para a nossa equipa de apoio.</string>
     <string name="wherigo_error_email">Relatório de problema no Wherigo\n\nErro: %1$s\n\nInformação Wherigo: %2$s</string>
     <string name="wherigo_error_toast">O motor do Wherigo reportou um erro. Abra o diálogo de erros para ver os detalhes.</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
@@ -2737,4 +2710,5 @@
     <string name="dbi_edit_error">Erro ao actualizar o campo</string>
     <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
     <string name="dbi_search_title">Pesquisar por</string>
+    <!-- emoji categories -->
 </resources>

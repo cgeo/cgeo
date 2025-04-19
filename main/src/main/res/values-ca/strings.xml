@@ -221,9 +221,9 @@
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- translation -->
-    <string name="translate">Tradueix</string>
-    <string name="translate_to_sys_lang">Tradueix a %s</string>
-    <string name="translate_to_english">Tradueix a l\'anglès</string>
+    <string name="translate">Tradueix a l\'aplicació Google Translate</string>
+    <string name="translate_to_sys_lang">Tradueix a %s (Web)</string>
+    <string name="translate_to_english">Traduir a l\'anglès (web)</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -342,6 +342,26 @@
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Bàsic</string>
+    <string name="translator_preference_target_lng">Idioma de traducció fora de línia</string>
+    <string name="translator_preference_target_lng_summary">Idioma objectiu per al traductor fora de línia</string>
+    <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
+    <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
+    <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
+    <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
+    <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
+    <string name="translator_model_download_notification">S\'ha iniciat la descàrrega del model de traducció</string>
+    <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
+    <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
+    <string name="translator_model">Model de traducció</string>
+    <string name="translator_tooltip">Traducció fora de línia</string>
+    <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
+    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
+    <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
+    <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
+    <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
+    <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
@@ -437,12 +457,16 @@
     <string name="caches_remove_selected">Elimina els seleccionats de la llista</string>
     <string name="caches_remove_all_completely">Elimina tot del dispositiu</string>
     <string name="caches_remove_selected_completely">Esborra la selecció del dispositiu</string>
+    <string name="caches_remove_from_other_lists_selected">Elimina els seleccionats d\'altres llistes</string>
+    <string name="caches_remove_from_other_lists_all">Suprimeix-ho tot de les altres llistes</string>
     <string name="caches_append_to_route_selected">Afegeix la selecció triada a la ruta individual</string>
     <string name="caches_append_to_route_all">Afegiu-ho tot a la ruta individual</string>
     <string name="caches_appended_to_route">S\'han adjuntat catxés a la ruta</string>
     <string name="waypoints_appended_to_route">Waypoints afegits a la ruta</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
     <string name="caches_upload_bookmarklist">Afegeix a la llista de marcadors</string>
+    <string name="caches_upload_bookmarklist_all">Afegeix-ho tot a la llista d\'adreces d\'interès</string>
+    <string name="caches_upload_bookmarklist_selected">Afegeix els seleccionats a la llista d\'adreces d\'interès</string>
     <string name="caches_upload_modifiedcoords">Coordenades modificades</string>
     <string name="caches_upload_modifiedcoords_warning">Vols modificar les coordenades de tots els catxés seleccionats i sobreescriure les existents al servidor? No podràs desfer-ho.</string>
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
@@ -464,8 +488,11 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
     <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
-    <string name="caches_show_attributes">Mostra la visió general d\'atributs</string>
+    <string name="caches_show_attributes_all">Mostra la visió general d\'atributs per a tots els catxés</string>
+    <string name="caches_show_attributes_selected">Mostra la visió general d\'atributs per els catxés seleccionats</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
+    <string name="caches_set_cache_icon_all">Estableix la icona de catxé per a tots els catxés</string>
+    <string name="caches_set_cache_icon_selected">Estableix la icona de catxé per els catxés seleccionats</string>
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
@@ -1096,6 +1123,8 @@
     <string name="init_accuracycirclecolor">Color línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
+    <string name="init_include_logs">Inclou registres</string>
+    <string name="init_include_travelbugs">Inclou Travel Bugs</string>
     <string name="init_trackautovisit">Visita TBs</string>
     <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
     <string name="init_sigautoinsert">Insereix automàticament</string>
@@ -1489,6 +1518,8 @@
     <string name="cache_menu_ignore">Ignora el catxé</string>
     <string name="cache_log_menu_decrypt">Desxifra / Xifra</string>
     <string name="cache_log_menu_edit">Edita el registre</string>
+    <string name="menu_expand_log">Amplia el registre</string>
+    <string name="menu_collapse_log">Redueix el registre</string>
     <string name="cache_log_menu_delete">Suprimeix el registre</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
@@ -1561,6 +1592,7 @@
     <string name="cache_multiple_wherigo_cartridges_message">Consulteu la llista de catxés per obtenir més informació sobre els cartutxos.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - no descarregat</string>
     <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
+    <string name="cache_wherigo_credentials">Per poder jugar a aquest Wherigo amb el reproductor intern de c:geo, primer heu d\'autoritzar el servei geocaching.com. Toqueu el botó de la dreta per anar a la configuració.</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
@@ -1609,7 +1641,7 @@
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
-    <string name="internal_connector_name">Catxé definit per l\'usuari</string>
+    <string name="internal_connector_name">Catxés definits per l\'usuari</string>
     <!-- html styles -->
     <string name="html_style_default">Per defecte</string>
     <string name="html_style_default_no_contrast_fix">Per defecte sense correcció de contrast</string>
@@ -1690,6 +1722,7 @@
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
+    <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <!-- Projection -->
     <string name="projection_type_none">Sense projecció</string>
     <string name="projection_type_bearing">Direcció</string>
@@ -1719,11 +1752,13 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
+    <string name="calccoord_remove_spaces">Elimina espais</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
     <string name="calccoord_paste_from_clipboard">Enganxa des del porta-retalls</string>
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
-    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals</string>
+    <string name="calccoord_generate_error_novarwithrange">Cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
@@ -1839,28 +1874,15 @@
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_bar_hint_settings">Configuració de cerca</string>
     <string name="search_coordinates">Coordenades</string>
-    <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
-    <string name="search_address_button">Cerca per l\'adreça</string>
     <string name="search_geo">Geocodi</string>
-    <string name="search_geo_button">Cerca per geocodi</string>
-    <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
     <string name="search_kw">Paraula clau</string>
-    <string name="search_kw_prefill">Paraula clau</string>
-    <string name="search_kw_button">Cerca per paraula clau</string>
     <string name="search_kw_disabled_hint">Desactivat perquè geocaching.com no l\'admet per als membres de BASIC</string>
     <string name="search_hbu">Amagat per</string>
-    <string name="search_hbu_prefill">Propietari</string>
-    <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_finder">Trobat per</string>
-    <string name="search_finder_prefill">Cercador</string>
-    <string name="search_finder_button">Cerca pel nom del cercador</string>
     <string name="search_filter">Filtre</string>
-    <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
-    <string name="search_tb_hint">Identificació del traçable</string>
-    <string name="search_tb_button">Cerca de traçables</string>
     <string name="search_destination">Obre la destinació al c: geo</string>
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
@@ -2013,13 +2035,11 @@
     <string name="attribute_night_no">No es recomana de nit</string>
     <string name="attribute_winter_yes">Disponible durant l\'hivern</string>
     <string name="attribute_cacti_yes">Cactus a prop</string>
-    <string name="attribute_cacti_no">No hi ha cactus a prop</string>
     <string name="attribute_winter_no">No disponible durant l\'hivern</string>
     <string name="attribute_stealth_yes">Exigeix sigil</string>
     <string name="attribute_stealth_no">No requereix sigil</string>
     <string name="attribute_firstaid_yes">Necessita manteniment</string>
     <string name="attribute_cow_yes">Vigileu amb el bestiar</string>
-    <string name="attribute_cow_no">No hi ha bestiar</string>
     <string name="attribute_field_puzzle_yes">És un misteri in situ</string>
     <string name="attribute_field_puzzle_no">No és un misteri in situ</string>
     <string name="attribute_nightcache_yes">És un catxé nocturn</string>
@@ -2052,7 +2072,6 @@
     <string name="attribute_scuba_yes">És necessari equip de busseig</string>
     <string name="attribute_flashlight_yes">És necessita una llanterna</string>
     <string name="attribute_uv_yes">És necessita una llum UV</string>
-    <string name="attribute_uv_no">No és necessita una llum UV</string>
     <string name="attribute_snowshoes_yes">Calen raquetes de neu</string>
     <string name="attribute_skiis_yes">Són necessaris esquís de travessa</string>
     <string name="attribute_s_tool_yes">Es requereix alguna eina especial</string>
@@ -2384,6 +2403,7 @@
     <string name="map_export_route">Exporta com a ruta</string>
     <string name="map_export_track">Exporta com a track</string>
     <string name="map_load_from_GPX">Carrega des de GPX</string>
+    <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
     <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>
@@ -2425,8 +2445,6 @@
     <string name="routes_tracks_color">Seleccioneu el color</string>
     <string name="routes_tracks_change_name">Canvia el nom</string>
     <string name="center">Centre</string>
-    <string name="unload_route_track">Descarregar ruta/track</string>
-    <string name="route">Ruta</string>
     <string name="track">Track</string>
     <string name="make_visible">Fer visible</string>
     <string name="hide">Ocultar</string>
@@ -2612,7 +2630,7 @@
     <string name="wherigo_controls_stopgame_hint">Atura un joc en curs</string>
     <string name="wherigo_controls_mapzones_hint">Mostra les zones d\'un joc en curs al mapa</string>
     <string name="wherigo_controls_downloadcartridge_hint">Descarrega un cartutx (cal cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Informa d\'un problema amb el Wherigo Player</string>
+    <string name="wherigo_controls_reportproblem_hint">Mostra l\'últim problema de Wherigo</string>
     <string name="wherigo_controls_cache_context">Context del catxé</string>
     <string name="wherigo_controls_cache_link">Vés als detalls del catxé</string>
     <string name="wherigo_sound_title">Controls de so</string>
@@ -2625,7 +2643,6 @@
     <string name="wherigo_dialog_pause_info">Reprèn el diàleg a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
     <string name="wherigo_currently_playing">Actualment jugant</string>
-    <string name="wherigo_cartridge_details">Detalls del cartutx</string>
     <string name="wherigo_locate_on_center">Situar al centre</string>
     <string name="wherigo_revoke_fixed_location">Revoca la ubicació fixa</string>
     <string name="wherigo_thingtype_location">Ubicacions</string>
@@ -2657,7 +2674,6 @@
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
     <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Utilitzeu \"Envia per correu electrònic\" per informar d\'un problema relacionat amb Wherigo al nostre equip d\'assistència.</string>
     <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError del motor: %1$s\n\nInformació de Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
@@ -2695,6 +2711,7 @@
     <string name="close">Tanca</string>
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
+    <string name="copy">Còpia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>
@@ -2745,4 +2762,14 @@
     <string name="dbi_edit_error">Error en actualitzar el camp</string>
     <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
     <string name="dbi_search_title">Buscar per</string>
+    <string name="dbi_search_columnSelection">Restringir a</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Usat recentment</string>
+    <string name="emoji_category_symbols">Símbols</string>
+    <string name="emoji_category_dots">Punts</string>
+    <string name="emoji_category_places">Llocs</string>
+    <string name="emoji_category_food">Menjar &amp; Beguda</string>
+    <string name="emoji_category_activity">Activitat</string>
+    <string name="emoji_category_people">Gent</string>
+    <string name="emoji_category_numbers">Nombres</string>
 </resources>

@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Attēls</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
-    <string name="translate_to_english">Tulkot angļu valodā</string>
     <string name="translate_length_warning">Tulkojums var neizdoties liela teksta apjoma dēļ.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -760,7 +758,6 @@
     <string name="goto_targets_list">Lietotāja definēti slēpņi</string>
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
-    <string name="internal_connector_name">Lietotāja definēti slēpņi</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grādi</string>
@@ -852,16 +849,8 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
-    <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
     <string name="search_address">Adrese</string>
-    <string name="search_address_button">Meklēt pēc adreses</string>
-    <string name="search_kw_prefill">Atslēgvārds</string>
-    <string name="search_kw_button">Meklēt pēc atslēgvārda</string>
-    <string name="search_hbu_prefill">Īpašnieks</string>
-    <string name="search_hbu_button">Meklēt pēc īpašnieka vārda</string>
     <string name="search_tb">Ceļotājs</string>
-    <string name="search_tb_hint">Ceļotāja identifikācija</string>
-    <string name="search_tb_button">Meklēt ceļotāju</string>
     <string name="search_address_started">Meklē vietu</string>
     <string name="search_address_result">Atrastās vietas</string>
     <string name="search_pocket_title">Slēpņu atlase (PQ)</string>
@@ -988,7 +977,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_stealth_no">Nav nepieciešama maskēšanās</string>
     <string name="attribute_firstaid_yes">Nepieciešama apkope</string>
     <string name="attribute_cow_yes">Uzmanīties no mājlopiem</string>
-    <string name="attribute_cow_no">Nav mājlopu</string>
     <string name="attribute_field_puzzle_yes">Lauka puzzle (Field puzzle)</string>
     <string name="attribute_field_puzzle_no">Nav lauka puzzle (No Field puzzle)</string>
     <string name="attribute_nightcache_yes">Nakts slēpnis (Night cache)</string>
@@ -1021,7 +1009,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_scuba_yes">Nepieciešams niršanas aprīkojums</string>
     <string name="attribute_flashlight_yes">Nepieciešams lukturītis</string>
     <string name="attribute_uv_yes">Nepieciešama UV gaisma</string>
-    <string name="attribute_uv_no">Nav nepieciešama UV gaisma</string>
     <string name="attribute_snowshoes_yes">Nepieciešami sniega zābaki</string>
     <string name="attribute_skiis_yes">Nepieciešamas distanču slēpes</string>
     <string name="attribute_s_tool_yes">Nepieciešami speciāli rīki</string>
@@ -1280,4 +1267,5 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

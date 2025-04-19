@@ -215,9 +215,6 @@
     <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
     <string name="contact_multiple_matches">연락처: 여러 일치 항목</string>
     <!-- translation -->
-    <string name="translate">번역</string>
-    <string name="translate_to_sys_lang">%s로 번역하기</string>
-    <string name="translate_to_english">영어로 번역하기</string>
     <string name="translate_length_warning">내용이 긴 경우 번역이 되지 않을수 도 있습니다.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
@@ -444,7 +441,6 @@
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
-    <string name="caches_show_attributes">속성 개요 표시</string>
     <string name="caches_set_cache_icon">캐시 아이콘 설정</string>
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
@@ -1507,7 +1503,6 @@
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
-    <string name="internal_connector_name">사용자 정의 캐시</string>
     <!-- html styles -->
     <string name="html_style_default">기본</string>
     <string name="html_style_monochrome">흑백크롬</string>
@@ -1614,7 +1609,6 @@
     <string name="calccoord_generate_title">지점 생성</string>
     <string name="calccoord_generate_showonmap">지도에 표시</string>
     <string name="calccoord_generate_waypointnameprefix">생성됨</string>
-    <string name="calccoord_generate_error_novarwithrange">범위가 있는 유효한 변수가 없습니다.</string>
     <string name="calccoord_generate_error_novalidgeopoints">유효한 좌표를 반환한 조합이 없습니다.</string>
     <string name="calccoord_generate_error_nogeopointselected">선택한 좌표 없음</string>
     <string name="calccoord_migrate_title">지점 이전</string>
@@ -1726,28 +1720,15 @@
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
     <string name="search_bar_hint_settings">설정 검색</string>
     <string name="search_coordinates">좌표</string>
-    <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
-    <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
-    <string name="search_geo_button">지오코드로 검색</string>
-    <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
-    <string name="search_kw_prefill">키워드</string>
-    <string name="search_kw_button">키워드로 검색</string>
     <string name="search_kw_disabled_hint">기본 회원의 경우 geocaching.com에서 지원하지 않으므로 사용할 수 없음</string>
     <string name="search_hbu">숨겨진 사용자</string>
-    <string name="search_hbu_prefill">소유주</string>
-    <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_finder">찾은 사용자</string>
-    <string name="search_finder_prefill">찾은 사용자</string>
-    <string name="search_finder_button">찾은 사용자명으로 검색</string>
     <string name="search_filter">필터</string>
-    <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
-    <string name="search_tb_hint">추적 코드</string>
-    <string name="search_tb_button">추적아이템 검색</string>
     <string name="search_destination">c:geo에서 대상 열기</string>
     <string name="add_target_to">대상 추가</string>
     <string name="search_address_started">장소 검색 중</string>
@@ -1902,7 +1883,6 @@
     <string name="attribute_stealth_no">은밀함이 필요 없음</string>
     <string name="attribute_firstaid_yes">유지보수가 필요함</string>
     <string name="attribute_cow_yes">가축 조심</string>
-    <string name="attribute_cow_no">가축 없음</string>
     <string name="attribute_field_puzzle_yes">현장 퍼즐</string>
     <string name="attribute_field_puzzle_no">현장 퍼즐 없음</string>
     <string name="attribute_nightcache_yes">야간 캐시</string>
@@ -1935,7 +1915,6 @@
     <string name="attribute_scuba_yes">스쿠버 장비 필요</string>
     <string name="attribute_flashlight_yes">플래시 필요</string>
     <string name="attribute_uv_yes">UV 라이트 필요</string>
-    <string name="attribute_uv_no">UV 라이트 필요없음</string>
     <string name="attribute_snowshoes_yes">설상화 필요</string>
     <string name="attribute_skiis_yes">크로스컨트리 스키 필요</string>
     <string name="attribute_s_tool_yes">특별한 도구가 필요함</string>
@@ -2243,6 +2222,7 @@
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
     <string name="map_refresh_individual_route">새로 고침</string>
+    <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_autotarget_individual_route">경로 시작을 대상으로 설정</string>
     <string name="map_disable_autotarget_individual_route">\"경로 시작을 대상으로 설정\" 비활성화</string>
@@ -2282,8 +2262,6 @@
     <string name="routes_tracks_color">색상 선택</string>
     <string name="routes_tracks_change_name">이름 변경</string>
     <string name="center">중앙</string>
-    <string name="unload_route_track">경로/트랙 내리기</string>
-    <string name="route">경로</string>
     <string name="track">트랙</string>
     <string name="make_visible">보이게 함</string>
     <string name="hide">숨기기</string>
@@ -2485,4 +2463,5 @@
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
