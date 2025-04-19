@@ -1,29 +1,43 @@
 ### Карта
 - Новое: Поддержка высот в Зимней теме (Winter theme) при скачивании карт
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on chaning list contents
-- New: Follow my location in elevation chart (UnifiedMap)
+- Новое: Адаптивное затенение холмов, дополнительный режим высокого качества (Mapsforge в ЕдинаяКарта)
+- Изменение: Сохраняется текущее окно просмотра при отображении списка, если все тайники помещаются в нём
+- Новое: Переработанный диалог быстрых настроек маршрутов/треков
+- Новое: Длительное нажатие на значок выбора карты для выбора предыдущего провайдера карт (ЕдинаяКарта)
+- Новое: Возможность настраивать отображаемое название для автономных карт в сопутствующем файле (ЕдинаяКарта)
+- Новое: Отображение геозон этапов Adventure Lab (ЕдинаяКарта) - включите "Круги" в быстрых настройках карты, чтобы отобразить их
+- Новое: Возможность устанавливать круги с индивидуальным радиусом для путевых точек (пункт контекстного меню "геозона")
+- Исправлено: карта не обновлялась при удалении тайника из отображаемого в данный момент списка
+- Исправлено: Число тайников выбранного списка не обновлялось при изменении содержимого списка
+- Новое: Следить за моим местоположением на карте высот (ЕдинаяКарта)
+- Новое: Долгий тап по "включить онлайн", чтобы скачать тайники
+- Новое: Добавлены "переместить в" / "скопировать в" для "показать списком"
 
 ### Детали тайника
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
-- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
-- Fix: User note gets lost on refreshing a lab adventure
+- Новое: Возможность поделиться пользовательскими данными (координаты, личные заметки) вместе с тайником
+- Исправлено: Чтение текста прерывалось при повороте экрана
+- Исправлено: Сведения о тайнике: списки тайников не обновлялись после нажатия на имя списка и удаления тайника из этого списка
+- Исправлено: Заметка пользователя терялась при обновлении lab adventure (geocaching.com)
+- Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
+- Изменение: Подстановки, связанные с датой записи, будут использовать выбранную дату вместо текущей
+- New: Collapse long log entries per default
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Общее
 - Новое: Переработана страница поиска
-- New: Inventory count filter
+- Новое: Фильтр количества трекаблов на руках
 - Новое: Поддержка координат в формате DD,DDDDDDD
-- New: Show last used filter name in filter dialog
-- New: Support opening local Wherigo files
-- Fix: Importing local map file gets random map name
-- Fix: Color issues with menu icons in light mode
-- Fix: Nearby distance limit setting not working properly for small values
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Новое: Отображение последнего использованного имени фильтра в диалоговом окне фильтра
+- Новое: Поддержка открытия локальных файлов Wherigo
+- Исправлено: при импорте файла локальной карты имя карты выбиралось случайным образом
+- Исправлено: проблемы с цветом значков меню в светлом режиме
+- Исправлено: Настройка ограничения расстояния до ближайшего объекта не работала должным образом при малых значениях
+- Новинка: Калькулятор координат: функция для замены "x" символом умножения
+- Исправлено: Тайники Adv Lab (Лаборатории Приключений) исключались фильтром D/T даже при активном "включать неопределенные"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
