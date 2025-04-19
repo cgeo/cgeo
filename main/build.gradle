@@ -415,6 +415,7 @@ dependencies {
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-jts:$mapsforgeVTMVersion"
+    implementation "$mapsforgeVTMSource:vtm-hillshading:$mapsforgeVTMVersion"
     implementation "org.locationtech.jts:jts-core:1.20.0"
 
     runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-armeabi-v7a"
