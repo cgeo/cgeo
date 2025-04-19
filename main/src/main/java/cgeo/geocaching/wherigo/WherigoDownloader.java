@@ -37,6 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.utils.IOUtils;
 
 public class WherigoDownloader {
@@ -148,6 +149,7 @@ public class WherigoDownloader {
             .add("__EVENTARGUMENT", "")
             .add("__RequestVerificationToken", token)
             .add("ctl00$ContentPlaceHolder1$uxDeviceList", "4")
+            .add("ctl00$ContentPlaceHolder1$EULAControl1$uxEulaAgree", "On")
             .add("ctl00$ContentPlaceHolder1$btnDownload", "Download Now");
 
         final HttpRequest downloadRequest = new HttpRequest()
@@ -156,10 +158,21 @@ public class WherigoDownloader {
             .bodyForm(params);
         try (HttpResponse downloadResponse = downloadRequest.request().blockingGet()) {
             final String type = downloadResponse.getResponse().body().contentType().toString();
-            if (!downloadResponse.isSuccessful() || !"application/octet-stream".equals(type)) {
-                return new StatusResult(StatusCode.COMMUNICATION_ERROR, "cartridge not found [" + type + "]");
+            if (!downloadResponse.isSuccessful()) {
+                return cartridgeNotFound(type);
             }
             final Response response = downloadResponse.getResponse();
+            if (StringUtils.startsWith(type, "text/html")) {
+                final String body = downloadResponse.getBodyString();
+                if (StringUtils.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
+                    return new StatusResult(StatusCode.UNAPPROVED_LICENSE, LocalizationUtils.getString(R.string.wherigo_download_accept_eula));
+                } else {
+                    return cartridgeNotFound(type);
+                }
+            } else if (!"application/octet-stream".equals(type)) {
+                return cartridgeNotFound(type);
+            }
+
             final String contentDisposition = response.header("Content-Disposition", "");
             final String pattern = "(?i)^ *attachment *; *filename *= *(.*) *$";
             final String filename;
@@ -172,6 +185,10 @@ public class WherigoDownloader {
 
             return store(filename, total, outputSupplier, response.body().byteStream(), progress, cancelFlag);
         }
+    }
+
+    private static StatusResult cartridgeNotFound(final String type) {
+        return new StatusResult(StatusCode.COMMUNICATION_ERROR, "cartridge not found [" + type + "]");
     }
 
     private static StatusResult store(final String filename, final long total, final Function<String, OutputStream> outputSupplier, final InputStream stream, final BiConsumer<Long, Long> progress, final Supplier<Boolean> cancelFlag) {
