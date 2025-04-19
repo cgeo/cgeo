@@ -232,7 +232,6 @@
     <string translatable="false" name="pref_maphillshading_show_layer">maphillshading_show_layer</string>
     <string translatable="false" name="pref_maphillshading_hq">maphillshading_hq</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
-    <string translatable="false" name="pref_rapidapiKey">rapidapiKey</string>
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
