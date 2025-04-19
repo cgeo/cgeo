@@ -202,9 +202,6 @@
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
     <!-- translation -->
-    <string name="translate">Oversett</string>
-    <string name="translate_to_sys_lang">Oversett til %s</string>
-    <string name="translate_to_english">Oversett til engelsk</string>
     <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -396,7 +393,6 @@
     <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
-    <string name="caches_show_attributes">Vis oversikt over attributter</string>
     <string name="caches_set_cache_icon">Angi cacheikon</string>
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikon</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
@@ -1194,7 +1190,6 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
-    <string name="internal_connector_name">Interne cacher</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1359,25 +1354,12 @@
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
     <string name="search_coordinates">Koordinater</string>
-    <string name="search_coordinates_button">Søk med koordinater</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Søk med adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Søk med geokode</string>
-    <string name="search_geocode_from_clipboard">Geokode ble limt inn fra utklippstavlen.</string>
     <string name="search_kw">Nøkkelord</string>
-    <string name="search_kw_prefill">Nøkkelord</string>
-    <string name="search_kw_button">Søk med nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
-    <string name="search_hbu_prefill">Eier</string>
-    <string name="search_hbu_button">Søk med</string>
     <string name="search_finder">Funnet av</string>
-    <string name="search_finder_prefill">Finner</string>
-    <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
-    <string name="search_tb_hint">Sporingskode</string>
-    <string name="search_tb_button">Søk etter sporbare</string>
     <string name="search_destination">Åpne mål i c:geo</string>
     <string name="add_target_to">Legg til mål til</string>
     <string name="search_address_started">Søker etter steder</string>
@@ -1530,7 +1512,6 @@
     <string name="attribute_stealth_no">Stealth kreves ikke</string>
     <string name="attribute_firstaid_yes">Trenger vedlikehold</string>
     <string name="attribute_cow_yes">Se opp for husdyr</string>
-    <string name="attribute_cow_no">Ingen fare for husdyr</string>
     <string name="attribute_field_puzzle_yes">Oppgave på stedet</string>
     <string name="attribute_field_puzzle_no">Ingen oppgave på stedet</string>
     <string name="attribute_nightcache_yes">Nattcache</string>
@@ -1563,7 +1544,6 @@
     <string name="attribute_scuba_yes">Dykkerutstyr kreves</string>
     <string name="attribute_flashlight_yes">Lommelykt kreves</string>
     <string name="attribute_uv_yes">UV-lys kreves</string>
-    <string name="attribute_uv_no">UV-lys ikke nødvendig</string>
     <string name="attribute_snowshoes_yes">Truger nødvendig</string>
     <string name="attribute_skiis_yes">Ski er nødvendig</string>
     <string name="attribute_s_tool_yes">Spesialverktøy kreves</string>
@@ -1851,6 +1831,7 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
+    <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
     <string name="map_autotarget_individual_route">Sett rutestart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Sett rutestart som mål\" er deaktivert</string>
@@ -1875,8 +1856,6 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
     <string name="routes_tracks_menu">Ruter / Spor</string>
-    <string name="unload_route_track">Slett rute/spor</string>
-    <string name="route">Rute</string>
     <string name="track">Spor</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -1997,4 +1976,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
