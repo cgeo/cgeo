@@ -486,7 +486,7 @@ dependencies {
     implementation 'androidx.core:core:1.16.0'
 
     // Support Library constraintlayout
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.1.0'
