@@ -10,12 +10,18 @@
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
 - Nyhet: Följ min plats i höjddiagram (UnifiedMap)
+- Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
+- Nytt: Aktivera "flytta till" / "kopiera till" åtgärder för "visa som lista"
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
 - Fix: Talservice avbryts vid skärmrotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: Användaranteckning tappas när du laddar upp ett lab adventure
+- Nyhet: Offline-översättning av notering, text och loggar (experimentell)
+- Ändra: Loggdatum-relaterade platshållare kommer att använda valt datum istället för aktuellt datum
+- New: Collapse long log entries per default
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Allmänt
 - New: Redesigned search page
@@ -26,4 +32,12 @@
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
 - Fix: Färg-problem med menyikoner i ljust läge
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
+- Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
