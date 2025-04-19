@@ -399,7 +399,7 @@ dependencies {
 
     // Mapsforge VTM implementation (official version)
     String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
-    String mapsforgeVTMVersion = '0.22.0'
+    String mapsforgeVTMVersion = '0.25.0'
 
     // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
     // String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
@@ -415,7 +415,7 @@ dependencies {
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-jts:$mapsforgeVTMVersion"
-    implementation "org.locationtech.jts:jts-core:1.16.1"
+    implementation "org.locationtech.jts:jts-core:1.20.0"
 
     runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-armeabi-v7a"
     runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-arm64-v8a"
