@@ -3003,6 +3003,7 @@
     <string name="wherigo_download_progress_login">Logging in…</string>
     <string name="wherigo_download_progress_started">Download started</string>
     <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Please log in to www.wherigo.com and accept their terms and conditions first</string>
 
     <string name="wherigo_error_title">Wherigo Problem report</string>
     <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
