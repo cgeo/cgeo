@@ -1,28 +1,28 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+### Roadmap UnifiedMap (Vereinheitlichte Karte) & Abkündigung der alten Karten
+c:geo hat seit einiger Zeit eine komplett neue Kartenimplementierung namens "UnifiedMap", die bald die alten Implementierungen von Google Maps und Mapsforge (OpenStreetMap) ersetzen wird. Dies ist ein Abkündigungs-Hinweis und informiert über die weitere Planung.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+UnifiedMap wurde vor etwa einem Jahr veröffentlicht. Google Maps und OpenStreetMap (online + offline) werden weiterhin unterstützt, aber in komplett überarbeiteter technischer Art und Weise und mit vielen neuen Features, die die "alten" Karten nicht unterstützen. Einige davon sind:
+- Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
+- Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
+- Kartenquellen ausblenden, die nicht benötigt werden
+- Höhendiagramm für Routen und Tracks
+- Wechseln zwischen Listen direkt auf der Karte
+- "Fahrmodus" für OpenStreetMap-basierte Karten
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+UnfiedMap ist seit geraumer Zeit stabil, daher werden wir die alten Kartenimplementierungen entfernen, um die Aufwände zur Pflege von c:geo zu reduzieren.
 
 Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+- "Alte" Karten sind jetzt abgekündigt - wir werden dazu keine Fehler mehr beheben.
+- UnifiedMap wird für alle Benutzer im Herbst 2025 voreingestellt.
+- "Alte" Kartenimplementierungen werden im Frühjahr 2026 entfernt.
 
-Until then, you can switch between the different implementations in settings => map sources.
+Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen Implementierungen wechseln.
 
 ### Karte
 - Neu: Geo-Begrenzung für Labstationen anzeigen (UnifiedMap) - Aktiviere "Kreise" in den Kartenschnelleinstellungen, um sie anzuzeigen
 - Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
-- Fix: Number of cache in list chooser not updated on changing list contents
+- Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
 - Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
 - Neu: Folge meinem Standort im Höhendiagramm (UnifiedMap)
 - Neu: Aktiviere "Verschieben" / "Kopieren" Aktionen für "Zeige als Liste"
@@ -42,14 +42,14 @@ Until then, you can switch between the different implementations in settings => 
 - Änderung: Logdatum-bezogene Platzhalter verwenden gewähltes statt des aktuellen Datums
 - Neu: Lange Logeinträge standardmäßig verkürzt anzeigen
 
-### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
+### Wherigo Player
+- Neu: Integrierter Wherigo Player prüft auf fehlende Anmeldeinformationen
+- Änderung: Mailen von Wherigo-Fehlerberichten entfernt (da Fehler meist in der Cartridges liegen und nur vom Besitzer der Cartridge behoben werden können)
+- Neu: Mit Kompass zu einer Zone navigieren
+- Neu: Koordinaten der Zonenmitte in die Zwischenablage kopieren
+- Neu: Zonenmitte beim Öffnen der Karte als Ziel festlegen (um Routen- und Distanzinformationen dafür zu erhalten)
 - Neu: Unterstützt das Öffnen lokaler Wherigo-Dateien
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- Änderung: Lange Tippen auf eine Zone auf der Karte wird ignoriert. Dies ermöglicht Zugriff auf andere Funktionen mit langem Tippen, z. B. Erstellen benutzerdefinierter Caches
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
@@ -57,7 +57,7 @@ Until then, you can switch between the different implementations in settings => 
 - Neu: Unterstützung für Koordinaten im DD,DDDDDDD Format
 - Neu: Zeige den letzten Filter im Filterdialog
 - Neu: Koordinatenrechner: Funktion zum Ersetzen von "x" durch Multiplikationssymbol
-- Fix: Incorrect altitude (not using mean above sea level)
+- Korrektur: Falsche Höhe angezeigt (nicht Mittlere Höhe über Meeresspiegel)
 - Korrektur: Einstellung der Annäherungswerte funktioniert nicht bei kleinen Entfernungen
 - Korrektur: Sortierung der Cachelisten nach Entfernung absteigend funktioniert nicht korrekt
 - Korrektur: Lab-Caches durch D/T-Filter selbst bei "Caches ohne D/T einbeziehen" ausgeschlossen
@@ -65,5 +65,5 @@ Until then, you can switch between the different implementations in settings => 
 - Neu: "Vergangene Events löschen" in Liste "alle"
 - Neu: Konnektor für "benutzerdefinierte Caches" als aktiv im "Herkunft"-Filter anzeigen
 - Neu: GPX-Export: Exportieren von Logs / Trackables optional
-- New: Added button to delete log templates
+- Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
