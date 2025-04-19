@@ -10,12 +10,18 @@
 - Correcção: Visualização do mapa não era actualizada ao remover a cache da lista actualmente mostrada
 - Correcção: Número de caches no selector de lista não era actualizado ao alterar o conteúdo da lista
 - New: Follow my location in elevation chart (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
+- New: Enable "move to" / "copy to" actions for "show as list"
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
 - Correcção: Serviço de fala interrompido na rotação do ecrã
 - Correcção: Detalhes da cache: Listas para a cache não eram actualizadas depois de tocar no nome da lista e remover essa cache dessa lista
 - Fix: User note gets lost on refreshing a lab adventure
+- New: Offline translation of listing text and logs (experimental)
+- Change: Log-date related placeholders will use chosen date instead of current date
+- New: Collapse long log entries per default
+- New: Integrated Wherigo player checking for missing credentials
 
 ### Geral
 - Novo: Página de pesquisa redesenhada
@@ -27,3 +33,11 @@
 - Correcção: problemas de cor com os ícones do menu no modo claro
 - Correcção: Configuração de limite de distância próxima não funcionava correctamente para valores pequenos
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
+- New: Add "Remove past events" to list "all"
+- New: Show connector for "user-defined caches" as active in source filter
+- New: GPX export: exporting logs / trackables made optional
+- Fix: Sorting of cache lists by distance descending not working correctly
+- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Added button to delete log templates
+- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
