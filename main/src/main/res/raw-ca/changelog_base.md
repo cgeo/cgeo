@@ -10,12 +10,18 @@
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
 - Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
+- Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
+- Nou: habiliteu les accions "mou a" / "copiar a" per a "mostrar com a llista"
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
 - Correcció: el servei de veu s'ha interromput en la rotació de la pantalla
 - Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
 - Correcció: la nota de l'usuari es perd en actualitzar una lab adventure
+- Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
+- Canvi: els marcadors de posició relacionats amb la data de registre utilitzaran la data escollida en lloc de la data actual
+- Nou: redueix les entrades de registre llargues per defecte
+- Nou: el Wherigo player integrat comprova les credencials que falten
 
 ### General
 - Nou: pàgina de cerca redissenyada
@@ -26,4 +32,12 @@
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
 - Solució: problemes de color amb les icones del menú en mode de llum
 - Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
+- Novetat: Calculadora de coordenades: funció per substituir "x" pel símbol de multiplicació
+- Correcció: El catxés Lab excloses pel filtre D/T fins i tot amb "inclou incert" actiu
+- Nou: afegiu "Elimina els esdeveniments passats" per llistar "tots"
+- Novetat: mostra el connector pels "Catxés definits per l'usuari" com a actiu al filtre font
+- Novetat: exportació GPX: exportació de registres / rastrejables es fa opcional
+- Correcció: l'ordenació de les llistes de catxés per distància descendent no funciona correctament
+- Correcció: altitud incorrecta (no utilitzant la mitjana sobre el nivell del mar)
+- Correcció: S'ha afegit un botó per eliminar les plantilles de registre
+- Canvi: S'ha eliminat l'informe d'error de Wherigo (ja que els errors estan relacionats principalment amb els cartutxos, el propietari del cartutx ha de solucionar-los)
