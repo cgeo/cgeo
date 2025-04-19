@@ -300,15 +300,17 @@ public class OfflineTranslateUtils {
 
         public synchronized void setSourceLanguage(final OfflineTranslateUtils.Language lng) {
             sourceLanguage = lng;
-            this.languageChangeConsumer.accept(lng);
+            if (null != this.languageChangeConsumer) {
+                this.languageChangeConsumer.accept(lng);
+            }
         }
 
         public void setSourceLanguageChangeConsumer(final Consumer<Language> consumer) {
             this.languageChangeConsumer = consumer;
         }
 
-        public OfflineTranslateUtils.TranslationProgressHandler getProgressHandler() {
-            return progressHandler;
+        public boolean isInProgress() {
+            return progressHandler != null && !progressHandler.isDisposed();
         }
 
         public void setProgressHandler(final OfflineTranslateUtils.TranslationProgressHandler progressHandler) {

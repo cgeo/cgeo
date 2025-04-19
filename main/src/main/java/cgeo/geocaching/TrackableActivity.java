@@ -64,6 +64,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class TrackableActivity extends TabbedViewPagerActivity {
 
+    public static final String STATE_TRANSLATION_LANGUAGE_SOURCE = "cgeo.geocaching.translation.languageSource";
+
     public enum Page {
         DETAILS(R.string.detail),
         LOGS(R.string.cache_logs),
@@ -196,9 +198,27 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             message = res.getString(R.string.trackable);
         }
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_TRANSLATION_LANGUAGE_SOURCE)) {
+                final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
+                if (newLanguage.isValid()) {
+                    translationStatus.setSourceLanguage(newLanguage);
+                }
+            }
+        }
+
         createViewPager(Page.DETAILS.id, getOrderedPages(), null, true);
 
         refreshTrackable(message);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (this.translationStatus.isTranslated()) {
+            outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.getSourceLanguage().getCode());
+        }
     }
 
     @Override
@@ -603,6 +623,11 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             }
 
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
+
+            final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
+            if (currentTranslationStatus.getSourceLanguage().isValid() && !currentTranslationStatus.isInProgress()) {
+                translateListing();
+            }
         }
 
         private void translateListing() {
