@@ -454,12 +454,16 @@
     <string name="caches_remove_selected">Ta bort vald från listan</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
+    <string name="caches_remove_from_other_lists_selected">Ta bort valda från andra listor</string>
+    <string name="caches_remove_from_other_lists_all">Ta bort alla från andra listor</string>
     <string name="caches_append_to_route_selected">Lägg till vald till individuell rutt</string>
     <string name="caches_append_to_route_all">Lägg till alla till individuella rutter</string>
     <string name="caches_appended_to_route">Cacher bifogade till rutt</string>
     <string name="waypoints_appended_to_route">Waypoints tillagda till rutt</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
     <string name="caches_upload_bookmarklist">Lägg till i bokmärkeslistan</string>
+    <string name="caches_upload_bookmarklist_all">Lägg till i bokmärkeslistan</string>
+    <string name="caches_upload_bookmarklist_selected">Lägg till valda i bokmärkeslistan</string>
     <string name="caches_upload_modifiedcoords">Ladda upp modifierade koordinater</string>
     <string name="caches_upload_modifiedcoords_warning">Vill du ladda upp modifierade koordinater för alla (markerade) cacher och skriva över befintliga koordinater på servern? Detta kan inte ångras.</string>
     <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
@@ -481,7 +485,11 @@
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
     <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
+    <string name="caches_show_attributes_all">Visa attributöversikt för alla cacher</string>
+    <string name="caches_show_attributes_selected">Visa attributöversikt för valda cacher</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
+    <string name="caches_set_cache_icon_all">Ställ in cache-ikon för alla cacher</string>
+    <string name="caches_set_cache_icon_selected">Ställ in cache-ikon för valda cacher</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
@@ -1111,6 +1119,8 @@
     <string name="init_accuracycirclecolor">Färg på cirkel för noggrannhet</string>
     <string name="init_accuracycirclecolor_summary">Välj färg och genomskinlighet för cirkeln för noggrannhet. Cirkeln används som en visuell representation för GPS-signalens noggrannhet.</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
+    <string name="init_include_logs">Inkludera loggar</string>
+    <string name="init_include_travelbugs">Inkludera Travel Bugs</string>
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
     <string name="init_sigautoinsert">Infoga automatiskt</string>
@@ -1575,6 +1585,7 @@
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
+    <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -1703,6 +1714,7 @@
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
+    <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <!-- Projection -->
     <string name="projection_type_none">Ingen projektion</string>
     <string name="projection_type_bearing">Bäring</string>
@@ -1736,6 +1748,7 @@
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
     <string name="calccoord_generate_waypointnameprefix">genererad</string>
+    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades (t.ex. [:0-9] eller [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
     <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
     <string name="calccoord_migrate_title">Migrera waypoints</string>
@@ -2596,6 +2609,7 @@
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_reportproblem_hint">Visa senaste Wherigo-problem</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
     <string name="wherigo_sound_title">Ljudkontroller</string>
@@ -2610,6 +2624,8 @@
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
+    <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
@@ -2641,6 +2657,7 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
+    <string name="copy">Kopiera</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
