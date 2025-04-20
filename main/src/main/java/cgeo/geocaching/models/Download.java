@@ -16,6 +16,7 @@ import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOSMPaws;
 import cgeo.geocaching.downloader.MapDownloaderOSMPawsThemes;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsBackgroundMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -156,7 +157,8 @@ public class Download {
 
         DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile, R.drawable.ic_menu_route),
         DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile, R.drawable.ic_menu_hills),
-        DOWNLOADTYPE_LANGUAGE_MODEL(92, R.string.translator_model, R.drawable.ic_menu_translate);
+        DOWNLOADTYPE_LANGUAGE_MODEL(92, R.string.translator_model, R.drawable.ic_menu_translate),
+        DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS(93, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode);
 
         public final int id;
         @StringRes final int typeNameResId;
@@ -187,6 +189,18 @@ public class Download {
             final ArrayList<DownloadTypeDescriptor> mapRelatedTypes = new ArrayList<>(offlineMapTypes);
             mapRelatedTypes.addAll(offlineMapThemeTypes);
             return mapRelatedTypes;
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> get(final int typeId) {
+            buildTypelist();
+            final ArrayList<DownloadTypeDescriptor> result = new ArrayList<>();
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
+                if (descriptor.type.id == typeId) {
+                    result.add(descriptor);
+                    break;
+                }
+            }
+            return result;
         }
 
         @Nullable
@@ -239,6 +253,7 @@ public class Download {
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_HILLSHADING_TILES, HillshadingTileDownloader.getInstance(), R.string.hillshading_name));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS, MapDownloaderOpenAndroMapsBackgroundMaps.getInstance(), R.string.persistablefolder_backgroundmaps));
 
                 // adding maps and map themes to download types for completeness
                 downloadTypes.addAll(offlineMapTypes);

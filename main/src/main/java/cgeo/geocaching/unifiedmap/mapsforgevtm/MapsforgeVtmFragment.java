@@ -12,6 +12,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.HillShadingLayerHelper;
+import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -45,6 +46,7 @@ import org.oscim.event.GestureListener;
 import org.oscim.event.MotionEvent;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
+import org.oscim.layers.tile.bitmap.BitmapTileLayer;
 import org.oscim.layers.tile.vector.OsmTileLayer;
 import org.oscim.layers.tile.vector.VectorTileLayer;
 import org.oscim.map.Map;
@@ -128,6 +130,12 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
         renderer.setOffset(30 * CanvasAdapter.getScale(), 0); // make room for attribution
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
+
+        if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
+            for (BitmapTileLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayers(requireActivity(), mMap)) {
+                addLayer(LayerHelper.ZINDEX_BASEMAP, backgroundMap);
+            }
+        }
         if (Settings.getMapShadingShowLayer()) {
             addLayer(2, HillShadingLayerHelper.getBitmapTileLayer(getContext(), mMap));
         }

@@ -83,6 +83,11 @@ public class DownloaderUtils {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
+        } else if (id == R.id.menu_download_backgroundmap) {
+            final Intent intent = new Intent(activity, DownloadSelectorActivity.class);
+            intent.putExtra(DownloadSelectorActivity.INTENT_FIXED_DOWNLOADTYPE, Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id);
+            activity.startActivity(intent);
+            return true;
         } else if (id == R.id.menu_delete_offline_data) {
             deleteOfflineData(activity);
             return true;

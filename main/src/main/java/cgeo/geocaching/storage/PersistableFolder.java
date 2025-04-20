@@ -34,6 +34,8 @@ public enum PersistableFolder {
     OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(OFFLINE_MAPS, "_themes")),
     /** Offline Maps: optional folder for map shading files (dem) */
     OFFLINE_MAP_SHADING(R.string.pref_persistablefolder_offlinemapshading, R.string.persistablefolder_offline_maps_shading, Folder.fromPersistableFolder(OFFLINE_MAPS, "_hgt")),
+    /** Offline Maps: app-specific media folder */
+    BACKGROUND_MAPS(R.string.pref_persistablefolder_backgroundmaps, R.string.persistablefolder_backgroundmaps, Folder.fromFile(CgeoApplication.getInstance().getApplicationContext().getExternalMediaDirs()[0])),
     /** Target folder for written logfiles */
     LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
     /** GPX Files */

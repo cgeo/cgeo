@@ -297,6 +297,7 @@
     <string translatable="false" name="mapserver_openandromaps_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/mapsV5/</string>
     <string translatable="false" name="mapserver_openandromaps_likeiturl">https://www.openandromaps.org/projektkosten</string>
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
+    <string translatable="false" name="mapserver_openandromaps_backgroundmaps">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/world/</string>
 
     <string translatable="false" name="mapserver_openandromaps_themes_name">OpenAndroMaps Theme</string>
     <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/elevate/</string>

@@ -15,6 +15,13 @@
             android:checkable="true"
             android:visible="false"/>
         <item
+            android:orderInCategory="90"
+            android:id="@+id/menu_backgroundmap"
+            android:title="@string/persistablefolder_backgroundmaps"
+            android:icon="@drawable/ic_menu_mapmode"
+            android:checkable="true"
+            android:visible="false"/>
+        <item
             android:orderInCategory="91"
             android:id="@+id/menu_manage_offline_maps"
             android:icon="@drawable/wherigo_download"
@@ -24,6 +31,11 @@
                     android:id="@+id/menu_download_offlinemap"
                     android:title="@string/downloadmap_title"
                     android:icon="@drawable/ic_menu_mapmode"/>
+                <item
+                    android:id="@+id/menu_download_backgroundmap"
+                    android:title="@string/downloadbackground_title"
+                    android:icon="@drawable/ic_menu_mapmode"
+                    android:visible="false"/>
                 <item
                     android:id="@+id/menu_check_routingdata"
                     android:title="@string/check_tiles_menu"

@@ -17,6 +17,7 @@
         android:visibility="gone" />
 
     <RelativeLayout
+        android:id="@+id/downloader_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingRight="8dip"
@@ -36,15 +37,14 @@
             android:layout_alignParentRight="true"
             android:text="@null"/>
 
+        <TextView
+            android:id="@+id/downloader_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/downloader_type"
+            android:paddingLeft="8dp"
+            android:paddingBottom="4dp" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/downloader_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="4dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mapdownloader_list"
