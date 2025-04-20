@@ -109,8 +109,6 @@
     <string name="log_problem_other_label">Annað</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Þýtt að %s</string>
-    <string name="translate_to_english">Þýða yfir á ensku</string>
     <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
@@ -493,14 +491,7 @@
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
-    <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
-    <string name="search_address_button">Leita eftir heimilisfangi</string>
-    <string name="search_kw_prefill">Leitarorð</string>
-    <string name="search_kw_button">Leita eftir leitarorðum</string>
-    <string name="search_hbu_prefill">Eigandi</string>
-    <string name="search_hbu_button">Leita eftir nafni eiganda</string>
-    <string name="search_tb_button">Leita að ferðalangi</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Sæki upplýsingar um ferðalang…</string>
     <string name="trackable_browser_open">Opna í vafra</string>
@@ -563,7 +554,6 @@
     <string name="attribute_winter_no">Ekki í boði yfir veturinn</string>
     <string name="attribute_firstaid_yes">Þarfnast viðhalds</string>
     <string name="attribute_cow_yes">Fylgist með búfé</string>
-    <string name="attribute_cow_no">Ekkert búfé</string>
     <string name="attribute_nightcache_yes">Næturkassi</string>
     <string name="attribute_nightcache_no">Ekki næturkassi</string>
     <string name="attribute_parkngrab_yes">Leggja og grípa</string>
@@ -586,7 +576,6 @@
     <string name="attribute_boat_yes">Krefst báts</string>
     <string name="attribute_flashlight_yes">Krefst vasaljóss</string>
     <string name="attribute_uv_yes">Krefst útfjólublás ljóss</string>
-    <string name="attribute_uv_no">Krefst ekki útfjólublás ljóss</string>
     <string name="attribute_ticks_yes">Mítlar</string>
     <string name="attribute_danger_yes">Hættulegt svæði</string>
     <string name="attribute_stroller_yes">Aðgengilegt barnavögnum</string>
@@ -687,4 +676,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

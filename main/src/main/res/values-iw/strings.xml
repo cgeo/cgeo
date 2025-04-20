@@ -128,8 +128,6 @@
     <string name="log_problem_other_label">אחר</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">תרגם ל%s</string>
-    <string name="translate_to_english">תרגם לאנגלית</string>
     <string name="translate_length_warning">תרגום עלול להיכשל עם כמות גדולה של טקסט.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
@@ -417,7 +415,6 @@
     <!-- map -->
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
-    <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Loading trackable details&#8230;</string>
     <string name="trackable_brand">מותג</string>
@@ -468,4 +465,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

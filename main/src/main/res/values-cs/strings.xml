@@ -221,9 +221,9 @@
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- translation -->
-    <string name="translate">Přeložit</string>
-    <string name="translate_to_sys_lang">Přeložit do %s</string>
-    <string name="translate_to_english">Přeložit do angličtiny</string>
+    <string name="translate">Přeložit v aplikaci Překladač Google</string>
+    <string name="translate_to_sys_lang">Přeložit do %s (Web)</string>
+    <string name="translate_to_english">Přeložit do angličtiny (Web)</string>
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -313,6 +313,8 @@
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
     <string name="info_log_delete_failed">Odstranění logu se nezdařilo.</string>
+    <string name="info_log_post_failed_simple_reason">Zkontrolujte, zda jste správně přihlášeni a máte funkční připojení k internetu.</string>
+    <string name="info_log_delete_failed_simple_reason">Zkontrolujte, zda jste se správně přihlásili, máte funkční připojení k internetu a že log již není smazán.</string>
     <string name="info_log_post_retry">Opakovat</string>
     <string name="info_log_post_save">Uložit offline</string>
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
@@ -339,6 +341,26 @@
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Základní</string>
+    <string name="translator_preference_target_lng">Offline jazyk překladu</string>
+    <string name="translator_preference_target_lng_summary">Cílový jazyk pro offline překladač</string>
+    <string name="translator_preference_nottranslate_lng">Ignorované jazyky</string>
+    <string name="translator_preference_nottranslate_lng_summary">Zdrojové jazyky, pro které se nenabízí překlad</string>
+    <string name="translator_preference_disable">&lt;Vypnout překlad&gt;</string>
+    <string name="translator_model_download_select">Stáhnout offline jazyk překladu</string>
+    <string name="translator_model_download_confirm_title">Potvrdit stažení jazyka</string>
+    <string name="translator_model_download_confirm_txt">Překladaový model pro jazyk %s je třeba stáhnout. Velikost modelu je přibližně 20-40 MB.</string>
+    <string name="translator_model_download_notification">Stažení překladového modelu začalo</string>
+    <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
+    <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
+    <string name="translator_model">Překladový model</string>
+    <string name="translator_tooltip">Offline překlad</string>
+    <string name="translator_language_select">Vybrat zdrojový jazyk</string>
+    <string name="translator_language_unsupported">Jazyk (%s) není podporován pro překlad.</string>
+    <string name="translator_language_unknown">Jazyk nelze identifikovat</string>
+    <string name="translator_language_detected">Přeložit z \"%s\"</string>
+    <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
+    <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
+    <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -438,12 +460,16 @@
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
+    <string name="caches_remove_from_other_lists_selected">Odstranit vybrané z ostatních seznamů</string>
+    <string name="caches_remove_from_other_lists_all">Odstranit všechny z ostatních seznamů</string>
     <string name="caches_append_to_route_selected">Připojit vybrané k individuální trase</string>
     <string name="caches_append_to_route_all">Připojit všechny k individuální trase</string>
     <string name="caches_appended_to_route">Kešky připojené k trase</string>
     <string name="waypoints_appended_to_route">Trasové body připojené k trase</string>
     <string name="caches_delete_events">Odstranit staré události</string>
     <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
+    <string name="caches_upload_bookmarklist_all">Přidat vše do seznamu záložek</string>
+    <string name="caches_upload_bookmarklist_selected">Přidat vybrané do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrát upravené souřadnice pro všechny (vybrané) kešky a přepsat stávající souřadnice na serveru? Tento krok nelze vrátit zpět.</string>
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
@@ -465,8 +491,11 @@
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_overwrite_offline_log">Přepsat offline log</string>
     <string name="caches_overwrite_offline_log_question">Keška má existující offline log typu „%1$s“ s textem logu. Chcete tento log přepsat?</string>
-    <string name="caches_show_attributes">Zobrazit přehled atributů</string>
+    <string name="caches_show_attributes_all">Zobrazit přehled atributů pro všechny kešky</string>
+    <string name="caches_show_attributes_selected">Zobrazit přehled atributů pro vybrané kešky</string>
     <string name="caches_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="caches_set_cache_icon_all">Nastavit ikonu kešky pro všechny kešky</string>
+    <string name="caches_set_cache_icon_selected">Nastavit ikonu kešky pro vybrané kešky</string>
     <string name="caches_reset_cache_icons_title">Obnovit ikonu kešky</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
@@ -1105,6 +1134,8 @@
     <string name="init_accuracycirclecolor">Barva čáry kruhu přesnosti</string>
     <string name="init_accuracycirclecolor_summary">Vyberte barvu a neprůhlednost kruhové čáry přesnosti. Kruh přesnosti se používá jako vizuální znázornění přesnosti lokálního signálu.</string>
     <string name="init_include_found_status">Zahrnout stav „Nalezené“</string>
+    <string name="init_include_logs">Zahrnout logy</string>
+    <string name="init_include_travelbugs">Zahrnout travel bugy</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
     <string name="init_summary_trackautovisit">Nastavit trasovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
@@ -1514,6 +1545,8 @@
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
     <string name="cache_log_menu_edit">Upravit log</string>
+    <string name="menu_expand_log">Rozbalit log</string>
+    <string name="menu_collapse_log">Sbalit log</string>
     <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
     <string name="cache_log_delete_reason_default">Log byl odstraněn pomocí c:geo</string>
@@ -1586,6 +1619,7 @@
     <string name="cache_multiple_wherigo_cartridges_message">Další informace o cartridgích naleznete v listingu kešek.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - není stažené</string>
     <string name="cache_wherigo_start">Stáhnout a hrát toto Wherigo pomocí vestavěného přehrávače v c:geo</string>
+    <string name="cache_wherigo_credentials">Abyste mohli hrát tuto hru Wherigo pomocí interního přehrávače c:geo, musíte se nejprve autorizovat proti službě geocaching.com. Klepnutím na tlačítko vpravo přejdete do konfigurace.</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1717,6 +1751,7 @@
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
+    <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <!-- Projection -->
     <string name="projection_type_none">Bez projekce</string>
     <string name="projection_type_bearing">Azimut</string>
@@ -1752,7 +1787,7 @@
     <string name="calccoord_generate_title">Vygenerovat trasové body</string>
     <string name="calccoord_generate_showonmap">Zobrazit na mapě</string>
     <string name="calccoord_generate_waypointnameprefix">Vygenerováno</string>
-    <string name="calccoord_generate_error_novarwithrange">Nebyla nalezena žádná platná proměnná s rozsahy</string>
+    <string name="calccoord_generate_error_novarwithrange">Nebyla nalezena žádná platná proměnná s rozsahy (např. [:0-9] nebo [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Žádná kombinace nevrátila platné souřadnice</string>
     <string name="calccoord_generate_error_nogeopointselected">Není vybrána žádná souřadnice</string>
     <string name="calccoord_migrate_title">Přesun trasových bodů</string>
@@ -1868,28 +1903,15 @@
     <string name="search_bar_hint">Hledat kešky/trasovatelné předměty</string>
     <string name="search_bar_hint_settings">Nastavení vyhledávání</string>
     <string name="search_coordinates">Souřadnice</string>
-    <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
-    <string name="search_address_button">Hledat podle adresy</string>
     <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Hledat podle geokódu</string>
-    <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
     <string name="search_kw">Klíčové slovo</string>
-    <string name="search_kw_prefill">Klíčové slovo</string>
-    <string name="search_kw_button">Hledat podle klíčového slova</string>
     <string name="search_kw_disabled_hint">Zakázáno, protože není podporováno službou geocaching.com pro ZÁKLADNÍ členy</string>
     <string name="search_hbu">Ukryl</string>
-    <string name="search_hbu_prefill">Vlastník</string>
-    <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_finder">Nalezené kým</string>
-    <string name="search_finder_prefill">Nálezce</string>
-    <string name="search_finder_button">Hledat podle jména nálezce</string>
     <string name="search_filter">Filtr</string>
-    <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Trasovatelný předmět</string>
-    <string name="search_tb_hint">ID trasovatelného předmětu</string>
-    <string name="search_tb_button">Hledat trasovatelné předměty</string>
     <string name="search_destination">Otevřít cíl v c:geo</string>
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
@@ -2044,13 +2066,11 @@
     <string name="attribute_night_no">Nedoporučuje se lovit v noci</string>
     <string name="attribute_winter_yes">Přístupná v zimě</string>
     <string name="attribute_cacti_yes">Kaktusy v okolí</string>
-    <string name="attribute_cacti_no">Žádné kaktusy v okolí</string>
     <string name="attribute_winter_no">Nepřístupná v zimě</string>
     <string name="attribute_stealth_yes">Nutno dávat pozor</string>
     <string name="attribute_stealth_no">Není třeba dávat pozor</string>
     <string name="attribute_firstaid_yes">Potřebuje údržbu</string>
     <string name="attribute_cow_yes">Pozor na hospodářská zvířata</string>
-    <string name="attribute_cow_no">Žádná hospodářská zvířata</string>
     <string name="attribute_field_puzzle_yes">Hádanka v terénu</string>
     <string name="attribute_field_puzzle_no">Žádná hádanka v terénu</string>
     <string name="attribute_nightcache_yes">Noční keška</string>
@@ -2083,7 +2103,6 @@
     <string name="attribute_scuba_yes">Potápěčský přístroj je nutný</string>
     <string name="attribute_flashlight_yes">Svítilna je potřeba</string>
     <string name="attribute_uv_yes">UV světlo je potřeba</string>
-    <string name="attribute_uv_no">UV světlo není potřeba</string>
     <string name="attribute_snowshoes_yes">Sněžnice jsou potřeba</string>
     <string name="attribute_skiis_yes">Běžky jsou potřeba</string>
     <string name="attribute_s_tool_yes">Speciální nástroj je nutný</string>
@@ -2438,6 +2457,7 @@
     <string name="map_export_route">Exportovat jako trasu</string>
     <string name="map_export_track">Exportovat jako stopu</string>
     <string name="map_load_from_GPX">Načíst z GPX</string>
+    <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
@@ -2481,8 +2501,6 @@
     <string name="routes_tracks_color">Vyberte barvu</string>
     <string name="routes_tracks_change_name">Změnit název</string>
     <string name="center">Vycentrovat</string>
-    <string name="unload_route_track">Zrušit trasu/stopu</string>
-    <string name="route">Trasa</string>
     <string name="track">Stopa</string>
     <string name="make_visible">Zviditelnit</string>
     <string name="hide">Skrýt</string>
@@ -2670,7 +2688,7 @@
     <string name="wherigo_controls_stopgame_hint">Zastavit spuštěnou hru</string>
     <string name="wherigo_controls_mapzones_hint">Zobrazit zóny spuštěné hry na mapě</string>
     <string name="wherigo_controls_downloadcartridge_hint">Stáhnout cartridge (je potřebný cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Nahlásit problém s Wherigo Player</string>
+    <string name="wherigo_controls_reportproblem_hint">Zobrazit poslední problém s Wherigo</string>
     <string name="wherigo_controls_cache_context">Kontext kešky</string>
     <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
     <string name="wherigo_sound_title">Ovládání zvuku</string>
@@ -2683,7 +2701,6 @@
     <string name="wherigo_dialog_pause_info">Pokračovat v dialogovém okně Wherigo přehrávače klepnutím na \"Pokračovat v pozastaveném dialogu\"</string>
     <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
     <string name="wherigo_currently_playing">Právě se hraje</string>
-    <string name="wherigo_cartridge_details">Podrobnosti cartridge</string>
     <string name="wherigo_locate_on_center">Vycentrovat</string>
     <string name="wherigo_revoke_fixed_location">Zrušit zafixovanou polohu</string>
     <string name="wherigo_thingtype_location">Místa</string>
@@ -2694,6 +2711,8 @@
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">uvnitř</string>
     <string name="wherigo_zone_near">blízko</string>
+    <string name="wherigo_zone_navigate_compass">Kompas do středu</string>
+    <string name="wherigo_zone_copy_coordinates">Kopírovat souřadnice středu</string>
     <string name="wherigo_choose_cartridge">Vybrat cartridge</string>
     <string name="wherigo_choose_new_loadgame">Vybrat novou hru nebo načíst hru</string>
     <string name="wherigo_choose_savegame_slot">Vybrat slot na uložení</string>
@@ -2715,7 +2734,6 @@
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
     <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Enginem:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Chcete-li našemu týmu podpory nahlásit problém související s Wherigo, použijte možnost „Odeslat e-mailem“.</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
@@ -2753,6 +2771,7 @@
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
     <string name="play">Hrát</string>
+    <string name="copy">Kopírovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
@@ -2806,4 +2825,13 @@
     <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
     <string name="dbi_search_title">Hledat</string>
     <string name="dbi_search_columnSelection">Omezit na</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Naposledy použito</string>
+    <string name="emoji_category_symbols">Symboly</string>
+    <string name="emoji_category_dots">Body</string>
+    <string name="emoji_category_places">Místa</string>
+    <string name="emoji_category_food">Jídlo &amp; Nápoje</string>
+    <string name="emoji_category_activity">Aktivita</string>
+    <string name="emoji_category_people">Lidé</string>
+    <string name="emoji_category_numbers">Čísla</string>
 </resources>

@@ -221,9 +221,9 @@
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
     <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
     <!-- translation -->
-    <string name="translate">Översätt</string>
-    <string name="translate_to_sys_lang">Översätt till %s</string>
-    <string name="translate_to_english">Översätt till engelska</string>
+    <string name="translate">Översätt i appen Google Translate</string>
+    <string name="translate_to_sys_lang">Översätt till %s (Webb)</string>
+    <string name="translate_to_english">Översätt till engelska (Webb)</string>
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -339,6 +339,26 @@
     <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Grundläggande</string>
+    <string name="translator_preference_target_lng">Offline översättningsspråk</string>
+    <string name="translator_preference_target_lng_summary">Målspråk för översättare offline</string>
+    <string name="translator_preference_nottranslate_lng">Ignorerade språk</string>
+    <string name="translator_preference_nottranslate_lng_summary">Källspråk att inte erbjuda översättning för</string>
+    <string name="translator_preference_disable">&lt;Avaktivera översättning&gt;</string>
+    <string name="translator_model_download_select">Ladda ned översättningsspråk offline</string>
+    <string name="translator_model_download_confirm_title">Bekräfta språknedladdning</string>
+    <string name="translator_model_download_confirm_txt">Översättningsmodell för språk %s måste laddas ner. Modellens storlek är ungefär 20-40 MB.</string>
+    <string name="translator_model_download_notification">Nedladdning av översättningsmodell startad</string>
+    <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
+    <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
+    <string name="translator_model">Översättningsmodell</string>
+    <string name="translator_tooltip">Översätt offline</string>
+    <string name="translator_language_select">Välj källspråk</string>
+    <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning.</string>
+    <string name="translator_language_unknown">Det gick inte att identifiera språk</string>
+    <string name="translator_language_detected">Översätt från \"%s\"</string>
+    <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
+    <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
+    <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
     <!-- location service -->
     <string name="loc_last">Senast kända</string>
     <string name="loc_net">Nätverk</string>
@@ -434,12 +454,16 @@
     <string name="caches_remove_selected">Ta bort vald från listan</string>
     <string name="caches_remove_all_completely">Ta bort alla från enheten</string>
     <string name="caches_remove_selected_completely">Ta bort vald från enhet</string>
+    <string name="caches_remove_from_other_lists_selected">Ta bort valda från andra listor</string>
+    <string name="caches_remove_from_other_lists_all">Ta bort alla från andra listor</string>
     <string name="caches_append_to_route_selected">Lägg till vald till individuell rutt</string>
     <string name="caches_append_to_route_all">Lägg till alla till individuella rutter</string>
     <string name="caches_appended_to_route">Cacher bifogade till rutt</string>
     <string name="waypoints_appended_to_route">Waypoints tillagda till rutt</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
     <string name="caches_upload_bookmarklist">Lägg till i bokmärkeslistan</string>
+    <string name="caches_upload_bookmarklist_all">Lägg till i bokmärkeslistan</string>
+    <string name="caches_upload_bookmarklist_selected">Lägg till valda i bokmärkeslistan</string>
     <string name="caches_upload_modifiedcoords">Ladda upp modifierade koordinater</string>
     <string name="caches_upload_modifiedcoords_warning">Vill du ladda upp modifierade koordinater för alla (markerade) cacher och skriva över befintliga koordinater på servern? Detta kan inte ångras.</string>
     <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
@@ -461,8 +485,11 @@
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
     <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
-    <string name="caches_show_attributes">Visa attributöversikt</string>
+    <string name="caches_show_attributes_all">Visa attributöversikt för alla cacher</string>
+    <string name="caches_show_attributes_selected">Visa attributöversikt för valda cacher</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
+    <string name="caches_set_cache_icon_all">Ställ in cache-ikon för alla cacher</string>
+    <string name="caches_set_cache_icon_selected">Ställ in cache-ikon för valda cacher</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
@@ -1092,6 +1119,8 @@
     <string name="init_accuracycirclecolor">Färg på cirkel för noggrannhet</string>
     <string name="init_accuracycirclecolor_summary">Välj färg och genomskinlighet för cirkeln för noggrannhet. Cirkeln används som en visuell representation för GPS-signalens noggrannhet.</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
+    <string name="init_include_logs">Inkludera loggar</string>
+    <string name="init_include_travelbugs">Inkludera Travel Bugs</string>
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
     <string name="init_sigautoinsert">Infoga automatiskt</string>
@@ -1485,6 +1514,7 @@
     <string name="cache_menu_ignore">Ignorera cache</string>
     <string name="cache_log_menu_decrypt">Dekryptera/kryptera</string>
     <string name="cache_log_menu_edit">Redigera logg</string>
+    <string name="menu_expand_log">Expandera logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
@@ -1555,6 +1585,7 @@
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
+    <string name="cache_wherigo_credentials">För att spela denna Wherigo med c:geo\'s interna spelare måste du godkänna mot geocaching.com-tjänsten först. Tryck på knappen till höger för att gå till konfigurationen.</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -1603,7 +1634,6 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
-    <string name="internal_connector_name">Interna cacher</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
@@ -1684,6 +1714,7 @@
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
+    <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <!-- Projection -->
     <string name="projection_type_none">Ingen projektion</string>
     <string name="projection_type_bearing">Bäring</string>
@@ -1711,11 +1742,13 @@
     <string name="calccoord_guided_value">Värde</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
+    <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Ersätt \'x\' med \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Klistra in från urklipp</string>
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
     <string name="calccoord_generate_waypointnameprefix">genererad</string>
-    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades</string>
+    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades (t.ex. [:0-9] eller [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
     <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
     <string name="calccoord_migrate_title">Migrera waypoints</string>
@@ -1831,28 +1864,15 @@
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
     <string name="search_bar_hint_settings">Sökinställningar</string>
     <string name="search_coordinates">Koordinater</string>
-    <string name="search_coordinates_button">Sök med koordinater</string>
     <string name="search_address">Adress</string>
-    <string name="search_address_button">Sök med adress</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Sök med Geocode</string>
-    <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
     <string name="search_kw">Nyckelord</string>
-    <string name="search_kw_prefill">Nyckelord</string>
-    <string name="search_kw_button">Sök med nyckelord</string>
     <string name="search_kw_disabled_hint">Inaktiverad eftersom det inte stöds av geocaching.com för BASIC-medlemmar</string>
     <string name="search_hbu">Gömd av</string>
-    <string name="search_hbu_prefill">Ägare</string>
-    <string name="search_hbu_button">Sök baserat på ägare</string>
     <string name="search_finder">Hittad av</string>
-    <string name="search_finder_prefill">Vem som hittat</string>
-    <string name="search_finder_button">Sök baserat på hittare</string>
     <string name="search_filter">Filter</string>
-    <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
-    <string name="search_tb_hint">Identifiering av trackable</string>
-    <string name="search_tb_button">Sök efter trackable</string>
     <string name="search_destination">Öppna destinationen i c:geo</string>
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
@@ -2005,13 +2025,11 @@
     <string name="attribute_night_no">Rekommenderas inte på natten</string>
     <string name="attribute_winter_yes">Tillgänglig under vintern</string>
     <string name="attribute_cacti_yes">Kaktusar i närheten</string>
-    <string name="attribute_cacti_no">Ingen kaktusar i närheten</string>
     <string name="attribute_winter_no">Inte tillgänglig under vintern</string>
     <string name="attribute_stealth_yes">Stealth krävs</string>
     <string name="attribute_stealth_no">Stealth krävs inte</string>
     <string name="attribute_firstaid_yes">Behöver underhåll</string>
     <string name="attribute_cow_yes">Se för boskap</string>
-    <string name="attribute_cow_no">Ingen boskap</string>
     <string name="attribute_field_puzzle_yes">Fältpussel</string>
     <string name="attribute_field_puzzle_no">Inget fältpussel</string>
     <string name="attribute_nightcache_yes">Nattcache</string>
@@ -2044,7 +2062,6 @@
     <string name="attribute_scuba_yes">Dykutrustning krävs</string>
     <string name="attribute_flashlight_yes">Ficklampa krävs</string>
     <string name="attribute_uv_yes">UV-ljus krävs</string>
-    <string name="attribute_uv_no">UV-ljus krävs inte</string>
     <string name="attribute_snowshoes_yes">Snöskor krävs</string>
     <string name="attribute_skiis_yes">Längdskidor krävs</string>
     <string name="attribute_s_tool_yes">Specialverktyg krävs</string>
@@ -2373,7 +2390,7 @@
     <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_route">Exportera som rutt</string>
     <string name="map_export_track">Exportera som spår</string>
-    <string name="map_load_from_GPX">Ladda från GPX</string>
+    <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
@@ -2415,8 +2432,6 @@
     <string name="routes_tracks_color">Välj färg</string>
     <string name="routes_tracks_change_name">Byt Namn</string>
     <string name="center">Centrera</string>
-    <string name="unload_route_track">Rensa rutt/spår</string>
-    <string name="route">Rutt</string>
     <string name="track">Spår</string>
     <string name="make_visible">Gör synlig</string>
     <string name="hide">Dölj</string>
@@ -2594,6 +2609,7 @@
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_reportproblem_hint">Visa senaste Wherigo-problem</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
     <string name="wherigo_sound_title">Ljudkontroller</string>
@@ -2608,11 +2624,12 @@
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
+    <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo-motorn:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Använd \"Skicka via e-post\" för att rapportera ett wherigo-relaterat problem till vårt supportteam.</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
@@ -2640,6 +2657,7 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
+    <string name="copy">Kopiera</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
@@ -2690,4 +2708,14 @@
     <string name="dbi_edit_error">Fel vid uppdatering av fält</string>
     <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
     <string name="dbi_search_title">Sök efter</string>
+    <string name="dbi_search_columnSelection">Begränsa till</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Senast använda</string>
+    <string name="emoji_category_symbols">Symboler</string>
+    <string name="emoji_category_dots">Prickar</string>
+    <string name="emoji_category_places">Platser</string>
+    <string name="emoji_category_food">Mat &amp; dryck</string>
+    <string name="emoji_category_activity">Aktivitet</string>
+    <string name="emoji_category_people">Människor</string>
+    <string name="emoji_category_numbers">Siffror</string>
 </resources>

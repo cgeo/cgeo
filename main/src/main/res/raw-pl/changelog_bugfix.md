@@ -1,4 +1,7 @@
 ##
+- Naprawiono: Status ulubionej skrytki był tracony podczas wybierania obrazu podczas przygotowywania wpisu
+
+##
 - Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
 - Naprawiono: Nieczytelny komunikat o błędzie podczas publikowania wpisu dziennika
 - Cofnięto: Wykrywanie lokalnych plików .map (ze względu na niepożądane efekty uboczne)

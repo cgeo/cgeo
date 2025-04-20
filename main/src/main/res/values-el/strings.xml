@@ -182,9 +182,6 @@
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Μετάφραση</string>
-    <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
-    <string name="translate_to_english">Μετάφραση στα Αγγλικά</string>
     <string name="translate_length_warning">Η μετάφραση ενδέχεται να αποτύχει σε μεγάλα κείμενα.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
@@ -383,7 +380,6 @@
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
-    <string name="caches_show_attributes">Εμφάνιση επισκόπησης ιδιοτήτων</string>
     <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίου κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
@@ -1295,7 +1291,6 @@
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
-    <string name="internal_connector_name">Κρύπτες ορισμένες από τον χρήστη</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Μοίρες</string>
@@ -1390,7 +1385,6 @@
     <string name="calccoord_generate_title">Δημιουργία Σημείων Πορείας</string>
     <string name="calccoord_generate_showonmap">Εμφάνιση στο χάρτη</string>
     <string name="calccoord_generate_waypointnameprefix">Δημιουργήθηκε</string>
-    <string name="calccoord_generate_error_novarwithrange">Δεν βρέθηκε έγκυρη μεταβλητή με εύρη</string>
     <string name="calccoord_generate_error_novalidgeopoints">Κανένας συνδυασμός δεν επέστρεψε έγκυρες συντεταγμένες</string>
     <string name="calccoord_generate_error_nogeopointselected">Δεν επιλέχθηκε συντεταγμένη</string>
     <string name="calccoord_migrate_title">Σύνθεση σημείων διαδρομής</string>
@@ -1484,26 +1478,13 @@
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_bar_hint_settings">Ρυθμίσεις αναζήτησης</string>
     <string name="search_coordinates">Συντεταγμένες</string>
-    <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
     <string name="search_address">Διεύθυνση</string>
-    <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
-    <string name="search_geo_button">Αναζήτηση ανά γεωκωδικό</string>
-    <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξη-κλειδί</string>
-    <string name="search_kw_prefill">Λέξη-κλειδί</string>
-    <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
-    <string name="search_hbu_prefill">Ιδιοκτήτης</string>
-    <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_finder">Βρέθηκε από</string>
-    <string name="search_finder_prefill">Το βρήκε</string>
-    <string name="search_finder_button">Αναζήτηση με το όνομα του παίκτη</string>
-    <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
-    <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
-    <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
     <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
     <string name="add_target_to">Προσθήκη στόχου σε</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
@@ -1658,7 +1639,6 @@
     <string name="attribute_stealth_no">Δεν απαιτείται διακριτικότητα</string>
     <string name="attribute_firstaid_yes">Χρειάζεται συντήρηση</string>
     <string name="attribute_cow_yes">Προσοχή στα ζώα</string>
-    <string name="attribute_cow_no">Δεν έχει ζώα κοντά</string>
     <string name="attribute_field_puzzle_yes">Γρίφος πεδίου</string>
     <string name="attribute_field_puzzle_no">Δεν είναι γρίφος πεδίου</string>
     <string name="attribute_nightcache_yes">Νυχτερινή Κρύπτη</string>
@@ -1691,7 +1671,6 @@
     <string name="attribute_scuba_yes">Απαιτείται καταδυτικός εξοπλισμός</string>
     <string name="attribute_flashlight_yes">Φακός απαραίτητος</string>
     <string name="attribute_uv_yes">Υπεριώδης φακός απαραίτητος</string>
-    <string name="attribute_uv_no">Υπεριώδης φακός μη απαραίτητος</string>
     <string name="attribute_snowshoes_yes">Χιονοπάπουτσα απαραίτητα</string>
     <string name="attribute_skiis_yes">Ορειβατικά σκι απαραίτητα</string>
     <string name="attribute_s_tool_yes">Ειδικά εργαλεία απαραίτητα</string>
@@ -1989,6 +1968,7 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
+    <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
     <string name="map_disable_autotarget_individual_route">Ορισμός Εναρξης διαδρομής ως \'στόχο\' απενεργοποιημένη</string>
@@ -2013,7 +1993,6 @@
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
-    <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
@@ -2187,4 +2166,5 @@
     <!-- message center notifications -->
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Выбрать изображение из хранилища</string>
     <string name="log_image_camera_tooltip">Сделать снимок с помощью камеры</string>
     <string name="log_image_selectfromown_tooltip">Выберите изображение из ваших снимков</string>
+    <string name="log_inventory">Трекаблы</string>
     <string name="log_problem_none">Нет проблем</string>
     <string name="log_problem_needs_maintenance_label">Необходимо восстановление</string>
     <string name="log_problem_needs_maintenance_text">Этот пользователь сообщил, что есть проблема с тайником.</string>
@@ -220,9 +221,9 @@
     <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
     <string name="contact_multiple_matches">Контакт: Несколько совпадений</string>
     <!-- translation -->
-    <string name="translate">Переводить</string>
-    <string name="translate_to_sys_lang">Перевести на %s</string>
-    <string name="translate_to_english">Перевести на английский</string>
+    <string name="translate">Перевести в приложении Google Translate</string>
+    <string name="translate_to_sys_lang">Перевести на %s (Веб)</string>
+    <string name="translate_to_english">Перевести на английский (Веб)</string>
     <string name="translate_length_warning">Перевод может произойти неисправно из-за большого количество текста.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -338,6 +339,26 @@
     <string name="switched_to_mf">Карта по умолчанию переключена на Mapsforge. Перезапустите карту.</string>
     <string name="gc_premium">Премиум</string>
     <string name="gc_basic">Базовый</string>
+    <string name="translator_preference_target_lng">Язык офлайн-перевода</string>
+    <string name="translator_preference_target_lng_summary">Целевой язык для офлайн-переводчика</string>
+    <string name="translator_preference_nottranslate_lng">Игнорируемые языки</string>
+    <string name="translator_preference_nottranslate_lng_summary">Исходные языки для которых не предлагать перевод</string>
+    <string name="translator_preference_disable">&lt;Отключить перевод&gt;</string>
+    <string name="translator_model_download_select">Скачать язык для офлайн перевода</string>
+    <string name="translator_model_download_confirm_title">Подтвердите загрузку языка</string>
+    <string name="translator_model_download_confirm_txt">Необходимо загрузить модель перевода для %s языка. Размер модели составляет примерно 20-40 МБ.</string>
+    <string name="translator_model_download_notification">Загрузка модели перевода началась</string>
+    <string name="translator_model_download_success">Модель перевода для %s загружена</string>
+    <string name="translator_model_download_error">Не удалось загрузить модель перевода %1$s: %2$s</string>
+    <string name="translator_model">Модель перевода</string>
+    <string name="translator_tooltip">Офлайн перевод</string>
+    <string name="translator_language_select">Выберите исходный язык</string>
+    <string name="translator_language_unsupported">Язык (%s) не поддерживается для перевода.</string>
+    <string name="translator_language_unknown">Невозможно определить язык</string>
+    <string name="translator_language_detected">Перевести с \"%s\"</string>
+    <string name="translator_translation_error">Не удалось перевести текст: %s</string>
+    <string name="translator_translation_initerror">Не удалось инициализировать переводчик</string>
+    <string name="translator_translation_success">Переведено с \"%s\", нажмите кнопку, чтобы восстановить оригинал</string>
     <!-- location service -->
     <string name="loc_last">Последнее местоположение</string>
     <string name="loc_net">Сеть</string>
@@ -419,6 +440,7 @@
     <string name="caches_sort_geocode">Код тайника</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Собственный рейтинг</string>
+    <string name="caches_sort_inventory">Количество трекаблов</string>
     <string name="caches_sort_date_hidden">Дата создания</string>
     <string name="caches_sort_date_logged">Дата записи (Своя запись)</string>
     <string name="caches_sort_finds">Нахождения</string>
@@ -456,13 +478,13 @@
     <string name="caches_map_locus_export">Экспорт в Locus</string>
     <string name="caches_filter_menuitem">Фильтр</string>
     <string name="caches_filter_title">Фильтровать по</string>
+    <string name="caches_filter_select_last">Предыдущий фильтр</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
     <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
     <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
     <string name="caches_overwrite_offline_log">Перезаписать офлайновую запись</string>
     <string name="caches_overwrite_offline_log_question">В тайнике есть офлайн запись типа \"%1$s\" с текстом. Вы хотите перезаписать эту запись?</string>
-    <string name="caches_show_attributes">Показать атрибуты</string>
     <string name="caches_set_cache_icon">Установить иконку тайника</string>
     <string name="caches_reset_cache_icons_title">Сбросить иконку тайника</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
@@ -493,6 +515,9 @@
     <string name="list_menu_create">Создать новый список</string>
     <string name="list_menu_drop">Удалить текущий список</string>
     <string name="list_menu_rename">Переименовать текущий список</string>
+    <string name="list_menu_rename_list_prefix">Переименовать префикс списка</string>
+    <string name="rename_from">Переименовать из</string>
+    <string name="rename_to">Переименовать в</string>
     <string name="list_menu_import">Импортировать</string>
     <string name="list_title">Выбрать список</string>
     <string name="lists_title">Выбрать списки</string>
@@ -510,6 +535,10 @@
     <string name="list_dialog_rename_title">Переименовать список</string>
     <string name="list_dialog_rename">Переименовать</string>
     <string name="list_not_available">Этот список больше недоступен, переключаюсь на список по умолчанию</string>
+    <string name="list_parent_list">Родительский список</string>
+    <string name="list_name">Имя списка</string>
+    <string name="list_confirm_rename">Переименование из \"%1$s\" в \"%2$s\"\n%3$s\nЭто действие невозможно отменить!</string>
+    <string name="list_confirm_no_hierarchy">\nНе найдено \":\" - все соответствующие списки будут преобразованы в списки верхнего уровня\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Продвинутые</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Перейти в простой режим</string>
@@ -540,6 +569,7 @@
     <string name="cache_filter_hidden">Дата создания</string>
     <string name="cache_filter_eventdate">Дата события</string>
     <string name="cache_filter_logs_count">Количество записей</string>
+    <string name="cache_filter_inventory_count">Количество трекаблов</string>
     <string name="cache_filter_last_found">Дата последнего нахождения</string>
     <string name="cache_filter_log_entry">Запись в блокноте</string>
     <string name="cache_filter_location">Место</string>
@@ -922,7 +952,7 @@
     <string name="init_brouterProfileCar">Профиль «Автомобиль»</string>
     <string name="init_brouterProfileUserNumber">Пользовательский профиль %d</string>
     <string name="init_removeFromRouteOnLog">Удалить из маршрута после записи в блокноте</string>
-    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить
+    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить 
 тайник из текущего маршрута.</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="brouter_missing_data">Откройте BRouter для загрузки недостающих данных маршрутизации (%s)</string>
@@ -1061,9 +1091,12 @@
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo поддерживает пользовательские темы для офлайн-карт. Они могут быть использованы для изменения цветового стиля карты (например, тёмный режим) или для выделения некоторых объектов, таких как велодорожки или линии уровней высот.\n\nРабота с несжатыми темами карт может снизить производительность открытия карты. В этом случае пользовательская папка темы может быть синхронизирована с локальной папкой приложения для ускорения доступа (ценой некоторого увеличения расхода внутренней памяти).</string>
     <string name="settings_info_hillshading_title">Информация о затенении высот</string>
-    <string name="settings_info_hillshading">Затенение высот - это метод создания рельефов топографических карт путем добавления к карте эффекта освещения для обозначения изменений высоты. Склоны будут затемнены/осветлены для создания 3D-эффекта.\nДанные о затенении высот можно загрузить из соответствующего меню.</string>
+    <string name="settings_info_hillshading">Затенение высот- это метод создания топографических карт рельефа путем добавления к карте эффекта освещения для обозначения изменения высоты. Склоны будут затемнены или осветлены для создания 3D-эффекта.\nДанные о затенении можно загрузить из меню заливки карт.\nНе совместим с вариантом VTM в ЕдинойКарте.</string>
     <string name="settings_hillshading_enable">Затенение высот</string>
+    <string name="init_hillshading_hq">Высококачественное затенение высот</string>
+    <string name="init_summary_hillshading_hq">Более детальное наложение теней высот, но на ~50% медленнее отрисовывается при уменьшении масштаба</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
+    <string name="init_mapsource_select_legacy">Выберите источник карты (Устаревший механизм)</string>
     <string name="init_local_file_system">Локальная файловая система</string>
     <string name="init_base_directory_description">\"Основная\" папка для публичных данных</string>
     <string name="init_map_directory_description">Папка с офлайн-картами</string>
@@ -1087,6 +1120,8 @@
     <string name="init_trackappearance_summary">Выберите цвет, степень прозрачность и толщину линии для трека/муршрута. Трек/маршрут состоит из нескольких путевых точек и может быть загружен через файл GPX.</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
+    <string name="init_geofencecolor">Цвет круга геозоны</string>
+    <string name="init_geofencecolor_summary">Выберите цвет и непрозрачность для круга геозоны. Круги используются в качестве визуального представления геозоны, определенной для путевых точек (обычно применяется в geocaching.com для Adventure Lab)</string>
     <string name="init_accuracycirclecolor">Цвет линии круга точности</string>
     <string name="init_accuracycirclecolor_summary">Выберите цвет и прозрачность границы круга точности. «Круг точности» используется для визуального представления степени точности сигнала геолокации.</string>
     <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
@@ -1180,6 +1215,9 @@
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
+    <string name="init_title_useLegacyMap">Использовать устаревший вариант карт</string>
+    <string name="init_summary_useLegacyMap">Использовать старые версии Google Map / Mapsforge (OSM) карт вместо ЕдинойКарты</string>
+    <string name="category_unifiedMap">ЕдинаяКарта</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
     <string name="localstorage_migrate_status_major">Версия %1$d</string>
     <!-- proximity notification -->
@@ -1372,7 +1410,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">больше года назад</string>
     <string name="cache_premium">Премиум</string>
-    <string name="cache_inventory">Инвентарь</string>
+    <string name="cache_inventory">Трекаблы</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_set_coordinates">Установить координаты</string>
     <string name="cache_personal_note">Персональные заметки</string>
@@ -1443,6 +1481,8 @@
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
     <string name="cache_menu_speechDeactivate">Перестать говорить</string>
     <string name="cache_menu_speechActivate">Начать говорить</string>
+    <string name="talking_disabled">Разговор запрещен</string>
+    <string name="talking_enabled">Разговор разрешен</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_target">Установить как цель</string>
     <string name="cache_menu_navigation_drive">Навигация (за рулём)</string>
@@ -1483,6 +1523,7 @@
     <string name="cache_menu_details">Детали</string>
     <string name="cache_menu_refresh">Обновить</string>
     <string name="cache_menu_share">Поделиться</string>
+    <string name="cache_menu_share_with_data">Поделиться в т.ч. польз. данными</string>
     <string name="cache_menu_move_list">Переместить в другой список</string>
     <string name="cache_menu_copy_list">Скопировать в другой список</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
@@ -1500,6 +1541,7 @@
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
+    <string name="cache_status_attended">Участвовал</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
     <string name="cache_status_archived">В архиве</string>
@@ -1578,6 +1620,9 @@
     <string name="image_category_own">Свои</string>
     <string name="image_category_listing">Список</string>
     <string name="image_category_log">Запись</string>
+    <string name="image_listing_spoiler">Спойлер</string>
+    <string name="image_listing_background">Фон</string>
+    <string name="image_listing_gallery">Галерея</string>
     <string name="context_map_add_to_route">Добавить в маршрут</string>
     <string name="context_map_add_to_route_start">Добавить в начале маршрута</string>
     <string name="context_map_remove_from_route_start">Удалить из начала маршрута</string>
@@ -1590,6 +1635,7 @@
     <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="create_internal_cache_short">Новый тайник</string>
     <string name="create_internal_cache_currentlist">Использовать текущий список</string>
+    <string name="internal_cache_default_names">Пользовательский тайник #%1$s</string>
     <string name="internal_cache_default_description">Это пользовательский тайник</string>
     <string name="internal_cache_default_owner">Вы</string>
     <string name="internal_goto_targets_title">\"Перейти к\" целям</string>
@@ -1602,10 +1648,12 @@
     <string name="init_summary_show_routing_menu">Длительное нажатие на тайник показывает меню с расширенными параметрами для добавления/удаления тайника в/из маршрута. Если отключено, то тайник только добавляется/удаляется в/из маршрута.</string>
     <string name="init_ActionbarAutohide">Скрыть панель инструментов при нажатии</string>
     <string name="init_summary_ActionbarAutohide">Нажмите на свободное место на карте, чтобы скрыть/показать панель инструментов</string>
+    <string name="init_autozoom_consider_lastcenter">Восстановить локацию при открытии списка</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Когда открыт список тайников и карта перемещена, то восстановить предыдущую позицию. Иначе отмасштабировать, чтобы показать все тайники.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Когда открыт список тайников, установить масштаб так, чтобы вмещать все тайники.</string>
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
-    <string name="internal_connector_name">Внутренние тайники</string>
     <!-- html styles -->
     <string name="html_style_default">По умолчанию</string>
     <string name="html_style_default_no_contrast_fix">По умолчанию без фиксации контраста</string>
@@ -1654,6 +1702,8 @@
     <string name="waypoint_my_coordinates_accuracy">Мои координаты (±%s)</string>
     <string name="waypoint_name">Название</string>
     <string name="waypoint_edit">Редактировать</string>
+    <string name="waypoint_geofence">Геозона</string>
+    <string name="waypoint_geofence_summary">Установить радиус геозоны (в метрах)</string>
     <string name="waypoint_copy_coordinates">Скопировать координаты</string>
     <string name="waypoint_clear_coordinates">Очистить координаты</string>
     <string name="waypoint_delete">Удалить</string>
@@ -1715,11 +1765,12 @@
     <string name="calccoord_guided_value">Значение</string>
     <string name="calccoord_convert_to_plain">Преобразовать в простые координаты</string>
     <string name="calccoord_plain_tools_title">Инструменты по работе с координатами в виде строки текста</string>
+    <string name="calccoord_remove_spaces">Удалить пробелы</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Заменить \'x\' на \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Вставить из буфера обмена</string>
     <string name="calccoord_generate_title">Создать путевые точки</string>
     <string name="calccoord_generate_showonmap">Показать на карте</string>
     <string name="calccoord_generate_waypointnameprefix">Создано</string>
-    <string name="calccoord_generate_error_novarwithrange">Не найдена допустимая переменная с диапазонами</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ни одна комбинация не вернула корректные координаты</string>
     <string name="calccoord_generate_error_nogeopointselected">Координаты не выбраны</string>
     <string name="calccoord_migrate_title">Миграция путевых точек</string>
@@ -1835,32 +1886,20 @@
     <string name="search_bar_hint">Поиск тайника / трекабла</string>
     <string name="search_bar_hint_settings">Настройки поиска</string>
     <string name="search_coordinates">Координаты</string>
-    <string name="search_coordinates_button">Поиск по координатам</string>
     <string name="search_address">Адрес</string>
-    <string name="search_address_button">Поиск по адресу</string>
     <string name="search_geo">Код тайника</string>
-    <string name="search_geo_button">Поиск по коду</string>
-    <string name="search_geocode_from_clipboard">Геокод был вставлен из буфера обмена.</string>
     <string name="search_kw">Ключевое слово</string>
-    <string name="search_kw_prefill">Ключевое слово</string>
-    <string name="search_kw_button">Искать по ключевым словам</string>
     <string name="search_kw_disabled_hint">Отключено, так как это не поддерживается geocaching.com для базовых аккаунтов</string>
     <string name="search_hbu">Создан</string>
-    <string name="search_hbu_prefill">Создатель</string>
-    <string name="search_hbu_button">Поиск по создателю</string>
     <string name="search_finder">Найден</string>
-    <string name="search_finder_prefill">Нашедший</string>
-    <string name="search_finder_button">Поиск по имени нашедшего</string>
     <string name="search_filter">Фильтр</string>
-    <string name="search_filter_button">Поиск по фильтру</string>
     <string name="search_filter_info_message" formatted="false">**Поиск по фильтру** производится по всем активным онлайн-сервисам по заданным условиям. Однако, поисковые возможности этих сервисов обычно более ограничены, чем возможности фильтра c:geo.\n\n- Все службы поддерживают только И фильтры (нет ИЛИ, нет инверсии).\n- Такие базовые фильтры, как **тип тайника** или **размер тайника**, есть во всех сервисах. Но более сложные фильтры зачастую не поддерживаются или имеют некоторые ограничения, например **избранное**.\n- Подробный список условий фильтрации, которые поддерживают разные сервисы, можно найти [здесь](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nФильтры, не поддерживаемые онлайн-сервисом, будут применяться c:geo для полученных результатов.</string>
     <string name="search_tb">Трекабл</string>
-    <string name="search_tb_hint">Код трекабла</string>
-    <string name="search_tb_button">Поиск трекабла</string>
     <string name="search_destination">Открыть место назначения в c:geo</string>
     <string name="add_target_to">Добавить цель в</string>
     <string name="search_address_started">Поиск мест</string>
     <string name="search_address_result">Найденные места</string>
+    <string name="search_own_caches">Мои тайники</string>
     <string name="search_pocket_title">Выборка</string>
     <string name="search_bookmark_list">Список закладок</string>
     <string name="search_pocket_is_new">новые</string>
@@ -2009,12 +2048,12 @@
     <string name="attribute_night_yes">Лучше ночью</string>
     <string name="attribute_night_no">Не рекомендуется ночью</string>
     <string name="attribute_winter_yes">Доступно зимой</string>
+    <string name="attribute_cacti_yes">Колючий кустарник</string>
     <string name="attribute_winter_no">Недоступно зимой</string>
     <string name="attribute_stealth_yes">Требуется маскировка</string>
     <string name="attribute_stealth_no">Маскировка не требуется</string>
     <string name="attribute_firstaid_yes">Необходимо восстановление</string>
     <string name="attribute_cow_yes">Осторожно, крупный скот</string>
-    <string name="attribute_cow_no">Отсутствует крупный скот</string>
     <string name="attribute_field_puzzle_yes">Головоломки в процессе поиска</string>
     <string name="attribute_field_puzzle_no">Нет головоломок \"в поле\"</string>
     <string name="attribute_nightcache_yes">Ночной тайник</string>
@@ -2047,7 +2086,6 @@
     <string name="attribute_scuba_yes">Требуется подводное снаряжение</string>
     <string name="attribute_flashlight_yes">Нужен фонарик</string>
     <string name="attribute_uv_yes">Нужен УФ фонарь</string>
-    <string name="attribute_uv_no">Можно без УФ фонаря</string>
     <string name="attribute_snowshoes_yes">Требуются снегоступы</string>
     <string name="attribute_skiis_yes">Требуются лыжи</string>
     <string name="attribute_s_tool_yes">Необходимо специальное снаряжение</string>
@@ -2336,6 +2374,10 @@
         <item quantity="other">Установлено %d иконок тайника</item>
     </plurals>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
+    <string name="live_map_status_http429">Пожалуйста, не спешите, слишком много запросов к %s</string>
+    <string name="live_map_status_error">Ошибка загрузки данных карты: %s</string>
+    <string name="live_map_status_partial">Частичный результат (увеличьте масштаб, чтобы уменьшить количество загружаемых тайников): %s</string>
+    <string name="live_map_status_normal">Загрузка данных без проблем: %s</string>
     <string name="list_list_headline">Списки:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d точка извлечена</item>
@@ -2344,6 +2386,7 @@
         <item quantity="other">%d точек извлечено</item>
     </plurals>
     <string name="link_gc_checker">проверка координат geocaching.com доступна в браузере</string>
+    <string name="link_gallery">Изображения, доступные в галерее (%d)</string>
     <string name="geochecker_available">Гео-чекер доступен через браузер</string>
     <!-- calendar adder -->
     <string name="event_fail">Не удалось добавить событие в календарь</string>
@@ -2394,9 +2437,13 @@
     <string name="individual_route_error_single_waypoint_mode">Недоступно в режиме одной точки</string>
     <string name="map_sort_individual_route">Сортировать личный маршрут</string>
     <string name="map_refresh_individual_route">Обновить</string>
+    <string name="map_export_route">Экспортировать как маршрут</string>
+    <string name="map_export_track">Экспортировать как трек</string>
+    <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
     <string name="map_disable_autotarget_individual_route">\"Установить начало маршрута как цель\" отключено</string>
+    <string name="map_clear_manual_targets">Очистить цель навигации</string>
     <string name="map_manual_targets_cleared">Ручные цели очищены</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
@@ -2436,8 +2483,6 @@
     <string name="routes_tracks_color">Выберите цвет</string>
     <string name="routes_tracks_change_name">Изменить имя</string>
     <string name="center">Центр</string>
-    <string name="unload_route_track">Выгрузить маршрут/трек</string>
-    <string name="route">Маршрут</string>
     <string name="track">Трек</string>
     <string name="make_visible">Сделать видимым</string>
     <string name="hide">Скрыть</string>
@@ -2458,6 +2503,8 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="show_all">Показать все</string>
+    <string name="lists_only_new">Только новые</string>
+    <string name="pq_only_dl">Скачиваемые</string>
     <string name="routingmode_straight">Напрямую</string>
     <string name="routingmode_walk">Пешком</string>
     <string name="routingmode_bike">На велосипеде</string>
@@ -2560,6 +2607,7 @@
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="hillshading_info">Оффлайн затенение высот</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
+    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования оффлайн карт (только для VTM, требуется перезапуск)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>
@@ -2622,7 +2670,6 @@
     <string name="wherigo_controls_stopgame_hint">Остановить запущенную игру</string>
     <string name="wherigo_controls_mapzones_hint">Показывать зоны запущенной игры на карте</string>
     <string name="wherigo_controls_downloadcartridge_hint">Скачать картридж (нужен cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Сообщить о проблеме с wherigo player</string>
     <string name="wherigo_controls_cache_context">Контекст тайника</string>
     <string name="wherigo_controls_cache_link">Перейти к деталям тайника</string>
     <string name="wherigo_sound_title">Управление звуком</string>
@@ -2635,7 +2682,6 @@
     <string name="wherigo_dialog_pause_info">Возобновить диалог в Wherigo Player, нажав «Возобновить приостановленный диалог»</string>
     <string name="wherigo_no_game_running">Игра wherigo в данный момент не запущена</string>
     <string name="wherigo_currently_playing">Идёт игра</string>
-    <string name="wherigo_cartridge_details">Детали картриджа</string>
     <string name="wherigo_locate_on_center">Расположение по центру</string>
     <string name="wherigo_revoke_fixed_location">Отменить фиксированное местоположение</string>
     <string name="wherigo_thingtype_location">Локации</string>
@@ -2667,7 +2713,6 @@
     <string name="wherigo_error_title">Отчет по проблеме Wherigo</string>
     <string name="wherigo_error_game_noerror">Движок Wherigo не сообщает об ошибках.</string>
     <string name="wherigo_error_game_error">Движок Wherigo выдал ошибку:\n\n```\n%1$s\n```</string>
-    <string name="wherigo_error_game_error_addinfo">Используйте \"Отправить по электронной почте\", чтобы сообщить нашей службе поддержки о проблеме, связанной с Wherigo.</string>
     <string name="wherigo_error_email">Отчет о проблеме Wherigo\n\nОшибка Движка: %1$s\n\nИнформация Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Движок Wherigo сообщил об ошибке. Откройте диалоговое окно с ошибкой для получения подробной информации.</string>
     <string name="wherigo_confirm_stop_running_game_title">Остановка Игры Wherigo</string>
@@ -2757,4 +2802,14 @@
     <string name="dbi_edit_error">Ошибка при обновлении поля</string>
     <string name="dbi_edit_error_pkfield">"%s\" является частью первичного ключа, не подлежит редактированию"</string>
     <string name="dbi_search_title">Искать</string>
+    <string name="dbi_search_columnSelection">Ограничить</string>
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Недавние</string>
+    <string name="emoji_category_symbols">Символы</string>
+    <string name="emoji_category_dots">Точки</string>
+    <string name="emoji_category_places">Места</string>
+    <string name="emoji_category_food">Еда и напитки</string>
+    <string name="emoji_category_activity">Активность</string>
+    <string name="emoji_category_people">Люди</string>
+    <string name="emoji_category_numbers">Числа</string>
 </resources>

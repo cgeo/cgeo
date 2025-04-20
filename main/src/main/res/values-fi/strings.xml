@@ -215,9 +215,6 @@
     <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
     <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
     <!-- translation -->
-    <string name="translate">Käännä</string>
-    <string name="translate_to_sys_lang">Käännä kielelle %s</string>
-    <string name="translate_to_english">Käännä englanniksi</string>
     <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -446,7 +443,6 @@
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
-    <string name="caches_show_attributes">Näytä attribuuttien yleisnäkymä</string>
     <string name="caches_set_cache_icon">Aseta kätkökuvake</string>
     <string name="caches_reset_cache_icons_title">Nollaa kätkökuvake</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
@@ -1484,7 +1480,6 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
-    <string name="internal_connector_name">Sisäiset kätköt</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
@@ -1582,7 +1577,6 @@
     <string name="calccoord_generate_title">Luo reittipisteet</string>
     <string name="calccoord_generate_showonmap">Näytä kartalla</string>
     <string name="calccoord_generate_waypointnameprefix">Luotu</string>
-    <string name="calccoord_generate_error_novarwithrange">Kelvollisia muuttujia väleillä ei löytynyt</string>
     <string name="calccoord_generate_error_novalidgeopoints">Mikään yhdistelmä ei palauttanut kelvollisia koordinaatteja</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinaatteja ei ole valittu</string>
     <string name="calccoord_migrate_title">Reittipisteen siirto</string>
@@ -1689,27 +1683,14 @@
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_bar_hint_settings">Hakuasetukset</string>
     <string name="search_coordinates">Koordinaatit</string>
-    <string name="search_coordinates_button">Hae koordinaattien avulla</string>
     <string name="search_address">Osoite</string>
-    <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">Geokoodi</string>
-    <string name="search_geo_button">Hae geokoodilla</string>
-    <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusana</string>
-    <string name="search_kw_prefill">Hakusana</string>
-    <string name="search_kw_button">Hae hakusanalla</string>
     <string name="search_kw_disabled_hint">Poistettu käytöstä, koska geocaching.com ei tue sitä perusjäsenille</string>
     <string name="search_hbu">Piilottanut</string>
-    <string name="search_hbu_prefill">Omistaja</string>
-    <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_finder">Löytänyt</string>
-    <string name="search_finder_prefill">Löytäjä</string>
-    <string name="search_finder_button">Etsi löytäjän mukaan</string>
-    <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
-    <string name="search_tb_hint">Reissaajan koodi</string>
-    <string name="search_tb_button">Etsi reissaajia</string>
     <string name="search_destination">Avaa kohde c:geossa</string>
     <string name="add_target_to">Lisää kohde kohteeseen</string>
     <string name="search_address_started">Etsitään paikkoja</string>
@@ -1865,7 +1846,6 @@
     <string name="attribute_stealth_no">Ei vaadi huomaamatonta toimintaa</string>
     <string name="attribute_firstaid_yes">Tarvitsee huoltoa</string>
     <string name="attribute_cow_yes">Varo karjaa</string>
-    <string name="attribute_cow_no">Ei karjaa</string>
     <string name="attribute_field_puzzle_yes">Kenttämysteeri</string>
     <string name="attribute_field_puzzle_no">Ei kenttämysteeri</string>
     <string name="attribute_nightcache_yes">Yökätkö</string>
@@ -1898,7 +1878,6 @@
     <string name="attribute_scuba_yes">Vaatii sukellusvälineitä</string>
     <string name="attribute_flashlight_yes">Tarvitaan taskulamppu</string>
     <string name="attribute_uv_yes">UV-valo tarvitaan</string>
-    <string name="attribute_uv_no">UV-valoa ei tarvita</string>
     <string name="attribute_snowshoes_yes">Tarvitaan lumikengät</string>
     <string name="attribute_skiis_yes">Vaatii sukset</string>
     <string name="attribute_s_tool_yes">Tarvitaan erikoistyökaluja</string>
@@ -2217,6 +2196,7 @@
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
     <string name="map_refresh_individual_route">Päivitä</string>
+    <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
     <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
@@ -2254,8 +2234,6 @@
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
     <string name="routes_tracks_color">Valitse väri</string>
-    <string name="unload_route_track">Tyhjennä reitti/jälki</string>
-    <string name="route">Reitti</string>
     <string name="track">Jälki</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -2447,4 +2425,5 @@
     </plurals>
     <!-- GC image size conversion -->
     <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>
