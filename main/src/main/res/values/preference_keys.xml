@@ -233,6 +233,10 @@
     <string translatable="false" name="pref_maphillshading_hq">maphillshading_hq</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
 
+    <!-- category background maps -->
+    <string translatable="false" name="pref_mapbackgroundmap_show_layer">mapbackgroundmap_show_layer</string>
+    <string translatable="false" name="pref_persistablefolder_backgroundmaps">persistablefolder_backgroundmaps</string>
+
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
 

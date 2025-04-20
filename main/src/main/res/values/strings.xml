@@ -1415,6 +1415,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
+    <string name="persistablefolder_backgroundmaps">Background Maps</string>
     <string name="persistablefolder_offline_maps_shading">Map Shading Files</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
@@ -2816,6 +2817,7 @@
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
+    <string name="downloadbackground_title">Download background map</string>
     <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_filename">Downloading %s</string>

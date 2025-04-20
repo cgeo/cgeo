@@ -13,6 +13,7 @@ public abstract class AbstractTileProvider {
     protected boolean supportsLanguages;
     protected boolean supportsThemes;
     protected boolean supportsHillshading = false;
+    protected boolean supportsBackgroundMaps = false;
     protected boolean supportsThemeOptions;
     protected String tileProviderName;
     private Integer numericId;
@@ -50,6 +51,10 @@ public abstract class AbstractTileProvider {
 
     public boolean supportsHillshading() {
         return supportsHillshading;
+    }
+
+    public boolean supportsBackgroundMaps() {
+        return supportsBackgroundMaps;
     }
 
     public String getTileProviderName() {

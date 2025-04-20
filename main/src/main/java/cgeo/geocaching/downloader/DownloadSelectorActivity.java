@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import org.apache.commons.lang3.StringUtils;
 
 public class DownloadSelectorActivity extends AbstractActionBarActivity {
+
+    public static final String INTENT_FIXED_DOWNLOADTYPE = "DSA_DOWNLOADTYPE";
 
     @NonNull
     private final List<Download> maps = new ArrayList<>();
@@ -206,36 +209,50 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         setThemeAndContentView(R.layout.downloader_activity);
         binding = DownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
 
-        spinnerData = Download.DownloadType.getOfflineMapTypes();
-        final ArrayAdapter<Download.DownloadTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.downloaderType.setAdapter(spinnerAdapter);
-
-        existingFiles = CompanionFileUtils.availableOfflineMapRelatedFiles();
-
-        final Download.DownloadTypeDescriptor descriptor = Download.DownloadType.fromTypeId(Settings.getMapDownloaderSource());
-        if (descriptor != null) {
-            final int spinnerPosition = spinnerAdapter.getPosition(descriptor);
-            binding.downloaderType.setSelection(spinnerPosition);
+        int fixedDownloadType = 0;
+        final Intent intent = getIntent();
+        if (intent != null) {
+            fixedDownloadType = intent.getIntExtra(INTENT_FIXED_DOWNLOADTYPE, 0);
         }
 
-        binding.downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
-                changeSource(position);
+        if (fixedDownloadType != 0) {
+            // specific download type requested
+            spinnerData = Download.DownloadType.get(fixedDownloadType);
+            changeSource(0);
+            binding.downloaderSelector.setVisibility(View.GONE);
+            existingFiles = CompanionFileUtils.availableOfflineMaps(Download.DownloadType.getFromId(fixedDownloadType));
+        } else {
+            spinnerData = Download.DownloadType.getOfflineMapTypes();
+            final ArrayAdapter<Download.DownloadTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            binding.downloaderType.setAdapter(spinnerAdapter);
+
+            final Download.DownloadTypeDescriptor descriptor = Download.DownloadType.fromTypeId(Settings.getMapDownloaderSource());
+            if (descriptor != null) {
+                final int spinnerPosition = spinnerAdapter.getPosition(descriptor);
+                binding.downloaderType.setSelection(spinnerPosition);
             }
 
-            @Override
-            public void onNothingSelected(final AdapterView<?> parent) {
-                // deliberately left empty
-            }
-        });
-        binding.likeIt.setOnClickListener(v -> ShareUtils.openUrl(this, current.likeItUrl));
-        binding.downloaderInfo.setOnClickListener(v -> {
-            if (StringUtils.isNotBlank(current.projectUrl)) {
-                ShareUtils.openUrl(this, current.projectUrl);
-            }
-        });
+            binding.downloaderType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+                    changeSource(position);
+                }
+
+                @Override
+                public void onNothingSelected(final AdapterView<?> parent) {
+                    // deliberately left empty
+                }
+            });
+            binding.likeIt.setOnClickListener(v -> ShareUtils.openUrl(this, current.likeItUrl));
+            binding.downloaderInfo.setOnClickListener(v -> {
+                if (StringUtils.isNotBlank(current.projectUrl)) {
+                    ShareUtils.openUrl(this, current.projectUrl);
+                }
+            });
+            existingFiles = CompanionFileUtils.availableOfflineMapRelatedFiles();
+        }
+
     }
 
     @Override

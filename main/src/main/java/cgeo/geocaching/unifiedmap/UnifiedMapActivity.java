@@ -999,6 +999,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
             changeMapSource(mapFragment.currentTileProvider);
+        } else if (id == R.id.menu_backgroundmap) {
+            Settings.setMapBackgroundMapLayer(!Settings.getMapBackgroundMapLayer());
+            item.setChecked(Settings.getMapBackgroundMapLayer());
+            changeMapSource(mapFragment.currentTileProvider);
         } else { // dynamic submenus: Map language, Map source
             final String language = TileProviderFactory.getLanguage(id);
             final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);

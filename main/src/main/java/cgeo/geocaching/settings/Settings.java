@@ -2524,6 +2524,14 @@ public class Settings {
         putBoolean(R.string.pref_maphillshading_show_layer, show);
     }
 
+    public static boolean getMapBackgroundMapLayer() {
+        return getBoolean(R.string.pref_mapbackgroundmap_show_layer, true);
+    }
+
+    public static void setMapBackgroundMapLayer(final boolean show) {
+        putBoolean(R.string.pref_mapbackgroundmap_show_layer, show);
+    }
+
     public static boolean getMapActionbarAutohide() {
         return getBoolean(R.string.pref_mapActionbarAutohide, false);
     }
