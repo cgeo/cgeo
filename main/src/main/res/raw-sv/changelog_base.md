@@ -43,7 +43,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Collapse long log entries per default
 
 ### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
+- Nytt: Integrerad Wherigo-spelarkontroll kontrollerar saknade inloggningsuppgifter
 - Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
 - New: Ability to navigate to a zone using compass
 - New: Ability to copy zone center coordinates to clipboard
@@ -57,7 +57,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nytt: Stöd för koordinater i DD,DDDDDDD-format
 - Nytt: Visa senast använda filternamn i filterdialogen
 - Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
-- Fix: Incorrect altitude (not using mean above sea level)
+- Fix: Felaktig höjd (använder inte medelvärde över havet)
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
 - Fix: Sorting of cache lists by distance descending not working correctly
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
