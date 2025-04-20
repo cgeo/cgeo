@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -20,7 +21,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_geokrety_website));
         final String urlOrHost = "https://geokrety.org";
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -29,7 +30,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
         // Open website Map Preference
         final Preference openWebsite2 = findPreference(getString(R.string.pref_fakekey_geokretymap_website));
         final String urlOrHost2 = "https://geokretymap.org";
-        openWebsite2.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite2, preference -> {
             final String url = StringUtils.startsWith(urlOrHost2, "http") ? urlOrHost2 : "http://" + urlOrHost2;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -39,7 +40,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.init_geokrety);
+        requireActivity().setTitle(R.string.init_geokrety);
 
         // Update authentication preference
         SettingsUtils.setAuthTitle(this, R.string.pref_fakekey_geokrety_authorization, Settings.hasGeokretyAuthorization());

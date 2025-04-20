@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.SeekbarBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -15,7 +14,6 @@ import android.view.ContextThemeWrapper;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -91,7 +89,6 @@ public class SeekbarUI extends LinearLayout {
 
     public SeekbarUI(final Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        Log.e("new SeekbarUI");
         createView();
         init();
     }
@@ -156,7 +153,7 @@ public class SeekbarUI extends LinearLayout {
                             }
                             valueView.setText(getValueString(newProgress));
                         } catch (NumberFormatException e) {
-                            Toast.makeText(getContext(), R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
                         }
                     });
         });

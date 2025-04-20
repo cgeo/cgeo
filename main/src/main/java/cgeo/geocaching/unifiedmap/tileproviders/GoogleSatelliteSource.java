@@ -7,6 +7,6 @@ import com.google.android.gms.maps.GoogleMap;
 class GoogleSatelliteSource extends AbstractGoogleTileProvider {
 
     GoogleSatelliteSource() {
-        super(GoogleMap.MAP_TYPE_SATELLITE, R.string.map_source_google_satellite);
+        super(GoogleMap.MAP_TYPE_HYBRID, R.string.map_source_google_satellite);
     }
 }

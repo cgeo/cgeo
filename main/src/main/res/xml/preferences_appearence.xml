@@ -36,16 +36,6 @@
             android:summary="@string/init_summary_plain_logs"
             android:title="@string/init_plain_logs"
             app:iconSpaceReserved="false" />
-        <ListPreference
-            android:key="@string/pref_selected_language"
-            android:title="@string/init_select_language"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_units_imperial"
-            android:summary="@string/init_summary_units"
-            android:title="@string/init_units"
-            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_quicklaunchitems"
             android:title="@string/init_quicklaunchitems"
@@ -63,6 +53,28 @@
             android:defaultValue="0"
             android:key="@string/pref_custombnitem"
             android:title="@string/init_custombnitem"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_localization"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:key="@string/pref_selected_language"
+            android:title="@string/init_select_language"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_units_imperial"
+            android:summary="@string/init_summary_units"
+            android:title="@string/init_units"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:key="@string/pref_short_date_format"
+            android:title="@string/init_date_format"
+            android:summary="@string/init_date_format_description"
+            android:entries="@array/init_date_format_values"
+            android:entryValues="@array/pref_values_short_date_format"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
@@ -159,11 +171,12 @@
             app:defaultColor="@color/default_circlecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
+
         <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_circlefillcolor"
-            android:summary="@string/init_circlefillcolor_summary"
-            android:title="@string/init_circlefillcolor"
-            app:defaultColor="@color/default_circlefillcolor"
+            android:key="@string/pref_mapline_geofencecolor"
+            android:title="@string/init_geofencecolor"
+            android:summary="@string/init_geofencecolor_summary"
+            app:defaultColor="@color/default_geofencecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
 
@@ -174,17 +187,11 @@
             app:defaultColor="@color/default_accuracycirclecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_accuracycirclefillcolor"
-            android:summary="@string/init_accuracycirclefillcolor_summary"
-            android:title="@string/init_accuracycirclefillcolor"
-            app:defaultColor="@color/default_accuracycirclefillcolor"
-            app:showOpaquenessSlider="true"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 
-    <PreferenceCategory
+    <cgeo.geocaching.settings.PreferenceCategory
+        android:key="@string/pref_fakekey_vtmScaling"
         android:title="@string/category_unifiedMap"
         android:summary="@string/maptheme_vtm_scaling_summary"
         app:iconSpaceReserved="false">
@@ -212,5 +219,5 @@
             app:max="200"
             app:defaultValue="100"
             app:iconSpaceReserved="false" />
-    </PreferenceCategory>
+    </cgeo.geocaching.settings.PreferenceCategory>
 </PreferenceScreen>

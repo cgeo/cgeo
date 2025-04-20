@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.GpxExportIndividualRouteDialogBinding;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
@@ -12,7 +13,6 @@ import android.app.Activity;
 import android.text.InputFilter;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -29,7 +29,7 @@ public class IndividualRouteExport {
         final InputFilter filter = (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (FileUtils.FORBIDDEN_FILENAME_CHARS.indexOf(source.charAt(i)) >= 0) {
-                    Toast.makeText(activity, String.format(activity.getString(R.string.err_invalid_filename_char), source.charAt(i)), Toast.LENGTH_SHORT).show();
+                    ViewUtils.showToast(activity, R.string.err_invalid_filename_char, source.charAt(i));
                     return "";
                 }
             }

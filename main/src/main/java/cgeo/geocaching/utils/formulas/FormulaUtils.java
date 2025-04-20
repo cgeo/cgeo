@@ -5,15 +5,20 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
-import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
 import android.content.Context;
 import android.util.Pair;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,10 +41,10 @@ import org.apache.commons.lang3.StringUtils;
 public class FormulaUtils {
 
     private static final String F_OPS = "\\+/!\\^:\\*x-";
-    private static final String MAX_NR_OF_OPS = "10"; //max number of operators which will be found in a formula
+    private static final String MAX_NR_OF_OPS = "15"; //max number of operators which will be found in a formula
 
     private static final String F_WS = "\\h{0,5}"; //max number of successive whitespaces. We need to limit
-    private static final String F_FORMULA = "((" + F_WS + "\\(){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((" + F_WS + "[()\\[\\]]){0,5}" + F_WS + "(" + F_WS + "[" + F_OPS + "]" + F_WS + "){1,5})(" + F_WS + "[()]){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})){1," + MAX_NR_OF_OPS + "}(" + F_WS + "\\)){0,5}" + F_WS + ")";
+    private static final String F_FORMULA = "((" + F_WS + "\\(){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,3}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((" + F_WS + "[()\\[\\]]){0,5}" + F_WS + "(" + F_WS + "[" + F_OPS + "]" + F_WS + "){1,5})(" + F_WS + "[()]){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,3}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})){1," + MAX_NR_OF_OPS + "}(" + F_WS + "\\)){0,5}" + F_WS + ")";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
 
@@ -78,32 +83,40 @@ public class FormulaUtils {
         //no instance
     }
 
-    public static double round(final double value, final int digits) {
-        if (digits <= 0) {
-            return Math.round(value);
-        }
-        final double factor = Math.pow(10, digits);
-        return Math.round(value * factor) / factor;
-    }
+    public static Value substring(final boolean indexStartsWithZero, @NonNull final ValueList valueList) {
+        valueList.assertCheckCount(1, 3, false);
+        final String value = valueList.getAsString(0, "");
+        final int valueLength = value.length();
 
-    public static double trunc(final double value, final int digits) {
-        if (digits <= 0) {
-            return value < 0 ? Math.ceil(value) : Math.floor(value);
+        //start value
+        int start = 0;
+        if (valueList.size() > 1) {
+            final Value startValue = valueList.get(1);
+            final int startValueInt = (int) startValue.getAsLong();
+            if (indexStartsWithZero) {
+                valueList.assertCheckType(1, v -> v.isLongBetween(-valueLength, valueLength),
+                    "start must be between -" + valueLength + " and " + valueLength, false);
+                start = startValueInt < 0 ? valueLength + startValueInt : startValueInt;
+            } else {
+                valueList.assertCheckType(1, v -> v.isLongBetween(-valueLength, valueLength + 1) && !v.isNumericZero(),
+                    "start must be between -" + valueLength + " and " + (valueLength + 1) + " and not zero", false);
+                start = startValueInt < 0 ? valueLength + startValueInt : startValueInt - 1;
+            }
         }
-        final double factor = Math.pow(10, digits);
-        final double newValue = value * factor;
-        return (newValue < 0 ? Math.ceil(newValue) : Math.floor(newValue)) / factor;
-    }
 
-    public static String substring(final String value, final int start, final int length) {
-        if (value == null || start >= value.length()) {
-            return "";
+        //length
+        final int maxLength = valueLength - start;
+        int length = maxLength;
+        if (valueList.size() > 2) {
+            valueList.assertCheckType(2, v -> v.isLongBetween(0, maxLength), "length must be between 0 and " + maxLength, false);
+            length = (int) valueList.get(2).getAsLong();
         }
-        final int s = Math.max(0, start);
-        return value.substring(s, Math.min(Math.max(s + length, s), value.length()));
+
+        return Value.of(value.substring(start, start + length));
     }
 
     public static Value ifFunction(final ValueList values) {
+        values.assertCheckCount(0, -1, false);
         final int ifConditionCount = values.size() / 2;
         final boolean hasElse = values.size() % 2 == 1;
         for (int i = 0; i < ifConditionCount; i++) {
@@ -115,45 +128,59 @@ public class FormulaUtils {
     }
 
     public static Value selectChars(final ValueList values) {
+        values.assertCheckCount(1, -1, false);
         final String value = values.getAsString(0, "");
+        values.assertCheckTypes((v, i) -> i == 0 || v.isLongBetween(1, value.length()), i -> "valid index", false);
         final StringBuilder result = new StringBuilder();
         for (int i = 1 ; i < values.size(); i++) {
-            if (!values.get(i).isInteger()) {
-                throw new FormulaException(WRONG_TYPE, "positive Integer", values.get(i), values.get(i).getType());
-            }
-            final int vInt = (int) values.get(i).getAsInt();
-            if (vInt < 1 || vInt > value.length()) {
-                throw new FormulaException(OTHER, "index out of range: " + vInt);
-            }
-            result.append(substring(value, vInt - 1, 1));
+            result.append(value.charAt((int) (values.get(i).getAsLong()) - 1));
         }
         return Value.of(result.toString());
     }
 
-
-    public static long valueChecksum(final Value value, final boolean iterative) {
-        final long cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
-        return iterative ? checksum(cs, true) : cs;
-    }
-
-    public static long checksum(final long value, final boolean iterative) {
-        long result = Math.abs(value);
-        do {
-            int cs = 0;
-            while (result > 0) {
-                cs += (result % 10);
-                result /= 10;
-            }
-            result = cs;
-        } while (result >= 10 && iterative);
+    public static BigDecimal factorial(final Value v) {
+        Value.assertType(v, vv -> vv.isLongBetween(1, 50), "integer in range 1-50");
+        final int facValue = (int) v.getAsLong();
+        BigDecimal result = BigDecimal.ONE;
+        for (int i = 2; i <= facValue; i++) {
+            result = result.multiply(BigDecimal.valueOf(i));
+        }
         return result;
     }
 
-    public static int letterValue(final String value) {
+    public static Value truncRound(final ValueList valueList, final boolean trunc) {
+        valueList.assertCheckCount(1, 2, false);
+        valueList.assertCheckTypes((v, i) -> {
+            if (i == 0) {
+                return v.isNumeric();
+            }
+            return v.isLongBetween(0, 20);
+        }, i -> "Numeric, Int between 0-20", false);
+
+        return Value.of(valueList.getAsDecimal(0).setScale((int) valueList.get(1).getAsLong(), trunc ? RoundingMode.DOWN : RoundingMode.HALF_UP));
+    }
+
+    public static Value checksum(final ValueList valueList, final boolean iterative) {
+        valueList.assertCheckCount(1, 1, false);
+        return Value.of(checksum(valueList.get(0), iterative));
+    }
+
+    public static long checksum(final Value value, final boolean iterative) {
+        final long cs = letterValue(value.getAsString());
+        final boolean negate = value.getAsString().trim().startsWith("-");
+        if (!iterative || cs == 0) {
+            return negate ? -cs : cs;
+        }
+        //iterative
+        final long itCs = cs % 9;
+        return itCs == 0 ? (negate ? -9 : 9) : (negate ? -itCs : itCs);
+    }
+
+    public static long letterValue(final String value) {
         if (value == null) {
             return 0;
         }
-        int lv = 0;
+        long lv = 0;
         final String strippedValue = StringUtils.stripAccents(value);
         for (int i = 0; i < value.length(); i++) {
             final char c = strippedValue.charAt(i);
@@ -169,6 +196,17 @@ public class FormulaUtils {
             }
         }
         return lv;
+    }
+
+    public static Value rot(final ValueList valueList, final boolean isRot13) {
+        valueList.assertCheckCount(1, isRot13 ? 1 : 2, false);
+        valueList.assertCheckTypes((v, i) -> {
+            if (i == 1) {
+                return v.isLongBetween(-500, 500);
+            }
+            return true;
+        }, i -> "Int from 0-500", false);
+        return Value.of(rot(valueList.getAsString(0, ""), valueList.size() == 1 ? 13 : (int) valueList.get(1).getAsLong()));
     }
 
     public static String rot(final String value, final int rotate) {
@@ -351,10 +389,10 @@ public class FormulaUtils {
         }
     }
 
-    public static int vanity(final String value) {
-        int result = 0;
+    public static BigInteger vanity(final String value) {
+        BigInteger result = BigInteger.valueOf(0);
         for (char c : value.toUpperCase(Locale.US).toCharArray()) {
-            result = result * 10 + vanityDigit(c);
+            result = result.multiply(BigInteger.TEN).add(BigInteger.valueOf(vanityDigit(c)));
         }
         return result;
     }
@@ -416,7 +454,9 @@ public class FormulaUtils {
             .setDisplayMapper(FormulaUtils::getFunctionDisplayString)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-        model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper((s, c) -> FormulaUtils.getFunctionGroupDisplayString(s));
+        model.activateGrouping(FormulaFunction::getGroup)
+                .setGroupDisplayMapper(gi -> FormulaUtils.getFunctionGroupDisplayString(gi.getGroup()))
+                .setGroupComparator(CommonUtils.getTextSortingComparator(FormulaFunction.FunctionGroup::getUserDisplayableString), true);
 
         SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.formula_choose_function))
             .selectSingle(model, f -> {
@@ -431,7 +471,6 @@ public class FormulaUtils {
                     final int newPos = currentPos + functionPos;
 
                     formulaView.setText(newFormula);
-                    //changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
                     if (formulaView instanceof EditText) {
                         ((EditText) formulaView).setSelection(newPos);
                     }
@@ -453,7 +492,17 @@ public class FormulaUtils {
 
     private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
         return
-            TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
+            TextParam.text("**" + (g == null ? "null" : g.getUserDisplayableString()) + "**").setMarkdown(true);
     }
 
+    public static void addNeededVariables(final Set<String> neededVars, @Nullable final String formulaString) {
+        if (formulaString == null) {
+            return;
+        }
+        final Formula compiledFormula = Formula.safeCompile(formulaString);
+        if (compiledFormula == null) {
+            return;
+        }
+        neededVars.addAll(compiledFormula.getNeededVariables());
+    }
 }

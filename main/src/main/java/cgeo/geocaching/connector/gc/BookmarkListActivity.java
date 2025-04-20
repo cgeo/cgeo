@@ -13,6 +13,7 @@ public class BookmarkListActivity extends AbstractListActivity {
         title = R.string.menu_lists_bookmarklists;
         progressInfo = R.string.search_bookmark_list;
         errorReadingList = R.string.err_read_bookmark_list;
+        switchLabel = R.string.lists_only_new;
     }
 
     @Override

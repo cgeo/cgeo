@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
@@ -20,6 +21,7 @@ import cgeo.geocaching.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.regex.Pattern;
@@ -46,6 +48,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     private ALConnector() {
         // singleton
         name = LocalizationUtils.getString(R.string.settings_title_lc);
+        prefKey = R.string.preference_screen_al;
     }
 
     /**
@@ -130,9 +133,22 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        final Collection<Geocache> caches = ALApi.searchByBBox(viewport);
-        final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.putInCacheAndLoadRating();
+        return searchByViewport(viewport, null);
+    }
+
+    @NonNull
+    @Override
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
+        try {
+            final Collection<Geocache> caches = ALApi.searchByFilter(filter, viewport, this, 100);
+            SearchResult searchResult = new SearchResult(caches);
+            searchResult = searchResult.putInCacheAndLoadRating();
+            searchResult.setPartialResult(this, caches.size() == 100);
+            return searchResult;
+        } catch (IOException ioe) {
+            Log.w("ALApi.searchByViewport: caught exception", ioe);
+            return new SearchResult(this, StatusCode.COMMUNICATION_ERROR);
+        }
     }
 
     @NonNull
@@ -144,7 +160,15 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
-        return new SearchResult(ALApi.searchByFilter(filter, this));
+        try {
+            final Collection<Geocache> caches = ALApi.searchByFilter(filter, null, this, 100);
+            final SearchResult result = new SearchResult(caches);
+            result.setPartialResult(this, caches.size() == 100);
+            return result;
+        } catch (IOException ioe) {
+            Log.w("ALApi.searchByFilter: caught exception", ioe);
+            return new SearchResult(this, StatusCode.COMMUNICATION_ERROR);
+        }
     }
 
 

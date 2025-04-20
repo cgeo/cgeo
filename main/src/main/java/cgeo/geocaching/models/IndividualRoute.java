@@ -4,13 +4,13 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -61,7 +61,7 @@ public class IndividualRoute extends Route implements Parcelable {
         }
 
         if (item.getType() == RouteItem.RouteItemType.WAYPOINT && item.getWaypointId() == -1) {
-            Toast.makeText(context, R.string.individual_route_error_single_waypoint_mode, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(context, R.string.individual_route_error_single_waypoint_mode);
             return;
         }
 
@@ -69,14 +69,14 @@ public class IndividualRoute extends Route implements Parcelable {
         if (result == ToggleItemState.REMOVED) {
             Log.d("[RouteTrackDebug] Individual route: Removed first element from route (" + item.getIdentifier() + ")");
         }
-        Toast.makeText(context, result == ToggleItemState.ADDED ? R.string.individual_route_added : result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
+        ViewUtils.showShortToast(context, result == ToggleItemState.ADDED ? R.string.individual_route_added : result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint);
         updateRoute(routeUpdater);
         saveRoute();
     }
 
     public void removeItem(final Context context, final int pos, final UpdateIndividualRoute routeUpdater) {
         final ToggleItemState result = removeItem(pos);
-        Toast.makeText(context, result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
+        ViewUtils.showShortToast(context, result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint);
         updateRoute(routeUpdater);
         saveRoute();
     }
@@ -193,7 +193,7 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     private int pos(final RouteItem item) {
-        if (segments == null || segments.size() == 0) {
+        if (segments == null || segments.isEmpty()) {
             return -1;
         }
         final String identifier = item.getIdentifier();

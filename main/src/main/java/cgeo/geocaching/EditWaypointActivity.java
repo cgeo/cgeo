@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.FormulaEditText;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
@@ -36,9 +37,9 @@ import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
+import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
@@ -62,8 +63,11 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 import com.google.android.material.button.MaterialButton;
@@ -111,6 +115,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      */
     private boolean initViews = true;
     private EditwaypointActivityBinding binding;
+    private VariableListView.VariablesListAdapter varListAdapter;
 
     /**
      * This is the cache that the waypoint belongs to.
@@ -133,7 +138,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final EditWaypointActivity activity = getReference();
             if (activity == null) {
                 return;
@@ -391,11 +396,28 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
+    private Set<String> getNeededVariablesForProjection() {
+        final Set<String> projectionVars = new HashSet<>();
+
+        final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
+        if (fields.left != null) {
+            fields.left.addNeededVariables(projectionVars);
+        }
+        if (fields.middle != null) {
+            fields.middle.addNeededVariables(projectionVars);
+        }
+
+        return projectionVars;
+    }
+
     private void initializeProjectionView(final Geocache cache) {
 
         //connect formula-editfields with cache's Variable list
         final VariableList varList = cache.getVariables();
-        final BiConsumer<String, Formula> listener = (s, f) -> recalculateProjectionView();
+        final BiConsumer<String, Formula> listener = (s, f) -> {
+            varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
+            recalculateProjectedCoordinates();
+        };
         binding.projectionBearingAngle.setVariableList(varList);
         binding.projectionBearingAngle.setFormulaChangeListener(listener);
         binding.projectionBearingDistance.setVariableList(varList);
@@ -414,6 +436,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             .setDisplayMapper(pt -> TextParam.text(pt.getId()))
             .setSpinner(binding.projectionBearingUnit)
             .setChangeListener(pt -> recalculateProjectionView());
+
+        varListAdapter = binding.variableList.getAdapter();
+        varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
+        varListAdapter.setVarChangeCallback((v, s) -> {
+            varListAdapter.checkAddVisibleVariables(Collections.singletonList(v));
+            recalculateProjectedCoordinates();
+        });
+
+        varListAdapter.setVariableList(varList);
+        varListAdapter.setVisibleVariablesAndDependent(getNeededVariablesForProjection());
+
+        binding.variablesTidyup.setOnClickListener(v -> varListAdapter.tidyUp(getNeededVariablesForProjection()));
     }
 
     /**
@@ -423,7 +457,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
     private void recalculateProjectionView() {
 
-        final Geopoint base = this.preprojectedCoords;
         final ProjectionType pType = this.projectionType.get();
         final boolean projectionEnabled = waypoint == null || (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty());
 
@@ -433,7 +466,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.projectionBearingBox.setVisibility(projectionEnabled && pType == ProjectionType.BEARING ? View.VISIBLE : View.GONE);
         binding.projectionOffsetBox.setVisibility(projectionEnabled && pType == ProjectionType.OFFSET ? View.VISIBLE : View.GONE);
 
+        binding.variableList.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
+        binding.variablesTidyup.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
+
         //update currentCoords and coordinate Views
+        recalculateProjectedCoordinates();
+    }
+
+    private void recalculateProjectedCoordinates() {
+        //update currentCoords and coordinate Views
+        final Geopoint base = this.preprojectedCoords;
+
+        final ProjectionType pType = this.projectionType.get();
+        final boolean projectionEnabled = waypoint == null || (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty());
+
         if (!projectionEnabled || pType == ProjectionType.NO_PROJECTION || base == null) {
             this.currentCoords = base;
         } else {
@@ -454,6 +500,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 calcStateString = waypoint.getCalcStateConfig();
+
+                final boolean resetFromOriginal = (WaypointType.ORIGINAL == waypoint.getWaypointType());
+                binding.modifyCacheCoordinatesLocal.setText(resetFromOriginal ? R.string.waypoint_localy_reset_cache_coords : R.string.waypoint_set_as_cache_coords);
+                binding.modifyCacheCoordinatesLocalAndRemote.setText(resetFromOriginal ? R.string.waypoint_reset_local_and_remote_cache_coords : R.string.waypoint_save_and_modify_on_website);
+
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
@@ -602,7 +653,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         } else { // keep original note
             currentState.noteText = waypoint.getNote();
         }
-        currentState.userNoteText = binding.userNote.getText().toString().trim();
+        currentState.userNoteText = ViewUtils.getEditableText(binding.userNote.getText()).trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
         currentState.calcStateJson = calcStateString;
@@ -636,7 +687,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final EditWaypointActivity activity = getReference();
             if (activity == null) {
                 return;
@@ -692,7 +743,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
         waypoint.setProjection(currentState.projectionType, currentState.projectionUnits,
-            currentState.projectionFormula1, currentState.projectionFormula2);
+                currentState.projectionFormula1, currentState.projectionFormula2);
 
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
         if (cache == null) {
@@ -702,21 +753,24 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final String oldAllUserNotes = cache.getAllUserNotes();
         if (cache.addOrChangeWaypoint(waypoint, true)) {
             cache.addCacheArtefactsFromNotes(oldAllUserNotes);
+            boolean deleteModifiedOnline = false;
             if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
-                if (!cache.hasUserModifiedCoords()) {
-                    final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-                    origWaypoint.setCoords(cache.getCoords());
-                    cache.addOrChangeWaypoint(origWaypoint, false);
-                    cache.setUserModifiedCoords(true);
+                if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
+                    deleteModifiedOnline = true;
+                    cache.resetUserModifiedCoords(waypoint);
+                } else {
+                    if (!cache.hasUserModifiedCoords()) {
+                        cache.createOriginalWaypoint(cache.getCoords());
+                    }
+                    cache.setCoords(waypoint.getCoords());
+                    DataStore.saveUserModifiedCoords(cache);
                 }
-                cache.setCoords(waypoint.getCoords());
-                DataStore.saveUserModifiedCoords(cache);
             }
             if (waypoint.getCoords() != null && binding.modifyCacheCoordinatesLocalAndRemote.isChecked()) {
                 finishHandler.sendEmptyMessage(UPLOAD_START);
 
                 if (cache.supportsOwnCoordinates()) {
-                    final boolean result = uploadModifiedCoords(cache, waypoint.getCoords());
+                    final boolean result = deleteModifiedOnline ? deleteModifiedCoords(cache) : uploadModifiedCoords(cache, waypoint.getCoords());
                     finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
                 } else {
                     ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
@@ -750,6 +804,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {
         final IConnector con = ConnectorFactory.getConnector(cache);
         return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
+    }
+
+    private static boolean deleteModifiedCoords(final Geocache cache) {
+        final IConnector con = ConnectorFactory.getConnector(cache);
+        return con.supportsOwnCoordinates() && con.deleteModifiedCoordinates(cache);
     }
 
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {

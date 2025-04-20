@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:elevation="0dp">
+
+    <RelativeLayout
+        android:id="@+id/container_followmylocation"
+        style="@style/map_shadowcontainer"
+        android:layout_above="@id/container_zoom"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="11dp">
+        <ImageButton
+            android:id="@+id/map_followmylocation_btn"
+            android:src="@drawable/map_followmylocation_btn"
+            style="@style/map_overlaybutton_bg"
+            android:tooltipText="@string/menu_centerposition"
+            android:contentDescription="@string/menu_centerposition"/>
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/container_zoomin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/container_zoomout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="13dp">
-        <ImageButton
-            android:id="@+id/map_zoomin"
-            android:src="@drawable/map_zoomin"
-            style="@style/map_quicksettingsbutton" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/container_zoomout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/container_zoom"
+        android:orientation="vertical"
+        style="@style/map_shadowcontainer"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="13dp"
-        android:layout_marginBottom="18dp">
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="12dp">
+        <ImageButton
+            android:id="@+id/map_zoomin"
+            android:src="@drawable/map_zoomin_btn"
+            android:contentDescription="@string/zoom_in"
+            style="@style/map_overlaybutton"
+            android:background="@drawable/map_button_background_top" />
+        <ImageButton
+            android:id="@+id/map_zoomdivider"
+            android:src="@drawable/map_zoom_divider"
+            android:layout_height="1dp"
+            style="@style/map_overlaybutton"
+            android:background="@drawable/mark_transparent" />
         <ImageButton
             android:id="@+id/map_zoomout"
-            android:src="@drawable/map_zoomout"
-            style="@style/map_quicksettingsbutton" />
+            android:src="@drawable/map_zoomout_btn"
+            android:contentDescription="@string/zoom_out"
+            style="@style/map_overlaybutton"
+            android:background="@drawable/map_button_background_bottom" />
     </LinearLayout>
 </RelativeLayout>

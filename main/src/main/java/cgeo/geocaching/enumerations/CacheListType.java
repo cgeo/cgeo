@@ -35,10 +35,6 @@ public enum CacheListType {
     public final boolean isStoredInDatabase;
     public final boolean isOnline;
 
-    CacheListType(final boolean canSwitch, @NonNull final GeocacheFilterContext.FilterType filterContextType, final int navigationMenuItem) {
-        this(canSwitch, filterContextType, navigationMenuItem, false, false);
-    }
-
     CacheListType(final boolean canSwitch, @NonNull final GeocacheFilterContext.FilterType filterContextType, final int navigationMenuItem, final boolean isStoredInDatabase, final boolean isOnline) {
         this.canSwitch = canSwitch;
         this.filterContextType = filterContextType;

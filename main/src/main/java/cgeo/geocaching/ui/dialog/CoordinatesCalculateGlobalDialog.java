@@ -80,7 +80,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private CoordinateInputData createFromDialog() {
         final CoordinateInputData cid = new CoordinateInputData();
         cid.setGeocode(geocode);
-        cid.setNotes(binding.notesText.getText().toString());
+        cid.setNotes(ViewUtils.getEditableText(binding.notesText.getText()));
         cid.setCalculatedCoordinate(calcCoord);
         cid.setGeopoint(calcCoord.calculateGeopoint(varList::getValue));
         return cid;
@@ -211,7 +211,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
         varListAdapter.setVarChangeCallback((v, s) -> {
-            checkAddVariables(Collections.singletonList(v));
+            varListAdapter.checkAddVisibleVariables(Collections.singletonList(v));
             updateView();
         });
         varListAdapter.setVariableList(varList);
@@ -223,14 +223,14 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLat.setText(calcCoord.getLatitudePattern());
 
         binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLongitudePattern(s.toString());
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLon.setText(calcCoord.getLongitudePattern());
@@ -238,7 +238,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.NonPlainFormat.setChangeListener(p -> {
             calcCoord.setLatitudePattern(p.first);
             calcCoord.setLongitudePattern(p.second);
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         });
 
@@ -263,18 +263,21 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         });
 
         binding.ccPlainTools.setOnClickListener(v -> {
-            final List<Integer> options = Collections.singletonList(R.string.calccoord_remove_spaces);
+            final List<Integer> options = List.of(R.string.calccoord_remove_spaces, R.string.calccoord_replace_x_with_multiplication_symbol);
             final SimpleDialog.ItemSelectModel<Integer> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(options)
-                .setDisplayMapper((i) -> TextParam.id(i))
+                .setDisplayMapper(TextParam::id)
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
                     .selectSingle(model, (o) -> {
                         if (o == R.string.calccoord_remove_spaces) {
-                            binding.PlainLat.setText(DegreeFormula.removeSpaces(binding.PlainLat.getText().toString()));
-                            binding.PlainLon.setText(DegreeFormula.removeSpaces(binding.PlainLon.getText().toString()));
+                            binding.PlainLat.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLat.getText())));
+                            binding.PlainLon.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLon.getText())));
+                        } else if (o == R.string.calccoord_replace_x_with_multiplication_symbol) {
+                            binding.PlainLat.setText(DegreeFormula.replaceXWithMultiplicationSign(ViewUtils.getEditableText(binding.PlainLat.getText())));
+                            binding.PlainLon.setText(DegreeFormula.replaceXWithMultiplicationSign(ViewUtils.getEditableText(binding.PlainLon.getText())));
                         }
                     });
         });
@@ -288,12 +291,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         refreshType(calcCoord.getType(), true);
 
         return binding.getRoot();
-    }
-
-    private void checkAddVariables(final Collection<String> vars) {
-        final Set<String> neededVars = varListAdapter.getVariables().getDependentVariables(vars);
-        varListAdapter.ensureVariables(neededVars);
-        varListAdapter.addVisibleVariables(neededVars);
     }
 
     // splitting up that method would not help improve readability

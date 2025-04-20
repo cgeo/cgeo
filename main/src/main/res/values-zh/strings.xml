@@ -148,8 +148,6 @@
     <string name="log_image_titleprefix">图片</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为英语</string>
     <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -172,7 +170,6 @@
     <string name="err_detail_cache">c:geo无法显示你想要的藏点。它真的是一个藏点吗？</string>
     <string name="err_detail_cache_find">c:geo找不到藏点</string>
     <string name="err_detail_cache_find_some">c:geo找不到那个藏点。</string>
-    <string name="err_detail_cache_find_any">c:geo找不到任何藏点。</string>
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
@@ -231,7 +228,6 @@
     <string name="info_log_posted">c:geo 已成功提交日志。</string>
     <string name="info_log_saved">c:geo 成功保存日志。</string>
     <string name="info_log_post_failed">发布日志失败。</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重试</string>
     <string name="info_log_post_save">离线保存</string>
     <string name="info_log_cleared">日志已清除</string>
@@ -291,9 +287,7 @@
     <string name="caches_sort_name">应用名</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
-    <string name="caches_sort_inventory">库存计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
-    <string name="caches_sort_date_logged">记录日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_storage">存储在设备上的日期</string>
@@ -424,7 +418,6 @@
     <string name="settings_authorize">授权 c:geo</string>
     <string name="settings_reauthorize">更新或删除授权</string>
     <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
-    <string name="settings_ec_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="settings_su_description">授权 c: geo 与寻宝游戏搜索缓存。</string>
     <string name="init_summary_oc_de">从 opencaching.de 加载缓存</string>
     <string name="init_oc_de_description">授权 c:geo 使用 opencaching.de 来搜索藏点和访问/筛选您发现的藏点。</string>
@@ -490,8 +483,6 @@
     <string name="init_useInternalRouting">使用内部路线规划</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
-    <string name="init_save_log_img">保存图片</string>
-    <string name="init_summary_save_log_img">保存日志中的图片</string>
     <string name="init_units">使用英制单位</string>
     <string name="init_summary_units">使用英制单位而不是公式单位</string>
     <string name="init_log_offline">离线日志记录</string>
@@ -563,12 +554,8 @@
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
-    <string name="init_circlefillcolor">圆环填充颜色</string>
-    <string name="init_circlefillcolor_summary">选择要填充的圆环的颜色和不透明度</string>
     <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
     <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
-    <string name="init_accuracycirclefillcolor">精度圆环填充颜色</string>
-    <string name="init_accuracycirclefillcolor_summary">选择填充精度圆环的颜色和不透明度</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">访问可追踪物</string>
     <string name="init_summary_trackautovisit">默认情况下将可追踪物设置为 “已访问”</string>
@@ -594,7 +581,6 @@
     <string name="init_plain_logs">普通日志</string>
     <string name="init_summary_plain_logs">显示不带颜色的日志条目</string>
     <string name="init_maintenance">维护</string>
-    <string name="init_maintenance_directories">删除孤立的文件</string>
     <string name="init_location">地理位置</string>
     <string name="init_location_note">在装有 Google Play 的服务设备上，c:geo 可以自动使用更好的地理位置提供商。然而，这让外部蓝牙 GPS 接收器无法使用。</string>
     <string name="init_location_googleplayservices">使用 Google Play 服务</string>
@@ -643,9 +629,11 @@
     <!-- auth token -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -662,7 +650,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
     <!-- helpers -->
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
@@ -709,12 +696,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

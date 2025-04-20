@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -97,6 +98,11 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         return true;
     }
 
+    @Override
+    public boolean hasValidCredentials() {
+        return isActive() && StringUtils.isNotBlank(Settings.getString(getTokenPublicPrefKeyId(), null)) && StringUtils.isNotBlank(Settings.getString(getTokenSecretPrefKeyId(), null));
+    }
+
     public OAuthLevel getSupportedAuthLevel() {
         return OAuthLevel.Level1;
     }
@@ -125,16 +131,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
     @Override
     public int getTokenSecretPrefKeyId() {
         return 0;
-    }
-
-    /**
-     * Checks if a search based on a user name targets the current user
-     *
-     * @param username Name of the user the query is searching after
-     * @return True - search target and current is same, False - current user not known or not the same as username
-     */
-    public boolean isSearchForMyCaches(final String username) {
-        return false;
     }
 
     @Override

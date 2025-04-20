@@ -242,7 +242,7 @@ public final class VoiceHintProcessor {
                 distance = 0.;
                 results.add(input);
             }
-            if (results.size() > 0 && distance < INTERNAL_CATCHING_RANGE) { //catchingRange
+            if (!results.isEmpty() && distance < INTERNAL_CATCHING_RANGE) { //catchingRange
                 results.get(results.size() - 1).angle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
             }
         }
@@ -281,7 +281,7 @@ public final class VoiceHintProcessor {
             } else if (hint.cmd == VoiceHint.BL) {
                 results2.add(hint);
             } else {
-                if (results2.size() > 0) {
+                if (!results2.isEmpty()) {
                     results2.get(results2.size() - 1).distanceToNext += hint.distanceToNext;
                 }
             }
@@ -292,7 +292,6 @@ public final class VoiceHintProcessor {
     @SuppressWarnings("checkstyle:ModifiedControlVariable")
     public List<VoiceHint> postProcess(final List<VoiceHint> inputs, final double catchingRange, final double minRange) {
         final List<VoiceHint> results = new ArrayList<>();
-        final double distance = 0;
         VoiceHint inputLast = null;
         VoiceHint inputLastSaved = null;
         for (int hintIdx = 0; hintIdx < inputs.size(); hintIdx++) {
@@ -357,7 +356,7 @@ public final class VoiceHintProcessor {
                     if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
                         if (input.goodWay.getPrio() < input.maxBadPrio) {
                             if (inputLastSaved != null && inputLastSaved.cmd != VoiceHint.C
-                                    && (inputLastSaved != null && inputLastSaved.distanceToNext > minRange)
+                                    && (inputLastSaved.distanceToNext > minRange)
                                     && transportMode != VoiceHintList.TRANS_MODE_CAR) {
                                 // add when straight and not linktype
                                 // and last vh not straight

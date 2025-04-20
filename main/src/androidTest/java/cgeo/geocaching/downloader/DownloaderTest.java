@@ -58,7 +58,7 @@ public class DownloaderTest {
         assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
-        assertThat(count(list, true)).isEqualTo(5);
+        assertThat(count(list, true)).isGreaterThanOrEqualTo(7);
 
         // number of non-dirs found
         assertThat(count(list, false)).isBetween(49, 53);
@@ -97,21 +97,21 @@ public void testOpenAndroMaps() {
 
     @Test
     public void testOpenAndroMapsThemes() {
-        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl));
+        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl));
 
         // number of themes
-        assertThat(list.size()).isEqualTo(2);
+        assertThat(list.size()).isEqualTo(3);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(2);
+        assertThat(count(list, false)).isEqualTo(3);
 
         // check one named entry
         final Download d = findByName(list, "Elevate");
         assertThat(d).isNotNull();
-        assertThat(d.getSizeInfo()).isBlank(); // no size info available
+        assertThat(d.getSizeInfo()).isNotBlank();
     }
 
     @Test
@@ -130,9 +130,9 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "Freizeitkarte Hamburg");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 18.64 MB
+        final String sizeInfoString = d.getSizeInfo(); // 20.11 MB
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(17.8F, 20.0F);
+        assertThat(sizeInfoFloat).isBetween(17.8F, 25.0F);
     }
 
     @Test

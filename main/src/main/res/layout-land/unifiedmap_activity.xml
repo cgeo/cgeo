@@ -18,11 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/unifiedmap"/>
-
         <include layout="@layout/filter_sort_bar" />
         <include layout="@layout/map_distanceinfo" />
         <include layout="@layout/map_settings_button" />

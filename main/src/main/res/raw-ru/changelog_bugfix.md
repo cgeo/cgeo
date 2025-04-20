@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Исправлено: Wherigo: Управление зонами с неверными/слишком близкими координатами
+- Исправлено: c:geo пытался импортировать локальные ".map" файлы как GPX
+- Исправлено: отредактированные заметки пользователя из всплывающего окна иногда терялись
+- Исправлено: отображение опции "сообщить о проблеме" при редактировании записи
+- Исправлено: фильтр "не содержит", работающий в реальном времени, не возвращал никаких тайников
+- Исправлено: Сбой при приостановке работы онлайн-карты ЕдинаяКарта
+- Исправлено: устаревшее приложение "GPS Bluetooth" в списке полезных приложений
+- Исправлено: переменные и/или значения ошибочно удалялись при редактировании личной заметки
+- Исправлено: Wherigo: Неверная информация о высоте
+- Исправлено: Wherigo: Все тексты кнопок написаны с заглавной буквы
+- Исправлено: Сбой в настройках
+- Исправлено: c:geo не указан в Play Store для устройств без GPS
+- Исправлено: c:geo зависал при выборе папки в определенных конфигурациях
+- Изменение: extremcaching.com отмечен "оффлайн" (их сервис заблокирован)
+- Исправлено: информация о состоянии карты обновлялась при изменении уровня масштабирования

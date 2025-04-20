@@ -16,22 +16,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/layoutDetailsTextViewName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/layoutDetailsTextViewState"
+                android:id="@+id/headerInformation"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:visibility="gone"
+                android:textIsSelectable="true"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/layoutDetailsTextViewDistance"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
 
             <cgeo.geocaching.ui.WherigoMediaView
                 android:id="@+id/media"
@@ -39,10 +30,39 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/layoutDetailsTextViewDescription"
+                android:id="@+id/description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:autoLink="web" />
+
+            <LinearLayout
+                android:id="@+id/debug_box"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/debug_info_title"
+                android:paddingTop="5dp"
+                android:text="Debug Information"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                tools:ignore="HardcodedText"
+                android:autoLink="web" />
+
+                <TextView
+                android:id="@+id/debug_info"
+                android:paddingTop="5dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+            </LinearLayout>
+
 
             <!-- Input field -->
             <com.google.android.material.textfield.TextInputLayout

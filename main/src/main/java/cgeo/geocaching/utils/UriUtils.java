@@ -50,11 +50,6 @@ public final class UriUtils {
     }
 
     @DrawableRes
-    public static int getMimeTypeIcon(@Nullable final Uri uri) {
-        return getMimeTypeIcon(getMimeType(uri));
-    }
-
-    @DrawableRes
     public static int getMimeTypeIcon(@Nullable final String mimeType) {
 
         if (mimeType == null) {
@@ -186,18 +181,18 @@ public final class UriUtils {
     /**
      * Get a mapping for all current volumes (UUIDs) to their display name.
      * This might work better or worse depending on Android version and context state. In any case a map object is returned
-     *
+     * <br>
      * Output (if context is available) is most likely a map with
      * * a null-key for internal storage description
      * * additional keys for each external storage with its Id as used in 'tree' expression and its name
-     *
+     * <br>
      * Real-world example: SDK29 emulator returns maps with at least the following entries:
      * * null -> "internal shared storage" (this one is returned by Android Volume Manager. It will not be used for display)
      * * "16EA-2F02" -> "SDCARD" (that's a typical entry for an SD card as returned by Android Volume Manager)
      * * "primary" -> null (used for internal storage in Uris. We add the entry to document that "primary" exists but should not be displayed)
      * * some special volume mappings e.g. for "home" (points to "Document" directory)
      * * A dummy entry for unit-tests
-     *
+     * <br>
      * In an Uri, the "volume id" is typically written directly behind "/tree". In the following uri
      * the "volumeId" is "primary" (the most common one, refering to internal storage):
      * content://com.android.externalstorage.documents/tree/primary%3Acgeo
@@ -323,7 +318,7 @@ public final class UriUtils {
     /**
      * Returns a PSEUDO-Uri based on given Root and appended paths. This can be used e.g. as cache key or for logging.
      * The returned string is guaranteed to be unique fpr given root uri and paths.
-     *
+     * <br>
      * Note that the returned Uri String CAN'T and SHOULDN'T be used to construct an Uri to retrieve documents etc since it is NOT constructred according to its type.
      * For example, content:-Uris can't be constructed at all and must be queries via ContentResolver
      *
@@ -355,7 +350,7 @@ public final class UriUtils {
         final String uriString = uri.trim();
 
         //legacy case: file names
-        if (uriString.indexOf(":") < 0 && uriString.length() >= 2 && uriString.startsWith("/") && uriString.charAt(1) != '/') {
+        if (!uriString.contains(":") && uriString.length() >= 2 && uriString.startsWith("/") && uriString.charAt(1) != '/') {
             return Uri.fromFile(new File(uriString));
         }
 
@@ -373,11 +368,11 @@ public final class UriUtils {
 
     /**
      * Returns a string reporesentation of Uri fit for comparison with other Uris (e.g. to heck for equality).
-     *
+     * <br>
      * This method tweaks the Uri string such that Uris different in string representation but pointing
      * to same physical folder have a higher chance to match. It does not, however, guarantee that
      * two Uris pointing to the same physical folder will get same string rep (this is simply not possible to achieve)
-     *
+     * <br>
      * Returned strings may NOT be used to reconstruct an Uri using Uri.parse()!
      */
     public static String toCompareString(final Uri uri) {
@@ -415,7 +410,7 @@ public final class UriUtils {
     /**
      * Returns a PSEUDO-Tree-Uri based on the given path. This URI can be used e.g. as EXTRA_INITIAL_URI when requesting access to a folder
      * The returned URI might be OK but also could simply be bullshit, so non't use this function when the URI must always be valid!
-     *
+     * <br>
      * Note that the returned URI CAN'T and SHOULDN'T be used to access the directory.
      *
      * @param legacyDirectory file uri which points to the directory

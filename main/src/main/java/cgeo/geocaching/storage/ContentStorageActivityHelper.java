@@ -3,12 +3,15 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -314,8 +317,18 @@ public class ContentStorageActivityHelper {
                 (docUri == null ? 0 : Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION));
 
         runningIntentData = new IntentData(docUri, action);
+        startActivityForResult(intent, action.requestCode);
+    }
 
-        this.activity.startActivityForResult(intent, action.requestCode);
+    private void startActivityForResult(final Intent intent, final int requestCode) {
+        try {
+            this.activity.startActivityForResult(intent, requestCode);
+        } catch (ActivityNotFoundException anfe) {
+            runningIntentData = null;
+            SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.contentstorage_err_activity_not_found_title))
+                .setMessage(TextParam.id(R.string.contentstorage_err_activity_not_found_message, anfe.getMessage())).show();
+        }
     }
 
     private void selectFolderInternal(final SelectAction action, final PersistableFolder folder, final Uri startUri, final CopyChoice copyChoice) {
@@ -339,8 +352,7 @@ public class ContentStorageActivityHelper {
         }
 
         runningIntentData = new IntentData(folder, copyChoice, action);
-
-        this.activity.startActivityForResult(intent, action.requestCode);
+        startActivityForResult(intent, action.requestCode);
     }
 
 
@@ -513,7 +525,7 @@ public class ContentStorageActivityHelper {
     }
 
     private void callCallback(final SelectAction action, final Object parameter) {
-        final Consumer<Object> callback = (Consumer<Object>) this.selectActionCallbacks.get(action);
+        final Consumer<Object> callback = this.selectActionCallbacks.get(action);
         if (callback != null) {
             callback.accept(parameter);
         }

@@ -64,7 +64,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
     @Override
     public void onCreateOptionsMenu(final @NonNull Menu menu, final @NonNull MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        requireActivity().getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
         menu.findItem(R.id.menu_item_save_and_upload).setVisible(getArguments().getBoolean(ARGUMENT_INITIAL_UPLOAD_AVAILABLE));
     }
 

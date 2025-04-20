@@ -14,6 +14,7 @@
         android:clipToPadding="false"
         android:dividerHeight="1dip"
         android:padding="0dip"
+        android:contentDescription="@string/search_address_result"
         android:scrollbarStyle="outsideOverlay"
         tools:listitem="@layout/addresslist_item" />
 

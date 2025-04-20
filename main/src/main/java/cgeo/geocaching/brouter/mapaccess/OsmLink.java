@@ -41,19 +41,6 @@ public class OsmLink {
      */
     public final OsmNode getTarget(final OsmNode source) {
         return n2 != source && n2 != null ? n2 : n1;
-    /* if ( n2 != null && n2 != source )
-    {
-      return n2;
-    }
-    else if ( n1 != null && n1 != source )
-    {
-      return n1;
-    }
-    else
-    {
-      new Throwable( "ups" ).printStackTrace();
-      throw new IllegalArgumentException( "internal error: getTarget: unknown source; " + source + " n1=" + n1 + " n2=" + n2 );
-    } */
     }
 
     /**
@@ -61,18 +48,6 @@ public class OsmLink {
      */
     public final OsmLink getNext(final OsmNode source) {
         return n2 != source && n2 != null ? next : previous;
-    /* if ( n2 != null && n2 != source )
-    {
-      return next;
-    }
-    else if ( n1 != null && n1 != source )
-    {
-      return previous;
-    }
-    else
-    {
-      throw new IllegalArgumentException( "internal error: gextNext: unknown source" );
-    } */
     }
 
     /**
@@ -122,18 +97,6 @@ public class OsmLink {
 
     public final boolean isReverse(final OsmNode source) {
         return n1 != source && n1 != null;
-    /* if ( n2 != null && n2 != source )
-    {
-      return false;
-    }
-    else if ( n1 != null && n1 != source )
-   {
-      return true;
-    }
-    else
-    {
-      throw new IllegalArgumentException( "internal error: isReverse: unknown source" );
-    } */
     }
 
     public final boolean isBidirectional() {

@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 /**
  * Encapsulates Google's location services, especially its FusedLocationProvider,
- * as described here: https://developers.google.com/location-context/fused-location-provider
+ * as described here: <a href="https://developers.google.com/location-context/fused-location-provider">...</a>
  */
 public class GoogleLocationProvider extends LocationCallback {
 

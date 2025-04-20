@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
@@ -46,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.BitmapCompat;
+import androidx.core.util.Predicate;
 import androidx.core.util.Supplier;
 import androidx.exifinterface.media.ExifInterface;
 
@@ -60,14 +62,17 @@ import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.caverock.androidsvg.SVG;
 import com.igreenwood.loupe.Loupe;
@@ -81,25 +86,23 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public final class ImageUtils {
 
-    private static final String OFFLINE_LOG_IMAGE_PRAEFIX = "cgeo-image-";
-
-    private static final int MAX_DISPLAY_IMAGE_XY = 800;
+    private static final String OFFLINE_LOG_IMAGE_PREFIX = "cgeo-image-";
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
     private static final String[] NO_EXTERNAL = {"geocheck.org"};
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
-    private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)(\\?|#|$|\\)|])\\S*)");
+    private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)((\\?|#|$|\\)|])\\S*)?)");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z/]*)?/([^/]*)");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*?)(?:_l|_d|_sm|_t)?(\\.jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)");
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
         private final Folder folder;
 
         public ImageFolderCategoryHandler(final String geocode) {
-            final String suffix = StringUtils.right(geocode, 2);
-            folder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                    suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
+            folder = getSpoilerImageFolder(geocode);
         }
 
         @Override
@@ -281,7 +284,7 @@ public final class ImageUtils {
     @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
-        final Bitmap image = readImage(imageUri, true);
+        final Bitmap image = readImage(imageUri);
         if (image == null) {
             return null;
         }
@@ -303,9 +306,7 @@ public final class ImageUtils {
     }
 
     @Nullable
-    private static Bitmap readImage(final Uri imageUri, final boolean adjustOrientation) {
-        final ViewOrientation orientation = adjustOrientation ? getImageOrientation(imageUri) : null;
-
+    private static Bitmap readImage(final Uri imageUri) {
         try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
@@ -330,26 +331,6 @@ public final class ImageUtils {
             Log.e("ImageUtils.getImageOrientation(ExifIf)", e);
         }
         return null;
-    }
-
-    /**
-     * stream will be consumed and closed by method
-     */
-    @NonNull
-    private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final InputStream imageStream) {
-        if (imageStream == null) {
-            return null;
-        }
-        BitmapFactory.Options sizeOnlyOptions = null;
-        try {
-            sizeOnlyOptions = new BitmapFactory.Options();
-            sizeOnlyOptions.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(imageStream, null, sizeOnlyOptions);
-        } finally {
-            IOUtils.closeQuietly(imageStream);
-        }
-
-        return sizeOnlyOptions;
     }
 
     @Nullable
@@ -438,19 +419,21 @@ public final class ImageUtils {
         return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
     }
 
+    public static Predicate<String> getImageContainsPredicate(final Collection<Image> images) {
+        final Set<String> urls = images == null ? Collections.emptySet() :
+            images.stream().map(img -> img == null ? "" : imageUrlForSpoilerCompare(img.getUrl())).collect(Collectors.toSet());
+        return url -> urls.contains(imageUrlForSpoilerCompare(url));
+    }
+
     /**
      * Add images present in plain text to the existing collection.
      *
-     * @param images   a collection of images
      * @param texts    plain texts to be searched for image URLs
      */
-    public static void addImagesFromText(final Collection<Image> images, final String... texts) {
-        final Set<String> urls = new LinkedHashSet<>();
-        for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
-        }
+    public static List<Image> getImagesFromText(final BiConsumer<String, Image.Builder> modifier, final String ... texts) {
+        final List<Image> result = new ArrayList<>();
         if (null == texts) {
-            return;
+            return result;
         }
         for (final String text : texts) {
             //skip null or empty texts
@@ -462,40 +445,52 @@ public final class ImageUtils {
             while (m.find()) {
                 if (m.groupCount() >= 1) {
                     final String imgUrl = m.group(1);
-                    if (!urls.contains(imgUrl)) {
-                        urls.add(imgUrl);
-                        images.add(new Image.Builder()
-                                .setUrl(imgUrl, "https")
-                                .setCategory(Image.ImageCategory.NOTE)
-                                .build());
+                    if (StringUtils.isBlank(imgUrl)) {
+                        continue;
                     }
+                    final Image.Builder builder = new Image.Builder().setUrl(imgUrl, "https");
+                    if (modifier != null) {
+                        modifier.accept(imgUrl, builder);
+                    }
+                    result.add(builder.build());
                 }
             }
+
         }
+        return result;
     }
 
     /**
      * Add images present in the HTML description to the existing collection.
      *
-     * @param images   a collection of images
-     * @param geocode  the common title for images in the description
      * @param htmlText the HTML description to be parsed, can be repeated
      */
-    public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
-        final Set<String> urls = new LinkedHashSet<>();
-        for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
-        }
+    public static List<Image> getImagesFromHtml(final BiConsumer<String, Image.Builder> modifier, final String... htmlText) {
+        final List<Image> result = new ArrayList<>();
         forEachImageUrlInHtml(source -> {
-                if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
-                    images.add(new Image.Builder()
-                            .setUrl(source, "https")
-                            .setTitle(StringUtils.defaultString(geocode))
-                            .setCategory(Image.ImageCategory.LISTING)
-                            .build());
-                    urls.add(source);
+                if (canBeOpenedExternally(source)) {
+                    final Image.Builder builder = new Image.Builder()
+                            .setUrl(source, "https");
+                    if (modifier != null) {
+                        modifier.accept(source, builder);
+                    }
+                    result.add(builder.build());
                 }
             }, htmlText);
+        return result;
+    }
+
+    public static void deduplicateImageList(final Collection<Image> list) {
+        final Set<String> urls = new HashSet<>();
+        final Iterator<Image> it = list.iterator();
+        while (it.hasNext()) {
+            final Image img = it.next();
+            final String url = ImageUtils.imageUrlForSpoilerCompare(img.getUrl());
+            if (urls.contains(url)) {
+                it.remove();
+            }
+            urls.add(url);
+        }
     }
 
     public static void forEachImageUrlInHtml(@Nullable final androidx.core.util.Consumer<String> callback, @Nullable final String ... htmlText) {
@@ -530,6 +525,47 @@ public final class ImageUtils {
                     cLog.add("#found:" + count);
                 }
             }
+        }
+    }
+
+    @NonNull
+    public static String getGCFullScaleImageUrl(@NonNull final String imageUrl) {
+        // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
+        // Manipulate the URL to load the requested size.
+        final GCImageSize preferredSize = ImageUtils.GCImageSize.valueOf(Settings.getString(R.string.pref_gc_imagesize, "ORIGINAL"));
+        MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
+        }
+        matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1) + matcherViewstates.group(2);
+            //return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
+        }
+        return imageUrl;
+    }
+
+    public enum GCImageSize {
+        ORIGINAL("", ""),
+        LARGE("_l", "large/"),
+        DISPLAY("_d", "display/"),
+        SMALL("_sm", "small/"),
+        THUMB("_t", "thumb/");
+
+        private final String suffix;
+        private final String pathname;
+
+        GCImageSize(final String suffix, final String pathname) {
+            this.suffix = suffix;
+            this.pathname = pathname;
+        }
+
+        public String getPathname() {
+            return pathname;
+        }
+
+        public String getSuffix() {
+            return suffix;
         }
     }
 
@@ -713,14 +749,6 @@ public final class ImageUtils {
                 image));
     }
 
-    /**
-     * Create a new image Uri for an offline log image
-     */
-    public static ImmutablePair<String, Uri> createNewOfflineLogImageUri(final String geocode) {
-        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
-        return new ImmutablePair<>(imageFileName, Uri.fromFile(getFileForOfflineLogImage(imageFileName)));
-    }
-
     public static Image toLocalLogImage(final String geocode, final Uri imageUri) {
         //create new image
         final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
@@ -730,35 +758,24 @@ public final class ImageUtils {
         return new Image.Builder().setUrl(targetUri).build();
     }
 
-    public static Uri createLocalLogImageUri(final String geocode) {
-        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
-        final Folder folder = Folder.fromFile(getFileForOfflineLogImage(imageFileName).getParentFile());
-        return ContentStorage.get().create(folder, imageFileName);
-    }
-
     public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
         if (geocode == null) {
             return;
         }
         final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile() == null ? null : i.getFile().getName()).toSet();
-        final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
+        final String fileNamePraefix = OFFLINE_LOG_IMAGE_PREFIX + geocode;
         CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
                 .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
                 .forEach(File::delete);
     }
 
-    public static boolean deleteOfflineLogImageFile(final Image delete) {
-        final File imageFile = getFileForOfflineLogImage(delete.getFileName());
-        return imageFile.isFile() && imageFile.delete();
-    }
-
     public static File getFileForOfflineLogImage(final String imageFileName) {
         //extract geocode
         String geocode = null;
-        if (imageFileName.startsWith(OFFLINE_LOG_IMAGE_PRAEFIX)) {
-            final int idx = imageFileName.indexOf("-", OFFLINE_LOG_IMAGE_PRAEFIX.length());
+        if (imageFileName.startsWith(OFFLINE_LOG_IMAGE_PREFIX)) {
+            final int idx = imageFileName.indexOf("-", OFFLINE_LOG_IMAGE_PREFIX.length());
             if (idx >= 0) {
-                geocode = imageFileName.substring(OFFLINE_LOG_IMAGE_PRAEFIX.length(), idx);
+                geocode = imageFileName.substring(OFFLINE_LOG_IMAGE_PREFIX.length(), idx);
             }
         }
         return new File(LocalStorage.getOfflineLogImageDir(geocode), imageFileName);
@@ -843,14 +860,6 @@ public final class ImageUtils {
         return StringUtils.defaultString(UriUtils.getMimeType(Uri.parse(url)), "image/*");
     }
 
-    public static boolean isImageUrl(final String url) {
-        if (StringUtils.isBlank(url)) {
-            return false;
-        }
-        final String mimeType = UriUtils.getMimeType(Uri.parse(url));
-        return (mimeType != null && mimeType.startsWith("image/"));
-    }
-
     public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images, final boolean showOwnCategory) {
         imageGallery.clear();
         imageGallery.setup(geocode);
@@ -859,6 +868,11 @@ public final class ImageUtils {
             imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
         }
         if (images != null) {
+            //pre-create all contained categories to be in control of their sort order
+            images.stream().map(img -> img.category)
+                    .distinct().sorted().forEach(cat -> imageGallery.createCategory(
+                            cat == Image.ImageCategory.UNCATEGORIZED ? null : cat.getI18n(), false));
+            //add the images
             imageGallery.addImages(images);
         }
     }
@@ -906,7 +920,7 @@ public final class ImageUtils {
             //Workaround START
             final GestureDetector singleTapDetector = new GestureDetector(activity, new GestureDetector.SimpleOnGestureListener() {
                 @Override
-                public boolean onSingleTapConfirmed(final MotionEvent e) {
+                public boolean onSingleTapConfirmed(@NonNull final MotionEvent e) {
                     //Logic to happen on single tap
                     onSingleTap.run();
                     return true;
@@ -1019,6 +1033,15 @@ public final class ImageUtils {
             Log.w("Problem parsing '" + logId + "' as SVG", es);
         }
         return null;
+    }
+
+    public static Folder getSpoilerImageFolder(final String geocode) {
+        if (geocode == null) {
+            return null;
+        }
+        final String suffix = StringUtils.right(geocode, 2);
+        return Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
+                suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
     }
 
 }

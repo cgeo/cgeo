@@ -32,7 +32,7 @@ public class TravelBugConnectorTest {
     public void testGetUrl() {
         final Trackable trackable = new Trackable();
         trackable.setGeocode("TB2345");
-        assertThat(getConnector().getUrl(trackable)).isEqualTo("https://www.geocaching.com//track/details.aspx?tracker=TB2345");
+        assertThat(getConnector().getUrl(trackable)).isEqualTo("https://www.geocaching.com/track/details.aspx?tracker=TB2345");
     }
 
     @Test

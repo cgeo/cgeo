@@ -56,7 +56,7 @@ public class FormatJson extends Formatter {
         }
         if (t.showSpeedProfile) { // set in profile
             final List<String> sp = t.aggregateSpeedProfile();
-            if (sp.size() > 0) {
+            if (!sp.isEmpty()) {
                 sb.append("        \"speedprofile\": [\n");
                 for (int i = sp.size() - 1; i >= 0; i--) {
                     sb.append("          [").append(sp.get(i)).append(i > 0 ? "],\n" : "]\n");
@@ -166,14 +166,14 @@ public class FormatJson extends Formatter {
         sb.append("    {\n");
         sb.append("      \"type\": \"Feature\",\n");
         sb.append("      \"properties\": {\n");
-        sb.append("        \"name\": \"" + StringUtils.escapeJson(name) + "\",\n");
-        sb.append("        \"type\": \"" + type + "\"\n");
+        sb.append("        \"name\": \"").append(StringUtils.escapeJson(name)).append("\",\n");
+        sb.append("        \"type\": \"").append(type).append("\"\n");
         sb.append("      },\n");
         sb.append("      \"geometry\": {\n");
         sb.append("        \"type\": \"Point\",\n");
         sb.append("        \"coordinates\": [\n");
-        sb.append("          " + formatILon(ilon) + ",\n");
-        sb.append("          " + formatILat(ilat) + "\n");
+        sb.append("          ").append(formatILon(ilon)).append(",\n");
+        sb.append("          ").append(formatILat(ilat)).append("\n");
         sb.append("        ]\n");
         sb.append("      }\n");
         sb.append("    }");

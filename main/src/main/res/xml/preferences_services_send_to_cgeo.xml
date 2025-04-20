@@ -14,6 +14,7 @@
             android:key="@string/pref_webDeviceName"
             android:singleLine="true"
             android:title="@string/init_sendToCgeo_name"
+            android:hint="@string/init_sendToCgeo_name"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.RegisterSend2CgeoPreference
             android:title="@string/init_sendToCgeo_register"

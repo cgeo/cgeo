@@ -5,7 +5,7 @@ import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -56,7 +56,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     public void navigateWithTargetSelector(@NonNull final Context context, @NonNull final Geocache cache) {
-        final ArrayList<IWaypoint> targets = new ArrayList<>();
+        final ArrayList<INamedGeoCoordinate> targets = new ArrayList<>();
         targets.add(cache);
         for (final Waypoint waypoint : cache.getWaypoints()) {
             final Geopoint coords = waypoint.getCoords();
@@ -69,7 +69,8 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         } else {
             // show a selection of all parking places and the cache itself, when using the navigation for driving
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
-            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
+            final ListAdapter adapter = new ArrayAdapter<INamedGeoCoordinate>(themeContext, R.layout.cacheslist_item_select, targets) {
+                @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position),
@@ -80,7 +81,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
             Dialogs.newBuilder(context)
                     .setTitle(R.string.cache_menu_navigation_drive_select_target)
                     .setAdapter(adapter, (dialog, which) -> {
-                        final IWaypoint target = targets.get(which);
+                        final INamedGeoCoordinate target = targets.get(which);
                         if (target instanceof Geocache) {
                             navigateWithoutTargetSelector(context, (Geocache) target);
                         }

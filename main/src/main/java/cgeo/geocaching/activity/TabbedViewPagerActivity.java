@@ -2,12 +2,15 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +38,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     private long[] orderedPages;
     private ViewPager2 viewPager = null;
     private Action1<Long> onPageChangeListener = null;
+    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
 
     /**
      * The {@link SwipeRefreshLayout} for this activity. Might be null if page is not refreshable.
@@ -87,12 +91,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
 
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
-        /*
-        @Override
-        public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        }
-        */
 
         @Override
         public void onPageSelected(final int position) {
@@ -211,10 +209,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         return currentPageId;
     }
 
-    protected boolean isCurrentPage(final int pageId) {
-        return currentPageId == pageId;
-    }
-
     @SuppressWarnings("rawtypes")
     public void registerFragment(final long pageId, final TabbedViewPagerFragment fragment) {
         fragmentMap.put(pageId, fragment);
@@ -252,6 +246,10 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             //triggering adapter change will re-layout the view pager tabs
             viewPager.post(this::notifyAdapterDataSetChanged);
         }
+    }
+
+    protected void scrollToBottom() {
+        findViewById(R.id.detailScroll).post(() -> ((NestedScrollView) findViewById(R.id.detailScroll)).fullScroll(View.FOCUS_DOWN));
     }
 
     /**
@@ -302,7 +300,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     // ---------------------------------------------------------------------------------
-    // ab hier lifecycle logging only
+    // lifecycle logging only - for testing purposes
     // ---------------------------------------------------------------------------------
 
     /*

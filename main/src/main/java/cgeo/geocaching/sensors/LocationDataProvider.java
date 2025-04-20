@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.functions.Function;
 
 /**
  * Provides access to Location data (GPS and direction).
- *
+ * <br>
  * This class is responsible for fusing different available Location providers of Android
  * system according to their availability and user preference. Examples for different providers:
  * * Google Play Location provider such as FusedLocationProvider (if Google Play Service is available)

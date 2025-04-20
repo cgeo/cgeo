@@ -37,7 +37,6 @@ import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -177,9 +176,9 @@ public final class TextUtils {
     /**
      * Replaces every \n, \r and \t with a single space. Afterwards multiple spaces
      * are merged into a single space. Finally leading spaces are deleted.
-     *
+     * <br>
      * This method must be fast, but may not lead to the shortest replacement String.
-     *
+     * <br>
      * You are only allowed to change this code if you can prove it became faster on a device.
      * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project.
      *
@@ -204,16 +203,6 @@ public final class TextUtils {
             }
         }
         return String.valueOf(chars, 0, resultSize);
-    }
-
-    /**
-     * @param str input string
-     *            As of performance reasons we non't use a REGEX here. Don't use this function for strings which could contain new-line characters like "\r\n" or "\r"
-     * @return normalized String Length like it is counted at the gc website (count UNIX new-line character "\n" as two characters)
-     */
-    public static int getNormalizedStringLength(@NonNull final String str) {
-        final String newStr = str.trim();
-        return StringUtils.countMatches(newStr, "\n") + newStr.length();
     }
 
     /**
@@ -469,7 +458,7 @@ public final class TextUtils {
      * @param text       text to search in
      * @param startToken starttoken. if blank then "starttoken" is assumed to be start of text
      * @param endToken   starttoken. if blank then "endtoken" is assumed to be end of text
-     * @return array of found matches
+     * @return list of found matches
      */
     @NonNull
     public static List<String> getAll(final String text, final String startToken, final String endToken) {
@@ -510,17 +499,6 @@ public final class TextUtils {
         final int charsAtEnd = maxLength - separator.length() - charsAtBegin;
 
         return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd);
-    }
-
-    public static boolean isLetterOrDigit(final char ch, final boolean useUpper) {
-        boolean returnValue = CharUtils.isAsciiAlphanumeric(ch);
-        if (useUpper) {
-            returnValue &= CharUtils.isAsciiAlphaUpper(ch);
-        } else {
-            returnValue &= CharUtils.isAsciiAlphaLower(ch);
-        }
-
-        return returnValue;
     }
 
     public static boolean isEqualIgnoreCaseAndSpecialChars(final String s1, final String s2) {
@@ -657,7 +635,7 @@ public final class TextUtils {
         return sp;
     }
 
-    public static String annotateSpans(final CharSequence cs, final Func1<Object, Pair<String, String>> annotator) {
+    public static String annotateSpans(final CharSequence cs, @Nullable final Func1<Object, Pair<String, String>> annotator) {
         if (!(cs instanceof Spanned) || cs.length() == 0) {
             return cs.toString();
         }
@@ -668,10 +646,11 @@ public final class TextUtils {
 
         final SortedMap<Integer, String> data = new TreeMap<>((i1, i2) -> -i1.compareTo(i2));
         for (Object span : spans) {
+            final Pair<String, String> markers = annotator == null ? null : annotator.call(span);
             final int start = ((Spanned) cs).getSpanStart(span);
-            data.put(start, (data.containsKey(start) ? data.get(start) : "") + annotator.call(span).first);
+            data.put(start, (data.containsKey(start) ? data.get(start) : "") + (markers == null || markers.first == null ? "" : markers.first));
             final int end = ((Spanned) cs).getSpanEnd(span);
-            data.put(end, annotator.call(span).second + (data.containsKey(end) ? data.get(end) : ""));
+            data.put(end, (markers == null || markers.second == null ? "" : markers.second) + (data.containsKey(end) ? data.get(end) : ""));
         }
 
         String result = cs.toString();

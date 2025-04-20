@@ -1,33 +1,45 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Encapsulates a single value for handling in {@link Formula}. Provides e.g. type conversions.
+ * <br>
+ * Supports raw values of type String, CharSequence, Double, Long, BigInterger and BigDecimal
  */
-public class Value {
+public class Value implements Comparable<Value> {
 
     public static final Value EMPTY = Value.of(null);
 
-    private static final double DOUBLE_DELTA = 0.000000001d;
     private static final Format DOUBLE_TO_STRING_FORMAT = new DecimalFormat("#.######", DecimalFormatSymbols.getInstance(Locale.US));
 
+    private static final BigInteger LONG_MAX = BigInteger.valueOf(Long.MAX_VALUE);
+    private static final BigInteger LONG_MIN = BigInteger.valueOf(Long.MIN_VALUE);
+
+    private static final BigDecimal DOUBLE_MAX = BigDecimal.valueOf(450000000);
+    private static final BigDecimal DOUBLE_MIN = DOUBLE_MAX.negate();
 
     private final Object raw;
 
-    //some caching
+    //caching
     private String asString;
-    private Double asDouble;
-    private Long asInteger;
+
+    private boolean isNumeric;
+    private BigDecimal asDecimal;
 
     public static Value of(final Object value) {
         return new Value(value);
@@ -42,26 +54,18 @@ public class Value {
         return raw;
     }
 
-    public boolean isDouble() {
-        getAsDouble();
-        return !asDouble.isNaN();
-    }
-
     public boolean isInteger() {
-        getAsInt();
-        return !asInteger.equals(Long.MIN_VALUE);
-    }
-
-    public boolean isString() {
-        return (raw != null);
+        return isNumeric() && getAsDecimal().stripTrailingZeros().scale() <= 0;
     }
 
     public String getAsString() {
         if (asString == null) {
             if (raw == null) {
                 asString = "";
-            } else if (raw instanceof Number && !(raw instanceof Integer)) {
+            } else if (raw instanceof Double || raw instanceof Float) {
                 asString = DOUBLE_TO_STRING_FORMAT.format(((Number) raw).doubleValue());
+            } else if (raw instanceof BigDecimal) {
+                asString = ((BigDecimal) raw).stripTrailingZeros().toPlainString();
             } else {
                 asString = raw instanceof String ? (String) raw : raw.toString();
             }
@@ -73,46 +77,76 @@ public class Value {
         return raw instanceof CharSequence ? (CharSequence) raw : getAsString();
     }
 
-    public boolean getAsBoolean() {
-        //value is boolean if it is either numeric and > 0 or non-numeric and non-empty as a string
-        return isDouble() ? getAsDouble() > 0d + DOUBLE_DELTA : !StringUtils.isBlank(getAsString());
+    public BigInteger getAsInteger() {
+        return getAsDecimal().toBigInteger();
     }
 
-    public long getAsInt() {
-        if (asInteger == null) {
-            if (raw instanceof Integer || raw instanceof Long) {
-                asInteger = ((Number) raw).longValue();
-            } else if (raw instanceof Number && Math.abs(Math.round(((Number) raw).doubleValue()) - ((Number) raw).doubleValue()) < DOUBLE_DELTA) {
-                asInteger = ((Number) raw).longValue();
-            } else {
-                try {
-                    asInteger = Long.parseLong(getAsString());
-                } catch (NumberFormatException nfe) {
-                    final double d = getAsDouble();
-                    if (isDouble() && d <= Long.MAX_VALUE && d >= Long.MIN_VALUE && Math.abs(Math.round(d) - d) < DOUBLE_DELTA) {
-                        asInteger = Math.round(d);
-                    } else {
-                        asInteger = Long.MIN_VALUE;
-                    }
+    public BigDecimal getAsDecimal() {
+        if (asDecimal == null) {
+            isNumeric = true;
+            try {
+                if (raw instanceof BigDecimal) {
+                    asDecimal = (BigDecimal) raw;
+                } else if (raw instanceof Integer || raw instanceof Long || raw instanceof Byte) {
+                    asDecimal = new BigDecimal(((Number) raw).longValue());
+                } else if (raw instanceof Double || raw instanceof Float) {
+                    asDecimal = BigDecimal.valueOf(((Number) raw).doubleValue());
+                } else if (raw instanceof BigInteger) {
+                    asDecimal = new BigDecimal((BigInteger) raw);
+                } else {
+                    asDecimal = new BigDecimal(getAsString().replace(',', '.'));
                 }
+            } catch (NumberFormatException ignore) {
+                isNumeric = false;
+                asDecimal = BigDecimal.ZERO;
             }
         }
-        return asInteger.equals(Long.MIN_VALUE) ? 0L : asInteger;
+        return asDecimal;
+    }
+
+    public boolean isNumeric() {
+        getAsDecimal();
+        return isNumeric;
+    }
+
+    public boolean isNumericZero() {
+        return isNumeric() && getAsDecimal().signum() == 0;
+    }
+
+    public boolean isNumericPositive() {
+        return isNumeric() && getAsDecimal().signum() > 0;
+    }
+
+    public boolean isNumericNegative() {
+        return isNumeric() && getAsDecimal().signum() < 0;
+    }
+
+    public boolean getAsBoolean() {
+        //value is boolean if it is either numeric and > 0 or non-numeric and non-empty as a string
+        if (isNumeric()) {
+            return getAsDecimal().compareTo(BigDecimal.ZERO) > 0;
+        }
+        return StringUtils.isNotBlank(getAsString());
+    }
+
+    public boolean isDouble() {
+        return isNumeric() && getAsDecimal().compareTo(DOUBLE_MAX) <= 0 && getAsDecimal().compareTo(DOUBLE_MIN) >= 0;
+    }
+
+    public boolean isLong() {
+        return isInteger() && getAsInteger().compareTo(LONG_MAX) <= 0 &&   getAsInteger().compareTo(LONG_MIN) >= 0;
+    }
+
+    public boolean isLongBetween(final long min, final long max) {
+        return isLong() && getAsLong() >= min && getAsLong() <= max;
     }
 
     public double getAsDouble() {
-        if (asDouble == null) {
-            if (raw instanceof Number) {
-                asDouble = ((Number) raw).doubleValue();
-            } else {
-                try {
-                    asDouble = Double.parseDouble(getAsString().replaceAll(",", "."));
-                } catch (NumberFormatException nfe) {
-                    asDouble = Double.NaN;
-                }
-            }
-        }
-        return asDouble.isNaN() ? 0d : asDouble;
+        return getAsDecimal().doubleValue();
+    }
+
+    public long getAsLong() {
+        return getAsInteger().longValue();
     }
 
     public String toUserDisplayableString() {
@@ -120,7 +154,63 @@ public class Value {
     }
 
     public String getType() {
-        return raw == null ? "null" : raw.getClass().getSimpleName();
+        if (raw == null) {
+            return "null";
+        }
+        if (isNumeric()) {
+            if (isNumericZero()) {
+                return "Zero";
+            }
+            final StringBuilder str = new StringBuilder(isNumericPositive() ? "+" : "-");
+            if (isInteger()) {
+                str.append("Integer");
+            } else {
+                str.append("Decimal");
+            }
+            return str.toString();
+        }
+        return "Text";
+    }
+
+    public CharSequence getAsTypedCharSequence(final boolean type) {
+        if (!type || isNumeric()) {
+            return getAsCharSequence();
+        }
+        return TextUtils.concat("'", getAsCharSequence(), "'");
+    }
+
+    public static boolean assertType(final Value value, final Predicate<Value> test, final String wantedType) {
+        if (value == null) {
+            throw new FormulaException(WRONG_TYPE, wantedType, "<empty>", "<empty>");
+        }
+        if (test != null && !test.test(value)) {
+            throw new FormulaException(WRONG_TYPE, wantedType, value.toUserDisplayableString(), value.getType());
+        }
+        return true;
+    }
+
+    @Override
+    public int compareTo(final Value other) {
+        if (other == null) {
+            return 1;
+        }
+        if (this.isNumeric() && other.isNumeric()) {
+            return this.getAsDecimal().compareTo(other.getAsDecimal());
+        }
+        if (this.isNumeric() || other.isNumeric()) {
+            return this.isNumeric() ? -1 : 1;
+        }
+        return this.getAsString().compareTo(other.getAsString());
+    }
+
+    public static int compare(final Value v1, final Value v2) {
+        if (v1 == v2) {
+            return 0;
+        }
+        if (v1 == null || v2 == null) {
+            return v1 == null ? -1 : 1;
+        }
+        return v1.compareTo(v2);
     }
 
     @Override
@@ -128,16 +218,12 @@ public class Value {
         if (!(obj instanceof Value)) {
             return false;
         }
-        final Value other = (Value) obj;
-        if (other.isDouble() && this.isDouble()) {
-            return Math.abs(other.getAsDouble() - this.getAsDouble()) < DOUBLE_DELTA;
-        }
-        return Objects.equals(getAsString(), other.getAsString());
+        return this.compareTo((Value) obj) == 0;
     }
 
     @Override
     public int hashCode() {
-        return isDouble() ? (int) Math.round(getAsDouble()) : getAsString().hashCode();
+        return isNumeric() ? getAsDecimal().hashCode() : getAsString().hashCode();
     }
 
     @Override

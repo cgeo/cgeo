@@ -26,11 +26,9 @@ public class BRouterWorker {
     public String rawTrackPath;
     public List<OsmNodeNamed> waypoints;
     public List<OsmNodeNamed> nogoList;
-    public List<OsmNodeNamed> nogoPolygonsList;
-    public String profileParams;
 
     // external code, do not refactor
-    @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch", "deprecation"})
+    @SuppressWarnings({"PMD.ExcessiveMethodLength"})
     public String getTrackFromParams(final Bundle params) {
         int engineMode = 0;
         if (params.containsKey("engineMode")) {
@@ -64,12 +62,12 @@ public class BRouterWorker {
                 throw new IllegalArgumentException("we need two lat/lon points at least!");
             }
         } else {
-            if (waypoints.size() < 1) {
+            if (waypoints.isEmpty()) {
                 throw new IllegalArgumentException("we need two lat/lon points at least!");
             }
         }
 
-        if (nogoList != null && nogoList.size() > 0) {
+        if (nogoList != null && !nogoList.isEmpty()) {
             // forward already read nogos from filesystem
             if (rc.nogopoints == null) {
                 rc.nogopoints = nogoList;

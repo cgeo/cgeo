@@ -10,6 +10,7 @@ import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
@@ -41,7 +42,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 /**
  * Fragment displays and maintains an image list where
  * user can select/delete/edit/sort images using various options
- *
+ * <br>
  * Activities using this fragment have to ensure to call {@link #onParentActivityResult(int, int, Intent)}
  * in their {@link android.app.Activity#onActivityResult(int, int, Intent)} method since
  * this fragment starts and works with results of intents.
@@ -55,6 +56,7 @@ public class ImageListFragment extends Fragment {
     //following info is used to restrict image selections and for display
     private String geocode;
     private Long maxImageUploadSize;
+    private Uri ownImageFolderUri;
 
     private final ImageLoader imageCache = new ImageLoader();
 
@@ -69,6 +71,13 @@ public class ImageListFragment extends Fragment {
     public void init(final String contextCode, final Long maxImageUploadSize) {
         this.geocode = contextCode;
         this.maxImageUploadSize = maxImageUploadSize;
+
+        if (geocode != null) {
+            final Folder ownImageFolder = ImageUtils.getSpoilerImageFolder(geocode);
+            final boolean hasOwnImages = ownImageFolder != null && !ContentStorage.get().list(ownImageFolder).isEmpty();
+            this.ownImageFolderUri = hasOwnImages ? ownImageFolder.getUri() : null;
+            binding.imageAddOwn.setVisibility(hasOwnImages ? View.VISIBLE : View.GONE);
+        }
     }
 
     /**
@@ -88,7 +97,7 @@ public class ImageListFragment extends Fragment {
 
     /**
      * make sure to call this method in the activites {@link android.app.Activity#onActivityResult(int, int, Intent)} method.
-     *
+     * <br>
      * When this method returns true, this means that the result has been consumed. False otherwise.
      */
     public boolean onParentActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -146,7 +155,7 @@ public class ImageListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.imagelist_fragment, container, false);
         binding = ImagelistFragmentBinding.bind(view);
@@ -163,9 +172,11 @@ public class ImageListFragment extends Fragment {
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-                imageHelper.getMultipleImagesFromStorage(geocode, false, null));
+                imageHelper.getMultipleImagesFromStorage(geocode, false, null, null));
         this.binding.imageAddCamera.setOnClickListener(v ->
                 imageHelper.getImageFromCamera(geocode, false, null));
+        this.binding.imageAddOwn.setOnClickListener(v ->
+                imageHelper.getMultipleImagesFromStorage(geocode, false, null, ownImageFolderUri));
 
         if (savedState != null) {
             imageList.setItems(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
@@ -180,6 +191,7 @@ public class ImageListFragment extends Fragment {
         outState.putBundle(SAVED_STATE_IMAGEHELPER, imageHelper.getState());
     }
 
+    /** @noinspection EmptyMethod*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -306,7 +318,7 @@ public class ImageListFragment extends Fragment {
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
 
-        getActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
+        requireActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }
 
     private int getFastImageAutoScale() {

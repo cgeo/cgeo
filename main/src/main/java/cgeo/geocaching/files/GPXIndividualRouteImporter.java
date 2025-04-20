@@ -1,15 +1,18 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.net.Uri;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -36,7 +39,10 @@ public class GPXIndividualRouteImporter {
             } catch (final Exception e) {
                 //
             }
-        }, () -> Toast.makeText(context, size.get() > 0 ? context.getResources().getQuantityString(R.plurals.individual_route_loaded, size.get(), size.get()) : context.getString(R.string.load_individual_route_error), Toast.LENGTH_SHORT).show());
+        }, () -> {
+            ViewUtils.showShortToast(context, size.get() > 0 ? LocalizationUtils.getPlural(R.plurals.individual_route_loaded, size.get()) : LocalizationUtils.getString(R.string.load_individual_route_error));
+            LifecycleAwareBroadcastReceiver.sendBroadcast(context, Intents.ACTION_INDIVIDUALROUTE_CHANGED);
+        });
     }
 
     // returns the length of the parsed route / 0 on empty or error

@@ -167,16 +167,8 @@ public class GeocacheSort implements Parcelable {
         this.targetCoords = targetCoords;
     }
 
-    public boolean isEventList() {
-        return isEventList;
-    }
-
     public void setEventList(final boolean eventList) {
         isEventList = eventList;
-    }
-
-    public boolean isSeriesList() {
-        return isSeriesList;
     }
 
     public void setSeriesList(final boolean seriesList) {

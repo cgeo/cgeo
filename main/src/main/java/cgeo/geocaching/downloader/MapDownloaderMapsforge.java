@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class MapDownloaderMapsforge extends AbstractMapDownloader {
 
-    private static final Pattern PATTERN_MAP = Pattern.compile("alt=\"\\[ \\]\"><\\/td><td><a href=\"(([-a-z]+)\\.map)\">[-a-z]+\\.map<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
+    private static final Pattern PATTERN_MAP = Pattern.compile("alt=\"\\[ \\]\"><\\/td><td><a href=\"(([-a-z0-9]+)\\.map)\">[-a-z0-9]+\\.map<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
     private static final Pattern PATTERN_DIR = Pattern.compile("alt=\"\\[DIR\\]\"><\\/td><td><a href=\"([-a-z]+\\/)");
     private static final Pattern PATTERN_UP = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
     private static final MapDownloaderMapsforge INSTANCE = new MapDownloaderMapsforge();

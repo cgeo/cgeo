@@ -7,7 +7,6 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.os.Parcel;
@@ -16,16 +15,12 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class RouteItem implements Parcelable {
-    public static final Comparator<? super RouteItem> NAME_COMPARATOR = (Comparator<RouteItem>) (left, right) -> TextUtils.COLLATOR.compare(left.identifier, right.identifier);
-
-
     // groups: 1=geocode, 3=wp prefix, 4=additional text
     private static final Pattern GEOINFO_PATTERN = Pattern.compile("^([A-Za-z]{1,2}[0-9A-Za-z]{1,6})(-([A-Za-z0-9]{1,10}))?( .*)?$");
     private static final Pattern AL_GEOINFO_PATTERN = Pattern.compile("^AL([A-Za-z0-9]+)(-[A-Za-z0-9]+)+( .*)?$");
@@ -40,7 +35,7 @@ public class RouteItem implements Parcelable {
     private int waypointId;
     private String sortFilterString;
 
-    public RouteItem(final IWaypoint item) {
+    public RouteItem(final INamedGeoCoordinate item) {
         setDetails(item);
     }
 
@@ -166,6 +161,14 @@ public class RouteItem implements Parcelable {
         return DataStore.loadCache(cacheGeocode, LoadFlags.LOAD_CACHE_OR_DB);
     }
 
+    @Nullable
+    public Waypoint getWaypoint() {
+        if (waypointId == 0) {
+            return null;
+        }
+        return DataStore.loadWaypoint(waypointId);
+    }
+
     @NonNull
     public String getShortGeocode() {
         return generateShortGeocode(cacheGeocode);
@@ -183,11 +186,11 @@ public class RouteItem implements Parcelable {
         return point;
     }
 
-    private void setDetails(final IWaypoint item) {
-        if (item instanceof Geocache) {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getName());
+    private void setDetails(final INamedGeoCoordinate item) {
+        if (item instanceof Waypoint) {
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), ((Waypoint) item).getId(), item.getName());
         } else {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), item.getName());
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getName());
         }
     }
 
@@ -222,7 +225,7 @@ public class RouteItem implements Parcelable {
         }
     }
 
-    private String buildIdentifier(final IWaypoint item) {
+    private String buildIdentifier(final INamedGeoCoordinate item) {
         String name = item.getGeocode();
         if (item instanceof Waypoint) {
             name += "-" + ((Waypoint) item).getPrefix();

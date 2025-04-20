@@ -171,9 +171,6 @@
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">翻譯</string>
-    <string name="translate_to_sys_lang">翻译为 %s</string>
-    <string name="translate_to_english">翻译为</string>
     <string name="translate_length_warning">文字太多，翻譯失敗。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
@@ -197,7 +194,6 @@
     <string name="err_detail_cache">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
     <string name="err_detail_cache_find">無法找到geocache</string>
     <string name="err_detail_cache_find_some">無法找到那個geocache</string>
-    <string name="err_detail_cache_find_any">無法找到任何geocache</string>
     <string name="err_detail_no_spoiler">c:geo未找到相關的spoiler照片</string>
     <string name="err_detail_still_working">仍然在處理另一個工作</string>
     <string name="err_detail_premium_log_found">這個是geocaching.com付費會員專屬的地理藏寶。雖然無法顯示這個地理藏寶的詳細資訊，但您仍可以發佈您的日誌。</string>
@@ -256,7 +252,6 @@
     <string name="info_log_posted">成功發布日誌</string>
     <string name="info_log_saved">成功儲存日誌。</string>
     <string name="info_log_post_failed">發布日誌失敗</string>
-    <string name="info_log_post_failed_reason">原因：%s</string>
     <string name="info_log_post_retry">重試</string>
     <string name="info_log_post_save">離線儲存</string>
     <string name="info_log_cleared">已清除日誌</string>
@@ -293,8 +288,6 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
-    <string name="menu_update_routingdata">路線規劃資料</string>
-    <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
@@ -321,9 +314,7 @@
     <string name="caches_sort_name">应用名</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票</string>
-    <string name="caches_sort_inventory">存貨數量</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
-    <string name="caches_sort_date_logged">日誌的日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_storage">日期儲存在裝置上</string>
@@ -542,7 +533,6 @@
     <string name="settings_authorize">賦予c:geo權力</string>
     <string name="settings_reauthorize">更新或移除使用權力</string>
     <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
-    <string name="settings_ec_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="settings_su_description">授权 c: geo 与寻宝游戏搜索缓存。</string>
     <string name="init_summary_oc_de">从 opencaching.de 加载缓存</string>
     <string name="init_oc_de_description">授權c:geo使用opencaching.de去尋找/存取/篩選您找到的藏寶</string>
@@ -611,8 +601,6 @@
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
-    <string name="init_save_log_img">儲存照片</string>
-    <string name="init_summary_save_log_img">從日誌儲存照片。</string>
     <string name="init_units">使用英制單位</string>
     <string name="init_summary_units">使用英制單位取代公制單位</string>
     <string name="init_log_offline">離線日誌</string>
@@ -700,7 +688,6 @@
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_circlecolor">圓邊框顏色</string>
-    <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">造訪TBs</string>
     <string name="init_summary_trackautovisit">預設是把旅行蟲設定成已拜訪</string>
@@ -852,6 +839,7 @@
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo正被授權與%s互動。</string>
     <string name="err_auth_geokrety_bad_password">你的帳號或密碼不正確</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d寶藏</item>
@@ -883,7 +871,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
-    <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_personal_note">個人筆記</string>
     <string name="cache_menu_preventWaypointsFromNote">不允許註解裡加上航點</string>
@@ -932,8 +919,6 @@
     <string name="cache_dialog_offline_save_title">離線</string>
     <string name="cache_dialog_offline_save_message">儲存寶藏給離線使用</string>
     <string name="cache_dialog_offline_drop_title">離線</string>
-    <string name="cache_dialog_refresh_title">重新整理</string>
-    <string name="cache_dialog_refresh_message">重新載入詳細的cache資訊</string>
     <string name="cache_menu_navigate">瀏覽</string>
     <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
@@ -949,7 +934,6 @@
     <string name="cache_menu_browser">在瀏覽器中開啟</string>
     <string name="cache_menu_open_with">開啟用…</string>
     <string name="cache_menu_visit">登錄拜訪</string>
-    <string name="cache_log_too_long">因為你的尋寶日誌太長了，c:geo無法傳送你的尋寶日誌。感謝您寫下如此豐富的藏寶日誌。;-)</string>
     <string name="cache_menu_visit_offline">快速的離線日誌</string>
     <string name="cache_menu_spoilers">提示圖片</string>
     <string name="cache_menu_around">附近的藏寶</string>
@@ -1022,7 +1006,6 @@
     <string name="create_internal_cache">建立玩家自訂cache</string>
     <string name="create_internal_cache_short">新的cache</string>
     <string name="create_internal_cache_currentlist">使用目前的列表</string>
-    <string name="internal_cache_default_name">玩家自訂的寶藏 #%1$d</string>
     <string name="internal_cache_default_description">這是玩家自訂cache</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">來去目標</string>
@@ -1030,6 +1013,7 @@
     <string name="goto_targets_list">玩家自訂cache</string>
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">角度</string>
     <string name="cc_hint_minutes">分鐘</string>
@@ -1128,22 +1112,13 @@
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
-    <string name="search_coordinates_button">用座標搜尋</string>
     <string name="search_address">地址</string>
-    <string name="search_address_button">使用地址搜尋</string>
-    <string name="search_kw_prefill">關鍵字</string>
-    <string name="search_kw_button">用關鍵字搜尋</string>
     <string name="search_hbu">由藏寶</string>
-    <string name="search_hbu_prefill">寶主</string>
-    <string name="search_hbu_button">用寶主名稱來搜尋</string>
     <string name="search_tb">旅行蟲</string>
-    <string name="search_tb_hint">旅行蟲識別</string>
-    <string name="search_tb_button">搜尋旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>
     <string name="search_address_started">搜尋位置</string>
     <string name="search_address_result">找到的地點</string>
-    <string name="search_own_caches">搜尋我的cache</string>
     <string name="search_bookmark_list">書籤列表</string>
     <string name="search_pocket_is_new">新的</string>
     <!-- trackable -->
@@ -1199,10 +1174,6 @@
     <string name="do_unknown">未知</string>
     <string name="do_auto">自動</string>
     <string name="do_upright">右上</string>
-    <!-- license -->
-    <string name="license">授權</string>
-    <string name="license_show">顯示授權</string>
-    <string name="license_dismiss">解散</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">過去的聚會活動</string>
     <string name="helper_calendar_pastevent_question">現在已經超過聚會活動的日期。還是要加入?</string>
@@ -1256,9 +1227,7 @@
     <string name="attribute_climbing_yes">困難的攀爬</string>
     <string name="attribute_climbing_no">不困難的攀爬</string>
     <string name="attribute_wading_yes">可能需要涉水</string>
-    <string name="attribute_wading_no">可能不需要涉水</string>
     <string name="attribute_swimming_yes">可能需要游泳</string>
-    <string name="attribute_swimming_no">可能不需要游泳</string>
     <string name="attribute_available_yes">隨時都可找</string>
     <string name="attribute_available_no">有時間限制的</string>
     <string name="attribute_night_yes">適合夜間</string>
@@ -1266,7 +1235,6 @@
     <string name="attribute_winter_yes">冬季才開放</string>
     <string name="attribute_winter_no">冬季不開放</string>
     <string name="attribute_firstaid_yes">需要維護</string>
-    <string name="attribute_firstaid_no">不需要維護</string>
     <string name="attribute_cow_yes">注意動物</string>
     <string name="attribute_field_puzzle_yes">實地解謎</string>
     <string name="attribute_field_puzzle_no">無實地解謎</string>
@@ -1291,44 +1259,29 @@
     <string name="attribute_teamwork_yes">需要團隊合作</string>
     <string name="attribute_teamwork_no">不需要團隊合作</string>
     <string name="attribute_fee_yes">過路費或停車費</string>
-    <string name="attribute_fee_no">不需過路費或停車費</string>
     <string name="attribute_rappelling_yes">需要攀登器材</string>
-    <string name="attribute_rappelling_no">不需要攀登器材</string>
     <string name="attribute_boat_yes">需要船</string>
-    <string name="attribute_boat_no">不需要船</string>
     <string name="attribute_scuba_yes">需要潛水用具</string>
-    <string name="attribute_scuba_no">不需要潛水用具</string>
     <string name="attribute_flashlight_yes">需要手電筒</string>
-    <string name="attribute_flashlight_no">不需要手電筒</string>
     <string name="attribute_uv_yes">需要紫外光手電筒</string>
-    <string name="attribute_uv_no">不需要紫外光手電筒</string>
     <string name="attribute_snowshoes_yes">需要雪靴</string>
-    <string name="attribute_snowshoes_no">不需要雪靴</string>
     <string name="attribute_s_tool_yes">需要特殊工具</string>
-    <string name="attribute_s_tool_no">不需要特殊工具</string>
     <string name="attribute_treeclimbing_yes">需爬樹</string>
     <string name="attribute_treeclimbing_no">不需要爬樹</string>
     <string name="attribute_poisonoak_yes">有毒植物</string>
     <string name="attribute_poisonoak_no">無有毒植物</string>
     <string name="attribute_dangerousanimals_yes">危險的動物</string>
-    <string name="attribute_dangerousanimals_no">沒有危險的動物</string>
     <string name="attribute_ticks_yes">蜱蟲</string>
     <string name="attribute_mine_yes">廢棄礦坑</string>
-    <string name="attribute_mine_no">不是廢棄礦坑</string>
     <string name="attribute_cliff_yes">懸崖 / 落石</string>
-    <string name="attribute_cliff_no">無懸崖/落石</string>
     <string name="attribute_hunting_yes">狩獵</string>
-    <string name="attribute_hunting_no">不可狩獵</string>
     <string name="attribute_danger_yes">危險區域</string>
-    <string name="attribute_danger_no">不是危險區域</string>
     <string name="attribute_thorn_yes">有刺植物</string>
-    <string name="attribute_thorn_no">不是有刺植物</string>
     <string name="attribute_wheelchair_yes">可通行輪椅</string>
     <string name="attribute_wheelchair_no">不可通行輪椅</string>
     <string name="attribute_parking_yes">可停車的</string>
     <string name="attribute_parking_no">不可停車的</string>
     <string name="attribute_public_yes">大眾運輸可到</string>
-    <string name="attribute_public_no">大眾運輸不可到</string>
     <string name="attribute_water_yes">附近有飲水機</string>
     <string name="attribute_water_no">附近無飲水機</string>
     <string name="attribute_restrooms_yes">附近有公廁</string>
@@ -1414,11 +1367,8 @@
     <string name="attribute_offset_cache_yes">座標飄移型藏寶</string>
     <string name="attribute_offset_cache_no">不是座標飄移型藏寶</string>
     <string name="attribute_bonuscache_yes">加分寶</string>
-    <string name="attribute_bonuscache_no">不是加分寶</string>
     <string name="attribute_challengecache_yes">挑戰型寶藏</string>
-    <string name="attribute_challengecache_no">不是挑戰型寶藏</string>
     <string name="attribute_hqsolutionchecker_yes">開啟解題檢查器</string>
-    <string name="attribute_hqsolutionchecker_no">關閉解題檢查器</string>
     <string name="attribute_military_area_yes">軍事訓練地區</string>
     <string name="attribute_military_area_no">不是軍事訓練地區</string>
     <string name="attribute_historic_yes">廢墟</string>
@@ -1569,7 +1519,6 @@
     <string name="downloadmap_download">下載</string>
     <string name="downloadmap_retrieving_directory_data">正在檢索資料…</string>
     <string name="downloadmap_checking_for_updates">正在檢查更新…</string>
-    <string name="downloadtile_title">遺失路線資料</string>
     <string name="no_updates_found">未找到更新</string>
     <string name="updates_check">檢查更新</string>
     <string name="mapserver_mapsforge_info">基礎的地圖，沒有地圖主題。</string>
@@ -1604,6 +1553,7 @@
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">上一首</string>
     <string name="skip">略過</string>
@@ -1613,10 +1563,9 @@
     <string name="back">後方</string>
     <string name="cancel">取消</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

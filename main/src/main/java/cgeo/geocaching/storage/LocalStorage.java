@@ -252,16 +252,6 @@ public final class LocalStorage {
     }
 
     /**
-     * Deletes all files from geocode cache directory with the given prefix.
-     *
-     * @param geocode The geocode identifying the cache directory
-     * @param prefix  The filename prefix
-     */
-    public static void deleteCacheFilesWithPrefix(@NonNull final String geocode, @NonNull final String prefix) {
-        FileUtils.deleteFilesWithPrefix(getGeocacheDataDirectory(geocode), prefix);
-    }
-
-    /**
      * Get all storages available on the device.
      * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
      */

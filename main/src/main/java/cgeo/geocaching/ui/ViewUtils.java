@@ -8,6 +8,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ScalableDrawable;
@@ -26,6 +27,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
@@ -41,6 +44,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,10 +55,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -69,6 +75,7 @@ import androidx.core.util.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -114,18 +121,23 @@ public class ViewUtils {
     }
 
     /**
-     * Sets enabled/disabled flag for given view and all nested child views recursively
+     * Sets enabled/disabled flag for given view (without crashing on null view)
      */
-    public static void setEnabledDeep(final View view, final boolean enabled) {
+    public static void setEnabled(final View view, final boolean enabled) {
         if (view == null) {
             return;
         }
         view.setEnabled(enabled);
-        if (view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                setEnabledDeep(((ViewGroup) view).getChildAt(i), enabled);
-            }
+    }
+
+    /**
+     * Sets visibility for given view (without crashing on null view)
+     */
+    public static void setVisibility(final View view, final int visibility) {
+        if (view == null) {
+            return;
         }
+        view.setVisibility(visibility);
     }
 
     /**
@@ -259,11 +271,11 @@ public class ViewUtils {
     }
 
     public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
-        return createButton(context, root, text, false);
+        return createButton(context, root, text, R.layout.button_view);
     }
 
-    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text, final boolean fillParent) {
-        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(fillParent ? R.layout.button_fillparent_view : R.layout.button_view, root, false);
+    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text, @LayoutRes final int buttonLayout) {
+        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(buttonLayout, root, false);
         text.applyTo(button);
         return button;
     }
@@ -315,6 +327,7 @@ public class ViewUtils {
             itemBinding.itemInfo.setOnClickListener(v -> SimpleDialog.of(activity).setMessage(infoText).show());
         }
         itemView.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
+        itemBinding.itemCheckbox.setContentDescription(itemBinding.itemText.getText());
 
         return new ImmutablePair<>(itemView, itemBinding.itemCheckbox);
     }
@@ -342,6 +355,42 @@ public class ViewUtils {
         view.setText("");
         view.setTextSize(1);
         return view;
+    }
+
+    public static void addDetachListener(final View view, final Consumer<View> action) {
+        view.getViewTreeObserver().addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
+            @Override
+            public void onWindowAttached() {
+                //do nothing
+            }
+
+            @Override
+            public void onWindowDetached() {
+                action.accept(view);
+            }
+        });
+    }
+
+    /** requests a layout change on given view and runs the given consumer once the view has been measured */
+    public static void runOnViewMeasured(final View view, final Function<View, Boolean> action) {
+        final ViewTreeObserver.OnGlobalLayoutListener observer = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (view.getMeasuredWidth() > 0 && view.getMeasuredHeight() > 0) {
+                    final Boolean continueAction = action.apply(view);
+                    if (continueAction == null || !continueAction) {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                }
+            }
+        };
+
+        //post the run in case "runOnViewMeasured" is used in a layouting context
+        //(This is typically the case when it is used in Activity.onCreate)
+        view.post(() -> {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(observer);
+            view.requestLayout();
+        });
     }
 
     /**
@@ -435,6 +484,69 @@ public class ViewUtils {
 
     }
 
+    public static boolean currentThreadIsUiThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
+    }
+
+    public static void runOnUiThread(final boolean forcePost, final Runnable action) {
+        if (action == null) {
+            return;
+        }
+        if (!forcePost && currentThreadIsUiThread()) {
+            action.run();
+        } else {
+            AndroidRxUtils.runOnUi(action);
+        }
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a short toast with a simple text */
+    public static void showShortToast(@Nullable final Context context, final String message) {
+        showToast(context, TextParam.text(message), true);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a short toast with a resource id */
+    public static void showShortToast(@Nullable final Context context, final int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), true);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a normal-length toast with a simple text */
+    public static void showToast(@Nullable final Context context, final String message) {
+        showToast(context, TextParam.text(message), false);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a normal-length toast with a resource id */
+    public static void showToast(@Nullable final Context context, final int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), false);
+    }
+
+    /**
+     * Shows a toast message to the user. This can be called from any thread.
+     *
+     * @param context any context, usually an activity. If context is null, then the application context will be used.
+     * @param text    the message
+     * @param shortToast set to true if this should be a short toast
+     */
+    public static void showToast(@Nullable final Context context, final TextParam text, final boolean shortToast) {
+        runOnUiThread(false, () -> {
+            final Context toastContext = wrap(context == null || (context instanceof Activity && ((Activity) context).isFinishing()) ?
+                    CgeoApplication.getInstance() : context);
+            final int toastDuration = shortToast ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
+            final CharSequence toastText = text == null ? "---" : text.getText(toastContext);
+
+            Log.iForce("[" + (context == null ? "APP" : context.getClass().getName()) + "].showToast(" + toastText + "){" + (shortToast ? "SHORT" : "LONG") + "}");
+            try {
+                final Toast toast = Toast.makeText(toastContext, toastText, toastDuration);
+                if (Build.VERSION.SDK_INT < 30) {
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+                }
+                toast.show();
+            } catch (RuntimeException re) {
+                //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
+                Log.w("Could not show toast '" + toastText + "' to user", re);
+            }
+        });
+    }
+
     /**
      * If given context is or wraps an Activity, this activity is returned,
      * Otherwise null is returned
@@ -499,6 +611,17 @@ public class ViewUtils {
         return ((ViewGroup) v.getParent()).indexOfChild(v);
     }
 
+    public static void setForParentAndChildren(final View view, final View.OnClickListener clickListener, final View.OnLongClickListener onLongClickListener) {
+        if (view == null) {
+            return;
+        }
+
+        walkViewTree(view, viewItem -> {
+            viewItem.setOnClickListener(clickListener);
+            viewItem.setOnLongClickListener(onLongClickListener);
+            return true;
+        }, null);
+    }
 
     public static Bitmap drawableToBitmap(final Drawable drawable) {
         final Bitmap bitmap;
@@ -708,5 +831,9 @@ public class ViewUtils {
             }
         }
         return result;
+    }
+
+    public static String getEditableText(@Nullable final Editable editable) {
+        return editable == null ? "" : editable.toString();
     }
 }

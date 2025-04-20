@@ -41,6 +41,7 @@
             android:scaleType="centerInside"
             android:layout_toLeftOf="@+id/filter_drag"
             android:layout_gravity="right"
+            android:tooltipText="@string/cache_filter_storage_delete_button"
             app:icon="@drawable/ic_menu_delete"
             tools:src="@drawable/ic_menu_delete"/>
 

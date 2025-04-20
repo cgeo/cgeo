@@ -29,7 +29,7 @@ import java.util.TreeMap;
  * Adapter for {@link RecyclerView} which also maintains the list of current elements inside it.
  * If provides helper methods to access and modify these items. Usage of these methods will also trigger
  * the necessary "notify" methods on adapter (unless set otherwise in configuration) so list animations can work as expected.
- *
+ * <br />
  * Adapter supports following additional features: <ul>
  * <li>Support for swapping whole lists using {@link #setItems(List)} methods</li>
  * <li>Support for lists where view also changed when position of item is NOT changed (using {@link Config#setNotifyOnPositionChange(boolean)}</li>
@@ -370,11 +370,11 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
     /**
      * Sets a new filter.
-     *
+     * <br />
      * If notifyInsertRemove is true, then RecyclerView is notified with a series of insert/remove
      * events with the goal to preserve existing views as much as possible. However, this will throw
      * IndexOutOfBoundsExceptions if used LayoutManager has "supportsPredictiveItemAnimations" enabled.
-     * See https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
+     * See <a href="https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in">SO article</a>
      */
     public void setFilter(final Predicate<T> filter, final boolean notifyInsertRemove) {
 

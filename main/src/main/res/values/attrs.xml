@@ -39,11 +39,7 @@
         <attr name="hasDecimals" format="boolean" />
         <attr name="logScaling" format="boolean" />
         <attr name="ui" format="string" />
-    </declare-styleable>
-
-    <!-- custom attributes for ProximityPreference -->
-    <declare-styleable name="ProximityPreference">
-        <attr name="highRes" format="boolean" />
+        <attr name="highRes" format="boolean" /> <!-- only used in ProximityPreference -->
     </declare-styleable>
 
     <!-- button style for home screen's quick launch buttons -->
@@ -57,5 +53,12 @@
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />
+
+
+    <declare-styleable name="SectionHeader">
+        <attr name="android:text"/>
+        <attr name="android:id"/>
+        <attr name="dividerAbove" format="boolean" />
+    </declare-styleable>
 
 </resources>

@@ -3,21 +3,17 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -47,19 +43,6 @@ public final class ActivityMixin {
         }
     }
 
-    public static void showHideActionBar(final Activity activity, final boolean show) {
-        if (activity instanceof AppCompatActivity) {
-            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
-            if (actionBar != null) {
-                if (show) {
-                    actionBar.show();
-                } else {
-                    actionBar.hide();
-                }
-            }
-        }
-    }
-
     private static int getThemeId() {
         return R.style.cgeo;
     }
@@ -83,45 +66,14 @@ public final class ActivityMixin {
      * @param resId   the message
      */
     public static void showToast(final Context context, @StringRes final int resId, final Object ... params) {
-        showToast(context, context.getString(resId, params));
-    }
-
-    private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
-        Log.iForce("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
-        try {
-            final Toast toast = Toast.makeText(context, text, toastDuration);
-            if (Build.VERSION.SDK_INT < 30) {
-                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            }
-            toast.show();
-        } catch (RuntimeException re) {
-            //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
-            Log.w("Could not show toast '" + text + "' to user: " + re);
-        }
-    }
-
-    private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
-        if (StringUtils.isNotBlank(text)) {
-            activity.runOnUiThread(() -> showCgeoToast(activity, text, toastDuration));
-        }
+        ViewUtils.showToast(context, resId, params);
     }
 
     /**
      * Show a (long) toast message in application context (e.g. from background threads)
      */
     public static void showApplicationToast(final String message) {
-        final Context context = new ContextThemeWrapper(CgeoApplication.getInstance().getApplicationContext(), getThemeId());
-        AndroidRxUtils.runOnUi(() -> showCgeoToast(context, message, Toast.LENGTH_LONG));
-    }
-
-    /**
-     * Show a long toast message to the user. This can be called from any thread.
-     *
-     * @param activity the activity the user is facing
-     * @param text     the message
-     */
-    public static void showToast(final Activity activity, final String text) {
-        postShowToast(activity, text, Toast.LENGTH_LONG);
+        ViewUtils.showToast(null, TextParam.text(message), false);
     }
 
     /**
@@ -131,11 +83,7 @@ public final class ActivityMixin {
      * @param text    the message
      */
     public static void showToast(final Context context, final String text) {
-        if (context instanceof Activity) {
-            showToast((Activity) context, text);
-        } else {
-            showApplicationToast(text);
-        }
+        ViewUtils.showToast(context, text);
     }
 
     /**
@@ -144,13 +92,15 @@ public final class ActivityMixin {
      * @param activity the activity the user is facing
      * @param text     the message
      */
-    public static void showShortToast(final Activity activity, final String text) {
-        postShowToast(activity, text, Toast.LENGTH_SHORT);
+    public static void showShortToast(final Context activity, final String text) {
+        ViewUtils.showShortToast(activity, text);
     }
 
-    public static void showShortToast(final Activity activity, @StringRes final int resId) {
-        postShowToast(activity, activity.getString(resId), Toast.LENGTH_SHORT);
+    public static void showShortToast(final Context activity, @StringRes final int resId) {
+        ViewUtils.showShortToast(activity, resId);
     }
+
+
 
     public static void postDelayed(@NonNull final Runnable runnable, final int delay) {
         new Handler(Looper.getMainLooper()).postDelayed(runnable, delay);

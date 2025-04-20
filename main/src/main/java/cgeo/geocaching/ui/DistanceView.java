@@ -37,4 +37,8 @@ public class DistanceView extends AppCompatTextView {
             setText(coords == null ? "?" : Units.getDistanceFromKilometers(coords.distanceTo(cacheCoords)));
         }
     }
+
+    public void setTypeface(final int typeface) {
+        setTypeface(getTypeface(), typeface);
+    }
 }

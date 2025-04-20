@@ -1,9 +1,12 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -19,6 +22,10 @@ public interface IConnector {
      */
     @NonNull
     String getName();
+
+    @NonNull
+    String getDisplayName();
+
 
     /**
      * Check if this connector is responsible for the given geocode.
@@ -75,6 +82,7 @@ public interface IConnector {
     @Nullable
     String getServiceSpecificLogId(@Nullable String serviceLogId);
 
+    int getServiceSpecificPreferenceScreenKey();
 
     /**
      * enable/disable logging controls in cache details
@@ -192,6 +200,13 @@ public interface IConnector {
      */
 
     boolean isActive();
+
+    /**
+     * Return {@code true} if this connector is active for online interaction and has valid (stored) credentials
+     */
+    default boolean hasValidCredentials() {
+        return (this instanceof ILogin && this instanceof ICredentials && isActive() && Settings.getCredentials((ICredentials) this).isValid());
+    }
 
     /**
      * Check if the current user is the owner of the given cache.

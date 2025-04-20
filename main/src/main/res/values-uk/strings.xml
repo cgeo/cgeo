@@ -144,8 +144,6 @@
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Перекласти на %s</string>
-    <string name="translate_to_english">Переклад англійською мовою</string>
     <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
@@ -168,7 +166,6 @@
     <string name="err_detail_cache">c:geo не може відображати бажану вами схованку. Вона дійсно схованка?</string>
     <string name="err_detail_cache_find">c:geo не вдається знайти схованку</string>
     <string name="err_detail_cache_find_some">c:geo не може знайти цей геокеш.</string>
-    <string name="err_detail_cache_find_any">c:geo не може знайти цей геокеш.</string>
     <string name="err_detail_no_spoiler">c:geo не знайдено зображень спойлера для цього кешу.</string>
     <string name="err_detail_still_working">Продовжуйте працювати над іншим завданням.</string>
     <string name="err_detail_premium_log_found">Цей кеш доступний лише для преміум членів geocaching.com. Таким чином, інформація з кешу не може бути відображена.\n\n, Однак, якщо ви вже знайшли цей кеш, увійдіть сюди.</string>
@@ -225,7 +222,6 @@
     <string name="info_log_posted">c:geo успішно відправив журнал.</string>
     <string name="info_log_saved">c:geo успішно збережено журнал.</string>
     <string name="info_log_post_failed">Журнал змін не вдалося.</string>
-    <string name="info_log_post_failed_reason">(Причина: %s)</string>
     <string name="info_log_post_retry">Повторити спробу</string>
     <string name="info_log_post_save">Збережено офлайн</string>
     <string name="info_log_cleared">Журнали очищено.</string>
@@ -286,9 +282,7 @@
     <string name="caches_sort_name">Ім’я</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Голосування (власна оцінка)</string>
-    <string name="caches_sort_inventory">Кількість речей</string>
     <string name="caches_sort_date_hidden">Дату приховано</string>
-    <string name="caches_sort_date_logged">Дата зареєстрована</string>
     <string name="caches_sort_finds">Знайти</string>
     <string name="caches_sort_state">Область</string>
     <string name="caches_sort_storage">Дата збереження на пристрої</string>
@@ -404,7 +398,6 @@
     <string name="settings_authorize">Авторизувати c:geo</string>
     <string name="settings_reauthorize">Оновити або видалити авторизацію</string>
     <string name="settings_gc_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
-    <string name="settings_ec_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="settings_su_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
     <string name="init_summary_oc_de">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_de_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
@@ -467,8 +460,6 @@
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>
-    <string name="init_save_log_img">Зберегти зображення</string>
-    <string name="init_summary_save_log_img">Зберегти зображення з логів</string>
     <string name="init_units">імперські одиниці</string>
     <string name="init_summary_units">Використовуйте імперські одиниці замість метричних одиниць</string>
     <string name="init_log_offline">автономний журнал</string>
@@ -539,8 +530,6 @@
     <string name="init_summary_maptrail">При активації (а GPS увімкнено) c: geo зберігає історію ваших рухів як доріжку та відображає її на карті.</string>
     <string name="init_circlecolor">коло лінії кола</string>
     <string name="init_circlecolor_summary">Вибирати колір і непрозорість для лінії круга. Кола використовуються як візуальне представлення мінімального радіусу навколо кешу або фізичної точки пошуку, де немає іншого кешу чи фізичної шляхової точки. (Застосовується до geocaching.com)</string>
-    <string name="init_circlefillcolor">коло заливки кольору</string>
-    <string name="init_circlefillcolor_summary">Виберіть колір і непрозорість для кіл, якими потрібно заповнити</string>
     <string name="init_include_found_status">Включити статус \"Знайдено\"</string>
     <string name="init_trackautovisit">Відвідайте ТБ</string>
     <string name="init_summary_trackautovisit">За замовчуванням встановіть для відстежуваних значення \"Відвідано\"</string>
@@ -566,7 +555,6 @@
     <string name="init_plain_logs">Звичайні журнали</string>
     <string name="init_summary_plain_logs">Відображати записи журналу без кольорів</string>
     <string name="init_maintenance">Технічне обслуговування</string>
-    <string name="init_maintenance_directories">осиротіли файли</string>
     <string name="init_location">геолокація</string>
     <string name="init_location_note">На пристроях, обладнаних Службами Google Play, c: geo може автоматично використовувати кращого постачальника геолокації. Однак це запобігає використанню зовнішнього приймача BlueTooth GPS.</string>
     <string name="init_location_googleplayservices">Використовуйте сервіси Google Play</string>
@@ -656,6 +644,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo тепер авторизований для публікації у Twitter %s.</string>
     <string name="err_auth_geokrety_bad_password">Ваше ім’я користувача / пароль здається недійсним.</string>
     <string name="err_auth_geokrety_unknown">%1$s повернений: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">доступний останній день</string>
@@ -669,7 +658,6 @@
     <string name="cache_offline_time_mins_few">кілька хвилин тому</string>
     <string name="cache_offline_about_time_year">більше року тому</string>
     <string name="cache_premium">Преміум</string>
-    <string name="cache_inventory">Інвентар</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_personal_note">Особиста нотатка</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
@@ -718,8 +706,6 @@
     <string name="cache_dialog_offline_save_message">Зберігання кешу для використання в режимі офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Офлайн</string>
     <string name="cache_dialog_offline_drop_message">Видалення кеш-пам\'яті з пам\'яті пристрою…</string>
-    <string name="cache_dialog_refresh_title">освіжити</string>
-    <string name="cache_dialog_refresh_message">перезавантаження деталей кешу…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
     <string name="cache_menu_navigation_walk">Навігація (ходьба)</string>
@@ -736,7 +722,6 @@
     <string name="cache_menu_browser">Відкрити в браузері</string>
     <string name="cache_menu_open_with">Відкрити за допомогою…</string>
     <string name="cache_menu_visit">Журнал відвідування</string>
-    <string name="cache_log_too_long">c:geo не вдалося представити ваш лог, занадто довго. Але дякуємо за те, що спробували написати такий великий журнал ;-)</string>
     <string name="cache_menu_visit_offline">Швидкий журнал оффлайн</string>
     <string name="cache_menu_spoilers">Зображення спойлера</string>
     <string name="cache_menu_around">Кеш навколо</string>
@@ -800,7 +785,6 @@
     <string name="context_share_as_link">Поділитись посиланням</string>
     <string name="create_internal_cache">Створіть кешований користувачем кеш</string>
     <string name="create_internal_cache_short">Новий кеш</string>
-    <string name="internal_cache_default_name">Визначений користувачем кеш #%1$d</string>
     <string name="internal_cache_default_description">Це користувацький кеш</string>
     <string name="internal_cache_default_owner">Ви</string>
     <string name="internal_goto_targets_title">перейти до мети</string>
@@ -809,6 +793,7 @@
     <string name="goto_targets_list">Визначений користувачем кеш</string>
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градуси</string>
     <string name="cc_hint_minutes">хвилини</string>
@@ -893,22 +878,13 @@
     <string name="quick_settings">Швидкі налаштування</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
-    <string name="search_coordinates_button">Пошук за координатами</string>
     <string name="search_address">Адреса</string>
-    <string name="search_address_button">Пошук адреси</string>
-    <string name="search_kw_prefill">Ключове слово</string>
-    <string name="search_kw_button">пошук за ключовим словом</string>
     <string name="search_hbu">прихований</string>
-    <string name="search_hbu_prefill">Власник</string>
-    <string name="search_hbu_button">пошук за іменем користувача</string>
     <string name="search_tb">відстежуваний</string>
-    <string name="search_tb_hint">Відстежена ідентифікація</string>
-    <string name="search_tb_button">пошук відстежуваного</string>
     <string name="search_destination">відкрите місце призначення в c: geo</string>
     <string name="add_target_to">додати метy до</string>
     <string name="search_address_started">пошук місць</string>
     <string name="search_address_result">Знайдені місця</string>
-    <string name="search_own_caches">Пошук моїх кешів</string>
     <string name="search_pocket_title">кишеньковий запит</string>
     <!-- trackable -->
     <string name="trackable">відстежуваний</string>
@@ -967,10 +943,6 @@
     <string name="do_auto">Авто</string>
     <string name="do_flat">Плоский</string>
     <string name="do_upright">вертикальний</string>
-    <!-- license -->
-    <string name="license">ліцензія</string>
-    <string name="license_show">Показати ліцензію</string>
-    <string name="license_dismiss">звільнити</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Минула подія</string>
     <string name="helper_calendar_pastevent_question">Дата події минула. Додати все-таки?</string>
@@ -978,11 +950,9 @@
     <string name="helper_sendtocgeo_description">Надсилається на c:geo розширення для браузера <strong>для вашого ПК</strong>. Під час перегляду геокешингу. коммм, ви можете надіслати кеші на свій смартфон за допомогою кнопки безпосередньо всередині браузера.</string>
     <string name="helper_locus_description">Програма навігації поза межами телефону або планшета. Переглядайте топографічні карти в режимі офлайн, відстежуйте ваш маршрут, схованки за допомогою голосового посібника і зробіть ще більше.</string>
     <string name="helper_gpsstatus_description">Ви можете використовувати радар у цьому додатку спільно з c: geo. Він також пропонує багато іншої інформації, пов\'язаної з GPS.</string>
-    <string name="helper_bluetoothgps_description">Дозволяє використовувати зовнішній приймач GPS для отримання більш точних даних про місцезнаходження та може заощадити акумулятор вашого пристрою.</string>
     <string name="helper_gps_locker_description">GPS Locker підтримує активний сигнал GPS під час перемикання між програмами та коли екран вашого пристрою вимкнений.</string>
     <string name="helper_google_translate_title">Перекладач Google</string>
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
-    <string name="helper_where_you_go_description">Тут Ви можете грати та шукати схованки типу Wherigo. c:geo може автоматично запустити завантаження картриджів у цьому додатку.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf дозволяє вам читати дані від тегів чітких даних ANT+/Garmin chirp тегів, які потрібні для ANT+/chirp geocaches.</string>
     <!-- export -->
     <string name="export">Експорт</string>
@@ -1037,9 +1007,7 @@
     <string name="attribute_climbing_yes">Складне сходження</string>
     <string name="attribute_climbing_no">Hecкладне сходження</string>
     <string name="attribute_wading_yes">може вимагати пробивання</string>
-    <string name="attribute_wading_no">Може не вимагати утворення</string>
     <string name="attribute_swimming_yes">Може вимагатись плавання</string>
-    <string name="attribute_swimming_no">Може не вимагати утворення</string>
     <string name="attribute_available_yes">доступні в будь-який час</string>
     <string name="attribute_available_no">Недоступно цієї пори дня</string>
     <string name="attribute_night_yes">Рекомендовано вночі</string>
@@ -1049,9 +1017,7 @@
     <string name="attribute_stealth_yes">Необхідна обережність</string>
     <string name="attribute_stealth_no">стелс не потрібен</string>
     <string name="attribute_firstaid_yes">потребує обслуговування</string>
-    <string name="attribute_firstaid_no">Не потребує технічного обслуговування</string>
     <string name="attribute_cow_yes">Спостереження за тваринами</string>
-    <string name="attribute_cow_no">Без домашньої худоби</string>
     <string name="attribute_field_puzzle_yes">польова головоломка</string>
     <string name="attribute_field_puzzle_no">Без головоломки</string>
     <string name="attribute_nightcache_yes">Нічний кеш</string>
@@ -1079,49 +1045,31 @@
     <string name="attribute_partnership_yes">Кеш партнерства</string>
     <string name="attribute_partnership_no">Не кеш партнерства</string>
     <string name="attribute_fee_yes">Потрібна плата за доступ або паркування</string>
-    <string name="attribute_fee_no">Плата за доступ або паркування не потрібна</string>
     <string name="attribute_rappelling_yes">Потрібне сходження на спорядження</string>
-    <string name="attribute_rappelling_no">Піднімальне спорядження не потрібне</string>
     <string name="attribute_boat_yes">потрібен човен</string>
-    <string name="attribute_boat_no">Човен не потрібний</string>
     <string name="attribute_scuba_yes">Потрібне підводне спорядження</string>
-    <string name="attribute_scuba_no">Піднімальне спорядження не потрібне</string>
     <string name="attribute_flashlight_yes">Потрібен ліхтарик</string>
-    <string name="attribute_flashlight_no">Ліхтарик не потрібен</string>
     <string name="attribute_uv_yes">Потрібне УФ-світло</string>
-    <string name="attribute_uv_no">Ліхтарик не потрібен</string>
     <string name="attribute_snowshoes_yes">Потрібні сніжки для взуття</string>
-    <string name="attribute_snowshoes_no">Снігоступи не потрібні</string>
     <string name="attribute_skiis_yes">Потрібні бігові лижі</string>
-    <string name="attribute_skiis_no">Бігові лижі не потрібні</string>
     <string name="attribute_s_tool_yes">потрібні спеціальні інструменти</string>
-    <string name="attribute_s_tool_no">спеціальні інструменти не потрібні</string>
     <string name="attribute_wirelessbeacon_yes">бездротовий маяк</string>
-    <string name="attribute_wirelessbeacon_no">Немає бездротового маяка</string>
     <string name="attribute_treeclimbing_yes">необхідне сходження на дерево</string>
     <string name="attribute_treeclimbing_no">сходження на дерево не потрібно</string>
     <string name="attribute_poisonoak_yes">Отруйні рослини</string>
     <string name="attribute_poisonoak_no">Немає отруйних рослин</string>
     <string name="attribute_dangerousanimals_yes">небезпечні тварини</string>
-    <string name="attribute_dangerousanimals_no">відсутність небезпечних тварин</string>
     <string name="attribute_ticks_yes">Кліщі</string>
-    <string name="attribute_ticks_no">Немає тактів</string>
     <string name="attribute_mine_yes">Покинуті міни</string>
-    <string name="attribute_mine_no">відсутність занедбаних шахт</string>
     <string name="attribute_cliff_yes">Скеля / падаючі скелі</string>
-    <string name="attribute_cliff_no">немає Скеля / падаючі скелі</string>
     <string name="attribute_hunting_yes">полювання</string>
-    <string name="attribute_hunting_no">Без полювання</string>
     <string name="attribute_danger_yes">Небезпечна зона</string>
-    <string name="attribute_danger_no">не небезпечна зона</string>
     <string name="attribute_thorn_yes">колючки</string>
-    <string name="attribute_thorn_no">ні колючок</string>
     <string name="attribute_wheelchair_yes">Для людей з обмеженими можливостями</string>
     <string name="attribute_wheelchair_no">He для людей з обмеженими можливостями</string>
     <string name="attribute_parking_yes">Паркування доступне</string>
     <string name="attribute_parking_no">Паркування не доступне</string>
     <string name="attribute_public_yes">громадський транспорт</string>
-    <string name="attribute_public_no">Немає громадського транспорту</string>
     <string name="attribute_water_yes">Питна вода поблизу</string>
     <string name="attribute_water_no">Немає питної води поблизу</string>
     <string name="attribute_restrooms_yes">Громадські туалети поблизу</string>
@@ -1233,13 +1181,9 @@
     <string name="attribute_offset_cache_yes">зміщений кеш</string>
     <string name="attribute_offset_cache_no">відсутність кешу зміщення</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">No bonus cache</string>
     <string name="attribute_powertrail_yes">Частина стеку влади</string>
-    <string name="attribute_powertrail_no">Не частина стеку влади</string>
     <string name="attribute_challengecache_yes">Кеш завдань</string>
-    <string name="attribute_challengecache_no">Немає кешу для викликів</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com увімкнено перевірку рішень</string>
-    <string name="attribute_hqsolutionchecker_no">Перевірка рішення Geocaching.com не включена</string>
     <string name="attribute_handicaching_yes">Рейтинг на Handicaching.com</string>
     <string name="attribute_handicaching_no">Не оцінено на Handicaching.com</string>
     <string name="attribute_munzee_yes">Містить Манзе</string>
@@ -1336,7 +1280,6 @@
     <string name="map_sort_individual_route">Сортувати за окремим маршрутом</string>
     <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
-    <string name="map_clear_manual_targets">Очистити ручні ярлики</string>
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_clear_individual_route_confirm">Чи хочете ви вилучити всі кешування/шляхові точки з вашого маршруту?</string>
@@ -1409,6 +1352,7 @@
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Попередній</string>
     <string name="skip">Пропустити</string>
@@ -1416,10 +1360,9 @@
     <string name="finish">Закінчити</string>
     <string name="cancel">Скасувати</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

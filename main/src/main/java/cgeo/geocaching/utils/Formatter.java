@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -148,8 +149,11 @@ public final class Formatter {
      */
     @NonNull
     public static String formatShortDate(final long date) {
-        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
-        return dateFormat.format(date);
+        final String dateFormatString = Settings.getShortDateFormat();
+        if (!dateFormatString.isEmpty()) {
+            return new SimpleDateFormat(dateFormatString, Locale.getDefault()).format(date);
+        }
+        return android.text.format.DateFormat.getDateFormat(getContext()).format(date);
     }
 
     private static String formatShortDateIncludingWeekday(final long time) {
@@ -268,7 +272,7 @@ public final class Formatter {
                 }
             } else if (item == CacheListInfoItem.VALUES.RECENT_LOGS.id) {
                 final List<LogEntry> logs = cache.getLogs();
-                if (logs.size() > 0) {
+                if (!logs.isEmpty()) {
                     int count = 0;
                     // mitigation to make displaying ImageSpans work even in wrapping lines, see #14163
                     // ImageSpans are separated by a zero-width space character (\u200b)
@@ -371,12 +375,6 @@ public final class Formatter {
     public static String formatDaysAgo(final long date) {
         final int days = CalendarUtils.daysSince(date);
         return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
-    }
-
-    @NonNull
-    public static String formatDaysAhead(final long date) {
-        final int days = CalendarUtils.daysSince(date);
-        return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ahead, days, days);
     }
 
     @NonNull
@@ -495,6 +493,15 @@ public final class Formatter {
         return milliseconds + "ms";
     }
 
+    public static String formatDurationInMinutesAndSeconds(final long milliseconds) {
+        if (milliseconds < 0) {
+            return "?:??";
+        }
+        final long minutes = ((milliseconds + 500) / 60000);
+        final long seconds = ((milliseconds + 500) / 1000) - minutes * 60;
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+
     public static List<CharSequence> truncateCommonSubdir(@NonNull final List<CharSequence> directories) {
         if (directories.size() < 2) {
             return directories;
@@ -520,6 +527,43 @@ public final class Formatter {
     @NonNull
     public static String generateShortGeocode(final String fullGeocode) {
         return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode : (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
+    }
+
+    /**
+     * Format a numeric string into a 2-digit number with leading zeros
+     */
+    public static String formatNumberTwoDigits(final String number) {
+        return String.format(Locale.getDefault(), "%02d", Integer.parseInt(number));
+    }
+
+    public static String formatNumberTwoDigits(final int number) {
+        return String.format(Locale.getDefault(), "%02d", number);
+    }
+
+    public static String formatGCEventTime(final String tableInside) {
+        final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
+        final StringBuilder sDesc = new StringBuilder();
+        if (eventTimesMatcher.find()) {
+            final boolean hour12mode = eventTimesMatcher.group(1).trim().equals("PM") || eventTimesMatcher.group(4).trim().equals("PM") || eventTimesMatcher.group(1).trim().equals("AM") || eventTimesMatcher.group(4).trim().equals("AM");
+            sDesc.append(formatNumberTwoDigits(
+                        Integer.parseInt(
+                            eventTimesMatcher.group(2))
+                            + (eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0)
+                            + (eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0)
+                            - ((hour12mode && "12".equals(eventTimesMatcher.group(2))) ? 12 : 0)))
+                    .append(":")
+                    .append(formatNumberTwoDigits(eventTimesMatcher.group(3)))
+                    .append(" - ")
+                    .append(formatNumberTwoDigits(
+                            Integer.parseInt(
+                                    eventTimesMatcher.group(6))
+                                    + (eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0)
+                                    + (eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0)
+                                    - (hour12mode && ("12".equals(eventTimesMatcher.group(6))) ? 12 : 0)))
+                    .append(":")
+                    .append(formatNumberTwoDigits(eventTimesMatcher.group(7)));
+        }
+        return sDesc.toString();
     }
 
 }

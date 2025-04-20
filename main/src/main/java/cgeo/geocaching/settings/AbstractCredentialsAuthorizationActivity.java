@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -101,8 +102,8 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
         AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
             loginDialog.dismiss();
+            setCredentials(credentials);
             if (statusCode == StatusCode.NO_ERROR) {
-                setCredentials(credentials);
                 ConnectorFactory.forceRelog();
                 showToast(getAuthDialogCompleted());
                 setResult(RESULT_OK);
@@ -121,6 +122,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     private class CheckListener implements View.OnClickListener {
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onClick(final View view) {
             hideKeyboard();

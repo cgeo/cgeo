@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements AbstractTrackOrRouteParser.RouteParse {
 
@@ -57,12 +56,12 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         this.parsingMode = parsingMode;
         result.setRouteable(routeable);
 
-        temp = new ArrayList<>();
+        resetTempData();
         setNameAndLatLonParsers();
         endElementForListener.setEndElementListener(() -> {
-            if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
-                temp = new ArrayList<>();
+            if (!temp.isEmpty()) {
+                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, tempElevation, false));
+                resetTempData();
             }
         });
     }

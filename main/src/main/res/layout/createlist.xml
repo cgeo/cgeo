@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/listprefix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/textinput_dropdown"
+        android:hint="@string/list_parent_list"
+        android:labelFor="@id/listprefixView">
+
+        <AutoCompleteTextView
+            android:id="@+id/listprefixView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textinput_dropdown"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleWrapper"
+        style="@style/textinput_edittext_singleline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title"
+            android:inputType="textPersonName"
+            style="@style/textinput_embedded_singleline"
+            android:hint="@string/list_name"
+            android:importantForAutofill="yes"
+            android:autofillHints="@string/list_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

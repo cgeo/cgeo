@@ -31,13 +31,10 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         put(keyValues);
     }
 
-    private static final Comparator<ImmutablePair<String, String>> comparator = (nv1, nv2) -> {
-        final int comparedKeys = nv1.left.compareTo(nv2.left);
-        return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
-    };
+    private static final Comparator<ImmutablePair<String, String>> comparator = Comparator.comparing((ImmutablePair<String, String> nv) -> nv.left).thenComparing(nv -> nv.right);
 
     /**
-     * Percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
+     * Percent encode following <a href="http://tools.ietf.org/html/rfc5849#section-3.6">...</a>
      */
     static String percentEncode(@NonNull final String url) {
         return StringUtils.replace(Network.rfc3986URLEncode(url), "*", "%2A");
@@ -72,7 +69,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
 
     /**
      * Lexically sort key/value pairs first by key, then by value.
-     *
+     * <br>
      * Some signing algorithms need the values to be ordered before issuing the signature.
      */
     public void sort() {

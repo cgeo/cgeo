@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Credentials;
-import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
@@ -70,7 +69,6 @@ public abstract class AbstractLogin {
     protected void resetLoginStatus() {
         Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
         Cookies.clearCookies();
-        DiskCookieStore.setCookieStore(null);
 
         setActualLoginStatus(false);
     }

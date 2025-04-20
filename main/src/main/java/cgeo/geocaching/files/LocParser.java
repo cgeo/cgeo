@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -21,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParser;
@@ -50,23 +48,6 @@ public final class LocParser extends FileParser {
     private static final Geocache DUMMY_GEOCACHE = new Geocache();
 
     private final int listId;
-
-    public static void parseLoc(final String fileContent, final Set<Geocache> caches) {
-        final Map<String, Geocache> cidCoords = parseLoc(fileContent);
-
-        for (final Geocache cache : caches) {
-            final Geocache coord = cidCoords.get(cache.getGeocode());
-            // Archived caches will not have any coordinates
-            if (coord != null) {
-                copyCoordToCache(coord, cache);
-            }
-        }
-    }
-
-    @NonNull
-    private static Map<String, Geocache> parseLoc(final String content) {
-        return parseLoc(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
-    }
 
     @NonNull
     private static Map<String, Geocache> parseLoc(final InputStream content) {
@@ -127,37 +108,13 @@ public final class LocParser extends FileParser {
         }
     }
 
-    private static void copyCoordToCache(final Geocache coord, final Geocache cache) {
-        cache.setCoords(coord.getCoords());
-        cache.setDifficulty(coord.getDifficulty());
-        cache.setTerrain(coord.getTerrain());
-        cache.setSize(coord.getSize());
-        cache.setGeocode(coord.getGeocode());
-        if (StringUtils.isBlank(cache.getName())) {
-            cache.setName(coord.getName());
-        }
-        cache.setOwnerUserId(coord.getOwnerUserId());
-    }
-
-    @NonNull
-    public static Geopoint parsePoint(final String latitude, final String longitude) {
-        // the loc file contains the coordinates as plain floating point values, therefore avoid using the GeopointParser
-        try {
-            return new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
-        } catch (final NumberFormatException e) {
-            Log.e("LOC format has changed", e);
-        }
-        // fall back to parser, just in case the format changes
-        return new Geopoint(latitude, longitude);
-    }
-
     public LocParser(final int listId) {
         this.listId = listId;
     }
 
     @Override
     @NonNull
-    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException {
         final int maxSize = stream.available();
         final Map<String, Geocache> coords = parseLoc(stream);
         final List<Geocache> caches = new ArrayList<>();

@@ -29,7 +29,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     private int lonLast;
     private int latLast;
 
-    private Comparator<MatchedWaypoint> comparator;
+    private final Comparator<MatchedWaypoint> comparator;
 
     public WaypointMatcherImpl(final List<MatchedWaypoint> waypoints, final double maxDistance, final OsmNodePairSet islandPairs) {
         this.waypoints = waypoints;
@@ -51,16 +51,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
         }
 
         // sort result list
-        comparator = new Comparator<MatchedWaypoint>() {
-            @Override
-            public int compare(MatchedWaypoint mw1, MatchedWaypoint mw2) {
-                final int cmpDist = Double.compare(mw1.radius, mw2.radius);
-                if (cmpDist != 0) {
-                    return cmpDist;
-                }
-                return Double.compare(mw1.directionDiff, mw2.directionDiff);
-            }
-        };
+        comparator = Comparator.comparingDouble((MatchedWaypoint mw) -> mw.radius).thenComparingDouble(mw -> mw.directionDiff);
 
     }
 

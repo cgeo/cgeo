@@ -346,7 +346,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case NOT_CHOSEN:
                 return GeocachingData.CACHE_SIZE_NOT_CHOSEN;
             case VIRTUAL:
-                return GeocachingData.CACHE_SIZE_OTHER;
+                return GeocachingData.CACHE_SIZE_VIRTUAL;
             case OTHER:
                 return GeocachingData.CACHE_SIZE_OTHER;
             case UNKNOWN:
@@ -391,7 +391,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         for (String attribute : attributes) {
             String rawAttribute = CacheAttribute.trimAttributeName(attribute);
-            if (rawAttribute.equals("")) {
+            if (rawAttribute.isEmpty()) {
                 continue;
             }
             // translate to locus names

@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -108,6 +109,7 @@ public class GCWebAPI {
         private Boolean statusMembership = null;
         private Boolean statusEnabled = null;
         private Boolean statusCorrectedCoordinates = null;
+        private boolean showArchived = true;
 
         private final Set<CacheType> cacheTypes = new HashSet<>();
         private final Set<CacheSize> cacheSizes = new HashSet<>();
@@ -222,6 +224,14 @@ public class GCWebAPI {
          */
         public WebApiSearch setStatusEnabled(final Boolean statusEnabled) {
             this.statusEnabled = statusEnabled;
+            return this;
+        }
+
+        /**
+         * set to true to show archived caches. Note that gc.com respects this setting not in all cases
+         */
+        public WebApiSearch setShowArchived(final boolean showArchived) {
+            this.showArchived = showArchived;
             return this;
         }
 
@@ -441,6 +451,9 @@ public class GCWebAPI {
             if (this.statusEnabled != null) {
                 params.put("sd", this.statusEnabled ? "0" : "1");
             }
+            if (this.showArchived) {
+                params.put("sa", "1");
+            }
 
             if (this.statusCorrectedCoordinates != null) {
                 params.put("cc", this.statusCorrectedCoordinates ? "0" : "1");
@@ -565,7 +578,7 @@ public class GCWebAPI {
 
     }
 
-    /**
+    /*
      * [{"referenceCode":"TB....","iconUrl":"http://www.geocaching.com/images/wpttypes/4433.gif","name":"Some-Geocoin","distanceTraveledInMiles":13350.6100050281,"distanceTraveledInKilometers":21485.7241079319425664,"currentGoal":"Goal of the owner.","description":"","dateReleased":"2011-08-31T12:00:00","locationReleased":{"state":"Hessen","country":"Germany","isoCountryCode":"DE"},"allowedToBeCollected":true,"owner":{"avatarUrl":"https://img.geocaching.com/avatar/...jpg","membershipTypeId":3,"code":"PR...","publicGuid":"...","userName":"..."},"holder":{"avatarUrl":"https://img.geocaching.com/avatar/...jpg","membershipTypeId":3,"code":"PR...","publicGuid":"...","userName":"..."},"inHolderCollection":false,"isMissing":false,"isActive":true,"isLocked":false,"journeyStepsCount":1638,"ownerImagesCount":0,"activityImagesCount":0,"activityCount":1688,"trackingNumber":"...","trackingNumberSha512Hash":"...","trackableType":{"id":4433,"name":"...-Geocoin","imageName":"4433.gif"}}]
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -747,77 +760,85 @@ public class GCWebAPI {
     static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
         final SearchResult result = new SearchResult();
 
-        final MapSearchResultSet mapSearchResultSet = search.execute();
-        result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
-        final List<Geocache> foundCaches = new ArrayList<>();
+        try {
 
-        if (mapSearchResultSet.results != null) {
-            for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+            final MapSearchResultSet mapSearchResultSet = search.execute();
+            result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
+            result.setPartialResult(con, search.getTake() > 0 && mapSearchResultSet.results.size() == search.getTake());
+            final List<Geocache> foundCaches = new ArrayList<>();
 
-                final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
+            if (mapSearchResultSet.results != null) {
+                for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
 
-                final Geocache c = new Geocache();
-                c.setDetailed(false);
-                c.setGeocode(r.code);
-                c.setName(r.name);
-                if (r.userCorrectedCoordinates != null) {
-                    c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
-                    c.setUserModifiedCoords(true);
-                } else if (cacheCoord != null) {
-                    c.setCoords(cacheCoord);
-                    c.setUserModifiedCoords(false);
-                } else {
-                    //this can only happen for PREMIUM caches when searched by BASIC members.
-                    //Open issue: what to do with those?
-                    c.setCoords(null);
-                }
-                c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
-                c.setDifficulty(r.difficulty);
-                c.setTerrain(r.terrain);
-                c.setSize(CacheSize.getByGcId(r.containerType));
-                c.setPremiumMembersOnly(r.premiumOnly);
-                c.setHidden(r.placedDate);
-                c.setLastFound(r.lastFoundDate);
-                c.setInventoryItems(r.trackableCount);
-                c.setLocation(r.region + ", " + r.country);
+                    final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
 
-                //Only set found if the map returns a "found",
-                //the map API will possibly lag behind and break
-                //cache merging if "not found" is set
-                if (r.userFound) {
-                    c.setFound(true);
-                } else if (r.userDidNotFind) {
-                    c.setDNF(true);
-                }
-
-                c.setFavoritePoints(r.favoritePoints);
-                c.setDisabled(r.cacheStatus == 1);
-                c.setArchived(r.cacheStatus == 2);
-                if (r.owner != null) {
-                    c.setOwnerDisplayName(r.owner.username);
-                    c.setOwnerUserId(r.owner.username);
-                }
-
-                // parse attributes
-                final List<String> attributes = new ArrayList<>();
-                if (r.attributes != null) {
-                    for (Attribute attribute : r.attributes) {
-                        attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                    final Geocache c = new Geocache();
+                    c.setDetailed(false);
+                    c.setGeocode(r.code);
+                    c.setName(r.name);
+                    if (r.userCorrectedCoordinates != null) {
+                        c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
+                        c.setUserModifiedCoords(true);
+                    } else if (cacheCoord != null) {
+                        c.setCoords(cacheCoord);
+                        c.setUserModifiedCoords(false);
+                    } else {
+                        //this can only happen for PREMIUM caches when searched by BASIC members.
+                        //Open issue: what to do with those?
+                        c.setCoords(null);
                     }
-                }
-                c.setAttributes(attributes);
+                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
+                    c.setDifficulty(r.difficulty);
+                    c.setTerrain(r.terrain);
+                    c.setSize(CacheSize.getByGcId(r.containerType));
+                    c.setPremiumMembersOnly(r.premiumOnly);
+                    c.setHidden(r.placedDate);
+                    c.setLastFound(r.lastFoundDate);
+                    c.setInventoryItems(r.trackableCount);
+                    c.setLocation(r.region + ", " + r.country);
 
-                foundCaches.add(c);
+                    //Only set found if the map returns a "found",
+                    //the map API will possibly lag behind and break
+                    //cache merging if "not found" is set
+                    if (r.userFound) {
+                        c.setFound(true);
+                    } else if (r.userDidNotFind) {
+                        c.setDNF(true);
+                    }
+
+                    c.setFavoritePoints(r.favoritePoints);
+                    c.setDisabled(r.cacheStatus == 1);
+                    c.setArchived(r.cacheStatus == 2);
+                    if (r.owner != null) {
+                        c.setOwnerDisplayName(r.owner.username);
+                        c.setOwnerUserId(r.owner.username);
+                    }
+
+                    // parse attributes
+                    final List<String> attributes = new ArrayList<>();
+                    if (r.attributes != null) {
+                        for (Attribute attribute : r.attributes) {
+                            attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                        }
+                    }
+                    c.setAttributes(attributes);
+
+                    foundCaches.add(c);
+                }
+
             }
 
+            tryGuessMissingDistances(foundCaches, search);
+
+            result.addAndPutInCache(foundCaches);
+            if (includeGcVote) {
+                GCVote.loadRatings(foundCaches);
+            }
+        } catch (RuntimeException re) {
+            Log.w("GCWebAPI: problem executing search", re);
+            result.setError(GCConnector.getInstance(), StatusCode.COMMUNICATION_ERROR);
         }
 
-        tryGuessMissingDistances(foundCaches, search);
-
-        result.addAndPutInCache(foundCaches);
-        if (includeGcVote) {
-            GCVote.loadRatings(foundCaches);
-        }
         return result;
     }
 
@@ -869,7 +890,7 @@ public class GCWebAPI {
         }
     }
 
-    /**
+    /*
      * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
     @NonNull
@@ -887,7 +908,7 @@ public class GCWebAPI {
         return trackableInventoryEntries;
     }
 
-    /**
+    /*
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */
     static Single<Integer> getAvailableFavoritePoints(final String profile) {

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import androidx.annotation.RequiresApi;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -62,6 +64,7 @@ public final class TranslationUtils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ProcessUtils.isLaunchable(TRANSLATION_APP);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void startInAppTranslationPopup(final Activity activity, final String text) {
         if (!supportsInAppTranslationPopup()) {
             return;

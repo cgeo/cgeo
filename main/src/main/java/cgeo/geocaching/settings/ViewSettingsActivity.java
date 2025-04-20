@@ -7,6 +7,7 @@ import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -27,7 +28,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -36,6 +36,7 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -94,7 +95,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 allItems.add(new KeyValue(key, value.toString(), type));
             }
         }
-        Collections.sort(allItems, (o1, o2) -> o1.key.compareTo(o2.key));
+        Collections.sort(allItems, Comparator.comparing(o -> o.key));
         filteredItems = new ArrayList<>();
         filteredItems.addAll(allItems);
 
@@ -294,16 +295,16 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 .setView(binding.getRoot())
                 .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                 .setPositiveButton(android.R.string.ok, (d, which) -> {
-                    final String preferenceName = binding.preferenceName.getText().toString().trim();
+                    final String preferenceName = ViewUtils.getEditableText(binding.preferenceName.getText()).trim();
                     final int rbId = rg.getCheckedRadioButtonId();
                     if (rbId == -1) {
-                        Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
+                        ViewUtils.showShortToast(this, R.string.add_setting_missing_type);
                     } else {
                         final SettingsUtils.SettingsType preferenceType = getType(((RadioButton) rg.findViewById(rbId)).getText().toString());
                         if (StringUtils.isBlank(preferenceName)) {
-                            Toast.makeText(this, R.string.add_setting_missing_name, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(this, R.string.add_setting_missing_name);
                         } else if (findItem(preferenceName) != -1) {
-                            Toast.makeText(this, R.string.add_setting_already_exists, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(this, R.string.add_setting_already_exists);
                         } else {
                             final KeyValue newItem = new KeyValue(preferenceName, preferenceType.getDefaultString(), preferenceType);
                             final SharedPreferences.Editor editor = prefs.edit();

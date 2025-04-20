@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
@@ -30,6 +31,7 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.apache.commons.compress.utils.IOUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -79,6 +81,27 @@ public final class CgeoTestUtils {
     public static void saveFreshCacheToDB(final Geocache cache) {
         removeCacheCompletely(cache.getGeocode());
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+    }
+
+    /** generates 'count' caches in the database, starting with 'orig' and associating it with given listIds */
+    public static void generateTestCaches(final Set<Integer> listIds, final Geocache orig, final int count) {
+        final String origName = orig.getName();
+        final Geopoint origCoords = orig.getCoords();
+        generateTestCaches(listIds, origName, origCoords, count);
+    }
+
+    public static void generateTestCaches(final Set<Integer> listIds, final String origName, final Geopoint origCoords, final int count) {
+
+            for (int i = 0; i < count ; i++) {
+            final Geocache gc = new Geocache();
+            gc.setName(origName + " " + i);
+            gc.setCoords(origCoords.project(90, (i / 100)).project(180, (i % 100)));
+            gc.setType(CacheType.values()[i % 9]);
+            gc.setGeocode("GCT" + i);
+            gc.setDescription("test");
+            gc.setLists(listIds);
+            DataStore.saveCache(gc, EnumSet.of(LoadFlags.SaveFlag.DB));
+        }
     }
 
     public static InputStream getResourceStream(@RawRes final int resourceId) {

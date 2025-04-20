@@ -60,6 +60,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private SuConnector() {
         // singleton
+        prefKey = R.string.preference_screen_su;
     }
 
     public static SuConnector getInstance() {
@@ -150,7 +151,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
-        return getCacheUrlPrefix() + "&cid=" + cache.getCacheId();
+        return getCacheUrlPrefix() + "/" + cache.getCacheId();
     }
 
     @Override
@@ -187,7 +188,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return getHostUrl() + "/?pn=101";
+        return getHostUrl() + "/cache";
     }
 
     @Override
@@ -409,7 +410,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @Override
     public String getCreateAccountUrl() {
-        return StringUtils.join(getHostUrl(), "/?pn=14");
+        return StringUtils.join(getHostUrl(), "/register");
     }
 
     @Override

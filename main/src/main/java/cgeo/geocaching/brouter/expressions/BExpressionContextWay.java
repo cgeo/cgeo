@@ -58,10 +58,6 @@ public final class BExpressionContextWay extends BExpressionContext implements T
         return getBuildInVariable(6);
     }
 
-    public float getTrafficSourceDensity() {
-        return getBuildInVariable(7);
-    }
-
     public float getIsTrafficBackbone() {
         return getBuildInVariable(8);
     }

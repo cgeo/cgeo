@@ -85,8 +85,7 @@ public final class OsmNodesMap {
     }
 
     private void justCount(final OsmNode[] nodes) {
-        for (int i = 0; i < nodes.length; i++) {
-            final OsmNode n = nodes[i];
+        for (final OsmNode n : nodes) {
             if (n.firstlink != null) {
                 nodesCreated++;
             }
@@ -95,8 +94,7 @@ public final class OsmNodesMap {
 
     private void cleanupPeninsulas(final OsmNode[] nodes) {
         baseID = lastVisitID++;
-        for (int i = 0; i < nodes.length; i++) { // loop over nodes again just for housekeeping
-            final OsmNode n = nodes[i];
+        for (final OsmNode n : nodes) { // loop over nodes again just for housekeeping
             if (n.firstlink != null && n.visitID == 1) {
                 try {
                     minVisitIdInSubtree(null, n);

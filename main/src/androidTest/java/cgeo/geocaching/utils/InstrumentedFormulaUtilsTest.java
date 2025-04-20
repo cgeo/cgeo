@@ -21,7 +21,7 @@ public class InstrumentedFormulaUtilsTest {
         assertScanFormula("(c+20*b):2+5", "(c+20*b):2+5");
 
         //ensure that things like the following are NOT found
-        assertScanFormula("abcd-efgh");
+        assertScanFormula("abcdefghi-efghjk");
 
         //from cache GC86KMW
         assertScanFormula("1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5    E 009°10*b-1,c:4-a+5",

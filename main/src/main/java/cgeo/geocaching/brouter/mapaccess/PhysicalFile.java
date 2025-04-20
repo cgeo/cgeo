@@ -96,7 +96,7 @@ public final class PhysicalFile implements Closeable {
 
     /**
      * Checks the integrity of the file using the build-in checksums.
-     *
+     * <br>
      * * Provided FileInputStream will be closed
      * * Provided fileName is just for logging purposes
      *

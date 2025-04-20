@@ -1,7 +1,5 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -28,10 +26,10 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.sax.Element;
 import android.sax.EndElementListener;
@@ -850,10 +848,7 @@ abstract class GPXParser extends FileParser {
 
     protected void addOriginalCoordinates() {
         if (StringUtils.isNotEmpty(originalLat) && StringUtils.isNotEmpty(originalLon)) {
-            final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-            waypoint.setCoords(new Geopoint(Double.parseDouble(originalLat), Double.parseDouble(originalLon)));
-            cache.addOrChangeWaypoint(waypoint, false);
-            cache.setUserModifiedCoords(true);
+            cache.createOriginalWaypoint(new Geopoint(Double.parseDouble(originalLat), Double.parseDouble(originalLon)));
         }
     }
 

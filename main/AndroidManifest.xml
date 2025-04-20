@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" android:minSdkVersion="34" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" android:minSdkVersion="34" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -20,7 +22,7 @@
 
     <uses-feature
         android:name="android.hardware.location.gps"
-        android:required="true" />
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -120,6 +122,10 @@
             <!-- 'adjustNothing' fixes the issue described in #11610 -->
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
+        <activity android:name=".DBInspectionActivity"
+            android:exported="false"
+            android:theme="@style/cgeo"
+            android:launchMode="singleTop" />
         <activity
             android:name=".InstallWizardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -191,8 +197,27 @@
         <activity
             android:name=".wherigo.WherigoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Whereigo"
+            android:label="@string/wherigo_player"
+            android:exported="true"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden" >
+
+            <!-- wherigo.com -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.wherigo.com" />
+                <data android:host="wherigo.com" />
+                <data android:pathPrefix="/cartridge/details.aspx" />
+                <data android:pathPrefix="/cartridge/downloads.aspx" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".AboutActivity"
@@ -205,6 +230,13 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/helpers"
             android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".helper.CopyToClipboardActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_menu_copy"
+            android:label="@string/copy"
+            >
         </activity>
         <activity
             android:name=".helper.QueryMapFile"
@@ -259,10 +291,9 @@
         <activity android:name=".settings.ViewSettingsActivity" />
         <activity
             android:name=".HandleLocalFilesActivity"
-            android:exported="true"
-            android:label="@string/localfile_intenttitle">
+            android:exported="true">
             <!-- intent filter for local map files -->
-            <intent-filter>
+            <intent-filter android:label="c:geo local map handler">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -280,10 +311,37 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
             </intent-filter>
+
+            <!-- Android API 31+ versions with better name filtering -->
+            <intent-filter android:label="c:geo local map handler">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="content" />
+                <data android:pathSuffix=".map" />
+            </intent-filter>
+            <intent-filter android:label="c:geo local Wherigo cartridge handler">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="content" />
+                <data android:pathSuffix=".gwc" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CacheListActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="c:geo GPX import">
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
             <!-- intent filter for local gpx files -->
@@ -304,6 +362,18 @@
                 <data android:pathPattern=".*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+            </intent-filter>
+            <intent-filter> <!-- Android API 31+ version with better name filtering -->
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="content" />
+                <data android:pathSuffix=".gpx" />
             </intent-filter>
 
             <!-- intent filter for all gpx links, independent of mime types -->
@@ -752,13 +822,20 @@
         <service
             android:name=".speech.SpeechService"
             android:label="@string/tts_service"
-            android:foregroundServiceType="mediaPlayback">
+            android:foregroundServiceType="location">
         </service>
         <service
             android:name=".brouter.InternalRoutingService"
             android:exported="false"
             android:enabled="true"
             android:process=":brouter_service"
+            android:foregroundServiceType="dataSync">
+        </service>
+        <service
+            android:name=".wherigo.WherigoGameService"
+            android:exported="false"
+            android:enabled="true"
+            android:stopWithTask="true"
             android:foregroundServiceType="location">
         </service>
 
@@ -816,19 +893,6 @@
 
         <activity
             android:name=".settings.GCAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".settings.ECAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -908,6 +972,7 @@
         </activity>
         <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
         <activity android:name=".unifiedmap.mapsforgevtm.MapsforgeThemeSettings" />
+        <activity android:name=".unifiedmap.mapsforge.MapsforgeThemeSettings" />
 
         <!-- fileprovider to be able to share files -->
         <provider

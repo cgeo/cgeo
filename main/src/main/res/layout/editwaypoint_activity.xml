@@ -88,6 +88,28 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/variables_tidyup"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                app:icon="@drawable/ic_menu_auto_fix_high"
+                android:text="@string/variables_tidyup"/>
+
+        </RelativeLayout>
+
+        <cgeo.geocaching.ui.VariableListView
+            android:id="@+id/variable_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/projectedLatLongitude"
             style="@style/button_full_double"

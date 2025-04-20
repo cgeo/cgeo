@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -61,6 +62,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public static final String URL = "https://" + HOST;
     private static final String URLPROXY = "https://api." + HOST;
 
+    private static final Pattern ID_PATTERN = Pattern.compile("geokret id=\"([^\"]+)\"");
+
     @Override
     @NonNull
     public String getHost() {
@@ -91,8 +94,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
-        if (brand != TrackableBrand.GEOKRETY) {
-            return canHandleTrackable(geocode);
+        if (brand != null && brand != TrackableBrand.GEOKRETY) {
+            return brand == TrackableBrand.UNKNOWN && canHandleTrackable(geocode);
         }
         return geocode != null && PATTERN_GK_CODE_EXTENDED.matcher(geocode).matches();
     }
@@ -296,12 +299,30 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Nullable
     @WorkerThread
     private static String getGeocodeFromTrackingCode(final String trackingCode) {
-        final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id/" + trackingCode));
+        //https://geokrety.org/api/v1/export2?tracking_code={trackingCode}
+        //Example response:
+        //<gkxml version="1.0" date="2024-08-07 19:02:22" date_Iso8601="2024-08-07T19:02:22+00:00">
+        //<geokrety>
+        //<geokret id="66184" type="1" collectible="false" owner_id="26422" ownername="kumy" holder_id="26422" holdername="" dist="36291" date="2017-12-13" places="12" image="GK10288_6503b68749e8a">
+        //<![CDATA[ Super Picsou Geant #200 ]]>
+        //</geokret>
+        //</geokrety>
+        //</gkxml>
+
+        final String response = Network.getResponseData(Network.getRequest(URL + "/api/v1/export2?tracking_code=" + trackingCode));
         // An empty response means "not found"
-        if (response == null || StringUtils.equals(response, "0")) {
+        if (response == null) {
             return null;
         }
-        return geocode(Integer.parseInt(response));
+        final Matcher m = ID_PATTERN.matcher(response);
+        if (m.find()) {
+            try {
+                return geocode(Integer.parseInt(m.group(1)));
+            } catch (NumberFormatException nfe) {
+                return null;
+            }
+        }
+        return null;
     }
 
     @Override

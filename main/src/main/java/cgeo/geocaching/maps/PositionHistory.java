@@ -26,7 +26,7 @@ public class PositionHistory {
      */
     private static final int MAX_POSITIONS = Settings.getMaximumMapTrailLength();
 
-    private ArrayList<TrailHistoryElement> history = new ArrayList<>();
+    private ArrayList<TrailHistoryElement> history;
 
     // load data from permanent storage
     public PositionHistory() {
@@ -76,9 +76,7 @@ public class PositionHistory {
         // avoid running out of memory
         final int itemsToRemove = getHistory().size() - MAX_POSITIONS;
         if (itemsToRemove > 0) {
-            for (int i = 0; i < itemsToRemove; i++) {
-                getHistory().remove(0);
-            }
+            getHistory().subList(0, itemsToRemove).clear();
         }
     }
 

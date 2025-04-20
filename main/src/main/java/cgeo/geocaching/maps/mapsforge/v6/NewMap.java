@@ -12,7 +12,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -46,7 +46,6 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
-import cgeo.geocaching.maps.mapsforge.v6.legend.RenderThemeLegend;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -64,6 +63,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -80,6 +80,7 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
@@ -106,10 +107,9 @@ import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -139,7 +139,6 @@ import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
-import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.Layers;
@@ -189,14 +188,14 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
      */
     private ProximityNotification proximityNotification;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
     private UnifiedMapViewModel.SheetInfo sheetInfo = null;
 
-    private static boolean followMyLocation = Settings.getFollowMyLocation();
+    private static boolean followMyLocationSwitch = Settings.getFollowMyLocation();
+    private final int[] inFollowMyLocation = { 0 };
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
@@ -250,13 +249,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            followMyLocation = mapOptions.mapState.followsMyLocation();
+            followMyLocationSwitch = mapOptions.mapState.followsMyLocation();
             sheetInfo = savedInstanceState.getParcelable(BUNDLE_SHEETINFO);
         } else {
             if (mapOptions.mapState != null) {
-                followMyLocation = mapOptions.mapState.followsMyLocation();
+                followMyLocationSwitch = mapOptions.mapState.followsMyLocation();
             } else {
-                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+                followMyLocationSwitch = followMyLocationSwitch && mapOptions.mapMode == MapMode.LIVE;
             }
             configureProximityNotifications();
         }
@@ -280,26 +279,23 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, this::configureProximityNotifications, mapOptions.filterContext));
 
         // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget, null));
 
         // prepare circular progress spinner
-        spinner = (ProgressBar) findViewById(R.id.map_progressbar);
+        spinner = findViewById(R.id.map_progressbar);
         spinner.setVisibility(View.GONE);
 
         // initialize map
-        mapView = (MfMapView) findViewById(R.id.mfmapv5);
+        mapView = findViewById(R.id.mfmapv5);
 
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
 
         // style zoom controls
-        final MapZoomControls zoomControls = mapView.getMapZoomControls();
-        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
-        zoomControls.setZoomInResource(R.drawable.map_zoomin);
-        zoomControls.setZoomOutResource(R.drawable.map_zoomout);
-        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(13.0f), ViewUtils.dpToPixel(18.0f));
-        zoomControls.setAutoHide(false);
+        mapView.setBuiltInZoomControls(false);
+        findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomIn()));
+        findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomOut()));
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
@@ -347,7 +343,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                     coordsMarkerLayer.setCoordsMarker(coordsMarkerPosition);
                 }
                 mapOptions.coords = null;   // no direction line, even if enabled in settings
-                followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+                followMyLocationSwitch = false;   // do not center on GPS position, even if in LIVE mode
             }
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
@@ -397,7 +393,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         MapProviderFactory.addMapviewMenuItems(this, menu);
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
-        initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(this, menu));
+        initFollowMyLocation(followMyLocationSwitch);
         FilterUtils.initializeFilterMenu(this, this);
 
         return result;
@@ -416,10 +412,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-            final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
-            if (menuItem != null) {
-                menuItem.setVisible(mapSource.isAvailable());
-            }
+            MenuUtils.setVisible(menu.findItem(mapSource.getNumericalId()), mapSource.isAvailable());
         }
 
         try {
@@ -433,7 +426,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
             menu.findItem(R.id.menu_theme_options).setVisible(tileLayerHasThemes);
-            menu.findItem(R.id.menu_theme_legend).setVisible(tileLayerHasThemes && RenderThemeLegend.supportsLegend());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
@@ -443,7 +435,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 LoggingUI.onPrepareOptionsMenu(menu, getSingleModeCache());
             }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
-            MapUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
@@ -467,7 +458,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 mapOptions.isStoredEnabled = true;
                 mapOptions.filterContext = new GeocacheFilterContext(LIVE);
                 caches.setFilterContext(mapOptions.filterContext);
-                refreshMapData(false);
+                refreshMapData(false, true);
             }
 
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -493,11 +484,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {
             this.renderThemeHelper.selectMapThemeOptions();
-        } else if (id == R.id.menu_theme_legend) {
-            RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
             ActivityMixin.overrideTransitionToFade(this);
+        } else if (id == R.id.menu_hillshading) {
+            Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
+            item.setChecked(Settings.getMapShadingShowLayer());
+            changeMapSource(mapSource);
         } else if (id == R.id.menu_hint) {
             menuShowHint();
         } else if (id == R.id.menu_compass) {
@@ -507,11 +500,14 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
+        } else if (id == R.id.menu_check_hillshadingdata) {
+            final BoundingBox bb = mapView.getBoundingBox();
+            MapUtils.checkHillshadingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-                || DownloaderUtils.onOptionsItemSelected(this, id, false)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(individualRoute, this::setTarget);
+            routeTrackUtils.showPopup(individualRoute, this::setTarget, null);
         } else {
             final String language = MapProviderFactory.getLanguage(id);
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -530,7 +526,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         return true;
     }
 
-    private void refreshMapData(final boolean circlesSwitched) {
+    private void refreshMapData(final boolean circlesSwitched, final boolean filterChanged) {
         if (circlesSwitched) {
             caches.switchCircles();
         }
@@ -543,13 +539,16 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         if (null != geoObjectLayer) {
             geoObjectLayer.requestRedraw();
         }
-        MapUtils.updateFilterBar(this, mapOptions.filterContext);
+
+        if (filterChanged) {
+            MapUtils.updateFilterBar(this, mapOptions.filterContext);
+        }
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
-            Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.brouter_recalculating);
         }
         reloadIndividualRoute();
         if (null != tracks) {
@@ -589,8 +588,8 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
-        followMyLocation = false;
-        switchMyLocationButton();
+        followMyLocationSwitch = false;
+        initFollowMyLocation(false);
         mapView.getModel().mapViewPosition.setMapPosition(new MapPosition(new LatLong(latitude, longitude), (byte) mapView.getMapZoomLevel()));
         postZoomToViewport(viewport);
     }
@@ -623,7 +622,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapOptions.filterContext.set(filter);
-        refreshMapData(false);
+        refreshMapData(false, true);
     }
 
     private void changeMapSource(@NonNull final MapSource newSource) {
@@ -664,7 +663,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             return null;
         }
         final Geopoint mapCenter = mapView.getViewport().getCenter();
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, Settings.isShowCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocationSwitch, Settings.isShowCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void configureProximityNotifications() {
@@ -891,7 +890,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(findViewById(R.id.distances1).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
+        this.distanceView = new DistanceView(findViewById(R.id.distanceinfo), navTarget, Settings.isBrouterShowBothDistances());
 
         //Target view
         this.targetView = new TargetView(findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
@@ -984,7 +983,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private MapState prepareMapState() {
-        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getMapZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getMapZoomLevel(), followMyLocationSwitch, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -999,24 +998,28 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         return loc;
     }
 
-    private void initMyLocationSwitchButton(final CheckBox locSwitch) {
-        myLocSwitch = locSwitch;
-        /*
-         * TODO: Switch back to ImageSwitcher for animations?
-         * myLocSwitch.setFactory(this);
-         * myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
-         * myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out);
-         */
-        myLocSwitch.setOnClickListener(new MyLocationListener(this));
-        switchMyLocationButton();
-    }
-
-    // switch My Location button image
-    private void switchMyLocationButton() {
+    private void initFollowMyLocation(final boolean followMyLocation) {
+        synchronized (inFollowMyLocation) {
+            if (inFollowMyLocation[0] > 0) {
+                return;
+            }
+            inFollowMyLocation[0]++;
+        }
         Settings.setFollowMyLocation(followMyLocation);
-        myLocSwitch.setChecked(followMyLocation);
+        followMyLocationSwitch = followMyLocation;
+
+        final ImageButton followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
+        if (followMyLocationButton != null) { // can be null after screen rotation
+            followMyLocationButton.setImageResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
+            followMyLocationButton.setOnClickListener(v -> initFollowMyLocation(!followMyLocationSwitch));
+        }
+
         if (followMyLocation) {
-            myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
+            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if none was delivered to the view-model yet
+            mapView.setCenter(new LatLong(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        }
+        synchronized (inFollowMyLocation) {
+            inFollowMyLocation[0]--;
         }
     }
 
@@ -1035,40 +1038,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     public void onReceiveTargetUpdate(final TargetInfo targetInfo) {
         if (Settings.isAutotargetIndividualRoute()) {
             Settings.setAutotargetIndividualRoute(false);
-            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
         }
         setTarget(targetInfo.coords, targetInfo.geocode);
-    }
-
-    // set my location listener
-    private static class MyLocationListener implements View.OnClickListener {
-
-        @NonNull
-        private final WeakReference<NewMap> mapRef;
-
-        MyLocationListener(@NonNull final NewMap map) {
-            mapRef = new WeakReference<>(map);
-        }
-
-        private void onFollowMyLocationClicked() {
-            followMyLocation = !followMyLocation;
-            final NewMap map = mapRef.get();
-            if (map != null) {
-                map.switchMyLocationButton();
-            }
-        }
-
-        @Override
-        public void onClick(final View view) {
-            onFollowMyLocationClicked();
-        }
-    }
-
-    // Set center of map to my location if appropriate.
-    private void myLocationInMiddle(final cgeo.geocaching.sensors.GeoData geo) {
-        if (followMyLocation) {
-            centerMap(geo.getCoords());
-        }
     }
 
     private static final class DisplayHandler extends Handler {
@@ -1081,21 +1053,14 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final NewMap map = mapRef.get();
             if (map == null) {
                 return;
             }
-
-            final int what = msg.what;
-            switch (what) {
-                case UPDATE_TITLE:
-                    map.setTitle();
-                    map.setSubtitle();
-                    break;
-
-                default:
-                    break;
+            if (msg.what == UPDATE_TITLE) {
+                map.setTitle();
+                map.setSubtitle();
             }
         }
 
@@ -1158,10 +1123,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         return subtitle.toString();
-    }
-
-    private void switchCircles() {
-        caches.switchCircles();
     }
 
     private int countVisibleCaches() {
@@ -1262,7 +1223,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy && NewMap.followMyLocation) {
+                        if (needsRepaintForDistanceOrAccuracy && NewMap.followMyLocationSwitch) {
                             map.centerMap(new Geopoint(currentLocation));
                         }
 
@@ -1336,9 +1297,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         @Override
         public void onDrag() {
             final NewMap map = mapRef.get();
-            if (map != null && NewMap.followMyLocation) {
-                NewMap.followMyLocation = false;
-                map.switchMyLocationButton();
+            if (map != null && NewMap.followMyLocationSwitch) {
+                NewMap.followMyLocationSwitch = false;
+                map.initFollowMyLocation(false);
             }
         }
     }
@@ -1368,12 +1329,12 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            final SimpleDialog.ItemSelectModel<GeoitemRef> model = new SimpleDialog.ItemSelectModel<GeoitemRef>();
+            final SimpleDialog.ItemSelectModel<GeoitemRef> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(sorted)
-                .setDisplayViewMapper((item, ctx, view, parent) ->
+                .setDisplayViewMapper((item, itemGroup, ctx, view, parent) ->
                         GeoItemSelectorUtils.createGeoItemView(NewMap.this, item, GeoItemSelectorUtils.getOrCreateView(NewMap.this, view, parent)),
-                        (item) -> item.getName() + "::" + item.getGeocode())
+                        (item, itemGroup) -> item.getName() + "::" + item.getGeocode())
                 .setItemPadding(0);
 
             SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
@@ -1394,7 +1355,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     private void triggerCacheWaypointLongTapContextMenu(final GeoitemRef item) {
         final long mapSize = MercatorProjection.getMapSize(mapView.getModel().mapViewPosition.getZoomLevel(), mapView.getModel().displayModel.getTileSize());
         Geopoint geopoint = null;
-        if (item.getType() == CoordinatesType.CACHE) {
+        if (item.getType() == CoordinateType.CACHE) {
             final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null) {
                 geopoint = cache.getCoords();
@@ -1427,7 +1388,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         try {
-            if (item.getType() == CoordinatesType.CACHE) {
+            if (item.getType() == CoordinateType.CACHE) {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     popupGeocodes.add(cache.getGeocode());
@@ -1438,7 +1399,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 return;
             }
 
-            if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
+            if (item.getType() == CoordinateType.WAYPOINT && item.getId() >= 0) {
                 popupGeocodes.add(item.getGeocode());
                 sheetInfo = new UnifiedMapViewModel.SheetInfo(item.getGeocode(), item.getId());
                 sheetShowDetails(sheetInfo);
@@ -1526,7 +1487,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 if (targetInfo != null) {
                     if (Settings.isAutotargetIndividualRoute()) {
                         Settings.setAutotargetIndividualRoute(false);
-                        Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                        ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
                     }
                     setTarget(targetInfo.coords, targetInfo.geocode);
                 }
@@ -1543,7 +1504,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapOptions.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            refreshMapData(false);
+            refreshMapData(false, true);
         }
 
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
@@ -1573,7 +1534,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
     private void updateRouteTrackButtonVisibility() {
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
-    };
+    }
 
     private Boolean isTargetSet() {
         return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;

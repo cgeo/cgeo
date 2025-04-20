@@ -8,12 +8,13 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
@@ -29,7 +30,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,7 +68,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         @SuppressLint("SetTextI18n")
         private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem) {
             final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
-            final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
+            final INamedGeoCoordinate data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
 
             if (null == data && cacheOrWaypointType) {
                 holder.binding.title.setText(routeItem.getShortGeocode());
@@ -192,7 +192,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItemAdapter.getItems()), () -> {
                 originalRouteItems = new ArrayList<>(routeItemAdapter.getItems());
                 invalidateOptionsMenu();
-                Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
+                ViewUtils.showShortToast(this, R.string.sorted_route_saved);
                 finish();
             });
             return true;

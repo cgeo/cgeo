@@ -1,8 +1,9 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -16,7 +17,6 @@ import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
-import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
@@ -31,12 +31,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class Waypoint implements IWaypoint {
+public class Waypoint implements INamedGeoCoordinate {
 
     public static final String PREFIX_OWN = "OWN";
     public static final String CLIPBOARD_PREFIX = "c:geo:WAYPOINT:";
@@ -61,6 +62,8 @@ public class Waypoint implements IWaypoint {
 
     @Nullable
     private Geopoint preprojectedCoords = null;
+    @Nullable
+    private Float geofence; // radius in meters
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -81,7 +84,7 @@ public class Waypoint implements IWaypoint {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) (left, right) -> left.order() - right.order();
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
@@ -132,6 +135,9 @@ public class Waypoint implements IWaypoint {
         }
         if (preprojectedCoords == null) {
             preprojectedCoords = old.preprojectedCoords;
+        }
+        if (geofence == null) {
+            geofence = old.geofence;
         }
 
         // keep note only for user-defined waypoints
@@ -199,10 +205,8 @@ public class Waypoint implements IWaypoint {
      * the waypoint was modified by the user
      */
     public boolean isUserModified() {
-        return
-            isUserDefined() || isVisited() ||
-                (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
-                StringUtils.isNotBlank(getUserNote());
+        final boolean hasModifiedCoordinates = (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null) || hasProjection());
+        return isUserDefined() || isVisited() || hasModifiedCoordinates || StringUtils.isNotBlank(getUserNote());
     }
 
     public void setUserDefined() {
@@ -232,7 +236,11 @@ public class Waypoint implements IWaypoint {
         return "https://www.geocaching.com/seek/cache_details.aspx?wp=" + geocode;
     }
 
-    @Override
+    /**
+     * Return an unique waypoint id.
+     *
+     * @return a non-negative id if set, -1 if unset
+     */
     public int getId() {
         return id;
     }
@@ -271,7 +279,6 @@ public class Waypoint implements IWaypoint {
         this.parentCache = null;
     }
 
-    @Override
     public WaypointType getWaypointType() {
         return waypointType;
     }
@@ -301,6 +308,20 @@ public class Waypoint implements IWaypoint {
 
     public Geopoint getPreprojectedCoords() {
         return preprojectedCoords;
+    }
+
+    @Nullable
+    public Float getGeofence() {
+        return geofence;
+    }
+
+    public boolean canChangeGeofence() {
+        // currently geofence value is used by AL connector only, so you may set it manually for every other connector
+        return !ALConnector.getInstance().canHandle(geocode);
+    }
+
+    public void setGeofence(@Nullable final Float geofence) {
+        this.geofence = geofence;
     }
 
     public void setCoords(final Geopoint coords) {
@@ -345,7 +366,7 @@ public class Waypoint implements IWaypoint {
         return CalculatedCoordinate.isValidConfig(calcStateConfig);
     }
 
-    public void setCalculated(final CalculatedCoordinate cc, final Func1<String, Value> varMap) {
+    public void setCalculated(final CalculatedCoordinate cc, final Function<String, Value> varMap) {
         this.setCalcStateConfig(cc.toConfig());
         this.setPreprojectedCoords(cc.calculateGeopoint(varMap));
     }
@@ -363,8 +384,8 @@ public class Waypoint implements IWaypoint {
      * Returns whether a recalculation was actually done
      */
     public boolean recalculateVariableDependentValues(final VariableList varList) {
-        //coords and proprojectedcoords are variable-dependent. Let's see whether we have to recalculate
-        final boolean hasProjection = this.getProjectionType() != ProjectionType.NO_PROJECTION;
+        //coords and projectedcoords are variable-dependent. Let's see whether we have to recalculate
+        final boolean hasProjection = hasProjection();
         boolean calcDone = false;
         if (this.isCalculated()) {
             final CalculatedCoordinate cc = getCalculated();
@@ -397,8 +418,8 @@ public class Waypoint implements IWaypoint {
     }
 
     @Override
-    public CoordinatesType getCoordType() {
-        return CoordinatesType.WAYPOINT;
+    public CoordinateType getCoordType() {
+        return CoordinateType.WAYPOINT;
     }
 
     public void setVisited(final boolean visited) {
@@ -463,6 +484,14 @@ public class Waypoint implements IWaypoint {
         //calcState, only if coords are empty, otherwise mismatch between coords and formula can occur
         if (getCoords() == null && getCalcStateConfig() == null && parsedWaypoint.getCalcStateConfig() != null) {
             setCalcStateConfig(parsedWaypoint.getCalcStateConfig());
+            changed = true;
+        }
+
+        if (getCoords() == null && !hasProjection() && parsedWaypoint.hasProjection()) {
+            setProjection(parsedWaypoint.getProjectionType(), parsedWaypoint.getProjectionDistanceUnit(),
+                    parsedWaypoint.getProjectionFormula1(), parsedWaypoint.getProjectionFormula2());
+            setPreprojectedCoords(parsedWaypoint.getPreprojectedCoords());
+            setCoordsPure(parsedWaypoint.getCoords());
             changed = true;
         }
 
@@ -687,7 +716,7 @@ public class Waypoint implements IWaypoint {
         final TextParser tp = new TextParser(config);
         tp.parseUntil('|');
         final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
-        this.projectionType = tokens.size() > 0 ? EnumUtils.getEnum(ProjectionType.class, tokens.get(0), ProjectionType.NO_PROJECTION) : ProjectionType.NO_PROJECTION;
+        this.projectionType = !tokens.isEmpty() ? EnumUtils.getEnum(ProjectionType.class, tokens.get(0), ProjectionType.NO_PROJECTION) : ProjectionType.NO_PROJECTION;
         this.projectionFormula1 = tokens.size() > 1 ? tokens.get(1) : "";
         this.projectionFormula2 = tokens.size() > 2 ? tokens.get(2) : "";
         this.projectionDistanceUnit = tokens.size() > 3 ? EnumUtils.getEnum(DistanceUnit.class, tokens.get(3), DistanceUnit.getDefaultUnit(false)) : DistanceUnit.getDefaultUnit(false);

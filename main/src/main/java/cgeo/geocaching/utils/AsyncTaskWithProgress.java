@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 
 /**
  * AsyncTask which automatically shows a progress dialog. The progress is tracked with integers.
- *
+ * <br>
  * Use it like the {@code AsyncTask} class, but leave away the middle template parameter. Override
  * {@link #doInBackgroundInternal(Object[])} and related methods.
  *

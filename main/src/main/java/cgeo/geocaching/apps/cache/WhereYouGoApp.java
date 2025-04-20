@@ -4,24 +4,18 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.wherigo.WherigoUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
+import java.util.List;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
-    private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
-    protected static final String URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
 
     public WhereYouGoApp() {
         super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
@@ -29,37 +23,30 @@ public class WhereYouGoApp extends AbstractGeneralApp {
 
     @Override
     public boolean isEnabled(@NonNull final Geocache cache) {
-        return isWherigo(cache);
-    }
-
-    public static boolean isWherigo(@NonNull final Geocache cache) {
-        return cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
+        return cache.getType() == CacheType.WHERIGO && !WherigoUtils.getWherigoGuids(cache).isEmpty();
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
-    }
-
-    /**
-     * get the URL of the cartridge.
-     *
-     * @return {@code null} if there is no link to a cartridge, or if there are multiple different links
-     */
-    @Nullable
-    public static String getWhereIGoUrl(final Geocache cache) {
-        final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
-        final Set<String> cartridgeGuids = new HashSet<>();
-        while (matcher.find()) {
-            cartridgeGuids.add(matcher.group(2));
+        final List<String> guids = WherigoUtils.getWherigoGuids(cache);
+        if (!guids.isEmpty()) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoUrl(guids.get(0)))));
         }
-        if (cartridgeGuids.size() == 1) {
-            return URL_BASE + cartridgeGuids.iterator().next();
-        }
-        return null;
     }
 
     public static boolean isWhereYouGoInstalled() {
         return null != ProcessUtils.getLaunchIntent(getString(R.string.package_whereyougo));
     }
+
+    public static void openWherigo(@NonNull final Activity activity, @NonNull final String guid) {
+        // re-check installation state, might have changed since creating the view
+        if (isWhereYouGoInstalled()) {
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoUrl(guid)));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+        } else {
+            ProcessUtils.openMarket(activity, activity.getString(R.string.package_whereyougo));
+        }
+    }
+
 }

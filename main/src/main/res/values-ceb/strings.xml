@@ -109,8 +109,6 @@
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
-    <string name="translate_to_english">Ang paghubad sa Inglis</string>
     <string name="translate_length_warning">Ang paghubad kay mahimon nga mapakyas sa usa ka dako nga kantidad sa teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Napakyas nga pagpasulod sa parsing nga panid</string>
@@ -129,7 +127,6 @@
     <string name="err_detail_cache">ang c:geo dili maka pakita sa geocache na imong gusto. Kani ba nga geocache gyud?</string>
     <string name="err_detail_cache_find">ang c:geo dili maka kita sa geocache</string>
     <string name="err_detail_cache_find_some">ang c:geo dili maka kita ni anang geocache.</string>
-    <string name="err_detail_cache_find_any">ang c:geo dili maka pangita bisan unsa na mga geocache.</string>
     <string name="err_detail_no_spoiler">ang c:geo kay walay nakit an na mga spoiler na imahe para sa ka ni nga cache.</string>
     <string name="err_detail_still_working">Nagahimo pa og lain nga bulohaton.</string>
     <string name="err_watchlist_failed">Ang pag-usab sa imong watchlist kay nakapyas.</string>
@@ -182,7 +179,6 @@
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
     <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
-    <string name="info_log_post_failed_reason">Rason: %s</string>
     <string name="info_log_post_retry">Suwayi og balik</string>
     <string name="info_log_post_save">I-save sa offline</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
@@ -233,9 +229,7 @@
     <string name="caches_sort_name">Pangalan</string>
     <string name="caches_sort_rating">Grado</string>
     <string name="caches_sort_vote">Botar (Kaugalingon na Grado)</string>
-    <string name="caches_sort_inventory">Ihap sa imbentaryo</string>
     <string name="caches_sort_date_hidden">Ang gitagoan na petsa</string>
-    <string name="caches_sort_date_logged">Petsa na nisulod</string>
     <string name="caches_sort_finds">Napangita</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Petsa na nahan-ay sa butang</string>
@@ -315,7 +309,6 @@
     <string name="settings_gc_legal_note">Sa paggamit sa serbisyo sa geocaching.com, imohang gidawat ang termino sa paggamit sa Groundspeak.</string>
     <string name="settings_authorize">I-awtorisar nga c:geo</string>
     <string name="settings_gc_description">Pagpasugot sa c:geo kuyog sa geocaching.com para mapangita ang mga cache.</string>
-    <string name="settings_ec_description">Pagpatugot sa c:geo kuyog sa extremcaching.com para mapangita ang mga cache ug ma akses/filter nimo ang imong nakit-ang mga cache.</string>
     <string name="settings_su_description">Pagpatugot sa c:geo kuyog sa geocaching.su para magpangita sa mga cache.</string>
     <string name="init_summary_oc_de">I-load ang mga cache gikan sa opencaching.de</string>
     <string name="init_oc_de_description">I-awtorisar ang c:geo sa opencaching.de para maka kita sa mga cache og acess/filter ang nakit-an nimo na mga cache.</string>
@@ -359,8 +352,6 @@
     <string name="init_address">Pagpakita sa Address</string>
     <string name="init_summary_address">Ipakita ang address imbis nga coordinate sa main nga screen</string>
     <string name="init_showwaypoint_description">Kung mas ubos kay sa gihatag nga kantidad sa mga caches nga gipakita sa mapa, ang ilang mga waypoint gipakita usab.</string>
-    <string name="init_save_log_img">I-save ang mga Imahe</string>
-    <string name="init_summary_save_log_img">I-save ang mga Imahe nga gikan sa Logs</string>
     <string name="init_units">Gamita ang Imperial nga mga Unit</string>
     <string name="init_summary_units">Gamita ang mga Imperial Units imbes Metric nga Units</string>
     <string name="init_summary_log_offline">Pag-enable sa Offline Logging (Dili mapakita ang online log screen sa dihang mag log, dili mag-upload sa mga log)</string>
@@ -410,7 +401,6 @@
     <string name="init_plain_logs">Yano na logs</string>
     <string name="init_summary_plain_logs">I-balandra and log entri nga walay kolor</string>
     <string name="init_maintenance">Pag-mintinar</string>
-    <string name="init_maintenance_directories">Tangtanga ang mga naulahi nga mga file</string>
     <string name="init_location_note">Sa mga kagamitan nga adunay mga Google Play Services, ang c:geo mahimong gamiton sa usa ka mas maayo nga geolocation provider. Hinoon, kini nagpugong sa paggamit sa usa ka eksternal nga GPS receiver sa GPS.</string>
     <string name="init_location_googleplayservices">Gamita ang Google Play Services</string>
     <string name="init_low_power">Hinay-og-power nga mode</string>
@@ -478,6 +468,7 @@
     <string name="auth_dialog_completed_geokrety">ang c:geo kay ge awtorisar nga makig-interact kauban ang %s.</string>
     <string name="err_auth_geokrety_bad_password">Ang imohang username/password kay murag dili balido.</string>
     <string name="err_auth_geokrety_unknown">%1$s nibalik: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
@@ -497,7 +488,6 @@
         <item quantity="one">mahitungod sa %d nga adlaw na ang milabay</item>
         <item quantity="other">mahitungod sa %d nga mga adlaw na ang milabay</item>
     </plurals>
-    <string name="cache_inventory">Imbentaryo</string>
     <string name="cache_log_image_default_title">Litrato</string>
     <string name="cache_personal_note">Personal nga sulat</string>
     <string name="cache_personal_note_edit">I-edit</string>
@@ -529,8 +519,6 @@
     <string name="cache_dialog_loading_details_status_render">Pag-render sa view</string>
     <string name="cache_dialog_offline_save_message">Pag-save sa cache alang sa paggamit sa offline…</string>
     <string name="cache_dialog_offline_drop_message">Pagtangtang sa cache gikan sa memorya sa device…</string>
-    <string name="cache_dialog_refresh_title">I-refresh</string>
-    <string name="cache_dialog_refresh_message">Pag-usab sa mga detalye sa cache…</string>
     <string name="cache_menu_navigate">Pag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmaneho)</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglakaw)</string>
@@ -594,6 +582,7 @@
     <string name="cache_share_field">Ang papakigbahin</string>
     <string name="cache_time_full_hours">alas dose</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Pagload sa mga cache gikan sa %1$s</string>
@@ -663,19 +652,10 @@
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <!-- search -->
     <string name="search_coordinates">Mga koordinate</string>
-    <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
     <string name="search_address">Lugar</string>
-    <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
-    <string name="search_kw_prefill">Importanteng letra</string>
-    <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
-    <string name="search_hbu_prefill">Tag-iya</string>
-    <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>
     <string name="search_tb">Masundan</string>
-    <string name="search_tb_hint">Idintipikasyon sa trackable</string>
-    <string name="search_tb_button">Mangita og mga trackable</string>
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>
-    <string name="search_own_caches">Pangitaa ang akong mga cache</string>
     <!-- trackable -->
     <string name="trackable">Masundan</string>
     <string name="trackable_details_loading">Ga load pa ang gisundang mga detalye…</string>
@@ -717,10 +697,6 @@
     <string name="destination_select">Pili ug destinasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Lisensya</string>
-    <string name="license_show">Ipakita ang lisensya</string>
-    <string name="license_dismiss">Wagtangon</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Niaging hitabo</string>
     <string name="helper_calendar_pastevent_question">Ang petsa sa hitabi ay nasa kaniadto. Ipuno ba ni bisan inaana?</string>
@@ -728,10 +704,8 @@
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay usa ka browser na ekstenyon <strong>para sa imung PC</strong>.Kung kag-browse ug geocaching.com, pwede ka magpadala ug mga cache sa imong cellphone kauban sa pagpislit sa pislitanan diretso sa sulod na browser.</string>
     <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
-    <string name="helper_bluetoothgps_description">Gisugtan ka na mugamit ug external GPS receiver para makuha paglaing nindot na lokasyong data, ug pwedeng makahabilin ug baterya sa imung device.</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
-    <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
     <!-- export -->
     <string name="export">I-export</string>
     <string name="export_progress">I-export: %1$s</string>
@@ -779,9 +753,7 @@
     <string name="attribute_climbing_yes">Malisod nga pagsaka</string>
     <string name="attribute_climbing_no">Walay lisud sa pagkatkat</string>
     <string name="attribute_wading_yes">Basin kinahanglan ug wading</string>
-    <string name="attribute_wading_no">Basin guro dile kinahanglan ug wading</string>
     <string name="attribute_swimming_yes">Basin kinahanglan ug paglangoy</string>
-    <string name="attribute_swimming_no">Basin guro dile kinahanglan ug paglangoy</string>
     <string name="attribute_available_yes">Available pirme bisan unsang orasa</string>
     <string name="attribute_available_no">Dile available bisan unsang orasa</string>
     <string name="attribute_night_yes">Girekomendar sa gabie</string>
@@ -791,9 +763,7 @@
     <string name="attribute_stealth_yes">Kinahanglan ang stealth</string>
     <string name="attribute_stealth_no">Dile kinahanglan ang stealth</string>
     <string name="attribute_firstaid_yes">Kinahanglan ug tigmintinar</string>
-    <string name="attribute_firstaid_no">Dile na kinahangalan ug tingtiminar</string>
     <string name="attribute_cow_yes">Tan-awa sa ang binuhi</string>
-    <string name="attribute_cow_no">Walay binuhi</string>
     <string name="attribute_field_puzzle_yes">Talan-awon sa uma</string>
     <string name="attribute_field_puzzle_no">Walay talan-awon sa uma</string>
     <string name="attribute_nightcache_yes">Cache sa pang-gabie</string>
@@ -821,49 +791,31 @@
     <string name="attribute_partnership_yes">Panag-uban nga cache</string>
     <string name="attribute_partnership_no">Dili panag-uban nga cache</string>
     <string name="attribute_fee_yes">Akses o bayad sa parking kay kinahanglan</string>
-    <string name="attribute_fee_no">Akses o bayad sa parking kay dili kinahanglan</string>
     <string name="attribute_rappelling_yes">Engranahe sa pagsaka kay kinahanglan</string>
-    <string name="attribute_rappelling_no">Dili kinahanglan og engranahe sa pagsaka</string>
     <string name="attribute_boat_yes">Kinahanglan og barko</string>
-    <string name="attribute_boat_no">Dili kinahanglan og barko</string>
     <string name="attribute_scuba_yes">Kinahanglan og scuba gear</string>
-    <string name="attribute_scuba_no">Dili kinahanglan og scuba gear</string>
     <string name="attribute_flashlight_yes">Kinahanglan og espat</string>
-    <string name="attribute_flashlight_no">Dili kinahanglan og espat</string>
     <string name="attribute_uv_yes">Kinahanglan og UV nga suga</string>
-    <string name="attribute_uv_no">Dili kinahanglan og UV nga suga</string>
     <string name="attribute_snowshoes_yes">Kinahanglan og snowshoes</string>
-    <string name="attribute_snowshoes_no">Dili kinahanglan og snowshoes</string>
     <string name="attribute_skiis_yes">Krus country nga mga ski kay kinahanglan</string>
-    <string name="attribute_skiis_no">Dili kinahanglan og mga krus country nga mga ski</string>
     <string name="attribute_s_tool_yes">Kinahanglan og espesyal nga mga hiramenta</string>
-    <string name="attribute_s_tool_no">Dili kinahanglan og espesyal na mga hiramenta</string>
     <string name="attribute_wirelessbeacon_yes">Wayirless na banwag</string>
-    <string name="attribute_wirelessbeacon_no">Walay wayirless na banwag</string>
     <string name="attribute_treeclimbing_yes">Kinahanglan ang pagsaka sa kahoy</string>
     <string name="attribute_treeclimbing_no">Dili kinahanglan ang pagsaka sa kahoy</string>
     <string name="attribute_poisonoak_yes">Makahilo na mga tanom</string>
     <string name="attribute_poisonoak_no">Walay makahilo na tanom</string>
     <string name="attribute_dangerousanimals_yes">Peligroso na mga hayop</string>
-    <string name="attribute_dangerousanimals_no">Walay peligroso na mga hayop</string>
     <string name="attribute_ticks_yes">Mga kato</string>
-    <string name="attribute_ticks_no">Walay mga kato</string>
     <string name="attribute_mine_yes">Gi-abandonar na mga mina</string>
-    <string name="attribute_mine_no">Walay gi-abandonar na mga mina</string>
     <string name="attribute_cliff_yes">Pangpang / Nangahulog na mga bato</string>
-    <string name="attribute_cliff_no">Walay pangpang / nangahulog na mga bato</string>
     <string name="attribute_hunting_yes">Pangayam</string>
-    <string name="attribute_hunting_no">Walay pangayam</string>
     <string name="attribute_danger_yes">Peligroso na lugar</string>
-    <string name="attribute_danger_no">Dili peligroso na lugar</string>
     <string name="attribute_thorn_yes">Mga tunok</string>
-    <string name="attribute_thorn_no">Walay tunok</string>
     <string name="attribute_wheelchair_yes">Naay maagian sa wiltsir</string>
     <string name="attribute_wheelchair_no">Dili maagian og wiltsir</string>
     <string name="attribute_parking_yes">Aduna\'y parking</string>
     <string name="attribute_parking_no">Walay magamit na parking</string>
     <string name="attribute_public_yes">Pampubliko nga transportasyon</string>
-    <string name="attribute_public_no">Walay pampubliko nga transportasyon</string>
     <string name="attribute_water_yes">Imnanan og tubig sa duol</string>
     <string name="attribute_water_no">Walay imnanan og tubig sa duol</string>
     <string name="attribute_restrooms_yes">Pampubliko nga banyo sa duol</string>
@@ -1042,10 +994,6 @@
     <string name="command_rename_list_result">Usba ang pangan sa listahan</string>
     <string name="command_delete_list_result">Gipapas na listahan</string>
     <string name="command_unique_list_result">Mga gipangwala nga cache gikan sa ubang mga listahan</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
-        <item quantity="other">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Ang kani na aksyon mahimong modulong sa taas nga network trapik. Sigurado ba ka na ganahan ka i-grupo og bag-ohon ang tanan n mga caches?</string>
     <string name="list_list_headline">Mga lista:</string>
     <plurals name="extract_waypoints_result">
@@ -1077,13 +1025,13 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahon</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -23,7 +24,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 /**
  * cgeo-specifc implementation for a date and time selector.
- *
+ * <br>
  * It is based on two text views (usually buttons) where selected date and time is displayed in a user-friendly way
  * and where on click a cgeo-specific pickup dialog appears. Time and reset is optional.
  */
@@ -55,6 +56,7 @@ public class DateTimeEditor {
         this.date = Calendar.getInstance();
 
         this.dateButton.setOnClickListener(new DateListener());
+        this.dateButton.setOnLongClickListener(new DateLongListener());
         if (this.timeButton != null) {
             this.timeButton.setOnClickListener(new TimeListener());
         }
@@ -149,9 +151,21 @@ public class DateTimeEditor {
 
                 // only update the date, but keep the previous time
                 date.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH), newDate.get(Calendar.DAY_OF_MONTH));
+                Settings.setLastUsedDate(newDate);
                 triggerChange();
             });
             dateDialog.show(fragmentManager, "date_dialog");
+        }
+    }
+
+    private class DateLongListener implements View.OnLongClickListener {
+
+        @Override
+        public boolean onLongClick(final View arg0) {
+            final Calendar newDate = Settings.getLastUsedDate();
+            date.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH), newDate.get(Calendar.DAY_OF_MONTH));
+            triggerChange();
+            return true;
         }
     }
 

@@ -47,6 +47,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
         HAS_OFFLINE_FOUND_LOG(R.string.cache_filter_status_select_label_has_offline_found_log, "has_offline_found_log", ImageParam.id(R.drawable.marker_found_offline)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.marker_usermodifiedcoords), R.string.cache_filter_status_select_infotext_solved_mystery),
+        CORRECTED_COORDINATES(R.string.cache_filter_status_select_label_corrected_coordinates, "corrected_coordinates", ImageParam.id(R.drawable.marker_usermodifiedcoords)),
         HAS_USER_DEFINED_WAYPOINTS(R.string.cache_filter_status_select_label_has_user_defined_waypoints, "has_user_defined_waypoints", ImageParam.id(R.drawable.marker_hasfinal));
 
         @StringRes public final int labelId;
@@ -87,6 +88,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasOfflineLog = null;
     private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
+    private Boolean statusCorrectedCoordinates = null;
     private Boolean statusHasUserDefinedWaypoints = null;
 
     @Override
@@ -103,7 +105,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
                 (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
                 (statusHasUserDefinedWaypoints != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
-                (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
+                (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null) ||
+                (statusCorrectedCoordinates != null && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
 
@@ -124,7 +127,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                         (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
                         (statusHasUserDefinedWaypoints == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoints) &&
                         (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
-                                (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
+                                (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery) &&
+                        (statusCorrectedCoordinates == null || cache.hasUserModifiedCoords() == statusCorrectedCoordinates);
     }
 
     public boolean isExcludeActive() {
@@ -247,6 +251,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusSolvedMystery = statusSolvedMystery;
     }
 
+    public Boolean getStatusCorrectedCoordinates() {
+        return statusCorrectedCoordinates;
+    }
+
+    public void setStatusCorrectedCoordinates(final Boolean statusCorrectedCoordinates) {
+        this.statusCorrectedCoordinates = statusCorrectedCoordinates;
+    }
+
     public Boolean getStatusHasUserDefinedWaypoint() {
         return statusHasUserDefinedWaypoints;
     }
@@ -290,6 +302,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
             checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
+            checkAndSetBooleanFlag(value, StatusType.CORRECTED_COORDINATES, b -> statusCorrectedCoordinates = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINTS, b -> statusHasUserDefinedWaypoints = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
@@ -333,6 +346,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG, result);
         checkAndAddFlagToDefaultList(statusHasUserDefinedWaypoints, StatusType.HAS_USER_DEFINED_WAYPOINTS, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
+        checkAndAddFlagToDefaultList(statusCorrectedCoordinates, StatusType.CORRECTED_COORDINATES, result);
         if (excludeActive) {
             result.add(FLAG_EXCLUDE_ACTIVE);
         }
@@ -359,7 +373,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         return statusOwned != null || statusFound != null || statusDnf != null || statusStored != null || statusFavorite != null ||
                 statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
                 statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
-                statusSolvedMystery != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
+                statusSolvedMystery != null || statusCorrectedCoordinates != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -434,6 +448,16 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 }
                 sqlBuilder.closeWhere();
             }
+            if (statusCorrectedCoordinates != null) {
+                final String coordsChangedWhere = sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = " + (statusCorrectedCoordinates ? "1" : "0");
+                if (statusCorrectedCoordinates) {
+                    //coorected coordinates have changed coords
+                    sqlBuilder.addWhere(coordsChangedWhere);
+                } else {
+                    //coorected coordinates don't have changed coords
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = 0");
+                }
+            }
             if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasUserDefinedWaypoints ? "" : "NOT ") +
@@ -471,6 +495,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
+        count = addIfStillFits(sb, count, statusCorrectedCoordinates, StatusType.CORRECTED_COORDINATES);
         count = addIfStillFits(sb, count, statusHasUserDefinedWaypoints, StatusType.HAS_USER_DEFINED_WAYPOINTS);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
         count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);

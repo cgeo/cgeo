@@ -128,8 +128,6 @@
     <string name="log_problem_other_label">אחר</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">תרגם ל%s</string>
-    <string name="translate_to_english">תרגם לאנגלית</string>
     <string name="translate_length_warning">תרגום עלול להיכשל עם כמות גדולה של טקסט.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
@@ -149,7 +147,6 @@
     <string name="err_detail_cache">c:geo אין אפשרות להציג את המטמון הרצוי. האם זה באמת מטמון?</string>
     <string name="err_detail_cache_find">ג: גיא לא יכול למצוא ג\'יוקש</string>
     <string name="err_detail_cache_find_some">ג: גיא לא יכול למצוא את הג\'יוקש</string>
-    <string name="err_detail_cache_find_any">ג: גיא לא יכול למצוא אף ג\'יוקשים</string>
     <string name="err_detail_no_spoiler">c:geo לא מצאה תמונות ספוילר עבור מטמון זה.</string>
     <string name="err_detail_still_working">עדיין עובד על משימה אחרת.</string>
     <string name="err_watchlist_failed">שינוי רשימת המעקב שלך נכשלה.</string>
@@ -200,7 +197,6 @@
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
     <string name="info_log_saved">c:geo שמר לוג זה בהצלחה.</string>
     <string name="info_log_post_failed">פירסום הלוג נכשל.</string>
-    <string name="info_log_post_failed_reason">סיבה:%s</string>
     <string name="info_log_post_retry">נסה שנית</string>
     <string name="info_log_post_save">שמור באופן לא מקוון</string>
     <string name="info_log_cleared">הלוג נוקה.</string>
@@ -256,9 +252,7 @@
     <string name="caches_sort_name">שם</string>
     <string name="caches_sort_rating">דירוג</string>
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
-    <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
-    <string name="caches_sort_date_logged">תאריך מציאה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
     <string name="caches_sort_storage">תאריך בו נשמר במכשיר</string>
@@ -376,18 +370,19 @@
     <!-- auth token -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">היום האחרון הזמין</string>
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
-    <string name="cache_dialog_refresh_message">Reloading cache details&#8230;</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <string name="init_longtap_map">לחיצה ארוכה על המפה</string>
     <string name="clear_goto_history">פעולה זו תמחק את כל נקודות הציון פרט לחמש האחרונות</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -420,14 +415,12 @@
     <!-- map -->
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
-    <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Loading trackable details&#8230;</string>
     <string name="trackable_brand">מותג</string>
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
     <!-- helpers -->
     <!-- export -->
     <string name="export_fieldnotes_uploading">Uploading&#8230;</string>
@@ -465,12 +458,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

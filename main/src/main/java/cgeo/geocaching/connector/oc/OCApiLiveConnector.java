@@ -48,8 +48,9 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED, UNKNOWN_FINDS);
 
     @SuppressWarnings("PMD.ExcessiveParameterList")
-    public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch) {
+    public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch, @StringRes final int prefKey) {
         super(name, host, https, prefix, CryptUtils.rot13(LocalizationUtils.getString(cKResId)), licenseString, apiSupport, abbreviation, apiBranch);
+        this.prefKey = prefKey;
 
         cS = CryptUtils.rot13(LocalizationUtils.getString(cSResId));
         this.isActivePrefKeyId = isActivePrefKeyId;
@@ -213,12 +214,6 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public SearchResult searchByNextPage(final Bundle context) {
         return OkapiClient.getCachesByNextPage(this, context);
-    }
-
-
-    @Override
-    public boolean isSearchForMyCaches(final String username) {
-        return StringUtils.equalsIgnoreCase(username, getUserName());
     }
 
     @Override

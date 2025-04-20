@@ -179,9 +179,6 @@
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate">Fordítás</string>
-    <string name="translate_to_sys_lang">Fordítás erre: %s</string>
-    <string name="translate_to_english">Fordítás angolra</string>
     <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -205,7 +202,6 @@
     <string name="err_detail_cache">Sajnáljuk, a c:geo nem tudja megmutatni a kért ládát. Biztos, hogy ez egy láda?</string>
     <string name="err_detail_cache_find">Sajnos a c:geo nem találja a ládát.</string>
     <string name="err_detail_cache_find_some">Sajnos a c:geo nem találja azt a ládát.</string>
-    <string name="err_detail_cache_find_any">Sajnos a c:geo nem talál ládákat.</string>
     <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
     <string name="err_detail_still_working">Egy másik feladat még folyamatban van.</string>
     <string name="err_detail_premium_log_found">Ez a láda csak a geocaching.com prémium tagjai számára érhető el. Ezért a láda információi nem jeleníthetők meg.\n\nHa azonban már megtaláltad ezt a ládát, itt logolhatod.</string>
@@ -262,7 +258,6 @@
     <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
     <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
     <string name="info_log_post_failed">Log küldése sikertelen.</string>
-    <string name="info_log_post_failed_reason">Oka: %s</string>
     <string name="info_log_post_retry">Újra</string>
     <string name="info_log_post_save">Offline mentés</string>
     <string name="info_log_cleared">A bejegyzés törölve.</string>
@@ -318,9 +313,7 @@
     <string name="caches_sort_name">Név</string>
     <string name="caches_sort_rating">Értékelés</string>
     <string name="caches_sort_vote">Saját értékelés</string>
-    <string name="caches_sort_inventory">Utazók száma</string>
     <string name="caches_sort_date_hidden">Rejtés dátuma</string>
-    <string name="caches_sort_date_logged">Logolás dátuma</string>
     <string name="caches_sort_finds">Találatok száma</string>
     <string name="caches_sort_state">Állapot</string>
     <string name="caches_sort_storage">Mentés dátuma</string>
@@ -482,7 +475,6 @@
     <string name="settings_authorize">A c:geo hitelesítése</string>
     <string name="settings_reauthorize">Engedély frissítése vagy törlése</string>
     <string name="settings_gc_description">A c:geo hitelesítése a geocaching.com-on ládák kereséséhez.</string>
-    <string name="settings_ec_description">A c:geo hitelesítése az extremcaching.com-on ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
     <string name="settings_su_description">A c:geo hitelesítése a geocaching.su-n ládák kereséséhez.</string>
     <string name="init_summary_oc_de">Ládák letöltése az opencaching.de-ről</string>
     <string name="init_oc_de_description">A c:geo hitelesítése az opencaching.de-n ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
@@ -540,8 +532,6 @@
     <string name="init_brouterProfileWalk">\"Séta\" profil</string>
     <string name="init_brouterProfileBike">\"Bicikli\" profil</string>
     <string name="init_brouterProfileCar">\"Autó\" profil</string>
-    <string name="init_save_log_img">Logokban található képek mentése</string>
-    <string name="init_summary_save_log_img">Logokban található képek mentése</string>
     <string name="init_units">Mérföld/láb használata</string>
     <string name="init_summary_units">Mérföld/láb használata\n(angolszász mértékegységek)</string>
     <string name="init_log_offline">Offline logolás</string>
@@ -602,7 +592,6 @@
     <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_maintenance">Karbantartás</string>
-    <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
     <string name="init_location">Helymeghatározás</string>
     <string name="init_location_note">A Google Play-szolgáltatásokat használó készülékeken a c:geo automatikusan egy jobb helymeghatározó technikát használhat. Ez azonban lehetetlenné teszi külső, BlueTooth-os GPS vevő alkalmazását.</string>
     <string name="init_location_googleplayservices">Google Play-szolgáltatások használata</string>
@@ -677,6 +666,7 @@
     <string name="auth_dialog_completed_geokrety">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
     <string name="err_auth_geokrety_unknown">%1$s visszatérési értéke: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d láda</item>
@@ -710,7 +700,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">több mint egy évvel ezelőtt</string>
     <string name="cache_premium">Prémium</string>
-    <string name="cache_inventory">Utazók</string>
     <string name="cache_log_image_default_title">Fotó</string>
     <string name="cache_personal_note">Személyes megjegyzés</string>
     <string name="cache_personal_note_edit">Szerkesztés</string>
@@ -750,8 +739,6 @@
     <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
     <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
     <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
-    <string name="cache_dialog_refresh_title">Frissítés</string>
-    <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -817,6 +804,7 @@
     <string name="cache_time_full_hours">óra</string>
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
@@ -892,19 +880,10 @@
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
-    <string name="search_coordinates_button">Keresés koordinátákkal</string>
     <string name="search_address">Cím</string>
-    <string name="search_address_button">Keresés címmel</string>
-    <string name="search_kw_prefill">Kulcsszó</string>
-    <string name="search_kw_button">Keresés kulcsszóval</string>
-    <string name="search_hbu_prefill">Tulajdonos</string>
-    <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
     <string name="search_tb">Utazó</string>
-    <string name="search_tb_hint">Utazó azonosítója</string>
-    <string name="search_tb_button">Utazó keresése</string>
     <string name="search_address_started">Helyek keresése</string>
     <string name="search_address_result">Megtalált helyek</string>
-    <string name="search_own_caches">Saját ládák keresése</string>
     <string name="search_pocket_title">Pocket lekérdezés</string>
     <!-- trackable -->
     <string name="trackable">Utazó</string>
@@ -948,10 +927,6 @@
     <string name="destination_select">Cél kiválasztása</string>
     <string name="osmand_marker_cgeo">c:geo jelölő</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenc</string>
-    <string name="license_show">Licenc mutatása</string>
-    <string name="license_dismiss">Elutasítás</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Múltbéli esemény</string>
     <string name="helper_calendar_pastevent_question">Az esemény időpontja már elmúlt. Mégis hozzáadod?</string>
@@ -959,11 +934,9 @@
     <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz ládákat küldeni a készülékedre.</string>
     <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
     <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
-    <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
     <string name="helper_gps_locker_description">A GPS Locker stabil GPS-jelről gondoskodik alkalmazások közötti váltáskor és készüléked képernyőjének kikapcsolása után is.</string>
     <string name="helper_google_translate_title">Google Fordító</string>
     <string name="helper_google_translate_description">A Google Fordító alkalmazáshoz letöltött fordítócsomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
-    <string name="helper_where_you_go_description">A WhereYouGo lehetővé teszi Wherigo ládák keresését és játszását. A c:geo képes automatikusan elindítani a cartridge fájlok létöltését a programon belül.</string>
     <!-- export -->
     <string name="export">Exportálás</string>
     <string name="export_progress">Exportálás: %1$s</string>
@@ -1020,9 +993,7 @@
     <string name="attribute_climbing_yes">Nehéz mászás</string>
     <string name="attribute_climbing_no">Nincs nehéz mászás</string>
     <string name="attribute_wading_yes">Szükséges lehet vízben gázolni</string>
-    <string name="attribute_wading_no">Nem kell vízben gázolni</string>
     <string name="attribute_swimming_yes">Úszás szükséges</string>
-    <string name="attribute_swimming_no">Úszás nem szükséges</string>
     <string name="attribute_available_yes">Mindig hozzáférhető</string>
     <string name="attribute_available_no">Nem mindig férhető hozzá</string>
     <string name="attribute_night_yes">Éjszaka ajánlott</string>
@@ -1032,9 +1003,7 @@
     <string name="attribute_stealth_yes">Rejtőzködés szükséges</string>
     <string name="attribute_stealth_no">Rejtőzködés nem szükséges</string>
     <string name="attribute_firstaid_yes">Karbantartás szükséges</string>
-    <string name="attribute_firstaid_no">Karbantartás nem szükséges</string>
     <string name="attribute_cow_yes">Figyelni kell a haszonállatokra</string>
-    <string name="attribute_cow_no">Nincsenek haszonállatok</string>
     <string name="attribute_field_puzzle_yes">Helyszíni rejtvény</string>
     <string name="attribute_field_puzzle_no">Nem helyszíni rejtvény</string>
     <string name="attribute_nightcache_yes">Éjszakai láda</string>
@@ -1062,49 +1031,31 @@
     <string name="attribute_partnership_yes">Társasági láda</string>
     <string name="attribute_partnership_no">Nem társasági láda</string>
     <string name="attribute_fee_yes">Belépő- vagy parkolódíj szükséges</string>
-    <string name="attribute_fee_no">Belépő- vagy parkolódíj nem szükséges</string>
     <string name="attribute_rappelling_yes">Mászófelszerelés szükséges</string>
-    <string name="attribute_rappelling_no">Mászófelszerelés nem szükséges</string>
     <string name="attribute_boat_yes">Hajó szükséges</string>
-    <string name="attribute_boat_no">Hajó nem szükséges</string>
     <string name="attribute_scuba_yes">Búvárfelszerelés szükséges</string>
-    <string name="attribute_scuba_no">Búvárfelszerelés nem szükséges</string>
     <string name="attribute_flashlight_yes">Zseblámpa szükséges</string>
-    <string name="attribute_flashlight_no">Zseblámpa nem szükséges</string>
     <string name="attribute_uv_yes">UV lámpa szükséges</string>
-    <string name="attribute_uv_no">UV lámpa nem szükséges</string>
     <string name="attribute_snowshoes_yes">Hótaposó szükséges</string>
-    <string name="attribute_snowshoes_no">Hótaposó nem szükséges</string>
     <string name="attribute_skiis_yes">Sífutóléc szükséges</string>
-    <string name="attribute_skiis_no">Sífutóléc nem szükséges</string>
     <string name="attribute_s_tool_yes">Speciális szerszám szükséges</string>
-    <string name="attribute_s_tool_no">Speciális szerszám nem szükséges</string>
     <string name="attribute_wirelessbeacon_yes">Vezeték nélküli jeladó</string>
-    <string name="attribute_wirelessbeacon_no">Nincs vezeték nélküli jeladó</string>
     <string name="attribute_treeclimbing_yes">Fáramászás szükséges</string>
     <string name="attribute_treeclimbing_no">Fáramászás nem szükséges</string>
     <string name="attribute_poisonoak_yes">Mérgező növények</string>
     <string name="attribute_poisonoak_no">Nincsenek mérgező növények</string>
     <string name="attribute_dangerousanimals_yes">Veszélyes állatok</string>
-    <string name="attribute_dangerousanimals_no">Nincsenek veszélyes állatok</string>
     <string name="attribute_ticks_yes">Kullancsveszély</string>
-    <string name="attribute_ticks_no">Nincs kullancsveszély</string>
     <string name="attribute_mine_yes">Elhagyott bánya</string>
-    <string name="attribute_mine_no">Nem elhagyott bánya</string>
     <string name="attribute_cliff_yes">Szakadék / leeső sziklák</string>
-    <string name="attribute_cliff_no">Nincs szakadék / leeső szikla</string>
     <string name="attribute_hunting_yes">Vadászat</string>
-    <string name="attribute_hunting_no">Nincs vadászat</string>
     <string name="attribute_danger_yes">Veszélyes terület</string>
-    <string name="attribute_danger_no">Nem veszélyes terület</string>
     <string name="attribute_thorn_yes">Tüskék</string>
-    <string name="attribute_thorn_no">Nincsenek tüskék</string>
     <string name="attribute_wheelchair_yes">Kerekesszékkel hozzáférhető</string>
     <string name="attribute_wheelchair_no">Kerekesszékkel nem hozzáférhető</string>
     <string name="attribute_parking_yes">Van parkolóhely</string>
     <string name="attribute_parking_no">Nincs parkolóhely</string>
     <string name="attribute_public_yes">Tömegközlekedéssel hozzáférhető</string>
-    <string name="attribute_public_no">Tömegközlekedéssel nem hozzáférhető</string>
     <string name="attribute_water_yes">Ivóvíz a közelben</string>
     <string name="attribute_water_no">Nincs ivóvíz a közelben</string>
     <string name="attribute_restrooms_yes">Nyilvános pihenőhely a közelben</string>
@@ -1289,10 +1240,6 @@
     <string name="command_rename_list_result">Átnevezett lista</string>
     <string name="command_delete_list_result">Törölt lista</string>
     <string name="command_unique_list_result">Ládák törölve</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
-        <item quantity="other">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Ez a művelet nagy hálózati forgalmat okozhat. Biztosan frissíteni akarod összes ládát?</string>
     <string name="list_list_headline">Listák:</string>
     <plurals name="extract_waypoints_result">
@@ -1331,13 +1278,13 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Mégsem</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

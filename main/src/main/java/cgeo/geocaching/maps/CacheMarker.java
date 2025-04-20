@@ -21,15 +21,6 @@ public class CacheMarker {
         drawable.draw(canvas);
     }
 
-    /**
-     * fallback contructor
-     *
-     * @param drawable
-     */
-    public CacheMarker(final Drawable drawable) {
-        this(0, drawable);
-    }
-
     public Drawable getDrawable() {
         return drawable;
     }

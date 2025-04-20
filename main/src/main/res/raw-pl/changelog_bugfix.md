@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Naprawiono: Status ulubionej skrytki był tracony podczas wybierania obrazu podczas przygotowywania wpisu
 
 ##
-- Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
-- Poprawka: Błąd podczas otwierania mapy z pustymi nazwami plików śladu
-- Poprawka: Automatyczne obracanie mapy jest nadal aktywne po zresetowaniu przy użyciu róży kompasu (UnifiedMap)
-- Poprawka: Brakujący kompas w trybach automatycznego obrotu na mapach Google (UnifiedMap)
-- Poprawka: Nie można załadować logów przedmiotów podróżnych ze względu na zmiany w witrynie
-- Zmiana: Połączenie informacji o wysokości + informacji o współrzędnych w menu po długim dotknięciu mapy w pojedynczą „wybraną pozycję” + pokaż odległość do bieżącej pozycji
+- Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
+- Naprawiono: Nieczytelny komunikat o błędzie podczas publikowania wpisu dziennika
+- Cofnięto: Wykrywanie lokalnych plików .map (ze względu na niepożądane efekty uboczne)
 
 ##
-- Nowość: Usuwanie wpisów offline za pomocą menu kontekstowego
-- Poprawka: Usuwanie wpisów offline czasami nie działało
-- Poprawka: Tracono nazwę filtra przy szybkiej zmianie filtra
-- Zmiana: Sortowanie plików ze śladami według nazwy
-- Zmiana: Zapisz działanie dla przedmiotu podróżnego również dla wpisów offline
-- Poprawka: Przełączanie mapy na współrzędne 0,0 przy zmianie typu mapy (UnifiedMap)
-- Poprawka: Cel punktu nawigacji przełączał się na skrytkę jako cel (UnifiedMap)
-- Poprawka: „Zapisywanie” skrytki bez wybierania listy
-- Poprawka: Błąd logowania z powodu zmiany strony na geocaching.com
-- Zmiana: Pokaż informacje o wysokości pod znacznikiem pozycji (jeśli aktywowany)
-- UWAGA: Istnieje więcej problemów z powodu ostatnich zmian na stronie geocaching.com, które nie zostały jeszcze naprawione. Pracujemy nad tym. Zobacz bieżący postęp na [stronie statusu](https://github.com/cgeo/cgeo/issues/15555).
+- Naprawiono: Wherigo: Obsługa stref z nieważnymi/zbyt bliskimi współrzędnymi
+- Naprawiono: c:geo próbował importować lokalne pliki „.map” jako GPX
+- Naprawiono: Edycja notatek użytkownika z wyskakującego okienka czasami była tracona
+- Naprawiono: Edycja dziennika pokazywała opcję „zgłoś problem”
+- Naprawiono: Filtr na żywo „Nie zawiera” nie zwraca żadnych skrytek
+- Naprawiono: Awarie przy wstrzymaniu mapy sieciowej UnifiedMap
+- Naprawiono: Nieaktualna aplikacja „GPS Bluethooth” na liście przydatnych aplikacji
+- Naprawiono: Zmienne i/lub wartości są błędnie usuwane podczas edycji osobistej notatki
+- Naprawiono: Wherigo: Nieprawidłowe informacje o wysokości
+- Naprawiono: Wherigo: Wszystkie teksty przycisków są pisane wielkimi literami
+- Naprawiono: Awaria w ustawieniach
+- Naprawiono: Aplikacja c:geo nie była wymieniona w Sklepie Play dla urządzeń bez GPS
+- Naprawiono: Awaria c:geo przy wyborze folderu w niektórych konfiguracjach
+- Zmiana: ekstremcaching.com został konektorem offline (serwis zakończył działanie)
+- Naprawiono: Aktualizowanie informacji o statusie na mapie po zmianach poziomu powiększenia

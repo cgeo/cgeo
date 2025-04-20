@@ -3,32 +3,47 @@ package cgeo.geocaching.list;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
 public final class StoredList extends AbstractList {
@@ -37,7 +52,7 @@ public final class StoredList extends AbstractList {
     public static final int STANDARD_LIST_ID = 1;
     public final int markerId;
     public final boolean preventAskForDeletion;
-    private final int count; // this value is only valid as long as the list is not changed by other database operations
+    private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
         super(id, title);
@@ -76,24 +91,17 @@ public final class StoredList extends AbstractList {
 
         private static final String GROUP_SEPARATOR = ":";
 
-        private static final String SYSTEM_GROUP_PREFIX = "system-group-";
-        private static final String SELECTED_GROUP_PREFIX = "selected-group-";
-
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
             res = CgeoApplication.getInstance().getResources();
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
-            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), ListNameMemento.EMPTY);
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), -1, ListNameMemento.EMPTY);
         }
 
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> currentListIds, final boolean fastStoreOnLastSelection) {
             promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.emptySet(), currentListIds, ListNameMemento.EMPTY, fastStoreOnLastSelection);
-        }
-
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, @NonNull final ListNameMemento listNameMemento) {
-            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), listNameMemento);
         }
 
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento, final boolean fastStoreOnLastSelection) {
@@ -145,18 +153,27 @@ public final class StoredList extends AbstractList {
             );
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final int preselectedListId, @Nullable final ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.emptySet());
             final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+            if (preselectedListId >= 0) {
+                final Optional<AbstractList> selected = lists.stream().filter(list -> list.id == preselectedListId).findFirst();
+                if (selected.isPresent()) {
+                    model
+                        .setScrollAnchor(selected.get())
+                        .setSelectedItems(Collections.singleton(selected.get()))
+                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
+                }
+            }
             configureListDisplay(model, null);
 
             SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(model, item -> {
                         if (item == PseudoList.NEW_LIST) {
                             // create new list on the fly
-                            promptForListCreation(runAfterwards, listNameMemento.getTerm());
+                            promptForListCreation(runAfterwards, listNameMemento == null ? StringUtils.EMPTY : listNameMemento.getTerm());
                         } else {
                             runAfterwards.call(item.id);
                         }
@@ -166,60 +183,79 @@ public final class StoredList extends AbstractList {
 
         private void configureListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model, final Set<Integer> selectedListIds) {
 
-            //prepare display: find out which groups will have >= 2 items
-            final Map<String, Integer> occurences = CommonUtils.countOccurences(model.getItems(), item -> getGroupFromList(item, selectedListIds));
-
-
             //Display for normal items
-            model.setDisplayMapper((item) -> {
+            model.setDisplayMapper((item, itemGroup) -> {
                 String title = item.getTitle();
-                final String group = getGroupFromList(item, selectedListIds);
-                if (item instanceof StoredList && occurences.containsKey(group) && occurences.get(group) >= 2) {
-                    //cut off the group header
-                    final int idx = title.indexOf(GROUP_SEPARATOR);
-                    if (idx >= 0) {
-                        title = title.substring(idx + GROUP_SEPARATOR.length());
+                if (item instanceof StoredList) {
+                    final String parentTitle = itemGroup == null || itemGroup.getGroup() == null ? "" : itemGroup.getGroup().toString();
+                    if (title.startsWith(parentTitle + GROUP_SEPARATOR)) {
+                        title = title.substring(parentTitle.length() + 1);
                     }
                     return TextParam.text(title + " [" + ((StoredList) item).count + "]");
                 }
                 return TextParam.text(item.getTitleAndCount());
-            }, AbstractList::getTitle, null);
+            }, (item, itemGroup) -> item.getTitle(), null);
             model.setDisplayIconMapper((item) -> UserInterface.getImageForList(item, false));
 
 
             //GROUPING
             model.activateGrouping(item -> getGroupFromList(item, selectedListIds))
-                .setGroupComparator(CommonUtils.getListSortingComparator(null, true, getSortedGroups(model.getItems(), selectedListIds)))
-                .setGroupDisplayMapper((t, elements) -> TextParam.text("**" + t.trim() + "** *(" + elements.size() + ")*").setMarkdown(true))
-                .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
-                .setHasGroupHeaderMapper((g, elements) -> elements.size() >= 2)
-                .setReducedGroupSaver("storedlist", g -> g, g -> g);
+                    .setGroupGroupMapper(UserInterface::getGroupFromGroup)
+                    .setItemGroupComparator(getGroupAwareListSorter(selectedListIds))
+                    .setGroupDisplayMapper(gi -> {
+                        final String parentGroup = gi.getParent() == null || gi.getParent().getGroup() == null ? "" : gi.getParent().getGroup();
+                        String title = gi.getGroup();
+                        if (title.startsWith(parentGroup + GROUP_SEPARATOR)) {
+                            title = title.substring(parentGroup.length() + 1);
+                        }
+                        return TextParam.text("**" + title + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true);
+                    })
+                    .setGroupDisplayIconMapper(gi -> gi.getItems().isEmpty() ? null : getImageForList(gi.getItems().get(0), true))
+                    .setGroupPruner(gi -> gi.getSize() >= 2)
+                    .setReducedGroupSaver("storedlist", g -> g, g -> g);
         }
 
-        private static List<String> getSortedGroups(final List<AbstractList> items, final Set<Integer> selectedIds) {
-            //Group sorting:
-            // 1. "Create new", "Stored",
-            // 2. Grouped and ungrouped lists with selected items in them (sorted alphabetically)
-            // 2. Grouped and ungrouped lists w/o selected items (sorted alphabetically)
-            // 4. "All", "History"
 
-            //find groups with selected items in them
-            final Set<String> groupsWithSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID && selectedIds != null && selectedIds.contains(item.id))
-                .map(item -> getGroupFromList(item, selectedIds)).collect(Collectors.toSet());
-            final Set<String> groupsWoSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID)
-                .map(item -> getGroupFromList(item, selectedIds)).collect(Collectors.toSet());
-            groupsWoSelection.removeAll(groupsWithSelection);
+        private Comparator<Object> getGroupAwareListSorter(final Set<Integer> selectedIds) {
+            final Collator collator = Collator.getInstance();
+            return CommonUtils.getNullHandlingComparator((p1, p2) -> collator.compare(getSortString(p1, selectedIds), getSortString(p2, selectedIds)), true);
+        }
 
-            final List<String> sortedGroups = new ArrayList<>();
-            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.NEW_LIST.id);
-            sortedGroups.add(SYSTEM_GROUP_PREFIX + StoredList.STANDARD_LIST_ID);
-            sortedGroups.addAll(TextUtils.sortListLocaleAware(new ArrayList<>(groupsWithSelection)));
-            sortedGroups.addAll(TextUtils.sortListLocaleAware(new ArrayList<>(groupsWoSelection)));
-            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.ALL_LIST.id);
-            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.HISTORY_LIST.id);
+        private String getSortString(final Object item, final Set<Integer> selectedIds) {
+            //Stored list sorting:
+            // A. If displayed: "Create new"
+            // B. If displayed: "Stored",
+            // C. If multiselect: preselected lists in alphabetic order (those are not grouped)
+            // D. Grouped and ungrouped user lists w/o selected items (each level sorted alphabetically, groups and lists intermixed)
+            // E. If displayed: "All"
+            // F. If displayed: "History"
 
-            return sortedGroups;
+            if (item instanceof ItemGroup) {
+                return "D-" + ((ItemGroup<?, ?>) item).getGroup().toString();
+            }
+            if (!(item instanceof AbstractList)) {
+                //should never happen, just a safety guard
+                return "X-" + item;
+            }
 
+            final AbstractList list = (AbstractList) item;
+
+            if (list.id == PseudoList.NEW_LIST.id) {
+              return "A";
+            }
+            if (list.id == STANDARD_LIST_ID) {
+                return "B";
+            }
+            if (list.id == PseudoList.ALL_LIST.id) {
+                return "E";
+            }
+            if (list.id == PseudoList.HISTORY_LIST.id) {
+                return "F";
+            }
+            if (selectedIds != null && selectedIds.contains(list.id)) {
+                return "C-" + list.getTitle();
+            }
+            return "D-" + list.getTitle();
         }
 
         public static ImageParam getImageForList(final AbstractList item, final boolean isGroup) {
@@ -243,18 +279,23 @@ public final class StoredList extends AbstractList {
         }
 
         private static String getGroupFromList(final AbstractList item, final Set<Integer> selectedIds) {
-            //special groups
-            if (item.id == StoredList.STANDARD_LIST_ID || item.id == PseudoList.NEW_LIST.id ||
-                item.id == PseudoList.HISTORY_LIST.id || item.id == PseudoList.ALL_LIST.id) {
-                return SYSTEM_GROUP_PREFIX + item.id;
+            //only stored lists can have groups
+            if (!(item instanceof StoredList)) {
+                return null;
             }
-            final String title = item == null || item.getTitle() == null ? "" : item.getTitle();
-            //selected lists are always their own group -> mark them as such
+            //selected lists are not in a group
             if (selectedIds != null && selectedIds.contains(item.id)) {
-                return SELECTED_GROUP_PREFIX + title;
+                return null;
             }
-            final int idx = title.indexOf(GROUP_SEPARATOR);
-            return idx > 0 ? title.substring(0, idx).trim() : title.trim();
+            return getGroupFromGroup(item.getTitle());
+        }
+
+        private static String getGroupFromGroup(final String group) {
+            if (group == null) {
+                return null;
+            }
+            final int idx = group.lastIndexOf(GROUP_SEPARATOR);
+            return idx <= 0 ? null : group.substring(0, idx);
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
@@ -262,7 +303,7 @@ public final class StoredList extends AbstractList {
         }
 
         private static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
-            final List<AbstractList> lists = new ArrayList<>(getSortedLists(selectedLists));
+            final List<AbstractList> lists = new ArrayList<>(DataStore.getLists());
 
             if (exceptListIds.contains(STANDARD_LIST_ID)) {
                 lists.remove(DataStore.getList(STANDARD_LIST_ID));
@@ -285,30 +326,6 @@ public final class StoredList extends AbstractList {
             if (!exceptListIds.contains(PseudoList.NEW_LIST.id)) {
                 lists.add(0, PseudoList.NEW_LIST);
             }
-            return lists;
-        }
-
-        @NonNull
-        private static List<StoredList> getSortedLists(final Set<Integer> selectedLists) {
-            final Collator collator = Collator.getInstance();
-            final List<StoredList> lists = DataStore.getLists();
-            Collections.sort(lists, (lhs, rhs) -> {
-                if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
-                    return -1;
-                }
-                if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
-                    return 1;
-                }
-                // have the standard list at the top
-                if (lhs.id == STANDARD_LIST_ID) {
-                    return -1;
-                }
-                if (rhs.id == STANDARD_LIST_ID) {
-                    return 1;
-                }
-                // otherwise sort alphabetical
-                return collator.compare(lhs.getTitle(), rhs.getTitle());
-            });
             return lists;
         }
 
@@ -356,12 +373,43 @@ public final class StoredList extends AbstractList {
             if (activity == null) {
                 return;
             }
-            SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
-                    .input(new SimpleDialog.InputOptions().setInitialValue(defaultValue), input -> {
-                        if (StringUtils.isNotBlank(input)) {
-                            runnable.call(input);
-                        }
-                    });
+
+            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+            final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
+            final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+
+            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
+
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            final boolean hasHierarchies = hierarchies.size() > 1;
+            if (hasHierarchies) {
+                if (StringUtils.isEmpty(hierarchies.get(0))) {
+                    hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
+                }
+                listprefix.setVisibility(View.VISIBLE);
+                listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+                listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
+            } else {
+                listprefix.setVisibility(View.GONE);
+            }
+
+            ((EditText) menu.findViewById(R.id.title)).setText(current);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+                    .setTitle(dialogTitle)
+                    .setPositiveButton(buttonTitle, ((d, which) -> {
+                            String prefix = "";
+                            if (hasHierarchies) {
+                                final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                                if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                                    prefix = temp;
+                                }
+                            }
+                            runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
+                        }))
+                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                    .setView(menu);
+            Keyboard.show(activity, menu.findViewById(R.id.title));
+            builder.show();
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -370,6 +418,59 @@ public final class StoredList extends AbstractList {
                 DataStore.renameList(listId, listName);
                 runAfterRename.run();
             });
+        }
+
+        public void promptForListPrefixRename(final Runnable runAfterRename) {
+            final Activity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            if (hierarchies.size() == 1) {
+                return;
+            }
+
+            if (StringUtils.isEmpty(hierarchies.get(0))) {
+                hierarchies.remove(0);
+            }
+
+            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+            final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
+            final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText title = menu.findViewById(R.id.title);
+
+            listprefix.setVisibility(View.VISIBLE);
+            listprefix.setHint(R.string.rename_from);
+            listprefixView.setText(hierarchies.get(0));
+            listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
+
+            ((TextInputLayout) menu.findViewById(R.id.titleWrapper)).setHint(R.string.rename_to);
+            title.setText(hierarchies.get(0));
+
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+                    .setTitle(R.string.list_menu_rename_list_prefix)
+                    .setPositiveButton(android.R.string.ok, ((d, which) -> {
+                        final String from = listprefixView.getText().toString();
+                        final String to = title.getText().toString();
+                        if (!StringUtils.equals(from, to)) {
+                            SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
+                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(":") < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                ).confirm(() -> {
+                                    DataStore.renameListPrefix(from, to);
+                                    runAfterRename.run();
+                                });
+                            }
+                        }))
+                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                    .setView(menu);
+            Keyboard.show(activity, title);
+            final AlertDialog dialog = builder.show();
+
+            listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                ((EditText) menu.findViewById(R.id.title)).setText(s);
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+            }));
         }
 
     }
@@ -386,6 +487,11 @@ public final class StoredList extends AbstractList {
     @Override
     public int getNumberOfCaches() {
         return count;
+    }
+
+    @Override
+    public void updateNumberOfCaches() {
+        count = DataStore.getList(id).count;
     }
 
     /**

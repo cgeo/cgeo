@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Encapsulates a {@link VariableMap} but adds semantic of a list to it
  * (e.g. it includes and maintains ordering).
- *
+ * <br>
  * It also maintains modification state and provides hooks for loading and saving a Variable Lists state e.g. for persistence (load-from/store-to DB)
  */
 public class VariableList {
@@ -99,7 +99,8 @@ public class VariableList {
     public Map<String, String> toMap() {
         final Map<String, String> result = new HashMap<>();
         for (String varName : variableList) {
-            result.put(varName, getState(varName).getFormulaString());
+            final String varValue = getState(varName).getFormulaString();
+            result.put(varName, StringUtils.isBlank(varValue) ? "" : varValue);
         }
         return result;
     }
@@ -147,7 +148,7 @@ public class VariableList {
      */
     public boolean changeVariable(final String var, final String formula) {
         if (!variablesSet.containsKey(var) ||
-                Objects.equals(Objects.requireNonNull(variableMap.get(var)).getFormulaString(), formula)) {
+                Objects.equals((variableMap.get(var) == null ? null : variableMap.get(var).getFormulaString()), formula)) {
             return false;
         }
         variableMap.put(var, formula);

@@ -15,9 +15,9 @@ import androidx.preference.PreferenceViewHolder;
 /**
  * ButtonPreference:
  * Regular preference, displaying a button in the widget area.
- *
+ * <br>
  * Buttons defaults to "add" symbol, but can be set via app:src="res-id" in preferences xml file.
- *
+ * <br>
  * Use setCallback() to define a callback function for the widget's button.
  * Use hideButton() to hide or show the widget's button.
  */

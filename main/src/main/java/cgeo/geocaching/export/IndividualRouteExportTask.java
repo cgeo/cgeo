@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
-import cgeo.geocaching.utils.XmlUtils;
+import cgeo.geocaching.utils.xml.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
@@ -88,10 +88,12 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
 
             gpx.startTag(NS_GPX, exportAsTrack ? "trk" : "rte");
             XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo individual route " + timeInfo);
+            if (exportAsTrack) {
+                gpx.startTag(null, "trkseg");
+            }
             for (RouteSegment loc : trail) {
                 final String segmentName = loc.getItem().getIdentifier();
                 if (exportAsTrack) {
-                    gpx.startTag(null, "trkseg");
                     final ArrayList<Geopoint> points = loc.getPoints();
                     // trkseg does not have a name entity, so we put the name into the last trkpt
                     final int size = points.size();
@@ -100,12 +102,14 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
                         exportPoint(gpx, "trkpt", point, current < size ? null : segmentName);
                         current++;
                     }
-                    gpx.endTag(null, "trkseg");
                 } else {
                     exportPoint(gpx, "rtept", loc.getPoint(), segmentName);
                 }
                 countExported++;
                 publishProgress(countExported);
+            }
+            if (exportAsTrack) {
+                gpx.endTag(null, "trkseg");
             }
             gpx.endTag(NS_GPX, exportAsTrack ? "trk" : "rte");
             gpx.endTag(NS_GPX, "gpx");

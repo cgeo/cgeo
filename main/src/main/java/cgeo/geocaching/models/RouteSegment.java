@@ -22,9 +22,14 @@ public class RouteSegment implements Parcelable {
         this.linkToPreviousSegment = linkToPreviousSegment;
     }
 
+    public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points, final ArrayList<Float> elevation, final boolean linkToPreviousSegment) {
+        this(item, points, linkToPreviousSegment);
+        this.elevation = elevation;
+    }
+
     public float calculateDistance() {
         distance = 0.0f;
-        if (points.size() > 0) {
+        if (!points.isEmpty()) {
             Geopoint last = points.get(0);
             for (Geopoint point : points) {
                 distance += last.distanceTo(point);
@@ -43,7 +48,7 @@ public class RouteSegment implements Parcelable {
     }
 
     public ArrayList<Geopoint> getPoints() {
-        if (null == points || points.size() == 0) {
+        if (null == points || points.isEmpty()) {
             this.points = new ArrayList<>();
             final Geopoint point = item.getPoint();
             if (null != point) {

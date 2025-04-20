@@ -9,6 +9,8 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.PreferenceUtils;
+import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -35,9 +37,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
         initMapSourcePreference();
 
-        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
-        useUnified.setChecked(Settings.useUnifiedMap());
-
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
         // new unified map providers
         final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
@@ -51,6 +50,31 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         }
         hideTileprovidersPref.setEntries(tpEntries);
         hideTileprovidersPref.setEntryValues(tpValues);
+
+        setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
+            setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
+            setFlagForRestartRequired();
+            return true;
+        });
+
+        final ListPreference unifiedMapVariants = findPreference(getString(R.string.pref_unifiedMapVariants));
+        unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
+        unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
+        setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
+
+        // UnifiedMap/legacy maps switch
+        final CheckBoxPreference useLegacyMap = findPreference(getString(R.string.pref_useLegacyMap));
+        useLegacyMap.setOnPreferenceChangeListener((preference, newValue) -> {
+            final boolean useUnifiedMap = !((boolean) newValue);
+            findPreference(getString(R.string.pref_tileprovider)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_tileprovider_hidden)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_unifiedMapVariants)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setEnabled(useUnifiedMap);
+            findPreference(getString(R.string.pref_mapsource)).setEnabled(!useUnifiedMap);
+            return true;
+        });
+        useLegacyMap.setChecked(Settings.useLegacyMaps());
     }
 
     @Override
@@ -62,12 +86,8 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
-        setPrefClick(this, R.string.pref_fakekey_info_offline_maphillshading, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_hillshading)));
 
         initPublicFolders(this, activity.getCsah());
-
-        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
-        useUnified.setChecked(Settings.useUnifiedMap());
     }
 
     /**
@@ -153,4 +173,9 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         });
 
     }
+
+    private void setUserDefinedTileProviderUriSummary(final String uri) {
+        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
+    }
+
 }

@@ -17,6 +17,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -135,7 +136,7 @@ public final class NavigationAppFactory {
          */
         public final int preferenceKey;
 
-        /*
+        /**
          * display app name in array adapter
          *
          * @see java.lang.Enum#toString()
@@ -150,12 +151,12 @@ public final class NavigationAppFactory {
      * Default way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
-     * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean)} with
+     * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean, int)} with
      * {@code showInternalMap = true} and {@code showDefaultNavigation = false}
      */
     public static void showNavigationMenu(final Activity activity,
                                           final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
-        showNavigationMenu(activity, cache, waypoint, destination, true, false);
+        showNavigationMenu(activity, cache, waypoint, destination, true, false, 0);
     }
 
     /**
@@ -167,27 +168,20 @@ public final class NavigationAppFactory {
      * @param destination           may be {@code null}
      * @param showInternalMap       should be {@code false} only when called from within the internal map
      * @param showDefaultNavigation should be {@code false} by default
+     * @param menuResToEnableOnDismiss res id of menu item to enable on dialog dismiss (0 if unused)
      * @see #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)
      */
     public static void showNavigationMenu(final Activity activity,
                                           final Geocache cache, final Waypoint waypoint, final Geopoint destination,
-                                          final boolean showInternalMap, final boolean showDefaultNavigation) {
+                                          final boolean showInternalMap, final boolean showDefaultNavigation, final int menuResToEnableOnDismiss) {
         final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                boolean add = false;
-                if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
-                    add = true;
-                }
-                if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
-                    add = true;
-                }
-                if (destination != null && navApp.app instanceof GeopointNavigationApp) {
-                    add = true;
-                }
-                if (add) {
+                if ((cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache))
+                    || (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint))
+                    || (destination != null && navApp.app instanceof GeopointNavigationApp)) {
                     items.add(navApp);
                 }
             }
@@ -211,6 +205,9 @@ public final class NavigationAppFactory {
             invokeNavigation(activity, cache, waypoint, destination, selectedItem.app);
         });
         final AlertDialog alert = builder.create();
+        if (menuResToEnableOnDismiss != 0) {
+            alert.setOnDismissListener(dialog -> ViewUtils.setEnabled(activity.findViewById(menuResToEnableOnDismiss), true));
+        }
         alert.show();
     }
 

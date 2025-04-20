@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class Trackfiles extends DataStore.DBExtension {
 
@@ -36,8 +37,10 @@ public class Trackfiles extends DataStore.DBExtension {
         return key;
     }
 
+    @NonNull
+    // must not be null or empty
     public String getDisplayname() {
-        return string1;
+        return StringUtils.isBlank(string1) ? "<???>" : string1;
     }
 
     public boolean isHidden() {
@@ -110,7 +113,9 @@ public class Trackfiles extends DataStore.DBExtension {
         for (DataStore.DBExtension item : getAll(type, null)) {
             result.add(new Trackfiles(item));
         }
-        TextUtils.sortListLocaleAware(result, Trackfiles::getDisplayname);
+        if (!result.isEmpty()) {
+            TextUtils.sortListLocaleAware(result, Trackfiles::getDisplayname);
+        }
         return result;
     }
 

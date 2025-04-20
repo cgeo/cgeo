@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.helper.CopyToClipboardActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.ShareBroadcastReceiver;
 import cgeo.geocaching.settings.StartWebviewActivity;
@@ -78,8 +79,20 @@ public class ShareUtils {
 
     private static void shareInternal(final Context context, final Intent intent, @StringRes final int titleResourceId) {
         if (intent != null) {
-            context.startActivity(Intent.createChooser(intent, context.getString(titleResourceId)));
+            final Intent share = Intent.createChooser(intent, context.getString(titleResourceId));
+            final Intent clipboardIntent = createClipboardIntent(context, intent);
+            if (clipboardIntent != null) {
+                share.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{ createClipboardIntent(context, intent) });
+            }
+            context.startActivity(share);
         }
+    }
+
+    private static Intent createClipboardIntent(final Context context, final Intent origIntent) {
+        if (origIntent == null || origIntent.getExtras() == null || !Settings.provideClipboardCopyAction()) {
+            return null;
+        }
+        return CopyToClipboardActivity.createClipboardIntent(context, origIntent.getExtras().getString(Intent.EXTRA_TEXT), null);
     }
 
     @Nullable
@@ -243,7 +256,7 @@ public class ShareUtils {
                 .setShareState(CustomTabsIntent.SHARE_STATE_ON);
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_UPDATE_CURRENT);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
         builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
 
         final CustomTabsIntent customTabsIntent = builder.build();

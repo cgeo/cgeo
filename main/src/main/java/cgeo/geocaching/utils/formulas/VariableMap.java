@@ -18,14 +18,14 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * A VariableMap instance manages a set of {@link Formula}s which are assigned to a variable each.
- *
+ * <br>
  * It allows adding, changing and removing such variable-formula assignments and recalculates all variable values
  * on each change. It also detects errors such as cyclic dependencies and provides appropriate error messages using {@link FormulaException}s
  * internationalized error message capacities.
- *
+ * <br>
  * VariableMap automatically adds/removes and maintains empty state entries for all variables where existing formulas have a dependency to but are
  * not themself added to the map by the user. Those state can be detected by having null as FormulaString.
- *
+ * <br>
  * The method names and semantics of this class are loosely related to the Java {@link Map} interface. However, this class does NOT implement the exact semantics
  * of this interface.
  */
@@ -129,18 +129,12 @@ public class VariableMap {
             return resultAsCharSequence;
         }
 
-        /**
-         * Range index currently used to calculate results of the Formula
-         */
-        public int getRangeIndex() {
-            return this.rangeIndex;
-        }
     }
 
 
     /**
      * Adds or changes a variable - formula assignment to this map.
-     *
+     * <br>
      * Note that on adding/changing a variable's formula, the map will ensure that for all
      * variables where the formula depends on there will also be an entry in this map (state might be empty though)
      */
@@ -171,7 +165,7 @@ public class VariableMap {
 
     /**
      * Removes a variable from this map.
-     *
+     * <br />
      * Note that the variable may still be represented in this Map after removal with an empty state.
      * This will be the case if another variable's formula depends on the removed variable.
      */

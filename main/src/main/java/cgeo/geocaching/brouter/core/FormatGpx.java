@@ -78,7 +78,7 @@ public class FormatGpx extends Formatter {
             sb.append("  <name>").append(t.name).append("</name>\n");
             sb.append("  <extensions>\n");
             sb.append("   <brouter:info>").append(t.messageList.get(0)).append("</brouter:info>\n");
-            if (t.params != null && t.params.size() > 0) {
+            if (t.params != null && !t.params.isEmpty()) {
                 sb.append("   <brouter:params><![CDATA[");
                 int i = 0;
                 for (Map.Entry<String, String> e : t.params.entrySet()) {
@@ -177,7 +177,7 @@ public class FormatGpx extends Formatter {
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
                         .append(formatILat(hint.ilat)).append("\">")
                         .append("<name>").append(hint.getMessageString()).append("</name>")
-                        .append("<sym>").append(hint.getSymbolString().toLowerCase()).append("</sym>")
+                        .append("<sym>").append(hint.getSymbolString().toLowerCase(Locale.ROOT)).append("</sym>")
                         .append("<type>").append(hint.getSymbolString()).append("</type>")
                         .append("</wpt>\n");
             }
@@ -498,10 +498,6 @@ public class FormatGpx extends Formatter {
         sb.append("</wpt>\n");
     }
 
-    public static String getWaypoint(int ilon, int ilat, String name, String desc) {
-        return "<wpt lon=\"" + formatILon(ilon) + "\" lat=\"" + formatILat(ilat) + "\"><name>" + name + "</name>" + (desc != null ? "<desc>" + desc + "</desc>" : "") + "</wpt>";
-    }
-
     public OsmTrack read(String filename) throws Exception {
         final File f = new File(filename);
         if (!f.exists()) {
@@ -529,7 +525,7 @@ public class FormatGpx extends Formatter {
                 idx2 += 6;
                 final int idx3 = line.indexOf('"', idx2);
                 final int ilat = (int) ((Double.parseDouble(line.substring(idx2, idx3)) + 90.) * 1000000. + 0.5);
-                track.nodes.add(OsmPathElement.create(ilon, ilat, (short) 0, null, false));
+                track.nodes.add(OsmPathElement.create(ilon, ilat, (short) 0, null));
             }
         }
         br.close();

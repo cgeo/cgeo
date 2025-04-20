@@ -62,21 +62,25 @@ public class GC40 extends MockedCache {
         return CacheSize.REGULAR;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.TRADITIONAL;
     }
 
+    @NonNull
     @Override
     public String getHint() {
         return "";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "<br> <br> This is the oldest cache that you can log on continental Europe.<br>";
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "";
@@ -92,6 +96,7 @@ public class GC40 extends MockedCache {
         return "e10600a4-fd99-474d-aa0d-34a96672906a";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Namur, Belgium";
@@ -130,6 +135,7 @@ public class GC40 extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);

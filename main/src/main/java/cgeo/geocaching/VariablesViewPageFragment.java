@@ -119,7 +119,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private void checkUnsavedChanges() {
-        if (cache != null && cache.getVariables() != null && cache.getVariables().wasModified()) {
+        if (cache != null && cache.getVariables().wasModified()) {
             //make call asynchronous due to possible fragment transaction conflicts, see #12977
             binding.getRoot().post(() -> {
                 cache.getVariables().saveState();
@@ -177,7 +177,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         //called e.g. when user closes cache detail view (after "onDestroy" is called)
         checkUnsavedChanges();
 
-        if (cache != null && cache.getVariables() != null) {
+        if (cache != null) {
             cache.getVariables().removeChangeListener(this);
         }
     }

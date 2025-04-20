@@ -6,6 +6,7 @@
     <style name="text">
         <item name="android:ellipsize">end</item>
         <item name="android:focusable">false</item>
+        <item name="android:textIsSelectable">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -81,6 +82,10 @@
         <item name="tint">@color/colorTextActionBar</item>
     </style>
 
+    <style name="actionBarActionOverflow2" parent="actionBarActionOverflow">
+        <item name="tint">@color/colorText</item>
+    </style>
+
     <style name="tool_bar" parent="actionBarStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
@@ -110,25 +115,38 @@
 
     <!-- buttons -->
 
-    <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="button_base" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:padding">6dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_buttonsPrimary</item>
         <item name="strokeColor">@color/button_strokecolor_selector</item>
+        <item name="iconTint">@color/colorText</item>
     </style>
 
-    <style name="button_full" parent="button">
+    <style name="button_full_base" parent="button_base">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:layout_marginLeft">6dip</item>
         <item name="android:layout_marginRight">6dip</item>
         <item name="android:layout_marginBottom">5dip</item>
+    </style>
+
+    <style name="button" parent="button_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="button_full" parent="button_full_base">
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="button_wherigo" parent="button_full_base">
+        <item name="android:maxLines">10</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="button_full_double" parent="button_full">
@@ -275,6 +293,11 @@
         <item name="endIconMode">clear_text</item>
     </style>
 
+    <style name="textinput_dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:padding">6dip</item>
+        <item name="android:textAppearance">@style/text_default</item>
+    </style>
+
     <!-- for AutoCompleteTextView or EditText embedded in material TextInputLayout -->
 
     <style name="textinput_embedded">
@@ -289,10 +312,6 @@
 
     <style name="textinput_embedded_singleline" parent="textinput_embedded">
         <item name="android:imeOptions">flagNoFullscreen</item>
-    </style>
-
-    <style name="textinput_embedded_singleline_go" parent="textinput_embedded_singleline">
-        <item name="android:imeOptions">flagNoFullscreen|actionGo</item>
     </style>
 
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
@@ -427,6 +446,27 @@
         <item name="android:background">@color/colorBackground</item>
     </style>
 
+    <!-- new section style -->
+    <style name="flat_separator_horizontal_heading_text" parent="@style/TextAppearance.Material3.TitleMedium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="flat_separator_horizontal_heading_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@color/colorSeparator</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
     <!-- images -->
     <style name="image_small_prepend_text">
         <item name="android:layout_width">30dp</item>
@@ -521,15 +561,27 @@
     </style>
 
     <!-- map quick buttons styles -->
-    <style name="map_quicksettingsbutton">
+    <style name="map_overlaybutton">
         <item name="android:layout_width">38dp</item>
         <item name="android:layout_height">38dp</item>
         <item name="android:gravity">bottom</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:padding">8dp</item>
-        <item name="android:background">@drawable/white_bcg</item>
-        <!--<item name="android:tint">@color/osm_zoomcontrol</item>-->
+        <item name="android:elevation">2dp</item>
+    </style>
+    <style name="map_overlaybutton_bg" parent="map_overlaybutton">
+        <item name="android:background">@drawable/map_button_background</item>
+    </style>
+
+    <style name="map_shadowcontainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <!-- authorization styles -->

@@ -35,6 +35,7 @@
     <include layout="@layout/filter_sort_bar" />
     <include layout="@layout/map_distanceinfo" />
     <include layout="@layout/map_settings_button" />
+    <include layout="@layout/map_zoom_control" />
     <include layout="@layout/map_progressbar" />
     <include layout="@layout/map_detailsfragment" />
 

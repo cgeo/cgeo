@@ -4,7 +4,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.Value;
-import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
 import android.os.Parcel;
@@ -16,6 +15,7 @@ import androidx.annotation.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
@@ -94,7 +94,7 @@ public class CalculatedCoordinate implements Parcelable {
         final TextParser tp = new TextParser(config);
         tp.parseUntil('|');
         final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
-        setLatitudePattern(tokens.size() > 0 ? tokens.get(0) : "");
+        setLatitudePattern(!tokens.isEmpty() ? tokens.get(0) : "");
         setLongitudePattern(tokens.size() > 1 ? tokens.get(1) : "");
         this.type = CalculatedCoordinateType.fromName(tokens.size() > 2 ? tokens.get(2) : PLAIN.shortName());
         return tp.pos();
@@ -142,18 +142,18 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     @Nullable
-    public Geopoint calculateGeopoint(final Func1<String, Value> varMap) {
+    public Geopoint calculateGeopoint(final Function<String, Value> varMap) {
         final ImmutableTriple<Double, CharSequence, Boolean> latData = calculateLatitudeData(varMap);
         final ImmutableTriple<Double, CharSequence, Boolean> lonData = calculateLongitudeData(varMap);
         return latData.left == null || lonData.left == null ? null : new Geopoint(latData.left, lonData.left);
     }
 
     @NonNull
-    public ImmutableTriple<Double, CharSequence, Boolean> calculateLatitudeData(final Func1<String, Value> varMap) {
+    public ImmutableTriple<Double, CharSequence, Boolean> calculateLatitudeData(final Function<String, Value> varMap) {
         return latitudePattern.evaluate(varMap);
     }
 
-    public ImmutableTriple<Double, CharSequence, Boolean> calculateLongitudeData(final Func1<String, Value> varMap) {
+    public ImmutableTriple<Double, CharSequence, Boolean> calculateLongitudeData(final Function<String, Value> varMap) {
         return longitudePattern.evaluate(varMap);
     }
 

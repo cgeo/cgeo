@@ -153,12 +153,11 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <RelativeLayout style="@style/separator_horizontal_layout" >
-                    <View style="@style/separator_horizontal_heading" />
-                    <TextView
-                        style="@style/separator_horizontal_heading_text"
-                        android:text="@string/cache_inventory" />
-                </RelativeLayout>
+                <cgeo.geocaching.ui.SectionHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerAbove="true"
+                    android:text="@string/log_inventory" />
 
                 <ListView
                     android:id="@+id/inventory"

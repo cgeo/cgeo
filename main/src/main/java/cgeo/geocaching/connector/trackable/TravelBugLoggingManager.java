@@ -38,7 +38,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
             return Collections.emptyList();
         }
 
-        final String url = GCLogAPI.getUrlForNewLog(GCLogAPI.getUrlForNewTrackableLog(trackableCode));
+        final String url = GCLogAPI.getUrlForNewTrackableLog(trackableCode);
         String page = null;
         try {
             page = Network.getResponseData(Network.getRequest(url, null));

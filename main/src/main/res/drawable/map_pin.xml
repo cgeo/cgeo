@@ -1,25 +1,19 @@
-<!-- Taken from https://de.wikipedia.org/wiki/Datei:Google_Maps_pin.svg -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:viewportWidth="20"
-    android:viewportHeight="34.89234"
-    android:width="20dp"
-    android:height="34.89234dp">
-    <group
-        android:translateX="-814.596"
-        android:translateY="-274.3862">
-        <group
-            android:scaleX="1.185585"
-            android:scaleY="1.185585"
-            android:translateX="-151.1772"
-            android:translateY="-57.3976">
-            <path
-                android:pathData="M817.11249 282.97118c-1.25816 1.34277 -2.04623 3.29881 -2.01563 5.13867 0.0639 3.84476 1.79693 5.3002 4.56836 10.59179 0.99832 2.32851 2.04027 4.79237 3.03125 8.87305 0.13772 0.60193 0.27203 1.16104 0.33416 1.20948 0.0621 0.0485 0.19644 -0.51262 0.33416 -1.11455 0.99098 -4.08068 2.03293 -6.54258 3.03125 -8.87109 2.77143 -5.29159 4.50444 -6.74704 4.56836 -10.5918 0.0306 -1.83986 -0.75942 -3.79785 -2.01758 -5.14062 -1.43724 -1.53389 -3.60504 -2.66908 -5.91619 -2.71655 -2.31115 -0.0475 -4.4809 1.08773 -5.91814 2.62162z"
-                android:fillColor="#FF4646"
-                android:strokeColor="#D73534"
-                android:strokeWidth="1" />
-            <path
-                android:pathData="M826.0661 288.2528A3.0355 3.0355 0 0 1 819.9951 288.2528A3.0355 3.0355 0 0 1 826.0661 288.2528Z"
-                android:fillColor="#590000" />
-        </group>
-    </group>
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="859.72"
+    android:viewportHeight="859.72">
+  <path
+      android:pathData="m429.86,780c-93.92,-82.2 -164.06,-158.55 -210.44,-229.05 -46.38,-70.5 -69.56,-135.75 -69.56,-195.75 0,-90 28.15,-161.7 84.44,-215.1s121.48,-80.1 195.56,-80.1 139.27,26.7 195.56,80.1 84.44,125.1 84.44,215.1c0,60 -23.19,125.25 -69.56,195.75 -46.38,70.5 -116.52,146.85 -210.44,229.05z"
+      android:strokeWidth="85"
+      android:fillColor="@color/cacheMarker_border"
+      android:strokeColor="@color/cacheMarker_border"/>
+  <path
+      android:pathData="m429.86,780c-93.92,-82.2 -164.06,-158.55 -210.44,-229.05 -46.38,-70.5 -69.56,-135.75 -69.56,-195.75 0,-90 28.15,-161.7 84.44,-215.1s121.48,-80.1 195.56,-80.1 139.27,26.7 195.56,80.1 84.44,125.1 84.44,215.1c0,60 -23.19,125.25 -69.56,195.75 -46.38,70.5 -116.52,146.85 -210.44,229.05z"
+      android:strokeWidth="50"
+      android:fillColor="@color/cacheType_cgeo"
+      android:strokeColor="@color/cacheMarker_icon"/>
+  <path
+      android:pathData="m429.86,420c22,0 40.83,-7.83 56.5,-23.5s23.5,-34.5 23.5,-56.5 -7.83,-40.83 -23.5,-56.5 -34.5,-23.5 -56.5,-23.5 -40.83,7.83 -56.5,23.5 -23.5,34.5 -23.5,56.5 7.83,40.83 23.5,56.5 34.5,23.5 56.5,23.5z"
+      android:fillColor="@color/cacheMarker_icon"/>
 </vector>

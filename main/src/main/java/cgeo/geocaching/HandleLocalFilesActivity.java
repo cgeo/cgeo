@@ -4,14 +4,21 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
 
@@ -37,6 +44,14 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 continueWithForegroundService(ReceiveDownloadService.class, intent);
                 finished = true;
                 break;
+            case WHERIGO:
+                final String guid = copyToWherigoFolder(uri);
+                if (guid != null) {
+                    WherigoActivity.startForGuid(this, guid, null, false);
+                    finish();
+                    finished = true;
+                }
+                break;
             default:
                 break;
         }
@@ -59,14 +74,25 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         finish();
     }
 
-    /*
-    private void continueWithExternal(final String component, final String clazz, final Intent intent) {
-        final Intent forwarder = new Intent(intent);
-        forwarder.setComponent(new ComponentName(component, clazz));
-        forwarder.setAction(clazz);
-        startActivity(forwarder);
-        finish();
+    /**
+     * copy uri to wherigo folder
+     * <br />
+     * For "guid calculation" of WherigoActivity,
+     * - capitalization of suffix ".gwc" will be normalized to ".gwc"
+     * - all "_" will be replaced by "-"
+     * <br />
+     * returns "guid" (= filename without suffix ".gwc") on success, null otherwise
+     */
+    @Nullable
+    private String copyToWherigoFolder(final Uri uri) {
+        String filename = ContentStorage.get().getName(uri).replace("_", "-");
+        if (StringUtils.isBlank(filename)) {
+            return null;
+        }
+        if (StringUtils.equalsAnyIgnoreCase(filename.substring(filename.length() - 4), ".gwc")) {
+            filename = filename.substring(0, filename.length() - 4);
+        }
+        ContentStorage.get().copy(uri, PersistableFolder.WHERIGO.getFolder(), FileNameCreator.forName(filename + ".gwc"), false);
+        return filename;
     }
-    */
-
 }

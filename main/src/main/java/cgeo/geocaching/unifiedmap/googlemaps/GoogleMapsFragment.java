@@ -8,16 +8,14 @@ import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
-import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
-import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
 import android.graphics.Point;
@@ -39,7 +37,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import org.oscim.core.BoundingBox;
 
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -90,8 +87,10 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void onMapReady(final @NonNull GoogleMap googleMap) {
         mMap = googleMap;
+
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
+        googleMap.getUiSettings().setCompassEnabled(false);
         setMapRotation(Settings.getMapRotation());
         onMapReadyCheckForActivity();
     }
@@ -109,7 +108,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private void onMapAndActivityReady() {
         applyTheme();
         if (position != null) {
-            setCenter(position);
+            ViewUtils.runOnUiThread(true, () -> setCenter(position));
         }
         setZoom(zoomLevel);
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
@@ -126,14 +125,17 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
                 viewModel.followMyLocation.setValue(false);
             }
         });
+        mMap.setOnCameraMoveListener(() -> {
+            repaintRotationIndicator(getCurrentBearing());
+            ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getCameraPosition().zoom);
+        });
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
-            viewModel.mapCenter.setValue(getCenter());
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
         });
 
-        adaptLayoutForActionbar(true);
+        adaptLayoutForActionBar(true);
 
         initLayers();
         onMapReadyTasks.run();
@@ -184,6 +186,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setCenter(final Geopoint geopoint) {
+        this.position = geopoint;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(geopoint.getLatitude(), geopoint.getLongitude())));
         }
@@ -199,13 +202,13 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
+    @Nullable
+    public Viewport getViewport() {
         if (lastBounds == null) {
-            return new BoundingBox(0, 0, 0, 0);
+            return null;
         }
         // mMap.getProjection() needs to be called on UI thread
-        return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
+        return new Viewport(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
 
@@ -231,10 +234,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setZoom(final int zoomLevel) {
+        this.zoomLevel = zoomLevel;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
-        } else {
-            this.zoomLevel = zoomLevel;
         }
     }
 
@@ -246,20 +248,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-
         mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
-
-        final View fragmentView = getView();
-        if (fragmentView != null) {
-            fragmentView.findViewWithTag("GoogleMapCompass").setVisibility(mapRotation != MAPROTATION_OFF ? View.VISIBLE : View.GONE);
-            fragmentView.findViewWithTag("GoogleMapCompass").setOnClickListener(v -> {
-                final boolean isRotated = getCurrentBearing() != 0f;
-                setBearing(0.0f);
-                if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                    Dialogs.advancedOneTimeMessage(getContext(), MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
-                }
-            });
-        }
     }
 
     @Override
@@ -279,18 +268,19 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     // theme & language related methods
 
     @Override
+    public void selectThemeOptions(final Activity activity) {
+        final int mapType = ((AbstractGoogleTileProvider) currentTileProvider).getMapType();
+        GoogleMapsThemeHelper.selectThemeOptions(activity, mapType, mMap, scaleDrawer);
+    }
+
+    @Override
     public void selectTheme(final Activity activity) {
-        GoogleMapsThemeHelper.selectTheme(activity, mMap, this::applyTheme);
+        GoogleMapsThemeHelper.selectTheme(activity, mMap, scaleDrawer);
     }
 
     @Override
     public void applyTheme() {
-        applyTheme(GoogleMapsThemeHelper.GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()));
-    }
-
-    public void applyTheme(final GoogleMapsThemeHelper.GoogleMapsThemes theme) {
-        scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
-        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap, theme);
+        GoogleMapsThemeHelper.setCurrentThemeOnMap(mMap, scaleDrawer);
     }
 
 
@@ -304,15 +294,5 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     // ========================================================================
     // Tap handling methods
-
-    @Override
-    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
-        if (mMap == null) {
-            return;
-        }
-
-        final View compass = requireView().findViewWithTag("GoogleMapCompass");
-        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
-    }
 
 }

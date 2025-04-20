@@ -22,10 +22,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class GeopointParser {
 
-    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (\\d{2,})");
-    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), ([-+]?\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("([-+]?\\d{1,3},\\d+), ([-+]?\\d{1,3},\\d+)");
 
-    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser());
+    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
     private GeopointParser() {
         // utility class
@@ -409,6 +410,35 @@ public class GeopointParser {
     }
 
     /**
+     * Parser for DegDec format: DD,DDDDDDD°.
+     */
+    private static final class DegDecCommaParser extends AbstractLatLonParser {
+        //                                        (     1     ) , (    2   )
+        private static final String STRING_LAT = "([-+]?\\d{1,2}+),(\\d{5,}+)°?";
+
+        //                                        (     1     ) , (    2   )
+        private static final String STRING_LON = "([-+]?\\d{1,3}+),(\\d{5,}+)\\b°?";
+        private static final String STRING_SEPARATOR = ",";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DegDecCommaParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        public Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0) + "." + groups.get(1);
+            return createCoordinate("", group1, "", "");
+        }
+    }
+
+    /**
      * Parser for DegDec format: -DD°.
      */
     private static final class ShortDegDecParser extends AbstractLatLonParser {
@@ -467,7 +497,7 @@ public class GeopointParser {
 
     /**
      * Returns a set of parser inputs for a given text
-     *
+     * <br>
      * The generated inputs use different delimiters for fractional numbers.
      *
      * @param text the text to parse
@@ -475,7 +505,8 @@ public class GeopointParser {
      */
     @NonNull
     private static Set<String> getParseInputs(@NonNull final String text) {
-        final String inputDot = removeSpaceAfterSeparators(text);
+        final String preparedInput = prepareForDegCommaCommaFormat(text);
+        final String inputDot = removeSpaceAfterSeparators(preparedInput);
         final String inputComma = swapDotAndComma(inputDot);
         return CollectionStream.of(new String[]{inputDot, inputComma}).toSet();
     }
@@ -490,6 +521,11 @@ public class GeopointParser {
     private static String removeSpaceAfterSeparators(@NonNull final String text) {
         final String replacedComma = new MatcherWrapper(PATTERN_BAD_BLANK_COMMA, text).replaceAll("$1,$2");
         return new MatcherWrapper(PATTERN_BAD_BLANK_DOT, replacedComma).replaceAll("$1.$2");
+    }
+
+    @NonNull
+    private static String prepareForDegCommaCommaFormat(@NonNull final String text) {
+        return new MatcherWrapper(PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER, text).replaceAll("$1,$2");
     }
 
     private static String swapDotAndComma(@NonNull final String text) {
@@ -542,7 +578,7 @@ public class GeopointParser {
 
     /**
      * Parses a pair of coordinates (latitude and longitude) out of the given string.
-     *
+     * <br>
      * Accepts following formats:
      * - X DD
      * - X DD°
@@ -551,7 +587,7 @@ public class GeopointParser {
      * - X DD° MM SS
      * - DD.DDDDDDD
      * - UTM
-     *
+     * <br>
      * Both . and , are accepted, also variable count of spaces (also 0)
      *
      * @param text the string to be parsed
@@ -617,14 +653,15 @@ public class GeopointParser {
                 waypoints.add(best);
             }
 
-        } while (best != null && startIndex < text.length());
+        // Limit maximum scanned geopoints to 20 -> quickfix for #15687
+        } while (waypoints.size() < 20 && (best != null && startIndex < text.length()));
 
         return waypoints;
     }
 
     /**
      * Parses latitude out of the given string.
-     *
+     * <br>
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
      * @param text the string to be parsed
@@ -645,7 +682,7 @@ public class GeopointParser {
 
     /**
      * Parses longitude out of the given string.
-     *
+     * <br>
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
      * @param text the string to be parsed

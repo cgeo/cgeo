@@ -12,9 +12,42 @@
         <ListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/init_mapsource_select"
-            android:key="@string/pref_mapsource"
+            android:key="@string/pref_tileprovider"
             android:summary="%s"
             android:title="@string/init_mapsource_select"
+            app:iconSpaceReserved="false" />
+        <MultiSelectListPreference
+            android:key="@string/pref_tileprovider_hidden"
+            android:title="@string/settings_hide_tileproviders_title"
+            android:summary="@string/settings_hide_tileproviders_summary"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/settings_unifiedMapVariants_title"
+            android:key="@string/pref_unifiedMapVariants"
+            android:summary="%s"
+            android:title="@string/settings_unifiedMapVariants_title"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.TextPreference
+            android:defaultValue=""
+            android:key="@string/pref_userDefinedTileProviderUri"
+            android:title="@string/settings_userDefinedTileProvider"
+            android:summary="@string/settings_userDefinedTileProviderUri"
+            app:iconSpaceReserved="false" />
+
+        <!-- legacy map settings starting here -->
+        <CheckBoxPreference
+            android:key="@string/pref_useLegacyMap"
+            android:title="@string/init_title_useLegacyMap"
+            android:summary="@string/init_summary_useLegacyMap"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:title="@string/init_mapsource_select_legacy"
+            android:summary="%s"
+            android:defaultValue="0"
+            android:dialogTitle="@string/init_mapsource_select"
+            android:key="@string/pref_mapsource"
+            android:dependency="@string/pref_useLegacyMap"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
     <PreferenceCategory
@@ -79,58 +112,15 @@
             android:summary="@string/settings_info_hillshading"
             android:title="@string/settings_info_hillshading_title"
             app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:key="@string/pref_maphillshading"
-            android:defaultValue="false"
-            android:title="@string/settings_hillshading_enable"
-            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
-            android:dependency="@string/pref_maphillshading"
-            android:summary="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
             app:iconSpaceReserved="false" />
-        <SeekBarPreference
-            android:key="@string/pref_mapShadingLinearity"
-            android:dependency="@string/pref_maphillshading"
-            android:summary="@string/init_mapShadingLinearity_description"
-            android:title="@string/init_mapShadingLinearity_title"
-            android:defaultValue="5"
-            android:max="100"
-            android:min="0"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
-        <SeekBarPreference
-            android:key="@string/pref_mapShadingScale"
-            android:dependency="@string/pref_maphillshading"
-            android:summary="@string/init_mapShadingScale_description"
-            android:title="@string/init_mapShadingScale_title"
-            android:defaultValue="120"
-            android:max="300"
-            android:min="0"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/category_unifiedMap"
-        app:iconSpaceReserved="false">
         <CheckBoxPreference
-            android:key="@string/pref_useUnifiedMap"
-            android:summary="@string/init_summary_useUnifiedMap"
-            android:title="@string/init_title_useUnifiedMap"
-            app:iconSpaceReserved="false" />
-        <ListPreference
-            android:defaultValue="0"
-            android:dialogTitle="@string/init_mapsource_select"
-            android:key="@string/pref_tileprovider"
-            android:summary="%s"
-            android:title="@string/init_mapsource_select"
-            app:iconSpaceReserved="false" />
-        <MultiSelectListPreference
-            android:key="@string/pref_tileprovider_hidden"
-            android:title="@string/settings_hide_tileproviders_title"
-            android:summary="@string/settings_hide_tileproviders_summary"
+            android:key="@string/pref_maphillshading_hq"
+            android:defaultValue="false"
+            android:title="@string/init_hillshading_hq"
+            android:summary="@string/init_summary_hillshading_hq"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

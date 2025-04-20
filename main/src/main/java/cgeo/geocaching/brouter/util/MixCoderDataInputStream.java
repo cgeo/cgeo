@@ -55,8 +55,6 @@ public final class MixCoderDataInputStream extends DataInputStream {
 
     /**
      * decode an integer in the range 0..max (inclusive).
-     *
-     * @see #encodeBounded
      */
     public int decodeBounded(final int max) throws IOException {
         int value = 0;
@@ -70,10 +68,6 @@ public final class MixCoderDataInputStream extends DataInputStream {
         return value;
     }
 
-
-    /**
-     * @see #encodeVarBits
-     */
 
     public int decodeVarBits() throws IOException {
         fillBuffer();

@@ -41,7 +41,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
-import org.mapsforge.map.model.IMapViewPosition;
+import org.mapsforge.map.model.MapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
 
@@ -121,6 +121,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public OfflineMapSource(final Uri mapUri, final MapProvider mapProvider, final String name) {
             super(mapProvider, name);
             this.mapUri = mapUri;
+            setSupportsHillshading(true);
         }
 
         public Uri getMapUri() {
@@ -142,7 +143,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
          * Create new render layer, if mapfile exists
          */
         @Override
-        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+        public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
             final InputStream mapStream = createMapFileInputStream(this.mapUri);
             if (mapStream == null) {
                 return null;
@@ -222,6 +223,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public OfflineMultiMapSource(final List<ImmutablePair<String, Uri>> mapUris, final MapProvider mapProvider, final String name) {
             super(mapProvider, name);
             this.mapUris = mapUris;
+            setSupportsHillshading(true);
         }
 
         @Override
@@ -237,7 +239,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
          * Create new render layer, if mapfiles exist
          */
         @Override
-        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+        public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
             final List<MapFile> mapFiles = new ArrayList<>();
             for (ImmutablePair<String, Uri> fileName : mapUris) {
                 final InputStream mapStream = createMapFileInputStream(fileName.right);

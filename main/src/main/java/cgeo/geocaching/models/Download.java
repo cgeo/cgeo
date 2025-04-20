@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
+import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderHylly;
@@ -137,37 +138,48 @@ public class Download {
 
     public enum DownloadType {
         // id values must not be changed as they are referenced in the database & download companion files
-        DOWNLOADTYPE_ALL_MAPRELATED(0, 0),         // virtual entry
-        DOWNLOADTYPE_MAP_MAPSFORGE(1, R.string.downloadmap_mapfile),
-        DOWNLOADTYPE_MAP_OPENANDROMAPS(2, R.string.downloadmap_mapfile),
-        DOWNLOADTYPE_THEME_OPENANDROMAPS(3, R.string.downloadmap_themefile),
-        DOWNLOADTYPE_MAP_FREIZEITKARTE(4, R.string.downloadmap_mapfile),
-        DOWNLOADTYPE_THEME_FREIZEITKARTE(5, R.string.downloadmap_themefile),
-        DOWNLOADTYPE_MAP_HYLLY(6, R.string.downloadmap_mapfile),
-        DOWNLOADTYPE_THEME_HYLLY(7, R.string.downloadmap_themefile),
-        DOWNLOADTYPE_MAP_PAWS(8, R.string.downloadmap_mapfile),
-        DOWNLOADTYPE_THEME_PAWS(9, R.string.downloadmap_themefile),
+        DOWNLOAD_TYPE_ALL_MAPS(-2, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),       // virtual entry
+        DOWNLOAD_TYPE_ALL_THEMES(-1, R.string.downloadmap_themefile, R.drawable.downloader_theme),  // virtual entry
+        DOWNLOADTYPE_ALL_MAPRELATED(0, 0, R.drawable.ic_menu_mapmode),                 // virtual entry
+        DOWNLOADTYPE_MAP_MAPSFORGE(1, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_MAP_OPENANDROMAPS(2, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_OPENANDROMAPS(3, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_FREIZEITKARTE(4, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_FREIZEITKARTE(5, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_HYLLY(6, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_HYLLY(7, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_PAWS(8, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_PAWS(9, R.string.downloadmap_themefile, R.drawable.downloader_theme),
 
-        DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload),
-        DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload),
+        DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload, R.drawable.downloader_theme),
 
-        DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile);
+        DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile, R.drawable.ic_menu_route),
+        DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile, R.drawable.ic_menu_hills),
+        DOWNLOADTYPE_LANGUAGE_MODEL(92, R.string.translator_model, R.drawable.ic_menu_translate);
 
         public final int id;
         @StringRes final int typeNameResId;
+        @DrawableRes final int iconResId;
         public static final int DEFAULT = DOWNLOADTYPE_MAP_MAPSFORGE.id;
         private static final ArrayList<DownloadTypeDescriptor> offlineMapTypes = new ArrayList<>();
         private static final ArrayList<DownloadTypeDescriptor> offlineMapThemeTypes = new ArrayList<>();
         private static final ArrayList<DownloadTypeDescriptor> downloadTypes = new ArrayList<>();
 
-        DownloadType(final int id, @StringRes final int typeNameResId) {
+        DownloadType(final int id, @StringRes final int typeNameResId, @DrawableRes final int iconResId) {
             this.id = id;
             this.typeNameResId = typeNameResId;
+            this.iconResId = iconResId;
         }
 
         public static ArrayList<DownloadTypeDescriptor> getOfflineMapTypes() {
             buildTypelist();
             return offlineMapTypes;
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> getOfflineMapThemeTypes() {
+            buildTypelist();
+            return offlineMapThemeTypes;
         }
 
         public static ArrayList<DownloadTypeDescriptor> getOfflineAllMapRelatedTypes() {
@@ -188,13 +200,27 @@ public class Download {
             return null;
         }
 
+        public static DownloadType getFromId(final int typeId) {
+            for (DownloadType type : DownloadType.values()) {
+                if (type.id == typeId) {
+                    return type;
+                }
+            }
+            return null;
+        }
+
         @StringRes
         public int getTypeNameResId() {
             return typeNameResId;
         }
 
+        @DrawableRes
+        public int getIconResId() {
+            return iconResId;
+        }
+
         private static void buildTypelist() {
-            if (offlineMapTypes.size() == 0) {
+            if (offlineMapTypes.isEmpty()) {
                 // put all bundled map theme file types here - they will not be shown in the maps download selector
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
@@ -211,6 +237,7 @@ public class Download {
                 // all other download types
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_HILLSHADING_TILES, HillshadingTileDownloader.getInstance(), R.string.hillshading_name));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
 
                 // adding maps and map themes to download types for completeness

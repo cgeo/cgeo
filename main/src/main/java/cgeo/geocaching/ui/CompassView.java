@@ -13,6 +13,8 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
@@ -179,7 +181,7 @@ public class CompassView extends View {
     }
 
     @Override
-    protected void onDraw(final Canvas canvas) {
+    protected void onDraw(@NonNull final Canvas canvas) {
 
         final float azimuthTemp = azimuthShown;
         final float azimuthRelative = AngleUtils.normalize(azimuthTemp - cacheHeadingShown);

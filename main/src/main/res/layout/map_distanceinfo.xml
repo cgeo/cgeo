@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="0dp"
     android:id="@+id/distanceinfo"
     android:layout_below="@id/filterbar">
 
@@ -30,43 +31,129 @@
             android:id="@+id/target"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/distances1"
             android:layout_marginLeft="-2dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="-2dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:ellipsize="end"
             style="@style/map_distanceinfo"
             android:gravity="left" />
 
-        <LinearLayout
-            android:id="@+id/distances1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:orientation="vertical"
-            android:gravity="right"
-            style="@style/map_distanceinfo"
-            android:background="@drawable/icon_bcg">
-
-        </LinearLayout>
-
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/distances2"
+        android:id="@+id/distancesFrame2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/distancesFrame1"
-        android:padding="0dp"
-        android:layout_margin="0dp"
-        android:orientation="vertical"
-        android:gravity="right"
-        android:background="@drawable/icon_bcg" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/distanceStraight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+
+        <TextView
+            android:id="@+id/distanceRouted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+
+        <TextView
+            android:id="@+id/distanceIndividualRoute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/map_compassrosecontainer"
+        android:layout_below="@id/distancesFrame1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="13dp"
+        style="@style/map_shadowcontainer"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:id="@+id/map_compassrose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/map_bearing_background"
+            android:elevation="2dp"
+            android:src="@drawable/bearing_indicator" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/map_shadowcontainer"
+        android:layout_marginLeft="13dp"
+        android:layout_below="@+id/map_compassrosecontainer">
+        <ImageView
+            android:id="@+id/live_map_status"
+            app:tint="@color/just_white"
+            style="@style/map_overlaybutton_bg"
+            android:visibility="gone"
+            android:background="@drawable/map_bearing_background" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_rotationmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/map_compassrosecontainer"
+        android:layout_alignTop="@id/map_compassrosecontainer"
+        android:layout_marginLeft="5dp"
+        android:gravity="left"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/rotation_mode_tooglegroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundDialog"
+            android:paddingTop="3dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/rotation_mode_off"
+                style="@style/button_icon_accent"
+                android:layout_margin="0dp"
+                android:tooltipText="@string/switch_off"
+                app:icon="@drawable/rotation_mode_off" />
+
+            <Button
+                android:id="@+id/rotation_mode_manual"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_manual"
+                app:icon="@drawable/rotation_mode_manual" />
+
+            <Button
+                android:id="@+id/rotation_mode_energy_saving"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_auto_lowpower"
+                app:icon="@drawable/rotation_mode_energy_saving" />
+
+            <Button
+                android:id="@+id/rotation_mode_high_precision"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_auto_precise"
+                app:icon="@drawable/rotation_mode_high_precision" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
 </RelativeLayout>

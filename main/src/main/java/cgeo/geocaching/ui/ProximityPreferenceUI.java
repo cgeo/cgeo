@@ -19,6 +19,7 @@ public class ProximityPreferenceUI extends SeekbarUI {
     // init() gets called by super constructor, therefore before class constructor / class variable assignments!
     @Override
     public void init() {
+        super.init();
         minProgress = 1;
     }
 
@@ -29,7 +30,7 @@ public class ProximityPreferenceUI extends SeekbarUI {
 
     @Override
     public int progressToValue(final int progress) {
-        final int value = (int) Math.pow(10, (double) progress / 250.0) - 1;
+        final int value = (int) Math.round(Math.pow(10, (double) progress / 250.0)) - 1;
         return Math.max(value, 0);
     }
 
@@ -56,6 +57,6 @@ public class ProximityPreferenceUI extends SeekbarUI {
 
     @Override
     public void loadAdditionalAttributes(final Context context, final TypedArray attrs, final int defStyle) {
-        highRes = attrs.getBoolean(R.styleable.ProximityPreference_highRes, false);
+        highRes = attrs.getBoolean(R.styleable.SeekbarPreference_highRes, false);
     }
 }

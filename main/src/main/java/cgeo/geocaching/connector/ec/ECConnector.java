@@ -1,38 +1,21 @@
 package cgeo.geocaching.connector.ec;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.ILoggingManager;
-import cgeo.geocaching.connector.capability.ICredentials;
-import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.capability.ISearchByFilter;
-import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterType;
-import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.sorting.GeocacheSort;
-import cgeo.geocaching.storage.extension.FoundNumCounter;
-import cgeo.geocaching.utils.DisposableHandler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials {
+public class ECConnector extends AbstractConnector {
 
     @NonNull
     private static final String CACHE_URL = "https://extremcaching.com/index.php/output-2/";
@@ -43,11 +26,9 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     private static final Pattern PATTERN_EC_CODE = Pattern.compile("EC[0-9]+", Pattern.CASE_INSENSITIVE);
 
-    @NonNull
-    private final ECLogin ecLogin = ECLogin.getInstance();
-
     private ECConnector() {
         // singleton
+        prefKey = R.string.preference_screen_ec;
     }
 
     /**
@@ -99,38 +80,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
-        if (geocode == null) {
-            return null;
-        }
-        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
-
-        final Geocache cache = ECApi.searchByGeoCode(geocode);
-
-        return cache != null ? new SearchResult(cache) : null;
-    }
-
-    @Override
-    @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
-        final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.putInCacheAndLoadRating();
-    }
-
-    @NonNull
-    @Override
-    public EnumSet<GeocacheFilterType> getFilterCapabilities() {
-        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN);
-    }
-
-    @NonNull
-    @Override
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
-        return new SearchResult(ECApi.searchByFilter(filter, this));
-    }
-
-    @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
@@ -144,46 +93,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean isActive() {
         return Settings.isECConnectorActive();
-    }
-
-    @Override
-    public boolean login() {
-        // login
-        final StatusCode status = ecLogin.login();
-        // update cache counter
-        FoundNumCounter.getAndUpdateFoundNum(this);
-
-        return status == StatusCode.NO_ERROR;
-    }
-
-    @Override
-    public String getUserName() {
-        return ecLogin.getActualUserName();
-    }
-
-    @Override
-    public Credentials getCredentials() {
-        return Settings.getCredentials(R.string.pref_ecusername, R.string.pref_ecpassword);
-    }
-
-    @Override
-    public int getCachesFound() {
-        return ecLogin.getActualCachesFound();
-    }
-
-    @Override
-    public void increaseCachesFound(final int by) {
-        ecLogin.increaseActualCachesFound(by);
-    }
-
-    @Override
-    public String getLoginStatusString() {
-        return ecLogin.getActualStatus();
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return ecLogin.isActualLoginStatus();
     }
 
     @Override
@@ -230,22 +139,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean supportsLogging() {
-        return true;
-    }
-
-    @Override
-    public boolean canLog(@NonNull final Geocache cache) {
-        return true;
-    }
-
-    @Override
-    @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
-        return new ECLoggingManager(this, cache);
-    }
-
-    @Override
     @NonNull
     public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();
@@ -268,16 +161,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getUsernamePreferenceKey() {
-        return R.string.pref_ecusername;
-    }
-
-    @Override
-    public int getPasswordPreferenceKey() {
-        return R.string.pref_ecpassword;
-    }
-
-    @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String geocode = "EC" + StringUtils.substringAfter(url, "extremcaching.com/index.php/output-2/");
@@ -285,11 +168,5 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
             return geocode;
         }
         return super.getGeocodeFromUrl(url);
-    }
-
-    @Override
-    @NonNull
-    public String getCreateAccountUrl() {
-        return "https://extremcaching.com/component/comprofiler/registers";
     }
 }

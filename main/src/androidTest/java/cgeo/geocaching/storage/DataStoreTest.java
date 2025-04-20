@@ -72,6 +72,7 @@ public class DataStoreTest {
 
             // get list
             final StoredList list1 = DataStore.getList(listId1);
+            final List<StoredList> lists = DataStore.getLists();
             assertThat(list1).isNotNull();
             assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
 
@@ -289,6 +290,82 @@ public class DataStoreTest {
 
         } finally {
             DataStore.clearLogOffline(geocode);
+        }
+    }
+
+    @Test
+    public void testUpdateOnlineCache() {
+        try {
+            final Geocache cacheOld = new Geocache();
+            cacheOld.setGeocode(ARTIFICIAL_GEOCODE);
+            cacheOld.setCoords(new Geopoint(1, 2));
+            cacheOld.setDescription("Cache description old");
+            cacheOld.setShortDescription("Cache short-description old");
+            cacheOld.setPersonalNote("Personal note old");
+            cacheOld.setDetailed(false);
+
+            DataStore.saveCache(cacheOld, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            // update cache-data
+            final Geocache cacheNew = new Geocache();
+            cacheNew.setGeocode(ARTIFICIAL_GEOCODE);
+            cacheNew.setDescription("Cache description new");
+            cacheNew.setHint("Cache hint new");
+
+            DataStore.saveCache(cacheNew, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            final Geocache cacheDb = DataStore.loadCache(ARTIFICIAL_GEOCODE, LoadFlags.LOAD_CACHE_OR_DB);
+
+            assertThat(cacheDb).isNotNull();
+            assertThat(cacheDb.getGeocode()).isEqualTo(ARTIFICIAL_GEOCODE);
+
+            // all data from online cache
+            assertThat(cacheDb.getCoords()).isNull();
+            assertThat(cacheDb.getDescription()).isEqualTo("Cache description new");
+            assertThat(cacheDb.getShortDescription()).isEqualTo("Cache short-description old");
+            assertThat(cacheDb.getPersonalNote()).isNull();
+            assertThat(cacheDb.getHint()).isEqualTo("Cache hint new");
+        } finally {
+            DataStore.removeCache(ARTIFICIAL_GEOCODE, REMOVE_ALL);
+        }
+    }
+
+    @Test
+    public void testUpdateOfflineCache() {
+        try {
+            final Geopoint gp = new Geopoint(1, 2);
+            final Geocache cacheOld = new Geocache();
+            cacheOld.setGeocode(ARTIFICIAL_GEOCODE);
+            cacheOld.setCoords(new Geopoint(1, 2));
+            cacheOld.setDescription("Cache description old");
+            cacheOld.setShortDescription("Cache short-description old");
+            cacheOld.setPersonalNote("Personal note old");
+            cacheOld.setDetailed(true);
+
+            cacheOld.getLists().add(StoredList.STANDARD_LIST_ID);
+            DataStore.saveCache(cacheOld, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            // update cache-data
+            final Geocache cacheNew = new Geocache();
+            cacheNew.setGeocode(ARTIFICIAL_GEOCODE);
+            cacheNew.setDescription("Cache description new");
+            cacheNew.setHint("Cache hint new");
+
+            DataStore.saveCache(cacheNew, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            final Geocache cacheDb = DataStore.loadCache(ARTIFICIAL_GEOCODE, LoadFlags.LOAD_CACHE_OR_DB);
+
+            assertThat(cacheDb).isNotNull();
+            assertThat(cacheDb.getGeocode()).isEqualTo(ARTIFICIAL_GEOCODE);
+
+            // all data from online cache, but missing data from old cache
+            assertThat(cacheDb.getCoords()).isEqualTo(gp);
+            assertThat(cacheDb.getDescription()).isEqualTo("Cache description new");
+            assertThat(cacheDb.getShortDescription()).isEqualTo("Cache short-description old");
+            assertThat(cacheDb.getPersonalNote()).isEqualTo("Personal note old");
+            assertThat(cacheDb.getHint()).isEqualTo("Cache hint new");
+        } finally {
+            DataStore.removeCache(ARTIFICIAL_GEOCODE, REMOVE_ALL);
         }
     }
 

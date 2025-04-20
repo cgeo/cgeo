@@ -25,7 +25,7 @@ public class KeywordGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @Override
     public IGeocacheFilter getAdditionalFilterParameter() {
-        final NameGeocacheFilter nameFilter = (NameGeocacheFilter) GeocacheFilterType.NAME.create();
+        final NameGeocacheFilter nameFilter = GeocacheFilterType.NAME.create();
         nameFilter.getStringFilter().setTextValue(keyword);
         return nameFilter;
     }

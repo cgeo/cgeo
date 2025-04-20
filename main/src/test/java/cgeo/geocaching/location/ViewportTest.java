@@ -1,12 +1,13 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import static cgeo.geocaching.location.Viewport.containing;
 
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -67,6 +68,20 @@ public class ViewportTest {
         assertThat(vpRef.contains(new Geopoint(3.0, 4.0))).isTrue();
     }
 
+    @Test
+    public void testIntersect() {
+        final Viewport vp1 = Viewport.forE6(0, 0, 100, 100);
+        final Viewport vp2 = Viewport.forE6(50, 50, 150, 150);
+        final Viewport vp3 = Viewport.forE6(25, 25, 75, 75);
+        assertThat(Viewport.intersect(vp1, vp2)).isEqualTo(Viewport.forE6(50, 50, 100, 100));
+        assertThat(Viewport.intersect(Arrays.asList(vp1, vp2, vp3))).isEqualTo(Viewport.forE6(50, 50, 75, 75));
+
+        assertThat(Viewport.intersect(vp1, null)).isNull();
+        assertThat(Viewport.intersect(null)).isNull();
+        assertThat(Viewport.intersect(Arrays.asList(vp1, vp2, vp3, null))).isNull();
+
+    }
+
     @SuppressLint("DefaultLocale")
     @Test
     public void testSqlWhere() {
@@ -106,7 +121,7 @@ public class ViewportTest {
 
     @Test
     public void testContaining() {
-        assertThat(containing(singleton((ICoordinates) null))).isNull();
+        assertThat(containing(singleton((ICoordinate) null))).isNull();
         final Set<Geopoint> points = new HashSet<>();
         points.add(vpRef.bottomLeft);
         assertThat(containing(points)).isEqualTo(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft));

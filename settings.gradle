@@ -1,6 +1,6 @@
 // Develocity gradle plugin, see https://docs.gradle.com/develocity/gradle-plugin/
 plugins {
-    id 'com.gradle.develocity' version '3.17.2'
+    id 'com.gradle.develocity' version '3.18.2'
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.

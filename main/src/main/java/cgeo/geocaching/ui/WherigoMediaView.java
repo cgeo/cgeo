@@ -2,8 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoMediaViewBinding;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.wherigo.WherigoGame;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,11 +14,11 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /** Allows live-editing of a formula, optionally associated with a Variable List*/
@@ -58,7 +57,7 @@ public class WherigoMediaView extends LinearLayout {
 
     }
 
-    private void setMediaData(final int mediaId, final String type, final String fileNameToUse, final String altText, final Supplier<byte[]> dataSupplier) {
+    private void setMediaData(final int mediaId, final String type, final String fileName, final String altText, final Supplier<byte[]> dataSupplier) {
         if (mediaId == this.mediaId) {
             return;
         }
@@ -74,16 +73,13 @@ public class WherigoMediaView extends LinearLayout {
             return;
         }
 
-        final File cacheDir = LocalStorage.getWherigoCacheDirectory();
-        final File mediaFile = new File(cacheDir, fileNameToUse);
-
-        try {
-            final byte[] data = dataSupplier.get();
-            FileUtils.writeByteArrayToFile(mediaFile, data);
-        } catch (Exception e) {
-            Log.e("Problem extracting media data", e);
+        final byte[] data = dataSupplier.get();
+        if (data == null) {
             return;
         }
+
+        final File cacheDir = WherigoGame.get().getCacheDirectory();
+        final File mediaFile = cgeo.geocaching.utils.FileUtils.getOrCreate(cacheDir, "media-" + fileName, type, data);
 
         this.mediaId = mediaId;
 
@@ -91,7 +87,7 @@ public class WherigoMediaView extends LinearLayout {
         binding.mediaVideoView.setVisibility(GONE);
         binding.mediaGifView.setVisibility(GONE);
 
-        switch (type.toLowerCase()) {
+        switch (type.toLowerCase(Locale.US)) {
             case "mp4":
                 //Video
                 binding.mediaVideoView.setVideoURI(Uri.fromFile(mediaFile));
@@ -117,7 +113,7 @@ public class WherigoMediaView extends LinearLayout {
 
     public void setMediaData(final String type, final byte[] data, final String altText) {
         final int mediaId = this.mediaId >= 0 ? -1 : this.mediaId - 1;
-        setMediaData(mediaId, type, "file" + mediaId, altText, () -> data);
+        setMediaData(mediaId, type, "id" + mediaId, altText, () -> data);
     }
 
     public void setMedia(final Media media) {

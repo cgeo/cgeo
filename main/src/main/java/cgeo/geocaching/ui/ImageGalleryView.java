@@ -331,7 +331,7 @@ public class ImageGalleryView extends LinearLayout {
         }
     }
 
-    private void createCategory(final String category, final boolean atStart) {
+    public void createCategory(final String category, final boolean atStart) {
 
         if (!categorizedImageListHelper.containsCategory(category)) {
             categorizedImageListHelper.addOrMoveCategory(category, atStart);
@@ -348,10 +348,13 @@ public class ImageGalleryView extends LinearLayout {
             binding.imgGalleryCategoryTitle.setVisibility(View.VISIBLE);
             binding.imgGalleryCategoryTitle.setText(category);
         }
+        if (entry.getLayoutPosition() == 0) {
+            binding.imgGalleryCategoryTitle.setSeparatorAboveVisible(false);
+        }
 
         final boolean isEditableCat = this.editableCategoryHandlerMap.containsKey(category);
         binding.imgGalleryAddButtons.setVisibility(isEditableCat ? View.VISIBLE : View.GONE);
-        binding.imgGalleryAddMultiImages.setOnClickListener(v -> imageHelper.getMultipleImagesFromStorage(geocode, false, category));
+        binding.imgGalleryAddMultiImages.setOnClickListener(v -> imageHelper.getMultipleImagesFromStorage(geocode, false, category, null));
         binding.imgGalleryAddCamera.setOnClickListener(v -> imageHelper.getImageFromCamera(geocode, false, category));
         binding.imgGalleryAddMultiFiles.setOnClickListener(v -> imageHelper.getMultipleFilesFromStorage(geocode, false, category));
 

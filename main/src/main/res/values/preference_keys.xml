@@ -56,6 +56,7 @@
 
     <!-- category nearby search -->
     <string translatable="false" name="pref_nearbySearchLimit">nearbySearchLimit</string>
+    <string translatable="false" name="pref_coordSearchLimit">coordSearchLimit</string>
 
     <!-- settings for geocaching.com service screen -->
     <string translatable="false" name="preference_screen_gc">preference_screen_gc</string>
@@ -113,7 +114,6 @@
     <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
     <string translatable="false" name="pref_connectorECActive">connectorECActive</string>
     <string translatable="false" name="preference_screen_ec">preference_screen_ec</string>
-    <string translatable="false" name="pref_fakekey_ec_website">fakekey_ec_website</string>
 
     <!-- settings for geocaching.su screen -->
     <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
@@ -156,6 +156,7 @@
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
     <string translatable="false" name="pref_units_imperial">units</string>
+    <string translatable="false" name="pref_short_date_format">short_date_format</string>
     <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
     <string translatable="false" name="pref_startscreen">startscreen</string>
     <string translatable="false" name="pref_custombnitem">custombnitem</string>
@@ -174,11 +175,11 @@
     <string translatable="false" name="pref_mapline_trackcolor">mapline_trackcolor</string>
     <string translatable="false" name="pref_mapline_trackwidth">mapline_trackwidth</string>
     <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
-    <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
+    <string translatable="false" name="pref_mapline_geofencecolor">mapline_geofencecolor</string>
     <string translatable="false" name="pref_mapline_accuracycirclecolor">mapline_accuracycirclecolor</string>
-    <string translatable="false" name="pref_mapline_accuracycirclefillcolor">mapline_accuracycirclefillcolor</string>
 
     <!-- category UnifiedMap -->
+    <string translatable="false" name="pref_fakekey_vtmScaling">vtmScaling</string>
     <string translatable="false" name="pref_vtmUserScale">vtmUserScale</string>
     <string translatable="false" name="pref_vtmTextScale">vtmTextScale</string>
     <string translatable="false" name="pref_vtmSymbolScale">vtmSymbolScale</string>
@@ -189,6 +190,8 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
     <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
+    <string translatable="false" name="pref_translation_language">translation_language</string>
+    <string translatable="false" name="pref_translation_notranslate">translation_notranslate</string>
     <string translatable="false" name="pref_livelist">livelist</string>
     <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
     <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
@@ -201,7 +204,14 @@
     <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
     <!-- ============================================================================================================================================================================== -->
 
-    <!-- category map data -->
+    <!-- category map data: UnifiedMap -->
+    <string translatable="false" name="pref_tileprovider">tileprovider</string>
+    <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
+    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
+    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+
+    <!-- category map data: legacy maps -->
+    <string translatable="false" name="pref_useLegacyMap">useLegacyMap</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
 
     <!-- category offline maps -->
@@ -215,19 +225,14 @@
     <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
     <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
+    <string translatable="false" name="pref_buildingLayer3D">buildingLayer3D</string>
 
     <!-- category offline maps hillshading -->
     <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
-    <string translatable="false" name="pref_maphillshading">maphillshading</string>
+    <string translatable="false" name="pref_maphillshading_show_layer">maphillshading_show_layer</string>
+    <string translatable="false" name="pref_maphillshading_hq">maphillshading_hq</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
-    <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>
-    <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
-
-    <!-- category unified map -->
-    <string translatable="false" name="pref_tileprovider">tileprovider</string>
-    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_useUnifiedMap">featureSwitch_useUnifiedMap</string>
-    <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
+    <string translatable="false" name="pref_rapidapiKey">rapidapiKey</string>
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
@@ -370,6 +375,7 @@
     <!-- category local filesystem -->
     <string translatable="false" name="pref_persistablefolder_basedir">persistablefolder_basedir</string>
     <string translatable="false" name="pref_persistablefolder_testdir">persistablefolder_testdir</string>
+    <string translatable="false" name="pref_fakekey_local_filesystem">fakekey_local_filesystem</string>
 
     <!-- category geolocation -->
     <string translatable="false" name="pref_googleplayservices">googleplayservices</string>
@@ -380,6 +386,9 @@
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
 
+    <!-- category clpboard copy action -->
+    <string translatable="false" name="pref_clipboard_copy_action">clipboardCopyAction</string>
+
     <!-- category extended settings -->
     <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
 
@@ -389,6 +398,7 @@
     <string translatable="false" name="pref_fakekey_memory_dump">fakekey_memory_dump</string>
     <string translatable="false" name="pref_fakekey_reset_otm">fakekey_reset_otm</string>
     <string translatable="false" name="pref_fakekey_view_settings">fakekey_view_settings</string>
+    <string translatable="false" name="pref_fakekey_view_database">fakekey_view_database</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -452,9 +462,46 @@
         <item>@string/pref_value_startscreen_nearby</item>
     </string-array>
 
+    <!-- appearance => short date format -->
+    <string translatable="false" name="pref_value_short_date_format_default" />
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.YY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-dd</string>
+    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-dd</string>
+    <string-array name="pref_values_short_date_format">
+        <item>@string/pref_value_short_date_format_default</item>
+        <item>@string/pref_value_short_date_format_DDdotMMdotYYYY</item>
+        <item>@string/pref_value_short_date_format_DDdotMMdotYY</item>
+        <item>@string/pref_value_short_date_format_MMslashDDslashYYYY</item>
+        <item>@string/pref_value_short_date_format_MMslashDDslashYY</item>
+        <item>@string/pref_value_short_date_format_DDslashMMslashYYYY</item>
+        <item>@string/pref_value_short_date_format_DDslashMMslashYY</item>
+        <item>@string/pref_value_short_date_format_YYYYdashMMdashDD</item>
+        <item>@string/pref_value_short_date_format_YYdashMMdashDD</item>
+    </string-array>
+
+    <!-- Geocaching.com => image size -->
+    <string translatable="false" name="pref_value_gc_imagesize_original">ORIGINAL</string>
+    <string translatable="false" name="pref_value_gc_imagesize_large">LARGE</string>
+    <string translatable="false" name="pref_value_gc_imagesize_display">DISPLAY</string>
+    <string translatable="false" name="pref_value_gc_imagesize_small">SMALL</string>
+    <string-array name="pref_gc_imagesize_values">
+        <item>@string/pref_value_gc_imagesize_original</item>
+        <item>@string/pref_value_gc_imagesize_large</item>
+        <item>@string/pref_value_gc_imagesize_display</item>
+        <item>@string/pref_value_gc_imagesize_small</item>
+    </string-array>
+
     <!-- ============================================================================================================================================================================== -->
     <!-- other preference keys (not used directly in our preferences) -->
     <!-- ============================================================================================================================================================================== -->
+
+    <!-- persistent cookies in cookiejar -->
+    <string translatable="false" name="pref_cookiejar">cookiejar</string>
 
     <!-- ids for persistable folder/uri prefs -->
     <string translatable="false" name="pref_persistablefolder_logfiles">persistablefolder_logfiles</string>
@@ -506,9 +553,6 @@
     <string translatable="false" name="pref_temp_ocuk2_token_secret">ocuk2-temp-token-secret</string>
     <string translatable="false" name="pref_temp_ocuk2_token_public">ocuk2-temp-token-public</string>
 
-    <string translatable="false" name="pref_ecusername">ecusername</string>
-    <string translatable="false" name="pref_ecpassword">ecpassword</string>
-
     <string translatable="false" name="pref_su_tokensecret">su_tokensecret</string>
     <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>
     <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
@@ -522,13 +566,15 @@
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
-    <string translatable="false" name="pref_feature_wherigo">feature_wherigo</string>
+    <string translatable="false" name="pref_feature_unified_debug">feature_unified_debug</string>
     <string translatable="false" name="pref_feature_wherigo_debug">feature_wherigo_debug</string>
+    <string translatable="false" name="pref_vtm_single_marker_symbol">vtmSingleMarkerSymbol</string>
+    <string translatable="false" name="pref_vtm_marker_atlas_usage">vtmMarkerAtlasUsage</string>
 
 
 
     <!-- additional map settings -->
-    <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
+    <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_mapLanguage">mapLanguage</string>
@@ -549,9 +595,12 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_google_map_theme">google_map_theme</string>
+    <string translatable="false" name="pref_google_map_option_enabled">google_map_option_enabled</string>
     <string translatable="false" name="pref_mapCacheScaling">mapCacheScaling</string>
     <string translatable="false" name="pref_mapWpScaling">mapWpScaling</string>
     <string translatable="false" name="pref_mapScaleOnly">mapScaleOnly</string>
+    <string translatable="false" name="pref_unifiedMapVariants">unifiedMapVariants</string>
+    <string translatable="false" name="pref_autorenameDownloads">autorenameDownloads</string>
 
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
@@ -578,6 +627,8 @@
     <string translatable="false" name="pref_trackableaction">trackableaction</string>
     <string translatable="false" name="pref_trackable_inventory_sort">trackableComparator</string>
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
+    <string translatable="false" name="pref_includelogs">includelogs</string>
+    <string translatable="false" name="pref_includetravelbugs">includetravelbugs</string>
     <string translatable="false" name="pref_cleartrailafterexportstatus">cleartrailafterexportstatus</string>
     <string translatable="false" name="pref_logImageScale">logImageScale</string>
     <string translatable="false" name="pref_fieldNoteExportDate">fieldnoteExportDate</string>
@@ -591,7 +642,14 @@
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
     <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>
     <string translatable="false" name="pref_pollMessageCenter">pollMessageCenter</string>
+    <string translatable="false" name="pref_gc_imagesize">gc_imagesize</string>
     <string translatable="false" name="pref_simple_list_model_config">simple_list_model_config</string>
+
+    <string translatable="false" name="pref_search_history_keyword">search_history_keyword</string>
+    <string translatable="false" name="pref_search_history_owner">search_history_owner</string>
+    <string translatable="false" name="pref_search_history_finder">search_history_finder</string>
+    <string translatable="false" name="pref_search_history_trackable">search_history_trackable</string>
+    <string translatable="false" name="pref_search_history_address">search_history_address</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>
@@ -599,6 +657,7 @@
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
     <string translatable="false" name="pref_followMyLocation">followMyLocation</string>
+    <string translatable="false" name="pref_autozoom_consider_lastcenter">list_viewport_calculation_consider_lastviewport</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -611,5 +670,6 @@
     <string translatable="false" name="old_pref_showListsInCacheList">showListsInCacheList</string>
 
     <string translatable="false" name="pref_legacy_filter_config_migrated">legacy_filter_config_migrated</string>
+    <string translatable="false" name="pref_last_used_date">last_used_logdate</string>
 
 </resources>

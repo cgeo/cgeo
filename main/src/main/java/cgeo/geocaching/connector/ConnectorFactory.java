@@ -3,7 +3,6 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.al.ALConnector;
-import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
@@ -36,6 +35,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
@@ -51,6 +51,7 @@ import java.util.Map;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.BiConsumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
@@ -65,19 +66,19 @@ public final class ConnectorFactory {
             new OCCZConnector(),
             new OCApiLiveConnector("opencache.uk", "opencache.uk", true, "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret,
-                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK", ApiBranch.ocpl),
+                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK", ApiBranch.ocpl, R.string.preference_screen_ocuk),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", true, "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
-                    R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL", ApiBranch.ocpl),
+                    R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL", ApiBranch.ocpl, R.string.preference_screen_ocnl),
             new OCApiLiveConnector("opencaching.pl", "opencaching.pl", true, "OP", "CC BY-SA 3.0",
                     R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret,
-                    R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current, "OC.PL", ApiBranch.ocpl),
+                    R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current, "OC.PL", ApiBranch.ocpl, R.string.preference_screen_ocpl),
             new OCApiLiveConnector("opencaching.us", "www.opencaching.us", true, "OU", "CC BY-NC-SA 2.5",
                     R.string.oc_us_okapi_consumer_key, R.string.oc_us_okapi_consumer_secret,
-                    R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current, "OC.US", ApiBranch.ocpl),
+                    R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current, "OC.US", ApiBranch.ocpl, R.string.preference_screen_ocus),
             new OCApiLiveConnector("opencaching.ro", "www.opencaching.ro", true, "OR", "CC BY-SA 3.0",
                     R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret,
-                    R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current, "OC.RO", ApiBranch.ocpl),
+                    R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current, "OC.RO", ApiBranch.ocpl, R.string.preference_screen_ocro),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
             new TerraCachingConnector(),
@@ -135,7 +136,6 @@ public final class ConnectorFactory {
     }
 
     @NonNull
-    @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
         return getMatchingConnectors(clazz, null);
     }
@@ -181,18 +181,18 @@ public final class ConnectorFactory {
                 liveConns.add((ILogin) conn);
             }
         }
-        return liveConns.toArray(new ILogin[liveConns.size()]);
+        return liveConns.toArray(new ILogin[0]);
     }
 
     @NonNull
     public static IConnector[] getActiveConnectorsWithValidCredentials() {
         final List<IConnector> credConns = new ArrayList<>();
         for (final IConnector conn : CONNECTORS) {
-            if (conn instanceof ILogin && conn instanceof ICredentials && conn.isActive() && Settings.getCredentials((ICredentials) conn).isValid()) {
+            if (conn.hasValidCredentials()) {
                 credConns.add(conn);
             }
         }
-        return credConns.toArray(new IConnector[credConns.size()]);
+        return credConns.toArray(new IConnector[0]);
     }
 
     @NonNull
@@ -208,15 +208,6 @@ public final class ConnectorFactory {
 
     public static boolean anyConnectorActive() {
         for (final IConnector conn : CONNECTORS) {
-            if (conn.isActive()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean anyTrackableConnectorActive() {
-        for (final TrackableConnector conn : trackableConnectors) {
             if (conn.isActive()) {
                 return true;
             }
@@ -357,19 +348,22 @@ public final class ConnectorFactory {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 
-    /**
-     * @see ISearchByViewPort#searchByViewport
-     */
-    @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return searchByViewport(viewport, null);
-    }
-
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
-        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport, filter));
         AmendmentUtils.amendCachesForViewport(result, viewport, filter);
         return result;
+    }
+
+    public static void searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter, @NonNull final BiConsumer<IConnector, SearchResult> callback) {
+        SearchResult.parallelCombineActive(searchByViewPortConns, connector -> {
+            Log.iForce("ConnectorFactory: START request for " + connector.getName());
+            final long startTs = System.currentTimeMillis();
+            final SearchResult sr = connector.searchByViewport(viewport, filter);
+            AmendmentUtils.amendCachesForViewport(sr, viewport, filter);
+            Log.iForce("ConnectorFactory: END request for " + connector.getName() + " (" + (System.currentTimeMillis() - startTs) + "ms)");
+            return sr;
+        }, callback::accept);
     }
 
     @Nullable
@@ -455,7 +449,7 @@ public final class ConnectorFactory {
 
     /**
      * Load a trackable.
-     *
+     * <br>
      * We query all the connectors that can handle the trackable in parallel as well as the local storage.
      * We return the first positive result coming from a connector, or, if none, the result of loading from
      * the local storage.

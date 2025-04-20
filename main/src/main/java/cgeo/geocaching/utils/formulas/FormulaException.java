@@ -9,6 +9,9 @@ import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.StringRes;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class FormulaException extends IllegalArgumentException {
@@ -20,6 +23,7 @@ public class FormulaException extends IllegalArgumentException {
         MISSING_VARIABLE_VALUE(R.string.formula_error_missingvarvalue, "Missing: %1$s"),
         CYCLIC_DEPENDENCY(R.string.formula_error_cyclicdependency, "Cycle: %1$s"),
         EMPTY_FORMULA(R.string.formula_error_empty, "Empty Formula"),
+        NUMERIC_OVERFLOW(R.string.formula_error_numeric_overflow, "Numeric overflow"),
         OTHER(R.string.formula_error_other, "Error: '%1$s'");
 
         @StringRes
@@ -40,22 +44,24 @@ public class FormulaException extends IllegalArgumentException {
     private CharSequence expressionFormatted;
     private String expression;
     private String functionContext;
+    private final Set<Integer> childrenInError;
     private int parsingPos = -1;
     private int parsingChar = 0;
     private String evaluationContext;
 
-    public FormulaException(final Throwable cause, final ErrorType errorType, final Object... errorParams) {
+    public FormulaException(final Throwable cause, final Set<Integer> childrenInError, final ErrorType errorType, final Object... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
         this.errorType = errorType;
+        this.childrenInError = childrenInError;
     }
 
     public FormulaException(final ErrorType errorType, final Object... errorParams) {
-        this(null, errorType, errorParams);
+        this(null, null, errorType, errorParams);
     }
 
-    public ErrorType getErrorType() {
-        return errorType;
+    public Set<Integer> getChildrenInError() {
+        return childrenInError == null ? Collections.emptySet() : childrenInError;
     }
 
     public void setExpression(final String expression) {

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/tableSpinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:dropDownWidth="wrap_content"
+            android:layout_alignParentLeft="true" />
+
+        <ImageView
+            android:id="@+id/tableButtonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_toRightOf="@id/tableSpinner"
+            android:src="@drawable/ic_menu_search" />
+        <TextView
+            android:id="@+id/searchTerm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tableButtonSearch" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/searchTerm"
+            android:gravity="right"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/tableButtonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/arrow_back" />
+            <ImageView
+                android:id="@+id/tableButtonForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/arrow_forward" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <net.movingbits.datatables.Datatable
+        android:id="@+id/tableData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
+        android:background="#C0000000"/>
+
+</LinearLayout>

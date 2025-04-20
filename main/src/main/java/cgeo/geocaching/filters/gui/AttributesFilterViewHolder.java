@@ -40,7 +40,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
     private void toggleAttributeIcon(final CacheAttribute ca) {
         final Boolean state = getAttributeIconState(ca);
-        final Boolean newState = state == null ? Boolean.TRUE : (state ? Boolean.FALSE : null);
+        final Boolean newState = state == null ? Boolean.TRUE : ((state && isAttributeFilterSourcesGC(sourcesState) && ca.stringIdNo != 0) ? Boolean.FALSE : null);
         setAttributeState(ca, newState);
     }
 
@@ -98,7 +98,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         sources.addButtons(R.string.attribute_source_gc, R.string.attribute_source_oc);
         sources.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             // always check a button. IDs are 3 and 4
-            if (sources.getCheckedButtonIndexes().size() == 0) {
+            if (sources.getCheckedButtonIndexes().isEmpty()) {
                 sources.setCheckedButtonByIndex(1 - (checkedId - 3), true);
             }
             sourcesState = 0;

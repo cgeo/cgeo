@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/dialog_actionlist"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- header infos -->
+            <TextView
+                android:id="@+id/headerInformation"
+                android:textIsSelectable="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Media -->
+            <cgeo.geocaching.ui.WherigoMediaView
+                android:id="@+id/media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- User description -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+
+            <!-- Debug Infos -->
+        <LinearLayout
+            android:id="@+id/debug_box"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/debug_info_title"
+                android:paddingTop="5dp"
+                android:text="Debug Information"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                tools:ignore="HardcodedText"
+                android:autoLink="web" />
+
+            <TextView
+                android:id="@+id/debug_info"
+                android:paddingTop="5dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+
+        </LinearLayout>
+
+            <!-- Save Games -->
+            <TextView
+                android:id="@+id/savegame_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web" />
+
+            <!-- Savegame List -->
+            <cgeo.geocaching.ui.SimpleItemListView
+                android:id="@+id/dialog_itemlistview"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Action List -->
+    <cgeo.geocaching.ui.SimpleItemListView
+        android:id="@+id/dialog_actionlist"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:paddingTop="6dip"/>
+
+
+
+
+</RelativeLayout>

@@ -168,7 +168,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
 
     /**
      * calcBoundingCircle is inspired by the algorithm described on
-     * http://geomalgorithms.com/a08-_containers.html
+     * <a href="http://geomalgorithms.com/a08-_containers.html">...</a>
      * (fast computation of bounding circly in c). It is not as fast (the original
      * algorithm runs in linear time), as it may do more iterations but it takes
      * into account the coslat-factor being used for the linear approximation that
@@ -304,7 +304,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
         Point p1 = points.get(0);
         for (int i = 1; i <= iLast; i++) {
             final Point p2 = points.get(i);
-            if (OsmNogoPolygon.isOnLine(px, py, p1.x, p1.y, p2.x, p2.y)) {
+            if (isOnLine(px, py, p1.x, p1.y, p2.x, p2.y)) {
                 return true;
             }
             p1 = p2;
@@ -334,7 +334,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
             final long p1x = p1.x;
             final long p1y = p1.y;
 
-            if (OsmNogoPolygon.isOnLine(px, py, p0x, p0y, p1x, p1y)) {
+            if (isOnLine(px, py, p0x, p0y, p1x, p1y)) {
                 return true;
             }
 

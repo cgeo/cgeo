@@ -2,6 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -26,11 +27,10 @@ public class Units {
         }
     }
 
-    /* formats elevation in m according to useImperialUnits() setting */
-    public static String formatElevation(final float elevationInM) {
-        // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
-        final double temp = Float.isNaN(elevationInM) ? Double.NaN : Settings.useImperialUnits() ? elevationInM * IConversion.METERS_TO_FEET : elevationInM;
-        return Double.isNaN(temp) ? "" : String.format(Locale.getDefault(), "%.1f", temp) + (Settings.useImperialUnits() ? " ft" : " m");
+    /** formats given elevation in meters or feet, no fractions, no kilometers/miles */
+    public static String formatElevation(final float meters) {
+        final NumberFormat nf = NumberFormat.getIntegerInstance(Locale.getDefault());
+        return Float.isNaN(meters) ? "" : Settings.useImperialUnits() ? nf.format(meters * IConversion.METERS_TO_FEET) + " ft" : nf.format(meters) + " m";
     }
 
     public static float generateSmartRoundedAverageDistance(final float newDistance, final float lastDistance) {
@@ -54,15 +54,15 @@ public class Units {
     }
 
     public static String getDistanceFromKilometers(final Float distanceKilometers) {
-        if (distanceKilometers == null) {
+        if (distanceKilometers == null || Float.isNaN(distanceKilometers) || Float.isInfinite(distanceKilometers)) {
             return "?";
         }
 
         final ImmutablePair<Double, String> scaled = scaleDistance(distanceKilometers);
         final String formatString;
-        if (scaled.left >= 100) {
+        if (Math.abs(scaled.left) >= 100) {
             formatString = "%.0f %s";
-        } else if (scaled.left >= 10) {
+        } else if (Math.abs(scaled.left) >= 10) {
             formatString = "%.1f %s";
         } else {
             formatString = "%.2f %s";
@@ -73,6 +73,17 @@ public class Units {
 
     public static String getDistanceFromMeters(final float meters) {
         return getDistanceFromKilometers(meters / 1000f);
+    }
+
+    public static String getDirectionFromBearing(final float bb) {
+        final float bearing = (bb + 360) % 360f;
+        final boolean north = bearing <= 67.5 || bearing >= 292.5;
+        final boolean south = bearing >= 112.5 && bearing <= 247.5;
+        final boolean east = bearing >= 22.5 && bearing <= 157.5;
+        final boolean west = bearing >= 202.5 && bearing <= 337.5;
+
+        return (north ? "N" : (south ? "S" : "")) + (east ? "E" : (west ? "W" : ""));
+
     }
 
     public static String getSpeed(final float kilometersPerHour) {

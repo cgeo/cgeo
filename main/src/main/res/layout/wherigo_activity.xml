@@ -13,57 +13,242 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="Wherigo" />
-        </RelativeLayout>
+        <!-- Experimental warning -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/experimental_warning"
+            android:textSize="@dimen/textSize_headingSecondary"
+            android:textColor="@color/archived_cache_color"
+            android:background="@drawable/mark_gray"
+            android:autoLink="web"
+            android:textIsSelectable="true"
+            tools:ignore="HardcodedText"
+            android:text="Beta version"/>
+
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/wherigo_controls" />
 
         <!--  buttons -->
         <LinearLayout
             android:id="@+id/action_buttons"
-            android:visibility="visible"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            >
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/start_game"
+                android:id="@+id/view_cartridges"
                 style="@style/button_icon"
-                android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_open_in_browser" />
-
-            <Button
-                android:id="@+id/save_game"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_save" />
-
-            <Button
-                android:id="@+id/stop_game"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_cancel" />
+                android:tooltipText="@string/wherigo_controls_cartridgelist_hint"
+                app:icon="@drawable/ic_menu_select_play" />
 
             <Button
                 android:id="@+id/download"
                 style="@style/button_icon"
-                android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_face" />
+                android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
+                app:icon="@drawable/wherigo_download" />
 
+            <View
+                style="@style/separator_vertical" />
+
+            <Button
+                android:id="@+id/report_problem"
+                style="@style/button_icon"
+                android:tooltipText="@string/wherigo_controls_reportproblem_hint"
+                app:icon="@drawable/ic_menu_bug_report" />
 
         </LinearLayout>
 
-        <!-- Item List -->
+        <LinearLayout
+            android:id="@+id/cache_context_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:autoLink="web"
+                android:textIsSelectable="true"
+                android:text="@string/wherigo_controls_cache_context"/>
+            <TextView
+                android:id="@+id/cache_context_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:textIsSelectable="true"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/cache_context_gotocache"
+                    style="@style/button_full"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/cache_context_remove"
+                    android:layout_margin="3dp"
+                    android:minWidth="2dp"
+                    android:text="@string/wherigo_controls_cache_link"/>
+                <Button
+                    android:id="@+id/cache_context_remove"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_delete" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Info about current cartridge -->
+        <LinearLayout
+            android:id="@+id/wherigo_cartridge_infos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <cgeo.geocaching.ui.SectionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerAbove="true"
+                android:text="@string/wherigo_currently_playing" />
+
+            <!--  game buttons -->
+            <LinearLayout
+                android:id="@+id/gmae_action_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/load_game"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_controls_loadgame_hint"
+                    app:icon="@drawable/wherigo_load" />
+
+                <Button
+                    android:id="@+id/save_game"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_controls_savegame_hint"
+                    app:icon="@drawable/wherigo_save" />
+
+                <Button
+                    android:id="@+id/stop_game"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_controls_stopgame_hint"
+                    app:icon="@drawable/wherigo_close" />
+
+                <Button
+                    android:id="@+id/map"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_controls_mapzones_hint"
+                    app:icon="@drawable/ic_menu_mapmode" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/resume_dialog"
+                style="@style/button_full"
+                android:layout_margin="3dp"
+                android:minWidth="2dp"
+                android:text="@string/wherigo_controls_resume_paused_dialog"/>
+
+            <TextView
+                android:id="@+id/game_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/revoke_fixed_location"
+                style="@style/button_full"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/wherigo_revoke_fixed_location"/>
+
+        </LinearLayout>
+
+        <!-- Item Type List -->
 
         <cgeo.geocaching.ui.SimpleItemListView
-            android:id="@+id/wherigo_things_list"
+            android:id="@+id/wherigo_thing_type_list"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:nestedScrollingEnabled="true"
             />
+
+        <!-- Sound box -->
+        <LinearLayout
+            android:id="@+id/sound_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+                <View style="@style/separator_horizontal_heading" />
+                <TextView
+                    style="@style/separator_horizontal_heading_text"
+                    android:text="@string/wherigo_sound_title" />
+            </RelativeLayout>
+
+            <!--  Music buttons -->
+            <LinearLayout
+                android:id="@+id/music_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sound_restart"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_restart"
+                    app:icon="@drawable/ic_menu_replay" />
+
+                <Button
+                    android:id="@+id/sound_pause"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_pause"
+                    app:icon="@drawable/ic_menu_pause" />
+
+                <Button
+                    android:id="@+id/sound_continue"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_continue"
+                    app:icon="@drawable/ic_menu_play_arrow" />
+
+                <Button
+                    android:id="@+id/sound_mute"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_mute"
+                    app:icon="@drawable/ic_menu_volume_off" />
+
+                <Button
+                    android:id="@+id/sound_unmute"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_unmute"
+                    app:icon="@drawable/ic_menu_volume_up" />
+
+                <TextView
+                    android:id="@+id/sound_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_headingSecondary"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

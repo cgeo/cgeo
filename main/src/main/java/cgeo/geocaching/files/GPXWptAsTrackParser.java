@@ -49,7 +49,7 @@ public class GPXWptAsTrackParser implements AbstractTrackOrRouteParser.RoutePars
         root.setStartElementListener(attrs -> temp = new ArrayList<>());
 
         root.setEndElementListener(() -> {
-            if (temp.size() > 0) {
+            if (!temp.isEmpty()) {
                 result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
                 temp = null;
             }

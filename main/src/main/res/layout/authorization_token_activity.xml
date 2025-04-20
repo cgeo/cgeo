@@ -33,7 +33,8 @@
                 android:autofillHints=".AUTOFILL_HINT_USERNAME" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline"
+            app:endIconMode="password_toggle">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:inputType="textPassword"

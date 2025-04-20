@@ -69,9 +69,7 @@ public class MessageCenterUtils {
                         Log.d("received message center update, count=" + lastCount);
                         notifyIfMessagesPending();
                     }
-                }, throwable -> {
-                    Log.e("Error occurred while polling message center: " + throwable.getMessage());
-                });
+                }, throwable -> Log.e("Error occurred while polling message center: " + throwable.getMessage()));
     }
 
     public static void notifyIfMessagesPending() {

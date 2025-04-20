@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -113,7 +114,7 @@ public class RoutingParamCollector {
      * @throws     UnsupportedEncodingException
      */
     public Map<String, String> getUrlParams(final String url) throws UnsupportedEncodingException {
-        final HashMap<String, String> params = new HashMap<>();
+        final Map<String, String> params = new HashMap<>();
         final String decoded = URLDecoder.decode(url, "UTF-8");
         final StringTokenizer tk = new StringTokenizer(decoded, "?&");
         while (tk.hasMoreTokens()) {
@@ -139,12 +140,12 @@ public class RoutingParamCollector {
      */
     public void setParams(final RoutingContext rctx, final List<OsmNodeNamed> wplist, final Map<String, String> params) {
         if (params != null) {
-            if (params.size() == 0) {
+            if (params.isEmpty()) {
                 return;
             }
 
             // prepare nogos extra
-            if (params.containsKey("nogoLats") && params.get("nogoLats").length() > 0) {
+            if (params.containsKey("nogoLats") && !params.get("nogoLats").isEmpty()) {
                 final List<OsmNodeNamed> nogoList = readNogos(params.get("nogoLons"), params.get("nogoLats"), params.get("nogoRadi"));
                 if (nogoList != null) {
                     RoutingContext.prepareNogoPoints(nogoList);
@@ -201,8 +202,8 @@ public class RoutingParamCollector {
                 if (key.equals("straight")) {
                     try {
                         final String[] sa = value.split(",");
-                        for (int i = 0; i < sa.length; i++) {
-                            final int v = Integer.parseInt(sa[i]);
+                        for (String s : sa) {
+                            final int v = Integer.parseInt(s);
                             if (wplist.size() > v) {
                                 wplist.get(v).direct = true;
                             }
@@ -232,9 +233,9 @@ public class RoutingParamCollector {
                 } else if (key.equals("exportWaypoints")) {
                     rctx.exportWaypoints = (Integer.parseInt(value) == 1);
                 } else if (key.equals("format")) {
-                    rctx.outputFormat = ((String) value).toLowerCase();
+                    rctx.outputFormat = value.toLowerCase(Locale.ROOT);
                 } else if (key.equals("trackFormat")) {
-                    rctx.outputFormat = ((String) value).toLowerCase();
+                    rctx.outputFormat = value.toLowerCase(Locale.ROOT);
                 } else if (key.startsWith("profile:")) {
                     if (rctx.keyValues == null) {
                         rctx.keyValues = new HashMap<>();
@@ -254,7 +255,7 @@ public class RoutingParamCollector {
      */
     public void setProfileParams(final RoutingContext rctx, final Map<String, String> params) {
         if (params != null) {
-            if (params.size() == 0) {
+            if (params.isEmpty()) {
                 return;
             }
             if (rctx.keyValues == null) {
@@ -274,8 +275,8 @@ public class RoutingParamCollector {
     private void parseNogoPolygons(final String polygons, final List<OsmNodeNamed> result, final boolean closed) {
         if (polygons != null) {
             final String[] polygonList = polygons.split("\\|");
-            for (int i = 0; i < polygonList.length; i++) {
-                final String[] lonLatList = polygonList[i].split(",");
+            for (String s : polygonList) {
+                final String[] lonLatList = s.split(",");
                 if (lonLatList.length > 1) {
                     final OsmNogoPolygon polygon = new OsmNogoPolygon(closed);
                     int j;
@@ -292,7 +293,7 @@ public class RoutingParamCollector {
                         nogoWeight = lonLatList[j];
                     }
                     polygon.nogoWeight = Double.parseDouble(nogoWeight);
-                    if (polygon.points.size() > 0) {
+                    if (!polygon.points.isEmpty()) {
                         polygon.calcBoundingCircle();
                         result.add(polygon);
                     }
@@ -310,8 +311,8 @@ public class RoutingParamCollector {
         final String[] lonLatNameList = pois.split("\\|");
 
         final List<OsmNodeNamed> poisList = new ArrayList<>();
-        for (int i = 0; i < lonLatNameList.length; i++) {
-            final String[] lonLatName = lonLatNameList[i].split(",");
+        for (String s : lonLatNameList) {
+            final String[] lonLatName = s.split(",");
 
             if (lonLatName.length != 3) {
                 continue;
@@ -337,8 +338,8 @@ public class RoutingParamCollector {
         final String[] lonLatRadList = nogos.split("\\|");
 
         final List<OsmNodeNamed> nogoList = new ArrayList<>();
-        for (int i = 0; i < lonLatRadList.length; i++) {
-            final String[] lonLatRad = lonLatRadList[i].split(",");
+        for (String s : lonLatRadList) {
+            final String[] lonLatRad = s.split(",");
             String nogoWeight = "NaN";
             if (lonLatRad.length > 3) {
                 nogoWeight = lonLatRad[3];

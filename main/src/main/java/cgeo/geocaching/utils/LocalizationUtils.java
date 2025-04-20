@@ -24,7 +24,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 /**
  * A set of static helper methods supporting localization/internationalization
  * especially in areas where Code has no activity available to get a context from.
- *
+ * <br>
  * All methods work also in unit-test environments (where there is no available context
  */
 public final class LocalizationUtils {
@@ -34,10 +34,6 @@ public final class LocalizationUtils {
 
     private LocalizationUtils() {
         //Util class, no instance
-    }
-
-    public static boolean hasContext() {
-        return APPLICATION_CONTEXT != null;
     }
 
     public static String getString(@StringRes final int resId, final Object... params) {
@@ -54,7 +50,14 @@ public final class LocalizationUtils {
             }
             return params != null && params.length > 0 ? APPLICATION_CONTEXT.getString(resId, params) : APPLICATION_CONTEXT.getString(resId);
         } catch (IllegalFormatException | Resources.NotFoundException e) {
-            Log.w("Problem trying to format '" + resId + "/" + fallback + "' with [" + StringUtils.join(params, ";") + "]", e);
+            String resStringWoFormat = null;
+            try {
+                resStringWoFormat = APPLICATION_CONTEXT == null ? null : APPLICATION_CONTEXT.getString(resId);
+            } catch (Exception ex) {
+                //ignore, this is for logging only!
+            }
+
+            Log.w("Problem trying to format '" + resId + "/'" + resStringWoFormat + "'/" + fallback + "' with [" + StringUtils.join(params, ";") + "] (appContext valid: " + (APPLICATION_CONTEXT != null) + ")", e);
             return (fallback == null ? "" : fallback) + ":" + StringUtils.join(params, ";");
         }
     }

@@ -1,25 +1,24 @@
 ##
-- Korrektur: Wegpunkte ein-/ausblenden funktioniert nicht korrekt, wenn Wegpunktlimit überschritten wird (UnifiedMap)
-- Korrektur: Loggen von Caches oder Trackables funktioniert aufgrund von Webseiten-Änderung nicht mehr
-- Korrektur: Löschen eigener Logs funktioniert nicht
+- Korrektur: Favoriten-Status geht verloren, wenn während der Erstellung eines Logs ein Bild ausgewählt wird
 
 ##
-- Korrektur: Fundzähler wird in bestimmten Situationen aufgrund von Webseiten-Änderungen nicht korrekt erkannt
-- Korrektur: Absturz beim Öffnen der Karte mit leeren Track-Dateinamen
-- Korrektur: Automatische Kartendrehung weiter aktiv nach Zurücksetzen über Kompassrose (UnifiedMap)
-- Korrektur: Fehlende Kompassrose in Modi zur automatischen Kartendrehung auf Google Maps (UnifiedMap)
-- Korrektur: Trackable Logs können aufgrund von Änderungen der Webseite nicht geladen werden
-- Änderung: "Höhe (Karte)" und "Koordinaten anzeigen" im Kartenmenü zu "Ausgewählte Position" zusammengefasst und Entfernung zur aktuellen Position ergänzt
+- Korrektur: Wherigo-Links ohne Hostname nicht erkannt
+- Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
+- Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)
 
 ##
-- Neu: Löschen von Offline-Logs über Kontextmenü
-- Korrektur: Löschen eines Offline-Logs funktioniert unter bestimmten Bedingungen nicht
-- Korrektur: Filtername nach Änderungen über Schnelleinstellungen verloren
-- Änderung: Trackdateien nach Namen sortieren
-- Änderung: Speichere gewählte Trackable-Aktion auch bei Offline-Logs
-- Korrektur: Karte springt zu 0,0 Koordinaten bei Kartenänderung (UnifiedMap)
-- Korrektur: Nach Setzen eines Wegpunktes als Ziel springt die Zielanzeige wieder zurück zum Cache (UnifiedMap)
-- Korrektur: "Speichern" eines Caches ohne eine Liste auszuwählen
-- Korrektur: Anmeldefehler bei geocaching.com (Webseitenänderung)
-- Änderung: Höhenangabe unterhalb des Positionsmarkers anzeigen (falls aktiviert)
-- HINWEIS: Es gibt weitere Probleme aufgrund kürzlicher Änderungen auf der geocaching.com-Webseite, die noch nicht behoben werden konnten. Wir arbeiten daran. Auf unserer [Statusseite](https://github.com/cgeo/cgeo/issues/15555) findest du den aktuellen Fortschritt.
+- Korrektur: Wherigo: Zonen mit ungültigen/zu nahen Koordinaten handhaben
+- Korrektur: c:geo versuchte, lokale ".map"-Dateien als GPX zu importieren
+- Korrektur: Bearbeitete Benutzernotizen aus Popup gehen manchmal verloren
+- Korrektur: Beim Bearbeiten von Logs wird die Option "Problem melden" angezeigt
+- Korrektur: Der Live-Filter 'Enthält nicht' gibt keine Caches zurück
+- Korrektur: Abstürze beim Pausieren einer Online-Karte (Vereinheitlichte Karte)
+- Korrektur: Veraltete App "GPS Bluethooth" in Liste der nützlichen Apps
+- Korrektur: Variablen und/oder Werte werden bei der Bearbeitung persönlicher Notiz fälschlicherweise gelöscht
+- Korrektur: Wherigo: Falsche Höhen-Info
+- Korrektur: Wherigo: Alle Buttontexte nur in Großbuchstaben
+- Korrektur: Absturz in den Einstellungen
+- Korrektur: c:geo wird im Play Store Geräten ohne GPS nicht angeboten
+- Korrektur: c:geo stürzt bei der Ordnerauswahl in bestimmten Konfigurationen ab
+- Änderung: extremcaching.com in Offline-Konnektor umgewandelt (Dienst wurde eingestellt)
+- Korrektur: Statusinformationen auf Karte werden bei Änderungen des Zoomstufe nicht aktualisiert

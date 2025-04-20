@@ -18,13 +18,14 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * To use this class, override {@link #updateGeoDir(cgeo.geocaching.sensors.GeoData, float)}. You need to start the handler using
  * {@link #start(int)}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
  * accordingly in {@code onPause}.
- *
+ * <br>
  * The direction is always relative to the top of the device (natural direction), and that it must
  * be fixed using {@link cgeo.geocaching.utils.AngleUtils#getDirectionNow(float)}. When the direction is derived from the GPS,
  * it is altered so that the fix can still be applied as if the information came from the compass.
  */
 public abstract class GeoDirHandler {
 
+    /** @noinspection PointlessBitwiseExpression*/
     public static final int UPDATE_GEODATA = 1 << 0;
     public static final int UPDATE_DIRECTION = 1 << 1;
     public static final int UPDATE_GEODIR = 1 << 2;
@@ -59,7 +60,7 @@ public abstract class GeoDirHandler {
      *
      * @param geoData   the new geographical data
      * @param direction the new direction
-     *
+     * <br>
      *                  If the device goes fast enough, or if the compass use is not enabled in the settings,
      *                  the GPS direction information will be used instead of the compass one.
      */

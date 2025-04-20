@@ -38,6 +38,9 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConnector implements IConnector {
 
+    @StringRes
+    protected int prefKey = R.string.preference_screen_services;
+
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return false;
@@ -214,6 +217,10 @@ public abstract class AbstractConnector implements IConnector {
     @Nullable
     public String getServiceSpecificLogId(@Nullable final String serviceLogId) {
         return serviceLogId; //by default, log id is directly usable
+    }
+
+    public int getServiceSpecificPreferenceScreenKey() {
+        return prefKey;
     }
 
     @Override
@@ -416,5 +423,9 @@ public abstract class AbstractConnector implements IConnector {
         return getName().hashCode();
     }
 
-
+    @Override
+    @NonNull
+    public String getDisplayName() {
+        return getName();
+    }
 }

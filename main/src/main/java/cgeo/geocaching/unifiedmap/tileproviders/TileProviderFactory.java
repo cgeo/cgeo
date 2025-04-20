@@ -2,18 +2,14 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.downloader.CompanionFileUtils;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.ui.SimpleItemListModel;
-import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 
@@ -23,10 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.util.Pair;
 import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
@@ -50,11 +44,6 @@ public class TileProviderFactory {
         // Singleton
     }
 
-    @NonNull
-    public static TileProviderFactory getInstance() {
-        return Holder.INSTANCE;
-    }
-
     public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
         final Menu parentMenu = menu.getMenu();
         MenuCompat.setGroupDividerEnabled(parentMenu, true);
@@ -71,60 +60,21 @@ public class TileProviderFactory {
             }
             if (!hide) {
                 final int id = tileProvider.getNumericalId();
-                parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+                final boolean isOfflineMap = (tileProvider instanceof AbstractMapsforgeOfflineTileProvider)
+                        || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
+                final String displayName = tileProvider.getDisplayName(null);
+                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, (displayName != null
+                        ? displayName + (tileProvider instanceof AbstractMapsforgeVTMTileProvider && Settings.showMapsforgeInUnifiedMap() ? " (VTM)" : "")
+                        : tileProvider.getTileProviderName()
+                )).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
         }
-        parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, tileProviders.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
-    }
-
-    /**
-     * displays a list of offline map sources and deletes selected item after confirmation
-     */
-    public static void showDeleteMenu(final Activity activity) {
-        final int currentSource = Settings.getTileProvider().getNumericalId();
-
-        // build list of available offline map sources except currently active one
-        final List<Pair<String, Integer>> list = new ArrayList<>();
-        for (AbstractTileProvider tileProvider : tileProviders.values()) {
-            if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider && tileProvider.getNumericalId() != currentSource && !(tileProvider instanceof MapsforgeMultiOfflineTileProvider)) {
-                list.add(new Pair<>(tileProvider.getTileProviderName(), tileProvider.getNumericalId()));
-            }
-        }
-        if (list.isEmpty()) {
-            ActivityMixin.showToast(activity, R.string.no_deletable_offlinemaps);
-            return;
-        }
-
-        final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = new SimpleDialog.ItemSelectModel<>();
-        model
-            .setItems(list)
-            .setDisplayMapper((l) -> TextParam.text(l.first))
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-
-        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title))
-                .selectSingle(model, (l) -> {
-            final AbstractMapsforgeOfflineTileProvider tileProvider = (AbstractMapsforgeOfflineTileProvider) getTileProvider(l.second);
-            if (tileProvider != null) {
-                final ContentStorage cs = ContentStorage.get();
-                final ContentStorage.FileInformation fi = cs.getFileInfo(tileProvider.getMapUri());
-                if (fi != null) {
-                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm(() -> {
-                        final Uri cf = CompanionFileUtils.companionFileExists(cs.list(PersistableFolder.OFFLINE_MAPS), fi.name);
-                        cs.delete(tileProvider.getMapUri());
-                        if (cf != null) {
-                            cs.delete(cf);
-                        }
-                        ActivityMixin.showShortToast(activity, String.format(activity.getString(R.string.file_deleted_info), fi.name));
-                        MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
-                        TileProviderFactory.buildTileProviderList(true);
-                        ActivityMixin.invalidateOptionsMenu(activity);
-                    });
-                }
-            }
-        });
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
+        parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && Settings.getTileProvider().supportsHillshading());
+        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getTileProvider().supportsHillshading());
+        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
@@ -138,6 +88,10 @@ public class TileProviderFactory {
         }
         tileProviders.clear();
 
+        // --------------------------------------------------------------------
+        // online-based map providers
+        // --------------------------------------------------------------------
+
         // Google Map based tile providers
         if (isGoogleMapsInstalled()) {
             registerTileProvider(new GoogleMapSource());
@@ -145,24 +99,76 @@ public class TileProviderFactory {
             registerTileProvider(new GoogleTerrainSource());
         }
 
-        // OSM online tile providers
-        registerTileProvider(new OsmOrgSource());
-        registerTileProvider(new OsmDeSource());
-        registerTileProvider(new CyclosmSource());
-        registerTileProvider(new OpenTopoMapSource());
+        // OSM online tile providers (Mapsforge)
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            registerTileProvider(new OsmOrgSource());
+            registerTileProvider(new OsmDeSource());
+            registerTileProvider(new CyclosmSource());
+            registerTileProvider(new OpenTopoMapSource());
 
-        // OSM offline tile providers
-        final List<ImmutablePair<String, Uri>> offlineMaps =
+            if (UserDefinedMapsforgeOnlineSource.isConfigured()) {
+                registerTileProvider(new UserDefinedMapsforgeOnlineSource());
+            }
+        }
+
+        // OSM online tile providers (VTM)
+        if (Settings.showVTMInUnifiedMap()) {
+            registerTileProvider(new OsmOrgVTMSource());
+            registerTileProvider(new OsmDeVTMSource());
+            registerTileProvider(new CyclosmVTMSource());
+            registerTileProvider(new OpenTopoMapVTMSource());
+
+            if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
+                registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
+            }
+        }
+
+        // --------------------------------------------------------------------
+        // offline-based map providers
+        // --------------------------------------------------------------------
+
+        // collect available offline map files
+        final List<ImmutablePair<String, Uri>> temp =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
                         .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
-        Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
-        if (offlineMaps.size() > 1) {
-            registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+
+        // OSM offline tile providers (Mapsforge)
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            if (temp.size() > 1) {
+                registerTileProvider(new MapsforgeMultiOfflineTileProvider(temp));
+            }
+
+            // sort according to displayName and register
+            final List<ImmutablePair<String, AbstractMapsforgeOfflineTileProvider>> offlineMaps = new ArrayList<>();
+            for (ImmutablePair<String, Uri> data : temp) {
+                final AbstractMapsforgeOfflineTileProvider tp = new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18); // @todo: get actual values for zoomMin/zoomMax
+                offlineMaps.add(new ImmutablePair<>(tp.getDisplayName(data.left), tp));
+            }
+            Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
+            for (ImmutablePair<String, AbstractMapsforgeOfflineTileProvider> data : offlineMaps) {
+                registerTileProvider(data.right);
+            }
         }
-        for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
+
+        // OSM offline tile providers (VTM)
+        if (Settings.showVTMInUnifiedMap()) {
+            if (temp.size() > 1) {
+                registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(temp));
+            }
+
+            // sort according to displayName and register
+            final List<ImmutablePair<String, AbstractMapsforgeVTMOfflineTileProvider>> offlineMaps = new ArrayList<>();
+            for (ImmutablePair<String, Uri> data : temp) {
+                final AbstractMapsforgeVTMOfflineTileProvider tp = new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 2, 18); // @todo: get actual values for zoomMin/zoomMax
+                offlineMaps.add(new ImmutablePair<>(tp.getDisplayName(data.left), tp));
+            }
+            Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
+            for (ImmutablePair<String, AbstractMapsforgeVTMOfflineTileProvider> data : offlineMaps) {
+                registerTileProvider(data.right);
+            }
         }
+        // --------------------------------------------------------------------
     }
 
     private static boolean isGoogleMapsInstalled() {
@@ -261,13 +267,4 @@ public class TileProviderFactory {
         languages = new String[]{};
     }
 
-    // -----------------------------------------------------------------------------------------------
-
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final TileProviderFactory INSTANCE = new TileProviderFactory();
-    }
 }

@@ -21,7 +21,6 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
@@ -181,16 +180,16 @@ public class ColorPickerUI {
                             newValue = Integer.parseInt(editText.getText().toString());
                             if (newValue > max) {
                                 newValue = max;
-                                Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(context, R.string.number_input_err_boundarymax);
                             }
                             if (newValue < min) {
                                 newValue = min;
-                                Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(context, R.string.number_input_err_boundarymin);
                             }
                             slider.setProgress((int) Math.round(newValue / valueToShownValue));
                             progressChangedCallback.accept(slider.getProgress());
                         } catch (NumberFormatException e) {
-                            Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(context, R.string.number_input_err_format);
                         }
                     })
                     .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> {
@@ -233,8 +232,7 @@ public class ColorPickerUI {
         return itemView;
     }
 
-    public static void setViewColor(final ImageView imageView, final int color, final boolean selected) {
-        final Drawable current = imageView.getDrawable();
+    public static Drawable getViewImage(final Drawable current, final int color, final boolean selected) {
         final GradientDrawable drawable;
         if (current instanceof GradientDrawable) {
             drawable = (GradientDrawable) current;
@@ -245,7 +243,11 @@ public class ColorPickerUI {
         drawable.setCornerRadii(radii);
         drawable.setColor(color);
         drawable.setStroke(strokeWidth, Color.rgb(Color.red(color) * 224 / 256, Color.green(color) * 224 / 256, Color.blue(color) * 224 / 256));
-        imageView.setImageDrawable(drawable);
+        return drawable;
+    }
+
+    public static void setViewColor(final ImageView imageView, final int color, final boolean selected) {
+        imageView.setImageDrawable(getViewImage(imageView.getDrawable(), color, selected));
     }
 
     private int getColorScheme() {

@@ -19,6 +19,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
@@ -49,7 +50,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 public class GooglePositionAndHistory implements PositionAndHistory, Tracks.UpdateTrack, IndividualRoute.UpdateIndividualRoute {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
-    public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_POSITION = 11;
+    public static final float ZINDEX_POSITION_ELEVATION = 10;
     public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
@@ -341,14 +343,13 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
 
         if (coordinates.hasAltitude() && Settings.showElevation()) {
-            final Bitmap elevationInfo = MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), positionMarker.getIntrinsicHeight(), coordinates.getAltitude());
+            final Bitmap elevationInfo = MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), positionMarker.getIntrinsicHeight(), GeoHeightUtils.getAltitude(coordinates));
             positionObjs.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(elevationInfo))
                     .position(latLng)
-                    .rotation(0)
                     .anchor(0.5f, 0.5f)
-                    .flat(true)
-                    .zIndex(ZINDEX_POSITION));
+                    .flat(false)
+                    .zIndex(ZINDEX_POSITION_ELEVATION));
         }
     }
 
@@ -423,7 +424,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         // draw individual route
         routeObjs.removeAll();
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
+        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && !individualRoute.track.isEmpty()) {
             for (List<LatLng> segment : individualRoute.track) {
                 routeObjs.addPolyline(new PolylineOptions()
                         .addAll(segment)
@@ -444,7 +445,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
-                if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
+                if (c != individualRoute && !c.isHidden && c.track != null && !c.track.isEmpty()) {
                     for (List<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)

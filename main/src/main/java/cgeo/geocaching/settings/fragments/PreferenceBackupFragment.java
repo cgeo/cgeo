@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 
@@ -19,23 +20,23 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
-        findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_startbackup)), preference -> {
             backupUtils.backup(this::updateSummary, false);
             return true;
         });
 
-        findPreference(getString(R.string.pref_fakekey_startrestore)).setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_startrestore)), preference -> {
             backupUtils.restore(BackupUtils.newestBackupFolder(false));
             return true;
         });
 
-        findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)).setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)), preference -> {
             backupUtils.selectBackupDirIntent();
             return true;
         });
 
         final CheckBoxPreference loginData = findPreference(getString(R.string.pref_backup_logins));
-        loginData.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(loginData, preference -> {
             if (loginData.isChecked()) {
                 loginData.setChecked(false);
                 SimpleDialog.of(getActivity()).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm(() -> loginData.setChecked(true));
@@ -45,7 +46,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         updateSummary();
 
-        findPreference(getString(R.string.pref_backup_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_backup_backup_history_length)), (preference, value) -> {
             backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value, false);
             return true;
         });
@@ -55,7 +56,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_backup);
+        requireActivity().setTitle(R.string.settings_title_backup);
     }
 
     private void updateSummary() {
@@ -65,6 +66,6 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         } else {
             textRestore = getString(R.string.init_backup_last_no);
         }
-        findPreference(getString(R.string.pref_fakekey_startrestore)).setSummary(textRestore);
+        PreferenceUtils.setSummary(findPreference(getString(R.string.pref_fakekey_startrestore)), textRestore);
     }
 }

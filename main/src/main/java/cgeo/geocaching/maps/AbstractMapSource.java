@@ -20,7 +20,7 @@ public abstract class AbstractMapSource implements MapSource {
     @NonNull
     private final MapProvider mapProvider;
     private Integer numericId;
-
+    private boolean supportsHillshading;
 
     protected AbstractMapSource(@NonNull final MapProvider mapProvider, final String name) {
         this.mapProvider = mapProvider;
@@ -71,6 +71,16 @@ public abstract class AbstractMapSource implements MapSource {
 
     public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
         return null;
+    }
+
+    @Override
+    public boolean supportsHillshading() {
+        return supportsHillshading;
+    }
+
+    @Override
+    public void setSupportsHillshading(final boolean supportsHillshading) {
+        this.supportsHillshading = supportsHillshading;
     }
 
 }

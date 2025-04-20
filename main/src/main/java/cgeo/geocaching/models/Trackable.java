@@ -6,9 +6,9 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -419,10 +419,13 @@ public class Trackable implements IGeoObject {
         if (StringUtils.isNotBlank(image)) {
             images.add(new Image.Builder().setUrl(image).setTitle(StringUtils.defaultIfBlank(name, geocode)).setCategory(Image.ImageCategory.LISTING).build());
         }
-        ImageUtils.addImagesFromHtml(images, geocode, getDetails());
+        images.addAll(ImageUtils.getImagesFromHtml((url, builder) -> builder.setTitle(geocode).setCategory(Image.ImageCategory.LISTING), getDetails()));
         for (final LogEntry log : getLogs()) {
             images.addAll(log.logImages);
         }
+        // Deduplicate images and return them in requested size
+        ImageUtils.deduplicateImageList(images);
+
         return images;
     }
 

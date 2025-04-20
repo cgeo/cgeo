@@ -8,8 +8,7 @@ import cgeo.geocaching.location.Viewport;
 
 import androidx.annotation.Nullable;
 
-public class
-AmendmentUtils {
+public class AmendmentUtils {
 
     private static final ICacheAmendment[] AMENDERS = new ICacheAmendment[] {
             BetterCacherConnector.INSTANCE

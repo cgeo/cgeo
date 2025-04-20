@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
@@ -29,7 +30,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         initPreferences(R.xml.preferences_appearence, rootKey);
 
         final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
-        themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(themePref, (preference, newValue) -> {
             final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
             Settings.setAppTheme(darkTheme);
             requireActivity().recreate();
@@ -59,21 +60,17 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
 
-        setPrefClick(this, R.string.pref_quicklaunchitems, () -> {
-            QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems);
-        });
+        setPrefClick(this, R.string.pref_quicklaunchitems, () -> QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems));
 
-        setPrefClick(this, R.string.pref_cacheListInfo, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2);
-        });
+        setPrefClick(this, R.string.pref_cacheListInfo, () -> CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2));
 
         final Preference.OnPreferenceChangeListener pScaling = (preference, newValue) -> {
             Settings.putIntDirect(preference.getKey(), (int) newValue);
             MapMarkerUtils.resetAllCaches();
             return true;
         };
-        findPreference(getString(R.string.pref_mapCacheScaling)).setOnPreferenceChangeListener(pScaling);
-        findPreference(getString(R.string.pref_mapWpScaling)).setOnPreferenceChangeListener(pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapCacheScaling)), pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapWpScaling)), pScaling);
 
         configCustomBNitemPreference();
 
@@ -83,7 +80,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_appearance);
+        requireActivity().setTitle(R.string.settings_title_appearance);
+        findPreference(getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
     }
 
     private void configCustomBNitemPreference() {

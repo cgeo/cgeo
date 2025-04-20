@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 /**
  * Abstract AsyncTask which automatically shows a progress dialog. Use it like the {@code AsyncTask} class, but leave away the
  * middle template parameter. Override {@link #doInBackgroundInternal(Object[])} and related methods.
- *
+ * <br>
  * Do not use this class directly, instead use either AsyncTaskWithProgress or AsyncTaskWithProgressText.
  */
 public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends AsyncTask<Params, T, Result> {

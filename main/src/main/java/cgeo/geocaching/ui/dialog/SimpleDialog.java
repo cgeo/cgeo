@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
@@ -82,6 +83,7 @@ public class SimpleDialog {
 
         private TextParam selectSetActionText = null;
         private Supplier<Set<T>> selectSetSupplier = null;
+        private T scrollAnchor = null;
 
         private AlertDialog dialog;
 
@@ -105,6 +107,12 @@ public class SimpleDialog {
         public ItemSelectModel<T> setSelectAction(final TextParam actionText, final Supplier<Set<T>> selectSetSupplier) {
             this.selectSetSupplier = selectSetSupplier;
             this.selectSetActionText = (actionText == null && selectSetSupplier != null) ? TextParam.id(R.string.unknown) : actionText;
+            return this;
+        }
+
+        /** if set, then view is scrolled to this item when opened. Has no effect after that */
+        public ItemSelectModel<T> setScrollAnchor(@Nullable  final T scrollAnchor) {
+            this.scrollAnchor = scrollAnchor;
             return this;
         }
 
@@ -138,6 +146,7 @@ public class SimpleDialog {
         private String suffix = null;
         private Predicate<String> inputChecker = null;
         private String allowedChars = null;
+        private String hint = null;
 
         /** input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed */
         public InputOptions setInputType(final int inputType) {
@@ -154,6 +163,11 @@ public class SimpleDialog {
         /** if non-null & non-empty, this will be displayed as a hint within the input field (e.g. to display a hint) */
         public InputOptions setLabel(final String label) {
             this.label = label;
+            return this;
+        }
+
+        public InputOptions setHint(final String hint) {
+            this.hint = hint;
             return this;
         }
 
@@ -416,15 +430,15 @@ public class SimpleDialog {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     if (positive != null) {
-                        dialog.dismiss();
                         positive.run();
+                        dialog.dismiss();
                         return true;
                     }
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     if (negative != null) {
-                        dialog.dismiss();
                         negative.run();
+                        dialog.dismiss();
                         return true;
                     }
                     break;
@@ -496,7 +510,7 @@ public class SimpleDialog {
         if (model.selectSetSupplier != null) {
             this.setNeutralButton(model.selectSetActionText);
         }
-        if (!selectionConfirmedViaButton) {
+        if (!selectionConfirmedViaButton && buttonClickAction == null) {
             //remove "negative/positive" buttons
             setPositiveButton(null);
             setNegativeButton(null);
@@ -506,9 +520,7 @@ public class SimpleDialog {
             this.title = TextParam.id(R.string.map_select_multiple_items);
         }
 
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons(r -> {
-            model.setFilterTerm(r == null ? null : r.toString());
-        });
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons(r -> model.setFilterTerm(r == null ? null : r.toString()));
         final AlertDialog dialog = dialogBinding.first;
         final SimpleDialogViewBinding binding = dialogBinding.second;
 
@@ -519,6 +531,10 @@ public class SimpleDialog {
 
         dialog.show();
 
+        if (model.scrollAnchor != null) {
+            binding.dialogItemlistview.scrollTo(model.scrollAnchor);
+        }
+
         finalizeCommons(dialog, (which) -> {
             boolean handled = false;
 
@@ -526,8 +542,8 @@ public class SimpleDialog {
                 case DialogInterface.BUTTON_POSITIVE:
                     if (selectionListener != null) {
                         //default action on OK button is to close and pass selection to listener
-                        dialog.dismiss();
                         selectionListener.accept(model.getSelectedItems());
+                        dialog.dismiss();
                         handled = true;
                     }
                     break;
@@ -556,10 +572,10 @@ public class SimpleDialog {
             }
             if (!selectionConfirmedViaButton  && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 //special handling of "single immediate select" (on click)
-                dialog.dismiss();
                 if (selectionListener != null) {
                     selectionListener.accept(model.getSelectedItems());
                 }
+                dialog.dismiss();
             }
         });
         adjustButtonEnablement(model, dialog);
@@ -588,19 +604,21 @@ public class SimpleDialog {
      */
      public void input(final InputOptions options, final Consumer<String> okayListener) {
 
+         final InputOptions io = options == null ? new InputOptions() : options;
 
-        final InputOptions io = options == null ? new InputOptions() : options;
+         final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
+         final EditText textField = dialogBinding.second.dialogInputEdittext;
+         final TextInputLayout textLayout = dialogBinding.second.dialogInputLayout;
+         final AlertDialog dialog = dialogBinding.first;
+         textField.setVisibility(View.VISIBLE);
+         textLayout.setVisibility(View.VISIBLE);
 
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
-        final EditText textField = dialogBinding.second.dialogInputEdittext;
-        final TextInputLayout textLayout = dialogBinding.second.dialogInputLayout;
-        final AlertDialog dialog = dialogBinding.first;
-        textField.setVisibility(View.VISIBLE);
-        textLayout.setVisibility(View.VISIBLE);
-
-        textField.setInputType(io.inputType);
+         textField.setInputType(io.inputType);
          if (io.initialValue != null) {
              textField.setText(io.initialValue);
+         }
+         if (io.hint != null) {
+             textField.setHint(io.hint);
          }
          if (io.label != null) {
              textLayout.setHint(io.label);
@@ -635,9 +653,9 @@ public class SimpleDialog {
         finalizeCommons(dialog, which -> {
             if (which == DialogInterface.BUTTON_POSITIVE && okayListener != null) {
                 // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
-                final String realText = textField.getText().toString().trim();
-                dialog.dismiss();
+                final String realText = ViewUtils.getEditableText(textField.getText()).trim();
                 okayListener.accept(realText);
+                dialog.dismiss();
                 return true;
             }
             return false;

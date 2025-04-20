@@ -2,7 +2,8 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
+import cgeo.geocaching.utils.JsonUtils;
 
 import android.location.Location;
 import android.os.Parcel;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.sf.geographiclib.Geodesic;
 import net.sf.geographiclib.GeodesicData;
 import net.sf.geographiclib.GeodesicMask;
@@ -49,6 +52,15 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
 
     public static Geopoint forE6(final int latE6, final int lonE6) {
         return new Geopoint(latE6, lonE6, null);
+    }
+
+    @Nullable
+    public static Geopoint forJson(final JsonNode node) {
+        if (!JsonUtils.has(node, "latE6") || !JsonUtils.has(node, "lonE6")) {
+            return null;
+        }
+        return forE6(JsonUtils.getInt(node, "latE6", 0),
+            JsonUtils.getInt(node, "lonE6", 0));
     }
 
     /**
@@ -136,6 +148,13 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
                 lonDir + " " + lonDeg + " " + lonMin + " " + lonSec + "." + addZeros(lonSecFrac, 3));
     }
 
+    public ObjectNode toJson() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setInt(node, "latE6", latitudeE6);
+        JsonUtils.setInt(node, "lonE6", longitudeE6);
+        return node;
+    }
+
     /**
      * Get latitude in degree.
      *
@@ -179,7 +198,7 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
      * @return distance in km
      * @throws GeopointException if there is an error in distance calculation
      */
-    public float distanceTo(final ICoordinates point) {
+    public float distanceTo(final ICoordinate point) {
         if (point == null) {
             return 0.0f;
         }
@@ -195,7 +214,7 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
      * @param point target
      * @return bearing in degree, in the [0,360[ range
      */
-    public float bearingTo(final ICoordinates point) {
+    public float bearingTo(final ICoordinate point) {
         final Geopoint otherCoords = point.getCoords();
         final GeodesicData g = Geodesic.WGS84.Inverse(getLatitude(), getLongitude(), otherCoords.getLatitude(), otherCoords.getLongitude(),
                 GeodesicMask.AZIMUTH);

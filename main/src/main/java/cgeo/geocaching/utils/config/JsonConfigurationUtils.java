@@ -107,7 +107,7 @@ public final class JsonConfigurationUtils {
                     array.add(childNode);
                 }
             }
-            if (array.size() > 0) {
+            if (!array.isEmpty()) {
                 node.set(FIELD_CHILDREN, array);
             }
         }

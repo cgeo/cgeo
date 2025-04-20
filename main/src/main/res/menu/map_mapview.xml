@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/menu_group_map_sources"
+        android:checkableBehavior="single" >
+    </group>
+    <group android:id="@+id/menu_group_offlinemaps">
+        <item
+            android:orderInCategory="90"
+            android:id="@+id/menu_hillshading"
+            android:title="@string/settings_hillshading_enable"
+            android:icon="@drawable/ic_menu_hills"
+            android:checkable="true"
+            android:visible="false"/>
+        <item
+            android:orderInCategory="91"
+            android:id="@+id/menu_manage_offline_maps"
+            android:icon="@drawable/wherigo_download"
+            android:title="@string/menu_manage_offline_data">
+            <menu>
+                <item
+                    android:id="@+id/menu_download_offlinemap"
+                    android:title="@string/downloadmap_title"
+                    android:icon="@drawable/ic_menu_mapmode"/>
+                <item
+                    android:id="@+id/menu_check_routingdata"
+                    android:title="@string/check_tiles_menu"
+                    android:icon="@drawable/ic_menu_route"/>
+                <item
+                    android:id="@+id/menu_check_hillshadingdata"
+                    android:title="@string/check_hillshading_tiles_menu"
+                    android:icon="@drawable/ic_menu_hills"/>
+                <item
+                    android:id="@+id/menu_delete_offline_data"
+                    android:title="@string/menu_delete_offline_data"
+                    android:icon="@drawable/ic_menu_delete"/>
+            </menu>
+        </item>
+    </group>
+</menu>

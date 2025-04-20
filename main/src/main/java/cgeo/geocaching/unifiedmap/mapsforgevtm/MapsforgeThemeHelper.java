@@ -7,14 +7,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorage.FileInformation;
 import cgeo.geocaching.storage.Folder;
-import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMOfflineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
-import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -24,11 +22,9 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.util.Consumer;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
@@ -39,12 +35,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.oscim.android.theme.ContentRenderTheme;
 import org.oscim.android.theme.ContentResolverResourceProvider;
 import org.oscim.map.Map;
@@ -54,7 +47,6 @@ import org.oscim.theme.ThemeFile;
 import org.oscim.theme.XmlRenderThemeMenuCallback;
 import org.oscim.theme.XmlRenderThemeStyleLayer;
 import org.oscim.theme.XmlRenderThemeStyleMenu;
-import org.oscim.theme.XmlThemeResourceProvider;
 import org.oscim.theme.ZipRenderTheme;
 import org.oscim.theme.ZipXmlThemeResourceProvider;
 
@@ -67,8 +59,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final int ZIP_FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
     private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MB
-
-    private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
 
     private static final int AVAILABLE_THEMES_SCAN_MAXDEPTH = 2;
 
@@ -87,11 +77,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
-
-    // cache most recent resource provider
-    private XmlThemeResourceProvider resourceProvider = null;
-
-    private static MapThemeFolderSynchronizer syncTask = null;
 
     private static class ThemeData {
         public final String id;
@@ -138,7 +123,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
 
         //try to apply stored value
-        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
+        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme(Settings.getTileProvider()));
 
         if (selectedTheme == null) {
             applyDefaultTheme(map, tileProvider);
@@ -153,11 +138,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
                 */
                 mTheme = map.setTheme(xmlRenderTheme);
-            } catch (final IOException e) {
-                Log.w("Failed to set render theme", e);
-                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
-                applyDefaultTheme(map, tileProvider);
-                selectedTheme = null;
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
@@ -166,6 +146,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             }
         }
         setSelectedTheme(selectedTheme);
+
+        if (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider) {
+            ((AbstractMapsforgeVTMOfflineTileProvider) tileProvider).switchBuildingLayer(Settings.getBuildings3D());
+        }
 
         map.updateMap(true);
         map.render();
@@ -183,7 +167,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
     }
 
-    private ThemeFile createThemeFor(@NonNull final ThemeData theme) throws IOException {
+    private ThemeFile createThemeFor(@NonNull final ThemeData theme) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 
@@ -217,7 +201,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
             }
-            resourceProvider = xmlRenderTheme == null ? null : xmlRenderTheme.getResourceProvider();
         } catch (Exception ex) {
             Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
             xmlRenderTheme = null;
@@ -231,7 +214,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         if (!tileProvider.supportsThemes()) {
             return;
         }
-        final String currentThemeId = Settings.getSelectedMapRenderTheme();
+        final String currentThemeId = Settings.getSelectedMapRenderTheme(tileProvider);
 
         final List<String> names = new ArrayList<>();
         names.add(activity.getString(R.string.switch_default));
@@ -267,12 +250,13 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         if (themeOptionsAvailable() && themeStyleMenu != null) {
             intent.putExtra(MapsforgeThemeSettingsFragment.RENDERTHEME_MENU, themeStyleMenu);
+            intent.putExtra(MapsforgeThemeSettingsFragment.SHOW3DOPTION, tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
         }
         activity.startActivity(intent);
     }
 
     public boolean themeOptionsAvailable() {
-        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme());
+        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme(Settings.getTileProvider()));
     }
 
     /**
@@ -300,13 +284,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
         return result;
     }
-
-    /** set new theme and report result, gets called after successful download of a new theme */
-    /* @todo
-    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
-        return setSelectedMapThemeInternal(themeIdCandidate) != null;
-    }
-    */
 
     /**
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
@@ -346,23 +323,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     private static void setSelectedTheme(final ThemeData theme) {
-        Settings.setSelectedMapRenderTheme(theme == null ? StringUtils.EMPTY : theme.id);
-    }
-
-    /**
-     * Depending on whether map theme folder synchronization is currently turned off or on, this
-     * method does two different things:
-     * * if turned off: app-private local folder is safely deleted
-     * * if turned on: folder is re-synced (every change in source folder is synced to target folder)
-     *
-     * In any case, this method will take care of thread syncrhonization e.g. when a sync is currently running then
-     * this sync will first be aborted, and only after that either target folder is deleted (if sync=off) or sync is restarted (if sync=on)
-     *
-     * Call this method whenever you feel that there might be a change in Map Theme files in
-     * public folder. Sync will be done in background task and reports its progress via toasts
-     */
-    public static void resynchronizeOrDeleteMapThemeFolder() {
-        MapThemeFolderSynchronizer.requestResynchronization(MAP_THEMES_FOLDER.getFolder(), MAP_THEMES_INTERNAL_FOLDER, isThemeSynchronizationActive());
+        Settings.setSelectedMapRenderTheme(Settings.getTileProvider().getId(), theme == null ? StringUtils.EMPTY : theme.id);
     }
 
     /**
@@ -435,176 +396,12 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         return userDisplay;
     }
 
-    private static class MapThemeFolderSynchronizer extends AsyncTask<Void, Void, FolderUtils.FolderProcessResult> {
-
-        private enum AfterSyncRequest { EXIT_NORMAL, REDO, ABORT_DELETE }
-
-        private static final Object syncTaskMutex = new Object();
-
-        private final Folder source;
-        private final File target;
-        private final boolean doSync;
-
-        private final AtomicBoolean cancelFlag = new AtomicBoolean(false);
-
-        private final Object requestRedoMutex = new Object();
-        private boolean taskIsDone = false;
-        private AfterSyncRequest afterSyncRequest = AfterSyncRequest.EXIT_NORMAL;
-        private long startTime = System.currentTimeMillis();
-
-        public static void requestResynchronization(final Folder source, final File target, final boolean doSync) {
-            synchronized (syncTaskMutex) {
-                if (syncTask == null || !syncTask.requestAfter(doSync ? MapThemeFolderSynchronizer.AfterSyncRequest.REDO : MapThemeFolderSynchronizer.AfterSyncRequest.ABORT_DELETE)) {
-                    Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target);
-                    syncTask = new MapThemeFolderSynchronizer(source, target, doSync);
-                    syncTask.execute();
-                }
-            }
-        }
-
-        private MapThemeFolderSynchronizer(final Folder source, final File target, final boolean doSync) {
-            this.source = source;
-            this.target = target;
-            this.doSync = doSync;
-        }
-
-        /**
-         * Requests for a running task to redo sync after finished. May fail if task is already done, but in this case the task may safely be discarted
-         */
-        public boolean requestAfter(final AfterSyncRequest afterSyncRequest) {
-            synchronized (requestRedoMutex) {
-                if (taskIsDone || !doSync) {
-                    return false;
-                }
-                Log.i("[MapThemeFolderSync] Requesting '" + afterSyncRequest + "' " + source + " -> " + target);
-                cancelFlag.set(true);
-                this.afterSyncRequest = afterSyncRequest;
-                startTime = System.currentTimeMillis();
-                return true;
-            }
-        }
-
-        @Override
-        protected FolderUtils.FolderProcessResult doInBackground(final Void[] params) {
-            Log.i("[MapThemeFolderSync] start synchronization " + source + " -> " + target + " (doSync=" + doSync + ")");
-            FolderUtils.FolderProcessResult result = null;
-            if (!doSync) {
-                FileUtils.deleteDirectory(target);
-            } else {
-                boolean cont = true;
-                while (cont) {
-                    result = FolderUtils.get().synchronizeFolder(source, target, MapThemeFolderSynchronizer::shouldBeSynced, cancelFlag, null);
-                    synchronized (requestRedoMutex) {
-                        switch (afterSyncRequest) {
-                            case EXIT_NORMAL:
-                                taskIsDone = true;
-                                cont = false;
-                                break;
-                            case ABORT_DELETE:
-                                FileUtils.deleteDirectory(target);
-                                cont = false;
-                                break;
-                            case REDO:
-                                Log.i("[MapThemeFolderSync] redo synchronization " + source + " -> " + target);
-                                cancelFlag.set(false);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-
-            synchronized (availableThemesMutex) {
-                if (result == null || !availableThemesInitialized || result.result != FolderUtils.ProcessResult.OK || result.filesModified > 0) {
-                    recalculateAvailableThemes();
-                }
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(final FolderUtils.FolderProcessResult result) {
-            Log.i("[MapThemeFolderSync] Finished synchronization (state=" + afterSyncRequest + ")");
-            //show toast only if something actually happened
-            if (result != null && result.filesModified > 0) {
-                showToast(R.string.mapthemes_foldersync_finished_toast,
-                        LocalizationUtils.getString(R.string.persistablefolder_offline_maps_themes),
-                        Formatter.formatDuration(System.currentTimeMillis() - startTime),
-                        result.filesModified, LocalizationUtils.getPlural(R.plurals.file_count, result.filesInSource, "file(s)"));
-            }
-            Log.i("[MapThemeFolderSync] Finished synchronization callback");
-        }
-
-        private static boolean shouldBeSynced(final FileInformation fileInfo) {
-            return fileInfo != null && !fileInfo.name.endsWith(".map") && fileInfo.size <= FILESYNC_MAX_FILESIZE;
-        }
-
-        private static void showToast(final int resId, final Object... params) {
-            final ImmutablePair<String, String> msgs = LocalizationUtils.getMultiPurposeString(resId, "RenderTheme", params);
-            ActivityMixin.showApplicationToast(msgs.left);
-            Log.iForce("[RenderThemeHelper.ThemeFolderSyncTask]" + msgs.right);
-        }
-
-    }
-
     private static ContentResolver getContentResolver() {
         return CgeoApplication.getInstance().getContentResolver();
     }
 
     public static boolean isThemeSynchronizationActive() {
         return Settings.getSyncMapRenderThemeFolder();
-    }
-
-    /**
-     * Method is called after user has changed the sync state in Settings Activity
-     */
-    public static boolean changeSyncSetting(final Activity activity, final boolean doSync, final Consumer<Boolean> callback) {
-        if (doSync) {
-            //this means user just turned sync on. Ask user if he/she is really shure about this.-
-            final FolderUtils.FolderInfo themeFolderInfo = FolderUtils.get().getFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), -1);
-            final String folderName = MAP_THEMES_FOLDER.getFolder().toUserDisplayableString();
-            final ImmutableTriple<String, String, String> folderInfoStrings = themeFolderInfo.getUserDisplayableFolderInfoStrings();
-            Dialogs.newBuilder(activity)
-                    .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
-                    .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
-                    .setPositiveButton(android.R.string.ok, (d, c) -> {
-                        d.dismiss();
-                        //start sync
-                        resynchronizeOrDeleteMapThemeFolder();
-                        callback.accept(true);
-                    })
-                    .setNegativeButton(android.R.string.cancel, (d, c) -> {
-                        d.dismiss();
-                        callback.accept(false);
-                        //following method will DELETE any existing data in sync folder (because sync is set to off in settings)
-                        resynchronizeOrDeleteMapThemeFolder();
-                    })
-                    .create().show();
-        } else {
-            //this means user just turned sync OFF
-            Settings.setSyncMapRenderThemeFolder(false);
-            //start sync will delete any existing data in sync folder
-            resynchronizeOrDeleteMapThemeFolder();
-            callback.accept(false);
-        }
-        return true;
-    }
-
-    public XmlThemeResourceProvider getResourceProvider() {
-        return resourceProvider;
-    }
-
-    public static RenderThemeType getRenderThemeType() {
-        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
-        for (MapsforgeThemeHelper.RenderThemeType rtt : MapsforgeThemeHelper.RenderThemeType.values()) {
-            for (String searchPath : rtt.searchPaths) {
-                if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
-                    return rtt;
-                }
-            }
-        }
-        return RenderThemeType.RTT_NONE;
     }
 
 }

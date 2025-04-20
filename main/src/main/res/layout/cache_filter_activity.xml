@@ -56,6 +56,7 @@
             style="@style/button_icon"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:tooltipText="@string/cache_filter_storage_load_delete_title"
             app:icon="@drawable/ic_menu_manage_list" />
 
         <Button
@@ -63,10 +64,12 @@
             style="@style/button_icon"
             android:layout_toRightOf="@+id/filter_storage_manage"
             android:layout_centerVertical="true"
+            android:tooltipText="@string/cache_filter_storage_save_title"
             app:icon="@drawable/ic_menu_save" />
 
          <TextView
              android:id="@+id/filter_storage_name"
+             android:hint="@string/cache_name"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_alignParentRight="true"

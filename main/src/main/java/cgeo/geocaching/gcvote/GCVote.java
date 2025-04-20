@@ -42,8 +42,6 @@ public final class GCVote implements ICredentials {
     // us on 2017-03-21 that the site is accessible through its provider https endpoint at
     // https://ssl.webpack.de/gcvote.com
 
-    public static final float NO_RATING = 0;
-
     private static final int MAX_CACHED_RATINGS = 1000;
     private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_RATINGS);
 

@@ -119,144 +119,136 @@ public class CheapAngleMeterTest {
 
     @Test
     public void testGetAngle() {
-        final CheapAngleMeter am = new CheapAngleMeter();
-
         int lon1 = toOsmLon(10.0);
         int lat1 = toOsmLat(50.0);
         int lon2 = toOsmLon(10.0);
         int lat2 = toOsmLat(60.0);
 
-        double angle = am.getAngle(lon1, lat1, lon2, lat2);
+        double angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, 0.0, angle, 0.0);
 
         lon2 = toOsmLon(10.0);
         lat2 = toOsmLat(40.0);
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, 180.0, angle, 0.0);
 
         lon2 = toOsmLon(0.0);
         lat2 = toOsmLat(50.0);
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, -90.0, angle, 0.0);
 
         lon2 = toOsmLon(20.0);
         lat2 = toOsmLat(50.0);
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, 90.0, angle, 0.0);
 
         lon2 = toOsmLon(20.0);
         lat2 = toOsmLat(60.0);
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, 45.0, angle, 0.0);
 
         lon2 = toOsmLon(0.0);
         lat2 = toOsmLat(60.0);
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, -45.0, angle, 0.0);
 
         lon1 = 1;
         lat1 = 1;
         lon2 = 2;
         lat2 = 2;
-        angle = am.getAngle(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getAngle(lon1, lat1, lon2, lat2);
         assertEquals("Angle = " + angle, 45.0, angle, 0.0);
 
     }
 
     @Test
     public void testGetDirection() {
-        final CheapAngleMeter am = new CheapAngleMeter();
-
         int lon1 = toOsmLon(10.0);
         int lat1 = toOsmLat(50.0);
         int lon2 = toOsmLon(10.0);
         int lat2 = toOsmLat(60.0);
 
-        double angle = am.getDirection(lon1, lat1, lon2, lat2);
+        double angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 0.0, angle, 0.0);
 
         lon2 = toOsmLon(10.0);
         lat2 = toOsmLat(40.0);
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 180.0, angle, 0.0);
 
         lon2 = toOsmLon(0.0);
         lat2 = toOsmLat(50.0);
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 270.0, angle, 0.0);
 
         lon2 = toOsmLon(20.0);
         lat2 = toOsmLat(50.0);
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 90.0, angle, 0.0);
 
         lon2 = toOsmLon(20.0);
         lat2 = toOsmLat(60.0);
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 45.0, angle, 0.0);
 
         lon2 = toOsmLon(0.0);
         lat2 = toOsmLat(60.0);
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 315.0, angle, 0.0);
 
         lon1 = 1;
         lat1 = 1;
         lon2 = 2;
         lat2 = 2;
-        angle = am.getDirection(lon1, lat1, lon2, lat2);
+        angle = CheapAngleMeter.getDirection(lon1, lat1, lon2, lat2);
         assertEquals("Direction = " + angle, 45.0, angle, 0.0);
 
     }
 
     @Test
     public void testNormalize() {
-        final CheapAngleMeter am = new CheapAngleMeter();
-
         double n = 1;
-        assertEquals("Direction  normalize = " + n, 1, am.normalize(n), 0.0);
+        assertEquals("Direction  normalize = " + n, 1, CheapAngleMeter.normalize(n), 0.0);
 
         n = -1;
-        assertEquals("Direction normalize  = " + n, 359, am.normalize(n), 0.0);
+        assertEquals("Direction normalize  = " + n, 359, CheapAngleMeter.normalize(n), 0.0);
 
         n = 361;
-        assertEquals("Direction normalize  = " + n, 1, am.normalize(n), 0.0);
+        assertEquals("Direction normalize  = " + n, 1, CheapAngleMeter.normalize(n), 0.0);
 
         n = 0;
-        assertEquals("Direction  normalize = " + n, 0, am.normalize(n), 0.0);
+        assertEquals("Direction  normalize = " + n, 0, CheapAngleMeter.normalize(n), 0.0);
 
         n = 360;
-        assertEquals("Direction  normalize = " + n, 0, am.normalize(n), 0.0);
+        assertEquals("Direction  normalize = " + n, 0, CheapAngleMeter.normalize(n), 0.0);
 
     }
 
     @Test
     public void testCalcAngle6() {
-        final CheapAngleMeter am = new CheapAngleMeter();
-
         double a1 = 90;
         double a2 = 180;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 90, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 90, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
         a1 = 180;
         a2 = 90;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 90, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 90, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
         a1 = 5;
         a2 = 355;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 10, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 10, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
         a1 = 355;
         a2 = 5;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 10, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 10, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
         a1 = 90;
         a2 = 270;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 180, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 180, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
         a1 = 270;
         a2 = 90;
-        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 180, am.getDifferenceFromDirection(a1, a2), 0.0);
+        assertEquals("Direction diff " + a1 + " " + a2 + " = ", 180, CheapAngleMeter.getDifferenceFromDirection(a1, a2), 0.0);
 
     }
 

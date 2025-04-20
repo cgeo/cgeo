@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
@@ -21,6 +22,7 @@ import androidx.preference.Preference;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceNavigationFragment extends BasePreferenceFragment {
     @Override
@@ -88,7 +90,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void initOfflineRoutingPreferences() {
         DefaultFilesUtils.checkDefaultFiles();
-        findPreference(getString(R.string.pref_useInternalRouting)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_useInternalRouting)), (preference, newValue) -> {
             updateRoutingPrefs(!Settings.useInternalRouting());
             return true;
         });
@@ -104,24 +106,31 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
                 profiles.add(file.name);
             }
         }
-        final CharSequence[] entries = profiles.toArray(new CharSequence[0]);
-        final CharSequence[] values = profiles.toArray(new CharSequence[0]);
-        updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values, 0);
-        updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values, 0);
-        updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values, 0);
-        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, entries, values, 1);
-        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, entries, values, 2);
+
+        updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, profiles, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, profiles, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, profiles, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, profiles, 1);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, profiles, 2);
     }
 
-    private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values, final int number) {
-        final String current = Settings.getRoutingProfile(mode);
+    private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final ArrayList<String> profiles, final int number) {
+        final String current = StringUtils.defaultIfBlank(Settings.getRoutingProfile(mode), getString(R.string.routingmode_none));
         final ListPreference pref = findPreference(getString(prefId));
         assert pref != null;
+
+        final ArrayList<String> prefProfiles = new ArrayList<>(profiles);
         if (number > 0) {
+            prefProfiles.add(getString(R.string.routingmode_none));
+
             final String title = String.format(getString(R.string.init_brouterProfileUserNumber), number);
             pref.setDialogTitle(title);
             pref.setTitle(title);
         }
+
+        final CharSequence[] entries = prefProfiles.toArray(new CharSequence[0]);
+        final CharSequence[] values = prefProfiles.toArray(new CharSequence[0]);
+
         pref.setEntries(entries);
         pref.setEntryValues(values);
         pref.setSummary(current);
@@ -129,19 +138,18 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
             preference.setSummary(newValue.toString());
             return true;
         });
-        if (current != null) {
-            for (int i = 0; i < entries.length; i++) {
-                if (current.contentEquals(entries[i])) {
-                    pref.setValueIndex(i);
-                    break;
-                }
+
+        for (int i = 0; i < entries.length; i++) {
+            if (current.contentEquals(entries[i])) {
+                pref.setValueIndex(i);
+                break;
             }
         }
     }
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
-        findPreference(getString(R.string.pref_brouterDistanceThreshold)).setEnabled(anyRoutingAvailable);
-        findPreference(getString(R.string.pref_brouterShowBothDistances)).setEnabled(anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
     }
 }

@@ -28,9 +28,9 @@ import java.util.Objects;
 
 /**
  * Represents a standard CGeo Spinner item where user can select one of multiple values.
- *
+ * <br>
  * Supports change of list values.
- *
+ * <br>
  * In cgeo, this type of spinner comes in two visual representations: <ul>
  * <li>As real spinner (eg. selecting coordinate type or image scale)</li>
  * <li>As text button with self-made dialog on click (e.g. selecting log type)</li>
@@ -134,9 +134,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     public TextSpinner<T> setDisplayMapperPure(@Nullable final Func1<T, String> displayMapper) {
-        return setDisplayMapper(displayMapper == null ? null : v -> {
-            return TextParam.text(displayMapper.call(v));
-        });
+        return setDisplayMapper(displayMapper == null ? null : v -> TextParam.text(displayMapper.call(v)));
     }
 
     /**
@@ -171,9 +169,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
      * if spinner should be represented as a textview, use this method to set the view
      */
     public TextSpinner<T> setTextView(@NonNull final TextView textView) {
-        return setView(textView, (view, text) -> {
-            text.applyTo((TextView) view);
-        });
+        return setView(textView, (view, text) -> text.applyTo((TextView) view));
     }
 
     /**
@@ -408,7 +404,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
             if (this.textGroupMapper != null) {
                 model.activateGrouping((v) -> this.textGroupMapper.call(v))
-                        .setGroupDisplayMapper((s, c) -> TextParam.text("**" + s + "**").setMarkdown(true));
+                        .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "**").setMarkdown(true));
             }
             sd.selectSingle(model, this::set);
         }

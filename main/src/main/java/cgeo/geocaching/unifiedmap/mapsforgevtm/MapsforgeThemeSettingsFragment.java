@@ -1,23 +1,16 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.SeekbarPreference;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.SeekbarUI;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.StringRes;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -27,11 +20,13 @@ import org.oscim.theme.XmlRenderThemeStyleMenu;
 
 public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
     public static final String RENDERTHEME_MENU = "renderthememenu";
+    public static final String SHOW3DOPTION = "show3Doption";
 
     ListPreference baseLayerPreference;
 
     XmlRenderThemeStyleMenu renderthemeOptions;
     PreferenceCategory renderthemeMenu;
+    boolean show3Doption = false;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
@@ -39,6 +34,8 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
 
         // if the render theme has a style menu, its data is delivered via the intent
         renderthemeOptions = (XmlRenderThemeStyleMenu) requireActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
+        // show 3D option for building layer
+        show3Doption = requireActivity().getIntent().getBooleanExtra(SHOW3DOPTION, false);
         // the preference category serves as the hook to add a list preference to allow users to select a style
         this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
@@ -66,6 +63,16 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         if (Settings.isDefaultMapRenderTheme()) {
             this.renderthemeMenu.addPreference(VtmThemes.getPreference(activity));
         }
+
+        if (show3Doption) {
+            final CheckBoxPreference cb3D = new CheckBoxPreference(activity);
+            cb3D.setKey(activity.getString(R.string.pref_buildingLayer3D));
+            cb3D.setTitle(R.string.maptheme_show3Dbuildings);
+            cb3D.setChecked(Settings.getBuildings3D());
+            cb3D.setIconSpaceReserved(false);
+            this.renderthemeMenu.addPreference(cb3D);
+        }
+
     }
 
     private String createThemePreferences(final Activity activity) {
@@ -149,27 +156,6 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
             this.renderthemeMenu.addPreference(checkbox);
         }
         return themePrefKey;
-    }
-
-    private void addScalePreference(final Context context, final PreferenceGroup cat, final String prefKey, @StringRes final int titleId, @StringRes final int summaryId) {
-
-        final Preference info = new Preference(context) {
-            public void onBindViewHolder(final PreferenceViewHolder holder) {
-                super.onBindViewHolder(holder);
-                holder.setDividerAllowedAbove(false);
-                holder.setDividerAllowedBelow(false);
-            }
-        };
-        info.setTitle(titleId);
-        info.setSummary(summaryId);
-        info.setIconSpaceReserved(false);
-        cat.addPreference(info);
-
-        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%",
-                new SeekbarUI.FactorizeValueMapper(10));
-        seek.setDefaultValue(100);
-        seek.setKey(prefKey);
-        cat.addPreference(seek);
     }
 
 }

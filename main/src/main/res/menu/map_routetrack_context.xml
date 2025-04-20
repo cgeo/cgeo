@@ -2,41 +2,85 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_showElevationChart"
+        android:title="@string/showElevationChart"
+        android:icon="@drawable/elevation"
+        app:iconTint="@color/colorIconMenu"
+        android:visibility="gone"/>
+    <item
         android:id="@+id/menu_edit"
         android:title="@string/edit"
         android:icon="@drawable/ic_menu_edit"
-        app:iconTint="@color/colorText"/>
+        app:iconTint="@color/colorIconMenu"
+        android:visibility="gone"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_rename"
+        android:title="@string/list_dialog_rename"
+        android:icon="@drawable/ic_menu_edit"
+        app:iconTint="@color/colorText"
+        android:visibility="gone"/>
     <item
         android:id="@+id/menu_optimize"
         android:icon="@drawable/ic_menu_auto_fix_high"
         android:title="@string/optimize"
-        app:iconTint="@color/colorText"
+        app:iconTint="@color/colorIconMenu"
         android:visible="false"/>
     <item
         android:id="@+id/menu_invert_order"
         android:icon="@drawable/ic_menu_swap_vert"
         android:title="@string/menu_invert_order"
-        app:iconTint="@color/colorText"
-        android:visible="false" />
+        app:iconTint="@color/colorIconMenu"
+        android:visible="false"/>
     <item
         android:id="@+id/menu_color"
         android:icon="@drawable/downloader_theme"
         android:title="@string/routes_tracks_color"
-        app:iconTint="@color/colorText"
-        android:visible="false"/>
+        app:iconTint="@color/colorIconMenu"
+        android:visible="false"
+        android:visibility="gone"
+        app:actionViewClass="android.widget.ImageButton"
+        app:showAsAction="always"/>
     <item
-        android:id="@+id/item_visibility"
+        android:id="@+id/menu_visibility"
         android:icon="@drawable/visibility"
         android:title="@string/hide"
-        app:iconTint="@color/colorText" />
+        app:iconTint="@color/colorIconMenu"
+        android:visibility="gone"
+        app:showAsAction="always"/>
     <item
-        android:id="@+id/item_center"
+        android:id="@+id/menu_center"
         android:icon="@drawable/center"
         android:title="@string/center"
-        app:iconTint="@color/colorText" />
+        app:iconTint="@color/colorIconMenu"
+        android:visibility="gone"
+        app:showAsAction="always"/>
     <item
-        android:id="@+id/menu_item_delete"
+        android:id="@+id/menu_delete"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_filter_storage_delete_button"
-        app:iconTint="@color/colorText" />
+        app:iconTint="@color/colorIconMenu"
+        android:visibility="gone"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_menu_refresh"
+        android:title="@string/map_refresh_individual_route"
+        android:visibility="gone"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/indivroute_export_route"
+        android:icon="@drawable/ic_menu_gpx"
+        android:title="@string/map_export_route"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/indivroute_export_track"
+        android:icon="@drawable/ic_menu_gpx"
+        android:title="@string/map_export_track"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/indivroute_load"
+        android:icon="@drawable/ic_menu_import"
+        android:title="@string/map_load_from_GPX"
+        app:showAsAction="never"/>
 </menu>

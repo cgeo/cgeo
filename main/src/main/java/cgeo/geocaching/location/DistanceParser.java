@@ -7,19 +7,6 @@ public final class DistanceParser {
     }
 
     /**
-     * Parses a distance string {@code distanceText} representing distance in units {@code unit}
-     *
-     * @param distanceText distance string
-     * @param unit         unit to convert from
-     * @return the distance in kilometers
-     * @throws NumberFormatException if the given string is not numeric
-     */
-    public static float parseDistance(final String distanceText, final DistanceUnit unit)
-            throws NumberFormatException {
-        return convertDistance(Float.parseFloat(distanceText.replace(',', '.')), unit);
-    }
-
-    /**
      * Converts distance from different units to kilometers
      *
      * @param distance source distance to convert

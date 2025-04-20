@@ -28,12 +28,10 @@ public class CoordsGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @Override
     public IGeocacheFilter getAdditionalFilterParameter() {
-        final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) GeocacheFilterType.DISTANCE.create();
-        if (applyNearbySearchLimit) {
-            final int nearbySearchLimit = Settings.getNearbySearchLimit();
-            if (nearbySearchLimit > 0) {
-                distanceFilter.setMinMaxRange(0.0f, (float) nearbySearchLimit);
-            }
+        final DistanceGeocacheFilter distanceFilter = GeocacheFilterType.DISTANCE.create();
+        final int searchLimit = applyNearbySearchLimit ? Settings.getNearbySearchLimit() : Settings.getCoordinateSearchLimit();
+        if (searchLimit > 0) {
+            distanceFilter.setMinMaxRange(0.0f, (float) searchLimit);
         }
         distanceFilter.setCoordinate(coords);
         return distanceFilter;

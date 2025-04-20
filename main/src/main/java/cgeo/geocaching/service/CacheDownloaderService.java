@@ -7,20 +7,20 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -75,7 +75,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         // some caches are already stored offline, thus show the advanced selection dialog
 
         final View content = LayoutInflater.from(context).inflate(R.layout.dialog_background_download_config, null);
-        final RadioGroup radioGroup = (RadioGroup) content.findViewById(R.id.radioGroup);
+        final RadioGroup radioGroup = content.findViewById(R.id.radioGroup);
 
         Dialogs.newBuilder(context)
                 .setView(content)
@@ -96,6 +96,15 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
 
+    }
+
+    public static void storeCache(final Activity context, final Geocache cache, final boolean fastStoreOnLastSelection, @Nullable final Runnable onStartCallback) {
+        if (Settings.getChooseList() || cache.isOffline()) {
+            // let user select list to store cache in
+            new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, Collections.singleton(cache.getGeocode()), selectedListIds, false, true, onStartCallback), true, cache.getLists(), fastStoreOnLastSelection);
+        } else {
+            downloadCachesInternal(context, Collections.singleton(cache.getGeocode()), Collections.singleton(StoredList.STANDARD_LIST_ID), false, true, onStartCallback);
+        }
     }
 
     public static void refreshCache(final Activity context, final String geocode, final boolean isOffline, @Nullable final Runnable onStartCallback) {
@@ -137,7 +146,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
         ContextCompat.startForegroundService(context, intent);
-        Toast.makeText(context, R.string.download_started, Toast.LENGTH_LONG).show();
+        ViewUtils.showToast(context, R.string.download_started);
 
         if (onStartCallback != null) {
             onStartCallback.run();
@@ -153,7 +162,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         shouldStop = false;
         final PendingIntent actionCancelIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(this, StopCacheDownloadServiceReceiver.class),
-                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_UPDATE_CURRENT);
+                ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
@@ -240,10 +249,10 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     @Override
     public void onDestroy() {
-        if (downloadQuery.size() > 0) {
+        if (!downloadQuery.isEmpty()) {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
-        } else {
+        } else if (cachesDownloaded.get() != 1) { // see #15881
             showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
         }
         downloadQuery.clear();

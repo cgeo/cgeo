@@ -28,10 +28,10 @@ import java.util.Objects;
 
 /**
  * A launcher for Actions which depend on Permissions.
- *
+ * <br>
  * Instances of this class use the "Activity Result APIs" underneath to handle permission requests.
  * Therefore instances MUST be created as part of Activity initialization, ideally in the variable init part.
- * See e.g. https://developer.android.com/training/basics/intents/result for more details
+ * See e.g. <a href="https://developer.android.com/training/basics/intents/result">...</a> for more details
  */
 public class PermissionAction<T> {
 

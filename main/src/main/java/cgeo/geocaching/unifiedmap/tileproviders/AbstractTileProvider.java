@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public abstract class AbstractTileProvider {
 
     protected boolean supportsLanguages;
     protected boolean supportsThemes;
+    protected boolean supportsHillshading = false;
     protected boolean supportsThemeOptions;
     protected String tileProviderName;
     private Integer numericId;
@@ -34,10 +36,6 @@ public abstract class AbstractTileProvider {
         return mapAttribution;
     }
 
-    public boolean supportsLanguages() {
-        return supportsLanguages;
-    }
-
     public void setPreferredLanguage(final String language) {
         // default: do nothing
     }
@@ -50,8 +48,17 @@ public abstract class AbstractTileProvider {
         return supportsThemeOptions;
     }
 
+    public boolean supportsHillshading() {
+        return supportsHillshading;
+    }
+
     public String getTileProviderName() {
         return tileProviderName;
+    }
+
+    @Nullable
+    public String getDisplayName(@Nullable final String defaultDisplayName) {
+        return defaultDisplayName;
     }
 
     public String getId() {
@@ -83,6 +90,21 @@ public abstract class AbstractTileProvider {
 
     public int getZoomMax() {
         return zoomMax;
+    }
+
+    // ========================================================================
+    // Lifecycle methods
+
+    public void onPause() {
+        // do nothing by default
+    }
+
+    public void onResume() {
+        // do nothing by default
+    }
+
+    public void onDestroy() {
+        // do nothing by default
     }
 
 }

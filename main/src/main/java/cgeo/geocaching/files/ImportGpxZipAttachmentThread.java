@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Handler;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
@@ -24,7 +23,7 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
     }
 
     @Override
-    protected InputStream getInputStream() throws IOException {
+    protected InputStream getInputStream() {
         try {
             return contentResolver.openInputStream(uri);
         } catch (final FileNotFoundException e) {

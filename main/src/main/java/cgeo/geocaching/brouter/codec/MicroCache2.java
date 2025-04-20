@@ -54,6 +54,7 @@ public final class MicroCache2 extends MicroCache {
         for (int n = 0; n < size; n++) {
             final long id64 = expandId(faid[n]);
             alon[n] = (int) (id64 >> 32);
+            //noinspection PointlessBitwiseExpression
             alat[n] = (int) (id64 & 0xffffffff);
         }
 
@@ -278,6 +279,7 @@ public final class MicroCache2 extends MicroCache {
     @Override
     public int shrinkId(final long id64) {
         final int lon32 = (int) (id64 >> 32);
+        //noinspection PointlessBitwiseExpression
         final int lat32 = (int) (id64 & 0xffffffff);
         final int dlon = lon32 - lonBase;
         final int dlat = lat32 - latBase;

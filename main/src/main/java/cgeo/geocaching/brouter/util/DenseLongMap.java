@@ -17,13 +17,13 @@ import java.util.List;
  * @author ab
  */
 public class DenseLongMap {
-    private List<byte[]> blocklist = new ArrayList<>(4096);
+    private final List<byte[]> blocklist = new ArrayList<>(4096);
 
-    private int blocksize; // bytes per bitplane in one block
-    private int blocksizeBits;
-    private long blocksizeBitsMask;
-    private int maxvalue = 254; // fixed due to 8 bit lookup table
-    private int[] bitplaneCount = new int[8];
+    private final int blocksize; // bytes per bitplane in one block
+    private final int blocksizeBits;
+    private final long blocksizeBitsMask;
+    private final int maxvalue = 254; // fixed due to 8 bit lookup table
+    private final int[] bitplaneCount = new int[8];
     private long putCount = 0L;
     private long getCount = 0L;
 

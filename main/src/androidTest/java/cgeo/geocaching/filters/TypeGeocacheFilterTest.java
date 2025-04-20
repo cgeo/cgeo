@@ -31,7 +31,7 @@ public class TypeGeocacheFilterTest {
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void grouping() {
-        singleType(c -> c.setType(CacheType.MEGA_EVENT), f -> f.setValues(new HashSet<>(Collections.singletonList(CacheType.EVENT))), true);
+        singleType(c -> c.setType(CacheType.MEGA_EVENT), f -> f.setValues(new HashSet<>(Collections.singletonList(CacheType.COMMUN_CELEBRATION))), true);
     }
 
     private void singleType(final Action1<Geocache> cacheSetter, final Action1<TypeGeocacheFilter> filterSetter, final Boolean expectedResult) {

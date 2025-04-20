@@ -256,19 +256,19 @@ final class BExpression {
         }
         // parse operands
         if (nops > 0) {
-            exp.op1 = BExpression.parse(ctx, level + 1, exp.typ == ASSIGN_EXP ? "=" : null);
+            exp.op1 = parse(ctx, level + 1, exp.typ == ASSIGN_EXP ? "=" : null);
         }
         if (nops > 1) {
             if (ifThenElse) {
                 checkExpectedToken(ctx, "then");
             }
-            exp.op2 = BExpression.parse(ctx, level + 1, null);
+            exp.op2 = parse(ctx, level + 1, null);
         }
         if (nops > 2) {
             if (ifThenElse) {
                 checkExpectedToken(ctx, "else");
             }
-            exp.op3 = BExpression.parse(ctx, level + 1, null);
+            exp.op3 = parse(ctx, level + 1, null);
         }
         if (brackets) {
             checkExpectedToken(ctx, ")");
@@ -376,11 +376,11 @@ final class BExpression {
     }
 
     private float max(final float v1, final float v2) {
-        return v1 > v2 ? v1 : v2;
+        return Math.max(v1, v2);
     }
 
     private float min(final float v1, final float v2) {
-        return v1 < v2 ? v1 : v2;
+        return Math.min(v1, v2);
     }
 
     private float divide(float v1, float v2) {

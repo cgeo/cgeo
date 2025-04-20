@@ -247,19 +247,6 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         return new Builder().setType(GeoItem.GeoType.POLYGON).addPoints(p).setStyle(style).build();
     }
 
-    public static GeoPrimitive createPolygonWithHoles(final List<List<Geopoint>> rings, final GeoStyle style) {
-        final GeoPrimitive.Builder b = new Builder().setType(GeoItem.GeoType.POLYGON).setStyle(style);
-        if (rings != null && !rings.isEmpty()) {
-            b.addPoints(rings.get(0));
-        }
-        if (rings != null && rings.size() > 1) {
-            for (int i = 1; i < rings.size(); i++) {
-                b.addHole(rings.get(i));
-            }
-        }
-        return b.build();
-    }
-
     //equals/HashCode
 
     @Override

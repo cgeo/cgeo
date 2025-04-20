@@ -14,6 +14,7 @@
         <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>
         <item name="android:textAppearanceMedium">@style/text_default</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
+        <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
 
         <!-- set Material theme colors -->
         <item name="colorOnBackground">@color/colorText</item>
@@ -36,6 +37,14 @@
 
     </style>
 
+    <style name="cgeo.coloredToolbar" parent="cgeo">
+        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow2</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
     <style name="cgeo.withWallpaper" parent="cgeo">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowShowWallpaper">true</item>
@@ -53,6 +62,11 @@
 
     <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="cgeo.fullScreen" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 

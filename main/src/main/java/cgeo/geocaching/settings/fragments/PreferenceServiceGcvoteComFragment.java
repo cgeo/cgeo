@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class PreferenceServiceGcvoteComFragment extends PreferenceFragmentCompat
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gcvote_website));
         final String urlOrHost = GCVote.getWebsite();
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -29,6 +30,6 @@ public class PreferenceServiceGcvoteComFragment extends PreferenceFragmentCompat
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.init_gcvote);
+        requireActivity().setTitle(R.string.init_gcvote);
     }
 }

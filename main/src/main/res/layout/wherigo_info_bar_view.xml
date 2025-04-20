@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/root"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true">
+
+    <LinearLayout
+        android:id="@+id/wherigo_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal"
+        android:layout_toLeftOf="@id/wherigo_additional_info_box"
+        android:background="@color/colorBackgroundActionBar"
+        tools:ignore="UseCompoundDrawables"
+        tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
+
+        <ImageView
+            style="@style/image_small_prepend_text"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_menu_wherigo"
+            app:tint="@color/colorTextActionBar" />
+
+        <TextView
+            android:id="@+id/wherigo_info_text"
+            style="@style/text_label"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorTextActionBar"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            tools:text="currently active filter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wherigo_additional_info_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorBackgroundActionBar"
+        tools:ignore="UseCompoundDrawables"
+        tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
+
+        <ImageView
+            style="@style/image_small_prepend_text"
+            android:id="@+id/wherigo_resume_dialog_icon"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_menu_face"
+            app:tint="@color/colorTextActionBar" />
+
+        <TextView
+            android:id="@+id/wherigo_resume_dialog_text"
+            style="@style/text_label"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="6dp"
+            android:text="@string/wherigo_bar_resume_dialog"
+            android:textColor="@color/colorTextActionBar"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            tools:text="Resume dialog" />
+
+        <ImageView
+            style="@style/image_small_prepend_text"
+            android:id="@+id/wherigo_song_info_icon"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_menu_play_arrow"
+            app:tint="@color/colorTextActionBar" />
+
+        <TextView
+            android:id="@+id/wherigo_song_info_text"
+            style="@style/text_label"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="6dp"
+            android:textColor="@color/colorTextActionBar"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            tools:text="0:45/3:23" />
+    </LinearLayout>
+</merge>

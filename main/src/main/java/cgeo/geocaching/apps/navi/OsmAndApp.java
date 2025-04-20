@@ -53,10 +53,10 @@ public class OsmAndApp extends AbstractPointNavigationApp {
         navigate(context, coords, context.getString(R.string.osmand_marker_cgeo));
     }
 
-    private static void navigate(@NonNull final Context context, @NonNull final Geopoint coords, @NonNull final String markerName) {
+    private static void navigate(@NonNull final Context context, @NonNull final Geopoint coords, @Nullable final String markerName) {
         final Parameters params = new Parameters(PARAM_LAT, String.valueOf(coords.getLatitude()),
                 PARAM_LON, String.valueOf(coords.getLongitude()),
-                PARAM_NAME, markerName);
+                PARAM_NAME, markerName == null ? "" : markerName);
         context.startActivity(buildIntent(params));
     }
 

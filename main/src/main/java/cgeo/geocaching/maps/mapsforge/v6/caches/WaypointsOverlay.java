@@ -48,7 +48,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         return waypoints;
     }
 
-    protected void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean checkOwnership, final boolean forceCompactIconMode) {
+    protected void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean forceCompactIconMode) {
         final Collection<String> removeCodes = getGeocodes();
         final Collection<String> newCodes = new HashSet<>();
         final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored);

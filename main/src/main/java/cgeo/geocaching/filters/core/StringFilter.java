@@ -80,7 +80,7 @@ public class StringFilter {
 
     public void setConfig(final List<String> config) {
         if (config != null) {
-            setTextValue(config.size() > 0 ? config.get(0) : null);
+            setTextValue(!config.isEmpty() ? config.get(0) : null);
             setFilterType(config.size() > 1 ? TextUtils.getEnumIgnoreCaseAndSpecialChars(StringFilterType.class, config.get(1), StringFilterType.CONTAINS) : StringFilterType.CONTAINS);
             setMatchCase(config.size() > 2 && TextUtils.isEqualIgnoreCaseAndSpecialChars(FLAG_MATCHCASE, config.get(2)));
         }

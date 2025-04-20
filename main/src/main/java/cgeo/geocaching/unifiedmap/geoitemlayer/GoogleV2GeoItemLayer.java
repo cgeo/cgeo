@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
 
 public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, Object>> {
 
@@ -118,6 +119,8 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
                 context = map.addPolyline(new PolylineOptions()
                         .width(strokeWidth * 4f / 3f) // factor required to adjust to OSM line width
                         .color(strokeColor)
+                        .startCap(new RoundCap())
+                        .endCap(new RoundCap())
                         .addAll(GP_CONVERTER.toList(item.getPoints()))
                         .zIndex(zLevel));
                 break;

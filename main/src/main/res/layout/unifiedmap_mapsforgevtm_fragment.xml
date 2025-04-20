@@ -10,8 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
-    <include layout="@layout/map_bearingindicator" />
-
     <ImageView
         android:id="@+id/map_attribution"
         android:layout_width="20dp"
@@ -24,4 +22,22 @@
         android:layout_gravity="left"
         android:src="@drawable/copyright"
         tools:src="@drawable/copyright"/>
+
+    <!--TODO remove as soon as Unified map is default-->
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/unifiedmap"/>
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:text="VTM"
+        android:textSize="8dp"
+        android:rotation="-45"
+        android:textColor="@color/just_white"
+        tools:ignore="HardcodedText,SpUsage" />
+    <!--End of TODO-->
+
 </RelativeLayout>

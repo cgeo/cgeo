@@ -25,6 +25,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.gcvote.GCVote;
@@ -45,10 +46,12 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
 import java.io.File;
@@ -95,6 +98,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private GCConnector() {
         // singleton
+        prefKey = R.string.preference_screen_gc;
     }
 
     @NonNull
@@ -317,8 +321,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return GCMap.searchByViewport(this, viewport);
+        return searchByViewport(viewport, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
     }
+
+    @Override
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
+        return GCMap.searchByViewport(this, viewport, filter);
+    }
+
 
     @NonNull
     @Override
@@ -370,7 +381,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Add a cache to the favorites list.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to add
@@ -388,7 +399,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Remove a cache from the favorites list.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to add
@@ -684,6 +695,17 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
         return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
+    }
+
+    @Override
+    public boolean supportsManualLogin() {
+        return GCLogin.getInstance().supportsManualLogin();
+    }
+
+    @UiThread
+    @Override
+    public void performManualLogin(final Context context, final Runnable callback) {
+        GCLogin.getInstance().performManualLogin(context, callback);
     }
 
     /**

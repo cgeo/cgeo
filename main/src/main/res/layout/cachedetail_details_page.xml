@@ -108,7 +108,7 @@
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/ic_menu_watch"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/remove_from_watchlist"
@@ -116,6 +116,47 @@
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/ic_menu_watch_remove"
                     android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Internal Wherigo player box -->
+
+        <LinearLayout
+            android:id="@+id/wherigo_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/wherigo_text"
+                    android:text="@string/cache_wherigo_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="100dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/play_in_cgeo"
+                    android:layout_alignParentRight="true"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_wherigo"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -146,11 +187,10 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
-                    android:layout_marginRight="60dip"
+                    android:layout_marginRight="100dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
                     android:textColor="@color/colorText"
-                    tools:text="Send to WhereYouGo"
                     android:textIsSelectable="false" />
 
                 <Button
@@ -159,7 +199,8 @@
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/icon_whereyougo"
                     android:visibility="visible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+                    android:tooltipText="@string/cache_whereyougo_start"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -247,7 +288,8 @@
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/icon_gc_alc"
                     android:visibility="visible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+                    android:tooltipText="@string/cache_alc_start"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -309,12 +351,11 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal_heading" />
-                <TextView
-                    style="@style/separator_horizontal_heading_text"
-                    android:text="@string/cache_license" />
-            </RelativeLayout>
+            <cgeo.geocaching.ui.SectionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerAbove="true"
+                android:text="@string/cache_license" />
 
             <TextView
                 android:id="@+id/license"

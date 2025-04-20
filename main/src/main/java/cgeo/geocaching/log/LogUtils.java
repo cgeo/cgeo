@@ -83,95 +83,96 @@ public final class LogUtils {
     static LogResult createLogTaskLogic(final Geocache cache, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory, final Consumer<String> progress) {
 
 
-        final ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), logEntry);
-        try {
-            final ILoggingManager loggingManager = cache.getLoggingManager();
-            final IConnector cacheConnector = loggingManager.getConnector();
+        try (ContextLogger cLog = new ContextLogger("LogUtils.createLogTaskLogic(%s, %s)", cache.getGeocode(), logEntry)) {
+            try {
+                final ILoggingManager loggingManager = cache.getLoggingManager();
+                final IConnector cacheConnector = loggingManager.getConnector();
 
-            //Upload new log entry
-            progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
-            final LogResult logResult = loggingManager.createLog(logEntry, inventory);
-            if (!logResult.isOk()) {
+                //Upload new log entry
+                progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
+                final LogResult logResult = loggingManager.createLog(logEntry, inventory);
+                if (!logResult.isOk()) {
+                    return logResult;
+                }
+
+                //if necessary: upload a second log entry for problem report
+                final LogEntry adaptedLogEntryProblemReport;
+                if (logEntry.reportProblem != ReportProblemType.NO_PROBLEM && !loggingManager.canLogReportType(logEntry.reportProblem)) {
+                    progress.accept(LocalizationUtils.getString(R.string.log_posting_problemreport));
+                    final OfflineLogEntry logEntryProblemReport = new OfflineLogEntry.Builder()
+                        .setLogType(logEntry.reportProblem.logType)
+                        .setDate(logEntry.date)
+                        .setLog(LocalizationUtils.getString(logEntry.reportProblem.textId))
+                        .setPassword(logEntry.password)
+                        .build();
+                    final LogResult logResultProblemReport = loggingManager.createLog(logEntryProblemReport, null);
+                    if (!logResultProblemReport.isOk()) {
+                        return logResultProblemReport;
+                    }
+                    adaptedLogEntryProblemReport = applyCommonsToOwnLog(logEntryProblemReport.buildUpon(), cacheConnector)
+                        .setServiceLogId(logResultProblemReport.getServiceLogId())
+                        .build();
+                } else {
+                    adaptedLogEntryProblemReport = null;
+                }
+
+                //upload images
+                final ImmutableTriple<ImageResult, List<Image>, Runnable> imgResult =
+                    updateImages(loggingManager, logResult.getServiceLogId(), Collections.emptyList(), logEntry.logImages, progress);
+                if (!imgResult.left.isOk()) {
+                    return LogResult.error(imgResult.left.getStatusCode(), imgResult.left.getPostServerMessage(), null);
+                }
+
+                progress.accept(LocalizationUtils.getString(R.string.log_posting_save_internal));
+
+                //adapt logs in database
+                final LogEntry adaptedNewLogEntry = applyCommonsToOwnLog(logEntry.buildUpon(), cacheConnector)
+                    .setServiceLogId(logResult.getServiceLogId())
+                    .setLogImages(imgResult.middle)
+                    .build();
+
+                changeLogsInDatabase(cache, logs -> {
+                    logs.add(0, adaptedNewLogEntry);
+                    if (adaptedLogEntryProblemReport != null) {
+                        logs.add(0, adaptedLogEntryProblemReport);
+                    }
+                });
+                //adapt commons in database
+                adaptCacheCommonsAfterLogging(cache, loggingManager, null, adaptedNewLogEntry);
+                // update offline log in DB
+                cache.clearOfflineLog(null);
+                //update favorites
+                if (loggingManager.supportsLogWithFavorite() && logEntry.favorite) {
+                    cache.setFavorite(true);
+                    cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+                }
+                DataStore.saveChangedCache(cache);
+
+                //Cleanup temporary images
+                imgResult.right.run();
+
+                //update trackable actions
+                if (loggingManager.supportsLogWithTrackables()) {
+                    for (Map.Entry<String, LogTypeTrackable> entry : logEntry.inventoryActions.entrySet()) {
+                        LastTrackableAction.setAction(entry.getKey(), entry.getValue());
+                    }
+                }
+
+                //Execute Log-actions NOT resulting in a log error being reported to user
+
+                postCacheRating(cacheConnector, cache, logEntry.rating, progress);
+                postGenericInventoryLogs(cache, logEntry, inventory.values(), progress);
+
+                cache.notifyChange();
                 return logResult;
+
+            } catch (final RuntimeException e) {
+                cLog.setException(e);
+                Log.e("LogUtils.createLogTaskLogic", e);
+                return LogResult.error(StatusCode.LOG_POST_ERROR, "LogUtils.createLogTaskLogic", e);
+            } finally {
+                cLog.endLog();
             }
-
-            //if necessary: upload a second log entry for problem report
-            final LogEntry adaptedLogEntryProblemReport;
-            if (logEntry.reportProblem != ReportProblemType.NO_PROBLEM && !loggingManager.canLogReportType(logEntry.reportProblem)) {
-                progress.accept(LocalizationUtils.getString(R.string.log_posting_problemreport));
-                final OfflineLogEntry logEntryProblemReport = new OfflineLogEntry.Builder()
-                    .setLogType(logEntry.reportProblem.logType)
-                    .setDate(logEntry.date)
-                    .setLog(LocalizationUtils.getString(logEntry.reportProblem.textId))
-                    .setPassword(logEntry.password)
-                    .build();
-                final LogResult logResultProblemReport = loggingManager.createLog(logEntryProblemReport, null);
-                if (!logResultProblemReport.isOk()) {
-                    return logResultProblemReport;
-                }
-                adaptedLogEntryProblemReport = applyCommonsToOwnLog(logEntryProblemReport.buildUpon(), cacheConnector)
-                    .setServiceLogId(logResultProblemReport.getServiceLogId())
-                    .build();
-            } else {
-                adaptedLogEntryProblemReport = null;
-            }
-
-            //upload images
-            final ImmutableTriple<ImageResult, List<Image>, Runnable> imgResult =
-                updateImages(loggingManager, logResult.getServiceLogId(), Collections.emptyList(), logEntry.logImages, progress);
-            if (!imgResult.left.isOk()) {
-                return LogResult.error(imgResult.left.getStatusCode(), imgResult.left.getPostServerMessage(), null);
-            }
-
-            progress.accept(LocalizationUtils.getString(R.string.log_posting_save_internal));
-
-            //adapt logs in database
-            final LogEntry adaptedNewLogEntry = applyCommonsToOwnLog(logEntry.buildUpon(), cacheConnector)
-                .setServiceLogId(logResult.getServiceLogId())
-                .setLogImages(imgResult.middle)
-                .build();
-
-            changeLogsInDatabase(cache, logs -> {
-                logs.add(0, adaptedNewLogEntry);
-                if (adaptedLogEntryProblemReport != null) {
-                    logs.add(0, adaptedLogEntryProblemReport);
-                }
-            });
-            //adapt commons in database
-            adaptCacheCommonsAfterLogging(cache, loggingManager, null, adaptedNewLogEntry);
-            // update offline log in DB
-            cache.clearOfflineLog(null);
-            //update favorites
-            if (loggingManager.supportsLogWithFavorite() && logEntry.favorite) {
-                cache.setFavorite(true);
-                cache.setFavoritePoints(cache.getFavoritePoints() + 1);
-            }
-            DataStore.saveChangedCache(cache);
-
-            //Cleanup temporary images
-            imgResult.right.run();
-
-            //update trackable actions
-            if (loggingManager.supportsLogWithTrackables()) {
-                for (Map.Entry<String, LogTypeTrackable> entry : logEntry.inventoryActions.entrySet()) {
-                    LastTrackableAction.setAction(entry.getKey(), entry.getValue());
-                }
-            }
-
-            //Execute Log-actions NOT resulting in a log error being reported to user
-
-            postCacheRating(cacheConnector, cache, logEntry.rating, progress);
-            postGenericInventoryLogs(cache, logEntry, inventory.values(), progress);
-
-            cache.notifyChange();
-            return logResult;
-
-        } catch (final RuntimeException e) {
-            cLog.setException(e);
-            Log.e("LogUtils.createLogTaskLogic", e);
-            return LogResult.error(StatusCode.LOG_POST_ERROR, "LogUtils.createLogTaskLogic", e);
-        } finally {
-            cLog.endLog();
         }
     }
 
@@ -238,6 +239,8 @@ public final class LogUtils {
     @WorkerThread
     static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
+        final IConnector cacheConnector = loggingManager.getConnector();
+
         //Upload changed log entry itself
         progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
         final LogResult result = cache.getLoggingManager().editLog(newEntry);
@@ -254,7 +257,7 @@ public final class LogUtils {
         progress.accept(LocalizationUtils.getString(R.string.log_posting_save_internal));
 
         //adapt logs in database
-        final LogEntry adaptedNewLogEntry = newEntry.buildUpon()
+        final LogEntry adaptedNewLogEntry = applyCommonsToOwnLog(newEntry.buildUpon(), cacheConnector)
             .setLogImages(imgResult.middle)
             .build();
         changeLogsInDatabase(cache, logs -> {
@@ -271,6 +274,16 @@ public final class LogUtils {
         });
         //adapt commons in database
         adaptCacheCommonsAfterLogging(cache, loggingManager, oldEntry, adaptedNewLogEntry);
+        // adapt cache facvorite status and stored favorite points
+        if (loggingManager.supportsLogWithFavorite() && newEntry instanceof OfflineLogEntry) {
+            final boolean oldWasFavorite = cache.isFavorite();
+            final boolean isFavorite = ((OfflineLogEntry) newEntry).favorite;
+            if (oldWasFavorite != isFavorite) {
+                cache.setFavorite(isFavorite);
+                cache.setFavoritePoints(cache.getFavoritePoints() + (isFavorite ? 1 : -1));
+            }
+        }
+        //store
         DataStore.saveChangedCache(cache);
 
         //Cleanup
@@ -292,27 +305,37 @@ public final class LogUtils {
         if (cacheConnector instanceof ILogin && oldIsFound != newIsFound) {
             ((ILogin) cacheConnector).increaseCachesFound(newIsFound ? 1 : -1);
         }
+        final List<String> attributes = cache.getAttributes();
 
-        //update cache state
-        for (LogEntry log : cache.getLogs()) {
-            if (log.logType == LogType.TEMP_DISABLE_LISTING) {
-                cache.setDisabled(true);
-                break;
-            } else if (log.logType == LogType.ENABLE_LISTING) {
-                cache.setDisabled(false);
-                break;
-            }
-        }
-
-        //update own found state
-        if (newLogEntry.date >= cache.getVisitedDate()) {
-            if (newLogEntry.logType.isFoundLog()) {
+        // update cache state
+        switch (newLogEntry.logType) {
+            case WEBCAM_PHOTO_TAKEN:
+            case ATTENDED:
+            case FOUND_IT:
                 cache.setFound(true);
                 cache.setVisitedDate(newLogEntry.date);
-            } else if (newLogEntry.logType == LogType.DIDNT_FIND_IT) {
+                break;
+            case DIDNT_FIND_IT:
                 cache.setDNF(true);
                 cache.setVisitedDate(newLogEntry.date);
-            }
+                break;
+            case ARCHIVE:
+                cache.setArchived(true);
+                break;
+            case TEMP_DISABLE_LISTING:
+                cache.setDisabled(true);
+                break;
+            case ENABLE_LISTING:
+                cache.setDisabled(false);
+                break;
+            case NEEDS_MAINTENANCE:
+                attributes.add("firstaid_yes");
+                cache.setAttributes(attributes);
+                break;
+            case OWNER_MAINTENANCE:
+                attributes.remove("firstaid_yes");
+                cache.setAttributes(attributes);
+                break;
         }
     }
 

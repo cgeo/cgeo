@@ -17,6 +17,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,7 +46,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
-    private static boolean isShowCircles;
     private static boolean isAutotargetIndividualRoute;
     private static boolean showAutotargetIndividualRoute;
 
@@ -53,11 +53,22 @@ public class MapSettingsUtils {
         // utility class
     }
 
+    public static void showRotationMenu(final Activity activity, final Action1<Integer> setRotationMode) {
+        final ToggleButtonWrapper<Integer> rotationChoiceWrapper = new ToggleButtonWrapper<>(Settings.getMapRotation(), setRotationMode, activity.findViewById(R.id.rotation_mode_tooglegroup), true);
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_off, Settings.MAPROTATION_OFF, activity.getString(R.string.switch_off)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_manual, Settings.MAPROTATION_MANUAL, activity.getString(R.string.switch_manual)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_energy_saving, Settings.MAPROTATION_AUTO_LOWPOWER, activity.getString(R.string.switch_auto_lowpower)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_high_precision, Settings.MAPROTATION_AUTO_PRECISE, activity.getString(R.string.switch_auto_precise)));
+        rotationChoiceWrapper.init();
+        for (ButtonChoiceModel<Integer> bcm : rotationChoiceWrapper.list) {
+            bcm.button.setOnClickListener(v -> rotationChoiceWrapper.setValue());
+        }
+    }
+
     // splitting up that method would not help improve readability
     @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
-        isShowCircles = Settings.isShowCircles();
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action2<Boolean, Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
         final boolean showPNMastertoggle = Settings.showProximityNotificationMasterToggle();
@@ -74,8 +85,8 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
         final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.ORIGINAL)), Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.PARKING)), Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
-        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
-        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, isShowCircles, Settings::setShowCircles, false);
+        final SettingsCheckboxModel wpVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
+        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, Settings.isShowCircles(), Settings::setShowCircles, false);
 
         final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
 
@@ -95,16 +106,16 @@ public class MapSettingsUtils {
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
         wpOriginalCb.addToViewGroup(activity, rightColumn);
         wpParkingCb.addToViewGroup(activity, rightColumn);
-        wbVisitedCb.addToViewGroup(activity, rightColumn);
+        wpVisitedCb.addToViewGroup(activity, rightColumn);
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         circlesCb.addToViewGroup(activity, rightColumn);
 
-        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup);
+        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup, false);
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
-        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
+        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup, false);
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
@@ -114,14 +125,15 @@ public class MapSettingsUtils {
         boolean useUser1 = false;
         boolean useUser2 = false;
         if (useInternalRouting) {
+            final String profileNoneString = activity.getResources().getString(R.string.routingmode_none);
             final StringBuilder sb = new StringBuilder();
             final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
-            if (StringUtils.isNotBlank(temp1)) {
+            if (StringUtils.isNotBlank(temp1) && !temp1.equals(profileNoneString)) {
                 sb.append("1: ").append(temp1);
                 useUser1 = true;
             }
             final String temp2 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER2), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
-            if (StringUtils.isNotBlank(temp2)) {
+            if (StringUtils.isNotBlank(temp2) && !temp2.equals(profileNoneString)) {
                 sb.append(StringUtils.isNotBlank(sb) ? " - " : "").append("2: ").append(temp2);
                 useUser2 = true;
             }
@@ -141,7 +153,12 @@ public class MapSettingsUtils {
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
+            boolean filterChanged = false;
+            final boolean circleChanged = circlesCb.valueChanged;
             for (SettingsCheckboxModel item : allCbs) {
+                if (item.valueChanged() && item != circlesCb) {
+                    filterChanged = true;
+                }
                 item.setValue();
             }
             compactIconWrapper.setValue();
@@ -152,7 +169,7 @@ public class MapSettingsUtils {
                 filterContext.set(filter);
             }
 
-            onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+            onMapSettingsPopupFinished.call(circleChanged, filterChanged);
 
             if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
                 if (route == null) {
@@ -217,12 +234,15 @@ public class MapSettingsUtils {
         private final Action1<Boolean> setValue;
         private final boolean isNegated;
 
+        private boolean valueChanged;
+
         SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
             this.imageParam = ImageParam.id(resIcon);
             this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
+            this.valueChanged = false;
         }
 
         SettingsCheckboxModel(@StringRes final int resTitle, final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
@@ -231,6 +251,7 @@ public class MapSettingsUtils {
             this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
+            this.valueChanged = false;
         }
 
         public void setValue() {
@@ -254,7 +275,16 @@ public class MapSettingsUtils {
             }
 
             ip.right.setChecked(currentValue);
-            ip.right.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
+            ip.right.setOnCheckedChangeListener((v, c) -> changeValue());
+        }
+
+        public boolean valueChanged() {
+            return valueChanged;
+        }
+
+        private void changeValue() {
+            this.currentValue = !this.currentValue;
+            this.valueChanged = !this.valueChanged;
         }
     }
 
@@ -276,12 +306,14 @@ public class MapSettingsUtils {
         private final ArrayList<ButtonChoiceModel<T>> list;
         private final Action1<T> setValue;
         private final T originalValue;
+        private final boolean setValueOnEachClick;
 
-        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup) {
+        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup, final boolean setValueOnEachClick) {
             this.originalValue = originalValue;
             this.toggleGroup = toggleGroup;
             this.setValue = setValue;
             this.list = new ArrayList<>();
+            this.setValueOnEachClick = setValueOnEachClick;
         }
 
         public void add(final ButtonChoiceModel<T> item) {
@@ -315,7 +347,7 @@ public class MapSettingsUtils {
 
         public void setValue() {
             final T currentValue = getByResId(toggleGroup.getCheckedButtonId()).assignedValue;
-            if (setValue != null && !originalValue.equals(currentValue)) {
+            if (setValue != null && (setValueOnEachClick || !originalValue.equals(currentValue))) {
                 this.setValue.call(currentValue);
             }
         }

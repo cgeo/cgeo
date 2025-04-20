@@ -195,10 +195,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             return true;
         }
 
-        if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
-            return true;
-        }
-        return false;
+        return LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init());
     }
 
     protected abstract TargetInfo getTargetInfo();

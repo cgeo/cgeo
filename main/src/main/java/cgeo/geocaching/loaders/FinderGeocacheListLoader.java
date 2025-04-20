@@ -25,7 +25,7 @@ public class FinderGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @Override
     public IGeocacheFilter getAdditionalFilterParameter() {
-        final LogEntryGeocacheFilter foundByFilter = (LogEntryGeocacheFilter) GeocacheFilterType.LOG_ENTRY.create();
+        final LogEntryGeocacheFilter foundByFilter = GeocacheFilterType.LOG_ENTRY.create();
         foundByFilter.setFoundByUser(username);
         return foundByFilter;
     }

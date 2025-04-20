@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 
 public class SearchUtils {
@@ -60,7 +61,7 @@ public class SearchUtils {
         menuSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
             @Override
-            public boolean onMenuItemActionExpand(final MenuItem item) {
+            public boolean onMenuItemActionExpand(@NonNull final MenuItem item) {
                 for (int i = 0; i < menu.size(); i++) {
                     if (menu.getItem(i).getItemId() == R.id.menu_paste_search && ConnectorFactory.containsGeocode(ClipboardUtils.getText())) {
                         menu.getItem(i).setVisible(true);
@@ -72,7 +73,7 @@ public class SearchUtils {
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(final MenuItem item) {
+            public boolean onMenuItemActionCollapse(@NonNull final MenuItem item) {
                 activity.invalidateOptionsMenu();
                 return true;
             }

@@ -17,7 +17,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -38,20 +37,20 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.theme_prefs, rootKey);
 
         // if the render theme has a style menu, its data is delivered via the intent
-        renderthemeOptions = (XmlRenderThemeStyleMenu) getActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
+        renderthemeOptions = (XmlRenderThemeStyleMenu) requireActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
         // the preference category serves as the hook to add a list preference to allow users to select a style
-        this.renderthemeMenu = (PreferenceCategory) findPreference(getString(R.string.pref_theme_menu));
+        this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_map_style);
+        requireActivity().setTitle(R.string.settings_title_map_style);
     }
 
     private void createRenderthemeMenu() {
-        final Activity activity = getActivity();
+        final Activity activity = requireActivity();
 
         this.renderthemeMenu.removeAll();
 
@@ -156,21 +155,9 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void addScalePreference(final Context context, final PreferenceGroup cat, final String prefKey, @StringRes final int titleId, @StringRes final int summaryId) {
-
-        final Preference info = new Preference(context) {
-            public void onBindViewHolder(final PreferenceViewHolder holder) {
-                super.onBindViewHolder(holder);
-                holder.setDividerAllowedAbove(false);
-                holder.setDividerAllowedBelow(false);
-            }
-        };
-        info.setTitle(titleId);
-        info.setSummary(summaryId);
-        info.setIconSpaceReserved(false);
-        cat.addPreference(info);
-
-        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%",
-                new SeekbarUI.FactorizeValueMapper(10));
+        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%", new SeekbarUI.FactorizeValueMapper(10));
+        seek.setTitle(titleId);
+        seek.setSummary(summaryId);
         seek.setDefaultValue(100);
         seek.setKey(prefKey);
         cat.addPreference(seek);

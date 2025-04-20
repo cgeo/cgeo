@@ -7,11 +7,9 @@ import android.net.Uri;
 
 import androidx.core.util.Pair;
 
-import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
-
 class OsmOrgSource extends AbstractMapsforgeOnlineTileProvider {
     OsmOrgSource() {
-        super("OSM.org", Uri.parse("https://tile.openstreetmap.org"), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_openstreetmap_html), true));
+        super(CgeoApplication.getInstance().getString(R.string.map_source_osm_mapnik), Uri.parse("https://tile.openstreetmap.org"), "/{Z}/{X}/{Y}.png", 2, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_openstreetmap_html), true));
     }
 
 }

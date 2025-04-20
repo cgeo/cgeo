@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
@@ -18,13 +18,13 @@ public class GeoitemRef implements Parcelable {
     public static final Comparator<? super GeoitemRef> NAME_COMPARATOR = (Comparator<GeoitemRef>) (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName());
 
     private final String itemCode;
-    private final CoordinatesType type;
+    private final CoordinateType type;
     private final String geocode;
     private final int id;
     private final String name;
     private final int markerId;
 
-    public GeoitemRef(final String itemCode, final CoordinatesType type, final String geocode, final int id, final String name, final int markerId) {
+    public GeoitemRef(final String itemCode, final CoordinateType type, final String geocode, final int id, final String name, final int markerId) {
         this.itemCode = itemCode;
         this.type = type;
         this.geocode = geocode;
@@ -63,12 +63,7 @@ public class GeoitemRef implements Parcelable {
         return itemCode;
     }
 
-    @NonNull
-    public String getShortItemCode() {
-        return generateShortGeocode(itemCode);
-    }
-
-    public CoordinatesType getType() {
+    public CoordinateType getType() {
         return type;
     }
 
@@ -101,7 +96,7 @@ public class GeoitemRef implements Parcelable {
                 @Override
                 public GeoitemRef createFromParcel(final Parcel in) {
                     final String itemCode = in.readString();
-                    final CoordinatesType type = CoordinatesType.values()[in.readInt()];
+                    final CoordinateType type = CoordinateType.values()[in.readInt()];
                     final String geocode = in.readString();
                     final int id = in.readInt();
                     final String name = in.readString();

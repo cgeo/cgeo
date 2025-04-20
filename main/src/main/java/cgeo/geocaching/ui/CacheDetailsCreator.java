@@ -7,7 +7,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
@@ -18,8 +18,9 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import static cgeo.geocaching.utils.Formatter.SEPARATOR;
+import static cgeo.geocaching.utils.MapMarkerUtils.createDTRatingMarker;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -156,7 +157,7 @@ public final class CacheDetailsCreator {
             date = "";
         }
         if (cache.isFound()) {
-            states.add(res.getString(R.string.cache_status_found) + date);
+            states.add(res.getString(cache.isEventCache() ? R.string.cache_status_attended : R.string.cache_status_found) + date);
         } else if (cache.isDNF()) {
             states.add(res.getString(R.string.cache_not_status_found) + date);
         }
@@ -186,7 +187,7 @@ public final class CacheDetailsCreator {
         return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
     }
 
-    private static Float distanceNonBlocking(final ICoordinates target) {
+    private static Float distanceNonBlocking(final ICoordinate target) {
         if (target.getCoords() == null) {
             return null;
         }
@@ -233,6 +234,16 @@ public final class CacheDetailsCreator {
     }
 
     public void addDifficultyTerrain(final Geocache cache) {
+        final Context context = parentView.getContext();
+
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+        layout.findViewById(R.id.addition).setVisibility(GONE);
+        parentView.addView(layout);
+
+        final TextView nameView = layout.findViewById(R.id.name);
+        nameView.setText(R.string.cache_difficulty_terrain);
+
+        final TextView valueView = layout.findViewById(R.id.value);
         final StringBuilder sb = new StringBuilder();
         if (cache.getDifficulty() > 0) {
             sb.append("D ").append(cache.getDifficulty());
@@ -240,7 +251,13 @@ public final class CacheDetailsCreator {
         if (cache.getTerrain() > 0) {
             sb.append(sb.length() > 0 ? SEPARATOR : "").append("T ").append(cache.getTerrain());
         }
-        add(R.string.cache_difficulty_terrain, sb);
+        valueView.setText(sb);
+
+        final LinearLayout linearLayout = layout.findViewById(R.id.linearlayout);
+
+        final ImageView catIcon = new ImageView(context);
+        catIcon.setBackground(createDTRatingMarker(res, cache.supportsDifficultyTerrain(), cache.getDifficulty(), cache.getTerrain(), 1.47f)); // 1.47 = scaling factor required to make D/T marker the same size as log smileys
+        linearLayout.addView(catIcon);
     }
 
     public void addBetterCacher(final Geocache cache) {
@@ -338,7 +355,7 @@ public final class CacheDetailsCreator {
 
     public void addLatestLogs(final Geocache cache) {
         final List<LogEntry> logs = cache.getLogs();
-        if (logs.size() < 1) {
+        if (logs.isEmpty()) {
             return;
         }
 

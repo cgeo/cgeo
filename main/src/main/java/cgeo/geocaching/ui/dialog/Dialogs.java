@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
- *
+ * <br>
  * To create simple dialogs, consider using {@link SimpleDialog} instead.
  */
 public final class Dialogs {
@@ -182,8 +181,8 @@ public final class Dialogs {
      */
     public static void confirmWithCheckbox(final Context context, final String title, final String message, final CheckboxDialogConfig checkboxConfig, final Action1<Boolean> onConfirm, @Nullable final Action1<Boolean> onCancel) {
         final View content = LayoutInflater.from(context).inflate(R.layout.dialog_text_checkbox, null);
-        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-        final TextView textView = (TextView) content.findViewById(R.id.message);
+        final CheckBox checkbox = content.findViewById(R.id.check_box);
+        final TextView textView = content.findViewById(R.id.message);
         textView.setText(message);
         checkbox.setText(checkboxConfig.getTextRes());
         checkbox.setChecked(checkboxConfig.isCheckedOnInit());
@@ -248,8 +247,10 @@ public final class Dialogs {
     private static void updateActionbarAfterStateChange(final BottomSheetDialog dialog, final BottomsheetDialogWithActionbarBinding dialogView) {
         if (dialog.getBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED) {
             dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_more_white);
+            dialogView.toolbar.setNavigationContentDescription(dialog.getContext().getString(R.string.close));
         } else {
             dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+            dialogView.toolbar.setNavigationContentDescription(dialog.getContext().getString(R.string.expand));
         }
     }
 
@@ -257,10 +258,15 @@ public final class Dialogs {
      * create a bottom sheet dialog with action bar
      */
     public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final @StringRes int titleResId) {
+        return bottomSheetDialogWithActionbar(context, contentView, LocalizationUtils.getString(titleResId));
+    }
+
+    public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final CharSequence title) {
+
         final BottomsheetDialogWithActionbarBinding dialogView = BottomsheetDialogWithActionbarBinding.inflate(LayoutInflater.from(newContextThemeWrapper(context)));
         final BottomSheetDialog dialog = bottomSheetDialog(context, dialogView.getRoot());
 
-        dialogView.toolbar.setTitle(titleResId);
+        dialogView.toolbar.setTitle(title);
         dialogView.contentWrapper.addView(contentView);
 
         dialogView.toolbar.setNavigationOnClickListener(v -> {
@@ -306,7 +312,7 @@ public final class Dialogs {
 
     /**
      * displays an input dialog (one or multiple lines)
-     *
+     * <br>
      * short form of input(), with default parameters for {@link InputType}, minLines and maxLines
      */
     public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
@@ -353,11 +359,11 @@ public final class Dialogs {
         float newValue = currentValue;
         if (newValue > maxValue) {
             newValue = maxValue;
-            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(context, R.string.number_input_err_boundarymax);
         }
         if (newValue < minValue) {
             newValue = minValue;
-            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(context, R.string.number_input_err_boundarymin);
         }
         return newValue;
     }

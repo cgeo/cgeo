@@ -20,7 +20,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class GeocoderTest {
 
     private static final String TEST_ADDRESS = "46 rue Barrault, Paris, France";
-    private static final double TEST_LATITUDE = 48.82677;
+    private static final double TEST_LATITUDE = 48.82622;
     private static final double TEST_LONGITUDE = 2.34644;
     private static final Geopoint TEST_COORDS = new Geopoint(TEST_LATITUDE, TEST_LONGITUDE);
     private static final Offset<Double> TEST_OFFSET = Offset.offset(0.00050);

@@ -4,29 +4,28 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.unifiedmap.LayerHelper;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
+import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
 
 import androidx.core.util.Pair;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.oscim.core.BoundingBox;
-import org.oscim.layers.tile.buildings.BuildingLayer;
-import org.oscim.layers.tile.vector.VectorTileLayer;
-import org.oscim.layers.tile.vector.labeling.LabelLayer;
-import org.oscim.map.Map;
-import org.oscim.tiling.source.mapfile.MapFileTileSource;
-import org.oscim.tiling.source.mapfile.MapInfo;
-import org.oscim.tiling.source.mapfile.MultiMapFileTileSource;
+import org.mapsforge.core.model.BoundingBox;
+import org.mapsforge.map.datastore.MultiMapDataStore;
+import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.reader.header.MapFileException;
+import org.mapsforge.map.reader.header.MapFileInfo;
+import org.mapsforge.map.view.MapView;
 
-class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProvider {
+public class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProvider {
 
     private final List<ImmutablePair<String, Uri>> maps;
 
@@ -36,50 +35,49 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
     }
 
     @Override
-    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
+    public void addTileLayer(final MapsforgeFragment fragment, final MapView map) {
         // collect metadata first: languages, zoom level range and bounding boxes
         final ArrayList<String> languages = new ArrayList<>();
         final StringBuilder mapAttribution = new StringBuilder();
         BoundingBox boundingBox = null;
-        for (ImmutablePair<String, Uri> data : maps) {
-            final MapFileTileSource source = new MapFileTileSource();
-            source.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
-            source.open();
-            final MapInfo info = source.getMapInfo();
-            source.close();
-            if (info != null) {
-                checkLanguage(languages, info.languagesPreference);
-                parseZoomLevel(info.zoomLevel);
-                boundingBox = boundingBox == null ? info.boundingBox : boundingBox.extendBoundingBox(info.boundingBox);
+        final MultiMapDataStore mapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
 
-                // map attribution
-                final String temp = StringUtils.isNotBlank(info.comment) ? info.comment : StringUtils.isNotBlank(info.createdBy) ? info.createdBy : "";
-                mapAttribution.append("<p><b>").append(data.left).append(":</b>");
-                if (StringUtils.isNotBlank(temp)) {
-                    mapAttribution.append("<br />").append(temp);
+        for (ImmutablePair<String, Uri> data : maps) {
+            MapFile mapFile = null;
+            final InputStream mapStream = ContentStorage.get().openForRead(data.right, true);
+            if (mapStream != null) {
+                try {
+                    mapFile = new MapFile((FileInputStream) mapStream, 0, Settings.getMapLanguage());
+                } catch (MapFileException mfe) {
+                    Log.e("Problem opening map file '" + mapUri + "'", mfe);
                 }
-                mapAttribution.append("</p>");
+            }
+            if (mapFile != null) {
+                final MapFileInfo info = mapFile.getMapFileInfo();
+                if (info != null) {
+                    boundingBox = boundingBox == null ? info.boundingBox : boundingBox.extendBoundingBox(info.boundingBox);
+                    if (StringUtils.isNotBlank(info.languagesPreference)) {
+                        checkLanguage(languages, info.languagesPreference);
+                    }
+                    zoomMin = Math.min(zoomMin, info.zoomLevelMin);
+                    zoomMax = Math.max(zoomMax, info.zoomLevelMax);
+                    // map attribution
+                    mapAttribution.append("<p><b>").append(data.left).append(":</b>");
+                    if (StringUtils.isNotBlank(info.comment)) {
+                        mapAttribution.append("<br />").append(info.comment);
+                    } else if (StringUtils.isNotBlank(info.createdBy)) {
+                        mapAttribution.append("<br />").append(info.createdBy);
+                    }
+                    mapAttribution.append("</p>");
+                }
+                mapDataStore.addMapDataStore(mapFile, false, false);
+            }
+            setMapAttribution(new Pair<>(StringUtils.isNotBlank(mapAttribution) ? mapAttribution.toString() : "", true));
+            if (!languages.isEmpty()) {
+                TileProviderFactory.setLanguages(languages.toArray(new String[0]));
             }
         }
-
-        // now prepare combined map
-        tileSource = new MultiMapFileTileSource();
-        tileSource.setPreferredLanguage(Settings.getMapLanguage());
-        for (ImmutablePair<String, Uri> data : maps) {
-            final MapFileTileSource mapFileTileSource = new MapFileTileSource();
-            mapFileTileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
-            ((MultiMapFileTileSource) tileSource).add(mapFileTileSource);
-        }
-        supportsLanguages = languages.size() > 0;
-        if (supportsLanguages) {
-            TileProviderFactory.setLanguages(languages.toArray(new String[]{}));
-        }
-        setMapAttribution(new Pair<>(mapAttribution.toString(), true));
-
-        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MultiMapFileTileSource) tileSource);
-        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
-        fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
-        fragment.applyTheme();
+        createTileLayerAndLabelStore(fragment, map, mapDataStore);
     }
 
     private void checkLanguage(final ArrayList<String> languages, final String languagesPreference) {

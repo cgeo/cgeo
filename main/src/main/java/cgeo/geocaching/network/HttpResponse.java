@@ -16,7 +16,7 @@ import okhttp3.ResponseBody;
 /**
  * Convenience class used to encapsulate the building and usage of a HtmlRequest
  * Can be used directly or as base class for own (JSON) response classes
- *
+ * <br>
  * Note that raw usage of this class requires the user to close it afterwards in order not to leak any connection
  */
 public class HttpResponse implements Closeable {
@@ -57,8 +57,6 @@ public class HttpResponse implements Closeable {
         this.response = other.response;
         this.bodyString = other.bodyString;
         this.bodyConsumed = other.bodyConsumed;
-        this.failed = failed;
-        this.failedException = failedException;
     }
 
     protected void setFailed(final Exception exception) {

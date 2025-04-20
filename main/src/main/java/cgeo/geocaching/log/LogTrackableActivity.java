@@ -162,6 +162,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
             }
+            // load brand (if given)
+            if (extras.getInt(Intents.EXTRA_BRAND, -1) != -1) {
+                brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND, -1));
+            }
         }
 
         // no given data
@@ -380,12 +384,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.getGeocode());
         logTouchIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.getTrackingcode());
+        logTouchIntent.putExtra(Intents.EXTRA_BRAND, trackable.getBrand().getId());
         return logTouchIntent;
     }
 
     public static Intent getIntent(final Context context, final Trackable trackable, final String geocache) {
         final Intent logTouchIntent = getIntent(context, trackable);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCACHE, geocache);
+        logTouchIntent.putExtra(Intents.EXTRA_BRAND, trackable.getBrand().getId());
         return logTouchIntent;
     }
 
@@ -513,7 +519,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             final View layout = View.inflate(activity, R.layout.logtrackable_without_geocode, null);
             builder.setView(layout);
 
-            doNotAskAgain = (CheckBox) layout.findViewById(R.id.logtrackable_do_not_ask_me_again);
+            doNotAskAgain = layout.findViewById(R.id.logtrackable_do_not_ask_me_again);
 
             final int showCount = Settings.getLogTrackableWithoutGeocodeShowCount();
             Settings.setLogTrackableWithoutGeocodeShowCount(showCount + 1);

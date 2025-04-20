@@ -166,13 +166,6 @@ public class ProximityNotification implements Parcelable {
         }
     }
 
-    public void checkDistance(final int meters) {
-        final int tone = checkDistanceInternal(meters);
-        if (useTextNotifications && tone != TONE_NONE) {
-            showNotification(tone == TONE_NEAR, TextFactory.getText(meters / 1000.0f));
-        }
-    }
-
     public void checkDistance(final WaypointDistanceInfo info) {
         final int tone = checkDistanceInternal(info.meters);
         if (useTextNotifications && tone != TONE_NONE) {

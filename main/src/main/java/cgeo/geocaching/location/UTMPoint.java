@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
  * A class representing a UTM co-ordinate.
  * <p>
  *
- * Derived from https://github.com/OpenMap-java/openmap
- *
+ * Derived from <a href="https://github.com/OpenMap-java/openmap">...</a>
+ * <br>
  * Adapted to Java by Colin Mummery (colin_mummery@yahoo.com) from C++ code by
  * Chuck Gantz (chuck.gantz@globalstar.com)
  */
@@ -260,7 +260,7 @@ public class UTMPoint {
     /**
      * Determines the correct MGRS letter designator for the given latitude
      * returns 'Z' if latitude is outside the MGRS limits of 84N to 80S.
-     *
+     * <br>
      * TODO: maybe we should handle the zones A, B, Y and Z
      *
      * @param lat The float value of the latitude.

@@ -10,7 +10,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.databinding.ActivityNavigationbarBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -98,8 +97,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private final Handler loginHandler = new Handler();
 
     private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
-    private static final AtomicInteger lowPrioNotificationCounter = ((CgeoApplication) CgeoApplication.getInstance()).getLowPrioNotificationCounter();
-    private static final AtomicBoolean hasHighPrioNotification = ((CgeoApplication) CgeoApplication.getInstance()).getHasHighPrioNotification();
+    private static final AtomicInteger lowPrioNotificationCounter = CgeoApplication.getInstance().getLowPrioNotificationCounter();
+    private static final AtomicBoolean hasHighPrioNotification = CgeoApplication.getInstance().getHasHighPrioNotification();
 
     @Override
     public void setContentView(final int layoutResID) {
@@ -147,7 +146,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private boolean onMapLongClicked() {
-        if (!Settings.useUnifiedMap()) {
+        if (Settings.useLegacyMaps()) {
             return false;
         }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
@@ -283,8 +282,14 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             menu.setTitle("");
         } else {
             final QuickLaunchItem iitem = (QuickLaunchItem) QuickLaunchItem.getById(item, QuickLaunchItem.ITEMS);
-            menu.setIcon(iitem.iconRes);
-            menu.setTitle(iitem.getTitleResId());
+            if (iitem != null) {
+                menu.setIcon(iitem.iconRes);
+                menu.setTitle(iitem.getTitleResId());
+                final View customView = findViewById(MENU_CUSTOM);
+                if (iitem.viewInitializer != null && customView != null) {
+                    iitem.viewInitializer.accept(customView);
+                }
+            }
         }
 
         // set long click event listeners
@@ -385,8 +390,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
      */
     public static boolean anyConnectorLoggedIn() {
         final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
-        for (final IConnector conn : activeConnectors) {
-            if (((ILogin) conn).isLoggedIn()) {
+        for (final ILogin conn : activeConnectors) {
+            if (conn.isLoggedIn()) {
                 return true;
             }
         }
@@ -459,6 +464,9 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     public void updateHomeBadge(final int delta) {
+        if (delta == 0) {
+            return;
+        }
         final int badgeColor;
         synchronized (hasHighPrioNotification) {
             badgeColor = hasHighPrioNotification.get() ? 0xffff0000 : 0xff0a67e2;

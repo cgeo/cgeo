@@ -26,7 +26,7 @@
             android:text="@string/variables_titletext"
             />
 
-        <com.google.android.material.chip.ChipGroup
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -34,56 +34,40 @@
 
             <Button
                 android:id="@+id/variables_add"
-                style="@style/button"
-                android:layout_margin="3dp"
-                android:minWidth="2dp"
-                app:icon="@drawable/ic_menu_add" />
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_add"
+                app:icon="@drawable/ic_menu_add_input" />
+
             <Button
                 android:id="@+id/variables_addnextchar"
-                style="@style/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="3dp"
-                android:minWidth="2dp"
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_add_next"
                 app:icon="@drawable/ic_menu_add" />
 
             <Button
                 android:id="@+id/variables_addscan"
-                style="@style/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="3dp"
-                android:text="@string/variables_scanlisting"
-                app:icon="@drawable/ic_menu_add" />
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_scanlisting"
+                app:icon="@drawable/ic_menu_scan" />
 
             <Button
                 android:id="@+id/variables_tidyup"
-                style="@style/button"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_margin="3dp"
-                app:icon="@drawable/ic_menu_auto_fix_high"
-                android:text="@string/variables_tidyup"/>
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_tidyup"
+                app:icon="@drawable/ic_menu_auto_fix_high" />
 
             <Button
                 android:id="@+id/variables_deleteall"
-                style="@style/button"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_margin="3dp"
-                android:text="@string/variables_deleteall"
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_deleteall"
                 app:icon="@drawable/ic_menu_delete"/>
 
             <Button
                 android:id="@+id/variables_info"
-                style="@style/button"
-                android:text="@string/variables_info"
-                android:layout_margin="3dp"
-                android:layout_gravity="center_horizontal"
-                app:icon="@drawable/settings_info" />
-        </com.google.android.material.chip.ChipGroup>
+                style="@style/button_icon"
+                android:tooltipText="@string/variables_info"
+                app:icon="@drawable/ic_menu_help" />
+        </LinearLayout>
 
         <View
             android:id="@+id/filter_storage_options_line"

@@ -18,7 +18,7 @@ import androidx.annotation.StringRes;
 
 abstract class OtherMapsApp extends AbstractPointNavigationApp {
 
-    boolean withLabel = false;
+    final boolean withLabel;
 
     OtherMapsApp(@StringRes final int title, final boolean withLabel) {
         super(getString(title), null);

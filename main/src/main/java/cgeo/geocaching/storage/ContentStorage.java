@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -33,21 +34,21 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
  * Central class to interact with locally stored Folders.
- *
+ * <br>
  * Encapsulates and unifies access to the Android SAF framework as well as the File framework
  * (and maybe later also the MediaStore API?)
- *
+ * <br>
  * Note that methods of this class do not and cannot ask user for access permissions when dealing with SAF This can only be
  * done in context of an Activity (using Intents) and is encapsulated in
  * {@link ContentStorageActivityHelper}.
  * When dealing with {@link PersistableFolder}s, methods of this class will try to fall back to default
  * accessible folders when a folder is not accessible.
- *
+ * <br>
  * Implementation reference(s) with regards to SAF:
- * * Android Doku: https://developer.android.com/preview/privacy/storage
- * * Android Doku on use cases: https://developer.android.com/training/data-storage/use-cases#handle-non-media-files
- * * Introduction: https://www.androidcentral.com/what-scoped-storage
- * * Helpers: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
+ * * Android Doku: <a href="https://developer.android.com/preview/privacy/storage">...</a>
+ * * Android Doku on use cases: <a href="https://developer.android.com/training/data-storage/use-cases#handle-non-media-files">...</a>
+ * * Introduction: <a href="https://www.androidcentral.com/what-scoped-storage">...</a>
+ * * Helpers: <a href="https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri">...</a>
  */
 public class ContentStorage {
 
@@ -258,7 +259,7 @@ public class ContentStorage {
             final List<FileInformation> result = getAccessorFor(folder).list(folder);
             cLog.add("#" + result.size());
             if (sortByName) {
-                Collections.sort(result, (fi1, fi2) -> fi1.name.compareTo(fi2.name));
+                Collections.sort(result, Comparator.comparing(fi -> fi.name));
             }
             return result;
         } catch (IOException ioe) {
@@ -348,7 +349,7 @@ public class ContentStorage {
 
     /**
      * Helper method to get the File Information for a Uri. Returns null if Uri does not exist.
-     *
+     * <br>
      * Note carefully: in case this Uri is not a File-Uri and points to a directory, the Folder field of the returned object is NOT FILLED
      * Unfortunately it is not possible to retrieve this info from an Uri alone.
      */
@@ -572,7 +573,7 @@ public class ContentStorage {
             //actually, on folder without write permission, we can not do much. Simply list the content...
             final List<FileInformation> files = list(folder);
 
-            if (testWrite && files.size() < 1) {
+            if (testWrite && files.isEmpty()) {
                 return false;
             }
 
@@ -633,7 +634,7 @@ public class ContentStorage {
 
     private void reportProblem(@StringRes final int messageId, final Exception ex, final boolean suppressForUser, final Object... params) {
 
-        if (reportRunningFlag.get() != null && reportRunningFlag.get()) {
+        if (reportRunningFlag.get() != null && Boolean.TRUE.equals(reportRunningFlag.get())) {
             return;
         }
         reportRunningFlag.set(true);

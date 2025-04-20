@@ -53,7 +53,7 @@ class MapsMeApp extends AbstractPointNavigationApp {
                 points.add(new MWMPoint(coords.getLatitude(), coords.getLongitude(), waypoint.getName(), waypoint.getGeocode()));
             }
         }
-        final MWMPoint[] pointsArray = points.toArray(new MWMPoint[points.size()]);
+        final MWMPoint[] pointsArray = points.toArray(new MWMPoint[0]);
         MapsWithMeApi.showPointsOnMap(activity, cache.getName(), pointsArray);
     }
 

@@ -18,7 +18,6 @@
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
 # action providers are only referenced from XML
--keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
 
@@ -72,6 +71,14 @@
 
 # this does not exist on jdk6 and is only loaded dynamically by jackson if needed
 -dontwarn java.nio.file.Path*
+
+# suggestion at https://github.com/FasterXML/jackson-docs/wiki/JacksonOnAndroid#proguard
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class com.fasterxml.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepclassmembers class * {
+     @com.fasterxml.jackson.annotation.* *;
+}
 
 # Junit -------------------------------------------------------------------------------------------
 

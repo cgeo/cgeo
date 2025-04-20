@@ -45,10 +45,10 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -70,6 +70,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -110,6 +111,10 @@ public class Settings {
     public static final int CUSTOMBNITEM_PLACEHOLDER = -2;
     public static final int CUSTOMBNITEM_NONE = -1;
     public static final int CUSTOMBNITEM_NEARBY = 0;
+
+    public static final int UNIFIEDMAP_VARIANT_MAPSFORGE = 1;
+    public static final int UNIFIEDMAP_VARIANT_VTM = 2;
+    public static final int UNIFIEDMAP_VARIANT_BOTH = 3;
 
     public static final int HOURS_TO_SECONDS = 60 * 60;
     public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
@@ -562,11 +567,16 @@ public class Settings {
     }
 
     public static void putBoolean(final int prefKeyId, final boolean value) {
+        putBooleanDirect(getKey(prefKeyId), value);
+    }
+
+    public static void putBooleanDirect(final String key, final boolean value) {
+
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putBoolean(getKey(prefKeyId), value);
+        edit.putBoolean(key, value);
         edit.apply();
     }
 
@@ -612,10 +622,6 @@ public class Settings {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.remove(key);
         edit.apply();
-    }
-
-    private static boolean contains(final int prefKeyId) {
-        return sharedPrefs != null && sharedPrefs.contains(getKey(prefKeyId));
     }
 
     public static boolean hasGCCredentials() {
@@ -671,6 +677,13 @@ public class Settings {
         return StringUtils.trim(getString(R.string.pref_username, StringUtils.EMPTY));
     }
 
+    /** this method is to be solely used for auto-fixing GC username, see MainActivity.UpdateUserInfoHandler */
+    public static void setGCUserName(final String username) {
+        if (StringUtils.isNotBlank(username)) {
+            putString(R.string.pref_username, username);
+        }
+    }
+
     public static boolean isGCConnectorActive() {
         return getBoolean(R.string.pref_connectorGCActive, false);
     }
@@ -707,17 +720,30 @@ public class Settings {
         return getBoolean(R.string.pref_foundstate_al, false);
     }
 
+    public static boolean enableVtmSingleMarkerSymbol() {
+        return getBoolean(R.string.pref_vtm_single_marker_symbol, false);
+    }
+
+    public static boolean enableVtmMarkerAtlasUsage() {
+        return getBoolean(R.string.pref_vtm_marker_atlas_usage, false);
+    }
+
+    public static boolean enableFeatureUnifiedDebug() {
+        return getBoolean(R.string.pref_feature_unified_debug, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
-    public static boolean enableFeatureWherigo() {
-        return getBoolean(R.string.pref_feature_wherigo, false);
+    public static boolean enableFeatureWherigoDebug() {
+        return getBoolean(R.string.pref_feature_wherigo_debug, false);
     }
 
-    public static boolean enableFeatureWherigoDebug() {
-        return enableFeatureWherigo() && getBoolean(R.string.pref_feature_wherigo_debug, false);
+    public static boolean enableFeatureWherigoDebugCartridge(final String code) {
+        return getBooleanDirect(getKey(R.string.pref_feature_wherigo_debug) + "_" + code, false);
     }
+
 
     public static boolean isFeatureEnabledDefaultFalse(@StringRes final int featureKeyId) {
         return getBoolean(featureKeyId, false);
@@ -737,6 +763,16 @@ public class Settings {
 
     public static void setGCMemberStatus(final GCMemberState memberStatus) {
         putString(R.string.pref_memberstatus, memberStatus.id);
+    }
+
+    //solely to be used by class Cookies
+    public static String getPersistentCookies() {
+        return getString(R.string.pref_cookiejar, "");
+    }
+
+    //solely to be used by class Cookies
+    public static void setPersistentCookies(final String cookies) {
+        putString(R.string.pref_cookiejar, cookies);
     }
 
     @NonNull
@@ -865,6 +901,10 @@ public class Settings {
                 // do nothing except satisfy static code analysis
                 break;
         }
+    }
+
+    public static boolean getBuildings3D() {
+        return getBoolean(R.string.pref_buildingLayer3D, true);
     }
 
     public static boolean isAutotargetIndividualRoute() {
@@ -1004,10 +1044,6 @@ public class Settings {
 
     public static boolean isDisplayOfflineLogsHomescreen() {
         return getBoolean(R.string.pref_offlinelogs_homescreen, true);
-    }
-
-    static void setUseImperialUnits(final boolean useImperialUnits) {
-        putBoolean(R.string.pref_units_imperial, useImperialUnits);
     }
 
     public static boolean useImperialUnits() {
@@ -1192,12 +1228,32 @@ public class Settings {
         }
     }
 
+    public static void setPreviousTileProvider(final AbstractTileProvider tileProvider) {
+        if (tileProvider != null) {
+            putString(R.string.pref_previous_tileprovider, tileProvider.getId());
+        }
+    }
+
+    public static AbstractTileProvider getPreviousTileProvider() {
+        final String tileProviderId = getString(R.string.pref_previous_tileprovider, null);
+        tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
+        if (tileProvider == null) {
+            tileProvider = TileProviderFactory.getAnyTileProvider();
+        }
+        return tileProvider;
+    }
+
     public static Set<String> getHideTileproviders() {
         final Set<String> empty = Collections.emptySet();
         if (sharedPrefs == null) {
             return empty;
         }
         return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
+    }
+
+    @Nullable
+    public static String getUserDefinedTileProviderUri() {
+        return getString(R.string.pref_userDefinedTileProviderUri, null);
     }
 
     public static void setMapLanguage(@Nullable final String language) {
@@ -1215,14 +1271,28 @@ public class Settings {
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
-    /** display UnifiedMap icon on home screen? */
-    public static boolean showUnifiedMap() {
-        return getBoolean(R.string.pref_showUnifiedMap, false);
+    /** use legacy maps **/
+    public static boolean useLegacyMaps() {
+        return getBoolean(R.string.pref_useLegacyMap, false);
     }
 
-    /** use UnifiedMap as default map in certain places */
-    public static boolean useUnifiedMap() {
-        return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
+    /** use Mapsforge as map view for UnifiedMap */
+    public static boolean showMapsforgeInUnifiedMap() {
+        return (getUnifiedMapVariant() & UNIFIEDMAP_VARIANT_MAPSFORGE) > 0;
+    }
+
+    /** use VTM as map view for UnifiedMap */
+    public static boolean showVTMInUnifiedMap() {
+        return (getUnifiedMapVariant() & UNIFIEDMAP_VARIANT_VTM) > 0;
+    }
+
+    /** which variants are enabled for UnifiedMap */
+    private static int getUnifiedMapVariant() {
+        try {
+            return Integer.parseInt(getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
+        } catch (NumberFormatException ignore) {
+            return UNIFIEDMAP_VARIANT_MAPSFORGE;
+        }
     }
 
     public static void setMapDownloaderSource(final int source) {
@@ -1247,6 +1317,10 @@ public class Settings {
 
     public static boolean getMapDownloadsKeepTemporaryFiles() {
         return getBoolean(R.string.pref_mapDownloadsKeepTemporaryFiles, false);
+    }
+
+    public static boolean getMapDownloaderAutoRename() {
+        return getBoolean(R.string.pref_autorenameDownloads, true);
     }
 
     public static boolean dbNeedsCleanup() {
@@ -1386,7 +1460,7 @@ public class Settings {
     }
 
     public static boolean isBrouterAutoTileDownloads() {
-        return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
+        return getBoolean(R.string.pref_brouterAutoTileDownloads, true);
     }
 
     public static void setBrouterAutoTileDownloads(final boolean value) {
@@ -1586,6 +1660,22 @@ public class Settings {
         putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
     }
 
+    public static boolean getIncludeLogs() {
+        return getBoolean(R.string.pref_includelogs, true);
+    }
+
+    public static void setIncludeLogs(final boolean includeLogs) {
+        putBoolean(R.string.pref_includelogs, includeLogs);
+    }
+
+    public static boolean getIncludeTravelBugs() {
+        return getBoolean(R.string.pref_includetravelbugs, true);
+    }
+
+    public static void setIncludeTravelBugs(final boolean includeTravelBugs) {
+        putBoolean(R.string.pref_includetravelbugs, includeTravelBugs);
+    }
+
     public static boolean getClearTrailAfterExportStatus() {
         return getBoolean(R.string.pref_cleartrailafterexportstatus, false);
     }
@@ -1637,6 +1727,16 @@ public class Settings {
         return getString(R.string.pref_renderthemefile, "");
     }
 
+    /**
+     * Variant used by UnifiedMap: try tileprovider-specifc first
+     */
+    public static String getSelectedMapRenderTheme(final AbstractTileProvider tileProvider) {
+        final String temp = getStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider.getId(), "");
+        final String temp2 = StringUtils.isNotBlank(temp) ? temp : getSelectedMapRenderTheme();
+        Log.e("getTheme: " + temp2);
+        return temp2;
+    }
+
     public static boolean isDefaultMapRenderTheme() {
         return StringUtils.isBlank(getSelectedMapRenderTheme());
     }
@@ -1654,6 +1754,15 @@ public class Settings {
     }
 
     /**
+     * variant used by UnifiedMap: store tileprovider-specific (additionally)
+     */
+    public static void setSelectedMapRenderTheme(final String tileProvider, final String customRenderThemeFile) {
+        Log.e("setTheme: " + tileProvider + " / " + customRenderThemeFile);
+        setSelectedMapRenderTheme(customRenderThemeFile);
+        putStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider, customRenderThemeFile);
+    }
+
+    /**
      * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
      */
     public static void setSelectedMapRenderThemeStyle(final String prefKey, final String style) {
@@ -1665,13 +1774,6 @@ public class Settings {
      */
     public static boolean getSyncMapRenderThemeFolder() {
         return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);
-    }
-
-    /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
-     */
-    public static void setSyncMapRenderThemeFolder(final boolean syncMapRenderThemeFolder) {
-        putBoolean(R.string.pref_renderthemefolder_synctolocal, syncMapRenderThemeFolder);
     }
 
     /**
@@ -1707,6 +1809,10 @@ public class Settings {
 
     public static int getNearbySearchLimit() {
         return getInt(R.string.pref_nearbySearchLimit, 0);
+    }
+
+    public static int getCoordinateSearchLimit() {
+        return getInt(R.string.pref_coordSearchLimit, 0);
     }
 
     public static int getLogImageScale() {
@@ -1883,6 +1989,19 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
+    public static String[] getHistoryList(final int prefKey) {
+        final List<String> history = getStringList(prefKey, StringUtils.EMPTY);
+        return history.subList(0, Math.min(HISTORY_SIZE, history.size())).toArray(new String[0]);
+    }
+
+    public static void addToHistoryList(final int prefKey, final String historyValue) {
+        final List<String> history = new ArrayList<>(Arrays.asList(getHistoryList(prefKey)));
+        // bring entry to front, if it already existed
+        history.remove(historyValue);
+        history.add(0, historyValue);
+        putStringList(prefKey, history);
+    }
+
     public static void clearRecentlyViewedHistory() {
         putStringList(R.string.pref_caches_history, new ArrayList<>());
     }
@@ -1924,15 +2043,15 @@ public class Settings {
         putBoolean(R.string.pref_followMyLocation, activated);
     }
 
-    public static void setForceOrientationSensor(final boolean forceOrientationSensor) {
-        putBoolean(R.string.pref_force_orientation_sensor, forceOrientationSensor);
-    }
-
     public static boolean useOrientationSensor(final Context context) {
         return OrientationProvider.hasOrientationSensor(context) &&
                 (getBoolean(R.string.pref_force_orientation_sensor, false) ||
                         !(RotationProvider.hasRotationSensor(context) || MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context))
                 );
+    }
+
+    public static boolean provideClipboardCopyAction() {
+        return getBoolean(R.string.pref_clipboard_copy_action, false);
     }
 
     /**
@@ -1975,7 +2094,7 @@ public class Settings {
 
     /**
      * get comma-delimited list of info items for given key
-     *
+     * <br>
      * defaultSource: 0=empty, 1=migrate quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
      */
     public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey, final int defaultSource) {
@@ -2062,7 +2181,7 @@ public class Settings {
     }
 
     public static boolean useInternalRouting() {
-        return getBoolean(R.string.pref_useInternalRouting, false);
+        return getBoolean(R.string.pref_useInternalRouting, true);
     }
 
     public static boolean getBackupLoginData() {
@@ -2272,7 +2391,6 @@ public class Settings {
         final HashSet<String> sensitiveKeys = new HashSet<>();
         Collections.addAll(sensitiveKeys,
                 context.getString(R.string.pref_username), context.getString(R.string.pref_password),
-                context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
                 context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
                 context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
                 context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
@@ -2376,6 +2494,16 @@ public class Settings {
         return getString(R.string.pref_google_map_theme, "DEFAULT");
     }
 
+    public static boolean isGoogleMapOptionEnabled(final String option, final boolean defaultValue) {
+        final String key = getKey(R.string.pref_google_map_option_enabled) + "." + option;
+        return getBooleanDirect(key, defaultValue);
+    }
+
+    public static void setGoogleMapOptionEnabled(final String option, final boolean enabled) {
+        final String key = getKey(R.string.pref_google_map_option_enabled) + "." + option;
+        putBooleanDirect(key, enabled);
+    }
+
     public static boolean getHintAsRot13() {
         return getBoolean(R.string.pref_rot13_hint, true);
     }
@@ -2384,12 +2512,16 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
-    public static double getMapShadingScale() {
-        return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
+    public static boolean getMapShadingShowLayer() {
+        return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
 
-    public static double getMapShadingLinearity() {
-        return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
+    public static boolean getMapShadingHq() {
+        return getBoolean(R.string.pref_maphillshading_hq, false);
+    }
+
+    public static void setMapShadingShowLayer(final boolean show) {
+        putBoolean(R.string.pref_maphillshading_show_layer, show);
     }
 
     public static boolean getMapActionbarAutohide() {
@@ -2408,5 +2540,40 @@ public class Settings {
         final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
         putBoolean(R.string.pref_legacy_filter_config_migrated, true);
         return isMigrated;
+    }
+
+    public static void setLastUsedDate(final Calendar date) {
+        putLong(R.string.pref_last_used_date, date.getTimeInMillis());
+    }
+
+    public static Calendar getLastUsedDate() {
+        final Calendar newDate = Calendar.getInstance();
+        newDate.setTimeInMillis(getLong(R.string.pref_last_used_date, newDate.getTimeInMillis()));
+        return newDate;
+    }
+
+    public static String getShortDateFormat() {
+        return getString(R.string.pref_short_date_format, "");
+    }
+
+    public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
+        final String lngCode = getString(R.string.pref_translation_language, getApplicationLocale().getLanguage());
+        if (!lngCode.isEmpty()) {
+            final OfflineTranslateUtils.Language lng = new OfflineTranslateUtils.Language(lngCode);
+            if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
+                return lng;
+            }
+        }
+        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
+    }
+
+    public static @NonNull Set<String> getLanguagesToNotTranslate() {
+        final Set<String> lngs = new HashSet<>();
+        if (sharedPrefs == null) {
+            return lngs;
+        }
+        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), lngs));
+        lngs.add(getTranslationTargetLanguage().getCode());
+        return lngs;
     }
 }

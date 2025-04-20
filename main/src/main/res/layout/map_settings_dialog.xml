@@ -83,36 +83,43 @@
                 android:id="@+id/routing_off"
                 style="@style/button_icon_accent"
                 android:layout_margin="0dp"
+                android:tooltipText="@string/switch_off"
                 app:icon="@drawable/routing_off" />
 
             <Button
                 android:id="@+id/routing_straight"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_straight"
                 app:icon="@drawable/routing_straight" />
 
             <Button
                 android:id="@+id/routing_walk"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_walk"
                 app:icon="@drawable/routing_walk" />
 
             <Button
                 android:id="@+id/routing_bike"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_bike"
                 app:icon="@drawable/routing_bike" />
 
             <Button
                 android:id="@+id/routing_car"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_car"
                 app:icon="@drawable/routing_car" />
 
             <Button
                 android:id="@+id/routing_user1"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_user1"
                 app:icon="@drawable/number_one" />
 
             <Button
                 android:id="@+id/routing_user2"
                 style="@style/button_icon_accent"
+                android:tooltipText="@string/routingmode_user2"
                 app:icon="@drawable/number_two" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 

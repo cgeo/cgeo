@@ -22,4 +22,8 @@ public interface MapSource {
 
     ImmutablePair<String, Boolean> calculateMapAttribution(Context ctx);
 
+    boolean supportsHillshading();
+
+    void setSupportsHillshading(boolean supportsHillshading);
+
 }

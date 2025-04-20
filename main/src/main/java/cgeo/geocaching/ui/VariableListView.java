@@ -264,6 +264,14 @@ public class VariableListView extends LinearLayout {
             filterEnabled = true;
         }
 
+        public void checkAddVisibleVariables(final Collection<String> vars) {
+            if (!vars.isEmpty()) {
+                final Set<String> neededVars = getVariables().getDependentVariables(vars);
+                ensureVariables(neededVars);
+                addVisibleVariables(neededVars);
+            }
+        }
+
         public void ensureVariables(final Collection<String> variables) {
             for (String v : variables) {
                 if (!containsVariable(v)) {
@@ -320,11 +328,7 @@ public class VariableListView extends LinearLayout {
             }
 
             if (viewHolder.viewButtonFunction != null) {
-                viewHolder.viewButtonFunction.setOnClickListener(d -> {
-                    FormulaUtils.showSelectFunctionDialog(parent.getContext(), viewHolder.viewVariableFormulaText, newFormula -> {
-                        changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
-                    });
-                });
+                viewHolder.viewButtonFunction.setOnClickListener(d -> FormulaUtils.showSelectFunctionDialog(parent.getContext(), viewHolder.viewVariableFormulaText, newFormula -> changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula)));
             }
 
             if (viewHolder.viewVariableName != null) {

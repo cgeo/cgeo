@@ -4,7 +4,6 @@ import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.util.Pair;
 
@@ -18,6 +17,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.apache.commons.collections4.SetUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -47,7 +47,7 @@ public class DegreeFormula {
     private int signum = 0; //0 = not set, 1 = set positive, -1 = set negative, -2 = ERROR
 
     private interface DegreeFormulaNode {
-        ImmutableTriple<Double, Boolean, Boolean> apply(Func1<String, Value> varMap, Double value, List<CharSequence> css, boolean digitsAllowed);
+        ImmutableTriple<Double, Boolean, Boolean> apply(Function<String, Value> varMap, Double value, List<CharSequence> css, boolean digitsAllowed);
     }
 
 
@@ -272,17 +272,17 @@ public class DegreeFormula {
     }
 
     @NonNull
-    public String evaluateToString(final Func1<String, Value> varMap) {
+    public String evaluateToString(final Function<String, Value> varMap) {
         return evaluateToCharSequence(varMap).toString();
     }
 
     @NonNull
-    public CharSequence evaluateToCharSequence(final Func1<String, Value> varMap) {
+    public CharSequence evaluateToCharSequence(final Function<String, Value> varMap) {
         return evaluate(varMap).middle;
     }
 
     @Nullable
-    public Double evaluateToDouble(final Func1<String, Value> varMap) {
+    public Double evaluateToDouble(final Function<String, Value> varMap) {
         return evaluate(varMap).left;
     }
 
@@ -295,7 +295,7 @@ public class DegreeFormula {
      * @return pair with calculated double value as first param (might be null) and text representation as secod (never null)
      */
     @NonNull
-    public ImmutableTriple<Double, CharSequence, Boolean> evaluate(final Func1<String, Value> varMap) {
+    public ImmutableTriple<Double, CharSequence, Boolean> evaluate(final Function<String, Value> varMap) {
 
         if (nodes.isEmpty()) {
             return new ImmutableTriple<>(null, "", false);
@@ -318,15 +318,15 @@ public class DegreeFormula {
     @Nullable
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Func1<String, Value> varMap, final Predicate<Double> checker, final int precision) {
+    private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Function<String, Value> varMap, final Predicate<Double> checker, final int precision) {
         final boolean hasDigits = fAfterDigit != null;
         final Value v = evaluateSingleFormula(f, varMap);
         final Value vAfter = !hasDigits ? null : evaluateSingleFormula(fAfterDigit, varMap);
 
         //check for diverse error situations
         if (v == null || !v.isDouble() ||
-                (signum != 0 && v.getAsDouble() < 0) ||
-                (hasDigits && (vAfter == null || !v.isInteger() || !vAfter.isInteger() || vAfter.getAsInt() < 0))) {
+                (signum != 0 && v.isNumericNegative()) ||
+                (hasDigits && (vAfter == null || !v.isLong() || !vAfter.isLong() || vAfter.isNumericNegative()))) {
             if (v == null) {
                 add(css, f.evaluateToCharSequence(varMap));
             } else {
@@ -380,7 +380,7 @@ public class DegreeFormula {
         return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, Formula.createWarningSpan(), 0, pad.length(), 0), true);
     }
 
-    private Value evaluateSingleFormula(final Formula f, final Func1<String, Value> varMap) {
+    private Value evaluateSingleFormula(final Formula f, final Function<String, Value> varMap) {
         try {
             return f.evaluate(varMap);
         } catch (FormulaException fe) {
@@ -402,8 +402,12 @@ public class DegreeFormula {
         }
     }
 
+
+    public static String replaceXWithMultiplicationSign(final String formula) {
+        return formula == null ? "" : formula.replaceAll("x", "*");
+    }
+
     public static String removeSpaces(final String formula) {
         return formula == null ? "" : formula.replaceAll("\\s", "");
     }
-
 }

@@ -55,6 +55,7 @@ public abstract class AbstractMap {
         return mapActivity.getResources();
     }
 
+    @NonNull
     public MapActivityImpl getMapActivity() {
         return mapActivity;
     }
@@ -123,7 +124,7 @@ public abstract class AbstractMap {
         //
     }
 
-    public abstract void refreshMapData(boolean circlesSwitched);
+    public abstract void refreshMapData(boolean circlesSwitched, boolean filterChanged);
 
     public boolean isTargetSet() {
         return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;

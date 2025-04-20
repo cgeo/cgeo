@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCCZConnector extends OCConnector {
+public class OCCZConnector extends OCBaseConnector {
 
     private static final String GEOCODE_PREFIX = "OZ";
 
@@ -39,4 +39,5 @@ public class OCCZConnector extends OCConnector {
         }
         return super.getGeocodeFromUrl(url);
     }
+
 }

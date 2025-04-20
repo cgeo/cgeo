@@ -125,9 +125,9 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     public void setCenter(final CenterOnPosition centerOnPosition) {
-        if (null != segments && segments.size() > 0) {
+        if (null != segments && !segments.isEmpty()) {
             final ArrayList<Geopoint> points0 = segments.get(0).getPoints();
-            if (points0.size() > 0) {
+            if (!points0.isEmpty()) {
                 final Geopoint first = points0.get(0);
                 double minLat = first.getLatitude();
                 double maxLat = first.getLatitude();
@@ -139,7 +139,7 @@ public class Route implements IGeoItemSupplier, Parcelable {
                 int numPoints = 0;
                 for (RouteSegment segment : segments) {
                     final ArrayList<Geopoint> points = segment.getPoints();
-                    if (points.size() > 0) {
+                    if (!points.isEmpty()) {
                         numPoints += points.size();
                         for (Geopoint point : points) {
                             final double lat = point.getLatitude();

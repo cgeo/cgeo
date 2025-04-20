@@ -1,5 +1,8 @@
 package cgeo.geocaching.utils.formulas;
 
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_PARAMETER_COUNT;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
+
 import android.util.Pair;
 
 import java.util.Arrays;
@@ -8,23 +11,89 @@ import java.util.List;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.fail;
 
 public class FormulaUtilsTest {
 
     @Test
     public void substring() {
-        assertThat(FormulaUtils.substring("test", 1, 2)).isEqualTo("es");
-        assertThat(FormulaUtils.substring(null, 1, 2)).isEqualTo("");
-        assertThat(FormulaUtils.substring("t", 1, 2)).isEqualTo("");
-        assertThat(FormulaUtils.substring("te", 1, 2)).isEqualTo("e");
+        //Test cases independent from "zero-based" or "one-based" index decision
+        assertSubString(WRONG_PARAMETER_COUNT.name(), true, false);
+        assertSubString(WRONG_PARAMETER_COUNT.name(), true, false, "test", 1, 2, 3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", "text", 2);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 1, "text");
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 1, -5);
+
+        //Test cases for one-based indexes
+        assertSubString("est", false, false, "test", 2, 3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 2, 4);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 0);
+        assertSubString("test", false, false, "test", 1);
+        assertSubString("e", false, false, "test", 2, 1);
+        assertSubString("te", false, false, "test", -4, 2);
+        assertSubString("est", false, false, "test", -3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", -5);
+
+        //Test cases for zero-based indexes
+        assertSubString("est", false, true, "test", 1, 3);
+        assertSubString(WRONG_TYPE.name(), true, true, "test", 1, 4);
+        assertSubString("test", false, true, "test", 0);
+        assertSubString("e", false, true, "test", 1, 1);
+        assertSubString("te", false, true, "test", -4, 2);
+        assertSubString("est", false, true, "test", -3);
+        assertSubString(WRONG_TYPE.name(), true, true, "test", -5);
+    }
+
+    private void assertSubString(final String expectedResult, final boolean expectException, final boolean indexStartsWithZero, final Object ... values) {
+        try {
+            final Value result = FormulaUtils.substring(indexStartsWithZero, ValueList.ofPlain(values));
+            if (expectException) {
+                fail("Expected FormulaException containing '" + expectedResult + "', got Result '" + result + "'");
+            }
+            assertThat(result.toString()).isEqualTo(expectedResult);
+        } catch (FormulaException fe) {
+            if (expectException) {
+                assertThat(fe.getMessage()).contains(expectedResult);
+            } else {
+                fail("Expected result '" + expectedResult + "', got Exception", fe);
+            }
+        }
     }
 
     @Test
     public void checksum() {
-        assertThat(FormulaUtils.checksum(255, false)).isEqualTo(12);
-        assertThat(FormulaUtils.checksum(255, true)).isEqualTo(3);
-        assertThat(FormulaUtils.checksum(-255, false)).isEqualTo(12);
-        assertThat(FormulaUtils.checksum(0, false)).isEqualTo(0);
+        //normal
+        assertThat(FormulaUtils.checksum(Value.of(255), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of(255), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of("2-55"), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of("2-55"), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of("2 -55"), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of("2 -55"), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of("2a-55"), false)).isEqualTo(13);
+        assertThat(FormulaUtils.checksum(Value.of("2a-55"), true)).isEqualTo(4);
+        //negative
+        assertThat(FormulaUtils.checksum(Value.of(-255), false)).isEqualTo(-12);
+        assertThat(FormulaUtils.checksum(Value.of(-255), true)).isEqualTo(-3);
+        assertThat(FormulaUtils.checksum(Value.of("-255"), false)).isEqualTo(-12);
+        assertThat(FormulaUtils.checksum(Value.of("-255"), true)).isEqualTo(-3);
+        assertThat(FormulaUtils.checksum(Value.of(" - 2 55a"), false)).isEqualTo(-13);
+        assertThat(FormulaUtils.checksum(Value.of(" - 2 55a"), true)).isEqualTo(-4);
+        //zero
+        assertThat(FormulaUtils.checksum(Value.of(0), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of(0), true)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("0000"), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("0000"), true)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("000 0 "), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("000 0 "), true)).isEqualTo(0);
+        //big numbers
+        final String zeroToNine = "1234567890"; //cs = 45
+        final String bigNumberBase = zeroToNine + zeroToNine + zeroToNine + zeroToNine; // cs = 180, ics = 9
+        assertThat(FormulaUtils.checksum(Value.of(bigNumberBase), false)).isEqualTo(180);
+        assertThat(FormulaUtils.checksum(Value.of(bigNumberBase), true)).isEqualTo(9);
+        assertThat(FormulaUtils.checksum(Value.of("1-" + bigNumberBase), false)).isEqualTo(181);
+        assertThat(FormulaUtils.checksum(Value.of("1-" + bigNumberBase), true)).isEqualTo(1);
+        assertThat(FormulaUtils.checksum(Value.of("-" + bigNumberBase), false)).isEqualTo(-180);
+        assertThat(FormulaUtils.checksum(Value.of("-" + bigNumberBase), true)).isEqualTo(-9);
     }
 
     @Test
@@ -33,6 +102,8 @@ public class FormulaUtilsTest {
         assertThat(FormulaUtils.letterValue("ABC")).isEqualTo(6);
         assertThat(FormulaUtils.letterValue("")).isEqualTo(0);
         assertThat(FormulaUtils.letterValue("1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("-1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("123-4")).isEqualTo(10);
         assertThat(FormulaUtils.letterValue("äöüß")).isEqualTo(27 + 28 + 29 + 30);
         assertThat(FormulaUtils.letterValue("ÄÖÜß")).isEqualTo(27 + 28 + 29 + 30);
         assertThat(FormulaUtils.letterValue("--")).isEqualTo(0);
@@ -90,7 +161,7 @@ public class FormulaUtilsTest {
         assertScanFormula("(c+20*b):2+5", "(c+20*b):2+5");
 
         //ensure that things like the following are NOT found
-        assertScanFormula("abcd-efgh");
+        assertScanFormula("abcde-fghi");
 
         //from cache GC86KMW
         assertScanFormula("1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5    E 009°10*b-1,c:4-a+5",
@@ -273,6 +344,12 @@ public class FormulaUtilsTest {
         assertScanFormula(text, false, "A*(D+E)-F*(E+C)", "A-B", "A-E+F", "C*D-F", "D+C*E");
     }
 
+    @Test
+    public void scanForFormulasGCAWBHB() {
+        final String description = "Nord = KM + BCO + AFJ + DGN + AF + K + EH + CD + I - L\n" +
+                "Ost = KM + BO + AF + GH + CDJN + AIN + DE + GH + A + B + C + F + I + N";
+        assertScanFormula(description, "KM + BCO + AFJ + DGN + AF + K + EH + CD + I - L", "KM + BO + AF + GH + CDJN + AIN + DE + GH + A + B + C + F + I + N");
+    }
 
     private void assertScanFormula(final String textToScan, final String... expectedFinds) {
         assertScanFormula(textToScan, true, expectedFinds);

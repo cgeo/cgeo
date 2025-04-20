@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Oprava: Stav oblíbených se ztratí při výběru obrázku při přípravě logu
 
 ##
-- Oprava: V některých situacích nebylo zjištěno počítadlo nalezených položek kvůli změnám webových stránek geocaching.com
-- Oprava: Pád při otevření mapy s prázdnými názvy souborů tras
-- Oprava: Automatické otáčení mapy je aktivní i po resetování pomocí kompasové růžice (Sjednocená mapa)
-- Oprava: Chybějící kompasová růžice v režimech autorotace na Mapách Google (Sjednocená mapa)
-- Oprava: Sledovatelné logy nelze načíst kvůli změnám webových stránek geocaching.com
-- Změna: Sloučení informací o nadmořské výšce a souřadnicích v nabídce dlouhého klepnutí na mapu do jediné "vybrané pozice" + zobrazení vzdálenosti k aktuální pozici
+- Oprava: Wherigo odkazy bez názvu hostitele nebyly zjištěny
+- Oprava: Nečitelná chybová zpráva při odesílání logu
+- Vráceno: Detekce lokálního .map souboru (kvůli nežádoucím vedlejším účinkům)
 
 ##
-- Novinka: Odstranění offline logů pomocí kontextového menu
-- Oprava: Odstranění offline logu nefunguje za určitých podmínek
-- Oprava: Ztráta názvu filtru při rychlé změně filtru
-- Změna: Řazení souborů tras podle názvu
-- Změna: Uložit sledovatelnou akci i pro offline logy
-- Oprava: Přepnutí mapy na souřadnice 0,0 při změně typu mapy (Sjednocená mapa)
-- Oprava: Cíl trasového bodu se přepne zpět na kešku jako cíl (Sjednocená mapa)
-- Oprava: "Uložení" kešky bez výběru seznamu
-- Oprava: Selhání přihlášení kvůli změně na webových stránkách geocaching.com
-- Změna: Zobrazit informace o nadmořské výšce pod značkou polohy (pokud je aktivováno)
-- POZNÁMKA: V důsledku nedávných změn na webu geocaching.com se objevily další problémy, které ještě nebyly odstraněny. Pracujeme na tom. Podívejte se na naší [stavovou stránku](https://github.com/cgeo/cgeo/issues/15555) pro aktuální pokrok.
+- Oprava: Wherigo: Zpracování zón s neplatnými/příliš blízkými souřadnicemi
+- Oprava: c:geo se pokouší importovat místní soubory ".map" jako GPX
+- Oprava: Úprava poznámek uživatele z vyskakovacích oken se někdy ztratí
+- Oprava: Úprava logu zobrazuje možnost "nahlásit problém"
+- Oprava: Živý filtr 'Neobsahuje' nevrátí žádné kešky
+- Oprava: Pády při pozastavení online mapy Sjednocená mapa
+- Oprava: Zastaralá aplikace "GPS Bluethooth" v seznamu užitečných aplikací
+- Oprava: Proměnné a/nebo hodnoty jsou při úpravách osobní poznámky vymazány chybně
+- Oprava: Wherigo: Špatné informace o nadmořské výšce
+- Oprava: Wherigo: Všechny texty tlačítek jsou nyní velkými písmeny
+- Oprava: Pády v nastavení
+- Oprava: c:geo není uvedeno v Play Store pro zařízení bez GPS
+- Oprava: c:geo pád při výběru složky v určitých konfiguracích
+- Změna: Udělejte z extremcaching.com offline konektor (jejich služba byla ukončena)
+- Oprava: Aktualizace informací o stavu v mapě při změnách úrovně přiblížení

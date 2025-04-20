@@ -17,6 +17,7 @@ import org.mapsforge.core.graphics.Path;
 import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.model.Rotation;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
@@ -91,11 +92,11 @@ abstract class AbstractRouteLayer extends Layer {
     }
 
     @Override
-    public synchronized void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+    public synchronized void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
-                if (!c.isHidden && c.track != null && c.track.size() > 0) {
+                if (!c.isHidden && c.track != null && !c.track.isEmpty()) {
                     final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
                     if (null == c.path || this.mapSize != mapSize || c.topLeftPoint != topLeftPoint) {
                         translateRouteToPath(mapSize, topLeftPoint, c);

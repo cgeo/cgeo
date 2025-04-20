@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 /**
  * Base class for filters where a cache can have one value out of a group of values
  * (e.g. cache type, cache size etc). Filter checks whether the cache value is in a to-be-filtered set of such values.
- *
+ * <br>
  * This class supports grouping of selectable values, e.g. a bunch of selectable values can be grouped,
  * and by selecing the group the filter checks for the cache to have any "raw" value assigned to this group
  *

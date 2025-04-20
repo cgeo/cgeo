@@ -10,6 +10,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -23,6 +24,11 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.WherigoSavegameInfo;
+import cgeo.geocaching.wherigo.WherigoThingType;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -40,6 +46,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -67,6 +74,7 @@ public final class SystemInformation {
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("## System information").append("\n")
                 .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
+                .append("\nDatetime: ").append(Formatter.formatDateTime(System.currentTimeMillis())).append("\n")
 
                 .append("\nDevice:")
                 .append("\n-------")
@@ -99,11 +107,9 @@ public final class SystemInformation {
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
                 .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
                 .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
-                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never")
-                .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
-                .append("\n- Live map mode: ").append(Settings.isLiveMap())
-                .append("\n- Use unified map: ").append(Settings.useUnifiedMap())
-                .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
+                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never");
+        appendRoutingModes(body, context);
+        appendMapModeSettings(body);
         appendMapSourceInformation(body, context);
         body
                 .append("\n")
@@ -133,6 +139,8 @@ public final class SystemInformation {
 
         appendPermissions(context, body);
 
+        appendWherigo(body);
+
         body.append("\n")
                 .append("\nPaths")
                 .append("\n-------");
@@ -144,6 +152,10 @@ public final class SystemInformation {
         appendPublicFolders(body);
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
+
+        body.append("\n")
+                .append("\nDatabase")
+                .append("\n-------");
         appendDatabase(body);
 
         body.append("\n\n--- End of system information ---\n");
@@ -156,19 +168,21 @@ public final class SystemInformation {
         if (memoryInfo == null) {
             body.append("null");
         } else {
-            body.append(" Available:" + Formatter.formatBytes(memoryInfo.availMem) +
-                    ", Total:" + Formatter.formatBytes(memoryInfo.totalMem) +
-                    ", Threshold: " + Formatter.formatBytes(memoryInfo.threshold) +
-                    ", low:" + memoryInfo.lowMemory);
+            body.append(" Available:").append(Formatter.formatBytes(memoryInfo.availMem))
+                .append(", Total:").append(Formatter.formatBytes(memoryInfo.totalMem))
+                .append(", Threshold: ").append(Formatter.formatBytes(memoryInfo.threshold))
+                .append(", low:").append(memoryInfo.lowMemory);
         }
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
         final File dbFile = DataStore.databasePath();
-        body.append("\n- Database: ").append(dbFile)
+        body.append("\n- File: ").append(dbFile)
                 .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
                 .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
                 .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
+        body.append("\n- Data: ").append(DataStore.getTableCounts());
+        body.append("\n- Extension Data: ").append(DataStore.getExtensionTableKeyCounts());
     }
 
     private static void appendSettings(@NonNull final StringBuilder body) {
@@ -186,7 +200,7 @@ public final class SystemInformation {
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
         final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
-        if (storedFilters.size() > 0) {
+        if (!storedFilters.isEmpty()) {
             body.append("\n- ").append("Additional stored filters: ").append(storedFilters.size());
         }
     }
@@ -238,18 +252,45 @@ public final class SystemInformation {
         }
     }
 
+    private static void appendRoutingModes(@NonNull final StringBuilder body, @NonNull final Context ctx) {
+        body.append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(ctx, Settings.getRoutingMode().infoResId)).append(" (");
+        for (RoutingMode mode : RoutingMode.values()) {
+            if (mode != RoutingMode.OFF && mode != RoutingMode.STRAIGHT) {
+                if (mode != RoutingMode.WALK) {
+                    body.append(" / ");
+                }
+                final String profile = Settings.getRoutingProfile(mode);
+                body.append(profile == null ? "-" : profile);
+            }
+        }
+        body.append(")");
+    }
+
+    private static void appendMapModeSettings(@NonNull final StringBuilder body) {
+        body
+            .append("\n- Map mode: ")
+            .append(Settings.useLegacyMaps() ? "legacy" : "UnifiedMap")
+            .append(Settings.isLiveMap() ? " / live" : "")
+            .append(" / OSM multi-threading: ").append(Settings.hasOSMMultiThreading() ? Settings.getMapOsmThreads() : "off");
+    }
+
     private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {
         body.append("\n- Map: ");
-        final MapSource source = Settings.getMapSource();
-        if (source == null) {
-            body.append("none");
-            return;
+        if (Settings.useLegacyMaps()) {
+            final MapSource source = Settings.getMapSource();
+            final ImmutablePair<String, Boolean> mapAttrs = source.calculateMapAttribution(ctx);
+            body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
+                    .append("\n  - Id: ").append(source.getId())
+                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.left).replace("\n", " / "))
+                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
+        } else {
+            final AbstractTileProvider tileProvider = Settings.getTileProvider();
+            final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
+            body.append(tileProvider.getTileProviderName())
+                    .append("\n  - Id: ").append(tileProvider.getId())
+                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
+                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
         }
-        final ImmutablePair<String, Boolean> mapAtts = source.calculateMapAttribution(ctx);
-        body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
-                .append("\n  - Id: ").append(source.getId())
-                .append("\n  - Atts: ").append(mapAtts == null ? "none" : HtmlUtils.extractText(mapAtts.left).replace("\n", " / "))
-                .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
     }
 
 
@@ -298,6 +339,24 @@ public final class SystemInformation {
                 appendPermission(context, body, permission);
             }
         }
+    }
+
+    private static void appendWherigo(final StringBuilder body) {
+        final WherigoGame game = WherigoGame.get();
+        final ContentStorage.FileInformation  cartridgeFileInfo = game.getCartridgeInfo() == null ? null : game.getCartridgeInfo().getFileInfo();
+        final CharSequence loadFileInfo = TextUtils.join(WherigoSavegameInfo.getAllSaveFiles(cartridgeFileInfo), WherigoSavegameInfo::toShortString, ", ");
+        final CharSequence visibleThingsCounts = TextUtils.join(Arrays.asList(WherigoThingType.values()), tt -> tt.name() + ":" + tt.getThingsForUserDisplay().size(), ", ");
+        body.append("\n")
+            .append("\nWherigo")
+            .append("\n-------")
+            .append("\n- playing:").append(game.isPlaying()).append(", debug:").append(game.isDebugMode()).append(", debugFC:").append(game.isDebugModeForCartridge())
+            .append("\n- Name: ").append(game.getCartridgeName()).append(" (").append(game.getCGuid()).append(")")
+            .append("\n- Cache context: ").append(game.getContextGeocacheName())
+            .append("\n- Last Error: ").append(game.getLastError())
+            .append("\n- Last Played: ").append(game.getLastPlayedCGuid()).append(" / ").append(game.getLastSetContextGeocode())
+            .append("\n- Visible things: ").append(visibleThingsCounts)
+            .append("\n- Cartridge File: ").append(cartridgeFileInfo)
+            .append("\n- Load Slots: ").append(loadFileInfo);
     }
 
     private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {

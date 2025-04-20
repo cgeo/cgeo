@@ -1,17 +1,17 @@
 package cgeo.geocaching.maps;
 
 /*
+ * Manages distance and target views
+ *
  * Standard view is: (at the top of the map view)
- * target      distances1
+ * target
  * supersize
- *             distances2
+ *             distances
  *
  * - target is only used when in target navigation (opened via cache/waypoint popup)
- * - distances1/distances2 placeholder will be filled with straight distance, routed distance,
- *   individual route length and elevation info (depending on settings and current data)
- * - By tapping on any of the distance fields either straight or routed distance can be supersized.
- *   It gets removed from the distance view containers and displayed in a larger font
- * - Tapping on the supersized window toggles between real distance supersized, straight distance
+ * - distances placeholder will be filled with straight distance, routed distance
+ *   and individual route length (depending on settings and current data)
+ * - Tapping on any of the distance fields toggles between real distance supersized, straight distance
  *   supersized (depending on availability) and no supersize
  */
 
@@ -20,12 +20,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.layers.UnifiedTargetAndDistancesHandler;
 
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MapDistanceDrawerCommons {
-    private final LinearLayout distances1;
-    private final LinearLayout distances2;
+    private final TextView distanceStraight;
+    private final TextView distanceRouted;
+    private final TextView distanceIndividualRoute;
     private final TextView distanceSupersizeView;
     private final TextView targetView;
     private boolean bothViewsNeeded = false;
@@ -34,16 +34,21 @@ public class MapDistanceDrawerCommons {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
+    private final Runnable handleSwapNotification;
 
-    public MapDistanceDrawerCommons(final View root) {
-        distances1 = root.findViewById(R.id.distances1);
-        distances2 = root.findViewById(R.id.distances2);
+    public MapDistanceDrawerCommons(final View root, final Runnable handleSwapNotification) {
+        distanceStraight = root.findViewById(R.id.distanceStraight);
+        distanceRouted = root.findViewById(R.id.distanceRouted);
+        distanceIndividualRoute = root.findViewById(R.id.distanceIndividualRoute);
         targetView = root.findViewById(R.id.target);
         distanceSupersizeView = root.findViewById(R.id.distanceSupersize);
 
-        distances1.setOnClickListener(v -> swap());
-        distances2.setOnClickListener(v -> swap());
+        distanceStraight.setOnClickListener(v -> swap());
+        distanceRouted.setOnClickListener(v -> swap());
+        distanceIndividualRoute.setOnClickListener(v -> swap());
         distanceSupersizeView.setOnClickListener(v -> swap());
+
+        this.handleSwapNotification = handleSwapNotification;
     }
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
@@ -66,7 +71,10 @@ public class MapDistanceDrawerCommons {
 
     private void updateDistanceViews() {
         // glue code to UnifiedMap
-        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distanceStraight, distanceRouted, distanceIndividualRoute, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        if (handleSwapNotification != null) {
+            handleSwapNotification.run();
+        }
     }
 
 }

@@ -19,9 +19,6 @@ public class GoogleMapProjection implements MapProjectionImpl {
     @Override
     public void toPixels(final GeoPointImpl leftGeo, final Point left) {
         final Point p = projection.toScreenLocation(new LatLng(leftGeo.getLatitudeE6() / 1e6, leftGeo.getLongitudeE6() / 1e6));
-        if (p == null) {
-            return;
-        }
         left.x = p.x;
         left.y = p.y;
     }

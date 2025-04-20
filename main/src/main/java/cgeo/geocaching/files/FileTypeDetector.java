@@ -58,6 +58,9 @@ public class FileTypeDetector {
         if (isMap(line)) {
             return FileType.MAP;
         }
+        if (isWherigo(reader, line)) {
+            return FileType.WHERIGO;
+        }
         // scan at most 5 lines of a GPX file
         for (int i = 0; i < 5; i++) {
             line = StringUtils.trim(line);
@@ -80,5 +83,17 @@ public class FileTypeDetector {
     private static boolean isMap(final String line) {
         return StringUtils.length(line) >= 20
                 && StringUtils.startsWith(line, "mapsforge binary OSM");
+    }
+
+    private static boolean isWherigo(final BufferedReader reader, final String line) {
+        if (line.length() == 1 && line.charAt(0) == 0x02) {
+            try {
+                final String line2 = reader.readLine();
+                return (StringUtils.equals(line2.substring(0, 4), "CART"));
+            } catch (IOException ignore) {
+                // ignore
+            }
+        }
+        return false;
     }
 }

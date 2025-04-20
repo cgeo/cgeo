@@ -49,6 +49,14 @@
             android:layout_marginBottom="8dp"
             android:visibility="gone" />
 
+        <include
+            android:id="@+id/missingLocationPermission"
+            layout="@layout/mainactivity_action_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <RelativeLayout

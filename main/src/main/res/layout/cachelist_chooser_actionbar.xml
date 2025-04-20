@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="?attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="right|center_vertical"
-    tools:context=".CacheListSpinnerAdapter">
+    android:layout_gravity="right|center_vertical">
 
     <ImageView
         android:id="@+id/icon"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/expand_more"
         android:layout_centerVertical="true"
+        app:tint="@color/colorTextActionBar"
         android:layout_alignParentRight="true"/>
 
     <LinearLayout

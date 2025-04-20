@@ -11,7 +11,6 @@ import cgeo.geocaching.filters.core.DifficultyTerrainMatrixGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
@@ -19,6 +18,7 @@ import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
+import cgeo.geocaching.filters.core.StringFilter;
 import cgeo.geocaching.filters.core.TerrainGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
@@ -56,11 +56,11 @@ public class GCMap {
      */
     @NonNull
     @WorkerThread
-    public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
+    public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            final GCWebAPI.WebApiSearch search = createSearchForFilter(con, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
+            final GCWebAPI.WebApiSearch search = createSearchForFilter(con, filter);
             if (search == null) {
                 return new SearchResult();
             }
@@ -108,14 +108,16 @@ public class GCMap {
     }
 
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @Nullable final GeocacheFilter filter) {
         return createSearchForFilter(connector, filter, new GeocacheSort(), 200, 0);
     }
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort, final int take, final int skip) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @Nullable final GeocacheFilter pFilter, @NonNull final GeocacheSort sort, final int take, final int skip) {
 
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setPage(take, skip);
+
+        final GeocacheFilter filter = pFilter != null ? pFilter : GeocacheFilter.createEmpty();
 
         //special case: if origin filter is present and excludes GCConnector, then skip search
         final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
@@ -126,14 +128,6 @@ public class GCMap {
         final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
         for (BaseGeocacheFilter baseFilter : filterAndChain) {
             fillForBasicFilter(baseFilter, search);
-        }
-
-        //special case (see #13891): if we search for owner AND archived caches are not excluded
-        // -> then remove status from filter (otherwise archived caches are not returned from gc.com on Owner search)
-        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filterAndChain, StatusGeocacheFilter.class);
-        final OwnerGeocacheFilter ownerFilter = GeocacheFilter.findInChain(filterAndChain, OwnerGeocacheFilter.class);
-        if (ownerFilter != null && ownerFilter.isFiltering() && statusFilter != null && !statusFilter.isExcludeArchived()) {
-            search.setStatusEnabled(null);
         }
 
         search.setSort(GCWebAPI.WebApiSearch.SortType.getByCGeoSortType(sort.getEffectiveType()), sort.isEffectiveAscending());
@@ -148,12 +142,20 @@ public class GCMap {
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
                 break;
             case NAME:
-                search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                if (((NameGeocacheFilter) basicFilter).getStringFilter().getFilterType() != StringFilter.StringFilterType.DOES_NOT_CONTAIN) {
+                    search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                }
                 break;
             case ATTRIBUTES:
-                search.addCacheAttributes(
-                        CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
-                                .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
+                final AttributesGeocacheFilter attFilter = (AttributesGeocacheFilter) basicFilter;
+                if (!attFilter.isInverse()) {
+                    search.addCacheAttributes(
+                        CollectionStream.of(attFilter.getAttributes().entrySet())
+                        .filter(e -> Boolean.TRUE.equals(e.getValue()))
+                        .filter(e -> e.getKey().gcid >= 0 && e.getKey().gcid < 100)
+                        .map(Map.Entry::getKey)
+                        .toArray(CacheAttribute.class));
+                }
                 break;
             case SIZE:
                 search.addCacheSizes(((SizeGeocacheFilter) basicFilter).getValues());
@@ -199,7 +201,10 @@ public class GCMap {
                 final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
                 search.setStatusFound(statusFilter.getStatusFound());
                 search.setStatusOwn(statusFilter.getStatusOwned());
-                search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? FALSE : null));
+                search.setStatusEnabled(
+                        statusFilter.isExcludeDisabled() && statusFilter.isExcludeArchived() ? Boolean.TRUE :
+                                (statusFilter.isExcludeActive() && statusFilter.isExcludeArchived() ? FALSE : null));
+                search.setShowArchived(!statusFilter.isExcludeArchived());
                 break;
             case HIDDEN:
             case EVENT_DATE:

@@ -1,46 +1,98 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.unifiedmap.LayerHelper;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
+import static cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource.MAPNIK_TILE_DOWNLOAD_UA;
 
 import android.net.Uri;
 
 import androidx.core.util.Pair;
 
-import java.io.File;
-import java.util.Collections;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import org.oscim.layers.tile.bitmap.BitmapTileLayer;
-import org.oscim.map.Map;
-import org.oscim.tiling.source.OkHttpEngine;
-import org.oscim.tiling.source.bitmap.BitmapTileSource;
+import org.mapsforge.core.model.Tile;
+import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.layer.download.TileDownloadLayer;
+import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
+import org.mapsforge.map.view.MapView;
 
-class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider {
+public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider {
 
-    private final String tilePath;
+    private final AbstractTileSource mfTileSource;
+    private String tilePath;
 
     AbstractMapsforgeOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         super(name, uri, zoomMin, zoomMax, mapAttribution);
         this.tilePath = tilePath;
+        mfTileSource = new AbstractTileSource(new String[]{ uri.getHost() }, 443) {
+            @Override
+            public int getParallelRequestsLimit() {
+                return 8;
+            }
+
+            @Override
+            public URL getTileUrl(final Tile tile) throws MalformedURLException {
+                // tilePath: "/cyclosm/{Z}/{X}/{Y}.png"
+                final String path = AbstractMapsforgeOnlineTileProvider.this.tilePath
+                        .replace("{Z}", String.valueOf(tile.zoomLevel))
+                        .replace("{X}", String.valueOf(tile.tileX))
+                        .replace("{Y}", String.valueOf(tile.tileY));
+                return new URL(AbstractMapsforgeOnlineTileProvider.this.mapUri + path);
+            }
+
+            @Override
+            public byte getZoomLevelMax() {
+                return (byte) zoomMax;
+            }
+
+            @Override
+            public byte getZoomLevelMin() {
+                return (byte) zoomMin;
+            }
+
+            @Override
+            public boolean hasAlpha() {
+                return false;
+            }
+        };
+    }
+
+    protected void setTilePath(final String tilePath) {
+        this.tilePath = tilePath;
     }
 
     @Override
-    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
-        final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
-        httpBuilder.cache(cache);
-        final BitmapTileSource tileSource = BitmapTileSource.builder()
-                .url(mapUri.toString())
-                .tilePath(tilePath)
-                .zoomMax(zoomMax)
-                .zoomMin(zoomMin)
-                .build();
-        tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
-        tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "cgeo-android"));
-        fragment.addLayer(LayerHelper.ZINDEX_BASEMAP, new BitmapTileLayer(map, tileSource));
+    public void addTileLayer(final MapsforgeFragment fragment, final MapView map) {
+        mfTileSource.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA); // @todo
+        tileLayer = new TileDownloadLayer(fragment.getTileCache(), map.getModel().mapViewPosition, mfTileSource, AndroidGraphicFactory.INSTANCE);
+        map.getLayerManager().getLayers().add(tileLayer);
+        onResume(); // start tile downloader
     }
 
+    // ========================================================================
+    // Lifecycle methods
+
+    @Override
+    public void onPause() {
+        if (tileLayer != null) {
+            ((TileDownloadLayer) tileLayer).onPause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (tileLayer != null) {
+            ((TileDownloadLayer) tileLayer).onResume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (tileLayer != null) {
+            tileLayer.onDestroy();
+        }
+        super.onDestroy();
+    }
 }

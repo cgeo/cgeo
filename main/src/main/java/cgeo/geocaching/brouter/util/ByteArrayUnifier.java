@@ -21,9 +21,6 @@ public final class ByteArrayUnifier implements IByteArrayUnifier {
      * @param ab the byte array to unify
      * @return the cached instance or the input instanced if not cached
      */
-    public byte[] unify(final byte[] ab) {
-        return unify(ab, 0, ab.length);
-    }
 
     public byte[] unify(final byte[] ab, final int offset, final int len) {
         final int crc = Crc32Utils.crc(ab, offset, len);

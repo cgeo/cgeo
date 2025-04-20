@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 
 import androidx.annotation.NonNull;
 
@@ -38,7 +38,7 @@ public class GeoitemLayers implements Iterable<GeoitemLayer> {
 
     public synchronized void add(final GeoitemLayer geoitem) {
         final boolean result = geoitems.put(geoitem.getItemCode(), geoitem) == null;
-        if (result && geoitem.getItem().getType() == CoordinatesType.CACHE) {
+        if (result && geoitem.getItem().getType() == CoordinateType.CACHE) {
             cacheCodes.add(geoitem.getItemCode());
         }
     }
@@ -58,7 +58,7 @@ public class GeoitemLayers implements Iterable<GeoitemLayer> {
         if (object instanceof GeoitemLayer) {
             final GeoitemLayer item = (GeoitemLayer) object;
             final boolean result = this.geoitems.remove(item.getItem().getItemCode()) != null;
-            if (result && item.getItem().getType() == CoordinatesType.CACHE) {
+            if (result && item.getItem().getType() == CoordinateType.CACHE) {
                 cacheCodes.remove(item.getItemCode());
             }
         }

@@ -27,9 +27,17 @@ public abstract class AbstractList {
 
     public abstract int getNumberOfCaches();
 
+    public void updateNumberOfCaches() {
+    }
+
     @Nullable
     public static AbstractList getListById(final int listId) {
         return LISTS.get(listId);
+    }
+
+    @NonNull
+    public String toString() {
+        return getTitleAndCount();
     }
 
 }

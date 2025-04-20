@@ -28,6 +28,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -142,6 +143,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         notifyDataSetChanged();
     }
 
+    public void setElement(@NonNull final Geocache geocache) {
+        final String geocode = geocache.getGeocode();
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).getGeocode().equalsIgnoreCase(geocode)) {
+                this.list.set(i, geocache);
+            }
+        }
+    }
+
     public void setStoredLists(final List<AbstractList> storedLists) {
         this.storedLists = storedLists;
     }
@@ -219,13 +229,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public int getCheckedCount() {
-        int checked = 0;
+        if (!isSelectMode()) {
+            return 0;
+        }
+
+        int checkedCount = 0;
         for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
-                checked++;
+                checkedCount++;
             }
         }
-        return checked;
+        return checkedCount;
     }
 
     public int getOriginalListCount() {
@@ -271,15 +285,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         notifyDataSetChanged();
     }
 
-    public void showAttributes() {
+    public void showAttributes(final Collection<Geocache> caches) {
         final Context context = getContext();
 
         // collect attributes and counters
         final Map<String, Integer> attributes = new HashMap<>();
         CacheAttribute ca;
-        final int max = list.size();
-        for (int i = 0; i < max; i++) {
-            for (String attr : list.get(i).getAttributes()) {
+        for (final Geocache cache : caches) {
+            for (String attr : cache.getAttributes()) {
                 // OC attributes are always positive, to count them with GC attributes append "_yes"
                 final String attrVal;
                 ca = CacheAttribute.getByName(attr);
@@ -432,15 +445,22 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         holder.binding.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
         holder.binding.checkbox.setChecked(cache.isStatusChecked());
-        holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
+        holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache, this));
 
         distances.add(holder.binding.distance);
         holder.binding.distance.setCacheData(cache.getCoords(), cache.getDistance());
-        holder.binding.distance.update(coords);
+
+        Geopoint targetCoords = sortContext.getSort().getTargetCoords();
+        if (null == targetCoords) {
+            targetCoords = coords;
+        } else {
+            holder.binding.distance.setTypeface(Typeface.BOLD_ITALIC);
+        }
+        holder.binding.distance.update(targetCoords);
 
         compasses.add(holder.binding.direction);
         holder.binding.direction.setTargetCoords(cache.getCoords());
-        holder.binding.text.setText(TextUtils.coloredCacheText(getContext(), cache, cache.getName()), TextView.BufferType.SPANNABLE);
+        holder.binding.text.setText(TextUtils.coloredCacheText(getContext(), cache, StringUtils.defaultIfBlank(cache.getName(), "")), TextView.BufferType.SPANNABLE);
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
 
@@ -458,8 +478,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 holder.binding.direction.setVisibility(View.VISIBLE);
                 holder.binding.dirimg.setVisibility(View.GONE);
                 holder.binding.direction.updateAzimuth(azimuth);
-                if (coords != null) {
-                    holder.binding.direction.updateCurrentCoords(coords);
+
+                if (targetCoords != null) {
+                    holder.binding.direction.updateCurrentCoords(targetCoords);
                 }
             } else if (cache.getDirection() != null) {
                 holder.binding.direction.setVisibility(View.VISIBLE);
@@ -506,15 +527,21 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private static class SelectionCheckBoxListener implements View.OnClickListener {
 
         private final Geocache cache;
+        @NonNull private final WeakReference<CacheListAdapter> adapterRef;
 
-        SelectionCheckBoxListener(final Geocache cache) {
+        SelectionCheckBoxListener(final Geocache cache, @NonNull final CacheListAdapter adapter) {
             this.cache = cache;
+            adapterRef = new WeakReference<>(adapter);
         }
 
         @Override
         public void onClick(final View view) {
             final boolean checkNow = ((CheckBox) view).isChecked();
             cache.setStatusChecked(checkNow);
+            final CacheListAdapter adapter = adapterRef.get();
+            if (adapter == null) {
+                return;
+            }
         }
     }
 
@@ -572,7 +599,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
 
         @Override
-        public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
+        public boolean onFling(final MotionEvent e1, @NonNull final MotionEvent e2, final float velocityX, final float velocityY) {
             try {
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     return false;
@@ -630,14 +657,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return result;
         }
         return new ArrayList<>(list);
-    }
-
-    public int getCheckedOrAllCount() {
-        final int checked = getCheckedCount();
-        if (checked > 0) {
-            return checked;
-        }
-        return list.size();
     }
 
     public void checkSpecialSortOrder() {

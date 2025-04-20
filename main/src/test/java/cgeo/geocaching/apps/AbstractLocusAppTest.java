@@ -53,7 +53,8 @@ public class AbstractLocusAppTest {
 
         final HashMap<CacheSize, Integer> testSizeList = new HashMap<>();
         testSizeList.put(CacheSize.NANO, GeocachingData.CACHE_SIZE_MICRO);
-        testSizeList.put(CacheSize.VIRTUAL, GeocachingData.CACHE_SIZE_OTHER);
+        testSizeList.put(CacheSize.VIRTUAL, GeocachingData.CACHE_SIZE_VIRTUAL);
+        testSizeList.put(CacheSize.OTHER, GeocachingData.CACHE_SIZE_OTHER);
         testSizeList.put(CacheSize.UNKNOWN, GeocachingData.CACHE_SIZE_NOT_CHOSEN);
 
         final ArrayList<CacheSize> testCgeoSizes = new ArrayList<>(testSizeList.keySet());

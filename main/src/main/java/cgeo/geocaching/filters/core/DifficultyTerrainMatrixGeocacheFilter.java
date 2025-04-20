@@ -92,7 +92,7 @@ public class DifficultyTerrainMatrixGeocacheFilter extends BaseGeocacheFilter {
     }
 
     public boolean isFilteringMatrix() {
-        return difficultyTerrainCombis.size() > 0 && difficultyTerrainCombis.size() < 81;
+        return !difficultyTerrainCombis.isEmpty() && difficultyTerrainCombis.size() < 81;
     }
 
     @Override

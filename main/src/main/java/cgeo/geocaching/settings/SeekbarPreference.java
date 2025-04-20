@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -96,6 +97,7 @@ public class SeekbarPreference extends Preference {
         init();
     }
 
+    /** @noinspection EmptyMethod*/
     protected void init() {
         // init method gets called once by the constructor,
         // so override and put initialization stuff in there (if needed)
@@ -137,32 +139,31 @@ public class SeekbarPreference extends Preference {
     public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
+        final boolean hasTitle = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.title)).getText());
+        final boolean hasSummary = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.summary)).getText());
+        if (!hasTitle) {
+            holder.findViewById(android.R.id.title).setVisibility(View.GONE);
+        }
+        if (!hasSummary) {
+            holder.findViewById(android.R.id.summary).setVisibility(View.GONE);
+        }
+
         if (seekbarUI == null) {
             if (StringUtils.isBlank(tempTemplate)) {
                 tempTemplate = SeekbarUI.class.getCanonicalName();
             }
-            tempTemplate = SeekbarUI.class.getCanonicalName(); // @test
             try {
                 final Class c = Class.forName(tempTemplate);
-                final Class[] types = { Context.class };
+                final Class[] types = {Context.class};
                 final Constructor constructor = c.getConstructor(types);
-                final Object[] parameters = { getContext() };
+                final Object[] parameters = {getContext()};
                 seekbarUI = (SeekbarUI) constructor.newInstance(parameters);
             } catch (IllegalAccessException | InstantiationException | ClassNotFoundException |
                      NoSuchMethodException |
                      InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
-            setExtraView(holder);
 
-            final boolean hasTitle = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.title)).getText());
-            final boolean hasSummary = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.summary)).getText());
-            if (!hasTitle) {
-                holder.findViewById(android.R.id.title).setVisibility(View.GONE);
-            }
-            if (!hasSummary) {
-                holder.findViewById(android.R.id.summary).setVisibility(View.GONE);
-            }
             if (tempAttributes != null) {
                 seekbarUI.loadAdditionalAttributes(getContext(), tempAttributes, android.R.attr.preferenceStyle);
                 tempAttributes.recycle();
@@ -183,12 +184,16 @@ public class SeekbarPreference extends Preference {
             seekbarUI.setSaveProgressListener(this::saveSetting);
             setInitialValue(restoreStoredValue, tempDefaultValue);
             seekbarUI.init();
-        } else {
-            setExtraView(holder);
         }
+        setExtraView(holder);
     }
 
     private void setExtraView(final PreferenceViewHolder holder) {
+        //if seekbar is still assigned to another group/viewholder, remove it from there. See #16635
+        if (seekbarUI.getParent() instanceof ViewGroup) {
+            ((ViewGroup) seekbarUI.getParent()).removeView(seekbarUI);
+        }
+
         final FrameLayout widget = (FrameLayout) holder.findViewById(R.id.widget_extra);
         widget.removeAllViews();
         widget.addView(seekbarUI);

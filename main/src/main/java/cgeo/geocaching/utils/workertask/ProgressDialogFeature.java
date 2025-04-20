@@ -111,9 +111,7 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
             });
         }
         if (allowCloseWithoutCancel) {
-            progress.setOnCloseListener((dialog, which) -> {
-                dialog.dismiss();
-            });
+            progress.setOnCloseListener((dialog, which) -> dialog.dismiss());
         }
         progress.setOnDismissListener(d -> {
             if (!allowCloseWithoutCancel) {

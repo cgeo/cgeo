@@ -58,7 +58,7 @@ public final class ProcessUtils {
 
     /**
      * This will find installed applications even without launch intent (e.g. the streetview plugin).
-     *
+     * <br>
      * Be aware:
      * Starting with Android 11 getInstalledPackages() will only return packages declared in AndroidManifest.xml
      * (Add a lint exception, as we have cross-checked our current usages for this method)
@@ -146,7 +146,7 @@ public final class ProcessUtils {
                     if (mStartActivity != null) {
                         mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         // create a pending intent so the application is restarted after System.exit(0) was called.
-                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_CANCEL_CURRENT);
+                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, getFlagImmutable() | PendingIntent.FLAG_CANCEL_CURRENT);
                         final AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
                         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                         System.exit(0);
@@ -162,6 +162,11 @@ public final class ProcessUtils {
         } catch (Exception ex) {
             Log.e("Was not able to restart application");
         }
+    }
+
+    // flag for declaring a PendingIntent as immutable (required since API 31, but supported only on API 23+)
+    public static int getFlagImmutable() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0;
     }
 
 }

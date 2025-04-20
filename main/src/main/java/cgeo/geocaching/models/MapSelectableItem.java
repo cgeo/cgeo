@@ -32,11 +32,11 @@ public class MapSelectableItem {
         this(route, null, null, null);
     }
 
-    public MapSelectableItem(final Object data, final String name, final String description) {
-        this(data, name == null ? null : TextParam.text(name), description == null ? null : TextParam.text(description), null);
+    public MapSelectableItem(final Object data, final String name, final String description, final int iconId) {
+        this(data, name == null ? null : TextParam.text(name), description == null ? null : TextParam.text(description), iconId >= 0 ? ImageParam.id(iconId) : null);
     }
 
-    public MapSelectableItem(final Object data, final TextParam name, final TextParam description, final ImageParam icon) {
+    private MapSelectableItem(final Object data, final TextParam name, final TextParam description, final ImageParam icon) {
         this.data = data;
         this.name = name;
         this.description = description;

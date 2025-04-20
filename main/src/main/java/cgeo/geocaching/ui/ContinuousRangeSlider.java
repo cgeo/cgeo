@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -123,7 +122,7 @@ public class ContinuousRangeSlider extends LinearLayout {
                                 }
                             }
                         } catch (NumberFormatException e) {
-                            Toast.makeText(getContext(), R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
                         }
                     };
                     SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))

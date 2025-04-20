@@ -36,7 +36,11 @@ public class NavigationTargetLayer {
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
 
     public NavigationTargetLayer(final UnifiedMapActivity activity, final GeoItemLayer<String> layer) {
-        mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo));
+        mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo), () -> {
+            if (activity.getMapFragment() != null) {
+                activity.getMapFragment().adaptLayoutForActionBar(null);
+            }
+        });
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
         this.layer = layer;
 
@@ -68,6 +72,12 @@ public class NavigationTargetLayer {
         viewModel.individualRoute.observe(activity, individualRoute -> mapDistanceDrawer.drawRouteDistance(individualRoute.getDistance()));
     }
 
+    public void triggerRepaint() {
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
+        if (target != null) {
+            repaintHelper(target);
+        }
+    }
 
     private void repaintHelper(final UnifiedMapViewModel.Target target) {
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();

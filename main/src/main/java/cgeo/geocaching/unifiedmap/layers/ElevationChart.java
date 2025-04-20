@@ -14,16 +14,14 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.MenuUtils;
 import static cgeo.geocaching.unifiedmap.LayerHelper.ZINDEX_ELEVATIONCHARTMARKERPOSITION;
 import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 
-import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -50,6 +48,8 @@ public class ElevationChart {
     private final GeoItemLayer<String> geoItemLayer;
     final Toolbar toolbar;
     private final List<Entry> entries = new ArrayList<>();
+    private float offset = 0f;
+    private Geopoint lastShownPosition = null;
 
     public ElevationChart(final AppCompatActivity activity, final GeoItemLayer<String> geoItemLayer) {
         chartBlock = activity.findViewById(R.id.elevation_block);
@@ -68,7 +68,6 @@ public class ElevationChart {
         }
     }
 
-    @SuppressLint("RestrictedApi") // required for workaround to make icons visible in overflow menu
     public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils) {
         if (chart == null) {
             return;
@@ -84,7 +83,7 @@ public class ElevationChart {
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
                 public void onValueSelected(final Entry e, final Highlight h) {
-                    final Geopoint center = findClosestByDistance(route, e.getX());
+                    final Geopoint center = (Geopoint) e.getData();
                     // update marker if position found
                     if (center != null) {
                         final GeoItem marker = GeoPrimitive.createMarker(center, GeoIcon.builder().setBitmap(ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.circle, null))).build()).buildUpon().setZLevel(ZINDEX_ELEVATIONCHARTMARKERPOSITION).build();
@@ -105,12 +104,9 @@ public class ElevationChart {
         if (routeTrackUtils != null) {
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.map_routetrack_context);
-            RouteTrackUtils.configureContextMenu(toolbar.getMenu(), route);
-            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, route));
-            // workaround to display icons in overflow menu of toolbar
-            if (toolbar.getMenu() instanceof MenuBuilder) {
-                ((MenuBuilder) toolbar.getMenu()).setOptionalIconsVisible(true);
-            }
+            RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true);
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, null));
+            MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu());
         }
 
         // set/update data
@@ -144,7 +140,7 @@ public class ElevationChart {
                 lastPoint = point;
                 final float elev = it.hasNext() ? it.next() : Float.NaN;
                 if (!Float.isNaN(elev)) {
-                    entries.add(new Entry(distance, elev));
+                    entries.add(new Entry(distance, elev, point));
                 }
             }
         }
@@ -153,13 +149,14 @@ public class ElevationChart {
     /** format line chart (lines, axes etc.) */
     private void formatChart(final Resources res) {
         chart.setData(null);
-        if (entries.size() > 0) {
+        if (!entries.isEmpty()) {
             final LineDataSet dataSet = new LineDataSet(entries, null);
             dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);
             dataSet.setColor(color);
-            dataSet.setHighLightColor(color);
+            dataSet.setHighLightColor(res.getColor(R.color.colorTextHint));
+            dataSet.setHighlightLineWidth(2.5f);
             dataSet.setValueTextColor(res.getColor(R.color.colorText));
             dataSet.setDrawValues(false);
             dataSet.setDrawFilled(true);
@@ -183,7 +180,7 @@ public class ElevationChart {
         xAxis.setTextSize(getDimensionInDp(res, R.dimen.textSize_detailsSecondary));
         xAxis.setTextColor(res.getColor(R.color.colorText));
         xAxis.setAxisMinimum(0.0f);
-        xAxis.setValueFormatter((value, axis) -> Units.getDistanceFromKilometers(value));
+        xAxis.setValueFormatter((value, axis) -> Units.getDistanceFromKilometers(value - offset));
 
         final YAxis yAxis = chart.getAxisLeft();
         yAxis.setDrawAxisLine(true);
@@ -194,29 +191,35 @@ public class ElevationChart {
         yAxis2.setEnabled(false);
     }
 
+    /** find position on track closest to given coords (max 100m) and highlight it */
+    public void showPositionOnTrack(final Geopoint coords) {
+        // calculate new position on track only if minimum distance reached
+        if (lastShownPosition != null && coords.distanceTo(lastShownPosition) < 0.05f) {
+            return;
+        }
+        lastShownPosition = coords;
+        // find position
+        float minDistance = 0.1f;
+        int x = -1;
+        int index = 0;
+        for (Entry entry : entries) {
+            final float distance = ((Geopoint) entry.getData()).distanceTo(coords);
+            if (distance < minDistance) {
+                x = index;
+                minDistance = distance;
+            }
+            index++;
+        }
+        // display hairpin line for found position + adapt x axis labelling
+        offset = x < 0 ? 0f : entries.get(x).getX();
+        chart.highlightValue(offset, x < 0 ? -1 : 0);
+        chart.invalidate();
+    }
+
     /** hides chart and map marker */
     private void closeChart(final GeoItemLayer<String> geoItemLayer) {
         chartBlock.setVisibility(View.GONE);
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
         LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
-    }
-
-    /** find position in route corresponding to distance from start */
-    @Nullable
-    private static Geopoint findClosestByDistance(final Route route, final float distance) {
-        float done = 0.0f;
-        Geopoint lastPoint = null;
-        for (RouteSegment segment : route.getSegments()) {
-            for (Geopoint point : segment.getPoints()) {
-                if (lastPoint != null) {
-                    done += lastPoint.distanceTo(point);
-                }
-                if (done >= distance) {
-                    return point;
-                }
-                lastPoint = point;
-            }
-        }
-        return null;
     }
 }

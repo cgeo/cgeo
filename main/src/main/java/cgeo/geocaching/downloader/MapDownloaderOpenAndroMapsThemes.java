@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -12,10 +14,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 import okhttp3.Response;
@@ -23,35 +22,50 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
+    private static final String BASE_TIMESTAMP_SIZE_PATTERN = "<\\/a>\\s*([0-9]{1,2}-[A-za-z]{3}-20[0-9]{2}) [0-9]{1,2}:[0-9]{1,2}\\s*([0-9]*)";
+
+    protected static final String FILENAME_ELEVATE = "Elevate.zip";
+    private static final Pattern PATTERN_LAST_UPDATED_DATE_ELEVATE = Pattern.compile(FILENAME_ELEVATE + BASE_TIMESTAMP_SIZE_PATTERN);
+    private static final String PATH_ELEVATE = "elevate/";
+
+    protected static final String FILENAME_WINTER = "Elevate_Winter.zip";
+    private static final Pattern PATTERN_LAST_UPDATED_DATE_WINTER = Pattern.compile(FILENAME_WINTER + BASE_TIMESTAMP_SIZE_PATTERN);
+    private static final String PATH_WINTER = "elevate_winter/";
+
     protected static final String FILENAME_VOLUNTARY = "Voluntary MF5.zip";
-    private static final Pattern PATTERN_LAST_UPDATED_DATE_ELEVATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9](\\.[0-9])?<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
-    private static final Pattern PATTERN_LAST_UPDATED_DATE_VOLUNTARY = Pattern.compile(FILENAME_VOLUNTARY + "<\\/a>\\s*([0-9]{1,2})-([A-Za-z]{3})-([0-9]{4})");
+    private static final Pattern PATTERN_LAST_UPDATED_DATE_VOLUNTARY = Pattern.compile(FILENAME_VOLUNTARY + BASE_TIMESTAMP_SIZE_PATTERN);
+    private static final String PATH_VOLUNTARY = "voluntary/downloads/";
+
     private static final MapDownloaderOpenAndroMapsThemes INSTANCE = new MapDownloaderOpenAndroMapsThemes();
+    private final String baseUrl;
 
     private MapDownloaderOpenAndroMapsThemes() {
-        super(Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS, R.string.mapserver_openandromaps_themes_updatecheckurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
+        super(Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS, R.string.mapserver_openandromaps_themes_downloadurl, R.string.mapserver_openandromaps_themes_name, R.string.mapserver_openandromaps_themes_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
+        baseUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_base_downloadurl);
     }
 
     @Override
     protected void analyzePage(final Uri uri, final List<Download> list, final @NonNull String page) {
-        final Download file = checkUpdateFor(page, CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl), "Elevate.zip");
-        if (file != null) {
-            list.add(file);
-        }
+        analyzePage(list, page, baseUrl + PATH_ELEVATE, FILENAME_ELEVATE);
+        analyzePage(list, PATH_WINTER, FILENAME_WINTER);
+        analyzePage(list, PATH_VOLUNTARY, FILENAME_VOLUNTARY);
+    }
 
-        // small hack to support a second theme from a different location
-        final String urlVoluntary = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_voluntary_downloadurl);
-        String pageVoluntary = null;
+    private void analyzePage(final List<Download> list, final String path, final String filename) {
+        final String url = baseUrl + path;
         try {
-            final Response response = Network.getRequest(urlVoluntary, new Parameters()).blockingGet();
-            pageVoluntary = Network.getResponseData(response, true);
+            final Response response = Network.getRequest(url, new Parameters()).blockingGet();
+            analyzePage(list, Network.getResponseData(response, true), url, filename);
         } catch (final Exception ignore) {
             // ignore
         }
-        if (StringUtils.isNotBlank(pageVoluntary)) {
-            final Download fileVoluntary = checkUpdateFor(pageVoluntary, urlVoluntary, FILENAME_VOLUNTARY);
-            if (fileVoluntary != null) {
-                list.add(fileVoluntary);
+    }
+
+    private void analyzePage(final List<Download> list, final String page, final String url, final String filename) {
+        if (StringUtils.isNotBlank(page)) {
+            final Download download = checkUpdateFor(page, url, filename);
+            if (download != null) {
+                list.add(download);
             }
         }
     }
@@ -59,41 +73,19 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
     @Nullable
     @Override
     protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
-        // check for elevate
-        final MatcherWrapper matchDate = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE_ELEVATE, page);
-        if (matchDate.find()) {
-            final String date = "20" + matchDate.group(4) + "-" + matchDate.group(3) + "-" + matchDate.group(2);
-            return new Download("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType, iconRes);
+        Download result = findTheme("Elevate", page, PATTERN_LAST_UPDATED_DATE_ELEVATE, PATH_ELEVATE + FILENAME_ELEVATE);
+        if (result == null) {
+            result = findTheme("Elevate Winter", page, PATTERN_LAST_UPDATED_DATE_WINTER, PATH_WINTER + FILENAME_WINTER);
         }
-        // check for voluntary
-        final MatcherWrapper matchDateVoluntary = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE_VOLUNTARY, page);
-        if (matchDateVoluntary.find()) {
-            String date = matchDateVoluntary.group(3) + "-" + matchDateVoluntary.group(2) + "-" + matchDateVoluntary.group(1);
-            try {
-                // convert date returned by server into ISO format
-                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
-                date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Objects.requireNonNull(formatter.parse(date)));
-            } catch (Exception ignore) {
-                // ignore
-            }
-            return new Download("Voluntary", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_voluntary_downloadurl) + FILENAME_VOLUNTARY), false, date, "", offlineMapType, iconRes);
+        if (result == null) {
+            result = findTheme("Voluntary", page, PATTERN_LAST_UPDATED_DATE_VOLUNTARY, PATH_VOLUNTARY + FILENAME_VOLUNTARY);
         }
-        // neither found
-        return null;
+        return result;
     }
 
-    // elevate uses different servers for update check and download, need to map here
-    // no mapping needed for voluntary theme
-    @Override
-    protected String getUpdatePageUrl(final String downloadPageUrl) {
-        final String compare = downloadPageUrl.endsWith("/") ? downloadPageUrl : downloadPageUrl + "/";
-        final String downloadUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl);
-        final String updateUrl = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl);
-        if (compare.startsWith(downloadUrl)) {
-            final String result = updateUrl + compare.substring(downloadUrl.length());
-            return result.endsWith("/") ? result : result + "/";
-        }
-        return downloadPageUrl;
+    private Download findTheme(final String name, final String page, final Pattern pattern, final String path) {
+        final MatcherWrapper matchDate = new MatcherWrapper(pattern, page);
+        return matchDate.find() ? new Download(name, Uri.parse(baseUrl + path), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchDate.group(1))), Formatter.formatBytes(Long.parseLong(matchDate.group(2))), offlineMapType, iconRes) : null;
     }
 
     @NonNull

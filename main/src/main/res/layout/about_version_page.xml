@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".AboutActivity$VersionViewCreator" >
+    tools:context=".AboutActivity$VersionViewCreator">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -61,18 +62,20 @@
             </LinearLayout>
         </FrameLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_version" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_version" />
 
         <TextView
             android:id="@+id/about_version_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:textIsSelectable="true"
             style="@style/about_base"
             android:textStyle="bold"
@@ -92,10 +95,11 @@
             tools:text="additional text in case of deprecated eclipse build"
             tools:visibility="visible"/>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_donate" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_donate" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -113,10 +117,11 @@
                 android:text="@string/about_donation_more" />
         </LinearLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_help" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_help" />
 
         <TableLayout
             android:layout_width="match_parent"

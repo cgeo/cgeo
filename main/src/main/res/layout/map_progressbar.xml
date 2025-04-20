@@ -3,6 +3,5 @@
 	android:id="@+id/map_progressbar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:indeterminateOnly="true"
-	android:layout_below="@id/filterbar"
-	/>
+	android:indeterminate="true"
+	android:layout_below="@id/filterbar"/>

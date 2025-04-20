@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
@@ -31,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -131,7 +133,7 @@ final class ALApi {
             this.themes = themes;
         }
 
-        class Origin {
+        static class Origin {
             @JsonProperty("Latitude")
             private Double latitude;
             @JsonProperty("Longitude")
@@ -165,7 +167,7 @@ final class ALApi {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
             if (!Settings.isALCfoundStateManual()) {
-                final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
+                final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
                     if (matchedLabCache.getGeocode().equals(geocode)) {
                         gc.setFound(matchedLabCache.isFound());
@@ -173,57 +175,38 @@ final class ALApi {
                 }
             }
             return gc;
-        } catch (final Exception ignored) {
+        } catch (final Exception ex) {
+            Log.w("APApi: Exception while getting " + geocode, ex);
             return null;
         }
     }
 
     @NonNull
-    protected static Collection<Geocache> searchByBBox(final Viewport viewport) {
-
-        if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty() || viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
-            return Collections.emptyList();
-        }
-
-        final double lat1 = viewport.getLatitudeMax();
-        final double lat2 = viewport.getLatitudeMin();
-        final double lon1 = viewport.getLongitudeMax();
-        final double lon2 = viewport.getLongitudeMin();
-        final double latcenter = (lat1 + lat2) / 2;
-        final double loncenter = (lon1 + lon2) / 2;
-        final Geopoint gp1 = new Geopoint(lat1, lon1);
-        final Geopoint gp2 = new Geopoint(lat2, lon2);
-        final int radius = (int) (gp1.distanceTo(gp2) * 500); // we get diameter in km, need radius in m
-        Log.d("_AL Radius: " + radius);
-
-        final Geopoint center = new Geopoint(latcenter, loncenter);
-        return search(center, radius, null);
-    }
-
-    @NonNull
     @WorkerThread
-    private static Collection<Geocache> search(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
+    private static Collection<Geocache> search(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish, final int take) throws IOException {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         final ALSearchV4Query query = new ALSearchV4Query();
         query.setOrigin(center.getLatitude(), center.getLongitude(), 0.0);
-        query.setTake(100);
+        query.setTake(take);
         query.setRadiusInMeters(distanceInMeters);
         query.setRecentlyPublishedDays(daysSincePublish);
         query.setCallingUserPublicGuid(GCLogin.getInstance().getPublicGuid());
         try {
             final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
-        } catch (final Exception ignored) {
-            return Collections.emptyList();
+        } catch (final Exception ex) {
+            throw new IOException("Problem accessing ALApi", ex);
         }
     }
 
     @NonNull
-    public static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
+    public static Collection<Geocache> searchByFilter(@Nullable final GeocacheFilter pFilter, @Nullable final Viewport viewport, final IConnector connector, final int take) throws IOException {
         //for now we have to assume that ALConnector supports only SINGLE criteria search
+
+        final GeocacheFilter filter = pFilter == null ? GeocacheFilter.createEmpty() : pFilter;
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
         // Origin excludes Lab
@@ -237,20 +220,22 @@ final class ALApi {
             return new ArrayList<>();
         }
 
-        final Geopoint searchCoords;
-        final int radius;
-        final Integer daysSincePublish;
-
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
-        } else {
-            // by default, search around current position
-            searchCoords = LocationDataProvider.getInstance().currentGeo().getCoords();
-            radius = DEFAULT_RADIUS;
+        //search center and radius
+        Geopoint searchCoords = LocationDataProvider.getInstance().currentGeo().getCoords();
+        int radius = DEFAULT_RADIUS;
+        if (Viewport.isValid(viewport)) {
+            searchCoords = viewport.getCenter();
+            radius = (int) (viewport.bottomLeft.distanceTo(viewport.topRight) * 500); // we get diameter in km, need radius in m
+        } else  {
+            final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+            if (df != null) {
+                searchCoords = df.getEffectiveCoordinate();
+                radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
+            }
         }
 
+        //days since publish
+        final Integer daysSincePublish;
         final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
         if (dr != null) {
             daysSincePublish = dr.getDaysSinceMinDate() == 0 ? null : dr.getDaysSinceMinDate();
@@ -258,7 +243,7 @@ final class ALApi {
             daysSincePublish = null;
         }
 
-        return search(searchCoords, radius, daysSincePublish);
+        return search(searchCoords, radius, daysSincePublish, take);
     }
 
     @NonNull
@@ -360,6 +345,9 @@ final class ALApi {
             if (!Settings.isALCfoundStateManual()) {
                 cache.setFound(response.get("IsComplete").asBoolean());
             }
+            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
+            cache.setPersonalNote(personalNote, false);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -403,6 +391,9 @@ final class ALApi {
                 cache.setAlcMode(0);
             }
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
+            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
+            cache.setPersonalNote(personalNote, false);
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
@@ -427,6 +418,7 @@ final class ALApi {
 
                 wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
+                wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
                 if (Settings.isALCAdvanced()) {

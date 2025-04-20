@@ -2,13 +2,13 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -31,6 +31,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ImageViewCompat;
 
+import java.util.Date;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,8 +43,7 @@ public class GeoItemSelectorUtils {
     }
 
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
-
-        final TextParam cacheName = TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName()));
+        final TextParam cacheName = TextParam.text(TextUtils.coloredCacheText(context, cache, StringUtils.defaultIfBlank(cache.getName(), "")));
         final ImageParam cacheIcon = ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
@@ -52,6 +52,12 @@ public class GeoItemSelectorUtils {
         }
         if (cache.getTerrain() > 0.1f) {
             text.append(Formatter.SEPARATOR).append("T ").append(cache.getTerrain());
+        }
+        if (cache.isEventCache()) {
+            final Date d = cache.getHiddenDate();
+            if (d != null) {
+                text.append(Formatter.SEPARATOR).append(Formatter.formatShortDate(d.getTime()));
+            }
         }
 
         setViewValues(view, cacheName, TextParam.text(text), cacheIcon);
@@ -62,7 +68,7 @@ public class GeoItemSelectorUtils {
     public static View createWaypointItemView(final Context context, final Waypoint waypoint, final View view) {
 
         final Geocache parentCache = waypoint.getParentGeocache();
-        final TextParam waypointName = TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName());
+        final TextParam waypointName = TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, StringUtils.defaultIfBlank(waypoint.getName(), "")) : waypoint.getName());
         final ImageParam waypointIcon = ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
@@ -77,7 +83,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createIWaypointItemView(final Context context, final IWaypoint geoObject, final View view) {
+    public static View createIWaypointItemView(final Context context, final INamedGeoCoordinate geoObject, final View view) {
         if (geoObject instanceof Geocache) {
             return createGeocacheItemView(context, (Geocache) geoObject, view);
         }
@@ -89,12 +95,12 @@ public class GeoItemSelectorUtils {
 
     public static View createGeoItemView(final Context context, final GeoitemRef geoitemRef, final View view) {
         if (StringUtils.isNotEmpty(geoitemRef.getGeocode())) {
-            if (geoitemRef.getType() == CoordinatesType.CACHE) {
+            if (geoitemRef.getType() == CoordinateType.CACHE) {
                 final Geocache cache = DataStore.loadCache(geoitemRef.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     return createGeocacheItemView(context, cache, view);
                 }
-            } else if (geoitemRef.getType() == CoordinatesType.WAYPOINT) {
+            } else if (geoitemRef.getType() == CoordinateType.WAYPOINT) {
                 final Waypoint waypoint = DataStore.loadWaypoint(geoitemRef.getId());
                 if (waypoint != null) {
                     return createWaypointItemView(context, waypoint, view);
@@ -108,7 +114,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createRouteView(final Context context, final Route route, final View view) {
+    public static View createRouteView(final Route route, final View view) {
         final boolean isIndividualRoute = route.getName().isEmpty();
         final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
         final ImageParam routeIcon = ImageParam.id(R.drawable.ic_menu_route);
@@ -121,7 +127,7 @@ public class GeoItemSelectorUtils {
 
         //handle special cases
         if (item.isRoute()) {
-            return createRouteView(context, Objects.requireNonNull(item.getRoute()), view);
+            return createRouteView(Objects.requireNonNull(item.getRoute()), view);
         }
         if (item.isRouteItem()) {
             return createRouteItemView(context, Objects.requireNonNull(item.getRouteItem()), view);

@@ -9,15 +9,15 @@ import java.util.TreeMap;
 
 /**
  * A helper class / companion object to help maintaining a list which is divided into categories
- *
+ * <br>
  * "Categorized lists" mean flat lists where however some entries are category headers and the
  * following entries are content entries for this category. For example consider following list:
- *
+ * <br>
  * Colors, Blue, Red, Animals, Cat, Dog, Snake, Fruits, Apple, Orange
- *
+ * <br>
  * In this list, the entries "Colors", "Animals" and "Fruits" can be considered "category headers"
  * whereas all other entries are considered "content" (belonging to the category they are placed under)
- *
+ * <br>
  * For such lists, an instance of {@link CategorizedListHelper} helps with common tasks such as
  * * maintaining contained categories and their order
  * * tracks number of actual content entries

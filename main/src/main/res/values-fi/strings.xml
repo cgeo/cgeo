@@ -87,7 +87,27 @@
     <string name="wpnew_original">Alkuperäinen</string>
     <string name="wpnew_generated">Luotu</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Tuntematon</string>
+    <string name="cache_cat_bc_nature">Luonto</string>
+    <string name="cache_cat_bc_location">Sijainti</string>
+    <string name="cache_cat_bc_recommended">Suositeltu</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysteeri</string>
+    <string name="cache_cat_bc_hiking">Vaeltaminen</string>
+    <string name="cache_cat_bc_other">Muu</string>
+    <string name="cache_cat_desc_bc_nature">Erityisen luonnon ympäröimä</string>
+    <string name="cache_cat_desc_bc_location">Näyttää sinulle mahtavan paikan</string>
+    <string name="cache_cat_desc_bc_recommended">BetterCacherin tiimin suosittelema</string>
+    <string name="cache_cat_desc_bc_mystery">Poikkeuksellinen ja haastava tehtävä</string>
+    <string name="cache_cat_desc_bc_hiking">Tarjoaa erinomaisen vaelluksen</string>
+    <string name="cache_cat_desc_bc_other">Muut ominaisuudet - katso suosituslokia</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Ei mitään</string>
+    <string name="cache_tier_bc_blue">Sininen</string>
+    <string name="cache_tier_bc_silver">Hopea</string>
+    <string name="cache_tier_bc_gold">Kulta</string>
+    <string name="cache_tier_desc_bc_blue">Oletustaso listatuille kätköille</string>
+    <string name="cache_tier_desc_bc_gold">Erinomainen kätkö, BetterCacher tiimin suosittelema</string>
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
@@ -125,6 +145,12 @@
     <string name="log_save">Offline-tallennus</string>
     <string name="log_saving">Lähetetään merkintää…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
+    <string name="log_posting_problemreport">Lähetetään ongelmanraportointilokia…</string>
+    <string name="log_posting_deletelog">Poista loki…</string>
+    <string name="log_posting_image_create">Kuva %1$s/%2$s: tietojen lähettäminen…</string>
+    <string name="log_posting_image_edit">Kuva %1$s/%2$s: muutetaan tietoja…</string>
+    <string name="log_posting_image_delete">Poistetaan kuvaa %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Tallenna uusi lokin tila…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
@@ -162,6 +188,9 @@
     <string name="log_oc_team_comment">OC-tiimin kommentti</string>
     <string name="log_your_saved_log">Tallennetut lokisi</string>
     <string name="log_empty_logbook">Tämän kätkön lokikirja on tyhjä.</string>
+    <string name="log_image_selectfromstorage_tooltip">Valitse kuvat tallennustilasta</string>
+    <string name="log_image_camera_tooltip">Ota kuva kameralla</string>
+    <string name="log_image_selectfromown_tooltip">Valitse kuvat omista kuvista</string>
     <string name="log_problem_none">Ei ongelmaa</string>
     <string name="log_problem_needs_maintenance_label">Tarvitsee huoltoa</string>
     <string name="log_problem_needs_maintenance_text">Tämä kätköilijä raportoi tällä kätköllä olevasta ongelmasta.</string>
@@ -180,14 +209,12 @@
     <string name="log_image_info_scaled">skaalattu</string>
     <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
+    <string name="log_offline_delete_confirm">Haluatko varmasti poistaa tallennetun offline-lokin jonka lokityyppi on \'%1$s\' ja on kirjattu \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
     <!-- Contacts -->
     <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
     <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
     <!-- translation -->
-    <string name="translate">Käännä</string>
-    <string name="translate_to_sys_lang">Käännä kielelle %s</string>
-    <string name="translate_to_english">Käännä englanniksi</string>
     <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -215,7 +242,6 @@
     <string name="err_detail_cache">c:geo ei voi näyttää haluamaasi geokätköä. Onko se varmasti geokätkö?</string>
     <string name="err_detail_cache_find">c:geo ei löydä geokätköä</string>
     <string name="err_detail_cache_find_some">c:geo ei löydä kyseistä geokätköä.</string>
-    <string name="err_detail_cache_find_any">c:geo ei löydä yhtään geokätköä.</string>
     <string name="err_detail_no_spoiler">c:geo ei löytänyt kätkön spoilerikuvia.</string>
     <string name="err_detail_still_working">Työstetään vielä toista tehtävää.</string>
     <string name="err_detail_premium_log_found">Tämä kätkö on saatavilla vain geocaching.com premium-jäsenille. Tällöin kätkön tietoja ei voida näyttää.\n\n Mutta jos olet kuitenkin löytänyt tämän kätkön, voit kirjata löytösi täällä.</string>
@@ -277,7 +303,7 @@
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
     <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
-    <string name="info_log_post_failed_reason">Syy: %s</string>
+    <string name="info_log_delete_failed">Lokin poisto epäonnistui.</string>
     <string name="info_log_post_retry">Yritä uudelleen</string>
     <string name="info_log_post_save">Offline-tallennus</string>
     <string name="info_log_cleared">Loki tyhjennetty.</string>
@@ -290,6 +316,8 @@
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
     <string name="confirm_discard_changes">Hylätäänkö tallentamattomat muutokset?</string>
+    <string name="confirm_unsent_changes_title">Lähettämättömät muutokset</string>
+    <string name="confirm_unsent_changes">Hylätäänkö lähettämättömät muutokset?</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) kirjausta varten.</string>
     <string name="more_information">Lisätietoja</string>
@@ -321,9 +349,6 @@
     <string name="menu_helpers">Apuohjelmat</string>
     <string name="menu_settings">Asetukset</string>
     <string name="menu_backup">Varmuuskopioi / Palauta</string>
-    <string name="menu_update">Päivitä offline-tiedot</string>
-    <string name="menu_update_routingdata">Reititystiedot</string>
-    <string name="menu_update_mapdata">Karttatiedot</string>
     <string name="menu_history">Historia</string>
     <string name="menu_search_clipboard">Lataa geokoodi leikepöydältä</string>
     <string name="menu_history_longstring">Löytöhistoria</string>
@@ -378,13 +403,12 @@
     <string name="caches_sort_geocode">Geokoodi</string>
     <string name="caches_sort_rating">Arviointi</string>
     <string name="caches_sort_vote">Ääni (oma arviointi)</string>
-    <string name="caches_sort_inventory">Matkaajien määrä</string>
     <string name="caches_sort_date_hidden">Piilotuspäivä</string>
-    <string name="caches_sort_date_logged">Kirjauspäivä</string>
     <string name="caches_sort_finds">Löydöt</string>
     <string name="caches_sort_state">Tila</string>
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
+    <string name="caches_sort_lastfounddate">Viimeisin löytöpäivä</string>
     <string name="caches_select_mode">Valintatila</string>
     <string name="caches_select_next20">Valitse seuraavat 20 kätköä</string>
     <string name="caches_select_next100">Valitse seuraavat 100 kätköä</string>
@@ -398,6 +422,7 @@
     <string name="caches_append_to_route_selected">Lisää valittu yksittäiseen reittiin</string>
     <string name="caches_append_to_route_all">Lisää kaikki yksittäiseen reittiin</string>
     <string name="caches_appended_to_route">Kätköt lisätty reittiin</string>
+    <string name="waypoints_appended_to_route">Reittiin liitetyt reittipisteet</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_bookmarklist">Lisää kirjanmerkkilistaan</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
@@ -418,7 +443,6 @@
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
-    <string name="caches_show_attributes">Näytä attribuuttien yleisnäkymä</string>
     <string name="caches_set_cache_icon">Aseta kätkökuvake</string>
     <string name="caches_reset_cache_icons_title">Nollaa kätkökuvake</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
@@ -480,8 +504,10 @@
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
     <string name="cache_filter_difficulty_terrain">Vaikeus / Maasto</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Vaikeus / Maasto Kuvio</string>
     <string name="cache_filter_rating">Arvostelu</string>
     <string name="cache_filter_status">Tila</string>
+    <string name="cache_filter_individualroute">Yksittäinen reitti</string>
     <string name="cache_filter_attributes">Kätkön attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
@@ -494,6 +520,9 @@
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
     <string name="cache_filter_origin">Alkuperä</string>
     <string name="cache_filter_stored_since">Viimeisin yksityiskohtien päivitys</string>
+    <string name="cache_filter_category">BC Kategoria</string>
+    <string name="cache_filter_tier">BC Taso</string>
+    <string name="cache_filter_named_filter">Sisäkkäinen suodatin</string>
     <string name="cache_filter_logical_filter_group">Sisäkkäinen suodatin</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
@@ -560,6 +589,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Sisältää offline-lokin</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Korjatut Koordinaatit</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Sisältää käyttäjän määrittämiä reittipisteitä</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin. Jos haluat sulkea pois muita kätkötyyppejä, määritä sopiva kätkötyyppisuodatin.\n\nMysteeriä pidetään \'ratkaistuna\', jos sillä on joko muutetut koordinaatit tai kelvollinen koordinaateilla täytetty lopullinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
@@ -568,7 +598,9 @@
     <string name="cache_filter_status_exclude_active">Rajaa pois aktiiviset</string>
     <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
+    <string name="cache_filter_boolean_individualroute_contained">Sisältyy reitillä</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Sisällytä kätköt ilman D/T:tä</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Täytä gc.com:lla</string>
     <string name="cache_filter_nested_filter_modify">muokkaa</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Alisuodatin on tällä hetkellä tyhjä</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt</string>
@@ -660,6 +692,7 @@
     <string name="about_changelog_full">Luettelo kaikista muutoksista</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
+    <string name="about_contributors_recent">Avustajat (viimeisen 12 kuukauden aikana)</string>
     <string name="about_contributors_specialthanks">Erikoiskiitokset</string>
     <string name="about_contributors_specialthanksdetails">- kaikki kääntäjämme [Crowdin.net](https://crowdin.net/project/cgeo)-sivustolla!\n- kaikki ongelmien ilmoittajat\n- ja kaikki muut tukijat.\n</string>
     <string name="about_contributors_other">Muut avustajat</string>
@@ -731,6 +764,7 @@
     <string name="settings_title_map_style">Kartan tyyli</string>
     <string name="settings_hide_tileproviders_title">Piilota karttalähteet</string>
     <string name="settings_hide_tileproviders_summary">Jätä pois yksi tai useampi karttalähde kartan valinnasta</string>
+    <string name="settings_userDefinedTileProvider">Käyttäjän määrittämä palojen tarjoaja</string>
     <string name="settings_title_data_dir">Kätködatan sisältävä kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
     <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
@@ -745,9 +779,11 @@
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
-    <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
+    <string name="settings_category_locationcentersearch">Sijaintikohtaiset haut</string>
     <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
+    <string name="init_coordsearchlimit_title">Koordinaatti/Osoitteen hakuraja</string>
+    <string name="init_coordsearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään koordinaattien/osoitteen mukaan (0=rajoittamaton)</string>
     <string name="init_settings_description_unlimited">rajoittamaton</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_logging_other">Muut kirjausasetukset</string>
@@ -759,9 +795,10 @@
     <string name="settings_authorize">Valtuuta c:geo</string>
     <string name="settings_reauthorize">Päivitä tai poista valtuutus</string>
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
-    <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
+    <string name="settings_lc_found_state_title">Manuaalinen löydetty tila</string>
+    <string name="settings_lc_found_state_handling">Jos valittuna, älä automaattisesti saavuta oikeaa tilaa Adventure Lab- kätköille, sen sijaan anna kontrollit, joiden avulla käyttäjä määrittää manuaalisesti löydetyn tilan</string>
     <string name="lc_default_description">Tämä on geocaching.com:in Adventure Lab Cache. Seikkailuja voi pelata vain Groundspeakin Adventure Lab -sovelluksen kanssa. Napauta Adventure Lab-kuvaketta \"Yksityiskohdat\" -sivulla avataksesi tai asentaaksesi Adventure Lab -sovelluksen tätä seikkailua varten.\nJos et halua nähdä Adventure Lab -kätköjä kartalla ja haussa, voit poistaa ne käytöstä \"asetukset\" -valikossa - Palvelut - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -822,6 +859,7 @@
     <string name="init_signature_template_geocode">Geokoodi</string>
     <string name="init_ratingwanted">GCVote-arvostelu</string>
     <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
+    <string name="init_summary_bettercacher">Lataa kätkötaso ja -kategoriat BetterCacher.orgista</string>
     <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
     <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
     <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
@@ -834,6 +872,8 @@
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Vierailtu reittipiste puoliksi läpinäkyvä</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Merkitse vieraillut reittipisteet puoliksi läpinäkyvällä taustalla</string>
     <string name="init_brouterThreshold">Laske reitti</string>
     <string name="init_brouterThreshold_description">Suurin sallittu etäisyys, johon offline-reititys laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
@@ -851,6 +891,8 @@
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, symbolit kuten \'löytöhymiö\' tai \'korjatut koordinaatit\' -merkki näytetään isona kartalla kätkötyypin kuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_dtMarkerOnCacheIcon">D/T arvio kätkön kuvakkeissa</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Näytä merkki vaikeustasosta (vasemmalla) ja maastosta (oikealla) kätkön kuvakkeen oikeassa yläkulmassa (\"tallennettu\"-merkki siirretään keskelle).</string>
+    <string name="elevation_selected">Korkeus (kartta) valitussa sijainnissa</string>
+    <string name="elevation_difference">Korkeusero</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruudusta.</string>
     <string name="init_prevent_cache_note_merge">Korvaa henkilökohtainen muistiinpano</string>
@@ -859,8 +901,6 @@
     <string name="init_summary_customtabs_as_browser">Ulkoiset sivustot näytetään poistumatta c:geosta (mahdollista vain, jos Chrome on asennettu)</string>
     <string name="init_rot13_hint">Salaa vihje</string>
     <string name="init_summary_rot13_hint">Näytä vihjeteksti salattuna ROT-13:lla kunnes sitä napautetaan</string>
-    <string name="init_save_log_img">Tallenna kuvat</string>
-    <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
     <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
     <string name="init_cachelists">Kätkölistat</string>
@@ -965,8 +1005,6 @@
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
     <string name="settings_info_hillshading_title">Tietoa rinnevarjostuksesta</string>
-    <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nLähdetiedostot, jotka sisältävät korkeustiedon, on ladattava manuaalisesti - napauta tätä lähteiden saamiseksi - ja asetettava alla selostettuun kansioon.</string>
-    <string name="settings_hillshading_enable">Ota rinnevarjostus käyttöön</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -991,12 +1029,8 @@
     <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
-    <string name="init_circlefillcolor">Ympyräviivan leveys</string>
-    <string name="init_circlefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla ympyräviiva täytetään</string>
     <string name="init_accuracycirclecolor">Tarkkuusympyrän viivan väri</string>
     <string name="init_accuracycirclecolor_summary">Valitse tarkkuusympyrän viivan väri ja läpinäkyvyys. Tarkkuusympyrää käytetään sijaintisi signaalin tarkkuuden näyttämiseksi.</string>
-    <string name="init_accuracycirclefillcolor">Tarkkuusympyrän täyttöväri</string>
-    <string name="init_accuracycirclefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla tarkkuusympyrä täytetään</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
@@ -1030,13 +1064,7 @@
     <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
     <string name="init_rendertheme_folder">Karttateemat sisältävä kansio</string>
     <string name="init_mapshading_folder">Karttavarjostustiedostojen kansio</string>
-    <string name="init_mapShadingLinearity_title">Varjostuksen lineaarisuus</string>
-    <string name="init_mapShadingLinearity_description">Pienet arvot korostavat kontrastia jyrkillä rinteillä, mutta piilottavat muutokset loivissa, suuret arvot tekevät siitä lineaarisemman</string>
-    <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
-    <string name="init_mapShadingScale_description">Varjostuskerroksen läpikuultavuus näkymättömistä korkeampiin arvoihin tehostaen varjostusta, mutta se voi tuottaa virheitä</string>
     <string name="init_maintenance">Ylläpito</string>
-    <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
-    <string name="init_maintenance_directories">Poista orpotiedostot</string>
     <string name="init_maintenance_start">Huolto aloitettu</string>
     <string name="init_maintenance_ongoing">Tämä voi kestää jonkin aikaa…</string>
     <string name="init_maintenance_finished">Huolto suoritettu</string>
@@ -1079,7 +1107,6 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
-    <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
     <string name="localstorage_migrate_status_major">Versio %1$d</string>
     <!-- proximity notification -->
@@ -1198,6 +1225,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
     <string name="err_auth_geokrety_bad_password">Väärä käyttäjätunnus/salasana.</string>
     <string name="err_auth_geokrety_unknown">%1$s palasi: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d kätkö</item>
@@ -1239,7 +1267,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Tavaraluettelo</string>
     <string name="cache_log_image_default_title">Kuva</string>
     <string name="cache_personal_note">Omat merkinnät</string>
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
@@ -1307,8 +1334,6 @@
     <string name="cache_dialog_offline_save_message">Tallennetaan kätköä offline-käyttöä varten…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Poistetaan kätkö laitteen muistista…</string>
-    <string name="cache_dialog_refresh_title">Päivitä</string>
-    <string name="cache_dialog_refresh_message">Ladataan kätkön tietoja uudestaan…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
@@ -1330,7 +1355,6 @@
     <string name="no_browser_found">Selainta ei löytynyt</string>
     <string name="cache_menu_open_with">Avaa kohteessa…</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
-    <string name="cache_log_too_long">c:geo ei voinut lähettää lokiasi, koska se on liian pitkä. Kiitos kuitenkin siitä, että yrität kirjoittaa näin laajan lokin ;-)</string>
     <string name="cache_empty_log">c:geo ei voinut lähettää kirjaustasi, koska se on tyhjä.</string>
     <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
@@ -1440,11 +1464,9 @@
     <string name="context_map_remove_from_route_start">Poista alusta</string>
     <string name="context_map_remove_from_route_pos">Poista paikasta %d</string>
     <string name="context_map_remove_from_route_end">Poista lopusta</string>
-    <string name="context_map_show_coords">Näytä koordinaatit</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
-    <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
     <string name="internal_goto_targets_title">Kohteet joihin siirrytään</string>
@@ -1458,6 +1480,7 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
     <string name="cc_hint_minutes">minuuttia</string>
@@ -1530,6 +1553,9 @@
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_info">Suunta %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Suunnassa</string>
+    <string name="projection_type_bearing_hint_distance">Etäisyys</string>
     <!-- Variables -->
     <string name="variables_titletext">Käytä tätä sivua kirjataksesi alas arvot ja tehdäksesi tarvittavat laskelmat tälle kätkölle.</string>
     <string name="variables_scanlisting">Skannaa kuvaus</string>
@@ -1547,12 +1573,10 @@
     <string name="calccoord_guided_value">Arvo</string>
     <string name="calccoord_convert_to_plain">Muunna peruskoordinaattimuotoon</string>
     <string name="calccoord_plain_tools_title">Perustyökalut</string>
-    <string name="calccoord_remove_spaces">Poista välilyönnit</string>
     <string name="calccoord_paste_from_clipboard">Liitä leikepöydältä</string>
     <string name="calccoord_generate_title">Luo reittipisteet</string>
     <string name="calccoord_generate_showonmap">Näytä kartalla</string>
     <string name="calccoord_generate_waypointnameprefix">Luotu</string>
-    <string name="calccoord_generate_error_novarwithrange">Kelvollisia muuttujia väleillä ei löytynyt</string>
     <string name="calccoord_generate_error_novalidgeopoints">Mikään yhdistelmä ei palauttanut kelvollisia koordinaatteja</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinaatteja ei ole valittu</string>
     <string name="calccoord_migrate_title">Reittipisteen siirto</string>
@@ -1575,6 +1599,7 @@
     <string name="formula_function_if">Jos</string>
     <string name="formula_function_length">Merkkijonon pituus</string>
     <string name="formula_function_substring">Alamerkkijono</string>
+    <string name="formula_function_chars">Valitse Merkit</string>
     <string name="formula_function_rot13">Kierrä merkkejä 13:lla</string>
     <string name="formula_function_rot">Kierrä merkkejä</string>
     <string name="formula_function_checksum">Tarkistussumma</string>
@@ -1616,8 +1641,6 @@
     <string name="map_showwp_visited">Vierailtu</string>
     <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
     <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
     <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
     <string name="map_theme_select">Valitse kartan teema</string>
@@ -1640,43 +1663,38 @@
     <string name="map_show_other_title">Näytä muu:</string>
     <string name="map_settings_cache_filter_too_complex_title">Kätkösuodatin liian monimutkainen</string>
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
-    <string name="map_theme_legend">Teeman selite</string>
-    <string name="map_theme_legend_info">Napauta kategorian otsikkoa avataksesi/sulkeaksesi kategorian. Paina pitkään symbolia saadaksesi lyhyen informaation symbolista. Napauta infokuvaketta vieraillaksesi yksityiskohtaisessa selitteessä verkossa.</string>
     <string name="google_maps_style_default">Oletus</string>
     <string name="google_maps_style_night">Yö</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Suuri kontrasti</string>
     <string name="google_maps_style_auto">Laitteen teema (päivä/yö)</string>
+    <string name="google_maps_option_group_map">Karttavalinnat</string>
+    <string name="google_maps_option_show_traffic">Näytä liikenne</string>
+    <string name="google_maps_option_show_buildings">Näytä 3D-rakennukset</string>
+    <string name="google_maps_option_show_feature_theme">Näytä teeman ominaisuudet</string>
+    <string name="google_maps_option_show_feature_administrative_all">Näytä hallinoiva</string>
+    <string name="google_maps_option_show_feature_landscape_all">Näytä vaakataso</string>
+    <string name="google_maps_option_show_feature_poi_all">Näytä kiinnostavat kohteet (POI)</string>
+    <string name="google_maps_option_show_feature_road_all">Näytä tiet</string>
+    <string name="google_maps_option_show_feature_transit_all">Näytä siirtymä</string>
+    <string name="google_maps_option_show_feature_water_all">Näytä vesi</string>
     <!-- search -->
     <string name="geo_search_label">Etsi kätköjä lähistöllä</string>
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_bar_hint_settings">Hakuasetukset</string>
     <string name="search_coordinates">Koordinaatit</string>
-    <string name="search_coordinates_button">Hae koordinaattien avulla</string>
     <string name="search_address">Osoite</string>
-    <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">Geokoodi</string>
-    <string name="search_geo_button">Hae geokoodilla</string>
-    <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusana</string>
-    <string name="search_kw_prefill">Hakusana</string>
-    <string name="search_kw_button">Hae hakusanalla</string>
+    <string name="search_kw_disabled_hint">Poistettu käytöstä, koska geocaching.com ei tue sitä perusjäsenille</string>
     <string name="search_hbu">Piilottanut</string>
-    <string name="search_hbu_prefill">Omistaja</string>
-    <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_finder">Löytänyt</string>
-    <string name="search_finder_prefill">Löytäjä</string>
-    <string name="search_finder_button">Etsi löytäjän mukaan</string>
-    <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
-    <string name="search_tb_hint">Reissaajan koodi</string>
-    <string name="search_tb_button">Etsi reissaajia</string>
     <string name="search_destination">Avaa kohde c:geossa</string>
     <string name="add_target_to">Lisää kohde kohteeseen</string>
     <string name="search_address_started">Etsitään paikkoja</string>
     <string name="search_address_result">Löydetyt paikat</string>
-    <string name="search_own_caches">Etsi minun kätköni</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Kirjanmerkit</string>
     <string name="search_pocket_is_new">uusi</string>
@@ -1728,6 +1746,7 @@
     <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
     <string name="user_menu_send_message">Lähetä viesti</string>
     <string name="user_menu_send_email">Lähetä sähköposti</string>
+    <string name="user_menu_open_contact">Etsi yhteystiedoista</string>
     <string name="user_unknown">Tuntematon käyttäjä</string>
     <!-- navigation -->
     <string name="navigation">Navigointi</string>
@@ -1745,10 +1764,6 @@
     <string name="do_auto">Automaattinen</string>
     <string name="do_flat">Vaaka</string>
     <string name="do_upright">Pysty</string>
-    <!-- license -->
-    <string name="license">Lisenssi</string>
-    <string name="license_show">Näytä lisenssi</string>
-    <string name="license_dismiss">Hylkää</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
     <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
@@ -1756,11 +1771,9 @@
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
     <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, jäljitä reittisi, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
-    <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
-    <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
     <string name="helper_gcwizard_description">GC Wizard sisältää lukuisia työkaluja yksinkertaisiin salauksiin, geodeettiset ja tieteelliset laskelmat sekä satoja eri symbolisarjoja.</string>
@@ -1822,9 +1835,7 @@
     <string name="attribute_climbing_yes">Vaikea kiipeily</string>
     <string name="attribute_climbing_no">Ei vaikeaa kiipeilyä</string>
     <string name="attribute_wading_yes">Saattaa vaatia kahlausta</string>
-    <string name="attribute_wading_no">Ei vaadi kahlausta</string>
     <string name="attribute_swimming_yes">Saattaa vaatia uintia</string>
-    <string name="attribute_swimming_no">Ei vaadi uintia</string>
     <string name="attribute_available_yes">Löydettävissä kaikkina aikoina</string>
     <string name="attribute_available_no">Ei saatavilla kaikkina aikoina</string>
     <string name="attribute_night_yes">Suositellaan haettavaksi yöllä</string>
@@ -1834,9 +1845,7 @@
     <string name="attribute_stealth_yes">Vaatii huomaamatonta toimintaa</string>
     <string name="attribute_stealth_no">Ei vaadi huomaamatonta toimintaa</string>
     <string name="attribute_firstaid_yes">Tarvitsee huoltoa</string>
-    <string name="attribute_firstaid_no">Ei tarvitse huoltoa</string>
     <string name="attribute_cow_yes">Varo karjaa</string>
-    <string name="attribute_cow_no">Ei karjaa</string>
     <string name="attribute_field_puzzle_yes">Kenttämysteeri</string>
     <string name="attribute_field_puzzle_no">Ei kenttämysteeri</string>
     <string name="attribute_nightcache_yes">Yökätkö</string>
@@ -1864,49 +1873,31 @@
     <string name="attribute_partnership_yes">Tiimityökätkö</string>
     <string name="attribute_partnership_no">Ei tiimityökätkö</string>
     <string name="attribute_fee_yes">Pääsy- tai pysäköintimaksu</string>
-    <string name="attribute_fee_no">Ei pääsy- tai pysäköintimaksua</string>
     <string name="attribute_rappelling_yes">Vaatii kiipeilyvälineitä</string>
-    <string name="attribute_rappelling_no">Ei vaadi kiipeilyvälineitä</string>
     <string name="attribute_boat_yes">Tarvitaan vene</string>
-    <string name="attribute_boat_no">Ei tarvita venettä</string>
     <string name="attribute_scuba_yes">Vaatii sukellusvälineitä</string>
-    <string name="attribute_scuba_no">Ei vaadi sukellusvälineitä</string>
     <string name="attribute_flashlight_yes">Tarvitaan taskulamppu</string>
-    <string name="attribute_flashlight_no">Ei tarvita taskulamppua</string>
     <string name="attribute_uv_yes">UV-valo tarvitaan</string>
-    <string name="attribute_uv_no">UV-valoa ei tarvita</string>
     <string name="attribute_snowshoes_yes">Tarvitaan lumikengät</string>
-    <string name="attribute_snowshoes_no">Ei tarvita lumikenkiä</string>
     <string name="attribute_skiis_yes">Vaatii sukset</string>
-    <string name="attribute_skiis_no">Ei vaadi suksia</string>
     <string name="attribute_s_tool_yes">Tarvitaan erikoistyökaluja</string>
-    <string name="attribute_s_tool_no">Erikoistyökaluja ei tarvita</string>
     <string name="attribute_wirelessbeacon_yes">Langaton lähetin</string>
-    <string name="attribute_wirelessbeacon_no">Ei langatonta lähetintä</string>
     <string name="attribute_treeclimbing_yes">Vaatii puuhun kiipeämistä</string>
     <string name="attribute_treeclimbing_no">Ei vaadi puuhun kiipeämistä</string>
     <string name="attribute_poisonoak_yes">Myrkyllisiä kasveja</string>
     <string name="attribute_poisonoak_no">Ei myrkyllisiä kasveja</string>
     <string name="attribute_dangerousanimals_yes">Vaarallisia eläimiä</string>
-    <string name="attribute_dangerousanimals_no">Ei vaarallisia eläimiä</string>
     <string name="attribute_ticks_yes">Punkkeja</string>
-    <string name="attribute_ticks_no">Ei punkkeja</string>
     <string name="attribute_mine_yes">Hylättyjä kaivoksia</string>
-    <string name="attribute_mine_no">Ei hylättyjä kaivoksia</string>
     <string name="attribute_cliff_yes">Jyrkänne / putoavia kiviä</string>
-    <string name="attribute_cliff_no">Ei jyrkännettä / putoavia kiviä</string>
     <string name="attribute_hunting_yes">Metsästysalue</string>
-    <string name="attribute_hunting_no">Ei metsästystä</string>
     <string name="attribute_danger_yes">Vaarallinen alue</string>
-    <string name="attribute_danger_no">Vaaraton alue</string>
     <string name="attribute_thorn_yes">Piikkejä</string>
-    <string name="attribute_thorn_no">Ei piikkejä</string>
     <string name="attribute_wheelchair_yes">Pyörätuolilla saavutettavissa</string>
     <string name="attribute_wheelchair_no">Ei saavutettavissa pyörätuolilla</string>
     <string name="attribute_parking_yes">Pysäköintimahdollisuus</string>
     <string name="attribute_parking_no">Ei pysäköintimahdollisuutta</string>
     <string name="attribute_public_yes">Pääsee julkisilla kulkuvälineillä</string>
-    <string name="attribute_public_no">Ei julkista liikennettä</string>
     <string name="attribute_water_yes">Juomavettä lähistöllä</string>
     <string name="attribute_water_no">Ei juomavettä lähistöllä</string>
     <string name="attribute_restrooms_yes">Yleinen WC lähistöllä</string>
@@ -2018,13 +2009,9 @@
     <string name="attribute_offset_cache_yes">Monivaiheinen kätkö</string>
     <string name="attribute_offset_cache_no">Ei ole monivaiheinen kätkö</string>
     <string name="attribute_bonuscache_yes">Bonuskätkö</string>
-    <string name="attribute_bonuscache_no">Ei bonuskätkö</string>
     <string name="attribute_powertrail_yes">Osa powertrailia</string>
-    <string name="attribute_powertrail_no">Ei osa powertrailia</string>
     <string name="attribute_challengecache_yes">Haastekätkö</string>
-    <string name="attribute_challengecache_no">Ei haastekätkö</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com:in tarkistin saatavilla</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com:in tarkistin ei saatavilla</string>
     <string name="attribute_handicaching_yes">Arvosteltu Handicaching.comissa</string>
     <string name="attribute_handicaching_no">Ei arvosteltu Handicaching.comissa</string>
     <string name="attribute_munzee_yes">Sisältää Munzeen</string>
@@ -2106,10 +2093,6 @@
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
     </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">%d päivässä</item>
-        <item quantity="other">%d päivässä</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>
@@ -2149,8 +2132,8 @@
         <item quantity="other">Suosittele tätä kätköä (%d jäljellä)</item>
     </plurals>
     <plurals name="fav_points_remaining">
-        <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
-        <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
+        <item quantity="one">Lisää tämä kätkö suosikkeihin (%d jäljellä)</item>
+        <item quantity="other">Lisää tämä kätkö suosikkeihin (%d jäljellä)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Asetetaan kätkökuvakkeita</string>
     <plurals name="command_set_cache_icons_result">
@@ -2180,6 +2163,8 @@
     <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
+    <string name="permission_post_notifications_explanation">c:geo käyttää ilmoituksia ilmoittaakseen sinulle latauksista ja kätköistä (jos aktivoitu)</string>
+    <string name="permission_post_notifications_explanation_title">Ilmoituksien käyttöoikeus</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
@@ -2211,12 +2196,10 @@
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
     <string name="map_refresh_individual_route">Päivitä</string>
-    <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
     <string name="map_disable_autotarget_individual_route">\"Aseta reitin alku kohteeksi\" pois päältä</string>
-    <string name="map_clear_manual_targets">Tyhjennä manuaaliset kohteet</string>
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
     <string name="map_clear_individual_route_confirm">Haluatko poistaa kaikki kätköt / reittipisteet yksittäiseltä reittiltäsi?</string>
@@ -2239,17 +2222,18 @@
     <string name="running_route_optimizations">Reitin optimointi</string>
     <string name="route_optimization_finished">Reitin optimointi valmis</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Muuta oikeuksia</string>
+    <string name="changed_permissions_info">Android on ottanut käyttöön uuden luvan vaaditaan c:geo. Avaa c:geon konfiguraationäkymä tarkistaaksesi tämän oikeuden ja saadaksesi tarkempia tietoja. Voit joko avata näkymän nyt tai suorittaa sen myöhemmin c:geon aloitusruudulla.\n\nHaluatko avata konfiguraationäkymän nyt?</string>
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
+    <string name="load_track_error_named">Virhe ladattaessa jälkeä/reittiä: \"%s\"</string>
     <string name="map_clear_track">Tyhjennä reitti/jälki</string>
     <string name="map_clear_track_confirm">Poistetaanko reitti/jälki \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
     <string name="routes_tracks_color">Valitse väri</string>
-    <string name="unload_route_track">Tyhjennä reitti/jälki</string>
-    <string name="route">Reitti</string>
     <string name="track">Jälki</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -2300,16 +2284,11 @@
     <string name="receivedownload_integritycheck_failed">Eheyden tarkistus epäonnistui</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
-    <string name="delete_offlinemap_title">Poista offline-kartta</string>
-    <string name="no_deletable_offlinemaps">Ei poistettavia offline-karttoja</string>
-    <string name="delete_file_confirmation">Poista %s?</string>
-    <string name="file_deleted_info">%s poistettu</string>
     <string name="download_title">Lataa tiedosto</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
     <string name="downloadmap_filename">Ladataan %s</string>
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
-    <string name="download_none_selected">Ladattavia tiedostoja ei ole valittu</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
     <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
@@ -2326,18 +2305,15 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
-    <string name="downloadmap_checking">Tarkistetaan saatavilla olevia reititystietoja…</string>
     <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
     <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>
     <string name="downloadmap_retrieving_directory_data">Haetaan kansion tietoja…</string>
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
-    <string name="downloadtile_title">Puuttuvat reititystiedot</string>
     <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
     <string name="check_tiles_menu">Tarkista puuttuvat reititystiedot</string>
     <string name="check_tiles_found">Reititystiedot ovat jo olemassa</string>
     <string name="check_tiles_missing">Puuttuvat reititystiedot löytyivät:</string>
-    <string name="check_tiles_unsupported">Varoitus: Reititystietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
     <string name="tileupdate_info">Napauta tästä tarkistaaksesi ladatun reititysdatan päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="mapupdate_info">Napauta tästä tarkistaaksesi kartta- ja teematiedostojen päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
@@ -2405,6 +2381,7 @@
     <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s kansion synkronointi päättyi %2$s jälkeen, %3$d %4$s :sta tarvitusta synkronoinnista</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>
@@ -2418,342 +2395,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimoi</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Alueet</string>
-    <string name="rtl_fell_meadow">tunturi / niitty</string>
-    <string name="rtl_heath">nummi</string>
-    <string name="rtl_marsh">suo</string>
-    <string name="rtl_rock">kivi</string>
-    <string name="rtl_scree">kivikko</string>
-    <string name="rtl_scrub">pensaikko</string>
-    <string name="rtl_wood_mixed">puu (sekalainen)</string>
-    <string name="rtl_wood_coniferous">puu (havupuu)</string>
-    <string name="rtl_wood_deciduous">puu (lehtipuu)</string>
-    <string name="rtl_glacier">jäätikkö</string>
-    <string name="rtl_grass">ruoho</string>
-    <string name="rtl_farmland">viljelysmaa</string>
-    <string name="rtl_orchard">hedelmätarha</string>
-    <string name="rtl_vineyard">viinitarha</string>
-    <string name="rtl_water">vesi</string>
-    <string name="rtl_water_intermittent">vesi (ajoittain)</string>
-    <string name="rtl_military">sotilaallinen</string>
-    <string name="rtl_nature_reserve">luonnonsuojelualue</string>
-    <string name="rtl_nature_reserve_strict">luonnonsuojelualue (tiukka)</string>
-    <string name="rtl_cliff">kallio</string>
-    <string name="rtl_ridge">harjanne</string>
-    <string name="rtl_reef">riutta</string>
-    <string name="rtl_dyke">pato</string>
-    <string name="rtl_embankment">pengerrys</string>
-    <string name="rtl_beach">ranta</string>
-    <string name="rtl_beach_gravel">soraranta</string>
-    <string name="rtl_spring">lähde</string>
-    <string name="rtl_powerline">voimalinja</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_category_roads_paths">Tiet &amp; polut</string>
-    <string name="rtl_paved_path">päällystetty polku</string>
-    <string name="rtl_paved_path_gravel">päällystetty polku (sora)</string>
-    <string name="rtl_unpaved_path">päällystämätön polku</string>
-    <string name="rtl_unpaved_path_partly_grown">päällystämätön polku (osittainen kasvillisuus)</string>
-    <string name="rtl_unpaved_path_grown">päällystämätön polku (kasvillisuus)</string>
-    <string name="rtl_surface_unknown">pinta tuntematon</string>
-    <string name="rtl_unpaved_footpath">päällystämätön kävelytie</string>
-    <string name="rtl_paved_footpath">päällystetty kävelytie</string>
-    <string name="rtl_bridleway">ratsastuspolku</string>
-    <string name="rtl_access_destination">pääsy (määräpaikka)</string>
-    <string name="rtl_access_private">pääsy (yksityinen)</string>
-    <string name="rtl_access_agricultural">rajoitettu maatalous- ja metsäliikenteeseen</string>
-    <string name="rtl_access_no">pääsy (ei)</string>
-    <string name="rtl_cycleway">pyörätie</string>
-    <string name="rtl_cycleway_steep">pyörätie (jyrkkä)</string>
-    <string name="rtl_cycleway_paved">pyörätie (päällystetty)</string>
-    <string name="rtl_paved_smooth">päällystetty (sileä)</string>
-    <string name="rtl_paved_rough">päällystetty (karkea)</string>
-    <string name="rtl_surface_compacted">pinta tiivistynyt</string>
-    <string name="rtl_surface_gravel">pintasora</string>
-    <string name="rtl_surface_raw">pinta raaka</string>
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <string name="rtl_category_walking_cycling_climbing">Kävely, Pyöräily, Kiipeily</string>
-    <string name="rtl_hiking_T1">vaellus T1</string>
-    <string name="rtl_hiking_T2">vaellus T2</string>
-    <string name="rtl_hiking_T23">vaellus T2/T3</string>
-    <string name="rtl_hiking_T3">vaellus T3</string>
-    <string name="rtl_hiking_T4">vaellus T4</string>
-    <string name="rtl_hiking_T45">vaellus T4/T5</string>
-    <string name="rtl_hiking_T5">vaellus T5</string>
-    <string name="rtl_hiking_T6">vaellus T6</string>
-    <string name="rtl_mtb_S0">maastopyörä S0</string>
-    <string name="rtl_mtb_S1">maastopyörä S1</string>
-    <string name="rtl_mtb_S2">maastopyörä S2</string>
-    <string name="rtl_mtb_S3">maastopyörä S3</string>
-    <string name="rtl_mtb_S4">maastopyörä S4</string>
-    <string name="rtl_mtb_S56">maastopyörä S5/6</string>
-    <string name="rtl_uphill15">ylämäki -15%</string>
-    <string name="rtl_uphill20">ylämäki -20%</string>
-    <string name="rtl_uphill25">ylämäki -25%</string>
-    <string name="rtl_uphill30">ylämäki -30%</string>
-    <string name="rtl_uphill40">ylämäki -40%</string>
-    <string name="rtl_uphill_too_steep">liian jyrkkä ylämäki</string>
-    <string name="rtl_security_rope">turvallisuus: köysi</string>
-    <string name="rtl_security_rungs">turvallisuus: askelmat</string>
-    <string name="rtl_security_ladder">turvallisuus: tikkaat</string>
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_category_poi_symbols">POI / symbolit</string>
-    <string name="rtl_bench">penkki</string>
-    <string name="rtl_cairn">kivikasa</string>
-    <string name="rtl_drinking_water">juomavesi</string>
-    <string name="rtl_guidepost">tienvitta</string>
-    <string name="rtl_info_board">infotaulu</string>
-    <string name="rtl_info_office">infotoimisto</string>
-    <string name="rtl_info_terminal">infopääte</string>
-    <string name="rtl_peak">huippu</string>
-    <string name="rtl_peak_cross">huippuristi</string>
-    <string name="rtl_picnic_site">piknikpaikka</string>
-    <string name="rtl_playground">leikkikenttä</string>
-    <string name="rtl_playground_private">yksityinen leikkikenttä</string>
-    <string name="rtl_recycling">kierrätys</string>
-    <string name="rtl_shelter">katos</string>
-    <string name="rtl_shelter_picnic">piknikkatos</string>
-    <string name="rtl_shelter_rock">kivisuoja</string>
-    <string name="rtl_telephone">puhelin</string>
-    <string name="rtl_toilets">käymälät</string>
-    <string name="rtl_volcano">tulivuori</string>
-    <string name="rtl_adit_disused">käytöstä poistettu kaivoksen sisäänkäynti</string>
-    <string name="rtl_archaeological">arkeologinen</string>
-    <string name="rtl_artwork">taideteos</string>
-    <string name="rtl_attraction">nähtävyys</string>
-    <string name="rtl_boundary_stone">raja (kivi)</string>
-    <string name="rtl_bunker_disused">bunkkeri (käytöstä poistettu)</string>
-    <string name="rtl_castle">linna</string>
-    <string name="rtl_cinema">elokuvateatteri</string>
-    <string name="rtl_cross">risti</string>
-    <string name="rtl_fountain">suihkulähde</string>
-    <string name="rtl_memorial">muistomerkki</string>
-    <string name="rtl_memorial_plaque">muistolaatta</string>
-    <string name="rtl_memorial_statue">muistopatsas</string>
-    <string name="rtl_memorial_stolperstein">muistokompastuskivi</string>
-    <string name="rtl_memorial_stone">muistokivi</string>
-    <string name="rtl_memorial_war">sotamuistomerkki</string>
-    <string name="rtl_monument">monumentti</string>
-    <string name="rtl_museum">museo</string>
-    <string name="rtl_ruins">rauniot</string>
-    <string name="rtl_stone_historic">historiallinen kivi</string>
-    <string name="rtl_theatre">teatteri</string>
-    <string name="rtl_water_well">vesikaivo</string>
-    <string name="rtl_wayside_cross">tienvarsiristi</string>
-    <string name="rtl_wayside_shrine">tienvarsipyhäkkö</string>
-    <string name="rtl_zoo">eläintarha</string>
-    <string name="rtl_library">kirjasto</string>
-    <string name="rtl_arts_centre">taidekeskus</string>
-    <string name="rtl_casino">kasino</string>
-    <string name="rtl_nightclub">yökerho</string>
-    <string name="rtl_community_centre">monitoimitalo</string>
-    <string name="rtl_social_facility">sosiaalilaitos</string>
-    <string name="rtl_townhall">kaupungintalo</string>
-    <string name="rtl_courthouse">oikeustalo</string>
-    <string name="rtl_beach_resort">rantalomakohde</string>
-    <string name="rtl_cliff_diving">kalliosukellus</string>
-    <string name="rtl_climbing">kiipeily</string>
-    <string name="rtl_climbing_adventure">kiipeilyseikkailu</string>
-    <string name="rtl_free_flying">vapaalento</string>
-    <string name="rtl_golf">golf</string>
-    <string name="rtl_gym">kuntosali</string>
-    <string name="rtl_miniature_golf">minigolf</string>
-    <string name="rtl_roller_skating">rullaluistelu</string>
-    <string name="rtl_shooting">ammunta</string>
-    <string name="rtl_skateboard">rullalautailu</string>
-    <string name="rtl_slipway">veneenlaskupaikka</string>
-    <string name="rtl_soccer">jalkapallo</string>
-    <string name="rtl_stadium">stadion</string>
-    <string name="rtl_swimming_area">uima-alue</string>
-    <string name="rtl_swimming_outdoor">ulkouinti</string>
-    <string name="rtl_tennis">tennis</string>
-    <string name="rtl_via_ferrata">via ferrata</string>
-    <string name="rtl_water_park">vesipuisto</string>
-    <string name="rtl_aerialway_station">köysirata-asema</string>
-    <string name="rtl_airport">lentokenttä</string>
-    <string name="rtl_cable_car">köysirata</string>
-    <string name="rtl_chair_lift">tuolihissi</string>
-    <string name="rtl_drag_lift">vetohissi</string>
-    <string name="rtl_gondola">gondoli</string>
-    <string name="rtl_goods_lift">tavarahissi</string>
-    <string name="rtl_helipad">helikopterikenttä</string>
-    <string name="rtl_rail_funicular">funikulaarirata</string>
-    <string name="rtl_parking">pysäköinti</string>
-    <string name="rtl_parking_private">yksityinen pysäköinti</string>
-    <string name="rtl_bicycle_parking">polkupyöräpysäköinti</string>
-    <string name="rtl_bicycle_rental">polkupyörävuokraus</string>
-    <string name="rtl_bicycle_shop">polkupyöräkauppa</string>
-    <string name="rtl_car_rental">autonvuokraus</string>
-    <string name="rtl_car_sharing">yhteiskäyttöauto</string>
-    <string name="rtl_car_wash">autopesula</string>
-    <string name="rtl_car_shop">autokauppa</string>
-    <string name="rtl_fuel">polttoaine</string>
-    <string name="rtl_ferry_terminal">lauttaterminaali</string>
-    <string name="rtl_alpine_hut">alppimaja</string>
-    <string name="rtl_alpine_hut_private">yksityinen alppimaja</string>
-    <string name="rtl_alpine_hut_winter">talvialppimaja</string>
-    <string name="rtl_apartment">asunto</string>
-    <string name="rtl_camp_site">leirintäalue</string>
-    <string name="rtl_caravan_site">asuntovaunualue</string>
-    <string name="rtl_chalet">lomamökki</string>
-    <string name="rtl_hostel">hostelli</string>
-    <string name="rtl_hotel">hotelli</string>
-    <string name="rtl_shelter_basic_hut">perussuojakota</string>
-    <string name="rtl_wilderness_hut">erämaja</string>
-    <string name="rtl_wilderness_hut_private">yksityinen erämaja</string>
-    <string name="rtl_bar">baari</string>
-    <string name="rtl_biergarten">olutpuutarha</string>
-    <string name="rtl_cafe">kahvila</string>
-    <string name="rtl_fastfood">pikaruoka</string>
-    <string name="rtl_ice_cream">jäätelö</string>
-    <string name="rtl_pub">pubi</string>
-    <string name="rtl_restaurant">ravintola</string>
-    <string name="rtl_bbq">BBQ</string>
-    <string name="rtl_water_point">vesipiste</string>
-    <string name="rtl_atm">pankkiautomaatti</string>
-    <string name="rtl_bakery">leipomo</string>
-    <string name="rtl_bank">pankki</string>
-    <string name="rtl_beverages">juomat</string>
-    <string name="rtl_books">kirjat</string>
-    <string name="rtl_butcher">teurastaja</string>
-    <string name="rtl_chemist">kemisti</string>
-    <string name="rtl_convenience">kioski</string>
-    <string name="rtl_doityourself">tee-se-itse</string>
-    <string name="rtl_farm_shop">maatilan kauppa</string>
-    <string name="rtl_laundry">pyykki</string>
-    <string name="rtl_mall">ostoskeskus</string>
-    <string name="rtl_marketplace">markkinapaikka</string>
-    <string name="rtl_organic">luomu</string>
-    <string name="rtl_postbox">postilaatikko</string>
-    <string name="rtl_postoffice">postitoimisto</string>
-    <string name="rtl_sports_shop">urheilukauppa</string>
-    <string name="rtl_supermarket">supermarketti</string>
-    <string name="rtl_travel_agency">matkatoimisto</string>
-    <string name="rtl_defibrillator">defibrillaattori</string>
-    <string name="rtl_doctors">lääkärit</string>
-    <string name="rtl_embassy">suurlähetystö</string>
-    <string name="rtl_emergency_phone">hätäpuhelin</string>
-    <string name="rtl_firebrigade">palokunta</string>
-    <string name="rtl_emergency_access_point">hätätilanteen yhteyspiste</string>
-    <string name="rtl_hospital">sairaala</string>
-    <string name="rtl_clinic">klinikka</string>
-    <string name="rtl_pharmacy">apteekki</string>
-    <string name="rtl_police">poliisi</string>
-    <string name="rtl_emergency_fire_hydrant">paloposti</string>
-    <string name="rtl_emergency_suction_point">hätäimupiste</string>
-    <string name="rtl_adit">kaivoksen sisäänkäynti</string>
-    <string name="rtl_petroleum_well">öljykaivo</string>
-    <string name="rtl_power_coal">voimala (hiili)</string>
-    <string name="rtl_power_gas">voimala (kaasu)</string>
-    <string name="rtl_power_nuclear">voimala (ydin)</string>
-    <string name="rtl_power_water">voimala (vesi)</string>
-    <string name="rtl_power_wind">voimala (tuuli)</string>
-    <string name="rtl_wastewater_plant">jätevesilaitos</string>
-    <string name="rtl_water_works">vesilaitos</string>
-    <string name="rtl_watermill">vesimylly</string>
-    <string name="rtl_weir">pato</string>
-    <string name="rtl_windmill">tuulimylly</string>
-    <string name="rtl_windpump">tuulipumppu</string>
-    <string name="rtl_bunker">bunkkeri</string>
-    <string name="rtl_farmyard">maatilapiha</string>
-    <string name="rtl_hunting_stand">metsästyspaikka</string>
-    <string name="rtl_lighthouse">majakka</string>
-    <string name="rtl_tower_communication">viestintätorni</string>
-    <string name="rtl_tower_observation">havaintotorni</string>
-    <string name="rtl_kindergarten">päiväkoti</string>
-    <string name="rtl_school">koulu</string>
-    <string name="rtl_university">yliopisto</string>
-    <string name="rtl_college">college</string>
-    <string name="rtl_buddhist">buddhalainen</string>
-    <string name="rtl_church">kirkko</string>
-    <string name="rtl_hindu">hindu</string>
-    <string name="rtl_mosque">moskeija</string>
-    <string name="rtl_place_of_worship">palvontapaikka</string>
-    <string name="rtl_shinto">shinto</string>
-    <string name="rtl_synagogue">synagoga</string>
-    <string name="rtl_pow">palvontapaikka</string>
-    <string name="rtl_pow_christian">kristillinen palvontapaikka</string>
-    <string name="rtl_pow_jewish">juutalaisten palvontapaikka</string>
-    <string name="rtl_pow_muslim">muslimien palvontapaikka</string>
-    <string name="rtl_block">lohko</string>
-    <string name="rtl_bollard">pollari</string>
-    <string name="rtl_border_control">rajavalvonta</string>
-    <string name="rtl_bridge_movable">liikkuva silta</string>
-    <string name="rtl_cave_entrance">luolan sisäänkäynti</string>
-    <string name="rtl_cycle_barrier">pyöräeste</string>
-    <string name="rtl_elevator">hissi</string>
-    <string name="rtl_ford">kahluupaikka</string>
-    <string name="rtl_ford_small">pieni kahluupaikka</string>
-    <string name="rtl_gate">portti</string>
-    <string name="rtl_gate_private">yksityinen portti</string>
-    <string name="rtl_geyser">geyser</string>
-    <string name="rtl_hot_spring">kuuma lähde</string>
-    <string name="rtl_kissing_gate">kissing-portti</string>
-    <string name="rtl_ladder">tikkaat</string>
-    <string name="rtl_lift_gate">nostoportti</string>
-    <string name="rtl_log">tukki</string>
-    <string name="rtl_oneway">yksisuuntainen</string>
-    <string name="rtl_oneway_cycle">yksisuuntainen (pyörä)</string>
-    <string name="rtl_oneway_cycle_rev">yksisuuntainen (pyörä, käänteinen)</string>
-    <string name="rtl_oneway_rev">yksisuuntainen (käänteinen)</string>
-    <string name="rtl_peak_small">pieni huippu</string>
-    <string name="rtl_rapids">koski</string>
-    <string name="rtl_rungs">askelmat</string>
-    <string name="rtl_saddle_0">satula 0°</string>
-    <string name="rtl_saddle_45">satula 45°</string>
-    <string name="rtl_saddle_90">satula 90°</string>
-    <string name="rtl_saddle_135">satula 135°</string>
-    <string name="rtl_safety_rope">turvaköysi</string>
-    <string name="rtl_stone">kivi</string>
-    <string name="rtl_traffic_signal">liikennemerkki</string>
-    <string name="rtl_turnstile">kääntöportti</string>
-    <string name="rtl_viewpoint">näköalapaikka</string>
-    <string name="rtl_waterfall">vesiputous</string>
-    <string name="rtl_alp">alppi</string>
-    <string name="rtl_wetland">kosteikko</string>
-    <string name="rtl_moor">nummi</string>
-    <string name="rtl_coppice">metsikkö</string>
-    <string name="rtl_plantation">istutus</string>
-    <string name="rtl_reed">ruoko</string>
-    <string name="rtl_mud">muta</string>
-    <string name="rtl_mudflat">mutatasanko</string>
-    <string name="rtl_cemetery">hautausmaa</string>
-    <string name="rtl_cemetery_christian">kristillinen hautausmaa</string>
-    <string name="rtl_cemetery_jewish">juutalainen hautausmaa</string>
-    <string name="rtl_cemetery_muslim">muslimien hautausmaa</string>
-    <string name="rtl_pedestrian_area">jalankulkijoiden alue</string>
-    <string name="rtl_trading">kaupankäynti</string>
-    <string name="rtl_parking_restricted">rajoitettu pysäköinti</string>
-    <string name="rtl_prison">vankila</string>
-    <string name="rtl_corral">lehmihaka</string>
-    <string name="rtl_riding_range">ratsastusalue</string>
-    <string name="rtl_allotment">siirtolapuutarha</string>
-    <string name="rtl_retention_reservoir">säilytysallas</string>
-    <string name="rtl_dump">kaatopaikka</string>
-    <string name="rtl_driving_range">lyöntiharjoitusalue</string>
-    <string name="rtl_ruin">rauniot</string>
-    <string name="rtl_saline">suolakko</string>
-    <string name="rtl_freeway">moottoritie</string>
-    <string name="rtl_freeway_similar">moottoritien kaltainen</string>
-    <string name="rtl_interstate">osavaltioiden välinen / tie</string>
-    <string name="rtl_secondary_road">toissijainen tie</string>
-    <string name="rtl_district_road">alue / tertiäärinen tie</string>
-    <string name="rtl_side_street">sivukatu</string>
-    <string name="rtl_residential_road">asuintie</string>
-    <string name="rtl_access_road">pääsytie</string>
-    <string name="rtl_traffic_calmed_area">liikenteeltä rauhoitettu alue</string>
-    <string name="rtl_pedestrian_road">kävelytie</string>
-    <string name="rtl_tunnel">tunneli</string>
-    <string name="rtl_bridge">silta</string>
-    <string name="rtl_railway">rautatie</string>
-    <string name="rtl_path_foot">yleinen jalkakäytävä</string>
-    <string name="rtl_path_bicycle">yleinen pyörätie</string>
-    <string name="rtl_path_combined_bicycle_foot">yhdistetty pyörätie ja jalkakäytävä</string>
-    <string name="rtl_path_narrow">yleinen tie tai polku, ei tarpeeksi leveä autoille</string>
-    <string name="rtl_path_badly_visible">huonosti näkyvä polku</string>
-    <string name="rtl_path_quality1">laatu 1 (päällystetty: asfaltti, …)</string>
-    <string name="rtl_path_quality23">laatu 2/3 (päällystetty: sora, korjattu, …)</string>
-    <string name="rtl_path_quality45">laatu 4/5 (päällystämätön)</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Hymiö</string>
     <string name="smiley_big_smile">Leveä hymy</string>
@@ -2782,4 +2423,7 @@
         <item quantity="one">%d lukematon viesti viestikeskuksessa</item>
         <item quantity="other">%d lukematonta viestiä viestikeskuksessa</item>
     </plurals>
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

@@ -1,15 +1,11 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -34,9 +30,9 @@ public class Image implements Parcelable {
 
     public enum ImageCategory {
         UNCATEGORIZED(R.string.image_category_uncategorized),
+        OWN(R.string.image_category_own),
         LISTING(R.string.image_category_listing),
         LOG(R.string.image_category_log),
-        OWN(R.string.image_category_own),
         NOTE(R.string.cache_personal_note);
 
         @StringRes
@@ -68,7 +64,7 @@ public class Image implements Parcelable {
 
     /**
      * Helper class for building or manipulating Image references.
-     *
+     * <br>
      * Use #buildUpon() to obtain a builder representing an existing Image.
      */
     public static class Builder {
@@ -307,7 +303,7 @@ public class Image implements Parcelable {
         if (isEmpty()) {
             return "";
         }
-        return uri.toString();
+        return ImageUtils.getGCFullScaleImageUrl(uri.toString());
     }
 
     /**
@@ -367,40 +363,12 @@ public class Image implements Parcelable {
     }
 
     /**
-     * Open the image in an external activity.
-     * Do nothing if image url is empty.
-     *
-     * @param fromActivity The calling activity
-     */
-    public void openInBrowser(final Activity fromActivity) {
-        if (isEmpty()) {
-            return;
-        }
-        final Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-        try {
-            fromActivity.startActivity(browserIntent);
-        } catch (final ActivityNotFoundException e) {
-            Log.e("Cannot find suitable activity", e);
-            ActivityMixin.showToast(fromActivity, R.string.err_application_no);
-        }
-    }
-
-    /**
      * Check if the URL represents a file on the local file system.
      *
      * @return <tt>true</tt> if the URL scheme is <tt>file</tt>, <tt>false</tt> otherwise
      */
     public boolean isLocalFile() {
         return FileUtils.isFileUrl(getUrl());
-    }
-
-    /**
-     * Local file name when {@link #isLocalFile()} is <tt>true</tt>.
-     *
-     * @return the local file
-     */
-    public File localFile() {
-        return FileUtils.urlToFile(uri.toString());
     }
 
     @Nullable

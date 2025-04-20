@@ -149,7 +149,7 @@ final class KinematicPath extends OsmPath {
     }
 
 
-    protected double evolveDistance(final KinematicModel km, final double dist, final double deltaH, final double fAir) {
+    private double evolveDistance(final KinematicModel km, final double dist, final double deltaH, final double fAir) {
         // elevation force
         final double fh = deltaH * km.totalweight * 9.81 / dist;
 

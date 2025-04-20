@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
@@ -26,7 +27,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -537,7 +537,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_WIZARD_GC) {
             if (!hasValidGCCredentials()) {
-                Toast.makeText(this, R.string.err_auth_process, Toast.LENGTH_SHORT).show();
+                ViewUtils.showShortToast(this, R.string.err_auth_process);
             } else {
                 SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm(() -> {
                     Settings.setGCConnectorActive(true);

@@ -52,6 +52,7 @@ public class GC1ZXX2 extends MockedCache {
         return 1.5f;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.TRADITIONAL;
@@ -68,6 +69,7 @@ public class GC1ZXX2 extends MockedCache {
         return "daniel5005";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "<center><img width=\"500\"";
@@ -83,6 +85,7 @@ public class GC1ZXX2 extends MockedCache {
         return "36d45871-b99d-46d6-95fc-ff86ab564c98";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Niedersachsen, Germany";
@@ -113,6 +116,7 @@ public class GC1ZXX2 extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);

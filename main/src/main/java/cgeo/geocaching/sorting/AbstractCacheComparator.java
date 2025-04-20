@@ -39,7 +39,7 @@ abstract class AbstractCacheComparator implements CacheComparator {
     /**
      * Check necessary preconditions (like missing fields) before running the comparison itself.
      * Caches not filling the conditions will be placed last, sorted by Geocode.
-     *
+     * <br>
      * The default implementation returns {@code true} and can be overridden if needed in sub classes.
      *
      * @param cache the cache to be sorted
@@ -59,20 +59,6 @@ abstract class AbstractCacheComparator implements CacheComparator {
      * cache2.
      */
     protected abstract int compareCaches(Geocache cache1, Geocache cache2);
-
-    /**
-     * Can optinally be overridden to perform preparation (e.g. caching of values) before sort of a list via {@link #sort(List)}
-     */
-    protected void beforeSort(final List<Geocache> list) {
-        //by default, do nothing
-    }
-
-    /**
-     * Can optinally be overridden to perform cleanup (e.g. deleting cached values) before sort of a list via {@link #sort(List)}
-     */
-    protected void afterSort(final List<Geocache> list) {
-        //by default, do nothing
-    }
 
     /**
      * Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)}

@@ -145,13 +145,14 @@ public class GeoItemTestLayer {
         layer.put(TESTLAYER_KEY_PREFIX + "staticPolygonWithTwoHoles", pol);
 
         final Geopoint zLevelStuff = staticPolygon.project(180, 50);
-        final GeoPrimitive one = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
-        final GeoPrimitive two = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
-        final GeoPrimitive three = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
+        final GeoPrimitive zGreen = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
+        final GeoPrimitive zYellow = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
+        final GeoPrimitive zRed = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
 
-        layer.put(TESTLAYER_KEY_PREFIX + "zOne", one.buildUpon().setZLevel(0).build());
-        layer.put(TESTLAYER_KEY_PREFIX + "zTwo", two.buildUpon().setZLevel(2).build());
-        layer.put(TESTLAYER_KEY_PREFIX + "zThree", three.buildUpon().setZLevel(1).build());
+        //order visible should be yellow, red, green
+        layer.put(TESTLAYER_KEY_PREFIX + "zGreen-z0(most background)(placed-0)", zGreen.buildUpon().setZLevel(0).build());
+        layer.put(TESTLAYER_KEY_PREFIX + "zYellow-z2(most foreground)(placed-1)", zYellow.buildUpon().setZLevel(2).build());
+        layer.put(TESTLAYER_KEY_PREFIX + "zRed-z1(placed-2)", zRed.buildUpon().setZLevel(1).build());
 
         //line thicknesses
         final Geopoint lineThickness = zLevelStuff.project(180, 50);

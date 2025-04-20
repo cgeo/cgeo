@@ -43,7 +43,7 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
     }
 
     @Override
-    public void onPrepareSubMenu(final SubMenu subMenu) {
+    public void onPrepareSubMenu(@NonNull final SubMenu subMenu) {
         if (callback == null) {
             return;
         }

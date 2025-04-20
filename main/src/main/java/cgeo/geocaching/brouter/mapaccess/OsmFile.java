@@ -27,7 +27,7 @@ final class OsmFile {
     private int divisor;
     private int cellsize;
     private int indexsize;
-    protected byte elevationType = 3;
+    byte elevationType = 3;
 
     OsmFile(final PhysicalFile rafile, final int lonDegree, final int latDegree, final DataBuffers dataBuffers) throws IOException {
         this.lonDegree = lonDegree;

@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
@@ -15,6 +14,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -177,7 +177,7 @@ public class HtmlImage implements Html.ImageGetter {
     /**
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> value. No view object
      * will be tied to this HtmlImage.
-     *
+     * <br>
      * For documentation, see {@link #HtmlImage(String, boolean, boolean, TextView, boolean)}.
      */
     public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final boolean onlySave,
@@ -341,7 +341,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     public static BitmapDrawable getErrorImage(final Resources resources, final boolean nonTransparent) {
         if (nonTransparent) {
-            return new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded));
+            return HtmlUtils.IMAGE_NOT_LOADED;
         }
         return ImageUtils.getTransparent1x1Drawable(resources);
     }
@@ -394,7 +394,7 @@ public class HtmlImage implements Html.ImageGetter {
      * Make a fresh copy of the file to reset its timestamp. On some storage, it is impossible
      * to modify the modified time after the fact, in which case a brand new file must be
      * created if we want to be able to use the time as validity hint.
-     *
+     * <br>
      * See Android issue 1699.
      *
      * @param file the file to refresh
@@ -474,7 +474,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.isFile()) {
             return loadCachedImage(Uri.fromFile(file), forceKeep, file.lastModified());
         }
-        return ImmutableTriple.of((Bitmap) null, null, false);
+        return ImmutableTriple.of(null, null, false);
     }
 
     @NonNull

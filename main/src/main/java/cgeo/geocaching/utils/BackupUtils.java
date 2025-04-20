@@ -19,6 +19,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
@@ -37,7 +38,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -141,9 +141,7 @@ public class BackupUtils {
                 SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
                     .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                    .confirm(() -> {
-                        fileSelector.restorePersistableUri(data.left, uriToBeRestored);
-                    },
+                    .confirm(() -> fileSelector.restorePersistableUri(data.left, uriToBeRestored),
                     () -> {
                         regrantAccessUris.remove(0);
                         triggerNextRegrantStep(null, null);
@@ -169,7 +167,7 @@ public class BackupUtils {
     /* Public methods containing question dialogs, etc */
 
     public void selectBackupDirIntent() {
-        Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
+        ViewUtils.showToast(activityContext, R.string.init_backup_restore_different_backup_explanation);
         fileSelector.selectFolder(PersistableFolder.BACKUP.getUri());
     }
 
@@ -184,7 +182,7 @@ public class BackupUtils {
         }
 
         if (!hasBackup(backupDir)) {
-            Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();
+            ViewUtils.showToast(activityContext, R.string.init_backup_no_backup_available);
             return;
         }
 
@@ -289,7 +287,7 @@ public class BackupUtils {
             }
 
             // check if folder settings changed and request grants, if necessary
-            if (settings && (currentFolderValues.size() > 0 || currentUriValues.size() > 0)) {
+            if (settings && (!currentFolderValues.isEmpty() || !currentUriValues.isEmpty())) {
                 this.regrantAccessFolders.clear();
                 this.regrantAccessFolders.addAll(currentFolderValues);
                 this.regrantAccessUris.clear();
@@ -333,8 +331,8 @@ public class BackupUtils {
 
         if (dirs != null) {
             final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
-            final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-            final TextView textView = (TextView) content.findViewById(R.id.message);
+            final CheckBox checkbox = content.findViewById(R.id.check_box);
+            final TextView textView = content.findViewById(R.id.message);
             textView.setText(R.string.init_backup_history_delete_warning);
             checkbox.setText(R.string.init_user_confirmation);
 
@@ -542,7 +540,7 @@ public class BackupUtils {
     private void backupInternal(final Runnable runAfterwards, final boolean autobackup) {
         final Folder backupDir = getNewBackupFolder(System.currentTimeMillis(), autobackup);
         if (backupDir == null) {
-            Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
+            ViewUtils.showToast(activityContext, R.string.init_backup_folder_exists_error);
             return;
         }
 
@@ -746,7 +744,7 @@ public class BackupUtils {
         final Folder folder = autobackup ? Folder.fromPersistableFolder(PersistableFolder.BACKUP, AUTO_BACKUP_FOLDER) : PersistableFolder.BACKUP.getFolder();
         final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(folder, true, false));
         CollectionUtils.filter(files, s -> s.isDirectory && s.name.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
-        return files.size() == 0 ? null : files;
+        return files.isEmpty() ? null : files;
     }
 
     @Nullable

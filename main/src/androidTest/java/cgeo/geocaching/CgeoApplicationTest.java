@@ -39,6 +39,7 @@ import androidx.test.filters.SmallTest;
 
 import java.util.GregorianCalendar;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -48,11 +49,30 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 public class CgeoApplicationTest {
 
+//    @Test
+//    public void createTestCaches() {
+//        final int listId = DataStore.createList("manycaches2");
+//        CgeoTestUtils.generateTestCaches(Collections.singleton(listId), "Test", new Geopoint(40, 10), 20000);
+//    }
+
     @Test
     @MediumTest
     public void testRegEx() {
         final String page = MockedCache.readCachePage("GC2CJPF");
-        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
+        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, true, "???")).isEqualTo("abft");
+
+        // test special character handling in usernames during login
+        testUsername("Max\\u0026Moritz"); // JS-escaped Unicode character
+        testUsername("Hello\\\"World\\\""); // JS-escaped double quote
+        testUsername("Hello\\\"Max\\u0026Moritz\\\""); // combination of both
+    }
+
+    private void testUsername(final String username) {
+        // pagePrefix / pagePostfix is part of the surrounding JS code around the username parameter
+        final String pagePrefix = "\"publicGuid\":\"abcdef01-2345-6789-abcd-ef0123456789\",\"referenceCode\":\"PRABCDE\",\"id\":1234567,\"username\":\"";
+        final String pagePostfix = "\",\"dateCreated\":\"2010-01-01T00:00:00\"";
+        final String purifiedUsername = StringEscapeUtils.unescapeEcmaScript(username); // unescape JS-escaped Unicode characters
+        assertThat(GCParser.getUsername(pagePrefix + username + pagePostfix)).isEqualTo(purifiedUsername);
     }
 
     /**
@@ -297,7 +317,7 @@ public class CgeoApplicationTest {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, GeocacheFilter)}
      */
     @MediumTest
     @Test
@@ -310,7 +330,7 @@ public class CgeoApplicationTest {
             final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
             // check coords
-            final SearchResult search = ConnectorFactory.searchByViewport(viewport);
+            final SearchResult search = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
             final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);

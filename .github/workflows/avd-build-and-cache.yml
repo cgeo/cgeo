@@ -8,10 +8,10 @@ on:
       JDK_VERSION:
         description: The JDK version to use
         type: number
-        default: 11
+        default: 17
 
 env:
-  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
 
 jobs:
   avd-cache-update:
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        api-level: [26, 29, 30]
+        api-level: [26, 30, 34]
     steps:
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms

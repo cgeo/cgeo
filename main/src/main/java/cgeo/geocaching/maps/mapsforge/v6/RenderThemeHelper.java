@@ -28,7 +28,6 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.util.Consumer;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
@@ -44,7 +43,6 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.rendertheme.ContentRenderTheme;
 import org.mapsforge.map.android.rendertheme.ContentResolverResourceProvider;
@@ -52,21 +50,20 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
-import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
-import org.mapsforge.map.rendertheme.XmlThemeResourceProvider;
 import org.mapsforge.map.rendertheme.ZipRenderTheme;
 import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
+import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
 
 
 /**
  * Helper class for Map Theme selection and related tasks.
- *
+ * <br>
  * Works in conjunction with {@link RenderThemeSettings} (for theme settings GUI).
- *
+ * <br>
  * Note: this class is an attempt to bundle all large parts of this code were simply moved from class
  * NewMap and might need refactoring.
  */
@@ -100,9 +97,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
-
-    // cache most recent resource provider
-    private XmlThemeResourceProvider resourceProvider = null;
 
     private static MapThemeFolderSynchronizer syncTask = null;
 
@@ -175,12 +169,12 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
                 selectedTheme = null;
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
                 selectedTheme = null;
             }
         }
@@ -194,7 +188,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     private void applyDefaultTheme(final TileRendererLayer rendererLayer) {
-        rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+        rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
         applyScales(rendererLayer, Settings.RENDERTHEMESCALE_DEFAULTKEY);
     }
 
@@ -210,7 +204,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     }
 
-    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) throws IOException {
+    private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) {
         final String[] themeIdTokens = theme.id.split(ZIP_THEME_SEPARATOR);
         final boolean isZipTheme = themeIdTokens.length == 2;
 
@@ -244,7 +238,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
             }
-            resourceProvider = xmlRenderTheme == null ? null : xmlRenderTheme.getResourceProvider();
         } catch (Exception ex) {
             Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
             xmlRenderTheme = null;
@@ -381,10 +374,10 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
      * method does two different things:
      * * if turned off: app-private local folder is safely deleted
      * * if turned on: folder is re-synced (every change in source folder is synced to target folder)
-     *
+     * <br>
      * In any case, this method will take care of thread syncrhonization e.g. when a sync is currently running then
      * this sync will first be aborted, and only after that either target folder is deleted (if sync=off) or sync is restarted (if sync=on)
-     *
+     * <br>
      * Call this method whenever you feel that there might be a change in Map Theme files in
      * public folder. Sync will be done in background task and reports its progress via toasts
      */
@@ -586,46 +579,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         return Settings.getSyncMapRenderThemeFolder();
     }
 
-    /**
-     * Method is called after user has changed the sync state in Settings Activity
-     */
-    public static boolean changeSyncSetting(final Activity activity, final boolean doSync, final Consumer<Boolean> callback) {
-
-        if (doSync) {
-            //this means user just turned sync on. Ask user if he/she is really shure about this.-
-            final FolderUtils.FolderInfo themeFolderInfo = FolderUtils.get().getFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), -1);
-            final String folderName = MAP_THEMES_FOLDER.getFolder().toUserDisplayableString();
-            final ImmutableTriple<String, String, String> folderInfoStrings = themeFolderInfo.getUserDisplayableFolderInfoStrings();
-            Dialogs.newBuilder(activity)
-                    .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
-                    .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
-                    .setPositiveButton(android.R.string.ok, (d, c) -> {
-                        d.dismiss();
-                        //start sync
-                        resynchronizeOrDeleteMapThemeFolder();
-                        callback.accept(true);
-                    })
-                    .setNegativeButton(android.R.string.cancel, (d, c) -> {
-                        d.dismiss();
-                        callback.accept(false);
-                        //following method will DELETE any existing data in sync folder (because sync is set to off in settings)
-                        resynchronizeOrDeleteMapThemeFolder();
-                    })
-                    .create().show();
-        } else {
-            //this means user just turned sync OFF
-            Settings.setSyncMapRenderThemeFolder(false);
-            //start sync will delete any existing data in sync folder
-            resynchronizeOrDeleteMapThemeFolder();
-            callback.accept(false);
-        }
-        return true;
-    }
-
-    public XmlThemeResourceProvider getResourceProvider() {
-        return resourceProvider;
-    }
-
     public static RenderThemeType getRenderThemeType() {
         final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
         for (RenderThemeHelper.RenderThemeType rtt : RenderThemeHelper.RenderThemeType.values()) {
@@ -639,4 +592,3 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
 }
-

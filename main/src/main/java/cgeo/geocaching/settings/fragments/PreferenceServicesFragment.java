@@ -15,7 +15,7 @@ public class PreferenceServicesFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_services);
+        requireActivity().setTitle(R.string.settings_title_services);
 
         // display connectors' activation status
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_gc_authorization, Settings.isGCConnectorActive());

@@ -115,8 +115,6 @@
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
-    <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
     <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>
@@ -135,7 +133,6 @@
     <string name="err_detail_cache">c: geo tidak bisa menampilkan geocache yang anda inginkan. Apakah itu geocache?</string>
     <string name="err_detail_cache_find">c: geo tidak bisa menemukan geocache</string>
     <string name="err_detail_cache_find_some">c: geo tidak dapat menemukan geocache itu.</string>
-    <string name="err_detail_cache_find_any">c: geo tidak dapat menemukan geocaches.</string>
     <string name="err_detail_no_spoiler">c: geo tidak menemukan gambar spoiler untuk cache ini.</string>
     <string name="err_detail_still_working">Masih mengerjakan tugas lain.</string>
     <string name="err_watchlist_failed">Mengubah daftar tontonan anda telah gagal.</string>
@@ -188,7 +185,6 @@
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
     <string name="info_log_post_failed">Posting log gagal.</string>
-    <string name="info_log_post_failed_reason">Alasan: %s</string>
     <string name="info_log_post_retry">Coba kembali</string>
     <string name="info_log_post_save">Simpan offline</string>
     <string name="info_log_cleared">Log dibersihkan.</string>
@@ -240,9 +236,7 @@
     <string name="caches_sort_name">Nama</string>
     <string name="caches_sort_rating">Peringkat</string>
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
-    <string name="caches_sort_inventory">Jumlah persedian</string>
     <string name="caches_sort_date_hidden">Tanggal Disembunyikan</string>
-    <string name="caches_sort_date_logged">Tanggal Masuk</string>
     <string name="caches_sort_finds">Menemukan</string>
     <string name="caches_sort_state">Keadaan</string>
     <string name="caches_sort_storage">Tanggal disimpan di perangkat</string>
@@ -326,7 +320,6 @@
     <string name="settings_gc_legal_note">Dengan menggunakan layanan dari geocaching.com, anda menerima Syarat Penggunaan Groundspeak.</string>
     <string name="settings_authorize">Mengizinkan c:geo</string>
     <string name="settings_gc_description">Otorisasi c:geo dengan geocaching.com untuk mencari cache.</string>
-    <string name="settings_ec_description">Otorisasi c:geo dengan extremcaching.com untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="settings_su_description">Otorisasi c:geo dengan geocaching.su untuk mencari cache.</string>
     <string name="init_summary_oc_de">Muat cache dari opencaching.de</string>
     <string name="init_oc_de_description">Mengizinkan c:geo dengan opencaching.de untuk mencari cache dan akses/filter cache yang anda temukan.</string>
@@ -371,8 +364,6 @@
     <string name="init_address">Tampilkan Alamat</string>
     <string name="init_summary_address">Tampilkan alamat alternatif dari koordinat pada layar utama</string>
     <string name="init_showwaypoint_description">Jika kurang dari jumlah cache yang diberikan ditampilkan di peta, titik arah mereka ditunjukkan juga.</string>
-    <string name="init_save_log_img">Simpan gambar</string>
-    <string name="init_summary_save_log_img">Simpan Gambar dari log</string>
     <string name="init_units">Gunakan Unit Imperial</string>
     <string name="init_summary_units">Gunakan satuan Imperial, bukan satuan Metrik</string>
     <string name="init_log_offline">Login Offline</string>
@@ -423,7 +414,6 @@
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
     <string name="init_maintenance">Pemeliharaan</string>
-    <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
     <string name="init_location_note">Pada perangkat yang telah dilengkapi dengan Google Play Services, c:geo dapat secara otomatis menggunakan penyedia geolocation secara lebih baik. Namun, hal ini untuk mencegah penggunaan unit penerima GPS BlueTooth eksternal.</string>
     <string name="init_location_googleplayservices">Gunakan Layanan Google Play</string>
@@ -495,6 +485,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
     <string name="err_auth_geokrety_bad_password">Nama pengguna/Kata sandi anda sepertinya tidak cocok.</string>
     <string name="err_auth_geokrety_unknown">%1$s dikembalikan: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d cache</item>
@@ -518,7 +509,6 @@
         <item quantity="other">sekitar %d hari yang lalu</item>
     </plurals>
     <string name="cache_premium">Meningkatkan</string>
-    <string name="cache_inventory">Persediaan</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Catatan pribadi</string>
     <string name="cache_personal_note_edit">Sunting</string>
@@ -552,8 +542,6 @@
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
-    <string name="cache_dialog_refresh_title">Menyegarkan</string>
-    <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
     <string name="cache_menu_navigate">Navigasi</string>
     <string name="cache_menu_navigation_drive">Navigasi (Mengemudi)</string>
     <string name="cache_menu_navigation_walk">Navigasi (Berjalan)</string>
@@ -618,6 +606,7 @@
     <string name="cache_share_field">Bagikan</string>
     <string name="cache_time_full_hours">jam</string>
     <string name="cache_listed_on">Terdaftar %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Memuat cache dri %1$s</string>
@@ -689,19 +678,10 @@
     <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
     <string name="search_coordinates">Koordinat</string>
-    <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
-    <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_kw_prefill">Kata kunci</string>
-    <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
-    <string name="search_hbu_prefill">Pemilik</string>
-    <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
     <string name="search_tb">Dilacak</string>
-    <string name="search_tb_hint">Identifikasi dilacak</string>
-    <string name="search_tb_button">Cari untuk dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
-    <string name="search_own_caches">Pencarian cache saya</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
     <!-- trackable -->
     <string name="trackable">Bisa dilacak</string>
@@ -748,10 +728,6 @@
     <string name="destination_select">Pilih tujuan</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Lisensi</string>
-    <string name="license_show">Menunjukkan lisensi</string>
-    <string name="license_dismiss">Abaikan</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Peristiwa yang lalu</string>
     <string name="helper_calendar_pastevent_question">Tanggal acara adalah di masa lalu. Tambahkan saja?</string>
@@ -759,10 +735,8 @@
     <string name="helper_sendtocgeo_description">Kirim ke c:geo adalah ekstensi browser <strong>untuk PC Anda</strong>. Saat browsing geocaching.com, Anda bisa mengirim cache ke smartphone Anda dengan satu klik tombol langsung di dalam browser.</string>
     <string name="helper_locus_description">Aplikasi navigasi luar ruang untuk ponsel anda atau tablet. Lihat peta topo offline, melacak rute anda, geocaches, menggunakan panduan suara dan melakukan bahkan lebih.</string>
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
-    <string name="helper_bluetoothgps_description">Memungkinkan Anda untuk menggunakan penerima GPS eksternal untuk mendapatkan data lokasi yang lebih tepat, dan dapat menghemat baterai perangkat Anda.</string>
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo memungkinkan bermain dan mencari geocaches dari tipe Wherigo. c:geo secara otomatis dapat memicu download kartrid dalam aplikasi ini.</string>
     <!-- export -->
     <string name="export">Ekspor</string>
     <string name="export_progress">Ekspor: %1$s</string>
@@ -813,9 +787,7 @@
     <string name="attribute_climbing_yes">Sulit mendaki</string>
     <string name="attribute_climbing_no">Tidak sulit mendaki</string>
     <string name="attribute_wading_yes">Mungkin membutuhkan rendam</string>
-    <string name="attribute_wading_no">Mungkin tidak perlu mengarungi</string>
     <string name="attribute_swimming_yes">Mungkin memerlukan kolam</string>
-    <string name="attribute_swimming_no">Mungkin tidak memerlukan kolam</string>
     <string name="attribute_available_yes">Tersedia pada semua waktu</string>
     <string name="attribute_available_no">Tidak tersedia di semua waktu</string>
     <string name="attribute_night_yes">Dianjurkan di malam hari</string>
@@ -825,9 +797,7 @@
     <string name="attribute_stealth_yes">Stealth diperlukan</string>
     <string name="attribute_stealth_no">Stealth tidak diperlukan</string>
     <string name="attribute_firstaid_yes">Kebutuhan pemeliharaan</string>
-    <string name="attribute_firstaid_no">Tidak membutuhkan pemeliharaan</string>
     <string name="attribute_cow_yes">Perhatikan ternak</string>
-    <string name="attribute_cow_no">Tidak ada ternak</string>
     <string name="attribute_field_puzzle_yes">Bidang teka-teki</string>
     <string name="attribute_field_puzzle_no">Tidak ada bidang teka-teki</string>
     <string name="attribute_nightcache_yes">Cache malam</string>
@@ -855,49 +825,31 @@
     <string name="attribute_partnership_yes">Cache Kemitraan</string>
     <string name="attribute_partnership_no">Bukan cache kemitraan</string>
     <string name="attribute_fee_yes">Akses atau biaya parkir yang diperlukan</string>
-    <string name="attribute_fee_no">Akses atau biaya parkir tidak diperlukan</string>
     <string name="attribute_rappelling_yes">Peralatan mendaki diperlukan</string>
-    <string name="attribute_rappelling_no">Peralatan mendaki tidak diperlukan</string>
     <string name="attribute_boat_yes">Perahu diperlukan</string>
-    <string name="attribute_boat_no">Perahu tidak diperlukan</string>
     <string name="attribute_scuba_yes">Peralatan selam diperlukan</string>
-    <string name="attribute_scuba_no">Peralatan selam tidak diperlukan</string>
     <string name="attribute_flashlight_yes">Senter diperlukan</string>
-    <string name="attribute_flashlight_no">Senter tidak diperlukan</string>
     <string name="attribute_uv_yes">Sinar UV diperlukan</string>
-    <string name="attribute_uv_no">Sinar UV tidak diperlukan</string>
     <string name="attribute_snowshoes_yes">Sepatu salju diperlukan</string>
-    <string name="attribute_snowshoes_no">Sepatu salju tidak diperlukan</string>
     <string name="attribute_skiis_yes">Ski lintas negara diperlukan</string>
-    <string name="attribute_skiis_no">Ski lintas negara tidak diperlukan</string>
     <string name="attribute_s_tool_yes">Alat-alat khusus diperlukan</string>
-    <string name="attribute_s_tool_no">Alat-alat khusus tidak diperlukan</string>
     <string name="attribute_wirelessbeacon_yes">Beacon nirkabel</string>
-    <string name="attribute_wirelessbeacon_no">Tidak ada beacon nirkabel</string>
     <string name="attribute_treeclimbing_yes">Memanjat pohon diperlukan</string>
     <string name="attribute_treeclimbing_no">Tidak perlu memanjat pohon</string>
     <string name="attribute_poisonoak_yes">Tanaman beracun</string>
     <string name="attribute_poisonoak_no">Tidak ada tanaman beracun</string>
     <string name="attribute_dangerousanimals_yes">Hewan yang Berbahaya</string>
-    <string name="attribute_dangerousanimals_no">Bukan Hewan Berbahaya</string>
     <string name="attribute_ticks_yes">Kutu</string>
-    <string name="attribute_ticks_no">Tidak kutu</string>
     <string name="attribute_mine_yes">Tambang ditinggalkan</string>
-    <string name="attribute_mine_no">Tidak ada tambang yang ditinggalkan</string>
     <string name="attribute_cliff_yes">Tebing / batu jatuh</string>
-    <string name="attribute_cliff_no">Tidak ada tebing / jatuhnya batu</string>
     <string name="attribute_hunting_yes">Berburu</string>
-    <string name="attribute_hunting_no">Tidak berburu</string>
     <string name="attribute_danger_yes">Daerah berbahaya</string>
-    <string name="attribute_danger_no">Bukan daerah berbahaya</string>
     <string name="attribute_thorn_yes">Duri</string>
-    <string name="attribute_thorn_no">Tidak ada duri</string>
     <string name="attribute_wheelchair_yes">Kursi roda dapat diakses</string>
     <string name="attribute_wheelchair_no">Kursi roda tidak dapat diakses</string>
     <string name="attribute_parking_yes">Parkir tersedia</string>
     <string name="attribute_parking_no">Parkir tidak tersedia</string>
     <string name="attribute_public_yes">Kendaraan umum</string>
-    <string name="attribute_public_no">Tidak ada kendaraan umum</string>
     <string name="attribute_water_yes">Minum air di dekatnya</string>
     <string name="attribute_water_no">Tidak ada air minum di dekatnya</string>
     <string name="attribute_restrooms_yes">Dekat toilet umum</string>
@@ -1068,9 +1020,6 @@
     <string name="command_rename_list_result">Ganti daftar nama</string>
     <string name="command_delete_list_result">Daftar dihapus</string>
     <string name="command_unique_list_result">Menghapus cache dari daftar lain</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="other">Tambahkan tembolok ini ke favorit (%d tersisa)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Tindakan ini bisa menimbulkan lalu lintas jaringan yang tinggi. Apakah anda yakin ingin menggabungkan semua cache?</string>
     <string name="list_list_headline">Daftar:</string>
     <plurals name="extract_waypoints_result">
@@ -1101,13 +1050,13 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Batal</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

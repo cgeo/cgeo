@@ -85,10 +85,6 @@ final class MessageData implements Cloneable {
         return (classifiermask & 1) != 0;
     }
 
-    public boolean isGoodOneway() {
-        return (classifiermask & 2) != 0;
-    }
-
     public boolean isRoundabout() {
         return (classifiermask & 4) != 0;
     }

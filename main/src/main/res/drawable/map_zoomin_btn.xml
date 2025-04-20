@@ -1,15 +1,9 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="38dp"
-    android:height="39dp"
+    android:height="38dp"
     android:viewportWidth="10.054"
-    android:viewportHeight="10.319">
-    <path
-        android:pathData="m0.5292,0c-0.2932,0 -0.5292,0.236 -0.5292,0.5292l0,8.9957 0,0.5292l0.5292,0 8.9957,0 0.5292,0l0,-0.5292 0,-8.9957c0,-0.2932 -0.236,-0.5292 -0.5292,-0.5292l-8.9957,0z"
-        android:fillColor="@color/osm_zoomcontrolbackground" />
+    android:viewportHeight="10.054">
     <path
         android:pathData="m7.4745,5.3767h-2.0978v2.0978h-0.6993v-2.0978h-2.0978v-0.6993h2.0978v-2.0978h0.6993v2.0978h2.0978z"
         android:fillColor="@color/osm_zoomcontrol" />
-    <path
-        android:pathData="M0,10.054h10.054v0.2646h-10.054z"
-        android:fillColor="@color/osm_zoomcontroldivider" />
 </vector>

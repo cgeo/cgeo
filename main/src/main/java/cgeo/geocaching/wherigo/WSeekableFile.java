@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -77,22 +77,22 @@ public class WSeekableFile implements SeekableFile {
         return fileChannel.position();
     }
 
-    public int read() throws IOException {
+    public int read() {
         final byte[] r = readInternal(1);
         return r[0];
     }
 
-    public void readFully(final byte[] buf) throws IOException {
+    public void readFully(final byte[] buf) {
         readInternal(buf);
     }
 
-    public short readShort() throws IOException {
+    public short readShort() {
         final byte[] r = readInternal(2);
         return (short) ((r[1] << 8) | (r[0] & 0xff));
     }
 
 
-    public String readString() throws IOException {
+    public String readString() {
         final StringBuilder sb = new StringBuilder();
         byte[] b = readInternal(1);
         while (b[0] > 0) {

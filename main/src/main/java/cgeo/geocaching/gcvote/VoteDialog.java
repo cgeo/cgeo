@@ -1,6 +1,5 @@
 package cgeo.geocaching.gcvote;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -8,16 +7,16 @@ import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheVotingBar;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,9 +77,7 @@ public class VoteDialog {
 
             return false;
         }, status -> {
-            final Application context = CgeoApplication.getInstance();
-            final String text = context.getString(status ? R.string.vote_sent : R.string.err_vote_send_rating);
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(null, LocalizationUtils.getString(status ? R.string.vote_sent : R.string.err_vote_send_rating));
             if (afterVoteSent != null) {
                 afterVoteSent.run();
             }

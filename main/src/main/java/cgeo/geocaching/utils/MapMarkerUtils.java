@@ -12,18 +12,23 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.GeoIcon;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
-import static cgeo.geocaching.utils.EmojiUtils.NUMBER_START;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -48,6 +53,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
+
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND = "cacheWaypointHighlighterBackground";
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM = "cacheWaypointHighlighterGeoitem";
 
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
@@ -185,7 +193,7 @@ public final class MapMarkerUtils {
         }
         // top-right: DT marker / sync / stored
         if (Settings.isDTMarkerEnabled()) {
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.supportsDifficultyTerrain(), cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
         } else if (CacheDownloaderService.isDownloadPending(cache)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
@@ -290,16 +298,11 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         if (cache != null && cache.isLinearAlc()) {
-            int stageCounter = 0;
             try {
-                stageCounter = Integer.parseInt(waypoint.getPrefix());
+                insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, Integer.parseInt(waypoint.getPrefix()), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             } catch (NumberFormatException ignore) {
-                // ignored, value defaults to 0
+                insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(ViewUtils.getDrawable(waypointType.markerId, true), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             }
-            while (stageCounter > 9) {
-                stageCounter = stageCounter - 10;
-            }
-            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
             final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
@@ -566,7 +569,7 @@ public final class MapMarkerUtils {
         final List<int[]> insets = new ArrayList<>(insetsInitialCapacity);
 
         insetsBuilder.build(layers, insets);
-        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[0]));
 
         int index = 0;
         for (final int[] temp : insets) {
@@ -597,7 +600,7 @@ public final class MapMarkerUtils {
 
     @Nullable
     private static Integer getMarkerIdIfLogged(final Geocache cache) {
-        if (cache.isOwner()) {
+        if (cache.isOwner() && !cache.hasLogOffline()) {
             return R.drawable.marker_own;
         } else if (cache.isFound()) {
             return R.drawable.marker_found;
@@ -631,7 +634,7 @@ public final class MapMarkerUtils {
      * adds list markers to drawable given by insetsBuilder
      */
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
-        if (assignedMarkers.size() > 0) {
+        if (!assignedMarkers.isEmpty()) {
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(0), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
                 insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(1), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
@@ -690,13 +693,13 @@ public final class MapMarkerUtils {
         return result;
     }
 
-    private static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
+    private static Drawable getDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).append(supportsRating).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain, applyScaling));
+                marker = new CacheMarker(hashcode, createDTRatingMarker(res, supportsRating, difficulty, terrain, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -710,34 +713,49 @@ public final class MapMarkerUtils {
      * @param terrain       Terrain rating
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
-    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getCacheScalingFactor(applyScaling));
+    private static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        return createDTRatingMarker(res, supportsRating, difficulty, terrain, getCacheScalingFactor(applyScaling));
+    }
+
+    public static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final float scaling) {
+        final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), scaling);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
-        if (difficulty == -1 && terrain == -1) {
+        if (!supportsRating) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, getCacheScalingFactor(applyScaling)));
-        } else if (difficulty == 0 && terrain == 0) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, scaling));
+        } else if (difficulty < 0.5 && terrain < 0.5) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, scaling));
         } else {
             final String packageName = CgeoApplication.getInstance().getPackageName();
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty, applyScaling)));
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain, applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty, scaling)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain, scaling)));
 
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg, scaling));
         }
 
         return buildLayerDrawable(insetsBuilder, layers, 0);
     }
 
     @SuppressWarnings("DiscouragedApi")
-    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final boolean applyScaling) {
+    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final float scaling) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
-        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), getCacheScalingFactor(applyScaling));
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
+    }
+
+    @SuppressWarnings("DiscouragedApi")
+    private static Drawable getStageNumberMarker(final Resources res, final int stageNum, final float scaling) {
+        int counter = stageNum;
+        while (counter > 10) {
+            counter = counter - 10;
+        }
+        final String packageName = CgeoApplication.getInstance().getPackageName();
+        // if we are ever going to remove this feature, the corresponding drawables must be removed manually (as they have set tools:ignore="UnusedResources" to avoid false warnings)
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_stagenum_" + counter, "drawable", packageName), null), scaling);
     }
 
     private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {
@@ -877,5 +895,32 @@ public final class MapMarkerUtils {
         markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
-    
+
+    // ------------------------------------------------------------------------
+    // methods for highlighting selected cache on map (UnifiedMap)
+
+    public static void addHighlighting(final INamedGeoCoordinate geoitem, final Resources res, final GeoItemLayer<String> nonClickableItemsLayer) {
+        Bitmap b1 = null;
+        float scalingFactor = 100f;
+        if (geoitem instanceof Geocache) {
+            b1 = MapMarkerUtils.getCacheMarker(res, (Geocache) geoitem, null, true).getBitmap();
+            scalingFactor = scalingFactorCacheIcons;
+        } else if (geoitem instanceof Waypoint) {
+            b1 = MapMarkerUtils.getWaypointMarker(res, (Waypoint) geoitem, true, true).getBitmap();
+            scalingFactor = scalingFactorWpIcons;
+        }
+        if (b1 != null) {
+            final Bitmap b = ViewUtils.drawableToBitmap(new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.background_gc_hightlighted, null), scalingFactor));
+            final GeoPrimitive gp = GeoPrimitive.createMarker(geoitem.getCoords(), GeoIcon.builder().setBitmap(b).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_MARKER).build();
+            nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND, gp);
+            final GeoPrimitive gp1 = GeoPrimitive.createMarker(geoitem.getCoords(), GeoIcon.builder().setBitmap(b1).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM).build();
+            nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM, gp1);
+        }
+    }
+
+    public static void removeHighlighting(final GeoItemLayer<String> nonClickableItemsLayer) {
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM);
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND);
+    }
+
 }

@@ -60,6 +60,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Provides a dialog to enter coordinates in different formats.
+ * Usage:
+ * 1. open the coordinate selection dialog: call CoordinatesInputDialog.show(getSupportFragmentManager(), null, null);
+ * 2. in your activity implement CoordinatesInputDialog.CoordinateUpdate, closing the dialog calls public void updateCoordinates(@NonNull final Geopoint gp)
+ */
 public class CoordinatesInputDialog extends DialogFragment {
 
     private CoordinateInputData inputData;
@@ -154,14 +160,14 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     private boolean supportsNullCoordinates() {
-        return ((CoordinateUpdate) getActivity()).supportsNullCoordinates();
+        return ((CoordinateUpdate) requireActivity()).supportsNullCoordinates();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         resumeDisposables.clear();
-        Keyboard.hide(getActivity());
+        Keyboard.hide(requireActivity());
 
     }
 
@@ -181,7 +187,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final Dialog dialog = getDialog();
+        final Dialog dialog = requireDialog();
         final boolean noTitle = dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         final View v = inflater.inflate(R.layout.coordinates_input_dialog, container, false);
@@ -208,7 +214,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         final Spinner spinner = binding.input.spinnerCoordinateFormats;
         final ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(getActivity(),
+                ArrayAdapter.createFromResource(requireActivity(),
                         R.array.waypoint_coordinate_formats,
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -257,7 +263,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             binding.cache.setVisibility(View.GONE);
         }
 
-        if (inputData.getGeocode() != null) {
+        if (inputData.getGeocode() != null && ((CoordinateUpdate) requireActivity()).supportsCalculatedCoordinates()) {
             binding.calculateGlobal.setVisibility(View.VISIBLE);
             binding.calculateGlobal.setOnClickListener(vv -> {
                 inputData.setGeopoint(gp);
@@ -572,7 +578,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             // Signaled and returned below
         }
         if (signalError) {
-            final AbstractActivity activity = (AbstractActivity) getActivity();
+            final AbstractActivity activity = (AbstractActivity) requireActivity();
             activity.showToast(activity.getString(R.string.err_parse_lat_lon));
         }
         return false;
@@ -591,7 +597,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     /**
      * Max lengths, depending on currentFormat
-     *
+     * <br>
      * formatPlain = disabled
      * DEG MIN SEC SUB
      * formatDeg 2/3 5 - -
@@ -655,7 +661,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         @Override
         public void onClick(final View v) {
             if (cacheCoords == null) {
-                final AbstractActivity activity = (AbstractActivity) getActivity();
+                final AbstractActivity activity = (AbstractActivity) requireActivity();
                 activity.showToast(activity.getString(R.string.err_location_unknown));
                 return;
             }
@@ -698,7 +704,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         public void onClick(final View v) {
             inputData.setCalculatedCoordinate(null);
             inputData.setGeopoint(null);
-            ((CoordinateUpdate) getActivity()).updateCoordinates(inputData);
+            ((CoordinateUpdate) requireActivity()).updateCoordinates(inputData);
             dismiss();
         }
     }
@@ -707,6 +713,10 @@ public class CoordinatesInputDialog extends DialogFragment {
         void updateCoordinates(Geopoint gp);
 
         boolean supportsNullCoordinates();
+
+        default boolean supportsCalculatedCoordinates() {
+            return true;
+        }
 
         default void updateCoordinates(CoordinateInputData coordinateInputData) {
             updateCoordinates(coordinateInputData.getGeopoint());

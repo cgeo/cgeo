@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -12,31 +11,23 @@ import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
-import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.MapilionVTMHillshadingSource;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
-import cgeo.geocaching.utils.ImageUtils;
-import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
@@ -48,6 +39,7 @@ import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
+import org.oscim.event.Event;
 import org.oscim.event.Gesture;
 import org.oscim.event.GestureListener;
 import org.oscim.event.MotionEvent;
@@ -79,10 +71,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     private View mapAttribution;
     private boolean doReapplyTheme = false;
 
-    private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
-    private final int rotationWidth = rotationIndicator.getWidth();
-    private final int rotationHeight = rotationIndicator.getHeight();
-
+    private Event lastEvent = null;
 
     public MapsforgeVtmFragment() {
         super(R.layout.unifiedmap_mapsforgevtm_fragment);
@@ -104,14 +93,21 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         setZoom(zoomLevel);
         mapUpdateListener = (event, mapPosition) -> {
             if (event == Map.ROTATE_EVENT || event == Map.POSITION_EVENT) {
-                repaintRotationIndicator(mapPosition.bearing);
+                repaintRotationIndicator(AngleUtils.normalize(360 - mapPosition.bearing));
             }
-            if (event == Map.MOVE_EVENT) {
+            if (event == Map.MOVE_EVENT || (lastEvent == Map.SCALE_EVENT && event == Map.POSITION_EVENT /* see #15590 */)) {
+                // SCALE event is sent only on manually scaling the map, not when using zoom controls
+                // (which send a POSITION event)
+                // moving while zooming sends a SCALE event first, then one or more POSITION events,
+                // while moving without zooming sends a MOVE event
                 if (Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                     viewModel.followMyLocation.setValue(false);
                 }
-                viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
             }
+            if (event == Map.SCALE_EVENT || event == Map.POSITION_EVENT) {
+                ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getMapPosition().zoomLevel);
+            }
+            lastEvent = event; // remember to detect scaling combined with panning
         };
         mMap.events.bind(mapUpdateListener);
 
@@ -133,6 +129,11 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         renderer.setOffset(30 * CanvasAdapter.getScale(), 0); // make room for attribution
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
 
+        if (Settings.getMapShadingShowLayer() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()) {
+            addLayer(2, new MapilionVTMHillshadingSource().getBitmapTileLayer(mMap));
+            //addLayer(2, new MapToolkitVTMHillshadingSource().getBitmapTileLayer(mMap));
+        }
+
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(v -> displayMapAttribution());
         }
@@ -153,7 +154,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(getContext().getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
@@ -163,35 +164,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         // Make the URLs in TextView clickable. Must be called after show()
         // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
         ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    protected void repaintRotationIndicator(final float bearing) {
-        final View currentView = getView();
-        if (currentView == null) {
-            return;
-        }
-
-        final ImageView compassrose = currentView.findViewById(R.id.bearingIndicator);
-        if (bearing == 0.0f) {
-            compassrose.setImageBitmap(null);
-        } else {
-            final ActionBar actionBar = ((UnifiedMapActivity) requireActivity()).getSupportActionBar();
-            final boolean actionBarIsShowing = actionBar != null && actionBar.isShowing();
-            adaptLayoutForActionbar(actionBarIsShowing);
-
-            final Matrix matrix = new Matrix();
-            matrix.setRotate(bearing, rotationWidth / 2.0f, rotationHeight / 2.0f);
-            compassrose.setImageBitmap(Bitmap.createBitmap(rotationIndicator, 0, 0, rotationWidth, rotationHeight, matrix, true));
-            compassrose.setOnClickListener(v -> {
-                final boolean isRotated = getCurrentBearing() != 0f;
-                setBearing(0.0f);
-                repaintRotationIndicator(0.0f);
-                if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                    Dialogs.advancedOneTimeMessage(getContext(), MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
-                }
-            });
-        }
-
     }
 
 
@@ -235,7 +207,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     @Override
     public boolean supportsTileSource(final AbstractTileProvider newSource) {
-        return newSource instanceof AbstractMapsforgeTileProvider;
+        return newSource instanceof AbstractMapsforgeVTMTileProvider;
     }
 
     @Override
@@ -261,7 +233,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
         final boolean needsUpdate = super.setTileSource(newSource, force);
         if (needsUpdate) {
-            ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
+            ((AbstractMapsforgeVTMTileProvider) currentTileProvider).addTileLayer(this, mMap);
             startMap();
         }
         return needsUpdate;
@@ -308,10 +280,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMapLayers.addToGroup(layer, groupIndex);
     }
 
-    public synchronized void clearGroup(final int groupIndex) {
-        mMapLayers.removeGroup(groupIndex);
-    }
-
 
     // ========================================================================
     // position related methods
@@ -330,9 +298,13 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
-        return mMap == null ? new BoundingBox(0, 0, 0, 0) : mMap.getBoundingBox(0);
+    @Nullable
+    public Viewport getViewport() {
+        final BoundingBox bb = mMap == null ? null : mMap.getBoundingBox(0);
+        if (bb == null) {
+            return null;
+        }
+        return Viewport.forE6(bb.minLatitudeE6, bb.minLongitudeE6, bb.maxLatitudeE6, bb.maxLongitudeE6);
     }
 
     @Override
@@ -391,9 +363,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-
         mMap.getEventLayer().enableRotation(mapRotation == Settings.MAPROTATION_MANUAL);
-        repaintRotationIndicator(mMap.getMapPosition().bearing);
     }
 
     @Override
@@ -443,15 +413,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     // ========================================================================
     // additional menu entries
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        if (item.getItemId() == R.id.menu_theme_legend) {
-            RenderThemeLegend.showLegend(requireActivity(), themeHelper);
-            return true;
-        }
-        return false;
-    }
-
 
     // ========================================================================
     // Tap handling methods
@@ -477,9 +438,4 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
     }
 
-    @Override
-    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
-        final View compass = requireView().findViewById(R.id.bearingIndicator);
-        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
-    }
 }

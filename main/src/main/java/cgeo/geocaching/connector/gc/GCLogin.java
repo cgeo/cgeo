@@ -3,18 +3,33 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
+import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AvatarUtils;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
@@ -22,13 +37,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.rxjava3.core.Single;
+import okhttp3.Cookie;
+import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +70,7 @@ public class GCLogin extends AbstractLogin {
         }
     }
 
-    /**
+    /*
      * <pre>
      * var serverParameters = {
      *   "user:info": {
@@ -155,16 +172,28 @@ public class GCLogin extends AbstractLogin {
         return status;
     }
 
-    private void logLastLoginError(final String status) {
-        Settings.setLastLoginErrorGC(status);
-        Log.w("Login.login: " + status);
+    private void logLastLoginError(final String status, final boolean retry) {
+        logLastLoginError(status, retry, "");
+    }
+
+    private void logLastLoginError(final String status, final boolean retry, final String additionalLogInfo) {
+        final String retryMarker = " // ";
+        final String currentStatus = Settings.getLastLoginErrorGC() == null || Settings.getLastLoginErrorGC().first == null ? "" : Settings.getLastLoginErrorGC().first;
+        if (!retry && currentStatus.endsWith(retryMarker)) {
+            Settings.setLastLoginErrorGC(currentStatus + status);
+        } else {
+            Settings.setLastLoginErrorGC(status + retryMarker);
+        }
+        Log.w("Login.login: " + status + " (retry=" + retry + ") [" + additionalLogInfo + "]");
     }
 
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
+        final Context ctx = CgeoApplication.getInstance();
+
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            logLastLoginError("No login information stored");
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_missing_login), retry);
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
@@ -175,7 +204,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                logLastLoginError("Failed to retrieve login page (1st)");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage1), retry);
                 return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
@@ -186,13 +215,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                logLastLoginError("failed to find request verification token");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                logLastLoginError("Failed to retrieve login page (2nd)");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -203,32 +232,32 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (loginData.contains("<div class=\"g-recaptcha\" data-sitekey=\"")) {
-                logLastLoginError("Failed to log in to geocaching.com due to captcha required");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_captcha), retry);
                 return resetGcCustomDate(StatusCode.LOGIN_CAPTCHA_ERROR);
             }
 
             if (loginData.contains("id=\"signup-validation-error\"")) {
-                logLastLoginError("Failed to log in to geocaching.com as " + username + " because of wrong username/password");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_bad_login, username), retry);
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("content=\"account/join/success\"")) {
-                logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_not_validated, username), retry);
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason");
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error, username), retry, loginData);
             if (retry) {
                 getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
-            logLastLoginError("Unknown error");
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
-            logLastLoginError("communication error");
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry);
             return StatusCode.CONNECTION_FAILED_GC;
         }
     }
@@ -264,6 +293,7 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private String getLoginPage() {
+        Log.iForce("GCLogin: get login Page");
         return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
 
@@ -276,6 +306,7 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
+        Log.iForce("GCLogin: post credentials");
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
@@ -327,7 +358,7 @@ public class GCLogin extends AbstractLogin {
 
     /**
      * Ensure that the website is presented in the specified language.
-     *
+     * <br>
      * Used for unit tests.
      *
      * @param language the language code to be used at geocaching.com (e.g. "en-US")
@@ -425,10 +456,6 @@ public class GCLogin extends AbstractLogin {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
-    static String formatGcCustomDate(final int year, final int month, final int day) {
-        return new SimpleDateFormat(Settings.getGcCustomDate(), Locale.ENGLISH).format(new GregorianCalendar(year, month - 1, day).getTime());
-    }
-
     /**
      * checks if an Array of Strings is empty or not. Empty means:
      * - Array is null
@@ -514,14 +541,6 @@ public class GCLogin extends AbstractLogin {
     }
 
     /**
-     * transfers the viewstates variables from a page (response) to parameters
-     * (next request)
-     */
-    static void transferViewstates(final String page, final Parameters params) {
-        putViewstates(params, getViewstates(page));
-    }
-
-    /**
      * POST HTTP request. Do the request a second time if the user is not logged in
      */
     @WorkerThread
@@ -582,6 +601,75 @@ public class GCLogin extends AbstractLogin {
         GCAuthAPI.triggerAuthenticationTokenRetrieval();
         Settings.setLastLoginSuccessGC();
         return StatusCode.NO_ERROR; // logged in
+    }
+
+    public boolean supportsManualLogin() {
+        return true;
+    }
+
+    @UiThread
+    public void performManualLogin(@NonNull final Context activity, final Runnable callback) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(activity));
+        final AlertDialog dialog = builder.create();
+        dialog.setView(binding.getRoot());
+        initializeWebview(binding.webview);
+        CookieManager.getInstance().removeAllCookies(b -> {
+            final String url = "https://www.geocaching.com";
+            binding.webview.loadUrl(url + "/account/signin");
+            binding.okButton.setOnClickListener(bo -> {
+
+                //try to extract GC auth cookie from WebView
+                final String webViewCookies = CookieManager.getInstance().getCookie(url);
+                final List<Cookie> gcAuthCookies = cgeo.geocaching.network.Cookies.extractCookies(url, webViewCookies, c -> c.name().equals("gspkauth"));
+                if (gcAuthCookies.isEmpty()) {
+                    SimpleDialog.ofContext(activity).setTitle(TextParam.id(R.string.init_login_manual)).setMessage(TextParam.id(R.string.init_login_manual_error_nocookie)).show();
+                    return;
+                }
+
+                //insert cookie
+                resetLoginStatus();
+                cgeo.geocaching.network.Cookies.cookieJar.saveFromResponse(HttpUrl.get(url), gcAuthCookies);
+
+                dialog.dismiss();
+                //set to state "logging in..."
+                setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+                callback.run();
+
+                //perform the log-in and set state afterwards
+                AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+                    try {
+                        if (getLoginStatus(getLoginPage())) {
+                            completeLoginProcess();
+                            return;
+                        }
+                    } catch (final Exception ex) {
+                        logLastLoginError(CgeoApplication.getInstance().getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
+                        Log.w("GCLogin: Exception on manual login", ex);
+                    }
+                    setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+                }, callback);
+            });
+            binding.cancelButton.setOnClickListener(bo -> dialog.dismiss());
+            dialog.show();
+        });
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private static void initializeWebview(final WebView webView) {
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
+        final WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
+        webView.setFocusable(true);
+        webView.setFocusableInTouchMode(true);
     }
 
 }

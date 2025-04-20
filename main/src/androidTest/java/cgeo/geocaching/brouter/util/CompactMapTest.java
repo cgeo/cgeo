@@ -1,6 +1,7 @@
 package cgeo.geocaching.brouter.util;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -23,14 +24,14 @@ public class CompactMapTest {
 
     private void hashMapComparison(final int mapsize, final int trycount) {
         final Random rand = new Random(12345);
-        final HashMap<Long, String> hmap = new HashMap<>();
+        final Map<Long, String> hmap = new HashMap<>();
         CompactLongMap<String> cmapSlow = new CompactLongMap<>();
         CompactLongMap<String> cmapFast = new CompactLongMap<>();
 
         for (int i = 0; i < mapsize; i++) {
             final String s = "" + i;
             final long k = mapsize < 10 ? i : rand.nextInt(20000);
-            final Long kk = new Long(k);
+            final Long kk = k;
 
             if (!hmap.containsKey(kk)) {
                 hmap.put(kk, s);
@@ -45,7 +46,7 @@ public class CompactMapTest {
                 cmapFast = new FrozenLongMap<>(cmapFast);
             }
             final long k = mapsize < 10 ? i : rand.nextInt(20000);
-            final Long kk = new Long(k);
+            final Long kk = k;
             final String s = hmap.get(kk);
 
             final boolean contained = hmap.containsKey(kk);

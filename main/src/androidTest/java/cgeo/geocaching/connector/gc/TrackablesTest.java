@@ -42,7 +42,7 @@ public class TrackablesTest {
         final List<Image> logImages = log.get(5).logImages;
         assertThat(logImages).isNotNull();
         assertThat(logImages).hasSize(1);
-        assertThat(logImages.get(0).getUrl()).isEqualTo("https://img.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
+        assertThat(logImages.get(0).getUrl()).isEqualTo("https://img.geocaching.com/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
         assertThat(logImages.get(0).getTitle()).isEqualTo("@Osaka");
 
         for (final LogEntry entry : log) {

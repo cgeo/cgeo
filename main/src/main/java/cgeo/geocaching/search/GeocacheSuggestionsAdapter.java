@@ -35,6 +35,7 @@ public class GeocacheSuggestionsAdapter extends BaseSuggestionsAdapter {
             tv.setCompoundDrawablesWithIntrinsicBounds(cursor.getInt(5), 0, 0, 0);
             ((TextView) view.findViewById(R.id.info)).setText(cursor.getString(2));
         }
+        view.setBackgroundColor(context.getResources().getColor(R.color.colorBackgroundDialog));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class GeocacheSuggestionsAdapter extends BaseSuggestionsAdapter {
     private static Cursor getLastOpenedCaches() {
         final GeocacheSearchSuggestionCursor resultCursor = new GeocacheSearchSuggestionCursor();
         for (final Geocache geocache : DataStore.getLastOpenedCaches()) {
-            resultCursor.addCache(geocache.getGeocode(), geocache.getName(), geocache.getType().id);
+            resultCursor.addCache(geocache.getGeocode(), StringUtils.defaultIfBlank(geocache.getName(), ""), geocache.getType().id);
         }
         return resultCursor;
     }

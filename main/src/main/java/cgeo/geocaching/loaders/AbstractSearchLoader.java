@@ -4,10 +4,10 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import androidx.loader.content.AsyncTaskLoader;
 
@@ -78,7 +78,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
             final Activity activity = activityRef.get();
             if (activity != null) {
                 activity.runOnUiThread(() -> {
-                    Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
+                    ViewUtils.showToast(activity, R.string.warn_no_connector);
                     activity.finish();
                 });
             }

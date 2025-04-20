@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 
+import java.util.Collections;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
@@ -98,7 +100,7 @@ public class CacheListActionBarChooser {
                     this.listId = selectedListId;
                     refreshActionBarTitle();
                 }
-            }, false, PseudoList.NEW_LIST.id));
+            }, false, Collections.singleton(PseudoList.NEW_LIST.id), listId, null));
         }
 
         final TextView titleTv = resultView.findViewById(android.R.id.text1);
@@ -106,7 +108,12 @@ public class CacheListActionBarChooser {
 
         final AbstractList list = AbstractList.getListById(listId);
         if (list != null) {
-            TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list, false)).applyTo(titleTv);
+            final ImageParam ip = StoredList.UserInterface.getImageForList(list, false);
+            if (ip.isReferencedById()) { // see #15883
+                TextParam.text(list.getTitle()).setImage(ip).setImageTint(ColorUtils.colorFromResource(R.color.colorTextActionBar)).applyTo(titleTv);
+            } else {
+                TextParam.text(list.getTitle()).setImage(ip).applyTo(titleTv);
+            }
             if (list.getNumberOfCaches() >= 0) {
                 subtitleTv.setVisibility(View.VISIBLE);
                 subtitleTv.setText(getCacheListSubtitle(list));

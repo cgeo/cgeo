@@ -16,16 +16,11 @@ import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.graphics.Style;
-import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -37,13 +32,13 @@ import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.util.MapViewProjection;
 
-public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLayer<Pair<Layer, Layer>> {
+public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
 
     private LayerManager layerManager;
-    private MapViewProjection projection;
+    private final MapViewProjection projection;
+    private int defaultZLevel;
 
-    public final List<Layer> layers = new ArrayList<>();
-    public final Lock layerLock = new ReentrantLock();
+    private MapsforgeV6ZLevelGroupLayer groupLayer;
 
     public MapsforgeV6GeoItemLayer(final LayerManager layerManager, final MapViewProjection projection) {
         this.layerManager = layerManager;
@@ -51,22 +46,39 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     }
 
     @Override
-    public void init(final int zLevel) {
+    public void init(final int defaultZLevel) {
         Log.iForce("AsyncMapWrapper: Init Layer");
-        this.layerManager.getLayers().add(this);
-    }
+        this.defaultZLevel = defaultZLevel;
 
-    @Override
-    public void destroy(final Collection<Pair<GeoPrimitive, Pair<Layer, Layer>>> values) {
-        Log.iForce("Destroy Layer");
-        if (this.layerManager != null) {
-            this.layerManager.getLayers().remove(this);
+        //find or create zLeve-aware group layer
+        synchronized (this.layerManager.getLayers()) {
+            for (Layer layer : this.layerManager.getLayers()) {
+                if (layer instanceof MapsforgeV6ZLevelGroupLayer) {
+                    groupLayer = (MapsforgeV6ZLevelGroupLayer) layer;
+                    break;
+                }
+            }
+            if (groupLayer == null) {
+                groupLayer = new MapsforgeV6ZLevelGroupLayer();
+                this.layerManager.getLayers().add(groupLayer);
+            }
         }
-        this.layerManager = null;
     }
 
     @Override
-    public Pair<Layer, Layer> add(final GeoPrimitive item) {
+    public void destroy(final Collection<Pair<GeoPrimitive, int[]>> values) {
+        Log.iForce("Destroy Layer");
+        this.layerManager = null;
+        if (groupLayer != null) {
+            for (Pair<GeoPrimitive, int[]> entry : values) {
+                groupLayer.remove(false, entry.second);
+            }
+            groupLayer.requestRedraw();
+        }
+    }
+
+    @Override
+    public int[] add(final GeoPrimitive item) {
 
         final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle()));
         strokePaint.setStrokeWidth(ViewUtils.dpToPixelFloat(GeoStyle.getStrokeWidth(item.getStyle())));
@@ -103,41 +115,31 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
                 break;
         }
         if (goLayer != null) {
-            goLayer.setDisplayModel(getDisplayModel());
+            goLayer.setDisplayModel(groupLayer.getDisplayModel());
         }
 
         final Marker marker = createMarker(item.getCenter(), item.getIcon());
         if (marker != null) {
-            marker.setDisplayModel(getDisplayModel());
+            marker.setDisplayModel(groupLayer.getDisplayModel());
         }
 
-        layerLock.lock();
-        try {
-            if (goLayer != null) {
-                layers.add(goLayer);
-            }
-            if (marker != null) {
-                layers.add(marker);
-            }
-        } finally {
-            layerLock.unlock();
-        }
-        requestRedraw();
-        return new Pair<>(goLayer, marker);
+        final int zlevel = item.getZLevel() <= 0 ? defaultZLevel : item.getZLevel();
+
+        return groupLayer.add(zlevel, false, goLayer, marker);
     }
 
     @Override
-    public void remove(final GeoPrimitive item, final Pair<Layer, Layer> context) {
-        layerLock.lock();
-        try {
-            layers.remove(context.first);
-            if (context.second != null) {
-                layers.remove(context.second);
-            }
-        } finally {
-            layerLock.unlock();
+    public void remove(final GeoPrimitive item, final int[] context) {
+        groupLayer.remove(false, context);
+    }
+
+    @Override
+    public String onMapChangeBatchEnd(final long processedCount) {
+        if (layerManager == null || processedCount == 0) {
+            return null;
         }
-        requestRedraw();
+        groupLayer.requestRedraw();
+        return null;
     }
 
     private static Marker createMarker(final Geopoint point, final GeoIcon icon) {
@@ -149,11 +151,13 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             return null;
         }
 
-        return new Marker(
+        final Marker newMarker = new Marker(
                 latLong(point),
                 AndroidGraphicFactory.convertToBitmap(new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap)),
                 (int) ((-icon.getXAnchor() + 0.5f) * bitmap.getWidth()),
                 (int) ((-icon.getYAnchor() + 0.5f) * bitmap.getHeight()));
+        newMarker.setBillboard(!icon.isFlat());
+        return newMarker;
     }
 
     private static Paint createPaint(@ColorInt final int color) {
@@ -164,19 +168,6 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
 
     private static LatLong latLong(final Geopoint gp) {
         return new LatLong(gp.getLatitude(), gp.getLongitude());
-    }
-
-
-    @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
-        layerLock.lock();
-        try {
-            for (Layer layer : layers) {
-                layer.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
-            }
-        } finally {
-            layerLock.unlock();
-        }
     }
 
     @Override

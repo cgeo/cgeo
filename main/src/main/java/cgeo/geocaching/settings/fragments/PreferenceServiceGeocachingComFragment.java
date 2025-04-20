@@ -3,8 +3,10 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.settings.Credentials;
+import cgeo.geocaching.settings.CredentialsPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -24,7 +26,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
         final String urlOrHost = GCConnector.getInstance().getHost();
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -32,7 +34,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
 
         // Facebook Login Hint
         final Preference loginFacebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
-        loginFacebook.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(loginFacebook, preference -> {
             final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
             builder.setMessage(R.string.settings_info_facebook_login)
                     .setIcon(android.R.drawable.ic_dialog_info)
@@ -48,20 +50,27 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_gc);
+        requireActivity().setTitle(R.string.settings_title_gc);
 
         // Update authentication preference
         final GCConnector connector = GCConnector.getInstance();
         final Credentials credentials = Settings.getCredentials(connector);
         SettingsUtils.setAuthTitle(this, R.string.pref_fakekey_gc_authorization, StringUtils.isNotBlank(credentials.getUsernameRaw()));
-        findPreference(getString(R.string.pref_fakekey_gc_authorization)).setSummary(credentials.isValid() ? getString(R.string.auth_connected_as, credentials.getUserName()) : getString(R.string.auth_unconnected));
+        final CredentialsPreference credentialsPreference = findPreference(getString(R.string.pref_fakekey_gc_authorization));
+        assert credentialsPreference != null;
+        if (credentials.isValid()) {
+            credentialsPreference.setIcon(null);
+            credentialsPreference.setSummary(getString(R.string.auth_connected_as, credentials.getUserName()));
+        } else {
+            credentialsPreference.setIcon(R.drawable.attribute_firstaid);
+            credentialsPreference.setSummary(R.string.auth_unconnected_tap_here);
+        }
         initBasicMemberPreferences();
     }
 
     void initBasicMemberPreferences() {
         findPreference(getString((R.string.preference_screen_basicmembers)))
                 .setVisible(!Settings.isGCPremiumMember());
-        findPreference(getString((R.string.pref_loaddirectionimg)))
-                .setEnabled(!Settings.isGCPremiumMember());
+        PreferenceUtils.setEnabled(findPreference(getString((R.string.pref_loaddirectionimg))), !Settings.isGCPremiumMember());
     }
 }

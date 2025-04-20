@@ -9,6 +9,7 @@
         android:id="@+id/dialog_title"
         style="?android:attr/windowTitleStyle"
         android:layout_alignParentLeft="true"
+        android:textIsSelectable="true"
         android:layout_toLeftOf="@id/dialog_search_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:paddingRight="12dp"
+        android:tooltipText="@string/search"
         android:src="@drawable/ic_menu_search"
     />
 

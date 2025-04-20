@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Predicate;
 
 import java.text.ParseException;
@@ -30,8 +31,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter implements Cloneable {
 
-    private static String savedDifferentlyMarkerPreFix = "(";
-    private static String savedDifferentlyMarkerPostFix = ")*";
+    private static final String savedDifferentlyMarkerPreFix = "(";
+    private static final String savedDifferentlyMarkerPostFix = ")*";
 
     public enum QuickFilter {
         FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_FOUND_LOG
@@ -178,6 +179,25 @@ public class GeocacheFilter implements Cloneable {
 
     public boolean isFiltering() {
         return tree != null && tree.isFiltering();
+    }
+
+    /** returns true if this filter and other filter would filter same results */
+    public boolean filtersSame(@Nullable final GeocacheFilter other) {
+        if (other == null || !other.isFiltering()) {
+            return !isFiltering();
+        }
+        return isIncludeInconclusive() == other.isIncludeInconclusive() &&
+            JsonConfigurationUtils.equals(getTree(), other.getTree());
+    }
+
+    public static boolean filtersSame(@Nullable final GeocacheFilter filter1, @Nullable final GeocacheFilter filter2) {
+        if (filter1 == filter2) {
+            return true;
+        }
+        if (filter1 == null || filter2 == null) {
+            return false;
+        }
+        return filter1.filtersSame(filter2);
     }
 
     @NonNull
@@ -404,6 +424,7 @@ public class GeocacheFilter implements Cloneable {
         JsonUtils.set(node, CONFIG_KEY_TREE, JsonConfigurationUtils.toJsonConfig(getTree()));
         return JsonUtils.nodeToString(node);
     }
+
 
     private static GeocacheFilter createInternal(final String pName, final String pJsonConfig, final boolean throwOnParseError) throws ParseException {
 

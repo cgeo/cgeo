@@ -29,6 +29,7 @@
         android:layout_margin="0dip"
         android:clipToPadding="false"
         android:dividerHeight="1dip"
+        android:divider="@color/colorSeparator"
         android:fastScrollEnabled="false"
         android:padding="0dip"
         android:scrollbarStyle="outsideOverlay"

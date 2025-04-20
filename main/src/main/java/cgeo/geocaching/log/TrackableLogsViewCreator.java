@@ -91,7 +91,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
         final Trackable trackable = getTrackable();
         if (trackable != null && trackable.canShareLog(log)) {
             ctxMenu.addItem(getActivity().getString(R.string.cache_menu_browser),
-                    R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(getActivity(), trackable.getServiceSpecificLogUrl(log)));
+                    R.drawable.ic_menu_open_in_browser, it -> ShareUtils.openUrl(getActivity(), trackable.getServiceSpecificLogUrl(log)));
         }
         return ctxMenu;
     }

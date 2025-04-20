@@ -4,9 +4,6 @@
     android:viewportWidth="10.054"
     android:viewportHeight="10.054">
     <path
-        android:pathData="m9.525,10.054c0.2932,0 0.5292,-0.236 0.5292,-0.5292v-9.525h-10.054v9.525c0,0.2932 0.236,0.5292 0.5292,0.5292z"
-        android:fillColor="@color/osm_zoomcontrolbackground" />
-    <path
         android:pathData="m7.4745,5.3767h-4.8948v-0.6993h4.8948z"
         android:fillColor="@color/osm_zoomcontrol"/>
 </vector>

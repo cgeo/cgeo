@@ -35,7 +35,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
@@ -44,10 +43,12 @@ import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
@@ -66,6 +67,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -110,8 +112,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.locationStatus.updatePermissions());
 
-    private Long lastMCTime = 0L;
-
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
         UpdateUserInfoHandler(final MainActivity activity) {
@@ -119,7 +119,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.UpdateUserInfoHandler.handleMessage")) {
                 final MainActivity activity = getReference();
                 if (activity != null) {
@@ -128,6 +128,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
                     // Update UI
                     activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                        @NonNull
                         @Override
                         public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
                             // do NOT use convertView, as it gets filled asynchronously, which may lead to the wrong view being filled
@@ -135,21 +136,32 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             final ILogin connector = getItem(position);
                             fillView(view, connector);
                             return view;
-
                         }
 
                         private void fillView(final View connectorInfo, final ILogin conn) {
 
                             final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
+                            final boolean isLoggingIn = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working));
+                            final boolean isLoggingOk = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_ok));
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
-                            if (conn instanceof GCConnector && Network.isConnected() && !StringUtils.equalsAny(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working), activity.getString(R.string.init_login_popup_ok))) {
+                            if (conn instanceof GCConnector && Network.isConnected() && !isLoggingIn && !isLoggingOk) {
                                 final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
                                 if (lastError != null && StringUtils.isNotBlank(lastError.first) && lastError.second > Settings.getLastLoginSuccessGC()) {
                                     connInfo.append(" (").append(lastError.first).append(")");
                                 }
                             }
                             connectorStatus.setText(connInfo);
-                            connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+                            final View.OnClickListener connectorConfig = v -> SettingsActivity.openForScreen(conn.getServiceSpecificPreferenceScreenKey(), activity);
+                            connectorStatus.setOnClickListener(connectorConfig);
+
+                            final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
+                            manualLogin.setVisibility(connInfo.toString().contains(activity.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
+                            manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
+                                if (!activity.isDestroyed() && !activity.isFinishing()) {
+                                    activity.updateUserInfoHandler.sendEmptyMessage(-1);
+                                    activity.onLoginIssue(!anyConnectorLoggedIn());
+                                }
+                            }));
 
                             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
                                     () -> {
@@ -167,6 +179,11 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             }
                                         }
                                         final String userNameText = FoundNumCounter.getNotBlankUserName(conn);
+                                        if (conn instanceof GCConnector && StringUtils.contains(Settings.getUserName(), '@') && StringUtils.isNotBlank(userNameText)) {
+                                            // auto-fix email address used as login instead of username for GC connector (#16397)
+                                            Settings.setGCUserName(userNameText);
+                                            Log.d("Auto-fixed GC login settings from email to username");
+                                        }
                                         return new Pair<>(userFoundCount, userNameText);
                                     },
                                     p -> {
@@ -194,6 +211,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             if (conn instanceof IAvatar) {
                                 // already reserve space, so that other content does not jump as soon as avatar is loaded
                                 userAvatar.setVisibility(View.INVISIBLE);
+                                userAvatar.setOnClickListener(null);
 
                                 AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                                         () -> AvatarUtils.getAvatar((IAvatar) conn),
@@ -204,6 +222,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             } else {
                                                 userAvatar.setImageDrawable(img);
                                             }
+                                            userAvatar.setOnClickListener(connectorConfig);
                                         });
                             } else {
                                 userAvatar.setVisibility(View.GONE);
@@ -262,9 +281,15 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
 
-            binding.locationStatus.setPermissionRequestCallback(() -> {
-                this.askLocationPermissionAction.launch(null);
-            });
+            // location permission currently granted?
+            if (!PermissionContext.LOCATION.getNotGrantedPermissions().isEmpty()) {
+                displayActionItem(R.id.missingLocationPermission, R.string.location_no_permission, false, doAsk -> {
+                    if (doAsk) {
+                        this.askLocationPermissionAction.launch(null);
+                    }
+                });
+            }
+            binding.locationStatus.setPermissionRequestCallback(() -> this.askLocationPermissionAction.launch(null));
 
             configureMessageCenterPolling();
 
@@ -285,7 +310,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
             final int count = intent.getIntExtra(EXTRA_MESSAGE_CENTER_COUNTER, 0);
             new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
-                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
+                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), true, (actionRequested) -> {
                     updateHomeBadge(-1);
                     if (actionRequested) {
                         ShareUtils.openUrl(that, GCConstants.URL_MESSAGECENTER);
@@ -306,23 +331,21 @@ public class MainActivity extends AbstractNavigationBarActivity {
         binding.quicklaunchitems.setVisibility(View.GONE);
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
-            if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()));
+            if (QuickLaunchItem.conditionsFulfilled(item)) {
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
             }
-        }
-
-        // temporarily add button for unified map, if enabled in settings
-        if (Settings.showUnifiedMap()) {
-            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map");
         }
     }
 
-    private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip) {
+    private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip, final java.util.function.Consumer<View> viewInitializer) {
         final MaterialButton b = new MaterialButton(this, null, R.attr.quickLaunchButtonStyle);
         b.setIconResource(iconRes);
         b.setLayoutParams(lp);
         b.setVisibility(View.VISIBLE);
         b.setOnClickListener(view -> action.run());
+        if (viewInitializer != null) {
+            viewInitializer.accept(b);
+        }
         TooltipCompat.setTooltipText(b, tooltip);
         binding.quicklaunchitems.addView(b);
         binding.quicklaunchitems.setVisibility(View.VISIBLE);
@@ -345,7 +368,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     private void checkPendingDownloads() {
         if (Settings.pendingDownloadsNeedCheck()) {
             final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
-            if (pendingDownloads.size() == 0) {
+            if (pendingDownloads.isEmpty()) {
                 return;
             }
 
@@ -468,6 +491,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DebugUtils.askUserToReportProblem(this, null);
         } else if (id == R.id.menu_helpers) {
             startActivity(new Intent(this, UsefulAppsActivity.class));
+        } else if (id == R.id.menu_wherigo) {
+            startActivity(new Intent(this, WherigoActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
             wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
@@ -498,6 +523,10 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_download_language) {
+            OfflineTranslateUtils.downloadLanguageModels(this);
+        } else if (id == R.id.menu_delete_offline_data) {
+            DownloaderUtils.deleteOfflineData(this);
         } else if (id == R.id.menu_pending_downloads) {
             startActivity(new Intent(this, PendingDownloadsActivity.class));
         } else {
@@ -588,25 +617,26 @@ public class MainActivity extends AbstractNavigationBarActivity {
      * display action notifications, e. g. update or backup reminders
      * action callback accepts true, if action is to be performed / false if to be postponed
      */
-    public void displayActionItem(final int layout, final @StringRes int info, final Action1<Boolean> action) {
-        displayActionItem(layout, getString(info), action);
+    public void displayActionItem(final int layout, final @StringRes int info, final boolean withBadge, final Action1<Boolean> action) {
+        displayActionItem(layout, getString(info), withBadge, action);
     }
 
-    public void displayActionItem(final int layout, final String info, final Action1<Boolean> action) {
+    public void displayActionItem(final int layout, final String info, final boolean withBadge, final Action1<Boolean> action) {
+        final int delta = withBadge ? 1 : 0;
         final TextView l = findViewById(layout);
         if (l != null) {
             l.setVisibility(View.VISIBLE);
-            updateHomeBadge(1);
+            updateHomeBadge(delta);
             l.setText(info);
             l.setOnClickListener(v -> {
                 action.call(true);
                 l.setVisibility(View.GONE);
-                updateHomeBadge(-1);
+                updateHomeBadge(-delta);
             });
             l.setOnLongClickListener(v -> {
                 action.call(false);
                 l.setVisibility(View.GONE);
-                updateHomeBadge(-1);
+                updateHomeBadge(-delta);
                 return true;
             });
         }

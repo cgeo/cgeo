@@ -2,7 +2,6 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECTED_TOKEN;
@@ -13,19 +12,24 @@ import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Function;
 
+import org.assertj.core.data.Offset;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
 
 public class FormulaTest {
 
+    private static final Offset<Double> DOUBLE_OFFSET = Offset.offset(0.0000001d);
 
     private static double eval(final String expression, final Object... vars) {
+        System.out.println("EVAL: " + Formula.compile(expression).toDebugString(null, true, true));
         return Formula.eval(expression, vars);
     }
 
@@ -41,23 +45,41 @@ public class FormulaTest {
     }
 
     @Test
+    public void numericOverflow() {
+        //Factor
+        assertCharSequence(Formula.compile("99^99").evaluateToCharSequence(null), "369729637649726772657187905628805440595668764281741102430259972423552570455277523421410650010128232727940978889548326540119429996769494359451621570193644014418071060667659301384999779999159200499899");
+        assertCharSequence(Formula.compile("99.2^99").evaluateToCharSequence(null), "451497701011167906703841661163527048570327680456821131912927542131240109815747012332035456522827892501171432658231661888826169986748536541541135792931381804288134021576803170332358962773334502471794.879484008303777090366409951066961034427451419830234801561538473283654036152732093162031995921891328");
+        assertCharSequence(Formula.compile("3.2^3.2").evaluateToCharSequence(null), "41.350421");
+        assertCharSequence(Formula.compile("9.2^9.2").evaluateToCharSequence(null), "[9.2 ^ 9.2]");
+
+        //factor
+        assertCharSequence(Formula.compile("20!").evaluateToCharSequence(null), "2432902008176640000");
+        assertCharSequence(Formula.compile("21.000!").evaluateToCharSequence(null), "51090942171709440000");
+        assertCharSequence(Formula.compile("100!").evaluateToCharSequence(null), "[100!]");
+
+        //various
+        assertCharSequence(Formula.compile("1/0").evaluateToCharSequence(null), "[1 / 0]");
+        assertCharSequence(Formula.compile("1/0.00000000000000000000000001").evaluateToCharSequence(null), "100000000000000000000000000");
+    }
+
+    @Test
     public void bigIntegers() {
         //Long value
         final String longMax = String.valueOf(Long.MAX_VALUE); // this should be 9223372036854775807
         final int longMaxCs = 88; // manually calculated checksum of Long.MAX_VALUE
 
         assertThat(Formula.evaluate(longMax).isInteger()).isTrue();
-        assertThat(Formula.evaluate(longMax).getAsInt()).isEqualTo(Long.MAX_VALUE);
+        assertThat(Formula.evaluate(longMax).getAsInteger()).isEqualTo(Long.MAX_VALUE);
         //Beyond Long Value
         final String longMaxBeyond = longMax + "1";
         final Value longMaxBeyondValue = Formula.evaluate(longMaxBeyond);
-        assertThat(longMaxBeyondValue.isInteger()).isFalse();
-        assertThat(longMaxBeyondValue.getAsInt()).isEqualTo(0L); // if too long for parsing -> return 0
+        assertThat(longMaxBeyondValue.isInteger()).isTrue();
+        assertThat(longMaxBeyondValue.getAsInteger()).isEqualTo(new BigInteger(longMaxBeyond)); // if too long for parsing -> return 0
 
         //Long value checksums
-        assertThat(Formula.evaluate("cs(" + longMax + ")").getAsInt()).isEqualTo(longMaxCs);
-        assertThat(FormulaUtils.valueChecksum(longMaxBeyondValue, false)).isEqualTo(longMaxCs + 1);
-        assertThat(Formula.evaluate("cs(" + longMaxBeyond + ")").getAsInt()).isEqualTo(longMaxCs + 1);
+        assertThat(Formula.evaluate("cs(" + longMax + ")").getAsInteger()).isEqualTo(longMaxCs);
+        assertThat(FormulaUtils.checksum(longMaxBeyondValue, false)).isEqualTo(longMaxCs + 1);
+        assertThat(Formula.evaluate("cs(" + longMaxBeyond + ")").getAsInteger()).isEqualTo(longMaxCs + 1);
     }
 
     @Test
@@ -182,8 +204,11 @@ public class FormulaTest {
         assertThat(Formula.compile("[:0-9]").getRangeIndexSize()).isEqualTo(10);
 
         assertThat(Formula.compile("[:0-3]*[:0-4]").getRangeIndexSize()).isEqualTo(20);
+        assertRangeFormula("[:1-2, 8]*3", null, 3, 6, 24);
+        assertRangeFormula("[:2-1, 8]*3", null, 3, 6, 24);
         assertRangeFormula("[:1-2]*[:3-4]", null, 3, 6, 4, 8);
-        assertRangeFormula("[:1-3, ^2]*[:10-20, ^11-19]", null, 10, 30, 20, 60);
+        assertRangeFormula("[:1,3]*[:10,20]", null, 10, 30, 20, 60);
+        assertRangeFormula("[:3,1]*[:10,20]", null, 30, 10, 60, 20);
 
         //assert graceful handling of "strange" formats
         assertRangeFormula("[:abc1]", null, 1);
@@ -193,18 +218,13 @@ public class FormulaTest {
         //assert
         assertThatThrownBy(() -> eval("[:0-3"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
-        assertThatThrownBy(() -> eval("[:0-5000]")).as("Too many items in range")
-                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
         assertThatThrownBy(() -> eval("[:]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
         assertThatThrownBy(() -> eval("[:  ]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-        assertThatThrownBy(() -> eval("[:^1-2]"))
-                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-
     }
 
-    private void assertRangeFormula(final String formula, final Func1<String, Value> varMap, final Object... expectedResults) {
+    private void assertRangeFormula(final String formula, final Function<String, Value> varMap, final Object... expectedResults) {
         final Formula f = Formula.compile(formula);
         assertThat(f.getRangeIndexSize()).isEqualTo(expectedResults.length);
         final List<Value> results = new ArrayList<>();
@@ -256,6 +276,12 @@ public class FormulaTest {
         assertThat(Formula.evaluate("rot13(rot('aBc'; -13))").getRaw()).isEqualTo("aBc");
         assertThat(Formula.evaluate("rot('abc'; 1)").getRaw()).isEqualTo("bcd");
         assertThat(eval("rot1(a)", "r", 1d, "o", 2d, "t", 3d, "a", 4d)).isEqualTo(12314d);
+
+        assertCharSequence(Formula.compile("substr('abcde'; 2; 2)").evaluateToCharSequence(null), "bc");
+        assertCharSequence(Formula.compile("substr('abcde'; 1; 5)").evaluateToCharSequence(null), "abcde");
+        assertCharSequence(Formula.compile("substr('abcde'; 3)").evaluateToCharSequence(null), "cde");
+        assertCharSequence(Formula.compile("substr('abcde';2;8)").evaluateToCharSequence(null), "substr('abcde'; 2; [<8>])");
+        assertCharSequence(Formula.compile("substr('abcde';'b';2)").evaluateToCharSequence(null), "substr('abcde'; [<'b'>]; 2)");
     }
 
     @Test
@@ -267,9 +293,10 @@ public class FormulaTest {
 
     @Test
     public void operatorPrecedenceAndEvaluationOrder() {
-        assertThat(eval("100/5/5")).isEqualTo(4);
         assertThat(eval("100-5-5")).isEqualTo(90);
         assertThat(eval("100-5*5")).isEqualTo(75);
+        assertThat(eval("100/5")).isEqualTo(20);
+        assertThat(eval("100/5/5")).isEqualTo(4);
     }
 
     @Test
@@ -328,8 +355,8 @@ public class FormulaTest {
     public void advancedFunctions() {
         assertThat(eval("checksum(888)")).isEqualTo(24);
         assertThat(eval("ichecksum(888)")).isEqualTo(6);
-        assertThat(eval("ichecksum(-888)")).isEqualTo(6);
-        assertThat(eval("ichecksum(-888.234)")).isEqualTo(6);
+        assertThat(eval("ichecksum(-888)")).isEqualTo(-6);
+        assertThat(eval("ichecksum(-888.235)")).isEqualTo(-7);
         assertThat(eval("lettervalue('Test123')")).isEqualTo(20 + 5 + 19 + 20 + 1 + 2 + 3);
         assertThat(eval("lettervalue(-888.123)")).isEqualTo(30);
     }
@@ -347,15 +374,19 @@ public class FormulaTest {
 
     @Test
     public void value() {
-        assertThat(Value.of(345).getAsInt()).isEqualTo(345);
-        assertThat(Value.of("345").getAsInt()).isEqualTo(345);
+        assertThat(Value.of(345).getAsInteger()).isEqualTo(345);
+        assertThat(Value.of("345").getAsInteger()).isEqualTo(345);
         assertThat(Value.of(345).isInteger()).isTrue();
         assertThat(Value.of("345").isInteger()).isTrue();
         assertThat(Value.of("345b").isInteger()).isFalse();
         assertThat(Value.of("abcd").isInteger()).isFalse();
 
-        assertThat(Formula.evaluate("123.00").isInteger()).isTrue();
-        assertThat(Formula.evaluate("123.00").getAsInt()).isEqualTo(123L);
+        assertThat(Formula.evaluate("123").isInteger()).isTrue();
+        assertThat(Formula.evaluate("123").getAsInteger()).isEqualTo(123L);
+        assertThat(Formula.evaluate("123.0").isInteger()).isTrue();
+        assertThat(Formula.evaluate("123.0").getAsInteger()).isEqualTo(123L);
+        assertThat(Formula.evaluate("123.00000000000000001").isInteger()).isFalse();
+        assertThat(Formula.evaluate("123.00000000000000001").getAsInteger()).isEqualTo(123L);
     }
 
     @Test
@@ -395,16 +426,20 @@ public class FormulaTest {
 
     @Test
     public void evaluateToCharSequence() {
-        assertErrorStringFormats(Formula.compile("3-'a'").evaluateToCharSequence(null), "3 - ['a']");
-        assertErrorStringFormats(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "7 + ['a'] + 5");
-        assertErrorStringFormats(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "7 + ['a'] + [?A][?B]12");
-        assertErrorStringFormats(Formula.compile("(5+'a')").evaluateToCharSequence(null), "(5 + ['a'])");
+        assertCharSequence(Formula.compile("3-'a'").evaluateToCharSequence(null), "[3 - 'a']");
+        assertCharSequence(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "[7 + 'a'] + 5");
+        assertCharSequence(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "[7 + 'a'] + [?A][?B]12");
+        assertCharSequence(Formula.compile("(5+'a')").evaluateToCharSequence(null), "([5 + 'a'])");
+
+        //parameter errors
+        assertCharSequence(Formula.compile("chars('abc';1;4;2;5;-4;'b')").evaluateToCharSequence(null), "chars('abc'; 1; [<4>]; 2; [<5>]; [<-4>]; [<'b'>])");
+        assertCharSequence(Formula.compile("'a'/'b'").evaluateToCharSequence(null), "['a' / 'b']");
     }
 
     /**
      * checks whether a given error string is correct and has the right places highlighted with an error format
      */
-    private void assertErrorStringFormats(final CharSequence cs, final String expectedString) {
+    private void assertCharSequence(final CharSequence cs, final String expectedString) {
         final String annotated = TextUtils.annotateSpans(cs, s -> {
             if (s instanceof ForegroundColorSpan && ((ForegroundColorSpan) s).getForegroundColor() == Color.RED) {
                 return new Pair<>("[", "]");
@@ -425,10 +460,10 @@ public class FormulaTest {
                 .as("constant value should be in one node").isEqualTo("16.123{}");
 
         assertThat(Formula.compile("A + (length('abc') + 3)").toDebugString(null, false, true))
-                .as("constant parts should be in one subnode").isEqualTo("?A + 6{?A{}6{}}");
+                .as("constant parts should be in one subnode").isEqualTo("?A + 6{?A{};6{}}");
 
         assertThat(Formula.compile("12A.456B8901").toDebugString(null, false, true))
-                .as("decimals should be stored as efficiently as possible").isEqualTo("12?A.456?B8901{12{}?A{}.456{}?B{}8901{}}");
+                .as("decimals should be stored as efficiently as possible").isEqualTo("12?A.456?B8901{12{};?A{};.456{};?B{};8901{}}");
 
 
     }
@@ -469,6 +504,10 @@ public class FormulaTest {
         assertThat(eval("if(3>4;1;2)")).isEqualTo(2d);
         assertThat(eval("if(3<4;1;2)")).isEqualTo(1d);
 
+        //comaring strings and number-string-mixes
+        assertThat(eval("'a' > 'd'")).isEqualTo(0d);
+        assertThat(eval("'a' <= 'd'")).isEqualTo(1.0d);
+        assertThat(eval("'a' > 4")).isEqualTo(1d);
     }
 
     @Test
@@ -490,7 +529,7 @@ public class FormulaTest {
         assertThat(eval("123 ### * 4")).isEqualTo(123d);
         assertThat(eval("123#ABC")).isEqualTo(123d);
         assertThat(eval("123 # -|=$&/( ABC 456 ÄÖÜäöü πΩ👍")).isEqualTo(123d);
-        assertThat(eval("3.14 #this is pi# * R # this is the radius used # *2    # 2*pi*r", "R", 10)).isEqualTo(3.14 * 10 * 2);
+        assertThat(eval("3.14 #this is pi# * R # this is the radius used # *2    # 2*pi*r", "R", 10)).isEqualTo(3.14 * 10 * 2, DOUBLE_OFFSET);
         assertThat(eval("4! #comment")).isEqualTo(4 * 3 * 2);
         assertThat(eval("4^2 #comment")).isEqualTo(4 * 4);
         assertThat(eval("2 * (3 + 4) #comment")).isEqualTo(2 * (3 + 4));

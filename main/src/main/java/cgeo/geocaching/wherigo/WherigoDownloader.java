@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -11,6 +12,8 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
@@ -34,6 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.utils.IOUtils;
 
 public class WherigoDownloader {
@@ -45,58 +49,69 @@ public class WherigoDownloader {
 
     private static final Pattern REQUEST_VERIFICATIOn_TOKEN_PATTERN = Pattern.compile("<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"");
 
-    private final WorkerTask<Pair<String, Function<String, Uri>>, String, StatusResult> wherigoDownloadTask;
+    private final WorkerTask<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>> wherigoDownloadTask;
 
 
-    public WherigoDownloader(@SuppressLint("RestrictedApi") final ComponentActivity activity, final Consumer<StatusResult> wherigoDownloadConsumer) {
+    public WherigoDownloader(@SuppressLint("RestrictedApi") final ComponentActivity activity, final BiConsumer<String, StatusResult> wherigoDownloadConsumer) {
 
-        wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, StatusResult>of(
+        wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>>of(
                 "wherigo-download",
                 (input, progress, cancelFlag) -> downloadWherigoTask(input.first, input.second, progress, cancelFlag),
                 AndroidRxUtils.networkScheduler)
-            .addFeature(ProgressDialogFeature.of(activity).setTitle("Downloading Wherigo").setAllowCancel(true))
+            .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.wherigo_download_title)).setAllowCancel(true))
             .observeResult(activity, result -> {
                 if (wherigoDownloadConsumer != null) {
-                    wherigoDownloadConsumer.accept(result);
+                    wherigoDownloadConsumer.accept(result.first, result.second);
                 }
-            }, null);
+            }, error -> {
+                if (wherigoDownloadConsumer != null) {
+                    wherigoDownloadConsumer.accept("-", new StatusResult(StatusCode.COMMUNICATION_ERROR, "Error: " + error));
+                }
+            });
     }
 
     public void downloadWherigo(final String cguid, final Function<String, Uri> targetUriSupplier) {
         wherigoDownloadTask.start(new Pair<>(cguid, targetUriSupplier));
     }
 
-    private static StatusResult downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
-        final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
-        final String username = cred.getUsernameRaw();
-        final String password = cred.getPasswordRaw();
+    private static Pair<String, StatusResult> downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
+        try {
+            final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
+            final String username = cred.getUsernameRaw();
+            final String password = cred.getPasswordRaw();
 
-        final Uri[] uriStorage = new Uri[1];
-        final Function<String, OutputStream> outputSupplier = name -> {
-            uriStorage[0] = targetUriSupplier.apply(name);
-            return ContentStorage.get().openForWrite(uriStorage[0]);
-        };
-        final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
-        if (!result.isOk() && uriStorage[0] != null) {
-            ActivityMixin.showApplicationToast("Wherigo: Deleting leftover file");
-            ContentStorage.get().delete(uriStorage[0]);
+            final Uri[] uriStorage = new Uri[1];
+            final Function<String, OutputStream> outputSupplier = name -> {
+                uriStorage[0] = targetUriSupplier.apply(name);
+                return ContentStorage.get().openForWrite(uriStorage[0]);
+            };
+            final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
+            if (!result.isOk() && uriStorage[0] != null) {
+                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_download_delete_leftover_toast));
+                ContentStorage.get().delete(uriStorage[0]);
+            }
+            return new Pair<>(cguid, result);
+        } catch (RuntimeException re) {
+            return new Pair<>(cguid, new StatusResult(StatusCode.COMMUNICATION_ERROR, "Unexpected problem: " + re));
         }
-        return result;
     }
 
     public static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
 
-        progress.accept("Logging in");
+        progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_login));
 
         final StatusResult loginResult = login(username, password);
         if (!loginResult.isOk()) {
             return loginResult;
         }
 
-        progress.accept("Start Download");
+        progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_started));
+
         return download(cguid, outputSupplier, (c, t) -> {
             final int percent = Math.round(((float) c) / t * 100);
-            progress.accept("Downloaded " + c + "/" + t + " (" + percent + "%)");
+
+            progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_download_status,
+                    Formatter.formatBytes(c), Formatter.formatBytes(t), String.valueOf(percent)));
         }, cancelFlag);
     }
 
@@ -128,12 +143,13 @@ public class WherigoDownloader {
         }
         final String token = m.group(1);
 
-        //pace download request
+        //place download request
         final Parameters params = new Parameters()
             .add("__EVENTTARGET", "")
             .add("__EVENTARGUMENT", "")
             .add("__RequestVerificationToken", token)
             .add("ctl00$ContentPlaceHolder1$uxDeviceList", "4")
+            .add("ctl00$ContentPlaceHolder1$EULAControl1$uxEulaAgree", "On")
             .add("ctl00$ContentPlaceHolder1$btnDownload", "Download Now");
 
         final HttpRequest downloadRequest = new HttpRequest()
@@ -142,10 +158,21 @@ public class WherigoDownloader {
             .bodyForm(params);
         try (HttpResponse downloadResponse = downloadRequest.request().blockingGet()) {
             final String type = downloadResponse.getResponse().body().contentType().toString();
-            if (!downloadResponse.isSuccessful() || !"application/octet-stream".equals(type)) {
-                return new StatusResult(StatusCode.COMMUNICATION_ERROR, "cartridge not found [" + type + "]");
+            if (!downloadResponse.isSuccessful()) {
+                return cartridgeNotFound(type);
             }
             final Response response = downloadResponse.getResponse();
+            if (StringUtils.startsWith(type, "text/html")) {
+                final String body = downloadResponse.getBodyString();
+                if (StringUtils.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
+                    return new StatusResult(StatusCode.UNAPPROVED_LICENSE, LocalizationUtils.getString(R.string.wherigo_download_accept_eula));
+                } else {
+                    return cartridgeNotFound(type);
+                }
+            } else if (!"application/octet-stream".equals(type)) {
+                return cartridgeNotFound(type);
+            }
+
             final String contentDisposition = response.header("Content-Disposition", "");
             final String pattern = "(?i)^ *attachment *; *filename *= *(.*) *$";
             final String filename;
@@ -160,16 +187,21 @@ public class WherigoDownloader {
         }
     }
 
+    private static StatusResult cartridgeNotFound(final String type) {
+        return new StatusResult(StatusCode.COMMUNICATION_ERROR, "cartridge not found [" + type + "]");
+    }
+
     private static StatusResult store(final String filename, final long total, final Function<String, OutputStream> outputSupplier, final InputStream stream, final BiConsumer<Long, Long> progress, final Supplier<Boolean> cancelFlag) {
 
             long completed = 0;
             boolean success = false;
             String errorMsg = "";
             final byte[] buffer = new byte[1024];
-            final OutputStream outputStream = new BufferedOutputStream(outputSupplier.apply(filename));
-            if (outputStream == null) {
+            final OutputStream rawStream = outputSupplier.apply(filename);
+            if (rawStream == null) {
                 return new StatusResult(StatusCode.COMMUNICATION_ERROR, "Creating outputstream for: " + filename);
             }
+            final OutputStream outputStream = new BufferedOutputStream(rawStream);
 
             try (BufferedInputStream inputStream = new BufferedInputStream(stream)) {
                 progress.accept(completed, total);

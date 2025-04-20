@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundActionBar"
+    android:paddingVertical="6dp">
+
+    <ImageView
+        android:id="@+id/dialog_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingVertical="3dp"
+        android:layout_centerVertical="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:src="@drawable/arrow_back" />
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="?android:attr/windowTitleStyle"
+        android:layout_toRightOf="@id/dialog_back"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"/>
+
+</RelativeLayout>

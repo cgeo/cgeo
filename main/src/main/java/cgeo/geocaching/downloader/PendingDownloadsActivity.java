@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.formatBytes;
@@ -21,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -121,7 +121,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
     private void fillAdapter() {
         // retrieve list of pending downloads
         pendingDownloads = PendingDownload.getAllPendingDownloads();
-        if (pendingDownloads.size() == 0) {
+        if (pendingDownloads.isEmpty()) {
             showShortToast(R.string.downloader_no_pending_downloads);
             finish();
         } else {
@@ -179,8 +179,8 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             PendingDownload.remove(id);
             downloadManager.remove(id);
             if (!silent) {
-                Toast.makeText(this, String.format(getString(R.string.downloader_cancelled_download), download.filename), Toast.LENGTH_SHORT).show();
-            }
+                ViewUtils.showToast(this, R.string.downloader_cancelled_download, download.filename);
+             }
         }
     }
 

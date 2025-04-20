@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Collection of higher-level utility functions for Folders.
- *
+ * <br>
  * Since Folders can be based several base types (Files, DOcuments etc) they can be used uniquely
  * for all those types
  */
@@ -109,7 +110,7 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0l, true, null);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0L, true, null);
 
         public final int fileCount;
         public final int dirCount;
@@ -243,15 +244,15 @@ public class FolderUtils {
 
     /**
      * Synchronizes the content of a given folder to a File folder.
-     *
+     * <br>
      * Methods attempts to create a copy of source folder into target folder with as few actual copy approaches as possible.
      * To achieve this, in target folder (and subfolders) an information file with name {@link #FOLDER_SYNC_INFO_FILENAME}
      * is maintained. This (property) file contains for each contained file a token with state of source file on last copying.
      * Currently this contains "lastMofidied" as well as "size" of source file.
      * Files in target which are not also in source will be deleted on sync.
-     *
+     * <br>
      * Only files are synchronized. Necessary (sub)folder in target are created on need but not explicitely maintained.
-     *
+     * <br>
      * This implementation does NOT support overlapping source and target folders. If such parameters
      * are given, then behaviour is undefined.
      *
@@ -461,7 +462,7 @@ public class FolderUtils {
 
     /**
      * Copies the content of one folder into another. Source and target folder itself remain untouched.
-     *
+     * <br>
      * Implementation supports handling of case when source and target point to same folder (maybe via different APIs e.g. File vs Document)
      * as well as when source folder is inside target or vice versa
      *
@@ -539,7 +540,7 @@ public class FolderUtils {
 
     /**
      * Copies the content of one folder into another. Source and target folder itself remain untouched.
-     *
+     * <br />
      * Implementation supports handling of case when source and target point to same folder (maybe via different APIs e.g. File vs Document)
      * as well as when source folder is inside target or vice versa
      *
@@ -861,7 +862,7 @@ public class FolderUtils {
 
         final List<ContentStorage.FileInformation> files = pls.list(root);
         if (ordered) {
-            Collections.sort(files, (o1, o2) -> o1.name.compareTo(o2.name));
+            Collections.sort(files, Comparator.comparing(o -> o.name));
         }
         boolean continueWalk = true;
         for (ContentStorage.FileInformation fi : files) {

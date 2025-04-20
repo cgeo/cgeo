@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.ImageeditActivityBinding;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
@@ -98,6 +99,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             imageOrientation = ImageUtils.getImageOrientation(image.getUri());
             savedImageOrientation = imageOrientation.clone();
+            binding.caption.requestFocus();
         }
 
         // Restore previous state
@@ -204,9 +206,9 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         image = new Image.Builder()
             .setServiceImageId(image.serviceImageId)
             .setUrl(image.uri)
-            .setTitle(binding.caption.getText().toString())
+            .setTitle(ViewUtils.getEditableText(binding.caption.getText()))
             .setTargetScale(imageScale.get())
-            .setDescription(binding.description.getText().toString())
+            .setDescription(ViewUtils.getEditableText(binding.description.getText()))
             .build();
     }
 
@@ -270,7 +272,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
-        if (requestCode == RC_EDIT_IMAGE_EXTERNAL && resultCode == RESULT_OK) {
+        if (requestCode == RC_EDIT_IMAGE_EXTERNAL) {
             imageOrientation = ImageUtils.getImageOrientation(image.getUri());
             savedImageOrientation = imageOrientation.clone();
             loadImage();

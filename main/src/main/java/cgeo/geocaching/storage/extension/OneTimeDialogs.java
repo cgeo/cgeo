@@ -28,7 +28,9 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         MAP_LIVE_DISABLED(R.string.map_live_disabled, R.string.map_live_disabled_hint, DefaultBehavior.SHOW_ALWAYS, 0),
         ROUTE_OPTIMIZATION(R.string.route_optimization, R.string.route_optimization_info, DefaultBehavior.SHOW_ALWAYS, 0),
         NOTIFICATION_PERMISSION(R.string.changed_permissions_title, R.string.changed_permissions_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
-        GOTO_DEPRECATION_NOTICE(R.string.goto_targets_deprecation_title, R.string.goto_targets_deprecation_notice, DefaultBehavior.SHOW_ALWAYS, 0);
+        GOTO_DEPRECATION_NOTICE(R.string.goto_targets_deprecation_title, R.string.goto_targets_deprecation_notice, DefaultBehavior.SHOW_ALWAYS, 0),
+        WHERIGO_PLAYER_SHORTCUTS(R.string.wherigo_otm_shortcuts_title, R.string.wherigo_otm_shortcuts_message, DefaultBehavior.SHOW_ALWAYS, 0);
+
 
         public final Integer messageTitle;
         public final Integer messageText;

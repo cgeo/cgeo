@@ -10,6 +10,18 @@
         <item>DDD°MM\'SS.SSS\"</item>
     </string-array>
 
+    <string-array translatable="false" name="init_date_format_values">
+        <item>@string/system_default</item>
+        <item>17.02.2024</item>
+        <item>17.02.24</item>
+        <item>02/17/2024</item>
+        <item>02/17/24</item>
+        <item>17/02/2024</item>
+        <item>17/02/24</item>
+        <item>2024-02-17</item>
+        <item>24-02-17</item>
+    </string-array>
+
     <!-- distance units -->
     <string-array translatable="false" name="distance_units">
         <item>@string/unit_m</item>
@@ -45,6 +57,8 @@
     <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
     <string translatable="false" name="map_source_osm_opentopomap">OpenTopoMap</string>
+    <string translatable="false" name="map_source_mapilion_hillshading">Mapilion Hillshading</string>
+    <string translatable="false" name="map_source_maptoolkit_hillshading">MapToolkit Hillshading</string>
 
     <!-- edit waypoint -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
@@ -66,7 +80,6 @@
     <!-- links to manual pages -->
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="faq_url_settings_themes">https://faq.cgeo.org/#theme-slow</string>
-    <string translatable="false" name="manual_url_hillshading">https://manual.cgeo.org/en/offlinemaps#hillshading</string>
 
     <!-- contributors -->
     <string translatable="false" name="contributors_carnero">carnero</string>
@@ -75,22 +88,19 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2023-01 to 2023-12 -->
+    <!-- currently listed: contributions 2025-04 to 2024-04 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
-    eddiemuc|https://github.com/eddiemuc|cd|
+    eddiemuc|https://github.com/eddiemuc|cds|
     fm-sys|https://github.com/fm-sys|cg|
-    kumy|https://github.com/kumy|c|
+    kumy|https://github.com/kumy|ci|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
-    mortenbruhn|https://github.com/mortenbruhn|c|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    mzylowski|https://github.com/mzylowski|c|
-    NotWoods|https://github.com/NotWoods|c|
-    technetium|https://github.com/technetium|c|
-    UniQP|https://github.com/UniQP|c|
+    okainov|https://github.com/okainov|c|
+    ReggieDoodle|https://github.com/ReggieDoodle|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -132,10 +142,12 @@
     Mathieu Alorent||c|
     Matze2||c|
     MichielK||c|
+    mortenbruhn|https://github.com/mortenbruhn|c|
     msperkowski|||
+    mzylowski|https://github.com/mzylowski|c|
     ncorreia||c|
     nmrsmn||c|
-    okainov|https://github.com/okainov|c|
+    NotWoods|https://github.com/NotWoods|c|
     osma|https://github.com/osma|c|
     osmpaws|https://github.com/osmpaws|c|
     Pavol Babinčák||c|
@@ -145,14 +157,16 @@
     Rainer S.||c|
     Ray||c|
     RoadRunner-||c|
-    SammysHP|https://www.sammyshp.de/|i|
-    Samuel Tardieu|https://www.rfc1149.net/sam.html||
+    SammysHP|https://www.sammyshp.de/|ci|
+    Samuel Tardieu|https://www.rfc1149.net/sam.html|c|
     S-Bartfast|https://github.com/S-Bartfast|c|
     SchoolGuy|https://github.com/SchoolGuy|c|
     stephanme/Geoteufel||c|
     Surfoo||c|
     TakoTheDank|https://github.com/TacoTheDank|c|
+    technetium|https://github.com/technetium|c|
     thiasB||c|
+    UniQP|https://github.com/UniQP|c|
     Volthai7us||c
     YraFyra||c|
     zenobios||c|
@@ -247,9 +261,7 @@
     <!-- helper app names -->
     <string translatable="false" name="helper_locus_title">Locus</string>
     <string translatable="false" name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
-    <string translatable="false" name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string translatable="false" name="helper_gps_locker_title">GPS Locker</string>
-    <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
     <string translatable="false" name="helper_chirpwolf">Chirp Wolf</string>
     <string translatable="false" name="helper_alc">Adventure Lab</string>
     <string translatable="false" name="helper_gcwizard">GC Wizard</string>
@@ -270,7 +282,6 @@
     <string translatable="false" name="package_brouter">btools.routingapp</string>
     <string translatable="false" name="package_google_translate">com.google.android.apps.translate</string>
     <string translatable="false" name="package_gpsstatus">com.eclipsim.gpsstatus2</string>
-    <string translatable="false" name="package_bluetoothgps">googoo.android.btgps</string>
     <string translatable="false" name="package_gpslocker">com.silentlexx.gpslock</string>
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
@@ -290,9 +301,8 @@
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
     <string translatable="false" name="mapserver_openandromaps_themes_name">OpenAndroMaps Theme</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
-    <string translatable="false" name="mapserver_openandromaps_themes_voluntary_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/voluntary/downloads/</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/elevate/</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_base_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
     <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string><!-- cannot use https: here due to certificate not valid for subdomain -->
@@ -314,6 +324,10 @@
     <string translatable="false" name="brouter_name">BRouter</string>
     <string translatable="false" name="brouter_downloadurl">https://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
+
+    <string translatable="false" name="hillshading_name">Hillshading</string>
+    <string translatable="false" name="hillshading_downloadurl">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/dem/dem3/</string>
+    <string translatable="false" name="hillshading_projecturl">https://download.mapsforge.org</string>
 
     <string translatable="false" name="mapserver_osmpaws_name">Paws</string>
     <string translatable="false" name="mapserver_osmpaws_downloadurl">https://osm.paws.cz/cgeo.php</string>

@@ -38,6 +38,8 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
+    <string name="other">Others</string>
+    <string name="event_special">Specials</string>
 
     <string name="all_types_short">All</string>
     <string name="traditional_short">Trad</string>
@@ -202,6 +204,10 @@
     <string name="log_oc_team_comment">OC Team comment</string>
     <string name="log_your_saved_log">Your saved log</string>
     <string name="log_empty_logbook">The logbook of this cache is empty.</string>
+    <string name="log_image_selectfromstorage_tooltip">Select images from storage</string>
+    <string name="log_image_camera_tooltip">Take picture with camera</string>
+    <string name="log_image_selectfromown_tooltip">Select images from own images</string>
+    <string name="log_inventory">Inventory</string>
 
     <string name="log_problem_none">No Problem</string>
     <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
@@ -233,9 +239,9 @@
     <string name="contact_multiple_matches">Contact: Multiple matches</string>
 
     <!-- translation -->
-    <string name="translate">Translate</string>
-    <string name="translate_to_sys_lang">Translate to %s</string>
-    <string name="translate_to_english">Translate to English</string>
+    <string name="translate">Translate in Google Translate App</string>
+    <string name="translate_to_sys_lang">Translate to %s (Web)</string>
+    <string name="translate_to_english">Translate to English (Web)</string>
     <string name="translate_length_warning">Translation may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->
@@ -264,7 +270,6 @@
     <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>
     <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
     <string name="err_detail_cache_find_some">c:geo can\'t find that geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo can\'t find any geocaches.</string>
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_still_working">Still working on another task.</string>
     <string name="err_detail_premium_log_found">This cache is only available to premium members of geocaching.com. Therefore, the cache information cannot be displayed.\n\nHowever, if you have already found this cache, you can log it here.</string>
@@ -327,7 +332,8 @@
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
-    <string name="info_log_post_failed_reason">Reason: %s</string>
+    <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
+    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>"
     <string name="info_log_post_retry">Retry</string>
     <string name="info_log_post_save">Save offline</string>
     <string name="info_log_cleared">Log was cleared.</string>
@@ -357,6 +363,27 @@
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basic</string>
 
+    <string name="translator_preference_target_lng">Offline translation language</string>
+    <string name="translator_preference_target_lng_summary">Target language for offline translator</string>
+    <string name="translator_preference_nottranslate_lng">Ignored languages</string>
+    <string name="translator_preference_nottranslate_lng_summary">Source languages to not offer translation for</string>
+    <string name="translator_preference_disable">&lt;Disable translation&gt;</string>
+    <string name="translator_model_download_select">Download offline translation language</string>
+    <string name="translator_model_download_confirm_title">Confirm language download</string>
+    <string name="translator_model_download_confirm_txt">Translation model for language %s needs to be downloaded. Model size is roughly 20-40 MB.</string>
+    <string name="translator_model_download_notification">Translation model download started</string>
+    <string name="translator_model_download_success">Translation model for %s downloaded</string>
+    <string name="translator_model_download_error">Failed to download translation model %1$s: %2$s</string>
+    <string name="translator_model">Translation model</string>
+    <string name="translator_tooltip">Offline translate</string>
+    <string name="translator_language_select">Select source language</string>
+    <string name="translator_language_unsupported">Language (%s) not supported for translation.</string>
+    <string name="translator_language_unknown">Unable to identify language</string>
+    <string name="translator_language_detected">Translate from "%s"</string>
+    <string name="translator_translation_error">Failed to translate text: %s</string>
+    <string name="translator_translation_initerror">Failed to initialize translator</string>
+    <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
+
     <!-- location service -->
     <string name="loc_last">Last known</string>
     <string name="loc_net">Network</string>
@@ -378,9 +405,10 @@
     <string name="menu_helpers">Utility programs</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_backup">Backup / restore</string>
-    <string name="menu_update">Update offline data</string>
-    <string name="menu_update_routingdata">Routing data</string>
-    <string name="menu_update_mapdata">Map data</string>
+    <string name="menu_manage_offline_data">Manage offline data</string>
+    <string name="menu_update_routingdata">Update routing data</string>
+    <string name="menu_update_mapdata">Update map data</string>
+    <string name="menu_delete_offline_data">Delete offline data</string>
     <string name="menu_history">History</string>
     <string name="menu_search_clipboard">Load geocode from clipboard</string>
     <string name="menu_history_longstring">Finds history</string>
@@ -446,9 +474,9 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Rating</string>
     <string name="caches_sort_vote">Vote (Own Rating)</string>
-    <string name="caches_sort_inventory">Count of Inventory</string>
+    <string name="caches_sort_inventory">Trackables Count</string>
     <string name="caches_sort_date_hidden">Date Hidden</string>
-    <string name="caches_sort_date_logged">Date Logged</string>
+    <string name="caches_sort_date_logged">Date Logged (Own Log)</string>
     <string name="caches_sort_finds">Finds</string>
     <string name="caches_sort_state">State</string>
     <string name="caches_sort_storage">Date stored on device</string>
@@ -464,12 +492,16 @@
     <string name="caches_remove_selected">Remove selected from list</string>
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
+    <string name="caches_remove_from_other_lists_selected">Remove selected from other lists</string>
+    <string name="caches_remove_from_other_lists_all">Remove all from other lists</string>
     <string name="caches_append_to_route_selected">Append selected to individual route</string>
     <string name="caches_append_to_route_all">Append all to individual route</string>
     <string name="caches_appended_to_route">Caches appended to route</string>
     <string name="waypoints_appended_to_route">Waypoints appended to route</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_bookmarklist">Add to bookmark list</string>
+    <string name="caches_upload_bookmarklist_all">Add all to bookmark list</string>
+    <string name="caches_upload_bookmarklist_selected">Add selected to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -484,12 +516,18 @@
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter by</string>
+    <string name="caches_filter_select_last">Previous filter</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
-    <string name="caches_show_attributes">Show attribute overview</string>
+    <string name="caches_overwrite_offline_log">Overwrite offline log</string>
+    <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
+    <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
+    <string name="caches_set_cache_icon_all">Set cache icon for all caches</string>
+    <string name="caches_set_cache_icon_selected">Set cache icon for selected caches</string>
     <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
@@ -526,6 +564,9 @@
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
+    <string name="list_menu_rename_list_prefix">Rename list prefix</string>
+    <string name="rename_from">Rename from</string>
+    <string name="rename_to">Rename to</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="lists_title">Pick the lists</string>
@@ -543,6 +584,10 @@
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
     <string name="list_not_available">List no longer available, switching to standard list</string>
+    <string name="list_parent_list">Parent list</string>
+    <string name="list_name">List name</string>
+    <string name="list_confirm_rename">Renaming from \"%1$s\" to \"%2$s\"\n%3$s\nThis action cannot be undone!</string>
+    <string name="list_confirm_no_hierarchy">\nNo \":\" found - all matching lists will be transformed to top-level lists\n</string>
 
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Advanced</string>
@@ -576,6 +621,7 @@
     <string name="cache_filter_hidden">Hidden Date</string>
     <string name="cache_filter_eventdate">Event Date</string>
     <string name="cache_filter_logs_count">Logs Count</string>
+    <string name="cache_filter_inventory_count">Trackables Count</string>
     <string name="cache_filter_last_found">Last Found Date</string>
     <string name="cache_filter_log_entry">Log Entry</string>
     <string name="cache_filter_location">Location</string>
@@ -621,10 +667,12 @@
     <string name="cache_filter_storage_delete_title">Delete filter</string>
     <string name="cache_filter_storage_delete_message">Do you really want to delete this filter config?</string>
     <string name="cache_filter_storage_select_clear_title">Select filter or clear current filter</string>
+    <string name="cache_filter_storage_clear_title">Clear current filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">No filter are stored yet.</string>
     <string name="cache_filter_storage_save_title">Save filter with name</string>
     <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
     <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
+    <string name="cache_filter_storage_clear_message">Do you want to clear the current filter?</string>
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Search Text</string>
@@ -669,6 +717,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Has Offline Log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Has Offline Found Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Solved Mystery</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Corrected Coordinates</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Has User Defined Waypoints</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">This filter setting will only affect mystery caches. If you like to exclude other cache types, please define an appropriate cache type filter.\n\nA mystery is considered \'solved\' if it has either changed coordinates or a valid final waypoint filled with coordinates.</string>
 
@@ -889,6 +938,9 @@
     <string name="settings_title_map_style">Map style</string>
     <string name="settings_hide_tileproviders_title">Hide Map Sources</string>
     <string name="settings_hide_tileproviders_summary">Exclude one or more map sources from map source selection</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap variants</string>
+    <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
+    <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_title_data_dir">Geocache data folder</string>
     <string name="settings_title_data_dir_usage">Geocache data folder (%1$s used)</string>
     <string name="calculate_dataDir_title">Geocache data usage</string>
@@ -905,9 +957,11 @@
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
-    <string name="settings_category_nearbysearch">Nearby search</string>
+    <string name="settings_category_locationcentersearch">Location-centered searches</string>
     <string name="init_nearbysearchlimit_title">Nearby search limit</string>
     <string name="init_nearbysearchlimit_description">Limits the distance up to which caches are returned for with nearby search (0=unlimited)</string>
+    <string name="init_coordsearchlimit_title">Coordinate/Address search limit</string>
+    <string name="init_coordsearchlimit_description">Limits the distance up to which caches are returned for with coordinate/address search (0=unlimited)</string>
     <string name="init_settings_description_unlimited">unlimited</string>
 
     <string name="settings_category_geocaching_additionals">Further services and addon</string>
@@ -922,7 +976,6 @@
     <string name="settings_authorize">Authorize c:geo</string>
     <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
-    <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
     <string name="settings_su_description">Authorize c:geo with geocaching.su to search for caches.</string>
     <string name="settings_lc_description">Include Adventure Lab caches on the map.\n\n(Available to \"Geocaching.com\" premium members only. Requires an activated \"Geocaching.com\" service.)\n\nChanging this setting requires a restart.</string>
     <string name="settings_lc_found_state_title">Manual found state</string>
@@ -951,6 +1004,9 @@
     <string name="init_login_popup_failed_reason">Login failed: %s</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_not_logged_in">Not logged in</string>
+    <string name="init_login_manual">Manual Login</string>
+    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'ok\' button below.</string>
+    <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
     <string name="init_authorization_credential_username">Username</string>
@@ -996,6 +1052,9 @@
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_select_language">Select language</string>
     <string name="init_use_default_language">Use default language</string>
+    <string name="init_date_format">Date format</string>
+    <string name="init_date_format_description">Format to use for short dates, e.g. in log view</string>
+    <string name="system_default">System Default</string>
     <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
@@ -1028,7 +1087,7 @@
     <string name="menu_elevation_info">Elevation (map):</string>
     <string name="elevation_selected">Elevation (map) at selected position</string>
     <string name="elevation_difference">Elevation difference</string>
-    <string name="distance">Distance:</string>
+    <string name="distance">Distance</string>
     <string name="copy_coordinates">Copy coordinates</string>
     <string name="selected_position">Selected position</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
@@ -1039,11 +1098,12 @@
     <string name="init_summary_customtabs_as_browser">External websites will be displayed without leaving c:geo (only possible if Chrome is installed)</string>
     <string name="init_rot13_hint">Encrypt hint</string>
     <string name="init_summary_rot13_hint">Show hint text ROT-13 encrypted until tapped</string>
-    <string name="init_save_log_img">Save Images</string>
-    <string name="init_summary_save_log_img">Save Images from Logs</string>
+    <string name="init_save_log_img">Store log images</string>
+    <string name="init_summary_save_log_img">Download and store images from logs in addition to those from the cache</string>
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_cachelists">Cache Lists</string>
+    <string name="init_localization">Localization</string>
     <string name="init_log_offline">Offline Logging</string>
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
@@ -1157,9 +1217,12 @@
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
     <string name="settings_info_hillshading_title">Info on Hillshading</string>
-    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nThe source files containing the elevation information have to be obtained manually - click this item for sources - and placed in the sources folder defined below.</string>
-    <string name="settings_hillshading_enable">Enable Hillshading</string>
+    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nHillshading data can be downloaded from maps overflow menu.\nNot compatible with UnifiedMap VTM variant.</string>
+    <string name="settings_hillshading_enable">Hillshading</string>
+    <string name="init_hillshading_hq">High quality hillshading</string>
+    <string name="init_summary_hillshading_hq">More detailed hillshading overlay but ~50%% slower rendering when zoomed out</string>
     <string name="init_mapsource_select">Select Map Source</string>
+    <string name="init_mapsource_select_legacy">Select Map Source (Legacy)</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
@@ -1184,13 +1247,13 @@
     <string name="init_trackappearance_summary">Select color, opaqueness and line width for track/route line. A track/route consists of several waypoints and can be loaded via a GPX track/route file.</string>
     <string name="init_circlecolor">Circle line color</string>
     <string name="init_circlecolor_summary">Select color and opaqueness for circle line. Circles are used as a visual representation for the minimum radius around a cache or physical waypoint, wherein no other cache or physical waypoint is allowed. (Applies to geocaching.com)</string>
-    <string name="init_circlefillcolor">Circle fill color</string>
-    <string name="init_circlefillcolor_summary">Select color and opaqueness for the circles to be filled with</string>
+    <string name="init_geofencecolor">Geofence circle color</string>
+    <string name="init_geofencecolor_summary">Select color and opaqueness for geofence circle. Circles are used as a visual representation for the geofence defined for waypoints (typically applies to geocaching.com lab adventure stages)</string>
     <string name="init_accuracycirclecolor">Accuracy circle line color</string>
     <string name="init_accuracycirclecolor_summary">Select color and opaqueness for accuracy circle line. Accuracy circle is used as a visual representation for location signal accuracy.</string>
-    <string name="init_accuracycirclefillcolor">Accuracy circle fill color</string>
-    <string name="init_accuracycirclefillcolor_summary">Select color and opaqueness for the accuracy circles to be filled with</string>
     <string name="init_include_found_status">Include \"Found\" status</string>
+    <string name="init_include_logs">Include Logs</string>
+    <string name="init_include_travelbugs">Include Travel Bugs</string>
     <string name="init_trackautovisit">Visit TBs</string>
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
@@ -1223,18 +1286,14 @@
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
     <string name="init_mapshading_folder">Map Shading Files Folder</string>
-    <string name="init_mapShadingLinearity_title">Shading Linearity</string>
-    <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
-    <string name="init_mapShadingScale_title">Shading Opacity</string>
-    <string name="init_mapShadingScale_description">Opacity of the shading layer, from invisible to higher values intensifying shading but may produce artifacts</string>
     <string name="init_iconsizes">Icon Sizes</string>
     <string name="init_mapCacheScaling_title">Cache icon scaling</string>
     <string name="init_mapCacheScaling_description">Scaling factor for cache icons (in %)</string>
     <string name="init_mapWpScaling_title">Waypoint icon scaling</string>
     <string name="init_mapWpScaling_description">Scaling factor for waypoint icons (in %)</string>
     <string name="init_maintenance">Maintenance</string>
-    <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
-    <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_maintenance_directories_note">Deleted caches are buffered internally for 72 hours by c:geo to prevent accidental data loss. Besides that, c:geo also stores images and other files related to caches in dedicated folders. In some special cases such data might not be removed although the cache is no longer stored. This function can be used to clean up such orphaned data.</string>
+    <string name="init_maintenance_directories">Delete orphaned data</string>
     <string name="init_maintenance_start">Maintenance started</string>
     <string name="init_maintenance_ongoing">This may take some time…</string>
     <string name="init_maintenance_finished">Maintenance finished</string>
@@ -1247,6 +1306,9 @@
     <string name="init_force_orientation_sensor_title">Orientation sensor</string>
     <string name="init_force_orientation_sensor_note">On some devices, the regular rotation vector sensor behaves erratically, giving the wrong direction. In this case, an alternate sensor (the orientation sensor) may provide better results.</string>
     <string name="init_force_orientation_sensor">Force use of orientation sensor</string>
+    <string name="init_clipboard_copy_action_title">Copy-to-Clipboard action</string>
+    <string name="init_clipboard_copy_action_note">On some devices, the text share options do not contain a \'Copy to Clipboard\' action. For these devices, c:geo can add its own \'Copy to clipboard\' action to the share menu.</string>
+    <string name="init_clipboard_copy_action">Add \'copy to clipboard\' action to share menu</string>
     <string name="init_title_extended_settings">Extended settings</string>
     <string name="init_summary_extended_settings">Show settings for the more experienced user</string>
     <string name="init_create_memory_dump">Create memory dump</string>
@@ -1282,9 +1344,9 @@
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
-    <string name="category_unifiedMap">Unified Map (beta)</string>
-    <string name="init_title_useUnifiedMap">Use unified map</string>
-    <string name="init_summary_useUnifiedMap">Use new unified map instead of built-in Google Map / Mapsforge (OSM) maps</string>
+    <string name="init_title_useLegacyMap">Use legacy map</string>
+    <string name="init_summary_useLegacyMap">Use legacy versions of Google Map / Mapsforge (OSM) maps instead of UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
 
@@ -1339,6 +1401,8 @@
     <string name="contentstorage_err_list_failed">Files in Folder \'%s\' could not be listed</string>
     <string name="contentstorage_err_folder_access_failed">Folder \'%s\' could not be accessed</string>
     <string name="contentstorage_err_copy_failed">File \'%1$s\' could not be copied/moved to \'%2$s\' (move=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Error selecting file/folder</string>
+    <string name="contentstorage_err_activity_not_found_message">Your system doesn\'t provide a component to select files/folders: %s</string>
 
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">User-defined</string>
@@ -1404,6 +1468,7 @@
     <string name="auth_register">Create an account</string>
     <string name="auth_connected">Connected</string>
     <string name="auth_unconnected">Not connected yet</string>
+    <string name="auth_unconnected_tap_here">Not connected yet - tap here to authorize</string>
     <string name="auth_connected_as">Connected as %s.\nTap here to update or long tap to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Waiting for %s…</string>
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
@@ -1428,6 +1493,19 @@
     <string name="err_auth_geokrety_bad_password">Your username/password seems invalid.</string>
     <string name="err_auth_geokrety_unknown">%1$s returned: %2$s.</string>
 
+    <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">No login information stored</string>
+    <string name="err_auth_gc_loginpage1">Failed to retrieve login page (1st)</string>
+    <string name="err_auth_gc_loginpage2">Failed to retrieve login page (2nd)</string>
+    <string name="err_auth_gc_verification_token">Failed to find request verification token</string>
+    <string name="err_auth_gc_captcha">Failed to log in to geocaching.com due to captcha required</string>
+    <string name="err_auth_gc_bad_login">Failed to log in to geocaching.com as %s because of wrong username/password</string>
+    <string name="err_auth_gc_not_validated">Failed to log in Geocaching.com as %s because account needs to be validated first</string>
+    <string name="err_auth_gc_unknown_error">Failed to log in Geocaching.com as %s for some unknown reason</string>
+    <string name="err_auth_gc_unknown_error_generic">Unknown error</string>
+    <string name="err_auth_gc_communication_error">Communication error</string>
+    <string name="err_auth_gc_manual_error">Manual login error: %s</string>
+
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="zero">%1$d caches</item>
@@ -1451,6 +1529,7 @@
 
     <string name="cache_offline_refresh">Refresh</string>
     <string name="cache_offline_drop">Remove from list</string>
+    <string name="cache_offline_delete">Delete</string>
     <string name="cache_delete_userdefined_waypoints">Remove user-defined waypoints</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remove all user-defined waypoints of this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
     <string name="cache_delete_userdefined_waypoints_note">Note: You have \"waypoints from note\" enabled. If you have coordinates in your personal note recognized by c:geo, waypoints will be recreated for them automatically. You can disable this in the personal note edit dialog.</string>
@@ -1496,8 +1575,9 @@
     </plurals>
     <string name="cache_offline_about_time_year">over a year ago</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Inventory</string>
+    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Photo</string>
+    <string name="cache_set_coordinates">Set coordinates</string>
     <string name="cache_personal_note">Personal note</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
@@ -1564,10 +1644,10 @@
     <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory…</string>
-    <string name="cache_dialog_refresh_title">Refresh</string>
-    <string name="cache_dialog_refresh_message">Reloading cache details…</string>
     <string name="cache_menu_speechDeactivate">Stop talking</string>
     <string name="cache_menu_speechActivate">Start talking</string>
+    <string name="talking_disabled">Talking disabled</string>
+    <string name="talking_enabled">Talking enabled</string>
     <string name="cache_menu_navigate">Navigate</string>
     <string name="cache_menu_target">Set as target</string>
     <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
@@ -1589,7 +1669,6 @@
     <string name="no_browser_found">No browser found</string>
     <string name="cache_menu_open_with">Open with…</string>
     <string name="cache_menu_visit">Log Visit</string>
-    <string name="cache_log_too_long">c:geo couldn\'t submit your log cause it is too long. But thanks for trying to write such an extensive log ;-)</string>
     <string name="cache_empty_log">c:geo couldn\'t submit your log cause it is empty.</string>
     <string name="cache_menu_visit_offline">Quick offline log</string>
     <string name="cache_menu_spoilers">Spoiler images</string>
@@ -1604,10 +1683,12 @@
     <string name="cache_menu_reset_foundstate">Reset found state</string>
     <string name="cache_foundstate_updated">Found state updated</string>
     <string name="cache_menu_set_cache_icon">Set cache icon</string>
+    <string name="cache_menu_change_description_style">Change description style</string>
     <string name="cache_icon_updated">Cache icon updated</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
+    <string name="cache_menu_share_with_data">Share incl. user data</string>
     <string name="cache_menu_move_list">Move to different list</string>
     <string name="cache_menu_copy_list">Copy to different list</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1618,6 +1699,8 @@
     <string name="cache_menu_ignore">Ignore cache</string>
     <string name="cache_log_menu_decrypt">Decrypt/Encrypt</string>
     <string name="cache_log_menu_edit">Edit Log</string>
+    <string name="menu_expand_log">Expand log</string>
+    <string name="menu_collapse_log">Collapse log</string>
     <string name="cache_log_menu_delete">Delete Log</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>
     <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
@@ -1625,6 +1708,7 @@
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
+    <string name="cache_status_attended">Attended</string>
     <string name="cache_status_found">Found</string>
     <string name="cache_not_status_found">Not Found</string>
     <string name="cache_status_archived">Archived</string>
@@ -1687,6 +1771,11 @@
     <string name="cachedetails_progress_favorite">Added to favorites</string>
     <string name="cachedetails_progress_unfavorite">Removed from favorites</string>
 
+    <string name="cache_multiple_wherigo_cartridges_title">Multiple Wherigo cartridges</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consult cache listing for further information about the cartridges.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - not downloaded</string>
+    <string name="cache_wherigo_start">Download and play this Wherigo using c:geo\'s internal player</string>
+    <string name="cache_wherigo_credentials">In order to play this Wherigo using c:geo\'s internal player you need to authorize against geocaching.com service first. Tap on the button on the right to go to configuration.</string>
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
     <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
@@ -1704,20 +1793,24 @@
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
 
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Background</string>
+    <string name="image_listing_gallery">Gallery</string>
+
     <string name="context_map_add_to_route">Append to route</string>
     <string name="context_map_add_to_route_start">Prepend to route</string>
     <string name="context_map_remove_from_route_start">Remove from start</string>
     <string name="context_map_remove_from_route_pos">Remove from position %d</string>
     <string name="context_map_remove_from_route_end">Remove from end</string>
-    <string name="context_map_show_coords">Show coordinates</string>
     <string name="context_map_star_show">Show lines to waypoints</string>
     <string name="context_map_star_hide">Hide lines to waypoints</string>
     <string name="edit">Edit</string>
+    <string name="showElevationChart">Show elevation chart</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="create_internal_cache_short">New cache</string>
     <string name="create_internal_cache_currentlist">Use current list</string>
-    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_names">User defined cache #%1$s</string>
     <string name="internal_cache_default_description">This is a user-defined cache</string>
     <string name="internal_cache_default_owner">You</string>
     <string name="internal_goto_targets_title">\'Go to\' targets</string>
@@ -1730,9 +1823,20 @@
     <string name="init_summary_show_routing_menu">Long tap on a cache shows a menu with advanced options to add/remove the cache to/from a route. If disabled the cache is just added/removed to/from the route.</string>
     <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
     <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
+    <string name="init_autozoom_consider_lastcenter">Restore map position on mapping a list</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">When a list of caches is mapped and map was previously left inside the list boundaries restore preview position, otherwise zoom to fit all caches.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">When a list of caches is mapped set map zoom and boundaries to fit all caches.</string>
     <string name="goto_targets_list">User-defined caches</string>
     <string name="clear_goto_history_title">Clear goto history</string>
     <string name="clear_goto_history">This will delete all historical waypoints except the five most recent</string>
+    <string name="internal_connector_name">User-defined caches</string>
+
+    <!-- html styles -->
+    <string name="html_style_default">Default</string>
+    <string name="html_style_default_no_contrast_fix">Default w/o contrast fix</string>
+    <string name="html_style_monochrome">Monochrome</string>
+    <string name="html_style_source_formatted">HTML Source Formatted</string>
+    <string name="html_style_source">HTML Source</string>
 
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>
@@ -1787,6 +1891,8 @@
     <string name="waypoint_my_coordinates_accuracy">My coordinates (±%s)</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Edit</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Set radius for geofence (in meters)</string>
     <string name="waypoint_copy_coordinates">Copy coordinates</string>
     <string name="waypoint_clear_coordinates">Clear coordinates</string>
     <string name="waypoint_delete">Delete</string>
@@ -1819,6 +1925,7 @@
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
 
     <!-- Projection -->
     <string name="projection_type_none">No projection</string>
@@ -1840,6 +1947,8 @@
     <string name="variables_scanlisting_nopatternfound">No pattern found</string>
     <string name="variables_tidyup">Tidy Up</string>
     <string name="variables_deleteall">Delete All</string>
+    <string name="variables_add">Add variable</string>
+    <string name="variables_add_next">Add next variable</string>
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variable Name</string>
@@ -1851,13 +1960,14 @@
     <string name="calccoord_guided_value">Value</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
     <string name="calccoord_plain_tools_title">Plain Tools</string>
-    <string name="calccoord_remove_spaces">Remove Spaces</string>
+    <string name="calccoord_remove_spaces">Remove spaces</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Replace \'x\' with \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Paste from clipboard</string>
 
     <string name="calccoord_generate_title">Generate Waypoints</string>
     <string name="calccoord_generate_showonmap">Show on Map</string>
     <string name="calccoord_generate_waypointnameprefix">Generated</string>
-    <string name="calccoord_generate_error_novarwithrange">No valid variable with ranges found</string>
+    <string name="calccoord_generate_error_novarwithrange">No valid variable with ranges found (eg: [:0-9] or [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">No combination returned valid coordinates</string>
     <string name="calccoord_generate_error_nogeopointselected">No Coordinate selected</string>
 
@@ -1903,6 +2013,7 @@
     <string name="formula_error_missingvarvalue">Missing: %1$s</string>
     <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
     <string name="formula_error_empty">Empty Formula</string>
+    <string name="formula_error_numeric_overflow">Numeric overflow</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
 
     <!-- ImageView -->
@@ -1931,8 +2042,6 @@
     <string name="map_showwp_visited">Visited</string>
     <string name="init_renderthemefolder_synctolocal">Synchronize themes</string>
     <string name="init_summary_renderthemefolder_synctolocal">This will synchronize your themes into an app-private folder to improve map viewer opening performance at the cost of some device storage space.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">This will continuously synchronize the content of the Map Theme folder into an app-private folder for faster file access. Make sure your theme folder only contains your themes but no additional (large) data before enabling this feature.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
     <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="map_theme_select">Select map theme</string>
@@ -1951,51 +2060,51 @@
     <string name="map_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
     <string name="quick_settings_info">Some map settings (Map settings, hide, routing) have been moved to the new \"Quick settings\" popup.\nYou can open this popup using the icon in the map\'s bottom center.</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
     <string name="other_settings">Other settings</string>
     <string name="map_show_caches_title">Show Caches:</string>
     <string name="map_show_waypoints_title">Show waypoints:</string>
     <string name="map_show_other_title">Show other:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cache filter too complex</string>
     <string name="map_settings_cache_filter_too_complex_message">The current cache filter is too complex to apply additional options here. Usually this means that the cache filter contains NOT or OR expressions instead of simple AND logic.</string>
-    <string name="map_theme_legend">Theme Legend</string>
-    <string name="map_theme_legend_info">Tap on category title to open/close category. Long tap on a symbol for short info about that symbol. Tap on the info icon to visit a detailed legend online.</string>
     <string name="google_maps_style_default">Default</string>
     <string name="google_maps_style_night">Night</string>
+    <string name="google_maps_style_classic">Classic</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
+    <string name="google_maps_option_group_map">Map Options</string>
+    <string name="google_maps_option_show_traffic">Show Traffic</string>
+    <string name="google_maps_option_show_buildings">Show 3D buildings</string>
+    <string name="google_maps_option_group_theme">Theme Options</string>
+    <string name="google_maps_option_show_feature_theme">Show Theme features</string>
+    <string name="google_maps_option_show_feature_administrative_all">Show Administrative</string>
+    <string name="google_maps_option_show_feature_landscape_all">Show Landscape</string>
+    <string name="google_maps_option_show_feature_poi_all">Show Points of Interest</string>
+    <string name="google_maps_option_show_feature_road_all">Show Roads</string>
+    <string name="google_maps_option_show_feature_transit_all">Show Transit</string>
+    <string name="google_maps_option_show_feature_water_all">Show Water</string>
 
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
     <string name="search_bar_hint_settings">Search settings</string>
     <string name="search_coordinates">Coordinates</string>
-    <string name="search_coordinates_button">Search by coordinates</string>
     <string name="search_address">Address</string>
-    <string name="search_address_button">Search by address</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Search by geocode</string>
-    <string name="search_geocode_from_clipboard">Geocode was pasted from clipboard.</string>
     <string name="search_kw">Keyword</string>
-    <string name="search_kw_prefill">Keyword</string>
-    <string name="search_kw_button">Search by keyword</string>
+    <string name="search_kw_disabled_hint">Disabled as it is not supported by geocaching.com for BASIC members</string>
     <string name="search_hbu">Hidden by</string>
-    <string name="search_hbu_prefill">Owner</string>
-    <string name="search_hbu_button">Search by owner name</string>
     <string name="search_finder">Found by</string>
-    <string name="search_finder_prefill">Finder</string>
-    <string name="search_finder_button">Search by finder name</string>
     <string name="search_filter">Filter</string>
-    <string name="search_filter_button">Search by filter</string>
     <string name="search_filter_info_message" formatted="false">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
     <string name="search_tb">Trackable</string>
-    <string name="search_tb_hint">Trackable identification</string>
-    <string name="search_tb_button">Search for trackable</string>
     <string name="search_destination">Open destination in c:geo</string>
     <string name="add_target_to">Add target to</string>
     <string name="search_address_started">Searching for places</string>
     <string name="search_address_result">Found places</string>
-    <string name="search_own_caches">Search my caches</string>
+    <string name="search_own_caches">My caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bookmark list</string>
     <string name="search_pocket_is_new">new</string>
@@ -2071,12 +2180,6 @@
     <string name="do_flat">Flat</string>
     <string name="do_upright">Upright</string>
 
-
-    <!-- license -->
-    <string name="license">License</string>
-    <string name="license_show">Show license</string>
-    <string name="license_dismiss">Dismiss</string>
-
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Past event</string>
     <string name="helper_calendar_pastevent_question">The event date is in the past. Add it anyway?</string>
@@ -2084,11 +2187,9 @@
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
-    <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location data, and can spare battery of your device.</string>
     <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
-    <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Wherigo. c:geo can automatically trigger the download of cartridges within this app.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf allows you to read the data from ANT+/Garmin chirp tags, which is needed for ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app for your phone or tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard contains numerous tools for simple cryptography, geodetic and scientific calculations as well as hundreds of sets of various symbols.</string>
@@ -2156,21 +2257,18 @@
     <string name="attribute_climbing_yes">Difficult climbing</string>
     <string name="attribute_climbing_no">No difficult climbing</string>
     <string name="attribute_wading_yes">May require wading</string>
-    <string name="attribute_wading_no">May not require wading</string>
     <string name="attribute_swimming_yes">May require swimming</string>
-    <string name="attribute_swimming_no">May not require swimming</string>
     <string name="attribute_available_yes">Available at all times</string>
     <string name="attribute_available_no">Not available at all times</string>
     <string name="attribute_night_yes">Recommended at night</string>
     <string name="attribute_night_no">Not recommended at night</string>
     <string name="attribute_winter_yes">Available during winter</string>
+    <string name="attribute_cacti_yes">Cacti nearby</string>
     <string name="attribute_winter_no">Not available during winter</string>
     <string name="attribute_stealth_yes">Stealth required</string>
     <string name="attribute_stealth_no">Stealth not required</string>
     <string name="attribute_firstaid_yes">Needs maintenance</string>
-    <string name="attribute_firstaid_no">Needs no maintenance</string>
     <string name="attribute_cow_yes">Watch for livestock</string>
-    <string name="attribute_cow_no">No livestock</string>
     <string name="attribute_field_puzzle_yes">Field puzzle</string>
     <string name="attribute_field_puzzle_no">No field puzzle</string>
     <string name="attribute_nightcache_yes">Night cache</string>
@@ -2198,49 +2296,31 @@
     <string name="attribute_partnership_yes">Partnership cache</string>
     <string name="attribute_partnership_no">Not a partnership cache</string>
     <string name="attribute_fee_yes">Access or parking fee required</string>
-    <string name="attribute_fee_no">Access or parking fee not required</string>
     <string name="attribute_rappelling_yes">Climbing gear required</string>
-    <string name="attribute_rappelling_no">Climbing gear not required</string>
     <string name="attribute_boat_yes">Boat required</string>
-    <string name="attribute_boat_no">Boat not required</string>
     <string name="attribute_scuba_yes">Scuba gear required</string>
-    <string name="attribute_scuba_no">Scuba gear not required</string>
     <string name="attribute_flashlight_yes">Flashlight required</string>
-    <string name="attribute_flashlight_no">Flashlight not required</string>
     <string name="attribute_uv_yes">UV light required</string>
-    <string name="attribute_uv_no">UV light not required</string>
     <string name="attribute_snowshoes_yes">Snowshoes required</string>
-    <string name="attribute_snowshoes_no">Snowshoes not required</string>
     <string name="attribute_skiis_yes">Cross country skis required</string>
-    <string name="attribute_skiis_no">Cross country skis not required</string>
     <string name="attribute_s_tool_yes">Special tools required</string>
-    <string name="attribute_s_tool_no">Special tools not required</string>
     <string name="attribute_wirelessbeacon_yes">Wireless beacon</string>
-    <string name="attribute_wirelessbeacon_no">No wireless beacon</string>
     <string name="attribute_treeclimbing_yes">Tree climbing required</string>
     <string name="attribute_treeclimbing_no">Tree climbing not required</string>
     <string name="attribute_poisonoak_yes">Poisonous plants</string>
     <string name="attribute_poisonoak_no">No poisonous plants</string>
     <string name="attribute_dangerousanimals_yes">Dangerous animals</string>
-    <string name="attribute_dangerousanimals_no">No dangerous animals</string>
     <string name="attribute_ticks_yes">Ticks</string>
-    <string name="attribute_ticks_no">No ticks</string>
     <string name="attribute_mine_yes">Abandoned mines</string>
-    <string name="attribute_mine_no">No abandoned mines</string>
     <string name="attribute_cliff_yes">Cliff / falling rocks</string>
-    <string name="attribute_cliff_no">No cliff / falling rocks</string>
     <string name="attribute_hunting_yes">Hunting</string>
-    <string name="attribute_hunting_no">No hunting</string>
     <string name="attribute_danger_yes">Dangerous area</string>
-    <string name="attribute_danger_no">Not a dangerous area</string>
     <string name="attribute_thorn_yes">Thorns</string>
-    <string name="attribute_thorn_no">No thorns</string>
     <string name="attribute_wheelchair_yes">Wheelchair accessible</string>
     <string name="attribute_wheelchair_no">Not wheelchair accessible</string>
     <string name="attribute_parking_yes">Parking available</string>
     <string name="attribute_parking_no">No parking available</string>
     <string name="attribute_public_yes">Public transportation</string>
-    <string name="attribute_public_no">No public transportation</string>
     <string name="attribute_water_yes">Drinking water nearby</string>
     <string name="attribute_water_no">No drinking water nearby</string>
     <string name="attribute_restrooms_yes">Public restrooms nearby</string>
@@ -2352,13 +2432,9 @@
     <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">No offset cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">No bonus cache</string>
     <string name="attribute_powertrail_yes">Part of a power trail</string>
-    <string name="attribute_powertrail_no">Not part of a power trail</string>
     <string name="attribute_challengecache_yes">Challenge cache</string>
-    <string name="attribute_challengecache_no">No challenge cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com solution checker enabled</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com solution checker not enabled</string>
     <string name="attribute_handicaching_yes">Rated on Handicaching.com</string>
     <string name="attribute_handicaching_no">Not rated on Handicaching.com</string>
     <string name="attribute_munzee_yes">Contains a Munzee</string>
@@ -2378,6 +2454,7 @@
     <string name="attribute_unknown">Unknown attribute</string>
 
     <!-- cache attribute categories -->
+    <string name="cat_status">Cache status</string>
     <string name="cat_tools">Equipment</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cache location</string>
@@ -2458,6 +2535,7 @@
 
     <!-- various -->
     <string name="clipboard_copy_ok">Copied to clipboard</string>
+    <string name="clipboard_copy_failed">Copying to clipboard failed</string>
 
     <plurals name="days_ago">
         <item quantity="zero">%d days ago</item>
@@ -2466,15 +2544,6 @@
         <item quantity="few">%d days ago</item>
         <item quantity="many">%d days ago</item>
         <item quantity="other">%d days ago</item>
-    </plurals>
-
-    <plurals name="days_ahead">
-        <item quantity="zero">In %d days</item>
-        <item quantity="one">In %d day</item>
-        <item quantity="two">In %d days</item>
-        <item quantity="few">In %d days</item>
-        <item quantity="many">In %d days</item>
-        <item quantity="other">In %d days</item>
     </plurals>
 
     <!-- shortcuts -->
@@ -2536,12 +2605,12 @@
         <item quantity="other">Recommend this cache (%d remaining)</item>
     </plurals>
     <plurals name="fav_points_remaining">
-        <item quantity="zero">Add this cache to favorites (%d remaining)</item>
-        <item quantity="one">Add this cache to favorites (%d remaining)</item>
-        <item quantity="two">Add this cache to favorites (%d remaining)</item>
-        <item quantity="few">Add this cache to favorites (%d remaining)</item>
-        <item quantity="many">Add this cache to favorites (%d remaining)</item>
-        <item quantity="other">Add this cache to favorites (%d remaining)</item>
+        <item quantity="zero">Make this cache a favorite (%d remaining)</item>
+        <item quantity="one">Make this cache a favorite (%d remaining)</item>
+        <item quantity="two">Make this cache a favorite (%d remaining)</item>
+        <item quantity="few">Make this cache a favorite (%d remaining)</item>
+        <item quantity="many">Make this cache a favorite (%d remaining)</item>
+        <item quantity="other">Make this cache a favorite (%d remaining)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Setting cache icons</string>
     <plurals name="command_set_cache_icons_result">
@@ -2554,6 +2623,10 @@
     </plurals>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
+    <string name="live_map_status_http429">Please slow down, too many requests to %s</string>
+    <string name="live_map_status_error">Error loading map data: %s</string>
+    <string name="live_map_status_partial">Partial results (zoom in to reduce the number of caches to load): %s</string>
+    <string name="live_map_status_normal">Loading data without problems: %s</string>
 
     <string name="list_list_headline">Lists:</string>
     <plurals name="extract_waypoints_result">
@@ -2565,6 +2638,7 @@
         <item quantity="other">%d waypoints extracted</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+    <string name="link_gallery">Images available in gallery (%d)</string>
     <string name="geochecker_available">Geochecker available via browser</string>
 
     <!-- calendar adder -->
@@ -2575,6 +2649,7 @@
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
 
     <!-- permission handling -->
+    <string name="permission_missing">Missing permission</string>
     <string name="permission_ask_again">Ask me again</string>
     <string name="permission_goto_app_details">Open Application Info</string>
 
@@ -2622,12 +2697,14 @@
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
     <string name="map_sort_individual_route">Sort individual route</string>
     <string name="map_refresh_individual_route">Refresh</string>
-    <string name="map_export_individual_route">Export individual route</string>
+    <string name="map_export_route">Export as route</string>
+    <string name="map_export_track">Export as track</string>
+    <string name="map_load_from_GPX">Load from GPX</string>
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_autotarget_individual_route">Set route start as target</string>
     <string name="map_disable_autotarget_individual_route">\"Set route start as target\" disabled</string>
-    <string name="map_clear_manual_targets">Clear manual targets</string>
+    <string name="map_clear_manual_targets">Clear routing target</string>
     <string name="map_manual_targets_cleared">Manual targets cleared</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>
@@ -2673,8 +2750,6 @@
     <string name="routes_tracks_color">Select color</string>
     <string name="routes_tracks_change_name">Change name</string>
     <string name="center">Center</string>
-    <string name="unload_route_track">Unload route/track</string>
-    <string name="route">Route</string>
     <string name="track">Track</string>
     <string name="make_visible">Make visible</string>
     <string name="hide">Hide</string>
@@ -2697,6 +2772,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="show_all">Show all</string>
+    <string name="lists_only_new">New only</string>
+    <string name="pq_only_dl">Downloadable</string>
 
     <string name="routingmode_straight">Straight</string>
     <string name="routingmode_walk">Walk</string>
@@ -2704,6 +2781,7 @@
     <string name="routingmode_car">Car</string>
     <string name="routingmode_user1">User 1</string>
     <string name="routingmode_user2">User 2</string>
+    <string name="routingmode_none">(none)</string>
 
     <!-- view settings -->
     <string name="view_settings">View settings</string>
@@ -2738,10 +2816,6 @@
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
-    <string name="delete_offlinemap_title">Delete offline map</string>
-    <string name="no_deletable_offlinemaps">No deletable offline maps</string>
-    <string name="delete_file_confirmation">Delete %s?</string>
-    <string name="file_deleted_info">%s deleted</string>
     <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_filename">Downloading %s</string>
@@ -2749,7 +2823,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Some download sources support additional files not used by c:geo. Keep those extra files in system\'s download folder instead of deleting it</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
-    <string name="download_none_selected">No files selected for download</string>
+    <string name="download_enqueing_error">Error on trying to start download</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
@@ -2766,22 +2840,37 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
-    <string name="downloadmap_checking">Checking available routing data…</string>
+    <string name="downloadmap_hillshadingfile">hillshading data file</string>
+    <string name="downloadmap_checking">Checking available data…</string>
     <string name="downloadmap_othermapdownload">other map download</string>
     <string name="downloadmap_otherthemedownload">other theme download</string>
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
-    <string name="downloadtile_title">Missing routing data</string>
+    <string name="downloadtile_title">Missing data</string>
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
     <string name="check_tiles_missing">Found missing routing data:</string>
-    <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
+    <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the selected region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
+    <string name="check_hillshading_found">Hillshading data already present</string>
+    <string name="check_hillshading_missing">Found missing hillshading data:</string>
+    <string name="check_hillshading_unsupported">Warning: Hillshading data is at least partly not available for the selected region</string>
+    <string name="check_hillshading_tiles_menu">Check for missing hillshading data</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>
+    <string name="delete_items">Delete items</string>
+    <plurals name="files_deleted">
+        <item quantity="zero">%1$d files deleted</item>
+        <item quantity="one">%1$d file deleted</item>
+        <item quantity="two">%1$d files deleted</item>
+        <item quantity="few">%1$d files deleted</item>
+        <item quantity="many">%1$d files deleted</item>
+        <item quantity="other">%1$d files deleted</item>
+    </plurals>
+    <string name="no_files_selected">No files selected</string>
     <string name="mapserver_mapsforge_info">Basic maps, no map themes required</string>
     <string name="mapserver_openandromaps_info">Detailed maps, require map theme \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Detailed map theme, built for \"OpenAndroMaps\" maps</string>
@@ -2792,14 +2881,16 @@
     <string name="mapserver_hylly_info">Detailed maps for Finland, require one of the \"Hylly\" map themes</string>
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
+    <string name="hillshading_info">Offline hillshading</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
-    <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (require restart)</string>
+    <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (VTM only, require restart)</string>
     <string name="maptheme_scale_map_title">Map Scale Factor</string>
     <string name="maptheme_scale_map_summary">Scales map; 100% = no scaling</string>
     <string name="maptheme_scale_text_title">Text Scale factor</string>
     <string name="maptheme_scale_text_summary">Additionally scales text labels in map; 100% = no extra scaling</string>
     <string name="maptheme_scale_symbol_title">Symbol Scale factor</string>
     <string name="maptheme_scale_symbol_summary">Additionally scales symbol sizes in map; 100% = no extra scaling</string>
+    <string name="maptheme_show3Dbuildings">Show buildings in 3D</string>
     <string name="vtm_theme_variant">Theme Variant</string>
 
     <!-- history track -->
@@ -2852,6 +2943,100 @@
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s folder synchronization finished after %2$s, %3$d of %4$s needed synchronization</string>
 
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls">Controls</string>
+    <string name="wherigo_controls_cartridgelist_hint">View cartridges and start game</string>
+    <string name="wherigo_controls_savegame_hint">Save progress of a running game</string>
+    <string name="wherigo_controls_loadgame_hint">Load a stored savegame</string>
+    <string name="wherigo_controls_stopgame_hint">Stop a runninggame</string>
+    <string name="wherigo_controls_mapzones_hint">Show zones of a running game on map</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Download a cartridge (cguid needed)</string>
+    <string name="wherigo_controls_reportproblem_hint">Show last Wherigo problem</string>
+    <string name="wherigo_controls_cache_context">Cache Context</string>
+    <string name="wherigo_controls_cache_link">Go to cache details</string>
+
+    <string name="wherigo_sound_title">Sound controls</string>
+    <string name="wherigo_sound_continue">Continue</string>
+    <string name="wherigo_sound_restart">Restart from beginning</string>
+    <string name="wherigo_sound_pause">Pause</string>
+    <string name="wherigo_sound_mute">Mute</string>
+    <string name="wherigo_sound_unmute">Unmute</string>
+
+
+    <string name="wherigo_controls_resume_paused_dialog">Resume paused dialog</string>
+    <string name="wherigo_dialog_pause_info">Resume dialog in Wherigo Player by tapping \"Resume paused dialog\"</string>
+    <string name="wherigo_no_game_running">No wherigo game is currently running</string>
+    <string name="wherigo_currently_playing">Currently playing</string>
+    <string name="wherigo_locate_on_center">Locate on center</string>
+    <string name="wherigo_revoke_fixed_location">Revoke fixed location</string>
+
+    <string name="wherigo_thingtype_location">Locations</string>
+    <string name="wherigo_thingtype_inventory">Inventory</string>
+    <string name="wherigo_thingtype_item">You see</string>
+    <string name="wherigo_thingtype_task">Tasks</string>
+    <string name="wherigo_thingtype_thing">Things</string>
+
+    <string name="wherigo_author">Author</string>
+    <string name="wherigo_zone_inside">inside</string>
+    <string name="wherigo_zone_near">near</string>
+    <string name="wherigo_zone_navigate_compass">Compass to center</string>
+    <string name="wherigo_zone_copy_coordinates">Copy center coordinates</string>
+
+    <string name="wherigo_choose_cartridge">Choose cartridge</string>
+    <string name="wherigo_choose_new_loadgame">Choose new game or game to load</string>
+    <string name="wherigo_choose_savegame_slot">Choose a save slot</string>
+
+    <string name="wherigo_savegame_name_empty">&lt;New game&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Autosave</string>
+    <string name="wherigo_savegame_name_numeric">Slot %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Empty slot&gt;</string>
+
+    <string name="wherigo_download_title">Download cartridge</string>
+    <string name="wherigo_download_message">Cartridge with CGUID \"%s\" is not available on your device. Do you want to download it?</string>
+    <string name="wherigo_download_successful_title">Download successful</string>
+    <string name="wherigo_download_failed_title">Download failed</string>
+    <string name="wherigo_download_failed_message">Download of cartridge with CGUID \"%1$s\" failed: %2$s</string>
+    <string name="wherigo_manual_download_title">Manually download cartridge</string>
+    <string name="wherigo_manual_download_cguid_label">Enter CGUID here</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: deleting leftover file</string>
+    <string name="wherigo_download_progress_login">Logging in…</string>
+    <string name="wherigo_download_progress_started">Download started</string>
+    <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Please log in to www.wherigo.com and accept their terms and conditions first</string>
+
+    <string name="wherigo_error_title">Wherigo Problem report</string>
+    <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
+    <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_email">Wherigo Problem report\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine reported an error. Open bug dialog for details.</string>
+
+    <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
+    <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Do you really want to delete savegame \"%2$s\" of cartridge \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Save Wherigo game progress</string>
+    <string name="wherigo_save_game_message">Save your game progress for cartridge \"%1$s\" into \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Enter name (optional)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Warning: by proceeding you will overwrite existing savegame from \"%1$s\"</string>
+
+    <string name="wherigo_dialog_push_page">Page %1$s / %2$s</string>
+
+    <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
+    <string name="wherigo_bar_resume_dialog">Resume</string>
+
+    <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
+    <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
+
+
+    <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
+    <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
+
+    <string name="wherigo_map_supported_for_unified_map_only">Displaying of Wherigo locations on map is not supported for your map settings. Please switch to unified map under Settings -> Map Sources -> %s</string>
+
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>
     <string name="skip">Skip</string>
@@ -2864,375 +3049,15 @@
     <string name="redo">Redo</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimize</string>
+    <string name="expand">Expand</string>
+    <string name="close">Close</string>
+    <string name="delete">Delete</string>
+    <string name="play">Play</string>
+    <string name="copy">Copy</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
     <string name="multiselect_selectvisible">Select Visible</string>
-
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Areas</string>
-
-    <string name="rtl_fell_meadow">fell / meadow</string>
-    <string name="rtl_heath">heath</string>
-    <string name="rtl_marsh">marsh</string>
-    <string name="rtl_rock">rock</string>
-    <string name="rtl_scree">scree</string>
-    <string name="rtl_scrub">scrub</string>
-    <string name="rtl_wood_mixed">wood (mixed)</string>
-    <string name="rtl_wood_coniferous">wood (coniferous)</string>
-    <string name="rtl_wood_deciduous">wood (deciduous)</string>
-    <string name="rtl_glacier">glacier</string>
-    <string name="rtl_grass">grass</string>
-    <string name="rtl_farmland">farmland</string>
-    <string name="rtl_orchard">orchard</string>
-    <string name="rtl_vineyard">vineyard</string>
-    <string name="rtl_water">water</string>
-    <string name="rtl_water_intermittent">water (intermittent)</string>
-    <string name="rtl_military">military</string>
-    <string name="rtl_nature_reserve">nature reserve</string>
-    <string name="rtl_nature_reserve_strict">nature reserve (strict)</string>
-    <string name="rtl_cliff">cliff</string>
-    <string name="rtl_ridge">ridge</string>
-    <string name="rtl_reef">reef</string>
-    <string name="rtl_dyke">dyke</string>
-    <string name="rtl_embankment">embankment</string>
-    <string name="rtl_beach">beach</string>
-    <string name="rtl_beach_gravel">gravel beach</string>
-    <string name="rtl_spring">spring</string>
-    <string name="rtl_powerline">powerline</string>
-
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_category_roads_paths">Roads &amp; Paths</string>
-
-    <string name="rtl_paved_path">paved path</string>
-    <string name="rtl_paved_path_gravel">paved path (gravel)</string>
-    <string name="rtl_unpaved_path">unpaved path</string>
-    <string name="rtl_unpaved_path_partly_grown">unpaved path (partly grown)</string>
-    <string name="rtl_unpaved_path_grown">unpaved path (grown)</string>
-    <string name="rtl_surface_unknown">surface unknown</string>
-    <string name="rtl_unpaved_footpath">unpaved footpath</string>
-    <string name="rtl_paved_footpath">paved footpath</string>
-    <string name="rtl_bridleway">bridleway</string>
-    <string name="rtl_access_destination">access (destination)</string>
-    <string name="rtl_access_private">access (private)</string>
-    <string name="rtl_access_agricultural">restricted to agricultural / forest traffic</string>
-    <string name="rtl_access_no">access (no)</string>
-    <string name="rtl_cycleway">cycleway</string>
-    <string name="rtl_cycleway_steep">cycleway (steep)</string>
-    <string name="rtl_cycleway_paved">cycleway (paved)</string>
-    <string name="rtl_paved_smooth">paved (smooth)</string>
-    <string name="rtl_paved_rough">paved (rough)</string>
-    <string name="rtl_surface_compacted">surface compacted</string>
-    <string name="rtl_surface_gravel">surface gravel</string>
-    <string name="rtl_surface_raw">surface raw</string>
-
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <string name="rtl_category_walking_cycling_climbing">Walking, Cycling, Climbing</string>
-
-    <string name="rtl_hiking_T1">hiking T1</string>
-    <string name="rtl_hiking_T2">hiking T2</string>
-    <string name="rtl_hiking_T23">hiking T2/T3</string>
-    <string name="rtl_hiking_T3">hiking T3</string>
-    <string name="rtl_hiking_T4">hiking T4</string>
-    <string name="rtl_hiking_T45">hiking T4/T5</string>
-    <string name="rtl_hiking_T5">hiking T5</string>
-    <string name="rtl_hiking_T6">hiking T6</string>
-    <string name="rtl_mtb_S0">MTB S0</string>
-    <string name="rtl_mtb_S1">MTB S1</string>
-    <string name="rtl_mtb_S2">MTB S2</string>
-    <string name="rtl_mtb_S3">MTB S3</string>
-    <string name="rtl_mtb_S4">MTB S4</string>
-    <string name="rtl_mtb_S56">MTB S5/6</string>
-    <string name="rtl_uphill15">uphill -15%</string>
-    <string name="rtl_uphill20">uphill -20%</string>
-    <string name="rtl_uphill25">uphill -25%</string>
-    <string name="rtl_uphill30">uphill -30%</string>
-    <string name="rtl_uphill40">uphill -40%</string>
-    <string name="rtl_uphill_too_steep">uphill too steep</string>
-    <string name="rtl_security_rope">security: rope</string>
-    <string name="rtl_security_rungs">security: rungs</string>
-    <string name="rtl_security_ladder">security: ladder</string>
-
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_category_poi_symbols">POI / Symbols</string>
-
-    <string name="rtl_bench">bench</string>
-    <string name="rtl_cairn">cairn</string>
-    <string name="rtl_drinking_water">drinking water</string>
-    <string name="rtl_guidepost">guidepost</string>
-    <string name="rtl_info_board">info board</string>
-    <string name="rtl_info_office">info office</string>
-    <string name="rtl_info_terminal">info terminal</string>
-    <string name="rtl_peak">peak</string>
-    <string name="rtl_peak_cross">peak cross</string>
-    <string name="rtl_picnic_site">picnic site</string>
-    <string name="rtl_playground">playground</string>
-    <string name="rtl_playground_private">private playground</string>
-    <string name="rtl_recycling">recycling</string>
-    <string name="rtl_shelter">shelter</string>
-    <string name="rtl_shelter_picnic">picnic shelter</string>
-    <string name="rtl_shelter_rock">rock shelter</string>
-    <string name="rtl_telephone">telephone</string>
-    <string name="rtl_toilets">toilets</string>
-    <string name="rtl_volcano">volcano</string>
-
-    <string name="rtl_adit_disused">disused adit</string>
-    <string name="rtl_archaeological">archaeological</string>
-    <string name="rtl_artwork">artwork</string>
-    <string name="rtl_attraction">attraction</string>
-    <string name="rtl_boundary_stone">boundary (stone)</string>
-    <string name="rtl_bunker_disused">bunker (disused)</string>
-    <string name="rtl_castle">castle</string>
-    <string name="rtl_cinema">cinema</string>
-    <string name="rtl_cross">cross</string>
-    <string name="rtl_fountain">fountain</string>
-    <string name="rtl_memorial">memorial</string>
-    <string name="rtl_memorial_plaque">memorial plaque</string>
-    <string name="rtl_memorial_statue">memorial statue</string>
-    <string name="rtl_memorial_stolperstein">memorial stolperstein</string>
-    <string name="rtl_memorial_stone">memorial stone</string>
-    <string name="rtl_memorial_war">war memorial</string>
-    <string name="rtl_monument">monument</string>
-    <string name="rtl_museum">museum</string>
-    <string name="rtl_ruins">ruins</string>
-    <string name="rtl_stone_historic">historic stone</string>
-    <string name="rtl_theatre">theatre</string>
-    <string name="rtl_water_well">water well</string>
-    <string name="rtl_wayside_cross">wayside cross</string>
-    <string name="rtl_wayside_shrine">wayside shrine</string>
-    <string name="rtl_zoo">zoo</string>
-    <string name="rtl_library">library</string>
-    <string name="rtl_arts_centre">arts centre</string>
-    <string name="rtl_casino">casino</string>
-    <string name="rtl_nightclub">nightclub</string>
-    <string name="rtl_community_centre">community centre</string>
-    <string name="rtl_social_facility">social facility</string>
-    <string name="rtl_townhall">town hall</string>
-    <string name="rtl_courthouse">courthouse</string>
-
-    <string name="rtl_beach_resort">beach resort</string>
-    <string name="rtl_cliff_diving">cliff diving</string>
-    <string name="rtl_climbing">climbing</string>
-    <string name="rtl_climbing_adventure">climbing adventure</string>
-    <string name="rtl_free_flying">free flying</string>
-    <string name="rtl_golf">golf</string>
-    <string name="rtl_gym">gym</string>
-    <string name="rtl_miniature_golf">miniature golf</string>
-    <string name="rtl_roller_skating">roller skating</string>
-    <string name="rtl_shooting">shooting</string>
-    <string name="rtl_skateboard">skateboard</string>
-    <string name="rtl_slipway">slipway</string>
-    <string name="rtl_soccer">soccer</string>
-    <string name="rtl_stadium">stadium</string>
-    <string name="rtl_swimming_area">swimming area</string>
-    <string name="rtl_swimming_outdoor">outdoor swimming</string>
-    <string name="rtl_tennis">tennis</string>
-    <string name="rtl_via_ferrata">via ferrata</string>
-    <string name="rtl_water_park">water park</string>
-
-    <string name="rtl_aerialway_station">aerialway station</string>
-    <string name="rtl_airport">airport</string>
-    <string name="rtl_cable_car">cable car</string>
-    <string name="rtl_chair_lift">chair lift</string>
-    <string name="rtl_drag_lift">drag lift</string>
-    <string name="rtl_gondola">gondola</string>
-    <string name="rtl_goods_lift">goods lift</string>
-    <string name="rtl_helipad">helipad</string>
-    <string name="rtl_rail_funicular">funicular rail</string>
-
-    <string name="rtl_parking">parking</string>
-    <string name="rtl_parking_private">private parking</string>
-    <string name="rtl_bicycle_parking">bicycle parking</string>
-    <string name="rtl_bicycle_rental">bicycle rental</string>
-    <string name="rtl_bicycle_shop">bicycle shop</string>
-    <string name="rtl_car_rental">car rental</string>
-    <string name="rtl_car_sharing">car sharing</string>
-    <string name="rtl_car_wash">car wash</string>
-    <string name="rtl_car_shop">car shop</string>
-    <string name="rtl_fuel">fuel</string>
-    <string name="rtl_ferry_terminal">ferry terminal</string>
-
-    <string name="rtl_alpine_hut">alpine hut</string>
-    <string name="rtl_alpine_hut_private">private alpine hut</string>
-    <string name="rtl_alpine_hut_winter">alpine winter hut</string>
-    <string name="rtl_apartment">apartment</string>
-    <string name="rtl_camp_site">camp site</string>
-    <string name="rtl_caravan_site">caravan site</string>
-    <string name="rtl_chalet">chalet</string>
-    <string name="rtl_hostel">hostel</string>
-    <string name="rtl_hotel">hotel</string>
-    <string name="rtl_shelter_basic_hut">basic shelter hut</string>
-    <string name="rtl_wilderness_hut">wilderness hut</string>
-    <string name="rtl_wilderness_hut_private">private wilderness hut</string>
-
-    <string name="rtl_bar">bar</string>
-    <string name="rtl_biergarten">biergarten</string>
-    <string name="rtl_cafe">cafe</string>
-    <string name="rtl_fastfood">fastfood</string>
-    <string name="rtl_ice_cream">ice cream</string>
-    <string name="rtl_pub">pub</string>
-    <string name="rtl_restaurant">restaurant</string>
-    <string name="rtl_bbq">BBQ</string>
-    <string name="rtl_water_point">water point</string>
-
-    <string name="rtl_atm">atm</string>
-    <string name="rtl_bakery">bakery</string>
-    <string name="rtl_bank">bank</string>
-    <string name="rtl_beverages">beverages</string>
-    <string name="rtl_books">books</string>
-    <string name="rtl_butcher">butcher</string>
-    <string name="rtl_chemist">chemist</string>
-    <string name="rtl_convenience">convenience</string>
-    <string name="rtl_doityourself">DIY</string>
-    <string name="rtl_farm_shop">farm shop</string>
-    <string name="rtl_laundry">laundry</string>
-    <string name="rtl_mall">mall</string>
-    <string name="rtl_marketplace">marketplace</string>
-    <string name="rtl_organic">organic</string>
-    <string name="rtl_postbox">postbox</string>
-    <string name="rtl_postoffice">post office</string>
-    <string name="rtl_sports_shop">sports shop</string>
-    <string name="rtl_supermarket">supermarket</string>
-    <string name="rtl_travel_agency">travel agency</string>
-
-    <string name="rtl_defibrillator">defibrillator</string>
-    <string name="rtl_doctors">doctors</string>
-    <string name="rtl_embassy">embassy</string>
-    <string name="rtl_emergency_phone">emergency phone</string>
-    <string name="rtl_firebrigade">fire brigade</string>
-    <string name="rtl_emergency_access_point">emergency access point</string>
-    <string name="rtl_hospital">hospital</string>
-    <string name="rtl_clinic">clinic</string>
-    <string name="rtl_pharmacy">pharmacy</string>
-    <string name="rtl_police">police</string>
-    <string name="rtl_emergency_fire_hydrant">fire hydrant</string>
-    <string name="rtl_emergency_suction_point">emergency suction point</string>
-
-    <string name="rtl_adit">adit</string>
-    <string name="rtl_petroleum_well">petroleum well</string>
-    <string name="rtl_power_coal">power (coal)</string>
-    <string name="rtl_power_gas">power (gas)</string>
-    <string name="rtl_power_nuclear">power (nuclear)</string>
-    <string name="rtl_power_water">power (water)</string>
-    <string name="rtl_power_wind">power (wind)</string>
-    <string name="rtl_wastewater_plant">wastewater plant</string>
-    <string name="rtl_water_works">water works</string>
-    <string name="rtl_watermill">watermill</string>
-    <string name="rtl_weir">weir</string>
-    <string name="rtl_windmill">windmill</string>
-    <string name="rtl_windpump">windpump</string>
-
-    <string name="rtl_bunker">bunker</string>
-    <string name="rtl_farmyard">farmyard</string>
-    <string name="rtl_hunting_stand">hunting stand</string>
-    <string name="rtl_lighthouse">lighthouse</string>
-    <string name="rtl_tower_communication">communication tower</string>
-    <string name="rtl_tower_observation">observation tower</string>
-
-    <string name="rtl_kindergarten">kindergarten</string>
-    <string name="rtl_school">school</string>
-    <string name="rtl_university">university</string>
-    <string name="rtl_college">college</string>
-
-    <string name="rtl_buddhist">buddhist</string>
-    <string name="rtl_church">church</string>
-    <string name="rtl_hindu">hindu</string>
-    <string name="rtl_mosque">mosque</string>
-    <string name="rtl_place_of_worship">place of worship</string>
-    <string name="rtl_shinto">shinto</string>
-    <string name="rtl_synagogue">synagogue</string>
-    <string name="rtl_pow">place of worship</string>
-    <string name="rtl_pow_christian">christian place of worship</string>
-    <string name="rtl_pow_jewish">jewish place of worship</string>
-    <string name="rtl_pow_muslim">muslim place of worship</string>
-
-    <string name="rtl_block">block</string>
-    <string name="rtl_bollard">bollard</string>
-    <string name="rtl_border_control">border control</string>
-    <string name="rtl_bridge_movable">movable bridge</string>
-    <string name="rtl_cave_entrance">cave entrance</string>
-    <string name="rtl_cycle_barrier">cycle barrier</string>
-    <string name="rtl_elevator">elevator</string>
-    <string name="rtl_ford">ford</string>
-    <string name="rtl_ford_small">small ford</string>
-    <string name="rtl_gate">gate</string>
-    <string name="rtl_gate_private">private gate</string>
-    <string name="rtl_geyser">geyser</string>
-    <string name="rtl_hot_spring">hot spring</string>
-    <string name="rtl_kissing_gate">kissing gate</string>
-    <string name="rtl_ladder">ladder</string>
-    <string name="rtl_lift_gate">lift gate</string>
-    <string name="rtl_log">log</string>
-    <string name="rtl_oneway">oneway</string>
-    <string name="rtl_oneway_cycle">oneway (cycle)</string>
-    <string name="rtl_oneway_cycle_rev">oneway (cycle, reverse)</string>
-    <string name="rtl_oneway_rev">oneway (reverse)</string>
-    <string name="rtl_peak_small">small peak</string>
-    <string name="rtl_rapids">rapids</string>
-    <string name="rtl_rungs">rungs</string>
-    <string name="rtl_saddle_0">saddle 0°</string>
-    <string name="rtl_saddle_45">saddle 45°</string>
-    <string name="rtl_saddle_90">saddle 90°</string>
-    <string name="rtl_saddle_135">saddle 135°</string>
-    <string name="rtl_safety_rope">safety rope</string>
-    <string name="rtl_stone">stone</string>
-    <string name="rtl_traffic_signal">traffic signal</string>
-    <string name="rtl_turnstile">turnstile</string>
-    <string name="rtl_viewpoint">viewpoint</string>
-    <string name="rtl_waterfall">waterfall</string>
-
-    <string name="rtl_alp">alp</string>
-    <string name="rtl_wetland">wetland</string>
-    <string name="rtl_moor">moor</string>
-    <string name="rtl_coppice">coppice</string>
-    <string name="rtl_plantation">plantation</string>
-    <string name="rtl_reed">reed</string>
-    <string name="rtl_mud">mud</string>
-    <string name="rtl_mudflat">mudflat</string>
-
-    <string name="rtl_cemetery">cemetery</string>
-    <string name="rtl_cemetery_christian">christian cemetery</string>
-    <string name="rtl_cemetery_jewish">jewish cemetery</string>
-    <string name="rtl_cemetery_muslim">muslim cemetery</string>
-
-    <string name="rtl_pedestrian_area">pedestrian area</string>
-    <string name="rtl_trading">trading</string>
-    <string name="rtl_parking_restricted">restricted parking</string>
-
-    <string name="rtl_prison">prison</string>
-    <string name="rtl_corral">corral</string>
-    <string name="rtl_riding_range">riding range</string>
-    <string name="rtl_allotment">allotment</string>
-
-    <string name="rtl_retention_reservoir">retention reservoir</string>
-    <string name="rtl_dump">dump</string>
-    <string name="rtl_driving_range">driving range</string>
-
-    <string name="rtl_ruin">ruin</string>
-    <string name="rtl_saline">saline</string>
-
-    <string name="rtl_freeway">freeway</string>
-    <string name="rtl_freeway_similar">similar to freeway</string>
-    <string name="rtl_interstate">interstate / A road</string>
-    <string name="rtl_secondary_road">secondary road</string>
-    <string name="rtl_district_road">district / tertiary road</string>
-    <string name="rtl_side_street">side street</string>
-    <string name="rtl_residential_road">residential road</string>
-    <string name="rtl_access_road">access road</string>
-    <string name="rtl_traffic_calmed_area">traffic-calmed area</string>
-    <string name="rtl_pedestrian_road">pedestrian road</string>
-    <string name="rtl_tunnel">tunnel</string>
-    <string name="rtl_bridge">bridge</string>
-    <string name="rtl_railway">railway</string>
-
-    <string name="rtl_path_foot">general foot path</string>
-    <string name="rtl_path_bicycle">general bicycle path</string>
-    <string name="rtl_path_combined_bicycle_foot">combined bicycle and foot path</string>
-    <string name="rtl_path_narrow">general way or path, not wide enough for cars</string>
-    <string name="rtl_path_badly_visible">badly visible path</string>
-    <string name="rtl_path_quality1">quality 1 (paved: asphalt, …)</string>
-    <string name="rtl_path_quality23">quality 2/3 (paved: gravel, repaired, …)</string>
-    <string name="rtl_path_quality45">quality 4/5 (unpaved)</string>
 
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Smiley</string>
@@ -3267,4 +3092,37 @@
         <item quantity="many">%d unread messages in message center</item>
         <item quantity="other">%d unread messages in message center</item>
     </plurals>
+
+    <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Preferred Image Size</string>
+    <string name="settings_gc_imagesize_summary">Images from Geocaching.com in listing, logs and trackables are available in different sizes. Select the size to be loaded when loading and storing a cache.</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Original</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
+
+    <!-- db inspection -->
+    <string name="view_database">View database</string>
+    <string name="dbi_select_title">(Select table)</string>
+    <string name="dbi_columnproperties_title">Column properties</string>
+    <string name="dbi_columnproperties_message">Field: %1$s\nType: %2$s\nStorage: %3$s</string>
+    <string name="dbi_edit_title">Edit "%1$s" of row %2$d"</string>
+    <string name="dbi_edit_ok">Field updated</string>
+    <string name="dbi_edit_error">Error while updating field</string>
+    <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
+    <string name="dbi_search_title">Search for</string>
+    <string name="dbi_search_columnSelection">Restrict to</string>
+
+    <!-- emoji categories -->
+    <string name="emoji_category_recent">Recently used</string>
+    <string name="emoji_category_symbols">Symbols</string>
+    <string name="emoji_category_dots">Dots</string>
+    <string name="emoji_category_places">Places</string>
+    <string name="emoji_category_food">Food &amp; Beverage</string>
+    <string name="emoji_category_activity">Activity</string>
+    <string name="emoji_category_people">People</string>
+    <string name="emoji_category_numbers">Numbers</string>
+
 </resources>

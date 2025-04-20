@@ -78,7 +78,7 @@ public abstract class Formatter {
         seconds = seconds - hours * 3600 - minutes * 60;
         String time = "";
         if (hours != 0) {
-            time = "" + hours + "h ";
+            time = hours + "h ";
         }
         if (minutes != 0) {
             time = time + minutes + "m ";

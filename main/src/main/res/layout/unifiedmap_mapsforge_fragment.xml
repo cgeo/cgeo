@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/unifiedmap_vtm"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <org.mapsforge.map.android.view.MapView
+        android:id="@+id/mapViewMapsforge"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <ImageView
+        android:id="@+id/map_attribution"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="11dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left"
+        android:src="@drawable/copyright"
+        tools:src="@drawable/copyright"/>
+
+    <!--TODO remove as soon as Unified map is default-->
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/unifiedmap"/>
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:text="mapsforge"
+        android:textSize="8dp"
+        android:rotation="-45"
+        android:textColor="@color/just_white"
+        tools:ignore="HardcodedText,SpUsage" />
+    <!--End of TODO-->
+
+</RelativeLayout>

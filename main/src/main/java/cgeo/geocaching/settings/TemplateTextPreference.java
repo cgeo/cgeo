@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -15,12 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import java.util.List;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,6 +39,7 @@ public class TemplateTextPreference extends Preference {
 
     public TemplateTextPreference(final Context context) {
         super(context);
+        setWidgetLayoutResource(R.layout.button_icon_view);
     }
 
     public TemplateTextPreference(final Context context, final AttributeSet attrs) {
@@ -47,7 +51,7 @@ public class TemplateTextPreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final Preference pref = findPreferenceInHierarchy(getKey());
         if (pref != null) {
@@ -55,17 +59,14 @@ public class TemplateTextPreference extends Preference {
                 launchEditTemplateDialog();
                 return false;
             });
-        }
-        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
-        if (!isSignature) {
-            holder.itemView.setOnLongClickListener(v -> {
-                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
+            if (!getKey().equals(getContext().getString(R.string.pref_signature))) {
+                final MaterialButton button = (MaterialButton) holder.findViewById(R.id.iconview);
+                button.setIconResource(R.drawable.ic_menu_delete);
+                button.setOnClickListener(v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
                     Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
                     callChangeListener(null);
-                });
-                return true;
-            });
-
+                }));
+            }
         }
     }
 
@@ -77,6 +78,7 @@ public class TemplateTextPreference extends Preference {
         editTitle = v.findViewById(R.id.title);
         editText = v.findViewById(R.id.edit);
 
+        boolean focusOnText = true;
         if (isSignature) {
             editText.setText(Settings.getSignature());
         } else {
@@ -86,8 +88,10 @@ public class TemplateTextPreference extends Preference {
                 editTitle.setText(template.getTitle());
                 editText.setText(template.getText());
             }
+            focusOnText = StringUtils.isNotEmpty(editTitle.getText());
         }
         Dialogs.moveCursorToEnd(editText);
+        Keyboard.show(getContext(), focusOnText ? editText : editTitle);
 
         final AlertDialog dialog = Dialogs.newBuilder(getContext())
                 .setView(v)

@@ -11,8 +11,8 @@ import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 import java.util.Map;
 
 final class StdModel extends OsmPathModel {
-    protected BExpressionContextWay ctxWay;
-    protected BExpressionContextNode ctxNode;
+    private BExpressionContextWay ctxWay;
+    private BExpressionContextNode ctxNode;
 
     public OsmPrePath createPrePath() {
         return null;

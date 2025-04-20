@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Oplossing: Favoriet status gaat verloren bij het uitvoeren van een afbeeldingsselectie tijdens het voorbereiden van een log
 
 ##
-- Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
-- Oplossing: Crash bij het openen van kaart met lege track bestandsnamen
-- Oplossing: Automatische kaartrotatie nog steeds actief na resetten met behulp van kompas (UnifiedMap)
-- Oplossing: Ontbrekende kompas roos in autorotatie modus op Google Maps (UnifiedMap)
-- Oplossing: Trackable logs kunnen niet worden geladen vanwege websitewijzigingen
-- Wijziging: Combineer hoogte + coördinaat info in kaart lange tik menu in één "geselecteerde positie" + toon afstand tot de huidige positie
+- Oplossing: Wherigo links zonder host naam niet gedetecteerd
+- Oplossing: Niet-leesbare foutmelding bij het plaatsen van een log
+- Teruggedraaid: Lokale .map bestandsdetectie (vanwege ongewenste bijwerkingen)
 
 ##
-- Nieuw: Offline logs verwijderen met behulp van contextmenu
-- Oplossing: Verwijderen offline log niet werkt onder bepaalde voorwaarde
-- Oplossing: Filternaam verloren bij filter snelwijziging
-- Wijziging: Sorteren van trackbestanden op naam
-- Wijziging: Sla trackable actie ook op voor offline logs
-- Oplossing: Kaart overschakelen naar 0,0 coördinaten op kaart type verandering (UnifiedMap)
-- Oplossing: Waypoint doel terugschakelen naar de cache als doel (UnifiedMap)
-- Oplossing: "Opslaan" van een cache zonder een lijst te selecteren
-- Oplossing: Inloggen mislukt als gevolg van websitewijziging op geocaching.com
-- Wijziging: Toon hoogte info onder de positie marker (indien geactiveerd)
-- OPMERKING: Er zijn meer problemen als gevolg van recente website wijzigingen op geocaching.com, die nog niet zijn verholpen. We zijn ermee bezig. Bekijk onze [status pagina](https://github.com/cgeo/cgeo/issues/15555) voor de huidige voortgang.
+- Oplossing: Wherigo: Behandeling zones met ongeldig/te-nabije coördinaten
+- Oplossing: c:geo probeert de lokale ".map" bestanden te importeren als GPX
+- Oplossing: Aangepaste gebruikersaantekeningen uit pop-up gaan soms verloren
+- Oplossing: Bewerken van logboek toont de optie "rapportageprobleem"
+- Oplossing: Live Filter 'Bevat niet' retourneert geen caches
+- Oplossing: Crashes op pauzeren van een UnifiedMap online kaart
+- Oplossing: verouderde app "GPS Bluethooth" in handige apps lijst
+- Oplossing: Variabelen en/of waarden worden per ongeluk verwijderd bij het bewerken van persoonlijke notitie
+- Oplossing: Wherigo: Verkeerde hoogte info
+- Oplossing: Wherigo: Alle knopteksten worden gekapitaliseerd
+- Oplossing: Crash in instellingen
+- Oplossing: c:geo niet vermeld in de Play Store voor GPS-loze apparaten
+- Oplossing: c:geo crashed stil bij mapselectie in bepaalde configuraties
+- Wijziging: Maak extremcaching.com een offline connector (hun service is gestopt)
+- Oplossing: Statusinfo op kaart bijwerken als zoomniveau wijzigt

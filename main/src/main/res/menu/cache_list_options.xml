@@ -15,9 +15,7 @@
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
-        android:showAsAction="always"
         android:title="@string/caches_sort"
-        app:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_switch_select_mode"
@@ -48,6 +46,7 @@
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_caches"
+        android:icon="@drawable/ic_menu_cache"
         android:title="@string/menu_caches"
         app:showAsAction="never|withText">
         <!-- Cache operations -->
@@ -69,17 +68,26 @@
                 android:title="@string/caches_remove_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_remove_from_other_lists"
+                android:title="@string/caches_remove_from_other_lists_all"
+                android:enabled="true"
+                app:showAsAction="never|withText"/>
+            <item
+                android:id="@+id/menu_drop_caches_all_lists"
+                android:title="@string/caches_remove_all_completely"
+                app:showAsAction="ifRoom|withText"/>
+            <item
                 android:id="@+id/menu_add_to_route"
                 android:title="@string/caches_append_to_route_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_delete_events"
                 android:title="@string/caches_delete_events"
-                android:enabled="false"
+                android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_upload_bookmarklist"
-                android:title="@string/caches_upload_bookmarklist"
+                android:title="@string/caches_upload_bookmarklist_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_upload_modifiedcoords"
@@ -92,17 +100,17 @@
             <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
-                android:enabled="false"
+                android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_show_attributes"
-                android:title="@string/caches_show_attributes"
+                android:title="@string/caches_show_attributes_all"
                 app:showAsAction="never"/>
-            <item android:id="@+id/menu_set_cache_icon"
-                android:title="@string/caches_set_cache_icon"
+            <item
+                android:id="@+id/menu_set_cache_icon"
+                android:title="@string/caches_set_cache_icon_all"
                 android:enabled="false"
-                app:showAsAction="never">
-            </item>
+                app:showAsAction="never"/>
             <item
                 android:id="@+id/menu_create_internal_cache"
                 android:title="@string/create_internal_cache"
@@ -111,6 +119,7 @@
     </item>
     <item
         android:id="@+id/menu_lists"
+        android:icon="@drawable/ic_menu_list"
         android:title="@string/menu_lists"
         app:showAsAction="never|withText">
         <!-- List operations -->
@@ -128,6 +137,10 @@
                 android:title="@string/list_menu_rename"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_rename_list_prefix"
+                android:title="@string/list_menu_rename_list_prefix"
+                app:showAsAction="never|withText"/>
+            <item
                 android:id="@+id/menu_make_list_unique"
                 android:title="@string/caches_make_list_unique"
                 android:enabled="false"
@@ -135,49 +148,56 @@
             <item
                 android:id="@+id/menu_set_listmarker"
                 android:title="@string/caches_set_listmarker"
-                app:showAsAction="never|withText">
-            </item>
+                app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_set_askfordeletion"
                 android:title="@string/caches_askdeletion"
                 app:showAsAction="never"
-                android:visible="false">
-            </item>
+                android:visible="false"/>
         </menu>
     </item>
     <item
         android:id="@+id/menu_import"
+        android:icon="@drawable/ic_menu_import"
         android:title="@string/list_menu_import"
         app:showAsAction="never|withText">
         <menu>
             <item
                 android:id="@+id/menu_import_pq"
-                android:title="@string/menu_lists_pocket_queries"/>
+                android:title="@string/menu_lists_pocket_queries"
+                android:icon="@drawable/ic_menu_pocket_query"/>
             <item
                 android:id="@+id/menu_bookmarklists"
-                android:title="@string/menu_lists_bookmarklists"/>
+                android:title="@string/menu_lists_bookmarklists"
+                android:icon="@drawable/ic_menu_bookmarks"/>
             <item
                 android:id="@+id/menu_import_gpx"
-                android:title="@string/gpx_import_title"/>
+                android:title="@string/gpx_import_title"
+                android:icon="@drawable/ic_menu_gpx"/>
             <item
                 android:id="@+id/menu_import_web"
-                android:title="@string/web_import_title"/>
+                android:title="@string/web_import_title"
+                android:icon="@drawable/wherigo_download"/>
         </menu>
     </item>
     <item
         android:id="@+id/menu_export"
+        android:icon="@drawable/ic_menu_share"
         android:title="@string/export"
         app:showAsAction="never|withText">
         <menu>
             <item
                 android:id="@+id/menu_export_gpx"
-                android:title="@string/export_gpx"/>
+                android:title="@string/export_gpx"
+                android:icon="@drawable/ic_menu_gpx"/>
             <item
                 android:id="@+id/menu_export_fieldnotes"
-                android:title="@string/export_fieldnotes"/>
+                android:title="@string/export_fieldnotes"
+                android:icon="@drawable/ic_menu_note_edit"/>
             <item
                 android:id="@+id/menu_export_persnotes"
-                android:title="@string/export_persnotes"/>
+                android:title="@string/export_persnotes"
+                android:icon="@drawable/ic_menu_note"/>
         </menu>
     </item>
     <item

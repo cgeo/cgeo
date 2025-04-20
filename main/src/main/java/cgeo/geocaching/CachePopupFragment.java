@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -10,11 +9,13 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheUtils;
@@ -23,7 +24,12 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.wherigo.WherigoActivity;
+import cgeo.geocaching.wherigo.WherigoUtils;
+import cgeo.geocaching.wherigo.WherigoViewUtils;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Message;
@@ -40,9 +46,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
@@ -59,7 +67,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
         return f;
     }
-
+ 
     private static class StoreCacheHandler extends DisposableHandler {
         private final int progressMessage;
         private final WeakReference<CachePopupFragment> popupRef;
@@ -99,7 +107,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CachePopupFragment popup = getReference();
             if (popup == null) {
                 return;
@@ -110,7 +118,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = PopupBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }
@@ -142,8 +150,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
-            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
-            details = new CacheDetailsCreator(getActivity(), binding.detailsList);
+            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));
+            details = new CacheDetailsCreator(requireActivity(), binding.detailsList);
 
             addCacheDetails(false);
 
@@ -154,17 +162,19 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             });
 
             // Wherigo
-            if (WhereYouGoApp.isWherigo(cache)) {
-                binding.sendToWhereyougo.setVisibility(View.VISIBLE);
-                CacheUtils.setWherigoLink(getActivity(), cache, binding.sendToWhereyougo);
+            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
+            if (!wherigoGuis.isEmpty()) {
+                binding.sendToWherigo.setVisibility(View.VISIBLE);
+                binding.sendToWherigo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(requireActivity(), wherigoGuis, guid ->
+                        WherigoActivity.startForGuid(requireActivity(), guid, cache.getGeocode(), true)));
             } else {
-                binding.sendToWhereyougo.setVisibility(View.GONE);
+                binding.sendToWherigo.setVisibility(View.GONE);
             }
 
             // ALC
             if (CacheUtils.isLabAdventure(cache)) {
                 binding.sendToAlc.setVisibility(View.VISIBLE);
-                CacheUtils.setLabLink(getActivity(), cache, binding.sendToAlc, cache.getUrl());
+                CacheUtils.setLabLink(requireActivity(), binding.sendToAlc, cache.getUrl());
             } else {
                 binding.sendToAlc.setVisibility(View.GONE);
             }
@@ -172,7 +182,17 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             // offline use
             CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
 
-            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res);
+            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res, null);
+
+            updateStoreRefreshButtons(true);
+            getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
+                @Override
+                protected void onReceive(final Context context, final String geocode) {
+                    if (StringUtils.equals(geocode, CachePopupFragment.this.geocode)) {
+                        init();
+                    }
+                }
+            });
 
         } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
@@ -213,7 +233,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             CacheDetailActivity.updateOfflineBox(getView(), cache, res,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(getView(), cache, res);
+            CacheDetailActivity.updateCacheLists(getView(), cache, res, null);
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
@@ -225,16 +245,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                     CacheDetailActivity.updateOfflineBox(view, cache, res,
                             new RefreshCacheClickListener(), new DropCacheClickListener(),
                             new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-                    CacheDetailActivity.updateCacheLists(view, cache, res);
+                    CacheDetailActivity.updateCacheLists(view, cache, res, null);
                 }
             });
         }
     }
 
 
+    private void updateStoreRefreshButtons(final boolean enable) {
+        final Activity activity = getActivity();
+        if (activity != null) {
+            ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_store), enable);
+            ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_refresh), enable);
+        }
+    }
+
+
     private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
         @Override
-        public void onClick(final View arg0) {
+        public void onClick(final View v) {
             selectListsAndStore(false);
         }
 
@@ -245,41 +274,28 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         private void selectListsAndStore(final boolean fastStoreOnLastSelection) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
-                return;
-            }
-
-            if (Settings.getChooseList() || cache.isOffline()) {
-                // let user select list to store cache in
-                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        this::storeCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
+            if (cache.isOffline()) {
+                // just update list selection
+                new StoredList.UserInterface(requireActivity()).promptForMultiListSelection(R.string.lists_title,
+                        CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
-                storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
+                if (!Network.isConnected()) {
+                    showToast(getString(R.string.err_server_general));
+                    return;
+                }
+                CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
             }
-        }
-
-        private void storeCacheOnLists(final Set<Integer> listIds) {
-            doStoreCacheOnLists(listIds);
         }
     }
 
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
-                return;
-            }
-
             if (!Network.isConnected()) {
                 showToast(getString(R.string.err_server_general));
                 return;
             }
-
-            final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
-            progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
-            cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
+            CacheDownloaderService.refreshCache(getActivity(), cache.getGeocode(), true, () -> updateStoreRefreshButtons(false));
         }
     }
 
@@ -293,7 +309,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return false;
             }
 
-            new StoredList.UserInterface(getActivity()).promptForListSelection(R.string.cache_menu_move_list,
+            new StoredList.UserInterface(requireActivity()).promptForListSelection(R.string.cache_menu_move_list,
                     this::moveCacheToList, true, -1);
 
             return true;
@@ -343,7 +359,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
     @Override
     public void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true);
+        ViewUtils.setEnabled(requireView().findViewById(R.id.menu_navigate), false);
+        NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true, R.id.menu_navigate);
     }
 
     /**

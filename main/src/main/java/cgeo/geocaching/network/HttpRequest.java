@@ -1,6 +1,8 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -11,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +40,8 @@ public class HttpRequest {
     private static final ObjectMapper JSON_MAPPER = JsonUtils.mapper;
 
     private static final String LOGPRAEFIX = "HTTP-";
+    public static final String HTTP429 = "HTTP429";
+    public static final String HTTP429_ADDRESS = "HTTP429ADDRESS";
 
     private Method method = null;
     private String uriBase;
@@ -144,6 +149,10 @@ public class HttpRequest {
             final T mappedResponse = mapper.apply(response);
             if (mappedResponse instanceof HttpResponse && response != mappedResponse) {
                 ((HttpResponse) mappedResponse).setFromHttpResponse(response);
+            }
+            if (response.getStatusCode() == 429) {
+                Log.w("Request throttled: " + this.getRequestUrl());
+                LifecycleAwareBroadcastReceiver.sendBroadcast(CgeoApplication.getInstance(), HTTP429, HTTP429_ADDRESS, Objects.requireNonNull(HttpUrl.parse(Objects.requireNonNull(getRequestUrl()))).host());
             }
             return mappedResponse;
         });

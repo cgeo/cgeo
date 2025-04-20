@@ -40,7 +40,6 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,7 +53,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,7 +63,6 @@ import androidx.loader.content.Loader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +78,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final String SAVED_STATE_OLDLOGENTRY = "cgeo.geocaching.saved_state_oldlogentry";
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
-    private static final int LOG_MAX_LENGTH = 5000;
+    private static final String SAVED_STATE_FAVORITE = "cgeo.geocaching.saved_state_favorite";
 
     private enum LogEditMode {
         CREATE_NEW, // create/edit a new log entry (which may be stored offline)
@@ -121,6 +118,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
+        /** @noinspection EmptyMethod*/
         @Override
         public void updateGeoData(final GeoData geo) {
             // Do nothing explicit, listening to location updates is sufficient
@@ -154,10 +152,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
         reportProblem.setValues(possibleReportProblemTypes);
 
-        if (logEditMode != LogEditMode.CREATE_NEW && possibleReportProblemTypes.size() == 1) {
-            binding.reportProblemBox.setVisibility(View.GONE);
-        } else {
+        if (logEditMode == LogEditMode.CREATE_NEW && possibleReportProblemTypes.size() > 1) {
             binding.reportProblemBox.setVisibility(View.VISIBLE);
+        } else {
+            binding.reportProblemBox.setVisibility(View.GONE);
         }
     }
 
@@ -244,6 +242,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
             this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
+            if (savedInstanceState.getInt(SAVED_STATE_FAVORITE) > 0) {
+                cache.setFavorite(true);
+            }
         }
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
 
@@ -286,7 +287,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void fillViewFromEntry(final LogEntry logEntry) {
         logType.set(logEntry.logType);
-        date.setDate(new Date(logEntry.date));
+        date.setDate(logEntry.getDate());
         setLogText(logEntry.log);
         reportProblem.set(logEntry.reportProblem);
         imageListFragment.setImages(logEntry.logImages);
@@ -319,7 +320,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(binding.favoriteCheck.isChecked())
-                .setPassword(binding.logPassword.getText().toString());
+                .setPassword(ViewUtils.getEditableText(binding.logPassword.getText()));
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         builder.addInventoryActions(inventoryAdapter.getActionLogs());
         //CollectionStream.of(inventory).forEach(t -> builder.addTrackableAction(t.geocode, t.action));
@@ -335,9 +336,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
-            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
-            if (this.logEditMode == LogEditMode.CREATE_NEW && availableFavoritePoints > 0) {
-                binding.favoriteCheck.setVisibility(View.VISIBLE);
+            final int remainingPoints = availableFavoritePoints + (cache.isFavorite() ? 1 : 0);
+            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
+            if (availableFavoritePoints > 0 || (this.logEditMode == LogEditMode.EDIT_EXISTING && cache.isFavorite())) {
+                binding.favoriteCheck.setVisibility(availableFavoritePoints > 0 ? View.VISIBLE : View.GONE);
+                binding.favoriteCheck.setChecked(cache.isFavorite());
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
@@ -415,6 +418,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         outState.putParcelable(SAVED_STATE_OLDLOGENTRY, this.originalLogEntry);
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
+        outState.putInt(SAVED_STATE_FAVORITE, this.binding.favoriteCheck.isChecked() ? 1 : 0);
+        if (this.binding.favoriteCheck.isChecked()) {
+            cache.setFavorite(true);
+        }
     }
 
     public void setType(final LogType type) {
@@ -465,7 +472,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 lastSavedState = logEntry;
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
-                        cache.logOffline(LogCacheActivity.this, logEntry);
+                        cache.storeLogOffline(LogCacheActivity.this, logEntry);
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                         inventoryAdapter.saveActions();
@@ -476,11 +483,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private String currentLogText() {
-        return binding.log.getText().toString();
-    }
-
-    private String currentLogPassword() {
-        return binding.logPassword.getText().toString();
+        return ViewUtils.getEditableText(binding.log.getText());
     }
 
     @Override
@@ -499,15 +502,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            final int logLength = TextUtils.getNormalizedStringLength(binding.log.getText().toString());
+            final int logLength = ViewUtils.getEditableText(binding.log.getText()).trim().length();
             if (logLength > 0) {
-                if (logLength <= LOG_MAX_LENGTH) {
-                    sendLogAndConfirm();
-                } else {
-                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
-                }
+                sendLogAndConfirm();
             } else {
-                Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
+                ViewUtils.showToast(this, R.string.cache_empty_log);
             }
         } else if (itemId == R.id.save) {
             finish(SaveMode.FORCE);
@@ -547,7 +546,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private void sendLogInternal() {
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
             logActivityHelper.editLog(cache, this.originalLogEntry,
-                getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build());
+                getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
         } else {
             logActivityHelper.createLog(cache, getEntryFromView(), inventoryAdapter.getInventory());
         }
@@ -576,8 +575,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         } else if (!LogCacheActivity.this.isFinishing()) {
             SimpleDialog.of(LogCacheActivity.this)
                     .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString()).setMovement(true))
-                    .setButtons(R.string.info_log_post_retry, R.string.cancel, R.string.info_log_post_save)
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_simple_reason))
+                    .setButtons(R.string.info_log_post_retry, R.string.cancel, logEditMode == LogEditMode.CREATE_NEW ? R.string.info_log_post_save : 0)
                     .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
                     .confirm(this::sendLogInternal);
         }
@@ -586,7 +585,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.save).setVisible(true);
+        menu.findItem(R.id.save).setVisible(logEditMode == LogEditMode.CREATE_NEW);
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
         switch (Settings.getTrackableComparator()) {
@@ -876,7 +875,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         @Override
         protected void undoCommand() {
-            cache.logOffline(getContext(), previousState);
+            cache.storeLogOffline(getContext(), previousState);
         }
 
         @Override

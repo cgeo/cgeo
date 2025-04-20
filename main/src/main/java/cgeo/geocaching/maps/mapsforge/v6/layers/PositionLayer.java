@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -22,6 +23,7 @@ import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.model.Rectangle;
+import org.mapsforge.core.model.Rotation;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidBitmap;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -41,7 +43,7 @@ public class PositionLayer extends Layer {
     private int heightArrowHalf = 0;
 
     @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
 
         if (coordinates == null || location == null) {
             return;
@@ -64,7 +66,7 @@ public class PositionLayer extends Layer {
         if (accuracy >= 0) {
             final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
             circle.setDisplayModel(getDisplayModel());
-            circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+            circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
         }
 
         // prepare heading indicator
@@ -95,7 +97,7 @@ public class PositionLayer extends Layer {
             canvas.drawBitmap(localArrow, left, top);
 
             if (coordinates.hasAltitude() && Settings.showElevation()) {
-                final Bitmap elevationInfo = new AndroidBitmap(MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), localArrow.getHeight(), coordinates.getAltitude()));
+                final Bitmap elevationInfo = new AndroidBitmap(MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), localArrow.getHeight(), GeoHeightUtils.getAltitude(coordinates)));
                 canvas.drawBitmap(elevationInfo, centerX - elevationInfo.getWidth() / 2, centerY - elevationInfo.getHeight() / 2);
             }
         } else {

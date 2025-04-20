@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -12,20 +12,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectOptionsFactory {
-    private final IWaypoint coord;
+    private final INamedGeoCoordinate coord;
     private final boolean applyDistanceRule;
     private BitmapDescriptorCache bitmapDescriptorCache;
     private CacheMarker marker;
     private final boolean setDraggable;
 
-    public GoogleCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
+    public GoogleCacheOverlayItem(final INamedGeoCoordinate coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
         this.coord = coordinate;
         this.applyDistanceRule = applyDistanceRule;
         this.setDraggable = setDraggable;
     }
 
     @Override
-    public IWaypoint getCoord() {
+    public INamedGeoCoordinate getCoord() {
         return coord;
     }
 
@@ -49,7 +49,7 @@ public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectO
         this.marker = markerIn;
     }
 
-    private static LatLng toLatLng(final IWaypoint w) {
+    private static LatLng toLatLng(final INamedGeoCoordinate w) {
         return new LatLng(w.getCoords().getLatitude(), w.getCoords().getLongitude());
     }
 

@@ -3,6 +3,8 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 import javax.inject.Inject
 
+import static org.gradle.api.provider.ValueSourceParameters.None
+
 /*
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
@@ -13,10 +15,12 @@ import javax.inject.Inject
  */
 apply plugin: 'com.android.application'
 
+Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class) {}
+String commitIdShort = gitCommitIdProvider.get()
+
 android {
     namespace 'cgeo.geocaching'
-    compileSdk 33
-
+    compileSdk 34
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
@@ -29,13 +33,16 @@ android {
 
     defaultConfig {
         minSdk 21
-        //noinspection OldTargetApi
-        targetSdk 33
+        targetSdk 34
+
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
+        // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
+        applicationId = "cgeo.geocaching"
+
         // NOTE: must match the package in the test directory and must be different from the app package
-        testApplicationId "cgeo.geocaching.test"
+        testApplicationId applicationId + ".test"
 
         //testHandlingProfiling true
         testFunctionalTest true
@@ -45,9 +52,6 @@ android {
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         archivesBaseName = "cgeo"
-
-        // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
-        applicationId = "cgeo.geocaching"
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
         // not yet enough translations (~50%): "is","iw"(="he"),"lb"
@@ -66,23 +70,25 @@ android {
 
     buildFeatures {
         viewBinding true
+        // Enable aidl, some modules in this project appear to be using AIDL
+        aidl true
+        // Enable buildConfig build feature
+        buildConfig true
     }
 
     buildTypes {
         debug {
             // debug build name contains git commit for better reproduction of bugs
-            versionNameSuffix "-" + GitCommit.currentShort() + " developer build"
+            versionNameSuffix "-$commitIdShort developer build"
 
-            // also give a different suffix so that it can be installed in parallel, however we do not want to affect the CI builds
-            if (!isContinuousIntegrationServer()) {
-                applicationIdSuffix ".developer"
-            }
+            applicationIdSuffix ".developer"
 
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            testCoverageEnabled isContinuousIntegrationServer()
+            enableUnitTestCoverage isContinuousIntegrationServer()
+            enableAndroidTestCoverage isContinuousIntegrationServer()
 
             // replace in AndroidManifest.xml
             manifestPlaceholders = [
@@ -92,7 +98,7 @@ android {
         }
         nightly {
             String nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-" + GitCommit.currentShort()
+            versionNameSuffix "-$nightlyName-$commitIdShort"
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
@@ -195,6 +201,9 @@ android {
 
         // necessary as we changing locales at runtime (CgeoApplication.initApplicationLocale())
         disable 'AppBundleLocaleChanges'
+
+        // move UnsafeImplicitIntentLaunch error to warning until fixed, see https://github.com/cgeo/cgeo/issues/16838
+        warning 'UnsafeImplicitIntentLaunch'
 
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
@@ -320,7 +329,7 @@ dependencies {
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation('com.github.k3b:k3b-geoHelper:1.1.12') {
+    implementation('com.github.k3b:k3b-geoHelper:v1.1.12') {
         // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
         exclude group: 'commons-io', module: 'commons-io'
     }
@@ -332,21 +341,25 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.8.3'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.8.4'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
 
+    // DB inspection
+    implementation 'com.github.moving-bits:datatables:v0.1.0'
+    implementation 'com.github.moving-bits:dbinspection:v0.1.1'
+
     // Jackson XML processing
-    // Jackson 2.14++ needs minSdk 26
+    // Jackson 2.13++ needs minSdk 24 (see https://github.com/FasterXML/jackson-databind?tab=readme-ov-file#android)
     //noinspection GradleDependency
-    String jacksonVersion = '2.13.5'
+    String jacksonVersion = '2.12.7'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'org.jsoup:jsoup:1.19.1'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
@@ -355,22 +368,22 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
-    String leakCanaryVersion = '2.12'
+    String leakCanaryVersion = '2.14'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api-android:0.9.50"
+    implementation "com.asamm:locus-api-android:0.9.55"
 
     // -- Mapsforge / Mapsforge --
 
     // Mapsforge official version
-    String mapsforgeSource = 'org.mapsforge'
-    String mapsforgeVersion = '0.21.0'
+    String mapsforgeSource = 'com.github.mapsforge.mapsforge'
+    String mapsforgeVersion = '0.23.0'
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
-    //String mapsforgeSource = 'com.github.mapsforge.mapsforge'
-    //String mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
+    // String mapsforgeSource = 'com.github.mapsforge.mapsforge'
+    // String mapsforgeVersion = '4674895'
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
     // String mapsforgeSource = 'com.github.cgeo.mapsforge'
@@ -385,8 +398,8 @@ dependencies {
     // -- Mapsforge / VTM --
 
     // Mapsforge VTM implementation (official version)
-    String mapsforgeVTMSource = 'org.mapsforge'
-    String mapsforgeVTMVersion = '0.21.0'
+    String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
+    String mapsforgeVTMVersion = '0.22.0'
 
     // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
     // String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
@@ -435,7 +448,7 @@ dependencies {
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:19.0.1'
-    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -446,7 +459,7 @@ dependencies {
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.10'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
@@ -477,7 +490,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.3.7'
+    implementation 'androidx.exifinterface:exifinterface:1.4.0'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
@@ -488,18 +501,21 @@ dependencies {
     // Settings Library
     implementation 'androidx.preference:preference:1.2.1'
 
+    // Altitude above MSL
+    implementation 'androidx.core:core-location-altitude:1.0.0-alpha03'
+
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.7.1'
+    String annotationVersion = '1.9.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
-    androidTestImplementation 'androidx.test:core:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:core:1.6.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'androidx.browser:browser:1.8.0'
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
@@ -524,18 +540,25 @@ dependencies {
     // ani gif support
     // minSdk=17 from version 1.2.16
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // Offline translation - language detection and translator
+    implementation 'com.google.mlkit:language-id:17.0.6'
+    implementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks
-File privatePropertiesFile = rootProject.file('private.properties')
-String templatesDirectory = "templates"
-String keysDirectory = "src/main/res/values"
-String keysName = "keys.xml"
-File templatesFile = project.file(templatesDirectory + "/" + keysName)
-File keysFile = project.file(keysDirectory + "/" + keysName)
-File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
+String privateProperties = 'private.properties'
+File privatePropertiesFile = rootProject.file(privateProperties)
+String templatesDirectory = 'templates/'
+String keysDirectory = 'src/main/res/values/'
+String keysXml = 'keys.xml'
+File templatesFile = project.file(templatesDirectory + keysXml)
+File keysFile = project.file(keysDirectory + keysXml)
+String preferencesXml = 'cgeo.geocaching_preferences.xml'
+File preferencesFile = project.file(preferencesXml)
 String adb = android.getAdbExecutable().absolutePath
-String appID = 'cgeo.geocaching'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -581,23 +604,23 @@ static String versionNameFromDate() {
     return formattedDate
 }
 
-// get the most recent git commit ID in long and short form
-class GitCommit {
-    static String commitId
+// get the most recent git commit ID in short form
+abstract class GitCommitIdValueSource implements ValueSource<String, None> {
+    @Inject
+    abstract ExecOperations getExecOperations()
 
-    static String current() {
-        if (commitId == null) {
-            Process p = ['git', 'rev-parse', 'HEAD'].execute()
-            if (p.waitFor() != 0) {
-                throw new Error("Unable to get git commit id: " + p.err.text)
+    static String commitIdShort
+
+    String obtain() {
+        if (commitIdShort == null) {
+            ByteArrayOutputStream output = new ByteArrayOutputStream()
+            execOperations.exec {
+                it.commandLine "git", "rev-parse", "HEAD"
+                it.standardOutput = output
             }
-            commitId = p.text.trim()
+            commitIdShort = new String(output.toByteArray()).trim().substring(0, 7)
         }
-        return commitId
-    }
-
-    static String currentShort() {
-        return current().substring(0, 7)
+        return commitIdShort
     }
 }
 
@@ -621,7 +644,7 @@ android.applicationVariants.configureEach { variant ->
                 }
                 GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
-                    project.exec {
+                    execOperations.exec {
                         executable = adb
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
@@ -677,25 +700,29 @@ interface Injected {
 // copy preferences containing user and password to the device
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
-    Injected injected = project.objects.newInstance(Injected)
-    doFirst {
-        if (preferencesFile.exists()) {
+    if (preferencesFile.exists()) {
+        Injected injected = project.objects.newInstance(Injected)
+        doFirst {
             try {
+                String debugBuildAppId = 'cgeo.geocaching.developer'
+                String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
+                String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
+                String tempDirectory = '/data/local/tmp/'
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
+                    args = ['push', preferencesXml, tempDirectory + preferencesXml]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
+                    args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
                 }
                 injected.execOperations.exec {
                     executable = adb
@@ -743,10 +770,10 @@ apply plugin: 'de.mobilej.unmock'
 apply plugin: 'checkstyle'
 
 checkstyle {
-    // assign the checkstyle version explicitly here
-    // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
-    // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.13.0'
+    // align checkstyle with codacy (https://github.com/codacy/codacy-checkstyle)
+    // - assign the checkstyle version explicitly here
+    // - and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
+    toolVersion = '10.21.4'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")

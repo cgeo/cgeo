@@ -14,7 +14,7 @@ import java.util.Locale;
 /**
  * Helper class to construct log messages. Optimized to log what is happening in a method,
  * but can be used in other situations as well.
- *
+ * <br>
  * All logging is done on level given in constructor, default is VERBOSE level.
  */
 public class ContextLogger implements Closeable {
@@ -32,7 +32,7 @@ public class ContextLogger implements Closeable {
     private final String contextString;
 
     private final boolean doLog;
-    private final boolean forceLog;
+    private boolean forceLog;
     private final Log.LogLevel logLevel;
     private boolean hasLogged = false;
 
@@ -53,16 +53,14 @@ public class ContextLogger implements Closeable {
         this.startTime = System.currentTimeMillis();
         this.logLevel = logLevel;
         this.forceLog = forceInfo;
+        this.contextString = "[CtxLog]" + String.format(context, params) + ":";
         this.doLog = Log.isEnabled(logLevel) || forceLog;
         if (this.doLog) {
-            this.contextString = "[CtxLog]" + String.format(context, params) + ":";
             if (this.forceLog) {
                 Log.iForce(contextString + "START");
             } else {
                 Log.log(logLevel, contextString + "START");
             }
-        } else {
-            this.contextString = null;
         }
     }
 
@@ -95,17 +93,21 @@ public class ContextLogger implements Closeable {
     }
 
     public ContextLogger setException(final Throwable t) {
+        return setException(t, false);
+    }
+
+    public ContextLogger setException(final Throwable t, final boolean forceEndLog) {
+        this.forceLog = this.forceLog || forceEndLog;
         this.exception = t;
         return this;
     }
 
     public ContextLogger addReturnValue(final Object returnValue) {
-        add("RET:" + returnValue);
-        return this;
+        return add("RET:" + returnValue);
     }
 
     public void endLog() {
-        if (doLog) {
+        if (doLog || forceLog) {
             hasLogged = true;
             final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message +
                     (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");

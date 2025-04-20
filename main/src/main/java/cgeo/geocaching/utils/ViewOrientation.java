@@ -160,29 +160,10 @@ public class ViewOrientation implements Parcelable, Cloneable {
         rotateDegree = (rotateDegree + 90) % 360;
     }
 
-    /** Changes this orientation to rotate by 180 degree */
-    public void rotate180() {
-        rotate90Clockwise();
-        rotate90Clockwise();
-    }
-
-    /** Changes this orientation to rotate by 270 degree clockwise */
-    public void rotate270Clockwise() {
-        rotate180();
-        rotate90Clockwise();
-    }
-
     /** Flips this orientation horizontal (left-to-right-mirrored) */
     public void flipHorizontal() {
         rotateDegree = (360 - rotateDegree) % 360;
         flipHorizontal = !flipHorizontal;
-    }
-
-    /** Flip this orientation vertical (top-to-bottom-mirrored) */
-    public void flipVertical() {
-        rotate90Clockwise();
-        flipHorizontal();
-        rotate90Clockwise();
     }
 
     @Override

@@ -15,7 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.XmlUtils;
+import cgeo.geocaching.utils.xml.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import androidx.annotation.NonNull;
@@ -153,8 +153,12 @@ public final class GpxSerializer {
 
             XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
 
-            writeLogs(cache);
-            writeTravelBugs(cache);
+            if (Settings.getIncludeLogs()) {
+                writeLogs(cache);
+            }
+            if (Settings.getIncludeTravelBugs()) {
+                writeTravelBugs(cache);
+            }
 
             gpx.endTag(NS_GROUNDSPEAK, "cache");
 

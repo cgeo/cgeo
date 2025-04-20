@@ -153,9 +153,42 @@ public class GeoPointParserTest {
     }
 
     @Test
-    public void testFloatingPointBoth() {
+    public void testFloatingPointPoint() {
         assertGeopointEquals(GeopointParser.parse("47.648883  122.348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47.648883  -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
+    @Test
+    public void testFloatingPointComma() {
+        assertGeopointEquals(GeopointParser.parse("47,648883  122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883  -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
+    @Test
+    public void testFloatingPointWithSeparator() {
+        assertGeopointEquals(GeopointParser.parse("47.648883,  122.348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47.648883,  -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47.648883,  9.348067"), GeopointParser.parse("N 47° 38.933 E 9° 20.884"), 1e-4f);
+
+        assertGeopointEquals(GeopointParser.parse("47,648883. 122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883. -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
+    @Test
+    public void testDegDecCommaParser() {
+        assertGeopointEquals(GeopointParser.parse("47,648883, 122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883, +122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883, -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("-47,648883, 9,348067"), GeopointParser.parse("S 47° 38.933 E 9° 20.884"), 1e-4f);
+
+        // blanks after decimal comma
+        assertParsingFails("47, 648883, -122, 348067");
+        // more than one blank after comma separator
+        assertParsingFails("47,648883,  122,348067");
+        // too few digits after comma separator
+        assertParsingFails("47,6488, 122,3480");
+        // no coordinates should be detected
+        assertParsingFails("47, 648, 122, 3480");
     }
 
     @Test

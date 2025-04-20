@@ -11,30 +11,17 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
  * that *YOUR* pattern is faster.
- *
+ * <br>
  * For further information about patterns have a look at
- * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
+ * <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html">...</a>
  */
 public final class GCConstants {
 
     static final String GC_URL = "https://www.geocaching.com/";
-    private static final String GC_TILE_URL = "https://tiles.geocaching.com/";
     /**
      * Live Map
      */
     @NonNull static final String URL_LIVE_MAP = GC_URL + "map/default.aspx";
-    /**
-     * Live Map pop-up
-     */
-    @NonNull static final String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
-    /**
-     * Caches in a tile
-     */
-    @NonNull static final String URL_MAP_INFO = GC_TILE_URL + "map.info";
-    /**
-     * Tile itself
-     */
-    @NonNull static final String URL_MAP_TILE = GC_TILE_URL + "map.png";
     /**
      * Format used by geocaching.com when user is not logged in.
      */
@@ -64,11 +51,15 @@ public final class GCConstants {
     static final Pattern PATTERN_TYPE = Pattern.compile("<use xlink:href=\"/app/ui-icons/sprites/cache-types.svg#icon-([0-9a-f]+)");
     static final Pattern PATTERN_HIDDEN = Pattern.compile("ctl00_ContentBody_mcd2[^:]+:\\s*([^<]+?)<");
     static final Pattern PATTERN_HIDDENEVENT = Pattern.compile(":\\s*([0-9-/]+)\\s*<div id=\"calLinks\">", Pattern.DOTALL);
+    public static final Pattern PATTERN_EVENTTIMES = Pattern.compile("<div id=\"mcd3\">\\s*[^<]*?\\s+([APM ]*)([0-9]+)[\\.:]([0-9]+)([APM ]*)\\s*</div>\\s*<div id=\"mcd4\">\\s*[^<]*?\\s+([APM ]*)([0-9]+)[\\.:]([0-9]+)([APM ]*)\\s*</div>");
     static final Pattern PATTERN_IS_FAVORITE = Pattern.compile("<div id=\"pnlFavoriteCache\">"); // without 'class="hideMe"' inside the tag !
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
-    static final Pattern PATTERN_CSRF_TOKEN = Pattern.compile("\"csrfToken\":\"([^\"]+)\"");
+
+    //example gallery count:
+    //<li><a href="/seek/gallery.aspx?guid=3d6f0c14-7d72-43a2-a704-dc4a2b879c73">View gallery (1885)</a></li>
+    static final Pattern PATTERN_GALLERY_COUNT = Pattern.compile("<a href=\"/seek/gallery.aspx\\?guid=[^(]+?\\((\\d+)\\)</a>");
     // matches: the inner JSON Code (w/o {}) of "currentGeocache":{"id":123,"referenceCode":"GCxyz","name":"somename"}
     static final Pattern PATTERN_TB_CURRENT_GEOCACHE_JSON = Pattern.compile("\"currentGeocache\":\\{([^}]+)\\}");
 
@@ -82,24 +73,34 @@ public final class GCConstants {
      * Two groups !
      */
     static final Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
-    private static final String IMAGE_FORMATS = "jpg|jpeg|png|gif|bmp";
-    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))\"[^>]+>" + "([^<]*)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
+    private static final String IMAGE_FORMATS = "jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP";
+    private static final String IMAGE_URL = "<a href=[\"'](https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))[\"'][^>]+>(?:[^>]*</strong>[^>]+>)?";
+    //Example HTML to match: <a href="https://img.geocaching.com/cache/large/1711f8a1-796a-405b-82ba-8685f2e9f024.jpg" class="owner-image" rel="owner_image_group" data-title="<strong>indy mit text netz Kopie</strong>">indy mit text netz Kopie</a></li>
+    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile(IMAGE_URL + "([^<]*)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
+
+    //gallery image example:
+    //<td>
+    //        <span class="date-stamp">15.01.2025</span>
+    //        <a href='https://img.geocaching.com/cache/log/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' data-title='&lt;span class=&quot;LogImgTitle&quot;&gt;Image 2&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;https://www.geocaching.com/seek/log.aspx?LUID=7f9ba457-022d-4269-a6f9-e15721fdf0c2&IID=3b8ffe04-f32e-4ec8-833e-f8ffd647187c&quot;>View Log&lt;/a&gt; &lt;a href=&quot;https://img.geocaching.com/cache/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;' class="imageLink" rel="gallery">
+    //            <img src='https://img.geocaching.com/cache/log/thumb/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' alt='View Image' /></a>
+    //            <span>Image 2 </span>
+    //    </td>
+    static final Pattern PATTERN_GALLERY_IMAGE = Pattern.compile("<span(?: [^>+]+)>([^>]+)</span>\\s*?" + IMAGE_URL + ".*?<span>([^<]*)</span>", Pattern.DOTALL);
     static final Pattern PATTERN_INVENTORY = Pattern.compile("ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">.*?WidgetBody(.*?)<div");
     static final Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/(?:track|hide)\\/details\\.aspx\\?(guid|TB)=([0-9a-zA-Z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     static final Pattern PATTERN_WATCHLIST = Pattern.compile("data-cacheonwatchlist=\"True\"");
     static final Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("ctl00_ContentBody_uxCacheUrl.*? href=\"(.*?)\">");
-    static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com/");
     static final Pattern PATTERN_BACKGROUND_IMAGE = Pattern.compile("<body background=\"(.+?)\"");
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
 
     //Try to find pattern as follows:
     //"publicGuid":"abc.def","referenceCode":"PRxyz","id":1234567,"username":"user","dateCreated":"2012-01-21T20:51:14","findCount":15123,
-    public static final Pattern PATTERN_LOGIN_NAME_CACHE_COUNT = Pattern.compile("\"publicGuid\":\"[^\"]+\",\"referenceCode\":\"[^\"]+\",\"id\":[0-9]+,\"username\":\"([^\"]+)\",\"dateCreated\":\"[0-9:T-]+\",\"findCount\":([0-9]+),");
+    public static final Pattern PATTERN_LOGIN_NAME1 = Pattern.compile(",\"referenceCode\":\"[^\"]+\",\"id\":[0-9]+,\"username\":\\s*\"(([^\\\\\\\"]*(\\\\[a-z\\\"])*)*)\\\",");
     public static final Pattern PATTERN_FINDCOUNT = Pattern.compile("\"findCount\":\\s*([0-9]+)[,\\s]");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
+    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /**
      * Use replaceAll("[,.]","") on the resulting string before converting to an int
      */
@@ -158,27 +159,6 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<ul class=\"log_images\"><li><a href=\"([^\"]+)\".+?(?= alt) alt=\"([^\"]+)\"");
     static final Pattern PATTERN_TRACKABLE_IS_LOCKED = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\"[^(]*\\(locked\\)</a></td>");
 
-    // Patterns for parsing the result of a search (next)
-
-    static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/WptTypes/(.*?)\\.", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
-    /**
-     * Two groups
-     **/
-    static final Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
-    /**
-     * Second group used
-     */
-    static final Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*");
-    static final Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([0-9.,]+)\\s*?(m|km|ft|yd|mi|)?</span>");
-    static final Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
-    static final Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
-    static final Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile(GEOCODE_PATTERN);
-    static final Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
-    static final Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
-    static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
-    static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
-
     // Patterns for waypoints
 
     static final Pattern PATTERN_WPTYPE = Pattern.compile("\\/WptTypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
@@ -192,14 +172,9 @@ public final class GCConstants {
      * replace line break and paragraph tags
      */
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
-    static final Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
-            + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_TYPE2 = Pattern.compile("<option( selected=\"selected\")? value=\"(\\d+)\">[^<]+</option>", Pattern.CASE_INSENSITIVE);
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
-    static final Pattern PATTERN_TYPE3 = Pattern.compile("logSettings.logTypes.push\\(([^;]*)\\);");
     static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_OK2 = Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|'] class=", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
@@ -231,7 +206,6 @@ public final class GCConstants {
     static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
     static final String STRING_STATUS_LOCKED = "<div id=\"ctl00_ContentBody_lockedMessage\"";
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
-    static final String STRING_UNAPPROVED_LICENSE = "<span id=\"ctl00_ContentBody_lblAgreementText\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";

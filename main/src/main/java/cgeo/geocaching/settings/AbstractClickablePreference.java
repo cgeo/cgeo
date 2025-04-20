@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -27,7 +28,8 @@ abstract class AbstractClickablePreference extends Preference {
                 .setTitle(R.string.auth_forget_title)
                 .setPositiveButton(android.R.string.yes, (dialog, id) -> {
                     revokeAuthorization();
-                    setSummary(R.string.auth_unconnected);
+                    setSummary(R.string.auth_unconnected_tap_here);
+                    setIcon(R.drawable.attribute_firstaid);
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
         builder.create().show();
@@ -46,7 +48,7 @@ abstract class AbstractClickablePreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         setOnPreferenceClickListener(getOnPreferenceClickListener(activity));

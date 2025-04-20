@@ -4,7 +4,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 
 public class GoogleMapItemFactory implements MapItemFactory {
 
@@ -16,7 +16,7 @@ public class GoogleMapItemFactory implements MapItemFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final INamedGeoCoordinate coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
         final GoogleCacheOverlayItem item = new GoogleCacheOverlayItem(coordinate, applyDistanceRule, setDraggable);
         item.setBitmapDescriptorCache(bitmapDescriptorCache);
         return item;

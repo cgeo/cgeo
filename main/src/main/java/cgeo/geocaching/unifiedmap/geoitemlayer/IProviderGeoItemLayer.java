@@ -14,7 +14,7 @@ public interface IProviderGeoItemLayer<C> {
 
     /**
      * Called once to initialize the map layer.
-     *
+     * <br />
      * Implementor is expected to set up necessary initialization within its concrete map viewer implementation.
      * Framework guarantees that this method is called only once, before any call to other methods of this interface
      */
@@ -42,8 +42,9 @@ public interface IProviderGeoItemLayer<C> {
     /** Optional method which is called after a batch of map layer updates (add/remove). It is intended to
      *  be used to trigger a "global map view update" if this is required by map implementation
       */
-    default void onMapChangeBatchEnd(final long processedCount) {
+    default String onMapChangeBatchEnd(final long processedCount) {
         //default implementation does nothing
+        return null;
     }
 
     /**

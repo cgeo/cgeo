@@ -125,8 +125,7 @@ public final class NodesCache implements Closeable {
             return;
         }
 
-        for (int i = 0; i < fileRows.length; i++) {
-            final OsmFile[] fileRow = fileRows[i];
+        for (final OsmFile[] fileRow : fileRows) {
             if (fileRow == null) {
                 continue;
             }

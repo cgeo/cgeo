@@ -1,73 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/routes_track_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp">
+    android:padding="0dp"
+    android:theme="@style/cgeo.coloredToolbar">
 
     <TextView
         android:id="@+id/item_title"
         style="@style/text_default"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_edit"
         android:text="@string/individual_route" />
-
-    <ImageButton
-        android:id="@+id/item_edit"
-        style="@style/button_icon"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_color"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_menu_edit"
-        android:tooltipText="@string/map_sort_individual_route"
-        android:visibility="gone" />
-
-    <ImageButton
-        android:id="@+id/item_color"
-        style="@style/button_icon"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_refresh"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/downloader_theme"
-        android:tooltipText="@string/routes_tracks_color"
-        android:visibility="gone" />
-
-    <ImageButton
-        android:id="@+id/item_refresh"
-        style="@style/button_icon"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_visibility"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_menu_refresh"
-        android:tooltipText="@string/map_refresh_individual_route"
-        android:visibility="gone" />
-
-    <ImageButton
-        android:id="@+id/item_visibility"
-        style="@style/button_icon"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_center"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/visibility"
-        android:tooltipText="@string/make_visible" />
-
-    <ImageButton
-        android:id="@+id/item_center"
-        style="@style/button_icon"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_delete"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/center"
-        android:tooltipText="@string/center" />
-
-    <ImageButton
-        android:id="@+id/item_delete"
-        style="@style/button_icon"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_menu_delete"
-        android:tooltipText="@string/unload_route_track" />
-
-</RelativeLayout>
+</androidx.appcompat.widget.Toolbar>

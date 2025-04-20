@@ -65,10 +65,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final TextSpinner<DirectionData.DeviceOrientation> deviceOrientationMode = new TextSpinner<>();
     private CompassActivityBinding binding;
 
-    private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
-        binding.hint.locationStatus.updatePermissions();
-    });
-
+    private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.hint.locationStatus.updatePermissions());
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -77,7 +74,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding = CompassActivityBinding.bind(getWindow().getDecorView().findViewById(android.R.id.content));
 
         deviceOrientationMode
-                .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
+                .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
                 .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
@@ -130,9 +127,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        binding.hint.locationStatus.setPermissionRequestCallback(() -> {
-            askLocationPermissionAction.launch();
-        });
+        binding.hint.locationStatus.setPermissionRequestCallback(askLocationPermissionAction::launch);
     }
 
     @Override

@@ -14,6 +14,8 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.Dimension;
 import org.mapsforge.core.model.LatLong;
@@ -86,7 +88,7 @@ public class MfMapView extends MapView {
     /**
      * Calculates projection of pixel to coord.
      * For this method to operate normally, it should 0 <= pixelX <= maxSize and 0 <= pixelY <= mapSize
-     *
+     * <br>
      * If either pixelX or pixelY is OUT of these bounds, it is assumed that the map displays the WHOLE WORLD
      * (and this displayed whole world map is smaller than the device's display size of the map.)
      * In these cases, lat/lon is projected to the world-border-coordinates (for lat: -85° - 85°, for lon: -180° - 180°)
@@ -106,7 +108,7 @@ public class MfMapView extends MapView {
     }
 
     private static double toBounds(final double value, final double min, final double max) {
-        return value < min ? min : (value > max ? max : value);
+        return value < min ? min : (Math.min(value, max));
     }
 
     public int getMapZoomLevel() {
@@ -143,7 +145,7 @@ public class MfMapView extends MapView {
 
     private class GestureListener extends SimpleOnGestureListener {
         @Override
-        public boolean onDoubleTap(final MotionEvent e) {
+        public boolean onDoubleTap(@NonNull final MotionEvent e) {
             if (onDragListener != null) {
                 onDragListener.onDrag();
             }
@@ -151,7 +153,7 @@ public class MfMapView extends MapView {
         }
 
         @Override
-        public boolean onScroll(final MotionEvent e1, final MotionEvent e2,
+        public boolean onScroll(final MotionEvent e1, @NonNull final MotionEvent e2,
                                 final float distanceX, final float distanceY) {
             if (onDragListener != null) {
                 onDragListener.onDrag();

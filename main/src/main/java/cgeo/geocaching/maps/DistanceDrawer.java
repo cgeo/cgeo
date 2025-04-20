@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.location.Geopoint;
 
-import android.graphics.Canvas;
 import android.location.Location;
 import android.view.View;
 
@@ -16,10 +15,10 @@ public class DistanceDrawer {
 
     private final MapDistanceDrawerCommons mapDistanceDrawer;
 
-    public DistanceDrawer(final View root, final Geopoint destinationCoords, final boolean showBothDistances) {
+    public DistanceDrawer(final View root, final Geopoint destinationCoords, final boolean showBothDistances, final Runnable handleSwapNotification) {
         this.destinationCoords = destinationCoords;
         this.showBothDistances = showBothDistances;
-        mapDistanceDrawer = new MapDistanceDrawerCommons(root);
+        mapDistanceDrawer = new MapDistanceDrawerCommons(root, handleSwapNotification);
     }
 
     public void setCoordinates(final Location location) {
@@ -42,7 +41,7 @@ public class DistanceDrawer {
         this.routeDistance = routeDistance;
     }
 
-    public void drawDistance(final Canvas canvas) {
+    public void drawDistance() {
         mapDistanceDrawer.drawDistance(showBothDistances, distance, realDistance);
         mapDistanceDrawer.drawRouteDistance(routeDistance);
     }

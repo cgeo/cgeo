@@ -103,10 +103,8 @@ public class GoogleMapObjectsQueue {
                     drawObjects.remove(options);
                 } else {
                     // could not remove, is it enqueued to be draw?
-                    if (requestedToAdd.contains(options)) {
-                        // if yes, it is not anymore
-                        requestedToAdd.remove(options);
-                    }
+                    // if yes, remove it
+                    requestedToAdd.remove(options);
                 }
                 if (System.currentTimeMillis() - time >= TIME_MAX) {
                     // removing and adding markers are time costly operations and we don't want to block UI thread

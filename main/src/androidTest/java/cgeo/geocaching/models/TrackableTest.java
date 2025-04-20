@@ -38,7 +38,7 @@ public class TrackableTest  {
     @Test
     public void testTrackableUrl() {
         final Trackable trackable = createTrackable("TB1234");
-        assertThat(trackable.getUrl()).isEqualTo("https://www.geocaching.com//track/details.aspx?tracker=TB1234");
+        assertThat(trackable.getUrl()).isEqualTo("https://www.geocaching.com/track/details.aspx?tracker=TB1234");
     }
 
     @Test

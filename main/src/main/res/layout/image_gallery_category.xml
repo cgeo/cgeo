@@ -8,17 +8,13 @@
     tools:context=".ImageGalleryActivity">
 
     <!-- category header -->
-    <RelativeLayout
-        android:id="@+id/img_gallery_category"
-        style="@style/separator_horizontal_layout"
-        android:layout_marginTop="5dp">
 
-        <View style="@style/separator_horizontal_heading" />
-        <TextView
-            android:id="@+id/img_gallery_category_title"
-            style="@style/separator_horizontal_heading_text"
-            tools:text="category title"/>
-    </RelativeLayout>
+    <cgeo.geocaching.ui.SectionHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerAbove="true"
+        android:id="@+id/img_gallery_category_title"
+        tools:text="category title" />
 
     <!-- Image add buttons -->
     <RelativeLayout
@@ -33,6 +29,7 @@
             android:id="@+id/img_gallery_add_multi_images"
             style="@style/button_icon"
             android:layout_gravity="left"
+            android:tooltipText="@string/feature_log_images"
             app:icon="@drawable/ic_menu_image_multi" />
 
         <Button
@@ -40,6 +37,7 @@
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/img_gallery_add_multi_images"
+            android:tooltipText="@string/cache_image_title_camera_prefix"
             app:icon="@drawable/ic_menu_camera" />
 
         <Button
@@ -47,6 +45,7 @@
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/img_gallery_add_camera"
+            android:tooltipText="@string/localfile_title"
             app:icon="@drawable/ic_menu_file_add" />
 
     </RelativeLayout>

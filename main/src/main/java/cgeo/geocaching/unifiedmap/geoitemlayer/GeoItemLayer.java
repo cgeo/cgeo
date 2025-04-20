@@ -204,14 +204,16 @@ public class GeoItemLayer<K> {
 
         @Override
         public void onMapChangeBatchEnd(final long processedCount) {
+            String batchEndMsg = null;
             if (providerLayer != null) {
-                providerLayer.onMapChangeBatchEnd(processedCount);
+                batchEndMsg = providerLayer.onMapChangeBatchEnd(processedCount);
             }
             if (addProcessedInBatch > 0 || removeProcessedInBatch > 0 || replaceProcessedInBatch > 0) {
-                Log.i(logPraefix + "BATCH-END - " +
+                Log.iForce(logPraefix + "BATCH-END - " +
                         "ADDS:" + addProcessedInBatch + "(" + addProcessed + "), " +
                         "REMOVES:" + removeProcessedInBatch + "(" + removeProcessed + "), " +
-                        "REPLACES:" + replaceProcessedInBatch + "(" + replaceProcessed + ")");
+                        "REPLACES:" + replaceProcessedInBatch + "(" + replaceProcessed + ")" +
+                        (batchEndMsg == null ? "" : "[" + batchEndMsg + "]"));
             }
             addProcessedInBatch = 0;
             removeProcessedInBatch = 0;

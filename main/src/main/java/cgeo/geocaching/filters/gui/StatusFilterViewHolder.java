@@ -36,6 +36,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     private ButtonToggleGroup statusHasTrackable = null;
     private ButtonToggleGroup statusHasOwnVote = null;
     private ButtonToggleGroup statusSolvedMystery = null;
+    private ButtonToggleGroup statusCorrectedCoordinates = null;
     private ButtonToggleGroup statusHasUserDefinedWaypoints = null;
 
     private final List<ButtonToggleGroup> advancedGroups = new ArrayList<>();
@@ -68,10 +69,6 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         }
     }
 
-    public boolean isSimpleView() {
-        return this.simpleView;
-    }
-
     @Override
     public View createView() {
         final LinearLayout ll = new LinearLayout(getActivity());
@@ -98,6 +95,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE, true);
         statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, true);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY, true);
+        statusCorrectedCoordinates = createGroup(ll, StatusGeocacheFilter.StatusType.CORRECTED_COORDINATES, true);
         statusHasUserDefinedWaypoints = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_USER_DEFINED_WAYPOINTS, true);
 
         setSimpleView(this.simpleView);
@@ -147,6 +145,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         setFromBoolean(statusHasTrackable, filter.getStatusHasTrackable());
         setFromBoolean(statusHasOwnVote, filter.getStatusHasOwnVote());
         setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
+        setFromBoolean(statusCorrectedCoordinates, filter.getStatusCorrectedCoordinates());
         setFromBoolean(statusHasUserDefinedWaypoints, filter.getStatusHasUserDefinedWaypoint());
     }
 
@@ -172,6 +171,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setStatusHasTrackable(getFromGroup(statusHasTrackable));
         filter.setStatusHasOwnVote(getFromGroup(statusHasOwnVote));
         filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
+        filter.setStatusCorrectedCoordinates(getFromGroup(statusCorrectedCoordinates));
         filter.setStatusHasUserDefinedWaypoint(getFromGroup(statusHasUserDefinedWaypoints));
         return filter;
     }

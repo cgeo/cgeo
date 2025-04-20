@@ -3,11 +3,13 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -15,6 +17,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
@@ -37,10 +40,12 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
-import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
+import static cgeo.geocaching.downloader.HillshadingTileDownloader.HILLSHADING_TILE_FILEEXTENSION;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -53,10 +58,8 @@ import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -67,7 +70,9 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -85,10 +90,36 @@ public class MapUtils {
     private static TextPaint elevationTextPaint = null;
     private static Paint elevationPaint = null;
 
+    public static Set<Geocache> getGeocachesFromDatabase(final Viewport viewport, final GeocacheFilter filter) {
+        if (viewport == null || viewport.isJustADot()) {
+            return Collections.emptySet();
+        }
+        final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(viewport.resize(1.2), filter));
+        Log.d("load.searchResult: " + searchResult.getGeocodes());
+        final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+        Log.d("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
+        if (filter != null) {
+            filter.filterList(cachesFromSearchResult);
+        }
+        return cachesFromSearchResult;
+    }
+
+    public static boolean mapHasMoved(final Viewport oldViewport, final Viewport newViewport) {
+        if (oldViewport == newViewport) {
+            return false;
+        }
+        if (oldViewport == null || newViewport == null) {
+            return true;
+        }
+        return Math.abs(newViewport.getLatitudeSpan() - oldViewport.getLatitudeSpan()) > 50e-6 || Math.abs(newViewport.getLongitudeSpan() - oldViewport.getLongitudeSpan()) > 50e-6 || Math.abs(newViewport.center.getLatitude() - oldViewport.center.getLatitude()) > oldViewport.getLatitudeSpan() / 4 || Math.abs(newViewport.center.getLongitude() - oldViewport.center.getLongitude()) > oldViewport.getLongitudeSpan() / 4;
+    }
+
     // filter waypoints from owned caches or certain wp types if requested.
     public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext) {
+        filter(waypoints, filterContext.get());
+    }
 
-        final GeocacheFilter filter = filterContext.get();
+    public static void filter(final Set<Waypoint> waypoints, @Nullable final GeocacheFilter filter) {
 
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
@@ -99,7 +130,7 @@ public class MapUtils {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
             if (cache == null ||
-                    !filter.filter(cache) ||
+                    (filter != null && !filter.filter(cache)) ||
                     (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
                     (excludeWpParking && wpt == WaypointType.PARKING) ||
                     (excludeWpVisited && wp.isVisited())) {
@@ -159,7 +190,7 @@ public class MapUtils {
         if (Settings.useInternalRouting()) {
             ActivityMixin.showToast(activity, R.string.downloadmap_checking);
 
-            final HashMap<String, String> missingTiles = new HashMap<>();
+            final HashMap<String, String> requiredTiles = new HashMap<>();
             final ArrayList<Download> missingDownloads = new ArrayList<>();
             final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
 
@@ -172,12 +203,12 @@ public class MapUtils {
                     int curLon = (int) Math.floor(minLongitude / 5) * 5;
                     while (curLon <= maxLon) {
                         final String filenameBase = (curLon < 0 ? "W" + (-curLon) : "E" + curLon) + "_" + (curLat < 0 ? "S" + (-curLat) : "N" + curLat) + BROUTER_TILE_FILEEXTENSION;
-                        missingTiles.put(filenameBase, filenameBase);
+                        requiredTiles.put(filenameBase, filenameBase);
                         curLon += 5;
                     }
                     curLat += 5;
                 }
-                checkTiles(missingTiles, missingDownloads, hasUnsupportedTiles);
+                checkTiles(requiredTiles, missingDownloads, hasUnsupportedTiles);
             }, () -> {
                 // give feedback to the user + offer to download missing tiles (if available)
                 if (missingDownloads.isEmpty()) {
@@ -202,37 +233,104 @@ public class MapUtils {
         }
     }
 
-    public static void onPrepareOptionsMenu(final Menu menu) {
-        final MenuItem item = menu.findItem(R.id.menu_check_routingdata);
-        if (item != null) {
-            // use same condition as in checkRoutingData() above
-            item.setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
-        }
+    // check whether hillshading tile data is available for the whole viewport given
+    // and offer to download missing hillshading data
+    public static void checkHillshadingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
+        ActivityMixin.showToast(activity, R.string.downloadmap_checking);
+
+        final HashMap<String, String> requiredTiles = new HashMap<>();
+        final ArrayList<Download> missingDownloads = new ArrayList<>();
+        final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
+
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+            // calculate affected routing tiles
+            int curLat = (int) Math.floor(minLatitude);
+            final int maxLat = (int) Math.floor(maxLatitude);
+            final int maxLon = (int) Math.floor(maxLongitude);
+            while (curLat <= maxLat) {
+                int curLon = (int) Math.floor(minLongitude);
+                while (curLon <= maxLon) {
+                    final String curLat02d = String.format(Locale.US, "%02d", Math.abs(curLat));
+                    final String filenameBase = (curLat < 0 ? "S" : "N") + curLat02d + (curLon < 0 ? "W" : "E") + String.format(Locale.US, "%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION;
+                    final String dirName = (curLat < 0 ? "S" : "N") + curLat02d;
+                    requiredTiles.put(filenameBase, dirName);
+                    curLon += 1;
+                }
+                curLat += 1;
+            }
+            checkHillshadingTiles(requiredTiles, missingDownloads, hasUnsupportedTiles);
+        }, () -> {
+            // give feedback to the user + offer to download missing tiles (if available)
+            if (missingDownloads.isEmpty()) {
+                ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_hillshading_unsupported : R.string.check_hillshading_found);
+            } else {
+                if (hasUnsupportedTiles.get()) {
+                    ActivityMixin.showShortToast(activity, R.string.check_hillshading_unsupported);
+                }
+                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_hillshading_missing, missingDownloads, null);
+            }
+        });
     }
 
     @WorkerThread
-    private static void checkTiles(final HashMap<String, String> missingTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
+    private static void checkTiles(final HashMap<String, String> requiredTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
         // read tiles already stored
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_TILES.getFolder());
         for (ContentStorage.FileInformation fi : files) {
             if (fi.name.endsWith(BROUTER_TILE_FILEEXTENSION)) {
-                missingTiles.remove(fi.name);
+                requiredTiles.remove(fi.name);
             }
         }
 
         // read list of available tiles from the server, if necessary
-        if (!missingTiles.isEmpty()) {
+        if (!requiredTiles.isEmpty()) {
             final HashMap<String, Download> tiles = BRouterTileDownloader.getInstance().getAvailableTiles();
-            final ArrayList<String> filenames = new ArrayList<>(missingTiles.values()); // work on copy to avoid concurrent modification
+            final ArrayList<String> filenames = new ArrayList<>(requiredTiles.values()); // work on copy to avoid concurrent modification
             for (String filename : filenames) {
                 if (tiles.containsKey(filename)) {
                     missingDownloads.add(tiles.get(filename));
                 } else {
-                    missingTiles.remove(filename);
+                    requiredTiles.remove(filename);
                     hasUnsupportedTiles.set(true);
                 }
             }
         }
+    }
+
+    @WorkerThread
+    private static void checkHillshadingTiles(final HashMap<String, String> requiredTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
+        // read tiles already stored
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_SHADING.getFolder());
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.endsWith(HILLSHADING_TILE_FILEEXTENSION)) {
+                requiredTiles.remove(fi.name);
+            }
+        }
+
+        // read list of available tiles from the server, if necessary
+        if (!requiredTiles.isEmpty()) {
+            final Set<String> missingTileFolders = new HashSet<>(requiredTiles.values());
+            final HashMap<String, Download> tiles = HillshadingTileDownloader.getInstance().getAvailableTiles(missingTileFolders);
+            final Set<String> filenames = new HashSet<>(requiredTiles.keySet()); // work on copy to avoid concurrent modification
+            for (String filename : filenames) {
+                if (tiles.containsKey(filename)) {
+                    missingDownloads.add(tiles.get(filename));
+                } else {
+                    requiredTiles.remove(filename);
+                    hasUnsupportedTiles.set(true);
+                }
+            }
+        }
+    }
+
+    public static boolean hasHillshadingTiles() {
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_SHADING.getFolder());
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.endsWith(HILLSHADING_TILE_FILEEXTENSION)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -245,8 +343,8 @@ public class MapUtils {
                 .setMenuContent(R.menu.map_longclick)
                 .setPosition(new Point(tapXY.x, tapXY.y - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
-                    menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
-                    menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
@@ -258,7 +356,7 @@ public class MapUtils {
                             .setPositiveButton(R.string.ok, null)
                             .setNegativeButton(R.string.copy_coordinates, (d, which) -> {
                                 ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
-                                Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(activity, R.string.clipboard_copy_ok);
                             })
                             .show();
                     final TextView tv1 = dialog.findViewById(R.id.tv1);
@@ -296,27 +394,13 @@ public class MapUtils {
                     setTarget.call(longClickGeopoint, null);
                     updateRouteTrackButtonVisibility.run();
                 })
-                .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
+                .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true, 0));
     }
 
     private static void updateRouteTrackButtonVisibility(final Runnable updateRouteTrackButtonVisibility) {
         if (updateRouteTrackButtonVisibility != null) {
             updateRouteTrackButtonVisibility.run();
         }
-    }
-
-    public static boolean isPartOfRoute(final RouteItem routeItem, final IndividualRoute individualRoute) {
-        final RouteSegment[] segments = (individualRoute != null ? individualRoute.getSegments() : null);
-        if (segments == null || segments.length == 0) {
-            return false;
-        }
-        final String routeItemIdentifier = routeItem.getIdentifier();
-        for (RouteSegment segment : segments) {
-            if (StringUtils.equals(routeItemIdentifier, segment.getItem().getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static SimplePopupMenu createEmptyLongClickPopupMenu(final Activity activity, final int tapX, final int tapY) {

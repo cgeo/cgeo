@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +47,8 @@ public class LegacyCalculatedCoordinateMigrator {
         SEC(CalculatedCoordinateType.DEGREE_MINUTE_SEC, "**°**'**.--***\"", "***°**'**.--***\"");
 
         public final CalculatedCoordinateType type;
-        public String latPattern;
-        public String lonPattern;
+        public final String latPattern;
+        public final String lonPattern;
 
         MigrationCalculatedCoordinateType(final CalculatedCoordinateType type, final String latPattern, final String lonPattern) {
             this.type = type;
@@ -335,8 +336,8 @@ public class LegacyCalculatedCoordinateMigrator {
         return newCacheVariables;
     }
 
-    public static boolean needsMigration(final Waypoint w) {
-        return WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
+    public static boolean needsMigration(@Nullable final Waypoint w) {
+        return w != null && WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
     }
 
     public static void performMigration(final Context ctx, final Geocache cache, final Waypoint w, final Runnable actionAfterMigration) {
@@ -372,7 +373,7 @@ public class LegacyCalculatedCoordinateMigrator {
                     w.setCalcStateConfig(cc.toConfig());
                     cache.addOrChangeWaypoint(w, true);
                     actionAfterMigration.run();
-                }, () -> actionAfterMigration.run());
+                }, actionAfterMigration);
     }
 
     private static String createNewUniqueVar(final String oldVar, final Set<String> existingVars) {

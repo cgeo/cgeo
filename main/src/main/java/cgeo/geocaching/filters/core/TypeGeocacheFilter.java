@@ -1,5 +1,7 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 
@@ -9,14 +11,12 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
 
     public TypeGeocacheFilter() {
         //gc.com groups in their search their cache types as follows:
-        //* "Tradi" also includes: GCHQ, PROJECT_APE
-        //* "Event" also includes:CITO,mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
-        //-> unlike gc.com, currently CITO is an OWN search box below (to make number even)
-        addDisplayValues(CacheType.TRADITIONAL, CacheType.TRADITIONAL, CacheType.GCHQ, CacheType.PROJECT_APE);
-        addDisplayValues(CacheType.EVENT, CacheType.EVENT, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
+        //* "Unknown" is displayed as "Others" and includes: Unknown, GCHQ, PROJECT_APE
+        //* "Celebration Event" is displayed as "Specials" and includes: mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
+        addDisplayValues(CacheType.UNKNOWN, CacheType.UNKNOWN, CacheType.GCHQ, CacheType.PROJECT_APE);
+        addDisplayValues(CacheType.COMMUN_CELEBRATION, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
                 CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
         addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
-        addDisplayValues(CacheType.USER_DEFINED, CacheType.USER_DEFINED, CacheType.UNKNOWN);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
 
     @Override
     public String valueToUserDisplayableValue(final CacheType value) {
-        return value.getShortL10n();
+        return valueDisplayTextGetter(value);
     }
 
     @Override
@@ -49,5 +49,13 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         return value.id;
     }
 
+    public static String valueDisplayTextGetter(final CacheType value) {
+        if (CacheType.UNKNOWN == value) {
+            return CgeoApplication.getInstance().getString(R.string.other);
+        } else if (CacheType.COMMUN_CELEBRATION == value) {
+            return CgeoApplication.getInstance().getString(R.string.event_special);
+        }
+        return value.getShortL10n();
+    }
 
 }

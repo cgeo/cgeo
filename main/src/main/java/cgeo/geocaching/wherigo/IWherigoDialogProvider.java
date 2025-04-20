@@ -5,15 +5,6 @@ import android.app.Dialog;
 
 public interface IWherigoDialogProvider {
 
-    Dialog createDialog(Activity activity);
-
-    default void onGameNotification(final WherigoGame.NotifyType notifyType) {
-        //default: do nothing
-    }
-
-    default void onDialogDismiss() {
-        //default: do nothing
-    }
-
+    Dialog createAndShowDialog(Activity activity, IWherigoDialogControl control);
 
 }

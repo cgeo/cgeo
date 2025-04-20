@@ -6,17 +6,13 @@
     app:key="@string/preference_screen_system">
 
     <PreferenceCategory
+        android:key="@string/pref_fakekey_local_filesystem"
         android:title="@string/init_local_file_system"
         app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_persistablefolder_basedir"
             android:title="@string/init_base_directory_description"
             app:iconSpaceReserved="false" />
-        <Preference
-            android:key="@string/pref_persistablefolder_testdir"
-            android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode"
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -53,6 +49,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/init_clipboard_copy_action_title"
+        app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_clipboard_copy_action_note" app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_clipboard_copy_action"
+            android:title="@string/init_clipboard_copy_action"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/init_debug_title"
         app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />
@@ -80,6 +87,11 @@
             android:key="@string/pref_fakekey_view_settings"
             android:layout="@layout/preference_button"
             android:title="@string/view_settings"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_view_database"
+            android:layout="@layout/preference_button"
+            android:title="@string/view_database"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

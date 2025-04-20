@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -12,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +32,7 @@ public class DebugUtils {
     }
 
     public static void createMemoryDump(@NonNull final Activity context) {
-        Toast.makeText(context, R.string.init_please_wait, Toast.LENGTH_LONG).show();
+        ViewUtils.showToast(context, R.string.init_please_wait);
         final File file = ContentStorage.get().createTempFile();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -80,8 +80,8 @@ public class DebugUtils {
     }
 
 
-    private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
-        final AtomicReference<Uri> result = new AtomicReference(null);
+    public static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
+        final AtomicReference<Uri> result = new AtomicReference<>(null);
 
         final File file = ContentStorage.get().createTempFile();
 
@@ -94,7 +94,7 @@ public class DebugUtils {
                     if (fullInfo) {
                         builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
                     } else {
-                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:I", "*:S", "-f", file.getAbsolutePath());
+                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
                     }
                 }
                 Log.iForce("[LogCat]Issuing command: " + builder.command());

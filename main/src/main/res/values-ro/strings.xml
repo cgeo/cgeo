@@ -156,8 +156,6 @@
     <string name="log_image_titleprefix">Imagine</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Tradu în limba %s</string>
-    <string name="translate_to_english">Tradu în limba engleză</string>
     <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -179,7 +177,6 @@
     <string name="err_detail_cache">c:geo nu poate afişa cutia solicitată. Este într-adevăr o geocutie?</string>
     <string name="err_detail_cache_find">c:geo nu găseşte cutia</string>
     <string name="err_detail_cache_find_some">c:geo nu găseşte acea cutie.</string>
-    <string name="err_detail_cache_find_any">c:geo nu poate găsi nici o cutie.</string>
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
     <string name="err_detail_premium_log_found">Acest cache este disponibil doar membrilor premium ai geocaching.com. Prin urmare, informațiile despre cache nu pot fi afișate.\n\nCu toate acestea, dacă ați găsit deja acest cache, puteți scrie un jurnal aici.</string>
@@ -235,7 +232,6 @@
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
     <string name="info_log_post_failed">Publicarea însemnării a eşuat.</string>
-    <string name="info_log_post_failed_reason">Motivul: %s</string>
     <string name="info_log_post_retry">Încearcă din nou</string>
     <string name="info_log_post_save">Salvează local</string>
     <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>
@@ -287,9 +283,7 @@
     <string name="caches_sort_name">Nume</string>
     <string name="caches_sort_rating">Voturi</string>
     <string name="caches_sort_vote">Vot (propriul vot)</string>
-    <string name="caches_sort_inventory">Total inventar</string>
     <string name="caches_sort_date_hidden">Data ascunderii</string>
-    <string name="caches_sort_date_logged">Însemnată în data</string>
     <string name="caches_sort_finds">Găsite</string>
     <string name="caches_sort_state">Stare</string>
     <string name="caches_sort_storage">Data salvării pe acest dispozitiv</string>
@@ -379,7 +373,6 @@
     <string name="settings_gc_legal_note">Folosind serviciul Geocaching.com declari că ai accepţi condiţiile de utilizare ale Groundspeak Inc.</string>
     <string name="settings_authorize">Autorizează c:geo</string>
     <string name="settings_gc_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
-    <string name="settings_ec_description">Autorizează c:geo la extremcaching.com pentru a putea căuta şi filtra selectiv geocutii şi pentru a-ţi vedea propriile geocutii găste.</string>
     <string name="settings_su_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
     <string name="init_summary_oc_de">Încarcă geocutii de la opencaching.de</string>
     <string name="init_oc_de_description">Autorizează c:geo pe opencaching.de pentru a putea căuta cutii şi a vedea/filtra cutiile găsite de tine.</string>
@@ -425,8 +418,6 @@
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
     <string name="init_showwaypoint_description">Dacă sunt afişate mai puţine cutii decât acest număr, afişează şi punctele adiţionale.</string>
-    <string name="init_save_log_img">Salvează imagini</string>
-    <string name="init_summary_save_log_img">Salvează imaginile din însemnări</string>
     <string name="init_units">Unităţi de măsură imperiale</string>
     <string name="init_summary_units">Foloseşte unităţi de măsură imperiale în loc de sistemul metric</string>
     <string name="init_log_offline">Însemnări salvate local</string>
@@ -477,7 +468,6 @@
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
     <string name="init_maintenance">Întreţinere</string>
-    <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
     <string name="init_location_note">Pe dispozitivele echipate cu serviciile Google Play, c:geo poate utiliza automat un furnizor de geolocalizare mai bun. Aceasta însă împiedică folosirea unui receptor GPS extern conectat prin Bluetooth.</string>
     <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
@@ -548,6 +538,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo este acum autorizat să comunice cu %s.</string>
     <string name="err_auth_geokrety_bad_password">Numele de utilizator/parola incorect.</string>
     <string name="err_auth_geokrety_unknown">%1$s a răspuns: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d geocutie</item>
@@ -575,7 +566,6 @@
         <item quantity="few">acum %d zile</item>
         <item quantity="other">acum %d zile</item>
     </plurals>
-    <string name="cache_inventory">Inventar</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
@@ -612,8 +602,6 @@
     <string name="cache_dialog_offline_save_message">Salvare pentru uz fără internet…</string>
     <string name="cache_dialog_offline_drop_title">Cutie salvată</string>
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
-    <string name="cache_dialog_refresh_title">Reîncarcă</string>
-    <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
@@ -677,6 +665,7 @@
     <string name="cache_share_field">ora</string>
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
@@ -749,19 +738,10 @@
     <string name="map_select_multiple_items">Selectează un element</string>
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
-    <string name="search_coordinates_button">Caută după coordonate</string>
     <string name="search_address">Adresă</string>
-    <string name="search_address_button">Caută după adresă</string>
-    <string name="search_kw_prefill">Cuvânt cheie</string>
-    <string name="search_kw_button">Caută după cuvânt cheie</string>
-    <string name="search_hbu_prefill">Proprietar</string>
-    <string name="search_hbu_button">Caută după numele proprietarului</string>
     <string name="search_tb">Obiect călător</string>
-    <string name="search_tb_hint">Codul obiectului călător</string>
-    <string name="search_tb_button">Caută obiect călător</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
-    <string name="search_own_caches">Caută cutiile mele</string>
     <!-- trackable -->
     <string name="trackable">Obiecte călătoare</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
@@ -806,10 +786,6 @@
     <string name="destination_select">Alege destinaţia</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenţă</string>
-    <string name="license_show">Afişează licenţa</string>
-    <string name="license_dismiss">Renunță</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Eveniment trecut</string>
     <string name="helper_calendar_pastevent_question">Data evenimentului este în trecut. Adaugă-l oricum?</string>
@@ -817,9 +793,7 @@
     <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
-    <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <!-- export -->
     <string name="export">Exportă</string>
     <string name="export_exportedto">exportat către</string>
@@ -871,9 +845,7 @@
     <string name="attribute_climbing_yes">Căţărare dificilă</string>
     <string name="attribute_climbing_no">Căţărare uşoară</string>
     <string name="attribute_wading_yes">Poate fi necesară traversare prin apă</string>
-    <string name="attribute_wading_no">Nu este necesară traversarea prin apă</string>
     <string name="attribute_swimming_yes">S-ar putea să fie necesar înotul</string>
-    <string name="attribute_swimming_no">Înotul nu este necesar</string>
     <string name="attribute_available_yes">Disponibilă permanent</string>
     <string name="attribute_available_no">Nu este disponibilă tot timul</string>
     <string name="attribute_night_yes">Recomandat noaptea</string>
@@ -883,9 +855,7 @@
     <string name="attribute_stealth_yes">Trebuie să fii discret</string>
     <string name="attribute_stealth_no">Discreţia nu este necesară</string>
     <string name="attribute_firstaid_yes">Are nevoie de întreţinere</string>
-    <string name="attribute_firstaid_no">Nu are nevoie de întreţinere</string>
     <string name="attribute_cow_yes">Atenţie la animale domestice mari (vite)</string>
-    <string name="attribute_cow_no">Nu sunt prezente animale domestice mari (vite)</string>
     <string name="attribute_field_puzzle_yes">Se rezolvă la faţa locului</string>
     <string name="attribute_field_puzzle_no">Nu se rezolvă la faţa locului</string>
     <string name="attribute_nightcache_yes">Cutie de noapte</string>
@@ -913,49 +883,31 @@
     <string name="attribute_partnership_yes">Geocutie parteneriat</string>
     <string name="attribute_partnership_no">Nu e geocutie parteneriat</string>
     <string name="attribute_fee_yes">Parcare cu plată sau taxa de intrare</string>
-    <string name="attribute_fee_no">Fără taxă de parcare sau de intrare</string>
     <string name="attribute_rappelling_yes">Necesită echipament de alpinism</string>
-    <string name="attribute_rappelling_no">Nu necesită echipament de alpinism</string>
     <string name="attribute_boat_yes">Necesită barcă</string>
-    <string name="attribute_boat_no">Nu este necesară o barcă</string>
     <string name="attribute_scuba_yes">Necesită echipament de scufundare</string>
-    <string name="attribute_scuba_no">Nu este necesar echipament de scufundare</string>
     <string name="attribute_flashlight_yes">Necesită lanternă</string>
-    <string name="attribute_flashlight_no">Nu este necesară lanterna</string>
     <string name="attribute_uv_yes">Necesită lanternă UV</string>
-    <string name="attribute_uv_no">Nu este necesară lanterna UV</string>
     <string name="attribute_snowshoes_yes">Ai nevoie de încălţări de zăpadă</string>
-    <string name="attribute_snowshoes_no">Nu ai nevoie de încălţări de zăpadă</string>
     <string name="attribute_skiis_yes">Este necesar practicare de ski fond</string>
-    <string name="attribute_skiis_no">Practicarea de ski fond nu este necesară</string>
     <string name="attribute_s_tool_yes">Necesită unelte speciale</string>
-    <string name="attribute_s_tool_no">Nu sunt necesare unelte speciale</string>
     <string name="attribute_wirelessbeacon_yes">Baliză radio</string>
-    <string name="attribute_wirelessbeacon_no">Nu e baliză radio</string>
     <string name="attribute_treeclimbing_yes">Trebuie urcat într-un copac</string>
     <string name="attribute_treeclimbing_no">Nu trebuie urcat în copac</string>
     <string name="attribute_poisonoak_yes">Plante otrăvitoare</string>
     <string name="attribute_poisonoak_no">Nu există plante otrăvitoare</string>
     <string name="attribute_dangerousanimals_yes">Animale periculoase</string>
-    <string name="attribute_dangerousanimals_no">Nu există animale periculoase</string>
     <string name="attribute_ticks_yes">Căpuşe</string>
-    <string name="attribute_ticks_no">Nu există căpuşe</string>
     <string name="attribute_mine_yes">Mine abandonate</string>
-    <string name="attribute_mine_no">Nu există mine abandonate</string>
     <string name="attribute_cliff_yes">Stânci / cad pietre</string>
-    <string name="attribute_cliff_no">Nu există stânci / nu cad pietre</string>
     <string name="attribute_hunting_yes">Teren de vânătoare</string>
-    <string name="attribute_hunting_no">Nu este teren de vânătoare</string>
     <string name="attribute_danger_yes">Zonă periculoasă</string>
-    <string name="attribute_danger_no">Nu este o zonă periculoasă</string>
     <string name="attribute_thorn_yes">Spini</string>
-    <string name="attribute_thorn_no">Nu există spini</string>
     <string name="attribute_wheelchair_yes">Accesibilă din scan cu rotile</string>
     <string name="attribute_wheelchair_no">Nu este accesibilă din scaun cu rotile</string>
     <string name="attribute_parking_yes">Parcare</string>
     <string name="attribute_parking_no">Nu există parcare</string>
     <string name="attribute_public_yes">Transport public</string>
-    <string name="attribute_public_no">Nu există transport în comun</string>
     <string name="attribute_water_yes">În apropiere există apă potabilă</string>
     <string name="attribute_water_no">Nu există apă potabilă în apropiere</string>
     <string name="attribute_restrooms_yes">În apropiere există toalete publice</string>
@@ -1144,11 +1096,6 @@
     <string name="command_rename_list_result">Lista a fost redenumită</string>
     <string name="command_delete_list_result">Lista a fost ştearsă</string>
     <string name="command_unique_list_result">Geocutii şterse din alte liste</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Adaugă această geocutie la favorite (%d disponibil)</item>
-        <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
-        <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
     <string name="list_list_headline">Liste:</string>
     <plurals name="extract_waypoints_result">
@@ -1183,13 +1130,13 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Anulează</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

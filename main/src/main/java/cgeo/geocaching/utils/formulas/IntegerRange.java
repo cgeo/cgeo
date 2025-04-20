@@ -2,46 +2,52 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextParser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class IntegerRange {
 
-    private final int[] values;
+    //range values will be stored in map structure mapping start pos of a range to first value of this range:
+    //Example: [:1-3, 8, 5-7] will be stored in a map as 0 -> 1, 3 -> 8, 4 -> 5
 
-    private IntegerRange(final int[] values) {
-        this.values = values;
+    private final TreeMap<Integer, Integer> valueMap;
+    private final int size;
+
+    private IntegerRange(final TreeMap<Integer, Integer> valueMap, final int size) {
+        this.valueMap = valueMap;
+        this.size = size;
     }
 
 
     public int getSize() {
-        return values.length;
+        return size;
     }
 
     public int getValue(final int pos) {
-        return pos < 0 || pos >= values.length ? 0 : values[pos];
+        if (pos < 0 || pos >= size || valueMap.isEmpty()) {
+            return 0;
+        }
+        final Map.Entry<Integer, Integer> entry = valueMap.floorEntry(pos);
+        return entry == null ? 0 : pos - entry.getKey() + entry.getValue();
     }
 
     public static IntegerRange createFromConfig(final String config) {
-        final List<Integer> parsed = parseConfig(config, 20);
-        return parsed == null ? null : new IntegerRange(ArrayUtils.toPrimitive(parsed.toArray(new Integer[0])));
+        final TreeMap<Integer, Integer> targetMap = new TreeMap<>();
+        final int size = parseConfig(config, targetMap);
+        return size <= 0 ? null : new IntegerRange(targetMap, size);
     }
 
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static List<Integer> parseConfig(final String pattern, final int maxLength) {
-        final List<Integer> result = new ArrayList<>();
+    private static int parseConfig(final String pattern, final Map<Integer, Integer> targetMap) {
+
         final TextParser tp = new TextParser(pattern);
         StringBuilder currentToken = new StringBuilder();
         String lastToken = null;
         boolean rangeFound = false;
-        boolean negate = false;
+        int pos = 0;
         while (true) {
-            if (tp.ch() == '^') {
-                negate = !negate;
-            } else if (tp.ch() >= '0' && tp.ch() <= '9') {
+            if (tp.ch() >= '0' && tp.ch() <= '9') {
                 currentToken.append(tp.ch());
             } else if (tp.ch() == '-') {
                 rangeFound = true;
@@ -62,28 +68,19 @@ public class IntegerRange {
                         start = end;
                         end = m;
                     }
-                    for (int i = start; i <= end; i++) {
-                        if (negate) {
-                            result.remove((Integer) i);
-                        } else {
-                            result.add(i);
-                            if (result.size() > maxLength) {
-                                break;
-                            }
-                        }
-                    }
+                    targetMap.put(pos, start);
+                    pos += end + 1 - start;
                 }
                 currentToken = new StringBuilder();
-                negate = false;
                 rangeFound = false;
                 lastToken = null;
-                if (tp.eof() || result.size() >= maxLength) {
+                if (tp.eof()) {
                     break;
                 }
             }
             tp.next();
         }
-        return tp.eof() && result.size() <= maxLength && !result.isEmpty() ? result : null;
+        return tp.eof() ? pos : 0;
 
     }
 
@@ -94,6 +91,5 @@ public class IntegerRange {
             return null;
         }
     }
-
 
 }

@@ -14,34 +14,8 @@
         style="@style/separator_horizontal" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/emoji_opacity"
+        android:id="@+id/emoji_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/emoji_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:id="@+id/emoji_grid_separator"
-                style="@style/separator_horizontal" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/emoji_lru"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:paddingHorizontal="5dp" />
 </LinearLayout>

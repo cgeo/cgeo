@@ -42,7 +42,7 @@ public final class BExpressionMetaData {
                     break;
                 }
                 line = line.trim();
-                if (line.length() == 0 || line.startsWith("#")) {
+                if (line.isEmpty() || line.startsWith("#")) {
                     continue;
                 }
                 if (line.startsWith(CONTEXT_TAG)) {

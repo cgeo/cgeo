@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -23,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -66,15 +66,15 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         super.init();
 
         waypoint = DataStore.loadWaypoint(waypointId);
-        if (null != proximityNotification) {
-            proximityNotification.setReferencePoint(waypoint.getCoords());
-            proximityNotification.setTextNotifications(getContext());
-        }
-
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
             ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
             return;
+        }
+
+        if (null != proximityNotification) {
+            proximityNotification.setReferencePoint(waypoint.getCoords());
+            proximityNotification.setTextNotifications(getContext());
         }
 
         try {
@@ -113,12 +113,10 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             binding.toggleVisited.setOnClickListener(arg1 -> {
                 waypoint.setVisited(!waypoint.isVisited());
                 DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
-                Toast.makeText(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited, Toast.LENGTH_SHORT).show();
+                ViewUtils.showShortToast(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited);
             });
 
-            binding.edit.setOnClickListener(arg0 -> {
-                EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
-            });
+            binding.edit.setOnClickListener(arg0 -> EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId()));
 
             binding.moreDetails.setOnClickListener(arg0 -> {
                 CacheDetailActivity.startActivity(getActivity(), geocode);

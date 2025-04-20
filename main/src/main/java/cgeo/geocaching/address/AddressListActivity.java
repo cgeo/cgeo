@@ -7,8 +7,10 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
 import android.location.Address;
@@ -45,25 +47,31 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
-                .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocationName(keyword));
+                .onErrorResumeNext(throwable -> {
+                    Log.w("AddressList: Problem retrieving address data from AndroidGeocoder", throwable);
+                    return OsmNominatumGeocoder.getFromLocationName(keyword);
+                });
         AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
             waitDialog.dismiss();
             addresses.addAll(foundAddresses);
             adapter.notifyItemRangeInserted(0, foundAddresses.size());
         }, throwable -> {
             finish();
+            Log.w("AddressList: Problem retrieving address data", throwable);
             showToast(res.getString(R.string.err_unknown_address));
         });
     }
 
     @Override
     public void onClickAddress(@NonNull final Address address) {
+        Settings.addToHistoryList(R.string.pref_search_history_address, StringUtils.defaultString(address.getAddressLine(0).replace(",", "")));
         CacheListActivity.startActivityAddress(this, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
         ActivityMixin.finishWithFadeTransition(this);
     }
 
     @Override
     public void onClickMapIcon(@NonNull final Address address) {
+        Settings.addToHistoryList(R.string.pref_search_history_address, StringUtils.defaultString(address.getAddressLine(0).replace(",", "")));
         DefaultMap.startActivityInitialCoords(this, new Geopoint(address.getLatitude(), address.getLongitude()));
         ActivityMixin.finishWithFadeTransition(this);
     }

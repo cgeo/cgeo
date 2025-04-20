@@ -11,12 +11,11 @@
     android:visibility="visible"
     tools:visibility="visible">
 
-    <RelativeLayout style="@style/separator_horizontal_layout">
-        <View style="@style/separator_horizontal_heading" />
-        <TextView
-            style="@style/separator_horizontal_heading_text"
-            android:text="@string/log_images" />
-    </RelativeLayout>
+    <cgeo.geocaching.ui.SectionHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerAbove="true"
+        android:text="@string/log_images" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -25,15 +24,26 @@
         <Button
             android:id="@+id/image_add_multi"
             style="@style/button_icon"
+            android:tooltipText="@string/log_image_selectfromstorage_tooltip"
             android:layout_gravity="left"
             app:icon="@drawable/ic_menu_image_multi" />
 
         <Button
             android:id="@+id/image_add_camera"
             style="@style/button_icon"
+            android:tooltipText="@string/log_image_camera_tooltip"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/image_add_multi"
             app:icon="@drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/image_add_own"
+            style="@style/button_icon"
+            android:tooltipText="@string/log_image_selectfromown_tooltip"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/image_add_camera"
+            android:visibility="gone"
+            app:icon="@drawable/ic_menu_folder_special" />
 
     </RelativeLayout>
 

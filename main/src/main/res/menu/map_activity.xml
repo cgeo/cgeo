@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_toggle_mypos"
-        android:icon="@drawable/ic_menu_myposition"
-        android:showAsAction="always"
-        android:title="@string/menu_centerposition"
-        app:showAsAction="always"/>
     <item
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_action_layers"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/map_view_map"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
+        <!-- only used for legacy map, overwritten by map_mapview for Unified map -->
         <menu>
             <group
-                android:id="@+id/menu_group_map_sources"
+                android:id="@+id/menu_group_map_sources_online"
+                android:checkableBehavior="single" >
+            </group>
+            <group
+                android:id="@+id/menu_group_map_sources_offline"
                 android:checkableBehavior="single" >
             </group>
             <group android:id="@+id/menu_group_offlinemaps">
                 <item
-                    android:id="@+id/menu_download_offlinemap"
-                    android:visible="false" />
+                    android:orderInCategory="90"
+                    android:id="@+id/menu_hillshading"
+                    android:title="@string/settings_hillshading_enable"
+                    android:icon="@drawable/ic_menu_hills"
+                    android:checkable="true"
+                    android:visible="false"/>
                 <item
-                    android:id="@+id/menu_delete_offlinemap"
-                    android:visible="false" />
+                    android:orderInCategory="91"
+                    android:id="@+id/menu_manage_offline_maps"
+                    android:icon="@drawable/wherigo_download"
+                    android:title="@string/menu_manage_offline_data"
+                    android:visible="false">
+                    <menu>
+                        <item
+                            android:id="@+id/menu_download_offlinemap"
+                            android:title="@string/downloadmap_title"
+                            android:icon="@drawable/ic_menu_mapmode"/>
+                        <item
+                            android:id="@+id/menu_check_routingdata"
+                            android:icon="@drawable/ic_menu_route"
+                            android:title="@string/check_tiles_menu"/>
+                        <item
+                            android:id="@+id/menu_check_hillshadingdata"
+                            android:icon="@drawable/ic_menu_hills"
+                            android:title="@string/check_hillshading_tiles_menu"/>
+                        <item
+                            android:id="@+id/menu_delete_offline_data"
+                            android:icon="@drawable/ic_menu_delete"
+                            android:title="@string/menu_delete_offline_data"/>
+                    </menu>
+                </item>
             </group>
         </menu>
     </item>
@@ -36,53 +60,47 @@
         android:showAsAction="ifRoom"
         android:title="@string/search_filter"
         android:visible="true"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
         android:showAsAction="ifRoom"
         android:title="@string/map_live_disable"
         android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
         android:title="@string/cache_hint"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_compass"
         android:icon="@drawable/ic_menu_compass"
         android:title="@string/compass_title"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline"
         android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit"
         android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_save"
         android:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_offline_map"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_map_rotation"
+        android:icon="@drawable/compass_rose_mini"
         android:title="@string/map_rotation"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
@@ -92,13 +110,13 @@
                 android:checkableBehavior="single" >
                 <item
                     android:id="@+id/menu_map_rotation_off"
-                    android:title="@string/switch_off" />
+                    android:title="@string/switch_off"/>
                 <item
                     android:id="@+id/menu_map_rotation_manual"
-                    android:title="@string/switch_manual" />
+                    android:title="@string/switch_manual"/>
                 <item
                     android:id="@+id/menu_map_rotation_auto_lowpower"
-                    android:title="@string/switch_auto_lowpower" />
+                    android:title="@string/switch_auto_lowpower"/>
                 <item
                     android:id="@+id/menu_map_rotation_auto_precise"
                     android:title="@string/switch_auto_precise"
@@ -108,27 +126,21 @@
     </item>
     <item
         android:id="@+id/menu_theme_mode"
-        android:icon="@drawable/ic_menu_preferences"
+        android:icon="@drawable/downloader_theme"
         android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_select"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_theme_options"
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_options"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_theme_legend"
-        android:title="@string/map_theme_legend"
-        android:visible="false">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_select_language"
+        android:icon="@drawable/ic_menu_translate"
         android:title="@string/map_language"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
@@ -141,35 +153,33 @@
     </item>
     <item
         android:id="@+id/menu_trailhistory"
+        android:icon="@drawable/ic_menu_recent_history"
         android:title="@string/trailhistory">
         <menu>
             <item
                 android:id="@+id/menu_trail_show"
-                android:title="@string/map_trail_show">
-            </item>
+                android:icon="@drawable/visibility"
+                android:title="@string/map_trail_show"/>
             <item
                 android:id="@+id/menu_trail_hide"
-                android:title="@string/map_trail_hide">
-            </item>
+                android:icon="@drawable/visibility_off"
+                android:title="@string/map_trail_hide"/>
             <item
                 android:id="@+id/menu_export_trailhistory"
-                android:title="@string/export_trailhistory_title">
-            </item>
+                android:icon="@drawable/ic_menu_gpx"
+                android:title="@string/export_trailhistory_title"/>
             <item
                 android:id="@+id/menu_clear_trailhistory"
-                android:title="@string/map_clear_trailhistory">
-            </item>
+                android:icon="@drawable/ic_menu_delete"
+                android:title="@string/map_clear_trailhistory"/>
         </menu>
     </item>
     <item
         android:id="@+id/menu_routetrack"
-        android:title="@string/routes_tracks_menu" />
-    <item
-        android:id="@+id/menu_check_routingdata"
-        android:title="@string/check_tiles_menu" />
+        android:icon="@drawable/ic_menu_route"
+        android:title="@string/routes_tracks_menu"/>
     <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"
-        android:title="@string/map_as_list">
-    </item>
+        android:title="@string/map_as_list"/>
 </menu>

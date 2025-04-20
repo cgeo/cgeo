@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Fix: Wherigo: Handle zones with invalid/too-close coordinates
+- Fix: c:geo tries to import local ".map" files as GPX
+- Fix: Edited user notes from popup sometimes get lost
+- Fix: Editing log shows "report problem" option
+- Fix: Live Filter 'Does not contain' fails to return any caches
+- Fix: Crashes on pausing a UnifiedMap online map
+- Fix: Outdated app "GPS Bluethooth" in useful apps list
+- Fix: Variables and/or values are deleted erroneously when editing personal note
+- Fix: Wherigo: Wrong altitude info
+- Fix: Wherigo: All button texts are capitalized
+- Fix: Crash in settings
+- Fix: c:geo not listed in Play Store for GPS-less devices
+- Fix: c:geo crashing silently on folder selection in certain configurations
+- Change: Make extremcaching.com an offline connector (their service has ceised)
+- Fix: Update status info in map on zoom level changes

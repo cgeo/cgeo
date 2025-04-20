@@ -294,7 +294,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     }
 
     private void setUpdateButtonVisibility() {
-        binding.checkForUpdates.setVisibility(installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
+        binding.checkForUpdates.setVisibility(installedOfflineMaps != null && !installedOfflineMaps.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     private synchronized void setMaps(final List<Download> maps, @NonNull final String selectionTitle, final boolean noUpdatesFound) {

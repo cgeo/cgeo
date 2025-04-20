@@ -2,6 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 
 import androidx.annotation.NonNull;
@@ -92,27 +93,16 @@ public class CacheVariableList extends VariableList {
                     final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
                     neededVars.addAll(cc.getNeededVars());
                 }
+                if (wp.hasProjection()) {
+                    FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula1());
+                    FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula2());
+                }
             }
         }
     }
 
     private boolean recalculateWaypoints() {
         final Geocache cache = DataStore.loadCache(this.geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        return recalculateWaypoints(cache);
-    }
-
-    public boolean recalculateWaypoints(final Geocache cache) {
-
-        boolean hasCalculatedWp = false;
-        if (cache != null) {
-            for (Waypoint wp : cache.getWaypoints()) {
-                hasCalculatedWp |=  wp.recalculateVariableDependentValues(this);
-
-            }
-            if (hasCalculatedWp) {
-                DataStore.saveWaypoints(cache);
-            }
-        }
-        return hasCalculatedWp;
+        return cache != null && cache.recalculateWaypoints(this);
     }
 }

@@ -4,10 +4,10 @@ public final class CheapRulerHelper {
     /**
      * Cheap-Ruler Java implementation
      * See
-     * https://blog.mapbox.com/fast-geodesic-approximations-with-cheap-ruler-106f229ad016
+     * <a href="https://blog.mapbox.com/fast-geodesic-approximations-with-cheap-ruler-106f229ad016">...</a>
      * for more details.
      * <p>
-     * Original code is at https://github.com/mapbox/cheap-ruler under ISC license.
+     * Original code is at <a href="https://github.com/mapbox/cheap-ruler">...</a> under ISC license.
      * <p>
      * This is implemented as a Singleton to have a unique cache for the cosine
      * values across all the code.
@@ -28,10 +28,8 @@ public final class CheapRulerHelper {
         // utility class
     }
 
-    /**
-     * build the cache of cosine values.
-     */
     static {
+        // build the cache of cosine values.
         for (int i = 0; i < SCALE_CACHE_LENGTH; i++) {
             SCALE_CACHE[i] = calcKxKyFromILat(i * SCALE_CACHE_INCREMENT + SCALE_CACHE_INCREMENT / 2);
         }

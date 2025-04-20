@@ -28,6 +28,7 @@ import androidx.appcompat.widget.TooltipCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -106,7 +107,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
             if (!sortedLogCounts.isEmpty()) {
                 // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                Collections.sort(sortedLogCounts, (logCountItem1, logCountItem2) -> logCountItem1.getKey().compareTo(logCountItem2.getKey()));
+                Collections.sort(sortedLogCounts, Comparator.comparing(Entry::getKey));
 
                 final List<String> labels = new ArrayList<>(sortedLogCounts.size());
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
@@ -152,7 +153,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (canShareLog) {
             ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> ShareUtils.shareLink(activity, getCache().getShareSubject(), logUrl));
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_browser),
-                    R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(activity, logUrl, true));
+                    R.drawable.ic_menu_open_in_browser, it -> ShareUtils.openUrl(activity, logUrl, true));
         }
         if (isOfflineLog(log)) {
             ctxMenu.setTitle(LocalizationUtils.getString(R.string.log_your_saved_log));

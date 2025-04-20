@@ -34,15 +34,6 @@ public enum DistanceUnit {
         return id;
     }
 
-    public static DistanceUnit getByPos(final int pos) {
-        for (final DistanceUnit e : values()) {
-            if (e.value == pos) {
-                return e;
-            }
-        }
-        return MILE;
-    }
-
     /**
      * Parses English-language string {@code id} representing {@link DistanceUnit} object.
      * If the string cannot be parsed to a valid unit, {@code defaultUnit} will be returned
@@ -69,14 +60,6 @@ public enum DistanceUnit {
 
     public int getValue() {
         return value;
-    }
-
-    public float parseToKilometers(final String distanceText, final float defaultValue) {
-        try {
-            return parseToKilometers(distanceText);
-        } catch (NumberFormatException nfe) {
-            return defaultValue;
-        }
     }
 
     /**

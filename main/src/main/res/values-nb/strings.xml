@@ -87,7 +87,21 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generert</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_nature">Natur</string>
+    <string name="cache_cat_bc_location">Posisjon</string>
+    <string name="cache_cat_bc_recommended">Anbefalt</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysterie</string>
+    <string name="cache_cat_bc_hiking">Fottur</string>
+    <string name="cache_cat_bc_other">Annet</string>
+    <string name="cache_cat_desc_bc_nature">Omgitt av spesiell natur</string>
+    <string name="cache_cat_desc_bc_location">Viser deg et flott sted</string>
+    <string name="cache_cat_desc_bc_recommended">Anbefalt av BetterCacher-teamet</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Ingen</string>
+    <string name="cache_tier_bc_blue">Blå</string>
+    <string name="cache_tier_bc_silver">Sølv</string>
+    <string name="cache_tier_bc_gold">Gull</string>
     <!-- logs -->
     <string name="log_found">Funnet</string>
     <string name="log_dnf">Ikke funnet</string>
@@ -125,6 +139,8 @@
     <string name="log_save">Lagre lokalt</string>
     <string name="log_saving">Lagrer logg…</string>
     <string name="log_posting_log">Laster opp logg…</string>
+    <string name="log_posting_deletelog">Slett logg…</string>
+    <string name="log_posting_image_delete">Sletter bilde %1$s/%2$s…</string>
     <string name="log_posting_vote">Laster opp cachestemme…</string>
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
@@ -152,6 +168,7 @@
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
     <string name="log_images">Bilder</string>
+    <string name="log_edit_image">Rediger bilde</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -161,6 +178,8 @@
     <string name="log_oc_team_comment">Kommentar fra OC-teamet</string>
     <string name="log_your_saved_log">Din lagrede logg</string>
     <string name="log_empty_logbook">Loggboka på denne cachen er tom.</string>
+    <string name="log_image_camera_tooltip">Ta bilde med kamera</string>
+    <string name="log_image_selectfromown_tooltip">Velg bilder fra egne bilder</string>
     <string name="log_problem_none">Ingen problemer</string>
     <string name="log_problem_needs_maintenance_label">Trenger vedlikehold</string>
     <string name="log_problem_needs_maintenance_text">Denne geocacheren rapporterte at det er et problem med denne cachen.</string>
@@ -181,10 +200,8 @@
     <string name="log_image_titleprefix">Bilde</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- Contacts -->
+    <string name="contact_multiple_matches">Kontakt: Flere treff</string>
     <!-- translation -->
-    <string name="translate">Oversett</string>
-    <string name="translate_to_sys_lang">Oversett til %s</string>
-    <string name="translate_to_english">Oversett til engelsk</string>
     <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -198,6 +215,7 @@
     <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
     <string name="err_comm">Ukjent kommunikasjonsfeil. Se på vår <a href="https://www.cgeo.org/faq#login-failed">Ofte Stilte Spørsmål</a> for hjelp.</string>
     <string name="err_missing_auth">Brukernavn og/eller passord er ikke oppgitt</string>
+    <string name="err_wrong">Feil brukernavn og/eller passord.</string>
     <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo fungerer offline med lokalt lagrede cacher.</string>
     <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
     <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -208,7 +226,6 @@
     <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
     <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne cachen</string>
     <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
-    <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher.</string>
     <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
     <string name="err_detail_still_working">Er fremdeles opptatt med en annen oppgave.</string>
     <string name="err_detail_premium_log_found">Denne cachen er kun tilgjengelig for premium-medlemmer på geocaching.com. Derfor kan ikke cacheinformasjonen vises.\n\nHvis du allerede har funnet denne cachen, kan du imidlertid logge den her.</string>
@@ -225,6 +242,7 @@
     <string name="err_favorite_failed">Endring av favorittstatus mislyktes.</string>
     <string name="err_select_logimage_failed">Valg av bilde til loggen mislyktes.</string>
     <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
+    <string name="err_acquire_image_unsupported_format">Bildeformat må være JPEG/JPG, PNG eller GIF</string>
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
     <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
@@ -268,7 +286,7 @@
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
     <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
-    <string name="info_log_post_failed_reason">Grunn: %s</string>
+    <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
     <string name="info_log_post_retry">Prøv på nytt</string>
     <string name="info_log_post_save">Lagre lokalt</string>
     <string name="info_log_cleared">Loggen ble slettet.</string>
@@ -281,6 +299,7 @@
     <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
     <string name="confirm_unsaved_changes_title">Ulagrede endringer</string>
     <string name="confirm_discard_changes">Forkaste ulagrede endringer?</string>
+    <string name="confirm_unsent_changes_title">Usendte endringer</string>
     <string name="confirm_discard_wp_changes">Forkaste ulagrede endringer i veipunktene?</string>
     <string name="warn_log_load_additional_data">c:geo kunne ikke laste tilleggsdata (trackables/favorittpoeng) for logging.</string>
     <string name="more_information">Mer informasjon</string>
@@ -305,9 +324,6 @@
     <string name="menu_helpers">Verktøyprogrammer</string>
     <string name="menu_settings">Innstillinger</string>
     <string name="menu_backup">Sikkerhetskopiering/gjenoppretting</string>
-    <string name="menu_update">Oppdater lagrede data</string>
-    <string name="menu_update_routingdata">Data fra ruting</string>
-    <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Historikk</string>
     <string name="menu_search_clipboard">Last GC-kode fra utklippstavlen</string>
     <string name="menu_history_longstring">Finner historikk</string>
@@ -344,9 +360,7 @@
     <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Rangering</string>
     <string name="caches_sort_vote">Avstemming (egen rangering)</string>
-    <string name="caches_sort_inventory">Antall sporbare</string>
     <string name="caches_sort_date_hidden">Dato gjemt</string>
-    <string name="caches_sort_date_logged">Dato logget</string>
     <string name="caches_sort_finds">Antall funn</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Dato lagret i c:geo</string>
@@ -379,7 +393,6 @@
     <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
-    <string name="caches_show_attributes">Vis oversikt over attributter</string>
     <string name="caches_set_cache_icon">Angi cacheikon</string>
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikon</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
@@ -595,7 +608,6 @@
     <string name="settings_summary_system">Systemspesifikke instillinger og debugging alternativer.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
-    <string name="settings_category_nearbysearch">Søk i nærheten</string>
     <string name="init_nearbysearchlimit_title">Søk i nærheten avgrensning</string>
     <string name="settings_category_geocaching_additionals">Flere tjenester og tillegg</string>
     <string name="settings_category_logging_other">Andre loggeinnstillinger</string>
@@ -607,7 +619,6 @@
     <string name="settings_authorize">Godkjenn c:geo</string>
     <string name="settings_reauthorize">Oppdater eller fjern tillatelse</string>
     <string name="settings_gc_description">Autoriser c:geo med geocaching.com for å søke etter cacher.</string>
-    <string name="settings_ec_description">Autoriser c:geo med extremecaching.com for å søke etter cacher og vise/filtrere de cachene du har funnet.</string>
     <string name="settings_su_description">Autoriser c:geo med geocaching.su for å søke etter cacher.</string>
     <string name="init_summary_oc_de">Last cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Gi c:geo tilgang til å bruke opencaching.de for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
@@ -696,8 +707,6 @@
     <string name="init_prevent_cache_note_merge">Overskriv personlig cachenotat</string>
     <string name="init_customtabs_as_browser">Bruk Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Eksterne nettsider vil vises uten at du forlater c:geo (kun hvis Chrome er installert)</string>
-    <string name="init_save_log_img">Lagre bilder</string>
-    <string name="init_summary_save_log_img">Lagre bilder fra loggene</string>
     <string name="init_units">Bruk britiske måleenheter (fot og engelsk mil)</string>
     <string name="init_summary_units">Bruk imperialistiske måleenheter</string>
     <string name="init_log_offline">Offline logging</string>
@@ -792,12 +801,8 @@
     <string name="init_summary_maptrail">Vis spor på kart</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
-    <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
-    <string name="init_circlefillcolor_summary">Velg fyllfarge og gjennomsiktighet for sirklene</string>
     <string name="init_accuracycirclecolor">Farge på presisjonssirkellinje</string>
     <string name="init_accuracycirclecolor_summary">Velg farge og gjennomsiktighet for presisjonssirkel. Presisjonssirkel brukes for å vise hvor nøyaktig posisjonssignalene er.</string>
-    <string name="init_accuracycirclefillcolor">Farge i presisjonssirkel</string>
-    <string name="init_accuracycirclefillcolor_summary">Velg farge og gjennomsiktighet for sirklene</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
     <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>
@@ -830,8 +835,6 @@
     <string name="init_summary_plain_logs">Vis ren tekst i loggene (ikke farger og annen formatering)</string>
     <string name="init_rendertheme_folder">Mappe for karttemaer</string>
     <string name="init_maintenance">Vedlikehold</string>
-    <string name="init_maintenance_directories_note">c:geo lagrer bilder og andre filer relatert til en cache i en dedikert mappe. I enkelte tilfeller (f.eks. når du importerer/eksporterer databasen) kan denne mappen inneholde foreldede filer som kan slettes her.</string>
-    <string name="init_maintenance_directories">Slett utdaterte filer</string>
     <string name="init_maintenance_start">Vedlikehold startet</string>
     <string name="init_maintenance_finished">Vedlikehold ferdig</string>
     <string name="init_location">Geolokasjon</string>
@@ -981,6 +984,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brukernavn og/eller passord ser ut til å være feil.</string>
     <string name="err_auth_geokrety_unknown">%1$s returnerte: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">En cache</item>
@@ -1020,7 +1024,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">over et år siden</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Inventar</string>
     <string name="cache_log_image_default_title">Bilder</string>
     <string name="cache_personal_note">Personlig cachenotat</string>
     <string name="cache_menu_preventWaypointsFromNote">Hindre veipunkter fra notat</string>
@@ -1078,8 +1081,6 @@
     <string name="cache_dialog_offline_save_message">Lagrer cachen lokalt…</string>
     <string name="cache_dialog_offline_drop_title">Lagret lokalt</string>
     <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten…</string>
-    <string name="cache_dialog_refresh_title">Oppdater</string>
-    <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_target">Sett som mål</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
@@ -1099,7 +1100,6 @@
     <string name="no_browser_found">Ingen nettleser funnet</string>
     <string name="cache_menu_open_with">Åpne med…</string>
     <string name="cache_menu_visit">Logg funn</string>
-    <string name="cache_log_too_long">c:geo kunne ikke sende inn loggen din fordi den er for lang. Men takk for forsøket med å skrive en så omfattende logg ;-)</string>
     <string name="cache_menu_visit_offline">Rask offlinelogg</string>
     <string name="cache_menu_spoilers">Bilder</string>
     <string name="cache_menu_around">Cacher i nærheten</string>
@@ -1182,7 +1182,6 @@
     <string name="create_internal_cache">Opprett en brukerdefinert cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Bruk gjeldende liste</string>
-    <string name="internal_cache_default_name">Brukerdefinert cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brukerdefinert cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå til\'-mål</string>
@@ -1191,6 +1190,7 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
@@ -1262,6 +1262,7 @@
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Retning i °</string>
     <!-- Variables -->
     <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
@@ -1277,7 +1278,6 @@
     <string name="calccoord_guided_value">Verdi</string>
     <string name="calccoord_convert_to_plain">Konverter til ren koordinat</string>
     <string name="calccoord_plain_tools_title">Vanlige verktøy</string>
-    <string name="calccoord_remove_spaces">Fjern mellomrom</string>
     <string name="calccoord_paste_from_clipboard">Lim inn fra utklippstavlen</string>
     <string name="calccoord_generate_title">Generer veipunkter</string>
     <string name="calccoord_generate_showonmap">Vis på kartet</string>
@@ -1311,6 +1311,7 @@
     <string name="formula_error_empty">Tom formel</string>
     <string name="formula_error_other">Feil: \'%1$s</string>
     <!-- ImageView -->
+    <string name="imageview_error">Kunne ikke laste inn bilde</string>
     <!-- map -->
     <string name="map_map">Kart</string>
     <string name="map_view_map">Kart</string>
@@ -1326,7 +1327,6 @@
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besøkt</string>
     <string name="init_renderthemefolder_synctolocal">Synkroniser temaer</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av temamappe</string>
     <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="map_theme_select">Velg karttema</string>
     <string name="map_theme_options">Valg for karttemaer</string>
@@ -1354,30 +1354,16 @@
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
     <string name="search_coordinates">Koordinater</string>
-    <string name="search_coordinates_button">Søk med koordinater</string>
     <string name="search_address">Adresse</string>
-    <string name="search_address_button">Søk med adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Søk med geokode</string>
-    <string name="search_geocode_from_clipboard">Geokode ble limt inn fra utklippstavlen.</string>
     <string name="search_kw">Nøkkelord</string>
-    <string name="search_kw_prefill">Nøkkelord</string>
-    <string name="search_kw_button">Søk med nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
-    <string name="search_hbu_prefill">Eier</string>
-    <string name="search_hbu_button">Søk med</string>
     <string name="search_finder">Funnet av</string>
-    <string name="search_finder_prefill">Finner</string>
-    <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
-    <string name="search_tb_hint">Sporingskode</string>
-    <string name="search_tb_button">Søk etter sporbare</string>
     <string name="search_destination">Åpne mål i c:geo</string>
     <string name="add_target_to">Legg til mål til</string>
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
-    <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_bookmark_list">Bokmerk liste</string>
     <string name="search_pocket_is_new">ny</string>
@@ -1446,10 +1432,6 @@
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flat</string>
     <string name="do_upright">Stående</string>
-    <!-- license -->
-    <string name="license">Lisens</string>
-    <string name="license_show">Vis lisens</string>
-    <string name="license_dismiss">Avvis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
     <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
@@ -1457,11 +1439,9 @@
     <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
     <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
     <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
-    <string name="helper_bluetoothgps_description">Lar deg bruke ekstern GPS-mottaker for å få mer nøyaktig posisjon og kan spare batteri på enheten.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS-signalet aktivt når du skifter mellom apper og når skjermen er av.</string>
     <string name="helper_google_translate_title">Google Oversetter</string>
     <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
-    <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Wherigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lar deg lese av data fra ANT+/Garmin chirp-tagger, som er nødvendig for ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="share_export">Del / Eksporter</string>
@@ -1521,9 +1501,7 @@
     <string name="attribute_climbing_yes">Vanskelig klatring</string>
     <string name="attribute_climbing_no">Ingen vanskelig klatring</string>
     <string name="attribute_wading_yes">Kan kreve vading</string>
-    <string name="attribute_wading_no">Krever ikke vading</string>
     <string name="attribute_swimming_yes">Kan kreve svømming</string>
-    <string name="attribute_swimming_no">Krever ikke svømming</string>
     <string name="attribute_available_yes">Tilgjengelig til alle tider</string>
     <string name="attribute_available_no">Ikke tilgjengelig til alle tider</string>
     <string name="attribute_night_yes">Anbefales på natten</string>
@@ -1533,9 +1511,7 @@
     <string name="attribute_stealth_yes">Stealth kreves</string>
     <string name="attribute_stealth_no">Stealth kreves ikke</string>
     <string name="attribute_firstaid_yes">Trenger vedlikehold</string>
-    <string name="attribute_firstaid_no">Trenger ikke vedlikehold</string>
     <string name="attribute_cow_yes">Se opp for husdyr</string>
-    <string name="attribute_cow_no">Ingen fare for husdyr</string>
     <string name="attribute_field_puzzle_yes">Oppgave på stedet</string>
     <string name="attribute_field_puzzle_no">Ingen oppgave på stedet</string>
     <string name="attribute_nightcache_yes">Nattcache</string>
@@ -1563,49 +1539,31 @@
     <string name="attribute_partnership_yes">Partnership-cache</string>
     <string name="attribute_partnership_no">Ikke partnership-cache</string>
     <string name="attribute_fee_yes">Inngangs- eller parkeringsavgift</string>
-    <string name="attribute_fee_no">Inngang- eller parkeringsavgift ikke nødvendig</string>
     <string name="attribute_rappelling_yes">Klatreutstyr nødvendig</string>
-    <string name="attribute_rappelling_no">Klatreutstyr ikke nødvendig</string>
     <string name="attribute_boat_yes">Båt kreves</string>
-    <string name="attribute_boat_no">Båt ikke nødvendig</string>
     <string name="attribute_scuba_yes">Dykkerutstyr kreves</string>
-    <string name="attribute_scuba_no">Dykkerutstyr ikke nødvendig</string>
     <string name="attribute_flashlight_yes">Lommelykt kreves</string>
-    <string name="attribute_flashlight_no">Lommelykt ikke nødvendig</string>
     <string name="attribute_uv_yes">UV-lys kreves</string>
-    <string name="attribute_uv_no">UV-lys ikke nødvendig</string>
     <string name="attribute_snowshoes_yes">Truger nødvendig</string>
-    <string name="attribute_snowshoes_no">Truger ikke nødvendig</string>
     <string name="attribute_skiis_yes">Ski er nødvendig</string>
-    <string name="attribute_skiis_no">Ski er ikke nødvendig</string>
     <string name="attribute_s_tool_yes">Spesialverktøy kreves</string>
-    <string name="attribute_s_tool_no">Spesialverktøy ikke nødvendig</string>
     <string name="attribute_wirelessbeacon_yes">Trådløs sender</string>
-    <string name="attribute_wirelessbeacon_no">Ikke trådløs sender</string>
     <string name="attribute_treeclimbing_yes">Treklatring er nødvendig</string>
     <string name="attribute_treeclimbing_no">Treklatring er ikke nødvendig</string>
     <string name="attribute_poisonoak_yes">Giftige planter</string>
     <string name="attribute_poisonoak_no">Ingen giftige planter</string>
     <string name="attribute_dangerousanimals_yes">Farlige dyr</string>
-    <string name="attribute_dangerousanimals_no">Ingen farlige dyr</string>
     <string name="attribute_ticks_yes">Flått</string>
-    <string name="attribute_ticks_no">Ikke flått</string>
     <string name="attribute_mine_yes">Forlatte gruver</string>
-    <string name="attribute_mine_no">Ingen forlatte gruver</string>
     <string name="attribute_cliff_yes">Klippe / fallende steiner</string>
-    <string name="attribute_cliff_no">Ingen klippe / fallende steiner</string>
     <string name="attribute_hunting_yes">Jaktområde</string>
-    <string name="attribute_hunting_no">Ikke jaktområde</string>
     <string name="attribute_danger_yes">Farlig område</string>
-    <string name="attribute_danger_no">Ikke et farlig område</string>
     <string name="attribute_thorn_yes">Torner</string>
-    <string name="attribute_thorn_no">Ingen torner</string>
     <string name="attribute_wheelchair_yes">Tilgjengelig med rullestol</string>
     <string name="attribute_wheelchair_no">Ikke tilgjengelig med rullestol</string>
     <string name="attribute_parking_yes">Parkering tilgjengelig</string>
     <string name="attribute_parking_no">Ingen parkgering tilgjengelig</string>
     <string name="attribute_public_yes">Kollektivtransport</string>
-    <string name="attribute_public_no">Ingen kollektivtransport</string>
     <string name="attribute_water_yes">Drikkevann i nærheten</string>
     <string name="attribute_water_no">Ikke drikkevann i nærheten</string>
     <string name="attribute_restrooms_yes">Offentlig toalett i nærheten</string>
@@ -1717,13 +1675,9 @@
     <string name="attribute_offset_cache_yes">Offset-cache</string>
     <string name="attribute_offset_cache_no">Ikke offset-cache</string>
     <string name="attribute_bonuscache_yes">Bonus cache</string>
-    <string name="attribute_bonuscache_no">Ingen bonus cache</string>
     <string name="attribute_powertrail_yes">Del av en power trail</string>
-    <string name="attribute_powertrail_no">Ikke del av en power trail</string>
     <string name="attribute_challengecache_yes">Utfordringscache</string>
-    <string name="attribute_challengecache_no">Ikke utfordringscache</string>
     <string name="attribute_hqsolutionchecker_yes">Aktivert Geocaching.com løsningssjekker</string>
-    <string name="attribute_hqsolutionchecker_no">Geocaching.com løsningssjekker er ikke aktivert</string>
     <string name="attribute_handicaching_yes">Rangert på Handicaching.com</string>
     <string name="attribute_handicaching_no">Ikke rangert på Handicaching.com</string>
     <string name="attribute_munzee_yes">Inneholder en Munzee</string>
@@ -1835,10 +1789,6 @@
     <string name="command_rename_list_result">Endret listenavn</string>
     <string name="command_delete_list_result">Slettet listen</string>
     <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Legg denne cachen til favoritter (%d tilgjengelig)</item>
-        <item quantity="other">Legg denne cachen til favoritter (%d tilgjengelig)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Angir cacheikoner</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Angi cacheikon for %d</item>
@@ -1881,12 +1831,10 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
-    <string name="map_export_individual_route">Eksporter individuell rute</string>
     <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
     <string name="map_autotarget_individual_route">Sett rutestart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Sett rutestart som mål\" er deaktivert</string>
-    <string name="map_clear_manual_targets">Slett manuelle mål</string>
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/veipunkter fra din individuelle rute?</string>
@@ -1908,8 +1856,6 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
     <string name="routes_tracks_menu">Ruter / Spor</string>
-    <string name="unload_route_track">Slett rute/spor</string>
-    <string name="route">Rute</string>
     <string name="track">Spor</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -1972,7 +1918,6 @@
     <string name="downloadmap_download">nedlasting</string>
     <string name="downloadmap_retrieving_directory_data">Henter mappedata…</string>
     <string name="downloadmap_checking_for_updates">Ser etter oppdateringer…</string>
-    <string name="downloadtile_title">Mangler rutedata</string>
     <string name="downloadtile_info">c:geo kan ikke beregne den ønskede ruten fordi det mangler noen datafiler. Vil du laste ned de manglende dataene for ruting?</string>
     <string name="no_updates_found">Fant ingen oppdateringer</string>
     <string name="updates_check">Oppdateringssjekk</string>
@@ -2016,6 +1961,7 @@
     <string name="wizard_skip_wizard_warning">c:geo vil kanskje ikke fungere som forventet før konfigurasjonen er fullført. Avhengig av den manglende konfigurasjonen vil c:geo kanskje ikke kunne lese/lagre data som offline-kart, geocacher, loggfiler osv.\n\nNår du føler deg klar til å fullføre oppsettet, kan du enten velge \"Konfigurasjonsveiviser\" i hovedmenyen eller starte c:geo på nytt.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappesynkronisering fullført etter %2$s, %3$d av %4$s trengte synkronisering</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Hopp over</string>
@@ -2026,167 +1972,9 @@
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Områder</string>
-    <string name="rtl_heath">varme</string>
-    <string name="rtl_marsh">myr</string>
-    <string name="rtl_rock">stein</string>
-    <string name="rtl_glacier">isbre</string>
-    <string name="rtl_grass">gress</string>
-    <string name="rtl_farmland">dyrket mark</string>
-    <string name="rtl_vineyard">vingård</string>
-    <string name="rtl_water">vann</string>
-    <string name="rtl_military">militært</string>
-    <string name="rtl_nature_reserve">naurreservat</string>
-    <string name="rtl_nature_reserve_strict">naturreservat (strengt)</string>
-    <string name="rtl_cliff">klippe</string>
-    <string name="rtl_ridge">rygg</string>
-    <string name="rtl_reef">rev</string>
-    <string name="rtl_beach">strand</string>
-    <string name="rtl_beach_gravel">grusstrand</string>
-    <string name="rtl_spring">kilde</string>
-    <string name="rtl_powerline">kraftlinje</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_surface_unknown">ukjent overflate</string>
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_bench">benk</string>
-    <string name="rtl_cairn">varde</string>
-    <string name="rtl_drinking_water">drikkevann</string>
-    <string name="rtl_info_board">infotavle</string>
-    <string name="rtl_playground">lekeplass</string>
-    <string name="rtl_playground_private">privat lekeplass</string>
-    <string name="rtl_recycling">gjenvinning</string>
-    <string name="rtl_telephone">telefon</string>
-    <string name="rtl_toilets">toaletter</string>
-    <string name="rtl_volcano">vulkan</string>
-    <string name="rtl_attraction">attraksjon</string>
-    <string name="rtl_castle">borg</string>
-    <string name="rtl_cinema">kino</string>
-    <string name="rtl_cross">kryss</string>
-    <string name="rtl_fountain">fontene</string>
-    <string name="rtl_memorial">minnesmerke</string>
-    <string name="rtl_memorial_plaque">minnesmerketavle</string>
-    <string name="rtl_memorial_war">krigsminne</string>
-    <string name="rtl_monument">monument</string>
-    <string name="rtl_museum">museum</string>
-    <string name="rtl_ruins">ruiner</string>
-    <string name="rtl_stone_historic">historisk stein</string>
-    <string name="rtl_theatre">teater</string>
-    <string name="rtl_water_well">brønn</string>
-    <string name="rtl_wayside_cross">kors ved veien</string>
-    <string name="rtl_zoo">dyrehage</string>
-    <string name="rtl_library">bibliotek</string>
-    <string name="rtl_arts_centre">kunstsenter</string>
-    <string name="rtl_casino">kasino</string>
-    <string name="rtl_nightclub">nattklubb</string>
-    <string name="rtl_community_centre">samfunnshus</string>
-    <string name="rtl_townhall">rådhus</string>
-    <string name="rtl_courthouse">tinghus</string>
-    <string name="rtl_cliff_diving">klippedykking</string>
-    <string name="rtl_climbing">klatring</string>
-    <string name="rtl_golf">golf</string>
-    <string name="rtl_gym">treningsstudio</string>
-    <string name="rtl_miniature_golf">minigolf</string>
-    <string name="rtl_soccer">fotball</string>
-    <string name="rtl_stadium">stadion</string>
-    <string name="rtl_tennis">tennis</string>
-    <string name="rtl_via_ferrata">via ferrata</string>
-    <string name="rtl_water_park">vannpark</string>
-    <string name="rtl_airport">flyplass</string>
-    <string name="rtl_cable_car">kabelbane</string>
-    <string name="rtl_chair_lift">stolheis</string>
-    <string name="rtl_gondola">gondol</string>
-    <string name="rtl_goods_lift">vareheis</string>
-    <string name="rtl_helipad">helipad</string>
-    <string name="rtl_parking">parkering</string>
-    <string name="rtl_parking_private">privat parkering</string>
-    <string name="rtl_bicycle_parking">sykkelparkering</string>
-    <string name="rtl_bicycle_rental">sykkelutleie</string>
-    <string name="rtl_bicycle_shop">sykkelbutikk</string>
-    <string name="rtl_car_rental">bilutleie</string>
-    <string name="rtl_car_sharing">bildeling</string>
-    <string name="rtl_car_wash">bilvask</string>
-    <string name="rtl_car_shop">bilbutikk</string>
-    <string name="rtl_fuel">drivstoff</string>
-    <string name="rtl_ferry_terminal">fergeterminal</string>
-    <string name="rtl_alpine_hut">fjellhytte</string>
-    <string name="rtl_alpine_hut_private">privat fjellhytte</string>
-    <string name="rtl_alpine_hut_winter">vinterfjellhytte</string>
-    <string name="rtl_apartment">leilighet</string>
-    <string name="rtl_camp_site">campingplass</string>
-    <string name="rtl_caravan_site">bobilplass</string>
-    <string name="rtl_hostel">hostel</string>
-    <string name="rtl_hotel">hotell</string>
-    <string name="rtl_shelter_basic_hut">nødbu</string>
-    <string name="rtl_wilderness_hut">villmarkshytte</string>
-    <string name="rtl_wilderness_hut_private">privat hytte</string>
-    <string name="rtl_bar">bar</string>
-    <string name="rtl_biergarten">ølhage</string>
-    <string name="rtl_cafe">cafe</string>
-    <string name="rtl_fastfood">hurtigmat</string>
-    <string name="rtl_ice_cream">iskrem</string>
-    <string name="rtl_pub">pub</string>
-    <string name="rtl_restaurant">restaurant</string>
-    <string name="rtl_bbq">grill</string>
-    <string name="rtl_water_point">vannpunkt</string>
-    <string name="rtl_atm">minibank</string>
-    <string name="rtl_bakery">bakeri</string>
-    <string name="rtl_bank">bank</string>
-    <string name="rtl_beverages">drikkevarer</string>
-    <string name="rtl_books">bøker</string>
-    <string name="rtl_butcher">slakter</string>
-    <string name="rtl_chemist">farmasøyt</string>
-    <string name="rtl_convenience">nærbutikk</string>
-    <string name="rtl_farm_shop">gårdsbutikk</string>
-    <string name="rtl_mall">kjøpesenter</string>
-    <string name="rtl_marketplace">marked</string>
-    <string name="rtl_organic">økologisk</string>
-    <string name="rtl_postbox">postkasse</string>
-    <string name="rtl_postoffice">postkontor</string>
-    <string name="rtl_sports_shop">sportsbutikk</string>
-    <string name="rtl_supermarket">supermarked</string>
-    <string name="rtl_travel_agency">reisebyrå</string>
-    <string name="rtl_defibrillator">hjertestarter</string>
-    <string name="rtl_doctors">legekontor</string>
-    <string name="rtl_embassy">ambassade</string>
-    <string name="rtl_emergency_phone">nødtelefon</string>
-    <string name="rtl_firebrigade">brannstasjon</string>
-    <string name="rtl_hospital">sykehus</string>
-    <string name="rtl_clinic">klinikk</string>
-    <string name="rtl_pharmacy">apotek</string>
-    <string name="rtl_police">politi</string>
-    <string name="rtl_emergency_fire_hydrant">brannhydrant</string>
-    <string name="rtl_emergency_suction_point">nødsugepunkt</string>
-    <string name="rtl_border_control">grensekontroll</string>
-    <string name="rtl_bridge_movable">bevegelig bro</string>
-    <string name="rtl_cave_entrance">huleinngang</string>
-    <string name="rtl_elevator">heis</string>
-    <string name="rtl_ford">vadested</string>
-    <string name="rtl_ford_small">lite vadested</string>
-    <string name="rtl_gate">port</string>
-    <string name="rtl_gate_private">privat port</string>
-    <string name="rtl_geyser">geysir</string>
-    <string name="rtl_hot_spring">varm kilde</string>
-    <string name="rtl_ladder">stige</string>
-    <string name="rtl_lift_gate">port</string>
-    <string name="rtl_peak_small">liten topp</string>
-    <string name="rtl_rapids">stryk</string>
-    <string name="rtl_stone">stein</string>
-    <string name="rtl_traffic_signal">trafikklys</string>
-    <string name="rtl_viewpoint">utsiktspunkt</string>
-    <string name="rtl_waterfall">foss</string>
-    <string name="rtl_wetland">våtland</string>
-    <string name="rtl_mud">gjørme</string>
-    <string name="rtl_cemetery">gravplass</string>
-    <string name="rtl_cemetery_christian">kristen gravplass</string>
-    <string name="rtl_cemetery_jewish">jødisk gravplass</string>
-    <string name="rtl_cemetery_muslim">muslimsk gravplass</string>
-    <string name="rtl_pedestrian_area">fotgjengerområde</string>
-    <string name="rtl_trading">handel</string>
-    <string name="rtl_parking_restricted">begrenset parkering</string>
-    <string name="rtl_prison">fengsel</string>
-    <string name="rtl_ruin">ruin</string>
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

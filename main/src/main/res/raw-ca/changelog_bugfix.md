@@ -1,25 +1,24 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Correcció: l'estat favorit es perd en seleccionar una imatge mentre es prepara un registre
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
+- Correcció: missatge d'error no llegible en publicar un registre
+- Revertit: detecció de fitxers .map local (a causa d'efectes secundaris no desitjats)
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Correcció: Wherigo: maneja zones amb coordenades no vàlides o massa properes
+- Correcció: c:geo intenta importar fitxers locals ".map" com a GPX
+- Correcció: les notes d'usuari editades de la finestra emergent de vegades es perden
+- Solució: el registre d'edició mostra l'opció "informar del problema".
+- Correcció: el filtre en directe "No conté" no retorna cap catxé
+- Solució: es bloqueja en posar en pausa un mapa en línia de UnifiedMap
+- Correcció: aplicació obsoleta "GPS Bluetooth" a la llista d'aplicacions útils
+- Correcció: les variables i/o els valors s'eliminen erròniament en editar la nota personal
+- Correcció: Wherigo: informació d'altitud incorrecta
+- Correcció: Wherigo: tots els textos dels botons estan en majúscula
+- Correcció: bloqueig a la configuració
+- Correcció: c:geo no apareix a Play Store per a dispositius sense GPS
+- Correcció: c:geo fallava silenciosament a la selecció de carpetes en determinades configuracions
+- Canvi: convertiu extremcaching.com en un connector fora de línia (el seu servei ha cessat)
+- Correcció: actualitzeu la informació d'estat al mapa sobre els canvis de nivell de zoom

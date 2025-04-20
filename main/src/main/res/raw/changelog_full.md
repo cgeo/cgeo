@@ -1,9 +1,253 @@
 # Full changelog
-This changelog contains all changes which are not intermediate developing steps. It is more detailed than the changelogs we publish in our releases.
+This changelog contains all changes which are not intermediate developing steps. It is sometimes more detailed than the changelogs we publish in our releases.
 
 <!-- --------------------------------------------------------------------------------- --->
 
-## Next release (branch `release`)
+## 2025.04.02 Bugfix Release
+
+- Fix: Wherigo links without host name not detected
+- Fix: Non-legible error message when posting a log
+- Reverted: Local .map file detection (due to unwanted side-effects)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2025.03.06 Bugfix Release
+
+- Fix: Wherigo: Handle zones with invalid/too-close coordinates
+- Fix: c:geo tries to import local ".map" files as GPX
+- Fix: Edited user notes from popup sometimes get lost
+- Fix: Editing log shows "report problem" option
+- Fix: Live Filter 'Does not contain' fails to return any caches
+- Fix: Crashes on pausing a UnifiedMap online map
+- Fix: Outdated app "GPS Bluethooth" in useful apps list
+- Fix: Variables and/or values are deleted erroneously when editing personal note
+- Fix: Wherigo: Wrong altitude info
+- Fix: Wherigo: All button texts are capitalized
+- Fix: Crash in settings
+- Fix: c:geo not listed in Play Store for GPS-less devices
+- Fix: c:geo crashing silently on folder selection in certain configurations
+- Change: Make extremcaching.com an offline connector (their service has ceased)
+- Fix: Update status info in map on zoom level changes
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2025.01.18 Feature Release
+
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
+(You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+
+### Map
+- New: Store map theme per tile provider (UnifiedMap)
+- New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Add separator between offline and online map sources
+- New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
+- Fix: Address search not considering live mode (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
+- Change: Make long-press pin more c:geo-like
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
+- Fix: Map not updating changed caches
+
+### Cache details
+- New: Not yet existing variables used in projection get created in variable list
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
+- Fix: Multiple images in personal note not added to images tab
+- Fix: Handling of projections in waypoints and personal notes
+- New: Long tap on date in logging retrieves previous log date
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- New: Confirm overwriting log on quick offline log
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
+
+### General
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- New: Allow multiple hierarchy levels in cache lists
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Fix: "Open in browser" not working for trackable logs
+- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- New: Allow clearing filter if no named filter is stored
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
+- New: Additional emojis for cache icons
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
+- Fix: Some sliders in settings having problems with uninitialized values
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.12.01 Bugfix Release
+
+- Fix: Fix: More time zone issues for events starting around midnight or noon
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.11.22 Bugfix Release
+
+- Fix: Time zone issues with new event time detection
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.11.09 Bugfix Release
+
+- Fix: Some issues with new event time detection
+- Fix: Crash when editing variable field
+- Fix: Crash on importing GPX file (workaround)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.10.27 Bugfix Release
+
+- Fix: Missing event times on cache download (website change)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.10.14 Bugfix Release
+
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Wrong elevation chart for tracks with multiple segments
+- Fix: Some crashes in Mapsforge map
+- New: Show warning for activated gc connector without credentials
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.09.18 Bugfix Release
+
+- Fix: Missing parametrization for user-defined tileprovider
+- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
+- Fix: Found cache not marked as found on map (UnifiedMap)
+- Fix: Elevation being scaled to kilometers/miles on home screen
+- Fix: Attended events being shown as "found"
+- Fix: Bumping white space in settings - system
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.09.09 Bugfix Release
+
+- Fix: "Manual login" cannot be activated
+- Fix: "Manual login" shown even without stored credentials
+- Fix: Map crash on opening navigation menu
+- Fix: Crash on editing personal note without cache
+- Fix: Certain spoiler images not detected
+- Fix: Current elevation on map shown with fraction
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.09.01 Feature Release
+
+This is basically the same as release 2024.08.19, but with different foreground service type configuration. This build is available on Play Store again.
+
+The following features are included in addition to release 2024.08.19:
+
+- Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Show warnings when HTTP error 429 occurs (Too many requests) (debug mode only)
+- New: Offer manual login on Captcha error
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.08.19 Feature Release
+
+### Notice
+
+This release is NOT available at Play Store currently.
+
+Reason for this are recent changes in Play Store policies which requires us to declare all service types c:geo offers (e. g.: downloading a map uses a so-called "foreground service"). There is quite a list of conditions which type of foreground service has to be declared for what type of service, but so far we seemingly have not found the right combination for the services c:geo offers. Thus Play Store has rejected c:geo's 2024.08.19 release (although it had accepted the beta versions for it, that used exactly the same declarations). We are working on it.
+
+### Map
+- Change: Search for coordinates: Show direction and distance to target and not to current position
+- Change: Removed map theme legends
+- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Fix: Multiple navigation selection popups on long-press
+- New: "Edit Personal Note" from cache info sheet
+- New: Support user-defined tile providers
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- New: Cache store/refresh from popup moved into background
+- New: Graphical D/T indicator in cache info sheet
+
+### Cache details
+- Change: Simplify long-tap action in cache details and trackable details
+- Change: Change "edit lists" icon from pencil to list + pencil
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
+- Fix: Spoiler images no longer being loaded (website change)
+- New: Allow user-stored cache images on creating/editing log
+- New: Show images linked in "personal note" in Images tab
+- New: Smoother scaling of log images
+
+### General
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
+- Change: Updated integrated BRouter to v1.7.5
+- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
+- Change: Improve description for "maintenance" function (remove orphaned data)
+- Fix: Search results for a location no longer sorted by distance to target location
+- Fix: Flickering on cache list refresh
+- Fix: Search for geokretys no longer working when using trackingcodes
+- New: Switch to set found state of Lab Adventures either manually or automatically
+- New: List selection dialog: Auto-group cache lists having a ":" in their name
+- New: Read elevation info from track on import
+- New: API to Locus now supporting cache size "virtual"
+- New: "Corrected coordinates" filter
+- New: Added "none"-entry to selection of routing profiles
+- New: Allow display of passwords in connector configuration
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.07.07 Bugfix Release
+
+- Fix: Log length check counting some characters twice
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: Adapt to hylly website change
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Enhance logging in case of GC login errors
+- New: Additional theming options for Google Maps
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.06.02 Bugfix Release
+
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
+- New: Show event date to cache selector
+- Fix: Login to OC platform not recognized by installation wizard
+- Fix: Routing not working by default after fresh installation
+- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
+- Fix: Individual routes exported as track cannot be read by Garmin devices
+- Fix: Loading trackables from internal database fails under certain conditions
+- Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.04.25 Bugfix Release
+
+- Fix: Trackable logging not working again (website changes)
+- Fix: Username not detected during login when containing certain special characters
+- Fix: Elevation info is rotating with position marker
+- Fix: Trackable links with TB parameter not working
+- New: Add hint to disabled keyword search for basic members
 
 <!-- --------------------------------------------------------------------------------- --->
 

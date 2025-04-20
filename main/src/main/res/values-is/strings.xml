@@ -109,8 +109,6 @@
     <string name="log_problem_other_label">Annað</string>
     <!-- Contacts -->
     <!-- translation -->
-    <string name="translate_to_sys_lang">Þýtt að %s</string>
-    <string name="translate_to_english">Þýða yfir á ensku</string>
     <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
@@ -127,7 +125,6 @@
     <string name="err_detail_cache">c:geo getur ekki sýnt geokassann sem þú vilt. Er þetta í alvörunni geokassi?</string>
     <string name="err_detail_cache_find">c:geo finnur ekki geocatch</string>
     <string name="err_detail_cache_find_some">c:geo finnur ekki þetta geocatch.</string>
-    <string name="err_detail_cache_find_any">c:geo finnur ekki nein geocatch.</string>
     <string name="err_detail_still_working">Er enn að vinna í öðru verki.</string>
     <string name="err_application_no">c:geo finnur ekki forrit við hæfi.</string>
     <string name="err_auth_initialize">c:geo gat ekki upphafsstillt heimildarveitingarferlið.</string>
@@ -154,7 +151,6 @@
     <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
     <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
     <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
-    <string name="info_log_post_failed_reason">Ástæða: %s</string>
     <string name="info_log_post_retry">Reyna aftur</string>
     <string name="info_log_post_save">Vista utan netsambands</string>
     <string name="info_log_cleared">Færsla var hreinsuð.</string>
@@ -198,7 +194,6 @@
     <string name="caches_sort_rating">Einkunnagjöf</string>
     <string name="caches_sort_vote">Gefa einkunn</string>
     <string name="caches_sort_date_hidden">Hvenær komið fyrir</string>
-    <string name="caches_sort_date_logged">Hvenær skráð</string>
     <string name="caches_sort_finds">Fundir</string>
     <string name="caches_sort_state">Staða</string>
     <string name="caches_sort_storage">Hvenær vistað í tæki</string>
@@ -266,7 +261,6 @@
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
     <string name="settings_authorize">Veita c:geo umboð</string>
     <string name="settings_gc_description">Veita c:geo aðgang að geocaching.com til að leita að kössum.</string>
-    <string name="settings_ec_description">Veita c:geo aðgang að extremcaching.com til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
     <string name="settings_su_description">Veita c:geo aðgang að geocaching.su til að leita að kössum.</string>
     <string name="init_summary_oc_de">Hlaða niður kössum frá opencaching.de</string>
     <string name="init_summary_oc_pl">Hlaða niður kössum frá opencaching.pl</string>
@@ -296,8 +290,6 @@
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
     <string name="init_address">Sýna heimilisfang</string>
-    <string name="init_save_log_img">Vista myndir</string>
-    <string name="init_summary_save_log_img">Vista myndir úr færslum</string>
     <string name="init_units">Nota breskar mælieiningar</string>
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
     <string name="init_log_offline">Skráning án netsambands</string>
@@ -360,6 +352,7 @@
     <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d kassi</item>
@@ -454,6 +447,7 @@
     <string name="cache_image_open_file">Opna sem skrá</string>
     <string name="cache_image_open_browser">Opna í vafra</string>
     <string name="cache_share_field">Deila</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
@@ -497,14 +491,7 @@
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
-    <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
-    <string name="search_address_button">Leita eftir heimilisfangi</string>
-    <string name="search_kw_prefill">Leitarorð</string>
-    <string name="search_kw_button">Leita eftir leitarorðum</string>
-    <string name="search_hbu_prefill">Eigandi</string>
-    <string name="search_hbu_button">Leita eftir nafni eiganda</string>
-    <string name="search_tb_button">Leita að ferðalangi</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Sæki upplýsingar um ferðalang…</string>
     <string name="trackable_browser_open">Opna í vafra</string>
@@ -533,16 +520,11 @@
     <string name="use_gps">Aðeins nota GPS</string>
     <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Leyfi</string>
-    <string name="license_show">Sýna leyfi</string>
-    <string name="license_dismiss">Loka</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_question">Dagsetning viðburðar er í fortíðinni. Viltu samt bæta honum við?</string>
     <string name="helper_sendtocgeo_title">Senda í c:geo</string>
     <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
     <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
-    <string name="helper_bluetoothgps_description">Leyfir þér að nota utanáliggjandi GPS móttakara til þess að fá nákvæmari staðsetningarupplýsingar, og getur sparað rafhlöðuna í tækinu þínu.</string>
     <!-- export -->
     <string name="export">Flytja út</string>
     <string name="export_failed">Útflutningur tókst ekki</string>
@@ -571,9 +553,7 @@
     <string name="attribute_winter_yes">Í boði yfir veturinn</string>
     <string name="attribute_winter_no">Ekki í boði yfir veturinn</string>
     <string name="attribute_firstaid_yes">Þarfnast viðhalds</string>
-    <string name="attribute_firstaid_no">Þarfnast ekki viðhalds</string>
     <string name="attribute_cow_yes">Fylgist með búfé</string>
-    <string name="attribute_cow_no">Ekkert búfé</string>
     <string name="attribute_nightcache_yes">Næturkassi</string>
     <string name="attribute_nightcache_no">Ekki næturkassi</string>
     <string name="attribute_parkngrab_yes">Leggja og grípa</string>
@@ -592,17 +572,11 @@
     <string name="attribute_teamwork_yes">Krefst teymisvinnu</string>
     <string name="attribute_teamwork_no">Krefst ekki teymisvinnu</string>
     <string name="attribute_fee_yes">Aðgangs- eða bílastæðagjald</string>
-    <string name="attribute_fee_no">Aðgangs- eða bílastæðagjalds ekki krafist</string>
     <string name="attribute_rappelling_yes">Krefst klifurbúnaðar</string>
-    <string name="attribute_rappelling_no">Krefst ekki klifurbúnaðar</string>
     <string name="attribute_boat_yes">Krefst báts</string>
-    <string name="attribute_boat_no">Báts ekki krafist</string>
     <string name="attribute_flashlight_yes">Krefst vasaljóss</string>
-    <string name="attribute_flashlight_no">Krefst ekki vasaljóss</string>
     <string name="attribute_uv_yes">Krefst útfjólublás ljóss</string>
-    <string name="attribute_uv_no">Krefst ekki útfjólublás ljóss</string>
     <string name="attribute_ticks_yes">Mítlar</string>
-    <string name="attribute_ticks_no">Engir mítlar</string>
     <string name="attribute_danger_yes">Hættulegt svæði</string>
     <string name="attribute_stroller_yes">Aðgengilegt barnavögnum</string>
     <string name="attribute_stroller_no">Ekki aðgengilegt barnavögnum</string>
@@ -694,13 +668,13 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
+    <!-- emoji categories -->
 </resources>

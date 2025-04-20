@@ -332,7 +332,7 @@ public class SuParser {
     public static List<Geocache> parseCaches(final ObjectNode response) {
         // Check for empty result
         final JsonNode results = response.path("data");
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             return Collections.emptyList();
         }
 
