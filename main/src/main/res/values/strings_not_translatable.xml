@@ -88,7 +88,7 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2024-01 to 2024-12 -->
+    <!-- currently listed: contributions 2025-04 to 2024-04 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
@@ -99,6 +99,8 @@
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
+    okainov|https://github.com/okainov|c|
+    ReggieDoodle|https://github.com/ReggieDoodle|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -146,7 +148,6 @@
     ncorreia||c|
     nmrsmn||c|
     NotWoods|https://github.com/NotWoods|c|
-    okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     osmpaws|https://github.com/osmpaws|c|
     Pavol Babinčák||c|
