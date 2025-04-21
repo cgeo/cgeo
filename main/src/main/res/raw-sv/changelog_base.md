@@ -32,6 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
 - Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
+- New: Offline hillshading for UnifiedMap (VTM variant)
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
@@ -50,6 +51,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - Nyhet: Stöd för att öppna lokala Wherigo-filer
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Allmänt
 - New: Redesigned search page
