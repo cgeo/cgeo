@@ -28,11 +28,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
