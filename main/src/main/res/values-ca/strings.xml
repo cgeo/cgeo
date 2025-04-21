@@ -2653,6 +2653,8 @@
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">interior</string>
     <string name="wherigo_zone_near">prop</string>
+    <string name="wherigo_zone_navigate_compass">Brúixola al centre</string>
+    <string name="wherigo_zone_copy_coordinates">Copia les coordenades del centre</string>
     <string name="wherigo_choose_cartridge">Trieu el cartutx</string>
     <string name="wherigo_choose_new_loadgame">Trieu un joc o un joc nou per carregar</string>
     <string name="wherigo_choose_savegame_slot">Trieu una ranura on desar</string>
@@ -2671,6 +2673,7 @@
     <string name="wherigo_download_progress_login">Iniciant sessió…</string>
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
     <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```</string>
