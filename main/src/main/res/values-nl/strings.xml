@@ -2671,6 +2671,7 @@
     <string name="wherigo_download_progress_login">Bezig met inloggen…</string>
     <string name="wherigo_download_progress_started">Download gestart</string>
     <string name="wherigo_download_progress_download_status">Gedownload %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Log in op www.wherigo.com en accepteer eerst hun algemene voorwaarden</string>
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
     <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```</string>
