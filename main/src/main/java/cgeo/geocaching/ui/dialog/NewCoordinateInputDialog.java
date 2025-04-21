@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.android.material.textfield.TextInputLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the existing coordinate dialog
