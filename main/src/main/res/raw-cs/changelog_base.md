@@ -32,6 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
 - Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
+- New: Offline hillshading for UnifiedMap (VTM variant)
 
 ### Detaily kešky
 - Nový: Offline překlad textu a logů (experimentální)
@@ -50,6 +51,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - Novinka: Podpora otevírání místních Wherigo souborů
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
