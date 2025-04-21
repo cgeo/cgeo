@@ -3,7 +3,6 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
