@@ -11,6 +11,8 @@ import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
+import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
+import cgeo.geocaching.unifiedmap.layers.mbtiles.MBTilesLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -122,6 +124,12 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
         mMapView.getMapScaleBar().setMarginHorizontal(mapAttPx);
+
+        if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
+            for (MBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
+                mMapView.getLayerManager().getLayers().add(backgroundMap);
+            }
+        }
 
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(v -> displayMapAttribution());
