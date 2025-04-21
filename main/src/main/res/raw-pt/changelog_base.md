@@ -32,6 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
 - Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
 - New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
 
 ### Detalhes da cache
 - New: Offline translation of listing text and logs (experimental)
@@ -50,6 +51,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - Novo: Suporte para abrir ficheiros Wherigo locais
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Geral
 - Novo: Página de pesquisa redesenhada
