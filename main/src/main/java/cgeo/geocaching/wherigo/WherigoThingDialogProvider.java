@@ -97,7 +97,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     ((ThingAction) a).getTextParam(),
                 item -> {
                     if (item instanceof Action) {
-                        WherigoUtils.callAction((Thing) eventTable, (Action) item);
+                        WherigoUtils.callAction((Thing) eventTable, (Action) item, activity);
                         refreshGui(activity, control, binding);
                         return;
                     }

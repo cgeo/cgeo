@@ -49,6 +49,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Container;
@@ -124,18 +125,34 @@ public final class WherigoUtils {
         return (action.isEnabled() && action.getActor().visibleToPlayer()) ? action.text : action.text + " (debug)";
     }
 
-    public static void callAction(final Thing thing, final Action action) {
+    public static void callAction(final Thing thing, final Action action, final Activity activity) {
         if (thing == null || action == null || !action.isEnabled() || !action.getActor().visibleToPlayer()) {
             return;
         }
 
         final String eventName = "On" + action.getName();
 
-        if (action.hasParameter() && action.getActor() != thing) {
-            Engine.callEvent(action.getActor(), eventName, thing);
+        if (action.hasParameter()) {
+            if (action.getActor() == thing) {
+                //choose a target for the action
+                final List<EventTable> targets = getActionTargets(action);
+                WherigoViewUtils.chooseThing(activity, targets, WherigoThingType.THING.getIconId(), "Choose Target", target -> {
+                    WherigoDialogManager.get().display(new WherigoThingDialogProvider(target));
+                    Engine.callEvent(action.getActor(), eventName, target);
+                });
+            } else {
+                Engine.callEvent(action.getActor(), eventName, thing);
+            }
         } else {
             Engine.callEvent(thing, eventName, null);
         }
+    }
+
+    public static List<EventTable> getActionTargets(final Action action) {
+        final List<Thing> targets = new ArrayList<>();
+        targets.addAll(WherigoGame.get().getItems());
+        targets.addAll(WherigoGame.get().getInventory());
+        return targets.stream().filter(t -> t.isVisible() && action.isTarget(t)).collect(Collectors.toList());
     }
 
     public static boolean isVisibleToPlayer(final EventTable et) {

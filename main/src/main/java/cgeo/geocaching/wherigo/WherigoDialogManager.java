@@ -209,6 +209,9 @@ public class WherigoDialogManager {
     }
 
     private void clearInternal() {
+        if (currentDialogControl != null) {
+            currentDialogControl.setPauseOnDismiss(false);
+        }
         closeCurrentDialog();
         currentDialogProvider = null;
         state = State.NO_DIALOG;
