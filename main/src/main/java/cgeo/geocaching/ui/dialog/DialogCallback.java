@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.location.Geopoint;
+
 public interface DialogCallback {
-    void onDialogClosed(String input);
+    void onDialogClosed(Geopoint input);
 }

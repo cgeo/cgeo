@@ -43,11 +43,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         useCurrentPosition.setOnClickListener(v -> toggleCurrent());
         location = LocationDataProvider.getInstance().currentGeo().getCoords();
 
-        setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates));
-        setCoordsButton.setLines(2);
-        setCoordsButton.setSingleLine(false);
-        setCoordsButton.setPadding(dpToPixel(10), dpToPixel(10), dpToPixel(10), dpToPixel(10));
-        setCoordsButton.setTextSize(16);
+        setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates), R.layout.button_coordinate_view);
         setCoordsButton.setEnabled(false);
         final ViewGroup.LayoutParams ll1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setCoordsButton.setLayoutParams(ll1);
@@ -112,9 +108,11 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         dialog.show(location);
     }
 
-    public void onDialogClosed(final String input) {
-        // Handle the data from the dialog - temp parse it until full UI is in place
-        this.location = GeopointParser.parse(input, null);
-        ViewUtils.setCoordinates(location, setCoordsButton);
+    public void onDialogClosed(final Geopoint input) {
+        // Handle the data from the dialog
+        if (input.isValid()) {
+            this.location = input;
+            ViewUtils.setCoordinates(location, setCoordsButton);
+        }
     }
 }

@@ -22,17 +22,21 @@
 		android:orientation="vertical"
 		android:padding="15dp">
 
-		<EditText
-        android:id="@+id/latitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+		<com.google.android.material.textfield.TextInputLayout android:id="@+id/latitudeFrame" style="@style/textinput_edittext_singleline">
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/latitude"
+				style="@style/textinput_embedded_singleline"
+				android:inputType="textNoSuggestions"
+				android:hint="@string/latitude" />
+		</com.google.android.material.textfield.TextInputLayout>
 
-		android:padding="8dp" />
-
-		<EditText
-        android:id="@+id/longitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+		<com.google.android.material.textfield.TextInputLayout android:id="@+id/longitudeFrame" style="@style/textinput_edittext_singleline">
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/longitude"
+				style="@style/textinput_embedded_singleline"
+				android:inputType="textNoSuggestions"
+				android:hint="@string/longitude" />
+		</com.google.android.material.textfield.TextInputLayout>
 
 		<LinearLayout
 			android:id="@+id/configurableLatitude"

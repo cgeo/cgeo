@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
@@ -27,6 +28,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +43,8 @@ public class NewCoordinateInputDialog {
     private final DialogCallback callback;
     Spinner spinner;
     private Settings.CoordInputFormatEnum currentFormat = null;
+
+    private TextInputLayout eLatFrame, eLonFrame;
     private EditText plainLatitude, plainLongitude;
     private LinearLayout configurableLatitude, configurableLongitude;
     private Button bLatitude, bLongitude;
@@ -85,7 +90,6 @@ public class NewCoordinateInputDialog {
         builder.setView(theView);
 
         final AlertDialog dialog = builder.create();
-        dialog.show();
 
         final NewCoordinateInputDialogBinding binding = NewCoordinateInputDialogBinding.bind(theView);
 
@@ -126,6 +130,9 @@ public class NewCoordinateInputDialog {
         });
 
         // Populate the text fields
+        eLatFrame = binding.latitudeFrame;
+        eLonFrame = binding.longitudeFrame;
+
         plainLatitude = binding.latitude;
         plainLongitude = binding.longitude;
 
@@ -191,6 +198,8 @@ public class NewCoordinateInputDialog {
             gp = currentCoords();
             updateGui();
         });
+
+        dialog.show();
     }
 
     // Close dialog and return selected coordinates to caller
@@ -202,7 +211,7 @@ public class NewCoordinateInputDialog {
             final Geopoint entered = new Geopoint(result);
             if (entered.isValid()) {
                 // Invoke the callback to notify that the dialog is closed
-                callback.onDialogClosed(result);
+                callback.onDialogClosed(entered);
                 return true;
             }
         } catch (Geopoint.ParseException e) {
@@ -221,6 +230,11 @@ public class NewCoordinateInputDialog {
 
         String lat = bLatitude.getText().toString();
         String lon = bLongitude.getText().toString();
+
+        if (currentFormat.equals(Settings.CoordInputFormatEnum.Deg)) {
+            lat = "S".equalsIgnoreCase(lat) ? "-" : "";
+            lon = "W".equalsIgnoreCase(lon) ? "-" : "";
+        }
 
         lat += String.valueOf(latitudeDegree.getText());
         lon += String.valueOf(longitudeDegree.getText());
@@ -246,10 +260,12 @@ public class NewCoordinateInputDialog {
     private void updateGui() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
+            eLatFrame.setVisibility(View.VISIBLE);
+            eLonFrame.setVisibility(View.VISIBLE);
             plainLatitude.setVisibility(View.VISIBLE);
             plainLongitude.setVisibility(View.VISIBLE);
-            plainLatitude.setText(String.valueOf(gp.getLatitude()));
-            plainLongitude.setText(String.valueOf(gp.getLongitude()));
+            plainLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            plainLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
             configurableLatitude.setVisibility(View.GONE);
             configurableLongitude.setVisibility(View.GONE);
             return;
@@ -257,6 +273,8 @@ public class NewCoordinateInputDialog {
 
         plainLatitude.setVisibility(View.GONE);
         plainLongitude.setVisibility(View.GONE);
+        eLatFrame.setVisibility(View.GONE);
+        eLonFrame.setVisibility(View.GONE);
         configurableLatitude.setVisibility(View.VISIBLE);
         configurableLongitude.setVisibility(View.VISIBLE);
 
