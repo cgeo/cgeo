@@ -32,6 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - Новое: Длительное нажатие на значок выбора карты для выбора предыдущего провайдера карт (ЕдинаяКарта)
 - Новое: Возможность настраивать отображаемое название для автономных карт в сопутствующем файле (ЕдинаяКарта)
 - Новое: Долгий тап по "включить онлайн", чтобы скачать тайники
+- New: Offline hillshading for UnifiedMap (VTM variant)
 
 ### Детали тайника
 - Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
@@ -50,6 +51,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - Новое: Поддержка открытия локальных файлов Wherigo
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Общее
 - Новое: Переработана страница поиска
