@@ -32,6 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
 
 ### Cache details
 - New: Offline translation of listing text and logs (experimental)
