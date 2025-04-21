@@ -2711,6 +2711,8 @@
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">wewnątrz</string>
     <string name="wherigo_zone_near">blisko</string>
+    <string name="wherigo_zone_navigate_compass">Kompas do środka</string>
+    <string name="wherigo_zone_copy_coordinates">Kopiuj współrzędne środkowe</string>
     <string name="wherigo_choose_cartridge">Wybierz kartridż</string>
     <string name="wherigo_choose_new_loadgame">Wybierz nową grę lub grę do załadowania</string>
     <string name="wherigo_choose_savegame_slot">Wybierz slot do zapisu</string>
@@ -2729,6 +2731,7 @@
     <string name="wherigo_download_progress_login">Logowanie…</string>
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Zaloguj się najpierw na www.wherigo.com i zaakceptuj ich warunki i postanowienia</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```</string>
