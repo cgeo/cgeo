@@ -137,7 +137,14 @@ public final class WherigoViewUtils {
     }
 
     private static void chooseThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType, final Consumer<EventTable> thingSelectAction) {
-        final List<EventTable> things = thingType.getThingsForUserDisplay();
+        chooseThing(activity, thingType.getThingsForUserDisplay(), thingType.getIconId(),
+            thingType.toUserDisplayableString(), thingSelectAction);
+    }
+
+    public static void chooseThing(@NonNull final Activity activity, @NonNull final List<EventTable> things,
+           final int defaultIconId, final String title,
+           final Consumer<EventTable> thingSelectAction) {
+
         if (things.isEmpty()) {
             return;
         }
@@ -162,13 +169,13 @@ public final class WherigoViewUtils {
             })
             .setDisplayIconMapper(item -> {
                 final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
-                return iconDrawable == null ? ImageParam.id(thingType.getIconId()) : ImageParam.drawable(iconDrawable);
+                return iconDrawable == null ? ImageParam.id(defaultIconId) : ImageParam.drawable(iconDrawable);
             })
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
             .setItemPadding(10, 0);
 
         SimpleDialog.of(activity)
-            .setTitle(TextParam.text(thingType.toUserDisplayableString()))
+            .setTitle(TextParam.text(title))
             .selectSingle(model, thingSelectAction::accept);
     }
 
