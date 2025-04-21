@@ -2,7 +2,7 @@
  * Enterprise plugin replaces Build scan plugin from gradle 6, see https://docs.gradle.com/enterprise/gradle-plugin/
  */
 plugins {
-    id 'com.gradle.enterprise' version '3.19.2'
+    id 'com.gradle.develocity' version '3.19.2'
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.
@@ -23,9 +23,9 @@ buildCache {
     }
 }
 
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
+        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+        termsOfUseAgree = "yes"
     }
 }
