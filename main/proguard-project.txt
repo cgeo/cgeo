@@ -52,6 +52,9 @@
 -dontwarn java.nio.channels.SeekableByteChannel
 -dontwarn java.nio.file.attribute.FileAttribute
 -dontwarn java.io.File
+# https://issuetracker.google.com/issues/284656253#comment12
+-if class * extends org.apache.commons.compress.archivers.zip.ZipExtraField
+-keep class <1> { <init>(); }
 
 # commons text
 -dontwarn java.util.Base64
