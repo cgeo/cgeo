@@ -1279,6 +1279,7 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline kaarten</string>
     <string name="persistablefolder_offline_maps_themes">Kaart Thema\'s</string>
+    <string name="persistablefolder_backgroundmaps">Achtergrond Kaarten</string>
     <string name="persistablefolder_offline_maps_shading">Kaart Arcering Bestanden</string>
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
@@ -2502,6 +2503,7 @@
     <string name="receivedownload_integritycheck_failed">Integriteitscontrole mislukt</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
+    <string name="downloadbackground_title">Achtergrondkaart downloaden</string>
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_filename">%s downloaden</string>
