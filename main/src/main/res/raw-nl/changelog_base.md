@@ -32,7 +32,8 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
 - Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
 - Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
-- New: Offline hillshading for UnifiedMap (VTM variant)
+- Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
+- Nieuw: Ondersteuning voor achtergrondkaarten (alleen UnifiedMap VTM)
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
