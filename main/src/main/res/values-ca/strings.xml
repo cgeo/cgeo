@@ -1280,6 +1280,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapes fora de línia</string>
     <string name="persistablefolder_offline_maps_themes">Temes de mapes</string>
+    <string name="persistablefolder_backgroundmaps">Mapes de fons</string>
     <string name="persistablefolder_offline_maps_shading">Fitxers d\'ombrejat de mapes</string>
     <string name="persistablefolder_backup">Còpia de seguretat</string>
     <string name="persistablefolder_logfiles">Arxius de registre</string>
@@ -2504,6 +2505,7 @@
     <string name="receivedownload_integritycheck_failed">La comprovació d\'integritat ha fallat</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
+    <string name="downloadbackground_title">Descarrega el mapa de fons</string>
     <string name="download_title">Descarrega l\'arxiu</string>
     <string name="downloadmap_info">Seleccioneu un fitxer de mapa per a la vostra regió tocant la icona \"Desa\".\n\nLa baixada es realitza en segon pla. Quan la transferència s\'hagi completat, el fitxer es copia a la carpeta de mapes de C:geo i es defineix com a mapa actual.\n\nVés amb compte: la descàrrega d\'un mapa pot provocar un gran trànsit a la xarxa.</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
