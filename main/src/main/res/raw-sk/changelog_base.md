@@ -33,6 +33,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap VTM only)
 
 ### Detaily kešky
 - New: Offline translation of listing text and logs (experimental)
