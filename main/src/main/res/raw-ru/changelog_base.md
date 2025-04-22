@@ -33,6 +33,7 @@ Until then, you can switch between the different implementations in settings => 
 - Новое: Возможность настраивать отображаемое название для автономных карт в сопутствующем файле (ЕдинаяКарта)
 - Новое: Долгий тап по "включить онлайн", чтобы скачать тайники
 - New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap VTM only)
 
 ### Детали тайника
 - Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
