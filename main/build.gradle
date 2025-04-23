@@ -170,7 +170,7 @@ android {
             res.srcDirs = ['src/test/res']
         }
         // device/emulator based instrumentation tests in source set "androidTest"
-        androidTest{
+        androidTest {
             setRoot("src/androidTest")
             manifest.srcFile 'src/androidTest/AndroidManifest.xml'
             java.srcDir 'src/androidTest/java'
@@ -180,7 +180,8 @@ android {
     }
 
     testOptions {
-        resultsDir = "$project.buildDir/build/test-results"
+        Provider<Directory> output = layout.buildDirectory.dir("test-results")
+        resultsDir = output.get().asFile
     }
 
     lint {
