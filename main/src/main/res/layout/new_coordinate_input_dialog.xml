@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+	<include android:id="@+id/actionbar" layout="@layout/actionbar_popup" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialogSpinner"
+        android:padding="8dp" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/border_active"
+		android:layout_marginTop="10dp"
+		android:orientation="vertical"
+		android:padding="15dp">
+
+		<com.google.android.material.textfield.TextInputLayout android:id="@+id/latitudeFrame" style="@style/textinput_edittext_singleline">
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/latitude"
+				style="@style/textinput_embedded_singleline"
+				android:inputType="textNoSuggestions"
+				android:hint="@string/latitude" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout android:id="@+id/longitudeFrame" style="@style/textinput_edittext_singleline">
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/longitude"
+				style="@style/textinput_embedded_singleline"
+				android:inputType="textNoSuggestions"
+				android:hint="@string/longitude" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<LinearLayout
+			android:id="@+id/configurableLatitude"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+				<Button
+					android:id="@+id/hemisphereLatitude"
+					style="@style/button_letter"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/textSize_inputCoords"
+					android:layout_weight="2" />
+
+				<EditText
+					android:id="@+id/editTextLatDegrees"
+					android:layout_width="0dp"
+					android:inputType="number"
+					android:layout_height="wrap_content"
+					android:selectAllOnFocus="true"
+					android:hint="@string/cc_hint_degrees"
+					android:gravity="right"
+					android:maxLength = "2"
+					android:layout_weight="3"/>
+
+				<EditText
+					android:id="@+id/editTextLatMinutes"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:selectAllOnFocus="true"
+					android:inputType="number"
+					android:gravity="right"
+					android:maxLength = "2"
+					android:layout_weight="3"/>
+
+				<EditText
+					android:id="@+id/editTextLatSeconds"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:selectAllOnFocus="true"
+					android:inputType="number"
+					android:gravity="right"
+					android:maxLength = "2"
+					android:layout_weight="3"/>
+
+				<TextView
+					android:id="@+id/LatDecimal"
+					android:text="."
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight= "0.5"/>
+
+				<EditText
+					android:id="@+id/editTextLatFraction"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:selectAllOnFocus="true"
+					android:inputType="number"
+					android:layout_weight="4"
+					android:maxLength = "5"
+					android:gravity="left" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/configurableLongitude"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+				<Button
+					android:id="@+id/hemisphereLongitude"
+					style="@style/button_letter"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/textSize_inputCoords"
+					android:layout_weight="2" />
+
+				<EditText
+					android:id="@+id/editTextLonDegrees"
+					android:layout_width="0dp"
+					android:inputType="number"
+					android:selectAllOnFocus="true"
+					android:layout_height="wrap_content"
+					android:hint="@string/cc_hint_degrees"
+					android:gravity="right"
+					android:maxLength = "3"
+					android:layout_weight="3"/>
+
+				<EditText
+					android:id="@+id/editTextLonMinutes"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:selectAllOnFocus="true"
+					android:gravity="right"
+					android:maxLength = "2"
+					android:layout_weight="3" />
+
+				<EditText
+					android:id="@+id/editTextLonSeconds"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:selectAllOnFocus="true"
+					android:gravity="right"
+					android:maxLength = "2"
+					android:layout_weight="3" />
+
+				<TextView
+					android:id="@+id/LonDecimal"
+					android:text="."
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight= "0.5"/>
+
+				<EditText
+					android:id="@+id/editTextLonFraction"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:selectAllOnFocus="true"
+					android:gravity="left"
+					android:maxLength = "5"
+					android:layout_weight="4" />
+		</LinearLayout>
+
+	</LinearLayout>
+
+	    <Button
+            android:id="@+id/current"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoint_my_coordinates" />
+
+
+        <Button
+            android:id="@+id/clipboard"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/from_clipboard" />
+
+
+</LinearLayout>
+
