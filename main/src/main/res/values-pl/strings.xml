@@ -1291,6 +1291,7 @@
     <string name="persistablefolder_base">Podstawowy</string>
     <string name="persistablefolder_offline_maps">Mapy offline</string>
     <string name="persistablefolder_offline_maps_themes">Motywy map</string>
+    <string name="persistablefolder_backgroundmaps">Mapy tła</string>
     <string name="persistablefolder_offline_maps_shading">Pliki cieniowaia mapy</string>
     <string name="persistablefolder_backup">Kopia zapasowa</string>
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
@@ -2560,6 +2561,7 @@
     <string name="receivedownload_integritycheck_failed">Sprawdzanie integralności nie powiodło się</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
+    <string name="downloadbackground_title">Pobierz mapę tła</string>
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
@@ -2680,7 +2682,7 @@
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizacja folderu %1$s zakończona po %2$s, %3$d z %4$s wymaga synchronizacji</string>
     <!-- Wherigo Player -->
-    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_player">Odtwarzacz Wherigo</string>
     <string name="wherigo_controls">Sterowanie</string>
     <string name="wherigo_controls_cartridgelist_hint">Zobacz kartridże i rozpocznij grę</string>
     <string name="wherigo_controls_savegame_hint">Zapisz postęp bieżącej gry</string>
@@ -2698,7 +2700,7 @@
     <string name="wherigo_sound_mute">Wycisz</string>
     <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
-    <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie \"Wznów wstrzymane okno dialogowe\"</string>
+    <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie „Wznów wstrzymane okno dialogowe”</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
     <string name="wherigo_locate_on_center">Umieść na środku</string>
@@ -2753,8 +2755,8 @@
     <string name="wherigo_bar_resume_dialog">Wznów</string>
     <string name="wherigo_toast_check_game">Wherigo: sprawdź swoją grę pod kątem zmian</string>
     <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
-    <string name="wherigo_otm_shortcuts_title">Skróty Wherigo Playera</string>
-    <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać c:geo Wherigo Player rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
+    <string name="wherigo_otm_shortcuts_title">Skróty Odtwarzacza Wherigo</string>
+    <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać Odtwarzacz Wherigo w c:geo rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
     <string name="wherigo_map_supported_for_unified_map_only">Wyświetlanie lokalizacji Wherigo na mapie nie jest obsługiwane dla twoich ustawień mapy. Proszę przełączyć się na ujednoliconą mapę w Ustawieniach -&gt; Źródła map -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
