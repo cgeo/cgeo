@@ -2,6 +2,8 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.platform.FileHandle;
 
 import android.net.Uri;
 
@@ -12,9 +14,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.platform.FileHandle;
 
 public class WherigoSaveFileHandler implements FileHandle {
 

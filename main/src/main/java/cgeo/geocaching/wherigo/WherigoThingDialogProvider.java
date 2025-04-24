@@ -10,6 +10,11 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.wherigo.openwig.Action;
+import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Media;
+import cgeo.geocaching.wherigo.openwig.Thing;
+import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,12 +25,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import cz.matejcik.openwig.Action;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
-import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
 
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 

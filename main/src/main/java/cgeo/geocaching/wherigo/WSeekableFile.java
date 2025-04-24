@@ -18,12 +18,12 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.wherigo.openwig.platform.SeekableFile;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import cz.matejcik.openwig.platform.SeekableFile;
 import org.oscim.utils.IOUtils;
 
 public class WSeekableFile implements SeekableFile {

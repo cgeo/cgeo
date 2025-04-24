@@ -5,6 +5,9 @@ import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.Media;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,10 +26,7 @@ import java.util.List;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Media;
 import org.apache.commons.lang3.StringUtils;
-import se.krka.kahlua.vm.LuaClosure;
 
 
 

@@ -8,6 +8,10 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Media;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,11 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
-import se.krka.kahlua.vm.LuaTable;
 
 /** Handles Wherigo/OpenWIG input dialogs */
 public class WherigoInputDialogProvider implements IWherigoDialogProvider {

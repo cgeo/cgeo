@@ -16,4 +16,8 @@
 
     <!-- BRouter code -->
     <suppress files="[\\/]cgeo[\\/]geocaching[\\/]brouter[\\/].*\.java$" checks="EqualsHashCodeCheck|FinalParametersCheck|InnerAssignmentCheck|ParameterAssignmentCheck" />
+	<!-- OpenWIG code -->
+	<suppress files="[\\/]cgeo[\\/]geocaching[\\/]wherigo[\\/]openwig[\\/].*\.java$" checks=".*" />
+	<suppress files="[\\/]cgeo[\\/]geocaching[\\/]wherigo[\\/]kahlua[\\/].*\.java$" checks=".*" />
+	
 </suppressions>

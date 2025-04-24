@@ -2,3 +2,5 @@
 exclude_paths:
   - "main/src/main/res/raw/*.md"
   - "main/src/main/res/raw-*/*.md"
+  - "main/src/main/java/cgeo/geocaching/wherigo/openwig/**"
+  - "main/src/main/java/cgeo/geocaching/wherigo/kahlua/**"

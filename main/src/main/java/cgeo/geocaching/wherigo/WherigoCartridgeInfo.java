@@ -5,6 +5,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 
 import android.net.Uri;
 
@@ -18,7 +19,6 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import cz.matejcik.openwig.formats.CartridgeFile;
 import org.apache.commons.lang3.StringUtils;
 
 public class WherigoCartridgeInfo {
