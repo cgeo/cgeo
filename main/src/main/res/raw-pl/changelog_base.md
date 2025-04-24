@@ -32,8 +32,8 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
 - Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
 - Nowość: Przytrzymaj dłużej przycisk „włącz online", aby załadować skrytki zapisane lokalnie
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap VTM only)
+- Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
+- Nowość: Obsługa map tła (tylko UnifiedMap VTM)
 
 ### Szczegóły skrytki
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
