@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,8 @@ public class NewCoordinateInputDialog {
     private Button bLatitude, bLongitude;
     private EditText longitudeDegree, longitudeMinutes, longitudeSeconds, longitudeFraction;
     private EditText latitudeDegree, latitudeMinutes, latitudeSeconds, latitudeFraction;
+    private TextView latSymbol1, latSymbol2, latSymbol3, latSymbol4;
+    private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
     private Geopoint gp, cacheCoords;
 
@@ -146,10 +149,20 @@ public class NewCoordinateInputDialog {
         latitudeSeconds = binding.editTextLatSeconds;
         latitudeFraction = binding.editTextLatFraction;
 
+        latSymbol1 = binding.txtLatSymbol1;
+        latSymbol2 = binding.txtLatSymbol2;
+        latSymbol3 = binding.txtLatSymbol3;
+        latSymbol4 = binding.txtLatSymbol4;
+
         longitudeDegree = binding.editTextLonDegrees;
         longitudeMinutes = binding.editTextLonMinutes;
         longitudeSeconds = binding.editTextLonSeconds;
         longitudeFraction = binding.editTextLonFraction;
+
+        lonSymbol1 = binding.txtLonSymbol1;
+        lonSymbol2 = binding.txtLonSymbol2;
+        lonSymbol3 = binding.txtLonSymbol3;
+        lonSymbol4 = binding.txtLonSymbol4;
 
         // Handle the hemisphere buttons
         bLatitude.setOnClickListener(v -> {
@@ -289,72 +302,107 @@ public class NewCoordinateInputDialog {
             case Min:
                 latitudeDegree.setVisibility(View.VISIBLE);
                 latitudeDegree.setText(addZeros(gp.getDecMinuteLatDeg(), 2));
+                latSymbol1.setText("°");
 
                 latitudeMinutes.setVisibility(View.VISIBLE);
                 latitudeMinutes.setText(addZeros(gp.getDecMinuteLatMin(), 2));
+                latSymbol2.setVisibility(View.VISIBLE);
+                latSymbol2.setText(".");
 
                 latitudeSeconds.setVisibility(View.GONE);
+                latSymbol3.setVisibility(View.GONE);
 
                 latitudeFraction.setVisibility(View.VISIBLE);
                 latitudeFraction.setText(addZeros(gp.getDecMinuteLatMinFrac(), 3));
+                latSymbol4.setVisibility(View.VISIBLE);
+                latSymbol4.setText("'");
+
 
                 longitudeDegree.setVisibility(View.VISIBLE);
                 longitudeDegree.setText(addZeros(gp.getDecMinuteLonDeg(), 3));
+                lonSymbol1.setText("°");
 
                 longitudeMinutes.setVisibility(View.VISIBLE);
                 longitudeMinutes.setText(addZeros(gp.getDecMinuteLonMin(), 2));
+                lonSymbol2.setVisibility(View.VISIBLE);
+                lonSymbol2.setText(".");
 
                 longitudeSeconds.setVisibility(View.GONE);
+                lonSymbol3.setVisibility(View.GONE);
 
                 longitudeFraction.setVisibility(View.VISIBLE);
                 longitudeFraction.setText(addZeros(gp.getDecMinuteLonMinFrac(), 3));
+                lonSymbol4.setVisibility(View.VISIBLE);
+                lonSymbol4.setText("'");
                 break;
 
             case Sec:
                 latitudeDegree.setVisibility(View.VISIBLE);
                 latitudeDegree.setText(addZeros(gp.getDecDegreeLatDeg(), 2));
+                latSymbol1.setText("°");
 
                 latitudeMinutes.setVisibility(View.VISIBLE);
                 latitudeMinutes.setText(addZeros(gp.getDMSLatMin(), 2));
+                latSymbol2.setVisibility(View.VISIBLE);
+                latSymbol2.setText("'");
 
                 latitudeSeconds.setVisibility(View.VISIBLE);
                 latitudeSeconds.setText(addZeros(gp.getDMSLatSec(), 2));
+                latSymbol3.setVisibility(View.VISIBLE);
+                latSymbol3.setText(".");
 
                 latitudeFraction.setVisibility(View.VISIBLE);
                 latitudeFraction.setText(addZeros(gp.getDMSLatSecFrac(), 3));
+                latSymbol4.setVisibility(View.GONE);
 
                 longitudeDegree.setVisibility(View.VISIBLE);
                 longitudeDegree.setText(addZeros(gp.getDMSLonDeg(), 3));
+                lonSymbol1.setText("°");
 
                 longitudeMinutes.setVisibility(View.VISIBLE);
                 longitudeMinutes.setText(addZeros(gp.getDMSLonMin(), 2));
+                lonSymbol2.setVisibility(View.VISIBLE);
+                lonSymbol2.setText("'");
 
                 longitudeSeconds.setVisibility(View.VISIBLE);
                 longitudeSeconds.setText(addZeros(gp.getDMSLonSec(), 2));
+                lonSymbol3.setVisibility(View.VISIBLE);
+                lonSymbol3.setText(".");
 
                 longitudeFraction.setVisibility(View.VISIBLE);
                 longitudeFraction.setText(addZeros(gp.getDMSLonSecFrac(), 3));
+                lonSymbol4.setVisibility(View.GONE);
                 break;
 
             case Deg:
             default:
                 latitudeDegree.setVisibility(View.VISIBLE);
                 latitudeDegree.setText(addZeros(gp.getDecDegreeLatDeg(), 2));
+                latSymbol1.setText(".");
 
                 latitudeMinutes.setVisibility(View.GONE);
                 latitudeSeconds.setVisibility(View.GONE);
+                latSymbol2.setVisibility(View.GONE);
+                latSymbol3.setVisibility(View.GONE);
 
                 latitudeFraction.setVisibility(View.VISIBLE);
                 latitudeFraction.setText(addZeros(gp.getDecDegreeLatDegFrac(), 5));
+                latSymbol4.setVisibility(View.VISIBLE);
+                latSymbol4.setText("°");
 
                 longitudeDegree.setVisibility(View.VISIBLE);
                 longitudeDegree.setText(addZeros(gp.getDecDegreeLonDeg(), 3));
+                lonSymbol1.setText(".");
 
                 longitudeMinutes.setVisibility(View.GONE);
                 longitudeSeconds.setVisibility(View.GONE);
+                lonSymbol2.setVisibility(View.GONE);
+                lonSymbol3.setVisibility(View.GONE);
 
                 longitudeFraction.setVisibility(View.VISIBLE);
                 longitudeFraction.setText(addZeros(gp.getDecDegreeLonDegFrac(), 5));
+                lonSymbol4.setVisibility(View.VISIBLE);
+                lonSymbol4.setText("°");
                 break;
         }
     }
