@@ -1,5 +1,6 @@
 ##
 - Oplossing: Favoriet status gaat verloren bij het uitvoeren van een afbeeldingsselectie tijdens het voorbereiden van een log
+- Oplossing: Wherigo speler staat geen doelselectie toe voor ding actie
 
 ##
 - Oplossing: Wherigo links zonder host naam niet gedetecteerd
