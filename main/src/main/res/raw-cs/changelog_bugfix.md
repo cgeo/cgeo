@@ -1,5 +1,6 @@
 ##
 - Oprava: Stav oblíbených se ztratí při výběru obrázku při přípravě logu
+- Fix: Wherigo player does not allow target selection for thing action
 
 ##
 - Oprava: Wherigo odkazy bez názvu hostitele nebyly zjištěny
