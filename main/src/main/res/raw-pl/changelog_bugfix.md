@@ -1,5 +1,6 @@
 ##
 - Naprawiono: Status ulubionej skrytki był tracony podczas wybierania obrazu podczas przygotowywania wpisu
+- Naprawiono: Odtwarzacz Wherigo nie zezwala na wybór celu dla akcji
 
 ##
 - Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
