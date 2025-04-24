@@ -22,6 +22,9 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Zone;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
@@ -48,9 +51,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Zone;
 import org.apache.commons.lang3.StringUtils;
 
 public final class WherigoViewUtils {

@@ -20,6 +20,16 @@ import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
+import cgeo.geocaching.wherigo.openwig.Action;
+import cgeo.geocaching.wherigo.openwig.Container;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Media;
+import cgeo.geocaching.wherigo.openwig.Thing;
+import cgeo.geocaching.wherigo.openwig.Zone;
+import cgeo.geocaching.wherigo.openwig.ZonePoint;
+import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,18 +61,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import cz.matejcik.openwig.Action;
-import cz.matejcik.openwig.Container;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
-import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
-import cz.matejcik.openwig.ZonePoint;
-import cz.matejcik.openwig.formats.CartridgeFile;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import se.krka.kahlua.vm.LuaTable;
 
 public final class WherigoUtils {
 

@@ -8,14 +8,13 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.wherigo.WherigoGame;
 import cgeo.geocaching.wherigo.WherigoUtils;
+import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.graphics.Color;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
-import cz.matejcik.openwig.Zone;
 
 public class WherigoLayer {
 

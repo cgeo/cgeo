@@ -3,6 +3,14 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Task;
+import cgeo.geocaching.wherigo.openwig.Thing;
+import cgeo.geocaching.wherigo.openwig.Zone;
+import static cgeo.geocaching.wherigo.openwig.platform.UI.INVENTORYSCREEN;
+import static cgeo.geocaching.wherigo.openwig.platform.UI.ITEMSCREEN;
+import static cgeo.geocaching.wherigo.openwig.platform.UI.LOCATIONSCREEN;
+import static cgeo.geocaching.wherigo.openwig.platform.UI.TASKSCREEN;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,15 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Task;
-import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
-import static cz.matejcik.openwig.platform.UI.INVENTORYSCREEN;
-import static cz.matejcik.openwig.platform.UI.ITEMSCREEN;
-import static cz.matejcik.openwig.platform.UI.LOCATIONSCREEN;
-import static cz.matejcik.openwig.platform.UI.TASKSCREEN;
 
 public enum WherigoThingType {
 

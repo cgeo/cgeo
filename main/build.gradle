@@ -535,9 +535,6 @@ dependencies {
     // stay with 3.1.0.16 for now to avoid problems with CI
     implementation 'com.github.AppDevNext:AndroidChart:3.1.0.16'
 
-    // For Wherigos: openwig@cgeo
-    implementation 'com.github.cgeo:openwig:1.1.0'
-
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
@@ -816,7 +813,7 @@ tasks.register('pmd', Pmd) {
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
-    exclude '**/gen/**','**/brouter/**'
+    exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
 
     reports {
         xml.required.set true

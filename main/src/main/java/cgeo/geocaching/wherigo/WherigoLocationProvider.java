@@ -24,10 +24,10 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.wherigo.openwig.platform.LocationService;
 
 import androidx.annotation.NonNull;
 
-import cz.matejcik.openwig.platform.LocationService;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class WherigoLocationProvider extends GeoDirHandler implements LocationService {

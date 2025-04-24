@@ -20,6 +20,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -37,8 +38,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
-
-import cz.matejcik.openwig.Zone;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 

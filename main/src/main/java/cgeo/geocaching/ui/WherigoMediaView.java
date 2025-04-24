@@ -3,6 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoMediaViewBinding;
 import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.openwig.Engine;
+import cgeo.geocaching.wherigo.openwig.Media;
 
 import android.content.Context;
 import android.net.Uri;
@@ -17,8 +19,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Media;
 import org.apache.commons.lang3.StringUtils;
 
 /** Allows live-editing of a formula, optionally associated with a Variable List*/
