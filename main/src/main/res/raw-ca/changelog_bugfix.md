@@ -1,5 +1,6 @@
 ##
 - Correcció: l'estat favorit es perd en seleccionar una imatge mentre es prepara un registre
+- Correcció: el Wherigo player no permet la selecció d'objectius per a l'acció d'un objecte
 
 ##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
