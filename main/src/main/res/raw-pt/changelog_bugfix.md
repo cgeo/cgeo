@@ -1,5 +1,6 @@
 ##
 - Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Fix: Wherigo player does not allow target selection for thing action
 
 ##
 - Fix: Wherigo links without host name not detected
