@@ -32,7 +32,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
 - Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
-- New: Offline hillshading for UnifiedMap (VTM variant)
+- Nyhet: Offline backskuggning för UnifiedMap (VTM-variant)
 - New: Support for background maps (UnifiedMap VTM only)
 
 ### Cachedetaljer
@@ -60,7 +60,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nytt: Stöd för koordinater i DD,DDDDDDD-format
 - Nytt: Visa senast använda filternamn i filterdialogen
 - Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
-- Fix: Felaktig höjd (använder inte medelvärde över havet)
+- Fix: Felaktig höjd (använder inte höjd över havsmedelnivån)
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
 - Fix: Sorting of cache lists by distance descending not working correctly
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
