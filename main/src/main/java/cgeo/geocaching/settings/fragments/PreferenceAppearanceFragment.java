@@ -60,6 +60,16 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
 
+
+        final ListPreference shortDateFormatPref = findPreference(getString(R.string.pref_short_date_format));
+        setDateSummary(shortDateFormatPref, Settings.getShortDateFormat());
+        PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
+            setDateSummary((ListPreference) preference, newValue.toString());
+            return true;
+        });
+
+
+
         setPrefClick(this, R.string.pref_quicklaunchitems, () -> QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems));
 
         setPrefClick(this, R.string.pref_cacheListInfo, () -> CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2));
@@ -118,4 +128,18 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         languagePref.setSummary(StringUtils.isBlank(newValue) ? getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
     }
 
+    private void setDateSummary(final ListPreference datePref, final String newValue) {
+        if (null != datePref) {
+            final int valueIndex = datePref.findIndexOfValue(newValue);
+            String summaryString = getString(R.string.init_date_format_description);
+            if (valueIndex >= 0) {
+                final String prefEntry = String.valueOf(datePref.getEntries()[valueIndex]);
+                summaryString += ": \n" + prefEntry;
+                if (!StringUtils.isEmpty(newValue)) {
+                    summaryString += " (" + newValue + ")";
+                }
+            }
+            datePref.setSummary(summaryString);
+        }
+    }
 }
