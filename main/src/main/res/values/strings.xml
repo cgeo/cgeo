@@ -368,6 +368,7 @@
     <string name="translator_preference_nottranslate_lng">Ignored languages</string>
     <string name="translator_preference_nottranslate_lng_summary">Source languages to not offer translation for</string>
     <string name="translator_preference_disable">&lt;Disable translation&gt;</string>
+    <string name="translator_preference_application_language">&lt;Use application language&gt;</string>
     <string name="translator_model_download_select">Download offline translation language</string>
     <string name="translator_model_download_confirm_title">Confirm language download</string>
     <string name="translator_model_download_confirm_txt">Translation model for language %s needs to be downloaded. Model size is roughly 20-40 MB.</string>

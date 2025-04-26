@@ -48,6 +48,7 @@ public class OfflineTranslateUtils {
     public static final String LANGUAGE_UNKNOWN = "und";
     public static final String LANGUAGE_UNDELETABLE = "en";
     public static final String LANGUAGE_INVALID = "";
+    public static final String LANGUAGE_AUTOMATIC = "default";
 
     public static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
@@ -82,8 +83,9 @@ public class OfflineTranslateUtils {
             if (!availableLanguages.contains(lngCode)) {
                 missingLanguages.add(new Language(lngCode));
             }
-            if (!availableLanguages.contains(Settings.getTranslationTargetLanguage().getCode())) {
-                missingLanguages.add(Settings.getTranslationTargetLanguage());
+            final Language targetLanguage = Settings.getTranslationTargetLanguage();
+            if (!availableLanguages.contains(targetLanguage.getCode())) {
+                missingLanguages.add(targetLanguage);
             }
             consumer.accept(missingLanguages);
         });
