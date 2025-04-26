@@ -370,6 +370,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
                 if (newLanguage.isValid()) {
                     translationStatus.setSourceLanguage(newLanguage);
+                    translationStatus.setNeedsRetranslation();
                 }
             }
         }
@@ -436,9 +437,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
         outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
 
-        if (this.translationStatus.isTranslated()) {
-            outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.getSourceLanguage().getCode());
-        }
+        outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.isTranslated() ? this.translationStatus.getSourceLanguage().getCode() : "");
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -1863,7 +1862,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
             final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
-            if (currentTranslationStatus.getSourceLanguage().isValid() && !currentTranslationStatus.isInProgress()) {
+            if (currentTranslationStatus.checkRetranslation()) {
+                currentTranslationStatus.setNotTranslated();
                 translateListing();
             }
         }
@@ -2778,6 +2778,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 showToast((String) msg.obj);
             } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
                 dismissProgress(cacheDetailActivity.getString(R.string.cachedetails_progress_refresh, cacheDetailActivity.geocode));
+                cacheDetailActivity.translationStatus.setNotTranslated();
                 notifyDataSetChanged(activityRef);
             }
         }
