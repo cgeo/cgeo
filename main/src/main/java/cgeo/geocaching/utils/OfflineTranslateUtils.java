@@ -293,6 +293,7 @@ public class OfflineTranslateUtils {
         private int textsToTranslate;
         private int translatedTexts = 0;
         private Consumer<Language> languageChangeConsumer;
+        private boolean needsRetranslation = false;
 
         public Language getSourceLanguage() {
             return sourceLanguage;
@@ -318,7 +319,7 @@ public class OfflineTranslateUtils {
         }
 
         public synchronized void startTranslation(final int textsToTranslate, @Nullable final AbstractActivity activity, @Nullable final MaterialButton button) {
-            this.isTranslated = false;
+            setNotTranslated();
             this.textsToTranslate = textsToTranslate;
             this.translatedTexts = 0;
             if (null != activity) {
@@ -331,7 +332,7 @@ public class OfflineTranslateUtils {
             if (null != this.progressHandler) {
                 this.progressHandler.sendEmptyMessage(DisposableHandler.DONE);
             }
-            isTranslated = false;
+            setNotTranslated();
         }
 
         public synchronized void updateProgress() {
@@ -349,6 +350,17 @@ public class OfflineTranslateUtils {
 
         public void setNotTranslated() {
             this.isTranslated = false;
+            this.needsRetranslation = false;
+        }
+
+
+        public void setNeedsRetranslation() {
+            needsRetranslation = true;
+        }
+
+        public boolean checkRetranslation() {
+            return needsRetranslation && !isInProgress()
+                    && getSourceLanguage().isValid();
         }
     }
 }

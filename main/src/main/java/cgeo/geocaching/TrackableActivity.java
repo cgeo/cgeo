@@ -203,6 +203,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
                 if (newLanguage.isValid()) {
                     translationStatus.setSourceLanguage(newLanguage);
+                    translationStatus.setNeedsRetranslation();
                 }
             }
         }
@@ -216,9 +217,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (this.translationStatus.isTranslated()) {
-            outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.getSourceLanguage().getCode());
-        }
+        outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.isTranslated() ? this.translationStatus.getSourceLanguage().getCode() : "");
     }
 
     @Override
@@ -625,7 +624,8 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
 
             final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
-            if (currentTranslationStatus.getSourceLanguage().isValid() && !currentTranslationStatus.isInProgress()) {
+            if (currentTranslationStatus.checkRetranslation()) {
+                currentTranslationStatus.setNotTranslated();
                 translateListing();
             }
         }
