@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 
 import android.os.Bundle;
@@ -18,9 +19,14 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         final CharSequence[] languageNames = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::toString).toArray(CharSequence[]::new);
         final CharSequence[] languageCodes = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::getCode).toArray(CharSequence[]::new);
 
-        final ListPreference translateTargetLng = findPreference(getString(R.string.pref_translation_language));
-        translateTargetLng.setEntries(ArrayUtils.insert(0, languageNames, getString(R.string.translator_preference_disable)));
-        translateTargetLng.setEntryValues(ArrayUtils.insert(0, languageCodes, ""));
+        final ListPreference translateTargetLngPref = findPreference(getString(R.string.pref_translation_language));
+        translateTargetLngPref.setEntries(ArrayUtils.insert(0, languageNames, getString(R.string.translator_preference_disable), getString(R.string.translator_preference_application_language)));
+        translateTargetLngPref.setEntryValues(ArrayUtils.insert(0, languageCodes, OfflineTranslateUtils.LANGUAGE_INVALID, OfflineTranslateUtils.LANGUAGE_AUTOMATIC));
+
+        final String rawCode = Settings.getTranslationTargetLanguageRaw().getCode();
+        if (translateTargetLngPref.getValue() == null) {
+            translateTargetLngPref.setValue(rawCode);
+        }
 
         final MultiSelectListPreference noTranslateLngs = findPreference(getString(R.string.pref_translation_notranslate));
         noTranslateLngs.setEntries(languageNames);

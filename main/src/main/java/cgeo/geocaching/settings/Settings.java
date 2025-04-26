@@ -2577,16 +2577,32 @@ public class Settings {
         return getString(R.string.pref_short_date_format, "");
     }
 
-    public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
-        final String lngCode = getString(R.string.pref_translation_language, getApplicationLocale().getLanguage());
+    public static OfflineTranslateUtils.Language getTranslationTargetLanguageRaw() {
+        final String lngCode = getString(R.string.pref_translation_language, null);
+        if (lngCode == null) {
+            return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_AUTOMATIC);
+        }
         if (!lngCode.isEmpty()) {
-            final OfflineTranslateUtils.Language lng = new OfflineTranslateUtils.Language(lngCode);
-            if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
-                return lng;
-            }
+            return new OfflineTranslateUtils.Language(lngCode);
         }
         return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
     }
+
+
+    public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
+        final OfflineTranslateUtils.Language lng = getTranslationTargetLanguageRaw();
+
+        if (StringUtils.equals(lng.getCode(), OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
+            return new OfflineTranslateUtils.Language(Settings.getApplicationLocale().getLanguage());
+        }
+
+        if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
+            return lng;
+        }
+
+        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
+    }
+
 
     public static @NonNull Set<String> getLanguagesToNotTranslate() {
         final Set<String> lngs = new HashSet<>();
