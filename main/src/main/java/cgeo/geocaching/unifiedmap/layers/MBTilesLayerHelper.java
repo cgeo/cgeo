@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.unifiedmap.layers.mbtiles.MBTilesFile;
 import cgeo.geocaching.unifiedmap.layers.mbtiles.MBTilesLayer;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -50,7 +51,7 @@ public class MBTilesLayerHelper {
 
     /** returns a list of .mbtiles files found in app-specific media folder, typically /Android/media/(app-id)/*.mbtiles */
     private static File[] getMBTilesSources(final Context context) {
-        return context.getExternalMediaDirs()[0].listFiles((dir, name) -> StringUtils.endsWith(name, ".mbtiles"));
+        return context.getExternalMediaDirs()[0].listFiles((dir, name) -> StringUtils.endsWith(name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION));
     }
 
 }
