@@ -353,7 +353,8 @@ public class NewCoordinateInputDialog {
 
                 latitudeFraction.setVisibility(View.VISIBLE);
                 latitudeFraction.setText(addZeros(gp.getDMSLatSecFrac(), 3));
-                latSymbol4.setVisibility(View.GONE);
+                latSymbol4.setVisibility(View.VISIBLE);
+                latSymbol4.setText("\"");
 
                 longitudeDegree.setVisibility(View.VISIBLE);
                 longitudeDegree.setText(addZeros(gp.getDMSLonDeg(), 3));
@@ -371,7 +372,8 @@ public class NewCoordinateInputDialog {
 
                 longitudeFraction.setVisibility(View.VISIBLE);
                 longitudeFraction.setText(addZeros(gp.getDMSLonSecFrac(), 3));
-                lonSymbol4.setVisibility(View.GONE);
+                lonSymbol4.setVisibility(View.VISIBLE);
+                lonSymbol4.setText("\"");
                 break;
 
             case Deg:

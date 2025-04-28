@@ -48,7 +48,7 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/textSize_inputCoords"
-					android:layout_weight="2" />
+					android:layout_weight="2.5" />
 
 				<EditText
 					android:id="@+id/editTextLatDegrees"
@@ -63,7 +63,6 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol1"
-					android:text="#"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -82,7 +81,6 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol2"
-					android:text="#"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -101,7 +99,6 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol3"
-					android:text="#"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -114,13 +111,12 @@
 					android:selectAllOnFocus="true"
 					android:inputType="number"
 					android:hint="@string/cc_hint_fraction"
-					android:layout_weight="4"
+					android:layout_weight="3"
 					android:maxLength = "5"
 					android:gravity="left" />
 
 				<TextView
 					android:id="@+id/txtLatSymbol4"
-					android:text="#"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -141,7 +137,7 @@
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:textSize="@dimen/textSize_inputCoords"
-						android:layout_weight="2" />
+						android:layout_weight="2.5" />
 
 					<EditText
 						android:id="@+id/editTextLonDegrees"
@@ -156,7 +152,6 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol1"
-						android:text="#"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
@@ -175,7 +170,6 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol2"
-						android:text="#"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
@@ -194,7 +188,6 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol3"
-						android:text="#"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
@@ -209,11 +202,10 @@
 						android:selectAllOnFocus="true"
 						android:gravity="left"
 						android:maxLength = "5"
-						android:layout_weight="4" />
+						android:layout_weight="3" />
 
 					<TextView
 						android:id="@+id/txtLonSymbol4"
-						android:text="#"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
