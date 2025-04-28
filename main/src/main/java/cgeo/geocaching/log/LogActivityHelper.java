@@ -16,7 +16,7 @@ import cgeo.geocaching.utils.workertask.WorkerTask;
 
 import android.annotation.TargetApi;
 
-import androidx.core.app.ComponentActivity;
+import androidx.activity.ComponentActivity;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
