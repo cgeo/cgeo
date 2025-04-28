@@ -18,11 +18,10 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.util.Pair;
 
-import androidx.core.app.ComponentActivity;
+import androidx.activity.ComponentActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -52,7 +51,7 @@ public class WherigoDownloader {
     private final WorkerTask<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>> wherigoDownloadTask;
 
 
-    public WherigoDownloader(@SuppressLint("RestrictedApi") final ComponentActivity activity, final BiConsumer<String, StatusResult> wherigoDownloadConsumer) {
+    public WherigoDownloader(final ComponentActivity activity, final BiConsumer<String, StatusResult> wherigoDownloadConsumer) {
 
         wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>>of(
                 "wherigo-download",

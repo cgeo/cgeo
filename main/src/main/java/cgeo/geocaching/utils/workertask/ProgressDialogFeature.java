@@ -5,7 +5,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.annotation.TargetApi;
 
-import androidx.core.app.ComponentActivity;
+import androidx.activity.ComponentActivity;
 
 import java.util.function.Function;
 
