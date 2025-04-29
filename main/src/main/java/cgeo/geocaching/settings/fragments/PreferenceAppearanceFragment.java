@@ -58,15 +58,26 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             CgeoApplication.getInstance().initApplicationLocale();
             return true;
         });
-        setLanguageSummary(languagePref, Settings.getUserLanguage());
+
+        final String userLanguage = Settings.getUserLanguage();
+        if (languagePref.getValue() == null) {
+            languagePref.setValue(userLanguage);
+        }
+        setLanguageSummary(languagePref, userLanguage);
 
 
         final ListPreference shortDateFormatPref = findPreference(getString(R.string.pref_short_date_format));
-        setDateSummary(shortDateFormatPref, Settings.getShortDateFormat());
         PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
             setDateSummary((ListPreference) preference, newValue.toString());
             return true;
         });
+
+        final String shortDateFormat = Settings.getShortDateFormat();
+        if (shortDateFormatPref.getValue() == null) {
+            shortDateFormatPref.setValue(shortDateFormat);
+        }
+        setDateSummary(shortDateFormatPref, shortDateFormat);
+
 
 
 
