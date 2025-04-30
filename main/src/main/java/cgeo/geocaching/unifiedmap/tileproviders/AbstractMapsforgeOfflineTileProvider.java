@@ -35,6 +35,7 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
         supportsThemes = true;
         supportsThemeOptions = true; // rule of thumb, not all themes support options
         supportsHillshading = true;
+        supportsBackgroundMaps = true;
         displayName = CompanionFileUtils.getDisplaynameForMap(uri);
     }
 

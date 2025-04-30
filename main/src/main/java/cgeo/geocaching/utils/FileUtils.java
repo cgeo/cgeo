@@ -40,6 +40,7 @@ public final class FileUtils {
     public static final String LOC_FILE_EXTENSION = ".loc";
     public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String MAP_FILE_EXTENSION = ".map";
+    public static final String BACKGROUND_MAP_FILE_EXTENSION = ".mbtiles";
 
     private static final String FILE_PROTOCOL = "file://";
 

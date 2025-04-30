@@ -132,7 +132,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
 
         if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
-            for (BitmapTileLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayers(requireActivity(), mMap)) {
+            for (BitmapTileLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersVTM(requireActivity(), mMap)) {
                 addLayer(LayerHelper.ZINDEX_BASEMAP, backgroundMap);
             }
         }

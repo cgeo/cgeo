@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_LANGUAGE_MODEL;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_MAPS;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_THEMES;
 
@@ -412,6 +413,11 @@ public class DownloaderUtils {
                 offlineItems.add(new Pair<>(DOWNLOAD_TYPE_ALL_THEMES.id, offlineItem.localFile));
             }
         }
+        for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.BACKGROUND_MAPS)) {
+            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
+                offlineItems.add(new Pair<>(DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id, fi.name));
+            }
+        }
         for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_BROUTER_TILES)) {
             offlineItems.add(new Pair<>(DOWNLOADTYPE_BROUTER_TILES.id, offlineItem.localFile));
         }
@@ -458,6 +464,8 @@ public class DownloaderUtils {
                         folder = PersistableFolder.ROUTING_TILES;
                     } else if (offlineItem.first == DOWNLOADTYPE_HILLSHADING_TILES.id) {
                         folder = PersistableFolder.OFFLINE_MAP_SHADING;
+                    } else if (offlineItem.first == DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id) {
+                        folder = PersistableFolder.BACKGROUND_MAPS;
                     } else if (offlineItem.first == DOWNLOADTYPE_LANGUAGE_MODEL.id) {
                         OfflineTranslateUtils.deleteLanguageModel(offlineItem.second);
                         filesDeleted++;
