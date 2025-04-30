@@ -33,7 +33,7 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Erlaubt die Einstellung des Anzeigennamens für Offline-Karten in der Begleitdatei (UnifiedMap)
 - Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
 - New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap VTM only)
+- New: Support for background maps (UnifiedMap)
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
