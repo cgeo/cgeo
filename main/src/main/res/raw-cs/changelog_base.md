@@ -33,7 +33,7 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
 - Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
 - New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap VTM only)
+- New: Support for background maps (UnifiedMap)
 
 ### Detaily kešky
 - Nový: Offline překlad textu a logů (experimentální)
