@@ -33,7 +33,7 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
 - Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
 - Nou: ombrejat fora de línia per a UnifiedMap (variant VTM)
-- Nou: suport per a mapes de fons (només UnifiedMap VTM)
+- New: Support for background maps (UnifiedMap)
 
 ### Detalls del catxé
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
