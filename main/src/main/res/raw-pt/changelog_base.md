@@ -33,7 +33,7 @@ Until then, you can switch between the different implementations in settings => 
 - Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap VTM only)
+- New: Support for background maps (UnifiedMap)
 
 ### Detalhes da cache
 - New: Offline translation of listing text and logs (experimental)
