@@ -33,7 +33,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
 - Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
 - Nyhet: Offline backskuggning för UnifiedMap (VTM-variant)
-- New: Support for background maps (UnifiedMap)
+- Nytt: Stöd för bakgrundskartor (UnifiedMap)
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
