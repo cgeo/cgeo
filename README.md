@@ -58,7 +58,7 @@ Details for setting up the IDE are described in the wiki (https://github.com/cge
 ### API keys
 
 For the full usability of c:geo you need some API keys for Google Maps and the opencaching sites.
-You can leave all entries in the configuration empty, but Google Maps and the Opencaching sites will not work.
+You can leave all entries in the configuration empty, but then Google Maps and the Opencaching sites will not work.
 
 For using the Google Maps function, it is necessary to have a Google Maps API v2 key. For this, follow
 * [Maps SDK for Android: Get an API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
@@ -78,6 +78,8 @@ If you leave these blank, those networks will remain disabled.
 
 To obtain an API key for [geocaching.su](https://geocaching.su/) you need to request access from [administration](https://geocaching.su/?pn=1).
 Keys are generated manually on request.
+
+The key to retrieve data for Adventure Labs is not available publicly, so you will have to leave that entry empty, and you cannot test Adventure Labs in your development builds.
 
 ### API keys installation
 
