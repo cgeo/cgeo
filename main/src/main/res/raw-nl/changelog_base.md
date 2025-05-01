@@ -33,7 +33,7 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
 - Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
 - Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
-- New: Support for background maps (UnifiedMap)
+- Nieuw: Ondersteuning voor achtergrondkaarten (UnifiedMap)
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
