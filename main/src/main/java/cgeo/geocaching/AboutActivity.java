@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
@@ -226,7 +227,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
-            final Markwon markwon = Markwon.create(activity);
+            final Markwon markwon = MarkdownUtils.create(activity);
 
             final String changelogBase = FileUtils.getChangelogMaster(activity).trim();
             final String changelogBugfix = prepareChangelogBugfix(activity);
@@ -277,7 +278,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             viewModel.getSystemInformation().observe(getViewLifecycleOwner(), (si -> {
                 if (si != null) {
-                    final Markwon markwon = Markwon.create(activity);
+                    final Markwon markwon = MarkdownUtils.create(activity);
                     markwon.setMarkdown(binding.system, si);
                     binding.copy.setEnabled(true);
                     binding.copy.setOnClickListener(view -> {
@@ -336,7 +337,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
-            final Markwon markwon = Markwon.create(getActivity());
+            final Markwon markwon = MarkdownUtils.create(getActivity());
             markwon.setMarkdown(binding.licenseText, getRawResourceString(R.raw.license));
         }
 
@@ -377,7 +378,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
-            final Markwon markwon = Markwon.create(activity);
+            final Markwon markwon = MarkdownUtils.create(activity);
 
             markwon.setMarkdown(binding.aboutContributorsRecent, formatContributors(R.string.contributors_recent));
             markwon.setMarkdown(binding.aboutContributorsOthers, formatContributors(R.string.contributors_other));

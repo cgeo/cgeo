@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.formatBytes;
 import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
@@ -216,7 +217,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             this.activity = activity;
             this.downloadManager = downloadManager;
             this.pendingDownloads = pendingDownloads;
-            this.markwon = Markwon.create(activity);
+            this.markwon = MarkdownUtils.create(activity);
         }
 
         @Override
