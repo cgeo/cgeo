@@ -4,6 +4,8 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
+import androidx.annotation.NonNull;
+
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
@@ -12,8 +14,11 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Iterator;
 
 public class EventTable implements LuaTable, Serializable {
 
@@ -146,28 +151,10 @@ public class EventTable implements LuaTable, Serializable {
         return (table.rawget(name)) instanceof LuaClosure;
     }
 
+    @NonNull
     public String toString()  {
-        final StringBuilder sb = new StringBuilder(baseToString(this));
-
-        for (Object key : table.keys()) {
-            sb.append("/" + key + "=");
-            final Object value = table.rawget(key);
-            if (value == null) {
-                sb.append("nil");
-            } else if (value.getClass().isPrimitive() ||
-                value instanceof Number ||
-                value instanceof String ||
-                value instanceof Character ||
-                value instanceof Boolean ||
-                value instanceof Date) {
-                sb.append(value);
-            } else if (value instanceof EventTable) {
-                sb.append(baseToString((EventTable) value));
-            } else {
-                sb.append(value.getClass().getName());
-            }
-        }
-        return sb.toString();
+        return baseToString(this) + BaseLib.luaTableToString(table, value ->
+            value instanceof EventTable ? baseToString((EventTable) value) : null);
     }
 
     private static String baseToString(final EventTable et) {
@@ -200,7 +187,7 @@ public class EventTable implements LuaTable, Serializable {
 
     public int len () { return table.len(); }
 
-    public Object[] keys() { return table.keys(); }
+    public Iterator<Object> keys() { return table.keys(); }
 
 
 }

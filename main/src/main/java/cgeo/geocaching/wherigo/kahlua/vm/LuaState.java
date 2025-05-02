@@ -513,10 +513,16 @@ public class LuaState {
 
                             Object metafun = getBinMetaOp(leftConcat, res,
                                     "__concat");
-                            if (!(metafun != null)) {
-                                BaseLib.fail(("__concat not defined for operands: " + leftConcat + " and " + res));
+                            if (metafun == null) {
+                                //special case: if one of the operands is null, then relax Lua rules...
+                                if (res == null) {
+                                    res = leftConcat;
+                                } else if (leftConcat != null) {
+                                    BaseLib.fail(("__concat not defined for operands: " + leftConcat + " and " + res));
+                                }
+                            } else {
+                                res = call(metafun, leftConcat, res, null);
                             }
-                            res = call(metafun, leftConcat, res, null);
                             last--;
                         }
                     }
@@ -1167,6 +1173,9 @@ public class LuaState {
     }
 
     public Object tableGet(Object table, Object key) {
+        if (table == null) {
+            throw new IllegalStateException("attempt to access index of null table [" + key + "]");
+        }
         Object curObj = table;
         for (int i = LuaState.MAX_INDEX_RECURSION; i > 0; i--) {
             boolean isTable = curObj instanceof LuaTable;
@@ -1183,7 +1192,7 @@ public class LuaState {
                     return null;
                 }
                 throw new IllegalStateException("attempted index of non-table: "
-                        + curObj);
+                        + curObj + "[" + key + "]");
             }
             if (metaOp instanceof JavaFunction || metaOp instanceof LuaClosure) {
                 Object res = call(metaOp, table, key, null);
@@ -1196,6 +1205,9 @@ public class LuaState {
     }
 
     public void tableSet(Object table, Object key, Object value) {
+        if (table == null) {
+            throw new IllegalStateException("attempt to set index of null table [" + key + "=" + value + "]");
+        }
         Object curObj = table;
         for (int i = LuaState.MAX_INDEX_RECURSION; i > 0; i--) {
             Object metaOp;
@@ -1214,7 +1226,8 @@ public class LuaState {
                 }
             } else {
                 metaOp = getMetaOp(curObj, "__newindex");
-                BaseLib.luaAssert(metaOp != null,    "attempted index of non-table: " + curObj);
+                BaseLib.luaAssert(metaOp != null,    "attempted index of non-table: " + curObj
+                + "[" + key + "=" + value + "]");
             }
             if (metaOp instanceof JavaFunction || metaOp instanceof LuaClosure) {
                 call(metaOp, table, key, value);

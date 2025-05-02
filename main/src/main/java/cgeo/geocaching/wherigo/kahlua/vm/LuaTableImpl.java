@@ -25,9 +25,13 @@ Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.k
  */
 package cgeo.geocaching.wherigo.kahlua.vm;
 
+import org.apache.commons.collections4.IteratorUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 
@@ -407,15 +411,11 @@ public final class LuaTableImpl implements LuaTable {
         return low;
     }
 
-    public final Object[] keys() {
-        final List<Object> list = new ArrayList<>();
-        for(Object key : keys) {
-            if (key != null) {
-                list.add(key);
-            }
-        }
-        return list.toArray(new Object[0]);
+    public Iterator<Object> keys() {
+        return IteratorUtils.filteredIterator(IteratorUtils.arrayIterator(keys), Objects::nonNull);
     }
+
+
 
     public static int luaHashcode(Object a) {
         if (a instanceof Double) {

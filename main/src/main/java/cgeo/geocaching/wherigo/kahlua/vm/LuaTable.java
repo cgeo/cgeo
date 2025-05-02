@@ -25,6 +25,8 @@
 
 package cgeo.geocaching.wherigo.kahlua.vm;
 
+import java.util.Iterator;
+
 public interface LuaTable {
     void setMetatable(LuaTable metatable);
     LuaTable getMetatable();
@@ -35,6 +37,6 @@ public interface LuaTable {
     Object next(Object key);
     int len();
 
-    Object[] keys();
+    Iterator<Object> keys();
 
 }

@@ -4,9 +4,12 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
+import org.apache.commons.collections4.IteratorUtils;
+
 import java.io.*;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
@@ -201,7 +204,7 @@ public class ZonePoint implements LuaTable, Serializable {
     public Object next (Object key) { return null; }
     public int len () { return 3; }
 
-    public Object[] keys() { return new Object[] { "latitude", "longitude", "altitude"}; };
+    public Iterator<Object> keys() { return IteratorUtils.arrayIterator(new Object[] { "latitude", "longitude", "altitude"}); }
 
     public void updateWeakSettings (boolean weakKeys, boolean weakValues) { }
 

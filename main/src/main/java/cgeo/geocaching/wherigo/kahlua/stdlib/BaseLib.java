@@ -33,6 +33,10 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaThread;
 
+import java.util.Date;
+import java.util.Iterator;
+import java.util.function.Function;
+
 public final class BaseLib implements JavaFunction {
 
     private static final Runtime RUNTIME = Runtime.getRuntime();
@@ -410,6 +414,38 @@ public final class BaseLib implements JavaFunction {
         }
         return num.toString();
     }
+
+    public static String luaTableToString(LuaTable table, Function<Object, String> valueMapper) {
+        if (table == null) {
+            return "null";
+        }
+        final StringBuilder sb = new StringBuilder("]");
+        final Iterator<Object> it = table.keys();
+        while (it.hasNext()) {
+            Object key = it.next();
+            sb.append(key).append("=");
+            Object value = table.rawget(key);
+            if (value == null) {
+                sb.append("nil");
+            } else if (value.getClass().isPrimitive() ||
+                    value instanceof Number ||
+                    value instanceof String ||
+                    value instanceof Character ||
+                    value instanceof Boolean ||
+                    value instanceof Date) {
+                sb.append(value);
+            } else if (valueMapper != null) {
+                final String valueString = valueMapper.apply(value);
+                sb.append(valueString != null ? valueString : value.getClass().getName());
+            } else {
+                sb.append(value.getClass().getName());
+            }
+            if (it.hasNext()) {
+                sb.append(",");
+            }
+        }
+        return sb.append("]").toString();
+     }
 
     /**
      *
