@@ -367,7 +367,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
-        setMapRotation(null, Settings.getMapRotation());
+        setMapRotation(Settings.getMapRotation());
     }
 
     private void reloadCachesAndWaypoints() {
@@ -942,13 +942,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             //refresh live status view
             refreshLiveStatusView();
         } else if (id == R.id.menu_map_rotation_off) {
-            setMapRotation(item, MAPROTATION_OFF);
+            setMapRotation(MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
-            setMapRotation(item, MAPROTATION_MANUAL);
+            setMapRotation(MAPROTATION_MANUAL);
         } else if (id == R.id.menu_map_rotation_auto_lowpower) {
-            setMapRotation(item, MAPROTATION_AUTO_LOWPOWER);
+            setMapRotation(MAPROTATION_AUTO_LOWPOWER);
         } else if (id == R.id.menu_map_rotation_auto_precise) {
-            setMapRotation(item, MAPROTATION_AUTO_PRECISE);
+            setMapRotation(MAPROTATION_AUTO_PRECISE);
         } else if (id == R.id.menu_check_routingdata) {
             final Viewport vp = mapFragment.getViewportNonNull();
             MapUtils.checkRoutingData(this, vp.getLatitudeMin(), vp.getLongitudeMin(), vp.getLatitudeMax(), vp.getLongitudeMax());
@@ -1033,13 +1033,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         Settings.setMapCenter(mapFragment.getCenter());
     }
 
-    private void setMapRotation(@Nullable final MenuItem item, final int mapRotation) {
+    void setMapRotation(final int mapRotation) {
         Settings.setMapRotation(mapRotation);
         mapFragment.setMapRotation(mapRotation);
-        if (item != null) {
-            item.setChecked(true);
-        }
-        ViewUtils.setVisibility(findViewById(R.id.map_compassrose), mapRotation == MAPROTATION_OFF ? GONE : View.VISIBLE);
+        invalidateOptionsMenu();
+        ViewUtils.setVisibility(findViewById(R.id.map_compassrose), mapRotation == MAPROTATION_OFF ? View.GONE : View.VISIBLE);
         checkDrivingMode();
     }
 

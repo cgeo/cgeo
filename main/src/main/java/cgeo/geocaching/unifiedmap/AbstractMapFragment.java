@@ -248,10 +248,11 @@ public abstract class AbstractMapFragment extends Fragment {
             }
         });
         compassrose.setOnLongClickListener(v -> {
-            getActivity().findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
-            MapSettingsUtils.showRotationMenu(getActivity(), newRotationMode -> {
-                setMapRotation(newRotationMode);
-                getActivity().findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
+            final UnifiedMapActivity activity = (UnifiedMapActivity) getActivity();
+            activity.findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
+            MapSettingsUtils.showRotationMenu(activity, newRotationMode -> {
+                activity.setMapRotation(newRotationMode);
+                activity.findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
             });
             return true;
         });
