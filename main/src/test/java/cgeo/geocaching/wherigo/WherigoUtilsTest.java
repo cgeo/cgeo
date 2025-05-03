@@ -27,7 +27,7 @@ public class WherigoUtilsTest {
 
     // from GC7K2KZ
     @Test
-    public void testGetWherIGoURLHttps() {
+    public void testGetWherIGoDownloadURLHttps() {
         final String description = "Da kannsch da die Cartridge oaladn:<br>\n<br>\n<a target=\"_blank\" href=\"https://www.wherigo.com/cartridge/details.aspx?CGUID=a482bfed-47f0-4b2c-a9f9-c1e3c4ef48c6\"><img src=\"https://imgproxy.geocaching.com/5e0c76c4b8cccbb11eecc36b322a9177d6820421?url=https%3A%2F%2Fwww.muggelfrei.at%2Fcaches%2Fi-heart-innsbruck%2Fcartridge.png\"></a><br>";
         assertThat(WherigoUtils.scanWherigoGuids(description)).containsExactly("a482bfed-47f0-4b2c-a9f9-c1e3c4ef48c6");
     }

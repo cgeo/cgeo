@@ -71,7 +71,8 @@ public final class WherigoUtils {
     public static final TextParam TP_CANCEL_BUTTON = TextParam.id(R.string.cancel).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_cancel));
 
     private static final Pattern PATTERN_CARTRIDGE_LINK = Pattern.compile("https?" + Pattern.quote("://") + "(?:www\\.)?" + Pattern.quote("wherigo.com/cartridge/") + "(?:details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
-    private static final String WHERIGO_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
+    private static final String WHERIGO_DOWNLOAD_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
+    private static final String WHERIGO_DETAILS_URL_BASE = "https://wherigo.com/cartridge/details.aspx?CGUID=";
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
@@ -363,8 +364,14 @@ public final class WherigoUtils {
     }
 
     @Nullable
-    public static String getWherigoUrl(@Nullable final String guid) {
-        return guid == null ? null : WHERIGO_URL_BASE + guid;
+    public static String getWherigoDetailsUrl(@Nullable final String guid) {
+        return guid == null ? null : WHERIGO_DETAILS_URL_BASE + guid;
+    }
+
+
+    @Nullable
+    public static String getWherigoDownloadUrl(@Nullable final String guid) {
+        return guid == null ? null : WHERIGO_DOWNLOAD_URL_BASE + guid;
     }
 
     @NonNull
