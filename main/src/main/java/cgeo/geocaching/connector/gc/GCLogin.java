@@ -390,8 +390,12 @@ public class GCLogin extends AbstractLogin {
     static Single<String> retrieveHomeLocation() {
         return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
                 .map(document -> {
-                    final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
-                    return innerHtml.select("input.search-coordinates").attr("value");
+
+                    final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, document.outerHtml());
+                    if (match.find()) {
+                        return match.group(1) + " " + match.group(2);
+                    }
+                    return "";
                 });
     }
 

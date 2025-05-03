@@ -39,6 +39,8 @@ public final class GCConstants {
     static final Pattern PATTERN_LATLON = Pattern.compile("<span id=\"uxLatLon\"[^>]*>(.*?)</span>");
     static final Pattern PATTERN_LATLON_ORIG = Pattern.compile("\\{\"isUserDefined\":true[^}]+?\"oldLatLngDisplay\":\"([^\"]+)\"\\}");
     static final Pattern PATTERN_LOCATION = Pattern.compile(Pattern.quote("<span id=\"ctl00_ContentBody_Location\">In ") + "(?:<a href=[^>]*>)?(.*?)<");
+    // homeLocation: {"Latitude":50.12345,"Longitude":10.98765}
+    static final Pattern PATTERN_LOCATION_LOGIN = Pattern.compile("homeLocation:\\s*\\{\\\"Latitude\\\":(-?\\d*\\.\\d*),\\\"Longitude\\\":(-?\\d*\\.\\d*)\\}");
     static final Pattern PATTERN_PERSONALNOTE = Pattern.compile("<div id=\"srOnlyCacheNote\"[^>]*>(.*?)</div>", Pattern.DOTALL);
     static final Pattern PATTERN_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_CacheName\".*?>(.*?)</span>");
     static final Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
