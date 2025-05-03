@@ -1904,13 +1904,13 @@ public class DataStore {
                     // Migrate UDC geocodes from ZZ1000-based numbers to random ones
                     if (oldVersion < 105) {
                         try {
-                            final String query = "select geocode from cg_caches where geocode >= \"ZZ1000\" and geocode < \"ZZ2000\"";
+                            final String query = "select geocode from cg_caches where geocode >= 'ZZ1000' and geocode < 'ZZ2000'";
                             try (Cursor cursor = db.rawQuery(query, null)) {
                                 while (cursor.moveToNext()) {
                                     final String geocode = cursor.getString(0);
                                     final String newGeocode = InternalConnector.PREFIX + InternalConnector.generateRandomId();
                                     for (String table : new String[] { "cg_attributes", "cg_caches",  "cg_caches_lists", "cg_categories", "cg_logCount", "cg_logs", "cg_logs_offline", "cg_spoilers", "cg_variables", "cg_waypoints" }) {
-                                        db.execSQL("UPDATE " + table + " SET geocode = \"" + newGeocode + "\" WHERE geocode = \"" + geocode + "\"");
+                                        db.execSQL("UPDATE " + table + " SET geocode = '" + newGeocode + "' WHERE geocode = '" + geocode + "'");
                                     }
 
                                 }
