@@ -3009,7 +3009,7 @@
 
     <string name="wherigo_error_title">Wherigo Problem report</string>
     <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
-    <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```\nYou may contact the author of the cartridge [here](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Problem report\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine reported an error. Open bug dialog for details.</string>
 

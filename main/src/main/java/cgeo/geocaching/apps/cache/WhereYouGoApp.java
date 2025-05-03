@@ -30,7 +30,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final List<String> guids = WherigoUtils.getWherigoGuids(cache);
         if (!guids.isEmpty()) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoUrl(guids.get(0)))));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoDownloadUrl(guids.get(0)))));
         }
     }
 
@@ -41,7 +41,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     public static void openWherigo(@NonNull final Activity activity, @NonNull final String guid) {
         // re-check installation state, might have changed since creating the view
         if (isWhereYouGoInstalled()) {
-            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoUrl(guid)));
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(WherigoUtils.getWherigoDownloadUrl(guid)));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
         } else {

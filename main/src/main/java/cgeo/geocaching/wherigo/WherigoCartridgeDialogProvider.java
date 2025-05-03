@@ -90,8 +90,10 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     private void refreshGui(final WherigoCartridgeDetailsBinding binding) {
+        final String link = WherigoUtils.getWherigoDetailsUrl(cartridgeInfo.getCGuid());
         TextParam.text("**CGUID:** " + cartridgeInfo.getCGuid() + "  \n" +
             "**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
+            "**[" + LocalizationUtils.getString(R.string.cache_menu_browser) + "](" + link + ")**  \n" +
             "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
             "**" + LocalizationUtils.getString(R.string.distance) + ":** " + WherigoUtils.getDisplayableDistance(WherigoLocationProvider.get().getLocation(), cartridgeInfo.getCartridgeLocation())
             ).setMarkdown(true).applyTo(binding.headerInformation);

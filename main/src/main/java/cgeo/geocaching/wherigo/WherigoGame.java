@@ -78,6 +78,7 @@ public class WherigoGame implements UI {
     private File cartridgeCacheDir;
     private HtmlImage htmlImageGetter;
     private String lastError;
+    private String lastErrorCGuid;
     private boolean lastErrorNotSeen = false;
     private String contextGeocode;
     private String contextGeocacheName;
@@ -150,6 +151,7 @@ public class WherigoGame implements UI {
             this.cartridgeInfo = new WherigoCartridgeInfo(cartridgeFileInfo, true, false);
             setCGuidAndDependentThings(this.cartridgeInfo.getCGuid());
             this.lastError = null;
+            this.lastErrorCGuid = null;
             this.lastErrorNotSeen = false;
 
             //try to restore context geocache
@@ -217,8 +219,14 @@ public class WherigoGame implements UI {
         return lastError;
     }
 
+    @Nullable
+    public String getLastErrorCGuid() {
+        return lastErrorCGuid;
+    }
+
     public void clearLastError() {
         lastError = null;
+        lastErrorCGuid = null;
         notifyListeners(NotifyType.REFRESH);
     }
 
@@ -365,6 +373,7 @@ public class WherigoGame implements UI {
             this.lastError = errorMessage +
                 " (Cartridge: " + getCartridgeName() + ", cguid: " + getCGuid() +
                 ", timestamp: " + Formatter.formatDateTime(System.currentTimeMillis()) + ")";
+            this.lastErrorCGuid = getCGuid();
             this.lastErrorNotSeen = true;
         }
         ViewUtils.showToast(null, R.string.wherigo_error_toast);
