@@ -20,9 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -35,6 +35,9 @@ import com.google.mlkit.nl.translate.TranslateRemoteModel;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.TextNode;
 
 public class OfflineTranslateUtils {
 
@@ -127,18 +130,21 @@ public class OfflineTranslateUtils {
     }
 
     public static void translateParagraph(final Translator translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<String> consumer, final Consumer<Exception> errorConsumer) {
-        final List<String> origText = Arrays.asList(text.split("\n"));
-        final List<String> translatedText = new ArrayList<>();
-        for (String p : origText) {
-            translator.translate(p)
+        final Document document = Jsoup.parseBodyFragment(text);
+        final List<TextNode> elements = document.children().select("*").textNodes();
+        final AtomicInteger remaining = new AtomicInteger(elements.size());
+        for (TextNode textNode : elements) {
+            translator.translate(textNode.text())
                     .addOnSuccessListener(translation -> {
-                        translatedText.add(translation);
-                        if (origText.size() == translatedText.size()) {
-                            consumer.accept(String.join("\n", translatedText));
+                        textNode.text(translation);
+                        // check if all done
+                        if (remaining.decrementAndGet() == 0) {
+                            consumer.accept(document.body().html());
                             status.updateProgress();
                         }
                     })
                     .addOnFailureListener(e -> {
+                        Log.e("err: " + e.getMessage());
                         status.abortTranslation();
                         errorConsumer.accept(e);
                     });
