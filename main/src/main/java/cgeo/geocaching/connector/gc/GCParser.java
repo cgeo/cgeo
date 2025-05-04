@@ -1612,19 +1612,17 @@ public final class GCParser {
         final Single<List<LogEntry>> ownTimeLogs = Single.zip(logs.toList(), ownLogs.toList(),
                 (logEntries, ownLogEntries) -> {
                     mergeLogTimes(ownLogEntries, ownLogsFromDb);
+                    if (cache.isFound() || cache.isDNF()) {
+                        for (final LogEntry logEntry : ownLogEntries) {
+                            if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
+                                cache.setVisitedDate(logEntry.date);
+                                break;
+                            }
+                        }
+                    }
+
                     return ownLogEntries;
                 }).cache();
-
-        if (cache.isFound() || cache.isDNF()) {
-            ownTimeLogs.subscribe(logEntries -> {
-                for (final LogEntry logEntry : logEntries) {
-                    if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
-                        cache.setVisitedDate(logEntry.date);
-                        break;
-                    }
-                }
-            });
-        }
 
         // Wait for completion of logs parsing, retrieving and merging
         ownTimeLogs.ignoreElement().blockingAwait();
