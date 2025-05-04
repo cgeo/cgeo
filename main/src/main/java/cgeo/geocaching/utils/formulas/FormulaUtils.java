@@ -325,7 +325,7 @@ public class FormulaUtils {
             d = d.substring(0, d.length() - group.length()).trim();
             m = DEGREE_TRAILINGSTUFF_REMOVER.matcher(d);
         }
-        return d.replace('x', '*');
+        return d;
     }
 
     private static String processFoundText(final String text) {
