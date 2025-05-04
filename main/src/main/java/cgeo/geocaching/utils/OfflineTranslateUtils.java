@@ -296,6 +296,10 @@ public class OfflineTranslateUtils {
             return new Locale(code).getDisplayName();
         }
 
+        public String getDisplayName(final Locale locale) {
+            return new Locale(code).getDisplayName(locale);
+        }
+
         @NonNull
         @Override
         public String toString() {

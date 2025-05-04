@@ -381,6 +381,7 @@
     <string name="translator_language_unsupported">Language (%s) not supported for translation.</string>
     <string name="translator_language_unknown">Unable to identify language</string>
     <string name="translator_language_detected">Translate from "%s"</string>
+    <string name="translator_target_language">Translate to "%s"</string>
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
     <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
@@ -1053,6 +1054,8 @@
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_select_language">Select language</string>
     <string name="init_use_default_language">Use default language</string>
+    <string name="init_use_application_language">Use application language</string>
+    <string name="init_translation_disabled">Translation disabled</string>
     <string name="init_date_format">Date format</string>
     <string name="init_date_format_description">Format to use for short dates, e.g. in log view</string>
     <string name="system_default">System Default</string>
