@@ -2676,7 +2676,6 @@
     <string name="wherigo_download_accept_eula">Log in op www.wherigo.com en accepteer eerst hun algemene voorwaarden</string>
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
-    <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
