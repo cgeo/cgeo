@@ -51,7 +51,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
-        archivesBaseName = "cgeo"
+        base.archivesName = "cgeo"
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
         // not yet enough translations (~50%): "is","iw"(="he"),"lb"
