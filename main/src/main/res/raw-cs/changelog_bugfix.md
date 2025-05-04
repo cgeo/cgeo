@@ -1,6 +1,7 @@
 ##
 - Oprava: Stav oblíbených se ztratí při výběru obrázku při přípravě logu
 - Fix: Wherigo player does not allow target selection for thing action
+- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
 
 ##
 - Oprava: Wherigo odkazy bez názvu hostitele nebyly zjištěny
