@@ -410,12 +410,13 @@ public class FormulaUtilsTest {
         //from Issue #12867
         assertScanCoordinates("N 49° 53.(H+1) (H-A) (B-2) \nE 008° 37. (B) (C) (H-1)", "N 49° 53.(H+1) (H-A) (B-2)|E 008° 37. (B) (C) (H-1)");
         assertScanCoordinates("N 49° (A + 42).0(B + 10)\nE 008° (C*6 + 2).(D + 256)", "N 49° (A + 42).0(B + 10)|E 008° (C*6 + 2).(D + 256)");
-        assertScanCoordinates("N AB CD.EFG E HI JK.LMN", "N AB CD.EFG|E HI JK.LMN");
+        assertScanCoordinates("N AB CD.EFG E 00U VW.XYZ", "N AB CD.EFG|E 00U VW.XYZ");
+        assertScanCoordinates("N ab cd.efg E 00u vw.xyz", "N ab cd.efg|E 00u vw.xyz");
 
         assertScanCoordinates("[N 49° 4(A-1).(B*50+85)]\n[E 008° (B+C+A).(D+45)]", "N 49° 4(A-1).(B*50+85)]|E 008° (B+C+A).(D+45)]");
         //from https://coord.info/GCW1GJ
         assertScanCoordinates("N 48° 04.ABE,\n E 11° 56.DEB.", "N 48° 04.ABE|E 11° 56.DEB");
-        assertScanCoordinates("N 48° 0B.(2x C)(2x C)(2x C),\n  E 11° BB.(G+H)DF", "N 48° 0B.(2* C)(2* C)(2* C)|E 11° BB.(G+H)DF");
+        assertScanCoordinates("N 48° 0B.(2x C)(2x C)(2x C),\n  E 11° BB.(G+H)DF", "N 48° 0B.(2x C)(2x C)(2x C)|E 11° BB.(G+H)DF");
         assertScanCoordinates("N 48° 0B.0[I+J*D],\nE 11° BB.D(J/4)D", "N 48° 0B.0[I+J*D]|E 11° BB.D(J/4)D");
 
         assertScanCoordinates("N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n", "N 45° A.B(C+D)'|E 9° (A-B).(2*D)EF");
