@@ -8,7 +8,6 @@ import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -197,7 +196,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                             TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
                 }
             }
-            if (Settings.getTranslationTargetLanguage().isValid()) {
+            if (OfflineTranslateUtils.isTargetLanguageValid()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();

@@ -2588,19 +2588,17 @@ public class Settings {
         return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
     }
 
+    public static OfflineTranslateUtils.Language getApplicationLanguage() {
+        return new OfflineTranslateUtils.Language(Settings.getApplicationLocale().getLanguage());
+    }
 
     public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
-        final OfflineTranslateUtils.Language lng = getTranslationTargetLanguageRaw();
-
-        if (StringUtils.equals(lng.getCode(), OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
-            return new OfflineTranslateUtils.Language(Settings.getApplicationLocale().getLanguage());
+        final OfflineTranslateUtils.Language rawLanguage = getTranslationTargetLanguageRaw();
+        if (StringUtils.equals(rawLanguage.getCode(), OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
+            return OfflineTranslateUtils.getAppLanguageOrDefault();
         }
 
-        if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
-            return lng;
-        }
-
-        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
+        return rawLanguage;
     }
 
 
