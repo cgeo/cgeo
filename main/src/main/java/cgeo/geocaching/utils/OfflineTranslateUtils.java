@@ -133,21 +133,26 @@ public class OfflineTranslateUtils {
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
         final AtomicInteger remaining = new AtomicInteger(elements.size());
-        for (TextNode textNode : elements) {
-            translator.translate(textNode.text())
-                    .addOnSuccessListener(translation -> {
-                        textNode.text(translation);
-                        // check if all done
-                        if (remaining.decrementAndGet() == 0) {
-                            consumer.accept(document.body().html());
-                            status.updateProgress();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e("err: " + e.getMessage());
-                        status.abortTranslation();
-                        errorConsumer.accept(e);
-                    });
+        if (remaining.get() == 0) {
+            consumer.accept("");
+            status.updateProgress();
+        } else {
+            for (TextNode textNode : elements) {
+                translator.translate(textNode.text())
+                        .addOnSuccessListener(translation -> {
+                            textNode.text(translation);
+                            // check if all done
+                            if (remaining.decrementAndGet() == 0) {
+                                consumer.accept(document.body().html());
+                                status.updateProgress();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("err: " + e.getMessage());
+                            status.abortTranslation();
+                            errorConsumer.accept(e);
+                        });
+            }
         }
     }
 
