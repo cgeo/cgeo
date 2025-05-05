@@ -1,4 +1,9 @@
 ##
+- Correcció: l'estat favorit es perd en seleccionar una imatge mentre es prepara un registre
+- Correcció: el Wherigo player no permet la selecció d'objectius per a l'acció d'un objecte
+- Solució: el canvi del mode de rotació mitjançant la finestra emergent no funciona de manera fiable (UnifiedMap)
+
+##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
 - Correcció: missatge d'error no llegible en publicar un registre
 - Revertit: detecció de fitxers .map local (a causa d'efectes secundaris no desitjats)

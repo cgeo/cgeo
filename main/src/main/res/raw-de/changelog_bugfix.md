@@ -1,4 +1,9 @@
 ##
+- Korrektur: Favoriten-Status geht verloren, wenn während der Erstellung eines Logs ein Bild ausgewählt wird
+- Fix: Wherigo player does not allow target selection for thing action
+- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
+
+##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
 - Korrektur: Unlesbare Fehlermeldung beim Veröffentlichen eines Logs
 - Zurückgenommen: Lokale .map-Datei-Erkennung (aufgrund unerwünschter Nebeneffekte)

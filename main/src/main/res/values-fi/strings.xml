@@ -1702,11 +1702,10 @@
     <string name="search_address">Osoite</string>
     <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">Geokoodi</string>
-    <string name="search_geo_button">Hae geokoodilla</string>
     <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusana</string>
     <string name="search_kw_prefill">Hakusana</string>
-    <string name="search_kw_button">Hae hakusanalla</string>
+    <string name="search_kw_button">Etsi hakusanalla</string>
     <string name="search_kw_disabled_hint">Poistettu käytöstä, koska geocaching.com ei tue sitä perusjäsenille</string>
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>

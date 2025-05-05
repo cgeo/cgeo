@@ -420,6 +420,7 @@
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
+    <string name="search_hbu_prefill">בעלים</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Loading trackable details&#8230;</string>
     <string name="trackable_brand">מותג</string>

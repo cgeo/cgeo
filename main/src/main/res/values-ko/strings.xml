@@ -1740,7 +1740,6 @@
     <string name="search_address">주소</string>
     <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
-    <string name="search_geo_button">지오코드로 검색</string>
     <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>

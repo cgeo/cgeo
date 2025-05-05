@@ -1399,7 +1399,6 @@
     <string name="search_address">Dirección</string>
     <string name="search_address_button">Buscar por dirección</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Buscar por código GC</string>
     <string name="search_geocode_from_clipboard">El Geocode se ha pegado desde el portapapeles.</string>
     <string name="search_kw">Palabra clave</string>
     <string name="search_kw_prefill">Palabra clave</string>
