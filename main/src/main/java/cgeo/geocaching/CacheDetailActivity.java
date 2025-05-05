@@ -1903,12 +1903,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         binding.descriptionTranslateButton.setEnabled(false);
                     };
                     reloadDescription(cda, cache, true, 0, cda.descriptionStyle, translator, cda.translationStatus, errorConsumer);
-        /*
-                    OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.description.getText().toString(), translatedText -> {
-                        displayDescription(getActivity(), cache, translatedText, binding.description);
-                        binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), sourceLng));
-                    }, errorConsumer);
-        */
                     OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.hint.getText().toString(), binding.hint::setText, errorConsumer);
                 });
         }
@@ -1955,12 +1949,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle, translator, status, p -> {
                         displayDescription(activity, cache, p.first, binding.description);
                         if (translator != null) {
-                            // @todo: Box does not come up again after successful translation
                             binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), status.getSourceLanguage()));
-                            binding.descriptionTranslate.setVisibility(View.VISIBLE);
                         }
 
-                        OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString(), this::translateListing);
+                        if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
+                            OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString(), this::translateListing);
+                        }
 
                         // we need to use post, so that the textview is layouted before scrolling gets called
                         if (((CacheDetailActivity) activity).lastActionWasEditNote) {
