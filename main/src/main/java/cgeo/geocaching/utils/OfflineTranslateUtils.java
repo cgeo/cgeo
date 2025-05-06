@@ -210,7 +210,7 @@ public class OfflineTranslateUtils {
 
     public static void initializeListingTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText, final Runnable callback) {
         if (!Settings.getTranslationTargetLanguage().isValid()) {
-            translationBox.setVisibility(View.GONE);
+            AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
             return;
         }
         final TextView note = translationBox.findViewById(R.id.description_translate_note);
@@ -219,7 +219,7 @@ public class OfflineTranslateUtils {
         // add observer to listing language
         cda.translationStatus.setSourceLanguageChangeConsumer(lng -> {
             if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
-                translationBox.setVisibility(View.GONE);
+                AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
             } else if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
                 button.setEnabled(false);
                 note.setText(R.string.translator_language_unknown);
@@ -231,7 +231,7 @@ public class OfflineTranslateUtils {
 
         button.setOnClickListener(v -> callback.run());
         note.setOnClickListener(v -> OfflineTranslateUtils.showLanguageSelection(cda, cda.translationStatus::setSourceLanguage));
-        translationBox.setVisibility(View.VISIBLE);
+        AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.VISIBLE));
 
         // identify listing language
         OfflineTranslateUtils.detectLanguage(translateText,
