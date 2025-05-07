@@ -62,7 +62,7 @@ public class NewCoordinateInputDialog {
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
-            String label = context.getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy()));
+            final String label = context.getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy()));
             binding.current.setText(label);
         }
     };
