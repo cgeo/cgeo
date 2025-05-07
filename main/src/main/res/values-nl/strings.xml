@@ -1421,6 +1421,7 @@
     <string name="cache_description">Omschrijving</string>
     <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
     <string name="cache_description_rendering">Omschrijving genereren, even geduld…</string>
+    <string name="cache_description_translating_and_rendering">Omschrijving vertalen en weergave opbouwen, even geduld…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Waarschuwing: Omschrijving is erg groot (%1$d tekens). Alleen de eerste %2$d%% worden weergegeven.</string>
     <string name="cache_description_render_fully">Geef complete beschrijving weer</string>
     <string name="cache_area_description">Beschrijving van het gebied</string>
@@ -2676,6 +2677,7 @@
     <string name="wherigo_download_accept_eula">Log in op www.wherigo.com en accepteer eerst hun algemene voorwaarden</string>
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
+    <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```\nJe mag contact opnemen met de auteur van de cartridge [here](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
