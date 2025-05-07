@@ -218,25 +218,30 @@ public class OfflineTranslateUtils {
 
         // add observer to listing language
         cda.translationStatus.setSourceLanguageChangeConsumer(lng -> {
+            final boolean showTranslationBox;
             if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
-                AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
-            } else if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
-                button.setEnabled(false);
-                note.setText(R.string.translator_language_unknown);
+                showTranslationBox = false;
             } else {
-                button.setEnabled(true);
-                note.setText(cda.getResources().getString(R.string.translator_language_detected, lng.toString()));
+                showTranslationBox = true;
+                if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
+                    button.setEnabled(false);
+                    note.setText(R.string.translator_language_unknown);
+                } else {
+                    button.setEnabled(true);
+                    note.setText(cda.getResources().getString(R.string.translator_language_detected, lng.toString()));
+                }
             }
+            AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(showTranslationBox ? View.VISIBLE : View.GONE));
         });
 
         button.setOnClickListener(v -> callback.run());
         note.setOnClickListener(v -> OfflineTranslateUtils.showLanguageSelection(cda, cda.translationStatus::setSourceLanguage));
-        AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.VISIBLE));
 
         // identify listing language
         OfflineTranslateUtils.detectLanguage(translateText,
                 cda.translationStatus::setSourceLanguage,
                 error -> {
+                    AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.VISIBLE));
                     button.setEnabled(false);
                     note.setText(error);
                 });
