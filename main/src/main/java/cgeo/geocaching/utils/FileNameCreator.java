@@ -23,7 +23,7 @@ public class FileNameCreator {
     public static final FileNameCreator TRACKFILE = new FileNameCreator("track", "gpx");
     public static final FileNameCreator OFFLINE_LOG_IMAGE = new FileNameCreator("cgeo-image-%s", "jpg");
 
-    private final AtomicInteger fileNameCounter = new AtomicInteger(1);
+    private final AtomicInteger fileNameCounter = new AtomicInteger(0);
 
     private final String fixedName;
     private final String prefix;
