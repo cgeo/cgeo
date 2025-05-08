@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.android.material.textfield.TextInputLayout;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the existing coordinate dialog
@@ -58,6 +59,7 @@ public class NewCoordinateInputDialog {
     private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
     private Geopoint gp;
+    private Disposable geoDisposable;
 
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
@@ -109,9 +111,11 @@ public class NewCoordinateInputDialog {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
                if (saveAndFinishDialog()) {
+                   geoDisposable.dispose();
                    dialog.dismiss();
                }
             } else {
+                geoDisposable.dispose();
                dialog.dismiss();
             }
             return true;
@@ -220,11 +224,8 @@ public class NewCoordinateInputDialog {
 
         dialog.show();
 
-        geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
+        geoDisposable = geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
     }
-
-
-
 
     // Close dialog and return selected coordinates to caller
     private boolean saveAndFinishDialog() {
