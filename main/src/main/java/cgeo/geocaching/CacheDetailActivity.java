@@ -82,7 +82,6 @@ import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
