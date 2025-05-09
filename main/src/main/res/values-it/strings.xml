@@ -2657,7 +2657,6 @@
     <string name="wherigo_download_progress_download_status">Scaricato %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
     <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
-    <string name="wherigo_error_game_error">Errore segnalato da Wherigo:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_email">Segnalazione problema Wherigo\n\nErrore: %1$s\n\n info Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>

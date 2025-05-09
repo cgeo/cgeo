@@ -2669,7 +2669,6 @@
     <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
-    <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_email">Wherigo Problembericht\n\nEnginefehler: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>

@@ -2627,9 +2627,9 @@
     <string name="wherigo_zone_navigate_compass">Kompass till centrum</string>
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
-    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo-motorn:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>

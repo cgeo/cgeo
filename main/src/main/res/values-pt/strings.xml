@@ -2622,7 +2622,6 @@
     <string name="wherigo_download_progress_download_status">Transferido %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
-    <string name="wherigo_error_game_error">Erro reportado pelo motor Wherigo:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_email">Relatório de problema no Wherigo\n\nErro: %1$s\n\nInformação Wherigo: %2$s</string>
     <string name="wherigo_error_toast">O motor do Wherigo reportou um erro. Abra o diálogo de erros para ver os detalhes.</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
