@@ -538,7 +538,7 @@ dependencies {
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
