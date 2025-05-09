@@ -8,8 +8,11 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import okhttp3.Cookie;
@@ -83,6 +86,12 @@ public final class Cookies {
             final StringBuilder cookieLogString = doLogging ? new StringBuilder() : null;
             synchronized (this) {
                 for (final Cookie cookie : allCookies.values()) {
+                    /* I am not sure what the problem is exactly. It seems like waymarking replies with set-cookie with those cookie names,
+                       all with an empty string, and if you try to access the login page afterwards with those cookies set it returns 500. */
+                    if (url.toString().contains("waymarking.com") &&
+                            List.of("WaymarksOnly", "SortType", "Radius", "ImagesOnly", "LogCount", "ExcludeVisitedWaymarks", "ExcludePostedWaymarks", "ShowFilteredCategories", "WaymarkStatus").contains(cookie.name()))
+                        continue;
+
                     if (cookie.matches(url)) {
                         cookies.add(cookie);
                         if (doLogging) {
@@ -99,6 +108,24 @@ public final class Cookies {
 
         public synchronized void clear() {
             allCookies.clear();
+            dumpCookieStore();
+        }
+
+        public synchronized void remove(final String domain) {
+            final HttpUrl url = HttpUrl.parse(domain);
+            if (url == null) {
+                Log.w("Could not remove cookies for domain " + domain);
+                return;
+            }
+
+            final Iterator<Map.Entry<String, Cookie>> iterator = allCookies.entrySet().iterator();
+            while (iterator.hasNext()) {
+                final Map.Entry<String, Cookie> cookie = iterator.next();
+                if (cookie.getValue().matches(url)) {
+                    iterator.remove();
+                }
+            }
+
             dumpCookieStore();
         }
 
@@ -141,7 +168,10 @@ public final class Cookies {
 
     public static void clearCookies() {
         cookieJar.clear();
-        cookieJar.dumpCookieStore();
+    }
+
+    public static void removeCookies(final String domain) {
+        cookieJar.remove(domain);
     }
 
     // To be called once when starting the application

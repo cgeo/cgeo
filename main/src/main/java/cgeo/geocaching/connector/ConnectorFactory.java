@@ -26,7 +26,7 @@ import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
-import cgeo.geocaching.connector.wm.WaymarkingConnector;
+import cgeo.geocaching.connector.wm.WMConnector;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
@@ -82,7 +82,7 @@ public final class ConnectorFactory {
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
             new TerraCachingConnector(),
-            new WaymarkingConnector(),
+            WMConnector.getInstance(),
             SuConnector.getInstance(),
             InternalConnector.getInstance(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
