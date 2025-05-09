@@ -53,7 +53,6 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.CalculatedCoordinate;
-import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
@@ -83,10 +82,10 @@ import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -196,7 +195,7 @@ import org.apache.commons.text.StringEscapeUtils;
  * e.g. details, description, logs, waypoints, inventory, variables...
  */
 public class CacheDetailActivity extends TabbedViewPagerActivity
-        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, EditNoteDialogListener, CoordinatesInputDialog.CoordinateUpdate {
+        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -781,7 +780,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_ignore) {
             ignoreCache();
         } else if (menuItem == R.id.menu_set_coordinates) {
-            setCoordinates();
+            setCoordinates(this);
         } else if (menuItem == R.id.menu_extract_waypoints) {
             final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
             extractWaypoints(searchText, cache);
@@ -845,12 +844,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         });
     }
 
-    private void setCoordinates() {
+    private void setCoordinates(final Activity activity) {
         ensureSaved();
-        final CoordinateInputData cid = new CoordinateInputData();
-        cid.setGeopoint(cache.getCoords());
-        cid.setGeocode(cache.getGeocode());
-        CoordinatesInputDialog.show(getSupportFragmentManager(), cid);
+        NewCoordinateInputDialog.show(activity, this::onCoordinatesUpdated, cache.getCoords());
+    }
+
+    public void onCoordinatesUpdated(final Geopoint input) {
+        cache.setCoords(input);
+        if (cache.isOffline()) {
+            storeCache(cache.getLists());
+        } else {
+            storeCache(false);
+        }
     }
 
     private void showVoteDialog() {
@@ -2995,29 +3000,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public void setNeedsRefresh() {
         refreshOnResume = true;
-    }
-
-
-    // methods for implementing CoordinateUpdate interface
-
-    @Override
-    public void updateCoordinates(final Geopoint gp) {
-        cache.setCoords(gp);
-        if (cache.isOffline()) {
-            storeCache(cache.getLists());
-        } else {
-            storeCache(false);
-        }
-    }
-
-    @Override
-    public boolean supportsNullCoordinates() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsCalculatedCoordinates() {
-        return false;
     }
 
 }

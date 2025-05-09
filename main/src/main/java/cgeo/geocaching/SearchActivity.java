@@ -17,12 +17,13 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.search.SearchAutoCompleteAdapter;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.SearchCardView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
@@ -62,7 +63,7 @@ import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
 import org.apache.commons.lang3.StringUtils;
 
-public class SearchActivity extends AbstractNavigationBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class SearchActivity extends AbstractNavigationBarActivity {
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
@@ -424,7 +425,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         }
 
         addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
-                .addOnClickListener(() -> CoordinatesInputDialog.show(getSupportFragmentManager(), null, null)); // callback method is updateCoordinates()
+                .addOnClickListener(this::onClickCoordinates);
 
         addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null, () -> Settings.getHistoryList(R.string.pref_search_history_address), null);
 
@@ -461,21 +462,18 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         }
     }
 
-    @Override
-    public void updateCoordinates(@NonNull final Geopoint geopoint) {
+    private void onClickCoordinates() {
+        NewCoordinateInputDialog.show(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
+    }
+
+    public void onUpdateCoordinates(final Geopoint input) {
         try {
-            CacheListActivity.startActivityCoordinates(this, geopoint, null);
+            CacheListActivity.startActivityCoordinates(this, input, null);
             ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
     }
-
-    @Override
-    public boolean supportsNullCoordinates() {
-        return false;
-    }
-
     private void findByKeywordFn(final String keyText) {
         if (StringUtils.isBlank(keyText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show();

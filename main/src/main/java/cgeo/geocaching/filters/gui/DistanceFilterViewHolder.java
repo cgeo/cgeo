@@ -103,8 +103,8 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
     }
 
     private void setCoordinates() {
-        final NewCoordinateInputDialog dialog = new NewCoordinateInputDialog(getActivity(), this::onDialogClosed);
-        dialog.show(location);
+
+        NewCoordinateInputDialog.show(getActivity(), this::onDialogClosed, location);
     }
 
     public void onDialogClosed(final Geopoint input) {
