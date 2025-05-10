@@ -229,7 +229,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
-        return new MapsforgeV6GeoItemLayer(mMapView.getLayerManager(), mMapView.getMapViewProjection());
+        return new MapsforgeV6GeoItemLayer(mMapView);
     }
 
 
