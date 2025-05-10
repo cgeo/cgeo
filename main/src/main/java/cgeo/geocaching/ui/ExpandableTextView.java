@@ -23,7 +23,7 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
 
     public ExpandableTextView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
-        setCollapse(true);
+        setMaxLines(Integer.MAX_VALUE);
         super.setOnClickListener(v -> {
             if (isCollapsed()) {
                 setCollapse(false);
