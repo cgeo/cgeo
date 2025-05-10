@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,25 +25,25 @@ import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 import org.mapsforge.map.layer.overlay.Circle;
 import org.mapsforge.map.layer.overlay.Marker;
 import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
-import org.mapsforge.map.util.MapViewProjection;
 
 public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
 
+    private MapView mapView;
     private LayerManager layerManager;
-    private final MapViewProjection projection;
     private int defaultZLevel;
 
     private MapsforgeV6ZLevelGroupLayer groupLayer;
 
-    public MapsforgeV6GeoItemLayer(final LayerManager layerManager, final MapViewProjection projection) {
-        this.layerManager = layerManager;
-        this.projection = projection;
+    public MapsforgeV6GeoItemLayer(final MapView mapView) {
+        this.mapView = mapView;
+        this.layerManager = mapView.getLayerManager();
     }
 
     @Override
@@ -75,6 +76,7 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
             }
             groupLayer.requestRedraw();
         }
+        this.mapView = null;
     }
 
     @Override
@@ -173,9 +175,21 @@ public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
     @Override
     public ToScreenProjector getScreenCoordCalculator() {
         return gp -> {
-            final Point pt = projection.toPixels(latLong(gp));
+            if (mapView == null || gp == null) {
+                return new int[] { 0, 0 };
+            }
+            final Point pt = projectLatLon(mapView, latLong(gp));
             return new int[]{(int) pt.x, (int) pt.y};
         };
+    }
+
+    /**
+     * projects a latlon to a screen coordinate. Accomodates for all visual effects
+     * eg zooming, rotation, tilting.
+     */
+    @NonNull
+    private static Point projectLatLon(@NonNull final MapView mapView, @NonNull final LatLong latLong) {
+        return mapView.getMapViewProjection().toPixels(latLong, true);
     }
 
 }

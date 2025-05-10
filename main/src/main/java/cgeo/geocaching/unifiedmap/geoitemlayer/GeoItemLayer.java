@@ -493,7 +493,8 @@ public class GeoItemLayer<K> {
             final IProviderGeoItemLayer<?> pl = this.providerLayer;
             if (pl != null) {
                 toCoordFct = pl.getScreenCoordCalculator();
-                Log.d("Touched: " + tapped + " at " + (toCoordFct == null ? "-" : toCoordFct.project(tapped)));
+                final int[] projCoord = toCoordFct == null ? new int[]{-1, -1} : toCoordFct.project(tapped);
+                Log.d("Touched: " + tapped + " at [" + projCoord[0] + ", " + projCoord[1] + "]");
             } else {
                 toCoordFct = null;
             }
