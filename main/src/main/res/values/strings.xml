@@ -2198,11 +2198,11 @@
 
     <!-- export -->
     <string name="share_export">Share / Export</string>
-    <string name="export">Export</string>
+    <string name="export">Export / Upload</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exported to</string>
     <string name="export_failed">Export failed</string>
-    <string name="export_fieldnotes">Field Notes</string>
+    <string name="export_fieldnotes">Export field notes</string>
     <string name="export_fieldnotes_info">Field Notes will be exported to /sdcard/field-notes with the current date and time as their file name.</string>
     <string name="export_fieldnotes_upload">Upload to geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploading…</string>
@@ -2212,7 +2212,7 @@
     <string name="export_gpx_info">The GPX file will be exported to %1$s with the current date and time as its file name.</string>
     <string name="export_confirm_title">Exporting %1$s</string>
     <string name="export_confirm_message">To Path: %1$s\nFile Name: %2$s</string>
-    <string name="export_persnotes">Personal notes</string>
+    <string name="export_persnotes">Upload personal notes</string>
     <string name="export_persnotes_uploading">Uploading personal note %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="zero">Uploaded %1$d notes successfully</item>
