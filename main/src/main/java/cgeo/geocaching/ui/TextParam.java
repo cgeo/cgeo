@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MarkdownUtils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -242,7 +243,7 @@ public class TextParam {
 
         //markdown
         if (this.useMarkdown && context != null) {
-            final Markwon markwon = Markwon.create(context);
+            final Markwon markwon = MarkdownUtils.create(context);
             text = markwon.toMarkdown(text.toString());
         }
 

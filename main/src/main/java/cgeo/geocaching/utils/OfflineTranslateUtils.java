@@ -96,8 +96,10 @@ public class OfflineTranslateUtils {
                 .addOnFailureListener(e -> errorConsumer.accept(e.getMessage()));
     }
 
-    public static void translateTextAutoDetectLng(final Activity activity, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
-        detectLanguage(text, lng -> getTranslator(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer), e -> {
+    public static void translateTextAutoDetectLng(final Activity activity, final Status translationStatus, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+        detectLanguage(text, lng -> {
+            getTranslator(activity, translationStatus, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
+        }, e -> {
 
         });
     }
@@ -110,7 +112,7 @@ public class OfflineTranslateUtils {
      * @param downloadingModelConsumer  returned if language models need to be downloaded, should be used to show a progress UI to the user
      * @param translatorConsumer        returns the translator object
      */
-    public static void getTranslator(final Activity activity, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<OfflineTranslateUtils. Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void getTranslator(final Activity activity, final Status translationStatus, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<OfflineTranslateUtils.Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
         final String lng = TranslateLanguage.fromLanguageTag(sourceLng.getCode());
         if (null == lng) {
             unsupportedLngConsumer.accept(sourceLng);
@@ -122,9 +124,11 @@ public class OfflineTranslateUtils {
                 OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.translator_model_download_confirm_title).setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, String.join(", ", missingLanguageModels.stream().map(OfflineTranslateUtils.Language::toString).collect(Collectors.toList())))).confirm(() -> {
-                    downloadingModelConsumer.accept(missingLanguageModels);
-                    OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
-                });
+                            downloadingModelConsumer.accept(missingLanguageModels);
+                            OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
+                        },
+                        () -> translationStatus.abortTranslation()
+                );
             }
         });
     }
@@ -133,21 +137,26 @@ public class OfflineTranslateUtils {
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
         final AtomicInteger remaining = new AtomicInteger(elements.size());
-        for (TextNode textNode : elements) {
-            translator.translate(textNode.text())
-                    .addOnSuccessListener(translation -> {
-                        textNode.text(translation);
-                        // check if all done
-                        if (remaining.decrementAndGet() == 0) {
-                            consumer.accept(document.body().html());
-                            status.updateProgress();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e("err: " + e.getMessage());
-                        status.abortTranslation();
-                        errorConsumer.accept(e);
-                    });
+        if (remaining.get() == 0) {
+            consumer.accept("");
+            status.updateProgress();
+        } else {
+            for (TextNode textNode : elements) {
+                translator.translate(textNode.text())
+                        .addOnSuccessListener(translation -> {
+                            textNode.text(translation);
+                            // check if all done
+                            if (remaining.decrementAndGet() == 0) {
+                                consumer.accept(document.body().html());
+                                status.updateProgress();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("err: " + e.getMessage());
+                            status.abortTranslation();
+                            errorConsumer.accept(e);
+                        });
+            }
         }
     }
 

@@ -20,7 +20,7 @@ String commitIdShort = gitCommitIdProvider.get()
 
 android {
     namespace 'cgeo.geocaching'
-    compileSdk 34
+    compileSdk 35
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
@@ -203,9 +203,6 @@ android {
         // necessary as we changing locales at runtime (CgeoApplication.initApplicationLocale())
         disable 'AppBundleLocaleChanges'
 
-        // move UnsafeImplicitIntentLaunch error to warning until fixed, see https://github.com/cgeo/cgeo/issues/16838
-        warning 'UnsafeImplicitIntentLaunch'
-
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
         checkDependencies true
@@ -304,7 +301,7 @@ android {
 
 dependencies {
     // desugaring of Java 8 APIs
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
@@ -538,7 +535,7 @@ dependencies {
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 

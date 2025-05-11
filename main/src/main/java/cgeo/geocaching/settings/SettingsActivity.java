@@ -349,6 +349,11 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         return intent;
     }
 
+    public static void openForSettingsLink(final Uri uri, final Context fromActivity) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, uri, fromActivity, SettingsActivity.class);
+        fromActivity.startActivity(intent);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         if (getSupportFragmentManager().popBackStackImmediate()) {
