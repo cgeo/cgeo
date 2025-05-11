@@ -90,14 +90,6 @@
                 android:title="@string/caches_upload_bookmarklist_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
-                android:id="@+id/menu_upload_modifiedcoords"
-                android:title="@string/caches_upload_modifiedcoords"
-                app:showAsAction="ifRoom|withText"/>
-            <item
-                android:id="@+id/menu_upload_allcoords"
-                android:title="@string/caches_upload_allcoords"
-                app:showAsAction="ifRoom|withText"/>
-            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:enabled="true"
@@ -198,6 +190,16 @@
                 android:id="@+id/menu_export_persnotes"
                 android:title="@string/export_persnotes"
                 android:icon="@drawable/ic_menu_note"/>
+            <item
+                android:id="@+id/menu_upload_modifiedcoords"
+                android:icon="@drawable/ic_menu_upload"
+                android:title="@string/caches_upload_modifiedcoords"
+                app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/menu_upload_allcoords"
+                android:icon="@drawable/ic_menu_upload"
+                android:title="@string/caches_upload_allcoords"
+                app:showAsAction="ifRoom|withText" />
         </menu>
     </item>
     <item
