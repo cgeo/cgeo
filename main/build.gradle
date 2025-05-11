@@ -20,7 +20,7 @@ String commitIdShort = gitCommitIdProvider.get()
 
 android {
     namespace 'cgeo.geocaching'
-    compileSdk 34
+    compileSdk 35
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
