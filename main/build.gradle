@@ -301,7 +301,7 @@ android {
 
 dependencies {
     // desugaring of Java 8 APIs
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
