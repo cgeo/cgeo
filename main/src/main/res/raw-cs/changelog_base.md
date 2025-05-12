@@ -22,7 +22,7 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Zobrazí geofence u zastávek labek (Sjednocená mapa) - povolte "Kruhy" v rychlém nastavení na mapě pro jejich zobrazení
 - Novinka: Možnost nastavit kruhy s individuálním poloměrem na trasové body (možnost kontextového menu "Sledovaná oblast")
 - Oprava: Zobrazení mapy se neaktualizuje při odebrání kešky z aktuálně zobrazeného seznamu
-- Fix: Number of cache in list chooser not updated on changing list contents
+- Oprava: Číslo kešky ve výběrovém seznamu se neaktualizuje při změně obsahu seznamu
 - Změna: Ponechat aktuální zobrazení při mapování seznamu, pokud se všechny kešky vejdou do aktuálního zobrazení
 - Novinka: Sledování mé polohy v grafu nadmořské výšky (Sjednocená mapa)
 - Novinka: Povolit akce "přesunout do" / "kopírovat do" pro "zobrazit jako seznam"
@@ -32,8 +32,8 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
 - Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
+- Nový: Offline stínování kopců pro Sjednocenou mapu (VTM varianta)
+- Novinka: Podpora pro mapy pozadí (Sjednocená mapa)
 
 ### Detaily kešky
 - Nový: Offline překlad textu a logů (experimentální)
@@ -44,15 +44,15 @@ Until then, you can switch between the different implementations in settings => 
 - Změna: zástupné symboly budou namísto aktuálního data používat zvolené datum
 - Novinka: Sbalení dloouhých logů je nyní ve výchozím nastavení
 
-### Wherigo player
+### Wherigo přehrávač
 - Novinka: Integrovaná kontrola chybějících pověření v přehrávači Wherigo
 - Změna: Odstraněno hlášení chyb Wherigo (jako jsou chyby většinou související s cartridgí, musí být opraveno majitelem cartridge)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
+- Novinka: Schopnost přejít do zóny pomocí kompasu
+- Novinka: Možnost kopírovat souřadnice centra zóny do schránky
+- Novinka: Nastavit centrum zóny jako cíl při otevření mapy (získat pro něj informace o směrování a vzdálenosti)
 - Novinka: Podpora otevírání místních Wherigo souborů
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- Změna: Dlouhým poklepáním na zónu na mapě již není rozpoznáno. To umožňuje uživatelům dělat další věci v oblasti mapy dostupné na dlouhém klepnutí, např.: vytvořit uživatelem definovanou kešku
+- Novinka: Zobrazí upozornění, pokud na wherigo.com chybí zprávy EULA (což vede k selhávajícímu stahování cartridge)
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
@@ -68,5 +68,5 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Přidat "Odstranit minulé události" do seznamu "Vše"
 - Novinka: Zobrazit konektor pro "uživatelem definované kešky" jako aktivní ve zdrojovém filtru
 - Novinka: Export GPX: export záznamů / trasovatelných položek je volitelný
-- New: Added button to delete log templates
+- Novinka: Přidáno tlačítko pro odstranění šablon logů
 - Oprava: Importování místního mapového souboru získá náhodný název mapy
