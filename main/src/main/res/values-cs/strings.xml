@@ -1291,6 +1291,7 @@
     <string name="persistablefolder_base">Hlavní</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
+    <string name="persistablefolder_backgroundmaps">Mapy pozadí</string>
     <string name="persistablefolder_offline_maps_shading">Soubory se stínováním map</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
@@ -1448,6 +1449,7 @@
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
     <string name="cache_description_rendering">Vykreslování popisu, čekejte prosím…</string>
+    <string name="cache_description_translating_and_rendering">Překlad a vykreslování popisu, počkejte prosím…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varování: Popis je velmi velký (%1$d znaků). Zobrazí se pouze prvních %2$d%%.</string>
     <string name="cache_description_render_fully">Popis kompletně vykreslený</string>
     <string name="cache_area_description">Popis místa</string>
@@ -2560,6 +2562,7 @@
     <string name="receivedownload_integritycheck_failed">Kontrola integrity se nezdařila</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
+    <string name="downloadbackground_title">Stáhnout mapu pozadí</string>
     <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_filename">Stahování %s</string>
@@ -2731,9 +2734,10 @@
     <string name="wherigo_download_progress_login">Přihlašování…</string>
     <string name="wherigo_download_progress_started">Stahování začalo</string>
     <string name="wherigo_download_progress_download_status">Staženo %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Přihlaste se prosím na www.wherigo.com a přijměte nejprve jejich podmínky</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
-    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Enginem:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>

@@ -1,5 +1,8 @@
 ##
 - Oprava: Stav oblíbených se ztratí při výběru obrázku při přípravě logu
+- Oprava: Přehrávač Wherigo neumožňuje cílový výběr pro akci
+- Oprava: Změna rotačního režimu pomocí vyskakovacího okna, které nefunguje spolehlivě (Sjednocená mapa)
+- Oprava: Na značky kešek nelze klepnout na otočené mapě (Sjednocená mapa Mapsforge)
 
 ##
 - Oprava: Wherigo odkazy bez názvu hostitele nebyly zjištěny

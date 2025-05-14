@@ -1,3 +1,5 @@
+(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
@@ -32,6 +34,8 @@ Until then, you can switch between the different implementations in settings => 
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
 - Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
+- Nyhet: Offline backskuggning för UnifiedMap (VTM-variant)
+- Nytt: Stöd för bakgrundskartor (UnifiedMap)
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
@@ -50,6 +54,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - Nyhet: Stöd för att öppna lokala Wherigo-filer
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Allmänt
 - New: Redesigned search page
@@ -57,7 +62,7 @@ Until then, you can switch between the different implementations in settings => 
 - Nytt: Stöd för koordinater i DD,DDDDDDD-format
 - Nytt: Visa senast använda filternamn i filterdialogen
 - Nytt: Koordinatkalkylator: Funktion för att ersätta "x" med multiplikationssymbol
-- Fix: Felaktig höjd (använder inte medelvärde över havet)
+- Fix: Felaktig höjd (använder inte höjd över havsmedelnivån)
 - Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
 - Fix: Sorting of cache lists by distance descending not working correctly
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"

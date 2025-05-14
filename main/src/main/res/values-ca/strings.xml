@@ -1280,6 +1280,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapes fora de línia</string>
     <string name="persistablefolder_offline_maps_themes">Temes de mapes</string>
+    <string name="persistablefolder_backgroundmaps">Mapes de fons</string>
     <string name="persistablefolder_offline_maps_shading">Fitxers d\'ombrejat de mapes</string>
     <string name="persistablefolder_backup">Còpia de seguretat</string>
     <string name="persistablefolder_logfiles">Arxius de registre</string>
@@ -1421,6 +1422,7 @@
     <string name="cache_description">Descripció</string>
     <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
     <string name="cache_description_rendering">S\'està mostrant la descripció, espereu…</string>
+    <string name="cache_description_translating_and_rendering">S\'està traduint i mostrant la descripció, si us plau, espereu…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Avís: la descripció és molt gran (%1$d caràcters). Només es mostren els primers %2$d%%.</string>
     <string name="cache_description_render_fully">Mostra una descripció completa</string>
     <string name="cache_area_description">Descripció de l’àrea</string>
@@ -2504,6 +2506,7 @@
     <string name="receivedownload_integritycheck_failed">La comprovació d\'integritat ha fallat</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
+    <string name="downloadbackground_title">Descarrega el mapa de fons</string>
     <string name="download_title">Descarrega l\'arxiu</string>
     <string name="downloadmap_info">Seleccioneu un fitxer de mapa per a la vostra regió tocant la icona \"Desa\".\n\nLa baixada es realitza en segon pla. Quan la transferència s\'hagi completat, el fitxer es copia a la carpeta de mapes de C:geo i es defineix com a mapa actual.\n\nVés amb compte: la descàrrega d\'un mapa pot provocar un gran trànsit a la xarxa.</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
@@ -2653,6 +2656,8 @@
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">interior</string>
     <string name="wherigo_zone_near">prop</string>
+    <string name="wherigo_zone_navigate_compass">Brúixola al centre</string>
+    <string name="wherigo_zone_copy_coordinates">Copia les coordenades del centre</string>
     <string name="wherigo_choose_cartridge">Trieu el cartutx</string>
     <string name="wherigo_choose_new_loadgame">Trieu un joc o un joc nou per carregar</string>
     <string name="wherigo_choose_savegame_slot">Trieu una ranura on desar</string>
@@ -2671,9 +2676,10 @@
     <string name="wherigo_download_progress_login">Iniciant sessió…</string>
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
-    <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>
     <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError del motor: %1$s\n\nInformació de Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>

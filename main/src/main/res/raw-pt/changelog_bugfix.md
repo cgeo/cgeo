@@ -1,5 +1,8 @@
 ##
 - Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Fix: Wherigo player does not allow target selection for thing action
+- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
+- Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
 
 ##
 - Fix: Wherigo links without host name not detected

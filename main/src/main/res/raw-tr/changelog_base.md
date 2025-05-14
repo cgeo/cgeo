@@ -1,3 +1,5 @@
+(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
@@ -32,6 +34,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap)
 
 ### Geocache ayrıntıları
 - New: Offline translation of listing text and logs (experimental)
@@ -50,6 +54,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Set zone center as target when opening map (to get routing and distance info for it)
 - New: Support opening local Wherigo files
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
+- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
 ### Genel
 - New: Redesigned search page
