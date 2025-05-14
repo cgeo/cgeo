@@ -1383,10 +1383,6 @@
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_address">Dirección</string>
     <string name="search_geo">Geocode</string>
-<<<<<<< HEAD
-=======
-    <string name="search_geocode_from_clipboard">El Geocode se ha pegado desde el portapapeles.</string>
->>>>>>> release
     <string name="search_kw">Palabra clave</string>
     <string name="search_hbu">Escondido por</string>
     <string name="search_finder">Encontrado por</string>
