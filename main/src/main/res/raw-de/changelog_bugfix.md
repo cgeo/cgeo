@@ -1,8 +1,9 @@
 ##
 - Korrektur: Favoriten-Status geht verloren, wenn während der Erstellung eines Logs ein Bild ausgewählt wird
-- Fix: Wherigo player does not allow target selection for thing action
-- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
-- Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
+- Korrektur: Der Wherigo-Player erlaubt keine Auswahl von Aktionen für Dinge
+- Korrektur: Ändern der Kartenrotation über Popup unzuverlässig (UnifiedMap)
+- Korrektur: Cache-Marker auf gedrehter Karte nicht anwählbar (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
 
 ##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
