@@ -1,3 +1,5 @@
+(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+
 ### UnifiedMap-routekaart en kennisgeving van veroudering van "oude" kaarten
 c:geo heeft al een tijdje een geheel nieuwe kaartimplementatie met de naam "UnifiedMap". Deze zal uiteindelijk de oude implementaties van Google Maps en Mapsforge (OpenStreetMap) vervangen. Dit is een waarschuwing van afschaffing om je te informeren over de verdere routekaart.
 
