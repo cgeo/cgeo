@@ -739,13 +739,6 @@
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
     <string name="search_address">Adresă</string>
-<<<<<<< HEAD
-=======
-    <string name="search_address_button">Caută după adresă</string>
-    <string name="search_kw_button">Caută după cuvânt cheie</string>
-    <string name="search_hbu_prefill">Proprietar</string>
-    <string name="search_hbu_button">Caută după numele proprietarului</string>
->>>>>>> release
     <string name="search_tb">Obiect călător</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
