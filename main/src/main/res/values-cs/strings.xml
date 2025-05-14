@@ -1907,10 +1907,6 @@
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_address">Adresa</string>
     <string name="search_geo">Geokód</string>
-<<<<<<< HEAD
-=======
-    <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
->>>>>>> release
     <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_disabled_hint">Zakázáno, protože není podporováno službou geocaching.com pro ZÁKLADNÍ členy</string>
     <string name="search_hbu">Ukryl</string>
