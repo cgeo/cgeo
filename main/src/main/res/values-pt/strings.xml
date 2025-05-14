@@ -1818,14 +1818,13 @@
     <string name="search_address">Endereço</string>
     <string name="search_address_button">Pesquisar por endereço</string>
     <string name="search_geo">Geo-código</string>
-    <string name="search_geo_button">Pesquisar por geo-código</string>
     <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
-    <string name="search_kw_button">Pesquisar por palavra-chave</string>
+    <string name="search_kw_button">Pesquisa por palavra-chave</string>
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
-    <string name="search_hbu_prefill">Proprietário</string>
+    <string name="search_hbu_prefill">Dono</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
@@ -2614,7 +2613,6 @@
     <string name="wherigo_dialog_pause_info">Retome o diálogo no reprodutor Wherigo tocando em \"Retomar diálogo pausado\"</string>
     <string name="wherigo_no_game_running">Não está nenhum jogo Wherigo em execução</string>
     <string name="wherigo_currently_playing">Em execução</string>
-    <string name="wherigo_cartridge_details">Detalhes do cartucho</string>
     <string name="wherigo_locate_on_center">Localizar no centro</string>
     <string name="wherigo_revoke_fixed_location">Revogar localização fixa</string>
     <string name="wherigo_thingtype_location">Locais</string>

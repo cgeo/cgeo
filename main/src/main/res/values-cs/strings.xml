@@ -312,6 +312,8 @@
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
     <string name="info_log_delete_failed">Odstranění logu se nezdařilo.</string>
+    <string name="info_log_post_failed_simple_reason">Zkontrolujte, zda jste správně přihlášeni a máte funkční připojení k internetu.</string>
+    <string name="info_log_delete_failed_simple_reason">Zkontrolujte, zda jste se správně přihlásili, máte funkční připojení k internetu a že log již není smazán.</string>
     <string name="info_log_post_retry">Opakovat</string>
     <string name="info_log_post_save">Uložit offline</string>
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
@@ -1848,7 +1850,6 @@
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hledat podle adresy</string>
     <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Hledat podle geokódu</string>
     <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
     <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
@@ -2674,7 +2675,6 @@
     <string name="wherigo_dialog_pause_info">Pokračovat v dialogovém okně Wherigo přehrávače klepnutím na \"Pokračovat v pozastaveném dialogu\"</string>
     <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
     <string name="wherigo_currently_playing">Právě se hraje</string>
-    <string name="wherigo_cartridge_details">Podrobnosti cartridge</string>
     <string name="wherigo_locate_on_center">Vycentrovat</string>
     <string name="wherigo_revoke_fixed_location">Zrušit zafixovanou polohu</string>
     <string name="wherigo_thingtype_location">Místa</string>

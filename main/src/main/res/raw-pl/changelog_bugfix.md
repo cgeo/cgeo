@@ -1,4 +1,11 @@
 ##
+- Naprawiono: Status ulubionej skrytki był tracony podczas wybierania obrazu podczas przygotowywania wpisu
+- Naprawiono: Odtwarzacz Wherigo nie zezwala na wybór celu dla akcji
+- Naprawiono: Zmiana trybu obrotu przy użyciu wyskakującego okienka nie działa niezawodnie (UnifiedMap)
+- Naprawiono: Znaczniki skrytek nie reagowały na dotknięcia na obracanej mapie (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+
+##
 - Naprawiono: Linki Wherigo bez nazwy hosta nie były wykrywane
 - Naprawiono: Nieczytelny komunikat o błędzie podczas publikowania wpisu dziennika
 - Cofnięto: Wykrywanie lokalnych plików .map (ze względu na niepożądane efekty uboczne)

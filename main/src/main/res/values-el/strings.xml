@@ -1497,7 +1497,6 @@
     <string name="search_address">Διεύθυνση</string>
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
-    <string name="search_geo_button">Αναζήτηση ανά γεωκωδικό</string>
     <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>

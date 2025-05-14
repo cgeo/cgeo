@@ -1811,7 +1811,6 @@
     <string name="search_address">Adress</string>
     <string name="search_address_button">Sök med adress</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Sök med Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>

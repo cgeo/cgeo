@@ -689,8 +689,7 @@
     <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
     <string name="search_address">Ang Address</string>
     <string name="search_address_button">Sinaliksik sa pamamagitan ng address</string>
-    <string name="search_kw_prefill">Mga Keyword</string>
-    <string name="search_kw_button">Sinaliksik sa pamamagitan ng keyword</string>
+    <string name="search_kw_button">Pagsaliksik sa pamamagitan ng keyword</string>
     <string name="search_hbu_prefill">Ang may-ari</string>
     <string name="search_hbu_button">Sinaliksik sa pamamagitan ng sariling pangalan</string>
     <string name="search_tb">Nasasala</string>

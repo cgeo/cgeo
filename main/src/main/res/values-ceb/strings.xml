@@ -659,7 +659,6 @@
     <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
     <string name="search_address">Lugar</string>
     <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
-    <string name="search_kw_prefill">Importanteng letra</string>
     <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
     <string name="search_hbu_prefill">Tag-iya</string>
     <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>

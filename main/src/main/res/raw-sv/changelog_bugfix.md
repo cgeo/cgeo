@@ -1,7 +1,14 @@
 ##
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Fix: Wherigo-spelare tillåter inte målval för sak-åtgärder
+- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
+- Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+
+##
 - Fix: Wherigo links without host name not detected
 - Fix: Non-legible error message when posting a log
-- Reverted: Local .map file detection (due to unwanted side-effects)
+- Återställd: Lokal .map fildetektering (på grund av oönskade sidoeffekter)
 
 ##
 - Fix: Wherigo: Hantera zoner med ogiltiga/alltför nära koordinater

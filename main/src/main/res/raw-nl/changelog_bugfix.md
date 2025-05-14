@@ -1,4 +1,11 @@
 ##
+- Oplossing: Favoriet status gaat verloren bij het uitvoeren van een afbeeldingsselectie tijdens het voorbereiden van een log
+- Oplossing: Wherigo speler staat geen doelselectie toe voor ding actie
+- Oplossing: Wijzigen van rotatie modus met behulp van popup werkt niet betrouwbaar (UnifiedMap)
+- Oplossing: cachemarkers niet aan te tikken op een gedraaide kaart (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+
+##
 - Oplossing: Wherigo links zonder host naam niet gedetecteerd
 - Oplossing: Niet-leesbare foutmelding bij het plaatsen van een log
 - Teruggedraaid: Lokale .map bestandsdetectie (vanwege ongewenste bijwerkingen)
