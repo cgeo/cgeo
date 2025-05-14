@@ -1279,6 +1279,7 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline-Karten</string>
     <string name="persistablefolder_offline_maps_themes">Kartendesigns</string>
+    <string name="persistablefolder_backgroundmaps">Hintergrundkarten</string>
     <string name="persistablefolder_offline_maps_shading">Kartenschattierungsdateien</string>
     <string name="persistablefolder_backup">Sicherung</string>
     <string name="persistablefolder_logfiles">Logdateien</string>
@@ -1420,6 +1421,7 @@
     <string name="cache_description">Beschreibung</string>
     <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
     <string name="cache_description_rendering">Formatiere Beschreibung, bitte warten…</string>
+    <string name="cache_description_translating_and_rendering">Übersetze und bereite die Beschreibung auf, bitte warten…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warnung: Beschreibung ist sehr lang (%1$d Zeichen). Nur die ersten %2$d%% werden angezeigt.</string>
     <string name="cache_description_render_fully">Komplette Beschreibung anzeigen</string>
     <string name="cache_area_description">Bereichsbeschreibung</string>
@@ -1464,6 +1466,8 @@
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
     <string name="cache_menu_speechDeactivate">Beende Sprachausgabe</string>
     <string name="cache_menu_speechActivate">Starte Sprachausgabe</string>
+    <string name="talking_disabled">Sprachausgabe deaktiviert</string>
+    <string name="talking_enabled">Sprachausgabe aktiviert</string>
     <string name="cache_menu_navigate">Navigieren</string>
     <string name="cache_menu_target">Als Ziel festlegen</string>
     <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
@@ -2500,6 +2504,7 @@
     <string name="receivedownload_integritycheck_failed">Integritätsprüfung fehlgeschlagen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
+    <string name="downloadbackground_title">Hintergrundkarte herunterladen</string>
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_filename">Lade %s</string>
@@ -2649,6 +2654,8 @@
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">innerhalb</string>
     <string name="wherigo_zone_near">in der Nähe</string>
+    <string name="wherigo_zone_navigate_compass">Kompass (Zentrum)</string>
+    <string name="wherigo_zone_copy_coordinates">Koordinaten (Mitte) kopieren</string>
     <string name="wherigo_choose_cartridge">Cartridge auswählen</string>
     <string name="wherigo_choose_new_loadgame">Wähle neues Spiel oder Spiel zum Laden</string>
     <string name="wherigo_choose_savegame_slot">Wähle einen Speicherplatz</string>
@@ -2667,8 +2674,10 @@
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
     <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
+    <string name="wherigo_download_accept_eula">Bitte logge dich auf www.wherigo.com ein und akzeptiere zuerst deren Allgemeine Geschäftsbedingungen</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
+    <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```\nDu kannst den Autor der Cartridge [hier](%2$s) kontaktieren</string>
     <string name="wherigo_error_email">Wherigo Problembericht\n\nEnginefehler: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
