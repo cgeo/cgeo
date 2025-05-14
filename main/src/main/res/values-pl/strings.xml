@@ -1906,14 +1906,7 @@
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_address">Adres</string>
     <string name="search_geo">Geokod</string>
-<<<<<<< HEAD
     <string name="search_kw">Słowo kluczowe</string>
-=======
-    <string name="search_geocode_from_clipboard">Geokod został wklejony ze schowka.</string>
-    <string name="search_kw">Słowo kluczowe</string>
-    <string name="search_kw_prefill">Słowo kluczowe</string>
-    <string name="search_kw_button">Szukanie po słowie kluczowym</string>
->>>>>>> release
     <string name="search_kw_disabled_hint">Wyłączone, ponieważ nie jest obsługiwany przez geocaching.com dla członków podstawowych</string>
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_finder">Znalezione przez</string>
