@@ -1,3 +1,5 @@
+(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+
 ### Roadmap UnifiedMap (Vereinheitlichte Karte) & Abkündigung der alten Karten
 c:geo hat seit einiger Zeit eine komplett neue Kartenimplementierung namens "UnifiedMap", die bald die alten Implementierungen von Google Maps und Mapsforge (OpenStreetMap) ersetzen wird. Dies ist ein Abkündigungs-Hinweis und informiert über die weitere Planung.
 
@@ -32,8 +34,8 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
 - Neu: Erlaubt die Einstellung des Anzeigennamens für Offline-Karten in der Begleitdatei (UnifiedMap)
 - Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
+- Neu: Offline Hangschattierung für UnifiedMap (VTM-Variante)
+- Neu: Unterstützung für Hintergrundkarten (UnifiedMap)
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -52,7 +54,7 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Zonenmitte beim Öffnen der Karte als Ziel festlegen (um Routen- und Distanzinformationen dafür zu erhalten)
 - Neu: Unterstützt das Öffnen lokaler Wherigo-Dateien
 - Änderung: Lange Tippen auf eine Zone auf der Karte wird ignoriert. Dies ermöglicht Zugriff auf andere Funktionen mit langem Tippen, z. B. Erstellen benutzerdefinierter Caches
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- Neu: Warnung anzeigen, wenn wherigo.com fehlende EULA meldet (was zum fehlgeschlagenen Download von Cartridges führt)
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
