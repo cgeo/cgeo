@@ -1,3 +1,5 @@
+(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+
 ### Full de ruta de UnifiedMap & avís de desús de mapes "vells".
 c:geo té una implementació de mapes totalment nova anomenada "UnifiedMap" des de fa temps, que finalment substituirà les antigues implementacions de Google Maps i Mapsforge (OpenStreetMap). Aquest és un avís d'abandonament per informar-vos sobre el full de ruta posterior.
 
