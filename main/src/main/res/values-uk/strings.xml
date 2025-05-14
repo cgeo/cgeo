@@ -879,6 +879,11 @@
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_address">Адреса</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Пошук адреси</string>
+    <string name="search_kw_button">пошук за ключовим словом</string>
+>>>>>>> release
     <string name="search_hbu">прихований</string>
     <string name="search_tb">відстежуваний</string>
     <string name="search_destination">відкрите місце призначення в c: geo</string>

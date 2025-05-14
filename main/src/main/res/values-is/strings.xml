@@ -492,6 +492,14 @@
     <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
     <string name="search_address">Heimilisfang</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Leita eftir heimilisfangi</string>
+    <string name="search_kw_button">Leita eftir aðalatriðum</string>
+    <string name="search_hbu_prefill">Eigandi</string>
+    <string name="search_hbu_button">Leita eftir nafni eiganda</string>
+    <string name="search_tb_button">Leita að ferðalangi</string>
+>>>>>>> release
     <!-- trackable -->
     <string name="trackable_details_loading">Sæki upplýsingar um ferðalang…</string>
     <string name="trackable_browser_open">Opna í vafra</string>

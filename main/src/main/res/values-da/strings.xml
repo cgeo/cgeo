@@ -1105,6 +1105,10 @@
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_address">Adresse</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Søg adresse</string>
+>>>>>>> release
     <string name="search_kw">Nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_finder">Fundet af</string>

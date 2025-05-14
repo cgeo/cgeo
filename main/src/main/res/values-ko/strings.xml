@@ -1722,6 +1722,10 @@
     <string name="search_coordinates">좌표</string>
     <string name="search_address">주소</string>
     <string name="search_geo">지오코드</string>
+<<<<<<< HEAD
+=======
+    <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
+>>>>>>> release
     <string name="search_kw">키워드</string>
     <string name="search_kw_disabled_hint">기본 회원의 경우 geocaching.com에서 지원하지 않으므로 사용할 수 없음</string>
     <string name="search_hbu">숨겨진 사용자</string>

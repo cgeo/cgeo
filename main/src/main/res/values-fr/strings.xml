@@ -1753,9 +1753,20 @@
     <string name="search_coordinates">Coordonnées</string>
     <string name="search_address">Adresse</string>
     <string name="search_geo">Géocode</string>
+<<<<<<< HEAD
     <string name="search_kw">Mot-clé</string>
     <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
     <string name="search_hbu">Cachée par</string>
+=======
+    <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
+    <string name="search_kw">Mot-clé</string>
+    <string name="search_kw_prefill">Mot-clé</string>
+    <string name="search_kw_button">Rechercher le mot-clé</string>
+    <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
+    <string name="search_hbu">Cachée par</string>
+    <string name="search_hbu_prefill">Propriétaire</string>
+    <string name="search_hbu_button">Rechercher par Propriétaire</string>
+>>>>>>> release
     <string name="search_finder">Trouvée par</string>
     <string name="search_filter">Filtrer</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>

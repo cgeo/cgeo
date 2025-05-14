@@ -653,6 +653,13 @@
     <!-- search -->
     <string name="search_coordinates">Mga koordinate</string>
     <string name="search_address">Lugar</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
+    <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
+    <string name="search_hbu_prefill">Tag-iya</string>
+    <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>
+>>>>>>> release
     <string name="search_tb">Masundan</string>
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>

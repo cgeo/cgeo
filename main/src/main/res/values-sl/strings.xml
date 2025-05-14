@@ -653,6 +653,13 @@
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
     <string name="search_address">Naslov</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Iskanje po naslovu</string>
+    <string name="search_kw_button">Išči po ključnih besedah</string>
+    <string name="search_hbu_prefill">Uporabniško ime lastnika zaklada</string>
+    <string name="search_hbu_button">Iskanje po imenu lastnika</string>
+>>>>>>> release
     <string name="search_tb">Sledljivčki</string>
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>

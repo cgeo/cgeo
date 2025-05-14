@@ -1113,7 +1113,16 @@
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
     <string name="search_address">地址</string>
+<<<<<<< HEAD
     <string name="search_hbu">由藏寶</string>
+=======
+    <string name="search_address_button">使用地址搜尋</string>
+    <string name="search_kw_button">關鍵字搜尋</string>
+    <string name="search_hbu">由藏寶</string>
+    <string name="search_hbu_prefill">所有者</string>
+    <string name="search_hbu_button">用寶主名稱來搜尋</string>
+    <string name="search_filter">篩選</string>
+>>>>>>> release
     <string name="search_tb">旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>

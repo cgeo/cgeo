@@ -1356,6 +1356,10 @@
     <string name="search_coordinates">Koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_geo">Geocode</string>
+<<<<<<< HEAD
+=======
+    <string name="search_geocode_from_clipboard">Geokode ble limt inn fra utklippstavlen.</string>
+>>>>>>> release
     <string name="search_kw">Nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
     <string name="search_finder">Funnet av</string>

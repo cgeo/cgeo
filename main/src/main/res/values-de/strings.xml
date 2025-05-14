@@ -1877,7 +1877,14 @@
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_address">Adresse</string>
     <string name="search_geo">Geocode</string>
+<<<<<<< HEAD
     <string name="search_kw">Stichwort</string>
+=======
+    <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
+    <string name="search_kw">Stichwort</string>
+    <string name="search_kw_prefill">Stichwort</string>
+    <string name="search_kw_button">Stichwortsuche</string>
+>>>>>>> release
     <string name="search_kw_disabled_hint">Deaktiviert, da von geocaching.com nicht für Basismitglieder unterstützt</string>
     <string name="search_hbu">Versteckt von</string>
     <string name="search_finder">Gefunden von</string>

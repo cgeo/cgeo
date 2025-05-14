@@ -467,14 +467,14 @@
 
     <!-- appearance => short date format -->
     <string translatable="false" name="pref_value_short_date_format_default" />
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.YY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-dd</string>
-    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-dd</string>
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.yyyy</string>
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.yy</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/yyyy</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/yy</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/yyyy</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/yy</string>
+    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">yyyy-MM-dd</string>
+    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">yy-MM-dd</string>
     <string-array name="pref_values_short_date_format">
         <item>@string/pref_value_short_date_format_default</item>
         <item>@string/pref_value_short_date_format_DDdotMMdotYYYY</item>

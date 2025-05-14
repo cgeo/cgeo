@@ -1862,7 +1862,14 @@
     <string name="search_coordinates">Coordinate</string>
     <string name="search_address">Indirizzo</string>
     <string name="search_geo">Geocode</string>
+<<<<<<< HEAD
     <string name="search_kw">Parola chiave</string>
+=======
+    <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
+    <string name="search_kw">Parola chiave</string>
+    <string name="search_kw_prefill">Parola chiave</string>
+    <string name="search_kw_button">Ricerca per parola chiave</string>
+>>>>>>> release
     <string name="search_kw_disabled_hint">Disabilitato in quanto non supportato da geocaching.com per gli utenti BASIC</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_finder">Trovato da</string>

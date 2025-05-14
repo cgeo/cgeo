@@ -679,6 +679,13 @@
     <!-- search -->
     <string name="search_coordinates">الإحداثيات</string>
     <string name="search_address">العنوان</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">البحث بواسطة العنوان</string>
+    <string name="search_kw_button">البحث بواسطة الكلمات المفتاحية</string>
+    <string name="search_hbu_prefill">مالك</string>
+    <string name="search_hbu_button">البحث بواسطة اسم المالك</string>
+>>>>>>> release
     <string name="search_tb">أمتعة السفر</string>
     <string name="search_address_started">البحث عن الأماكن</string>
     <string name="search_address_result">الأماكن المعثور عليها</string>

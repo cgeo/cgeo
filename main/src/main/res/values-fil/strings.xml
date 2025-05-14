@@ -683,6 +683,13 @@
     <!-- search -->
     <string name="search_coordinates">Ang mga Coordinate</string>
     <string name="search_address">Ang Address</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Magsaliksik sa pamamagitan ng address</string>
+    <string name="search_kw_button">Maghilap ayon sa keyword</string>
+    <string name="search_hbu_prefill">Ang May-ari</string>
+    <string name="search_hbu_button">Magsaliksik ayon sa pangalan ng may-ari</string>
+>>>>>>> release
     <string name="search_tb">Ang Pagsusubaybay</string>
     <string name="search_address_started">Ang pagsasaliksik para sa mga lugar</string>
     <string name="search_address_result">Ang matagpuan na mga lugar</string>

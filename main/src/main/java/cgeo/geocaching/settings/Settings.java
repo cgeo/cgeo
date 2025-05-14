@@ -274,7 +274,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 9;
+        return 10;
     }
 
     private static void migrateSettings() {
@@ -478,6 +478,19 @@ public class Settings {
 
             e.apply();
             setActualVersion(9);
+        }
+
+        if (currentVersion < 10) {
+            final Editor e = sharedPrefs.edit();
+
+            final String dateFormatString = getShortDateFormat();
+            if (!dateFormatString.isEmpty()) {
+                // fix short date formatting: "week date" => "date", see #16925
+                e.putString(getKey(R.string.pref_short_date_format), dateFormatString.replace("Y", "y"));
+            }
+
+            e.apply();
+            setActualVersion(10);
         }
     }
 

@@ -679,6 +679,13 @@
     <!-- search -->
     <string name="search_coordinates">Koordinat</string>
     <string name="search_address">Alamat</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Cari berdasarkan alamat</string>
+    <string name="search_kw_button">Cari dengan kata kunci</string>
+    <string name="search_hbu_prefill">Pemilik</string>
+    <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
+>>>>>>> release
     <string name="search_tb">Dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>

@@ -1685,7 +1685,14 @@
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_address">Osoite</string>
     <string name="search_geo">Geokoodi</string>
+<<<<<<< HEAD
     <string name="search_kw">Hakusana</string>
+=======
+    <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
+    <string name="search_kw">Hakusana</string>
+    <string name="search_kw_prefill">Hakusana</string>
+    <string name="search_kw_button">Etsi hakusanalla</string>
+>>>>>>> release
     <string name="search_kw_disabled_hint">Poistettu käytöstä, koska geocaching.com ei tue sitä perusjäsenille</string>
     <string name="search_hbu">Piilottanut</string>
     <string name="search_finder">Löytänyt</string>

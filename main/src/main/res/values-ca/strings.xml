@@ -1878,6 +1878,10 @@
     <string name="search_coordinates">Coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_geo">Geocodi</string>
+<<<<<<< HEAD
+=======
+    <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
+>>>>>>> release
     <string name="search_kw">Paraula clau</string>
     <string name="search_kw_disabled_hint">Desactivat perquè geocaching.com no l\'admet per als membres de BASIC</string>
     <string name="search_hbu">Amagat per</string>

@@ -1582,6 +1582,10 @@
     <string name="search_coordinates">Súradnice</string>
     <string name="search_address">Adresa</string>
     <string name="search_geo">Geokód</string>
+<<<<<<< HEAD
+=======
+    <string name="search_geocode_from_clipboard">Geokód bol vložený zo schránky.</string>
+>>>>>>> release
     <string name="search_kw">Kľúčové slovo</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_finder">Nájdené kým</string>

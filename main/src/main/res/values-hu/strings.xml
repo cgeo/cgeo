@@ -881,6 +881,13 @@
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_address">Cím</string>
+<<<<<<< HEAD
+=======
+    <string name="search_address_button">Keresés címmel</string>
+    <string name="search_kw_button">Keresés kulcsszó alapján</string>
+    <string name="search_hbu_prefill">Tulajdonos</string>
+    <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
+>>>>>>> release
     <string name="search_tb">Utazó</string>
     <string name="search_address_started">Helyek keresése</string>
     <string name="search_address_result">Megtalált helyek</string>

@@ -1442,7 +1442,14 @@
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_address">Adres</string>
     <string name="search_geo">Geokod</string>
+<<<<<<< HEAD
     <string name="search_kw">Anahtar kelime</string>
+=======
+    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
+    <string name="search_kw">Anahtar kelime</string>
+    <string name="search_kw_prefill">Anahtar kelime</string>
+    <string name="search_kw_button">Anahtar kelime ile ara</string>
+>>>>>>> release
     <string name="search_hbu">Saklayan</string>
     <string name="search_finder">Bulan</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>

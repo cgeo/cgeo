@@ -1374,8 +1374,17 @@
     <string name="search_coordinates">座標</string>
     <string name="search_address">住所</string>
     <string name="search_geo">GCコード</string>
+<<<<<<< HEAD
+=======
+    <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
+>>>>>>> release
     <string name="search_kw">キーワード</string>
     <string name="search_hbu">設置したオーナー名</string>
+<<<<<<< HEAD
+=======
+    <string name="search_hbu_prefill">オーナー</string>
+    <string name="search_hbu_button">オーナー名で検索</string>
+>>>>>>> release
     <string name="search_finder">発見したユーザー名</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
