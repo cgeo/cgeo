@@ -3,7 +3,7 @@
 - Korrektur: Der Wherigo-Player erlaubt keine Auswahl von Aktionen für Dinge
 - Korrektur: Ändern der Kartenrotation über Popup unzuverlässig (UnifiedMap)
 - Korrektur: Cache-Marker auf gedrehter Karte nicht anwählbar (UnifiedMap Mapsforge)
-- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+- Korrektur: Zuweilen falsche Jahresformatierung in Logs, wenn nicht die default-Formatierung für kurze Datumsangaben verwendet wird
 
 ##
 - Korrektur: Wherigo-Links ohne Hostname nicht erkannt
