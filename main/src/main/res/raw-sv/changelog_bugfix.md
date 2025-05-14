@@ -3,6 +3,7 @@
 - Fix: Wherigo-spelare tillåter inte målval för sak-åtgärder
 - Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
 - Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
 
 ##
 - Fix: Wherigo links without host name not detected
