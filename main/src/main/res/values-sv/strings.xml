@@ -1866,10 +1866,6 @@
     <string name="search_coordinates">Koordinater</string>
     <string name="search_address">Adress</string>
     <string name="search_geo">Geocode</string>
-<<<<<<< HEAD
-=======
-    <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
->>>>>>> release
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_disabled_hint">Inaktiverad eftersom det inte stöds av geocaching.com för BASIC-medlemmar</string>
     <string name="search_hbu">Gömd av</string>
