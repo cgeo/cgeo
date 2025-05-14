@@ -1877,14 +1877,7 @@
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_address">Adres</string>
     <string name="search_geo">Geocode</string>
-<<<<<<< HEAD
     <string name="search_kw">Trefwoord</string>
-=======
-    <string name="search_geocode_from_clipboard">Geocode is geplakt van klembord.</string>
-    <string name="search_kw">Trefwoord</string>
-    <string name="search_kw_prefill">Trefwoord</string>
-    <string name="search_kw_button">Zoeken op zoekterm</string>
->>>>>>> release
     <string name="search_kw_disabled_hint">Uitgeschakeld omdat het niet ondersteund wordt door geocaching.com voor BASIS-leden</string>
     <string name="search_hbu">Verborgen door</string>
     <string name="search_finder">Gevonden door</string>

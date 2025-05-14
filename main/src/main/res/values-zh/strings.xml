@@ -646,8 +646,6 @@
     <!-- ImageView -->
     <!-- map -->
     <!-- search -->
-    <string name="search_kw_button">按关键字搜索</string>
-    <string name="search_hbu_prefill">拥有者</string>
     <!-- trackable -->
     <!-- user -->
     <!-- navigation -->

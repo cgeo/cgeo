@@ -1829,20 +1829,9 @@
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_address">Endereço</string>
     <string name="search_geo">Geo-código</string>
-<<<<<<< HEAD
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
-=======
-    <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
-    <string name="search_kw">Palavra-chave</string>
-    <string name="search_kw_prefill">Palavra-chave</string>
-    <string name="search_kw_button">Pesquisa por palavra-chave</string>
-    <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
-    <string name="search_hbu">Escondidas por</string>
-    <string name="search_hbu_prefill">Dono</string>
-    <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
->>>>>>> release
     <string name="search_finder">Encontrada por</string>
     <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>

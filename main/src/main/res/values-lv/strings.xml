@@ -850,13 +850,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_address">Adrese</string>
-<<<<<<< HEAD
-=======
-    <string name="search_address_button">Meklēt pēc adreses</string>
-    <string name="search_kw_button">Meklēt pēc atslēgvārda</string>
-    <string name="search_hbu_prefill">Īpašnieks</string>
-    <string name="search_hbu_button">Meklēt pēc īpašnieka vārda</string>
->>>>>>> release
     <string name="search_tb">Ceļotājs</string>
     <string name="search_address_started">Meklē vietu</string>
     <string name="search_address_result">Atrastās vietas</string>
