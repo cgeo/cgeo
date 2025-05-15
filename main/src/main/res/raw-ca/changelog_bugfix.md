@@ -3,7 +3,7 @@
 - Correcció: el Wherigo player no permet la selecció d'objectius per a l'acció d'un objecte
 - Solució: el canvi del mode de rotació mitjançant la finestra emergent no funciona de manera fiable (UnifiedMap)
 - Correcció: els marcadors dels catxés no es poden tocar al mapa girat (UnifiedMap Mapsforge)
-- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+- Solució: de vegades el format de l'any als registres és incorrecte quan s'utilitza un format de data curta no predeterminat
 
 ##
 - Solució: no s'han detectat enllaços de Wherigo sense nom d'amfitrió
