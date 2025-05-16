@@ -3,6 +3,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.05.14 Bugfix Release
+
+- Fix: Favorite status gets lost when doing an image selection while preparing a log
+- Fix: Wherigo player does not allow target selection for thing action
+- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
+- Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
+- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.04.02 Bugfix Release
 
 - Fix: Wherigo links without host name not detected
