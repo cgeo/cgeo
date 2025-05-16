@@ -22,9 +22,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -54,7 +53,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+public class LogTrackableActivity extends AbstractLoggingActivity implements LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
     private static final int LOADER_ID_LOGGING_INFO = 409842;
 
@@ -320,7 +319,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
-    @Override
     public void updateCoordinates(final Geopoint geopointIn) {
         if (geopointIn == null) {
             return;
@@ -329,16 +327,16 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding.coordinates.setText(geopoint.toString());
         geocache.setCoords(geopoint);
     }
-
-    @Override
-    public boolean supportsNullCoordinates() {
-        return false;
-    }
-
     private class CoordinatesListener implements View.OnClickListener {
         @Override
-        public void onClick(final View arg0) {
-            CoordinatesInputDialog.show(getSupportFragmentManager(), geocache, geopoint);
+        public void onClick(final View theView) {
+
+            NewCoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+        }
+
+        public void onCoordinatesUpdated(final Geopoint input) {
+
+            updateCoordinates(input);
         }
     }
 

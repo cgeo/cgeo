@@ -4,7 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -34,6 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.android.material.textfield.TextInputLayout;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the existing coordinate dialog
@@ -44,6 +47,8 @@ public class NewCoordinateInputDialog {
     Spinner spinner;
     private Settings.CoordInputFormatEnum currentFormat = null;
 
+    private NewCoordinateInputDialogBinding binding;
+
     private TextInputLayout eLatFrame, eLonFrame;
     private EditText plainLatitude, plainLongitude;
     private LinearLayout configurableLatitude, configurableLongitude;
@@ -53,12 +58,25 @@ public class NewCoordinateInputDialog {
     private TextView latSymbol1, latSymbol2, latSymbol3, latSymbol4;
     private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
-    private Geopoint gp, cacheCoords;
+    private Geopoint gp;
+    private Disposable geoDisposable;
 
-    public NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
+    private final GeoDirHandler geoUpdate = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final GeoData geo) {
+            final String label = context.getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy()));
+            binding.current.setText(label);
+        }
+    };
+
+    private NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
 
         this.context = context;
         this.callback = callback;
+    }
+
+    public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
+       new NewCoordinateInputDialog(context, callback).show(location);
     }
 
     @NonNull
@@ -67,17 +85,8 @@ public class NewCoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
-    // Will be used later by GeoKrety TB page
-    public void show(final Geopoint location, final Geocache cache) {
-
-        if (cache != null) {
-            cacheCoords = cache.getCoords();
-        }
-        show(location);
-    }
-
-    // Main entry point for distance filter and user defined cache coordinates
-    public void show(final Geopoint location) {
+    // Main entry point for distance filter, GK TB and user defined cache coordinates
+    private void show(final Geopoint location) {
 
         if (location != null) {
             gp = location;
@@ -93,7 +102,7 @@ public class NewCoordinateInputDialog {
 
         final AlertDialog dialog = builder.create();
 
-        final NewCoordinateInputDialogBinding binding = NewCoordinateInputDialogBinding.bind(theView);
+        binding = NewCoordinateInputDialogBinding.bind(theView);
 
         // Show title and action buttons
         final Toolbar toolbar = binding.actionbar.toolbar;
@@ -102,9 +111,11 @@ public class NewCoordinateInputDialog {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
                if (saveAndFinishDialog()) {
+                   geoDisposable.dispose();
                    dialog.dismiss();
                }
             } else {
+                geoDisposable.dispose();
                dialog.dismiss();
             }
             return true;
@@ -212,6 +223,8 @@ public class NewCoordinateInputDialog {
         });
 
         dialog.show();
+
+        geoDisposable = geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
     }
 
     // Close dialog and return selected coordinates to caller
