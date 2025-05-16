@@ -2003,11 +2003,9 @@
     <string name="helper_gcwizard_description">Průvodce GC Wizard obsahuje řadu nástrojů pro jednoduché kryptografické, geodetické a vědecké výpočty a stovky sad různých symbolů.</string>
     <!-- export -->
     <string name="share_export">Sdílet / Exportovat</string>
-    <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">Exportováno do</string>
     <string name="export_failed">Export selhal</string>
-    <string name="export_fieldnotes">Koncepty</string>
     <string name="export_fieldnotes_info">Koncepty budou uloženy do /sdcard/field-notes s názvem souboru podle aktuálního data a času.</string>
     <string name="export_fieldnotes_upload">Nahrát na geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nahrávání…</string>
@@ -2017,7 +2015,6 @@
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
-    <string name="export_persnotes">Osobní poznámky</string>
     <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d poznámka byla úspěšně nahrána</item>
