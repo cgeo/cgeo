@@ -1973,11 +1973,9 @@
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
-    <string name="export">Exporteren</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
     <string name="export_failed">Exporteren mislukt</string>
-    <string name="export_fieldnotes">Veld-notities</string>
     <string name="export_fieldnotes_info">Veld-notities worden geëxporteerd naar /sdcard/field-notes met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_fieldnotes_upload">Upload naar geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploaden…</string>
@@ -1987,7 +1985,6 @@
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
-    <string name="export_persnotes">Persoonlijke notities</string>
     <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d notitie succesvol geüpload</item>
