@@ -413,7 +413,6 @@
     <string name="caches_sort_geocode">Geo-código</string>
     <string name="caches_sort_rating">Avaliação</string>
     <string name="caches_sort_vote">Votos (avaliação própria)</string>
-    <string name="caches_sort_inventory">Quantidade de TB(s)</string>
     <string name="caches_sort_date_hidden">Data de colocação</string>
     <string name="caches_sort_date_logged">Data de registo (Próprio Registo)</string>
     <string name="caches_sort_finds">Nº de vezes encontrada</string>
@@ -536,7 +535,6 @@
     <string name="cache_filter_hidden">Data de Colocação</string>
     <string name="cache_filter_eventdate">Data do Evento</string>
     <string name="cache_filter_logs_count">Contagem de registos</string>
-    <string name="cache_filter_inventory_count">Quantidade de TB(s)</string>
     <string name="cache_filter_last_found">Última Data Encontrada</string>
     <string name="cache_filter_log_entry">Publicação do Registo</string>
     <string name="cache_filter_location">Localização</string>
@@ -1055,7 +1053,6 @@
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Podem ser utilizados para alterar o estilo de cor do mapa (ex: ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo no mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="settings_info_hillshading_title">Informação sobre o Sombreado de altitude</string>
-    <string name="settings_info_hillshading">O Sombreado de altitude é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de altitude. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nAs informações de sombreado de altitude podem ser descarregadas no menu de mapas.\nIncompatível com a variante VTM do Mapa Unificado.</string>
     <string name="settings_hillshading_enable">Sombreado de altitude</string>
     <string name="init_hillshading_hq">Sombreado de altitude de alta qualidade</string>
     <string name="init_summary_hillshading_hq">Sobreposição de sombreado de altitude mais detalhada, mas com ~50%% de renderização mais lenta ao afastar zoom</string>
@@ -1181,7 +1178,6 @@
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Usar mapa antigo</string>
     <string name="init_summary_useLegacyMap">Use versões antigas do Google Map / Mapsforge (OSM) mapas ao invés do Mapa Unificado</string>
-    <string name="category_unifiedMap">Mapa unificado</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1358,7 +1354,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">há mais de um ano</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">TB(s)</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Definir coordenadas</string>
     <string name="cache_personal_note">Nota pessoal</string>
@@ -1814,7 +1809,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções de Tema</string>
+    <string name="google_maps_option_group_theme">Opções do Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1833,14 +1828,13 @@
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
     <string name="search_finder">Encontrada por</string>
-    <string name="search_filter">Filtro</string>
+    <string name="search_filter">Filtrar</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Abrir pasta de destino no c:geo</string>
     <string name="add_target_to">Adicionar destino a</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
-    <string name="search_own_caches">As minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">novo</string>
@@ -2354,7 +2348,6 @@
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>
-    <string name="map_clear_manual_targets">Limpar destino de rota</string>
     <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
@@ -2514,7 +2507,6 @@
     <string name="brouter_info">Serviço de encaminhamento offline</string>
     <string name="hillshading_info">Sombreado da altitude offline</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
-    <string name="maptheme_vtm_scaling_summary">Opções de dimensionamento para mapas offline (apenas VTM, requer reinicialização)</string>
     <string name="maptheme_scale_map_title">Factor de Escala do Mapa</string>
     <string name="maptheme_scale_map_summary">Redimensionar mapa; 100% = sem dimensionamento</string>
     <string name="maptheme_scale_text_title">Factor de Escala do Texto</string>
