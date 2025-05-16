@@ -221,9 +221,6 @@
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
     <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
     <!-- translation -->
-    <string name="translate">Vertalen in de Google Translate App</string>
-    <string name="translate_to_sys_lang">Vertalen naar %s (Web)</string>
-    <string name="translate_to_english">Vertalen naar Engels (Web)</string>
     <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -438,7 +435,6 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Waardering</string>
     <string name="caches_sort_vote">Stemmen (eigen waardering)</string>
-    <string name="caches_sort_inventory">Aantal trackables</string>
     <string name="caches_sort_date_hidden">Datum geplaatst</string>
     <string name="caches_sort_date_logged">Datum gelogd (eigen log)</string>
     <string name="caches_sort_finds">Aantal keer gevonden</string>
@@ -569,7 +565,6 @@
     <string name="cache_filter_hidden">Verstopt op</string>
     <string name="cache_filter_eventdate">Evenement datum</string>
     <string name="cache_filter_logs_count">Aantal logs</string>
-    <string name="cache_filter_inventory_count">Aantal trackables</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
     <string name="cache_filter_location">Locatie</string>
@@ -1088,7 +1083,6 @@
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="settings_info_hillshading_title">Informatie over Reliëfweergave</string>
-    <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen donker/licht worden weergegeven om een 3D-effect te genereren.\nDe reliëfweergave bronbestanden kunnen worden gedownload uit het kaarten menu.\nNiet compatible met Unifiedmap VTM variant.</string>
     <string name="settings_hillshading_enable">Reliëfweergave</string>
     <string name="init_hillshading_hq">Hoge kwaliteit reliëfweergave</string>
     <string name="init_summary_hillshading_hq">Meer gedetailleerde reliëfweergave overlay maar ~50%% langzamere weergave bij het uitzoomen</string>
@@ -1216,7 +1210,6 @@
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
     <string name="init_title_useLegacyMap">Oudere kaart gebruiken</string>
     <string name="init_summary_useLegacyMap">Gebruik oude versies van Google Map / Mapsforge (OSM) kaarten in plaats van UnifiedMap</string>
-    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1394,7 +1387,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Stel coördinaten in</string>
     <string name="cache_personal_note">Persoonlijke notitie</string>
@@ -1528,7 +1520,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Bijgewoond</string>
+    <string name="cache_status_attended">Was aanwezig</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1753,13 +1745,11 @@
     <string name="calccoord_guided_value">Waarde</string>
     <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
     <string name="calccoord_plain_tools_title">Eenvoudig gereedschap</string>
-    <string name="calccoord_remove_spaces">Verwijder spaties</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Vervang \'x\' door \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Plakken vanaf klembord</string>
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
     <string name="calccoord_generate_waypointnameprefix">Gegenereerd</string>
-    <string name="calccoord_generate_error_novarwithrange">Geen geldige variabele gevonden met bereik (bijv. [:0-9] of [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Geen combinatie gaf geldige coördinaten terug</string>
     <string name="calccoord_generate_error_nogeopointselected">Geen Coördinaat geselecteerd</string>
     <string name="calccoord_migrate_title">Waypoint Migratie</string>
@@ -1862,7 +1852,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema Opties</string>
+    <string name="google_maps_option_group_theme">Thema opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -1888,7 +1878,6 @@
     <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
     <string name="search_address_result">Gevonden plaatsen</string>
-    <string name="search_own_caches">Mijn caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
@@ -2404,7 +2393,6 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2565,7 +2553,6 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
@@ -2628,7 +2615,6 @@
     <string name="wherigo_controls_stopgame_hint">Stop een lopend spel</string>
     <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
-    <string name="wherigo_controls_reportproblem_hint">Toon laatste Wherigo probleem</string>
     <string name="wherigo_controls_cache_context">Cache Context</string>
     <string name="wherigo_controls_cache_link">Ga naar de cache details</string>
     <string name="wherigo_sound_title">Volumeregeling</string>
@@ -2674,7 +2660,6 @@
     <string name="wherigo_download_accept_eula">Log in op www.wherigo.com en accepteer eerst hun algemene voorwaarden</string>
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
-    <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```\nJe mag contact opnemen met de auteur van de cartridge [here](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>

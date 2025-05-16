@@ -221,9 +221,6 @@
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
     <string name="contact_multiple_matches">Kontakt: wiele pasujących</string>
     <!-- translation -->
-    <string name="translate">Tłumacz w aplikacji Google Translate</string>
-    <string name="translate_to_sys_lang">Przetłumacz na %s (Web)</string>
-    <string name="translate_to_english">Przetłumacz na angielski (Web)</string>
     <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -346,6 +343,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorowane języki</string>
     <string name="translator_preference_nottranslate_lng_summary">Języki źródłowe nie oferują tłumaczenia dla</string>
     <string name="translator_preference_disable">&lt;Wyłącz tłumaczenie&gt;</string>
+    <string name="translator_preference_application_language">&lt;Użyj języka aplikacji&gt;</string>
     <string name="translator_model_download_select">Pobierz język tłumaczenia offline</string>
     <string name="translator_model_download_confirm_title">Potwierdź pobranie języka</string>
     <string name="translator_model_download_confirm_txt">Należy pobrać model tłumaczenia dla języka %s. Rozmiar modelu wynosi około 20-40 MB.</string>
@@ -358,6 +356,7 @@
     <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany dla tłumaczenia.</string>
     <string name="translator_language_unknown">Nie można zidentyfikować języka</string>
     <string name="translator_language_detected">Przetłumacz z \"%s\"</string>
+    <string name="translator_target_language">Przetłumacz na \"%s\"</string>
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
     <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
@@ -442,7 +441,6 @@
     <string name="caches_sort_geocode">Geokod</string>
     <string name="caches_sort_rating">Ocena</string>
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
-    <string name="caches_sort_inventory">Liczba przedmiotów podróżnych</string>
     <string name="caches_sort_date_hidden">Data ukrycia</string>
     <string name="caches_sort_date_logged">Data zalogowania (własny wpis)</string>
     <string name="caches_sort_finds">Ile razy znaleziona</string>
@@ -579,7 +577,6 @@
     <string name="cache_filter_hidden">Data ukrycia</string>
     <string name="cache_filter_eventdate">Data wydarzenia</string>
     <string name="cache_filter_logs_count">Liczba wpisów</string>
-    <string name="cache_filter_inventory_count">Liczba przedmiotów podróżnych</string>
     <string name="cache_filter_last_found">Data ostatniego znalezienia</string>
     <string name="cache_filter_log_entry">Wpis w dzienniku</string>
     <string name="cache_filter_location">Lokalizacja</string>
@@ -943,6 +940,8 @@
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
+    <string name="init_use_application_language">Użyj języka aplikacji</string>
+    <string name="init_translation_disabled">Tłumaczenie wyłączone</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
     <string name="system_default">Domyślne systemowe</string>
@@ -1100,7 +1099,6 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.\nNiekompatybilne z wariantem VTM UnifiedMap.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
     <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
     <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
@@ -1228,7 +1226,6 @@
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
     <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
-    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1422,7 +1419,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Przedmioty podróżne</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_set_coordinates">Ustaw współrzędne</string>
     <string name="cache_personal_note">Notatka osobista</string>
@@ -1555,7 +1551,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczył/a</string>
+    <string name="cache_status_attended">Uczestniczyłem</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1782,13 +1778,11 @@
     <string name="calccoord_guided_value">Wartość</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
-    <string name="calccoord_remove_spaces">Usuń spacje</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>
     <string name="calccoord_paste_from_clipboard">Wklej ze schowka</string>
     <string name="calccoord_generate_title">Wygeneruj punkty nawigacji</string>
     <string name="calccoord_generate_showonmap">Pokaż na mapie</string>
     <string name="calccoord_generate_waypointnameprefix">Wygenerowane</string>
-    <string name="calccoord_generate_error_novarwithrange">Nie znaleziono prawidłowej zmiennej z zakresami (np. [:0-9] lub [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Żadna kombinacja nie zwróciła prawidłowych współrzędnych</string>
     <string name="calccoord_generate_error_nogeopointselected">Nie wybrano współrzędnych</string>
     <string name="calccoord_migrate_title">Migracja punktu nawigacji</string>
@@ -1917,7 +1911,6 @@
     <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>
     <string name="search_address_result">Znalezione miejsca</string>
-    <string name="search_own_caches">Moje skrytki</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
@@ -2002,9 +1995,11 @@
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksportuj</string>
+    <string name="export">Eksport / Prześlij</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
     <string name="export_failed">Eksport nie powiódł się</string>
+    <string name="export_fieldnotes">Eksportuj notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
@@ -2014,6 +2009,7 @@
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
+    <string name="export_persnotes">Prześlij osobiste notatki</string>
     <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Wysłano pomyślnie notatkę</item>
@@ -2459,7 +2455,6 @@
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
-    <string name="map_clear_manual_targets">Wyczyść cel trasy</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_clear_individual_route_confirm">Czy chcesz usunąć wszystkie skrytki/punkty nawigacji z Twojej trasy?</string>
@@ -2624,7 +2619,6 @@
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="hillshading_info">Cieniowanie szczytów offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
-    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (tylko VTM, wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>
@@ -2687,7 +2681,6 @@
     <string name="wherigo_controls_stopgame_hint">Zatrzymaj uruchomioną grę</string>
     <string name="wherigo_controls_mapzones_hint">Pokaż strefy uruchomionej gry na mapie</string>
     <string name="wherigo_controls_downloadcartridge_hint">Pobierz kartridż (potrzebny cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Pokaż ostatni problem Wherigo</string>
     <string name="wherigo_controls_cache_context">Kontekst skrytki</string>
     <string name="wherigo_controls_cache_link">Przejdź do szczegółów skrytki</string>
     <string name="wherigo_sound_title">Kontrola dźwięku</string>
@@ -2733,7 +2726,6 @@
     <string name="wherigo_download_accept_eula">Zaloguj się najpierw na www.wherigo.com i zaakceptuj ich warunki i postanowienia</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
-    <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>
     <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
