@@ -704,11 +704,9 @@
     <string name="helper_google_translate_title">Prevajalnik Google</string>
     <string name="helper_google_translate_description">Če prenesete pakete prevodov znotraj Google Translate aplikacije, lahko prevajate opise zakladov v c:geo tudi brez povezave z dolgim pritiskom na tekst.</string>
     <!-- export -->
-    <string name="export">Izvozi</string>
     <string name="export_progress">Izvozi: %1$s</string>
     <string name="export_exportedto">izvoženo v</string>
     <string name="export_failed">Izvažanje ni uspelo</string>
-    <string name="export_fieldnotes">Field Notes zapisi</string>
     <string name="export_fieldnotes_info">Field Notes zapisi bodo izvoženi v mapo /sdcard/field-notes. Ime datoteke bo trenutni datum in čas.</string>
     <string name="export_fieldnotes_upload">Nalaganje na Geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nalaganje…</string>
@@ -717,7 +715,6 @@
     <string name="export_fieldnotes_creating">Ustvarjanje Field Notes zapisov…</string>
     <string name="export_gpx_info">Datoteka GPX bo shranjena v mapo %1$s. Ime datoteke bo trenutni datum in čas.</string>
     <string name="export_confirm_title">Izvozi %1$s</string>
-    <string name="export_persnotes">Lastna opomba</string>
     <string name="export_persnotes_uploading">Nalagam lastno opombo na spletno stran %1$d</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Dovoljen obisk s psom</string>
