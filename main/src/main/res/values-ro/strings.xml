@@ -795,10 +795,8 @@
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
     <!-- export -->
-    <string name="export">Exportă</string>
     <string name="export_exportedto">exportat către</string>
     <string name="export_failed">Exportul nu a reușit</string>
-    <string name="export_fieldnotes">Note din teren</string>
     <string name="export_fieldnotes_info">Notele din teren vor fi exportate către /sdcard/field-notes numite după data şi ora curentă.</string>
     <string name="export_fieldnotes_upload">Încarcă pe geocaching.com</string>
     <string name="export_fieldnotes_uploading">Încărcare…</string>
@@ -808,7 +806,6 @@
     <string name="export_gpx_info">Fişierul GPX va fi exportat în %1$s şi va fi numit după data şi ora curentă.</string>
     <string name="export_confirm_title">Se exportă %1$s</string>
     <string name="export_confirm_message">Cale: %1$s\nNume fişier: %2$s</string>
-    <string name="export_persnotes">Note personale</string>
     <string name="export_persnotes_uploading">Se încarcă nota personală %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d notă personală încarcată cu succes</item>
