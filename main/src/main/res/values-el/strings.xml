@@ -1572,11 +1572,9 @@
     <string name="helper_gcwizard_description">GC Wizard περιέχει πολλά εργαλεία για απλή κρυπτογραφία, γεωδαιτικούς και επιστημονικούς υπολογισμούς, καθώς και εκατοντάδες σύνολα διαφόρων συμβόλων.</string>
     <!-- export -->
     <string name="share_export">Κοινοποίηση / Εξαγωγή</string>
-    <string name="export">Εξαγωγή</string>
     <string name="export_progress">Εξαγωγή: %1$s</string>
     <string name="export_exportedto">εξαγωγή σε</string>
     <string name="export_failed">Η εξαγωγή απέτυχε</string>
-    <string name="export_fieldnotes">Σημειώσεις πεδίου</string>
     <string name="export_fieldnotes_info">Οι σημειώσεις πεδίου θα εξαχθούν στο /sdcard/field-notes με την τρέχουσα ημερομηνία και ώρα ως όνομα αρχείου.</string>
     <string name="export_fieldnotes_upload">Ανεβάσετε στο geocaching.com</string>
     <string name="export_fieldnotes_uploading">Μεταφόρτωση…</string>
@@ -1586,7 +1584,6 @@
     <string name="export_gpx_info">Το αρχείο GPX θα εξαθεί στο %1$s με την τρέχουσα ημερομηνία και ώρα ως όνομα αρχείου.</string>
     <string name="export_confirm_title">Εξαγωγή %1$s</string>
     <string name="export_confirm_message">Στη Διαδρομή: %1$s\nΌνομα αρείου: %2$s</string>
-    <string name="export_persnotes">Προσωπικές σημειώσεις</string>
     <string name="export_persnotes_uploading">Φόρτωση προσωπικής σημείωσης %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Μεταφορτώθηκε %1$d σημείωση επιτυχώς</item>
