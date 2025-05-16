@@ -911,11 +911,9 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <!-- export -->
-    <string name="export">Eksportēt</string>
     <string name="export_progress">Eksportē: %1$s</string>
     <string name="export_exportedto">eksportēts uz</string>
     <string name="export_failed">Eksportēšana neizdevās</string>
-    <string name="export_fieldnotes">Lauka piezīmes</string>
     <string name="export_fieldnotes_info">Lauka piezīmes tiks eksportētas uz /sdcard/field-notes ar pašreizējo datumu un laiku, kā faila nosaukumu.</string>
     <string name="export_fieldnotes_upload">Augšupielādēt geocaching.com</string>
     <string name="export_fieldnotes_uploading">Augšupielādē…</string>
@@ -925,7 +923,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="export_gpx_info">GPX fails tiks eksportēts ar pašreizējo datumu un laiku, kā faila nosaukumu %1$s.</string>
     <string name="export_confirm_title">Eksportē %1$s</string>
     <string name="export_confirm_message">Direktorijs: %1$s\nFaila nosaukums: %2$s</string>
-    <string name="export_persnotes">Personiskas piezīmes</string>
     <string name="export_persnotes_uploading">Augšupielādē personīgās piezīmes %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="zero">%1$d piezīmes veiksmīgi augšupielādētas</item>
