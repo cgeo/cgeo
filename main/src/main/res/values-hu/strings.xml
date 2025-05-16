@@ -938,11 +938,9 @@
     <string name="helper_google_translate_title">Google Fordító</string>
     <string name="helper_google_translate_description">A Google Fordító alkalmazáshoz letöltött fordítócsomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
     <!-- export -->
-    <string name="export">Exportálás</string>
     <string name="export_progress">Exportálás: %1$s</string>
     <string name="export_exportedto">exportálva</string>
     <string name="export_failed">Sikertelen exportálás</string>
-    <string name="export_fieldnotes">Offline logok</string>
     <string name="export_fieldnotes_info">Az offline logok a /sdcard/field-notes mappába lesznek exportálva. A fájlnév a jelenlegi dátum és időpont lesz.</string>
     <string name="export_fieldnotes_upload">Feltöltés a geocaching.com-ra</string>
     <string name="export_fieldnotes_uploading">Feltöltés…</string>
@@ -952,7 +950,6 @@
     <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
     <string name="export_confirm_title">%1$s exportálása</string>
     <string name="export_confirm_message">Mappa: %1$s\nFájl: %2$s</string>
-    <string name="export_persnotes">Személyes megjegyzések</string>
     <string name="export_persnotes_uploading">%1$d személyes megjegyzés feltöltése</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d személyes megjegyzés sikeresen feltöltve</item>

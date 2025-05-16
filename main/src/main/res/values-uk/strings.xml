@@ -955,11 +955,9 @@
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
     <string name="helper_chirpwolf_description">Chirp Wolf дозволяє вам читати дані від тегів чітких даних ANT+/Garmin chirp тегів, які потрібні для ANT+/chirp geocaches.</string>
     <!-- export -->
-    <string name="export">Експорт</string>
     <string name="export_progress">Експорт: %1$s</string>
     <string name="export_exportedto">Експортовано до</string>
     <string name="export_failed">Експорт не вдався</string>
-    <string name="export_fieldnotes">польові примітки</string>
     <string name="export_fieldnotes_info">Примітки до поля будуть експортовані в /sdcard/field-notes з поточною датою і часом як ім\'я файлу.</string>
     <string name="export_fieldnotes_upload">завантажити до geocaching.com</string>
     <string name="export_fieldnotes_uploading">завантаження…</string>
@@ -969,7 +967,6 @@
     <string name="export_gpx_info">Файл GPX буде експортовано до %1$s з поточною датою та часом в якості імені файлу.</string>
     <string name="export_confirm_title">Експорт: %1$s</string>
     <string name="export_confirm_message">До шляху: %1$s\nІм\'я файлу: %2$s</string>
-    <string name="export_persnotes">особисті нотатки</string>
     <string name="export_persnotes_uploading">Завантаження особистої нотатки %1$d</string>
     <string name="export_modifiedcoords">змінені координати</string>
     <string name="export_modifiedcoords_uploading">Завантаження %1$d</string>

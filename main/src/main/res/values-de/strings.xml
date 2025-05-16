@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorierte Sprachen</string>
     <string name="translator_preference_nottranslate_lng_summary">Sprachen, für die keine Übersetzung angeboten werden soll</string>
     <string name="translator_preference_disable">&lt;Übersetzung deaktivieren&gt;</string>
+    <string name="translator_preference_application_language">&lt;Anwendungssprache verwenden&gt;</string>
     <string name="translator_model_download_select">Sprache für Offline-Übersetzung herunterladen</string>
     <string name="translator_model_download_confirm_title">Sprachdownload bestätigen</string>
     <string name="translator_model_download_confirm_txt">Übersetzungsmodell für Sprache %s muss heruntergeladen werden. Modellgröße beträgt etwa 20-40 MB.</string>
@@ -358,6 +359,7 @@
     <string name="translator_language_unsupported">Sprache (%s) wird nicht für die Übersetzung unterstützt.</string>
     <string name="translator_language_unknown">Ausgangssprache nicht erkannt</string>
     <string name="translator_language_detected">Übersetze von \"%s\"</string>
+    <string name="translator_target_language">Übersetze nach \"%s\"</string>
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
     <string name="translator_translation_success">Übersetzt von \"%s\", tippe auf Schaltfläche, um das Original wiederherzustellen</string>
@@ -931,6 +933,8 @@
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
     <string name="init_use_default_language">Systemsprache verwenden</string>
+    <string name="init_use_application_language">Anwendungssprache verwenden</string>
+    <string name="init_translation_disabled">Übersetzung deaktiviert</string>
     <string name="init_date_format">Datumsformat</string>
     <string name="init_date_format_description">Format für kurze Datumsangaben, z.B. in der Log-Ansicht</string>
     <string name="system_default">Systemstandard</string>
@@ -1973,11 +1977,11 @@
     <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
-    <string name="export">Exportieren</string>
+    <string name="export">Exportieren / Hochladen</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
     <string name="export_failed">Exportieren fehlgeschlagen</string>
-    <string name="export_fieldnotes">Field Notes</string>
+    <string name="export_fieldnotes">Field notes exportieren</string>
     <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
     <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
     <string name="export_fieldnotes_uploading">Hochladen…</string>
@@ -1987,7 +1991,7 @@
     <string name="export_gpx_info">GPX-Datei wird nach %1$s mit aktuellem Datum und Zeit als Dateiname exportiert.</string>
     <string name="export_confirm_title">Exportiere %1$s</string>
     <string name="export_confirm_message">Pfad: %1$s\nDateiname: %2$s</string>
-    <string name="export_persnotes">Persönliche Notizen</string>
+    <string name="export_persnotes">Persönliche Notizen hochladen</string>
     <string name="export_persnotes_uploading">Persönliche Notiz %1$d wird gesendet</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d Notiz erfolgreich hochgeladen</item>

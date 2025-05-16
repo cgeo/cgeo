@@ -526,12 +526,10 @@
     <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
     <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
     <!-- export -->
-    <string name="export">Flytja út</string>
     <string name="export_failed">Útflutningur tókst ekki</string>
     <string name="export_fieldnotes_uploading">Hleð upp…</string>
     <string name="export_fieldnotes_onlynew">Aðeins að síðasta útflutningi</string>
     <string name="export_confirm_title">Flyt út %1$s</string>
-    <string name="export_persnotes">Mínir minnispunktar</string>
     <string name="export_persnotes_uploading">Hleð upp þínum minnispunktum %1$d</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hundar leyfðir</string>

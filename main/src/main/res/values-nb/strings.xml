@@ -1445,11 +1445,9 @@
     <string name="helper_chirpwolf_description">Chirp Wolf lar deg lese av data fra ANT+/Garmin chirp-tagger, som er nødvendig for ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="share_export">Del / Eksporter</string>
-    <string name="export">Eksporter</string>
     <string name="export_progress">Eksporter: %1$s</string>
     <string name="export_exportedto">eksportert til</string>
     <string name="export_failed">Eksporteringen mislyktes</string>
-    <string name="export_fieldnotes">Feltnotater</string>
     <string name="export_fieldnotes_info">Feltnotater vil bli eksportert til /sdcard/field-notes med dato og tidspunkt som filnavn.</string>
     <string name="export_fieldnotes_upload">Last opp til geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laster opp…</string>
@@ -1459,7 +1457,6 @@
     <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
-    <string name="export_persnotes">Personlig notat</string>
     <string name="export_persnotes_uploading">Laster opp personlig notat %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Lastet opp et personlig notat</item>

@@ -1674,11 +1674,9 @@
     <string name="helper_gcwizard_description">Aplikácia GC Wizard obsahuje množstvo nástrojov na jednoduché šifrovanie, geodéziu a vedecké výpočty, ako aj stovky setov rôznych symbolov.</string>
     <!-- export -->
     <string name="share_export">Zdieľať/Export</string>
-    <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportované do</string>
     <string name="export_failed">Export zlyhal</string>
-    <string name="export_fieldnotes">Poznámky</string>
     <string name="export_fieldnotes_info">Poznámky budú exportované do /sdcard/field-notes s názvom súboru podľa aktuálneho dátumu a času.</string>
     <string name="export_fieldnotes_upload">Nahrať na geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nahrávanie…</string>
@@ -1688,7 +1686,6 @@
     <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
     <string name="export_confirm_title">Exportovanie %1$s</string>
     <string name="export_confirm_message">Priečinok: %1$s\nNázov súboru: %2$s</string>
-    <string name="export_persnotes">Osobné poznámky</string>
     <string name="export_persnotes_uploading">Nahrávanie osobnej poznámky %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d poznámke úspešne nahratá</item>

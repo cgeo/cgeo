@@ -1962,11 +1962,9 @@
     <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
     <!-- export -->
     <string name="share_export">Dela / Exportera</string>
-    <string name="export">Exportera</string>
     <string name="export_progress">Exportera: %1$s</string>
     <string name="export_exportedto">exporterat till</string>
     <string name="export_failed">Exporteringen misslyckades</string>
-    <string name="export_fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
     <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laddar upp…</string>
@@ -1976,7 +1974,6 @@
     <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
     <string name="export_confirm_title">Exporterar %1$s</string>
     <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
-    <string name="export_persnotes">Personliga anteckningar</string>
     <string name="export_persnotes_uploading">Laddar upp personlig anteckning %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Överförde %1$d anteckning</item>

@@ -1179,11 +1179,9 @@
     <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lader dig læse data fra ANT+/Garmin Chirp tags, som bruges til caches med \"trådløs beacon\"-attribut.</string>
     <!-- export -->
-    <string name="export">Eksportér</string>
     <string name="export_progress">Eksportér: %1$s</string>
     <string name="export_exportedto">eksporteret til</string>
     <string name="export_failed">Eksport fejlede</string>
-    <string name="export_fieldnotes">Feltnoter</string>
     <string name="export_fieldnotes_info">Feltnoter vil blive eksporteret til /sdcard/field-notes med den aktuelle dato og tidspunkt som filnavn.</string>
     <string name="export_fieldnotes_upload">Upload til geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploader…</string>
@@ -1193,7 +1191,6 @@
     <string name="export_gpx_info">GPX-filen vil blive eksporteret til %1$s med den aktuelle dato og tidspunkt som filnavn.</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
     <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
-    <string name="export_persnotes">Egne noter</string>
     <string name="export_persnotes_uploading">Uploader personlig note %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d personlig note blev uploadet</item>

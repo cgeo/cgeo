@@ -1533,11 +1533,9 @@
     <string name="helper_alc_description">Telefonunuz ve tabletiniz için Adventure Lab uygulaması.</string>
     <!-- export -->
     <string name="share_export">Paylaş / Dışa aktar</string>
-    <string name="export">Dışa aktar</string>
     <string name="export_progress">Dışa aktar:%1$s</string>
     <string name="export_exportedto">aktarılan yer</string>
     <string name="export_failed">Dışa aktarım başarısız</string>
-    <string name="export_fieldnotes">Saha notları</string>
     <string name="export_fieldnotes_info">Alan notları tarih ve saat isminde /sdcard/field-notes dosyasına aktarıldı.</string>
     <string name="export_fieldnotes_upload">geocaching.com\'a yükle</string>
     <string name="export_fieldnotes_uploading">Yükleniyor…</string>
@@ -1547,7 +1545,6 @@
     <string name="export_gpx_info">Gpx dosyası geçerli tarih ve saati dosya adıyla %1$s klasörüne aktarıldı.</string>
     <string name="export_confirm_title">Dışa aktarılıyor %1$s</string>
     <string name="export_confirm_message">Yol: %1$s\n Dosya İsmi: %2$s</string>
-    <string name="export_persnotes">Kişisel notlar</string>
     <string name="export_persnotes_uploading">Kişisel notlar yükleniyor %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d not başarıyla yüklendi</item>

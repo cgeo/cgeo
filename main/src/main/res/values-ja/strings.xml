@@ -1465,11 +1465,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="helper_gcwizard_description">GC Wizardは簡単な暗号、測地系や科学系の計算のための多数のツールが含まれています。また、様々なシンボルの一覧を見ることができます。</string>
     <!-- export -->
     <string name="share_export">共有/エクスポート</string>
-    <string name="export">エクスポート</string>
     <string name="export_progress">エクスポート: %1$s</string>
     <string name="export_exportedto">にエクスポートしました</string>
     <string name="export_failed">エクスポートに失敗しました</string>
-    <string name="export_fieldnotes">フィールドノート</string>
     <string name="export_fieldnotes_info">フィールドノートは/sdcard/field-notesフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_fieldnotes_upload">geocaching.comにアップロード</string>
     <string name="export_fieldnotes_uploading">アップロード中…</string>
@@ -1479,7 +1477,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_confirm_title">エクスポート: %1$s</string>
     <string name="export_confirm_message">フォルダ: %1$s\nファイル名: %2$s</string>
-    <string name="export_persnotes">パーソナルノート</string>
     <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">%1$dノートを正常にアップロードしました</item>

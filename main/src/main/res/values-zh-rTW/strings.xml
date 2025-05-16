@@ -1181,16 +1181,13 @@
     <string name="helper_google_translate_title">Google 翻譯</string>
     <!-- export -->
     <string name="share_export">分享/輸出</string>
-    <string name="export">匯出</string>
     <string name="export_progress">匯出：%1$s</string>
     <string name="export_exportedto">已匯出至</string>
     <string name="export_failed">匯出失敗</string>
-    <string name="export_fieldnotes">現場備註</string>
     <string name="export_fieldnotes_upload">上傳到geocaching.com</string>
     <string name="export_fieldnotes_uploading">上傳中…</string>
     <string name="export_fieldnotes_upload_success">成功上傳到geocaching.com</string>
     <string name="export_confirm_title">正在匯出%1$s</string>
-    <string name="export_persnotes">個人筆記</string>
     <string name="export_persnotes_uploading">上傳個人筆記 %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">成功上傳 %1$d note</item>

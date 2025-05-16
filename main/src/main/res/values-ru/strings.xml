@@ -1984,11 +1984,9 @@
     <string name="helper_gcwizard_description">GC Wizard содержит множество инструментов для базовой криптографии, геодезических и научных расчетов, а также сотни наборов различных символов.</string>
     <!-- export -->
     <string name="share_export">Поделиться / Экспорт</string>
-    <string name="export">Экспорт</string>
     <string name="export_progress">Экспорт: %1$s</string>
     <string name="export_exportedto">экспортировано в</string>
     <string name="export_failed">Сбой экспорта</string>
-    <string name="export_fieldnotes">Полевые заметки</string>
     <string name="export_fieldnotes_info">Полевые заметки будут экспортированы в /sdcard/field-notes с текущей датой и временем в имени файла.</string>
     <string name="export_fieldnotes_upload">Загрузить на geocaching.com</string>
     <string name="export_fieldnotes_uploading">Загрузка…</string>
@@ -1998,7 +1996,6 @@
     <string name="export_gpx_info">GPX файл будет экспортирован в %1$s в файл с текущей датой и временем в имени.</string>
     <string name="export_confirm_title">Экспорт %1$s</string>
     <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
-    <string name="export_persnotes">Личные заметки</string>
     <string name="export_persnotes_uploading">Загрузка личной заметки %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Успешно загружена %1$d заметка</item>

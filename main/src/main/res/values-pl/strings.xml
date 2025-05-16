@@ -2002,11 +2002,9 @@
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksportuj</string>
-    <string name="export">Eksport</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
     <string name="export_failed">Eksport nie powiódł się</string>
-    <string name="export_fieldnotes">Notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
@@ -2016,7 +2014,6 @@
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
-    <string name="export_persnotes">Notatki osobiste</string>
     <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Wysłano pomyślnie notatkę</item>

@@ -738,11 +738,9 @@
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
     <!-- export -->
-    <string name="export">Ekspor</string>
     <string name="export_progress">Ekspor: %1$s</string>
     <string name="export_exportedto">diekspor ke</string>
     <string name="export_failed">Ekspor gagal</string>
-    <string name="export_fieldnotes">Catatan lapangan</string>
     <string name="export_fieldnotes_info">Catatan bidang akan diekspor ke /sdcard/bidang-catatan dengan tanggal dan waktu saat ini sebagai nama berkas.</string>
     <string name="export_fieldnotes_upload">Mengunggah ke geocaching.com</string>
     <string name="export_fieldnotes_uploading">Sedang Mengunggah&#8230;</string>
@@ -752,7 +750,6 @@
     <string name="export_gpx_info">Berkas GPX akan diekspor ke %1$s dengan tanggal dan waktu saat ini sebagai nama berkasnya.</string>
     <string name="export_confirm_title">Mengekspor %1$s</string>
     <string name="export_confirm_message">Untuk Path: %1$s\nNama Berkas: %2$s</string>
-    <string name="export_persnotes">Catatan pribadi</string>
     <string name="export_persnotes_uploading">Mengunggah catatan pribadi %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">Mengupload %1$d notes dengan sukses</item>
