@@ -549,6 +549,7 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_status_attended">Nitambong</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_status_archived">Ge-arkibo</string>
