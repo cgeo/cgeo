@@ -707,11 +707,9 @@
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
     <!-- export -->
-    <string name="export">I-export</string>
     <string name="export_progress">I-export: %1$s</string>
     <string name="export_exportedto">gi-export sa</string>
     <string name="export_failed">Palpak sa pag-export</string>
-    <string name="export_fieldnotes">Palibot sa nota</string>
     <string name="export_fieldnotes_info">Ang palibot sa nota kay ma eksport ngadto sa /sdcard/field-notes uban ang petsa karon og ang oras isip pangan sa file.</string>
     <string name="export_fieldnotes_upload">I-upoload sa geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nag-upload…</string>
@@ -721,7 +719,6 @@
     <string name="export_gpx_info">Ang Gpx na file kay ma eksport ngadto sa %1$s uban ang petsa karon og oras isip pangan sa file.</string>
     <string name="export_confirm_title">Naga-eksport %1$s</string>
     <string name="export_confirm_message">Sa padulngan: %1$s\nPangan sa File:%2$s</string>
-    <string name="export_persnotes">Mga personal nga nota</string>
     <string name="export_persnotes_uploading">Gipang-upload nga personal na nota %1$d</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Pwede ra ang mga iro</string>
