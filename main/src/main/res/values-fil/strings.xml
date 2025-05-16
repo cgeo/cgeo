@@ -742,11 +742,9 @@
     <string name="helper_google_translate_title">Ang agsasalin ng Google</string>
     <string name="helper_google_translate_description">Kung kkaw ay nagdadownload sa mga package ng pagsasalin sa app na Google Translate, pagkatapos ikaw ay maaaring madaling makapagsalin sa mga deskripsyon ng c:geo sa pag-tap ng mataas sa teksto ng deskripsyon sa cache (na walang koneksyon sa Internet).</string>
     <!-- export -->
-    <string name="export">Ang magluwas</string>
     <string name="export_progress">Ang magluwas: %1$s</string>
     <string name="export_exportedto">ang nailuwas sa</string>
     <string name="export_failed">Angn abigong pagluluwas</string>
-    <string name="export_fieldnotes">Ang mga Palatandaan sa Patlang</string>
     <string name="export_fieldnotes_info">Ang mga Tala ng Field ay mai-export sa / sdcard / field-notes sa kasalukuyang petsa at oras bilang kanilang pangalan ng file.</string>
     <string name="export_fieldnotes_upload">Mag-upload sa geocaching.com</string>
     <string name="export_fieldnotes_uploading">Ang nag-a-upload&#8230;</string>
@@ -756,7 +754,6 @@
     <string name="export_gpx_info">Ang GPX file ay mai-export sa %1$s gamit ang kasalukuyang petsa at oras bilang pangalan ng file nito.</string>
     <string name="export_confirm_title">Ang Pag-eeksport %1$s</string>
     <string name="export_confirm_message">Para sa Path: %1$s\n Ang Pangalan ng Payl: %2$s</string>
-    <string name="export_persnotes">Personal na mga tala</string>
     <string name="export_persnotes_uploading">Pag-upload ng mga pansiriling tala %1$d</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Pinapayagan Ang mga aso</string>
