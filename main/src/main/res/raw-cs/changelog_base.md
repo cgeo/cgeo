@@ -21,21 +21,21 @@ Roadmap:
 Until then, you can switch between the different implementations in settings => map sources.
 
 ### Mapa
-- Novinka: Zobrazí geofence u zastávek labek (Sjednocená mapa) - povolte "Kruhy" v rychlém nastavení na mapě pro jejich zobrazení
-- Novinka: Možnost nastavit kruhy s individuálním poloměrem na trasové body (možnost kontextového menu "Sledovaná oblast")
-- Oprava: Zobrazení mapy se neaktualizuje při odebrání kešky z aktuálně zobrazeného seznamu
-- Oprava: Číslo kešky ve výběrovém seznamu se neaktualizuje při změně obsahu seznamu
-- Změna: Ponechat aktuální zobrazení při mapování seznamu, pokud se všechny kešky vejdou do aktuálního zobrazení
-- Novinka: Sledování mé polohy v grafu nadmořské výšky (Sjednocená mapa)
-- Novinka: Povolit akce "přesunout do" / "kopírovat do" pro "zobrazit jako seznam"
-- Novinka: Podpora motivu Elevate Winter ve stahovači map
-- Novinka: Adaptivní stínování kopců, volitelný režim vysoké kvality (Sjednocená mapa Mapsforge)
-- Novinka: Přepracované dialogové okno rychlého nastavení tras/stop
-- Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
-- Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
-- Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
-- Nový: Offline stínování kopců pro Sjednocenou mapu (VTM varianta)
-- Novinka: Podpora pro mapy pozadí (Sjednocená mapa)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
+- Fix: Number of cache in list chooser not updated on changing list contents
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
+- New: Follow my location in elevation chart (UnifiedMap)
+- New: Enable "move to" / "copy to" actions for "show as list"
+- New: Support Elevate Winter theme in map downloader
+- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap)
 
 ### Detaily kešky
 - Nový: Offline překlad textu a logů (experimentální)
