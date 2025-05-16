@@ -4,38 +4,38 @@
 c:geo ma od pewnego czasu zupełnie nową implementację mapy o nazwie „UnifiedMap”, która ostatecznie zastąpi stare implementacje Google Maps i Mapsforge (OpenStreetMap). Jest to zawiadomienie o wycofaniu, aby poinformować Cię mapie drogowej.
 
 UnifiedMap został opublikowany około roku temu. Nadal obsługuje Google Maps i OpenStreetMap (online + offline), ale w całkowicie przerobiony sposób techniczny. i z wieloma ekscytującymi nowymi funkcjami, których nie obsługują „stare” mapy, z których część to
-- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
-- Wyskakujące okienko klastra dla Google Maps
-- Ukrywanie źródeł map, których nie potrzebujesz
-- Wykres wysokości tras i ścieżek
-- Przełącz pomiędzy listami bezpośrednio z mapy
-- „Tryb jazdy” dla map opartych na OpenStreetMap
+- Map rotation for OpenStreetMap based maps (online + offline)
+- Cluster popup for Google Maps
+- Hide map sources you don't need
+- Elevation chart for routes and tracks
+- Switch between lists directly from map
+- "Driving mode" for OpenStreetMap based maps
 
 UnfiedMap okazała się stabilna od dłuższego czasu, dlatego usuniemy stare implementacje mapy, aby zmniejszyć wysiłek związany z utrzymaniem c:geo.
 
 Plan działania:
-- „Stare” mapy są teraz w trybie wycofywania – nie naprawimy już w nich błędów.
-- UnifiedMap stanie się domyślne dla wszystkich użytkowników jesienią 2025 r.
-- „Stare” implementacje mapy zostaną usunięte wiosną 2026 r.
+- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
+- UnifiedMap will be made default for all users in fall of 2025.
+- "Old" map implementations will be removed in spring 2026.
 
 Do tego czasu możesz przełączać się między różnymi implementacjami w ustawieniach => źródła mapy.
 
 ### Mapa
-- Nowość: Pokaż granice udzialania odpowiedzi (geofence) dla etapów skrytek lab (UnifiedMap) - włącz „Okręgi” w szybkich ustawieniach mapy, aby je pokazać
-- Nowość: Opcja ustawiania okręgów z indywidualnym promieniem do punktów orientacyjnych („Geofence” w menu kontekstowym)
-- Naprawiono: Widok mapy nie zaktualizował się podczas usuwania skrytki z aktualnie wyświetlanej listy
-- Naprawiono: Liczba skrytek w wyborze listy nie była aktualizowana po zmianie zawartości listy
-- Zmiana: Zachowaj bieżący widok na mapowaniu listy, jeśli wszystkie skrytki mieszczą się w bieżącym widoku
-- Nowość: Śledź moją lokalizację na wykresie wysokości (UnifiedMap)
-- Nowość: Włączenie działań „przenieś do” / „skopiuj do” dla „Pokaż jako listę”
-- Nowość: Wsparcie dla motywu Elevate Winter przy pobieraniu map
-- Nowość: Adaptacyjne cieniowanie wzgórz, opcjonalny tryb wysokiej jakości (UnifiedMap Mapsforge)
-- Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
-- Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
-- Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
-- Nowość: Przytrzymaj dłużej przycisk „włącz online", aby załadować skrytki zapisane lokalnie
-- Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
-- Nowość: Obsługa map tła (UnifiedMap)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
+- Fix: Number of cache in list chooser not updated on changing list contents
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
+- New: Follow my location in elevation chart (UnifiedMap)
+- New: Enable "move to" / "copy to" actions for "show as list"
+- New: Support Elevate Winter theme in map downloader
+- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap)
 
 ### Szczegóły skrytki
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
