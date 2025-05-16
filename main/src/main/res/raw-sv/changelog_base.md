@@ -21,21 +21,21 @@ Roadmap:
 Until then, you can switch between the different implementations in settings => map sources.
 
 ### Karta
-- Nyhet: Visa geofences för labsteg (UnifiedMap) - aktivera "Cirklar" i snabbinställningar på kartan för att visa dem
-- Ny: Alternativ för att ställa in cirklar med individuell radie till vägpunkter ("geofence" alternativ i sammanhangsmeny)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on changing list contents
-- Ändra: Behåll nuvarande vy för att visa en lista på karta, om alla cacher passar in i nuvarande vy
-- Nyhet: Följ min plats i höjddiagram (UnifiedMap)
-- Nytt: Aktivera "flytta till" / "kopiera till" åtgärder för "visa som lista"
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
+- New: Follow my location in elevation chart (UnifiedMap)
+- New: Enable "move to" / "copy to" actions for "show as list"
 - New: Support Elevate Winter theme in map downloader
-- Nyhet: Adaptiv terrängskuggning, valfritt högkvalitetsläge (UnifiedMap Mapsforge)
-- Nyhet: Omgjorda rutter/spår snabbinställningsdialog
-- Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
-- Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
-- Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
-- Nyhet: Offline backskuggning för UnifiedMap (VTM-variant)
-- Nytt: Stöd för bakgrundskartor (UnifiedMap)
+- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
+- New: Offline hillshading for UnifiedMap (VTM variant)
+- New: Support for background maps (UnifiedMap)
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
