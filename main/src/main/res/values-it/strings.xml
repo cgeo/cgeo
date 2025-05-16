@@ -1958,11 +1958,9 @@
     <string name="helper_gcwizard_description">GC Wizard contiene numerosi strumenti per la crittografia semplice, calcoli geodetici e scientifici e centinaia di insiemi di vari simboli.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
-    <string name="export">Esportazione</string>
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
     <string name="export_failed">Esportazione fallita</string>
-    <string name="export_fieldnotes">Field Note</string>
     <string name="export_fieldnotes_info">Field Note saranno esportate in /sdcard/field-notes con la data e ora correnti nel nome file.</string>
     <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
     <string name="export_fieldnotes_uploading">Caricamento…</string>
@@ -1972,7 +1970,6 @@
     <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
     <string name="export_confirm_title">Esportazione di %1$s</string>
     <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
-    <string name="export_persnotes">Note personali</string>
     <string name="export_persnotes_uploading">Carico la nota personale %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d nota caricata con successo</item>
