@@ -738,11 +738,9 @@
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
     <!-- export -->
-    <string name="export">تصدير</string>
     <string name="export_progress">تصدير: %1$s</string>
     <string name="export_exportedto">تم التصدير إلى</string>
     <string name="export_failed">فشل التصدير</string>
-    <string name="export_fieldnotes">حقل الملاحظات</string>
     <string name="export_fieldnotes_info">سيتم تصدير حقل الملاحظات إلى بطاقة الذاكرة/حقل لملاحظات بالتاريخ الحالي و الوقت هو اسم الملف.</string>
     <string name="export_fieldnotes_upload">الرفع إلى geocaching.com</string>
     <string name="export_fieldnotes_uploading">يتم الرفع&#8230;</string>
@@ -752,7 +750,6 @@
     <string name="export_gpx_info">سيتم تصدير ملف GPX إلى %1$s بواسطة التاريخ الحالي و الوقت هو اسم الملف.</string>
     <string name="export_confirm_title">تصدير %1$s</string>
     <string name="export_confirm_message">إلى المسار %1$s\nحقل الاسم: %2$s</string>
-    <string name="export_persnotes">الملاحظات الشخصية</string>
     <string name="export_persnotes_uploading">تحميل الملاحظة الشخصية %1$d</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">مسموح للكلاب</string>
