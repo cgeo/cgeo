@@ -1817,11 +1817,9 @@
     <string name="helper_gcwizard_description">GC Wizard에는 수백 가지의 다양한 기호 집합뿐만 아니라 간단한 암호화, 측지학 및 과학적 계산을 위한 수많은 도구가 포함되어 있습니다.</string>
     <!-- export -->
     <string name="share_export">공유 / 내보내기</string>
-    <string name="export">내보내기</string>
     <string name="export_progress">내보내기 : %1$s</string>
     <string name="export_exportedto">여기로 내보냄 :</string>
     <string name="export_failed">내보내기 실패</string>
-    <string name="export_fieldnotes">현장 기록</string>
     <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
     <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
     <string name="export_fieldnotes_uploading">올리는 중…</string>
@@ -1831,7 +1829,6 @@
     <string name="export_gpx_info">GPX 파일이 현재 날짜, 시간과 함께 %1$s로 저장됩니다.</string>
     <string name="export_confirm_title">%1$s 내보내는 중</string>
     <string name="export_confirm_message">경로: %1$s\nFile 이름: %2$s</string>
-    <string name="export_persnotes">개인 메모</string>
     <string name="export_persnotes_uploading">개인용 메모 올리기 %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">%1$d 개의 메모를 성공적으로 올림</item>
