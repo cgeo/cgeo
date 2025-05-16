@@ -1779,11 +1779,9 @@
     <string name="helper_gcwizard_description">GC Wizard sisältää lukuisia työkaluja yksinkertaisiin salauksiin, geodeettiset ja tieteelliset laskelmat sekä satoja eri symbolisarjoja.</string>
     <!-- export -->
     <string name="share_export">Jaa / Vie</string>
-    <string name="export">Vie</string>
     <string name="export_progress">Vienti: %1$s</string>
     <string name="export_exportedto">viety</string>
     <string name="export_failed">Vienti epäonnistui</string>
-    <string name="export_fieldnotes">Kenttämerkinnät</string>
     <string name="export_fieldnotes_info">Kenttämerkinnät viedään /sdcard/field-notes kansioon päivämäärä ja kellonaika tiedostonimenä.</string>
     <string name="export_fieldnotes_upload">Lataa geocaching.com:iin</string>
     <string name="export_fieldnotes_uploading">Lähetetään…</string>
@@ -1793,7 +1791,6 @@
     <string name="export_gpx_info">GPX-tiedosto viedään %1$s päivämäärä ja aika sen tiedostonimenä.</string>
     <string name="export_confirm_title">Viedään %1$s</string>
     <string name="export_confirm_message">Polku: %1$s\nTiedostonimi: %2$s</string>
-    <string name="export_persnotes">Omat merkinnät</string>
     <string name="export_persnotes_uploading">Ladataan omaa merkintää %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d muistiinpano ladattu onnistuneesti</item>
