@@ -4,38 +4,38 @@
 c:geo heeft al een tijdje een geheel nieuwe kaartimplementatie met de naam "UnifiedMap". Deze zal uiteindelijk de oude implementaties van Google Maps en Mapsforge (OpenStreetMap) vervangen. Dit is een waarschuwing van afschaffing om je te informeren over de verdere routekaart.
 
 UnifiedMap is ongeveer een jaar geleden gepubliceerd. Het ondersteunt nog steeds Google Maps en OpenStreetMap (online + offline), maar op een volledig herwerkte technische manier en met veel spannende nieuwe functies die de "old" kaarten niet ondersteunen, waarvan sommige zijn
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
+- Cluster popup voor Google Maps
+- Verberg kaartbronnen die je niet nodig hebt
+- Hoogtegrafiek voor routes en tracks
+- Schakel tussen lijsten direct van kaart
+- "Rijden modus" voor OpenStreetMap gebaseerde kaarten
 
 UnfiedMap is sinds geruime tijd stabiel gebleken, dus zullen we de oude implementatie van de kaart verwijderen om de onderhoudsinspanningen van c:geo te verminderen.
 
 Routekaart:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+- "Oud" kaarten zijn verouderd - we lossen geen bugs meer op.
+- UnifiedMap zal de standaard worden voor alle gebruikers in de herst van 2025.
+- "Oud" kaart implementaties zullen in het najaar van 2026 worden verwijderd.
 
 Tot dan kun je schakelen tussen de verschillende implementaties in instellingen => kaartbronnen.
 
 ### Kaart
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
+- Nieuw: Toon geofences voor lab stadia (UnifiedMap) - "Circles" inschakelen in kaart snelle instellingen om ze te tonen
+- Nieuw: Optie om cirkels met individuele straal in te stellen op waypoints ("geofence" contextoptie)
+- Oplossing: Kaartweergave niet bijgewerkt bij het verwijderen van cache van de huidig getoonde lijst
+- Oplossing: Aantal caches in lijst kiezer niet bijgewerkt bij wijziging van lijst inhoud
+- Wijziging: Houd de huidige viewport op de kaart van een lijst, als alle caches passen in de huidige viewport
+- Nieuw: Volg mijn locatie in de hoogte kaart (UnifiedMap)
+- Nieuw: "verplaatsen naar" / "kopiëren naar" acties voor "weergeven als lijst" inschakelen
+- Nieuw: Ondersteun verhoging Winter thema in kaart download
+- Nieuw: Adaptieve Hoogtelijnen, optionele hoge kwaliteit modus (UnifiedMap Mapsforge)
+- Nieuw: Herontworpen routes/track van het dialoogvenster snelle instellingen
+- Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
+- Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
+- Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
+- Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
+- Nieuw: Ondersteuning voor achtergrondkaarten (UnifiedMap)
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
