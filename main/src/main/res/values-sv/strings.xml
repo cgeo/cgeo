@@ -1409,6 +1409,7 @@
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
     <string name="cache_description_rendering">Återger beskrivning, vänligen vänta…</string>
+    <string name="cache_description_translating_and_rendering">Översätter och renderar beskrivning, vänligen vänta…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varning: Beskrivningen är mycket stor (%1$d tecken). Endast de första %2$d%% visas.</string>
     <string name="cache_description_render_fully">Rendera fullständig beskrivning</string>
     <string name="cache_area_description">Områdesbeskrivning</string>
@@ -2376,6 +2377,7 @@
     <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_route">Exportera som rutt</string>
     <string name="map_export_track">Exportera som spår</string>
+    <string name="map_load_from_GPX">Ladda från GPX</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
