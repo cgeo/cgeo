@@ -221,6 +221,9 @@
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- translation -->
+    <string name="translate">Tradueix a l\'aplicació Google Translate</string>
+    <string name="translate_to_sys_lang">Tradueix a %s (Web)</string>
+    <string name="translate_to_english">Traduir a l\'anglès (web)</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -344,6 +347,7 @@
     <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
     <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
     <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_preference_application_language">&lt;Utilitzar l\'idioma de l\'aplicació&gt;</string>
     <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
     <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
     <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
@@ -356,6 +360,7 @@
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
     <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
     <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_target_language">Tradueix a \"%s\"</string>
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
     <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
@@ -436,6 +441,7 @@
     <string name="caches_sort_geocode">Geocodi</string>
     <string name="caches_sort_rating">Puntuació</string>
     <string name="caches_sort_vote">Vota (valoració pròpia)</string>
+    <string name="caches_sort_inventory">Recompte de rastrejables</string>
     <string name="caches_sort_date_hidden">Data d\'amagat</string>
     <string name="caches_sort_date_logged">Data de registre (Registre propi)</string>
     <string name="caches_sort_finds">Trobats</string>
@@ -566,6 +572,7 @@
     <string name="cache_filter_hidden">Data d\'Amagat</string>
     <string name="cache_filter_eventdate">Data de la trobada</string>
     <string name="cache_filter_logs_count">Recompte de registres</string>
+    <string name="cache_filter_inventory_count">Recompte de rastrejables</string>
     <string name="cache_filter_last_found">Darrera trobada</string>
     <string name="cache_filter_log_entry">Entrada de registre</string>
     <string name="cache_filter_location">Ubicació</string>
@@ -927,6 +934,8 @@
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_use_application_language">Utilitzeu el llenguatge de l\'aplicació</string>
+    <string name="init_translation_disabled">Traducció desactivada</string>
     <string name="init_date_format">Format de data</string>
     <string name="init_date_format_description">Format per utilitzar per a dates curtes, p. a la vista de registre</string>
     <string name="system_default">Sistema per defecte</string>
@@ -1084,6 +1093,7 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els vessants s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
@@ -1211,6 +1221,7 @@
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Utilitzeu el mapa heretat</string>
     <string name="init_summary_useLegacyMap">Utilitzeu versions heretades dels mapes de Google Map/Mapsforge (OSM) en comptes d\'UnifiedMap</string>
+    <string name="category_unifiedMap">Mapa unificat</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -1388,6 +1399,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Rastrejables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
@@ -1746,11 +1758,13 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
+    <string name="calccoord_remove_spaces">Elimina espais</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
     <string name="calccoord_paste_from_clipboard">Enganxa des del porta-retalls</string>
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
+    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
@@ -1879,6 +1893,7 @@
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
     <string name="search_address_result">Llocs trobats</string>
+    <string name="search_own_caches">Els meus catxés</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Llista de marcadors</string>
     <string name="search_pocket_is_new">nou</string>
@@ -1963,9 +1978,11 @@
     <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
+    <string name="export">Exporta / Carrega</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
     <string name="export_failed">S\'ha produït un error en l\'exportació</string>
+    <string name="export_fieldnotes">Exporta notes de camp</string>
     <string name="export_fieldnotes_info">Les notes de camp s\'exportaran a /sdcard/field-notes amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_fieldnotes_upload">Carrega a geocaching.com</string>
     <string name="export_fieldnotes_uploading">S\'està carregant…</string>
@@ -1975,6 +1992,7 @@
     <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_confirm_title">Exportant %1$s</string>
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
+    <string name="export_persnotes">Carregueu notes personals</string>
     <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">S\'ha pujat %1$d nota correctament</item>
@@ -2395,6 +2413,7 @@
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
     <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>
+    <string name="map_clear_manual_targets">Esborra l\'objectiu d\'encaminament</string>
     <string name="map_manual_targets_cleared">Objectius manuals esborrats</string>
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
     <string name="map_clear_individual_route_confirm">Voleu eliminar tots els catxés / waypoints de la vostra ruta individual?</string>
@@ -2555,6 +2574,7 @@
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <string name="hillshading_info">Ombreig fora de línia</string>
     <string name="maptheme_elevate_categoryinfo">Rellevant per a: [A] Àrees, [P] POI, [R] Rutes, [W] Camins</string>
+    <string name="maptheme_vtm_scaling_summary">Opcions d\'escala per a mapes fora de línia (només VTM, requereix reinici)</string>
     <string name="maptheme_scale_map_title">Factor d\'escala del mapa</string>
     <string name="maptheme_scale_map_summary">Mapa d\'escales; 100% = sense escala</string>
     <string name="maptheme_scale_text_title">Factor d\'escala del text</string>
@@ -2617,6 +2637,7 @@
     <string name="wherigo_controls_stopgame_hint">Atura un joc en curs</string>
     <string name="wherigo_controls_mapzones_hint">Mostra les zones d\'un joc en curs al mapa</string>
     <string name="wherigo_controls_downloadcartridge_hint">Descarrega un cartutx (cal cguid)</string>
+    <string name="wherigo_controls_reportproblem_hint">Mostra l\'últim problema de Wherigo</string>
     <string name="wherigo_controls_cache_context">Context del catxé</string>
     <string name="wherigo_controls_cache_link">Vés als detalls del catxé</string>
     <string name="wherigo_sound_title">Controls de so</string>
@@ -2662,6 +2683,7 @@
     <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
+    <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>
     <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError del motor: %1$s\n\nInformació de Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
