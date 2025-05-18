@@ -310,6 +310,8 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
+    <string name="info_log_post_failed_simple_reason">Kontrollera att du är korrekt inloggad och har en giltig internetanslutning.</string>
+    <string name="info_log_delete_failed_simple_reason">Kontrollera att du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan har tagits bort.</string>
     <string name="info_log_post_retry">Försök igen</string>
     <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
@@ -1627,6 +1629,7 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <string name="internal_connector_name">Användardefinierade cacher</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
