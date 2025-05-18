@@ -91,6 +91,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         final Activity activity = requireActivity();
         if (activity instanceof CoordinatesInputDialog.CoordinateUpdate) {
+            // TODO : FIX THIS
+            // TODO : This still works but is messy as it references the old coordinate input dialog's interface methods
+            // TODO : Can I add a normal call back instead
             ((CoordinatesInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
 
@@ -135,9 +138,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                     this.varList = cache.getVariables();
                 }
             }
-            if (varList == null) {
-                varList = new VariableList();
-            }
+        }
+        if (varList == null) {
+            varList = new VariableList();
         }
     }
 

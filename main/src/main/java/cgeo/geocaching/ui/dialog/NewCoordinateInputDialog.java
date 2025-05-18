@@ -1,10 +1,14 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CalculatedCoordinateType;
+import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -16,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +65,7 @@ public class NewCoordinateInputDialog {
     private List<EditText> orderedInputs;
     private Geopoint gp;
     private Disposable geoDisposable;
-
+    private boolean showCalculator = false;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
@@ -69,14 +74,28 @@ public class NewCoordinateInputDialog {
         }
     };
 
-    private NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
+    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final boolean showCalculatorButton ) {
 
         this.context = context;
         this.callback = callback;
+        this.showCalculator = showCalculatorButton;
     }
 
+    // Entry point for user defined cache, search card and GK TB
     public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
-       new NewCoordinateInputDialog(context, callback).show(location);
+       new NewCoordinateInputDialog(context, callback, false).show(location);
+    }
+
+    //Entry point for Waypoint page
+    public static void show(final Context context, final DialogCallback callback, final CoordinateInputData inputData) {
+
+        if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
+            final AbstractActivity activity = (AbstractActivity) context;
+            final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+            CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
+            return;
+        }
+        new NewCoordinateInputDialog(context, callback, true).show(null);
     }
 
     @NonNull
@@ -85,7 +104,6 @@ public class NewCoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
-    // Main entry point for distance filter, GK TB and user defined cache coordinates
     private void show(final Geopoint location) {
 
         if (location != null) {
@@ -116,7 +134,7 @@ public class NewCoordinateInputDialog {
                }
             } else {
                 geoDisposable.dispose();
-               dialog.dismiss();
+                dialog.dismiss();
             }
             return true;
         });
@@ -204,9 +222,12 @@ public class NewCoordinateInputDialog {
             EditUtils.disableSuggestions(editText);
         }
 
-        // User copy/paste buttons
+        // Manage to options buttons
         final Button copyFromClipboard = binding.clipboard;
         final Button useCurrentLocation = binding.current;
+        final Button calculate = binding.calculate;
+
+        calculate.setVisibility(this.showCalculator ? View.VISIBLE : View.GONE);
 
         copyFromClipboard.setOnClickListener(v -> {
             try {
@@ -220,6 +241,27 @@ public class NewCoordinateInputDialog {
         useCurrentLocation.setOnClickListener(v -> {
             gp = currentCoords();
             updateGui();
+        });
+
+        // Launch the calculator dialog that is still fragment based atm
+        calculate.setOnClickListener(v -> {
+            final AbstractActivity activity = (AbstractActivity) context;
+            final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+            CoordinateInputData inputData = new CoordinateInputData();
+            inputData.setGeopoint(gp);
+            final CalculatedCoordinate cc = new CalculatedCoordinate();
+            cc.setType( CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
+
+            //try to set patterns from GUI
+            final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
+            cc.setLatitudePattern(patternsFromGui.first);
+            cc.setLongitudePattern(patternsFromGui.second);
+
+            inputData.setCalculatedCoordinate(cc);
+            CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
+            geoDisposable.dispose();
+            dialog.dismiss();
         });
 
         dialog.show();
@@ -453,6 +495,31 @@ public class NewCoordinateInputDialog {
         return 2;
     }
 
+    private Pair<String, String> getLatLonPatternFromGui() {
+        String lat = null;
+        String lon = null;
+        switch (currentFormat) {
+            case Deg: // DDD.DDDDD°
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "." + latitudeFraction.getText() + "°";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "." + longitudeFraction.getText() + "°";
+                break;
+            case Min: // DDD° MM.MMM
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "°" + latitudeMinutes.getText() + "." + latitudeFraction.getText() + "'";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "." + longitudeFraction.getText() + "'";
+                break;
+            case Sec: // DDD° MM SS.SSS
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "°" + latitudeMinutes.getText() + "'" + latitudeSeconds.getText() + "." + latitudeFraction.getText() + "\"";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
+                break;
+            case Plain:
+            default:
+                lat = bLatitude.getText().toString();
+                lon = bLongitude.getText().toString();
+                break;
+        }
+        return new Pair<>(lat, lon);
+
+    }
     private class PadZerosOnFocusLostListener implements View.OnFocusChangeListener {
 
         @Override
