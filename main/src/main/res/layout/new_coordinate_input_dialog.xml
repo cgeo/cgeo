@@ -232,6 +232,12 @@
             android:layout_height="wrap_content"
             android:text="@string/waypoint_my_coordinates" />
 
+		<Button
+			android:id="@+id/calculate"
+			style="@style/button_full"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="Compute" />
 
         <Button
             android:id="@+id/clipboard"

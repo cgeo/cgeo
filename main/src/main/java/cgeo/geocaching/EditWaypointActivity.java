@@ -30,6 +30,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -568,10 +569,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
             cid.setCalculatedCoordinate(cc);
 
-            CoordinatesInputDialog.show(getSupportFragmentManager(), cid);
+            NewCoordinateInputDialog.show(EditWaypointActivity.this, this::OnCoordinatesUpdated, cid);
+        }
+        private void OnCoordinatesUpdated(@Nullable final Geopoint gp) {
+            updateCoordinates(gp);
         }
     }
-
     @Override
     public void updateCoordinates(@Nullable final Geopoint gp) {
         //this method is supposed to update the "base" / "preprojected" coordinate
@@ -593,7 +596,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         updateCoordinates(coordinateInputData.getGeopoint());
     }
 
-    @Override
+    @Override  // REDUNDANT ?
     public boolean supportsNullCoordinates() {
         return true;
     }
