@@ -633,6 +633,7 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
+    <string name="cache_status_attended">已参加</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->

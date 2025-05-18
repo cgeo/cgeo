@@ -16,24 +16,24 @@ UnfiedMap ha demostrat ser estable des de fa força temps, per la qual cosa elim
 Full de ruta:
 - Els mapes "vells" estan ara en mode obsolet; ja no els arreglarem els errors.
 - UnifiedMap es convertirà per defecte per a tots els usuaris a la tardor del 2025.
-- Les implementacions de mapes "antigues" s'eliminaran a la primavera de 2026.
+- Les implementacions de mapes antigues s'eliminaran a la primavera del 2026.
 
 Fins aleshores, podeu canviar entre les diferents implementacions a la configuració => fonts de mapes.
 
 ### Mapa
-- Novetat: Mostra les tanques geogràfiques per a les etapes de laboratori (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
-- Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geotanca")
+- Novetat: Mostra les tanques geogràfiques per a les etapes de lab (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
+- Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geofence")
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
-- Correcció: el nombre de catxés al selector de llista no s'ha actualitzat en canviar el contingut de la llista
+- Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Canviar: manteniu la finestra gràfica actual en el mapa d'una llista, si tots els catxés encaixen a la finestra gràfica actual
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
 - Nou: habiliteu les accions "mou a" / "copiar a" per a "mostrar com a llista"
 - Nou: admet el tema Elevate Winter al descarregador de mapes
 - Nou: ombrejat adaptatiu, mode d'alta qualitat opcional (UnifiedMap Mapsforge)
 - Novetat: diàleg de configuració ràpida de rutes/tracks redissenyades
-- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor anterior (UnifiedMap)
+- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor de rajoles anterior (UnifiedMap)
 - Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
-- Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
+- Nou: toqueu llargament "activa el botó en directe" per carregar catxés fora de línia
 - Nou: ombrejat fora de línia per a UnifiedMap (variant VTM)
 - Nou: suport per a mapes de fons (UnifiedMap)
 

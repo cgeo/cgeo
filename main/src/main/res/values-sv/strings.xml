@@ -221,9 +221,6 @@
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
     <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
     <!-- translation -->
-    <string name="translate">Översätt i appen Google Translate</string>
-    <string name="translate_to_sys_lang">Översätt till %s (Webb)</string>
-    <string name="translate_to_english">Översätt till engelska (Webb)</string>
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -313,6 +310,8 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
+    <string name="info_log_post_failed_simple_reason">Kontrollera att du är korrekt inloggad och har en giltig internetanslutning.</string>
+    <string name="info_log_delete_failed_simple_reason">Kontrollera att du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan har tagits bort.</string>
     <string name="info_log_post_retry">Försök igen</string>
     <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
@@ -436,7 +435,6 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Betyg (GC-vote)</string>
     <string name="caches_sort_vote">Betyg (eget)</string>
-    <string name="caches_sort_inventory">Antal spårbara objekt</string>
     <string name="caches_sort_date_hidden">Datum för utplacering</string>
     <string name="caches_sort_date_logged">Logg-datum (egen logg)</string>
     <string name="caches_sort_finds">Antal som hittat</string>
@@ -567,7 +565,6 @@
     <string name="cache_filter_hidden">Gömd datum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Antal loggar</string>
-    <string name="cache_filter_inventory_count">Antal spårbara objekt</string>
     <string name="cache_filter_last_found">Senast hittad</string>
     <string name="cache_filter_log_entry">Loggpost</string>
     <string name="cache_filter_location">Plats</string>
@@ -1085,7 +1082,6 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
-    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.\nInte kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
     <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
@@ -1213,7 +1209,6 @@
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
     <string name="init_title_useLegacyMap">Använd äldre karta</string>
     <string name="init_summary_useLegacyMap">Använd äldre versioner av kartor från Google Map / Mapsforge (OSM) istället för UnifiedMap</string>
-    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1390,7 +1385,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Spårbara objekt</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
@@ -1417,6 +1411,7 @@
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
     <string name="cache_description_rendering">Återger beskrivning, vänligen vänta…</string>
+    <string name="cache_description_translating_and_rendering">Översätter och renderar beskrivning, vänligen vänta…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varning: Beskrivningen är mycket stor (%1$d tecken). Endast de första %2$d%% visas.</string>
     <string name="cache_description_render_fully">Rendera fullständig beskrivning</string>
     <string name="cache_area_description">Områdesbeskrivning</string>
@@ -1634,6 +1629,7 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <string name="internal_connector_name">Användardefinierade cacher</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
@@ -1742,13 +1738,11 @@
     <string name="calccoord_guided_value">Värde</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
-    <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Ersätt \'x\' med \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Klistra in från urklipp</string>
     <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
     <string name="calccoord_generate_waypointnameprefix">genererad</string>
-    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades (t.ex. [:0-9] eller [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
     <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
     <string name="calccoord_migrate_title">Migrera waypoints</string>
@@ -1870,14 +1864,13 @@
     <string name="search_kw_disabled_hint">Inaktiverad eftersom det inte stöds av geocaching.com för BASIC-medlemmar</string>
     <string name="search_hbu">Gömd av</string>
     <string name="search_finder">Hittad av</string>
-    <string name="search_filter">Filter</string>
+    <string name="search_filter">Filtrera</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
     <string name="search_destination">Öppna destinationen i c:geo</string>
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
     <string name="search_address_result">Hittade platser</string>
-    <string name="search_own_caches">Mina cacher</string>
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_bookmark_list">Bokmärkeslista</string>
     <string name="search_pocket_is_new">ny</string>
@@ -2387,11 +2380,11 @@
     <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_route">Exportera som rutt</string>
     <string name="map_export_track">Exportera som spår</string>
+    <string name="map_load_from_GPX">Ladda från GPX</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
-    <string name="map_clear_manual_targets">Rensa rutt-mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_clear_individual_route_confirm">Vill du ta bort alla cacher/punkter från din individuella rutt?</string>
@@ -2549,7 +2542,6 @@
     <string name="brouter_info">Offline rutt-tjänst</string>
     <string name="hillshading_info">Offline terrängskuggning</string>
     <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
-    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offlinekartor (endast VTM, kräver omstart)</string>
     <string name="maptheme_scale_map_title">Skalfaktor karta</string>
     <string name="maptheme_scale_map_summary">Skalar karta; 100% = ingen skalning</string>
     <string name="maptheme_scale_text_title">Skalfaktor text</string>
@@ -2606,7 +2598,6 @@
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
-    <string name="wherigo_controls_reportproblem_hint">Visa senaste Wherigo-problem</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
     <string name="wherigo_sound_title">Ljudkontroller</string>

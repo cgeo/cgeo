@@ -418,6 +418,7 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
+    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>

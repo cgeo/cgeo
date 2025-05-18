@@ -221,9 +221,6 @@
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- translation -->
-    <string name="translate">In Google Translate App übersetzen</string>
-    <string name="translate_to_sys_lang">Übersetze nach %s</string>
-    <string name="translate_to_english">Übersetze nach Englisch (Web)</string>
     <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -440,7 +437,6 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Bewertung</string>
     <string name="caches_sort_vote">Eigene Bewertung</string>
-    <string name="caches_sort_inventory">Anzahl Trackables</string>
     <string name="caches_sort_date_hidden">Versteckdatum</string>
     <string name="caches_sort_date_logged">Logdatum (Eigener Log)</string>
     <string name="caches_sort_finds">Funde</string>
@@ -571,7 +567,6 @@
     <string name="cache_filter_hidden">Versteckdatum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Anzahl Logs</string>
-    <string name="cache_filter_inventory_count">Anzahl Trackables</string>
     <string name="cache_filter_last_found">Letztes Funddatum</string>
     <string name="cache_filter_log_entry">Logeintrag</string>
     <string name="cache_filter_location">Ort</string>
@@ -1092,7 +1087,6 @@
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
-    <string name="settings_info_hillshading">Kartenschattierung ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie erforderlichen Daten können über das Kartenmenü heruntergeladen werden.\nNicht kompatibel mit der Vereinheitlichten Karte in der VTM-Variante.</string>
     <string name="settings_hillshading_enable">Kartenschattierung</string>
     <string name="init_hillshading_hq">Kartenschattierung in hoher Qualität</string>
     <string name="init_summary_hillshading_hq">Detailliertere Kartenschattierung, aber ~50%% langsamere Darstellung beim Vergrößern</string>
@@ -1220,7 +1214,6 @@
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
     <string name="init_title_useLegacyMap">Alte Karte verwenden</string>
     <string name="init_summary_useLegacyMap">Verwenden Sie alte Versionen von Google Map / Mapsforge (OSM) anstelle der Vereinheitlichten Karte (UnifiedMap)</string>
-    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1398,7 +1391,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">vor über einem Jahr</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_set_coordinates">Koordinaten festlegen</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
@@ -1532,7 +1524,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Teilgenomen</string>
+    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1757,13 +1749,11 @@
     <string name="calccoord_guided_value">Wert</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
-    <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">\'x\' durch \'*\' ersetzen</string>
     <string name="calccoord_paste_from_clipboard">Aus Zwischenablage einfügen</string>
     <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
     <string name="calccoord_generate_waypointnameprefix">Erzeugt</string>
-    <string name="calccoord_generate_error_novarwithrange">Keine gültige Variable mit Bereichen gefunden (z. B.: [:0-9] oder [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Keine Kombination ergab gültige Koordinaten</string>
     <string name="calccoord_generate_error_nogeopointselected">Keine Koordinate ausgewählt</string>
     <string name="calccoord_migrate_title">Wegpunkt-Migration</string>
@@ -1892,7 +1882,6 @@
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
-    <string name="search_own_caches">Meine Caches</string>
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
@@ -2411,7 +2400,6 @@
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
     <string name="map_disable_autotarget_individual_route">\"Routenstart als Ziel festlegen\" deaktiviert</string>
-    <string name="map_clear_manual_targets">Routing-Ziel löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
@@ -2572,7 +2560,6 @@
     <string name="brouter_info">Offline Routing-Dienst</string>
     <string name="hillshading_info">Offline Kartenschattierung</string>
     <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
-    <string name="maptheme_vtm_scaling_summary">Skalierungsoptionen für Offline-Karten (Nur VTM, Neustart erforderlich)</string>
     <string name="maptheme_scale_map_title">Kartenskalierungsfaktor</string>
     <string name="maptheme_scale_map_summary">Skaliert die Karte; 100% = keine Skalierung</string>
     <string name="maptheme_scale_text_title">Textskalierungsfaktor</string>
@@ -2635,7 +2622,6 @@
     <string name="wherigo_controls_stopgame_hint">Laufendes Spiel stoppen</string>
     <string name="wherigo_controls_mapzones_hint">Zonen eines laufenden Spiels auf der Karte anzeigen</string>
     <string name="wherigo_controls_downloadcartridge_hint">Manuelles Herunterladen einer Cartridge (cguid erforderlich)</string>
-    <string name="wherigo_controls_reportproblem_hint">Letztes Wherigo-Problem anzeigen</string>
     <string name="wherigo_controls_cache_context">Geocache Kontext</string>
     <string name="wherigo_controls_cache_link">Gehe zu Cache-Details</string>
     <string name="wherigo_sound_title">Sound-Steuerung</string>
@@ -2681,7 +2667,6 @@
     <string name="wherigo_download_accept_eula">Bitte logge dich auf www.wherigo.com ein und akzeptiere zuerst deren Allgemeine Geschäftsbedingungen</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
-    <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```\nDu kannst den Autor der Cartridge [hier](%2$s) kontaktieren</string>
     <string name="wherigo_error_email">Wherigo Problembericht\n\nEnginefehler: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
