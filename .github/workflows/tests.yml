@@ -52,7 +52,7 @@ jobs:
           username: ${{ github.triggering_actor }}
 
       - name: Check User Permission
-        if: steps.checkAccess.outputs.require-result == 'false' && !contains(github.event.pull_request.labels.*.name, 'safe to test') && github.actor != 'dependabot[bot]'
+        if: steps.checkAccess.outputs.require-result == 'false' && !contains(github.event.pull_request.labels.*.name, 'ok-to-test') && github.actor != 'dependabot[bot]'
         run: |
           echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
           exit 1
@@ -312,22 +312,17 @@ jobs:
             ./gradlew --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
+      - name: Rerun workflow if needed
+        if: failure() && fromJSON(github.run_attempt) < 3
+        run: |
+          gh workflow run unit-tests-rerun.yml -F run_id=${{ github.run_id }}
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          GH_DEBUG: api
+
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/build/test-results/**/*.xml'
-
-
-
-
-  rerun-on-failure:
-    needs: integration-tests
-    if: failure() && fromJSON(github.run_attempt) < 3
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ github.token }}
-          GH_DEBUG: api
-        run: gh workflow run unit-tests-rerun.yml -F run_id=${{ github.run_id }}
