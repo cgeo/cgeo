@@ -24,6 +24,15 @@ permissions:
   pull-requests: write
 
 jobs:
+  test-skip-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug concurrency-group
+        run: |
+          # Skip-CI:
+          # commit[0] message: ${{ github.event.commits[0].message }}
+          # test has_skip_ci: ${{ ! contains(github.event.commits[0].message, '[skip ci]') }}
+
   check-secrets:
     if: ! contains(github.event.commits[0].message, '[skip ci]')
     runs-on: ubuntu-latest
