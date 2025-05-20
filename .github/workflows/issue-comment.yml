@@ -10,7 +10,7 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-    - uses: estroz/rerun-actions@main
+    - uses: kumy/rerun-actions@events
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         comment_id: ${{ github.event.comment.id }}
