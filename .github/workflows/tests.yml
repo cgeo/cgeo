@@ -19,6 +19,7 @@ env:
   JDK_VERSION: ${{ inputs.JDK_VERSION || '17' }}
 
 permissions:
+  actions: write
   contents: write
   checks: write
   pull-requests: write
