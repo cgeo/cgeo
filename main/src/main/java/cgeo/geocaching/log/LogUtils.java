@@ -22,6 +22,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Context;
 import android.net.Uri;
@@ -33,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,6 +47,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public final class LogUtils {
@@ -494,5 +497,29 @@ public final class LogUtils {
 
     private static boolean imagePropertiesEqual(final Image oldImg, final Image newImg, final String newTitle) {
         return Objects.equals(oldImg.title, newTitle) && Objects.equals(oldImg.getDescription(), newImg.getDescription());
+    }
+
+    /**
+     * Checks, if the logs are representing the same log-entry.
+     * Log-text can be empty (to deal with field-notes)
+     */
+    public static boolean isMatchingLog(final LogEntry log1, final LogEntry log2) {
+        return log1.logType == log2.logType &&
+                log1.author.compareTo(log2.author) == 0 &&
+                DateUtils.isSameDay(new Date(log1.date), new Date(log2.date)) &&
+                (log1.log.isEmpty() || log2.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(log1.log, log2.log));
+    }
+
+
+    public static boolean hasSameLogId(final LogEntry log1, final LogEntry log2) {
+        if (log1 == log2) {
+            return true;
+        }
+
+        if (log1.serviceLogId != null && log2.serviceLogId != null) {
+            return StringUtils.equals(log1.serviceLogId, log2.serviceLogId);
+        }
+
+        return false;
     }
 }
