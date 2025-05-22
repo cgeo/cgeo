@@ -19,6 +19,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.LogUtils;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -1603,24 +1604,29 @@ public final class GCParser {
         final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
                 getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
 
-        List<LogEntry> ownLogsFromDb = Collections.emptyList();
         final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
+
+        // merge time from offline log
+        mergeOfflineLogTime(ownLogEntriesBlocked, DataStore.loadLogOffline(cache.getGeocode()));
+
+        // merge time from online-logs already stored in db (overrides possible offline log)
+        List<LogEntry> ownLogsFromDb = Collections.emptyList();
         if (!ownLogEntriesBlocked.isEmpty()) {
             ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), true);
             if (ownLogsFromDb.isEmpty()) {
                 ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), false);
             }
         }
-
         mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
-                    if (cache.isFound() || cache.isDNF()) {
-                        for (final LogEntry logEntry : ownLogEntriesBlocked) {
-                            if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
-                                cache.setVisitedDate(logEntry.date);
-                                break;
-                            }
-                        }
-                    }
+
+        if (cache.isFound() || cache.isDNF()) {
+            for (final LogEntry logEntry : ownLogEntriesBlocked) {
+                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
+                    cache.setVisitedDate(logEntry.date);
+                    break;
+                }
+            }
+        }
 
         final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), friendLogs.toList(), ownLogs.toList(),
                 (logEntries, friendLogEntries, ownLogEntries) -> {
@@ -1732,6 +1738,19 @@ public final class GCParser {
                     }
                     break;
                 }
+            }
+        }
+    }
+
+    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @Nullable OfflineLogEntry logToMerge) {
+        if (logToMerge == null) {
+            return;
+        }
+
+        for (final LogEntry mergedLog : mergedLogTimes) {
+            if (LogUtils.isMatchingLog(logToMerge, mergedLog)) {
+                mergedLog.setDate(logToMerge.date);
+                break;
             }
         }
     }
