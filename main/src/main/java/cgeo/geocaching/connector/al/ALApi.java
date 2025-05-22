@@ -55,9 +55,13 @@ import org.apache.commons.lang3.StringUtils;
 final class ALApi {
 
     @NonNull
-    private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
+    private static final boolean DEBUG = false;
+    private static final String API_HOST = "https://labs-api.geocaching.com/Api/";
+    private static final String ADVENTURES = "Adventures/";
+    private static final String JOURNAL = "GeocacheLogs";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
     private static final String CONSUMER_KEY = LocalizationUtils.getString(R.string.alc_consumer_key);
+    private static final String AUTHORIZATION = "Bearer XXX"; // access_token must be acquired somehow
 
     private static final String LOCATION = "/Location";
     private static final String LONGITUDE = "Longitude";
@@ -149,22 +153,43 @@ final class ALApi {
         }
     }
 
+    // getJournal() is required in order to extract completion dates for each solved
+    // stage of each adventure. This API method requires a JWT access_token.
+
+    @Nullable
+    @WorkerThread
+    protected static String getJournal() {
+        if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
+            return null;
+        }
+        final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY, AUTHORIZATION);
+        try {
+            final Response response = apiRequest(JOURNAL, null, headers).blockingGet();
+            return null;
+        } catch (final Exception ex) {
+            Log.e("APApi: Exception while getting Journal", ex);
+            return null;
+        }
+    }
+
     // To understand the logic of this function some details about the API is in order.
     // The API method being used does return the detailed properties of the
     // object in question, however it does not return the true found state of the object so
     // we have to do an additional search, a search which will give us much less details about
     // the object but does indeed give us the true found state of the object. Once we got
-    // that information, we merge it into the object we wanted to lookup initially.
+    // that information, we merge it into the object we wanted to lookup initially. However,
+    // please note: we do not get the completion date.
 
     @Nullable
     @WorkerThread
     protected static Geocache searchByGeocode(final String geocode) {
+        //getJournal(); // put this here for debugging the getJournal function
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
+            final Response response = apiRequest(ADVENTURES + geocode.substring(2), null, headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
             if (!Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
@@ -176,7 +201,7 @@ final class ALApi {
             }
             return gc;
         } catch (final Exception ex) {
-            Log.w("APApi: Exception while getting " + geocode, ex);
+            Log.e("APApi: Exception while getting " + geocode, ex);
             return null;
         }
     }
@@ -195,7 +220,7 @@ final class ALApi {
         query.setRecentlyPublishedDays(daysSincePublish);
         query.setCallingUserPublicGuid(GCLogin.getInstance().getPublicGuid());
         try {
-            final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
+            final Response response = apiPostRequest(ADVENTURES + "SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ex) {
             throw new IOException("Problem accessing ALApi", ex);
@@ -291,7 +316,7 @@ final class ALApi {
             Log.d("_AL importCacheFromJson: " + json.toPrettyString());
             return parseCacheDetail(json);
         } catch (final Exception e) {
-            Log.w("_AL importCacheFromJSON", e);
+            Log.e("_AL importCacheFromJSON", e);
             return null;
         }
     }
@@ -319,88 +344,91 @@ final class ALApi {
             }
             return caches;
         } catch (final Exception e) {
-            Log.w("_AL importCachesFromJSON", e);
+            Log.e("_AL importCachesFromJSON", e);
             return Collections.emptyList();
         }
     }
 
+    // We have two parsers:
+    //
+    // 1) parseCache
+    // 2) parseCacheDetails
+    //
+    // searchByGeocode() -> importCacheFromJSON  -> parseCacheDetail()
+    // search()          -> importCachesFromJSON -> parseCache()
+    //
+
     @Nullable
     private static Geocache parseCache(final JsonNode response) {
+        final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
         try {
-            final Geocache cache = new Geocache();
-            final JsonNode location = response.at(LOCATION);
-            final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
-            final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
-            cache.setGeocode(geocode);
-            cache.setCacheId(segments[segments.length - 1]);
-            cache.setName(response.get(TITLE).asText());
-            cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
-            cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
-            cache.setVotes(response.get("RatingsTotalCount").asInt());
-            cache.setRating(response.get("RatingsAverage").floatValue());
-            cache.setArchived(response.get("IsArchived").asBoolean());
-            cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            if (!Settings.isALCfoundStateManual()) {
-                cache.setFound(response.get("IsComplete").asBoolean());
+            Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache == null) {
+                cache = new Geocache();
             }
-            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
-            cache.setPersonalNote(personalNote, false);
+            populateCommonCacheFields(cache, response);
+            cache.setArchived(response.get("IsArchived").asBoolean());
+
+            if (!Settings.isALCfoundStateManual()) {
+                final boolean isComplete = response.get("IsComplete").asBoolean();
+                cache.setFound(isComplete);
+            }
+
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
+
         } catch (final NullPointerException e) {
             Log.e("_AL ALApi.parseCache", e);
             return null;
         }
     }
 
-    // Having a separate parser for details is required because the API provider
-    // decided to use different upper/lower case wordings for the same entities
-
     @Nullable
     private static Geocache parseCacheDetail(final JsonNode response) {
+        final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
         try {
-            final Geocache cache = new Geocache();
-            final JsonNode location = response.at(LOCATION);
-            final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
-            final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
+            Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache == null) {
+                cache = new Geocache();
+            }
+            populateCommonCacheFields(cache, response);
+
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
-            cache.setGeocode(geocode);
-            cache.setCacheId(segments[segments.length - 1]);
-            cache.setName(response.get(TITLE).asText());
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\"></img><p><p>" : "") + desc);
-            cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
-            cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
-            cache.setVotes(response.get("RatingsTotalCount").asInt());
-            cache.setRating(response.get("RatingsAverage").floatValue());
-            // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
-            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
-            cache.setDisabled(false);
-            cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode), true);
-            final boolean isLinear = response.get("IsLinear").asBoolean();
-            if (isLinear) {
-                cache.setAlcMode(1);
-            } else {
-                cache.setAlcMode(0);
+            if (DEBUG && cache.getFound()) {
+                cache.setVisitedDate(parseDate("2025-01-01").getTime());
             }
-            Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
-            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
-            cache.setPersonalNote(personalNote, false);
+            final List<Waypoint> wpts = parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), cache.getGeocode());
+            cache.setWaypoints(wpts, true);
+            cache.setAlcMode(response.get("IsLinear").asBoolean() ? 1 : 0);
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
+
         } catch (final NullPointerException e) {
-            Log.e("_AL ALApi.parseCache", e);
+            Log.e("_AL ALApi.parseCacheDetail", e);
             return null;
         }
+    }
+
+    @Nullable
+    private static void populateCommonCacheFields(final Geocache cache, final JsonNode response) {
+        final JsonNode location = response.at(LOCATION);
+        final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
+        final String[] segments = firebaseDynamicLink.split("/");
+        final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
+
+        cache.setGeocode(geocode);
+        cache.setCacheId(segments[segments.length - 1]);
+        cache.setName(response.get(TITLE).asText());
+        cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
+        cache.setType(ADVLAB);
+        cache.setSize(CacheSize.getById("virtual"));
+        cache.setVotes(response.get("RatingsTotalCount").asInt());
+        cache.setRating(response.get("RatingsAverage").floatValue());
+        cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
     }
 
     @Nullable
@@ -460,7 +488,7 @@ final class ALApi {
         return result;
     }
 
-    @Nullable
+    @NonNull
     private static Date parseDate(final String date) {
         final SynchronizedDateFormat dateFormat = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
