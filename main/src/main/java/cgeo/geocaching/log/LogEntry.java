@@ -57,7 +57,7 @@ public class LogEntry implements Parcelable {
     /** The log message */
     @NonNull public final String log;
     /** The log date */
-    public final long date;
+    public long date;
     /** Is a found log */
     public final int found;
     /** Own's or Friend's log entry indicator. */
@@ -76,6 +76,10 @@ public class LogEntry implements Parcelable {
     @NonNull
     public Date getDate() {
         return new Date(date);
+    }
+
+    public void setDate(final long date) {
+        this.date = date;
     }
 
     @NonNull
@@ -453,18 +457,6 @@ public class LogEntry implements Parcelable {
                 logType == otherLog.logType &&
                 author.compareTo(otherLog.author) == 0 &&
                 log.compareTo(otherLog.log) == 0;
-    }
-
-    public boolean hasSameLogId(final LogEntry obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (serviceLogId != null && obj.serviceLogId != null) {
-            return StringUtils.equals(serviceLogId, obj.serviceLogId);
-        }
-
-        return false;
     }
 
     @NonNull

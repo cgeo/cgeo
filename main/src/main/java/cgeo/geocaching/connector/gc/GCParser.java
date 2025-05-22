@@ -18,6 +18,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -1602,18 +1603,18 @@ public final class GCParser {
         final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
                 getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
 
-        final List<LogEntry> ownLogsFromDb;
-        if (!ownLogs.isEmpty().blockingGet()) {
+        List<LogEntry> ownLogsFromDb = Collections.emptyList();
+        final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
+        if (!ownLogEntriesBlocked.isEmpty()) {
             ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), true);
-        } else {
-            ownLogsFromDb = Collections.emptyList();
+            if (ownLogsFromDb.isEmpty()) {
+                ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), false);
+            }
         }
 
-        final Single<List<LogEntry>> ownTimeLogs = Single.zip(logs.toList(), ownLogs.toList(),
-                (logEntries, ownLogEntries) -> {
-                    mergeLogTimes(ownLogEntries, ownLogsFromDb);
+        mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
                     if (cache.isFound() || cache.isDNF()) {
-                        for (final LogEntry logEntry : ownLogEntries) {
+                        for (final LogEntry logEntry : ownLogEntriesBlocked) {
                             if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
                                 cache.setVisitedDate(logEntry.date);
                                 break;
@@ -1621,13 +1622,7 @@ public final class GCParser {
                         }
                     }
 
-                    return ownLogEntries;
-                }).cache();
-
-        // Wait for completion of logs parsing, retrieving and merging
-        ownTimeLogs.ignoreElement().blockingAwait();
-
-        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), friendLogs.toList(), ownTimeLogs,
+        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), friendLogs.toList(), ownLogs.toList(),
                 (logEntries, friendLogEntries, ownLogEntries) -> {
                     final List<LogEntry> specialLogEntries = ListUtils.union(friendLogEntries, ownLogEntries);
                     mergeFriendsLogs(logEntries, specialLogEntries);
@@ -1727,14 +1722,13 @@ public final class GCParser {
     }
 
     private static void mergeLogTimes(final List<LogEntry> mergedLogTimes, final Iterable<LogEntry> logTimesToMerge) {
-        for (final LogEntry log : logTimesToMerge) {
-            for (final LogEntry dateTimeLog : mergedLogTimes) {
-                if (log.hasSameLogId(dateTimeLog)) {
-                    final Date dateTimeLogTime = new Date(dateTimeLog.date);
-                    final Date logTime = new Date(log.date);
+        for (final LogEntry logToMerge : logTimesToMerge) {
+            for (final LogEntry mergedLog : mergedLogTimes) {
+                if (LogUtils.hasSameLogId(logToMerge, mergedLog)) {
+                    final Date dateTimeLogTime = new Date(mergedLog.date);
+                    final Date logTime = new Date(logToMerge.date);
                     if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
-                        final LogEntry updatedOwnLog = dateTimeLog.buildUpon().setDate(log.date).build();
-                        mergedLogTimes.set(mergedLogTimes.indexOf(dateTimeLog), updatedOwnLog);
+                        mergedLog.setDate(logToMerge.date);
                     }
                     break;
                 }
