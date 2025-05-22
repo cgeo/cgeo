@@ -1502,6 +1502,10 @@ public class Geocache implements INamedGeoCoordinate {
         this.found = found;
     }
 
+    public boolean getFound() {
+        return this.found;
+    }
+
     public void setDNF(final boolean didNotFound) {
         this.didNotFound = didNotFound;
     }
