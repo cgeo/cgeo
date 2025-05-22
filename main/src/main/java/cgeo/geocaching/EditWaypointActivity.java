@@ -569,9 +569,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
             cid.setCalculatedCoordinate(cc);
 
-            NewCoordinateInputDialog.show(EditWaypointActivity.this, this::OnCoordinatesUpdated, cid);
+            NewCoordinateInputDialog.show(EditWaypointActivity.this, this::onCoordinatesUpdated, cid);
         }
-        private void OnCoordinatesUpdated(@Nullable final Geopoint gp) {
+        private void onCoordinatesUpdated(@Nullable final Geopoint gp) {
             updateCoordinates(gp);
         }
     }

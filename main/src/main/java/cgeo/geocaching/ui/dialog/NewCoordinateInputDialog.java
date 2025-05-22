@@ -74,7 +74,7 @@ public class NewCoordinateInputDialog {
         }
     };
 
-    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final boolean showCalculatorButton ) {
+    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final boolean showCalculatorButton) {
 
         this.context = context;
         this.callback = callback;
@@ -248,10 +248,10 @@ public class NewCoordinateInputDialog {
             final AbstractActivity activity = (AbstractActivity) context;
             final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
-            CoordinateInputData inputData = new CoordinateInputData();
+            final CoordinateInputData inputData = new CoordinateInputData();
             inputData.setGeopoint(gp);
             final CalculatedCoordinate cc = new CalculatedCoordinate();
-            cc.setType( CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
+            cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
 
             //try to set patterns from GUI
             final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
