@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Genegeerde talen</string>
     <string name="translator_preference_nottranslate_lng_summary">Brontalen om geen vertaling voor aan te bieden</string>
     <string name="translator_preference_disable">&lt;Schakel vertalen uit&gt;</string>
+    <string name="translator_preference_application_language">&lt;Gebruik applicatie taal&gt;</string>
     <string name="translator_model_download_select">Download offline vertalen taal</string>
     <string name="translator_model_download_confirm_title">Bevestig taaldownload</string>
     <string name="translator_model_download_confirm_txt">Vertaalmodel voor %s moet worden gedownload. Het model is grofweg 20-40 MB.</string>
@@ -358,6 +359,7 @@
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
     <string name="translator_language_unknown">Kan taal niet identificeren</string>
     <string name="translator_language_detected">Vertalen van \"%s\"</string>
+    <string name="translator_target_language">Vertaal naar \"%s\"</string>
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
     <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
@@ -931,6 +933,8 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
+    <string name="init_use_application_language">Gebruik applicatie taal</string>
+    <string name="init_translation_disabled">Vertalen uitgeschakeld</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
     <string name="system_default">Systeemstandaard</string>
@@ -1973,9 +1977,11 @@
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
+    <string name="export">Exporteren / Uploaden</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
     <string name="export_failed">Exporteren mislukt</string>
+    <string name="export_fieldnotes">Exporteren veldnotities</string>
     <string name="export_fieldnotes_info">Veld-notities worden geëxporteerd naar /sdcard/field-notes met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_fieldnotes_upload">Upload naar geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploaden…</string>
@@ -1985,6 +1991,7 @@
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
+    <string name="export_persnotes">Persoonlijke notitie uploaden</string>
     <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d notitie succesvol geüpload</item>

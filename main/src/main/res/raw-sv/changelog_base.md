@@ -1,4 +1,4 @@
-(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
+(Nattliga endast: Tar tillfälligt bort "nattlig" banner från logotypen medan finjustering av designen pågår)
 
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
@@ -67,8 +67,8 @@ Until then, you can switch between the different implementations in settings => 
 - Fix: Sorting of cache lists by distance descending not working correctly
 - Fix: Lab-cacher exkluderade av D/T-filter även med aktiva "inkludera osäkerhet"
 - Fix: Färg-problem med menyikoner i ljust läge
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
+- Nyhet: Lägg till "Ta bort tidigare händelser" för att lista "alla"
+- Nyhet: Visa koppling för "användardefinierade cacher" som aktiv i källfiltret
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
