@@ -89,7 +89,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
-        if (GCConnector.getInstance().canHandle(cache.getGeocode())) {
+        if (GCConnector.getInstance().canHandle(cache.getGeocode()) && !cache.isOwner()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
             logTypes.add(LogType.NEEDS_ARCHIVE);
         }
