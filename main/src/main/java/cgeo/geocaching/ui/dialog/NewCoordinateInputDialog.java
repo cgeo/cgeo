@@ -293,7 +293,7 @@ public class NewCoordinateInputDialog {
 
         if (showWaypointOptions) {
             clearCoordinates.setVisibility(View.VISIBLE);
-            clearCoordinates.setOnClickListener( v -> {
+            clearCoordinates.setOnClickListener(v -> {
                 callback.onDialogClosed(null);
                 dialog.dismiss();
             });
