@@ -334,6 +334,12 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                 final String searchTerm = (String) parent.getItemAtPosition(position);
                 searchFunction.accept(searchTerm);
             });
+            binding.suggestionList.setOnItemLongClickListener((parent, view, position, id) -> {
+                final String searchTerm = (String) parent.getItemAtPosition(position);
+                searchView.setText(searchTerm);
+                searchView.setSelection(searchView.getText().length());
+                return true;
+            });
 
             if (title == R.string.search_geo) {
                 searchView.setText("GC");
