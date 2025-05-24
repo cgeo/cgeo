@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
 
 	<include android:id="@+id/actionbar" layout="@layout/actionbar_popup" />
 
@@ -233,11 +234,19 @@
             android:text="@string/waypoint_my_coordinates" />
 
 		<Button
+			android:id="@+id/cache"
+			style="@style/button_full"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/waypoint_cache_coordinates" />
+
+		<Button
 			android:id="@+id/calculate"
 			style="@style/button_full"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="Compute" />
+			app:icon="@drawable/ic_menu_variable"
+			android:text="@string/waypoint_calculated_coordinates_global" />
 
         <Button
             android:id="@+id/clipboard"
@@ -246,5 +255,11 @@
             android:layout_height="wrap_content"
             android:text="@string/from_clipboard" />
 
+		<Button
+			android:id="@+id/clear"
+			style="@style/button_full"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/waypoint_clear_coordinates" />
 
 </LinearLayout>
