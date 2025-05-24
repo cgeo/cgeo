@@ -3,16 +3,19 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
@@ -64,8 +67,9 @@ public class NewCoordinateInputDialog {
     private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
     private Geopoint gp;
+    private static Geopoint cacheCoordinates;
     private Disposable geoDisposable;
-    private boolean showCalculator = false;
+    private boolean showWaypointOptions = false;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
@@ -74,20 +78,27 @@ public class NewCoordinateInputDialog {
         }
     };
 
-    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final boolean showCalculatorButton) {
+    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final boolean showWaypointButtons) {
 
         this.context = context;
         this.callback = callback;
-        this.showCalculator = showCalculatorButton;
+        this.showWaypointOptions = showWaypointButtons;
     }
 
     // Entry point for user defined cache, search card and GK TB
     public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
-       new NewCoordinateInputDialog(context, callback, false).show(location);
+        cacheCoordinates = null;
+        new NewCoordinateInputDialog(context, callback, false).show(location);
     }
 
     //Entry point for Waypoint page
     public static void show(final Context context, final DialogCallback callback, final CoordinateInputData inputData) {
+
+        final String geocode = inputData.getGeocode();
+        if (!StringUtils.isBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            cacheCoordinates = cache == null ? null : cache.getCoords();
+        }
 
         if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
             final AbstractActivity activity = (AbstractActivity) context;
@@ -222,12 +233,54 @@ public class NewCoordinateInputDialog {
             EditUtils.disableSuggestions(editText);
         }
 
-        // Manage to options buttons
-        final Button copyFromClipboard = binding.clipboard;
+        // Manage the options buttons
         final Button useCurrentLocation = binding.current;
-        final Button calculate = binding.calculate;
+        final Button useCacheCoordinates = binding.cache;
+        final Button calculateCoordinates = binding.calculate;
+        final Button copyFromClipboard = binding.clipboard;
+        final Button clearCoordinates = binding.clear;
 
-        calculate.setVisibility(this.showCalculator ? View.VISIBLE : View.GONE);
+        useCurrentLocation.setOnClickListener(v -> {
+            gp = currentCoords();
+            updateGui();
+        });
+
+        if (cacheCoordinates == null) {
+            useCacheCoordinates.setVisibility(View.GONE);
+        } else {
+            useCacheCoordinates.setVisibility(View.VISIBLE);
+            useCacheCoordinates.setOnClickListener(v -> {
+                gp = cacheCoordinates;
+                updateGui();
+            });
+        }
+
+        // For waypoints only, launch the calculator dialog that is still fragment based atm
+        if (showWaypointOptions) {
+            calculateCoordinates.setVisibility(View.VISIBLE);
+
+            calculateCoordinates.setOnClickListener(v -> {
+                final AbstractActivity activity = (AbstractActivity) context;
+                final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                final CoordinateInputData inputData = new CoordinateInputData();
+                inputData.setGeopoint(gp);
+                final CalculatedCoordinate cc = new CalculatedCoordinate();
+                cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
+
+                //try to set patterns from GUI
+                final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
+                cc.setLatitudePattern(patternsFromGui.first);
+                cc.setLongitudePattern(patternsFromGui.second);
+
+                inputData.setCalculatedCoordinate(cc);
+                CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
+                geoDisposable.dispose();
+                dialog.dismiss();
+            });
+        } else  {
+            calculateCoordinates.setVisibility(View.GONE);
+        }
 
         copyFromClipboard.setOnClickListener(v -> {
             try {
@@ -238,31 +291,15 @@ public class NewCoordinateInputDialog {
             }
         });
 
-        useCurrentLocation.setOnClickListener(v -> {
-            gp = currentCoords();
-            updateGui();
-        });
-
-        // Launch the calculator dialog that is still fragment based atm
-        calculate.setOnClickListener(v -> {
-            final AbstractActivity activity = (AbstractActivity) context;
-            final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
-
-            final CoordinateInputData inputData = new CoordinateInputData();
-            inputData.setGeopoint(gp);
-            final CalculatedCoordinate cc = new CalculatedCoordinate();
-            cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
-
-            //try to set patterns from GUI
-            final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
-            cc.setLatitudePattern(patternsFromGui.first);
-            cc.setLongitudePattern(patternsFromGui.second);
-
-            inputData.setCalculatedCoordinate(cc);
-            CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
-            geoDisposable.dispose();
-            dialog.dismiss();
-        });
+        if (showWaypointOptions) {
+            clearCoordinates.setVisibility(View.VISIBLE);
+            clearCoordinates.setOnClickListener( v -> {
+                callback.onDialogClosed(null);
+                dialog.dismiss();
+            });
+        } else {
+            clearCoordinates.setVisibility(View.GONE);
+        }
 
         dialog.show();
 
