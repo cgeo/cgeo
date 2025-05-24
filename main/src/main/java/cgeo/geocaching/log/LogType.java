@@ -25,6 +25,7 @@ public enum LogType {
     NOTE(4, "4", "Write note", "Comment", R.string.log_note, R.drawable.mark_gray, R.drawable.marker_note),
     ATTENDED(10, "10", "Attended", "Attended", R.string.log_attended, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
     WEBCAM_PHOTO_TAKEN(11, "11", "Webcam Photo Taken", "", R.string.log_webcam, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
+    WM_VISITED(10005, null, "Visited", "", R.string.log_visited, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
     WILL_ATTEND(9, "9", "Will Attend", "Will attend", R.string.log_attend, R.drawable.mark_gray, R.drawable.marker_calendar),
     NEEDS_MAINTENANCE(45, "45", "Needs Maintenance", "Needs maintenance", R.string.log_maintenance_needed, R.drawable.mark_red, R.drawable.marker_maintenance),
     NEEDS_ARCHIVE(7, "7", "Needs Archived", "", R.string.log_needs_archived, R.drawable.mark_red, R.drawable.marker_archive),
