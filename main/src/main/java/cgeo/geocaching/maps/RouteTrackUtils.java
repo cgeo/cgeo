@@ -435,6 +435,6 @@ public class RouteTrackUtils {
     }
 
     public static boolean isIndividualRoute(final IGeoItemSupplier route) {
-        return (route instanceof Route && ((Route) route).getName().isEmpty());
+        return route instanceof IndividualRoute;
     }
 }
