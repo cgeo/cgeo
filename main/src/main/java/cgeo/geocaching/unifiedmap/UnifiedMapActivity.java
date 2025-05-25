@@ -649,27 +649,30 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
         final Viewport viewport = viewModel.viewport.getValue();
 
-        //should waypoints be displayed at all?
-        final boolean waypointsAreVisible = viewModel.mapType.isSingleCacheView() || (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold());
-        if (!waypointsAreVisible) {
-            viewModel.waypoints.write(Set::clear);
-            return;
+        final Set<Waypoint> waypoints = new HashSet<>();
+
+        if (viewModel.mapType.hasTarget()) {
+            waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                final Set<Waypoint> wpSet = new HashSet<>();
+                final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                wpSet.addAll(cache.getWaypoints());
+                return wpSet;
+            }));
         }
 
-        final Set<Waypoint> waypoints;
-
-        //show all waypoints be displayed or just the ones from visible caches?
-        final boolean showAll = TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
-        if (showAll) {
-            waypoints = DataStore.loadWaypoints(viewport);
-        } else {
-            waypoints = viewModel.caches.readWithResult(caches -> {
-                final Set<Waypoint> wpSet = new HashSet<>();
-                for (final Geocache c : caches) {
-                    wpSet.addAll(c.getWaypoints());
-                }
-                return wpSet;
-            });
+        if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+            //show all waypoints be displayed or just the ones from visible caches?
+            if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                waypoints.addAll(DataStore.loadWaypoints(viewport));
+            } else {
+                waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                    final Set<Waypoint> wpSet = new HashSet<>();
+                    for (final Geocache c : caches) {
+                        wpSet.addAll(c.getWaypoints());
+                    }
+                    return wpSet;
+                }));
+            }
         }
         //filter waypoints
         MapUtils.filter(waypoints, filter);
@@ -864,7 +867,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final View liveButton = findViewById(R.id.menu_map_live);
         if (liveButton != null) {
             liveButton.setOnLongClickListener(v -> {
-                viewModel.mapType = new UnifiedMapType(); // switch to PLAIN mode
+                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
                 viewModel.transientIsLiveEnabled.setValue(false);
                 Settings.setLiveMap(false);
                 reloadCachesAndWaypoints();
@@ -928,7 +931,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     reloadCachesAndWaypoints();
                 }
             } else {
-                viewModel.mapType = new UnifiedMapType();
+                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType);
                 viewModel.transientIsLiveEnabled.setValue(true);
                 Settings.setLiveMap(true);
                 refreshListChooser();

@@ -113,6 +113,13 @@ public class UnifiedMapType implements Parcelable {
         this.coords = coords;
     }
 
+    public static UnifiedMapType getPlainMapWithTarget(final UnifiedMapType mapType) {
+        final UnifiedMapType umt = new UnifiedMapType();
+        umt.target = mapType.target;
+        umt.waypointId = mapType.waypointId;
+        return umt;
+    }
+
     /** get launch intent */
     public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
@@ -130,7 +137,11 @@ public class UnifiedMapType implements Parcelable {
     }
 
     public boolean isSingleCacheView() {
-        return type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_TargetGeocode;
+        return type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_TargetGeocode || hasTarget();
+    }
+
+    public boolean hasTarget() {
+        return target != null && !target.isEmpty();
     }
     // ========================================================================
     // parcelable methods
