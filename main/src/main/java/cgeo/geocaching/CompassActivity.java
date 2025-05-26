@@ -26,8 +26,10 @@ import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -43,6 +45,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;
+
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -66,6 +69,8 @@ public class CompassActivity extends AbstractActionBarActivity {
     private CompassActivityBinding binding;
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.hint.locationStatus.updatePermissions());
+
+    private static final int REQUEST_CODE_LOG = 1001;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -254,6 +259,17 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
         return true;
     }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.location_status));
+        }
+    }
+
+
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
         setDestCoords(coords);

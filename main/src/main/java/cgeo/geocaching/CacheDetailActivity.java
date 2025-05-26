@@ -199,6 +199,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
+    private static final int REQUEST_CODE_LOG = 1001;
 
     private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
     private static final String EXTRA_EDIT_PERSONALNOTE = "cgeo.geocaching.extra.cachedetail.editPersonalNote";
@@ -2485,6 +2486,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             imageGalleryResultRequestCode = requestCode;
             imageGalleryResultResultCode = resultCode;
             imageGalleryData = data;
+        }
+        if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.tab_layout));
         }
     }
 
