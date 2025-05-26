@@ -232,6 +232,13 @@
     <string name="log_delete_confirm">Do you really want to delete log of type \'%1$s\' by author \'%2$s\' with log date \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Do you really want to delete your stored offline log of type \'%1$s\' with log date \'%2$s\'?</string>
 
+    <string name="log_share_prefix_found">I found %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">I couldn\'t find %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">I left a note on %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">I reported maintenance needed for %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">I think %1$s (%2$s) should be archived:\n\n</string>
+    <string name="log_share_prefix_default">My log for %1$s (%2$s):\n\n</string>
+
     <string name="datetime_nodateset_display">No date set</string>
 
     <!-- Contacts -->
@@ -355,6 +362,7 @@
     <string name="dont_show_again">Don\'t show again</string>
     <string name="tap_icon_more_info">Tap on icon for more info</string>
     <string name="use_slider_adjust_value">Use slider to adjust value</string>
+    <string name="snackbar_action_share">Share</string>
 
     <string name="warn_gm_not_available">Google Maps not available.</string>
     <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>

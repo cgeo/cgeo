@@ -563,6 +563,19 @@ public class Geocache implements INamedGeoCoordinate {
         LogCacheActivity.startForCreate(fromActivity, geocode);
     }
 
+    public void logVisitForResult(@NonNull final Activity fromActivity, final int requestCode) {
+        if (!getConnector().canLog(this)) {
+            ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
+            return;
+        }
+        String geocode = this.geocode;
+        if (StringUtils.isBlank(geocode)) {
+            geocode = DataStore.getGeocodeForGuid(this.cacheId);
+        }
+        LogCacheActivity.startForCreateForResult(fromActivity, geocode, requestCode);
+    }
+
+
     public boolean hasLogOffline() {
         return BooleanUtils.isTrue(hasLogOffline);
     }
