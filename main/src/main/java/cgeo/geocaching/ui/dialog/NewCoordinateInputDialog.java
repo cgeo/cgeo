@@ -103,7 +103,7 @@ public class NewCoordinateInputDialog {
         if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
             final AbstractActivity activity = (AbstractActivity) context;
             final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
-            CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
+            CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
             return;
         }
         new NewCoordinateInputDialog(context, callback, true).show(null);
@@ -274,7 +274,7 @@ public class NewCoordinateInputDialog {
                 cc.setLongitudePattern(patternsFromGui.second);
 
                 inputData.setCalculatedCoordinate(cc);
-                CoordinatesCalculateGlobalDialog.show(fragmentManager, inputData);
+                CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
                 geoDisposable.dispose();
                 dialog.dismiss();
             });
@@ -616,6 +616,14 @@ public class NewCoordinateInputDialog {
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
             // nothing to do
+        }
+    }
+
+    public interface CoordinateUpdate {
+        void updateCoordinates(Geopoint gp);
+
+        default void updateCoordinates(CoordinateInputData coordinateInputData) {
+            updateCoordinates(coordinateInputData.getGeopoint());
         }
     }
 }
