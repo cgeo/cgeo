@@ -10,7 +10,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.9.2'
 
         // un-mocking of portable Android classes
-        classpath 'com.github.bjoernq:unmockplugin:0.7.9'
+        classpath 'com.github.bjoernq:unmockplugin:0.9.0'
 
         // monitor our application method limit
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0'
@@ -22,7 +22,7 @@ plugins {
     id 'idea'
 
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'com.github.ben-manes.versions' version '0.52.0'
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
