@@ -149,6 +149,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
     NavigationTargetLayer navigationTargetLayer = null;
+    boolean forceCompactIcons = false;
 
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -729,7 +730,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             listChooser.setDirect(calculateTitle(), visibleCaches);
         }
 
-        CompactIconModeUtils.forceCompactIconMode(visibleCaches);
+        final boolean newForceCompactIcons = CompactIconModeUtils.forceCompactIconMode(visibleCaches);
+        if (newForceCompactIcons != forceCompactIcons) {
+            forceCompactIcons = newForceCompactIcons;
+            refreshMapData(false);
+        }
     }
 
     /**
