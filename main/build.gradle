@@ -483,7 +483,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Support Library core (used for eg. HtmlCompat)
-    implementation 'androidx.core:core:1.8.0'
+    implementation 'androidx.core:core:1.16.0'
 
     // Support Library constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
