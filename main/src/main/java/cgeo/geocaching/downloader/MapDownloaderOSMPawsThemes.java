@@ -52,7 +52,7 @@ public class MapDownloaderOSMPawsThemes extends AbstractThemeDownloader {
             theme.getChild("", "title").setEndTextElementListener(body -> description = body);
             theme.getChild("", "date").setEndTextElementListener(body -> dateInfo = body);
             theme.setEndElementListener(() -> {
-                if (StringUtils.isNotBlank(url)) {
+                if (StringUtils.isNotBlank(url) && size > 0) {
                     result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType, ICONRES_THEME));
                 }
             });
