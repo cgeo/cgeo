@@ -135,6 +135,7 @@ public class CheckableItemSelectActivity extends AbstractActionBarActivity {
 
     @Override
     public void onBackPressed() {
+        // @todo should be replaced by setting a OnBackPressedDispatcher
         final ArrayList<Integer> selected = new ArrayList<>();
         for (InfoItem item : infoItemListAdapter.getItems()) {
             if (item == null) {
@@ -144,5 +145,6 @@ public class CheckableItemSelectActivity extends AbstractActionBarActivity {
         }
         Settings.setInfoItems(prefKey, selected);
         finish();
+        super.onBackPressed();
     }
 }
