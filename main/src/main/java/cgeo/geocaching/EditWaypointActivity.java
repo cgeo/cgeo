@@ -28,7 +28,6 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -78,7 +77,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class EditWaypointActivity extends AbstractActionBarActivity implements NewCoordinateInputDialog.CoordinateUpdate {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -572,6 +571,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             NewCoordinateInputDialog.show(EditWaypointActivity.this, this::onCoordinatesUpdated, cid);
         }
         private void onCoordinatesUpdated(@Nullable final Geopoint gp) {
+            // Arrives here from the new coordinate dialog either for a standard waypoint
+            // or a calculated one that has been converted to plain coordinates, in which case we need to clear the state
+            calcStateString = null;
             updateCoordinates(gp);
         }
     }
@@ -594,11 +596,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             this.calcStateString = coordinateInputData.getCalculatedCoordinate().toConfig();
         }
         updateCoordinates(coordinateInputData.getGeopoint());
-    }
-
-    @Override  // REDUNDANT ?
-    public boolean supportsNullCoordinates() {
-        return true;
     }
 
     /**
