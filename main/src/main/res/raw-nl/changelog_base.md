@@ -4,7 +4,7 @@
 c:geo heeft al een tijdje een geheel nieuwe kaartimplementatie met de naam "UnifiedMap". Deze zal uiteindelijk de oude implementaties van Google Maps en Mapsforge (OpenStreetMap) vervangen. Dit is een waarschuwing van afschaffing om je te informeren over de verdere routekaart.
 
 UnifiedMap is ongeveer een jaar geleden gepubliceerd. Het ondersteunt nog steeds Google Maps en OpenStreetMap (online + offline), maar op een volledig herwerkte technische manier en met veel spannende nieuwe functies die de "old" kaarten niet ondersteunen, waarvan sommige zijn
-- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online en offline)
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
 - Cluster popup voor Google Maps
 - Verberg kaartbronnen die je niet nodig hebt
 - Hoogtegrafiek voor routes en tracks
@@ -16,7 +16,7 @@ UnfiedMap is sinds geruime tijd stabiel gebleken, dus zullen we de oude implemen
 Routekaart:
 - "Oud" kaarten zijn verouderd - we lossen geen bugs meer op.
 - UnifiedMap zal de standaard worden voor alle gebruikers in de herst van 2025.
-- "Oud" kaart implementaties zullen in het voorjaar van 2026 worden verwijderd.
+- "Oud" kaart implementaties zullen in het najaar van 2026 worden verwijderd.
 
 Tot dan kun je schakelen tussen de verschillende implementaties in instellingen => kaartbronnen.
 

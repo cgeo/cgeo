@@ -1403,6 +1403,7 @@
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
     <string name="cache_status_offline_log">저장된 로그</string>
+    <string name="cache_status_attended">참가했음</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
     <string name="cache_status_archived">영구보관됨</string>
