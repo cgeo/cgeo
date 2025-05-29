@@ -31,7 +31,7 @@ public class FieldNoteExport extends AbstractExport {
     private final String fileName;
 
     public FieldNoteExport() {
-        super(R.string.export_fieldnotes);
+        super(R.string.fieldnotes);
         final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
         fileName = fileNameDateFormat.format(new Date()) + ".txt";
     }
@@ -52,7 +52,7 @@ public class FieldNoteExport extends AbstractExport {
     @SuppressLint("SetTextI18n")
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_fieldnotes)));
+        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.fieldnotes)));
 
         final View layout = View.inflate(activity, R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
