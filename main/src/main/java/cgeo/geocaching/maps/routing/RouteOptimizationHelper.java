@@ -3,12 +3,15 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -20,7 +23,12 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -29,11 +37,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class RouteOptimizationHelper {
+
+    private static final String CACHED_DISTANCES_FILENAME = "tsp_cache.json";
+    private static final int CACHED_DISTANCES_FILEVERSION = 1;
 
     private final List<RouteItem> initialRoute;
     private final int[][] distanceMatrix;
     private final int routeSize;
+    private CachedDistances cachedDistances = resetCachedDistances();
 
     private class TSPDialog extends SimpleProgressDialog {
 
@@ -57,6 +71,7 @@ public class RouteOptimizationHelper {
                     newRoute.add(initialRoute.get(best[r]));
                 }
                 updateRoute.call(newRoute);
+                saveCachedDistances(newRoute);
             }));
             // will be set further down
             setButton(BUTTON_NEUTRAL, TextParam.id(R.string.redo), (((dialogInterface, i) -> { })));
@@ -171,6 +186,7 @@ public class RouteOptimizationHelper {
 
     /** generate matrix of all distances between pairs */
     private void generateDistanceMatrix(final SimpleProgressDialog dialog, final ExecutorService executor) {
+        loadCachedDistances();
         final AtomicInteger progress = new AtomicInteger(0);
         final List<Future<Object>> taskList = new ArrayList<>();
         try {
@@ -179,19 +195,24 @@ public class RouteOptimizationHelper {
                 taskList.add(executor.submit(() -> {
                     for (int j = 0; j < routeSize; j++) {
                         if (col != j) {
-                            final Geopoint[] track = Routing.getTrackNoCaching(
-                                    new Geopoint(initialRoute.get(col).getPoint().getLatitude(), initialRoute.get(col).getPoint().getLongitude()),
-                                    new Geopoint(initialRoute.get(j).getPoint().getLatitude(), initialRoute.get(j).getPoint().getLongitude()),
-                                    null);
-                            float distance = 0.0f;
-                            if (track.length > 0) {
-                                Geopoint last = track[0];
-                                for (Geopoint point : track) {
-                                    distance += last.distanceTo(point);
-                                    last = point;
+                            final Integer temp = cachedDistances.distances.get(getCacheKey(initialRoute.get(col).getPoint(), initialRoute.get(j).getPoint()));
+                            if (temp != null && temp != Integer.MAX_VALUE) {
+                                distanceMatrix[col][j] = temp;
+                            } else {
+                                final Geopoint[] track = Routing.getTrackNoCaching(
+                                        new Geopoint(initialRoute.get(col).getPoint().getLatitude(), initialRoute.get(col).getPoint().getLongitude()),
+                                        new Geopoint(initialRoute.get(j).getPoint().getLatitude(), initialRoute.get(j).getPoint().getLongitude()),
+                                        null);
+                                float distance = 0.0f;
+                                if (track.length > 0) {
+                                    Geopoint last = track[0];
+                                    for (Geopoint point : track) {
+                                        distance += last.distanceTo(point);
+                                        last = point;
+                                    }
                                 }
+                                distanceMatrix[col][j] = (int) (1000.0f * distance);
                             }
-                            distanceMatrix[col][j] = (int) (1000.0f * distance);
                             progress.set(progress.get() + 1);
                             dialog.postProgress(progress.get() + 1);
                             if (Thread.currentThread().isInterrupted()) {
@@ -292,6 +313,55 @@ public class RouteOptimizationHelper {
             length += distanceMatrix[route[i]][route[i + 1]];
         }
         return length;
+    }
+
+
+    // routines for caching distance matrix data
+
+    private static class CachedDistances {
+        public int version;
+        public RoutingMode routingMode;
+        public HashMap<String, Integer> distances;
+    }
+
+    private String getCacheKey(final Geopoint from, final Geopoint to) {
+        return from.getLatitudeE6() + "," + from.getLongitudeE6() + "," + to.getLatitudeE6() + "," + to.getLongitudeE6();
+    }
+
+    private void loadCachedDistances() {
+        try (InputStream fileStream = new FileInputStream(new File(LocalStorage.getFirstExternalPrivateCgeoDirectory(), CACHED_DISTANCES_FILENAME))) {
+            cachedDistances = new ObjectMapper().readValue(fileStream, CachedDistances.class);
+            if (cachedDistances.version != CACHED_DISTANCES_FILEVERSION || cachedDistances.routingMode != Settings.getRoutingMode()) {
+                Log.i("discarding tsp cache due to different routing mode or wrong file version");
+                resetCachedDistances();
+            }
+        } catch (final IOException e) {
+            Log.w("Error reading tsp cache file: " + e.getMessage());
+        }
+    }
+
+    private void saveCachedDistances(final ArrayList<RouteItem> route) {
+        resetCachedDistances();
+        for (int i = 0; i < route.size(); i++) {
+            for (int j = 0; j < route.size(); j++) {
+                if (i != j && distanceMatrix[i][j] != Integer.MAX_VALUE) {
+                    cachedDistances.distances.put(getCacheKey(initialRoute.get(i).getPoint(), initialRoute.get(j).getPoint()), distanceMatrix[i][j]);
+                }
+            }
+        }
+        try {
+            new ObjectMapper().writeValue(new File(LocalStorage.getFirstExternalPrivateCgeoDirectory(), CACHED_DISTANCES_FILENAME), cachedDistances);
+        } catch (final IOException e) {
+            Log.w("Error writing tsp cache file: " + e.getMessage());
+        }
+    }
+
+    private CachedDistances resetCachedDistances() {
+        cachedDistances = new CachedDistances();
+        cachedDistances.version = CACHED_DISTANCES_FILEVERSION;
+        cachedDistances.routingMode = Settings.getRoutingMode();
+        cachedDistances.distances = new HashMap<>();
+        return cachedDistances;
     }
 
 }
