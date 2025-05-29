@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Imatge</string>
     <string name="log_delete_confirm">Realment voleu suprimir el registre del tipus \"%1$s\" de l\'autor \"%2$s\" amb la data de registre \"%3$s\"?</string>
     <string name="log_offline_delete_confirm">Realment voleu suprimir el vostre registre fora de línia emmagatzemat del tipus \"%1$s\" amb la data de registre \"%2$s\"?</string>
+    <string name="log_share_prefix_found">He trobat %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">No he pogut trobar %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">He deixat una nota a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">He informat del manteniment necessari per a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Crec que %1$s (%2$s) s\'hauria d\'arxivar:\n\n</string>
+    <string name="log_share_prefix_default">El meu registre de %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- Contacts -->
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
@@ -337,6 +343,7 @@
     <string name="dont_show_again">No ho tornis a mostrar</string>
     <string name="tap_icon_more_info">Toqueu la icona per obtenir més informació</string>
     <string name="use_slider_adjust_value">Utilitzeu el control lliscant per ajustar el valor</string>
+    <string name="snackbar_action_share">Comparteix</string>
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
     <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
