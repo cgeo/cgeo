@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Czy na pewno chcesz usunąć zapisany wpis typu \'%1$s\' z datą logowania \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Znalazłem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nie mogłem znaleźć %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Zostawiłem notatkę na %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Zgłosiłem konieczność konserwacji dla %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myślę, że %1$s (%2$s) powinna zostać zarchiwizowana:\n\n</string>
+    <string name="log_share_prefix_default">Mój wpis dla %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Nie wyświetlaj ponownie</string>
     <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
     <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
+    <string name="snackbar_action_share">Udostępnij</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
