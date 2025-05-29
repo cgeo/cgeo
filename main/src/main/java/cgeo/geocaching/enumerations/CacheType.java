@@ -38,6 +38,7 @@ public enum CacheType {
     BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.string.block_short, R.drawable.type_event_blockparty, R.drawable.type_marker_event_blockparty, "4738", R.color.cacheType_event),
     LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.string.locationless_short, R.drawable.type_locationless, R.drawable.type_marker_locationless, "12", R.color.cacheType_unknown), // icon missing
     ADVLAB("advlab", "Lab Cache", "", R.string.advlab, R.string.advlab_short, R.drawable.type_advlab, R.drawable.type_marker_advlab, "", R.color.cacheType_lab), // pattern "Lab Cache" is used by https://gcutils.de/lab2gpx/
+    WAYMARK("waymark", "Waymark", "", R.string.waymark, R.string.waymark_short, R.drawable.type_waymark, R.drawable.type_marker_waymark, "", R.color.cacheType_waymark),
 
     // insert other official cache types before USER_DEFINED and UNKNOWN
     USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.string.userdefined_short, R.drawable.type_cgeo, R.drawable.type_marker_cgeo, "", R.color.cacheType_cgeo),

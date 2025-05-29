@@ -36,6 +36,7 @@
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="advlab">Adventure Lab Cache</string>
+    <string name="waymark">Waymark</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
     <string name="other">Others</string>
@@ -62,6 +63,7 @@
     <string name="block_short">GCHQ Block</string>
     <string name="locationless_short">Locationless</string>
     <string name="advlab_short">Adv Lab</string>
+    <string name="waymark_short">Waymark</string>
     <string name="userdefined_short">Userdefined</string>
     <string name="unknown_short">Unknown</string>
 
@@ -133,6 +135,7 @@
     <string name="log_disabled">Disabled</string>
     <string name="log_attend">Will Attend</string>
     <string name="log_attended">Attended</string>
+    <string name="log_visited">Visited</string>
     <string name="log_retrieved">Retrieved</string>
     <string name="log_placed">Placed</string>
     <string name="log_grabbed">Grabbed Somewhere</string>
@@ -257,6 +260,7 @@
     <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to login with c:geo.</string>
     <string name="err_server_general">Unable to contact geocaching server. The website may be down or your internet connection not working.</string>
     <string name="err_server_gc">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
+    <!--TODO Translate--><string name="err_server_wm">Unable to contact Waymarking.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_lc">Unable to contact labs.geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
@@ -567,6 +571,14 @@
         <item quantity="few">%d caches stored</item>
         <item quantity="many">%d caches stored</item>
         <item quantity="other">%d caches stored</item>
+    </plurals>
+    <plurals name="user_visits">
+        <item quantity="zero">%d visits</item>
+        <item quantity="one">%d visit</item>
+        <item quantity="two">%d visits</item>
+        <item quantity="few">%d visits</item>
+        <item quantity="many">%d visits</item>
+        <item quantity="other">%d visits</item>
     </plurals>
 
     <!-- caches lists -->
@@ -991,6 +1003,11 @@
     <string name="settings_lc_found_state_title">Manual found state</string>
     <string name="settings_lc_found_state_handling">If checked, do not automatically obtain the true found state for Adventure Lab caches, instead, provide controls for the user to manually set the found state</string>
     <string name="lc_default_description">This is a geocaching.com Adventure Lab Cache. Adventures can only be played with the Groundspeak Adventure Lab App. Tap on the Adventure Lab icon on the \"Details\" page to open/install the Adventure Lab App for this adventure from there.\nIf you don\'t want to see Adenture Lab caches on your map and search, you can deactivate using the \"settings\" menu - Services - Geocaching.com Adventure Lab</string>
+    <string name="settings_wm_description">Load waymarks from waymarking.com</string>
+    <string name="settings_wm_gc_note">(Requires an activated "Geocaching.com" service.)</string>
+    <string name="settings_wm_refresh_login">Refresh authorization</string>
+    <string name="settings_wm_refresh_login_note">This will use your Geocaching.com authorization data.</string>
+    <string name="settings_wm_filter_note">Please note that Waymarks are considered Virtual caches in the \"Cache Type\" filter. If you would like to filter Waymarks separately, use the \"Origin\" filter.</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
     <string name="init_summary_oc_pl">Load caches from opencaching.pl</string>
@@ -1519,6 +1536,11 @@
     <string name="err_auth_gc_communication_error">Communication error</string>
     <string name="err_auth_gc_manual_error">Manual login error: %s</string>
 
+    <!-- auth WM -->
+    <string name="err_auth_wm_error_text">Failed to login to waymarking.com as %s because: %s</string>
+    <!--TODO translate--><string name="err_auth_wm_unknown_error">Failed to log in waymarking.com as %s for some unknown reason</string>
+    <string name="err_auth_wm_finds_error">Failed to retrieve find data from waymarking.com</string>
+
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="zero">%1$d caches</item>
@@ -1724,6 +1746,7 @@
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_attended">Attended</string>
     <string name="cache_status_found">Found</string>
+    <string name="cache_status_visited">Visited</string>
     <string name="cache_not_status_found">Not Found</string>
     <string name="cache_status_archived">Archived</string>
     <string name="cache_status_disabled">Disabled</string>
@@ -1740,6 +1763,7 @@
     <string name="cache_mode">Mode</string>
     <string name="cache_mode_linear">Linear</string>
     <string name="cache_mode_random">Random</string>
+    <string name="cache_category">Category</string>
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulty</string>
     <string name="cache_terrain">Terrain</string>

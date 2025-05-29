@@ -37,6 +37,7 @@
     <color name="cacheMarker_border">#ff383838</color>
     <color name="cacheMarker_archived">#ffb71c1c</color>
 
+    <color name="cacheType_waymark">#b10022</color>
     <color name="cacheType_lab">#ff7b1fa2</color>
     <color name="cacheType_virtual">#ff0288d1</color>
     <color name="cacheType_mystery">#ff303f9f</color>

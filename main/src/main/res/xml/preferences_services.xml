@@ -25,6 +25,12 @@
             app:title="@string/settings_title_lc"
             app:iconSpaceReserved="false" />
 
+        <Preference
+            android:key="@string/pref_connectorWMActive"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceWaymarkingFragment"
+            app:title="@string/init_wm"
+            app:iconSpaceReserved="false" />
+
         <!-- Opencaching.de -->
         <Preference
             android:key="@string/pref_fakekey_ocde_authorization"

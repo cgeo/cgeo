@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
@@ -15,6 +16,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.NetworkUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
@@ -60,17 +62,7 @@ public class GCLogin extends AbstractLogin {
 
     private ServerParameters serverParameters = null;
 
-    private static class StatusException extends RuntimeException {
-        private static final long serialVersionUID = -597420116705938433L;
-        final StatusCode statusCode;
-
-        StatusException(final StatusCode statusCode) {
-            super("Status code: " + statusCode);
-            this.statusCode = statusCode;
-        }
-    }
-
-    /*
+    /**
      * <pre>
      * var serverParameters = {
      *   "user:info": {
@@ -187,6 +179,20 @@ public class GCLogin extends AbstractLogin {
         Log.w("Login.login: " + status + " (retry=" + retry + ") [" + additionalLogInfo + "]");
     }
 
+    private void resetLoginStatus() {
+        Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
+        Cookies.removeCookies(GCConnector.getInstance().getHostUrl());
+
+        setActualLoginStatus(false);
+    }
+
+    private void clearLoginInfo() {
+        resetLoginStatus();
+
+        setActualCachesFound(-1);
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
+    }
+
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
         final Context ctx = CgeoApplication.getInstance();
@@ -254,7 +260,7 @@ public class GCLogin extends AbstractLogin {
 
             logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
-        } catch (final StatusException status) {
+        } catch (final NetworkUtils.StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
             logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry);
@@ -265,9 +271,9 @@ public class GCLogin extends AbstractLogin {
     @WorkerThread
     public StatusCode logout() {
         try {
-            getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
+            NetworkUtils.getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
             resetServerParameters();
-        } catch (final StatusException status) {
+        } catch (final NetworkUtils.StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
         }
@@ -276,25 +282,10 @@ public class GCLogin extends AbstractLogin {
         return StatusCode.NO_ERROR;
     }
 
-    private String getResponseBodyOrStatus(final Response response) {
-        final String body;
-        try {
-            body = response.body().string();
-        } catch (final IOException ignore) {
-            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
-        }
-        if (response.code() == 503 && TextUtils.matches(body, GCConstants.PATTERN_MAINTENANCE)) {
-            throw new StatusException(StatusCode.MAINTENANCE);
-        } else if (!response.isSuccessful()) {
-            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
-        }
-        return body;
-    }
-
     @WorkerThread
     private String getLoginPage() {
         Log.iForce("GCLogin: get login Page");
-        return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
+        return NetworkUtils.getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
 
     @Nullable
@@ -309,7 +300,7 @@ public class GCLogin extends AbstractLogin {
         Log.iForce("GCLogin: post credentials");
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
-        return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
+        return NetworkUtils.getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 
     /**
