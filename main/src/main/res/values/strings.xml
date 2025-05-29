@@ -2202,11 +2202,14 @@
 
     <!-- export -->
     <string name="share_export">Share / Export</string>
-    <string name="export">Export / Upload</string>
+    <string name="export">Export</string>
+    <string name="export_upload">Export / Upload</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exported to</string>
     <string name="export_failed">Export failed</string>
+    <string name="export_gpx">Export GPX</string>
     <string name="export_fieldnotes">Export field notes</string>
+    <string name="fieldnotes">field notes</string>
     <string name="export_fieldnotes_info">Field Notes will be exported to /sdcard/field-notes with the current date and time as their file name.</string>
     <string name="export_fieldnotes_upload">Upload to geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploading…</string>
