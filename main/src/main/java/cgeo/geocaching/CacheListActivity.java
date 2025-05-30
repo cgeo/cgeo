@@ -89,6 +89,7 @@ import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -144,6 +145,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
+    private static final int REQUEST_CODE_LOG = 1001;
     private static final int REQUEST_CODE_IMPORT_PQ = 10003;
     private static final int REQUEST_CODE_IMPORT_BOOKMARK = 10004;
 
@@ -1241,6 +1243,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             setAndRefreshFilterForOnlineSearch(data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT));
+        } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            final View navBar = findViewById(R.id.activity_navigationBar);
+            final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
+
+            ShareUtils.showLogPostedSnackbar(this, data, isNavBarVisible ? navBar : null);
         }
     }
 

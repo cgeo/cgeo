@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public final class LoggingUI extends AbstractUIFactory {
+    public static final int REQUEST_CODE_LOG = 1001;
 
     private LoggingUI() {
         // utility class
@@ -74,7 +75,7 @@ public final class LoggingUI extends AbstractUIFactory {
     public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_log_visit) {
-            cache.logVisit(activity);
+            cache.logVisitForResult(activity, REQUEST_CODE_LOG);
         } else if (itemId == R.id.menu_log_visit_offline) {
             showOfflineMenu(cache, activity, listener);
         } else {
@@ -89,7 +90,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
-        if (GCConnector.getInstance().canHandle(cache.getGeocode())) {
+        if (GCConnector.getInstance().canHandle(cache.getGeocode()) && !cache.isOwner()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
             logTypes.add(LogType.NEEDS_ARCHIVE);
         }
