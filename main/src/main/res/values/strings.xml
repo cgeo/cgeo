@@ -1108,6 +1108,7 @@
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_cachelists">Cache Lists</string>
     <string name="init_localization">Localization</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline Logging</string>
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
@@ -1125,6 +1126,8 @@
     <string name="init_custombnitem_default">Nearby search (default)</string>
     <string name="init_custombnitem_none">(none)</string>
     <string name="init_custombnitem_empty_placeholder">(empty placeholder)</string>
+    <string name="init_title_collapse_log_limit">Log Line Limit</string>
+    <string name="init_summary_collapse_log_limit">Maximum number of lines to show for logs. Additional lines will be collapsed. </string>
 
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
@@ -1344,6 +1347,8 @@
     <string name="feature_favorite">Adding cache to favorites</string>
     <string name="feature_voting">Voting for caches</string>
     <string name="init_appearance_general">General appearance</string>
+    <string name="init_cachedetail_behaviour">Behaviour</string>
+    <string name="init_cachedetail_note">Personal Cache Note</string>
     <string name="init_maplines_title">Map colors customization</string>
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
