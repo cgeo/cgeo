@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,7 +10,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextView {
-    private static final int MAX_LINES = 15;
     private boolean isCollapsible = false;
     private View.OnClickListener stackedOnClickListener = null;
 
@@ -36,7 +36,9 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
     @Override
     protected void onTextChanged(final CharSequence text, final int start, final int lengthBefore, final int lengthAfter) {
         post(() -> {
-            isCollapsible = getLineCount() > MAX_LINES;
+            final int lineLimit = Settings.getLogLineLimit();
+            final int lineCount = getLineCount();
+            isCollapsible = lineLimit > 0 && lineCount > lineLimit;
             setCollapse(isCollapsible);
         });
     }
@@ -50,7 +52,8 @@ public class ExpandableTextView extends androidx.appcompat.widget.AppCompatTextV
     }
 
     public void setCollapse(final boolean collapse) {
-        setMaxLines(collapse ? MAX_LINES : Integer.MAX_VALUE);
+        final int lineLimit = Settings.getLogLineLimit();
+        setMaxLines(collapse && lineLimit > 0 ? lineLimit : Integer.MAX_VALUE);
         setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, collapse ? R.drawable.ic_menu_more : 0);
     }
 

@@ -6,57 +6,89 @@
     android:title="@string/settings_title_cachedetails"
     android:summary="@string/settings_summary_cachedetails"
     app:key="@string/preference_screen_cachedetails">
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="@string/pref_friendlogswanted"
-        android:summary="@string/init_summary_friends_and_own_logs_wanted"
-        android:title="@string/init_friends_and_own_logs_wanted"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_opendetailslastpage"
-        android:summary="@string/init_summary_openlastdetailspage"
-        android:title="@string/init_openlastdetailspage"
-        app:iconSpaceReserved="false" />
-    <ListPreference
-        android:key="@string/pref_translation_language"
-        android:title="@string/translator_preference_target_lng"
-        android:summary="@string/translator_preference_target_lng_summary"
-        app:iconSpaceReserved="false" />
-    <MultiSelectListPreference
-        android:key="@string/pref_translation_notranslate"
-        android:title="@string/translator_preference_nottranslate_lng"
-        android:summary="@string/translator_preference_nottranslate_lng_summary"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="@string/pref_livelist"
-        android:summary="@string/init_summary_livelist"
-        android:title="@string/init_livelist"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_global_wp_extraction_disable"
-        android:title="@string/init_global_wp_extraction_disable"
-        android:summary="@string/init_summary_global_wp_extraction_disable"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_personal_cache_note_merge_disable"
-        android:title="@string/init_prevent_cache_note_merge"
-        android:summary="@string/init_summary_prevent_cache_note_merge"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_customtabs_as_browser"
-        android:title="@string/init_customtabs_as_browser"
-        android:summary="@string/init_summary_customtabs_as_browser"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="@string/pref_rot13_hint"
-        android:title="@string/init_rot13_hint"
-        android:summary="@string/init_summary_rot13_hint"
-        app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:title="@string/init_cachedetail_behaviour"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_opendetailslastpage"
+            android:summary="@string/init_summary_openlastdetailspage"
+            android:title="@string/init_openlastdetailspage"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_rot13_hint"
+            android:title="@string/init_rot13_hint"
+            android:summary="@string/init_summary_rot13_hint"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_customtabs_as_browser"
+            android:title="@string/init_customtabs_as_browser"
+            android:summary="@string/init_summary_customtabs_as_browser"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_localization"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:key="@string/pref_translation_language"
+            android:title="@string/translator_preference_target_lng"
+            android:summary="@string/translator_preference_target_lng_summary"
+            app:iconSpaceReserved="false" />
+        <MultiSelectListPreference
+            android:key="@string/pref_translation_notranslate"
+            android:title="@string/translator_preference_nottranslate_lng"
+            android:summary="@string/translator_preference_nottranslate_lng_summary"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_cachedetail_note"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_global_wp_extraction_disable"
+            android:title="@string/init_global_wp_extraction_disable"
+            android:summary="@string/init_summary_global_wp_extraction_disable"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_personal_cache_note_merge_disable"
+            android:title="@string/init_prevent_cache_note_merge"
+            android:summary="@string/init_summary_prevent_cache_note_merge"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_logs"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_friendlogswanted"
+            android:summary="@string/init_summary_friends_and_own_logs_wanted"
+            android:title="@string/init_friends_and_own_logs_wanted"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_plainLogs"
+            android:summary="@string/init_summary_plain_logs"
+            android:title="@string/init_plain_logs"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_collapse_log_limit"
+            android:title="@string/init_title_collapse_log_limit"
+            android:summary="@string/init_summary_collapse_log_limit"
+            android:defaultValue="@integer/list_load_limit_default"
+            app:min="0"
+            app:max="@integer/log_line_limit_max"
+            app:minValueDescription="@string/init_settings_description_unlimited"
+            app:maxValueDescription="@string/init_settings_description_unlimited"
+            app:stepSize="5"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

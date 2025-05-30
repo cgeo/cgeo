@@ -25,6 +25,8 @@
     <integer name="backup_interval_max">366</integer>
     <integer name="list_load_limit_default">0</integer>
     <integer name="list_load_limit_max">50000</integer>
+    <integer name="log_line_limit_default">15</integer>
+    <integer name="log_line_limit_max">100</integer>
 
     <!-- history track -->
     <integer name="historytrack_length_default">700</integer>

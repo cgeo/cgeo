@@ -197,6 +197,7 @@
     <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
     <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
+    <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
 
 
     <!-- ============================================================================================================================================================================== -->

@@ -1043,6 +1043,14 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static int getLogLineLimit() {
+        final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.list_load_limit_default));
+        if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {
+            return 0;
+        }
+        return logLineLimit;
+    }
+
     public static boolean isLiveList() {
         return getBoolean(R.string.pref_livelist, true);
     }
