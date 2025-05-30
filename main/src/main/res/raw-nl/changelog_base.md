@@ -6,5 +6,5 @@
 ### Wherigo speler
 
 ### Algemeen
-- New: Share option after logging a cache
-- Change: Do not show "needs maintenance" or "needs archived" options for own caches
+- Nieuw: Delen optie na het loggen van een cache
+- Wijziging: Toon geen "need maintenance" of "need archived" opties voor eigen caches
