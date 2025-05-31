@@ -59,7 +59,7 @@ public class LogEntry implements Parcelable {
     /** The log message */
     @NonNull public final String log;
     /** The log date */
-    public long date;
+    public final long date;
     /** Is a found log */
     public final int found;
     /** Own's or Friend's log entry indicator. */
@@ -78,10 +78,6 @@ public class LogEntry implements Parcelable {
     @NonNull
     public Date getDate() {
         return new Date(date);
-    }
-
-    public void setDate(final long date) {
-        this.date = date;
     }
 
     @NonNull
