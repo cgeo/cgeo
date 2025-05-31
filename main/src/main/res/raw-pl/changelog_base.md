@@ -2,6 +2,7 @@
 ### Mapa
 
 ### Szczegóły skrytki
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Odtwarzacz Wherigo
 
