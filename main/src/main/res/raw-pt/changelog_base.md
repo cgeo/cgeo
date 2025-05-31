@@ -2,6 +2,7 @@
 ### Mapa
 
 ### Detalhes da cache
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo player
 
