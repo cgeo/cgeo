@@ -1725,8 +1725,10 @@ public final class GCParser {
                 mergedLogs.add(log);
             } else {
                 final LogEntry friendLog = mergedLogs.get(logIndex);
-                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                mergedLogs.set(logIndex, updatedFriendLog);
+                if (!friendLog.friend) {
+                    final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                    mergedLogs.set(logIndex, updatedFriendLog);
+                }
             }
         }
     }
