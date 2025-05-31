@@ -2,6 +2,7 @@
 ### 지도
 
 ### 캐시 상세정보
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo player
 
