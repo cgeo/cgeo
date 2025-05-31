@@ -19,14 +19,14 @@ public class HtmlUtilsJunitTest {
         assertFormattedHtml(false, false, "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment", "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment-->");
         assertFormattedHtml(false, false, "<p> Start a list <ul><li>first end the paragraph </p>", "<p> Start a list </p><ul><li>first end the paragraph <p></p></li></ul>");
 
-        //check ooloring
+        //check coloring
         assertFormattedHtml(false, true, "<p att1='de\"f'   att2=\"value<>'&\"> text </p>", "[<p] [att1=\"][de&quot;f][\" att2=\"][value<>'&amp;][\"][>] text [</p>]");
         assertFormattedHtml(false, true, "<p> text with line breaks <br> <br/> <div> no ending paragraph", "[<p>] text with line breaks [<br>] [<br>] [</p>][<div>] no ending paragraph[</div>]");
         assertFormattedHtml(false, true, "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment", "[<p>] text with comment [<!-- my comment <>'& - -> -->] [</p>] [<!-- non-ending comment-->]");
         assertFormattedHtml(false, true, "<p> Start a list <ul><li>first end the paragraph </p>", "[<p>] Start a list [</p>][<ul>][<li>]first end the paragraph [<p>][</p>][</li>][</ul>]");
 
         //check pretty print
-        assertFormattedHtml(true, true, "<p>Hello world<br>again</p>", "\n[<p>]\n  Hello world\n  [<br>]\n  again\n[</p>]");
+        assertFormattedHtml(true, true, "<p>Hello world<br>again</p>", "[<p>]\n  Hello world\n  [<br>]\n  again\n[</p>]");
     }
 
     private void assertFormattedHtml(final boolean prettyPrint, final boolean colorize, final String html, final String expectedResult) {
