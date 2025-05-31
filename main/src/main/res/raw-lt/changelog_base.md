@@ -2,6 +2,7 @@
 ### Žemėlapis
 
 ### Slėptuvės detalės
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo player
 
