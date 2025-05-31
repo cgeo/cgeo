@@ -175,7 +175,7 @@
     <item
         android:id="@+id/menu_export"
         android:icon="@drawable/ic_menu_share"
-        android:title="@string/export"
+        android:title="@string/export_upload"
         app:showAsAction="never|withText">
         <menu>
             <item
