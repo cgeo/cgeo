@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Imatge</string>
     <string name="log_delete_confirm">Realment voleu suprimir el registre del tipus \"%1$s\" de l\'autor \"%2$s\" amb la data de registre \"%3$s\"?</string>
     <string name="log_offline_delete_confirm">Realment voleu suprimir el vostre registre fora de línia emmagatzemat del tipus \"%1$s\" amb la data de registre \"%2$s\"?</string>
+    <string name="log_share_prefix_found">He trobat %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">No he pogut trobar %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">He deixat una nota a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">He informat del manteniment necessari per a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Crec que %1$s (%2$s) s\'hauria d\'arxivar:\n\n</string>
+    <string name="log_share_prefix_default">El meu registre de %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- Contacts -->
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
@@ -337,6 +343,7 @@
     <string name="dont_show_again">No ho tornis a mostrar</string>
     <string name="tap_icon_more_info">Toqueu la icona per obtenir més informació</string>
     <string name="use_slider_adjust_value">Utilitzeu el control lliscant per ajustar el valor</string>
+    <string name="snackbar_action_share">Comparteix</string>
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
     <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
@@ -347,6 +354,7 @@
     <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
     <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
     <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_preference_application_language">&lt;Utilitzar l\'idioma de l\'aplicació&gt;</string>
     <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
     <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
     <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
@@ -359,6 +367,7 @@
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
     <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
     <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_target_language">Tradueix a \"%s\"</string>
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
     <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
@@ -932,6 +941,8 @@
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_use_application_language">Utilitzeu el llenguatge de l\'aplicació</string>
+    <string name="init_translation_disabled">Traducció desactivada</string>
     <string name="init_date_format">Format de data</string>
     <string name="init_date_format_description">Format per utilitzar per a dates curtes, p. a la vista de registre</string>
     <string name="system_default">Sistema per defecte</string>
@@ -1974,9 +1985,11 @@
     <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
+    <string name="export">Exporta / Carrega</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
     <string name="export_failed">S\'ha produït un error en l\'exportació</string>
+    <string name="export_fieldnotes">Exporta notes de camp</string>
     <string name="export_fieldnotes_info">Les notes de camp s\'exportaran a /sdcard/field-notes amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_fieldnotes_upload">Carrega a geocaching.com</string>
     <string name="export_fieldnotes_uploading">S\'està carregant…</string>
@@ -1986,6 +1999,7 @@
     <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_confirm_title">Exportant %1$s</string>
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
+    <string name="export_persnotes">Carregueu notes personals</string>
     <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">S\'ha pujat %1$d nota correctament</item>

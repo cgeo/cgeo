@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Czy na pewno chcesz usunąć zapisany wpis typu \'%1$s\' z datą logowania \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Znalazłem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nie mogłem znaleźć %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Zostawiłem notatkę na %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Zgłosiłem konieczność konserwacji dla %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myślę, że %1$s (%2$s) powinna zostać zarchiwizowana:\n\n</string>
+    <string name="log_share_prefix_default">Mój wpis dla %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Nie wyświetlaj ponownie</string>
     <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
     <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
+    <string name="snackbar_action_share">Udostępnij</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
@@ -346,6 +353,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorowane języki</string>
     <string name="translator_preference_nottranslate_lng_summary">Języki źródłowe nie oferują tłumaczenia dla</string>
     <string name="translator_preference_disable">&lt;Wyłącz tłumaczenie&gt;</string>
+    <string name="translator_preference_application_language">&lt;Użyj języka aplikacji&gt;</string>
     <string name="translator_model_download_select">Pobierz język tłumaczenia offline</string>
     <string name="translator_model_download_confirm_title">Potwierdź pobranie języka</string>
     <string name="translator_model_download_confirm_txt">Należy pobrać model tłumaczenia dla języka %s. Rozmiar modelu wynosi około 20-40 MB.</string>
@@ -358,6 +366,7 @@
     <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany dla tłumaczenia.</string>
     <string name="translator_language_unknown">Nie można zidentyfikować języka</string>
     <string name="translator_language_detected">Przetłumacz z \"%s\"</string>
+    <string name="translator_target_language">Przetłumacz na \"%s\"</string>
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
     <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
@@ -943,6 +952,8 @@
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
+    <string name="init_use_application_language">Użyj języka aplikacji</string>
+    <string name="init_translation_disabled">Tłumaczenie wyłączone</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
     <string name="system_default">Domyślne systemowe</string>
@@ -2002,9 +2013,11 @@
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksportuj</string>
+    <string name="export">Eksport / Prześlij</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
     <string name="export_failed">Eksport nie powiódł się</string>
+    <string name="export_fieldnotes">Eksportuj notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
@@ -2014,6 +2027,7 @@
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
     <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
+    <string name="export_persnotes">Prześlij osobiste notatki</string>
     <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Wysłano pomyślnie notatkę</item>
