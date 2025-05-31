@@ -2,6 +2,7 @@
 ### Mapa
 
 ### Detaily kešky
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo přehrávač
 
