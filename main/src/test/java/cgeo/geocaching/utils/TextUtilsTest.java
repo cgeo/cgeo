@@ -270,6 +270,12 @@ public class TextUtilsTest {
     }
 
     @Test
+    public void isEqualStripHtmlIgnoreSpaces() {
+        assertThat(TextUtils.isEqualStripHtmlIgnoreSpaces("This is a test \n with linebreak", "This is a test <br> with linebreak")).isTrue();
+        assertThat(TextUtils.isEqualStripHtmlIgnoreSpaces("<p>This is a test with html", "This is a test with html")).isTrue();
+    }
+
+    @Test
     public void pattern() {
         final String text = "abc\"logTypes\":[{\"value\":2},{\"value\":3},{\"value\":4},{\"value\":45},{\"value\":7}]def";
         final Pattern p = Pattern.compile("\"logTypes\":\\[([^]]+)]");
