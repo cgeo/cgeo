@@ -2,6 +2,7 @@
 ### Mapa
 
 ### Detalls del catxé
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo Player
 
