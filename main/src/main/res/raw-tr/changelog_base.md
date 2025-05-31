@@ -2,6 +2,7 @@
 ### Harita
 
 ### Geocache ayrıntıları
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo player
 
