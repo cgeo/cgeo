@@ -2,6 +2,7 @@
 ### Karte
 
 ### Cache-Details
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo Player
 
