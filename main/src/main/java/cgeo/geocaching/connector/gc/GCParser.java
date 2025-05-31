@@ -1720,12 +1720,13 @@ public final class GCParser {
      */
     private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {
-            if (mergedLogs.contains(log)) {
-                final LogEntry friendLog = mergedLogs.get(mergedLogs.indexOf(log));
-                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                mergedLogs.set(mergedLogs.indexOf(log), updatedFriendLog);
-            } else {
+            final int logIndex = mergedLogs.indexOf(log);
+            if (logIndex < 0) {
                 mergedLogs.add(log);
+            } else {
+                final LogEntry friendLog = mergedLogs.get(logIndex);
+                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                mergedLogs.set(logIndex, updatedFriendLog);
             }
         }
     }
@@ -1736,15 +1737,15 @@ public final class GCParser {
             logTimesToMergeMap.put(logToMerge.serviceLogId, logToMerge);
         }
 
-        for (final LogEntry mergedLog : mergedLogTimes) {
+        for (int i = 0; i < mergedLogTimes.size(); i++) {
+            final LogEntry mergedLog = mergedLogTimes.get(i);
             final LogEntry logToMerge = logTimesToMergeMap.get(mergedLog.serviceLogId);
             if (logToMerge != null) {
                 final Date dateTimeLogTime = new Date(mergedLog.date);
                 final Date logTime = new Date(logToMerge.date);
                 if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
                     final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                    final int logIndex = mergedLogTimes.indexOf(mergedLog);
-                    mergedLogTimes.set(logIndex, updatedTimeLog);
+                    mergedLogTimes.set(i, updatedTimeLog);
                 }
             }
         }
@@ -1755,12 +1756,11 @@ public final class GCParser {
             return;
         }
 
-        // TODO iterate via index to avoid indexOf
-        for (final LogEntry mergedLog : mergedLogTimes) {
+        for (int i = 0; i < mergedLogTimes.size(); i++) {
+            final LogEntry mergedLog = mergedLogTimes.get(i);
             if (logToMerge.isMatchingLog(mergedLog)) {
                 final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                final int logIndex = mergedLogTimes.indexOf(mergedLog);
-                mergedLogTimes.set(logIndex, updatedTimeLog);
+                mergedLogTimes.set(i, updatedTimeLog);
 
                 break;
             }
