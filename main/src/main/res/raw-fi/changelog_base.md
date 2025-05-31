@@ -2,6 +2,7 @@
 ### Kartta
 
 ### Kätkön tiedot
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo player
 
