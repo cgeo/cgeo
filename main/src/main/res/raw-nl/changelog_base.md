@@ -2,6 +2,7 @@
 ### Kaart
 
 ### Cache details
+- New: Detect additional characters in formulas: –, ⋅, ×
 
 ### Wherigo speler
 
