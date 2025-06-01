@@ -129,7 +129,11 @@ public final class StoredList extends AbstractList {
 
             final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
             model.setButtonSelectionIsMandatory(true)
-                    .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> lastSelectedListSet)
+                    .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> {
+                        model.setSelectedItems(lastSelectedListSet);
+                        configureListDisplay(model, lastSelectedLists);
+                        return lastSelectedListSet;
+                    })
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                     .setItems(lists)
                     .setSelectedItems(selectedListSet);
