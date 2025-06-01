@@ -36,6 +36,7 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
 - Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
 - Nieuw: Ondersteuning voor achtergrondkaarten (UnifiedMap)
+- Oplossing: Compacte pictogrammen komen niet terug naar grote pictogrammen bij zoomen in automatische modus (UnifiedMap)
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
@@ -72,3 +73,4 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: GPX export: export logs/trackables optioneel gemaakt
 - Nieuw: knop toegevoegd om log sjablonen te verwijderen
 - Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
+- Oplossing: Kaart-downloader biedt beschadigde (0 bytes) bestanden aan om te downloaden
