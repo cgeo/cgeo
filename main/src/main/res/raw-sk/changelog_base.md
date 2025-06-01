@@ -1,5 +1,6 @@
 
 ### Mapa
+- New: Route optimization caches calculated data
 
 ### Detaily kešky
 - New: Detect additional characters in formulas: –, ⋅, ×
