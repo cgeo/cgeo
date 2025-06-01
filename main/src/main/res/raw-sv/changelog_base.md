@@ -36,6 +36,7 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
@@ -72,3 +73,4 @@ Until then, you can switch between the different implementations in settings => 
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
+- Fix: Map downloader offering broken (0 bytes) files for download
