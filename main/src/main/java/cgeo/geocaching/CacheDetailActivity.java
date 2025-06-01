@@ -72,7 +72,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -1262,7 +1261,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache name (full name), may be editable
             // Not using colored cache names at this place to have at least one place without any formatting to support visually impaired users
             final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
-            activity.addShareAction(cachename);
+            details.addShareAction(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
                     cachename.setText(name);
@@ -1277,7 +1276,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 details.addAlcMode(cache);
             }
             details.addSize(cache);
-            activity.addShareAction(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
+            details.addShareAction(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
 
             activity.cacheDistanceView = details.addDistance(cache, activity.cacheDistanceView);
@@ -1310,7 +1309,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // hidden or event date
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
-                activity.addShareAction(hiddenView);
+                details.addShareAction(hiddenView);
                 if (cache.isEventCache()) {
                     hiddenView.setOnClickListener(v -> CalendarUtils.openCalendar(activity, cache.getHiddenDate()));
                 }
@@ -1322,11 +1321,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // cache coordinates
-            if (cache.getCoords() != null) {
-                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).valueView;
-                new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
-                activity.addShareAction(valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
-            }
+            details.addCoordinates(cache.getCoords());
 
             // Latest logs
             details.addLatestLogs(cache);
@@ -1781,7 +1776,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache personal note
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
             binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            activity.addShareAction(binding.personalnote);
+            CacheDetailsCreator.addShareAction(activity, binding.personalnote);
             TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
             binding.editPersonalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             binding.personalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
@@ -2303,7 +2298,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
-            activity.addShareAction(coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
+            CacheDetailsCreator.addShareAction(activity, coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
@@ -2492,17 +2487,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void onActivityReenter(final int resultCode, final Intent data) {
         super.onActivityReenter(resultCode, data);
         this.imageGalleryPos = ImageGalleryView.onActivityReenter(this, this.imageGallery, data);
-    }
-
-    public void addShareAction(final TextView view) {
-        addShareAction(view, s -> s);
-    }
-
-    public void addShareAction(final TextView view, final androidx.arch.core.util.Function<String, String> formatter) {
-        view.setOnLongClickListener(v -> {
-            ShareUtils.sharePlainText(this, formatter.apply(view.getText().toString()));
-            return true;
-        });
     }
 
     public static void startActivityGuid(final Context context, final String guid, final String cacheName) {
