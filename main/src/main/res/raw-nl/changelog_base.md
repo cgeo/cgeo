@@ -1,8 +1,9 @@
 
 ### Kaart
+- Nieuw: Route optimalisatie caches berekende data
 
 ### Cache details
-- New: Detect additional characters in formulas: –, ⋅, ×
+- Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
 
 ### Wherigo speler
 
