@@ -1,5 +1,6 @@
 
 ### 지도
+- New: Route optimization caches calculated data
 
 ### 캐시 상세정보
 - New: Detect additional characters in formulas: –, ⋅, ×
