@@ -1,5 +1,6 @@
 
 ### Harita
+- New: Route optimization caches calculated data
 
 ### Geocache ayrıntıları
 - New: Detect additional characters in formulas: –, ⋅, ×
