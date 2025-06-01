@@ -36,6 +36,7 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Nou: toqueu llargament "activa el botó en directe" per carregar catxés fora de línia
 - Nou: ombrejat fora de línia per a UnifiedMap (variant VTM)
 - Nou: suport per a mapes de fons (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
 
 ### Detalls del catxé
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
@@ -72,3 +73,4 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Novetat: exportació GPX: exportació de registres / rastrejables es fa opcional
 - Nou: S'ha afegit un botó per eliminar les plantilles de registre
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
+- Fix: Map downloader offering broken (0 bytes) files for download
