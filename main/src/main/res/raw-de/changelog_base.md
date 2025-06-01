@@ -36,6 +36,7 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -72,3 +73,4 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: GPX-Export: Exportieren von Logs / Trackables optional
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
+- Fix: Map downloader offering broken (0 bytes) files for download
