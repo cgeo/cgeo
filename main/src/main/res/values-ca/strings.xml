@@ -1985,7 +1985,6 @@
     <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
-    <string name="export">Exporta / Carrega</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
     <string name="export_failed">S\'ha produït un error en l\'exportació</string>
