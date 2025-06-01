@@ -1,5 +1,6 @@
 
 ### Χάρτης
+- New: Route optimization caches calculated data
 
 ### Λεπτομέρειες κρύπτης
 - New: Detect additional characters in formulas: –, ⋅, ×
