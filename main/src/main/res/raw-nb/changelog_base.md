@@ -1,5 +1,6 @@
 
 ### Kart
+- New: Route optimization caches calculated data
 
 ### Cachedetaljer
 - New: Detect additional characters in formulas: –, ⋅, ×
