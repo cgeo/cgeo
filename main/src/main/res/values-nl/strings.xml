@@ -1984,11 +1984,14 @@
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
-    <string name="export">Exporteren / Uploaden</string>
+    <string name="export">Exporteren</string>
+    <string name="export_upload">Exporteren / Uploaden</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
     <string name="export_failed">Exporteren mislukt</string>
+    <string name="export_gpx">Exporteer GPX</string>
     <string name="export_fieldnotes">Exporteren veldnotities</string>
+    <string name="fieldnotes">Veldnotities</string>
     <string name="export_fieldnotes_info">Veld-notities worden geëxporteerd naar /sdcard/field-notes met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_fieldnotes_upload">Upload naar geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploaden…</string>
