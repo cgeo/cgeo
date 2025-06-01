@@ -1,5 +1,6 @@
 
 ### Mapa
+- New: Route optimization caches calculated data
 
 ### Detalls del catxé
 - New: Detect additional characters in formulas: –, ⋅, ×
