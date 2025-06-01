@@ -1,5 +1,6 @@
 
 ### Карта
+- New: Route optimization caches calculated data
 
 ### Детали тайника
 - New: Detect additional characters in formulas: –, ⋅, ×
