@@ -1,5 +1,6 @@
 
 ### Kartta
+- New: Route optimization caches calculated data
 
 ### Kätkön tiedot
 - New: Detect additional characters in formulas: –, ⋅, ×
