@@ -1,8 +1,9 @@
 
 ### Mapa
+- Nowość: Optymalizacja trasy buforuje obliczone dane
 
 ### Szczegóły skrytki
-- New: Detect additional characters in formulas: –, ⋅, ×
+- Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
 
 ### Odtwarzacz Wherigo
 
