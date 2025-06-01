@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -157,7 +158,13 @@ public final class CacheDetailsCreator {
             date = "";
         }
         if (cache.isFound()) {
-            states.add(res.getString(cache.isEventCache() ? R.string.cache_status_attended : R.string.cache_status_found) + date);
+            if (cache.isEventCache()) {
+                states.add(res.getString(R.string.cache_status_attended) + date);
+            } else if (cache.getType() == CacheType.WAYMARK) {
+                states.add(res.getString(R.string.cache_status_visited) + date);
+            } else {
+                states.add(res.getString(R.string.cache_status_found) + date);
+            }
         } else if (cache.isDNF()) {
             states.add(res.getString(R.string.cache_not_status_found) + date);
         }
@@ -218,6 +225,12 @@ public final class CacheDetailsCreator {
             add(R.string.cache_mode, res.getString(R.string.cache_mode_linear));
         } else {
             add(R.string.cache_mode, res.getString(R.string.cache_mode_random));
+        }
+    }
+
+    public void addWmCategory(final Geocache cache) {
+        if (!StringUtils.isEmpty(cache.getWmCategory())) {
+            add(R.string.cache_category, cache.getWmCategory());
         }
     }
 

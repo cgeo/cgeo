@@ -713,6 +713,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorALActive, true);
     }
 
+    public static boolean isWMConnectorActive() {
+        return getBoolean(R.string.pref_connectorWMActive, false);
+    }
+
     public static boolean isSUConnectorActive() {
         return getBoolean(R.string.pref_connectorSUActive, false);
     }
@@ -1925,6 +1929,23 @@ public class Settings {
 
     public static long getLastLoginSuccessGC() {
         return getLastLoginSuccess(R.string.pref_gcLastLoginSuccess);
+    }
+
+    public static void setLastLoginErrorWM(final String status) {
+        setLastLoginError(R.string.pref_wmLastLoginErrorStatus, status, R.string.pref_wmLastLoginError);
+    }
+
+    @Nullable
+    public static Pair<String, Long> getLastLoginErrorWM() {
+        return getLastLoginError(R.string.pref_wmLastLoginErrorStatus, R.string.pref_wmLastLoginError);
+    }
+
+    public static void setLastLoginSuccessWM() {
+        setLastLoginSuccess(R.string.pref_wmLastLoginSuccess);
+    }
+
+    public static long getLastLoginSuccessWM() {
+        return getLastLoginSuccess(R.string.pref_wmLastLoginSuccess);
     }
 
 

@@ -128,6 +128,7 @@ public class Geocache implements INamedGeoCoordinate {
     private String ownerUserId = "";
     private int assignedEmoji = 0;
     private int alcMode = 0;
+    private String wmCategory = "";
     private Tier tier;
 
     @Nullable
@@ -1339,6 +1340,16 @@ public class Geocache implements INamedGeoCoordinate {
     public int getAlcMode() {
         Log.d("_AL getAlcMode: " + alcMode);
         return alcMode;
+    }
+
+    public void setWmCategory(final String category) {
+        Log.d("_WM setWmCategory: " + category);
+        this.wmCategory = category;
+    }
+
+    public String getWmCategory() {
+        Log.d("_WM getWmCategory: " + wmCategory);
+        return wmCategory;
     }
 
     public void setTier(final Tier tier) {

@@ -535,7 +535,11 @@ public final class ImageUtils {
         final GCImageSize preferredSize = ImageUtils.GCImageSize.valueOf(Settings.getString(R.string.pref_gc_imagesize, "ORIGINAL"));
         MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
         if (matcherViewstates.find()) {
-            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
+            String baseUrl = "https://img.geocaching.com/";
+            if (imageUrl.contains("/waymarking/")) {
+                baseUrl += "waymarking/";
+            }
+            return baseUrl + preferredSize.getPathname() + matcherViewstates.group(1);
         }
         matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
         if (matcherViewstates.find()) {

@@ -73,6 +73,11 @@
     <string translatable="false" name="pref_fakekey_al_website">fakekey_al_website</string>
     <string translatable="false" name="pref_foundstate_al">foundstate_al</string>
 
+    <!-- settings for waymarking.com screen -->
+    <string translatable="false" name="preference_screen_wm">preference_screen_wm</string>
+    <string translatable="false" name="pref_connectorWMActive">connectorWMActive</string>
+    <string translatable="false" name="pref_fakekey_wm_website">fakekey_wm_website</string>
+    <string translatable="false" name="pref_fakekey_wm_refresh">fakekey_wm_refresh</string>
 
     <!-- settings for opencaching.de screen -->
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>
@@ -525,6 +530,10 @@
     <string translatable="false" name="pref_gcLastLoginErrorStatus">gcLastLoginErrorStatus</string>
     <string translatable="false" name="pref_gcLastLoginError">gcLastLoginError</string>
     <string translatable="false" name="pref_gcLastLoginSuccess">gcLastLoginSuccess</string>
+
+    <string translatable="false" name="pref_wmLastLoginErrorStatus">wmLastLoginErrorStatus</string>
+    <string translatable="false" name="pref_wmLastLoginError">wmLastLoginError</string>
+    <string translatable="false" name="pref_wmLastLoginSuccess">wmLastLoginSuccess</string>
 
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
     <string translatable="false" name="pref_ocde_tokenpublic">ocde_tokenpublic</string>
