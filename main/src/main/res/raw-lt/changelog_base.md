@@ -1,5 +1,6 @@
 
 ### Žemėlapis
+- New: Route optimization caches calculated data
 
 ### Slėptuvės detalės
 - New: Detect additional characters in formulas: –, ⋅, ×
