@@ -1,5 +1,6 @@
 
 ### Karte
+- New: Route optimization caches calculated data
 
 ### Cache-Details
 - New: Detect additional characters in formulas: –, ⋅, ×
