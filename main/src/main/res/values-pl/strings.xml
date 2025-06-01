@@ -2006,11 +2006,14 @@
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksportuj</string>
-    <string name="export">Eksport / Prześlij</string>
+    <string name="export">Eksport</string>
+    <string name="export_upload">Eksport / Prześlij</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
     <string name="export_failed">Eksport nie powiódł się</string>
+    <string name="export_gpx">Eksportuj GPX</string>
     <string name="export_fieldnotes">Eksportuj notatki polowe</string>
+    <string name="fieldnotes">notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
