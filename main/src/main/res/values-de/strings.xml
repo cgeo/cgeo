@@ -1966,7 +1966,6 @@
     <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
-    <string name="export">Exportieren / Hochladen</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
     <string name="export_failed">Exportieren fehlgeschlagen</string>
