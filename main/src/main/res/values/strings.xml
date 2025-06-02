@@ -2106,6 +2106,7 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
     <string name="search_tb">Trackable</string>
+    <string name="most_recent">Most recent</string>
     <string name="search_destination">Open destination in c:geo</string>
     <string name="add_target_to">Add target to</string>
     <string name="search_address_started">Searching for places</string>
