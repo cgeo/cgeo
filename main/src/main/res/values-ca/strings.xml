@@ -1985,10 +1985,14 @@
     <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
+    <string name="export">Exporta</string>
+    <string name="export_upload">Exporta / Carrega</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
     <string name="export_failed">S\'ha produït un error en l\'exportació</string>
+    <string name="export_gpx">Exporta GPX</string>
     <string name="export_fieldnotes">Exporta notes de camp</string>
+    <string name="fieldnotes">notes de camp</string>
     <string name="export_fieldnotes_info">Les notes de camp s\'exportaran a /sdcard/field-notes amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_fieldnotes_upload">Carrega a geocaching.com</string>
     <string name="export_fieldnotes_uploading">S\'està carregant…</string>
