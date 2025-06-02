@@ -653,6 +653,7 @@
     <string translatable="false" name="pref_search_history_finder">search_history_finder</string>
     <string translatable="false" name="pref_search_history_trackable">search_history_trackable</string>
     <string translatable="false" name="pref_search_history_address">search_history_address</string>
+    <string translatable="false" name="pref_search_history_geocode">search_history_geocode</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

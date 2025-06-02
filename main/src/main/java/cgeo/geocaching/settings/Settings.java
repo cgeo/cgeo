@@ -510,7 +510,7 @@ public class Settings {
         return sharedPrefs != null && sharedPrefs.contains(prefKey);
     }
 
-    private static String getStringDirect(final String prefKey, final String defaultValue) {
+    public static String getStringDirect(final String prefKey, final String defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getString(prefKey, defaultValue);
     }
 
@@ -566,7 +566,7 @@ public class Settings {
         putStringDirect(getKey(prefKeyId), value);
     }
 
-    private static void putStringDirect(final String prefKey, final String value) {
+    public static void putStringDirect(final String prefKey, final String value) {
         if (sharedPrefs == null) {
             return;
         }
