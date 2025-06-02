@@ -1,9 +1,9 @@
 
 ### Mapa
-- New: Route optimization caches calculated data
+- Nou: l'optimització de la ruta guarda les dades calculades
 
 ### Detalls del catxé
-- New: Detect additional characters in formulas: –, ⋅, ×
+- Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
 
 ### Wherigo Player
 
