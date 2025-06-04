@@ -72,6 +72,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CompassMiniView;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -88,6 +89,7 @@ import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
@@ -223,6 +225,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private GeoDirHandler locationUpdater;
 
     private MenuItem menuItemToggleWaypointsFromNote = null;
+
+    private CompassMiniView compassMiniView;
+    private float azimuth = 0;
+
+    private final boolean isLiveDetail = Settings.isLiveDetail();
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -448,7 +455,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else {
             start = initial;
         }
-        if (start) {
+        if (start && isLiveDetail) {
+            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION));
+        } else {
             geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
         }
     }
@@ -717,6 +726,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         if (cache != null) {
             // top level menu items
+            if (isLiveDetail && cache.getCoords() != null) {
+                initCompassMiniView();
+            }
 
             final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
             ttsMenuItem.setVisible(!cache.isGotoHistoryUDC());
@@ -822,6 +834,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return true;
     }
 
+    private void initCompassMiniView() {
+        final CompassMiniView compass = findViewById(R.id.compass_action);
+        if (compass != null) {
+            this.compassMiniView = compass;
+            compassMiniView.setTargetCoords(cache.getCoords());
+            compassMiniView.updateCurrentCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
+        }
+    }
+
     private static void openGeochecker(final Activity activity, final Geocache cache) {
         ShareUtils.openUrl(activity, CheckerUtils.getCheckerUrl(cache), true);
     }
@@ -883,7 +904,44 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(activity.cache.getCoords())));
                 activity.cacheDistanceView.bringToFront();
             }
+            if (activity.isLiveDetail) {
+                if (activity.compassMiniView != null && activity.compassMiniView == activity.findViewById(R.id.compass_action)) {
+                    activity.setActualCoordinates(geo.getCoords());
+                } else if (activity.cache != null && activity.cache.getCoords() != null) {
+                    activity.initCompassMiniView();
+                }
+            }
         }
+
+        @Override
+        public void updateDirection(final float direction) {
+            final CacheDetailActivity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+            if (activity.cacheDistanceView == null) {
+                return;
+            }
+            if (activity.isLiveDetail) {
+                if (activity.compassMiniView != null && activity.compassMiniView == activity.findViewById(R.id.compass_action)) {
+                    activity.setActualHeading(AngleUtils.getDirectionNow(direction));
+                } else if (activity.cache != null && activity.cache.getCoords() != null) {
+                    activity.initCompassMiniView();
+                }
+            }
+        }
+    }
+
+    public void setActualCoordinates(@NonNull final Geopoint coords) {
+        compassMiniView.updateCurrentCoords(coords);
+    }
+
+    public void setActualHeading(final float direction) {
+        if (Math.abs(AngleUtils.difference(azimuth, direction)) < 5) {
+            return;
+        }
+        azimuth = direction;
+        compassMiniView.updateAzimuth(azimuth);
     }
 
     private static final class LoadCacheHandler extends SimpleDisposableHandler {
