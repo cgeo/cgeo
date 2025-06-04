@@ -1055,6 +1055,10 @@ public class Settings {
         return getBoolean(R.string.pref_livelist, true);
     }
 
+    public static boolean useLiveCompassInNavigationAction() {
+        return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
+    }
+
     public static boolean isTrackableAutoVisit() {
         return getBoolean(R.string.pref_trackautovisit, false);
     }
