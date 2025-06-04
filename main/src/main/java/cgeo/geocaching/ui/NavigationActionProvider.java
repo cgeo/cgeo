@@ -1,7 +1,9 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.INavigationSource;
+import cgeo.geocaching.settings.Settings;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -43,9 +45,14 @@ public class NavigationActionProvider extends ActionProvider {
         if (navigationSource != null) {
 
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
-            view = layoutInflater.inflate(R.layout.navigation_action, null);
-
-            final View navItem = view.findViewById(R.id.default_navigation_action);
+            View navItem = null;
+            if (Settings.useLiveCompassInNavigationAction() && navigationSource instanceof CacheDetailActivity) {
+                view = layoutInflater.inflate(R.layout.compass_action_view, null);
+                navItem = view.findViewById(R.id.compass_action);
+            } else {
+                view = layoutInflater.inflate(R.layout.navigation_action, null);
+                navItem = view.findViewById(R.id.default_navigation_action);
+            }
 
             navItem.setOnClickListener(v -> navigationSource.startDefaultNavigation());
 
