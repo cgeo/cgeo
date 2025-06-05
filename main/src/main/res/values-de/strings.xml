@@ -1532,7 +1532,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Teilgenomen</string>
+    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1977,11 +1977,14 @@
     <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
-    <string name="export">Exportieren / Hochladen</string>
+    <string name="export">Exportieren</string>
+    <string name="export_upload">Exportieren / Hochladen</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
     <string name="export_failed">Exportieren fehlgeschlagen</string>
+    <string name="export_gpx">GPX exportieren</string>
     <string name="export_fieldnotes">Field notes exportieren</string>
+    <string name="fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
     <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
     <string name="export_fieldnotes_uploading">Hochladen…</string>

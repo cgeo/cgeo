@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Genegeerde talen</string>
     <string name="translator_preference_nottranslate_lng_summary">Brontalen om geen vertaling voor aan te bieden</string>
     <string name="translator_preference_disable">&lt;Schakel vertalen uit&gt;</string>
+    <string name="translator_preference_application_language">&lt;Gebruik applicatie taal&gt;</string>
     <string name="translator_model_download_select">Download offline vertalen taal</string>
     <string name="translator_model_download_confirm_title">Bevestig taaldownload</string>
     <string name="translator_model_download_confirm_txt">Vertaalmodel voor %s moet worden gedownload. Het model is grofweg 20-40 MB.</string>
@@ -358,6 +359,7 @@
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
     <string name="translator_language_unknown">Kan taal niet identificeren</string>
     <string name="translator_language_detected">Vertalen van \"%s\"</string>
+    <string name="translator_target_language">Vertaal naar \"%s\"</string>
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
     <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
@@ -931,6 +933,8 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
+    <string name="init_use_application_language">Gebruik applicatie taal</string>
+    <string name="init_translation_disabled">Vertalen uitgeschakeld</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
     <string name="system_default">Systeemstandaard</string>
@@ -1528,7 +1532,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Bijgewoond</string>
+    <string name="cache_status_attended">Was aanwezig</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1862,7 +1866,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema Opties</string>
+    <string name="google_maps_option_group_theme">Thema opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -1973,9 +1977,14 @@
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
+    <string name="export">Exporteren</string>
+    <string name="export_upload">Exporteren / Uploaden</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
     <string name="export_failed">Exporteren mislukt</string>
+    <string name="export_gpx">Exporteer GPX</string>
+    <string name="export_fieldnotes">Exporteren veldnotities</string>
+    <string name="fieldnotes">Veldnotities</string>
     <string name="export_fieldnotes_info">Veld-notities worden geëxporteerd naar /sdcard/field-notes met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_fieldnotes_upload">Upload naar geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploaden…</string>
@@ -1985,6 +1994,7 @@
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
+    <string name="export_persnotes">Persoonlijke notitie uploaden</string>
     <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d notitie succesvol geüpload</item>
@@ -2404,7 +2414,7 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Routering-doel wissen</string>
+    <string name="map_clear_manual_targets">Routeringsdoel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2565,7 +2575,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (alleen VTM, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>

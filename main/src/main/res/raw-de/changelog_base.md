@@ -25,7 +25,7 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
 - Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
-- Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
+- Änderung: Aktuellen Kartenausschnitt bei Anzeige der Caches einer Liste behalten, wenn alle Caches in den aktuellen Kartenausschnitt passen
 - Neu: Folge meinem Standort im Höhendiagramm (UnifiedMap)
 - Neu: Aktiviere "Verschieben" / "Kopieren" Aktionen für "Zeige als Liste"
 - Neu: Unterstützung für Elevate Winter Design im Kartendownloader
@@ -36,6 +36,9 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
 - Neu: Offline Hangschattierung für UnifiedMap (VTM-Variante)
 - Neu: Unterstützung für Hintergrundkarten (UnifiedMap)
+- Korrektur: Kompakte Icons kehren nicht zu großen Icons zurück, wenn sie im Auto-Modus eingeschoben werden (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -72,3 +75,4 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: GPX-Export: Exportieren von Logs / Trackables optional
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
+- Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an

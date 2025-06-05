@@ -36,6 +36,9 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Przytrzymaj dłużej przycisk „włącz online", aby załadować skrytki zapisane lokalnie
 - Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
 - Nowość: Obsługa map tła (UnifiedMap)
+- Naprawiono: Ikony kompaktowe nie wracały do dużych ikon przy powiększaniu w trybie automatycznym (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Szczegóły skrytki
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
@@ -72,3 +75,4 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Eksport GPX: eksport dzienników / przedmiotów podróżnych jest teraz opcjonalny
 - Nowość: Dodano przycisk do usunięcia szablonów dzienników
 - Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
+- Naprawiono: Pobieranie mapy oferowało uszkodzone (0 bajtów) pliki do pobrania
