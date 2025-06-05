@@ -37,6 +37,8 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
 - Nowość: Obsługa map tła (UnifiedMap)
 - Naprawiono: Ikony kompaktowe nie wracały do dużych ikon przy powiększaniu w trybie automatycznym (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Szczegóły skrytki
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
