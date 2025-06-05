@@ -4,39 +4,39 @@
 c:geo hat seit einiger Zeit eine komplett neue Kartenimplementierung namens "UnifiedMap", die bald die alten Implementierungen von Google Maps und Mapsforge (OpenStreetMap) ersetzen wird. Dies ist ein Abkündigungs-Hinweis und informiert über die weitere Planung.
 
 UnifiedMap wurde vor etwa einem Jahr veröffentlicht. Google Maps und OpenStreetMap (online + offline) werden weiterhin unterstützt, aber in komplett überarbeiteter technischer Art und Weise und mit vielen neuen Features, die die "alten" Karten nicht unterstützen. Einige davon sind:
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+- Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
+- Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
+- Kartenquellen ausblenden, die nicht benötigt werden
+- Höhendiagramm für Routen und Tracks
+- Wechseln zwischen Listen direkt auf der Karte
+- "Fahrmodus" für OpenStreetMap-basierte Karten
 
 UnfiedMap ist seit geraumer Zeit stabil, daher werden wir die alten Kartenimplementierungen entfernen, um die Aufwände zur Pflege von c:geo zu reduzieren.
 
 Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+- "Alte" Karten sind jetzt abgekündigt - wir werden dazu keine Fehler mehr beheben.
+- UnifiedMap wird für alle Benutzer im Herbst 2025 voreingestellt.
+- "Alte" Kartenimplementierungen werden im Frühjahr 2026 entfernt.
 
 Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen Implementierungen wechseln.
 
 ### Karte
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- Neu: Geo-Begrenzung für Labstationen anzeigen (UnifiedMap) - Aktiviere "Kreise" in den Kartenschnelleinstellungen, um sie anzuzeigen
+- Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
+- Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
+- Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
+- Änderung: Aktuellen Kartenausschnitt bei Anzeige der Caches einer Liste behalten, wenn alle Caches in den aktuellen Kartenausschnitt passen
+- Neu: Folge meinem Standort im Höhendiagramm (UnifiedMap)
+- Neu: Aktiviere "Verschieben" / "Kopieren" Aktionen für "Zeige als Liste"
+- Neu: Unterstützung für Elevate Winter Design im Kartendownloader
+- Neu: Adaptive Kartenschattierung, optionaler Modus mit hoher Qualität (UnifiedMap Mapsforge)
+- Neu: Neues Design für die Schnelleinstellungen für Routen/Tracks
+- Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
+- Neu: Erlaubt die Einstellung des Anzeigennamens für Offline-Karten in der Begleitdatei (UnifiedMap)
+- Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
+- Neu: Offline Hangschattierung für UnifiedMap (VTM-Variante)
+- Neu: Unterstützung für Hintergrundkarten (UnifiedMap)
+- Korrektur: Kompakte Icons kehren nicht zu großen Icons zurück, wenn sie im Auto-Modus eingeschoben werden (UnifiedMap)
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -73,4 +73,4 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: GPX-Export: Exportieren von Logs / Trackables optional
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
-- Fix: Map downloader offering broken (0 bytes) files for download
+- Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an
