@@ -1,12 +1,12 @@
 
 ### Karte
-- New: Route optimization caches calculated data
+- Neu: Routenoptimierung speichert Ergebnisse temporär
 
 ### Cache-Details
-- New: Detect additional characters in formulas: –, ⋅, ×
+- Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
 
 ### Wherigo Player
 
 ### Allgemein
-- New: Share option after logging a cache
-- Change: Do not show "needs maintenance" or "needs archived" options for own caches
+- Neu: Freigabeoption nach dem Loggen eines Caches
+- Änderung: Logoptionen "Benötigt Wartung" oder "Sollte archiviert werden" für eigene Caches ausblenden
