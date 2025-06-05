@@ -37,6 +37,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
 - Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### 캐시 상세정보
 - New: Offline translation of listing text and logs (experimental)
