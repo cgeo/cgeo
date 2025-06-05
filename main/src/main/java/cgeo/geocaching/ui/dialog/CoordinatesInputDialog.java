@@ -126,7 +126,9 @@ public class CoordinatesInputDialog extends DialogFragment {
     public static void show(final FragmentManager mgr, final CoordinateInputData inputData) {
 
         if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
-            CoordinatesCalculateGlobalDialog.show(mgr, inputData);
+            // TODO : Callback is not needed here but in the new usage by NewCoordinateInputDialog is is
+            // TODO : so its just here to allow the old code to build before it gets removed
+            CoordinatesCalculateGlobalDialog.show(mgr, null, inputData);
             return;
         }
 
@@ -277,7 +279,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 cc.setLongitudePattern(patternsFromGui.second);
 
                 inputData.setCalculatedCoordinate(cc);
-                CoordinatesCalculateGlobalDialog.show(myContext.getSupportFragmentManager(), inputData);
+                CoordinatesCalculateGlobalDialog.show(myContext.getSupportFragmentManager(), null, inputData);
                 dismiss();
             });
         }
