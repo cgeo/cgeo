@@ -3,7 +3,7 @@
 - New: Route optimization caches calculated data
 
 ### Cachedetaljer
-- New: Detect additional characters in formulas: –, ⋅, ×
+- Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
 
 ### Wherigo player
 
