@@ -41,6 +41,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -131,7 +132,7 @@ public final class StoredList extends AbstractList {
             model.setButtonSelectionIsMandatory(true)
                     .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> {
                         model.setSelectedItems(lastSelectedListSet);
-                        configureListDisplay(model, lastSelectedLists);
+                        configureListDisplay(model, Stream.concat(lastSelectedLists.stream(), selectedListIds.stream()).collect(Collectors.toSet()));
                         return lastSelectedListSet;
                     })
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
