@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Bild</string>
     <string name="log_delete_confirm">Möchten Sie das Log vom Typ \'%1$s\' des Autors \'%2$s\' mit dem Logdatum \'%3$s\' wirklich löschen?</string>
     <string name="log_offline_delete_confirm">Möchtest du wirklich das gespeicherte Offline-Log vom Typ \'%1$s\' mit dem Logdatum \'%2$s \' löschen?</string>
+    <string name="log_share_prefix_found">Ich habe %1$s (%2$s) gefunden:\n\n</string>
+    <string name="log_share_prefix_dnf">Ich konnte %1$s (%2$s) nicht finden:\n\n</string>
+    <string name="log_share_prefix_note">Ich habe eine Notiz zu %1$s (%2$s) verfasst:\n\n</string>
+    <string name="log_share_prefix_maintenance">Ich habe \"Benötigt Wartung\" für %1$s (%2$s) gemeldet:\n\n</string>
+    <string name="log_share_prefix_archive">Ich denke, %1$s (%2$s) sollte archiviert werden:\n\n</string>
+    <string name="log_share_prefix_default">Mein Log für %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Nicht erneut anzeigen</string>
     <string name="tap_icon_more_info">Für weitere Informationen tippe auf das Symbol</string>
     <string name="use_slider_adjust_value">Schieberegler verwenden, um den Wert anzupassen</string>
+    <string name="snackbar_action_share">Teilen</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
@@ -1977,10 +1984,14 @@
     <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
+    <string name="export">Exportieren</string>
+    <string name="export_upload">Exportieren / Hochladen</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
     <string name="export_failed">Exportieren fehlgeschlagen</string>
+    <string name="export_gpx">GPX exportieren</string>
     <string name="export_fieldnotes">Field notes exportieren</string>
+    <string name="fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
     <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
     <string name="export_fieldnotes_uploading">Hochladen…</string>
