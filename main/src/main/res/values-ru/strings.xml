@@ -221,9 +221,6 @@
     <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
     <string name="contact_multiple_matches">Контакт: Несколько совпадений</string>
     <!-- translation -->
-    <string name="translate">Перевести в приложении Google Translate</string>
-    <string name="translate_to_sys_lang">Перевести на %s (Веб)</string>
-    <string name="translate_to_english">Перевести на английский (Веб)</string>
     <string name="translate_length_warning">Перевод может произойти неисправно из-за большого количество текста.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -440,7 +437,6 @@
     <string name="caches_sort_geocode">Код тайника</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Собственный рейтинг</string>
-    <string name="caches_sort_inventory">Количество трекаблов</string>
     <string name="caches_sort_date_hidden">Дата создания</string>
     <string name="caches_sort_date_logged">Дата записи (Своя запись)</string>
     <string name="caches_sort_finds">Нахождения</string>
@@ -569,7 +565,6 @@
     <string name="cache_filter_hidden">Дата создания</string>
     <string name="cache_filter_eventdate">Дата события</string>
     <string name="cache_filter_logs_count">Количество записей</string>
-    <string name="cache_filter_inventory_count">Количество трекаблов</string>
     <string name="cache_filter_last_found">Дата последнего нахождения</string>
     <string name="cache_filter_log_entry">Запись в блокноте</string>
     <string name="cache_filter_location">Место</string>
@@ -1091,7 +1086,6 @@
     <string name="settings_info_themes_title">Информация по темам карт</string>
     <string name="settings_info_themes">c:geo поддерживает пользовательские темы для офлайн-карт. Они могут быть использованы для изменения цветового стиля карты (например, тёмный режим) или для выделения некоторых объектов, таких как велодорожки или линии уровней высот.\n\nРабота с несжатыми темами карт может снизить производительность открытия карты. В этом случае пользовательская папка темы может быть синхронизирована с локальной папкой приложения для ускорения доступа (ценой некоторого увеличения расхода внутренней памяти).</string>
     <string name="settings_info_hillshading_title">Информация о затенении высот</string>
-    <string name="settings_info_hillshading">Затенение высот- это метод создания топографических карт рельефа путем добавления к карте эффекта освещения для обозначения изменения высоты. Склоны будут затемнены или осветлены для создания 3D-эффекта.\nДанные о затенении можно загрузить из меню заливки карт.\nНе совместим с вариантом VTM в ЕдинойКарте.</string>
     <string name="settings_hillshading_enable">Затенение высот</string>
     <string name="init_hillshading_hq">Высококачественное затенение высот</string>
     <string name="init_summary_hillshading_hq">Более детальное наложение теней высот, но на ~50% медленнее отрисовывается при уменьшении масштаба</string>
@@ -1217,7 +1211,6 @@
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Использовать устаревший вариант карт</string>
     <string name="init_summary_useLegacyMap">Использовать старые версии Google Map / Mapsforge (OSM) карт вместо ЕдинойКарты</string>
-    <string name="category_unifiedMap">ЕдинаяКарта</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
     <string name="localstorage_migrate_status_major">Версия %1$d</string>
     <!-- proximity notification -->
@@ -1410,7 +1403,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">больше года назад</string>
     <string name="cache_premium">Премиум</string>
-    <string name="cache_inventory">Трекаблы</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_set_coordinates">Установить координаты</string>
     <string name="cache_personal_note">Персональные заметки</string>
@@ -1765,7 +1757,6 @@
     <string name="calccoord_guided_value">Значение</string>
     <string name="calccoord_convert_to_plain">Преобразовать в простые координаты</string>
     <string name="calccoord_plain_tools_title">Инструменты по работе с координатами в виде строки текста</string>
-    <string name="calccoord_remove_spaces">Удалить пробелы</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Заменить \'x\' на \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Вставить из буфера обмена</string>
     <string name="calccoord_generate_title">Создать путевые точки</string>
@@ -1899,7 +1890,6 @@
     <string name="add_target_to">Добавить цель в</string>
     <string name="search_address_started">Поиск мест</string>
     <string name="search_address_result">Найденные места</string>
-    <string name="search_own_caches">Мои тайники</string>
     <string name="search_pocket_title">Выборка</string>
     <string name="search_bookmark_list">Список закладок</string>
     <string name="search_pocket_is_new">новые</string>
@@ -2440,7 +2430,6 @@
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
     <string name="map_disable_autotarget_individual_route">\"Установить начало маршрута как цель\" отключено</string>
-    <string name="map_clear_manual_targets">Очистить цель навигации</string>
     <string name="map_manual_targets_cleared">Ручные цели очищены</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
@@ -2604,7 +2593,6 @@
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="hillshading_info">Оффлайн затенение высот</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
-    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования оффлайн карт (только для VTM, требуется перезапуск)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>

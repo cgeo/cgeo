@@ -1387,6 +1387,7 @@
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
+    <string name="cache_status_attended">Osallistui</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
     <string name="cache_status_archived">Arkistoitu</string>
@@ -1671,6 +1672,7 @@
     <string name="google_maps_option_group_map">Karttavalinnat</string>
     <string name="google_maps_option_show_traffic">Näytä liikenne</string>
     <string name="google_maps_option_show_buildings">Näytä 3D-rakennukset</string>
+    <string name="google_maps_option_group_theme">Teeman asetukset</string>
     <string name="google_maps_option_show_feature_theme">Näytä teeman ominaisuudet</string>
     <string name="google_maps_option_show_feature_administrative_all">Näytä hallinoiva</string>
     <string name="google_maps_option_show_feature_landscape_all">Näytä vaakataso</string>
@@ -1689,6 +1691,7 @@
     <string name="search_kw_disabled_hint">Poistettu käytöstä, koska geocaching.com ei tue sitä perusjäsenille</string>
     <string name="search_hbu">Piilottanut</string>
     <string name="search_finder">Löytänyt</string>
+    <string name="search_filter">Suodatin</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_destination">Avaa kohde c:geossa</string>

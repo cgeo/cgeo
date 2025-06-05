@@ -221,9 +221,6 @@
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- translation -->
-    <string name="translate">Přeložit v aplikaci Překladač Google</string>
-    <string name="translate_to_sys_lang">Přeložit do %s (Web)</string>
-    <string name="translate_to_english">Přeložit do angličtiny (Web)</string>
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -442,7 +439,6 @@
     <string name="caches_sort_geocode">Geokód</string>
     <string name="caches_sort_rating">Hodnocení</string>
     <string name="caches_sort_vote">Hlasy (vlastní hodnocení)</string>
-    <string name="caches_sort_inventory">Počet trasovatelných předmětů</string>
     <string name="caches_sort_date_hidden">Datum schování</string>
     <string name="caches_sort_date_logged">Datum zápisu (vlastní záznam)</string>
     <string name="caches_sort_finds">Počet nálezů</string>
@@ -579,7 +575,6 @@
     <string name="cache_filter_hidden">Datum skrytí</string>
     <string name="cache_filter_eventdate">Datum eventu</string>
     <string name="cache_filter_logs_count">Počet logů</string>
-    <string name="cache_filter_inventory_count">Počet trasovatelných předmětů</string>
     <string name="cache_filter_last_found">Datum posledního nálezu</string>
     <string name="cache_filter_log_entry">Záznam logu</string>
     <string name="cache_filter_location">Místo</string>
@@ -1100,7 +1095,6 @@
     <string name="settings_info_themes_title">Info o motivech mapy</string>
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
-    <string name="settings_info_hillshading">Stínování kopců je technika pro tvorbu map topografického reliéfu, která do mapy přidává světelný efekt pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nData pro stínování svahů lze stáhnout přes nabídku mapy.\nNení kompatibilní s variantou UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Stínování kopců</string>
     <string name="init_hillshading_hq">Stínování kopců ve vysoké kvalitě</string>
     <string name="init_summary_hillshading_hq">Detailnější překrytí stínování kopců, ale asi o 50 % pomalejší vykreslování při oddálení</string>
@@ -1228,7 +1222,6 @@
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Použít starší mapu</string>
     <string name="init_summary_useLegacyMap">Použít starší verze Google Map / Mapsforge (OSM) map namísto Sjednocené mapy</string>
-    <string name="category_unifiedMap">Sjednocená mapa</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -1422,7 +1415,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">před více než rokem</string>
     <string name="cache_premium">Prémiový účet</string>
-    <string name="cache_inventory">Trasovatelné předměty</string>
     <string name="cache_log_image_default_title">Fotografie</string>
     <string name="cache_set_coordinates">Nastavit souřadnice</string>
     <string name="cache_personal_note">Osobní poznámka</string>
@@ -1556,7 +1548,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Zúčastnil jsem se</string>
+    <string name="cache_status_attended">Účastnil se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -1783,13 +1775,11 @@
     <string name="calccoord_guided_value">Hodnota</string>
     <string name="calccoord_convert_to_plain">Převod na prosté souřadnice</string>
     <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
-    <string name="calccoord_remove_spaces">Odstranit mezery</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Nahradit \'x\' symbolem \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Vložit ze schránky</string>
     <string name="calccoord_generate_title">Vygenerovat trasové body</string>
     <string name="calccoord_generate_showonmap">Zobrazit na mapě</string>
     <string name="calccoord_generate_waypointnameprefix">Vygenerováno</string>
-    <string name="calccoord_generate_error_novarwithrange">Nebyla nalezena žádná platná proměnná s rozsahy (např. [:0-9] nebo [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Žádná kombinace nevrátila platné souřadnice</string>
     <string name="calccoord_generate_error_nogeopointselected">Není vybrána žádná souřadnice</string>
     <string name="calccoord_migrate_title">Přesun trasových bodů</string>
@@ -1918,7 +1908,6 @@
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
     <string name="search_address_result">Nalezená místa</string>
-    <string name="search_own_caches">Moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
@@ -2460,7 +2449,6 @@
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
-    <string name="map_clear_manual_targets">Vymazat cíl směrování</string>
     <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete odstranit všechny kešky/trasové body z vaší individuální trasy?</string>
@@ -2625,7 +2613,6 @@
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="hillshading_info">Offline stínování kopců</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
-    <string name="maptheme_vtm_scaling_summary">Možnosti měřítka pro offline mapy (pouze VTM, vyžaduje restart)</string>
     <string name="maptheme_scale_map_title">Měřítko mapy</string>
     <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
     <string name="maptheme_scale_text_title">Měřítko textu</string>
@@ -2688,7 +2675,6 @@
     <string name="wherigo_controls_stopgame_hint">Zastavit spuštěnou hru</string>
     <string name="wherigo_controls_mapzones_hint">Zobrazit zóny spuštěné hry na mapě</string>
     <string name="wherigo_controls_downloadcartridge_hint">Stáhnout cartridge (je potřebný cguid)</string>
-    <string name="wherigo_controls_reportproblem_hint">Zobrazit poslední problém s Wherigo</string>
     <string name="wherigo_controls_cache_context">Kontext kešky</string>
     <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
     <string name="wherigo_sound_title">Ovládání zvuku</string>
@@ -2734,7 +2720,6 @@
     <string name="wherigo_download_accept_eula">Přihlaste se prosím na www.wherigo.com a přijměte nejprve jejich podmínky</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
-    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>

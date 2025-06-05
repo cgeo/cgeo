@@ -21,21 +21,24 @@ Roadmap:
 Until then, you can switch between the different implementations in settings => map sources.
 
 ### Mapa
-- Novo: Mostrar perímetro de resposta para os pontos de AdventureLab (Mapa Unificado) — active "círculos" nas configurações rápidas do mapa para mostrá-los
-- Novo: Opção para definir círculos com raio individual para pontos adicionais (opção de menu "perímetro de resposta")
-- Correcção: Visualização do mapa não era actualizada ao remover a cache da lista actualmente mostrada
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on changing list contents
-- Alteração: Manter a visualização actual no mapeamento de uma lista, se todas as caches couberem na visualização actual
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
 - New: Follow my location in elevation chart (UnifiedMap)
 - New: Enable "move to" / "copy to" actions for "show as list"
-- Novo: Suporte para o tema Elevate Winter no gestor de transferências de mapas
-- Novo: Sombreado adaptativo de altitude, modo de alta qualidade opcional (Mapa Unificado Mapsforge)
-- Novo: Redesenhado menu de definições rápidas de percursos/rotas
-- Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
-- Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
+- New: Support Elevate Winter theme in map downloader
+- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Detalhes da cache
 - New: Offline translation of listing text and logs (experimental)
@@ -72,3 +75,4 @@ Until then, you can switch between the different implementations in settings => 
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Correcção: Ao importar o ficheiro de mapa local é atribuído um nome aleatório ao mapa
+- Fix: Map downloader offering broken (0 bytes) files for download

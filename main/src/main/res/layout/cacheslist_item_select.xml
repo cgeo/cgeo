@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:minHeight="36dip"
         android:layout_centerVertical="true"
-        android:scaleType="fitStart"
+        android:scaleType="center"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
