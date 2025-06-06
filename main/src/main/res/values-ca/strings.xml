@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Imatge</string>
     <string name="log_delete_confirm">Realment voleu suprimir el registre del tipus \"%1$s\" de l\'autor \"%2$s\" amb la data de registre \"%3$s\"?</string>
     <string name="log_offline_delete_confirm">Realment voleu suprimir el vostre registre fora de línia emmagatzemat del tipus \"%1$s\" amb la data de registre \"%2$s\"?</string>
+    <string name="log_share_prefix_found">He trobat %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">No he pogut trobar %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">He deixat una nota a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">He informat del manteniment necessari per a %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Crec que %1$s (%2$s) s\'hauria d\'arxivar:\n\n</string>
+    <string name="log_share_prefix_default">El meu registre de %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- Contacts -->
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
@@ -337,6 +343,7 @@
     <string name="dont_show_again">No ho tornis a mostrar</string>
     <string name="tap_icon_more_info">Toqueu la icona per obtenir més informació</string>
     <string name="use_slider_adjust_value">Utilitzeu el control lliscant per ajustar el valor</string>
+    <string name="snackbar_action_share">Comparteix</string>
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
     <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
@@ -1093,7 +1100,7 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els vessants s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
@@ -1399,7 +1406,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Rastrejables</string>
+    <string name="cache_inventory">Traçable</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
@@ -1533,7 +1540,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">Vaig assistir</string>
+    <string name="cache_status_attended">He assistit</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1764,7 +1771,7 @@
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
-    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
+    <string name="calccoord_generate_error_novarwithrange">Cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
@@ -1867,7 +1874,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
+    <string name="google_maps_option_group_theme">Opcions del Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
@@ -1889,6 +1896,7 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
+    <string name="most_recent">El més recent</string>
     <string name="search_destination">Obre la destinació al c: geo</string>
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>

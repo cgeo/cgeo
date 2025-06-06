@@ -1305,7 +1305,6 @@
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Uložený log</string>
-    <string name="cache_status_attended">Zúčastnil/a sa</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
     <string name="cache_status_archived">Archivovaná</string>
@@ -1576,7 +1575,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
-    <string name="google_maps_option_group_theme">Nastavenia Témy</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
@@ -1587,7 +1585,6 @@
     <string name="search_kw">Kľúčové slovo</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_finder">Nájdené kým</string>
-    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>
     <string name="search_destination">Otvoriť cieľ v c:geo</string>

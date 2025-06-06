@@ -1430,7 +1430,6 @@
     <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
     <string name="cache_status">Statut</string>
     <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
-    <string name="cache_status_attended">A participé</string>
     <string name="cache_status_found">Trouvée</string>
     <string name="cache_not_status_found">Non trouvée</string>
     <string name="cache_status_archived">Archivée</string>

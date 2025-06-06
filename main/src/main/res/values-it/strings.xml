@@ -221,6 +221,9 @@
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
     <string name="contact_multiple_matches">Contatto: risultati multipli</string>
     <!-- translation -->
+    <string name="translate">Traduci con l\'app Google Translate</string>
+    <string name="translate_to_sys_lang">Traduci in %s (Web)</string>
+    <string name="translate_to_english">Traduci in inglese (Web)</string>
     <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -435,6 +438,7 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Voto</string>
     <string name="caches_sort_vote">Il tuo voto</string>
+    <string name="caches_sort_inventory">Conteggio Tracciabili</string>
     <string name="caches_sort_date_hidden">Data</string>
     <string name="caches_sort_date_logged">Data Di Registrazione (propri log)</string>
     <string name="caches_sort_finds">Numero ritrovamenti</string>
@@ -557,6 +561,7 @@
     <string name="cache_filter_hidden">Data Nascosta</string>
     <string name="cache_filter_eventdate">Data evento</string>
     <string name="cache_filter_logs_count">Conteggio Log</string>
+    <string name="cache_filter_inventory_count">Conteggio Tracciabili</string>
     <string name="cache_filter_last_found">Data ultimo trovato</string>
     <string name="cache_filter_log_entry">Voce di Registro Log</string>
     <string name="cache_filter_location">Posizione</string>
@@ -1075,6 +1080,7 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
     <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
+    <string name="settings_info_hillshading">L\'ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono essere scaricate dal menu in sovraimpressione sulle mappe.\n Non compatibile con la variante VTM delle UnifiedMaps.</string>
     <string name="settings_hillshading_enable">Ombreggiatura</string>
     <string name="init_hillshading_hq">Ombreggiatura di alta qualità</string>
     <string name="init_summary_hillshading_hq">Ombreggiatura più dettagliata ma rendering ~50%% più lento quando ingrandito</string>
@@ -1200,6 +1206,7 @@
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Usa mappa legacy</string>
     <string name="init_summary_useLegacyMap">Usa le versioni precedenti delle mappe Google Map / Mapsforge (OSM) invece di UnifiedMap</string>
+    <string name="category_unifiedMap">Mappa Unificata</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
     <!-- proximity notification -->
@@ -1376,6 +1383,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Tracciabili</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Imposta coordinate</string>
     <string name="cache_personal_note">Note personali</string>
@@ -1731,6 +1739,7 @@
     <string name="calccoord_guided_value">Valore</string>
     <string name="calccoord_convert_to_plain">Converti in semplici coordinate</string>
     <string name="calccoord_plain_tools_title">Strumenti Semplici</string>
+    <string name="calccoord_remove_spaces">Rimuovi Spazi</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Sostituisci \'x\' con \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Incolla dagli appunti</string>
     <string name="calccoord_generate_title">Genera Waypoint</string>
@@ -1864,6 +1873,7 @@
     <string name="add_target_to">Aggiungi obiettivo a</string>
     <string name="search_address_started">Cerca per luoghi</string>
     <string name="search_address_result">Cerca luoghi</string>
+    <string name="search_own_caches">I miei cache</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista segnalibri</string>
     <string name="search_pocket_is_new">nuovo</string>
@@ -2379,6 +2389,7 @@
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
+    <string name="map_clear_manual_targets">Cancella obiettivo di routing</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
@@ -2538,6 +2549,7 @@
     <string name="brouter_info">Servizio di navigazione offline</string>
     <string name="hillshading_info">Ombreggiatura delle Mappe offline</string>
     <string name="maptheme_elevate_categoryinfo">Rilevante per: [A] Aree, [P] POI, [R] Percorsi, [W] Vie</string>
+    <string name="maptheme_vtm_scaling_summary">Opzioni di scala per le mappe offline (solo VTM, richiede riavvio)</string>
     <string name="maptheme_scale_map_title">Fattore di scala della mappa</string>
     <string name="maptheme_scale_map_summary">Scala della mappa; 100% = nessuna scala</string>
     <string name="maptheme_scale_text_title">Fattore di Scala del testo</string>

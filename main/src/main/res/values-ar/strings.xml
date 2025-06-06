@@ -573,7 +573,6 @@
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
-    <string name="cache_status_attended">تم حضورها</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
     <string name="cache_status_archived">تم أرشفته</string>
