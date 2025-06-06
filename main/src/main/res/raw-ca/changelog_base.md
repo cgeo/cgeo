@@ -37,8 +37,8 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Nou: ombrejat fora de línia per a UnifiedMap (variant VTM)
 - Nou: suport per a mapes de fons (UnifiedMap)
 - Solució: les icones compactes no tornen a les icones grans en fer zoom en mode automàtic (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Novetat: Accions de toc llarg al full d'informació del catxé: codi GC, títol del catxé, coordenades, nota/suggeriment personal
+- Canvi: canvia el toc llarg del full d'informació del catxé per al selector d'emojis a un toc breu per resoldre la col·lisió
 
 ### Detalls del catxé
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
