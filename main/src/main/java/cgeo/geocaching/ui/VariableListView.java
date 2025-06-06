@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.VariableListViewBinding;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.Log;
@@ -248,11 +249,10 @@ public class VariableListView extends LinearLayout {
                     return;
                 }
                 //disable filter
-                filterEnabled = false;
-                this.visibleVariables.clear();
-                this.setFilter(d -> true, true);
-
+                setVisibleVariables();
+                return;
             }
+
             //this is a costly operation
             //Thus check whether new and old set contains same elements (e.g. no change)
             if (filterEnabled && newVisibleVariables.size() == this.visibleVariables.size() && this.visibleVariables.containsAll(newVisibleVariables)) {
@@ -270,6 +270,19 @@ public class VariableListView extends LinearLayout {
                 ensureVariables(neededVars);
                 addVisibleVariables(neededVars);
             }
+        }
+
+        public void setVisibleVariables() {
+            //disable filter
+            this.filterEnabled = Settings.getHideCompletedVariables();
+            this.visibleVariables.clear();
+            this.setFilter(d -> filterEnabled ? !isVariableComplete(d.getVar()) : true, true);
+        }
+
+        private boolean isVariableComplete(final String var) {
+            // return StringUtils.isNotEmpty(this.variables.getState(var).getFormulaString();
+            return null != this.variables.getValue(var)
+                    && this.variables.getState(var).getState() == VariableMap.State.OK;
         }
 
         public void ensureVariables(final Collection<String> variables) {
@@ -385,7 +398,6 @@ public class VariableListView extends LinearLayout {
             this.variables.tidyUp(neededVars);
             this.setVisibleVariablesAndDependent(neededVars);
             setVariableList(this.variables);
-
         }
 
         public void clearAllVariables() {

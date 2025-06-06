@@ -232,7 +232,7 @@ public class VariableList {
             this.variableList.add(entry.varname);
             this.variablesSet.put(entry.varname, entry.id);
         }
-        wasModified = false;
+        resetModified();
     }
 
     public boolean wasModified() {
