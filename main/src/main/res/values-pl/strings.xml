@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Czy na pewno chcesz usunąć zapisany wpis typu \'%1$s\' z datą logowania \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Znalazłem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nie mogłem znaleźć %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Zostawiłem notatkę na %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Zgłosiłem konieczność konserwacji dla %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myślę, że %1$s (%2$s) powinna zostać zarchiwizowana:\n\n</string>
+    <string name="log_share_prefix_default">Mój wpis dla %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Nie wyświetlaj ponownie</string>
     <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
     <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
+    <string name="snackbar_action_share">Udostępnij</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
@@ -1232,7 +1239,7 @@
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
     <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
-    <string name="category_unifiedMap">Ujednolicona mapa (UnifiedMap)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1559,7 +1566,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1917,6 +1924,7 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtru** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
     <string name="search_tb">Przedmioty podróżne</string>
+    <string name="most_recent">Najnowsze</string>
     <string name="search_destination">Otwórz miejsce docelowe w c:geo</string>
     <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>
