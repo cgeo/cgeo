@@ -40,7 +40,8 @@
 
             <Button
                 android:id="@+id/variables_addnextchar"
-                style="@style/button_icon"
+                style="@style/button_icon_text"
+                android:text="@string/variables_add_next"
                 android:tooltipText="@string/variables_add_next"
                 app:icon="@drawable/ic_menu_add" />
 
