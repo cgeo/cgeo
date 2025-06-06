@@ -962,7 +962,6 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
-    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -1110,13 +1109,11 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
     <string name="search_address">地址</string>
     <string name="search_hbu">由藏寶</string>
-    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>
