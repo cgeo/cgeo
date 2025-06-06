@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Bild</string>
     <string name="log_delete_confirm">Möchten Sie das Log vom Typ \'%1$s\' des Autors \'%2$s\' mit dem Logdatum \'%3$s\' wirklich löschen?</string>
     <string name="log_offline_delete_confirm">Möchtest du wirklich das gespeicherte Offline-Log vom Typ \'%1$s\' mit dem Logdatum \'%2$s \' löschen?</string>
+    <string name="log_share_prefix_found">Ich habe %1$s (%2$s) gefunden:\n\n</string>
+    <string name="log_share_prefix_dnf">Ich konnte %1$s (%2$s) nicht finden:\n\n</string>
+    <string name="log_share_prefix_note">Ich habe eine Notiz zu %1$s (%2$s) verfasst:\n\n</string>
+    <string name="log_share_prefix_maintenance">Ich habe \"Benötigt Wartung\" für %1$s (%2$s) gemeldet:\n\n</string>
+    <string name="log_share_prefix_archive">Ich denke, %1$s (%2$s) sollte archiviert werden:\n\n</string>
+    <string name="log_share_prefix_default">Mein Log für %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Nicht erneut anzeigen</string>
     <string name="tap_icon_more_info">Für weitere Informationen tippe auf das Symbol</string>
     <string name="use_slider_adjust_value">Schieberegler verwenden, um den Wert anzupassen</string>
+    <string name="snackbar_action_share">Teilen</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
@@ -1532,7 +1539,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Habe teilgenommen</string>
+    <string name="cache_status_attended">Teilgenomen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1888,6 +1895,7 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
+    <string name="most_recent">Letzter</string>
     <string name="search_destination">Öffne Ziel in c:geo</string>
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
