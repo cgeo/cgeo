@@ -1988,6 +1988,14 @@ public class Settings {
         return getBoolean(R.string.pref_hideVisitedWaypoints, false);
     }
 
+    public static void setHideCompletedVariables(final boolean hideCompletedVariables) {
+        putBoolean(R.string.pref_hideCompletedVariables, hideCompletedVariables);
+    }
+
+    public static boolean getHideCompletedVariables() {
+        return getBoolean(R.string.pref_hideCompletedVariables, false);
+    }
+
     public static String getECIconSet() {
         return getString(R.string.pref_ec_icons, "1");
     }
