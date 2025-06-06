@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="log_delete_confirm">Weet u zeker dat u het log \'%1$s\' door auteur \'%2$s\' met logdatum \'%3$s \' wilt verwijderen?</string>
     <string name="log_offline_delete_confirm">Weet je zeker dat je je opgeslagen offline log van type \'%1$s\' met log datum \'%2$s \' wilt verwijderen?</string>
+    <string name="log_share_prefix_found">Ik vond %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Ik kon %1$s (%2$s):\n\n niet vinden</string>
+    <string name="log_share_prefix_note">Ik heb een notitie geplaatst voor %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Ik meldde dat er onderhoud nodig is voor %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Ik denk dat %1$s (%2$s) gearchiveerd zou moeten worden:\n\n</string>
+    <string name="log_share_prefix_default">Mijn log voor %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Niet meer weergeven</string>
     <string name="tap_icon_more_info">Tik op het pictogram voor meer informatie</string>
     <string name="use_slider_adjust_value">Gebruik de schuifregelaar om de waarde aan te passen</string>
+    <string name="snackbar_action_share">Delen</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
@@ -1532,7 +1539,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1866,7 +1873,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2414,7 +2421,7 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Routeringsdoel wissen</string>
+    <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2575,7 +2582,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (alleen VTM, herstart nodig)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
