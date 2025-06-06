@@ -744,7 +744,6 @@
     <string name="ignore_confirm_message">Ігнорування кешу означає, що цей кеш ніколи не буде використовуватися знову під час завантаження даних із схованки. м.Ви зможете знову побачити кеш не ігноруючи його на сайті.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Зберегти у журнал</string>
-    <string name="cache_status_attended">Взяв участь</string>
     <string name="cache_status_found">Знайдено</string>
     <string name="cache_not_status_found">Не знайдено</string>
     <string name="cache_status_archived">Архівний</string>
@@ -877,7 +876,6 @@
     <string name="map_as_list">показати як список</string>
     <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="quick_settings">Швидкі налаштування</string>
-    <string name="google_maps_option_group_theme">Параметри тем</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_address">Адреса</string>
