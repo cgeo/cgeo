@@ -1889,6 +1889,7 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
+    <string name="most_recent">El més recent</string>
     <string name="search_destination">Obre la destinació al c: geo</string>
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
