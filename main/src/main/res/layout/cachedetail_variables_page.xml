@@ -69,6 +69,13 @@
                 app:icon="@drawable/ic_menu_help" />
         </LinearLayout>
 
+        <CheckBox
+            android:id="@+id/hide_completed_variables"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cache_variables_hide_completed_variables"
+            tools:context=".VariablesViewPageFragment" />
+
         <View
             android:id="@+id/filter_storage_options_line"
             style="@style/separator_horizontal"
