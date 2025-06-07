@@ -37,8 +37,8 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
 - Nieuw: Ondersteuning voor achtergrondkaarten (UnifiedMap)
 - Oplossing: Compacte pictogrammen komen niet terug naar grote pictogrammen bij zoomen in automatische modus (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Nieuw: Lange tik acties in cache infosheet: GC code, cache-titel, coördinaten, persoonlijke notitie/hint
+- Wijziging: Schakelt lang tikken voor cache infosheet uit om kort tikken voor emoji selector om conflict op te lossen
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
