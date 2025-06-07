@@ -643,7 +643,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {
 
-        if (viewModel.mapType.waypointId > 0) { // single waypoint mode. No refresh in this case
+        if (viewModel.mapType.type == UMTT_TargetGeocode) { // single waypoint mode. No refresh in this case
             return;
         }
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
