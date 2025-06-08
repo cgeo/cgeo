@@ -76,3 +76,5 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: knop toegevoegd om log sjablonen te verwijderen
 - Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
 - Oplossing: Kaart-downloader biedt beschadigde (0 bytes) bestanden aan om te downloaden
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
