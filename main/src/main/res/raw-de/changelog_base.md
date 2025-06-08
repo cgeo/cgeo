@@ -76,3 +76,5 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
 - Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
