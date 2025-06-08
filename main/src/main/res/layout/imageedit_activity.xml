@@ -95,6 +95,12 @@
                 android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/log_img_view_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/log_image_view"/>
     </LinearLayout>
 
 </ScrollView>

@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -140,6 +141,21 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         }
 
         loadImage();
+
+        // check the image details
+        binding.logImgViewBtn.setOnClickListener(view -> {
+            if (image == null) {
+                Toast.makeText(view.getContext(),
+                                "Image not available",
+                                Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                final Intent imageDetailIntent = new Intent(getApplicationContext(), ImageDetailActivity.class);
+                // pass the image url
+                imageDetailIntent.putExtra("image_url", image.getUrl());
+                startActivity(imageDetailIntent);
+            }
+        });
     }
 
     @Override

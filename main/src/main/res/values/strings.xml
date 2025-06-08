@@ -197,7 +197,9 @@
     <string name="log_edit_image">Edit image</string>
     <string name="log_image_caption">Caption</string>
     <string name="log_image_description">Description</string>
+    <string name="log_image_details">Image Details</string>
     <string name="log_image_scale">Scaling</string>
+    <string name="log_image_view">View Image</string>
     <string name="log_password_title">Log Password:</string>
     <string name="log_report_problem">Report Problem:</string>
     <string name="log_hint_log_password">Enter your log password</string>
@@ -340,7 +342,8 @@
     <string name="info_log_post_failed">Posting log failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
     <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>"
+    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
+    "
     <string name="info_log_post_retry">Retry</string>
     <string name="info_log_post_save">Save offline</string>
     <string name="info_log_cleared">Log was cleared.</string>
