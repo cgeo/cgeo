@@ -76,3 +76,5 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Nou: S'ha afegit un botó per eliminar les plantilles de registre
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
 - Correcció: el descarregador de mapes ofereix fitxers trencats (0 bytes) per a la descàrrega
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
