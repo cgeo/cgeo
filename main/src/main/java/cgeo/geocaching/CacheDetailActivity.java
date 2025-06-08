@@ -153,6 +153,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import android.widget.Toast;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -456,7 +457,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public void onResume() {
         super.onResume();
-
         // resume location access
         startOrStopGeoDataListener(true);
 
@@ -1786,6 +1786,38 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.editPersonalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             binding.personalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
+            // === Always show Upload Personal Note button with proper state and message ===
+            final Button uploadButton = binding.uploadPersonalnote;
+            final PersonalNoteCapability connectorPN = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
+
+            if (uploadButton != null) {
+                if (!Network.isConnected()) {
+                    uploadButton.setEnabled(true);
+                    uploadButton.setAlpha(0.3f);
+                    uploadButton.setOnClickListener(v ->
+                            Toast.makeText(activity,
+                                    getString(R.string.personal_note_upload_unavailable_offline),
+                                    Toast.LENGTH_LONG).show());
+                } else if (connectorPN == null) {
+                    uploadButton.setEnabled(true);
+                    uploadButton.setAlpha(0.3f);
+                    uploadButton.setOnClickListener(v ->
+                            Toast.makeText(activity,
+                                    getString(R.string.personal_note_upload_unavailable_generic),
+                                    Toast.LENGTH_LONG).show());
+                } else if (!connectorPN.canAddPersonalNote(cache)) {
+                    uploadButton.setEnabled(true);
+                    uploadButton.setAlpha(0.3f);
+                    uploadButton.setOnClickListener(v ->
+                            Toast.makeText(activity,
+                                    getString(R.string.personal_note_upload_unavailable_not_pm),
+                                    Toast.LENGTH_LONG).show());
+                } else {
+                    uploadButton.setEnabled(true);
+                    uploadButton.setAlpha(1.0f);
+                    uploadButton.setOnClickListener(v -> activity.uploadPersonalNote());
+                }
+            }
             binding.storewaypointsPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
                 activity.storeWaypointsInPersonalNote(cache);
@@ -1797,14 +1829,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
             binding.personalnoteVarsOutOfSync.setOnClickListener(v -> handleVariableOutOfSync());
             activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
-            final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
-            if (connector != null && connector.canAddPersonalNote(cache)) {
-                binding.uploadPersonalnote.setVisibility(View.VISIBLE);
-                TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
-                binding.uploadPersonalnote.setOnClickListener(v -> activity.checkAndUploadPersonalNote(connector));
-            } else {
-                binding.uploadPersonalnote.setVisibility(View.GONE);
-            }
+            //final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
+            //if (connector != null && connector.canAddPersonalNote(cache)) {
+            //    binding.uploadPersonalnote.setVisibility(View.VISIBLE);
+            //    TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
+            //    binding.uploadPersonalnote.setOnClickListener(v -> activity.checkAndUploadPersonalNote(connector));
+            //} else {
+            //    binding.uploadPersonalnote.setVisibility(View.GONE);
+            //}
 
             final List<Image> spoilerImages = cache.getFilteredSpoilers();
             final boolean hasSpoilerImages = CollectionUtils.isNotEmpty(spoilerImages);
@@ -2722,13 +2754,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         if (cache.isOffline()) {
             offlineText.setText(Formatter.formatStoredAgo(cache.getDetailedUpdate()));
-
             offlineStore.setVisibility(View.GONE);
             offlineDrop.setVisibility(View.VISIBLE);
             offlineEdit.setVisibility(View.VISIBLE);
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-
             offlineStore.setVisibility(View.VISIBLE);
             offlineDrop.setVisibility(View.GONE);
             offlineEdit.setVisibility(View.GONE);

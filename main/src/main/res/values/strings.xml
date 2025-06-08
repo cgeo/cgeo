@@ -3132,4 +3132,15 @@
     <string name="emoji_category_people">People</string>
     <string name="emoji_category_numbers">Numbers</string>
 
+    <!-- Personal Note Upload States -->
+    <string name="personal_note_upload_unavailable_offline">
+        Currently offline – cannot upload personal notes.
+    </string>
+    <string name="personal_note_upload_unavailable_generic">
+        Personal note upload not supported on this site.
+    </string>
+    <string name="personal_note_upload_unavailable_not_pm">
+        Only Premium Members can upload personal notes.
+    </string>
+
 </resources>
