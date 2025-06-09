@@ -76,5 +76,5 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Dodano przycisk do usunięcia szablonów dzienników
 - Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
 - Naprawiono: Pobieranie mapy oferowało uszkodzone (0 bajtów) pliki do pobrania
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
+- Nowość: Dodano mapowanie dla niektórych brakujących typów skrzynek OC
+- Nowość: Przeniesiono listy „ostatnio używane” z oknie dialogowego wyboru listy na górę po naciśnięciu przycisku „ostatnio używane”
