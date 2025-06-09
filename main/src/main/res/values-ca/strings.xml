@@ -988,6 +988,7 @@
     <string name="init_summary_units">Utilitza unitats imperials (milles/peus) en lloc d\'unitats mètriques (quilòmetres/metres)</string>
     <string name="init_cachelists">Llistes de catxés</string>
     <string name="init_localization">Localització</string>
+    <string name="init_logs">Registres</string>
     <string name="init_log_offline">Registre fora de línia</string>
     <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
     <string name="init_choose_list">Demana una llista</string>
@@ -1005,6 +1006,8 @@
     <string name="init_custombnitem_default">Cerca propers (per defecte)</string>
     <string name="init_custombnitem_none">(cap)</string>
     <string name="init_custombnitem_empty_placeholder">(marcador de posició buit)</string>
+    <string name="init_title_collapse_log_limit">Límit de línia de registre</string>
+    <string name="init_summary_collapse_log_limit">Nombre màxim de línies per mostrar per als registres.Les línies addicionals es reduiran. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocodi</string>
     <string name="cacheListInfoItem_Difficulty">Dificultat</string>
@@ -1215,6 +1218,8 @@
     <string name="feature_favorite">S\'està afegint el catxé als preferits…</string>
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_appearance_general">Aparença general</string>
+    <string name="init_cachedetail_behaviour">Comportament</string>
+    <string name="init_cachedetail_note">Nota de catxé personal</string>
     <string name="init_maplines_title">Personalització dels colors del mapa</string>
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
