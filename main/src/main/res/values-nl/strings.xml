@@ -987,6 +987,7 @@
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
     <string name="init_cachelists">Cache lijsten</string>
     <string name="init_localization">Lokalisatie</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
@@ -1004,6 +1005,8 @@
     <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
     <string name="init_custombnitem_none">(geen)</string>
     <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
+    <string name="init_title_collapse_log_limit">Log regellimiet</string>
+    <string name="init_summary_collapse_log_limit">Maximaal aantal lijnen om te tonen voor logs. Extra lijnen worden samengevouwen. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
@@ -1214,6 +1217,8 @@
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
     <string name="init_appearance_general">Algemeen uiterlijk</string>
+    <string name="init_cachedetail_behaviour">Gedrag</string>
+    <string name="init_cachedetail_note">Persoonlijke cache notitie</string>
     <string name="init_maplines_title">Kaart kleuren aanpassen</string>
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
