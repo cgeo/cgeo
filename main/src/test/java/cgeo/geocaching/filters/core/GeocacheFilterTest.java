@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
 public class GeocacheFilterTest {
 
     @Test
@@ -70,7 +69,6 @@ public class GeocacheFilterTest {
         final GeocacheFilter f2 = GeocacheFilter.createEmpty();
         assertThat(f1.filtersSame(f2)).isTrue();
     }
-
 
     @Test
     public void filtersSameReturnsFalseIfInconclusiveDiffers() {
