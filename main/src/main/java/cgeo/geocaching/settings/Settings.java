@@ -1044,7 +1044,7 @@ public class Settings {
     }
 
     public static int getLogLineLimit() {
-        final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.list_load_limit_default));
+        final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
         if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {
             return 0;
         }
