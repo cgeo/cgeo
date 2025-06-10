@@ -1439,7 +1439,7 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setGeocode(@NonNull final String geocode) {
-        this.geocode = geocode;
+        this.geocode = StringUtils.length(geocode) >= 2 ? StringUtils.join(StringUtils.upperCase(geocode.substring(0, 2)), geocode.substring(2)) : StringUtils.upperCase(geocode);
     }
 
     public void setCacheId(final String cacheId) {
