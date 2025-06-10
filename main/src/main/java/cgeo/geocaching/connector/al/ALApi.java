@@ -383,7 +383,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode), true);
+            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode), false);
             final boolean isLinear = response.get("IsLinear").asBoolean();
             if (isLinear) {
                 cache.setAlcMode(1);
