@@ -239,7 +239,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
         // Finally if a geocache was found load it
         if (connector instanceof ISearchByGeocode && geocode != null) {
-            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
+            CacheDetailActivity.startActivity(this, geocode);
             return true;
         }
 
@@ -283,7 +283,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         // Finally if a trackable was found load it
         if (trackableBrand != TrackableBrand.UNKNOWN && !StringUtils.isEmpty(trackableCode)) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableCode.toUpperCase(Locale.US));
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableCode);
             trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId());
             if (keywordSearch) { // keyword fallback, if desired by caller
                 trackablesIntent.putExtra(Intents.EXTRA_KEYWORD, query);
@@ -560,7 +560,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         }
 
         if (ConnectorFactory.anyConnectorActive()) {
-            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
+            CacheDetailActivity.startActivity(this, geocode);
         } else {
             showToast(getString(R.string.warn_no_connector));
         }
@@ -573,7 +573,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         }
         Settings.addToHistoryList(R.string.pref_search_history_trackable, trackableText);
         final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText);
         startActivity(trackablesIntent);
     }
 

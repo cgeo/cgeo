@@ -5099,15 +5099,14 @@ public class DataStore {
     }
 
     /**
-     * Creates the WHERE clause for matching multiple geocodes. This automatically converts all given codes to
-     * UPPERCASE.
+     * Creates the WHERE clause for matching multiple geocodes.
      */
     @NonNull
     private static StringBuilder whereGeocodeIn(final Collection<String> geocodes) {
         final StringBuilder whereExpr = new StringBuilder("geocode IN (");
         final Iterator<String> iterator = geocodes.iterator();
         while (true) {
-            DatabaseUtils.appendEscapedSQLString(whereExpr, StringUtils.upperCase(iterator.next()));
+            DatabaseUtils.appendEscapedSQLString(whereExpr, iterator.next());
             if (!iterator.hasNext()) {
                 break;
             }
