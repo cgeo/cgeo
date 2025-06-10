@@ -994,6 +994,7 @@
     <string name="init_summary_units">Imperiale Einheiten (Meilen/Fuß)</string>
     <string name="init_cachelists">Cachelisten</string>
     <string name="init_localization">Lokalisierung</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
@@ -1011,6 +1012,8 @@
     <string name="init_custombnitem_default">Suche in der Nähe (Standard)</string>
     <string name="init_custombnitem_none">(keiner)</string>
     <string name="init_custombnitem_empty_placeholder">(leerer Platzhalter)</string>
+    <string name="init_title_collapse_log_limit">Limit für Logzeilen</string>
+    <string name="init_summary_collapse_log_limit">Maximale Anzahl Logzeilen, die ohne Einklappen gezeigt werden.</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
@@ -1221,6 +1224,7 @@
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
     <string name="init_appearance_general">Allgemeine Darstellung</string>
+    <string name="init_cachedetail_behaviour">Verhalten</string>
     <string name="init_maplines_title">Farbeinstellungen für die Karte</string>
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
