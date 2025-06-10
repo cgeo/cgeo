@@ -169,7 +169,7 @@ final class ALApi {
             if (!Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
-                    if (matchedLabCache.getGeocode().equals(geocode)) {
+                    if (matchedLabCache.getGeocode().equalsIgnoreCase(geocode)) {
                         gc.setFound(matchedLabCache.isFound());
                     }
                 }

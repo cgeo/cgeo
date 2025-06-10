@@ -466,7 +466,7 @@ public class Geocache implements INamedGeoCoordinate {
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
-                StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
+                StringUtils.equals(geocode, other.geocode) &&
                 StringUtils.equalsIgnoreCase(name, other.name) &&
                 cacheType.equals(other.cacheType) &&
                 size == other.size &&
