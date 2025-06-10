@@ -37,8 +37,8 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Offline Hangschattierung für UnifiedMap (VTM-Variante)
 - Neu: Unterstützung für Hintergrundkarten (UnifiedMap)
 - Korrektur: Kompakte Icons kehren nicht zu großen Icons zurück, wenn sie im Auto-Modus eingeschoben werden (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Neu: Langes Tippen im Cache-Popup: GC-Code, Cachetitel, Koordinaten, persönliche Notiz/Hinweis
+- Änderung: Langes Tippen im Cache-Popup für Emoji-Auswahl geändert in kurzes Tippen, um die Kollision zu beheben
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -76,3 +76,5 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
 - Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an
+- Neu: Zuordnungen für einige fehlende OC-Cache-Typen ergänzt
+- Neu: Verschiebe zuletzt zugeordnete Listen im Listenauswahldialog nach oben, wenn du "Letzte Auswahl" verwendest

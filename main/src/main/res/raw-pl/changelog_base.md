@@ -37,8 +37,8 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
 - Nowość: Obsługa map tła (UnifiedMap)
 - Naprawiono: Ikony kompaktowe nie wracały do dużych ikon przy powiększaniu w trybie automatycznym (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Nowość: Działania przy długim dotknięciu w arkuszu informacji o skrytce: kod GC, tytuł skrytki, współrzędne, notatka/podpowiedź
+- Zmiana: Wybór emoji ma zmienione wywołanie w celu rozwiązania kolizji (było długie dotknięcie w arkuszu informacji o skrytce, a teraz jest krótkie dotknięcie)
 
 ### Szczegóły skrytki
 - Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
@@ -76,3 +76,5 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Dodano przycisk do usunięcia szablonów dzienników
 - Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
 - Naprawiono: Pobieranie mapy oferowało uszkodzone (0 bajtów) pliki do pobrania
+- Nowość: Dodano mapowanie dla niektórych brakujących typów skrzynek OC
+- Nowość: Przeniesiono listy „ostatnio używane” z oknie dialogowego wyboru listy na górę po naciśnięciu przycisku „ostatnio używane”

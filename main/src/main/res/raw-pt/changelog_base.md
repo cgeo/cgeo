@@ -76,3 +76,5 @@ Until then, you can switch between the different implementations in settings => 
 - New: Added button to delete log templates
 - Correcção: Ao importar o ficheiro de mapa local é atribuído um nome aleatório ao mapa
 - Fix: Map downloader offering broken (0 bytes) files for download
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
