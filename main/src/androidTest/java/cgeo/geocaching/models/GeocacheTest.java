@@ -468,7 +468,7 @@ public class GeocacheTest {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
-        cache.setWaypoints(new ArrayList<>(), false);
+        cache.setWaypoints(new ArrayList<>());
         assertWaypointsParsed(cache, note, expectedWaypoints);
         cache.store(Collections.singleton(StoredList.TEMPORARY_LIST.id), null);
         removeCacheCompletely(geocode);

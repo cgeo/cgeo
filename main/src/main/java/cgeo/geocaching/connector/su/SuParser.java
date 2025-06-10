@@ -165,7 +165,7 @@ public class SuParser {
 
 
         if (data.has(CACHE_WPTS)) {
-            cache.setWaypoints(parseWaypoints((ArrayNode) data.path(CACHE_WPTS)), false);
+            cache.setWaypoints(parseWaypoints((ArrayNode) data.path(CACHE_WPTS)));
         }
 
         // TODO: Maybe put smth in Hint?
