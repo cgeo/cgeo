@@ -300,7 +300,7 @@ public class SuParser {
         cache.setName(data.get(CACHE_NAME).asText());
 
         cache.setType(parseType(data.get(CACHE_TYPE).asInt()));
-        cache.setGeocode(data.get(CACHE_CODE).asText());
+        cache.setGeocode(data.get(CACHE_CODE).asText().toUpperCase());
         cache.setHidden(parseDate(data.get(CACHE_HIDDEN).asText()));
 
         final double latitude = data.get(CACHE_LAT).asDouble();

@@ -847,7 +847,7 @@ final class OkapiClient {
     }
 
     private static void parseCoreCache(final ObjectNode response, @NonNull final Geocache cache) {
-        cache.setGeocode(response.get(CACHE_CODE).asText());
+        cache.setGeocode(response.get(CACHE_CODE).asText().toUpperCase());
         cache.setName(response.get(CACHE_NAME).asText());
         // not used: names
         setLocation(cache, response.get(CACHE_LOCATION).asText());

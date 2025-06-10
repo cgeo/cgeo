@@ -221,7 +221,7 @@ public final class BetterCacherAPI {
             }
             final Geocache cache = new Geocache();
             //set stump data
-            cache.setGeocode(gccode);
+            cache.setGeocode(gccode.toUpperCase());
             cache.setCategories(getCategories());
             cache.setTier(getTier());
 
@@ -330,7 +330,7 @@ public final class BetterCacherAPI {
             for (BetterCacherCache bcCache : caches) {
                 if (!bcCache.error && bcCache.gccode != null) {
                     bcCache.setFullData(fullData);
-                    bcCaches.put(bcCache.gccode, bcCache);
+                    bcCaches.put(bcCache.gccode.toUpperCase(), bcCache);
                 }
             }
             cLog.add(bcCaches.size() + " caches");

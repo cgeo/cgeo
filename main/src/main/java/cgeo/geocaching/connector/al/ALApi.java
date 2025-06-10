@@ -331,7 +331,7 @@ final class ALApi {
             final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
+            final String geocode = (ALConnector.GEOCODE_PREFIX + response.get("Id").asText()).toUpperCase();
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get(TITLE).asText());
@@ -366,7 +366,7 @@ final class ALApi {
             final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
+            final String geocode = (ALConnector.GEOCODE_PREFIX + response.get("Id").asText()).toUpperCase();
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
             cache.setGeocode(geocode);
