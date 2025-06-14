@@ -3144,7 +3144,7 @@ public class DataStore {
                     if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
                         final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
                         if (CollectionUtils.isNotEmpty(waypoints)) {
-                            cache.setWaypoints(waypoints, false);
+                            cache.setWaypoints(waypoints);
                         }
                     }
 

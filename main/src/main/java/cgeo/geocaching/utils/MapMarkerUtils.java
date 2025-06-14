@@ -749,7 +749,7 @@ public final class MapMarkerUtils {
 
     @SuppressWarnings("DiscouragedApi")
     private static Drawable getStageNumberMarker(final Resources res, final int stageNum, final float scaling) {
-        int counter = stageNum;
+        int counter = Math.max(stageNum, 1); // safeguard for stageNum == 0
         while (counter > 10) {
             counter = counter - 10;
         }

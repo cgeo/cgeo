@@ -428,11 +428,11 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void mergeWaypoints(final List<Waypoint> otherWaypoints, final boolean forceMerge) {
         if (waypoints.isEmpty()) {
-            this.setWaypoints(otherWaypoints, false);
+            this.setWaypoints(otherWaypoints);
         } else {
             final List<Waypoint> newPoints = new ArrayList<>(waypoints);
             Waypoint.mergeWayPoints(newPoints, otherWaypoints, forceMerge);
-            this.setWaypoints(newPoints, false);
+            this.setWaypoints(newPoints);
         }
     }
 
@@ -1379,11 +1379,8 @@ public class Geocache implements INamedGeoCoordinate {
 
     /**
      * @param waypoints      List of waypoints to set for cache
-     * @param saveToDatabase Indicates whether to add the waypoints to the database. Should be false if
-     *                       called while loading or building a cache
-     * @return {@code true} if waypoints successfully added to waypoint database
      */
-    public boolean setWaypoints(@Nullable final List<Waypoint> waypoints, final boolean saveToDatabase) {
+    public void setWaypoints(@Nullable final List<Waypoint> waypoints) {
         this.waypoints.clear();
         if (waypoints != null) {
             this.waypoints.addAll(waypoints);
@@ -1394,7 +1391,6 @@ public class Geocache implements INamedGeoCoordinate {
             }
         }
         resetFinalDefined();
-        return saveToDatabase && DataStore.saveWaypoints(this);
     }
 
     /**
@@ -2241,7 +2237,7 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public boolean isOffline() {
-        return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
+        return !lists.isEmpty() && (lists.size() > 1 || !lists.contains(StoredList.TEMPORARY_LIST.id));
     }
 
     public int getEventStartTimeInMinutes() {
