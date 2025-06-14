@@ -38,6 +38,7 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
         titleSelectTable = getString(R.string.dbi_select_title);
         database = DataStore.getDatabase(true);
         super.onCreate(savedInstanceState);
+        ActivityMixin.api35edgeToEdgeHelper(this);
 
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
