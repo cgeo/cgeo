@@ -2224,7 +2224,7 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public boolean isOffline() {
-        return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
+        return !lists.isEmpty() && (lists.size() > 1 || !lists.contains(StoredList.TEMPORARY_LIST.id));
     }
 
     public int getEventStartTimeInMinutes() {
