@@ -1127,6 +1127,8 @@
     <string name="init_summary_cacheListInfo">Select the additional information to be shown for each cache in cache lists</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
+    <string name="init_live_compass_in_navigation_action">Show direction in cache detail view</string>
+    <string name="init_summary_live_compass_in_navigation_action">Show an arrow with compass direction for caches in their detail view</string>
     <string name="init_quicklaunchitems">Quick launch buttons</string>
     <string name="init_summary_quicklaunchitems">Select one or more items as quick launch buttons on home screen</string>
     <string name="init_custombnitem">Custom Menu Item</string>

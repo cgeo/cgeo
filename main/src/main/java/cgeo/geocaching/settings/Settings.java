@@ -314,6 +314,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), prefsV0.getInt(getKey(R.string.pref_livelist), 1) != 0);
+            e.putBoolean(getKey(R.string.pref_live_compass_in_navigation_action), prefsV0.getBoolean(getKey(R.string.pref_live_compass_in_navigation_action), false));
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
@@ -1053,6 +1054,10 @@ public class Settings {
 
     public static boolean isLiveList() {
         return getBoolean(R.string.pref_livelist, true);
+    }
+
+    public static boolean useLiveCompassInNavigationAction() {
+        return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
     }
 
     public static boolean isTrackableAutoVisit() {
