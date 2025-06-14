@@ -463,7 +463,7 @@ dependencies {
 
     // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
     constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10") {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.21") {
             because 'align all versions of kotlin transitive dependencies'
         }
     }
