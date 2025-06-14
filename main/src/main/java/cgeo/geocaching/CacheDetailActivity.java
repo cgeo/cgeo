@@ -1963,8 +1963,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                         }
                         if (p.second) {
-                            binding.descriptionRenderFully.setVisibility(View.VISIBLE);
-                            binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
+                            binding.descriptionRenderFully.post(() -> {
+                                binding.descriptionRenderFully.setVisibility(View.VISIBLE);
+                                binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
+                            });
                         } else {
                             ((CacheDetailActivity) activity).lastActionWasEditNote = false;
                         }
