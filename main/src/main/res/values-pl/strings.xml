@@ -999,6 +999,7 @@
     <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_cachelists">Listy skrytek</string>
     <string name="init_localization">Lokalizacja</string>
+    <string name="init_logs">Logi</string>
     <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
@@ -1016,6 +1017,8 @@
     <string name="init_custombnitem_default">Szukaj w pobliżu (domyślnie)</string>
     <string name="init_custombnitem_none">(brak)</string>
     <string name="init_custombnitem_empty_placeholder">(pusty tekst zastępczy)</string>
+    <string name="init_title_collapse_log_limit">Limit linii dziennika</string>
+    <string name="init_summary_collapse_log_limit">Maksymalna liczba linii do pokazania w logach. Dodatkowe linie zostaną zwinięte. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokod</string>
     <string name="cacheListInfoItem_Difficulty">Trudność</string>
@@ -1226,6 +1229,8 @@
     <string name="feature_favorite">Dodaję skrytkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrytek</string>
     <string name="init_appearance_general">Ogólny wygląd</string>
+    <string name="init_cachedetail_behaviour">Zachowanie</string>
+    <string name="init_cachedetail_note">Osobista notatka do skrytki</string>
     <string name="init_maplines_title">Dostosowanie kolorów mapy</string>
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
@@ -1917,6 +1922,7 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtru** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
     <string name="search_tb">Przedmioty podróżne</string>
+    <string name="most_recent">Najnowsze</string>
     <string name="search_destination">Otwórz miejsce docelowe w c:geo</string>
     <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>

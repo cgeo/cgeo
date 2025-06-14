@@ -987,6 +987,7 @@
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
     <string name="init_cachelists">Cache lijsten</string>
     <string name="init_localization">Lokalisatie</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
@@ -1004,6 +1005,8 @@
     <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
     <string name="init_custombnitem_none">(geen)</string>
     <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
+    <string name="init_title_collapse_log_limit">Log regellimiet</string>
+    <string name="init_summary_collapse_log_limit">Maximaal aantal lijnen om te tonen voor logs. Extra lijnen worden samengevouwen. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
@@ -1214,6 +1217,8 @@
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
     <string name="init_appearance_general">Algemeen uiterlijk</string>
+    <string name="init_cachedetail_behaviour">Gedrag</string>
+    <string name="init_cachedetail_note">Persoonlijke cache notitie</string>
     <string name="init_maplines_title">Kaart kleuren aanpassen</string>
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
@@ -1888,6 +1893,7 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
     <string name="search_tb">Trackable</string>
+    <string name="most_recent">Meest recent</string>
     <string name="search_destination">Open bestemming in c:geo</string>
     <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
