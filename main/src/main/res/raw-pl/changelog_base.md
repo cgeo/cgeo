@@ -78,3 +78,4 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Naprawiono: Pobieranie mapy oferowało uszkodzone (0 bajtów) pliki do pobrania
 - Nowość: Dodano mapowanie dla niektórych brakujących typów skrzynek OC
 - Nowość: Przeniesiono listy „ostatnio używane” z oknie dialogowego wyboru listy na górę po naciśnięciu przycisku „ostatnio używane”
+- New: Share list of geocodes from cache list
