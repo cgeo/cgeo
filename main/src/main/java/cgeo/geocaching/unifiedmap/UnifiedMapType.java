@@ -136,10 +136,6 @@ public class UnifiedMapType implements Parcelable {
         return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
     }
 
-    public boolean isSingleCacheView() {
-        return type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_TargetGeocode || hasTarget();
-    }
-
     public boolean hasTarget() {
         return target != null && !target.isEmpty();
     }
