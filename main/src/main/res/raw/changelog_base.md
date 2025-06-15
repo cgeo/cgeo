@@ -5,6 +5,7 @@
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
+- New: Preserve timestamp of own logs on refreshing a cache
 
 ### Wherigo player
 
