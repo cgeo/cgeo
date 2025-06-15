@@ -1,11 +1,11 @@
 
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
-- New: Enabling live mode keeps waypoints of currently set target visible
+- Neu: Bei Aktivierung des Live-Modus bleiben Wegpunkte des aktuell gesetzten Ziels sichtbar
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
-- New: Preserve timestamp of own logs on refreshing a cache
+- Neu: Zeitstempel eigener Logs beim Aktualisieren eines Caches beibehalten
 
 ### Wherigo Player
 
