@@ -73,6 +73,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private VariableList varList;
     private VariableListView.VariablesListAdapter varListAdapter;
 
+    private static DialogCallback callback;
     private CoordinatescalculateglobalDialogBinding binding;
 
     private final TextSpinner<CalculatedCoordinateType> displayType = new TextSpinner<>();
@@ -90,8 +91,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
-        if (activity instanceof CoordinatesInputDialog.CoordinateUpdate) {
-            ((CoordinatesInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
+        if (activity instanceof NewCoordinateInputDialog.CoordinateUpdate) {
+            ((NewCoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
 
         //save changes to the var list
@@ -104,7 +105,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     /**
      * Displays an instance of the calculator dialog
      */
-    public static void show(final FragmentManager mgr, final CoordinateInputData initialState) {
+    public static void show(final FragmentManager mgr, final DialogCallback callbackMethod, final CoordinateInputData initialState) {
+        callback = callbackMethod;
         final CoordinatesCalculateGlobalDialog ccd = new CoordinatesCalculateGlobalDialog();
         final Bundle args = new Bundle();
         args.putParcelable(ARG_INPUT_DATA, initialState);
@@ -135,9 +137,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                     this.varList = cache.getVariables();
                 }
             }
-            if (varList == null) {
-                varList = new VariableList();
-            }
+        }
+        if (varList == null) {
+            varList = new VariableList();
         }
     }
 
@@ -194,9 +196,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         }
 
         binding.convertToPlain.setOnClickListener(v -> {
-            final CoordinateInputData cid = createFromDialog();
-            cid.setCalculatedCoordinate(null);
-            CoordinatesInputDialog.show(this.requireActivity().getSupportFragmentManager(), cid);
+            // When the callback is hit it will clear the calculator state associated with the waypoint
+            NewCoordinateInputDialog.show(this.requireActivity(), callback, createFromDialog().getGeopoint());
             dismiss();
         });
 
