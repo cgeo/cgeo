@@ -480,6 +480,7 @@
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
     <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Geänderte Koordinaten hochladen\" verwenden.</string>
+    <string name="caches_share_geocodes">Teile Liste mit Geocodes</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -1225,6 +1226,7 @@
     <string name="feature_voting">Cache bewerten</string>
     <string name="init_appearance_general">Allgemeine Darstellung</string>
     <string name="init_cachedetail_behaviour">Verhalten</string>
+    <string name="init_cachedetail_note">Persönliche Cachenotiz</string>
     <string name="init_maplines_title">Farbeinstellungen für die Karte</string>
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
