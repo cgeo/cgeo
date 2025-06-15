@@ -78,4 +78,4 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an
 - Neu: Zuordnungen für einige fehlende OC-Cache-Typen ergänzt
 - Neu: Verschiebe zuletzt zugeordnete Listen im Listenauswahldialog nach oben, wenn du "Letzte Auswahl" verwendest
-- New: Share list of geocodes from cache list
+- Neu: Liste mit Geocodes aus der Cacheliste teilen
