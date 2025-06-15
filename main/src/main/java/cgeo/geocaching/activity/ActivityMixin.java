@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Window;
@@ -21,6 +22,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -112,6 +117,20 @@ public final class ActivityMixin {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
+
+    /** helps c:geo to cope with new edge-to-edge enforcement of APK 35+ */
+    public static void api35edgeToEdgeHelper(final Activity activity) {
+        if (Build.VERSION.SDK_INT >= 35) {
+            WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), false);
+            ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content), (v, windowInsets) -> {
+                final Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                final float actionBarHeight = activity.getResources().getDimension(R.dimen.actionbar_height);
+                v.setPadding(insets.left, insets.top + (int) actionBarHeight, insets.right, insets.bottom);
+                return WindowInsetsCompat.CONSUMED;
+            });
+        }
+    }
+
 
     public static void invalidateOptionsMenu(final Activity activity) {
         if (activity instanceof AppCompatActivity) {
