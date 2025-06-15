@@ -78,3 +78,4 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Oplossing: Kaart-downloader biedt beschadigde (0 bytes) bestanden aan om te downloaden
 - Nieuw: Mappings toegevoegd voor enkele ontbrekende OC cache types
 - Nieuw: "recent gebruikte" Lijsten verplaatst in lijstselectie venster bovenaan bij drukken op de knop "recent gebruikt"
+- New: Share list of geocodes from cache list
