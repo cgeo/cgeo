@@ -37,8 +37,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
 - Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Nytt: Åtgärder för långtryck på cache-infosida: GC-kod, cachetitel, koordinater, personlig anteckning/ledtråd
+- Ändring: Byter cache infosida långtryck för emoji-väljare till kort tryck för att lösa kollisionen
 
 ### Cachedetaljer
 - Nyhet: Offline-översättning av notering, text och loggar (experimentell)
@@ -78,3 +78,4 @@ Until then, you can switch between the different implementations in settings => 
 - Fix: Map downloader offering broken (0 bytes) files for download
 - New: Added mappings for some missing OC cache types
 - New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
+- New: Share list of geocodes from cache list
