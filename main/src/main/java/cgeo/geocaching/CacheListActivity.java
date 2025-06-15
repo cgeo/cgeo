@@ -801,6 +801,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_upload_allcoords) {
             final Activity that2 = this;
             SimpleDialog.of(this).setTitle(R.string.caches_upload_allcoords_dialogtitle).setMessage(R.string.caches_upload_allcoords_warning).confirm(() -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
+        } else if (menuItem == R.id.menu_share_geocodes) {
+            shareGeocodes(adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_remove_from_history) {
             removeFromHistoryCheck();
             invalidateOptionsMenuCompatible();
@@ -1319,6 +1321,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
         new DeleteCachesFromListCommand(this, caches, listId, removeFromAllLists).execute();
+    }
+
+    private void shareGeocodes(@NonNull final Collection<Geocache> caches) {
+        final StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (Geocache cache : caches) {
+            sb.append(first ? "" : ',').append(cache.getGeocode());
+            first = false;
+        }
+        ShareUtils.sharePlainText(this, sb.toString());
     }
 
     private static final class LastPositionHelper {

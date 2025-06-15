@@ -517,6 +517,7 @@
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
     <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
+    <string name="caches_share_geocodes">Share list of geocodes</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
     <string name="caches_move_selected">Move selected</string>

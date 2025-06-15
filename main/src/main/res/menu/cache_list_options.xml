@@ -200,6 +200,11 @@
                 android:icon="@drawable/ic_menu_upload"
                 android:title="@string/caches_upload_allcoords"
                 app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/menu_share_geocodes"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/caches_share_geocodes"
+                app:showAsAction="ifRoom|withText" />
         </menu>
     </item>
     <item
