@@ -1,6 +1,7 @@
 
 ### Map
 - New: Route optimization caches calculated data
+- New: Enabling live mode keeps waypoints of currently set target visible
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
