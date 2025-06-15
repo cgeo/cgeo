@@ -2549,7 +2549,7 @@
     <string name="localfile_title">Otevřít místní soubor</string>
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Přijmout soubor</string>
+    <string name="receivedownload_intenttitle">Přijatý soubor</string>
     <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
