@@ -474,6 +474,7 @@
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
     <string name="caches_upload_allcoords_dialogtitle">ATENCIÓ - Pujant totes les coordenades</string>
     <string name="caches_upload_allcoords_warning">Això sobreescriurà les coordenades existents al servidor per a tots els catxés seleccionats de la vostra llista amb les coordenades de llista actuals a c: geo! Això només s’ha d’utilitzar en casos especials, Ex. en importar un fitxer GPX que conté coordenades corregides com a coordenades de llista. Això no es pot desfer i només l\'heu d\'utilitzar si sabeu què feu. En casos normals, és possible que vulgueu utilitzar la funció \"Pujar coordenades modificades\" del mateix menú.</string>
+    <string name="caches_share_geocodes">Comparteix la llista de geocodis</string>
     <string name="caches_refresh_selected">Actualitza els seleccionats</string>
     <string name="caches_refresh_all">Actualitza-ho tot</string>
     <string name="caches_move_selected">Mou els seleccionats</string>
