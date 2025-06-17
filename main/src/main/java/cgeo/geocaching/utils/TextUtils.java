@@ -660,5 +660,15 @@ public final class TextUtils {
         return result;
     }
 
+    public static boolean isEqualContent(final CharSequence cs1, final CharSequence cs2) {
+        if (cs1 == cs2) {
+            return true;
+        }
+        if (cs1 == null || cs2 == null) {
+            return false;
+        }
+        return cs1.toString().equals(cs2.toString());
+    }
+
 
 }
