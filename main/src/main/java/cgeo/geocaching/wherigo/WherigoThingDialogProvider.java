@@ -67,7 +67,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     }
 
     private void refreshGui(final Activity activity, final IWherigoDialogControl control, final WherigoThingDetailsBinding binding) {
-        TextParam.text(WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
+        TextParam.text(WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo, false, true);
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
         binding.headerInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
         if (eventTable instanceof Zone) {
@@ -75,7 +75,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         }
         //description and media
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
-        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
+        ViewUtils.setIfDiffers(binding.description, WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
