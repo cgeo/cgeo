@@ -1613,8 +1613,8 @@ public final class GCParser {
         }
     }
 
-    private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
 
+    private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
 
         final String userToken = parseUserToken(page);
@@ -1623,11 +1623,12 @@ public final class GCParser {
         final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
                 getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
 
-        final List<LogEntry> logsBlocked = logs.toList().blockingGet();
         final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
-        final List<LogEntry> friendLLogsBlocked = friendLogs.toList().blockingGet();
-        final OfflineLogEntry offlineLog = DataStore.loadLogOffline(cache.getGeocode());
 
+        // merge time from offline log
+        mergeOfflineLogTime(ownLogEntriesBlocked, DataStore.loadLogOffline(cache.getGeocode()));
+
+        // merge time from online-logs already stored in db (overrides possible offline log)
         List<LogEntry> ownLogsFromDb = Collections.emptyList();
         if (!ownLogEntriesBlocked.isEmpty()) {
             ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), true);
@@ -1635,11 +1636,6 @@ public final class GCParser {
                 ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), false);
             }
         }
-
-        // merge time from offline log
-        mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
-
-        // merge time from online-logs already stored in db (overrides possible offline log)
         mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
 
         if (cache.isFound() || cache.isDNF()) {
@@ -1651,10 +1647,17 @@ public final class GCParser {
             }
         }
 
-        final List<LogEntry> specialLogEntries = ListUtils.union(friendLLogsBlocked, ownLogEntriesBlocked);
-        mergeFriendsLogs(logsBlocked, specialLogEntries);
+        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), friendLogs.toList(), ownLogs.toList(),
+                (logEntries, friendLogEntries, ownLogEntries) -> {
+                    final List<LogEntry> specialLogEntries = ListUtils.union(friendLogEntries, ownLogEntries);
+                    mergeFriendsLogs(logEntries, specialLogEntries);
+                    return logEntries;
+                }).cache();
 
-        DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
+        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
+
+        // Wait for completion of logs parsing, retrieving and merging
+        mergedLogs.ignoreElement().blockingAwait();
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
@@ -1742,9 +1745,7 @@ public final class GCParser {
                 final Date dateTimeLogTime = new Date(mergedLog.date);
                 final Date logTime = new Date(logToMerge.date);
                 if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
-                    final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                    final int logIndex = mergedLogTimes.indexOf(mergedLog);
-                    mergedLogTimes.set(logIndex, updatedTimeLog);
+                    mergedLog.setDate(logToMerge.date);
                 }
             }
         }
@@ -1755,13 +1756,9 @@ public final class GCParser {
             return;
         }
 
-        // TODO iterate via index to avoid indexOf
         for (final LogEntry mergedLog : mergedLogTimes) {
             if (logToMerge.isMatchingLog(mergedLog)) {
-                final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                final int logIndex = mergedLogTimes.indexOf(mergedLog);
-                mergedLogTimes.set(logIndex, updatedTimeLog);
-
+                mergedLog.setDate(logToMerge.date);
                 break;
             }
         }
