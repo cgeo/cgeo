@@ -1720,13 +1720,12 @@ public final class GCParser {
      */
     private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {
-            final int logIndex = mergedLogs.indexOf(log);
-            if (logIndex < 0) {
-                mergedLogs.add(log);
-            } else {
-                final LogEntry friendLog = mergedLogs.get(logIndex);
+            if (mergedLogs.contains(log)) {
+                final LogEntry friendLog = mergedLogs.get(mergedLogs.indexOf(log));
                 final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                mergedLogs.set(logIndex, updatedFriendLog);
+                mergedLogs.set(mergedLogs.indexOf(log), updatedFriendLog);
+            } else {
+                mergedLogs.add(log);
             }
         }
     }
@@ -1737,15 +1736,15 @@ public final class GCParser {
             logTimesToMergeMap.put(logToMerge.serviceLogId, logToMerge);
         }
 
-        for (int i = 0; i < mergedLogTimes.size(); i++) {
-            final LogEntry mergedLog = mergedLogTimes.get(i);
+        for (final LogEntry mergedLog : mergedLogTimes) {
             final LogEntry logToMerge = logTimesToMergeMap.get(mergedLog.serviceLogId);
             if (logToMerge != null) {
                 final Date dateTimeLogTime = new Date(mergedLog.date);
                 final Date logTime = new Date(logToMerge.date);
                 if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
                     final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                    mergedLogTimes.set(i, updatedTimeLog);
+                    final int logIndex = mergedLogTimes.indexOf(mergedLog);
+                    mergedLogTimes.set(logIndex, updatedTimeLog);
                 }
             }
         }
@@ -1756,11 +1755,12 @@ public final class GCParser {
             return;
         }
 
-        for (int i = 0; i < mergedLogTimes.size(); i++) {
-            final LogEntry mergedLog = mergedLogTimes.get(i);
+        // TODO iterate via index to avoid indexOf
+        for (final LogEntry mergedLog : mergedLogTimes) {
             if (logToMerge.isMatchingLog(mergedLog)) {
                 final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                mergedLogTimes.set(i, updatedTimeLog);
+                final int logIndex = mergedLogTimes.indexOf(mergedLog);
+                mergedLogTimes.set(logIndex, updatedTimeLog);
 
                 break;
             }
