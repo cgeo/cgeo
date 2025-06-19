@@ -388,7 +388,7 @@
     <string name="menu_delete_offline_data">Offline-Daten löschen</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_search_clipboard">Geocode aus der Zwischenablage laden</string>
-    <string name="menu_history_longstring">Fundhistorie</string>
+    <string name="menu_history_longstring">Verlauf</string>
     <string name="menu_lists_pocket_queries">Pocket-Queries</string>
     <string name="menu_lists_bookmarklists">Lesezeichenlisten</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
