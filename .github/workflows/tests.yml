@@ -298,11 +298,17 @@ jobs:
       - name: Wait for lock on live tests
         id: lock-tests
         run: |
+          function unlock() {
+            curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock
+          }
+          # Unlock immediatelly if we just get the lock and the step is cancelled
+          trap unlock SIGINT
           TIMEOUT_MINUTES=120
           i=0
+          locked=false
           while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
             do ((i+=1))
-          done
+          done && locked=true
 
       - name: Check websites status
         uses: ./.github/actions/check-websites
