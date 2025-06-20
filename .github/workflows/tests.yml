@@ -206,16 +206,16 @@ jobs:
       matrix:
         api-level: [26, 30, 34]
     steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
       - name: Fail early if OC.de is not reachable
         uses: ./.github/actions/check-websites
         with:
           URLS: https://www.opencaching.de/
           with_error: "true"
-
-      - name: Checkout the latest code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
