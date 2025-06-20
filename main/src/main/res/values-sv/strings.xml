@@ -467,6 +467,7 @@
     <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
     <string name="caches_upload_allcoords_dialogtitle">VARNING - Laddar upp alla koordinater</string>
     <string name="caches_upload_allcoords_warning">Detta kommer att skriva över befintliga koordinater på servern för alla (valda) cacher i din lista med nuvarande listkoordinater i c:geo! Detta ska endast användas i särskilda fall, t.ex. när du importerade en GPX-fil som innehåller korrigerade koordinater som listningskoordinater. Detta kan inte ångras och du bör bara använda det om du vet vad du gör. I normala fall kanske du hellre vill använda funktionen \"Ladda upp modifierade koordinater\" ifrån samma meny.</string>
+    <string name="caches_share_geocodes">Dela lista med geocoder</string>
     <string name="caches_refresh_selected">Uppdatera valda</string>
     <string name="caches_refresh_all">Uppdatera alla</string>
     <string name="caches_move_selected">Flytta valda</string>
@@ -977,6 +978,7 @@
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_cachelists">Cache-listor</string>
     <string name="init_localization">Lokalisering</string>
+    <string name="init_logs">Loggar</string>
     <string name="init_log_offline">Snabbloggning</string>
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
@@ -994,6 +996,8 @@
     <string name="init_custombnitem_default">Närliggande sökning (standard)</string>
     <string name="init_custombnitem_none">(ingen)</string>
     <string name="init_custombnitem_empty_placeholder">(tom platshållare)</string>
+    <string name="init_title_collapse_log_limit">Gräns för loggrader</string>
+    <string name="init_summary_collapse_log_limit">Maximalt antal rader att visa för loggar. Ytterligare rader kommer att kollapsa. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Svårighetsgrad</string>
@@ -1203,6 +1207,8 @@
     <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
     <string name="feature_voting">Rösta på cacher</string>
     <string name="init_appearance_general">Allmänt utseende</string>
+    <string name="init_cachedetail_behaviour">Beteende</string>
+    <string name="init_cachedetail_note">Personlig cacheanteckning</string>
     <string name="init_maplines_title">Anpassning av kartfärger</string>
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
