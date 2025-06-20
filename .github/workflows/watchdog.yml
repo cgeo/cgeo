@@ -37,7 +37,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: [ "master", "release" ]
+        # Release disabled until next merge
+        # branch: [ "master", "release" ]
+        branch: [ "master" ]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
