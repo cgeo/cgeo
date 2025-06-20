@@ -286,7 +286,7 @@ jobs:
       # Allow only one job at a time (prevent errors on live GC tests)
       - name: Wait for lock on live tests
         run: |
-          TIMEOUT_MINUTES=15
+          TIMEOUT_MINUTES=120
           i=0
           while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
             do ((i+=1))
