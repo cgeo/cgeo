@@ -206,6 +206,12 @@ jobs:
       matrix:
         api-level: [26, 30, 34]
     steps:
+      - name: Fail early if OC.de is not reachable
+        uses: ./.github/actions/check-websites
+        with:
+          URLS: https://www.opencaching.de/
+          with_error: "true"
+
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
