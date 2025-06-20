@@ -3,11 +3,11 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MarkdownUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
@@ -182,23 +182,25 @@ public class TextParam {
      * * Calls {@link #adjust(TextView)} on the textview
      */
     public void applyTo(@Nullable final TextView view) {
-        applyTo(view, false);
+        applyTo(view, false, false);
     }
 
     /**
      * Applies the current settings of this TextParam to a textview.
-     * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
-     * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
      * * Sets text returned by {@link #getText(Context)}
      * * Calls {@link #adjust(TextView, boolean)} on the textview
+     * @param forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
+     * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
+     * @param ifContentDiffers if true then View text is only set if it differs from already contained text
+     * This is important if user selection should be remained across text view updates
      */
-    public void applyTo(@Nullable final TextView view, final boolean forceNoMovement) {
+    public void applyTo(@Nullable final TextView view, final boolean forceNoMovement, final boolean ifContentDiffers) {
 
         if (view == null) {
             return;
         }
         final CharSequence tcs = getText(view.getContext());
-        if (tcs != null) {
+        if (tcs != null && (!ifContentDiffers || !TextUtils.isEqualContent(tcs, view.getText()))) {
             view.setText(tcs);
         }
         adjust(view, forceNoMovement);

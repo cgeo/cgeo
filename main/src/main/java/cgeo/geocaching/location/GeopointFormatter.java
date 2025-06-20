@@ -127,6 +127,11 @@ public class GeopointFormatter {
      * @return the formatted coordinates
      */
     public static String format(final Format format, final Geopoint gp) {
+        if (gp == null) {
+            // should never happen - only to satisfy Play Store prelaunch tests
+            return "";
+        }
+
         final double latSigned = gp.getLatitude();
         final double lonSigned = gp.getLongitude();
         final char decimalSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();

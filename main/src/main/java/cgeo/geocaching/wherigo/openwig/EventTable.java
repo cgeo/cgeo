@@ -4,8 +4,6 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import androidx.annotation.NonNull;
-
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
@@ -14,10 +12,11 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
+import androidx.annotation.NonNull;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 
 public class EventTable implements LuaTable, Serializable {

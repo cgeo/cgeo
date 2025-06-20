@@ -391,7 +391,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void pushDialog(final String[] strings, final Media[] media, final String s, final String s1, final LuaClosure luaClosure) {
-        Log.iForce(LOG_PRAEFIX + "pushDialog:" + Arrays.asList(strings));
+        Log.iForce(LOG_PRAEFIX + "pushDialog:" + Arrays.asList(strings) + "/" + s + "/" + s1 + "/" + Arrays.asList(media));
         WherigoDialogManager.get().display(new WherigoPushDialogProvider(strings, media, s, s1, luaClosure));
     }
 
@@ -435,7 +435,9 @@ public class WherigoGame implements UI {
                 }
                 break;
             case DETAILSCREEN:
-                WherigoViewUtils.displayThing(null, details, true);
+                if (WherigoUtils.isVisibleToPlayer(details)) {
+                    WherigoViewUtils.displayThing(null, details, true);
+                }
                 break;
             default:
                 Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
