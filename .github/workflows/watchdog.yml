@@ -113,6 +113,9 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
         env:

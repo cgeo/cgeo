@@ -1,0 +1,41 @@
+name: Get stats about urls
+description: Get site stats using httpstat and curl
+
+inputs:
+  URLS:
+    description: The urls to test as json array
+    required: true
+    default: >-
+      https://geocaching.su/
+      https://geokrety.org/en
+      https://opencaching.nl/
+      https://opencaching.pl/
+      https://opencaching.us/
+      https://www.geocaching.com
+      https://www.opencaching.de/
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Check/install httpstat
+      shell: bash
+      run: |
+        # Check binary from PATH
+        ! type -P httpstat || exit 0
+
+        # Install
+        pip install httpstat
+
+    - name: Testing url
+      shell: bash
+      run: |
+        for url in ${{ inputs.URLS }}; do
+          echo
+          echo "Checking URL: ${url}"
+          httpstat "${url}" -4 || {
+            echo "::warning::${url} looks down"
+          }
+        done
+      env:
+        HTTPSTAT_SAVE_BODY: false
