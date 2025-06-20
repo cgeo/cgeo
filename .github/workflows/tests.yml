@@ -285,6 +285,7 @@ jobs:
 
       # Allow only one job at a time (prevent errors on live GC tests)
       - name: Wait for lock on live tests
+        id: lock-tests
         run: |
           TIMEOUT_MINUTES=120
           i=0
@@ -315,7 +316,8 @@ jobs:
             killall -INT crashpad_handler || true
 
       - name: Unlock live tests
-        if: always()
+        # unlock only if we locked it
+        if: always() && steps.lock-tests.conclusion == 'success'
         run: |
           curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
 
