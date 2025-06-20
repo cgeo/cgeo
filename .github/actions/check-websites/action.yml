@@ -8,11 +8,11 @@ inputs:
     default: >-
       https://geocaching.su/
       https://geokrety.org/en
-      https://opencaching.nl/
       https://opencaching.pl/
-      https://opencaching.us/
-      https://www.geocaching.com
+      https://www.geocaching.com/
       https://www.opencaching.de/
+      https://www.opencaching.nl/
+      https://www.opencaching.us/
 
 runs:
   using: "composite"
