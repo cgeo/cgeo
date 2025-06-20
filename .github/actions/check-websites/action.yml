@@ -35,8 +35,8 @@ runs:
           echo "Checking URL: ${url}"
           httpstat "${url}" -4 || {
             echo "::warning::${url} looks down"
-            echo -n "Runner IPv4: "; curl ifconfig.co -4 || true
-            echo -n "Runner IPv6: "; curl ifconfig.co -6 || true
+            echo -n "Runner IPv4: "; curl -qSs api.ipify.org || true; echo
+            echo -n "Runner IPv6: "; curl -qSs api6.ipify.org || true; echo
           }
         done
       env:
