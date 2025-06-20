@@ -25,6 +25,17 @@ permissions:
   pull-requests: write
 
 jobs:
+  check-websites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+
   check-secrets:
     runs-on: ubuntu-latest
     steps:
@@ -292,6 +303,9 @@ jobs:
           while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
             do ((i+=1))
           done
+
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
