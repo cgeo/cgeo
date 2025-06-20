@@ -299,7 +299,7 @@ jobs:
         id: lock-tests
         run: |
           function unlock() {
-            curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock
+            curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
           }
           # Unlock immediatelly if we just get the lock and the step is cancelled
           trap unlock SIGINT
