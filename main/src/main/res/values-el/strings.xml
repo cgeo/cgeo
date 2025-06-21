@@ -1214,7 +1214,6 @@
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
-    <string name="cache_status_attended">Συμμετείχα</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
@@ -1474,7 +1473,6 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
-    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -1485,7 +1483,6 @@
     <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_finder">Βρέθηκε από</string>
-    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
