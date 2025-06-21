@@ -6,6 +6,7 @@
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
 - Nou: conserva la marca de temps dels propis registres en actualitzar un catxé
+- Novetat: minivisualització de la brúixola opcional (vegeu la configuració => detalls del catxé => Mostra la direcció a la vista detallada del catxé)
 
 ### Wherigo Player
 
