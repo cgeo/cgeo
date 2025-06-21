@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Imagem</string>
     <string name="log_delete_confirm">Deseja mesmo eliminar o registo do tipo \'%1$s\' do autor \'%2$s\' com data de registo \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Quer mesmo apagar o seu registo offline armazenado do tipo \'%1$s\', com data de registo de \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Eu encontrei %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Eu não consegui encontrar %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Deixei uma nota em %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Reportei precisa de manutenção para %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Acho que %1$s (%2$s) deve ser arquivado:\n\n</string>
+    <string name="log_share_prefix_default">O meu registo para %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- Contacts -->
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Não mostrar novamente</string>
     <string name="tap_icon_more_info">Toque no ícone para mais informações</string>
     <string name="use_slider_adjust_value">Use o controle deslizante para ajustar o valor</string>
+    <string name="snackbar_action_share">Partilhar</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
@@ -1871,7 +1878,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1890,7 +1897,7 @@
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
     <string name="search_finder">Encontrada por</string>
-    <string name="search_filter">Filtrar</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="most_recent">Mais recentes</string>

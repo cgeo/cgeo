@@ -550,7 +550,6 @@
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
-    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
