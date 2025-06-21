@@ -167,6 +167,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e("Error requesting indeterminate progress", ex);
         }
         initializeCommonFields();
+        ActivityMixin.api35edgeToEdgeHelper(this);
     }
 
     private void initializeCommonFields() {
