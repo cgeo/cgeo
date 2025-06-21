@@ -577,7 +577,6 @@
     <string name="ignore_confirm_message">Ang pag-ignore sa cache ay nangangahulugang ang cache na ito hindi na magaganap pa habang nagloload ng datos mula sa geocaching.com. Maaari mo lang makitang muli ang cache sa pag-unignore nito sa website.</string>
     <string name="cache_status">Katayuan</string>
     <string name="cache_status_offline_log">Naka-save na Log</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
     <string name="cache_status_archived">Naka-archive</string>
