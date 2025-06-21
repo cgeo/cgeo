@@ -1007,6 +1007,8 @@
     <string name="init_summary_cacheListInfo">Seleccioneu la informació addicional que es mostrarà per a cada catxé a les llistes de catxé</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
+    <string name="init_live_compass_in_navigation_action">Mostra la direcció a la vista detallada del catxé</string>
+    <string name="init_summary_live_compass_in_navigation_action">Mostra una fletxa amb la direcció de la brúixola pels catxés a la vista de detall</string>
     <string name="init_quicklaunchitems">Botons d\'inici ràpid</string>
     <string name="init_summary_quicklaunchitems">Seleccioneu un o més elements com a botons d\'inici ràpid a la pantalla d\'inici</string>
     <string name="init_custombnitem">Element de menú personalitzat</string>
