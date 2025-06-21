@@ -6,6 +6,7 @@
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
 - Nyhet: Bevara tidsstämpel för egna loggar vid uppdatering av en cache
+- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
 
 ### Wherigo player
 
