@@ -1006,6 +1006,8 @@
     <string name="init_summary_cacheListInfo">Selecteer de extra informatie die getoond moet worden voor elke cache in cache lijsten</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <string name="init_live_compass_in_navigation_action">Toon richting in cache detailweergave</string>
+    <string name="init_summary_live_compass_in_navigation_action">Toon een pijl met kompasrichting voor caches in hun detailweergave</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <string name="init_custombnitem">Aangepast Menu-Item</string>
