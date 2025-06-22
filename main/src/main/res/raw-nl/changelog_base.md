@@ -6,7 +6,7 @@
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
 - Nieuw: Behoud tijdstempel van eigen logs bij het vernieuwen van een cache
-- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
+- Nieuw: Optioneel kompas mini weergave (zie instellingen => cache details => Toon richting in cache detail weergave)
 
 ### Wherigo speler
 
