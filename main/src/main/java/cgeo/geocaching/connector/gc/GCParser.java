@@ -18,6 +18,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -76,8 +77,10 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
@@ -1593,25 +1596,8 @@ public final class GCParser {
             return;
         }
 
-        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-        final String userToken = parseUserToken(page);
-        final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
-        final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
-        final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
-                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.empty();
-        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
-                (logEntries, specialLogEntries) -> {
-                    mergeFriendsLogs(logEntries, specialLogEntries);
-                    return logEntries;
-                }).cache();
-        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
-        if (cache.isFound() || cache.isDNF()) {
-            ownLogs.subscribe(logEntry -> {
-                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
-                    cache.setVisitedDate(logEntry.date);
-                }
-            });
-        }
+        // merge log-entries (friend-logs and log-times)
+        mergeAndStoreLogEntries(cache, page, handler);
 
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
@@ -1625,9 +1611,52 @@ public final class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
+    }
 
-        // Wait for completion of logs parsing, retrieving and merging
-        mergedLogs.ignoreElement().blockingAwait();
+    private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
+
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+
+        final String userToken = parseUserToken(page);
+        final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
+        final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
+        final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
+                getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
+
+        final List<LogEntry> logsBlocked = logs.toList().blockingGet();
+        final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
+        final List<LogEntry> friendLLogsBlocked = friendLogs.toList().blockingGet();
+        final OfflineLogEntry offlineLog = DataStore.loadLogOffline(cache.getGeocode());
+
+        List<LogEntry> ownLogsFromDb = Collections.emptyList();
+        if (!ownLogEntriesBlocked.isEmpty()) {
+            ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), true);
+            if (ownLogsFromDb.isEmpty()) {
+                ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), false);
+            }
+        }
+
+        // merge time from offline log
+        final boolean offlineLogsMerged = mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+
+        // merge time from online-logs already stored in db (overrides possible offline log)
+        final boolean logTimesMerged = mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
+
+        if (cache.isFound() || cache.isDNF()) {
+            for (final LogEntry logEntry : ownLogEntriesBlocked) {
+                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
+                    cache.setVisitedDate(logEntry.date);
+                    break;
+                }
+            }
+        }
+
+        final List<LogEntry> specialLogEntries = ListUtils.union(friendLLogsBlocked, ownLogEntriesBlocked);
+        final boolean friendLogsMerged = mergeFriendsLogs(logsBlocked, specialLogEntries);
+
+        if (offlineLogsMerged || logTimesMerged || friendLogsMerged) {
+            DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
+        }
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
@@ -1691,16 +1720,66 @@ public final class GCParser {
      * @param mergedLogs  the list to merge logs with
      * @param logsToMerge the list of logs to merge
      */
-    private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
+    private static boolean mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
+        boolean logsMerged = false;
         for (final LogEntry log : logsToMerge) {
-            if (mergedLogs.contains(log)) {
-                final LogEntry friendLog = mergedLogs.get(mergedLogs.indexOf(log));
-                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                mergedLogs.set(mergedLogs.indexOf(log), updatedFriendLog);
-            } else {
+            final int logIndex = mergedLogs.indexOf(log);
+            if (logIndex < 0) {
                 mergedLogs.add(log);
+            } else {
+                final LogEntry friendLog = mergedLogs.get(logIndex);
+                if (!friendLog.friend) {
+                    final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                    mergedLogs.set(logIndex, updatedFriendLog);
+                    logsMerged = true;
+                }
             }
         }
+        return logsMerged;
+    }
+
+    private static boolean mergeLogTimes(final List<LogEntry> mergedLogTimes, final Iterable<LogEntry> logTimesToMerge) {
+        boolean logsMerged = false;
+
+        final Map<String, LogEntry> logTimesToMergeMap = new HashMap<>();
+        for (final LogEntry logToMerge : logTimesToMerge) {
+            logTimesToMergeMap.put(logToMerge.serviceLogId, logToMerge);
+        }
+
+        for (int i = 0; i < mergedLogTimes.size(); i++) {
+            final LogEntry mergedLog = mergedLogTimes.get(i);
+            final LogEntry logToMerge = logTimesToMergeMap.get(mergedLog.serviceLogId);
+            if (logToMerge != null) {
+                final Date dateTimeLogTime = new Date(mergedLog.date);
+                final Date logTime = new Date(logToMerge.date);
+                if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
+                    final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
+                    mergedLogTimes.set(i, updatedTimeLog);
+                    logsMerged = true;
+                }
+            }
+        }
+
+        return logsMerged;
+    }
+
+    private static boolean mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @Nullable OfflineLogEntry logToMerge) {
+        if (logToMerge == null) {
+            return false;
+        }
+
+        boolean logMerged = false;
+        for (int i = 0; i < mergedLogTimes.size(); i++) {
+            final LogEntry mergedLog = mergedLogTimes.get(i);
+            if (logToMerge.isMatchingLog(mergedLog)) {
+                final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
+                mergedLogTimes.set(i, updatedTimeLog);
+
+                logMerged = true;
+                break;
+            }
+        }
+        return logMerged;
     }
 
     @NonNull
