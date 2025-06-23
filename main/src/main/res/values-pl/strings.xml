@@ -1018,6 +1018,8 @@
     <string name="init_summary_cacheListInfo">Wybierz dodatkowe informacje, które mają być wyświetlane dla każdej skrytki na listach skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
+    <string name="init_live_compass_in_navigation_action">Pokaż kierunek w widoku szczegółów skrytki</string>
+    <string name="init_summary_live_compass_in_navigation_action">Pokaż strzałkę z kierunkiem kompasu dla skrytek w widoku szczegółów</string>
     <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
     <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
     <string name="init_custombnitem">Własny element menu</string>
