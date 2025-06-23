@@ -54,7 +54,9 @@ public final class MetadataUtils {
             return null;
         }
         try {
-            return ImageMetadataReader.readMetadata(imageStream);
+            final Metadata data = ImageMetadataReader.readMetadata(imageStream);
+            //throw new RuntimeException("test");
+            return data;
         } catch (IOException | ImageProcessingException | RuntimeException ie) {
             Log.w("[MetadataUtils] Problem reading metadata from " + description, ie);
         } finally {
@@ -84,7 +86,7 @@ public final class MetadataUtils {
     }
 
     public static int getOrientation(final Metadata metadata) {
-        return safeProcess("orientation", metadata, ExifInterface.ORIENTATION_NORMAL, () -> {
+        return safeProcess("orientation", metadata, ExifInterface.ORIENTATION_UNDEFINED, () -> {
 
             final Collection<ExifDirectoryBase> exifDirs = metadata.getDirectoriesOfType(ExifDirectoryBase.class);
             for (ExifDirectoryBase exifDir : exifDirs) {
