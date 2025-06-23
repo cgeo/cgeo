@@ -1625,7 +1625,7 @@ public final class GCParser {
 
         final List<LogEntry> logsBlocked = logs.toList().blockingGet();
         final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
-        final List<LogEntry> friendLLogsBlocked = friendLogs.toList().blockingGet();
+        final List<LogEntry> friendLogsBlocked = friendLogs.toList().blockingGet();
         final OfflineLogEntry offlineLog = DataStore.loadLogOffline(cache.getGeocode());
 
         List<LogEntry> ownLogsFromDb = Collections.emptyList();
@@ -1637,10 +1637,10 @@ public final class GCParser {
         }
 
         // merge time from offline log
-        final boolean offlineLogsMerged = mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+        mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
 
         // merge time from online-logs already stored in db (overrides possible offline log)
-        final boolean logTimesMerged = mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
+        mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
 
         if (cache.isFound() || cache.isDNF()) {
             for (final LogEntry logEntry : ownLogEntriesBlocked) {
@@ -1651,12 +1651,10 @@ public final class GCParser {
             }
         }
 
-        final List<LogEntry> specialLogEntries = ListUtils.union(friendLLogsBlocked, ownLogEntriesBlocked);
-        final boolean friendLogsMerged = mergeFriendsLogs(logsBlocked, specialLogEntries);
+        final List<LogEntry> specialLogEntries = ListUtils.union(friendLogsBlocked, ownLogEntriesBlocked);
+        mergeFriendsLogs(logsBlocked, specialLogEntries);
 
-        if (offlineLogsMerged || logTimesMerged || friendLogsMerged) {
-            DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
-        }
+        DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
@@ -1720,8 +1718,7 @@ public final class GCParser {
      * @param mergedLogs  the list to merge logs with
      * @param logsToMerge the list of logs to merge
      */
-    private static boolean mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
-        boolean logsMerged = false;
+    private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {
             final int logIndex = mergedLogs.indexOf(log);
             if (logIndex < 0) {
@@ -1731,16 +1728,12 @@ public final class GCParser {
                 if (!friendLog.friend) {
                     final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
                     mergedLogs.set(logIndex, updatedFriendLog);
-                    logsMerged = true;
                 }
             }
         }
-        return logsMerged;
     }
 
-    private static boolean mergeLogTimes(final List<LogEntry> mergedLogTimes, final Iterable<LogEntry> logTimesToMerge) {
-        boolean logsMerged = false;
-
+    private static void mergeLogTimes(final List<LogEntry> mergedLogTimes, final Iterable<LogEntry> logTimesToMerge) {
         final Map<String, LogEntry> logTimesToMergeMap = new HashMap<>();
         for (final LogEntry logToMerge : logTimesToMerge) {
             logTimesToMergeMap.put(logToMerge.serviceLogId, logToMerge);
@@ -1755,31 +1748,24 @@ public final class GCParser {
                 if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
                     final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
                     mergedLogTimes.set(i, updatedTimeLog);
-                    logsMerged = true;
                 }
             }
         }
-
-        return logsMerged;
     }
 
-    private static boolean mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @Nullable OfflineLogEntry logToMerge) {
+    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @Nullable OfflineLogEntry logToMerge) {
         if (logToMerge == null) {
-            return false;
+            return;
         }
 
-        boolean logMerged = false;
         for (int i = 0; i < mergedLogTimes.size(); i++) {
             final LogEntry mergedLog = mergedLogTimes.get(i);
             if (logToMerge.isMatchingLog(mergedLog)) {
                 final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
                 mergedLogTimes.set(i, updatedTimeLog);
-
-                logMerged = true;
                 break;
             }
         }
-        return logMerged;
     }
 
     @NonNull
