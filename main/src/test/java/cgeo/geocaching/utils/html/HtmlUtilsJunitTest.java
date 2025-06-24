@@ -14,13 +14,13 @@ public class HtmlUtilsJunitTest {
     @Test
     public void testFormattedHtml() {
         //check whether and how bad-formatted HTML is cleaned up
-        assertFormattedHtml(false, false, "<p att1='de\"f'   att2=\"value<>'&\"> text </p>", "<p att1=\"de&quot;f\" att2=\"value<>'&amp;\"> text </p>");
+        assertFormattedHtml(false, false, "<p att1='de\"f'   att2=\"value<>'&\"> text </p>", "<p att1=\"de&quot;f\" att2=\"value&lt;&gt;'&amp;\"> text </p>");
         assertFormattedHtml(false, false, "<p> text with line breaks <br> <br/> <div> no ending paragraph", "<p> text with line breaks <br> <br> </p><div> no ending paragraph</div>");
         assertFormattedHtml(false, false, "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment", "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment-->");
         assertFormattedHtml(false, false, "<p> Start a list <ul><li>first end the paragraph </p>", "<p> Start a list </p><ul><li>first end the paragraph <p></p></li></ul>");
 
         //check coloring
-        assertFormattedHtml(false, true, "<p att1='de\"f'   att2=\"value<>'&\"> text </p>", "[<p] [att1=\"][de&quot;f][\" att2=\"][value<>'&amp;][\"][>] text [</p>]");
+        assertFormattedHtml(false, true, "<p att1='de\"f'   att2=\"value<>'&\"> text </p>", "[<p] [att1=\"][de&quot;f][\" att2=\"][value&lt;&gt;'&amp;][\"][>] text [</p>]");
         assertFormattedHtml(false, true, "<p> text with line breaks <br> <br/> <div> no ending paragraph", "[<p>] text with line breaks [<br>] [<br>] [</p>][<div>] no ending paragraph[</div>]");
         assertFormattedHtml(false, true, "<p> text with comment <!-- my comment <>'& - -> --> </p> <!-- non-ending comment", "[<p>] text with comment [<!-- my comment <>'& - -> -->] [</p>] [<!-- non-ending comment-->]");
         assertFormattedHtml(false, true, "<p> Start a list <ul><li>first end the paragraph </p>", "[<p>] Start a list [</p>][<ul>][<li>]first end the paragraph [<p>][</p>][</li>][</ul>]");
