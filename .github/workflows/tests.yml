@@ -318,6 +318,9 @@ jobs:
 
       - name: Check websites status
         uses: ./.github/actions/check-websites
+        continue-on-error: true
+        with:
+          with_error: "true"
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2

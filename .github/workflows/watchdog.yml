@@ -46,6 +46,12 @@ jobs:
         with:
           ref: ${{ matrix.branch }}
 
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+        continue-on-error: true
+        with:
+          with_error: "true"
+
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
         run: |
@@ -114,9 +120,6 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
-
-      - name: Check websites status
-        uses: ./.github/actions/check-websites
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
