@@ -8,6 +8,8 @@ import java.util.function.Consumer;
 /** a dialog control interface passed to dialogs to control certain behaviour */
 public interface IWherigoDialogControl {
 
+    void setTitle(CharSequence title);
+
     void setPauseOnDismiss(boolean pauseOnDismiss);
 
     void setOnGameNotificationListener(BiConsumer<Dialog, WherigoGame.NotifyType> listener);

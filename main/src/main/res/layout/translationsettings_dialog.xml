@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp">
+
+    <TextView
+        style="@style/text_default"
+        android:text="@string/translator_language_select"/>
+
+    <Button
+        android:id="@+id/source_language_select"
+        style="@style/button_full"
+        android:text="to be replaced"/>
+
+    <TextView
+        style="@style/text_default"
+        android:text="Select target language"/>
+
+    <Button
+        android:id="@+id/target_language_select"
+        style="@style/button_full"
+        android:text="to be replaced"/>
+
+</LinearLayout>

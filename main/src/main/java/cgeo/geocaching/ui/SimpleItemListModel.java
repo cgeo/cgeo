@@ -523,6 +523,10 @@ public class SimpleItemListModel<T> {
         return this.actionListener;
     }
 
+    public void triggerRepaint() {
+        triggerChange(ChangeType.COMPLETE);
+    }
+
     private void triggerChange(final ChangeType mode) {
         for (Consumer<ChangeType> changeListener : this.changeListeners) {
             changeListener.accept(mode);
