@@ -7,6 +7,9 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorState;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 
 import android.app.Activity;
@@ -25,9 +28,13 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     private final CartridgeFile cartridgeFile;
     private final boolean infoOnly;
 
+    //TEST PURPOSES ONLY
+    private final Translator translator = new Translator();
+
     private enum CartridgeAction {
         PLAY(TextParam.id(R.string.play).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
         DELETE(TextParam.id(R.string.delete).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_delete))),
+        TRANSLATE(TextParam.text("Translate").setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_translate))),
         CLOSE(TextParam.id(R.string.close).setAllCaps(true).setImage(ImageParam.id(R.drawable.wherigo_close)));
 
         private final TextParam tp;
@@ -73,14 +80,26 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
+
+        translator.addListener((state, translatorImplementation) -> translateStateChange(state, translatorImplementation, binding));
+        translator.initialize(null, cartridgeFile.description);
+        control.setOnDismissListener(d -> {
+            translator.dispose();
+        });
+
         refreshGui(binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
 
         WherigoViewUtils.setViewActions(infoOnly ? Collections.singleton(CartridgeAction.CLOSE) : Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, 1, CartridgeAction::getTextParam, item -> {
+            if (item == CartridgeAction.TRANSLATE) {
+                TranslatorUtils.changeSettings(activity, translator);
+                return;
+            }
             control.dismiss();
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
+
             //Other actions require ending a running game (if any)
             WherigoUtils.ensureNoGameRunning(activity, () -> performActionAfterGameEnded(item, activity, saveGames));
         });
@@ -89,9 +108,29 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         return dialog;
     }
 
+    private void translateStateChange(final TranslatorState state, final Translator translator, final WherigoCartridgeDetailsBinding binding) {
+        final String stateString = "State:" + state + ", srcDSet:" + this.translator.getSourceLanguageDetected();
+        binding.debugInfoTitle.setText("Debug Info: " + stateString);
+        switch (state) {
+            case REINITIALIZED:
+                if (!this.translator.isEnabled()) {
+                    binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
+                }
+                break;
+            case READY:
+                if (this.translator.isEnabled()) {
+                    translator.translate(cartridgeFile.description, tr -> {
+                        binding.description.setText("TRANSLATED:\n" + tr + "\n\nORIGINAL:" + cartridgeFile.description);
+                    });
+                }
+
+        }
+    }
+
     private void refreshGui(final WherigoCartridgeDetailsBinding binding) {
         final String link = WherigoUtils.getWherigoDetailsUrl(cartridgeInfo.getCGuid());
         TextParam.text("**CGUID:** " + cartridgeInfo.getCGuid() + "  \n" +
+            "** Translator-State:** " + translator + "  \n" +
             "**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
             "**[" + LocalizationUtils.getString(R.string.cache_menu_browser) + "](" + link + ")**  \n" +
             "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
