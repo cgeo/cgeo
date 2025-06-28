@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.openwig.Cartridge;
 import cgeo.geocaching.wherigo.openwig.Engine;
@@ -66,10 +67,12 @@ public class WherigoGame implements UI {
     }
 
     private final AudioManager audioManager = new AudioManager();
+    private final Translator translator = new Translator(500);
 
     //filled overall (independent from current game)
     private String lastPlayedCGuid;
     private String lastSetContextGeocode;
+    private String startGameTranslationConfig;
 
     //filled on new/loadGame
     private CartridgeFile cartridgeFile;
@@ -169,6 +172,7 @@ public class WherigoGame implements UI {
             } else {
                 engine.start();
             }
+
         } catch (IOException ie) {
             Log.e(LOG_PRAEFIX + "Problem", ie);
         }
@@ -320,6 +324,14 @@ public class WherigoGame implements UI {
         this.contextGeocacheName = WherigoUtils.findGeocacheNameForGeocode(geocode);
     }
 
+    public void setStartGameTranslationConfig(final String translationConfig) {
+        this.startGameTranslationConfig = translationConfig;
+    }
+
+    public Translator getTranslator() {
+        return this.translator;
+    }
+
     private void runOnUi(final Runnable r) {
         AndroidRxUtils.runOnUi(r);
     }
@@ -338,6 +350,8 @@ public class WherigoGame implements UI {
         WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
         WherigoLocationProvider.get().connect();
         WherigoGameService.startService();
+
+        initializeTranslatorForGame();
     }
 
     @Override
@@ -363,6 +377,7 @@ public class WherigoGame implements UI {
         setContextGeocodeInternal(null);
         WherigoDialogManager.get().clear();
         audioManager.release();
+        translator.dispose();
     }
 
     @Override
@@ -398,6 +413,7 @@ public class WherigoGame implements UI {
     @Override
     public void pushInput(final EventTable input) {
         Log.iForce(LOG_PRAEFIX + "pushInput:" + input);
+        WherigoUtils.hookEventTableToTranslation(input);
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
@@ -414,6 +430,7 @@ public class WherigoGame implements UI {
     @Override
     public void showScreen(final int screenId, final EventTable details) {
         Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
+        WherigoUtils.hookEventTableToTranslation(details);
 
         switch (screenId) {
             case MAINSCREEN:
@@ -501,6 +518,12 @@ public class WherigoGame implements UI {
         }
         return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable).first;
     }
+
+    private void initializeTranslatorForGame() {
+        translator.reinit(this.startGameTranslationConfig, false, null);
+        translator.addStateListener((state, l) -> notifyListeners(NotifyType.REFRESH));
+    }
+
 
     public boolean isDebugModeForCartridge() {
         final String code = cartridgeInfo == null || cartridgeInfo.getCartridgeFile() == null ? null

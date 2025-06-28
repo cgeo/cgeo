@@ -10,10 +10,10 @@ import android.app.Activity;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
-import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Represents a dialog usable as a context menu for various elements.

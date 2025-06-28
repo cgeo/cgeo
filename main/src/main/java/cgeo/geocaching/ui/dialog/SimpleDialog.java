@@ -26,11 +26,12 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.util.Consumer;
-import androidx.core.util.Predicate;
-import androidx.core.util.Supplier;
+import androidx.viewbinding.ViewBinding;
 
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -46,6 +47,7 @@ public class SimpleDialog {
 
     private TextParam title;
     private TextParam message;
+    private View customView;
 
     private TextParam positiveButton = TextParam.id(android.R.string.ok);
     private TextParam negativeButton = TextParam.id(android.R.string.cancel);
@@ -224,6 +226,16 @@ public class SimpleDialog {
         return this;
     }
 
+    public SimpleDialog setCustomView(final View customView) {
+        this.customView = customView;
+        return this;
+    }
+
+    public SimpleDialog setCustomView(final ViewBinding customBinding) {
+        this.customView = customBinding.getRoot();
+        return this;
+    }
+
     public SimpleDialog setMessage(@StringRes final int stringId, final Object... params) {
         return setMessage(TextParam.id(stringId, params));
     }
@@ -347,6 +359,12 @@ public class SimpleDialog {
             this.message.applyTo(binding.dialogMessage);
         } else {
             binding.dialogMessage.setVisibility(View.GONE);
+        }
+        if (this.customView != null) {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
+            binding.dialogCustomviewholder.addView(this.customView);
+        } else {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
         }
 
         return new Pair<>(dialog, binding);

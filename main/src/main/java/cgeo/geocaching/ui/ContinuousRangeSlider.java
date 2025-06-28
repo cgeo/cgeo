@@ -15,11 +15,11 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import com.google.android.material.slider.RangeSlider;
 import org.apache.commons.lang3.tuple.ImmutablePair;
