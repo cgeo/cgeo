@@ -16,32 +16,22 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CountryFilterFactory implements IFilterFactory {
-
-
-    static class CountryFilter extends AbstractFilter {
-        private @NonNull String location;
-
-        public static final Creator<CountryFilter> CREATOR = new Creator<CountryFilter>() {
-
-            @Override
-            public CountryFilter createFromParcel(final Parcel in) {
-                return new CountryFilter(in);
-            }
-
-            @Override
-            public CountryFilter[] newArray(final int size) {
-                return new CountryFilter[size];
-            }
-        };
-
-        CountryFilter(final String location, final String title) {
-            super(title);
-            this.location = Objects.requireNonNull(location);
+    Creator<CountryFilter> CREATOR = new Creator<CountryFilter>() {
+        @Override
+        public CountryFilter createFromParcel(final Parcel in) {
+            return new CountryFilter(Objects.requireNonNull(in.readString()), null);
         }
 
-        CountryFilter(final Parcel in) {
-            super(in);
-            location = Objects.requireNonNull(in.readString());
+        @Override
+        public CountryFilter[] newArray(final int size) {
+            return new CountryFilter[size];
+        }
+    };
+    
+    record CountryFilter(@NonNull String location, String title) extends AbstractFilter {
+
+        CountryFilter {
+            super(title);
         }
 
         @Override
@@ -60,7 +50,6 @@ public class CountryFilterFactory implements IFilterFactory {
                 return location.endsWith(this.location);
             }
         }
-
     }
 
     @Override
