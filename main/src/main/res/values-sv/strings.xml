@@ -998,6 +998,8 @@
     <string name="init_summary_cacheListInfo">Välj den ytterligare information som ska visas för varje cache i cachelistor</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
+    <string name="init_live_compass_in_navigation_action">Visa riktning i detaljvy för cache</string>
+    <string name="init_summary_live_compass_in_navigation_action">Visa en pil med kompassriktning för cacher i en lista</string>
     <string name="init_quicklaunchitems">Snabbstartsknappar</string>
     <string name="init_summary_quicklaunchitems">Välj en eller flera objekt som snabbstartsknappar på startskärmen</string>
     <string name="init_custombnitem">Anpassat menyobjekt</string>
