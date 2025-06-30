@@ -76,6 +76,6 @@ Until then, you can switch between the different implementations in settings => 
 - New: Added button to delete log templates
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
 - Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
+- Nytt: Lade till mappningar för vissa saknade OC-cache-typer
+- Nytt: Flytta "nyligen använda"-listorna i dialogrutan för val av lista till toppen när du trycker på "nyligen använda"-knappen
+- Nyhet: Dela en lista med geocoder från cachelistan

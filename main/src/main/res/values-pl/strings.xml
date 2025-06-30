@@ -477,6 +477,7 @@
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
     <string name="caches_upload_allcoords_dialogtitle">UWAGA - Przesyłanie wszystkich współrzędnych</string>
     <string name="caches_upload_allcoords_warning">Spowoduje to nadpisanie istniejących współrzędnych na serwerze dla wszystkich (zaznaczonych) skrytek na Twojej liście bieżącymi współrzędnymi zapisanymi w c:geo! Tę operację można zastosować tylko w szczególnych przypadkach, np. gdy zaimportowałeś plik GPX, który zawiera skorygowane współrzędne. Nie można cofnąć tej operacji i powinieneś ją używać tylko wtedy, gdy wiesz, co robisz. W normalnych przypadkach możesz raczej chcieć użyć funkcji „Wyślij zmodyfikowane współrzędne” w tym samym menu.</string>
+    <string name="caches_share_geocodes">Udostępnij listę geokodów</string>
     <string name="caches_refresh_selected">Odśwież wybrane</string>
     <string name="caches_refresh_all">Odśwież wszystkie</string>
     <string name="caches_move_selected">Przenieś zaznaczone</string>
