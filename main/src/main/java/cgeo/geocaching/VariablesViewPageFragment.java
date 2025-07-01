@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.CachedetailVariablesPageBinding;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -42,6 +43,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         this.adapter = varList.getAdapter();
         adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
         adapter.setChangeCallback(v -> {
+            binding.variablesAddnextchar.setEnabled(null != getAddNextChar());
             binding.variablesAddnextchar.setText(getAddNextCharText());
             if (activity != null && (previousVarSize < 0 || previousVarSize != v.size())) {
                 activity.reinitializePage(-1); //this just reinits the title bar, not the variable tab content
@@ -70,6 +72,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         });
 
+        binding.variablesAddnextchar.setEnabled(null != getAddNextChar());
         binding.variablesAddnextchar.setText(getAddNextCharText());
         binding.variablesAddnextchar.setOnClickListener(d -> {
             final Character lmc = adapter.getVariables().getLowestMissingChar();
@@ -81,15 +84,25 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         binding.variablesInfo.setOnClickListener(d -> ShareUtils.openUrl(
                 this.getContext(), LocalizationUtils.getString(R.string.formula_syntax_url), false));
 
+        binding.hideCompletedVariables.setChecked(Settings.getHideCompletedVariables());
+        binding.hideCompletedVariables.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Settings.setHideCompletedVariables(isChecked);
+            activity.reinitializePage(getPageId());
+        });
+
         return binding;
     }
 
-    private String getAddNextCharText() {
+    private Character getAddNextChar() {
         if (adapter == null || adapter.getVariables() == null) {
-            return "-";
+            return null;
         }
-        final Character lmc = adapter.getVariables().getLowestMissingChar();
-        return lmc == null ? "-" : "" + lmc;
+        return adapter.getVariables().getLowestMissingChar();
+    }
+
+    private String getAddNextCharText() {
+        final Character nextChar = getAddNextChar();
+        return nextChar == null ? "-" : "" + nextChar;
     }
 
     @Override
@@ -112,10 +125,17 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         if (cache == null) {
             return;
         }
-        adapter.setVariableList(cache.getVariables());
+        updateVariableList(cache);
+
         //register for changes of variableslist -> calculated waypoints may have changed
-        cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(() -> adapter.setVariableList(cache.getVariables())));
+        cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(() -> updateVariableList(cache)));
         binding.getRoot().setVisibility(View.VISIBLE);
+    }
+
+    private void updateVariableList(final Geocache cache) {
+        adapter.setVariableList(cache.getVariables());
+        adapter.setVisibleVariables();
+        adapter.sortVariables(TextUtils.COLLATOR::compare);
     }
 
     private void checkUnsavedChanges() {
