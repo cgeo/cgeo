@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.layers;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
@@ -93,8 +94,12 @@ public class NavigationTargetLayer {
                 }
             }
 
-            layer.put(KEY_TARGET_PATH, GeoPrimitive.createPolyline(Arrays.asList(routingPoints), lineStyle).buildUpon()
-                    .setZLevel(LayerHelper.ZINDEX_DIRECTION_LINE).build());
+            if (Settings.getRoutingMode() != RoutingMode.OFF) {
+                layer.put(KEY_TARGET_PATH, GeoPrimitive.createPolyline(Arrays.asList(routingPoints), lineStyle).buildUpon()
+                        .setZLevel(LayerHelper.ZINDEX_DIRECTION_LINE).build());
+            } else {
+                layer.remove(KEY_TARGET_PATH);
+            }
 
             mapDistanceDrawer.drawDistance(showBothDistances, currentGp.distanceTo(target.geopoint), routedDistance);
 

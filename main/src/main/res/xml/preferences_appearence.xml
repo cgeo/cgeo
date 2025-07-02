@@ -30,12 +30,6 @@
             android:summary="@string/init_summary_address"
             android:title="@string/init_address"
             app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_plainLogs"
-            android:summary="@string/init_summary_plain_logs"
-            android:title="@string/init_plain_logs"
-            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_quicklaunchitems"
             android:title="@string/init_quicklaunchitems"
@@ -96,6 +90,12 @@
             android:key="@string/pref_cacheListInfo"
             android:title="@string/init_title_cacheListInfo1"
             android:summary="@string/init_summary_cacheListInfo"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_livelist"
+            android:summary="@string/init_summary_livelist"
+            android:title="@string/init_livelist"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

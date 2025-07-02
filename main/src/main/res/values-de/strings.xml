@@ -473,6 +473,7 @@
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
     <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Geänderte Koordinaten hochladen\" verwenden.</string>
+    <string name="caches_share_geocodes">Teile Liste mit Geocodes</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -987,6 +988,7 @@
     <string name="init_summary_units">Imperiale Einheiten (Meilen/Fuß)</string>
     <string name="init_cachelists">Cachelisten</string>
     <string name="init_localization">Lokalisierung</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
@@ -1004,6 +1006,8 @@
     <string name="init_custombnitem_default">Suche in der Nähe (Standard)</string>
     <string name="init_custombnitem_none">(keiner)</string>
     <string name="init_custombnitem_empty_placeholder">(leerer Platzhalter)</string>
+    <string name="init_title_collapse_log_limit">Limit für Logzeilen</string>
+    <string name="init_summary_collapse_log_limit">Maximale Anzahl Logzeilen, die ohne Einklappen gezeigt werden.</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
@@ -1214,6 +1218,8 @@
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
     <string name="init_appearance_general">Allgemeine Darstellung</string>
+    <string name="init_cachedetail_behaviour">Verhalten</string>
+    <string name="init_cachedetail_note">Persönliche Cachenotiz</string>
     <string name="init_maplines_title">Farbeinstellungen für die Karte</string>
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
@@ -1532,7 +1538,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Teilgenomen</string>
+    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1888,6 +1894,7 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
+    <string name="most_recent">Letzter</string>
     <string name="search_destination">Öffne Ziel in c:geo</string>
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
@@ -1977,11 +1984,14 @@
     <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
-    <string name="export">Exportieren / Hochladen</string>
+    <string name="export">Exportieren</string>
+    <string name="export_upload">Exportieren / Hochladen</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">exportiert nach</string>
     <string name="export_failed">Exportieren fehlgeschlagen</string>
+    <string name="export_gpx">GPX exportieren</string>
     <string name="export_fieldnotes">Field notes exportieren</string>
+    <string name="fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
     <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
     <string name="export_fieldnotes_uploading">Hochladen…</string>

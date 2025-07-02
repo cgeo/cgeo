@@ -4,9 +4,13 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.io.*;
+import androidx.annotation.NonNull;
 
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Media extends EventTable {
 
@@ -64,5 +68,11 @@ public class Media extends EventTable {
         } catch (IOException e) {
             // meh
         }
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return id + ":" + name ;
     }
 }

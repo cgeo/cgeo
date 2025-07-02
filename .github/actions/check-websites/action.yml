@@ -1,0 +1,51 @@
+name: Get stats about urls
+description: Get site stats using httpstat and curl
+
+inputs:
+  with_error:
+    description: Set to true to exit with erro when a site fail
+    default: "false"
+  URLS:
+    description: The urls to test as json array
+    required: true
+    default: >-
+      https://geocaching.su/
+      https://geokrety.org/en
+      https://opencaching.pl/
+      https://www.geocaching.com/
+      https://www.opencaching.de/
+      https://www.opencaching.nl/
+      https://www.opencaching.us/
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Check/install httpstat
+      shell: bash
+      run: |
+        # Check binary from PATH
+        ! type -P httpstat || exit 0
+
+        # Install
+        pip install httpstat
+
+    - name: Testing url
+      shell: bash
+      run: |
+        has_failure=false
+        for url in ${{ inputs.URLS }}; do
+          echo
+          echo "Checking URL: ${url}"
+          httpstat "${url}" -4 --connect-timeout 15 || {
+            echo "::warning::${url} looks down"
+            has_failure=true
+          }
+        done
+        echo "Runner IPv4:"; curl -qSs api.ipify.org || true; echo
+        if $has_failure; then
+          echo "::warning::Some service(s) looks down"
+          [ "${{ inputs.with_error }}" != "true" ] || exit 1
+        fi
+      env:
+        HTTPSTAT_SAVE_BODY: false

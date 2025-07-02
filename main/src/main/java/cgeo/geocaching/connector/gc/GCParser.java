@@ -521,7 +521,7 @@ public final class GCParser {
         }
 
         // waypoints - reset collection
-        cache.setWaypoints(Collections.emptyList(), false);
+        cache.setWaypoints(Collections.emptyList());
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {

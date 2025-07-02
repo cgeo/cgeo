@@ -35,13 +35,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-secrets
     strategy:
+      fail-fast: false
       matrix:
-        branch: [ "master", "release" ]
+        # Release disabled until next merge
+        # branch: [ "master", "release" ]
+        branch: [ "master" ]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
           ref: ${{ matrix.branch }}
+
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+        continue-on-error: true
+        with:
+          with_error: "true"
 
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
@@ -128,7 +137,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew --no-configuration-cache main:connectedBasicDebugAndroidTest --no-daemon --continue -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest
+            ./gradlew --no-configuration-cache main:connectedBasicDebugAndroidTest --no-daemon --continue -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
       - name: Publish Test Report

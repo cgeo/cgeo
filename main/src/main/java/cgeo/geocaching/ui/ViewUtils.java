@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ScalableDrawable;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -725,6 +726,13 @@ public class ViewUtils {
     public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
         if (view != null) {
             applyMethod.call(view);
+        }
+    }
+
+    /** Sets a text on a text view ONLY if it differs from current text */
+    public static void setIfDiffers(@NonNull final TextView tv, @Nullable final CharSequence text) {
+        if (text != null && !TextUtils.isEqualContent(tv.getText(), text)) {
+            tv.setText(text);
         }
     }
 

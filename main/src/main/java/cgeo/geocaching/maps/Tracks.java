@@ -83,19 +83,23 @@ public class Tracks {
 
     public void traverse(final Action4<String, IGeoItemSupplier, Integer, Integer> action) {
         for (Track track : data) {
-            action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor(), track.trackfile.getWidth());
+            if (track.route != null) {
+                action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor(), track.trackfile.getWidth());
+            }
         }
     }
 
     public void traverse(final Action2<String, IGeoItemSupplier> action) {
         for (Track track : data) {
-            action.call(track.trackfile.getKey(), track.route);
+            if (track.route != null) {
+                action.call(track.trackfile.getKey(), track.route);
+            }
         }
     }
 
     public void find(final IGeoItemSupplier route, final Action2<String, IGeoItemSupplier> action) {
         for (Track track : data) {
-            if (track.getRoute().equals(route)) {
+            if (track.route != null && track.route.equals(route)) {
                 action.call(track.trackfile.getKey(), track.route);
             }
         }

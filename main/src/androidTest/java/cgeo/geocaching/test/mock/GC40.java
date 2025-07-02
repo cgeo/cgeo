@@ -77,7 +77,7 @@ public class GC40 extends MockedCache {
     @NonNull
     @Override
     public String getDescription() {
-        return "<br> <br> This is the oldest cache that you can log on continental Europe.<br>";
+        return "This is the oldest cache that you can log on continental Europe.<br>";
     }
 
     @NonNull

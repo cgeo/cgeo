@@ -58,7 +58,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
             map.getChild("", "DescriptionEnglish").setEndTextElementListener(body -> description = body);
             map.getChild("", "MapsforgeDateOfCreation").setEndTextElementListener(body -> dateInfo = body);
             map.setEndElementListener(() -> {
-                if (StringUtils.isNotBlank(url) && StringUtils.isNotBlank(dateInfo)) {
+                if (StringUtils.isNotBlank(url) && StringUtils.isNotBlank(dateInfo) && size > 0) {
                     result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType, ICONRES_MAP));
                 }
             });

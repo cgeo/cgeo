@@ -24,6 +24,22 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/mostRecent"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                layout="@layout/cacheslist_item_select"
+                />
+
+            <View style="@style/separator_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/clipboardGeocode"
             android:visibility="gone"
             android:layout_width="match_parent"

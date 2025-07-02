@@ -297,12 +297,16 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
+        int stagenum = 0;
         if (cache != null && cache.isLinearAlc()) {
             try {
-                insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, Integer.parseInt(waypoint.getPrefix()), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
+                stagenum = Integer.parseInt(waypoint.getPrefix());
             } catch (NumberFormatException ignore) {
-                insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(ViewUtils.getDrawable(waypointType.markerId, true), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
+                // do nothing
             }
+        }
+        if (stagenum > 0) {
+            insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, stagenum, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
             final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
@@ -749,7 +753,7 @@ public final class MapMarkerUtils {
 
     @SuppressWarnings("DiscouragedApi")
     private static Drawable getStageNumberMarker(final Resources res, final int stageNum, final float scaling) {
-        int counter = stageNum;
+        int counter = Math.max(stageNum, 1); // safeguard for stageNum == 0
         while (counter > 10) {
             counter = counter - 10;
         }

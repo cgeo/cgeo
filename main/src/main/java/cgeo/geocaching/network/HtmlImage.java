@@ -507,6 +507,7 @@ public class HtmlImage implements Html.ImageGetter {
                 return ImmutableTriple.of(image, null, true);
             }
             metadata = MetadataUtils.readImageMetadata("[HtmlImage]" + uri, imageStream, true);
+            Log.iForce("[HtmlImage] Orientation of " + uri + ": " + MetadataUtils.getOrientation(metadata));
         }
         return ImmutableTriple.of(image, metadata, freshEnough);
     }

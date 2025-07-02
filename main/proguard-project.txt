@@ -146,3 +146,6 @@
 
 # transitive needed using R8 (minifyEnabled)
 -dontwarn org.slf4j.impl.StaticLoggerBinder
+
+# keep classes of metadata libaray (this lib heavily uses reflection)
+-keep class com.drew.** { *; }

@@ -349,7 +349,7 @@ abstract class GPXParser extends FileParser {
                         final List<Waypoint> newPoints = new ArrayList<>();
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
-                        cacheForWaypoint.setWaypoints(newPoints, false);
+                        cacheForWaypoint.setWaypoints(newPoints);
                         DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.DB));
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }
@@ -986,7 +986,7 @@ abstract class GPXParser extends FileParser {
         final Geocache newCache = new Geocache();
 
         newCache.setAttributes(Collections.emptyList()); // override the lazy initialized list
-        newCache.setWaypoints(Collections.emptyList(), false); // override the lazy initialized list
+        newCache.setWaypoints(Collections.emptyList()); // override the lazy initialized list
 
         return newCache;
     }

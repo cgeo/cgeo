@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
@@ -67,7 +68,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
         return f;
     }
- 
+
     private static class StoreCacheHandler extends DisposableHandler {
         private final int progressMessage;
         private final WeakReference<CachePopupFragment> popupRef;
@@ -136,22 +137,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             toolbar.setTitle(geocode);
             toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
             toolbar.setLongClickable(true);
-            toolbar.setOnLongClickListener(v -> {
+            toolbar.setOnClickListener(v -> {
                 if (cache.isOffline()) {
                     EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
                         toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                     });
-                    return true;
                 }
-                return false;
+            });
+            toolbar.setOnLongClickListener(v -> {
+                ShareUtils.sharePlainText(v.getContext(), geocode);
+                return true;
             });
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
-            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));
             details = new CacheDetailsCreator(requireActivity(), binding.detailsList);
+            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));
+            details.addShareAction(binding.title);
 
             addCacheDetails(false);
 
@@ -352,6 +356,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             } else {
                 offlineHintText.setVisibility(View.VISIBLE);
                 offlineHintSeparator.setVisibility(View.VISIBLE);
+                CacheDetailsCreator.addShareAction(offlineHintText.getContext(), offlineHintText);
             }
         }
     }

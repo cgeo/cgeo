@@ -17,6 +17,10 @@ public class Zone extends Thing {
         return active && visible && contain > NOWHERE;
     }
 
+    public boolean isActive() {
+        return active && contain > NOWHERE;
+    }
+
     public boolean visibleToPlayer () {
         return isVisible();
     }

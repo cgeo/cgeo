@@ -3,6 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -35,6 +37,7 @@ import android.widget.TextView;
 import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -336,6 +339,17 @@ public final class CacheDetailsCreator {
         return add(R.string.cache_distance, text).valueView;
     }
 
+    public TextView addCoordinates(@Nullable final Geopoint coords) {
+        if (coords == null) {
+            return null;
+        }
+        final TextView valueView = add(R.string.cache_coordinates, coords.toString()).valueView;
+        new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(coords);
+        CacheDetailsCreator.addShareAction(activity, valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
+        return valueView;
+    }
+
+
     public void addEventDate(@NonNull final Geocache cache) {
         if (!cache.isEventCache()) {
             return;
@@ -375,4 +389,20 @@ public final class CacheDetailsCreator {
             markers.addView(logIcon);
         }
     }
+
+    public void addShareAction(final TextView view) {
+        addShareAction(activity, view, s -> s);
+    }
+
+    public static void addShareAction(final Context context, final TextView view) {
+        addShareAction(context, view, s -> s);
+    }
+
+    public static void addShareAction(final Context context, final TextView view, final androidx.arch.core.util.Function<String, String> formatter) {
+        view.setOnLongClickListener(v -> {
+            ShareUtils.sharePlainText(context, formatter.apply(view.getText().toString()));
+            return true;
+        });
+    }
+
 }

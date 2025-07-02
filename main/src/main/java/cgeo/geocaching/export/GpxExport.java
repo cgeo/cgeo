@@ -27,7 +27,7 @@ public class GpxExport extends AbstractExport {
     private String title = null;
 
     public GpxExport() {
-        super(R.string.export_gpx);
+        super(R.string.gpx);
     }
 
     public void export(@NonNull final List<Geocache> caches, @Nullable final Activity activity, @Nullable final String title) {
@@ -73,7 +73,7 @@ public class GpxExport extends AbstractExport {
 
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_gpx)));
+        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.gpx)));
 
         final View layout = View.inflate(activity, R.layout.gpx_export_dialog, null);
         builder.setView(layout);

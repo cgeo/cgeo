@@ -368,6 +368,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @Override
     public void onBackPressed() {
+        // @todo should be replaced by setting a OnBackPressedDispatcher
         final GeocacheFilter newFilter = getFilterFromView();
         final boolean filterWasChanged = !originalFilterConfig.equals(newFilter.toConfig());
         if (filterWasChanged) {
@@ -375,6 +376,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         } else {
             finish();
         }
+        super.onBackPressed();
     }
 
 
