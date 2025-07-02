@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
@@ -127,7 +128,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         });
         mMap.setOnCameraMoveListener(() -> {
             repaintRotationIndicator(getCurrentBearing());
-            ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getCameraPosition().zoom);
+            ActivityMixin.requireActivity(getActivity(), activity -> ((UnifiedMapActivity) activity).notifyZoomLevel(mMap.getCameraPosition().zoom));
         });
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;

@@ -5,6 +5,7 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -195,6 +197,12 @@ public final class ActivityMixin {
         final ActionBar actionbar = activity.getSupportActionBar();
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(enabled);
+        }
+    }
+
+    public static void requireActivity(final @Nullable Activity activity, final Action1<Activity> action) {
+        if (activity != null) {
+            action.call(activity);
         }
     }
 }
