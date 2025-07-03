@@ -38,7 +38,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     private long[] orderedPages;
     private ViewPager2 viewPager = null;
     private Action1<Long> onPageChangeListener = null;
-    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
+    public final OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
 
     /**
      * The {@link SwipeRefreshLayout} for this activity. Might be null if page is not refreshable.
