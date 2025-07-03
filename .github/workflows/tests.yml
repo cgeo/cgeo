@@ -26,7 +26,8 @@ permissions:
 
 jobs:
   check-websites:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
@@ -37,7 +38,8 @@ jobs:
         uses: ./.github/actions/check-websites
 
   check-secrets:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Debug concurrency-group
         run: |
@@ -70,7 +72,8 @@ jobs:
           exit 1
 
   checkstyle:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: check-secrets
     steps:
       - name: Checkout the latest code
@@ -132,7 +135,8 @@ jobs:
 
 
   lint:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: check-secrets
     steps:
       - name: Checkout the latest code
@@ -199,7 +203,8 @@ jobs:
     # > It is now recommended to use the Ubuntu (ubuntu-latest) runners which
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: check-secrets
     strategy:
       fail-fast: false
@@ -378,7 +383,8 @@ jobs:
   rerun-on-failure:
     needs: integration-tests
     if: failure() && fromJSON(github.run_attempt) < 3
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - env:
           GH_REPO: ${{ github.repository }}
