@@ -1947,9 +1947,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.description.setVisibility(View.VISIBLE);
             AndroidRxUtils.computationScheduler.scheduleDirect(() ->
                     createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle, translator, status, p -> {
+                        if (activity.isFinishing() || activity.isDestroyed()) {
+                            return;
+                        }
                         displayDescription(activity, cache, p.first, binding.description);
                         if (translator != null) {
-                            binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), status.getSourceLanguage()));
+                            binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
 
                         if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
