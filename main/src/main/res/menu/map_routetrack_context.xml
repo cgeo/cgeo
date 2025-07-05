@@ -65,22 +65,26 @@
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
+        app:iconTint="@color/colorIconMenu"
         android:title="@string/map_refresh_individual_route"
         android:visibility="gone"
         app:showAsAction="never"/>
     <item
         android:id="@+id/indivroute_export_route"
         android:icon="@drawable/ic_menu_gpx"
+        app:iconTint="@color/colorIconMenu"
         android:title="@string/map_export_route"
         app:showAsAction="never"/>
     <item
         android:id="@+id/indivroute_export_track"
         android:icon="@drawable/ic_menu_gpx"
+        app:iconTint="@color/colorIconMenu"
         android:title="@string/map_export_track"
         app:showAsAction="never"/>
     <item
         android:id="@+id/indivroute_load"
         android:icon="@drawable/ic_menu_import"
+        app:iconTint="@color/colorIconMenu"
         android:title="@string/map_load_from_GPX"
         app:showAsAction="never"/>
 </menu>

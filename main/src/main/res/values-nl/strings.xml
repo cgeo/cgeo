@@ -473,6 +473,7 @@
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
     <string name="caches_upload_allcoords_dialogtitle">WAARSCHUWING: Alle coördinaten worden geüpload</string>
     <string name="caches_upload_allcoords_warning">Dit zal de bestaande coördinaten op de server overschrijven voor alle (geselecteerde) caches van je lijst met de huidige coördinaten in c:geo! Dit dient alleen in speciale gevallen te worden gebruikt bijvoorbeeld wanneer je een GPX-bestand importeerde dat gecorrigeerde coördinaten bevat als lijstcoördinaten. Dit kan niet ongedaan worden gemaakt en je dient het alleen te gebruiken als je weet wat je aan het doen bent. In normale gevallen wil je liever de functie \"Upload aangepaste coördinaten\" gebruiken in hetzelfde menu.</string>
+    <string name="caches_share_geocodes">Deel lijst met geocodes</string>
     <string name="caches_refresh_selected">Ververs geselecteerden</string>
     <string name="caches_refresh_all">Ververs alle</string>
     <string name="caches_move_selected">Verplaats geselecteerden</string>

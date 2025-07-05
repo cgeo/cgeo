@@ -78,4 +78,4 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Correcció: el descarregador de mapes ofereix fitxers trencats (0 bytes) per a la descàrrega
 - Nou: s'han afegit mapes per a alguns tipus de catxé d'OC que falten
 - Nou: moveu les llistes "utilitzades recentment" al diàleg de selecció de llista a la part superior en prémer el botó "utilitzades recentment"
-- New: Share list of geocodes from cache list
+- Nou: Comparteix la llista de geocodis de la llista de catxés
