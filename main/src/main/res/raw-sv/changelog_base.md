@@ -79,3 +79,4 @@ Until then, you can switch between the different implementations in settings => 
 - Nytt: Lade till mappningar för vissa saknade OC-cache-typer
 - Nytt: Flytta "nyligen använda"-listorna i dialogrutan för val av lista till toppen när du trycker på "nyligen använda"-knappen
 - Nyhet: Dela en lista med geocoder från cachelistan
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter

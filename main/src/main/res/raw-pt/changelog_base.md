@@ -79,3 +79,4 @@ Até lá, pode alternar entre as diferentes implementações nas definições =>
 - Novo: Adicionados mapeamentos para alguns tipos de cache OC ausentes
 - Novo: Mover listas "utilizadas recentemente" na caixa de diálogo de selecção de lista para o topo ao pressionar o botão "utilizadas recentemente"
 - New: Share list of geocodes from cache list
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
