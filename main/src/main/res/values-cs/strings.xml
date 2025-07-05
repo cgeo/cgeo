@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Obrázek</string>
     <string name="log_delete_confirm">Opravdu chcete smazat log typu \'%1$s\' od autora \'%2$s\' s datem logu \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Opravdu chcete odstranit uložený offline log typu \'%1$s\' s datem zápisu \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Našel jsem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nenašel jsem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Nechal jsem poznámku u %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Nahlásil jsem údržbu u %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myslím, že %1$s (%2$s) by měla být archivována:\n\n</string>
+    <string name="log_share_prefix_default">Můj log pro %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Znovu nezobrazovat</string>
     <string name="tap_icon_more_info">Pro více informací klepněte na ikonu</string>
     <string name="use_slider_adjust_value">Pomocí posuvníku upravte hodnotu</string>
+    <string name="snackbar_action_share">Sdílet</string>
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
@@ -346,6 +353,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorované jazyky</string>
     <string name="translator_preference_nottranslate_lng_summary">Zdrojové jazyky, pro které se nenabízí překlad</string>
     <string name="translator_preference_disable">&lt;Vypnout překlad&gt;</string>
+    <string name="translator_preference_application_language">&lt;Použít jazyk aplikace&gt;</string>
     <string name="translator_model_download_select">Stáhnout offline jazyk překladu</string>
     <string name="translator_model_download_confirm_title">Potvrdit stažení jazyka</string>
     <string name="translator_model_download_confirm_txt">Překladaový model pro jazyk %s je třeba stáhnout. Velikost modelu je přibližně 20-40 MB.</string>
@@ -358,6 +366,7 @@
     <string name="translator_language_unsupported">Jazyk (%s) není podporován pro překlad.</string>
     <string name="translator_language_unknown">Jazyk nelze identifikovat</string>
     <string name="translator_language_detected">Přeložit z \"%s\"</string>
+    <string name="translator_target_language">Přeložit do \"%s\"</string>
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
@@ -475,6 +484,7 @@
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
     <string name="caches_upload_allcoords_dialogtitle">VAROVÁNÍ - Nahrávání všech souřadnic</string>
     <string name="caches_upload_allcoords_warning">Tím přepíšete existující souřadnice na serveru u všech (vybraných) kešek ze seznamu s aktuálními souřadnicemi v listingu v aplikaci c:geo. Používá se to jen ve zvláštních případech, např. pokud jste importovali soubor GPX, který obsahuje upravené souřadnice jako souřadnice v listingu. Tento úkon nelze vrátit. Použít byste ho měli jen v případě, že víte, co děláte. Obvykle je lepší použít funkci \"Nahrát upravené souřadnice\" v téže nabídce.</string>
+    <string name="caches_share_geocodes">Sdílet seznam geokódů</string>
     <string name="caches_refresh_selected">Aktualizovat vybrané</string>
     <string name="caches_refresh_all">Aktualizovat vše</string>
     <string name="caches_move_selected">Přesunout vybrané</string>
@@ -943,6 +953,8 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
+    <string name="init_use_application_language">Použít jazyk aplikace</string>
+    <string name="init_translation_disabled">Překlad vypnutý</string>
     <string name="init_date_format">Formát data</string>
     <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
     <string name="system_default">Podle systému</string>
@@ -995,6 +1007,7 @@
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_cachelists">Seznamy kešek</string>
     <string name="init_localization">Lokalizace</string>
+    <string name="init_logs">Logy</string>
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
@@ -1005,6 +1018,8 @@
     <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
+    <string name="init_live_compass_in_navigation_action">Zobrazit směr v zobrazení detailů kešky</string>
+    <string name="init_summary_live_compass_in_navigation_action">Zobrazit šipku se směrem kompasu pro kešky v zobrazení detailů</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <string name="init_custombnitem">Vlastní položka nabídky</string>
@@ -1012,6 +1027,8 @@
     <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
     <string name="init_custombnitem_none">(žádné)</string>
     <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
+    <string name="init_title_collapse_log_limit">Limit řádku logu</string>
+    <string name="init_summary_collapse_log_limit">Maximální počet řádků, které se mají zobrazit pro logy. Další řádky budou sbaleny. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokód</string>
     <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
@@ -1222,6 +1239,8 @@
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_appearance_general">Obecný vzhled</string>
+    <string name="init_cachedetail_behaviour">Chování</string>
+    <string name="init_cachedetail_note">Osobní poznámka ke kešce</string>
     <string name="init_maplines_title">Přizpůsobení barev mapy</string>
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
@@ -1914,6 +1933,7 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Trasovatelný předmět</string>
+    <string name="most_recent">Nejnovější</string>
     <string name="search_destination">Otevřít cíl v c:geo</string>
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
@@ -2003,9 +2023,14 @@
     <string name="helper_gcwizard_description">Průvodce GC Wizard obsahuje řadu nástrojů pro jednoduché kryptografické, geodetické a vědecké výpočty a stovky sad různých symbolů.</string>
     <!-- export -->
     <string name="share_export">Sdílet / Exportovat</string>
+    <string name="export">Export</string>
+    <string name="export_upload">Exportovat / Nahrát</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">Exportováno do</string>
     <string name="export_failed">Export selhal</string>
+    <string name="export_gpx">Exportovat GPX</string>
+    <string name="export_fieldnotes">Exportovat poznámky z terénu</string>
+    <string name="fieldnotes">poznámky z terénu</string>
     <string name="export_fieldnotes_info">Koncepty budou uloženy do /sdcard/field-notes s názvem souboru podle aktuálního data a času.</string>
     <string name="export_fieldnotes_upload">Nahrát na geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nahrávání…</string>
@@ -2015,6 +2040,7 @@
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
+    <string name="export_persnotes">Nahrát osobní poznámky</string>
     <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d poznámka byla úspěšně nahrána</item>
