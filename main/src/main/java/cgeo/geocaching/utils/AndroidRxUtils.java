@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -191,6 +192,10 @@ public class AndroidRxUtils {
                 return result1;
             }
         }).blockingGet();
+    }
+
+    public static Executor fromScheduler(final Scheduler scheduler) {
+        return runnable -> scheduler.createWorker().schedule(runnable);
     }
 
     /**
