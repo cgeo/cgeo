@@ -79,3 +79,4 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Nou: s'han afegit mapes per a alguns tipus de catxé d'OC que falten
 - Nou: moveu les llistes "utilitzades recentment" al diàleg de selecció de llista a la part superior en prémer el botó "utilitzades recentment"
 - Nou: Comparteix la llista de geocodis de la llista de catxés
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
