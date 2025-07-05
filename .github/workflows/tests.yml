@@ -306,21 +306,21 @@ jobs:
       #     disable-animations: false
       #     script: echo "Generated AVD snapshot for caching."
 
-      # Allow only one job at a time (prevent errors on live GC tests)
-      - name: Wait for lock on live tests
-        id: lock-tests
-        run: |
-          function unlock() {
-            curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
-          }
-          # Unlock immediatelly if we just get the lock and the step is cancelled
-          trap unlock SIGINT
-          TIMEOUT_MINUTES=120
-          i=0
-          locked=false
-          while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
-            do ((i+=1))
-          done && locked=true
+      # # Allow only one job at a time (prevent errors on live GC tests)
+      # - name: Wait for lock on live tests
+      #   id: lock-tests
+      #   run: |
+      #     function unlock() {
+      #       curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
+      #     }
+      #     # Unlock immediatelly if we just get the lock and the step is cancelled
+      #     trap unlock SIGINT
+      #     TIMEOUT_MINUTES=120
+      #     i=0
+      #     locked=false
+      #     while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
+      #       do ((i+=1))
+      #     done && locked=true
 
       - name: Check websites status
         uses: ./.github/actions/check-websites
@@ -350,11 +350,11 @@ jobs:
             ./gradlew --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
-      - name: Unlock live tests
-        # unlock only if we locked it
-        if: always() && steps.lock-tests.conclusion == 'success'
-        run: |
-          curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
+      # - name: Unlock live tests
+      #   # unlock only if we locked it
+      #   if: always() && steps.lock-tests.conclusion == 'success'
+      #   run: |
+      #     curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
 
       - name: Upload logcat
         uses: actions/upload-artifact@v4
