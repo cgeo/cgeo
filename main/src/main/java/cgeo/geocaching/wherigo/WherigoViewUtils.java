@@ -314,8 +314,9 @@ public final class WherigoViewUtils {
         final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.ic_menu_wherigo) :
                 ImageParam.drawable(getDrawableForImageData(null, iconData));
 
-        binding.name.setText(name);
-        binding.description.setText(description);
+        //using "markdown" replaces HTML chars (like eg &amp;) with corresponding text symbols
+        TextParam.text(name).setMarkdown(true).applyTo(binding.name);
+        TextParam.text(description).setMarkdown(true).applyTo(binding.description);
         icon.applyTo(binding.icon);
     }
 
