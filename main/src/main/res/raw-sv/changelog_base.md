@@ -1,7 +1,7 @@
 
 ### Karta
-- New: Route optimization caches calculated data
-- New: Enabling live mode keeps waypoints of currently set target visible
+- Nyhet: Ruttoptimering cachar beräknade data
+- Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -11,6 +11,6 @@
 ### Wherigo player
 
 ### Allmänt
-- New: Share option after logging a cache
-- Change: Do not show "needs maintenance" or "needs archived" options for own caches
+- Nyhet: alternativ att dela efter att ha loggat en cache
+- Ändra: Visa inte "behöver underhåll" eller "behöver arkiveras"-alternativen för egna cacher
 
