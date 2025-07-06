@@ -69,7 +69,7 @@ jobs:
           echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
           exit 1
 
-  build-and-check:
+  build-and-checks:
     runs-on: ubuntu-latest
     needs: check-secrets
     steps:
@@ -261,6 +261,7 @@ jobs:
               --gpsLocation "52.518621, 13.404659" \
               --singleRunnerInvocation=true \
               --local=true \
+              --localIdentifier="${BROWSERSTACK_LOCAL_IDENTIFIER}" \
               --disableAnimations=true
 
       - name: 'BrowserStackLocal Setup'
