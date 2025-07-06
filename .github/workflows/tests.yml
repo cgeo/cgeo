@@ -119,7 +119,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run checkstyle
         run: ./gradlew --no-configuration-cache --no-daemon --scan checkstyle
@@ -181,7 +181,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run lintBasicDebug
         run: ./gradlew --no-configuration-cache --no-daemon --scan lintBasicDebug
@@ -265,7 +265,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Build binary
         run: |
