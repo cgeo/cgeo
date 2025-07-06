@@ -17,6 +17,6 @@ runs:
         ! type -P browserstack || exit 0
 
         # Install
-        curl https://browserstack.com/browserstack-cli/download?arch=amd64&file=browserstack&os=linux&version=${{ inputs.version }} \
-          -o /usr/local/bin/browserstack
+        curl -L "https://browserstack.com/browserstack-cli/download?arch=amd64&file=browserstack&os=linux&version=${{ inputs.version }}" \
+          -O /usr/local/bin/browserstack
         chmod +x /usr/local/bin/browserstack
