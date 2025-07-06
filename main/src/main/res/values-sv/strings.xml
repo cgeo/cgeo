@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Bild</string>
     <string name="log_delete_confirm">Vill du verkligen ta bort loggen av typen \'%1$s\' av författaren \'%2$s\' med loggdatum \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Vill du verkligen ta bort din lagrade offline-logg av typen \'%1$s\' med loggdatum \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Jag hittade %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Jag kunde inte hitta %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Jag lämnade en anteckning på %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Jag rapporterade underhåll behövs för %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Jag tycker att %1$s (%2$s) bör arkiveras:\n\n</string>
+    <string name="log_share_prefix_default">Min logg för %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Inget datum angivet</string>
     <!-- Contacts -->
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Visa inte igen</string>
     <string name="tap_icon_more_info">Tryck på ikonen för mer information</string>
     <string name="use_slider_adjust_value">Använd reglaget för att justera värdet</string>
+    <string name="snackbar_action_share">Dela</string>
     <string name="warn_gm_not_available">Google Maps är inte tillgänglig.</string>
     <string name="switch_to_mf">Din Google Play-tjänst är föråldrad. Vill du byta till Mapsforge kartleverantör istället?</string>
     <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
@@ -1530,6 +1537,7 @@
     <string name="cache_log_menu_decrypt">Dekryptera/kryptera</string>
     <string name="cache_log_menu_edit">Redigera logg</string>
     <string name="menu_expand_log">Expandera logg</string>
+    <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
@@ -1979,10 +1987,14 @@
     <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
     <!-- export -->
     <string name="share_export">Dela / Exportera</string>
+    <string name="export">Exportera</string>
+    <string name="export_upload">Exportera / ladda upp</string>
     <string name="export_progress">Exportera: %1$s</string>
     <string name="export_exportedto">exporterat till</string>
     <string name="export_failed">Exporteringen misslyckades</string>
+    <string name="export_gpx">Exportera GPX</string>
     <string name="export_fieldnotes">Exportera fältanteckningar</string>
+    <string name="fieldnotes">Fältanteckningar</string>
     <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
     <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laddar upp…</string>
@@ -2647,6 +2659,7 @@
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
