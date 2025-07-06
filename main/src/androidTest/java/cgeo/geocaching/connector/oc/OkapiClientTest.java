@@ -141,6 +141,7 @@ public class OkapiClientTest {
         assertThat(logWithImage.logImages).isNotEmpty();
     }
 
+    // TODO add secrets to CI
     @Test
     @Ignore("This tests needs a working OC account on the CI AVD")
     public void testUploadPersonalNote() {

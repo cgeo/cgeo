@@ -26,6 +26,7 @@ import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
+import cgeo.geocaching.test.NotForIntegrationTests;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -204,63 +205,67 @@ public class CgeoApplicationTest {
         assertThat(search.getError()).isEqualTo(StatusCode.CACHE_NOT_FOUND);
     }
 
-    /**
-     * Set the login data to the cgeo login, run the given Runnable, and restore the login.
-     */
-    private static void withMockedLoginDo(final Runnable runnable) {
-        final Credentials credentials = Settings.getGcCredentials();
-        final GCMemberState memberStatus = Settings.getGCMemberStatus();
+   /**
+    * Set the login data to the cgeo login, run the given Runnable, and restore the login.
+    */
+   private static void withMockedLoginDo(final Runnable runnable) {
+       final Credentials credentials = Settings.getGcCredentials();
+       final GCMemberState memberStatus = Settings.getGCMemberStatus();
 
-        try {
-            runnable.run();
-        } finally {
-            // restore user and password
-            TestSettings.setLogin(credentials);
-            Settings.setGCMemberStatus(memberStatus);
-            GCLogin.getInstance().login();
-        }
-    }
+       try {
+           runnable.run();
+       } finally {
+           // restore user and password
+           TestSettings.setLogin(credentials);
+           Settings.setGCMemberStatus(memberStatus);
+           GCLogin.getInstance().login();
+       }
+   }
 
-    /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
-     */
-    @MediumTest
-    @Test
-    public void testSearchByGeocodeNotLoggedIn() {
-        withMockedLoginDo(() -> {
-            // non premium cache
-            MockedCache cache = new GC3FJ5F();
+   /**
+    * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
+    *
+    * Not suitable for integration tests in CI, this is causing ReCaptch to enable itself under
+    * havy batch of tests
+    */
+   @NotForIntegrationTests
+   @MediumTest
+   @Test
+   public void testSearchByGeocodeNotLoggedIn() {
+       withMockedLoginDo(() -> {
+           // non premium cache
+           MockedCache cache = new GC3FJ5F();
 
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+           deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
-            assertThat(search).isNotNull();
-            assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
-            Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            // coords must be null if the user is not logged in
-            assertThat(searchedCache).isNotNull();
-            assertThat(searchedCache.getCoords()).isNull();
+           SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
+           assertThat(search).isNotNull();
+           assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
+           Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+           // coords must be null if the user is not logged in
+           assertThat(searchedCache).isNotNull();
+           assertThat(searchedCache.getCoords()).isNull();
 
-            // premium cache. Not fully visible to guests
-            cache = new GC2JVEH();
+           // premium cache. Not fully visible to guests
+           cache = new GC2JVEH();
 
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+           deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
-            assertThat(search).isNotNull();
-            searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            assertThat(searchedCache).isNotNull();
-            assertThat(searchedCache.getCoords()).isNull();
-            assertThat(searchedCache.getName()).isEqualTo(cache.getName());
-            assertThat(searchedCache.getDifficulty()).isEqualTo(cache.getDifficulty());
-            assertThat(searchedCache.getTerrain()).isEqualTo(cache.getTerrain());
-            assertThat(searchedCache.getGeocode()).isEqualTo(cache.getGeocode());
-            assertThat(searchedCache.getSize()).isEqualTo(cache.getSize());
-            assertThat(searchedCache.getType()).isEqualTo(cache.getType());
-            // it's not possible in guest sessions to distinguish whether a PM-only cache is disabled or archived
-            assertThat(searchedCache.isDisabled()).isEqualTo(cache.isDisabled() || cache.isArchived());
-        });
-    }
+           search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
+           assertThat(search).isNotNull();
+           searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+           assertThat(searchedCache).isNotNull();
+           assertThat(searchedCache.getCoords()).isNull();
+           assertThat(searchedCache.getName()).isEqualTo(cache.getName());
+           assertThat(searchedCache.getDifficulty()).isEqualTo(cache.getDifficulty());
+           assertThat(searchedCache.getTerrain()).isEqualTo(cache.getTerrain());
+           assertThat(searchedCache.getGeocode()).isEqualTo(cache.getGeocode());
+           assertThat(searchedCache.getSize()).isEqualTo(cache.getSize());
+           assertThat(searchedCache.getType()).isEqualTo(cache.getType());
+           // it's not possible in guest sessions to distinguish whether a PM-only cache is disabled or archived
+           assertThat(searchedCache.isDisabled()).isEqualTo(cache.isDisabled() || cache.isArchived());
+       });
+   }
 
     /**
      * mock the "exclude disabled caches" and "exclude my caches" options for the execution of the runnable

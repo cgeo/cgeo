@@ -79,6 +79,10 @@ inputs:
   PREF_PASSWORD:
     description: cgeo preferences xml GC password
     required: true
+  destination:
+    description: Where to save the preferences
+    default: main/cgeo.geocaching_preferences.xml
+    required: true
 
 runs:
   using: "composite"
@@ -95,7 +99,7 @@ runs:
     - name: Set the emulator preferences
       shell: bash
       run: |
-        cat << EOF > main/cgeo.geocaching_preferences.xml
+        cat << EOF > "${{ inputs.destination }}"
         <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
         <map>
             <boolean name="connectorECActive" value="false" />
