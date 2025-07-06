@@ -247,6 +247,10 @@ jobs:
 
       - name: Run Integration Tests
         run: |
+          export BROWSERSTACK_USERNAME=$BROWSERSTACK_USERNAME
+          export BROWSERSTACK_ACCESS_KEY=$BROWSERSTACK_ACCESS_KEY
+          export BROWSERSTACK_LOCAL_IDENTIFIER=$BROWSERSTACK_LOCAL_IDENTIFIER
+
           browserstack \
             app-automate \
               espresso \
