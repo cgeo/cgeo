@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import cgeo.geocaching.utils.SharedPrefsXmlRestorer;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 
 import android.annotation.SuppressLint;
@@ -124,6 +125,10 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onCreate() {
+        if (BuildConfig.FLAVOR.equals("customprefs")) {
+            Log.iForce("---------------- Installing custom prefs -------------");
+            SharedPrefsXmlRestorer.restoreFromXmlAsset(this, "developer_preferences.xml");
+        }
         Log.iForce("---------------- CGeoApplication: startup -------------");
         Log.e("c:geo version " + BuildConfig.VERSION_NAME);
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {

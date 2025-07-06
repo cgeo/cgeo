@@ -260,6 +260,11 @@ android {
             dimension "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
         }
+
+        customprefs {
+            dimension "javaCompilerTime"
+            buildConfigField "String", "SPECIAL_BUILD", '"Custom Prefs"'
+        }
     }
 
     // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
