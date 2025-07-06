@@ -119,7 +119,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Build BasicDebug apk
         run: |
@@ -177,7 +177,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Setup cgeo preferences and keystore
         uses: ./.github/actions/cgeo-preferences
@@ -210,6 +210,11 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
+      - name: Build CustomprefsDebug apk
+        run: |
+          ./gradlew assembleCustomprefsDebug \
+            --no-configuration-cache
+
       - name: Build CustomprefsDebugUnitTest apk
         run: |
           ./gradlew assembleCustomprefsDebugUnitTest \
@@ -218,10 +223,6 @@ jobs:
       - name: Run Unit Tests
         run: |
           ./gradlew testCustomprefsDebugUnitTest
-
-      - name: Build CustomprefsDebug apk
-        run: |
-          ./gradlew assembleCustomprefsDebug
 
       - name: Build CustomprefsAndroidDebug apk
         run: |
@@ -259,7 +260,7 @@ jobs:
               --video=false \
               --gpsLocation "52.518621, 13.404659" \
               --singleRunnerInvocation=true \
-              --localIdentifier=fooglobal \
+              --local=true \
               --disableAnimations=true
 
       - name: 'BrowserStackLocal Setup'
