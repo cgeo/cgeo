@@ -247,26 +247,80 @@ jobs:
 
       - name: Run Integration Tests
         run: |
+          # Uploading apk and launching tests
+          set -euo pipefail
+
           export BROWSERSTACK_USERNAME=$BROWSERSTACK_USERNAME
           export BROWSERSTACK_ACCESS_KEY=$BROWSERSTACK_ACCESS_KEY
           export BROWSERSTACK_LOCAL_IDENTIFIER=$BROWSERSTACK_LOCAL_IDENTIFIER
 
+          browserstack app-automate apps upload \
+            -p ./main/build/outputs/apk/customprefs/debug/cgeo-customprefs-debug.apk \
+            --custom-id ${{ github.run_id }}-${{ github.run_attempt }}-app \
+             | jq
+
           browserstack \
-            app-automate \
-              espresso \
-              run \
-              --app ./main/build/outputs/apk/customprefs/debug/cgeo-customprefs-debug.apk \
-              --testSuite ./main/build/outputs/apk/androidTest/customprefs/debug/cgeo-customprefs-debug-androidTest.apk \
-              --devices "Google Pixel 7-13.0" \
-              --project "c:geo" \
-              --deviceLogs=true \
-              --networkLogs=false \
-              --video=false \
-              --gpsLocation "52.518621, 13.404659" \
-              --singleRunnerInvocation=true \
-              --local=true \
-              --localIdentifier="${BROWSERSTACK_LOCAL_IDENTIFIER}" \
-              --disableAnimations=true
+            app-automate testsuite upload \
+            -f espresso \
+            --custom_id ${{ github.run_id }}-${{ github.run_attempt }}-testsuite \
+            -p ./main/build/outputs/apk/androidTest/customprefs/debug/cgeo-customprefs-debug-androidTest.apk \
+              | grep -v "You will need this test_url" \
+              | jq
+
+          cat <<EOF > browserstack.json
+          {
+            "app": "${{ github.run_id }}-${{ github.run_attempt }}-app",
+            "testSuite": "${{ github.run_id }}-${{ github.run_attempt }}-testsuite",
+            "devices": [
+              "Google Pixel 7-13.0"
+            ],
+            "project": "c:geo",
+            "deviceLogs": true,
+            "networkLogs": false,
+            "debugscreenshots": false,
+            "video": false,
+            "gpsLocation": "52.518621, 13.404659",
+            "local": true,
+            "singleRunnerInvocation": true,
+            "disableAnimations": true,
+            "localIdentifier": "${BROWSERSTACK_LOCAL_IDENTIFIER}",
+            "instrumentationOptions": {
+              "notAnnotation": "cgeo.geocaching.test.NotForIntegrationTests"
+            }
+          }
+          EOF
+
+          RUN_START_RESULT="$(curl "https://api-cloud.browserstack.com/app-automate/espresso/v2/build" \
+            -u "${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}" \
+            -X POST \
+            -d @browserstack.json \
+            -H "Content-Type: application/json")"
+
+          echo "${RUN_START_RESULT}" | jq -c
+          BUILD_ID="$(echo "${RUN_START_RESULT}" | jq -r '.build_id')"
+
+          while curl "https://api-cloud.browserstack.com/app-automate/espresso/v2/builds/${RUN_START_RESULT}" \
+            -u "${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}" \
+            | jq '.duration != null'; do
+              sleep 5
+          done
+
+        # browserstack \
+        #   app-automate \
+        #     espresso \
+        #     run \
+        #     --app ./main/build/outputs/apk/customprefs/debug/cgeo-customprefs-debug.apk \
+        #     --testSuite ./main/build/outputs/apk/androidTest/customprefs/debug/cgeo-customprefs-debug-androidTest.apk \
+        #     --devices "Google Pixel 7-13.0" \
+        #     --project "c:geo" \
+        #     --deviceLogs=true \
+        #     --networkLogs=false \
+        #     --video=false \
+        #     --gpsLocation "52.518621, 13.404659" \
+        #     --singleRunnerInvocation=true \
+        #     --local=true \
+        #     --localIdentifier="${BROWSERSTACK_LOCAL_IDENTIFIER}" \
+        #     --disableAnimations=true
 
       - name: 'BrowserStackLocal Setup'
         uses: 'browserstack/github-actions/setup-local@master'
