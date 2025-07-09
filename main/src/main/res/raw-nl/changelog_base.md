@@ -79,4 +79,4 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: Mappings toegevoegd voor enkele ontbrekende OC cache types
 - Nieuw: "recent gebruikte" Lijsten verplaatst in lijstselectie venster bovenaan bij drukken op de knop "recent gebruikt"
 - Nieuw: Deel lijst van geocodes uit de cache lijst
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Verandering: "Navigatie (auto)" etc. Gebruik "q=" parameter in plaats van verouderde "ll=" parameter
