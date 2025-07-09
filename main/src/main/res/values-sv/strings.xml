@@ -1095,6 +1095,7 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
+    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.\nInte kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
     <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
@@ -1526,6 +1527,7 @@
     <string name="cache_log_menu_decrypt">Dekryptera/kryptera</string>
     <string name="cache_log_menu_edit">Redigera logg</string>
     <string name="menu_expand_log">Expandera logg</string>
+    <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
@@ -1975,10 +1977,14 @@
     <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
     <!-- export -->
     <string name="share_export">Dela / Exportera</string>
+    <string name="export">Exportera</string>
+    <string name="export_upload">Exportera / ladda upp</string>
     <string name="export_progress">Exportera: %1$s</string>
     <string name="export_exportedto">exporterat till</string>
     <string name="export_failed">Exporteringen misslyckades</string>
+    <string name="export_gpx">Exportera GPX</string>
     <string name="export_fieldnotes">Exportera fältanteckningar</string>
+    <string name="fieldnotes">Fältanteckningar</string>
     <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
     <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laddar upp…</string>
@@ -2643,6 +2649,7 @@
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>

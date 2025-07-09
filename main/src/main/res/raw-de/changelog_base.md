@@ -79,3 +79,4 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Zuordnungen für einige fehlende OC-Cache-Typen ergänzt
 - Neu: Verschiebe zuletzt zugeordnete Listen im Listenauswahldialog nach oben, wenn du "Letzte Auswahl" verwendest
 - Neu: Liste mit Geocodes aus der Cacheliste teilen
+- Änderung: "Navigation (Auto)" etc. verwenden nun den Parameter "q=" anstelle des veralteten "ll="
