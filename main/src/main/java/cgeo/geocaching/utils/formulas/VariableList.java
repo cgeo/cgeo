@@ -177,7 +177,6 @@ public class VariableList {
 
     public void sortVariables(final Comparator<String> comp) {
         Collections.sort(variableList, comp);
-        wasModified = true;
     }
 
     /**
