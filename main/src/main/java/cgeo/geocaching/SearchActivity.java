@@ -227,7 +227,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
         // otherwise see if this is a pure geocode
         if (!(connector instanceof ISearchByGeocode)) {
-            geocode = StringUtils.upperCase(query);
+            geocode = ConnectorFactory.normalizeGeocode(query);
             connector = ConnectorFactory.getConnector(geocode);
         }
 

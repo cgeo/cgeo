@@ -372,9 +372,9 @@ public final class ConnectorFactory {
             return null;
         }
         for (final IConnector connector : CONNECTORS) {
-            final String geocode = connector.getGeocodeFromUrl(url);
+            final String geocode = normalizeGeocode(connector.getGeocodeFromUrl(url));
             if (StringUtils.isNotBlank(geocode)) {
-                return StringUtils.upperCase(geocode);
+                return geocode;
             }
         }
         return null;
@@ -386,10 +386,21 @@ public final class ConnectorFactory {
             return null;
         }
         for (final IConnector connector : CONNECTORS) {
-            final String geocode = connector.getGeocodeFromText(text);
+            final String geocode = normalizeGeocode(connector.getGeocodeFromText(text));
             if (StringUtils.isNotBlank(geocode)) {
-                return StringUtils.upperCase(geocode);
+                return geocode;
             }
+        }
+        return null;
+    }
+
+    @Nullable
+    public static String normalizeGeocode(@Nullable final String geocode) {
+        if (StringUtils.isNotBlank(geocode)) {
+            if (StringUtils.length(geocode) >= 2) {
+                return StringUtils.join(StringUtils.upperCase(geocode.substring(0, 2)), geocode.substring(2));
+            }
+            return StringUtils.upperCase(geocode);
         }
         return null;
     }
