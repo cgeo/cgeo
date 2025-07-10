@@ -135,6 +135,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     private void updateVariableList(final Geocache cache) {
         adapter.setVariableList(cache.getVariables());
         adapter.setVisibleVariables();
+        adapter.sortVariables(TextUtils.COLLATOR::compare);
     }
 
     private void checkUnsavedChanges() {

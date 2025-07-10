@@ -407,14 +407,12 @@ public class VariableListView extends LinearLayout {
         }
 
         public void sortVariables(final Comparator<String> comparator) {
-            if (comparator == null) {
+            if (comparator == null || variables == null) {
                 return;
             }
-            sortItems((v1, v2) -> comparator.compare(v1.getVar(), v2.getVar()));
-            if (variables != null) {
-                variables.sortVariables(comparator);
-            }
-            callCallback();
+
+            // don't reinitialize from original list, hence, only sortVariables and not sortItems
+            variables.sortVariables(comparator);
         }
 
         public void selectVariableName(final String oldName, final Action2<String, String> callback) {
