@@ -1,5 +1,3 @@
-(tylko wersja nocna: Tymczasowo usunięto napis „nightly” z logo podczas dostrajania projektu)
-
 ### Zawiadomienie o wycofaniu mapy drogowej i „staych” map UnifiedMap
 c:geo ma od pewnego czasu zupełnie nową implementację mapy o nazwie „UnifiedMap”, która ostatecznie zastąpi stare implementacje Google Maps i Mapsforge (OpenStreetMap). Jest to zawiadomienie o wycofaniu, aby poinformować Cię mapie drogowej.
 

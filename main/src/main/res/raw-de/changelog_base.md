@@ -1,5 +1,3 @@
-(nur nightly-Versionen: "nightly"-Banner temporär vom Logo entfernt während der Überarbeitung des Logo-Designs)
-
 ### Roadmap UnifiedMap (Vereinheitlichte Karte) & Abkündigung der alten Karten
 c:geo hat seit einiger Zeit eine komplett neue Kartenimplementierung namens "UnifiedMap", die bald die alten Implementierungen von Google Maps und Mapsforge (OpenStreetMap) ersetzen wird. Dies ist ein Abkündigungs-Hinweis und informiert über die weitere Planung.
 

@@ -1,5 +1,3 @@
-(Nattliga endast: Tar tillfälligt bort "nattlig" banner från logotypen medan finjustering av designen pågår)
-
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
