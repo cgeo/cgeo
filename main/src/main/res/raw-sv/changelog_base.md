@@ -4,39 +4,39 @@
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
 UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+- Kartrotation för OpenStreetMap-baserade kartor (online + offline)
+- Klusterpopup för Google Maps
+- Dölj kartkällor som du inte behöver
+- Höjddiagram för rutter och spår
+- Växla mellan listor direkt från kartan
+- "Körläge" för OpenStreetMap-baserade kartor
 
 UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
 
 Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+- "Gamla" kartor är i avskrivningsläge nu - vi kommer inte att fixa buggar för dem längre.
+- UnifiedMap kommer att göras som standard för alla användare under hösten 2025.
+- "Gamla" kartimplementationer kommer att tas bort våren 2026.
 
 Until then, you can switch between the different implementations in settings => map sources.
 
 ### Karta
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- Nyhet: Visa geofences för labsteg (UnifiedMap) - aktivera "Cirklar" i snabbinställningar på kartan för att visa dem
+- Ny: Alternativ för att ställa in cirklar med individuell radie till vägpunkter ("geofence" alternativ i sammanhangsmeny)
+- Fix: Kartvy inte uppdaterad när cachen tas bort från listan som visas just nu
+- Fix: Antal cacher i list-väljaren inte uppdaterad vid förändring av innehållet i listan
+- Ändra: Behåll nuvarande vy för att visa en lista på karta, om alla cacher passar in i nuvarande vy
+- Nyhet: Följ min plats i höjddiagram (UnifiedMap)
+- Nytt: Aktivera "flytta till" / "kopiera till"-åtgärder för "visa som lista"
+- Nyhet: Stöd Höjd vintertema i kartan nedladdning
+- Nyhet: Adaptiv terrängskuggning, valfritt högkvalitetsläge (UnifiedMap Mapsforge)
+- Nyhet: Omgjorda rutter/spår snabbinställningsdialog
+- Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
+- Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
+- Nytt: Långtryck på "aktivera live-knappen" för att ladda offline cacher
+- Nyhet: Offline terrängskuggning för UnifiedMap (VTM-variant)
+- Nytt: Stöd för bakgrundskartor (UnifiedMap)
+- Fix: Kompakta ikoner som inte återvänder till stora ikoner vid zoomning i autoläge (UnifiedMap)
 - Nytt: Åtgärder för långtryck på cache-infosida: GC-kod, cachetitel, koordinater, personlig anteckning/ledtråd
 - Ändring: Byter cache infosida långtryck för emoji-väljare till kort tryck för att lösa kollisionen
 
@@ -75,7 +75,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
-- Fix: Map downloader offering broken (0 bytes) files for download
+- Fix: Kartnedladdning erbjuder trasiga (0 bytes) filer för nedladdning
 - Nytt: Lade till mappningar för vissa saknade OC-cache-typer
 - Nytt: Flytta "nyligen använda"-listorna i dialogrutan för val av lista till toppen när du trycker på "nyligen använda"-knappen
 - Nyhet: Dela en lista med geocoder från cachelistan
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
