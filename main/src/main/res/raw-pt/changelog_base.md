@@ -1,5 +1,3 @@
-(apenas nightly: Removido temporariamente o banner "nightly" do logotipo enquanto o design estiver em ajuste)
-
 ### Plano estratégico do Mapa Unificado & aviso de obsolescência mapas "antigos"
 O c:geo tem já há algum tempo uma implementação de mapas nova chamada "Mapa Unificado", que irá no final substituir as implementações do Google Maps e Mapsforge (OpenStreetMap). Isto é um aviso de obscelecência para te informar acerca do próximo plano estratégico.
 
