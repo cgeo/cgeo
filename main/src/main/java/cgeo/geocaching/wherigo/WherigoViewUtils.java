@@ -91,7 +91,6 @@ public final class WherigoViewUtils {
             titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog));
         }
         return dialog;
-
     }
 
     public static <T> void setViewActions(final Iterable<T> actions, final SimpleItemListView view, final int columnCount, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
@@ -116,7 +115,8 @@ public final class WherigoViewUtils {
                 final List<EventTable> things = type.getThingsForUserDisplay();
                 final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
                 final CharSequence description = TextUtils.join(things, i -> {
-                    final String thingName = i.name;
+                    final Object trans = i.rawget(WherigoUtils.TRANSLATION_NAME_TAG);
+                    final String thingName = i.name + (trans == null ? "" : "/" + trans);
                     return WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan("(" + thingName + ")", new StyleSpan(Typeface.ITALIC));
                 }, ", ");
 

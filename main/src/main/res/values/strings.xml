@@ -372,7 +372,7 @@
     <string name="gc_basic">Basic</string>
 
     <string name="translator_preference_target_lng">Offline translation language</string>
-    <string name="translator_preference_target_lng_summary">Target language for offline translator</string>
+    <string name="translator_preference_target_lng_summary">Target language for offline translatorImplementation</string>
     <string name="translator_preference_nottranslate_lng">Ignored languages</string>
     <string name="translator_preference_nottranslate_lng_summary">Source languages to not offer translation for</string>
     <string name="translator_preference_disable">&lt;Disable translation&gt;</string>
@@ -391,8 +391,11 @@
     <string name="translator_language_detected">Translate from "%s"</string>
     <string name="translator_target_language">Translate to "%s"</string>
     <string name="translator_translation_error">Failed to translate text: %s</string>
-    <string name="translator_translation_initerror">Failed to initialize translator</string>
+    <string name="translator_translation_initerror">Failed to initialize translatorImplementation</string>
     <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
+
+    <string name="translator_error_language_unsupported">Language not supported</string>
+    <string name="translator_error_model_unavailable">Translator model not downloaded</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>

@@ -94,4 +94,12 @@ public enum WherigoThingType {
         return WHERIGOSCREENID_TO_TYPE.get(wherigoScreenId);
     }
 
+    public static List<EventTable> getEverything() {
+        final List<EventTable> result = new ArrayList<>();
+        for (WherigoThingType type : values()) {
+            result.addAll(type.getAllThings());
+        }
+        return result;
+    }
+
 }

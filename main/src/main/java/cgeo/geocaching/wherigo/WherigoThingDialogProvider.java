@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -26,9 +27,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
+    private CompositeDisposable translatorDisposables;
+    private TranslatorUtils.ChangeableText descriptionText;
+
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -59,6 +65,17 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 
+        //translator
+        translatorDisposables = new CompositeDisposable();
+        translatorDisposables.add(TranslatorUtils.initializeView("ThingDialog", activity, WherigoGame.get().getTranslator(),
+                binding.translation, null, null, true));
+        descriptionText = new TranslatorUtils.ChangeableText(WherigoGame.get().getTranslator());
+        translatorDisposables.add(descriptionText);
+        control.setOnDismissListener(d -> {
+            translatorDisposables.dispose();
+            translatorDisposables = null;
+        });
+
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
 
@@ -73,9 +90,12 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         if (eventTable instanceof Zone) {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
-        //description and media
+        //media
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
-        ViewUtils.setIfDiffers(binding.description, WherigoGame.get().toDisplayText(eventTable.description));
+
+        //description
+        descriptionText.set(eventTable.description, (tr, t) ->
+            binding.description.setText(WherigoGame.get().toDisplayText(tr)));
 
         //actions
         refreshActionList(activity, control, binding);

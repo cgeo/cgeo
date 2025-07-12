@@ -74,6 +74,8 @@ public final class WherigoUtils {
     private static final String WHERIGO_DOWNLOAD_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
     private static final String WHERIGO_DETAILS_URL_BASE = "https://wherigo.com/cartridge/details.aspx?CGUID=";
 
+    public static final String TRANSLATION_NAME_TAG = "nameTranslated";
+
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
         ll -> new Geopoint(ll.latitude, ll.longitude)
@@ -509,5 +511,4 @@ public final class WherigoUtils {
         }
         return geocode.trim() + ": " + cache.getName().trim();
     }
-
 }
