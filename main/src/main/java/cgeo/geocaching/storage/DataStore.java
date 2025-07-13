@@ -45,6 +45,7 @@ import cgeo.geocaching.search.GeocacheSearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
+import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -4252,6 +4253,8 @@ public class DataStore {
                         }
                         Log.d("Database clean: finished");
                     }
+
+                    deleteOrphanedTrackfiles();
                 });
             }
         });
@@ -4322,6 +4325,29 @@ public class DataStore {
         }
         Log.i("delete orphaned UDC" + info);
         removeCaches(orphanedUDC, LoadFlags.REMOVE_ALL);
+    }
+
+    private static void deleteOrphanedTrackfiles() {
+        // current used trackfiles
+        final ArrayList<Trackfiles> currentTrackFiles = Trackfiles.getTrackfiles();
+        // all trackfiles
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> trackFiles = FolderUtils.get().getAllFiles(Folder.fromFile(LocalStorage.getTrackfilesDir()));
+        if (trackFiles.size() <= currentTrackFiles.size()) {
+            return;
+        }
+
+        final List<String> currentTracks = new ArrayList<>();
+        for (final Trackfiles trackFile : currentTrackFiles) {
+            currentTracks.add(trackFile.getFilename());
+        }
+
+        // delete unused trackfiles
+        for (final ImmutablePair<ContentStorage.FileInformation, String> track : trackFiles) {
+            final String trackName = track.left.name;
+            if (!currentTracks.contains(trackName)) {
+                Trackfiles.removeTrackfile(trackName);
+            }
+        }
     }
 
     /**
