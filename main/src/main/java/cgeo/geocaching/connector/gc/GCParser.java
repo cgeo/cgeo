@@ -1719,13 +1719,17 @@ public final class GCParser {
      * @param logsToMerge the list of logs to merge
      */
     private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
+        final Map<String, LogEntry> logsToMergeMap = new HashMap<>();
+        for (final LogEntry logToMerge : mergedLogs) {
+            logsToMergeMap.put(logToMerge.serviceLogId, logToMerge);
+        }
         for (final LogEntry log : logsToMerge) {
-            final int logIndex = mergedLogs.indexOf(log);
-            if (logIndex < 0) {
+            final LogEntry friendLog = logsToMergeMap.get(log.serviceLogId);
+            if (friendLog == null) {
                 mergedLogs.add(log);
-            } else {
-                final LogEntry friendLog = mergedLogs.get(logIndex);
-                if (!friendLog.friend) {
+            } else if (!friendLog.friend) {
+                final int logIndex = mergedLogs.indexOf(friendLog);
+                if (logIndex >= 0) {
                     final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
                     mergedLogs.set(logIndex, updatedFriendLog);
                 }
