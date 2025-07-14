@@ -1468,6 +1468,7 @@
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
     <string name="cache_description_rendering">Renderowanie opisu, proszę czekać…</string>
+    <string name="cache_description_translating_and_rendering">Tłumaczenie i renderowanie opisu, proszę czekać…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Ostrzeżenie: Opis jest bardzo duży (%1$d znaków). Wyświetlane są tylko pierwsze %2$d%%.</string>
     <string name="cache_description_render_fully">Renderowanie pełnego opisu</string>
     <string name="cache_area_description">Opis terenu</string>
@@ -2797,6 +2798,7 @@
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
+    <string name="copy">Kopiuj</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
