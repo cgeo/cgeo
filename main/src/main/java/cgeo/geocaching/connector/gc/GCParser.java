@@ -1637,10 +1637,14 @@ public final class GCParser {
         }
 
         // merge time from offline log
-        mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+        if (offlineLog != null) {
+            mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+        }
 
         // merge time from online-logs already stored in db (overrides possible offline log)
-        mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
+        if (!ownLogsFromDb.isEmpty()) {
+            mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
+        }
 
         if (cache.isFound() || cache.isDNF()) {
             for (final LogEntry logEntry : ownLogEntriesBlocked) {
@@ -1652,7 +1656,10 @@ public final class GCParser {
         }
 
         final List<LogEntry> specialLogEntries = ListUtils.union(friendLogsBlocked, ownLogEntriesBlocked);
-        mergeFriendsLogs(logsBlocked, specialLogEntries);
+        if (!specialLogEntries.isEmpty()) {
+            setFriendsLogs(specialLogEntries);
+            mergeModifiedLogs(logsBlocked, specialLogEntries);
+        }
 
         DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
     }
@@ -1712,26 +1719,40 @@ public final class GCParser {
     }
 
     /**
-     * Merge log entries and mark them as friends logs (personal and friends) to identify
+     * Mark log entries as friends logs (personal and friends) to identify
      * them on friends/personal logs tab.
+     *
+     * @param friendLogs  the list to friend logs
+     */
+    private static void setFriendsLogs(final List<LogEntry> friendLogs) {
+        for (int i = 0; i < friendLogs.size(); i++) {
+            final LogEntry friendLog = friendLogs.get(i);
+            if (!friendLog.friend) {
+                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                friendLogs.set(i, updatedFriendLog);
+            }
+        }
+    }
+
+    /**
+     * Merge log entries
      *
      * @param mergedLogs  the list to merge logs with
      * @param logsToMerge the list of logs to merge
      */
-    private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
-        final Map<String, LogEntry> logsToMergeMap = new HashMap<>();
-        for (final LogEntry logToMerge : mergedLogs) {
-            logsToMergeMap.put(logToMerge.serviceLogId, logToMerge);
+    private static void mergeModifiedLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
+        final Map<String, LogEntry> mergedLogsMap = new HashMap<>();
+        for (final LogEntry mergedLog : mergedLogs) {
+            mergedLogsMap.put(mergedLog.serviceLogId, mergedLog);
         }
-        for (final LogEntry log : logsToMerge) {
-            final LogEntry friendLog = logsToMergeMap.get(log.serviceLogId);
-            if (friendLog == null) {
-                mergedLogs.add(log);
-            } else if (!friendLog.friend) {
-                final int logIndex = mergedLogs.indexOf(friendLog);
+        for (final LogEntry logToMerge : logsToMerge) {
+            final LogEntry modifiedLog = mergedLogsMap.get(logToMerge.serviceLogId);
+            if (modifiedLog == null) {
+                mergedLogs.add(logToMerge);
+            } else {
+                final int logIndex = mergedLogs.indexOf(modifiedLog);
                 if (logIndex >= 0) {
-                    final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                    mergedLogs.set(logIndex, updatedFriendLog);
+                    mergedLogs.set(logIndex, logToMerge);
                 }
             }
         }
@@ -1757,11 +1778,7 @@ public final class GCParser {
         }
     }
 
-    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @Nullable OfflineLogEntry logToMerge) {
-        if (logToMerge == null) {
-            return;
-        }
-
+    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
         for (int i = 0; i < mergedLogTimes.size(); i++) {
             final LogEntry mergedLog = mergedLogTimes.get(i);
             if (logToMerge.isMatchingLog(mergedLog)) {
