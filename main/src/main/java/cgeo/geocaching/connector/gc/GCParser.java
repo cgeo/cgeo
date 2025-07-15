@@ -1640,9 +1640,7 @@ public final class GCParser {
         mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
 
         // merge time from online-logs already stored in db (overrides possible offline log)
-        if (!ownLogsFromDb.isEmpty()) {
-            mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
-        }
+        mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
 
         if (cache.isFound() || cache.isDNF()) {
             for (final LogEntry logEntry : ownLogEntriesBlocked) {
@@ -1654,9 +1652,7 @@ public final class GCParser {
         }
 
         final List<LogEntry> specialLogEntries = ListUtils.union(friendLogsBlocked, ownLogEntriesBlocked);
-        if (!specialLogEntries.isEmpty()) {
-            mergeFriendsLogs(logsBlocked, specialLogEntries);
-        }
+        mergeFriendsLogs(logsBlocked, specialLogEntries);
 
         DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
     }
