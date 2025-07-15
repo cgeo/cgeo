@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
