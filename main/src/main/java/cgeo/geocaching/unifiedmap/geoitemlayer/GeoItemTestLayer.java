@@ -41,7 +41,7 @@ public class GeoItemTestLayer {
 
     private static final GeoIcon ICON_CAMERA = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.ic_menu_camera).getAsBitmap()).build();
     private static final GeoIcon ICON_TYPE_GIGA = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.type_giga).getAsBitmap()).build();
-    private static final GeoIcon ICON_CGEO_LOGO = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.cgeo_borderless).getAsBitmap()).build();
+    private static final GeoIcon ICON_CGEO_LOGO = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.ic_launcher_rounded_noborder).getAsBitmap()).build();
 
     private static final GeoIcon[] ICON_ALL = new GeoIcon[] { ICON_SMILEY, ICON_SPARKLES, ICON_CAMERA, ICON_TYPE_GIGA, ICON_CGEO_LOGO };
 
@@ -187,7 +187,7 @@ public class GeoItemTestLayer {
                         .setXAnchor(xAnchor)
                         .setYAnchor(yAnchor)
                         .setRotation(angle)
-                        .setBitmap(createBitmap(R.drawable.cgeo_borderless)).build());
+                        .setBitmap(createBitmap(R.drawable.ic_launcher_rounded_noborder)).build());
 
         return GeoGroup.builder().addItems(poly, marker).build();
 

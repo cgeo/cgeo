@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:drawable="@drawable/ic_launcher_background_rounded_noborder"
+            android:width="115.5px"
+            android:height="115.5px" />
+        <item android:drawable="@drawable/ic_launcher_foreground"
+            android:width="154px"
+            android:height="154px"
+            android:left="-19.25px"
+            android:right="-19.25px"
+            android:top="-19.25px"
+            android:bottom="-19.25px" />
+</layer-list>

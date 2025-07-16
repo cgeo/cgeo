@@ -75,7 +75,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     private final PermissionAction<Void> askNotificationsPermissionAction = PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext());
 
     // dialog elements
-    private ImageView logo = null;
     private TextView title = null;
     private TextView text = null;
 
@@ -109,7 +108,6 @@ public class InstallWizardActivity extends AppCompatActivity {
         final InstallWizardBinding binding = InstallWizardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        logo = binding.wizardLogo;
         title = binding.wizardTitle;
         text = binding.wizardText;
 
@@ -155,7 +153,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void updateDialog() {
-        logo.setImageResource(R.mipmap.ic_launcher);
         text.setVisibility(View.VISIBLE);
         setButton(button1, 0, null, button1Info, 0);
         setButton(button2, 0, null, button2Info, 0);

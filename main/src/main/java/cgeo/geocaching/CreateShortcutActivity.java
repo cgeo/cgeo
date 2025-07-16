@@ -148,7 +148,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private Bitmap createOverlay(@DrawableRes final int drawableResourceId) {
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
                 ResourcesCompat.getDrawable(res, drawableResourceId, null),
-                ResourcesCompat.getDrawable(res, R.drawable.cgeo_borderless, null)
+                ResourcesCompat.getDrawable(res, R.drawable.ic_launcher_rounded_noborder, null)
         });
         layerDrawable.setLayerInset(1, 140, 140, 0, 0);
         return ImageUtils.convertToBitmap(layerDrawable);
