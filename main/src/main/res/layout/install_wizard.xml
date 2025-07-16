@@ -16,11 +16,12 @@
 
             <ImageView
                 android:id="@+id/wizard_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:src="@drawable/ic_launcher_rounded_noborder"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="64dp"
                 android:layout_marginRight="64dp"
                 android:layout_marginBottom="32dp"
