@@ -1006,6 +1006,8 @@
     <string name="init_summary_cacheListInfo">Wähle die zusätzlichen Informationen, die in Cachelisten zu jedem Cache angezeigt werden sollen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
+    <string name="init_live_compass_in_navigation_action">Richtung in Cache-Detailansicht anzeigen</string>
+    <string name="init_summary_live_compass_in_navigation_action">Zeige einen Mini-Kompass in der Cache-Detailansicht</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <string name="init_custombnitem">Benutzerdefinierter Menüeintrag</string>
