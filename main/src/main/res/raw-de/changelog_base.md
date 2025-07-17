@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Version von c:geo erhöht. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
@@ -7,7 +7,7 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
 - Neu: Zeitstempel eigener Logs beim Aktualisieren eines Caches beibehalten
-- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
+- Neu: Optionaler Mini-Kompass (siehe Einstellungen => Cache-Details => Richtung in Cache-Detailansicht anzeigen)
 
 ### Wherigo Player
 
