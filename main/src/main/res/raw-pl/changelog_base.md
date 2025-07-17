@@ -77,4 +77,4 @@ Do tego czasu możesz przełączać się między różnymi implementacjami w ust
 - Nowość: Dodano mapowanie dla niektórych brakujących typów skrzynek OC
 - Nowość: Przeniesiono listy „ostatnio używane” z oknie dialogowego wyboru listy na górę po naciśnięciu przycisku „ostatnio używane”
 - Nowość: Udostępnij listę geokodów z listy skrytek
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Zmiana: „Nawigacja (samochód)” itp. używa parametru "q=" zamiast nieaktualnego parametru "ll="
