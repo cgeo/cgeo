@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
 - Wijziging: Toon geen "need maintenance" of "need archived" opties voor eigen caches
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
