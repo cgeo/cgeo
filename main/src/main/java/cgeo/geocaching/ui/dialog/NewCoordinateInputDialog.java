@@ -282,14 +282,19 @@ public class NewCoordinateInputDialog {
             calculateCoordinates.setVisibility(View.GONE);
         }
 
-        copyFromClipboard.setOnClickListener(v -> {
-            try {
-                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
-                updateGui();
-            } catch (final Geopoint.ParseException ignored) {
-                //ignore
-            }
-        });
+        if (hasClipboardCoordinates()) {
+            copyFromClipboard.setVisibility(View.VISIBLE);
+            copyFromClipboard.setOnClickListener(v -> {
+                try {
+                    gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                    updateGui();
+                } catch (final Geopoint.ParseException ignored) {
+                    //ignore
+                }
+            });
+        } else {
+          copyFromClipboard.setVisibility(View.GONE);
+        }
 
         if (showWaypointOptions) {
             clearCoordinates.setVisibility(View.VISIBLE);
@@ -557,6 +562,16 @@ public class NewCoordinateInputDialog {
         return new Pair<>(lat, lon);
 
     }
+
+    private static boolean hasClipboardCoordinates() {
+        try {
+            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        } catch (final Geopoint.ParseException ignored) {
+            return false;
+        }
+        return true;
+    }
+
     private class PadZerosOnFocusLostListener implements View.OnFocusChangeListener {
 
         @Override
