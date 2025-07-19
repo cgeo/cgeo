@@ -17,6 +17,7 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -26,6 +27,7 @@ import cgeo.geocaching.wherigo.openwig.Container;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
+import cgeo.geocaching.wherigo.openwig.Task;
 import cgeo.geocaching.wherigo.openwig.Thing;
 import cgeo.geocaching.wherigo.openwig.Zone;
 import cgeo.geocaching.wherigo.openwig.ZonePoint;
@@ -182,6 +184,32 @@ public final class WherigoUtils {
         return builder.getViewport();
     }
 
+    public static CharSequence getEventTableNameForDisplay(final EventTable et, final boolean doShort) {
+        if (et == null) {
+            return "--";
+        }
+        CharSequence name = WherigoGame.get().toDisplayText(et.name);
+        if (et instanceof Task) {
+            switch (((Task) et).state()) {
+                case Task.DONE:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
+                    break;
+                case Task.FAILED:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (!doShort && et instanceof Zone) {
+            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")");
+        }
+        if (!WherigoUtils.isVisibleToPlayer(et)) {
+            name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
+        }
+        return name;
+    }
+
     public static String eventTableDebugInfo(final EventTable et) {
         if (et == null) {
             return "null";
@@ -222,6 +250,9 @@ public final class WherigoUtils {
                     msg.append("unknown(").append(z.contain).append(")");
             }
             msg.append(")");
+        }
+        if (et instanceof Task) {
+            msg.append("\n- taskstate:").append(((Task) et).state());
         }
         msg.append("\n- Raw:").append(et);
         return msg.toString();

@@ -55,7 +55,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, eventTable.name);
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, WherigoUtils.getEventTableNameForDisplay(eventTable, true));
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 

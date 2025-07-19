@@ -496,7 +496,7 @@ public class WherigoGame implements UI {
         if (text == null) {
             return "";
         }
-        if (!TextUtils.containsHtml(text)) {
+        if (!TextUtils.containsHtml(text) || htmlImageGetter == null) {
             return text;
         }
         return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable).first;
