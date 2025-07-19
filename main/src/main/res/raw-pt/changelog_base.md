@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
 - Alteração: Não mostrar as opções "precisa de manutenção" ou "precisa de arquivamento" para as próprias caches
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
