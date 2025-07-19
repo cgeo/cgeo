@@ -14,4 +14,4 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 ### General
 - Nou: opció de compartir després de registrar un catxé
 - Canvi: no mostri les opcions "necessita manteniment" o "necessita arxivar" per a els catxés propis
-
+- Correcció: La restauració d'una còpia de seguretat pot duplicar els fitxers de track a l'emmagatzematge intern i a les còpies de seguretat posteriors
