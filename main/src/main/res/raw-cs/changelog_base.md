@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky
 - Změna: Nezobrazovat možnosti "vyžaduje údržbu" nebo "vyžaduje archivaci" pro vlastní kešky
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
