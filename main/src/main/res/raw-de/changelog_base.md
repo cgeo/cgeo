@@ -14,4 +14,4 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
 - Änderung: Logoptionen "Benötigt Wartung" oder "Sollte archiviert werden" für eigene Caches ausblenden
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
