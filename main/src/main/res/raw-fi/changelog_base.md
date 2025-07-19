@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Yleinen
 - New: Share option after logging a cache
 - Change: Do not show "needs maintenance" or "needs archived" options for own caches
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
