@@ -641,6 +641,7 @@
     <string translatable="false" name="pref_fieldNoteExportUpload">fieldnoteExportUpload</string>
     <string translatable="false" name="pref_fieldNoteExportOnlyNew">fieldnoteExportOnlyNew</string>
     <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
+    <string translatable="false" name="pref_hideCompletedVariables">hideCompletedVariables</string>
     <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
     <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
     <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
