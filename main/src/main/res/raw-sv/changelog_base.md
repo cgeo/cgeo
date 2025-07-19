@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
 - Ändra: Visa inte "behöver underhåll" eller "behöver arkiveras"-alternativen för egna cacher
-
+- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
