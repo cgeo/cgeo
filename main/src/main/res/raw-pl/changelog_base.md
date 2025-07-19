@@ -14,4 +14,4 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
 - Zmiana: Nie pokazuj opcji „wymaga konserwacji” lub „wymaga zarchiwizowania” dla własnych skrytek
-
+- Naprawiono: Przywracanie kopii zapasowej może duplikować pliki śladów w pamięci wewnętrznej i kolejnych kopiach zapasowych
