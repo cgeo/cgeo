@@ -1,5 +1,3 @@
-(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
-
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
@@ -21,21 +19,24 @@ Roadmap:
 Until then, you can switch between the different implementations in settings => map sources.
 
 ### Карта
-- Новое: Отображение геозон этапов Adventure Lab (ЕдинаяКарта) - включите "Круги" в быстрых настройках карты, чтобы отобразить их
-- Новое: Возможность устанавливать круги с индивидуальным радиусом для путевых точек (пункт контекстного меню "геозона")
-- Исправлено: карта не обновлялась при удалении тайника из отображаемого в данный момент списка
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on changing list contents
-- Изменение: Сохраняется текущее окно просмотра при отображении списка, если все тайники помещаются в нём
-- Новое: Следить за моим местоположением на карте высот (ЕдинаяКарта)
-- Новое: Добавлены "переместить в" / "скопировать в" для "показать списком"
-- Новое: Поддержка высот в Зимней теме (Winter theme) при скачивании карт
-- Новое: Адаптивное затенение холмов, дополнительный режим высокого качества (Mapsforge в ЕдинаяКарта)
-- Новое: Переработанный диалог быстрых настроек маршрутов/треков
-- Новое: Длительное нажатие на значок выбора карты для выбора предыдущего провайдера карт (ЕдинаяКарта)
-- Новое: Возможность настраивать отображаемое название для автономных карт в сопутствующем файле (ЕдинаяКарта)
-- Новое: Долгий тап по "включить онлайн", чтобы скачать тайники
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
+- New: Follow my location in elevation chart (UnifiedMap)
+- New: Enable "move to" / "copy to" actions for "show as list"
+- New: Support Elevate Winter theme in map downloader
+- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Детали тайника
 - Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
@@ -72,3 +73,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Исправлено: при импорте файла локальной карты имя карты выбиралось случайным образом
+- Fix: Map downloader offering broken (0 bytes) files for download
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
+- New: Share list of geocodes from cache list
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter

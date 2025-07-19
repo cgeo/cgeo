@@ -47,6 +47,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // cache details
             R.string.pref_friendlogswanted,
             R.string.pref_livelist,
+            R.string.pref_live_compass_in_navigation_action,
             R.string.pref_rot13_hint,
             // map sources
             R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,

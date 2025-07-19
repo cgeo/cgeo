@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Genegeerde talen</string>
     <string name="translator_preference_nottranslate_lng_summary">Brontalen om geen vertaling voor aan te bieden</string>
     <string name="translator_preference_disable">&lt;Schakel vertalen uit&gt;</string>
+    <string name="translator_preference_application_language">&lt;Gebruik applicatie taal&gt;</string>
     <string name="translator_model_download_select">Download offline vertalen taal</string>
     <string name="translator_model_download_confirm_title">Bevestig taaldownload</string>
     <string name="translator_model_download_confirm_txt">Vertaalmodel voor %s moet worden gedownload. Het model is grofweg 20-40 MB.</string>
@@ -358,6 +359,7 @@
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
     <string name="translator_language_unknown">Kan taal niet identificeren</string>
     <string name="translator_language_detected">Vertalen van \"%s\"</string>
+    <string name="translator_target_language">Vertaal naar \"%s\"</string>
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
     <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
@@ -471,6 +473,7 @@
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
     <string name="caches_upload_allcoords_dialogtitle">WAARSCHUWING: Alle coördinaten worden geüpload</string>
     <string name="caches_upload_allcoords_warning">Dit zal de bestaande coördinaten op de server overschrijven voor alle (geselecteerde) caches van je lijst met de huidige coördinaten in c:geo! Dit dient alleen in speciale gevallen te worden gebruikt bijvoorbeeld wanneer je een GPX-bestand importeerde dat gecorrigeerde coördinaten bevat als lijstcoördinaten. Dit kan niet ongedaan worden gemaakt en je dient het alleen te gebruiken als je weet wat je aan het doen bent. In normale gevallen wil je liever de functie \"Upload aangepaste coördinaten\" gebruiken in hetzelfde menu.</string>
+    <string name="caches_share_geocodes">Deel lijst met geocodes</string>
     <string name="caches_refresh_selected">Ververs geselecteerden</string>
     <string name="caches_refresh_all">Ververs alle</string>
     <string name="caches_move_selected">Verplaats geselecteerden</string>
@@ -931,6 +934,8 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
+    <string name="init_use_application_language">Gebruik applicatie taal</string>
+    <string name="init_translation_disabled">Vertalen uitgeschakeld</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
     <string name="system_default">Systeemstandaard</string>
@@ -983,6 +988,7 @@
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
     <string name="init_cachelists">Cache lijsten</string>
     <string name="init_localization">Lokalisatie</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
@@ -1000,6 +1006,8 @@
     <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
     <string name="init_custombnitem_none">(geen)</string>
     <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
+    <string name="init_title_collapse_log_limit">Log regellimiet</string>
+    <string name="init_summary_collapse_log_limit">Maximaal aantal lijnen om te tonen voor logs. Extra lijnen worden samengevouwen. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
@@ -1210,6 +1218,8 @@
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
     <string name="init_appearance_general">Algemeen uiterlijk</string>
+    <string name="init_cachedetail_behaviour">Gedrag</string>
+    <string name="init_cachedetail_note">Persoonlijke cache notitie</string>
     <string name="init_maplines_title">Kaart kleuren aanpassen</string>
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
@@ -1528,7 +1538,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Bijgewoond</string>
+    <string name="cache_status_attended">Was aanwezig</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1862,7 +1872,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema Opties</string>
+    <string name="google_maps_option_group_theme">Thema opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -1884,6 +1894,7 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_info_message" formatted="false">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
     <string name="search_tb">Trackable</string>
+    <string name="most_recent">Meest recent</string>
     <string name="search_destination">Open bestemming in c:geo</string>
     <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
@@ -1973,9 +1984,14 @@
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
+    <string name="export">Exporteren</string>
+    <string name="export_upload">Exporteren / Uploaden</string>
     <string name="export_progress">Exporteer: %1$s</string>
     <string name="export_exportedto">Geexporteerd naar</string>
     <string name="export_failed">Exporteren mislukt</string>
+    <string name="export_gpx">Exporteer GPX</string>
+    <string name="export_fieldnotes">Exporteren veldnotities</string>
+    <string name="fieldnotes">Veldnotities</string>
     <string name="export_fieldnotes_info">Veld-notities worden geëxporteerd naar /sdcard/field-notes met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_fieldnotes_upload">Upload naar geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploaden…</string>
@@ -1985,6 +2001,7 @@
     <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
     <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
     <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
+    <string name="export_persnotes">Persoonlijke notitie uploaden</string>
     <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d notitie succesvol geüpload</item>
@@ -2404,7 +2421,7 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Routering-doel wissen</string>
+    <string name="map_clear_manual_targets">Routeringsdoel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2565,7 +2582,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (alleen VTM, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>

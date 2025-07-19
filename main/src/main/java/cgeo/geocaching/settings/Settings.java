@@ -510,7 +510,7 @@ public class Settings {
         return sharedPrefs != null && sharedPrefs.contains(prefKey);
     }
 
-    private static String getStringDirect(final String prefKey, final String defaultValue) {
+    public static String getStringDirect(final String prefKey, final String defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getString(prefKey, defaultValue);
     }
 
@@ -566,7 +566,7 @@ public class Settings {
         putStringDirect(getKey(prefKeyId), value);
     }
 
-    private static void putStringDirect(final String prefKey, final String value) {
+    public static void putStringDirect(final String prefKey, final String value) {
         if (sharedPrefs == null) {
             return;
         }
@@ -1043,8 +1043,20 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static int getLogLineLimit() {
+        final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
+        if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {
+            return 0;
+        }
+        return logLineLimit;
+    }
+
     public static boolean isLiveList() {
         return getBoolean(R.string.pref_livelist, true);
+    }
+
+    public static boolean useLiveCompassInNavigationAction() {
+        return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
     }
 
     public static boolean isTrackableAutoVisit() {

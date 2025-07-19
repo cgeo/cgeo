@@ -96,7 +96,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             "**[" + LocalizationUtils.getString(R.string.cache_menu_browser) + "](" + link + ")**  \n" +
             "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
             "**" + LocalizationUtils.getString(R.string.distance) + ":** " + WherigoUtils.getDisplayableDistance(WherigoLocationProvider.get().getLocation(), cartridgeInfo.getCartridgeLocation())
-            ).setMarkdown(true).applyTo(binding.headerInformation);
+            ).setMarkdown(true).applyTo(binding.headerInformation, false, true);
     }
 
     //Action is either "delete cartridge" or "Play Game"

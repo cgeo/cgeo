@@ -22,6 +22,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Parcelable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.material.snackbar.Snackbar;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -263,5 +265,23 @@ public class ShareUtils {
         // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
         customTabsIntent.intent.setPackage(CHROME_PACKAGE_NAME);
         customTabsIntent.launchUrl(context, Uri.parse(url));
+    }
+
+    public static void showLogPostedSnackbar(@NonNull final Activity activity, @Nullable final Intent data, final View anchor) {
+        if (data == null) {
+            return;
+        }
+        final String shareText = data.getStringExtra("EXTRA_SHARE_TEXT");
+        if (!StringUtils.isBlank(shareText)) {
+            Snackbar.make(activity.findViewById(android.R.id.content), activity.getString(R.string.info_log_posted), Snackbar.LENGTH_LONG)
+                    .setAnchorView(anchor)
+                    .setAction(R.string.snackbar_action_share, v -> {
+                        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                        activity.startActivity(Intent.createChooser(shareIntent, null));
+                    })
+                    .show();
+        }
     }
 }

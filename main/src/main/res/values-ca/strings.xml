@@ -347,6 +347,7 @@
     <string name="translator_preference_nottranslate_lng">Llengües ignorades</string>
     <string name="translator_preference_nottranslate_lng_summary">Idiomes d\'origen per als quals no oferir traducció</string>
     <string name="translator_preference_disable">&lt;Desactiva la traducció&gt;</string>
+    <string name="translator_preference_application_language">&lt;Utilitzar l\'idioma de l\'aplicació&gt;</string>
     <string name="translator_model_download_select">Baixeu l\'idioma de traducció fora de línia</string>
     <string name="translator_model_download_confirm_title">Confirmeu la descàrrega de l\'idioma</string>
     <string name="translator_model_download_confirm_txt">Cal descarregar el model de traducció per a l\'idioma %s. La mida del model és d\'aproximadament 20-40 MB.</string>
@@ -359,6 +360,7 @@
     <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
     <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
     <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_target_language">Tradueix a \"%s\"</string>
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
     <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
@@ -472,6 +474,7 @@
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
     <string name="caches_upload_allcoords_dialogtitle">ATENCIÓ - Pujant totes les coordenades</string>
     <string name="caches_upload_allcoords_warning">Això sobreescriurà les coordenades existents al servidor per a tots els catxés seleccionats de la vostra llista amb les coordenades de llista actuals a c: geo! Això només s’ha d’utilitzar en casos especials, Ex. en importar un fitxer GPX que conté coordenades corregides com a coordenades de llista. Això no es pot desfer i només l\'heu d\'utilitzar si sabeu què feu. En casos normals, és possible que vulgueu utilitzar la funció \"Pujar coordenades modificades\" del mateix menú.</string>
+    <string name="caches_share_geocodes">Comparteix la llista de geocodis</string>
     <string name="caches_refresh_selected">Actualitza els seleccionats</string>
     <string name="caches_refresh_all">Actualitza-ho tot</string>
     <string name="caches_move_selected">Mou els seleccionats</string>
@@ -932,6 +935,8 @@
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_use_application_language">Utilitzeu el llenguatge de l\'aplicació</string>
+    <string name="init_translation_disabled">Traducció desactivada</string>
     <string name="init_date_format">Format de data</string>
     <string name="init_date_format_description">Format per utilitzar per a dates curtes, p. a la vista de registre</string>
     <string name="system_default">Sistema per defecte</string>
@@ -984,6 +989,7 @@
     <string name="init_summary_units">Utilitza unitats imperials (milles/peus) en lloc d\'unitats mètriques (quilòmetres/metres)</string>
     <string name="init_cachelists">Llistes de catxés</string>
     <string name="init_localization">Localització</string>
+    <string name="init_logs">Registres</string>
     <string name="init_log_offline">Registre fora de línia</string>
     <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
     <string name="init_choose_list">Demana una llista</string>
@@ -1001,6 +1007,8 @@
     <string name="init_custombnitem_default">Cerca propers (per defecte)</string>
     <string name="init_custombnitem_none">(cap)</string>
     <string name="init_custombnitem_empty_placeholder">(marcador de posició buit)</string>
+    <string name="init_title_collapse_log_limit">Límit de línia de registre</string>
+    <string name="init_summary_collapse_log_limit">Nombre màxim de línies per mostrar per als registres.Les línies addicionals es reduiran. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocodi</string>
     <string name="cacheListInfoItem_Difficulty">Dificultat</string>
@@ -1089,7 +1097,7 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els vessants s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
@@ -1211,6 +1219,8 @@
     <string name="feature_favorite">S\'està afegint el catxé als preferits…</string>
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_appearance_general">Aparença general</string>
+    <string name="init_cachedetail_behaviour">Comportament</string>
+    <string name="init_cachedetail_note">Nota de catxé personal</string>
     <string name="init_maplines_title">Personalització dels colors del mapa</string>
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
@@ -1395,7 +1405,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Traçable</string>
+    <string name="cache_inventory">Rastrejables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
@@ -1529,7 +1539,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">He assistit</string>
+    <string name="cache_status_attended">Vaig assistir</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1760,7 +1770,7 @@
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
-    <string name="calccoord_generate_error_novarwithrange">Cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
+    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals (p. ex.: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
     <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
     <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
@@ -1863,7 +1873,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del Tema</string>
+    <string name="google_maps_option_group_theme">Opcions del tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
@@ -1885,6 +1895,7 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
+    <string name="most_recent">El més recent</string>
     <string name="search_destination">Obre la destinació al c: geo</string>
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
@@ -1974,9 +1985,14 @@
     <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
+    <string name="export">Exporta</string>
+    <string name="export_upload">Exporta / Carrega</string>
     <string name="export_progress">Exporta: %1$s</string>
     <string name="export_exportedto">exportat a</string>
     <string name="export_failed">S\'ha produït un error en l\'exportació</string>
+    <string name="export_gpx">Exporta GPX</string>
+    <string name="export_fieldnotes">Exporta notes de camp</string>
+    <string name="fieldnotes">notes de camp</string>
     <string name="export_fieldnotes_info">Les notes de camp s\'exportaran a /sdcard/field-notes amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_fieldnotes_upload">Carrega a geocaching.com</string>
     <string name="export_fieldnotes_uploading">S\'està carregant…</string>
@@ -1986,6 +2002,7 @@
     <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
     <string name="export_confirm_title">Exportant %1$s</string>
     <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
+    <string name="export_persnotes">Carregueu notes personals</string>
     <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">S\'ha pujat %1$d nota correctament</item>

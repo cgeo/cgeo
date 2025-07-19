@@ -25,6 +25,17 @@ permissions:
   pull-requests: write
 
 jobs:
+  check-websites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+
   check-secrets:
     runs-on: ubuntu-latest
     steps:
@@ -108,7 +119,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run checkstyle
         run: ./gradlew --no-configuration-cache --no-daemon --scan checkstyle
@@ -170,7 +181,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run lintBasicDebug
         run: ./gradlew --no-configuration-cache --no-daemon --scan lintBasicDebug
@@ -199,6 +210,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Fail early if OC.de is not reachable
+        uses: ./.github/actions/check-websites
+        with:
+          URLS: https://www.opencaching.de/
+          with_error: "true"
 
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
@@ -248,7 +265,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/release' }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          add-job-summary-as-pr-comment: on-failure  # Valid values are 'never' (default), 'always', and 'on-failure'
+          add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Build binary
         run: |
@@ -285,14 +302,25 @@ jobs:
 
       # Allow only one job at a time (prevent errors on live GC tests)
       - name: Wait for lock on live tests
-        uses: suzuki-shunsuke/lock-action@latest
+        id: lock-tests
+        run: |
+          function unlock() {
+            curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
+          }
+          # Unlock immediatelly if we just get the lock and the step is cancelled
+          trap unlock SIGINT
+          TIMEOUT_MINUTES=120
+          i=0
+          locked=false
+          while [ "$i" -lt $(( 6 * $TIMEOUT_MINUTES )) ] && ! curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?lock&waitTimeoutMs=10000" --fail
+            do ((i+=1))
+          done && locked=true
+
+      - name: Check websites status
+        uses: ./.github/actions/check-websites
+        continue-on-error: true
         with:
-          mode: lock
-          key: unit-test
-          # Try to acquire a lock every 30 seconds until acquiring a lock or 2 hours pass.
-          max_wait_seconds: "7200"
-          wait_interval_seconds: "30"
-          post_unlock: "true"
+          with_error: "true"
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -310,8 +338,33 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            # Capture logcat output ; see https://github.com/ReactiveCircus/android-emulator-runner/issues/228
+            adb logcat -c || true
+            adb logcat > /tmp/cgeo-apk-api${{ matrix.api-level }}.logcat.txt &
             ./gradlew --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
+
+      - name: Unlock live tests
+        # unlock only if we locked it
+        if: always() && steps.lock-tests.conclusion == 'success'
+        run: |
+          curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
+
+      - name: Upload logcat
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "cgeo-apk-api${{ matrix.api-level }}.logcat"
+          path: '/tmp/cgeo-apk-api*.logcat.txt'
+          overwrite: true
+
+      # - name: Add PR comment with logcat output
+      #   if: failure() && (github.event_name == 'pull_request_target' || github.event_name == 'pull_request')
+      #   uses: thollander/actions-comment-pull-request@v3
+      #   with:
+      #     file-path: /tmp/cgeo-apk-api${{ matrix.api-level }}.logcat.txt
+      #     comment-tag: cgeo-apk-api${{ matrix.api-level }}.logcat
+      #     reactions: eyes, rocket
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4

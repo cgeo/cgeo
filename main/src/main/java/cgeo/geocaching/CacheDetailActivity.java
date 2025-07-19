@@ -72,7 +72,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
+import cgeo.geocaching.ui.CompassMiniView;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -89,6 +89,7 @@ import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
@@ -199,6 +200,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
+    private static final int REQUEST_CODE_LOG = 1001;
 
     private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
     private static final String EXTRA_EDIT_PERSONALNOTE = "cgeo.geocaching.extra.cachedetail.editPersonalNote";
@@ -223,6 +225,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private GeoDirHandler locationUpdater;
 
     private MenuItem menuItemToggleWaypointsFromNote = null;
+
+    private CompassMiniView compassMiniView;
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -449,7 +453,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             start = initial;
         }
         if (start) {
-            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODIR));
         }
     }
 
@@ -717,6 +721,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         if (cache != null) {
             // top level menu items
+            if (getUseLiveCompassInNavigationAction() && cache.getCoords() != null) {
+                initCompassMiniView();
+            }
 
             final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
             ttsMenuItem.setVisible(!cache.isGotoHistoryUDC());
@@ -822,6 +829,19 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return true;
     }
 
+    private void initCompassMiniView() {
+        final CompassMiniView compass = findViewById(R.id.compass_action);
+        if (compass != null) {
+            this.compassMiniView = compass;
+            compassMiniView.setTargetCoords(cache.getCoords());
+            compassMiniView.updateCurrentCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
+        }
+    }
+
+    private boolean getUseLiveCompassInNavigationAction() {
+        return Settings.useLiveCompassInNavigationAction();
+    }
+
     private static void openGeochecker(final Activity activity, final Geocache cache) {
         ShareUtils.openUrl(activity, CheckerUtils.getCheckerUrl(cache), true);
     }
@@ -870,7 +890,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
-        public void updateGeoData(final GeoData geo) {
+        public void updateGeoDir(@NonNull final GeoData newGeo, final float newDirection) {
             final CacheDetailActivity activity = activityRef.get();
             if (activity == null) {
                 return;
@@ -878,12 +898,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (activity.cacheDistanceView == null) {
                 return;
             }
-
             if (activity.cache != null && activity.cache.getCoords() != null) {
-                activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(activity.cache.getCoords())));
+                activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(newGeo.getCoords().distanceTo(activity.cache.getCoords())));
                 activity.cacheDistanceView.bringToFront();
             }
+            if (activity.getUseLiveCompassInNavigationAction()) {
+                if (activity.compassMiniView != null && activity.compassMiniView == activity.findViewById(R.id.compass_action)) {
+                    activity.setActualCoordinates(newGeo.getCoords());
+                    activity.setActualHeading(AngleUtils.getDirectionNow(newDirection));
+                } else if (activity.cache != null && activity.cache.getCoords() != null) {
+                    activity.initCompassMiniView();
+                }
+            }
         }
+    }
+
+    public void setActualCoordinates(@NonNull final Geopoint coords) {
+        compassMiniView.updateCurrentCoords(coords);
+    }
+
+    public void setActualHeading(final float direction) {
+        compassMiniView.updateAzimuth(direction);
     }
 
     private static final class LoadCacheHandler extends SimpleDisposableHandler {
@@ -1262,7 +1297,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache name (full name), may be editable
             // Not using colored cache names at this place to have at least one place without any formatting to support visually impaired users
             final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
-            activity.addShareAction(cachename);
+            details.addShareAction(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
                     cachename.setText(name);
@@ -1277,7 +1312,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 details.addAlcMode(cache);
             }
             details.addSize(cache);
-            activity.addShareAction(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
+            details.addShareAction(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
 
             activity.cacheDistanceView = details.addDistance(cache, activity.cacheDistanceView);
@@ -1310,7 +1345,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // hidden or event date
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
-                activity.addShareAction(hiddenView);
+                details.addShareAction(hiddenView);
                 if (cache.isEventCache()) {
                     hiddenView.setOnClickListener(v -> CalendarUtils.openCalendar(activity, cache.getHiddenDate()));
                 }
@@ -1322,11 +1357,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // cache coordinates
-            if (cache.getCoords() != null) {
-                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).valueView;
-                new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
-                activity.addShareAction(valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
-            }
+            details.addCoordinates(cache.getCoords());
 
             // Latest logs
             details.addLatestLogs(cache);
@@ -1781,7 +1812,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache personal note
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
             binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            activity.addShareAction(binding.personalnote);
+            CacheDetailsCreator.addShareAction(activity, binding.personalnote);
             TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
             binding.editPersonalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             binding.personalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
@@ -1952,9 +1983,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.description.setVisibility(View.VISIBLE);
             AndroidRxUtils.computationScheduler.scheduleDirect(() ->
                     createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle, translator, status, p -> {
+                        if (activity.isFinishing() || activity.isDestroyed()) {
+                            return;
+                        }
                         displayDescription(activity, cache, p.first, binding.description);
                         if (translator != null) {
-                            binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_translation_success), status.getSourceLanguage()));
+                            binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
 
                         if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
@@ -1968,8 +2002,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                         }
                         if (p.second) {
-                            binding.descriptionRenderFully.setVisibility(View.VISIBLE);
-                            binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
+                            binding.descriptionRenderFully.post(() -> {
+                                binding.descriptionRenderFully.setVisibility(View.VISIBLE);
+                                binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
+                            });
                         } else {
                             ((CacheDetailActivity) activity).lastActionWasEditNote = false;
                         }
@@ -2303,7 +2339,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
-            activity.addShareAction(coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
+            CacheDetailsCreator.addShareAction(activity, coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
@@ -2486,23 +2522,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             imageGalleryResultResultCode = resultCode;
             imageGalleryData = data;
         }
+        if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.tab_layout));
+        }
     }
 
     @Override
     public void onActivityReenter(final int resultCode, final Intent data) {
         super.onActivityReenter(resultCode, data);
         this.imageGalleryPos = ImageGalleryView.onActivityReenter(this, this.imageGallery, data);
-    }
-
-    public void addShareAction(final TextView view) {
-        addShareAction(view, s -> s);
-    }
-
-    public void addShareAction(final TextView view, final androidx.arch.core.util.Function<String, String> formatter) {
-        view.setOnLongClickListener(v -> {
-            ShareUtils.sharePlainText(this, formatter.apply(view.getText().toString()));
-            return true;
-        });
     }
 
     public static void startActivityGuid(final Context context, final String guid, final String cacheName) {

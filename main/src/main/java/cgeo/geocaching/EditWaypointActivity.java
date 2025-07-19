@@ -316,7 +316,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements N
 
     @Override
     public void onBackPressed() {
+        // @todo should be replaced by setting a OnBackPressedDispatcher
         finishConfirmDiscard();
+        super.onBackPressed();
     }
 
     @Override

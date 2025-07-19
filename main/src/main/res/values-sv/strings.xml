@@ -313,6 +313,8 @@
     <string name="info_log_saved">c:geo har sparat din logg.</string>
     <string name="info_log_post_failed">Misslyckades skicka logg.</string>
     <string name="info_log_delete_failed">Borttagning av logg misslyckades.</string>
+    <string name="info_log_post_failed_simple_reason">Kontrollera att du är korrekt inloggad och har en giltig internetanslutning.</string>
+    <string name="info_log_delete_failed_simple_reason">Kontrollera att du är korrekt inloggad, har en giltig internetanslutning och att loggen inte redan har tagits bort.</string>
     <string name="info_log_post_retry">Försök igen</string>
     <string name="info_log_post_save">Spara offline</string>
     <string name="info_log_cleared">Loggen har rensats.</string>
@@ -344,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorerade språk</string>
     <string name="translator_preference_nottranslate_lng_summary">Källspråk att inte erbjuda översättning för</string>
     <string name="translator_preference_disable">&lt;Avaktivera översättning&gt;</string>
+    <string name="translator_preference_application_language">&lt;Använd applikationsspråk&gt;</string>
     <string name="translator_model_download_select">Ladda ned översättningsspråk offline</string>
     <string name="translator_model_download_confirm_title">Bekräfta språknedladdning</string>
     <string name="translator_model_download_confirm_txt">Översättningsmodell för språk %s måste laddas ner. Modellens storlek är ungefär 20-40 MB.</string>
@@ -356,6 +359,7 @@
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning.</string>
     <string name="translator_language_unknown">Det gick inte att identifiera språk</string>
     <string name="translator_language_detected">Översätt från \"%s\"</string>
+    <string name="translator_target_language">Översätt till %s</string>
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
     <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
@@ -469,6 +473,7 @@
     <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
     <string name="caches_upload_allcoords_dialogtitle">VARNING - Laddar upp alla koordinater</string>
     <string name="caches_upload_allcoords_warning">Detta kommer att skriva över befintliga koordinater på servern för alla (valda) cacher i din lista med nuvarande listkoordinater i c:geo! Detta ska endast användas i särskilda fall, t.ex. när du importerade en GPX-fil som innehåller korrigerade koordinater som listningskoordinater. Detta kan inte ångras och du bör bara använda det om du vet vad du gör. I normala fall kanske du hellre vill använda funktionen \"Ladda upp modifierade koordinater\" ifrån samma meny.</string>
+    <string name="caches_share_geocodes">Dela lista med geocoder</string>
     <string name="caches_refresh_selected">Uppdatera valda</string>
     <string name="caches_refresh_all">Uppdatera alla</string>
     <string name="caches_move_selected">Flytta valda</string>
@@ -928,6 +933,8 @@
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
     <string name="init_use_default_language">Använd standardspråk</string>
+    <string name="init_use_application_language">Använd applikationsspråk</string>
+    <string name="init_translation_disabled">Översättning inaktiverad</string>
     <string name="init_date_format">Datumformat</string>
     <string name="init_date_format_description">Format att använda för korta datum, t.ex. i loggvy</string>
     <string name="system_default">Systemstandard</string>
@@ -980,6 +987,7 @@
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_cachelists">Cache-listor</string>
     <string name="init_localization">Lokalisering</string>
+    <string name="init_logs">Loggar</string>
     <string name="init_log_offline">Snabbloggning</string>
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
@@ -997,6 +1005,8 @@
     <string name="init_custombnitem_default">Närliggande sökning (standard)</string>
     <string name="init_custombnitem_none">(ingen)</string>
     <string name="init_custombnitem_empty_placeholder">(tom platshållare)</string>
+    <string name="init_title_collapse_log_limit">Gräns för loggrader</string>
+    <string name="init_summary_collapse_log_limit">Maximalt antal rader att visa för loggar. Ytterligare rader kommer att kollapsa. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Svårighetsgrad</string>
@@ -1207,6 +1217,8 @@
     <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
     <string name="feature_voting">Rösta på cacher</string>
     <string name="init_appearance_general">Allmänt utseende</string>
+    <string name="init_cachedetail_behaviour">Beteende</string>
+    <string name="init_cachedetail_note">Personlig cacheanteckning</string>
     <string name="init_maplines_title">Anpassning av kartfärger</string>
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
@@ -1390,7 +1402,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Spårbara objekt</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
@@ -1417,6 +1428,7 @@
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
     <string name="cache_description_rendering">Återger beskrivning, vänligen vänta…</string>
+    <string name="cache_description_translating_and_rendering">Översätter och renderar beskrivning, vänligen vänta…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varning: Beskrivningen är mycket stor (%1$d tecken). Endast de första %2$d%% visas.</string>
     <string name="cache_description_render_fully">Rendera fullständig beskrivning</string>
     <string name="cache_area_description">Områdesbeskrivning</string>
@@ -1515,6 +1527,7 @@
     <string name="cache_log_menu_decrypt">Dekryptera/kryptera</string>
     <string name="cache_log_menu_edit">Redigera logg</string>
     <string name="menu_expand_log">Expandera logg</string>
+    <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
@@ -1634,6 +1647,7 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <string name="internal_connector_name">Användardefinierade cacher</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
@@ -1870,9 +1884,10 @@
     <string name="search_kw_disabled_hint">Inaktiverad eftersom det inte stöds av geocaching.com för BASIC-medlemmar</string>
     <string name="search_hbu">Gömd av</string>
     <string name="search_finder">Hittad av</string>
-    <string name="search_filter">Filter</string>
+    <string name="search_filter">Filtrera</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
+    <string name="most_recent">Senaste</string>
     <string name="search_destination">Öppna destinationen i c:geo</string>
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
@@ -1962,9 +1977,14 @@
     <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
     <!-- export -->
     <string name="share_export">Dela / Exportera</string>
+    <string name="export">Exportera</string>
+    <string name="export_upload">Exportera / ladda upp</string>
     <string name="export_progress">Exportera: %1$s</string>
     <string name="export_exportedto">exporterat till</string>
     <string name="export_failed">Exporteringen misslyckades</string>
+    <string name="export_gpx">Exportera GPX</string>
+    <string name="export_fieldnotes">Exportera fältanteckningar</string>
+    <string name="fieldnotes">Fältanteckningar</string>
     <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
     <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laddar upp…</string>
@@ -1974,6 +1994,7 @@
     <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
     <string name="export_confirm_title">Exporterar %1$s</string>
     <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
+    <string name="export_persnotes">Ladda upp personliga anteckningar</string>
     <string name="export_persnotes_uploading">Laddar upp personlig anteckning %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Överförde %1$d anteckning</item>
@@ -2387,6 +2408,7 @@
     <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_route">Exportera som rutt</string>
     <string name="map_export_track">Exportera som spår</string>
+    <string name="map_load_from_GPX">Ladda från GPX</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
@@ -2627,6 +2649,7 @@
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
     <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>

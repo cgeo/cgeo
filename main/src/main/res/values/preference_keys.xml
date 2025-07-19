@@ -197,6 +197,8 @@
     <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
     <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
+    <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>
+    <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -604,6 +606,7 @@
     <string translatable="false" name="pref_mapScaleOnly">mapScaleOnly</string>
     <string translatable="false" name="pref_unifiedMapVariants">unifiedMapVariants</string>
     <string translatable="false" name="pref_autorenameDownloads">autorenameDownloads</string>
+    <string translatable="false" name="pref_elevationChartExpanded">elevationChartExpanded</string>
 
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
@@ -653,6 +656,7 @@
     <string translatable="false" name="pref_search_history_finder">search_history_finder</string>
     <string translatable="false" name="pref_search_history_trackable">search_history_trackable</string>
     <string translatable="false" name="pref_search_history_address">search_history_address</string>
+    <string translatable="false" name="pref_search_history_geocode">search_history_geocode</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

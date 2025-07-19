@@ -187,12 +187,11 @@ public final class WherigoUtils {
             return "null";
         }
 
-        final StringBuilder msg = new StringBuilder(et.getClass().getSimpleName() + ": " + et.name + "\n");
-        msg.append("Description: ").append(et.description);
+        final StringBuilder msg = new StringBuilder(et.getClass().getSimpleName() + ": " + et.name);
+        msg.append("\nDescription: ").append(et.description);
         msg.append("\n- vis:").append(et.isVisible());
-        msg.append("\n- Has Media: ").append(et.media != null);
+        msg.append("\n- Media: ").append(mediaDebugInfo(et.media));
         msg.append("\n- Located: ").append(et.isLocated()).append(" (").append(WherigoUtils.GP_CONVERTER.from(et.position)).append(")");
-
         if (et instanceof Container) {
             final Container cnt = (Container) et;
             msg.append("\n- visToPlayer:").append(cnt.visibleToPlayer());
@@ -224,7 +223,19 @@ public final class WherigoUtils {
             }
             msg.append(")");
         }
+        msg.append("\n- Raw:").append(et);
         return msg.toString();
+    }
+
+    private static String mediaDebugInfo(final Object media) {
+        if (media == null) {
+            return "null";
+        }
+        if (!(media instanceof Media)) {
+            return "no media instance: " + media.getClass().getName();
+        }
+        final Media m = (Media) media;
+        return m.id + ": " + m.name;
     }
 
     public static CartridgeFile readCartridge(final Uri uri) throws IOException {

@@ -1,5 +1,3 @@
-(nur nightly-Versionen: "nightly"-Banner temporär vom Logo entfernt während der Überarbeitung des Logo-Designs)
-
 ### Roadmap UnifiedMap (Vereinheitlichte Karte) & Abkündigung der alten Karten
 c:geo hat seit einiger Zeit eine komplett neue Kartenimplementierung namens "UnifiedMap", die bald die alten Implementierungen von Google Maps und Mapsforge (OpenStreetMap) ersetzen wird. Dies ist ein Abkündigungs-Hinweis und informiert über die weitere Planung.
 
@@ -25,7 +23,7 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
 - Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
-- Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
+- Änderung: Aktuellen Kartenausschnitt bei Anzeige der Caches einer Liste behalten, wenn alle Caches in den aktuellen Kartenausschnitt passen
 - Neu: Folge meinem Standort im Höhendiagramm (UnifiedMap)
 - Neu: Aktiviere "Verschieben" / "Kopieren" Aktionen für "Zeige als Liste"
 - Neu: Unterstützung für Elevate Winter Design im Kartendownloader
@@ -36,6 +34,9 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: Langes Tippen auf "Live-Modus"-Icon, um Offline-Caches zu laden
 - Neu: Offline Hangschattierung für UnifiedMap (VTM-Variante)
 - Neu: Unterstützung für Hintergrundkarten (UnifiedMap)
+- Korrektur: Kompakte Icons kehren nicht zu großen Icons zurück, wenn sie im Auto-Modus eingeschoben werden (UnifiedMap)
+- Neu: Langes Tippen im Cache-Popup: GC-Code, Cachetitel, Koordinaten, persönliche Notiz/Hinweis
+- Änderung: Langes Tippen im Cache-Popup für Emoji-Auswahl geändert in kurzes Tippen, um die Kollision zu beheben
 
 ### Cache-Details
 - Neu: Offline-Übersetzung von Text und Logs (experimentell)
@@ -72,3 +73,8 @@ Bis dahin kannst du in Einstellungen => Kartenquellen zwischen den verschiedenen
 - Neu: GPX-Export: Exportieren von Logs / Trackables optional
 - Neu: Button zum Löschen von Logtemplates hinzugefügt
 - Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
+- Korrektur: Map-Downloader bietet defekte (0 Bytes) Dateien zum Download an
+- Neu: Zuordnungen für einige fehlende OC-Cache-Typen ergänzt
+- Neu: Verschiebe zuletzt zugeordnete Listen im Listenauswahldialog nach oben, wenn du "Letzte Auswahl" verwendest
+- Neu: Liste mit Geocodes aus der Cacheliste teilen
+- Änderung: "Navigation (Auto)" etc. verwenden nun den Parameter "q=" anstelle des veralteten "ll="

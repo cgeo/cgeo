@@ -45,6 +45,7 @@ import cgeo.geocaching.search.GeocacheSearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
+import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -3144,7 +3145,7 @@ public class DataStore {
                     if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
                         final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
                         if (CollectionUtils.isNotEmpty(waypoints)) {
-                            cache.setWaypoints(waypoints, false);
+                            cache.setWaypoints(waypoints);
                         }
                     }
 
@@ -3751,15 +3752,26 @@ public class DataStore {
         });
     }
 
+    @NonNull
+    public static List<LogEntry> loadLogs(final String geocode) {
+        return loadLogs(geocode, null, null);
+    }
+
+    @NonNull
+    public static List<LogEntry> loadLogsOfAuthor(final String geocode, final @Nullable String authorName, final @Nullable Boolean whereFriend) {
+        return loadLogs(geocode, authorName, whereFriend);
+    }
 
     /**
      * @return an immutable, non null list of logs
      */
     @NonNull
-    public static List<LogEntry> loadLogs(final String geocode) {
+    private static List<LogEntry> loadLogs(final String geocode, final @Nullable String authorName, final @Nullable Boolean whereFriend) {
         return withAccessLock(() -> {
 
-            try (ContextLogger cLog = new ContextLogger("DataStore.loadLogs(%s)", geocode)) {
+            try (ContextLogger cLog = new ContextLogger("DataStore.loadLogs(geocode: %s, author: %s, friend: %s)", geocode,
+                    StringUtils.isEmpty(authorName) ? "%" : authorName,
+                    whereFriend == null ? "all" : (whereFriend ? "true" : "false"))) {
                 final List<LogEntry> logs = new ArrayList<>();
 
                 if (StringUtils.isBlank(geocode)) {
@@ -3768,11 +3780,17 @@ public class DataStore {
 
                 init();
 
+                String whereFriendSql = "";
+                if (whereFriend != null) {
+                    whereFriendSql = "AND friend = ";
+                    whereFriendSql += whereFriend ? "1" : "0";
+                }
+
                 final Cursor cursor = database.rawQuery(
                         //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
                         "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"
                                 + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
+                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + " ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
 
                 LogEntry.Builder log = null;
                 int cnt = 0;
@@ -4235,6 +4253,8 @@ public class DataStore {
                         }
                         Log.d("Database clean: finished");
                     }
+
+                    deleteOrphanedTrackfiles();
                 });
             }
         });
@@ -4305,6 +4325,29 @@ public class DataStore {
         }
         Log.i("delete orphaned UDC" + info);
         removeCaches(orphanedUDC, LoadFlags.REMOVE_ALL);
+    }
+
+    private static void deleteOrphanedTrackfiles() {
+        // current used trackfiles
+        final ArrayList<Trackfiles> currentTrackFiles = Trackfiles.getTrackfiles();
+        // all trackfiles
+        final List<ImmutablePair<ContentStorage.FileInformation, String>> trackFiles = FolderUtils.get().getAllFiles(Folder.fromFile(LocalStorage.getTrackfilesDir()));
+        if (trackFiles.size() <= currentTrackFiles.size()) {
+            return;
+        }
+
+        final List<String> currentTracks = new ArrayList<>();
+        for (final Trackfiles trackFile : currentTrackFiles) {
+            currentTracks.add(trackFile.getFilename());
+        }
+
+        // delete unused trackfiles
+        for (final ImmutablePair<ContentStorage.FileInformation, String> track : trackFiles) {
+            final String trackName = track.left.name;
+            if (!currentTracks.contains(trackName)) {
+                Trackfiles.removeTrackfile(trackName);
+            }
+        }
     }
 
     /**

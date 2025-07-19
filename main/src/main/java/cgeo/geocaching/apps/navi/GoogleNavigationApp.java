@@ -30,7 +30,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                    .parse("google.navigation:ll=" + coords.getLatitude() + ","
+                    .parse("google.navigation:q=" + coords.getLatitude() + ","
                             + coords.getLongitude() + "&mode=" + mode)));
 
         } catch (final Exception e) {

@@ -1,5 +1,3 @@
-(només per a la nit: s'ha eliminat temporalment el bàner "nocturn" del logotip mentre s'ajustava el disseny)
-
 ### Full de ruta de UnifiedMap & avís de desús de mapes "vells".
 c:geo té una implementació de mapes totalment nova anomenada "UnifiedMap" des de fa temps, que finalment substituirà les antigues implementacions de Google Maps i Mapsforge (OpenStreetMap). Aquest és un avís d'abandonament per informar-vos sobre el full de ruta posterior.
 
@@ -16,26 +14,29 @@ UnfiedMap ha demostrat ser estable des de fa força temps, per la qual cosa elim
 Full de ruta:
 - Els mapes "vells" estan ara en mode obsolet; ja no els arreglarem els errors.
 - UnifiedMap es convertirà per defecte per a tots els usuaris a la tardor del 2025.
-- Les implementacions de mapes "antigues" s'eliminaran a la primavera de 2026.
+- Les implementacions de mapes antigues s'eliminaran a la primavera del 2026.
 
 Fins aleshores, podeu canviar entre les diferents implementacions a la configuració => fonts de mapes.
 
 ### Mapa
-- Novetat: Mostra les tanques geogràfiques per a les etapes de laboratori (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
-- Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geotanca")
+- Novetat: Mostra les tanques geogràfiques per a les etapes de lab (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
+- Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geofence")
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
-- Correcció: el nombre de catxés al selector de llista no s'ha actualitzat en canviar el contingut de la llista
+- Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 - Canviar: manteniu la finestra gràfica actual en el mapa d'una llista, si tots els catxés encaixen a la finestra gràfica actual
 - Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
 - Nou: habiliteu les accions "mou a" / "copiar a" per a "mostrar com a llista"
 - Nou: admet el tema Elevate Winter al descarregador de mapes
 - Nou: ombrejat adaptatiu, mode d'alta qualitat opcional (UnifiedMap Mapsforge)
 - Novetat: diàleg de configuració ràpida de rutes/tracks redissenyades
-- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor anterior (UnifiedMap)
+- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor de rajoles anterior (UnifiedMap)
 - Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
-- Nou: toqueu llargament "activa el botó en directe" per carregar xatxés fora de línia
+- Nou: toqueu llargament "activa el botó en directe" per carregar catxés fora de línia
 - Nou: ombrejat fora de línia per a UnifiedMap (variant VTM)
 - Nou: suport per a mapes de fons (UnifiedMap)
+- Solució: les icones compactes no tornen a les icones grans en fer zoom en mode automàtic (UnifiedMap)
+- Novetat: Accions de toc llarg al full d'informació del catxé: codi GC, títol del catxé, coordenades, nota/suggeriment personal
+- Canvi: canvia el toc llarg del full d'informació del catxé per al selector d'emojis a un toc breu per resoldre la col·lisió
 
 ### Detalls del catxé
 - Nou: traducció fora de línia del text i de la llista dels registres  (experimental)
@@ -72,3 +73,8 @@ Fins aleshores, podeu canviar entre les diferents implementacions a la configura
 - Novetat: exportació GPX: exportació de registres / rastrejables es fa opcional
 - Nou: S'ha afegit un botó per eliminar les plantilles de registre
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
+- Correcció: el descarregador de mapes ofereix fitxers trencats (0 bytes) per a la descàrrega
+- Nou: s'han afegit mapes per a alguns tipus de catxé d'OC que falten
+- Nou: moveu les llistes "utilitzades recentment" al diàleg de selecció de llista a la part superior en prémer el botó "utilitzades recentment"
+- Nou: Comparteix la llista de geocodis de la llista de catxés
+- Canvi: "Navegació (cotxe)", etc., s'utilitza el paràmetre "q=" en lloc del paràmetre "ll=" obsolet

@@ -1218,6 +1218,7 @@
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
+    <string name="cache_status_attended">Katıldım</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
     <string name="cache_status_archived">Arşivlendi</string>
@@ -1435,6 +1436,7 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
+    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1445,6 +1447,7 @@
     <string name="search_kw">Anahtar kelime</string>
     <string name="search_hbu">Saklayan</string>
     <string name="search_finder">Bulan</string>
+    <string name="search_filter">Filtre</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Hedefi c:geo olarak aç</string>

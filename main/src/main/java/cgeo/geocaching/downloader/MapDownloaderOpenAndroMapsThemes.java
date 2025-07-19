@@ -85,7 +85,11 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
     private Download findTheme(final String name, final String page, final Pattern pattern, final String path) {
         final MatcherWrapper matchDate = new MatcherWrapper(pattern, page);
-        return matchDate.find() ? new Download(name, Uri.parse(baseUrl + path), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchDate.group(1))), Formatter.formatBytes(Long.parseLong(matchDate.group(2))), offlineMapType, iconRes) : null;
+        if (!matchDate.find()) {
+            return null;
+        }
+        final long size = Long.parseLong(matchDate.group(2));
+        return size > 0 ? new Download(name, Uri.parse(baseUrl + path), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchDate.group(1))), Formatter.formatBytes(size), offlineMapType, iconRes) : null;
     }
 
     @NonNull

@@ -1,10 +1,8 @@
-(alleen nightly: "nightly" banner van het logo tijdelijk verwijderd tijdens het afstemmen van het ontwerp)
-
 ### UnifiedMap-routekaart en kennisgeving van veroudering van "oude" kaarten
 c:geo heeft al een tijdje een geheel nieuwe kaartimplementatie met de naam "UnifiedMap". Deze zal uiteindelijk de oude implementaties van Google Maps en Mapsforge (OpenStreetMap) vervangen. Dit is een waarschuwing van afschaffing om je te informeren over de verdere routekaart.
 
 UnifiedMap is ongeveer een jaar geleden gepubliceerd. Het ondersteunt nog steeds Google Maps en OpenStreetMap (online + offline), maar op een volledig herwerkte technische manier en met veel spannende nieuwe functies die de "old" kaarten niet ondersteunen, waarvan sommige zijn
-- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online en offline)
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
 - Cluster popup voor Google Maps
 - Verberg kaartbronnen die je niet nodig hebt
 - Hoogtegrafiek voor routes en tracks
@@ -16,7 +14,7 @@ UnfiedMap is sinds geruime tijd stabiel gebleken, dus zullen we de oude implemen
 Routekaart:
 - "Oud" kaarten zijn verouderd - we lossen geen bugs meer op.
 - UnifiedMap zal de standaard worden voor alle gebruikers in de herst van 2025.
-- "Oud" kaart implementaties zullen in het voorjaar van 2026 worden verwijderd.
+- "Oud" kaart implementaties zullen in het najaar van 2026 worden verwijderd.
 
 Tot dan kun je schakelen tussen de verschillende implementaties in instellingen => kaartbronnen.
 
@@ -36,6 +34,9 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: lang tikken op "live button inschakelen" om offline caches te laden
 - Nieuw: Offline Reliëfweergave voor UnifiedMap (VTM-variant)
 - Nieuw: Ondersteuning voor achtergrondkaarten (UnifiedMap)
+- Oplossing: Compacte pictogrammen komen niet terug naar grote pictogrammen bij zoomen in automatische modus (UnifiedMap)
+- Nieuw: Lange tik acties in cache infosheet: GC code, cache-titel, coördinaten, persoonlijke notitie/hint
+- Wijziging: Schakelt lang tikken voor cache infosheet uit om kort tikken voor emoji selector om conflict op te lossen
 
 ### Cache details
 - Nieuw: Offline vertaling van tekst en logs (experimenteel)
@@ -72,3 +73,8 @@ Tot dan kun je schakelen tussen de verschillende implementaties in instellingen 
 - Nieuw: GPX export: export logs/trackables optioneel gemaakt
 - Nieuw: knop toegevoegd om log sjablonen te verwijderen
 - Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
+- Oplossing: Kaart-downloader biedt beschadigde (0 bytes) bestanden aan om te downloaden
+- Nieuw: Mappings toegevoegd voor enkele ontbrekende OC cache types
+- Nieuw: "recent gebruikte" Lijsten verplaatst in lijstselectie venster bovenaan bij drukken op de knop "recent gebruikt"
+- Nieuw: Deel lijst van geocodes uit de cache lijst
+- Verandering: "Navigatie (auto)" etc. Gebruik "q=" parameter in plaats van verouderde "ll=" parameter

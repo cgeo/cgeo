@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Ignorované jazyky</string>
     <string name="translator_preference_nottranslate_lng_summary">Zdrojové jazyky, pro které se nenabízí překlad</string>
     <string name="translator_preference_disable">&lt;Vypnout překlad&gt;</string>
+    <string name="translator_preference_application_language">&lt;Použít jazyk aplikace&gt;</string>
     <string name="translator_model_download_select">Stáhnout offline jazyk překladu</string>
     <string name="translator_model_download_confirm_title">Potvrdit stažení jazyka</string>
     <string name="translator_model_download_confirm_txt">Překladaový model pro jazyk %s je třeba stáhnout. Velikost modelu je přibližně 20-40 MB.</string>
@@ -358,6 +359,7 @@
     <string name="translator_language_unsupported">Jazyk (%s) není podporován pro překlad.</string>
     <string name="translator_language_unknown">Jazyk nelze identifikovat</string>
     <string name="translator_language_detected">Přeložit z \"%s\"</string>
+    <string name="translator_target_language">Přeložit do \"%s\"</string>
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
@@ -475,6 +477,7 @@
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
     <string name="caches_upload_allcoords_dialogtitle">VAROVÁNÍ - Nahrávání všech souřadnic</string>
     <string name="caches_upload_allcoords_warning">Tím přepíšete existující souřadnice na serveru u všech (vybraných) kešek ze seznamu s aktuálními souřadnicemi v listingu v aplikaci c:geo. Používá se to jen ve zvláštních případech, např. pokud jste importovali soubor GPX, který obsahuje upravené souřadnice jako souřadnice v listingu. Tento úkon nelze vrátit. Použít byste ho měli jen v případě, že víte, co děláte. Obvykle je lepší použít funkci \"Nahrát upravené souřadnice\" v téže nabídce.</string>
+    <string name="caches_share_geocodes">Sdílet seznam geokódů</string>
     <string name="caches_refresh_selected">Aktualizovat vybrané</string>
     <string name="caches_refresh_all">Aktualizovat vše</string>
     <string name="caches_move_selected">Přesunout vybrané</string>
@@ -943,6 +946,8 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
+    <string name="init_use_application_language">Použít jazyk aplikace</string>
+    <string name="init_translation_disabled">Překlad vypnutý</string>
     <string name="init_date_format">Formát data</string>
     <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
     <string name="system_default">Podle systému</string>
@@ -995,6 +1000,7 @@
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_cachelists">Seznamy kešek</string>
     <string name="init_localization">Lokalizace</string>
+    <string name="init_logs">Logy</string>
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
@@ -1012,6 +1018,8 @@
     <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
     <string name="init_custombnitem_none">(žádné)</string>
     <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
+    <string name="init_title_collapse_log_limit">Limit řádku logu</string>
+    <string name="init_summary_collapse_log_limit">Maximální počet řádků, které se mají zobrazit pro logy. Další řádky budou sbaleny. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokód</string>
     <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
@@ -1222,6 +1230,8 @@
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_appearance_general">Obecný vzhled</string>
+    <string name="init_cachedetail_behaviour">Chování</string>
+    <string name="init_cachedetail_note">Osobní poznámka ke kešce</string>
     <string name="init_maplines_title">Přizpůsobení barev mapy</string>
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
@@ -1556,7 +1566,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Zúčastnil jsem se</string>
+    <string name="cache_status_attended">Účastnil se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -1914,6 +1924,7 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Trasovatelný předmět</string>
+    <string name="most_recent">Nejnovější</string>
     <string name="search_destination">Otevřít cíl v c:geo</string>
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
@@ -2003,9 +2014,14 @@
     <string name="helper_gcwizard_description">Průvodce GC Wizard obsahuje řadu nástrojů pro jednoduché kryptografické, geodetické a vědecké výpočty a stovky sad různých symbolů.</string>
     <!-- export -->
     <string name="share_export">Sdílet / Exportovat</string>
+    <string name="export">Export</string>
+    <string name="export_upload">Exportovat / Nahrát</string>
     <string name="export_progress">Export: %1$s</string>
     <string name="export_exportedto">Exportováno do</string>
     <string name="export_failed">Export selhal</string>
+    <string name="export_gpx">Exportovat GPX</string>
+    <string name="export_fieldnotes">Exportovat poznámky z terénu</string>
+    <string name="fieldnotes">poznámky z terénu</string>
     <string name="export_fieldnotes_info">Koncepty budou uloženy do /sdcard/field-notes s názvem souboru podle aktuálního data a času.</string>
     <string name="export_fieldnotes_upload">Nahrát na geocaching.com</string>
     <string name="export_fieldnotes_uploading">Nahrávání…</string>
@@ -2015,6 +2031,7 @@
     <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
     <string name="export_confirm_title">Exportovat %1$s</string>
     <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
+    <string name="export_persnotes">Nahrát osobní poznámky</string>
     <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d poznámka byla úspěšně nahrána</item>
@@ -2549,7 +2566,7 @@
     <string name="localfile_title">Otevřít místní soubor</string>
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Přijmout soubor</string>
+    <string name="receivedownload_intenttitle">Přijatý soubor</string>
     <string name="receivedownload_success">Soubor byl úspěšně uložen jako \"%s\"</string>
     <string name="receivedownload_error">Chyba při přijímání souboru</string>
     <string name="receivedownload_error_io_exception">I/O chyba při přijímání souboru. Je vaše složka \"%s\" zapisovatelná?</string>
@@ -2734,7 +2751,7 @@
     <string name="wherigo_download_accept_eula">Přihlaste se prosím na www.wherigo.com a přijměte nejprve jejich podmínky</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
-    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
+    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge [zde](%2$s)</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>

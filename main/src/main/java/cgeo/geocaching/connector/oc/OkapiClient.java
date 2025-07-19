@@ -1193,6 +1193,18 @@ final class OkapiClient {
         if ("Webcam".equalsIgnoreCase(cacheType)) {
             return CacheType.WEBCAM;
         }
+        if ("Moving".equalsIgnoreCase(cacheType)) {
+            return CacheType.LOCATIONLESS;
+        }
+        if ("Other".equalsIgnoreCase(cacheType)) {
+            return CacheType.UNKNOWN;
+        }
+        if ("Podcast".equalsIgnoreCase(cacheType)) {
+            return CacheType.VIRTUAL;
+        }
+        if ("Own".equalsIgnoreCase(cacheType)) {
+            return CacheType.LOCATIONLESS;
+        }
         if ("Math/Physics".equalsIgnoreCase(cacheType)) {
             return CacheType.MYSTERY;
         }

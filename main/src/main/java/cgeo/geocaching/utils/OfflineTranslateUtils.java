@@ -220,7 +220,7 @@ public class OfflineTranslateUtils {
     }
 
     public static void initializeListingTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText, final Runnable callback) {
-        if (!OfflineTranslateUtils.isTargetLanguageValid()) {
+        if (!OfflineTranslateUtils.isTargetLanguageValid() || cda == null || cda.isFinishing() || cda.isDestroyed()) {
             AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
             return;
         }

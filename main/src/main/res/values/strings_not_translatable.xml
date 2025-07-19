@@ -50,7 +50,7 @@
     <string translatable="false"  name="persistablefolder_wherigo">Wherigo</string>
 
     <!-- export -->
-    <string translatable="false" name="export_gpx">Export GPX</string>
+    <string translatable="false" name="gpx">GPX</string>
 
     <!-- map sources -->
     <string translatable="false" name="map_source_osm_mapnik">OpenStreetMap.org</string>

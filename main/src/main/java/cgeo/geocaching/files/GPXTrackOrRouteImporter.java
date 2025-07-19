@@ -43,12 +43,12 @@ public class GPXTrackOrRouteImporter {
                         try {
                             callback.updateRoute(value);
                         } catch (final Throwable t) {
-                            Log.w("Error on track/route import: " + t.getMessage());
+                            Log.e("Error on track/route import: " + t.getMessage());
                         }
                     });
                 }
             } catch (final Exception e) {
-                Log.w("Exception on doImport", e);
+                Log.e("Exception on doImport", e);
             }
         }, () -> {
             if (!success.get()) {
@@ -90,7 +90,7 @@ public class GPXTrackOrRouteImporter {
             }
             return route;
         } catch (IOException e) {
-            Log.w("Problem accessing GPX Track file '" + uri + "'. Maybe file was removed or renamed by user?", e);
+            Log.e("Problem accessing GPX Track file '" + uri + "'. Maybe file was removed or renamed by user?", e);
             return null;
         }
     }
@@ -105,7 +105,7 @@ public class GPXTrackOrRouteImporter {
             final Route route = parser.parse(stream);
             return route.getNumSegments() < 1 ? null : route;
         } catch (ParserException e) {
-            Log.w("Problem parsing GPX Track file '" + uri + "': " + e);
+            Log.e("Problem parsing GPX Track file '" + uri + "': " + e);
             return null;
         } finally {
             IOUtils.closeQuietly(stream);
@@ -116,7 +116,7 @@ public class GPXTrackOrRouteImporter {
         final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(uri);
         final long freeMem = EnvironmentUtils.getFreeMemory(context);
         if (fi == null || freeMem < 0 || fi.size * 10 > freeMem) {
-            Log.w("Won't import '" + uri + "' as json due to limited memory (filesize: " +
+            Log.e("Won't import '" + uri + "' as json due to limited memory (filesize: " +
                     Formatter.formatBytes(fi == null ? 0 : fi.size) + ", freeMem: " + Formatter.formatBytes(freeMem));
             return null;
         }
@@ -128,7 +128,7 @@ public class GPXTrackOrRouteImporter {
 
             return new GeoItemHolder(GeoJsonUtils.parseGeoJson(is));
         } catch (JSONException e) {
-            Log.w("Problem parsing GeoJson file '" + uri + "': " + e);
+            Log.e("Problem parsing GeoJson file '" + uri + "': " + e);
             return null;
         }
     }

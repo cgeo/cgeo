@@ -74,6 +74,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -141,6 +142,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
+    private static final int REQUEST_CODE_LOG = 1001;
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
@@ -149,6 +151,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
     NavigationTargetLayer navigationTargetLayer = null;
+    boolean forceCompactIcons = false;
 
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -643,33 +646,36 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {
 
-        if (viewModel.mapType.waypointId > 0) { // single waypoint mode. No refresh in this case
+        if (viewModel.mapType.type == UMTT_TargetGeocode) { // single waypoint mode. No refresh in this case
             return;
         }
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
         final Viewport viewport = viewModel.viewport.getValue();
 
-        //should waypoints be displayed at all?
-        final boolean waypointsAreVisible = viewModel.mapType.isSingleCacheView() || (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold());
-        if (!waypointsAreVisible) {
-            viewModel.waypoints.write(Set::clear);
-            return;
+        final Set<Waypoint> waypoints = new HashSet<>();
+
+        if (viewModel.mapType.hasTarget()) {
+            waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                final Set<Waypoint> wpSet = new HashSet<>();
+                final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                wpSet.addAll(cache.getWaypoints());
+                return wpSet;
+            }));
         }
 
-        final Set<Waypoint> waypoints;
-
-        //show all waypoints be displayed or just the ones from visible caches?
-        final boolean showAll = TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
-        if (showAll) {
-            waypoints = DataStore.loadWaypoints(viewport);
-        } else {
-            waypoints = viewModel.caches.readWithResult(caches -> {
-                final Set<Waypoint> wpSet = new HashSet<>();
-                for (final Geocache c : caches) {
-                    wpSet.addAll(c.getWaypoints());
-                }
-                return wpSet;
-            });
+        if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+            //show all waypoints be displayed or just the ones from visible caches?
+            if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                waypoints.addAll(DataStore.loadWaypoints(viewport));
+            } else {
+                waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                    final Set<Waypoint> wpSet = new HashSet<>();
+                    for (final Geocache c : caches) {
+                        wpSet.addAll(c.getWaypoints());
+                    }
+                    return wpSet;
+                }));
+            }
         }
         //filter waypoints
         MapUtils.filter(waypoints, filter);
@@ -729,7 +735,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             listChooser.setDirect(calculateTitle(), visibleCaches);
         }
 
-        CompactIconModeUtils.forceCompactIconMode(visibleCaches);
+        final boolean newForceCompactIcons = CompactIconModeUtils.forceCompactIconMode(visibleCaches);
+        if (newForceCompactIcons != forceCompactIcons) {
+            forceCompactIcons = newForceCompactIcons;
+            refreshMapData(false);
+        }
     }
 
     /**
@@ -864,7 +874,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final View liveButton = findViewById(R.id.menu_map_live);
         if (liveButton != null) {
             liveButton.setOnLongClickListener(v -> {
-                viewModel.mapType = new UnifiedMapType(); // switch to PLAIN mode
+                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
                 viewModel.transientIsLiveEnabled.setValue(false);
                 Settings.setLiveMap(false);
                 reloadCachesAndWaypoints();
@@ -928,7 +938,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     reloadCachesAndWaypoints();
                 }
             } else {
-                viewModel.mapType = new UnifiedMapType();
+                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType);
                 viewModel.transientIsLiveEnabled.setValue(true);
                 Settings.setLiveMap(true);
                 refreshListChooser();
@@ -1056,6 +1066,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             viewModel.mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
             refreshMapData(true);
+        } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
+            ShareUtils.showLogPostedSnackbar(this, data, findViewById(R.id.activity_navigationBar));
         }
     }
 

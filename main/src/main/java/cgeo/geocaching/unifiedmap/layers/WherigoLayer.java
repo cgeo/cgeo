@@ -86,7 +86,7 @@ public class WherigoLayer {
             return null;
         }
 
-        final int color = WherigoUtils.isVisibleToPlayer(zone) ? Color.RED : Color.GRAY;
+        final int color = WherigoUtils.isVisibleToPlayer(zone) ? Color.RED : (zone.isActive() ? Color.YELLOW : Color.GRAY);
         final List<Geopoint> geopoints = WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points));
         if (geopoints.isEmpty()) {
             return null;

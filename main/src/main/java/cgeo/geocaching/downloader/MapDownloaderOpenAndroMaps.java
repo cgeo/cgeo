@@ -42,8 +42,11 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
 
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
-            final Download offlineMap = new Download(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(Long.parseLong(matchMap.group(4))), offlineMapType, iconRes);
-            list.add(offlineMap);
+            final long size = Long.parseLong(matchMap.group(4));
+            if (size > 0) {
+                final Download offlineMap = new Download(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(size), offlineMapType, iconRes);
+                list.add(offlineMap);
+            }
         }
     }
 
@@ -56,7 +59,10 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
             if (filename.equals(remoteFilenameNew)) {
-                return new Download(matchMap.group(2), Uri.parse(getUpdatedPath(remoteUrl) + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(Long.parseLong(matchMap.group(4))), offlineMapType, iconRes);
+                final long size = Long.parseLong(matchMap.group(4));
+                if (size > 0) {
+                    return new Download(matchMap.group(2), Uri.parse(getUpdatedPath(remoteUrl) + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(size), offlineMapType, iconRes);
+                }
             }
         }
         return null;

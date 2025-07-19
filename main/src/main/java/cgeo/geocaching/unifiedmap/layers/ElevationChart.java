@@ -11,6 +11,7 @@ import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -20,6 +21,7 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 
 import android.content.res.Resources;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -50,6 +52,7 @@ public class ElevationChart {
     private final List<Entry> entries = new ArrayList<>();
     private float offset = 0f;
     private Geopoint lastShownPosition = null;
+    private boolean expanded = Settings.getBoolean(R.string.pref_elevationChartExpanded, false);
 
     public ElevationChart(final AppCompatActivity activity, final GeoItemLayer<String> geoItemLayer) {
         chartBlock = activity.findViewById(R.id.elevation_block);
@@ -99,6 +102,8 @@ public class ElevationChart {
 
             toolbar.setNavigationIcon(R.drawable.expand_more);
             toolbar.setNavigationOnClickListener(v -> closeChart(geoItemLayer));
+            resizeChart(expanded);
+            toolbar.setOnClickListener(v -> resizeChart(!expanded));
         }
 
         if (routeTrackUtils != null) {
@@ -150,7 +155,7 @@ public class ElevationChart {
     private void formatChart(final Resources res) {
         chart.setData(null);
         if (!entries.isEmpty()) {
-            final LineDataSet dataSet = new LineDataSet(entries, null);
+            final LineDataSet dataSet = new LineDataSet(entries, "");
             dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);
@@ -221,5 +226,14 @@ public class ElevationChart {
         chartBlock.setVisibility(View.GONE);
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
         LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
+    }
+
+    /** resize elevation chart 1:1 vs. 1:3 in relation to map size */
+    private void resizeChart(final boolean newExpandedState) {
+        expanded = newExpandedState;
+        Settings.putBoolean(R.string.pref_elevationChartExpanded, expanded);
+        final LinearLayout.LayoutParams lpOld = (LinearLayout.LayoutParams) chartBlock.getLayoutParams();
+        final LinearLayout.LayoutParams lpNew = new LinearLayout.LayoutParams(lpOld.width, lpOld.height, expanded ? 1 : 3);
+        chartBlock.setLayoutParams(lpNew);
     }
 }

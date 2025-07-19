@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         minSdk 21
-        targetSdk 34
+        targetSdk 35
 
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
@@ -339,7 +339,7 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.8.4'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.9.3'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
@@ -357,7 +357,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.19.1'
+    implementation 'org.jsoup:jsoup:1.21.1'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
@@ -447,18 +447,18 @@ dependencies {
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-maps:19.2.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
     // Support Library Design
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
     // ProcessPhoenix, reliable process restart
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.10'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.11'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
@@ -477,16 +477,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.8.1"
+    implementation "androidx.work:work-runtime:2.10.2"
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
 
     // Support Library core (used for eg. HtmlCompat)
-    implementation 'androidx.core:core:1.8.0'
+    implementation 'androidx.core:core:1.16.0'
 
     // Support Library constraintlayout
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.1.0'
@@ -532,8 +532,7 @@ dependencies {
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    // stay with 3.1.0.16 for now to avoid problems with CI
-    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.16'
+    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.27'
 
     // For Wherigos: GIF support
     // ani gif support

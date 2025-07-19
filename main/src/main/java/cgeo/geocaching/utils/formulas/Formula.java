@@ -564,7 +564,7 @@ public final class Formula {
         for (; ; ) {
             if (p.eat('+')) {
                 x = createBiNumeric("+", x, parseMultiplyDivision(), (v1, v2) -> v1.getAsDecimal().add(v2.getAsDecimal()));
-            } else if (p.eat('-') || p.eat('—')) { //those are two different chars
+            } else if (p.eat('-') || p.eat('—') || p.eat('–')) { //those are different chars
                 x = createBiNumeric("-", x, parseMultiplyDivision(), (v1, v2) -> v1.getAsDecimal().subtract(v2.getAsDecimal()));
             } else {
                 return x;
@@ -575,7 +575,7 @@ public final class Formula {
     private FormulaNode parseMultiplyDivision() {
         FormulaNode x = parseFactor();
         for (; ; ) {
-            if (p.eat('*') || p.eat('•')) {
+            if (p.eat('*') || p.eat('•') || p.eat('⋅') || p.eat('×')) {
                 x = createBiNumeric("*", x, parseFactor(), (v1, v2) -> v1.getAsDecimal().multiply(v2.getAsDecimal()));
             } else if (p.eat('/') || p.eat(':') || p.eat('÷')) {
                 x = createBiNumeric("/", x, parseFactor(), (n1, n2) -> n1.getAsDecimal().divide(n2.getAsDecimal(), Math.max(n1.getAsDecimal().scale(), 30), RoundingMode.HALF_UP));

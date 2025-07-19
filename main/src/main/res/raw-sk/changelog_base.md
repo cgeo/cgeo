@@ -1,5 +1,3 @@
-(nightly only: Temporarily removed "nightly" banner from logo while fine-tuning the design)
-
 ### UnifiedMap roadmap & "old" maps deprecation notice
 c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
 
@@ -36,6 +34,9 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long tap on "enable live button" to load offline caches
 - New: Offline hillshading for UnifiedMap (VTM variant)
 - New: Support for background maps (UnifiedMap)
+- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
+- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
+- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
 ### Detaily kešky
 - New: Offline translation of listing text and logs (experimental)
@@ -72,3 +73,8 @@ Until then, you can switch between the different implementations in settings => 
 - New: GPX export: exporting logs / trackables made optional
 - New: Added button to delete log templates
 - Fix: Importing local map file gets random map name
+- Fix: Map downloader offering broken (0 bytes) files for download
+- New: Added mappings for some missing OC cache types
+- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
+- New: Share list of geocodes from cache list
+- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter

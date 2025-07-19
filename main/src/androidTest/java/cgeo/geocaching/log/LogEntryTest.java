@@ -222,6 +222,20 @@ public class LogEntryTest {
 
     }
 
+    @Test
+    public void testIsMatchingLog() {
+        final LogEntry logEntry = new LogEntry.Builder().setAuthor("testUser").setDate(178672529).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final OfflineLogEntry offlineLogEntry = new OfflineLogEntry.Builder().setAuthor("testUser").setDate(178672000).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final LogEntry logEntryEmpty = new LogEntry.Builder().setAuthor("testUser").setDate(178672000).setLogType(LogType.FOUND_IT).setLog("").build();
+        final LogEntry logEntryUser = new LogEntry.Builder().setAuthor("testUserDifferent").setDate(178672529).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+        final LogEntry logEntryDate = new LogEntry.Builder().setAuthor("testUser").setDate(718867252).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
+
+        assertThat(logEntry.isMatchingLog(offlineLogEntry)).isTrue();
+        assertThat(logEntry.isMatchingLog(logEntryUser)).isFalse();
+        assertThat(logEntry.isMatchingLog(logEntryDate)).isFalse();
+        assertThat(logEntry.isMatchingLog(logEntryEmpty)).isTrue();
+    }
+
     public static byte[] marshall(final Parcelable parceable) {
         final Parcel parcel = Parcel.obtain();
         parceable.writeToParcel(parcel, 0);

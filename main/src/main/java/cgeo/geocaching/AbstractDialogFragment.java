@@ -136,6 +136,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         }
 
         details.addBetterCacher(cache);
+        details.addCoordinates(cache.getCoords());
 
         // Latest logs
         details.addLatestLogs(cache);

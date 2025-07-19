@@ -214,10 +214,12 @@ public class RouteSortActivity extends AbstractActionBarActivity {
 
     @Override
     public void onBackPressed() {
+        // @todo should be replaced by setting a OnBackPressedDispatcher
         if (!originalRouteItems.equals(routeItemAdapter.getItems())) {
             SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
         } else {
             finish();
         }
+        super.onBackPressed();
     }
 }
