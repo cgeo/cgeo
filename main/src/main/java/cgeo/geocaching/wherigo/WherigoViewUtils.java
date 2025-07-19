@@ -27,6 +27,7 @@ import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Zone;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
+import static cgeo.geocaching.wherigo.WherigoUtils.getUserDisplayableName;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,6 +40,7 @@ import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -91,7 +93,13 @@ public final class WherigoViewUtils {
             titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog));
         }
         return dialog;
+    }
 
+    public static void setTitle(final Dialog dialog, final String title) {
+        final View view = dialog.findViewById(R.id.dialog_title);
+        if (view instanceof TextView) {
+            ((TextView) view).setText(title);
+        }
     }
 
     public static <T> void setViewActions(final Iterable<T> actions, final SimpleItemListView view, final int columnCount, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
@@ -116,7 +124,7 @@ public final class WherigoViewUtils {
                 final List<EventTable> things = type.getThingsForUserDisplay();
                 final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
                 final CharSequence description = TextUtils.join(things, i -> {
-                    final String thingName = i.name;
+                    final String thingName = WherigoUtils.getUserDisplayableName(i);
                     return WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan("(" + thingName + ")", new StyleSpan(Typeface.ITALIC));
                 }, ", ");
 
@@ -151,7 +159,6 @@ public final class WherigoViewUtils {
         }
         if (things.size() == 1) {
             thingSelectAction.accept(things.get(0));
-            //displayThing(activity, things.get(0), false);
             return;
         }
 
@@ -159,7 +166,7 @@ public final class WherigoViewUtils {
         model
             .setItems(things)
             .setDisplayMapper(item -> {
-                CharSequence name = WherigoGame.get().toDisplayText(item.name);
+                CharSequence name = WherigoGame.get().toDisplayText(getUserDisplayableName(item));
                 if (item instanceof Zone) {
                     name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) item) + ")");
                 }

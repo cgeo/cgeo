@@ -13,6 +13,8 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
 
@@ -89,6 +91,14 @@ public class WherigoDialogManager {
                 dialog = null;
             }));
             WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
+        }
+
+        @Override
+        public void setTitle(final CharSequence title) {
+            final View view = dialog == null ? null : dialog.findViewById(R.id.dialog_title);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(title);
+            }
         }
 
         @Override
