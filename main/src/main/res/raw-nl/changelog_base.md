@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in deze versie van c:geo doelen. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Kaart
 - Nieuw: Route optimalisatie caches berekende data
@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
 - Wijziging: Toon geen "need maintenance" of "need archived" opties voor eigen caches
-- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Oplossing: Het herstellen van een back-up kan het bijhouden van bestanden in de interne opslag en volgende back-ups dupliceren
