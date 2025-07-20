@@ -7,6 +7,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
+import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
+import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,27 +17,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.mlkit.common.model.DownloadConditions;
-import com.google.mlkit.common.model.RemoteModelManager;
-import com.google.mlkit.nl.languageid.LanguageIdentification;
-import com.google.mlkit.nl.translate.TranslateLanguage;
-import com.google.mlkit.nl.translate.TranslateRemoteModel;
-import com.google.mlkit.nl.translate.Translation;
-import com.google.mlkit.nl.translate.Translator;
-import com.google.mlkit.nl.translate.TranslatorOptions;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.TextNode;
@@ -52,9 +48,9 @@ public class OfflineTranslateUtils {
 
     public static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
-        final List<String> languageIds = TranslateLanguage.getAllLanguages();
+        final Set<String> languageIds = TranslateAccessor.get().getSupportedLanguages();
         for (String languageId : languageIds) {
-            languages.add(new Language(TranslateLanguage.fromLanguageTag(languageId)));
+            languages.add(new Language(languageId));
         }
         return languages.stream().sorted().collect(Collectors.toList());
     }
@@ -93,12 +89,12 @@ public class OfflineTranslateUtils {
 
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
         // identify listing language
-        LanguageIdentification.getClient().identifyLanguage(text)
-                .addOnSuccessListener(lngCode -> successConsumer.accept(new Language(lngCode)))
-                .addOnFailureListener(e -> errorConsumer.accept(e.getMessage()));
+        TranslateAccessor.get().guessLanguage(text,
+            lngCode -> successConsumer.accept(new Language(lngCode)),
+                e -> errorConsumer.accept(e.getMessage()));
     }
 
-    public static void translateTextAutoDetectLng(final Activity activity, final Status translationStatus, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void translateTextAutoDetectLng(final Activity activity, final Status translationStatus, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<ITranslatorImpl> translatorConsumer) {
         detectLanguage(text, lng -> {
             getTranslator(activity, translationStatus, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
         }, e -> {
@@ -114,13 +110,13 @@ public class OfflineTranslateUtils {
      * @param downloadingModelConsumer  returned if language models need to be downloaded, should be used to show a progress UI to the user
      * @param translatorConsumer        returns the translator object
      */
-    public static void getTranslator(final Activity activity, final Status translationStatus, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<OfflineTranslateUtils.Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void getTranslator(final Activity activity, final Status translationStatus, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<OfflineTranslateUtils.Language>> downloadingModelConsumer, final Consumer<ITranslatorImpl> translatorConsumer) {
         if (!isLanguageSupported(sourceLng)) {
             unsupportedLngConsumer.accept(sourceLng);
             return;
         }
 
-        final String sourceLngCode = TranslateLanguage.fromLanguageTag(sourceLng.getCode());
+        final String sourceLngCode = TranslateAccessor.get().fromLanguageTag(sourceLng.getCode());
         findMissingLanguageModels(sourceLngCode, missingLanguageModels -> {
             if (missingLanguageModels.isEmpty()) {
                 OfflineTranslateUtils.getTranslator(sourceLngCode, translatorConsumer);
@@ -128,14 +124,14 @@ public class OfflineTranslateUtils {
                 SimpleDialog.of(activity).setTitle(R.string.translator_model_download_confirm_title).setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, String.join(", ", missingLanguageModels.stream().map(OfflineTranslateUtils.Language::toString).collect(Collectors.toList())))).confirm(() -> {
                     downloadingModelConsumer.accept(missingLanguageModels);
                     OfflineTranslateUtils.getTranslator(sourceLngCode, translatorConsumer);
-                        },
-                        () -> translationStatus.abortTranslation()
+                },
+                    () -> translationStatus.abortTranslation()
                 );
             }
         });
     }
 
-    public static void translateParagraph(final Translator translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<String> consumer, final Consumer<Exception> errorConsumer) {
+    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<String> consumer, final Consumer<Exception> errorConsumer) {
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
         final AtomicInteger remaining = new AtomicInteger(elements.size());
@@ -144,16 +140,15 @@ public class OfflineTranslateUtils {
             status.updateProgress();
         } else {
             for (TextNode textNode : elements) {
-                translator.translate(textNode.text())
-                        .addOnSuccessListener(translation -> {
+                translator.translate(textNode.text(),
+                        translation -> {
                             textNode.text(translation);
                             // check if all done
                             if (remaining.decrementAndGet() == 0) {
                                 consumer.accept(document.body().html());
                                 status.updateProgress();
                             }
-                        })
-                        .addOnFailureListener(e -> {
+                        }, e -> {
                             Log.e("err: " + e.getMessage());
                             status.abortTranslation();
                             errorConsumer.accept(e);
@@ -162,45 +157,37 @@ public class OfflineTranslateUtils {
         }
     }
 
-    private static void getTranslator(final String lng, final Consumer<Translator> consumer) {
-        final String targetLng = TranslateLanguage.fromLanguageTag(Settings.getTranslationTargetLanguage().getCode());
+    private static void getTranslator(final String lng, final Consumer<ITranslatorImpl> consumer) {
+        final String targetLng = TranslateAccessor.get().fromLanguageTag(Settings.getTranslationTargetLanguage().getCode());
         if (null == targetLng) {
             return;
         }
-        final TranslatorOptions options = new TranslatorOptions.Builder()
-                .setSourceLanguage(lng)
-                .setTargetLanguage(targetLng)
-                .build();
 
-        final Translator translator = Translation.getClient(options);
-
-        translator.downloadModelIfNeeded(new DownloadConditions.Builder().build())
-                .addOnSuccessListener(b -> consumer.accept(translator))
-                .addOnFailureListener(e -> {
-                    Log.e("Failed to initialize MLKit Translator", e);
-                    consumer.accept(null);
-                });
-    }
-
-    private static void getDownloadedLanguageModels(final Consumer<List<String>> consumer) {
-        RemoteModelManager.getInstance().getDownloadedModels(TranslateRemoteModel.class).addOnSuccessListener(remoteModels -> {
-            final List<String> modelCodes = new ArrayList<>(remoteModels.size());
-            for (TranslateRemoteModel model : remoteModels) {
-                modelCodes.add(model.getLanguage());
-            }
-            consumer.accept(modelCodes);
+        TranslateAccessor.get().getTranslatorWithDownload(lng, targetLng, consumer, e -> {
+            Log.e("Failed to initialize MLKit Translator", e);
+            consumer.accept(null);
         });
     }
 
+    private static void getDownloadedLanguageModels(final Consumer<List<String>> consumer) {
+        final List<String> result = new ArrayList<>();
+        for (String lng : TranslationModelManager.get().getSupportedLanguages()) {
+            if (TranslationModelManager.get().isAvailable(lng)) {
+                result.add(lng);
+            }
+        }
+        consumer.accept(result);
+    }
+
     public static void deleteLanguageModel(final String lngCode) {
-        final TranslateRemoteModel model = new TranslateRemoteModel.Builder(lngCode).build();
-        RemoteModelManager.getInstance().deleteDownloadedModel(model).addOnFailureListener(e -> Log.e("Failed to delete TranslateRemoteModel", e));
+        TranslationModelManager.get().deleteLanguage(lngCode);
     }
 
     public static void downloadLanguageModels(final Context context) {
         final List<Language> languages = getSupportedLanguages();
         getDownloadedLanguageModels(availableLanguages -> {
             languages.removeAll(availableLanguages.stream().map(Language::new).collect(Collectors.toList()));
+            Collections.sort(languages);
 
             final SimpleDialog.ItemSelectModel<Language> model = new SimpleDialog.ItemSelectModel<>();
             model.setItems(languages)
@@ -210,17 +197,15 @@ public class OfflineTranslateUtils {
             SimpleDialog.ofContext(context).setTitle(R.string.translator_model_download_select)
                     .selectMultiple(model, lngs -> {
                         for (Language lng : lngs) {
-                            RemoteModelManager.getInstance()
-                                    .download(new TranslateRemoteModel.Builder(lng.getCode()).build(), new DownloadConditions.Builder().build())
-                                    .addOnSuccessListener(s -> Toast.makeText(context, context.getString(R.string.translator_model_download_success, lng.toString()), Toast.LENGTH_SHORT).show())
-                                    .addOnFailureListener(e -> Toast.makeText(context, context.getString(R.string.translator_model_download_error, lng.toString(), e.getMessage()), Toast.LENGTH_LONG).show());
+                            TranslationModelManager.get().downloadLanguage(lng.getCode());
                         }
                     });
         });
     }
 
     public static void initializeListingTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText, final Runnable callback) {
-        if (!OfflineTranslateUtils.isTargetLanguageValid() || cda == null || cda.isFinishing() || cda.isDestroyed()) {
+        if (!OfflineTranslateUtils.isTargetLanguageValid() || TranslateAccessor.get().getSupportedLanguages().isEmpty() ||
+                cda == null || cda.isFinishing() || cda.isDestroyed()) {
             AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
             return;
         }
@@ -272,7 +257,7 @@ public class OfflineTranslateUtils {
     }
 
     public static boolean isLanguageSupported(final Language language) {
-        final String languageCode = TranslateLanguage.fromLanguageTag(language.getCode());
+        final String languageCode = TranslateAccessor.get().fromLanguageTag(language.getCode());
         return (null != languageCode);
     }
 
@@ -294,21 +279,17 @@ public class OfflineTranslateUtils {
         }
 
         public boolean isValid() {
-            return !LANGUAGE_INVALID.equals(code);
+            return code != null && !LANGUAGE_INVALID.equals(code);
         }
 
         public String getDisplayName() {
-            return new Locale(code).getDisplayName();
-        }
-
-        public String getDisplayName(final Locale locale) {
-            return new Locale(code).getDisplayName(locale);
+            return code == null ? "--" : LocalizationUtils.getLocaleDisplayName(new Locale(code), true, true);
         }
 
         @NonNull
         @Override
         public String toString() {
-            return getDisplayName() + " (" + getCode() + ")";
+            return getDisplayName();
         }
 
         @Override
@@ -326,7 +307,7 @@ public class OfflineTranslateUtils {
 
         @Override
         public int compareTo(@NonNull final Language lng) {
-            return this.toString().compareTo(lng.toString());
+            return this.getCode().compareTo(lng.getCode());
         }
     }
 
