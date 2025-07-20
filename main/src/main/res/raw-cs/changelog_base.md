@@ -73,8 +73,8 @@ Until then, you can switch between the different implementations in settings => 
 - Novinka: Export GPX: export záznamů / trasovatelných položek je volitelný
 - Novinka: Přidáno tlačítko pro odstranění šablon logů
 - Oprava: Importování místního mapového souboru získá náhodný název mapy
-- Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Oprava: Stahovač map nabízí ke stažení poškozené (0 bajtů) soubory
+- Novinka: Přidáno mapování pro některé chybějící typy OC kešek
+- Novinka: Přesunutí „nedávno použitých“ seznamů v dialogovém okně pro výběr seznamu na začátek, při stisknutí tlačítka „nedávno použité“
+- Novinka: Sdílení seznamu geokódů ze seznamu kešek
+- Změna: "Navigace (auto) apod. použijte parametr "q=" místo zastaralého parametru "ll="
