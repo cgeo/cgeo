@@ -177,6 +177,10 @@ android {
             resources.srcDirs = ['src/androidTest/res']
             res.srcDirs = ['src/androidTest/res']
         }
+        // resources specific to flavor "basic".
+        basic {
+            java.srcDir 'src/nofoss/java' // "basic" shall contain non-foss code
+        }
     }
 
     testOptions {
@@ -259,6 +263,11 @@ android {
         nojit {
             dimension "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
+        }
+
+        foss {
+            dimension "javaCompilerTime"
+            buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
 
@@ -540,8 +549,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Offline translation - language detection and translator
-    implementation 'com.google.mlkit:language-id:17.0.6'
-    implementation 'com.google.mlkit:translate:17.0.3'
+    // -> this is NON-FOSS code and should only be available in flavor "basic"
+    basicImplementation 'com.google.mlkit:language-id:17.0.6'
+    basicImplementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks

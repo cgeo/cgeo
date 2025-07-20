@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.TransactionSizeLogger;
+import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -158,6 +159,9 @@ public class CgeoApplication extends Application {
             LooperLogger.startLogging(Looper.getMainLooper());
 
             applyVTMScales();
+
+            //initialize TranslationModelManager
+            TranslationModelManager.get().initialize();
         }
     }
 
