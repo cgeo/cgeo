@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úroveň API Androidu. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
@@ -14,4 +14,4 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky
 - Změna: Nezobrazovat možnosti "vyžaduje údržbu" nebo "vyžaduje archivaci" pro vlastní kešky
-- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Oprava: Obnovení zálohy může duplikovat soubory stop v interním úložišti a následných zálohách
