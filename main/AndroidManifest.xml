@@ -468,6 +468,10 @@
             android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
+            android:name=".CrashActivity"
+            android:exported="false"
+            />
+        <activity
             android:name=".log.LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>
