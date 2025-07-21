@@ -1,3 +1,3 @@
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
+- Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
