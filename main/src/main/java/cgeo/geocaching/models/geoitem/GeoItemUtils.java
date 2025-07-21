@@ -11,7 +11,7 @@ import java.util.List;
 
 public final class GeoItemUtils {
 
-    private static final int MIN_DP_TOUCH_WIDTH = 10;
+    private static final int MIN_DP_TOUCH_WIDTH = 30; // 30dp ~ 4.7mm
 
     private GeoItemUtils() {
         //no instance
