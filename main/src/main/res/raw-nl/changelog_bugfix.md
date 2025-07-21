@@ -1,3 +1,3 @@
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
+- Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
