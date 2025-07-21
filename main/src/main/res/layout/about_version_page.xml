@@ -129,7 +129,6 @@
             android:paddingLeft="10dp" >
 
             <TableRow
-                android:id="@+id/tableRow1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -144,7 +143,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow2b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -159,7 +157,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -174,7 +171,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow3b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -189,22 +185,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:text="@string/twitter_title"
-                    style="@style/about_info_title" />
-
-                <TextView
-                    android:id="@+id/twitter"
-                    android:text="@string/twitter_link"
-                    style="@style/about_info_content" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -219,7 +199,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -234,7 +213,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
@@ -249,7 +227,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
