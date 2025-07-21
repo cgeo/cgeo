@@ -61,7 +61,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             @Override
             public boolean onSingleTapUp(final @NonNull MotionEvent event) {
                 final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
+                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), false);
                 return true;
             }
 
@@ -69,7 +69,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             public void onLongPress(final @NonNull MotionEvent event) {
                 if (!mapIsCurrentlyMoving) {
                     final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), true);
                 }
             }
         });
