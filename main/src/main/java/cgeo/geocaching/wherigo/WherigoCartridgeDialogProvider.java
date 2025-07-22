@@ -7,6 +7,8 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 
 import android.app.Activity;
@@ -24,6 +26,8 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     private final WherigoCartridgeInfo cartridgeInfo;
     private final CartridgeFile cartridgeFile;
     private final boolean infoOnly;
+
+    private final Translator translator = new Translator();
 
     private enum CartridgeAction {
         PLAY(TextParam.id(R.string.play).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
@@ -73,14 +77,25 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
+
+        //translator
+        TranslatorUtils.initializeView("CartridgeDalog", activity, translator, binding.translation, null, null);
+        translator.addTranslation(cartridgeFile.description, (tr, t) -> binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+        translator.init(null, cartridgeFile.description);
+        control.setOnDismissListener(d -> translator.dispose());
+
         refreshGui(binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
 
         WherigoViewUtils.setViewActions(infoOnly ? Collections.singleton(CartridgeAction.CLOSE) : Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, 1, CartridgeAction::getTextParam, item -> {
+            //on potential game start, initialize translation settings with cartridge select dialog settings
+            WherigoGame.get().setStartGameTranslationConfig(translator.toConfig());
+
             control.dismiss();
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
+
             //Other actions require ending a running game (if any)
             WherigoUtils.ensureNoGameRunning(activity, () -> performActionAfterGameEnded(item, activity, saveGames));
         });

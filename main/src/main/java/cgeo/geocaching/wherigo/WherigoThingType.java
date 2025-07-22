@@ -83,6 +83,11 @@ public enum WherigoThingType {
         final List<T> list = getAllThings().stream()
             .map(t -> (T) t)
             .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
+            .map(et -> {
+                //make sure everything displayed is also translated if needed
+                WherigoGame.get().hookToTranslation(et);
+                return et;
+            })
             .collect(Collectors.toCollection(ArrayList::new));
 
         list.sort(WherigoUtils.getThingsComparator());
@@ -92,6 +97,14 @@ public enum WherigoThingType {
     @Nullable
     public static WherigoThingType getByWherigoScreenId(final int wherigoScreenId) {
         return WHERIGOSCREENID_TO_TYPE.get(wherigoScreenId);
+    }
+
+    public static List<EventTable> getEverything() {
+        final List<EventTable> result = new ArrayList<>();
+        for (WherigoThingType type : values()) {
+            result.addAll(type.getAllThings());
+        }
+        return result;
     }
 
 }
