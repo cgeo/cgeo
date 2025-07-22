@@ -71,7 +71,7 @@ public class ElevationChart {
         }
     }
 
-    public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils) {
+    public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils, final Runnable onDelete) {
         if (chart == null) {
             return;
         }
@@ -110,7 +110,7 @@ public class ElevationChart {
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.map_routetrack_context);
             RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true);
-            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, null));
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, onDelete));
             MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu());
         }
 
@@ -119,7 +119,7 @@ public class ElevationChart {
             collectData(route);
             formatChart(res);
             chart.invalidate();
-            toolbar.setTitle(route.getName().isEmpty() ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
+            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
             geoItemLayer.remove(ELEVATIONCHART_MARKER);
         }
     }
