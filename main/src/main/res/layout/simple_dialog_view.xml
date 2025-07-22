@@ -31,6 +31,14 @@
             android:hint="" tools:ignore="LabelFor" /> <!-- hint is set by Dialog builder -->
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Custom View Holder -->
+    <LinearLayout
+        android:id="@+id/dialog_customviewholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical" />
+
     <!-- Item List -->
     <cgeo.geocaching.ui.SimpleItemListView
         android:id="@+id/dialog_itemlistview"

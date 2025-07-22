@@ -2600,6 +2600,10 @@ public class Settings {
         return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
     }
 
+    public static String getTranslationTargetLanguageCode() {
+        return getString(R.string.pref_translation_language, null);
+    }
+
     public static OfflineTranslateUtils.Language getApplicationLanguage() {
         return new OfflineTranslateUtils.Language(Settings.getApplicationLocale().getLanguage());
     }
