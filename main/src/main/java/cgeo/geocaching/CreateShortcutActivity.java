@@ -10,12 +10,8 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
@@ -23,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
 import java.util.ArrayList;
@@ -136,22 +131,14 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         final ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(this, "c:geo " + idFragment + " shortcut")
                 .setIntent(targetIntent)
                 .setShortLabel(title)
-                .setIcon(IconCompat.createWithAdaptiveBitmap(createOverlay(iconResourceId)))
+                .setIcon(IconCompat.createWithResource(this, iconResourceId))
+                .setAlwaysBadged()
                 .build();
         if (!ShortcutManagerCompat.requestPinShortcut(this, info, null)) {
             ActivityMixin.showShortToast(this, R.string.failed_creating_shortcut);
         }
         // finish activity to return the shortcut
         finish();
-    }
-
-    private Bitmap createOverlay(@DrawableRes final int drawableResourceId) {
-        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                ResourcesCompat.getDrawable(res, drawableResourceId, null),
-                ResourcesCompat.getDrawable(res, R.drawable.ic_launcher_rounded_noborder, null)
-        });
-        layerDrawable.setLayerInset(1, 140, 140, 0, 0);
-        return ImageUtils.convertToBitmap(layerDrawable);
     }
 
 }
