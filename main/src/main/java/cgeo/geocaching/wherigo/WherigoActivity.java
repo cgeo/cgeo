@@ -20,6 +20,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.annotation.SuppressLint;
@@ -39,6 +40,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
@@ -49,6 +52,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
     private int wherigoAudioManagerListenerId;
+    private final CompositeDisposable translationDisposables = new CompositeDisposable();
 
     private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
@@ -91,6 +95,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         wherigoThingTypeModel = WherigoViewUtils.createThingTypeTable(this, binding.wherigoThingTypeList, thing -> WherigoViewUtils.displayThing(this, thing, false));
 
+        translationDisposables.add(TranslatorUtils.initializeView("WherigoActivity", this, WherigoGame.get().getTranslator(), binding.translate, null, null, true));
         refreshGui();
         refreshMusicGui();
 
@@ -308,6 +313,14 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public final void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public final void onPause() {
+        super.onPause();
+
+        translationDisposables.dispose();
+        translationDisposables.clear();
     }
 
     @Override

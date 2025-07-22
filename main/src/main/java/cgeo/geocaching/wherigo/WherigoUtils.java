@@ -76,6 +76,10 @@ public final class WherigoUtils {
     private static final String WHERIGO_DOWNLOAD_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
     private static final String WHERIGO_DETAILS_URL_BASE = "https://wherigo.com/cartridge/details.aspx?CGUID=";
 
+    private static final String TRANSLATION_NAME_TAG = "nameTranslated";
+    private static final String TRANSLATION_ACTION_TEXT_TAG = "actionTextTranslated";
+    private static final String TRANSLATION_HOOK_TAG = "translationHooked";
+
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
         ll -> new Geopoint(ll.latitude, ll.longitude)
@@ -114,6 +118,7 @@ public final class WherigoUtils {
         final List<Action> result = new ArrayList<>();
         for (Object aObj : thing.actions) {
             final Action action = (Action) aObj;
+            hookEventTableToTranslation(action);
             if (all || (action.isEnabled() && action.getActor().visibleToPlayer())) {
                 result.add(action);
             }
@@ -121,11 +126,13 @@ public final class WherigoUtils {
         return result;
     }
 
-    public static String getActionText(final Action action) {
+    public static String getUserDisplayableActionText(final Action action) {
         if (action == null || action.text == null) {
             return "-";
         }
-        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? action.text : action.text + " (debug)";
+        final Object translated = action.rawget(TRANSLATION_ACTION_TEXT_TAG);
+        final String actionText = translated != null ? translated.toString() : action.text;
+        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? actionText : actionText + " (debug)";
     }
 
     public static void callAction(final Thing thing, final Action action, final Activity activity) {
@@ -184,32 +191,6 @@ public final class WherigoUtils {
         return builder.getViewport();
     }
 
-    public static CharSequence getEventTableNameForDisplay(final EventTable et, final boolean doShort) {
-        if (et == null) {
-            return "--";
-        }
-        CharSequence name = WherigoGame.get().toDisplayText(et.name);
-        if (et instanceof Task) {
-            switch (((Task) et).state()) {
-                case Task.DONE:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
-                    break;
-                case Task.FAILED:
-                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (!doShort && et instanceof Zone) {
-            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")");
-        }
-        if (!WherigoUtils.isVisibleToPlayer(et)) {
-            name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
-        }
-        return name;
-    }
-
     public static String eventTableDebugInfo(final EventTable et) {
         if (et == null) {
             return "null";
@@ -229,7 +210,7 @@ public final class WherigoUtils {
             final List<Action> actions = WherigoUtils.getActions((Thing) et, true);
             msg.append("\n- Actions (").append(actions.size()).append("):");
             for (Action act : actions) {
-                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getActionText(act)).append(", univ=").append(act.isUniversal()).append(")");
+                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getUserDisplayableActionText(act)).append(", univ=").append(act.isUniversal()).append(")");
             }
         }
         if (et instanceof Zone) {
@@ -252,7 +233,7 @@ public final class WherigoUtils {
             msg.append(")");
         }
         if (et instanceof Task) {
-            msg.append("\n- taskstate:").append(((Task) et).state());
+            msg.append("\n- TaskState:").append(((Task) et).state());
         }
         msg.append("\n- Raw:").append(et);
         return msg.toString();
@@ -541,4 +522,46 @@ public final class WherigoUtils {
         return geocode.trim() + ": " + cache.getName().trim();
     }
 
+    public static CharSequence getUserDisplayableName(final EventTable et, final boolean doShort) {
+        if (et == null) {
+            return "--";
+        }
+        //translation
+        final Object rawName = et.rawget(TRANSLATION_NAME_TAG);
+        CharSequence name = WherigoGame.get().toDisplayText(rawName == null ? et.name : rawName.toString());
+        //special things for certain types of elements
+        if (et instanceof Task) {
+            switch (((Task) et).state()) {
+                case Task.DONE:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name);
+                    break;
+                case Task.FAILED:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (!doShort && et instanceof Zone) {
+            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")");
+        }
+        if (!WherigoUtils.isVisibleToPlayer(et)) {
+            name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
+        }
+        return name;
+    }
+
+    public static void hookEventTableToTranslation(final EventTable et) {
+        if (!WherigoGame.get().isPlaying() || et == null || et.rawget(TRANSLATION_HOOK_TAG) != null) {
+            return;
+        }
+        et.rawset(TRANSLATION_HOOK_TAG, true);
+        WherigoGame.get().getTranslator()
+            .addTranslation(et.name, (tr, t) -> et.rawset(WherigoUtils.TRANSLATION_NAME_TAG, t ? tr : null));
+        if (et instanceof Action) {
+            WherigoGame.get().getTranslator()
+                .addTranslation(((Action) et).text, (tr, t) -> et.rawset(WherigoUtils.TRANSLATION_ACTION_TEXT_TAG, t ? tr : null));
+
+        }
+    }
 }

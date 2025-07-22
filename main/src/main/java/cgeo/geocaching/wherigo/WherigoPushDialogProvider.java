@@ -5,6 +5,7 @@ import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -35,10 +36,15 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
     @NonNull private final String[] texts;
     @NonNull private final Media[] media;
-    @NonNull private final String button1;
+    @Nullable private final String button1;
     @Nullable private final String button2;
     @Nullable private final LuaClosure callback;
 
+    private int pageDisplayed;
+
+    private TranslatorUtils.ChangeableText descriptionText;
+    private String button1Translated;
+    private String button2Translated;
 
     /**
      * Handles display of an OpenWIG push dialog. The following description is copied for reference from OpenWIG code
@@ -60,9 +66,10 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     WherigoPushDialogProvider(final String[] texts, final Media[] media, final String button1, final String button2, final LuaClosure callback) {
         this.texts = texts == null || texts.length == 0 ? new String[]{"---" } : texts;
         this.media = media == null ? new Media[0] : media;
-        this.button1 = StringUtils.isBlank(button1) ? LocalizationUtils.getString(R.string.ok) : button1.trim();
+        this.button1 = StringUtils.isBlank(button1) ? null : button1.trim();
         this.button2 = StringUtils.isBlank(button2) ? null : button2.trim();
         this.callback = callback;
+        this.pageDisplayed = 0;
     }
 
     @Override
@@ -71,45 +78,34 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
-        final int[] page = new int[]{ 0 };
 
-        refreshGui(binding, 0);
+        //translator
+        control.disposeOnDismiss(TranslatorUtils.initializeView("PushDialog", activity, control.getTranslator(),
+                binding.translation, null, null, true));
+        descriptionText = control.createChangeableTranslation();
+        if (this.button1 != null) {
+            control.addTranslation(this.button1, (tr, t) -> this.button1Translated = t ? tr : null);
+        }
+        if (this.button2 != null) {
+            control.addTranslation(this.button2, (tr, t) -> this.button2Translated = t ? tr : null);
+        }
 
-        final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(FALSE, TRUE);
-
-        WherigoViewUtils.setViewActions(options, binding.dialogActionlist, button2 == null ? 1 : 2, item -> TRUE.equals(item) ?
-                TextParam.text(button1).setImage(ImageParam.id(R.drawable.ic_menu_done)) :
-                TextParam.text(button2).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
-            item -> {
-                if (FALSE.equals(item)) {
-                    control.setPauseOnDismiss(false);
-                    control.dismiss();
-                    if (callback != null) {
-                        Engine.invokeCallback(callback, "Button2");
-                    }
-                } else if (page[0] + 1 < texts.length) {
-                    page[0] ++;
-                    refreshGui(binding, page[0]);
-                } else {
-                    control.setPauseOnDismiss(false);
-                    control.dismiss();
-                    if (callback != null) {
-                        Engine.invokeCallback(callback, "Button1");
-                    }
-                }
-            }
-        );
+        control.setOnGameNotificationListener((d, nt) -> refreshGui(binding, control));
+        refreshGui(binding, control);
 
         dialog.show();
         return dialog;
     }
 
-    private void refreshGui(final WherigoThingDetailsBinding binding, final int pageToDisplay) {
-        final int page = pageToDisplay < 0 || pageToDisplay >= texts.length ? 0 : pageToDisplay;
-        final String message = this.texts[page];
-        final Media media = this.media == null || this.media.length == 0 ? null : (page >= this.media.length ? this.media[0] : this.media[page]);
+    private void refreshGui(final WherigoThingDetailsBinding binding, final IWherigoDialogControl control) {
+        this.pageDisplayed = pageDisplayed < 0 || pageDisplayed >= texts.length ? 0 : pageDisplayed;
+        final String message = this.texts[pageDisplayed];
+        final Media media = this.media == null || this.media.length == 0 ? null : (pageDisplayed >= this.media.length ? this.media[0] : this.media[pageDisplayed]);
 
-        binding.description.setText(WherigoGame.get().toDisplayText(message));
+        //description
+        descriptionText.set(message, (tr, t) ->
+                binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+
         if (media != null) {
             binding.media.setMedia(media);
         }
@@ -120,7 +116,35 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.headerInformation.setVisibility(texts.length > 1 ? View.VISIBLE : View.GONE);
-        binding.headerInformation.setText(LocalizationUtils.getString(R.string.wherigo_dialog_push_page, String.valueOf(page + 1), String.valueOf(texts.length)));
+        binding.headerInformation.setText(LocalizationUtils.getString(R.string.wherigo_dialog_push_page, String.valueOf(pageDisplayed + 1), String.valueOf(texts.length)));
+
+        final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(FALSE, TRUE);
+        final String button1Text = button1Translated != null ? button1Translated : (button1 != null ? button1 : LocalizationUtils.getString(R.string.ok));
+        final String button2Text = button2Translated != null ? button2Translated : button2;
+
+        WherigoViewUtils.setViewActions(options, binding.dialogActionlist, button2 == null ? 1 : 2, item -> TRUE.equals(item) ?
+            TextParam.text(button1Text).setImage(ImageParam.id(R.drawable.ic_menu_done)) :
+            TextParam.text(button2Text).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
+                item -> {
+                    if (FALSE.equals(item)) {
+                        control.setPauseOnDismiss(false);
+                        control.dismiss();
+                        if (callback != null) {
+                            Engine.invokeCallback(callback, "Button2");
+                        }
+                    } else if (pageDisplayed + 1 < texts.length) {
+                        pageDisplayed ++;
+                        refreshGui(binding, control);
+                    } else {
+                        control.setPauseOnDismiss(false);
+                        control.dismiss();
+                        if (callback != null) {
+                            Engine.invokeCallback(callback, "Button1");
+                        }
+                    }
+                }
+        );
+
     }
 
 }

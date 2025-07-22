@@ -78,6 +78,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.CircularProgressIndicatorSpec;
+import com.google.android.material.progressindicator.IndeterminateDrawable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -843,5 +846,21 @@ public class ViewUtils {
 
     public static String getEditableText(@Nullable final Editable editable) {
         return editable == null ? "" : editable.toString();
+    }
+
+    public static Consumer<Boolean> createCircularProgressSetter(final Button button) {
+        if (!(button instanceof MaterialButton) || APP_RESOURCES == null) {
+            return x -> { };
+        }
+
+        final MaterialButton mButton = (MaterialButton) button;
+        final Drawable originalIcon = mButton.getIcon();
+
+        //create circular icon
+        final CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(button.getContext(), null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_Small);
+        spec.indicatorSize = ViewUtils.dpToPixel(APP_RESOURCES.getDimension(R.dimen.buttonSize_iconButton) / APP_RESOURCES.getDisplayMetrics().density / 1.8f);
+        final Drawable circularIcon = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec);
+
+        return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
     }
 }

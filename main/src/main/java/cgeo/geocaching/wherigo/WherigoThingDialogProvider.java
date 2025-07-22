@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -29,6 +30,11 @@ import java.util.List;
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
+
+    //private CompositeDisposable translatorDisposables;
+    private TranslatorUtils.ChangeableText titleText;
+    private TranslatorUtils.ChangeableText descriptionText;
+
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -55,9 +61,15 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, WherigoUtils.getEventTableNameForDisplay(eventTable, true));
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--");
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
+
+        //translator
+        control.disposeOnDismiss(TranslatorUtils.initializeView("ThingDialog", activity, control.getTranslator(),
+                binding.translation, null, null, true));
+        descriptionText = control.createChangeableTranslation();
+        titleText = control.createChangeableTranslation();
 
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
@@ -73,9 +85,14 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         if (eventTable instanceof Zone) {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
-        //description and media
+        //media
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
-        ViewUtils.setIfDiffers(binding.description, WherigoGame.get().toDisplayText(eventTable.description));
+
+        //title
+        titleText.set(eventTable.name, (tr, t) -> control.setTitle(tr));
+        //description
+        descriptionText.set(eventTable.description, (tr, t) ->
+            binding.description.setText(WherigoGame.get().toDisplayText(tr)));
 
         //actions
         refreshActionList(activity, control, binding);
@@ -100,7 +117,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
         WherigoViewUtils.setViewActions(actions, binding.dialogActionlist, 1,
                 a -> a instanceof Action ?
-                    TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
+                    TextParam.text(WherigoUtils.getUserDisplayableActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
                     ((ThingAction) a).getTextParam(),
                 item -> {
                     if (item instanceof Action) {

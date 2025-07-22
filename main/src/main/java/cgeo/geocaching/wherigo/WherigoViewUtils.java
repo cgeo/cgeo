@@ -24,18 +24,23 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
+import cgeo.geocaching.wherigo.openwig.Zone;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
+import static cgeo.geocaching.wherigo.WherigoUtils.getUserDisplayableName;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.text.Spannable;
+import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -88,7 +93,13 @@ public final class WherigoViewUtils {
             titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog));
         }
         return dialog;
+    }
 
+    public static void setTitle(final Dialog dialog, final String title) {
+        final View view = dialog.findViewById(R.id.dialog_title);
+        if (view instanceof TextView) {
+            ((TextView) view).setText(title);
+        }
     }
 
     public static <T> void setViewActions(final Iterable<T> actions, final SimpleItemListView view, final int columnCount, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
@@ -113,7 +124,8 @@ public final class WherigoViewUtils {
                 final List<EventTable> things = type.getThingsForUserDisplay();
                 final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
                 final CharSequence description = TextUtils.join(things, i ->
-                        WherigoUtils.getEventTableNameForDisplay(i, false), ", ");
+                        WherigoUtils.getUserDisplayableName(i, false), ", ");
+
                 final WherigolistItemBinding typeBinding = WherigolistItemBinding.bind(view);
                 typeBinding.name.setText(name);
                 typeBinding.description.setText(description);
@@ -145,14 +157,13 @@ public final class WherigoViewUtils {
         }
         if (things.size() == 1) {
             thingSelectAction.accept(things.get(0));
-            //displayThing(activity, things.get(0), false);
             return;
         }
 
         final SimpleDialog.ItemSelectModel<EventTable> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(things)
-            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getEventTableNameForDisplay(item, false)))
+            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getUserDisplayableName(item, false)))
             .setDisplayIconMapper(item -> {
                 final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
                 return iconDrawable == null ? ImageParam.id(defaultIconId) : ImageParam.drawable(iconDrawable);

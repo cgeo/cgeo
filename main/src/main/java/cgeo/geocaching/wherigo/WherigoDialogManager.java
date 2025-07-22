@@ -7,12 +7,15 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
 
@@ -20,6 +23,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * Starts and handles Wherigo-related dialogs
@@ -61,6 +67,7 @@ public class WherigoDialogManager {
         private Consumer<Dialog> dismissListener;
         private boolean isDismissed = false;
         private boolean flaggedForNoUserResult = false;
+        private final CompositeDisposable dismissDisposables = new CompositeDisposable();
 
         public static WherigoDialogControl createAndShowDialog(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onDismissAction) {
             return new WherigoDialogControl(activity, dialogProvider, onDismissAction);
@@ -79,6 +86,7 @@ public class WherigoDialogManager {
             dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
                 WherigoGame.get().removeListener(gameListenerId);
                 isDismissed = true;
+                dismissDisposables.dispose();
                 if (dismissListener != null) {
                     dismissListener.accept(dialog);
                 }
@@ -89,6 +97,14 @@ public class WherigoDialogManager {
                 dialog = null;
             }));
             WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
+        }
+
+        @Override
+        public void setTitle(final CharSequence title) {
+            final View view = dialog == null ? null : dialog.findViewById(R.id.dialog_title);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(title);
+            }
         }
 
         @Override
@@ -115,6 +131,17 @@ public class WherigoDialogManager {
         public void dismissWithoutUserResult() {
             flaggedForNoUserResult = true;
             dismiss();
+        }
+
+        @Override
+        public <T extends Disposable> T disposeOnDismiss(final T disposable) {
+            this.dismissDisposables.add(disposable);
+            return disposable;
+        }
+
+        @Override
+        public Translator getTranslator() {
+            return WherigoGame.get().getTranslator();
         }
     }
 

@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import io.reactivex.rxjava3.disposables.Disposable;
+
 /**
  * Manages Language Models which are downloaded to local device
  */
@@ -85,8 +87,8 @@ public class TranslationModelManager {
     }
 
 
-    public void registerListener(final Supplier<Boolean> onChange) {
-        listeners.addListener(onChange);
+    public Disposable registerListener(final Supplier<Boolean> onChange) {
+        return listeners.addListenerWithDisposable(onChange);
     }
 
     private void callListeners() {
