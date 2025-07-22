@@ -16,16 +16,15 @@
 
             <ImageView
                 android:id="@+id/wizard_logo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_launcher_rounded_noborder"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_marginLeft="64dp"
-                android:layout_marginRight="64dp"
-                android:layout_marginBottom="32dp"
+                style="@style/InstallationWizardMarginsLR"
+                android:layout_width="200dip"
+                android:layout_height="200dip"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="64dp"
-                style="@style/InstallationWizardMarginsLR" />
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/wizard_title"
