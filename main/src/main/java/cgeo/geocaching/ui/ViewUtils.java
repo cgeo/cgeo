@@ -102,7 +102,7 @@ public class ViewUtils {
     }
 
     public static float dpToPixelFloat(final float dp) {
-        return dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density);
+        return dp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density);
     }
 
     public static int spToPixel(final float sp) {
@@ -110,11 +110,11 @@ public class ViewUtils {
     }
 
     public static float spToPixelFloat(final float sp) {
-        return sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity);
+        return sp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().scaledDensity);
     }
 
     public static int pixelToDp(final float px) {
-        return (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
+        return (int) (px / (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
     public static void setTooltip(final View view, final TextParam text) {
