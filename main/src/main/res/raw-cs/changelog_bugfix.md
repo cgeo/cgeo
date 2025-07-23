@@ -1,3 +1,3 @@
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
+- Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
