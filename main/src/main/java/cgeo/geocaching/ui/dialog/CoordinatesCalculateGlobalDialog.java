@@ -197,7 +197,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.convertToPlain.setOnClickListener(v -> {
             // When the callback is hit it will clear the calculator state associated with the waypoint
-            NewCoordinateInputDialog.show(this.requireActivity(), callback, createFromDialog().getGeopoint());
+            NewCoordinateInputDialog.show(this.requireActivity(), callback, createFromDialog().getGeopoint(), true );
             dismiss();
         });
 
