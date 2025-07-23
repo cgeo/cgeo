@@ -340,7 +340,7 @@
     <string name="info_log_post_failed">Posting log failed.</string>
     <string name="info_log_delete_failed">Deleting log failed.</string>
     <string name="info_log_post_failed_simple_reason">Check your are correctly logged in and have a valid internet connection.</string>
-    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>"
+    <string name="info_log_delete_failed_simple_reason">Check your are correctly logged in, have a valid internet connection and that the log is not already deleted.</string>
     <string name="info_log_post_retry">Retry</string>
     <string name="info_log_post_save">Save offline</string>
     <string name="info_log_cleared">Log was cleared.</string>
@@ -393,6 +393,8 @@
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
     <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
+    <string name="crash_activity_title">Oops! c:geo crashed!</string>
+    <string name="crash_activity_report">report problem</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>

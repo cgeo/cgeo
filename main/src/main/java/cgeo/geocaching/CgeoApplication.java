@@ -4,10 +4,10 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.utils.CgeoUncaughtExceptionHandler;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
-import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 
 import android.annotation.SuppressLint;
@@ -131,7 +131,8 @@ public class CgeoApplication extends Application {
 
             TransactionSizeLogger.get().setRequested();
 
-            OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
+            // error handlers
+            CgeoUncaughtExceptionHandler.installUncaughtExceptionHandler(this);
 
             Settings.setAppThemeAutomatically(this);
 
