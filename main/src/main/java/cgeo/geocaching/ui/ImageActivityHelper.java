@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action3;
 
@@ -295,7 +296,7 @@ public class ImageActivityHelper {
 
         final String mimeType = context.getContentResolver().getType(imageUri);
         if (checkMimeType && (!("image/jpeg".equals(mimeType) || "image/png".equals(mimeType) || "image/gif".equals(mimeType)))) {
-            ActivityMixin.showToast(context, R.string.err_acquire_image_unsupported_format);
+            ViewUtils.showToast(context, LocalizationUtils.getString(R.string.err_acquire_image_unsupported_format) + " (" + mimeType + ")");
             return false;
         }
         return true;
