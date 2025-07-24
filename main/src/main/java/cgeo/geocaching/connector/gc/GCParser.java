@@ -867,7 +867,7 @@ public final class GCParser {
                 return true;
             })
             .onErrorReturn((throwable) -> {
-                Log.e("GCParser.uploadPersonalNote - cannot upload caches to GC.com bookmark list", throwable);
+                Log.e("GCParser.addCachesToBookmarkList - cannot upload caches to GC.com bookmark list", throwable);
                 return false;
             });
     }
