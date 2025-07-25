@@ -1412,7 +1412,8 @@ public final class GCParser {
     public enum Logs {
         ALL(null),
         FRIENDS("sf"),
-        OWN("sp");
+        OWN("sp"),
+        OWNER("showOwnerOnly");
 
         final String paramName;
 
@@ -1617,15 +1618,17 @@ public final class GCParser {
 
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
 
-        final String userToken = parseUserToken(page);
+        final String userToken = getLogsPageUserToken(cache);
         final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
                 getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
+        final Observable<LogEntry> ownerLogs = getLogs(userToken, Logs.OWNER).cache();
 
         final List<LogEntry> logsBlocked = logs.toList().blockingGet();
         final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
         final List<LogEntry> friendLogsBlocked = friendLogs.toList().blockingGet();
+        final List<LogEntry> ownerLogsBlocked = ownerLogs.toList().blockingGet();
         final OfflineLogEntry offlineLog = DataStore.loadLogOffline(cache.getGeocode());
 
         List<LogEntry> ownLogsFromDb = Collections.emptyList();
@@ -1655,13 +1658,21 @@ public final class GCParser {
             }
         }
 
-        final List<LogEntry> specialLogEntries = ListUtils.union(friendLogsBlocked, ownLogEntriesBlocked);
+        final List<LogEntry> specialLogEntries = new ArrayList<>();
+        specialLogEntries.addAll(friendLogsBlocked);
+        specialLogEntries.addAll(ownLogEntriesBlocked);
+        specialLogEntries.addAll(ownerLogsBlocked);
         if (!specialLogEntries.isEmpty()) {
             setFriendsLogs(specialLogEntries);
             mergeModifiedLogs(logsBlocked, specialLogEntries);
         }
 
         DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
+    }
+
+    private static String getLogsPageUserToken(@NonNull final Geocache cache) {
+        final String logsPage = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/geocache_logs.aspx", new Parameters("code", cache.getGeocode()));
+        return parseUserToken(logsPage);
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
