@@ -1,3 +1,6 @@
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Fix: Trackable inventory not loaded while logging a cache
+
+##
+- Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
+- Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
