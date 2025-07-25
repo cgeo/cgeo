@@ -5,6 +5,8 @@ import cgeo.geocaching.location.Geopoint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 public class RouteSegment implements Parcelable {
@@ -24,6 +26,11 @@ public class RouteSegment implements Parcelable {
 
     public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points, final ArrayList<Float> elevation, final boolean linkToPreviousSegment) {
         this(item, points, linkToPreviousSegment);
+        this.elevation = elevation;
+    }
+
+    public RouteSegment(final ArrayList<Geopoint> points, @Nullable final ArrayList<Float> elevation) {
+        this(new RouteItem(points.get(points.size() - 1)), points, false);
         this.elevation = elevation;
     }
 
