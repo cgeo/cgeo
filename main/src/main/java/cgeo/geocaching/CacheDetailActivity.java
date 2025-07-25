@@ -116,6 +116,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -179,7 +180,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.mlkit.nl.translate.Translator;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -1977,7 +1977,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
         private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll, final HtmlStyle descriptionStyle,
-            final Translator translator, final OfflineTranslateUtils.Status status, final Consumer<Exception> errorConsumer) {
+                           final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Exception> errorConsumer) {
             binding.descriptionRenderFully.setVisibility(View.GONE);
             binding.description.setText(TextUtils.setSpan(activity.getString(translator != null ? R.string.cache_description_translating_and_rendering : R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
             binding.description.setVisibility(View.VISIBLE);
@@ -2030,7 +2030,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 } else {
                     descriptionView.setOnClickListener(null);
                 }
-            } catch (final RuntimeException ignored) {
+            } catch (final RuntimeException ex) {
+                Log.e("Problem with description", ex);
                 ActivityMixin.showToast(activity, R.string.err_load_descr_failed);
             }
         }
@@ -2040,7 +2041,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
         @WorkerThread
         private static void createDescriptionContent(final Activity activity, final Geocache cache, final boolean restrictLength, final TextView descriptionView, final HtmlStyle descriptionStyle,
-            final Translator translator, final OfflineTranslateUtils.Status status, final Consumer<Pair<CharSequence, Boolean>> successConsumer, final Consumer<Exception> errorConsumer) {
+            final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Pair<CharSequence, Boolean>> successConsumer, final Consumer<Exception> errorConsumer) {
             //combine short and long description to the final description to render
             String descriptionText = cache.getDescription();
             final String shortDescriptionText = cache.getShortDescription();
@@ -2058,12 +2059,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (textTooLong && restrictLength) {
                 descriptionText = descriptionText.substring(0, DESCRIPTION_MAX_SAFE_LENGTH);
             }
-
+            final String descriptionTextFinal = descriptionText;
             // translate, if requested
             if (translator == null) {
-                successConsumer.accept(createDescriptionContentHelper(activity, descriptionText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle));
+                AndroidRxUtils.runOnUi(() ->
+                    successConsumer.accept(createDescriptionContentHelper(activity, descriptionTextFinal, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle))
+                );
             } else {
-                OfflineTranslateUtils.translateParagraph(translator, status, descriptionText, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
+                OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
             }
         }
 

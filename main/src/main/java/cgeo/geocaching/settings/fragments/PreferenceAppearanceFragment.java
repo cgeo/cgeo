@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
@@ -40,14 +41,12 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final ListPreference languagePref = findPreference(getString(R.string.pref_selected_language));
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
-        final Locale currentLocale = Settings.getApplicationLocale();
 
         entries[0] = getString(R.string.init_use_default_language);
         entryValues[0] = "";
         for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
             entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
-            final Locale l = new Locale(BuildConfig.TRANSLATION_ARRAY[i], "");
-            entries[1 + i] = BuildConfig.TRANSLATION_ARRAY[i] + " (" + l.getDisplayLanguage(currentLocale) + ")";
+            entries[1 + i ] = LocalizationUtils.getLocaleDisplayName(BuildConfig.TRANSLATION_ARRAY[i], false, true);
         }
 
         languagePref.setEntries(entries);

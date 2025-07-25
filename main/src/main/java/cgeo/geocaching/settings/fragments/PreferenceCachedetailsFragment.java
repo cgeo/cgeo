@@ -56,14 +56,14 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         } else if (StringUtils.equals(newValue, OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
             final OfflineTranslateUtils.Language systemLang = OfflineTranslateUtils.getAppLanguageOrDefault();
             final OfflineTranslateUtils.Language appLanguage = Settings.getApplicationLanguage();
-            final String appLanguageDisplayName = appLanguage.getDisplayName(appLocale);
+            final String appLanguageDisplayName = appLanguage.getDisplayName();
 
             if (systemLang.equals(appLanguage)) {
                 languagePref.setSummary(String.format("%s: %s", getString(R.string.init_use_application_language), appLanguageDisplayName));
             } else {
                 languagePref.setSummary(String.format("%s: %s\n%s", getString(R.string.init_use_application_language),
                         getString(R.string.translator_language_unsupported, appLanguageDisplayName),
-                        getString(R.string.translator_target_language, systemLang.getDisplayName(appLocale))));
+                        getString(R.string.translator_target_language, systemLang.getDisplayName())));
             }
         } else {
             final Locale newLocale = new Locale(newValue);

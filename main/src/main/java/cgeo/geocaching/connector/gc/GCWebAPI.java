@@ -900,7 +900,7 @@ public class GCWebAPI {
         int skip = 0;
         TrackableInventoryEntry[] entries;
         do {
-            entries = apiProxyReq().uri("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntry[].class).blockingGet();
+            entries = apiProxyReq().uri("/trackables?inCollection=false&inInventory=true&take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntry[].class).blockingGet();
             //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
             trackableInventoryEntries.addAll(Arrays.asList(entries));
             skip += MAX_TAKE;

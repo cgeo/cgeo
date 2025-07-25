@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -196,7 +197,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                             TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
                 }
             }
-            if (OfflineTranslateUtils.isTargetLanguageValid()) {
+            if (OfflineTranslateUtils.isTargetLanguageValid() && !TranslateAccessor.get().getSupportedLanguages().isEmpty()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
                     if (translationStatus.isTranslated()) {
                         translationStatus.setNotTranslated();

@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -80,6 +81,11 @@ public class EmojiUtils {
     public static final int SPARKLES = 0x2728;
     public static final int RECENT = 0x27f2;
 
+    public static final int RED_FLAG = 0x1f6a9;
+    public static final int GREEN_CHECK_BOXED = 0x2705;
+    public static final int GRAY_CHECK_BOXED = 0x2611;
+    public static final int DOUBLE_RED_EXCLAMATION_MARK = 0x203c;
+
     private static final EmojiSet[] symbols = {
             // category symbols
             new EmojiSet(R.string.emoji_category_symbols, 0x2764, new int[]{
@@ -92,8 +98,8 @@ public class EmojiUtils {
                     /* money */         0x1fa99, 0x1f4b0,
                     /* warning */       0x26a0, 0x26d4, 0x1f6ab, 0x1f6b3, 0x1f6d1, 0x2622,
                     /* av-symbol */     0x1f505, 0x1f506,
-                    /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757, 0x1f522, 0x1f520,
-                    /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3,
+                    /* other-symbol */  0x2b55, GREEN_CHECK_BOXED, GRAY_CHECK_BOXED, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, DOUBLE_RED_EXCLAMATION_MARK, 0x2049, 0x2753, 0x2757, 0x1f522, 0x1f520,
+                    /* flags */         0x1f3c1, RED_FLAG, 0x1f3f4, 0x1f3f3,
 
             }),
             // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
@@ -439,7 +445,7 @@ public class EmojiUtils {
      * @param emoji codepoint of the emoji to display
      * @return string emoji with protection from rendering as black-and-white glyphs
      */
-    private static String getEmojiAsString(final int emoji) {
+    public static String getEmojiAsString(final int emoji) {
         return new String(Character.toChars(emoji)) + new String(Character.toChars(VariationSelectorEmoji));
     }
 
@@ -489,6 +495,17 @@ public class EmojiUtils {
             canvas.restore();
         }
         return new BitmapDrawable(paint.res, bm);
+    }
+
+    public static String getFlagEmojiFromCountry(final String countryCode) {
+        String cCode = countryCode;
+        if (cCode == null || cCode.length() != 2) {
+            cCode = "EO"; //will return "unknown" flag
+        }
+        final String ccTouse = cCode.toUpperCase(Locale.ROOT);
+        final int firstLetter = Character.codePointAt(ccTouse, 0) - 0x41 + 0x1F1E6;
+        final int secondLetter = Character.codePointAt(ccTouse, 1) - 0x41 + 0x1F1E6;
+        return new String(Character.toChars(firstLetter)) + new String(Character.toChars(secondLetter));
     }
 
     /**

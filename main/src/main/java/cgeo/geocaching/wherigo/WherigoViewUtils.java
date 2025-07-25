@@ -24,18 +24,15 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
-import cgeo.geocaching.wherigo.openwig.Zone;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.text.Spannable;
-import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +78,7 @@ public final class WherigoViewUtils {
         }
     }
 
-    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final String title) {
+    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final CharSequence title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         final AlertDialog dialog = builder.create();
         if (!StringUtils.isBlank(title)) {
@@ -115,11 +112,8 @@ public final class WherigoViewUtils {
                 view.setBackground(null);
                 final List<EventTable> things = type.getThingsForUserDisplay();
                 final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
-                final CharSequence description = TextUtils.join(things, i -> {
-                    final String thingName = i.name;
-                    return WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan("(" + thingName + ")", new StyleSpan(Typeface.ITALIC));
-                }, ", ");
-
+                final CharSequence description = TextUtils.join(things, i ->
+                        WherigoUtils.getEventTableNameForDisplay(i, false), ", ");
                 final WherigolistItemBinding typeBinding = WherigolistItemBinding.bind(view);
                 typeBinding.name.setText(name);
                 typeBinding.description.setText(description);
@@ -158,16 +152,7 @@ public final class WherigoViewUtils {
         final SimpleDialog.ItemSelectModel<EventTable> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(things)
-            .setDisplayMapper(item -> {
-                CharSequence name = WherigoGame.get().toDisplayText(item.name);
-                if (item instanceof Zone) {
-                    name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) item) + ")");
-                }
-                if (!WherigoUtils.isVisibleToPlayer(item)) {
-                    name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
-                }
-                return TextParam.text(name);
-            })
+            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getEventTableNameForDisplay(item, false)))
             .setDisplayIconMapper(item -> {
                 final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
                 return iconDrawable == null ? ImageParam.id(defaultIconId) : ImageParam.drawable(iconDrawable);
