@@ -20,7 +20,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
+import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.Cartridge;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
@@ -46,10 +48,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
 public class WherigoGame implements UI {
@@ -66,10 +71,12 @@ public class WherigoGame implements UI {
     }
 
     private final AudioManager audioManager = new AudioManager();
+    private final Translator translator = new Translator();
 
     //filled overall (independent from current game)
     private String lastPlayedCGuid;
     private String lastSetContextGeocode;
+    private String startGameTranslationConfig;
 
     //filled on new/loadGame
     private CartridgeFile cartridgeFile;
@@ -82,6 +89,8 @@ public class WherigoGame implements UI {
     private boolean lastErrorNotSeen = false;
     private String contextGeocode;
     private String contextGeocacheName;
+    private final CompositeDisposable translationDisposable = new CompositeDisposable();
+    private final Map<String, String> translatedStrings = Collections.synchronizedMap(new HashMap<>());
 
     //filled on game start
     private boolean isPlaying = false;
@@ -110,6 +119,7 @@ public class WherigoGame implements UI {
             // not really important
             Log.d(LOG_PRAEFIX + "unable to set name/platform for OpenWIG", e);
         }
+
     }
 
     public int addListener(final Consumer<NotifyType> listener) {
@@ -169,6 +179,7 @@ public class WherigoGame implements UI {
             } else {
                 engine.start();
             }
+
         } catch (IOException ie) {
             Log.e(LOG_PRAEFIX + "Problem", ie);
         }
@@ -320,6 +331,14 @@ public class WherigoGame implements UI {
         this.contextGeocacheName = WherigoUtils.findGeocacheNameForGeocode(geocode);
     }
 
+    public void setStartGameTranslationConfig(final String translationConfig) {
+        this.startGameTranslationConfig = translationConfig;
+    }
+
+    public Translator getTranslator() {
+        return this.translator;
+    }
+
     private void runOnUi(final Runnable r) {
         AndroidRxUtils.runOnUi(r);
     }
@@ -338,6 +357,8 @@ public class WherigoGame implements UI {
         WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
         WherigoLocationProvider.get().connect();
         WherigoGameService.startService();
+
+        initializeTranslatorForGame();
     }
 
     @Override
@@ -350,6 +371,7 @@ public class WherigoGame implements UI {
     public void destroy() {
         stopGame();
         freeResources();
+        translator.dispose();
     }
 
     private void freeResources() {
@@ -363,6 +385,11 @@ public class WherigoGame implements UI {
         setContextGeocodeInternal(null);
         WherigoDialogManager.get().clear();
         audioManager.release();
+
+        //translation
+        translator.reset();
+        translatedStrings.clear();
+        translationDisposable.clear();
     }
 
     @Override
@@ -398,6 +425,7 @@ public class WherigoGame implements UI {
     @Override
     public void pushInput(final EventTable input) {
         Log.iForce(LOG_PRAEFIX + "pushInput:" + input);
+        WherigoGame.get().hookToTranslation(input);
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
@@ -414,6 +442,7 @@ public class WherigoGame implements UI {
     @Override
     public void showScreen(final int screenId, final EventTable details) {
         Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
+        WherigoGame.get().hookToTranslation(details);
 
         switch (screenId) {
             case MAINSCREEN:
@@ -501,6 +530,38 @@ public class WherigoGame implements UI {
         }
         return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable).first;
     }
+
+    public void hookToTranslation(final EventTable et) {
+        if (!WherigoGame.get().isPlaying() || et == null) {
+            return;
+        }
+        synchronized (translatedStrings) {
+            //store name
+            if (!translatedStrings.containsKey(et.name)) {
+                translationDisposable.add(translator.addTranslation(et.name, (tr, t) -> translatedStrings.put(et.name, tr)));
+            }
+            //for Actions: store text
+            if (et instanceof Action && !translatedStrings.containsKey(((Action) et).text)) {
+                translationDisposable.add(translator.addTranslation(((Action) et).text, (tr, t) -> translatedStrings.put(((Action) et).text, tr)));
+            }
+        }
+    }
+
+    public String getTranslatedName(@NonNull final EventTable et) {
+        final String translated = translatedStrings.get(et.name);
+        return translated != null ? translated : et.name;
+    }
+
+    public String getTranslatedText(@NonNull final Action action) {
+        final String translated = translatedStrings.get(action.text);
+        return translated != null ? translated : action.text;
+    }
+
+    private void initializeTranslatorForGame() {
+        translator.init(this.startGameTranslationConfig, null);
+        translationDisposable.add(translator.addStateListener((state, l) -> notifyListeners(NotifyType.REFRESH)));
+    }
+
 
     public boolean isDebugModeForCartridge() {
         final String code = cartridgeInfo == null || cartridgeInfo.getCartridgeFile() == null ? null

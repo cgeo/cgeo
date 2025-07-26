@@ -211,6 +211,10 @@
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
     </style>
 
+    <style name="button_icon_with_text" parent="button_icon">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
     <style name="button_icon_actionbar" parent="button_icon">
         <item name="iconGravity">top</item>
         <item name="android:layout_height">wrap_content</item>

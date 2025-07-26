@@ -193,6 +193,10 @@ public class AndroidRxUtils {
         }).blockingGet();
     }
 
+    public static Scheduler singleThreadPool() {
+        return Schedulers.from(newFixedDiscardingThreadPool(1, "singleThread"));
+    }
+
     /**
      * Provide an executor service with a fixed number of threads and an unbounded queue. If the
      * service is shutdown while tasks are still queued, jobs will be silently discarded.

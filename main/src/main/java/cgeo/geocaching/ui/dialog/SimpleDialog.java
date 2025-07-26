@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 import androidx.core.util.Supplier;
+import androidx.viewbinding.ViewBinding;
 
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -46,6 +47,7 @@ public class SimpleDialog {
 
     private TextParam title;
     private TextParam message;
+    private View customView;
 
     private TextParam positiveButton = TextParam.id(android.R.string.ok);
     private TextParam negativeButton = TextParam.id(android.R.string.cancel);
@@ -218,6 +220,15 @@ public class SimpleDialog {
         return setTitle(TextParam.id(stringId, params));
     }
 
+    public SimpleDialog setCustomView(final View customView) {
+        this.customView = customView;
+        return this;
+    }
+
+    public SimpleDialog setCustomView(final ViewBinding customBinding) {
+        this.customView = customBinding.getRoot();
+        return this;
+    }
 
     public SimpleDialog setMessage(final TextParam message) {
         this.message = message;
@@ -347,6 +358,12 @@ public class SimpleDialog {
             this.message.applyTo(binding.dialogMessage);
         } else {
             binding.dialogMessage.setVisibility(View.GONE);
+        }
+        if (this.customView != null) {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
+            binding.dialogCustomviewholder.addView(this.customView);
+        } else {
+            binding.dialogCustomviewholder.setVisibility(View.VISIBLE);
         }
 
         return new Pair<>(dialog, binding);
