@@ -32,6 +32,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -95,7 +96,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = getCache().getLogCounts();
+        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getCache().getFriendsLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
