@@ -45,7 +45,7 @@
         app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_caches"
+        android:id="@+id/menu_cache_online"
         android:icon="@drawable/ic_menu_cache"
         android:title="@string/menu_caches"
         app:showAsAction="never|withText">
@@ -54,7 +54,54 @@
             <item
                 android:id="@+id/menu_refresh_stored"
                 android:title="@string/cache_offline_refresh"
+                android:icon="@drawable/ic_menu_refresh"
                 app:showAsAction="ifRoom|withText"/>
+            <item
+                android:id="@+id/menu_upload_bookmarklist"
+                android:title="@string/caches_upload_bookmarklist_all"
+                android:icon="@drawable/ic_menu_bookmarks"
+                app:showAsAction="ifRoom|withText"/>
+            <item
+                android:id="@+id/menu_watch_management"
+                android:icon="@drawable/ic_menu_watch"
+                android:title="@string/feature_watch_list"
+                app:showAsAction="never|withText">
+                <menu>
+                    <item
+                        android:id="@+id/menu_watch_all"
+                        android:title="@string/caches_watch_all"
+                        android:icon="@drawable/ic_menu_watch"
+                        app:showAsAction="ifRoom|withText"/>
+                    <item
+                        android:id="@+id/menu_unwatch_all"
+                        android:title="@string/caches_unwatch_all"
+                        android:icon="@drawable/ic_menu_watch_remove"
+                        app:showAsAction="ifRoom|withText"/>
+                </menu>
+            </item>
+            <item
+                android:id="@+id/menu_export_persnotes"
+                android:title="@string/export_persnotes"
+                android:icon="@drawable/ic_menu_note"/>
+            <item
+                android:id="@+id/menu_upload_modifiedcoords"
+                android:icon="@drawable/ic_menu_upload"
+                android:title="@string/caches_upload_modifiedcoords"
+                app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/menu_upload_allcoords"
+                android:icon="@drawable/ic_menu_upload"
+                android:title="@string/caches_upload_allcoords"
+                app:showAsAction="ifRoom|withText" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_caches"
+        android:icon="@drawable/ic_menu_cache"
+        android:title="@string/menu_caches"
+        app:showAsAction="never|withText">
+        <!-- Cache operations -->
+        <menu>
             <item
                 android:id="@+id/menu_move_to_list"
                 android:title="@string/cache_menu_move_list"
@@ -77,36 +124,14 @@
                 android:title="@string/caches_remove_all_completely"
                 app:showAsAction="ifRoom|withText"/>
             <item
-                android:id="@+id/menu_add_to_route"
-                android:title="@string/caches_append_to_route_all"
-                app:showAsAction="ifRoom|withText"/>
-            <item
                 android:id="@+id/menu_delete_events"
                 android:title="@string/caches_delete_events"
                 android:enabled="true"
                 app:showAsAction="never|withText"/>
             <item
-                android:id="@+id/menu_upload_bookmarklist"
-                android:title="@string/caches_upload_bookmarklist_all"
+                android:id="@+id/menu_add_to_route"
+                android:title="@string/caches_append_to_route_all"
                 app:showAsAction="ifRoom|withText"/>
-            <item
-                android:id="@+id/menu_watch_management"
-                android:icon="@drawable/ic_menu_watch"
-                android:title="@string/feature_watch_list"
-                app:showAsAction="never|withText">
-                <menu>
-                    <item
-                        android:id="@+id/menu_watch_all"
-                        android:title="@string/caches_watch_all"
-                        android:icon="@drawable/ic_menu_watch"
-                        app:showAsAction="ifRoom|withText"/>
-                    <item
-                        android:id="@+id/menu_unwatch_all"
-                        android:title="@string/caches_unwatch_all"
-                        android:icon="@drawable/ic_menu_watch_remove"
-                        app:showAsAction="ifRoom|withText"/>
-                </menu>
-            </item>
             <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
@@ -193,7 +218,7 @@
     <item
         android:id="@+id/menu_export"
         android:icon="@drawable/ic_menu_share"
-        android:title="@string/export_upload"
+        android:title="@string/share_export"
         app:showAsAction="never|withText">
         <menu>
             <item
@@ -204,20 +229,6 @@
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes"
                 android:icon="@drawable/ic_menu_note_edit"/>
-            <item
-                android:id="@+id/menu_export_persnotes"
-                android:title="@string/export_persnotes"
-                android:icon="@drawable/ic_menu_note"/>
-            <item
-                android:id="@+id/menu_upload_modifiedcoords"
-                android:icon="@drawable/ic_menu_upload"
-                android:title="@string/caches_upload_modifiedcoords"
-                app:showAsAction="ifRoom|withText" />
-            <item
-                android:id="@+id/menu_upload_allcoords"
-                android:icon="@drawable/ic_menu_upload"
-                android:title="@string/caches_upload_allcoords"
-                app:showAsAction="ifRoom|withText" />
             <item
                 android:id="@+id/menu_share_geocodes"
                 android:icon="@drawable/ic_menu_share"
