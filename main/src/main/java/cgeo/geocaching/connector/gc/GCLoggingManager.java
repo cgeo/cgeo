@@ -68,27 +68,8 @@ class GCLoggingManager extends AbstractLoggingManager {
             return result;
         }
 
-        final List<LogType> possibleLogTypes = GCParser.parseTypes(page);
-        result.setAvailableLogTypes(possibleLogTypes);
-
-        try {
-            final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
-            final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
-                final Trackable trackable = new Trackable();
-                trackable.setGeocode(entry.referenceCode);
-                trackable.setTrackingcode(entry.trackingNumber);
-                trackable.setName(entry.name);
-                trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
-                return trackable;
-                //new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, TrackableBrand.TRAVELBUG)
-            }).toList();
-            result.setAvailableTrackables(trackables);
-        } catch (final Exception e) {
-            result.setError();
-            Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
-        }
-
-
+        result.setAvailableLogTypes(GCParser.parseTypes(page));
+        result.setAvailableTrackables(GCParser.parseTrackables(page));
 
         // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 

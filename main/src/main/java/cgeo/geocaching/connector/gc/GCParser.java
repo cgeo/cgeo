@@ -1558,21 +1558,21 @@ public final class GCParser {
 
     @NonNull
     static List<LogType> parseTypes(final String page) {
-            final AvailableLogType[] availableTypes = parseLogTypes(page);
-            if (availableTypes == null) {
-                return Collections.emptyList();
-            }
-            return CollectionStream.of(availableTypes)
-                    .filter(a -> a.value > 0)
-                    .map(a -> LogType.getById(a.value))
-                    .filter(t -> t != LogType.UPDATE_COORDINATES)
-                    .toList();
+        final AvailableLogType[] availableTypes = parseLogTypes(page);
+        if (availableTypes == null) {
+            return Collections.emptyList();
         }
+        return CollectionStream.of(availableTypes)
+                .filter(a -> a.value > 0)
+                .map(a -> LogType.getById(a.value))
+                .filter(t -> t != LogType.UPDATE_COORDINATES)
+                .toList();
+    }
 
     private static AvailableLogType[] parseLogTypes(final String page) {
         //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
         if (StringUtils.isBlank(page)) {
-            return new AvailableLogType[0];
+            return null;
         }
 
         final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
@@ -1583,7 +1583,40 @@ public final class GCParser {
             return MAPPER.readValue("[" + match + "]", AvailableLogType[].class);
         } catch (final Exception e) {
             Log.e("Error parsing log types from [" + match + "]", e);
-            return new AvailableLogType[0];
+            return null;
+        }
+    }
+
+    @NonNull
+    static List<Trackable> parseTrackables(final String page) {
+        final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = parseTrackablesJson(page);
+        if (trackableInventoryItems == null) {
+            return Collections.emptyList();
+        }
+        return CollectionStream.of(trackableInventoryItems).map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.setName(entry.name);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+        }).toList();
+    }
+
+    private static GCWebAPI.TrackableInventoryEntry[] parseTrackablesJson(final String page) {
+        if (StringUtils.isBlank(page)) {
+            return null;
+        }
+
+        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_LOGPAGE_TRACKABLES, null);
+        if (match == null) {
+            return null;
+        }
+        try {
+            return MAPPER.readValue("[" + match + "]", GCWebAPI.TrackableInventoryEntry[].class);
+        } catch (final Exception e) {
+            Log.e("Error parsing log types from [" + match + "]", e);
+            return null;
         }
     }
 
