@@ -281,6 +281,7 @@
     <string name="err_detail_still_working">Still working on another task.</string>
     <string name="err_detail_premium_log_found">This cache is only available to premium members of geocaching.com. Therefore, the cache information cannot be displayed.\n\nHowever, if you have already found this cache, you can log it here.</string>
     <string name="err_watchlist_failed">Changing your watchlist failed.</string>
+    <string name="err_watchlist_failed_geocodes">Changing your watchlist failed for geocodes: %s</string>
     <string name="err_application_no">c:geo can\'t find any suitable application.</string>
     <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
     <string name="err_auth_process">Authorization process failed.</string>
@@ -516,6 +517,11 @@
     <string name="caches_upload_bookmarklist">Add to bookmark list</string>
     <string name="caches_upload_bookmarklist_all">Add all to bookmark list</string>
     <string name="caches_upload_bookmarklist_selected">Add selected to bookmark list</string>
+    <string name="caches_watch_all">Add all to watch list</string>
+    <string name="caches_unwatch_all">Remove all from watch list</string>
+    <string name="caches_watch_selected">Add selected to watch list</string>
+    <string name="caches_unwatch_selected">Remove selected from watch list</string>
+    <string name="watchlist_background_started">Watchlist update started in background</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
