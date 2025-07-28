@@ -370,6 +370,8 @@
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
     <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
+    <string name="crash_activity_title">Ups! c:geo uległ awarii!</string>
+    <string name="crash_activity_report">zgłoś problem</string>
     <!-- location service -->
     <string name="loc_last">Ostatnia pozycja</string>
     <string name="loc_net">Sieć</string>
@@ -2486,6 +2488,7 @@
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
+    <string name="map_manual_target_route_name">Bieżąca nawigacja</string>
     <string name="map_clear_manual_targets">Wyczyść cel trasy</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
