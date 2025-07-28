@@ -2432,6 +2432,7 @@
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
     <string name="map_disable_autotarget_individual_route">Desactivat \"Estableix l\'inici de ruta com a objectiu\"</string>
+    <string name="map_manual_target_route_name">Navegació actual</string>
     <string name="map_clear_manual_targets">Esborra l\'objectiu d\'encaminament</string>
     <string name="map_manual_targets_cleared">Objectius manuals esborrats</string>
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
