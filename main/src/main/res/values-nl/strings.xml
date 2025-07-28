@@ -370,6 +370,8 @@
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
     <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
+    <string name="crash_activity_title">Oeps! c:geo is vastgelopen!</string>
+    <string name="crash_activity_report">probleem melden</string>
     <!-- location service -->
     <string name="loc_last">Laatst bekende</string>
     <string name="loc_net">Netwerk</string>
@@ -2430,6 +2432,7 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
+    <string name="map_manual_target_route_name">Huidige navigatie</string>
     <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
