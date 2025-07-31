@@ -3,6 +3,7 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
 - Neu: Bei Aktivierung des Live-Modus bleiben Wegpunkte des aktuell gesetzten Ziels sichtbar
+- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -15,3 +16,4 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Neu: Freigabeoption nach dem Loggen eines Caches
 - Änderung: Logoptionen "Benötigt Wartung" oder "Sollte archiviert werden" für eigene Caches ausblenden
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Change: Removed references to Twitter
