@@ -3,6 +3,7 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Mapa
 - Novo: Optimização de rota armazena dados calculados
 - New: Enabling live mode keeps waypoints of currently set target visible
+- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -15,3 +16,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - Novo: Opção de partilhar depois de registar uma cache
 - Alteração: Não mostrar as opções "precisa de manutenção" ou "precisa de arquivamento" para as próprias caches
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
+- Change: Removed references to Twitter
