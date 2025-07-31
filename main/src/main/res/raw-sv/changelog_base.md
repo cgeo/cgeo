@@ -3,6 +3,7 @@ Due to Play Store policies we have updated the Android API level this version of
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
 - Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
+- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -15,3 +16,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - Nyhet: alternativ att dela efter att ha loggat en cache
 - Ändra: Visa inte "behöver underhåll" eller "behöver arkiveras"-alternativen för egna cacher
 - Fix: Återställning av en säkerhetskopia kan duplicera spårfiler i internt lagringsutrymme och efterföljande säkerhetskopior
+- Change: Removed references to Twitter
