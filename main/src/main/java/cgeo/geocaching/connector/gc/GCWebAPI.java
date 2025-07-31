@@ -891,24 +891,6 @@ public class GCWebAPI {
     }
 
     /*
-     * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
-     */
-    @NonNull
-    @WorkerThread
-    static List<TrackableInventoryEntry> getTrackableInventory() {
-        final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
-        int skip = 0;
-        TrackableInventoryEntry[] entries;
-        do {
-            entries = apiProxyReq().uri("/trackables?inCollection=false&inInventory=true&take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntry[].class).blockingGet();
-            //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
-            trackableInventoryEntries.addAll(Arrays.asList(entries));
-            skip += MAX_TAKE;
-        } while (entries.length == MAX_TAKE);
-        return trackableInventoryEntries;
-    }
-
-    /*
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */
     static Single<Integer> getAvailableFavoritePoints(final String profile) {
