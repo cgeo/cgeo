@@ -3,6 +3,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
 - Nou: activar el mode en directe manté visibles els punts de referència de l'objectiu establert actualment
+- Nou: Si toqueu llargament la línia de navegació, s'obre el gràfic d'elevació (UnifiedMap)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -15,3 +16,4 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: opció de compartir després de registrar un catxé
 - Canvi: no mostri les opcions "necessita manteniment" o "necessita arxivar" per a els catxés propis
 - Correcció: La restauració d'una còpia de seguretat pot duplicar els fitxers de track a l'emmagatzematge intern i a les còpies de seguretat posteriors
+- Canvi: S'han eliminat les referències a Twitter
