@@ -257,7 +257,11 @@ public class OfflineTranslateUtils {
     }
 
     public static boolean isLanguageSupported(final Language language) {
-        final String languageCode = TranslateAccessor.get().fromLanguageTag(language.getCode());
+        final String languageTag = null != language ? language.getCode() : null;
+        if (null == languageTag) {
+            return false;
+        }
+        final String languageCode = TranslateAccessor.get().fromLanguageTag(languageTag);
         return (null != languageCode);
     }
 
