@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clickable="true"
-    android:clipToPadding="false"
-    android:fastScrollEnabled="false"
-    android:focusable="true"
-    android:footerDividersEnabled="false"
-    android:headerDividersEnabled="false"
-    android:nestedScrollingEnabled="true"
-    android:scrollbarStyle="outsideOverlay"
-    android:paddingHorizontal="@dimen/paddingRight_fastscroll"
-    tools:context=".CacheDetailActivity$WaypointsViewCreator">
-</ListView>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <Button
+            android:id="@+id/add_waypoint"
+            style="@style/button_full"
+            android:layout_margin="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="0dp"
+            android:text="@string/cache_waypoints_add" />
+
+        <Button
+            android:id="@+id/add_waypoint_currentlocation"
+            style="@style/button_full"
+            android:layout_margin="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="0dp"
+            android:text="@string/cache_waypoints_add_currentLocation" />
+
+        <Button
+            android:id="@+id/add_waypoint_fromclipboard"
+            style="@style/button_full"
+            android:layout_margin="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="0dp"
+            android:text="@string/cache_waypoints_add_fromclipboard"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/hide_visited_waypoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cache_waypoints_hide_visited_waypoints"
+            tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/waypoint_header_line"
+        style="@style/separator_horizontal"
+        android:layout_marginTop="3dp" />
+
+    <ListView
+        android:id="@+id/waypoint_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:fastScrollEnabled="false"
+        android:focusable="true"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:nestedScrollingEnabled="true"
+        android:paddingHorizontal="@dimen/paddingRight_fastscroll"
+        android:scrollbarStyle="outsideOverlay"
+        tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+</LinearLayout>

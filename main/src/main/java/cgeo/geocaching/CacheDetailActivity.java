@@ -30,7 +30,6 @@ import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
-import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
@@ -152,6 +151,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -2215,9 +2215,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
 
-            final ListView v = binding.getRoot();
-            v.setVisibility(View.VISIBLE);
-            v.setClickable(true);
+            final LinearLayout rootView = binding.getRoot();
+            rootView.setVisibility(View.VISIBLE);
+            rootView.setClickable(true);
 
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = createSortedWaypointList(cache);
@@ -2244,6 +2244,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     return rowView;
                 }
             };
+
+            final ListView v = binding.waypointList;
             v.setAdapter(adapter);
             v.setOnScrollListener(new FastScrollListener(v));
 
@@ -2257,11 +2259,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             //register for changes of variableslist -> calculated waypoints may have changed
             cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(adapter::notifyDataSetChanged));
 
-            if (v.getHeaderViewsCount() < 1) {
-                final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
-                v.addHeaderView(headerBinding.getRoot());
-
-                headerBinding.addWaypoint.setOnClickListener(v2 -> {
+            binding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     EditWaypointActivity.startActivityAddWaypoint(activity, cache);
                     if (sortedWaypoints != null && !sortedWaypoints.isEmpty()) {
@@ -2270,7 +2268,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     activity.setNeedsRefresh();
                 });
 
-                headerBinding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
+            binding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
                     newWaypoint.setCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
@@ -2283,8 +2281,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
 
-                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
-                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            binding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
+            binding.hideVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     Settings.setHideVisitedWaypoints(isChecked);
 
                     final List<Waypoint> sortedWaypoints2 = createSortedWaypointList(cache);
@@ -2298,8 +2296,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
 
                 // read waypoint from clipboard
-                setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard);
-                headerBinding.addWaypointFromclipboard.setOnClickListener(v2 -> {
+            setClipboardButtonVisibility(binding.addWaypointFromclipboard);
+            binding.addWaypointFromclipboard.setOnClickListener(v2 -> {
                     final Waypoint oldWaypoint = DataStore.loadWaypoint(Waypoint.hasClipboardWaypoint());
                     if (null != oldWaypoint) {
                         activity.ensureSaved();
@@ -2320,8 +2318,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 });
 
                 final ClipboardManager cliboardManager = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-                cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard));
-            }
+            cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(binding.addWaypointFromclipboard));
         }
 
         @Override
