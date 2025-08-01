@@ -1965,7 +1965,7 @@
     <string name="projection_type_offset_hint_longitude">Longitude Offset in Micro-Minutes</string>
 
     <!-- Variables -->
-    <string name="variables_titletext">Use this page to note down values and do calculations necessary for this cache.</string>
+    <string name="variables_titletext">Values and calculations</string>
     <string name="variables_scanlisting">Scan listing</string>
     <string name="variables_scanlisting_choosepattern_title">Choose found pattern</string>
     <string name="variables_scanlisting_nopatternfound">No pattern found</string>
