@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <cgeo.geocaching.ui.SectionHeader
         android:id="@+id/variables_titletext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
