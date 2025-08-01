@@ -77,7 +77,8 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
         setMapAttribution(new Pair<>(mapAttribution.toString(), true));
 
         final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MultiMapFileTileSource) tileSource);
-        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        buildingLayer = new BuildingLayer(map, tileLayer);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, buildingLayer);
         fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         fragment.applyTheme();
     }
