@@ -32,29 +32,31 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
-    private static final String BUNDLE_ALLLOGS = "alllogs";
-
+    private final boolean allLogs;
     private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
+    public CacheLogsViewCreator(final boolean allLogs) {
+        this.allLogs = allLogs;
+    }
+
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
-        final CacheLogsViewCreator fragment = new CacheLogsViewCreator();
+        final CacheLogsViewCreator fragment = new CacheLogsViewCreator(allLogs);
         final Bundle bundle = new Bundle();
-        bundle.putBoolean(BUNDLE_ALLLOGS, allLogs);
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public long getPageId() {
-        final Bundle arguments = getArguments();
-        return arguments == null ? 0 : arguments.getBoolean(BUNDLE_ALLLOGS) ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
+        return allLogs ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
     }
 
     private Geocache getCache() {
@@ -65,8 +67,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
-        final Bundle arguments = getArguments();
-        final boolean allLogs = arguments == null || arguments.getBoolean(BUNDLE_ALLLOGS);
         final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
         return addOwnOfflineLog(cache, logs);
     }
@@ -95,7 +95,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = getCache().getLogCounts();
+        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getCache().getFriendsLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
