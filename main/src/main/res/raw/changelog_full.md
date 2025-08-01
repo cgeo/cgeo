@@ -3,6 +3,19 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.07.25 Bugfix Release
+
+- Fix: Trackable inventory not loaded while logging a cache
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2025.07.20 Bugfix Release
+
+- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
+- Fix: Finished Wherigo tasks not marked as finished or failed
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.07.17 Feature Release
 
 ### Map
