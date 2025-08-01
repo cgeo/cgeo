@@ -1,85 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/variable_page_viewroot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="10dip"
-    android:nestedScrollingEnabled="true"
-    android:fastScrollEnabled="false"
-    android:scrollbarStyle="outsideOverlay"
-    tools:context=".VariablesViewPageFragment">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/variables_titletext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/variables_titletext"
+        android:textSize="@dimen/textSize_headingSecondary" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_marginHorizontal="4sp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/variables_titletext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textSize_headingSecondary"
-            android:text="@string/variables_titletext"
-            />
+        <Button
+            android:id="@+id/variables_add"
+            style="@style/button_icon"
+            android:tooltipText="@string/variables_add"
+            app:icon="@drawable/ic_menu_add_input" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="4sp">
-
-            <Button
-                android:id="@+id/variables_add"
-                style="@style/button_icon"
-                android:tooltipText="@string/variables_add"
-                app:icon="@drawable/ic_menu_add_input" />
-
-            <Button
+        <Button
                 android:id="@+id/variables_addnextchar"
                 style="@style/button_icon"
                 android:tooltipText="@string/variables_add_next"
-                app:icon="@drawable/ic_menu_add" />
+            app:icon="@drawable/ic_menu_add" />
 
-            <Button
-                android:id="@+id/variables_addscan"
-                style="@style/button_icon"
-                android:tooltipText="@string/variables_scanlisting"
-                app:icon="@drawable/ic_menu_scan" />
+        <Button
+            android:id="@+id/variables_addscan"
+            style="@style/button_icon"
+            android:tooltipText="@string/variables_scanlisting"
+            app:icon="@drawable/ic_menu_scan" />
 
-            <Button
-                android:id="@+id/variables_tidyup"
-                style="@style/button_icon"
-                android:tooltipText="@string/variables_tidyup"
-                app:icon="@drawable/ic_menu_auto_fix_high" />
+        <Button
+            android:id="@+id/variables_tidyup"
+            style="@style/button_icon"
+            android:tooltipText="@string/variables_tidyup"
+            app:icon="@drawable/ic_menu_auto_fix_high" />
 
-            <Button
-                android:id="@+id/variables_deleteall"
-                style="@style/button_icon"
-                android:tooltipText="@string/variables_deleteall"
-                app:icon="@drawable/ic_menu_delete"/>
+        <Button
+            android:id="@+id/variables_deleteall"
+            style="@style/button_icon"
+            android:tooltipText="@string/variables_deleteall"
+            app:icon="@drawable/ic_menu_delete" />
 
-            <Button
-                android:id="@+id/variables_info"
-                style="@style/button_icon"
-                android:tooltipText="@string/variables_info"
-                app:icon="@drawable/ic_menu_help" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/variables_info"
+            style="@style/button_icon"
+            android:tooltipText="@string/variables_info"
+            app:icon="@drawable/ic_menu_help" />
+    </LinearLayout>
 
-        <View
-            android:id="@+id/variable_header_line"
-            style="@style/separator_horizontal"
-            android:layout_marginTop="3dp" />
+    <View
+        android:id="@+id/variable_header_line"
+        style="@style/separator_horizontal"
+        android:layout_marginTop="3dp" />
 
+    <ScrollView
+        android:id="@+id/variable_page_viewroot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dip"
+        android:fastScrollEnabled="false"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        tools:context=".VariablesViewPageFragment">
 
         <cgeo.geocaching.ui.VariableListView
             android:id="@+id/variables"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-</ScrollView>
+            android:layout_height="wrap_content" />
+    </ScrollView>
+</LinearLayout>
