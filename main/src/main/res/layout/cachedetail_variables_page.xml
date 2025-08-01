@@ -70,7 +70,7 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/filter_storage_options_line"
+            android:id="@+id/variable_header_line"
             style="@style/separator_horizontal"
             android:layout_marginTop="3dp" />
 
