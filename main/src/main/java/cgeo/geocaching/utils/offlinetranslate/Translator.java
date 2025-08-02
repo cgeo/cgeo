@@ -4,6 +4,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.ListenerHelper;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SimpleDisposable;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.util.Pair;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -74,11 +76,23 @@ public class Translator {
     }
 
     public Disposable addTranslation(final String original, final BiConsumer<String, Boolean> translationAction) {
+        return addTranslation(original, null, translationAction);
+    }
+
+    public Disposable addTranslation(final String original, final Consumer<Disposable> disposableHandler, final BiConsumer<String, Boolean> translationAction) {
         synchronized (mutex) {
-            final Disposable result = this.translations.addListenerWithDisposable(new Pair<>(original, translationAction));
+            final Disposable disp = this.translations.addListenerWithDisposable(new Pair<>(original, translationAction));
+            Log.d(LOGPRAEFIX + "(" + translations + ") added Translation for " + logShort(original));
             resetSingle(original, translationAction);
             if (state.ordinal() > TranslatorState.READY.ordinal()) {
                 translateSingle(original, translationAction);
+            }
+            final Disposable result = new SimpleDisposable(() -> {
+                disp.dispose();
+                Log.d(LOGPRAEFIX + "(" + translations + ") removed Translation for " + logShort(original));
+            });
+            if (disposableHandler != null) {
+                disposableHandler.accept(result);
             }
             return result;
         }
@@ -108,6 +122,7 @@ public class Translator {
             final boolean enabled = JsonUtils.getBoolean(node, "enabled", this.enabled);
             final boolean allowDownload = JsonUtils.getBoolean(node, "allowDownload", this.allowDownload);
             set(srcLng, trgLng, srcLngDetected, detectText, enabled, allowDownload);
+            Log.iForce(LOGPRAEFIX + " init (" + this + ")");
         });
     }
 
@@ -123,6 +138,12 @@ public class Translator {
             JsonUtils.setBoolean(node, "allowDownload", this.allowDownload);
             return JsonUtils.nodeToString(node);
         }
+    }
+
+    @AnyThread
+    public void setDetectionText(final String detectText) {
+        runOnWorker(() ->
+            set(this.sourceLanguage, this.targetLanguage, this.sourceLanguageDetected, detectText, this.enabled, this.allowDownload));
     }
 
 
@@ -174,6 +195,7 @@ public class Translator {
                 resetAll();
             }
         }
+        Log.d(LOGPRAEFIX + " set (" + this + ")");
     }
 
     @WorkerThread
@@ -276,7 +298,10 @@ public class Translator {
 
     @WorkerThread
     private void resetSingle(final String source, final BiConsumer<String, Boolean> translate) {
-        AndroidRxUtils.runOnUi(() -> translate.accept(source, false));
+        AndroidRxUtils.runOnUi(() -> {
+            Log.d(LOGPRAEFIX + "fire reset for " +  logShort(source));
+            translate.accept(source, false);
+        });
     }
 
     @WorkerThread
@@ -303,8 +328,15 @@ public class Translator {
                 //all pending translations were done
                 changeState(TranslatorState.TRANSLATED);
             }
-            AndroidRxUtils.runOnUi(() -> translate.accept(translated, true));
+            AndroidRxUtils.runOnUi(() -> {
+                Log.d(LOGPRAEFIX + "fire translate for " + logShort(source) + " -> " + logShort(translated));
+                translate.accept(translated, true);
+            });
         }));
+    }
+
+    private static String logShort(final String text) {
+        return  TextUtils.shortenText(text, 40, 0.5f);
     }
 
     public String getSourceLanguage() {
@@ -356,15 +388,13 @@ public class Translator {
 
     @AnyThread
     public void reset() {
-        runOnWorker(() -> {
-            resetInternal();
-        });
+        runOnWorker(this::resetInternal);
     }
 
     @AnyThread
     public void dispose() {
         runOnWorker(() -> {
-            Log.iForce(LOGPRAEFIX + "dispose");
+            Log.iForce(LOGPRAEFIX + "dispose (" + this + ")");
             resetInternal();
             this.modelStateListener.dispose();
             stateListeners.clear();
@@ -395,6 +425,7 @@ public class Translator {
         if (newState == this.state && enabled == this.enabled) {
             return;
         }
+        Log.iForce(LOGPRAEFIX + "changeState " + this.state + "->" + newState + ", enabled " + this.enabled + "->" + enabled);
         this.state = newState;
         this.enabled = enabled;
         stateListeners.executeOnMain(c -> c.accept(newState, enabled));
