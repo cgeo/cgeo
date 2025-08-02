@@ -2281,9 +2281,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
 
-            binding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
-            binding.hideVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    Settings.setHideVisitedWaypoints(isChecked);
+            binding.chipVisitedWaypoints.setChecked(!Settings.getHideVisitedWaypoints());
+            binding.chipVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                Settings.setHideVisitedWaypoints(!isChecked);
 
                     final List<Waypoint> sortedWaypoints2 = createSortedWaypointList(cache);
                     Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
