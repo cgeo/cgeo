@@ -123,8 +123,8 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         final String button2Text = button2Translated != null ? button2Translated : button2;
 
         WherigoViewUtils.setViewActions(options, binding.dialogActionlist, button2 == null ? 1 : 2, item -> TRUE.equals(item) ?
-            TextParam.text(button1Text).setImage(ImageParam.id(R.drawable.ic_menu_done)) :
-            TextParam.text(button2Text).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
+            TextParam.text(button1Text).setImage(button1 == null ? ImageParam.id(R.drawable.ic_menu_done) : null) :
+            TextParam.text(button2Text),
                 item -> {
                     if (FALSE.equals(item)) {
                         control.setPauseOnDismiss(false);
