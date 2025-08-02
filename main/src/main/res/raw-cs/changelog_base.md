@@ -1,42 +1,42 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+### Sjednocená mapa & upozornění na odstranění „starých“ map
+c:geo má zcela novou implementaci mapy nazvanou "Sjednocená mapa", která nakonec nahradí staré implementace Mapy Google a Mapsforge (OpenStreetMap). Toto je notifikace o zastaralosti, která vás informuje o dalším plánu.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+Sjenocená mapa byla publikována asi před rokem. Stále podporuje Mapy Google a OpenStreetMap (online + offline), ale ve zcela přepracované technické podobě a se spoustou nových zajímavých funkcí, které „staré“ mapy nepodporují, mezi něž patří například
+- Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
+- Vyskakovací okno pro Google mapy
+- Skrytí nepotřebných zdrojů map
+- Graf nadmořské výšky pro trasy a stopy
+- Přepínání mezi seznamy přímo z mapy
+- "Řidičský režim" pro mapy založené na OpenStreetMap
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+Sjednocená mapa se již delší dobu osvědčila jako stabilní, proto odstraníme staré implementace map, abychom snížili nároky na údržbu c:geo.
 
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+Cestovní mapa:
+- „Staré“ mapy jsou nyní v režimu zastaralosti – nebudeme již opravovat chyby, které se v nich vyskytují.
+- Sjednocená mapa se stane výchozí pro všechny uživatele na podzim roku 2025.
+- „Staré“ implementace map budou odstraněny na jaře 2026.
 
-Until then, you can switch between the different implementations in settings => map sources.
+Do té doby můžete přepínat mezi různými implementacemi v nastavení => mapové zdroje.
 
 ### Mapa
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Novinka: Zobrazí geofence u zastávek labek (Sjednocená mapa) - povolte "Kruhy" v rychlém nastavení na mapě pro jejich zobrazení
+- Novinka: Možnost nastavit kruhy s individuálním poloměrem na trasové body (možnost kontextového menu "Sledovaná oblast")
+- Oprava: Zobrazení mapy se neaktualizuje při odebrání kešky z aktuálně zobrazeného seznamu
+- Oprava: Číslo kešky ve výběrovém seznamu se neaktualizuje při změně obsahu seznamu
+- Změna: Ponechat aktuální zobrazení při mapování seznamu, pokud se všechny kešky vejdou do aktuálního zobrazení
+- Novinka: Sledování mé polohy v grafu nadmořské výšky (Sjednocená mapa)
+- Novinka: Povolit akce "přesunout do" / "kopírovat do" pro "zobrazit jako seznam"
+- Novinka: Podpora motivu Elevate Winter ve stahovači map
+- Novinka: Adaptivní stínování kopců, volitelný režim vysoké kvality (Sjednocená mapa Mapsforge)
+- Novinka: Přepracované dialogové okno rychlého nastavení tras/stop
+- Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
+- Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
+- Novinka: Dlouhým klepnutím na "Povolit živé tlačítko" načíst offline kešky
+- Nový: Offline stínování kopců pro Sjednocenou mapu (VTM varianta)
+- Novinka: Podpora pro mapy pozadí (Sjednocená mapa)
+- Oprava: Kompaktní ikony se při přiblížení v automatickém režimu nevrátí do velkých ikon (Sjednocená mapa)
+- Novinka: Akce po dlouhém stisknutí v informačním listu kešky: kód GC, název kešky, souřadnice, osobní poznámka/nápověda
+- Změna: Přepíná dlouhé stisknutí informačního listu kešky pro výběr emodži na krátké stisknutí, aby se vyřešila kolize
 
 ### Detaily kešky
 - Nový: Offline překlad textu a logů (experimentální)
