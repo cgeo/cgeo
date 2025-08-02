@@ -9,8 +9,11 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
 - Neu: Zeitstempel eigener Logs beim Aktualisieren eines Caches beibehalten
 - Neu: Optionaler Mini-Kompass (siehe Einstellungen => Cache-Details => Richtung in Cache-Detailansicht anzeigen)
+- New: Show owners' logs on "friends/own" tab
+- Change: "Friends/own" tab shows log counts for that tab instead of global counters
 
 ### Wherigo Player
+- New: Offline translation for Wherigos
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
