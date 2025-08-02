@@ -2743,7 +2743,7 @@
     <string name="close">Tanca</string>
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
-    <string name="copy">Còpia</string>
+    <string name="copy" tools:ignore="PrivateResource">Còpia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>
