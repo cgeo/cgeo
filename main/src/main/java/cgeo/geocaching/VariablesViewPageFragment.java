@@ -42,6 +42,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         this.adapter = varList.getAdapter();
         adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
         adapter.setChangeCallback(v -> {
+            binding.variablesAddnextchar.setEnabled(null != getAddNextChar());
             binding.variablesAddnextchar.setText(getAddNextCharText());
             if (activity != null && (previousVarSize < 0 || previousVarSize != v.size())) {
                 activity.reinitializePage(-1); //this just reinits the title bar, not the variable tab content
@@ -70,6 +71,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         });
 
+        binding.variablesAddnextchar.setEnabled(null != getAddNextChar());
         binding.variablesAddnextchar.setText(getAddNextCharText());
         binding.variablesAddnextchar.setOnClickListener(d -> {
             final Character lmc = adapter.getVariables().getLowestMissingChar();
@@ -84,12 +86,16 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         return binding;
     }
 
-    private String getAddNextCharText() {
+    private Character getAddNextChar() {
         if (adapter == null || adapter.getVariables() == null) {
-            return "-";
+            return null;
         }
-        final Character lmc = adapter.getVariables().getLowestMissingChar();
-        return lmc == null ? "-" : "" + lmc;
+        return adapter.getVariables().getLowestMissingChar();
+    }
+
+    private String getAddNextCharText() {
+        final Character nextChar = getAddNextChar();
+        return nextChar == null ? "-" : "" + nextChar;
     }
 
     @Override
