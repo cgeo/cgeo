@@ -1,8 +1,8 @@
 ##
-- Fix: Crash in translation module
+- Oprava: Chyba v překladatelském modulu
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Oprava: Sledovatelný inventář se při zaznamenávání kešky nenačítá
 
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
