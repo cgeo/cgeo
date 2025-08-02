@@ -386,6 +386,7 @@
     <string name="translator_model">Translation model</string>
     <string name="translator_tooltip">Offline translate</string>
     <string name="translator_language_select">Select source language</string>
+    <string name="translator_language_target_select">Select target language</string>
     <string name="translator_language_unsupported">Language (%s) not supported for translation.</string>
     <string name="translator_language_unknown">Unable to identify language</string>
     <string name="translator_language_detected">Translate from "%s"</string>
@@ -3083,7 +3084,7 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="play">Play</string>
-    <string name="copy">Copy</string>
+    <string name="copy" tools:ignore="PrivateResource">Copy</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
