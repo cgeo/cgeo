@@ -9,8 +9,11 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
 - Nieuw: Behoud tijdstempel van eigen logs bij het vernieuwen van een cache
 - Nieuw: Optioneel kompas mini weergave (zie instellingen => cache details => Toon richting in cache detail weergave)
+- Nieuw: Toon eigenaar's logs op "vrienden/eigenaar" tabblad
+- Wijziging: "Vrienden/eigenaar" tab toont het aantal logs voor dat tabblad in plaats van globale tellers
 
 ### Wherigo speler
+- Nieuw: Offline vertaling voor Wherigos
 
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
