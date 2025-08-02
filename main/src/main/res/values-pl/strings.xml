@@ -363,6 +363,7 @@
     <string name="translator_model">Model tłumaczenia</string>
     <string name="translator_tooltip">Tłumaczenie offline</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
+    <string name="translator_language_target_select">Wybierz język docelowy</string>
     <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany dla tłumaczenia.</string>
     <string name="translator_language_unknown">Nie można zidentyfikować języka</string>
     <string name="translator_language_detected">Przetłumacz z \"%s\"</string>
@@ -2801,7 +2802,7 @@
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
-    <string name="copy">Kopiuj</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
