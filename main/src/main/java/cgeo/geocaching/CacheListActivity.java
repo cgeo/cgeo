@@ -92,7 +92,6 @@ import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -1138,36 +1137,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshListFooter() {
-        refreshListFooter(false);
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void refreshListFooter(final boolean cachesAreLoading) {
         if (listFooter == null) {
             return;
         }
 
-        if (cachesAreLoading) {
-            setView(listFooterLine1, res.getString(R.string.caches_more_caches_loading), null);
-            setViewGone(listFooterLine2);
-            return;
-        }
+        if (type.isOnline) {
+            final int unfilteredListSize = search == null ? adapter.getOriginalListCount() : search.getCount();
+            final int totalAchievableListSize = search == null ? unfilteredListSize : Math.max(0, search.getTotalCount());
+            final boolean moreToShow = unfilteredListSize > 0 && totalAchievableListSize > unfilteredListSize;
 
-        final int unfilteredListSize = search == null ? adapter.getOriginalListCount() : search.getCount();
-        final int totalAchievableListSize = search == null ? unfilteredListSize : Math.max(0, search.getTotalCount());
-        final boolean moreToShow = unfilteredListSize > 0 && totalAchievableListSize > unfilteredListSize;
+            if (moreToShow) {
+                setViewGone(listFooterLine2);
+                setView(listFooterLine1, res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + unfilteredListSize + ")", v -> {
+                    showProgress(true);
+                    restartCacheLoader(true, null);
+                });
+            } else {
+                setViewGone(listFooterLine2);
+                setView(listFooterLine1, res.getString(adapter.isEmpty() ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
+            }
+        } else if (resultIsOfflineAndLimited()) {
+            final int missingCaches = search.getTotalCount() - search.getCount();
 
-        if (moreToShow && type.isOnline) {
-            setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + unfilteredListSize + ")", v -> {
-                showProgress(true);
-                restartCacheLoader(true, null);
-            });
-        } else if (type.isOnline) {
-            setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(adapter.isEmpty() ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
-        } else if (moreToShow && type.isStoredInDatabase) {
-            final int missingCaches = totalAchievableListSize - unfilteredListSize;
             if (missingCaches > getOfflineListLimitIncrease()) {
                 final String info = res.getQuantityString(R.plurals.caches_more_caches_next_x, getOfflineListLimitIncrease(), getOfflineListLimitIncrease());
                 setView(listFooterLine1, info, v -> {
@@ -1179,7 +1170,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else {
                 setViewGone(listFooterLine1);
             }
-            setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalAchievableListSize), v -> {
+            setView(listFooterLine2, res.getString(R.string.caches_more_caches_all_remaining), v -> {
                 offlineListLoadLimit = 0;
                 refreshCurrentList();
             });
