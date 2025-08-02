@@ -2738,7 +2738,7 @@
     <string name="close">Schließen</string>
     <string name="delete">Löschen</string>
     <string name="play">Spielen</string>
-    <string name="copy">Kopieren</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopieren</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
