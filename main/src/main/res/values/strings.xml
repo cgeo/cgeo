@@ -430,7 +430,6 @@
     <string name="caches_no_cache">No caches here</string>
     <string name="caches_more_caches">Load more caches</string>
     <string name="caches_more_caches_no">No more caches</string>
-    <string name="caches_more_caches_loading">Loading caches…</string>
     <string name="caches_more_caches_currently">currently</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="zero">Load next %1$d caches</item>
@@ -440,7 +439,7 @@
         <item quantity="many">Load next %1$d caches</item>
         <item quantity="other">Load next %1$d caches</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Load remaining caches (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Load all remaining caches</string>
 
     <string name="caches_store_offline">Store offline</string>
     <string name="caches_store_offline_map">Store caches offline</string>
