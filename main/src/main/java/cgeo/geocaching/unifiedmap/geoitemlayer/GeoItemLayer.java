@@ -127,7 +127,8 @@ public class GeoItemLayer<K> {
         @SuppressWarnings("unchecked")
         MapWriter(final String logPraefix, final IProviderGeoItemLayer<?> providerLayer) {
             this.providerLayer = (IProviderGeoItemLayer<Object>) providerLayer;
-            this.logPraefix = logPraefix;
+            this.logPraefix = logPraefix + "[" + System.identityHashCode(this) + "] ";
+            Log.iForce(this.logPraefix + " CREATE ");
         }
 
         @Override
@@ -195,7 +196,8 @@ public class GeoItemLayer<K> {
 
         @Override
         public void destroy(final Collection<Pair<GeoPrimitive, Object>> values) {
-            Log.i(this.logPraefix + "DESTROY " + values.size() + " values");
+            Log.iForce(this.logPraefix + " DESTROY " + values.size() + " values" +
+                    " (after a total of " + addProcessed + " ADDs, " + removeProcessed + " REMOVES, " + replaceProcessed + " REPLACES)");
 
             if (providerLayer != null) {
                 providerLayer.destroy(values);
@@ -260,7 +262,7 @@ public class GeoItemLayer<K> {
 
         final IProviderGeoItemLayer<?>  providerLayer = newProviderLayer == null ? NOOP_GEOITEM_LAYER : newProviderLayer;
         final String logPraefix = "GeoItemLayer:" + getId() + "(" + providerLayer.getClass().getSimpleName() + "):";
-        Log.d(logPraefix + " init " + zLevel);
+        Log.d(logPraefix + " setProvider " + zLevel);
         providerLayer.init(zLevel);
         this.providerLayer = providerLayer;
         this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter(logPraefix, providerLayer));
