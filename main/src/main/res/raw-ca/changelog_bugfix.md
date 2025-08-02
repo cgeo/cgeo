@@ -1,5 +1,5 @@
 ##
-- Fix: Crash in translation module
+- Correcció: Error al mòdul de traducció
 
 ##
 - Correcció: L'inventari rastrejable no es carregava en registrar un catxé
