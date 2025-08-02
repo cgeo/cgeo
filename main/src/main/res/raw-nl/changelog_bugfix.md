@@ -1,5 +1,5 @@
 ##
-- Fix: Crash in translation module
+- Oplossing: Crash in vertaalmodule
 
 ##
 - Oplossing: Trackable inventaris niet geladen tijdens het loggen van een cache
