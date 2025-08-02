@@ -13,15 +13,17 @@
     <Button
         android:id="@+id/source_language_select"
         style="@style/button_full"
-        android:text="to be replaced"/>
+        android:text="-"
+        tools:ignore="HardcodedText" />
 
     <TextView
         style="@style/text_default"
-        android:text="Select target language"/>
+        android:text="@string/translator_language_target_select"/>
 
     <Button
         android:id="@+id/target_language_select"
         style="@style/button_full"
-        android:text="to be replaced"/>
+        android:text="-"
+        tools:ignore="HardcodedText"/>
 
 </LinearLayout>

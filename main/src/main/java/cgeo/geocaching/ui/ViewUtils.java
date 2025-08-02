@@ -857,6 +857,7 @@ public class ViewUtils {
         final Drawable originalIcon = mButton.getIcon();
 
         //create circular icon
+        @SuppressLint("PrivateResource")
         final CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(button.getContext(), null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_Small);
         spec.indicatorSize = ViewUtils.dpToPixel(APP_RESOURCES.getDimension(R.dimen.buttonSize_iconButton) / APP_RESOURCES.getDisplayMetrics().density / 1.8f);
         final Drawable circularIcon = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec);
