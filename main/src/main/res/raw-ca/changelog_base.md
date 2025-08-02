@@ -9,8 +9,11 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
 - Nou: conserva la marca de temps dels propis registres en actualitzar un catxé
 - Novetat: minivisualització de la brúixola opcional (vegeu la configuració => detalls del catxé => Mostra la direcció a la vista detallada del catxé)
+- Nou: Mostra els registres dels propietaris a la pestanya "amics/propis"
+- Canvi: La pestanya "Amics/propis" mostra els recomptes de registre d'aquesta pestanya en lloc dels comptadors globals
 
 ### Wherigo Player
+- Nou: Traducció fora de línia per a Wherigos
 
 ### General
 - Nou: opció de compartir després de registrar un catxé
