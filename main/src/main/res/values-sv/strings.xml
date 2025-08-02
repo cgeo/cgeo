@@ -2687,7 +2687,7 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
-    <string name="copy">Kopiera</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopiera</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
