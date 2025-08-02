@@ -363,6 +363,7 @@
     <string name="translator_model">Překladový model</string>
     <string name="translator_tooltip">Offline překlad</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
+    <string name="translator_language_target_select">Vyberte cílový jazyk</string>
     <string name="translator_language_unsupported">Jazyk (%s) není podporován pro překlad.</string>
     <string name="translator_language_unknown">Jazyk nelze identifikovat</string>
     <string name="translator_language_detected">Přeložit z \"%s\"</string>
@@ -370,6 +371,8 @@
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
+    <string name="crash_activity_title">Jejda! c:geo spadlo!</string>
+    <string name="crash_activity_report">nahlásit problém</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -2486,6 +2489,7 @@
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
+    <string name="map_manual_target_route_name">Aktuální navigace</string>
     <string name="map_clear_manual_targets">Vymazat cíl směrování</string>
     <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
@@ -2798,7 +2802,7 @@
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
     <string name="play">Hrát</string>
-    <string name="copy">Kopírovat</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopírovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
