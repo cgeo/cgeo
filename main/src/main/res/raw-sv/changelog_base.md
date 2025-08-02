@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna version av c:geo riktar in sig på. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
@@ -9,8 +9,11 @@ Due to Play Store policies we have updated the Android API level this version of
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
 - Nyhet: Bevara tidsstämpel för egna loggar vid uppdatering av en cache
 - Nyhet: Valfri kompass-minivy (se inställningar => cachedetaljer => Visa riktning i cache-detaljvyn)
+- New: Show owners' logs on "friends/own" tab
+- Change: "Friends/own" tab shows log counts for that tab instead of global counters
 
 ### Wherigo player
+- New: Offline translation for Wherigos
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
