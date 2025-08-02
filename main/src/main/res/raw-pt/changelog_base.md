@@ -9,8 +9,11 @@ Due to Play Store policies we have updated the Android API level this version of
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
 - New: Preserve timestamp of own logs on refreshing a cache
 - New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
+- New: Show owners' logs on "friends/own" tab
+- Change: "Friends/own" tab shows log counts for that tab instead of global counters
 
 ### Wherigo
+- New: Offline translation for Wherigos
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
