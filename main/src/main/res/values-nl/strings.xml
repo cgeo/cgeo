@@ -363,6 +363,7 @@
     <string name="translator_model">Vertaal model</string>
     <string name="translator_tooltip">Offline vertalen</string>
     <string name="translator_language_select">Selecteer brontaal</string>
+    <string name="translator_language_target_select">Selecteer doeltaal</string>
     <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
     <string name="translator_language_unknown">Kan taal niet identificeren</string>
     <string name="translator_language_detected">Vertalen van \"%s\"</string>
@@ -2741,7 +2742,7 @@
     <string name="close">Sluiten</string>
     <string name="delete">Verwijderen</string>
     <string name="play">Spelen</string>
-    <string name="copy">Kopiëren</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopiëren</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
