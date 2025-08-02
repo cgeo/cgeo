@@ -9,8 +9,11 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
 - Nowość: Zachowaj znacznik czasu z własnych logów przy odświeżeniu skrytki
 - Nowość: Opcjonalny widok kompasu (zobacz ustawienia => szczegóły skrytki => Pokaż kierunek w widoku szczegółów skrytki)
+- Nowość: Pokaż wpisy właścicieli na karcie „wpisy przyjaciół/własne”
+- Zmiana: Karta „Wpisy przyjaciół/własne” pokazuje liczbę wpisów dla tej karty, a nie globalne liczniki
 
 ### Odtwarzacz Wherigo
+- Nowość: Tłumaczenie offline dla Wherigo
 
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
