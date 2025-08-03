@@ -55,7 +55,7 @@ public class GCWebAPI {
     /**
      * maximum number of elements to retrieve with one call
      */
-    private static final int MAX_TAKE = 50;
+    private static final int MAX_TAKE = 1000;
 
     private GCWebAPI() {
         // Utility class, do not instantiate
@@ -888,6 +888,24 @@ public class GCWebAPI {
                 emptyC.setDistance(lastDistance == 0 ? 1 : lastDistance + 1);
             }
         }
+    }
+
+    /*
+     * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
+     */
+    @NonNull
+    @WorkerThread
+    static List<TrackableInventoryEntry> getTrackableInventory(final int totalTrackables) {
+        final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
+        int skip = 0;
+        TrackableInventoryEntry[] entries;
+        do {
+            entries = apiProxyReq().uri("/trackables?inCollection=false&inInventory=true&take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntry[].class).blockingGet();
+            //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
+            trackableInventoryEntries.addAll(Arrays.asList(entries));
+            skip += MAX_TAKE;
+        } while (trackableInventoryEntries.size() < totalTrackables);
+        return trackableInventoryEntries;
     }
 
     /*

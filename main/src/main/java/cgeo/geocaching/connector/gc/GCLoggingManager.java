@@ -69,7 +69,18 @@ class GCLoggingManager extends AbstractLoggingManager {
         }
 
         result.setAvailableLogTypes(GCParser.parseTypes(page));
-        result.setAvailableTrackables(GCParser.parseTrackables(page));
+        final int totalTrackables = GCParser.parseTrackableCount(page);
+        // log page HTML contains up to 20 TBs
+        if (totalTrackables <= 20) {
+            result.setAvailableTrackables(GCParser.parseTrackables(page));
+        } else {
+            try {
+                result.setAvailableTrackables(loadTrackablesPaged(totalTrackables));
+            } catch (Exception e) {
+                result.setError();
+                Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
+            }
+        }
 
         // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 
@@ -101,6 +112,20 @@ class GCLoggingManager extends AbstractLoggingManager {
         }
 
         return result;
+    }
+
+    private List<Trackable> loadTrackablesPaged(final int totalTrackables) {
+        final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory(totalTrackables);
+        final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.setName(entry.name);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+            //new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, TrackableBrand.TRAVELBUG)
+        }).toList();
+        return trackables;
     }
 
     @NonNull
