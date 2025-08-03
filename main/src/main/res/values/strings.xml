@@ -335,6 +335,8 @@
     <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Error reading Pocket query list.</string>
     <string name="err_read_bookmark_list">Error reading bookmark lists.</string>
+    <string name="err_bookmark_list_overfull">Too many caches</string>
+    <string name="err_bookmark_list_overfull_description">Bookmark lists can only store up to 1000 caches, you\'re attempting to add more than that to the list.\n\nDo you want to proceed and add only as many caches as the list can hold?</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
