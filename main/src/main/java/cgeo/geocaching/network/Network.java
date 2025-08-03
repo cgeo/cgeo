@@ -417,10 +417,17 @@ public final class Network {
                 final Response response = chain.proceed(request);
                 final String protocol = " (" + response.protocol() + ')';
                 final String redirect = request.url().equals(response.request().url()) ? "" : " (=> " + response.request().url() + ")";
-                if (response.isSuccessful()) {
-                    Log.d("HTTP-RESP:" + response.code() + formatTimeSpan(before) + reqLogStr + protocol + redirect + ", headers=[" + headerToString(response.headers()) + "]");
-                } else {
-                    Log.d("HTTP-RESP:" + response.code() + " [" + response.message() + "]" + formatTimeSpan(before) + reqLogStr + protocol + ", headers=[" + headerToString(response.headers()) + "]");
+
+                //log everything in DEBUG or when execute time was very long
+                final boolean longTimeNeeded = (System.currentTimeMillis() - before) > 5000;
+                if (Log.isEnabled(Log.LogLevel.DEBUG) || longTimeNeeded) {
+                    final String logMessage;
+                    if (response.isSuccessful()) {
+                        logMessage = response.code() + formatTimeSpan(before) + reqLogStr + protocol + redirect + ", headers=[" + headerToString(response.headers()) + "]";
+                    } else {
+                        logMessage = response.code() + " [" + response.message() + "]" + formatTimeSpan(before) + reqLogStr + protocol + ", headers=[" + headerToString(response.headers()) + "]";
+                    }
+                    Log.iForce("HTTP-RESP" + (longTimeNeeded ? "!" : "") + ": " + logMessage);
                 }
                 return response;
             } catch (final IOException e) {
