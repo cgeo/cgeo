@@ -51,6 +51,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -1562,7 +1563,7 @@ public final class GCParser {
         if (availableTypes == null) {
             return Collections.emptyList();
         }
-        return CollectionStream.of(availableTypes)
+        return Arrays.asList(availableTypes).stream()
                 .filter(a -> a.value > 0)
                 .map(a -> LogType.getById(a.value))
                 .filter(t -> t != LogType.UPDATE_COORDINATES)
@@ -1587,13 +1588,22 @@ public final class GCParser {
         }
     }
 
+    static int parseTrackableCount(final String page) {
+        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TOTAL_TRACKABLES, null);
+        try {
+            return Integer.parseInt(match);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     @NonNull
     static List<Trackable> parseTrackables(final String page) {
         final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = parseTrackablesJson(page);
         if (trackableInventoryItems == null) {
             return Collections.emptyList();
         }
-        return CollectionStream.of(trackableInventoryItems).map(entry -> {
+        return Arrays.asList(trackableInventoryItems).stream().map(entry -> {
             final Trackable trackable = new Trackable();
             trackable.setGeocode(entry.referenceCode);
             trackable.setTrackingcode(entry.trackingNumber);
