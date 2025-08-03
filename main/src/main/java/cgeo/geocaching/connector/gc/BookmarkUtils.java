@@ -56,7 +56,7 @@ public class BookmarkUtils {
             final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((l) -> TextParam.text(l.getName()))
+                .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " (" + l.getCaches() + ")")))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
@@ -67,7 +67,7 @@ public class BookmarkUtils {
 
     private static void processSelectionSizeCheck(final Context context, final List<Geocache> geocaches, final GCList selection) {
         if (geocaches.size() > (1000 - selection.getCaches())) {
-            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, selection), () -> {});
+            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, selection));
         }
     }
 
