@@ -400,14 +400,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // load cache/waypoint, focus map on it, and set it as target
                 final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
-                    }
                     if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
                         viewModel.caches.write(false, Set::clear);
                         final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
                         if (waypoint != null) {
                             if (setDefaultCenterAndZoom) {
+                                mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                                 mapFragment.setCenter(waypoint.getCoords());
                             }
                             viewModel.waypoints.write(wps -> {
@@ -418,22 +416,34 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                 onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
                             }
                         }
-                    } else if (cache.getCoords() != null) { // geocache mode: display ONLY geocache and its waypoints
-                        viewModel.caches.write(false, c -> {
-                            c.clear();
-                            c.add(cache);
-                        });
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.setCenter(cache.getCoords());
-                        }
-                        viewModel.waypoints.write(wps -> {
-                            wps.clear();
-                            final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
-                            MapUtils.filter(waypoints, getFilterContext());
-                            wps.addAll(waypoints);
-                        });
-                        if (!isTargetSet()) {
-                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
+                    } else { // geocache mode: display ONLY geocache and its waypoints, if coordinates are available
+                        final Geopoint cacheCoordinates = cache.getCoords();
+                        final Waypoint firstWaypoint = cacheCoordinates == null ? cache.getFirstMatchingWaypoint(wp -> wp.getCoords() != null) : null;
+                        final Geopoint currentCoordinates = null != firstWaypoint ? firstWaypoint.getCoords() : cacheCoordinates;
+
+                        if (null != currentCoordinates) {
+                            viewModel.caches.write(false, c -> {
+                                c.clear();
+                                c.add(cache);
+                            });
+
+                            viewModel.waypoints.write(wps -> {
+                                wps.clear();
+                                final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+                                MapUtils.filter(waypoints, getFilterContext());
+                                wps.addAll(waypoints);
+                            });
+
+                            if (setDefaultCenterAndZoom) {
+                                // for cache with no coordinates (generated waypoints), we want to zoom to the waypoints
+                                final boolean zoomToWaypoints = null == cacheCoordinates || Settings.getZoomIncludingWaypoints();
+                                mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, zoomToWaypoints));
+                                mapFragment.setCenter(currentCoordinates);
+                            }
+
+                            if (!isTargetSet()) {
+                                onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(currentCoordinates, cache.getGeocode()));
+                            }
                         }
                     }
                     viewModel.waypoints.notifyDataChanged();
