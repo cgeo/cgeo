@@ -1,17 +1,20 @@
 package cgeo.geocaching.utils;
 
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.models.Geocache;
 
-public class WatchListUtils {
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public final class WatchListUtils {
+    private WatchListUtils() {
+        // utility class
+    }
 
     public static void unwatchAll(final Context context, final List<Geocache> caches) {
         updateHandler(context, caches, false);
@@ -25,16 +28,10 @@ public class WatchListUtils {
         ActivityMixin.showToast(context, context.getString(R.string.watchlist_background_started));
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             final List<String> failedCaches = new ArrayList<>();
-            for (Geocache cache : caches) {
+            for (final Geocache cache : caches) {
                 if (cache.supportsWatchList()) {
                     final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
-                    boolean ret;
-                    if (actionIsWatch) {
-                        ret = connector.addToWatchlist(cache);
-                    } else {
-                        ret = connector.removeFromWatchlist(cache);
-                    }
-                    if (!ret) {
+                    if (!(actionIsWatch ? connector.addToWatchlist(cache) : connector.removeFromWatchlist(cache))) {
                         failedCaches.add(cache.getGeocode());
                     }
                 }
