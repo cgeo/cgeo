@@ -47,6 +47,10 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         this.allLogs = allLogs;
     }
 
+    public CacheLogsViewCreator() {
+        this.allLogs = false;
+    }
+
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
         final CacheLogsViewCreator fragment = new CacheLogsViewCreator(allLogs);
         final Bundle bundle = new Bundle();
