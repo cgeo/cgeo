@@ -1800,8 +1800,14 @@ public final class GCParser {
             return username;
         }
 
-        //second try
+        // header in right top
         username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, null);
+        if (StringUtils.isNotBlank(username)) {
+            return username;
+        }
+
+        // serverparams page
+        username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME3, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
         }

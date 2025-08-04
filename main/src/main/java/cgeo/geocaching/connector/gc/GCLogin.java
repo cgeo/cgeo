@@ -54,7 +54,7 @@ import org.jsoup.nodes.Document;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin?returnUrl=%2Fplay%2Fserverparameters%2Fparams";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -309,7 +309,11 @@ public class GCLogin extends AbstractLogin {
         Log.iForce("GCLogin: post credentials");
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
-        return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
+
+        final Response response = Network.postRequest(LOGIN_URI, params).blockingGet();
+        final String body = getResponseBodyOrStatus(response);
+        parseServerParams(body);
+        return body;
     }
 
     /**
@@ -414,9 +418,11 @@ public class GCLogin extends AbstractLogin {
             return serverParameters;
         }
 
-        final Response response = Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet();
+        return parseServerParams(getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet()));
+    }
+
+    private ServerParameters parseServerParams(final String javascriptBody) {
         try {
-            final String javascriptBody = response.body().string();
             final String jsonBody = javascriptBody.subSequence(javascriptBody.indexOf('{'), javascriptBody.lastIndexOf(';')).toString();
             serverParameters = MAPPER.readValue(jsonBody, ServerParameters.class);
 
@@ -444,7 +450,6 @@ public class GCLogin extends AbstractLogin {
             Log.e("Error loading serverparameters", e);
             return null;
         }
-
         return serverParameters;
     }
 
