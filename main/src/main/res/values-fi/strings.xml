@@ -366,13 +366,11 @@
     <string name="caches_no_cache">Ei kätköjä</string>
     <string name="caches_more_caches">Lataa lisää kätköjä</string>
     <string name="caches_more_caches_no">Ei enempää kätköjä</string>
-    <string name="caches_more_caches_loading">Ladataan kätköjä…</string>
     <string name="caches_more_caches_currently">tällä hetkellä</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Lataa seuraava %1$d kätkö</item>
         <item quantity="other">Lataa seuraavat %1$d kätköä</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
     <string name="caches_store_offline">Tallenna offline-tilassa</string>
     <string name="caches_store_offline_map">Tallenna kätköt offline-tilassa</string>
     <string name="caches_store_selected">Tallenna valitut</string>
