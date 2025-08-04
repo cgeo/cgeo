@@ -404,13 +404,11 @@
     <string name="caches_no_cache">Aquí no hi ha catxés</string>
     <string name="caches_more_caches">Carrega més catxés</string>
     <string name="caches_more_caches_no">No hi ha més catxés</string>
-    <string name="caches_more_caches_loading">S\'estan carregant els catxés…</string>
     <string name="caches_more_caches_currently">actualment</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Carregueu el següent %1$d catxé</item>
         <item quantity="other">Carregueu els següents %1$d catxés</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Carrega els catxés restants (%1$d / %2$d)</string>
     <string name="caches_store_offline">Desa fora de línia</string>
     <string name="caches_store_offline_map">Desa els catxés fora de línia</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
