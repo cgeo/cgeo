@@ -363,6 +363,7 @@
     <string name="translator_model">Översättningsmodell</string>
     <string name="translator_tooltip">Översätt offline</string>
     <string name="translator_language_select">Välj källspråk</string>
+    <string name="translator_language_target_select">Välj målspråk</string>
     <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning.</string>
     <string name="translator_language_unknown">Det gick inte att identifiera språk</string>
     <string name="translator_language_detected">Översätt från \"%s\"</string>
@@ -370,6 +371,8 @@
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
     <string name="translator_translation_success">Översatt från \"%s\", tryck på knappen för att återställa originalet</string>
+    <string name="crash_activity_title">Hoppsan! c:geo kraschade!</string>
+    <string name="crash_activity_report">rapportera problem</string>
     <!-- location service -->
     <string name="loc_last">Senast kända</string>
     <string name="loc_net">Nätverk</string>
@@ -2423,6 +2426,7 @@
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
     <string name="map_disable_autotarget_individual_route">\"Ange ruttstart som mål\" inaktiverad</string>
+    <string name="map_manual_target_route_name">Aktuell navigering</string>
     <string name="map_clear_manual_targets">Rensa rutt-mål</string>
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
