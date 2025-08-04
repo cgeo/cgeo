@@ -1658,6 +1658,7 @@
     <string name="cache_logs">Logbook</string>
     <string name="cache_latest_logs">Recent logs</string>
     <string name="cache_logs_friends_and_own">Friends/Own Logs</string>
+    <string name="cache_logs_friends">Friends</string>
     <string name="cache_dialog_loading_details">Loading cache details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Loading page</string>
     <string name="cache_dialog_loading_details_status_details">Processing details</string>

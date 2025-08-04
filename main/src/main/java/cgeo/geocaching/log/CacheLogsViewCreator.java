@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -89,13 +90,58 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (binding != null) {
             addLogCountsHeader();
             addEmptyLogsHeader();
+
+            binding.chipOwn.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                setContent();
+            });
+            binding.chipOwner.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                setContent();
+            });
+            binding.chipFriends.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                setContent();
+            });
+        }
+    }
+
+    @Override
+    public void setContent() {
+        super.setContent();
+        if (!allLogs) {
+            final List<LogEntry> logs = getLogs();
+            final List<LogEntry> ownLogs = logs.stream().filter(LogEntry::isOwn).collect(Collectors.toList());
+            final LogEntry offlineLog = getCache().getOfflineLog();
+            if (offlineLog != null) {
+                ownLogs.addAll(logs.stream().filter(log -> log.id == offlineLog.id).collect(Collectors.toList()));
+            }
+            final List<LogEntry> ownerLogs = logs.stream().filter(log -> log.authorGuid.equals(getCache().getOwnerGuid())).collect(Collectors.toList());
+            final List<LogEntry> friendsLogs = getLogs();
+            friendsLogs.removeAll(ownLogs);
+            friendsLogs.removeAll(ownerLogs);
+
+            binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
+
+            if (!binding.chipOwn.isChecked()) {
+                logs.removeAll(ownLogs);
+            }
+            if (!binding.chipFriends.isChecked()) {
+                logs.removeAll(friendsLogs);
+            }
+            if (!binding.chipOwner.isChecked()) {
+                logs.removeAll(ownerLogs);
+            }
+            logsAdapter.clear();
+            logsAdapter.addAll(logs);
+            logsAdapter.notifyDataSetChanged();
         }
     }
 
     @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
+        final ListView logItems = binding.getRoot().findViewById(R.id.logs_items);
         if (countview1 != null) {
-            binding.getRoot().removeHeaderView(countview1);
+            logItems.removeHeaderView(countview1);
             countview1 = null;
         }
 
@@ -131,21 +177,22 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }
-                binding.getRoot().addHeaderView(countview1, null, false);
+                logItems.addHeaderView(countview1, null, false);
             }
         }
     }
 
     private void addEmptyLogsHeader() {
+        final ListView logItems = binding.getRoot().findViewById(R.id.logs_items);
         if (countview2 != null) {
-            binding.getRoot().removeHeaderView(countview2);
+            logItems.removeHeaderView(countview2);
             countview2 = null;
         }
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
             countview2.setText(res.getString(R.string.log_empty_logbook));
-            binding.getRoot().addHeaderView(countview2, null, false);
+            logItems.addHeaderView(countview2, null, false);
         }
     }
 
