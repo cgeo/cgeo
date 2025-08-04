@@ -370,13 +370,11 @@
     <string name="caches_no_cache">Aucune cache</string>
     <string name="caches_more_caches">Rechercher d\'autres caches</string>
     <string name="caches_more_caches_no">Pas d\'autres caches</string>
-    <string name="caches_more_caches_loading">Recherche de caches…</string>
     <string name="caches_more_caches_currently">trouvées</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Charger %1$d cache suivante</item>
         <item quantity="other">Charger les %1$d caches suivantes</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Charger les caches restantes (%1$d / %2$d)</string>
     <string name="caches_store_offline">Stocker localement</string>
     <string name="caches_store_offline_map">Stocker les caches localement</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
