@@ -3,20 +3,20 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna 
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
 - Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
-- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
+- Nyhet: Långtryck på navigationslinjen öppnar höjddiagram (UnifiedMap)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
 - Nyhet: Bevara tidsstämpel för egna loggar vid uppdatering av en cache
 - Nyhet: Valfri kompass-minivy (se inställningar => cachedetaljer => Visa riktning i cache-detaljvyn)
-- New: Show owners' logs on "friends/own" tab
-- Change: "Friends/own" tab shows log counts for that tab instead of global counters
+- Nyhet: Visa ägarnas loggar på fliken "vänner/egna"
+- Ändra: "Vänner/egna" fliken visar antal loggar för den fliken istället för globalt antal
 
 ### Wherigo player
-- New: Offline translation for Wherigos
+- Nyhet: Offline-översättning för Wherigos
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
 - Ändra: Visa inte "behöver underhåll" eller "behöver arkiveras"-alternativen för egna cacher
 - Fix: Återställning av en säkerhetskopia kan duplicera spårfiler i internt lagringsutrymme och efterföljande säkerhetskopior
-- Change: Removed references to Twitter
+- Förändring: Referenser till Twitter borttagna
