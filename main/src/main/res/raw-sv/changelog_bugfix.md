@@ -1,5 +1,5 @@
 ##
-- Fix: Crash in translation module
+- Fix: Krasch i översättningsmodulen
 
 ##
 - Fix: Trackable inventory not loaded while logging a cache
