@@ -403,7 +403,6 @@
     <string name="caches_no_cache">Brak skrytek</string>
     <string name="caches_more_caches">Więcej skrytek</string>
     <string name="caches_more_caches_no">Nie ma więcej skrytek</string>
-    <string name="caches_more_caches_loading">Ładuję skrytki…</string>
     <string name="caches_more_caches_currently">Obecnie</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Wczytaj następną %1$d skrytkę</item>
@@ -411,7 +410,6 @@
         <item quantity="many">Wczytaj następne %1$d skrytek</item>
         <item quantity="other">Wczytaj następne %1$d skrytek</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Wczytaj pozostałe skrytki (%1$d / %2$d)</string>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
