@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
     public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
+    protected ArrayAdapter<LogEntry> logsAdapter;
 
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -59,11 +61,9 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         }
         binding.getRoot().setVisibility(View.VISIBLE);
 
-        final List<LogEntry> logs = getLogs();
-
         addHeaderView();
-        binding.getRoot().setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, logs) {
-
+        final ListView logItems = binding.getRoot().findViewById(R.id.logs_items);
+        logsAdapter = new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, getLogs()) {
             @Override
             @NonNull
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
@@ -83,8 +83,10 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 return rowView;
             }
-        });
-        binding.getRoot().setOnScrollListener(new FastScrollListener(binding.getRoot()));
+        };
+
+        logItems.setAdapter(logsAdapter);
+        logItems.setOnScrollListener(new FastScrollListener(logItems));
     }
 
     protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
