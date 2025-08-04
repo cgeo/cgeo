@@ -424,7 +424,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (null != currentCoordinates) {
                             viewModel.caches.write(false, c -> {
                                 c.clear();
-                                c.add(cache);
+                                // we can only display the cache if it has coordinates
+                                if (null != cacheCoordinates) {
+                                    c.add(cache);
+                                }
                             });
 
                             viewModel.waypoints.write(wps -> {
