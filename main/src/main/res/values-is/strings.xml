@@ -179,7 +179,6 @@
     <string name="caches_no_cache">Engir kassar hér</string>
     <string name="caches_more_caches">Hlaða fleiri kössum</string>
     <string name="caches_more_caches_no">Ekki fleiri fjársjóðir</string>
-    <string name="caches_more_caches_loading">Hleður inn fjársjóðum…</string>
     <string name="caches_more_caches_currently">nú</string>
     <string name="caches_history">Ferill</string>
     <string name="caches_on_map">Sýna á korti</string>
