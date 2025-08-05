@@ -1806,12 +1806,6 @@ public final class GCParser {
             return username;
         }
 
-        // serverparams page
-        username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME3, null);
-        if (StringUtils.isNotBlank(username)) {
-            return username;
-        }
-
         // Old style webpage fallback // @todo: no longer existing?
         final Document document = Jsoup.parse(page);
         final String usernameOld = TextUtils.stripHtml(document.select("span.li-user-info > span:first-child").text());
