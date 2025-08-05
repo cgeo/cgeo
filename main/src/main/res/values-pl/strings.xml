@@ -410,6 +410,7 @@
         <item quantity="many">Wczytaj następne %1$d skrytek</item>
         <item quantity="other">Wczytaj następne %1$d skrytek</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Wczytaj wszystkie pozostałe skrytki</string>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
