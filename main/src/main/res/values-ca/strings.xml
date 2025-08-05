@@ -409,6 +409,7 @@
         <item quantity="one">Carregueu el següent %1$d catxé</item>
         <item quantity="other">Carregueu els següents %1$d catxés</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Carrega tots els catxés restants</string>
     <string name="caches_store_offline">Desa fora de línia</string>
     <string name="caches_store_offline_map">Desa els catxés fora de línia</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
