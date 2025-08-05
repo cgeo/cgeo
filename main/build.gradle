@@ -811,7 +811,7 @@ apply plugin: 'pmd'
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
     consoleOutput = true
-    toolVersion = "6.55.0"
+    toolVersion = "7.16.0"
     rulesMinimumPriority = 5
     ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
 }
