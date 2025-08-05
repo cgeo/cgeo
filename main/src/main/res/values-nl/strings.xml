@@ -413,13 +413,12 @@
     <string name="caches_no_cache">Geen caches</string>
     <string name="caches_more_caches">Meer caches</string>
     <string name="caches_more_caches_no">Einde cachelijst</string>
-    <string name="caches_more_caches_loading">Caches laden…</string>
     <string name="caches_more_caches_currently">op dit moment</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Volgende %1$d cache laden</item>
         <item quantity="other">Volgende %1$d caches laden</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Laad resterende caches (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Laad alle resterende caches</string>
     <string name="caches_store_offline">Offline opslaan</string>
     <string name="caches_store_offline_map">Caches offline opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
@@ -1466,7 +1465,6 @@
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Bezochte waypoints verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Geen hint beschikbaar</string>
@@ -1757,7 +1755,7 @@
     <string name="projection_type_offset_hint_latitude">Breedtegraad Offset in Micro-minuten</string>
     <string name="projection_type_offset_hint_longitude">Lengtegraad Offset in Micro-minuten</string>
     <!-- Variables -->
-    <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
+    <string name="variables_titletext">Waardes en berekeningen</string>
     <string name="variables_scanlisting">Lijst scannen</string>
     <string name="variables_scanlisting_choosepattern_title">Gevonden patroon kiezen</string>
     <string name="variables_scanlisting_nopatternfound">Geen patroon gevonden</string>
