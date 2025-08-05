@@ -43,7 +43,6 @@ import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivex.rxjava3.core.Single;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
@@ -54,11 +53,12 @@ import org.jsoup.nodes.Document;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin?returnUrl=%2Fplay%2Fserverparameters%2Fparams";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin?returnUrl=%2Faccount%2Fsettings%2Fhomelocation";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private ServerParameters serverParameters = null;
+    private String homeLocationPage = null;
 
     private static class StatusException extends RuntimeException {
         private static final long serialVersionUID = -597420116705938433L;
@@ -311,9 +311,9 @@ public class GCLogin extends AbstractLogin {
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
 
         final Response response = Network.postRequest(LOGIN_URI, params).blockingGet();
-        final String body = getResponseBodyOrStatus(response);
-        parseServerParams(body);
-        return body;
+        final String loginPageResponse = getResponseBodyOrStatus(response);
+        homeLocationPage = loginPageResponse;
+        return loginPageResponse;
     }
 
     /**
@@ -389,27 +389,25 @@ public class GCLogin extends AbstractLogin {
     /**
      * Retrieve the home location
      *
-     * @return a Single containing the home location, or IOException
+     * @return the home location, or IOException
      */
-    static Single<String> retrieveHomeLocation() {
-        return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
-                .map(document -> {
-
-                    final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, document.outerHtml());
-                    if (match.find()) {
-                        return match.group(1) + " " + match.group(2);
-                    }
-                    return "";
-                });
+    String retrieveHomeLocation() {
+        if (homeLocationPage == null || !homeLocationPage.contains("homeLocation")) {
+            homeLocationPage = getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/account/settings/homelocation").blockingGet());
+        }
+        final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, homeLocationPage);
+        if (match.find()) {
+            return match.group(1) + " " + match.group(2);
+        }
+        return "";
     }
 
-    private static void setHomeLocation() {
-        retrieveHomeLocation().subscribe(homeLocationStr -> {
-            if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
-                Log.i("Setting home location to " + homeLocationStr);
-                Settings.setHomeLocation(homeLocationStr);
-            }
-        }, throwable -> Log.w("Unable to retrieve the home location"));
+    private void setHomeLocation() {
+        final String homeLocationStr = retrieveHomeLocation();
+        if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+            Log.i("Setting home location to " + homeLocationStr);
+            Settings.setHomeLocation(homeLocationStr);
+        }
     }
 
     @WorkerThread
@@ -417,7 +415,6 @@ public class GCLogin extends AbstractLogin {
         if (serverParameters != null) {
             return serverParameters;
         }
-
         return parseServerParams(getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet()));
     }
 

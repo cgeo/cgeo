@@ -103,7 +103,6 @@ public final class GCConstants {
 
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("window(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
-    public static final Pattern PATTERN_LOGIN_NAME3 = Pattern.compile("user:info\":\\s*\\{\\s*\"username\":\\s*\"(([^\\\\\\\"]*(\\\\[a-z\\\"])*)*)\\\",");
     /**
      * Use replaceAll("[,.]","") on the resulting string before converting to an int
      */
