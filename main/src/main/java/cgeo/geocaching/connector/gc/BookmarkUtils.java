@@ -17,6 +17,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookmarkUtils {
     private static final String NEW_LIST_GUID = "FakeList";
@@ -57,6 +58,7 @@ public class BookmarkUtils {
             model
                 .setItems(lists)
                 .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " (" + l.getCaches() + ")")))
+                .setDisabledItems(lists.stream().filter(l -> l.getCaches() >= 1000).collect(Collectors.toSet()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)

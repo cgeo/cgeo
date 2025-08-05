@@ -10,11 +10,13 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -270,6 +272,20 @@ public class SimpleItemListView extends LinearLayout {
         @Override
         public void onBindViewHolder(@NonNull final ItemListViewHolder holder, final int position) {
             holder.fillData(getItem(position));
+
+            if (model.getDisabledItems().contains(getItem(position).value)) {
+                for (int i = 0; i < holder.binding.itemViewAnchor.getChildCount(); i++) {
+                    final View child = holder.binding.itemViewAnchor.getChildAt(i);
+                    if (child instanceof TextView) {
+                        final TextView tv = (TextView) child;
+                        tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        tv.setTextColor(getResources().getColor(R.color.colorTextHint));
+                    }
+                }
+                holder.binding.itemCheckbox.setEnabled(false);
+                holder.binding.itemRadiobutton.setEnabled(false);
+                return;
+            }
 
             holder.binding.getRoot().setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
             holder.binding.itemChecker.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
