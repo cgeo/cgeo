@@ -408,6 +408,7 @@
         <item quantity="one">Nächsten Cache laden</item>
         <item quantity="other">Nächste %1$d Caches laden</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Alle verbleibenden Caches laden</string>
     <string name="caches_store_offline">Offline speichern</string>
     <string name="caches_store_offline_map">Caches offline speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
