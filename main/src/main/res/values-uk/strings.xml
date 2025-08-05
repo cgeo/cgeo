@@ -268,7 +268,6 @@
     <string name="caches_no_cache">Тут немає кешів</string>
     <string name="caches_more_caches">Завантажити більше кешу</string>
     <string name="caches_more_caches_no">Немає більше сторінок</string>
-    <string name="caches_more_caches_loading">Завантаження кешу…</string>
     <string name="caches_more_caches_currently">зараз</string>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>
