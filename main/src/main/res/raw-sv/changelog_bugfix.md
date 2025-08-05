@@ -2,7 +2,7 @@
 - Fix: Krasch i översättningsmodulen
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Fix: Inventarie med spårbara inte laddat vid loggning av en cache
 
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
