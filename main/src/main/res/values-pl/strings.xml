@@ -413,7 +413,6 @@
     <string name="caches_no_cache">Brak skrytek</string>
     <string name="caches_more_caches">Więcej skrytek</string>
     <string name="caches_more_caches_no">Nie ma więcej skrytek</string>
-    <string name="caches_more_caches_loading">Ładuję skrytki…</string>
     <string name="caches_more_caches_currently">Obecnie</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Wczytaj następną %1$d skrytkę</item>
@@ -421,7 +420,7 @@
         <item quantity="many">Wczytaj następne %1$d skrytek</item>
         <item quantity="other">Wczytaj następne %1$d skrytek</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Wczytaj pozostałe skrytki (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Wczytaj wszystkie pozostałe skrytki</string>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
@@ -1494,7 +1493,6 @@
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Ukryj odwiedzone punkty nawigacji</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacji został skopiowany ze schowka do tej skrytki.\n\nUsunąć oryginalny punkt nawigacji?</string>
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak podpowiedzi</string>
@@ -1787,7 +1785,7 @@
     <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w mikrominutach</string>
     <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
-    <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
+    <string name="variables_titletext">Wartości i obliczenia</string>
     <string name="variables_scanlisting">Skanuj wpis</string>
     <string name="variables_scanlisting_choosepattern_title">Wybierz znaleziony wzór</string>
     <string name="variables_scanlisting_nopatternfound">Nie znaleziono wzoru</string>
