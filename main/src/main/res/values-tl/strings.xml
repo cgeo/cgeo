@@ -228,7 +228,6 @@
     <string name="caches_no_cache">Walang mga cache dito</string>
     <string name="caches_more_caches">Mag-load ng maraming mga cache</string>
     <string name="caches_more_caches_no">Wala ng mga cache</string>
-    <string name="caches_more_caches_loading">Naglo-load ng mga cache&#8230;</string>
     <string name="caches_more_caches_currently">kasalukuyan</string>
     <string name="caches_history">Ang Kasaysayan</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
