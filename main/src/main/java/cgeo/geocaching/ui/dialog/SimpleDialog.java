@@ -591,8 +591,12 @@ public class SimpleDialog {
                 //special handling of "single immediate select" (on click)
                 if (selectionListener != null) {
                     selectionListener.accept(model.getSelectedItems());
+                    dialog.dismiss();
+                } else if (model.buttonClickedListener != null) {
+                    model.buttonClickedListener.call(model, DialogInterface.BUTTON_POSITIVE);
+                } else {
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
             }
         });
         adjustButtonEnablement(model, dialog);
