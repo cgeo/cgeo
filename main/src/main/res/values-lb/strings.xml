@@ -268,7 +268,6 @@
     <string name="caches_no_cache">Kee Cache</string>
     <string name="caches_more_caches">Méi Cachen lueden</string>
     <string name="caches_more_caches_no">Keng aner Cachen</string>
-    <string name="caches_more_caches_loading">Cachen gi gelueden…</string>
     <string name="caches_more_caches_currently">aktuell</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
