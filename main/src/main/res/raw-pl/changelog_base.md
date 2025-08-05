@@ -1,4 +1,4 @@
-### Zawiadomienie o wycofaniu mapy drogowej i „staych” map UnifiedMap
+### Zawiadomienie o wycofaniu mapy drogowej i „starych” map UnifiedMap
 c:geo ma od pewnego czasu zupełnie nową implementację mapy o nazwie „UnifiedMap”, która ostatecznie zastąpi stare implementacje Google Maps i Mapsforge (OpenStreetMap). Jest to zawiadomienie o wycofaniu, aby poinformować Cię mapie drogowej.
 
 UnifiedMap został opublikowany około roku temu. Nadal obsługuje Google Maps i OpenStreetMap (online + offline), ale w całkowicie przerobiony sposób techniczny. i z wieloma ekscytującymi nowymi funkcjami, których nie obsługują „stare” mapy, z których część to

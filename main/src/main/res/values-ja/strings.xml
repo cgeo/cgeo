@@ -316,12 +316,10 @@
     <string name="caches_no_cache">キャッシュがありません</string>
     <string name="caches_more_caches">次のキャッシュ</string>
     <string name="caches_more_caches_no">キャッシュは以上です</string>
-    <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="other">次の%1$dキャッシュを読み込む</item>
     </plurals>
-    <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
     <string name="caches_store_background_title">キャッシュのダウンロード</string>
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>

@@ -238,7 +238,6 @@
     <string name="caches_no_cache">אין כאן מטמונים</string>
     <string name="caches_more_caches">טען מטמונים נוספים</string>
     <string name="caches_more_caches_no">אין עוד מטמונים</string>
-    <string name="caches_more_caches_loading">טוען מטמונים&#8230;</string>
     <string name="caches_more_caches_currently">מוצג כעת</string>
     <string name="caches_history">היסטוריה</string>
     <string name="caches_on_map">הצג במפה</string>

@@ -349,7 +349,6 @@
     <string name="caches_no_cache">Slėptuvių čia nėra</string>
     <string name="caches_more_caches">Įkelti daugiau slėptuvių</string>
     <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
-    <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
     <string name="caches_more_caches_currently">dabar</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Įkelti kitą %1$d slėptuvę</item>
@@ -357,7 +356,6 @@
         <item quantity="many">Įkelti kitas %1$d slėptuvių</item>
         <item quantity="other">Įkelti kitas %1$d slėptuvių</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Įkelti likusias slėptuves (%1$d / %2$d)</string>
     <string name="caches_store_offline">Saugoti naudojimui neprisijungus</string>
     <string name="caches_store_offline_map">Saugoti slėptuves naudojimui neprisijungus</string>
     <string name="caches_store_selected">Saugoti pasirinktas</string>

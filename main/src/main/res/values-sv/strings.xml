@@ -403,13 +403,12 @@
     <string name="caches_no_cache">Det finns ingen cache</string>
     <string name="caches_more_caches">Ladda fler cacher</string>
     <string name="caches_more_caches_no">Inga fler cacher att ladda</string>
-    <string name="caches_more_caches_loading">Laddar fler cacher…</string>
     <string name="caches_more_caches_currently">nu</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Ladda nästa %1$d cache</item>
         <item quantity="other">Ladda nästa %1$d cacher</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Ladda återstående cacher (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Ladda alla återstående cacher</string>
     <string name="caches_store_offline">Spara offline</string>
     <string name="caches_store_offline_map">Spara cacher offline</string>
     <string name="caches_store_selected">Spara valda</string>

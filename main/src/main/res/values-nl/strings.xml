@@ -403,13 +403,12 @@
     <string name="caches_no_cache">Geen caches</string>
     <string name="caches_more_caches">Meer caches</string>
     <string name="caches_more_caches_no">Einde cachelijst</string>
-    <string name="caches_more_caches_loading">Caches laden…</string>
     <string name="caches_more_caches_currently">op dit moment</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Volgende %1$d cache laden</item>
         <item quantity="other">Volgende %1$d caches laden</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Laad resterende caches (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Laad alle resterende caches</string>
     <string name="caches_store_offline">Offline opslaan</string>
     <string name="caches_store_offline_map">Caches offline opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>

@@ -398,13 +398,11 @@
     <string name="caches_no_cache">Non ci sono cache</string>
     <string name="caches_more_caches">Carica altri cache</string>
     <string name="caches_more_caches_no">Nessun altro cache</string>
-    <string name="caches_more_caches_loading">Caricamento dei cache…</string>
     <string name="caches_more_caches_currently">attualmente</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Carica il prossimo cache %1$d</item>
         <item quantity="other">Carica i prossimi %1$d cache</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Carica i (%1$d / %2$d) cache rimanenti</string>
     <string name="caches_store_offline">Salva offline</string>
     <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_selected">Salva selezionati</string>

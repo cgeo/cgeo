@@ -403,7 +403,6 @@
     <string name="caches_no_cache">Žádná keška</string>
     <string name="caches_more_caches">Načíst další kešky</string>
     <string name="caches_more_caches_no">Žádné další kešky</string>
-    <string name="caches_more_caches_loading">Načítání kešek…</string>
     <string name="caches_more_caches_currently">aktuálně</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Načíst další %1$d kešku</item>
@@ -411,7 +410,7 @@
         <item quantity="many">Načíst dalších %1$d kešek</item>
         <item quantity="other">Načíst dalších %1$d kešek</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Načíst zbývající kešky (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Načíst všechny zbývající kešky</string>
     <string name="caches_store_offline">Uložit offline</string>
     <string name="caches_store_offline_map">Ukládat kešky offline</string>
     <string name="caches_store_selected">Uložit vybrané</string>

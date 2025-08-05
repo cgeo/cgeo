@@ -341,9 +341,7 @@
     <string name="caches_no_cache">ingen cacher</string>
     <string name="caches_more_caches">flere cacher</string>
     <string name="caches_more_caches_no">ingen flere cacher</string>
-    <string name="caches_more_caches_loading">Laster cacher…</string>
     <string name="caches_more_caches_currently">for øyeblikket</string>
-    <string name="caches_more_caches_remaining">Last gjenværende cacher (%1$d / %2$d)</string>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>

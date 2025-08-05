@@ -396,7 +396,6 @@
     <string name="caches_no_cache">Здесь тайников нет</string>
     <string name="caches_more_caches">Загрузить больше тайников</string>
     <string name="caches_more_caches_no">Тайников больше нет</string>
-    <string name="caches_more_caches_loading">Загрузка тайников…</string>
     <string name="caches_more_caches_currently">Отображено</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Загрузить следующий %1$d тайник</item>
@@ -404,7 +403,6 @@
         <item quantity="many">Загрузить следующие %1$d тайников</item>
         <item quantity="other">Загрузить следующие %1$d тайников</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Загрузить оставшиеся тайники (%1$d / %2$d)</string>
     <string name="caches_store_offline">Сохранить офлайн</string>
     <string name="caches_store_offline_map">Сохранить тайники офлайн</string>
     <string name="caches_store_selected">Сохранить выбранное</string>

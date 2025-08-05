@@ -273,7 +273,6 @@
     <string name="caches_no_cache">这里没有藏点</string>
     <string name="caches_more_caches">加载更多藏点</string>
     <string name="caches_more_caches_no">没有更多藏点</string>
-    <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
