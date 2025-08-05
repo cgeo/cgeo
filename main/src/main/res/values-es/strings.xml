@@ -320,9 +320,7 @@
     <string name="caches_no_cache">Ningún caché</string>
     <string name="caches_more_caches">Cargar más cachés</string>
     <string name="caches_more_caches_no">No hay más cachés</string>
-    <string name="caches_more_caches_loading">Cargando cachés…</string>
     <string name="caches_more_caches_currently">actualmente</string>
-    <string name="caches_more_caches_remaining">Cargar cachés restantes (%1$d / %2$d)</string>
     <string name="caches_store_offline">Guardar en el dispositivo</string>
     <string name="caches_store_offline_map">Almacenar cachés en el dispositivo</string>
     <string name="caches_store_selected">Almacenamiento seleccionado</string>

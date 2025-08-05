@@ -1,4 +1,4 @@
-c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken cliënt voor geocaching.com (onofficieel) en het biedt ook basis-ondersteuning voor andere geocaching platformen (zoals OpenCaching). Er is geen webbrowser of export voor nodig - alleen installeren en je kan gelijk beginnen.
+c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken onofficiële cliënt voor geocaching.com en het biedt ook basis-ondersteuning voor andere geocaching platformen (zoals OpenCaching). Er is geen webbrowser of export voor nodig - alleen installeren en je kan gelijk beginnen.
 
 Belangrijkste functies:
 - Bekijk caches op een Live-map

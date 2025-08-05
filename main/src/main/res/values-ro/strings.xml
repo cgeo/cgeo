@@ -269,7 +269,6 @@
     <string name="caches_no_cache">Nici o cutie</string>
     <string name="caches_more_caches">Încarcă mai multe cutii</string>
     <string name="caches_more_caches_no">Nu mai sunt alte cutii</string>
-    <string name="caches_more_caches_loading">Încarcare cutii…</string>
     <string name="caches_more_caches_currently">până acum</string>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>

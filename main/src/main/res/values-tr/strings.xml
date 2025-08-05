@@ -334,13 +334,11 @@
     <string name="caches_no_cache">Burada Geocache bulunmuyor</string>
     <string name="caches_more_caches">Daha fazla Geocache yükle</string>
     <string name="caches_more_caches_no">Başka Geocache yok</string>
-    <string name="caches_more_caches_loading">Geocache\'ler yükleniyor…</string>
     <string name="caches_more_caches_currently">şu anda</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Sonraki %1$d cache\'i yükle</item>
         <item quantity="other">Sonraki %1$d cache\'i yükle</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Kalan cacheleri yükle (%1$d / %2$d)</string>
     <string name="caches_store_offline">Çevrimdışı kaydet</string>
     <string name="caches_store_offline_map">Çevrimdışı kaydedilmiş cache\'ler</string>
     <string name="caches_store_selected">Seçilenleri kaydet</string>

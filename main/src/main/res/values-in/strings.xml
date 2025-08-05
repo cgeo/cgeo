@@ -222,7 +222,6 @@
     <string name="caches_no_cache">Tidak ada cache di sini</string>
     <string name="caches_more_caches">Memuat lebih banyak cache</string>
     <string name="caches_more_caches_no">Tidak ada lagi cache</string>
-    <string name="caches_more_caches_loading">Memuat cache&#8230;</string>
     <string name="caches_more_caches_currently">saat ini</string>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>

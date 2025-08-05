@@ -403,13 +403,12 @@
     <string name="caches_no_cache">Kein Cache</string>
     <string name="caches_more_caches">Mehr Caches laden</string>
     <string name="caches_more_caches_no">Keine weiteren Caches</string>
-    <string name="caches_more_caches_loading">Lade Caches…</string>
     <string name="caches_more_caches_currently">aktuell</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Nächsten Cache laden</item>
         <item quantity="other">Nächste %1$d Caches laden</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Verbleibende Caches laden (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Alle verbleibenden Caches laden</string>
     <string name="caches_store_offline">Offline speichern</string>
     <string name="caches_store_offline_map">Caches offline speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>

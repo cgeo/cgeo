@@ -318,9 +318,7 @@
     <string name="caches_no_cache">Καμία κρύπτη εδώ</string>
     <string name="caches_more_caches">Φόρτωση περισσότερων κρυπτών</string>
     <string name="caches_more_caches_no">Δεν υπάρχουν άλλες κρύπτες</string>
-    <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
-    <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
     <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>

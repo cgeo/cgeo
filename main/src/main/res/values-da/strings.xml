@@ -313,13 +313,11 @@
     <string name="caches_no_cache">Ingen cache</string>
     <string name="caches_more_caches">Flere cacher</string>
     <string name="caches_more_caches_no">Ikke flere cacher</string>
-    <string name="caches_more_caches_loading">Indlæser cacher…</string>
     <string name="caches_more_caches_currently">indlæst</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Indlæs næste %1$d cache</item>
         <item quantity="other">Indlæs næste %1$d caches</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Indlæs resterende caches (%1$d / %2$d)</string>
     <string name="caches_store_background_option_refresh_and_add">Opdater og tilføj til liste</string>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
