@@ -140,6 +140,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 
+    private static final String LOGPRAEFIX = "UnifiedMapActivity:";
+
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
     private static final int REQUEST_CODE_LOG = 1001;
@@ -563,7 +565,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private LiveMapGeocacheLoader.LoadState oldStatus;
 
     public void setLiveLoadStatus(final LiveMapGeocacheLoader.LiveDataState observedStatus) {
-        Log.iForce("UnifiedMap:set progress to " + observedStatus);
+        Log.d(LOGPRAEFIX + "set progress to " + observedStatus.loadState);
         refreshLiveStatusView();
     }
 
@@ -700,7 +702,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
 
     public void replaceSearchResultByGeocaches(final SearchResult searchResult) {
-        Log.d("replace " + searchResult.getGeocodes());
+        Log.d(LOGPRAEFIX + "replace " + searchResult.getGeocodes());
         viewModel.caches.write(true, Set::clear);
         final Set<Geocache> geocaches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
         CommonUtils.filterCollection(geocaches, cache -> cache != null && cache.getCoords() != null);
@@ -1142,8 +1144,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // lookup elements touched by this
         final LinkedList<MapSelectableItem> result = new LinkedList<>();
+        final Set<String> touchedKeys = clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6));
+        final Set<String> missedKeys = new HashSet<>();
 
-        for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
+        for (String key : touchedKeys) {
 
             if (key.startsWith(UnifiedMapViewModel.CACHE_KEY_PREFIX)) {
                 final String geocode = key.substring(UnifiedMapViewModel.CACHE_KEY_PREFIX.length());
@@ -1152,9 +1156,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (temp != null && temp.getCoords() != null) {
                     result.add(new MapSelectableItem(new RouteItem(temp)));
                 }
-            }
-
-            if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX) && isLongTap) { // only consider when tap was a longTap
+            } else if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX) && isLongTap) { // only consider when tap was a longTap
                 final String identifier = key.substring(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX.length());
 
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
@@ -1163,9 +1165,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         break;
                     }
                 }
-            }
-
-            if (key.startsWith(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX)) {
+            } else if (key.startsWith(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX)) {
                 final String fullGpxId = key.substring(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX.length());
                 viewModel.waypoints.read(wps -> {
                     for (Waypoint waypoint : wps) {
@@ -1175,33 +1175,25 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         }
                     }
                 });
-            }
-
-            if (key.startsWith(NavigationTargetLayer.KEY_TARGET_PATH) && isLongTap) {
-                result.add(new MapSelectableItem(viewModel.navigationTargetRoute.getValue()));
-            }
-
-            if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && isLongTap) {
+            } else if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && isLongTap) {
                 result.add(new MapSelectableItem(viewModel.individualRoute.getValue()));
-            }
-            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
+            } else if (key.startsWith(NavigationTargetLayer.KEY_TARGET_PATH) && isLongTap) {
+                result.add(new MapSelectableItem(viewModel.navigationTargetRoute.getValue()));
+            } else if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
-            }
-            if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX) && !isLongTap) {
+            } else if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX) && !isLongTap) {
                 result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())),
                         key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), // Zone name
                         WherigoGame.get().getCartridgeName(), // Wherigo
                         WherigoThingType.LOCATION.getIconId()));
-            }
-
-            if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
+            } else if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
                 result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString(), -1));
+            } else {
+                missedKeys.add(key);
             }
-
-
-
         }
-        Log.d("touched elements on " + touchedPoint + " (" + result.size() + "): " + result);
+        Log.iForce(LOGPRAEFIX + "TOUCHED [" + touchedPoint + "/" + isLongTap + "] (identified " + result.size() + " of " + touchedKeys.size() + ", missed: " + missedKeys + ")");
+        Log.d(LOGPRAEFIX + "TOUCHED DETAILS: " + result);
 
         if (result.isEmpty()) {
             if (isLongTap) {
@@ -1234,7 +1226,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> handleTap(item, touchedPoint, isLongTap, x, y));
 
             } catch (final Resources.NotFoundException e) {
-                Log.e("UnifiedMapActivity.showSelection", e);
+                Log.e(LOGPRAEFIX + "showSelection", e);
             }
         }
 

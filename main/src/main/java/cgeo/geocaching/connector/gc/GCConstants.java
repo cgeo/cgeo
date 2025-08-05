@@ -102,11 +102,11 @@ public final class GCConstants {
     public static final Pattern PATTERN_FINDCOUNT = Pattern.compile("\"findCount\":\\s*([0-9]+)[,\\s]");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
+    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("window(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /**
      * Use replaceAll("[,.]","") on the resulting string before converting to an int
      */
-    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
+    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("window(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
 
     // Patterns for parsing trackables
 

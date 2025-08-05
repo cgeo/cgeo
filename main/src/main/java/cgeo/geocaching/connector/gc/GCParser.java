@@ -1064,16 +1064,16 @@ public final class GCParser {
 
     @Nullable
     static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log) {
-        final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
-            params.put("wp", geocode);
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, null);
         } else if (StringUtils.isNotBlank(guid)) {
+            final Parameters params = new Parameters("decrypt", "y");
+            params.put("log", log);
+            params.put("numlogs", "0");
             params.put("guid", guid);
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
         }
-        params.put("log", log);
-        params.put("numlogs", "0");
-
-        return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
+        return null;
     }
 
     /**
