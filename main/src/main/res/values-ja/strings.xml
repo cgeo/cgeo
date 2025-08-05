@@ -316,12 +316,10 @@
     <string name="caches_no_cache">キャッシュがありません</string>
     <string name="caches_more_caches">次のキャッシュ</string>
     <string name="caches_more_caches_no">キャッシュは以上です</string>
-    <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="other">次の%1$dキャッシュを読み込む</item>
     </plurals>
-    <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
     <string name="caches_store_background_title">キャッシュのダウンロード</string>
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>
@@ -1058,7 +1056,6 @@
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
-    <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
     <string name="cache_waypoints_remove_original_waypoint">ウェイポイントをクリップボードからこのキャッシュにコピーしました。\n\n元のウェイポイントを削除しますか?</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
@@ -1275,7 +1272,6 @@
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <!-- Projection -->
     <!-- Variables -->
-    <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
     <string name="variables_scanlisting">スキャン</string>
     <string name="variables_scanlisting_choosepattern_title">パターンを選択</string>
     <string name="variables_scanlisting_nopatternfound">パターンが見つかりません</string>
