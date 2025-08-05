@@ -268,7 +268,6 @@
     <string name="caches_no_cache">Šeit nav slēpņu</string>
     <string name="caches_more_caches">Ielādēt vairāk slēpņus</string>
     <string name="caches_more_caches_no">Vairs nav slēpņu</string>
-    <string name="caches_more_caches_loading">Ielādē slēpņus…</string>
     <string name="caches_more_caches_currently">pašlaik</string>
     <string name="caches_history">Vēsture</string>
     <string name="caches_on_map">Parādīt kartē</string>
