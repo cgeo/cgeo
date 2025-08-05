@@ -57,9 +57,9 @@ public class BookmarkUtils {
             final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " (" + l.getCaches() + ")")))
+                .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " --(" + l.getCaches() + ")")))
                 .setDisabledItems(lists.stream().filter(l -> l.getCaches() >= 1000).collect(Collectors.toSet()))
-                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);;
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
                     .selectSingle(model, l -> {
