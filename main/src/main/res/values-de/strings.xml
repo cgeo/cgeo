@@ -363,6 +363,7 @@
     <string name="translator_model">Übersetzungsmodell</string>
     <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
+    <string name="translator_language_target_select">Zielsprache wählen</string>
     <string name="translator_language_unsupported">Sprache (%s) wird nicht für die Übersetzung unterstützt.</string>
     <string name="translator_language_unknown">Ausgangssprache nicht erkannt</string>
     <string name="translator_language_detected">Übersetze von \"%s\"</string>
@@ -370,6 +371,8 @@
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
     <string name="translator_translation_success">Übersetzt von \"%s\", tippe auf Schaltfläche, um das Original wiederherzustellen</string>
+    <string name="crash_activity_title">Ups! c:geo ist abgestürzt!</string>
+    <string name="crash_activity_report">Problem melden</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>
@@ -410,13 +413,12 @@
     <string name="caches_no_cache">Kein Cache</string>
     <string name="caches_more_caches">Mehr Caches laden</string>
     <string name="caches_more_caches_no">Keine weiteren Caches</string>
-    <string name="caches_more_caches_loading">Lade Caches…</string>
     <string name="caches_more_caches_currently">aktuell</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Nächsten Cache laden</item>
         <item quantity="other">Nächste %1$d Caches laden</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Verbleibende Caches laden (%1$d / %2$d)</string>
+    <string name="caches_more_caches_all_remaining">Alle verbleibenden Caches laden</string>
     <string name="caches_store_offline">Offline speichern</string>
     <string name="caches_store_offline_map">Caches offline speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
@@ -1463,7 +1465,6 @@
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Besuchte Wegpunkte verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Wegpunkt aus der Zwischenablage in diesen Cache kopiert.\n\nUrsprünglichen Wegpunkt entfernen?</string>
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
@@ -1754,7 +1755,6 @@
     <string name="projection_type_offset_hint_latitude">Breitengrad Verschiebung in Mikro-Minuten</string>
     <string name="projection_type_offset_hint_longitude">Längengrad Verschiebung in Mikro-Minuten</string>
     <!-- Variables -->
-    <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
     <string name="variables_scanlisting">Scanne Listing</string>
     <string name="variables_scanlisting_choosepattern_title">Muster auswählen</string>
     <string name="variables_scanlisting_nopatternfound">Kein Muster gefunden</string>
