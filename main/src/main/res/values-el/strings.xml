@@ -318,9 +318,7 @@
     <string name="caches_no_cache">Καμία κρύπτη εδώ</string>
     <string name="caches_more_caches">Φόρτωση περισσότερων κρυπτών</string>
     <string name="caches_more_caches_no">Δεν υπάρχουν άλλες κρύπτες</string>
-    <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
-    <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
     <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
@@ -1143,7 +1141,6 @@
     <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
@@ -1365,7 +1362,6 @@
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
     <!-- Projection -->
     <!-- Variables -->
-    <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
     <string name="variables_scanlisting_choosepattern_title">Επιλέξτε μοτίβο εύρεσης</string>
     <string name="variables_scanlisting_nopatternfound">Δεν βρέθηκε μοτίβο</string>
