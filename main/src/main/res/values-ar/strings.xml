@@ -229,7 +229,6 @@
     <string name="caches_no_cache">لا يوجد مخبآت هنا</string>
     <string name="caches_more_caches">تحميل المزيد من المخبآت</string>
     <string name="caches_more_caches_no">لا مزيد من المخبآت</string>
-    <string name="caches_more_caches_loading">تحميل المزيد من المخبآت&#8230;</string>
     <string name="caches_more_caches_currently">حالياً</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>
