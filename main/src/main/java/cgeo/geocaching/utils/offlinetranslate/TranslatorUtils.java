@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
@@ -60,11 +61,19 @@ public class TranslatorUtils {
         private Disposable disposable;
 
         public ChangeableText(final Translator translator) {
-            this.translator = translator;
+            this(translator, null);
         }
 
+        public ChangeableText(final Translator translator, final CompositeDisposable compositeDisposable) {
+            this.translator = translator;
+            if (compositeDisposable != null) {
+                compositeDisposable.add(this);
+            }
+        }
+
+
         public void set(final String text, final BiConsumer<String, Boolean> textAction) {
-            if (Objects.equals(this.text, text)) {
+           if (Objects.equals(this.text, text)) {
                 return;
             }
             if (this.disposable != null) {
@@ -73,7 +82,6 @@ public class TranslatorUtils {
             this.text = text;
             this.disposable = translator.addTranslation(this.text, textAction);
         }
-
 
         @Override
         public void dispose() {

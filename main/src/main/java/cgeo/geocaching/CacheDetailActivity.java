@@ -73,9 +73,9 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CompassMiniView;
-import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
+import cgeo.geocaching.ui.Rot13TextView;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
@@ -96,7 +96,6 @@ import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
-import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -105,7 +104,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
@@ -116,7 +114,8 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
-import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
+import cgeo.geocaching.utils.offlinetranslate.Translator;
+import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -177,7 +176,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.core.Observable;
@@ -209,7 +208,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
     public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
     public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocaching.speechServiceRunning";
-    public static final String STATE_TRANSLATION_LANGUAGE_SOURCE = "cgeo.geocaching.translation.languageSource";
+    public static final String STATE_TRANSLATOR = "cgeo.geocaching.translator";
 
 
     // Store Geocode here, as 'cache' is loaded Async.
@@ -244,7 +243,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private Intent imageGalleryData;
     private Bundle imageGalleryState = null;
 
-    private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
      */
@@ -260,6 +258,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private boolean activityIsStartedForEditNote = false;
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
+
+    private final Translator cacheTranslator = new Translator();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -370,13 +370,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             restartSpeechService = (savedInstanceState.getInt(STATE_SPEECHSERVICE_RUNNING, 0) > 0);
 
-            if (savedInstanceState.containsKey(STATE_TRANSLATION_LANGUAGE_SOURCE)) {
-                final OfflineTranslateUtils.Language newLanguage = new OfflineTranslateUtils.Language(savedInstanceState.getString(STATE_TRANSLATION_LANGUAGE_SOURCE));
-                if (newLanguage.isValid()) {
-                    translationStatus.setSourceLanguage(newLanguage);
-                    translationStatus.setNeedsRetranslation();
-                }
-            }
+            cacheTranslator.init(savedInstanceState.getString(STATE_TRANSLATOR), null);
         }
 
         imageGalleryState = savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_IMAGE_GALLERY);
@@ -441,7 +435,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
         outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
 
-        outState.putString(STATE_TRANSLATION_LANGUAGE_SOURCE, this.translationStatus.isTranslated() ? this.translationStatus.getSourceLanguage().getCode() : "");
+        outState.putString(STATE_TRANSLATOR, this.cacheTranslator.toConfig());
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -478,10 +472,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public void onDestroy() {
-        createDisposables.clear();
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
+        cacheTranslator.dispose();
         super.onDestroy();
     }
 
@@ -1013,6 +1007,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         setCacheTitleBar(cache);
         setIsContentRefreshable(cache.supportsRefresh());
+        cacheTranslator.setDetectionText(cache.getDescription());
 
         // reset imagesList so Images view page will be redrawn
         imageGallery = null;
@@ -1758,10 +1753,20 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private static final int DESCRIPTION_MAX_SAFE_LENGTH = 50000;
 
         private Geocache cache;
+        private Rot13TextView hintWrapper;
+        private final CompositeDisposable contentDisposable = new CompositeDisposable();
+        private final AtomicInteger descriptionRunId = new AtomicInteger(0);
 
         @Override
         public CachedetailDescriptionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             return CachedetailDescriptionPageBinding.inflate(getLayoutInflater(), container, false);
+        }
+
+        @Override
+        public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            final View view = super.onCreateView(inflater, container, savedInstanceState);
+            hintWrapper = new Rot13TextView(binding.hint, Settings.getHintAsRot13());
+            return view;
         }
 
         @Override
@@ -1783,9 +1788,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
+            contentDisposable.clear();
 
-            // load description
-            reloadDescription(this.getActivity(), cache, true, 0, activity.descriptionStyle, null, null, null);
+            //translator controls
+            final Translator translator = activity.cacheTranslator;
+            contentDisposable.add(TranslatorUtils.initializeView("cacheDetails", getActivity(), translator,
+                    binding.descriptionTranslateButton, binding.descriptionTranslate, binding.descriptionTranslateNote));
+
+            //Description
+            translator.addTranslation(getRawCacheDescription(cache), contentDisposable::add, (translated, t) -> {
+                reloadDescription(activity, cache, translated, true, activity.descriptionStyle);
+            });
+
 
             //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
@@ -1847,20 +1861,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             if (StringUtils.isNotBlank(cache.getHint())) {
-                if (TextUtils.containsHtml(cache.getHint())) {
-                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                } else {
-                    binding.hint.setText(cache.getHint());
-                }
+                translator.addTranslation(cache.getHint(), contentDisposable::add, (translatedHint, t) -> {
+                    if (TextUtils.containsHtml(translatedHint)) {
+                        hintWrapper.setText(HtmlCompat.fromHtml(translatedHint, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
+                    } else {
+                        hintWrapper.setText(translatedHint);
+                    }
+                });
                 binding.hint.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 binding.hint.setVisibility(View.VISIBLE);
-                if (Settings.getHintAsRot13()) {
-                    binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
-                }
-                final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
-                binding.hint.setOnClickListener(decryptListener);
+                binding.hint.setOnClickListener(v -> hintWrapper.rotate());
                 binding.hint.setClickable(true);
-                binding.hintBox.setOnClickListener(decryptListener);
+                binding.hintBox.setOnClickListener(v -> hintWrapper.rotate());
                 binding.hintBox.setClickable(true);
             } else {
                 binding.hint.setVisibility(View.GONE);
@@ -1869,7 +1881,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hintBox.setClickable(false);
                 binding.hintBox.setOnClickListener(null);
             }
-
 
             if (hasSpoilerImages) {
                 binding.hintSpoilerlink.setVisibility(View.VISIBLE);
@@ -1898,49 +1909,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             //register for changes of variableslist -> state of variable sync may change
             cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
-            final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
-            if (currentTranslationStatus.checkRetranslation()) {
-                currentTranslationStatus.setNotTranslated();
-                translateListing();
-            }
-        }
-
-        private void translateListing() {
-            final CacheDetailActivity cda = (CacheDetailActivity) getActivity();
-            final OfflineTranslateUtils.Language sourceLng = cda.translationStatus.getSourceLanguage();
-
-            if (cda.translationStatus.isTranslated()) {
-                cda.translationStatus.setNotTranslated();
-                reloadDescription(cda, cache, true, 0, cda.descriptionStyle, null, null, null);
-                if (TextUtils.containsHtml(cache.getHint())) {
-                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                } else {
-                    binding.hint.setText(cache.getHint());
-                }
-                binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_language_detected), sourceLng));
-                return;
-            }
-
-            cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
-
-            OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
-                unsupportedLng -> {
-                    cda.translationStatus.abortTranslation();
-                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, unsupportedLng));
-                }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
-    translator -> {
-                    if (null == translator) {
-                        binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
-                        return;
-                    }
-
-                    final Consumer<Exception> errorConsumer = error -> {
-                        binding.descriptionTranslateNote.setText(getResources().getText(R.string.translator_translation_error, error.getMessage()));
-                        binding.descriptionTranslateButton.setEnabled(false);
-                    };
-                    reloadDescription(cda, cache, true, 0, cda.descriptionStyle, translator, cda.translationStatus, errorConsumer);
-                    OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.hint.getText().toString(), binding.hint::setText, errorConsumer);
-                });
         }
 
         @Override
@@ -1949,6 +1917,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache != null && cache.getVariables() != null) {
                 cache.getVariables().removeChangeListener(this);
             }
+            contentDisposable.clear();
         }
 
 
@@ -1975,25 +1944,35 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     });
         }
 
+        private static String getRawCacheDescription(final Geocache cache) {
+            //combine short and long description to the final description to render
+            String descriptionText = cache.getDescription();
+            final String shortDescriptionText = cache.getShortDescription();
+            if (StringUtils.isNotBlank(shortDescriptionText)) {
+                final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+                // allow up to 200 characters of HTML formatting
+                if (index < 0 || index > 200) {
+                    descriptionText = shortDescriptionText + "\n" + descriptionText;
+                }
+            }
+            return descriptionText;
+        }
+
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
-        private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll, final HtmlStyle descriptionStyle,
-                           final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Exception> errorConsumer) {
+        private void reloadDescription(final Activity activity, final Geocache cache, final String rawDescription, final boolean restrictLength, final HtmlStyle descriptionStyle) {
+            final int initialScroll = binding.detailScroll.getScrollY();
             binding.descriptionRenderFully.setVisibility(View.GONE);
-            binding.description.setText(TextUtils.setSpan(activity.getString(translator != null ? R.string.cache_description_translating_and_rendering : R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            binding.description.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
             binding.description.setVisibility(View.VISIBLE);
-            AndroidRxUtils.computationScheduler.scheduleDirect(() ->
-                    createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle, translator, status, p -> {
-                        if (activity.isFinishing() || activity.isDestroyed()) {
+            final int runId = descriptionRunId.addAndGet(1);
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
+                createDescriptionContent(activity, cache, rawDescription, restrictLength, binding.description, descriptionStyle),
+                p -> {
+                        if (activity.isFinishing() || activity.isDestroyed() || runId < descriptionRunId.get()) {
+                            //aboard. Either activity is destroyed or a new run was started meanwhile
                             return;
                         }
                         displayDescription(activity, cache, p.first, binding.description);
-                        if (translator != null) {
-                            binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
-                        }
-
-                        if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
-                            OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString(), this::translateListing);
-                        }
 
                         // we need to use post, so that the textview is layouted before scrolling gets called
                         if (((CacheDetailActivity) activity).lastActionWasEditNote) {
@@ -2004,12 +1983,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         if (p.second) {
                             binding.descriptionRenderFully.post(() -> {
                                 binding.descriptionRenderFully.setVisibility(View.VISIBLE);
-                                binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY(), descriptionStyle, translator, status, errorConsumer));
+                                binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, rawDescription, false, descriptionStyle));
                             });
                         } else {
                             ((CacheDetailActivity) activity).lastActionWasEditNote = false;
                         }
-                    }, errorConsumer)
+                    }
             );
         }
 
@@ -2040,18 +2019,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // splitting up that method would not help improve readability
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
         @WorkerThread
-        private static void createDescriptionContent(final Activity activity, final Geocache cache, final boolean restrictLength, final TextView descriptionView, final HtmlStyle descriptionStyle,
-            final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Pair<CharSequence, Boolean>> successConsumer, final Consumer<Exception> errorConsumer) {
-            //combine short and long description to the final description to render
-            String descriptionText = cache.getDescription();
-            final String shortDescriptionText = cache.getShortDescription();
-            if (StringUtils.isNotBlank(shortDescriptionText)) {
-                final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
-                // allow up to 200 characters of HTML formatting
-                if (index < 0 || index > 200) {
-                    descriptionText = shortDescriptionText + "\n" + descriptionText;
-                }
-            }
+        private static Pair<CharSequence, Boolean> createDescriptionContent(final Activity activity, final Geocache cache, final String translatedDescription, final boolean restrictLength, final TextView descriptionView, final HtmlStyle descriptionStyle) {
+
+            String descriptionText = translatedDescription;
 
             //check for too-long-listing
             final int descriptionFullLength = descriptionText.length();
@@ -2059,19 +2029,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (textTooLong && restrictLength) {
                 descriptionText = descriptionText.substring(0, DESCRIPTION_MAX_SAFE_LENGTH);
             }
-            final String descriptionTextFinal = descriptionText;
-            // translate, if requested
-            if (translator == null) {
-                AndroidRxUtils.runOnUi(() ->
-                    successConsumer.accept(createDescriptionContentHelper(activity, descriptionTextFinal, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle))
-                );
-            } else {
-                OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
-            }
-        }
 
-        @WorkerThread
-        private static Pair<CharSequence, Boolean> createDescriptionContentHelper(final Activity activity, final String descriptionText, final boolean textTooLong, final int descriptionFullLength, final Geocache cache, final boolean restrictLength, final TextView descriptionView, final HtmlStyle descriptionStyle) {
             try {
                 //Format to HTML. This takes time on long listings or those with e.g. many images...
                 final HtmlImage imageGetter = new HtmlImage(cache.getGeocode(), true, false, descriptionView, false);
@@ -2165,6 +2123,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private Geocache cache;
+        private final CompositeDisposable translateDisposables = new CompositeDisposable();
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -2214,6 +2173,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache == null) {
                 return;
             }
+
+            translateDisposables.clear();
 
             final ListView v = binding.getRoot();
             v.setVisibility(View.VISIBLE);
@@ -2330,6 +2291,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache != null && cache.getVariables() != null) {
                 cache.getVariables().removeChangeListener(this);
             }
+            translateDisposables.clear();
         }
 
         @SuppressLint("SetTextI18n")
@@ -2339,6 +2301,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinateInfo;
             final Geopoint coordinates = wpt.getCoords();
             final String calcStateJson = wpt.getCalcStateConfig();
+
+            final Translator translator = activity.cacheTranslator;
 
             // coordinates
             holder.setCoordinate(coordinates);
@@ -2365,7 +2329,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // title
-            holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
+            translator.addTranslation(wpt.getName(), translateDisposables::add, (translated, t) -> {
+                holder.binding.name.setText(StringUtils.isNotBlank(translated) ? StringEscapeUtils.unescapeHtml4(translated) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
+            });
             holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false, Settings.getIconScaleEverywhere()).getDrawable());
 
             // visited
@@ -2383,13 +2349,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // note
             final TextView noteView = holder.binding.note;
             if (StringUtils.isNotBlank(wpt.getNote())) {
-                noteView.setOnClickListener(new DecryptTextClickListener(noteView));
+                noteView.setOnClickListener(v -> Rot13TextView.rotate(noteView));
                 noteView.setVisibility(View.VISIBLE);
-                if (TextUtils.containsHtml(wpt.getNote())) {
-                    noteView.setText(HtmlCompat.fromHtml(wpt.getNote(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, noteView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                } else {
-                    noteView.setText(wpt.getNote());
-                }
+                translator.addTranslation(wpt.getNote(), translateDisposables::add, (translated, t) -> {
+                    if (TextUtils.containsHtml(translated)) {
+                        noteView.setText(HtmlCompat.fromHtml(translated, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, noteView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                    } else {
+                        noteView.setText(translated);
+                    }
+                });
             } else {
                 noteView.setVisibility(View.GONE);
             }
@@ -2397,7 +2365,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // user note
             final TextView userNoteView = holder.binding.userNote;
             if (StringUtils.isNotBlank(wpt.getUserNote()) && !StringUtils.equals(wpt.getNote(), wpt.getUserNote())) {
-                userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
+                userNoteView.setOnClickListener(v -> Rot13TextView.rotate(userNoteView));
                 userNoteView.setVisibility(View.VISIBLE);
                 userNoteView.setText(wpt.getUserNote());
             } else {
@@ -2827,7 +2795,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 showToast((String) msg.obj);
             } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
                 dismissProgress(cacheDetailActivity.getString(R.string.cachedetails_progress_refresh, cacheDetailActivity.geocode));
-                cacheDetailActivity.translationStatus.setNotTranslated();
                 notifyDataSetChanged(activityRef);
             }
         }

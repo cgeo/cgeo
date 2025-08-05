@@ -83,10 +83,20 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        Log.e("[Trans onDestroyView " + getClass());
+        super.onDestroyView();
+    }
 
     // Fragment lifecycle methods - for testing purposes
 
     /*
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,11 +138,7 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
         super.onDestroyView();
     }
 
-    @Override
-    public void onDestroy() {
-        Log.e("onDestroy " + getClass().toString());
-        super.onDestroy();
-    }
+
 
     */
 }
