@@ -10,11 +10,13 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
@@ -120,9 +123,9 @@ public class SimpleItemListView extends LinearLayout {
 
             switch (data.type) {
                 case SELECT_ALL:
-                    final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + model.getItems().size() + ")>";
+                    final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + (model.getItems().size() - model.getDisabledItems().size()) + ")>";
                     applyItemView(binding, selectAllText, null, SELECT_VIEW_MAPPER);
-                    binding.itemCheckbox.setChecked(model.getSelectedItems().size() == model.getItems().size());
+                    binding.itemCheckbox.setChecked(model.getSelectedItems().size() == (model.getItems().size() - model.getDisabledItems().size()));
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 case SELECTED_VISIBLE:
@@ -220,10 +223,10 @@ public class SimpleItemListView extends LinearLayout {
 
             switch (itemData.type) {
                 case SELECT_ALL:
-                    if (model.getSelectedItems().size() == model.getItems().size()) {
+                    if (model.getSelectedItems().size() - model.getDisabledItems().size() == model.getItems().size() - model.getDisabledItems().size()) {
                         newSelection.clear();
                     } else {
-                        newSelection.addAll(model.getItems());
+                        newSelection.addAll(model.getItems().stream().filter(i -> !model.getDisabledItems().contains(i)).collect(Collectors.toList()));
                     }
                     selectionChanged = true;
                     break;
@@ -270,6 +273,17 @@ public class SimpleItemListView extends LinearLayout {
         @Override
         public void onBindViewHolder(@NonNull final ItemListViewHolder holder, final int position) {
             holder.fillData(getItem(position));
+
+            if (model.getDisabledItems().contains(getItem(position).value)) {
+                final List<TextView> tvs = getAllTextViews(holder.binding.itemViewAnchor);
+                for (TextView tv : tvs) {
+                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    tv.setTextColor(getResources().getColor(R.color.colorTextHint));
+                }
+                holder.binding.itemCheckbox.setEnabled(false);
+                holder.binding.itemRadiobutton.setEnabled(false);
+                return;
+            }
 
             holder.binding.getRoot().setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
             holder.binding.itemChecker.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
@@ -552,5 +566,19 @@ public class SimpleItemListView extends LinearLayout {
                }
            });
         }
+    }
+
+    private List<TextView> getAllTextViews(final View view) {
+        final List<TextView> textViews = new ArrayList<>();
+        if (view instanceof TextView) {
+            textViews.add((TextView) view);
+        } else if (view instanceof ViewGroup) {
+            final ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                final View child = viewGroup.getChildAt(i);
+                textViews.addAll(getAllTextViews(child));
+            }
+        }
+        return textViews;
     }
 }
