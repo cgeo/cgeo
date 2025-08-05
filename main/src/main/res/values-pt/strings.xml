@@ -410,13 +410,11 @@
     <string name="caches_no_cache">Nenhuma cache</string>
     <string name="caches_more_caches">Carregar mais caches</string>
     <string name="caches_more_caches_no">Sem mais caches</string>
-    <string name="caches_more_caches_loading">A carregar caches…</string>
     <string name="caches_more_caches_currently">actualmente</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Carregar a próxima %1$d cache</item>
         <item quantity="other">Carregar as próximas %1$d caches</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Carregar as caches restantes (%1$d / %2$d)</string>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_offline_map">Armazenar caches p/ utilização offline</string>
     <string name="caches_store_selected">Armazenar seleccionada(s)</string>
@@ -1460,7 +1458,6 @@
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Ocultar pontos adicionais visitados</string>
     <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
@@ -1751,7 +1748,6 @@
     <string name="projection_type_offset_hint_latitude">Desvio da Latitude em Micro-Minutos</string>
     <string name="projection_type_offset_hint_longitude">Desvio da Longitude em Micro-Minutos</string>
     <!-- Variables -->
-    <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
     <string name="variables_scanlisting_choosepattern_title">Escolher o modelo de \'encontrado\'</string>
     <string name="variables_scanlisting_nopatternfound">Nenhum padrão encontrado</string>
