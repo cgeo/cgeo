@@ -57,6 +57,7 @@ public class SimpleItemListModel<T> {
     private String filterTerm = null;
 
     private final Set<T> selectedItems = new HashSet<>();
+    private final Set<T> disabledItems = new HashSet<>();
 
     private final List<Consumer<ChangeType>> changeListeners = new ArrayList<>();
 
@@ -473,6 +474,23 @@ public class SimpleItemListModel<T> {
      *  collection will always have 0 or 1 element only. */
     public Set<T> getSelectedItems() {
         return selectedItems;
+    }
+
+    /** Sets the currently selected items */
+    public SimpleItemListModel<T> setDisabledItems(final Iterable<T> disabled) {
+        if (disabled != null) {
+            disabledItems.clear();
+            for (T sel : disabled) {
+                disabledItems.add(sel);
+            }
+        }
+        return this;
+    }
+
+    /** Gets currently selected items. If ChoiceMode is a SINGLE mode then the returned
+     *  collection will always have 0 or 1 element only. */
+    public Set<T> getDisabledItems() {
+        return disabledItems;
     }
 
     /** Adds a model change listener */
