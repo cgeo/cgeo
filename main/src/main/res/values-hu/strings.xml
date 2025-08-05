@@ -299,7 +299,6 @@
     <string name="caches_no_cache">Nem található láda</string>
     <string name="caches_more_caches">Nem elég? Keress több ládát!</string>
     <string name="caches_more_caches_no">Ez az összes. Nincs több láda.</string>
-    <string name="caches_more_caches_loading">Ládák betöltése…</string>
     <string name="caches_more_caches_currently">jelenleg</string>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
