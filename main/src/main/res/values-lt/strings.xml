@@ -349,7 +349,6 @@
     <string name="caches_no_cache">Slėptuvių čia nėra</string>
     <string name="caches_more_caches">Įkelti daugiau slėptuvių</string>
     <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
-    <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
     <string name="caches_more_caches_currently">dabar</string>
     <plurals name="caches_more_caches_next_x">
         <item quantity="one">Įkelti kitą %1$d slėptuvę</item>
@@ -357,7 +356,6 @@
         <item quantity="many">Įkelti kitas %1$d slėptuvių</item>
         <item quantity="other">Įkelti kitas %1$d slėptuvių</item>
     </plurals>
-    <string name="caches_more_caches_remaining">Įkelti likusias slėptuves (%1$d / %2$d)</string>
     <string name="caches_store_offline">Saugoti naudojimui neprisijungus</string>
     <string name="caches_store_offline_map">Saugoti slėptuves naudojimui neprisijungus</string>
     <string name="caches_store_selected">Saugoti pasirinktas</string>
@@ -1299,7 +1297,6 @@
     <string name="cache_waypoints_add">Pridėti kelio tašką</string>
     <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Slėpti aplankytus kelio taškus</string>
     <string name="cache_waypoints_remove_original_waypoint">Kelio taškas nukopijuotas iš iškarpinės į šią slėptuvę.\n\nPašalinti pradinį kelio tašką?</string>
     <string name="cache_hint">Užuomina</string>
     <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -1557,7 +1554,6 @@
     <string name="projection_type_offset_hint_latitude">Platumos poslinkis mikro minutėmis</string>
     <string name="projection_type_offset_hint_longitude">Ilgumos poslinkis mikro minutėmis</string>
     <!-- Variables -->
-    <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
     <string name="variables_scanlisting_choosepattern_title">Pasirinkite rastus ruošinius</string>
     <string name="variables_scanlisting_nopatternfound">Ruošinių nerasta</string>
