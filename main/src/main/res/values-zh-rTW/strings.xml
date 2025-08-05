@@ -300,7 +300,6 @@
     <string name="caches_no_cache">此处无文件</string>
     <string name="caches_more_caches">載入更多cache</string>
     <string name="caches_more_caches_no">载入更多答案</string>
-    <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
