@@ -215,7 +215,6 @@
     <string name="caches_no_cache">Walay mga cache diri</string>
     <string name="caches_more_caches">Magpakita og dugang na mga cache</string>
     <string name="caches_more_caches_no">Wala nay mga cache</string>
-    <string name="caches_more_caches_loading">Nag-load ang mga cache…</string>
     <string name="caches_more_caches_currently">karon</string>
     <string name="caches_history">Ang mga niaagi</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
