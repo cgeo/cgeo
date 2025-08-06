@@ -4,6 +4,7 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 - Nowość: Optymalizacja trasy buforuje obliczone dane
 - Nowość: Włączenie trybu na żywo utrzymuje punkty orientacyjne aktualnie ustawionego celu
 - Nowość: Długie dotknięcie na linii nawigacji otwiera wykres wysokości (UnifiedMap)
+- Nowość: Pokaż wygenerowane punkty nawigacji na mapie
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -11,12 +12,17 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 - Nowość: Opcjonalny widok kompasu (zobacz ustawienia => szczegóły skrytki => Pokaż kierunek w widoku szczegółów skrytki)
 - Nowość: Pokaż wpisy właścicieli na karcie „wpisy przyjaciół/własne”
 - Zmiana: Karta „Wpisy przyjaciół/własne” pokazuje liczbę wpisów dla tej karty, a nie globalne liczniki
+- Zmiana: Ulepszony nagłówek w zakładkach „Zmienne” i „Punkty nawigacji”
+- Naprawiono: Podwójne wyświetlanie elementu „Usuń wpis”
+- Naprawiono: Awaria c:geo podczas obracania ekranu w szczegółach skrytki
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
+- Nowość: Ulepszona obsługa przycisku
 
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
 - Zmiana: Nie pokazuj opcji „wymaga konserwacji” lub „wymaga zarchiwizowania” dla własnych skrytek
 - Naprawiono: Przywracanie kopii zapasowej może duplikować pliki śladów w pamięci wewnętrznej i kolejnych kopiach zapasowych
 - Zmiana: Usunięte odwołania do Twittera
+- Nowość: Usuń osierocone pliki ścieżek przy czyszczeniu i przywracaniu kopii zapasowej
