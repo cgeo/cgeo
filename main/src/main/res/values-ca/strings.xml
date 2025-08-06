@@ -316,6 +316,8 @@
     <string name="warn_notloggedin_long">No heu iniciat la sessió. El mapa en viu només mostrarà els catxés emmagatzemats localment i les funcions en línia no funcionaran. \n\n Si no hi ha connexió de xarxa, no hi ha cap problema de servidor o heu de (tornar) configurar els vostres serveis de geocatxing. \n\n Voleu configurar els serveis ara?</string>
     <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
     <string name="err_read_bookmark_list">S\'ha produït un error en llegir les llistes de marcadors.</string>
+    <string name="err_bookmark_list_overfull">Massa catxés</string>
+    <string name="err_bookmark_list_overfull_description">Les llistes de marcadors només poden emmagatzemar fins a 1000 catxés; esteu intentant afegir-ne més a la llista.\n\nVoleu continuar i afegir només tants catxés com pugui contenir la llista?</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
     <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
@@ -1756,6 +1758,7 @@
     <string name="projection_type_offset_hint_latitude">Desplaçament de latitud en microminuts</string>
     <string name="projection_type_offset_hint_longitude">Desplaçament de longitud en microminuts</string>
     <!-- Variables -->
+    <string name="variables_titletext">Valors i càlculs</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
     <string name="variables_scanlisting_choosepattern_title">Trieu el patró de trobat</string>
     <string name="variables_scanlisting_nopatternfound">No s\'ha trobat cap patró</string>
