@@ -1,8 +1,11 @@
 ##
+- Correcció: UnifiedMap VTM: L'activació o desactivació d'edificis en 3D no funciona per a mapes combinats
+
+##
 - Correcció: Error al mòdul de traducció
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Correcció: La detecció d'inici de sessió falla (canvi de lloc web)
+- Correcció: Error en recuperar el cartutx Wherigo
+- Correcció: "Carrega'n més" no respecta els filtres fora de línia
 
 ##
 - Correcció: L'inventari rastrejable no es carregava en registrar un catxé
@@ -10,5 +13,6 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
