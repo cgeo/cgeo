@@ -4,6 +4,7 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Nieuw: Route optimalisatie caches berekende data
 - Nieuw: Inschakelen van live modus houdt waypoints zichtbaar van huidig ingesteld doel
 - Nieuw: Lang tikken op de navigatielijn opent de hoogtegrafiek (UnifiedMap)
+- Nieuw: Toon gegenereerde waypoints op kaart
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
@@ -11,12 +12,17 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Nieuw: Optioneel kompas mini weergave (zie instellingen => cache details => Toon richting in cache detail weergave)
 - Nieuw: Toon eigenaar's logs op "vrienden/eigenaar" tabblad
 - Wijziging: "Vrienden/eigenaar" tab toont het aantal logs voor dat tabblad in plaats van globale tellers
+- Wijziging: Verbeterde header in variabele en waypoint tabbladen
+- Oplossing: Twee "verwijder log" items getoond
+- Oplossing: c:geo crasht in cache details wanneer het scherm wordt gedraaid
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
+- Nieuw: Verbeterde knoppen verwerking
 
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
 - Wijziging: Toon geen "need maintenance" of "need archived" opties voor eigen caches
 - Oplossing: Het herstellen van een back-up kan het bijhouden van bestanden in de interne opslag en volgende back-ups dupliceren
 - Wijziging: Verwijzingen naar Twitter verwijderd
+- Nieuw: Verwijder verweesde trackbestanden bij opschonen en back-up herstellen
