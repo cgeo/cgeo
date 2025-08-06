@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -26,9 +25,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.TooltipCompat;
-
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +34,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.google.android.material.chip.Chip;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -46,7 +43,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
-    private ChipGroup filterview = null;
 
     public CacheLogsViewCreator(final boolean allLogs) {
         this.allLogs = allLogs;
@@ -86,21 +82,17 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             friendsLogs.removeAll(ownLogs);
             friendsLogs.removeAll(ownerLogs);
 
-            final Chip chipOwn = binding.getRoot().findViewById(R.id.chip_own);
-            final Chip chipFriends = binding.getRoot().findViewById(R.id.chip_friends);
-            final Chip chipOwner = binding.getRoot().findViewById(R.id.chip_owner);
+            binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
 
-            chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            chipOwner.findViewById(R.id.chip_owner).setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
-
-            if (!chipOwn.isChecked()) {
+            if (!binding.chipOwn.isChecked()) {
                 logs.removeAll(ownLogs);
             }
-            if (!chipFriends.isChecked()) {
+            if (!binding.chipFriends.isChecked()) {
                 logs.removeAll(friendsLogs);
             }
-            if (!chipOwner.isChecked()) {
+            if (!binding.chipOwner.isChecked()) {
                 logs.removeAll(ownerLogs);
             }
             return logs;
@@ -119,29 +111,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected void addHeaderView() {
         if (binding != null) {
-            addFilterHeader();
             addLogCountsHeader();
             addEmptyLogsHeader();
-        }
-    }
 
-    private void addFilterHeader() {
-        if (filterview != null) {
-            return;
+            for (int i = 0; i < binding.filterChips.getChildCount(); i++) {
+                ((Chip) binding.filterChips.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    setContent();
+                });
+            }
         }
-        filterview = (ChipGroup) LayoutInflater.from(getActivity()).inflate(R.layout.logs_filter, binding.getRoot(), false);
-        for (int i = 0; i < filterview.getChildCount(); i++) {
-            ((Chip) filterview.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
-                setContent();
-            });
-        }
-        binding.getRoot().addHeaderView(filterview, null, false);
     }
 
     @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
         if (countview1 != null) {
-            binding.getRoot().removeHeaderView(countview1);
+            binding.logsItems.removeHeaderView(countview1);
             countview1 = null;
         }
 
@@ -177,21 +161,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }
-                binding.getRoot().addHeaderView(countview1, null, false);
+                binding.logsItems.addHeaderView(countview1, null, false);
             }
         }
     }
 
     private void addEmptyLogsHeader() {
         if (countview2 != null) {
-            binding.getRoot().removeHeaderView(countview2);
+            binding.logsItems.removeHeaderView(countview2);
             countview2 = null;
         }
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
             countview2.setText(allLogs ? res.getString(R.string.log_empty_logbook) : res.getString(R.string.log_empty_logbook_filtered));
-            binding.getRoot().addHeaderView(countview2, null, false);
+            binding.logsItems.addHeaderView(countview2, null, false);
         }
     }
 
