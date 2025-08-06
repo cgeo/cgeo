@@ -14,7 +14,7 @@ import androidx.annotation.StringRes;
 /** Enum listing projection types */
 public enum ProjectionType {
     NO_PROJECTION("none", R.string.projection_type_none, 0, R.drawable.ic_menu_mylocation_off, null),
-    BEARING("bearing", R.string.projection_type_bearing, R.string.projection_type_bearing_info, R.drawable.arrow_north_east, (base, v1, v2, du) ->
+    PROJECTION("projection", R.string.projection_type_projection, R.string.projection_type_projection_info, R.drawable.arrow_north_east, (base, v1, v2, du) ->
         base == null || v1 == null || v2 == null ? null : base.project(v2, du.toKilometers(v1.floatValue()))),
     OFFSET("offset", R.string.projection_type_offset, R.string.projection_type_offset_info, R.drawable.arrow_top_right, (base, v1, v2, du) ->
         base == null || v1 == null || v2 == null ? null : base.offsetMinuteMillis(v1, v2));
