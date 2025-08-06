@@ -60,7 +60,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         binding.getRoot().setVisibility(View.VISIBLE);
 
         addHeaderView();
-        binding.logsItems.setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, getLogs()) {
+        binding.getRoot().setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, getLogs()) {
 
             @Override
             @NonNull
@@ -82,7 +82,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 return rowView;
             }
         });
-        binding.logsItems.setOnScrollListener(new FastScrollListener(binding.logsItems));
+        binding.getRoot().setOnScrollListener(new FastScrollListener(binding.getRoot()));
     }
 
     protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
