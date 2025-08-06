@@ -315,6 +315,8 @@
     <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
     <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
     <string name="err_read_bookmark_list">Fout bij het lezen van bladwijzerlijsten.</string>
+    <string name="err_bookmark_list_overfull">Te veel caches</string>
+    <string name="err_bookmark_list_overfull_description">Bookmarklijsten kunnen maximaal 1000 caches opslaan, je probeert er meer toe te voegen aan de lijst.\n\nWil je doorgaan en alleen zoveel caches toevoegen als de lijst nog kan hebben?</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
@@ -1461,6 +1463,7 @@
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
     <string name="cache_variables">Variabelen</string>
+    <string name="cache_variables_chip_completed_variables">Voltooid</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
