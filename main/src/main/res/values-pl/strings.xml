@@ -315,6 +315,8 @@
     <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrytki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="err_read_bookmark_list">Błąd odczytywania list zakładek.</string>
+    <string name="err_bookmark_list_overfull">Zbyt wiele skrytek</string>
+    <string name="err_bookmark_list_overfull_description">Listy zakładek mogą przechowywać maksymalnie 1000 skrytek, próbujesz dodać więcej do listy.\n\nCzy chcesz kontynuować i dodać tylko tyle skrytek, ile zmieści się na liście?</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
@@ -1489,6 +1491,7 @@
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
     <string name="cache_variables">Zmienne</string>
+    <string name="cache_variables_chip_completed_variables">Zakończone</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punkty nawigacji (%d)</string>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
