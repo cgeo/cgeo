@@ -4,6 +4,7 @@ Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úrove
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
 - Novinka: Zapnutí živého režimu udržuje viditelné trasové body aktuálně nastaveného cíle
 - Novinka: Dlouhým stisknutím navigační lišty se otevře výškový graf (Sjednocená mapa)
+- New: Show generated waypoints on map
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -11,12 +12,17 @@ Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úrove
 - Novinka: Volitelné mini zobrazení kompasu (viz nastavení => podrobnosti kešky => Zobrazit směr v podrobnostech kešky)
 - Novinka: Možnost zobrazit logy majitelů na kartě „přátelé/vlastní“
 - Změna: Karta „přátelé/vlastní“ zobrazuje počet logů pro danou kartu namísto globálních počítadel
+- Change: Improved header in variable and waypoint tabs
+- Fix: Two "delete log" items shown
+- Fix: c:geo crashing in cache details when rotating screen
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
+- New: Improved button handling
 
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky
 - Změna: Nezobrazovat možnosti "vyžaduje údržbu" nebo "vyžaduje archivaci" pro vlastní kešky
 - Oprava: Obnovení zálohy může duplikovat soubory stop v interním úložišti a následných zálohách
 - Změna: Odstraněny odkazy na Twitter
+- New: Delete orphaned trackfiles on clean up and restore backup
