@@ -1,14 +1,21 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CalculatedCoordinateType;
+import cgeo.geocaching.models.CoordinateInputData;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
@@ -16,6 +23,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +67,9 @@ public class NewCoordinateInputDialog {
     private TextView lonSymbol1, lonSymbol2, lonSymbol3, lonSymbol4;
     private List<EditText> orderedInputs;
     private Geopoint gp;
+    private static Geopoint cacheCoordinates;
     private Disposable geoDisposable;
-
+    private CoordinateDialogDisplayModeEnum waypointOptions = CoordinateDialogDisplayModeEnum.Normal;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
@@ -69,14 +78,41 @@ public class NewCoordinateInputDialog {
         }
     };
 
-    private NewCoordinateInputDialog(final Context context, final DialogCallback callback) {
+    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final CoordinateDialogDisplayModeEnum showWaypointButtons) {
 
         this.context = context;
         this.callback = callback;
+        this.waypointOptions = showWaypointButtons;
     }
 
+    // Entry point for user defined cache, search card and GK TB
     public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
-       new NewCoordinateInputDialog(context, callback).show(location);
+        cacheCoordinates = null;
+        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Normal).show(location);
+    }
+
+    //Entry point for a plain waypoint returning from the calculator page
+    public static void show(final Context context, final DialogCallback callback, final Geopoint location, final boolean noButtons) {
+        cacheCoordinates = null;
+        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Simple).show(location);
+    }
+
+    //Main entry point for the waypoint page
+    public static void show(final Context context, final DialogCallback callback, final CoordinateInputData inputData) {
+
+        final String geocode = inputData.getGeocode();
+        if (!StringUtils.isBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            cacheCoordinates = cache == null ? null : cache.getCoords();
+        }
+
+        if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
+            final AbstractActivity activity = (AbstractActivity) context;
+            final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+            CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
+            return;
+        }
+        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData.getGeopoint());
     }
 
     @NonNull
@@ -85,7 +121,6 @@ public class NewCoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
-    // Main entry point for distance filter, GK TB and user defined cache coordinates
     private void show(final Geopoint location) {
 
         if (location != null) {
@@ -116,7 +151,7 @@ public class NewCoordinateInputDialog {
                }
             } else {
                 geoDisposable.dispose();
-               dialog.dismiss();
+                dialog.dismiss();
             }
             return true;
         });
@@ -204,23 +239,87 @@ public class NewCoordinateInputDialog {
             EditUtils.disableSuggestions(editText);
         }
 
-        // User copy/paste buttons
-        final Button copyFromClipboard = binding.clipboard;
+        // Manage the options buttons
         final Button useCurrentLocation = binding.current;
+        final Button useCacheCoordinates = binding.cache;
+        final Button calculateCoordinates = binding.calculate;
+        final Button copyFromClipboard = binding.clipboard;
+        final Button clearCoordinates = binding.clear;
 
-        copyFromClipboard.setOnClickListener(v -> {
-            try {
-                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        // Do noy display any option buttons if simple mode
+        if (waypointOptions == CoordinateDialogDisplayModeEnum.Simple) {
+            useCurrentLocation.setVisibility(View.GONE);
+            useCacheCoordinates.setVisibility(View.GONE);
+            calculateCoordinates.setVisibility(View.GONE);
+            copyFromClipboard.setVisibility(View.GONE);
+            clearCoordinates.setVisibility(View.GONE);
+        } else {
+            useCurrentLocation.setOnClickListener(v -> {
+                gp = currentCoords();
                 updateGui();
-            } catch (final Geopoint.ParseException ignored) {
-                //ignore
-            }
-        });
+            });
 
-        useCurrentLocation.setOnClickListener(v -> {
-            gp = currentCoords();
-            updateGui();
-        });
+            if (cacheCoordinates == null) {
+                useCacheCoordinates.setVisibility(View.GONE);
+            } else {
+                useCacheCoordinates.setVisibility(View.VISIBLE);
+                useCacheCoordinates.setOnClickListener(v -> {
+                    gp = cacheCoordinates;
+                    updateGui();
+                });
+            }
+
+            // For waypoints only, launch the calculator dialog that is still fragment based atm
+            if (waypointOptions != CoordinateDialogDisplayModeEnum.Normal) {
+                calculateCoordinates.setVisibility(View.VISIBLE);
+
+                calculateCoordinates.setOnClickListener(v -> {
+                    final AbstractActivity activity = (AbstractActivity) context;
+                    final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                    final CoordinateInputData inputData = new CoordinateInputData();
+                    inputData.setGeopoint(gp);
+                    final CalculatedCoordinate cc = new CalculatedCoordinate();
+                    cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
+
+                    //try to set patterns from GUI
+                    final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
+                    cc.setLatitudePattern(patternsFromGui.first);
+                    cc.setLongitudePattern(patternsFromGui.second);
+
+                    inputData.setCalculatedCoordinate(cc);
+                    CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
+                    geoDisposable.dispose();
+                    dialog.dismiss();
+                });
+            } else {
+                calculateCoordinates.setVisibility(View.GONE);
+            }
+
+            if (hasClipboardCoordinates()) {
+                copyFromClipboard.setVisibility(View.VISIBLE);
+                copyFromClipboard.setOnClickListener(v -> {
+                    try {
+                        gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                        updateGui();
+                    } catch (final Geopoint.ParseException ignored) {
+                        //ignore
+                    }
+                });
+            } else {
+                copyFromClipboard.setVisibility(View.GONE);
+            }
+
+            if (waypointOptions == CoordinateDialogDisplayModeEnum.Waypoint) {
+                clearCoordinates.setVisibility(View.VISIBLE);
+                clearCoordinates.setOnClickListener(v -> {
+                    callback.onDialogClosed(null);
+                    dialog.dismiss();
+                });
+            } else {
+                clearCoordinates.setVisibility(View.GONE);
+            }
+        }
 
         dialog.show();
 
@@ -453,6 +552,41 @@ public class NewCoordinateInputDialog {
         return 2;
     }
 
+    private Pair<String, String> getLatLonPatternFromGui() {
+        String lat = null;
+        String lon = null;
+        switch (currentFormat) {
+            case Deg: // DDD.DDDDD°
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "." + latitudeFraction.getText() + "°";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "." + longitudeFraction.getText() + "°";
+                break;
+            case Min: // DDD° MM.MMM
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "°" + latitudeMinutes.getText() + "." + latitudeFraction.getText() + "'";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "." + longitudeFraction.getText() + "'";
+                break;
+            case Sec: // DDD° MM SS.SSS
+                lat = bLatitude.getText().toString() + latitudeDegree.getText() + "°" + latitudeMinutes.getText() + "'" + latitudeSeconds.getText() + "." + latitudeFraction.getText() + "\"";
+                lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
+                break;
+            case Plain:
+            default:
+                lat = bLatitude.getText().toString();
+                lon = bLongitude.getText().toString();
+                break;
+        }
+        return new Pair<>(lat, lon);
+
+    }
+
+    private static boolean hasClipboardCoordinates() {
+        try {
+            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        } catch (final Geopoint.ParseException ignored) {
+            return false;
+        }
+        return true;
+    }
+
     private class PadZerosOnFocusLostListener implements View.OnFocusChangeListener {
 
         @Override
@@ -512,6 +646,20 @@ public class NewCoordinateInputDialog {
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
             // nothing to do
+        }
+    }
+
+    private enum CoordinateDialogDisplayModeEnum {
+        Normal,
+        Waypoint,
+        Simple
+    }
+
+    public interface CoordinateUpdate {
+        void updateCoordinates(Geopoint gp);
+
+        default void updateCoordinates(CoordinateInputData coordinateInputData) {
+            updateCoordinates(coordinateInputData.getGeopoint());
         }
     }
 }
