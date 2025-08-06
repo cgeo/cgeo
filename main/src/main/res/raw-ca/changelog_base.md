@@ -4,6 +4,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: l'optimització de la ruta guarda les dades calculades
 - Nou: activar el mode en directe manté visibles els punts de referència de l'objectiu establert actualment
 - Nou: Si toqueu llargament la línia de navegació, s'obre el gràfic d'elevació (UnifiedMap)
+- Nou: Mostra els punts de referència generats al mapa
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -11,12 +12,17 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Novetat: minivisualització de la brúixola opcional (vegeu la configuració => detalls del catxé => Mostra la direcció a la vista detallada del catxé)
 - Nou: Mostra els registres dels propietaris a la pestanya "amics/propis"
 - Canvi: La pestanya "Amics/propis" mostra els recomptes de registre d'aquesta pestanya en lloc dels comptadors globals
+- Canvi: Millora de la capçalera a les pestanyes de variables i punts de referència
+- Correcció: Es mostren dos elements de "supressió del registre"
+- Correcció: c:geo es bloqueja als detalls del catxé en girar la pantalla
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
+- Nou: Millora del maneig dels botons
 
 ### General
 - Nou: opció de compartir després de registrar un catxé
 - Canvi: no mostri les opcions "necessita manteniment" o "necessita arxivar" per a els catxés propis
 - Correcció: La restauració d'una còpia de seguretat pot duplicar els fitxers de track a l'emmagatzematge intern i a les còpies de seguretat posteriors
 - Canvi: S'han eliminat les referències a Twitter
+- Nou: Elimina els fitxers de pista orfes en netejar i restaurar la còpia de seguretat
