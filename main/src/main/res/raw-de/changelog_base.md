@@ -4,6 +4,7 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Neu: Routenoptimierung speichert Ergebnisse temporär
 - Neu: Bei Aktivierung des Live-Modus bleiben Wegpunkte des aktuell gesetzten Ziels sichtbar
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
+- New: Show generated waypoints on map
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -11,12 +12,17 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Neu: Optionaler Mini-Kompass (siehe Einstellungen => Cache-Details => Richtung in Cache-Detailansicht anzeigen)
 - New: Show owners' logs on "friends/own" tab
 - Change: "Friends/own" tab shows log counts for that tab instead of global counters
+- Change: Improved header in variable and waypoint tabs
+- Fix: Two "delete log" items shown
+- Fix: c:geo crashing in cache details when rotating screen
 
 ### Wherigo Player
 - New: Offline translation for Wherigos
+- New: Improved button handling
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
 - Änderung: Logoptionen "Benötigt Wartung" oder "Sollte archiviert werden" für eigene Caches ausblenden
 - Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
 - Change: Removed references to Twitter
+- New: Delete orphaned trackfiles on clean up and restore backup
