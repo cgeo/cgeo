@@ -129,7 +129,7 @@ public class SimpleItemListView extends LinearLayout {
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 case SELECTED_VISIBLE:
-                    final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + currentlyVisible + ")>";
+                    final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + (currentlyVisible - model.getDisabledItems().size()) + ")>";
                     applyItemView(binding, selectVisibleText, null, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(currentlyVisibleSelected == currentlyVisible);
                     binding.itemIcon.setVisibility(GONE);
@@ -233,7 +233,7 @@ public class SimpleItemListView extends LinearLayout {
                 case SELECTED_VISIBLE:
                     final boolean remove = (currentlyVisible == currentlyVisibleSelected);
                     for (ListItem item : getOriginalItems()) {
-                        if (item.type == ListItemType.ITEM && item.isVisible) {
+                        if (item.type == ListItemType.ITEM && item.isVisible && !model.getDisabledItems().contains(item)) {
                             if (remove) {
                                 newSelection.remove(item.value);
                             } else {
@@ -278,8 +278,8 @@ public class SimpleItemListView extends LinearLayout {
                 final List<TextView> tvs = getAllTextViews(holder.binding.itemViewAnchor);
                 for (TextView tv : tvs) {
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    tv.setTextColor(getResources().getColor(R.color.colorTextHint));
                 }
+                holder.binding.itemViewAnchor.setAlpha(0.5f);
                 holder.binding.itemCheckbox.setEnabled(false);
                 holder.binding.itemRadiobutton.setEnabled(false);
                 return;
