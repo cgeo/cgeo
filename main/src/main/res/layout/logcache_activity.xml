@@ -123,17 +123,36 @@
                 </LinearLayout>
 
                 <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <CheckBox
-                    android:id="@+id/favorite_check"
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:id="@+id/favorite_box"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    />
+                    android:visibility="gone">
+
+                    <com.google.android.material.button.MaterialButton
+                        app:iconTint="@color/button_drawable_selector"
+                        app:toggleCheckedStateOnClick="true"
+                        android:checkable="true"
+                        android:id="@+id/favorite_check"
+                        style="@style/button_icon"
+                        android:layout_alignParentLeft="true"
+                        app:icon="@drawable/ic_menu_favorite" />
+
+                    <TextView
+                        android:id="@+id/favorite_text"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="6dip"
+                        android:layout_marginRight="60dip"
+                        android:paddingRight="3dip"
+                        android:textSize="@dimen/textSize_detailsSecondary"
+                        android:layout_toRightOf="@id/favorite_check"
+                        android:textColor="@color/colorText"
+                        android:textIsSelectable="false" />
+                </RelativeLayout>
 
             </LinearLayout>
 

@@ -304,7 +304,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             binding.favoriteCheck.setChecked(offlineLogEntry.favorite);
             //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
             if (offlineLogEntry.favorite) {
-                binding.favoriteCheck.setVisibility(View.VISIBLE);
+                binding.favoriteBox.setVisibility(View.VISIBLE);
             }
             binding.logPassword.setText(offlineLogEntry.password);
             inventoryAdapter.putActions(offlineLogEntry.inventoryActions);
@@ -343,13 +343,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
             final int remainingPoints = availableFavoritePoints + (cache.isFavorite() ? 1 : 0);
-            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
+            binding.favoriteText.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
             if (availableFavoritePoints > 0 || (this.logEditMode == LogEditMode.EDIT_EXISTING && cache.isFavorite())) {
-                binding.favoriteCheck.setVisibility(availableFavoritePoints > 0 ? View.VISIBLE : View.GONE);
+                binding.favoriteBox.setVisibility(availableFavoritePoints > 0 ? View.VISIBLE : View.GONE);
                 binding.favoriteCheck.setChecked(cache.isFavorite());
             }
         } else {
-            binding.favoriteCheck.setVisibility(View.GONE);
+            binding.favoriteBox.setVisibility(View.GONE);
         }
     }
 
