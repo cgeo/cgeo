@@ -4,6 +4,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna 
 - Nyhet: Ruttoptimering cachar beräknade data
 - Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
 - Nyhet: Långtryck på navigationslinjen öppnar höjddiagram (UnifiedMap)
+- New: Show generated waypoints on map
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -11,12 +12,17 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna 
 - Nyhet: Valfri kompass-minivy (se inställningar => cachedetaljer => Visa riktning i cache-detaljvyn)
 - Nyhet: Visa ägarnas loggar på fliken "vänner/egna"
 - Ändra: "Vänner/egna" fliken visar antal loggar för den fliken istället för globalt antal
+- Change: Improved header in variable and waypoint tabs
+- Fix: Two "delete log" items shown
+- Fix: c:geo crashing in cache details when rotating screen
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
+- New: Improved button handling
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
 - Ändra: Visa inte "behöver underhåll" eller "behöver arkiveras"-alternativen för egna cacher
 - Fix: Återställning av en säkerhetskopia kan duplicera spårfiler i internt lagringsutrymme och efterföljande säkerhetskopior
 - Förändring: Referenser till Twitter borttagna
+- New: Delete orphaned trackfiles on clean up and restore backup
