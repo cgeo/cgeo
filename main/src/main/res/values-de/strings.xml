@@ -1461,6 +1461,7 @@
     <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
     <string name="cache_variables">Variablen</string>
+    <string name="cache_variables_chip_completed_variables">Vollständig</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Wegpunkte (%d)</string>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
@@ -1755,6 +1756,7 @@
     <string name="projection_type_offset_hint_latitude">Breitengrad Verschiebung in Mikro-Minuten</string>
     <string name="projection_type_offset_hint_longitude">Längengrad Verschiebung in Mikro-Minuten</string>
     <!-- Variables -->
+    <string name="variables_titletext">Werte und Berechnungen</string>
     <string name="variables_scanlisting">Scanne Listing</string>
     <string name="variables_scanlisting_choosepattern_title">Muster auswählen</string>
     <string name="variables_scanlisting_nopatternfound">Kein Muster gefunden</string>
