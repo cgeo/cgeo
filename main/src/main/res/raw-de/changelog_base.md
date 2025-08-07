@@ -3,26 +3,26 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
 - Neu: Bei Aktivierung des Live-Modus bleiben Wegpunkte des aktuell gesetzten Ziels sichtbar
-- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
-- New: Show generated waypoints on map
+- Neu: Lange Tippen auf die Navigationslinie öffnet das Höhendiagramm (UnifiedMap)
+- Neu: Zeige generierte Wegpunkte auf der Karte
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
 - Neu: Zeitstempel eigener Logs beim Aktualisieren eines Caches beibehalten
 - Neu: Optionaler Mini-Kompass (siehe Einstellungen => Cache-Details => Richtung in Cache-Detailansicht anzeigen)
-- New: Show owners' logs on "friends/own" tab
-- Change: "Friends/own" tab shows log counts for that tab instead of global counters
-- Change: Improved header in variable and waypoint tabs
-- Fix: Two "delete log" items shown
-- Fix: c:geo crashing in cache details when rotating screen
+- Neu: Logs der Besitzer auf der Registerkarte "Freunde/Eigene" anzeigen
+- Änderung: "Freunde/Eigene" Tab zeigt die Anzahl der Logs für diesen Tab anstelle von globalen Zählern an
+- Änderung: Fixierter Header in Variablen und Wegpunkt-Tabs
+- Korrektur: Doppelte "Log löschen"-Einträge anzeigen
+- Korrektur: c:geo stürzt in den Cache-Details ab, wenn der Bildschirm dreht
 
 ### Wherigo Player
-- New: Offline translation for Wherigos
-- New: Improved button handling
+- Neu: Offline-Übersetzung für Wherigos
+- Neu: Verbesserter Umgang mit Schaltflächen
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
 - Änderung: Logoptionen "Benötigt Wartung" oder "Sollte archiviert werden" für eigene Caches ausblenden
-- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
-- Change: Removed references to Twitter
-- New: Delete orphaned trackfiles on clean up and restore backup
+- Korrektur: Wiederherstellung eines Backups kann Dateien von Tracks im internen Speicher und in anschließenden Sicherungen duplizieren
+- Änderung: Verweise auf Twitter entfernt
+- Neu: Löschen verwaister Dateien von Tracks beim Bereinigen und Wiederherstellen der Sicherung
