@@ -490,11 +490,13 @@
     </string-array>
 
     <!-- Geocaching.com => image size -->
+    <string translatable="false" name="pref_value_gc_imagesize_unchanged">UNCHANGED</string>
     <string translatable="false" name="pref_value_gc_imagesize_original">ORIGINAL</string>
     <string translatable="false" name="pref_value_gc_imagesize_large">LARGE</string>
     <string translatable="false" name="pref_value_gc_imagesize_display">DISPLAY</string>
     <string translatable="false" name="pref_value_gc_imagesize_small">SMALL</string>
     <string-array name="pref_gc_imagesize_values">
+        <item>@string/pref_value_gc_imagesize_unchanged</item>
         <item>@string/pref_value_gc_imagesize_original</item>
         <item>@string/pref_value_gc_imagesize_large</item>
         <item>@string/pref_value_gc_imagesize_display</item>
