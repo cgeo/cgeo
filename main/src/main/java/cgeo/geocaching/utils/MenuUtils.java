@@ -79,7 +79,7 @@ public class MenuUtils {
             return;
         }
         final Resources res = getThemedContext().getResources();
-        tintMenuIcons(menu, res.getColor(R.color.colorIconActionBar), res.getColor(R.color.colorIconMenu));
+        tintMenuIcons(menu, res.getColor(R.color.colorTextActionBar), res.getColor(R.color.colorIconMenu));
     }
 
     private static Context getThemedContext() {
