@@ -1464,6 +1464,7 @@
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
     <string name="cache_variables">Variables</string>
+    <string name="cache_variables_chip_completed_variables">Completat</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
     <string name="cache_waypoints_add">Afegeix punt de ruta</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
