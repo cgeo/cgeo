@@ -1,5 +1,5 @@
 ##
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Korrektur: UnifiedMap VTM: Umschalten von 3D-Gebäude funktioniert nicht für kombinierte Karten
 
 ##
 - Korrektur: Absturz in Übersetzungsfunktion
