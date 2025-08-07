@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,33 +15,38 @@
         android:orientation="vertical"
         android:padding="0dp">
 
-        <Button
-            android:id="@+id/add_waypoint"
-            style="@style/button_full"
-            android:layout_margin="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="0dp"
-            android:text="@string/cache_waypoints_add" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/add_waypoint_currentlocation"
-            style="@style/button_full"
-            android:layout_margin="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="0dp"
-            android:text="@string/cache_waypoints_add_currentLocation" />
+            <Button
+                android:id="@+id/add_waypoint"
+                style="@style/button_icon_accent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cache_waypoints_add"
+                app:icon="@drawable/ic_menu_add"
+                tools:context=".CacheDetailActivity$WaypointsViewCreator" />
 
-        <Button
-            android:id="@+id/add_waypoint_fromclipboard"
-            style="@style/button_full"
-            android:layout_margin="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="0dp"
-            android:text="@string/cache_waypoints_add_fromclipboard"
-            android:visibility="gone" />
+            <Button
+                android:id="@+id/add_waypoint_fromclipboard"
+                style="@style/button_icon_accent"
+                android:clickable="true"
+                android:focusable="true"
+                app:icon="@drawable/ic_menu_paste"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/add_waypoint_currentlocation"
+                style="@style/button_icon_accent"
+                android:clickable="true"
+                android:focusable="true"
+                app:icon="@drawable/ic_menu_mylocation" />
+
+
+        </LinearLayout>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_visited_waypoints"
