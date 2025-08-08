@@ -192,7 +192,7 @@ public class GCParserTest {
         // upload coordinates
         editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566")).blockingSubscribe();
         cache.dropSynchronous();
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n");
+        final String page = requestHtmlPage(cache.getGeocode(), null);
         final Geocache cache2 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache2).isNotNull();
         assertThat(cache2.hasUserModifiedCoords()).isTrue();
@@ -200,7 +200,7 @@ public class GCParserTest {
         // delete coordinates
         deleteModifiedCoordinates(cache2).blockingSubscribe();
         cache2.dropSynchronous();
-        final String page2 = requestHtmlPage(cache.getGeocode(), null, "n");
+        final String page2 = requestHtmlPage(cache.getGeocode(), null);
         final Geocache cache3 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache3).isNotNull();
         assertThat(cache3.hasUserModifiedCoords()).isFalse();

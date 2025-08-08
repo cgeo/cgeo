@@ -1061,13 +1061,12 @@ public final class GCParser {
     }
 
     @Nullable
-    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log) {
+    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid) {
         if (StringUtils.isNotBlank(geocode)) {
-            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, null);
+            final Parameters params = new Parameters("decrypt", "y");
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, params);
         } else if (StringUtils.isNotBlank(guid)) {
             final Parameters params = new Parameters("decrypt", "y");
-            params.put("log", log);
-            params.put("numlogs", "0");
             params.put("guid", guid);
             return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
         }
@@ -1119,7 +1118,7 @@ public final class GCParser {
     }
 
     private static String getUserToken(@NonNull final String geocode) {
-        return parseUserToken(requestHtmlPage(geocode, null, "n"));
+        return parseUserToken(requestHtmlPage(geocode, null));
     }
 
     private static String parseUserToken(final String page) {
@@ -1127,7 +1126,7 @@ public final class GCParser {
     }
 
     private static String getRequestVerificationToken(@NonNull final Geocache cache) {
-        return parseRequestVerificationToken(requestHtmlPage(cache.getGeocode(), null, "n"));
+        return parseRequestVerificationToken(requestHtmlPage(cache.getGeocode(), null));
     }
 
     private static String parseRequestVerificationToken(final String page) {
