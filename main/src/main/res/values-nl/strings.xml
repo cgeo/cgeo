@@ -356,9 +356,6 @@
     <string name="translator_model">Vertaal model</string>
     <string name="translator_tooltip">Offline vertalen</string>
     <string name="translator_language_select">Selecteer brontaal</string>
-    <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.</string>
-    <string name="translator_language_unknown">Kan taal niet identificeren</string>
-    <string name="translator_language_detected">Vertalen van \"%s\"</string>
     <string name="translator_target_language">Vertaal naar \"%s\"</string>
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
