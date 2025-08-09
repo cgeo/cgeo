@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clipToPadding="false"
-    android:fastScrollEnabled="false"
-    android:focusable="false"
-    android:footerDividersEnabled="false"
-    android:headerDividersEnabled="false"
-    android:nestedScrollingEnabled="true"
-    android:scrollbarStyle="outsideOverlay"
-    tools:context=".log.LogsViewCreator"
-    tools:listitem="@layout/logs_item">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:padding="0dp">
 
-</ListView>
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter_chips">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_own"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:checked="true"
+            style="@style/chip_choice"
+            android:text="@string/image_category_own" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:checked="true"
+            style="@style/chip_choice"
+            android:text="@string/cache_logs_friends" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:checked="true"
+            style="@style/chip_choice"
+            android:text="@string/cache_owner" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <ListView
+        android:id="@+id/logs_items"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clipToPadding="false"
+        android:fastScrollEnabled="false"
+        android:focusable="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:nestedScrollingEnabled="true"
+        android:scrollbarStyle="outsideOverlay"
+        tools:context=".log.LogsViewCreator"
+        tools:listitem="@layout/logs_item" />
+
+</LinearLayout>

@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.google.android.material.chip.Chip;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -71,8 +72,31 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
-        final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
-        return addOwnOfflineLog(cache, logs);
+        if (allLogs) {
+            return addOwnOfflineLog(cache, cache.getLogs());
+        } else {
+            final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
+            final List<LogEntry> ownLogs = addOwnOfflineLog(cache, logs.stream().filter(LogEntry::isOwn).collect(Collectors.toList()));
+            final List<LogEntry> ownerLogs = logs.stream().filter(log -> log.authorGuid.equals(getCache().getOwnerGuid())).collect(Collectors.toList());
+            final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
+            friendsLogs.removeAll(ownLogs);
+            friendsLogs.removeAll(ownerLogs);
+
+            binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
+
+            if (!binding.chipOwn.isChecked()) {
+                logs.removeAll(ownLogs);
+            }
+            if (!binding.chipFriends.isChecked()) {
+                logs.removeAll(friendsLogs);
+            }
+            if (!binding.chipOwner.isChecked()) {
+                logs.removeAll(ownerLogs);
+            }
+            return logs;
+        }
     }
 
     private List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
@@ -89,17 +113,23 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (binding != null) {
             addLogCountsHeader();
             addEmptyLogsHeader();
+
+            for (int i = 0; i < binding.filterChips.getChildCount(); i++) {
+                ((Chip) binding.filterChips.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    setContent();
+                });
+            }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
         if (countview1 != null) {
-            binding.getRoot().removeHeaderView(countview1);
+            binding.logsItems.removeHeaderView(countview1);
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getCache().getFriendsLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
+        final Map<LogType, Integer> logCounts = getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
@@ -131,21 +161,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }
-                binding.getRoot().addHeaderView(countview1, null, false);
+                binding.logsItems.addHeaderView(countview1, null, false);
             }
         }
     }
 
     private void addEmptyLogsHeader() {
         if (countview2 != null) {
-            binding.getRoot().removeHeaderView(countview2);
+            binding.logsItems.removeHeaderView(countview2);
             countview2 = null;
         }
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
-            countview2.setText(res.getString(R.string.log_empty_logbook));
-            binding.getRoot().addHeaderView(countview2, null, false);
+            countview2.setText(allLogs ? res.getString(R.string.log_empty_logbook) : res.getString(R.string.log_empty_logbook_filtered));
+            binding.logsItems.addHeaderView(countview2, null, false);
         }
     }
 
