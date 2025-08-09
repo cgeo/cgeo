@@ -350,9 +350,6 @@
     <string name="translator_model">Модель перевода</string>
     <string name="translator_tooltip">Офлайн перевод</string>
     <string name="translator_language_select">Выберите исходный язык</string>
-    <string name="translator_language_unsupported">Язык (%s) не поддерживается для перевода.</string>
-    <string name="translator_language_unknown">Невозможно определить язык</string>
-    <string name="translator_language_detected">Перевести с \"%s\"</string>
     <string name="translator_translation_error">Не удалось перевести текст: %s</string>
     <string name="translator_translation_initerror">Не удалось инициализировать переводчик</string>
     <string name="translator_translation_success">Переведено с \"%s\", нажмите кнопку, чтобы восстановить оригинал</string>
