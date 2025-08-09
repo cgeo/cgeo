@@ -88,7 +88,7 @@ public class OfflineTranslateUtils {
 
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
         // identify listing language
-        TranslateAccessor.get().guessLanguage(text,
+        TranslateAccessor.get().guessLanguage(text.replaceAll("[\\s\\ufffc]+", " ").trim(),
             lngCode -> successConsumer.accept(new Language(lngCode)),
                 e -> errorConsumer.accept(e.getMessage()));
     }
