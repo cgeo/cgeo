@@ -45,6 +45,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.BitmapCompat;
 import androidx.core.util.Predicate;
@@ -549,19 +550,21 @@ public final class ImageUtils {
     }
 
     public enum GCImageSize {
-        UNCHANGED("", ""),
-        ORIGINAL("", ""),
-        LARGE("_l", "large/"),
-        DISPLAY("_d", "display/"),
-        SMALL("_sm", "small/"),
-        THUMB("_t", "thumb/");
+        UNCHANGED("", "", R.string.settings_gc_imagesize_entry_unchanged),
+        ORIGINAL("", "", R.string.settings_gc_imagesize_entry_original),
+        LARGE("_l", "large/", R.string.settings_gc_imagesize_entry_large),
+        DISPLAY("_d", "display/", R.string.settings_gc_imagesize_entry_diplay),
+        SMALL("_sm", "small/", R.string.settings_gc_imagesize_entry_small),
+        THUMB("_t", "thumb/", R.string.settings_gc_imagesize_entry_thumb);
 
         private final String suffix;
         private final String pathname;
+        private final int label;
 
-        GCImageSize(final String suffix, final String pathname) {
+        GCImageSize(final String suffix, final String pathname, final @StringRes int label) {
             this.suffix = suffix;
             this.pathname = pathname;
+            this.label = label;
         }
 
         public String getPathname() {
@@ -570,6 +573,10 @@ public final class ImageUtils {
 
         public String getSuffix() {
             return suffix;
+        }
+
+        public int getLabel() {
+            return label;
         }
     }
 
