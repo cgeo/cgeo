@@ -3128,13 +3128,12 @@
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferred Image Size</string>
     <string name="settings_gc_imagesize_summary">Images from Geocaching.com in listing, logs and trackables are available in different sizes. Select the size to be loaded when loading and storing a cache. "Unchanged" will load the version the listing/log author included in the page.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Unchanged</item>
-        <item>Maximum</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_entry_unchanged">Unchanged</string>
+    <string name="settings_gc_imagesize_entry_original">Maximum</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
 
     <!-- db inspection -->
     <string name="view_database">View database</string>
