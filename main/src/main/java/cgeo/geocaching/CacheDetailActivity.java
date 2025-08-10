@@ -2269,7 +2269,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 });
 
             binding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
-                    activity.ensureSaved();
+                activity.ensureSaved();
                 final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
                 final GeoData geoData = LocationDataProvider.getInstance().currentGeo();
                 final String currentAccuracy = Units.getDistanceFromMeters(geoData.getAccuracy());
@@ -2277,6 +2277,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 newWaypoint.setGeocode(cache.getGeocode());
                 if (cache.addOrChangeWaypoint(newWaypoint, true)) {
                     addWaypointAndSort(sortedWaypoints, newWaypoint);
+                    activity.selectedWaypoint = newWaypoint;
                     adapter.notifyDataSetChanged();
                     activity.reinitializePage(Page.WAYPOINTS.id);
                     ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added_current_location, newWaypoint.getName(), currentAccuracy));
@@ -2307,6 +2308,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         if (null != newWaypoint) {
                             CacheDetailActivity.saveAndNotify(getContext(), cache);
                             addWaypointAndSort(sortedWaypoints, newWaypoint);
+                            activity.selectedWaypoint = newWaypoint;
                             adapter.notifyDataSetChanged();
                             activity.reinitializePage(Page.WAYPOINTS.id);
                             if (oldWaypoint.isUserDefined()) {
