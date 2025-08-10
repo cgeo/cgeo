@@ -2284,7 +2284,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             });
 
+            final boolean hasVisitedWaypoints = null != cache.getFirstMatchingWaypoint(Waypoint::isVisited);
             binding.chipVisitedWaypoints.setChecked(!Settings.getHideVisitedWaypoints());
+            binding.chipVisitedWaypoints.setVisibility(hasVisitedWaypoints ? View.VISIBLE : View.GONE);
             binding.chipVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 Settings.setHideVisitedWaypoints(!isChecked);
 
