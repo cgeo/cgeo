@@ -41,7 +41,6 @@ public class OfflineTranslateUtils {
         // utility class
     }
 
-    public static final String LANGUAGE_UNKNOWN = "und";
     public static final String LANGUAGE_UNDELETABLE = "en";
     public static final String LANGUAGE_INVALID = "";
     public static final String LANGUAGE_AUTOMATIC = "default";
@@ -89,7 +88,7 @@ public class OfflineTranslateUtils {
 
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
         // identify listing language
-        TranslateAccessor.get().guessLanguage(text,
+        TranslateAccessor.get().guessLanguage(text.replaceAll("[\\s\\ufffc]+", " ").trim(),
             lngCode -> successConsumer.accept(new Language(lngCode)),
                 e -> errorConsumer.accept(e.getMessage()));
     }
@@ -219,9 +218,12 @@ public class OfflineTranslateUtils {
                 showTranslationBox = false;
             } else {
                 showTranslationBox = true;
-                if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
+                if (lng.getCode() == null) { //no language detected
                     button.setEnabled(false);
                     note.setText(R.string.translator_language_unknown);
+                } else if (!TranslationModelManager.get().getSupportedLanguages().contains(lng.getCode())) {
+                    button.setEnabled(true);
+                    note.setText(cda.getResources().getString(R.string.translator_language_unsupported, lng.toString()));
                 } else {
                     button.setEnabled(true);
                     note.setText(cda.getResources().getString(R.string.translator_language_detected, lng.toString()));
