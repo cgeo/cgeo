@@ -315,6 +315,8 @@
     <string name="warn_notloggedin_long">(Noch) nicht eingeloggt. Die Live-Karte wird nur lokal gespeicherte Caches zeigen und Onlinefunktionen werden nicht verfügbar sein.\n\nEntweder gibt es keine Netzwerkverbindung, ein Server-Problem oder du musst deine Geocaching-Dienste (neu) konfigurieren.\n\nMöchtest du die Dienste jetzt konfigurieren?</string>
     <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket-Queries.</string>
     <string name="err_read_bookmark_list">Fehler beim Lesen der Lesezeichenliste.</string>
+    <string name="err_bookmark_list_overfull">Zu viele Caches</string>
+    <string name="err_bookmark_list_overfull_description">In Lesezeichenlisten können nur bis zu 1000 Caches gespeichert werden, du versuchst mehr Caches der Liste hinzuzufügen.\n\nMöchtest du fortfahren und nur so viele Caches hinzufügen, wie die Liste halten kann?</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -364,9 +366,6 @@
     <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
     <string name="translator_language_target_select">Zielsprache wählen</string>
-    <string name="translator_language_unsupported">Sprache (%s) wird nicht für die Übersetzung unterstützt.</string>
-    <string name="translator_language_unknown">Ausgangssprache nicht erkannt</string>
-    <string name="translator_language_detected">Übersetze von \"%s\"</string>
     <string name="translator_target_language">Übersetze nach \"%s\"</string>
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
@@ -2432,6 +2431,7 @@
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
     <string name="map_disable_autotarget_individual_route">\"Routenstart als Ziel festlegen\" deaktiviert</string>
+    <string name="map_manual_target_route_name">Aktuelle Navigation</string>
     <string name="map_clear_manual_targets">Routing-Ziel löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
