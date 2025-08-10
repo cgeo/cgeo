@@ -367,9 +367,9 @@
     <string name="translator_tooltip">Traducció fora de línia</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
     <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
-    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible per a la traducció.</string>
-    <string name="translator_language_unknown">No es pot identificar l\'idioma</string>
-    <string name="translator_language_detected">Tradueix de \"%s\"</string>
+    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
+    <string name="translator_language_unknown">No s\'ha pogut identificar l\'idioma. Toca per seleccionar l\'idioma d\'origen.</string>
+    <string name="translator_language_detected">Tradueix de \"%s\". Toca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_target_language">Tradueix a \"%s\"</string>
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
