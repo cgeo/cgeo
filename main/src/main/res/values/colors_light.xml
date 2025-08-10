@@ -9,15 +9,15 @@
     <color name="archived_cache_color">#FFAC0B0B</color>
 
     <color name="colorTextHeadline">#88000000</color>
-    <color name="colorTextHintActionBar">#FF888888</color>
-    <color name="colorTextActionBar">#FF666666</color>
-    <color name="colorIconMenu">#FF1B1B1B</color>
+    <color name="colorTextHintActionBar">@color/colorTextHint</color>
+    <color name="colorTextActionBar">#FF3D3D3D</color>
+    <color name="colorIconMenu">#FF3D3D3D</color>
 
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
     <color name="colorBackgroundSelected">#FFCCCCCC</color>
-    <color name="colorBackgroundActionBar">#fff6eeeb</color>
+    <color name="colorBackgroundActionBar">#FFDEDEDE</color>
 
     <color name="colorSeparator">#33000000</color>
 
