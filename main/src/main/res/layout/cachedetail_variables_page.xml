@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/variables_titletext"
+        android:text="@string/variables_titletext_short"
+        android:tooltipText="@string/variables_titletext"
         android:textSize="@dimen/textSize_headingSecondary" />
 
     <LinearLayout
