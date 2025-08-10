@@ -4,7 +4,7 @@
 
     <stroke
         android:width="2px"
-        android:color="#99FFFFFF" />
+        android:color="@color/colorTextActionBar" />
 
     <solid android:color="@color/colorBackgroundActionBar" />
 
