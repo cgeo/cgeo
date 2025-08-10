@@ -2270,16 +2270,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             binding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
                     activity.ensureSaved();
-                    final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                    newWaypoint.setCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
-                    newWaypoint.setGeocode(cache.getGeocode());
-                    if (cache.addOrChangeWaypoint(newWaypoint, true)) {
-                        addWaypointAndSort(sortedWaypoints, newWaypoint);
-                        adapter.notifyDataSetChanged();
-                        activity.reinitializePage(Page.WAYPOINTS.id);
-                        ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added));
-                    }
-                });
+                final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                final GeoData geoData = LocationDataProvider.getInstance().currentGeo();
+                final String currentAccuracy = Units.getDistanceFromMeters(geoData.getAccuracy());
+                newWaypoint.setCoords(geoData.getCoords());
+                newWaypoint.setGeocode(cache.getGeocode());
+                if (cache.addOrChangeWaypoint(newWaypoint, true)) {
+                    addWaypointAndSort(sortedWaypoints, newWaypoint);
+                    adapter.notifyDataSetChanged();
+                    activity.reinitializePage(Page.WAYPOINTS.id);
+                    ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added_current_location, newWaypoint.getName(), currentAccuracy));
+                }
+            });
 
             binding.chipVisitedWaypoints.setChecked(!Settings.getHideVisitedWaypoints());
             binding.chipVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
