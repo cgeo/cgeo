@@ -1373,6 +1373,7 @@
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
+    <string name="gui_test_title">GUI Test Screen</string>
 
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>

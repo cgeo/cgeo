@@ -615,7 +615,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely, checkedCount);
 
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
+            //MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, true, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_bookmarklist, R.string.caches_upload_bookmarklist_selected, R.string.caches_upload_bookmarklist_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);

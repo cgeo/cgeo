@@ -13,9 +13,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ScalableDrawable;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Func1;
-import cgeo.geocaching.utils.functions.Func2;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -70,13 +67,14 @@ import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
-import androidx.core.util.Consumer;
-import androidx.core.util.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec;
@@ -182,7 +180,7 @@ public class ViewUtils {
      *                          May return null for some columns, in which case those are empty
      * @return new ViewGroup holding the column layout. If "root" was not null, then "root" is returned.
      */
-    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Func1<Integer, View> columnViewCreator) {
+    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Function<Integer, View> columnViewCreator) {
 
         final List<Float> columnWidths = new ArrayList<>();
         for (int c = 0; c < columnCount * 2 - 1; c++) {
@@ -195,13 +193,13 @@ public class ViewUtils {
                 return ViewUtils.createVerticalSeparator(ctx, !withSeparator);
             }
 
-            return columnViewCreator.call(i / 2);
+            return columnViewCreator.apply(i / 2);
         }, (i, f) -> f);
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, String> itemTextMapper) {
+    public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, String> itemTextMapper) {
         return createHorizontallyDistributedViews(ctx, root, items, (idx, item) -> {
-            final String itemText = item == null ? null : itemTextMapper.call(idx, item);
+            final String itemText = item == null ? null : itemTextMapper.apply(idx, item);
             if (itemText != null) {
                 final TextView tv = new TextView(ctx);
                 tv.setText(itemText);
@@ -216,11 +214,11 @@ public class ViewUtils {
         });
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator) {
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator) {
         return createHorizontallyDistributedViews(ctx, root, items, viewCreator, null);
     }
 
-    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final Func2<Integer, T, View> viewCreator, final Func2<Integer, T, Float> weightCreator) {
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator, final BiFunction<Integer, T, Float> weightCreator) {
 
         final LinearLayout viewGroup = root == null ? new LinearLayout(ctx) : root;
         viewGroup.setOrientation(LinearLayout.HORIZONTAL);
@@ -228,9 +226,9 @@ public class ViewUtils {
         int idx = 0;
         for (T item : items) {
             final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.weight = weightCreator == null ? 1 : weightCreator.call(idx, item);
+            lp.weight = weightCreator == null ? 1 : weightCreator.apply(idx, item);
 
-            View itemView = viewCreator.call(idx, item);
+            View itemView = viewCreator.apply(idx, item);
             if (itemView == null) {
                 itemView = new View(ctx);
             }
@@ -726,9 +724,9 @@ public class ViewUtils {
     }
 
     /** null-safe call to view */
-    public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
+    public static void applyToView(@Nullable final View view, final Consumer<View> applyMethod) {
         if (view != null) {
-            applyMethod.call(view);
+            applyMethod.accept(view);
         }
     }
 
