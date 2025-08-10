@@ -201,7 +201,7 @@ public class TranslatorUtils {
     public static Disposable initializeView(final String id, final Context context, final Translator translator,
                                             final Button button, final View box, final TextView status) {
 
-        final androidx.core.util.Consumer<Boolean> circularSetter = ViewUtils.createCircularProgressSetter(button);
+        final Consumer<Boolean> circularSetter = ViewUtils.createCircularProgressSetter(button);
 
         //changes on state
         final Disposable disposable = translator.addStateListener((s, e) -> {
