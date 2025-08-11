@@ -1741,6 +1741,7 @@
     <string name="projection_type_offset_hint_latitude">Смещение широты в микроминутах</string>
     <string name="projection_type_offset_hint_longitude">Смещение долготы в микроминутах</string>
     <!-- Variables -->
+    <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_scanlisting">Сканирование</string>
     <string name="variables_scanlisting_choosepattern_title">Выберите найденный шаблон</string>
     <string name="variables_scanlisting_nopatternfound">Шаблон не найден</string>
