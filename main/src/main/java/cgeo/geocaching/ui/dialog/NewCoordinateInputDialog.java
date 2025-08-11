@@ -570,8 +570,8 @@ public class NewCoordinateInputDialog {
                 break;
             case Plain:
             default:
-                lat = bLatitude.getText().toString();
-                lon = bLongitude.getText().toString();
+                lat = plainLatitude.getText().toString();
+                lon = plainLongitude.getText().toString();
                 break;
         }
         return new Pair<>(lat, lon);
