@@ -1614,6 +1614,7 @@
     <string name="projection_type_offset_hint_latitude">Décalage de Latitude en Micro-Minutes</string>
     <string name="projection_type_offset_hint_longitude">Décalage de longitude en Micro-Minutes</string>
     <!-- Variables -->
+    <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_scanlisting">Scanner la liste</string>
     <string name="variables_scanlisting_choosepattern_title">Choisir le modèle trouvé</string>
     <string name="variables_scanlisting_nopatternfound">Aucun motif trouvé</string>
