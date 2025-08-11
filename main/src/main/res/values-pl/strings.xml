@@ -1788,7 +1788,8 @@
     <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w mikrominutach</string>
     <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
-    <string name="variables_titletext">Wartości i obliczenia</string>
+    <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
+    <string name="variables_titletext_short">Wartości i obliczenia</string>
     <string name="variables_scanlisting">Skanuj wpis</string>
     <string name="variables_scanlisting_choosepattern_title">Wybierz znaleziony wzór</string>
     <string name="variables_scanlisting_nopatternfound">Nie znaleziono wzoru</string>
