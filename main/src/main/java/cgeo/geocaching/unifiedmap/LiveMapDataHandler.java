@@ -91,7 +91,10 @@ public class LiveMapDataHandler {
                     //get a bit more than just the current viewport. This prevents immediate necessity for a db call on next (small) map move
                     final Viewport refreshedViewport = params.viewport.resize(1.5);
                     final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
-                    model.caches.write(caches -> caches.addAll(dbCaches));
+                    model.caches.write(caches -> {
+                        caches.clear();
+                        caches.addAll(dbCaches);
+                    });
                     lastViewport = refreshedViewport;
                 }
                 //live refresh
