@@ -1261,6 +1261,7 @@
     <!-- Projection -->
     <string name="projection_type_bearing_hint_angle">Retning i °</string>
     <!-- Variables -->
+    <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
     <string name="variables_scanlisting_choosepattern_title">Velg funnet mønster</string>
     <string name="variables_scanlisting_nopatternfound">Fant ikke noe mønster</string>
