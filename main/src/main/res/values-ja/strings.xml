@@ -1272,6 +1272,7 @@
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <!-- Projection -->
     <!-- Variables -->
+    <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
     <string name="variables_scanlisting">スキャン</string>
     <string name="variables_scanlisting_choosepattern_title">パターンを選択</string>
     <string name="variables_scanlisting_nopatternfound">パターンが見つかりません</string>
