@@ -1759,7 +1759,7 @@
     <string name="projection_type_offset_hint_latitude">Desplaçament de latitud en microminuts</string>
     <string name="projection_type_offset_hint_longitude">Desplaçament de longitud en microminuts</string>
     <!-- Variables -->
-    <string name="variables_titletext">Valors i càlculs</string>
+    <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
     <string name="variables_scanlisting_choosepattern_title">Trieu el patró de trobat</string>
     <string name="variables_scanlisting_nopatternfound">No s\'ha trobat cap patró</string>
