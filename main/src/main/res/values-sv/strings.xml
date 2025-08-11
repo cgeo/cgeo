@@ -1748,6 +1748,7 @@
     <string name="projection_type_offset_hint_latitude">Latitud-förskjutning i mikro-minuter</string>
     <string name="projection_type_offset_hint_longitude">Longitud-förskjutning i mikro-minuter</string>
     <!-- Variables -->
+    <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_scanlisting">Skanna listning</string>
     <string name="variables_scanlisting_choosepattern_title">Välj funnet-mönster</string>
     <string name="variables_scanlisting_nopatternfound">Inget mönster hittades</string>
