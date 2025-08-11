@@ -1755,7 +1755,7 @@
     <string name="projection_type_offset_hint_latitude">Breedtegraad Offset in Micro-minuten</string>
     <string name="projection_type_offset_hint_longitude">Lengtegraad Offset in Micro-minuten</string>
     <!-- Variables -->
-    <string name="variables_titletext">Waardes en berekeningen</string>
+    <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
     <string name="variables_scanlisting">Lijst scannen</string>
     <string name="variables_scanlisting_choosepattern_title">Gevonden patroon kiezen</string>
     <string name="variables_scanlisting_nopatternfound">Geen patroon gevonden</string>
