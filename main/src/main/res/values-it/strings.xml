@@ -346,6 +346,7 @@
     <string name="translator_preference_nottranslate_lng">Lingue ignorate</string>
     <string name="translator_preference_nottranslate_lng_summary">Lingue di origine per le quali non offrire traduzione</string>
     <string name="translator_preference_disable">&lt;Disattva traduzione&gt;</string>
+    <string name="translator_preference_application_language">&lt;Usa app di traduzione&gt;</string>
     <string name="translator_model_download_select">Scarica lingua di traduzione offline</string>
     <string name="translator_model_download_confirm_title">Conferma download della lingua</string>
     <string name="translator_model_download_confirm_txt">Il modello di traduzione per la lingua %s deve essere scaricato. La dimensione del modello è di circa 20-40 MB.</string>
@@ -355,6 +356,7 @@
     <string name="translator_model">Modello di traduzione</string>
     <string name="translator_tooltip">Traduttore offline</string>
     <string name="translator_language_select">Seleziona la lingua di origine</string>
+    <string name="translator_target_language">Traduci in %s</string>
     <string name="translator_translation_error">Traduzione del testo non riuscita: %s</string>
     <string name="translator_translation_initerror">Impossibile avviare il traduttore</string>
     <string name="translator_translation_success">Tradotto da \"%s\", tocca il pulsante per ripristinare il testo originale</string>
@@ -451,12 +453,16 @@
     <string name="caches_remove_selected">Rimuovi selezionati dalla lista</string>
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
+    <string name="caches_remove_from_other_lists_selected">Rimuovi selezionati da altre liste</string>
+    <string name="caches_remove_from_other_lists_all">Rimuovi tutti dagli altri elenchi</string>
     <string name="caches_append_to_route_selected">Aggiungi quanto selezionato al percorso individuale</string>
     <string name="caches_append_to_route_all">Aggiungi tutto al percorso individuale</string>
     <string name="caches_appended_to_route">Cache allegate al percorso</string>
     <string name="waypoints_appended_to_route">Waypoint aggiunti al percorso</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
+    <string name="caches_upload_bookmarklist_all">Aggiunge tutti alla lista dei segnalibri</string>
+    <string name="caches_upload_bookmarklist_selected">Aggiungi selezionato alla lista dei segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
@@ -478,7 +484,11 @@
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
     <string name="caches_overwrite_offline_log">Sovrascrivi log offline</string>
     <string name="caches_overwrite_offline_log_question">Il cache ha già un log offline di tipo \"%1$s\" con un testo. Vuoi sovrascrivere questo log?</string>
+    <string name="caches_show_attributes_all">Mostra la panoramica degli attributi per tutti i cache</string>
+    <string name="caches_show_attributes_selected">Mostra la panoramica degli attributi per i cache selezionati</string>
     <string name="caches_set_cache_icon">Imposta icona cache</string>
+    <string name="caches_set_cache_icon_all">Imposta l\'icona per tutti i cache</string>
+    <string name="caches_set_cache_icon_selected">Imposta l\'icona per i cache selezionati</string>
     <string name="caches_reset_cache_icons_title">Reimposta icona cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
@@ -918,6 +928,8 @@
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_select_language">Seleziona lingua</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
+    <string name="init_use_application_language">Usa traduttore</string>
+    <string name="init_translation_disabled">Traduzione disabilitata</string>
     <string name="init_date_format">Formato data</string>
     <string name="init_date_format_description">Formato da usare per date brevi, ad esempio nella visualizzazione log</string>
     <string name="system_default">Predefinito di Sistema</string>
@@ -1109,6 +1121,8 @@
     <string name="init_accuracycirclecolor">Colore del cerchio di precisione</string>
     <string name="init_accuracycirclecolor_summary">Seleziona il colore e l\'opacità per la linea del cerchio di precisione. Il cerchio di precisione è usato come rappresentazione visiva per l\'accuratezza del segnale di posizione.</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
+    <string name="init_include_logs">Includi Log</string>
+    <string name="init_include_travelbugs">Includi Travel Bug</string>
     <string name="init_trackautovisit">Visita TB</string>
     <string name="init_summary_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
     <string name="init_sigautoinsert">Inserisce automaticamente</string>
@@ -1264,6 +1278,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mappe Offline</string>
     <string name="persistablefolder_offline_maps_themes">Temi Mappa</string>
+    <string name="persistablefolder_backgroundmaps">Mappe Di Sfondo</string>
     <string name="persistablefolder_offline_maps_shading">File di ombreggiatura della Mappa</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
@@ -1405,6 +1420,7 @@
     <string name="cache_description">Descrizione</string>
     <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
     <string name="cache_description_rendering">Rendering della Descrizione, attendere…</string>
+    <string name="cache_description_translating_and_rendering">Traduzione e rendering della descrizione in corso, attendere…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Attenzione: la descrizione è molto grande (%1$d caratteri). Solo i primi %2$d%% caratteri saranno visualizzati.</string>
     <string name="cache_description_render_fully">Rendering della descrizione completato</string>
     <string name="cache_area_description">Descrizione area</string>
@@ -1575,6 +1591,7 @@
     <string name="cache_multiple_wherigo_cartridges_message">Consultare la descrizione del cache per ulteriori informazioni sulle cartucce.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - non scaricato</string>
     <string name="cache_wherigo_start">Scarica e riproduci questo Wherigo usando il lettore interno di c:geo</string>
+    <string name="cache_wherigo_credentials">Per giocare a questo Wherigo usando il motore interno di c:geo è prima è necessario autorizzare il servizio nei confronti di geocaching.com. Tocca il pulsante a destra per andare alla configurazione.</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
     <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
@@ -1704,6 +1721,7 @@
     <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
+    <string name="copied_to_clipboard">Copiato negli appunti</string>
     <!-- Projection -->
     <string name="projection_type_none">Nessuna proiezione</string>
     <string name="projection_type_bearing">Direzione</string>
@@ -1715,6 +1733,7 @@
     <string name="projection_type_offset_hint_latitude">Latitudine Offset in Micro-Minuti</string>
     <string name="projection_type_offset_hint_longitude">Longitudine Offset in Micro-Minuti</string>
     <!-- Variables -->
+    <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
     <string name="variables_scanlisting_choosepattern_title">Seleziona il motivo trovato</string>
     <string name="variables_scanlisting_nopatternfound">Pattern non trovato</string>
@@ -1738,6 +1757,7 @@
     <string name="calccoord_generate_title">Genera Waypoint</string>
     <string name="calccoord_generate_showonmap">Mostra sulla Mappa</string>
     <string name="calccoord_generate_waypointnameprefix">Generato</string>
+    <string name="calccoord_generate_error_novarwithrange">Nessuna variabile valida con intervalli selezionati (ad esempio: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nessuna combinazione restituisce coordinate valide</string>
     <string name="calccoord_generate_error_nogeopointselected">Nessuna coordinata selezionata</string>
     <string name="calccoord_migrate_title">Migrazione Waypoint</string>
@@ -1954,6 +1974,7 @@
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
     <string name="export_failed">Esportazione fallita</string>
+    <string name="export_fieldnotes">Esporta note personali</string>
     <string name="export_fieldnotes_info">Field Note saranno esportate in /sdcard/field-notes con la data e ora correnti nel nome file.</string>
     <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
     <string name="export_fieldnotes_uploading">Caricamento…</string>
@@ -1963,6 +1984,7 @@
     <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
     <string name="export_confirm_title">Esportazione di %1$s</string>
     <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
+    <string name="export_persnotes">Carica note personali</string>
     <string name="export_persnotes_uploading">Carico la nota personale %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">%1$d nota caricata con successo</item>
@@ -2479,6 +2501,7 @@
     <string name="receivedownload_integritycheck_failed">Controllo integrità non riuscito</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
+    <string name="downloadbackground_title">Scarica mappa di sfondo</string>
     <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
@@ -2605,6 +2628,7 @@
     <string name="wherigo_controls_stopgame_hint">Ferma una partita in corso</string>
     <string name="wherigo_controls_mapzones_hint">Mostra sulla mappa le zone di una partita in corso</string>
     <string name="wherigo_controls_downloadcartridge_hint">Scarica una cartuccia (necessario cguid)</string>
+    <string name="wherigo_controls_reportproblem_hint">Mostra l\'ultimo problema Wherigo</string>
     <string name="wherigo_controls_cache_context">Contesto Cache</string>
     <string name="wherigo_controls_cache_link">Vai ai dettagli del cache</string>
     <string name="wherigo_sound_title">Controlli del suono</string>
@@ -2627,6 +2651,8 @@
     <string name="wherigo_author">Autore</string>
     <string name="wherigo_zone_inside">all\'interno</string>
     <string name="wherigo_zone_near">vicino</string>
+    <string name="wherigo_zone_navigate_compass">Bussola al centro</string>
+    <string name="wherigo_zone_copy_coordinates">Copia le coordinate centrali</string>
     <string name="wherigo_choose_cartridge">Scegli Cartuccia</string>
     <string name="wherigo_choose_new_loadgame">Inizia una nuova partita o scegli una partita da caricare</string>
     <string name="wherigo_choose_savegame_slot">Scegli uno slot di salvataggio</string>
@@ -2645,8 +2671,10 @@
     <string name="wherigo_download_progress_login">Accesso in corso…</string>
     <string name="wherigo_download_progress_started">Scaricamento avviato</string>
     <string name="wherigo_download_progress_download_status">Scaricato %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Effettua prima il login su www.wherigo.com e accetta i termini e le condizioni</string>
     <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
     <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
+    <string name="wherigo_error_game_error">Errore segnalato dal gestore di Wherigo:\n\n```\n%1$s\n```\nPuoi contattare l\'autore della cartuccia [qui](%2$s)</string>
     <string name="wherigo_error_email">Segnalazione problema Wherigo\n\nErrore: %1$s\n\n info Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
@@ -2684,6 +2712,7 @@
     <string name="close">Chiudi</string>
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
+    <string name="copy" tools:ignore="PrivateResource">Copia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>
