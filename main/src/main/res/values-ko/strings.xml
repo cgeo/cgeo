@@ -1586,6 +1586,7 @@
     <string name="projection_type_offset_hint_latitude">마이크로분 단위의 위도 오프셋</string>
     <string name="projection_type_offset_hint_longitude">마이크로분 단위의 경도 오프셋</string>
     <!-- Variables -->
+    <string name="variables_titletext">이 페이지를 사용하여 값을 기록하고 이 캐시에 필요한 계산을 수행합니다.</string>
     <string name="variables_scanlisting">지오캐시 스캔</string>
     <string name="variables_scanlisting_choosepattern_title">찾은 패턴 선택</string>
     <string name="variables_scanlisting_nopatternfound">패턴을 찾을 수 없습니다</string>
