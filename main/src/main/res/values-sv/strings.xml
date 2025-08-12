@@ -2709,7 +2709,7 @@
     <string name="settings_gc_imagesize_title">Önskad bildstorlek</string>
     <string name="settings_gc_imagesize_summary">Bilder från Geocaching.com i listningar, loggar och spårbara objekt finns i olika storlekar. Välj den storlek som ska laddas när du laddar och lagrar en cache.</string>
     <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
+        <item>Ursprunglig</item>
         <item>640px</item>
         <item>320px</item>
         <item>120px</item>
