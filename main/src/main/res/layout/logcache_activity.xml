@@ -137,7 +137,7 @@
                         android:id="@+id/favorite_check"
                         style="@style/button_icon"
                         android:layout_alignParentLeft="true"
-                        app:icon="@drawable/ic_menu_favorite" />
+                        app:icon="@drawable/ic_menu_favorite_toggle" />
 
                     <TextView
                         android:id="@+id/favorite_text"
