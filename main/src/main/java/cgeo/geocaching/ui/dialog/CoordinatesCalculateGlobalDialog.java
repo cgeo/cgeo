@@ -91,8 +91,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
-        if (activity instanceof NewCoordinateInputDialog.CoordinateUpdate) {
-            ((NewCoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
+        if (activity instanceof CoordinateInputDialog.CoordinateUpdate) {
+            ((CoordinateInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
 
         //save changes to the var list
@@ -197,7 +197,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.convertToPlain.setOnClickListener(v -> {
             // When the callback is hit it will clear the calculator state associated with the waypoint
-            NewCoordinateInputDialog.show(this.requireActivity(), callback, createFromDialog().getGeopoint(), true);
+            CoordinateInputDialog.show(this.requireActivity(), callback, createFromDialog().getGeopoint(), true);
             dismiss();
         });
 
