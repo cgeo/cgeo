@@ -2833,13 +2833,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Upřednostňovaná velikost obrázku</string>
-    <string name="settings_gc_imagesize_summary">Obrázky z webu Geocaching.com, které jsou v listingu, lozích a trasovatelných předmětech jsou k dispozici v různých velikostech. Při načítání a ukládání kešky vyberte velikost, která se má načíst.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Původní</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Zobrazit databázi</string>
     <string name="dbi_select_title">(Vyber tabulku)</string>
