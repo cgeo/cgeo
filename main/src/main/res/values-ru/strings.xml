@@ -2775,13 +2775,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Предпочитаемый размер изображения</string>
-    <string name="settings_gc_imagesize_summary">Изображения из Geocaching.com в списках, отчетах и трекаблах доступны в разных размерах. Выберите размер, в котором будут доставляться изображения при загрузке и сохранении тайника.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Оригинал</item>
-        <item>640 пикселей</item>
-        <item>320 пикселей</item>
-        <item>120 пикселей</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Просмотр БД</string>
     <string name="dbi_select_title">(Выберите таблицу)</string>
