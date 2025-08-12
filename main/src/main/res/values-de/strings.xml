@@ -2775,13 +2775,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Bevorzugte Bildgröße</string>
-    <string name="settings_gc_imagesize_summary">Bilder von Geocaching.com in Listing, Logs und Trackables sind in verschiedenen Größen verfügbar. Wähle die Größe, die beim Laden und Speichern eines Caches geladen werden soll.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
-        <item>640 px</item>
-        <item>320 px</item>
-        <item>120 px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Datenbank anzeigen</string>
     <string name="dbi_select_title">(Tabelle auswählen)</string>
