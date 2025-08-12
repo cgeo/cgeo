@@ -2826,7 +2826,7 @@
     <string name="settings_gc_imagesize_title">Preferowany rozmiar obrazu</string>
     <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisach skrytek, dziennikach znalezień oraz i dziennikach przedmiotów podróżnych są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas ładowania i przechowywania skrytek.</string>
     <string-array name="settings_gc_imagesize_entries">
-        <item>Oryginalny</item>
+        <item>Oryginalne</item>
         <item>640px</item>
         <item>320px</item>
         <item>120px</item>
