@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Comentari de l\'equip OC</string>
     <string name="log_your_saved_log">El registre que heu desat</string>
     <string name="log_empty_logbook">El llibre de registres del catxé està buit.</string>
+    <string name="log_empty_logbook_filtered">Els filtres seleccionats amaguen tots els registres. Seleccioneu com a mínim una opció.</string>
     <string name="log_image_selectfromstorage_tooltip">Seleccioneu imatges de l\'emmagatzematge</string>
     <string name="log_image_camera_tooltip">Feu una foto amb la càmera</string>
     <string name="log_image_selectfromown_tooltip">Seleccioneu imatges de les pròpies imatges</string>
@@ -262,6 +263,7 @@
     <string name="err_detail_still_working">Encara hi ha una altra tasca en execució.</string>
     <string name="err_detail_premium_log_found">Aquesta catxé només està disponible per a membres premium de geocaching.com. Per tant, la seva informació no es pot mostrar. \n\n Tanmateix, si ja heu trobat aquest catxé, podeu registrar-ho aquí.</string>
     <string name="err_watchlist_failed">S\'ha produït un error canviant la llista de seguiment.</string>
+    <string name="err_watchlist_failed_geocodes">No s\'ha pogut canviar la llista de seguiment per als geocodis: %s</string>
     <string name="err_application_no">El c:geo no troba cap aplicació adequada.</string>
     <string name="err_auth_initialize">El c:geo no ha pogut iniciar el procés d\'autorització.</string>
     <string name="err_auth_process">El procés d\'autorització ha fallat.</string>
@@ -480,6 +482,11 @@
     <string name="caches_upload_bookmarklist">Afegeix a la llista de marcadors</string>
     <string name="caches_upload_bookmarklist_all">Afegeix-ho tot a la llista d\'adreces d\'interès</string>
     <string name="caches_upload_bookmarklist_selected">Afegeix els seleccionats a la llista d\'adreces d\'interès</string>
+    <string name="caches_watch_all">Afegeix-ho tot a la llista de seguiment</string>
+    <string name="caches_unwatch_all">Elimina-ho tot de la llista de seguiment</string>
+    <string name="caches_watch_selected">Afegeix la selecció a la llista de seguiment</string>
+    <string name="caches_unwatch_selected">Elimina la selecció de la llista de seguiment</string>
+    <string name="watchlist_background_started">L\'actualització de la llista de seguiment s\'ha iniciat en segon pla</string>
     <string name="caches_upload_modifiedcoords">Coordenades modificades</string>
     <string name="caches_upload_modifiedcoords_warning">Vols modificar les coordenades de tots els catxés seleccionats i sobreescriure les existents al servidor? No podràs desfer-ho.</string>
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
@@ -1243,6 +1250,7 @@
     <string name="category_unifiedMap">Mapa unificat</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
+    <string name="gui_test_title">Pantalla de prova de la GUI</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificació de proximitat</string>
     <string name="init_proximityNotificationGeneral">Notificació general de proximitat</string>
@@ -1475,6 +1483,7 @@
     <string name="cache_logs">Llibre de registre</string>
     <string name="cache_latest_logs">Registres recents</string>
     <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
+    <string name="cache_logs_friends">Amics</string>
     <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
     <string name="cache_dialog_loading_details_status_loadpage">S\'està carregant la pàgina</string>
     <string name="cache_dialog_loading_details_status_details">S\'està processant els detalls</string>
@@ -1721,6 +1730,7 @@
     <string name="waypoint_edit_title">Edita fita</string>
     <string name="waypoint_add_title">Afegeix fita</string>
     <string name="waypoint_added">Punt de ruta afegit</string>
+    <string name="waypoint_added_current_location">Punt de referència (%s) afegit (±%s)</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota de l\'usuari</string>
     <string name="waypoint_visited">Visitat</string>
@@ -1760,6 +1770,7 @@
     <string name="projection_type_offset_hint_longitude">Desplaçament de longitud en microminuts</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
+    <string name="variables_titletext_short">Valors i càlculs</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
     <string name="variables_scanlisting_choosepattern_title">Trieu el patró de trobat</string>
     <string name="variables_scanlisting_nopatternfound">No s\'ha trobat cap patró</string>
@@ -2779,13 +2790,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Mida d\'imatge preferida</string>
-    <string name="settings_gc_imagesize_summary">Les imatges de Geocaching.com a la llista, registres i rastrejables estan disponibles en diferents mides. Seleccioneu la mida que voleu carregar quan carregueu i emmagatzemeu un catxé.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_summary">Les imatges de Geocaching.com a les llistes, registres i elements de seguiment estan disponibles en diferents mides. Seleccioneu la mida que es carregarà en carregar i emmagatzemar un catxé. \"Sense canvis\" carregarà la versió que l\'autor de la llista/registre ha inclòs a la pàgina.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Sense canvis</string>
+    <string name="settings_gc_imagesize_entry_original">Màxim</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
     <string name="dbi_select_title">(Selecciona la taula)</string>
