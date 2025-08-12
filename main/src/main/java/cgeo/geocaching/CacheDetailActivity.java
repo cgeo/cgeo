@@ -84,7 +84,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -866,7 +866,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void setCoordinates(final Activity activity) {
         ensureSaved();
-        NewCoordinateInputDialog.show(activity, this::onCoordinatesUpdated, cache.getCoords());
+        CoordinateInputDialog.show(activity, this::onCoordinatesUpdated, cache.getCoords());
     }
 
     public void onCoordinatesUpdated(final Geopoint input) {

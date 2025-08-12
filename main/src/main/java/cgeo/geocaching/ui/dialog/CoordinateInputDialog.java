@@ -2,7 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.databinding.NewCoordinateInputDialogBinding;
+import cgeo.geocaching.databinding.CoordinateInputDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -47,15 +47,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
-// A recreation of the existing coordinate dialog
-public class NewCoordinateInputDialog {
+// A recreation of the original coordinate dialog as an Alert based dialog
+public class CoordinateInputDialog {
 
     private final Context context;
     private final DialogCallback callback;
     Spinner spinner;
     private Settings.CoordInputFormatEnum currentFormat = null;
 
-    private NewCoordinateInputDialogBinding binding;
+    private CoordinateInputDialogBinding binding;
 
     private TextInputLayout eLatFrame, eLonFrame;
     private EditText plainLatitude, plainLongitude;
@@ -78,7 +78,7 @@ public class NewCoordinateInputDialog {
         }
     };
 
-    private NewCoordinateInputDialog(final Context context, final DialogCallback callback, final CoordinateDialogDisplayModeEnum showWaypointButtons) {
+    private CoordinateInputDialog(final Context context, final DialogCallback callback, final CoordinateDialogDisplayModeEnum showWaypointButtons) {
 
         this.context = context;
         this.callback = callback;
@@ -88,13 +88,13 @@ public class NewCoordinateInputDialog {
     // Entry point for user defined cache, search card and GK TB
     public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
         cacheCoordinates = null;
-        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Normal).show(location);
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Normal).show(location);
     }
 
     //Entry point for a plain waypoint returning from the calculator page
     public static void show(final Context context, final DialogCallback callback, final Geopoint location, final boolean noButtons) {
         cacheCoordinates = null;
-        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Simple).show(location);
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Simple).show(location);
     }
 
     //Main entry point for the waypoint page
@@ -112,7 +112,7 @@ public class NewCoordinateInputDialog {
             CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
             return;
         }
-        new NewCoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData.getGeopoint());
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData.getGeopoint());
     }
 
     @NonNull
@@ -130,14 +130,14 @@ public class NewCoordinateInputDialog {
         }
 
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final View theView = inflater.inflate(R.layout.new_coordinate_input_dialog, null);
+        final View theView = inflater.inflate(R.layout.coordinate_input_dialog, null);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(theView);
 
         final AlertDialog dialog = builder.create();
 
-        binding = NewCoordinateInputDialogBinding.bind(theView);
+        binding = CoordinateInputDialogBinding.bind(theView);
 
         // Show title and action buttons
         final Toolbar toolbar = binding.actionbar.toolbar;

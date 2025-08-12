@@ -29,7 +29,7 @@ import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -77,7 +77,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 
-public class EditWaypointActivity extends AbstractActionBarActivity implements NewCoordinateInputDialog.CoordinateUpdate {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinateInputDialog.CoordinateUpdate {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -570,7 +570,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements N
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
             cid.setCalculatedCoordinate(cc);
 
-            NewCoordinateInputDialog.show(EditWaypointActivity.this, this::onCoordinatesUpdated, cid);
+            CoordinateInputDialog.show(EditWaypointActivity.this, this::onCoordinatesUpdated, cid);
         }
         private void onCoordinatesUpdated(@Nullable final Geopoint gp) {
             // Arrives here from the new coordinate dialog either for a standard waypoint

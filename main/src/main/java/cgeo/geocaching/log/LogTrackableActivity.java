@@ -23,7 +23,7 @@ import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -331,7 +331,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         @Override
         public void onClick(final View theView) {
 
-            NewCoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+            CoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
         }
 
         public void onCoordinatesUpdated(final Geopoint input) {
