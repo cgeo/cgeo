@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Komentarz zespołu OC</string>
     <string name="log_your_saved_log">Twój zapisany wpis</string>
     <string name="log_empty_logbook">Dziennik tej skrytki jest pusty.</string>
+    <string name="log_empty_logbook_filtered">Wybrane filtry ukrywają wszystkie logi. Wybierz co najmniej jedną opcję.</string>
     <string name="log_image_selectfromstorage_tooltip">Wybierz obrazy z pamięci</string>
     <string name="log_image_camera_tooltip">Zrób zdjęcie za pomocą aparatu</string>
     <string name="log_image_selectfromown_tooltip">Wybierz obrazy z własnych obrazów</string>
@@ -261,6 +262,7 @@
     <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
     <string name="err_detail_premium_log_found">Ta skrytka jest dostępna tylko dla członków premium geocaching.com. Dlatego nie można wyświetlić informacji o skrytce.\n\nJeśli jednak już znalazłeś tę skrytkę, możesz ją zalogować tutaj.</string>
     <string name="err_watchlist_failed">Zmiana listy obserwowanych zakończona niepowodzeniem.</string>
+    <string name="err_watchlist_failed_geocodes">Zmiana listy obserwowanych nie powiodła się dla geokodów: %s</string>
     <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
     <string name="err_auth_initialize">c:geo nie mógł rozpocząć autoryzacji.</string>
     <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
@@ -483,6 +485,11 @@
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
     <string name="caches_upload_bookmarklist_all">Dodaj wszystkie do listy zakładek</string>
     <string name="caches_upload_bookmarklist_selected">Dodaj wybrane do listy zakładek</string>
+    <string name="caches_watch_all">Dodaj wszystkie do listy obserwowanych</string>
+    <string name="caches_unwatch_all">Usuń wszystkie z listy obserwowanych</string>
+    <string name="caches_watch_selected">Dodaj wybrane do listy obserwowanych</string>
+    <string name="caches_unwatch_selected">Usuń wybrane z listy obserwowanych</string>
+    <string name="watchlist_background_started">Aktualizacja listy obserwowanych rozpoczęta w tle</string>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać zmodyfikowane współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
@@ -1254,6 +1261,7 @@
     <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
+    <string name="gui_test_title">Testowy ekran interfejsu</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
     <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
@@ -1502,6 +1510,7 @@
     <string name="cache_logs">Dziennik</string>
     <string name="cache_latest_logs">Ostatnie wpisy</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
+    <string name="cache_logs_friends">Przyjaciele</string>
     <string name="cache_dialog_loading_details">Ładuję szczegóły skrytki…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
     <string name="cache_dialog_loading_details_status_details">Przetwarzam szczegóły</string>
@@ -1750,6 +1759,7 @@
     <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
     <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
     <string name="waypoint_added">Punkt dodany</string>
+    <string name="waypoint_added_current_location">Dodano punkt nawigacji (%s) (±%s)</string>
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
@@ -2840,13 +2850,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferowany rozmiar obrazu</string>
-    <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisach skrytek, dziennikach znalezień oraz i dziennikach przedmiotów podróżnych są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas ładowania i przechowywania skrytek.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Oryginalny</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisie, dzienniki znalezień i przedmioty podróżne są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas wczytywania i przechowywania skrytek. „Bez zmian” wczyta oryginalną wersję opisu/autora logowania dołączoną do strony.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Bez zmian</string>
+    <string name="settings_gc_imagesize_entry_original">Maksymalne</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Zobacz bazę danych</string>
     <string name="dbi_select_title">(Zaznacz tabelę)</string>
