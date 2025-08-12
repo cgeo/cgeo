@@ -92,7 +92,9 @@ public class LiveMapDataHandler {
                     final Viewport refreshedViewport = params.viewport.resize(1.5);
                     final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
                     model.caches.write(caches -> {
-                        caches.clear();
+                        if (filterChanged) {
+                            caches.clear();
+                        }
                         caches.addAll(dbCaches);
                     });
                     lastViewport = refreshedViewport;
