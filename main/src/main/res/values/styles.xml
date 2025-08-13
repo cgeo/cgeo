@@ -334,14 +334,6 @@
         <item name="android:textColor">@color/colorText</item>
     </style>
 
-    <style name="edittext_full" parent="edittext">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">10dip</item>
-        <item name="android:layout_marginRight">10dip</item>
-        <item name="android:layout_marginBottom">5dip</item>
-    </style>
-
     <style name="edittext_dialog" parent="edittext">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -602,24 +594,6 @@
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-    </style>
-
-    <!-- coordinates input dialog styles -->
-    <style name="edittext_coordinates" parent="edittext_full">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_marginLeft">2dp</item>
-        <item name="android:layout_marginRight">2dp</item>
-        <item name="android:inputType">number</item>
-        <item name="android:textSize">@dimen/textSize_inputCoords</item>
-        <item name="android:selectAllOnFocus">true</item>
-    </style>
-
-    <style name="separator_coordinates">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:textSize">@dimen/textSize_inputCoords</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_weight">0.25</item>
     </style>
 
     <!-- installation wizard styles -->

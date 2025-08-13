@@ -1872,11 +1872,12 @@
     <string name="html_style_source_formatted">HTML Source Formatted</string>
     <string name="html_style_source">HTML Source</string>
 
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
+    <string name="hash_symbol">#</string>
 
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
