@@ -3774,7 +3774,7 @@ public class DataStore {
                         //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
                         "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"
                                 + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + " ORDER BY Date(date) DESC, cg_logs._id ASC", new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
+                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + " ORDER BY Date(date / 1000, 'unixepoch') DESC, service_log_id DESC, cg_logs._id ASC ", new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
 
                 LogEntry.Builder log = null;
                 int cnt = 0;
