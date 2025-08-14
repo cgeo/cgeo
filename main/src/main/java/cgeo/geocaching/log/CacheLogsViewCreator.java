@@ -129,7 +129,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
+        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
