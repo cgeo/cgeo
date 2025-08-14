@@ -28,6 +28,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
@@ -63,6 +64,7 @@ import androidx.work.WorkManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Response;
@@ -429,6 +431,7 @@ public class DownloaderUtils {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOADTYPE_LANGUAGE_MODEL.id, candidate, LocalizationUtils.getLocaleDisplayName(candidate, false, true)));
             }
         }
+        Collections.sort(offlineItems, (left, right) -> TextUtils.COLLATOR.compare(left.getRight(), right.getRight()));
         showDialog(activity, offlineItems);
     }
 
