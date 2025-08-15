@@ -30,6 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+
             <!-- Translation -->
             <Button
                 android:id="@+id/translation"
@@ -38,14 +45,6 @@
                 android:layout_gravity="right"
                 android:visibility="gone"
                 />
-
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:autoLink="web" />
 
             <LinearLayout
                 android:id="@+id/debug_box"
