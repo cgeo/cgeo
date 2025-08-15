@@ -92,6 +92,11 @@ public class TranslatorUtils {
         //no instance
     }
 
+    public static boolean isTranslationActive() {
+        //as of now, user deactivates translation by setting targetlanguagecode to empty...
+        return !StringUtils.isBlank(Settings.getTranslationTargetLanguageCode());
+    }
+
     @Nullable
     public static String getEffectiveSourceLanguage(final String sourceLanguage, final String sourceLanguageDetected) {
         return sourceLanguage != null ? sourceLanguage : sourceLanguageDetected;
@@ -219,7 +224,7 @@ public class TranslatorUtils {
             final View visibilityView = box != null ? box : button;
             final String srcLng = translator.getSourceLanguage();
             final String detSrcLng = translator.getSourceLanguageDetected();
-            visibilityView.setVisibility(Translator.isSupported() &&
+            visibilityView.setVisibility(Translator.isActive() &&
                 (translator.getEffectiveSourceLanguage() == null || translator.isEnabled() ||
                 srcLng != null || (detSrcLng != null && !Settings.getLanguagesToNotTranslate().contains(detSrcLng)))
                 ? View.VISIBLE : View.GONE);

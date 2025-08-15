@@ -1657,7 +1657,6 @@
     <string name="cache_variables_chip_completed_variables">Completed</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Add waypoint</string>
-    <string name="cache_waypoints_add_currentLocation">Add current location</string>
     <string name="cache_waypoints_add_fromclipboard">Add from clipboard</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copied from clipboard to this cache.\n\nRemove original waypoint?</string>
     <string name="cache_hint">Hint</string>
