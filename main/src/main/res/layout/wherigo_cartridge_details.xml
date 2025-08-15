@@ -29,14 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- Translation -->
-            <Button
-                android:id="@+id/translation"
-                style="@style/button_icon_with_text"
-                app:icon="@drawable/ic_menu_translate"
-                android:layout_gravity="right"
-                />
-
             <!-- User description -->
             <TextView
                 android:id="@+id/description"
@@ -44,6 +36,14 @@
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
                 android:autoLink="web" />
+
+            <!-- Translation -->
+            <Button
+                android:id="@+id/translation"
+                style="@style/button_icon_with_text"
+                app:icon="@drawable/ic_menu_translate"
+                android:layout_gravity="right"
+                />
 
             <!-- Debug Infos -->
         <LinearLayout

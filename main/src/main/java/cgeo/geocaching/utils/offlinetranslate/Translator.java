@@ -62,8 +62,8 @@ public class Translator {
         modelStateListener = TranslationModelManager.get().registerListener(() -> runOnWorker(this::onModelStateChange));
     }
 
-    public static boolean isSupported() {
-        return TranslateAccessor.get().isSupported();
+    public static boolean isActive() {
+        return TranslatorUtils.isTranslationActive();
     }
 
     @Override

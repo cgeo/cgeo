@@ -150,7 +150,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying());
-        MenuUtils.setVisible(menu, R.id.menu_translate, WherigoGame.get().isPlaying() && Translator.isSupported());
+        MenuUtils.setVisible(menu, R.id.menu_translate, WherigoGame.get().isPlaying() && Translator.isActive());
         return super.onPrepareOptionsMenu(menu);
     }
 

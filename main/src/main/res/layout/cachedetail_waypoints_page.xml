@@ -28,7 +28,8 @@
                 android:focusable="true"
                 android:text="@string/cache_waypoints_add"
                 app:icon="@drawable/ic_menu_add"
-                tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+                tools:context=".CacheDetailActivity$WaypointsViewCreator"
+                android:layout_width="0dp" />
 
             <Button
                 android:id="@+id/add_waypoint_fromclipboard"

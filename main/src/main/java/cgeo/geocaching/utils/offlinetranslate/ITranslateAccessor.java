@@ -26,8 +26,4 @@ public interface ITranslateAccessor {
 
     void getTranslatorWithDownload(String sourceLanguage, String targetLanguage, Consumer<ITranslatorImpl> onSuccess, Consumer<Exception> onError);
 
-    default boolean isSupported() {
-        return !getSupportedLanguages().isEmpty();
-    }
-
 }
