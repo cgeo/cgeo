@@ -15,6 +15,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LiveMapDataHandler {
 
+    private static final String LOGPRAEFIX = "LiveMapDataHandler:";
+
     private final Action action;
     private final Disposable actionDisposable;
 
@@ -50,16 +52,21 @@ public class LiveMapDataHandler {
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
             this.model = model;
-            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, this::updateLiveLoad);
+            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, caches -> updateCaches(caches, true));
         }
 
-        private void updateLiveLoad(final Set<Geocache> result) {
-            final GeocacheFilter filter = lastFilter;
+        private void updateCaches(final Set<Geocache> result, final boolean replaceExisting) {
+            final int before = result.size();
+            final GeocacheFilter filter = handler == null ? null : handler.params.filter;
             if (filter != null) {
                 filter.filterList(result);
             }
+            final int after = result.size();
+            Log.iForce(LOGPRAEFIX + "updating with " + before + "->" + after + " caches, replace=" + replaceExisting + ". filter = " + filter);
             model.caches.write(caches -> {
-                caches.removeAll(result);
+                if (replaceExisting) {
+                    caches.removeAll(result);
+                }
                 caches.addAll(result);
             });
         }
@@ -91,7 +98,8 @@ public class LiveMapDataHandler {
                     //get a bit more than just the current viewport. This prevents immediate necessity for a db call on next (small) map move
                     final Viewport refreshedViewport = params.viewport.resize(1.5);
                     final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
-                    model.caches.write(caches -> caches.addAll(dbCaches));
+                    Log.d(LOGPRAEFIX + " queried DB data for filter:" + params.filter + " (" + dbCaches.size() + " result)");
+                    updateCaches(dbCaches, false);
                     lastViewport = refreshedViewport;
                 }
                 //live refresh
