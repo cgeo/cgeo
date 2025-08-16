@@ -2041,6 +2041,12 @@ Nombre de archivo:%2$s</string>
         <item quantity="other">%d mensajes no leídos en el centro de mensajes</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Original</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

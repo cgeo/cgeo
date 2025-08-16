@@ -356,9 +356,9 @@
     <string name="translator_model">Model tłumaczenia</string>
     <string name="translator_tooltip">Tłumaczenie offline</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
-    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany dla tłumaczenia.</string>
-    <string name="translator_language_unknown">Nie można zidentyfikować języka</string>
-    <string name="translator_language_detected">Przetłumacz z \"%s\"</string>
+    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia. Dotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_unknown">Nie można zidentyfikować języka. Dotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_detected">Tłumacz z \"%s\". Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_target_language">Przetłumacz na \"%s\"</string>
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
@@ -2826,7 +2826,7 @@
     <string name="settings_gc_imagesize_title">Preferowany rozmiar obrazu</string>
     <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisach skrytek, dziennikach znalezień oraz i dziennikach przedmiotów podróżnych są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas ładowania i przechowywania skrytek.</string>
     <string-array name="settings_gc_imagesize_entries">
-        <item>Oryginalny</item>
+        <item>Oryginalne</item>
         <item>640px</item>
         <item>320px</item>
         <item>120px</item>

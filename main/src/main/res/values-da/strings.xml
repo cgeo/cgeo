@@ -1638,6 +1638,12 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Oprindeligt</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
