@@ -364,6 +364,9 @@
     <string name="translator_tooltip">Översätt offline</string>
     <string name="translator_language_select">Välj källspråk</string>
     <string name="translator_language_target_select">Välj målspråk</string>
+    <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning. Tryck för att välja källspråk.</string>
+    <string name="translator_language_unknown">Det går inte att identifiera språk. Tryck för att välja källspråk.</string>
+    <string name="translator_language_detected">Översätt från \"%s\". Tryck för att välja källspråk.</string>
     <string name="translator_target_language">Översätt till %s</string>
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
@@ -1749,6 +1752,7 @@
     <string name="projection_type_offset_hint_longitude">Longitud-förskjutning i mikro-minuter</string>
     <!-- Variables -->
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
+    <string name="variables_titletext_short">Värden och beräkningar</string>
     <string name="variables_scanlisting">Skanna listning</string>
     <string name="variables_scanlisting_choosepattern_title">Välj funnet-mönster</string>
     <string name="variables_scanlisting_nopatternfound">Inget mönster hittades</string>
