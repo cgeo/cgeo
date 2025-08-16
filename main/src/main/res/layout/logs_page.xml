@@ -10,6 +10,7 @@
     <com.google.android.material.chip.ChipGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4sp"
         android:id="@+id/filter_chips">
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_own"
@@ -50,6 +51,7 @@
         android:headerDividersEnabled="false"
         android:nestedScrollingEnabled="true"
         android:scrollbarStyle="outsideOverlay"
+        android:paddingHorizontal="@dimen/paddingRight_fastscroll"
         tools:context=".log.LogsViewCreator"
         tools:listitem="@layout/logs_item" />
 
