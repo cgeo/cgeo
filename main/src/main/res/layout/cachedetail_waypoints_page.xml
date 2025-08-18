@@ -18,6 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4sp"
             android:orientation="horizontal">
 
             <Button
@@ -45,7 +46,6 @@
                 android:focusable="true"
                 app:icon="@drawable/ic_menu_mylocation" />
 
-
         </LinearLayout>
 
         <com.google.android.material.chip.Chip
@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/chip_choice"
+            android:layout_marginHorizontal="7sp"
             android:text="@string/waypoint_visited"
             tools:context=".CacheDetailActivity$WaypointsViewCreator" />
     </LinearLayout>
