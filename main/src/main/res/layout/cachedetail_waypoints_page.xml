@@ -4,48 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="4dp"
-    android:orientation="vertical">
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:padding="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="0dp"
+        android:orientation="vertical"
+        android:padding="0dp">
 
-        <Button
-            android:id="@+id/add_waypoint"
-            style="@style/button_icon_accent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/cache_waypoints_add"
-            app:icon="@drawable/ic_menu_add"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/add_waypoint"
+                style="@style/button_icon_accent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cache_waypoints_add"
+                app:icon="@drawable/ic_menu_add"
+                tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+
+            <Button
+                android:id="@+id/add_waypoint_fromclipboard"
+                style="@style/button_icon_accent"
+                android:clickable="true"
+                android:focusable="true"
+                app:icon="@drawable/ic_menu_paste"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/add_waypoint_currentlocation"
+                style="@style/button_icon_accent"
+                android:clickable="true"
+                android:focusable="true"
+                app:icon="@drawable/ic_menu_mylocation" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_visited_waypoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/chip_choice"
+            android:text="@string/waypoint_visited"
             tools:context=".CacheDetailActivity$WaypointsViewCreator" />
-
-        <Button
-            android:id="@+id/add_waypoint_fromclipboard"
-            style="@style/button_icon_accent"
-            android:clickable="true"
-            android:focusable="true"
-            app:icon="@drawable/ic_menu_paste"
-            android:visibility="visible" />
-
-        <Button
-            android:id="@+id/add_waypoint_currentlocation"
-            style="@style/button_icon_accent"
-            android:clickable="true"
-            android:focusable="true"
-            app:icon="@drawable/ic_menu_mylocation" />
     </LinearLayout>
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_visited_waypoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        style="@style/chip_choice"
-        android:text="@string/waypoint_visited"
-        tools:context=".CacheDetailActivity$WaypointsViewCreator" />
 
     <View
         android:id="@+id/waypoint_header_line"
@@ -54,8 +64,8 @@
 
     <ListView
         android:id="@+id/waypoint_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:clickable="true"
         android:clipToPadding="false"
         android:fastScrollEnabled="false"
@@ -67,4 +77,3 @@
         android:scrollbarStyle="outsideOverlay"
         tools:context=".CacheDetailActivity$WaypointsViewCreator" />
 </LinearLayout>
-

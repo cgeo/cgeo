@@ -2,21 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="4dp"
     android:orientation="vertical">
 
     <cgeo.geocaching.ui.SectionHeader
         android:id="@+id/variables_titletext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/variables_titletext_short"
-        android:tooltipText="@string/variables_titletext" />
+        android:tooltipText="@string/variables_titletext"
+        android:textSize="@dimen/textSize_headingSecondary" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4sp"
         android:orientation="horizontal">
 
         <Button
@@ -62,7 +64,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/chip_choice"
-        android:layout_marginHorizontal="4dp"
         android:text="@string/cache_variables_chip_completed_variables"
         tools:context=".VariablesViewPageFragment" />
 
