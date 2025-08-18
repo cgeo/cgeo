@@ -680,7 +680,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
             //show all waypoints be displayed or just the ones from visible caches?
-            if (viewModel.mapType.enableLiveMap()) {
+            if (viewModel.mapType.enableLiveMap() || TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
                 waypoints.addAll(DataStore.loadWaypoints(viewport));
             } else {
                 waypoints.addAll(viewModel.caches.readWithResult(caches -> {
