@@ -65,7 +65,7 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol1"
-					android:text="#"
+					android:text="@string/hash_symbol"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol2"
-					android:text="#"
+					android:text="@string/hash_symbol"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol3"
-					android:text="#"
+					android:text="@string/hash_symbol"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
 
 				<TextView
 					android:id="@+id/txtLatSymbol4"
-					android:text="#"
+					android:text="@string/hash_symbol"
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol1"
-						android:text="#"
+						android:text="@string/hash_symbol"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol2"
-						android:text="#"
+						android:text="@string/hash_symbol"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol3"
-						android:text="#"
+						android:text="@string/hash_symbol"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
 
 					<TextView
 						android:id="@+id/txtLonSymbol4"
-						android:text="#"
+						android:text="@string/hash_symbol"
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"

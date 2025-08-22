@@ -9,7 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
@@ -104,7 +104,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
 
     private void setCoordinates() {
 
-        NewCoordinateInputDialog.show(getActivity(), this::onDialogClosed, location);
+        CoordinateInputDialog.show(getActivity(), this::onDialogClosed, location);
     }
 
     public void onDialogClosed(final Geopoint input) {
