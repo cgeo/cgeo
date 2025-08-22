@@ -18,16 +18,21 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
+
+import android.os.Message;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,6 +71,28 @@ final class ALApi {
     private static final String TITLE = "Title";
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
+
+    private static final class ImageDisposable extends DisposableHandler {
+
+        String wptName, desc, ilink;
+        Image localImage;
+
+        public ImageDisposable(String wptName, String desc, String ilink) {
+            this.wptName = wptName;
+            this.desc = desc;
+            this.ilink = ilink;
+        }
+
+        @Override
+        protected void handleRegularMessage(Message message) {
+            localImage = new Image.Builder()
+                    .setUrl(ilink)
+                    .setTitle(wptName)
+                    .setDescription(desc)
+                    .setCategory(Image.ImageCategory.STAGE)
+                    .build();
+        }
+    }
 
     private ALApi() {
         // utility class with static methods
@@ -424,11 +451,18 @@ final class ALApi {
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                wptImages.add(new Image.Builder().setUrl(ilink)
-                        .setTitle(wptName)
-                        .setDescription(desc).build());
+                HtmlImage htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
 
-                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+                ImageDisposable cachedImageHandler = new ImageDisposable(wptName, desc, ilink);
+
+                htmlImage.waitForEndCompletable(cachedImageHandler);
+
+                htmlImage.fetchDrawableWithMetadata(ilink);
+
+                wptImages.add(cachedImageHandler.localImage);
+
+                final StringBuilder note = new StringBuilder("<img src=\"" + cachedImageHandler.localImage.uri + "\"></img><p><p>" + desc);
+
                 if (Settings.isALCAdvanced()) {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
