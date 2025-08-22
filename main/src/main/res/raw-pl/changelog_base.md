@@ -15,6 +15,9 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 - Zmiana: Ulepszony nagłówek w zakładkach „Zmienne” i „Punkty nawigacji”
 - Naprawiono: Podwójne wyświetlanie elementu „Usuń wpis”
 - Naprawiono: Awaria c:geo podczas obracania ekranu w szczegółach skrytki
+- Zmiana: Bardziej kompaktowy układ dla „dodawania nowego punktu nawigacji”
+- Nowość: Możliwość załadowania obrazów dla skrytek geocaching.com o rozmiarze „niezmienione”
+- Nowość: Widok zmiennych może być filtrowany
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -26,3 +29,6 @@ Ze względu na zasady Play Store zaktualizowaliśmy poziom API Androida w tej we
 - Naprawiono: Przywracanie kopii zapasowej może duplikować pliki śladów w pamięci wewnętrznej i kolejnych kopiach zapasowych
 - Zmiana: Usunięte odwołania do Twittera
 - Nowość: Usuń osierocone pliki ścieżek przy czyszczeniu i przywracaniu kopii zapasowej
+- Nowość: Ostrzeżenie przy próbie dodania zbyt wielu skrytek do zakładek
+- Nowość: Funkcje listy obserwowanej/nieobserwowanej
+
