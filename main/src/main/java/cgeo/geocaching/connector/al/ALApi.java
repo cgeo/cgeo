@@ -32,7 +32,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
 
 import android.os.Message;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,12 +71,12 @@ final class ALApi {
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
 
-    private static final class ImageDisposable extends DisposableHandler {
+    private static final class HtmlImageHandler extends DisposableHandler {
 
-        String wptName, desc, ilink;
+        final String wptName, desc, ilink;
         Image localImage;
 
-        public ImageDisposable(String wptName, String desc, String ilink) {
+        public HtmlImageHandler(String wptName, String desc, String ilink) {
             this.wptName = wptName;
             this.desc = desc;
             this.ilink = ilink;
@@ -86,11 +85,11 @@ final class ALApi {
         @Override
         protected void handleRegularMessage(Message message) {
             localImage = new Image.Builder()
-                    .setUrl(ilink)
-                    .setTitle(wptName)
-                    .setDescription(desc)
-                    .setCategory(Image.ImageCategory.STAGE)
-                    .build();
+                        .setUrl(ilink)
+                        .setTitle(wptName)
+                        .setDescription(desc)
+                        .setCategory(Image.ImageCategory.STAGE)
+                        .build();
         }
     }
 
@@ -451,9 +450,9 @@ final class ALApi {
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                HtmlImage htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
+                final HtmlImage htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
 
-                ImageDisposable cachedImageHandler = new ImageDisposable(wptName, desc, ilink);
+                final HtmlImageHandler cachedImageHandler = new HtmlImageHandler(wptName, desc, ilink);
 
                 htmlImage.waitForEndCompletable(cachedImageHandler);
 
