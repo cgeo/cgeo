@@ -15,6 +15,9 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Wijziging: Verbeterde header in variabele en waypoint tabbladen
 - Oplossing: Twee "verwijder log" items getoond
 - Oplossing: c:geo crasht in cache details wanneer het scherm wordt gedraaid
+- Change: More compact layout for "adding new waypoint"
+- New: Option to load images for geocaching.com caches in "unchanged" size
+- New: Variables view can be filtered
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
@@ -26,3 +29,6 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Oplossing: Het herstellen van een back-up kan het bijhouden van bestanden in de interne opslag en volgende back-ups dupliceren
 - Wijziging: Verwijzingen naar Twitter verwijderd
 - Nieuw: Verwijder verweesde trackbestanden bij opschonen en back-up herstellen
+- New: Warning on trying to add too many caches to a bookmark list
+- New: Watch/unwatch list functions
+
