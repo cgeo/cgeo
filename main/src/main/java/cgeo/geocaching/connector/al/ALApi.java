@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
 
+import android.os.Looper;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
@@ -71,27 +73,6 @@ final class ALApi {
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
 
-    private static final class HtmlImageHandler extends DisposableHandler {
-
-        final String wptName, desc, ilink;
-        Image localImage;
-
-        public HtmlImageHandler(String wptName, String desc, String ilink) {
-            this.wptName = wptName;
-            this.desc = desc;
-            this.ilink = ilink;
-        }
-
-        @Override
-        protected void handleRegularMessage(Message message) {
-            localImage = new Image.Builder()
-                        .setUrl(ilink)
-                        .setTitle(wptName)
-                        .setDescription(desc)
-                        .setCategory(Image.ImageCategory.STAGE)
-                        .build();
-        }
-    }
 
     private ALApi() {
         // utility class with static methods
@@ -175,6 +156,34 @@ final class ALApi {
             }
         }
     }
+
+    static final class HtmlImageHandler extends DisposableHandler {
+
+        final String wptName, desc, ilink;
+        Image localImage;
+
+        public static HtmlImageHandler of(String wptName, String desc, String ilink) {
+            Looper.prepare();
+            return new HtmlImageHandler(wptName, desc, ilink);
+        }
+
+        HtmlImageHandler(String wptName, String desc, String ilink) {
+            this.wptName = wptName;
+            this.desc = desc;
+            this.ilink = ilink;
+        }
+
+        @Override
+        protected void handleRegularMessage(Message message) {
+            localImage = new Image.Builder()
+                    .setUrl(ilink)
+                    .setTitle(wptName)
+                    .setDescription(desc)
+                    .setCategory(Image.ImageCategory.STAGE)
+                    .build();
+        }
+    }
+
 
     // To understand the logic of this function some details about the API is in order.
     // The API method being used does return the detailed properties of the
@@ -452,11 +461,13 @@ final class ALApi {
 
                 final HtmlImage htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
 
-                final HtmlImageHandler cachedImageHandler = new HtmlImageHandler(wptName, desc, ilink);
+                final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(wptName, desc, ilink);
 
-                htmlImage.waitForEndCompletable(cachedImageHandler);
+                Completable completable = htmlImage.waitForEndCompletable(cachedImageHandler);
 
                 htmlImage.fetchDrawableWithMetadata(ilink);
+
+                completable.blockingAwait();
 
                 wptImages.add(cachedImageHandler.localImage);
 
