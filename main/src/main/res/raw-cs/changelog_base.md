@@ -15,6 +15,9 @@ Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úrove
 - Change: Improved header in variable and waypoint tabs
 - Fix: Two "delete log" items shown
 - Fix: c:geo crashing in cache details when rotating screen
+- Change: More compact layout for "adding new waypoint"
+- New: Option to load images for geocaching.com caches in "unchanged" size
+- New: Variables view can be filtered
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -26,3 +29,6 @@ Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úrove
 - Oprava: Obnovení zálohy může duplikovat soubory stop v interním úložišti a následných zálohách
 - Změna: Odstraněny odkazy na Twitter
 - New: Delete orphaned trackfiles on clean up and restore backup
+- New: Warning on trying to add too many caches to a bookmark list
+- New: Watch/unwatch list functions
+
