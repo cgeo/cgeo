@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -337,7 +338,7 @@ final class ALApi {
             cache.setName(response.get(TITLE).asText());
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
+            cache.setSize(CacheSize.VIRTUAL);
             cache.setVotes(response.get("RatingsTotalCount").asInt());
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
@@ -375,7 +376,7 @@ final class ALApi {
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\"></img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
+            cache.setSize(CacheSize.VIRTUAL);
             cache.setVotes(response.get("RatingsTotalCount").asInt());
             cache.setRating(response.get("RatingsAverage").floatValue());
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
@@ -383,7 +384,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode));
+            cache.setWaypoints(parseWaypoints(cache, (ArrayNode) response.path("GeocacheSummaries")));
             final boolean isLinear = response.get("IsLinear").asBoolean();
             if (isLinear) {
                 cache.setAlcMode(1);
@@ -404,21 +405,28 @@ final class ALApi {
     }
 
     @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
+    private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
         List<Waypoint> result = null;
+        List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint("S" + stageCounter + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
+
+                final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                wpt.setGeocode(geocode);
+                wpt.setGeocode(cache.getGeocode());
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
+
+                wptImages.add(new Image.Builder().setUrl(ilink)
+                        .setTitle(wptName)
+                        .setDescription(desc).build());
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
                 if (Settings.isALCAdvanced()) {
@@ -457,6 +465,9 @@ final class ALApi {
                 Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
+
+        cache.setSpoilers(wptImages);
+
         return result;
     }
 
