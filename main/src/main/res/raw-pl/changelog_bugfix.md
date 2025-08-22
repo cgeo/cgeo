@@ -1,5 +1,7 @@
 ##
+- Fix: Unencrypted cache hints (website change)
 - Naprawiono: UnifiedMap VTM: Przełączanie 3D budynków nie działa dla połączonych map
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
 - Naprawiono: Awaria w module tłumaczenia
@@ -13,6 +15,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
