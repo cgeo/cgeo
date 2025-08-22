@@ -1,6 +1,7 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.list.PseudoList;
@@ -33,6 +34,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class DataStoreTest {
 
     static final String ARTIFICIAL_GEOCODE = "TEST";
+    static final String ARTIFICIAL_GEOCODE_GC = "GCATEST";
 
     private static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -144,9 +146,8 @@ public class DataStoreTest {
     // Check that loading a cache by case insensitive geo code works correctly (see #3139)
     @Test
     public void testGeocodeCaseInsensitive() {
-
-        final String upperCase = ARTIFICIAL_GEOCODE;
-        final String lowerCase = StringUtils.lowerCase(upperCase);
+        final String upperCase = ARTIFICIAL_GEOCODE_GC;
+        final String lowerCase = ConnectorFactory.normalizeGeocode(StringUtils.lowerCase(upperCase));
         assertThat(upperCase).isNotEqualTo(lowerCase);
 
         // create cache and trackable
