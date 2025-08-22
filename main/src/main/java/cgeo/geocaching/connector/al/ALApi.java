@@ -179,7 +179,7 @@ final class ALApi {
             this.completable = htmlImage.waitForEndCompletable(this);
         }
 
-        public void fetch(List<Image> wptImages) {
+        public void fetch(final List<Image> wptImages) {
             htmlImage.fetchDrawableWithMetadata(ilink);
 
             completable.doOnComplete(() -> wptImages.add(localImage))
@@ -187,7 +187,7 @@ final class ALApi {
         }
 
         @Override
-        protected void handleRegularMessage(Message message) {
+        protected void handleRegularMessage(final Message message) {
             localImage = new Image.Builder()
                     .setUrl(ilink)
                     .setTitle(wptName)
@@ -475,7 +475,6 @@ final class ALApi {
                 final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(cache, wptName, desc, ilink);
 
                 cachedImageHandler.fetch(wptImages);
-                        ;
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + cachedImageHandler.localImage.uri + "\"></img><p><p>" + desc);
 
