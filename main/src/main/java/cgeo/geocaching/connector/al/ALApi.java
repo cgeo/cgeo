@@ -16,17 +16,23 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
+
+import android.os.Looper;
+import android.os.Message;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +53,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
@@ -65,6 +72,7 @@ final class ALApi {
     private static final String TITLE = "Title";
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
+
 
     private ALApi() {
         // utility class with static methods
@@ -149,6 +157,47 @@ final class ALApi {
         }
     }
 
+    static final class HtmlImageHandler extends DisposableHandler {
+        final Geocache cache;
+        final String wptName, desc, ilink;
+        private final Completable completable;
+        private final HtmlImage htmlImage;
+        Image localImage;
+
+        public static HtmlImageHandler of(final Geocache cache, final String wptName, final String desc, final String ilink) {
+            Looper.prepare();
+            return new HtmlImageHandler(cache, wptName, desc, ilink);
+        }
+
+        HtmlImageHandler(final Geocache cache, final String wptName, final String desc, final String ilink) {
+            this.cache = cache;
+            this.wptName = wptName;
+            this.desc = desc;
+            this.ilink = ilink;
+
+            this.htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
+            this.completable = htmlImage.waitForEndCompletable(this);
+        }
+
+        public void fetch(final List<Image> wptImages) {
+            htmlImage.fetchDrawableWithMetadata(ilink);
+
+            completable.doOnComplete(() -> wptImages.add(localImage))
+                    .blockingAwait();
+        }
+
+        @Override
+        protected void handleRegularMessage(final Message message) {
+            localImage = new Image.Builder()
+                    .setUrl(ilink)
+                    .setTitle(wptName)
+                    .setDescription(desc)
+                    .setCategory(Image.ImageCategory.STAGE)
+                    .build();
+        }
+    }
+
+
     // To understand the logic of this function some details about the API is in order.
     // The API method being used does return the detailed properties of the
     // object in question, however it does not return the true found state of the object so
@@ -165,8 +214,8 @@ final class ALApi {
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
-            final Geocache gc = importCacheFromJSON(response);
-            if (!Settings.isALCfoundStateManual()) {
+            final @Nullable Geocache gc = importCacheFromJSON(response);
+            if (gc != null && !Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
                     if (matchedLabCache.getGeocode().equals(geocode)) {
@@ -337,7 +386,7 @@ final class ALApi {
             cache.setName(response.get(TITLE).asText());
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
+            cache.setSize(CacheSize.VIRTUAL);
             cache.setVotes(response.get("RatingsTotalCount").asInt());
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
@@ -375,7 +424,7 @@ final class ALApi {
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\"></img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
-            cache.setSize(CacheSize.getById("virtual"));
+            cache.setSize(CacheSize.VIRTUAL);
             cache.setVotes(response.get("RatingsTotalCount").asInt());
             cache.setRating(response.get("RatingsAverage").floatValue());
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
@@ -383,7 +432,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode));
+            cache.setWaypoints(parseWaypoints(cache, (ArrayNode) response.path("GeocacheSummaries")));
             final boolean isLinear = response.get("IsLinear").asBoolean();
             if (isLinear) {
                 cache.setAlcMode(1);
@@ -404,23 +453,31 @@ final class ALApi {
     }
 
     @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
+    private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
         List<Waypoint> result = null;
+        final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint("S" + stageCounter + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
+
+                final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                wpt.setGeocode(geocode);
+                wpt.setGeocode(cache.getGeocode());
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+                final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(cache, wptName, desc, ilink);
+
+                cachedImageHandler.fetch(wptImages);
+
+                final StringBuilder note = new StringBuilder("<img src=\"" + cachedImageHandler.localImage.uri + "\"></img><p><p>" + desc);
+
                 if (Settings.isALCAdvanced()) {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
@@ -457,6 +514,9 @@ final class ALApi {
                 Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
+
+        cache.setSpoilers(wptImages);
+
         return result;
     }
 
