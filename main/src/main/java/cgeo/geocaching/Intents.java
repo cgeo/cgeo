@@ -18,6 +18,7 @@ public class Intents {
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";
     public static final String EXTRA_COORDS = PREFIX + "coords";
+    public static final String EXTRA_CONNECTOR = PREFIX + "connector";
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GEOCACHE = PREFIX + "geocache";
 

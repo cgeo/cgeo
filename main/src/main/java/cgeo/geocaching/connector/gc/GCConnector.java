@@ -659,6 +659,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @Nullable
+    public String geMyAccountUrl() {
+        return "https://www.geocaching.com/my/default.aspx";
+    }
+
+    @Override
     public List<Smiley> getSmileys() {
         return GCSmileysProvider.getSmileys();
     }

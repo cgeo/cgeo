@@ -193,6 +193,9 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                         final TextView userName = connectorInfo.findViewById(R.id.item_title);
                                         final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
                                         userName.setText(p.second);
+                                        userName.setOnClickListener(v -> {
+                                            ShareUtils.openUrl(getContext(), conn.geMyAccountUrl());
+                                        });
                                         final String userFoundCount = p.first.toString();
                                         if (userFoundCount.isEmpty()) {
                                             userFounds.setVisibility(View.GONE);
@@ -202,6 +205,11 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             userFounds.setOnClickListener(v -> {
                                                 activity.startActivity(CacheListActivity.getHistoryIntent(activity));
                                                 ActivityMixin.overrideTransitionToFade(activity);
+                                            });
+                                            userFounds.setOnLongClickListener(v -> {
+                                                getContext().startActivity(CacheListActivity.getHistoryIntent(activity, conn));
+                                                ActivityMixin.overrideTransitionToFade(activity);
+                                                return true;
                                             });
                                         }
                                     });

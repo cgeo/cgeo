@@ -85,6 +85,12 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
     }
 
     @Override
+    @Nullable
+    public String geMyAccountUrl() {
+        return getSchemeAndHost() + "/myhome.php";
+    }
+
+    @Override
     public List<Smiley> getSmileys() {
         return OCSmileysProvider.getSmileys();
     }
