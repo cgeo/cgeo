@@ -1502,11 +1502,10 @@
     <string name="cache_variables_chip_completed_variables">Zakończone</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punkty nawigacji (%d)</string>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
-    <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacji został skopiowany ze schowka do tej skrytki.\n\nUsunąć oryginalny punkt nawigacji?</string>
     <string name="cache_hint">Wskazówka</string>
-    <string name="cache_hint_not_available">Brak podpowiedzi</string>
+    <string name="cache_hint_not_available">Brak wskazówki</string>
     <string name="cache_logs">Dziennik</string>
     <string name="cache_latest_logs">Ostatnie wpisy</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
