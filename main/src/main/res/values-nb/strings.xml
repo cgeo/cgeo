@@ -1057,7 +1057,6 @@
     <string name="cache_variables">Variabler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Veipunkter (%d)</string>
     <string name="cache_waypoints_add">Legg til veipunkt</string>
-    <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
     <string name="cache_waypoints_remove_original_waypoint">Veipunkt kopiert fra utklippstavlen til denne cachen.\n\nFjern opprinnelige veipunkt?</string>
     <string name="cache_hint">Hint</string>
