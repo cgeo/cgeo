@@ -15,6 +15,9 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna 
 - Change: Improved header in variable and waypoint tabs
 - Fix: Two "delete log" items shown
 - Fix: c:geo crashing in cache details when rotating screen
+- Change: More compact layout for "adding new waypoint"
+- New: Option to load images for geocaching.com caches in "unchanged" size
+- New: Variables view can be filtered
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -26,3 +29,6 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån som denna 
 - Fix: Återställning av en säkerhetskopia kan duplicera spårfiler i internt lagringsutrymme och efterföljande säkerhetskopior
 - Förändring: Referenser till Twitter borttagna
 - New: Delete orphaned trackfiles on clean up and restore backup
+- New: Warning on trying to add too many caches to a bookmark list
+- New: Watch/unwatch list functions
+
