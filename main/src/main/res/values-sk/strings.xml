@@ -1229,7 +1229,6 @@
     <string name="cache_variables">Premenné</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Body trasy (%d)</string>
     <string name="cache_waypoints_add">Pridať bod trasy</string>
-    <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>
     <string name="cache_waypoints_remove_original_waypoint">Bod trasy bol skopírovaný zo schránky do tejto kešky.\n\nOdstrániť pôvodný bod trasy?</string>
     <string name="cache_hint">Nápoveda</string>
