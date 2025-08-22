@@ -899,7 +899,6 @@
     <string name="cache_images">圖片</string>
     <string name="cache_advanced">進階</string>
     <string name="cache_waypoints">航點</string>
-    <string name="cache_waypoints_add_currentLocation">新增目前位置</string>
     <string name="cache_waypoints_add_fromclipboard">從剪貼簿新增</string>
     <string name="cache_waypoints_remove_original_waypoint">從剪貼簿複製到這個cache</string>
     <string name="cache_hint">提示</string>
