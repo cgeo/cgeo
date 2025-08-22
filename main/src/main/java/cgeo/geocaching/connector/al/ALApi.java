@@ -158,19 +158,32 @@ final class ALApi {
     }
 
     static final class HtmlImageHandler extends DisposableHandler {
-
+        final Geocache cache;
         final String wptName, desc, ilink;
+        private final Completable completable;
+        private final HtmlImage htmlImage;
         Image localImage;
 
-        public static HtmlImageHandler of(final String wptName, final String desc, final String ilink) {
+        public static HtmlImageHandler of(final Geocache cache, final String wptName, final String desc, final String ilink) {
             Looper.prepare();
-            return new HtmlImageHandler(wptName, desc, ilink);
+            return new HtmlImageHandler(cache, wptName, desc, ilink);
         }
 
-        HtmlImageHandler(final String wptName, final String desc, final String ilink) {
+        HtmlImageHandler(final Geocache cache, final String wptName, final String desc, final String ilink) {
+            this.cache = cache;
             this.wptName = wptName;
             this.desc = desc;
             this.ilink = ilink;
+
+            this.htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
+            this.completable = htmlImage.waitForEndCompletable(this);
+        }
+
+        public void fetch(List<Image> wptImages) {
+            htmlImage.fetchDrawableWithMetadata(ilink);
+
+            completable.doOnComplete(() -> wptImages.add(localImage))
+                    .blockingAwait();
         }
 
         @Override
@@ -459,17 +472,10 @@ final class ALApi {
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                final HtmlImage htmlImage = new HtmlImage(cache.getGeocode(), true, true, null, false);
+                final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(cache, wptName, desc, ilink);
 
-                final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(wptName, desc, ilink);
-
-                final Completable completable = htmlImage.waitForEndCompletable(cachedImageHandler);
-
-                htmlImage.fetchDrawableWithMetadata(ilink);
-
-                completable.blockingAwait();
-
-                wptImages.add(cachedImageHandler.localImage);
+                cachedImageHandler.fetch(wptImages);
+                        ;
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + cachedImageHandler.localImage.uri + "\"></img><p><p>" + desc);
 
