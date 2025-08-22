@@ -5,6 +5,7 @@
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:enforceNavigationBarContrast">true</item>
         <item name="android:enforceStatusBarContrast">true</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
 </resources>
