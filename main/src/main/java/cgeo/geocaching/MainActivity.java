@@ -193,6 +193,9 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                         final TextView userName = connectorInfo.findViewById(R.id.item_title);
                                         final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
                                         userName.setText(p.second);
+                                        userName.setOnClickListener(v -> {
+                                            ShareUtils.openUrl(getContext(), conn.geMyAccountUrl());
+                                        });
                                         final String userFoundCount = p.first.toString();
                                         if (userFoundCount.isEmpty()) {
                                             userFounds.setVisibility(View.GONE);
