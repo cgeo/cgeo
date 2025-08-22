@@ -1,5 +1,7 @@
 ##
+- Fix: Unencrypted cache hints (website change)
 - Korrektur: UnifiedMap VTM: Umschalten von 3D-Gebäude funktioniert nicht für kombinierte Karten
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
 - Korrektur: Absturz in Übersetzungsfunktion
@@ -13,6 +15,7 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
