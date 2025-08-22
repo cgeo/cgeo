@@ -407,13 +407,13 @@ final class ALApi {
     @Nullable
     private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
         List<Waypoint> result = null;
-        List<Image> wptImages = new ArrayList<>(5);
+        final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
+                final String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
 
                 final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
