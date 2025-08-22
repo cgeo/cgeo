@@ -685,7 +685,6 @@
     <string name="cache_list_select_last">останній відбір</string>
     <string name="cache_images">зображення</string>
     <string name="cache_waypoints">шляхові точки</string>
-    <string name="cache_waypoints_add_currentLocation">додати поточне місцезнаходження</string>
     <string name="cache_waypoints_add_fromclipboard">додати з буфера обміну</string>
     <string name="cache_waypoints_remove_original_waypoint">Точку шляху скопійовано з буфера обміну в цей кеш. \n\n Вилучити оригінальну точку маршруту?</string>
     <string name="cache_hint">підказка</string>
