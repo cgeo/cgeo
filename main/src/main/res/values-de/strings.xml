@@ -1463,7 +1463,6 @@
     <string name="cache_variables_chip_completed_variables">Vollständig</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Wegpunkte (%d)</string>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
-    <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
     <string name="cache_waypoints_remove_original_waypoint">Wegpunkt aus der Zwischenablage in diesen Cache kopiert.\n\nUrsprünglichen Wegpunkt entfernen?</string>
     <string name="cache_hint">Hinweis</string>
