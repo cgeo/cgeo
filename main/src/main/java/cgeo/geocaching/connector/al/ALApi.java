@@ -201,8 +201,8 @@ final class ALApi {
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
-            final Geocache gc = importCacheFromJSON(response);
-            if (!Settings.isALCfoundStateManual()) {
+            final @Nullable Geocache gc = importCacheFromJSON(response);
+            if (gc != null && !Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
                     if (matchedLabCache.getGeocode().equals(geocode)) {
