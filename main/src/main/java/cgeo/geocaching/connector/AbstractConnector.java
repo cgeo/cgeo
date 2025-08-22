@@ -410,6 +410,12 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    @Nullable
+    public String geMyAccountUrl() {
+        return null;
+    }
+
+    @Override
     public boolean equals(@Nullable final Object obj) {
         if (!(obj instanceof AbstractConnector)) {
             return false;
