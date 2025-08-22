@@ -1,5 +1,7 @@
 ##
+- Fix: Unencrypted cache hints (website change)
 - Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
 - Oprava: Chyba v překladatelském modulu
@@ -13,6 +15,7 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
