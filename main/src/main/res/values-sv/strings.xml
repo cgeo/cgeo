@@ -1462,7 +1462,6 @@
     <string name="cache_variables">Variabler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Lägg till waypoint</string>
-    <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
     <string name="cache_waypoints_add_fromclipboard">Lägg till från urklipp</string>
     <string name="cache_waypoints_remove_original_waypoint">Vägpunkt kopierad från urklipp till denna cache.\n\nTa bort ursprungliga vägpunkten?</string>
     <string name="cache_hint">Tips</string>
