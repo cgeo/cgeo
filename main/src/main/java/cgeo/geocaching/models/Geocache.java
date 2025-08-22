@@ -466,7 +466,7 @@ public class Geocache implements INamedGeoCoordinate {
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
-                StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
+                StringUtils.equals(geocode, other.geocode) &&
                 StringUtils.equalsIgnoreCase(name, other.name) &&
                 cacheType.equals(other.cacheType) &&
                 size == other.size &&
@@ -1439,7 +1439,8 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setGeocode(@NonNull final String geocode) {
-        this.geocode = geocode == null ? "" : StringUtils.upperCase(geocode);
+        final String normalizedCode = ConnectorFactory.normalizeGeocode(geocode);
+        this.geocode = StringUtils.isBlank(normalizedCode) ? "" : normalizedCode;
     }
 
     public void setCacheId(final String cacheId) {

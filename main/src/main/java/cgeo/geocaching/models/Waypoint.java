@@ -275,7 +275,7 @@ public class Waypoint implements INamedGeoCoordinate {
     }
 
     public void setGeocode(final String geocode) {
-        this.geocode = geocode == null ? "" : StringUtils.upperCase(geocode);
+        this.geocode = geocode == null ? "" : geocode;
         this.parentCache = null;
     }
 

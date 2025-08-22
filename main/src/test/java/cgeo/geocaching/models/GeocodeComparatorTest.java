@@ -19,7 +19,7 @@ public class GeocodeComparatorTest {
         caches.add(createGeocache("GC1ABCD"));
         caches.add(createGeocache("OCFBD3"));
         caches.add(createGeocache("GC2345"));
-        caches.add(createGeocache(null));
+        caches.add(createGeocache(""));
         caches.add(createGeocache("GC56EFG"));
         caches.add(createGeocache("OC117B6"));
         caches.add(createGeocache("GC77"));

@@ -127,7 +127,7 @@ public final class GCParser {
             final JsonNode properties = features.get(i).get("properties");
             final Geocache cache = new Geocache();
             cache.setName(properties.get("name").asText());
-            cache.setGeocode(properties.get("key").asText());
+            cache.setGeocode(properties.get("key").asText().toUpperCase());
             cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
             cache.setArchived(properties.get("archived").asBoolean());
             cache.setDisabled(!properties.get("available").asBoolean());
@@ -267,7 +267,7 @@ public final class GCParser {
         cache.setFavorite(TextUtils.matches(page, GCConstants.PATTERN_IS_FAVORITE));
 
         // cache geocode
-        cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
+        cache.setGeocode(Objects.requireNonNull(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode())).toUpperCase());
 
         // cache id
         cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));

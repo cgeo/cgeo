@@ -65,9 +65,13 @@ public class GeocacheTest {
     }
 
     @Test
-    public void testGeocodeUppercase() {
+    public void testGeocodeCaseSensitive() {
         final Geocache cache = new Geocache();
-        cache.setGeocode("gc1234");
+        cache.setGeocode("gcab12");
+        assertThat(cache.getGeocode()).isEqualTo("GCab12");
+        cache.setGeocode("GCaB12");
+        assertThat(cache.getGeocode()).isEqualTo("GCaB12");
+        cache.setGeocode("Gc1234");
         assertThat(cache.getGeocode()).isEqualTo("GC1234");
     }
 

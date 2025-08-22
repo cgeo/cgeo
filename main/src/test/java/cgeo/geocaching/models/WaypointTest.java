@@ -47,7 +47,7 @@ public class WaypointTest {
     public void testGeocode() {
         final Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);
         waypoint.setGeocode("p1");
-        assertThat(waypoint.getGeocode()).isEqualTo("P1");
+        assertThat(waypoint.getGeocode()).isEqualTo("p1");
     }
 
 

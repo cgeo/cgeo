@@ -774,7 +774,7 @@ public class GCWebAPI {
 
                     final Geocache c = new Geocache();
                     c.setDetailed(false);
-                    c.setGeocode(r.code);
+                    c.setGeocode(r.code.toUpperCase());
                     c.setName(r.name);
                     if (r.userCorrectedCoordinates != null) {
                         c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));

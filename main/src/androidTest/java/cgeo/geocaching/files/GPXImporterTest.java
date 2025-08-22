@@ -183,7 +183,7 @@ public class GPXImporterTest {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, /*GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS,*/ GPXImporter.IMPORT_STEP_FINISHED);
-        final Geocache cache = DataStore.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache("AId1", LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
         assertCacheProperties(cache);
