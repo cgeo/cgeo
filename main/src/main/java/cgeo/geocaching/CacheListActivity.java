@@ -17,6 +17,8 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -31,7 +33,9 @@ import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
@@ -1671,6 +1675,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return Intents.putListType(new Intent(context, CacheListActivity.class), CacheListType.HISTORY);
     }
 
+    public static Intent getHistoryIntent(final Context context, @NonNull final IConnector connector) {
+        final Intent historyIntent = new Intent(context, CacheListActivity.class);
+        Intents.putListType(historyIntent, CacheListType.HISTORY);
+        historyIntent.putExtra(Intents.EXTRA_CONNECTOR, connector.getName());
+        return historyIntent;
+    }
+
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(addressIntent, CacheListType.ADDRESS);
@@ -1815,7 +1826,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = res.getString(R.string.caches_history);
                     listId = PseudoList.HISTORY_LIST.id;
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+
+                    final GeocacheFilter offlineFilter;
+                    final String connectorName = extras.getString(Intents.EXTRA_CONNECTOR);
+                    if (null == connectorName) {
+                        offlineFilter = currentCacheFilter.get();
+                    } else {
+                        final IConnector connector = ConnectorFactory.getConnectorByName(connectorName);
+                        final OriginGeocacheFilter connectorAddFilter = GeocacheFilterType.ORIGIN.create();
+                        connectorAddFilter.setValues(Collections.singletonList(connector));
+                        offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
+                    }
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+
                     break;
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);

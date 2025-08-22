@@ -203,6 +203,11 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                                 activity.startActivity(CacheListActivity.getHistoryIntent(activity));
                                                 ActivityMixin.overrideTransitionToFade(activity);
                                             });
+                                            userFounds.setOnLongClickListener(v -> {
+                                                getContext().startActivity(CacheListActivity.getHistoryIntent(activity, conn));
+                                                ActivityMixin.overrideTransitionToFade(activity);
+                                                return true;
+                                            });
                                         }
                                     });
 
