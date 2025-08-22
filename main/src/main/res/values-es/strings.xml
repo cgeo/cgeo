@@ -1089,7 +1089,6 @@
     <string name="cache_variables">Variables</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Añadir waypoint</string>
-    <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copiado desde el portapapeles a este caché.\n\n¿Eliminar el waypoint original?</string>
     <string name="cache_hint">Pista</string>
