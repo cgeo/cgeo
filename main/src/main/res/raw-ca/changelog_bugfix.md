@@ -1,5 +1,7 @@
 ##
+- Fix: Unencrypted cache hints (website change)
 - Correcció: UnifiedMap VTM: L'activació o desactivació d'edificis en 3D no funciona per a mapes combinats
+- Fix: Offline translation: Listing language sometimes detected as --
 
 ##
 - Correcció: Error al mòdul de traducció
@@ -13,6 +15,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
