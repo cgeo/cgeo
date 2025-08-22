@@ -1484,7 +1484,7 @@
     <string name="cache_waypoints_hide_visited_waypoints">Ukryj odwiedzone punkty nawigacji</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacji został skopiowany ze schowka do tej skrytki.\n\nUsunąć oryginalny punkt nawigacji?</string>
     <string name="cache_hint">Wskazówka</string>
-    <string name="cache_hint_not_available">Brak podpowiedzi</string>
+    <string name="cache_hint_not_available">Brak wskazówki</string>
     <string name="cache_logs">Dziennik</string>
     <string name="cache_latest_logs">Ostatnie wpisy</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
