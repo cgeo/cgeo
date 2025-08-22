@@ -1139,7 +1139,6 @@
     <string name="cache_variables">Μεταβλητές</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
     <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
-    <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
