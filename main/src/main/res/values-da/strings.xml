@@ -900,7 +900,6 @@
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Rutepunkter</string>
-    <string name="cache_waypoints_add_currentLocation">Tilføj nuværende position</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
     <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
     <string name="cache_hint">Hint</string>
