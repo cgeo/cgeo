@@ -162,12 +162,12 @@ final class ALApi {
         final String wptName, desc, ilink;
         Image localImage;
 
-        public static HtmlImageHandler of(String wptName, String desc, String ilink) {
+        public static HtmlImageHandler of(final String wptName, final String desc, final String ilink) {
             Looper.prepare();
             return new HtmlImageHandler(wptName, desc, ilink);
         }
 
-        HtmlImageHandler(String wptName, String desc, String ilink) {
+        HtmlImageHandler(final String wptName, final String desc, final String ilink) {
             this.wptName = wptName;
             this.desc = desc;
             this.ilink = ilink;
@@ -463,7 +463,7 @@ final class ALApi {
 
                 final HtmlImageHandler cachedImageHandler = HtmlImageHandler.of(wptName, desc, ilink);
 
-                Completable completable = htmlImage.waitForEndCompletable(cachedImageHandler);
+                final Completable completable = htmlImage.waitForEndCompletable(cachedImageHandler);
 
                 htmlImage.fetchDrawableWithMetadata(ilink);
 
