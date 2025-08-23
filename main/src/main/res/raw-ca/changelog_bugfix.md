@@ -1,7 +1,7 @@
 ##
-- Fix: Unencrypted cache hints (website change)
+- Correcció: Suggeriments de catxé sense xifrar (canvi de lloc web)
 - Correcció: UnifiedMap VTM: L'activació o desactivació d'edificis en 3D no funciona per a mapes combinats
-- Fix: Offline translation: Listing language sometimes detected as --
+- Correcció: Traducció fora de línia: De vegades es detecta l'idioma de la llista com a --
 
 ##
 - Correcció: Error al mòdul de traducció
