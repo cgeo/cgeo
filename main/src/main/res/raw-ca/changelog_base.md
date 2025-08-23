@@ -15,9 +15,9 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Canvi: Millora de la capçalera a les pestanyes de variables i punts de referència
 - Correcció: Es mostren dos elements de "supressió del registre"
 - Correcció: c:geo es bloqueja als detalls del catxé en girar la pantalla
-- Change: More compact layout for "adding new waypoint"
-- New: Option to load images for geocaching.com caches in "unchanged" size
-- New: Variables view can be filtered
+- Canvi: Disseny més compacte per "afegir un nou punt de referència"
+- Nou: Opció per carregar imatges pels catxés de geocaching.com en mida "sense canvis"
+- Nou: la vista de variables es pot filtrar
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -29,6 +29,6 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Correcció: La restauració d'una còpia de seguretat pot duplicar els fitxers de track a l'emmagatzematge intern i a les còpies de seguretat posteriors
 - Canvi: S'han eliminat les referències a Twitter
 - Nou: Elimina els fitxers de pista orfes en netejar i restaurar la còpia de seguretat
-- New: Warning on trying to add too many caches to a bookmark list
-- New: Watch/unwatch list functions
+- Nou: Avís en intentar afegir massa catxés a una llista de marcadors
+- Nou: Funcions de llista de seguiment/no seguiment
 
