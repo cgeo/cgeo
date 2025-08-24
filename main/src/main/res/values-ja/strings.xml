@@ -2019,6 +2019,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_question">疑問</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
+    <string-array name="settings_gc_imagesize_entries">
+        <item>オリジナル</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

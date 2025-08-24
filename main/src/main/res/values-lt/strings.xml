@@ -2414,6 +2414,12 @@
     <string name="smiley_question">Klausimas</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Originalus</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
