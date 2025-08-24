@@ -1,7 +1,7 @@
 ##
-- Fix: Unencrypted cache hints (website change)
+- Oplossing: Onversleutelde cache hints (website wijziging)
 - Oplossing: UnifiedMap VTM: Wisselen van 3D-gebouwen werkt niet voor gecombineerde kaarten
-- Fix: Offline translation: Listing language sometimes detected as --
+- Oplossing: Offline vertaling: Listing taal soms gedetecteerd als --
 
 ##
 - Oplossing: Crash in vertaalmodule
