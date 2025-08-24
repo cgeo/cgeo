@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort {
 
     @NonNull
-    private static final String CACHE_URL = "https://adventurelab.page.link/";
+    private static final String CACHE_URL = "https://labs.geocaching.com/goto/";
 
     @NonNull
     protected static final String GEOCODE_PREFIX = "AL";
