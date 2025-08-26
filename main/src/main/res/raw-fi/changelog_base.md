@@ -27,12 +27,12 @@ Until then, you can switch between the different implementations in settings => 
 - New: Follow my location in elevation chart (UnifiedMap)
 - New: Enable "move to" / "copy to" actions for "show as list"
 - New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- Uusi: Mukautuva rinnevarjostus, valinnainen laadukkaampi tila (UnifiedMap Mapsforge)
 - New: Redesigned routes/tracks quick settings dialog
 - New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
+- Uusi: Offline rinnevarjostus UnifiedMap (VTM variantti)
 - New: Support for background maps (UnifiedMap)
 - Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
 - New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
@@ -47,7 +47,7 @@ Until then, you can switch between the different implementations in settings => 
 - Change: Log-date related placeholders will use chosen date instead of current date
 - New: Collapse long log entries per default
 
-### Wherigo player
+### Wherigo -toistin
 - New: Integrated Wherigo player checking for missing credentials
 - Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
 - New: Ability to navigate to a zone using compass
