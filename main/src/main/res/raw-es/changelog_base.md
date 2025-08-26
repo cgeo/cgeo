@@ -1,15 +1,15 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Debido a las políticas de Play Store hemos actualizado el nivel de la API de Android esta versión de los objetivos de c:geo. Esto podría producir efectos secundarios no deseados, especialmente en las versiones más recientes de Android. Si experimenta algún problema con esta versión de c:geo, por favor informe ya sea en [GitHub](https://github.com/cgeo/cgeo) o por correo electrónico a [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
-- New: Route optimization caches calculated data
-- New: Enabling live mode keeps waypoints of currently set target visible
-- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
-- New: Show generated waypoints on map
+- Nuevo: Optimización del calculo de rutas de cachés
+- Nuevo: Activar el modo live (en vivo) mantiene visibles los waypoints del objetivo actual
+- Nuevo: Un toque largo en la línea de navegación abre el mapa de terreno (UnifiedMap)
+- Nuevo: Mostrar waypoints generados en el mapa
 
 ### Detalles del caché
-- New: Detect additional characters in formulas: –, ⋅, ×
-- New: Preserve timestamp of own logs on refreshing a cache
-- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
+- Nuevo: Detectar caracteres adicionales en fórmulas: –, ⋅, ×
+- Nuevo: Se preservará la hora y día de los registros propios al actualizar un caché
+- Nuevo: Opcional mini vista de la brújula (ver configuración => detalles del caché => Mostrar dirección en los detalles del caché)
 - New: Show owners' logs on "friends/own" tab
 - Change: "Friends/own" tab shows log counts for that tab instead of global counters
 - Change: Improved header in variable and waypoint tabs
