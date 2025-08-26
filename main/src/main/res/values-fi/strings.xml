@@ -1082,7 +1082,7 @@
     <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nRinnevarjostustiedot voidaan ladata karttavalikosta.\nEi yhteensopiva UnifiedMap VTM -variantin kanssa.</string>
     <string name="settings_hillshading_enable">Rinnevarjostus</string>
     <string name="init_hillshading_hq">Korkealaatuinen rinnevarjostus</string>
-    <string name="init_summary_hillshading_hq">Tarkempi rinnevarjostus, mutta ~50% hitaampi renderöinti ulos loitontaessa</string>
+    <string name="init_summary_hillshading_hq">Tarkempi rinnevarjostus, mutta ~50%% hitaampi renderöinti ulos loitontaessa</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_mapsource_select_legacy">Valitse karttalähde (Legacy)</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
