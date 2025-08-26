@@ -1,7 +1,8 @@
 ##
-- Fix: Unencrypted cache hints (website change)
+- Naprawiono: Niezaszyfrowane wskazówki skrytki (zmiana strony internetowej)
+- Naprawiono: Skrytki Lab nie były wczytywane w aplikacji (zmiana strony internetowej, będziesz musiał zaktualizować zapisane Laby, aby móc wywoływać je z c:geo ponownie)
 - Naprawiono: UnifiedMap VTM: Przełączanie 3D budynków nie działa dla połączonych map
-- Fix: Offline translation: Listing language sometimes detected as --
+- Naprawiono: Tłumaczenie offline: Czasami język opisu skrytki był wykrywany jako --
 
 ##
 - Naprawiono: Awaria w module tłumaczenia
@@ -15,6 +16,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
