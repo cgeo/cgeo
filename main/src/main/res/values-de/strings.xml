@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
     <string name="log_your_saved_log">Dein gespeichertes Log</string>
     <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
+    <string name="log_empty_logbook_filtered">Die ausgewählten Filter verstecken alle Logs. Wähle mindestens eine Option.</string>
     <string name="log_image_selectfromstorage_tooltip">Bilder aus dem Speicher auswählen</string>
     <string name="log_image_camera_tooltip">Foto mit Kamera aufnehmen</string>
     <string name="log_image_selectfromown_tooltip">Bilder aus eigenen Bildern auswählen</string>
@@ -261,6 +262,7 @@
     <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
     <string name="err_detail_premium_log_found">Dieser Cache ist nur für Premium-Mitglieder von Geocaching.com sichtbar. Daher können die Cache-Informationen nicht angezeigt werden.\n\nFalls du diesen Cache aber bereits gefunden hast, kannst du ihn hier loggen.</string>
     <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
+    <string name="err_watchlist_failed_geocodes">Änderung der Beobachtungsliste fehlgeschlagen für Geocodes: %s</string>
     <string name="err_application_no">c:geo konnte keine passende Anwendung finden.</string>
     <string name="err_auth_initialize">c:geo konnte die Autorisierung nicht starten.</string>
     <string name="err_auth_process">Autorisierung fehlgeschlagen.</string>
@@ -366,6 +368,9 @@
     <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
     <string name="translator_language_target_select">Zielsprache wählen</string>
+    <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt. Tippen, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_unknown">Die Sprache kann nicht erkannt werden. Tippen, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_detected">Übersetze von \"%s\". Tippe um die Ausgangssprache auszuwählen.</string>
     <string name="translator_target_language">Übersetze nach \"%s\"</string>
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
@@ -476,6 +481,11 @@
     <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_bookmarklist_all">Alle zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_bookmarklist_selected">Ausgewählte zu Lesezeichenliste hinzufügen</string>
+    <string name="caches_watch_all">Alle zur Beobachtungsliste hinzufügen</string>
+    <string name="caches_unwatch_all">Alle von der Beobachtungsliste entfernen</string>
+    <string name="caches_watch_selected">Ausgewählte zur Beobachtungsliste hinzufügen</string>
+    <string name="caches_unwatch_selected">Ausgewählte von der Beobachtungsliste entfernen</string>
+    <string name="watchlist_background_started">Beobachtungsliste wird im Hintergrund aktualisiert</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
@@ -1239,6 +1249,7 @@
     <string name="category_unifiedMap">Vereinheitlichte Karte</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
+    <string name="gui_test_title">GUI Testbildschirm</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Annäherungsbenachrichtigung</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung auf der Karte</string>
@@ -1470,6 +1481,7 @@
     <string name="cache_logs">Logbuch</string>
     <string name="cache_latest_logs">Letzte Logs</string>
     <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
+    <string name="cache_logs_friends">Freunde</string>
     <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
     <string name="cache_dialog_loading_details_status_details">Verarbeite Details</string>
