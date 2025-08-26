@@ -356,6 +356,9 @@
     <string name="translator_model">Übersetzungsmodell</string>
     <string name="translator_tooltip">Offline-Übersetzung</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
+    <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt. Tippen, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_unknown">Die Sprache kann nicht erkannt werden. Tippen, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_detected">Übersetze von \"%s\". Tippe um die Ausgangssprache auszuwählen.</string>
     <string name="translator_target_language">Übersetze nach \"%s\"</string>
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
