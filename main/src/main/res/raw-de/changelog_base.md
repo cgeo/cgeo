@@ -15,9 +15,9 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Änderung: Fixierter Header in Variablen und Wegpunkt-Tabs
 - Korrektur: Doppelte "Log löschen"-Einträge anzeigen
 - Korrektur: c:geo stürzt in den Cache-Details ab, wenn der Bildschirm dreht
-- Change: More compact layout for "adding new waypoint"
-- New: Option to load images for geocaching.com caches in "unchanged" size
-- New: Variables view can be filtered
+- Änderung: Kompaktere Ansicht für "Neuen Wegpunkt hinzufügen"
+- Neu: Option, um Bilder von geocaching.com in "unveränderter" Größe zu laden
+- Neu: Variablenansicht kann gefiltert werden
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -29,6 +29,6 @@ Aufgrund der Play Store-Richtlinien haben wir das Android Ziel-API dieser Versio
 - Korrektur: Wiederherstellung eines Backups kann Dateien von Tracks im internen Speicher und in anschließenden Sicherungen duplizieren
 - Änderung: Verweise auf Twitter entfernt
 - Neu: Löschen verwaister Dateien von Tracks beim Bereinigen und Wiederherstellen der Sicherung
-- New: Warning on trying to add too many caches to a bookmark list
-- New: Watch/unwatch list functions
+- Neu: Warnung, wenn zu viele Caches zu einer Lesezeichenliste hinzugefügt werden sollen
+- Neu: Listen beobachten/nicht beobachten
 
