@@ -356,9 +356,6 @@
     <string name="translator_model">Modelo de tradução</string>
     <string name="translator_tooltip">Tradução offline</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
-    <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução.</string>
-    <string name="translator_language_unknown">Não foi possível identificar o idioma</string>
-    <string name="translator_language_detected">Traduzir de \"%s\"</string>
     <string name="translator_target_language">Traduzir para \"%s\"</string>
     <string name="translator_translation_error">Falha ao traduzir texto: %s</string>
     <string name="translator_translation_initerror">Falha ao inicializar o tradutor</string>
