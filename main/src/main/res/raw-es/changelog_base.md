@@ -1,80 +1,80 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+### Aviso de deprecación de mapas "antiguos" & UnifiedMap hoja de ruta
+c:geo tiene una implementación de mapa completamente nueva llamada "UnifiedMap" desde un tiempo, que reemplazará en última instancia las viejas implementaciones de Google Maps y Mapsforge (OpenStreetMap). Este es un aviso de deprecación para informarle acerca de la nueva hoja de ruta.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+UnifiedMap se publicó hace aproximadamente un año. Todavía soporta Google Maps y OpenStreetMap (online + offline), pero de una manera técnica completamente reelaborada y con muchas nuevas características emocionantes que los "antiguos" mapas no soportan, algunas de las cuales son
+- Mapa de rotación para mapas basados en OpenStreetMap (online + offline)
+- Popup de cluster para Google Maps
+- Ocultar fuentes de mapa que no necesitas
+- Gráfico de reconocimiento de rutas y pistas
+- Cambiar entre listas directamente desde el mapa
+- "Modo de conducción" para mapas basados en OpenStreetMap
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+UnfiedMap ha demostrado ser estable desde hace algún tiempo, por lo que eliminaremos las implementaciones de mapas antiguas para reducir los esfuerzos de mantenimiento de c:geo.
 
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+Hoja de Ruta:
+- Los mapas "Antiguos" están ahora en modo de deprecación - ya no arreglaremos errores para ellos.
+- UnifiedMap será la elección por defecto para todos los usuarios en otoño de 2025.
+- Las implementaciones de mapas "Antiguos" se eliminarán en la primavera de 2026.
 
-Until then, you can switch between the different implementations in settings => map sources.
+Hasta entonces, puede cambiar entre las diferentes implementaciones en ajustes => fuentes de mapas.
 
-### Mapa
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+### UnifiedMap
+- Nuevo: Mostrar perímetros de respuesta para etapas de Adventure Labs (UnifiedMap) - habilite "Círculos" en los ajustes rápidos del mapa para mostrarlos
+- Nuevo: Opción para establecer círculos con radio individual para puntos adicionales (opción de menú contextual "perímetro de respuesta")
+- Corregido: La vista del mapa no se actualiza al eliminar la caché de la lista actual
+- Corregido: Número de caché en el selector de lista no actualizaba al cambiar el contenido de la lista
+- Cambio: Se mantendrá la vista actual al mapear una lista, si todos los cachés entran en la vista actual
+- Nuevo: Sigue mi ubicación en el gráfico de elevación (UnifiedMap)
+- Nuevo: Activar las acciones "mover a" / "copiar a" para "mostrar como lista"
+- Nuevo: Soporte para el tema Elevate Winter en el descargador de mapas
+- Nuevo: Sombreado de relieve adaptativo, modo opcional de alta calidad (UnifiedMap Mapsforge)
+- Nuevo: Rediseño del diálogo de ajustes rápidos de rutas/pistas
+- Nuevo: Pulsación larga en el icono de selección de mapa para seleccionar el proveedor de teselas anterior (UnifiedMap)
+- Nuevo: Permite configurar el nombre de los mapas sin conexión en el archivo complementario (UnifiedMap)
+- Nuevo: Pulsación larga en "botón activar en vivo" para cargar cachés sin conexión
+- Nuevo: Sombreado de relieve sin conexión para UnifiedMap (variante VTM)
+- Nuevo: Soporte para mapas en segundo plano (UnifiedMap)
+- Corregido: Iconos compactos que no regresan a su tamaño grande al acercarse de modo automático (UnifiedMap)
+- Nuevo: Acciones con pulsaciones largas en la hoja de información del caché: código GC, título del caché, coordenadas, notas personales/pista
+- Cambio: Cambia el toque largo en la hoja de información del caché para el selector de emojis por un toque corto para resolver la colisión
 
 ### Detalles del caché
-- New: Offline translation of listing text and logs (experimental)
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
-- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
-- Fix: User note gets lost on refreshing a lab adventure
-- Change: Log-date related placeholders will use chosen date instead of current date
-- New: Collapse long log entries per default
+- Nuevo: Traducción sin conexión del texto de los listados y registros (experimental)
+- Nuevo: Opción para compartir cachés con datos de usuario (coordenadas, notas personales)
+- Corregido: Servicio de voz interrumpido al rotar la pantalla
+- Corregido: Detalles del caché: Listas de cachés no actualizadas después de tocar en el nombre de la lista y eliminando ese caché de esa lista
+- Corregido: La nota del usuario se pierde al actualizar un Adventure Lab
+- Cambio: Los marcadores de posición relacionados con fecha de registro usarán la fecha elegida en lugar de la fecha actual
+- Nuevo: Las entradas de registro largas se colapsarán por defecto
 
-### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
-- New: Support opening local Wherigo files
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+### Ejecutador de Wherigos
+- Nuevo: Comprobación de credenciales faltantes integrada en el Ejecutador de Wherigos
+- Cambio: Eliminado informe de error Wherigo (ya que los errores están en su mayoría relacionados con cartuchos, necesitan ser corregidos por el propietario de cartucho)
+- Nuevo: Posibilidad de navegar a una zona usando la brújula
+- Nuevo: Posibilidad de copiar las coordenadas del centro de zona al portapapeles
+- Nuevo: Establecer el centro de zona como objetivo al abrir el mapa (para obtener información de ruta e información de distancia hacia él)
+- Nuevo: Soporte para abrir archivos locales de Wherigo
+- Cambio: Ya no se reconocen pulsaciones largas en una zona del mapa. Esto permite a los usuarios hacer otras cosas en el área de la zona del mapa disponible con toques largos, por ejemplo: crear un caché definido por el usuario
+- Nuevo: Mostrar advertencia si wherigo.com informa de que falta el EULA (lo que conduce a una descarga fallida de cartucho)
 
 ### General
-- New: Redesigned search page
-- New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
-- New: Show last used filter name in filter dialog
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
-- Fix: Incorrect altitude (not using mean above sea level)
-- Fix: Nearby distance limit setting not working properly for small values
-- Fix: Sorting of cache lists by distance descending not working correctly
-- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
-- Fix: Color issues with menu icons in light mode
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
-- Fix: Importing local map file gets random map name
-- Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Nuevo: Página de búsqueda rediseñada
+- Nuevo: Filtro de recuento de inventario
+- Nuevo: Soporte para coordenadas en formato DD, DDDDDD
+- Nuevo: Mostrar el último nombre de filtro usado en el filtro de diálogo
+- Nuevo: Calculadora de coordenadas: Función para reemplazar "x" con el símbolo de multiplicación
+- Corregido: Altitud incorrecta (no usando la media sobre el nivel del mar)
+- Corregido: El ajuste del límite de distancia cercano no funcionaba correctamente para valores pequeños
+- Corregido: Ordenar las listas de cachés por distancia descendente no funcionaba correctamente
+- Corregido: Cachés Adventure Lab excluidos en el filtro D/T incluso con "incluir incierto" activo
+- Corregido: Problemas de color con los iconos de menú en modo claro
+- Nuevo: Añadir "Eliminar eventos pasados" a la lista "todos"
+- Nuevo: Mostrar conector para "cachés definidos por el usuario" como activos en el filtro de origen
+- Nuevo: Exporte de GPX: exportación de registros / rastreables ahora es opcional
+- Nuevo: Botón añadido para eliminar plantillas de registro
+- Corregido: Importar archivo de mapa local obtiene un nombre aleatorio para el mapa
+- Corregido: El descargador de mapas ofrece archivos rotos (0 bytes) para descargar
+- Nuevo: Se añadieron mapeados para algunos tipos de cachés OC faltantes
+- Nuevo: Mover listas "usadas recientemente" en el diálogo de selección a la parte superior pulsando el botón "usado recientemente"
+- Nuevo: Compartir lista de geocódigos de la lista de cachés
+- Cambio: "Navegación (coche)" etc. usará el parámetro "q=" en lugar del parámetro "ll=" obsoleto
