@@ -379,6 +379,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final boolean setDefaultCenterAndZoom = this.cacheReloadState == CacheReloadState.INITIALIZE;
 
         final UnifiedMapType mapType = viewModel.mapType;
+        Log.d(LOGPRAEFIX + "reloadCachesAnddWaypoints, setZoom=" + setDefaultCenterAndZoom + ", mapType=" + mapType.type + ", filter=" + viewModel.mapType.filterContext);
         switch (mapType.type) {
             case UMTT_PlainMap:
                 // restore last saved position and zoom
@@ -515,10 +516,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
-        viewModel.liveMapHandler.setEnabled(mapType.enableLiveMap());
         if (mapType.enableLiveMap()) {
             refreshMapData(true);
         }
+        viewModel.liveMapHandler.setEnabled(mapType.enableLiveMap());
     }
 
     private void restoreOrSetViewport(final Viewport vp) {
@@ -1127,10 +1128,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void refreshMapData(final boolean filterChanged) {
+        Log.d(LOGPRAEFIX + "refreshMapData:filterChanged=" + filterChanged + ", mapType=" + viewModel.mapType.type + ", filter=" + viewModel.mapType.filterContext);
+        //FIRST set filter in liveMapHandler (to prevent it from delivering results from old outdated filter)
+        if (filterChanged) {
+            viewModel.liveMapHandler.setFilter(viewModel.mapType.filterContext.get());
+        }
+        //THEN filter already existing caches
         viewModel.caches.write(false, caches -> MapUtils.filter(caches, viewModel.mapType.filterContext));
         viewModel.waypoints.notifyDataChanged();
         if (filterChanged) {
-            viewModel.liveMapHandler.setFilter(viewModel.mapType.filterContext.get());
             MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
         }
     }
