@@ -18,7 +18,7 @@ Roadmap:
 
 Until then, you can switch between the different implementations in settings => map sources.
 
-### Map
+### 地图
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 - Fix: Map view not updated when removing cache from currently shown list
@@ -38,10 +38,10 @@ Until then, you can switch between the different implementations in settings => 
 - New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
 - Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
 
-### Cache details
+### 藏点详细信息
 - New: Offline translation of listing text and logs (experimental)
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
+- 更新：分享藏点时可以选择包含用户数据（坐标，个人笔记）
+- 修复：屏幕旋转时语音中断的问题
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 - Fix: User note gets lost on refreshing a lab adventure
 - Change: Log-date related placeholders will use chosen date instead of current date
@@ -57,10 +57,10 @@ Until then, you can switch between the different implementations in settings => 
 - Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
 - New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
 
-### General
-- New: Redesigned search page
-- New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
+### 通用
+- 更新：重新设计搜索页面
+- 更新：库存数量过滤器
+- 更新：支持DDDDDD格式的坐标
 - New: Show last used filter name in filter dialog
 - New: Coordinate calculator: Function to replace "x" with multiplication symbol
 - Fix: Incorrect altitude (not using mean above sea level)
