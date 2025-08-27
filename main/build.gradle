@@ -351,7 +351,7 @@ dependencies {
     implementation 'com.github.spotbugs:spotbugs-annotations:4.9.3'
 
     // GeographicLib
-    implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
+    implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
 
     // DB inspection
     implementation 'com.github.moving-bits:datatables:v0.1.0'
