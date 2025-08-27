@@ -1,21 +1,21 @@
 ##
-- Fix: Unencrypted cache hints (website change)
+- Corregido: Pistas de caché sin cifrar (cambio del sitio web)
 - Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Solucionado: VTM UnifiedMap: Alternar edificios 3D no funciona para mapas combinados
+- Corregido: Traducción sin conexión: Listado de idiomas detectado a veces como --
 
 ##
-- Fix: Crash in translation module
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Corregido: Detención de la aplicación en el módulo de traducción
+- Corregido: Fallo en la detección de inicio de sesión (cambio del sitio web)
+- Corregido: Aplicación detenida al recuperar el cartucho de Wherigo
+- Corregido: "Cargar más" no respetaba los filtros sin conexión
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Corregido: Inventario de TB(s) no cargado mientras se registra un caché
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
+- Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
 
 
 
