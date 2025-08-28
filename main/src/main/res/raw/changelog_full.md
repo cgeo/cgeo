@@ -3,6 +3,24 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.08.26 Bugfix Release
+
+- Fix: Unencrypted cache hints (website change)
+- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
+- Fix: Offline translation: Listing language sometimes detected as --
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2025.08.05 Bugfix Release
+
+- Fix: Login detection fails (website change)
+- Fix: Crash in translation module
+- Fix: Crash on retrieving Wherigo cartridge
+- Fix: "Load more" does not respect offline filters
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.07.25 Bugfix Release
 
 - Fix: Trackable inventory not loaded while logging a cache
