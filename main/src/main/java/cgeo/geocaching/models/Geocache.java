@@ -251,7 +251,6 @@ public class Geocache implements INamedGeoCoordinate {
         }
 
         updated = System.currentTimeMillis();
-        //storageLocation.addAll(other.getStorageLocation()); // seems correct but has side effects / failing tests
 
         // if parsed cache is not yet detailed and stored is, the information of
         // the parsed cache will be overwritten
@@ -402,7 +401,7 @@ public class Geocache implements INamedGeoCoordinate {
             setCoords(other.getCoords());
         } else {
             if (coords == null) {
-                coords = other.coords;
+                setCoords(other.coords);
             }
         }
         // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
@@ -1162,6 +1161,9 @@ public class Geocache implements INamedGeoCoordinate {
      * Set reliable coordinates
      */
     public void setCoords(final Geopoint coords) {
+        if (this.coords != null && coords == null) {
+            Log.w("Geocache: setting non-null-coordinates to null for cache´" + geocode + " (was: " + coords + ")");
+        }
         this.coords = coords;
     }
 
