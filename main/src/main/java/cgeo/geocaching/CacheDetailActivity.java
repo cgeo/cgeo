@@ -163,6 +163,7 @@ import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
 import java.lang.ref.WeakReference;
@@ -263,6 +264,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        calculateInsets |= WindowInsetsCompat.Type.navigationBars(); // no bottom navigation, need to take navigation bar into account for insets calculation
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.tabbed_viewpager_activity_refreshable);
 

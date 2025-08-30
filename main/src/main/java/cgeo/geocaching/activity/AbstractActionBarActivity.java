@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.os.Bundle;
 import android.view.View;
@@ -45,7 +46,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
                     if (activityContent != null && !skipActionBarInsetCalculation) {
                         final float actionBarHeight = getResources().getDimension(R.dimen.actionbar_height);
                         final Insets innerPadding = insets.getInsets(calculateInsets);
-                        activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + actionBarHeight), innerPadding.right, innerPadding.bottom);
+                        activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + ViewUtils.dpToPixelFloat(10f) + actionBarHeight), innerPadding.right, innerPadding.bottom);
                     }
                 }
                 return insets;
