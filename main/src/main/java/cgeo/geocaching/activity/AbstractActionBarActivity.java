@@ -47,10 +47,10 @@ public class AbstractActionBarActivity extends AbstractActivity {
                     if (activityContent == null) {
                         Log.e("edge2edge: activityContent not found in " + this);
                     }
-                    if (activityContent != null && !skipActionBarInsetCalculation) {
-                        final float actionBarHeight = getResources().getDimension(R.dimen.actionbar_height);
+                    if (activityContent != null) {
+                        final float actionBarHeight = skipActionBarInsetCalculation ? 0f : ViewUtils.dpToPixelFloat(10f) + getResources().getDimension(R.dimen.actionbar_height);
                         final Insets innerPadding = insets.getInsets(calculateInsets);
-                        activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + ViewUtils.dpToPixelFloat(10f) + actionBarHeight), innerPadding.right, innerPadding.bottom);
+                        activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + actionBarHeight), innerPadding.right, innerPadding.bottom);
                     }
                 }
                 return insets;

@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.network.HttpRequest;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
@@ -47,7 +48,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        skipActionBarInsetCalculation = true; // gets calculated by map activities themselves
+        skipActionBarInsetCalculation = Settings.getMapActionbarAutohide(); // may get calculated by map HideActionBarUtils
         super.onCreate(savedInstanceState);
     }
 
