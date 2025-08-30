@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
                 if (isEdgeToEdge) {
                     // make room for action bar on top + whatever other insets are requested with calculateInsets variable
                     final ViewGroup activityContent = v.findViewById(R.id.activity_content);
+                    if (activityContent == null) {
+                        Log.e("edge2edge: activityContent not found in " + this);
+                    }
                     if (activityContent != null && !skipActionBarInsetCalculation) {
                         final float actionBarHeight = getResources().getDimension(R.dimen.actionbar_height);
                         final Insets innerPadding = insets.getInsets(calculateInsets);
