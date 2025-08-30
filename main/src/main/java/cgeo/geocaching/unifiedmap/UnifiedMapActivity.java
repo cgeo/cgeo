@@ -1139,28 +1139,39 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 final String geocode = key.substring(UnifiedMapViewModel.CACHE_KEY_PREFIX.length());
 
                 final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                if (temp != null && temp.getCoords() != null) {
+                if (temp != null) {
                     result.add(new MapSelectableItem(new RouteItem(temp)));
+                } else {
+                    result.add(new MapSelectableItem(null, geocode, "Geocache data missing", -1));
                 }
             } else if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX) && isLongTap) { // only consider when tap was a longTap
                 final String identifier = key.substring(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX.length());
 
+                boolean found = false;
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
                     if (identifier.equals(item.getIdentifier())) {
+                        found = true;
                         result.add(new MapSelectableItem(item));
                         break;
                     }
                 }
+                if (!found) {
+                    result.add(new MapSelectableItem(null, "Route " + identifier, "Route data missing", -1));
+                }
             } else if (key.startsWith(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX)) {
                 final String fullGpxId = key.substring(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX.length());
-                viewModel.waypoints.read(wps -> {
+                final boolean found = viewModel.waypoints.readWithResult(wps -> {
                     for (Waypoint waypoint : wps) {
                         if (fullGpxId.equals(waypoint.getFullGpxId())) {
                             result.add(new MapSelectableItem(new RouteItem(waypoint)));
-                            break;
+                            return true;
                         }
                     }
+                    return false;
                 });
+                if (!found) {
+                    result.add(new MapSelectableItem(null, "FluuGpxId " + fullGpxId, "Waypoint not found", -1));
+                }
             } else if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && isLongTap) {
                 result.add(new MapSelectableItem(viewModel.individualRoute.getValue()));
             } else if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
@@ -1263,6 +1274,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             WherigoViewUtils.displayThing(this, item.getData(), false);
         } else if (item.getData() instanceof String) {
             GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
+        } else if (item.getData() == null) {
+            //error case
+            SimpleDialog.of(this).setTitle(item.getName()).setMessage(item.getDescription()).show();
         }
     }
 
