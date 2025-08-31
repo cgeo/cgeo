@@ -1,21 +1,30 @@
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
 
 ##
-- Fix: Crash in translation module
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Correction: indices des caches non encryptés (changement sur le site web)
+- Correction : Lab Aventures ne se chargent pas dans l'application (changement sur le site web, vous devrez mettre à jour les adventure labs stockées pour pouvoir les appeler à nouveau de c:geo)
+- Correction : UnifiedMap VTM : basculer les bâtiments 3D ne fonctionne pas pour les cartes combinées
+- Correction: Traduction hors ligne: Liste des langages parfois détectés comme --
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Correction : Crash dans le module de traduction
+- Correction : Échec de la détection de la connexion (changement du site)
+- Correction : Crash lors de la récupération de la cartouche Wherigo
+- Correction : « Charger plus» ne respecte pas les filtres hors ligne
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Correction : L'inventaire des objets voyageurs n'est pas chargé lors du log d'une cache
+
+##
+- Correctif : La migration des caches définies par l'utilisateur au démarrage de c:geo échoue => retiré pour le moment
+- Correctif : Les tâches Wherigo terminées ne sont pas marquées comme terminées ou échouées
+
+
 
 
 
