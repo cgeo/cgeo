@@ -3,7 +3,7 @@
 - Korrektur: Wherigo Absturz beim Lesen alter Spielstände
 - Korrektur: Fund-Log von innerhalb c:geo manchmal nicht gespeichert
 - Korrektur: Fehlendes Live-Datenupdate für gefundene & archivierte Caches
-- Fix: Wegpunkte werden in der Offline-Karte manchmal nicht angezeigt
+- Korrektur: Wegpunkte werden in der Offline-Karte manchmal nicht angezeigt
 
 ##
 - Fix: Cache-Hinweise nicht mehr verschlüsselt (Webseiten-Änderung)
