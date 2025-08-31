@@ -1,4 +1,11 @@
 ##
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
+
+##
 - Fix: Cache-Hinweise nicht mehr verschlüsselt (Webseiten-Änderung)
 - Fix: Labcaches können in der App nicht geöffnet werden (Webseiten-Änderung, du musst gespeicherte Labcaches aktualisieren um sie erneut aus c:geo zu öffnen)
 - Korrektur: UnifiedMap VTM: Umschalten von 3D-Gebäude funktioniert nicht für kombinierte Karten
@@ -16,6 +23,8 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
+
 
 
 
