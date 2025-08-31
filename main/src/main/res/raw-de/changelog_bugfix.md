@@ -1,9 +1,9 @@
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
+- Korrektur: Wherigo Absturz beim Lesen alter Spielstände
+- Korrektur: Fund-Log von innerhalb c:geo manchmal nicht gespeichert
+- Korrektur: Fehlendes Live-Datenupdate für gefundene & archivierte Caches
+- Fix: Wegpunkte werden in der Offline-Karte manchmal nicht angezeigt
 
 ##
 - Fix: Cache-Hinweise nicht mehr verschlüsselt (Webseiten-Änderung)
