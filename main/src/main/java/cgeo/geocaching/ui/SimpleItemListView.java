@@ -275,10 +275,12 @@ public class SimpleItemListView extends LinearLayout {
             holder.fillData(getItem(position));
 
             if (model.getDisabledItems().contains(getItem(position).value)) {
-                final List<TextView> tvs = getAllTextViews(holder.binding.itemViewAnchor);
-                for (TextView tv : tvs) {
+                ViewUtils.walkViewTree(holder.binding.itemViewAnchor, vi -> {
+                    final TextView tv = (TextView) vi;
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                }
+                    return true;
+                    },
+                    view -> view instanceof TextView);
                 holder.binding.itemViewAnchor.setAlpha(0.5f);
                 holder.binding.itemCheckbox.setEnabled(false);
                 holder.binding.itemRadiobutton.setEnabled(false);
@@ -566,19 +568,5 @@ public class SimpleItemListView extends LinearLayout {
                }
            });
         }
-    }
-
-    private List<TextView> getAllTextViews(final View view) {
-        final List<TextView> textViews = new ArrayList<>();
-        if (view instanceof TextView) {
-            textViews.add((TextView) view);
-        } else if (view instanceof ViewGroup) {
-            final ViewGroup viewGroup = (ViewGroup) view;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                final View child = viewGroup.getChildAt(i);
-                textViews.addAll(getAllTextViews(child));
-            }
-        }
-        return textViews;
     }
 }
