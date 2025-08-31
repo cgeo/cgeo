@@ -681,7 +681,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
             //show all waypoints be displayed or just the ones from visible caches?
-            if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+            if (viewModel.mapType.enableLiveMap()) {
                 waypoints.addAll(DataStore.loadWaypoints(viewport));
             } else {
                 waypoints.addAll(viewModel.caches.readWithResult(caches -> {
@@ -693,6 +693,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }));
             }
         }
+
         //filter waypoints
         MapUtils.filter(waypoints, filter);
         viewModel.waypoints.write(wps -> {

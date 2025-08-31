@@ -35,6 +35,8 @@
     <string name="advlab">Adventure Lab Caché</string>
     <string name="userdefined">Caché definido por el usuario</string>
     <string name="unknown">De tipo desconocido</string>
+    <string name="other">Otros</string>
+    <string name="event_special">Especiales</string>
     <string name="all_types_short">Todos</string>
     <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
@@ -87,7 +89,29 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generado</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Desconocido</string>
+    <string name="cache_cat_bc_nature">Naturaleza</string>
+    <string name="cache_cat_bc_location">Ubicación</string>
+    <string name="cache_cat_bc_recommended">Recomendado</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mystery</string>
+    <string name="cache_cat_bc_hiking">Senderismo</string>
+    <string name="cache_cat_bc_other">Otro</string>
+    <string name="cache_cat_desc_bc_nature">Rodeado de una naturaleza especial</string>
+    <string name="cache_cat_desc_bc_location">Te muestra una gran ubicación</string>
+    <string name="cache_cat_desc_bc_recommended">Recomendado por el equipo BetterCacher</string>
+    <string name="cache_cat_desc_bc_gadget">Artesanía especial, gadget interesante, etc</string>
+    <string name="cache_cat_desc_bc_mystery">Un rompecabezas extraordinario y desafiante</string>
+    <string name="cache_cat_desc_bc_hiking">Ofrece una excelente caminata</string>
+    <string name="cache_cat_desc_bc_other">Otras características - consultar las recomendaciones</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Ninguno</string>
+    <string name="cache_tier_bc_blue">Azul</string>
+    <string name="cache_tier_bc_silver">Plateado</string>
+    <string name="cache_tier_bc_gold">Oro</string>
+    <string name="cache_tier_desc_bc_blue">Nivel por defecto para los cachés listados</string>
+    <string name="cache_tier_desc_bc_silver">Visitado por el equipo BetterCacher, automáticamente premiado</string>
+    <string name="cache_tier_desc_bc_gold">Caché que se sale de lo común, recomendado por el equipo BetterCacher</string>
     <!-- logs -->
     <string name="log_found">Encontrado</string>
     <string name="log_dnf">No encontrado</string>
@@ -125,6 +149,12 @@
     <string name="log_save">Guardar sin conexión</string>
     <string name="log_saving">Enviando registro…</string>
     <string name="log_posting_log">Enviando registro…</string>
+    <string name="log_posting_problemreport">Publicando informe del problema…</string>
+    <string name="log_posting_deletelog">Eliminando registro…</string>
+    <string name="log_posting_image_create">Imagen %1$s/%2$s: publicando datos…</string>
+    <string name="log_posting_image_edit">Imagen %1$s/%2$s: cambiando datos…</string>
+    <string name="log_posting_image_delete">Eliminando imagen %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Guardando nuevo tipo de registro…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
@@ -152,6 +182,7 @@
     <string name="log_smilies">Emoticonos</string>
     <string name="log_image">Imagen</string>
     <string name="log_images">Imágenes</string>
+    <string name="log_edit_image">Editar imagen</string>
     <string name="log_image_caption">Título</string>
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
@@ -161,6 +192,10 @@
     <string name="log_oc_team_comment">Comentario equipo OC</string>
     <string name="log_your_saved_log">Tu registro guardado</string>
     <string name="log_empty_logbook">No hay registros en este caché.</string>
+    <string name="log_image_selectfromstorage_tooltip">Seleccionar imagenes desde el almacenamiento</string>
+    <string name="log_image_camera_tooltip">Tomar foto con la cámara</string>
+    <string name="log_image_selectfromown_tooltip">Seleccionar imagenes propias</string>
+    <string name="log_inventory">Inventario</string>
     <string name="log_problem_none">Sin problema</string>
     <string name="log_problem_needs_maintenance_label">Necesita mantenimiento</string>
     <string name="log_problem_needs_maintenance_text">Este geocacher informó de que hay un problema con este caché.</string>
@@ -179,13 +214,23 @@
     <string name="log_image_info_scaled">A escala</string>
     <string name="log_image_info_notscaled">Sin escalar</string>
     <string name="log_image_titleprefix">Imagen</string>
+    <string name="log_delete_confirm">¿Quieres eliminar el registro de tipo \'%1$s\' por el autor \'%2$s\' y con fecha de registro \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">¿Realmente desea eliminar su registro almacenado sin conexión de tipo \'%1$s\' y con fecha de registro \'%2$s\'?</string>
     <string name="datetime_nodateset_display">No hay fecha fijada</string>
     <!-- Contacts -->
+    <string name="contact_not_found">El contacto con apodo/nombre de usuario %s no se ha encontrado. Primero añádelo a tus contactos.</string>
+    <string name="contact_multiple_matches">Contacto: Varias coincidencias</string>
     <!-- translation -->
+    <string name="translate">Traducir en la aplicación de Google Traductor</string>
+    <string name="translate_to_sys_lang">Traducir a %s (Web)</string>
+    <string name="translate_to_english">Traducir a Inglés (Web)</string>
     <string name="translate_length_warning">La traducción podría fallar con un texto muy largo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Aceptar</string>
     <string name="err_parse">Error procesando la página de acceso</string>
+    <string name="err_captcha">El servicio requiere un Captcha. Por favor, abre la web de geocaching.com con tu navegador y resuelve el Captcha mostrado mientras inicias sesión allí. Luego vuelve a intentar iniciar sesión con c:geo.</string>
+    <string name="err_server_general">No es posible conectar con el servidor de geocaching. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>
+    <string name="err_server_gc">No es posible conectar con geocaching.com. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>
     <string name="err_server_ec">Imposible conectar a Extremcaching.com. La página web puede estar caída o su conexión a Internet no funciona.</string>
     <string name="err_server_lc">No se puede contactar con labs.geocaching.com. El sitio web puede estar caído o su conexión a Internet no funciona.</string>
     <string name="err_server_su">No es posible conectar con Geocaching.su. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>
@@ -195,6 +240,7 @@
     <string name="err_unknown_address">c:geo no ha podido ubicar en el mapa esta dirección</string>
     <string name="err_comm">Error de comunicación desconocido. Por favor, consulte nuestra <a href="https://www.cgeo.org/faq#login-failed"> sección de preguntas frecuentes (FAQ) </a> para obtener ayuda.</string>
     <string name="err_missing_auth">Falta nombre de usuario o contraseña</string>
+    <string name="err_wrong">Usuario y/o contraseña incorrecto.</string>
     <string name="err_maintenance">Geocaching.com no está disponible debido a labores de mantenimiento. c:geo puede funcionar sin conexión con los caches que hayan sido almacenados previamente.</string>
     <string name="err_license">No has aceptado las condiciones del acuerdo de licencia de Geocaching.com, por lo que c:geo no puede cargar las coordenadas de los cachés.</string>
     <string name="err_unvalidated_account">Antes debe validar su cuenta en la página web Geocaching.com.</string>
@@ -221,6 +267,7 @@
     <string name="err_favorite_failed">Falló el cambio de estado de favorito.</string>
     <string name="err_select_logimage_failed">No se pudo seleccionar una imagen para el registro.</string>
     <string name="err_acquire_image_failed">No se pudo obtener una imagen.</string>
+    <string name="err_acquire_image_unsupported_format">El formato de imagen debe ser JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">c:geo no puede mostrar el rastreable que buscas. ¿Es realmente un rastreable?</string>
     <string name="err_tb_details_open">c:geo no puede abrir los detalles del rastreable.</string>
     <string name="err_tb_not_loggable">Este rastreable no se puede registrar.</string>
@@ -231,6 +278,7 @@
     <string name="err_log_load_data">c:geo no puede cargar los datos necesarios para registrar la visita.</string>
     <string name="err_log_post_missing_tracking_code">Falta el código rastreable.</string>
     <string name="err_log_post_missing_coordinates">Faltan las coordenadas.</string>
+    <string name="err_website_message">El sitio web respondió con el siguiente mensaje: </string>
     <string name="err_log_post_failed">Parece que tu registro no ha sido publicado. Compruébalo en la página original del caché.</string>
     <string name="err_log_post_failed_ec">Parece que su registro no ha sido publicado. Por favor compruébalo en Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Parece que su registro no ha sido publicado. Por favor compruébalo en GeoKrety.org.</string>
@@ -264,6 +312,9 @@
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
     <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
+    <string name="info_log_delete_failed">Fallo al eliminar el registro.</string>
+    <string name="info_log_post_failed_simple_reason">Compruebe que su sesión está correctamente iniciada y que tiene una conexión a internet válida.</string>
+    <string name="info_log_delete_failed_simple_reason">Compruebe que su sesión está correctamente iniciada, tiene una conexión a internet válida y que el registro no está ya eliminado.</string>
     <string name="info_log_post_retry">Reintentar</string>
     <string name="info_log_post_save">Guardar sin conexión</string>
     <string name="info_log_cleared">Registro borrado.</string>
@@ -276,16 +327,42 @@
     <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
     <string name="confirm_discard_changes">¿Quieres descartar los cambios no guardados?</string>
+    <string name="confirm_unsent_changes_title">Cambios sin enviar</string>
+    <string name="confirm_unsent_changes">¿Descartar cambios no enviados?</string>
     <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
     <string name="warn_log_load_additional_data">c:geo no ha podido cargar datos adicionales (rastreables/puntos favoritos) para el registro.</string>
     <string name="more_information">Más información</string>
     <string name="undo">Deshacer</string>
     <string name="dont_show_again">No mostrar de nuevo</string>
+    <string name="tap_icon_more_info">Pulsa sobre el icono para más información</string>
+    <string name="use_slider_adjust_value">Desliza para ajustar el valor</string>
     <string name="warn_gm_not_available">Google Maps no está disponible.</string>
     <string name="switch_to_mf">Tu servicio de Google Play está desactualizado. ¿Quieres cambiar al proveedor de mapas de Mapsforge en su lugar?</string>
     <string name="switched_to_mf">El mapa por defecto cambió al proveedor de mapas de Mapsforge. Reinicia el mapa ahora.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Básico</string>
+    <string name="translator_preference_target_lng">Idioma para traducir sin conexión</string>
+    <string name="translator_preference_target_lng_summary">Idioma sleccionado para el traductor sin conexión</string>
+    <string name="translator_preference_nottranslate_lng">Idiomas ignorados</string>
+    <string name="translator_preference_nottranslate_lng_summary">Idiomas que no quieres que se traduzcan</string>
+    <string name="translator_preference_disable">&lt;Desactivar traducción&gt;</string>
+    <string name="translator_preference_application_language">&lt;Usar el idioma de la aplicación&gt;</string>
+    <string name="translator_model_download_select">Descargar idioma para traducción sin conexión</string>
+    <string name="translator_model_download_confirm_title">Confirmar descarga de idioma</string>
+    <string name="translator_model_download_confirm_txt">El modelo de traducción para el idioma %s necesita ser descargado. El tamaño del modelo es de aproximadamente 20-40 MB.</string>
+    <string name="translator_model_download_notification">Descarga del modelo de traducción iniciada</string>
+    <string name="translator_model_download_success">Se ha descargado el modelo de traducción para %s</string>
+    <string name="translator_model_download_error">Fallo al descargar el modelo de traducción %1$s: %2$s</string>
+    <string name="translator_model">Modelo de traducción</string>
+    <string name="translator_tooltip">Traducción sin conexión</string>
+    <string name="translator_language_select">Seleccione el idioma de origen</string>
+    <string name="translator_language_unsupported">Idioma (%s) no disponible para traducción. Pulse para seleccionar el idioma de origen.</string>
+    <string name="translator_language_unknown">No se puede identificar el idioma. Pulse para seleccionar el idioma de origen.</string>
+    <string name="translator_language_detected">Traducir desde \"%s\". Pulse para seleccionar el idioma de origen.</string>
+    <string name="translator_target_language">Traducir al %s</string>
+    <string name="translator_translation_error">Fallo al traducir el texto: %s</string>
+    <string name="translator_translation_initerror">Error al inicializar el traductor</string>
+    <string name="translator_translation_success">Traducido de \"%s\", pulse el botón para restaurar el original</string>
     <!-- location service -->
     <string name="loc_last">Última conocida</string>
     <string name="loc_net">Red</string>
@@ -298,11 +375,17 @@
     <string name="loc_gps_disabled">GPS desactivado</string>
     <string name="loc_copied_clipboard">La ubicación actual ha sido copiada al portapapeles</string>
     <string name="menu_centerposition">Centrar en mi posición</string>
+    <string name="location_no_permission">Advertencia: Falta el permiso para obtener la ubicación</string>
+    <string name="location_only_coarse_permission">Advertencia: Solo hay permiso de ubicación aproximada</string>
     <!-- standard menu -->
     <string name="menu_about">Sobre c:geo</string>
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_backup">Copia de seguridad / Restauración</string>
+    <string name="menu_manage_offline_data">Administrar datos sin conexión</string>
+    <string name="menu_update_routingdata">Actualizar datos de enrutamiento</string>
+    <string name="menu_update_mapdata">Actualizar datos del mapa</string>
+    <string name="menu_delete_offline_data">Borrar datos sin conexión</string>
     <string name="menu_history">Historial</string>
     <string name="menu_search_clipboard">Cargar geocódigo desde el portapapeles</string>
     <string name="menu_history_longstring">Historial de búsqueda</string>
@@ -321,6 +404,11 @@
     <string name="caches_more_caches">Cargar más cachés</string>
     <string name="caches_more_caches_no">No hay más cachés</string>
     <string name="caches_more_caches_currently">actualmente</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Cargar el siguiente %1$d caché</item>
+        <item quantity="other">Cargar los siguientes %1$d cachés</item>
+    </plurals>
+    <string name="caches_more_caches_all_remaining">Cargar todos los cachés restantes</string>
     <string name="caches_store_offline">Guardar en el dispositivo</string>
     <string name="caches_store_offline_map">Almacenar cachés en el dispositivo</string>
     <string name="caches_store_selected">Almacenamiento seleccionado</string>
@@ -328,6 +416,8 @@
     <string name="caches_store_background_already_stored">Algunos cachés ya están almacenados. ¿Qué debería pasar con ellos?</string>
     <string name="caches_store_background_option_nothing">No hacer nada</string>
     <string name="caches_store_background_option_add_to_list">Añadir a la lista</string>
+    <string name="caches_store_background_option_refresh_and_add">Actualizar y añadir a la lista</string>
+    <string name="caches_store_background_option_refresh_and_keep">Actualizar y mantener las asignaciones de la lista actual</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Descarga fallida, %1$d/%2$d cachés fueron descargados</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Descarga cancelada, %1$d/%2$d cachés fueron descargados</string>
     <plurals name="caches_store_background_result">
@@ -349,12 +439,17 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Valoración</string>
     <string name="caches_sort_vote">Votos (valoración propia)</string>
+    <string name="caches_sort_inventory">Cantidad de TB(s)</string>
     <string name="caches_sort_date_hidden">Fecha escondido</string>
+    <string name="caches_sort_date_logged">Fecha registrada (Registro propio)</string>
     <string name="caches_sort_finds">Encontrados</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Fecha de guardado en dispositivo</string>
     <string name="caches_sort_eventdate">Fecha del evento</string>
+    <string name="caches_sort_lastfounddate">Última fecha encontrada</string>
     <string name="caches_select_mode">Modo selección</string>
+    <string name="caches_select_next20">Seleccionar los siguientes 20 cachés</string>
+    <string name="caches_select_next100">Seleccionar los siguientes 100 cachés</string>
     <string name="caches_select_mode_exit">Salir de modo selección</string>
     <string name="caches_select_invert">Invertir selección</string>
     <string name="caches_nearby">Cercanos</string>
@@ -362,13 +457,22 @@
     <string name="caches_remove_selected">Eliminar seleccionados de la lista</string>
     <string name="caches_remove_all_completely">Eliminar todo del dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar los seleccionados del dispositivo</string>
+    <string name="caches_remove_from_other_lists_selected">Eliminar seleccionados de otras listas</string>
+    <string name="caches_remove_from_other_lists_all">Eliminar todos de otras listas</string>
+    <string name="caches_append_to_route_selected">Añadir seleccionado a la ruta individual</string>
+    <string name="caches_append_to_route_all">Añadir todos a la ruta individual</string>
+    <string name="caches_appended_to_route">Cachés añadidos a la ruta</string>
+    <string name="waypoints_appended_to_route">Waypoints añadidos a la ruta</string>
     <string name="caches_delete_events">Borrar eventos pasados</string>
     <string name="caches_upload_bookmarklist">Añadir a lista de marcadores</string>
+    <string name="caches_upload_bookmarklist_all">Añadir todos a la lista de marcadores</string>
+    <string name="caches_upload_bookmarklist_selected">Añadir los seleccionados a la lista de marcadores</string>
     <string name="caches_upload_modifiedcoords">Subir coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">¿Quieres subir las coordenadas modificadas para todos los cachés (seleccionados) y sobreescribir las coordenadas existentes en el servidor? Esto no se puede deshacer.</string>
     <string name="caches_upload_allcoords">Subir coordenadas para todos los cachés</string>
     <string name="caches_upload_allcoords_dialogtitle">ADVERTENCIA - Subiendo todas las coordenadas</string>
     <string name="caches_upload_allcoords_warning">¡Esto sobrescribirá las coordenadas existentes en el servidor para todos los cachés (seleccionados) de tu lista con las coordenadas actuales de c:geo! Esto sólo se debe utilizar en casos especiales, p. ej. al importar un archivo GPX que contiene coordenadas corregidas como coordenadas. Esto no se puede deshacer y sólo debería usarlo, si sabe lo que está haciendo. En casos normales puede preferir usar la función \"Subir coordenadas modificadas\" en el mismo menú.</string>
+    <string name="caches_share_geocodes">Compartir lista de geocódigos</string>
     <string name="caches_refresh_selected">Actualizar seleccionados</string>
     <string name="caches_refresh_all">Actualizar todos</string>
     <string name="caches_move_selected">Mover seleccionados</string>
@@ -378,11 +482,18 @@
     <string name="caches_map_locus_export">Exportar a Locus</string>
     <string name="caches_filter_menuitem">Filtro</string>
     <string name="caches_filter_title">Filtrar por</string>
+    <string name="caches_filter_select_last">Filtro anterior</string>
     <string name="caches_removing_from_history">Borrando del historial…</string>
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
     <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
+    <string name="caches_overwrite_offline_log">Sobrescribir registro sin conexión</string>
+    <string name="caches_overwrite_offline_log_question">El caché tiene un registro sin conexión de tipo \"%1$s\" con un texto. ¿Desea sobrescribir este registro?</string>
+    <string name="caches_show_attributes_all">Mostrar resumen de atributos para todos los cachés</string>
+    <string name="caches_show_attributes_selected">Mostrar resumen de atributos para los cachés seleccionados</string>
     <string name="caches_set_cache_icon">Establecer icono del caché</string>
+    <string name="caches_set_cache_icon_all">Establecer icono para todos los cachés</string>
+    <string name="caches_set_cache_icon_selected">Establecer icono para los cachés seleccionados</string>
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
@@ -406,9 +517,13 @@
     <string name="list_menu_create">Crear nueva lista</string>
     <string name="list_menu_drop">Borrar lista actual</string>
     <string name="list_menu_rename">Renombrar la lista actual</string>
+    <string name="list_menu_rename_list_prefix">Renombrar prefijo de la lista</string>
+    <string name="rename_from">Renombrar desde</string>
+    <string name="rename_to">Renombrar a</string>
     <string name="list_menu_import">Importar</string>
     <string name="list_title">Escoger lista</string>
     <string name="lists_title">Escoge las listas</string>
+    <string name="lists_title_new_caches">Escoge la lista (nuevos cachés)</string>
     <string name="list_inbox">Guardados</string>
     <string name="list_all_lists">Todos los cachés</string>
     <string name="list_dialog_create_title">Nueva lista</string>
@@ -422,6 +537,10 @@
     <string name="list_dialog_rename_title">Renombrar lista</string>
     <string name="list_dialog_rename">Renombrar</string>
     <string name="list_not_available">La lista ya no está disponible, cambiando a la lista estándar</string>
+    <string name="list_parent_list">Lista padre</string>
+    <string name="list_name">Nombre de la lista</string>
+    <string name="list_confirm_rename">Renombrando de \"%1$s\" a \"%2$s\"\n%3$s\n¡Esta acción no se puede deshacer!</string>
+    <string name="list_confirm_no_hierarchy">\nNo se encontró \":\" - todas las listas coincidentes se transformarán en listas de nivel superior\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avanzado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Cambiar a Basic</string>
@@ -442,19 +561,26 @@
     <string name="cache_filter_difficulty">Dificultad</string>
     <string name="cache_filter_terrain">Terreno</string>
     <string name="cache_filter_difficulty_terrain">Dificultad / Terreno</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matriz de Dificultad / Terreno</string>
     <string name="cache_filter_rating">Puntuación</string>
     <string name="cache_filter_status">Estado</string>
+    <string name="cache_filter_individualroute">Ruta individual</string>
     <string name="cache_filter_attributes">Atributos del caché</string>
     <string name="cache_filter_favorites">Favoritos</string>
     <string name="cache_filter_distance">Distancia</string>
     <string name="cache_filter_hidden">Fecha oculta</string>
+    <string name="cache_filter_eventdate">Fecha de evento</string>
     <string name="cache_filter_logs_count">Número de registros</string>
+    <string name="cache_filter_inventory_count">Cantidad de TB(s)</string>
     <string name="cache_filter_last_found">Última fecha encontrada</string>
     <string name="cache_filter_log_entry">Entrada de registro</string>
     <string name="cache_filter_location">Ubicación</string>
     <string name="cache_filter_stored_lists">Listas almacenadas</string>
     <string name="cache_filter_origin">Origen</string>
     <string name="cache_filter_stored_since">Últimos detalles actualizados</string>
+    <string name="cache_filter_category">Categoría BC</string>
+    <string name="cache_filter_tier">Nivel BC</string>
+    <string name="cache_filter_named_filter">Filtro con nombre</string>
     <string name="cache_filter_logical_filter_group">Filtro anidado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalles</string>
@@ -480,10 +606,12 @@
     <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
     <string name="cache_filter_storage_delete_message">¿Está seguro de que quiere borrar esta configuración de filtro?</string>
     <string name="cache_filter_storage_select_clear_title">Seleccionar filtro o borrar el filtro actual</string>
+    <string name="cache_filter_storage_clear_title">Limpiar el filtro actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ningún filtro ha sido almacenado todavía.</string>
     <string name="cache_filter_storage_save_title">Guardar filtro con nombre</string>
     <string name="cache_filter_storage_save_confirm_title">Guardar filtro y sobrescribir</string>
     <string name="cache_filter_storage_save_confirm_message">Ya existe un filtro con el nombre \'%s\' y una configuración diferente. ¿Sobrescribirlo?</string>
+    <string name="cache_filter_storage_clear_message">¿Deseas limpiar el filtro actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidir Mayus/minus</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Buscar texto</string>
     <string name="cache_filter_stringfilter_info">Con la opción \'Patrón\', usa comodines * y ?. * representa cero, uno o varios caracteres, ? representa un solo carácter. Por ejemplo, el patrón \"H?mburg*\" coincidirá, por ejemplo, \"Homburg\" o \"Hamburgo por la noche\", pero no \"Un día en Hamburg\" o \"Hahmburg\"</string>
@@ -494,6 +622,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Comienza con</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina con</string>
     <string name="cache_filter_stringfilter_type_pattern">Patrón</string>
+    <string name="cache_filter_datefilter_absolute">Absoluto</string>
+    <string name="cache_filter_datefilter_relative">Relativo a hoy</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todo</string>
@@ -519,6 +649,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tiene registro sin conexión</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tiene registros sin conexión</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misterio resuelto</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Coordenadas actualizadas</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Con waypoints definidos por el usuario</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuración de filtro sólo afectará a cachés mystery. Si desea excluir otros tipos de caché, por favor defina un filtro de tipo de caché apropiado.\n\nUn caché mystery se considera \'resuelto\' si ha cambiado de coordenadas o tiene un punto final válido con coordenadas.</string>
     <string name="cache_filter_status_active">Activo</string>
@@ -527,16 +658,79 @@
     <string name="cache_filter_status_exclude_active">Excluir activos</string>
     <string name="cache_filter_status_exclude_disabled">Excluir desactivados</string>
     <string name="cache_filter_status_exclude_archived">Excluir archivados</string>
+    <string name="cache_filter_boolean_individualroute_contained">Dentro de la ruta</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluye cachés sin D/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Rellenar con gc.com</string>
     <string name="cache_filter_nested_filter_modify">modificar</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">El sub-filtro está vacío</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto del registro</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>hace más de un año</item>
+        <item>hace un año</item>
+        <item>Hace 30 días</item>
+        <item>hace una semana</item>
+        <item>Hace 1 día</item>
+        <item>hace menos de 1 día</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1 año</item>
+        <item>1 año</item>
+        <item>30 días</item>
+        <item>1 semana</item>
+        <item>1 día</item>
+        <item>&lt;1 día</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>hace más de un año</item>
+        <item>hace un año</item>
+        <item>Hace 180 días</item>
+        <item>Hace 90 días</item>
+        <item>Hace 30 días</item>
+        <item>hace 2 semanas</item>
+        <item>hace una semana</item>
+        <item>Hace 3 días</item>
+        <item>hace menos de 3 días</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1 año</item>
+        <item>1 año</item>
+        <item>180d días</item>
+        <item>90 días</item>
+        <item>30 días</item>
+        <item>2 semanas</item>
+        <item>1 semana</item>
+        <item>3 días</item>
+        <item>&lt;3 días</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>pasado</item>
+        <item>hoy</item>
+        <item>mañana</item>
+        <item>dentro de 2 días</item>
+        <item>dentro de 3 días</item>
+        <item>Dentro de 1 semana</item>
+        <item>Dentro de 2 semanas</item>
+        <item>Dentro de 1 mes</item>
+        <item>En el futuro</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>pasado</item>
+        <item>0 días</item>
+        <item>1 día</item>
+        <item>2 días</item>
+        <item>3 días</item>
+        <item>1 semana</item>
+        <item>2 semanas</item>
+        <item>1 mes</item>
+        <item>&gt;1 mes</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
     <string name="about_changelog_nightly_build">Revisión Nocturna</string>
     <string name="about_changelog_next_release">Siguiente versión</string>
+    <string name="about_changelog_bugfix_release">Correción de errores</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Ayúdanos</string>
     <string name="about_donation_more">Visita el sitio web para información</string>
@@ -544,6 +738,7 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
     <string name="about_help">Ayuda</string>
+    <string name="about_system_collecting">Recuperando información del sistema, por favor espere…</string>
     <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar por correo…</string>
     <string name="about_system_info">Información del sistema c:geo</string>
@@ -554,8 +749,10 @@
     <string name="about_system_write_logcat_type_extended">Extendido</string>
     <string name="about_system_write_logcat_success">Archivo de registro \"%1$s\" escrito en la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
+    <string name="about_changelog_full">Lista de todos los cambios</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
+    <string name="about_contributors_recent">Colaboradores (últimos 12 meses)</string>
     <string name="about_contributors_specialthanks">Agradecimientos especiales a</string>
     <string name="about_contributors_specialthanksdetails">- Todos nuestros colaboradores de traducción en [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Todos los creadores de incidencias\n- Y todos los demás seguidores.\n</string>
     <string name="about_contributors_other">Otros colaboradores</string>
@@ -596,6 +793,9 @@
     <string name="asdm_error_file_error">Error: Problema de almacenamiento desconocido</string>
     <string name="asdm_error_http_data_error">Error: Error procesando los datos HTTP</string>
     <string name="asdm_error_insufficient_space">Error: Espacio de almacenamiento insuficiente</string>
+    <string name="asdm_error_too_many_redirects">Error: Demasiadas redirecciones</string>
+    <string name="asdm_error_unhandled_http_code">Error: Código HTTP sin gestionar</string>
+    <string name="asdm_error_unknown">Error: Error desconocido</string>
     <!-- settings -->
     <string name="settings_title_open_settings">¿Abrir ajustes?</string>
     <string name="settings_title_services">Servicios</string>
@@ -608,13 +808,25 @@
     <string name="settings_summary_offlinedata">Configure los datos que se guardarán para el uso sin conexión, la ubicación de almacenamiento y las carpetas de los archivos GPX.</string>
     <string name="settings_title_logging">Registro</string>
     <string name="settings_summary_logging">Configura tu firma y las opciones de registro.</string>
+    <string name="settings_title_map_sources">Proveedor de mapas</string>
+    <string name="settings_summary_map_sources">Establecer la fuente del mapa y la configuración del mapa fuera de línea.</string>
+    <string name="settings_title_map_content_behavior">Mapa de contenido &amp; comportamiento</string>
+    <string name="settings_summary_map_content_behavior">Configurar que información mostrar en los mapas y las opciones de interacción.</string>
     <string name="settings_title_map_data">Datos del mapa</string>
+    <string name="settings_title_offline_maps">Mapas sin conexión</string>
+    <string name="settings_title_map_themes">Temas de mapa sin conexión</string>
+    <string name="settings_title_map_hillshading">Sombreado de relieve sin conexión</string>
     <string name="settings_title_offline_routing">Ruta sin conexión</string>
     <string name="settings_summary_offline_routing">La ruta sin conexión está disponible si la aplicación de ayuda \"BRouter\" está instalada y configurada o si está habilitada la ruta interna.</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenido del mapa</string>
     <string name="settings_title_map_behavior">Comportamiento del mapa</string>
     <string name="settings_title_map_style">Estilo de mapa</string>
+    <string name="settings_hide_tileproviders_title">Ocultar fuente de mapa</string>
+    <string name="settings_hide_tileproviders_summary">Excluir una o más fuentes de mapas de la selección de fuentes del mapa</string>
+    <string name="settings_unifiedMapVariants_title">Variantes UnifiedMap</string>
+    <string name="settings_userDefinedTileProvider">Proveedor de teselas definido por el usuario</string>
+    <string name="settings_userDefinedTileProviderUri">Introduzca la Uri completa (sin barra a la derecha) para el proveedor de teselas, o introduzca el Uri completo con parámetros (incluyendo {X}, {Y} y {Z}). Asegúrese de haber comprobado y cumplir con sus condiciones de uso.</string>
     <string name="settings_title_data_dir">Carpeta de datos Geocache</string>
     <string name="settings_title_data_dir_usage">Carpeta de datos Geocache (%1$s usado)</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
@@ -629,6 +841,12 @@
     <string name="settings_summary_system">Configuración específica del sistema y opciones de depuración.</string>
     <string name="settings_title_navigation_menu">Menú de navegación</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
+    <string name="settings_category_locationcentersearch">Búsquedas centradas en ubicación</string>
+    <string name="init_nearbysearchlimit_title">Límite de búsqueda cercano</string>
+    <string name="init_nearbysearchlimit_description">Limita la distancia a la que se encuentran los cachés con la búsqueda cercana (0=ilimitado)</string>
+    <string name="init_coordsearchlimit_title">Límite de búsqueda de coordenadas/dirección</string>
+    <string name="init_coordsearchlimit_description">Limita la distancia a la que se muestran los cachés con la búsqueda por coordenadas/de direcciones (0=ilimitado)</string>
+    <string name="init_settings_description_unlimited">Ilimitado</string>
     <string name="settings_category_geocaching_additionals">Servicios adicionales y addon</string>
     <string name="settings_category_logging_other">Otras opciones de registro</string>
     <string name="settings_goto_url_button">más …</string>
@@ -641,6 +859,8 @@
     <string name="settings_gc_description">Autorizar a c:geo en geocaching.com para buscar cachés.</string>
     <string name="settings_su_description">Autorizar a c:geo en geocaching.su para buscar cachés.</string>
     <string name="settings_lc_description">Incluye cachés de Adventure Lab en el mapa.\n\n(Disponible solo para miembros premium \"Geocaching.com\". Requiere un servicio \"Geocaching.com\" activado.)\n\nPara cambiar esta configuración es necesario reiniciar.</string>
+    <string name="settings_lc_found_state_title">Estado manual de encontrado</string>
+    <string name="settings_lc_found_state_handling">Si está marcado, no se obtendrá automáticamente el estado de encontrado verdadero para los Adventure Lab, en su lugar, proporcionar controles para que el usuario establezca manualmente el estado de encontrado</string>
     <string name="lc_default_description">Este es un caché Adventure Lab de geocaching.com. Las aventuras sólo se pueden jugar con la aplicación de Adventure Lab de Groundspeake. Pulsa en el icono de Adventure Lab en la página \"Detalles\" para abrir/instalar la aplicación de Adventure Lab para esta aventura desde allí.\nSi no quieres ver cachés de Adventure Lab en el mapa y buscar, puedes desactivar usando el menú \"Configuración\" - Servicios - Geocaching. Laboratorio de Aventuras</string>
     <string name="init_summary_oc_de">Carga cachés de opencaching.de</string>
     <string name="init_oc_de_description">Autorizar que c:geo pueda usar opencaching.de para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
@@ -665,6 +885,9 @@
     <string name="init_login_popup_failed_reason">Error al iniciar sesión: %s</string>
     <string name="init_login_popup_not_authorized">No autorizado</string>
     <string name="init_login_popup_not_logged_in">No has iniciado sesión</string>
+    <string name="init_login_manual">Inicio de sesión manual</string>
+    <string name="init_login_manual_description">Por favor espere a que aparezca un sitio web e inicie sesión en su cuenta. Espere hasta que se haya completado el inicio de sesión. Luego haga clic en el botón \'ok\' de abajo.</string>
+    <string name="init_login_manual_error_nocookie">No se ha encontrado ningún token de autorización. Por favor inicie sesión o cancele el inicio de sesión manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
     <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
     <string name="init_authorization_credential_username">Usuario</string>
@@ -685,6 +908,7 @@
     <string name="init_signature_template_button">Añadir marcador de posición</string>
     <string name="init_signature_template_date">Fecha</string>
     <string name="init_signature_template_time">Hora</string>
+    <string name="init_signature_template_day_of_week">Día de la semana</string>
     <string name="init_signature_template_datetime">Fecha &amp; hora</string>
     <string name="init_signature_template_user">Usuario</string>
     <string name="init_signature_template_number">Número</string>
@@ -696,9 +920,11 @@
     <string name="init_signature_template_log">Texto de registro</string>
     <string name="init_signature_template_size">Tamaño</string>
     <string name="init_signature_template_type">Tipo</string>
+    <string name="init_signature_template_location">Ubicación</string>
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">Puntuación de GCvote</string>
     <string name="init_summary_ratingwanted">Cargar la puntuación del cache desde GCvote.com</string>
+    <string name="init_summary_bettercacher">Cargar nivel y categoría de caché desde BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar amigos / propios</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostrar una página adicional para los registros de amigos y propios</string>
     <string name="init_openlastdetailspage">Recordar última página</string>
@@ -707,10 +933,17 @@
     <string name="init_summary_address">Mostrar dirección en lugar de coordenadas en la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Usar el idioma por defecto</string>
+    <string name="init_use_application_language">Usar idioma de la aplicación</string>
+    <string name="init_translation_disabled">Traducción desactivada</string>
+    <string name="init_date_format">Formato de la fecha</string>
+    <string name="init_date_format_description">Formato a utilizar para fechas cortas, por ejemplo, en la vista de registros</string>
+    <string name="system_default">Predeterminado del sistema</string>
     <string name="init_showwaypoints">Mostrar waypoints</string>
     <string name="init_showwaypoint_description">Mostrar los waypoints de los cachés si en el mapa se muestran menos cachés que el número seleccionado.</string>
     <string name="init_zoomincludingwaypoints">El zoom incluye waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Si se mapea un solo caché: ¿Debe ajustarse el zoom para incluir todos sus waypoints?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Waypoints visitados semitransparentes</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Marcar waypoints visitados con fondo semi transparente</string>
     <string name="init_brouterThreshold">Calcular ruta</string>
     <string name="init_brouterThreshold_description">Distancia máxima hasta la cual el enrutamiento sin conexión calculará una ruta.</string>
     <string name="init_brouterShowBothDistances">Mostrar distancia en linea recta</string>
@@ -719,6 +952,9 @@
     <string name="init_brouterProfileWalk">Perfil \"Caminar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Coche\"</string>
+    <string name="init_brouterProfileUserNumber">Perfil definido por el usuario %d</string>
+    <string name="init_removeFromRouteOnLog">Eliminar de la ruta en el registro</string>
+    <string name="init_summary_removeFromRouteOnLog">Al enviar o almacenar un registro, eliminar la caché de la ruta actual.</string>
     <string name="brouter_recalculating">Recalculando ruta en segundo plano…</string>
     <string name="brouter_missing_data">Abrir BRouter para descargar datos de enrutamiento que falten (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta está activa: Muestra la distancia recta además de la longitud calculada de la ruta.</string>
@@ -728,23 +964,61 @@
     <string name="init_summary_bigSmileysOnMap">Si está activado, se mostrarán en el mapa símbolos como la \"sonrisa encontrada\" o el marcador de \"coordenadas corregidas\" en lugar del icono del tipo de caché.</string>
     <string name="init_dtMarkerOnCacheIcon">Valoración D/T en iconos de caché</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Mostrar un marcador para las valoraciones de Dificultad (izquierda) y Terreno (derecha) en los marcadores de caché en la esquina superior derecha (el marcador \"almacenado\" se mueve al medio).</string>
+    <string name="init_showElevation">Mostrar la elevación</string>
+    <string name="init_summary_showElevation">Mostrar información de elevación para la posición actual, tomada de datos de enrutamiento o GNSS (si está disponible)</string>
+    <string name="init_elevation_notAvailable">"No hay datos de elevación disponibles"</string>
+    <string name="menu_elevation_info">Elevación (mapa):</string>
+    <string name="elevation_selected">Elevación (mapa) en la posición seleccionada</string>
+    <string name="elevation_difference">Diferencia de elevación</string>
+    <string name="distance">Distancia</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="selected_position">Posición seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracción de waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Deshabilita la extracción global de waypoints de las notas personales de caché. Todavía se puede habilitar para cachés individuales desactivando la casilla de verificación debajo de la nota personal de caché.</string>
     <string name="init_prevent_cache_note_merge">Sobrescribir nota de caché personal</string>
     <string name="init_summary_prevent_cache_note_merge">Si esta opción está activada, c:geo eliminará permanentemente la nota almacenada localmente y la reemplazará por la nota personal en el servidor. No se hará ninguna fusión.</string>
     <string name="init_customtabs_as_browser">Usar Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Los sitios web externos se mostrarán sin salir de c:geo (sólo es posible si Chrome está instalado)</string>
+    <string name="init_rot13_hint">Encriptar pista</string>
+    <string name="init_summary_rot13_hint">Mostrar el texto de pista ROT-13 encriptado hasta pulsar</string>
+    <string name="init_save_log_img">Almacenar imágenes del registro</string>
+    <string name="init_summary_save_log_img">Descargar y almacenar imágenes de los registros además de las del caché</string>
     <string name="init_units">Usar millas/pies</string>
     <string name="init_summary_units">Usar millas/pies (unidades imperiales)</string>
+    <string name="init_cachelists">Listas de cachés</string>
+    <string name="init_localization">Localización</string>
+    <string name="init_logs">Registros</string>
     <string name="init_log_offline">Registro sin conexión</string>
     <string name="init_summary_log_offline">Permitir el registro sin conexión (No se mostrará la pantalla de registro en línea ni se enviarán los logs)</string>
     <string name="init_choose_list">Preguntar lista</string>
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
     <string name="init_list_initial_load_limit">Límite de carga de lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de cachés que son cargados inicialmente al mostrar las listas almacenadas. Elija 0 para \'ilimitado\'</string>
+    <string name="init_title_cacheListInfo1">Configurar las líneas de información de la lista</string>
+    <string name="init_summary_cacheListInfo">Selecciona la información adicional que se mostrará para cada caché en las listas de cachés</string>
     <string name="init_livelist">Mostrar dirección</string>
     <string name="init_summary_livelist">Mostrar una flecha con la dirección de la brújula para los cachés de una lista</string>
+    <string name="init_quicklaunchitems">Botones de inicio rápido</string>
+    <string name="init_summary_quicklaunchitems">Seleccione uno o más elementos como botones de inicio rápido en la pantalla de inicio</string>
+    <string name="init_custombnitem">Elemento de menú personalizado</string>
+    <string name="init_custombnitem_description">Elemento del menú de navegación más abajo de la derecha:\n%s</string>
+    <string name="init_custombnitem_default">Búsqueda cercana (por defecto)</string>
+    <string name="init_custombnitem_none">(ninguno)</string>
+    <string name="init_custombnitem_empty_placeholder">(Posición vacía)</string>
+    <string name="init_title_collapse_log_limit">Límite de línea del registro</string>
+    <string name="init_summary_collapse_log_limit">Número máximo de líneas a mostrar para los registros. Las líneas adicionales se colapsarán. </string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocódigo</string>
+    <string name="cacheListInfoItem_Difficulty">Dificultad</string>
+    <string name="cacheListInfoItem_Terrain">Terreno</string>
+    <string name="cacheListInfoItem_MemberState">Estado Premium</string>
+    <string name="cacheListInfoItem_Size">tamaño</string>
+    <string name="cacheListInfoItem_Lists">Otras listas</string>
+    <string name="cacheListInfoItem_HiddenMonth">Mes de ocultación</string>
+    <string name="cacheListInfoItem_EventDate">Fecha del evento</string>
+    <string name="newline">Nueva línea</string>
+    <string name="active_elements">Elementos activos</string>
+    <string name="disabled_elements">Elementos deshabilitados</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -753,6 +1027,9 @@
         <item>Oscuro</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Pantalla por defecto</string>
+    <string name="init_wallpaper">Fondo de pantalla</string>
+    <string name="init_summary_wallpaper">Mostrar fondo del dispositivo como fondo de la pantalla de inicio</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crear copia de seguridad</string>
     <string name="init_backup_summary">Tenga en cuenta que esta característica puede respaldar cachés, waypoints &amp; configuraciones, pero no las imágenes de caché. \nCon el fin de poder restaurar los datos incluso después de perder tu teléfono, los archivos de la copia de seguridad deben ser copiados a una ubicación independiente.</string>
@@ -778,6 +1055,8 @@
     <string name="init_backup_history_length_min">Solo recientes</string>
     <string name="init_backup_history_length_max">Mantener Todo</string>
     <string name="init_backup_history_delete_warning">Ha guardado más copias de seguridad de las que permite el valor máximo configurado. ¿Realmente desea eliminar todas las copias de seguridad excedentes?</string>
+    <string name="init_backup_automatic">Copia de seguridad automática</string>
+    <string name="init_backup_automatic_summary">Realiza una copia de seguridad automática cada x días (además de cualquier copia de seguridad creada manualmente), 0=apagado</string>
     <string name="init_user_confirmation">Sé lo que estoy haciendo</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
@@ -798,6 +1077,7 @@
     <string name="init_backup_unavailable">no disponible</string>
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
     <string name="init_restore_version_error">Formato inesperado - no se puede restaurar la base de datos.\n\nLa versión esperada es %1$d,\nla copia de seguridad tiene la versión %2$d</string>
+    <string name="backup_tracks_error">Error al crear copia de seguridad de las pistas.</string>
     <string name="settings_title_backup">Copia de seguridad / Restauración</string>
     <string name="settings_summary_backup">Realizar copia de seguridad y restauración de los datos de caché/waypoint y de los ajustes del programa.</string>
     <string name="init_backup_settings_logins">Guarda datos de la cuenta</string>
@@ -809,11 +1089,18 @@
     <string name="settings_readingerror">Error leyendo los ajustes</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_folder_changed">La carpeta \"%1$s\" se cambiará a \"%2$s\" durante la restauración.\n\nPulse \"%4$s\" para continuar. En ese caso se le pedirá que vuelva a conceder acceso a c:geo a esa carpeta.\n\nPulse \"%3$s\" para mantener la configuración de la carpeta actual en su lugar.</string>
+    <string name="settings_file_changed">\"%1$s\" se cambiará a \"%2$s\" durante la restauración.\n\nPulse \"%4$s\" para continuar. En ese caso se le pedirá que vuelva a conceder acceso a c:geo a ese archivo.\n\nPulse \"%3$s\" para mantener la configuración actual.</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_offline_maps">c:geo soporta mapas para utilizarse sin conexión. Puedes obtener mapas de diferentes proveedores o incluso crear tus propios mapas (a partir de datos OSM). Primero tiene que seleccionar la carpeta en la que se almacenarán los mapas sin conexión.</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
     <string name="settings_info_themes">c:geo soporta temas personalizados para mapas sin conexión. Estos pueden ser usados para cambiar el estilo de color del mapa (p. ej. tener un mapa de vista nocturna) o para resaltar ciertos objetos, como rutas de ciclismo o líneas de altura dentro del mapa.\n\nTrabajar con temas de mapa no comprimidos puede disminuir el rendimiento del visor de mapas. En este caso, la carpeta del tema puede sincronizarse opcionalmente con una carpeta local privada para un acceso más rápido (a costa de algún espacio de almacenamiento).</string>
+    <string name="settings_info_hillshading_title">Información sobre el sombreado de relieve</string>
+    <string name="settings_info_hillshading">Sombreado de relives es una técnica para crear mapas de relieve topográfico añadiendo un efecto de iluminación al mapa para indicar cambios en la elevación. Las pendientes serán oscuras/iluminadas para generar un efecto 3D.\nLos datos del sombreado de relieve se pueden descargar desde el menú de mapas.\nNo es compatible con la variante VTM UnifiedMay.</string>
+    <string name="settings_hillshading_enable">Sombreado de relieve</string>
+    <string name="init_hillshading_hq">Sombreado de relieve de alta calidad</string>
+    <string name="init_summary_hillshading_hq">Sombreado de relieve más detallado pero ~50%% más lento renderizando al alejar el zoom</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
+    <string name="init_mapsource_select_legacy">Seleccionar Fuente de Mapa (Legado)</string>
     <string name="init_local_file_system">Sistema de archivos local</string>
     <string name="init_base_directory_description">Carpeta base para datos locales públicos</string>
     <string name="init_map_directory_description">Carpeta con mapas sin conexión</string>
@@ -827,15 +1114,28 @@
     <string name="init_maptrail_length">Longitud máxima de la pista de historial</string>
     <string name="init_maptrail_length_summary">Establece la longitud máxima de la pista de historia (ejecutada en cada inicio de c:geo). El valor predeterminado es de 700 puntos - ajuste de acuerdo a la memoria disponible.</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
+    <string name="init_trailappearance">Apariencia del historial de ruta</string>
+    <string name="init_trailappearance_summary">Seleccione color, opacidad y ancho de línea para el historial</string>
+    <string name="init_directionappearance">Apariencia de la dirección</string>
+    <string name="init_directionappearance_summary">Seleccione el color, la opacidad y la anchura para la línea de dirección. La línea de dirección muestra una línea recta a tu objetivo de navegación seleccionado, o la ruta de navegación especifica, si el enrutamiento está habilitado instalando la aplicación BRouter.</string>
+    <string name="init_routeappearance">Apariencia de la ruta individual</string>
+    <string name="init_routeappearance_summary">Seleccione color, opacidad y anchura para la línea de ruta individual. Una ruta individual es una recolección de waypoints y/o cachés que seleccionó al mantener pulsado el waypoint/caché. (Necesitas activar primero la función de toque largo, mira la configuración del mapa.)</string>
+    <string name="init_trackappearance">Apariencia de la pista GPX / ruta</string>
+    <string name="init_trackappearance_summary">Seleccione color, opacidad y grosor de línea de la línea de la pista/ruta. Una pista/ruta consiste en varios waypoints y puede ser cargada mediante un archivo GPX de pista/ruta.</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
+    <string name="init_geofencecolor">Color del círculo del perímetro de respuesta</string>
+    <string name="init_geofencecolor_summary">Seleccione color y opacidad para el círculo de perímetro. Los círculos se utilizan como representación visual para el perímetro definido para los waypoints (normalmente se aplica a las etapas de aventure lab de geocaching.com)</string>
     <string name="init_accuracycirclecolor">Color de línea de círculo de precisión</string>
     <string name="init_accuracycirclecolor_summary">Seleccione color y opacidad para la línea del círculo de precisión. El círculo de precisión se utiliza como una representación visual para la precisión de la señal de ubicación.</string>
     <string name="init_include_found_status">Incluir estado \"Encontrado\"</string>
+    <string name="init_include_logs">Incluir registros</string>
+    <string name="init_include_travelbugs">Incluir Travel Bugs</string>
     <string name="init_trackautovisit">Convertir TBs a Visitado</string>
     <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"Visitado\"</string>
     <string name="init_sigautoinsert">Insertar automáticamente</string>
     <string name="init_offlinelogs_homescreen">Mostrar registros sin conexión</string>
+    <string name="init_log_image_default_prefix_title">Leyenda por defecto para imágenes de registro</string>
     <string name="init_summary_offlinelogs_homescreen">Un contador de registro fuera de línea (ej. \"+ 1\") se mostrará junto a tu cuenta de búsqueda online en la pantalla de inicio si tienes registros que aún no han sido enviados.</string>
     <string name="init_loaddirectionimg">Imagen de dirección</string>
     <string name="init_summary_loaddirectionimg">Descarga si es necesario las imágenes de las flechas direccionales (necesario solo para miembros básicos)</string>
@@ -862,8 +1162,17 @@
     <string name="init_plain_logs">Registros sencillos</string>
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
     <string name="init_rendertheme_folder">Carpeta de temas del mapa</string>
+    <string name="init_mapshading_folder">Carpeta de archivos de sombreado de mapa</string>
+    <string name="init_iconsizes">Tamaños de icono</string>
+    <string name="init_mapCacheScaling_title">Escala del icono de caché</string>
+    <string name="init_mapCacheScaling_description">Factor de escala para los iconos de caché (en %)</string>
+    <string name="init_mapWpScaling_title">Escalado del icono del Waypoint</string>
+    <string name="init_mapWpScaling_description">Factor de escala para los iconos de waypoints (en %)</string>
     <string name="init_maintenance">Mantenimiento</string>
+    <string name="init_maintenance_directories_note">Los cachés eliminados son almacenados internamente durante 72 horas por c:geo para prevenir la pérdida accidental de datos. Además, c:geo también almacena imágenes y otros archivos relacionados con cachés en carpetas dedicadas. En algunos casos especiales tal vez no se eliminen dichos datos, aunque el caché ya no esté almacenado. Esta función se puede utilizar para limpiar estos datos huérfanos.</string>
+    <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
     <string name="init_maintenance_start">Mantenimiento iniciado</string>
+    <string name="init_maintenance_ongoing">Esto puede tardar un poco…</string>
     <string name="init_maintenance_finished">Mantenimiento finalizado</string>
     <string name="init_location">Geolocalización</string>
     <string name="init_location_note">En dispositivos equipados con los servicios Google Play, c:geo puede usar el mejor proveedor de geolocalización de manera automática. Sin embargo, esto impide el uso de un receptor externo de GPS por Bluetooth.</string>
@@ -874,9 +1183,17 @@
     <string name="init_force_orientation_sensor_title">Sensor de orientación</string>
     <string name="init_force_orientation_sensor_note">En algunos dispositivos, el sensor de vectores de rotación estándar se comporta de manera errática, dando la dirección equivocada. En este caso, un sensor alternativo (el sensor de orientación) puede proporcionar mejores resultados.</string>
     <string name="init_force_orientation_sensor">Forzar el uso del sensor de orientación</string>
+    <string name="init_clipboard_copy_action_title">Acción de copiar al portapapeles</string>
+    <string name="init_clipboard_copy_action_note">En algunos dispositivos, las opciones de compartir texto no contienen \'Copiar al portapapeles\'. Para estos dispositivos, c:geo puede añadir su propio \'Copiar al portapapeles\' al menú compartir.</string>
+    <string name="init_clipboard_copy_action">Añadir la acción \'copiar al portapapeles\' al menú compartir</string>
+    <string name="init_title_extended_settings">Configuración avanzada</string>
+    <string name="init_summary_extended_settings">Mostrar ajustes para el usuario más experimentado</string>
     <string name="init_create_memory_dump">Crear volcado de memoria</string>
     <string name="init_memory_dump">Volcado de memoria</string>
     <string name="init_memory_dumped">Memoria volcada a %s</string>
+    <string name="init_reset_otm">Resetear mensajes de una sola vez</string>
+    <string name="init_reset_otm_confirm">¿Quieres resetear todos los mensajes de una sola vez?</string>
+    <string name="init_reset_otm_done">Se han reseteado los mensajes de una sola vez</string>
     <string name="init_please_wait">Espere por favor…</string>
     <string name="settings_open_website">Abrir el sitio web</string>
     <string name="settings_open_geokretymap_website">Abrir el sitio web GeoKretyMap.org</string>
@@ -899,9 +1216,16 @@
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="feature_favorite">Añadiendo caché a favoritos</string>
     <string name="feature_voting">Votando por cachés</string>
+    <string name="init_appearance_general">Apariencia general</string>
+    <string name="init_cachedetail_behaviour">Comportamiento</string>
+    <string name="init_cachedetail_note">Nota Personal del Caché</string>
+    <string name="init_maplines_title">Personalización de los colores del mapa</string>
     <string name="init_map_other">Otro</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar múltiples capas para dibujar mapas de OpenStreetMap</string>
+    <string name="init_title_useLegacyMap">Usar mapa de legado</string>
+    <string name="init_summary_useLegacyMap">Usar versiones antiguas de Google Maps / Mapsforge (OSM) maps en lugar de UnifiedMap</string>
+    <string name="category_unifiedMap">Mapa unificado</string>
     <string name="localstorage_migrate_title">Migración de archivos locales</string>
     <string name="localstorage_migrate_status_major">Versión %1$d</string>
     <!-- proximity notification -->
@@ -916,9 +1240,11 @@
     <string name="pn_tone_only">Sólo sonido</string>
     <string name="pn_text_only">Sólo texto</string>
     <string name="pn_tone_and_text">Sonido + texto</string>
+    <string name="pn_enabled">Activar notificaciones de proximidad</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
+    <string name="map_source_google_terrain">Google: Terreno</string>
     <string name="map_source_osm_offline">Desconectado</string>
     <string name="map_source_osm_offline_combined">Combinado (sin conexión)</string>
     <string name="map_source_attribution_dialog_title">Atribuciones del mapa</string>
@@ -951,6 +1277,8 @@
     <string name="contentstorage_err_list_failed">No se han podido listar los archivos en la carpeta \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">No se pudo acceder a la carpeta \'%s\'</string>
     <string name="contentstorage_err_copy_failed">El archivo \'%1$s\' no se pudo copiar/mover a \'%2$s\' (mover=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Error al seleccionar el archivo/carpeta</string>
+    <string name="contentstorage_err_activity_not_found_message">Su sistema no proporciona un componente para seleccionar los archivos/carpetas: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definido por usuario</string>
     <string name="persistablefolder_usertype_default">Por defecto</string>
@@ -960,12 +1288,17 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapas sin conexión</string>
     <string name="persistablefolder_offline_maps_themes">Temas del mapa</string>
+    <string name="persistablefolder_backgroundmaps">Mapas de fondo</string>
+    <string name="persistablefolder_offline_maps_shading">Carpetas de archivos de sombreado de mapa</string>
     <string name="persistablefolder_backup">Copia de seguridad</string>
     <string name="persistablefolder_logfiles">Archivos de registro</string>
     <string name="persistablefolder_fieldnotes">Notas de campo</string>
     <string name="persistablefolder_spoilerimages">Imágenes reveladoras</string>
     <string name="persistablefolder_routingbase">Enrutamiento</string>
     <string name="persistablefolder_routingtiles">Datos de ruta</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Archivo de audio (lejano)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Archivo de audio (cercano)</string>
+    <string name="proximitynotification_internal">(interno)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hecho</string>
     <string name="folder_process_status_currentfile">Procesar %1$s</string>
@@ -995,6 +1328,7 @@
     <string name="auth_register">Crear una cuenta</string>
     <string name="auth_connected">Conectado</string>
     <string name="auth_unconnected">Aún no conectado</string>
+    <string name="auth_unconnected_tap_here">No conectado todavía - pulse aquí para autorizar</string>
     <string name="auth_connected_as">Conectado como %s.\nPresione aquí para actualizar o mantenga pulsado para eliminar los datos de autorización de c:geo.</string>
     <string name="auth_dialog_waiting">Esperando a %s…</string>
     <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
@@ -1015,6 +1349,17 @@
     <string name="err_auth_geokrety_bad_password">Tu usuario/contraseña no es correcto.</string>
     <string name="err_auth_geokrety_unknown">%1$s ha devuelto: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">No hay información de inicio de sesión guardada</string>
+    <string name="err_auth_gc_loginpage1">Error al obtener la página de inicio de sesión (1a)</string>
+    <string name="err_auth_gc_loginpage2">Error al obtener la página de inicio de sesión (2º)</string>
+    <string name="err_auth_gc_verification_token">No se pudo encontrar el token de verificación de la solicitud</string>
+    <string name="err_auth_gc_captcha">Error al iniciar sesión en geocaching.com debido a que se requiere captcha</string>
+    <string name="err_auth_gc_bad_login">Error al iniciar sesión en geocaching.com como %s debido a un nombre de usuario o contraseña incorrectos</string>
+    <string name="err_auth_gc_not_validated">Error al iniciar sesión en Geocaching.com como %s porque la cuenta debe ser validada primero</string>
+    <string name="err_auth_gc_unknown_error">Error al iniciar sesión en Geocaching.com como %s por una razón desconocida</string>
+    <string name="err_auth_gc_unknown_error_generic">Error desconocido</string>
+    <string name="err_auth_gc_communication_error">Error de comunicación</string>
+    <string name="err_auth_gc_manual_error">Error de inicio de sesión manual: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">Un caché</item>
@@ -1028,11 +1373,16 @@
     <string name="last_day_available">último día disponible</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Eliminar de la lista</string>
+    <string name="cache_offline_delete">Borrar</string>
     <string name="cache_delete_userdefined_waypoints">Eliminar waypoints definidos por el usuario</string>
     <string name="cache_delete_userdefined_waypoints_confirm">¿Eliminar todos los waypoints definidos por el usuario de este caché?\n\nLos waypoints se eliminarán inmediatamente, no hay deshacer.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tiene habilitados \"waypoints de la nota\". Si tiene coordenadas en su nota personal reconocida por c:geo, los waypoints serán recreados para ellos automáticamente. Puede desactivar esto en el cuadro de diálogo de edición de notas personales.</string>
     <string name="cache_delete_userdefined_waypoints_success">Waypoints definidos por el usuario eliminados</string>
+    <string name="cache_delete_generated_waypoints">Eliminar waypoints generados</string>
+    <string name="cache_delete_generated_waypoints_confirm">¿Eliminar todos los waypoints generados para este caché?\n\nLos waypoints se eliminarán inmediatamente, no hay opción de deshacer.</string>
+    <string name="cache_delete_generated_waypoints_success">Los waypoints generados han sido eliminados</string>
     <string name="cache_offline_store">Guardar</string>
+    <string name="cache_offline_stored_ago">Almacenado: %s</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
     <string name="cache_offline_time_mins_few">hace unos minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1053,7 +1403,9 @@
     </plurals>
     <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">TB(s)</string>
     <string name="cache_log_image_default_title">Foto</string>
+    <string name="cache_set_coordinates">Establecer coordenadas</string>
     <string name="cache_personal_note">Nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Evitar waypoints de la nota</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir waypoints de la nota</string>
@@ -1066,11 +1418,21 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">No se encontraron waypoints para guardar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Evitar extracción de waypoints</string>
     <string name="cache_personal_note_limit">Límite de la nota personal</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Esta nota personal será truncada por aprox. %1$d caracteres por %3$s (tamaño máximo %2$d).</string>
     <string name="cache_personal_note_upload">Subir</string>
     <string name="cache_personal_note_upload_done">Nota personal cargada</string>
     <string name="cache_personal_note_upload_error">Error al subir la nota personal</string>
+    <string name="cache_personal_note_save_and_upload">Guardar y enviar</string>
+    <string name="cache_personal_note_vars_out_of_sync">Las variables en las notas están desincronizadas (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variables de sincronización</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Revisar variables cuyo valor debe sobrescribirse desde las notas</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Descripción</string>
     <string name="cache_description_table_note">La descripción contiene formato de tabla que puede necesitar ser vista en %s para mostrarse correctamente.</string>
+    <string name="cache_description_rendering">Renderizando descripción, por favor espere…</string>
+    <string name="cache_description_translating_and_rendering">Traduciendo y renderizando la descripción, por favor espere…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Advertencia: La descripción es demasiado grande (%1$d caracteres). Solo los primeros %2$d%% se mostrarán.</string>
+    <string name="cache_description_render_fully">Renderizar descripción completa</string>
     <string name="cache_area_description">Descripción del área</string>
     <string name="cache_cache_description">Descripción del caché</string>
     <string name="cache_virtual_description">Pregunta de Virtual</string>
@@ -1111,6 +1473,10 @@
     <string name="cache_dialog_offline_save_message">Guardando caché para usar desconectado…</string>
     <string name="cache_dialog_offline_drop_title">Desconectado</string>
     <string name="cache_dialog_offline_drop_message">Borrando caché de la memoria del dispositivo…</string>
+    <string name="cache_menu_speechDeactivate">Dejar de hablar</string>
+    <string name="cache_menu_speechActivate">Empezar a hablar</string>
+    <string name="talking_disabled">Hablar deshabilitado</string>
+    <string name="talking_enabled">Hablar habilitado</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Establecer como objetivo</string>
     <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
@@ -1120,16 +1486,19 @@
     <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
     <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
     <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Ver en mapa</string>
     <string name="cache_menu_map_ext">Otras apps externas</string>
+    <string name="cache_menu_map_ext_nolabel">Otras aplicaciones externas (solo coordenadas)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="no_browser_found">Navegador no encontrado</string>
     <string name="cache_menu_open_with">Abrir con…</string>
     <string name="cache_menu_visit">Registrar visita</string>
+    <string name="cache_empty_log">c:geo no pudo enviar tu registro porque está vacío.</string>
     <string name="cache_menu_visit_offline">Registro rápido sin conexión</string>
     <string name="cache_menu_spoilers">Revelaciones</string>
     <string name="cache_menu_around">Cachés cercanos</string>
@@ -1137,24 +1506,33 @@
     <string name="menu_caches">Gestionar cachés</string>
     <string name="cache_menu_event">Añadir al calendario</string>
     <string name="cache_menu_extract_waypoints">Extraer waypoints</string>
+    <string name="cache_menu_scan_calculated_waypoints">Escanear para fórmulas de waypoint</string>
     <string name="cache_menu_set_found">Establecer como encontrado</string>
     <string name="cache_menu_set_DNF">Establecer como no se encontró</string>
     <string name="cache_menu_reset_foundstate">Resetear estado encontrado</string>
     <string name="cache_foundstate_updated">Estado encontrado actualizado</string>
     <string name="cache_menu_set_cache_icon">Establecer icono del caché</string>
+    <string name="cache_menu_change_description_style">Cambiar estilo de descripción</string>
     <string name="cache_icon_updated">Icono del caché actualizado</string>
     <string name="cache_menu_details">Detalles</string>
     <string name="cache_menu_refresh">Actualizar</string>
     <string name="cache_menu_share">Compartir caché</string>
+    <string name="cache_menu_share_with_data">Compartir incluyendo datos de usuario</string>
     <string name="cache_menu_move_list">Mover a otra lista</string>
     <string name="cache_menu_copy_list">Copiar a otra lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (En línea)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (sin conexión)</string>
     <string name="cache_menu_vote">Votar</string>
     <string name="cache_menu_challenge_checker">Buscar checker del challenge</string>
+    <string name="cache_menu_log_in_browser">Abrir en el navegador</string>
     <string name="cache_menu_ignore">Ignorar caché</string>
     <string name="cache_log_menu_decrypt">Descifrar/Cifrar</string>
+    <string name="cache_log_menu_edit">Editar registro</string>
+    <string name="menu_expand_log">Expandir registro</string>
+    <string name="menu_collapse_log">Colapsar registro</string>
+    <string name="cache_log_menu_delete">Eliminar registro</string>
     <string name="cache_log_menu_popup_title">Registro de %s</string>
+    <string name="cache_log_delete_reason_default">Registro eliminado usando c:geo</string>
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
@@ -1174,15 +1552,20 @@
     <string name="cache_description_updated">Descripción del caché actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamaño</string>
+    <string name="cache_mode">Modo</string>
+    <string name="cache_mode_linear">Lineal</string>
+    <string name="cache_mode_random">Aleatorio</string>
     <string name="cache_distance">Distancia</string>
     <string name="cache_difficulty">Dificultad</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Puntuación</string>
     <string name="cache_own_rating">Tu puntuación</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
     <string name="cache_favorite">Favorito</string>
     <string name="cache_owner">Propietario</string>
     <string name="cache_hidden">Oculto</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Fecha</string>
     <string name="cache_location">Ubicación</string>
     <string name="cache_coordinates">Coordenadas</string>
@@ -1193,35 +1576,88 @@
     <string name="cache_remove_from_history">Borrar del historial</string>
     <string name="cache_license">Licencia</string>
     <string name="cache_image">Imagen</string>
+    <string name="cache_image_information_unavailable">Información de imagen no disponible</string>
+    <string name="cache_image_open">Abrir</string>
     <string name="cache_image_open_file">Abrir como archivo</string>
     <string name="cache_image_open_browser">Abrir en el navegador</string>
+    <string name="cache_image_share">Compartir</string>
+    <string name="cache_image_show_description">Mostrar descripción</string>
     <string name="cache_image_add_waypoint">Añadir waypoint</string>
+    <string name="cache_image_rename">Renombrar</string>
+    <string name="cache_image_delete">Eliminar</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Imagen de fondo del caché</string>
     <string name="cache_share_field">Compartir</string>
     <string name="cache_time_full_hours">en punto</string>
     <string name="cache_listed_on">Listado en %s</string>
+    <string name="cache_recently_viewed">Visto recientemente</string>
+    <string name="cache_recently_viewed_empty">No hay cachés vistos recientemente</string>
+    <string name="cache_clear_recently_viewed">Limpiar</string>
+    <string name="cachedetails_progress_refresh">%s actualizado</string>
+    <string name="cachedetails_progress_watch">Añadido a la lista de seguimiento</string>
+    <string name="cachedetails_progress_unwatch">Eliminado de la lista de seguimiento</string>
+    <string name="cachedetails_progress_favorite">Añadido a favoritos</string>
+    <string name="cachedetails_progress_unfavorite">Eliminado de favoritos</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartuchos Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consulta el listing del caché para obtener más información sobre los cartuchos.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - no descargado</string>
+    <string name="cache_wherigo_start">Descargar y reproducir este Wherigo usando el reproductor interno de c:geo</string>
+    <string name="cache_wherigo_credentials">Para poder jugar este Wherigo usando el lector interno de c:geo necesita autorización del servicio de geocaching.com primero. Pulse en el botón de la derecha para ir a la configuración.</string>
     <string name="cache_whereyougo_start">Abre WhereYouGo para descargar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descargar e iniciar este cartucho</string>
+    <string name="cache_chirpwolf_start">Este caché puede usar un transmisor chirp u otro tipo de baliza inalámbrica. Para leer los datos chirp puedes abrir Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Este caché puede usar un transmisor chirp u otro tipo de baliza inalámbrica. Para leer los datos chirp puede abrir Chirp Wolf.</string>
     <string name="cache_alc_start">Abrir Adventure Lab para empezar a jugar esta aventura</string>
+    <string name="cache_alc_related_start">Abrir Adventure Lab para empezar a jugar esta aventura</string>
     <string name="cache_alc_install">Instalar el reproductor de Adventure Lab para jugar a esta aventura</string>
+    <string name="cache_bettercacher_open">Abrir caché en BetterCacher.org</string>
     <string name="context_share_as_text">Compartir texto</string>
     <string name="context_share_as_link">Compartir enlace</string>
+    <string name="image_category_uncategorized">Sin categoría</string>
+    <string name="image_category_own">Propio</string>
+    <string name="image_category_listing">Listado</string>
     <string name="image_category_log">Registro</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Fondo</string>
+    <string name="image_listing_gallery">Galería</string>
     <string name="context_map_add_to_route">Añadir a la ruta</string>
     <string name="context_map_add_to_route_start">Anteponer a la ruta</string>
+    <string name="context_map_remove_from_route_start">Remover del inicio</string>
+    <string name="context_map_remove_from_route_pos">Eliminar de la posición %d</string>
+    <string name="context_map_remove_from_route_end">Eliminar del final</string>
+    <string name="context_map_star_show">Mostrar líneas a los waypoints</string>
+    <string name="context_map_star_hide">Ocultar lineas a los waypoints</string>
+    <string name="edit">Editar</string>
+    <string name="showElevationChart">Mostrar gráfico de elevación</string>
     <string name="create_internal_cache">Crear caché definido por el usuario</string>
     <string name="create_internal_cache_short">Nuevo caché</string>
     <string name="create_internal_cache_currentlist">Utilizar lista actual</string>
+    <string name="internal_cache_default_names">Caché definido por el usuario #%1$s</string>
     <string name="internal_cache_default_description">Este es un caché definido por el usuario</string>
     <string name="internal_cache_default_owner">Tú</string>
     <string name="internal_goto_targets_title">Objetivos \"Ir a\"</string>
     <string name="internal_goto_targets_description">Este caché almacena tus últimos objetivos \"Ir a\" y se crea automáticamente una vez que has usado la función \"Ir a\" en el menú principal. Las coordenadas introducidas se almacenarán en los waypoints de este caché. Si ya no necesitas estas coordenadas, puedes borrar este caché o cualquiera de sus waypoints. También puedes mover el caché a cualquier otra lista de tu elección.</string>
+    <string name="goto_targets_deprecation_title">Aviso de obsolescencia</string>
+    <string name="goto_targets_deprecation_notice">La funcionalidad \"Ir a\" está obsoleta y se eliminará en una versión futura. Por favor, utilice cachés definidos por el usuario para nuevos objetivos.</string>
     <string name="init_longtap_map">Toque largo en el mapa</string>
     <string name="init_summary_longtap_map">Activar el toque largo en el icono del mapa (para crear una ruta individual) o en el espacio libre del mapa (para crear un caché definido por el usuario)</string>
+    <string name="init_show_routing_menu">Mostrar menú de ruta</string>
+    <string name="init_summary_show_routing_menu">Mantener pulsado en un caché muestra un menú con opciones avanzadas para añadir/eliminar el caché a/de una ruta. Si se desactiva el caché es añadido/eliminado a/de la ruta.</string>
+    <string name="init_ActionbarAutohide">Ocultar barra de herramientas al tocar</string>
+    <string name="init_summary_ActionbarAutohide">Pulsa en el espacio libre del mapa para ocultar/mostrar la barra de herramientas</string>
+    <string name="init_autozoom_consider_lastcenter">Restaurar posición del mapa al mapear una lista</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Cuando se mapea una lista de cachés y el mapa se dejó previamente dentro de los límites de la lista, se restaurará la posición de previsualización, de lo contrario se hará zoom para que se adapte a todos los cachés.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Cuando una lista de cachés se mapea, asigna el zoom del mapa y límites para que se adapten a todos los cachés.</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
+    <string name="internal_connector_name">Cachés definidos por el usuario</string>
     <!-- html styles -->
+    <string name="html_style_default">Por defecto</string>
+    <string name="html_style_default_no_contrast_fix">Por defecto sin corrección de contraste</string>
+    <string name="html_style_monochrome">Monocromático</string>
+    <string name="html_style_source_formatted">Código HTML formateado</string>
+    <string name="html_style_source">Código HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grados</string>
     <string name="cc_hint_minutes">minutos</string>
@@ -1251,6 +1687,7 @@
     <string name="web_downloaded">Descargados</string>
     <!-- popup -->
     <string name="popup_more">Más detalles</string>
+    <string name="map_fragment_swipe_hint_text">Desliza para abrir la vista de detalles</string>
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coordenadas</string>
@@ -1261,6 +1698,8 @@
     <string name="waypoint_my_coordinates_accuracy">Mis coordenadas (±%s)</string>
     <string name="waypoint_name">Nombre</string>
     <string name="waypoint_edit">Editar</string>
+    <string name="waypoint_geofence">Perímetro de respuesta</string>
+    <string name="waypoint_geofence_summary">Define el radio para el perímetro de respuesta (en metros)</string>
     <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
     <string name="waypoint_clear_coordinates">Borrar coordenadas</string>
     <string name="waypoint_delete">Borrar</string>
@@ -1288,11 +1727,22 @@
     <string name="waypoint_duplicate">Duplicar waypoint</string>
     <string name="waypoint_toclipboard">Copiar waypoint al portapapeles</string>
     <string name="waypoint_copy_of">Copia de</string>
+    <string name="waypoint_open_geochecker">Abrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Introduce aquí las notas…</string>
     <string name="waypoint_coordinate_formats_plain">Sencillo</string>
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <!-- Projection -->
+    <string name="projection_type_none">Sin proyección</string>
+    <string name="projection_type_bearing">Rumbo</string>
+    <string name="projection_type_bearing_info">En rumbo a %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Orientación en º</string>
+    <string name="projection_type_bearing_hint_distance">Distancia</string>
+    <string name="projection_type_offset">Desvío</string>
+    <string name="projection_type_offset_info">Desplazar lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Desvío de la latitud en Micro-Minutos</string>
+    <string name="projection_type_offset_hint_longitude">Desvío de la longitud en Micro-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_scanlisting">Escanear listado</string>
@@ -1300,6 +1750,8 @@
     <string name="variables_scanlisting_nopatternfound">Patrón no encontrado</string>
     <string name="variables_tidyup">Ordenar</string>
     <string name="variables_deleteall">Borrar Todo</string>
+    <string name="variables_add">Añadir variable</string>
+    <string name="variables_add_next">Añadir siguiente variable</string>
     <string name="variables_deleteall_confirm_text">¿Realmente desea eliminar todas las variables de este caché?</string>
     <string name="variables_info">Ayuda</string>
     <string name="variables_varname_dialog_title">Nombre de la variable</string>
@@ -1310,10 +1762,13 @@
     <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a Coordenadas simples</string>
     <string name="calccoord_plain_tools_title">Herramientas simples</string>
+    <string name="calccoord_remove_spaces">Quitar espacios</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Reemplazar \'x\' con \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Pegar desde el portapapeles</string>
     <string name="calccoord_generate_title">Generar Waypoints</string>
     <string name="calccoord_generate_showonmap">Mostrar en el mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generado</string>
+    <string name="calccoord_generate_error_novarwithrange">No se encontró ninguna variable válida con rangos (por ejemplo: [:0-9] o [:0,2,7])</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ninguna combinación devuelve coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">No hay Coordenadas seleccionadas</string>
     <string name="calccoord_migrate_title">Migración de Waypoint</string>
@@ -1332,14 +1787,41 @@
     <string name="formula_function_tan">Tangente</string>
     <string name="formula_function_abs">Valor absoluto</string>
     <string name="formula_function_round">Redondeo</string>
+    <string name="formula_function_trunc">Truncar</string>
     <string name="formula_function_if">Si</string>
     <string name="formula_function_length">Longitud del hilo</string>
     <string name="formula_function_substring">Subhilo</string>
+    <string name="formula_function_chars">Seleccionar Caracteres</string>
     <string name="formula_function_rot13">Rotar caracteres por 13</string>
+    <string name="formula_function_rot">Rotar caracteres</string>
+    <string name="formula_function_checksum">Suma de verificación</string>
+    <string name="formula_function_ichecksum">Suma de verificación iterativa</string>
+    <string name="formula_function_lettervalue">Valor de Palabra</string>
+    <string name="formula_function_roman">Romano a Decimal</string>
+    <string name="formula_function_vanity">Código Vanity</string>
+    <string name="formula_function_group_simplenumeric">Número simple</string>
+    <string name="formula_function_group_complexnumeric">Número Complejo</string>
+    <string name="formula_function_group_simplestring">Secuencia de caracteres simple</string>
+    <string name="formula_function_group_complexstring">Secuencia de caracteres compleja</string>
+    <string name="formula_error_unexpectedtoken">Esperado \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Número incorrecto de parámetros, se esperaba %1$s-%2$s, se obtuvo %3$s</string>
+    <string name="formula_error_wrongtype">Tipo incorrecto, se esperaba \'%1$s\', se obtuvo \'%2$s\' de tipo \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Falta: %1$s</string>
+    <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
+    <string name="formula_error_empty">Fórmula Vacía</string>
+    <string name="formula_error_numeric_overflow">Numeración excedida</string>
+    <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">Sin título</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_error">No se pudo cargar la imagen</string>
+    <string name="imageview_metadata_geopoint">Geopunto</string>
+    <string name="imageview_metadata_comment">Comentario</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
+    <string name="map_live">En vivo</string>
+    <string name="map_offline">Offline</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_rotation">Rotación del mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
@@ -1368,14 +1850,35 @@
     <string name="map_routing">Enrutamiento</string>
     <string name="map_routing_activate_title">Activar enrutamiento</string>
     <string name="map_routing_activate">Algunos modos de enrutamiento no están actualmente disponibles, ya que ningún motor de enrutamiento está activo.\n\n¿Quieres activar el motor de enrutamiento interno de c:geo y descargar los datos de enrutamiento?</string>
+    <string name="map_autorotation">Rotación automática del mapa</string>
+    <string name="map_autorotation_disable">¿Desactivar la rotación automática del mapa?\n\nPuede activarla de nuevo usando el menú de rotación del mapa</string>
     <string name="quick_settings">Configuración rápida</string>
     <string name="quick_settings_info">Algunos ajustes del mapa (configuración del mapa, ocultar, enrutar) se han movido a la nueva ventana de \"Configuración rápida\".\nPuedes abrir esta ventana mediante el icono que hay en la parte inferior del mapa.</string>
+    <string name="zoom_in">Ampliar</string>
+    <string name="zoom_out">Reducir</string>
+    <string name="other_settings">Otros ajustes</string>
     <string name="map_show_caches_title">Mostrar cachés:</string>
     <string name="map_show_waypoints_title">Mostrar waypoints:</string>
     <string name="map_show_other_title">Mostrar otros:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
+    <string name="google_maps_style_default">Por defecto</string>
+    <string name="google_maps_style_night">Noche</string>
+    <string name="google_maps_style_classic">Clásico</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Contraste alto</string>
+    <string name="google_maps_style_auto">Tema del dispositivo (Día/Noche)</string>
+    <string name="google_maps_option_group_map">Opciones de mapa</string>
+    <string name="google_maps_option_show_traffic">Mostrar Tráfico</string>
+    <string name="google_maps_option_show_buildings">Mostrar edificios en 3D</string>
     <string name="google_maps_option_group_theme">Opciones de Temas</string>
+    <string name="google_maps_option_show_feature_theme">Mostrar características del tema</string>
+    <string name="google_maps_option_show_feature_administrative_all">Mostrar Administrativo</string>
+    <string name="google_maps_option_show_feature_landscape_all">Mostrar en modo horizontal</string>
+    <string name="google_maps_option_show_feature_poi_all">Mostrar Puntos de Interés</string>
+    <string name="google_maps_option_show_feature_road_all">Mostrar carreteras</string>
+    <string name="google_maps_option_show_feature_transit_all">Mostrar Tránsito</string>
+    <string name="google_maps_option_show_feature_water_all">Mostrar agua</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
@@ -1384,15 +1887,18 @@
     <string name="search_address">Dirección</string>
     <string name="search_geo">Geocode</string>
     <string name="search_kw">Palabra clave</string>
+    <string name="search_kw_disabled_hint">Deshabilitado ya que no está soportado por geocaching.com para miembros básicos (No premium)</string>
     <string name="search_hbu">Escondido por</string>
     <string name="search_finder">Encontrado por</string>
     <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Buscar por filtro** busca cachés en todos los servicios activos en línea (por ejemplo, geocaching.com) usando un filtro proporcionado. Sin embargo, las capacidades de búsqueda de estos servicios suelen ser más limitadas que las capacidades de filtro de c:geo.\n\n- Todos los servicios sólo soportan filtros AND (no hay filtros OR ni inversión de filtros).\n- Los filtros más básicos como **tipo de caché** o **tamaño de caché** son compatibles con todos los servicios. Los filtros más complicados a menudo no son compatibles o tienen algunas restricciones, por ejemplo, **favoritos** o **fecha oculta**.\n- Una lista detallada sobre los filtros soportados por servicio puede ser encontrada [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLos filtros no soportados por el servicio online serán aplicados por c:geo en los resultados recibidos.</string>
     <string name="search_tb">Rastreable</string>
+    <string name="most_recent">Más reciente</string>
     <string name="search_destination">Abrir destino en c:geo</string>
     <string name="add_target_to">Añadir objetivo a</string>
     <string name="search_address_started">Buscando lugares</string>
     <string name="search_address_result">Lugares encontrados</string>
+    <string name="search_own_caches">Mis cachés</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">nuevo</string>
@@ -1477,9 +1983,14 @@
     <string name="helper_gcwizard_description">GC Wizard contiene numerosas herramientas para cifrado simple, cálculo geográfico y científico, así como cientos de conjuntos de diversos símbolos.</string>
     <!-- export -->
     <string name="share_export">Compartir / Exportar</string>
+    <string name="export">Exportar</string>
+    <string name="export_upload">Exportar / Subir</string>
     <string name="export_progress">Exportar: %1$s</string>
     <string name="export_exportedto">exportado a</string>
     <string name="export_failed">Error en la exportación</string>
+    <string name="export_gpx">Exportar GPX</string>
+    <string name="export_fieldnotes">Exportar notas de campo</string>
+    <string name="fieldnotes">notas de campo</string>
     <string name="export_fieldnotes_info">Las notas de campo seran exportadas a /sdcard/field-notes con la fecha y hora actuales como nombre de archivo.</string>
     <string name="export_fieldnotes_upload">Subir a geocaching.com</string>
     <string name="export_fieldnotes_uploading">Subiendo…</string>
@@ -1490,6 +2001,7 @@
     <string name="export_confirm_title">Exportando %1$s</string>
     <string name="export_confirm_message">Directorio: %1$s\n
 Nombre de archivo:%2$s</string>
+    <string name="export_persnotes">Subir notas personales</string>
     <string name="export_persnotes_uploading">Subiendo nota personal %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Se ha subido una nota correctamente</item>
@@ -1537,6 +2049,7 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_night_yes">Recomendado por la noche</string>
     <string name="attribute_night_no">No recomendado por la noche</string>
     <string name="attribute_winter_yes">Disponible en invierno</string>
+    <string name="attribute_cacti_yes">Cactus cercanos</string>
     <string name="attribute_winter_no">No disponible en invierno</string>
     <string name="attribute_stealth_yes">Es necesario ser sigiloso</string>
     <string name="attribute_stealth_no">No es necesario ser sigiloso</string>
@@ -1726,12 +2239,16 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_blind_people_no">No adecuado a personas invidentes</string>
     <string name="attribute_unknown">Atributo desconocido</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Estado del caché</string>
+    <string name="cat_tools">Equipamiento</string>
     <string name="cat_type">Tipo</string>
     <string name="cat_location">Ubicación del caché</string>
     <string name="cat_duration">Distancia / Duración</string>
     <string name="cat_surrounding">Alrededor del caché</string>
     <string name="cat_permissions">Permisos</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1756,6 +2273,7 @@ Nombre de archivo:%2$s</string>
     <string name="tts_service">Brújula con voz</string>
     <string name="tts_started">Voz iniciada</string>
     <string name="tts_stopped">Voz detenida</string>
+    <string name="tts_running">El servicio de voz se está ejecutando…</string>
     <string name="err_tts_lang_not_supported">El idioma actual no es compatible con la síntesis de voz.</string>
     <string name="tts_one_kilometer">un kilómetro</string>
     <plurals name="tts_kilometers">
@@ -1781,6 +2299,7 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
+    <string name="clipboard_copy_failed">Error al copiar al portapapeles</string>
     <plurals name="days_ago">
         <item quantity="one">hace %d día</item>
         <item quantity="other">hace %d días</item>
@@ -1788,6 +2307,7 @@ Nombre de archivo:%2$s</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
+    <string name="failed_creating_shortcut">Error al crear el acceso directo</string>
     <string name="send">Enviar</string>
     <string name="confirm_log_title">Tipo de registro especial</string>
     <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
@@ -1819,18 +2339,32 @@ Nombre de archivo:%2$s</string>
     <string name="command_rename_list_result">Lista renombrada</string>
     <string name="command_delete_list_result">Lista borrada</string>
     <string name="command_unique_list_result">Cachés borrados de otras listas</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Recomendar este caché (quedan %d)</item>
+        <item quantity="other">Recomendar este caché (quedan %d)</item>
+    </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Marcar el caché como favorito (te quedan %d)</item>
+        <item quantity="other">Marcar el caché como favorito (te quedan %d)</item>
+    </plurals>
     <string name="command_set_cache_icons_progress">Configurando iconos de caché</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Establecer %d icono de caché</item>
         <item quantity="other">Establecer %d iconos de caché</item>
     </plurals>
     <string name="caches_refresh_all_warning">Esta acción puede ocasionar un alto tráfico de red. ¿Estás seguro de querer actualizar todos los cachés?</string>
+    <string name="live_map_status_http429">Por favor, disminuya las peticiones, demasiadas solicitudes a %s</string>
+    <string name="live_map_status_error">Error al cargar datos del mapa: %s</string>
+    <string name="live_map_status_partial">Resultados parciales (acerque el zoom para reducir el número de cachés a cargar): %s</string>
+    <string name="live_map_status_normal">Cargando datos sin problema: %s</string>
     <string name="list_list_headline">Listas:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint extraído</item>
         <item quantity="other">%d waypoints extraídos</item>
     </plurals>
     <string name="link_gc_checker">El comprobador de coordenadas de geocaching.com está disponible desde el navegador</string>
+    <string name="link_gallery">Imágenes disponibles en la galería (%d)</string>
+    <string name="geochecker_available">Geochecker disponible a través del navegador</string>
     <!-- calendar adder -->
     <string name="event_fail">Error al añadir el evento al calendario</string>
     <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>
@@ -1838,7 +2372,15 @@ Nombre de archivo:%2$s</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Faltan permisos</string>
+    <string name="permission_ask_again">Preguntame de nuevo</string>
+    <string name="permission_goto_app_details">Abrir información de la aplicación</string>
+    <string name="permission_contacts_read_explanation_title">Permiso de lectura de contactos</string>
+    <string name="permission_contacts_read_explanation">c:geo puede buscar contactos en tu agenda de contactos usando nombres de geocachers. Para hacer esto, debes autorizar a c:geo a leer tu agenda de contactos. De lo contrario, el uso de esta función no es posible.</string>
+    <string name="permission_location_explanation_title">Permiso de ubicación</string>
+    <string name="permission_location_explanation">c:geo está optimizado para el uso con datos GPS (buena ubicación) para localizar tu posición y calcular la distancia y la dirección a los cachés. Sin este permiso, las funciones basadas en la ubicación no funcionarán como deberían.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo escribirá datos en el almacenamiento de su teléfono o en la tarjeta SD, por ejemplo, cuando guarde geocachés para su uso sin conexión, importe o exporte archivos y otras funciones. En algunas versiones de Android, debe otorgar un permiso adicional para estas acciones.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Permiso de Legado Escribir en Almacenamiento Externo</string>
     <string name="permission_post_notifications_explanation">c:geo utiliza notificaciones para informarte sobre descargas y acerca de cachés (si está activado)</string>
     <string name="permission_post_notifications_explanation_title">Permiso de notificaciones</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
@@ -1846,6 +2388,8 @@ Nombre de archivo:%2$s</string>
     <string name="preference_colorpicker_select_color_scheme">Seleccionar esquema de color</string>
     <string name="preference_colorpicker_select_color">Seleccionar color</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidad</string>
+    <string name="preference_colorpicker_select_width">Seleccionar ancho de línea</string>
+    <string name="preference_colorpicker_show_width">ancho: %d</string>
     <string name="reset_to_default">Por defecto</string>
     <!-- number input -->
     <string name="number_input_title">Introduce un valor entre %1$s y %2$s</string>
@@ -1859,6 +2403,8 @@ Nombre de archivo:%2$s</string>
     <string name="notification_channel_foreground_description">la notificación se muestra mientras c:geo funciona en segundo plano</string>
     <string name="notification_channel_downloader_name">Descargador c:geo</string>
     <string name="notification_channel_downloader_description">notificaciones de resultados para descargas (ej: mapas sin conexión)</string>
+    <string name="notification_channel_cache_download_name">Descargador de cachés</string>
+    <string name="notification_channel_cache_download_description">notificaciones de resultados para las descargas en segundo plano de cachés</string>
     <string name="notification_download_receiver_title">Importando descarga</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
@@ -1867,16 +2413,22 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_sort_individual_route">Ordenar ruta individual</string>
+    <string name="map_refresh_individual_route">Actualizar</string>
+    <string name="map_export_route">Exportar como ruta</string>
+    <string name="map_export_track">Exportar como pista</string>
+    <string name="map_load_from_GPX">Cargar desde el GPX</string>
     <string name="map_load_individual_route">Cargar ruta individual</string>
     <string name="map_load_individual_route_confirm">¿Sobrescribir ruta existente?</string>
     <string name="map_autotarget_individual_route">Establecer el inicio de la ruta como objetivo</string>
     <string name="map_disable_autotarget_individual_route">\"Establecer inicio de ruta como objetivo\" desactivado</string>
+    <string name="map_clear_manual_targets">Limpiar destino de ruta</string>
     <string name="map_manual_targets_cleared">Objetivos manuales borrados</string>
     <string name="map_clear_individual_route">Borrar ruta individual</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
     <string name="map_individual_route_cleared">Ruta individual borrada</string>
     <string name="sorted_route_saved">Ruta individual guardada</string>
     <string name="load_individual_route_error">Error al cargar la ruta individual</string>
+    <string name="route_item_point">Punto de ruta</string>
     <string name="route_item_not_yet_loaded">Los elementos de ruta aún no se han cargado</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Ruta cargada con %d punto de ruta</item>
@@ -1884,26 +2436,58 @@ Nombre de archivo:%2$s</string>
     </plurals>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
+    <string name="route_optimization">Optimización de ruta</string>
+    <string name="route_optimization_info">La optimización de ruta es un recurso experimental para optimizar una ruta con una distancia más corta. La ruta será calculada a partir del primer punto de la lista hasta el último punto de la misma, pasando por los otros puntos a lo largo de la ruta en orden optimizado.\n\nComo no es posible evaluar todas las soluciones posibles, debido a las restricciones de tiempo y energía al hacer el cálculo en un dispositivo móvil, se usan algoritmos de aproximación para calcular posibles optimizaciones.\n\nEl cálculo se hace en dos pasos: Calcula las distancias entre cada dos pares de la ruta, depués intenta encontrar una ruta aceptable. Esta puede no ser la ruta más corta posible, por lo tanto puede repetir el segundo paso las veces que necesite.</string>
+    <string name="initial_route_length">Longitud inicial de la ruta: %d</string>
+    <string name="optimized_route_length">Longitud de la ruta optimizada: %d</string>
+    <string name="route_optimization_out_of_bounds">La optimización de rutas funciona para rutas entre 3 y 100 puntos</string>
+    <string name="generating_distance_matrix">Generar matriz de distancia</string>
+    <string name="running_route_optimizations">Optimizaciones de ruta en ejecución</string>
+    <string name="route_optimization_finished">Optimización de ruta finalizada</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Cambiar permisos</string>
     <string name="changed_permissions_info">Android ha introducido un nuevo permiso requerido por c:geo. Ejecute el asistente de configuración de c:geo para comprobar este permiso y obtener información más detallada. Puede ejecutar el asistente ahora o más tarde mediante la entrada de menú correspondiente en la pantalla de inicio de c:geo.\n\n¿Quieres ejecutar el asistente de configuración ahora?</string>
     <!-- individual track -->
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="load_track_error">Error al cargar pista/ruta</string>
+    <string name="load_track_error_named">Error al cargar pista/ruta: \"%s\"</string>
+    <string name="map_clear_track">Borrar ruta/pista</string>
+    <string name="map_clear_track_confirm">¿Desea eliminar la ruta/pista \"%s\"?</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Opciones de rutas / pistas</string>
+    <string name="routes_tracks_menu">Rutas / Pistas</string>
+    <string name="routes_tracks_color">Seleccione un color</string>
+    <string name="routes_tracks_change_name">Cambiar el nombre</string>
+    <string name="center">Centrar</string>
+    <string name="track">Pista</string>
+    <string name="make_visible">Hacer visible</string>
+    <string name="hide">Ocultar</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">apagado</string>
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
+    <string name="switch_auto_lowpower">Automático (Batería baja)</string>
+    <string name="switch_auto_precise">Automático (preciso)</string>
     <string name="switch_default">(por defecto)</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="show_all">Mostrar todos</string>
+    <string name="lists_only_new">Sólo nuevo</string>
+    <string name="pq_only_dl">Descargable</string>
     <string name="routingmode_straight">Recto</string>
     <string name="routingmode_walk">A pie</string>
     <string name="routingmode_bike">En bicicleta</string>
     <string name="routingmode_car">En coche</string>
+    <string name="routingmode_user1">Usuario 1</string>
+    <string name="routingmode_user2">Usuario 2</string>
+    <string name="routingmode_none">(ninguno)</string>
     <!-- view settings -->
     <string name="view_settings">Ver configuraciones</string>
     <string name="delete_setting">Eliminar configuración</string>
@@ -1931,13 +2515,18 @@ Nombre de archivo:%2$s</string>
     <string name="receivedownload_error_filenotfound_exception">Archivo no encontrado error al recibir el archivo.</string>
     <string name="receivedownload_amount_copied">%s copiado</string>
     <string name="receivedownload_cancelled">Transferencia de archivo cancelada</string>
+    <string name="receivedownload_integritycheck_failed">Comprobación de integridad fallida</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descargar mapa sin conexión</string>
+    <string name="downloadbackground_title">Descargar mapa de fondo</string>
     <string name="download_title">Descargar archivo</string>
     <string name="downloadmap_info">Seleccione un archivo de mapa para su región pulsando el icono \"Guardar\".\n\nLa descarga se realiza en segundo plano. Cuando la transferencia se completa, el archivo se copia a la carpeta de mapa c:geo y se establece como el mapa actual.\n\nTenga cuidado: ¡Descargando un mapa puede causar un gran tráfico de red!</string>
     <string name="downloadmap_filename">Descargando %s</string>
+    <string name="downloadmap_keep_temporary_files">Conservar archivos temporales</string>
+    <string name="downloadmap_keep_temporary_files_summary">Algunas fuentes de descarga soportan archivos adicionales no utilizados por c:geo. Mantenga esos archivos extra en la carpeta de descargas del sistema en lugar de eliminarlos</string>
     <string name="downloadmanager_not_available">No se puede descargar el archivo, el gestor de descargas del sistema no está disponible</string>
     <string name="download_started">Descarga iniciada en segundo plano</string>
+    <string name="download_enqueing_error">Error al intentar iniciar la descarga</string>
     <string name="downloadmap_target_not_writable">El objetivo seleccionado \"%s\" no tiene permisos de escritura - el archivo de mapa descargado se guarda en la carpeta de descarga del sistema y debe moverse manualmente a la carpeta del mapa.</string>
     <string name="downloadmap_allow_metered_network">Permitir descargar a través de red (por ejemplo: conexión móvil)</string>
     <string name="download_confirmation">%1$s¿Descargar archivo \"%2$s\"?%3$s</string>
@@ -1954,29 +2543,54 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_mapfile">archivo de mapa</string>
     <string name="downloadmap_themefile">archivo de tema</string>
     <string name="downloadmap_tilefile">Archivo de datos de enrutamiento</string>
+    <string name="downloadmap_hillshadingfile">archivo de datos de sombreado de relieve</string>
+    <string name="downloadmap_checking">Comprobando datos disponibles…</string>
+    <string name="downloadmap_othermapdownload">otra descarga de mapa</string>
+    <string name="downloadmap_otherthemedownload">otra descarga de tema</string>
     <string name="downloadmap_download">descargar</string>
     <string name="downloadmap_retrieving_directory_data">Recuperando datos de la carpeta…</string>
     <string name="downloadmap_checking_for_updates">Comprobando actualizaciones…</string>
+    <string name="downloadtile_title">Datos faltantes</string>
     <string name="downloadtile_info">c:geo no puede calcular la ruta solicitada ya que falta algún archivo de datos de enrutamiento. ¿Desea descargar los datos de enrutamiento que faltan?</string>
     <string name="check_tiles_menu">Comprobar si faltan datos de ruta</string>
     <string name="check_tiles_found">Los datos de ruta ya están presentes</string>
     <string name="check_tiles_missing">Faltan datos de enrutamiento:</string>
+    <string name="check_tiles_unsupported">Advertencia: Los datos de ruta no están disponibles al menos parcialmente para la región elegida</string>
     <string name="tileupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de datos de ruta descargados. Mantenga pulsado para posponer.</string>
+    <string name="check_hillshading_found">Los datos de sombreado de relieve ya están presentes</string>
+    <string name="check_hillshading_missing">Encontrados datos de sombreado de relieve:</string>
+    <string name="check_hillshading_unsupported">Advertencia: Los datos de relieve no están disponibles al menos parcialmente para la región elegida</string>
+    <string name="check_hillshading_tiles_menu">Comprobar datos de relieve faltantes</string>
     <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
     <string name="updates_check">Comprobar actualizaciones</string>
+    <string name="delete_items">Eliminar elementos</string>
+    <plurals name="files_deleted">
+        <item quantity="one">Archivo %1$d eliminado</item>
+        <item quantity="other">Archivos %1$d eliminados</item>
+    </plurals>
+    <string name="no_files_selected">No hay archivos seleccionados</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, no se requieren temas de mapa</string>
     <string name="mapserver_openandromaps_info">Mapas detallados, requieren el tema del mapa \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Tema detallado del mapa, construido para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapa detallados, requieren uno de los temas del mapa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema detallado del mapa, construido para mapas \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mapas detallados, requiere el tema de mapa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema detallado de mapa, construido para mapas \"Paws\"</string>
     <string name="mapserver_hylly_info">Mapas detallados para Finlandia, requieren uno de los temas del mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema detallado del mapa, construido para mapas \"Hylly\"</string>
     <string name="brouter_info">Servicio de ruta sin conexión</string>
+    <string name="hillshading_info">Sombreado de relieve sin conexión</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rutas, [W] Vías</string>
+    <string name="maptheme_vtm_scaling_summary">Opciones de escalado para mapas sin conexión (solo VTM, requiere reiniciar)</string>
     <string name="maptheme_scale_map_title">Factor de la escala del mapa</string>
     <string name="maptheme_scale_map_summary">Mapa de escalas; 100% = sin escala</string>
     <string name="maptheme_scale_text_title">Factor de escala del texto</string>
+    <string name="maptheme_scale_text_summary">Además, escala etiquetas de texto en el mapa; 100% = sin escalado extra</string>
+    <string name="maptheme_scale_symbol_title">Factor de escala de símbolos</string>
+    <string name="maptheme_scale_symbol_summary">Además, escala el tamaño de los símbolos en el mapa; 100% = sin escalado extra</string>
+    <string name="maptheme_show3Dbuildings">Mostrar edificios en 3D</string>
+    <string name="vtm_theme_variant">Variantes del tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
     <string name="map_trailhistory_cleared">historial de ruta borrado</string>
@@ -2023,6 +2637,82 @@ Nombre de archivo:%2$s</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Sincronización de carpetas %1$s terminada después de %2$s, %3$d de %4$s necesita sincronización</string>
     <!-- Wherigo Player -->
+    <string name="wherigo_player">Ejecutador de Wherigos</string>
+    <string name="wherigo_controls">Controles</string>
+    <string name="wherigo_controls_cartridgelist_hint">Ver cartuchos y empezar el juego</string>
+    <string name="wherigo_controls_savegame_hint">Guardar progreso de una partida en ejecución</string>
+    <string name="wherigo_controls_loadgame_hint">Cargar una partida guardada</string>
+    <string name="wherigo_controls_stopgame_hint">Detener una partida en ejecución</string>
+    <string name="wherigo_controls_mapzones_hint">Mostrar zonas de una partida en ejecución en el mapa</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Descargar un cartucho (se necesita cguid)</string>
+    <string name="wherigo_controls_reportproblem_hint">Mostrar último problema de Wherigo</string>
+    <string name="wherigo_controls_cache_context">Contexto del caché</string>
+    <string name="wherigo_controls_cache_link">Ir a detalles del caché</string>
+    <string name="wherigo_sound_title">Controles de sonido</string>
+    <string name="wherigo_sound_continue">Continuar</string>
+    <string name="wherigo_sound_restart">Reiniciar desde el principio</string>
+    <string name="wherigo_sound_pause">Pausar</string>
+    <string name="wherigo_sound_mute">Silenciar</string>
+    <string name="wherigo_sound_unmute">Reactivar el sonido</string>
+    <string name="wherigo_controls_resume_paused_dialog">Reanudar el diálogo pausado</string>
+    <string name="wherigo_dialog_pause_info">Reanude el diálogo en el Ejecutador de Wherigos pulsando \"Reanudar diálogo pausado\"</string>
+    <string name="wherigo_no_game_running">No hay partidas de wherigo en ejecución</string>
+    <string name="wherigo_currently_playing">En ejecución</string>
+    <string name="wherigo_locate_on_center">Localizar en el centro</string>
+    <string name="wherigo_revoke_fixed_location">Revocar ubicación fija</string>
+    <string name="wherigo_thingtype_location">Ubicaciones</string>
+    <string name="wherigo_thingtype_inventory">Inventario</string>
+    <string name="wherigo_thingtype_item">Visible</string>
+    <string name="wherigo_thingtype_task">Tareas</string>
+    <string name="wherigo_thingtype_thing">Objetos</string>
+    <string name="wherigo_author">Autor</string>
+    <string name="wherigo_zone_inside">dentro</string>
+    <string name="wherigo_zone_near">cerca</string>
+    <string name="wherigo_zone_navigate_compass">Centrar la brújula</string>
+    <string name="wherigo_zone_copy_coordinates">Copiar coordenadas centrales</string>
+    <string name="wherigo_choose_cartridge">Elegir Cartucho</string>
+    <string name="wherigo_choose_new_loadgame">Elija nueva partida o partida para cargar</string>
+    <string name="wherigo_choose_savegame_slot">Elija una ranura para guardar</string>
+    <string name="wherigo_savegame_name_empty">&lt;Nueva partida&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Guardado automático</string>
+    <string name="wherigo_savegame_name_numeric">Ranura %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Ranura vacía&gt;</string>
+    <string name="wherigo_download_title">Descargar cartucho</string>
+    <string name="wherigo_download_message">El cartucho con CGUID \"%s\" no está disponible en tu dispositivo. ¿Quieres descargarlo?</string>
+    <string name="wherigo_download_successful_title">Descarga exitosa</string>
+    <string name="wherigo_download_failed_title">Descarga fallida</string>
+    <string name="wherigo_download_failed_message">La descarga del cartucho con CGUID \"%1$s\" ha fallado: %2$s</string>
+    <string name="wherigo_manual_download_title">Descargar manualmente el cartucho</string>
+    <string name="wherigo_manual_download_cguid_label">Introduzca el CGUID aquí</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: borrando el archivo residual</string>
+    <string name="wherigo_download_progress_login">Iniciando sesión…</string>
+    <string name="wherigo_download_progress_started">Descarga iniciada</string>
+    <string name="wherigo_download_progress_download_status">Descargado %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Por favor, inicie sesión en www.wherigo.com y acepte primero sus términos y condiciones</string>
+    <string name="wherigo_error_title">Reporte de Problemas Wherigo</string>
+    <string name="wherigo_error_game_noerror">No hay errores reportados por ejecutador de Wherigo.</string>
+    <string name="wherigo_error_game_error">Error reportado por el Ejecutador de Wherigos:\n\n```\n%1$s\n```\nPuedes contactar con el autor del cartucho [aquí](%2$s)</string>
+    <string name="wherigo_error_email">Reporte de error de Wherigo\n\nError: %1$s\n\nInformación Wherigo: %2$s</string>
+    <string name="wherigo_error_toast">El ejecutador de Wherigo informó de un error. Abra el diálogo de errores para más detalles.</string>
+    <string name="wherigo_confirm_stop_running_game_title">Dejar de ejecutar la partida de Wherigo</string>
+    <string name="wherigo_confirm_stop_running_game_message">Una partida se está ejecutando para \"%s\". ¿Quiere detener esta partida?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Eliminar Cartucho de Wherigo</string>
+    <string name="wherigo_confirm_delete_cartridge_message">¿Está seguro de que quiere eliminar el cartucho \"%1$s\" incluyendo %2$s partidas guardadas?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Eliminar la Partida Guardada del Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">¿Está seguro de que desea eliminar la partida guardada \"%2$s\" del cartucho \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Guardar progreso de la partida Wherigo</string>
+    <string name="wherigo_save_game_message">Guarda el progreso de tu partida para el cartucho \"%1$s\" en \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Introduce un nombre (opcional)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Advertencia: al continuar, sobreescribirá la partida guardada existente en \"%1$s\"</string>
+    <string name="wherigo_dialog_push_page">Página %1$s / %2$s</string>
+    <string name="wherigo_notification_service">c:geo está ejecutando un Wherigo…</string>
+    <string name="wherigo_notification_waiting">¡Te está esperando \"%s!</string>
+    <string name="wherigo_bar_resume_dialog">Reanudar</string>
+    <string name="wherigo_toast_check_game">Wherigo: revisa tu partida por si hay cambios</string>
+    <string name="wherigo_toast_check_things">Wherigo: revisa %s por si hay cambios</string>
+    <string name="wherigo_otm_shortcuts_title">Atajos del Ejecutador de Wherigos</string>
+    <string name="wherigo_otm_shortcuts_message">Si quieres usar el Ejecutador de Wherigos de c:geo regularmente, considera crear un botón de inicio rápido o un elemento de menú personalizado para él en Ajustes -&gt; Apariencia</string>
+    <string name="wherigo_map_supported_for_unified_map_only">La visualización de las ubicaciones de Wherigo en el mapa no es compatible con tu configuración del mapa. Cambie a mapa unificado en Ajustes -&gt; Fuente del Mapa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Saltar</string>
@@ -2031,16 +2721,49 @@ Nombre de archivo:%2$s</string>
     <string name="finish">Finalizar</string>
     <string name="back">Atrás</string>
     <string name="cancel">Cancelar</string>
+    <string name="use">Usar</string>
+    <string name="redo">Rehacer</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
+    <string name="optimize">Optimizar</string>
+    <string name="expand">Expandir</string>
+    <string name="close">Cerrar</string>
+    <string name="delete">Eliminar</string>
+    <string name="play">Jugar</string>
+    <string name="copy">Copiar</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Seleccionar todo</string>
+    <string name="multiselect_selectvisible">Seleccionar visibles</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Sonriente</string>
+    <string name="smiley_big_smile">Sonrisa Grande</string>
+    <string name="smiley_cool">Guay</string>
+    <string name="smiley_blush">Rubor</string>
+    <string name="smiley_tongue">Lengua</string>
+    <string name="smiley_evil">Malvado</string>
+    <string name="smiley_shocked">Sorprendido</string>
+    <string name="smiley_wink">Guiño</string>
+    <string name="smiley_clown">Payaso</string>
+    <string name="smiley_blackeye">Ojo negro</string>
+    <string name="smiley_8ball">Bola 8</string>
+    <string name="smiley_frown">Fruncir el Ceño</string>
+    <string name="smiley_shy">Tímido</string>
+    <string name="smiley_angry">Enfadado</string>
+    <string name="smiley_dead">Muerto</string>
+    <string name="smiley_sleepy">Somnoliento</string>
+    <string name="smiley_kisses">Besos</string>
+    <string name="smiley_approve">Aprobado</string>
+    <string name="smiley_disapprove">No aprobado</string>
+    <string name="smiley_question">Pregunta</string>
     <!-- message center notifications -->
     <string name="mcpolling_title">Centro de Mensajes</string>
+    <string name="mcpolling_summary">Verifique el centro de mensajes en busca de mensajes entrantes en intervalos regulares</string>
     <plurals name="mcupdate">
         <item quantity="one">%d mensaje no leído en el centro de mensajes</item>
         <item quantity="other">%d mensajes no leídos en el centro de mensajes</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Tamaño de imagen preferido</string>
+    <string name="settings_gc_imagesize_summary">Las imágenes de Geocaching.com en listados, registros y rastreables están disponibles en diferentes tamaños. Seleccione el tamaño a cargar al cargar y almacenar un caché.</string>
     <string-array name="settings_gc_imagesize_entries">
         <item>Original</item>
         <item>640px</item>
@@ -2048,5 +2771,23 @@ Nombre de archivo:%2$s</string>
         <item>120px</item>
     </string-array>
     <!-- db inspection -->
+    <string name="view_database">Ver base de datos</string>
+    <string name="dbi_select_title">(Seleccionar tabla)</string>
+    <string name="dbi_columnproperties_title">Propiedades de la columna</string>
+    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nAlmacenamiento: %3$s</string>
+    <string name="dbi_edit_title">Editar \"%1$s\" de la fila %2$d\"</string>
+    <string name="dbi_edit_ok">Columna actualizada</string>
+    <string name="dbi_edit_error">Error al actualizar el campo</string>
+    <string name="dbi_edit_error_pkfield">"%s\" es parte de la clave primaria, no se puede editar"</string>
+    <string name="dbi_search_title">Buscar por</string>
+    <string name="dbi_search_columnSelection">Restringir a</string>
     <!-- emoji categories -->
+    <string name="emoji_category_recent">Usado recientemente</string>
+    <string name="emoji_category_symbols">Símbolos</string>
+    <string name="emoji_category_dots">Puntos</string>
+    <string name="emoji_category_places">Lugares</string>
+    <string name="emoji_category_food">Comida &amp; Bebida</string>
+    <string name="emoji_category_activity">Actividad</string>
+    <string name="emoji_category_people">Personas</string>
+    <string name="emoji_category_numbers">Números</string>
 </resources>
