@@ -2323,7 +2323,7 @@ public class DataStore {
 
                 cLog.add("gc" + cLog.toStringLimited(caches, 10, c -> c == null ? "-" : c.getGeocode()));
 
-                final List<String> cachesFromDatabase = new ArrayList<>();
+                final List<String> cachesToLoadFromDatabase = new ArrayList<>();
                 final Map<String, Geocache> existingCaches = new HashMap<>();
 
                 // first check which caches are in the memory cache
@@ -2331,14 +2331,14 @@ public class DataStore {
                     final String geocode = cache.getGeocode();
                     final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
                     if (cacheFromCache == null) {
-                        cachesFromDatabase.add(geocode);
+                        cachesToLoadFromDatabase.add(geocode);
                     } else {
                         existingCaches.put(geocode, cacheFromCache);
                     }
                 }
 
                 // then load all remaining caches from the database in one step
-                for (final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
+                for (final Geocache cacheFromDatabase : loadCaches(cachesToLoadFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
                     existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
                 }
 
@@ -2367,8 +2367,8 @@ public class DataStore {
                     // the cache contains detailed information.
                     if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
                         toBeStored.add(cache);
-                    } else if (existingCache != null && existingCache.isDisabled() != cache.isDisabled()) {
-                        // Update the disabled status in the database if it changed
+                    } else if (existingCache != null && needsStatusUpdate(existingCache, cache)) {
+                        // Update the status in the database if it changed
                         toBeUpdated.add(cache);
                     }
                 }
@@ -2378,26 +2378,34 @@ public class DataStore {
                 }
 
                 for (final Geocache geocache : toBeUpdated) {
-                    updateDisabledStatus(geocache);
+                    updateCacheStatus(geocache);
                 }
             }
         });
-
     }
 
-    private static boolean updateDisabledStatus(final Geocache cache) {
-        cache.addStorageLocation(StorageLocation.DATABASE);
+    private static boolean needsStatusUpdate(final Geocache existingCache, final Geocache newCache) {
+        return existingCache.isDisabled() != newCache.isDisabled() ||
+            existingCache.isArchived() != newCache.isArchived() ||
+            existingCache.isFound() != newCache.isFound() ||
+            existingCache.isDNF() != newCache.isDNF();
+    }
+
+    private static boolean updateCacheStatus(final Geocache cache) {
         cacheCache.putCacheInCache(cache);
-        Log.d("Updating disabled status of " + cache + " in DB");
+        Log.d("Updating status of " + cache + " in DB");
 
         final ContentValues values = new ContentValues();
         values.put("disabled", cache.isDisabled() ? 1 : 0);
+        values.put("archived", cache.isArchived() ? 1 : 0);
+        values.put("found", cache.isFound() ? 1 : cache.isDNF() ? -1 : 0);
 
         init();
         try {
             database.beginTransaction();
             final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
             if (rows == 1) {
+                cache.addStorageLocation(StorageLocation.DATABASE);
                 database.setTransactionSuccessful();
                 return true;
             }
@@ -5139,7 +5147,7 @@ public class DataStore {
     }
 
     public static void saveChangedCache(final Geocache cache) {
-        saveCache(cache, cache.inDatabase() ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
+        saveCache(cache, cache.getLists().isEmpty() ? EnumSet.of(SaveFlag.CACHE) : LoadFlags.SAVE_ALL);
     }
 
     private enum PreparedStatement {
