@@ -337,6 +337,7 @@
     <string translatable="false" name="pref_brouterProfileUser1">brouterProfileUser1</string>
     <string translatable="false" name="pref_brouterProfileUser2">brouterProfileUser2</string>
     <string translatable="false" name="pref_removeFromRouteOnLog">removeFromRouteOnLog</string>
+    <string translatable="false" name="pref_preferGuidedCoordFormulaInput">preferGuidedCoordFormulaInput</string>
 
     <!-- categories default navigation / secondary navigation -->
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
