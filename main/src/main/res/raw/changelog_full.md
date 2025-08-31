@@ -1,6 +1,17 @@
 # Full changelog
 This changelog contains all changes which are not intermediate developing steps. It is sometimes more detailed than the changelogs we publish in our releases.
 
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2025.08.31 Bugfix Release
+
+- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
+
 <!-- --------------------------------------------------------------------------------- --->
 
 ## 2025.08.26 Bugfix Release
