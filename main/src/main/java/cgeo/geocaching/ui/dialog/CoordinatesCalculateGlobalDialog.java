@@ -14,6 +14,7 @@ import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
 import cgeo.geocaching.ui.SimpleItemListModel;
@@ -244,6 +245,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         });
 
         binding.ccSwitchGuided.setOnCheckedChangeListener((v, c) -> {
+            Settings.putBoolean(R.string.pref_preferGuidedCoordFormulaInput, c);
             if (!c) {
                 refreshType(PLAIN, false);
             } else {
@@ -297,11 +299,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
-        if (!initialLoad && calcCoord.getType() == newType) {
-            return;
-        }
-
         calcCoord.setType(newType);
+        final boolean isGuidedMode = newType != PLAIN && Settings.getBoolean(R.string.pref_preferGuidedCoordFormulaInput, true);
 
         Geopoint currentGp = null;
         if (calcCoord != null) {
@@ -310,22 +309,22 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         if (currentGp == null) {
             currentGp = geopoint;
         }
-        binding.PlainFormat.setVisibility(newType == PLAIN ? View.VISIBLE : View.GONE);
-        binding.NonPlainFormat.setVisibility(newType != PLAIN ? View.VISIBLE : View.GONE);
-        if (newType == PLAIN) {
+        binding.PlainFormat.setVisibility(!isGuidedMode ? View.VISIBLE : View.GONE);
+        binding.NonPlainFormat.setVisibility(isGuidedMode ? View.VISIBLE : View.GONE);
+        if (!isGuidedMode) {
             binding.NonPlainFormat.unmarkButtons();
         }
-        binding.ccGuidedFormat.setVisibility(newType == PLAIN ? View.GONE : View.VISIBLE);
-        binding.ccSwitchGuided.setChecked(newType != PLAIN);
-        if (newType != PLAIN) {
+        binding.ccGuidedFormat.setVisibility(!isGuidedMode ? View.GONE : View.VISIBLE);
+        binding.ccSwitchGuided.setChecked(isGuidedMode);
+        if (isGuidedMode) {
             displayType.set(newType);
         }
-        binding.ccPlainTools.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccPlainTools.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
 
-        binding.ccPaste.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccPaste.setVisibility(isGuidedMode ? View.GONE : View.VISIBLE);
         binding.ccPaste.setEnabled(!FormulaUtils.scanForCoordinates(Collections.singleton(ClipboardUtils.getText()), null).isEmpty());
 
-        if (newType == PLAIN) {
+        if (!isGuidedMode) {
             if (initialLoad) {
                 binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
                 binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
