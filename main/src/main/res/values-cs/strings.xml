@@ -216,6 +216,12 @@
     <string name="log_image_titleprefix">Obrázek</string>
     <string name="log_delete_confirm">Opravdu chcete smazat log typu \'%1$s\' od autora \'%2$s\' s datem logu \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Opravdu chcete odstranit uložený offline log typu \'%1$s\' s datem zápisu \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Našel jsem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nenašel jsem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Nechal jsem poznámku u %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Nahlásil jsem údržbu u %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myslím, že %1$s (%2$s) by měla být archivována:\n\n</string>
+    <string name="log_share_prefix_default">Můj log pro %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Znovu nezobrazovat</string>
     <string name="tap_icon_more_info">Pro více informací klepněte na ikonu</string>
     <string name="use_slider_adjust_value">Pomocí posuvníku upravte hodnotu</string>
+    <string name="snackbar_action_share">Sdílet</string>
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
@@ -356,10 +363,13 @@
     <string name="translator_model">Překladový model</string>
     <string name="translator_tooltip">Offline překlad</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
+    <string name="translator_language_target_select">Vyberte cílový jazyk</string>
     <string name="translator_target_language">Přeložit do \"%s\"</string>
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
     <string name="translator_translation_success">Přeloženo z \"%s\", klepněte na tlačítko pro obnovení originálního</string>
+    <string name="crash_activity_title">Jejda! c:geo spadlo!</string>
+    <string name="crash_activity_report">nahlásit problém</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -1007,6 +1017,8 @@
     <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
+    <string name="init_live_compass_in_navigation_action">Zobrazit směr v zobrazení detailů kešky</string>
+    <string name="init_summary_live_compass_in_navigation_action">Zobrazit šipku se směrem kompasu pro kešky v zobrazení detailů</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <string name="init_custombnitem">Vlastní položka nabídky</string>
@@ -1476,9 +1488,7 @@
     <string name="cache_variables">Proměnné</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Trasové body (%d)</string>
     <string name="cache_waypoints_add">Přidat trasový bod</string>
-    <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skrýt navštívené trasové body</string>
     <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této kešky.\n\nOdstranit původní trasový bod?</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
@@ -1562,7 +1572,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Účastnil se</string>
+    <string name="cache_status_attended">Zúčastnil jsem se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -1683,7 +1693,7 @@
     <string name="html_style_monochrome">Monochromatický</string>
     <string name="html_style_source_formatted">HTML zdroj formátován</string>
     <string name="html_style_source">Zdroj HTML</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>
     <string name="cc_hint_seconds">sekundy</string>
@@ -2473,6 +2483,7 @@
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Funkce \"Nastavit začátek trasy jako cíl\" je vypnutá</string>
+    <string name="map_manual_target_route_name">Aktuální navigace</string>
     <string name="map_clear_manual_targets">Vymazat cíl směrování</string>
     <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
@@ -2747,7 +2758,7 @@
     <string name="wherigo_download_accept_eula">Přihlaste se prosím na www.wherigo.com a přijměte nejprve jejich podmínky</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
-    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge [zde](%2$s)</string>
+    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
     <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
@@ -2785,7 +2796,7 @@
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
     <string name="play">Hrát</string>
-    <string name="copy">Kopírovat</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopírovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
@@ -2821,13 +2832,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Upřednostňovaná velikost obrázku</string>
-    <string name="settings_gc_imagesize_summary">Obrázky z webu Geocaching.com, které jsou v listingu, lozích a trasovatelných předmětech jsou k dispozici v různých velikostech. Při načítání a ukládání kešky vyberte velikost, která se má načíst.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Původní</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Zobrazit databázi</string>
     <string name="dbi_select_title">(Vyber tabulku)</string>

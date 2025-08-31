@@ -1087,7 +1087,7 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
     <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
-    <string name="settings_info_hillshading">L\'ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per evidenziare i rilievi. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono essere scaricate dal menu in sovraimpressione sulle mappe.\n Non compatibile con la variante VTM delle UnifiedMaps.</string>
+    <string name="settings_info_hillshading">L\'ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono essere scaricate dal menu in sovraimpressione sulle mappe.\n Non compatibile con la variante VTM delle UnifiedMaps.</string>
     <string name="settings_hillshading_enable">Ombreggiatura</string>
     <string name="init_hillshading_hq">Ombreggiatura di alta qualità</string>
     <string name="init_summary_hillshading_hq">Ombreggiatura più dettagliata ma rendering ~50%% più lento quando ingrandito</string>
@@ -1393,6 +1393,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Tracciabili</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Imposta coordinate</string>
     <string name="cache_personal_note">Note personali</string>
@@ -1440,9 +1441,7 @@
     <string name="cache_variables">Variabili</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
-    <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Nascondi i waypoint visitati</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copiato dagli appunti su questo cache.\n\nRimuovere il waypoint originale?</string>
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
@@ -1647,7 +1646,7 @@
     <string name="html_style_monochrome">Monocromatico</string>
     <string name="html_style_source_formatted">Sorgente Html Formattato</string>
     <string name="html_style_source">Sorgente HTML</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">gradi</string>
     <string name="cc_hint_minutes">minuti</string>
     <string name="cc_hint_seconds">secondi</string>
@@ -2404,7 +2403,7 @@
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
-    <string name="map_clear_manual_targets">Cancella la destinazione del percorso</string>
+    <string name="map_clear_manual_targets">Cancella obiettivo di routing</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
@@ -2712,7 +2711,7 @@
     <string name="close">Chiudi</string>
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
-    <string name="copy">Copia</string>
+    <string name="copy" tools:ignore="PrivateResource">Copia</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>
@@ -2746,13 +2745,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferenze dimensione immagine</string>
-    <string name="settings_gc_imagesize_summary">Le immagini da Geocaching.com negli elenchi, log e trackables sono disponibili in diverse dimensioni. Selezionare la dimensione da utilizzare quando si carica e memorizza un cache.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Originale</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Visualizza database</string>
     <string name="dbi_select_title">(Seleziona tabella)</string>

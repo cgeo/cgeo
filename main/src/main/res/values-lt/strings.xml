@@ -1295,9 +1295,7 @@
     <string name="cache_variables">Kintamieji</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Kelio taškai (%d)</string>
     <string name="cache_waypoints_add">Pridėti kelio tašką</string>
-    <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Slėpti aplankytus kelio taškus</string>
     <string name="cache_waypoints_remove_original_waypoint">Kelio taškas nukopijuotas iš iškarpinės į šią slėptuvę.\n\nPašalinti pradinį kelio tašką?</string>
     <string name="cache_hint">Užuomina</string>
     <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -1374,7 +1372,6 @@
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
-    <string name="cache_status_attended">Dalyvavo</string>
     <string name="cache_status_found">Surasta</string>
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_status_archived">Archyvuota</string>
@@ -1472,7 +1469,7 @@
     <string name="html_style_default">Numatytas</string>
     <string name="html_style_monochrome">Vienspalvė</string>
     <string name="html_style_source">HTML pirminis tekstas</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
     <string name="cc_hint_seconds">sekundės</string>
@@ -1667,7 +1664,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Didelis kontrastas</string>
     <string name="google_maps_style_auto">Įrenginio tema (Diena/Naktis)</string>
-    <string name="google_maps_option_group_theme">Temos parinktys</string>
     <!-- search -->
     <string name="geo_search_label">Ieškoti slėptuvių netoliese</string>
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
@@ -1678,7 +1674,6 @@
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_finder">Surado</string>
-    <string name="search_filter">Filtras</string>
     <string name="search_filter_info_message" formatted="false">**Ieškoti pagal filtrą** ieško visų aktyvių internetinių paslaugų (pvz., geocaching.com) slėptuvių, naudodama pateiktą filtrą. Tačiau šių paslaugų paieškos galimybės paprastai yra labiau ribotos nei c:geo filtrų galimybės.\n\n- Visos paslaugos palaiko tik filtrus IR (jokių ARBA filtrų ir jokios filtro inversijos).\n- Paprastesni filtrai, pvz., ** slėptuvės tipą** arba **slėptuvės dydį** palaiko visos paslaugos. Sudėtingesni filtrai dažnai nepalaikomi arba turi tam tikrų apribojimų, pvz. **mėgstamiausi** arba **paslėpimo data**.\n- Išsamų kiekvienos paslaugos palaikomų filtrų sąrašą rasite [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltrus, kurių nepalaiko internetinė paslauga, c:geo taikys gautuose rezultatuose.</string>
     <string name="search_tb">Keliauninkas</string>
     <string name="search_destination">Atidaryti tikslą su c:geo</string>
@@ -2414,12 +2409,6 @@
     <string name="smiley_question">Klausimas</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Originalus</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
