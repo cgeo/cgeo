@@ -576,7 +576,6 @@
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
     <string name="cache_status_archived">Ang naka-archive</string>
@@ -611,7 +610,7 @@
     <string name="cache_time_full_hours">ang oras</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nag-load ang cache mula sa %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nag-loading ang waypoints mula sa %1$s</string>
