@@ -1057,9 +1057,7 @@
     <string name="cache_variables">Variabler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Veipunkter (%d)</string>
     <string name="cache_waypoints_add">Legg til veipunkt</string>
-    <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skjul besøkte veipunkter</string>
     <string name="cache_waypoints_remove_original_waypoint">Veipunkt kopiert fra utklippstavlen til denne cachen.\n\nFjern opprinnelige veipunkt?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
@@ -1127,7 +1125,6 @@
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
-    <string name="cache_status_attended">Deltok</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
     <string name="cache_status_archived">Arkivert</string>
@@ -1190,7 +1187,7 @@
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
@@ -1349,7 +1346,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1359,7 +1355,6 @@
     <string name="search_kw">Nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
     <string name="search_finder">Funnet av</string>
-    <string name="search_filter">Filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_destination">Åpne mål i c:geo</string>
     <string name="add_target_to">Legg til mål til</string>
@@ -1973,12 +1968,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
