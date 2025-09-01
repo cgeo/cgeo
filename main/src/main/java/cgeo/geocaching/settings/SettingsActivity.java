@@ -35,7 +35,6 @@ import cgeo.geocaching.settings.fragments.PreferencesFragmentRoot;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
-import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -105,8 +104,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        ApplicationSettings.setLocale(this);
-        calculateInsets |= WindowInsetsCompat.Type.navigationBars(); // no bottom navigation, need to take navigation bar into account for insets calculation
+        configureEdge2Edge(WindowInsetsCompat.Type.navigationBars(), false);
         super.onCreate(savedInstanceState);
 
         backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));

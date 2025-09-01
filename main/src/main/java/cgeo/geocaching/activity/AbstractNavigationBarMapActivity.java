@@ -48,7 +48,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        skipActionBarInsetCalculation = Settings.getMapActionbarAutohide(); // may get calculated by map HideActionBarUtils
+        configureEdge2Edge(0, Settings.getMapActionbarAutohide());
         super.onCreate(savedInstanceState);
     }
 

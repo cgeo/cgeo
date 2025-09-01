@@ -12,6 +12,7 @@ import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
@@ -30,6 +31,8 @@ import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 
@@ -39,6 +42,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
@@ -62,6 +71,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
     }
+
+    // edge2edge parametrization, see configureEdge2Edge()
+    protected static final int DEFAULT_INSETS = WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
+    protected int addInsets = 0;
+    private boolean skipActionBarInsetCalculation = false;
 
     public void setUpNavigationEnabled(final boolean enabled) {
         final ActionBar actionBar = getSupportActionBar();
@@ -128,13 +142,52 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e(e.toString());
             throw e;
         }
-        onCreateCommon();
+
         this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 finish();
             }
         });
+
+        try {
+            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting indeterminate progress", ex);
+        }
+
+        // initialize commonly used members
+        res = this.getResources();
+        app = (CgeoApplication) this.getApplication();
+        ActivityMixin.onCreate(this, false);
+
+        // edge2edge configuration
+        final Window currentWindow = getWindow();
+        WindowCompat.enableEdgeToEdge(currentWindow);
+        final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
+        windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+        ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), new OnApplyWindowInsetsListener() {
+            @Override
+            public @NonNull WindowInsetsCompat onApplyWindowInsets(final @NonNull View v, final @NonNull WindowInsetsCompat insets) {
+                // make room for action bar on top + whatever other insets are requested with calculateInsets variable
+                final ViewGroup activityContent = v.findViewById(R.id.activity_content);
+                if (activityContent == null) {
+                    Log.e("edge2edge: activityContent not found in " + this);
+                }
+                if (activityContent != null) {
+                    final float actionBarHeight = skipActionBarInsetCalculation ? 0f : ViewUtils.dpToPixelFloat(10f) + getResources().getDimension(R.dimen.actionbar_height);
+                    final Insets innerPadding = insets.getInsets(DEFAULT_INSETS | addInsets);
+                    activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + actionBarHeight), innerPadding.right, innerPadding.bottom);
+                }
+                return insets;
+            }
+        });
+    }
+
+    /** must be called before onCreate() */
+    protected void configureEdge2Edge(final int addInsets, final boolean skipActionBarInsetCalculation) {
+        this.addInsets = addInsets;
+        this.skipActionBarInsetCalculation = skipActionBarInsetCalculation;
     }
 
     public void clearBackStack() {
@@ -154,28 +207,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         Log.v(logToken + ".setThemeAndContentView(resourceLayoutId=" + resourceLayoutID + ", isDialog= " + isDialog + ")");
         ActivityMixin.setTheme(this, isDialog);
         setContentView(resourceLayoutID);
-
-    }
-
-    /**
-     * Common actions for all onCreate functions.
-     */
-    private void onCreateCommon() {
-        try {
-            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        } catch (final AndroidRuntimeException ex) {
-            Log.e("Error requesting indeterminate progress", ex);
-        }
-        initializeCommonFields();
-    }
-
-    private void initializeCommonFields() {
-
-        // initialize commonly used members
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
-
-        ActivityMixin.onCreate(this, false);
     }
 
     @Override
