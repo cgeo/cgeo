@@ -1,5 +1,9 @@
 ##
 - Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Fix: Wherigo crash on reading old saved games
+- Fix: Logging from within c:geo not remembered sometimes
+- Fix: Missing live data update for found & archived caches
+- Fix: Waypoints in offline map are not shown sometimes
 
 ##
 - Corregido: Pistas de caché sin cifrar (cambio del sitio web)
@@ -19,6 +23,7 @@
 ##
 - Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
 - Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
+
 
 
 
