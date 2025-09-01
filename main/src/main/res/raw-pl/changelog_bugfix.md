@@ -1,5 +1,9 @@
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
+- Naprawiono: Błąd Wherigo podczas czytania starych zapisanych gier
+- Naprawiono: Logowanie wywołane w c:geo czasami nie było zapamiętane
+- Naprawiono: Brak aktualizacji danych na żywo dla znalezionych i zarchiwizowanych skrytek
+- Naprawiono: Punkty nawigacji na mapie offline nie są czasami wyświetlane
 
 ##
 - Naprawiono: Niezaszyfrowane wskazówki skrytki (zmiana strony internetowej)
@@ -19,6 +23,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
