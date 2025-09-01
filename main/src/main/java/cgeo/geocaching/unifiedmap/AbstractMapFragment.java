@@ -292,7 +292,10 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
     public void adaptLayoutForActionBar(final @Nullable Boolean actionBarShowing) {
-        HideActionBarUtils.adaptLayoutForActionBarHelper((AppCompatActivity) requireActivity(), actionBarShowing, null);
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            HideActionBarUtils.adaptLayoutForActionBarHelper(activity, actionBarShowing, null);
+        }
     }
 
 }
