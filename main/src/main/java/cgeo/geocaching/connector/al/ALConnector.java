@@ -212,10 +212,24 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
-        final String geocode = "AL" + StringUtils.substringAfter(url, "https://adventurelab.page.link/");
-        if (canHandle(geocode)) {
-            return geocode;
+        // try current url
+        final String geocodeCacheUrl = "AL" + StringUtils.substringAfter(url, CACHE_URL);
+        if (canHandle(geocodeCacheUrl)) {
+            return geocodeCacheUrl;
         }
+
+        // try current url with uppercase (lab2gpx with option uppercase)
+        final String geocodeCacheUrlUppercase = "AL" + StringUtils.substringAfter(url, StringUtils.upperCase(CACHE_URL));
+        if (canHandle(geocodeCacheUrlUppercase)) {
+            return geocodeCacheUrlUppercase;
+        }
+
+        // try old firebase url
+        final String geocodeFirebase = "AL" + StringUtils.substringAfter(url, "https://adventurelab.page.link/");
+        if (canHandle(geocodeFirebase)) {
+            return geocodeFirebase;
+        }
+
         return super.getGeocodeFromUrl(url);
     }
 }

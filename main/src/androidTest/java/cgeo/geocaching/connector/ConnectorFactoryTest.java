@@ -134,6 +134,7 @@ public class ConnectorFactoryTest {
         geocodes.add("GE1234");
         geocodes.add("GA1234");
         geocodes.add("TP1234");
+        geocodes.add("AL1234");
 
         geocodes.add("GC5678");
         geocodes.add("OC5678");
@@ -143,6 +144,7 @@ public class ConnectorFactoryTest {
         geocodes.add("GE5678");
         geocodes.add("GA5678");
         geocodes.add("TP5678");
+        geocodes.add("AL5678");
 
         geocodes.add("ZZ1");
         return geocodes;

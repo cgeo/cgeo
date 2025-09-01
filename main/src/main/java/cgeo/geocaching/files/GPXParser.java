@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCUtils;
@@ -722,7 +723,12 @@ abstract class GPXParser extends FileParser {
 
             gsak.getChild(gsakNamespace, "Code").setEndTextElementListener(geocode -> {
                 if (StringUtils.isNotBlank(geocode)) {
-                    cache.setGeocode(StringUtils.trim(geocode));
+                    final String alConnectorCode = ALConnector.getInstance().getGeocodeFromUrl(geocode);
+                    if (null != alConnectorCode) {
+                        cache.setGeocode(alConnectorCode);
+                    } else {
+                        cache.setGeocode(StringUtils.trim(geocode));
+                    }
                 }
             });
 
