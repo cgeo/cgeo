@@ -1685,6 +1685,7 @@
     <string name="cc_hint_minutes">minuten</string>
     <string name="cc_hint_seconds">seconden</string>
     <string name="cc_hint_fraction">fractie</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
@@ -1728,6 +1729,7 @@
     <string name="waypoint_edit_title">Waypoint bewerken</string>
     <string name="waypoint_add_title">Waypoint toevoegen</string>
     <string name="waypoint_added">Waypoint toegevoegd</string>
+    <string name="waypoint_added_current_location">Waypoint (%1$s) toegevoegd (±%2$s)</string>
     <string name="waypoint_note">Notitie</string>
     <string name="waypoint_user_note">Gebruikersnotitie</string>
     <string name="waypoint_visited">Bezocht</string>
