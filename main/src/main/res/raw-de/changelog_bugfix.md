@@ -1,5 +1,9 @@
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
+- Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
+- Korrektur: Wherigo Absturz beim Lesen alter Spielstände
+- Korrektur: Fund-Log von innerhalb c:geo manchmal nicht gespeichert
+- Korrektur: Fehlendes Live-Datenupdate für gefundene & archivierte Caches
+- Korrektur: Wegpunkte werden in der Offline-Karte manchmal nicht angezeigt
 
 ##
 - Fix: Cache-Hinweise nicht mehr verschlüsselt (Webseiten-Änderung)
@@ -19,6 +23,7 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
