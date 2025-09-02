@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.network.HttpRequest;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
@@ -16,6 +17,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -43,6 +45,12 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
     private static long close429warning = 0;
 
     private final ViewTreeObserver.OnGlobalLayoutListener[] layoutListeners = new ViewTreeObserver.OnGlobalLayoutListener[1];
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        configureEdge2Edge(0, Settings.getMapActionbarAutohide());
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onBackPressed() {

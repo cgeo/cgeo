@@ -15,7 +15,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
         initUpAction();
     }
 
-
     private void initUpAction() {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

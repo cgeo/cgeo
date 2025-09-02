@@ -20,7 +20,7 @@ String commitIdShort = gitCommitIdProvider.get()
 
 android {
     namespace 'cgeo.geocaching'
-    compileSdk 35
+    compileSdk 36
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
@@ -492,7 +492,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
 
     // Support Library core (used for eg. HtmlCompat)
-    implementation 'androidx.core:core:1.16.0'
+    implementation 'androidx.core:core:1.17.0'
 
     // Support Library constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'

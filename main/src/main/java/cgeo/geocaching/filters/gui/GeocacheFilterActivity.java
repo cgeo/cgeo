@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
@@ -93,9 +94,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        configureEdge2Edge(WindowInsetsCompat.Type.navigationBars(), false);
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.cache_filter_activity);
-        binding = CacheFilterActivityBinding.bind(findViewById(R.id.cachefilter_activity_viewroot));
+        binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_content));
 
         binding.filterPropsCheckboxes.removeAllViews();
         this.andOrFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_and_or), R.drawable.ic_menu_logic);
