@@ -1575,6 +1575,17 @@
     <string name="cache_delete_generated_waypoints">Remove generated waypoints</string>
     <string name="cache_delete_generated_waypoints_confirm">Remove all generated waypoints from this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
     <string name="cache_delete_generated_waypoints_success">Generated waypoints deleted</string>
+
+    <string name="cache_select_waypoint_types">Select waypoint types</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="zero">%d waypoints marked as visited</item>
+        <item quantity="one">%d waypoint marked as visited</item>
+        <item quantity="two">%d waypoints marked as visited</item>
+        <item quantity="few">%d waypoints marked as visited</item>
+        <item quantity="many">%d waypoints marked as visited</item>
+        <item quantity="other">%d waypoints marked as visited</item>
+    </plurals>
+
     <string name="cache_offline_store">Store</string>
     <string name="cache_offline_stored_ago">Stored %s</string>
     <string name="cache_offline_not_ready">Not available offline</string>
@@ -1942,6 +1953,7 @@
     <string name="waypoint_user_note">User note</string>
     <string name="waypoint_visited">Visited</string>
     <string name="waypoint_set_visited">Waypoint set to visited</string>
+    <string name="waypoint_set_visited_types">Set waypoints to visited</string>
     <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Save</string>
     <string name="waypoint_loading">Loading waypoint…</string>

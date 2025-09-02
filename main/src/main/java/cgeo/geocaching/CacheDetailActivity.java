@@ -172,6 +172,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -745,6 +746,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // submenu waypoints
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
             menu.findItem(R.id.menu_delete_generated_waypoints).setVisible(cache.isOffline() && cache.hasGeneratedWaypoints());
+            menu.findItem(R.id.menu_set_waypoints_to_visited).setVisible(cache.isOffline() && cache.hasWaypoints());
             menu.findItem(R.id.menu_extract_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_scan_calculated_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
@@ -781,6 +783,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             dropUserdefinedWaypoints();
         } else if (menuItem == R.id.menu_delete_generated_waypoints) {
             dropGeneratedWaypoints();
+        } else if (menuItem == R.id.menu_set_waypoints_to_visited) {
+            setWaypointsOfWaypointTypesToVisited();
         } else if (menuItem == R.id.menu_refresh) {
             refreshCache();
         } else if (menuItem == R.id.menu_challenge_checker) {
@@ -1194,6 +1198,54 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
         }
     }
+
+    private List<Waypoint> getSortedWaypointList(final Geocache cache) {
+        if (null != cache && cache.hasWaypoints()) {
+            final List<Waypoint> waypoints = cache.getWaypoints();
+            Collections.sort(waypoints, cache.getWaypointComparator());
+            return waypoints;
+        }
+        return Collections.emptyList();
+    }
+
+    private Set<WaypointType> getWaypointTypes(final Iterable<Waypoint> waypoints) {
+        final Set<WaypointType> wpTypes = new LinkedHashSet<>();
+        for (Waypoint waypoint : waypoints) {
+            final WaypointType wpType = waypoint.getWaypointType();
+            wpTypes.add(wpType);
+        }
+        return wpTypes;
+    }
+
+    private void setWaypointsOfWaypointTypesToVisited() {
+        final List<Waypoint> waypoints = getSortedWaypointList(cache);
+        if (waypoints.isEmpty()) {
+            return;
+        }
+
+        final Set<WaypointType> sortedWpTypes = getWaypointTypes(waypoints);
+        final SimpleDialog.ItemSelectModel<WaypointType> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(sortedWpTypes)
+                .setDisplayMapper((wpType) -> TextParam.text(wpType.getL10n()));
+
+        SimpleDialog.of(this).setTitle(R.string.cache_select_waypoint_types)
+                .selectMultiple(model, selectedWpTypeSet -> {
+                    int wpCount = 0;
+                    for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
+                        final WaypointType wpType = waypoint.getWaypointType();
+                        if (selectedWpTypeSet.contains(wpType)) {
+                            waypoint.setVisited(true);
+                            wpCount++;
+                        }
+                    }
+
+                    saveAndNotify();
+                    ActivityMixin.showShortToast(this, getResources().getQuantityString(R.plurals.cache_waypoints_marked_as_visited_success, wpCount));
+                    invalidateOptionsMenu();
+                    reinitializePage(Page.WAYPOINTS.id);
+                });
+    }
+
 
     private void storeCache(final boolean fastStoreOnLastSelection) {
         if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
