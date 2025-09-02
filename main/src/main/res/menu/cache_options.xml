@@ -120,6 +120,11 @@
                 app:showAsAction="ifRoom"
                 android:visible="false"/>
             <item
+                android:id="@+id/menu_set_waypoints_to_visited"
+                android:title="@string/waypoint_set_visited_types"
+                app:showAsAction="ifRoom|withText"
+                android:visible="false" />
+            <item
                 android:id="@+id/menu_toggleWaypointsFromNote"
                 android:title="@string/cache_menu_preventWaypointsFromNote"
                 app:showAsAction="ifRoom"
