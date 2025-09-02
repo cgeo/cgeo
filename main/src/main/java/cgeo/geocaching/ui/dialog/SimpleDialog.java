@@ -425,6 +425,9 @@ public class SimpleDialog {
 
     private void showInternal(final Runnable positive, final Runnable negative) {
         final AlertDialog dialog = constructCommons().first;
+        if (negative != null) {
+            dialog.setOnCancelListener(dialogInterface -> negative.run());
+        }
         dialog.show();
         finalizeCommons(dialog, which -> {
             switch (which) {
