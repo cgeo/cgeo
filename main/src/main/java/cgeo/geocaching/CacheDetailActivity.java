@@ -612,7 +612,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }, result -> {
                 if (result) {
                     if (waypointPos > 0) {
-                        selectedWaypoint = WaypointsViewCreator.createSortedWaypointList(cache).get(waypointPos - 1); // set new list position to avoid jumping to the top
+                        selectedWaypoint = WaypointsViewCreator.createWaypointList(cache).get(waypointPos - 1); // set new list position to avoid jumping to the top
                     }
                     notifyDataSetChanged();
                     GeocacheChangedBroadcastReceiver.sendBroadcast(CacheDetailActivity.this, cache.getGeocode());
@@ -2188,20 +2188,25 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private static List<Waypoint> createSortedWaypointList(final Geocache cache) {
-            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
-            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            final List<Waypoint> sortedWaypoints = createWaypointList(cache);
+            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
+            return sortedWaypoints;
+        }
+
+        private static List<Waypoint> createWaypointList(final Geocache cache) {
+            final List<Waypoint> waypointList = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = waypointList.iterator();
             while (waypointIterator.hasNext()) {
                 final Waypoint waypointInIterator = waypointIterator.next();
                 if (waypointInIterator.isVisited() && Settings.getHideVisitedWaypoints()) {
                     waypointIterator.remove();
                 }
             }
-            return sortedWaypoints2;
+            return waypointList;
         }
 
         private static int indexOfWaypoint(final Geocache cache, final Waypoint waypoint) {
             final List<Waypoint> sortedWaypoints = createSortedWaypointList(cache);
-            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
             return IterableUtils.indexOf(sortedWaypoints, wp -> wp.getId() == waypoint.getId());
         }
 
@@ -2233,7 +2238,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = createSortedWaypointList(cache);
-            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
                 @NonNull
@@ -2303,7 +2307,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 Settings.setHideVisitedWaypoints(!isChecked);
 
                     final List<Waypoint> sortedWaypoints2 = createSortedWaypointList(cache);
-                    Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
 
                     adapter.clear();
                     adapter.addAll(sortedWaypoints2);
