@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/colorBackgroundActionBar"
-    android:paddingVertical="6dp">
+    android:id="@+id/dialog_title_content">
 
     <ImageView
         android:id="@+id/dialog_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:paddingVertical="3dp"
-        android:layout_centerVertical="true"
-        android:paddingStart="5dp"
+        android:paddingTop="8dp"
+        android:paddingStart="12dp"
         android:paddingEnd="5dp"
         android:src="@drawable/arrow_back" />
 
@@ -25,8 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:paddingBottom="12dp"
         android:paddingLeft="12dp"
-        android:paddingRight="12dp"/>
+        android:paddingRight="12dp"
+        tools:text="Wherigo Test Title"/>
 
 </RelativeLayout>

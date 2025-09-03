@@ -862,4 +862,5 @@ public class ViewUtils {
 
         return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
     }
+
 }

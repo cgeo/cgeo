@@ -75,9 +75,8 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
         control.setPauseOnDismiss(true);
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        dialog.setView(binding.getRoot());
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player), binding.getRoot());
 
         //translator
         control.disposeOnDismiss(TranslatorUtils.initializeView("PushDialog", activity, control.getTranslator(),
