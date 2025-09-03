@@ -135,7 +135,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logtrackable_activity);
-        binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
+        binding = LogtrackableActivityBinding.bind(findViewById(R.id.activity_content));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
 
