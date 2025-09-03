@@ -179,7 +179,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
-        binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
+        binding = LogcacheActivityBinding.bind(findViewById(R.id.activity_content));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type)
