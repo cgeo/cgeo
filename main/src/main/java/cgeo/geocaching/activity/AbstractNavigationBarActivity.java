@@ -44,6 +44,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +58,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -225,6 +228,19 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         super.onNewIntent(intent);
         // avoid weird transitions
         ActivityMixin.overrideTransitionToFade(this);
+    }
+
+    @NonNull
+    @Override
+    protected Insets calculateInsetsForActivityContent(@NonNull final WindowInsetsCompat windowInsets, @NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsForActivityContent(windowInsets, def);
+        if (hideNavigationBar) {
+            return insets;
+        }
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return Insets.of(0, insets.top, insets.right, insets.bottom);
+        }
+        return Insets.of(insets.left, insets.top, insets.right, 0);
     }
 
     @Override

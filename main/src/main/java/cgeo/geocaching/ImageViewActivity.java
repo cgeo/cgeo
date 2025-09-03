@@ -224,6 +224,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setFixedActionBar(false);
         getSupportActionBar().hide(); //do not use normal Action Bar
         setThemeAndContentView(R.layout.imageview_activity);
         enableViewTransitions(this);
@@ -264,7 +265,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         imageAdapter = new ImageAdapter(this);
 
-        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_activityroot));
+        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.activity_content));
         mainBinding.imageviewViewpager.setAdapter(imageAdapter);
         startPagerPos = imagePos + imageAdapter.getCount() / 2;
         mainBinding.imageviewViewpager.setCurrentItem(startPagerPos);

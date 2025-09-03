@@ -61,7 +61,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
@@ -104,7 +103,6 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        configureEdge2Edge(WindowInsetsCompat.Type.navigationBars(), false);
         super.onCreate(savedInstanceState);
 
         backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));

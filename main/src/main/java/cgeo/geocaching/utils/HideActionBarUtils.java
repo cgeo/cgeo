@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
@@ -34,16 +35,29 @@ public class HideActionBarUtils {
         showActionBarSpacer(activity, showSpacer);
     }
 
-    public static boolean toggleActionBar(@NonNull final AbstractNavigationBarActivity activity) {
+    public static boolean toggleActionBar(@NonNull final AbstractActionBarActivity activity) {
         if (!Settings.getMapActionbarAutohide()) {
             return true;
         }
-        final boolean actionBarShowing = toggleActionBarHelper(activity);
+        final View actionBar = activity.getActionBarView();
+        if (actionBar == null) {
+            return true;
+        }
+        final boolean isShown = activity.actionBarIsShowing();
+
+        if (!isShown) {
+            activity.showActionBar();
+        } else {
+            activity.hideActionBar();
+        }
+
         final View spacer = activity.findViewById(R.id.actionBarSpacer);
-        ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        return actionBarShowing;
+        final int height = !isShown ? 0 : -spacer.getHeight();
+        ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(height).start());
+        ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(height).start());
+        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(height).start());
+
+        return !isShown;
     }
 
     private static boolean toggleActionBarHelper(@NonNull final AbstractNavigationBarActivity activity) {

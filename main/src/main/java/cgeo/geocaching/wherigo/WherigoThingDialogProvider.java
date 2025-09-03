@@ -61,9 +61,8 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--");
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        dialog.setView(binding.getRoot());
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--", binding.getRoot());
 
         //translator
         control.disposeOnDismiss(TranslatorUtils.initializeView("ThingDialog", activity, control.getTranslator(),

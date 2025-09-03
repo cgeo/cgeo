@@ -12,7 +12,6 @@ import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
@@ -31,7 +30,6 @@ import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
@@ -43,7 +41,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
-import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -73,9 +70,10 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     // edge2edge parametrization, see configureEdge2Edge()
-    protected static final int DEFAULT_INSETS = WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
-    protected int addInsets = 0;
-    private boolean skipActionBarInsetCalculation = false;
+    private static final int DEFAULT_INSETS =
+            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
+    //private int addInsets = 0;
+    //private boolean skipActionBarInsetCalculation = false;
 
     public void setUpNavigationEnabled(final boolean enabled) {
         final ActionBar actionBar = getSupportActionBar();
@@ -160,34 +158,41 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         res = this.getResources();
         app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
+        initEdgeToEdge();
+    }
 
-        // edge2edge configuration
+    private void initEdgeToEdge() {
         final Window currentWindow = getWindow();
+        //enable edge-to-edge downward-compatible
         WindowCompat.enableEdgeToEdge(currentWindow);
+        //set window behaviour
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
-        ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), new OnApplyWindowInsetsListener() {
-            @Override
-            public @NonNull WindowInsetsCompat onApplyWindowInsets(final @NonNull View v, final @NonNull WindowInsetsCompat insets) {
-                // make room for action bar on top + whatever other insets are requested with calculateInsets variable
-                final ViewGroup activityContent = v.findViewById(R.id.activity_content);
-                if (activityContent == null) {
-                    Log.e("edge2edge: activityContent not found in " + this);
-                }
-                if (activityContent != null) {
-                    final float actionBarHeight = skipActionBarInsetCalculation ? 0f : ViewUtils.dpToPixelFloat(10f) + getResources().getDimension(R.dimen.actionbar_height);
-                    final Insets innerPadding = insets.getInsets(DEFAULT_INSETS | addInsets);
-                    activityContent.setPadding(innerPadding.left, (int) (innerPadding.top + actionBarHeight), innerPadding.right, innerPadding.bottom);
-                }
-                return insets;
+        //apply edge2edge to activity content view
+        ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
+            final ViewGroup activityContent = v.findViewById(R.id.activity_content);
+            if (activityContent == null) {
+                Log.w("edge2edge: activityContent not found in " + this);
+            } else {
+                //calculate the default insets
+                final Insets defaultInsets = windowInsets.getInsets(DEFAULT_INSETS);
+                //let subclasses modify those insets according to their needs
+                final Insets insets = calculateInsetsForActivityContent(windowInsets, defaultInsets);
+                //apply final insets to activity content
+                activityContent.setPadding(
+                    insets.left < 0 ? defaultInsets.left : insets.left,
+                    insets.top < 0 ? defaultInsets.top : insets.top,
+                    insets.right < 0 ? defaultInsets.right : insets.right,
+                    insets.bottom < 0 ? defaultInsets.bottom : insets.bottom);
             }
+            return windowInsets;
         });
     }
 
-    /** must be called before onCreate() */
-    protected void configureEdge2Edge(final int addInsets, final boolean skipActionBarInsetCalculation) {
-        this.addInsets = addInsets;
-        this.skipActionBarInsetCalculation = skipActionBarInsetCalculation;
+    /** Overwrite to manipulate insets for activitycontent in subclasses */
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final WindowInsetsCompat windowInsets, @NonNull final Insets insets) {
+        return insets;
     }
 
     public void clearBackStack() {
