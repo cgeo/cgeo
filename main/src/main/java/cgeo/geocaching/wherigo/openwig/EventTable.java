@@ -41,9 +41,7 @@ public class EventTable implements LuaTable, Serializable {
         }
     }
 
-
-    protected String luaTostring () { return "a ZTimer instance"; }
-
+    protected String luaTostring () { return "a ZObject instance"; }
 
     public EventTable() {
         metatable.rawset("__tostring", new TostringJavaFunc(this));
