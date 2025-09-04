@@ -49,6 +49,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -84,6 +85,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -2595,6 +2597,11 @@ public class Settings {
 
     public static String getShortDateFormat() {
         return getString(R.string.pref_short_date_format, "");
+    }
+
+    public static TranslationUtils.Translator getTranslatorExternal() {
+        return EnumUtils.getEnum(TranslationUtils.Translator.class, getString(R.string.pref_translator_external, null),
+                TranslationUtils.Translator.GOOGLE_TRANSLATE_APP);
     }
 
     public static OfflineTranslateUtils.Language getTranslationTargetLanguageRaw() {
