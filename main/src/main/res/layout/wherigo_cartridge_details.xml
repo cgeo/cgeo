@@ -45,6 +45,14 @@
                 android:layout_gravity="right"
                 />
 
+            <!-- External Translation -->
+            <Button
+                android:id="@+id/translation_external"
+                style="@style/button_icon_with_text"
+                app:icon="@drawable/ic_menu_translate"
+                android:layout_gravity="right"
+                />
+
             <!-- Debug Infos -->
         <LinearLayout
             android:id="@+id/debug_box"

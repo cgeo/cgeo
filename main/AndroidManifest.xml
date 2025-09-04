@@ -1015,6 +1015,7 @@
         <package android:name="btools.routingapp" />
         <package android:name="com.eclipsim.gpsstatus2" />
         <package android:name="com.google.android.apps.translate" />
+        <package android:name="com.deepl.mobiletranslator" />
         <package android:name="com.google.android.street" />
         <package android:name="com.google.zxing.client.android" />
         <package android:name="com.groundspeak.react.adventures" />

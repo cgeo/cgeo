@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.offlinetranslate.Translator;
 import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
@@ -76,6 +77,11 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
+
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+            TranslationUtils.prepareForTranslation(cartridgeFile.name, cartridgeFile.description));
+
 
         //translator
         TranslatorUtils.initializeView("CartridgeDalog", activity, translator, binding.translation, null, null);

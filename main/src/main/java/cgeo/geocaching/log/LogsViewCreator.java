@@ -39,7 +39,6 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -182,18 +181,9 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             });
 
             // translation
-            if (TranslationUtils.supportsInAppTranslationPopup()) {
-                ctxMenu.addItem(R.string.translate, R.drawable.ic_menu_translate, it ->
-                        TranslationUtils.startInAppTranslationPopup(activity, HtmlUtils.extractText(log.log)));
-            } else {
-                ctxMenu.addItem(activity.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()),
-                        R.drawable.ic_menu_translate, it -> TranslationUtils.startActivityTranslate(activity, Locale.getDefault().getLanguage(), HtmlUtils.extractText(log.log)));
-
-                final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
-                if (!localeIsEnglish) {
-                    ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
-                            TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
-                }
+            if (TranslationUtils.isEnabled()) {
+                ctxMenu.addItem(TranslationUtils.getTranslationLabel().toString(), R.drawable.ic_menu_translate, it ->
+                    TranslationUtils.translate(activity, TranslationUtils.prepareForTranslation(log.log)));
             }
             if (OfflineTranslateUtils.isTargetLanguageValid() && !TranslateAccessor.get().getSupportedLanguages().isEmpty()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {

@@ -5,6 +5,7 @@ import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.openwig.Engine;
@@ -77,6 +78,10 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         control.setPauseOnDismiss(true);
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player), binding.getRoot());
+
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+                TranslationUtils.prepareForTranslation(binding.description.getText()));
 
         //translator
         control.disposeOnDismiss(TranslatorUtils.initializeView("PushDialog", activity, control.getTranslator(),
