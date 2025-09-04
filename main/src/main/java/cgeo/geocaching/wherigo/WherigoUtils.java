@@ -176,10 +176,14 @@ public final class WherigoUtils {
         return Geopoint.ZERO;
     }
 
-    public static Viewport getZonesViewport(final Collection<Zone> zones) {
+    public static Viewport getZonesViewport(final Collection<Zone> zones, final boolean includeCartridgeLocation) {
         final Viewport.ContainingViewportBuilder builder = new Viewport.ContainingViewportBuilder();
         for (Zone zone : zones) {
             builder.add(WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points)));
+        }
+        if (includeCartridgeLocation) {
+            builder.add(WherigoGame.get().getCartridgeInfo() == null ? null :
+                WherigoGame.get().getCartridgeInfo().getCartridgeLocation());
         }
         return builder.getViewport();
     }
