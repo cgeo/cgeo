@@ -33,5 +33,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/actionBarSpacer"
         app:labelVisibilityMode="unlabeled"
+        android:background="@color/colorBackgroundActionBar"
+        app:itemIconTint="@color/bottom_bar_selector"
+        app:itemTextColor="@color/bottom_bar_selector"
         app:menu="@menu/activity_navigationbar_menu" />
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>
