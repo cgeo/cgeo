@@ -112,7 +112,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
                             control.dismiss();
-                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
+                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable), false), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
                             break;
                         case COMPASS:
                             control.dismiss();
