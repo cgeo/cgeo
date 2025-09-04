@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.Formatter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -331,6 +332,37 @@ public final class LogTemplateProvider {
                 final Geocache cache = context.getCache();
                 if (cache != null) {
                     return cache.getGeocode();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TB_LOCATION_CACHE", R.string.init_signature_template_tblocation_geocache) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
+                        final String cacheGeocode = trackable.getSpottedCacheGeocode();
+                        final String spottedCode = StringUtils.isNotBlank(cacheGeocode) ? cacheGeocode : trackable.getSpottedGuid();
+                        return String.format("%1$s (%2$s)", spottedCode, HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    }
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TB_LOCATION_USER", R.string.init_signature_template_tblocation_user) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    switch (trackable.getSpottedType()) {
+                        case Trackable.SPOTTED_USER:
+                            return trackable.getSpottedName();
+                        case Trackable.SPOTTED_OWNER:
+                            return trackable.getOwner();
+                        default:
+                            return StringUtils.EMPTY;
+                    }
                 }
                 return StringUtils.EMPTY;
             }
