@@ -598,7 +598,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         searchViewItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(@NonNull final MenuItem item) {
-                binding.flipper.showNext();
+                binding.activityContent.showNext();
                 return true;
             }
 
@@ -606,7 +606,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             public boolean onMenuItemActionCollapse(@NonNull final MenuItem item) {
                 searchViewItem.setVisible(false);
                 searchButtonItem.setVisible(false);
-                binding.flipper.showPrevious();
+                binding.activityContent.showPrevious();
                 return true;
             }
         });

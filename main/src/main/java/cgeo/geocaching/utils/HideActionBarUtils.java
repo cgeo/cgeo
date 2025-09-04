@@ -60,28 +60,12 @@ public class HideActionBarUtils {
         return !isShown;
     }
 
-    private static boolean toggleActionBarHelper(@NonNull final AbstractNavigationBarActivity activity) {
-        final ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar == null) {
-            return false;
-        }
-        if (actionBar.isShowing()) {
-            actionBar.hide();
-            return false;
-        } else {
-            actionBar.show();
-            return true;
-        }
-    }
-
     private static void showActionBarSpacer(@NonNull final Activity activity, final boolean showSpacer) {
-        if (Settings.getMapActionbarAutohide()) {
-            activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
-        }
+        activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
     }
 
     private static void setStableLayout(@NonNull final AbstractNavigationBarActivity activity, final boolean showSpacer) {
-        if (showSpacer && Settings.getMapActionbarAutohide()) {
+        if (showSpacer) {
             activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
     }
