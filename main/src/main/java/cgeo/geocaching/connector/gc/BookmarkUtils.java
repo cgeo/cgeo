@@ -60,15 +60,15 @@ public class BookmarkUtils {
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
-                    .selectSingle(model, l -> processSelectionSizeCheck(context, geocaches, l));
+                    .selectSingle(model, l -> {
+                        if (geocaches.size() > (1000 - l.getCaches())) {
+                            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, l));
+                        } else {
+                            processSelection(context, geocaches, l);
+                        }
+                    });
 
         });
-    }
-
-    private static void processSelectionSizeCheck(final Context context, final List<Geocache> geocaches, final GCList selection) {
-        if (geocaches.size() > (1000 - selection.getCaches())) {
-            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, selection));
-        }
     }
 
     private static void processSelection(final Context context, final List<Geocache> geocaches, final GCList selection) {
