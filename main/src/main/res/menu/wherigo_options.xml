@@ -7,10 +7,4 @@
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/wherigo_controls_cartridgelist_hint"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/menu_translate"
-        android:icon="@drawable/ic_menu_translate"
-        android:title="@string/translate"
-        app:showAsAction="ifRoom"/>
-
 </menu>
