@@ -143,7 +143,7 @@
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_titleprefix">Attēls</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Tulkojums var neizdoties liela teksta apjoma dēļ.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
