@@ -170,7 +170,7 @@
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">文字太多，翻譯失敗。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
