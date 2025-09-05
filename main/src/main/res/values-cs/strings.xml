@@ -226,10 +226,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
-    <!-- translation -->
-    <string name="translate">Přeložit v aplikaci Překladač Google</string>
-    <string name="translate_to_sys_lang">Přeložit do %s (Web)</string>
-    <string name="translate_to_english">Přeložit do angličtiny (Web)</string>
+    <!-- External translation -->
     <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
