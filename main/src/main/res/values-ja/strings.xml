@@ -178,7 +178,7 @@
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_nodateset_display">未設定</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
