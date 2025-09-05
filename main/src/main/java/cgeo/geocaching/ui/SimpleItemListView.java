@@ -274,17 +274,31 @@ public class SimpleItemListView extends LinearLayout {
         public void onBindViewHolder(@NonNull final ItemListViewHolder holder, final int position) {
             holder.fillData(getItem(position));
 
-            if (model.getDisabledItems().contains(getItem(position).value)) {
+            if (!model.getDisabledItems().isEmpty()) {
+                final boolean isEnabled = !model.getDisabledItems().contains(getItem(position).value);
+
                 ViewUtils.walkViewTree(holder.binding.itemViewAnchor, vi -> {
-                    final TextView tv = (TextView) vi;
-                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    return true;
+                        final TextView tv = (TextView) vi;
+                        tv.setPaintFlags(isEnabled ? tv.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG : tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        return true;
                     },
                     view -> view instanceof TextView);
-                holder.binding.itemViewAnchor.setAlpha(0.5f);
-                holder.binding.itemCheckbox.setEnabled(false);
-                holder.binding.itemRadiobutton.setEnabled(false);
-                return;
+                holder.binding.itemViewAnchor.setAlpha(!isEnabled ? 0.5f : 1f);
+                holder.binding.itemCheckbox.setEnabled(isEnabled);
+                holder.binding.itemRadiobutton.setEnabled(isEnabled);
+
+                holder.binding.getRoot().setClickable(isEnabled);
+                holder.binding.itemChecker.setClickable(isEnabled);
+                holder.binding.itemIcon.setClickable(isEnabled);
+                holder.binding.itemAction.setClickable(isEnabled);
+                ViewUtils.walkViewTree(holder.binding.itemViewAnchor, view -> {
+                        view.setClickable(isEnabled);
+                        return true;
+                    }, null);
+
+                if (!isEnabled) {
+                    return;
+                }
             }
 
             holder.binding.getRoot().setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
