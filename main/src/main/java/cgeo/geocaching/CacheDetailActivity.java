@@ -173,6 +173,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -497,6 +498,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_geofence).setVisible(selectedWaypoint.canChangeGeofence());
+            menu.findItem(R.id.menu_waypoint_visited).setVisible(!selectedWaypoint.isVisited());
             menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint || selectedWaypoint.belongsToUserDefinedCache());
             final boolean hasCoords = selectedWaypoint.getCoords() != null;
@@ -613,7 +615,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }, result -> {
                 if (result) {
                     if (waypointPos > 0) {
-                        selectedWaypoint = WaypointsViewCreator.createSortedWaypointList(cache).get(waypointPos - 1); // set new list position to avoid jumping to the top
+                        selectedWaypoint = WaypointsViewCreator.createWaypointList(cache).get(waypointPos - 1); // set new list position to avoid jumping to the top
                     }
                     notifyDataSetChanged();
                     GeocacheChangedBroadcastReceiver.sendBroadcast(CacheDetailActivity.this, cache.getGeocode());
@@ -744,6 +746,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // submenu waypoints
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
             menu.findItem(R.id.menu_delete_generated_waypoints).setVisible(cache.isOffline() && cache.hasGeneratedWaypoints());
+            menu.findItem(R.id.menu_set_waypoints_to_visited).setVisible(cache.isOffline() && cache.hasWaypoints());
             menu.findItem(R.id.menu_extract_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_scan_calculated_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
@@ -785,6 +788,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             dropUserdefinedWaypoints();
         } else if (menuItem == R.id.menu_delete_generated_waypoints) {
             dropGeneratedWaypoints();
+        } else if (menuItem == R.id.menu_set_waypoints_to_visited) {
+            setWaypointsOfWaypointTypesToVisited();
         } else if (menuItem == R.id.menu_refresh) {
             refreshCache();
         } else if (menuItem == R.id.menu_gcvote) {
@@ -1202,6 +1207,54 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
         }
     }
+
+    private List<Waypoint> getSortedWaypointList(final Geocache cache) {
+        if (null != cache && cache.hasWaypoints()) {
+            final List<Waypoint> waypoints = cache.getWaypoints();
+            Collections.sort(waypoints, cache.getWaypointComparator());
+            return waypoints;
+        }
+        return Collections.emptyList();
+    }
+
+    private Set<WaypointType> getWaypointTypes(final Iterable<Waypoint> waypoints) {
+        final Set<WaypointType> wpTypes = new LinkedHashSet<>();
+        for (Waypoint waypoint : waypoints) {
+            final WaypointType wpType = waypoint.getWaypointType();
+            wpTypes.add(wpType);
+        }
+        return wpTypes;
+    }
+
+    private void setWaypointsOfWaypointTypesToVisited() {
+        final List<Waypoint> waypoints = getSortedWaypointList(cache);
+        if (waypoints.isEmpty()) {
+            return;
+        }
+
+        final Set<WaypointType> sortedWpTypes = getWaypointTypes(waypoints);
+        final SimpleDialog.ItemSelectModel<WaypointType> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(sortedWpTypes)
+                .setDisplayMapper((wpType) -> TextParam.text(wpType.getL10n()));
+
+        SimpleDialog.of(this).setTitle(R.string.cache_select_waypoint_types)
+                .selectMultiple(model, selectedWpTypeSet -> {
+                    int wpCount = 0;
+                    for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
+                        final WaypointType wpType = waypoint.getWaypointType();
+                        if (selectedWpTypeSet.contains(wpType)) {
+                            waypoint.setVisited(true);
+                            wpCount++;
+                        }
+                    }
+
+                    saveAndNotify();
+                    ActivityMixin.showShortToast(this, getResources().getQuantityString(R.plurals.cache_waypoints_marked_as_visited_success, wpCount));
+                    invalidateOptionsMenu();
+                    reinitializePage(Page.WAYPOINTS.id);
+                });
+    }
+
 
     private void storeCache(final boolean fastStoreOnLastSelection) {
         if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
@@ -2196,20 +2249,25 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private static List<Waypoint> createSortedWaypointList(final Geocache cache) {
-            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
-            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            final List<Waypoint> sortedWaypoints = createWaypointList(cache);
+            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
+            return sortedWaypoints;
+        }
+
+        private static List<Waypoint> createWaypointList(final Geocache cache) {
+            final List<Waypoint> waypointList = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = waypointList.iterator();
             while (waypointIterator.hasNext()) {
                 final Waypoint waypointInIterator = waypointIterator.next();
                 if (waypointInIterator.isVisited() && Settings.getHideVisitedWaypoints()) {
                     waypointIterator.remove();
                 }
             }
-            return sortedWaypoints2;
+            return waypointList;
         }
 
         private static int indexOfWaypoint(final Geocache cache, final Waypoint waypoint) {
             final List<Waypoint> sortedWaypoints = createSortedWaypointList(cache);
-            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
             return IterableUtils.indexOf(sortedWaypoints, wp -> wp.getId() == waypoint.getId());
         }
 
@@ -2241,7 +2299,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = createSortedWaypointList(cache);
-            Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
                 @NonNull
@@ -2311,7 +2368,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 Settings.setHideVisitedWaypoints(!isChecked);
 
                     final List<Waypoint> sortedWaypoints2 = createSortedWaypointList(cache);
-                    Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
 
                     adapter.clear();
                     adapter.addAll(sortedWaypoints2);
