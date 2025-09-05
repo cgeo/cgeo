@@ -227,10 +227,14 @@
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
     <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
-    <!-- translation -->
-    <string name="translate">Vertalen in de Google Translate App</string>
-    <string name="translate_to_sys_lang">Vertalen naar %s (Web)</string>
-    <string name="translate_to_english">Vertalen naar Engels (Web)</string>
+    <!-- External translation -->
+    <string name="translate">Vertaal</string>
+    <string name="translate_external_label">Vertalen met %s</string>
+    <string name="translate_external_notavailable">Niet beschikbaar</string>
+    <string name="translate_external_none">Geen</string>
+    <string name="translate_external_google_web">Google Translate Website</string>
+    <string name="translate_external_google_app">Google Translate App</string>
+    <string name="translate_external_deepl_app">Deepl App</string>
     <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -956,6 +960,8 @@
     <string name="init_translation_disabled">Vertalen uitgeschakeld</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
+    <string name="init_translator_external">Externe vertaler</string>
+    <string name="init_translator_external_description">Te gebruiken externe vertaalapp</string>
     <string name="system_default">Systeemstandaard</string>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
