@@ -119,7 +119,7 @@
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
