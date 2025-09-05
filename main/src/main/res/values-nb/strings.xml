@@ -201,7 +201,7 @@
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
