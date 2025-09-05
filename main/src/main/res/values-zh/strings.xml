@@ -217,7 +217,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">找不到别名/昵称为%s的联系人，请先将它添加到你的联系人应用中。</string>
     <string name="contact_multiple_matches">联系人: 多个匹配</string>
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
