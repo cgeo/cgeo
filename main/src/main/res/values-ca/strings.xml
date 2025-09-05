@@ -227,10 +227,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
-    <!-- translation -->
-    <string name="translate">Tradueix a l\'aplicació Google Translate</string>
-    <string name="translate_to_sys_lang">Tradueix a %s (Web)</string>
-    <string name="translate_to_english">Traduir a l\'anglès (web)</string>
+    <!-- External translation -->
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
