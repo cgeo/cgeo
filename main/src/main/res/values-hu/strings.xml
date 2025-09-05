@@ -178,7 +178,7 @@
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
