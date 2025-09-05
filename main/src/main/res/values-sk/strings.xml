@@ -183,7 +183,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s aliasom/prezývkou %s sa nenašiel. Najprv si ho pridaj do kontaktov.</string>
     <string name="contact_multiple_matches">Kontakt: Viac zhôd</string>
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
