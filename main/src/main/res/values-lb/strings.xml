@@ -143,7 +143,7 @@
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
