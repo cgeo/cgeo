@@ -549,7 +549,7 @@ public class EmojiUtils {
             p = EMOJI_PAINT_CACHE_PER_SIZE.get(wantedSize);
             if (p == null) {
                 final Resources res = CgeoApplication.getInstance().getApplicationContext().getResources();
-                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (wantedSize * 1.2), (int) (wantedSize * 1.2));
+                final Pair<Integer, Integer> markerDimensions = new Pair<>(wantedSize, wantedSize);
                 p = new EmojiUtils.EmojiPaint(res, markerDimensions, wantedSize, 0, DisplayUtils.calculateMaxFontsize(wantedSize, (int) (wantedSize * 0.8), (int) (wantedSize * 1.5), wantedSize));
                 EMOJI_PAINT_CACHE_PER_SIZE.put(wantedSize, p);
             }
