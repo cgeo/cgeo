@@ -177,7 +177,7 @@
     <string name="log_image_titleprefix">Billede</string>
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Oversættelse af lange tekster kan fejle.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
