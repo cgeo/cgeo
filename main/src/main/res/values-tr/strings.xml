@@ -196,7 +196,7 @@
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
