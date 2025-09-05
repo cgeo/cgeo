@@ -114,7 +114,6 @@ public final class WherigoUtils {
         final List<Action> result = new ArrayList<>();
         for (Object aObj : thing.actions) {
             final Action action = (Action) aObj;
-            WherigoGame.get().hookToTranslation(action);
             if (all || (action.isEnabled() && action.getActor().visibleToPlayer())) {
                 result.add(action);
             }
@@ -126,7 +125,7 @@ public final class WherigoUtils {
         if (action == null || action.text == null) {
             return "-";
         }
-        final String actionText = WherigoGame.get().getTranslatedText(action);
+        final String actionText = action.text;
         return (action.isEnabled() && action.getActor().visibleToPlayer()) ? actionText : actionText + " (debug)";
     }
 
@@ -522,7 +521,7 @@ public final class WherigoUtils {
             return "--";
         }
         //translation
-        CharSequence name = WherigoGame.get().toDisplayText(WherigoGame.get().getTranslatedName(et));
+        CharSequence name = WherigoGame.get().toDisplayText(et.name);
         //special things for certain types of elements
         if (et instanceof Task) {
             switch (((Task) et).state()) {

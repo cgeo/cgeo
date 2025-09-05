@@ -11,7 +11,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.TranslationUtils;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -31,11 +30,6 @@ import java.util.List;
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
-
-    //private CompositeDisposable translatorDisposables;
-    private TranslatorUtils.ChangeableText titleText;
-    private TranslatorUtils.ChangeableText descriptionText;
-
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -69,12 +63,6 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
             TranslationUtils.prepareForTranslation(eventTable.name, eventTable.description));
 
-        //translator
-        control.disposeOnDismiss(TranslatorUtils.initializeView("ThingDialog", activity, control.getTranslator(),
-                binding.translation, null, null));
-        descriptionText = control.createChangeableTranslation();
-        titleText = control.createChangeableTranslation();
-
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
 
@@ -93,10 +81,9 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
         //title
-        titleText.set(eventTable.name, (tr, t) -> control.setTitle(tr));
+        control.setTitle(eventTable.name);
         //description
-        descriptionText.set(eventTable.description, (tr, t) ->
-            binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);

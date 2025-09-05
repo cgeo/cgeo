@@ -6,7 +6,6 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TranslationUtils;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -43,10 +42,6 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
     private int pageDisplayed;
 
-    private TranslatorUtils.ChangeableText descriptionText;
-    private String button1Translated;
-    private String button2Translated;
-
     /**
      * Handles display of an OpenWIG push dialog. The following description is copied for reference from OpenWIG code
      * <p>
@@ -81,18 +76,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
         //external translator
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
-                TranslationUtils.prepareForTranslation(binding.description.getText()));
-
-        //translator
-        control.disposeOnDismiss(TranslatorUtils.initializeView("PushDialog", activity, control.getTranslator(),
-                binding.translation, null, null));
-        descriptionText = control.createChangeableTranslation();
-        if (this.button1 != null) {
-            control.addTranslation(this.button1, (tr, t) -> this.button1Translated = t ? tr : null);
-        }
-        if (this.button2 != null) {
-            control.addTranslation(this.button2, (tr, t) -> this.button2Translated = t ? tr : null);
-        }
+            TranslationUtils.prepareForTranslation(binding.description.getText(), button1, button2));
 
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding, control));
         refreshGui(binding, control);
@@ -106,9 +90,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         final String message = this.texts[pageDisplayed];
         final Media media = this.media == null || this.media.length == 0 ? null : (pageDisplayed >= this.media.length ? this.media[0] : this.media[pageDisplayed]);
 
-        //description
-        descriptionText.set(message, (tr, t) ->
-                binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+        binding.description.setText(WherigoGame.get().toDisplayText(message));
 
         if (media != null) {
             binding.media.setMedia(media);
@@ -123,8 +105,8 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         binding.headerInformation.setText(LocalizationUtils.getString(R.string.wherigo_dialog_push_page, String.valueOf(pageDisplayed + 1), String.valueOf(texts.length)));
 
         final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(FALSE, TRUE);
-        final String button1Text = button1Translated != null ? button1Translated : (button1 != null ? button1 : LocalizationUtils.getString(R.string.ok));
-        final String button2Text = button2Translated != null ? button2Translated : button2;
+        final String button1Text = button1 != null ? button1 : LocalizationUtils.getString(R.string.ok);
+        final String button2Text = button2;
 
         WherigoViewUtils.setViewActions(options, binding.dialogActionlist, button2 == null ? 1 : 2, item -> TRUE.equals(item) ?
             TextParam.text(button1Text).setImage(button1 == null ? ImageParam.id(R.drawable.ic_menu_done) : null) :
