@@ -214,7 +214,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
     <string name="contact_multiple_matches">연락처: 여러 일치 항목</string>
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">내용이 긴 경우 번역이 되지 않을수 도 있습니다.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
