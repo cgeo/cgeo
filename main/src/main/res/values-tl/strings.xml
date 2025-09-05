@@ -119,7 +119,7 @@
     <string name="log_your_saved_log">Ang iyong na-save na log</string>
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Ang pagsasalin ay pwedeng mabigo na may malaking halaga ng teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Nabigong mag-parse sa pag-login ng pahina</string>
