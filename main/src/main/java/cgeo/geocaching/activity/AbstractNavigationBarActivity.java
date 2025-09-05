@@ -59,7 +59,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -232,8 +231,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     @NonNull
     @Override
-    protected Insets calculateInsetsForActivityContent(@NonNull final WindowInsetsCompat windowInsets, @NonNull final Insets def) {
-        final Insets insets = super.calculateInsetsForActivityContent(windowInsets, def);
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsForActivityContent(def);
         if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
             //-> navbar is NOT shown, we have to handle all insets (including bottom)
             return insets;
@@ -267,6 +266,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             binding.activityNavigationBar.setVisibility(View.VISIBLE);
             ((NavigationBarView) binding.activityNavigationBar).setSelectedItemId(menuId);
         }
+        //if navigationbar is hidden or revealted (again) then activityContent's padding needs to be refreshed
+        refreshActivityContentInsets();
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
         final ActionBar actionBar = getSupportActionBar();
