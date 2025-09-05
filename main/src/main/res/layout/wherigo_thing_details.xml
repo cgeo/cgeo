@@ -37,15 +37,6 @@
                 android:textIsSelectable="true"
                 android:autoLink="web" />
 
-            <!-- Translation -->
-            <Button
-                android:id="@+id/translation"
-                style="@style/button_icon_with_text"
-                app:icon="@drawable/ic_menu_translate"
-                android:layout_gravity="right"
-                android:visibility="gone"
-                />
-
             <!-- External Translation -->
             <Button
                 android:id="@+id/translation_external"

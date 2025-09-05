@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TranslationUtils;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.EventTable;
@@ -25,9 +24,7 @@ import static android.view.View.VISIBLE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /** Handles Wherigo/OpenWIG input dialogs */
 public class WherigoInputDialogProvider implements IWherigoDialogProvider {
@@ -74,16 +71,9 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
             TranslationUtils.prepareForTranslation(binding.description.getText()));
 
-        //translator
-
-        control.disposeOnDismiss(TranslatorUtils.initializeView("InputDialog", activity, control.getTranslator(),
-                binding.translation, null, null));
-
         binding.media.setMedia((Media) input.table.rawget("Media"));
         final Object descr = input.table.rawget("Text");
-        control.addTranslation(descr == null ? "" : descr.toString(), (tr, t) -> {
-            binding.description.setText(WherigoGame.get().toDisplayText(tr));
-        });
+        binding.description.setText(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
 
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {
@@ -93,7 +83,6 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         final String type = (String) input.rawget("InputType");
         boolean handled = false;
-        final Map<String, String> choiceTranslations = Collections.synchronizedMap(new HashMap<>());
         final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
 
         if ("Text".equals(type)) {
@@ -124,7 +113,6 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 final String choiceRaw = (String) choicesTable.rawget((double) (i + 1));
                 final String choice = choiceRaw == null ? "-" : choiceRaw;
                 choices.add(choice);
-                control.addTranslation(choice, (tr, t) -> choiceTranslations.put(choice, tr));
             }
 
             if (!choices.isEmpty()) {
@@ -132,10 +120,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 binding.dialogItemlistview.setVisibility(VISIBLE);
                 choiceModel
                     .setItems(choices)
-                    .setDisplayMapper(s -> {
-                        final String translated = choiceTranslations.get(s);
-                        return TextParam.text(game.toDisplayText(translated != null ? translated : s));
-                    })
+                    .setDisplayMapper(s -> TextParam.text(game.toDisplayText(s)))
                     .setSelectedItems(Collections.singleton(choices.get(0)))
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
                 binding.dialogItemlistview.setModel(choiceModel);

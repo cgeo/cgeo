@@ -21,8 +21,6 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.offlinetranslate.Translator;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.annotation.SuppressLint;
@@ -42,8 +40,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
@@ -54,7 +50,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
     private int wherigoAudioManagerListenerId;
-    private final CompositeDisposable translationDisposables = new CompositeDisposable();
 
     private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
@@ -150,7 +145,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying());
-        MenuUtils.setVisible(menu, R.id.menu_translate, WherigoGame.get().isPlaying() && Translator.isActive());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -162,9 +156,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             if (info != null) {
                 WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(info, true));
             }
-            return true;
-        } else if (menuItem == R.id.menu_translate) {
-            TranslatorUtils.changeSettings(this, WherigoGame.get().getTranslator());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -319,20 +310,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public final void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public final void onResume() {
-        super.onResume();
-
-        translationDisposables.add(TranslatorUtils.initializeView("WherigoActivity", this, WherigoGame.get().getTranslator(), binding.translate, null, null));
-    }
-
-    @Override
-    public final void onPause() {
-        super.onPause();
-
-        translationDisposables.clear();
     }
 
     @Override
