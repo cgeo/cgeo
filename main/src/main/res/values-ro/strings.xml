@@ -155,7 +155,7 @@
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
     <string name="log_image_titleprefix">Imagine</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
