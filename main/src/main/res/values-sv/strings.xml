@@ -226,10 +226,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
     <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
-    <!-- translation -->
-    <string name="translate">Översätt i appen Google Translate</string>
-    <string name="translate_to_sys_lang">Översätt till %s (Webb)</string>
-    <string name="translate_to_english">Översätt till engelska (Webb)</string>
+    <!-- External translation -->
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -1670,6 +1667,7 @@
     <string name="cc_hint_minutes">minuter</string>
     <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">bråk</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laddar cacher från %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laddar punkter från %1$s</string>
@@ -1713,6 +1711,7 @@
     <string name="waypoint_edit_title">Redigera punkt</string>
     <string name="waypoint_add_title">Lägg till punkt</string>
     <string name="waypoint_added">Vägpunkt tillagd</string>
+    <string name="waypoint_added_current_location">Vägpunkt (%1$s) tillagd (±%2$s)</string>
     <string name="waypoint_note">Kommentar</string>
     <string name="waypoint_user_note">Personlig anteckning</string>
     <string name="waypoint_visited">Besökt</string>
