@@ -227,10 +227,14 @@
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
     <string name="contact_multiple_matches">Kontakt: wiele pasujących</string>
-    <!-- translation -->
-    <string name="translate">Tłumacz w aplikacji Google Translate</string>
-    <string name="translate_to_sys_lang">Przetłumacz na %s (Web)</string>
-    <string name="translate_to_english">Przetłumacz na angielski (Web)</string>
+    <!-- External translation -->
+    <string name="translate">Przetłumacz</string>
+    <string name="translate_external_label">Przetłumacz z %s</string>
+    <string name="translate_external_notavailable">Niedostępne</string>
+    <string name="translate_external_none">Brak</string>
+    <string name="translate_external_google_web">Strona Tłumacz Google</string>
+    <string name="translate_external_google_app">Aplikacja Tłumacz Google</string>
+    <string name="translate_external_deepl_app">Aplikacja DeepL</string>
     <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -968,6 +972,8 @@
     <string name="init_translation_disabled">Tłumaczenie wyłączone</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
+    <string name="init_translator_external">Zewnętrzny tłumacz</string>
+    <string name="init_translator_external_description">Zewnętrzna aplikacja tłumacza</string>
     <string name="system_default">Domyślne systemowe</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
