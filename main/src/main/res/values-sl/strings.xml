@@ -138,7 +138,7 @@
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
