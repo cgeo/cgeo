@@ -225,7 +225,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
     <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
-    <!-- translation -->
+    <!-- External translation -->
     <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
