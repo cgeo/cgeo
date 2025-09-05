@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
@@ -56,7 +57,7 @@ public class ImageParam {
     }
 
     public static ImageParam emoji(final int emojiSymbol, final int emojiSizeInDp) {
-        return new ImageParam(-1, emojiSymbol, emojiSizeInDp, null);
+        return new ImageParam(-1, emojiSymbol, Math.max(2, emojiSizeInDp) , null);
     }
 
     /**
@@ -83,9 +84,7 @@ public class ImageParam {
         } else if (this.drawableId > 0) {
             view.setImageResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
-            final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(view);
-            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
-            view.setImageDrawable(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
+            view.setImageDrawable(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(view), this.emojiSymbol));
         }
     }
 
@@ -95,10 +94,17 @@ public class ImageParam {
         } else if (this.drawableId > 0) {
             button.setIconResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
-            final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(button);
-            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
-            button.setIcon(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
+            button.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(button), this.emojiSymbol));
         }
+    }
+
+    private int getWantedEmojiSizeInPixel(final View view) {
+        int max = ViewUtils.dpToPixel(emojiSizeInDp);
+        final Pair<Integer, Integer> viewSize = view == null ? null : ViewUtils.getViewSize(view);
+        if (viewSize != null) {
+            max = Math.max(max, Math.max(viewSize.first, viewSize.second));
+        }
+        return max;
     }
 
     /**
@@ -113,7 +119,7 @@ public class ImageParam {
         if (this.drawableId > 0) {
             result = Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme())).mutate();
         } else if (this.emojiSymbol > 0) {
-            result = EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(emojiSizeInDp), this.emojiSymbol);
+            result = EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(null), this.emojiSymbol);
         }
         if (result != null) {
             return result;
