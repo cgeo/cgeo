@@ -136,8 +136,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             scaleDrawer.drawScale(lastBounds);
         });
 
-        adaptLayoutForActionBar(true);
-
         initLayers();
         onMapReadyTasks.run();
     }
