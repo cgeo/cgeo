@@ -228,6 +228,13 @@
     <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
     <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- External translation -->
+    <string name="translate">Tradueix</string>
+    <string name="translate_external_label">Tradueix amb %s</string>
+    <string name="translate_external_notavailable">No disponible</string>
+    <string name="translate_external_none">Cap</string>
+    <string name="translate_external_google_web">Web del Traductor de Google</string>
+    <string name="translate_external_google_app">Aplicació Google Translate</string>
+    <string name="translate_external_deepl_app">Aplicació Deepl</string>
     <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -954,6 +961,8 @@
     <string name="init_translation_disabled">Traducció desactivada</string>
     <string name="init_date_format">Format de data</string>
     <string name="init_date_format_description">Format per utilitzar per a dates curtes, p. a la vista de registre</string>
+    <string name="init_translator_external">Traductor extern</string>
+    <string name="init_translator_external_description">Aplicació de traducció externa per utilitzar</string>
     <string name="system_default">Sistema per defecte</string>
     <string name="init_showwaypoints">Mostra punts de referència</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
