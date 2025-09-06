@@ -10,11 +10,13 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
@@ -120,13 +123,13 @@ public class SimpleItemListView extends LinearLayout {
 
             switch (data.type) {
                 case SELECT_ALL:
-                    final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + model.getItems().size() + ")>";
+                    final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + (model.getItems().size() - model.getDisabledItems().size()) + ")>";
                     applyItemView(binding, selectAllText, null, SELECT_VIEW_MAPPER);
-                    binding.itemCheckbox.setChecked(model.getSelectedItems().size() == model.getItems().size());
+                    binding.itemCheckbox.setChecked(model.getSelectedItems().size() == (model.getItems().size() - model.getDisabledItems().size()));
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 case SELECTED_VISIBLE:
-                    final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + currentlyVisible + ")>";
+                    final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + (currentlyVisible - model.getDisabledItems().size()) + ")>";
                     applyItemView(binding, selectVisibleText, null, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(currentlyVisibleSelected == currentlyVisible);
                     binding.itemIcon.setVisibility(GONE);
@@ -220,17 +223,17 @@ public class SimpleItemListView extends LinearLayout {
 
             switch (itemData.type) {
                 case SELECT_ALL:
-                    if (model.getSelectedItems().size() == model.getItems().size()) {
+                    if (model.getSelectedItems().size() - model.getDisabledItems().size() == model.getItems().size() - model.getDisabledItems().size()) {
                         newSelection.clear();
                     } else {
-                        newSelection.addAll(model.getItems());
+                        newSelection.addAll(model.getItems().stream().filter(i -> !model.getDisabledItems().contains(i)).collect(Collectors.toList()));
                     }
                     selectionChanged = true;
                     break;
                 case SELECTED_VISIBLE:
                     final boolean remove = (currentlyVisible == currentlyVisibleSelected);
                     for (ListItem item : getOriginalItems()) {
-                        if (item.type == ListItemType.ITEM && item.isVisible) {
+                        if (item.type == ListItemType.ITEM && item.isVisible && !model.getDisabledItems().contains(item)) {
                             if (remove) {
                                 newSelection.remove(item.value);
                             } else {
@@ -270,6 +273,33 @@ public class SimpleItemListView extends LinearLayout {
         @Override
         public void onBindViewHolder(@NonNull final ItemListViewHolder holder, final int position) {
             holder.fillData(getItem(position));
+
+            if (!model.getDisabledItems().isEmpty()) {
+                final boolean isEnabled = !model.getDisabledItems().contains(getItem(position).value);
+
+                ViewUtils.walkViewTree(holder.binding.itemViewAnchor, vi -> {
+                        final TextView tv = (TextView) vi;
+                        tv.setPaintFlags(isEnabled ? tv.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG : tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        return true;
+                    },
+                    view -> view instanceof TextView);
+                holder.binding.itemViewAnchor.setAlpha(!isEnabled ? 0.5f : 1f);
+                holder.binding.itemCheckbox.setEnabled(isEnabled);
+                holder.binding.itemRadiobutton.setEnabled(isEnabled);
+
+                holder.binding.getRoot().setClickable(isEnabled);
+                holder.binding.itemChecker.setClickable(isEnabled);
+                holder.binding.itemIcon.setClickable(isEnabled);
+                holder.binding.itemAction.setClickable(isEnabled);
+                ViewUtils.walkViewTree(holder.binding.itemViewAnchor, view -> {
+                        view.setClickable(isEnabled);
+                        return true;
+                    }, null);
+
+                if (!isEnabled) {
+                    return;
+                }
+            }
 
             holder.binding.getRoot().setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
             holder.binding.itemChecker.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
