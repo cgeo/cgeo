@@ -1867,8 +1867,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
                 binding.hint.setOnClickListener(decryptListener);
                 binding.hint.setClickable(true);
+                binding.hint.setOnLongClickListener(v -> {
+                    ShareUtils.sharePlainText(activity, binding.hint.getText().toString());
+                    return true;
+                });
                 binding.hintBox.setOnClickListener(decryptListener);
                 binding.hintBox.setClickable(true);
+                binding.hintBox.setOnLongClickListener(v -> {
+                    ShareUtils.sharePlainText(activity, binding.hint.getText().toString());
+                    return true;
+                });
+
             } else {
                 binding.hint.setVisibility(View.GONE);
                 binding.hint.setClickable(false);
