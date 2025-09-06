@@ -47,11 +47,10 @@ public class UnifiedTargetAndDistancesHandler {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
-    private final Runnable handleSwapNotification;
 
     private static final float MIN_DISTANCE = 0.0005f;
 
-    UnifiedTargetAndDistancesHandler(final View root, final Runnable handleSwapNotification) {
+    UnifiedTargetAndDistancesHandler(final View root) {
         distanceStraight = root.findViewById(R.id.distanceStraight);
         distanceRouted = root.findViewById(R.id.distanceRouted);
         distanceIndividualRoute = root.findViewById(R.id.distanceIndividualRoute);
@@ -62,8 +61,6 @@ public class UnifiedTargetAndDistancesHandler {
         distanceRouted.setOnClickListener(v -> swap());
         distanceIndividualRoute.setOnClickListener(v -> swap());
         distanceSupersizeView.setOnClickListener(v -> swap());
-
-        this.handleSwapNotification = handleSwapNotification;
     }
 
     // distances handling -------------------------------------------------------------------------------------------
@@ -88,9 +85,6 @@ public class UnifiedTargetAndDistancesHandler {
 
     private void updateDistanceViews() {
         updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distanceStraight, distanceRouted, distanceIndividualRoute, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
-        if (handleSwapNotification != null) {
-            handleSwapNotification.run();
-        }
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
