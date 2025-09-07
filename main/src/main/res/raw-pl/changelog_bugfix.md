@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
 - Naprawiono: Błąd Wherigo podczas czytania starych zapisanych gier
 - Naprawiono: Logowanie wywołane w c:geo czasami nie było zapamiętane
@@ -23,6 +27,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
