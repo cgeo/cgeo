@@ -33,7 +33,8 @@ public class Image implements Parcelable {
         OWN(R.string.image_category_own),
         LISTING(R.string.image_category_listing),
         LOG(R.string.image_category_log),
-        NOTE(R.string.cache_personal_note);
+        NOTE(R.string.cache_personal_note),
+        STAGE(R.string.cache_stages);
 
         @StringRes
         private final int textId;
