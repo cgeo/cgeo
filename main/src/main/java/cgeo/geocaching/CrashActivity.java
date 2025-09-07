@@ -1,17 +1,16 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.databinding.ActivityCrashBinding;
 import cgeo.geocaching.utils.DebugUtils;
 
 import android.os.Bundle;
 import android.view.Window;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class CrashActivity extends AppCompatActivity {
+public class CrashActivity extends AbstractActivity {
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // window without actionbar for a cleaner look

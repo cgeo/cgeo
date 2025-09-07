@@ -1,18 +1,17 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This activity provides an entry point for external intent calls, and then forwards to the currently used map activity
  * implementation.
  */
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AbstractActivity {
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startActivity(DefaultMap.getLiveMapIntent(this, Settings.getMapProvider().getMapClass()));
         finish();
