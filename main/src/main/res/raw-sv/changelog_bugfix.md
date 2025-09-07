@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Fix: Kryptera/dekryptera en ledtråd behöver ett extra tryck initialt
 - Fix: Wherigo kraschar vid läsning av gamla sparade spel
 - Fix: Logging from within c:geo not remembered sometimes
@@ -23,6 +27,7 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 
