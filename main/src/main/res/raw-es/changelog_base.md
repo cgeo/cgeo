@@ -1,4 +1,4 @@
-Debido a las políticas de Play Store hemos actualizado el nivel de la API de Android esta versión de los objetivos de c:geo. Esto podría producir efectos secundarios no deseados, especialmente en las versiones más recientes de Android. Si experimenta algún problema con esta versión de c:geo, por favor informe ya sea en [GitHub](https://github.com/cgeo/cgeo) o por correo electrónico a [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Esto podría producir efectos secundarios no deseados, especialmente en las versiones más recientes de Android. Si experimenta algún problema con esta versión de c:geo, por favor informe ya sea en [GitHub](https://github.com/cgeo/cgeo) o por correo electrónico a [support@cgeo.org](mailto:support@cgeo.org)
 
 ### UnifiedMap
 - Nuevo: Optimización del calculo de rutas de cachés
@@ -31,4 +31,4 @@ Debido a las políticas de Play Store hemos actualizado el nivel de la API de An
 - Nuevo: Borrar archivos huérfanos al limpiar y restaurar la copia de seguridad
 - Nuevo: Advertencia al intentar añadir demasiados cachés a una lista de marcadores
 - Nuevo: Opción de añadir/no añadir una lista a seguimiento
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
