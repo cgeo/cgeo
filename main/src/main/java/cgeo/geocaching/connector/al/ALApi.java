@@ -72,75 +72,75 @@ final class ALApi {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static class ALSearchV4Query {
+    public static final class ALSearchV4Query {
         @JsonProperty("Origin")
-        Origin origin;
+        private Origin origin;
         @JsonProperty("RadiusInMeters")
-        Integer radiusInMeters;
+        private Integer radiusInMeters;
         @JsonProperty("RecentlyPublishedDays")
-        Integer recentlyPublishedDays = null;
+        private Integer recentlyPublishedDays = null;
         @JsonProperty("Skip")
-        Integer skip = 0;
+        private Integer skip = 0;
         @JsonProperty("Take")
-        Integer take;
+        private Integer take;
         @JsonProperty("CompletionStatuses")
-        List<Integer> completionStatuses = null;
+        private List<Integer> completionStatuses = null;
         @JsonProperty("AdventureTypes")
-        List<Integer> adventureTypes = null;
+        private List<Integer> adventureTypes = null;
         @JsonProperty("MedianCompletionTimes")
-        List<String> medianCompletionTimes = null;
+        private List<String> medianCompletionTimes = null;
         @JsonProperty("CallingUserPublicGuid")
-        String callingUserPublicGuid;
+        private String callingUserPublicGuid;
         @JsonProperty("Themes")
-        List<Integer> themes = null;
+        private List<Integer> themes = null;
 
-        void setRadiusInMeters(final Integer radiusInMeters) {
+        public void setRadiusInMeters(final Integer radiusInMeters) {
             this.radiusInMeters = radiusInMeters;
         }
 
-        void setRecentlyPublishedDays(final Integer recentlyPublishedDays) {
+        public void setRecentlyPublishedDays(final Integer recentlyPublishedDays) {
             this.recentlyPublishedDays = recentlyPublishedDays;
         }
 
-        void setTake(final Integer take) {
+        public void setTake(final Integer take) {
             this.take = take;
         }
 
-        void setSkip(final Integer skip) {
+        public void setSkip(final Integer skip) {
             this.skip = skip;
         }
 
-        void setOrigin(final Double latitude, final Double longitude, final Double altitude) {
+        public void setOrigin(final Double latitude, final Double longitude, final Double altitude) {
             this.origin = new Origin(latitude, longitude, altitude);
         }
 
-        void setCompletionStatuses(final List<Integer> completionStatuses) {
+        public void setCompletionStatuses(final List<Integer> completionStatuses) {
             this.completionStatuses = completionStatuses;
         }
 
-        void setAdventureTypes(final List<Integer> adventureTypes) {
+        public void setAdventureTypes(final List<Integer> adventureTypes) {
             this.adventureTypes = adventureTypes;
         }
 
-        void setMedianCompletionTimes(final List<String> medianCompletionTimes) {
+        public void setMedianCompletionTimes(final List<String> medianCompletionTimes) {
             this.medianCompletionTimes = medianCompletionTimes;
         }
 
-        void setCallingUserPublicGuid(final String callingUserPublicGuid) {
+        public void setCallingUserPublicGuid(final String callingUserPublicGuid) {
             this.callingUserPublicGuid = callingUserPublicGuid;
         }
 
-        void setThemes(final List<Integer> themes) {
+        public void setThemes(final List<Integer> themes) {
             this.themes = themes;
         }
 
-        class Origin {
+        static class Origin {
             @JsonProperty("Latitude")
-            Double latitude;
+            private Double latitude;
             @JsonProperty("Longitude")
-            Double longitude;
+            private Double longitude;
             @JsonProperty("Altitude")
-            Double altitude;
+            private Double altitude;
 
             Origin(final Double latitude, final Double longitude, final Double altitude) {
                 this.latitude = latitude;
@@ -159,7 +159,7 @@ final class ALApi {
 
     @Nullable
     @WorkerThread
-    static Geocache searchByGeocode(final String geocode) {
+    protected static Geocache searchByGeocode(final String geocode) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
         }
@@ -384,7 +384,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            parseWaypoints(cache, (ArrayNode) response.path("GeocacheSummaries"));
+            cache.setWaypoints(parseWaypoints(cache,  (ArrayNode) response.path("GeocacheSummaries")));
             final boolean isLinear = response.get("IsLinear").asBoolean();
             cache.setAlcMode(isLinear ? 1 : 0);
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
@@ -400,11 +400,9 @@ final class ALApi {
         }
     }
 
-    @Nullable
-    private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
-        // refresh into new list
-        cache.setWaypoints(new ArrayList<>(5));
-
+    @NonNull
+    private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
+        final List<Waypoint> result = new ArrayList<>(5);
         final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
@@ -430,6 +428,8 @@ final class ALApi {
                         .build();
 
                 wptImages.add(spoilerImage);
+
+                // todo: cache image so src can point to local image instead of URI
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
 
@@ -461,11 +461,15 @@ final class ALApi {
                     wpt.setOriginalCoordsEmpty(true);
                 }
 
-                cache.getWaypoints().add(wpt);
+                result.add(wpt);
             } catch (final NullPointerException e) {
                 Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
+
+        cache.setSpoilers(wptImages);
+
+        return result;
     }
 
     @Nullable
