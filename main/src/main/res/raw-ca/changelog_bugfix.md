@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Correcció: Xifrar/desxifrar una pista requereix un toc addicional inicialment
 - Correcció: Wherigo s'ha bloquejat en llegir partides guardades antigues
 - Correcció: De vegades no es recorda el registre des de c:geo
@@ -23,6 +27,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
