@@ -16,11 +16,9 @@ public class Player extends Thing {
 
     private LuaTableImpl insideOfZones = new LuaTableImpl();
 
-    private static JavaFunction refreshLocation = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Engine.instance.player.refreshLocation();
-            return 0;
-        }
+    private static JavaFunction refreshLocation = (callFrame, nArguments) -> {
+        Engine.instance.player.refreshLocation();
+        return 0;
     };
 
     public static void register () {
