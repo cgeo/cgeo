@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
 - Oplossing: Wherigo crash bij het lezen van oude opgeslagen spellen
 - Oplossing: Logging van c:geo word soms niet onthouden
@@ -23,6 +27,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
