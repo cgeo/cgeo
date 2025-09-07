@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -383,13 +384,9 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode));
+            cache.setWaypoints(parseWaypoints(cache,  (ArrayNode) response.path("GeocacheSummaries")));
             final boolean isLinear = response.get("IsLinear").asBoolean();
-            if (isLinear) {
-                cache.setAlcMode(1);
-            } else {
-                cache.setAlcMode(0);
-            }
+            cache.setAlcMode(isLinear ? 1 : 0);
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
             final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
@@ -403,24 +400,39 @@ final class ALApi {
         }
     }
 
-    @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
-        List<Waypoint> result = null;
+    @NonNull
+    private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
+        final List<Waypoint> result = new ArrayList<>(5);
+        final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint("S" + stageCounter + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
+
+                final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                wpt.setGeocode(geocode);
+                wpt.setGeocode(cache.getGeocode());
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
+                final Image spoilerImage = new Image.Builder()
+                        .setUrl(ilink)
+                        .setTitle(wptName)
+                        .setDescription(desc)
+                        //.setCategory(Image.ImageCategory.STAGE)
+                        .build();
+
+                wptImages.add(spoilerImage);
+
+                // todo: cache image so src can point to local image instead of URI
+
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+
                 if (Settings.isALCAdvanced()) {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
@@ -448,15 +460,15 @@ final class ALApi {
                 } else {
                     wpt.setOriginalCoordsEmpty(true);
                 }
-                if (result == null) {
-                    result = new ArrayList<>();
-                }
 
                 result.add(wpt);
             } catch (final NullPointerException e) {
                 Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
+
+        cache.setSpoilers(wptImages);
+
         return result;
     }
 
