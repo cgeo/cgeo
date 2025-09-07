@@ -1,4 +1,4 @@
-A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
@@ -31,4 +31,4 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Elimina els fitxers de pista orfes en netejar i restaurar la còpia de seguretat
 - Nou: Avís en intentar afegir massa catxés a una llista de marcadors
 - Nou: Funcions de llista de seguiment/no seguiment
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
