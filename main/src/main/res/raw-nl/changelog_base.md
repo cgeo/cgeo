@@ -1,4 +1,4 @@
-Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in deze versie van c:geo doelen. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Kaart
 - Nieuw: Route optimalisatie caches berekende data
@@ -31,4 +31,4 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt in 
 - Nieuw: Verwijder verweesde trackbestanden bij opschonen en back-up herstellen
 - Nieuw: Waarschuwing bij poging om te veel caches toe te voegen aan een bookmarklijst
 - Nieuw: Watch/unwatch lijst functies
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
