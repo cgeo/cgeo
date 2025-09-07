@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.INamedGeoCoordinate;
@@ -116,11 +115,10 @@ public class GeoItemSelectorUtils {
     }
 
     public static View createRouteView(final Route route, final View view) {
-        final boolean isIndividualRoute = RouteTrackUtils.isIndividualRoute(route);
-        final boolean isNavigationTargetRoute = RouteTrackUtils.isNavigationTargetRoute(route);
+        final boolean isIndividualRoute = route.getName().isEmpty();
         final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
-        final ImageParam routeIcon = isNavigationTargetRoute ? ImageParam.id(Settings.getRoutingMode().drawableId) : ImageParam.id(R.drawable.ic_menu_route);
-        final TextParam routeInfo = isIndividualRoute || isNavigationTargetRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
+        final ImageParam routeIcon = ImageParam.id(R.drawable.ic_menu_route);
+        final TextParam routeInfo = isIndividualRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
         setViewValues(view, routeName, routeInfo, routeIcon);
         return view;
     }

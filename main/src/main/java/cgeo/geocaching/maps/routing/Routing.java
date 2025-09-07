@@ -142,7 +142,7 @@ public final class Routing {
      * @return a track with at least two points including the start and destination points
      */
     @NonNull
-    public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
+    public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
         if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
@@ -173,7 +173,7 @@ public final class Routing {
 
         // now really calculate a new route
         lastDestination = destination;
-        lastRoutingPoints = calculateRouting(start, destination, elevation);
+        lastRoutingPoints = calculateRouting(start, destination, null);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return ensureTrack(lastRoutingPoints, start, destination);

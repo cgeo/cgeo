@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <cgeo.geocaching.wherigo.WherigoInfoBarView
+        android:id="@+id/wherigo_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
@@ -13,9 +19,9 @@
 
     <FrameLayout
         android:id="@+id/activity_content"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/wherigo_bar_view"
         android:layout_above="@id/activity_navigationBar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,8 +30,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
-        android:background="@color/colorBackgroundActionBar"
-        app:itemIconTint="@color/bottom_bar_selector"
-        app:itemTextColor="@color/bottom_bar_selector"
         app:menu="@menu/activity_navigationbar_menu" />
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>

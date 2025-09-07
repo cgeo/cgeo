@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,7 @@ public class ContinuousRangeSlider extends LinearLayout {
                     if (slider.getValueFrom() < 0) {
                         inputType |= InputType.TYPE_NUMBER_FLAG_SIGNED;
                     }
-                    final java.util.function.Consumer<String> listener = input -> {
+                    final Consumer<String> listener = input -> {
                         try {
                             final float newValue = Dialogs.checkInputRange(getContext(), Float.parseFloat(input), slider.getValueFrom() * factor, slider.getValueTo() * factor) / factor;
                             if (lastThumb == 0) {

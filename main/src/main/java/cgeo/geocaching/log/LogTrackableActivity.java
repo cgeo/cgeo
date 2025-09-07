@@ -22,8 +22,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -135,7 +135,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logtrackable_activity);
-        binding = LogtrackableActivityBinding.bind(findViewById(R.id.activity_content));
+        binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
 
@@ -331,7 +331,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         @Override
         public void onClick(final View theView) {
 
-            CoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+            NewCoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
         }
 
         public void onCoordinatesUpdated(final Geopoint input) {

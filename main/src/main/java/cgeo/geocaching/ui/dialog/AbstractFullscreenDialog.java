@@ -4,14 +4,9 @@ import cgeo.geocaching.R;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 
 /**
@@ -30,15 +25,6 @@ public abstract class AbstractFullscreenDialog extends DialogFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.cgeo_fullScreenDialog);
-        WindowCompat.enableEdgeToEdge(requireActivity().getWindow());
-    }
-
-    protected void applyEdge2Edge(final View view) {
-        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
-            view.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
-            return windowInsets;
-        });
     }
 
     @Override

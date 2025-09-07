@@ -7,11 +7,6 @@
     android:layout_height="fill_parent"
     tools:context=".MainActivity">
 
-    <cgeo.geocaching.wherigo.WherigoInfoBarView
-        android:id="@+id/wherigo_info_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/status"
         android:name="cgeo.geocaching.StatusFragment"
@@ -19,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dip"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/wherigo_info_bar"
         tools:layout="@layout/status" />
 
     <LinearLayout
@@ -93,7 +87,7 @@
             android:layout_toRightOf="@id/info_notloggedin_icon"
             android:gravity="center"
             android:text="@string/warn_notloggedin_short"
-            android:textColor="@color/colorTextActionBar"
+            android:textColor="@color/text_icon"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_detailsPrimary" />
     </RelativeLayout>

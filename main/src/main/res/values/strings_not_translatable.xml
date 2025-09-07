@@ -207,6 +207,7 @@
     <string translatable="false" name="caches_menu_organicmaps">Organic Maps</string>
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
+    <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
     <string translatable="false" name="support_mail"><a href="">support@cgeo.org</a></string>
     <string translatable="false" name="manual_link"><a href="">manual.cgeo.org</a></string>
     <string translatable="false" name="github_link"><a href="">github.com/cgeo/cgeo/issues</a></string>
@@ -248,6 +249,7 @@
     <string translatable="false" name="init_gcvote">GCvote.com</string>
     <string translatable="false" name="init_bettercacher">BetterCacher.org</string>
     <string translatable="false" name="facebook_title">Facebook</string>
+    <string translatable="false" name="twitter_title">Twitter</string>
     <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
     <string translatable="false" name="cache_menu_pebble">Pebble</string>
     <string translatable="false" name="init_geokrety">GeoKrety.org</string>
@@ -332,6 +334,12 @@
 
     <string translatable="false" name="mapserver_osmpaws_themes_name">Paws Themes</string>
     <string translatable="false" name="mapserver_osmpaws_themes_downloadurl">https://osm.paws.cz/paws_themes/</string>
+
+    <string translatable="false" name="maptheme_legend_elevate">https://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
+    <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
+    <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
+    <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
+    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>

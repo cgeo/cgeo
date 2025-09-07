@@ -79,14 +79,13 @@ public class MLKitTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public ITranslatorImpl getTranslator(final String sourceLanguage, final String targetLanguage) {
-        return wrap(sourceLanguage, targetLanguage, createTranslator(sourceLanguage, targetLanguage));
+        return wrap(createTranslator(sourceLanguage, targetLanguage));
     }
 
     @Override
     public void getTranslatorWithDownload(final String sourceLanguage, final String targetLanguage, final Consumer<ITranslatorImpl> onSuccess, final Consumer<Exception> onError) {
         final Translator t = createTranslator(sourceLanguage, targetLanguage);
-        execute(t.downloadModelIfNeeded(new DownloadConditions.Builder().build()), onError,
-            x -> onSuccess.accept(wrap(sourceLanguage, targetLanguage, t)));
+        execute(t.downloadModelIfNeeded(new DownloadConditions.Builder().build()), onError, x -> onSuccess.accept(wrap(t)));
     }
 
 
@@ -99,19 +98,8 @@ public class MLKitTranslateAccessor implements ITranslateAccessor {
         return Translation.getClient(options);
     }
 
-    private ITranslatorImpl wrap(final String srcLng, final String trgLng, final Translator translator) {
+    private ITranslatorImpl wrap(final Translator translator) {
         return new ITranslatorImpl() {
-
-            @Override
-            public String getSourceLanguage() {
-                return srcLng;
-            }
-
-            @Override
-            public String getTargetLanguage() {
-                return trgLng;
-            }
-
             @Override
             public void translate(final String source, final Consumer<String> onSuccess, final Consumer<Exception> onError) {
                 execute(translator.translate(source), onError, onSuccess);

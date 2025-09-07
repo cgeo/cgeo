@@ -10,13 +10,11 @@ public abstract class AbstractList {
     public final int id;
     @NonNull
     public final String title;
-    public final int markerId;
     private static final SparseArray<AbstractList> LISTS = new SparseArray<>();
 
-    public AbstractList(final int id, @NonNull final String title, @NonNull final int markerId) {
+    public AbstractList(final int id, @NonNull final String title) {
         this.id = id;
         this.title = title;
-        this.markerId = markerId;
         LISTS.put(id, this);
     }
 

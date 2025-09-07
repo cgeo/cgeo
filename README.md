@@ -137,6 +137,7 @@ See the references in main/src/main/res/values/strings_not_translatable.xml for 
 
 - Website: https://www.cgeo.org/
 - Support: support@cgeo.org
+- Twitter: https://twitter.com/android_gc
 - Facebook: https://www.facebook.com/android.geocaching
 - Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
 - Live status: https://status.cgeo.org/

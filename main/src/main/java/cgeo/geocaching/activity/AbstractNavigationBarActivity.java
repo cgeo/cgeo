@@ -44,7 +44,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,7 +57,6 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.graphics.Insets;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -229,20 +227,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         ActivityMixin.overrideTransitionToFade(this);
     }
 
-    @NonNull
-    @Override
-    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
-        final Insets insets = super.calculateInsetsForActivityContent(def);
-        if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
-            //-> navbar is NOT shown, we have to handle all insets (including bottom)
-            return insets;
-        }
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            return Insets.of(0, insets.top, insets.right, insets.bottom);
-        }
-        return Insets.of(insets.left, insets.top, insets.right, 0);
-    }
-
     @Override
     public void onBackPressed() {
         if (isTaskRoot() && !(this instanceof MainActivity)) {
@@ -266,8 +250,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             binding.activityNavigationBar.setVisibility(View.VISIBLE);
             ((NavigationBarView) binding.activityNavigationBar).setSelectedItemId(menuId);
         }
-        //if navigationbar is hidden or revealted (again) then activityContent's padding needs to be refreshed
-        refreshActivityContentInsets();
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
         final ActionBar actionBar = getSupportActionBar();

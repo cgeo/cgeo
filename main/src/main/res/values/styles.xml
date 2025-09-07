@@ -69,12 +69,6 @@
 
     <!-- actionbar -->
 
-    <style name="actionBarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
-        <item name="titleTextStyle">@style/action_bar_title</item>
-        <item name="android:textColorPrimary">@color/colorTextActionBar</item>
-        <item name="android:subtitleTextStyle">@style/action_bar_subtitle</item>
-    </style>
-
     <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
         <item name="android:textColor">@color/colorTextActionBar</item>
@@ -217,10 +211,6 @@
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
     </style>
 
-    <style name="button_icon_with_text" parent="button_icon">
-        <item name="android:layout_width">wrap_content</item>
-    </style>
-
     <style name="button_icon_actionbar" parent="button_icon">
         <item name="iconGravity">top</item>
         <item name="android:layout_height">wrap_content</item>
@@ -254,11 +244,6 @@
     <style name="shapeRoundedCorner" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
-    </style>
-
-    <style name="shapeRounded" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
     </style>
 
     <!-- Chips -->
@@ -338,6 +323,14 @@
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
         <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="edittext_full" parent="edittext">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
     </style>
 
     <style name="edittext_dialog" parent="edittext">
@@ -600,6 +593,24 @@
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+    </style>
+
+    <!-- coordinates input dialog styles -->
+    <style name="edittext_coordinates" parent="edittext_full">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textSize">@dimen/textSize_inputCoords</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
+
+    <style name="separator_coordinates">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">@dimen/textSize_inputCoords</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_weight">0.25</item>
     </style>
 
     <!-- installation wizard styles -->

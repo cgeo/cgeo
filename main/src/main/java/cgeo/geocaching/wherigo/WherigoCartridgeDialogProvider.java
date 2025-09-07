@@ -7,7 +7,6 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 
 import android.app.Activity;
@@ -50,8 +49,9 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, cartridgeFile.name);
         final WherigoCartridgeDetailsBinding binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, cartridgeFile.name, binding.getRoot());
+        dialog.setView(binding.getRoot());
 
         final List<WherigoSavegameInfo> saveGames = WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo());
 
@@ -73,14 +73,6 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
-
-        //external translator
-        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
-            TranslationUtils.prepareForTranslation(cartridgeFile.name, cartridgeFile.description));
-
-
-        binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
-
         refreshGui(binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
 
@@ -89,7 +81,6 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
-
             //Other actions require ending a running game (if any)
             WherigoUtils.ensureNoGameRunning(activity, () -> performActionAfterGameEnded(item, activity, saveGames));
         });

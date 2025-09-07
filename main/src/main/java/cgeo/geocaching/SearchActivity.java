@@ -23,7 +23,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.SearchCardView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
@@ -496,7 +496,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     }
 
     private void onClickCoordinates() {
-        CoordinateInputDialog.show(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
+        NewCoordinateInputDialog.show(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
     }
 
     public void onUpdateCoordinates(final Geopoint input) {
@@ -598,7 +598,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         searchViewItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(@NonNull final MenuItem item) {
-                binding.activityContent.showNext();
+                binding.flipper.showNext();
                 return true;
             }
 
@@ -606,7 +606,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             public boolean onMenuItemActionCollapse(@NonNull final MenuItem item) {
                 searchViewItem.setVisible(false);
                 searchButtonItem.setVisible(false);
-                binding.activityContent.showPrevious();
+                binding.flipper.showPrevious();
                 return true;
             }
         });

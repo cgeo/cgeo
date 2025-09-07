@@ -438,17 +438,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
         @Override
         public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            final int[] location = new int[2];
-            mMapView.getLocationOnScreen(location);
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], true);
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, true);
             return true;
         }
 
         @Override
         public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-            final int[] location = new int[2];
-            mMapView.getLocationOnScreen(location);
-            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x + location[0], (int) tapXY.y + location[1], false);
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, false);
             return true;
         }
 

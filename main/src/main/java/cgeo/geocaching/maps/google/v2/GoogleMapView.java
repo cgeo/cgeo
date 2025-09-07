@@ -45,7 +45,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -258,45 +257,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             try {
                 final View mapView = findViewById(R.id.map);
                 final View compass = mapView.findViewWithTag("GoogleMapCompass");
-                adaptLayoutForActionBarHelper(activity, actionBarShowing, compass);
+                HideActionBarUtils.adaptLayoutForActionBarHelper(activity, actionBarShowing, compass);
             } catch (Exception ignore) {
             }
         }
     }
-
-    private static void adaptLayoutForActionBarHelper(final AppCompatActivity activity, @androidx.annotation.Nullable final Boolean actionBarShowing, @androidx.annotation.Nullable final View compassRose) {
-        if (compassRose == null) {
-            return;
-        }
-
-        int minHeight = 0;
-
-        Boolean abs = actionBarShowing;
-        if (actionBarShowing == null) {
-            final ActionBar actionBar = activity.getSupportActionBar();
-            abs = actionBar != null && actionBar.isShowing();
-        }
-        if (abs) {
-            minHeight = activity.findViewById(R.id.actionBarSpacer).getHeight();
-        }
-
-        final View filterbar = activity.findViewById(R.id.filter_bar);
-        if (filterbar != null) {
-            minHeight += filterbar.getHeight();
-        }
-
-        View v = activity.findViewById(R.id.distanceinfo);
-        if (v.getVisibility() != View.VISIBLE) {
-            v = activity.findViewById(R.id.target);
-        }
-        if (v.getVisibility() == View.VISIBLE) {
-            minHeight += v.getHeight();
-        }
-
-        final int finalMinHeight = minHeight;
-        activity.runOnUiThread(() -> compassRose.animate().translationY(finalMinHeight).start());
-    }
-
 
     @Override
     public void setCoordsMarker(@Nullable final Geopoint coords) {

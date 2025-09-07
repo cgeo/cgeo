@@ -18,7 +18,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -51,7 +50,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -80,7 +78,6 @@ import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
@@ -1411,8 +1408,7 @@ public final class GCParser {
     public enum Logs {
         ALL(null),
         FRIENDS("sf"),
-        OWN("sp"),
-        OWNER("showOwnerOnly");
+        OWN("sp");
 
         final String paramName;
 
@@ -1558,21 +1554,21 @@ public final class GCParser {
 
     @NonNull
     static List<LogType> parseTypes(final String page) {
-        final AvailableLogType[] availableTypes = parseLogTypes(page);
-        if (availableTypes == null) {
-            return Collections.emptyList();
+            final AvailableLogType[] availableTypes = parseLogTypes(page);
+            if (availableTypes == null) {
+                return Collections.emptyList();
+            }
+            return CollectionStream.of(availableTypes)
+                    .filter(a -> a.value > 0)
+                    .map(a -> LogType.getById(a.value))
+                    .filter(t -> t != LogType.UPDATE_COORDINATES)
+                    .toList();
         }
-        return Arrays.asList(availableTypes).stream()
-                .filter(a -> a.value > 0)
-                .map(a -> LogType.getById(a.value))
-                .filter(t -> t != LogType.UPDATE_COORDINATES)
-                .toList();
-    }
 
     private static AvailableLogType[] parseLogTypes(final String page) {
         //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
         if (StringUtils.isBlank(page)) {
-            return null;
+            return new AvailableLogType[0];
         }
 
         final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
@@ -1583,49 +1579,7 @@ public final class GCParser {
             return MAPPER.readValue("[" + match + "]", AvailableLogType[].class);
         } catch (final Exception e) {
             Log.e("Error parsing log types from [" + match + "]", e);
-            return null;
-        }
-    }
-
-    static int parseTrackableCount(final String page) {
-        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TOTAL_TRACKABLES, null);
-        try {
-            return Integer.parseInt(match);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    @NonNull
-    static List<Trackable> parseTrackables(final String page) {
-        final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = parseTrackablesJson(page);
-        if (trackableInventoryItems == null) {
-            return Collections.emptyList();
-        }
-        return Arrays.asList(trackableInventoryItems).stream().map(entry -> {
-            final Trackable trackable = new Trackable();
-            trackable.setGeocode(entry.referenceCode);
-            trackable.setTrackingcode(entry.trackingNumber);
-            trackable.setName(entry.name);
-            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
-            return trackable;
-        }).toList();
-    }
-
-    private static GCWebAPI.TrackableInventoryEntry[] parseTrackablesJson(final String page) {
-        if (StringUtils.isBlank(page)) {
-            return null;
-        }
-
-        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_LOGPAGE_TRACKABLES, null);
-        if (match == null) {
-            return null;
-        }
-        try {
-            return MAPPER.readValue("[" + match + "]", GCWebAPI.TrackableInventoryEntry[].class);
-        } catch (final Exception e) {
-            Log.e("Error parsing log types from [" + match + "]", e);
-            return null;
+            return new AvailableLogType[0];
         }
     }
 
@@ -1638,8 +1592,25 @@ public final class GCParser {
             return;
         }
 
-        // merge log-entries (friend-logs and log-times)
-        mergeAndStoreLogEntries(cache, page, handler);
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+        final String userToken = parseUserToken(page);
+        final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
+        final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
+        final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
+                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.empty();
+        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
+                (logEntries, specialLogEntries) -> {
+                    mergeFriendsLogs(logEntries, specialLogEntries);
+                    return logEntries;
+                }).cache();
+        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
+        if (cache.isFound() || cache.isDNF()) {
+            ownLogs.subscribe(logEntry -> {
+                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
+                    cache.setVisitedDate(logEntry.date);
+                }
+            });
+        }
 
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
@@ -1653,67 +1624,9 @@ public final class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
-    }
 
-    private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
-
-        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-
-        final String userToken = getLogsPageUserToken(cache);
-        final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
-        final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
-        final Observable<LogEntry> friendLogs = Settings.isFriendLogsWanted() ?
-                getLogs(userToken, Logs.FRIENDS).cache() : Observable.empty();
-        final Observable<LogEntry> ownerLogs = getLogs(userToken, Logs.OWNER).cache();
-
-        final List<LogEntry> logsBlocked = logs.toList().blockingGet();
-        final List<LogEntry> ownLogEntriesBlocked = ownLogs.toList().blockingGet();
-        final List<LogEntry> friendLogsBlocked = friendLogs.toList().blockingGet();
-        final List<LogEntry> ownerLogsBlocked = ownerLogs.toList().blockingGet();
-        final OfflineLogEntry offlineLog = DataStore.loadLogOffline(cache.getGeocode());
-
-        List<LogEntry> ownLogsFromDb = Collections.emptyList();
-        if (!ownLogEntriesBlocked.isEmpty()) {
-            ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), true);
-            if (ownLogsFromDb.isEmpty()) {
-                ownLogsFromDb = DataStore.loadLogsOfAuthor(cache.getGeocode(), GCConnector.getInstance().getUserName(), false);
-            }
-        }
-
-        // merge time from offline log
-        if (offlineLog != null) {
-            mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
-        }
-
-        // merge time from online-logs already stored in db (overrides possible offline log)
-        if (!ownLogsFromDb.isEmpty()) {
-            mergeLogTimes(ownLogEntriesBlocked, ownLogsFromDb);
-        }
-
-        if (cache.isFound() || cache.isDNF()) {
-            for (final LogEntry logEntry : ownLogEntriesBlocked) {
-                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
-                    cache.setVisitedDate(logEntry.date);
-                    break;
-                }
-            }
-        }
-
-        final List<LogEntry> specialLogEntries = new ArrayList<>();
-        specialLogEntries.addAll(friendLogsBlocked);
-        specialLogEntries.addAll(ownLogEntriesBlocked);
-        specialLogEntries.addAll(ownerLogsBlocked);
-        if (!specialLogEntries.isEmpty()) {
-            setFriendsLogs(specialLogEntries);
-            mergeModifiedLogs(logsBlocked, specialLogEntries);
-        }
-
-        DataStore.saveLogs(cache.getGeocode(), logsBlocked, true);
-    }
-
-    private static String getLogsPageUserToken(@NonNull final Geocache cache) {
-        final String logsPage = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/geocache_logs.aspx", new Parameters("code", cache.getGeocode()));
-        return parseUserToken(logsPage);
+        // Wait for completion of logs parsing, retrieving and merging
+        mergedLogs.ignoreElement().blockingAwait();
     }
 
     private static void addImagesFromGallery(@NonNull final Geocache cache, final DisposableHandler handler) {
@@ -1771,72 +1684,20 @@ public final class GCParser {
     }
 
     /**
-     * Mark log entries as friends logs (personal and friends) to identify
+     * Merge log entries and mark them as friends logs (personal and friends) to identify
      * them on friends/personal logs tab.
-     *
-     * @param friendLogs  the list to friend logs
-     */
-    private static void setFriendsLogs(final List<LogEntry> friendLogs) {
-        for (int i = 0; i < friendLogs.size(); i++) {
-            final LogEntry friendLog = friendLogs.get(i);
-            if (!friendLog.friend) {
-                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
-                friendLogs.set(i, updatedFriendLog);
-            }
-        }
-    }
-
-    /**
-     * Merge log entries
      *
      * @param mergedLogs  the list to merge logs with
      * @param logsToMerge the list of logs to merge
      */
-    private static void mergeModifiedLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
-        final Map<String, LogEntry> mergedLogsMap = new HashMap<>();
-        for (final LogEntry mergedLog : mergedLogs) {
-            mergedLogsMap.put(mergedLog.serviceLogId, mergedLog);
-        }
-        for (final LogEntry logToMerge : logsToMerge) {
-            final LogEntry modifiedLog = mergedLogsMap.get(logToMerge.serviceLogId);
-            if (modifiedLog == null) {
-                mergedLogs.add(logToMerge);
+    private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
+        for (final LogEntry log : logsToMerge) {
+            if (mergedLogs.contains(log)) {
+                final LogEntry friendLog = mergedLogs.get(mergedLogs.indexOf(log));
+                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                mergedLogs.set(mergedLogs.indexOf(log), updatedFriendLog);
             } else {
-                final int logIndex = mergedLogs.indexOf(modifiedLog);
-                if (logIndex >= 0) {
-                    mergedLogs.set(logIndex, logToMerge);
-                }
-            }
-        }
-    }
-
-    private static void mergeLogTimes(final List<LogEntry> mergedLogTimes, final Iterable<LogEntry> logTimesToMerge) {
-        final Map<String, LogEntry> logTimesToMergeMap = new HashMap<>();
-        for (final LogEntry logToMerge : logTimesToMerge) {
-            logTimesToMergeMap.put(logToMerge.serviceLogId, logToMerge);
-        }
-
-        for (int i = 0; i < mergedLogTimes.size(); i++) {
-            final LogEntry mergedLog = mergedLogTimes.get(i);
-            final LogEntry logToMerge = logTimesToMergeMap.get(mergedLog.serviceLogId);
-            if (logToMerge != null) {
-                final Date dateTimeLogTime = new Date(mergedLog.date);
-                final Date logTime = new Date(logToMerge.date);
-                if (!logTime.equals(dateTimeLogTime) && DateUtils.isSameDay(dateTimeLogTime, logTime)) {
-                    final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                    mergedLogTimes.set(i, updatedTimeLog);
-                }
-            }
-        }
-    }
-
-    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
-        for (int i = 0; i < mergedLogTimes.size(); i++) {
-            final LogEntry mergedLog = mergedLogTimes.get(i);
-            if (logToMerge.isMatchingLog(mergedLog)) {
-                final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
-                mergedLogTimes.set(i, updatedTimeLog);
-                break;
+                mergedLogs.add(log);
             }
         }
     }

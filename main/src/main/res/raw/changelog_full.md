@@ -1,143 +1,6 @@
 # Full changelog
 This changelog contains all changes which are not intermediate developing steps. It is sometimes more detailed than the changelogs we publish in our releases.
 
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.08.31 Bugfix Release
-
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.08.26 Bugfix Release
-
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.08.05 Bugfix Release
-
-- Fix: Login detection fails (website change)
-- Fix: Crash in translation module
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.07.25 Bugfix Release
-
-- Fix: Trackable inventory not loaded while logging a cache
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.07.20 Bugfix Release
-
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.07.17 Feature Release
-
-### Map
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
-
-### Cache details
-- New: Offline translation of listing text and logs (experimental)
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
-- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
-- Fix: User note gets lost on refreshing a lab adventure
-- Change: Log-date related placeholders will use chosen date instead of current date
-- New: Collapse long log entries per default
-
-### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
-- New: Support opening local Wherigo files
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
-
-### General
-- New: Redesigned search page
-- New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
-- New: Show last used filter name in filter dialog
-- New: Coordinate calculator: Function to replace "x" with multiplication symbol
-- Fix: Incorrect altitude (not using mean above sea level)
-- Fix: Nearby distance limit setting not working properly for small values
-- Fix: Sorting of cache lists by distance descending not working correctly
-- Fix: Lab caches excluded by D/T filter even with active "include uncertain"
-- Fix: Color issues with menu icons in light mode
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
-- Fix: Importing local map file gets random map name
-- Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
-
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
-
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
-
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
-
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
-
-Until then, you can switch between the different implementations in settings => map sources.
-
-<!-- --------------------------------------------------------------------------------- --->
-
-## 2025.05.14 Bugfix Release
-
-- Fix: Favorite status gets lost when doing an image selection while preparing a log
-- Fix: Wherigo player does not allow target selection for thing action
-- Fix: Changing rotation mode using popup not working reliably (UnifiedMap)
-- Fix: Cache markers not tapable on rotated map (UnifiedMap Mapsforge)
-- Fix: Wrong year formatting in logs sometimes when using non-default short date formatting
-
 <!-- --------------------------------------------------------------------------------- --->
 
 ## 2025.04.02 Bugfix Release
@@ -393,7 +256,7 @@ Reason for this are recent changes in Play Store policies which requires us to d
 - Fix: Logging caches or trackables no longer working (website changes)
 - Fix: Deleting own logs not working
 - Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
- 
+
 <!-- --------------------------------------------------------------------------------- --->
 
 ## 2024.04.13 Bugfix Release
@@ -728,7 +591,7 @@ Reason for this are recent changes in Play Store policies which requires us to d
 ## 2022.12.21 Bugfix Release
 
 ### General
-- Fix: New TB set to visit mode automatically 
+- Fix: New TB set to visit mode automatically
 - Fix: gc.com basic member settings not displayed
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
@@ -744,10 +607,10 @@ Reason for this are recent changes in Play Store policies which requires us to d
 - Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
 ### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache 
+- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
 
 ### Variable calculator
-- New: TRUNC function to truncate decimal values 
+- New: TRUNC function to truncate decimal values
 - New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
 ### Map

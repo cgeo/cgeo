@@ -90,24 +90,6 @@
                 android:title="@string/caches_upload_bookmarklist_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
-                android:id="@+id/menu_watch_management"
-                android:icon="@drawable/ic_menu_watch"
-                android:title="@string/feature_watch_list"
-                app:showAsAction="never|withText">
-                <menu>
-                    <item
-                        android:id="@+id/menu_watch_all"
-                        android:title="@string/caches_watch_all"
-                        android:icon="@drawable/ic_menu_watch"
-                        app:showAsAction="ifRoom|withText"/>
-                    <item
-                        android:id="@+id/menu_unwatch_all"
-                        android:title="@string/caches_unwatch_all"
-                        android:icon="@drawable/ic_menu_watch_remove"
-                        app:showAsAction="ifRoom|withText"/>
-                </menu>
-            </item>
-            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:enabled="true"

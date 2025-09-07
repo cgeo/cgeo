@@ -7,4 +7,5 @@
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/wherigo_controls_cartridgelist_hint"
         app:showAsAction="always"/>
+
 </menu>

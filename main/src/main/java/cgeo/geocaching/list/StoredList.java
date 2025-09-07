@@ -41,7 +41,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -51,11 +50,13 @@ public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, true, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
+    public final int markerId;
     public final boolean preventAskForDeletion;
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title, markerId);
+        super(id, title);
+        this.markerId = markerId;
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
@@ -128,11 +129,7 @@ public final class StoredList extends AbstractList {
 
             final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
             model.setButtonSelectionIsMandatory(true)
-                    .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> {
-                        model.setSelectedItems(lastSelectedListSet);
-                        configureListDisplay(model, Stream.concat(lastSelectedLists.stream(), selectedListIds.stream()).collect(Collectors.toSet()));
-                        return lastSelectedListSet;
-                    })
+                    .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> lastSelectedListSet)
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                     .setItems(lists)
                     .setSelectedItems(selectedListSet);
@@ -269,7 +266,11 @@ public final class StoredList extends AbstractList {
                     return ImageParam.emoji(((StoredList) item).markerId, 30);
                 }
             } else if (item instanceof PseudoList) {
-                return ImageParam.id(item.markerId);
+                if (item.id == PseudoList.ALL_LIST.id) {
+                    return ImageParam.id(R.drawable.ic_menu_list_group);
+                } else if (item.id == PseudoList.HISTORY_LIST.id) {
+                    return ImageParam.id(R.drawable.ic_menu_recent_history);
+                }
             }
             if (isGroup) {
                 return ImageParam.id(R.drawable.downloader_folder);

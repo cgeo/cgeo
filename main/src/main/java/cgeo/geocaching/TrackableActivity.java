@@ -29,7 +29,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
@@ -621,15 +620,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.image.removeAllViews();
                 binding.image.addView(trackableImage);
             }
-
-            //external translation
-            TranslationUtils.registerTranslation(
-                getActivity(),
-                binding.descriptionTranslateExternalButton,
-                binding.descriptionTranslateExternal,
-                binding.descriptionTranslateExternalNote,
-                () -> TranslationUtils.prepareForTranslation(binding.goal.getText().toString(), binding.details.getText().toString()));
-
 
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
 

@@ -1,14 +1,15 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.SettingsActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class RenderThemeSettings extends AbstractActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class RenderThemeSettings extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
@@ -20,7 +21,7 @@ public class RenderThemeSettings extends AbstractActivity {
     }
 
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ActivityMixin.setDisplayHomeAsUpEnabled(this, true);

@@ -8,7 +8,6 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.ui.dialog.SimpleDialogExamples;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
@@ -43,7 +42,6 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_view_database, () -> startActivity(new Intent(activity, DBInspectionActivity.class)));
-        setPrefClick(this, R.string.pref_fakekey_gui_testscreen, () -> SimpleDialogExamples.createTestDialog(activity));
 
         if (BranchDetectionHelper.isDeveloperBuild()) {
             Preference testDir = findPreference(getString(R.string.pref_persistablefolder_testdir));

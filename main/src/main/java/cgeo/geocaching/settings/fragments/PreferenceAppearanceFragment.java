@@ -7,11 +7,9 @@ import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
@@ -79,16 +77,6 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         }
         setDateSummary(shortDateFormatPref, shortDateFormat);
 
-        //external translator
-        final ListPreference translatorExternalPref = findPreference(getString(R.string.pref_translator_external));
-        translatorExternalPref.setEntries(CollectionStream.of(TranslationUtils.Translator.values()).map(TranslationUtils.Translator::toUserDisplayableString).toArray(String.class));
-        translatorExternalPref.setEntryValues(CollectionStream.of(TranslationUtils.Translator.values()).map(Enum::name).toArray(String.class));
-        translatorExternalPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(TranslationUtils.Translator.valueOf(newValue.toString()).toUserDisplayableString());
-            return true;
-        });
-        translatorExternalPref.setValue(Settings.getTranslatorExternal().name());
-        translatorExternalPref.setSummary(Settings.getTranslatorExternal().toUserDisplayableString());
 
 
 

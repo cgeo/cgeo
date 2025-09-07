@@ -55,7 +55,7 @@ public class GCWebAPI {
     /**
      * maximum number of elements to retrieve with one call
      */
-    private static final int MAX_TAKE = 1000;
+    private static final int MAX_TAKE = 50;
 
     private GCWebAPI() {
         // Utility class, do not instantiate
@@ -895,7 +895,7 @@ public class GCWebAPI {
      */
     @NonNull
     @WorkerThread
-    static List<TrackableInventoryEntry> getTrackableInventory(final int totalTrackables) {
+    static List<TrackableInventoryEntry> getTrackableInventory() {
         final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
         int skip = 0;
         TrackableInventoryEntry[] entries;
@@ -904,7 +904,7 @@ public class GCWebAPI {
             //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
             trackableInventoryEntries.addAll(Arrays.asList(entries));
             skip += MAX_TAKE;
-        } while (trackableInventoryEntries.size() < totalTrackables);
+        } while (entries.length == MAX_TAKE);
         return trackableInventoryEntries;
     }
 
