@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -30,9 +31,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class InstallWizardActivity extends AppCompatActivity {
+public class InstallWizardActivity extends AbstractActivity {
 
     public static final String BUNDLE_MODE = "wizardmode";
     private static final String BUNDLE_STEP = "step";
