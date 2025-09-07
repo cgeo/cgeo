@@ -1,4 +1,4 @@
-En raison des politiques du Play Store, nous avons mis à jour le niveau de l'API Android que cette version de c:geo cible. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Carte
 - Nouveau: L'optimisation des itinéraires met en cache les données calculées
@@ -31,4 +31,4 @@ En raison des politiques du Play Store, nous avons mis à jour le niveau de l'AP
 - Nouveau : Supprimer les fichiers de suivi orphelins lors du nettoyage et de la restauration de la sauvegarde
 - Nouveau: Avertissement en essayant d'ajouter trop de caches à une liste de favoris
 - Nouveau: Fonctions de surveillance des listes
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
