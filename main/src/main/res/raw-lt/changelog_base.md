@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Žemėlapis
 - New: Route optimization caches calculated data
@@ -31,4 +31,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Delete orphaned trackfiles on clean up and restore backup
 - New: Warning on trying to add too many caches to a bookmark list
 - New: Watch/unwatch list functions
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
