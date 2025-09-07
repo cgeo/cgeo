@@ -64,6 +64,7 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
+    @Nullable Image image;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -84,14 +85,14 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
      * used only for "goto history" UDC
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (Comparator<Waypoint>) (left, right) -> right.id - left.id;
+    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (left, right) -> right.id - left.id;
 
     /**
      * require name and type for every waypoint
@@ -314,7 +315,6 @@ public class Waypoint implements INamedGeoCoordinate {
     public Float getGeofence() {
         return geofence;
     }
-
     public boolean canChangeGeofence() {
         // currently geofence value is used by AL connector only, so you may set it manually for every other connector
         return !ALConnector.getInstance().canHandle(geocode);
@@ -322,6 +322,15 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public void setGeofence(@Nullable final Float geofence) {
         this.geofence = geofence;
+    }
+
+    @Nullable
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(@NonNull final Image image) {
+        this.image = image;
     }
 
     public void setCoords(final Geopoint coords) {
