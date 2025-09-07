@@ -1,4 +1,4 @@
-Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úroveň API Androidu. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
+Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
@@ -31,4 +31,4 @@ Vzhledem k zásadám Obchodu Play, jsme v této verzi c:geo aktualizovali úrove
 - New: Delete orphaned trackfiles on clean up and restore backup
 - New: Warning on trying to add too many caches to a bookmark list
 - New: Watch/unwatch list functions
-
+- New: Offer offline translation with Google Translate or DeepL apps (if installed)
