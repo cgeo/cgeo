@@ -138,12 +138,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         startActivityInternal(fromActivity, geocode, null);
     }
 
-    public static void startForCreateForResult(@NonNull final Activity fromActivity, final String geocode, final int requestCode) {
-        final Intent intent = new Intent(fromActivity, LogCacheActivity.class);
-        intent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        fromActivity.startActivityForResult(intent, requestCode);
-    }
-
     public static void startForEdit(@NonNull final Context fromActivity, final String geocode, final LogEntry logEntry) {
         startActivityInternal(fromActivity, geocode, logEntry);
     }
@@ -179,7 +173,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
-        binding = LogcacheActivityBinding.bind(findViewById(R.id.activity_content));
+        binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type)
@@ -567,32 +561,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 Settings.setLastCacheLog(currentLogText);
             }
 
-            final LogContext logContext = getLogContext();
-            final LogType logType = logContext.getLogEntry().logType;
-            final String cacheName = logContext.getCache().getName();
-            final String cacheUrl = logContext.getCache().getUrl();
-            final String prefix;
-            switch (logType) {
-                case FOUND_IT:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_found, cacheName, cacheUrl);
-                    break;
-                case DIDNT_FIND_IT:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_dnf, cacheName, cacheUrl);
-                    break;
-                case NOTE:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_note, cacheName, cacheUrl);
-                    break;
-                case NEEDS_MAINTENANCE:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_maintenance, cacheName, cacheUrl);
-                    break;
-                case NEEDS_ARCHIVE:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_archive, cacheName, cacheUrl);
-                    break;
-                default:
-                    prefix = LocalizationUtils.getString(R.string.log_share_prefix_default, cacheName, cacheUrl);
-                    break;
-            }
-
             //reset Gui and all values
             resetValues();
             refreshGui();
@@ -601,10 +569,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             imageListFragment.clearImages();
             imageListFragment.adjustImagePersistentState();
 
-            final Intent shareIntent = new Intent();
-            shareIntent.putExtra("EXTRA_SHARE_TEXT", prefix + currentLogText);
-            setResult(Activity.RESULT_OK, shareIntent);
-
+            showToast(res.getString(R.string.info_log_posted));
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
         } else if (!LogCacheActivity.this.isFinishing()) {

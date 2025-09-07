@@ -11,7 +11,6 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteOptimizationHelper;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.NavigationTargetRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
@@ -142,10 +141,10 @@ public class RouteTrackUtils {
     // route/track context menu-related methods
 
     /** show a popup for track/individual route, opened by using a long-tap on that item on the map */
-    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action2<Route, Boolean> handleLongTapOnRoutesOrTracks, final Route route, final Runnable onDelete) {
+    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action2<Route, Boolean> handleLongTapOnRoutesOrTracks, final Route route) {
         final SimplePopupMenu menu = SimplePopupMenu.of(activity).setMenuContent(R.menu.map_routetrack_context).setPosition(new Point(tapX, tapY), 0);
         menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, handleLongTapOnRoutesOrTracks != null, route, true));
-        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route, onDelete));
+        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route, null));
         menu.show();
     }
 
@@ -153,20 +152,18 @@ public class RouteTrackUtils {
         MenuUtils.enableIconsInOverflowMenu(menu);
 
         final boolean isIndividualRoute = isIndividualRoute(route);
-        final boolean isNavigationTargetRoute = isNavigationTargetRoute(route);
         final MenuItem elevationChart = menu.findItem(R.id.menu_showElevationChart);
         configureMenuItem(elevationChart, showElevationChart, null);
         elevationChart.setEnabled(route instanceof Route);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute && !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute && !isNavigationTargetRoute, null);
+        configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_center), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_optimize), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_refresh), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_invert_order), isIndividualRoute, null);
-        configureMenuItem(menu.findItem(R.id.menu_visibility), route != null && !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_delete), !isNavigationTargetRoute, hidePerDefault);
-        configureMenuItem(menu.findItem(R.id.menu_clear_target), isNavigationTargetRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_visibility), route != null, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_delete), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.indivroute_export_route), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_export_track), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.indivroute_load), isIndividualRoute, null);
@@ -247,10 +244,6 @@ public class RouteTrackUtils {
                         onDelete.run();
                     }
                 }));
-            }
-        } else if (id == R.id.menu_clear_target) {
-            if (onDelete != null) {
-                onDelete.run();
             }
         } else if (id == R.id.menu_refresh && isIndividualRoute(route)) {
             // create list of geocodes contained in individual route (including geocodes for contained waypoints)
@@ -445,9 +438,5 @@ public class RouteTrackUtils {
 
     public static boolean isIndividualRoute(final IGeoItemSupplier route) {
         return route instanceof IndividualRoute;
-    }
-
-    public static boolean isNavigationTargetRoute(final IGeoItemSupplier route) {
-        return route instanceof NavigationTargetRoute;
     }
 }

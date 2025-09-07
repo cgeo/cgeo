@@ -59,8 +59,6 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
         toolbar = view.findViewById(R.id.toolbar);
 
-        applyEdge2Edge(view);
-
         return view;
     }
 

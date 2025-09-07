@@ -32,36 +32,29 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
-import com.google.android.material.chip.Chip;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
-    private final boolean allLogs;
+    private static final String BUNDLE_ALLLOGS = "alllogs";
+
     private final Resources res = CgeoApplication.getInstance().getResources();
     private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
-    public CacheLogsViewCreator(final boolean allLogs) {
-        this.allLogs = allLogs;
-    }
-
-    public CacheLogsViewCreator() {
-        this.allLogs = false;
-    }
-
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
-        final CacheLogsViewCreator fragment = new CacheLogsViewCreator(allLogs);
+        final CacheLogsViewCreator fragment = new CacheLogsViewCreator();
         final Bundle bundle = new Bundle();
+        bundle.putBoolean(BUNDLE_ALLLOGS, allLogs);
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public long getPageId() {
-        return allLogs ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
+        final Bundle arguments = getArguments();
+        return arguments == null ? 0 : arguments.getBoolean(BUNDLE_ALLLOGS) ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
     }
 
     private Geocache getCache() {
@@ -72,31 +65,10 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
-        if (allLogs) {
-            return addOwnOfflineLog(cache, cache.getLogs());
-        } else {
-            final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
-            final List<LogEntry> ownLogs = addOwnOfflineLog(cache, logs.stream().filter(LogEntry::isOwn).collect(Collectors.toList()));
-            final List<LogEntry> ownerLogs = logs.stream().filter(log -> log.authorGuid.equals(getCache().getOwnerGuid())).collect(Collectors.toList());
-            final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
-            friendsLogs.removeAll(ownLogs);
-            friendsLogs.removeAll(ownerLogs);
-
-            binding.chipOwn.setVisibility(ownLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            binding.chipFriends.setVisibility(friendsLogs.isEmpty() ? View.GONE : View.VISIBLE);
-            binding.chipOwner.setVisibility(ownerLogs.isEmpty() ? View.GONE : View.VISIBLE);
-
-            if (!binding.chipOwn.isChecked()) {
-                logs.removeAll(ownLogs);
-            }
-            if (!binding.chipFriends.isChecked()) {
-                logs.removeAll(friendsLogs);
-            }
-            if (!binding.chipOwner.isChecked()) {
-                logs.removeAll(ownerLogs);
-            }
-            return logs;
-        }
+        final Bundle arguments = getArguments();
+        final boolean allLogs = arguments == null || arguments.getBoolean(BUNDLE_ALLLOGS);
+        final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
+        return addOwnOfflineLog(cache, logs);
     }
 
     private List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
@@ -113,23 +85,17 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (binding != null) {
             addLogCountsHeader();
             addEmptyLogsHeader();
-
-            for (int i = 0; i < binding.filterChips.getChildCount(); i++) {
-                ((Chip) binding.filterChips.getChildAt(i)).setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    setContent();
-                });
-            }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
         if (countview1 != null) {
-            binding.logsItems.removeHeaderView(countview1);
+            binding.getRoot().removeHeaderView(countview1);
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = allLogs ? getCache().getLogCounts() : getLogs().stream().collect(Collectors.groupingBy(log -> log.logType, Collectors.summingInt(log -> 1)));
+        final Map<LogType, Integer> logCounts = getCache().getLogCounts();
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
@@ -161,21 +127,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }
-                binding.logsItems.addHeaderView(countview1, null, false);
+                binding.getRoot().addHeaderView(countview1, null, false);
             }
         }
     }
 
     private void addEmptyLogsHeader() {
         if (countview2 != null) {
-            binding.logsItems.removeHeaderView(countview2);
+            binding.getRoot().removeHeaderView(countview2);
             countview2 = null;
         }
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
-            countview2.setText(allLogs ? res.getString(R.string.log_empty_logbook) : res.getString(R.string.log_empty_logbook_filtered));
-            binding.logsItems.addHeaderView(countview2, null, false);
+            countview2.setText(res.getString(R.string.log_empty_logbook));
+            binding.getRoot().addHeaderView(countview2, null, false);
         }
     }
 

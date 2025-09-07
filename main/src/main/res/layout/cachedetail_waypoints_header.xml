@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="0dp"
+    android:padding="0dp">
+    <Button
+        android:id="@+id/add_waypoint"
+        style="@style/button_full"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cache_waypoints_add"
+        tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+    <Button
+        android:id="@+id/add_waypoint_currentlocation"
+        style="@style/button_full"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cache_waypoints_add_currentLocation" />
+    <Button
+        android:id="@+id/add_waypoint_fromclipboard"
+        style="@style/button_full"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cache_waypoints_add_fromclipboard"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/hide_visited_waypoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cache_waypoints_hide_visited_waypoints"
+        tools:context=".CacheDetailActivity$WaypointsViewCreator" />
+</LinearLayout>

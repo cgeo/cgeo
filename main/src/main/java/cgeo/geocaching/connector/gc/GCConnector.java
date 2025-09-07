@@ -220,15 +220,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean canEditLog(final Geocache cache, final LogEntry logEntry) {
-        // needs to be online and needs to be log author
+        //needs to be log author
         return !StringUtils.isBlank(logEntry.serviceLogId) && logEntry.author.equalsIgnoreCase(getUserName());
     }
 
     @Override
     public boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
-        //needs to be online and needs to be log author or cache owner
+        //needs to be log author or cache owner
         return !StringUtils.isBlank(logEntry.serviceLogId) &&
-                (logEntry.author.equalsIgnoreCase(getUserName()) || cache.getOwnerUserId().equals(getUserName()));
+            logEntry.author.equalsIgnoreCase(getUserName()) || cache.getOwnerUserId().equals(getUserName());
     }
 
     @Override
@@ -656,12 +656,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Nullable
     public String getCreateAccountUrl() {
         return "https://www.geocaching.com/account/register";
-    }
-
-    @Override
-    @Nullable
-    public String geMyAccountUrl() {
-        return "https://www.geocaching.com/my/default.aspx";
     }
 
     @Override

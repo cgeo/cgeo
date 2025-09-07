@@ -5,26 +5,18 @@ import cgeo.geocaching.utils.Log;
 public class TranslateAccessor {
 
     private static final ITranslateAccessor INSTANCE;
-    private static final boolean DO_TEST = false;
 
     static {
         ITranslateAccessor instance = null;
-        if (DO_TEST) {
-            instance = new DevTranslateAccessor();
-        } else {
-            try {
-                final Class<ITranslateAccessor> mlkitClass = (Class<ITranslateAccessor>)
-                        Class.forName("cgeo.geocaching.utils.offlinetranslate.MLKitTranslateAccessor");
-                if (mlkitClass != null) {
-                    instance = mlkitClass.newInstance();
-                    Log.iForce("TranslateAccessor: MLKit instance created");
-                } else {
-                    Log.iForce("TranslateAccessor: MLKit class not found");
-                }
-            } catch (Exception re) {
-                //mlkit not found
-                Log.iForce("TranslateAccessor: Could not find MLKit");
+        try {
+            final Class<ITranslateAccessor> mlkitClass = (Class<ITranslateAccessor>)
+                    Class.forName("cgeo.geocaching.utils.offlinetranslate.MLKitTranslateAccessor");
+            if (mlkitClass != null) {
+                instance = mlkitClass.newInstance();
             }
+        } catch (Exception re) {
+            //mlkit not found
+            Log.iForce("TranslateAccessor: Could not find MLKit");
         }
         INSTANCE = instance == null ? new NoopTranslateAccessor() : instance;
     }

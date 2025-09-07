@@ -110,7 +110,6 @@ public class WherigoGame implements UI {
             // not really important
             Log.d(LOG_PRAEFIX + "unable to set name/platform for OpenWIG", e);
         }
-
     }
 
     public int addListener(final Consumer<NotifyType> listener) {
@@ -170,7 +169,6 @@ public class WherigoGame implements UI {
             } else {
                 engine.start();
             }
-
         } catch (IOException ie) {
             Log.e(LOG_PRAEFIX + "Problem", ie);
         }

@@ -71,7 +71,7 @@ public class ElevationChart {
         }
     }
 
-    public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils, final Runnable onDelete) {
+    public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils) {
         if (chart == null) {
             return;
         }
@@ -110,7 +110,7 @@ public class ElevationChart {
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.map_routetrack_context);
             RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true);
-            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, onDelete));
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, null));
             MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu());
         }
 
@@ -119,7 +119,7 @@ public class ElevationChart {
             collectData(route);
             formatChart(res);
             chart.invalidate();
-            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
+            toolbar.setTitle(route.getName().isEmpty() ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
             geoItemLayer.remove(ELEVATIONCHART_MARKER);
         }
     }
@@ -155,7 +155,7 @@ public class ElevationChart {
     private void formatChart(final Resources res) {
         chart.setData(null);
         if (!entries.isEmpty()) {
-            final LineDataSet dataSet = new LineDataSet(entries, "");
+            final LineDataSet dataSet = new LineDataSet(entries, null);
             dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);

@@ -61,7 +61,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             @Override
             public boolean onSingleTapUp(final @NonNull MotionEvent event) {
                 final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), false);
+                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
                 return true;
             }
 
@@ -69,7 +69,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             public void onLongPress(final @NonNull MotionEvent event) {
                 if (!mapIsCurrentlyMoving) {
                     final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getRawX(), (int) event.getRawY(), true);
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
                 }
             }
         });
@@ -135,6 +135,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
         });
+
+        adaptLayoutForActionBar(true);
 
         initLayers();
         onMapReadyTasks.run();

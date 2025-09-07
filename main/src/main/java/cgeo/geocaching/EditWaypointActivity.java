@@ -28,7 +28,7 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -77,7 +77,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinateInputDialog.CoordinateUpdate {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -570,15 +570,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
             cid.setCalculatedCoordinate(cc);
 
-            CoordinateInputDialog.show(EditWaypointActivity.this, this::onCoordinatesUpdated, cid);
-        }
-        private void onCoordinatesUpdated(@Nullable final Geopoint gp) {
-            // Arrives here from the new coordinate dialog either for a standard waypoint
-            // or a calculated one that has been converted to plain coordinates, in which case we need to clear the state
-            calcStateString = null;
-            updateCoordinates(gp);
+            CoordinatesInputDialog.show(getSupportFragmentManager(), cid);
         }
     }
+
     @Override
     public void updateCoordinates(@Nullable final Geopoint gp) {
         //this method is supposed to update the "base" / "preprojected" coordinate
@@ -598,6 +593,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             this.calcStateString = coordinateInputData.getCalculatedCoordinate().toConfig();
         }
         updateCoordinates(coordinateInputData.getGeopoint());
+    }
+
+    @Override
+    public boolean supportsNullCoordinates() {
+        return true;
     }
 
     /**

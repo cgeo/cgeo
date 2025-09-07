@@ -20,7 +20,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.annotation.SuppressLint;
@@ -84,7 +83,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS);
 
-        this.wherigoListenerId = WherigoGame.get().addListener(this::refreshGui);
+        this.wherigoListenerId = WherigoGame.get().addListener(type -> refreshGui());
         this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui());
 
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
@@ -92,7 +91,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         wherigoThingTypeModel = WherigoViewUtils.createThingTypeTable(this, binding.wherigoThingTypeList, thing -> WherigoViewUtils.displayThing(this, thing, false));
 
-        refreshGui(null);
+        refreshGui();
         refreshMusicGui();
 
         binding.viewCartridges.setOnClickListener(v -> startGame());
@@ -143,18 +142,15 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying());
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-        @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
         if (menuItem == R.id.menu_show_cartridge) {
             final WherigoCartridgeInfo info = WherigoGame.get().getCartridgeInfo();
             if (info != null) {
                 WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(info, true));
+            } else {
+                SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_player))
+                        .setMessage(TextParam.id(R.string.wherigo_no_game_running)).show();
             }
             return true;
         }
@@ -253,12 +249,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void refreshGui(final WherigoGame.NotifyType type) {
-
-        if (type == null || type == WherigoGame.NotifyType.START || type == WherigoGame.NotifyType.END) {
-            invalidateOptionsMenuCompatible();
-        }
-
+    private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
 
         WherigoViewUtils.updateThingTypeTable(wherigoThingTypeModel, binding.wherigoThingTypeList);
@@ -310,6 +301,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public final void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public final void onResume() {
+        super.onResume();
     }
 
     @Override

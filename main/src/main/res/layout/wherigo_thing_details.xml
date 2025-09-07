@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -36,15 +35,6 @@
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
                 android:autoLink="web" />
-
-            <!-- External Translation -->
-            <Button
-                android:id="@+id/translation_external"
-                style="@style/button_icon_with_text"
-                app:icon="@drawable/ic_menu_translate"
-                android:layout_gravity="right"
-                android:visibility="gone"
-                />
 
             <LinearLayout
                 android:id="@+id/debug_box"

@@ -78,8 +78,7 @@ public class SimpleItemListModel<T> {
         private Function<T, G> groupMapper = null;
         private Function<G, G> groupGroupMapper = null;
 
-        private Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper = constructGroupDisplayViewMapper((ig) -> TextParam.text(ig == null || ig.getGroup() == null ? "-" : ig.getGroup().toString()));
-            //(group, itemGroup, context, view, parent) -> null;
+        private Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper = (group, itemGroup, context, view, parent) -> null;
         private Function<ItemGroup<T, G>, ImageParam> groupDisplayIconMapper = (ig) -> null;
         private Comparator<Object> itemGroupComparator = null;
         private Comparator<G> groupComparator = null;
@@ -522,10 +521,6 @@ public class SimpleItemListModel<T> {
 
     public Consumer<T> getActionListener() {
         return this.actionListener;
-    }
-
-    public void triggerRepaint() {
-        triggerChange(ChangeType.COMPLETE);
     }
 
     private void triggerChange(final ChangeType mode) {

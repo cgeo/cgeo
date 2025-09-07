@@ -30,7 +30,6 @@ import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
@@ -40,11 +39,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
@@ -63,19 +57,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
-    private Insets currentWindowInsets;
-
     private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
 
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
     }
-
-    // edge2edge parametrization, see configureEdge2Edge()
-    private static final int DEFAULT_INSETS =
-            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
-    //private int addInsets = 0;
-    //private boolean skipActionBarInsetCalculation = false;
 
     public void setUpNavigationEnabled(final boolean enabled) {
         final ActionBar actionBar = getSupportActionBar();
@@ -142,76 +128,13 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e(e.toString());
             throw e;
         }
-
+        onCreateCommon();
         this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 finish();
             }
         });
-
-        try {
-            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        } catch (final AndroidRuntimeException ex) {
-            Log.e("Error requesting indeterminate progress", ex);
-        }
-
-        // initialize commonly used members
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
-        ActivityMixin.onCreate(this, false);
-        initEdgeToEdge();
-    }
-
-    private void initEdgeToEdge() {
-        final Window currentWindow = getWindow();
-        //enable edge-to-edge downward-compatible
-        WindowCompat.enableEdgeToEdge(currentWindow);
-        //set window behaviour
-        final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
-        windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
-        //apply edge2edge to activity content view
-        ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
-            final View activityContent = v.findViewById(R.id.activity_content);
-            if (activityContent == null) {
-                Log.w("edge2edge: activityContent not found in " + this);
-            } else {
-                //calculate and set the activity_content's insets
-                this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
-                //trigger insets recalculation
-                refreshActivityContentInsets();
-            }
-            return windowInsets;
-        });
-    }
-
-    /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */
-    protected void refreshActivityContentInsets() {
-        if (this.currentWindowInsets == null) {
-            //method was called before insets were set
-            return;
-        }
-        final View activityContent = getWindow() == null || getWindow().getDecorView() == null ? null :
-            getWindow().getDecorView().findViewById(R.id.activity_content);
-        if (activityContent == null) {
-            return;
-        }
-
-        //let subclasses modify insets according to their needs
-        final Insets insets = calculateInsetsForActivityContent(this.currentWindowInsets);
-        //apply final insets to activity content
-        activityContent.setPadding(
-                insets.left < 0 ? this.currentWindowInsets.left : insets.left,
-                insets.top < 0 ? this.currentWindowInsets.top : insets.top,
-                insets.right < 0 ? this.currentWindowInsets.right : insets.right,
-                insets.bottom < 0 ? this.currentWindowInsets.bottom : insets.bottom);
-
-    }
-
-    /** Overwrite to manipulate edge-2-edge-insets for activitycontent in subclasses */
-    @NonNull
-    protected Insets calculateInsetsForActivityContent(@NonNull final Insets insets) {
-        return insets;
     }
 
     public void clearBackStack() {
@@ -231,6 +154,28 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         Log.v(logToken + ".setThemeAndContentView(resourceLayoutId=" + resourceLayoutID + ", isDialog= " + isDialog + ")");
         ActivityMixin.setTheme(this, isDialog);
         setContentView(resourceLayoutID);
+
+    }
+
+    /**
+     * Common actions for all onCreate functions.
+     */
+    private void onCreateCommon() {
+        try {
+            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting indeterminate progress", ex);
+        }
+        initializeCommonFields();
+    }
+
+    private void initializeCommonFields() {
+
+        // initialize commonly used members
+        res = this.getResources();
+        app = (CgeoApplication) this.getApplication();
+
+        ActivityMixin.onCreate(this, false);
     }
 
     @Override

@@ -44,7 +44,19 @@ public class ListenerHelper<T> {
 
     public Disposable addListenerWithDisposable(final T listener) {
         final int id = addListener(listener);
-        return new SimpleDisposable(() -> removeListener(id));
+        return new Disposable() {
+            boolean disposed = false;
+            @Override
+            public void dispose() {
+                removeListener(id);
+                disposed = true;
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return disposed;
+            }
+        };
     }
 
     public void removeListener(final T listener) {
@@ -53,6 +65,15 @@ public class ListenerHelper<T> {
             listeners.values().remove(listener);
         } finally {
             lock.writeLock().unlock();
+        }
+    }
+
+    public int size() {
+        lock.readLock().lock();
+        try {
+            return listeners.size();
+        } finally {
+            lock.readLock().unlock();
         }
     }
 
@@ -100,6 +121,6 @@ public class ListenerHelper<T> {
     @NonNull
     @Override
     public String toString() {
-        return "ListenerHelper<" + listeners.size() + ">";
+        return "ListenerHelper: " + listeners.size() + " registered";
     }
 }

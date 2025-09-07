@@ -70,11 +70,6 @@
             android:entries="@array/init_date_format_values"
             android:entryValues="@array/pref_values_short_date_format"
             app:iconSpaceReserved="false" />
-        <ListPreference
-            android:key="@string/pref_translator_external"
-            android:title="@string/init_translator_external"
-            android:summary="@string/init_translator_external_description"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

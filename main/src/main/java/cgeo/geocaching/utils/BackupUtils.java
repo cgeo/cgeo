@@ -302,16 +302,8 @@ public class BackupUtils {
 
         if (database) {
             AndroidRxUtils.andThenOnUi(Schedulers.io(),
-                    () -> {
-                        final Folder trackfilesBackupDir = Folder.fromFolder(backupDir, TRACKS_SUBFOLDER);
-                        final Folder trackfilesDir = Folder.fromFile(LocalStorage.getTrackfilesDir());
-                        if (0 < FolderUtils.get().getFolderInfo(trackfilesBackupDir).fileCount) {
-                            FolderUtils.get().deleteAll(trackfilesDir);
-                            FolderUtils.get().copyAll(trackfilesBackupDir, trackfilesDir, false);
-                        }
-                    },
-                    () -> restoreDatabaseInternal(backupDir, consumer)
-            );
+                () -> FolderUtils.get().copyAll(Folder.fromFolder(backupDir, TRACKS_SUBFOLDER), Folder.fromFile(LocalStorage.getTrackfilesDir()), false),
+                () -> restoreDatabaseInternal(backupDir, consumer));
         } else {
             consumer.accept("");
         }

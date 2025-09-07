@@ -48,12 +48,8 @@ public class DebugUtils {
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
-        askUserToReportProblem(context, errorMsg, true);
-    }
-
-    public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg, final boolean showErrorTextIfAvailable) {
         final StringBuilder message = new StringBuilder();
-        if (showErrorTextIfAvailable && errorMsg != null) {
+        if (errorMsg != null) {
             message.append(context.getString(R.string.debug_user_error_errortext)).append("\n[")
                     .append(errorMsg).append("]\n\n");
             Log.w("User was asked to report problem: " + errorMsg);

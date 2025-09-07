@@ -36,7 +36,7 @@ import java.util.Objects;
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 
 
-public final class LuaTableImpl implements LuaTable {
+public class LuaTableImpl implements LuaTable {
     private boolean weakKeys, weakValues;
 
     // Hash part
@@ -308,7 +308,7 @@ public final class LuaTableImpl implements LuaTable {
 
     private LuaTable metatable;
 
-    public final void rawset(Object key, Object value) {
+    public void rawset(Object key, Object value) {
         checkKey(key);
         rawsetHash(key, value);
     }

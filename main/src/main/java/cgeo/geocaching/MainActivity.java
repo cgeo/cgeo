@@ -43,11 +43,11 @@ import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
@@ -193,9 +193,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                         final TextView userName = connectorInfo.findViewById(R.id.item_title);
                                         final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
                                         userName.setText(p.second);
-                                        userName.setOnClickListener(v -> {
-                                            ShareUtils.openUrl(getContext(), conn.geMyAccountUrl());
-                                        });
                                         final String userFoundCount = p.first.toString();
                                         if (userFoundCount.isEmpty()) {
                                             userFounds.setVisibility(View.GONE);
@@ -205,11 +202,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             userFounds.setOnClickListener(v -> {
                                                 activity.startActivity(CacheListActivity.getHistoryIntent(activity));
                                                 ActivityMixin.overrideTransitionToFade(activity);
-                                            });
-                                            userFounds.setOnLongClickListener(v -> {
-                                                getContext().startActivity(CacheListActivity.getHistoryIntent(activity, conn));
-                                                ActivityMixin.overrideTransitionToFade(activity);
-                                                return true;
                                             });
                                         }
                                     });
@@ -532,7 +524,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
         } else if (id == R.id.menu_download_language) {
-            TranslatorUtils.downloadLanguageModels(this);
+            OfflineTranslateUtils.downloadLanguageModels(this);
         } else if (id == R.id.menu_delete_offline_data) {
             DownloaderUtils.deleteOfflineData(this);
         } else if (id == R.id.menu_pending_downloads) {

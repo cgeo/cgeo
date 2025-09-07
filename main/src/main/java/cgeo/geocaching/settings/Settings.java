@@ -49,7 +49,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -85,7 +84,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -1057,10 +1055,6 @@ public class Settings {
         return getBoolean(R.string.pref_livelist, true);
     }
 
-    public static boolean useLiveCompassInNavigationAction() {
-        return getBoolean(R.string.pref_live_compass_in_navigation_action, false);
-    }
-
     public static boolean isTrackableAutoVisit() {
         return getBoolean(R.string.pref_trackautovisit, false);
     }
@@ -1990,14 +1984,6 @@ public class Settings {
         return getBoolean(R.string.pref_hideVisitedWaypoints, false);
     }
 
-    public static void setHideCompletedVariables(final boolean hideCompletedVariables) {
-        putBoolean(R.string.pref_hideCompletedVariables, hideCompletedVariables);
-    }
-
-    public static boolean getHideCompletedVariables() {
-        return getBoolean(R.string.pref_hideCompletedVariables, false);
-    }
-
     public static String getECIconSet() {
         return getString(R.string.pref_ec_icons, "1");
     }
@@ -2599,11 +2585,6 @@ public class Settings {
         return getString(R.string.pref_short_date_format, "");
     }
 
-    public static TranslationUtils.Translator getTranslatorExternal() {
-        return EnumUtils.getEnum(TranslationUtils.Translator.class, getString(R.string.pref_translator_external, null),
-                TranslationUtils.Translator.GOOGLE_TRANSLATE_APP);
-    }
-
     public static OfflineTranslateUtils.Language getTranslationTargetLanguageRaw() {
         final String lngCode = getString(R.string.pref_translation_language, null);
         if (lngCode == null) {
@@ -2613,10 +2594,6 @@ public class Settings {
             return new OfflineTranslateUtils.Language(lngCode);
         }
         return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
-    }
-
-    public static String getTranslationTargetLanguageCode() {
-        return getString(R.string.pref_translation_language, null);
     }
 
     public static OfflineTranslateUtils.Language getApplicationLanguage() {

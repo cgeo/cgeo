@@ -80,7 +80,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.imageedit_activity);
-        binding = ImageeditActivityBinding.bind(findViewById(R.id.activity_content));
+        binding = ImageeditActivityBinding.bind(findViewById(R.id.imageselect_activity_viewroot));
 
         imageScale.setSpinner(findViewById(R.id.logImageScale))
                 .setValues(Arrays.asList(ArrayUtils.toObject(getResources().getIntArray(R.array.log_image_scale_values))))

@@ -60,7 +60,7 @@ public class NavigationLayer extends Layer {
 
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-        final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords, null);
+        final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
         Geopoint point = routingPoints[0];
         final Path path = AndroidGraphicFactory.INSTANCE.createPath();
         path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));

@@ -200,6 +200,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             setClickListener(binding.website, "https://www.cgeo.org/");
             setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
+            setClickListener(binding.twitter, "https://twitter.com/android_gc");
             setClickListener(binding.nutshellmanual, getString(R.string.manual_link_full));
             setClickListener(binding.faq, getString(R.string.faq_link_full));
             setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");

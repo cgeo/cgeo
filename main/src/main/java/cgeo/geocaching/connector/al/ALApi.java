@@ -384,7 +384,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints(cache,  (ArrayNode) response.path("GeocacheSummaries")));
+            parseWaypoints(cache, (ArrayNode) response.path("GeocacheSummaries"));
             final boolean isLinear = response.get("IsLinear").asBoolean();
             cache.setAlcMode(isLinear ? 1 : 0);
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
@@ -400,9 +400,11 @@ final class ALApi {
         }
     }
 
-    @NonNull
-    private static List<Waypoint> parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
-        final List<Waypoint> result = new ArrayList<>(5);
+    @Nullable
+    private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
+        // refresh into new list
+        cache.setWaypoints(new ArrayList<>(5));
+
         final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
@@ -424,12 +426,10 @@ final class ALApi {
                         .setUrl(ilink)
                         .setTitle(wptName)
                         .setDescription(desc)
-                        //.setCategory(Image.ImageCategory.STAGE)
+                        .setCategory(Image.ImageCategory.STAGE)
                         .build();
 
                 wptImages.add(spoilerImage);
-
-                // todo: cache image so src can point to local image instead of URI
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
 
@@ -461,15 +461,11 @@ final class ALApi {
                     wpt.setOriginalCoordsEmpty(true);
                 }
 
-                result.add(wpt);
+                cache.getWaypoints().add(wpt);
             } catch (final NullPointerException e) {
                 Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
-
-        cache.setSpoilers(wptImages);
-
-        return result;
     }
 
     @Nullable

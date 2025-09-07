@@ -207,7 +207,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.downloader_activity);
-        binding = DownloaderActivityBinding.bind(findViewById(R.id.activity_content));
+        binding = DownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
 
         int fixedDownloadType = 0;
         final Intent intent = getIntent();

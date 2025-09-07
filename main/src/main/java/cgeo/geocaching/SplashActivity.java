@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -13,7 +12,9 @@ import cgeo.geocaching.utils.TextUtils;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class SplashActivity extends AbstractActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

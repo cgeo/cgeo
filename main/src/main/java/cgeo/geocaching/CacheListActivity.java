@@ -17,8 +17,6 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -33,9 +31,7 @@ import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
@@ -89,11 +85,11 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -148,7 +144,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
-    private static final int REQUEST_CODE_LOG = 1001;
     private static final int REQUEST_CODE_IMPORT_PQ = 10003;
     private static final int REQUEST_CODE_IMPORT_BOOKMARK = 10004;
 
@@ -390,7 +385,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-        setContentView(R.layout.cacheslist_activity);
+        HideActionBarUtils.setContentView(this, R.layout.cacheslist_activity, false);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -619,16 +614,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely, checkedCount);
 
-            //MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, true, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_bookmarklist, R.string.caches_upload_bookmarklist_selected, R.string.caches_upload_bookmarklist_all, checkedCount);
-
-            MenuUtils.setVisible(menu, R.id.menu_watch_management, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()));
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_watch_all, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()), WatchListUtils.anySupportsWatching(adapter.getCheckedOrAllCaches()));
-            setMenuItemLabel(menu, R.id.menu_watch_all, R.string.caches_watch_selected, R.string.caches_watch_all, checkedCount);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_unwatch_all, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()), WatchListUtils.anySupportsUnwatching(adapter.getCheckedOrAllCaches()));
-            setMenuItemLabel(menu, R.id.menu_unwatch_all, R.string.caches_unwatch_selected, R.string.caches_unwatch_all, checkedCount);
-
             MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
@@ -849,10 +836,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }.execute();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
-        } else if (menuItem == R.id.menu_watch_all) {
-            WatchListUtils.watchAll(this, adapter.getCheckedOrAllCaches());
-        } else if (menuItem == R.id.menu_unwatch_all) {
-            WatchListUtils.unwatchAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
             EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
@@ -1252,11 +1235,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             setAndRefreshFilterForOnlineSearch(data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT));
-        } else if (requestCode == REQUEST_CODE_LOG && resultCode == Activity.RESULT_OK && data != null) {
-            final View navBar = findViewById(R.id.activity_navigationBar);
-            final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
-
-            ShareUtils.showLogPostedSnackbar(this, data, isNavBarVisible ? navBar : null);
         }
     }
 
@@ -1674,13 +1652,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return Intents.putListType(new Intent(context, CacheListActivity.class), CacheListType.HISTORY);
     }
 
-    public static Intent getHistoryIntent(final Context context, @NonNull final IConnector connector) {
-        final Intent historyIntent = new Intent(context, CacheListActivity.class);
-        Intents.putListType(historyIntent, CacheListType.HISTORY);
-        historyIntent.putExtra(Intents.EXTRA_CONNECTOR, connector.getName());
-        return historyIntent;
-    }
-
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(addressIntent, CacheListType.ADDRESS);
@@ -1825,19 +1796,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = res.getString(R.string.caches_history);
                     listId = PseudoList.HISTORY_LIST.id;
                     markerId = EmojiUtils.NO_EMOJI;
-
-                    final GeocacheFilter offlineFilter;
-                    final String connectorName = extras.getString(Intents.EXTRA_CONNECTOR);
-                    if (null == connectorName) {
-                        offlineFilter = currentCacheFilter.get();
-                    } else {
-                        final IConnector connector = ConnectorFactory.getConnectorByName(connectorName);
-                        final OriginGeocacheFilter connectorAddFilter = GeocacheFilterType.ORIGIN.create();
-                        connectorAddFilter.setValues(Collections.singletonList(connector));
-                        offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
-                    }
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
-
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
                     break;
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);
