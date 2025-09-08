@@ -526,7 +526,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.8.0'
+    implementation 'androidx.browser:browser:1.9.0'
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
