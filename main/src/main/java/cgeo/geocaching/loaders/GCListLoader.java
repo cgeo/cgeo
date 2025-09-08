@@ -10,21 +10,21 @@ import android.app.Activity;
 
 import java.util.List;
 
-public class PocketGeocacheListLoader extends AbstractSearchLoader {
-    private final List<GCList> pocketQueries;
+public class GCListLoader extends AbstractSearchLoader {
+    private final List<GCList> gcLists;
 
-    public PocketGeocacheListLoader(final Activity activity, final List<GCList> pocketQueries) {
+    public GCListLoader(final Activity activity, final List<GCList> gcLists) {
         super(activity);
-        this.pocketQueries = pocketQueries;
+        this.gcLists = gcLists;
     }
 
     @Override
     public SearchResult runSearch() {
         if (Settings.isGCConnectorActive()) {
             final SearchResult combinedResult = new SearchResult();
-            for (final GCList pocketQuery : pocketQueries) {
-                if (!pocketQuery.isBookmarkList()) {
-                    final SearchResult pqResult = GCParser.searchByPocketQuery(GCConnector.getInstance(), pocketQuery.getShortGuid(), pocketQuery.getPqHash());
+            for (final GCList gcList : gcLists) {
+                if (!gcList.isBookmarkList()) {
+                    final SearchResult pqResult = GCParser.searchByPocketQuery(GCConnector.getInstance(), gcList.getShortGuid(), gcList.getPqHash());
                     combinedResult.addSearchResult(pqResult);
                 }
             }
