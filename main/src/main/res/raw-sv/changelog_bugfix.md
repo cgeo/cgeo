@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
+- Fix: Krasch vid sökning på nyckelord
+- Fix: Krasch i kartan
 
 ##
 - Fix: Kryptera/dekryptera en ledtråd behöver ett extra tryck initialt
