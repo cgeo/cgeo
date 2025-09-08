@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
+- Oplossing: Crash in trefwoord zoeken
+- Oplossing: Crash op kaart
 
 ##
 - Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
