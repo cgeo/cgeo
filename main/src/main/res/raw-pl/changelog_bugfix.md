@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
+- Naprawiono: Awaria podczas wyszukiwania słów kluczowych
+- Naprawiono: Awaria na mapie
 
 ##
 - Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
