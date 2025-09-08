@@ -146,6 +146,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -1776,6 +1777,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return Page.DESCRIPTION.id;
         }
 
+        @SuppressLint("ClickableViewAccessibility") // for binding.hint onTouchListener
         @Override
         // splitting up that method would not help improve readability
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
@@ -1864,13 +1866,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 if (Settings.getHintAsRot13()) {
                     binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
                 }
+                // see #17399 and https://stackoverflow.com/questions/22653641/using-onclick-on-textview-with-selectable-text-how-to-avoid-double-click
+                binding.hint.setOnTouchListener((v, event) -> {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        v.requestFocus();
+                    }
+                    return false;
+                });
                 final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
                 binding.hint.setOnClickListener(decryptListener);
                 binding.hint.setClickable(true);
-                binding.hint.setOnLongClickListener(v -> {
-                    ShareUtils.sharePlainText(activity, binding.hint.getText().toString());
-                    return true;
-                });
                 binding.hintBox.setOnClickListener(decryptListener);
                 binding.hintBox.setClickable(true);
                 binding.hintBox.setOnLongClickListener(v -> {
