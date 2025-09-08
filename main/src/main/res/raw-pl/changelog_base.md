@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Nowość: Optymalizacja trasy buforuje obliczone dane
@@ -31,4 +31,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - Nowość: Usuń osierocone pliki ścieżek przy czyszczeniu i przywracaniu kopii zapasowej
 - Nowość: Ostrzeżenie przy próbie dodania zbyt wielu skrytek do zakładek
 - Nowość: Funkcje listy obserwowanej/nieobserwowanej
-- New: Offer offline translation with Google Translate or DeepL apps (if installed)
+- Nowość: Oferuj tłumaczenie offline z aplikacjami Google Translate lub DeepL (jeśli zainstalowane)
