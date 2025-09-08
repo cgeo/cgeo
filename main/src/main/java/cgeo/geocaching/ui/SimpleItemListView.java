@@ -288,10 +288,7 @@ public class SimpleItemListView extends LinearLayout {
                 holder.binding.itemRadiobutton.setEnabled(isEnabled);
 
                 holder.binding.getRoot().setClickable(isEnabled);
-                holder.binding.itemChecker.setClickable(isEnabled);
-                holder.binding.itemIcon.setClickable(isEnabled);
-                holder.binding.itemAction.setClickable(isEnabled);
-                ViewUtils.walkViewTree(holder.binding.itemViewAnchor, view -> {
+                ViewUtils.walkViewTree(holder.binding.getRoot(), view -> {
                         view.setClickable(isEnabled);
                         return true;
                     }, null);
