@@ -69,6 +69,12 @@
 
     <!-- actionbar -->
 
+    <style name="actionBarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="titleTextStyle">@style/action_bar_title</item>
+        <item name="android:textColorPrimary">@color/colorTextActionBar</item>
+        <item name="android:subtitleTextStyle">@style/action_bar_subtitle</item>
+    </style>
+
     <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
         <item name="android:textColor">@color/colorTextActionBar</item>

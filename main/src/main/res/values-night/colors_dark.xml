@@ -10,7 +10,7 @@
 
     <color name="colorTextHeadline">#88FFFFFF</color>
     <color name="colorTextHintActionBar">@color/colorTextHint</color>
-    <color name="colorIconActionBar">#FFE3E3E3</color>
+    <color name="colorTextActionBar">#FFE3E3E3</color>
     <color name="colorIconMenu">#FFE4E4E4</color>
 
     <color name="colorBackground">#FF000000</color>
