@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
+- Correcció: Error en la cerca de paraules clau
+- Correcció: Error al mapa
 
 ##
 - Correcció: Xifrar/desxifrar una pista requereix un toc addicional inicialment
