@@ -43,6 +43,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
     @StringRes protected int title;
     @StringRes protected int progressInfo;
     @StringRes protected int errorReadingList;
+    @StringRes protected int warnNoSelectedList;
     @StringRes protected int switchLabel;
 
     abstract boolean getFiltersetting();
@@ -144,7 +145,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     public void returnResult(final GCList pocketQuery) {
         setResult(RESULT_OK, new Intent()
-                .setDataAndType(pocketQuery.getUri(), pocketQuery.isBookmarkList() ? "application/xml" : "application/zip"));
+                .setDataAndType(pocketQuery.getUri(), pocketQuery.getMimeType()));
         finish();
     }
 

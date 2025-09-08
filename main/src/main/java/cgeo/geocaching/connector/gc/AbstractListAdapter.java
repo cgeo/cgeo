@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
+
 import org.apache.commons.lang3.StringUtils;
+
 
 class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewHolder> {
 
@@ -44,14 +47,15 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gclist_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.binding.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(view1.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition())));
+
+        viewHolder.binding.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(view1.getContext(), Collections.singletonList(activity.getQueries().get(viewHolder.getAdapterPosition()))));
         viewHolder.binding.download.setOnClickListener(v -> {
             final GCList pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
             PocketQueryHistory.updateLastDownload(pocketQuery);
             notifyDataSetChanged();
 
             if (activity.getStartDownload()) {
-                CacheListActivity.startActivityPocketDownload(view.getContext(), pocketQuery);
+                CacheListActivity.startActivityPocketDownload(view.getContext(), Collections.singletonList(pocketQuery));
             } else {
                 activity.returnResult(pocketQuery);
             }
