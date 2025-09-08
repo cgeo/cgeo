@@ -43,13 +43,13 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
+import cgeo.geocaching.loaders.GCListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.LiveFilterGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
-import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.SearchFilterGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LoggingUI;
@@ -1899,7 +1899,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     final List<GCList> cachesLists = extras.getParcelableArrayList(Intents.EXTRA_POCKET_LIST);
                     title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new PocketGeocacheListLoader(this, cachesLists);
+                    loader = new GCListLoader(this, cachesLists);
                     break;
                 default:
                     //can never happen, makes Codacy happy

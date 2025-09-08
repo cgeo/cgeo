@@ -32,8 +32,8 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
-    @NonNull private final List<GCList> allPocketQueries = new ArrayList<>();
-    @NonNull private final List<GCList> pocketQueries = new ArrayList<>();
+    @NonNull private final List<GCList> allGCLists = new ArrayList<>();
+    @NonNull private final List<GCList> visibleGCLists = new ArrayList<>();
 
     private boolean filteredList = false;
     private final boolean fixed = false;
@@ -117,10 +117,10 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
                 ActivityMixin.showToast(AbstractListActivity.this, errorReadingList);
                 return; // do not flood the user with multiple toasts
             }
-            allPocketQueries.addAll(list);
+            allGCLists.addAll(list);
         }, () -> {
-            Collections.sort(allPocketQueries, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
-            if (CollectionUtils.isEmpty(allPocketQueries)) {
+            Collections.sort(allGCLists, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
+            if (CollectionUtils.isEmpty(allGCLists)) {
                 ActivityMixin.showToast(AbstractListActivity.this, getString(R.string.warn_no_pocket_query_found));
                 finish();
             }
@@ -133,15 +133,15 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
     }
 
     private void fillAdapter(final AbstractListAdapter adapter) {
-        pocketQueries.clear();
+        visibleGCLists.clear();
         if (!filteredList) {
-            for (final GCList pq : allPocketQueries) {
+            for (final GCList pq : allGCLists) {
                 if (alwaysShow(pq)) {
-                    pocketQueries.add(pq);
+                    visibleGCLists.add(pq);
                 }
             }
         } else {
-            pocketQueries.addAll(allPocketQueries);
+            visibleGCLists.addAll(allGCLists);
         }
         adapter.notifyDataSetChanged();
     }
@@ -153,16 +153,16 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
     }
 
     public List<GCList> getQueries() {
-        return pocketQueries;
+        return visibleGCLists;
     }
 
     public boolean getStartDownload() {
         return startDownload;
     }
 
-    public void returnResult(final GCList pocketQuery) {
+    public void returnResult(final GCList gcList) {
         setResult(RESULT_OK, new Intent()
-                .setDataAndType(pocketQuery.getUri(), pocketQuery.getMimeType()));
+                .setDataAndType(gcList.getUri(), gcList.getMimeType()));
         finish();
     }
 
