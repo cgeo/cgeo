@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
@@ -55,6 +56,8 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     abstract boolean alwaysShow(GCList list);
 
+    abstract boolean hasPreview();
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +88,20 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
                 switchCompat.setVisibility(View.INVISIBLE);
                 switchCompat.setChecked(!getFiltersetting());
                 switchCompat.setOnCheckedChangeListener((a, b) -> checkSwitchState(adapter));
+
+                customView.findViewById(R.id.download_selected).setOnClickListener(v -> {
+                    final List<GCList> selectedLists = adapter.getSelectedLists();
+                    if (!selectedLists.isEmpty()) {
+                        CacheListActivity.startActivityPocketDownload(customView.getContext(), selectedLists);
+                    }
+                });
+                customView.findViewById(R.id.cachelist_selected).setOnClickListener(v -> {
+                    final List<GCList> selectedLists = adapter.getSelectedLists();
+                    if (!selectedLists.isEmpty()) {
+                        CacheListActivity.startActivityPocket(customView.getContext(), selectedLists);
+                    }
+                });
+
             }
         }
 
