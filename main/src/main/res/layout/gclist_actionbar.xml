@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +21,37 @@
         android:textColor="@color/colorTextActionBar"
         android:text="@string/menu_lists_pocket_queries"
         tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
+
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/download_selected"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_save"
+            app:iconTint="@color/colorTextActionBar"
+            android:background="@android:color/transparent"
+            android:text="@null"
+            android:visibility="gone"
+            tools:visibility="gone"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/cachelist_selected"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_search"
+            app:iconTint="@color/colorTextActionBar"
+            android:background="@android:color/transparent"
+            android:text="@null"
+            android:visibility="gone"
+            tools:visibility="gone"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchAB"

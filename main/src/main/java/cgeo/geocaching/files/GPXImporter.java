@@ -1,8 +1,10 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -15,6 +17,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -141,9 +144,16 @@ public class GPXImporter {
      */
     public void importGPX() {
         final Intent intent = fromActivity.getIntent();
-        final Uri uri = intent.getData();
-        final String mimeType = intent.getType();
-        importGPX(uri, mimeType, null);
+
+        final Bundle extras = intent.getExtras();
+        if (extras != null) {
+            final List<GCList> pqList = intent.getExtras().getParcelableArrayList(Intents.EXTRA_POCKET_LIST);
+            if (pqList != null && !pqList.isEmpty()) {
+                for (final GCList pq : pqList) {
+                    importGPX(pq.getUri(), pq.getMimeType(), null);
+                }
+            }
+        }
     }
 
     private static final class ProgressHandler extends DisposableHandler {

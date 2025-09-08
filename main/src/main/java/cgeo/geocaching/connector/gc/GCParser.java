@@ -123,22 +123,24 @@ public final class GCParser {
         final JsonNode features = json.get("data").get("layer").get("features");
         for (int i = 0; i < features.size(); i++) {
             final JsonNode properties = features.get(i).get("properties");
-            final Geocache cache = new Geocache();
-            cache.setName(properties.get("name").asText());
-            cache.setGeocode(properties.get("key").asText());
-            cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
-            cache.setArchived(properties.get("archived").asBoolean());
-            cache.setDisabled(!properties.get("available").asBoolean());
-            cache.setCoords(new Geopoint(properties.get("lat").asDouble(), properties.get("lng").asDouble()));
-            final String icon = properties.get("icon").asText();
-            if ("MyHide".equals(icon)) {
-                cache.setOwnerUserId(Settings.getUserName());
-            } else if ("MyFind".equals(icon)) {
-                cache.setFound(true);
-            } else if (icon.startsWith("solved")) {
-                cache.setUserModifiedCoords(true);
+            if (properties != null) {
+                final Geocache cache = new Geocache();
+                cache.setName(properties.get("name").asText());
+                cache.setGeocode(properties.get("key").asText());
+                cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
+                cache.setArchived(properties.get("archived").asBoolean());
+                cache.setDisabled(!properties.get("available").asBoolean());
+                cache.setCoords(new Geopoint(properties.get("lat").asDouble(), properties.get("lng").asDouble()));
+                final String icon = properties.get("icon").asText();
+                if ("MyHide".equals(icon)) {
+                    cache.setOwnerUserId(Settings.getUserName());
+                } else if ("MyFind".equals(icon)) {
+                    cache.setFound(true);
+                } else if (icon.startsWith("solved")) {
+                    cache.setUserModifiedCoords(true);
+                }
+                caches.add(cache);
             }
-            caches.add(cache);
         }
 
         final SearchResult searchResult = new SearchResult();
@@ -706,7 +708,7 @@ public final class GCParser {
             searchResult = null;
         }
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.w("GCParser.searchByAny: No cache parsed");
+            Log.w("GCParser.searchByMap : No cache parsed");
             return searchResult;
         }
 
