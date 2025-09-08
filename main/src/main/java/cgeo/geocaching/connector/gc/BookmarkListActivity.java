@@ -37,4 +37,9 @@ public class BookmarkListActivity extends AbstractListActivity {
         return PocketQueryHistory.isNew(list);
     }
 
+    @Override
+    boolean hasPreview() {
+        // Currently, we aren't able to parse bookmark lists without download
+        return false;
+    }
 }

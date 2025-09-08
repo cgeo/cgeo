@@ -35,4 +35,9 @@ public class PocketQueryListActivity extends AbstractListActivity {
     boolean alwaysShow(final GCList list) {
         return list.isDownloadable();
     }
+
+    @Override
+    boolean hasPreview() {
+        return true;
+    }
 }

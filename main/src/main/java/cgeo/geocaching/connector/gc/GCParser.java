@@ -706,7 +706,7 @@ public final class GCParser {
             searchResult = null;
         }
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.w("GCParser.searchByAny: No cache parsed");
+            Log.w("GCParser.searchByMap : No cache parsed");
             return searchResult;
         }
 
