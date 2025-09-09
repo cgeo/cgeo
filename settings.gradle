@@ -9,9 +9,6 @@ plugins {
 // This can avoid problems with directory names like "cgeo pull request" containing blanks on CI.
 rootProject.name = "cgeo"
 
-// included sub projects
-include ':mapswithme-api'
-include ':organicmaps-api'
 include ':main'
 
 // Configure the built-in local build cache to a pre-defined directory.
