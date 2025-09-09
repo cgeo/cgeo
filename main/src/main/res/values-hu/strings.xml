@@ -179,7 +179,6 @@
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
