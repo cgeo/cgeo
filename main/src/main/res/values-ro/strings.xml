@@ -156,7 +156,6 @@
     <string name="log_image_titleprefix">Imagine</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Pagina de autentificare nu a putut fi parcursă</string>
