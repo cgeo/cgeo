@@ -1,9 +1,13 @@
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
+- Fix: Krasch vid sökning på nyckelord
+- Fix: Krasch i kartan
+
+##
+- Fix: Kryptera/dekryptera en ledtråd behöver ett extra tryck initialt
+- Fix: Wherigo kraschar vid läsning av gamla sparade spel
 - Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Fix: Saknar live-data-uppdatering för hittade & arkiverade cacher
+- Fix: Vägpunkter i offline-karta visas inte ibland
 
 ##
 - Fix: Unencrypted cache hints (website change)
@@ -23,6 +27,7 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 

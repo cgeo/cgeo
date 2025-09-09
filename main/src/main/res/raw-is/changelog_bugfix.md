@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Fix: Encrypting/decrypting a hint needs an extra tap initially
 - Fix: Wherigo crash on reading old saved games
 - Fix: Logging from within c:geo not remembered sometimes
@@ -23,6 +27,7 @@
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 

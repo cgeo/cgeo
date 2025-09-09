@@ -2469,7 +2469,7 @@ Nombre de archivo:%2$s</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
-    <string name="switch_off">apagado</string>
+    <string name="switch_off">Apagado</string>
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>

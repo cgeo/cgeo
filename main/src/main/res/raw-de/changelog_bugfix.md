@@ -1,4 +1,8 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+
+##
 - Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
 - Korrektur: Wherigo Absturz beim Lesen alter Spielstände
 - Korrektur: Fund-Log von innerhalb c:geo manchmal nicht gespeichert
@@ -23,6 +27,7 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
