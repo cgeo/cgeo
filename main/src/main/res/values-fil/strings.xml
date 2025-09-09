@@ -112,7 +112,6 @@
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Maaaring pumulya ang pagsasalin na may malaking halaga ng teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Okay</string>
     <string name="err_parse">Nabigong pag-login sa isang pahina ng parsing</string>
