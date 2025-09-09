@@ -179,7 +179,6 @@
     <string name="datetime_nodateset_display">未設定</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
