@@ -7,8 +7,7 @@ public enum CacheListApps {
 
     INTERNAL(new InternalCacheListMap()),
     LOCUS_SHOW(new LocusShowCacheListApp()),
-    LOCUS_EXPORT(new LocusExportCacheListApp()),
-    MAPS_ME(new MapsMeCacheListApp());
+    LOCUS_EXPORT(new LocusExportCacheListApp());
 
     private final CacheListApp app;
 

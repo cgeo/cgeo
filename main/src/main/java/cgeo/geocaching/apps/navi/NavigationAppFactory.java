@@ -9,8 +9,6 @@ import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationTransitApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
-import cgeo.geocaching.apps.navi.OruxMapsApp.OruxOfflineMapApp;
-import cgeo.geocaching.apps.navi.OruxMapsApp.OruxOnlineMapApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationWalkingApp;
 import cgeo.geocaching.location.Geopoint;
@@ -55,14 +53,6 @@ public final class NavigationAppFactory {
          */
         LOCUS(new LocusApp(), 4, R.string.pref_navigation_menu_locus),
         /**
-         * Other external map app (label included)
-         */
-        OTHER_MAP(new OtherMapsApp.OtherMapsAppWithLabel(), 6, R.string.pref_navigation_menu_other),
-        /**
-         * Other external map app (coordinates only)
-         */
-        OTHER_MAP_NOLABEL(new OtherMapsApp.OtherMapsAppWithoutLabel(), 27, R.string.pref_navigation_menu_other_nolabel),
-        /**
          * Google Navigation
          */
         GOOGLE_NAVIGATION(new GoogleNavigationDrivingApp(), 7, R.string.pref_navigation_menu_google_navigation),
@@ -70,26 +60,6 @@ public final class NavigationAppFactory {
          * Google Streetview
          */
         GOOGLE_STREETVIEW(new StreetviewApp(), 8, R.string.pref_navigation_menu_google_streetview),
-        /**
-         * The external OruxMaps app
-         */
-        ORUX_MAPS(new OruxOnlineMapApp(), 9, R.string.pref_navigation_menu_oruxmaps),
-        /**
-         * The external OruxMaps app
-         */
-        ORUX_MAPS_OFFLINE(new OruxOfflineMapApp(), 24, R.string.pref_navigation_menu_oruxmaps_offline),
-        /**
-         * The external Sygic app in walking mode
-         */
-        SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
-        /**
-         * The external Sygic app in driving mode
-         */
-        SYGIC_DRIVING(new SygicNavigationDrivingApp(), 23, R.string.pref_navigation_menu_sygic_driving),
-        /**
-         * The external OsmAnd app
-         */
-        OSM_AND(new OsmAndApp(), 26, R.string.pref_navigation_menu_osmand),
         /**
          * Google Navigation in walking mode
          */
@@ -107,10 +77,6 @@ public final class NavigationAppFactory {
          */
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
-        WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
-        PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
-        MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme),
-        ORGANICMAP(new OrganicMapsApp(), 29, R.string.pref_navigation_menu_organicmaps),
         CRUISER(new CruiserNavigationApp(), 28, R.string.pref_navigation_menu_cruiser);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {

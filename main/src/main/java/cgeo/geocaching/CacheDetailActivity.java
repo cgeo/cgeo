@@ -7,7 +7,6 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
-import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.command.AbstractCommand;
@@ -277,11 +276,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             guid = extras.getString(Intents.EXTRA_GUID);
             forceWaypointsPage = extras.getBoolean(EXTRA_FORCE_WAYPOINTSPAGE);
             forceEditPersonalNote = extras.getBoolean(EXTRA_EDIT_PERSONALNOTE);
-        }
-
-        // When clicking a cache in MapsWithMe, we get back a PendingIntent
-        if (StringUtils.isEmpty(geocode)) {
-            geocode = MapsMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
         }
 
         if (geocode == null && uri != null) {
