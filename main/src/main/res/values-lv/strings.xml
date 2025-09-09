@@ -144,7 +144,6 @@
     <string name="log_image_titleprefix">Attēls</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Tulkojums var neizdoties liela teksta apjoma dēļ.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
