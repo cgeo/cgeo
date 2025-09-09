@@ -197,7 +197,6 @@
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
