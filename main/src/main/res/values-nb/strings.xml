@@ -202,7 +202,6 @@
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
     <!-- External translation -->
-    <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
