@@ -144,7 +144,6 @@
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
