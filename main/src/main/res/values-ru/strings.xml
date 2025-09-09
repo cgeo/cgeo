@@ -221,7 +221,6 @@
     <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
     <string name="contact_multiple_matches">Контакт: Несколько совпадений</string>
     <!-- External translation -->
-    <string name="translate_length_warning">Перевод может произойти неисправно из-за большого количество текста.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
