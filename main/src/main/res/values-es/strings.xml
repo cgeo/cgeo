@@ -228,7 +228,6 @@
     <string name="contact_not_found">El contacto con apodo/nombre de usuario %s no se ha encontrado. Primero añádelo a tus contactos.</string>
     <string name="contact_multiple_matches">Contacto: Varias coincidencias</string>
     <!-- External translation -->
-    <string name="translate_length_warning">La traducción podría fallar con un texto muy largo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Aceptar</string>
     <string name="err_parse">Error procesando la página de acceso</string>
@@ -2490,7 +2489,7 @@ Nombre de archivo:%2$s</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
-    <string name="switch_off">apagado</string>
+    <string name="switch_off">Apagado</string>
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
