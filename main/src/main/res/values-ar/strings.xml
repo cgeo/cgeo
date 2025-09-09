@@ -120,7 +120,6 @@
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
     <string name="err_parse">أخفق تحليل صفحة تسجيل الدخول</string>
