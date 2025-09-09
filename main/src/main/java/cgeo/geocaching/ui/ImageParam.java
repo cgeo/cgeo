@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
@@ -37,6 +38,7 @@ public class ImageParam {
     private final int emojiSymbol;
     private final int emojiSizeInDp;
     private final Drawable drawable;
+    private boolean nullifyTintList = false;
     //if needed, then this can be extended e.g. with Icon or Bitmap
 
     public static final int DEFAULT_EMOJI_SIZE_DP = 30;
@@ -74,11 +76,19 @@ public class ImageParam {
         this.drawable = drawable;
     }
 
+    public ImageParam setNullifyTintList(final boolean nullifyTintList) {
+        this.nullifyTintList = nullifyTintList;
+        return this;
+    }
+
     public boolean isReferencedById() {
         return drawableId != -1;
     }
 
     public void applyTo(final ImageView view) {
+        if (this.nullifyTintList) {
+            view.setImageTintList(null);
+        }
         if (this.drawable != null) {
             view.setImageDrawable(this.drawable);
         } else if (this.drawableId > 0) {
@@ -88,13 +98,21 @@ public class ImageParam {
         }
     }
 
-    public void applyToIcon(final MaterialButton button) {
+    public void applyToIcon(final Button button) {
+        if (!(button instanceof MaterialButton)) {
+            return;
+        }
+        final MaterialButton btn = (MaterialButton) button;
+        if (this.nullifyTintList) {
+            btn.setIconTint(null);
+        }
+
         if (this.drawable != null) {
-            button.setIcon(this.drawable);
+            btn.setIcon(this.drawable);
         } else if (this.drawableId > 0) {
-            button.setIconResource(this.drawableId);
+            btn.setIconResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
-            button.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(button), this.emojiSymbol));
+            btn.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(btn), this.emojiSymbol));
         }
     }
 

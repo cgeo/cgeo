@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 
@@ -87,6 +88,15 @@ public final class ProcessUtils {
             // This can throw an exception where the exception type is only defined on API Level > 3
             // therefore surround with try-catch
             return packageManager.getLaunchIntentForPackage(packageName);
+        } catch (final Exception ignored) {
+            return null;
+        }
+    }
+    @Nullable
+    public static Drawable getApplicationIcon(final String packageName) {
+        final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
+        try {
+            return packageManager.getApplicationIcon(packageName);
         } catch (final Exception ignored) {
             return null;
         }
