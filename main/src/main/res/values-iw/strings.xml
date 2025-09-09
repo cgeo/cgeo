@@ -128,7 +128,6 @@
     <string name="log_problem_other_label">אחר</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">תרגום עלול להיכשל עם כמות גדולה של טקסט.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
     <string name="err_parse">טעינת עמוד ההתחברות כשלה</string>
