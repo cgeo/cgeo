@@ -139,7 +139,6 @@
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
