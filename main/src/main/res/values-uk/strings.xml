@@ -144,7 +144,6 @@
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
     <!-- External translation -->
-    <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
     <string name="err_parse">Не вдалося проаналізувати сторінку входу</string>
