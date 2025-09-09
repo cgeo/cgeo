@@ -228,7 +228,6 @@
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
     <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- External translation -->
-    <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
