@@ -228,6 +228,13 @@
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- External translation -->
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Webseite</string>
+    <string name="translate_external_none">&lt;Keine&gt;</string>
+    <string name="translate_external_app">Externe App</string>
+    <string name="translate_external_google">Google Übersetzer</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Die Übersetzung über eine Webseite kann bei langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
