@@ -205,6 +205,9 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
         activity.findViewById(R.id.cachelist_selected).setVisibility(selectMode && activity.hasPreview() ? View.VISIBLE : View.GONE);
         activity.findViewById(R.id.switchAB).setVisibility(!selectMode ? View.VISIBLE : View.GONE);
 
+        activity.findViewById(R.id.download_selected).setAlpha(selectedLists.stream().allMatch(GCList::isDownloadable) ? 1.0f : 0.4f);
+        activity.findViewById(R.id.download_selected).setClickable(false);
+
         notifyDataSetChanged();
     }
 

@@ -31,8 +31,9 @@
 
         <Button
             android:id="@+id/download_selected"
-            style="@style/button_icon"
+            style="@style/button_icon_actionbar"
             app:icon="@drawable/ic_menu_save"
+            app:tint="@color/colorTextActionBar"
             android:text="@null"
             android:visibility="gone"
             tools:visibility="gone"
@@ -40,8 +41,9 @@
 
         <Button
             android:id="@+id/cachelist_selected"
-            style="@style/button_icon"
+            style="@style/button_icon_actionbar"
             app:icon="@drawable/ic_menu_search"
+            app:tint="@color/colorTextActionBar"
             android:text="@null"
             android:visibility="gone"
             tools:visibility="gone"
