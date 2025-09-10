@@ -1968,6 +1968,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         if (translator != null) {
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
+                        binding.descriptionTranslatedByGoogle.setVisibility(translator != null ? View.VISIBLE : View.GONE);
 
                         if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
                             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);
@@ -2044,7 +2045,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     successConsumer.accept(createDescriptionContentHelper(activity, descriptionTextFinal, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle))
                 );
             } else {
-                OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
+                OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText.toString(), textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
             }
         }
 

@@ -376,15 +376,18 @@
     <string name="translator_model_download_success">Translation model for %s downloaded</string>
     <string name="translator_model_download_error">Failed to download translation model %1$s: %2$s</string>
     <string name="translator_model">Translation model</string>
-    <string name="translator_tooltip">Offline translate</string>
+    <string name="translator_tooltip">Offline translate with Google</string>
     <string name="translator_language_select">Select source language</string>
-    <string name="translator_language_unsupported">Language (%s) not supported for translation. Tap to select source language.</string>
-    <string name="translator_language_unknown">Unable to identify language. Tap to select source language.</string>
-    <string name="translator_language_detected">Translate from "%s". Tap to select source language.</string>
+    <string name="translator_language_target_select">Select target language</string>
+    <string name="translator_language_unsupported">Language (%s) not supported for translation.\nTap to select source language.</string>
+    <string name="translator_language_unknown">Unable to identify language.\nTap to select source language.</string>
+    <string name="translator_language_detected">Translate from "%s" with Google.\nTap to select source language.</string>
     <string name="translator_target_language">Translate to "%s"</string>
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
-    <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
+    <string name="translator_translation_success">Translated from "%s".\nTap button to restore original</string>
+    <string name="crash_activity_title">Oops! c:geo crashed!</string>
+    <string name="crash_activity_report">report problem</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>

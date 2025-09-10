@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
@@ -13,6 +14,13 @@ import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AlignmentSpan;
+import android.text.style.DynamicDrawableSpan;
+import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,6 +28,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -130,12 +139,12 @@ public class OfflineTranslateUtils {
         });
     }
 
-    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<String> consumer, final Consumer<Exception> errorConsumer) {
+    public static void translateParagraph(final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<SpannableStringBuilder> consumer, final Consumer<Exception> errorConsumer) {
         final Document document = Jsoup.parseBodyFragment(text);
         final List<TextNode> elements = document.children().select("*").textNodes();
         final AtomicInteger remaining = new AtomicInteger(elements.size());
         if (remaining.get() == 0) {
-            consumer.accept("");
+            consumer.accept(new SpannableStringBuilder(""));
             status.updateProgress();
         } else {
             for (TextNode textNode : elements) {
@@ -144,7 +153,7 @@ public class OfflineTranslateUtils {
                             textNode.text(translation);
                             // check if all done
                             if (remaining.decrementAndGet() == 0) {
-                                consumer.accept(document.body().html());
+                                consumer.accept(OfflineTranslateUtils.getTextWithTranslatedByLogo(document.body().html()));
                                 status.updateProgress();
                             }
                         }, e -> {
@@ -271,6 +280,18 @@ public class OfflineTranslateUtils {
         public TranslationProgressHandler(final AbstractActivity activity) {
             super(activity);
         }
+    }
+
+    public static SpannableStringBuilder getTextWithTranslatedByLogo(final String text) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(text + "\n ");
+        final Drawable d = ContextCompat.getDrawable(CgeoApplication.getInstance(), R.drawable.translated_by_google);
+        if (d != null) {
+            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+            final int start = ssb.length() - 1;
+            ssb.setSpan(new ImageSpan(d, DynamicDrawableSpan.ALIGN_BOTTOM), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // center the logo
+        }
+        return ssb;
     }
 
     public static class Language implements Comparable<Language> {
