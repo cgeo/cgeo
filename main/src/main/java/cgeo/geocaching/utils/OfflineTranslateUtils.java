@@ -202,6 +202,33 @@ public class OfflineTranslateUtils {
         });
     }
 
+    public static void initializeListingExternalTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText) {
+        if (!OfflineTranslateUtils.isTargetLanguageValid() || TranslateAccessor.get().getSupportedLanguages().isEmpty() ||
+                cda == null || cda.isFinishing() || cda.isDestroyed()) {
+            AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.GONE));
+            return;
+        }
+        final TextView note = translationBox.findViewById(R.id.description_translate_note);
+        final Button button = translationBox.findViewById(R.id.description_translate_button);
+
+        // identify listing language
+        OfflineTranslateUtils.detectLanguage(translateText,
+                lng -> {
+                    final boolean showTranslationBox;
+                    if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
+                        showTranslationBox = false;
+                    } else {
+                        showTranslationBox = true;
+                    }
+                    AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(showTranslationBox ? View.VISIBLE : View.GONE));
+                },
+                error -> {
+                    AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(View.VISIBLE));
+                    button.setEnabled(false);
+                    note.setText(error);
+                });
+    }
+
     public static void initializeListingTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText, final Runnable callback) {
         if (!OfflineTranslateUtils.isTargetLanguageValid() || TranslateAccessor.get().getSupportedLanguages().isEmpty() ||
                 cda == null || cda.isFinishing() || cda.isDestroyed()) {

@@ -2019,6 +2019,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);
                         }
 
+                        OfflineTranslateUtils.initializeListingExternalTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslateExternal, binding.description.getText().toString() + " " + binding.hint.getText().toString());
+
                         // we need to use post, so that the textview is layouted before scrolling gets called
                         if (((CacheDetailActivity) activity).lastActionWasEditNote) {
                             ((CacheDetailActivity) activity).scrollToBottom();
