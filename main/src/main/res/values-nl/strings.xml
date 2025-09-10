@@ -230,6 +230,13 @@
     <!-- External translation -->
     <string name="translate">Vertaal</string>
     <string name="translate_external_label">Vertalen met %s</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Website</string>
+    <string name="translate_external_none">&lt;Geen&gt;</string>
+    <string name="translate_external_app">Externe app</string>
+    <string name="translate_external_google">Google Translate</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Vertaling via de website kan mislukken met een grote hoeveelheid tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
