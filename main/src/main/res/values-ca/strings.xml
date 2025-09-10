@@ -230,6 +230,13 @@
     <!-- External translation -->
     <string name="translate">Tradueix</string>
     <string name="translate_external_label">Tradueix amb %s</string>
+    <string name="translate_external_variant_app">Applicació</string>
+    <string name="translate_external_variant_web">Lloc web</string>
+    <string name="translate_external_none">&lt;Cap&gt;</string>
+    <string name="translate_external_app">Aplicació externa</string>
+    <string name="translate_external_google">Google Translate</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">La traducció a través del lloc web pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
