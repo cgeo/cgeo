@@ -147,12 +147,6 @@
                     android:tooltipText="@string/wherigo_controls_mapzones_hint"
                     app:icon="@drawable/ic_menu_mapmode" />
 
-                <Button
-                    android:id="@+id/translate"
-                    style="@style/button_icon_with_text"
-                    android:tooltipText="Translate"
-                    app:icon="@drawable/ic_menu_translate" />
-
             </LinearLayout>
 
             <Button

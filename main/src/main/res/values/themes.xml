@@ -4,6 +4,7 @@
     <!-- theme for (nearly) all activities -->
     <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Action bar theming -->
+        <item name="actionBarTheme">@style/actionBarTheme</item>
         <item name="actionBarStyle">@style/actionBarStyle</item>
         <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>
 

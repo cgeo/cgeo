@@ -111,6 +111,7 @@ import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -145,6 +146,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -509,6 +511,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
             menu.findItem(R.id.menu_waypoint_open_geochecker).setVisible(CheckerUtils.getCheckerUrl(cache) != null);
+            menu.findItem(R.id.menu_waypoint_translate).setVisible(TranslationUtils.isEnabled());
+            menu.findItem(R.id.menu_waypoint_translate).setTitle(TranslationUtils.getTranslationLabel());
         }
     }
 
@@ -639,6 +643,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, false);
                 handler.showProgress();
                 resetCoords(cache, handler, selectedWaypoint, true, false);
+            }
+        } else if (itemId == R.id.menu_waypoint_translate) {
+            if (selectedWaypoint != null) {
+                TranslationUtils.translate(this, TranslationUtils.prepareForTranslation(selectedWaypoint.getName(), selectedWaypoint.getNote()));
             }
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
@@ -1769,6 +1777,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return Page.DESCRIPTION.id;
         }
 
+        @SuppressLint("ClickableViewAccessibility") // for binding.hint onTouchListener
         @Override
         // splitting up that method would not help improve readability
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
@@ -1857,11 +1866,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 if (Settings.getHintAsRot13()) {
                     binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
                 }
+                // see #17399 and https://stackoverflow.com/questions/22653641/using-onclick-on-textview-with-selectable-text-how-to-avoid-double-click
+                binding.hint.setOnTouchListener((v, event) -> {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        v.requestFocus();
+                    }
+                    return false;
+                });
                 final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
                 binding.hint.setOnClickListener(decryptListener);
                 binding.hint.setClickable(true);
                 binding.hintBox.setOnClickListener(decryptListener);
                 binding.hintBox.setClickable(true);
+                binding.hintBox.setOnLongClickListener(v -> {
+                    ShareUtils.sharePlainText(activity, binding.hint.getText().toString());
+                    return true;
+                });
+
             } else {
                 binding.hint.setVisibility(View.GONE);
                 binding.hint.setClickable(false);
@@ -1894,6 +1915,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hintSpoilerlink.setClickable(true);
                 binding.hintSpoilerlink.setOnClickListener(null);
             }
+
+            //external translation
+            TranslationUtils.registerTranslation(
+                    getActivity(),
+                    binding.descriptionTranslateExternalButton,
+                    binding.descriptionTranslateExternal,
+                    binding.descriptionTranslateExternalNote,
+                    () -> TranslationUtils.prepareForTranslation(getDescriptionText(cache), cache.getHint()));
 
             //register for changes of variableslist -> state of variable sync may change
             cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
@@ -2042,16 +2071,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @WorkerThread
         private static void createDescriptionContent(final Activity activity, final Geocache cache, final boolean restrictLength, final TextView descriptionView, final HtmlStyle descriptionStyle,
             final ITranslatorImpl translator, final OfflineTranslateUtils.Status status, final Consumer<Pair<CharSequence, Boolean>> successConsumer, final Consumer<Exception> errorConsumer) {
-            //combine short and long description to the final description to render
-            String descriptionText = cache.getDescription();
-            final String shortDescriptionText = cache.getShortDescription();
-            if (StringUtils.isNotBlank(shortDescriptionText)) {
-                final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
-                // allow up to 200 characters of HTML formatting
-                if (index < 0 || index > 200) {
-                    descriptionText = shortDescriptionText + "\n" + descriptionText;
-                }
-            }
+            String descriptionText = getDescriptionText(cache);
 
             //check for too-long-listing
             final int descriptionFullLength = descriptionText.length();
@@ -2068,6 +2088,20 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             } else {
                 OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
             }
+        }
+
+        private static String getDescriptionText(final Geocache cache) {
+            //combine short and long description to the final description to render
+            String descriptionText = cache.getDescription();
+            final String shortDescriptionText = cache.getShortDescription();
+            if (StringUtils.isNotBlank(shortDescriptionText)) {
+                final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+                // allow up to 200 characters of HTML formatting
+                if (index < 0 || index > 200) {
+                    descriptionText = shortDescriptionText + "\n" + descriptionText;
+                }
+            }
+            return descriptionText;
         }
 
         @WorkerThread

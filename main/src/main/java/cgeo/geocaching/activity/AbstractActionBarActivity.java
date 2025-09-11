@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
-import androidx.core.view.WindowInsetsCompat;
 
 /**
  * Classes actually having an ActionBar (as opposed to the Dialog activities)
@@ -94,8 +93,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     @Override
     @NonNull
-    protected Insets calculateInsetsForActivityContent(@NonNull final WindowInsetsCompat windowInsets, @NonNull final Insets def) {
-        final Insets insets = super.calculateInsetsForActivityContent(windowInsets, def);
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsForActivityContent(def);
         this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
         applyTranslation();
         if (fixedActionBar) {

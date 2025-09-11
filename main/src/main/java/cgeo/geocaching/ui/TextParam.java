@@ -279,6 +279,8 @@ public class TextParam {
     public void adjust(final TextView view, final boolean forceNoMovement) {
         if (!forceNoMovement && (useHtml || linkifyMask != 0 || useMarkdown)) {
             view.setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            view.setMovementMethod(null);
         }
         if (image != null || imageHeightInDp > 0) {
             final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image).getAsDrawable(view.getContext());
@@ -311,6 +313,8 @@ public class TextParam {
             }
             //Add margin between image and text (support various screen densities)
             view.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
+        } else {
+            view.setCompoundDrawables(null, null, null, null);
         }
 
     }

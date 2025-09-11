@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
@@ -105,6 +106,7 @@ public class ContextMenuDialog {
             this.selectAction = selectAction;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return text;

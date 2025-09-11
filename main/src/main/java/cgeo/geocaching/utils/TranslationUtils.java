@@ -3,79 +3,169 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Utilities used for translating
- */
+/** Utilities used for (c:geo-external) translatinn */
 public final class TranslationUtils {
 
-    private static final String TRANSLATION_WEBSITE = "https://translate.google.com/m/translate";
-    private static final String TRANSLATION_FORCE_CLASSIC_MODE = "?vi=c";
-    private static final String TRANSLATION_AUTO_SELECT = "#auto";
-    private static final String TRANSLATION_FIELD_SEPARATOR = "|";
+    public enum Translator {
+        NONE(R.string.translate_external_none, null, null),
+        EXTERNAL_APP(R.string.translate_external_app, APP_PACKAGE_ANYAPP, null),
+        GOOGLE(R.string.translate_external_google, "com.google.android.apps.translate", WEB_GOOGLE_URL),
+        DEEPL(R.string.translate_external_deepl, "com.deepl.mobiletranslator", WEB_DEEPL_URL);
 
-    private static final int TRANSLATION_TEXT_LENGTH_WARN = 500;
-    private static final String TRANSLATION_APP = "com.google.android.apps.translate";
+        private final int nameId;
+        public final String appPackageName;
+        public final String urlPattern;
+
+        Translator(final int nameId, final String appPackageName, final String urlPattern) {
+            this.nameId = nameId;
+            this.appPackageName = appPackageName;
+            this.urlPattern = urlPattern;
+        }
+
+        public String toUserDisplayableString() {
+            final StringBuilder sb = new StringBuilder(LocalizationUtils.getString(nameId));
+            if (!APP_PACKAGE_ANYAPP.equals(this.appPackageName)) {
+                sb
+                    .append(" (")
+                    .append(LocalizationUtils.getString(appIsAvailable(this.appPackageName) ? R.string.translate_external_variant_app : R.string.translate_external_variant_web))
+                    .append(")");
+            }
+            return sb.toString();
+        }
+
+        @NonNull
+        public ImageParam getIcon() {
+            if (appIsAvailable(appPackageName)) {
+                final Drawable icon = ProcessUtils.getApplicationIcon(appPackageName);
+                if (icon != null) {
+                    return ImageParam.drawable(icon).setNullifyTintList(true);
+                }
+            }
+            return ImageParam.id(R.drawable.ic_menu_translate);
+        }
+    }
+
+    //special package name for "any app"
+    private static final String APP_PACKAGE_ANYAPP = "ANY_APP";
+
+    //URLs for Web translations. Following parameters will be replaced:
+    // %1 (String) gives the URL-encoded text to translate (spaces will be replaced with +)
+    // %2 (String) gives the URL-encoded text (spaces will be replaced with %20)
+    // %3 (String) gives the target language code (2-digit-ISO)
+    private static final String WEB_GOOGLE_URL = "https://translate.google.com/m/translate?vi=c#auto|%3$s|%1$s";
+    private static final String WEB_DEEPL_URL = "https://www.deepl.com/de/translator/q/xx/%1$s";
+
+    private static final int TRANSLATION_WEB_TEXT_LENGTH_WARN = 500;
 
     private TranslationUtils() {
         // utility class
     }
 
-    /**
-     * Build a URI for Google Translate.
-     *
-     * @param toLang The two-letter lowercase ISO language codes as defined by ISO 639-1
-     * @param text   The text to be translated
-     * @return URI ready to be parsed
-     */
-    private static String buildTranslationURI(final String toLang, final String text) {
-        String content = Network.encode(text);
-        // the app works better without the "+", the website works better with "+", therefore assume using the app if installed
-        if (ProcessUtils.isLaunchable(TRANSLATION_APP)) {
-            content = StringUtils.replace(content, "+", "%20");
-        }
-        return TRANSLATION_WEBSITE + TRANSLATION_FORCE_CLASSIC_MODE + TRANSLATION_AUTO_SELECT + TRANSLATION_FIELD_SEPARATOR + toLang + TRANSLATION_FIELD_SEPARATOR + content;
+    public static boolean isEnabled() {
+        return Settings.getTranslatorExternal() != Translator.NONE;
     }
 
-    /**
-     * Send Intent for Google Translate. Should only be used if InAppTranslationPopup is not available.
-     *
-     * @param activity The activity starting the process
-     * @param toLang   The two-letter lowercase ISO language codes as defined by ISO 639-1
-     * @param text     The text to be translated
-     */
-    public static void startActivityTranslate(final Activity activity, final String toLang, final String text) {
-        if (text.length() > TRANSLATION_TEXT_LENGTH_WARN) {
+    @NonNull
+    public static CharSequence getTranslationLabel() {
+        return LocalizationUtils.getString(R.string.translate_external_label, getTranslationName());
+    }
+
+    @NonNull
+    public static CharSequence getTranslationName() {
+        return getTranslator().toUserDisplayableString();
+    }
+
+
+
+    public static void translate(final Activity activity, final String text) {
+        final Translator translator = getTranslator();
+        if (APP_PACKAGE_ANYAPP.equals(translator.appPackageName) || appIsAvailable(translator.appPackageName)) {
+            startTranslateViaApp(activity, translator.appPackageName, text);
+        } else {
+            startTranslateViaUrl(activity, translator.urlPattern, text);
+        }
+    }
+
+    public static String prepareForTranslation(final CharSequence ... text) {
+        return Arrays.stream(text).filter(StringUtils::isNotBlank).map(HtmlUtils::extractText).collect(Collectors.joining("\n\n"));
+    }
+
+    public static void registerTranslation(final Activity activity, final Button button, final Supplier<String> textSupplier) {
+        registerTranslation(activity, button, null, null, textSupplier);
+    }
+
+    public static void registerTranslation(final Activity activity, final Button button, final View box, final TextView label,
+           final Supplier<String> textSupplier) {
+
+        final View realBox = box != null ? box : button;
+        realBox.setVisibility(isEnabled() ? View.VISIBLE : View.GONE);
+        if (label != null) {
+            label.setText(getTranslationLabel());
+        }
+        getTranslator().getIcon().applyToIcon(button);
+        button.setOnClickListener(v -> {
+            final String text = textSupplier.get();
+            translate(activity, text);
+        });
+
+    }
+
+    private static Translator getTranslator() {
+        return Settings.getTranslatorExternal();
+    }
+
+    private static void startTranslateViaUrl(final Activity activity, final String urlPattern, final String text) {
+        if (text.length() > TRANSLATION_WEB_TEXT_LENGTH_WARN) {
             ActivityMixin.showToast(activity, R.string.translate_length_warning);
         }
-        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));
+        //build URL
+        final String encodedText = Network.encode(text);
+        final String encodedTextWithSpace = StringUtils.replace(encodedText, "+", "%20");
+        final String toLang = Locale.getDefault().getLanguage();
+        final String url = String.format(urlPattern, encodedText, encodedTextWithSpace, toLang);
+        //call actionView for URL
+        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
-    public static boolean supportsInAppTranslationPopup() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ProcessUtils.isLaunchable(TRANSLATION_APP);
+    private static boolean appIsAvailable(final String packageName) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ProcessUtils.isLaunchable(packageName);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public static void startInAppTranslationPopup(final Activity activity, final String text) {
-        if (!supportsInAppTranslationPopup()) {
+    private static void startTranslateViaApp(final Activity activity, final String packageName, final String text) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return;
         }
-
         final Intent intent = new Intent();
         intent.setType("text/plain");
         intent.setAction(Intent.ACTION_PROCESS_TEXT);
         intent.putExtra(Intent.EXTRA_PROCESS_TEXT, text);
         intent.putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true);
-        intent.setPackage(TRANSLATION_APP);
+        if (packageName != null && !Objects.equals(APP_PACKAGE_ANYAPP, packageName)) {
+            intent.setPackage(packageName);
+        }
         activity.startActivity(intent);
     }
 }

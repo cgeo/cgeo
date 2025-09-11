@@ -10,7 +10,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -30,11 +30,6 @@ import java.util.List;
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
-
-    //private CompositeDisposable translatorDisposables;
-    private TranslatorUtils.ChangeableText titleText;
-    private TranslatorUtils.ChangeableText descriptionText;
-
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -64,11 +59,9 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--", binding.getRoot());
 
-        //translator
-        control.disposeOnDismiss(TranslatorUtils.initializeView("ThingDialog", activity, control.getTranslator(),
-                binding.translation, null, null));
-        descriptionText = control.createChangeableTranslation();
-        titleText = control.createChangeableTranslation();
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+            TranslationUtils.prepareForTranslation(eventTable.name, eventTable.description));
 
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
@@ -88,10 +81,9 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
         //title
-        titleText.set(eventTable.name, (tr, t) -> control.setTitle(tr));
+        control.setTitle(eventTable.name);
         //description
-        descriptionText.set(eventTable.description, (tr, t) ->
-            binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
@@ -128,7 +120,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
                             control.dismiss();
-                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
+                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable), false), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
                             break;
                         case COMPASS:
                             control.dismiss();

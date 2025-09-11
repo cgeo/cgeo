@@ -83,11 +83,6 @@ public enum WherigoThingType {
         final List<T> list = getAllThings().stream()
             .map(t -> (T) t)
             .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
-            .map(et -> {
-                //make sure everything displayed is also translated if needed
-                WherigoGame.get().hookToTranslation(et);
-                return et;
-            })
             .collect(Collectors.toCollection(ArrayList::new));
 
         list.sort(WherigoUtils.getThingsComparator());

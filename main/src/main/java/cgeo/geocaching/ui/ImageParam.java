@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
@@ -36,6 +38,7 @@ public class ImageParam {
     private final int emojiSymbol;
     private final int emojiSizeInDp;
     private final Drawable drawable;
+    private boolean nullifyTintList = false;
     //if needed, then this can be extended e.g. with Icon or Bitmap
 
     public static final int DEFAULT_EMOJI_SIZE_DP = 30;
@@ -56,7 +59,7 @@ public class ImageParam {
     }
 
     public static ImageParam emoji(final int emojiSymbol, final int emojiSizeInDp) {
-        return new ImageParam(-1, emojiSymbol, emojiSizeInDp, null);
+        return new ImageParam(-1, emojiSymbol, Math.max(2, emojiSizeInDp) , null);
     }
 
     /**
@@ -73,32 +76,53 @@ public class ImageParam {
         this.drawable = drawable;
     }
 
+    public ImageParam setNullifyTintList(final boolean nullifyTintList) {
+        this.nullifyTintList = nullifyTintList;
+        return this;
+    }
+
     public boolean isReferencedById() {
         return drawableId != -1;
     }
 
     public void applyTo(final ImageView view) {
+        if (this.nullifyTintList) {
+            view.setImageTintList(null);
+        }
         if (this.drawable != null) {
             view.setImageDrawable(this.drawable);
         } else if (this.drawableId > 0) {
             view.setImageResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
-            final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(view);
-            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
-            view.setImageDrawable(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
+            view.setImageDrawable(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(view), this.emojiSymbol));
         }
     }
 
-    public void applyToIcon(final MaterialButton button) {
-        if (this.drawable != null) {
-            button.setIcon(this.drawable);
-        } else if (this.drawableId > 0) {
-            button.setIconResource(this.drawableId);
-        } else if (this.emojiSymbol > 0) {
-            final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(button);
-            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
-            button.setIcon(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
+    public void applyToIcon(final Button button) {
+        if (!(button instanceof MaterialButton)) {
+            return;
         }
+        final MaterialButton btn = (MaterialButton) button;
+        if (this.nullifyTintList) {
+            btn.setIconTint(null);
+        }
+
+        if (this.drawable != null) {
+            btn.setIcon(this.drawable);
+        } else if (this.drawableId > 0) {
+            btn.setIconResource(this.drawableId);
+        } else if (this.emojiSymbol > 0) {
+            btn.setIcon(EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(btn), this.emojiSymbol));
+        }
+    }
+
+    private int getWantedEmojiSizeInPixel(final View view) {
+        int max = ViewUtils.dpToPixel(emojiSizeInDp);
+        final Pair<Integer, Integer> viewSize = view == null ? null : ViewUtils.getViewSize(view);
+        if (viewSize != null) {
+            max = Math.max(max, Math.max(viewSize.first, viewSize.second));
+        }
+        return max;
     }
 
     /**
@@ -113,7 +137,7 @@ public class ImageParam {
         if (this.drawableId > 0) {
             result = Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme())).mutate();
         } else if (this.emojiSymbol > 0) {
-            result = EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(emojiSizeInDp), this.emojiSymbol);
+            result = EmojiUtils.getEmojiDrawable(getWantedEmojiSizeInPixel(null), this.emojiSymbol);
         }
         if (result != null) {
             return result;

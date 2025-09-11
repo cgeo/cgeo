@@ -1,8 +1,5 @@
 package cgeo.geocaching.wherigo;
 
-import cgeo.geocaching.utils.offlinetranslate.Translator;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
-
 import android.app.Dialog;
 
 import java.util.function.BiConsumer;
@@ -26,16 +23,6 @@ public interface IWherigoDialogControl {
     void dismissWithoutUserResult();
 
     <T extends Disposable> T disposeOnDismiss(T disposable);
-
-    Translator getTranslator();
-
-    default void addTranslation(final String original, final BiConsumer<String, Boolean> translationAction) {
-        disposeOnDismiss(getTranslator().addTranslation(original, translationAction));
-    }
-
-    default TranslatorUtils.ChangeableText createChangeableTranslation() {
-        return disposeOnDismiss(new TranslatorUtils.ChangeableText(getTranslator()));
-    }
 
 
 }

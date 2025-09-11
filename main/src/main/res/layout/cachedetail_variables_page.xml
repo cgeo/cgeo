@@ -18,7 +18,6 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4sp"
         android:orientation="horizontal">
 
         <Button
@@ -63,6 +62,7 @@
         android:id="@+id/chip_completed_variables"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="7sp"
         style="@style/chip_choice"
         android:text="@string/cache_variables_chip_completed_variables"
         tools:context=".VariablesViewPageFragment" />
@@ -70,6 +70,7 @@
     <View
         android:id="@+id/variable_header_line"
         style="@style/separator_horizontal"
+        android:paddingHorizontal="@dimen/paddingRight_fastscroll"
         android:layout_marginTop="3dp" />
 
     <ScrollView

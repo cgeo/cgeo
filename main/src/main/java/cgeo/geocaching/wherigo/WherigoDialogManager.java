@@ -7,7 +7,6 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.offlinetranslate.Translator;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -137,11 +136,6 @@ public class WherigoDialogManager {
         public <T extends Disposable> T disposeOnDismiss(final T disposable) {
             this.dismissDisposables.add(disposable);
             return disposable;
-        }
-
-        @Override
-        public Translator getTranslator() {
-            return WherigoGame.get().getTranslator();
         }
     }
 

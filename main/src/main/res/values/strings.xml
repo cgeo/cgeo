@@ -246,11 +246,16 @@
     <string name="contact_not_found">Contact with alias/nickname %s not found. Add it in your contacts app first.</string>
     <string name="contact_multiple_matches">Contact: Multiple matches</string>
 
-    <!-- translation -->
-    <string name="translate">Translate in Google Translate App</string>
-    <string name="translate_to_sys_lang">Translate to %s (Web)</string>
-    <string name="translate_to_english">Translate to English (Web)</string>
-    <string name="translate_length_warning">Translation may fail with a large amount of text.</string>
+    <!-- External translation -->
+    <string name="translate">Translate</string>
+    <string name="translate_external_label">Translate with %s</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Website</string>
+    <string name="translate_external_none">&lt;None&gt;</string>
+    <string name="translate_external_app">External App</string>
+    <string name="translate_external_google">Google Translate</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Translation via Website may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -1079,6 +1084,8 @@
     <string name="init_translation_disabled">Translation disabled</string>
     <string name="init_date_format">Date format</string>
     <string name="init_date_format_description">Format to use for short dates, e.g. in log view</string>
+    <string name="init_translator_external">External Translator</string>
+    <string name="init_translator_external_description">External translator app to use</string>
     <string name="system_default">System Default</string>
     <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>

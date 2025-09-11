@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
@@ -62,6 +62,8 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
+
+    private Insets currentWindowInsets;
 
     private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
 
@@ -170,28 +172,45 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         //apply edge2edge to activity content view
         ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
-            final ViewGroup activityContent = v.findViewById(R.id.activity_content);
+            final View activityContent = v.findViewById(R.id.activity_content);
             if (activityContent == null) {
                 Log.w("edge2edge: activityContent not found in " + this);
             } else {
-                //calculate the default insets
-                final Insets defaultInsets = windowInsets.getInsets(DEFAULT_INSETS);
-                //let subclasses modify those insets according to their needs
-                final Insets insets = calculateInsetsForActivityContent(windowInsets, defaultInsets);
-                //apply final insets to activity content
-                activityContent.setPadding(
-                    insets.left < 0 ? defaultInsets.left : insets.left,
-                    insets.top < 0 ? defaultInsets.top : insets.top,
-                    insets.right < 0 ? defaultInsets.right : insets.right,
-                    insets.bottom < 0 ? defaultInsets.bottom : insets.bottom);
+                //calculate and set the activity_content's insets
+                this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
+                //trigger insets recalculation
+                refreshActivityContentInsets();
             }
             return windowInsets;
         });
     }
 
-    /** Overwrite to manipulate insets for activitycontent in subclasses */
+    /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */
+    protected void refreshActivityContentInsets() {
+        if (this.currentWindowInsets == null) {
+            //method was called before insets were set
+            return;
+        }
+        final View activityContent = getWindow() == null || getWindow().getDecorView() == null ? null :
+            getWindow().getDecorView().findViewById(R.id.activity_content);
+        if (activityContent == null) {
+            return;
+        }
+
+        //let subclasses modify insets according to their needs
+        final Insets insets = calculateInsetsForActivityContent(this.currentWindowInsets);
+        //apply final insets to activity content
+        activityContent.setPadding(
+                insets.left < 0 ? this.currentWindowInsets.left : insets.left,
+                insets.top < 0 ? this.currentWindowInsets.top : insets.top,
+                insets.right < 0 ? this.currentWindowInsets.right : insets.right,
+                insets.bottom < 0 ? this.currentWindowInsets.bottom : insets.bottom);
+
+    }
+
+    /** Overwrite to manipulate edge-2-edge-insets for activitycontent in subclasses */
     @NonNull
-    protected Insets calculateInsetsForActivityContent(@NonNull final WindowInsetsCompat windowInsets, @NonNull final Insets insets) {
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets insets) {
         return insets;
     }
 
