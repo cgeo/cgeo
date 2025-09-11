@@ -230,6 +230,13 @@
     <!-- External translation -->
     <string name="translate">Przetłumacz</string>
     <string name="translate_external_label">Przetłumacz z %s</string>
+    <string name="translate_external_variant_app">Aplikacja</string>
+    <string name="translate_external_variant_web">Strona www</string>
+    <string name="translate_external_none">&lt;Brak&gt;</string>
+    <string name="translate_external_app">Aplikacja zewnętrzna</string>
+    <string name="translate_external_google">Tłumacz Google</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Tłumaczenie przez stronę www może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
