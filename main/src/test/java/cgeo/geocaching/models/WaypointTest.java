@@ -130,17 +130,17 @@ public class WaypointTest {
 
     @Test
     public void testMergeStageWPWithLocalCoords() {
-        final Waypoint local = new Waypoint("STAGE", WaypointType.STAGE, false);
+        final Waypoint local = new Waypoint("WAYPOINT", WaypointType.STAGE, false);
         local.setCoords(new Geopoint("N 45°49.739 E 9°45.038"));
-        final Waypoint server = new Waypoint("STAGE", WaypointType.STAGE, false);
+        final Waypoint server = new Waypoint("WAYPOINT", WaypointType.STAGE, false);
         server.merge(local);
         assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
     }
 
     @Test
     public void testMergeStageWPWithServerCoords() {
-        final Waypoint local = new Waypoint("STAGE", WaypointType.STAGE, false);
-        final Waypoint server = new Waypoint("STAGE", WaypointType.STAGE, false);
+        final Waypoint local = new Waypoint("WAYPOINT", WaypointType.STAGE, false);
+        final Waypoint server = new Waypoint("WAYPOINT", WaypointType.STAGE, false);
         server.setCoords(new Geopoint("N 45°49.739 E 9°45.038"));
         server.merge(local);
         assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));

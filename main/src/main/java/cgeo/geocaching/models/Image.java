@@ -34,7 +34,7 @@ public class Image implements Parcelable {
         LISTING(R.string.image_category_listing),
         LOG(R.string.image_category_log),
         NOTE(R.string.cache_personal_note),
-        STAGE(R.string.cache_stages);
+        WAYPOINT(R.string.cache_waypoints);
 
         @StringRes
         private final int textId;

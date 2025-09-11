@@ -40,6 +40,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -159,7 +161,7 @@ final class ALApi {
 
     @Nullable
     @WorkerThread
-    protected static Geocache searchByGeocode(final String geocode) {
+    static Geocache searchByGeocode(final String geocode) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
         }
@@ -402,6 +404,8 @@ final class ALApi {
 
     @Nullable
     private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
+        final HashMap<String, Waypoint> waypoints = new LinkedHashMap<>(5);
+
         // refresh into new list
         cache.setWaypoints(new ArrayList<>(5));
 
@@ -410,62 +414,69 @@ final class ALApi {
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
-            try {
-                final String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
 
-                final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
-                final JsonNode location = wptResponse.at(LOCATION);
-                final String ilink = wptResponse.get("KeyImageUrl").asText();
-                final String desc = wptResponse.get("Description").asText();
+            final String wptName = wptResponse.get(TITLE).asText();
+            final boolean isLinear = wptResponse.get("IsLinear").asBoolean();
+            final String prefix = (isLinear ? "L" : "S") + stageCounter;
 
-                wpt.setGeocode(cache.getGeocode());
-                wpt.setPrefix(String.valueOf(stageCounter));
-                wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
+            final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
 
-                final Image spoilerImage = new Image.Builder()
-                        .setUrl(ilink)
-                        .setTitle(wptName)
-                        .setDescription(desc)
-                        .setCategory(Image.ImageCategory.STAGE)
-                        .build();
+            wpt.setPrefix(prefix);
 
-                wptImages.add(spoilerImage);
+            final JsonNode location = wptResponse.at(LOCATION);
+            final String ilink = wptResponse.get("KeyImageUrl").asText();
+            final String desc = wptResponse.get("Description").asText();
 
-                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+            wpt.setGeocode(cache.getGeocode());
+            wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                if (Settings.isALCAdvanced()) {
-                    note.append("<p><p>").append(wptResponse.get("Question").asText());
-                }
+            final Image spoilerImage = new Image.Builder()
+                    .setUrl(ilink)
+                    .setTitle(wptName)
+                    .setDescription(desc)
+                    .setCategory(Image.ImageCategory.WAYPOINT)
+                    .build();
 
-                try {
-                    final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
-                    if (jn instanceof ArrayNode) { // implicitly covers null case as well
-                        final ArrayNode multiChoiceOptions = (ArrayNode) jn;
-                        if (!multiChoiceOptions.isEmpty()) {
-                            note.append("<ul>");
-                            for (final JsonNode mc : multiChoiceOptions) {
-                                note.append("<li>").append(mc.get("Text").asText()).append("</li>");
-                            }
-                            note.append("</ul>");
-                        }
-                    }
-                } catch (Exception ignore) {
-                    // ignore exception
-                }
-                wpt.setNote(note.toString());
+            wptImages.add(spoilerImage);
 
-                final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
-                if (!pt.equals(pointZero)) {
-                    wpt.setCoords(pt);
-                } else {
-                    wpt.setOriginalCoordsEmpty(true);
-                }
+            final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
 
-                cache.getWaypoints().add(wpt);
-            } catch (final NullPointerException e) {
-                Log.e("_AL ALApi.parseWaypoints", e);
+            if (Settings.isALCAdvanced()) {
+                note.append("<p><p>").append(wptResponse.get("Question").asText());
             }
+
+            final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
+            if (jn instanceof ArrayNode) { // implicitly covers null case as well
+                final ArrayNode multiChoiceOptions = (ArrayNode) jn;
+                if (!multiChoiceOptions.isEmpty()) {
+                    note.append("<ul>");
+                    for (final JsonNode mc : multiChoiceOptions) {
+                        note.append("<li>").append(mc.get("Text").asText()).append("</li>");
+                    }
+                    note.append("</ul>");
+                }
+            }
+
+            wpt.setNote(note.toString());
+
+            final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
+            if (!pt.equals(pointZero)) {
+                wpt.setCoords(pt);
+            } else {
+                wpt.setOriginalCoordsEmpty(true);
+            }
+
+            // merge waypoints
+            waypoints.merge(wpt.getPrefix(), wpt, ALApi::mergeWaypoint);
+
         }
+
+        cache.setWaypoints(new ArrayList<>(waypoints.values()));
+        cache.setSpoilers(new ArrayList<>(cache.getSpoilers()));
+    }
+
+    private static Waypoint mergeWaypoint(Waypoint original, Waypoint modified) {
+        return modified;
     }
 
     @Nullable
