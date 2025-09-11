@@ -23,7 +23,8 @@
         tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 
 
-    <LinearLayout android:id="@+id/buttons"
+    <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -31,9 +32,10 @@
 
         <Button
             android:id="@+id/download_selected"
-            style="@style/button_icon_actionbar"
+            style="@style/button_icon"
             app:icon="@drawable/ic_menu_save"
-            app:tint="@color/colorTextActionBar"
+            app:iconTint="@color/colorTextActionBar"
+            android:background="@android:color/transparent"
             android:text="@null"
             android:visibility="gone"
             tools:visibility="gone"
@@ -41,9 +43,10 @@
 
         <Button
             android:id="@+id/cachelist_selected"
-            style="@style/button_icon_actionbar"
+            style="@style/button_icon"
             app:icon="@drawable/ic_menu_search"
-            app:tint="@color/colorTextActionBar"
+            app:iconTint="@color/colorTextActionBar"
+            android:background="@android:color/transparent"
             android:text="@null"
             android:visibility="gone"
             tools:visibility="gone"
