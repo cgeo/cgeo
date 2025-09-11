@@ -203,7 +203,9 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
         activity.findViewById(R.id.switchAB).setVisibility(!selectMode ? View.VISIBLE : View.GONE);
 
         // Currently, we aren't able to parse bookmark lists without download
-        activity.findViewById(R.id.cachelist_selected).setVisibility(selectMode && activity.hasPreview() ? View.VISIBLE : View.GONE);
+        final View buttonPreviewSelected = activity.findViewById(R.id.cachelist_selected);
+        buttonPreviewSelected.setVisibility(selectMode && activity.hasPreview() ? View.VISIBLE : View.GONE);
+        buttonPreviewSelected.setEnabled(!selectedLists.isEmpty());
 
         // enable download button only, all selected lists are downloadable
         final View buttonDownloadSelected = activity.findViewById(R.id.download_selected);
