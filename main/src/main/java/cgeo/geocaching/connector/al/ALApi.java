@@ -18,6 +18,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -50,6 +51,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
@@ -167,9 +169,9 @@ final class ALApi {
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
+            final Response response = apiRequest(geocode.substring(2), headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
-            if (!Settings.isALCfoundStateManual()) {
+            if (gc != null && !Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
                     if (matchedLabCache.getGeocode().equals(geocode)) {
@@ -250,8 +252,8 @@ final class ALApi {
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, @Nullable final Parameters params, final Parameters headers) {
-        return apiRequest(uri, params, headers, false);
+    private static Single<Response> apiRequest(final String uri, final Parameters headers) {
+        return apiRequest(uri, null, headers, false);
     }
 
     @NonNull
@@ -402,15 +404,11 @@ final class ALApi {
         }
     }
 
-    @Nullable
     private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
-        final HashMap<String, Waypoint> waypoints = new LinkedHashMap<>(5);
+        final HashMap<Integer, Waypoint> waypoints = new LinkedHashMap<>(5);
 
-        // refresh into new list
-        cache.setWaypoints(new ArrayList<>(5));
-
-        final List<Image> wptImages = new ArrayList<>(5);
         final Geopoint pointZero = new Geopoint(0, 0);
+
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
@@ -418,28 +416,36 @@ final class ALApi {
             final String wptName = wptResponse.get(TITLE).asText();
             final boolean isLinear = wptResponse.get("IsLinear").asBoolean();
             final String prefix = (isLinear ? "L" : "S") + stageCounter;
-
-            final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
-
-            wpt.setPrefix(prefix);
-
             final JsonNode location = wptResponse.at(LOCATION);
             final String ilink = wptResponse.get("KeyImageUrl").asText();
             final String desc = wptResponse.get("Description").asText();
 
-            wpt.setGeocode(cache.getGeocode());
-            wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
+            final StringBuilder note = new StringBuilder();
 
-            final Image spoilerImage = new Image.Builder()
+            note.append(desc);
+
+            final Waypoint wpt = new Waypoint(prefix, null, wptName, prefix, note.toString(), WaypointType.PUZZLE);
+
+            // Load image
+            final Image image = new Image.Builder()
                     .setUrl(ilink)
                     .setTitle(wptName)
                     .setDescription(desc)
                     .setCategory(Image.ImageCategory.WAYPOINT)
                     .build();
 
-            wptImages.add(spoilerImage);
+            final Completable imgGetter = new HtmlImage(cache.getGeocode(), false, true, false).waitForEndCompletable(null).doOnComplete(() -> {
+                final String localUri = String.valueOf(image.getUri());
 
-            final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+                if (!localUri.equals("null")) {
+                    note.insert(0, "<img src=\"").append(localUri).append("\"></img><p><p>");
+                    wpt.setNote(note.toString());
+                }
+            });
+
+            wpt.setGeocode(cache.getGeocode());
+
+            wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
             if (Settings.isALCAdvanced()) {
                 note.append("<p><p>").append(wptResponse.get("Question").asText());
@@ -457,8 +463,6 @@ final class ALApi {
                 }
             }
 
-            wpt.setNote(note.toString());
-
             final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
             if (!pt.equals(pointZero)) {
                 wpt.setCoords(pt);
@@ -466,13 +470,13 @@ final class ALApi {
                 wpt.setOriginalCoordsEmpty(true);
             }
 
-            // merge waypoints
-            waypoints.merge(wpt.getPrefix(), wpt, ALApi::mergeWaypoint);
+            imgGetter.blockingAwait();
 
+            waypoints.merge(stageCounter, wpt, ALApi::mergeWaypoint);
         }
 
         cache.setWaypoints(new ArrayList<>(waypoints.values()));
-        cache.setSpoilers(new ArrayList<>(cache.getSpoilers()));
+        cache.setSpoilers(waypoints.values().stream().map(Waypoint::getImage).toList());
     }
 
     private static Waypoint mergeWaypoint(Waypoint original, Waypoint modified) {
