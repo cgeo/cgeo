@@ -632,6 +632,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
 
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
+            OfflineTranslateUtils.initializeListingExternalTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString());
 
             final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
             if (currentTranslationStatus.checkRetranslation()) {
