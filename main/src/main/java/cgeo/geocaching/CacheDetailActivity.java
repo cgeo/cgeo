@@ -726,6 +726,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache, false);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         MenuUtils.setVisible(menu.findItem(R.id.menu_set_coordinates), isUDC);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_translate), cache != null && TranslationUtils.isEnabled());
+        menu.findItem(R.id.menu_translate).setTitle(TranslationUtils.getTranslationLabel());
 
         if (cache != null) {
             // top level menu items
@@ -796,6 +798,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             ignoreCache();
         } else if (menuItem == R.id.menu_set_coordinates) {
             setCoordinates(this);
+        } else if (menuItem == R.id.menu_translate) {
+            TranslationUtils.translate(this, getListingForTranslate(cache));
         } else if (menuItem == R.id.menu_extract_waypoints) {
             final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
             extractWaypoints(searchText, cache);
@@ -1922,7 +1926,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     binding.descriptionTranslateExternalButton,
                     binding.descriptionTranslateExternal,
                     binding.descriptionTranslateExternalNote,
-                    () -> TranslationUtils.prepareForTranslation(getDescriptionText(cache), cache.getHint()));
+                    () -> getListingForTranslate(cache));
 
             //register for changes of variableslist -> state of variable sync may change
             cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
@@ -2088,20 +2092,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             } else {
                 OfflineTranslateUtils.translateParagraph(translator, status, descriptionTextFinal, translatedText -> successConsumer.accept(createDescriptionContentHelper(activity, translatedText, textTooLong, descriptionFullLength, cache, restrictLength, descriptionView, descriptionStyle)), errorConsumer);
             }
-        }
-
-        private static String getDescriptionText(final Geocache cache) {
-            //combine short and long description to the final description to render
-            String descriptionText = cache.getDescription();
-            final String shortDescriptionText = cache.getShortDescription();
-            if (StringUtils.isNotBlank(shortDescriptionText)) {
-                final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
-                // allow up to 200 characters of HTML formatting
-                if (index < 0 || index > 200) {
-                    descriptionText = shortDescriptionText + "\n" + descriptionText;
-                }
-            }
-            return descriptionText;
         }
 
         @WorkerThread
@@ -2673,6 +2663,32 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return this.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
         return this.getString(Page.find(pageId).titleStringId);
+    }
+
+    @NonNull
+    public static String getListingForTranslate(final Geocache cache) {
+        if (cache == null) {
+            return "";
+        }
+        return TranslationUtils.prepareForTranslation(getDescriptionText(cache), cache.getHint());
+    }
+
+    @NonNull
+    public static String getDescriptionText(final Geocache cache) {
+        if (cache == null) {
+            return "";
+        }
+        //combine short and long description to the final description to render
+        String descriptionText = cache.getDescription();
+        final String shortDescriptionText = cache.getShortDescription();
+        if (StringUtils.isNotBlank(shortDescriptionText)) {
+            final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+            // allow up to 200 characters of HTML formatting
+            if (index < 0 || index > 200) {
+                descriptionText = shortDescriptionText + "\n" + descriptionText;
+            }
+        }
+        return descriptionText;
     }
 
     protected long[] getOrderedPages() {

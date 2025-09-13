@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -272,6 +273,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             ShareUtils.openUrl(this, trackable.getUrl(), true);
         } else if (itemId == R.id.menu_refresh_trackable) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+        } else if (itemId == R.id.menu_translate) {
+            TranslationUtils.translate(this, getTranslationText(trackable));
+            refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -285,6 +289,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
             menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
         }
+        MenuUtils.setVisible(menu.findItem(R.id.menu_translate), trackable != null && TranslationUtils.isEnabled());
+        menu.findItem(R.id.menu_translate).setTitle(TranslationUtils.getTranslationLabel());
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -415,6 +422,13 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             return title;
         }
         return this.getString(Page.find(pageId).resId);
+    }
+
+    public static String getTranslationText(final Trackable trackable) {
+        if (trackable == null) {
+            return "";
+        }
+        return TranslationUtils.prepareForTranslation(trackable.getGoal(), trackable.getDetails());
     }
 
     protected long[] getOrderedPages() {
@@ -628,8 +642,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.descriptionTranslateExternalButton,
                 binding.descriptionTranslateExternal,
                 binding.descriptionTranslateExternalNote,
-                () -> TranslationUtils.prepareForTranslation(binding.goal.getText().toString(), binding.details.getText().toString()));
-
+                () -> getTranslationText(trackable));
 
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
 

@@ -20,5 +20,9 @@
         android:title="@string/trackable_refresh"
         android:visible="false"
         app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_translate"
+        android:icon="@drawable/ic_menu_translate"
+        android:title="@string/translate"/>
 
 </menu>

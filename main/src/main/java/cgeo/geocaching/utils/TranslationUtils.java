@@ -47,13 +47,19 @@ public final class TranslationUtils {
 
         public String toUserDisplayableString() {
             final StringBuilder sb = new StringBuilder(LocalizationUtils.getString(nameId));
-            if (!APP_PACKAGE_ANYAPP.equals(this.appPackageName)) {
+            if (this.appPackageName != null && !APP_PACKAGE_ANYAPP.equals(this.appPackageName)) {
                 sb
                     .append(" (")
                     .append(LocalizationUtils.getString(appIsAvailable(this.appPackageName) ? R.string.translate_external_variant_app : R.string.translate_external_variant_web))
                     .append(")");
             }
             return sb.toString();
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return name() + "/appPackage:" + appPackageName + "(av=" + appIsAvailable(appPackageName) + ")";
         }
 
         @NonNull
@@ -96,6 +102,11 @@ public final class TranslationUtils {
     @NonNull
     public static CharSequence getTranslationName() {
         return getTranslator().toUserDisplayableString();
+    }
+
+    @NonNull
+    public static ImageParam getTranslationIcon() {
+        return getTranslator().getIcon();
     }
 
 
@@ -160,6 +171,7 @@ public final class TranslationUtils {
         }
         final Intent intent = new Intent();
         intent.setType("text/plain");
+        // intent.setAction(Intent.ACTION_TRANSLATE); doesn't seem to work
         intent.setAction(Intent.ACTION_PROCESS_TEXT);
         intent.putExtra(Intent.EXTRA_PROCESS_TEXT, text);
         intent.putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true);
