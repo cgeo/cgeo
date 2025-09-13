@@ -2599,9 +2599,12 @@ public class Settings {
         return getString(R.string.pref_short_date_format, "");
     }
 
+    @NonNull
     public static TranslationUtils.Translator getTranslatorExternal() {
-        return EnumUtils.getEnum(TranslationUtils.Translator.class, getString(R.string.pref_translator_external, null),
-                TranslationUtils.Translator.GOOGLE);
+        final TranslationUtils.Translator defaultTranslator = TranslationUtils.Translator.GOOGLE;
+        return EnumUtils.getEnum(TranslationUtils.Translator.class,
+            getString(R.string.pref_translator_external, defaultTranslator.name()),
+                defaultTranslator);
     }
 
     public static OfflineTranslateUtils.Language getTranslationTargetLanguageRaw() {

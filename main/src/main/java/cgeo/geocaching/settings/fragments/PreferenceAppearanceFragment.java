@@ -90,8 +90,6 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         translatorExternalPref.setValue(Settings.getTranslatorExternal().name());
         translatorExternalPref.setSummary(Settings.getTranslatorExternal().toUserDisplayableString());
 
-
-
         setPrefClick(this, R.string.pref_quicklaunchitems, () -> QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems));
 
         setPrefClick(this, R.string.pref_cacheListInfo, () -> CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2));

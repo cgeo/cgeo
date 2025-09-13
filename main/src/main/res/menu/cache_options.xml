@@ -86,6 +86,10 @@
         android:title="@string/cache_personal_note"
         android:visible="false"/>
     <item
+        android:id="@+id/menu_translate"
+        android:icon="@drawable/ic_menu_translate"
+        android:title="@string/translate" />
+    <item
         android:id="@+id/menu_set_coordinates"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_set_coordinates"
