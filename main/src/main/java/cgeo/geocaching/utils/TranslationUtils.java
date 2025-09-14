@@ -6,6 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -141,7 +142,15 @@ public final class TranslationUtils {
             final String text = textSupplier.get();
             translate(activity, text);
         });
-
+        if (isEnabled() && box != null && !Settings.getLanguagesToNotTranslate().isEmpty()) {
+            TranslateAccessor.get().guessLanguage(textSupplier.get(), lng -> {
+                if (Settings.getLanguagesToNotTranslate().contains(lng)) {
+                    realBox.setVisibility(View.GONE);
+                }
+            }, e -> {
+                //ignore
+            });
+        }
     }
 
     private static Translator getTranslator() {

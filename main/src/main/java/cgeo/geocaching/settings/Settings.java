@@ -2641,8 +2641,12 @@ public class Settings {
         if (sharedPrefs == null) {
             return lngs;
         }
-        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), lngs));
-        lngs.add(getTranslationTargetLanguage().getCode());
+        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), Collections.emptySet()));
+        //add target language if valid
+        final OfflineTranslateUtils.Language targetLng = getTranslationTargetLanguage();
+        if (targetLng.isValid()) {
+            lngs.add(targetLng.getCode());
+        }
         return lngs;
     }
 }
