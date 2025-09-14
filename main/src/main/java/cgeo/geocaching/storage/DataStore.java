@@ -245,7 +245,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude", "geofence"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude", "geofence", "image"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -258,7 +258,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 106;
+    private static final int dbVersion = 107;
     public static final int customListIdOffset = 10;
 
     /**
@@ -298,9 +298,10 @@ public class DataStore {
             101, // add service_image_id to saved log images
             102, // add projection attributes to waypoints
             103, // add more projection attributes to waypoints
-            104,  // add geofence radius for lab stages
-            105,  // Migrate UDC geocodes from ZZ1000-based numbers to random ones
-            106  // Update lab caches DT rating to zero from minus one
+            104, // add geofence radius for lab stages
+            105, // Migrate UDC geocodes from ZZ1000-based numbers to random ones
+            106, // Update lab caches DT rating to zero from minus one
+            107  // add image column in waypoints
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -462,7 +463,8 @@ public class DataStore {
             + "projection_formula_1 TEXT, "
             + "preprojected_latitude DOUBLE, "
             + "preprojected_longitude DOUBLE, "
-            + "geofence DOUBLE"
+            + "geofence DOUBLE,"
+            + "image TEXT"
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -2742,6 +2744,7 @@ public class DataStore {
         values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2());
         putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
         values.put("geofence", waypoint.getGeofence());
+        values.put("image", waypoint.getImage());
         return values;
     }
 
@@ -3439,6 +3442,8 @@ public class DataStore {
                 cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2"))
             );
             waypoint.setGeofence(cursor.getFloat(cursor.getColumnIndexOrThrow("geofence")));
+            waypoint.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            waypoint.buildImage();
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

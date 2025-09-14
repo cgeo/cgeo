@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/waypoint"
     android:layout_width="fill_parent"
@@ -146,6 +147,13 @@
                 android:textStyle="italic"
                 tools:visiblity="visible"
                 tools:ignore="HardcodedText"/>
+
+            <ImageView
+                android:id="@+id/waypoint_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_no_placement"
+                tools:visibility="gone" />
 
             <TextView
                 android:id="@+id/note"
