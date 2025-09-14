@@ -72,7 +72,8 @@ public class MLKitTranslateAccessor implements ITranslateAccessor {
 
     @Override
     public void guessLanguage(final String source, final Consumer<String> onSuccess, final Consumer<Exception> onError) {
-        execute(LanguageIdentification.getClient().identifyLanguage(source), onError, lngCode -> {
+        final String text = source.replaceAll("[\\s\\ufffc]+", " ").trim();
+        execute(LanguageIdentification.getClient().identifyLanguage(text), onError, lngCode -> {
                 onSuccess.accept("und".equals(lngCode) ? null : lngCode);
         });
     }
