@@ -53,6 +53,15 @@ public class ColorUtils {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
 
+    public static int getActionBarColor(@ColorInt final int colorInt) {
+        // convert to HSL
+        final float[] hsl = getHslValues(colorInt);
+
+        // darker color by 15%
+        hsl[2] = Math.max(0f, hsl[2] - 0.15f);
+        return androidx.core.graphics.ColorUtils.HSLToColor(hsl);
+    }
+
     private static float[] getHslValues(@ColorInt final int colorInt) {
         final int red = Color.red(colorInt);
         final int green = Color.green(colorInt);

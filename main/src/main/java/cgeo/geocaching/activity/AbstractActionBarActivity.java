@@ -2,7 +2,6 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ColorUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -115,7 +114,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
-            actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
+
+            // don't set background here, as this would override possible action bar themes
+            // actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
         }
     }
 
