@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.DbinspectionActivityBinding;
 import cgeo.geocaching.storage.DataStore;
@@ -22,51 +23,59 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import java.util.Arrays;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import net.movingbits.dbinspection.DBInspectionBaseActivity;
+import net.movingbits.dbinspection.DBInspectionToolkit;
 import org.apache.commons.lang3.StringUtils;
 
-public class DBInspectionActivity extends DBInspectionBaseActivity implements AdapterView.OnItemSelectedListener {
+public class DBInspectionActivity extends AbstractActionBarActivity implements AdapterView.OnItemSelectedListener {
+
+    private static final String BUNDLE_TOOLKIT = "BUNDLE_TOOLKIT";
+    private static final int FAST_JUMP_PAGES = 10;
 
     private DbinspectionActivityBinding binding;
+    private DBInspectionToolkit toolkit;
+    private String titleSelectTable = "";
 
     @Override
     public void onCreate(final @Nullable Bundle savedInstanceState) {
         binding = DbinspectionActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle(R.string.view_database);
-        prepareBlankTable(binding.tableData.getId());
+
+        if (savedInstanceState != null) {
+            toolkit = savedInstanceState.getParcelable(BUNDLE_TOOLKIT);
+        }
+        if (toolkit == null) {
+            toolkit = new DBInspectionToolkit();
+        }
         titleSelectTable = getString(R.string.dbi_select_title);
-        database = DataStore.getDatabase(true);
+        toolkit.init(this, DataStore.getDatabase(true), titleSelectTable, 10);
+        toolkit.prepareBlankTable(binding.tableData.getId());
         super.onCreate(savedInstanceState);
 
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
-        // set dimensions
-        pxMargin = ViewUtils.dpToPixel(10);
-        pxCharWidth = ViewUtils.dpToPixel(10);
-        pxHeight = ViewUtils.dpToPixel(40); // will be adjusted in onItemSelected
+        setDimensions(ViewUtils.dpToPixel(40)); // will be adjusted in onItemSelected);
 
         // initialize table selector
         final AppCompatSpinner spinner = binding.tableSpinner;
         spinner.setOnItemSelectedListener(this);
-        final ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getTablenames());
+        final ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, toolkit.getTablenames());
         spinner.setAdapter(spinnerAdapter);
 
         // prepare UI elements
         binding.tableButtonBack.setEnabled(false);
-        binding.tableButtonBack.setOnClickListener(v -> pagination(offset - itemsPerPage));
-        binding.tableButtonBack.setOnLongClickListener(v -> pagination(offset - 10 * itemsPerPage));
-        final View.OnClickListener editSearch = v -> Dialogs.input(DBInspectionActivity.this, getString(R.string.dbi_search_title), getSearchTerm(), "", n -> {
+        binding.tableButtonBack.setOnClickListener(v -> pagination(toolkit.getOffset() - toolkit.getItemsPerPage()));
+        binding.tableButtonBack.setOnLongClickListener(v -> pagination(toolkit.getOffset() - FAST_JUMP_PAGES * toolkit.getItemsPerPage()));
+        final View.OnClickListener editSearch = v -> Dialogs.input(DBInspectionActivity.this, getString(R.string.dbi_search_title), toolkit.getSearchTerm(), "", n -> {
             final String newSearchTerm = n.trim();
-            final boolean[] currentSelection = getSearchColumnSelection();
+            final boolean[] currentSelection = toolkit.getSearchColumnSelection();
             if (StringUtils.isBlank(newSearchTerm)) {
                 // skip column selection for empty search term
                 onSearchConfirmed(newSearchTerm, currentSelection);
             } else {
-                final CharSequence[] items = getAvailableSearchColumns();
+                final CharSequence[] items = toolkit.getAvailableSearchColumns();
                 final boolean[] newSelection = Arrays.copyOf(currentSelection, items.length);
                 new MaterialAlertDialogBuilder(DBInspectionActivity.this)
                         .setTitle(R.string.dbi_search_columnSelection)
@@ -79,20 +88,45 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
         binding.tableButtonSearch.setOnClickListener(editSearch);
         binding.searchTerm.setOnClickListener(editSearch);
         binding.tableButtonForward.setEnabled(false);
-        binding.tableButtonForward.setOnClickListener(v -> pagination(offset + itemsPerPage));
-        binding.tableButtonForward.setOnLongClickListener(v -> pagination(offset + 10 * itemsPerPage));
+        binding.tableButtonForward.setOnClickListener(v -> pagination(toolkit.getOffset() + toolkit.getItemsPerPage()));
+        binding.tableButtonForward.setOnLongClickListener(v -> pagination(toolkit.getOffset() + FAST_JUMP_PAGES * toolkit.getItemsPerPage()));
+
+        toolkit.setOnColumnHeaderLongClickListener(columnInfo -> {
+                SimpleDialog
+                        .of(this)
+                        .setTitle(TextParam.id(R.string.dbi_columnproperties_title))
+                        .setMessage(TextParam.text(String.format(getString(R.string.dbi_columnproperties_message), columnInfo.name, columnInfo.type, columnInfo.storageClass)))
+                        .show();
+                return true;
+        });
+        toolkit.setOnFieldLongClickListener((columnInfo, row, inputType, currentValue, isPartOfPrimaryKey) -> {
+            if (isPartOfPrimaryKey) {
+                ViewUtils.showShortToast(null, String.format(getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
+                return true;
+            } else {
+                Dialogs.input(this, String.format(getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
+                    if (toolkit.persistData(row, columnInfo.name, newValue)) {
+                        ViewUtils.showShortToast(this, R.string.dbi_edit_ok);
+                    } else {
+                        ViewUtils.showToast(this, R.string.dbi_edit_error);
+                    }
+                });
+            }
+            return true;
+        });
+        toolkit.setUpdateTableDataHandler(this::updateTableData);
     }
 
     private void onSearchConfirmed(final String newSearchTerm, final boolean[] newSearchColumnSelection) {
-        if (!StringUtils.equals(newSearchTerm, getSearchTerm()) || (!Arrays.equals(getSearchColumnSelection(), newSearchColumnSelection))) {
-            setSearchTerm(newSearchTerm, newSearchColumnSelection);
+        if (!StringUtils.equals(newSearchTerm, toolkit.getSearchTerm()) || (!Arrays.equals(toolkit.getSearchColumnSelection(), newSearchColumnSelection))) {
+            toolkit.setSearchTerm(newSearchTerm, newSearchColumnSelection);
             updateTableData(null);
         }
         binding.searchTerm.setText(newSearchTerm);
     }
 
     private boolean pagination(final int newOffset) {
-        offset = Math.max(0, newOffset);
+        toolkit.setOffset(Math.max(0, newOffset));
         updateTableData(null);
         return true;
     }
@@ -107,56 +141,26 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
             onNothingSelected(parent);
             return;
         }
-        pxHeight = Math.max(ViewUtils.dpToPixel(40), binding.tableData.getHeight() / (itemsPerPage + 1));
+        setDimensions(Math.max(ViewUtils.dpToPixel(40), binding.tableData.getHeight() / (toolkit.getItemsPerPage() + 1)));
         updateTableData(item);
     }
 
-    @Override
-    protected boolean updateTableData(@Nullable final String resetToTable) {
-        final boolean moreDataAvailable = super.updateTableData(resetToTable);
-        binding.tableButtonBack.setEnabled(offset > 0);
+    private void setDimensions(final int pxHeight) {
+        toolkit.setDimensions(ViewUtils.dpToPixel(10), ViewUtils.dpToPixel(10), pxHeight);
+    }
+
+    private boolean updateTableData(@Nullable final String resetToTable) {
+        final boolean moreDataAvailable = toolkit.updateTableDataDefault(resetToTable);
+        binding.tableButtonBack.setEnabled(toolkit.getOffset() > 0);
         binding.tableButtonSearch.setEnabled(true);
         binding.tableButtonForward.setEnabled(moreDataAvailable);
-        binding.searchTerm.setText(getSearchTerm());
+        binding.searchTerm.setText(toolkit.getSearchTerm());
         return moreDataAvailable;
     }
 
     @Override
     public void onNothingSelected(final AdapterView<?> parent) {
         // do nothing
-    }
-
-    @Override
-    protected boolean onColumHeaderLongClickListener(final ColumnInfo columnInfo) {
-        SimpleDialog
-                .of(this)
-                .setTitle(TextParam.id(R.string.dbi_columnproperties_title))
-                .setMessage(TextParam.text(String.format(getString(R.string.dbi_columnproperties_message), columnInfo.name, columnInfo.type, columnInfo.storageClass)))
-                .show();
-        return true;
-    }
-
-    @Override
-    protected boolean onFieldLongClickListener(final ColumnInfo columnInfo, final int row, final int inputType, final String currentValue, final boolean isPartOfPrimaryKey) {
-        if (isPartOfPrimaryKey) {
-            ViewUtils.showShortToast(null, String.format(getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
-            return true;
-        } else {
-            Dialogs.input(this, String.format(getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
-                if (persistData(row, columnInfo.name, newValue)) {
-                    ViewUtils.showShortToast(this, R.string.dbi_edit_ok);
-                } else {
-                    ViewUtils.showToast(this, R.string.dbi_edit_error);
-                }
-            });
-        }
-        return true;
-    }
-
-    @Override
-    protected void setSearchTerm(final String newSearchTerm) {
-        super.setSearchTerm(newSearchTerm);
-        binding.searchTerm.setText(newSearchTerm);
     }
 
     @Override
@@ -169,10 +173,13 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
 
     @Override
     protected void onDestroy() {
-        if (database != null) {
-            DataStore.releaseDatabase(true);
-        }
+        DataStore.releaseDatabase(true);
         super.onDestroy();
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_TOOLKIT, toolkit);
+    }
 }
