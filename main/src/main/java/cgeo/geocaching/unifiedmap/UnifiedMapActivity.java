@@ -1001,7 +1001,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final List<Geocache> list = viewModel.caches.readWithResult(caches ->
                     mapFragment.getViewport().filter(caches));
             new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
-            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list), false, false, () -> viewModel.caches.notifyDataChanged(false));
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
