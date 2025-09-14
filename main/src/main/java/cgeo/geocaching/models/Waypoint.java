@@ -1,5 +1,6 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -10,14 +11,23 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
+
+import io.reactivex.rxjava3.core.Observable;
+
+import static cgeo.geocaching.models.Image.ImageCategory.WAYPOINT;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
+
+import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +75,10 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
+    @Nullable
+    String image;
+    @Nullable
+    Image modelImage;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -85,14 +99,14 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
      * used only for "goto history" UDC
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (Comparator<Waypoint>) (left, right) -> right.id - left.id;
+    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (left, right) -> right.id - left.id;
 
     /**
      * require name and type for every waypoint
@@ -167,6 +181,8 @@ public class Waypoint implements INamedGeoCoordinate {
             projectionFormula2 = old.projectionFormula2;
             projectionDistanceUnit = old.projectionDistanceUnit;
         }
+
+        image = old.image;
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -323,6 +339,41 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public void setGeofence(@Nullable final Float geofence) {
         this.geofence = geofence;
+    }
+
+
+    @Nullable
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(@Nullable final String image) {
+        this.image = image;
+    }
+
+    @Nullable
+    public Image buildImage() {
+        if (image != null && modelImage == null) {
+            modelImage = new Image.Builder()
+                .setUrl(image)
+                .setTitle(name)
+                .setDescription(note)
+                .setCategory(WAYPOINT)
+                .build();
+        }
+        return modelImage;
+    }
+
+    public void fetchImage(View view) {
+        parentCache = this.getParentGeocache();
+        final String geocode = parentCache == null ? "" : parentCache.getGeocode();
+
+        final HtmlImage htmlImage = new HtmlImage(geocode, true, false, false);
+        final Observable<BitmapDrawable> observable = htmlImage.fetchDrawable(getImage());
+        final BitmapDrawable drawable = observable.blockingFirst();
+
+        final ImageParam image = ImageParam.drawable(drawable);
+        image.applyTo(view.findViewById(R.id.waypoint_item_image));
     }
 
     public void setCoords(final Geopoint coords) {
