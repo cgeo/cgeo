@@ -355,7 +355,7 @@ dependencies {
 
     // DB inspection
     implementation 'com.github.moving-bits:datatables:v0.1.0'
-    implementation 'com.github.moving-bits:dbinspection:v0.1.1'
+    implementation 'com.github.moving-bits:dbinspection:v0.1.2'
 
     // Jackson XML processing
     // Jackson 2.13++ needs minSdk 24 (see https://github.com/FasterXML/jackson-databind?tab=readme-ov-file#android)
@@ -493,6 +493,9 @@ dependencies {
 
     // Support Library core (used for eg. HtmlCompat)
     implementation 'androidx.core:core:1.17.0'
+
+    // Local broadcast manager
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 
     // Support Library constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
