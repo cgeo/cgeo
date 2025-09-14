@@ -1,5 +1,6 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -10,14 +11,20 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
+import static cgeo.geocaching.models.Image.ImageCategory.WAYPOINT;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
+
+import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,10 +38,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -65,6 +74,10 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
+    @Nullable
+    String image;
+    @Nullable
+    Image modelImage;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -85,14 +98,14 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
      * used only for "goto history" UDC
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (Comparator<Waypoint>) (left, right) -> right.id - left.id;
+    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (left, right) -> right.id - left.id;
 
     /**
      * require name and type for every waypoint
@@ -114,6 +127,7 @@ public class Waypoint implements INamedGeoCoordinate {
 
     /**
      * copy constructor
+     * @noinspection CopyConstructorMissesField
      */
     public Waypoint(final Waypoint other) {
         merge(other);
@@ -167,6 +181,8 @@ public class Waypoint implements INamedGeoCoordinate {
             projectionFormula2 = old.projectionFormula2;
             projectionDistanceUnit = old.projectionDistanceUnit;
         }
+
+        image = old.image;
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -183,16 +199,20 @@ public class Waypoint implements INamedGeoCoordinate {
         // Copy user modified details of the old waypoints over the new ones
         for (final Waypoint oldWaypoint : oldPoints) {
             final String prefix = oldWaypoint.getPrefix();
-            if (newPrefixes.containsKey(prefix)) {
-                final Waypoint newWaypoint = newPrefixes.get(prefix);
-                if (oldWaypoint.isUserDefined() && !newWaypoint.isUserDefined()) {
-                    assignUniquePrefix(oldWaypoint, newPoints);
+            try {
+                if (newPrefixes.containsKey(prefix)) {
+                    final Waypoint newWaypoint = Objects.requireNonNull(newPrefixes.get(prefix));
+                    if (oldWaypoint.isUserDefined() && !newWaypoint.isUserDefined()) {
+                        assignUniquePrefix(oldWaypoint, newPoints);
+                        newPoints.add(oldWaypoint);
+                    } else {
+                        newWaypoint.merge(oldWaypoint);
+                    }
+                } else if (oldWaypoint.isUserDefined() || forceMerge) {
                     newPoints.add(oldWaypoint);
-                } else {
-                    newWaypoint.merge(oldWaypoint);
                 }
-            } else if (oldWaypoint.isUserDefined() || forceMerge) {
-                newPoints.add(oldWaypoint);
+            } catch (NullPointerException e) {
+                // ?
             }
         }
     }
@@ -307,6 +327,7 @@ public class Waypoint implements INamedGeoCoordinate {
         return coords;
     }
 
+    @Nullable
     public Geopoint getPreprojectedCoords() {
         return preprojectedCoords;
     }
@@ -324,6 +345,45 @@ public class Waypoint implements INamedGeoCoordinate {
         this.geofence = geofence;
     }
 
+
+    @Nullable
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(@Nullable final String image) {
+        this.image = image;
+    }
+
+    @Nullable
+    public Image buildImage() {
+        if (image != null && modelImage == null) {
+            modelImage = new Image.Builder()
+                .setUrl(image)
+                .setTitle(name)
+                .setDescription(note)
+                .setCategory(WAYPOINT)
+                .build();
+        }
+        return modelImage;
+    }
+
+    public void fetchImage(final View view) {
+        if (view == null) {
+            return;
+        }
+
+        parentCache = this.getParentGeocache();
+        final String geocode = parentCache == null ? "" : parentCache.getGeocode();
+
+        final HtmlImage htmlImage = new HtmlImage(geocode, true, false, false);
+        final Observable<BitmapDrawable> observable = htmlImage.fetchDrawable(getImage());
+        final BitmapDrawable drawable = observable.blockingFirst();
+
+        final ImageParam image = ImageParam.drawable(drawable);
+        image.applyTo(view.findViewById(R.id.waypoint_item_image));
+    }
+
     public void setCoords(final Geopoint coords) {
         setCoordsPure(coords);
         setPreprojectedCoords(coords);
@@ -334,7 +394,7 @@ public class Waypoint implements INamedGeoCoordinate {
         this.coords = coords;
     }
 
-    public void setPreprojectedCoords(final Geopoint coords) {
+    public void setPreprojectedCoords(@Nullable final Geopoint coords) {
         this.preprojectedCoords = coords;
     }
 
@@ -343,7 +403,7 @@ public class Waypoint implements INamedGeoCoordinate {
         return note;
     }
 
-    public void setNote(final String note) {
+    public void setNote(@NonNull final String note) {
         this.note = note;
     }
 
