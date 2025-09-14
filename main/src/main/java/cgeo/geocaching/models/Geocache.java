@@ -1052,8 +1052,17 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     @NonNull
-    private List<Image> getWaypointImages() {
-        return waypoints.stream().map(Waypoint::getImage).toList();
+    public List<Image> getWaypointImages() {
+        final List<Image> images = new ArrayList<>(5);
+
+        for (final Waypoint wpt: waypoints) {
+            final Image img = wpt.buildImage();
+            if (img != null) {
+                images.add(img);
+            }
+        }
+
+        return images;
     }
 
     /**

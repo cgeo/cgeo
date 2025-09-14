@@ -16,22 +16,17 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
-
-import android.os.Message;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,45 +68,6 @@ final class ALApi {
 
     private ALApi() {
         // utility class with static methods
-    }
-
-    @NonNull
-    private static Image getImage(final String ilink, final String wptName, final String desc) {
-        return new Image.Builder()
-                .setUrl(ilink)
-                .setTitle(wptName)
-                .setDescription(desc)
-                .setCategory(Image.ImageCategory.WAYPOINT)
-                .build();
-    }
-
-    static class ImageHandler extends DisposableHandler {
-        final Geocache cache;
-        final Waypoint waypoint;
-        final String ilink;
-        final Image image;
-        ImageHandler(final Geocache cache, final Waypoint waypoint, final String ilink, final Image image) {
-            this.cache = cache;
-            this.waypoint = waypoint;
-            this.ilink = ilink;
-            this.image = image;
-        }
-
-        @Override
-        protected void handleRegularMessage(final Message message) {
-            final String localUri = message.obj.toString();
-            final Image cachedImage = getImage(localUri, waypoint.getName(), waypoint.getNote());
-
-            waypoint.setNote(imageString(localUri) + waypoint.getNote());
-
-            cache.getSpoilers().remove(image);
-            cache.getSpoilers().add(cachedImage);
-        }
-
-        @NonNull
-        private static String imageString(final String localUri) {
-            return "<img src=\"" + localUri + "\"></img><p><p>";
-        }
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -209,7 +165,7 @@ final class ALApi {
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
+            final Response response = apiRequest(geocode.substring(2), headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
             if (gc != null && !Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
@@ -292,8 +248,8 @@ final class ALApi {
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, @Nullable final Parameters params, final Parameters headers) {
-        return apiRequest(uri, params, headers, false);
+    private static Single<Response> apiRequest(final String uri, final Parameters headers) {
+        return apiRequest(uri, null, headers, false);
     }
 
     @NonNull
@@ -445,11 +401,7 @@ final class ALApi {
     }
 
     private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
-        final List<Image> wptImages = new ArrayList<>(5);
-        ImageHandler handler;
         final Geopoint pointZero = new Geopoint(0, 0);
-
-        final HtmlImage downloader = new HtmlImage(cache.getGeocode(), true, true, false);
 
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
@@ -467,15 +419,7 @@ final class ALApi {
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                final Image spoilerImage = getImage(ilink, wptName, desc);
-
-                wptImages.add(spoilerImage);
-
-                handler = new ImageHandler(cache, wpt, ilink, spoilerImage);
-
-                downloader.waitForEndCompletable(handler);
-
-                downloader.fetchDrawable(ilink);
+                wpt.setImage(ilink);
 
                 final StringBuilder note = new StringBuilder(desc);
 
@@ -483,17 +427,16 @@ final class ALApi {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
 
-            final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
-            if (jn instanceof ArrayNode) { // implicitly covers null case as well
-                final ArrayNode multiChoiceOptions = (ArrayNode) jn;
-                if (!multiChoiceOptions.isEmpty()) {
+                final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
+                if (jn instanceof ArrayNode && ! jn.isEmpty()) {
                     note.append("<ul>");
-                    for (final JsonNode mc : multiChoiceOptions) {
+                    for (final JsonNode mc : jn) {
                         note.append("<li>").append(mc.get("Text").asText()).append("</li>");
                     }
                     note.append("</ul>");
                 }
-            }
+
+                wpt.setNote(note.toString());
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
                 if (!pt.equals(pointZero)) {
@@ -501,13 +444,16 @@ final class ALApi {
                 } else {
                     wpt.setOriginalCoordsEmpty(true);
                 }
+
+                cache.addOrChangeWaypoint(wpt, true);
             } catch (final Exception e) {
                 Log.e("_AL ALApi.parseWaypoints", e);
-                throw e;
+                // one waypoint failing should not impact the others
             }
         }
 
-        cache.setSpoilers(wptImages);
+        // cache spoilers
+        cache.setSpoilers(cache.getWaypointImages());
     }
 
     @Nullable

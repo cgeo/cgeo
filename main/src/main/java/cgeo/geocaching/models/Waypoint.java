@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
+import static cgeo.geocaching.models.Image.ImageCategory.WAYPOINT;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
@@ -65,7 +66,10 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
-    @Nullable Image image;
+    @Nullable
+    String image;
+    @Nullable
+    Image modelImage;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -168,6 +172,8 @@ public class Waypoint implements INamedGeoCoordinate {
             projectionFormula2 = old.projectionFormula2;
             projectionDistanceUnit = old.projectionDistanceUnit;
         }
+
+        image = old.image;
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -316,6 +322,7 @@ public class Waypoint implements INamedGeoCoordinate {
     public Float getGeofence() {
         return geofence;
     }
+
     public boolean canChangeGeofence() {
         // currently geofence value is used by AL connector only, so you may set it manually for every other connector
         return !ALConnector.getInstance().canHandle(geocode);
@@ -325,13 +332,27 @@ public class Waypoint implements INamedGeoCoordinate {
         this.geofence = geofence;
     }
 
+
     @Nullable
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(@NonNull final Image image) {
+    public void setImage(@Nullable final String image) {
         this.image = image;
+    }
+
+    @Nullable
+    public Image buildImage() {
+        if (image != null && modelImage == null) {
+            modelImage = new Image.Builder()
+                .setUrl(image)
+                .setTitle(name)
+                .setDescription(note)
+                .setCategory(WAYPOINT)
+                .build();
+        }
+        return modelImage;
     }
 
     public void setCoords(final Geopoint coords) {
