@@ -52,4 +52,16 @@ public class ColorUtils {
     public static int colorFromResource(@ColorRes final int colorRes) {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
+
+    public static int getActionBarColor(final int colorInt) {
+        int red = Color.red(colorInt);
+        int green = Color.green(colorInt);
+        int blue = Color.blue(colorInt);
+
+        float[] hsl = new float[3];
+        androidx.core.graphics.ColorUtils.RGBToHSL(red, green, blue, hsl);
+
+        hsl[2] = Math.max(0f, hsl[2] - 0.15f);
+        return androidx.core.graphics.ColorUtils.HSLToColor(hsl);
+    }
 }

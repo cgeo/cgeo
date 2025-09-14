@@ -108,7 +108,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
-            actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
+            //actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
         }
     }
 

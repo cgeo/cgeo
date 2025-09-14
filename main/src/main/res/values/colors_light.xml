@@ -17,7 +17,7 @@
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
     <color name="colorBackgroundSelected">#FFCCCCCC</color>
-    <color name="colorBackgroundActionBar">#FFDEDEDE</color>
+    <color name="colorBackgroundActionBar">#DD000000</color>
 
     <color name="colorSeparator">#33000000</color>
 
