@@ -81,6 +81,8 @@ public class GeoItemSelectorUtils {
         }
         setViewValues(view, waypointName, TextParam.text(text), waypointIcon);
 
+        waypoint.fetchImage(view);
+
         return view;
     }
 
