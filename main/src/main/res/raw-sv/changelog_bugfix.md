@@ -10,10 +10,10 @@
 - Fix: Vägpunkter i offline-karta visas inte ibland
 
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Fix: Okrypterade cache-tips (ändring av webbplatsen)
+- Fix: Lab Adventures laddas inte i appen (webbplats ändras, du kommer att behöva uppdatera lagrade lab-äventyr för att kunna använda dem från c:geo igen)
 - Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Fix: Offline-översättning: Listspråk detekteras ibland som --
 
 ##
 - Fix: Krasch i översättningsmodulen
