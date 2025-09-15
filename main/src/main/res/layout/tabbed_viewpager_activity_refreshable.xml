@@ -40,7 +40,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            app:tabTextColor="@color/colorTextActionBar"
+            app:tabTextColor="@color/colorTextTabBar"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabPaddingStart="18sp"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_detailsPrimary"
-            android:background="@color/colorBackgroundActionBar" />
+            android:background="@color/colorBackgroundTabBar" />
 
     </LinearLayout>
 </RelativeLayout>

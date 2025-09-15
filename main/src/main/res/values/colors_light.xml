@@ -18,6 +18,8 @@
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
     <color name="colorBackgroundSelected">#FFCCCCCC</color>
     <color name="colorBackgroundActionBar">#DD000000</color>
+    <color name="colorBackgroundTabBar">#fff3f3f3</color>
+    <color name="colorTextTabBar">@color/colorTextDark</color>
 
     <color name="colorSeparator">#33000000</color>
 
