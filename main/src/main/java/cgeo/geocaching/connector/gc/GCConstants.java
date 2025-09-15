@@ -177,7 +177,7 @@ public final class GCConstants {
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
     static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
     static final Pattern PATTERN_TOTAL_TRACKABLES = Pattern.compile("\"totalTrackables\":\"([\\d]+)\"");
-    static final Pattern PATTERN_LOGPAGE_TRACKABLES = Pattern.compile("\"trackables\":\\[(.+?)\\]\\},\"__N_SSP\"");
+    static final Pattern PATTERN_LOGPAGE_TRACKABLES = Pattern.compile("\"trackables\":\\[(.+?\\})\\],[\"_sentry|\\},\"__N_SSP]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
