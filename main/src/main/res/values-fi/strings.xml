@@ -350,12 +350,10 @@
     <string name="translator_model_download_success">Käännösmalli %s ladattu</string>
     <string name="translator_model_download_error">Käännösmallin %1$slataaminen epäonnistui: %2$s</string>
     <string name="translator_model">Käännösmalli</string>
-    <string name="translator_tooltip">Offline kääntö</string>
     <string name="translator_language_select">Valitse lähdekieli</string>
     <string name="translator_target_language">Käännä kielelle \"%s\"</string>
     <string name="translator_translation_error">Tekstin kääntäminen epäonnistui: %s</string>
     <string name="translator_translation_initerror">Kääntäjän alustus epäonnistui</string>
-    <string name="translator_translation_success">Käännetty kielestä \"%s\", napauta painiketta palauttaaksesi alkuperäisen</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
     <string name="loc_net">Verkko</string>
