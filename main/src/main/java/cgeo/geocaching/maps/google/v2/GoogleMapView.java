@@ -26,7 +26,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.HideActionBarUtils;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
@@ -148,7 +148,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 if (activityRef.get().sheetRemoveFragment()) {
                     return;
                 }
-                adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(activityRef.get()));
+                adaptLayoutForActionbar(ActionBarUtils.toggleActionBar(activityRef.get()));
             }
         });
         googleMap.setOnMarkerClickListener(marker -> {
