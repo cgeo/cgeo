@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.ColorUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -33,6 +34,12 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar != null) {
             // don't display a back button it the activity is running as top-level activity with bottom navigation attached
             actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractNavigationBarActivity));
+        }
+
+        final View actionBarView = getActionBarView();
+        if (actionBarView != null) {
+            // set action bar background color, otherwise it would be transparent
+            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
         }
     }
 
