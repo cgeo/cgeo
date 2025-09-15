@@ -354,12 +354,18 @@
     <string name="translator_model_download_success">Modello di traduzione per %s scaricato</string>
     <string name="translator_model_download_error">Download del modello di traduzione non riuscito: %1$s: %2$s</string>
     <string name="translator_model">Modello di traduzione</string>
-    <string name="translator_tooltip">Traduttore offline</string>
+    <string name="translator_tooltip">Traduttore offline con Google</string>
     <string name="translator_language_select">Seleziona la lingua di origine</string>
+    <string name="translator_language_target_select">Seleziona la lingua di destinazione</string>
+    <string name="translator_language_unsupported">Lingua (%s) non supportata per la traduzione.\nTocca per selezionare la lingua sorgente.</string>
+    <string name="translator_language_unknown">Impossibile identificare la lingua.\nTocca per selezionare la lingua di origine.</string>
+    <string name="translator_language_detected">Traduci da \"%s\" con Google.\nTocca per selezionare la lingua sorgente.</string>
     <string name="translator_target_language">Traduci in %s</string>
     <string name="translator_translation_error">Traduzione del testo non riuscita: %s</string>
     <string name="translator_translation_initerror">Impossibile avviare il traduttore</string>
-    <string name="translator_translation_success">Tradotto da \"%s\", tocca il pulsante per ripristinare il testo originale</string>
+    <string name="translator_translation_success">Tradotto da \"%s\".\nTocca il pulsante per ripristinare l\'originale</string>
+    <string name="crash_activity_title">Oops! c:geo è andato in errore!</string>
+    <string name="crash_activity_report">segnala il problema</string>
     <!-- location service -->
     <string name="loc_last">Ultima nota</string>
     <string name="loc_net">Rete</string>
@@ -405,6 +411,7 @@
         <item quantity="one">Carica il prossimo cache %1$d</item>
         <item quantity="other">Carica i prossimi %1$d cache</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Carica tutte i cache rimanenti</string>
     <string name="caches_store_offline">Salva offline</string>
     <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_selected">Salva selezionati</string>
@@ -468,6 +475,7 @@
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
     <string name="caches_upload_allcoords_dialogtitle">ATTENZIONE - Caricamento di tutte le coordinate</string>
     <string name="caches_upload_allcoords_warning">Questo sovrascriverà le coordinate esistenti sul server per tutte le cache (selezionate) della tua lista con le coordinate correnti nella tua lista in c:geo! Questo viene utilizzato solo in casi particolari, per esempio, quando hai importato un file GPX che contiene coordinate corrette come coordinate di lista. Questo non può essere annullato e lo si dovrebbe usare solo se si sa cosa si sta facendo. In casi normali dovresti preferire la funzione \"Carica coordinate modificate\" nello stesso menu.</string>
+    <string name="caches_share_geocodes">Condividi l\'elenco dei geocodici</string>
     <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
     <string name="caches_refresh_all">Aggiorna tutti</string>
     <string name="caches_move_selected">Muovi i cache selezionati</string>
@@ -982,6 +990,7 @@
     <string name="init_summary_units">Usa miglia/piedi invece del sistema metrico</string>
     <string name="init_cachelists">Liste di cache</string>
     <string name="init_localization">Localizzazione</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Log offline</string>
     <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
     <string name="init_choose_list">Chiedi lista</string>
@@ -999,6 +1008,8 @@
     <string name="init_custombnitem_default">Ricerca nelle vicinanze (predefinita)</string>
     <string name="init_custombnitem_none">(nessuno)</string>
     <string name="init_custombnitem_empty_placeholder">(segnaposto vuoto)</string>
+    <string name="init_title_collapse_log_limit">Limite Linea Log</string>
+    <string name="init_summary_collapse_log_limit">Numero massimo di righe da mostrare per i registri. Linee aggiuntive saranno collassate. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Difficoltà</string>
@@ -1209,6 +1220,8 @@
     <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
     <string name="feature_voting">Votazione per i cache</string>
     <string name="init_appearance_general">Aspetto generale</string>
+    <string name="init_cachedetail_behaviour">Comportamento</string>
+    <string name="init_cachedetail_note">Nota Personale del Cache</string>
     <string name="init_maplines_title">Personalizzazione colori mappa</string>
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
@@ -1393,6 +1406,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Tracciabili</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Imposta coordinate</string>
     <string name="cache_personal_note">Note personali</string>
@@ -1882,6 +1896,7 @@
     <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_tb">Oggetto Trackable</string>
+    <string name="most_recent">Più recenti</string>
     <string name="search_destination">Apri destinazione in c:geo</string>
     <string name="add_target_to">Aggiungi obiettivo a</string>
     <string name="search_address_started">Cerca per luoghi</string>
@@ -1971,10 +1986,14 @@
     <string name="helper_gcwizard_description">GC Wizard contiene numerosi strumenti per la crittografia semplice, calcoli geodetici e scientifici e centinaia di insiemi di vari simboli.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
+    <string name="export">Esportazione</string>
+    <string name="export_upload">Esporta / Carica</string>
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
     <string name="export_failed">Esportazione fallita</string>
+    <string name="export_gpx">Esporta GPX</string>
     <string name="export_fieldnotes">Esporta note personali</string>
+    <string name="fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Note saranno esportate in /sdcard/field-notes con la data e ora correnti nel nome file.</string>
     <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
     <string name="export_fieldnotes_uploading">Caricamento…</string>
