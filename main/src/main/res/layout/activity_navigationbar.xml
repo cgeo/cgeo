@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
-        android:background="@color/colorBackgroundActionBar"
+        android:background="@color/colorBackgroundTabBar"
         app:itemIconTint="@color/bottom_bar_selector"
         app:itemTextColor="@color/bottom_bar_selector"
         app:menu="@menu/activity_navigationbar_menu" />
