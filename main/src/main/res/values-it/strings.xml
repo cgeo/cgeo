@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Commenti del Team OC</string>
     <string name="log_your_saved_log">I tuoi log salvati</string>
     <string name="log_empty_logbook">Il logbook di questo cache è vuoto.</string>
+    <string name="log_empty_logbook_filtered">I filtri selezionati nascondono tutti i log. Selezionare almeno un\'opzione.</string>
     <string name="log_image_selectfromstorage_tooltip">Seleziona le immagini dalla memoria</string>
     <string name="log_image_camera_tooltip">Scatta foto con la fotocamera</string>
     <string name="log_image_selectfromown_tooltip">Seleziona immagini dalle proprie immagini</string>
@@ -216,11 +217,26 @@
     <string name="log_image_titleprefix">Immagine</string>
     <string name="log_delete_confirm">Vuoi davvero eliminare il registro di tipo \'%1$s\' dall\'autore \'%2$s\' con la data di log \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Vuoi davvero eliminare il tuo log offline di tipo \'%1$s\' memorizzato con la data di log \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Ho trovato %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Non ho trovato %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Ho lasciato una nota su %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Ho segnalato la manutenzione necessaria per %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Penso che %1$s (%2$s) debba essere archiviato:\n\n</string>
+    <string name="log_share_prefix_default">Il mio log per %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
     <string name="contact_multiple_matches">Contatto: risultati multipli</string>
     <!-- External translation -->
+    <string name="translate">Traduci</string>
+    <string name="translate_external_label">Traduci in %s</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Sito Internet</string>
+    <string name="translate_external_none">&lt;nessuno&gt;</string>
+    <string name="translate_external_app">App esterna</string>
+    <string name="translate_external_google">Google Traduttore</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">La traduzione tramite sito web potrebbe fallire con una grande quantità di testo.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
@@ -251,6 +267,7 @@
     <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
     <string name="err_detail_premium_log_found">Questo cache è disponibile solo per i membri premium di geocaching.com. Pertanto, le informazioni non possono essere visualizzate.\n\nTuttavia, se hai già trovato questo cache, puoi registrarlo qui.</string>
     <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
+    <string name="err_watchlist_failed_geocodes">Cambiamento della tua watchlist non riuscito per i geocodici: %s</string>
     <string name="err_application_no">c:geo non trova nessuna applicazione compatibile.</string>
     <string name="err_auth_initialize">c:geo ha fallito l\'inizializzazione del processo di autorizzazione.</string>
     <string name="err_auth_process">Processo di autorizzazione fallito.</string>
@@ -305,6 +322,8 @@
     <string name="warn_notloggedin_long">Non connesso (ancora). La mappa live mostrerà solo i cache memorizzati localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
     <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
     <string name="err_read_bookmark_list">Errore nella lettura degli elenchi dei segnalibri.</string>
+    <string name="err_bookmark_list_overfull">Troppi cache</string>
+    <string name="err_bookmark_list_overfull_description">Le liste dei segnalibri possono memorizzare solo fino a 1000 cache, si sta tentando di aggiungerne di più.\n\nVuoi procedere e aggiungere solo quanti cache può contenere la lista?</string>
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
@@ -332,6 +351,7 @@
     <string name="dont_show_again">Non mostrare ancora</string>
     <string name="tap_icon_more_info">Tocca l\'icona per maggiori informazioni</string>
     <string name="use_slider_adjust_value">Usa il cursore per regolare il valore</string>
+    <string name="snackbar_action_share">Condividi</string>
     <string name="warn_gm_not_available">Google Maps non disponibile.</string>
     <string name="switch_to_mf">Il tuo servizio Google Play non è aggiornato. Vuoi passare al provider delle mappe di Mapsforge?</string>
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
@@ -352,10 +372,16 @@
     <string name="translator_model">Modello di traduzione</string>
     <string name="translator_tooltip">Traduttore offline</string>
     <string name="translator_language_select">Seleziona la lingua di origine</string>
+    <string name="translator_language_target_select">Seleziona la lingua di destinazione</string>
+    <string name="translator_language_unsupported">Lingua (%s) non supportata per la traduzione. Tocca per selezionare la lingua sorgente.</string>
+    <string name="translator_language_unknown">Impossibile identificare la lingua. Tocca per selezionare la lingua di origine.</string>
+    <string name="translator_language_detected">Traduci da \"%s\". Tocca per selezionare la lingua di origine.</string>
     <string name="translator_target_language">Traduci in %s</string>
     <string name="translator_translation_error">Traduzione del testo non riuscita: %s</string>
     <string name="translator_translation_initerror">Impossibile avviare il traduttore</string>
     <string name="translator_translation_success">Tradotto da \"%s\", tocca il pulsante per ripristinare il testo originale</string>
+    <string name="crash_activity_title">Oops! c:geo è andato in errore!</string>
+    <string name="crash_activity_report">segnala il problema</string>
     <!-- location service -->
     <string name="loc_last">Ultima nota</string>
     <string name="loc_net">Rete</string>
@@ -401,6 +427,7 @@
         <item quantity="one">Carica il prossimo cache %1$d</item>
         <item quantity="other">Carica i prossimi %1$d cache</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Carica tutte i cache rimanenti</string>
     <string name="caches_store_offline">Salva offline</string>
     <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_selected">Salva selezionati</string>
@@ -459,11 +486,17 @@
     <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_bookmarklist_all">Aggiunge tutti alla lista dei segnalibri</string>
     <string name="caches_upload_bookmarklist_selected">Aggiungi selezionato alla lista dei segnalibri</string>
+    <string name="caches_watch_all">Aggiungi tutti alla watchlist</string>
+    <string name="caches_unwatch_all">Rimuovi tutti dalla watchlist</string>
+    <string name="caches_watch_selected">Aggiungi selezionato alla watchlist</string>
+    <string name="caches_unwatch_selected">Rimuovi selezionato dalla watchlist</string>
+    <string name="watchlist_background_started">Aggiornamento Watchlist avviato in background</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
     <string name="caches_upload_allcoords_dialogtitle">ATTENZIONE - Caricamento di tutte le coordinate</string>
     <string name="caches_upload_allcoords_warning">Questo sovrascriverà le coordinate esistenti sul server per tutte le cache (selezionate) della tua lista con le coordinate correnti nella tua lista in c:geo! Questo viene utilizzato solo in casi particolari, per esempio, quando hai importato un file GPX che contiene coordinate corrette come coordinate di lista. Questo non può essere annullato e lo si dovrebbe usare solo se si sa cosa si sta facendo. In casi normali dovresti preferire la funzione \"Carica coordinate modificate\" nello stesso menu.</string>
+    <string name="caches_share_geocodes">Condividi l\'elenco dei geocodici</string>
     <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
     <string name="caches_refresh_all">Aggiorna tutti</string>
     <string name="caches_move_selected">Muovi i cache selezionati</string>
@@ -928,6 +961,8 @@
     <string name="init_translation_disabled">Traduzione disabilitata</string>
     <string name="init_date_format">Formato data</string>
     <string name="init_date_format_description">Formato da usare per date brevi, ad esempio nella visualizzazione log</string>
+    <string name="init_translator_external">Traduttore Esterno</string>
+    <string name="init_translator_external_description">App traduttore esterno da usare</string>
     <string name="system_default">Predefinito di Sistema</string>
     <string name="init_showwaypoints">Mostra i waypoint</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
@@ -978,6 +1013,7 @@
     <string name="init_summary_units">Usa miglia/piedi invece del sistema metrico</string>
     <string name="init_cachelists">Liste di cache</string>
     <string name="init_localization">Localizzazione</string>
+    <string name="init_logs">Logs</string>
     <string name="init_log_offline">Log offline</string>
     <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
     <string name="init_choose_list">Chiedi lista</string>
@@ -988,6 +1024,8 @@
     <string name="init_summary_cacheListInfo">Seleziona le informazioni aggiuntive da mostrare per ogni cache negli elenchi di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
+    <string name="init_live_compass_in_navigation_action">Mostra la direzione nella vista dettagliata del cache</string>
+    <string name="init_summary_live_compass_in_navigation_action">Mostra una freccia con la direzione della bussola per i cache nella loro vista dettagliata</string>
     <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
     <string name="init_summary_quicklaunchitems">Seleziona uno o più elementi come pulsanti di avvio rapido nella schermata iniziale</string>
     <string name="init_custombnitem">Voce di menu Personalizzata</string>
@@ -995,6 +1033,8 @@
     <string name="init_custombnitem_default">Ricerca nelle vicinanze (predefinita)</string>
     <string name="init_custombnitem_none">(nessuno)</string>
     <string name="init_custombnitem_empty_placeholder">(segnaposto vuoto)</string>
+    <string name="init_title_collapse_log_limit">Limite Linea Log</string>
+    <string name="init_summary_collapse_log_limit">Numero massimo di righe da mostrare per i registri. Linee aggiuntive saranno collassate. </string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Difficoltà</string>
@@ -1205,6 +1245,8 @@
     <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
     <string name="feature_voting">Votazione per i cache</string>
     <string name="init_appearance_general">Aspetto generale</string>
+    <string name="init_cachedetail_behaviour">Comportamento</string>
+    <string name="init_cachedetail_note">Nota Personale del Cache</string>
     <string name="init_maplines_title">Personalizzazione colori mappa</string>
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
@@ -1214,6 +1256,7 @@
     <string name="category_unifiedMap">Mappa Unificata</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
+    <string name="gui_test_title">Schermata Di Prova GUI</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notifica di prossimità</string>
     <string name="init_proximityNotificationGeneral">Notifica generale di prossimità sulla mappa</string>
@@ -1435,6 +1478,7 @@
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
     <string name="cache_variables">Variabili</string>
+    <string name="cache_variables_chip_completed_variables">Completati</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
@@ -1444,6 +1488,7 @@
     <string name="cache_logs">Logbook</string>
     <string name="cache_latest_logs">Log recenti</string>
     <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
+    <string name="cache_logs_friends">Amici</string>
     <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
     <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
@@ -1647,6 +1692,7 @@
     <string name="cc_hint_minutes">minuti</string>
     <string name="cc_hint_seconds">secondi</string>
     <string name="cc_hint_fraction">frazione</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Caricamento cache da %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Caricamento coordinate da %1$s</string>
@@ -1690,6 +1736,7 @@
     <string name="waypoint_edit_title">Modifica waypoint</string>
     <string name="waypoint_add_title">Aggiungi waypoint</string>
     <string name="waypoint_added">Waypoint aggiunto</string>
+    <string name="waypoint_added_current_location">Waypoint (%1$s) aggiunto (±%2$s)</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota utente</string>
     <string name="waypoint_visited">Visitato</string>
@@ -1729,6 +1776,7 @@
     <string name="projection_type_offset_hint_longitude">Longitudine Offset in Micro-Minuti</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
+    <string name="variables_titletext_short">Valori e calcoli</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
     <string name="variables_scanlisting_choosepattern_title">Seleziona il motivo trovato</string>
     <string name="variables_scanlisting_nopatternfound">Pattern non trovato</string>
@@ -1877,6 +1925,7 @@
     <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_tb">Oggetto Trackable</string>
+    <string name="most_recent">Più recenti</string>
     <string name="search_destination">Apri destinazione in c:geo</string>
     <string name="add_target_to">Aggiungi obiettivo a</string>
     <string name="search_address_started">Cerca per luoghi</string>
@@ -1966,10 +2015,14 @@
     <string name="helper_gcwizard_description">GC Wizard contiene numerosi strumenti per la crittografia semplice, calcoli geodetici e scientifici e centinaia di insiemi di vari simboli.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
+    <string name="export">Esportazione</string>
+    <string name="export_upload">Esporta / Carica</string>
     <string name="export_progress">Esporta: %1$s</string>
     <string name="export_exportedto">esportato in</string>
     <string name="export_failed">Esportazione fallita</string>
+    <string name="export_gpx">Esporta GPX</string>
     <string name="export_fieldnotes">Esporta note personali</string>
+    <string name="fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Note saranno esportate in /sdcard/field-notes con la data e ora correnti nel nome file.</string>
     <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
     <string name="export_fieldnotes_uploading">Caricamento…</string>
@@ -2399,6 +2452,7 @@
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta l\'inizio del percorso come obiettivo\" disabilitato</string>
+    <string name="map_manual_target_route_name">Navigazione corrente</string>
     <string name="map_clear_manual_targets">Cancella obiettivo di routing</string>
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
@@ -2741,6 +2795,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferenze dimensione immagine</string>
+    <string name="settings_gc_imagesize_summary">Le immagini da Geocaching.com negli elenchi, log e trackables sono disponibili in diverse dimensioni. Selezionare la dimensione da utilizzare quando si carica e memorizza un cache.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Invariato</string>
+    <string name="settings_gc_imagesize_entry_original">Massimo</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Visualizza database</string>
     <string name="dbi_select_title">(Seleziona tabella)</string>
