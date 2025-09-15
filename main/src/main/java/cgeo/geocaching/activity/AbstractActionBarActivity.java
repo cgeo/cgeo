@@ -103,7 +103,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
         return insets;
     }
 
-    private void applyTranslation() {
+    @Override
+    protected void applyTranslation() {
         final View actionBar = getActionBarView();
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);

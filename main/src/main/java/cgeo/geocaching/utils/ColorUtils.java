@@ -1,7 +1,10 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
@@ -51,5 +54,27 @@ public class ColorUtils {
     @ColorInt
     public static int colorFromResource(@ColorRes final int colorRes) {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
+    }
+
+    private static int getActionBarColor(final int colorInt) {
+        final int red = Color.red(colorInt);
+        final int green = Color.green(colorInt);
+        final int blue = Color.blue(colorInt);
+
+        final float[] hsl = new float[3];
+        androidx.core.graphics.ColorUtils.RGBToHSL(red, green, blue, hsl);
+
+        hsl[2] = Math.max(0f, hsl[2] - 0.15f);
+        return androidx.core.graphics.ColorUtils.HSLToColor(hsl);
+    }
+
+    public static int getActionBarColor(final Resources res, final Geocache cache) {
+        final int cacheColor;
+        if (cache.isArchived() || cache.isDisabled()) {
+            cacheColor = R.color.cacheType_disabled;
+        } else {
+            cacheColor = cache.getType().typeColor;
+        }
+        return getActionBarColor(res.getColor(cacheColor));
     }
 }
