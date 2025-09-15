@@ -406,7 +406,7 @@ dependencies {
 
     // Mapsforge VTM implementation (official version)
     String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
-    String mapsforgeVTMVersion = '0.25.0'
+    String mapsforgeVTMVersion = '0.26.1'
 
     // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
     // String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
