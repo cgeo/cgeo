@@ -55,13 +55,13 @@ import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
@@ -518,7 +518,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        HideActionBarUtils.setContentView(activity, MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot(), true);
+        ActionBarUtils.setContentView(activity, MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot(), true);
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->

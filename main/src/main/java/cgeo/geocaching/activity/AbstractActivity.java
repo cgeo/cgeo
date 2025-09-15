@@ -8,8 +8,8 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -154,9 +154,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
         initEdgeToEdge();
-
-        // set light/dark system bars depending on action bar colors
-        setStatusBarAppearance(getResources().getColor(R.color.colorBackgroundActionBar));
     }
 
     private void initEdgeToEdge() {
@@ -165,6 +162,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         WindowCompat.enableEdgeToEdge(currentWindow);
         //set window behaviour
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
+
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         //apply edge2edge to activity content view
         ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
@@ -179,6 +177,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             }
             return windowInsets;
         });
+
+        // adjust system bars appearance, depending on action bar color and visibility
+        ActionBarUtils.setSystemBarAppearance(this, true);
     }
 
     /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */
