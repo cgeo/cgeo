@@ -103,12 +103,13 @@ public class AbstractActionBarActivity extends AbstractActivity {
         return insets;
     }
 
-    private void applyTranslation() {
+    @Override
+    protected void applyTranslation() {
         final View actionBar = getActionBarView();
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
-            //actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
+            actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
         }
     }
 

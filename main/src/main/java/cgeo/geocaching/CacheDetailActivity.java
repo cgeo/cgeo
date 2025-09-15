@@ -998,6 +998,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     }
 
+    @Override
+    public void applyTranslation() {
+        super.applyTranslation();
+
+        if (cache != null) {
+            getActionBarView().setBackgroundColor(ColorUtils.getActionBarColor(getResources(), cache));
+        }
+    }
+
     private void notifyDataSetChanged() {
         // This might get called asynchronous when the activity is shut down
         if (isFinishing()) {
@@ -1009,10 +1018,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
-
-        if (cache != null) {
-            getActionBarView().setBackgroundColor(ColorUtils.getActionBarColor(getResources().getColor(cache.getType().typeColor)));
-        }
 
         if (cache == null) {
             progress.dismiss();

@@ -153,7 +153,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             });
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
-            toolbar.setBackgroundColor(ColorUtils.getActionBarColor(getResources().getColor(cache.getType().typeColor)));
+            toolbar.setBackgroundColor(ColorUtils.getActionBarColor(getResources(), cache));
 
             details = new CacheDetailsCreator(requireActivity(), binding.detailsList);
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));

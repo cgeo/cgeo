@@ -372,4 +372,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         Log.v(logToken + ".onRestart()");
         super.onRestart();
     }
+
+    protected void applyTranslation() {
+    }
 }
