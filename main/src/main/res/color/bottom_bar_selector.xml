@@ -3,7 +3,5 @@
     <item
         android:state_checked="true"
         android:color="@color/colorAccent" />
-    <item
-        android:state_checked="false"
-        android:color="@color/colorTextActionBar" />
+    <item android:state_checked="false" android:color="@color/colorTextTabBar" />
 </selector>
