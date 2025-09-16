@@ -52,4 +52,19 @@ public class ColorUtils {
     public static int colorFromResource(@ColorRes final int colorRes) {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
+
+    private static float[] getHslValues(@ColorInt final int colorInt) {
+        final int red = Color.red(colorInt);
+        final int green = Color.green(colorInt);
+        final int blue = Color.blue(colorInt);
+
+        final float[] hsl = new float[3];
+        androidx.core.graphics.ColorUtils.RGBToHSL(red, green, blue, hsl);
+        return hsl;
+    }
+
+    public static boolean isBrightnessDark(@ColorInt final int colorInt) {
+        final float[] hsl = getHslValues(colorInt);
+        return hsl[2] < 0.5f;
+    }
 }
