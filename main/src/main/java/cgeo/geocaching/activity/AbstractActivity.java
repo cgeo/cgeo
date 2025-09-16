@@ -14,6 +14,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
+import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -161,6 +162,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
         initEdgeToEdge();
+
+        // set light/dark system bars depending on action bar colors
+        setStatusBarAppearance(getResources().getColor(R.color.colorBackgroundActionBar));
     }
 
     private void initEdgeToEdge() {
@@ -290,6 +294,19 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+        }
+    }
+
+    private void setStatusBarAppearance(final int actionBarColor) {
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        if (isLightSkin) {
+            final Window currentWindow = this.getWindow();
+            final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
+
+            // set light/dark system bars depending on action bar colors
+            final boolean isLightActionBar = !ColorUtils.isBrightnessDark(actionBarColor);
+            windowInsetsController.setAppearanceLightStatusBars(isLightActionBar);
+            windowInsetsController.setAppearanceLightNavigationBars(isLightActionBar);
         }
     }
 
