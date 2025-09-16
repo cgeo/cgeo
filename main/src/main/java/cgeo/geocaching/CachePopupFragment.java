@@ -19,7 +19,6 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheUtils;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
@@ -136,6 +135,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(geocode);
+            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType());
+
             toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
             toolbar.setLongClickable(true);
             toolbar.setOnClickListener(v -> {
@@ -153,7 +154,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             });
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
-            toolbar.setBackgroundColor(ColorUtils.getActionBarColor(getResources().getColor(cache.getType().typeColor)));
 
             details = new CacheDetailsCreator(requireActivity(), binding.detailsList);
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));
