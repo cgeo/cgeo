@@ -92,7 +92,6 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -1000,10 +999,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
-
-        if (cache != null) {
-            getActionBarView().setBackgroundColor(ColorUtils.getActionBarColor(getResources().getColor(cache.getType().typeColor)));
-        }
 
         if (cache == null) {
             progress.dismiss();
