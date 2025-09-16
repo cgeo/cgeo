@@ -9,7 +9,9 @@
     android:orientation="vertical"
     tools:context=".CachePopupFragment">
 
-    <include layout="@layout/swipe_up_indicator" />
+    <include
+        android:id="@+id/swipe_up_indicator"
+        layout="@layout/swipe_up_indicator" />
 
     <include
         android:id="@+id/toolbar"
