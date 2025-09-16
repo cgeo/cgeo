@@ -1183,6 +1183,8 @@
 
     <string name="init_wallpaper">Wallpaper</string>
     <string name="init_summary_wallpaper">Show device wallpaper as home screen background</string>
+    <string name="init_colored_theme">Colored theme</string>
+    <string name="init_summary_colored_theme">Use colored theme</string>
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>

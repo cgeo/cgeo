@@ -145,6 +145,7 @@
     <string translatable="false" name="preference_screen_appearance">preference_screen_appearance</string>
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_theme_setting">theme_setting</string>
+    <string translatable="false" name="pref_colored_theme">colored_actionbar</string>
     <string translatable="false" name="pref_wallpaper">wallpaper</string>
     <string translatable="false" name="pref_showaddress">showaddress</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>

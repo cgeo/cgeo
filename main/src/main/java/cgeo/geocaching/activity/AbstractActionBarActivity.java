@@ -167,6 +167,10 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     private void setCacheTitleBarBackground(@Nullable final CacheType cacheType) {
+        if (!Settings.useColoredActionBar(this)) {
+            return;
+        }
+
         // set action bar background color according to cache type
         final View actionBarView = getActionBarView();
         if (actionBarView == null) {
