@@ -82,8 +82,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private final List<Geocache> list;
 
 
-    private static final int SWIPE_MIN_DISTANCE = 60;
-    private static final int SWIPE_MAX_OFF_PATH = 100;
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
@@ -589,6 +587,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private static class FlingGesture extends GestureDetector.SimpleOnGestureListener {
+
+        private static final int SWIPE_MIN_DISTANCE = 60;
+        private static final int SWIPE_MAX_OFF_PATH = 100;
 
         private final Geocache cache;
         @NonNull private final WeakReference<CacheListAdapter> adapterRef;
