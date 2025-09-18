@@ -24,12 +24,12 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     private final Context context;
 
     public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction) {
-        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, null);
+        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, null, null);
         this.context = context;
     }
 
     public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
-        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, historyFunction);
+        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, historyFunction, null);
         this.context = context;
     }
 

@@ -2037,6 +2037,13 @@ public class Settings {
         putStringList(prefKey, history);
     }
 
+    public static void removeFromHistoryList(final int prefKey, final String historyValue) {
+        final List<String> history = new ArrayList<>(Arrays.asList(getHistoryList(prefKey)));
+        Log.e("remove from history " + prefKey + ": " + historyValue);
+        history.remove(historyValue);
+        putStringList(prefKey, history);
+    }
+
     public static void clearRecentlyViewedHistory() {
         putStringList(R.string.pref_caches_history, new ArrayList<>());
     }
