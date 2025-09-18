@@ -1447,12 +1447,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             recreate(); // restart with a fresh MapView
         }
 
-        if (Settings.removeFromRouteOnLog()) {
-            viewModel.reloadIndividualRoute();
-        }
         super.onResume();
         reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
+        
+        if (Settings.removeFromRouteOnLog()) {
+            viewModel.reloadIndividualRoute();
+        }
+
         if (tileProvider != null) {
             tileProvider.onResume();
         }
