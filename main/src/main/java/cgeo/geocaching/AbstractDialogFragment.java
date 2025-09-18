@@ -16,7 +16,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -208,13 +207,8 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             return;
         }
 
-        final int actionbarColor;
-        if (cacheType != null) {
-            actionbarColor = ColorUtils.getActionBarColor(getResources().getColor(cacheType.typeColor));
-        } else {
-            actionbarColor = getResources().getColor(R.color.colorBackgroundActionBar);
-        }
-
+        final boolean isLightSkin = Settings.isLightSkin(toolbar.getContext());
+        final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isLightSkin);
         swipView.getBackground().mutate().setTint(actionbarColor);
         toolbar.setBackgroundColor(actionbarColor);
     }

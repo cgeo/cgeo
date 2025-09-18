@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -181,8 +180,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
 
-        final int typeColor = getResources().getColor(cacheType.typeColor);
-        final int actionbarColor = ColorUtils.getActionBarColor(typeColor);
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, isLightSkin);
         actionBarView.setBackgroundColor(actionbarColor);
     }
 }

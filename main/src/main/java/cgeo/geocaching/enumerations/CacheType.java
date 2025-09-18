@@ -3,6 +3,9 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.ColorUtils;
+
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -193,5 +196,26 @@ public enum CacheType {
 
     public boolean isVirtual() {
         return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
+    }
+
+    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isLightSkin) {
+        final int actionbarColor;
+        if (cacheType != null) {
+            // convert to HSL
+            final int colorInt = context.getResources().getColor(cacheType.typeColor);
+            final float[] hsl = ColorUtils.getHslValues(colorInt);
+
+            // less saturation
+            final float offSet1 = isLightSkin ? -0.02f : -0.07f;
+            // darker color
+            final float offSet2 = isLightSkin ? -0.15f : -0.13f;
+            hsl[1] = Math.min(1f, hsl[1] + offSet1);
+            hsl[2] = Math.min(1f, hsl[2] + offSet2);
+
+            actionbarColor = ColorUtils.getColorFromHslValues(hsl);
+        } else {
+            actionbarColor = context.getResources().getColor(R.color.colorBackgroundActionBar);
+        }
+        return actionbarColor;
     }
 }
