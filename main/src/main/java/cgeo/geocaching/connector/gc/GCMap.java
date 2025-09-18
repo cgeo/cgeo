@@ -68,7 +68,7 @@ public class GCMap {
             search.setBox(viewport);
             search.setPage(500, 0);
 
-            final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
+            final SearchResult searchResult = GCWebAPI.searchCaches(con, search);
 
             if (Settings.isDebug()) {
                 searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
@@ -99,7 +99,7 @@ public class GCMap {
             return new SearchResult();
         }
 
-        final SearchResult sr = GCWebAPI.searchCaches(con, search, true);
+        final SearchResult sr = GCWebAPI.searchCaches(con, search);
         search.fillSearchCacheData(sr.getOrCreateCacheData());
         sr.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
         sr.setToContext(con, b -> b.putParcelable(GCConnector.SEARCH_CONTEXT_SORT, sort));

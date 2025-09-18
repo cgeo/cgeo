@@ -921,18 +921,6 @@
         </activity>
 
         <activity
-            android:name=".settings.GCVoteAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_pocket_title">
