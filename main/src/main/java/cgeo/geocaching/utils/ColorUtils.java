@@ -53,16 +53,7 @@ public class ColorUtils {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
 
-    public static int getActionBarColor(@ColorInt final int colorInt) {
-        // convert to HSL
-        final float[] hsl = getHslValues(colorInt);
-
-        // darker color by 15%
-        hsl[2] = Math.max(0f, hsl[2] - 0.15f);
-        return androidx.core.graphics.ColorUtils.HSLToColor(hsl);
-    }
-
-    private static float[] getHslValues(@ColorInt final int colorInt) {
+    public static float[] getHslValues(@ColorInt final int colorInt) {
         final int red = Color.red(colorInt);
         final int green = Color.green(colorInt);
         final int blue = Color.blue(colorInt);
@@ -70,6 +61,11 @@ public class ColorUtils {
         final float[] hsl = new float[3];
         androidx.core.graphics.ColorUtils.RGBToHSL(red, green, blue, hsl);
         return hsl;
+    }
+
+    public static int getColorFromHslValues(final float[] hslValues) {
+        return androidx.core.graphics.ColorUtils.HSLToColor(hslValues);
+
     }
 
     public static boolean isBrightnessDark(@ColorInt final int colorInt) {

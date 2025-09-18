@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -127,28 +126,23 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
 
-    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name, @Nullable final CacheType type) {
+    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name) {
         final CharSequence title;
         if (StringUtils.isNotBlank(name)) {
             title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
         } else {
             title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
         }
-        setCacheTitleBar(title, type);
+        setCacheTitleBar(title);
     }
 
-    private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
+    private void setCacheTitleBar(@NonNull final CharSequence title) {
         setTitle(title);
-        setCacheTitleBarBackground(type);
+        setCacheTitleBarBackground(null, false);
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            if (type != null) {
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(ViewUtils.getDrawable(type.iconId, false));
-            } else {
-                actionBar.setIcon(android.R.color.transparent);
-            }
+            actionBar.setIcon(android.R.color.transparent);
         }
     }
 
@@ -157,7 +151,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
      */
     protected void setCacheTitleBar(@NonNull final Geocache cache) {
         setTitle(TextUtils.coloredCacheText(this, cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
-        setCacheTitleBarBackground(cache.getType());
+        setCacheTitleBarBackground(cache.getType(), cache.isEnabled());
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -166,7 +160,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         }
     }
 
-    private void setCacheTitleBarBackground(@Nullable final CacheType cacheType) {
+    private void setCacheTitleBarBackground(@Nullable final CacheType cacheType, final boolean useCacheColor) {
         if (!Settings.useColoredActionBar(this)) {
             return;
         }
@@ -181,8 +175,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
 
-        final int typeColor = getResources().getColor(cacheType.typeColor);
-        final int actionbarColor = ColorUtils.getActionBarColor(typeColor);
+        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor);
         actionBarView.setBackgroundColor(actionbarColor);
     }
 }
