@@ -1,6 +1,7 @@
 package cgeo.geocaching.search;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -18,7 +19,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,10 +31,11 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     int historyIcon = R.drawable.ic_menu_recent_history;
     Context context;
     final Func0<String[]> historyFunction;
+    final Action1<String> deleteFunction;
     String searchTerm;
     boolean isShowingResultsFromHistory;
 
-    public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction) {
+    public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction, final Action1<String> deleteFunction) {
         super(context, textViewResourceId, suggestionFunction);
         if (null != suggestionFunction) {
             this.suggestionIcon = suggestionIcon;
@@ -40,6 +44,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
         }
         this.context = context;
         this.historyFunction = historyFunction;
+        this.deleteFunction = deleteFunction;
     }
 
     @NonNull
@@ -48,10 +53,20 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
         final View v = getOrCreateView(context, convertView, parent);
         final TextView textView = v.findViewById(R.id.text);
         final ImageView iconView = v.findViewById(R.id.icon);
+        final View deleteView = v.findViewById(R.id.delete);
 
         textView.setText(getItem(position));
         setHighLightedText(textView, searchTerm);
         iconView.setImageResource(isShowingResultsFromHistory ? historyIcon : suggestionIcon);
+        if (deleteFunction != null) {
+            deleteView.setOnClickListener(view -> {
+                deleteFunction.call(getItem(position));
+                final List<String> temp = new ArrayList<>(Arrays.asList(suggestions));
+                temp.remove(getItem(position));
+                suggestions = temp.toArray(String[]::new);
+                notifyDataSetChanged();
+            });
+        }
 
         return v;
     }
