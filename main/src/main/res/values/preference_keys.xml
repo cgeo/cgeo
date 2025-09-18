@@ -121,12 +121,6 @@
     <string translatable="false" name="preference_screen_su">preference_screen_su</string>
     <string translatable="false" name="pref_fakekey_su_website">fakekey_su_website</string>
 
-    <!-- settings for gcvote.com screen -->
-    <string translatable="false" name="preference_screen_gcvote">preference_screen_gcvote</string>
-    <string translatable="false" name="pref_ratingwanted">useGCVote</string>
-    <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
-    <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
-
     <!-- settings for bettercacher.org screen -->
     <string translatable="false" name="preference_screen_bettercacher">preference_screen_bettercacher</string>
     <string translatable="false" name="pref_connectorBetterCacherActive">connectorBetterCacherActive</string>
@@ -561,8 +555,6 @@
     <string translatable="false" name="pref_alc_advanced">alc_advanced</string>
     <string translatable="false" name="pref_alc_launcher">alc_launcher</string>
     <string translatable="false" name="pref_ec_icons">ec_icons</string>
-    <string translatable="false" name="pref_user_vote">user-vote</string>
-    <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
     <string translatable="false" name="pref_feature_unified_debug">feature_unified_debug</string>

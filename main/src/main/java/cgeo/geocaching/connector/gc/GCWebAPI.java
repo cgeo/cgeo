@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
@@ -757,7 +756,7 @@ public class GCWebAPI {
     }
 
     @WorkerThread
-    static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
+    static SearchResult searchCaches(final IConnector con, final WebApiSearch search) {
         final SearchResult result = new SearchResult();
 
         try {
@@ -831,9 +830,6 @@ public class GCWebAPI {
             tryGuessMissingDistances(foundCaches, search);
 
             result.addAndPutInCache(foundCaches);
-            if (includeGcVote) {
-                GCVote.loadRatings(foundCaches);
-            }
         } catch (RuntimeException re) {
             Log.w("GCWebAPI: problem executing search", re);
             result.setError(GCConnector.getInstance(), StatusCode.COMMUNICATION_ERROR);

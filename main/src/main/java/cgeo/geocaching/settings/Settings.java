@@ -320,7 +320,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
-            e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
             e.putBoolean(getKey(R.string.old_pref_useenglish), prefsV0.getBoolean(getKey(R.string.old_pref_useenglish), false));
             e.putBoolean(getKey(R.string.pref_usecompass), prefsV0.getInt(getKey(R.string.pref_usecompass), 1) != 0);
@@ -329,7 +328,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_logimages), prefsV0.getBoolean(getKey(R.string.pref_logimages), false));
             e.putString(getKey(R.string.pref_mapfile), prefsV0.getString(getKey(R.string.pref_mapfile), null));
             e.putString(getKey(R.string.pref_signature), prefsV0.getString(getKey(R.string.pref_signature), null));
-            e.putString(getKey(R.string.pref_pass_vote), prefsV0.getString(getKey(R.string.pref_pass_vote), null));
             e.putString(getKey(R.string.pref_password), prefsV0.getString(getKey(R.string.pref_password), null));
             e.putString(getKey(R.string.pref_username), prefsV0.getString(getKey(R.string.pref_username), null));
             e.putString(getKey(R.string.pref_memberstatus), prefsV0.getString(getKey(R.string.pref_memberstatus), ""));
@@ -817,17 +815,6 @@ public class Settings {
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
 
-    public static boolean isGCVoteLoginValid() {
-        return getGCVoteLogin().isValid();
-    }
-
-    @NonNull
-    public static Credentials getGCVoteLogin() {
-        final String username = StringUtils.trimToNull(getString(R.string.pref_username, null));
-        final String password = getString(R.string.pref_pass_vote, null);
-        return new Credentials(username, password);
-    }
-
     @NonNull
     public static String getSignature() {
         return StringUtils.defaultString(getString(R.string.pref_signature, StringUtils.EMPTY));
@@ -985,10 +972,6 @@ public class Settings {
 
     public static boolean isStoreLogImages() {
         return getBoolean(R.string.pref_logimages, false);
-    }
-
-    public static boolean isRatingWanted() {
-        return getBoolean(R.string.pref_ratingwanted, false);
     }
 
     public static boolean isGeokretyConnectorActive() {
@@ -2433,7 +2416,6 @@ public class Settings {
         final HashSet<String> sensitiveKeys = new HashSet<>();
         Collections.addAll(sensitiveKeys,
                 context.getString(R.string.pref_username), context.getString(R.string.pref_password),
-                context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
                 context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
                 context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
                 context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),

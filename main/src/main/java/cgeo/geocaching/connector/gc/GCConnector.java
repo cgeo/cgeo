@@ -16,7 +16,6 @@ import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.Smiley;
@@ -28,7 +27,6 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
@@ -66,7 +64,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -104,60 +102,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     public static GCConnector getInstance() {
         return Holder.INSTANCE;
-    }
-
-    /**
-     * Indicates whether voting is possible for this cache for this type of log entry
-     *
-     * @param cache   cache to check
-     * @param logType log type to check
-     */
-    @Override
-    public boolean canVote(@NonNull final Geocache cache, @NonNull final LogType logType) {
-        return Settings.isGCVoteLoginValid() && StringUtils.isNotBlank(cache.getGuid());
-    }
-
-    /**
-     * Indicates whether voting is possible for this cache in general
-     *
-     * @param cache cache to check
-     */
-    @Override
-    public boolean supportsVoting(@NonNull final Geocache cache) {
-        return true;
-    }
-
-    @Override
-    public float getRatingStep() {
-        return 0.5f;
-    }
-
-    @Override
-    public String getDescription(final float rating) {
-        return IVotingCapability.getDefaultFiveStarsDescription(rating);
-    }
-
-    /**
-     * Posts single request to update the vote only.
-     *
-     * @param cache  cache to vote for
-     * @param rating vote to set
-     * @return status of the request
-     */
-    @Override
-    public boolean postVote(@NonNull final Geocache cache, final float rating) {
-        return GCVote.setRating(cache, rating);
-    }
-
-    /**
-     * Indicates whether the given rating is acceptable (i.e. one might accept only integer values or restrict some other values)
-     *
-     * @param rating rating given
-     * @return true if rating is acceptable, false if not
-     */
-    @Override
-    public boolean isValidRating(final float rating) {
-        return rating >= MIN_RATING && rating <= MAX_RATING;
     }
 
     @Override

@@ -17,7 +17,6 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
-import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -42,7 +41,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
-import cgeo.geocaching.gcvote.VoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -759,11 +757,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_export).setVisible(true);
 
             // submenu advanced
-            if (connector instanceof IVotingCapability) {
-                final MenuItem menuItemGCVote = menu.findItem(R.id.menu_gcvote);
-                menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
-                menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
-            }
             if (connector instanceof IIgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IIgnoreCapability) connector).canIgnoreCache(cache));
             }
@@ -790,8 +783,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             dropGeneratedWaypoints();
         } else if (menuItem == R.id.menu_refresh) {
             refreshCache();
-        } else if (menuItem == R.id.menu_gcvote) {
-            showVoteDialog();
         } else if (menuItem == R.id.menu_challenge_checker) {
             ShareUtils.openUrl(this, "https://project-gc.com/Challenges/" + cache.getGeocode());
         } else if (menuItem == R.id.menu_ignore) {
@@ -888,10 +879,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else {
             storeCache(false);
         }
-    }
-
-    private void showVoteDialog() {
-        VoteDialog.show(this, cache, this::notifyDataSetChanged);
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
