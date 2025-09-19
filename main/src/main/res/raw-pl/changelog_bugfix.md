@@ -1,6 +1,8 @@
 ##
 - Naprawiono: Awaria podczas wyszukiwania słów kluczowych
 - Naprawiono: Awaria na mapie
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
 - Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
@@ -27,6 +29,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
