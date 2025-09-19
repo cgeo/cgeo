@@ -1,4 +1,10 @@
 ##
+- Fix: Crash in keyword search
+- Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
+
+##
 - Fix: Encrypting/decrypting a hint needs an extra tap initially
 - Fix: Wherigo crash on reading old saved games
 - Fix: Logging from within c:geo not remembered sometimes
@@ -23,6 +29,8 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
+
 
 
 

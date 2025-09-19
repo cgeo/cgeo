@@ -354,15 +354,18 @@
     <string name="translator_model_download_success">Model tłumaczenia dla %s pobrany</string>
     <string name="translator_model_download_error">Nie udało się pobrać modelu tłumaczenia %1$s: %2$s</string>
     <string name="translator_model">Model tłumaczenia</string>
-    <string name="translator_tooltip">Tłumaczenie offline</string>
+    <string name="translator_tooltip">Tłumaczenie offline z Google</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
-    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia. Dotknij, aby wybrać język źródłowy.</string>
-    <string name="translator_language_unknown">Nie można zidentyfikować języka. Dotknij, aby wybrać język źródłowy.</string>
-    <string name="translator_language_detected">Tłumacz z \"%s\". Dotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_target_select">Wybierz język docelowy</string>
+    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia.\nDotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_unknown">Nie można rozpoznać języka.\nDotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_detected">Tłumacz z „%s” za pomocą Google.\nDotknij, aby wybrać język źródłowy.</string>
     <string name="translator_target_language">Przetłumacz na \"%s\"</string>
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
-    <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
+    <string name="translator_translation_success">Przetłumaczone z „%s”.\nNaciśnij przycisk, aby przywrócić oryginał</string>
+    <string name="crash_activity_title">Ups! c:geo uległ awarii!</string>
+    <string name="crash_activity_report">zgłoś problem</string>
     <!-- location service -->
     <string name="loc_last">Ostatnia pozycja</string>
     <string name="loc_net">Sieć</string>
