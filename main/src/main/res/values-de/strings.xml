@@ -228,6 +228,8 @@
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
     <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- External translation -->
+    <string name="translate">Übersetzen</string>
+    <string name="translate_external_label">Übersetze mit %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Webseite</string>
     <string name="translate_external_none">&lt;Keine&gt;</string>
@@ -959,6 +961,8 @@
     <string name="init_translation_disabled">Übersetzung deaktiviert</string>
     <string name="init_date_format">Datumsformat</string>
     <string name="init_date_format_description">Format für kurze Datumsangaben, z.B. in der Log-Ansicht</string>
+    <string name="init_translator_external">Externer Übersetzer</string>
+    <string name="init_translator_external_description">Zu verwendende externe Übersetzer-App</string>
     <string name="system_default">Systemstandard</string>
     <string name="init_showwaypoints">Wegpunkte anzeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
