@@ -1,4 +1,4 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisiert + einige der Bildschirmlayout-Routinen geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
@@ -31,4 +31,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - Neu: Löschen verwaister Dateien von Tracks beim Bereinigen und Wiederherstellen der Sicherung
 - Neu: Warnung, wenn zu viele Caches zu einer Lesezeichenliste hinzugefügt werden sollen
 - Neu: Listen beobachten/nicht beobachten
-- New: Offer offline translation with Google Translate or DeepL apps (if installed)
+- Neu: Offline-Übersetzung mit Google Translate oder DeepL-Apps (falls installiert)
