@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
+- Korrektur: Absturz bei der Stichwortsuche
+- Korrektur: Absturz in der Karte
 
 ##
 - Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
