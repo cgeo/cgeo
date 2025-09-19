@@ -487,6 +487,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         SearchUtils.hideKeyboardOnSearchClick(searchView, menuSearch);
         SearchUtils.hideActionIconsWhenSearchIsActive(this, menu, menuSearch);
         SearchUtils.handleDropDownVisibility(this, searchView, menuSearch);
+        SearchUtils.setSearchViewColor(searchView);
 
         return true;
     }
