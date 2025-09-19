@@ -1,6 +1,8 @@
 ##
 - Fix: Crash in keyword search
 - Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
 - Korrektur: Verschlüsseln/Entschlüsseln eines Hinweises erfordert initial ein extra Tippen
@@ -27,6 +29,7 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
