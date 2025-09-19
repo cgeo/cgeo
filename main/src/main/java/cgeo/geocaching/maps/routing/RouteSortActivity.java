@@ -127,6 +127,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         setTitle(getString(R.string.map_sort_individual_route));
 
         listView = new RecyclerView(this, null);
+        listView.setId(R.id.activity_content);
         setContentView(listView);
 
         originalRouteItems = DataStore.loadIndividualRoute();
