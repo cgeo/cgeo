@@ -11,8 +11,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
@@ -1643,16 +1641,6 @@ public final class GCParser {
 
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
-
-        if (Settings.isRatingWanted() && !DisposableHandler.isDisposed(handler)) {
-            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-            final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
-            if (rating != null) {
-                cache.setRating(rating.getRating());
-                cache.setVotes(rating.getVotes());
-                cache.setMyVote(rating.getMyVote());
-            }
-        }
     }
 
     private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
