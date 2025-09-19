@@ -1,6 +1,8 @@
 ##
 - Fix: Crash in keyword search
 - Fix: Crash in map
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
 - Fix: Encrypting/decrypting a hint needs an extra tap initially
@@ -27,6 +29,7 @@
 ##
 - Correctif : La migration des caches définies par l'utilisateur au démarrage de c:geo échoue => retiré pour le moment
 - Correctif : Les tâches Wherigo terminées ne sont pas marquées comme terminées ou échouées
+
 
 
 
