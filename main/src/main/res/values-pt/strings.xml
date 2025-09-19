@@ -354,12 +354,10 @@
     <string name="translator_model_download_success">Modelo de tradução para %s transferido</string>
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
-    <string name="translator_tooltip">Tradução offline</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
     <string name="translator_target_language">Traduzir para \"%s\"</string>
     <string name="translator_translation_error">Falha ao traduzir texto: %s</string>
     <string name="translator_translation_initerror">Falha ao inicializar o tradutor</string>
-    <string name="translator_translation_success">Traduzido de \"%s\", toque no botão para restaurar o original</string>
     <!-- location service -->
     <string name="loc_last">Última conhecida</string>
     <string name="loc_net">Rede</string>

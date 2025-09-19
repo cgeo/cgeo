@@ -354,15 +354,18 @@
     <string name="translator_model_download_success">Übersetzungsmodell für %s heruntergeladen</string>
     <string name="translator_model_download_error">Fehler beim Herunterladen des Übersetzungsmodells %1$s: %2$s</string>
     <string name="translator_model">Übersetzungsmodell</string>
-    <string name="translator_tooltip">Offline-Übersetzung</string>
+    <string name="translator_tooltip">Offline-Übersetzung mit Google</string>
     <string name="translator_language_select">Ausgangssprache auswählen</string>
-    <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt. Tippen, um die Ausgangssprache auszuwählen.</string>
-    <string name="translator_language_unknown">Die Sprache kann nicht erkannt werden. Tippen, um die Ausgangssprache auszuwählen.</string>
-    <string name="translator_language_detected">Übersetze von \"%s\". Tippe um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_target_select">Zielsprache wählen</string>
+    <string name="translator_language_unsupported">Sprache (%s) wird für die Übersetzung nicht unterstützt.\nTippe, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_unknown">Sprache nicht erkannt.\nTippe, um die Ausgangssprache auszuwählen.</string>
+    <string name="translator_language_detected">Übersetze von \"%s\" mit Google.\nTippe, um die Ausgangssprache auszuwählen.</string>
     <string name="translator_target_language">Übersetze nach \"%s\"</string>
     <string name="translator_translation_error">Übersetzung fehlgeschlagen: %s</string>
     <string name="translator_translation_initerror">Fehler beim Initialisieren des Übersetzers</string>
-    <string name="translator_translation_success">Übersetzt von \"%s\", tippe auf Schaltfläche, um das Original wiederherzustellen</string>
+    <string name="translator_translation_success">Übersetzt von \"%s\".\nTippe Button, um das Original wiederherzustellen</string>
+    <string name="crash_activity_title">Ups! c:geo ist abgestürzt!</string>
+    <string name="crash_activity_report">Problem melden</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>

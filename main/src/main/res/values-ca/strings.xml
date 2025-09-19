@@ -355,15 +355,18 @@
     <string name="translator_model_download_success">S\'ha baixat el model de traducció de %s</string>
     <string name="translator_model_download_error">No s\'ha pogut baixar el model de traducció %1$s: %2$s</string>
     <string name="translator_model">Model de traducció</string>
-    <string name="translator_tooltip">Traducció fora de línia</string>
+    <string name="translator_tooltip">Traducció fora de línia amb Google</string>
     <string name="translator_language_select">Seleccioneu l\'idioma d\'origen</string>
-    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció. Toca per seleccionar l\'idioma d\'origen.</string>
-    <string name="translator_language_unknown">No s\'ha pogut identificar l\'idioma. Toca per seleccionar l\'idioma d\'origen.</string>
-    <string name="translator_language_detected">Tradueix de \"%s\". Toca per seleccionar l\'idioma d\'origen.</string>
+    <string name="translator_language_target_select">Selecciona l\'idioma de destinació</string>
+    <string name="translator_language_unsupported">L\'idioma (%s) no és compatible amb la traducció.\nToqueu per seleccionar l\'idioma d\'origen.</string>
+    <string name="translator_language_unknown">No s\'ha pogut identificar l\'idioma.\nToca per seleccionar l\'idioma d\'origen.</string>
+    <string name="translator_language_detected">Tradueix de \"%s\" amb Google.\nToca per seleccionar l\'idioma d\'origen.</string>
     <string name="translator_target_language">Tradueix a \"%s\"</string>
     <string name="translator_translation_error">No s\'ha pogut traduir el text: %s</string>
     <string name="translator_translation_initerror">No s\'ha pogut inicialitzar el traductor</string>
-    <string name="translator_translation_success">Traduït de \"%s\", toca el botó per restaurar l\'original</string>
+    <string name="translator_translation_success">Traduït de \"%s\".\nToqueu el botó per restaurar l\'original</string>
+    <string name="crash_activity_title">Ups! c:geo s\'ha bloquejat!</string>
+    <string name="crash_activity_report">Informa d’un problema</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>

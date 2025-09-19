@@ -354,15 +354,13 @@
     <string name="translator_model_download_success">Modèle de traduction pour %s téléchargé</string>
     <string name="translator_model_download_error">Impossible de télécharger le modèle de traduction %1$s: %2$s</string>
     <string name="translator_model">Modèle de traduction</string>
-    <string name="translator_tooltip">Traduction hors ligne</string>
     <string name="translator_language_select">Sélectionner la langue source</string>
-    <string name="translator_language_unsupported">La langue (%s) n\'est pas prise en charge pour la traduction. Appuyez pour sélectionner la langue source.</string>
-    <string name="translator_language_unknown">Impossible d\'identifier la langue. Appuyez pour sélectionner la langue source.</string>
-    <string name="translator_language_detected">Traduire depuis «%s». Appuyez pour sélectionner la langue source.</string>
+    <string name="translator_language_target_select">Sélectionner la langue cible</string>
     <string name="translator_target_language">Traduire en \"%s\"</string>
     <string name="translator_translation_error">Échec de la traduction du texte : %s</string>
     <string name="translator_translation_initerror">Impossible d\'initialiser le traducteur</string>
-    <string name="translator_translation_success">Traduit de \"%s\", appuyez sur le bouton pour restaurer l\'original</string>
+    <string name="crash_activity_title">Oups ! c:geo a planté !</string>
+    <string name="crash_activity_report">signaler un problème</string>
     <!-- location service -->
     <string name="loc_last">Dernière position</string>
     <string name="loc_net">Réseau</string>

@@ -348,11 +348,9 @@
     <string name="translator_model_download_success">Модель перевода для %s загружена</string>
     <string name="translator_model_download_error">Не удалось загрузить модель перевода %1$s: %2$s</string>
     <string name="translator_model">Модель перевода</string>
-    <string name="translator_tooltip">Офлайн перевод</string>
     <string name="translator_language_select">Выберите исходный язык</string>
     <string name="translator_translation_error">Не удалось перевести текст: %s</string>
     <string name="translator_translation_initerror">Не удалось инициализировать переводчик</string>
-    <string name="translator_translation_success">Переведено с \"%s\", нажмите кнопку, чтобы восстановить оригинал</string>
     <!-- location service -->
     <string name="loc_last">Последнее местоположение</string>
     <string name="loc_net">Сеть</string>

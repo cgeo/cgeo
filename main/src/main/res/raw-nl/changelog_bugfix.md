@@ -1,9 +1,15 @@
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Oplossing: Crash in trefwoord zoeken
+- Oplossing: Crash op kaart
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
+
+##
+- Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
+- Oplossing: Wherigo crash bij het lezen van oude opgeslagen spellen
+- Oplossing: Logging van c:geo word soms niet onthouden
+- Fix: Ontbrekende live data update voor gevonden & gearchiveerde caches
+- Oplossing: waypoints in offline kaart worden niet soms weergegeven
 
 ##
 - Oplossing: Onversleutelde cache hints (website wijziging)
@@ -23,6 +29,8 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
+
 
 
 

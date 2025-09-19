@@ -59,6 +59,13 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/description_translated_by_google"
+                android:src="@drawable/translated_by_google"
+                android:visibility="gone"/>
+
             <View
                 style="@style/separator_horizontal"
                 android:layout_marginBottom="9dp"

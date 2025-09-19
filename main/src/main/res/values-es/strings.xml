@@ -354,15 +354,13 @@
     <string name="translator_model_download_success">Se ha descargado el modelo de traducción para %s</string>
     <string name="translator_model_download_error">Fallo al descargar el modelo de traducción %1$s: %2$s</string>
     <string name="translator_model">Modelo de traducción</string>
-    <string name="translator_tooltip">Traducción sin conexión</string>
     <string name="translator_language_select">Seleccione el idioma de origen</string>
-    <string name="translator_language_unsupported">Idioma (%s) no disponible para traducción. Pulse para seleccionar el idioma de origen.</string>
-    <string name="translator_language_unknown">No se puede identificar el idioma. Pulse para seleccionar el idioma de origen.</string>
-    <string name="translator_language_detected">Traducir desde \"%s\". Pulse para seleccionar el idioma de origen.</string>
+    <string name="translator_language_target_select">Seleccionar idiomas a traducir</string>
     <string name="translator_target_language">Traducir al %s</string>
     <string name="translator_translation_error">Fallo al traducir el texto: %s</string>
     <string name="translator_translation_initerror">Error al inicializar el traductor</string>
-    <string name="translator_translation_success">Traducido de \"%s\", pulse el botón para restaurar el original</string>
+    <string name="crash_activity_title">¡Ups! ¡c:geo se ha detenido!</string>
+    <string name="crash_activity_report">reportar problema</string>
     <!-- location service -->
     <string name="loc_last">Última conocida</string>
     <string name="loc_net">Red</string>
@@ -2469,7 +2467,7 @@ Nombre de archivo:%2$s</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
-    <string name="switch_off">apagado</string>
+    <string name="switch_off">Apagado</string>
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>

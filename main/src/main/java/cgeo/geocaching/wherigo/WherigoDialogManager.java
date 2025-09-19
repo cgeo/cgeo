@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
@@ -83,6 +84,7 @@ public class WherigoDialogManager {
             }
 
             dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
+                Log.iForce("Wherigo: dismissing dialog");
                 WherigoGame.get().removeListener(gameListenerId);
                 isDismissed = true;
                 dismissDisposables.dispose();
@@ -164,6 +166,13 @@ public class WherigoDialogManager {
     /** sets a new Wherigo Dialog to display. Removes/closes any other waiting/opened dialog */
     public void display(final IWherigoDialogProvider dialogProvider) {
         executeAction(() -> {
+
+            //check if maybe refresh of already opened dialog is sufficient
+            if (state == State.DIALOG_DISPLAYED && currentDialogProvider != null && currentDialogProvider.canRefresh(dialogProvider)) {
+                WherigoGame.get().notifyListeners(WherigoGame.NotifyType.REFRESH);
+                return;
+            }
+            //close existing dialog + trigger opening a new one
             clearInternal();
             this.currentDialogProvider = dialogProvider;
             state = State.DIALOG_WAITING;
