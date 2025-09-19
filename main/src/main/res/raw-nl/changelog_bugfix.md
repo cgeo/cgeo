@@ -1,6 +1,8 @@
 ##
 - Oplossing: Crash in trefwoord zoeken
 - Oplossing: Crash op kaart
+- Fix: Hint text no longer selectable
+- Fix: Several Wherigo issues
 
 ##
 - Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
@@ -27,6 +29,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
