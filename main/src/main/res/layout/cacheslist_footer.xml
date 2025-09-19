@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@color/colorBackgroundActionBar"
+    android:background="@color/colorBackgroundTabBar"
     android:ellipsize="end"
     android:gravity="center"
     android:lines="1"
@@ -18,7 +18,7 @@
     android:scrollHorizontally="true"
     android:text="@string/caches_no_cache"
     android:textSize="@dimen/textSize_detailsPrimary"
-    android:textColor="@color/colorTextActionBar"
+    android:textColor="@color/colorTextTabBar"
     tools:context=".CacheListActivity"
     android:maxLines="1" />
 
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/colorBackgroundActionBar"
+        android:background="@color/colorBackgroundTabBar"
         android:ellipsize="end"
         android:gravity="center"
         android:lines="1"
@@ -35,7 +35,7 @@
         android:scrollHorizontally="true"
         android:text="@string/caches_no_cache"
         android:textSize="@dimen/textSize_detailsPrimary"
-        android:textColor="@color/colorTextActionBar"
+        android:textColor="@color/colorTextTabBar"
         tools:context=".CacheListActivity"
         android:maxLines="1" />
 

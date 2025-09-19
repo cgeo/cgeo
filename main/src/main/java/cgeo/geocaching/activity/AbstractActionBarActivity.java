@@ -1,7 +1,13 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Classes actually having an ActionBar (as opposed to the Dialog activities)
@@ -33,6 +41,12 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar != null) {
             // don't display a back button it the activity is running as top-level activity with bottom navigation attached
             actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractNavigationBarActivity));
+        }
+
+        final View actionBarView = getActionBarView();
+        if (actionBarView != null) {
+            // set action bar background color, otherwise it would be transparent
+            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
         }
     }
 
@@ -108,9 +122,66 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
-            actionBar.setBackgroundResource(R.color.colorBackgroundActionBar);
         }
     }
 
 
+    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name, @Nullable final CacheType type) {
+        final CharSequence title;
+        if (StringUtils.isNotBlank(name)) {
+            title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
+        } else {
+            title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
+        }
+        setCacheTitleBar(title, type);
+    }
+
+    private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
+        setTitle(title);
+        setCacheTitleBarBackground(type);
+
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            if (type != null) {
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(ViewUtils.getDrawable(type.iconId, false));
+            } else {
+                actionBar.setIcon(android.R.color.transparent);
+            }
+        }
+    }
+
+    /**
+     * change the titlebar icon and text to show the current geocache
+     */
+    protected void setCacheTitleBar(@NonNull final Geocache cache) {
+        setTitle(TextUtils.coloredCacheText(this, cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
+        setCacheTitleBarBackground(cache.getType());
+
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
+        }
+    }
+
+    private void setCacheTitleBarBackground(@Nullable final CacheType cacheType) {
+        if (!Settings.useColoredActionBar(this)) {
+            return;
+        }
+
+        // set action bar background color according to cache type
+        final View actionBarView = getActionBarView();
+        if (actionBarView == null) {
+            return;
+        }
+        if (cacheType == null) {
+            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
+            return;
+        }
+
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, isLightSkin);
+        actionBarView.setBackgroundColor(actionbarColor);
+    }
 }
