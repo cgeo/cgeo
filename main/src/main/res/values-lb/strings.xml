@@ -143,8 +143,7 @@
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
@@ -493,9 +492,8 @@
     <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
-    <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <!-- import -->
     <!-- popup -->
