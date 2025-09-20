@@ -178,8 +178,7 @@
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_nodateset_display">未設定</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
@@ -1054,9 +1053,7 @@
     <string name="cache_variables">変数</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
-    <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
-    <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
     <string name="cache_waypoints_remove_original_waypoint">ウェイポイントをクリップボードからこのキャッシュにコピーしました。\n\n元のウェイポイントを削除しますか?</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
@@ -1126,7 +1123,6 @@
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
-    <string name="cache_status_attended">参加した</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>
@@ -1202,7 +1198,7 @@
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
@@ -1367,7 +1363,6 @@
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
-    <string name="google_maps_option_group_theme">テーマのオプション</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1377,7 +1372,6 @@
     <string name="search_kw">キーワード</string>
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_finder">発見したユーザー名</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_destination">c:geo</string>
@@ -2019,12 +2013,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_question">疑問</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>オリジナル</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
