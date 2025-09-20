@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -108,6 +109,12 @@ public final class GpxSerializer {
 
     private void exportBatch(final XmlSerializer gpx, @NonNull final Collection<String> geocodesOfBatch) throws IOException {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
+
+        // Define the DecimalFormat for corrected output (DDD.DDDDDD format)
+        final DecimalFormat df = new DecimalFormat("#.######");
+        df.setMinimumFractionDigits(1);
+        df.setMaximumFractionDigits(6);
+
         for (final Geocache cache : caches) {
             if (cache == null) {
                 continue;
@@ -120,8 +127,8 @@ public final class GpxSerializer {
                 continue;
             }
             gpx.startTag(NS_GPX, "wpt");
-            gpx.attribute("", "lat", Double.toString(coords == null ? 0 : coords.getLatitude()));
-            gpx.attribute("", "lon", Double.toString(coords == null ? 0 : coords.getLongitude()));
+            gpx.attribute("", "lat", df.format(coords == null ? 0 : coords.getLatitude()));
+            gpx.attribute("", "lon", df.format(coords == null ? 0 : coords.getLongitude()));
 
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
