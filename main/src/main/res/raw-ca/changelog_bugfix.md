@@ -1,8 +1,8 @@
 ##
 - Correcció: Error en la cerca de paraules clau
 - Correcció: Error al mapa
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Correcció: El text de la pista ja no es pot seleccionar
+- Correcció: Diversos problemes amb Wherigo
 
 ##
 - Correcció: Xifrar/desxifrar una pista requereix un toc addicional inicialment
