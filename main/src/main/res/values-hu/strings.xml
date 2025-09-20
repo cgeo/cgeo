@@ -178,8 +178,7 @@
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
@@ -769,7 +768,6 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
-    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -805,7 +803,7 @@
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
@@ -878,7 +876,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_address">Cím</string>
@@ -1283,12 +1280,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Eredeti</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
