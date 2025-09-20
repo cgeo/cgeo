@@ -1,8 +1,8 @@
 ##
 - Oplossing: Crash in trefwoord zoeken
 - Oplossing: Crash op kaart
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Oplossing: Hint tekst niet langer selecteerbaar
+- Oplossing: Verschillende Wherigo problemen
 
 ##
 - Oplossing: Versleutelen en decoderen van een hint vereist een extra tik in eerste instantie
