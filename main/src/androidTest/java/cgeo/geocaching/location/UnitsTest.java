@@ -4,6 +4,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -66,6 +67,36 @@ public class UnitsTest {
         final String actual = Units.getSpeed(kilometersPerHour);
         if (!StringUtils.equals(expected, actual.replace(',', '.'))) {
             fail("speed " + actual + " does not match expected " + expected);
+        }
+    }
+
+    private String getDistanceFromKilometers(final float value) {
+        return Units.getDistanceFromKilometers(value).replace(',', '.');
+    }
+
+    @Test
+    public void testScalingNegative() {
+        final boolean savedImperial = Settings.useImperialUnits();
+        try {
+            // results in SI units
+            TestSettings.setUseImperialUnits(false);
+            Assertions.assertThat(getDistanceFromKilometers(0.05f)).isEqualTo("50.0 m");
+            Assertions.assertThat(getDistanceFromKilometers(-0.05f)).isEqualTo("-50.0 m");
+            Assertions.assertThat(getDistanceFromKilometers(1.05f)).isEqualTo("1.05 km");
+            Assertions.assertThat(getDistanceFromKilometers(-1.05f)).isEqualTo("-1.05 km");
+            Assertions.assertThat(getDistanceFromKilometers(14.05f)).isEqualTo("14.1 km");
+            Assertions.assertThat(getDistanceFromKilometers(-14.05f)).isEqualTo("-14.1 km");
+
+            // results in imperial units
+            TestSettings.setUseImperialUnits(true);
+            Assertions.assertThat(getDistanceFromKilometers(0.05f)).isEqualTo("164 ft");
+            Assertions.assertThat(getDistanceFromKilometers(-0.05f)).isEqualTo("-164 ft");
+            Assertions.assertThat(getDistanceFromKilometers(1.05f)).isEqualTo("0.65 mi");
+            Assertions.assertThat(getDistanceFromKilometers(-1.05f)).isEqualTo("-0.65 mi");
+            Assertions.assertThat(getDistanceFromKilometers(14.05f)).isEqualTo("8.73 mi");
+            Assertions.assertThat(getDistanceFromKilometers(-14.05f)).isEqualTo("-8.73 mi");
+        } finally {
+            TestSettings.setUseImperialUnits(savedImperial);
         }
     }
 
