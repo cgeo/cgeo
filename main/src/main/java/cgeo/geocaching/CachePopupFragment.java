@@ -135,7 +135,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(geocode);
-            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType());
+            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
 
             toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
             toolbar.setLongClickable(true);

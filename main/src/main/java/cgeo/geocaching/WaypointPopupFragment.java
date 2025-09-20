@@ -82,7 +82,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(wpCode);
-            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType());
+            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
 
             toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
             onCreatePopupOptionsMenu(toolbar, this, cache);

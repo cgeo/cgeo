@@ -198,11 +198,12 @@ public enum CacheType {
         return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
     }
 
-    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isLightSkin) {
+    public static int getActionBarColor(final Context context, final boolean isLightSkin, final CacheType cacheType, final boolean isEnabled) {
         final int actionbarColor;
         if (cacheType != null) {
             // convert to HSL
-            final int colorInt = context.getResources().getColor(cacheType.typeColor);
+            final int colorInt = context.getResources().getColor(isEnabled ? cacheType.typeColor : R.color.cacheType_disabled);
+
             final float[] hsl = ColorUtils.getHslValues(colorInt);
 
             // less saturation
