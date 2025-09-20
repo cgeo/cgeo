@@ -143,8 +143,7 @@
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_titleprefix">Attēls</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Tulkojums var neizdoties liela teksta apjoma dēļ.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
@@ -660,7 +659,6 @@
     <string name="cache_list_select_last">Iepriekšējā atlase</string>
     <string name="cache_images">Attēli</string>
     <string name="cache_waypoints">Starpposmi</string>
-    <string name="cache_waypoints_add_currentLocation">Pievienot pašreizējo atrašanās vietu</string>
     <string name="cache_waypoints_add_fromclipboard">Pievienot no starpliktuves (clipboard)</string>
     <string name="cache_hint">Mājiens</string>
     <string name="cache_hint_not_available">Nekādi mājieni nav pieejami</string>
@@ -715,7 +713,6 @@
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
-    <string name="cache_status_attended">Piedalījos</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
     <string name="cache_status_archived">Arhivēts</string>
@@ -759,7 +756,7 @@
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">grādi</string>
     <string name="cc_hint_minutes">minūtes</string>
     <string name="cc_hint_seconds">sekundes</string>
@@ -847,7 +844,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
-    <string name="google_maps_option_group_theme">Kartes motīva iestatījumi</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_address">Adrese</string>
