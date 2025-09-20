@@ -1,8 +1,8 @@
 ##
 - Naprawiono: Awaria podczas wyszukiwania słów kluczowych
 - Naprawiono: Awaria na mapie
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Naprawiono: Tekst wskazówki nie jest już możliwy do zaznaczenia
+- Naprawiono: Kilka problemów z Wherigo
 
 ##
 - Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
