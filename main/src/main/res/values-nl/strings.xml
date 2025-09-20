@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">OC Team commentaar</string>
     <string name="log_your_saved_log">Je opgeslagen log</string>
     <string name="log_empty_logbook">Het logboek van deze cache is leeg.</string>
+    <string name="log_empty_logbook_filtered">De geselecteerde filters verbergen alle logs. Selecteer ten minste één optie.</string>
     <string name="log_image_selectfromstorage_tooltip">Selecteer afbeeldingen uit opslag</string>
     <string name="log_image_camera_tooltip">Foto maken met camera</string>
     <string name="log_image_selectfromown_tooltip">Afbeeldingen selecteren uit eigen afbeeldingen</string>
@@ -216,15 +217,26 @@
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="log_delete_confirm">Weet u zeker dat u het log \'%1$s\' door auteur \'%2$s\' met logdatum \'%3$s \' wilt verwijderen?</string>
     <string name="log_offline_delete_confirm">Weet je zeker dat je je opgeslagen offline log van type \'%1$s\' met log datum \'%2$s \' wilt verwijderen?</string>
+    <string name="log_share_prefix_found">Ik vond %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Ik kon %1$s (%2$s):\n\n niet vinden</string>
+    <string name="log_share_prefix_note">Ik heb een notitie geplaatst voor %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Ik meldde dat er onderhoud nodig is voor %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Ik denk dat %1$s (%2$s) gearchiveerd zou moeten worden:\n\n</string>
+    <string name="log_share_prefix_default">Mijn log voor %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
     <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
-    <!-- translation -->
-    <string name="translate">Vertalen in de Google Translate App</string>
-    <string name="translate_to_sys_lang">Vertalen naar %s (Web)</string>
-    <string name="translate_to_english">Vertalen naar Engels (Web)</string>
-    <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
+    <!-- External translation -->
+    <string name="translate">Vertaal</string>
+    <string name="translate_external_label">Vertalen met %s</string>
+    <string name="translate_external_variant_app">App</string>
+    <string name="translate_external_variant_web">Website</string>
+    <string name="translate_external_none">&lt;Geen&gt;</string>
+    <string name="translate_external_app">Externe app</string>
+    <string name="translate_external_google">Google Translate</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Vertaling via de website kan mislukken met een grote hoeveelheid tekst.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
@@ -255,6 +267,7 @@
     <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
     <string name="err_detail_premium_log_found">Deze cache is alleen beschikbaar voor premium leden van geocaching.com. Daarom kan de cache informatie niet worden weergegeven.\n\nAls je deze cache al hebt gevonden, kan je deze hier loggen.</string>
     <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
+    <string name="err_watchlist_failed_geocodes">Wijzigen van watchlist is mislukt voor geocodes: %s</string>
     <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
     <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
     <string name="err_auth_process">Autorisatie proces mislukt.</string>
@@ -309,6 +322,8 @@
     <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
     <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
     <string name="err_read_bookmark_list">Fout bij het lezen van bladwijzerlijsten.</string>
+    <string name="err_bookmark_list_overfull">Te veel caches</string>
+    <string name="err_bookmark_list_overfull_description">Bookmarklijsten kunnen maximaal 1000 caches opslaan, je probeert er meer toe te voegen aan de lijst.\n\nWil je doorgaan en alleen zoveel caches toevoegen als de lijst nog kan hebben?</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
@@ -336,6 +351,7 @@
     <string name="dont_show_again">Niet meer weergeven</string>
     <string name="tap_icon_more_info">Tik op het pictogram voor meer informatie</string>
     <string name="use_slider_adjust_value">Gebruik de schuifregelaar om de waarde aan te passen</string>
+    <string name="snackbar_action_share">Delen</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
@@ -357,13 +373,13 @@
     <string name="translator_tooltip">Offline vertalen met Google</string>
     <string name="translator_language_select">Selecteer brontaal</string>
     <string name="translator_language_target_select">Selecteer doeltaal</string>
-    <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling.\nTik om de brontaal te selecteren.</string>
-    <string name="translator_language_unknown">Kan taal niet identificeren.\nTik om de brontaal te selecteren.</string>
-    <string name="translator_language_detected">Vertaal van \"%s\" met Google.\nTik om de brontaal te selecteren.</string>
+    <string name="translator_language_unsupported">Taal (%s) wordt niet ondersteund voor vertaling. Tik om de brontaal te selecteren.</string>
+    <string name="translator_language_unknown">Kan taal niet identificeren. Tik om brontaal te selecteren.</string>
+    <string name="translator_language_detected">Vertaal van \"%s\". Tik om de brontaal te selecteren.</string>
     <string name="translator_target_language">Vertaal naar \"%s\"</string>
     <string name="translator_translation_error">Tekst vertalen mislukt: %s</string>
     <string name="translator_translation_initerror">Kan vertaler niet initialiseren</string>
-    <string name="translator_translation_success">Vertaald van \"%s\".\nTik de knop om origineel te herstellen</string>
+    <string name="translator_translation_success">Vertaald van \"%s\", tik op de knop om origineel te herstellen</string>
     <string name="crash_activity_title">Oeps! c:geo is vastgelopen!</string>
     <string name="crash_activity_report">probleem melden</string>
     <!-- location service -->
@@ -470,6 +486,11 @@
     <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_bookmarklist_all">Alles aan bladwijzerlijst toevoegen</string>
     <string name="caches_upload_bookmarklist_selected">Selectie aan bladwijzerlijst toevoegen</string>
+    <string name="caches_watch_all">Alles toevoegen aan de watchlist</string>
+    <string name="caches_unwatch_all">Alles uit de volglijst verwijderen</string>
+    <string name="caches_watch_selected">Voeg geselecteerden aan watchlist toe</string>
+    <string name="caches_unwatch_selected">Geselecteerden uit watchlist verwijderen</string>
+    <string name="watchlist_background_started">Watchlist update gestart op de achtergrond</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -940,6 +961,8 @@
     <string name="init_translation_disabled">Vertalen uitgeschakeld</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
+    <string name="init_translator_external">Externe vertaler</string>
+    <string name="init_translator_external_description">Te gebruiken externe vertaalapp</string>
     <string name="system_default">Systeemstandaard</string>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
@@ -1001,6 +1024,8 @@
     <string name="init_summary_cacheListInfo">Selecteer de extra informatie die getoond moet worden voor elke cache in cache lijsten</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <string name="init_live_compass_in_navigation_action">Toon richting in cache detailweergave</string>
+    <string name="init_summary_live_compass_in_navigation_action">Toon een pijl met kompasrichting voor caches in hun detailweergave</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <string name="init_custombnitem">Aangepast Menu-Item</string>
@@ -1231,6 +1256,7 @@
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
+    <string name="gui_test_title">GUI Test Scherm</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
@@ -1452,17 +1478,17 @@
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
     <string name="cache_variables">Variabelen</string>
+    <string name="cache_variables_chip_completed_variables">Voltooid</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
-    <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Bezochte waypoints verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Geen hint beschikbaar</string>
     <string name="cache_logs">Logboek</string>
     <string name="cache_latest_logs">Recente logs</string>
     <string name="cache_logs_friends_and_own">Vrienden/Eigen Logs</string>
+    <string name="cache_logs_friends">Vrienden</string>
     <string name="cache_dialog_loading_details">Cache details laden…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Pagina laden</string>
     <string name="cache_dialog_loading_details_status_details">Verwerken details</string>
@@ -1540,7 +1566,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1661,11 +1687,12 @@
     <string name="html_style_monochrome">Monochroom</string>
     <string name="html_style_source_formatted">Opgemaakte HTML bron</string>
     <string name="html_style_source">HTML Bron</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">graden</string>
     <string name="cc_hint_minutes">minuten</string>
     <string name="cc_hint_seconds">seconden</string>
     <string name="cc_hint_fraction">fractie</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
@@ -1709,6 +1736,7 @@
     <string name="waypoint_edit_title">Waypoint bewerken</string>
     <string name="waypoint_add_title">Waypoint toevoegen</string>
     <string name="waypoint_added">Waypoint toegevoegd</string>
+    <string name="waypoint_added_current_location">Waypoint (%1$s) toegevoegd (±%2$s)</string>
     <string name="waypoint_note">Notitie</string>
     <string name="waypoint_user_note">Gebruikersnotitie</string>
     <string name="waypoint_visited">Bezocht</string>
@@ -1748,6 +1776,7 @@
     <string name="projection_type_offset_hint_longitude">Lengtegraad Offset in Micro-minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
+    <string name="variables_titletext_short">Waardes en berekeningen</string>
     <string name="variables_scanlisting">Lijst scannen</string>
     <string name="variables_scanlisting_choosepattern_title">Gevonden patroon kiezen</string>
     <string name="variables_scanlisting_nopatternfound">Geen patroon gevonden</string>
@@ -1874,7 +1903,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2423,7 +2452,8 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
     <string name="map_disable_autotarget_individual_route">\"Zet route startpunt als doel\" uitgeschakeld</string>
-    <string name="map_clear_manual_targets">Routeringsdoel wissen</string>
+    <string name="map_manual_target_route_name">Huidige navigatie</string>
+    <string name="map_clear_manual_targets">Routering-doel wissen</string>
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
@@ -2584,7 +2614,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (alleen VTM, herstart nodig)</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
@@ -2731,7 +2761,7 @@
     <string name="close">Sluiten</string>
     <string name="delete">Verwijderen</string>
     <string name="play">Spelen</string>
-    <string name="copy">Kopiëren</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopiëren</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
@@ -2765,13 +2795,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Voorkeur afbeeldingsgrootte</string>
-    <string name="settings_gc_imagesize_summary">Afbeeldingen van Geocaching.com in de lijst, logs en trackables zijn beschikbaar in verschillende formaten. Selecteer de grootte die moet worden geladen bij het laden en opslaan van een cache.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Oorspronkelijk</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_summary">Afbeeldingen van Geocaching.com in de lijst, logs en trackables zijn beschikbaar in verschillende formaten. Selecteer het formaat om te gebruiken bij het laden en opslaan van een cache. \"Onveranderd\" zal de versie laden zoals deze is inbegrepen in de pagina door de listing/log-auteur.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Ongewijzigd</string>
+    <string name="settings_gc_imagesize_entry_original">Maximum</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Bekijk database</string>
     <string name="dbi_select_title">(Selecteer tabel)</string>
