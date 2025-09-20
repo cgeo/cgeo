@@ -215,12 +215,17 @@
     <string name="log_image_titleprefix">Kuva</string>
     <string name="log_delete_confirm">Haluatko varmasti poistaa tyypin \'%1$s\' kirjoittajan \'%2$s\' lokipäivän \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Haluatko varmasti poistaa tallennetun offline-lokin jonka lokityyppi on \'%1$s\' ja on kirjattu \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Löysin %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">En löytänyt %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Jätin merkinnän %1$s (%2$s:\n\n)</string>
+    <string name="log_share_prefix_maintenance">Ilmoitin tarvittavasta huollosta %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Mielestäni %1$s (%2$s) pitäisi arkistoida:\n\n</string>
+    <string name="log_share_prefix_default">Lokini %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
     <!-- Contacts -->
     <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
     <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
-    <!-- translation -->
-    <string name="translate_length_warning">Käännös saattaa epäonnistua jos tekstiä on paljon.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
@@ -332,6 +337,7 @@
     <string name="dont_show_again">Älä näytä uudelleen</string>
     <string name="tap_icon_more_info">Napauta kuvaketta saadaksesi lisätietoja</string>
     <string name="use_slider_adjust_value">Säädä arvoa liukusäätimellä</string>
+    <string name="snackbar_action_share">Jaa</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
@@ -354,6 +360,7 @@
     <string name="translator_target_language">Käännä kielelle \"%s\"</string>
     <string name="translator_translation_error">Tekstin kääntäminen epäonnistui: %s</string>
     <string name="translator_translation_initerror">Kääntäjän alustus epäonnistui</string>
+    <string name="translator_translation_success">Käännetty kielestä \"%s\", napauta painiketta palauttaaksesi alkuperäisen</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
     <string name="loc_net">Verkko</string>
@@ -982,6 +989,7 @@
     <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
+    <string name="init_live_compass_in_navigation_action">Näytä suunta kätkön yksityiskohdista</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
     <string name="init_custombnitem">Mukautettu valikkokohde</string>
@@ -1425,9 +1433,7 @@
     <string name="cache_variables">Muuttujat</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Reittipisteet (%d)</string>
     <string name="cache_waypoints_add">Lisää reittipiste</string>
-    <string name="cache_waypoints_add_currentLocation">Lisää nykyinen sijainti</string>
     <string name="cache_waypoints_add_fromclipboard">Liitä leikepöydältä</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Piilota vieraillut reittipisteet</string>
     <string name="cache_waypoints_remove_original_waypoint">Reittipiste on nyt liitetty tähän kätköön leikepöydältä. \n\nPoistetaanko alkuperäinen reittipiste?</string>
     <string name="cache_hint">Vihje</string>
     <string name="cache_hint_not_available">Ei vihjettä</string>
@@ -1628,7 +1634,7 @@
     <string name="html_style_monochrome">Mustavalkoinen</string>
     <string name="html_style_source_formatted">HTML- lähde muotoiltu</string>
     <string name="html_style_source">HTML-lähde</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">astetta</string>
     <string name="cc_hint_minutes">minuuttia</string>
     <string name="cc_hint_seconds">sekuntia</string>
@@ -2670,7 +2676,7 @@
     <string name="close">Sulje</string>
     <string name="delete">Poista</string>
     <string name="play">Toista</string>
-    <string name="copy">Kopioi</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopioi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Valitse kaikki</string>
     <string name="multiselect_selectvisible">Valitse näkyvät</string>
@@ -2704,12 +2710,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Ensisijainen kuvan koko</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Alkuperäinen</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Näytä tietokanta</string>
     <string name="dbi_select_title">(Valitse taulukko)</string>
