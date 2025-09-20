@@ -217,8 +217,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">找不到别名/昵称为%s的联系人，请先将它添加到你的联系人应用中。</string>
     <string name="contact_multiple_matches">联系人: 多个匹配</string>
-    <!-- translation -->
-    <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
@@ -406,6 +405,7 @@
     <string name="caches_sort_geocode">藏点编码</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
+    <string name="caches_sort_inventory">可追踪物计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
     <string name="caches_sort_date_logged">记录日期（个人日志）</string>
     <string name="caches_sort_finds">查找</string>
@@ -517,6 +517,7 @@
     <string name="cache_filter_hidden">藏宝日期</string>
     <string name="cache_filter_eventdate">活动日期</string>
     <string name="cache_filter_logs_count">日志数量</string>
+    <string name="cache_filter_inventory_count">可追踪物计数</string>
     <string name="cache_filter_last_found">最后找到日期</string>
     <string name="cache_filter_log_entry">日志条目</string>
     <string name="cache_filter_location">位置</string>
@@ -1199,7 +1200,6 @@
     <string name="cache_favpoint_not_on">该藏点不在您的喜爱列表之中。</string>
     <string name="cache_images">图片</string>
     <string name="cache_waypoints_add">添加途经点</string>
-    <string name="cache_waypoints_add_currentLocation">添加当前位置</string>
     <string name="cache_waypoints_add_fromclipboard">从剪贴板中添加</string>
     <string name="cache_hint">提示</string>
     <string name="cache_hint_not_available">没有可用的提示</string>
@@ -1243,7 +1243,6 @@
     <string name="ignore_confirm_title">小心</string>
     <string name="cache_status">状态</string>
     <string name="cache_status_offline_log">保存的日志</string>
-    <string name="cache_status_attended">已参加</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">已归档</string>
@@ -1305,7 +1304,7 @@
     <string name="html_style_default">默认</string>
     <string name="html_style_monochrome">黑白</string>
     <string name="html_style_source">HTML源</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
@@ -1409,7 +1408,6 @@
     <string name="search_kw">关键词</string>
     <string name="search_kw_disabled_hint">由于您是BASIC会员，该功能已被禁用</string>
     <string name="search_finder">发现者：</string>
-    <string name="search_filter">筛选器</string>
     <string name="search_tb">旅行虫</string>
     <string name="search_destination">在c:geo中打开目的地</string>
     <string name="search_address_started">搜索地点</string>
@@ -1734,12 +1732,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>原始坐标</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>
