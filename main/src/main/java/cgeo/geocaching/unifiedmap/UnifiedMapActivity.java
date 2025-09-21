@@ -38,6 +38,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
@@ -128,7 +129,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -994,13 +994,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
         } else if (id == R.id.menu_store_caches) {
-            final Set<String> geocodes = viewModel.caches.readWithResult(caches ->
-                    mapFragment.getViewport()
-                            .filter(caches)
-                            .stream()
-                            .map(Geocache::getGeocode)
-                            .collect(Collectors.toSet()));
-            CacheDownloaderService.downloadCaches(this, geocodes, false, false, () -> viewModel.caches.notifyDataChanged(false));
+            final List<Geocache> list = viewModel.caches.readWithResult(caches ->
+                    mapFragment.getViewport().filter(caches));
+            new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
