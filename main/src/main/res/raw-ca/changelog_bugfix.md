@@ -1,4 +1,8 @@
 ##
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+
+##
 - Correcció: Error en la cerca de paraules clau
 - Correcció: Error al mapa
 - Correcció: El text de la pista ja no es pot seleccionar
@@ -29,6 +33,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
