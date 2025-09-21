@@ -191,8 +191,8 @@ public final class Viewport implements Parcelable {
      * @param points a collection of (possibly null) points
      * @return a new collection containing the points in the viewport
      */
-    public <T extends ICoordinate> Collection<T> filter(@NonNull final Collection<T> points) {
-        final Collection<T> result = new ArrayList<>();
+    public <T extends ICoordinate> List<T> filter(@NonNull final Collection<T> points) {
+        final List<T> result = new ArrayList<>();
         for (final T point : points) {
             if (point != null && contains(point)) {
                 result.add(point);

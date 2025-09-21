@@ -2211,7 +2211,7 @@ public class DataStore {
         });
     }
 
-    public static Set<String> getUnsavedGeocodes(@NonNull final Set<String> geocodes) {
+    public static Collection<String> getUnsavedGeocodes(@NonNull final Collection<String> geocodes) {
         return withAccessLock(() -> {
 
             final Set<String> unsavedGeocodes = new HashSet<>();

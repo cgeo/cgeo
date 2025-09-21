@@ -27,6 +27,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -58,7 +59,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         return isDownloadPending(geocache.getGeocode());
     }
 
-    public static void downloadCaches(final Activity context, final Set<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    public static void downloadCaches(final Activity context, final Collection<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (geocodes.isEmpty()) {
             ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
             return;
@@ -111,7 +112,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), isOffline, true, isOffline, onStartCallback);
     }
 
-    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    private static void askForListsIfNecessaryAndDownload(final Activity context, final Collection<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (isOffline) {
             downloadCachesInternal(context, geocodes, null, keepExistingLists, forceRedownload, onStartCallback);
         } else if (Settings.getChooseList()) {
@@ -122,7 +123,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         }
     }
 
-    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
+    private static void downloadCachesInternal(final Activity context, final Collection<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
 
         final ArrayList<String> newGeocodes = new ArrayList<>();
 
@@ -142,6 +143,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         if (newGeocodes.isEmpty()) {
             return;
         }
+
+        Log.d("DOWNLOAD: " + newGeocodes);
 
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);

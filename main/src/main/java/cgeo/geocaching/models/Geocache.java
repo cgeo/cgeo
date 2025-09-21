@@ -2460,14 +2460,18 @@ public class Geocache implements INamedGeoCoordinate {
      */
     @NonNull
     public static Set<String> getGeocodes(@NonNull final Collection<Geocache> caches) {
-        final Set<String> geocodes = new HashSet<>(caches.size());
+        return getGeocodes(caches, new HashSet<>(caches.size()));
+    }
+
+    @NonNull
+    public static <T extends Collection<String>> T getGeocodes(@NonNull final Iterable<Geocache> caches, final T result) {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode)) {
-                geocodes.add(geocode);
+                result.add(geocode);
             }
         }
-        return geocodes;
+        return result;
     }
 
     /**
