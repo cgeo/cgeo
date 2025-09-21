@@ -594,6 +594,7 @@
     <string translatable="false" name="pref_unifiedMapVariants">unifiedMapVariants</string>
     <string translatable="false" name="pref_autorenameDownloads">autorenameDownloads</string>
     <string translatable="false" name="pref_elevationChartExpanded">elevationChartExpanded</string>
+    <string translatable="false" name="pref_vtmBackgroundTransparent">vtmBackgroundTransparent</string>
 
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
