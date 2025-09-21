@@ -16,11 +16,11 @@ public class Units {
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
         if (Settings.useImperialUnits()) {
             final double distanceMiles = distanceKilometers / IConversion.MILES_TO_KILOMETER;
-            if (distanceMiles >= 0.1) {
+            if (Math.abs(distanceMiles) >= 0.1) {
                 return new ImmutablePair<>(distanceMiles, "mi");
             }
             return new ImmutablePair<>(distanceMiles * 5280, "ft");
-        } else if (distanceKilometers >= 1) {
+        } else if (Math.abs(distanceKilometers) >= 1) {
             return new ImmutablePair<>(distanceKilometers, "km");
         } else {
             return new ImmutablePair<>(distanceKilometers * 1000, "m");
