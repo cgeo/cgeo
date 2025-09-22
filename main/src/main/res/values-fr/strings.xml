@@ -889,9 +889,7 @@
     <string name="init_summary_oc_uk">Charger les caches depuis opencache.uk</string>
     <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencache.uk pour rechercher des caches et accéder / filtrer vos caches trouvées.</string>
     <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
-    <string name="init_gcvote_password_description">Afin de pouvoir attribuer un vote à une cache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
     <string name="err_vote_send_rating">Erreur à l’envoi de l\'évaluation.</string>
-    <string name="vote_sent">Évaluation envoyée</string>
     <string name="init_login_popup">Authentification</string>
     <string name="init_login_popup_working">Connexion…</string>
     <string name="init_login_popup_ok">Connecté</string>
@@ -936,8 +934,6 @@
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Emplacement</string>
     <string name="init_signature_template_geocode">Géocode</string>
-    <string name="init_ratingwanted">Vote GCvote.com</string>
-    <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
     <string name="init_summary_bettercacher">Charger le niveau de cache et les catégories de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
@@ -1483,7 +1479,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
     <string name="cache_dialog_loading_details_status_logs">Chargement des visites</string>
     <string name="cache_dialog_loading_details_status_waypoints">Traitement des points de passage</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
     <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
     <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
     <string name="cache_dialog_offline_save_title">Hors-ligne</string>
@@ -2710,7 +2705,6 @@
     <string name="wherigo_error_title">Rapport de Problème Wherigo</string>
     <string name="wherigo_error_game_noerror">Aucune erreur signalée par le Moteur Wherigo.</string>
     <string name="wherigo_error_game_error">Erreur signalée par Wherigo Engine :\n\n```\n%1$s\n```\nVous pouvez contacter l\'auteur de la cartouche [here](%2$s)</string>
-    <string name="wherigo_error_email">Rapport d\'erreur Wherigo\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Le moteur Wherigo a signalé une erreur. Ouvrez la boîte de dialogue des bogues pour plus de détails.</string>
     <string name="wherigo_confirm_stop_running_game_title">Arrêter l\'exécution de la cartouche Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Une partie est en cours d\'exécution pour \"%s\". Voulez-vous arrêter cette partie?</string>
