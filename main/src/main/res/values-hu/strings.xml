@@ -487,7 +487,6 @@
     <string name="init_summary_oc_uk">Ládák letöltése az opencache.uk-ról</string>
     <string name="init_oc_uk_description">A c:geo hitelesítése az opencache.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
     <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
-    <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
     <string name="init_login_popup">Bejelentkezés</string>
     <string name="init_login_popup_working">Bejelentkezés a geocaching.com-ra…</string>
     <string name="init_login_popup_ok">Bejelentkezés ok</string>
@@ -513,8 +512,6 @@
     <string name="init_signature_template_log">Log szöveg</string>
     <string name="init_signature_template_size">Méret</string>
     <string name="init_signature_template_type">Típus</string>
-    <string name="init_ratingwanted">GCVote értékelés</string>
-    <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése</string>
     <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
     <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
@@ -732,7 +729,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Spoiler képek betöltése</string>
     <string name="cache_dialog_loading_details_status_logs">Logok betöltése</string>
     <string name="cache_dialog_loading_details_status_waypoints">Útpontok feldolgozása</string>
-    <string name="cache_dialog_loading_details_status_gcvote">A GCVote betöltése</string>
     <string name="cache_dialog_loading_details_status_cache">Láda adatai</string>
     <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
     <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
