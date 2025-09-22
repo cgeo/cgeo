@@ -787,9 +787,7 @@
     <string name="init_summary_oc_uk">Įkelti slėptuves iš opencache.uk</string>
     <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencache.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
-    <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
     <string name="err_vote_send_rating">Siunčiant įvertinimą įvyko klaida.</string>
-    <string name="vote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="init_login_popup">Prisijungti</string>
     <string name="init_login_popup_working">Prisijungiama…</string>
     <string name="init_login_popup_ok">Prisijungta</string>
@@ -831,8 +829,6 @@
     <string name="init_signature_template_type">Tipas</string>
     <string name="init_signature_template_location">Vieta</string>
     <string name="init_signature_template_geocode">Geokodas</string>
-    <string name="init_ratingwanted">GCvote reitingas</string>
-    <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir asmeninių įrašų žurnalo papildomą puslapį</string>
     <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
@@ -1307,7 +1303,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Įkeliami užuominos vaizdai</string>
     <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apdorojami kelio taškai</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
     <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
     <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
     <string name="cache_dialog_offline_save_title">Išsaugoma</string>
