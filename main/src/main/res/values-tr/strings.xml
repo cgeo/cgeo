@@ -704,9 +704,7 @@
     <string name="init_summary_oc_uk">opencache.uk üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_uk_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencache.uk ile yetkilendirin.</string>
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
-    <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
     <string name="err_vote_send_rating">Puan gönderilirken hata oluştu.</string>
-    <string name="vote_sent">Puanlama başarıyla gönderildi</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
     <string name="init_login_popup_ok">Oturum açıldı</string>
@@ -744,8 +742,6 @@
     <string name="init_signature_template_size">Boyut</string>
     <string name="init_signature_template_type">Tür</string>
     <string name="init_signature_template_location">Konum</string>
-    <string name="init_ratingwanted">GCvote Puanlaması</string>
-    <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache puanlamasını yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
     <string name="init_summary_friends_and_own_logs_wanted">Arkadaşlarınızın ve kendinizin kayıt sayfasını görüntüle</string>
     <string name="init_openlastdetailspage">Son Ayrıntılar Sayfası</string>
@@ -1157,7 +1153,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">İpucu görselleri yükleniyor</string>
     <string name="cache_dialog_loading_details_status_logs">Kayıtlar yükleniyor</string>
     <string name="cache_dialog_loading_details_status_waypoints">Yol noktaları işleniyor</string>
-    <string name="cache_dialog_loading_details_status_gcvote">GCVote yükleniyor</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Verisi</string>
     <string name="cache_dialog_loading_details_status_render">Görünüm oluştur</string>
     <string name="cache_dialog_offline_save_title">Çevrimdışı</string>
