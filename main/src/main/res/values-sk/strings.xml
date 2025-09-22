@@ -727,9 +727,7 @@
     <string name="init_summary_oc_uk">Načítať skrýše z opencache.uk</string>
     <string name="init_oc_uk_description">Autorizovať c:geo pre opencache.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
     <string name="init_summary_su">Načítať skrýše z Geocaching.su</string>
-    <string name="init_gcvote_password_description">Ak chcete hodnotiť skrýše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
     <string name="err_vote_send_rating">Chyba pri odosielaní hodnotenia.</string>
-    <string name="vote_sent">Hlasovanie úspešne odoslané</string>
     <string name="init_login_popup">Prihlasovanie</string>
     <string name="init_login_popup_working">Prihlasovanie…</string>
     <string name="init_login_popup_ok">Prihlásenie úspešné</string>
@@ -771,8 +769,6 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Poloha</string>
     <string name="init_signature_template_geocode">Geokód</string>
-    <string name="init_ratingwanted">GCvote hodnotenie</string>
-    <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Logy priateľov a vlastné</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobraziť ďalšiu stránku pre logy priateľov a vlastné logy</string>
     <string name="init_openlastdetailspage">Detaily na posledne použitej stránke</string>
@@ -1241,7 +1237,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Načítanie obrázkov s nápovedou</string>
     <string name="cache_dialog_loading_details_status_logs">Načítanie logov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
     <string name="cache_dialog_loading_details_status_render">Pripravuje sa stránka</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
