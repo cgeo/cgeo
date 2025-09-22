@@ -899,9 +899,7 @@
     <string name="init_summary_oc_uk">Laad caches van opencaching.uk</string>
     <string name="init_oc_uk_description">Autoriseer c:geo met opencache.uk om naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
     <string name="init_summary_su">Laad caches van Geocaching.su</string>
-    <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
     <string name="err_vote_send_rating">Fout bij verzenden beoordeling.</string>
-    <string name="vote_sent">Stem succesvol verzonden</string>
     <string name="init_login_popup">Inloggen</string>
     <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
     <string name="init_login_popup_ok">Ingelogd</string>
@@ -946,8 +944,6 @@
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Locatie</string>
     <string name="init_signature_template_geocode">Geocode</string>
-    <string name="init_ratingwanted">GCvote.com waardering</string>
-    <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_summary_bettercacher">Laad cache niveau en categorieën van BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
     <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
@@ -1495,7 +1491,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Laden spoilerafbeeldingen</string>
     <string name="cache_dialog_loading_details_status_logs">Laden logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Verwerken waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Laden GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Gegevens</string>
     <string name="cache_dialog_loading_details_status_render">Weergave genereren</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -2724,7 +2719,6 @@
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
     <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
     <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```\nJe mag contact opnemen met de auteur van de cartridge [here](%2$s)</string>
-    <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
     <string name="wherigo_confirm_stop_running_game_message">Er wordt momenteel een spel uitgevoerd voor \"%s\". Wil je dit spel stoppen?</string>
