@@ -900,9 +900,7 @@
     <string name="init_summary_oc_uk">Carrega geoamagatalls des d\'opencache.uk</string>
     <string name="init_oc_uk_description">Autoritza al c:geo amb opencache.uk a buscar geoamagatalls i accedir/filtrar els teus geoamagatalls trobats.</string>
     <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
-    <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
     <string name="err_vote_send_rating">S\'ha produït un error en enviar el missatge</string>
-    <string name="vote_sent">Votació enviada correctament</string>
     <string name="init_login_popup">Accés</string>
     <string name="init_login_popup_working">S\'està accedint…</string>
     <string name="init_login_popup_ok">Accés correcte</string>
@@ -947,8 +945,6 @@
     <string name="init_signature_template_type">Tipus</string>
     <string name="init_signature_template_location">Ubicació</string>
     <string name="init_signature_template_geocode">Geocodi</string>
-    <string name="init_ratingwanted">Valoració del GCvote</string>
-    <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
     <string name="init_summary_bettercacher">Carregueu el nivell de catxé i les categories des de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
@@ -1496,7 +1492,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">S\'està carregant les imatges d\'ajuda</string>
     <string name="cache_dialog_loading_details_status_logs">S\'està carregant els registres</string>
     <string name="cache_dialog_loading_details_status_waypoints">S\'està processant les fites</string>
-    <string name="cache_dialog_loading_details_status_gcvote">S\'està carregant el GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Desant dades</string>
     <string name="cache_dialog_loading_details_status_render">S\'està generant la vista del satèl·lit</string>
     <string name="cache_dialog_offline_save_title">Fora de línia</string>
@@ -2726,7 +2721,6 @@
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
     <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>
-    <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError del motor: %1$s\n\nInformació de Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
