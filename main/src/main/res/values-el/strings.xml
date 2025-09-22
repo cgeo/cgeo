@@ -684,9 +684,7 @@
     <string name="init_summary_oc_uk">Φόρτωση κρυπτών από opencaching.uk</string>
     <string name="init_oc_uk_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.uk, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
-    <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
     <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
-    <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
     <string name="init_login_popup_ok">Επιτυχής σύνδεση</string>
@@ -728,8 +726,6 @@
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
     <string name="init_signature_template_geocode">Γεωκωδικός</string>
-    <string name="init_ratingwanted">Βαθμολογία GCvote</string>
-    <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
     <string name="init_summary_friends_and_own_logs_wanted">Εμφάνιση επιπλέον σελίδας ημερολογίου για αρχεία καταγραφής φίλων και δικών μου</string>
     <string name="init_openlastdetailspage">Τελευταία καταχώρηση</string>
@@ -1151,7 +1147,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Φόρτωση εικόνων spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Φόρτωση καταγραφών</string>
     <string name="cache_dialog_loading_details_status_waypoints">Επεξεργασία σημείων αναφοράς</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Φόρτωση του GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Προσωρινή αποθήκευση δεδομένων</string>
     <string name="cache_dialog_loading_details_status_render">Εμφάνιση σελίδας</string>
     <string name="cache_dialog_offline_save_title">Εκτός σύνδεσης</string>
