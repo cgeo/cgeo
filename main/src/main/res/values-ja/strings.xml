@@ -620,9 +620,7 @@
     <string name="init_summary_oc_uk">opencache.ukからキャッシュを読み込み</string>
     <string name="init_oc_uk_description">c:geoをopencache.ukで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="init_summary_su">Geocaching.suからキャッシュを読み込み</string>
-    <string name="init_gcvote_password_description">キャッシュを評価するにはGCVote.comに登録してGCVoteのパスワードを入力してください</string>
     <string name="err_vote_send_rating">評価を送信中にエラーが発生しました</string>
-    <string name="vote_sent">評価は正常に送信されました</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
@@ -661,8 +659,6 @@
     <string name="init_signature_template_log">ログの本文</string>
     <string name="init_signature_template_size">サイズ</string>
     <string name="init_signature_template_type">タイプ</string>
-    <string name="init_ratingwanted">GCvote評価</string>
-    <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_friends_and_own_logs_wanted">ジオ友達/自分のログを表示</string>
     <string name="init_summary_friends_and_own_logs_wanted">ジオ友達/自分のログの追加のページを表示</string>
     <string name="init_openlastdetailspage">最後に表示したページ</string>
@@ -1066,7 +1062,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">スポイラー画像を読み込み中</string>
     <string name="cache_dialog_loading_details_status_logs">ログを読み込み中</string>
     <string name="cache_dialog_loading_details_status_waypoints">ウェイポイントを処理中</string>
-    <string name="cache_dialog_loading_details_status_gcvote">GCVoteを読み込み中</string>
     <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
     <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
     <string name="cache_dialog_offline_save_title">オフライン</string>
