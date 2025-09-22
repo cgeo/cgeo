@@ -385,7 +385,6 @@
     <string name="init_summary_oc_uk">Încarcă geocutii de la opencache.uk</string>
     <string name="init_oc_uk_description">Autorizează c:geo cu opencache.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
     <string name="init_summary_su">Încarcă geocutii de la Geocaching.su</string>
-    <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
     <string name="init_login_popup">Autentificare</string>
     <string name="init_login_popup_working">Autentificare în curs…</string>
     <string name="init_login_popup_ok">Autentificare REUŞITĂ</string>
@@ -407,8 +406,6 @@
     <string name="init_signature_template_owner">Proprietar</string>
     <string name="init_signature_template_name">Nume</string>
     <string name="init_signature_template_log">Text însemnare</string>
-    <string name="init_ratingwanted">Voturi GCvote</string>
-    <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
     <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
@@ -593,7 +590,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Încărcare imagini (indicii?)</string>
     <string name="cache_dialog_loading_details_status_logs">Încărcare jurnal</string>
     <string name="cache_dialog_loading_details_status_waypoints">Procesare puncte</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Încărcare GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Informaţii cutie</string>
     <string name="cache_dialog_loading_details_status_render">Generez paginile</string>
     <string name="cache_dialog_offline_save_title">Cutie salvată</string>
