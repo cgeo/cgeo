@@ -889,9 +889,7 @@
     <string name="init_summary_oc_uk">Načíst kešky z opencache.uk</string>
     <string name="init_oc_uk_description">Autorizovat c:geo s opencache.uk pro vyhledávání kešek a přístup/filtrování nalezených kešek.</string>
     <string name="init_summary_su">Načíst kešky z geocaching.su</string>
-    <string name="init_gcvote_password_description">Pokud chceš hodnotit kešky, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
     <string name="err_vote_send_rating">Chyba při odesílání hodnocení.</string>
-    <string name="vote_sent">Hlasování úspěšně odesláno</string>
     <string name="init_login_popup">Přihlášení</string>
     <string name="init_login_popup_working">Přihlašování…</string>
     <string name="init_login_popup_ok">Přihlášení bylo úspěšné</string>
@@ -936,8 +934,6 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Umístění</string>
     <string name="init_signature_template_geocode">Geokód</string>
-    <string name="init_ratingwanted">Načítat hodnocení</string>
-    <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_summary_bettercacher">Načíst úroveň kešek a kategorie z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
@@ -1496,7 +1492,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Načítání spoilerových obrázků</string>
     <string name="cache_dialog_loading_details_status_logs">Načítání logů</string>
     <string name="cache_dialog_loading_details_status_waypoints">Zpracovávání trasových bodů</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
     <string name="cache_dialog_offline_save_title">Offline použití</string>
@@ -2754,7 +2749,6 @@
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
     <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Engine:\n\n```\n%1$s\n```\nMůžete kontaktovat autora cartridge[zde](%2$s)</string>
-    <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Momentálně je spuštěná hra pro \"%s\". Chcete tuto hru zastavit?</string>
