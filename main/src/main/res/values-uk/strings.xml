@@ -410,9 +410,7 @@
     <string name="init_summary_oc_uk">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_uk_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="init_summary_su">Завантажте кеші з opencaching.de</string>
-    <string name="init_gcvote_password_description">Щоб мати можливість оцінити кеш, вам необхідно дотримуватися інструкцій в GCVote.com та ввести свій пароль до GCVote тут.</string>
     <string name="err_vote_send_rating">Помилка надсилання повідомлення.</string>
-    <string name="vote_sent">Голосування успішно відправлено</string>
     <string name="init_login_popup">логін</string>
     <string name="init_login_popup_working">вхід в систему…</string>
     <string name="init_login_popup_ok">Логін добре</string>
@@ -439,8 +437,6 @@
     <string name="init_signature_template_log">текст журналу</string>
     <string name="init_signature_template_size">Розмір</string>
     <string name="init_signature_template_type">Тип</string>
-    <string name="init_ratingwanted">Рейтинг GCvote</string>
-    <string name="init_summary_ratingwanted">Завантажте оцінку кешу від GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Показати друзів</string>
     <string name="init_summary_friends_and_own_logs_wanted">Відображати додаткову сторінку логів для друзів і власних журналів</string>
     <string name="init_openlastdetailspage">Сторінка останніх деталей</string>
@@ -696,7 +692,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Завантаження зображень спойлера</string>
     <string name="cache_dialog_loading_details_status_logs">завантаження журналів</string>
     <string name="cache_dialog_loading_details_status_waypoints">обробка маршрутних точок</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Завантаження GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Кешування даних</string>
     <string name="cache_dialog_loading_details_status_render">візуалізувати подання</string>
     <string name="cache_dialog_offline_save_title">Офлайн</string>
