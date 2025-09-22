@@ -899,9 +899,7 @@
     <string name="init_summary_oc_uk">Carica cache da opencache.uk</string>
     <string name="init_oc_uk_description">Autorizza c:geo a cercare cache su opencache.uk.</string>
     <string name="init_summary_su">Carica cache da Geocaching.su</string>
-    <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
     <string name="err_vote_send_rating">Errore durante l\'invio della valutazione.</string>
-    <string name="vote_sent">Voto inviato correttamente</string>
     <string name="init_login_popup">Accesso</string>
     <string name="init_login_popup_working">Logging…</string>
     <string name="init_login_popup_ok">Accesso OK</string>
@@ -946,8 +944,6 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Luogo</string>
     <string name="init_signature_template_geocode">Geocode</string>
-    <string name="init_ratingwanted">Rating da GCvote.com</string>
-    <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_summary_bettercacher">Carica categorie e livelli di cache da BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visualizza una pagina di log addizionale per i log dei tuoi amici e i tuoi log</string>
@@ -1495,7 +1491,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Caricamento immagini spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Caricamento log</string>
     <string name="cache_dialog_loading_details_status_waypoints">Elaborazione waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Caricamento GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Salvataggio dati</string>
     <string name="cache_dialog_loading_details_status_render">Creazione pagina</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -2724,7 +2719,6 @@
     <string name="wherigo_error_title">Rapporrto di problemi Wherigo</string>
     <string name="wherigo_error_game_noerror">Nessun errore segnalato dal motore Wherigo.</string>
     <string name="wherigo_error_game_error">Errore segnalato dal gestore di Wherigo:\n\n```\n%1$s\n```\nPuoi contattare l\'autore della cartuccia [qui](%2$s)</string>
-    <string name="wherigo_error_email">Segnalazione problema Wherigo\n\nErrore: %1$s\n\n info Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo ha segnalato un errore. Apri la finestra di dialogo dei bug per i dettagli.</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
     <string name="wherigo_confirm_stop_running_game_message">Un gioco è attualmente in esecuzione per \"%s\". Vuoi interrompere questo gioco?</string>
