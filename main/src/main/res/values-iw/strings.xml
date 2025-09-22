@@ -344,7 +344,6 @@
     <string name="init_signature_template_number">מספר</string>
     <string name="init_signature_template_owner">בעלים</string>
     <string name="init_signature_template_name">שם</string>
-    <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_address">הצג כתובת</string>
     <string name="init_summary_address">הצגת כתובת במקום נקודות ציון על המסך הראשי</string>
     <!-- names for CacheListInfoItem -->
