@@ -5,6 +5,8 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Enabling live mode keeps waypoints of currently set target visible
 - New: Long-tap on navigation line opens elevation chart (UnifiedMap)
 - New: Show generated waypoints on map
+- New: Download caches ordered by distance
+- Fix: Doubling of individual route items
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -32,3 +34,5 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Warning on trying to add too many caches to a bookmark list
 - New: Watch/unwatch list functions
 - New: Offer offline translation with Google Translate or DeepL apps (if installed)
+- New: Delete items from search history
+- Change: Remove GCVote (service discontinued)
