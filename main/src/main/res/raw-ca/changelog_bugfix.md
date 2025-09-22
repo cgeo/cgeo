@@ -1,6 +1,6 @@
 ##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
+- Correcció: Els valors negatius del gràfic d'elevació no s'escalen
+- Correcció: Coordenades properes a 0 trencades a les exportacions GPX
 
 ##
 - Correcció: Error en la cerca de paraules clau
