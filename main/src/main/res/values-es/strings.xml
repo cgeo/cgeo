@@ -889,9 +889,7 @@
     <string name="init_summary_oc_uk">Carga cachés de opencaching.uk</string>
     <string name="init_oc_uk_description">Autorizar que c:geo pueda usar opencache.uk para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
     <string name="init_summary_su">Carga cachés de Geocaching.su</string>
-    <string name="init_gcvote_password_description">Para poder calificar un caché, tienes que seguir las instrucciones en GCVote.com e introducir tu contraseña de GCVote aquí.</string>
     <string name="err_vote_send_rating">Error al enviar la calificación.</string>
-    <string name="vote_sent">Voto enviado con éxito</string>
     <string name="init_login_popup">Acceso</string>
     <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
     <string name="init_login_popup_ok">Acceso conseguido</string>
@@ -936,8 +934,6 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Ubicación</string>
     <string name="init_signature_template_geocode">Geocode</string>
-    <string name="init_ratingwanted">Puntuación de GCvote</string>
-    <string name="init_summary_ratingwanted">Cargar la puntuación del cache desde GCvote.com</string>
     <string name="init_summary_bettercacher">Cargar nivel y categoría de caché desde BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar amigos / propios</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostrar una página adicional para los registros de amigos y propios</string>
@@ -1483,7 +1479,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Cargando imágenes spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Cargando registros</string>
     <string name="cache_dialog_loading_details_status_waypoints">Procesando waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Cargando GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Almacenando datos</string>
     <string name="cache_dialog_loading_details_status_render">Procesando la representación</string>
     <string name="cache_dialog_offline_save_title">Desconectado</string>
@@ -2711,7 +2706,6 @@ Nombre de archivo:%2$s</string>
     <string name="wherigo_error_title">Reporte de Problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">No hay errores reportados por ejecutador de Wherigo.</string>
     <string name="wherigo_error_game_error">Error reportado por el Ejecutador de Wherigos:\n\n```\n%1$s\n```\nPuedes contactar con el autor del cartucho [aquí](%2$s)</string>
-    <string name="wherigo_error_email">Reporte de error de Wherigo\n\nError: %1$s\n\nInformación Wherigo: %2$s</string>
     <string name="wherigo_error_toast">El ejecutador de Wherigo informó de un error. Abra el diálogo de errores para más detalles.</string>
     <string name="wherigo_confirm_stop_running_game_title">Dejar de ejecutar la partida de Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Una partida se está ejecutando para \"%s\". ¿Quiere detener esta partida?</string>
