@@ -2,24 +2,18 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -40,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -54,7 +47,6 @@ import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
@@ -162,9 +154,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
         initEdgeToEdge();
-
-        // set light/dark system bars depending on action bar colors
-        setStatusBarAppearance(getResources().getColor(R.color.colorBackgroundActionBar));
     }
 
     private void initEdgeToEdge() {
@@ -173,6 +162,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         WindowCompat.enableEdgeToEdge(currentWindow);
         //set window behaviour
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
+
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         //apply edge2edge to activity content view
         ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
@@ -187,6 +177,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             }
             return windowInsets;
         });
+
+        // adjust system bars appearance, depending on action bar color and visibility
+        ActionBarUtils.setSystemBarAppearance(this, true);
     }
 
     /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */
@@ -295,69 +288,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
         }
-    }
-
-    private void setStatusBarAppearance(final int actionBarColor) {
-        final boolean isLightSkin = Settings.isLightSkin(this);
-        if (isLightSkin) {
-            final Window currentWindow = this.getWindow();
-            final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
-
-            // set light/dark system bars depending on action bar colors
-            final boolean isLightActionBar = !ColorUtils.isBrightnessDark(actionBarColor);
-            windowInsetsController.setAppearanceLightStatusBars(isLightActionBar);
-            windowInsetsController.setAppearanceLightNavigationBars(isLightActionBar);
-        }
-    }
-
-    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name, @Nullable final CacheType type) {
-        final CharSequence title;
-        if (StringUtils.isNotBlank(name)) {
-            title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
-        } else {
-            title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
-        }
-        setCacheTitleBar(title, type);
-    }
-
-    private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
-        setTitle(title);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (type != null) {
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.iconId, null));
-            } else {
-                actionBar.setIcon(android.R.color.transparent);
-            }
-        }
-    }
-
-    /**
-     * change the titlebar icon and text to show the current geocache
-     */
-    protected void setCacheTitleBar(@NonNull final Geocache cache) {
-        setTitle(TextUtils.coloredCacheText(this, cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
-        }
-    }
-
-    /**
-     * change the titlebar icon and text to show the current geocache
-     */
-    protected void setCacheTitleBar(@Nullable final String geocode) {
-        if (StringUtils.isEmpty(geocode)) {
-            return;
-        }
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        if (cache == null) {
-            Log.e("AbstractActivity.setCacheTitleBar: cannot find the cache " + geocode);
-            return;
-        }
-        setCacheTitleBar(cache);
     }
 
     @Override

@@ -69,13 +69,13 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
@@ -270,7 +270,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         ActivityMixin.setTheme(this);
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        HideActionBarUtils.setContentView(this, MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot(), true);
+        ActionBarUtils.setContentView(this, MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot(), true);
 
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
@@ -1309,7 +1309,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             if (sheetRemoveFragment()) {
                 return;
             }
-            HideActionBarUtils.toggleActionBar(this);
+            ActionBarUtils.toggleActionBar(this);
         }
         if (items.isEmpty()) {
             return;

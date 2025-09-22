@@ -9,15 +9,22 @@
     <color name="archived_cache_color">#FFAC0B0B</color>
 
     <color name="colorTextHeadline">#88000000</color>
-    <color name="colorTextHintActionBar">@color/colorTextHint</color>
-    <color name="colorTextActionBar">#FF3D3D3D</color>
     <color name="colorIconMenu">#FF3D3D3D</color>
 
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
     <color name="colorBackgroundSelected">#FFCCCCCC</color>
-    <color name="colorBackgroundActionBar">#FFDEDEDE</color>
+
+    <color name="colorTextHintActionBar">#FFAAAAAA</color>
+    <color name="colorTextActionBar">#FFFFFFFF</color>
+    <color name="colorBackgroundActionBar">#DD2A2A2A</color>
+
+    <color name="colorTextTabBar">@color/colorTextDark</color>
+    <color name="colorBackgroundTabBar">#FFF3F3F3</color>
+
+    <color name="colorTextMainInfo">#FF3D3D3D</color>
+    <color name="colorBackgroundMainInfo">#FFDEDEDE</color>
 
     <color name="colorSeparator">#33000000</color>
 

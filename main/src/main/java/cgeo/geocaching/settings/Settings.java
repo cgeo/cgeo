@@ -1420,6 +1420,10 @@ public class Settings {
         return !isDarkThemeActive(context, getAppTheme(context));
     }
 
+    public static boolean useColoredActionBar(final @NonNull Context context) {
+        return getBoolean(R.string.pref_colored_theme, true);
+    }
+
     public static Intent getStartscreenIntent(final @NonNull Activity activity) {
         final String startscreen = getString(R.string.pref_startscreen, activity.getString(R.string.pref_value_startscreen_home));
         if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_stored))) {

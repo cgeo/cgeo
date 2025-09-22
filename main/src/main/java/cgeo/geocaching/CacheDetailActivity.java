@@ -335,7 +335,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         // If we open this cache from a search, let's properly initialize the title bar, even if we don't have cache details
-        setCacheTitleBar(geocode, name, null);
+        setCacheTitleBar(geocode, name);
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 

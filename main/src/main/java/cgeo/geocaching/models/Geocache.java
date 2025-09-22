@@ -784,6 +784,10 @@ public class Geocache implements INamedGeoCoordinate {
         return !isArchived() && BooleanUtils.isTrue(disabled);
     }
 
+    public boolean isEnabled() {
+        return !isDisabled() && !isArchived();
+    }
+
     public boolean isPremiumMembersOnly() {
         return BooleanUtils.isTrue(premiumMembersOnly);
     }

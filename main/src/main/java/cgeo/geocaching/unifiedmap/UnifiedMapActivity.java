@@ -63,12 +63,12 @@ import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -185,7 +185,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onCreate(savedInstanceState);
         acquireUnifiedMap(this);
 
-        HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        ActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
         if (null != findViewById(R.id.live_map_status)) {
             findViewById(R.id.live_map_status).getBackground().mutate();
         }
@@ -1220,7 +1220,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (sheetRemoveFragment()) {
                     return;
                 }
-                HideActionBarUtils.toggleActionBar(this);
+                ActionBarUtils.toggleActionBar(this);
                 GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, "", isLongTap);
             }
         } else if (result.size() == 1) {

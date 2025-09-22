@@ -53,7 +53,7 @@ public class ColorUtils {
         return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
 
-    private static float[] getHslValues(@ColorInt final int colorInt) {
+    public static float[] getHslValues(@ColorInt final int colorInt) {
         final int red = Color.red(colorInt);
         final int green = Color.green(colorInt);
         final int blue = Color.blue(colorInt);
@@ -61,6 +61,11 @@ public class ColorUtils {
         final float[] hsl = new float[3];
         androidx.core.graphics.ColorUtils.RGBToHSL(red, green, blue, hsl);
         return hsl;
+    }
+
+    public static int getColorFromHslValues(final float[] hslValues) {
+        return androidx.core.graphics.ColorUtils.HSLToColor(hslValues);
+
     }
 
     public static boolean isBrightnessDark(@ColorInt final int colorInt) {
