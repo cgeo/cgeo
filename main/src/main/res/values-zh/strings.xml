@@ -817,9 +817,7 @@
     <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="init_gcvote_password_description">为了能够给藏点打分，您需要遵循 GCVote.com 的使用说明，然后在这里输入您的 GCVote 密码。</string>
     <string name="err_vote_send_rating">发送评分时出错。</string>
-    <string name="vote_sent">发送评分成功</string>
     <string name="init_login_popup">登录</string>
     <string name="init_login_popup_working">正在登录…</string>
     <string name="init_login_popup_ok">登录成功</string>
@@ -861,8 +859,6 @@
     <string name="init_signature_template_type">类型</string>
     <string name="init_signature_template_location">位置</string>
     <string name="init_signature_template_geocode">藏点编码</string>
-    <string name="init_ratingwanted">GCvote 评分</string>
-    <string name="init_summary_ratingwanted">从 GCvote.com 加载藏点评分</string>
     <string name="init_summary_bettercacher">从 BetterCacher.org 载入藏点等级和类别</string>
     <string name="init_friends_and_own_logs_wanted">显示好友的 / 自己的</string>
     <string name="init_summary_friends_and_own_logs_wanted">为朋友和自己的日志显示额外的日志页面</string>
