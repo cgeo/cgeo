@@ -889,9 +889,7 @@
     <string name="init_summary_oc_uk">Ladda cacher från opencache.uk</string>
     <string name="init_oc_uk_description">Använd c:geo med opencache.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
     <string name="init_summary_su">Ladda cacher från geocaching.su</string>
-    <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
     <string name="err_vote_send_rating">Fel uppstod när betyget skickades.</string>
-    <string name="vote_sent">Rösten har skickats</string>
     <string name="init_login_popup">Inloggning</string>
     <string name="init_login_popup_working">Loggar in…</string>
     <string name="init_login_popup_ok">Inloggning OK</string>
@@ -936,8 +934,6 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Plats</string>
     <string name="init_signature_template_geocode">Geocode</string>
-    <string name="init_ratingwanted">GCvote.com</string>
-    <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
     <string name="init_summary_bettercacher">Ladda cache-nivåer och kategorier från BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Visa vänners/egna</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
@@ -1483,7 +1479,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Hämtar spoilerbilder</string>
     <string name="cache_dialog_loading_details_status_logs">Hämtar tidigare loggar</string>
     <string name="cache_dialog_loading_details_status_waypoints">Analyserar punkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
     <string name="cache_dialog_loading_details_status_cache">Sparar information</string>
     <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
     <string name="cache_dialog_offline_save_title">Sparad lokalt</string>
@@ -2673,7 +2668,6 @@
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
-    <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
     <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
     <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
