@@ -865,9 +865,7 @@
     <string name="init_summary_oc_uk">Загрузить тайники с opencache.uk</string>
     <string name="init_oc_uk_description">Авторизовать c:geo для opencaching.uk, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
     <string name="init_summary_su">Загрузить тайники с Geocaching.su</string>
-    <string name="init_gcvote_password_description">Чтобы оценивать тайники, вам необходимо проследовать инструкциям на GCVote.com и ввести здесь ваш пароль GCVote.</string>
     <string name="err_vote_send_rating">При отправке оценки произошла ошибка.</string>
-    <string name="vote_sent">Оценка успешно отправлена</string>
     <string name="init_login_popup">Вход</string>
     <string name="init_login_popup_working">Выполняется вход</string>
     <string name="init_login_popup_ok">Вход ОК</string>
@@ -912,8 +910,6 @@
     <string name="init_signature_template_type">Тип</string>
     <string name="init_signature_template_location">Местоположение</string>
     <string name="init_signature_template_geocode">Геокод</string>
-    <string name="init_ratingwanted">Рейтинг GCvote</string>
-    <string name="init_summary_ratingwanted">Загружать рейтинг тайника с GCvote.com</string>
     <string name="init_summary_bettercacher">Загрузить уровень тайника и категории с BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Свои записи и записи друзей</string>
     <string name="init_summary_friends_and_own_logs_wanted">Отображать дополнительную страницу блокнота для своих записей и записей друзей</string>
@@ -1460,7 +1456,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Загрузка фото из спойлера</string>
     <string name="cache_dialog_loading_details_status_logs">Загрузка блокнота</string>
     <string name="cache_dialog_loading_details_status_waypoints">Обработка путевых точек</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Загрузка GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Кэширование данных</string>
     <string name="cache_dialog_loading_details_status_render">Отрисовка</string>
     <string name="cache_dialog_offline_save_title">Сохранение</string>
@@ -2697,7 +2692,6 @@
     <string name="wherigo_download_progress_download_status">Скачано %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Отчет по проблеме Wherigo</string>
     <string name="wherigo_error_game_noerror">Движок Wherigo не сообщает об ошибках.</string>
-    <string name="wherigo_error_email">Отчет о проблеме Wherigo\n\nОшибка Движка: %1$s\n\nИнформация Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Движок Wherigo сообщил об ошибке. Откройте диалоговое окно с ошибкой для получения подробной информации.</string>
     <string name="wherigo_confirm_stop_running_game_title">Остановка Игры Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">В данный момент игра запущена для \"%s\". Вы хотите остановить эту игру?</string>
