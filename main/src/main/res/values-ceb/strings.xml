@@ -321,7 +321,6 @@
     <string name="init_summary_oc_uk">I-load ang mga cache gikan sa opencache.uk</string>
     <string name="init_oc_uk_description">Pagpatugot sa c:geo kuyog sa opencache.uk para magpangita sa mga cache ug akses/filter ang imong nakit-ang mga cache.</string>
     <string name="init_summary_su">I-load ang mga cache gikan sa Geocaching.su</string>
-    <string name="init_gcvote_password_description">Para maka-rate sa cache, kinahanglan nimo sundon ang gitudlo sa GCVote.com ug ipasulod ang imong GCVote password dire.</string>
     <string name="init_login_popup">Pasulod</string>
     <string name="init_login_popup_working">Pagpasulod…</string>
     <string name="init_login_popup_ok">Okay ang pagpasulod</string>
@@ -341,8 +340,6 @@
     <string name="init_signature_template_owner">Tag-iya</string>
     <string name="init_signature_template_name">Pangalan</string>
     <string name="init_signature_template_log">Ang teksto sa log</string>
-    <string name="init_ratingwanted">Rating sa GCvote</string>
-    <string name="init_summary_ratingwanted">Ang pag-load sa rating sa cache gikan sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ang pagpakita sa mga Higala/Kaugalingon</string>
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpakita sa dugang nga panid sa logbook nga alang sa mga higala ug kaugalingong mga log</string>
     <string name="init_openlastdetailspage">Ang katapusang detalye nga panid</string>
@@ -512,7 +509,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Loading pa ang spoiler nga imahe</string>
     <string name="cache_dialog_loading_details_status_logs">Loading ang logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pagproseso sa Waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Loading ang GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Pag-cache sa Datos</string>
     <string name="cache_dialog_loading_details_status_render">Pag-render sa view</string>
     <string name="cache_dialog_offline_save_message">Pag-save sa cache alang sa paggamit sa offline…</string>
