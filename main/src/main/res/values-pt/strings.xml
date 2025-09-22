@@ -872,9 +872,7 @@
     <string name="init_summary_oc_uk">Carregar caches a partir de \'opencaching.uk\'</string>
     <string name="init_oc_uk_description">Autoriza o c:geo em opencache.uk a pesquisar por geocaches e a aceder/filtrar as suas caches encontradas.</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
-    <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
     <string name="err_vote_send_rating">Erro ao enviar a avaliação.</string>
-    <string name="vote_sent">Votação enviada com sucesso</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
     <string name="init_login_popup_ok">Sessão iniciada</string>
@@ -919,8 +917,6 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Localização</string>
     <string name="init_signature_template_geocode">Geo-código</string>
-    <string name="init_ratingwanted">Avaliação de GCvote</string>
-    <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
     <string name="init_summary_bettercacher">Carregar nível e categorias das caches de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
@@ -1461,7 +1457,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">A carregar as imagens spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">A carregar registos</string>
     <string name="cache_dialog_loading_details_status_waypoints">A carregar os pontos adicionais</string>
-    <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">A armazenar dados</string>
     <string name="cache_dialog_loading_details_status_render">A renderizar a vista</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -2686,7 +2681,6 @@
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor do Wherigo:\n\n```\n%1$s\n```\nPode contactar o autor do cartucho [aqui](%2$s)</string>
-    <string name="wherigo_error_email">Relatório de problema no Wherigo\n\nErro: %1$s\n\nInformação Wherigo: %2$s</string>
     <string name="wherigo_error_toast">O motor do Wherigo reportou um erro. Abra o diálogo de erros para ver os detalhes.</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Um jogo está actualmente em execução para \"%s\". Deseja parar este jogo?</string>
