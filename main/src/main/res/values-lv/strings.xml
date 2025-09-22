@@ -412,9 +412,7 @@
     <string name="init_summary_oc_uk">Ielādēt slēpņus no opencache.uk</string>
     <string name="init_oc_uk_description">Atļaut c:geo un opencaching.us meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
     <string name="init_summary_su">Ielādēt slēpņus no Geocaching.su</string>
-    <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, tev jāseko instrukcijām GCVote.com mājas lapā un jāievada sava GCVote parole šeit.</string>
     <string name="err_vote_send_rating">Ir notikusi kļūme sūtot vērtējumu.</string>
-    <string name="vote_sent">Novērtējums ir sekmīgi nosūtīts</string>
     <string name="init_login_popup">Pieteikšanās</string>
     <string name="init_login_popup_working">Piesakās sistēmā…</string>
     <string name="init_login_popup_ok">Pieteikšanās izpildīta veiksmīgi</string>
@@ -441,8 +439,6 @@
     <string name="init_signature_template_log">Ieraksta teksts</string>
     <string name="init_signature_template_size">Izmērs</string>
     <string name="init_signature_template_type">Pēc tipa</string>
-    <string name="init_ratingwanted">GCvote reitings</string>
-    <string name="init_summary_ratingwanted">Ielādēt slēpņu novērtējumus no GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rādīt draugu / savus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rādīt papildu lapu ar draugu un saviem apmeklējuma ierakstiem</string>
     <string name="init_openlastdetailspage">Pēdējā atvērtā sadaļa</string>
@@ -670,7 +666,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Ielādē \"spoiler\" attēlus</string>
     <string name="cache_dialog_loading_details_status_logs">Ielādē ierakstus</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apstrādā starpposmus</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Ielādē GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
     <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
     <string name="cache_dialog_offline_save_title">Bezsaistes režīmā</string>
