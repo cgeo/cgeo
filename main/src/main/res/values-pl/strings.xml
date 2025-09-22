@@ -911,9 +911,7 @@
     <string name="init_summary_oc_uk">Załaduj skrzynki z opencache.uk</string>
     <string name="init_oc_uk_description">Autoryzuj c:geo z opencache.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
     <string name="init_summary_su">Załaduj skrzynki z Geocaching.su</string>
-    <string name="init_gcvote_password_description">Aby móc oceniać skrytki, należy postępować zgodnie z instrukcjami zawartymi na GCVote.com i podać swoje hasło do serwisu tutaj.</string>
     <string name="err_vote_send_rating">Błąd podczas wysyłania oceny.</string>
-    <string name="vote_sent">Ocena pomyślnie wysłana</string>
     <string name="init_login_popup">Nazwa użytkownika</string>
     <string name="init_login_popup_working">Logowanie…</string>
     <string name="init_login_popup_ok">Nazwa użytkownika OK</string>
@@ -958,8 +956,6 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Lokalizacja</string>
     <string name="init_signature_template_geocode">Geokod</string>
-    <string name="init_ratingwanted">Ocena GCvote</string>
-    <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
     <string name="init_summary_bettercacher">Wczytaj kategorie i poziom skrytek z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
@@ -1523,7 +1519,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Ładuję zdjęcia spoilerowe</string>
     <string name="cache_dialog_loading_details_status_logs">Ładuję wpisy</string>
     <string name="cache_dialog_loading_details_status_waypoints">Przetwarzam punkty nawigacji</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Ładuję GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Zapisuję dane</string>
     <string name="cache_dialog_loading_details_status_render">Renderuję widok</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -2784,7 +2779,6 @@
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>
-    <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
