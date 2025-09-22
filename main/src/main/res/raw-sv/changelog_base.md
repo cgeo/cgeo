@@ -5,6 +5,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Aktivering av live-läge håller waypoints för nuvarande inställda mål synliga
 - Nyhet: Långtryck på navigationslinjen öppnar höjddiagram (UnifiedMap)
 - Nytt: Visa genererade vägpunkter på kartan
+- New: Download caches ordered by distance
+- Fix: Doubling of individual route items
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -32,3 +34,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Varning vid försök att lägga till för många cacher i en bokmärkeslista
 - Nytt: Funktioner för att bevaka/avbevaka listan
 - Nyhet: Erbjud offline-översättning med appar från Google Translate eller DeepL (om installerat)
+- New: Delete items from search history
+- Change: Remove GCVote (service discontinued)
