@@ -630,9 +630,7 @@
     <string name="init_summary_oc_uk">Last cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencache.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
     <string name="init_summary_su">Last cacher fra Geocaching.su</string>
-    <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
     <string name="err_vote_send_rating">Feil under sending av vurdering.</string>
-    <string name="vote_sent">Stemmegivning sendt</string>
     <string name="init_login_popup">Logg inn</string>
     <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
     <string name="init_login_popup_ok">Innlogging fullført</string>
@@ -672,8 +670,6 @@
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Sted</string>
-    <string name="init_ratingwanted">GCvote-rangering</string>
-    <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners / egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
     <string name="init_openlastdetailspage">Sist brukte fane</string>
@@ -1069,7 +1065,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Laster spoiler-bilder</string>
     <string name="cache_dialog_loading_details_status_logs">Laster logger</string>
     <string name="cache_dialog_loading_details_status_waypoints">Behandler veipunkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Laster GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Bufrer data</string>
     <string name="cache_dialog_loading_details_status_render">Klargjør visning</string>
     <string name="cache_dialog_offline_save_title">Lagret lokalt</string>
