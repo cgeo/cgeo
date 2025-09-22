@@ -329,7 +329,6 @@
     <string name="init_summary_oc_uk">Mag-load ng caches mula sa opencache.uk</string>
     <string name="init_oc_uk_description">Pahintulot c:geo may opencache.uk para mag hanap ng cache at access/filter para sa iyong caches.</string>
     <string name="init_summary_su">Mag-load ng caches mula sa Geocaching.su</string>
-    <string name="init_gcvote_password_description">Para mai-rate ang cache, kinakailangan mo sumunod sa mga tagubilin ng Gcvote.com at ipasok ang iyong GCvote password dito.</string>
     <string name="init_login_popup">Mag-login</string>
     <string name="init_login_popup_working">Naglo-login sa&#8230;</string>
     <string name="init_login_popup_ok">OK mag-login</string>
@@ -351,8 +350,6 @@
     <string name="init_signature_template_owner">Ang May-ari</string>
     <string name="init_signature_template_name">Pangalan</string>
     <string name="init_signature_template_log">Ang teksto ng log</string>
-    <string name="init_ratingwanted">Ang rate ng GCvote</string>
-    <string name="init_summary_ratingwanted">I-load ang rating ng cache mula sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ipakita ang mga Sarili at/mga Kaibigan</string>
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpapakita ng karagdagang talaan ng pahina para sa mga kaibigan at ang sariling mga log</string>
     <string name="init_openlastdetailspage">Ang Huling mga Detalye ng Pahina</string>
@@ -534,7 +531,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Ang mga imahe na spoiler ay nag-load</string>
     <string name="cache_dialog_loading_details_status_logs">Ang mga log ay nag-load</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pinoproseso ang mga waypoint</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Ang GCVote ay nag-load</string>
     <string name="cache_dialog_loading_details_status_cache">Ang Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">I-Render view</string>
     <string name="cache_dialog_offline_save_title">Ang offline</string>
