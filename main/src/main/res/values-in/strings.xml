@@ -332,7 +332,6 @@
     <string name="init_summary_oc_uk">Muat cache dari opencache.uk</string>
     <string name="init_oc_uk_description">Otorisasi c:geo dengan opencache.uk untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="init_summary_su">Muat cache dari Geocaching.su</string>
-    <string name="init_gcvote_password_description">Untuk bisa menilai sebuah cache, anda perlu mengikuti petunjuk di GCVote.com dan masukkan kata sandi GCVote anda di sini.</string>
     <string name="init_login_popup_working">Sedang masuk&#8230;</string>
     <string name="init_login_popup_ok">Masuk Ok</string>
     <string name="init_login_popup_failed">Gagal masuk</string>
@@ -353,8 +352,6 @@
     <string name="init_signature_template_owner">Pemilik</string>
     <string name="init_signature_template_name">Nama</string>
     <string name="init_signature_template_log">Teks log</string>
-    <string name="init_ratingwanted">Rating GCvote</string>
-    <string name="init_summary_ratingwanted">Muat penilaian cache dari GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Tampilan Teman/Milik Sendiri</string>
     <string name="init_summary_friends_and_own_logs_wanted">Tampilan tambahan halaman logbook untuk teman dan log sendiri</string>
     <string name="init_openlastdetailspage">Halaman Rincian Terakhir</string>
@@ -535,7 +532,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Memuat gambar spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Memuat log</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pengolahan titik arah</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Memuat GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Data caching</string>
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
