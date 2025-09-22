@@ -804,9 +804,7 @@
     <string name="init_summary_oc_uk">Opencache.uk 에서 캐시 불러오기</string>
     <string name="init_oc_uk_description">캐시 검색과 찾은 캐시 접근을 위하여 opencache.uk에 c:geo를 인증하기</string>
     <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
-    <string name="init_gcvote_password_description">캐시를 평가하려면, GCVote.com의 지시사항에 따른 후, GCVOte의 비밀번호를 여기 입력하세요.</string>
     <string name="err_vote_send_rating">등급을 보내는 중 오류가 발생했습니다.</string>
-    <string name="vote_sent">투표가 성공적으로 송신됨</string>
     <string name="init_login_popup">로그인</string>
     <string name="init_login_popup_working">로그인 중…</string>
     <string name="init_login_popup_ok">로그인 OK</string>
@@ -848,8 +846,6 @@
     <string name="init_signature_template_type">유형</string>
     <string name="init_signature_template_location">위치</string>
     <string name="init_signature_template_geocode">지오코드</string>
-    <string name="init_ratingwanted">GCvote 평점</string>
-    <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_summary_bettercacher">BetterCacher.org에서 캐시 계층 및 분류를 로드하세요.</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
     <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
@@ -1332,7 +1328,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">스포일러 사진 불러오는 중</string>
     <string name="cache_dialog_loading_details_status_logs">로그 불러오는 중</string>
     <string name="cache_dialog_loading_details_status_waypoints">지점 처리중</string>
-    <string name="cache_dialog_loading_details_status_gcvote">GCVote 불러오는 중</string>
     <string name="cache_dialog_loading_details_status_cache">캐싱 데이터</string>
     <string name="cache_dialog_loading_details_status_render">화면 그리기</string>
     <string name="cache_dialog_offline_save_title">오프라인</string>
