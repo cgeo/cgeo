@@ -545,9 +545,7 @@
     <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="init_gcvote_password_description">輸入GCVote.com的密碼，並根據GCVote.com的指示完成這個地理藏寶的評價。</string>
     <string name="err_vote_send_rating">發送評價時出現錯誤</string>
-    <string name="vote_sent">成功上傳您的投票</string>
     <string name="init_login_popup">登入</string>
     <string name="init_login_popup_working">登入中…</string>
     <string name="init_login_popup_ok">登入成功</string>
@@ -575,8 +573,6 @@
     <string name="init_signature_template_log">日誌文字</string>
     <string name="init_signature_template_size">大小</string>
     <string name="init_signature_template_type">類型</string>
-    <string name="init_ratingwanted">GCVoting的評價</string>
-    <string name="init_summary_ratingwanted">載入GCvote.com的評價</string>
     <string name="init_friends_and_own_logs_wanted">顯示朋友擁有的</string>
     <string name="init_summary_friends_and_own_logs_wanted">對於朋友寫的或是自己的日誌，顯示額外的日誌頁</string>
     <string name="init_openlastdetailspage">最後的詳細資訊頁面</string>
@@ -910,7 +906,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">載入提示圖片</string>
     <string name="cache_dialog_loading_details_status_logs">讀取日誌</string>
     <string name="cache_dialog_loading_details_status_waypoints">處理航點</string>
-    <string name="cache_dialog_loading_details_status_gcvote">載入 GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">藏寶資料</string>
     <string name="cache_dialog_loading_details_status_render">渲染</string>
     <string name="cache_dialog_offline_save_title">離線</string>
