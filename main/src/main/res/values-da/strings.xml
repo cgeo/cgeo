@@ -583,9 +583,7 @@
     <string name="init_summary_oc_uk">Indlæs cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencache.uk.</string>
     <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
-    <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
     <string name="err_vote_send_rating">Fejl under afsendelse af bedømmelse.</string>
-    <string name="vote_sent">Bedømmelse blev afsendt</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_ok">Login OK</string>
@@ -613,8 +611,6 @@
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
-    <string name="init_ratingwanted">GCVote vurdering</string>
-    <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
     <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -911,7 +907,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Loader spoilerbilleder</string>
     <string name="cache_dialog_loading_details_status_logs">Loader logbeskeder</string>
     <string name="cache_dialog_loading_details_status_waypoints">Bearbejder rutepunkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Loader GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Lagrer data</string>
     <string name="cache_dialog_loading_details_status_render">Tegner side</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
