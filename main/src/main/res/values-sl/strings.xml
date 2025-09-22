@@ -372,8 +372,6 @@
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
     <string name="init_signature_template_name">Ime</string>
     <string name="init_signature_template_log">Vsebina zapisa</string>
-    <string name="init_ratingwanted">GCvote ocene</string>
-    <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Prikaže svoje/prijateljeve</string>
     <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
     <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
@@ -519,7 +517,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Nalaganje spoiler slik</string>
     <string name="cache_dialog_loading_details_status_logs">Nalaganje zapisov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Obdelovanje dodatnih točk</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Nalaganje glasov GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Shranjevanje podatkov</string>
     <string name="cache_dialog_loading_details_status_render">Ustvarjanje pogleda</string>
     <string name="cache_dialog_offline_save_title">Brez povezave</string>
