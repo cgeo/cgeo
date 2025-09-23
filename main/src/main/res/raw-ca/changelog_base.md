@@ -5,8 +5,8 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: activar el mode en directe manté visibles els punts de referència de l'objectiu establert actualment
 - Nou: Si toqueu llargament la línia de navegació, s'obre el gràfic d'elevació (UnifiedMap)
 - Nou: Mostra els punts de referència generats al mapa
-- New: Download caches ordered by distance
-- Fix: Doubling of individual route items
+- Nou: Descarrega els catxés ordenats per distància
+- Correcció: Duplicació d'elements de ruta individuals
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -34,5 +34,5 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Avís en intentar afegir massa catxés a una llista de marcadors
 - Nou: Funcions de llista de seguiment/no seguiment
 - Nou: Ofereix traducció fora de línia amb les aplicacions de Google Translate o DeepL (si estan instal·lades)
-- New: Delete items from search history
-- Change: Remove GCVote (service discontinued)
+- Nou: Suprimeix elements de l'historial de cerca
+- Canvi: Elimina GCVote (servei descontinuat)
