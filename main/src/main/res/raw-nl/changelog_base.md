@@ -5,8 +5,8 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Inschakelen van live modus houdt waypoints zichtbaar van huidig ingesteld doel
 - Nieuw: Lang tikken op de navigatielijn opent de hoogtegrafiek (UnifiedMap)
 - Nieuw: Toon gegenereerde waypoints op kaart
-- New: Download caches ordered by distance
-- Fix: Doubling of individual route items
+- Nieuw: Download caches gesorteerd op afstand
+- Oplossing: Verdubbeling van individuele route items
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
@@ -34,5 +34,5 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Waarschuwing bij poging om te veel caches toe te voegen aan een bookmarklijst
 - Nieuw: Watch/unwatch lijst functies
 - Nieuw: Offlinevertaling aanbieden met Google Translate of DeepL apps (indien geïnstalleerd)
-- New: Delete items from search history
-- Change: Remove GCVote (service discontinued)
+- Nieuw: Items uit zoekgeschiedenis verwijderen
+- Wijziging: Verwijder GCVote (service beëindigd)
