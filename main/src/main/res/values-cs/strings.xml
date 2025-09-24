@@ -354,11 +354,16 @@
     <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
     <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
     <string name="translator_model">Překladový model</string>
+    <string name="translator_tooltip">Offline překlad pomocí Google</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
     <string name="translator_language_target_select">Vyberte cílový jazyk</string>
+    <string name="translator_language_unsupported">Jazyk (%s) není pro překlad podporován.\nKlepnutím vyberte zdrojový jazyk.</string>
+    <string name="translator_language_unknown">Nelze určit jazyk.\nKlepnutím vyberte zdrojový jazyk.</string>
+    <string name="translator_language_detected">Přeložte z \"%s\" pomocí Googlu.\nKlepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_target_language">Přeložit do \"%s\"</string>
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
+    <string name="translator_translation_success">Přeloženo z \"%s\". \nKlepněte na tlačítko pro obnovení originálního</string>
     <string name="crash_activity_title">Jejda! c:geo spadlo!</string>
     <string name="crash_activity_report">nahlásit problém</string>
     <!-- location service -->
