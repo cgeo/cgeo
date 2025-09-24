@@ -127,8 +127,7 @@
     <string name="log_problem_missing_label">ייתכן והמטמון נעלם</string>
     <string name="log_problem_other_label">אחר</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">תרגום עלול להיכשל עם כמות גדולה של טקסט.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
     <string name="err_parse">טעינת עמוד ההתחברות כשלה</string>
@@ -345,7 +344,6 @@
     <string name="init_signature_template_number">מספר</string>
     <string name="init_signature_template_owner">בעלים</string>
     <string name="init_signature_template_name">שם</string>
-    <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_address">הצג כתובת</string>
     <string name="init_summary_address">הצגת כתובת במקום נקודות ציון על המסך הראשי</string>
     <!-- names for CacheListInfoItem -->
@@ -376,14 +374,13 @@
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
-    <string name="cache_status_attended">השתתף</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <string name="init_longtap_map">לחיצה ארוכה על המפה</string>
     <string name="clear_goto_history">פעולה זו תמחק את כל נקודות הציון פרט לחמש האחרונות</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <!-- import -->
     <string name="web_import_waiting">Waiting for new caches from send2cgeo&#8230;</string>

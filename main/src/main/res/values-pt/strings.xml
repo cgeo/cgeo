@@ -216,15 +216,17 @@
     <string name="log_image_titleprefix">Imagem</string>
     <string name="log_delete_confirm">Deseja mesmo eliminar o registo do tipo \'%1$s\' do autor \'%2$s\' com data de registo \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Quer mesmo apagar o seu registo offline armazenado do tipo \'%1$s\', com data de registo de \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Eu encontrei %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Eu não consegui encontrar %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Deixei uma nota em %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Reportei precisa de manutenção para %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Acho que %1$s (%2$s) deve ser arquivado:\n\n</string>
+    <string name="log_share_prefix_default">O meu registo para %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- Contacts -->
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
     <string name="contact_multiple_matches">Contacto: Múltiplas correspondências</string>
-    <!-- translation -->
-    <string name="translate">Traduzir na App Google Tradutor</string>
-    <string name="translate_to_sys_lang">Traduzir para %s (Web)</string>
-    <string name="translate_to_english">Traduzir para Inglês (Web)</string>
-    <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
@@ -336,6 +338,7 @@
     <string name="dont_show_again">Não mostrar novamente</string>
     <string name="tap_icon_more_info">Toque no ícone para mais informações</string>
     <string name="use_slider_adjust_value">Use o controle deslizante para ajustar o valor</string>
+    <string name="snackbar_action_share">Partilhar</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
@@ -358,6 +361,7 @@
     <string name="translator_target_language">Traduzir para \"%s\"</string>
     <string name="translator_translation_error">Falha ao traduzir texto: %s</string>
     <string name="translator_translation_initerror">Falha ao inicializar o tradutor</string>
+    <string name="translator_translation_success">Traduzido de \"%s\", toque no botão para restaurar o original</string>
     <!-- location service -->
     <string name="loc_last">Última conhecida</string>
     <string name="loc_net">Rede</string>
@@ -868,9 +872,7 @@
     <string name="init_summary_oc_uk">Carregar caches a partir de \'opencaching.uk\'</string>
     <string name="init_oc_uk_description">Autoriza o c:geo em opencache.uk a pesquisar por geocaches e a aceder/filtrar as suas caches encontradas.</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
-    <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
     <string name="err_vote_send_rating">Erro ao enviar a avaliação.</string>
-    <string name="vote_sent">Votação enviada com sucesso</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
     <string name="init_login_popup_ok">Sessão iniciada</string>
@@ -915,8 +917,6 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Localização</string>
     <string name="init_signature_template_geocode">Geo-código</string>
-    <string name="init_ratingwanted">Avaliação de GCvote</string>
-    <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
     <string name="init_summary_bettercacher">Carregar nível e categorias das caches de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
@@ -1444,9 +1444,7 @@
     <string name="cache_variables">Variáveis</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Pontos adicionais (%d)</string>
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
-    <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Ocultar pontos adicionais visitados</string>
     <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
@@ -1459,7 +1457,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">A carregar as imagens spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">A carregar registos</string>
     <string name="cache_dialog_loading_details_status_waypoints">A carregar os pontos adicionais</string>
-    <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">A armazenar dados</string>
     <string name="cache_dialog_loading_details_status_render">A renderizar a vista</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -1651,7 +1648,7 @@
     <string name="html_style_monochrome">Monocromático</string>
     <string name="html_style_source_formatted">Código fonte da formação HTML</string>
     <string name="html_style_source">Fonte HTML</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">graus</string>
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
@@ -1864,7 +1861,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1883,7 +1880,7 @@
     <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
     <string name="search_finder">Encontrada por</string>
-    <string name="search_filter">Filtrar</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
     <string name="most_recent">Mais recentes</string>
@@ -2684,7 +2681,6 @@
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor do Wherigo:\n\n```\n%1$s\n```\nPode contactar o autor do cartucho [aqui](%2$s)</string>
-    <string name="wherigo_error_email">Relatório de problema no Wherigo\n\nErro: %1$s\n\nInformação Wherigo: %2$s</string>
     <string name="wherigo_error_toast">O motor do Wherigo reportou um erro. Abra o diálogo de erros para ver os detalhes.</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Um jogo está actualmente em execução para \"%s\". Deseja parar este jogo?</string>
@@ -2721,7 +2717,7 @@
     <string name="close">Fechar</string>
     <string name="delete">Eliminar</string>
     <string name="play">Jogar</string>
-    <string name="copy">Copiar</string>
+    <string name="copy" tools:ignore="PrivateResource">Copiar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Selecionar Tudo</string>
     <string name="multiselect_selectvisible">Selecionar Visíveis</string>
@@ -2755,13 +2751,6 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Tamanho de imagem preferencial</string>
-    <string name="settings_gc_imagesize_summary">As imagens nas descrições, nos registos e trackables, a partir de Geocaching.com, estão disponíveis em tamanhos diferentes. Seleccione o tamanho com que serão descarregadas, quando carrega e armazena uma cache.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Original</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <string name="view_database">Ver a base de dados</string>
     <string name="dbi_select_title">(Selecionar tabela)</string>
