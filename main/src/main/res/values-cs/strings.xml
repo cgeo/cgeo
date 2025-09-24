@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Komentář týmu OC</string>
     <string name="log_your_saved_log">Tvé uložené logy</string>
     <string name="log_empty_logbook">Logbook této kešky je prázdný.</string>
+    <string name="log_empty_logbook_filtered">Vybrané filtry skrývají všechny záznamy. Vyberte alespoň jednu možnost.</string>
     <string name="log_image_selectfromstorage_tooltip">Vybrat obrázky z úložiště</string>
     <string name="log_image_camera_tooltip">Pořídit snímek pomocí fotoaparátu</string>
     <string name="log_image_selectfromown_tooltip">Vybrat obrázky z vlastních snímků</string>
@@ -227,6 +228,15 @@
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
     <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- External translation -->
+    <string name="translate">Přeložit</string>
+    <string name="translate_external_label">Přeložit pomocí %s</string>
+    <string name="translate_external_variant_app">Aplikace</string>
+    <string name="translate_external_variant_web">Webová stránka</string>
+    <string name="translate_external_none">&lt;Žádné&gt;</string>
+    <string name="translate_external_app">Externí aplikace</string>
+    <string name="translate_external_google">Překladač Google</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Překlad prostřednictvím webové stránky může selhat v případě velkého množství textu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
@@ -257,6 +267,7 @@
     <string name="err_detail_still_working">Stále probíhá zpracování jiné úlohy.</string>
     <string name="err_detail_premium_log_found">Tato keška je dostupná pouze pro prémiové členy geocaching.com. Informace o kešce proto nelze zobrazit.\n\nPokud jste však již tuto kešku nalezli, můžete ji zalogovat zde.</string>
     <string name="err_watchlist_failed">Změna tvého Watchlistu selhala.</string>
+    <string name="err_watchlist_failed_geocodes">Změna seznamu sledovaných se pro geokódy nezdařila: %s</string>
     <string name="err_application_no">c:geo nemůže najít žádnou vhodnou aplikaci.</string>
     <string name="err_auth_initialize">c:geo nedokázalo zahájit autorizační proces.</string>
     <string name="err_auth_process">Autorizační proces selhal.</string>
@@ -311,6 +322,8 @@
     <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Živá mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="err_read_bookmark_list">Chyba při čtení seznamů záložek.</string>
+    <string name="err_bookmark_list_overfull">Příliš mnoho kešek</string>
+    <string name="err_bookmark_list_overfull_description">Seznamy záložek mohou uložit maximálně 1000 kešek, ale vy se pokoušíte přidat do seznamu více kešek. \n\nChcete pokračovat a přidat pouze tolik kešek, kolik seznam pojme?</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
     <string name="info_log_saved">Log byl úspěšně uložen.</string>
     <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
@@ -357,8 +370,12 @@
     <string name="translator_model_download_success">Překladaový model pro %s stažen</string>
     <string name="translator_model_download_error">Nepodařilo se stáhnout překladový model %1$s: %2$s</string>
     <string name="translator_model">Překladový model</string>
+    <string name="translator_tooltip">Offline překlad pomocí Google</string>
     <string name="translator_language_select">Vybrat zdrojový jazyk</string>
     <string name="translator_language_target_select">Vyberte cílový jazyk</string>
+    <string name="translator_language_unsupported">Jazyk (%s) není pro překlad podporován. Klepnutím vyberte zdrojový jazyk.</string>
+    <string name="translator_language_unknown">Nelze určit jazyk. Klepnutím vyberte zdrojový jazyk.</string>
+    <string name="translator_language_detected">Přeložit z \"%s\". Klepnutím vyberte zdrojový jazyk.</string>
     <string name="translator_target_language">Přeložit do \"%s\"</string>
     <string name="translator_translation_error">Nepodařilo se přeložit text: %s</string>
     <string name="translator_translation_initerror">Nepodařilo se inicializovat překladatele</string>
@@ -473,6 +490,11 @@
     <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
     <string name="caches_upload_bookmarklist_all">Přidat vše do seznamu záložek</string>
     <string name="caches_upload_bookmarklist_selected">Přidat vybrané do seznamu záložek</string>
+    <string name="caches_watch_all">Přidat vše do seznamu sledovaných</string>
+    <string name="caches_unwatch_all">Odstranit vše ze seznamu sledovaných</string>
+    <string name="caches_watch_selected">Přidat vybrané do seznamu sledovaných</string>
+    <string name="caches_unwatch_selected">Odstranit vybrané ze seznamu sledovaných</string>
+    <string name="watchlist_background_started">Aktualizace seznamu sledovaných byla spuštěna na pozadí</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrát upravené souřadnice pro všechny (vybrané) kešky a přepsat stávající souřadnice na serveru? Tento krok nelze vrátit zpět.</string>
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
@@ -947,6 +969,8 @@
     <string name="init_translation_disabled">Překlad vypnutý</string>
     <string name="init_date_format">Formát data</string>
     <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
+    <string name="init_translator_external">Externí překladač</string>
+    <string name="init_translator_external_description">Externí aplikace pro použití k překladu</string>
     <string name="system_default">Podle systému</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
@@ -1240,6 +1264,7 @@
     <string name="category_unifiedMap">Sjednocená mapa</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
+    <string name="gui_test_title">Testovací obrazovka GUI</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
@@ -1477,6 +1502,7 @@
     <string name="cache_advanced">Pokročilé</string>
     <string name="cache_waypoints">Trasové body</string>
     <string name="cache_variables">Proměnné</string>
+    <string name="cache_variables_chip_completed_variables">Dokončeno</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Trasové body (%d)</string>
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
@@ -1486,6 +1512,7 @@
     <string name="cache_logs">Logbook</string>
     <string name="cache_latest_logs">Poslední logy</string>
     <string name="cache_logs_friends_and_own">Moje logy a logy přátel</string>
+    <string name="cache_logs_friends">Přátelé</string>
     <string name="cache_dialog_loading_details">Načítání detailů kešky…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Načítání stránky</string>
     <string name="cache_dialog_loading_details_status_details">Zpracovávání podrobností</string>
@@ -1688,6 +1715,7 @@
     <string name="cc_hint_minutes">minuty</string>
     <string name="cc_hint_seconds">sekundy</string>
     <string name="cc_hint_fraction">zlomek</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítání kešek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítání trasových bodů z %1$s</string>
@@ -1733,6 +1761,7 @@
     <string name="waypoint_edit_title">Upravit trasový bod</string>
     <string name="waypoint_add_title">Přidat trasový bod</string>
     <string name="waypoint_added">Trasový bod přidán</string>
+    <string name="waypoint_added_current_location">Trasový bod (%1$s) přidán (±%2$s)</string>
     <string name="waypoint_note">Poznámka</string>
     <string name="waypoint_user_note">Osobní poznámka</string>
     <string name="waypoint_visited">Navštíven</string>
@@ -1772,6 +1801,7 @@
     <string name="projection_type_offset_hint_longitude">Posun zeměpisné délky v mikrominutách</string>
     <!-- Variables -->
     <string name="variables_titletext">Tuto stránku můžete použít k zapisování poznámek a výpočtů nutných pro tuto kešku.</string>
+    <string name="variables_titletext_short">Hodnoty a výpočty</string>
     <string name="variables_scanlisting">Prohledat listing</string>
     <string name="variables_scanlisting_choosepattern_title">Vyberte vzor pro nalezené</string>
     <string name="variables_scanlisting_nopatternfound">Nebyl nalezen žádný vzor</string>
@@ -2821,6 +2851,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Upřednostňovaná velikost obrázku</string>
+    <string name="settings_gc_imagesize_summary">Obrázky z webu Geocaching.com, které jsou v listingu, lozích a trasovatelných předmětech jsou k dispozici v různých velikostech. Při načítání a ukládání kešky vyberte velikost, která se má načíst.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Nezměněno</string>
+    <string name="settings_gc_imagesize_entry_original">Maximální</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Zobrazit databázi</string>
     <string name="dbi_select_title">(Vyber tabulku)</string>
