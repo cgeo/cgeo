@@ -110,6 +110,7 @@ import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
+import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -125,7 +126,9 @@ import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -2290,7 +2293,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
 
                     final Waypoint waypoint = getItem(position);
-                    fillViewHolder(activity, rowView, holder, waypoint);
+                    fillViewHolder(activity, rowView, holder, waypoint, cache.getVariables());
                     return rowView;
                 }
             };
@@ -2383,7 +2386,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @SuppressLint("SetTextI18n")
-        protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
+        protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt, final VariableList varList) {
             // coordinates
             final TextView coordinatesView = holder.binding.coordinates;
             final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinateInfo;
@@ -2398,6 +2401,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
             calculatedCoordinatesView.setText("(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern());
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
+            if (cc.hasWarning(varList::getValue)) {
+                holder.binding.calculatedCoordinatesIcon.setImageTintList(ColorStateList.valueOf(Color.YELLOW));
+                holder.binding.calculatedCoordinatesIcon.setImageResource(R.drawable.warning);
+            }
 
             holder.binding.projectionIcon.setVisibility(wpt.hasProjection() ? View.VISIBLE : View.GONE);
             holder.binding.projectionIcon.setImageResource(wpt.getProjectionType().markerId);

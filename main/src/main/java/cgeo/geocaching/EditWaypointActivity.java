@@ -45,6 +45,8 @@ import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -489,6 +491,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
         ViewUtils.setCoordinates(base, binding.buttonLatLongitude);
         ViewUtils.setCoordinates(this.currentCoords, binding.projectedLatLongitude);
+
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
+        if (cc.hasWarning((s) -> varListAdapter.getVariables().getValue(s))) {
+            ((MaterialButton) binding.buttonLatLongitude).setIconTint(ColorStateList.valueOf(Color.YELLOW));
+            ((MaterialButton) binding.buttonLatLongitude).setIconResource(R.drawable.warning);
+        }
     }
 
     private class LoadWaypointThread extends Thread {
