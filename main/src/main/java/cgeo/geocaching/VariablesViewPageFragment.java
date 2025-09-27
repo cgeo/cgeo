@@ -48,6 +48,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             if (activity != null && (previousVarSize < 0 || previousVarSize != v.size())) {
                 activity.reinitializePage(-1); //this just reinits the title bar, not the variable tab content
                 previousVarSize = v.size();
+                cache.recalculateWaypoints();
             }
         });
 
