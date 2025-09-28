@@ -612,6 +612,7 @@
     <string name="list_dialog_rename">Rename</string>
     <string name="list_not_available">List no longer available, switching to standard list</string>
     <string name="list_parent_list">Parent list</string>
+    <string name="list_create_parent">&lt;Create new parent list&gt;</string>
     <string name="list_name">List name</string>
     <string name="list_confirm_rename">Renaming from \"%1$s\" to \"%2$s\"\n%3$s\nThis action cannot be undone!</string>
     <string name="list_confirm_no_hierarchy">\nNo \":\" found - all matching lists will be transformed to top-level lists\n</string>

@@ -21,6 +21,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newParentWrapper"
+        style="@style/textinput_edittext_singleline"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newParent"
+            android:inputType="textPersonName"
+            style="@style/textinput_embedded_singleline"
+            android:hint="@string/list_parent_list"
+            android:importantForAutofill="yes"
+            android:autofillHints="@string/list_parent_list" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleWrapper"
         style="@style/textinput_edittext_singleline">
 
@@ -32,5 +46,4 @@
             android:importantForAutofill="yes"
             android:autofillHints="@string/list_name" />
     </com.google.android.material.textfield.TextInputLayout>
-
 </LinearLayout>
