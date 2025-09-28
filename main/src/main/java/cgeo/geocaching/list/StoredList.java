@@ -17,11 +17,14 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -377,38 +380,36 @@ public final class StoredList extends AbstractList {
             final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
             final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
 
-            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
+            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
             final List<String> hierarchies = DataStore.getListHierarchy();
-            final boolean hasHierarchies = hierarchies.size() > 1;
-            if (hasHierarchies) {
-                if (StringUtils.isEmpty(hierarchies.get(0))) {
-                    hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
-                }
-                listprefix.setVisibility(View.VISIBLE);
-                listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
-                listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
-            } else {
-                listprefix.setVisibility(View.GONE);
-            }
+            hierarchies.set(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+            hierarchies.add(1, activity.getString(R.string.list_create_parent));
+            listprefix.setVisibility(View.VISIBLE);
+            listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+            listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
 
             ((EditText) menu.findViewById(R.id.title)).setText(current);
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
                     .setTitle(dialogTitle)
                     .setPositiveButton(buttonTitle, ((d, which) -> {
                             String prefix = "";
-                            if (hasHierarchies) {
-                                final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
-                                if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                    prefix = temp;
+                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                            if (StringUtils.equals(temp, activity.getString(R.string.list_create_parent))) {
+                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
+                                if (!StringUtils.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
+                                    prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
+                            } else if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                                prefix = temp;
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                     .setView(menu);
             Keyboard.show(activity, menu.findViewById(R.id.title));
-            builder.show();
+            final AlertDialog dialog = builder.show();
+            ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -454,7 +455,7 @@ public final class StoredList extends AbstractList {
                         final String to = title.getText().toString();
                         if (!StringUtils.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
-                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(":") < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
                                     DataStore.renameListPrefix(from, to);
                                     runAfterRename.run();
@@ -508,4 +509,29 @@ public final class StoredList extends AbstractList {
         return true;
     }
 
+    /** enable/disable given input field (for new parent list name) on tapping the "create new parent" entry (= entry on position 1) */
+    private static class NewListAdapter extends ArrayAdapter<String> {
+
+        View newParentInput = null;
+
+        NewListAdapter(final @NonNull Context context, final int resource, final @NonNull List<String> objects) {
+            super(context, resource, objects);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @NonNull
+        @Override
+        public View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
+            final View v = super.getView(position, convertView, parent);
+            v.setOnTouchListener((view, motionEvent) -> {
+                ViewUtils.setVisibility(newParentInput, position == 1 ? View.VISIBLE : View.GONE); // pos 1 is "new parent list"
+                return false;
+            });
+            return v;
+        }
+
+        public void setNewParentInput(final View newParentInput) {
+            this.newParentInput = newParentInput;
+        }
+    }
 }
