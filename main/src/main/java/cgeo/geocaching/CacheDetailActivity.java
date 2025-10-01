@@ -869,7 +869,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void setCoordinates(final Activity activity) {
         ensureSaved();
-        CoordinateInputDialog.show(activity, this::onCoordinatesUpdated, cache.getCoords());
+        CoordinateInputDialog.showLocation(activity, this::onCoordinatesUpdated, cache.getCoords());
     }
 
     public void onCoordinatesUpdated(final Geopoint input) {

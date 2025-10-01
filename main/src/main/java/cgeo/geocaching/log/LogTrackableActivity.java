@@ -331,7 +331,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         @Override
         public void onClick(final View theView) {
 
-            CoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+            CoordinateInputDialog.showLocation(theView.getContext(), this::onCoordinatesUpdated, geopoint);
         }
 
         public void onCoordinatesUpdated(final Geopoint input) {

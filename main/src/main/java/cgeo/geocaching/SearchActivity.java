@@ -497,7 +497,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     }
 
     private void onClickCoordinates() {
-        CoordinateInputDialog.show(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
+        CoordinateInputDialog.showLocation(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
     }
 
     public void onUpdateCoordinates(final Geopoint input) {

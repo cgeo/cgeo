@@ -86,15 +86,17 @@ public class CoordinateInputDialog {
     }
 
     // Entry point for user defined cache, search card and GK TB
-    public static void show(final Context context, final DialogCallback callback, final Geopoint location) {
+    public static void showLocation(final Context context, final DialogCallback callback, final Geopoint location) {
         cacheCoordinates = null;
-        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Normal).show(location);
+        final CoordinateInputData cid = new CoordinateInputData();
+        cid.setGeopoint(location);
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Normal).show(cid);
     }
 
     //Entry point for a plain waypoint returning from the calculator page
-    public static void show(final Context context, final DialogCallback callback, final Geopoint location, final boolean noButtons) {
+    public static void showSimple(final Context context, final DialogCallback callback, final CoordinateInputData inputData) {
         cacheCoordinates = null;
-        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Simple).show(location);
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Simple).show(inputData);
     }
 
     //Main entry point for the waypoint page
@@ -112,7 +114,7 @@ public class CoordinateInputDialog {
             CoordinatesCalculateGlobalDialog.show(fragmentManager, callback, inputData);
             return;
         }
-        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData.getGeopoint());
+        new CoordinateInputDialog(context, callback, CoordinateDialogDisplayModeEnum.Waypoint).show(inputData);
     }
 
     @NonNull
@@ -121,11 +123,10 @@ public class CoordinateInputDialog {
         return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
-    private void show(final Geopoint location) {
+    private void show(final CoordinateInputData inputData) {
 
-        if (location != null) {
-            gp = location;
-        } else {
+        gp = inputData.getGeopoint();
+        if (gp == null) {
             gp = currentCoords();
         }
 
@@ -277,8 +278,6 @@ public class CoordinateInputDialog {
                     final AbstractActivity activity = (AbstractActivity) context;
                     final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
-                    final CoordinateInputData inputData = new CoordinateInputData();
-                    inputData.setGeopoint(gp);
                     final CalculatedCoordinate cc = new CalculatedCoordinate();
                     cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
 
@@ -553,8 +552,8 @@ public class CoordinateInputDialog {
     }
 
     private Pair<String, String> getLatLonPatternFromGui() {
-        String lat = null;
-        String lon = null;
+        final String lat;
+        final String lon;
         switch (currentFormat) {
             case Deg: // DDD.DDDDD°
                 lat = bLatitude.getText().toString() + latitudeDegree.getText() + "." + latitudeFraction.getText() + "°";
@@ -575,7 +574,6 @@ public class CoordinateInputDialog {
                 break;
         }
         return new Pair<>(lat, lon);
-
     }
 
     private static boolean hasClipboardCoordinates() {
