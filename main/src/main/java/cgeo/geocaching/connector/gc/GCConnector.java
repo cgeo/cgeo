@@ -44,7 +44,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -654,8 +654,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @UiThread
     @Override
-    public void performManualLogin(final Context context, final Runnable callback) {
-        GCLogin.getInstance().performManualLogin(context, callback);
+    public void performManualLogin(final Activity activity, final Runnable callback) {
+        GCLogin.getInstance().performManualLogin(activity, callback);
     }
 
     /**
