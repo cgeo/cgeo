@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -32,6 +33,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -614,12 +619,20 @@ public class GCLogin extends AbstractLogin {
     }
 
     @UiThread
-    public void performManualLogin(@NonNull final Context activity, final Runnable callback) {
+    public void performManualLogin(@NonNull final Activity activity, final Runnable callback) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
+
+        WindowCompat.enableEdgeToEdge(activity.getWindow());
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
+            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
+            return windowInsets;
+        });
+
         CookieManager.getInstance().removeAllCookies(b -> {
             final String url = "https://www.geocaching.com";
             binding.webview.loadUrl(url + "/account/signin");

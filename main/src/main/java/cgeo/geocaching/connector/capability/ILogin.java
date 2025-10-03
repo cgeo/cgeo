@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
 
-import android.content.Context;
+import android.app.Activity;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
@@ -61,7 +61,7 @@ public interface ILogin extends IConnector {
     }
 
     @UiThread
-    default void performManualLogin(final Context context, final Runnable callback) {
+    default void performManualLogin(final Activity activity, final Runnable callback) {
         //do nothing by default
     }
 }
