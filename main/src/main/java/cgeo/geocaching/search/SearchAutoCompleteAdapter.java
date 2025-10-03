@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -81,7 +82,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
      * Highlight the selected text (case insensitive) in the given TextView
      */
     void setHighLightedText(final TextView tv, final String textToHighlight) {
-        final String text = tv.getText().toString().toLowerCase();
+        final String text = tv.getText().toString().toLowerCase(Locale.getDefault());
         int ofe = text.indexOf(textToHighlight, 0);
         final Spannable wordToSpan = new SpannableString(tv.getText());
         for (int ofs = 0; ofs < text.length() && ofe != -1; ofs = ofe + 1) {
@@ -129,7 +130,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
             @Override
             protected void publishResults(final CharSequence constraint, final FilterResults filterResults) {
                 if (filterResults != null && filterResults.count > 0) {
-                    searchTerm = constraint.toString().toLowerCase();
+                    searchTerm = constraint.toString().toLowerCase(Locale.getDefault());
                     suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
                 } else {
