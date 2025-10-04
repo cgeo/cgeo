@@ -1497,7 +1497,6 @@
     <string name="cache_menu_copy_list">Kopioi toiseen listaan</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_vote">Anna ääni</string>
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
     <string name="cache_menu_log_in_browser">Kirjaa selaimessa</string>
     <string name="cache_menu_ignore">Ohita kätkö</string>
@@ -2461,7 +2460,6 @@
     <string name="add_setting_missing_type">Sinun tulee valita preferenssin tyyppi</string>
     <string name="add_setting_already_exists">Samanniminen preferenssi on jo olemassa</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Paikallisen tiedoston käsittelijä</string>
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2599,7 +2597,6 @@
     <string name="wherigo_sound_unmute">Poista mykistys</string>
     <string name="wherigo_controls_resume_paused_dialog">Jatka keskeytettyä dialogia</string>
     <string name="wherigo_dialog_pause_info">Jatka dialogia Wherigo -toistimessa napauttamalla \"Jatka keskeytettyä dialogia\"</string>
-    <string name="wherigo_no_game_running">Ei Wherigo -peliä käynnissä</string>
     <string name="wherigo_currently_playing">Toistetaan nyt</string>
     <string name="wherigo_locate_on_center">Paikanna keskelle</string>
     <string name="wherigo_thingtype_location">Sijainnit</string>
