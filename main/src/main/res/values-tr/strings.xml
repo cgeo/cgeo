@@ -1198,7 +1198,6 @@
     <string name="cache_menu_copy_list">Farklı bir listeye kopyala</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Çevrimiçi)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Çevrimdışı)</string>
-    <string name="cache_menu_vote">Oyla</string>
     <string name="cache_menu_challenge_checker">Challenge Denetleyicisi ara</string>
     <string name="cache_menu_log_in_browser">Tarayıcıda aç</string>
     <string name="cache_menu_ignore">Geocache\'i yoksay</string>
@@ -1975,7 +1974,6 @@
     <string name="add_setting_missing_type">Bir görünüm türü seçmeniz gerekmektedir</string>
     <string name="add_setting_already_exists">Bu isimle bir görünüm zaten mevcut</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Yerel dosya işleyicisi</string>
     <string name="localfile_title">Yerel bir dosyayı aç</string>
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveDownloadActivity -->
