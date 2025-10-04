@@ -1354,7 +1354,6 @@
     <string name="cache_menu_copy_list">Kopijuoti į kitą sąrašą</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (neprisijungus)</string>
-    <string name="cache_menu_vote">Balsuoti</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_log_in_browser">Užregistruoti naršyklėje</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
@@ -2256,7 +2255,6 @@
     <string name="add_setting_missing_type">Turite pasirinkti pageidaujamą tipą</string>
     <string name="add_setting_already_exists">Nuostata šiuo pavadinimu jau yra</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
