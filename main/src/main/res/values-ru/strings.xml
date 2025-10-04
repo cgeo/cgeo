@@ -1511,7 +1511,6 @@
     <string name="cache_menu_copy_list">Скопировать в другой список</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (офлайн)</string>
-    <string name="cache_menu_vote">Оценить</string>
     <string name="cache_menu_challenge_checker">Поиск проверки испытания</string>
     <string name="cache_menu_log_in_browser">Войдите в браузере</string>
     <string name="cache_menu_ignore">Игнорировать тайник</string>
@@ -2508,7 +2507,6 @@
     <string name="add_setting_missing_type">Вам нужно выбрать тип настройки</string>
     <string name="add_setting_already_exists">Настройка с таким именем уже существует</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">Обработчик файлов c:geo</string>
     <string name="localfile_title">Открыть файл</string>
     <string name="localfile_cannot_handle">Ошибка чтения файла или c:geo не может обработать этот тип файла.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2660,7 +2658,6 @@
     <string name="wherigo_sound_unmute">Вкл. звук</string>
     <string name="wherigo_controls_resume_paused_dialog">Возобновить приостановленный диалог</string>
     <string name="wherigo_dialog_pause_info">Возобновить диалог в Wherigo Player, нажав «Возобновить приостановленный диалог»</string>
-    <string name="wherigo_no_game_running">Игра wherigo в данный момент не запущена</string>
     <string name="wherigo_currently_playing">Идёт игра</string>
     <string name="wherigo_locate_on_center">Расположение по центру</string>
     <string name="wherigo_revoke_fixed_location">Отменить фиксированное местоположение</string>
