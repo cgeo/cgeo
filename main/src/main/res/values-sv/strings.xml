@@ -1534,7 +1534,6 @@
     <string name="cache_menu_copy_list">Kopiera till annan lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_vote">Rösta</string>
     <string name="cache_menu_challenge_checker">Sök efter challenge checker</string>
     <string name="cache_menu_log_in_browser">Logga i webbläsaren</string>
     <string name="cache_menu_ignore">Ignorera cache</string>
@@ -2514,7 +2513,6 @@
     <string name="add_setting_missing_type">Du måste välja en preferenstyp</string>
     <string name="add_setting_already_exists">En preferens med detta namn finns redan</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Lokal filhanterare</string>
     <string name="localfile_title">Välj en fil lokalt</string>
     <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2657,7 +2655,6 @@
     <string name="wherigo_sound_unmute">Sätt på ljud</string>
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
     <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
-    <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
