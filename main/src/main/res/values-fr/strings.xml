@@ -1534,7 +1534,6 @@
     <string name="cache_menu_copy_list">Copier dans une autre liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (en ligne)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (hors ligne)</string>
-    <string name="cache_menu_vote">Voter</string>
     <string name="cache_menu_challenge_checker">Chercher le vérificateur de défis</string>
     <string name="cache_menu_log_in_browser">Ouvrir dans un navigateur</string>
     <string name="cache_menu_ignore">Ignorer la cache</string>
@@ -2517,7 +2516,6 @@
     <string name="add_setting_missing_type">Vous devez sélectionner un type de préférence</string>
     <string name="add_setting_already_exists">Une préférence avec ce nom existe déjà</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2669,7 +2667,6 @@
     <string name="wherigo_sound_unmute">Rétablir le son</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprendre le dialogue en pause</string>
     <string name="wherigo_dialog_pause_info">Reprendre la boîte de dialogue dans Wherigo Player en appuyant sur \"Reprendre la fenêtre en pause\"</string>
-    <string name="wherigo_no_game_running">Aucune cartouche wherigo n\'est en cours d\'exécution</string>
     <string name="wherigo_currently_playing">En cours de jeu</string>
     <string name="wherigo_locate_on_center">Localiser au centre</string>
     <string name="wherigo_revoke_fixed_location">Révoquer l\'emplacement fixe</string>
