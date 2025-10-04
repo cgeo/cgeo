@@ -1228,7 +1228,6 @@
     <string name="cache_menu_share">分享藏点</string>
     <string name="cache_menu_move_list">移动到另一个列表</string>
     <string name="cache_menu_copy_list">复制到另一个列表</string>
-    <string name="cache_menu_vote">投票</string>
     <string name="cache_menu_log_in_browser">在浏览器中写日志</string>
     <string name="cache_menu_ignore">忽略藏点</string>
     <string name="cache_log_menu_decrypt">解密/加密</string>
