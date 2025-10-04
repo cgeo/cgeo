@@ -1108,7 +1108,6 @@
     <string name="cache_menu_copy_list">ほかのリストにコピー</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (オンライン)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (オフライン)</string>
-    <string name="cache_menu_vote">評価を投稿</string>
     <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
     <string name="cache_menu_log_in_browser">ブラウザでログを書く</string>
     <string name="cache_menu_ignore">キャッシュを無視</string>
@@ -1886,7 +1885,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="add_setting_missing_type">設定タイプを選択してください</string>
     <string name="add_setting_already_exists">同じ設定名がすでに存在しています</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
     <string name="localfile_title">ローカルファイルを開く</string>
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
