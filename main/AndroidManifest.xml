@@ -168,7 +168,7 @@
             </intent-filter>
             <!-- "Search geocaches nearby" where location comes from click on http(s) link to internet map service
                 (google-maps, openstreetmap, yandex, here)  -->
-            <intent-filter android:label="@string/geo_search_label" android:icon="${appIcon}" android:roundIcon="${appIconRound}">
+            <intent-filter android:label="@string/geo_search_label" android:icon="${appIcon}" android:roundIcon="${appIconRound}" tools:ignore="AppLinkWarning">
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="maps.google.com" />
@@ -203,7 +203,7 @@
             android:windowSoftInputMode="stateHidden" >
 
             <!-- wherigo.com -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -371,7 +371,7 @@
             </intent-filter>
 
             <!-- intent filter for all gpx links, independent of mime types -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -408,7 +408,7 @@
             </intent-filter>
 
             <!-- intent filter for GGZ links, independent of mime types -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -482,7 +482,7 @@
             android:exported="true">
 
             <!-- GeoKrety.org QRCode-->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -511,7 +511,7 @@
             </intent-filter>
 
             <!-- extremcaching.com -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -526,7 +526,7 @@
             </intent-filter>
 
             <!-- geocaching.com URL via coord.info redirection -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -544,7 +544,7 @@
             </intent-filter>
 
             <!-- geocaching.com -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -563,7 +563,7 @@
             </intent-filter>
 
             <!-- opencaching.CZ -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -582,7 +582,7 @@
             </intent-filter>
 
             <!-- opencaching.DE -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -601,7 +601,7 @@
             </intent-filter>
 
             <!-- opencaching.NL -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -620,7 +620,7 @@
             </intent-filter>
 
             <!-- opencaching.PL -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -639,7 +639,7 @@
             </intent-filter>
 
             <!-- opencache.uk -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -658,7 +658,7 @@
             </intent-filter>
 
             <!-- opencaching.RO -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -677,7 +677,7 @@
             </intent-filter>
 
             <!-- opencaching.US -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -702,7 +702,7 @@
             android:exported="true">
 
             <!-- TravelBug URL via coord.info redirection -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -720,7 +720,7 @@
             </intent-filter>
 
             <!-- TravelBug URL tracking page -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -735,7 +735,7 @@
             </intent-filter>
 
             <!-- GeoKrety.org -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -761,7 +761,7 @@
             android:exported="true">
 
             <!-- geocaching.com URL via coord.info redirection -->
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -776,7 +776,7 @@
                 <data android:pathPrefix="/Bm" />
                 <data android:pathPrefix="/bM" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkWarning">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
