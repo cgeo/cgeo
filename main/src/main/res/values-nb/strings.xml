@@ -1110,7 +1110,6 @@
     <string name="cache_menu_copy_list">Kopier til en annen liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (lokalt lagret)</string>
-    <string name="cache_menu_vote">Avgi stemme</string>
     <string name="cache_menu_challenge_checker">Søk etter utfordringssjekkere</string>
     <string name="cache_menu_ignore">Ignorer cache</string>
     <string name="cache_log_menu_decrypt">Dekryptering/Kryptering</string>
@@ -1879,7 +1878,6 @@
     <string name="add_setting_missing_type">Du må velge en preferansetype</string>
     <string name="add_setting_already_exists">En preferanse med dette navnet finnes allerede</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo lokal filbehandler</string>
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
