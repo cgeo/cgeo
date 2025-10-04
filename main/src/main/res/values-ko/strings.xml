@@ -1380,7 +1380,6 @@
     <string name="cache_menu_copy_list">다른 목록으로 복사</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps(온라인)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps(오프라인)</string>
-    <string name="cache_menu_vote">투표</string>
     <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
     <string name="cache_menu_log_in_browser">브라우저에서 로그하기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
@@ -2291,7 +2290,6 @@
     <string name="add_setting_missing_type">선호 유형을 선택해야합니다.</string>
     <string name="add_setting_already_exists">이 이름의 선호가 이미 존재합니다.</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo 로컬 파일 핸들러</string>
     <string name="localfile_title">로컬 파일 열기</string>
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
     <!-- ReceiveDownloadActivity -->
