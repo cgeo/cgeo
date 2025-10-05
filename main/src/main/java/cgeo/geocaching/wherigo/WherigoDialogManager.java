@@ -50,7 +50,6 @@ public class WherigoDialogManager {
     private IWherigoDialogControl currentDialogControl; // filled in state DIALOG_DISPLAYED
     private final AtomicInteger currentDialogId = new AtomicInteger(0); // if DIALOG_DISPLAYED, then holds id of this dialog
 
-
     public enum State {
         NO_DIALOG, // no dialog is displayed and none is waiting to be displayed
         DIALOG_DISPLAYED, //a dialog is currently being displayed

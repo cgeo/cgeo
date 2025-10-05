@@ -423,12 +423,22 @@ public class WherigoGame implements UI {
             case ITEMSCREEN:
             case LOCATIONSCREEN:
             case TASKSCREEN:
+                //close open dialog if any
                 WherigoDialogManager.get().clear();
+                //special: also close open thing dialogs which might have been opened directly
+                WherigoThingDialogProvider.closeAllThingDialogs();
+
+                //jump to main screen: if we are already displaying the main screen then do nothing
                 final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
                 if (currentActivity instanceof WherigoActivity) {
                     return;
                 }
-                //don't open the screens here, just issue a toast advising user to check
+                //if we can jump to main screen then do it
+                if (currentActivity != null) {
+                    WherigoActivity.start(currentActivity, false);
+                    return;
+                }
+                //-> we can't jump to main screen eg maybe we are not currently inside c:geo. Issue a toast instead
                 final WherigoThingType type = WherigoThingType.getByWherigoScreenId(screenId);
                 if (type == null) {
                     ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_game));
