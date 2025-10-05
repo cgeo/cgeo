@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -111,7 +112,9 @@ public final class GpxSerializer {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
 
         // Define the DecimalFormat for corrected output (DDD.DDDDDD format)
-        final DecimalFormat df = new DecimalFormat("#.######");
+        final DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance();
+        dfs.setDecimalSeparator('.');
+        final DecimalFormat df = new DecimalFormat("#.######", dfs);
         df.setMinimumFractionDigits(1);
         df.setMaximumFractionDigits(6);
 
