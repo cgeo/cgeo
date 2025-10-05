@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/dialog_actionlist"
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- Action List -->
     <cgeo.geocaching.ui.SimpleItemListView
