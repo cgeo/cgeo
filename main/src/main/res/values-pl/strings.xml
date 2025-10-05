@@ -572,6 +572,7 @@
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
     <string name="list_parent_list">Lista nadrzędna</string>
+    <string name="list_create_parent">&lt;Utwórz nową listę nadrzędną&gt;</string>
     <string name="list_name">Nazwa listy</string>
     <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
     <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
