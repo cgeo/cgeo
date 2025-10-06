@@ -562,6 +562,7 @@
     <string name="list_dialog_rename">Hernoem</string>
     <string name="list_not_available">Lijst is niet langer beschikbaar, wissel naar standaard lijst</string>
     <string name="list_parent_list">Bovenliggende lijst</string>
+    <string name="list_create_parent">&lt;Maak nieuwe bovenliggende lijst&gt;</string>
     <string name="list_name">Lijstnaam</string>
     <string name="list_confirm_rename">Hernoemen van \"%1$s\" naar \"%2$s\"\n%3$s\nDeze actie kan niet ongedaan worden gemaakt!</string>
     <string name="list_confirm_no_hierarchy">\nGeen \":\" gevonden - alle overeenkomende lijsten zullen worden omgezet naar top-niveau lijsten\n</string>
