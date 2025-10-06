@@ -563,6 +563,7 @@
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
     <string name="list_parent_list">Llista parental</string>
+    <string name="list_create_parent">&lt;Crea una nova llista principal&gt;</string>
     <string name="list_name">Nom de la llista</string>
     <string name="list_confirm_rename">S\'està canviant el nom de \"%1$s\" a \"%2$s\"\n%3$s\n Aquesta acció no es pot desfer!</string>
     <string name="list_confirm_no_hierarchy">\nNo s\'ha trobat cap \":\" totes les llistes coincidents es transformaran en llistes de nivell superior\n</string>
