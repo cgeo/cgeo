@@ -31,7 +31,8 @@ public class UserDefinedMapsforgeOnlineSource extends AbstractMapsforgeOnlineTil
     }
 
     public static boolean isConfigured() {
-        return StringUtils.isNotBlank(Settings.getUserDefinedTileProviderUri());
+        final String uri = Settings.getUserDefinedTileProviderUri();
+        return StringUtils.isNotBlank(uri) && StringUtils.isNotBlank(Uri.parse(uri).getHost());
     }
 
 }
