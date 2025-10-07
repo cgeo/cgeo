@@ -42,6 +42,8 @@ public class FileTypeDetector {
             if (!uri.toString().startsWith("http")) {
                 Log.e("FileTypeDetector", e);
             }
+        } catch (RuntimeException re) {
+            Log.e("FileTypeDetector, unexpected error", re);
         } finally {
             IOUtils.closeQuietly(reader);
             IOUtils.closeQuietly(is);
