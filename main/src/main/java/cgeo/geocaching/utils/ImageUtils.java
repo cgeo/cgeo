@@ -80,6 +80,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -532,7 +533,8 @@ public final class ImageUtils {
     public static String getGCFullScaleImageUrl(@NonNull final String imageUrl) {
         // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
         // Manipulate the URL to load the requested size.
-        final GCImageSize preferredSize = ImageUtils.GCImageSize.valueOf(Settings.getString(R.string.pref_gc_imagesize, "ORIGINAL"));
+        final GCImageSize preferredSize = EnumUtils.getEnum(ImageUtils.GCImageSize.class,
+                Settings.getString(R.string.pref_gc_imagesize, null), GCImageSize.ORIGINAL);
         MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
         if (matcherViewstates.find()) {
             return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
