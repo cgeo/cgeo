@@ -616,13 +616,11 @@ public class ContentStorage {
         }
     }
 
-    protected Folder getAccessibleDefaultFolder(final Folder[] candidates, final boolean needsWrite, final String fallbackName) {
+    protected Folder getAccessibleDefaultFolder(final Folder candidate, final boolean needsWrite, final String fallbackName) {
 
-        for (Folder candidate : candidates) {
-            //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-            if (candidate != null && ensureFolder(candidate, needsWrite, true)) {
-                return candidate;
-            }
+        //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
+        if (candidate != null && ensureFolder(candidate, needsWrite, true)) {
+            return candidate;
         }
 
         return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + fallbackName);
