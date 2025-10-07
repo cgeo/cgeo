@@ -77,6 +77,21 @@ public final class Log {
     private static final boolean[] SETTING_ADD_CLASSINFO = new boolean[LogLevel.values().length];
 
     static {
+        //avoid ANR by starting configuring in a separate thread (configuring accessed file system via SAF)
+        try {
+            new Thread(Log::configureLogging).start();
+        } catch (RuntimeException re) {
+            //never ever shall setup of Log fail
+            android.util.Log.e(TAG, "[Log] Failed in static Log", re);
+        }
+    }
+
+    private Log() {
+        //utility class
+    }
+
+    private static void configureLogging() {
+        android.util.Log.i(TAG, "[Log] Start configuring");
         InputStream propFile = null;
         try {
             String logfileFolder = "(unknown, no cgeo app)";
@@ -95,14 +110,10 @@ public final class Log {
             }
         } catch (Exception ex) {
             //whatever happens in Log initializer, it is NOT allowed to make Log unusable!
-            android.util.Log.e(TAG, "[Log] Failed to set up Logging", ex);
+            android.util.Log.e(TAG, "[Log] Failed to configure Logging", ex);
         } finally {
             IOUtils.closeQuietly(propFile);
         }
-    }
-
-    private Log() {
-        //utility class
     }
 
     public static boolean isDebug() {
