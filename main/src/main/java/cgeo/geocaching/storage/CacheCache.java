@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class CacheCache {
 
-    private static final int MAX_CACHED_CACHES = 1000;
+    private static final int MAX_CACHED_CACHES = 2000;
     private final LeastRecentlyUsedMap<String, Geocache> cachesCache;
 
     public CacheCache() {

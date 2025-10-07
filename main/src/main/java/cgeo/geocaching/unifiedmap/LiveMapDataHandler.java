@@ -1,11 +1,14 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -69,6 +72,8 @@ public class LiveMapDataHandler {
                 }
                 caches.addAll(result);
             });
+            //update global CacheCache. See #17492
+            DataStore.saveCaches(result, EnumSet.of(LoadFlags.SaveFlag.CACHE));
         }
 
         @Override
