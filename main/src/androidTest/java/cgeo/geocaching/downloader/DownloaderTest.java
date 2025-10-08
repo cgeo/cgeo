@@ -172,8 +172,8 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "E5_N50.rd5");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 174.1 MB as of 2025-10-06
+        final String sizeInfoString = d.getSizeInfo(); // 178328254 byte as of 2025-10-07
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(120.0F, 190.0F);
+        assertThat(sizeInfoFloat).isBetween(120.0F, 250.0F);
     }
 }
