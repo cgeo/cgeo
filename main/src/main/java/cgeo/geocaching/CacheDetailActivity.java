@@ -1199,17 +1199,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private List<Waypoint> getSortedWaypointList(final Geocache cache) {
-        if (null != cache && cache.hasWaypoints()) {
-            final List<Waypoint> waypoints = cache.getWaypoints();
-            Collections.sort(waypoints, cache.getWaypointComparator());
-            return waypoints;
-        }
-        return Collections.emptyList();
-    }
 
     private void setWaypointsOfWaypointTypesToVisited() {
-        final List<Waypoint> waypoints = getSortedWaypointList(cache);
+        final List<Waypoint> waypoints = cache.getSortedWaypointList();
         if (waypoints.isEmpty()) {
             return;
         }

@@ -1379,6 +1379,15 @@ public class Geocache implements INamedGeoCoordinate {
         return waypoints.getUnderlyingList();
     }
 
+    public List<Waypoint> getSortedWaypointList() {
+        if (hasWaypoints()) {
+            final List<Waypoint> waypoints = getWaypoints();
+            Collections.sort(waypoints, getWaypointComparator());
+            return waypoints;
+        }
+        return Collections.emptyList();
+    }
+
     /**
      * @param waypoints      List of waypoints to set for cache
      */
