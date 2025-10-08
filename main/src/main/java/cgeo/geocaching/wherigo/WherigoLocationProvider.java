@@ -145,7 +145,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getPrecision() {
-        return 0d;
+        return geoData == null || !geoData.hasAccuracy() ? 20d : Math.max(2d, geoData.getAccuracy());
     }
 
     @Override
