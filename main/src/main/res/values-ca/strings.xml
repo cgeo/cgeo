@@ -316,6 +316,7 @@
     <string name="warn_search_help_user">Introduïu el nom d\'usuari de Geocaching.com.</string>
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
+    <string name="warn_bookmarklist_select">No s\'ha seleccionat cap llista de marcadors.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_notloggedin_title">Fora de línia</string>
