@@ -172,7 +172,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -1209,22 +1208,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return Collections.emptyList();
     }
 
-    private Set<WaypointType> getWaypointTypes(final Iterable<Waypoint> waypoints) {
-        final Set<WaypointType> wpTypes = new LinkedHashSet<>();
-        for (Waypoint waypoint : waypoints) {
-            final WaypointType wpType = waypoint.getWaypointType();
-            wpTypes.add(wpType);
-        }
-        return wpTypes;
-    }
-
     private void setWaypointsOfWaypointTypesToVisited() {
         final List<Waypoint> waypoints = getSortedWaypointList(cache);
         if (waypoints.isEmpty()) {
             return;
         }
 
-        final Set<WaypointType> sortedWpTypes = getWaypointTypes(waypoints);
+        final Set<WaypointType> sortedWpTypes = Waypoint.getWaypointTypes(waypoints);
         final SimpleDialog.ItemSelectModel<WaypointType> model = new SimpleDialog.ItemSelectModel<>();
         model.setItems(sortedWpTypes)
                 .setDisplayMapper((wpType) -> TextParam.text(wpType.getL10n()));
