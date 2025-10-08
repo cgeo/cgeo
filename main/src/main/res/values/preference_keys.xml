@@ -614,6 +614,7 @@
     <string translatable="false" name="pref_attributeFilterSources">attributeFilterSources</string>
     <string translatable="false" name="pref_lastusedlist">lastlist</string>
     <string translatable="false" name="pref_last_selected_lists">last_selected_lists</string>
+    <string translatable="false" name="pref_last_selected_visited_waypointtypes">last_selected_visited_waypointtypes</string>
     <string translatable="false" name="pref_help_shown">helper</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_lastdetailspage">lastdetailspage</string>
