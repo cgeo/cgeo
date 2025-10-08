@@ -468,10 +468,6 @@ public final class Formatter {
             infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining, daysRemaining, daysRemaining));
         }
 
-        if (pocketQuery.isBookmarkList()) {
-            infos.add(CgeoApplication.getInstance().getResources().getString(R.string.search_bookmark_list));
-        }
-
         return StringUtils.join(infos, SEPARATOR);
     }
 
