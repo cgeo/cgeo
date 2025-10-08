@@ -39,7 +39,7 @@ public class BookmarkListActivity extends AbstractListActivity {
 
     @Override
     boolean hasPreview() {
-        // Currently, we aren't able to parse bookmark lists without download
-        return false;
+        // Now we are able to parse bookmark lists without download
+        return true;
     }
 }
