@@ -134,6 +134,7 @@ import static java.lang.Boolean.TRUE;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
@@ -1156,7 +1157,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (key.startsWith(UnifiedMapViewModel.CACHE_KEY_PREFIX)) {
                 final String geocode = key.substring(UnifiedMapViewModel.CACHE_KEY_PREFIX.length());
 
-                final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                //if not in CacheCache, try viewmodel cache. See #17492
+                if (temp == null) {
+                    temp = viewModel.caches.readWithResult(caches ->
+                        IterableUtils.find(caches, cache -> geocode.equals(cache.getGeocode())));
+                }
                 if (temp != null) {
                     result.add(new MapSelectableItem(new RouteItem(temp)));
                 } else {
