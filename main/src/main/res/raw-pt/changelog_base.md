@@ -76,5 +76,5 @@ Até lá, pode alternar entre as diferentes implementações nas definições =>
 - Correcção: Motor de transferência do mapa a disponibilizar ficheiros com erro (0 bytes) para transferência
 - Novo: Adicionados mapeamentos para alguns tipos de cache OC ausentes
 - Novo: Mover listas "utilizadas recentemente" na caixa de diálogo de selecção de lista para o topo ao pressionar o botão "utilizadas recentemente"
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Novo: Partilha de geo-códigos a partir da lista de caches
+- Alteração: "Navegação (carro)", etc. utiliza o parâmetro "q=" em vez do parâmetro desactualizado "ll="
