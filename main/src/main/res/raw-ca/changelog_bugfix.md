@@ -1,8 +1,12 @@
 ##
+- Correcció: Els valors negatius del gràfic d'elevació no s'escalen
+- Correcció: Coordenades properes a 0 trencades a les exportacions GPX
+
+##
 - Correcció: Error en la cerca de paraules clau
 - Correcció: Error al mapa
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Correcció: El text de la pista ja no es pot seleccionar
+- Correcció: Diversos problemes amb Wherigo
 
 ##
 - Correcció: Xifrar/desxifrar una pista requereix un toc addicional inicialment
@@ -29,6 +33,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
