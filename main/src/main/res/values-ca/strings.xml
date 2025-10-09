@@ -1409,6 +1409,11 @@
     <string name="cache_delete_generated_waypoints">Elimina els punts de ruta generats</string>
     <string name="cache_delete_generated_waypoints_confirm">Eliminar tots els punts de ruta generats d\'aquest catxé?\n\nEls Punts de ruta s\'eliminaran immediatament, no es pot desfer.</string>
     <string name="cache_delete_generated_waypoints_success">Els punts de ruta generats s\'han suprimit</string>
+    <string name="cache_select_waypoint_types">Selecciona els tipus de punts de referència</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%d punt de referència marcat com a visitat</item>
+        <item quantity="other">%d punts de referència marcats com a visitats</item>
+    </plurals>
     <string name="cache_offline_store">Desa</string>
     <string name="cache_offline_stored_ago">Emmagatzemat %s</string>
     <string name="cache_offline_not_ready">No disponible fora de línia</string>
@@ -1738,6 +1743,7 @@
     <string name="waypoint_user_note">Nota de l\'usuari</string>
     <string name="waypoint_visited">Visitat</string>
     <string name="waypoint_set_visited">Punt de ruta definit com a visitat</string>
+    <string name="waypoint_set_visited_types">Estableix els punts de referència com a visitats</string>
     <string name="waypoint_unset_visited">Punt de ruta definit com a no visitat</string>
     <string name="waypoint_save">Desa</string>
     <string name="waypoint_loading">S\'està carregant la fita…</string>
