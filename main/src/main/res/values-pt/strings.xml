@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Comentário da Equipa OC</string>
     <string name="log_your_saved_log">O seu registo gravado</string>
     <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
+    <string name="log_empty_logbook_filtered">Os filtros seleccionados estão a ocultar todos os registos. Seleccione pelo menos uma opção.</string>
     <string name="log_image_selectfromstorage_tooltip">Seleccionar imagens a partir do armazenamento</string>
     <string name="log_image_camera_tooltip">Tirar fotografia com a câmara</string>
     <string name="log_image_selectfromown_tooltip">Seleccione imagens das suas próprias imagens</string>
@@ -227,6 +228,15 @@
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
     <string name="contact_multiple_matches">Contacto: Múltiplas correspondências</string>
     <!-- External translation -->
+    <string name="translate">Traduzir</string>
+    <string name="translate_external_label">Traduzir com %s</string>
+    <string name="translate_external_variant_app">Aplicação</string>
+    <string name="translate_external_variant_web">Página da Internet</string>
+    <string name="translate_external_none">&lt;Nenhum&gt;</string>
+    <string name="translate_external_app">Aplicação externa</string>
+    <string name="translate_external_google">Tradutor Google</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">A tradução através da página da Internet pode falhar com grandes quantidades de texto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
@@ -257,6 +267,7 @@
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
     <string name="err_detail_premium_log_found">Esta cache apenas está disponível para os membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
     <string name="err_watchlist_failed">A alteração da sua lista de observação falhou.</string>
+    <string name="err_watchlist_failed_geocodes">Falha ao alterar a sua lista de observação para geo-códigos: %s</string>
     <string name="err_application_no">O c:geo não encontra nenhuma aplicação compatível.</string>
     <string name="err_auth_initialize">O c:geo falhou a inicialização do processo de autorização.</string>
     <string name="err_auth_process">O processo de autorização falhou.</string>
@@ -304,6 +315,7 @@
     <string name="warn_search_help_user">Introduza o nome de um geocacher.</string>
     <string name="warn_search_help_tb">Introduza o código do trackable. Por exemplo \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Por favor, insira algum texto para o registo.</string>
+    <string name="warn_bookmarklist_select">Nenhuma lista de marcadores selecionada.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_notloggedin_title">Modo Offline</string>
@@ -311,6 +323,8 @@
     <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nPode dever-se a não existir uma ligação à rede, a um problema com o servidor ou ter de (re)configurar os seus serviços de geocaching.\n\nPretende configurar os serviços agora?</string>
     <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
     <string name="err_read_bookmark_list">Erro ao ler as listas de marcadores.</string>
+    <string name="err_bookmark_list_overfull">Demasiadas caches</string>
+    <string name="err_bookmark_list_overfull_description">As listas de marcadores só podem armazenar até 1000 caches, mas está a tentar adicionar mais do que isso à lista.\n\nDeseja continuar e adicionar apenas o número de caches que a lista pode armazenar?</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
@@ -357,11 +371,18 @@
     <string name="translator_model_download_success">Modelo de tradução para %s transferido</string>
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
+    <string name="translator_tooltip">Traduzir offline com o Google</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
+    <string name="translator_language_target_select">Seleccione idioma de destino</string>
+    <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução. Toque para selecionar o idioma de origem.</string>
+    <string name="translator_language_unknown">Não é possível identificar o idioma. Toque para selecionar o idioma de origem.</string>
+    <string name="translator_language_detected">Traduzir de \"%s\". Toque para selecionar o idioma de origem.</string>
     <string name="translator_target_language">Traduzir para \"%s\"</string>
     <string name="translator_translation_error">Falha ao traduzir texto: %s</string>
     <string name="translator_translation_initerror">Falha ao inicializar o tradutor</string>
     <string name="translator_translation_success">Traduzido de \"%s\", toque no botão para restaurar o original</string>
+    <string name="crash_activity_title">Ups! O c:geo encerrou inesperadamente!</string>
+    <string name="crash_activity_report">reportar um problema</string>
     <!-- location service -->
     <string name="loc_last">Última conhecida</string>
     <string name="loc_net">Rede</string>
@@ -407,6 +428,7 @@
         <item quantity="one">Carregar a próxima %1$d cache</item>
         <item quantity="other">Carregar as próximas %1$d caches</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Carregar todas as caches restantes</string>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_offline_map">Armazenar caches p/ utilização offline</string>
     <string name="caches_store_selected">Armazenar seleccionada(s)</string>
@@ -465,11 +487,17 @@
     <string name="caches_upload_bookmarklist">Adicionar aos marcadores</string>
     <string name="caches_upload_bookmarklist_all">Adicionar todas à lista de marcadores</string>
     <string name="caches_upload_bookmarklist_selected">Adicionar caches seleccionadas à lista de marcadores</string>
+    <string name="caches_watch_all">Adicionar tudo à lista de observação</string>
+    <string name="caches_unwatch_all">Remover tudo da lista de observação</string>
+    <string name="caches_watch_selected">Adicionar seleccionados à lista de observação</string>
+    <string name="caches_unwatch_selected">Remover seleccionados da lista de observação</string>
+    <string name="watchlist_background_started">Actualização da lista de observação iniciada em segundo plano</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Quer carregar as coordenadas modificadas para todas as caches (seleccionadas) e substituir as coordenadas existentes no servidor? Isto não pode ser anulado.</string>
     <string name="caches_upload_allcoords">Carregar todas as coord. memorizadas</string>
     <string name="caches_upload_allcoords_dialogtitle">AVISO - A enviar todas as coordenadas</string>
     <string name="caches_upload_allcoords_warning">Isto irá substituir as coordenadas existentes no servidor, para todas as caches (seleccionadas) da sua lista, pelas coordenadas actuais da cache no c:geo! Esta função deve ser utilizada apenas em casos especiais, p. ex. quando importou um ficheiro GPX que contém coordenadas corrigidas como coordenadas da cache. Esta operação não pode ser anulada e só deve usar esta função, se souber o que está a fazer. Em casos normais, poderá preferir usar a função \"Carregar coordenadas modificadas\" no mesmo menu.</string>
+    <string name="caches_share_geocodes">Partilhar lista de códigos GC</string>
     <string name="caches_refresh_selected">Actualizar seleccionada(s)</string>
     <string name="caches_refresh_all">Actualizar todas</string>
     <string name="caches_move_selected">Mover seleccionada(s)</string>
@@ -535,6 +563,7 @@
     <string name="list_dialog_rename">Mudar o nome</string>
     <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
     <string name="list_parent_list">Lista principal</string>
+    <string name="list_create_parent">&lt;Criar nova lista base&gt;</string>
     <string name="list_name">Nome da lista</string>
     <string name="list_confirm_rename">Renomear de \"%1$s\" para \"%2$s\"\n%3$s\nEsta acção não pode ser anulada!</string>
     <string name="list_confirm_no_hierarchy">\n Nenhuma \":\" encontrada — todas as listas correspondentes serão transformadas em listas de nível superior, ou principais\n</string>
@@ -930,6 +959,8 @@
     <string name="init_translation_disabled">Tradução desactivada</string>
     <string name="init_date_format">Formato da data</string>
     <string name="init_date_format_description">Formato a ser usado para datas curtas, por ex. na visualização do registo</string>
+    <string name="init_translator_external">Tradutor Externo</string>
+    <string name="init_translator_external_description">Aplicação de tradução externa a usar</string>
     <string name="system_default">Padrão do Sistema</string>
     <string name="init_showwaypoints">Mostrar pontos adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
@@ -991,6 +1022,8 @@
     <string name="init_summary_cacheListInfo">Seleccione os elementos informativos a serem mostrados sobre cada cache, numa lista de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
+    <string name="init_live_compass_in_navigation_action">Mostrar direcção na visualização de detalhes da cache</string>
+    <string name="init_summary_live_compass_in_navigation_action">Mostra uma seta com a direcção da bússola para as caches nas suas vistas detalhadas</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
     <string name="init_custombnitem">Item de Menu Personalizado</string>
@@ -1221,6 +1254,7 @@
     <string name="category_unifiedMap">Mapa unificado</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
+    <string name="gui_test_title">Ecrã de teste da GUI</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificação de proximidade</string>
     <string name="init_proximityNotificationGeneral">Notificação geral de prox. no mapa</string>
@@ -1442,6 +1476,7 @@
     <string name="cache_advanced">Avançadas</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <string name="cache_variables">Variáveis</string>
+    <string name="cache_variables_chip_completed_variables">Concluído</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Pontos adicionais (%d)</string>
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
@@ -1451,6 +1486,7 @@
     <string name="cache_logs">Todos os registos</string>
     <string name="cache_latest_logs">Registos recentes</string>
     <string name="cache_logs_friends_and_own">Registos: Amigos/Meus</string>
+    <string name="cache_logs_friends">Amigos</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
     <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
@@ -1652,6 +1688,7 @@
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">parcial</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
@@ -1695,6 +1732,7 @@
     <string name="waypoint_edit_title">Editar ponto adicional</string>
     <string name="waypoint_add_title">Adicionar ponto adicional</string>
     <string name="waypoint_added">Foi adicionado o ponto adicional</string>
+    <string name="waypoint_added_current_location">Ponto Adicional (%1$s) adicionado (±%2$s)</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota do utilizador</string>
     <string name="waypoint_visited">Percorrido</string>
@@ -1734,6 +1772,7 @@
     <string name="projection_type_offset_hint_longitude">Desvio da Longitude em Micro-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
+    <string name="variables_titletext_short">Valores e cálculos</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
     <string name="variables_scanlisting_choosepattern_title">Escolher o modelo de \'encontrado\'</string>
     <string name="variables_scanlisting_nopatternfound">Nenhum padrão encontrado</string>
@@ -2306,7 +2345,7 @@
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Geo-código não definido</string>
-    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adiciona-lo agora?</string>
+    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adicioná-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
@@ -2409,6 +2448,7 @@
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
     <string name="map_disable_autotarget_individual_route">\"Definir início da rota como destino\" desactivado</string>
+    <string name="map_manual_target_route_name">Navegação actual</string>
     <string name="map_clear_manual_targets">Limpar destino de rota</string>
     <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
@@ -2748,6 +2788,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Tamanho de imagem preferencial</string>
+    <string name="settings_gc_imagesize_summary">As imagens nas descrições, nos registos e trackables, a partir de Geocaching.com, estão disponíveis em tamanhos diferentes. Seleccione o tamanho com que serão descarregadas, quando carrega e armazena uma cache.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Inalterado</string>
+    <string name="settings_gc_imagesize_entry_original">Máximo</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Ver a base de dados</string>
     <string name="dbi_select_title">(Selecionar tabela)</string>
