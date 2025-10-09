@@ -10,10 +10,6 @@ trim_trailing_whitespace = true
 indent_size = 4
 indent_style = space
 
-[*.java]
-ij_java_imports_layout = @*,|,cgeo.**,$cgeo.**,|,android.**,$android.**,|,androidx.**,$androidx.**,|,java.**,$java.**,|,javax.**,$javax.**,|,*,$*,|
-
-
 # IntelliJ-specific configurations
 ij_continuation_indent_size = 8
 ij_java_do_not_wrap_after_single_annotation = true
