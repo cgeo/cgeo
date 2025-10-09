@@ -1428,6 +1428,13 @@
     <string name="cache_delete_generated_waypoints">Usuń wygenerowane punkty nawigacji</string>
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
     <string name="cache_delete_generated_waypoints_success">Usunięto wygenerowane punkty nawigacji</string>
+    <string name="cache_select_waypoint_types">Wybierz typy punktów</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%d punkt nawigacji oznaczony jako odwiedzony</item>
+        <item quantity="few">%d punkty nawigacji oznaczone jako odwiedzone</item>
+        <item quantity="many">%d punktów nawigacji oznaczonych jako odwiedzone</item>
+        <item quantity="other">%d punktów nawigacji oznaczonych jako odwiedzone</item>
+    </plurals>
     <string name="cache_offline_store">Zapisz</string>
     <string name="cache_offline_stored_ago">Zapisano: %s</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
@@ -1767,6 +1774,7 @@
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
     <string name="waypoint_set_visited">Punkt nawigacji ustawiony jako odwiedzony</string>
+    <string name="waypoint_set_visited_types">Ustaw punkty nawigacji jako odwiedzone</string>
     <string name="waypoint_unset_visited">Punkt nawigacji ustawiony jako nieodwiedzony</string>
     <string name="waypoint_save">Zapisz</string>
     <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
