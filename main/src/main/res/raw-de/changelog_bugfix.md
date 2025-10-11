@@ -1,4 +1,8 @@
 ##
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+
+##
 - Korrektur: Absturz bei der Stichwortsuche
 - Korrektur: Absturz in der Karte
 - Korrektur: Hinweistext nicht mehr auswählbar
@@ -29,6 +33,7 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 

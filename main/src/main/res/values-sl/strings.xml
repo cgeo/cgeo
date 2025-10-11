@@ -138,8 +138,7 @@
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
@@ -373,8 +372,6 @@
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
     <string name="init_signature_template_name">Ime</string>
     <string name="init_signature_template_log">Vsebina zapisa</string>
-    <string name="init_ratingwanted">GCvote ocene</string>
-    <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Prikaže svoje/prijateljeve</string>
     <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
     <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
@@ -520,7 +517,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Nalaganje spoiler slik</string>
     <string name="cache_dialog_loading_details_status_logs">Nalaganje zapisov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Obdelovanje dodatnih točk</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Nalaganje glasov GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Shranjevanje podatkov</string>
     <string name="cache_dialog_loading_details_status_render">Ustvarjanje pogleda</string>
     <string name="cache_dialog_offline_save_title">Brez povezave</string>
@@ -549,7 +545,6 @@
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
-    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
@@ -584,7 +579,7 @@
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nalaganje dodatnih točk iz %1$s</string>
