@@ -20,6 +20,8 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Zmiana: Bardziej kompaktowy układ dla „dodawania nowego punktu nawigacji”
 - Nowość: Możliwość załadowania obrazów dla skrytek geocaching.com o rozmiarze „niezmienione”
 - Nowość: Widok zmiennych może być filtrowany
+- New: Visualize calculated coordinates overflow in waypoint list
+- New: Menu entry in waypoint list to mark certain waypoint types as visited
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -36,3 +38,5 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Oferuj tłumaczenie offline z aplikacjami Google Translate lub DeepL (jeśli zainstalowane)
 - Nowość: Usuń elementy z historii wyszukiwania
 - Zmiana: Usunięto GCVote (usługa przestała działać)
+- New: Colored toolbar on cache details pages
+- New: Select multiple bookmark lists / pocket queries to download
