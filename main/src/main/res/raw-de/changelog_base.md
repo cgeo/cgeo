@@ -20,6 +20,8 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Änderung: Kompaktere Ansicht für "Neuen Wegpunkt hinzufügen"
 - Neu: Option, um Bilder von geocaching.com in "unveränderter" Größe zu laden
 - Neu: Variablenansicht kann gefiltert werden
+- New: Visualize calculated coordinates overflow in waypoint list
+- New: Menu entry in waypoint list to mark certain waypoint types as visited
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -36,3 +38,5 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Offline-Übersetzung mit Google Translate oder DeepL-Apps (falls installiert)
 - New: Delete items from search history
 - Change: Remove GCVote (service discontinued)
+- New: Colored toolbar on cache details pages
+- New: Select multiple bookmark lists / pocket queries to download
