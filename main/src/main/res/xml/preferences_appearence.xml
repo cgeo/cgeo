@@ -19,6 +19,12 @@
             android:summary="%s"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_colored_theme"
+            android:summary="@string/init_summary_colored_theme"
+            android:title="@string/init_colored_theme"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_wallpaper"
             android:summary="@string/init_summary_wallpaper"

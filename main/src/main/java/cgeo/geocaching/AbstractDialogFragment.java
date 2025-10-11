@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.INavigationSource;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -11,6 +12,7 @@ import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ViewUtils;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -197,6 +200,16 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         }
 
         return LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init());
+    }
+
+    protected void setToolbarBackgroundColor(@NonNull final Toolbar toolbar, @NonNull final View swipView, @Nullable final CacheType cacheType, final boolean isEnabled) {
+        if (!Settings.useColoredActionBar(toolbar.getContext())) {
+            return;
+        }
+
+        final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isEnabled);
+        swipView.getBackground().mutate().setTint(actionbarColor);
+        toolbar.setBackgroundColor(actionbarColor);
     }
 
     protected abstract TargetInfo getTargetInfo();

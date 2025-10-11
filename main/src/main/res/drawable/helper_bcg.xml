@@ -4,9 +4,9 @@
 
     <stroke
         android:width="2px"
-        android:color="@color/colorTextActionBar" />
+        android:color="@color/colorTextMainInfo" />
 
-    <solid android:color="@color/colorBackgroundActionBar" />
+    <solid android:color="@color/colorBackgroundMainInfo" />
 
     <corners
         android:bottomLeftRadius="3dp"

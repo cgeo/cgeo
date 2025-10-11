@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
+import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -375,6 +376,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 return true;
             }
         });
+        SearchUtils.setSearchViewColor(searchView);
 
         return true;
     }

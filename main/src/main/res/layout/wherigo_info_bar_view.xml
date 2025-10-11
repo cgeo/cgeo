@@ -15,6 +15,7 @@
         android:layout_alignParentLeft="true"
         android:orientation="horizontal"
         android:layout_toLeftOf="@id/wherigo_additional_info_box"
+        android:colorPrimary="@color/colorTextActionBar"
         android:background="@color/colorBackgroundActionBar"
         tools:ignore="UseCompoundDrawables"
         tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->

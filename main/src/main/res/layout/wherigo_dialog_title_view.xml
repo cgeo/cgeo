@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/colorBackgroundActionBar"
@@ -15,11 +16,13 @@
         android:paddingTop="8dp"
         android:paddingStart="12dp"
         android:paddingEnd="5dp"
-        android:src="@drawable/arrow_back" />
+        android:src="@drawable/arrow_back"
+        app:tint="@color/colorTextActionBar" />
 
     <TextView
         android:id="@+id/dialog_title"
         style="?android:attr/windowTitleStyle"
+        android:textColor="@color/colorTextActionBar"
         android:layout_toRightOf="@id/dialog_back"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"

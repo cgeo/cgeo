@@ -467,6 +467,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             searchView = (SearchView) searchItem.getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
+            SearchUtils.setSearchViewColor(searchView);
 
             // initialize menu items
             menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk());

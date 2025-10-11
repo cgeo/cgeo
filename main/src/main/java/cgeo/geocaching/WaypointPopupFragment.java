@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import org.apache.commons.lang3.StringUtils;
@@ -79,10 +80,13 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
         try {
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
-            binding.toolbar.toolbar.setTitle(wpCode);
-            binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
-            onCreatePopupOptionsMenu(binding.toolbar.toolbar, this, cache);
-            binding.toolbar.toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
+            final Toolbar toolbar = binding.toolbar.toolbar;
+            toolbar.setTitle(wpCode);
+            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
+
+            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            onCreatePopupOptionsMenu(toolbar, this, cache);
+            toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
