@@ -20,6 +20,8 @@ Due to Play Store policies we have updated the Android API level this version of
 - Cambio: Diseño más compacto para "añadir nuevo waypoint"
 - Nuevo: Opción de cargar imágenes para cachés de geocaching.com en tamaño "sin cambios"
 - Nuevo: La vista de variables puede ser filtrada
+- New: Visualize calculated coordinates overflow in waypoint list
+- New: Menu entry in waypoint list to mark certain waypoint types as visited
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
@@ -36,3 +38,5 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Offer offline translation with Google Translate or DeepL apps (if installed)
 - New: Delete items from search history
 - Change: Remove GCVote (service discontinued)
+- New: Colored toolbar on cache details pages
+- New: Select multiple bookmark lists / pocket queries to download
