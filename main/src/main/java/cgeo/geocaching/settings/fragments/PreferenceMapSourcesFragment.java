@@ -25,6 +25,8 @@ import androidx.preference.MultiSelectListPreference;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     private ListPreference prefMapSources;
     private ListPreference prefTileProvicers;
@@ -58,18 +60,25 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
             return true;
         });
 
+        final CheckBoxPreference useLegacyMap = findPreference(getString(R.string.pref_useLegacyMap));
+
         final ListPreference unifiedMapVariants = findPreference(getString(R.string.pref_unifiedMapVariants));
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
+        unifiedMapVariants.setOnPreferenceChangeListener((preference, newValue) -> {
+            updateBackgroundTransparent((String) newValue, !useLegacyMap.isChecked());
+            return true;
+        });
+        updateBackgroundTransparent(unifiedMapVariants.getValue(), !useLegacyMap.isChecked());
 
         // UnifiedMap/legacy maps switch
-        final CheckBoxPreference useLegacyMap = findPreference(getString(R.string.pref_useLegacyMap));
         useLegacyMap.setOnPreferenceChangeListener((preference, newValue) -> {
             final boolean useUnifiedMap = !((boolean) newValue);
             findPreference(getString(R.string.pref_tileprovider)).setEnabled(useUnifiedMap);
             findPreference(getString(R.string.pref_tileprovider_hidden)).setEnabled(useUnifiedMap);
             findPreference(getString(R.string.pref_unifiedMapVariants)).setEnabled(useUnifiedMap);
+            updateBackgroundTransparent(unifiedMapVariants.getValue(), useUnifiedMap);
             findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setEnabled(useUnifiedMap);
             findPreference(getString(R.string.pref_mapsource)).setEnabled(!useUnifiedMap);
             return true;
@@ -172,6 +181,10 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
             return true;
         });
 
+    }
+
+    private void updateBackgroundTransparent(final String unifiedMapVariant, final boolean useUnifiedMap) {
+        findPreference(getString(R.string.pref_vtmBackgroundTransparent)).setEnabled(useUnifiedMap && !StringUtils.equals(unifiedMapVariant, "1")); // "1" is "Mapsforge only"
     }
 
     private void setUserDefinedTileProviderUriSummary(final String uri) {
