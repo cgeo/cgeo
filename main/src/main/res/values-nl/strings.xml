@@ -1408,6 +1408,11 @@
     <string name="cache_delete_generated_waypoints">Gegenereerde waypoints verwijderen</string>
     <string name="cache_delete_generated_waypoints_confirm">Alle gegenereerde waypoints uit deze cache verwijderen?\n\nWaypoints worden onmiddellijk verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_generated_waypoints_success">Gegenereerde waypoints verwijderd</string>
+    <string name="cache_select_waypoint_types">Selecteer waypoint types</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%d waypoint gemarkeerd als bezocht</item>
+        <item quantity="other">%d waypoints gemarkeerd als bezocht</item>
+    </plurals>
     <string name="cache_offline_store">Opslaan</string>
     <string name="cache_offline_stored_ago">Opgeslagen: %s</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
@@ -1737,6 +1742,7 @@
     <string name="waypoint_user_note">Gebruikersnotitie</string>
     <string name="waypoint_visited">Bezocht</string>
     <string name="waypoint_set_visited">Waypoint ingesteld als bezocht</string>
+    <string name="waypoint_set_visited_types">Stel waypoints in als bezocht</string>
     <string name="waypoint_unset_visited">Waypoint ingesteld als niet bezocht</string>
     <string name="waypoint_save">Opslaan</string>
     <string name="waypoint_loading">Waypoint laden…</string>
