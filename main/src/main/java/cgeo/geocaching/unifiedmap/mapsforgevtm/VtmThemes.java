@@ -45,6 +45,7 @@ public enum VtmThemes implements ThemeFile {
 
     DEFAULT("vtm/default.xml"),
     MAPZEN("vtm/mapzen.xml"),
+    MOTORIDER("vtm/motorider.xml"),
     NEWTRON("vtm/newtron.xml"),
     OPENMAPTILES("vtm/openmaptiles.xml"),
     OSMAGRAY("vtm/osmagray.xml"),
