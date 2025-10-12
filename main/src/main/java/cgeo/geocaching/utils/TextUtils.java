@@ -298,6 +298,24 @@ public final class TextUtils {
         return span;
     }
 
+    // Checks whether a given span class covers the entire text
+    public static <T> boolean hasSpanCoveringWholeText(final CharSequence spanText, final Class<T> spanClass) {
+        final int length = spanText == null ? 0 : spanText.length();
+        if (length == 0 || !(spanText instanceof Spanned)) {
+            return false;
+        }
+        final Spanned spanned = (Spanned) spanText;
+        final T[] existing = spanned.getSpans(0, length, spanClass);
+        for (final T span : existing) {
+            final int start = spanned.getSpanStart(span);
+            final int end = spanned.getSpanEnd(span);
+            if (start == 0 && end == length) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @NonNull
     public static String getTextBeforeIndexUntil(final String text, final int idx, final String startToken) {
         return getTextBeforeIndexUntil(text, idx, startToken, -1);
