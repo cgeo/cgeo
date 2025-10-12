@@ -1,6 +1,9 @@
 ##
 - Oprava: Negativní hodnoty v nadmořské výškové mapě nejsou měřítkem
 - Oprava: Souřadnice blízko 0 nefungovaly při exportu GPX
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
 - Oprava: pád při hledání klíčových slov
@@ -33,6 +36,7 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
