@@ -484,7 +484,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private boolean isInvokedFromAttachment() {
         final Intent intent = getIntent();
         final String actionType = intent.getAction();
-        return Intent.ACTION_SEND_MULTIPLE.equals(actionType);
+        return Intent.ACTION_SEND_MULTIPLE.equals(actionType)
+                || (Intent.ACTION_VIEW.equals(actionType) && intent.getData() != null);
     }
 
     private void importGpxAttachement() {
