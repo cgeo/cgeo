@@ -113,7 +113,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
@@ -1067,12 +1066,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private void setTitle() {
-        final String title = calculateTitle();
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(MapUtils.getColoredValue(title));
-        }
+        ActionBarUtils.setTitle(this, calculateTitle());
     }
 
     @NonNull
@@ -1090,15 +1084,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private void setSubtitle() {
-        final String subtitle = calculateSubtitle();
-        if (StringUtils.isEmpty(subtitle)) {
-            return;
-        }
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setSubtitle(MapUtils.getColoredValue(subtitle));
-        }
+        ActionBarUtils.setSubtitle(this, calculateSubtitle());
     }
 
     @NonNull

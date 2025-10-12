@@ -11,6 +11,7 @@ import cgeo.geocaching.databinding.AboutSystemPageBinding;
 import cgeo.geocaching.databinding.AboutVersionPageBinding;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
@@ -34,7 +35,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -115,11 +115,9 @@ public class AboutActivity extends TabbedViewPagerActivity {
     }
 
     private void setActionBarTitle(final long currentPageId) {
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            final String prefix = getString(R.string.about);
-            actionBar.setTitle((StringUtils.isNotBlank(prefix) ? prefix + " - " : "") + getTitle(currentPageId));
-        }
+        final String prefix = getString(R.string.about);
+        final String title = (StringUtils.isNotBlank(prefix) ? (prefix + " - ") : "") + getTitle(currentPageId);
+        ActionBarUtils.setTitle(this, title);
     }
 
     @Override
