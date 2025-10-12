@@ -1,6 +1,9 @@
 ##
 - Oplossing: Negatieve waarden in de hoogte grafiek niet geschaald
 - Fix: Coördinaten in de buurt van 0 gebroken in GPX export
+- Oplossing: Enkele crashes
+- Poging tot reparatie: ANR bij opstarten
+- Poging tot reparatie: Ontbrekende geocache gegevens op de live kaart
 
 ##
 - Oplossing: Crash in trefwoord zoeken
@@ -33,6 +36,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
