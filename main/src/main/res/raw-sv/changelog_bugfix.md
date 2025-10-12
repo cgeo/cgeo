@@ -1,6 +1,9 @@
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
 - Fix: Koordinater nära 0 felaktiga i GPX-export
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
 - Fix: Krasch vid sökning på nyckelord
@@ -33,6 +36,7 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 
