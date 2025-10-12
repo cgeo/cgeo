@@ -1,6 +1,9 @@
 ##
 - Correcção: Valores negativos no gráfico de altitude não eram dimensionados
 - Correcção: Coordenadas próximas de 0 ficavam inválidas na exportação para GPX
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
 - Correcção: Falha na pesquisa por palavra-chave
@@ -33,6 +36,7 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
 
 
 
