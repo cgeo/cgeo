@@ -54,7 +54,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
     public void setTitle(final CharSequence title) {
         super.setTitle(title);
         // reflect the title in the actionbar
-        ActivityMixin.setTitle(this, title);
+        ActivityMixin.setTitle(this, title.toString());
     }
 
     /** call in onCreate to set fixed action bar. If fixed then show/hode won't work and content will NOT be extended behind action bar */

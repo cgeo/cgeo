@@ -5,6 +5,7 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -24,24 +25,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
 
-import org.apache.commons.lang3.StringUtils;
-
 public final class ActivityMixin {
 
     private ActivityMixin() {
         // utility class
     }
 
-    public static void setTitle(final Activity activity, final CharSequence text) {
-        if (StringUtils.isBlank(text)) {
-            return;
-        }
-
-        if (activity instanceof AppCompatActivity) {
-            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setTitle(text);
-            }
+    public static void setTitle(final Activity activity, final String text) {
+        if (activity instanceof AbstractActionBarActivity) {
+            ActionBarUtils.setTitle((AbstractActionBarActivity) activity, text);
         }
     }
 
