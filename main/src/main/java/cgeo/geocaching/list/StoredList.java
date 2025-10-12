@@ -383,7 +383,11 @@ public final class StoredList extends AbstractList {
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
             final List<String> hierarchies = DataStore.getListHierarchy();
-            hierarchies.set(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+            if (hierarchies.isEmpty()) {
+                hierarchies.add(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+            } else {
+                hierarchies.set(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+            }
             hierarchies.add(1, activity.getString(R.string.list_create_parent));
             listprefix.setVisibility(View.VISIBLE);
             listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
