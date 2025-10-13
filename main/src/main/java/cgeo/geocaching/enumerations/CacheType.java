@@ -198,7 +198,7 @@ public enum CacheType {
         return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
     }
 
-    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isEnabled) {
+    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isEnabled, final boolean isLightSkin) {
         final int actionbarColor;
         if (cacheType != null) {
             // convert to HSL
@@ -206,12 +206,11 @@ public enum CacheType {
 
             final float[] hsl = ColorUtils.getHslValues(colorInt);
 
-            // less saturation
-            final float offSet1 = -0.02f;
-            // darker color
-            final float offSet2 = -0.12f;
-            hsl[1] = Math.min(1f, hsl[1] + offSet1);
-            hsl[2] = Math.min(1f, hsl[2] + offSet2);
+            // darker color by 15%
+            final float offSet1 = isLightSkin ? -0.2f : -0.7f;
+            final float offSet2 = isLightSkin ? -0.12f : -0.13f;
+            hsl[1] = Math.max(0f, Math.min(1f, hsl[1] + offSet1));
+            hsl[2] = Math.max(0f, Math.min(1f, hsl[2] + offSet2));
 
             actionbarColor = ColorUtils.getColorFromHslValues(hsl);
         } else {
