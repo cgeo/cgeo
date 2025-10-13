@@ -236,7 +236,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         super.setContentView(layoutResID);
 
         // initialize the action bar title with the activity title for single source
-        ActivityMixin.setTitle(this, getTitle());
+        ActivityMixin.setTitle(this, getTitle().toString());
     }
 
     protected void hideKeyboard() {

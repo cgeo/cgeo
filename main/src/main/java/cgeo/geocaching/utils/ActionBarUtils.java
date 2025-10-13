@@ -7,11 +7,15 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
@@ -91,5 +95,34 @@ public class ActionBarUtils {
             windowInsetsController.setAppearanceLightStatusBars(false);
             windowInsetsController.setAppearanceLightNavigationBars(false);
         }
+    }
+
+    public static void setSubtitle(@NonNull final AbstractActionBarActivity activity, @NonNull final String subtitleText) {
+        final ActionBar supportActionBar = activity.getSupportActionBar();
+        if (supportActionBar == null || subtitleText.isEmpty()) {
+            return;
+        }
+
+        final SpannableString titleString = getSpan(activity, subtitleText, R.color.colorTextHintActionBar);
+        supportActionBar.setSubtitle(titleString);
+    }
+
+    public static void setTitle(@NonNull final AbstractActionBarActivity activity, @NonNull final String titleText) {
+        final ActionBar supportActionBar = activity.getSupportActionBar();
+        if (supportActionBar == null || titleText.isEmpty()) {
+            return;
+        }
+
+        final SpannableString titleString = getSpan(activity, titleText, R.color.colorTextActionBar);
+        supportActionBar.setTitle(titleString);
+    }
+
+    // workaround for colored ActionBar titles/subtitles
+    // @todo remove after switching map ActionBar to Toolbar
+    private static SpannableString getSpan(@NonNull final AbstractActionBarActivity activity, final String spanText, final @ColorRes int colorRes) {
+        final SpannableString titleString = new SpannableString(spanText);
+        final int color = activity.getResources().getColor(colorRes);
+        titleString.setSpan(new ForegroundColorSpan(color), 0, titleString.length(), 0);
+        return titleString;
     }
 }
