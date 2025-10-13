@@ -1,9 +1,9 @@
 ##
 - Correcció: Els valors negatius del gràfic d'elevació no s'escalen
 - Correcció: Coordenades properes a 0 trencades a les exportacions GPX
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Correcció: Alguns errors
+- Intenta solucionar: ANR a l'inici
+- Intenta solucionar: Falten dades de catxés al mapa en directe
 
 ##
 - Correcció: Error en la cerca de paraules clau
