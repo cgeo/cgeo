@@ -20,8 +20,8 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Canvi: Disseny més compacte per "afegir un nou punt de referència"
 - Nou: Opció per carregar imatges pels catxés de geocaching.com en mida "sense canvis"
 - Nou: la vista de variables es pot filtrar
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Nou: Visualitza el desbordament de coordenades calculades a la llista de punts de referència
+- Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -38,5 +38,5 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Ofereix traducció fora de línia amb les aplicacions de Google Translate o DeepL (si estan instal·lades)
 - Nou: Suprimeix elements de l'historial de cerca
 - Canvi: Elimina GCVote (servei descontinuat)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
+- Nou: Barra d'eines de color a les pàgines de detalls de catxé
+- Nou: seleccioneu diverses llistes de marcadors / pocket queries per descarregar
