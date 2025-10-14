@@ -20,8 +20,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Mer kompakt layout för att "lägga till ny vägpunkt"
 - Nytt: Alternativ för att ladda bilder för geocaching.com cacher i "oförändrad" storlek
 - Nytt: Variabler kan filtreras
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Nytt: Visualisera beräknat koordinat-spill i vägpunkt-listan
+- Nytt: Menypost i vägpunkt-listan för att markera vissa vägpunkt-typer som besökta
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
