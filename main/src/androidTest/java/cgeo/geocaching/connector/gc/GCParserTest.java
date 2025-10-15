@@ -83,7 +83,7 @@ public class GCParserTest {
         assertThat(cache).isNotNull();
         assertThat(cache.getSpoilers()).as("spoilers").hasSize(2);
         final Image spoiler = cache.getSpoilers().get(1);
-        assertThat(spoiler.getUrl()).as("First spoiler image url wrong").isEqualTo("http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg");
+        assertThat(spoiler.getUrl()).as("First spoiler image url wrong").isEqualTo("https://img.geocaching.com/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg");
         assertThat(spoiler.getTitle()).as("First spoiler image text wrong").isEqualTo("SPOILER");
         assertThat(spoiler.getDescription()).as("First spoiler image description").isEqualTo("Spoiler");
     }
@@ -327,7 +327,7 @@ public class GCParserTest {
         final Image spoiler = spoilers.get(0);
         assertThat(spoiler.getTitle()).isEqualTo("");
         assertThat(spoiler.getDescription()).isEqualTo("Spoiler: FOTO SPOILER");
-        assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/cache/large/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
+        assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
     }
 
     @MediumTest
@@ -350,7 +350,7 @@ public class GCParserTest {
 
         final List<Image> images = GCParser.parseSpoiler(html);
         assertThat(images).hasSize(2);
-        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/cache/large/baf98e07-b431-4fbf-920d-0df4346c2847.JPG");
+        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/baf98e07-b431-4fbf-920d-0df4346c2847.JPG");
         assertThat(images.get(0).getTitle()).isEqualTo("Blick vom Weg");
         assertThat(images.get(0).getDescription()).isEqualTo("Spoiler");
     }
