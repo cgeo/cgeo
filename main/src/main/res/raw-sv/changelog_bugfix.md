@@ -1,9 +1,9 @@
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
 - Fix: Koordinater nära 0 felaktiga i GPX-export
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Fix: Vissa krascher
+- Försök att fixa: ANR vid start
+- Försök att fixa: Saknar geocache-data på livekartan
 
 ##
 - Fix: Krasch vid sökning på nyckelord
