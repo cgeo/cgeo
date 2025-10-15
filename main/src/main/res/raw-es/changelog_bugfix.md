@@ -1,4 +1,8 @@
 ##
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+
+##
 - Fix: Crash in keyword search
 - Fix: Crash in map
 - Fix: Hint text no longer selectable
@@ -29,6 +33,7 @@
 ##
 - Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
 - Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
+
 
 
 
