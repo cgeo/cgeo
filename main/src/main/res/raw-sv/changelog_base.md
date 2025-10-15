@@ -38,5 +38,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Erbjud offline-översättning med appar från Google Translate eller DeepL (om installerat)
 - Nytt: Ta bort objekt från sökhistoriken
 - Ändring: Ta bort GCVote (tjänsten upphör)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
+- Nyhet: Färgat verktygsfält på cache-detaljsidor
+- Nyhet: Välj flera bokmärkeslistor / fickfrågor att ladda ner
