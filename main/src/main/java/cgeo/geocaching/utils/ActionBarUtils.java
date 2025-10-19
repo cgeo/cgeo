@@ -87,13 +87,8 @@ public class ActionBarUtils {
         // set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
         if (isLightSkin) {
-            final int actionBarColor = activity.getResources().getColor(R.color.colorBackgroundActionBar);
-            final boolean isLightStatusBar = !isActionBarShown || !ColorUtils.isBrightnessDark(actionBarColor);
-            windowInsetsController.setAppearanceLightStatusBars(isLightStatusBar);
-
-            final int tabBarColor = activity.getResources().getColor(R.color.colorBackgroundTabBar);
-            final boolean isLightNavigationBar = !ColorUtils.isBrightnessDark(tabBarColor);
-            windowInsetsController.setAppearanceLightNavigationBars(isLightNavigationBar);
+            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown);
+            windowInsetsController.setAppearanceLightNavigationBars(true);
         } else {
             windowInsetsController.setAppearanceLightStatusBars(false);
             windowInsetsController.setAppearanceLightNavigationBars(false);
