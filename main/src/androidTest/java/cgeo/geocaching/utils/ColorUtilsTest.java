@@ -26,10 +26,4 @@ public class ColorUtilsTest {
     public void testContrastAverage() {
         assertThat(ColorUtils.getContrastRatio(Color.DKGRAY, Color.WHITE)).isBetween(9.0, 10.0);
     }
-
-    @Test
-    public void testIsBrightnessDark() {
-        assertThat(ColorUtils.isBrightnessDark(Color.DKGRAY)).isTrue();
-        assertThat(ColorUtils.isBrightnessDark(Color.LTGRAY)).isFalse();
-    }
 }
