@@ -18,7 +18,7 @@
 
     <color name="colorTextHintActionBar">#FFAAAAAA</color>
     <color name="colorTextActionBar">#FFFFFFFF</color>
-    <color name="colorBackgroundActionBar">#DD2A2A2A</color>
+    <color name="colorBackgroundActionBar">#FF2A2A2A</color>
 
     <color name="colorTextTabBar">@color/colorTextDark</color>
     <color name="colorBackgroundTabBar">#FFF3F3F3</color>
