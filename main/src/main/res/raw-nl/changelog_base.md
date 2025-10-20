@@ -7,6 +7,8 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Toon gegenereerde waypoints op kaart
 - Nieuw: Download caches gesorteerd op afstand
 - Oplossing: Verdubbeling van individuele route items
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
