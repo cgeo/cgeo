@@ -83,6 +83,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -118,7 +119,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -140,6 +140,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -261,10 +262,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     protected void updateTitle() {
         setTitle(title);
         adapter.setCurrentListTitle(title);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setSubtitle(getCurrentSubtitle());
-        }
+        ActionBarUtils.setSubtitle(this, getCurrentSubtitle());
         refreshActionBarTitle();
     }
 
@@ -1971,7 +1969,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Calculate the subtitle of the current list depending on (optional) filters.
      */
-    private CharSequence getCurrentSubtitle() {
+    private String getCurrentSubtitle() {
         if (search == null) {
             return getCacheNumberString(getResources(), 0);
         }
