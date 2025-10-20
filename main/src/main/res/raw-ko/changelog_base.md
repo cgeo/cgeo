@@ -7,6 +7,8 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Show generated waypoints on map
 - New: Download caches ordered by distance
 - Fix: Doubling of individual route items
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### 캐시 상세정보
 - New: Detect additional characters in formulas: –, ⋅, ×
