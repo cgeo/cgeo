@@ -7,6 +7,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Visa genererade vägpunkter på kartan
 - Nyhet: Ladda ned cacher beställda på distans
 - Fix: Fördubbling av enskilda rutt-objekt
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
