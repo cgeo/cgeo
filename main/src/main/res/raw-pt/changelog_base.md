@@ -7,6 +7,8 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Mostrar os pontos adicionais gerados no mapa
 - Novo: Transferência de caches ordenadas por distância
 - Correcção: duplicação de pontos individuais da rota
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
