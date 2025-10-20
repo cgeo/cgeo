@@ -7,6 +7,8 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Graf nadmořské výšky pro trasy a stopy
 - Novinka: Stáhnout kešky seřazené podle vzdálenosti
 - Oprava: Zdvojnásobení jednotlivých položek trasy
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
