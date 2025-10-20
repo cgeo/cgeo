@@ -863,6 +863,8 @@
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
     <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
+    <string name="settings_vtm_background_transparent_title">Przezroczyste tło</string>
+    <string name="settings_vtm_background_transparent_summary">Pokaż przezroczyste tło map offline VTM (eksperymentalne)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
