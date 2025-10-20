@@ -7,6 +7,8 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Pokaż wygenerowane punkty nawigacji na mapie
 - Nowość: Pobierz skrytki uporządkowane według odległości
 - Naprawiono: Dublowanie poszczególnych pozycji trasy
+- Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
+- Nowość: Obsługa przezroczystego tła podczas wyświetlania map offline (tylko VTM)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
