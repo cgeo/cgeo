@@ -852,6 +852,8 @@
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
+    <string name="settings_vtm_background_transparent_title">Fons transparent</string>
+    <string name="settings_vtm_background_transparent_summary">Mostra el fons dels mapes fora de línia de VTM de manera transparent (experimental)</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
