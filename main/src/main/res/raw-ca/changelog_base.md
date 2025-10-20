@@ -7,6 +7,8 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Mostra els punts de referència generats al mapa
 - Nou: Descarrega els catxés ordenats per distància
 - Correcció: Duplicació d'elements de ruta individuals
+- Nou: Suport per al tema Motorider (només VTM)
+- Nou: Compatibilitat amb la visualització de fons transparent de mapes fora de línia (només VTM)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
