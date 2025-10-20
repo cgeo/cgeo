@@ -7,6 +7,8 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Zeige generierte Wegpunkte auf der Karte
 - New: Download caches ordered by distance
 - Fix: Doubling of individual route items
+- New: Support for Motorider theme (VTM only)
+- New: Support for transparent background display of offline maps (VTM only)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
