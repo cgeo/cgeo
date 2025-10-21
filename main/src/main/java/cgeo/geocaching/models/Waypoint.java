@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
+import static cgeo.geocaching.models.Image.ImageCategory.WAYPOINT;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,10 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
+    @Nullable
+    String image;
+    @Nullable
+    Image modelImage;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -85,14 +90,14 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
      * used only for "goto history" UDC
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (Comparator<Waypoint>) (left, right) -> right.id - left.id;
+    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (left, right) -> right.id - left.id;
 
     /**
      * require name and type for every waypoint
@@ -167,6 +172,8 @@ public class Waypoint implements INamedGeoCoordinate {
             projectionFormula2 = old.projectionFormula2;
             projectionDistanceUnit = old.projectionDistanceUnit;
         }
+
+        image = old.image;
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -323,6 +330,29 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public void setGeofence(@Nullable final Float geofence) {
         this.geofence = geofence;
+    }
+
+
+    @Nullable
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(@Nullable final String image) {
+        this.image = image;
+    }
+
+    @Nullable
+    public Image buildImage() {
+        if (image != null && modelImage == null) {
+            modelImage = new Image.Builder()
+                .setUrl(image)
+                .setTitle(name)
+                .setDescription(note)
+                .setCategory(WAYPOINT)
+                .build();
+        }
+        return modelImage;
     }
 
     public void setCoords(final Geopoint coords) {

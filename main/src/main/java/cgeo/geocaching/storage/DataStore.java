@@ -462,7 +462,8 @@ public class DataStore {
             + "projection_formula_1 TEXT, "
             + "preprojected_latitude DOUBLE, "
             + "preprojected_longitude DOUBLE, "
-            + "geofence DOUBLE"
+            + "geofence DOUBLE,"
+            + "image TEXT"
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -2742,6 +2743,7 @@ public class DataStore {
         values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2());
         putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
         values.put("geofence", waypoint.getGeofence());
+        values.put("image", waypoint.getImage());
         return values;
     }
 
@@ -3439,6 +3441,8 @@ public class DataStore {
                 cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2"))
             );
             waypoint.setGeofence(cursor.getFloat(cursor.getColumnIndexOrThrow("geofence")));
+            waypoint.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            waypoint.buildImage();
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }
