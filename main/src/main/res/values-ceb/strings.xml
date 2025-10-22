@@ -108,8 +108,7 @@
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Ang paghubad kay mahimon nga mapakyas sa usa ka dako nga kantidad sa teksto.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Napakyas nga pagpasulod sa parsing nga panid</string>
     <string name="err_server_ec">Dili ma kontak ang Extremecahing.com. Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
@@ -322,7 +321,6 @@
     <string name="init_summary_oc_uk">I-load ang mga cache gikan sa opencache.uk</string>
     <string name="init_oc_uk_description">Pagpatugot sa c:geo kuyog sa opencache.uk para magpangita sa mga cache ug akses/filter ang imong nakit-ang mga cache.</string>
     <string name="init_summary_su">I-load ang mga cache gikan sa Geocaching.su</string>
-    <string name="init_gcvote_password_description">Para maka-rate sa cache, kinahanglan nimo sundon ang gitudlo sa GCVote.com ug ipasulod ang imong GCVote password dire.</string>
     <string name="init_login_popup">Pasulod</string>
     <string name="init_login_popup_working">Pagpasulod…</string>
     <string name="init_login_popup_ok">Okay ang pagpasulod</string>
@@ -342,8 +340,6 @@
     <string name="init_signature_template_owner">Tag-iya</string>
     <string name="init_signature_template_name">Pangalan</string>
     <string name="init_signature_template_log">Ang teksto sa log</string>
-    <string name="init_ratingwanted">Rating sa GCvote</string>
-    <string name="init_summary_ratingwanted">Ang pag-load sa rating sa cache gikan sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ang pagpakita sa mga Higala/Kaugalingon</string>
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpakita sa dugang nga panid sa logbook nga alang sa mga higala ug kaugalingong mga log</string>
     <string name="init_openlastdetailspage">Ang katapusang detalye nga panid</string>
@@ -513,7 +509,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Loading pa ang spoiler nga imahe</string>
     <string name="cache_dialog_loading_details_status_logs">Loading ang logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pagproseso sa Waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Loading ang GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Pag-cache sa Datos</string>
     <string name="cache_dialog_loading_details_status_render">Pag-render sa view</string>
     <string name="cache_dialog_offline_save_message">Pag-save sa cache alang sa paggamit sa offline…</string>
@@ -542,13 +537,11 @@
     <string name="cache_menu_share">Ipanghatag ang cache</string>
     <string name="cache_menu_move_list">Balhin sa laing listahan</string>
     <string name="cache_menu_copy_list">Ikopya sa laing listahan</string>
-    <string name="cache_menu_vote">Boto</string>
     <string name="cache_menu_challenge_checker">Pagpangita sa hagit sa checker</string>
     <string name="cache_menu_ignore">Ibalewala ang cache</string>
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_status_attended">Nitambong</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_status_archived">Ge-arkibo</string>
@@ -583,7 +576,7 @@
     <string name="cache_time_full_hours">alas dose</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Pagload sa mga cache gikan sa %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nagload sa waypoints gikan sa %1$s</string>
