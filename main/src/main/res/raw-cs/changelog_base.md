@@ -7,8 +7,8 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Graf nadmořské výšky pro trasy a stopy
 - Novinka: Stáhnout kešky seřazené podle vzdálenosti
 - Oprava: Zdvojnásobení jednotlivých položek trasy
-- New: Support for Motorider theme (VTM only)
-- New: Support for transparent background display of offline maps (VTM only)
+- Novinka: Podpora motivu Motorider (pouze VTM)
+- Novinka: Podpora zobrazení offline map s průhledným pozadím (pouze VTM)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -22,8 +22,8 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Změna: Kompaktnější rozložení pro „přidání nového trasového bodu“
 - Novinka: Možnost načíst obrázky pro kešky z geocaching.com v „nezměněné“ velikosti
 - Novinka: Proměnné lze filtrovat
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Novinka: Vizualizace vypočítaných souřadnic v seznamu trasových bodů
+- Novinka: Položka v nabídce seznamu trasových bodů pro označení určitých typů trasových bodů jako navštívených
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -40,5 +40,5 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Nabídka offline překladu pomocí aplikací Překladač Google nebo DeepL (pokud jsou nainstalovány)
 - Novinka: Odstranit položky z historie hledání
 - Změna: Odebráno GCVote (služba pozastavena)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
+- Novinka: Barevný panel nástrojů na stránkách s podrobnostmi o kešce
+- Novinka: Vyberte více seznamů záložek / pocket queries ke stažení
