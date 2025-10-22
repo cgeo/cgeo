@@ -315,6 +315,7 @@
     <string name="warn_search_help_user">Zadej jméno uživatele z Geocaching.com.</string>
     <string name="warn_search_help_tb">Zadej kód trasovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
+    <string name="warn_bookmarklist_select">Nebyl vybrán žádný seznam záložek.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_notloggedin_title">Offline režim</string>
@@ -572,6 +573,7 @@
     <string name="list_dialog_rename">Přejmenovat</string>
     <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
     <string name="list_parent_list">Nadřazený seznam</string>
+    <string name="list_create_parent">&lt;Vytvořit nový nadřazený seznam&gt;</string>
     <string name="list_name">Název seznamu</string>
     <string name="list_confirm_rename">Přejmenování z \"%1$s\" na \"%2$s\"\n%3$s\nTuto akci nelze vrátit zpět!</string>
     <string name="list_confirm_no_hierarchy">\nNenalezeno \":\" - všechny odpovídající seznamy budou převedeny na nejvyšší úroveň\n</string>
@@ -861,6 +863,8 @@
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
     <string name="settings_unifiedMapVariants_title">Varianty Sjednocené mapy</string>
+    <string name="settings_vtm_background_transparent_title">Průhledné pozadí</string>
+    <string name="settings_vtm_background_transparent_summary">Zobrazit pozadí offline map VTM jako průhledné (experimentální)</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
     <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
@@ -1066,6 +1070,8 @@
     <string name="settings_startscreen_title">Výchozí obrazovka</string>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
+    <string name="init_colored_theme">Barevné téma</string>
+    <string name="init_summary_colored_theme">Použít barevné téma</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
@@ -1426,6 +1432,13 @@
     <string name="cache_delete_generated_waypoints">Odstranit vygenerované trasové body</string>
     <string name="cache_delete_generated_waypoints_confirm">Odstranit všechny vygenerované trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_generated_waypoints_success">Vygenerované trasové body smazány</string>
+    <string name="cache_select_waypoint_types">Vyberte typy trasových bodů</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%dtrasový bod označen jako navštívený</item>
+        <item quantity="few">%dtrasové body označené jako navštívené</item>
+        <item quantity="many">%dtrasových bodů označených jako navštívené</item>
+        <item quantity="other">%dtrasových bodů označených jako navštívené</item>
+    </plurals>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_stored_ago">Uloženo %s</string>
     <string name="cache_offline_not_ready">Nedostupné offline</string>
@@ -1765,6 +1778,7 @@
     <string name="waypoint_user_note">Osobní poznámka</string>
     <string name="waypoint_visited">Navštíven</string>
     <string name="waypoint_set_visited">Trasový bod nastaven jako navštívený</string>
+    <string name="waypoint_set_visited_types">Nastavit trasové body na navštívené</string>
     <string name="waypoint_unset_visited">Trasový bod nastaven jako nenavštívený</string>
     <string name="waypoint_save">Uložit</string>
     <string name="waypoint_loading">Načítání trasového bodu…</string>
