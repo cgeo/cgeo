@@ -1,9 +1,9 @@
 ##
 - Oprava: Negativní hodnoty v nadmořské výškové mapě nejsou měřítkem
 - Oprava: Souřadnice blízko 0 nefungovaly při exportu GPX
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Oprava: Několik pádů
+- Zkuste opravit: ANR při spuštění
+- Zkuste opravit: Chybějící data kešek na živé mapě
 
 ##
 - Oprava: pád při hledání klíčových slov
