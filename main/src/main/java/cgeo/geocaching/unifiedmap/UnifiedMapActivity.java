@@ -315,6 +315,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }));
 
         refreshListChooser();
+
+        ActionBarUtils.setSystemBarAppearance(this, actionBarIsShowing());
     }
 
     public AbstractMapFragment getMapFragment() {
