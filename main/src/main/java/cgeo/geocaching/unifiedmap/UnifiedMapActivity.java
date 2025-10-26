@@ -121,6 +121,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -1145,6 +1146,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (temp == null) {
                     temp = viewModel.caches.readWithResult(caches ->
                         IterableUtils.find(caches, cache -> geocode.equals(cache.getGeocode())));
+                    //If found in viewmodel cache but not in CacheCache,
+                    //-> then put into CacheCache for usage by Cache-Popup (popup will fail otherwise)
+                    if (temp != null) {
+                        DataStore.saveCache(temp, EnumSet.of(LoadFlags.SaveFlag.CACHE));
+                    }
                 }
                 if (temp != null) {
                     result.add(new MapSelectableItem(new RouteItem(temp)));
