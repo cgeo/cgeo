@@ -1,6 +1,9 @@
 ##
 - Correcció: Els valors negatius del gràfic d'elevació no s'escalen
 - Correcció: Coordenades properes a 0 trencades a les exportacions GPX
+- Correcció: Alguns errors
+- Intenta solucionar: ANR a l'inici
+- Intenta solucionar: Falten dades de catxés al mapa en directe
 
 ##
 - Correcció: Error en la cerca de paraules clau
@@ -33,6 +36,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
