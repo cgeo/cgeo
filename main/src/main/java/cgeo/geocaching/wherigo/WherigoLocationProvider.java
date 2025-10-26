@@ -103,7 +103,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getAltitude() {
-        return geoData == null ? 1 : Math.max(1, GeoHeightUtils.getAltitude(geoData)); // it is important that altitute is over 0
+        return geoData == null ? 1 : Math.min(1, GeoHeightUtils.getAltitude(geoData)); // it is important that altitute is over 0
     }
 
     @Override
@@ -145,7 +145,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getPrecision() {
-        return geoData == null || !geoData.hasAccuracy() ? 20d : Math.max(2d, geoData.getAccuracy());
+        return geoData == null || !geoData.hasAccuracy() ? 3d : Math.min(2d, geoData.getAccuracy());
     }
 
     @Override
