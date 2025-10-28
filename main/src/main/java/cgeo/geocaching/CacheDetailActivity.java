@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
-import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.calendar.CalendarAdder;
@@ -119,7 +118,6 @@ import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
-import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -1424,9 +1422,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.removeFromWatchlist.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox(activity);
 
-            // internal WIG player, WhereYouGo, ChirpWolf, Adventure Lab
+            // internal WIG player,ChirpWolf, Adventure Lab
             updateWherigoBox(activity);
-            updateWhereYouGoBox(activity);
             updateChirpWolfBox(activity);
             updateALCBox(activity);
 
@@ -1738,14 +1735,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.addToFavpoint.setVisibility(View.GONE);
                 binding.removeFromFavpoint.setVisibility(View.GONE);
             }
-        }
-
-        private void updateWhereYouGoBox(final CacheDetailActivity activity) {
-            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
-            binding.whereyougoBox.setVisibility(!wherigoGuis.isEmpty() ? View.VISIBLE : View.GONE);
-            binding.whereyougoText.setText(isWhereYouGoInstalled() ? R.string.cache_whereyougo_start : R.string.cache_whereyougo_install);
-            binding.sendToWhereyougo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
-                WhereYouGoApp.openWherigo(activity, guid)));
         }
 
         private void updateWherigoBox(final CacheDetailActivity activity) {
