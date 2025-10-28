@@ -209,7 +209,9 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
 
         final boolean isLightSkin = Settings.isLightSkin(toolbar.getContext());
         final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isEnabled, isLightSkin);
-        swipView.getBackground().mutate().setTint(actionbarColor);
+        if (isLightSkin) {
+            swipView.getBackground().mutate().setTint(actionbarColor);
+        }
         toolbar.setBackgroundColor(actionbarColor);
     }
 

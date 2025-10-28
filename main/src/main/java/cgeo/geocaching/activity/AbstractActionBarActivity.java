@@ -25,9 +25,12 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
-    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN = 50; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK = 0; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT = 50; //dp
 
-    private int actionBarSystemBarOverlapHeight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN);
+    private int actionBarSystemBarOverlapHeightDark = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK);
+    private int actionBarSystemBarOverlapHeightLight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT);
+
     private boolean fixedActionBar = true;
 
     @Override
@@ -81,7 +84,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar == null || abView == null || !actionBar.isShowing() || fixedActionBar) {
             return;
         }
-        abView.animate().translationY(- 2 * getActionBarHeight() - 2 * this.actionBarSystemBarOverlapHeight)
+
+        final int actionBarTranslation = getActionBarSystemBarOverlapHeight() + getActionBarHeight();
+        abView.animate().translationY(-2 * actionBarTranslation)
             .withEndAction(actionBar::hide).start();
     }
 
@@ -92,9 +97,11 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
         actionBar.show();
-        applyTranslation();
-        abView.setTranslationY(-getActionBarHeight() - this.actionBarSystemBarOverlapHeight);
-        abView.animate().translationY(-this.actionBarSystemBarOverlapHeight).start();
+
+        final int systemBarOverlapHeight = getActionBarSystemBarOverlapHeight();
+        final int actionBarTranslation = systemBarOverlapHeight + getActionBarHeight();
+        abView.setTranslationY(-actionBarTranslation);
+        abView.animate().translationY(-systemBarOverlapHeight).start();
     }
 
     public boolean actionBarIsShowing() {
@@ -109,7 +116,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
     @NonNull
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
-        this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
+
+        this.actionBarSystemBarOverlapHeightDark = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK));
+        this.actionBarSystemBarOverlapHeightLight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT));
         applyTranslation();
         if (fixedActionBar) {
             return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
@@ -120,9 +129,14 @@ public class AbstractActionBarActivity extends AbstractActivity {
     private void applyTranslation() {
         final View actionBar = getActionBarView();
         if (actionBar != null) {
+            final int actionBarSystemBarOverlapHeight = getActionBarSystemBarOverlapHeight();
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
         }
+    }
+
+    private int getActionBarSystemBarOverlapHeight() {
+        return Settings.isLightSkin(this) ? this.actionBarSystemBarOverlapHeightLight : this.actionBarSystemBarOverlapHeightDark;
     }
 
 
