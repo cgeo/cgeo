@@ -24,6 +24,46 @@
             android:summary="@string/init_summary_colored_theme"
             android:title="@string/init_colored_theme"
             app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_saturation_offset_dark"
+            android:title="Saturation Offset Dark"
+            android:summary="Offset for saturation in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:defaultValue="@integer/saturation_offset_dark_default"
+            app:min="-100"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_lightness_offset_dark"
+            android:title="Lightness Offset Dark"
+            android:summary="Offset for lightness in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:defaultValue="@integer/lightness_offset_dark_default"
+            app:min="-100"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_saturation_offset_light"
+            android:title="Saturation Offset Light"
+            android:summary="Offset for saturation in light mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:defaultValue="@integer/saturation_offset_light_default"
+            app:min="-100"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_lightness_offset_light"
+            android:title="Lightness Offset Light"
+            android:summary="Offset for lightness in light mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:defaultValue="@integer/lightness_offset_light_default"
+            app:min="-100"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_wallpaper"

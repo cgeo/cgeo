@@ -1084,6 +1084,18 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static float getSaturationOffset(final boolean isLightTheme) {
+        final int saturationOffset = getInt(isLightTheme ? R.string.pref_saturation_offset_light : R.string.pref_saturation_offset_dark,
+                getKeyInt(isLightTheme ? R.integer.saturation_offset_light_default : R.integer.saturation_offset_dark_default));
+        return saturationOffset / 100.0f;
+    }
+
+    public static float getLightnessOffset(final boolean isLightTheme) {
+        final int lightnessOffset = getInt(isLightTheme ? R.string.pref_lightness_offset_light : R.string.pref_lightness_offset_dark,
+                getKeyInt(isLightTheme ? R.integer.lightness_offset_light_default : R.integer.lightness_offset_dark_default));
+        return lightnessOffset / 100.0f;
+    }
+
     public static int getLogLineLimit() {
         final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
         if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {
