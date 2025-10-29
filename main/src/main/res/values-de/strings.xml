@@ -562,6 +562,7 @@
     <string name="list_dialog_rename">Umbenennen</string>
     <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
     <string name="list_parent_list">Übergeordnete Liste</string>
+    <string name="list_create_parent">&lt;Neue übergeordnete Liste erstellen&gt;</string>
     <string name="list_name">Listenname</string>
     <string name="list_confirm_rename">Umbenennen von \"%1$s\" zu \"%2$s\"\n%3$s\nDiese Aktion kann nicht rückgängig gemacht werden!</string>
     <string name="list_confirm_no_hierarchy">\nKein \":\" gefunden - alle übereinstimmenden Listen werden top-level Listen\n</string>
