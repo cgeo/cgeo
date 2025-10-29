@@ -199,6 +199,8 @@
     <string translatable="false" name="pref_lightness_offset_dark">pref_lightness_offset_dark</string>
     <string translatable="false" name="pref_saturation_offset_light">pref_saturation_offset_light</string>
     <string translatable="false" name="pref_lightness_offset_light">pref_lightness_offset_light</string>
+    <string translatable="false" name="pref_colored_progressbar_height_dark">pref_colored_progressbar_height_dark</string>
+    <string translatable="false" name="pref_colored_progressbar_height_light">pref_colored_progressbar_height_light</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for map sources screen -->

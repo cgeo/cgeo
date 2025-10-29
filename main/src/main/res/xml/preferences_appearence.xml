@@ -25,8 +25,18 @@
             android:title="@string/init_colored_theme"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_colored_progressbar_height_dark"
+            android:title="Height of colored progress bar (dark mode)"
+            android:summary="Height of colored progress bar in dark mode (default: 8)"
+            android:defaultValue="@integer/colored_progressbar_default_dark"
+            app:min="0"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_saturation_offset_dark"
-            android:title="Saturation Offset Dark"
+            android:title="Saturation Offset (dark mode)"
             android:summary="Offset for saturation in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
             android:defaultValue="@integer/saturation_offset_dark_default"
             app:min="-100"
@@ -36,7 +46,7 @@
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_lightness_offset_dark"
-            android:title="Lightness Offset Dark"
+            android:title="Lightness Offset (dark mode)"
             android:summary="Offset for lightness in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
             android:defaultValue="@integer/lightness_offset_dark_default"
             app:min="-100"
@@ -45,8 +55,18 @@
             app:logScaling="false"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_colored_progressbar_height_light"
+            android:title="Height of colored progress bar (light mode)"
+            android:summary="Height of colored progress bar (default: 0)"
+            android:defaultValue="@integer/colored_progressbar_default_light"
+            app:min="0"
+            app:max="100"
+            app:stepSize="1"
+            app:logScaling="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_saturation_offset_light"
-            android:title="Saturation Offset Light"
+            android:title="Saturation Offset (light mode)"
             android:summary="Offset for saturation in light mode (0 = no change, 100 = full color, -100 = grayscale)"
             android:defaultValue="@integer/saturation_offset_light_default"
             app:min="-100"
@@ -56,7 +76,7 @@
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_lightness_offset_light"
-            android:title="Lightness Offset Light"
+            android:title="Lightness Offset (light mode)"
             android:summary="Offset for lightness in light mode (0 = no change, 100 = full color, -100 = grayscale)"
             android:defaultValue="@integer/lightness_offset_light_default"
             app:min="-100"

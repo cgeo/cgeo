@@ -1096,6 +1096,13 @@ public class Settings {
         return lightnessOffset / 100.0f;
     }
 
+
+    public static int getColoredSpacerHeight(final boolean isLightTheme) {
+        final int spacerHeight = getInt(isLightTheme ? R.string.pref_colored_progressbar_height_light : R.string.pref_colored_progressbar_height_dark,
+                getKeyInt(isLightTheme ? R.integer.colored_progressbar_default_light : R.integer.colored_progressbar_default_dark));
+        return spacerHeight;
+    }
+
     public static int getLogLineLimit() {
         final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
         if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {

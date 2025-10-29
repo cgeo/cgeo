@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -179,17 +180,36 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
 
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        final int spacerHeight = Settings.getColoredSpacerHeight(isLightSkin);
+        final View spacerView = findViewById(R.id.static_divider);
+        final View actionBarView;
+        if (0 == spacerHeight) {
+            actionBarView = getActionBarView();
+        } else {
+            actionBarView = spacerView;
+        }
+
         // set action bar background color according to cache type
-        final View actionBarView = getActionBarView();
         if (actionBarView == null) {
             return;
         }
+
+        if (spacerView != null) {
+            if (cacheType == null || spacerHeight == 0) {
+                spacerView.setVisibility(View.GONE);
+            } else {
+                spacerView.setVisibility(View.VISIBLE);
+                spacerView.getLayoutParams().height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, spacerHeight, getResources().getDisplayMetrics());
+                spacerView.requestLayout();
+            }
+        }
+
         if (cacheType == null) {
-            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
+            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundTransparent));
             return;
         }
 
-        final boolean isLightSkin = Settings.isLightSkin(this);
         final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor, isLightSkin);
         actionBarView.setBackgroundColor(actionbarColor);
     }
