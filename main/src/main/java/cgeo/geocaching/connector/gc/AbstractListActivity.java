@@ -56,7 +56,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     abstract boolean alwaysShow(GCList list);
 
-    abstract boolean hasPreview();
+    abstract boolean supportMultiPreview();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
