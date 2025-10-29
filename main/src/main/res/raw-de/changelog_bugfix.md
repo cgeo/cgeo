@@ -1,9 +1,9 @@
 ##
-- Fix: Negative values in elevation chart not scaled
-- Fix: Coordinates near 0 broken in GPX exports
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Korrektur: Negative Werte im Höhendiagramm nicht skaliert
+- Korrektur: Koordinaten nahe 0 in GPX-Exporten fehlerhaft
+- Korrektur: Mehrere Abstürze
+- Mögliche Korrektur: Langsamer Programmstart
+- Mögliche Korrektur: Fehlende Geocache-Daten auf Live-Karte
 
 ##
 - Korrektur: Absturz bei der Stichwortsuche
