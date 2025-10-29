@@ -5,8 +5,8 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Bei Aktivierung des Live-Modus bleiben Wegpunkte des aktuell gesetzten Ziels sichtbar
 - Neu: Lange Tippen auf die Navigationslinie öffnet das Höhendiagramm (UnifiedMap)
 - Neu: Zeige generierte Wegpunkte auf der Karte
-- New: Download caches ordered by distance
-- Fix: Doubling of individual route items
+- Neu: Caches nach Entfernung sortiert herunterladen
+- Korrektur: Verdopplung einzelner Routenelemente
 - New: Support for Motorider theme (VTM only)
 - New: Support for transparent background display of offline maps (VTM only)
 
@@ -38,7 +38,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Warnung, wenn zu viele Caches zu einer Lesezeichenliste hinzugefügt werden sollen
 - Neu: Listen beobachten/nicht beobachten
 - Neu: Offline-Übersetzung mit Google Translate oder DeepL-Apps (falls installiert)
-- New: Delete items from search history
-- Change: Remove GCVote (service discontinued)
+- Neu: Elemente aus dem Suchverlauf löschen
+- Änderung: GCVote entfernen (Dienst eingestellt)
 - New: Colored toolbar on cache details pages
 - New: Select multiple bookmark lists / pocket queries to download
