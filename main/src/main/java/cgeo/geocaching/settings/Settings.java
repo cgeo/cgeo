@@ -14,6 +14,7 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -862,6 +863,22 @@ public class Settings {
      */
     public static void setLastSelectedLists(final Set<Integer> lastSelectedLists) {
         putStringList(R.string.pref_last_selected_lists, lastSelectedLists);
+    }
+
+    public static Set<WaypointType> getLastSelectedVisitedWaypointTypes() {
+        final Set<WaypointType> lastSelectedVisitedWaypointTypes = new HashSet<>();
+        for (final String lastSelectedVisitedWaypointTypesString : getStringList(R.string.pref_last_selected_visited_waypointtypes, StringUtils.EMPTY)) {
+            lastSelectedVisitedWaypointTypes.add(WaypointType.findById(lastSelectedVisitedWaypointTypesString));
+        }
+        return lastSelectedVisitedWaypointTypes;
+    }
+
+    public static void setLastSelectedVisitedWaypointTypes(final Set<WaypointType> lastSelectedVisitedWaypointTypes) {
+        final Set<String> lastSelectedVisitedWaypointTypesAsString = new HashSet<>();
+        for (final WaypointType wpType : lastSelectedVisitedWaypointTypes) {
+            lastSelectedVisitedWaypointTypesAsString.add(wpType.id);
+        }
+        putStringList(R.string.pref_last_selected_visited_waypointtypes, lastSelectedVisitedWaypointTypesAsString);
     }
 
     public static void setWebNameCode(final String name, final String code) {
