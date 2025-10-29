@@ -574,7 +574,6 @@ public class Geocache implements INamedGeoCoordinate {
         LogCacheActivity.startForCreateForResult(fromActivity, geocode, requestCode);
     }
 
-
     public boolean hasLogOffline() {
         return BooleanUtils.isTrue(hasLogOffline);
     }
@@ -1047,7 +1046,23 @@ public class Geocache implements INamedGeoCoordinate {
                 result.add(spoilerCandidate);
             }
         }
+        result.addAll(getWaypointImages());
+
         return result;
+    }
+
+    @NonNull
+    public List<Image> getWaypointImages() {
+        final List<Image> images = new ArrayList<>(5);
+
+        for (final Waypoint wpt: waypoints) {
+            final Image img = wpt.buildImage();
+            if (img != null) {
+                images.add(img);
+            }
+        }
+
+        return images;
     }
 
     /**
