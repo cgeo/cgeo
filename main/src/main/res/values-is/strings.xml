@@ -108,8 +108,7 @@
     <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
     <string name="log_problem_other_label">Annað</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
     <string name="err_server_gk">Gat ekki náð sambandi við GeoKrety.org. Vefsíðan gæti legið niðri eða internet tengingin þín virkar ekki.</string>
@@ -286,8 +285,6 @@
     <string name="init_signature_template_owner">Eigandi</string>
     <string name="init_signature_template_name">Nafn</string>
     <string name="init_signature_template_log">Færslutexti</string>
-    <string name="init_ratingwanted">GCvote mat</string>
-    <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
     <string name="init_address">Sýna heimilisfang</string>
     <string name="init_units">Nota breskar mælieiningar</string>
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
@@ -413,11 +410,9 @@
     <string name="cache_menu_move_list">Færa í annan lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (með neti)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (án nets)</string>
-    <string name="cache_menu_vote">Kjósa</string>
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
-    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -448,7 +443,7 @@
     <string name="cache_image_open_browser">Opna í vafra</string>
     <string name="cache_share_field">Deila</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Hleð vegpunktum úr %1$s</string>

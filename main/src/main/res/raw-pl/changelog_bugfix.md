@@ -1,8 +1,15 @@
 ##
+- Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
+- Naprawiono: Współrzędne bliskie 0 uszkadzane przy eksporcie GPX
+- Naprawiono: Kilka awarii
+- Próba naprawienia: Aplikacja nie odpowiada podczas uruchamiania
+- Próba naprawienia: Brak danych skrytek na mapie na żywo
+
+##
 - Naprawiono: Awaria podczas wyszukiwania słów kluczowych
 - Naprawiono: Awaria na mapie
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Naprawiono: Tekst wskazówki nie jest już możliwy do zaznaczenia
+- Naprawiono: Kilka problemów z Wherigo
 
 ##
 - Naprawiono: Szyfrowanie/odszyfrowywanie podpowiedzi wymaga dodatkowego dotknięcia
@@ -29,6 +36,8 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
 
 
 
