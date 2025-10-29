@@ -1,4 +1,11 @@
 ##
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
+
+##
 - Fix: Crash in keyword search
 - Fix: Crash in map
 - Fix: Hint text no longer selectable
@@ -29,6 +36,8 @@
 ##
 - Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
 - Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
+
+
 
 
 

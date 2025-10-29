@@ -354,11 +354,16 @@
     <string name="translator_model_download_success">Översättningsmodell för %s nedladdad</string>
     <string name="translator_model_download_error">Det gick inte att ladda ner översättningsmodell %1$s: %2$s</string>
     <string name="translator_model">Översättningsmodell</string>
+    <string name="translator_tooltip">Översätta offline med Google</string>
     <string name="translator_language_select">Välj källspråk</string>
     <string name="translator_language_target_select">Välj målspråk</string>
+    <string name="translator_language_unsupported">Språk (%s) stöds inte för översättning.\nTryck för att välja källspråk.</string>
+    <string name="translator_language_unknown">Det gick inte att identifiera språk.\nTryck för att välja källspråk.</string>
+    <string name="translator_language_detected">Översätt från \"%s\" med Google.\nTryck för att välja källspråk.</string>
     <string name="translator_target_language">Översätt till %s</string>
     <string name="translator_translation_error">Det gick inte att översätta text: %s</string>
     <string name="translator_translation_initerror">Det gick inte att initiera översättare</string>
+    <string name="translator_translation_success">Översatt från \"%s\".\nTryck på knappen för att återställa originalet</string>
     <string name="crash_activity_title">Hoppsan! c:geo kraschade!</string>
     <string name="crash_activity_report">rapportera problem</string>
     <!-- location service -->

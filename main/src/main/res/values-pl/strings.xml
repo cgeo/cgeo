@@ -499,7 +499,7 @@
     <string name="caches_show_attributes_all">Pokaż przegląd atrybutów dla wszystkich skrytek</string>
     <string name="caches_show_attributes_selected">Pokaż przegląd atrybutów dla wybranych skrytek</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
-    <string name="caches_set_cache_icon_all">Ustaw ikonę slrytki dla wszystkich skrytek</string>
+    <string name="caches_set_cache_icon_all">Ustaw ikonę skrytki dla wszystkich skrytek</string>
     <string name="caches_set_cache_icon_selected">Ustaw ikonę skrytki dla wybranych skrytek</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>

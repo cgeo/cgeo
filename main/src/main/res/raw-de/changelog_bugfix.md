@@ -1,4 +1,11 @@
 ##
+- Korrektur: Negative Werte im Höhendiagramm nicht skaliert
+- Korrektur: Koordinaten nahe 0 in GPX-Exporten fehlerhaft
+- Korrektur: Mehrere Abstürze
+- Mögliche Korrektur: Langsamer Programmstart
+- Mögliche Korrektur: Fehlende Geocache-Daten auf Live-Karte
+
+##
 - Korrektur: Absturz bei der Stichwortsuche
 - Korrektur: Absturz in der Karte
 - Korrektur: Hinweistext nicht mehr auswählbar
@@ -29,6 +36,8 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
+
 
 
 

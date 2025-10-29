@@ -354,10 +354,18 @@
     <string name="translator_model_download_success">Modelo de tradução para %s transferido</string>
     <string name="translator_model_download_error">Falha ao transferir o modelo de tradução %1$s: %2$s</string>
     <string name="translator_model">Modelo de tradução</string>
+    <string name="translator_tooltip">Traduzir offline com o Google</string>
     <string name="translator_language_select">Selecionar idioma de origem</string>
+    <string name="translator_language_target_select">Seleccione idioma de destino</string>
+    <string name="translator_language_unsupported">Idioma (%s) não suportado para tradução.\nToque para selecionar o idioma de origem.</string>
+    <string name="translator_language_unknown">Não é possível identificar o idioma.\nToque para selecionar o idioma de origem.</string>
+    <string name="translator_language_detected">Traduzir de \"%s\" com o Google.\nToque para selecionar o idioma de origem.</string>
     <string name="translator_target_language">Traduzir para \"%s\"</string>
     <string name="translator_translation_error">Falha ao traduzir texto: %s</string>
     <string name="translator_translation_initerror">Falha ao inicializar o tradutor</string>
+    <string name="translator_translation_success">Traduzido de \"%s\".\nToque no botão para restaurar o original</string>
+    <string name="crash_activity_title">Ups! O c:geo encerrou inesperadamente!</string>
+    <string name="crash_activity_report">reportar um problema</string>
     <!-- location service -->
     <string name="loc_last">Última conhecida</string>
     <string name="loc_net">Rede</string>
@@ -403,6 +411,7 @@
         <item quantity="one">Carregar a próxima %1$d cache</item>
         <item quantity="other">Carregar as próximas %1$d caches</item>
     </plurals>
+    <string name="caches_more_caches_all_remaining">Carregar todas as caches restantes</string>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_offline_map">Armazenar caches p/ utilização offline</string>
     <string name="caches_store_selected">Armazenar seleccionada(s)</string>
@@ -466,6 +475,7 @@
     <string name="caches_upload_allcoords">Carregar todas as coord. memorizadas</string>
     <string name="caches_upload_allcoords_dialogtitle">AVISO - A enviar todas as coordenadas</string>
     <string name="caches_upload_allcoords_warning">Isto irá substituir as coordenadas existentes no servidor, para todas as caches (seleccionadas) da sua lista, pelas coordenadas actuais da cache no c:geo! Esta função deve ser utilizada apenas em casos especiais, p. ex. quando importou um ficheiro GPX que contém coordenadas corrigidas como coordenadas da cache. Esta operação não pode ser anulada e só deve usar esta função, se souber o que está a fazer. Em casos normais, poderá preferir usar a função \"Carregar coordenadas modificadas\" no mesmo menu.</string>
+    <string name="caches_share_geocodes">Partilhar lista de códigos GC</string>
     <string name="caches_refresh_selected">Actualizar seleccionada(s)</string>
     <string name="caches_refresh_all">Actualizar todas</string>
     <string name="caches_move_selected">Mover seleccionada(s)</string>
@@ -2310,7 +2320,7 @@
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Geo-código não definido</string>
-    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adiciona-lo agora?</string>
+    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adicioná-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
