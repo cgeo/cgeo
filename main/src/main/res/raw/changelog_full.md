@@ -3,6 +3,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.10.31 Bugfix Release
+
+- Fix: Negative values in elevation chart not scaled
+- Fix: Coordinates near 0 broken in GPX exports
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.09.19 Bugfix Release
 
 - Fix: Hint text no longer selectable
