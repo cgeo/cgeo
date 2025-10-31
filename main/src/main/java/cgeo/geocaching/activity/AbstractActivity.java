@@ -179,7 +179,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         });
 
         // adjust system bars appearance, depending on action bar color and visibility
-        ActionBarUtils.setSystemBarAppearance(this, null);
+        ActionBarUtils.setSystemBarAppearance(this, true);
     }
 
     /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */

@@ -7,7 +7,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -17,12 +16,10 @@ import android.view.Window;
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ActionBarUtils {
@@ -83,17 +80,14 @@ public class ActionBarUtils {
         }
     }
 
-    public static void setSystemBarAppearance(@NonNull final Activity activity, @Nullable final Boolean isActionBarShown) {
+    public static void setSystemBarAppearance(@NonNull final Activity activity, final boolean isActionBarShown) {
         final Window currentWindow = activity.getWindow();
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
 
         // set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
         if (isLightSkin) {
-            final boolean supportsDarkStatusBars = (Build.VERSION.SDK_INT > Build.VERSION_CODES.P); // API 28
-            final boolean isLightStatusBar = (null != isActionBarShown && !supportsDarkStatusBars) || BooleanUtils.isFalse(isActionBarShown);
-
-            windowInsetsController.setAppearanceLightStatusBars(isLightStatusBar);
+            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown);
             windowInsetsController.setAppearanceLightNavigationBars(true);
         } else {
             windowInsetsController.setAppearanceLightStatusBars(false);
