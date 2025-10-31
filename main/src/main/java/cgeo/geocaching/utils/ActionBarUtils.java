@@ -30,14 +30,12 @@ public class ActionBarUtils {
 
     /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, final View contentView, final boolean showSpacer) {
-        setStableLayout(activity, showSpacer);
         activity.setContentView(contentView);
         showActionBarSpacer(activity, showSpacer);
     }
 
     /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, @LayoutRes final int layoutResID, final boolean showSpacer) {
-        setStableLayout(activity, showSpacer);
         activity.setContentView(layoutResID);
         showActionBarSpacer(activity, showSpacer);
     }
@@ -72,12 +70,6 @@ public class ActionBarUtils {
 
     private static void showActionBarSpacer(@NonNull final Activity activity, final boolean showSpacer) {
         activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
-    }
-
-    private static void setStableLayout(@NonNull final AbstractNavigationBarActivity activity, final boolean showSpacer) {
-        if (showSpacer) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }
     }
 
     public static void setSystemBarAppearance(@NonNull final Activity activity, final boolean isActionBarShown) {
