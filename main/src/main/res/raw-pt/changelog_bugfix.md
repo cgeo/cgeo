@@ -1,34 +1,43 @@
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Correcção: Valores negativos no gráfico de altitude não eram dimensionados
+- Correcção: Coordenadas próximas de 0 ficavam inválidas na exportação para GPX
+- Fix: Some crashes
+- Try to fix: ANR on startup
+- Try to fix: Missing geocache data on live map
 
 ##
-- Fix: Encrypting/decrypting a hint needs an extra tap initially
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Correcção: Falha na pesquisa por palavra-chave
+- Correcção: Bloqueio no mapa
+- Correcção: Texto de dica não era seleccionável
+- Correcção: Vários erros de Wherigo
 
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
-- Fix: UnifiedMap VTM: Toggling 3D buildings doesn't work for combined maps
-- Fix: Offline translation: Listing language sometimes detected as --
+- Correcção: Criptografar/Descriptografar uma dica obrigava, na primeira vez, a um toque extra
+- Correcção: Falha Wherigo ao ler jogos gravados antigos
+- Correcção: O registo a partir do c:geo por vezes não era recordado
+- Correcção: Actualização de dados ao vivo em falta, para caches encontradas & arquivadas
+- Correcção: Pontos adicionais no mapa offline por vezes não eram mostrados
 
 ##
-- Fix: Crash in translation module
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Correcção: Dicas de cache não encriptadas (alteração do site)
+- Correcção: As Adventure Lab não eram carregadas, devido a alteração no site (para poder executá-las novamente a partir do c:geo, terá de actualizar as Adventure Lab armazenadas)
+- Correcção: Mapa Unificado VTM: Alternar edifícios 3D não funciona para mapas combinados
+- Correcção: Tradução offline: O idioma da descrição às vezes é detectado como --
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Correcção: Falha no módulo de tradução
+- Correcção: Falha na detecção do início de sessão (devido a mudança no sítio Web)
+- Correcção: Falha ao obter cartucho Wherigo
+- Correcção: "Carregar mais" não respeitava os filtros offline
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Correcção: Inventário de Trackables não era carregado enquanto registava uma cache
+
+##
+- Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
+- Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
 
 
 

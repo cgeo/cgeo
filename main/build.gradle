@@ -396,11 +396,11 @@ dependencies {
     // String mapsforgeSource = 'com.github.cgeo.mapsforge'
     // String mapsforgeVersion = 'fbc75a4' // fix for #12210
 
-    implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
-    implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
-    implementation "$mapsforgeSource:mapsforge-map-android:$mapsforgeVersion"
-    implementation "$mapsforgeSource:mapsforge-map-reader:$mapsforgeVersion"
-    implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion"
+    implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion@jar"
+    implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion@jar"
+    implementation "$mapsforgeSource:mapsforge-map-android:$mapsforgeVersion@jar"
+    implementation "$mapsforgeSource:mapsforge-map-reader:$mapsforgeVersion@jar"
+    implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion@jar"
 
     // -- Mapsforge / VTM --
 
