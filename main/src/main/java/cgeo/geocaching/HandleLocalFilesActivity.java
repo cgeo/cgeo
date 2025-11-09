@@ -4,6 +4,8 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
+import cgeo.geocaching.files.GPXMultiParser;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -19,7 +21,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Collection;
+
 import org.apache.commons.lang3.StringUtils;
+import org.xmlpull.v1.XmlPullParserException;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
 
@@ -40,6 +50,23 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         final FileType fileType = new FileTypeDetector(uri, contentResolver).getFileType();
         switch (fileType) {
             case GPX:
+                // sample code for GPXMultiParser, which parses geocaches, tracks and routes in parallel
+                try (InputStream in = new BufferedInputStream(ContentStorage.get().openForRead(uri))) {
+                    final Collection<Object> result = new GPXMultiParser().doParsing(in, StoredList.STANDARD_LIST_ID); // todo: listId depends on context
+                    Log.e("returned from parsing, size=" + result.size());
+                } catch (IOException | XmlPullParserException e) {
+                    final StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    Log.e("parsing exception: " + e.getMessage() + "\n" + sw);
+                }
+                // depending on result different actions can be done
+                // (either automatically or after asking the user):
+                // - single cache: import to list + open cache
+                // - multiple caches: import to list + open list
+                // - track: add to viewed tracks on map
+                // - route: overwrite individual route (after confirmation)
+                finished = true;
+                break;
             case ZIP:
             case LOC:
                 continueWith(CacheListActivity.class, intent);
