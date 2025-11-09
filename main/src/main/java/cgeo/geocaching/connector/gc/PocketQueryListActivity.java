@@ -37,7 +37,7 @@ public class PocketQueryListActivity extends AbstractListActivity {
     }
 
     @Override
-    boolean hasPreview() {
+    boolean supportMultiPreview() {
         return true;
     }
 }

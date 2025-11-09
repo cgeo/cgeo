@@ -38,8 +38,8 @@ public class BookmarkListActivity extends AbstractListActivity {
     }
 
     @Override
-    boolean hasPreview() {
-        // Currently, we aren't able to parse bookmark lists without download
+    boolean supportMultiPreview() {
+        // Now we are able to parse bookmark lists without download, but only for single list
         return false;
     }
 }

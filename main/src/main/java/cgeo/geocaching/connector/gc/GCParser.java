@@ -683,7 +683,7 @@ public final class GCParser {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
     }
 
-    private static SearchResult searchByMap(final IConnector con, final Parameters params) {
+    private static SearchResult searchByMap(final IConnector con, final Parameters params, final String context) {
         final String page = GCLogin.getInstance().getRequestLogged(GCConstants.URL_LIVE_MAP, params);
 
         if (StringUtils.isBlank(page)) {
@@ -699,11 +699,11 @@ public final class GCParser {
 
         params.add("st", sessionToken);
 
-        final String pqJson = GCLogin.getInstance().getRequestLogged("https://tiles01.geocaching.com/map.pq", params);
+        final String pqJson = GCLogin.getInstance().getRequestLogged("https://tiles01.geocaching.com/map." + context, params);
 
         SearchResult searchResult;
         try {
-            searchResult = parseMap(con, "https://tiles01.geocaching.com/map.pq" + "?" + params, pqJson, 0);
+            searchResult = parseMap(con, "https://tiles01.geocaching.com/map." + context + "?" + params, pqJson, 0);
         } catch (JsonProcessingException e) {
             searchResult = null;
         }
@@ -726,7 +726,58 @@ public final class GCParser {
         }
 
         final Parameters params = new Parameters("pq", shortGuid, "hash", pqHash);
-        return searchByMap(con, params);
+        return searchByMap(con, params, "pq");
+    }
+
+    public static SearchResult searchByBookmarkList(final IConnector con, final String bmGuid, final int alreadyTaken) {
+        final Parameters params = new Parameters("skip", String.valueOf(alreadyTaken), "take", "1000");
+
+        final String url = "https://www.geocaching.com/api/proxy/web/v1/lists/" + bmGuid + "/geocaches";
+        final String page = GCLogin.getInstance().getRequestLogged(url, params);
+
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchByBookmarkList: No data from server");
+            return null;
+        }
+
+        final List<Geocache> caches = new ArrayList<>();
+        try {
+            final JsonNode json = JsonUtils.reader.readTree(page);
+
+            final int totalCount = json.get("total").asInt();
+            final JsonNode jsonData = json.get("data");
+            for (int i = 0; i < jsonData.size(); i++) {
+                final Geocache cache = new Geocache();
+                final JsonNode properties = jsonData.get(i);
+                final JsonNode stateProps = properties.get("state");
+                cache.setName(properties.get("name").asText());
+                cache.setGeocode(properties.get("referenceCode").asText());
+                cache.setOwnerDisplayName(properties.get("owner").asText());
+                cache.setDifficulty(properties.get("difficulty").floatValue());
+                cache.setTerrain(properties.get("terrain").floatValue());
+                cache.setSize(CacheSize.getByGcId(properties.get("containerType").asInt()));
+                cache.setType(CacheType.getByWaypointType(properties.get("geocacheType").asText()));
+
+                cache.setArchived(stateProps.get("isArchived").asBoolean());
+                cache.setDisabled(!stateProps.get("isAvailable").asBoolean());
+                cache.setPremiumMembersOnly(stateProps.get("isPremiumOnly").asBoolean());
+
+                caches.add(cache);
+            }
+
+            final int currentFetched = alreadyTaken + caches.size();
+            final SearchResult searchResult = new SearchResult(caches);
+            searchResult.setLeftToFetch(con, totalCount - currentFetched);
+            searchResult.setToContext(con, b -> {
+                b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, currentFetched);
+                b.putString(GCConnector.SEARCH_CONTEXT_BOOKMARK, bmGuid);
+            });
+
+            return searchResult;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchByBookmarkLists: error parsing html page", e);
+            return null;
+        }
     }
 
     @Nullable
