@@ -1070,6 +1070,8 @@
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Location</string>
     <string name="init_signature_template_geocode">Geocode</string>
+    <string name="init_signature_template_tblocation_geocache">Trackable - Geocache</string>
+    <string name="init_signature_template_tblocation_user">Trackable - User</string>
     <string name="init_summary_bettercacher">Load cache tier and categories from BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
