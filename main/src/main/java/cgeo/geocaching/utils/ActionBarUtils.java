@@ -30,14 +30,12 @@ public class ActionBarUtils {
 
     /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, final View contentView, final boolean showSpacer) {
-        setStableLayout(activity, showSpacer);
         activity.setContentView(contentView);
         showActionBarSpacer(activity, showSpacer);
     }
 
     /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, @LayoutRes final int layoutResID, final boolean showSpacer) {
-        setStableLayout(activity, showSpacer);
         activity.setContentView(layoutResID);
         showActionBarSpacer(activity, showSpacer);
     }
@@ -74,12 +72,6 @@ public class ActionBarUtils {
         activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
     }
 
-    private static void setStableLayout(@NonNull final AbstractNavigationBarActivity activity, final boolean showSpacer) {
-        if (showSpacer) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }
-    }
-
     public static void setSystemBarAppearance(@NonNull final Activity activity, final boolean isActionBarShown) {
         final Window currentWindow = activity.getWindow();
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
@@ -87,13 +79,8 @@ public class ActionBarUtils {
         // set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
         if (isLightSkin) {
-            final int actionBarColor = activity.getResources().getColor(R.color.colorBackgroundActionBar);
-            final boolean isLightStatusBar = !isActionBarShown || !ColorUtils.isBrightnessDark(actionBarColor);
-            windowInsetsController.setAppearanceLightStatusBars(isLightStatusBar);
-
-            final int tabBarColor = activity.getResources().getColor(R.color.colorBackgroundTabBar);
-            final boolean isLightNavigationBar = !ColorUtils.isBrightnessDark(tabBarColor);
-            windowInsetsController.setAppearanceLightNavigationBars(isLightNavigationBar);
+            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown);
+            windowInsetsController.setAppearanceLightNavigationBars(true);
         } else {
             windowInsetsController.setAppearanceLightStatusBars(false);
             windowInsetsController.setAppearanceLightNavigationBars(false);
