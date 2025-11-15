@@ -4,8 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
-import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.ui.ViewUtils;
@@ -218,7 +216,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
             mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
-            mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
+            mapController.animateTo(new LatLng(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
         }
     }
 
