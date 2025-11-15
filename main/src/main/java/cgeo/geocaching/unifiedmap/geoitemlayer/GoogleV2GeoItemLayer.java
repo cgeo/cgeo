@@ -3,12 +3,12 @@ package cgeo.geocaching.unifiedmap.geoitemlayer;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
-import cgeo.geocaching.maps.google.v2.BitmapDescriptorCache;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.unifiedmap.googlemaps.BitmapDescriptorCache;
 import cgeo.geocaching.utils.Log;
 
 import android.content.res.Resources;
