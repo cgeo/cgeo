@@ -6,7 +6,6 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.DownloaderConfirmationBinding;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -484,7 +483,6 @@ public class DownloaderUtils {
                     }
                     ActivityMixin.showShortToast(activity, activity.getResources().getQuantityString(R.plurals.files_deleted, filesDeleted, filesDeleted));
                     // update map lists in case something has changed there
-                    MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
                     TileProviderFactory.buildTileProviderList(true);
                 });
     }

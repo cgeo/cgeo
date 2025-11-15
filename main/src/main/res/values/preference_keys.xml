@@ -208,10 +208,6 @@
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 
-    <!-- category map data: legacy maps -->
-    <string translatable="false" name="pref_useLegacyMap">useLegacyMap</string>
-    <string translatable="false" name="pref_mapsource">mapsource</string>
-
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
     <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
