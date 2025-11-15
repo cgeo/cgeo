@@ -39,21 +39,6 @@
             android:title="@string/settings_userDefinedTileProvider"
             android:summary="@string/settings_userDefinedTileProviderUri"
             app:iconSpaceReserved="false" />
-
-        <!-- legacy map settings starting here -->
-        <CheckBoxPreference
-            android:key="@string/pref_useLegacyMap"
-            android:title="@string/init_title_useLegacyMap"
-            android:summary="@string/init_summary_useLegacyMap"
-            app:iconSpaceReserved="false" />
-        <ListPreference
-            android:title="@string/init_mapsource_select_legacy"
-            android:summary="%s"
-            android:defaultValue="0"
-            android:dialogTitle="@string/init_mapsource_select"
-            android:key="@string/pref_mapsource"
-            android:dependency="@string/pref_useLegacyMap"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_title_offline_maps"

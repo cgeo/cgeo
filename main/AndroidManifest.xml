@@ -448,21 +448,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:exported="true"
-            android:name=".maps.MapActivity"
-            android:label="@string/map_map" >
-        </activity>
-        <activity
-            android:name=".maps.google.v2.GoogleMapActivity"
-            android:label="@string/map_map"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
-            android:name=".maps.mapsforge.v6.NewMap"
-            android:label="@string/map_map"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
             android:name=".unifiedmap.UnifiedMapActivity"
             android:label="@string/map_map"
             android:windowSoftInputMode="adjustNothing">
@@ -956,7 +941,6 @@
                 <data android:scheme="mf-theme" />
             </intent-filter>
         </activity>
-        <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
         <activity android:name=".unifiedmap.mapsforgevtm.MapsforgeThemeSettings" />
         <activity android:name=".unifiedmap.mapsforge.MapsforgeThemeSettings" />
 

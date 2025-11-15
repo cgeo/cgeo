@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google.v2;
+package cgeo.geocaching.unifiedmap.googlemaps;
 
 import cgeo.geocaching.maps.CacheMarker;
 

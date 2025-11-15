@@ -4,7 +4,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.MatcherWrapper;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
@@ -117,27 +116,6 @@ public class RouteItem implements Parcelable {
             }
         }
         // else stay with defaults (=coords)
-    }
-
-    public RouteItem(final GeoitemRef item) {
-        switch (item.getType()) {
-            case CACHE:
-                final Geocache geocache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                if (null != geocache) {
-                    setDetails(buildIdentifier(geocache), geocache.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, geocache.getName());
-                } else {
-                    setDetails(item.getGeocode(), null, RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getGeocode());
-                }
-                break;
-            case WAYPOINT:
-                final Waypoint waypoint = DataStore.loadWaypoint(item.getId());
-                if (null != waypoint) {
-                    setDetails(buildIdentifier(waypoint), waypoint.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), waypoint.getName());
-                }
-                break;
-            default:
-                throw new IllegalStateException("RouteItem: unknown item type");
-        }
     }
 
     public RouteItemType getType() {
