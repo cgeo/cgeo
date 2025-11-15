@@ -21,12 +21,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableComparator;
-import cgeo.geocaching.maps.MapMode;
-import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
-import cgeo.geocaching.maps.interfaces.GeoPointImpl;
-import cgeo.geocaching.maps.interfaces.MapProvider;
-import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Download;
@@ -43,6 +37,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
@@ -50,7 +45,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.TranslationUtils;
-import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -94,6 +88,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class Settings {
 
+    public static final int MAP_LANGUAGE_DEFAULT_ID = 432198765;
     private static final String LEGACY_UNUSED_MARKER = "unused::";
 
     /**
@@ -123,8 +118,6 @@ public class Settings {
 
     private static final int HISTORY_SIZE = 50;
 
-    private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
-
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -133,10 +126,9 @@ public class Settings {
     private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
 
     /**
-     * Cache the mapsource locally. If that is an offline map source, each request would potentially access the
+     * Cache the tileprovider locally. If that is an offline tileprovider, each request would potentially access the
      * underlying map file, leading to delays.
      */
-    private static MapSource mapSource;
     private static AbstractTileProvider tileProvider;
 
     public static final String RENDERTHEMESCALE_DEFAULTKEY = "renderthemescale_default";
@@ -311,7 +303,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
             e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
             e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
-            e.putInt(getKey(R.string.pref_mapsource), prefsV0.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
             e.putBoolean(getKey(R.string.pref_showaddress), prefsV0.getInt(getKey(R.string.pref_showaddress), 1) != 0);
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
@@ -357,11 +348,6 @@ public class Settings {
             int wpThreshold = Math.max(0, getWayPointsThreshold());
             wpThreshold = Math.min(wpThreshold, getKeyInt(R.integer.waypoint_threshold_max));
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), wpThreshold);
-
-            // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
-            final int ms = sharedPrefs.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT);
-            e.remove(getKey(R.string.pref_mapsource));
-            e.putString(getKey(R.string.pref_mapsource), String.valueOf(ms));
 
             // navigation tool ids must be string, because ListPreference uses strings as keys
             final int dnt1 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id);
@@ -869,10 +855,6 @@ public class Settings {
         putString(R.string.pref_webDeviceCode, code);
     }
 
-    public static MapProvider getMapProvider() {
-        return getMapSource().getMapProvider();
-    }
-
     public static int getMapRotation() {
         final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
@@ -1137,15 +1119,15 @@ public class Settings {
      * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
      * live map) and the map of a single cache (which is often zoomed in more deep).
      */
-    public static int getMapZoom(final MapMode mapMode) {
-        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
+    public static int getMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType) {
+        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
             return getCacheZoom();
         }
         return getMapZoom();
     }
 
-    public static void setMapZoom(final MapMode mapMode, final int zoomLevel) {
-        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
+    public static void setMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType, final int zoomLevel) {
+        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
             setCacheZoom(zoomLevel);
         } else {
             setMapZoom(zoomLevel);
@@ -1174,14 +1156,7 @@ public class Settings {
         putInt(R.string.pref_cache_zoom, zoomLevel);
     }
 
-    public static GeoPointImpl getMapCenter() {
-        return getMapProvider().getMapItemFactory()
-                .getGeoPointBase(new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6,
-                        getInt(R.string.pref_lastmaplon, 0) / 1e6));
-    }
-
-    // temporary workaround for UnifiedMap necessary, as it is completely parallel to getMapProvider() currently
-    public static Geopoint getUMMapCenter() {
+    public static Geopoint getMapCenter() {
         return new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6, getInt(R.string.pref_lastmaplon, 0) / 1e6);
     }
 
@@ -1189,33 +1164,12 @@ public class Settings {
         return getBoolean(R.string.pref_zoomincludingwaypoints, false);
     }
 
-    public static void setMapCenter(final GeoPointImpl mapViewCenter) {
+    public static void setMapCenter(final Geopoint mapViewCenter) {
         if (mapViewCenter == null) {
             return;
         }
         putInt(R.string.pref_lastmaplat, mapViewCenter.getLatitudeE6());
         putInt(R.string.pref_lastmaplon, mapViewCenter.getLongitudeE6());
-    }
-
-    @NonNull
-    public static synchronized MapSource getMapSource() {
-        if (mapSource != null) {
-            return mapSource;
-        }
-        final String mapSourceId = getString(R.string.pref_mapsource, null);
-        mapSource = MapProviderFactory.getMapSource(mapSourceId);
-        if (mapSource == null || !mapSource.isAvailable()) {
-            mapSource = MapProviderFactory.getAnyMapSource();
-        }
-        return mapSource;
-    }
-
-    public static synchronized void setMapSource(final MapSource newMapSource) {
-        if (newMapSource != null && newMapSource.isAvailable()) {
-            putString(R.string.pref_mapsource, newMapSource.getId());
-            // cache the value
-            mapSource = newMapSource;
-        }
     }
 
     @NonNull
@@ -1279,11 +1233,6 @@ public class Settings {
     public static int getMapLanguageId() {
         final String language = getMapLanguage();
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
-    }
-
-    /** use legacy maps **/
-    public static boolean useLegacyMaps() {
-        return getBoolean(R.string.pref_useLegacyMap, false);
     }
 
     /** use Mapsforge as map view for UnifiedMap */
@@ -1735,7 +1684,7 @@ public class Settings {
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper}!
      */
     public static String getSelectedMapRenderTheme() {
         return getString(R.string.pref_renderthemefile, "");
@@ -1761,7 +1710,7 @@ public class Settings {
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper}!
      */
     public static void setSelectedMapRenderTheme(final String customRenderThemeFile) {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
@@ -1777,28 +1726,28 @@ public class Settings {
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeSettingsFragment}!
      */
     public static void setSelectedMapRenderThemeStyle(final String prefKey, final String style) {
         putStringDirect(prefKey, style);
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper}!
      */
     public static boolean getSyncMapRenderThemeFolder() {
         return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeSettingsFragment}!
      */
     public static String getMapRenderScalePreferenceKey(final String themeStyleId, final RenderThemeScaleType scaleType) {
         return themeStyleId + "-" + scaleType;
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper}!
      */
     public static int getMapRenderScale(final String themeStyleId, final RenderThemeScaleType scaleType) {
         final int value = getIntDirect(getMapRenderScalePreferenceKey(themeStyleId, scaleType), 100);

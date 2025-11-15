@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
+import static cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFileUtils.isValidMapFile;
 
 import android.app.Activity;
 import android.net.Uri;

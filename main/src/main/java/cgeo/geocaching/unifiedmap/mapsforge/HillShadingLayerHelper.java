@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.mapsforge.v6.layers;
+package cgeo.geocaching.unifiedmap.mapsforge;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;

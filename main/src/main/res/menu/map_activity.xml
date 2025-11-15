@@ -102,7 +102,7 @@
         android:id="@+id/menu_map_rotation"
         android:icon="@drawable/compass_rose_mini"
         android:title="@string/map_rotation"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="ifRoom|withText">
         <menu>
             <group

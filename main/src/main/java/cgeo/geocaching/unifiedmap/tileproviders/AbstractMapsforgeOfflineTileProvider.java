@@ -1,9 +1,9 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.downloader.CompanionFileUtils;
-import cgeo.geocaching.maps.mapsforge.v6.layers.HillShadingLayerHelper;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.unifiedmap.mapsforge.HillShadingLayerHelper;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
 import cgeo.geocaching.utils.Log;
 
