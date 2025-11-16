@@ -42,3 +42,4 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Zmiana: Usunięto GCVote (usługa przestała działać)
 - Nowość: Kolorowany pasek narzędzi na stronach szczegółów skrytki
 - Nowość: Wybierz wiele zakładek / pocket queries do pobrania
+- New: Preview bookmark lists
