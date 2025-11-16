@@ -42,3 +42,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - Change: Remove GCVote (service discontinued)
 - New: Colored toolbar on cache details pages
 - New: Select multiple bookmark lists / pocket queries to download
+- New: Preview bookmark lists
