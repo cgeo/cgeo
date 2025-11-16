@@ -310,9 +310,8 @@ public class Waypoint implements INamedGeoCoordinate {
         return preprojectedCoords;
     }
 
-    @Nullable
-    public Float getGeofence() {
-        return geofence;
+    public int getGeofence() {
+        return geofence == null ? 0 : Math.round(geofence);
     }
 
     public boolean canChangeGeofence() {

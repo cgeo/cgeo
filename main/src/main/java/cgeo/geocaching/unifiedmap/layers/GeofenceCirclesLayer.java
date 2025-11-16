@@ -25,8 +25,8 @@ public class GeofenceCirclesLayer {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
 
                 for (Waypoint waypoint : waypoints) {
-                    final Float geofenceInMeters = waypoint.getGeofence();
-                    if (geofenceInMeters != null && geofenceInMeters > 0f) {
+                    final int geofenceInMeters = waypoint.getGeofence();
+                    if (geofenceInMeters > 0) {
                         geoGroup.addItems(
                                 GeoPrimitive.createCircle(waypoint.getCoords(), geofenceInMeters / 1000f, GeoStyle.builder()
                                         .setStrokeWidth(2.0f)
