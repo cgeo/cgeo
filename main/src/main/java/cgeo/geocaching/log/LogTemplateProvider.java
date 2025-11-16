@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.Formatter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -331,6 +332,48 @@ public final class LogTemplateProvider {
                 final Geocache cache = context.getCache();
                 if (cache != null) {
                     return cache.getGeocode();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TB_LOCATION_CODE", R.string.init_signature_template_tblocation_geocache_code) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
+                        final String cacheGeocode = trackable.getSpottedCacheGeocode();
+                        return StringUtils.isNotBlank(cacheGeocode) ? cacheGeocode : trackable.getSpottedGuid();
+                    }
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TB_LOCATION_CACHE", R.string.init_signature_template_tblocation_geocache_name) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
+                        return HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
+                    }
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TB_LOCATION_USER", R.string.init_signature_template_tblocation_user) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    switch (trackable.getSpottedType()) {
+                        case Trackable.SPOTTED_USER:
+                            return trackable.getSpottedName();
+                        case Trackable.SPOTTED_OWNER:
+                            return trackable.getOwner();
+                        default:
+                            return StringUtils.EMPTY;
+                    }
                 }
                 return StringUtils.EMPTY;
             }
