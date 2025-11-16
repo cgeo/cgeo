@@ -71,27 +71,42 @@ final class ALApi {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static final class ALSearchV4Query {
+    static class ALSearchV4Query {
         @JsonProperty("Origin")
-        private Origin origin;
+        Origin origin;
         @JsonProperty("RadiusInMeters")
-        private Integer radiusInMeters;
+        Integer radiusInMeters;
         @JsonProperty("RecentlyPublishedDays")
-        private Integer recentlyPublishedDays = null;
+        Integer recentlyPublishedDays = null;
         @JsonProperty("Skip")
-        private Integer skip = 0;
+        Integer skip = 0;
         @JsonProperty("Take")
-        private Integer take;
+        Integer take;
         @JsonProperty("CompletionStatuses")
-        private List<Integer> completionStatuses = null;
+        List<Integer> completionStatuses = null;
         @JsonProperty("AdventureTypes")
-        private List<Integer> adventureTypes = null;
+        List<Integer> adventureTypes = null;
         @JsonProperty("MedianCompletionTimes")
-        private List<String> medianCompletionTimes = null;
+        List<String> medianCompletionTimes = null;
         @JsonProperty("CallingUserPublicGuid")
-        private String callingUserPublicGuid;
+        String callingUserPublicGuid;
         @JsonProperty("Themes")
-        private List<Integer> themes = null;
+        List<Integer> themes = null;
+
+        static class Origin {
+            @JsonProperty("Latitude")
+            Double latitude;
+            @JsonProperty("Longitude")
+            Double longitude;
+            @JsonProperty("Altitude")
+            Double altitude;
+
+            Origin(final Double latitude, final Double longitude, final Double altitude) {
+                this.latitude = latitude;
+                this.longitude = longitude;
+                this.altitude = altitude;
+            }
+        }
 
         public void setRadiusInMeters(final Integer radiusInMeters) {
             this.radiusInMeters = radiusInMeters;
@@ -133,20 +148,6 @@ final class ALApi {
             this.themes = themes;
         }
 
-        static class Origin {
-            @JsonProperty("Latitude")
-            private Double latitude;
-            @JsonProperty("Longitude")
-            private Double longitude;
-            @JsonProperty("Altitude")
-            private Double altitude;
-
-            Origin(final Double latitude, final Double longitude, final Double altitude) {
-                this.latitude = latitude;
-                this.longitude = longitude;
-                this.altitude = altitude;
-            }
-        }
     }
 
     // To understand the logic of this function some details about the API is in order.
@@ -158,15 +159,15 @@ final class ALApi {
 
     @Nullable
     @WorkerThread
-    protected static Geocache searchByGeocode(final String geocode) {
+    static Geocache searchByGeocode(final String geocode) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
-            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
+            final Response response = apiRequest(geocode.substring(2), headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
-            if (!Settings.isALCfoundStateManual()) {
+            if (gc != null && !Settings.isALCfoundStateManual()) {
                 final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null, 10);
                 for (Geocache matchedLabCache : matchedLabCaches) {
                     if (matchedLabCache.getGeocode().equals(geocode)) {
@@ -247,8 +248,8 @@ final class ALApi {
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, @Nullable final Parameters params, final Parameters headers) {
-        return apiRequest(uri, params, headers, false);
+    private static Single<Response> apiRequest(final String uri, final Parameters headers) {
+        return apiRequest(uri, null, headers, false);
     }
 
     @NonNull
@@ -383,13 +384,9 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode));
+            parseWaypoints(cache, (ArrayNode) response.path("GeocacheSummaries"));
             final boolean isLinear = response.get("IsLinear").asBoolean();
-            if (isLinear) {
-                cache.setAlcMode(1);
-            } else {
-                cache.setAlcMode(0);
-            }
+            cache.setAlcMode(isLinear ? 1 : 0);
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
             final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
@@ -403,43 +400,42 @@ final class ALApi {
         }
     }
 
-    @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
-        List<Waypoint> result = null;
+    private static void parseWaypoints(final Geocache cache, final ArrayNode wptsJson) {
         final Geopoint pointZero = new Geopoint(0, 0);
+
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint("S" + stageCounter + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final String wptName = "S" + stageCounter + ": " + wptResponse.get(TITLE).asText();
+
+                final Waypoint wpt = new Waypoint(wptName, WaypointType.PUZZLE, false);
+
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                wpt.setGeocode(geocode);
+                wpt.setGeocode(cache.getGeocode());
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+                wpt.setImage(ilink);
+
+                final StringBuilder note = new StringBuilder(desc);
+
                 if (Settings.isALCAdvanced()) {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
 
-                try {
-                    final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
-                    if (jn instanceof ArrayNode) { // implicitly covers null case as well
-                        final ArrayNode multiChoiceOptions = (ArrayNode) jn;
-                        if (!multiChoiceOptions.isEmpty()) {
-                            note.append("<ul>");
-                            for (final JsonNode mc : multiChoiceOptions) {
-                                note.append("<li>").append(mc.get("Text").asText()).append("</li>");
-                            }
-                            note.append("</ul>");
-                        }
+                final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
+                if (jn instanceof ArrayNode && ! jn.isEmpty()) {
+                    note.append("<ul>");
+                    for (final JsonNode mc : jn) {
+                        note.append("<li>").append(mc.get("Text").asText()).append("</li>");
                     }
-                } catch (Exception ignore) {
-                    // ignore exception
+                    note.append("</ul>");
                 }
+
                 wpt.setNote(note.toString());
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
@@ -448,16 +444,16 @@ final class ALApi {
                 } else {
                     wpt.setOriginalCoordsEmpty(true);
                 }
-                if (result == null) {
-                    result = new ArrayList<>();
-                }
 
-                result.add(wpt);
-            } catch (final NullPointerException e) {
+                cache.addOrChangeWaypoint(wpt, true);
+            } catch (final Exception e) {
                 Log.e("_AL ALApi.parseWaypoints", e);
+                // one waypoint failing should not impact the others
             }
         }
-        return result;
+
+        // cache spoilers
+        cache.setSpoilers(cache.getWaypointImages());
     }
 
     @Nullable
