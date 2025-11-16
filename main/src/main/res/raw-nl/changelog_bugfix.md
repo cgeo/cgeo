@@ -1,4 +1,7 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+##
 - Oplossing: Negatieve waarden in de hoogte grafiek niet geschaald
 - Fix: Coördinaten in de buurt van 0 gebroken in GPX export
 - Oplossing: Enkele crashes
@@ -36,6 +39,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
