@@ -1,4 +1,7 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+##
 - Oprava: Negativní hodnoty v nadmořské výškové mapě nejsou měřítkem
 - Oprava: Souřadnice blízko 0 nefungovaly při exportu GPX
 - Oprava: Několik pádů
@@ -36,6 +39,7 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
