@@ -1,4 +1,7 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
 - Naprawiono: Współrzędne bliskie 0 uszkadzane przy eksporcie GPX
 - Naprawiono: Kilka awarii
@@ -36,6 +39,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
