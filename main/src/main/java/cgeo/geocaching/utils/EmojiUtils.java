@@ -7,7 +7,6 @@ import cgeo.geocaching.databinding.EmojiselectorBinding;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.extension.EmojiLRU;
-import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
@@ -20,7 +19,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -183,25 +181,23 @@ public class EmojiUtils {
         prefillCustomCircles();
 
         // check EmojiSet for characters not supported on this device
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            synchronized (lockGuard) {
-                if (!fontIsChecked) {
-                    final Paint checker = new TextPaint();
-                    checker.setTypeface(Typeface.DEFAULT);
-                    for (EmojiSet symbol : symbols) {
-                        int iPosNeu = 0;
-                        for (int i = 0; i < symbol.symbols.length; i++) {
-                            if (i != iPosNeu) {
-                                symbol.symbols[iPosNeu] = symbol.symbols[i];
-                            }
-                            if ((symbol.symbols[i] >= CUSTOM_ICONS_START && symbol.symbols[i] <= CUSTOM_ICONS_END) || checker.hasGlyph(new String(Character.toChars(symbol.symbols[i])))) {
-                                iPosNeu++;
-                            }
+        synchronized (lockGuard) {
+            if (!fontIsChecked) {
+                final Paint checker = new TextPaint();
+                checker.setTypeface(Typeface.DEFAULT);
+                for (EmojiSet symbol : symbols) {
+                    int iPosNeu = 0;
+                    for (int i = 0; i < symbol.symbols.length; i++) {
+                        if (i != iPosNeu) {
+                            symbol.symbols[iPosNeu] = symbol.symbols[i];
                         }
-                        symbol.remaining = iPosNeu;
+                        if ((symbol.symbols[i] >= CUSTOM_ICONS_START && symbol.symbols[i] <= CUSTOM_ICONS_END) || checker.hasGlyph(new String(Character.toChars(symbol.symbols[i])))) {
+                            iPosNeu++;
+                        }
                     }
-                    fontIsChecked = true;
+                    symbol.remaining = iPosNeu;
                 }
+                fontIsChecked = true;
             }
         }
 
@@ -315,10 +311,6 @@ public class EmojiUtils {
                 groupsAdapter.setHighlighting(glm.findFirstVisibleItemPosition());
             }
         });
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Dialogs.basicOneTimeMessage(context, OneTimeDialogs.DialogType.MISSING_UNICODE_CHARACTERS);
-        }
     }
 
     private static void onItemSelected(final AlertDialog dialog, final Action1<Integer> callback, final int selectedValue) {
