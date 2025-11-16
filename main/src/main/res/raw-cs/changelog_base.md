@@ -42,3 +42,4 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Změna: Odebráno GCVote (služba pozastavena)
 - Novinka: Barevný panel nástrojů na stránkách s podrobnostmi o kešce
 - Novinka: Vyberte více seznamů záložek / pocket queries ke stažení
+- New: Preview bookmark lists
