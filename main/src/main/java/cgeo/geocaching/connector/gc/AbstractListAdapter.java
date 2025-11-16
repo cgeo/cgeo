@@ -155,8 +155,8 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
         final GCList pocketQuery = activity.getQueries().get(position);
         holder.binding.download.setVisibility(pocketQuery.isDownloadable() && !selectMode ? View.VISIBLE : View.GONE);
 
-        // Currently, we aren't able to parse bookmark lists without download
-        holder.binding.cachelist.setVisibility(pocketQuery.isBookmarkList() || StringUtils.isBlank(pocketQuery.getPqHash()) || selectMode ? View.GONE : View.VISIBLE);
+        // Now we are able to parse bookmark lists without download
+        holder.binding.cachelist.setVisibility((!pocketQuery.isBookmarkList() && StringUtils.isBlank(pocketQuery.getPqHash())) || selectMode ? View.GONE : View.VISIBLE);
         holder.binding.label.setText(pocketQuery.getName());
         final String info = Formatter.formatPocketQueryInfo(pocketQuery);
         holder.binding.info.setVisibility(StringUtils.isNotBlank(info) ? View.VISIBLE : View.GONE);
@@ -202,9 +202,8 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
 
         activity.findViewById(R.id.switchAB).setVisibility(!selectMode ? View.VISIBLE : View.GONE);
 
-        // Currently, we aren't able to parse bookmark lists without download
         final View buttonPreviewSelected = activity.findViewById(R.id.cachelist_selected);
-        buttonPreviewSelected.setVisibility(selectMode && activity.hasPreview() ? View.VISIBLE : View.GONE);
+        buttonPreviewSelected.setVisibility(selectMode && activity.supportMultiPreview() ? View.VISIBLE : View.GONE);
         buttonPreviewSelected.setEnabled(!selectedLists.isEmpty());
 
         // enable download button only, all selected lists are downloadable

@@ -72,6 +72,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static final String SEARCH_CONTEXT_FILTER = "sc_gc_filter";
     public static final String SEARCH_CONTEXT_SORT = "sc_gc_sort";
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
+    public static final String SEARCH_CONTEXT_BOOKMARK = "sc_gc_bm_id";
 
     @NonNull
     private static final String GC_BASE_URL = "https://www.geocaching.com/";
@@ -242,6 +243,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByNextPage(final Bundle context) {
+        // Bookmark is limited to a specific number of caches, so we can page through it without a filter
+        final String bmGuid = context.getString(SEARCH_CONTEXT_BOOKMARK);
+        if (StringUtils.isNotEmpty(bmGuid)) {
+            final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
+            return GCParser.searchByBookmarkList(this, bmGuid, alreadyTook);
+        }
+
         final String filterConfig = context.getString(SEARCH_CONTEXT_FILTER);
         GeocacheFilter filter = null;
         if (filterConfig != null) {
@@ -258,7 +266,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
 
         final GeocacheSort sort = context.getParcelable(SEARCH_CONTEXT_SORT);
-
         return GCMap.searchByNextPage(this, context, filter, sort == null ? new GeocacheSort() : sort);
     }
 
