@@ -130,8 +130,10 @@ public class LogTemplateProviderTest {
         trackable.setSpottedType(Trackable.SPOTTED_CACHE);
         trackable.setSpottedCacheGeocode("GC12345");
         trackable.setSpottedName("My cache");
-        final String log = LogTemplateProvider.applyTemplates("[TB_LOCATION_CACHE]", context);
-        assertThat(log).isEqualTo("GC12345 (My cache)");
+        final String logCache = LogTemplateProvider.applyTemplates("[TB_LOCATION_CODE]", context);
+        final String logName = LogTemplateProvider.applyTemplates("[TB_LOCATION_CACHE]", context);
+        assertThat(logCache).isEqualTo("GC12345");
+        assertThat(logName).isEqualTo("My cache");
     }
 
     @Test
