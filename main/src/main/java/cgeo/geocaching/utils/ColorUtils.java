@@ -86,9 +86,4 @@ public class ColorUtils {
         return androidx.core.graphics.ColorUtils.HSLToColor(hslValues);
 
     }
-
-    public static boolean isBrightnessDark(@ColorInt final int colorInt) {
-        final float[] hsl = getHslValues(colorInt);
-        return hsl[2] < 0.5f;
-    }
 }
