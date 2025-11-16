@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Parcelable;
 import android.view.View;
 
@@ -233,9 +232,7 @@ public class ShareUtils {
                 }
 
                 chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, additionalTargetedShareIntents.toArray(new Parcelable[]{}));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[]{new ComponentName(context, CacheDetailActivity.class)});
-                }
+                chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[]{new ComponentName(context, CacheDetailActivity.class)});
 
                 context.startActivity(chooser);
             } else {
@@ -258,7 +255,7 @@ public class ShareUtils {
                 .setShareState(CustomTabsIntent.SHARE_STATE_ON);
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
 
         final CustomTabsIntent customTabsIntent = builder.build();
