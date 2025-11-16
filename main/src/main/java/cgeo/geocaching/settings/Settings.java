@@ -276,7 +276,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 10;
+        return 11;
     }
 
     private static void migrateSettings() {
@@ -492,6 +492,45 @@ public class Settings {
             e.apply();
             setActualVersion(10);
         }
+
+        if (currentVersion < 11) {
+            final String tileprovider = sharedPrefs.getString(getKey(R.string.pref_mapsource), "")
+                // Google Maps map sources
+                .replace("cgeo.geocaching.maps.google.v2.GoogleMapProvider$", "cgeo.geocaching.unifiedmap.tileproviders.")
+                // cgeo.geocaching.maps.google.v2.GoogleMapProvider$GoogleMapSource         => cgeo.geocaching.unifiedmap.tileproviders.GoogleMapSource
+                // cgeo.geocaching.maps.google.v2.GoogleMapProvider$GoogleSatelliteSource   => cgeo.geocaching.unifiedmap.tileproviders.GoogleSatelliteSource
+                // cgeo.geocaching.maps.google.v2.GoogleMapProvider$GoogleTerrainSource     => cgeo.geocaching.unifiedmap.tileproviders.GoogleTerrainSource
+
+                // OSM online map sources
+                .replace("cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$", "cgeo.geocaching.unifiedmap.tileproviders.")
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$OsmMapSource         => cgeo.geocaching.unifiedmap.tileproviders.OsmOrgSource:null
+                .replace(".OsmMapSource", ".OsmOrgSource:null")
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$OsmdeMapSource       => cgeo.geocaching.unifiedmap.tileproviders.OsmDeSource:null
+                .replace(".OsmdeMapSource", ".OsmDeSource:null")
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$CyclosmMapSource     => cgeo.geocaching.unifiedmap.tileproviders.CyclosmSource:null
+                .replace(".CyclosmMapSource", ".CyclosmSource:null")
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$OpenTopoMapSource    => cgeo.geocaching.unifiedmap.tileproviders.OpenTopoMapSource:null (!!!)
+                .replace(".OpenTopoMapSource", ".OpenTopoMapSource:null")
+
+                // OSM offline map sources
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$OfflineMapSource:primary:cgeo/maps/bremen.map => cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOfflineTileProvider:primary:cgeo/maps/bremen.map
+                .replace(".OfflineMapSource:", ".AbstractMapsforgeOfflineTileProvider:")
+                // cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider$OfflineMultiMapSource => cgeo.geocaching.unifiedmap.tileproviders.MapsforgeMultiOfflineTileProvider:null
+                .replace(".OfflineMultiMapSource", ".MapsforgeMultiOfflineTileProvider:null")
+            ;
+
+            if (useLegacyMaps()) {
+                final Editor e = sharedPrefs.edit();
+                e.putString(getKey(R.string.pref_tileprovider), StringUtils.isBlank(tileprovider) ? "cgeo.geocaching.unifiedmap.tileproviders.GoogleMapSource" : tileprovider);
+                e.putBoolean(getKey(R.string.pref_useLegacyMap), false);
+                e.putString(getKey(R.string.pref_unifiedMapVariants), String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE));
+                e.apply();
+                Log.e("Migrated map mode to UnifiedMap: " + tileprovider);
+            }
+
+            setActualVersion(11);
+        }
+
     }
 
     private static String getKey(final int prefKeyId) {
