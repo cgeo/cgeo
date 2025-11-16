@@ -42,3 +42,4 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Ändring: Ta bort GCVote (tjänsten upphör)
 - Nyhet: Färgat verktygsfält på cache-detaljsidor
 - Nyhet: Välj flera bokmärkeslistor / fickfrågor att ladda ner
+- New: Preview bookmark lists
