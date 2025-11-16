@@ -1,4 +1,7 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+##
 - Correcção: Valores negativos no gráfico de altitude não eram dimensionados
 - Correcção: Coordenadas próximas de 0 ficavam inválidas na exportação para GPX
 - Fix: Some crashes
@@ -36,6 +39,7 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
 
 
 
