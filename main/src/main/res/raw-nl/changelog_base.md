@@ -42,3 +42,4 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Wijziging: Verwijder GCVote (service beëindigd)
 - Nieuw: Gekleurde werkbalk op de pagina met cache detailgegevens
 - Nieuw: Selecteer meerdere bladwijzerlijsten / pocket queries om te downloaden
+- New: Preview bookmark lists
