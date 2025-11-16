@@ -213,7 +213,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
 
         final int spacerHeight = Settings.getColoredSpacerHeight(isLightSkin);
         if (0 == spacerHeight) {
-            if (isLightSkin) {
+            if (Settings.useColoredStatusbar(isLightSkin)) {
                 swipView.setBackgroundColor(actionbarColor);
             }
             toolbar.setBackgroundColor(actionbarColor);

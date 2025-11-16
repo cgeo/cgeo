@@ -1084,6 +1084,11 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static boolean useColoredStatusbar(final boolean isLightTheme) {
+        return getBoolean(isLightTheme ? R.string.pref_statusbar_light : R.string.pref_statusbar_dark,
+                isLightTheme);
+    }
+
     public static float getSaturationOffset(final boolean isLightTheme) {
         final int saturationOffset = getInt(isLightTheme ? R.string.pref_saturation_offset_light : R.string.pref_saturation_offset_dark,
                 getKeyInt(isLightTheme ? R.integer.saturation_offset_light_default : R.integer.saturation_offset_dark_default));

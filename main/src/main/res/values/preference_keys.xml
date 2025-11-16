@@ -195,8 +195,10 @@
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
     <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>
     <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
+    <string translatable="false" name="pref_statusbar_dark">pref_statusbar_dark</string>
     <string translatable="false" name="pref_saturation_offset_dark">pref_saturation_offset_dark</string>
     <string translatable="false" name="pref_lightness_offset_dark">pref_lightness_offset_dark</string>
+    <string translatable="false" name="pref_statusbar_light">pref_statusbar_light</string>
     <string translatable="false" name="pref_saturation_offset_light">pref_saturation_offset_light</string>
     <string translatable="false" name="pref_lightness_offset_light">pref_lightness_offset_light</string>
     <string translatable="false" name="pref_colored_progressbar_height_dark">pref_colored_progressbar_height_dark</string>

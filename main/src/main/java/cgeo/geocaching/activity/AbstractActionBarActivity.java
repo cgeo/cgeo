@@ -26,11 +26,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
-    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK = 0; //dp
-    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT = 50; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR = 0; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR = 50; //dp
 
-    private int actionBarSystemBarOverlapHeightDark = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK);
-    private int actionBarSystemBarOverlapHeightLight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT);
+    private int actionBarSystemBarOverlapHeightNoColor = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR);
+    private int actionBarSystemBarOverlapHeightColor = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR);
 
     private boolean fixedActionBar = true;
 
@@ -118,8 +118,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
 
-        this.actionBarSystemBarOverlapHeightDark = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_DARK));
-        this.actionBarSystemBarOverlapHeightLight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_LIGHT));
+        this.actionBarSystemBarOverlapHeightNoColor = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR));
+        this.actionBarSystemBarOverlapHeightColor = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR));
         applyTranslation();
         if (fixedActionBar) {
             return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
@@ -137,7 +137,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     private int getActionBarSystemBarOverlapHeight() {
-        return Settings.isLightSkin(this) ? this.actionBarSystemBarOverlapHeightLight : this.actionBarSystemBarOverlapHeightDark;
+        return Settings.useColoredStatusbar(Settings.isLightSkin(this)) ? this.actionBarSystemBarOverlapHeightColor : this.actionBarSystemBarOverlapHeightNoColor;
     }
 
 

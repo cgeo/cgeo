@@ -79,7 +79,7 @@ public class ActionBarUtils {
         // set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
         if (isLightSkin) {
-            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown);
+            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown || !Settings.useColoredStatusbar(true));
             windowInsetsController.setAppearanceLightNavigationBars(true);
         } else {
             windowInsetsController.setAppearanceLightStatusBars(false);

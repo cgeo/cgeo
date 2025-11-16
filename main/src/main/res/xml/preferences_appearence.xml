@@ -24,10 +24,16 @@
             android:summary="@string/init_summary_colored_theme"
             android:title="@string/init_colored_theme"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_statusbar_dark"
+            android:title="Color status bar (dark mode)"
+            android:summary="Color the status bar in dark mode"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_colored_progressbar_height_dark"
             android:title="Height of colored progress bar (dark mode)"
-            android:summary="Height of colored progress bar in dark mode (default: 8)"
+            android:summary="Height of colored progress bar in dark mode (default: 8)\n(0: complete actionbar)"
             android:defaultValue="@integer/colored_progressbar_default_dark"
             app:min="0"
             app:max="100"
@@ -37,7 +43,7 @@
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_saturation_offset_dark"
             android:title="Saturation Offset (dark mode)"
-            android:summary="Offset for saturation in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:summary="Offset for saturation in dark mode (default: -2)\n(0: no change, 100: full color, -100: grayscale)"
             android:defaultValue="@integer/saturation_offset_dark_default"
             app:min="-100"
             app:max="100"
@@ -47,17 +53,23 @@
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_lightness_offset_dark"
             android:title="Lightness Offset (dark mode)"
-            android:summary="Offset for lightness in dark mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:summary="Offset for lightness in dark mode (default: -5)\n(0: no change, 100: full color, -100: grayscale)"
             android:defaultValue="@integer/lightness_offset_dark_default"
             app:min="-100"
             app:max="100"
             app:stepSize="1"
             app:logScaling="false"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_statusbar_light"
+            android:title="Color status bar (light mode)"
+            android:summary="Color the status bar in light mode"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_colored_progressbar_height_light"
             android:title="Height of colored progress bar (light mode)"
-            android:summary="Height of colored progress bar (default: 0)"
+            android:summary="Height of colored progress bar (default: 0)\n(0: complete actionbar)"
             android:defaultValue="@integer/colored_progressbar_default_light"
             app:min="0"
             app:max="100"
@@ -67,7 +79,7 @@
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_saturation_offset_light"
             android:title="Saturation Offset (light mode)"
-            android:summary="Offset for saturation in light mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:summary="Offset for saturation in light mode (default: -2)\n(0: no change, 100: full color, -100: grayscale)"
             android:defaultValue="@integer/saturation_offset_light_default"
             app:min="-100"
             app:max="100"
@@ -77,7 +89,7 @@
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_lightness_offset_light"
             android:title="Lightness Offset (light mode)"
-            android:summary="Offset for lightness in light mode (0 = no change, 100 = full color, -100 = grayscale)"
+            android:summary="Offset for lightness in light mode (default: -12)\n(0: no change, 100: full color, -100: grayscale)"
             android:defaultValue="@integer/lightness_offset_light_default"
             app:min="-100"
             app:max="100"
