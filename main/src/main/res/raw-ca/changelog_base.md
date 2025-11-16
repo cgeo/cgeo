@@ -42,3 +42,4 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Canvi: Elimina GCVote (servei descontinuat)
 - Nou: Barra d'eines de color a les pàgines de detalls de catxé
 - Nou: seleccioneu diverses llistes de marcadors / pocket queries per descarregar
+- New: Preview bookmark lists
