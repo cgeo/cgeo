@@ -10,7 +10,6 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -70,17 +69,12 @@ public class DebugUtils {
     }
 
     public static void createLogcat(@NonNull final Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            // no differentiation possible on older systems, so no need to ask
-            createLogcatHelper(activity, true, false, null);
-        } else {
-            SimpleDialog.of(activity)
-                    .setTitle(R.string.about_system_write_logcat)
-                    .setMessage(R.string.about_system_write_logcat_type)
-                    .setButtons(R.string.about_system_write_logcat_type_standard, R.string.cancel, R.string.about_system_write_logcat_type_extended)
-                    .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
-                    .confirm(() -> createLogcatHelper(activity, false, false, null));
-        }
+        SimpleDialog.of(activity)
+                .setTitle(R.string.about_system_write_logcat)
+                .setMessage(R.string.about_system_write_logcat_type)
+                .setButtons(R.string.about_system_write_logcat_type_standard, R.string.cancel, R.string.about_system_write_logcat_type_extended)
+                .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
+                .confirm(() -> createLogcatHelper(activity, false, false, null));
     }
 
 
@@ -92,14 +86,10 @@ public class DebugUtils {
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final ProcessBuilder builder = new ProcessBuilder();
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                    builder.command("logcat", "-d", "-f", file.getAbsolutePath());
+                if (fullInfo) {
+                    builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
                 } else {
-                    if (fullInfo) {
-                        builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
-                    } else {
-                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
-                    }
+                    builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
                 }
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
