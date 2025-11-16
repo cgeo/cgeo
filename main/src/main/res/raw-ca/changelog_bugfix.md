@@ -1,4 +1,7 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+##
 - Correcció: Els valors negatius del gràfic d'elevació no s'escalen
 - Correcció: Coordenades properes a 0 trencades a les exportacions GPX
 - Correcció: Alguns errors
@@ -36,6 +39,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
