@@ -42,4 +42,4 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Änderung: GCVote entfernen (Dienst eingestellt)
 - New: Colored toolbar on cache details pages
 - New: Select multiple bookmark lists / pocket queries to download
-- New: Preview bookmark lists
+- Neu: Vorschau für Lesezeichen-Listen
