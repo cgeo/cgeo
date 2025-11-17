@@ -1,5 +1,5 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
 
 ##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
