@@ -1,4 +1,8 @@
 ##
+- Änderung: Die neue vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (als Teil unserer Planung für diese neue Karte). Momentan kannst unter "Einstellungen" - "Kartenquellen" noch manuell zurückschalten. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
+
+##
 - Korrektur: Negative Werte im Höhendiagramm nicht skaliert
 - Korrektur: Koordinaten nahe 0 in GPX-Exporten fehlerhaft
 - Korrektur: Mehrere Abstürze
@@ -36,6 +40,8 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
+
 
 
 
