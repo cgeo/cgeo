@@ -1,5 +1,6 @@
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
 
 ##
 - Fix: Negative values in elevation chart not scaled
@@ -39,6 +40,7 @@
 ##
 - Correctif : La migration des caches définies par l'utilisateur au démarrage de c:geo échoue => retiré pour le moment
 - Correctif : Les tâches Wherigo terminées ne sont pas marquées comme terminées ou échouées
+
 
 
 
