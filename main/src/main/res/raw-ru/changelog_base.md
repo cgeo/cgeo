@@ -1,45 +1,45 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+В соответствии с политикой Play Store мы обновили уровень API для Android в этой версии c: geo + мы изменили некоторые процедуры компоновки экрана. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Карта
-- New: Route optimization caches calculated data
-- New: Enabling live mode keeps waypoints of currently set target visible
-- New: Long-tap on navigation line opens elevation chart (UnifiedMap)
-- New: Show generated waypoints on map
-- New: Download caches ordered by distance
-- Fix: Doubling of individual route items
-- New: Support for Motorider theme (VTM only)
-- New: Support for transparent background display of offline maps (VTM only)
+- Новое: При оптимизации маршрута кэшируются данные расчетов
+- Новое: При включении режима реального времени путевые точки текущей установленной цели остаются видимыми
+- Новое: Длительное нажатие на навигационную линию открывает карту высот (ЕдинаяКарта)
+- Новое: Показать сгенерированные точки на карте
+- Новое: Загрузка тайников упорядочена по расстоянию
+- Исправлено: Дублирование отдельных пунктов маршрута
+- Новое: Поддержка темы Motorider (только VTM)
+- Новое: Поддержка прозрачного фонового отображения офлайн-карт (только для VTM)
 
 ### Детали тайника
-- New: Detect additional characters in formulas: –, ⋅, ×
-- New: Preserve timestamp of own logs on refreshing a cache
-- New: Optional compass mini view (see settings => cache details => Show direction in cache detail view)
-- New: Show owners' logs on "friends/own" tab
-- Change: "Friends/own" tab shows log counts for that tab instead of global counters
-- Change: Improved header in variable and waypoint tabs
-- Fix: Two "delete log" items shown
-- Fix: c:geo crashing in cache details when rotating screen
-- Change: More compact layout for "adding new waypoint"
-- New: Option to load images for geocaching.com caches in "unchanged" size
-- New: Variables view can be filtered
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
+- Новое: Сохранение временной метки для собственных записей при обновлении тайника
+- Новое: Дополнительный мини-вид компаса (смотрите Настройки => Детали тайника => Показать направление в описании тайника)
+- Новое: Показывать записи владельцев на вкладке "Свои записи и записи друзей"
+- Изменение: На вкладке "Свои записи и записи друзей" отображалось количество записей для этой вкладки вместо глобальных счетчиков
+- Изменение: Улучшен заголовок на вкладках переменных и путевых точек
+- Исправлено: Отображалось два элемента «удалить запись»
+- Исправлено: Сбой c:geo во время просмотра деталей тайника при повороте экрана
+- Изменение: Более компактное расположение для "добавления новой путевой точки"
+- Новое: Возможность загружать изображения для тайников geocaching.com в "неизмененном" размере
+- Новое: Просмотр переменных может быть отфильтрован
+- Новое: Визуализация переполнения вычисленных координат в списке путевых точек
+- Новое: Пункт меню в списке путевых точек, позволяющий отмечать определенные типы путевых точек как посещенные
 
 ### Wherigo player
-- New: Offline translation for Wherigos
-- New: Improved button handling
+- Новое: Оффлайн перевод для Wherigo
+- Новое: Улучшено управление кнопками
 
 ### Общее
-- New: Share option after logging a cache
-- Change: Do not show "needs maintenance" or "needs archived" options for own caches
-- Fix: Restoring a backup may duplicate track files in internal storage and subsequent backups
-- Change: Removed references to Twitter
-- New: Delete orphaned trackfiles on clean up and restore backup
-- New: Warning on trying to add too many caches to a bookmark list
-- New: Watch/unwatch list functions
-- New: Offer offline translation with Google Translate or DeepL apps (if installed)
-- New: Delete items from search history
-- Change: Remove GCVote (service discontinued)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
-- New: Preview bookmark lists
+- Новое: возможность поделиться информацией после записи о посещении тайника
+- Изменение: Не отображать параметры "нуждается в востановлении" или "нуждается в архивировании" для собственных тайников
+- Исправление: Восстановление резервной копии могло приводить к дублированию файлов трека во внутреннем хранилище и последующих резервных копиях
+- Изменение: Удалены ссылки на Twitter
+- Новое: Удаление треков (при очистке и при восстановлении резервной копии), которые не отслеживаются программой, но остаются в файловой системе и занимают место
+- New: Added mappings for some missing OC cache types
+- Новое: Функции добавления/исключения тайников в списке наблюдения
+- Новое: Предложение автономного перевода с помощью приложений Google Переводчик или DeepL (если они установлены)
+- Новое: Удаление элементов из истории поиска
+- Изменение: Удален GCVote (сервис закрыт)
+- Новое: Раскрашенная панель инструментов на страницах с деталями тайников
+- Новое: Выбор нескольких списков закладок/запросов для загрузки
+- Новое: Предварительный просмотр списков закладок
