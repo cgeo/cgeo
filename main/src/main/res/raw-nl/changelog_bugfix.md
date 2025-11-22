@@ -1,5 +1,6 @@
 ##
 - Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
+- Oplossing: Favorieten checkbox wordt gereset bij het opnieuw openen van offline logboekscherm
 
 ##
 - Oplossing: Negatieve waarden in de hoogte grafiek niet geschaald
@@ -39,6 +40,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
