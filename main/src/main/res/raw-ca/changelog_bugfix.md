@@ -1,5 +1,6 @@
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
+- Fix: Favorite checkbox gets reset on reentering offline log screen
 
 ##
 - Correcció: Els valors negatius del gràfic d'elevació no s'escalen
@@ -39,6 +40,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
