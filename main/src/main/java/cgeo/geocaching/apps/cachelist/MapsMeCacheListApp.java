@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -64,7 +63,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
     private static PendingIntent getPendingIntent(final Context context) {
         final Intent intent = new Intent(context, CacheDetailActivity.class);
-        return PendingIntent.getActivity(context, 0, intent, ProcessUtils.getFlagImmutable());
+        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
     }
 
 }

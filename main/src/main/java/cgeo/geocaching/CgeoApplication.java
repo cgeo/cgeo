@@ -21,15 +21,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,10 +134,6 @@ public class CgeoApplication extends Application {
 
             Settings.setAppThemeAutomatically(this);
 
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
-                fixUserManagerMemoryLeak();
-            }
-
             initApplicationLocale();
 
             // initialize cgeo notification channels
@@ -170,23 +163,6 @@ public class CgeoApplication extends Application {
         CanvasAdapter.userScale = Settings.getInt(R.string.pref_vtmUserScale, 100) / 100.0f;
         CanvasAdapter.textScale = Settings.getInt(R.string.pref_vtmTextScale, 100) / 100f;
         CanvasAdapter.symbolScale = Settings.getInt(R.string.pref_vtmSymbolScale, 100) / 100f;
-    }
-
-    /**
-     * <a href="https://code.google.com/p/android/issues/detail?id=173789">...</a>
-     * introduced with JELLY_BEAN_MR2 / fixed in October 2016
-     */
-    private void fixUserManagerMemoryLeak() {
-        try {
-            // invoke UserManager.get() via reflection
-            final Method m = UserManager.class.getMethod("get", Context.class);
-            m.setAccessible(true);
-            m.invoke(null, this);
-        } catch (final Throwable e) {
-            if (BuildConfig.DEBUG) {
-                throw new IllegalStateException("Cannot fix UserManager memory leak", e);
-            }
-        }
     }
 
     @Override

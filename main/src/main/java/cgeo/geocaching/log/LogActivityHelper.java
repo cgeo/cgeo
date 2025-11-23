@@ -14,8 +14,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
-import android.annotation.TargetApi;
-
 import androidx.activity.ComponentActivity;
 
 import java.util.Map;
@@ -24,7 +22,6 @@ import java.util.function.BiConsumer;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /** Helper class to use in Activities which want to use cache/trackable logging functionality */
-@TargetApi(24)
 public class LogActivityHelper {
 
     private final ComponentActivity activity;

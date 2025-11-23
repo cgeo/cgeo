@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-/** Utilities used for (c:geo-external) translatinn */
+/** Utilities used for (c:geo-external) translation */
 public final class TranslationUtils {
 
     public enum Translator {
@@ -171,13 +170,10 @@ public final class TranslationUtils {
     }
 
     private static boolean appIsAvailable(final String packageName) {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ProcessUtils.isLaunchable(packageName);
+        return ProcessUtils.isLaunchable(packageName);
     }
 
     private static void startTranslateViaApp(final Activity activity, final String packageName, final String text) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return;
-        }
         final Intent intent = new Intent();
         intent.setType("text/plain");
         // intent.setAction(Intent.ACTION_TRANSLATE); doesn't seem to work

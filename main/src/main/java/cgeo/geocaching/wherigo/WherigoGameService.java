@@ -8,7 +8,6 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -52,7 +51,7 @@ public class WherigoGameService extends Service {
                     .setSmallIcon(R.drawable.ic_menu_wherigo)
                     .setContentTitle(content)
                     .setContentText(content)
-                    .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, WherigoActivity.class), ProcessUtils.getFlagImmutable()))
+                    .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, WherigoActivity.class), PendingIntent.FLAG_IMMUTABLE))
                     .setPriority(NotificationCompat.PRIORITY_LOW)
                     .setSilent(true)
                     .setOngoing(true).build());

@@ -7,7 +7,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.UriPermission;
 import android.net.Uri;
-import android.os.Build;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.webkit.MimeTypeMap;
@@ -208,7 +207,7 @@ public final class UriUtils {
         volumeMap.put("primary", null); //the most common one where we will NOT put text for
         volumeMap.put("home", "[Documents]"); //example Uri pointing to /Documents/cgeo: content://com.android.externalstorage.documents/tree/home%3Acgeo
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && CgeoApplication.getInstance() != null) {
+        if (CgeoApplication.getInstance() != null) {
             final Context context = CgeoApplication.getInstance().getApplicationContext();
             final StorageManager storageManager = ContextCompat.getSystemService(context, StorageManager.class);
             final List<StorageVolume> storageVolumes = storageManager.getStorageVolumes();

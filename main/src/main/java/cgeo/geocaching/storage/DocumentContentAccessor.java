@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.UriPermission;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.DocumentsContract;
 import android.webkit.MimeTypeMap;
 
@@ -147,13 +146,6 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         //Note that when passing a wrong mimeType (not fitting to filename suffix),
         //then most document providers will append the mimeType's default extension
         //we want to avoid this from happening
-
-        //Android SDK21/22 replace file suffixes with their defaults from mimeType.
-        //This leads to e.g. "image.jpg" to be renamed to "image.jpeg".
-        //->prevent this by using octet-stream for all files
-        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            return "application/octet-stream";
-        }
 
         //try guess mimeType from filename suffix;
         String suffix = filename;

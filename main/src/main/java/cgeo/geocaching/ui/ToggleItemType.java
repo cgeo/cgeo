@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import android.os.Build;
 import android.view.MenuItem;
 
 import androidx.annotation.DrawableRes;
@@ -60,7 +59,7 @@ public enum ToggleItemType {
             if (-1 != drawableActiveId && -1 != drawableInactiveId) {
                 menuItem.setIcon(active ? drawableActiveId : drawableInactiveId);
             }
-            if (-1 != hintActiveId && -1 != hintInactiveId && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (-1 != hintActiveId && -1 != hintInactiveId) {
                 menuItem.setTooltipText(CgeoApplication.getInstance().getString(active ? hintActiveId : hintInactiveId));
             }
         }

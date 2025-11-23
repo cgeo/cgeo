@@ -351,9 +351,9 @@ public class InstallWizardActivity extends AbstractActivity {
     }
 
     private boolean stepCanBeSkipped() {
-        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasLocationPermission() && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))))
-                || (step == WizardStep.WIZARD_PERMISSIONS_LEGACY_WRITE_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || !DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))
-                || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
+        return (step == WizardStep.WIZARD_PERMISSIONS && ((hasLocationPermission() && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))))
+                || (step == WizardStep.WIZARD_PERMISSIONS_LEGACY_WRITE_STORAGE && (!DO_LEGACY_WRITE_STORAGE || hasLegacyWriteStoragePermission()))
+                || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && hasLocationPermission())
                 || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
