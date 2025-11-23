@@ -2235,7 +2235,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private static List<Waypoint> createWaypointList(final Geocache cache, final boolean sorted) {
-            final List<Waypoint> waypointList = sorted ? cache.getSortedWaypointList() : cache.getWaypoints();
+            final List<Waypoint> waypointList = new ArrayList<>(sorted ? cache.getSortedWaypointList() : cache.getWaypoints());
             if (!Settings.getHideVisitedWaypoints()) {
                 return waypointList;
             }
