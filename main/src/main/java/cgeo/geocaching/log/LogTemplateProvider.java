@@ -336,7 +336,7 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
-        templates.add(new LogTemplate("TB_LOCATION_CODE", R.string.init_signature_template_tblocation_geocache_code) {
+        templates.add(new LogTemplate("TB_LOCATION_GEOCODE", R.string.init_signature_template_tblocation_geocache_code) {
             @Override
             public String getValue(final LogContext context) {
                 final Trackable trackable = context.getTrackable();
