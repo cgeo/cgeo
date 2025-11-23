@@ -12,7 +12,6 @@ import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
-import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
@@ -34,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -483,17 +481,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void finish() {
         super.finish();
         this.logActivityHelper.finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        final boolean result = super.onCreateOptionsMenu(menu);
-        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
-            if (template.getTemplateString().equals("NUMBER") || template.getTemplateString().equals("ONLINENUM")) {
-                menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());
-            }
-        }
-        return result;
     }
 
     @Override
