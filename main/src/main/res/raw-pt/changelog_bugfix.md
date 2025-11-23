@@ -1,6 +1,7 @@
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
 - Fix: Favorite checkbox gets reset on reentering offline log screen
+- Fix: Geofence radius input box shows decimal number
 
 ##
 - Correcção: Valores negativos no gráfico de altitude não eram dimensionados
@@ -40,6 +41,7 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
 
 
 
