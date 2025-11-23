@@ -6,7 +6,6 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.GeoData;
 
 import android.location.Location;
-import android.os.Build;
 
 import androidx.core.location.LocationCompat;
 import androidx.core.location.altitude.AltitudeConverterCompat;
@@ -31,7 +30,7 @@ public class GeoHeightUtils {
     /** returns a formatted height string, empty, if height==0 */
     public static String getAverageHeight(final GeoData geo, final boolean onlyFullReadings) {
         // remember new altitude reading, and calculate average from past MAX_READINGS readings
-        if (geo.hasAltitude() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || geo.getVerticalAccuracyMeters() > 0.0)) {
+        if (geo.hasAltitude() && (geo.getVerticalAccuracyMeters() > 0.0)) {
             altitudeReadings[altitudeReadingPos] = getAltitude(geo);
             altitudeReadingPos = (++altitudeReadingPos) % altitudeReadings.length;
         }
