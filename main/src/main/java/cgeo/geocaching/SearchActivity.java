@@ -37,7 +37,6 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -106,13 +105,8 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             } else {
                 // send intent back so query string is known.
                 // Strip away potential security-relevant things (see #12409)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    intent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    intent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                } else {
-                    intent.setFlags(intent.getFlags() & ~Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    intent.setFlags(intent.getFlags() & ~Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                }
+                intent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
                 setResult(RESULT_CANCELED, intent);
             }

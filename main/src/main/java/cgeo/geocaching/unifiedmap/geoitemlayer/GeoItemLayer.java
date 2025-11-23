@@ -41,8 +41,8 @@ import java.util.function.Predicate;
  */
 public class GeoItemLayer<K> {
 
-    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP = CommonUtils.threadLocalWithInitial(HashMap::new);
-    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP_2 = CommonUtils.threadLocalWithInitial(HashMap::new);
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP = ThreadLocal.withInitial(HashMap::new);
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP_2 = ThreadLocal.withInitial(HashMap::new);
     private final String id;
     private final Map<K, Pair<GeoItem, Boolean>> itemMap = new HashMap<>();
     //private final Lock lock = new ReentrantLock(); //-> locking is done via synchronized
