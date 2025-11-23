@@ -249,7 +249,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
             this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
             if (savedInstanceState.getInt(SAVED_STATE_FAVORITE) > 0) {
-                cache.setFavorite(true);
+                this.binding.favoriteCheck.setChecked(true);
             }
         }
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
@@ -302,10 +302,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             final OfflineLogEntry offlineLogEntry = (OfflineLogEntry) logEntry;
             cacheVotingBar.setRating(offlineLogEntry.rating == 0 ? cache.getMyVote() : offlineLogEntry.rating);
             binding.favoriteCheck.setChecked(offlineLogEntry.favorite);
-            //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
-            if (offlineLogEntry.favorite) {
-                binding.favoriteCheck.setVisibility(View.VISIBLE);
-            }
             binding.logPassword.setText(offlineLogEntry.password);
             inventoryAdapter.putActions(offlineLogEntry.inventoryActions);
             //CollectionStream.of(inventory).forEach(t -> initializeTrackableAction(t, offlineLogEntry));
@@ -342,11 +338,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
-            final int remainingPoints = availableFavoritePoints + (cache.isFavorite() ? 1 : 0);
+            final boolean isFavorite = cache.isFavorite();
+            final boolean favIsChecked = binding.favoriteCheck.isChecked() || isFavorite;
+            final boolean editExistingFavorite = this.logEditMode == LogEditMode.EDIT_EXISTING && isFavorite;
+
+            final int remainingPoints = availableFavoritePoints + (editExistingFavorite ? 1 : 0);
             binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
-            if (availableFavoritePoints > 0 || (this.logEditMode == LogEditMode.EDIT_EXISTING && cache.isFavorite())) {
-                binding.favoriteCheck.setVisibility(availableFavoritePoints > 0 ? View.VISIBLE : View.GONE);
-                binding.favoriteCheck.setChecked(cache.isFavorite());
+            // If fav check is set then ALWAYS make the checkbox visible and set the checked state accordingly
+            // see https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609 and https://github.com/cgeo/cgeo/issues/17593
+            if (availableFavoritePoints > 0 || editExistingFavorite || favIsChecked) {
+                binding.favoriteCheck.setVisibility(View.VISIBLE);
+                binding.favoriteCheck.setChecked(favIsChecked);
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
@@ -425,9 +427,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
         outState.putInt(SAVED_STATE_FAVORITE, this.binding.favoriteCheck.isChecked() ? 1 : 0);
-        if (this.binding.favoriteCheck.isChecked()) {
-            cache.setFavorite(true);
-        }
     }
 
     public void setType(final LogType type) {
