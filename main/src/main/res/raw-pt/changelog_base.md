@@ -7,8 +7,8 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Mostrar os pontos adicionais gerados no mapa
 - Novo: Transferência de caches ordenadas por distância
 - Correcção: duplicação de pontos individuais da rota
-- New: Support for Motorider theme (VTM only)
-- New: Support for transparent background display of offline maps (VTM only)
+- Novo: Suporte para o tema Motorider (apenas VTM)
+- Novo: Suporte para exibição de fundo transparente de mapas offline (apenas VTM)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -22,8 +22,8 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Alteração: Interface mais compacta para "adicionar novo ponto adicional"
 - Novo: Opção para carregar imagens para caches do geocaching.com em tamanho “inalterado”
 - Novo: Visualização de variáveis pode ser filtrada
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Novo: Visualizar coordenadas calculadas que excedem os limites na lista de pontos adicionais
+- Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
@@ -40,6 +40,6 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Oferecer tradução sem rede com as aplicações do Google Tradutor ou do DeepL (se instalado)
 - Novo: Excluir itens do histórico de pesquisa
 - Alteração: Remover GCVote (serviço descontinuado)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
-- New: Preview bookmark lists
+- Novo: Barra de ferramentas colorida nas páginas de detalhes das caches
+- Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
+- Novo: Pré-visualizar listas de marcadores
