@@ -315,6 +315,7 @@
     <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
+    <string name="warn_bookmarklist_select">Keine Lesezeichenliste ausgewählt.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_notloggedin_title">Offlinemodus</string>
@@ -850,6 +851,8 @@
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
     <string name="settings_hide_tileproviders_summary">Eine oder mehrere Kartenquellen aus der Kartenauswahl ausblenden</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap-Varianten</string>
+    <string name="settings_vtm_background_transparent_title">Transparenter Hintergrund</string>
+    <string name="settings_vtm_background_transparent_summary">Zeige Hintergrund von VTM Offline-Karten transparent (experimentell)</string>
     <string name="settings_userDefinedTileProvider">Benutzerdefinierter Kartenabieter</string>
     <string name="settings_userDefinedTileProviderUri">Adresse (ohne abschließenden Schrägstrich) zum Kartenserver eingeben oder vollständige Adresse mit Parametern {X}, {Y} und {Z}. Stelle sicher, dass Du die Nutzungsbedingungen geprüft hast und einhältst.</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
@@ -1055,6 +1058,8 @@
     <string name="settings_startscreen_title">Standardbildschirm</string>
     <string name="init_wallpaper">Hintergrundbild</string>
     <string name="init_summary_wallpaper">Geräte-Hintergrund als Hintergrund für den Startbildschirm anzeigen</string>
+    <string name="init_colored_theme">Farbiges Design</string>
+    <string name="init_summary_colored_theme">Farbiges Design verwenden</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -1407,6 +1412,7 @@
     <string name="cache_delete_generated_waypoints">Generierte Wegpunkte löschen</string>
     <string name="cache_delete_generated_waypoints_confirm">Alle generierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, keine Wiederherstellung möglich.</string>
     <string name="cache_delete_generated_waypoints_success">Generierte Wegpunkte gelöscht</string>
+    <string name="cache_select_waypoint_types">Wegpunkttypen auswählen</string>
     <string name="cache_offline_store">Speichern</string>
     <string name="cache_offline_stored_ago">Gespeichert %s</string>
     <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
@@ -1736,6 +1742,7 @@
     <string name="waypoint_user_note">Eigene Notiz</string>
     <string name="waypoint_visited">Besucht</string>
     <string name="waypoint_set_visited">Wegpunkt auf Besucht gesetzt</string>
+    <string name="waypoint_set_visited_types">Wegpunkte als besucht markieren</string>
     <string name="waypoint_unset_visited">Wegpunkt auf Nicht Besucht gesetzt</string>
     <string name="waypoint_save">Speichern</string>
     <string name="waypoint_loading">Lade Wegpunkt…</string>
