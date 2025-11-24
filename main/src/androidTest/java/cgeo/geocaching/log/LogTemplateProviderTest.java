@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
@@ -99,6 +100,12 @@ public class LogTemplateProviderTest {
         return new LogContext(cache, new LogEntry.Builder().build());
     }
 
+
+    private static LogContext createTrackable() {
+        final Trackable trackable = new Trackable();
+        return new LogContext(trackable, new LogEntry.Builder().build());
+    }
+
     @Test
     public void testSizeTemplate() {
         final LogContext context = createCache();
@@ -114,5 +121,38 @@ public class LogTemplateProviderTest {
         final String distance = Units.getDistanceFromMeters(0);
         final String log = LogTemplateProvider.applyTemplates("[LOCATION]", context);
         assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±" + distance + ")");
+    }
+
+    @Test
+    public void testLocationCacheTemplate() {
+        final LogContext context = createTrackable();
+        final Trackable trackable = context.getTrackable();
+        trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+        trackable.setSpottedCacheGeocode("GC12345");
+        trackable.setSpottedName("My cache");
+        final String logCache = LogTemplateProvider.applyTemplates("[TB_LOCATION_GEOCODE]", context);
+        final String logName = LogTemplateProvider.applyTemplates("[TB_LOCATION_CACHE]", context);
+        assertThat(logCache).isEqualTo("GC12345");
+        assertThat(logName).isEqualTo("My cache");
+    }
+
+    @Test
+    public void testLocationUserTemplate() {
+        final LogContext context = createTrackable();
+        final Trackable trackable = context.getTrackable();
+        trackable.setSpottedType(Trackable.SPOTTED_USER);
+        trackable.setSpottedName("username");
+        final String log = LogTemplateProvider.applyTemplates("[TB_LOCATION_USER]", context);
+        assertThat(log).isEqualTo("username");
+    }
+
+    @Test
+    public void testLocationOwnerTemplate() {
+        final LogContext context = createTrackable();
+        final Trackable trackable = context.getTrackable();
+        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+        trackable.setOwner("ownername");
+        final String log = LogTemplateProvider.applyTemplates("[TB_LOCATION_USER]", context);
+        assertThat(log).isEqualTo("ownername");
     }
 }
