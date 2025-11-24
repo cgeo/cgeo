@@ -1,7 +1,7 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
 - Naprawiono: Pole wyboru Ulubione było resetowane przy ponowym wejściu na ekran logowania offline
-- Fix: Geofence radius input box shows decimal number
+- Naprawiono: Pole do wpisywania promienia geofence pokazuje liczbę dziesiętną
 
 ##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
