@@ -7,8 +7,8 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Zeige generierte Wegpunkte auf der Karte
 - Neu: Caches nach Entfernung sortiert herunterladen
 - Korrektur: Verdopplung einzelner Routenelemente
-- New: Support for Motorider theme (VTM only)
-- New: Support for transparent background display of offline maps (VTM only)
+- Neu: Unterstützung für Motorider Design (nur VTM)
+- Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -22,8 +22,8 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Änderung: Kompaktere Ansicht für "Neuen Wegpunkt hinzufügen"
 - Neu: Option, um Bilder von geocaching.com in "unveränderter" Größe zu laden
 - Neu: Variablenansicht kann gefiltert werden
-- New: Visualize calculated coordinates overflow in waypoint list
-- New: Menu entry in waypoint list to mark certain waypoint types as visited
+- Neu: Hinweis in Wegpunkt-Liste bei Überlauf berechneter Koordinaten
+- Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -40,6 +40,6 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Offline-Übersetzung mit Google Translate oder DeepL-Apps (falls installiert)
 - Neu: Elemente aus dem Suchverlauf löschen
 - Änderung: GCVote entfernen (Dienst eingestellt)
-- New: Colored toolbar on cache details pages
-- New: Select multiple bookmark lists / pocket queries to download
+- Neu: Farbige Symbolleiste auf Cache-Detailseiten
+- Neu: Auswahl mehrerer Lesezeichenlisten / Pocket queries zum Herunterladen
 - Neu: Vorschau für Lesezeichen-Listen
