@@ -1,4 +1,9 @@
 ##
+- Änderung: Die Vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (ein Schritt zur Ablösung der alten Karten). Kann vorläufig unter "Einstellungen" - "Kartenquellen" noch umgeschaltet werden. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
+- Korrektur: Favoriten-Checkbox wird beim erneuten Öffnen des Offline-Logs zurückgesetzt
+- Korrektur: Geofence Radius Eingabefeld zeigt Dezimalzahl an
+
+##
 - Korrektur: Negative Werte im Höhendiagramm nicht skaliert
 - Korrektur: Koordinaten nahe 0 in GPX-Exporten fehlerhaft
 - Korrektur: Mehrere Abstürze
@@ -36,6 +41,9 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
+
+
 
 
 
