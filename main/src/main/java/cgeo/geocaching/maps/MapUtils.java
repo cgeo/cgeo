@@ -36,6 +36,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -168,9 +169,9 @@ public class MapUtils {
     }
 
     // one-time messages to be shown for maps
-    public static void showMapOneTimeMessages(final Activity activity, final MapMode mapMode) {
+    public static void showMapOneTimeMessages(final Activity activity, final UnifiedMapType.UnifiedMapTypeType mapType) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
-        if (mapMode == MapMode.LIVE && !Settings.isLiveMap()) {
+        if ((mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport) && !Settings.isLiveMap()) {
             Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_LIVE_DISABLED);
         }
     }
@@ -327,7 +328,7 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final int fromList, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
@@ -337,7 +338,7 @@ public class MapUtils {
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
                 })
-                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
+                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
                 .addItemClickListener(R.id.menu_coords, item -> {
                     final AtomicReference<TextView> textview = new AtomicReference<>();

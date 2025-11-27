@@ -16,8 +16,6 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -28,6 +26,8 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.DefaultMap;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ContextLogger;
@@ -148,9 +148,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private boolean onMapLongClicked() {
-        if (Settings.useLegacyMaps()) {
-            return false;
-        }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
             DefaultMap.startActivityList(this, selectedListId, null);
             ActivityMixin.overrideTransitionToFade(this);
@@ -551,7 +548,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             cLog.add("mls");
 
             //sync map Theme folder
-            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+            MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
             cLog.add("rth");
 
             // automated backup check

@@ -9,7 +9,6 @@ import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -522,10 +521,6 @@ public class Waypoint implements INamedGeoCoordinate {
             }
         }
         return false;
-    }
-
-    public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getFullGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
     }
 
     public String getUserNote() {

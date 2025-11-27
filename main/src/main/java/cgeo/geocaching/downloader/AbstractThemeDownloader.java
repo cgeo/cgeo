@@ -1,9 +1,9 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.FileUtils;
 
 import android.net.Uri;
@@ -23,7 +23,7 @@ abstract class AbstractThemeDownloader extends AbstractDownloader {
     @Override
     protected void onSuccessfulReceive(final Uri result) {
         //resync
-        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+        MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
     }
 
 }
