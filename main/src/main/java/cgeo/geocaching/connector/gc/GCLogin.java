@@ -576,9 +576,18 @@ public class GCLogin extends AbstractLogin {
     @Nullable
     @WorkerThread
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+        return getRequestLogged(uri, params, null);
+    }
+
+    /**
+     * GET HTTP request. Do the request a second time if the user is not logged in
+     */
+    @Nullable
+    @WorkerThread
+    String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params, @Nullable final Boolean removeWhitespace) {
         try {
             final Response response = Network.getRequest(uri, params).blockingGet();
-            final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
+            final String data = Network.getResponseData(response, removeWhitespace == null ? canRemoveWhitespace(uri) : removeWhitespace);
 
             // A page not found will not be found if the user logs in either
             if (response.code() == 404 || getLoginStatus(data)) {

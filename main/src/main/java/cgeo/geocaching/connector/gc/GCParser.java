@@ -1118,7 +1118,7 @@ public final class GCParser {
     static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid) {
         if (StringUtils.isNotBlank(geocode)) {
             final Parameters params = new Parameters("decrypt", "y");
-            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, params);
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, params, false);
         } else if (StringUtils.isNotBlank(guid)) {
             final Parameters params = new Parameters("decrypt", "y");
             params.put("guid", guid);
