@@ -4,6 +4,7 @@
   Removal of legacy maps is planned for spring 2026 in our regular releases.
 - Fix: Favorite checkbox gets reset on reentering offline log screen
 - Fix: Geofence radius input box shows decimal number
+- Fix: Syncing of personal notes not working
 
 ##
 - Fix: Negative values in elevation chart not scaled
@@ -43,6 +44,7 @@
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
