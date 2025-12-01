@@ -1,4 +1,11 @@
 ##
+- Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
+- Naprawiono: Pole wyboru Ulubione było resetowane przy ponowym wejściu na ekran logowania offline
+- Naprawiono: Pole do wpisywania promienia geofence pokazuje liczbę dziesiętną
+- Naprawiono: Synchronizacja notatek osobistych nie działała
+- Change: New icon for GPX track/route import in map track/route quick settings
+
+##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
 - Naprawiono: Współrzędne bliskie 0 uszkadzane przy eksporcie GPX
 - Naprawiono: Kilka awarii
@@ -36,6 +43,11 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
+
+
+
 
 
 
