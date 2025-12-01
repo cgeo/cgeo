@@ -3,6 +3,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2025.12.01 Bugfix Release
+
+- Fix: Syncing of personal notes not working
+- Fix: Favorite checkbox gets reset on reentering offline log screen
+- Fix: Geofence radius input box shows decimal number
+- Change: New icon for GPX track/route import in map track/route quick settings
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2025.10.31 Bugfix Release
 
 - Fix: Negative values in elevation chart not scaled
