@@ -24,6 +24,7 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Proměnné lze filtrovat
 - Novinka: Vizualizace vypočítaných souřadnic v seznamu trasových bodů
 - Novinka: Položka v nabídce seznamu trasových bodů pro označení určitých typů trasových bodů jako navštívených
+- New placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
