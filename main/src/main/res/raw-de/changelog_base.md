@@ -24,6 +24,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Variablenansicht kann gefiltert werden
 - Neu: Hinweis in Wegpunkt-Liste bei Überlauf berechneter Koordinaten
 - Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
+- New placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
