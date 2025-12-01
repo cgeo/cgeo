@@ -960,6 +960,9 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Lokalizacja</string>
     <string name="init_signature_template_geocode">Geokod</string>
+    <string name="init_signature_template_tblocation_geocache_code">Przedmiot podróżny – kod skrytki</string>
+    <string name="init_signature_template_tblocation_geocache_name">Przedmiot podróżny – nazwa skrytki</string>
+    <string name="init_signature_template_tblocation_user">Przedmiot podróżny – użytkownik</string>
     <string name="init_summary_bettercacher">Wczytaj kategorie i poziom skrytek z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
