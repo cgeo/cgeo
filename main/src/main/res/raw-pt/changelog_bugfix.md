@@ -1,9 +1,16 @@
 ##
+- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Correcção: A caixa de seleção de favorito é reposta ao regressar ao ecrã de registo offline
+- Fix: Geofence radius input box shows decimal number
+- Fix: Syncing of personal notes not working
+- Change: New icon for GPX track/route import in map track/route quick settings
+
+##
 - Correcção: Valores negativos no gráfico de altitude não eram dimensionados
 - Correcção: Coordenadas próximas de 0 ficavam inválidas na exportação para GPX
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Correcção: Alguns encerramentos abruptos
+- Tentativa de correcção: Aplicação Não Responde no arranque
+- Tentativa de correcção: Dados de geocache em falta no mapa ao vivo
 
 ##
 - Correcção: Falha na pesquisa por palavra-chave
@@ -36,6 +43,11 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
+
+
+
 
 
 
