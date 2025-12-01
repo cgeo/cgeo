@@ -2,8 +2,8 @@
 - Änderung: Die Vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (ein Schritt zur Ablösung der alten Karten). Kann vorläufig unter "Einstellungen" - "Kartenquellen" noch umgeschaltet werden. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
 - Korrektur: Favoriten-Checkbox wird beim erneuten Öffnen des Offline-Logs zurückgesetzt
 - Korrektur: Geofence Radius Eingabefeld zeigt Dezimalzahl an
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Korrektur: Synchronisation von persönlichen Notizen funktioniert nicht
+- Änderung: Neues Icon für GPX-Track/Routenimport in Track-/Routen-Schnelleinstellungen auf Karte
 
 ##
 - Korrektur: Negative Werte im Höhendiagramm nicht skaliert
