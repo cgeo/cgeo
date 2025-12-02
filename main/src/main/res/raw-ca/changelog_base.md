@@ -24,7 +24,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: la vista de variables es pot filtrar
 - Nou: Visualitza el desbordament de coordenades calculades a la llista de punts de referència
 - Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
-- New placeholders for trackable logging (geocache name, geocache code, user)
+- Nous marcadors de posició per al registre traçable (nom del geoamagatall, codi del geoamagatall, usuari)
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
