@@ -949,6 +949,9 @@
     <string name="init_signature_template_type">Tipus</string>
     <string name="init_signature_template_location">Ubicació</string>
     <string name="init_signature_template_geocode">Geocodi</string>
+    <string name="init_signature_template_tblocation_geocache_code">Traçable - Codi de geoamagatall</string>
+    <string name="init_signature_template_tblocation_geocache_name">Traçable - Nom del geoamagatall</string>
+    <string name="init_signature_template_tblocation_user">Traçable - Usuari</string>
     <string name="init_summary_bettercacher">Carregueu el nivell de catxé i les categories des de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
