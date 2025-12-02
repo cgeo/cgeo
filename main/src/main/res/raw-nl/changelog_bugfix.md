@@ -2,7 +2,7 @@
 - Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
 - Oplossing: Favorieten checkbox wordt gereset bij het opnieuw openen van offline logboekscherm
 - Oplossing: Geofencradius invoervak toont decimaal nummer
-- Fix: Syncing of personal notes not working
+- Oplossing: Synchronisatie van persoonlijke notities werkt niet
 - Change: New icon for GPX track/route import in map track/route quick settings
 
 ##
