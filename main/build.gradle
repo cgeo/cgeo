@@ -505,7 +505,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.1.0'
 
     // Support Library swiperefreshlayout
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0'
 
     // Support Library ExifInterface
     implementation 'androidx.exifinterface:exifinterface:1.4.1'
