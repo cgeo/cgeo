@@ -3,7 +3,7 @@
 - Naprawiono: Pole wyboru Ulubione było resetowane przy ponowym wejściu na ekran logowania offline
 - Naprawiono: Pole do wpisywania promienia geofence pokazuje liczbę dziesiętną
 - Naprawiono: Synchronizacja notatek osobistych nie działała
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Zmiana: Nowa ikona dla importu śladu GPX/trasy w szybkich ustawieniach śladu/trasy na mapie
 
 ##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
