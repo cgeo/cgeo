@@ -19,36 +19,36 @@ Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class
 String commitIdShort = gitCommitIdProvider.get()
 
 android {
-    namespace 'cgeo.geocaching'
-    compileSdk 36
+    namespace = 'cgeo.geocaching'
+    compileSdk = 36
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
         // enable Java 8 APIs like Streams on older Android versions
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
         // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        minSdk 21
-        targetSdk 35
+        minSdk = 21
+        targetSdk = 35
 
-        versionName versionNameFromDate()
-        versionCode versionCodeFromDate(0)
+        versionName = versionNameFromDate()
+        versionCode = versionCodeFromDate(0)
 
         // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
         applicationId = "cgeo.geocaching"
 
         // NOTE: must match the package in the test directory and must be different from the app package
-        testApplicationId applicationId + ".test"
+        testApplicationId = applicationId + ".test"
 
         //testHandlingProfiling true
-        testFunctionalTest true
+        testFunctionalTest = true
 
         // set the default test runner to be used by IDE and command line
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         base.archivesName = "cgeo"
@@ -69,26 +69,26 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
         // Enable aidl, some modules in this project appear to be using AIDL
-        aidl true
+        aidl = true
         // Enable buildConfig build feature
-        buildConfig true
+        buildConfig = true
     }
 
     buildTypes {
         debug {
             // debug build name contains git commit for better reproduction of bugs
-            versionNameSuffix "-$commitIdShort developer build"
+            versionNameSuffix = "-$commitIdShort developer build"
 
-            applicationIdSuffix ".developer"
+            applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            enableUnitTestCoverage isContinuousIntegrationServer()
-            enableAndroidTestCoverage isContinuousIntegrationServer()
+            enableUnitTestCoverage = isContinuousIntegrationServer()
+            enableAndroidTestCoverage = isContinuousIntegrationServer()
 
             // replace in AndroidManifest.xml
             manifestPlaceholders = [
@@ -98,8 +98,8 @@ android {
         }
         nightly {
             String nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-$commitIdShort"
-            signingConfig signingConfigs.release
+            versionNameSuffix = "-$nightlyName-$commitIdShort"
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -109,8 +109,8 @@ android {
         }
         rc {
             String rcName = System.getenv('RC') // RC, RC1, RC2 ...
-            versionNameSuffix "-$rcName"
-            signingConfig signingConfigs.release
+            versionNameSuffix = "-$rcName"
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -119,7 +119,7 @@ android {
             ]
         }
         legacy {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -128,7 +128,7 @@ android {
             ]
         }
         release {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
             manifestPlaceholders = [
                 appIcon:      "@mipmap/ic_launcher",
                 appIconRound: "@mipmap/ic_launcher_round"
@@ -140,17 +140,17 @@ android {
         // as it affects the build speed, do skip some steps for debug builds
         if (buildType.name != 'debug') {
             // enable proguard and remove unused code
-            minifyEnabled true
+            minifyEnabled = true
 
             // remove unused resources in addition to unused code
-            shrinkResources true
+            shrinkResources = true
         }
 
         // proguard rules
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
     }
 
-    testBuildType "debug" //the default BuildType
+    testBuildType = "debug" //the default BuildType
 
     sourceSets {
         // application sources in source set "main"
@@ -190,14 +190,14 @@ android {
 
     lint {
         // we do not accept lint errors when building
-        abortOnError true
+        abortOnError = true
         // Warnings shall not fail build
-        warningsAsErrors false
+        warningsAsErrors = false
 
         // abort release builds in case of FATAL errors
-        checkReleaseBuilds true
+        checkReleaseBuilds = true
 
-        absolutePaths false
+        absolutePaths = false
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
@@ -209,7 +209,7 @@ android {
 
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
-        checkDependencies true
+        checkDependencies = true
     }
 
     packagingOptions {
@@ -256,17 +256,17 @@ android {
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
 
         nojit {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
         }
 
         foss {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
@@ -644,8 +644,8 @@ static boolean isContinuousIntegrationServer() {
 android.applicationVariants.configureEach { variant ->
     if (variant.installProvider) {
         tasks.register("run${variant.name.capitalize()}") {
-            group 'cgeo'
-            description "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
+            group = 'cgeo'
+            description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
             dependsOn tasks.named(variant.installProvider.name)
 
             doFirst {
@@ -671,8 +671,8 @@ android.applicationVariants.configureEach { variant ->
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
 // This uses eager task creation API.
 tasks.register('testDebug') {
-    group 'verification'
-    description "Tests the debug build both with device-dependent and device-independent tests."
+    group = 'verification'
+    description = "Tests the debug build both with device-dependent and device-independent tests."
 
     dependsOn 'testBasicDebugUnitTest', 'connectedBasicDebugAndroidTest'
 }
@@ -686,13 +686,13 @@ if (privatePropertiesFile.exists()) {
     properties.load(new FileInputStream(privatePropertiesFile))
     android.signingConfigs {
         release {
-            storeFile file(properties.getProperty('key.store'))
-            storePassword properties.getProperty('key.store.password')
-            keyAlias properties.getProperty('key.alias')
-            keyPassword properties.getProperty('key.alias.password')
+            storeFile = file(properties.getProperty('key.store'))
+            storePassword = properties.getProperty('key.store.password')
+            keyAlias = properties.getProperty('key.alias')
+            keyPassword = properties.getProperty('key.alias.password')
         }
     }
-    android.buildTypes.release.signingConfig android.signingConfigs.release
+    android.buildTypes.release.signingConfig = android.signingConfigs.release
 }
 
 // check existence of private properties, show an error message
@@ -791,12 +791,12 @@ checkstyle {
 }
 
 tasks.register('checkstyle', Checkstyle) {
-    group 'verification'
-    description 'Check code standard'
+    group = 'verification'
+    description = 'Check code standard'
 
-    source 'src/main/java'
-    source 'src/test/java'
-    source 'src/androidTest/java'
+    source = 'src/main/java'
+    source = 'src/test/java'
+    source = 'src/androidTest/java'
     include '**/*.java'
 
     classpath = files()
@@ -820,15 +820,15 @@ pmd {
 }
 
 tasks.register('pmd', Pmd) {
-    group 'verification'
-    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    group = 'verification'
+    description = 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
 
     reports {
-        xml.required.set true
-        html.required.set true
+        xml.required.set = true
+        html.required.set = true
     }
 }

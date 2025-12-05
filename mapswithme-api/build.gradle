@@ -1,19 +1,19 @@
 apply plugin: 'com.android.library'
 
 android {
-    namespace 'com.mapwithme.maps.api'
-    compileSdk 34
+    namespace = 'com.mapwithme.maps.api'
+    compileSdk = 34
 
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        minSdk 21
+        minSdk = 21
         //noinspection OldTargetApi
-        targetSdk 34
+        targetSdk = 34
     }
 
     sourceSets.main {
@@ -24,10 +24,10 @@ android {
 
     lint {
         // generally we accept lint errors when building
-        abortOnError false
+        abortOnError = false
 
         // abort release builds in case of FATAL errors
-        checkReleaseBuilds true
+        checkReleaseBuilds = true
     }
 
     dependencies {
