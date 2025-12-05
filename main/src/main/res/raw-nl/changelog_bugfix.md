@@ -3,7 +3,7 @@
 - Oplossing: Favorieten checkbox wordt gereset bij het opnieuw openen van offline logboekscherm
 - Oplossing: Geofencradius invoervak toont decimaal nummer
 - Oplossing: Synchronisatie van persoonlijke notities werkt niet
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Wijziging: Nieuw pictogram voor GPX track/route import in kaart track/route snelle instellingen
 
 ##
 - Oplossing: Negatieve waarden in de hoogte grafiek niet geschaald
