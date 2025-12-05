@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,9 +26,12 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
-    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN = 50; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR = 0; //dp
+    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR = 50; //dp
 
-    private int actionBarSystemBarOverlapHeight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN);
+    private int actionBarSystemBarOverlapHeightNoColor = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR);
+    private int actionBarSystemBarOverlapHeightColor = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR);
+
     private boolean fixedActionBar = true;
 
     @Override
@@ -81,7 +85,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (actionBar == null || abView == null || !actionBar.isShowing() || fixedActionBar) {
             return;
         }
-        abView.animate().translationY(- 2 * getActionBarHeight() - 2 * this.actionBarSystemBarOverlapHeight)
+
+        final int actionBarTranslation = getActionBarSystemBarOverlapHeight() + getActionBarHeight();
+        abView.animate().translationY(-2 * actionBarTranslation)
             .withEndAction(actionBar::hide).start();
     }
 
@@ -92,9 +98,11 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
         actionBar.show();
-        applyTranslation();
-        abView.setTranslationY(-getActionBarHeight() - this.actionBarSystemBarOverlapHeight);
-        abView.animate().translationY(-this.actionBarSystemBarOverlapHeight).start();
+
+        final int systemBarOverlapHeight = getActionBarSystemBarOverlapHeight();
+        final int actionBarTranslation = systemBarOverlapHeight + getActionBarHeight();
+        abView.setTranslationY(-actionBarTranslation);
+        abView.animate().translationY(-systemBarOverlapHeight).start();
     }
 
     public boolean actionBarIsShowing() {
@@ -109,7 +117,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
     @NonNull
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
-        this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
+
+        this.actionBarSystemBarOverlapHeightNoColor = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_NOCOLOR));
+        this.actionBarSystemBarOverlapHeightColor = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN_COLOR));
         applyTranslation();
         if (fixedActionBar) {
             return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
@@ -120,9 +130,14 @@ public class AbstractActionBarActivity extends AbstractActivity {
     private void applyTranslation() {
         final View actionBar = getActionBarView();
         if (actionBar != null) {
+            final int actionBarSystemBarOverlapHeight = getActionBarSystemBarOverlapHeight();
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
         }
+    }
+
+    private int getActionBarSystemBarOverlapHeight() {
+        return Settings.useColoredStatusbar(Settings.isLightSkin(this)) ? this.actionBarSystemBarOverlapHeightColor : this.actionBarSystemBarOverlapHeightNoColor;
     }
 
 
@@ -165,17 +180,37 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
 
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        final int spacerHeight = Settings.getColoredSpacerHeight(isLightSkin);
+        final View spacerView = findViewById(R.id.static_divider);
+        final View actionBarView;
+        if (0 == spacerHeight) {
+            actionBarView = getActionBarView();
+        } else {
+            actionBarView = spacerView;
+        }
+
         // set action bar background color according to cache type
-        final View actionBarView = getActionBarView();
         if (actionBarView == null) {
             return;
         }
+
+        if (spacerView != null) {
+            if (cacheType == null || spacerHeight == 0) {
+                spacerView.setVisibility(View.GONE);
+            } else {
+                spacerView.setVisibility(View.VISIBLE);
+                spacerView.getLayoutParams().height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, spacerHeight, getResources().getDisplayMetrics());
+                spacerView.requestLayout();
+            }
+        }
+
         if (cacheType == null) {
-            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundActionBar));
+            actionBarView.setBackgroundColor(getResources().getColor(R.color.colorBackgroundTransparent));
             return;
         }
 
-        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor);
+        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor, isLightSkin);
         actionBarView.setBackgroundColor(actionbarColor);
     }
 }

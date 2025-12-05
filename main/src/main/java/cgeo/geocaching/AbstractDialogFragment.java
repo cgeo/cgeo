@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -207,9 +208,28 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             return;
         }
 
-        final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isEnabled);
-        swipView.getBackground().mutate().setTint(actionbarColor);
-        toolbar.setBackgroundColor(actionbarColor);
+        final boolean isLightSkin = Settings.isLightSkin(toolbar.getContext());
+        final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isEnabled, isLightSkin);
+
+        final int spacerHeight = Settings.getColoredSpacerHeight(isLightSkin);
+        if (0 == spacerHeight) {
+            if (Settings.useColoredStatusbar(isLightSkin)) {
+                swipView.setBackgroundColor(actionbarColor);
+            }
+            toolbar.setBackgroundColor(actionbarColor);
+        }
+
+        final View spacerView = toolbar.getRootView().findViewById(R.id.static_divider);
+        if (spacerView != null) {
+            if (spacerHeight == 0) {
+                spacerView.setVisibility(View.GONE);
+            } else {
+                spacerView.setVisibility(View.VISIBLE);
+                spacerView.setBackgroundColor(actionbarColor);
+                spacerView.getLayoutParams().height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, spacerHeight, getResources().getDisplayMetrics());
+                spacerView.requestLayout();
+            }
+        }
     }
 
     protected abstract TargetInfo getTargetInfo();
