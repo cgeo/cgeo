@@ -44,3 +44,4 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Barra d'eines de color a les pàgines de detalls de catxé
 - Nou: seleccioneu diverses llistes de marcadors / pocket queries per descarregar
 - Nou: Previsualitza les llistes de marcadors
+- Change: Increase minimum required Android version to Android 8
