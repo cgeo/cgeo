@@ -44,3 +44,4 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Barevný panel nástrojů na stránkách s podrobnostmi o kešce
 - Novinka: Vyberte více seznamů záložek / pocket queries ke stažení
 - New: Preview bookmark lists
+- Change: Increase minimum required Android version to Android 8
