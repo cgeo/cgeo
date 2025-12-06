@@ -44,3 +44,4 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Gekleurde werkbalk op de pagina met cache detailgegevens
 - Nieuw: Selecteer meerdere bladwijzerlijsten / pocket queries om te downloaden
 - Nieuw: Voorbeeld van bladwijzerlijsten
+- Change: Increase minimum required Android version to Android 8
