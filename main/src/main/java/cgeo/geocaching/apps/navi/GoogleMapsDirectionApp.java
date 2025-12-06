@@ -2,9 +2,9 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -21,7 +21,7 @@ class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
 
     @Override
     public boolean isInstalled() {
-        return MapProviderFactory.isGoogleMapsInstalled();
+        return GoogleMapsUtils.isGoogleMapsInstalled();
     }
 
     @Override
