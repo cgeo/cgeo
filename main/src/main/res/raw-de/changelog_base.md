@@ -44,3 +44,4 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Farbige Symbolleiste auf Cache-Detailseiten
 - Neu: Auswahl mehrerer Lesezeichenlisten / Pocket queries zum Herunterladen
 - Neu: Vorschau für Lesezeichen-Listen
+- Change: Increase minimum required Android version to Android 8
