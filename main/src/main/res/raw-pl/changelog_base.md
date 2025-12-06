@@ -44,3 +44,4 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Kolorowany pasek narzędzi na stronach szczegółów skrytki
 - Nowość: Wybierz wiele zakładek / pocket queries do pobrania
 - Nowość: Podgląd list zakładek
+- Change: Increase minimum required Android version to Android 8
