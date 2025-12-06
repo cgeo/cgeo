@@ -313,7 +313,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // Apache Commons
-    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-collections4:4.5.0'
 
     // commons.compress 1.21+ relies on java.nio which is only supported on API26+
     // See https://github.com/cgeo/cgeo/issues/13730 / 13731
