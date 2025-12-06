@@ -544,7 +544,7 @@ dependencies {
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.27'
+    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.31'
 
     // For Wherigos: GIF support
     // ani gif support
