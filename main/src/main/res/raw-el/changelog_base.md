@@ -44,3 +44,4 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Colored toolbar on cache details pages
 - New: Select multiple bookmark lists / pocket queries to download
 - New: Preview bookmark lists
+- Change: Increase minimum required Android version to Android 8
