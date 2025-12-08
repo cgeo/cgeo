@@ -938,6 +938,9 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Plats</string>
     <string name="init_signature_template_geocode">Geocode</string>
+    <string name="init_signature_template_tblocation_geocache_code">Spårbar - Geocache-kod</string>
+    <string name="init_signature_template_tblocation_geocache_name">Spårbar - Geocache-namn</string>
+    <string name="init_signature_template_tblocation_user">Spårbar - Användare</string>
     <string name="init_summary_bettercacher">Ladda cache-nivåer och kategorier från BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Visa vänners/egna</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
@@ -1401,6 +1404,11 @@
     <string name="cache_delete_generated_waypoints">Ta bort genererade waypoints</string>
     <string name="cache_delete_generated_waypoints_confirm">Ta bort alla genererade waypoints från denna cache?\n\nWaypoints kommer att tas bort omedelbart, det går inte att ångra.</string>
     <string name="cache_delete_generated_waypoints_success">Genererade waypoints raderade</string>
+    <string name="cache_select_waypoint_types">Välj vägpunkt-typer</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%d vägpunkt markerad som besökt</item>
+        <item quantity="other">%d vägpunkter markerade som besökta</item>
+    </plurals>
     <string name="cache_offline_store">Spara</string>
     <string name="cache_offline_stored_ago">Lagrad: %s</string>
     <string name="cache_offline_not_ready">Inte redo\nför användning offline</string>
@@ -1727,6 +1735,7 @@
     <string name="waypoint_user_note">Personlig anteckning</string>
     <string name="waypoint_visited">Besökt</string>
     <string name="waypoint_set_visited">Punkten markerad som besökt</string>
+    <string name="waypoint_set_visited_types">Sätt vägpunkter som besökta</string>
     <string name="waypoint_unset_visited">Punkten markerad som ej besökt</string>
     <string name="waypoint_save">Spara</string>
     <string name="waypoint_loading">Laddar punkt…</string>
