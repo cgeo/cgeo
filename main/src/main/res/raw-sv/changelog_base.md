@@ -24,7 +24,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Variabler kan filtreras
 - Nytt: Visualisera beräknat koordinat-spill i vägpunkt-listan
 - Nytt: Menypost i vägpunkt-listan för att markera vissa vägpunkt-typer som besökta
-- New placeholders for trackable logging (geocache name, geocache code, user)
+- Nya platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -44,4 +44,4 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Färgat verktygsfält på cache-detaljsidor
 - Nyhet: Välj flera bokmärkeslistor / fickfrågor att ladda ner
 - New: Preview bookmark lists
-- Change: Increase minimum required Android version to Android 8
+- Förändring: Öka den minsta nödvändiga Android-versionen till Android 8
