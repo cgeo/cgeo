@@ -1,9 +1,9 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
+- Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
+- Fix: Geofence-radie-inmatningsrutan visar decimaltal
+- Fix: Synkronisering av personliga anteckningar fungerar inte
+- Ändra: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
 
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
