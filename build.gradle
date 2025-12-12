@@ -7,7 +7,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:8.9.2'
+        classpath 'com.android.tools.build:gradle:8.13.2'
 
         // un-mocking of portable Android classes
         classpath 'com.github.bjoernq:unmockplugin:0.9.0'
@@ -26,7 +26,7 @@ plugins {
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
-    id 'com.github.spotbugs' version '6.1.13'
+    id 'com.github.spotbugs' version '6.4.8'
 }
 
 /*
@@ -122,11 +122,11 @@ subprojects {
         google()
         // integrate as last one - for versions by commit ID
         maven {
-            url 'https://jitpack.io'
+            url = 'https://jitpack.io'
         }
         // Used for Mapsforge and VTM Snapshots
         maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
 
