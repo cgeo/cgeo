@@ -140,7 +140,7 @@ public class ProximityNotification implements Parcelable {
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
-            Notifications.getNotificationManager(context).notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
+            Notifications.send(context, Notifications.ID_PROXIMITY_NOTIFICATION, builder);
         }
     }
 

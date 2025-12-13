@@ -55,6 +55,6 @@ public abstract class AbstractForegroundIntentService extends IntentService {
     }
 
     protected void updateForegroundNotification() {
-        notificationManager.notify(getForegroundNotificationId(), notification.build());
+        Notifications.send(this, getForegroundNotificationId(), notification);
     }
 }
