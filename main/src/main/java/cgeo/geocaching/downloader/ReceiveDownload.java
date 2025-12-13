@@ -95,9 +95,9 @@ class ReceiveDownload {
                 return handleMapFile(context, notificationManager, notification, updateForegroundNotification, false, null);
             }
         } else {
-            notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+            Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
                     context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(context.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
-            ).build());
+            ));
         }
         return Worker.Result.failure();
     }
@@ -176,9 +176,9 @@ class ReceiveDownload {
                 resultMsg = context.getString(R.string.receivedownload_error);
                 break;
         }
-        notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+        Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
                 context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, resultMsg
-        ).build());
+        ));
         return resultId;
     }
 
