@@ -7,7 +7,6 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.utils.AsynchronousMapWrapper;
-import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 
