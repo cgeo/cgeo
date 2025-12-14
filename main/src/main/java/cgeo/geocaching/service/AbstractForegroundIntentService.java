@@ -55,6 +55,17 @@ public abstract class AbstractForegroundIntentService extends IntentService {
     }
 
     protected void updateForegroundNotification() {
-        notificationManager.notify(getForegroundNotificationId(), notification.build());
+        if (notificationManager == null) {
+            return;
+        }
+        if (notificationManager.areNotificationsEnabled()) {
+            try {
+                notificationManager.notify(getForegroundNotificationId(), notification.build());
+            } catch (SecurityException se) {
+                Log.w(logTag + " - Notification permission denied", se);
+            }
+        } else {
+            Log.w(logTag + " - Notifications disabled, skipping update");
+        }
     }
 }

@@ -95,9 +95,9 @@ class ReceiveDownload {
                 return handleMapFile(context, notificationManager, notification, updateForegroundNotification, false, null);
             }
         } else {
-            notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+            notifyResult(notificationManager, context, Notifications.createTextContentNotification(
                     context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(context.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
-            ).build());
+            ));
         }
         return Worker.Result.failure();
     }
@@ -176,10 +176,21 @@ class ReceiveDownload {
                 resultMsg = context.getString(R.string.receivedownload_error);
                 break;
         }
-        notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+        notifyResult(notificationManager, context, Notifications.createTextContentNotification(
                 context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, resultMsg
-        ).build());
+        ));
         return resultId;
+    }
+
+    private void notifyResult(final NotificationManagerCompat notificationManager, final Context context, final NotificationCompat.Builder builder) {
+        if (notificationManager == null || !notificationManager.areNotificationsEnabled()) {
+            return;
+        }
+        try {
+            notificationManager.notify(Settings.getUniqueNotificationId(), builder.build());
+        } catch (SecurityException e) {
+            Log.e("SecurityException while showing download notification: " + e.getMessage());
+        }
     }
 
     /** check whether the target file or its companion file already exist, and delete both, if so */

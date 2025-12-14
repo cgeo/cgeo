@@ -262,8 +262,19 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     private void showEndNotification(final String text) {
-        notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true).build());
+        if (notificationManager == null) {
+            return;
+        }
+        if (notificationManager.areNotificationsEnabled()) {
+            try {
+                notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+                        this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true).build());
+            } catch (SecurityException se) {
+                Log.w("CacheDownloaderService - Notification permission denied", se);
+            }
+        } else {
+            Log.w("CacheDownloaderService - Notifications disabled, skipping end notification");
+        }
 
     }
 

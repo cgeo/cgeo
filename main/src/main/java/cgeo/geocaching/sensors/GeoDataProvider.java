@@ -4,13 +4,16 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -39,13 +42,25 @@ public class GeoDataProvider {
                 emitter.onNext(initialLocation);
             }
             Log.d("GeoDataProvider: starting the GPS and network listeners");
+
+            final boolean hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+            final boolean hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
             try {
-                geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+                if (hasFine) {
+                    geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+                } else {
+                    Log.w("GeoDataProvider: missing ACCESS_FINE_LOCATION, skipping GPS_PROVIDER");
+                }
             } catch (final Exception e) {
                 Log.w("Unable to create GPS location provider: " + e.getMessage());
             }
             try {
-                geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
+                if (hasFine || hasCoarse) {
+                    geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
+                } else {
+                    Log.w("GeoDataProvider: missing location permission, skipping NETWORK_PROVIDER");
+                }
             } catch (final Exception e) {
                 Log.w("Unable to create network location provider: " + e.getMessage());
             }

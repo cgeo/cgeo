@@ -19,6 +19,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class ProximityNotification implements Parcelable {
 
@@ -140,13 +141,32 @@ public class ProximityNotification implements Parcelable {
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
-            Notifications.getNotificationManager(context).notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
+            final NotificationManagerCompat nm = Notifications.getNotificationManager(context);
+            if (nm == null) {
+                return;
+            }
+            if (nm.areNotificationsEnabled()) {
+                try {
+                    nm.notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
+                } catch (SecurityException se) {
+                    Log.w("ProximityNotification - Notification permission denied", se);
+                }
+            } else {
+                Log.w("ProximityNotification - Notifications disabled, skipping notify");
+            }
         }
     }
 
     // cancel proximity notification notification
     private void clearNotification() {
-        Notifications.getNotificationManager(context).cancel(Notifications.ID_PROXIMITY_NOTIFICATION);
+        final NotificationManagerCompat nm = Notifications.getNotificationManager(context);
+        if (nm != null) {
+            try {
+                nm.cancel(Notifications.ID_PROXIMITY_NOTIFICATION);
+            } catch (SecurityException se) {
+                Log.w("ProximityNotification - Notification permission denied on cancel", se);
+            }
+        }
     }
 
     private void resetValues() {

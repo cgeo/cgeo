@@ -47,7 +47,13 @@ public class ReceiveDownloadWorker extends Worker {
         } catch (Exception e) {
             return Result.failure();
         } finally {
-            notificationManager.cancel(getForegroundNotificationId());
+            if (notificationManager != null && notificationManager.areNotificationsEnabled()) {
+                try {
+                    notificationManager.cancel(getForegroundNotificationId());
+                } catch (SecurityException e) {
+                    // ignore
+                }
+            }
         }
     }
 
@@ -56,7 +62,13 @@ public class ReceiveDownloadWorker extends Worker {
     }
 
     private void updateForegroundNotification() {
-        notificationManager.notify(getForegroundNotificationId(), notification.build());
+        if (notificationManager != null && notificationManager.areNotificationsEnabled()) {
+            try {
+                notificationManager.notify(getForegroundNotificationId(), notification.build());
+            } catch (SecurityException e) {
+                // ignore
+            }
+        }
     }
 
 }

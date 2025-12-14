@@ -4,10 +4,14 @@ import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.GnssStatus;
 import android.location.GnssStatus.Callback;
 import android.location.LocationManager;
+
+import androidx.core.content.ContextCompat;
 
 import io.reactivex.rxjava3.core.Observable;
 
@@ -66,9 +70,15 @@ public class GnssStatusProvider {
                 }
             };
             emitter.onNext(NO_GNSS);
-            if (PermissionContext.LOCATION.hasAllPermissions()) {
+            final boolean hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+            final boolean hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+            if (PermissionContext.LOCATION.hasAllPermissions() || hasFine || hasCoarse) {
                 Log.d("GnssStatusProvider.createGNSSObservable: registering callback");
-                geoManager.registerGnssStatusCallback(callback);
+                try {
+                    geoManager.registerGnssStatusCallback(callback);
+                } catch (SecurityException se) {
+                    Log.w("GnssStatusProvider: permission denied registering callback", se);
+                }
             } else {
                 Log.d("GnssStatusProvider.createGNSSObservable: Could not register provider, no Location permission available");
             }
