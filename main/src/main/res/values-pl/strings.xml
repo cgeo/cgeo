@@ -325,6 +325,8 @@
     <string name="warn_calculator_state_save">Pamiętaj, aby zapisać punkt nawigacji jeśli chcesz zachować stan kalkulatora.</string>
     <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
+    <string name="err_trackable_error">Błąd przedmiotu podróżnego</string>
+    <string name="err_trackable_too_many_visited">Zbyt wiele przedmiotór podróżnych zaznaczono jako „odwiedzono” – maksymalnie można %d</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
     <string name="confirm_unsent_changes_title">Niewysłane zmiany</string>
