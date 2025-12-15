@@ -1,42 +1,42 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
+### Развитие ЕдинойКарты и уведомление об устаревании "старых" карт
+С некоторых пор в c:geo появилась совершенно новая реализация карты под названием "ЕдинаяКарта", которая в конечном итоге заменит старые реализации Google Maps и Mapsforge (OpenStreetMap). Это уведомление об устаревании информирует вас о дальнейшем развитии дорожной карты.
 
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
+ЕдинаяКарта была опубликована около года назад. Она по-прежнему поддерживает Google Maps и OpenStreetMap (онлайн + оффлайн), но в полностью переработанном техническом виде и с множеством интересных новых функций, которые не поддерживаются "старыми" картами. Часть новых функций:
+- Поворот карты для карт на основе OpenStreetMap (онлайн + офлайн)
+- Всплывающее окно кластера для Google Maps
+- Возможность убрать ненужные вам источники карт
+- Диаграмма высот для маршрутов и треков
+- Переключение между списками непосредственно с карты
+- "Режим вождения" для карт на основе OpenStreetMap
 
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
+ЕдинаяКарта уже довольно давно доказала свою стабильность, поэтому мы удалим старые версии карт, чтобы сократить затраты на поддержку c:geo.
 
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
+Дорожная карта:
+- "Старые" карты теперь находятся в режиме вывода из приложения - мы больше не будем исправлять ошибки, возникающие при работе с ними.
+- Осенью 2025 года ЕдинаяКарта будет доступна по умолчанию для всех пользователей.
+- "Старые" версии карт будут удалены весной 2026 года.
 
-Until then, you can switch between the different implementations in settings => map sources.
+До наступления указанных сроков вы можете переключаться между различными реализациями в разделе настройки => источники карт.
 
 ### Карта
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Новое: Отображение геозон для этапов лабораторных (ЕдинаяКарта) - включите "Круги" в быстрых настройках карты, чтобы отобразить их
+- Новое: Возможность устанавливать круги с индивидуальным радиусом для путевых точек (пункт контекстного меню "Геозона")
+- Исправлено: Вид карты не обновлялся при удалении тайника из отображаемого в данный момент списка
+- Исправлено: Количество тайников в выбранном списке не обновлялось при изменении содержимого списка
+- Изменение: Сохранение текущего отображения экрана при отображении списка, если все тайники помещаются в него
+- Новое: Следить за моим местоположением на карте высот (ЕдинаяКарта)
+- Новое: Включить действия "переместить в" / "скопировать в" для "показывать как список"
+- Новое: Поддержка Elevate Winter темы в загрузчике карт
+- Новое: Адаптивное затенение высот, дополнительный режим высокого качества (ЕдинаяКарта Mapsforge)
+- Новое: Переработанный диалог быстрых настроек маршрутов/треков
+- Новое: Длительное нажатие на значок выбора карты для выбора предыдущего провайдера карт (ЕдинаяКарта)
+- Новое: Разрешить установку отображаемого имени для офлайн-карт в сопутствующем файле (ЕдинаяКарта)
+- Новое: Длительное нажатие на онлайн-кнопку для загрузки офлайн-тайников
+- Новое: Офлайн-затенение высот для ЕдинаяКарта (вариант VTM)
+- Новое: Поддержка фоновых карт (ЕдинаяКарта)
+- Исправлено: Компактные значки не превращались в большие при увеличении масштаба в автоматическом режиме (ЕдинаяКарта)
+- Новое: Действия при длительном нажатии в поле информации о тайнике: GC код, название тайника, координаты, персональная заметка/подсказка
+- Изменение: Переключение длительным нажатием на информационое поле тайника для выбора эмодзи на короткое нажатие для устранения коллизии
 
 ### Детали тайника
 - Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
@@ -45,17 +45,17 @@ Until then, you can switch between the different implementations in settings => 
 - Исправлено: Сведения о тайнике: списки тайников не обновлялись после нажатия на имя списка и удаления тайника из этого списка
 - Исправлено: Заметка пользователя терялась при обновлении lab adventure (geocaching.com)
 - Изменение: Подстановки, связанные с датой записи, будут использовать выбранную дату вместо текущей
-- New: Collapse long log entries per default
+- Новое: По умолчанию сворачивать длинные записи о посещении
 
 ### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
+- Новое: Встроенный проигрыватель Wherigo player проверяет отсутствие учетных данных
+- Изменение: Удален отчет об ошибке Wherigo (поскольку ошибки в основном связаны с картриджем, их должен исправлять владелец картриджа)
+- Новое: Возможность навигации в определенной зоне с помощью компаса
+- Новое: Возможность копировать координаты центра зоны в буфер обмена
+- Новое: Установить центр зоны в качестве цели при открытии карты (чтобы получить информацию о маршруте и расстоянии для него)
 - Новое: Поддержка открытия локальных файлов Wherigo
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- Изменение: Длительное нажатие на зону на карте больше не распознается. Это позволяет пользователям выполнять другие действия в области зоны карты, доступной при длительном нажатии, например: создавать пользовательский тайник
+- Новое: Отображать предупреждение, если wherigo.com сообщает об отсутствии лицензионного соглашения (что приводит к сбою загрузки картриджа)
 
 ### Общее
 - Новое: Переработана страница поиска
@@ -63,18 +63,18 @@ Until then, you can switch between the different implementations in settings => 
 - Новое: Поддержка координат в формате DD,DDDDDDD
 - Новое: Отображение последнего использованного имени фильтра в диалоговом окне фильтра
 - Новинка: Калькулятор координат: функция для замены "x" символом умножения
-- Fix: Incorrect altitude (not using mean above sea level)
+- Исправлено: Неправильная высота (не использовалось среднее значение над уровнем моря)
 - Исправлено: Настройка ограничения расстояния до ближайшего объекта не работала должным образом при малых значениях
-- Fix: Sorting of cache lists by distance descending not working correctly
+- Исправлено: некорректно работала сортировка списков тайников по убыванию расстояния
 - Исправлено: Тайники Adv Lab (Лаборатории Приключений) исключались фильтром D/T даже при активном "включать неопределенные"
 - Исправлено: проблемы с цветом значков меню в светлом режиме
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
+- Новое: Добавлено "Удалить прошедшие события" в списке "все"
+- Новое: Отображать коннектор при фильтрации для "пользовательских тайников" как активный
+- Новое: GPX экспорт: экспорт журналов/геокротов стал необязательным
+- Новое: Добавлена кнопка для удаления шаблонов журналов
 - Исправлено: при импорте файла локальной карты имя карты выбиралось случайным образом
-- Fix: Map downloader offering broken (0 bytes) files for download
-- New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Исправлено: Загрузчик карт предлагал для загрузки поврежденные файлы (0 байт)
+- Новое: Добавлены сопоставления для некоторых отсутствующих типов тайников OC
+- Новое: Переместили списки "Недавние" в диалоговом окне выбора списка наверх при нажатии кнопки "Недавние"
+- Новое: Поделиться списком геокодов из списка тайников
+- Изменение: "Навигация (автомобиль)" и т.п. теперь используют параметр "q=" вместо устаревшего параметра "ll="
