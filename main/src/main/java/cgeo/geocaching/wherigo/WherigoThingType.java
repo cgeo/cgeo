@@ -102,4 +102,11 @@ public enum WherigoThingType {
         return result;
     }
 
+    public static String getVisibleThingState() {
+        return getEverything().stream()
+            .filter(WherigoUtils::isVisibleToPlayer)
+            .map(et -> et.getClass().getSimpleName() + ":" + et.name)
+            .sorted().collect(Collectors.joining(","));
+    }
+
 }

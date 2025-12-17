@@ -110,7 +110,6 @@ public class WherigoGame implements UI {
             // not really important
             Log.d(LOG_PRAEFIX + "unable to set name/platform for OpenWIG", e);
         }
-
     }
 
     public int addListener(final Consumer<NotifyType> listener) {
@@ -337,7 +336,7 @@ public class WherigoGame implements UI {
         isPlaying = true;
         Log.iForce(LOG_PRAEFIX + "pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);
-        WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
+        WherigoSaveFileHandler.get().reset(); // ends a probable LOAD
         WherigoLocationProvider.get().connect();
         WherigoGameService.startService();
     }
@@ -484,7 +483,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void unblock() {
-        WherigoSaveFileHandler.get().loadSaveFinished(); // Ends a running SAVE
+        WherigoSaveFileHandler.get().saveFinished(); // Ends a running SAVE
     }
 
     /**
@@ -529,4 +528,5 @@ public class WherigoGame implements UI {
     public String toString() {
         return "isPlaying:" + isPlaying + ", name:" + getCartridgeName() + ", cguid:" + getCGuid() + ", context: " + getContextGeocacheName();
     }
+
 }
