@@ -118,12 +118,14 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                         if (callback != null) {
                             Engine.invokeCallback(callback, "Button2");
                         }
+                        WherigoSaveFileHandler.get().markSafeWorthyAction();
                     } else if (pageDisplayed + 1 < texts.length) {
                         pageDisplayed ++;
                         refreshGui(binding, control);
                     } else {
                         control.setPauseOnDismiss(false);
                         control.dismiss();
+                        WherigoSaveFileHandler.get().markSafeWorthyAction();
                         if (callback != null) {
                             Engine.invokeCallback(callback, "Button1");
                         }

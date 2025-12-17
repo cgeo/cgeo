@@ -93,6 +93,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                     control.setPauseOnDismiss(false);
                     control.dismiss();
                     Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
+                    WherigoSaveFileHandler.get().markSafeWorthyAction();
                 } else {
                     control.dismiss();
                 }
@@ -101,6 +102,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 control.setPauseOnDismiss(false);
                 control.dismiss();
                 Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
+                WherigoSaveFileHandler.get().markSafeWorthyAction();
             });
             Keyboard.show(activity, binding.dialogInputEdittext);
 
@@ -130,6 +132,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                         if (item) {
                             control.setPauseOnDismiss(false);
                             control.dismiss();
+                            WherigoSaveFileHandler.get().markSafeWorthyAction();
                             Engine.callEvent(input, "OnGetInput", CommonUtils.first(choiceModel.getSelectedItems()));
                         } else {
                             control.dismiss();
@@ -144,6 +147,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             WherigoViewUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, 1, item -> WherigoUtils.TP_OK_BUTTON, item -> {
                 control.setPauseOnDismiss(false);
                 control.dismiss();
+                WherigoSaveFileHandler.get().markSafeWorthyAction();
                 Engine.callEvent(input, "OnGetInput", null);
             });
         }
