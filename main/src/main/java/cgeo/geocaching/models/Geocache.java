@@ -2303,6 +2303,13 @@ public class Geocache implements INamedGeoCoordinate {
         images.addAll(getSpoilers()); //for gc.com this includes gallery images, spoilers and background
         addLocalSpoilersTo(images);
 
+        //For Demonstration purposes: add a fake "WAYPOINT" image
+        images.add(new Image.Builder()
+                .setTitle("cgeo Logo")
+                .setCategory(Image.ImageCategory.WAYPOINT)
+                .setUrl("https://www.cgeo.org/images/logo.png")
+                .build());
+
         // Deduplicate images and return them in requested size
         ImageUtils.deduplicateImageList(images);
 
