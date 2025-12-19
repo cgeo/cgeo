@@ -2180,24 +2180,16 @@ public class Settings {
     /**
      * get comma-delimited list of info items for given key
      * <br>
-     * defaultSource: 0=empty, 1=migrate quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
+     * defaultSource: 0=empty, 1=default quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
      */
     public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey, final int defaultSource) {
         final ArrayList<Integer> result = new ArrayList<>();
         final String pref = getString(prefKey, "-");
         if (StringUtils.equals(pref, "-")) {
             if (defaultSource == 1) {
-                // migrate quicklaunchitem setting
-                final Set<String> empty = Collections.emptySet();
-                if (sharedPrefs != null) {
-                    for (String s : sharedPrefs.getStringSet(getKey(R.string.old_pref_quicklaunchitems), empty)) {
-                        for (QuickLaunchItem.VALUES item : QuickLaunchItem.VALUES.values()) {
-                            if (StringUtils.equals(s, item.name())) {
-                                result.add(item.id);
-                            }
-                        }
-                    }
-                }
+                result.add(QuickLaunchItem.VALUES.MANUAL.id);
+                result.add(QuickLaunchItem.VALUES.FAQ.id);
+                result.add(QuickLaunchItem.VALUES.INFO.id);
                 putString(prefKey, StringUtils.join(result, ","));
                 Log.i("migrated quicklaunch: " + result);
             } else if (defaultSource == 2) {
