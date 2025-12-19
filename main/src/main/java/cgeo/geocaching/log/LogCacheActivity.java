@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
 import cgeo.geocaching.databinding.LogcacheTrackableItemBinding;
@@ -79,6 +80,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final String SAVED_STATE_FAVORITE = "cgeo.geocaching.saved_state_favorite";
+
+    private static final int MAX_GC_TRACKABLE_FOUNDS = 100; // maximum number of allowed trackables visiting per cache log for geocaching.com
 
     private enum LogEditMode {
         CREATE_NEW, // create/edit a new log entry (which may be stored offline)
@@ -539,6 +542,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
         }
+        if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
+            SimpleDialog.of(this).setTitle(R.string.err_trackable_error).setMessage(R.string.err_trackable_too_many_visited, MAX_GC_TRACKABLE_FOUNDS).confirm(() -> { });
+            return;
+        }
         if (logType.get().mustConfirmLog()) {
             SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm(this::sendLogInternal);
         } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
@@ -549,6 +556,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sendLogInternal() {
+        if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
+            return;
+        }
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
             logActivityHelper.editLog(cache, this.originalLogEntry,
                 getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
@@ -774,6 +784,20 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.clear();
             this.addAll(inventory);
             resortTrackables(Settings.getTrackableComparator());
+        }
+
+        public boolean hastTooManyGCVisitedLogs() {
+            int count = 0;
+            for (int i = 0; i < getCount(); i++) {
+                final Trackable t = getItem(i);
+                if (t != null && t.getBrand() == TrackableBrand.TRAVELBUG && actionLogs.get(t.getGeocode()) == LogTypeTrackable.VISITED) {
+                    count++;
+                    if (count > MAX_GC_TRACKABLE_FOUNDS) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public void resortTrackables(final TrackableComparator comparator) {

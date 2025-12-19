@@ -262,9 +262,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     private void showEndNotification(final String text) {
-        notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true).build());
-
+        Notifications.send(this, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true));
     }
 
     private static class DownloadTaskProperties {
