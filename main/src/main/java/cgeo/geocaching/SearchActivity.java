@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
@@ -446,7 +447,8 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         // mitigation for #13312
         if (!Settings.isGCPremiumMember()) {
             final int activeCount = ConnectorFactory.getActiveConnectors().size();
-            if (GCConnector.getInstance().isActive() && (activeCount == 1 || (activeCount == 2 && ALConnector.getInstance().isActive()))) {
+            final int compareCount = (GCConnector.getInstance().isActive() ? 1 : 0) + (ALConnector.getInstance().isActive() ? 1 : 0) + (InternalConnector.getInstance().isActive() ? 1 : 0);
+            if (GCConnector.getInstance().isActive() && (activeCount == compareCount)) {
                 // only gc.com connectors active, and user has basic member status => disable keyword search
                 kwCard.addOnClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_kw_disabled_hint)).show());
                 ((ImageView) kwCard.findViewById(R.id.icon)).getDrawable().setTint(getResources().getColor(R.color.colorTextHint));
