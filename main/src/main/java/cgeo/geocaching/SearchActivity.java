@@ -344,7 +344,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
             if (title == R.string.search_geo) {
                 searchView.setText("GC");
-                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
+                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction));
                 final String clipboardGeocode = getGeocodeFromClipboard();
                 if (null != clipboardGeocode) {
                     binding.suggestionList.postDelayed(() -> {
@@ -356,7 +356,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                     }, 0);
                 }
             } else if (title == R.string.search_kw) {
-                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
+                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction));
                 binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
                     final String searchTerm = (String) parent.getItemAtPosition(position);
                     // suggestions are a mix of geocodes and keywords, differentiate them by layout used
