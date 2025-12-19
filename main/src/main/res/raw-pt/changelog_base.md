@@ -24,11 +24,12 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Visualização de variáveis pode ser filtrada
 - Novo: Visualizar coordenadas calculadas que excedem os limites na lista de pontos adicionais
 - Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
-- New placeholders for trackable logging (geocache name, geocache code, user)
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
 - Novo: Melhorado o funcionamento dos botões
+- New: Status auto-save
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
