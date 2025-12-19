@@ -24,11 +24,12 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Widok zmiennych może być filtrowany
 - Nowość: Wizualizuj przepełnienie obliczonych współrzędnych na liście punktów nawigacji
 - Nowość: Wpis menu na liście punktów nawigacji do oznaczania niektórych typów punktów nawigacji jako odwiedzone
-- Nowe teksty zastępcze przy logowaniu przedmiotów podróżnych (nazwa skrytki, kod skrytki, użytkownik)
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
 - Nowość: Ulepszona obsługa przycisku
+- New: Status auto-save
 
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
