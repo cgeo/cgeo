@@ -24,11 +24,12 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Variabelenweergave kan worden gefilterd
 - Nieuw: Visualiseer berekende coördinaten overloop in de lijst van waypoints
 - Nieuw: Menu optie in de waypointlijst om bepaalde waypoint types als bezocht te markeren
-- Nieuwe placeholders voor trackable logging (geocache naam, geocache code, gebruiker)
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
 - Nieuw: Verbeterde knoppen verwerking
+- New: Status auto-save
 
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
