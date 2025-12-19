@@ -24,11 +24,12 @@ Due to Play Store policies we have updated the Android API level this version of
 - Nouveau : la vue des variables peut être filtrée
 - New: Visualize calculated coordinates overflow in waypoint list
 - New: Menu entry in waypoint list to mark certain waypoint types as visited
-- New placeholders for trackable logging (geocache name, geocache code, user)
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
 
 ### Wherigo Player
 - Nouveau : Traduction hors ligne pour les caches Wherigo
 - Nouveau : Amélioration de la gestion des boutons
+- New: Status auto-save
 
 ### Général
 - Nouveau : Option de partage après avoir logué une cache
