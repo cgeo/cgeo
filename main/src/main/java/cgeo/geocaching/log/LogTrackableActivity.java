@@ -284,7 +284,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
+        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode, null));
     }
 
     public void updateForNewType() {

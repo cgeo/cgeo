@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -23,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
 public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     private final Context context;
 
-    public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction) {
-        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, null, null);
+    public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Action1<String> deleteFunction) {
+        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, null, deleteFunction);
         this.context = context;
     }
 
-    public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
-        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, historyFunction, null);
+    public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction, final Action1<String> deleteFunction) {
+        super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, historyFunction, deleteFunction);
         this.context = context;
     }
 
@@ -57,8 +58,8 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     }
 
     public static class GeocodeAutoCompleteAdapter extends GeocacheAutoCompleteAdapter {
-        public GeocodeAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
-            super(context, geocodeSuggestionFunction, historyFunction);
+        public GeocodeAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction, final Action1<String> deleteFunction) {
+            super(context, geocodeSuggestionFunction, historyFunction, deleteFunction);
         }
 
         /**
@@ -70,8 +71,8 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     }
 
     public static class KeywordAutoCompleteAdapter extends GeocacheAutoCompleteAdapter {
-        public KeywordAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
-            super(context, geocodeSuggestionFunction, historyFunction);
+        public KeywordAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction, final Action1<String> deleteFunction) {
+            super(context, geocodeSuggestionFunction, historyFunction, deleteFunction);
         }
 
         @NonNull
