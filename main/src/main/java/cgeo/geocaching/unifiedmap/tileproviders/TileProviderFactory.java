@@ -171,7 +171,10 @@ public class TileProviderFactory {
                 registerTileProvider(data.right);
             }
         }
+
         // --------------------------------------------------------------------
+        // "no map" tile provider
+        registerTileProvider(new NoMapMapsforgeTileProvider());
     }
 
     private static boolean isGoogleMapsInstalled() {
