@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
 	<include android:id="@+id/actionbar" layout="@layout/actionbar_popup" />
@@ -68,7 +69,8 @@
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight= "0.5"/>
+					android:layout_weight= "0.5"
+                    tools:ignore="HardcodedText"/>
 
 				<EditText
 					android:id="@+id/editTextLatMinutes"
@@ -87,7 +89,8 @@
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight= "0.5"/>
+					android:layout_weight= "0.5"
+                    tools:ignore="HardcodedText"/>
 
 				<EditText
 					android:id="@+id/editTextLatSeconds"
@@ -106,7 +109,8 @@
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight= "0.5"/>
+					android:layout_weight= "0.5"
+                    tools:ignore="HardcodedText"/>
 
 				<EditText
 					android:id="@+id/editTextLatFraction"
@@ -125,7 +129,8 @@
 					android:textSize="@dimen/textSize_inputCoords"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_weight= "0.5"/>
+					android:layout_weight= "0.5"
+                    tools:ignore="HardcodedText"/>
 
 
 		</LinearLayout>
@@ -162,7 +167,8 @@
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_weight= "0.5"/>
+						android:layout_weight= "0.5"
+                        tools:ignore="HardcodedText"/>
 
 					<EditText
 						android:id="@+id/editTextLonMinutes"
@@ -181,7 +187,8 @@
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_weight= "0.5"/>
+						android:layout_weight= "0.5"
+                        tools:ignore="HardcodedText"/>
 
 					<EditText
 						android:id="@+id/editTextLonSeconds"
@@ -200,7 +207,8 @@
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_weight= "0.5"/>
+						android:layout_weight= "0.5"
+                        tools:ignore="HardcodedText"/>
 
 					<EditText
 						android:id="@+id/editTextLonFraction"
@@ -219,7 +227,8 @@
 						android:textSize="@dimen/textSize_inputCoords"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_weight= "0.5"/>
+						android:layout_weight= "0.5"
+                        tools:ignore="HardcodedText"/>
 
 			</LinearLayout>
 
