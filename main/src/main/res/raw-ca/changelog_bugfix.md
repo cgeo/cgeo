@@ -2,6 +2,7 @@
 - Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 - Canvi: S'ha reduït a 100 el nombre màxim de visites de rastrejables de GC per registre de catxé (segons la sol·licitud de geocaching.com per reduir la càrrega del servidor causada pels amants extrems dels rastrejables)
 - Correcció: Algunes possibles excepcions de seguretat quan l'usuari no ha atorgat certs drets (per exemple: notificacions)
+- Correcció: Cercles de catxés incomplets en nivells de zoom baixos (només VTM)
 
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
@@ -48,6 +49,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
