@@ -327,7 +327,7 @@
     <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
     <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
     <string name="err_trackable_error">Error rastrejable</string>
-    <string name="err_trackable_too_many_visited">Massa elements rastrejables marcats com a \"visita\": un màxim de %d permès</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Massa elements rastrejables marcats com a \"visita\": un màxim de %d permès</string>
     <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
     <string name="confirm_discard_changes">Voleu descartar els canvis no desats?</string>
     <string name="confirm_unsent_changes_title">Canvis no enviats</string>
