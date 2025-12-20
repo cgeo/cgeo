@@ -1,4 +1,10 @@
 ##
+- Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
+- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
+- Fix: Cache circles incomplete on low zoom levels (VTM only)
+
+##
 - Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
 - Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
 - Fix: Geofence-radie-inmatningsrutan visar decimaltal
@@ -43,6 +49,9 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
+
+
 
 
 
