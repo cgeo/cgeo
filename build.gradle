@@ -122,11 +122,11 @@ subprojects {
         google()
         // integrate as last one - for versions by commit ID
         maven {
-            url 'https://jitpack.io'
+            url = 'https://jitpack.io'
         }
         // Used for Mapsforge and VTM Snapshots
         maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
 
