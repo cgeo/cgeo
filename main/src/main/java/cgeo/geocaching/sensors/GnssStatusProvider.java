@@ -68,7 +68,11 @@ public class GnssStatusProvider {
             emitter.onNext(NO_GNSS);
             if (PermissionContext.LOCATION.hasAllPermissions()) {
                 Log.d("GnssStatusProvider.createGNSSObservable: registering callback");
-                geoManager.registerGnssStatusCallback(callback);
+                try {
+                    geoManager.registerGnssStatusCallback(callback);
+                } catch (SecurityException ignore) {
+                    Log.d("GnssStatusProvider.createGNSSObservable: Could not register provider, no Location permission available");
+                }
             } else {
                 Log.d("GnssStatusProvider.createGNSSObservable: Could not register provider, no Location permission available");
             }
