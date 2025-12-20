@@ -41,12 +41,12 @@ public class GeoDataProvider {
             Log.d("GeoDataProvider: starting the GPS and network listeners");
             try {
                 geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
-            } catch (final Exception e) {
+            } catch (final IllegalArgumentException | SecurityException e) {
                 Log.w("Unable to create GPS location provider: " + e.getMessage());
             }
             try {
                 geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
-            } catch (final Exception e) {
+            } catch (final IllegalArgumentException | SecurityException e) {
                 Log.w("Unable to create network location provider: " + e.getMessage());
             }
             emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> {
