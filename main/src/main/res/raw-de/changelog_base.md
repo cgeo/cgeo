@@ -9,6 +9,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Korrektur: Verdopplung einzelner Routenelemente
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
+- New: NoMap tile provider (don't show map, just caches etc.)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
