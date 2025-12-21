@@ -77,9 +77,23 @@ public final class Log {
     private static final boolean[] SETTING_ADD_CLASSINFO = new boolean[LogLevel.values().length];
 
     static {
-        //avoid ANR by starting configuring in a separate thread (configuring accessed file system via SAF)
+        // Initialize with default settings immediately, avoid any file I/O during static initialization
+        // to prevent ANR on startup. Log property file reading is deferred to background.
         try {
-            new Thread(Log::configureLogging).start();
+            adjustSettings();
+            // Start background thread to potentially load log properties file
+            // This is done with a delay to ensure it doesn't interfere with app startup
+            new Thread(() -> {
+                try {
+                    // Wait a bit to let the app finish initializing
+                    Thread.sleep(2000);
+                    configureLoggingFromFile();
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                } catch (RuntimeException re) {
+                    android.util.Log.e(TAG, "[Log] Failed in background log configuration", re);
+                }
+            }).start();
         } catch (RuntimeException re) {
             //never ever shall setup of Log fail
             android.util.Log.e(TAG, "[Log] Failed in static Log", re);
@@ -90,27 +104,32 @@ public final class Log {
         //utility class
     }
 
-    private static void configureLogging() {
-        android.util.Log.i(TAG, "[Log] Start configuring");
+    /**
+     * Attempts to load log configuration from a properties file in the logfiles folder.
+     * This method performs file I/O and should NOT be called during app initialization.
+     * It is called in a background thread after startup.
+     */
+    private static void configureLoggingFromFile() {
+        android.util.Log.i(TAG, "[Log] Start configuring from file");
         InputStream propFile = null;
         try {
             String logfileFolder = "(unknown, no cgeo app)";
             if (CgeoApplication.getInstance() != null) {
+                // Access folder lazily - this may trigger folder initialization but it's in background thread
                 propFile = ContentStorage.get().openForRead(PersistableFolder.LOGFILES.getFolder(), LOGPROPERTY_FILENAME);
                 logfileFolder = String.valueOf(PersistableFolder.LOGFILES.getFolder());
             }
             if (propFile == null) {
-                adjustSettings();
                 android.util.Log.i(TAG, "[Log] No logging config file '" + LOGPROPERTY_FILENAME + "' found at " + logfileFolder + ", using defaults");
             } else {
-                android.util.Log.i(TAG, "[Log] Logging config file '" + LOGPROPERTY_FILENAME + "'found at " + logfileFolder + ", try to apply");
+                android.util.Log.i(TAG, "[Log] Logging config file '" + LOGPROPERTY_FILENAME + "' found at " + logfileFolder + ", applying");
                 final Properties logProps = new Properties();
                 logProps.load(new InputStreamReader(propFile));
                 setProperties(logProps);
             }
         } catch (Exception ex) {
             //whatever happens in Log initializer, it is NOT allowed to make Log unusable!
-            android.util.Log.e(TAG, "[Log] Failed to configure Logging", ex);
+            android.util.Log.e(TAG, "[Log] Failed to configure Logging from file", ex);
         } finally {
             IOUtils.closeQuietly(propFile);
         }
