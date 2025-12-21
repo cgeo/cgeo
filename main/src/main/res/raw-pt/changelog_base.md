@@ -9,6 +9,7 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Correcção: duplicação de pontos individuais da rota
 - Novo: Suporte para o tema Motorider (apenas VTM)
 - Novo: Suporte para exibição de fundo transparente de mapas offline (apenas VTM)
+- New: NoMap tile provider (don't show map, just caches etc.)
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
