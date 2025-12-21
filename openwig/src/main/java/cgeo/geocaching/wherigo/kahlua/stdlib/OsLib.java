@@ -116,12 +116,12 @@ public class OsLib implements JavaFunction {
     }
 
     public int call(LuaCallFrame cf, int nargs) {
-        switch(methodId) {
-        case DATE: return date(cf, nargs);
-        case DIFFTIME: return difftime(cf);
-        case TIME: return time(cf, nargs);
-        default: throw new IllegalStateException("Undefined method called on os.");
-        }
+        return switch (methodId) {
+            case DATE -> date(cf, nargs);
+            case DIFFTIME -> difftime(cf);
+            case TIME -> time(cf, nargs);
+            default -> throw new IllegalStateException("Undefined method called on os.");
+        };
     }
 
     private int time(LuaCallFrame cf, int nargs) {
@@ -198,32 +198,32 @@ public class OsLib implements JavaFunction {
     }
 
     private static String strftime(char format, Calendar cal) {
-        switch(format) {
-            case 'a': return shortDayNames[cal.get(Calendar.DAY_OF_WEEK)-1];
-            case 'A': return longDayNames[cal.get(Calendar.DAY_OF_WEEK)-1];
-            case 'b': return shortMonthNames[cal.get(Calendar.MONTH)];
-            case 'B': return longMonthNames[cal.get(Calendar.MONTH)];
-            case 'c': return cal.getTime().toString();
-            case 'C': return Integer.toString(cal.get(Calendar.YEAR) / 100);
-            case 'd': return Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
-            case 'D': return formatTime("%m/%d/%y",cal);
-            case 'e': return cal.get(Calendar.DAY_OF_MONTH) < 10 ?
-                            " " + strftime('d',cal) : strftime('d',cal);
-            case 'h': return strftime('b',cal);
-            case 'H': return Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
-            case 'I': return Integer.toString(cal.get(Calendar.HOUR));
-            case 'j': return Integer.toString(getDayOfYear(cal));
-            case 'm': return Integer.toString(cal.get(Calendar.MONTH) + 1);
-            case 'M': return Integer.toString(cal.get(Calendar.MINUTE));
-            case 'n': return "\n";
-            case 'p': return cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-            case 'r': return formatTime("%I:%M:%S %p",cal);
-            case 'R': return formatTime("%H:%M",cal);
-            case 'S': return Integer.toString(cal.get(Calendar.SECOND));
-            case 'U': return Integer.toString(getWeekOfYear(cal, true, false));
-            case 'V': return Integer.toString(getWeekOfYear(cal, false, true));
-            case 'w': return Integer.toString(cal.get(Calendar.DAY_OF_WEEK) - 1);
-            case 'W': return Integer.toString(getWeekOfYear(cal, false, false));
+        return switch (format) {
+            case 'a' -> shortDayNames[cal.get(Calendar.DAY_OF_WEEK) - 1];
+            case 'A' -> longDayNames[cal.get(Calendar.DAY_OF_WEEK) - 1];
+            case 'b' -> shortMonthNames[cal.get(Calendar.MONTH)];
+            case 'B' -> longMonthNames[cal.get(Calendar.MONTH)];
+            case 'c' -> cal.getTime().toString();
+            case 'C' -> Integer.toString(cal.get(Calendar.YEAR) / 100);
+            case 'd' -> Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
+            case 'D' -> formatTime("%m/%d/%y", cal);
+            case 'e' -> cal.get(Calendar.DAY_OF_MONTH) < 10 ?
+                    " " + strftime('d', cal) : strftime('d', cal);
+            case 'h' -> strftime('b', cal);
+            case 'H' -> Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
+            case 'I' -> Integer.toString(cal.get(Calendar.HOUR));
+            case 'j' -> Integer.toString(getDayOfYear(cal));
+            case 'm' -> Integer.toString(cal.get(Calendar.MONTH) + 1);
+            case 'M' -> Integer.toString(cal.get(Calendar.MINUTE));
+            case 'n' -> "\n";
+            case 'p' -> cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+            case 'r' -> formatTime("%I:%M:%S %p", cal);
+            case 'R' -> formatTime("%H:%M", cal);
+            case 'S' -> Integer.toString(cal.get(Calendar.SECOND));
+            case 'U' -> Integer.toString(getWeekOfYear(cal, true, false));
+            case 'V' -> Integer.toString(getWeekOfYear(cal, false, true));
+            case 'w' -> Integer.toString(cal.get(Calendar.DAY_OF_WEEK) - 1);
+            case 'W' -> Integer.toString(getWeekOfYear(cal, false, false));
             /* commented out until we have a way to define locale and get locale formats working
             case 'x':
                 String str = Integer.toString(cal.get(Calendar.YEAR));
@@ -232,11 +232,11 @@ public class OsLib implements JavaFunction {
             case 'X': return Integer.toString(cal.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(cal.get(Calendar.MINUTE)) +
                         ":" + Integer.toString(cal.get(Calendar.SECOND));
             */
-            case 'y': return Integer.toString(cal.get(Calendar.YEAR) % 100);
-            case 'Y': return Integer.toString(cal.get(Calendar.YEAR));
-            case 'Z': return cal.getTimeZone().getID();
-            default: return null; // bad input format.
-        }
+            case 'y' -> Integer.toString(cal.get(Calendar.YEAR) % 100);
+            case 'Y' -> Integer.toString(cal.get(Calendar.YEAR));
+            case 'Z' -> cal.getTimeZone().getID();
+            default -> null; // bad input format.
+        };
     }
 
     public static LuaTable getTableFromDate(Calendar c) {
