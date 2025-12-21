@@ -1283,6 +1283,7 @@
     <string name="map_source_google_terrain">Google: Terrein</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
+    <string name="map_source_nomap">Geen kaart</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
