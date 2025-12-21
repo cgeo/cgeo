@@ -619,7 +619,9 @@ public class ContentStorage {
     protected Folder getAccessibleDefaultFolder(final Folder candidate, final boolean needsWrite, final String fallbackName) {
 
         //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)
-        if (candidate != null && ensureFolder(candidate, needsWrite, true)) {
+        // Note: we don't do a full read/write test here (testReadWrite=false) to avoid ANR during app startup
+        // The folder will be properly tested when it's actually used
+        if (candidate != null && ensureFolder(candidate, needsWrite, false)) {
             return candidate;
         }
 
