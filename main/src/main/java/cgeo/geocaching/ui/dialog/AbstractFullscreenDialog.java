@@ -35,7 +35,10 @@ public abstract class AbstractFullscreenDialog extends DialogFragment {
 
     protected void applyEdge2Edge(final View view) {
         ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+            // Note: IME (keyboard) insets are excluded because SOFT_INPUT_ADJUST_RESIZE (set in onStart())
+            // already handles keyboard layout adjustments. Including IME insets here would cause content
+            // to extend behind the keyboard when text fields expand.
+            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
             view.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
             return windowInsets;
         });
