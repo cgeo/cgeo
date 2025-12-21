@@ -2,7 +2,7 @@
 - Tijd om te updaten! Als je nog steeds Android 7 of ouder gebruikt, is dit misschien de laatste c:geo update voor jou! Met onze volgende release van c:geo zullen we ondersteuning voor Android 5-7 stopzetten om onze onderhoudsbelasting te verminderen en om externe componenten te kunnen bijwerken die gebruikt worden door c:geo die we momenteel nog achterhouden. We ondersteunen nog steeds Android 8 tot en met Android 16 (en nieuwere versies wanneer ze gepubliceerd worden), een totaal van meer dan acht jaar Android geschiedenis.
 - Wijziging: Maximum aantal GC trackables die per cachelogboek op bezocht gezet kunnen worden, is teruggebracht tot 100 (op verzoek van geocaching.com om hun serverbelasting veroorzaakt door extreme trackable lovers te verminderen)
 - Oplossing: Enkele mogelijke beveiligingsuitzonderingen wanneer de gebruiker bepaalde permissies niet heeft toegekend (bv. meldingen)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Oplossing: Cache cirkels onvolledig op lage zoomniveaus (VTM alleen)
 
 ##
 - Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
