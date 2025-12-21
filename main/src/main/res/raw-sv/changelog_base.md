@@ -9,6 +9,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Fördubbling av enskilda rutt-objekt
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nytt: Stöd för transparent bakgrundsvisning av offline-kartor (endast VTM)
+- Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -24,12 +25,12 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Variabler kan filtreras
 - Nytt: Visualisera beräknat koordinat-spill i vägpunkt-listan
 - Nytt: Menypost i vägpunkt-listan för att markera vissa vägpunkt-typer som besökta
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
 - Nytt: Förbättrad knapphantering
-- New: Status auto-save
+- Ny: Status auto-spara
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
