@@ -337,6 +337,8 @@
     <string name="warn_calculator_state_save">Glöm inte att spara punkten om du vill behålla kalkylatorläget.</string>
     <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
     <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
+    <string name="err_trackable_error">Fel med spårbar</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">För många spårbara objekt markerade som \"besökt\" - maximalt antal %d tillåtna</string>
     <string name="confirm_unsaved_changes_title">Osparade ändringar</string>
     <string name="confirm_discard_changes">Ignorera osparade ändringar?</string>
     <string name="confirm_unsent_changes_title">Osparade ändringar</string>
@@ -1271,6 +1273,7 @@
     <string name="map_source_google_terrain">Google: Terräng</string>
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
+    <string name="map_source_nomap">Ingen karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
