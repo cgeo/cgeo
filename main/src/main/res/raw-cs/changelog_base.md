@@ -9,6 +9,7 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Oprava: Zdvojnásobení jednotlivých položek trasy
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Podpora zobrazení offline map s průhledným pozadím (pouze VTM)
+- New: NoMap tile provider (don't show map, just caches etc.)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
