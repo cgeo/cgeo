@@ -9,6 +9,7 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Oplossing: Verdubbeling van individuele route items
 - Nieuw: Ondersteuning voor Motorider thema (alleen VTM)
 - Nieuw: Ondersteuning voor transparante achtergrond weergave van offline kaarten (alleen VTM)
+- Nieuw: NoMap tegel provider (kaart niet tonen, gewoon caches etc.)
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
@@ -24,12 +25,12 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Variabelenweergave kan worden gefilterd
 - Nieuw: Visualiseer berekende coördinaten overloop in de lijst van waypoints
 - Nieuw: Menu optie in de waypointlijst om bepaalde waypoint types als bezocht te markeren
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Nieuw: Plaatshouders voor trackable logging (geocache naam, geocache code, gebruiker)
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
 - Nieuw: Verbeterde knoppen verwerking
-- New: Status auto-save
+- Nieuw: Status automatisch opslaan
 
 ### Algemeen
 - Nieuw: Delen optie na het loggen van een cache
