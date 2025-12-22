@@ -46,4 +46,4 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Barra de ferramentas colorida nas páginas de detalhes das caches
 - Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
 - Novo: Pré-visualizar listas de marcadores
-- Change: Increase minimum required Android version to Android 8
+- Alteração: Elevada a versão mínima necessária do Android para o Android 8
