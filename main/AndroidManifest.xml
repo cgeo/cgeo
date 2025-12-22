@@ -295,7 +295,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.map" />
@@ -315,7 +314,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="content" />
                 <data android:pathSuffix=".map" />
             </intent-filter>
@@ -327,7 +325,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="content" />
                 <data android:pathSuffix=".gwc" />
             </intent-filter>
@@ -347,7 +344,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.gpx" />
@@ -365,7 +361,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="content" />
                 <data android:pathSuffix=".gpx" />
             </intent-filter>
@@ -396,7 +391,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
 
-                <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.ggz" />
