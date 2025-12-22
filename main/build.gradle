@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
 
         versionName = versionNameFromDate()
         versionCode = versionCodeFromDate(0)
@@ -313,26 +313,26 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // Apache Commons
-    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-collections4:4.5.0'
 
     // commons.compress 1.21+ relies on java.nio which is only supported on API26+
     // See https://github.com/cgeo/cgeo/issues/13730 / 13731
     //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-compress:1.20'
+    implementation 'org.apache.commons:commons-compress:1.28.0'
 
     // commons-lang3 3.12.0 uses StringJoiner which is first contained in Android API24
     // See https://github.com/cgeo/cgeo/issues/12577
     //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'org.apache.commons:commons-lang3:3.19.0'
 
     // commons-text 1.10.0 uses commons-lang3 3.12.0 and commons-io 2.11.0, wait for updating both
     //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.apache.commons:commons-text:1.14.0'
 
     // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
     // could be replaced by Storage Access Framework
     //noinspection GradleDependency
-    implementation 'commons-io:commons-io:2.5'
+    implementation 'commons-io:commons-io:2.20.0'
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
@@ -348,7 +348,7 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.9.4'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.9.8'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
@@ -360,27 +360,24 @@ dependencies {
     // Jackson XML processing
     // Jackson 2.13++ needs minSdk 24 (see https://github.com/FasterXML/jackson-databind?tab=readme-ov-file#android)
     //noinspection GradleDependency
-    String jacksonVersion = '2.12.7'
+    String jacksonVersion = '2.17.0'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.21.1'
+    implementation 'org.jsoup:jsoup:1.21.2'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
 
     // Junit only needed for local unit tests
-    testImplementation 'junit:junit:4.13.2'
+    //testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
-    String leakCanaryVersion = '2.14'
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
-
-    // Locus Maps integration
-    implementation "com.asamm:locus-api-android:0.9.55"
+    //String leakCanaryVersion = '2.14'
+    //debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    //implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // -- Mapsforge / Mapsforge --
 
@@ -440,16 +437,10 @@ dependencies {
     // used by mapsforge
     implementation 'com.caverock:androidsvg:1.4'
 
-    // Maps.ME integration
-    implementation project(":mapswithme-api")
-
-    // Organic Maps integration
-    implementation project(":organicmaps-api")
-
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.19.0'
 
-    String okhttpVersion = '4.12.0'
+    String okhttpVersion = '5.3.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
@@ -461,25 +452,24 @@ dependencies {
     configurations.all*.exclude module: "play-services-measurement"
 
     // Support Library Design
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.13.0'
 
     // ProcessPhoenix, reliable process restart
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.11'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
     constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0") {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.21") {
             because 'align all versions of kotlin transitive dependencies'
         }
     }
 
     // Support Library Lifecycle Helpers
-
-    String lifecycleVersion = '2.10.0'
+    String lifecycleVersion = '2.9.4'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
@@ -487,7 +477,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.10.5"
+    implementation "androidx.work:work-runtime:2.11.0"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.7.1'
@@ -525,12 +515,12 @@ dependencies {
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
-    androidTestImplementation 'androidx.test:core:1.6.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test:core:1.7.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.9.0'
+    // implementation 'androidx.browser:browser:1.9.0'
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
@@ -541,11 +531,11 @@ dependencies {
 
     //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
     //See https://github.com/guardian/toolargetool
-    implementation 'com.gu.android:toolargetool:0.3.0'
+    implementation 'com.gu.android:toolargetool:0.3.2'
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.27'
+    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.31'
 
     // For Wherigos: GIF support
     // ani gif support
@@ -556,8 +546,8 @@ dependencies {
 
     // Offline translation - language detection and translator
     // -> this is NON-FOSS code and should only be available in flavor "basic"
-    basicImplementation 'com.google.mlkit:language-id:17.0.6'
-    basicImplementation 'com.google.mlkit:translate:17.0.3'
+    //basicImplementation 'com.google.mlkit:language-id:17.0.6'
+    //basicImplementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks
