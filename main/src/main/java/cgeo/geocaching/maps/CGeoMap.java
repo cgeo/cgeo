@@ -148,7 +148,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private Resources res;
     private AbstractNavigationBarMapActivity activity;
     private MapItemFactory mapItemFactory;
-    private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
+    private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + 5000);
     private MapSource mapSource;
 
 
