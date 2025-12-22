@@ -1284,6 +1284,7 @@
     <string name="map_source_google_terrain">Google: Terreny</string>
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
+    <string name="map_source_nomap">Sense mapa</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
