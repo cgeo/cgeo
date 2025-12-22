@@ -9,7 +9,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Correcció: Duplicació d'elements de ruta individuals
 - Nou: Suport per al tema Motorider (només VTM)
 - Nou: Compatibilitat amb la visualització de fons transparent de mapes fora de línia (només VTM)
-- New: NoMap tile provider (don't show map, just caches etc.)
+- Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
