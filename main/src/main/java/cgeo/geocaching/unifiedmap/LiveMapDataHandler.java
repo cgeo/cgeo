@@ -99,7 +99,7 @@ public class LiveMapDataHandler {
                 final boolean lastViewportContainsCurrent = lastViewport != null && lastViewport.includes(params.viewport);
 
                 //database refresh
-                if (filterChanged || !lastViewportContainsCurrent) {
+                if (params.viewport != null && (filterChanged || !lastViewportContainsCurrent)) {
                     //get a bit more than just the current viewport. This prevents immediate necessity for a db call on next (small) map move
                     final Viewport refreshedViewport = params.viewport.resize(1.5);
                     final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
