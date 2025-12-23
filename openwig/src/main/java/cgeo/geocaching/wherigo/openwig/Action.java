@@ -16,7 +16,7 @@ public class Action extends EventTable {
     private boolean enabled;
 
     private Thing actor = null;
-    private Vector targets = new Vector();
+    private Vector<Thing> targets = new Vector<>();
     private boolean universal;
 
     public String text;

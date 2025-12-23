@@ -5,7 +5,6 @@
 package cgeo.geocaching.wherigo.openwig;
 
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 
 import java.io.*;
@@ -14,29 +13,23 @@ public class Timer extends EventTable {
 
     private static java.util.Timer globalTimer;
 
-    private static JavaFunction start = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            t.start();
-            return 0;
-        }
+    private static final JavaFunction start = (callFrame, nArguments) -> {
+        Timer t = (Timer)callFrame.get(0);
+        t.start();
+        return 0;
     };
 
-    private static JavaFunction stop = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            t.stop();
-            return 0;
-        }
+    private static final JavaFunction stop = (callFrame, nArguments) -> {
+        Timer t = (Timer)callFrame.get(0);
+        t.stop();
+        return 0;
     };
 
-    private static JavaFunction tick = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Timer t = (Timer)callFrame.get(0);
-            //t.tick();
-            t.callEvent("OnTick", null);
-            return 0;
-        }
+    private static final JavaFunction tick = (callFrame, nArguments) -> {
+        Timer t = (Timer)callFrame.get(0);
+        //t.tick();
+        t.callEvent("OnTick", null);
+        return 0;
     };
 
     public static void register () {
@@ -66,7 +59,7 @@ public class Timer extends EventTable {
     private static final int INTERVAL = 1;
     private int type = COUNTDOWN;
 
-    private static final Double ZERO = new Double(0);
+    private static final Double ZERO = (double) 0;
 
     private long duration = -1;
     private long lastTick = 0;
@@ -79,8 +72,7 @@ public class Timer extends EventTable {
     }
 
     protected void setItem (String key, Object value) {
-        if ("Type".equals(key) && value instanceof String) {
-            String v = (String)value;
+        if ("Type".equals(key) && value instanceof String v) {
             int t = type;
             if ("Countdown".equals(v)) {
                 t = COUNTDOWN;

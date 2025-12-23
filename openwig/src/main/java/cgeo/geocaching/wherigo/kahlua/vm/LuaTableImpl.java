@@ -28,15 +28,13 @@ package cgeo.geocaching.wherigo.kahlua.vm;
 import org.apache.commons.collections4.IteratorUtils;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 
 
-public final class LuaTableImpl implements LuaTable {
+public class LuaTableImpl implements LuaTable {
     private boolean weakKeys, weakValues;
 
     // Hash part
@@ -95,21 +93,21 @@ public final class LuaTableImpl implements LuaTable {
         return luaHashcode(key) & (capacity - 1);
     }
 
-    private final Object unref(Object o) {
+    private Object unref(Object o) {
         if (!canBeWeakObject(o)) {
             return o;
         }
 
         // Assertion: o instanceof WeakReference
-        return ((WeakReference) o).get();
+        return ((WeakReference<?>) o).get();
     }
 
-    private final Object ref(Object o) {
+    private Object ref(Object o) {
         if (!canBeWeakObject(o)) {
             return o;
         }
 
-        return new WeakReference(o);
+        return new WeakReference<>(o);
     }
 
     private boolean canBeWeakObject(Object o) {
@@ -117,7 +115,7 @@ public final class LuaTableImpl implements LuaTable {
                 || o instanceof Double || o instanceof Boolean);
     }
 
-    private final Object __getKey(int index) {
+    private Object __getKey(int index) {
         Object key = keys[index];
         if (weakKeys) {
             return unref(key);
@@ -125,14 +123,14 @@ public final class LuaTableImpl implements LuaTable {
         return key;
     }
 
-    private final void __setKey(int index, Object key) {
+    private void __setKey(int index, Object key) {
         if (weakKeys) {
             key = ref(key);
         }
         keys[index] = key;
     }
 
-    private final Object __getValue(int index) {
+    private Object __getValue(int index) {
         Object value = values[index];
         if (weakValues) {
             return unref(value);
@@ -140,14 +138,14 @@ public final class LuaTableImpl implements LuaTable {
         return value;
     }
 
-    private final void __setValue(int index, Object value) {
+    private void __setValue(int index, Object value) {
         if (weakValues) {
             value = ref(value);
         }
         values[index] = value;
     }
 
-    private final int hash_primitiveFindKey(Object key, int index) {
+    private int hash_primitiveFindKey(Object key, int index) {
         Object currentKey = __getKey(index);
 
         if (currentKey == null) {
@@ -202,7 +200,7 @@ public final class LuaTableImpl implements LuaTable {
         }
     }
 
-    private final int hash_primitiveNewKey(Object key, int mp) {
+    private int hash_primitiveNewKey(Object key, int mp) {
         keyIndexCacheKey = null;
         keyIndexCacheValue = -1;
 
@@ -308,7 +306,7 @@ public final class LuaTableImpl implements LuaTable {
 
     private LuaTable metatable;
 
-    public final void rawset(Object key, Object value) {
+    public void rawset(Object key, Object value) {
         checkKey(key);
         rawsetHash(key, value);
     }
@@ -334,12 +332,12 @@ public final class LuaTableImpl implements LuaTable {
         rawsetHash(LuaState.toDouble(index), value);
     }
 
-    public final Object rawget(Object key) {
+    public final <T> T rawget(Object key) {
         checkKey(key);
         if (key instanceof Double) {
             BaseLib.luaAssert(!((Double) key).isNaN(), "table index is NaN");
         }
-        return rawgetHash(key);
+        return (T) rawgetHash(key);
     }
 
     private Object rawgetHash(Object key) {
@@ -418,8 +416,7 @@ public final class LuaTableImpl implements LuaTable {
 
 
     public static int luaHashcode(Object a) {
-        if (a instanceof Double) {
-            Double ad = (Double) a;
+        if (a instanceof Double ad) {
             long l = Double.doubleToLongBits(ad.doubleValue()) & 0x7fffffffffffffffL;
             return (int) (l ^ (l >>> 32));
         }
@@ -471,8 +468,7 @@ public final class LuaTableImpl implements LuaTable {
         boolean weakKeys = false, weakValues = false;
         if (metatable != null) {
             Object modeObj = metatable.rawget(BaseLib.MODE_KEY);
-            if (modeObj != null && modeObj instanceof String) {
-                String mode = (String) modeObj;
+            if (modeObj instanceof String mode) {
                 weakKeys = (mode.indexOf('k') >= 0);
                 weakValues = (mode.indexOf('v') >= 0);
             }

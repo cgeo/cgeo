@@ -99,32 +99,21 @@ public class WherigoLib implements JavaFunction {
         }
     }
 
-    private Class assignClass () {
+    private Class<?> assignClass () {
         // because i'm too lazy to type out the break;s in a switch
-        switch (index) {
-            case DISTANCE:
-                return Double.class;
-            case ZONEPOINT:
-                return ZonePoint.class;
-            case ZONE:
-                return Zone.class;
-            case ZCHARACTER: case ZITEM:
-                return Thing.class;
-            case ZCOMMAND:
-                return Action.class;
-            case ZMEDIA:
-                return Media.class;
-            case ZINPUT:
-                return EventTable.class;
-            case ZTIMER:
-                return Timer.class;
-            case ZTASK:
-                return Task.class;
-            case CARTRIDGE:
-                return Cartridge.class;
-            default:
-                return getClass();
-        }
+        return switch (index) {
+            case DISTANCE -> Double.class;
+            case ZONEPOINT -> ZonePoint.class;
+            case ZONE -> Zone.class;
+            case ZCHARACTER, ZITEM -> Thing.class;
+            case ZCOMMAND -> Action.class;
+            case ZMEDIA -> Media.class;
+            case ZINPUT -> EventTable.class;
+            case ZTIMER -> Timer.class;
+            case ZTASK -> Task.class;
+            case CARTRIDGE -> Cartridge.class;
+            default -> getClass();
+        };
     }
 
     public WherigoLib(int index) {
@@ -192,47 +181,46 @@ public class WherigoLib implements JavaFunction {
 
 
     public int call(LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-            case MADE: return made(callFrame, nArguments);
+        return switch (index) {
+            case MADE -> made(callFrame, nArguments);
 
             // special constructors:
-            case ZONEPOINT: return zonePoint(callFrame, nArguments);
-            case DISTANCE: return distance(callFrame, nArguments);
+            case ZONEPOINT -> zonePoint(callFrame, nArguments);
+            case DISTANCE -> distance(callFrame, nArguments);
 
             // generic constructors:
-            case ZITEM: return construct(new Thing(false), callFrame, nArguments);
-            case ZCHARACTER: return construct(new Thing(true), callFrame, nArguments);
-            case CARTRIDGE: return construct(Engine.instance.cartridge = new Cartridge(), callFrame, nArguments);
-            case ZONE:
-            case ZCOMMAND:
-            case ZMEDIA:
-            case ZINPUT:
-            case ZTIMER:
-            case ZTASK:
-                try {
-                    return construct((EventTable)klass.newInstance(), callFrame, nArguments);
-                } catch (InstantiationException e) {
-                    /* will not happen */
-                    return 0;
-                } catch (IllegalAccessException e) {
-                    /* will not happen either */
-                    return 0;
-                }
+            case ZITEM -> construct(new Thing(false), callFrame, nArguments);
+            case ZCHARACTER -> construct(new Thing(true), callFrame, nArguments);
+            case CARTRIDGE ->
+                    construct(Engine.instance.cartridge = new Cartridge(), callFrame, nArguments);
+            case ZONE, ZCOMMAND, ZMEDIA, ZINPUT, ZTIMER, ZTASK -> construct(callFrame, nArguments);
 
             // functions:
-            case MESSAGEBOX: return messageBox(callFrame, nArguments);
-            case DIALOG: return dialog(callFrame, nArguments);
-            case NOCASEEQUALS: return nocaseequals(callFrame, nArguments);
-            case GETINPUT: return getinput(callFrame, nArguments);
-            case SHOWSCREEN: return showscreen(callFrame, nArguments);
-            case TRANSLATEPOINT: return translatePoint(callFrame, nArguments);
-            case AUDIO: return playAudio(callFrame, nArguments);
-            case VECTORTOPOINT: return vectorToPoint(callFrame, nArguments);
-            case COMMAND: return command(callFrame, nArguments);
-            case SHOWSTATUSTEXT: return showStatusText(callFrame, nArguments);
-            case LOGMESSAGE: return logMessage(callFrame, nArguments);
-            case GETVALUE: return distanceGetValue(callFrame, nArguments);
-            default: return 0;
+            case MESSAGEBOX -> messageBox(callFrame, nArguments);
+            case DIALOG -> dialog(callFrame, nArguments);
+            case NOCASEEQUALS -> nocaseequals(callFrame, nArguments);
+            case GETINPUT -> getinput(callFrame, nArguments);
+            case SHOWSCREEN -> showscreen(callFrame, nArguments);
+            case TRANSLATEPOINT -> translatePoint(callFrame, nArguments);
+            case AUDIO -> playAudio(callFrame, nArguments);
+            case VECTORTOPOINT -> vectorToPoint(callFrame, nArguments);
+            case COMMAND -> command(callFrame, nArguments);
+            case SHOWSTATUSTEXT -> showStatusText(callFrame, nArguments);
+            case LOGMESSAGE -> logMessage(callFrame, nArguments);
+            case GETVALUE -> distanceGetValue(callFrame, nArguments);
+            default -> 0;
+        };
+    }
+
+    private int construct(LuaCallFrame callFrame, int nArguments) {
+        try {
+            return construct((EventTable) klass.newInstance(), callFrame, nArguments);
+        } catch (InstantiationException e) {
+            /* will not happen */
+            return 0;
+        } catch (IllegalAccessException e) {
+            /* will not happen either */
+            return 0;
         }
     }
 

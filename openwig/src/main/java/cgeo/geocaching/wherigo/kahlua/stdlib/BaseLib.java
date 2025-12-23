@@ -65,7 +65,7 @@ public final class BaseLib implements JavaFunction {
 
     private static final String[] names;
     public static final Object MODE_KEY = "__mode";
-    private static final Object DOUBLE_ONE = new Double(1.0);
+    private static final Double DOUBLE_ONE = 1.0;
 
     public static final String TYPE_NIL = "nil";
     public static final String TYPE_STRING = "string";
@@ -129,31 +129,31 @@ public final class BaseLib implements JavaFunction {
 
 
     public int call(LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-        case PCALL: return pcall(callFrame, nArguments);
-        case PRINT: return print(callFrame, nArguments);
-        case SELECT: return select(callFrame, nArguments);
-        case TYPE: return type(callFrame, nArguments);
-        case TOSTRING: return tostring(callFrame, nArguments);
-        case TONUMBER: return tonumber(callFrame, nArguments);
-        case GETMETATABLE: return getmetatable(callFrame, nArguments);
-        case SETMETATABLE: return setmetatable(callFrame, nArguments);
-        case ERROR: return error(callFrame, nArguments);
-        case UNPACK: return unpack(callFrame, nArguments);
-        case NEXT: return next(callFrame, nArguments);
-        case SETFENV: return setfenv(callFrame, nArguments);
-        case GETFENV: return getfenv(callFrame, nArguments);
-        case RAWEQUAL: return rawequal(callFrame, nArguments);
-        case RAWSET: return rawset(callFrame, nArguments);
-        case RAWGET: return rawget(callFrame, nArguments);
-        case COLLECTGARBAGE: return collectgarbage(callFrame, nArguments);
-        case DEBUGSTACKTRACE: return debugstacktrace(callFrame, nArguments);
-        case BYTECODELOADER: return bytecodeloader(callFrame, nArguments);
-        default:
-            // Should never happen
-            // throw new Error("Illegal function object");
-            return 0;
-        }
+        return switch (index) {
+            case PCALL -> pcall(callFrame, nArguments);
+            case PRINT -> print(callFrame, nArguments);
+            case SELECT -> select(callFrame, nArguments);
+            case TYPE -> type(callFrame, nArguments);
+            case TOSTRING -> tostring(callFrame, nArguments);
+            case TONUMBER -> tonumber(callFrame, nArguments);
+            case GETMETATABLE -> getmetatable(callFrame, nArguments);
+            case SETMETATABLE -> setmetatable(callFrame, nArguments);
+            case ERROR -> error(callFrame, nArguments);
+            case UNPACK -> unpack(callFrame, nArguments);
+            case NEXT -> next(callFrame, nArguments);
+            case SETFENV -> setfenv(callFrame, nArguments);
+            case GETFENV -> getfenv(callFrame, nArguments);
+            case RAWEQUAL -> rawequal(callFrame, nArguments);
+            case RAWSET -> rawset(callFrame, nArguments);
+            case RAWGET -> rawget(callFrame, nArguments);
+            case COLLECTGARBAGE -> collectgarbage(callFrame, nArguments);
+            case DEBUGSTACKTRACE -> debugstacktrace(callFrame, nArguments);
+            case BYTECODELOADER -> bytecodeloader(callFrame, nArguments);
+            default ->
+                // Should never happen
+                // throw new Error("Illegal function object");
+                    0;
+        };
     }
 
     private int debugstacktrace(LuaCallFrame callFrame, int nArguments) {
