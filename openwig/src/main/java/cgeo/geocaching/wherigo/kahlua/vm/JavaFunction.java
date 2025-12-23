@@ -39,5 +39,5 @@ public interface JavaFunction {
      * @param nArguments - number of function arguments
      * @return N - number of return values. The N top objects on the stack are considered the return values
      */
-    public abstract int call(LuaCallFrame callFrame, int nArguments);
+    int call(LuaCallFrame callFrame, int nArguments);
 }

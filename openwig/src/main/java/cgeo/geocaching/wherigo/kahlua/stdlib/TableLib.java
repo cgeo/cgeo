@@ -83,18 +83,13 @@ public final class TableLib implements JavaFunction {
     }
 
     public int call (LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-            case CONCAT:
-                return concat(callFrame, nArguments);
-            case INSERT:
-                return insert(callFrame, nArguments);
-            case REMOVE:
-                return remove(callFrame, nArguments);
-            case MAXN:
-                return maxn(callFrame, nArguments);
-            default:
-                return 0;
-        }
+        return switch (index) {
+            case CONCAT -> concat(callFrame, nArguments);
+            case INSERT -> insert(callFrame, nArguments);
+            case REMOVE -> remove(callFrame, nArguments);
+            case MAXN -> maxn(callFrame, nArguments);
+            default -> 0;
+        };
     }
 
     private static int concat (LuaCallFrame callFrame, int nArguments) {

@@ -19,11 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class EventTable implements LuaTable, Serializable {
-
-    public LuaTable table = new LuaTableImpl();
-
-    private LuaTable metatable = new LuaTableImpl();
+public class EventTable extends LuaTableImpl {
 
     private boolean isDeserializing = false;
 
@@ -44,11 +40,11 @@ public class EventTable implements LuaTable, Serializable {
     protected String luaTostring () { return "a ZObject instance"; }
 
     public EventTable() {
-        metatable.rawset("__tostring", new TostringJavaFunc(this));
+        super.getMetatable().rawset("__tostring", new TostringJavaFunc(this));
     }
 
     public void serialize (DataOutputStream out) throws IOException {
-        Engine.instance.savegame.storeValue(table, out);
+        Engine.instance.savegame.storeValue(this, out);
     }
 
     public void deserialize (DataInputStream in) throws IOException {
@@ -76,7 +72,7 @@ public class EventTable implements LuaTable, Serializable {
 
     public void setPosition(ZonePoint location) {
         position = location;
-        table.rawset("ObjectLocation", location);
+        this.rawset("ObjectLocation", location);
     }
 
     public boolean isLocated() {
@@ -109,7 +105,7 @@ public class EventTable implements LuaTable, Serializable {
             if (isLocated())
                 return LuaState.toDouble(ZonePoint.angle2azimuth(position.bearing(Engine.instance.player.position)));
             else return LuaState.toDouble(0);
-        } else return table.rawget(key);
+        } else return this.rawget(key);
     }
 
     public void setTable (LuaTable table) {
@@ -132,7 +128,7 @@ public class EventTable implements LuaTable, Serializable {
         }
 
         try {
-            Object o = table.rawget(name);
+            Object o = this.rawget(name);
             if (o instanceof LuaClosure) {
                 Engine.log("EVNT: " + toString() + "." + name + (param!=null ? " (" + param.toString() + ")" : ""), Engine.LOG_CALL);
                 LuaClosure event = (LuaClosure) o;
@@ -145,12 +141,12 @@ public class EventTable implements LuaTable, Serializable {
     }
 
     public boolean hasEvent(String name) {
-        return (table.rawget(name)) instanceof LuaClosure;
+        return (this.rawget(name)) instanceof LuaClosure;
     }
 
     @NonNull
     public String toString()  {
-        return baseToString(this) + BaseLib.luaTableToString(table, value ->
+        return baseToString(this) + BaseLib.luaTableToString(this, value ->
             value instanceof EventTable ? baseToString((EventTable) value) : null);
     }
 
@@ -164,27 +160,7 @@ public class EventTable implements LuaTable, Serializable {
         if (key instanceof String) {
             setItem((String) key, value);
         }
-        table.rawset(key, value);
+        this.rawset(key, value);
         Engine.log("PROP: " + toString() + "." + key + " is set to " + (value == null ? "nil" : value.toString()), Engine.LOG_PROP);
     }
-
-    public void setMetatable (LuaTable metatable) { }
-
-    public LuaTable getMetatable () { return metatable; }
-
-    public Object rawget (Object key) {
-        // TODO unify rawget/getItem
-        if (key instanceof String)
-            return getItem((String)key);
-        else
-            return table.rawget(key);
-    }
-
-    public Object next (Object key) { return table.next(key); }
-
-    public int len () { return table.len(); }
-
-    public Iterator<Object> keys() { return table.keys(); }
-
-
 }
