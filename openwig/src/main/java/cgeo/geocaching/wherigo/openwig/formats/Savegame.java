@@ -42,7 +42,7 @@ public class Savegame {
     protected boolean debug = false;
     protected void debug (String s) { }
 
-    protected Class classForName (String s) throws ClassNotFoundException {
+    protected Class<?> classForName (String s) throws ClassNotFoundException {
         try {
             return Class.forName(s);
         } catch (ClassNotFoundException cnfe) {
@@ -81,12 +81,12 @@ public class Savegame {
             storeValue(table, out);
             Engine.log("STOR: store successful", Engine.LOG_CALL);
         } finally {
-            try { out.close(); } catch (Exception e) { }
+            try { out.close(); } catch (Exception ignored) { }
         }
     }
 
     protected void resetObjectStore () {
-        objectStore = new Hashtable(256);
+        objectStore = new Hashtable<>(256);
         // XXX why did i choose to use LuaTable over Hashtable?
         currentId = 0;
         level = 0;
@@ -119,7 +119,7 @@ public class Savegame {
         }
     }
 
-    private Hashtable objectStore;
+    private Hashtable<Object,Object> objectStore;
     private int currentId;
 
     private Hashtable idToJavafuncMap = new Hashtable(128);

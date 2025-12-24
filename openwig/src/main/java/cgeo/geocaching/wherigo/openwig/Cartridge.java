@@ -6,6 +6,7 @@ package cgeo.geocaching.wherigo.openwig;
 
 import java.io.*;
 import java.util.Vector;
+
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
@@ -13,17 +14,17 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
 public class Cartridge extends EventTable {
-    public Vector zones = new Vector();
-    public Vector timers = new Vector();
+    public Vector<Zone> zones = new Vector<>();
+    public Vector<Timer> timers = new Vector<>();
 
-    public Vector things = new Vector();
-    public Vector universalActions = new Vector();
+    public Vector<Thing> things = new Vector<>();
+    public Vector<Action>universalActions = new Vector<>();
 
-    public Vector tasks = new Vector();
+    public static Vector<Task> tasks = new Vector<>();
 
     public LuaTable allZObjects = new LuaTableImpl();
 
-    private static JavaFunction requestSync = new JavaFunction() {
+    private static final JavaFunction requestSync = new JavaFunction() {
         public int call (LuaCallFrame callFrame, int nArguments) {
             Engine.instance.store();
             return 0;
@@ -37,8 +38,8 @@ public class Cartridge extends EventTable {
     protected String luaTostring () { return "a ZCartridge instance"; }
 
     public Cartridge () {
-        table.rawset("RequestSync", requestSync);
-        table.rawset("AllZObjects", allZObjects);
+        rawset("RequestSync", requestSync);
+        rawset("AllZObjects", allZObjects);
         TableLib.rawappend(allZObjects, this);
     }
 
@@ -112,17 +113,18 @@ public class Cartridge extends EventTable {
     }
 
     private void sortObject (Object o) {
-        if (o instanceof Task) tasks.addElement(o);
-        else if (o instanceof Zone) zones.addElement(o);
-        else if (o instanceof Timer) timers.addElement(o);
-        else if (o instanceof Thing) things.addElement(o);
+
+        if (o instanceof Task t) tasks.addElement(t);
+        else if (o instanceof Zone z) zones.addElement(z);
+        else if (o instanceof Timer t) timers.addElement(t);
+        else if (o instanceof Thing t) things.addElement(t);
     }
 
     public void deserialize (DataInputStream in)
     throws IOException {
         super.deserialize(in);
         Engine.instance.cartridge = this;
-        allZObjects = (LuaTable)table.rawget("AllZObjects");
+        allZObjects = rawget("AllZObjects");
         Object next = null;
         while ((next = allZObjects.next(next)) != null) {
             sortObject(allZObjects.rawget(next));

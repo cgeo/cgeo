@@ -25,14 +25,15 @@
 
 package cgeo.geocaching.wherigo.kahlua.vm;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public interface LuaTable {
+public interface LuaTable extends Serializable {
     void setMetatable(LuaTable metatable);
     LuaTable getMetatable();
 
     void rawset(Object key, Object value);
-    Object rawget(Object key);
+    <T> T rawget(Object key);
 
     Object next(Object key);
     int len();

@@ -87,17 +87,17 @@ public class CoroutineLib implements JavaFunction {
     }
 
     public int call(LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-        case CREATE: return create(callFrame, nArguments);
-        case YIELD: return yieldFunction(callFrame, nArguments);
-        case RESUME: return resume(callFrame, nArguments);
-        case STATUS: return status(callFrame, nArguments);
-        case RUNNING: return running(callFrame, nArguments);
-        default:
-            // Should never happen
-            // throw new Error("Illegal function object");
-            return 0;
-        }
+        return switch (index) {
+            case CREATE -> create(callFrame, nArguments);
+            case YIELD -> yieldFunction(callFrame, nArguments);
+            case RESUME -> resume(callFrame, nArguments);
+            case STATUS -> status(callFrame, nArguments);
+            case RUNNING -> running(callFrame, nArguments);
+            default ->
+                // Should never happen
+                // throw new Error("Illegal function object");
+                    0;
+        };
     }
 
     private int running(LuaCallFrame callFrame, int nArguments) {

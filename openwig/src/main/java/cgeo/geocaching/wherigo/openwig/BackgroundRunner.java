@@ -36,7 +36,7 @@ public class BackgroundRunner extends Thread {
         return instance;
     }
 
-    private Vector queue = new Vector();
+    private final Vector<Runnable> queue = new Vector<>();
     private boolean end = false;
     private Runnable queueProcessedListener = null;
 
@@ -48,13 +48,13 @@ public class BackgroundRunner extends Thread {
         boolean events;
         while (!end) {
             synchronized (this) { while (paused) {
-                try { wait(); } catch (InterruptedException e) { }
+                try { wait(); } catch (InterruptedException ignored) { }
                 if (end) return;
             } }
             events = false;
             while (!queue.isEmpty()) {
                 events = true;
-                Runnable c = (Runnable)queue.firstElement();
+                Runnable c = queue.firstElement();
                 queue.removeElementAt(0);
                 try {
                     c.run();
@@ -67,7 +67,7 @@ public class BackgroundRunner extends Thread {
             synchronized (this) {
                 if (!queue.isEmpty()) continue;
                 if (end) return;
-                try { wait(); } catch (InterruptedException e) { }
+                try { wait(); } catch (InterruptedException ignored) { }
             }
         }
     }

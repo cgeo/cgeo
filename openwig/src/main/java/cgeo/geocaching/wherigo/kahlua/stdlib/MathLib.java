@@ -131,35 +131,35 @@ public final class MathLib implements JavaFunction {
     }
 
     public int call(LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-        case ABS: return abs(callFrame, nArguments);
-        case ACOS: return acos(callFrame, nArguments);
-        case ASIN: return asin(callFrame, nArguments);
-        case ATAN: return atan(callFrame, nArguments);
-        case ATAN2: return atan2(callFrame, nArguments);
-        case CEIL: return ceil(callFrame, nArguments);
-        case COS: return cos(callFrame, nArguments);
-        case COSH: return cosh(callFrame, nArguments);
-        case DEG: return deg(callFrame, nArguments);
-        case EXP: return exp(callFrame, nArguments);
-        case FLOOR: return floor(callFrame, nArguments);
-        case FMOD: return fmod(callFrame, nArguments);
-        case FREXP: return frexp(callFrame, nArguments);
-        case LDEXP: return ldexp(callFrame, nArguments);
-        case LOG: return log(callFrame, nArguments);
-        case LOG10: return log10(callFrame, nArguments);
-        case MODF: return modf(callFrame, nArguments);
-        case POW: return pow(callFrame, nArguments);
-        case RAD: return rad(callFrame, nArguments);
-        case RANDOM: return random(callFrame, nArguments);
-        case RANDOMSEED: return randomseed(callFrame, nArguments);
-        case SIN: return sin(callFrame, nArguments);
-        case SINH: return sinh(callFrame, nArguments);
-        case SQRT: return sqrt(callFrame, nArguments);
-        case TAN: return tan(callFrame, nArguments);
-        case TANH: return tanh(callFrame, nArguments);
-        default: return 0;
-        }
+        return switch (index) {
+            case ABS -> abs(callFrame, nArguments);
+            case ACOS -> acos(callFrame, nArguments);
+            case ASIN -> asin(callFrame, nArguments);
+            case ATAN -> atan(callFrame, nArguments);
+            case ATAN2 -> atan2(callFrame, nArguments);
+            case CEIL -> ceil(callFrame, nArguments);
+            case COS -> cos(callFrame, nArguments);
+            case COSH -> cosh(callFrame, nArguments);
+            case DEG -> deg(callFrame, nArguments);
+            case EXP -> exp(callFrame, nArguments);
+            case FLOOR -> floor(callFrame, nArguments);
+            case FMOD -> fmod(callFrame, nArguments);
+            case FREXP -> frexp(callFrame, nArguments);
+            case LDEXP -> ldexp(callFrame, nArguments);
+            case LOG -> log(callFrame, nArguments);
+            case LOG10 -> log10(callFrame, nArguments);
+            case MODF -> modf(callFrame, nArguments);
+            case POW -> pow(callFrame, nArguments);
+            case RAD -> rad(callFrame, nArguments);
+            case RANDOM -> random(callFrame, nArguments);
+            case RANDOMSEED -> randomseed(callFrame, nArguments);
+            case SIN -> sin(callFrame, nArguments);
+            case SINH -> sinh(callFrame, nArguments);
+            case SQRT -> sqrt(callFrame, nArguments);
+            case TAN -> tan(callFrame, nArguments);
+            case TANH -> tanh(callFrame, nArguments);
+            default -> 0;
+        };
     }
 
     private static double getDoubleArg(LuaCallFrame callFrame, int argc, String funcname) {

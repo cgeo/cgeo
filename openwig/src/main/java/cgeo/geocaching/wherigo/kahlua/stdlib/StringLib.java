@@ -109,19 +109,19 @@ public final class StringLib implements JavaFunction {
     }
 
     public int call(LuaCallFrame callFrame, int nArguments)  {
-        switch (methodId) {
-        case SUB: return sub(callFrame, nArguments);
-        case CHAR: return stringChar(callFrame, nArguments);
-        case BYTE: return stringByte(callFrame, nArguments);
-        case LOWER: return lower(callFrame, nArguments);
-        case UPPER: return upper(callFrame, nArguments);
-        case REVERSE: return reverse(callFrame, nArguments);
-        case FORMAT: return format(callFrame);
-        case FIND: return findAux(callFrame, true);
-        case MATCH: return findAux(callFrame, false);
-        case GSUB: return gsub(callFrame);
-        default: return 0; // Should never happen.
-        }
+        return switch (methodId) {
+            case SUB -> sub(callFrame, nArguments);
+            case CHAR -> stringChar(callFrame, nArguments);
+            case BYTE -> stringByte(callFrame, nArguments);
+            case LOWER -> lower(callFrame, nArguments);
+            case UPPER -> upper(callFrame, nArguments);
+            case REVERSE -> reverse(callFrame, nArguments);
+            case FORMAT -> format(callFrame);
+            case FIND -> findAux(callFrame, true);
+            case MATCH -> findAux(callFrame, false);
+            case GSUB -> gsub(callFrame);
+            default -> 0; // Should never happen.
+        };
     }
 
     private long unsigned(long vv) {
