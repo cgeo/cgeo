@@ -304,24 +304,6 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
             </intent-filter>
-            <!-- intent filter for local map files with MIME type -->
-            <intent-filter android:label="c:geo local map handler">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-
-                <data android:scheme="file" />
-                <data android:host="*" />
-                <data android:mimeType="application/octet-stream" />
-                <data android:pathPattern=".*\\.map" />
-                <data android:pathPattern=".*\\..*\\.map" />
-                <data android:pathPattern=".*\\..*\\..*\\.map" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
-            </intent-filter>
 
             <!-- Android API 31+ versions with better name filtering -->
             <intent-filter android:label="c:geo local map handler">
@@ -347,6 +329,24 @@
                 <data android:scheme="content" />
                 <data android:mimeType="application/octet-stream" />
                 <data android:pathSuffix=".map" />
+            </intent-filter>
+            <!-- intent filter for local Wherigo cartridge files -->
+            <intent-filter android:label="c:geo local Wherigo cartridge handler">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.gwc" />
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gwc" />
             </intent-filter>
             <intent-filter android:label="c:geo local Wherigo cartridge handler">
                 <action android:name="android.intent.action.VIEW" />
@@ -392,24 +392,6 @@
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.gpx" />
                 <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
-                <data android:pathPattern=".*\\..*\\.gpx" />
-                <data android:pathPattern=".*\\..*\\..*\\.gpx" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
-            </intent-filter>
-            <!-- intent filter for local gpx files with MIME type -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-
-                <data android:scheme="file" />
-                <data android:host="*" />
-                <data android:mimeType="application/octet-stream" />
-                <data android:pathPattern=".*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
@@ -470,24 +452,6 @@
                 <data android:host="*" />
                 <data android:pathPattern=".*\\.ggz" />
                 <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
-                <data android:pathPattern=".*\\..*\\.ggz" />
-                <data android:pathPattern=".*\\..*\\..*\\.ggz" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
-            </intent-filter>
-            <!-- intent filter for local ggz files with MIME type -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-
-                <data android:scheme="file" />
-                <data android:host="*" />
-                <data android:mimeType="application/octet-stream" />
-                <data android:pathPattern=".*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\..*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
