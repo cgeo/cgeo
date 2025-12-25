@@ -1046,8 +1046,6 @@ public class Geocache implements INamedGeoCoordinate {
                 result.add(spoilerCandidate);
             }
         }
-        result.addAll(getWaypointImages());
-
         return result;
     }
 
@@ -2305,7 +2303,7 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public Collection<Image> getImages() {
         final List<Image> images = new LinkedList<>();
-        //the order of adding imgaes will determine which duplicates will be removed. prio is to images further up
+        //the order of adding images will determine which duplicates will be removed. prio is to images further up
         for (final LogEntry log : getLogs()) {
             images.addAll(log.logImages);
         }
@@ -2317,6 +2315,9 @@ public class Geocache implements INamedGeoCoordinate {
                 getShortDescription(), getDescription()));
         images.addAll(getSpoilers()); //for gc.com this includes gallery images, spoilers and background
         addLocalSpoilersTo(images);
+
+        // images from lab waypoints
+        images.addAll(getWaypointImages());
 
         // Deduplicate images and return them in requested size
         ImageUtils.deduplicateImageList(images);
