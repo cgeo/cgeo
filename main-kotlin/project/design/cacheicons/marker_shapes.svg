@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="36"
+   height="36"
+   version="1.1"
+   id="svg1436"
+   sodipodi:docname="marker_shapes.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   inkscape:export-filename="/media/johnson/Web/cgeoicons/marker.png"
+   inkscape:export-xdpi="172.8"
+   inkscape:export-ydpi="172.8"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1440">
+    <inkscape:path-effect
+       effect="mirror_symmetry"
+       start_point="14,20"
+       end_point="14,28"
+       center_point="14,24"
+       id="path-effect7562"
+       is_visible="true"
+       lpeversion="1.1"
+       mode="free"
+       discard_orig_path="false"
+       fuse_paths="true"
+       oposite_fuse="false"
+       split_items="false"
+       split_open="false" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview1438"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     width="30px"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="false"
+     inkscape:bbox-nodes="false"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:zoom="32"
+     inkscape:cx="15.875"
+     inkscape:cy="19.5625"
+     inkscape:window-width="2472"
+     inkscape:window-height="1411"
+     inkscape:window-x="88"
+     inkscape:window-y="240"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1436"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <path
+     style="mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#383838;stroke-width:0.580197;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 14,21.197266 c -0.704085,0.29179 -1.404582,0.930515 -1.808594,1.794922 C 11.30979,24.878457 14,27 14,27 14,27 16.69021,24.878457 15.808594,22.992188 15.404582,22.127781 14.704085,21.489056 14,21.197266 Z"
+     id="pin"
+     sodipodi:nodetypes="zczz"
+     transform="matrix(1.3814601,0,0,1.2895387,-1.3404414,0.70603076)"
+     inkscape:original-d="M 12.192036,22.992685 C 11.31042,24.878955 14,27 14,27 c 0,0 2.7017,-3.654071 2.032889,-5.180334 -0.668812,-1.526262 -2.959237,-0.713251 -3.840853,1.173019 z"
+     inkscape:path-effect="#path-effect7562" />
+  <rect
+     style="display:inline;fill:#ffffff;stroke:#383838;stroke-width:0.75;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none"
+     id="marker_oc"
+     width="28"
+     height="28"
+     x="4"
+     y="4"
+     ry="4.6"
+     rx="4.6" />
+  <path
+     sodipodi:type="star"
+     style="display:inline;fill:#ffffff;stroke:#383838;stroke-width:1.2395;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none"
+     id="marker_other"
+     inkscape:flatsided="true"
+     sodipodi:sides="6"
+     sodipodi:cx="15.994999"
+     sodipodi:cy="33.315941"
+     sodipodi:r1="26.716059"
+     sodipodi:r2="23.136786"
+     sodipodi:arg1="0"
+     sodipodi:arg2="0.52359878"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="M 42.711058,33.315941 29.353028,56.452726 H 2.6369696 L -10.72106,33.315941 2.6369696,10.179155 l 26.7160584,0 z"
+     transform="matrix(0.60506817,0,0,0.60509668,8.3219353,-2.1593652)" />
+  <ellipse
+     style="display:inline;fill:#ffffff;stroke:#383838;stroke-width:0.75;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none"
+     id="marker_gc"
+     cx="18"
+     cy="18"
+     rx="14"
+     ry="14" />
+</svg>

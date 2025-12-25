@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical">
+
+    <!-- following LinearLayout is needed so image is centered inside column of gridlayout -->
+    <LinearLayout
+        android:id="@+id/image_complete"
+        android:orientation="vertical"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
+        tools:ignore="UselessParent">
+
+        <cgeo.geocaching.ui.ImageExtendedView
+            android:id="@+id/image_wrapper"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:id="@+id/image_title"
+            style="@style/text_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="3dip"
+            android:visibility="visible"
+            android:textStyle="bold"
+            tools:text="image title"
+            tools:visibility="visible"
+            />
+    </LinearLayout>
+
+</LinearLayout>

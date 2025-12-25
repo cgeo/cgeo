@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_item_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:padding="8dp"
+    android:background="@drawable/helper_bcg"
+    android:gravity="center"
+    android:textColor="@color/colorTextMainInfo"
+    android:textIsSelectable="false"
+    android:textSize="@dimen/textSize_detailsPrimary" />

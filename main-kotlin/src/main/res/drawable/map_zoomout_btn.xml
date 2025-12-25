@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="38dp"
+    android:height="38dp"
+    android:viewportWidth="10.054"
+    android:viewportHeight="10.054">
+    <path
+        android:pathData="m7.4745,5.3767h-4.8948v-0.6993h4.8948z"
+        android:fillColor="@color/osm_zoomcontrol"/>
+</vector>

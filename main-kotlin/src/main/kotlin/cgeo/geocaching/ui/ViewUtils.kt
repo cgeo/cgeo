@@ -1,0 +1,869 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.ui
+
+import cgeo.geocaching.CgeoApplication
+import cgeo.geocaching.R
+import cgeo.geocaching.databinding.CheckboxItemBinding
+import cgeo.geocaching.databinding.DialogEdittextBinding
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.GeopointFormatter
+import cgeo.geocaching.ui.dialog.Dialogs
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.AndroidRxUtils
+import cgeo.geocaching.utils.LocalizationUtils
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.utils.ScalableDrawable
+import cgeo.geocaching.utils.TextUtils
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.content.res.TypedArray
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.os.Looper
+import android.text.Editable
+import android.text.Selection
+import android.text.Spannable
+import android.text.TextWatcher
+import android.text.method.ScrollingMovementMethod
+import android.text.util.Linkify
+import android.util.AttributeSet
+import android.util.Pair
+import android.view.ContextThemeWrapper
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListAdapter
+import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
+import android.view.MenuItem.SHOW_AS_ACTION_ALWAYS
+
+import androidx.annotation.AttrRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.annotation.StyleRes
+import androidx.annotation.StyleableRes
+import androidx.appcompat.widget.TooltipCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.text.util.LinkifyCompat
+
+import java.util.ArrayList
+import java.util.List
+import java.util.Objects
+import java.util.function.BiFunction
+import java.util.function.Consumer
+import java.util.function.Function
+import java.util.function.Predicate
+
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
+import com.google.android.material.progressindicator.IndeterminateDrawable
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.tuple.ImmutablePair
+
+class ViewUtils {
+
+    //if this flag is true, then layouts will be generated with background colors, for layout checking use cases
+    private static val DEBUG_LAYOUT: Boolean = false
+
+    private static val APP_RESOURCES: Resources = CgeoApplication.getInstance() == null || CgeoApplication.getInstance().getApplicationContext() == null ? null :
+            CgeoApplication.getInstance().getApplicationContext().getResources()
+
+    private ViewUtils() {
+        //no instance
+    }
+
+    public static Boolean isDebugLayout() {
+        return DEBUG_LAYOUT
+    }
+
+    public static Int dpToPixel(final Float dp) {
+        return Math.round(dpToPixelFloat(dp))
+    }
+
+    public static Float dpToPixelFloat(final Float dp) {
+        return dp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density)
+    }
+
+    public static Int spToPixel(final Float sp) {
+        return Math.round(spToPixelFloat(sp))
+    }
+
+    public static Float spToPixelFloat(final Float sp) {
+        return sp * (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().scaledDensity)
+    }
+
+    public static Int pixelToDp(final Float px) {
+        return (Int) (px / (APP_RESOURCES == null ? 4f : APP_RESOURCES.getDisplayMetrics().density))
+    }
+
+    public static Unit setTooltip(final View view, final TextParam text) {
+        TooltipCompat.setTooltipText(view, text.getText(view.getContext()))
+    }
+
+    /**
+     * Sets enabled/disabled flag for given view (without crashing on null view)
+     */
+    public static Unit setEnabled(final View view, final Boolean enabled) {
+        if (view == null) {
+            return
+        }
+        view.setEnabled(enabled)
+    }
+
+    /**
+     * Sets visibility for given view (without crashing on null view)
+     */
+    public static Unit setVisibility(final View view, final Int visibility) {
+        if (view == null) {
+            return
+        }
+        view.setVisibility(visibility)
+    }
+
+    /**
+     * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
+     *
+     * @param ctx           context to use for creating views
+     * @param root          optional. If given, then the column layout will be created IN the given view instead of returning a one.
+     * @param parent        the parent layout to add the column view to. May be null (if root is not null)
+     * @param columnCount   number of columns the layout shall have
+     * @param withSeparator if true, a vertical separator line will be drawn between columns
+     * @return created linearlayouts, one per column
+     */
+    public static List<LinearLayout> createAndAddStandardColumnView(final Context ctx, final LinearLayout root, final ViewGroup parent, final Int columnCount, final Boolean withSeparator) {
+        val columns: List<LinearLayout> = ArrayList<>()
+        for (Int i = 0; i < columnCount; i++) {
+            val colLl: LinearLayout = LinearLayout(ctx)
+            columns.add(colLl)
+            colLl.setOrientation(LinearLayout.VERTICAL)
+        }
+
+        val colGroup: ViewGroup = createColumnView(ctx, root, columnCount, withSeparator, columns::get)
+        if (parent != null) {
+            parent.addView(colGroup)
+        }
+
+        return columns
+
+    }
+
+    /**
+     * creates a column layout and returns it. Provides the option to specify individual layouts per column.
+     *
+     * @param ctx               context to use for creating views
+     * @param root              optional. If given, then the column layout will be created IN the given view instead of returning a one.
+     * @param columnCount       number of columns the layout shall have
+     * @param withSeparator     if true, a vertical separator line will be drawn between columns
+     * @param columnViewCreator will be called for each column index (0 - "columnCount-1") and shall return the columns content view.
+     *                          May return null for some columns, in which case those are empty
+     * @return ViewGroup holding the column layout. If "root" was not null, then "root" is returned.
+     */
+    public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final Int columnCount, final Boolean withSeparator, final Function<Integer, View> columnViewCreator) {
+
+        val columnWidths: List<Float> = ArrayList<>()
+        for (Int c = 0; c < columnCount * 2 - 1; c++) {
+            columnWidths.add(c % 2 == 0 ? 1f : 0.1f)
+        }
+
+        return ViewUtils.createHorizontallyDistributedViews(ctx, root, columnWidths, (i, f) -> {
+            if (i % 2 == 1) {
+                //column separator
+                return ViewUtils.createVerticalSeparator(ctx, !withSeparator)
+            }
+
+            return columnViewCreator.apply(i / 2)
+        }, (i, f) -> f)
+    }
+
+    public static <T> ViewGroup createHorizontallyDistributedText(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, String> itemTextMapper) {
+        return createHorizontallyDistributedViews(ctx, root, items, (idx, item) -> {
+            val itemText: String = item == null ? null : itemTextMapper.apply(idx, item)
+            if (itemText != null) {
+                val tv: TextView = TextView(ctx)
+                tv.setText(itemText)
+                tv.setMaxLines(1)
+                tv.setTextColor(ctx.getResources().getColor(R.color.colorText))
+                if (DEBUG_LAYOUT) {
+                    tv.setBackgroundResource(R.drawable.mark_orange)
+                }
+                return tv
+            }
+            return null
+        })
+    }
+
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator) {
+        return createHorizontallyDistributedViews(ctx, root, items, viewCreator, null)
+    }
+
+    public static <T> ViewGroup createHorizontallyDistributedViews(final Context ctx, final LinearLayout root, final List<T> items, final BiFunction<Integer, T, View> viewCreator, final BiFunction<Integer, T, Float> weightCreator) {
+
+        val viewGroup: LinearLayout = root == null ? LinearLayout(ctx) : root
+        viewGroup.setOrientation(LinearLayout.HORIZONTAL)
+
+        Int idx = 0
+        for (T item : items) {
+            final LinearLayout.LayoutParams lp = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT)
+            lp.weight = weightCreator == null ? 1 : weightCreator.apply(idx, item)
+
+            View itemView = viewCreator.apply(idx, item)
+            if (itemView == null) {
+                itemView = View(ctx)
+            }
+            if (itemView is TextView) {
+                ((TextView) itemView).setGravity(Gravity.CENTER_HORIZONTAL)
+            }
+            viewGroup.addView(itemView, lp)
+
+            idx++
+        }
+        return viewGroup
+    }
+
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final TextParam text, final Int iconId) {
+        return addCheckboxItem(activity, viewGroup, text, iconId, null)
+    }
+
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final TextParam text, final Int iconId, final TextParam infoText) {
+
+        val ip: ImmutablePair<View, CheckBox> = createCheckboxItem(activity, viewGroup, text, ImageParam.id(iconId), infoText)
+        viewGroup.addView(ip.left)
+        return ip.right
+    }
+
+    public static CheckBox addCheckboxItem(final Activity activity, final ViewGroup viewGroup, final TextParam text, final ImageParam imageParam) {
+
+        val ip: ImmutablePair<View, CheckBox> = createCheckboxItem(activity, viewGroup, text, imageParam, null)
+        viewGroup.addView(ip.left)
+        return ip.right
+    }
+
+    public static TextView createTextItem(final Context ctx, @StyleRes final Int styleId, final TextParam text) {
+        val tv: TextView = TextView(wrap(ctx), null, 0, styleId)
+        text.applyTo(tv)
+        return tv
+    }
+
+    public static ImageView createIconView(final Context ctx, final Int iconId) {
+        val iv: ImageView = ImageView(wrap(ctx))
+        iv.setImageResource(iconId)
+        return iv
+    }
+
+    public static Button createButton(final Context context, final ViewGroup root, final TextParam text) {
+        return createButton(context, root, text, R.layout.button_view)
+    }
+
+    public static Button createButton(final Context context, final ViewGroup root, final TextParam text, @LayoutRes final Int buttonLayout) {
+        val button: Button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(buttonLayout, root, false)
+        text.applyTo(button)
+        return button
+    }
+
+    public static TextView createTextSpinnerView(final Context context, final ViewGroup root) {
+        return (TextView) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.textspinner_view, root, false)
+    }
+
+    public static Pair<View, EditText> createTextField(final Context context, final String currentValue, final TextParam label, final TextParam suffix, final Int inputType, final Int minLines, final Int maxLines) {
+        val binding: DialogEdittextBinding = DialogEdittextBinding.inflate(LayoutInflater.from(context))
+        if (StringUtils.isNotBlank(currentValue)) {
+            binding.input.setText(currentValue)
+        }
+        if (label != null) {
+            binding.inputFrame.setHint(label.getText(context))
+        }
+        if (suffix != null) {
+            binding.inputFrame.setSuffixText(suffix.getText(context))
+        }
+        if (maxLines > 1) {
+            binding.input.setSingleLine(false)
+            binding.input.setLines(minLines)
+            binding.input.setMaxLines(maxLines)
+            binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION)
+            binding.input.setVerticalScrollBarEnabled(true)
+            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance())
+            binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET)
+            binding.input.invalidate()
+            Dialogs.moveCursorToEnd(binding.input)
+        } else {
+            binding.input.setSingleLine()
+        }
+        if (inputType >= 0) {
+            binding.input.setInputType(inputType)
+        }
+        return Pair<>(binding.getRoot(), binding.input)
+    }
+
+    public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, final ViewGroup context, final TextParam text, final ImageParam icon, final TextParam infoText) {
+
+        val itemView: View = LayoutInflater.from(context == null ? activity : context.getContext()).inflate(R.layout.checkbox_item, context, false)
+        val itemBinding: CheckboxItemBinding = CheckboxItemBinding.bind(itemView)
+        text.applyTo(itemBinding.itemText)
+        if (icon != null) {
+            icon.applyTo(itemBinding.itemIcon)
+        }
+        if (infoText != null) {
+            itemBinding.itemInfo.setVisibility(View.VISIBLE)
+            itemBinding.itemInfo.setOnClickListener(v -> SimpleDialog.of(activity).setMessage(infoText).show())
+        }
+        itemView.setOnClickListener(v -> itemBinding.itemCheckbox.toggle())
+        itemBinding.itemCheckbox.setContentDescription(itemBinding.itemText.getText())
+
+        return ImmutablePair<>(itemView, itemBinding.itemCheckbox)
+    }
+
+    public static View createVerticalSeparator(final Context context) {
+        return createVerticalSeparator(context, false)
+    }
+
+    private static View createVerticalSeparator(final Context context, final Boolean makeTransparent) {
+        val llSep: RelativeLayout = RelativeLayout(context)
+        val separatorView: View = View(context, null, 0, R.style.separator_vertical)
+        if (makeTransparent) {
+            separatorView.setBackgroundResource(R.color.colorBackgroundTransparent)
+        }
+        final RelativeLayout.LayoutParams rp = RelativeLayout.LayoutParams(ViewUtils.dpToPixel(1), ViewGroup.LayoutParams.MATCH_PARENT)
+        rp.addRule(RelativeLayout.CENTER_HORIZONTAL)
+        rp.addRule(RelativeLayout.CENTER_VERTICAL)
+        rp.setMargins(0, ViewUtils.dpToPixel(10), 0, ViewUtils.dpToPixel(10))
+        llSep.addView(separatorView, rp)
+        return llSep
+    }
+
+    public static View createExpandableSeparatorPixelView(final Context context) {
+        val view: TextView = TextView(context, null, 0, R.style.separator_pixel)
+        view.setText("")
+        view.setTextSize(1)
+        return view
+    }
+
+    public static Unit addDetachListener(final View view, final Consumer<View> action) {
+        view.getViewTreeObserver().addOnWindowAttachListener(ViewTreeObserver.OnWindowAttachListener() {
+            override             public Unit onWindowAttached() {
+                //do nothing
+            }
+
+            override             public Unit onWindowDetached() {
+                action.accept(view)
+            }
+        })
+    }
+
+    /** requests a layout change on given view and runs the given consumer once the view has been measured */
+    public static Unit runOnViewMeasured(final View view, final Function<View, Boolean> action) {
+        final ViewTreeObserver.OnGlobalLayoutListener observer = ViewTreeObserver.OnGlobalLayoutListener() {
+            override             public Unit onGlobalLayout() {
+                if (view.getMeasuredWidth() > 0 && view.getMeasuredHeight() > 0) {
+                    val continueAction: Boolean = action.apply(view)
+                    if (continueAction == null || !continueAction) {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                    }
+                }
+            }
+        }
+
+        //post the run in case "runOnViewMeasured" is used in a layouting context
+        //(This is typically the case when it is used in Activity.onCreate)
+        view.post(() -> {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(observer)
+            view.requestLayout()
+        })
+    }
+
+    /**
+     * Sets ListView height dynamically based on the height of the items.
+     *
+     * @param listView to be resized
+     * @return true if the listView is successfully resized, false otherwise
+     */
+    public static Boolean setListViewHeightBasedOnItems(final ListView listView) {
+        val listAdapter: ListAdapter = listView.getAdapter()
+        if (listAdapter != null) {
+
+            val numberOfItems: Int = listAdapter.getCount()
+
+            // Get total height of all items.
+            Int totalItemsHeight = 0
+            for (Int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                val item: View = listAdapter.getView(itemPos, null, listView)
+                item.measure(0, 0)
+                totalItemsHeight += item.getMeasuredHeight()
+            }
+
+            // Get total height of all item dividers.
+            val totalDividersHeight: Int = listView.getDividerHeight() *
+                    (numberOfItems - 1)
+
+            // Set list height.
+            final ViewGroup.LayoutParams params = listView.getLayoutParams()
+            params.height = totalItemsHeight + totalDividersHeight
+            listView.setLayoutParams(params)
+            listView.requestLayout()
+
+            return true
+        }
+
+        return false
+    }
+
+    public static Int getMinimalWidth(final Context ctx, final String text, final Int styleId) {
+        val tv: TextView = TextView(ctx, null, 0, styleId)
+        tv.setText(text)
+        tv.measure(0, 0)
+        return tv.getMeasuredWidth()
+
+    }
+
+    @SuppressLint("AlwaysShowAction")
+    public static Unit extendMenuActionBarDisplayItemCount(final Context ctx, final Menu menu) {
+
+        val config: Configuration = ctx.getResources().getConfiguration()
+        val width: Int = config.screenWidthDp
+
+        Int extendTo = 0
+
+        //RULES to extend AS ALWAYS are decoded here. See rules of Android in {@link androidx.appcompat.view.ActionBarPolicy#getMaxActionButtons}
+        if (width >= 410) {
+            extendTo = 4
+        } else if (width >= 360) {
+            extendTo = 3
+        }
+
+        for (Int pos = 0; pos < menu.size() && pos < extendTo; pos++) {
+            val item: MenuItem = menu.getItem(pos)
+            item.setShowAsAction(SHOW_AS_ACTION_ALWAYS)
+        }
+
+    }
+
+    /**
+     * Tries its best to return the size of a view. Returns null otherwise.
+     * Sometimes it is only possible to return width OR height. In this case the other parameter is set to 0.
+     *
+     * @return Pair where first is width in pixel and second is height in pixel
+     */
+    public static Pair<Integer, Integer> getViewSize(final View view) {
+        view.measure(0, 0)
+        if (view.getMeasuredHeight() > 0 || view.getMeasuredWidth() > 0) {
+            return Pair<>(view.getMeasuredWidth(), view.getMeasuredHeight())
+        }
+        //try to get size from layout parameters
+        if (view.getLayoutParams() != null) {
+            val w: Int = Math.max(view.getLayoutParams().width, 0)
+            val h: Int = Math.max(view.getLayoutParams().height, 0)
+            if (w > 0 || h > 0) {
+                return Pair<>(w, h)
+            }
+        }
+
+        return null
+
+    }
+
+    public static Boolean currentThreadIsUiThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread()
+    }
+
+    public static Unit runOnUiThread(final Boolean forcePost, final Runnable action) {
+        if (action == null) {
+            return
+        }
+        if (!forcePost && currentThreadIsUiThread()) {
+            action.run()
+        } else {
+            AndroidRxUtils.runOnUi(action)
+        }
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, Boolean)} for a Short toast with a simple text */
+    public static Unit showShortToast(final Context context, final String message) {
+        showToast(context, TextParam.text(message), true)
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, Boolean)} for a Short toast with a resource id */
+    public static Unit showShortToast(final Context context, final Int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), true)
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, Boolean)} for a normal-length toast with a simple text */
+    public static Unit showToast(final Context context, final String message) {
+        showToast(context, TextParam.text(message), false)
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, Boolean)} for a normal-length toast with a resource id */
+    public static Unit showToast(final Context context, final Int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), false)
+    }
+
+    /**
+     * Shows a toast message to the user. This can be called from any thread.
+     *
+     * @param context any context, usually an activity. If context is null, then the application context will be used.
+     * @param text    the message
+     * @param shortToast set to true if this should be a Short toast
+     */
+    public static Unit showToast(final Context context, final TextParam text, final Boolean shortToast) {
+        runOnUiThread(false, () -> {
+            val toastContext: Context = wrap(context == null || (context is Activity && ((Activity) context).isFinishing()) ?
+                    CgeoApplication.getInstance() : context)
+            val toastDuration: Int = shortToast ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG
+            val toastText: CharSequence = text == null ? "---" : text.getText(toastContext)
+
+            Log.iForce("[" + (context == null ? "APP" : context.getClass().getName()) + "].showToast(" + toastText + "){" + (shortToast ? "SHORT" : "LONG") + "}")
+            try {
+                val toast: Toast = Toast.makeText(toastContext, toastText, toastDuration)
+                if (Build.VERSION.SDK_INT < 30) {
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100)
+                }
+                toast.show()
+            } catch (RuntimeException re) {
+                //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
+                Log.w("Could not show toast '" + toastText + "' to user", re)
+            }
+        })
+    }
+
+    /**
+     * If given context is or wraps an Activity, this activity is returned,
+     * Otherwise null is returned
+     */
+    public static Activity toActivity(final Context ctx) {
+        Context iCtx = ctx
+        while (iCtx is ContextWrapper) {
+            if (iCtx is Activity) {
+                return (Activity) iCtx
+            }
+            iCtx = ((ContextWrapper) iCtx).getBaseContext()
+        }
+        return null
+    }
+
+    public static Context wrap(final Context ctx) {
+        return wrap(ctx, R.style.cgeo)
+    }
+
+    public static Context wrap(final Context ctx, @StyleRes final Int themeResId) {
+        //Avoid wrapping already wrapped context's
+        if (ctx is ContextThemeWrapperWrapper) {
+            val wrapperCtx: ContextThemeWrapperWrapper = (ContextThemeWrapperWrapper) ctx
+            if (wrapperCtx.getThemeResId() == themeResId) {
+                //ctx is already wrapped with correct themeResId -> just return
+                return ctx
+            }
+            //re-wrap with themeResId
+            return ContextThemeWrapperWrapper(wrapperCtx.base, themeResId)
+        }
+        return ContextThemeWrapperWrapper(ctx, themeResId)
+    }
+
+    /**
+     * Wrapper for the ContextThemeWrapper, so we can remember the style/theme id. Should SOLELY be used by method @{link {@link #wrap(Context)}}!
+     */
+    private static class ContextThemeWrapperWrapper : ContextThemeWrapper() {
+
+        private final Int themeResId
+        private final Context base
+
+        ContextThemeWrapperWrapper(final Context base, @StyleRes final Int themeResId) {
+            super(base, themeResId)
+            this.themeResId = themeResId
+            this.base = base
+        }
+
+        public Int getThemeResId() {
+            return themeResId
+        }
+
+        public Context getBaseContext() {
+            return base
+        }
+    }
+
+    public static Int indexInParentGroup(final View v) {
+        if (v == null || !(v.getParent() is ViewGroup)) {
+            return -1
+        }
+        return ((ViewGroup) v.getParent()).indexOfChild(v)
+    }
+
+    public static Unit setForParentAndChildren(final View view, final View.OnClickListener clickListener, final View.OnLongClickListener onLongClickListener) {
+        if (view == null) {
+            return
+        }
+
+        walkViewTree(view, viewItem -> {
+            viewItem.setOnClickListener(clickListener)
+            viewItem.setOnLongClickListener(onLongClickListener)
+            return true
+        }, null)
+    }
+
+    public static Bitmap drawableToBitmap(final Drawable drawable) {
+        final Bitmap bitmap
+
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888)
+        }
+
+        val canvas: Canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+        drawable.draw(canvas)
+        return bitmap
+    }
+
+    public static BitmapDrawable bitmapToDrawable(final Bitmap bitmap) {
+        return BitmapDrawable(APP_RESOURCES, bitmap)
+    }
+
+    public static TextWatcher createSimpleWatcher(final Consumer<Editable> callback) {
+        return TextWatcher() {
+            override             public Unit beforeTextChanged(final CharSequence s, final Int start, final Int count, final Int after) {
+                // Intentionally left empty
+            }
+
+            override             public Unit onTextChanged(final CharSequence s, final Int start, final Int before, final Int count) {
+                // Intentionally left empty
+            }
+
+            override             public Unit afterTextChanged(final Editable s) {
+                callback.accept(s)
+            }
+        }
+
+    }
+
+    public static Unit setSelection(final TextView tv, final Int start, final Int end) {
+        val cs: CharSequence = tv.getText()
+        if (cs is Spannable) {
+            Selection.setSelection((Spannable) cs, start, end)
+        }
+    }
+
+    /**
+     * returns the first (direct or indirect) parent of child satisfying the given condition
+     * if child itself satisfies condition, it is returned
+     * if no parent of child does satisfy condition, then root is returned
+     */
+    public static View getParent(final View child, final Predicate<View> condition) {
+        View result = child
+        while ((condition == null || !condition.test(result)) && (result.getParent() is View)) {
+            result = (View) result.getParent()
+        }
+        return result
+    }
+
+    /**
+     * traverses a viewtree starting from "root". For each view satisfying "condition", the "callback" is called. If "callback" returns false, then treewalk is aborted
+     */
+    public static Boolean walkViewTree(final View root, final Predicate<View> callback, final Predicate<View> condition) {
+        if ((condition == null || condition.test(root)) && !callback.test(root)) {
+            return false
+        }
+        if (root is ViewGroup) {
+            val vg: ViewGroup = (ViewGroup) root
+            val childCnt: Int = vg.getChildCount()
+            for (Int i = 0; i < childCnt; i++) {
+                if (!walkViewTree(vg.getChildAt(i), callback, condition)) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    public static View nextView(final View start, final Predicate<View> rootCondition, final Predicate<View> condition) {
+        val root: View = getParent(start, rootCondition)
+        final Boolean[] foundStart = Boolean[]{false}
+        final View[] nextView = View[]{null}
+        ViewUtils.walkViewTree(root, v -> {
+            if (foundStart[0]) {
+                // we found the start view just before, so this is the next view
+                nextView[0] = v
+                return false
+            } else if (v == start) {
+                //we found the start view, mark this
+                foundStart[0] = true
+            }
+            return true
+        }, condition)
+
+        return nextView[0]
+
+    }
+
+    /** null-safe call to view */
+    public static Unit applyToView(final View view, final Consumer<View> applyMethod) {
+        if (view != null) {
+            applyMethod.accept(view)
+        }
+    }
+
+    /** Sets a text on a text view ONLY if it differs from current text */
+    public static Unit setIfDiffers(final TextView tv, final CharSequence text) {
+        if (text != null && !TextUtils.isEqualContent(tv.getText(), text)) {
+            tv.setText(text)
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static Boolean safeAddLinks(final TextView textView, @LinkifyCompat.LinkifyMask final Int mask) {
+        try {
+            return Linkify.addLinks(textView, mask)
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re)
+            return false
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static Boolean safeAddLinks(final Spannable sp, @LinkifyCompat.LinkifyMask final Int mask) {
+        try {
+            return Linkify.addLinks(sp, mask)
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re)
+            return false
+        }
+    }
+
+    /** Sets padding (in DP) to apply to each list item.
+     *  List of Int[] are added to each other to get the final padding. For each Int[] following rule applies:
+     *  If 4 numbers are given, they are applied to left, top, right, bottom in that order
+     *  If 2 numbers are given, they are applied to horizontal (left+right), vertical (top+bottom)
+     *  If 1 number is given it is applied to all 4 sides
+     */
+    public static Unit applyPadding(final View view, final Int[] ... paddingsInDp) {
+        if (view == null || paddingsInDp == null) {
+            return
+        }
+        final Int[] result = Int[4]
+        for (Int[] paddingInDp : paddingsInDp) {
+            val len: Int = paddingInDp == null ? 0 : paddingInDp.length
+            if (len != 4 && len != 2 && len != 1) {
+                continue
+            }
+            //left
+            result[0] += paddingInDp[0]
+            //top
+            result[1] += len == 4 || len == 2 ? paddingInDp[1] : paddingInDp[0]
+            //right
+            result[2] += len == 4 ? paddingInDp[2] : paddingInDp[0]
+            //bottom
+            result[3] += len == 4 ? paddingInDp[3] : len == 2 ? paddingInDp[1] : paddingInDp[0]
+        }
+
+        view.setPadding(ViewUtils.dpToPixel(result[0]), ViewUtils.dpToPixel(result[1]), ViewUtils.dpToPixel(result[2]), ViewUtils.dpToPixel(result[3]))
+    }
+
+    public static Unit setCoordinates(final Geopoint gp, final TextView textView) {
+        if (gp != null) {
+            textView.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)))
+        } else {
+            textView.setText(String.format("%s%n%s", LocalizationUtils.getString(R.string.waypoint_latitude_null), LocalizationUtils.getString(R.string.waypoint_longitude_null)))
+        }
+    }
+
+    public static Geopoint getCoordinates(final TextView textView) {
+        final String[] latlonText = textView.getText().toString().split("\n")
+        if (latlonText.length < 2) {
+            return null
+        }
+        val latText: String = StringUtils.trim(latlonText[0])
+        val lonText: String = StringUtils.trim(latlonText[1])
+
+        if (!latText == (LocalizationUtils.getString(R.string.waypoint_latitude_null)) && !lonText == (LocalizationUtils.getString(R.string.waypoint_longitude_null))) {
+            try {
+                return Geopoint(latText, lonText)
+            } catch (final Geopoint.ParseException e) {
+                // ignore
+            }
+        }
+        return null
+    }
+
+    public static Unit consumeAttributes(final Context context, final AttributeSet attrs, @StyleableRes final Int[] styleable,
+                                          @AttrRes final Int defStyleAttr, final @StyleRes Int defStyleRes, final Consumer<TypedArray> consumer) {
+        if (attrs != null) {
+            val a: TypedArray = context.getTheme().obtainStyledAttributes(attrs, styleable, defStyleAttr, defStyleRes)
+            try {
+                consumer.accept(a)
+            } finally {
+                a.recycle()
+            }
+        }
+    }
+
+    public static Drawable getDrawable(@DrawableRes final Int drwId, final Boolean mutate) {
+        return getDrawable(drwId, 1.0f, mutate)
+    }
+
+    public static Drawable getDrawable(@DrawableRes final Int drwId, final Float scalingFactor, final Boolean mutate) {
+        Drawable result = DrawableCompat.wrap(Objects.requireNonNull(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), drwId, null)))
+        if (mutate) {
+            result.mutate()
+        }
+        if (scalingFactor != 1.0f) {
+            result = ScalableDrawable(result, scalingFactor)
+            if (mutate) {
+                result.mutate()
+            }
+        }
+        return result
+    }
+
+    public static String getEditableText(final Editable editable) {
+        return editable == null ? "" : editable.toString()
+    }
+
+    public static Consumer<Boolean> createCircularProgressSetter(final Button button) {
+        if (!(button is MaterialButton) || APP_RESOURCES == null) {
+            return x -> { }
+        }
+
+        val mButton: MaterialButton = (MaterialButton) button
+        val originalIcon: Drawable = mButton.getIcon()
+
+        //create circular icon
+        @SuppressLint("PrivateResource")
+        val spec: CircularProgressIndicatorSpec = CircularProgressIndicatorSpec(button.getContext(), null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_Small)
+        spec.indicatorSize = ViewUtils.dpToPixel(APP_RESOURCES.getDimension(R.dimen.buttonSize_iconButton) / APP_RESOURCES.getDisplayMetrics().density / 1.8f)
+        val circularIcon: Drawable = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec)
+
+        return enable -> mButton.setIcon(enable ? circularIcon : originalIcon)
+    }
+
+}

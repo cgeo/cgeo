@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">c:geo tests</string>
+    <string name="logcat">Logcat:</string>
+    <string name="run_tests">Run tests…</string>
+
+</resources>

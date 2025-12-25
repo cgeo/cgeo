@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="93.924px"
+   height="100px"
+   viewBox="0 0 93.924 100"
+   enable-background="new 0 0 93.924 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="cliff.svg"><metadata
+   id="metadata2859"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2857"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="93.924004 : 50 : 1"
+     inkscape:persp3d-origin="46.962002 : 33.333333 : 1"
+     id="perspective2861" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2855"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="46.962002"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<polygon
+   points="46.178,7.197 42.985,0.364 36.152,3.528 39.316,10.389 "
+   id="polygon2839"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<polygon
+   points="24.979,12.377 21.143,23.691 32.484,27.499 36.293,16.186 "
+   id="polygon2841"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<polygon
+   points="57.07,18.986 58.807,38.701 43.909,40.465 37.861,32.428 36.377,20.918 "
+   id="polygon2843"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<polygon
+   points="69.112,58.275 73.285,57.519 78.213,49.37 78.213,49.174 71.017,44.805 66.844,45.562 61.916,53.711 61.916,53.906 "
+   id="polygon2845"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<polygon
+   points="78.326,65.863 76.617,79.529 67.152,78.186 63.624,71.353 64.968,64.072 "
+   id="polygon2847"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<path
+   d="M 42.314,65.275 78.466,21.59 86.307,2.324 93.924,0 93.896,95.071 c 0,2.632 -2.128,4.761 -4.761,4.761 L 24.139,99.775 29.46,80.817 42.314,65.275"
+   id="path2849"
+   style="fill:#ffffff" />
+<polygon
+   points="49.426,47.718 44.974,41.809 41.949,44.077 41.949,50.07 46.289,50.07 "
+   id="polygon2851"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+<polygon
+   points="82.134,100 82.134,91.627 86.951,86.782 93.924,92.104 93.924,100 "
+   id="polygon2853"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,93.924,0)" />
+</svg>

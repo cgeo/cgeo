@@ -1,0 +1,106 @@
+<gkxml version="1.0" date="2016-07-26T20:16:00.263Z">
+    <geokrety>
+        <geokret id="47496">
+            <name><![CDATA[c:geo tests]]></name>
+            <description><![CDATA[virtual, just for testing c:geo app
+
+
+
+
+Test to break c:geo]]></description>
+            <owner id="26422"><![CDATA[kumy]]></owner>
+            <datecreated/>
+            <dateupdated>2016-07-26T20:16:00.263Z</dateupdated>
+            <distancetravelled unit="km">143</distancetravelled>
+            <places>2</places>
+            <state>1</state>
+            <missing>0</missing>
+            <waypoints>
+                <waypoint id="967656"/>
+            </waypoints>
+            <type id="0">Traditional</type>
+            <image title="test">1437081713r7ay7.jpg</image>
+            <images>
+                <image title="azaaaa">1447615839yuz2v.jpg</image>
+                <image title="sdqsd">1437081699py7j4.jpg</image>
+                <image title="">14266379429mpyj.jpeg</image>
+            </images>
+            <moves last_id="911689">
+                <move>
+                    <id>911689</id>
+                    <date moved="2016-05-02 12:00"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <comment><![CDATA[test images in log]]></comment>
+                    <logtype id="2">A comment</logtype>
+                    <images>
+                        <image title="test logo 2">14622133503lxv2.png</image>
+                        <image title="test 1">1462213331lhaiu.png</image>
+                    </images>
+                </move>
+                <move>
+                    <id>967656</id>
+                    <date moved="2016-03-21 18:31"/>
+                    <user id="27829"><![CDATA[gueta]]></user>
+                    <comment><![CDATA[Grabbed]]></comment>
+                    <logtype id="1">Grabbed from</logtype>
+                </move>
+                <move>
+                    <id>967654</id>
+                    <position latitude="43.69365" longitude="6.86097"/>
+                    <wpt alt="fr">GC5BRQK</wpt>
+                    <date moved="2016-02-12 12:00"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <comment><![CDATA[Multiline 1
+
+Multiline 2
+Multiline 3
+
+
+
+Multiline 4]]></comment>
+                    <logtype id="3">Seen in</logtype>
+                    <distancetravelled unit="km">0</distancetravelled>
+                </move>
+                <move>
+                    <id>912063</id>
+                    <position latitude="43.69365" longitude="6.86097"/>
+                    <wpt alt="fr">GC5BRQK</wpt>
+                    <date moved="2016-01-03 12:00"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <comment><![CDATA[test drop]]></comment>
+                    <logtype id="0">Dropped to</logtype>
+                    <distancetravelled unit="km">143</distancetravelled>
+                    <comments>
+                        <comment type="missing">
+                            <user id="26422"><![CDATA[kumy]]></user>
+                            <message><![CDATA[Où est tu ?]]></message>
+                        </comment>
+                        <comment type="message">
+                            <user id="26422"><![CDATA[kumy]]></user>
+                            <message><![CDATA[test]]></message>
+                        </comment>
+                    </comments>
+                </move>
+                <move>
+                    <id>722027</id>
+                    <position latitude="44.12427" longitude="5.17875"/>
+                    <wpt alt="fr">GC2E895</wpt>
+                    <date moved="2015-07-04 00:00"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <application using="API"><![CDATA[c:geo developerbuild]]></application>
+                    <comment><![CDATA[Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.]]></comment>
+                    <logtype id="5">Dipped in</logtype>
+                    <distancetravelled unit="km">0</distancetravelled>
+                </move>
+                <move>
+                    <id>673734</id>
+                    <date moved="2015-03-29 14:10"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <application using="API"><![CDATA[c:geo developer build]]></application>
+                    <comment><![CDATA[Test]]></comment>
+                    <logtype id="2">A comment</logtype>
+                </move>
+            </moves>
+        </geokret>
+    </geokrety>
+</gkxml>

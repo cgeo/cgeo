@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36" height="36" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_gc">
+ <ellipse id="marker_gc" cx="18" cy="18" rx="14" ry="14" fill="#fff" stroke="#383838" stroke-width=".75"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_gc_withpin">
+ <path id="pin" transform="matrix(1.3815 0 0 1.2895 -1.3404 .70603)" d="m14 21.197c-0.70408 0.29179-1.4046 0.93052-1.8086 1.7949-0.88162 1.8863 1.8086 4.0078 1.8086 4.0078s2.6902-2.1215 1.8086-4.0078c-0.40401-0.86441-1.1045-1.5031-1.8086-1.7949z" fill="#fff" fill-rule="evenodd" stroke="#383838" stroke-width=".5802" style="mix-blend-mode:normal"/>
+ <ellipse id="marker_gc" cx="18" cy="18" rx="14" ry="14" fill="#fff" stroke="#383838" stroke-width=".75"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_oc">
+ <rect id="marker_oc" x="4" y="4" width="28" height="28" rx="4.6" ry="4.6" fill="#fff" stroke="#383838" stroke-linecap="square" stroke-width=".75"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_oc_withpin">
+ <path id="pin" transform="matrix(1.3815 0 0 1.2895 -1.3404 .70603)" d="m14 21.197c-0.70408 0.29179-1.4046 0.93052-1.8086 1.7949-0.88162 1.8863 1.8086 4.0078 1.8086 4.0078s2.6902-2.1215 1.8086-4.0078c-0.40401-0.86441-1.1045-1.5031-1.8086-1.7949z" fill="#fff" fill-rule="evenodd" stroke="#383838" stroke-width=".5802" style="mix-blend-mode:normal"/>
+ <rect id="marker_oc" x="4" y="4" width="28" height="28" rx="4.6" ry="4.6" fill="#fff" stroke="#383838" stroke-linecap="square" stroke-width=".75"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_other">
+ <path id="marker_other" transform="matrix(.60507 0 0 .6051 8.3219 -2.1594)" d="m42.711 33.316-13.358 23.137h-26.716l-13.358-23.137 13.358-23.137h26.716z" fill="#fff" stroke="#383838" stroke-width="1.2395"/>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" id="combined_marker_other_withpin">
+ <path id="pin" transform="matrix(1.3815 0 0 1.2895 -1.3404 .70603)" d="m14 21.197c-0.70408 0.29179-1.4046 0.93052-1.8086 1.7949-0.88162 1.8863 1.8086 4.0078 1.8086 4.0078s2.6902-2.1215 1.8086-4.0078c-0.40401-0.86441-1.1045-1.5031-1.8086-1.7949z" fill="#fff" fill-rule="evenodd" stroke="#383838" stroke-width=".5802" style="mix-blend-mode:normal"/>
+ <path id="marker_other" transform="matrix(.60507 0 0 .6051 8.3219 -2.1594)" d="m42.711 33.316-13.358 23.137h-26.716l-13.358-23.137 13.358-23.137h26.716z" fill="#fff" stroke="#383838" stroke-width="1.2395"/>
+    </symbol>
+</svg>

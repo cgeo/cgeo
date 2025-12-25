@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/activity_content"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/destination"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/cacheinfo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/destination"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal" />
+
+        <ToggleButton
+            android:id="@+id/use_compass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/cacheinfo"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:textOn="@string/use_compass"
+            android:textOff="@string/use_gps" />
+
+        <ToggleButton
+            android:id="@+id/device_orientation_mode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/use_compass"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:textOn="@null"
+            android:textOff="@null" />
+
+
+         <RelativeLayout
+            android:id="@+id/device_information"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/device_orientation_mode"
+            android:longClickable="false" >
+
+                 <TextView
+                     android:id="@+id/device_heading_label"
+                     style="@style/location_current_style"
+                     android:layout_alignParentLeft="true"
+                     android:text="@string/device_heading_label"/>
+
+                 <TextView
+                     android:id="@+id/device_heading"
+                     style="@style/single_degree_style"
+                     android:width="42dip"
+                     android:layout_toRightOf="@+id/device_heading_label"/>
+
+                 <TextView
+                     android:id="@+id/device_orientation_roll"
+                     style="@style/single_degree_style"
+                     android:width="28dip"
+                     android:layout_alignParentRight="true"
+                     />
+                 <TextView
+                     android:id="@+id/device_orientation_pitch"
+                     style="@style/single_degree_style"
+                     android:width="36dip"
+                     android:layout_toLeftOf="@+id/device_orientation_roll"
+                     />
+                 <TextView
+                     android:id="@+id/device_orientation_azimuth"
+                     style="@style/single_degree_style"
+                     android:width="36dip"
+                     android:layout_toLeftOf="@+id/device_orientation_pitch"
+                     />
+                 <TextView
+                     android:id="@+id/device_orientation_label"
+                     style="@style/location_current_style"
+                     android:layout_toLeftOf="@+id/device_orientation_azimuth"
+                     android:text="@string/device_orientation_label"
+                     />
+             </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="3dip"
+            android:layout_below="@+id/device_information"
+            android:text="@null"
+            android:textSize="@dimen/textSize_compassTargeting" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_marginRight="3dip"
+            android:layout_below="@+id/device_information"
+            android:text="@null"
+            android:textSize="@dimen/textSize_compassTargeting" />
+
+        <include layout="@layout/compass_hint_and_status" android:id="@+id/hint" />
+
+        <RelativeLayout
+            android:id="@+id/status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:longClickable="true" >
+
+            <TextView
+                android:id="@+id/nav_type"
+                style="@style/location_current_type" />
+
+            <TextView
+                android:id="@+id/nav_accuracy"
+                style="@style/location_current_accuracy" />
+
+            <TextView
+                android:id="@+id/nav_satellites"
+                style="@style/location_current_satellites" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <view
+        android:id="@+id/rose"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="1dip"
+        android:layout_marginLeft="1dip"
+        android:layout_marginRight="1dip"
+        android:layout_marginTop="6dip"
+        android:layout_weight="1"
+        class="cgeo.geocaching.ui.CompassView"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:padding="4dip" />
+
+</LinearLayout>

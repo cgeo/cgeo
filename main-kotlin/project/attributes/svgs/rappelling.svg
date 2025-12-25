@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="75.472px"
+   height="100px"
+   viewBox="0 0 75.472 100"
+   enable-background="new 0 0 75.472 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="rappelling.svg"><metadata
+   id="metadata2935"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2933"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="75.472 : 50 : 1"
+     inkscape:persp3d-origin="37.736 : 33.333333 : 1"
+     id="perspective2937" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2931"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="37.736"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M38.879,66.319c-0.935,0.348-1.978,0.543-3.042,0.543c-1.151,0-2.282-0.131-3.325-0.436l-11.82,27.162  c-1.065,2.5-4.042,3.348-6.628,1.891c-2.586-1.455-3.803-4.649-2.694-7.148l14.472-33.225h18.471v-3.107l9.344-4.346  c2.455-1.195,5.628,0.848,6.28,3.434L64.52,69.47c0.652,2.607-0.934,5.236-3.541,5.889s-5.259-0.935-5.911-3.542l-2.911-11.712  L38.879,66.319z"
+   id="path2921"
+   style="fill:#ffffff" />
+<path
+   d="M47.396,47.284C67.627,37.245,75.472,2.868,75.472,0H72.69c-1.043,7.17-9.735,35.854-25.294,44.176V47.284z"
+   id="path2923"
+   style="fill:#ffffff" />
+<path
+   d="M10.065,39.765c1.064,1.651,3.194,2.39,5.085,1.608l10.69-4.194v14.841h18.471V34.833L60.869,8.344  c1.217-1.934,0.652-4.498-1.304-5.736c-1.934-1.217-4.498-0.652-5.584,1.238l-14.06,22.512l-8.475,0.021  c-0.543,0-1.086,0.087-1.63,0.304L15.193,32.42l-7.54-11.43c-1.238-1.912-3.803-2.477-5.736-1.239  c-1.934,1.239-2.499,3.825-1.261,5.758L10.065,39.765z"
+   id="path2925"
+   style="fill:#ffffff" />
+<path
+   d="M33.816,24.858c4.062,0,7.366-3.281,7.366-7.345c0-4.063-3.304-7.366-7.366-7.366c-4.064,0-7.367,3.303-7.367,7.366  C26.449,21.577,29.752,24.858,33.816,24.858z"
+   id="path2927"
+   style="fill:#ffffff" />
+<polygon
+   points="44.312,100 44.312,66.862 41.204,68.317 41.204,100 "
+   id="polygon2929"
+   style="fill:#ffffff" />
+</svg>

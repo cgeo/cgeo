@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="86.735px"
+   height="100px"
+   viewBox="0 0 86.735 100"
+   enable-background="new 0 0 86.735 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="wheelchair.svg"><metadata
+   id="metadata2950"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2948"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="86.735001 : 50 : 1"
+     inkscape:persp3d-origin="43.3675 : 33.333333 : 1"
+     id="perspective2952" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2946"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="43.3675"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<g
+   id="g2938"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,86.735406,0)">
+	<path
+   d="m 61.075,65.383 c 0.002,0.146 0.011,0.288 0.011,0.434 0,14.833 -12.068,26.901 -26.902,26.901 -14.833,0 -26.902,-12.068 -26.902,-26.901 0,-8.966 4.413,-16.916 11.176,-21.807 L 17.543,35.972 C 7.087,41.825 0,53.006 0,65.816 0,84.666 15.334,100 34.184,100 50.163,100 63.611,88.979 67.338,74.141 l -6.263,-8.758 z"
+   id="path2940"
+   style="fill:#ffffff" />
+</g>
+<circle
+   cx="29.795"
+   cy="8.698"
+   r="8.698"
+   id="circle2942"
+   style="fill:#ffffff"
+   sodipodi:cx="29.795"
+   sodipodi:cy="8.698"
+   sodipodi:rx="8.698"
+   sodipodi:ry="8.698"
+   transform="matrix(-1,0,0,1,86.735406,0)" />
+<path
+   d="M 0.86840648,76.098 20.385406,48.807 c 1.022,-1.429 2.726,-2.105 4.457,-1.957 0.129,-0.012 0.258,-0.023 0.389,-0.023 l 22.295,0 0.553,-4.854 -16.572,0 c -1.927,0 -3.489,-1.562 -3.489,-3.489 0,-1.927 1.562,-3.489 3.489,-3.489 l 17.366,0 0.907,-7.97 c 0.53,-4.662 4.74,-8.011 9.401,-7.48 4.662,0.531 8.011,4.74 7.48,9.401 l -2.562,22.509 c -0.496,4.353 -4.196,7.557 -8.478,7.533 -0.014,0 -0.028,0.003 -0.043,0.003 l -29.172,0 -16.7379995,23.403 c -1.598,2.237 -4.866,2.641 -7.297,0.901 -2.42900002,-1.738 -3.10300002,-4.961 -1.50300002,-7.197 z"
+   id="path2944"
+   style="fill:#ffffff" />
+</svg>

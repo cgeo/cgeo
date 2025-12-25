@@ -1,0 +1,14 @@
+<!-- taken (modified) from human-child, lightbulb-outline / materialdesignicons-community, flag / materialdesignicons-google -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportHeight="24"
+    android:viewportWidth="24"
+    android:tint="?android:textColorPrimary">
+     <path
+      android:fillColor="#FF000000"
+      android:pathData="M18.6,2.83 L18.3,1.55H12.6V22.7H13.9V7.95H17.4L17.7,9.23H22.2V2.83Z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M7.21,2.75A3,3 0,0 1,10.2 5.75,3 3,0 0,1 7.21,8.75 3,3 0,0 1,4.21 5.75,3 3,0 0,1 7.21,2.75M6.21,22.7H3.21V16.7H1.21V9.75H13.2V16.7H11.2V22.7H8.21V18.7H6.21Z"/>
+</vector>

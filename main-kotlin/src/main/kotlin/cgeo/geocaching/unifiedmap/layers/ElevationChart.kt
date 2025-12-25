@@ -1,0 +1,248 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.unifiedmap.layers
+
+import cgeo.geocaching.CgeoApplication
+import cgeo.geocaching.Intents
+import cgeo.geocaching.R
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.Units
+import cgeo.geocaching.maps.RouteTrackUtils
+import cgeo.geocaching.models.Route
+import cgeo.geocaching.models.RouteSegment
+import cgeo.geocaching.models.geoitem.GeoIcon
+import cgeo.geocaching.models.geoitem.GeoItem
+import cgeo.geocaching.models.geoitem.GeoPrimitive
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer
+import cgeo.geocaching.utils.ImageUtils
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver
+import cgeo.geocaching.utils.MenuUtils
+import cgeo.geocaching.unifiedmap.LayerHelper.ZINDEX_ELEVATIONCHARTMARKERPOSITION
+import cgeo.geocaching.utils.DisplayUtils.getDimensionInDp
+
+import android.content.res.Resources
+import android.view.View
+import android.widget.LinearLayout
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
+
+import java.util.ArrayList
+import java.util.Iterator
+import java.util.List
+
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+
+class ElevationChart {
+
+    private static val ELEVATIONCHART_MARKER: String = "ELEVATIONCHARTMARKER"
+    private final View chartBlock
+    private final LineChart chart
+    private final Resources res
+    private final GeoItemLayer<String> geoItemLayer
+    final Toolbar toolbar
+    private val entries: List<Entry> = ArrayList<>()
+    private var offset: Float = 0f
+    private var lastShownPosition: Geopoint = null
+    private var expanded: Boolean = Settings.getBoolean(R.string.pref_elevationChartExpanded, false)
+
+    public ElevationChart(final AppCompatActivity activity, final GeoItemLayer<String> geoItemLayer) {
+        chartBlock = activity.findViewById(R.id.elevation_block)
+        chart = activity.findViewById(R.id.elevation_chart)
+        this.geoItemLayer = geoItemLayer
+        toolbar = activity.findViewById(R.id.toolbar)
+        res = activity.getResources()
+    }
+
+    public Unit removeElevationChart() {
+        if (chart == null) {
+            return
+        }
+        if (chartBlock.getVisibility() == View.VISIBLE) {
+            closeChart(geoItemLayer)
+        }
+    }
+
+    public Unit showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils, final Runnable onDelete) {
+        if (chart == null) {
+            return
+        }
+
+        // initialize chart
+        if (chartBlock.getVisibility() != View.VISIBLE) {
+            chartBlock.setVisibility(View.VISIBLE)
+
+            chart.setNoDataText(chart.getContext().getString(R.string.init_elevation_notAvailable))
+
+            // follow tap on elevation chart in route on map
+            chart.setOnChartValueSelectedListener(OnChartValueSelectedListener() {
+                override                 public Unit onValueSelected(final Entry e, final Highlight h) {
+                    val center: Geopoint = (Geopoint) e.getData()
+                    // update marker if position found
+                    if (center != null) {
+                        val marker: GeoItem = GeoPrimitive.createMarker(center, GeoIcon.builder().setBitmap(ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.circle, null))).build()).buildUpon().setZLevel(ZINDEX_ELEVATIONCHARTMARKERPOSITION).build()
+                        geoItemLayer.put(ELEVATIONCHART_MARKER, marker)
+                    }
+                }
+
+                override                 public Unit onNothingSelected() {
+                    geoItemLayer.remove(ELEVATIONCHART_MARKER)
+                }
+            })
+
+            toolbar.setNavigationIcon(R.drawable.expand_more)
+            toolbar.setNavigationOnClickListener(v -> closeChart(geoItemLayer))
+            resizeChart(expanded)
+            toolbar.setOnClickListener(v -> resizeChart(!expanded))
+        }
+
+        if (routeTrackUtils != null) {
+            toolbar.getMenu().clear()
+            toolbar.inflateMenu(R.menu.map_routetrack_context)
+            RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true)
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, onDelete))
+            MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu())
+        }
+
+        // set/update data
+        synchronized (entries) {
+            collectData(route)
+            formatChart(res)
+            chart.invalidate()
+            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName())
+            geoItemLayer.remove(ELEVATIONCHART_MARKER)
+        }
+    }
+
+    /** collect entries for line chart from route */
+    private Unit collectData(final Route route) {
+        Float distance = 0.0f
+        Geopoint lastPoint = null
+        entries.clear()
+        if (route == null || route.getSegments() == null) {
+            return
+        }
+        for (RouteSegment segment : route.getSegments()) {
+            val elevation: ArrayList<Float> = segment.getElevation()
+            if (elevation == null) {
+                return
+            }
+            val it: Iterator<Float> = elevation.iterator()
+            for (Geopoint point : segment.getPoints()) {
+                if (lastPoint != null) {
+                    distance += lastPoint.distanceTo(point)
+                }
+                lastPoint = point
+                val elev: Float = it.hasNext() ? it.next() : Float.NaN
+                if (!Float.isNaN(elev)) {
+                    entries.add(Entry(distance, elev, point))
+                }
+            }
+        }
+    }
+
+    /** format line chart (lines, axes etc.) */
+    private Unit formatChart(final Resources res) {
+        chart.setData(null)
+        if (!entries.isEmpty()) {
+            val dataSet: LineDataSet = LineDataSet(entries, "")
+            dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER)
+            dataSet.setLineWidth(2f)
+            val color: Int = res.getColor(R.color.colorAccent)
+            dataSet.setColor(color)
+            dataSet.setHighLightColor(res.getColor(R.color.colorTextHint))
+            dataSet.setHighlightLineWidth(2.5f)
+            dataSet.setValueTextColor(res.getColor(R.color.colorText))
+            dataSet.setDrawValues(false)
+            dataSet.setDrawFilled(true)
+            dataSet.setFillColor(color)
+            dataSet.setDrawCircles(false)
+
+            val lineData: LineData = LineData(dataSet)
+            chart.setData(lineData)
+        }
+
+        chart.setExtraOffsets(0, -30, 0, 10)
+        chart.setBackgroundColor(res.getColor(R.color.colorBackground))
+
+        val legend: Legend = chart.getLegend()
+        legend.setEnabled(false)
+        chart.getDescription().setEnabled(false)
+
+        val xAxis: XAxis = chart.getXAxis()
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
+        xAxis.setDrawAxisLine(true)
+        xAxis.setTextSize(getDimensionInDp(res, R.dimen.textSize_detailsSecondary))
+        xAxis.setTextColor(res.getColor(R.color.colorText))
+        xAxis.setAxisMinimum(0.0f)
+        xAxis.setValueFormatter((value, axis) -> Units.getDistanceFromKilometers(value - offset))
+
+        val yAxis: YAxis = chart.getAxisLeft()
+        yAxis.setDrawAxisLine(true)
+        yAxis.setTextSize(getDimensionInDp(res, R.dimen.textSize_detailsSecondary))
+        yAxis.setTextColor(res.getColor(R.color.colorText))
+
+        val yAxis2: YAxis = chart.getAxisRight()
+        yAxis2.setEnabled(false)
+    }
+
+    /** find position on track closest to given coords (max 100m) and highlight it */
+    public Unit showPositionOnTrack(final Geopoint coords) {
+        // calculate position on track only if minimum distance reached
+        if (lastShownPosition != null && coords.distanceTo(lastShownPosition) < 0.05f) {
+            return
+        }
+        lastShownPosition = coords
+        // find position
+        Float minDistance = 0.1f
+        Int x = -1
+        Int index = 0
+        for (Entry entry : entries) {
+            val distance: Float = ((Geopoint) entry.getData()).distanceTo(coords)
+            if (distance < minDistance) {
+                x = index
+                minDistance = distance
+            }
+            index++
+        }
+        // display hairpin line for found position + adapt x axis labelling
+        offset = x < 0 ? 0f : entries.get(x).getX()
+        chart.highlightValue(offset, x < 0 ? -1 : 0)
+        chart.invalidate()
+    }
+
+    /** hides chart and map marker */
+    private Unit closeChart(final GeoItemLayer<String> geoItemLayer) {
+        chartBlock.setVisibility(View.GONE)
+        geoItemLayer.remove(ELEVATIONCHART_MARKER)
+        LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED)
+    }
+
+    /** resize elevation chart 1:1 vs. 1:3 in relation to map size */
+    private Unit resizeChart(final Boolean newExpandedState) {
+        expanded = newExpandedState
+        Settings.putBoolean(R.string.pref_elevationChartExpanded, expanded)
+        final LinearLayout.LayoutParams lpOld = (LinearLayout.LayoutParams) chartBlock.getLayoutParams()
+        final LinearLayout.LayoutParams lpNew = LinearLayout.LayoutParams(lpOld.width, lpOld.height, expanded ? 1 : 3)
+        chartBlock.setLayoutParams(lpNew)
+    }
+}

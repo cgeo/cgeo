@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".downloader.DownloadSelectorActivity" >
+
+    <Button
+        android:id="@+id/check_for_updates"
+        style="@style/button_full"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/downloadmap_checkforupdates_button"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/downloader_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dip"
+        >
+
+        <Spinner
+            android:id="@+id/downloader_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_toLeftOf="@id/like_it"/>
+
+        <Button
+            android:id="@+id/like_it"
+	        style="@style/button_icon"
+            app:icon="@drawable/downloader_favorite"
+            android:layout_alignParentRight="true"
+            android:text="@null"/>
+
+        <TextView
+            android:id="@+id/downloader_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/downloader_type"
+            android:paddingLeft="8dp"
+            android:paddingBottom="4dp" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mapdownloader_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dip"
+        android:clipToPadding="false"
+        android:dividerHeight="1dip"
+        android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/downloader_item" />
+
+</LinearLayout>

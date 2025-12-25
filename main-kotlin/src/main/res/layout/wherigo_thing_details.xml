@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/dialog_actionlist"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/headerInformation"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:visibility="gone"
+                android:textIsSelectable="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+            <cgeo.geocaching.ui.WherigoMediaView
+                android:id="@+id/media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+
+            <!-- External Translation -->
+            <Button
+                android:id="@+id/translation_external"
+                style="@style/button_icon_with_text"
+                app:icon="@drawable/ic_menu_translate"
+                android:layout_gravity="right"
+                android:visibility="gone"
+                />
+
+            <LinearLayout
+                android:id="@+id/debug_box"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/debug_info_title"
+                android:paddingTop="5dp"
+                android:text="Debug Information"
+                android:textSize="@dimen/textSize_listsPrimary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                tools:ignore="HardcodedText"
+                android:autoLink="web" />
+
+                <TextView
+                android:id="@+id/debug_info"
+                android:paddingTop="5dp"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+            </LinearLayout>
+
+
+            <!-- Input field -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_input_layout"
+                android:visibility="gone"
+                style="@style/textinput_edittext_singleline">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_input_edittext"
+                    style="@style/textinput_embedded_singleline"
+                    android:inputType="text"
+                    android:hint="" tools:ignore="LabelFor" /> <!-- hint is set by Dialog builder -->
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Item List -->
+            <cgeo.geocaching.ui.SimpleItemListView
+                android:id="@+id/dialog_itemlistview"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Action List -->
+    <cgeo.geocaching.ui.SimpleItemListView
+        android:id="@+id/dialog_actionlist"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:paddingTop="6dip"/>
+
+
+
+
+</RelativeLayout>

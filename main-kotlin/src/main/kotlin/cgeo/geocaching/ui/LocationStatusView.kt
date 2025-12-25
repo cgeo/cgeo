@@ -1,0 +1,199 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.ui
+
+import cgeo.geocaching.R
+import cgeo.geocaching.activity.ActivityMixin
+import cgeo.geocaching.address.AndroidGeocoder
+import cgeo.geocaching.address.OsmNominatumGeocoder
+import cgeo.geocaching.databinding.LocationStatusViewBinding
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.GeopointFormatter
+import cgeo.geocaching.location.Units
+import cgeo.geocaching.permission.PermissionContext
+import cgeo.geocaching.sensors.GeoData
+import cgeo.geocaching.sensors.GnssStatusProvider
+import cgeo.geocaching.utils.AndroidRxUtils
+import cgeo.geocaching.utils.ClipboardUtils
+import cgeo.geocaching.utils.Formatter
+import cgeo.geocaching.utils.GeoHeightUtils
+import cgeo.geocaching.utils.LocalizationUtils
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
+import android.location.Address
+import android.util.AttributeSet
+import android.view.ContextThemeWrapper
+import android.view.View
+import android.widget.LinearLayout
+
+import androidx.annotation.Nullable
+
+import java.util.ArrayList
+import java.util.List
+import java.util.Set
+
+import io.reactivex.rxjava3.core.Single
+import org.apache.commons.lang3.StringUtils
+
+/** Displays location information */
+class LocationStatusView : LinearLayout() {
+
+    private Context context
+    private Activity activity
+
+    private LocationStatusViewBinding binding
+    private Geopoint currentCoords
+    private var currentAddressCoords: Geopoint = null
+
+    private Runnable permissionRequestCallback
+
+    private var showAddress: Boolean = false
+
+    override     protected Unit onConfigurationChanged(final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig)
+
+    }
+
+    public LocationStatusView(final Context context) {
+        super(context)
+        init()
+    }
+
+    public LocationStatusView(final Context context, final AttributeSet attrs) {
+        super(context, attrs)
+        init()
+    }
+
+    public LocationStatusView(final Context context, final AttributeSet attrs, final Int defStyleAttr) {
+        super(context, attrs, defStyleAttr)
+        init()
+    }
+
+    private Unit init() {
+        setOrientation(VERTICAL)
+        this.context = ContextThemeWrapper(getContext(), R.style.cgeo)
+        this.activity = ViewUtils.toActivity(this.context)
+
+        inflate(this.context, R.layout.location_status_view, this)
+        binding = LocationStatusViewBinding.bind(this)
+
+        setOnClickListener(c -> {
+            if (permissionRequestCallback != null && !PermissionContext.LOCATION.hasAllPermissions()) {
+                permissionRequestCallback.run()
+            } else {
+                openLocationSettings()
+            }
+        })
+
+        setOnLongClickListener(v -> {
+            ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(currentCoords.toString()))
+            ActivityMixin.showToast(context, R.string.loc_copied_clipboard)
+            return true
+        })
+
+        updateGeoData(null)
+    }
+
+    public Unit setShowAddress(final Boolean showAddress) {
+        this.showAddress = showAddress
+    }
+
+    @SuppressLint("SetTextI18n")
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    public Unit updateGeoData(final GeoData geo) {
+
+        this.currentCoords = geo == null ? null : geo.getCoords()
+
+        binding.locationType.setText(geo == null ? "" : LocalizationUtils.getString(geo.getLocationProvider().resourceId))
+
+        if (geo != null && geo.getAccuracy() >= 0) {
+            val speed: Int = Math.round(geo.getSpeed()) * 60 * 60 / 1000
+            binding.locationAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed))
+        } else {
+            binding.locationAccuracy.setText(null)
+        }
+
+        val averageHeight: String = geo == null ? "" : GeoHeightUtils.getAverageHeight(geo, true)
+        if (currentCoords != null && showAddress && activity != null) {
+            if (currentAddressCoords == null) {
+                binding.locationText.setText(R.string.loc_no_addr)
+            }
+            if (currentAddressCoords == null || currentCoords.distanceTo(currentAddressCoords) > 0.5) {
+                currentAddressCoords = currentCoords
+                val address: Single<String> = (AndroidGeocoder(context).getFromLocation(currentCoords))
+                        .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocation(currentCoords))
+                        .map(LocationStatusView::formatAddress)
+                        .onErrorResumeNext(throwable -> Single.just(currentCoords.toString()))
+                AndroidRxUtils.bindActivity(activity, address)
+                        .subscribeOn(AndroidRxUtils.networkScheduler)
+                        .subscribe(address12 -> binding.locationText.setText(address12 + averageHeight))
+            }
+        } else {
+            binding.locationText.setText((currentCoords == null ? "" : currentCoords.toString()) + averageHeight)
+        }
+
+        updatePermissions()
+    }
+
+    @SuppressLint("SetTextI18n")
+    public Unit updateSatelliteStatus(final GnssStatusProvider.Status gnssStatus) {
+        if (gnssStatus.gnssEnabled) {
+            binding.locationSatellites.setText(LocalizationUtils.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible)
+        } else {
+            binding.locationSatellites.setText(LocalizationUtils.getString(R.string.loc_gps_disabled))
+        }
+    }
+
+    public Unit updatePermissions() {
+        val notGranted: Set<String> = PermissionContext.LOCATION.getNotGrantedPermissions()
+        binding.locationPermissionStatus.setVisibility(notGranted.isEmpty() ? View.GONE : View.VISIBLE)
+        if (notGranted.size() >= PermissionContext.LOCATION.getPermissions().length) {
+            binding.locationPermissionStatus.setText(R.string.location_no_permission)
+        } else {
+            binding.locationPermissionStatus.setText(R.string.location_only_coarse_permission)
+        }
+    }
+
+    public Unit setPermissionRequestCallback(final Runnable callback) {
+        this.permissionRequestCallback = callback
+    }
+
+    private static String formatAddress(final Address address) {
+        val addressParts: List<String> = ArrayList<>()
+
+        val countryName: String = address.getCountryName()
+        if (countryName != null) {
+            addressParts.add(countryName)
+        }
+        val locality: String = address.getLocality()
+        if (locality != null) {
+            addressParts.add(locality)
+        } else {
+            val adminArea: String = address.getAdminArea()
+            if (adminArea != null) {
+                addressParts.add(adminArea)
+            }
+        }
+        return StringUtils.join(addressParts, ", ")
+    }
+
+    private Unit openLocationSettings() {
+        if (activity != null) {
+            activity.startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        }
+    }
+
+}

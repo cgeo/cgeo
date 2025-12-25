@@ -1,0 +1,119 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.connector.trackable
+
+import cgeo.geocaching.connector.ConnectorFactory
+import cgeo.geocaching.models.Trackable
+import cgeo.geocaching.test.CgeoTestUtils
+import cgeo.geocaching.test.R
+
+import java.util.List
+
+import org.junit.Test
+import org.xml.sax.InputSource
+import org.assertj.core.api.Java6Assertions.assertThat
+
+/**
+ * test for {@link GeokretyConnector}
+ */
+class GeokretyConnectorTest  {
+
+    @Test
+    public Unit testCanHandleTrackable() {
+        ConnectorFactory.updateTBConnectorsList(true); // make sure GK connector is included
+        assertThat(getConnector().canHandleTrackable("GK82A2")).isTrue()
+        assertThat(getConnector().canHandleTrackable("TB1234")).isFalse()
+        assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse()
+
+        assertThat(getConnector().canHandleTrackable("GKXYZ1")).isFalse(); // non hex
+        assertThat(getConnector().canHandleTrackable("GKXYZ1", TrackableBrand.GEOKRETY)).isTrue(); // non hex, but match secret codes pattern
+        assertThat(getConnector().canHandleTrackable("123456", TrackableBrand.GEOKRETY)).isTrue();  // Secret code
+        assertThat(getConnector().canHandleTrackable("012345", TrackableBrand.GEOKRETY)).isFalse(); // blacklisted 0/O
+        assertThat(getConnector().canHandleTrackable("ABCDEF", TrackableBrand.GEOKRETY)).isTrue();  // Secret code
+        assertThat(getConnector().canHandleTrackable("LMNOPQ", TrackableBrand.GEOKRETY)).isFalse(); // blacklisted 0/O
+
+        assertThat(getConnector().canHandleTrackable("GC1234")).isFalse()
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.UNKNOWN)).isFalse()
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.TRAVELBUG)).isFalse()
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.GEOKRETY)).isTrue()
+    }
+
+    @Test
+    public Unit testGetTrackableCodeFromUrl() throws Exception {
+        assertThat(getConnector().getTrackableCodeFromUrl("http://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580")
+        assertThat(getConnector().getTrackableCodeFromUrl("https://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580")
+        assertThat(getConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581")
+        assertThat(getConnector().getTrackableCodeFromUrl("https://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581")
+
+        assertThat(getConnector().getTrackableCodeFromUrl("https://api.geokrety.org/gk/46464")).isEqualTo("GKB580")
+        assertThat(getConnector().getTrackableCodeFromUrl("https://api.geokrety.org/gk/46464/details")).isEqualTo("GKB580")
+    }
+
+    @Test
+    public Unit testGeocode() throws Exception {
+        assertThat(GeokretyConnector.geocode(46464)).isEqualTo("GKB580")
+    }
+
+    @Test
+    public Unit testGetId() throws Exception {
+        assertThat(GeokretyConnector.getId("GKB581")).isEqualTo(46465)
+    }
+
+    @Test
+    public Unit testGetUrl() throws Exception {
+        val trackables: List<Trackable> = GeokretyParser.parse(InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)))
+        assertThat(trackables).hasSize(2)
+        assertThat(trackables.get(0).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46464")
+        assertThat(trackables.get(1).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46465")
+    }
+
+    @Test
+    public Unit testSearchTrackable() throws Exception {
+        val geokret: Trackable = GeokretyConnector.searchTrackable("GKB580")
+        assertThat(geokret).isNotNull()
+        assertThat(geokret.getBrand()).isEqualTo(TrackableBrand.GEOKRETY)
+        assertThat(geokret.getName()).isEqualTo("c:geo One")
+        assertThat(geokret.getDetails()).isEqualTo("GeoKret for the c:geo project :)<br />DO NOT MOVE")
+        assertThat(geokret.getOwner()).isEqualTo("kumy")
+        assertThat(geokret.isMissing()).isTrue()
+        assertThat(geokret.isLoggable()).isTrue()
+        assertThat(geokret.getSpottedName()).isEqualTo("OX5BRQK")
+        assertThat(geokret.getSpottedType()).isEqualTo(Trackable.SPOTTED_CACHE)
+    }
+
+    @Test
+    public Unit testSearchTrackables() throws Exception {
+        // here it is assumed that:
+        // * cache OX5BRQK contains these 2 objects only...
+        // * objects never been moved
+        // * GK website always return list in the same order
+        val trackables: List<Trackable> = GeokretyConnector().searchTrackables("OX5BRQK")
+        assertThat(trackables).hasSize(2)
+        assertThat(trackables).extracting("name").containsOnly("c:geo One", "c:geo Two")
+    }
+
+    @Test
+    public Unit testGetIconBrand() throws Exception {
+        val trackables: List<Trackable> = GeokretyParser.parse(InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)))
+        assertThat(trackables).hasSize(2)
+        assertThat(trackables).extracting("brand").containsOnly(TrackableBrand.GEOKRETY, TrackableBrand.GEOKRETY)
+    }
+
+    private static GeokretyConnector getConnector() {
+        return GeokretyConnector()
+    }
+
+    @Test
+    public Unit testRecommendGeocode() throws Exception {
+        assertThat(getConnector().recommendLogWithGeocode()).isTrue()
+    }
+}

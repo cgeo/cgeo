@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/activity_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".EditWaypointActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!-- Coordinates -->
+
+        <Button
+            android:id="@+id/buttonLatLongitude"
+            style="@style/button_full_double"
+            app:icon="@drawable/ic_menu_variable"
+            android:freezesText="true"
+            android:hint="@string/latlongitude" />
+
+        <!-- Projection Settings -->
+
+        <Spinner
+            android:id="@+id/projection_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:listitem="@android:layout/simple_spinner_item" />
+
+        <RelativeLayout
+            android:id="@+id/projection_bearing_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:importantForAutofill="noExcludeDescendants">
+
+            <cgeo.geocaching.ui.FormulaEditText
+                android:id="@+id/projection_bearing_distance"
+                custom:hint="@string/projection_type_bearing_hint_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/projection_bearing_unit"/>
+
+            <Spinner
+                android:id="@+id/projection_bearing_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="25dp"
+                android:enabled="false"
+                android:entries="@array/distance_units"
+                tools:listitem="@android:layout/simple_spinner_item" />
+
+            <cgeo.geocaching.ui.FormulaEditText
+                android:id="@+id/projection_bearing_angle"
+                custom:hint="@string/projection_type_bearing_hint_angle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/projection_bearing_distance"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/projection_offset_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:importantForAutofill="noExcludeDescendants">
+
+            <cgeo.geocaching.ui.FormulaEditText
+                android:id="@+id/projection_offset_latitude"
+                custom:hint="@string/projection_type_offset_hint_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <cgeo.geocaching.ui.FormulaEditText
+                android:id="@+id/projection_offset_longitude"
+                custom:hint="@string/projection_type_offset_hint_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/projection_offset_latitude"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/variables_tidyup"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                app:icon="@drawable/ic_menu_auto_fix_high"
+                android:text="@string/variables_tidyup"/>
+
+        </RelativeLayout>
+
+        <cgeo.geocaching.ui.VariableListView
+            android:id="@+id/variable_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/projectedLatLongitude"
+            style="@style/button_full_double"
+            app:icon="@drawable/ic_menu_mylocation"
+            android:clickable="false"
+            android:focusable="false"
+            android:freezesText="true"
+            android:visibility="gone"
+            android:text="@string/latlongitude" />
+
+        <Spinner
+            android:id="@+id/type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:listitem="@android:layout/simple_spinner_item" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/waypoint_name" android:labelFor="@id/name" android:id="@+id/name_layout">
+            <AutoCompleteTextView
+                android:id="@+id/name"
+                style="@style/textinput_embedded_singleline" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/note_layout"
+            style="@style/textinput_edittext"
+            android:hint="@string/waypoint_note" android:labelFor="@id/note">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/note"
+                style="@style/textinput_embedded"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
+            android:hint="@string/waypoint_user_note" android:labelFor="@id/user_note">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_note"
+                style="@style/textinput_embedded"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/wpt_visited_checkbox"
+            style="@style/checkbox_full"
+            android:text="@string/waypoint_visited" />
+
+        <RadioGroup
+            android:id="@+id/modify_cache_coordinates_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/modify_cache_coordinates_nothing"
+                style="@style/radiobutton_wrap"
+                android:checked="true"
+                android:text="@string/waypoint_do_not_touch_cache_coordinates" />
+
+            <RadioButton
+                android:id="@+id/modify_cache_coordinates_local"
+                style="@style/radiobutton_wrap"
+                android:text="@string/waypoint_set_as_cache_coords" />
+
+            <RadioButton
+                android:id="@+id/modify_cache_coordinates_local_and_remote"
+                style="@style/radiobutton_wrap"
+                android:text="@string/waypoint_save_and_modify_on_website"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+</ScrollView>

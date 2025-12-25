@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".AboutActivity$SystemViewCreator" >
+
+        <Button android:id="@+id/copy"
+            style="@style/button_full"
+            android:text="@string/copy_to_clipboard" />
+
+        <Button android:id="@+id/share"
+            style="@style/button_full"
+            android:layout_below="@id/copy"
+            android:text="@string/about_system_info_send_button" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/share"
+        android:layout_above="@id/logcat">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dip"
+                android:linksClickable="true"
+                android:paddingLeft="3dip"
+                android:text="@string/about_system_include"
+                style="@style/about_base" />
+
+            <TextView
+                android:id="@+id/system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dip"
+                android:linksClickable="true"
+                android:paddingLeft="3dip"
+                android:textIsSelectable="true"
+                style="@style/about_base"
+                android:textColor="@color/colorTextHint"
+                tools:text="long list of system properties"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button android:id="@+id/logcat"
+        style="@style/button_full"
+        android:layout_alignParentBottom="true"
+        android:text="@string/about_system_write_logcat" />
+</RelativeLayout>

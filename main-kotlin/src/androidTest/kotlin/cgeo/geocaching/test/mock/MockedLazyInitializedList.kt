@@ -1,0 +1,31 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.test.mock
+
+import cgeo.geocaching.utils.LazyInitializedList
+
+import java.util.ArrayList
+import java.util.Arrays
+import java.util.List
+
+class MockedLazyInitializedList<ElementType> : LazyInitializedList()<ElementType> {
+
+    MockedLazyInitializedList(final ElementType[] elements) {
+        clear()
+        addAll(Arrays.asList(elements))
+    }
+
+    override     public List<ElementType> call() {
+        return ArrayList<>()
+    }
+
+}

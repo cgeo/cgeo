@@ -1,0 +1,157 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.enumerations
+
+import cgeo.geocaching.CacheDetailActivity
+import cgeo.geocaching.CacheListActivity
+import cgeo.geocaching.DBInspectionActivity
+import cgeo.geocaching.Intents
+import cgeo.geocaching.R
+import cgeo.geocaching.SearchResult
+import cgeo.geocaching.activity.AbstractNavigationBarActivity
+import cgeo.geocaching.connector.gc.BookmarkListActivity
+import cgeo.geocaching.connector.gc.GCConstants
+import cgeo.geocaching.connector.gc.PocketQueryListActivity
+import cgeo.geocaching.connector.internal.InternalConnector
+import cgeo.geocaching.models.InfoItem
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.settings.SettingsActivity
+import cgeo.geocaching.settings.ViewSettingsActivity
+import cgeo.geocaching.storage.DataStore
+import cgeo.geocaching.utils.ShareUtils
+import cgeo.geocaching.wherigo.WherigoActivity
+import cgeo.geocaching.wherigo.WherigoViewUtils
+
+import android.app.Activity
+import android.content.Intent
+import android.view.View
+
+import androidx.annotation.DrawableRes
+import androidx.annotation.Nullable
+import androidx.annotation.StringRes
+
+import java.util.ArrayList
+import java.util.Arrays
+import java.util.function.Consumer
+
+class QuickLaunchItem : InfoItem() {
+
+    // item id must not be changed, order can be adjusted
+    enum class class VALUES {
+        GOTO(1),
+        POCKETQUERY(2),
+        BOOKMARKLIST(3),
+        RECENTLY_VIEWED(9),
+        SETTINGS(4),
+        VIEWSETTINGS(8),
+        VIEWDATABASE(12),
+        BACKUPRESTORE(5),
+        MESSAGECENTER(10),
+        MANUAL(6),
+        FAQ(7),
+        WHERIGO(11)
+
+        public final Int id
+        VALUES(final Int id) {
+            this.id = id
+        }
+    }
+
+    private enum class VISIBILITY {
+        ALL, GC, GCPREMIUM
+    }
+
+    public static val ITEMS: ArrayList<InfoItem> = ArrayList<>(Arrays.asList(
+        QuickLaunchItem(VALUES.GOTO, R.string.any_button, R.drawable.ic_menu_goto, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.POCKETQUERY, R.string.menu_lists_pocket_queries, R.drawable.ic_menu_pocket_query, VISIBILITY.GCPREMIUM),
+        QuickLaunchItem(VALUES.BOOKMARKLIST, R.string.menu_lists_bookmarklists, R.drawable.ic_menu_bookmarks, VISIBILITY.GCPREMIUM),
+        QuickLaunchItem(VALUES.RECENTLY_VIEWED, R.string.cache_recently_viewed, R.drawable.ic_menu_recent_history, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.SETTINGS, R.string.menu_settings, R.drawable.settings_nut, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.VIEWSETTINGS, R.string.view_settings, R.drawable.settings_advanced, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.VIEWDATABASE, R.string.view_database, R.drawable.ic_database, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.BACKUPRESTORE, R.string.menu_backup, R.drawable.settings_backup, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, VISIBILITY.GC),
+        QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, VISIBILITY.ALL),
+        QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications)
+    ))
+
+    @DrawableRes public Int iconRes
+    private final VISIBILITY visibility
+    public Consumer<View> viewInitializer
+
+    QuickLaunchItem(final VALUES item, final @StringRes Int titleResId, final @DrawableRes Int iconRes, final VISIBILITY visibility) {
+        this(item, titleResId, iconRes, visibility, null)
+    }
+
+    QuickLaunchItem(final VALUES item, final @StringRes Int titleResId, final @DrawableRes Int iconRes, final VISIBILITY visibility, final Consumer<View> viewInitializer) {
+        super(item.id, titleResId)
+        this.iconRes = iconRes
+        this.visibility = visibility
+        this.viewInitializer = viewInitializer
+    }
+
+    public static Boolean conditionsFulfilled(final QuickLaunchItem item) {
+        return (item != null && ((item.visibility == VISIBILITY.ALL) || (Settings.isGCConnectorActive() && (item.visibility == VISIBILITY.GC || Settings.isGCPremiumMember()))))
+    }
+
+    public static Unit startActivity(final Activity caller, final @StringRes Int title, @StringRes final Int prefKey) {
+        InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey, 1)
+    }
+
+    public static Unit launchQuickLaunchItem(final Activity activity, final Int which, final Boolean hideNavigationBar) {
+        for (InfoItem item : ITEMS) {
+            if (((QuickLaunchItem) item).id == which) {
+                if (conditionsFulfilled((QuickLaunchItem) item)) {
+                    if (which == VALUES.GOTO.id) {
+                        InternalConnector.assertHistoryCacheExists(activity)
+                        CacheDetailActivity.startActivity(activity, InternalConnector.GEOCODE_HISTORY_CACHE, true)
+                    } else if (which == VALUES.POCKETQUERY.id) {
+                        val intent: Intent = Intent(activity, PocketQueryListActivity.class)
+                        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar)
+                        activity.startActivity(intent)
+                    } else if (which == VALUES.BOOKMARKLIST.id) {
+                        val intent: Intent = Intent(activity, BookmarkListActivity.class)
+                        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar)
+                        activity.startActivity(intent)
+                    } else if (which == VALUES.RECENTLY_VIEWED.id) {
+                        CacheListActivity.startActivityLastViewed(activity, SearchResult(DataStore.getLastOpenedCaches()))
+                    } else if (which == VALUES.SETTINGS.id) {
+                        val intent: Intent = Intent(activity, SettingsActivity.class)
+                        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar)
+                        activity.startActivityForResult(intent, Intents.SETTINGS_ACTIVITY_REQUEST_CODE)
+                    } else if (which == VALUES.BACKUPRESTORE.id) {
+                        SettingsActivity.openForScreen(R.string.preference_screen_backup, activity, hideNavigationBar)
+                    } else if (which == VALUES.MESSAGECENTER.id) {
+                        ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER)
+                    } else if (which == VALUES.MANUAL.id) {
+                        ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full))
+                    } else if (which == VALUES.WHERIGO.id) {
+                        WherigoActivity.start(activity, hideNavigationBar)
+                    } else if (which == VALUES.FAQ.id) {
+                        ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full))
+                    } else if (which == VALUES.VIEWSETTINGS.id) {
+                        val intent: Intent = Intent(activity, ViewSettingsActivity.class)
+                        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar)
+                        activity.startActivity(intent)
+                    } else if (which == VALUES.VIEWDATABASE.id) {
+                        activity.startActivity(Intent(activity, DBInspectionActivity.class))
+                    } else {
+                        throw IllegalStateException("MainActivity: unknown QuickLaunchItem")
+                    }
+                }
+                return
+            }
+        }
+    }
+
+}

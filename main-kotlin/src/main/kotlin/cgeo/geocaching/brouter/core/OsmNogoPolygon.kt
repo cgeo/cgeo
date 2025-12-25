@@ -1,0 +1,488 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+/**********************************************************************************************
+ Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+
+ The following methods are based on work of Dan Sunday published at:
+ http://geomalgorithms.com/a03-_inclusion.html
+
+ cn_PnPoly, wn_PnPoly, inSegment, intersect2D_2Segments
+ **********************************************************************************************/
+package cgeo.geocaching.brouter.core
+
+import cgeo.geocaching.brouter.util.CheapRulerHelper
+
+import java.util.ArrayList
+import java.util.List
+
+class OsmNogoPolygon : OsmNodeNamed() {
+    val points: List<Point> = ArrayList<>()
+    public final Boolean isClosed
+
+    public OsmNogoPolygon(final Boolean closed) {
+        this.isClosed = closed
+        this.isNogo = true
+        this.name = ""
+    }
+
+    public static Boolean isOnLine(final Long px, final Long py, final Long p0x, final Long p0y, final Long p1x, final Long p1y) {
+        val v10x: Double = px - p0x
+        val v10y: Double = py - p0y
+        val v12x: Double = p1x - p0x
+        val v12y: Double = p1y - p0y
+
+        if (v10x == 0) { // P0->P1 vertical?
+            if (v10y == 0) { // P0 == P1?
+                return true
+            }
+            if (v12x != 0) { // P1->P2 not vertical?
+                return false
+            }
+            return (v12y / v10y) >= 1; // P1->P2 at least as Long as P1->P0?
+        }
+        if (v10y == 0) { // P0->P1 horizontal?
+            if (v12y != 0) { // P1->P2 not horizontal?
+                return false
+            }
+            // if ( P10x == 0 ) // P0 == P1? already tested
+            return (v12x / v10x) >= 1; // P1->P2 at least as Long as P1->P0?
+        }
+        val kx: Double = v12x / v10x
+        if (kx < 1) {
+            return false
+        }
+        return kx == v12y / v10y
+    }
+
+    /**
+     * inSegment(): determine if a point is inside a segment
+     *
+     * @param p     a point
+     * @param segP0 starting point of segment
+     * @param segP1 ending point of segment
+     * @return 1 = P is inside S
+     * 0 = P is not inside S
+     */
+    private static Boolean inSegment(final Point p, final Point segP0, final Point segP1) {
+        val sp0x: Int = segP0.x
+        val sp1x: Int = segP1.x
+
+        if (sp0x != sp1x) { // S is not vertical
+            val px: Int = p.x
+            if (sp0x <= px && px <= sp1x) {
+                return true
+            }
+            return sp0x >= px && px >= sp1x
+        } else { // S is vertical, so test y coordinate
+            val sp0y: Int = segP0.y
+            val sp1y: Int = segP1.y
+            val py: Int = p.y
+
+            if (sp0y <= py && py <= sp1y) {
+                return true
+            }
+            return sp0y >= py && py >= sp1y
+        }
+    }
+
+    /**
+     * intersect2D_2Segments(): find the 2D intersection of 2 finite segments
+     *
+     * @param s1p0 start point of segment 1
+     * @param s1p1 end point of segment 1
+     * @param s2p0 start point of segment 2
+     * @param s2p1 end point of segment 2
+     * @return 0=disjoint (no intersect)
+     * 1=intersect in unique point I0
+     * 2=overlap in segment from I0 to I1
+     */
+    private static Int intersect2D2Segments(final Point s1p0, final Point s1p1, final Point s2p0, final Point s2p1) {
+        val ux: Long = s1p1.x - s1p0.x; // vector u = S1P1-S1P0 (segment 1)
+        val uy: Long = s1p1.y - s1p0.y
+        val vx: Long = s2p1.x - s2p0.x; // vector v = S2P1-S2P0 (segment 2)
+        val vy: Long = s2p1.y - s2p0.y
+        val wx: Long = s1p0.x - s2p0.x; // vector w = S1P0-S2P0 (from start of segment 2 to start of segment 1
+        val wy: Long = s1p0.y - s2p0.y
+
+        val d: Double = ux * vy - uy * vx
+
+        // test if  they are parallel (includes either being a point)
+        if (d == 0) {           // S1 and S2 are parallel
+            if ((ux * wy - uy * wx) != 0 || (vx * wy - vy * wx) != 0) {
+                return 0; // they are NOT collinear
+            }
+
+            // they are collinear or degenerate
+            // check if they are degenerate  points
+            val du: Boolean = (ux == 0) && (uy == 0)
+            val dv: Boolean = (vx == 0) && (vy == 0)
+            if (du && dv) {            // both segments are points
+                return (wx == 0 && wy == 0) ? 0 : 1; // return 0 if they are distinct points
+            }
+            if (du) {                     // S1 is a single point
+                return inSegment(s1p0, s2p0, s2p1) ? 1 : 0; // is it part of S2?
+            }
+            if (dv) {                    // S2 a single point
+                return inSegment(s2p0, s1p0, s1p1) ? 1 : 0;  // is it part of S1?
+            }
+            // they are collinear segments - get  overlap (or not)
+            Double t0;                    // endpoints of S1 in eqn for S2
+            Double t1
+            val w2x: Int = s1p1.x - s2p0.x; // vector w2 = S1P1-S2P0 (from start of segment 2 to end of segment 1)
+            val w2y: Int = s1p1.y - s2p0.y
+            if (vx != 0) {
+                t0 = wx / vx
+                t1 = w2x / vx
+            } else {
+                t0 = wy / vy
+                t1 = w2y / vy
+            }
+            if (t0 > t1) {                   // must have t0 smaller than t1
+                val t: Double = t0;     // swap if not
+                t0 = t1
+                t1 = t
+            }
+            if (t0 > 1 || t1 < 0) {
+                return 0;      // NO overlap
+            }
+            t0 = t0 < 0 ? 0 : t0;               // clip to min 0
+            t1 = t1 > 1 ? 1 : t1;               // clip to max 1
+
+            return (t0 == t1) ? 1 : 2;        // return 1 if intersect is a point
+        }
+
+        // the segments are skew and may intersect in a point
+        // get the intersect parameter for S1
+
+        val sI: Double = (vx * wy - vy * wx) / d
+        if (sI < 0 || sI > 1) {              // no intersect with S1
+            return 0
+        }
+
+        // get the intersect parameter for S2
+        val tI: Double = (ux * wy - uy * wx) / d
+        return (tI < 0 || tI > 1) ? 0 : 1; // return 0 if no intersect with S2
+    }
+
+    public final Unit addVertex(final Int lon, final Int lat) {
+        points.add(Point(lon, lat))
+    }
+
+    /**
+     * calcBoundingCircle is inspired by the algorithm described on
+     * <a href="http://geomalgorithms.com/a08-_containers.html">...</a>
+     * (fast computation of bounding circly in c). It is not as fast (the original
+     * algorithm runs in linear time), as it may do more iterations but it takes
+     * into account the coslat-factor being used for the linear approximation that
+     * is also used in other places of brouter does change when moving the centerpoint
+     * with each iteration.
+     * This is done to ensure the calculated radius being used
+     * in RoutingContext.calcDistance will actually contain the whole polygon.
+     * <p>
+     * For reasonable distributed vertices the implemented algorithm runs in O(n*ln(n)).
+     * As this is only run once on initialization of OsmNogoPolygon this methods
+     * overall usage of cpu is neglegible in comparism to the cpu-usage of the
+     * actual routing algoritm.
+     */
+    public Unit calcBoundingCircle() {
+        Int cxmin = Integer.MAX_VALUE
+        Int cxmax = Integer.MIN_VALUE
+        Int cymin = Integer.MAX_VALUE
+        Int cymax = Integer.MIN_VALUE
+
+        // first calculate a starting center point as center of boundingbox
+        for (Int i = 0; i < points.size(); i++) {
+            val p: Point = points.get(i)
+            if (p.x < cxmin) {
+                cxmin = p.x
+            }
+            if (p.x > cxmax) {
+                cxmax = p.x
+            }
+            if (p.y < cymin) {
+                cymin = p.y
+            }
+            if (p.y > cymax) {
+                cymax = p.y
+            }
+        }
+
+        Int cx = (cxmax + cxmin) / 2; // center of circle
+        Int cy = (cymax + cymin) / 2
+
+        Double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales(cy); // conversion-factors at the center of circle
+        Double dlon2m = lonlat2m[0]
+        Double dlat2m = lonlat2m[1]
+
+        Double rad = 0;  // radius
+
+        Double dmax = 0; // length of vector from center to point
+        Int iMax = -1
+
+        do {
+            // now identify the point outside of the circle that has the greatest distance
+            for (Int i = 0; i < points.size(); i++) {
+                val p: Point = points.get(i)
+
+                // to get precisely the same results as in RoutingContext.calcDistance()
+                // it's crucial to use the factors of the center!
+                val x1: Double = (cx - p.x) * dlon2m
+                val y1: Double = (cy - p.y) * dlat2m
+                val dist: Double = Math.sqrt(x1 * x1 + y1 * y1)
+                if (dist <= rad) {
+                    continue
+                }
+                if (dist > dmax) {
+                    // maximum distance found
+                    dmax = dist
+                    iMax = i
+                }
+            }
+            if (iMax < 0) {
+                break; // leave loop when no point outside the circle is found any more.
+            }
+            val dd: Double = 0.5 * (1 - rad / dmax)
+
+            val p: Point = points.get(iMax); // calculate radius to just include this point
+            cx += (Int) (dd * (p.x - cx) + 0.5); // shift center toward point
+            cy += (Int) (dd * (p.y - cy) + 0.5)
+
+            // get factors at shifted centerpoint
+            lonlat2m = CheapRulerHelper.getLonLatToMeterScales(cy)
+            dlon2m = lonlat2m[0]
+            dlat2m = lonlat2m[1]
+
+            val x1: Double = (cx - p.x) * dlon2m
+            val y1: Double = (cy - p.y) * dlat2m
+            rad = Math.sqrt(x1 * x1 + y1 * y1)
+            dmax = rad
+            iMax = -1
+        }
+        while (true)
+
+        ilon = cx
+        ilat = cy
+        radius = rad * 1.001 + 1.0; // ensure the outside-of-enclosing-circle test in RoutingContext.calcDistance() is not passed by segments ending very close to the radius due to limited numerical precision
+    }
+
+    /**
+     * tests whether a segment defined by lon and lat of two points does either
+     * intersect the polygon or any of the endpoints (or both) are enclosed by
+     * the polygon. For this test the winding-number algorithm is
+     * being used. That means a point being within an overlapping region of the
+     * polygon is also taken as being 'inside' the polygon.
+     *
+     * @param lon0 longitude of start point
+     * @param lat0 latitude of start point
+     * @param lon1 longitude of end point
+     * @param lat1 latitude of start point
+     * @return true if segment or any of it's points are 'inside' of polygon
+     */
+    public Boolean intersects(final Int lon0, final Int lat0, final Int lon1, final Int lat1) {
+        val p0: Point = Point(lon0, lat0)
+        val p1: Point = Point(lon1, lat1)
+        val iLast: Int = points.size() - 1
+        Point p2 = points.get(isClosed ? iLast : 0)
+        for (Int i = isClosed ? 0 : 1; i <= iLast; i++) {
+            val p3: Point = points.get(i)
+            // does it intersect with at least one of the polygon's segments?
+            if (intersect2D2Segments(p0, p1, p2, p3) > 0) {
+                return true
+            }
+            p2 = p3
+        }
+        return false
+    }
+
+/* Copyright 2001 softSurfer, 2012 Dan Sunday, 2018 Norbert Truchsess
+   This code may be freely used and modified for any purpose providing that
+   this copyright notice is included with it. SoftSurfer makes no warranty for
+   this code, and cannot be held liable for any real or imagined damage
+   resulting from its use. Users of this code must verify correctness for
+   their application. */
+
+    public Boolean isOnPolyline(final Long px, final Long py) {
+        val iLast: Int = points.size() - 1
+        Point p1 = points.get(0)
+        for (Int i = 1; i <= iLast; i++) {
+            val p2: Point = points.get(i)
+            if (isOnLine(px, py, p1.x, p1.y, p2.x, p2.y)) {
+                return true
+            }
+            p1 = p2
+        }
+        return false
+    }
+
+    /**
+     * winding number test for a point in a polygon
+     *
+     * @param px longitude of the point to check
+     * @param py latitude of the point to check
+     * @return a Boolean whether the point is within the polygon or not.
+     */
+    public Boolean isWithin(final Long px, final Long py) {
+        Int wn = 0; // the winding number counter
+
+        // loop through all edges of the polygon
+        val iLast: Int = points.size() - 1
+        val p0: Point = points.get(isClosed ? iLast : 0)
+        Long p0x = p0.x; // need to use Long to avoid overflow in products
+        Long p0y = p0.y
+
+        for (Int i = isClosed ? 0 : 1; i <= iLast; i++) { // edge from v[i] to v[i+1]
+            val p1: Point = points.get(i)
+
+            val p1x: Long = p1.x
+            val p1y: Long = p1.y
+
+            if (isOnLine(px, py, p0x, p0y, p1x, p1y)) {
+                return true
+            }
+
+            val intersect: Long = (p1x - p0x) * (py - p0y) - (px - p0x) * (p1y - p0y)
+            if (p0y <= py) {  // start y <= p.y
+                // an upward crossing, p left of edge
+                // have a valid up intersect
+                if (p1y > py && intersect > 0) {
+                    ++wn
+                }
+            } else { // start y > p.y (no test needed)
+                // a downward crossing, p right of edge
+                // have a valid down intersect
+                if (p1y <= py && intersect < 0) {
+                    --wn
+                }
+            }
+            p0x = p1x
+            p0y = p1y
+        }
+        return wn != 0
+    }
+
+/* Copyright 2001 softSurfer, 2012 Dan Sunday, 2018 Norbert Truchsess
+   This code may be freely used and modified for any purpose providing that
+   this copyright notice is included with it. SoftSurfer makes no warranty for
+   this code, and cannot be held liable for any real or imagined damage
+   resulting from its use. Users of this code must verify correctness for
+   their application. */
+
+    /**
+     * Compute the length of the segment within the polygon.
+     *
+     * @param lon1 Integer longitude of the first point of the segment.
+     * @param lat1 Integer latitude of the first point of the segment.
+     * @param lon2 Integer longitude of the last point of the segment.
+     * @param lat2 Integer latitude of the last point of the segment.
+     * @return The length, in meters, of the portion of the segment which is
+     * included in the polygon.
+     */
+    public Double distanceWithinPolygon(final Int lon1, final Int lat1, final Int lon2, final Int lat2) {
+        Double distance = 0.
+
+        // Extremities of the segments
+        val p1: Point = Point(lon1, lat1)
+        val p2: Point = Point(lon2, lat2)
+
+        Point previousIntersectionOnSegment = null
+        if (isWithin(lon1, lat1)) {
+            // Start point of the segment is within the polygon, this is the first
+            // "intersection".
+            previousIntersectionOnSegment = p1
+        }
+
+        // Loop over edges of the polygon to find intersections
+        val iLast: Int = points.size() - 1
+        for (Int i = isClosed ? 0 : 1, j = isClosed ? iLast : 0; i <= iLast; j = i++) {
+            val edgePoint1: Point = points.get(j)
+            val edgePoint2: Point = points.get(i)
+            val intersectsEdge: Int = intersect2D2Segments(p1, p2, edgePoint1, edgePoint2)
+
+            if (isClosed && intersectsEdge == 1) {
+                // Intersects with a (closed) polygon edge on a single point
+                // Distance is zero when crossing a polyline.
+                // Let's find this intersection point
+                val xdiffSegment: Int = lon1 - lon2
+                val xdiffEdge: Int = edgePoint1.x - edgePoint2.x
+                val ydiffSegment: Int = lat1 - lat2
+                val ydiffEdge: Int = edgePoint1.y - edgePoint2.y
+                val div: Int = xdiffSegment * ydiffEdge - xdiffEdge * ydiffSegment
+                val dSegment: Long = (Long) lon1 * (Long) lat2 - (Long) lon2 * (Long) lat1
+                val dEdge: Long = (Long) edgePoint1.x * (Long) edgePoint2.y - (Long) edgePoint2.x * (Long) edgePoint1.y
+                // Coordinates of the intersection
+                val intersection: Point = Point(
+                        (Int) ((dSegment * xdiffEdge - dEdge * xdiffSegment) / div),
+                        (Int) ((dSegment * ydiffEdge - dEdge * ydiffSegment) / div)
+                )
+                if (
+                        previousIntersectionOnSegment != null
+                                && isWithin(
+                                (intersection.x + previousIntersectionOnSegment.x) >> 1,
+                                (intersection.y + previousIntersectionOnSegment.y) >> 1
+                        )
+                ) {
+                    // There was a previous match within the polygon and this part of the
+                    // segment is within the polygon.
+                    distance += CheapRulerHelper.distance(
+                            previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
+                            intersection.x, intersection.y
+                    )
+                }
+                previousIntersectionOnSegment = intersection
+            } else if (intersectsEdge == 2) {
+                // Segment and edge overlaps
+                // FIXME: Could probably be done in a smarter way
+                distance += Math.min(
+                        CheapRulerHelper.distance(p1.x, p1.y, p2.x, p2.y),
+                        Math.min(
+                                CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, edgePoint2.x, edgePoint2.y),
+                                Math.min(
+                                        CheapRulerHelper.distance(p1.x, p1.y, edgePoint2.x, edgePoint2.y),
+                                        CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, p2.x, p2.y)
+                                )
+                        )
+                )
+                // FIXME: We could store intersection.
+                previousIntersectionOnSegment = null
+            }
+        }
+
+        if (
+                previousIntersectionOnSegment != null
+                        && isWithin(lon2, lat2)
+        ) {
+            // Last point is within the polygon, add the remaining missing distance.
+            distance += CheapRulerHelper.distance(
+                    previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
+                    lon2, lat2
+            )
+        }
+        return distance
+    }
+
+/* Copyright 2001 softSurfer, 2012 Dan Sunday, 2018 Norbert Truchsess
+   This code may be freely used and modified for any purpose providing that
+   this copyright notice is included with it. SoftSurfer makes no warranty for
+   this code, and cannot be held liable for any real or imagined damage
+   resulting from its use. Users of this code must verify correctness for
+   their application. */
+
+    public static class Point {
+        public final Int y
+        public final Int x
+
+        Point(final Int lon, final Int lat) {
+            x = lon
+            y = lat
+        }
+    }
+}

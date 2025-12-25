@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_viewroot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dip"
+    android:nestedScrollingEnabled="true"
+    android:fastScrollEnabled="false"
+    android:scrollbarStyle="outsideOverlay"
+    tools:context=".VariablesViewPageFragment">
+
+        <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+       work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/variables_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dip"
+                android:scrollbars="none"
+                tools:ignore="NestedScrolling"
+                tools:listitem="@layout/variable_list_item_advanced">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+
+
+</LinearLayout>

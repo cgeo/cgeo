@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="82.704px"
+   viewBox="0 0 100 82.704"
+   enable-background="new 0 0 100 82.704"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="touristOK.svg"><metadata
+   id="metadata2883"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2881"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 41.352001 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="100 : 41.352001 : 1"
+     inkscape:persp3d-origin="50 : 27.568001 : 1"
+     id="perspective2885" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2879"
+   showgrid="false"
+   inkscape:zoom="2.8535499"
+   inkscape:cx="50"
+   inkscape:cy="41.352001"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M17.473,82.588h-7.398C4.952,82.58,0.005,78.827,0,72.287c0,0,0.005-46.695,0-46.837  c0.005-5.786,4.833-10.182,10.075-10.186h7.398V82.588L17.473,82.588z"
+   id="path2873"
+   style="fill:#ffffff" />
+<path
+   d="M64.025,15.378V5.7c0.028-3.486-3.065-5.715-6.829-5.688c0,0-14.393-0.027-14.341,0c-3.749-0.027-6.894,2.202-6.887,5.688  v9.678H22.48v67.325h55.146V15.378H64.025z M58.961,15.378H40.919v-9.96h18.042V15.378z"
+   id="path2875"
+   style="fill:#ffffff" />
+<path
+   d="M82.578,82.588h7.398c5.083-0.009,10.031-3.762,10.017-10.302c0,0,0.015-46.695,0-46.837  c0.015-5.786-4.814-10.182-10.017-10.186h-7.398V82.588L82.578,82.588z"
+   id="path2877"
+   style="fill:#ffffff" />
+</svg>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/one_cache"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    tools:context=".ui.CacheListAdapter">
+
+    <!-- "found" marker, vertical green/red line -->
+    <ImageView
+        android:id="@+id/log_status_mark"
+        android:layout_width="4dip"
+        android:layout_height="match_parent"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:scaleType="centerCrop"
+        android:gravity="left|center_vertical"
+        android:src="@drawable/mark_transparent"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <!-- selection mode checkbox -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left"
+        android:gravity="left|center_horizontal"
+        android:paddingRight="5dip"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <!-- cache icon -->
+    <ImageView
+        android:id="@+id/text_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dip"
+        android:layout_marginRight="4dip"
+        android:scaleType="fitXY"
+        android:gravity="left|top"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <!-- cache name -->
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingRight="3dip"
+            android:paddingTop="5dip"
+            android:scrollHorizontally="true"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_listsPrimary"
+            android:textColor="@color/colorText_listsPrimary"
+            tools:text="name" />
+
+        <!-- cache attributes and other info -->
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:ellipsize="end"
+            android:paddingBottom="5dip"
+            android:paddingRight="3dip"
+            android:scrollHorizontally="true"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_listsSecondary"
+            android:textColor="@color/colorText_listsSecondary"
+            tools:text="terrain, difficulty and others" />
+    </LinearLayout>
+
+    <!-- real text based direction and distance -->
+    <RelativeLayout
+        android:layout_width="78dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
+        android:layout_marginTop="1dip"
+        android:layout_gravity="right|center_vertical">
+
+        <cgeo.geocaching.ui.DistanceView
+            android:id="@+id/distance"
+            android:layout_width="78dip"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:scrollHorizontally="true"
+            android:textSize="@dimen/textSize_listsSecondary"
+            android:textColor="@color/colorText_listsPrimary"
+            android:maxLines="1" /><!-- explicitly use default text color here -->
+
+        <cgeo.geocaching.ui.CompassMiniView
+            android:id="@+id/direction"
+            android:layout_width="78dip"
+            android:layout_height="28dip"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_below="@id/distance"
+            android:gravity="center"
+            android:minHeight="28px"
+            android:minWidth="28px"
+            android:visibility="gone"
+            app:skin="?compass"
+            tools:ignore="PxUsage" />
+
+        <ImageView
+            android:id="@+id/dirimg"
+            android:layout_width="78dip"
+            android:layout_height="28px"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_below="@id/distance"
+            android:gravity="center"
+            android:minHeight="28px"
+            android:minWidth="28px"
+            android:src="@null"
+            android:visibility="gone"
+            tools:ignore="PxUsage" />
+    </RelativeLayout>
+
+    <!-- inventory and favorites -->
+    <RelativeLayout
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dip"
+        android:layout_marginTop="1dip"
+        android:layout_gravity="right|center_vertical">
+
+        <TextView
+            android:id="@+id/inventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="1dip"
+            app:drawableLeftCompat="@drawable/trackable_all"
+            android:drawablePadding="-10sp"
+            android:gravity="center"
+            android:scaleType="center"
+            android:text=""
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_listsSecondary"
+            android:textColor="@color/colorText_listsPrimary"
+            android:textStyle="bold"
+            tools:text="12"
+            android:maxLines="1" /><!-- explicitly use default text color here -->
+
+        <TextView
+            android:id="@+id/favorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:layout_below="@id/inventory"
+            android:singleLine="true"
+            android:paddingLeft="3dip"
+            android:paddingRight="3dip"
+            android:paddingBottom="1dip"
+            android:scrollHorizontally="true"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_listsSecondary"
+            android:textColor="@color/colorText_listsPrimary"
+            android:textStyle="bold"
+            tools:text="345" /><!-- explicitly use default text color here -->
+    </RelativeLayout>
+
+</LinearLayout>

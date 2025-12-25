@@ -1,0 +1,555 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.wherigo
+
+import cgeo.geocaching.CgeoApplication
+import cgeo.geocaching.R
+import cgeo.geocaching.databinding.WherigolistItemBinding
+import cgeo.geocaching.enumerations.LoadFlags
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.GeopointConverter
+import cgeo.geocaching.location.Units
+import cgeo.geocaching.location.Viewport
+import cgeo.geocaching.models.Geocache
+import cgeo.geocaching.sensors.LocationDataProvider
+import cgeo.geocaching.storage.ContentStorage
+import cgeo.geocaching.storage.DataStore
+import cgeo.geocaching.ui.ImageParam
+import cgeo.geocaching.ui.SimpleItemListModel
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.CommonUtils
+import cgeo.geocaching.utils.EmojiUtils
+import cgeo.geocaching.utils.LocalizationUtils
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.utils.TextUtils
+import cgeo.geocaching.wherigo.kahlua.vm.LuaTable
+import cgeo.geocaching.wherigo.openwig.Action
+import cgeo.geocaching.wherigo.openwig.Container
+import cgeo.geocaching.wherigo.openwig.Engine
+import cgeo.geocaching.wherigo.openwig.EventTable
+import cgeo.geocaching.wherigo.openwig.Media
+import cgeo.geocaching.wherigo.openwig.Task
+import cgeo.geocaching.wherigo.openwig.Thing
+import cgeo.geocaching.wherigo.openwig.Zone
+import cgeo.geocaching.wherigo.openwig.ZonePoint
+import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile
+
+import android.app.Activity
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.Typeface
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.text.style.StyleSpan
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+
+import java.io.FileInputStream
+import java.io.IOException
+import java.util.ArrayList
+import java.util.Arrays
+import java.util.Collection
+import java.util.Collections
+import java.util.Comparator
+import java.util.EnumSet
+import java.util.HashSet
+import java.util.List
+import java.util.Locale
+import java.util.Set
+import java.util.function.Predicate
+import java.util.function.Supplier
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+import java.util.stream.Collectors
+
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.reflect.FieldUtils
+
+class WherigoUtils {
+
+    public static val TP_OK_BUTTON: TextParam = TextParam.id(R.string.ok).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_done))
+    public static val TP_CLOSE_BUTTON: TextParam = TextParam.id(R.string.close).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_done))
+    public static val TP_CANCEL_BUTTON: TextParam = TextParam.id(R.string.cancel).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_cancel))
+
+    private static val PATTERN_CARTRIDGE_LINK: Pattern = Pattern.compile("https?" + Pattern.quote("://") + "(?:www\\.)?" + Pattern.quote("wherigo.com/cartridge/") + "(?:details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)")
+    private static val WHERIGO_DOWNLOAD_URL_BASE: String = "https://www.wherigo.com/cartridge/download.aspx?CGUID="
+    private static val WHERIGO_DETAILS_URL_BASE: String = "https://wherigo.com/cartridge/details.aspx?CGUID="
+
+    public static val GP_CONVERTER: GeopointConverter<ZonePoint> = GeopointConverter<>(
+        gc -> ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
+        ll -> Geopoint(ll.latitude, ll.longitude)
+    )
+
+    private WherigoUtils() {
+        //no instance
+    }
+
+    private static Context wrap(final Context ctx) {
+        return ctx == null ? CgeoApplication.getInstance() : ctx
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T : EventTable()> List<T> getListFromContainer(final LuaTable container, final Class<T> clazz, final Predicate<T> filter) {
+        if (container == null) {
+            return Collections.emptyList()
+        }
+        val result: List<T> = ArrayList<>()
+        Object key = null
+        while ((key = container.next(key)) != null) {
+            val o: Object = container.rawget(key)
+            if (!clazz.isInstance(o)) {
+                continue
+            }
+            val t: T = (T) o
+            if (filter == null || filter.test(t)) {
+                result.add(t)
+            }
+        }
+        return result
+    }
+
+    public static List<Action> getActions(final Thing thing, final Boolean all) {
+        val result: List<Action> = ArrayList<>()
+        for (Object aObj : thing.actions) {
+            val action: Action = (Action) aObj
+            if (all || (action.isEnabled() && action.getActor().visibleToPlayer())) {
+                result.add(action)
+            }
+        }
+        return result
+    }
+
+    public static String getUserDisplayableActionText(final Action action) {
+        if (action == null || action.text == null) {
+            return "-"
+        }
+        val actionText: String = action.text
+        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? actionText : actionText + " (debug)"
+    }
+
+    public static Unit callAction(final Thing thing, final Action action, final Activity activity) {
+        if (thing == null || action == null || !action.isEnabled() || !action.getActor().visibleToPlayer()) {
+            return
+        }
+
+        val eventName: String = "On" + action.getName()
+
+        if (action.hasParameter()) {
+            if (action.getActor() == thing) {
+                //choose a target for the action
+                val targets: List<EventTable> = getActionTargets(action)
+                WherigoViewUtils.chooseThing(activity, targets, WherigoThingType.THING.getIconId(), "Choose Target", target -> {
+                    WherigoDialogManager.get().display(WherigoThingDialogProvider(target))
+                    Engine.callEvent(action.getActor(), eventName, target)
+                })
+            } else {
+                Engine.callEvent(action.getActor(), eventName, thing)
+            }
+        } else {
+            Engine.callEvent(thing, eventName, null)
+        }
+    }
+
+    public static List<EventTable> getActionTargets(final Action action) {
+        val targets: List<Thing> = ArrayList<>()
+        targets.addAll(WherigoGame.get().getItems())
+        targets.addAll(WherigoGame.get().getInventory())
+        return targets.stream().filter(t -> t.isVisible() && action.isTarget(t)).collect(Collectors.toList())
+    }
+
+    public static Boolean isVisibleToPlayer(final EventTable et) {
+        return et != null && et.isVisible() && (!(et is Container) || ((Container) et).visibleToPlayer())
+    }
+
+    public static Geopoint getZoneCenter(final Zone zone) {
+        if (zone == null) {
+            return Geopoint.ZERO
+        }
+        if (zone.bbCenter != null && zone.bbCenter.latitude != 0d && zone.bbCenter.longitude != 0d) {
+            return GP_CONVERTER.from(zone.bbCenter)
+        }
+        if (zone.points != null && zone.points.length > 0) {
+            val geopoints: List<Geopoint> = WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points))
+            return Viewport.ContainingViewportBuilder().add(geopoints).getViewport().getCenter()
+        }
+        return Geopoint.ZERO
+    }
+
+    public static Viewport getZonesViewport(final Collection<Zone> zones, final Boolean includeCartridgeLocation) {
+        final Viewport.ContainingViewportBuilder builder = Viewport.ContainingViewportBuilder()
+        for (Zone zone : zones) {
+            builder.add(WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points)))
+        }
+        if (includeCartridgeLocation) {
+            builder.add(WherigoGame.get().getCartridgeInfo() == null ? null :
+                WherigoGame.get().getCartridgeInfo().getCartridgeLocation())
+        }
+        return builder.getViewport()
+    }
+
+    public static String eventTableDebugInfo(final EventTable et) {
+        if (et == null) {
+            return "null"
+        }
+
+        val msg: StringBuilder = StringBuilder(et.getClass().getSimpleName() + ": " + et.name)
+        msg.append("\nDescription: ").append(et.description)
+        msg.append("\n- vis:").append(et.isVisible())
+        msg.append("\n- Media: ").append(mediaDebugInfo(et.media))
+        msg.append("\n- Located: ").append(et.isLocated()).append(" (").append(WherigoUtils.GP_CONVERTER.from(et.position)).append(")")
+        if (et is Container) {
+            val cnt: Container = (Container) et
+            msg.append("\n- visToPlayer:").append(cnt.visibleToPlayer())
+        }
+
+        if (et is Thing) {
+            val actions: List<Action> = WherigoUtils.getActions((Thing) et, true)
+            msg.append("\n- Actions (").append(actions.size()).append("):")
+            for (Action act : actions) {
+                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getUserDisplayableActionText(act)).append(", univ=").append(act.isUniversal()).append(")")
+            }
+        }
+        if (et is Zone) {
+            val z: Zone = (Zone) et
+            msg.append("\n- Zone center:").append(WherigoGame.GP_CONVERTER.from(z.bbCenter))
+            msg.append(", dist:").append(getDisplayableDistanceTo(z)).append(" (")
+            switch (z.contain) {
+                case Zone.DISTANT:
+                    msg.append("distant")
+                    break
+                case Zone.PROXIMITY:
+                    msg.append("near")
+                    break
+                case Zone.INSIDE:
+                    msg.append("inside")
+                    break
+                default:
+                    msg.append("unknown(").append(z.contain).append(")")
+            }
+            msg.append(")")
+        }
+        if (et is Task) {
+            msg.append("\n- TaskState:").append(((Task) et).state())
+        }
+        msg.append("\n- Raw:").append(et)
+        return msg.toString()
+    }
+
+    private static String mediaDebugInfo(final Object media) {
+        if (media == null) {
+            return "null"
+        }
+        if (!(media is Media)) {
+            return "no media instance: " + media.getClass().getName()
+        }
+        val m: Media = (Media) media
+        return m.id + ": " + m.name
+    }
+
+    public static CartridgeFile readCartridge(final Uri uri) throws IOException {
+        val fis: FileInputStream = (FileInputStream) ContentStorage.get().openForRead(uri)
+        return CartridgeFile.read(WSeekableFile(fis.getChannel()), WherigoSaveFileHandler.get())
+    }
+
+    public static Drawable getThingIconAsDrawable(final Context context, final EventTable et) {
+        if (et == null) {
+            return null
+        }
+        val iconMedia: Media = et.icon
+        if (iconMedia == null) {
+            return null
+        }
+        try {
+            final Byte[] iconData = Engine.mediaFile(iconMedia)
+            return getDrawableForImageData(wrap(context), iconData)
+        } catch (Exception e) {
+            Log.w("WherigoUtils: problem reading icon data from event table " + et, e)
+            return null
+        }
+    }
+
+    public static Unit closeCartridgeQuietly(final CartridgeFile file) {
+        if (file == null) {
+            return
+        }
+        try {
+            val seekableFile: WSeekableFile = (WSeekableFile) FieldUtils.readDeclaredField(file, "source", true)
+            seekableFile.close()
+        } catch (Exception e) {
+            Log.w("WHEERIGO: Couldn't access seekable file inside cartridge", e)
+        }
+    }
+
+    public static Drawable getDrawableForImageData(final Context ctx, final Byte[] data) {
+        if (data == null || data.length == 0) {
+            return null
+        }
+        val realCtx: Context = wrap(ctx)
+        return BitmapDrawable(realCtx.getResources(), BitmapFactory.decodeByteArray(data, 0, data.length))
+    }
+
+    public static String getDisplayableDistance(final Geopoint from, final Geopoint to) {
+        if (from == null || to == null) {
+            return "-"
+        }
+        val distance: String = Units.getDistanceFromKilometers(from.distanceTo(to))
+        val direction: String = Units.getDirectionFromBearing(from.bearingTo(to))
+        return distance + " " + direction
+    }
+
+    public static Geopoint getNearestPointTo(final Zone zone) {
+        if (zone == null) {
+            return Geopoint.ZERO
+        }
+        return zone.nearestPoint != null ? GP_CONVERTER.from(zone.nearestPoint) : getZoneCenter(zone)
+    }
+
+    public static String getDisplayableDistanceTo(final Zone zone) {
+        if (zone == null) {
+            return "?"
+        }
+        if (zone.contain == Zone.INSIDE) {
+            return LocalizationUtils.getString(R.string.wherigo_zone_inside)
+        }
+        if (zone.nearestPoint != null) {
+            val current: Geopoint = WherigoLocationProvider.get().getLocation()
+            return getDisplayableDistance(current, GP_CONVERTER.from(zone.nearestPoint)) + (zone.contain == Zone.PROXIMITY ? " (" + LocalizationUtils.getString(R.string.wherigo_zone_near) + ")" : "")
+        }
+        val center: Geopoint = getZoneCenter(zone)
+        val current: Geopoint = LocationDataProvider.getInstance().currentGeo().getCoords()
+        if (center != Geopoint.ZERO && current != Geopoint.ZERO) {
+            return getDisplayableDistance(current, center)
+        }
+        return "?"
+    }
+
+    public static Unit ensureNoGameRunning(final Activity activity, final Runnable runOnClosedGameOnly) {
+        if (!WherigoGame.get().isPlaying()) {
+            if (runOnClosedGameOnly != null) {
+                runOnClosedGameOnly.run()
+            }
+            return
+        }
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_stop_running_game_title))
+            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.get().getCartridgeName())).confirm(() -> {
+                if (runOnClosedGameOnly != null) {
+
+                    //ensure that action is performed after game is REALLY stopped! -> add a listener to OpenWIG END notification
+                    final Int[] listenerId = Int[1]
+                    listenerId[0] = WherigoGame.get().addListener(notifyType -> {
+                        if (notifyType == (WherigoGame.NotifyType.END)) {
+                            runOnClosedGameOnly.run()
+                            WherigoGame.get().removeListener(listenerId[0])
+                        }
+                    })
+                }
+                WherigoGame.get().stopGame()
+            })
+    }
+
+    public static Comparator<EventTable> getThingsComparator() {
+        return CommonUtils.getNullHandlingComparator((t1, t2) -> {
+            if (!t1.getClass() == (t2.getClass())) {
+                return t1.getClass().getName().compareTo(t2.getClass().getName())
+            }
+            if (isVisibleToPlayer(t1) != isVisibleToPlayer(t2)) {
+                return isVisibleToPlayer(t1) ? -1 : 1
+            }
+            if (t1 is Zone) {
+                val dist1: Double = ((Zone) t1).distance
+                val dist2: Double = ((Zone) t2).distance
+                val dist1Valid: Boolean = !Double.isNaN(dist1) && !Double.isInfinite(dist1)
+                val dist2Valid: Boolean = !Double.isNaN(dist2) && !Double.isInfinite(dist2)
+                if (dist1Valid != dist2Valid) {
+                    return dist1Valid ? -1 : 1
+                }
+                if (dist1Valid && Math.abs(dist1 - dist2) > 5) { // more than 5 meters
+                    return dist1 < dist2 ? -1 : 1
+                }
+            }
+            val name1: String = t1.name == null ? "-" : t1.name.trim().toLowerCase(Locale.ROOT)
+            val name2: String = t2.name == null ? "-" : t2.name.trim().toLowerCase(Locale.ROOT)
+            return name1.compareTo(name2)
+        }, true)
+    }
+
+    public static List<String> getWherigoGuids(final Geocache cache) {
+        if (cache == null) {
+            return Collections.emptyList()
+        }
+        return scanWherigoGuids(cache.getShortDescription() + " " + cache.getDescription())
+    }
+
+    public static String getWherigoDetailsUrl(final String guid) {
+        return guid == null ? null : WHERIGO_DETAILS_URL_BASE + guid
+    }
+
+
+    public static String getWherigoDownloadUrl(final String guid) {
+        return guid == null ? null : WHERIGO_DOWNLOAD_URL_BASE + guid
+    }
+
+    public static List<String> scanWherigoGuids(final String textToScan) {
+
+        if (textToScan == null) {
+            return Collections.emptyList()
+        }
+
+        val matcher: Matcher = PATTERN_CARTRIDGE_LINK.matcher(textToScan)
+        val cartridgeGuidsList: List<String> = ArrayList<>()
+        val cartridgeGuidsSet: Set<String> = HashSet<>()
+        while (matcher.find()) {
+            val guid: String = matcher.group(1)
+            if (guid != null && !cartridgeGuidsSet.contains(guid)) {
+                cartridgeGuidsSet.add(guid)
+                cartridgeGuidsList.add(guid)
+            }
+        }
+        return cartridgeGuidsList
+    }
+
+    private static Unit addDeleteOptions(final Activity activity, final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model, final String cartridgeName, final Supplier<List<WherigoSavegameInfo>> refresher) {
+        model.setItemActionIconMapper(item -> {
+                    if (!item.isDeletableByUser()) {
+                        return null
+                    }
+                    return ImageParam.id(R.drawable.ic_menu_delete)
+                })
+                .setItemActionListener(item -> {
+                    if (!item.isDeletableByUser()) {
+                        return
+                    }
+                    SimpleDialog.of(activity)
+                            .setTitle(TextParam.id(R.string.wherigo_confirm_delete_savegame_slot_title))
+                            .setMessage(TextParam.id(R.string.wherigo_confirm_delete_savegame_slot_message,
+                                    cartridgeName, item.getUserDisplayableName()))
+                            .confirm(() -> {
+                                item.delete()
+                                model.setItems(refresher.get())
+                            })
+                })
+    }
+
+    public static Unit loadGame(final Activity activity, final WherigoCartridgeInfo cartridgeInfo) {
+        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = SimpleDialog.ItemSelectModel<>()
+        model
+            .setItems(WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo()))
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+                val itemBinding: WherigolistItemBinding = WherigolistItemBinding.bind(view)
+                itemBinding.name.setText(si.getUserDisplayableName())
+                itemBinding.description.setText(si.getUserDisplayableSaveDate())
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_upload)
+            }, (item, itemGroup) -> item == null ? "" : item.getSavefileName())
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+
+        WherigoUtils.addDeleteOptions(activity, model, cartridgeInfo.getName(), () -> WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo()))
+
+        SimpleDialog.of(activity)
+            .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
+            .selectSingle(model, s -> WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s))
+    }
+
+    public static Unit saveGame(final Activity activity) {
+        val cartridgeInfo: WherigoCartridgeInfo = WherigoGame.get().getCartridgeInfo()
+        if (cartridgeInfo == null) {
+            return
+        }
+
+        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = SimpleDialog.ItemSelectModel<>()
+        model
+            .setItems(WherigoSavegameInfo.getSavegameSlots(cartridgeInfo.getFileInfo()))
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+
+                val itemBinding: WherigolistItemBinding = WherigolistItemBinding.bind(view)
+                itemBinding.name.setText(si.getUserDisplayableName())
+                itemBinding.description.setText(si.getUserDisplayableSaveDate())
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_save)
+            }, (item, itemGroup) -> item == null ? "" : item.getSavefileName())
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+
+        WherigoUtils.addDeleteOptions(activity, model, cartridgeInfo.getName(), () -> WherigoSavegameInfo.getSavegameSlots(cartridgeInfo.getFileInfo()))
+
+        SimpleDialog.of(activity)
+            .setTitle(TextParam.id(R.string.wherigo_choose_savegame_slot))
+            .selectSingle(model, s -> {
+                //allow entering/editing a savegame name, warn in case of overwriting an existing game
+                CharSequence message = LocalizationUtils.getString(R.string.wherigo_save_game_message,
+                        cartridgeInfo.getName(), s.getUserDisplayableNameId())
+                if (s.isExistingSavefile()) {
+                    val warningMessage: String = LocalizationUtils.getString(R.string.wherigo_save_game_warning_overwrite_slot, s.getUserDisplayableSaveDate())
+                    message = TextUtils.concat(message, "\n\n", TextUtils.setSpan(warningMessage, StyleSpan(Typeface.BOLD)))
+                }
+                String initialValue = s.nameCustom
+                val geocode: String = WherigoGame.get().getContextGeocode()
+                if (geocode != null && (initialValue == null || !initialValue.contains(geocode))) {
+                    initialValue = geocode + (initialValue == null ? "" : " " + initialValue)
+                }
+                SimpleDialog.of(activity)
+                    .setTitle(TextParam.id(R.string.wherigo_save_game_title))
+                    .setMessage(TextParam.text(message))
+                    .input(SimpleDialog.InputOptions()
+                        .setAllowedChars("[-a-zA-Z0-9 ]")
+                        .setLabel(LocalizationUtils.getString(R.string.wherigo_save_game_custom_name_label))
+                        .setInitialValue(initialValue), nameCustom -> {
+                        if (s.isExistingSavefile()) {
+                            s.delete()
+                        }
+                        val newSaveFile: WherigoSavegameInfo = WherigoSavegameInfo.getNewSavefile(s.cartridgeFileInfo, s.nameId, nameCustom)
+                        WherigoGame.get().saveGame(newSaveFile)
+                    })
+        })
+    }
+
+
+    public static String findGeocacheNameForGeocode(final String geocode) {
+        if (StringUtils.isBlank(geocode)) {
+            return null
+        }
+        val cache: Geocache = DataStore.loadCache(geocode.trim(), EnumSet.of(LoadFlags.LoadFlag.CACHE_BEFORE, LoadFlags.LoadFlag.DB_MINIMAL))
+        if (cache == null || StringUtils.isBlank(cache.getName())) {
+            return geocode.trim()
+        }
+        return geocode.trim() + ": " + cache.getName().trim()
+    }
+
+    public static CharSequence getUserDisplayableName(final EventTable et, final Boolean doShort) {
+        if (et == null) {
+            return "--"
+        }
+        //translation
+        CharSequence name = WherigoGame.get().toDisplayText(et.name)
+        //special things for certain types of elements
+        if (et is Task) {
+            switch (((Task) et).state()) {
+                case Task.DONE:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.GREEN_CHECK_BOXED) + " ", name)
+                    break
+                case Task.FAILED:
+                    name = TextUtils.concat(EmojiUtils.getEmojiAsString(EmojiUtils.DOUBLE_RED_EXCLAMATION_MARK) + " ", name)
+                    break
+                default:
+                    break
+            }
+        }
+        if (!doShort && et is Zone) {
+            name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) et) + ")")
+        }
+        if (!WherigoUtils.isVisibleToPlayer(et)) {
+            name = TextUtils.setSpan("(" + name + ")", StyleSpan(Typeface.ITALIC))
+        }
+        return name
+    }
+}

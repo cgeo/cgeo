@@ -1,0 +1,358 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.wherigo
+
+import cgeo.geocaching.CacheDetailActivity
+import cgeo.geocaching.R
+import cgeo.geocaching.activity.ActivityMixin
+import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding
+import cgeo.geocaching.databinding.WherigoMapQuickinfosBinding
+import cgeo.geocaching.databinding.WherigolistItemBinding
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.sensors.LocationDataProvider
+import cgeo.geocaching.ui.BadgeManager
+import cgeo.geocaching.ui.ImageParam
+import cgeo.geocaching.ui.SimpleItemListModel
+import cgeo.geocaching.ui.SimpleItemListView
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.ViewUtils
+import cgeo.geocaching.ui.dialog.Dialogs
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.AndroidRxUtils
+import cgeo.geocaching.utils.ClipboardUtils
+import cgeo.geocaching.utils.LocalizationUtils
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.utils.TextUtils
+import cgeo.geocaching.utils.html.HtmlUtils
+import cgeo.geocaching.wherigo.openwig.Engine
+import cgeo.geocaching.wherigo.openwig.EventTable
+import cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance
+import cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData
+
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.drawable.Drawable
+import android.os.Looper
+import android.text.Spannable
+import android.util.Pair
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+
+import java.util.Arrays
+import java.util.HashMap
+import java.util.List
+import java.util.Map
+import java.util.function.Consumer
+import java.util.function.Function
+import java.util.stream.Collectors
+
+import org.apache.commons.lang3.StringUtils
+
+class WherigoViewUtils {
+
+    private static val THING_TYPE_LIST: List<WherigoThingType> = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM)
+    private static val THING_TYPE_LIST_DEBUG: List<WherigoThingType> = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM, WherigoThingType.THING)
+
+    private WherigoViewUtils() {
+        //no instances of Utility classes
+    }
+
+    public static Unit safeDismissDialog(final Dialog dialog) {
+        if (dialog == null) {
+            return
+        }
+        try {
+            dialog.dismiss()
+        } catch (Exception ex) {
+            Log.w("Exception when dismissing dialog", ex)
+        }
+    }
+
+    public static Unit ensureRunOnUi(final Runnable r) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            r.run()
+        } else {
+            AndroidRxUtils.runOnUi(r)
+        }
+    }
+
+    public static AlertDialog createFullscreenDialog(final Activity activity, final CharSequence title, final View contentView) {
+        final AlertDialog.Builder builder = AlertDialog.Builder(activity, R.style.cgeo_fullScreen)
+        val dialog: AlertDialog = builder.create()
+        val hasTitle: Boolean = !StringUtils.isBlank(title)
+        if (hasTitle) {
+            val titleBinding: WherigoDialogTitleViewBinding = WherigoDialogTitleViewBinding.inflate(LayoutInflater.from(activity))
+            titleBinding.dialogTitle.setText(title)
+            dialog.setCustomTitle(titleBinding.getRoot())
+            titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog))
+        }
+        dialog.setView(contentView)
+
+        //apply edge2edge
+        WindowCompat.enableEdgeToEdge(activity.getWindow())
+        ViewCompat.setOnApplyWindowInsetsListener(contentView, (v, windowInsets) -> {
+            val innerPadding: Insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime())
+            //if dialog has a title then "divide" padding between title bar and content. Otherwise all to content
+            if (hasTitle) {
+                contentView.setPadding(innerPadding.left, 0, innerPadding.right, innerPadding.bottom)
+                val titleView: View = dialog.findViewById(R.id.dialog_title_content)
+                titleView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, 0)
+            } else {
+                contentView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom)
+            }
+
+            return windowInsets
+        })
+
+        return dialog
+    }
+
+    public static Unit setTitle(final Dialog dialog, final String title) {
+        val view: View = dialog.findViewById(R.id.dialog_title)
+        if (view is TextView) {
+            ((TextView) view).setText(title)
+        }
+    }
+
+    public static <T> Unit setViewActions(final Iterable<T> actions, final SimpleItemListView view, final Int columnCount, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
+        val model: SimpleItemListModel<T> = SimpleItemListModel<>()
+        model
+            .setItems(actions)
+            .setDisplayMapper((item, group) -> displayMapper.apply(item), null, (ctx, parent) -> ViewUtils.createButton(ctx, parent, TextParam.text(""), R.layout.button_wherigo_view))
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setItemPadding(10, 0)
+            .setColumns(columnCount, null)
+            .addSingleSelectListener(clickHandler)
+        view.setModel(model)
+        view.setVisibility(View.VISIBLE)
+    }
+
+    public static SimpleItemListModel<WherigoThingType> createThingTypeTable(final Activity activity, final SimpleItemListView target, final Consumer<EventTable> thingSelectAction) {
+        //create the model
+        val wherigoThingTypeModel: SimpleItemListModel<WherigoThingType> = SimpleItemListModel<WherigoThingType>()
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setDisplayViewMapper(R.layout.wherigolist_item, (type, group, view) -> {
+                view.setBackground(null)
+                val things: List<EventTable> = type.getThingsForUserDisplay()
+                val name: String = type.toUserDisplayableString() + " (" + things.size() + ")"
+                val description: CharSequence = TextUtils.join(things, i ->
+                        WherigoUtils.getUserDisplayableName(i, false), ", ")
+
+                val typeBinding: WherigolistItemBinding = WherigolistItemBinding.bind(view)
+                typeBinding.name.setText(name)
+                typeBinding.description.setText(description)
+                ImageParam.id(type.getIconId()).applyTo(typeBinding.icon)
+            }, (item, itemGroup) -> item == null  ? "" : item.toUserDisplayableString())
+
+        target.setModel(wherigoThingTypeModel)
+        wherigoThingTypeModel.addSingleSelectListener(type -> chooseThing(activity, type, thingSelectAction))
+        updateThingTypeTable(wherigoThingTypeModel, target)
+        return wherigoThingTypeModel
+    }
+
+    public static Unit updateThingTypeTable(final SimpleItemListModel<WherigoThingType> model, final SimpleItemListView target) {
+        model.setItems(WherigoGame.get().isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST)
+        target.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : View.GONE)
+    }
+
+    private static Unit chooseThing(final Activity activity, final WherigoThingType thingType, final Consumer<EventTable> thingSelectAction) {
+        chooseThing(activity, thingType.getThingsForUserDisplay(), thingType.getIconId(),
+            thingType.toUserDisplayableString(), thingSelectAction)
+    }
+
+    public static Unit chooseThing(final Activity activity, final List<EventTable> things,
+           final Int defaultIconId, final String title,
+           final Consumer<EventTable> thingSelectAction) {
+
+        if (things.isEmpty()) {
+            return
+        }
+        if (things.size() == 1) {
+            thingSelectAction.accept(things.get(0))
+            return
+        }
+
+        final SimpleDialog.ItemSelectModel<EventTable> model = SimpleDialog.ItemSelectModel<>()
+        model
+            .setItems(things)
+            .setDisplayMapper(item -> TextParam.text(WherigoUtils.getUserDisplayableName(item, false)))
+            .setDisplayIconMapper(item -> {
+                val iconDrawable: Drawable = WherigoUtils.getThingIconAsDrawable(activity, item)
+                return iconDrawable == null ? ImageParam.id(defaultIconId) : ImageParam.drawable(iconDrawable)
+            })
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setItemPadding(10, 0)
+
+        SimpleDialog.of(activity)
+            .setTitle(TextParam.text(title))
+            .selectSingle(model, thingSelectAction::accept)
+    }
+
+    public static Unit displayThing(final Activity activity, final EventTable thing, final Boolean forceDisplay) {
+        if (!forceDisplay && thing.hasEvent("OnClick")) {
+            Log.iForce("Wherigo: discovered OnClick event on thing: " + thing)
+            //this logic was taken over from WhereYouGo. Assumption is that a click event handles triggering of display itself
+            Engine.callEvent(thing, "OnClick", null)
+        } else if (activity != null) {
+            WherigoDialogManager.displayDirect(activity, WherigoThingDialogProvider(thing))
+        } else {
+            WherigoDialogManager.get().display(WherigoThingDialogProvider(thing))
+        }
+    }
+
+    public static Dialog getQuickViewDialog(final Activity activity) {
+        val binding: WherigoMapQuickinfosBinding = WherigoMapQuickinfosBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)))
+        val model: SimpleItemListModel<WherigoThingType> = createThingTypeTable(activity, binding.wherigoThingTypeList, thing -> displayThing(activity, thing, false))
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog())
+        BadgeManager.get().setBadge(binding.resumeDialog, false, -1)
+        binding.cacheContextGotocache.setOnClickListener(v -> CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode()))
+        binding.goToWherigo.setOnClickListener(v -> WherigoActivity.start(activity, false))
+
+        val refreshGui: Runnable = () -> {
+            updateThingTypeTable(model, binding.wherigoThingTypeList)
+            binding.resumeDialog.setVisibility(WherigoGame.get().dialogIsPaused() ? View.VISIBLE : View.GONE)
+            binding.cacheContextBox.setVisibility(WherigoGame.get().getContextGeocode() != null ? View.VISIBLE : View.GONE)
+            binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName())
+        }
+
+        val wherigoListenerId: Int = WherigoGame.get().addListener(nt -> refreshGui.run())
+        refreshGui.run()
+
+        val dialog: Dialog = Dialogs.bottomSheetDialogWithActionbar(activity, binding.getRoot(), WherigoGame.get().getCartridgeName())
+        dialog.setOnDismissListener(dl -> WherigoGame.get().removeListener(wherigoListenerId))
+
+        return dialog
+    }
+
+    public static Unit showErrorDialog(final Activity activity) {
+        val lastError: String = WherigoGame.get().getLastError()
+        val lastErrorCartridgeLink: String = WherigoUtils.getWherigoDetailsUrl(WherigoGame.get().getLastErrorCGuid())
+        val dialogErrorMessage: String = (lastError == null ? LocalizationUtils.getString(R.string.wherigo_error_game_noerror) :
+                LocalizationUtils.getString(R.string.wherigo_error_game_error, lastError, lastErrorCartridgeLink))
+
+        val dialog: SimpleDialog = SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.wherigo_error_title))
+                .setMessage(TextParam.text(dialogErrorMessage).setMarkdown(true))
+                .setPositiveButton(lastError == null ? TextParam.id(R.string.ok) : TextParam.id(R.string.copy))
+
+        if (lastError != null) {
+            dialog
+                .setNeutralButton(TextParam.id(R.string.log_clear))
+                .setNeutralAction(() -> WherigoGame.get().clearLastError())
+        }
+        dialog.show(() -> {
+            if (lastError != null) {
+                ClipboardUtils.copyToClipboard(lastError)
+                ActivityMixin.showToast(activity, R.string.copied_to_clipboard)
+            }
+        })
+        WherigoGame.get().clearLastErrorNotSeen()
+    }
+
+    /** adds badge logic to the given view to display current wherigo information as badges */
+    public static Unit addWherigoBadgeNotifications(final View view) {
+        if (view == null) {
+            return
+        }
+        val refreshRoutine: Runnable = () -> {
+            if (WherigoGame.get().isLastErrorNotSeen() || WherigoGame.get().dialogIsPaused()) {
+                BadgeManager.get().setBadge(view, false, -1)
+            } else {
+                BadgeManager.get().removeBadge(view)
+            }
+        }
+
+        val listenerId: Int = WherigoGame.get().addListener(nt -> refreshRoutine.run())
+        ViewUtils.addDetachListener(view, v -> WherigoGame.get().removeListener(listenerId))
+        refreshRoutine.run()
+    }
+
+    public static Unit executeForOneCartridge(final Activity activity, final List<String> wherigoGuids, final Consumer<String> guidAction) {
+        if (wherigoGuids.isEmpty()) {
+            return
+        }
+        if (wherigoGuids.size() == 1) {
+            guidAction.accept(wherigoGuids.get(0))
+        } else {
+            // prepare some data for display
+            final Int[] pos = {1}
+            val cartridgeInfoMap: Map<String, WherigoCartridgeInfo> = HashMap<>()
+            for (String guid : wherigoGuids) {
+                cartridgeInfoMap.put(guid, null)
+            }
+            for (WherigoCartridgeInfo info : WherigoCartridgeInfo.getAvailableCartridges(cartridgeInfoMap::containsKey)) {
+                cartridgeInfoMap.put(info.getCGuid(), info)
+            }
+
+            final List<Pair<String, Integer>> wherigoGuidPosList = wherigoGuids.stream().map(guid -> Pair<>(guid, pos[0]++)).collect(Collectors.toList())
+            final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = SimpleDialog.ItemSelectModel<>()
+            model
+                .setItems(wherigoGuidPosList)
+                .setDisplayMapper((l) -> TextParam.text(LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded) + " " + l.second))
+                .setDisplayViewMapper(R.layout.wherigolist_item, (p, group, view) -> {
+                    val binding: WherigolistItemBinding = WherigolistItemBinding.bind(view)
+                    val info: WherigoCartridgeInfo = cartridgeInfoMap.get(p.first)
+                    if (info != null) {
+                        WherigoViewUtils.fillCartridgeSelectItem(binding, info)
+                    } else {
+                        //Cartridge not (yet) downloaded
+                        binding.name.setText(LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded, "" + p.second))
+                        binding.description.setText(p.first)
+                        ImageParam.id(R.drawable.ic_menu_wherigo).applyTo(binding.icon)
+                    }
+                }, (p, group) -> {
+                    val info: WherigoCartridgeInfo = cartridgeInfoMap.get(p.first)
+                    return info != null ? info.getName() : LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded, "" + p.second)
+                })
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.cache_multiple_wherigo_cartridges_title))
+                .setMessage(TextParam.id(R.string.cache_multiple_wherigo_cartridges_message))
+                .selectSingle(model, s -> guidAction.accept(s.first))
+        }
+    }
+
+    /** fills an instance of Wherigo-List-Item-layout with info from a given cartridge */
+    public static Unit fillCartridgeSelectItem(final WherigolistItemBinding binding, final WherigoCartridgeInfo info) {
+        val name: String = info.getCartridgeFile().name
+        val description: CharSequence = "v" + info.getCartridgeFile().version + ", " + info.getCartridgeFile().author + ", " +
+                getDisplayableDistance(LocationDataProvider.getInstance().currentGeo().getCoords(),
+                        Geopoint(info.getCartridgeFile().latitude, info.getCartridgeFile().longitude))
+        final Byte[] iconData = info.getIconData()
+        val icon: ImageParam = iconData == null ? ImageParam.id(R.drawable.ic_menu_wherigo) :
+                ImageParam.drawable(getDrawableForImageData(null, iconData))
+
+        //using "markdown" replaces HTML chars (like eg &amp;) with corresponding text symbols
+        TextParam.text(name).setMarkdown(true).applyTo(binding.name)
+        TextParam.text(description).setMarkdown(true).applyTo(binding.description)
+        icon.applyTo(binding.icon)
+    }
+
+    /** replaces found WherigoURLs with link to own wherigo player */
+    public static Unit htmlReplaceWherigoClickAction(final Activity activity, final String geocode, final Spannable spannable) {
+
+        HtmlUtils.replaceUrlClickAction(spannable, (span, spn, start, end) -> !WherigoUtils.scanWherigoGuids(span.getURL()).isEmpty(), span -> {
+            val guid: String = WherigoUtils.scanWherigoGuids(span.getURL()).get(0)
+            WherigoActivity.startForGuid(activity, guid, geocode, false)
+        })
+    }
+
+}

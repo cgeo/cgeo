@@ -1,0 +1,148 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.utils
+
+import cgeo.geocaching.CgeoApplication
+
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
+
+import androidx.annotation.Nullable
+import androidx.annotation.StringRes
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
+
+/**
+ * Handler with a dispose policy. Once disposed, the handler will not handle
+ * any more dispose or regular message.
+ */
+abstract class DisposableHandler : Handler() : Disposable {
+
+    public static val DONE: Int = -1000
+    protected static val UPDATE_LOAD_PROGRESS_DETAIL: Int = 42186
+    protected static val UPDATE_SHOW_STATUS_TOAST: Int = 42187
+    private val disposables: CompositeDisposable = CompositeDisposable()
+
+    protected DisposableHandler(final Looper serviceLooper) {
+        super(serviceLooper)
+    }
+
+    protected DisposableHandler() {
+        super()
+    }
+
+    private static class CancelHolder {
+        // CANCEL is used to synchronously dispose the DisposableHandler and call
+        // the appropriate callback.
+        static val CANCEL: Int = -1
+        // When dispose() has been called, CANCEL_CALLBACK is used to synchronously
+        // call the appropriate callback.
+        static val CANCEL_CALLBACK: Int = -2
+
+        final Int kind
+
+        CancelHolder(final Int kind) {
+            this.kind = kind
+        }
+    }
+
+    override     public Unit handleMessage(final Message message) {
+        if (message.obj is CancelHolder) {
+            val holder: CancelHolder = (CancelHolder) message.obj
+            if (holder.kind == CancelHolder.CANCEL && !isDisposed()) {
+                disposables.dispose()
+                handleDispose()
+            } else if (holder.kind == CancelHolder.CANCEL_CALLBACK) {
+                // We have been disposed already but the callback has not been called yet.
+                handleDispose()
+            }
+        } else if (!isDisposed()) {
+            handleRegularMessage(message)
+        }
+    }
+
+    /**
+     * Add a disposable to the list of disposables to be disposed at disposition time.
+     */
+    public final Unit add(final Disposable disposable) {
+        disposables.add(disposable)
+    }
+
+    /**
+     * Handle a non-dispose message.<br>
+     * Subclasses must implement this to handle messages.
+     *
+     * @param message the message to handle
+     */
+    protected abstract Unit handleRegularMessage(Message message)
+
+    /**
+     * Handle a dispose message.
+     * <br>
+     * This is called on the handler looper thread when the handler gets disposed.
+     */
+    protected Unit handleDispose() {
+        // May be overwritten by inheriting classes.
+    }
+
+    /**
+     * Get a dispose message that can later be sent to this handler to dispose it.
+     *
+     * @return a message that, when sent, will dispose the current handler.
+     */
+    public Message disposeMessage() {
+        return obtainMessage(0, CancelHolder(CancelHolder.CANCEL))
+    }
+
+    /**
+     * Cancel the current handler. This can be called from any thread. The disposables
+     * added with {@link #add(Disposable)} will be disposed immediately, while the
+     * {@link #handleDispose()} callback will be called synchronously by the handler.
+     */
+    override     public Unit dispose() {
+        disposables.dispose()
+        obtainMessage(0, CancelHolder(CancelHolder.CANCEL_CALLBACK)).sendToTarget()
+    }
+
+    /**
+     * Check if the current handler has been disposed.
+     *
+     * @return true if the handler has been disposed
+     */
+    override     public Boolean isDisposed() {
+        return disposables.isDisposed()
+    }
+
+    /**
+     * Check if a handler has been disposed.
+     *
+     * @param handler a handler, or null
+     * @return true if the handler is not null and has been disposed
+     */
+    public static Boolean isDisposed(final DisposableHandler handler) {
+        return handler != null && handler.isDisposed()
+    }
+
+    public static Unit sendLoadProgressDetail(final Handler handler, @StringRes final Int resourceId) {
+        if (handler != null) {
+            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget()
+        }
+    }
+
+    public static Unit sendShowStatusToast(final Handler handler, @StringRes final Int resourceId) {
+        if (handler != null) {
+            handler.obtainMessage(UPDATE_SHOW_STATUS_TOAST, CgeoApplication.getInstance().getString(resourceId)).sendToTarget()
+        }
+    }
+}

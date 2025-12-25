@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_content"
+    android:padding="4dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/auth_1"
+            style="@style/authorization_text"
+            android:layout_marginBottom="20dip"
+            android:drawablePadding="15dip"
+            tools:text="Auth text 1"
+            app:drawableLeftCompat="@drawable/cgeo_actionbar_squircle" />
+
+        <TextView
+            android:id="@+id/auth_2"
+            style="@style/authorization_text"
+            android:layout_marginBottom="5dip"
+            tools:text="Auth text 2"/>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username"
+                android:inputType="textPersonName"
+                style="@style/textinput_embedded_singleline"
+                android:hint="@string/init_authorization_credential_username"
+                android:autofillHints=".AUTOFILL_HINT_USERNAME" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline"
+            app:endIconMode="password_toggle">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:inputType="textPassword"
+                android:hint="@string/init_authorization_credential_password"
+                style="@style/textinput_embedded_singleline"
+                android:autofillHints=".AUTOFILL_HINT_PASSWORD" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/start"
+            style="@style/button_full"
+            android:layout_margin="7dip"
+            tools:text="start"/>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/separator_horizontal" />
+
+        <TextView
+            android:id="@+id/auth_3"
+            style="@style/authorization_text"
+            android:layout_marginBottom="5dip"
+            tools:text="Auth text 3"/>
+
+        <Button
+            android:id="@+id/register"
+            style="@style/button_full"
+            android:layout_margin="7dip"
+            tools:text="register"/>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:windowBackground="@android:color/transparent"
+    tools:context=".WaypointPopupFragment">
+
+    <include
+        android:id="@+id/swipe_up_indicator"
+        layout="@layout/swipe_up_indicator" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/actionbar_popup" />
+
+    <ScrollView
+        android:id="@+id/details_list_box"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBackgroundDialog"
+        android:padding="4dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/textSize_headingPrimary"
+                android:gravity="center">
+            </TextView>
+            <View style="@style/separator_horizontal" />
+
+            <LinearLayout
+                android:id="@+id/waypoint_details_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/edit_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/toggle_visited"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/edit"
+                    android:layout_alignBaseline="@id/edit"
+                    android:text="@string/waypoint_visited" />
+                <Button
+                    android:id="@+id/edit"
+                    style="@style/button_small_popups"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/waypoint_edit" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/more_details"
+                style="@style/button_full_popups"
+                android:text="@string/cache" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

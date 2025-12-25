@@ -1,0 +1,111 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.files
+
+import cgeo.geocaching.utils.Log
+
+import android.content.ContentResolver
+import android.net.Uri
+
+import androidx.annotation.NonNull
+
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+
+import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
+
+class FileTypeDetector {
+
+    private final ContentResolver contentResolver
+    private final Uri uri
+
+    public FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
+        this.uri = uri
+        this.contentResolver = contentResolver
+    }
+
+    public FileType getFileType() {
+        InputStream is = null
+        BufferedReader reader = null
+        FileType type = FileType.UNKNOWN
+        try {
+            is = contentResolver.openInputStream(uri)
+            if (is == null) {
+                return FileType.UNKNOWN
+            }
+            reader = BufferedReader(InputStreamReader(is, StandardCharsets.UTF_8))
+            type = detectHeader(reader)
+        } catch (final IOException e) {
+            if (!uri.toString().startsWith("http")) {
+                Log.e("FileTypeDetector", e)
+            }
+        } catch (RuntimeException re) {
+            Log.e("FileTypeDetector, unexpected error", re)
+        } finally {
+            IOUtils.closeQuietly(reader)
+            IOUtils.closeQuietly(is)
+        }
+        return type
+    }
+
+    private static FileType detectHeader(final BufferedReader reader)
+            throws IOException {
+        String line = reader.readLine()
+        if (isZip(line)) {
+            return FileType.ZIP
+        }
+        if (isMap(line)) {
+            return FileType.MAP
+        }
+        if (isWherigo(reader, line)) {
+            return FileType.WHERIGO
+        }
+        // scan at most 5 lines of a GPX file
+        for (Int i = 0; i < 5; i++) {
+            line = StringUtils.trim(line)
+            if (StringUtils.contains(line, "<loc")) {
+                return FileType.LOC
+            } else if (StringUtils.contains(line, "<gpx")) {
+                return FileType.GPX
+            }
+            line = reader.readLine()
+        }
+        return FileType.UNKNOWN
+    }
+
+    private static Boolean isZip(final String line) {
+        return StringUtils.length(line) >= 4
+                && StringUtils.startsWith(line, "PK") && line.charAt(2) == 3
+                && line.charAt(3) == 4
+    }
+
+    private static Boolean isMap(final String line) {
+        return StringUtils.length(line) >= 20
+                && StringUtils.startsWith(line, "mapsforge binary OSM")
+    }
+
+    private static Boolean isWherigo(final BufferedReader reader, final String line) {
+        if (line.length() == 1 && line.charAt(0) == 0x02) {
+            try {
+                val line2: String = reader.readLine()
+                return (StringUtils == (line2.substring(0, 4), "CART"))
+            } catch (IOException ignore) {
+                // ignore
+            }
+        }
+        return false
+    }
+}

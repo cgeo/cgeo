@@ -1,0 +1,298 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.models
+
+import cgeo.geocaching.CgeoApplication
+import cgeo.geocaching.R
+import cgeo.geocaching.downloader.AbstractDownloader
+import cgeo.geocaching.downloader.BRouterTileDownloader
+import cgeo.geocaching.downloader.CompanionFileUtils
+import cgeo.geocaching.downloader.HillshadingTileDownloader
+import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte
+import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes
+import cgeo.geocaching.downloader.MapDownloaderHylly
+import cgeo.geocaching.downloader.MapDownloaderHyllyThemes
+import cgeo.geocaching.downloader.MapDownloaderJustDownload
+import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes
+import cgeo.geocaching.downloader.MapDownloaderMapsforge
+import cgeo.geocaching.downloader.MapDownloaderOSMPaws
+import cgeo.geocaching.downloader.MapDownloaderOSMPawsThemes
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsBackgroundMaps
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes
+import cgeo.geocaching.storage.extension.PendingDownload
+import cgeo.geocaching.utils.CalendarUtils
+
+import android.net.Uri
+
+import androidx.annotation.DrawableRes
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.annotation.StringRes
+
+import java.util.ArrayList
+
+class Download {
+
+    private final String name
+    private final Uri uri
+    private final Boolean isDir
+    private final Boolean isBackDir; // virtual folder type for back navigation
+    private final Long dateInfo
+    private final String sizeInfo
+    private String addInfo
+    private final DownloadType type
+    @DrawableRes private final Int iconRes
+    var customMarker: Boolean = false; // handled solely by caller
+
+    public Download(final String name, final Uri uri, final Boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type, @DrawableRes final Int iconRes) {
+        this.name = CompanionFileUtils.getDisplayName(name)
+        this.uri = uri
+        this.isDir = isDir
+        this.isBackDir = false
+        this.sizeInfo = sizeInfo
+        this.addInfo = ""
+        this.dateInfo = CalendarUtils.parseYearMonthDay(dateISO)
+        this.type = type
+        this.iconRes = iconRes
+    }
+
+    public Download(final PendingDownload pendingDownload) {
+        val desc: DownloadTypeDescriptor = DownloadType.fromTypeId(pendingDownload.getOfflineMapTypeId())
+
+        this.name = CompanionFileUtils.getDisplayName(pendingDownload.getFilename())
+        this.uri = Uri.parse(pendingDownload.getRemoteUrl())
+        this.isDir = false
+        this.isBackDir = false
+        this.sizeInfo = ""
+        this.addInfo = ""
+        this.dateInfo = pendingDownload.getDate()
+        this.type = desc == null ? DownloadType.DOWNLOADTYPE_ALL_MAPRELATED : desc.type
+        this.iconRes = R.drawable.ic_menu_file
+    }
+
+    public Download(final Uri navigateUpUri, final DownloadType type) {
+        this.name = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup)
+        this.uri = navigateUpUri
+        this.isDir = true
+        this.isBackDir = true
+        this.sizeInfo = ""
+        this.addInfo = ""
+        this.dateInfo = 0
+        this.type = type
+        this.iconRes = 0
+    }
+
+    public String getName() {
+        return name
+    }
+
+    public Uri getUri() {
+        return uri
+    }
+
+    public Boolean isDir() {
+        return isDir
+    }
+
+    public Boolean isBackDir() {
+        return isBackDir
+    }
+
+    public String getDateInfoAsString() {
+        return CalendarUtils.yearMonthDay(dateInfo)
+    }
+
+    public Long getDateInfo() {
+        return dateInfo
+    }
+
+    public String getSizeInfo() {
+        return sizeInfo
+    }
+
+    public Unit setAddInfo(final String addInfo) {
+        this.addInfo = addInfo
+    }
+
+    public String getAddInfo() {
+        return addInfo
+    }
+
+    public DownloadType getType() {
+        return type
+    }
+
+    public String getTypeAsString() {
+        val downloader: AbstractDownloader = DownloadType.getInstance(type.id)
+        return downloader != null ? downloader.mapSourceName : "???"
+    }
+
+    @DrawableRes
+    public Int getIconRes() {
+        return iconRes
+    }
+
+    override     public String toString() {
+        return "{ n=" + name + ", t=" + type + ", u=" + uri + ", isDir=" + isDir + ", di=" + dateInfo + " }"
+    }
+
+    enum class class DownloadType {
+        // id values must not be changed as they are referenced in the database & download companion files
+        DOWNLOAD_TYPE_ALL_MAPS(-2, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),       // virtual entry
+        DOWNLOAD_TYPE_ALL_THEMES(-1, R.string.downloadmap_themefile, R.drawable.downloader_theme),  // virtual entry
+        DOWNLOADTYPE_ALL_MAPRELATED(0, 0, R.drawable.ic_menu_mapmode),                 // virtual entry
+        DOWNLOADTYPE_MAP_MAPSFORGE(1, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_MAP_OPENANDROMAPS(2, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_OPENANDROMAPS(3, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_FREIZEITKARTE(4, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_FREIZEITKARTE(5, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_HYLLY(6, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_HYLLY(7, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+        DOWNLOADTYPE_MAP_PAWS(8, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_PAWS(9, R.string.downloadmap_themefile, R.drawable.downloader_theme),
+
+        DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload, R.drawable.ic_menu_mapmode),
+        DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload, R.drawable.downloader_theme),
+
+        DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile, R.drawable.ic_menu_route),
+        DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile, R.drawable.ic_menu_hills),
+        DOWNLOADTYPE_LANGUAGE_MODEL(92, R.string.translator_model, R.drawable.ic_menu_translate),
+        DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS(93, R.string.downloadmap_mapfile, R.drawable.ic_menu_mapmode)
+
+        public final Int id
+        @StringRes final Int typeNameResId
+        @DrawableRes final Int iconResId
+        public static val DEFAULT: Int = DOWNLOADTYPE_MAP_MAPSFORGE.id
+        private static val offlineMapTypes: ArrayList<DownloadTypeDescriptor> = ArrayList<>()
+        private static val offlineMapThemeTypes: ArrayList<DownloadTypeDescriptor> = ArrayList<>()
+        private static val downloadTypes: ArrayList<DownloadTypeDescriptor> = ArrayList<>()
+
+        DownloadType(final Int id, @StringRes final Int typeNameResId, @DrawableRes final Int iconResId) {
+            this.id = id
+            this.typeNameResId = typeNameResId
+            this.iconResId = iconResId
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> getOfflineMapTypes() {
+            buildTypelist()
+            return offlineMapTypes
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> getOfflineMapThemeTypes() {
+            buildTypelist()
+            return offlineMapThemeTypes
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> getOfflineAllMapRelatedTypes() {
+            buildTypelist()
+            val mapRelatedTypes: ArrayList<DownloadTypeDescriptor> = ArrayList<>(offlineMapTypes)
+            mapRelatedTypes.addAll(offlineMapThemeTypes)
+            return mapRelatedTypes
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> get(final Int typeId) {
+            buildTypelist()
+            val result: ArrayList<DownloadTypeDescriptor> = ArrayList<>()
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
+                if (descriptor.type.id == typeId) {
+                    result.add(descriptor)
+                    break
+                }
+            }
+            return result
+        }
+
+        public static AbstractDownloader getInstance(final Int typeId) {
+            buildTypelist()
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
+                if (descriptor.type.id == typeId) {
+                    return descriptor.instance
+                }
+            }
+            return null
+        }
+
+        public static DownloadType getFromId(final Int typeId) {
+            for (DownloadType type : DownloadType.values()) {
+                if (type.id == typeId) {
+                    return type
+                }
+            }
+            return null
+        }
+
+        @StringRes
+        public Int getTypeNameResId() {
+            return typeNameResId
+        }
+
+        @DrawableRes
+        public Int getIconResId() {
+            return iconResId
+        }
+
+        private static Unit buildTypelist() {
+            if (offlineMapTypes.isEmpty()) {
+                // put all bundled map theme file types here - they will not be shown in the maps download selector
+                offlineMapThemeTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name))
+                offlineMapThemeTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name))
+                offlineMapThemeTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_THEME_HYLLY, MapDownloaderHyllyThemes.getInstance(), R.string.mapserver_hylly_themes_name))
+                offlineMapThemeTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_THEME_PAWS, MapDownloaderOSMPawsThemes.getInstance(), R.string.mapserver_osmpaws_themes_name))
+
+                // put all file types that should be listed in the downloader here
+                offlineMapTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name))
+                offlineMapTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name))
+                offlineMapTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name))
+                offlineMapTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_HYLLY, MapDownloaderHylly.getInstance(), R.string.mapserver_hylly_name))
+                offlineMapTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_PAWS, MapDownloaderOSMPaws.getInstance(), R.string.mapserver_osmpaws_name))
+
+                // all other download types
+                downloadTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile))
+                downloadTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile))
+                downloadTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_HILLSHADING_TILES, HillshadingTileDownloader.getInstance(), R.string.hillshading_name))
+                downloadTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name))
+                downloadTypes.add(DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS, MapDownloaderOpenAndroMapsBackgroundMaps.getInstance(), R.string.persistablefolder_backgroundmaps))
+
+                // adding maps and map themes to download types for completeness
+                downloadTypes.addAll(offlineMapTypes)
+                downloadTypes.addAll(offlineMapThemeTypes)
+            }
+        }
+
+        public static DownloadTypeDescriptor fromTypeId(final Int id) {
+            buildTypelist()
+            for (DownloadTypeDescriptor descriptor : downloadTypes) {
+                if (descriptor.type.id == id) {
+                    return descriptor
+                }
+            }
+            return null
+        }
+    }
+
+    public static class DownloadTypeDescriptor {
+        public final DownloadType type
+        public final AbstractDownloader instance
+        public final Int name
+
+        override         public String toString() {
+            return CgeoApplication.getInstance().getString(name)
+        }
+
+        DownloadTypeDescriptor(final DownloadType type, final AbstractDownloader instance, final @StringRes Int name) {
+            this.type = type
+            this.instance = instance
+            this.name = name
+        }
+    }
+}

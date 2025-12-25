@@ -1,0 +1,316 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.downloader
+
+import cgeo.geocaching.R
+import cgeo.geocaching.models.Download
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.storage.ContentStorage
+import cgeo.geocaching.ui.notifications.NotificationChannels
+import cgeo.geocaching.ui.notifications.Notifications
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory
+import cgeo.geocaching.utils.FileNameCreator
+import cgeo.geocaching.utils.FileUtils
+import cgeo.geocaching.utils.Formatter
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.downloader.HillshadingTileDownloader.HILLSHADING_TILE_FILEEXTENSION
+
+import android.content.Context
+import android.net.Uri
+
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.work.Worker
+
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.util.List
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
+
+import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
+
+class ReceiveDownload {
+    private var uri: Uri = null
+    private var filename: String = null
+
+    private var sourceURL: String = ""
+    private var sourceDate: Long = 0
+    private var offlineMapTypeId: Int = Download.DownloadType.DEFAULT
+    private AbstractDownloader downloader
+
+
+    //copy task
+    private var bytesCopied: Long = 0
+    private val cancelled: AtomicBoolean = AtomicBoolean(false)
+
+
+    protected enum class CopyStates {
+        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, INTEGRITY_CHECK_ERROR, UNKNOWN_STATE
+    }
+
+    /**
+     * receives a file downloaded with system's DownloadManager, copying it to the appropriate c:geo folder
+     * called internally by {@link ReceiveDownloadService} or {@link ReceiveDownloadWorker}
+     */
+    Worker.Result receiveDownload(final Context context, final NotificationManagerCompat notificationManager, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification,
+                         final Uri uri, final String preset, final String sourceURL, final Long sourceDate, final Int offlineMapTypeId) {
+        this.uri = uri
+        this.filename = preset
+        this.sourceURL = sourceURL
+        this.sourceDate = sourceDate
+        this.offlineMapTypeId = offlineMapTypeId
+        this.downloader = Download.DownloadType.getInstance(offlineMapTypeId)
+        if (downloader == null) {
+            return Worker.Result.failure()
+        }
+
+        val mapDirIsReady: Boolean = ContentStorage.get().ensureFolder(downloader.targetFolder)
+
+        if (mapDirIsReady) {
+            // test if ZIP file received
+            try (BufferedInputStream bis = BufferedInputStream(context.getContentResolver().openInputStream(uri))
+                 ZipInputStream zis = ZipInputStream(bis)) {
+                ZipEntry ze
+                while ((ze = zis.getNextEntry()) != null) {
+                    String filename = ze.getName()
+                    val posExt: Int = filename.lastIndexOf('.')
+                    if (posExt != -1 && ((StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (StringUtils.equalsIgnoreCase(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
+                        filename = downloader.toVisibleFilename(filename)
+                        // found map file within zip
+                        if (guessFilename(filename)) {
+                            return handleMapFile(context, notificationManager, notification, updateForegroundNotification, true, ze.getName())
+                        }
+                    }
+                }
+            } catch (IOException | SecurityException e) {
+                // ignore ZIP errors
+            }
+            // if no ZIP file: continue with copying the file
+            if (guessFilename(preset)) {
+                return handleMapFile(context, notificationManager, notification, updateForegroundNotification, false, null)
+            }
+        } else {
+            Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+                    context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(context.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
+            ))
+        }
+        return Worker.Result.failure()
+    }
+
+    // try to guess a filename, otherwise chose randomized filename
+    private Boolean guessFilename(final String preset1) {
+        val preset: String = StringUtils.isNotBlank(preset1) ? preset1 : ContentStorage.get().getName(uri)
+        filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
+        if (filename != null) {
+            filename = FileUtils.getFilenameFromPath(filename)
+            if (StringUtils.isNotBlank(downloader.forceExtension)) {
+                val posExt: Int = filename.lastIndexOf('.')
+                if (posExt == -1 || !(StringUtils.equalsIgnoreCase(downloader.forceExtension, filename.substring(posExt)))) {
+                    filename += downloader.forceExtension
+                }
+            }
+        }
+        if (filename == null) {
+            filename = FileNameCreator.OFFLINE_MAPS.createName()
+        }
+        return true
+    }
+
+    private Worker.Result handleMapFile(final Context context, final NotificationManagerCompat notificationManager, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification,
+                               final Boolean isZipFile, final String nameWithinZip) {
+        // try to preserve displayName (if download supports that)
+        String displayName = ""
+        if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
+            val downloader: AbstractDownloader = Download.DownloadType.getInstance(offlineMapTypeId)
+            final CompanionFileUtils.DownloadedFileData old = downloader == null ? null : CompanionFileUtils.readData(downloader.targetFolder.getFolder(), filename + CompanionFileUtils.INFOFILE_SUFFIX)
+            if (old != null && StringUtils.isNotBlank(old.displayName)) {
+                displayName = old.displayName
+            }
+        }
+
+        cleanupFolder()
+
+        Worker.Result resultId = Worker.Result.failure()
+        final String resultMsg
+
+        String fileinfo = filename
+        if (fileinfo != null) {
+            fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length())
+        }
+
+        // do some integrity checks (if supported by file type)
+        final CopyStates status
+        if (!downloader.verifiedBeforeCopying(filename, uri)) {
+            status = CopyStates.INTEGRITY_CHECK_ERROR
+        } else {
+            // now start copy task
+            status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip, downloader.downloadHasExtraContents)
+        }
+        switch (status) {
+            case SUCCESS:
+                resultMsg = String.format(context.getString(R.string.receivedownload_success), fileinfo)
+                if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
+                    CompanionFileUtils.writeInfo(sourceURL, filename, StringUtils.isNotBlank(displayName) ? displayName : CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId)
+                }
+                TileProviderFactory.buildTileProviderList(true)
+                resultId = Worker.Result.success()
+                break
+            case CANCELLED:
+                resultMsg = context.getString(R.string.receivedownload_cancelled)
+                break
+            case IO_EXCEPTION:
+                resultMsg = String.format(context.getString(R.string.receivedownload_error_io_exception), downloader.targetFolder.toUserDisplayableValue())
+                break
+            case FILENOTFOUND_EXCEPTION:
+                resultMsg = context.getString(R.string.receivedownload_error_filenotfound_exception)
+                break
+            case INTEGRITY_CHECK_ERROR:
+                resultMsg = context.getString(R.string.receivedownload_integritycheck_failed)
+                break
+            default:
+                resultMsg = context.getString(R.string.receivedownload_error)
+                break
+        }
+        Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+                context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, resultMsg
+        ))
+        return resultId
+    }
+
+    /** check whether the target file or its companion file already exist, and delete both, if so */
+    private Unit cleanupFolder() {
+        val files: List<ContentStorage.FileInformation> = ContentStorage.get().list(downloader.targetFolder.getFolder(), false, false)
+
+        val companionFile: Uri = downloader.useCompanionFiles ? CompanionFileUtils.companionFileExists(files, filename) : null
+        if (companionFile != null) {
+            ContentStorage.get().delete(companionFile)
+        }
+
+        // check for files in different capitalizations
+        val filenameNormalized: String = normalized(filename)
+        for (ContentStorage.FileInformation fi : files) {
+            val fiNormalized: String = normalized(fi.name)
+            if (fiNormalized == (filenameNormalized)) {
+                ContentStorage.get().delete(fi.uri)
+                // also check companion file for this
+                val cf: Uri = downloader.useCompanionFiles ? CompanionFileUtils.companionFileExists(files, fi.name) : null
+                if (cf != null) {
+                    ContentStorage.get().delete(cf)
+                }
+            }
+        }
+    }
+
+    private String normalized(final String filename) {
+        return StringUtils.replace(StringUtils.lowerCase(filename), "-", "_")
+    }
+
+    private CopyStates copyInternal(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final Boolean isZipFile, final String nameWithinZip, final Boolean potentiallyKeepTemporaryFile) {
+        Boolean keepTemporaryFile = potentiallyKeepTemporaryFile && Settings.getMapDownloadsKeepTemporaryFiles()
+        CopyStates status = CopyStates.UNKNOWN_STATE
+
+        Log.d("start receiving map file: " + filename)
+        InputStream inputStream = null
+        val outputUri: Uri = ContentStorage.get().create(downloader.targetFolder, filename)
+
+        try {
+            inputStream = BufferedInputStream(context.getContentResolver().openInputStream(uri))
+            if (isZipFile) {
+                try (ZipInputStream zis = ZipInputStream(inputStream)) {
+                    ZipEntry ze
+                    Boolean stillSearching = true
+                    while (stillSearching && (ze = zis.getNextEntry()) != null) {
+                        if (ze.getName() == (nameWithinZip)) {
+                            status = doCopy(context, notification, updateForegroundNotification, zis, outputUri)
+                            stillSearching = false; // don't continue here, as doCopy also closes the input stream, so further reads would lead to IOException
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.e("IOException on receiving map file: " + e.getMessage())
+                    status = CopyStates.IO_EXCEPTION
+                }
+            } else {
+                status = doCopy(context, notification, updateForegroundNotification, inputStream, outputUri)
+                keepTemporaryFile = false
+            }
+            if (status == CopyStates.SUCCESS && !downloader.verifiedAfterCopying(filename, outputUri)) {
+                status = CopyStates.INTEGRITY_CHECK_ERROR
+                cancelled.set(true)
+            }
+        } catch (SecurityException e) {
+            Log.e("SecurityException on receiving map file: " + e.getMessage())
+            return CopyStates.FILENOTFOUND_EXCEPTION
+        } catch (FileNotFoundException e) {
+            return CopyStates.FILENOTFOUND_EXCEPTION
+        } finally {
+            IOUtils.closeQuietly(inputStream)
+        }
+
+        // clean up
+        if (!cancelled.get()) {
+            if (status == CopyStates.SUCCESS) {
+                // having successfully received the copy we can delete the temporary copy
+                try {
+                    if (!keepTemporaryFile) {
+                        context.getContentResolver().delete(uri, null, null)
+                    }
+                } catch (IllegalArgumentException | UnsupportedOperationException e) {
+                    Log.w("Deleting Uri '" + uri + "' failed, will be ignored", e)
+                }
+                // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
+                downloader.onSuccessfulReceive(outputUri)
+            } else {
+                // delete partial copy, but don't change status
+                ContentStorage.get().delete(outputUri)
+            }
+        } else {
+            // delete partial copy, set status to CANCELLED
+            ContentStorage.get().delete(outputUri)
+            status = CopyStates.CANCELLED
+        }
+
+        return status
+    }
+
+    private CopyStates doCopy(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final InputStream inputStream, final Uri outputUri) {
+        OutputStream outputStream = null
+        Long lastPublishTime = System.currentTimeMillis()
+        try {
+            outputStream = BufferedOutputStream(ContentStorage.get().openForWrite(outputUri))
+            final Byte[] buffer = Byte[8192]
+            Int length = 0
+            while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length)
+                bytesCopied += length
+                if ((System.currentTimeMillis() - lastPublishTime) > 500) { // avoid message flooding
+                    notification.setContentText(context.getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)))
+                    updateForegroundNotification.run()
+                    lastPublishTime = System.currentTimeMillis()
+                }
+            }
+            return CopyStates.SUCCESS
+        } catch (IOException e) {
+            Log.e("IOException on receiving map file: " + e.getMessage())
+            return CopyStates.IO_EXCEPTION
+        } finally {
+            IOUtils.closeQuietly(inputStream, outputStream)
+        }
+    }
+
+}

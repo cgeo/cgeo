@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_content"
+    tools:context=".address.AddressListActivity" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/address_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dip"
+        android:clipToPadding="false"
+        android:dividerHeight="1dip"
+        android:padding="0dip"
+        android:contentDescription="@string/search_address_result"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/addresslist_item" />
+
+</LinearLayout>

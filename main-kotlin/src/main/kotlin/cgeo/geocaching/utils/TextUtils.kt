@@ -1,0 +1,705 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.utils
+
+import cgeo.geocaching.R
+import cgeo.geocaching.models.Geocache
+import cgeo.geocaching.utils.functions.Func1
+
+import android.content.Context
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.StrikethroughSpan
+import android.text.style.StyleSpan
+import android.util.Pair
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
+
+import java.nio.charset.StandardCharsets
+import java.text.Collator
+import java.util.ArrayList
+import java.util.Collections
+import java.util.HashMap
+import java.util.Iterator
+import java.util.List
+import java.util.Locale
+import java.util.Map
+import java.util.Objects
+import java.util.Set
+import java.util.SortedMap
+import java.util.TreeMap
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+import java.util.zip.CRC32
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings
+import org.apache.commons.lang3.StringUtils
+
+/**
+ * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
+ */
+class TextUtils {
+
+    /**
+     * a Collator instance appropriate for comparing strings using the default locale while ignoring the casing
+     */
+    public static val COLLATOR: Collator = getCollator()
+
+    private static val PATTERN_REMOVE_NONPRINTABLE: Pattern = Pattern.compile("\\p{Cntrl}")
+
+    private static val PATTERN_REMOVE_SPECIAL: Pattern = Pattern.compile("[^a-z0-9]")
+
+    private static val PATTERN_CONTAINS_HTML: Pattern = Pattern.compile(
+            "<(/\\s*)?[a-zA-Z]+\\s*([a-zA-Z]+\\s*=\\s*['\"][^'\"]*['\"]\\s*)*(/\\s*)?>|&#?[a-zA-Z0-9]{1,10};")
+
+    /**
+     * Internal cache for created Patterns (avoids parsing them unnecessarily often)
+     */
+    private static val PATTERN_CACHE: Map<String, Pattern> = Collections.synchronizedMap(HashMap<>())
+
+    private TextUtils() {
+        // utility class
+    }
+
+    public static List<String> sortListLocaleAware(final List<String> listToSort) {
+        return sortListLocaleAware(listToSort, s -> s)
+    }
+
+    public static <T> List<T> sortListLocaleAware(final List<T> listToSort, final Func1<T, String> sortStringAccessor) {
+        Collections.sort(listToSort, CommonUtils.getNullHandlingComparator((e1, e2) -> COLLATOR.compare(sortStringAccessor.call(e1), sortStringAccessor.call(e2)), true))
+        return listToSort
+    }
+
+    /**
+     * returns for a list and a text the position to insert the text into the list to keep it sorted
+     */
+    public static Int getSortedPos(final List<String> list, final String text) {
+        return getSortedPos(list, s -> s, text)
+    }
+
+    public static <T> Int getSortedPos(final List<T> list, final Func1<T, String> sortStringAccessor, final String text) {
+        if (text == null || list == null || sortStringAccessor == null) {
+            return 0
+        }
+        Int idx = 0
+        while (idx < list.size()) {
+            val s: String = sortStringAccessor.call(list.get(idx))
+            if (s == null || COLLATOR.compare(s, text) >= 0) {
+                break
+            }
+            idx++
+        }
+        return idx
+    }
+
+    /**
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
+     *
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param trim         Set to true if the group found should be trim'ed
+     * @param group        Number of the group to return if found
+     * @param defaultValue Value to return if the pattern is not found
+     * @param last         Find the last occurring value
+     * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
+     */
+    @SuppressFBWarnings("DM_STRING_CTOR")
+    public static String getMatch(final String data, final Pattern pattern, final Boolean trim, final Int group, final String defaultValue, final Boolean last) {
+        if (data != null) {
+            val matcher: Matcher = pattern.matcher(data)
+            if (matcher.find()) {
+                String result = matcher.group(group)
+                while (last && matcher.find()) {
+                    result = matcher.group(group)
+                }
+
+                if (result != null) {
+                    val remover: Matcher = PATTERN_REMOVE_NONPRINTABLE.matcher(result)
+                    val untrimmed: String = remover.replaceAll(" ")
+
+                    // Some versions of Java copy the whole page String, when matching with regular expressions
+                    // later this would block the garbage collector, as we only need tiny parts of the page
+                    // see http://developer.android.com/reference/java/lang/String.html#backing_array
+                    // Thus the creation of a String via String constructor is voluntary here!!
+                    // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    //noinspection StringOperationCanBeSimplified
+                    return trim ? String(untrimmed).trim() : String(untrimmed)
+                }
+            }
+        }
+
+        return defaultValue
+    }
+
+    /**
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
+     *
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param trim         Set to true if the group found should be trim'ed
+     * @param defaultValue Value to return if the pattern is not found
+     * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
+     */
+    public static String getMatch(final String data, final Pattern pattern, final Boolean trim, final String defaultValue) {
+        return getMatch(data, pattern, trim, 1, defaultValue, false)
+    }
+
+    /**
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
+     *
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param defaultValue Value to return if the pattern is not found
+     * @return defaultValue or the first group if the pattern matches (trimmed)
+     */
+    public static String getMatch(final String data, final Pattern pattern, final String defaultValue) {
+        return getMatch(data, pattern, true, 1, defaultValue, false)
+    }
+
+    /**
+     * Searches for the pattern pattern in the data.
+     *
+     * @return true if data contains the pattern pattern
+     */
+    public static Boolean matches(final String data, final Pattern pattern) {
+        // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
+        return data != null && pattern.matcher(data).find()
+    }
+
+    /**
+     * Replaces every \n, \r and \t with a single space. Afterwards multiple spaces
+     * are merged into a single space. Finally leading spaces are deleted.
+     * <br>
+     * This method must be fast, but may not lead to the shortest replacement String.
+     * <br>
+     * You are only allowed to change this code if you can prove it became faster on a device.
+     * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project.
+     *
+     * @param data complete HTML page
+     * @return the HTML page as a very Long single "line"
+     */
+    public static String replaceWhitespace(final String data) {
+        val length: Int = data.length()
+        final Char[] chars = Char[length]
+        data.getChars(0, length, chars, 0)
+        Int resultSize = 0
+        Boolean lastWasWhitespace = true
+        for (final Char c : chars) {
+            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+                if (!lastWasWhitespace) {
+                    chars[resultSize++] = ' '
+                }
+                lastWasWhitespace = true
+            } else {
+                chars[resultSize++] = c
+                lastWasWhitespace = false
+            }
+        }
+        return String.valueOf(chars, 0, resultSize)
+    }
+
+    /**
+     * Quick and naive check for possible rich HTML content in a string.
+     *
+     * @param str A string containing HTML code.
+     * @return <tt>true</tt> if <tt>str</tt> contains HTML code that needs to go through a HTML renderer before
+     * being displayed, <tt>false</tt> if it can be displayed as-is without any loss
+     */
+    public static Boolean containsHtml(final String str) {
+        if (StringUtils.isBlank(str)) {
+            return false
+        }
+        return PATTERN_CONTAINS_HTML.matcher(str).find()
+    }
+
+    /**
+     * Remove all control characters (which are not valid in XML or HTML), as those should not appear in cache texts
+     * anyway
+     */
+    public static String removeControlCharacters(final String input) {
+        val remover: Matcher = PATTERN_REMOVE_NONPRINTABLE.matcher(input)
+        return remover.replaceAll(" ").trim()
+    }
+
+    /**
+     * Calculate a simple checksum for change-checking (not usable for security/cryptography!)
+     *
+     * @param input String to check
+     * @return resulting checksum
+     */
+    public static Long checksum(final String input) {
+        val checksum: CRC32 = CRC32()
+        checksum.update(input.getBytes(StandardCharsets.UTF_8))
+        return checksum.getValue()
+    }
+
+    /**
+     * Build a Collator instance appropriate for comparing strings using the default locale while ignoring the casing.
+     *
+     * @return a collator
+     */
+    private static Collator getCollator() {
+        val collator: Collator = Collator.getInstance()
+        collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION)
+        collator.setStrength(Collator.TERTIARY)
+        return collator
+    }
+
+    /**
+     * When converting html to text using {@link HtmlCompat#fromHtml(String, Int)} then the result often contains unwanted trailing
+     * linebreaks (from the conversion of paragraph tags). This method removes those.
+     */
+    public static CharSequence trimSpanned(final Spanned source) {
+        val length: Int = source.length()
+        Int i = length
+
+        // loop back to the first non-whitespace character
+        //noinspection StatementWithEmptyBody
+        while (--i >= 0 && Character.isWhitespace(source.charAt(i))) {
+            // empty
+        }
+
+        if (i < length - 1) {
+            return source.subSequence(0, i + 1)
+        }
+        return source
+    }
+
+    /**
+     * Convert a potentially HTML string into a plain-text one. If the string does not contain HTML markup,
+     * it is returned unchanged.
+     *
+     * @param html a string containing either HTML or plain text
+     * @return a string without any HTML markup
+     */
+    public static String stripHtml(final String html) {
+        return containsHtml(html) ? trimSpanned(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)).toString() : html
+    }
+
+    public static SpannableString coloredCacheText(final Context context, final Geocache cache, final String text) {
+        val span: SpannableString = SpannableString(text)
+        if (CalendarUtils.isPastEvent(cache)) { // italics
+            span.setSpan(StyleSpan(Typeface.ITALIC), 0, span.length(), 0)
+        }
+        if (cache.isDisabled() || cache.isArchived()) { // strike
+            span.setSpan(StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        if (cache.isArchived()) {
+            span.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return span
+    }
+
+    // Checks whether a given span class covers the entire text
+    public static <T> Boolean hasSpanCoveringWholeText(final CharSequence spanText, final Class<T> spanClass) {
+        val length: Int = spanText == null ? 0 : spanText.length()
+        if (length == 0 || !(spanText is Spanned)) {
+            return false
+        }
+        val spanned: Spanned = (Spanned) spanText
+        final T[] existing = spanned.getSpans(0, length, spanClass)
+        for (final T span : existing) {
+            val start: Int = spanned.getSpanStart(span)
+            val end: Int = spanned.getSpanEnd(span)
+            if (start == 0 && end == length) {
+                return true
+            }
+        }
+        return false
+    }
+
+    public static String getTextBeforeIndexUntil(final String text, final Int idx, final String startToken) {
+        return getTextBeforeIndexUntil(text, idx, startToken, -1)
+    }
+
+    public static String getTextAfterIndexUntil(final String text, final Int idx, final String endToken) {
+        return getTextAfterIndexUntil(text, idx, endToken, -1)
+    }
+
+    /**
+     * Returns substring of text before (and excluding) given 'idx' until one of given conditions is met
+     *
+     * @param text       text to work on
+     * @param idx        idx to start checking
+     * @param startToken if not null, return text until (and excluding) this token is found
+     * @param maxLength  if >=0, text is truncated to given max length
+     * @return found text or empty string. Never null.
+     */
+    public static String getTextBeforeIndexUntil(final String text, final Int idx, final String startToken, final Int maxLength) {
+        if (StringUtils.isEmpty(text) || idx <= 0) {
+            return ""
+        }
+        String before = text.substring(0, Math.min(idx, text.length()))
+
+        if (StringUtils.isNotEmpty(startToken)) {
+            val tokenIdx: Int = before.lastIndexOf(startToken)
+            if (tokenIdx >= 0) {
+                before = before.substring(tokenIdx + startToken.length())
+            }
+        }
+        return (maxLength >= 0 && before.length() > maxLength) ? before.substring(before.length() - maxLength) : before
+    }
+
+    /**
+     * Returns substring of text after (and excluding) given 'idx' until one of given conditions is met
+     *
+     * @param text      text to work on
+     * @param idx       idx to start checking
+     * @param endToken  if not null, return text until (and excluding) this token is found
+     * @param maxLength if >=0, text is truncated to given max length
+     * @return found text or empty string. Never null.
+     */
+    public static String getTextAfterIndexUntil(final String text, final Int idx, final String endToken, final Int maxLength) {
+        if (StringUtils.isEmpty(text) || idx >= text.length() - 1) {
+            return ""
+        }
+        String after = text.substring(idx < 0 ? 0 : idx + 1)
+        if (StringUtils.isNotEmpty(endToken)) {
+            val tokenIdx: Int = after.indexOf(endToken)
+            if (tokenIdx >= 0) {
+                after = after.substring(0, tokenIdx)
+            }
+        }
+        return (maxLength >= 0 && after.length() > maxLength) ? after.substring(0, maxLength) : after
+    }
+
+    /**
+     * Tries to find the next value in 'text' which is delimited (beginning and end) with given ÄdelimiterChar and
+     * returns text inside these delimiters. In this text, occurences of both 'escapedChar' or 'delimiterChar' can
+     * be escaped with 'escapedChar' to get them into the indelimited text.
+     * Method returns null if no delimited value is found.
+     * This is the 'inverse' function to {@link #createDelimitedValue(String, Char, Char)}
+     */
+    public static String parseNextDelimitedValue(final String text, final Char delimiterChar, final Char escapeChar) {
+
+        val tp: TextParser = TextParser(text)
+        if (tp.parseUntil(delimiterChar) == null) {
+            return null
+        }
+        return tp.parseUntil(c -> c == delimiterChar, false, delimiterChar == escapeChar ? null : escapeChar, delimiterChar == escapeChar)
+    }
+
+    public static String parseUntil(final String text, final Int startIdx, final Set<Character> delimiterChars, final Char escapeChar) {
+        val result: StringBuilder = StringBuilder()
+        Int idx = Math.max(startIdx, 0)
+        Boolean escape = false
+        while (idx < text.length()) {
+            val c: Char = text.charAt(idx)
+            if (escapeChar == c) {
+                if (escape) {
+                    result.append(c)
+                    escape = false
+                } else {
+                    escape = true
+                }
+            } else if (delimiterChars.contains(c)) {
+                if (escape) {
+                    result.append(c)
+                    escape = false
+                } else {
+                    return result.toString()
+                }
+            } else {
+                escape = false
+                result.append(c)
+            }
+            idx++
+        }
+        return result.toString()
+    }
+
+    /**
+     * Returns a delimited version of given 'text' using given 'delimiterChar'. Occurences of 'delimiterChar' are
+     * escaped with given 'escapeChar'. Occurences of 'escapedChar' are also escaped with 'escapedChar'.
+     * This is the 'inverse' function to {@link #parseNextDelimitedValue(String, Char, Char)}
+     */
+    public static String createDelimitedValue(final String text, final Char delimiterChar, final Char escapeChar) {
+
+        return delimiterChar + TextParser.escape(text, c -> c == delimiterChar, escapeChar) + delimiterChar
+    }
+
+    /**
+     * Returns text split into its single words (a word being a continuous group of non-whitespace-characters).
+     * Leadig/trailing whitespaces are omitted. blank string (or null string) results in empty array.
+     *
+     * @param text text to split
+     * @return splited into words
+     */
+    public static String[] getWords(final String text) {
+        val theText: String = text == null ? "" : text.trim()
+        if (theText.isEmpty()) {
+            return String[0]
+        }
+        return compilePattern("\\s+").split(theText)
+    }
+
+    /**
+     * Replaces all occurences of texts starting with 'startToken' and ending with 'endTOken' with given 'replacement'.
+     * Note that 'replacement' is interpreted as regex as defined in {@link String#replaceAll(String, String)}}.
+     * In replacmenent, '$1' may be used to reference the replaced text inside the tokens
+     * it is assured that for same parameters, matches are always the same as in {@link #getAll(String, String, String)}.
+     *
+     * @param text        text to do replacement in
+     * @param startToken  starttoken. if blank then "starttoken" is assumed to be start of text
+     * @param endToken    starttoken. if blank then "endtoken" is assumed to be end of text
+     * @param replacement replacements
+     * @return text with replacements
+     */
+    public static String replaceAll(final String text, final String startToken, final String endToken, final String replacement) {
+        if (text == null) {
+            return ""
+        }
+        return getTokenSearchPattern(startToken, endToken).matcher(text).replaceAll(replacement)
+    }
+
+    /**
+     * Gets all text occurences starting with 'startToken' and ending with 'endToken'.
+     * it is assured that for same parameters, matches are always the same as in {@link #replaceAll(String, String, String, String)}.
+     *
+     * @param text       text to search in
+     * @param startToken starttoken. if blank then "starttoken" is assumed to be start of text
+     * @param endToken   starttoken. if blank then "endtoken" is assumed to be end of text
+     * @return list of found matches
+     */
+    public static List<String> getAll(final String text, final String startToken, final String endToken) {
+        if (text == null) {
+            return Collections.emptyList()
+        }
+        val m: Matcher = getTokenSearchPattern(startToken, endToken).matcher(text)
+        val result: List<String> = ArrayList<>()
+        while (m.find()) {
+            result.add(m.group(1))
+        }
+        return result
+    }
+
+    /**
+     * Shortens a given text to a maximum given number of characters. In case the text is too Long it
+     * is shortened according to a given begin-end-distribution-value. Deleted text part is marked with '...'
+     *
+     * @param text                 text to shorten. If text is shorter than maxLength it remains unchanged
+     * @param maxLength            maxLength to shorten text to.
+     * @param beginEndDistribution begin-end-distribution to obey on shortening. If >=1 then text is shortened at the end.
+     *                             If <=0 then text is shortened at the beginning. If between 0-1 then text is shortened at beginning and end in relation to this value.
+     * @return the shortened text
+     */
+    public static String shortenText(final String text, final Int maxLength, final Float beginEndDistribution) {
+        val separator: String = "..."
+        if (StringUtils.isBlank(text) || maxLength < 0) {
+            return ""
+        }
+        if (text.length() <= maxLength) {
+            return text
+        }
+        if (maxLength < separator.length()) {
+            return text.substring(0, maxLength)
+        }
+        val charsAtBegin: Int = Math.max(0, Math.min(maxLength - separator.length(), (Int) ((maxLength - separator.length()) * beginEndDistribution)))
+        val charsAtEnd: Int = maxLength - separator.length() - charsAtBegin
+
+        return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd)
+    }
+
+    public static Boolean isEqualIgnoreCaseAndSpecialChars(final String s1, final String s2) {
+        if (Objects == (s1, s2)) {
+            return true
+        }
+        if (s1 == null || s2 == null) {
+            return false
+        }
+        return toComparableStringIgnoreCaseAndSpecialChars(s1) == (toComparableStringIgnoreCaseAndSpecialChars(s2))
+    }
+
+    public static String toComparableStringIgnoreCaseAndSpecialChars(final String value) {
+        if (value == null) {
+            return null
+        }
+        return PATTERN_REMOVE_SPECIAL.matcher(value.toLowerCase(Locale.US)).replaceAll("")
+    }
+
+
+    public static Boolean isEqualStripHtmlIgnoreSpaces(final String s1, final String s2) {
+        if (Objects == (s1, s2)) {
+            return true
+        }
+        if (s1 == null || s2 == null) {
+            return false
+        }
+
+        val s1Stripped: String = TextUtils.stripHtml(s1)
+        val s2Stripped: String = TextUtils.stripHtml(s2)
+        if (s1Stripped == null || s2Stripped == null) {
+            return false
+        }
+
+        return StringUtils.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0
+    }
+
+    public static <E : Enum()<E>> E getEnumIgnoreCaseAndSpecialChars(final Class<E> enumClass, final String enumName, final E defaultEnum) {
+        if (enumName == null || !enumClass.isEnum()) {
+            return defaultEnum
+        }
+        for (final E each : enumClass.getEnumConstants()) {
+            if (isEqualIgnoreCaseAndSpecialChars(each.name(), enumName)) {
+                return each
+            }
+        }
+        return defaultEnum
+    }
+
+    private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {
+        return compilePattern("(?s)" + (StringUtils.isEmpty(startToken) ? "^" : Pattern.quote(startToken)) + "(.*?)" +
+                (StringUtils.isEmpty(endToken) ? "$" : Pattern.quote(endToken)))
+    }
+
+    private static Pattern compilePattern(final String patternString) {
+
+        Pattern pattern = PATTERN_CACHE.get(patternString)
+        if (pattern == null) {
+            pattern = Pattern.compile(patternString)
+            PATTERN_CACHE.put(patternString, pattern)
+        }
+        return pattern
+    }
+
+    /**
+     * creates a pad of length 'targetLength' out of given 'padPattern'.
+     * if 'padPattern' is too Short to fill 'targetLength' then it is concattenated to fill the length up
+     */
+    public static String getPad(final String padPattern, final Int targetLength) {
+        //fast-lane
+        if (targetLength < padPattern.length()) {
+            return padPattern.substring(0, targetLength)
+        }
+        //Long-lane
+        if (padPattern.isEmpty()) {
+            return ""
+        }
+        val sb: StringBuilder = StringBuilder()
+        for (Int i = 0; i < targetLength / padPattern.length(); i++) {
+            sb.append(padPattern)
+        }
+        sb.append(padPattern.substring(0, targetLength % padPattern.length()))
+        return sb.toString()
+    }
+
+    /**
+     * convenience forward to {@link android.text.TextUtils#concat(java.lang.CharSequence...)}
+     */
+    public static CharSequence concat(final CharSequence... cs) {
+        return android.text.TextUtils.concat(cs)
+    }
+
+    public static <T> CharSequence join(final Iterable<T> it, final Func1<T, CharSequence> getter, final CharSequence delim) {
+        return join(it.iterator(), getter, delim)
+    }
+
+    public static <T> CharSequence join(final Iterator<T> it, final Func1<T, CharSequence> getter, final CharSequence delim) {
+        val list: List<CharSequence> = ArrayList<>()
+        Boolean first = true
+        while (it.hasNext()) {
+            val item: T = it.next()
+            val cs: CharSequence = getter.call(item)
+            if (cs != null) {
+                if (!first) {
+                    list.add(delim)
+                }
+                list.add(cs)
+                first = false
+            }
+        }
+
+        return concat(list.toArray(CharSequence[0]))
+    }
+
+    /**
+     * Convenience method to apply a span to a Charsequence
+     */
+    public static CharSequence setSpan(final CharSequence cs, final Object span) {
+        return setSpan(cs, span, -1, -1, 0)
+    }
+
+    /**
+     * Convenience method to apply a span to a CharSequence. See {@link Spannable#setSpan(Object, Int, Int, Int)} for details.
+     *
+     * @param cs       CharSequence to apply span to
+     * @param span     the span to use. Usually a class implementing {@link android.text.style.CharacterStyle}, e.g. {@link ForegroundColorSpan}
+     * @param start    start index to add span. if <0 then 0 is used
+     * @param end      end index to add span. if <0 then cs.length() is used. if end<start, then no span is applied
+     * @param priority span priority. Values > 255 will be set to 255
+     * @return CharSequence with span applied
+     */
+    public static CharSequence setSpan(final CharSequence cs, final Object span, final Int start, final Int end, final Int priority) {
+        if (cs == null || cs.length() == 0 || span == null) {
+            return cs
+        }
+        final Spannable sp
+        if (cs is Spannable) {
+            sp = (Spannable) cs
+        } else {
+            sp = SpannableString(cs)
+        }
+        val startToUse: Int = Math.min(cs.length(), Math.max(0, start))
+        val endToUse: Int = end < 0 ? cs.length() : Math.min(cs.length(), Math.max(end, startToUse))
+        if (endToUse <= startToUse) {
+            return cs
+        }
+
+        Int spanFlags = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        spanFlags |= (Math.min(255, Math.max(0, priority)) << Spannable.SPAN_PRIORITY_SHIFT) & Spannable.SPAN_PRIORITY
+        sp.setSpan(span, startToUse, endToUse, spanFlags)
+        return sp
+    }
+
+    public static String annotateSpans(final CharSequence cs, final Func1<Object, Pair<String, String>> annotator) {
+        if (!(cs is Spanned) || cs.length() == 0) {
+            return cs.toString()
+        }
+        final Object[] spans = ((Spanned) cs).getSpans(0, cs.length(), Object.class)
+        if (spans.length == 0) {
+            return cs.toString()
+        }
+
+        val data: SortedMap<Integer, String> = TreeMap<>((i1, i2) -> -i1.compareTo(i2))
+        for (Object span : spans) {
+            val markers: Pair<String, String> = annotator == null ? null : annotator.call(span)
+            val start: Int = ((Spanned) cs).getSpanStart(span)
+            data.put(start, (data.containsKey(start) ? data.get(start) : "") + (markers == null || markers.first == null ? "" : markers.first))
+            val end: Int = ((Spanned) cs).getSpanEnd(span)
+            data.put(end, (markers == null || markers.second == null ? "" : markers.second) + (data.containsKey(end) ? data.get(end) : ""))
+        }
+
+        String result = cs.toString()
+        for (Map.Entry<Integer, String> entry : data.entrySet()) {
+            result = result.substring(0, entry.getKey()) + entry.getValue() + result.substring(entry.getKey())
+        }
+        return result
+    }
+
+    public static Boolean isEqualContent(final CharSequence cs1, final CharSequence cs2) {
+        if (cs1 == cs2) {
+            return true
+        }
+        if (cs1 == null || cs2 == null) {
+            return false
+        }
+        return cs1.toString() == (cs2.toString())
+    }
+
+
+}

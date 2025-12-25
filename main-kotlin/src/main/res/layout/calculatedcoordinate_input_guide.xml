@@ -1,0 +1,41 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.CalculatedCoordinateInputGuideView">
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/cc_guide_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
+            android:id="@+id/cc_guide_value_layout"
+            android:layout_centerInParent="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cc_guide_value"
+                style="@style/textinput_embedded"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/calccoord_guided_value"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/cc_guide_value_hiddenhint"
+            style="@style/text_label"
+            android:visibility="invisible"
+            android:text="@string/calccoord_guided_edit"
+            android:textSize="@dimen/textSize_headingPrimary"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</merge>

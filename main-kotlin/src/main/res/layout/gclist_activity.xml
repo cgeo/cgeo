@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".connector.gc.PocketQueryListActivity" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gclist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dip"
+        android:clipToPadding="false"
+        android:dividerHeight="1dip"
+        android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/gclist_item" />
+
+</LinearLayout>

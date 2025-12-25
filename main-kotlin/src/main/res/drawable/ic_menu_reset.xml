@@ -1,0 +1,11 @@
+<!-- taken (modified) from lock-reset / materialdesignicons-google -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportHeight="24"
+    android:viewportWidth="24"
+    android:tint="?android:textColorPrimary">
+     <path
+      android:fillColor="#FF000000"
+      android:pathData="M12.6,2C18.2,2 22.6,6.5 22.6,12 22.6,17.5 18.2,22 12.6,22 9.12,22 6.05,20.2 4.26,17.4L5.84,16.2C7.25,18.5 9.76,20 12.6,20 17.1,20 20.6,16.4 20.6,12 20.6,7.58 17.1,4 12.6,4 8.56,4 5.2,7.06 4.71,11H7.47L3.73,14.7 0,11H2.69C3.19,5.95 7.45,2 12.6,2"/>
+</vector>

@@ -1,0 +1,142 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.utils
+
+import androidx.annotation.NonNull
+
+import java.util.AbstractSet
+import java.util.ArrayList
+import java.util.Collection
+import java.util.HashSet
+import java.util.Iterator
+import java.util.List
+
+/**
+ * Synchronized set wrapper for the LeastRecentlyUsedMap.
+ * <br>
+ * This code is heavily based on the HashSet code that represents Map as a Set.
+ * Unfortunately HashSet does not allow to use a custom Map as its Storage.
+ * Therefore overriding removeEldestEntry() is impossible for a normal LinkedHashSet.
+ * <br>
+ * Synchronization is added to guard against concurrent modification. Iterator
+ * access has to be guarded externally or the synchronized getAsList method can be used
+ * to get a clone for iteration.
+ */
+class LeastRecentlyUsedSet<E> : AbstractSet()<E> {
+
+    private final LeastRecentlyUsedMap<E, Object> map
+    private static val PRESENT: Object = Object()
+
+    public LeastRecentlyUsedSet(final Int maxEntries, final Int initialCapacity, final Float loadFactor) {
+        // because we don't use any Map.get() methods from the Set, BOUNDED and LRU_CACHE have the exact same Behaviour
+        // So we use LRU_CACHE mode because it should perform a bit better (as it doesn't re-add explicitly)
+        map = LeastRecentlyUsedMap.LruCache<>(maxEntries, initialCapacity, loadFactor)
+    }
+
+    public LeastRecentlyUsedSet(final Int maxEntries) {
+        map = LeastRecentlyUsedMap.LruCache<>(maxEntries)
+    }
+
+    /**
+     * Copy of the HashSet code if iterator()
+     * Iterator access has to be synchronized externally!
+     *
+     * @see HashSet
+     */
+    override     public Iterator<E> iterator() {
+        return map.keySet().iterator()
+    }
+
+    /**
+     * Synchronized access to set size
+     * Copy of the HashSet code if size()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Int size() {
+        return map.size()
+    }
+
+    /**
+     * Synchronized check of set emptiness
+     * Copy of the HashSet code if isEmpty()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Boolean isEmpty() {
+        return map.isEmpty()
+    }
+
+    /**
+     * Synchronized check for containment
+     * Copy of the HashSet code if contains()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Boolean contains(final Object o) {
+        return map.containsKey(o)
+    }
+
+    /**
+     * Synchronized addition of an item
+     * Copy of the HashSet code if add()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Boolean add(final E e) {
+        if (e == null) {
+            throw IllegalArgumentException("LeastRecentlyUsedSet cannot take null element")
+        }
+        return map.put(e, PRESENT) == null
+    }
+
+    /**
+     * Synchronized removal of a contained item
+     * Copy of the HashSet code if remove()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Boolean remove(final Object o) {
+        return map.remove(o) == PRESENT
+    }
+
+    /**
+     * Synchronized removal of all elements contained in another collection.
+     */
+    override     public synchronized Boolean removeAll(final Collection<?> c) {
+        Boolean changed = false
+        for (final Object o : c) {
+            changed |= remove(o)
+        }
+        return changed
+    }
+
+    /**
+     * Synchronized clearing of the set
+     * Copy of the HashSet code if clear()
+     *
+     * @see HashSet
+     */
+    override     public synchronized Unit clear() {
+        map.clear()
+    }
+
+    /**
+     * Creates a clone as a list in a synchronized fashion.
+     *
+     * @return List based clone of the set
+     */
+    public synchronized List<E> getAsList() {
+        return ArrayList<>(this)
+    }
+
+}

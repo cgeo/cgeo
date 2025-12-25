@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="36"
+   height="36"
+   viewBox="0 0 36.000001 36.000001"
+   version="1.1"
+   id="svg4325"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="marker_backgrounds.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview4327"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="22.627417"
+     inkscape:cx="3.5134368"
+     inkscape:cy="11.22532"
+     inkscape:window-width="2472"
+     inkscape:window-height="1411"
+     inkscape:window-x="88"
+     inkscape:window-y="240"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4325"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     scale-x="1" />
+  <defs
+     id="defs4322" />
+  <rect
+     style="fill:#303f9f;stroke:none;stroke-width:0;stroke-linecap:square;stroke-linejoin:round"
+     id="background_oc"
+     width="23.4"
+     height="23.399998"
+     x="6.3000002"
+     y="6.3000011"
+     ry="2.95"
+     rx="2.95" />
+  <path
+     sodipodi:type="star"
+     style="display:inline;fill:#388e3c;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none"
+     id="background_other"
+     inkscape:flatsided="true"
+     sodipodi:sides="6"
+     sodipodi:cx="15.994999"
+     sodipodi:cy="33.315941"
+     sodipodi:r1="26.716059"
+     sodipodi:r2="23.136786"
+     sodipodi:arg1="0"
+     sodipodi:arg2="0.52359878"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     transform="matrix(0.50568822,0,0,0.50568822,9.9115175,1.1525212)"
+     d="M 42.711058,33.315941 29.353028,56.452726 H 2.6369696 L -10.72106,33.315941 2.6369696,10.179155 l 26.7160584,0 z" />
+  <circle
+     fill="#f57c00"
+     cx="18"
+     cy="18"
+     r="11.699999"
+     id="background_gc"
+     style="stroke:none;stroke-width:0.264583" />
+</svg>

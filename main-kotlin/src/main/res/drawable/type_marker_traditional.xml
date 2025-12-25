@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="13dp"
+    android:height="13dp"
+    android:viewportWidth="13"
+    android:viewportHeight="13">
+  <path
+      android:pathData="m10.208,5.637s-0.347,1.734 -0.391,1.826c-0.129,0.105 -4.152,2.086 -4.152,2.086 -0.117,0.038 -0.201,0.034 -0.275,-0.022 0,0 -1.822,-2.007 -1.889,-2.177 -0.027,-0.085 -0.017,-2.002 -0.017,-2.002z"
+      android:strokeWidth="0.463"
+      android:strokeColor="@color/cacheMarker_icon"/>
+  <path
+      android:pathData="m8.133,3.471 l2.336,1.871c0.066,0.087 -0.028,0.141 -0.028,0.141l-4.61,1.838c-0.108,0.052 -0.217,0.015 -0.275,-0.032l-2.236,-2.022c-0.198,-0.222 0.099,-0.314 0.099,-0.314l4.412,-1.492c0.176,-0.07 0.303,0.011 0.303,0.011zM10.449,5.437 L10.329,5.823c-0.084,0.082 -0.138,0.114 -0.138,0.114l-4.407,1.979c-0.201,0.073 -0.303,-0.022 -0.303,-0.022l-2.176,-2.114c-0.058,-0.054 -0.05,-0.119 -0.05,-0.119s-0.02,-0.139 -0.001,-0.574z"
+      android:fillColor="@color/cacheMarker_icon"/>
+  <path
+      android:pathData="m5.579,9.683 l0.125,-2.12"
+      android:strokeWidth="0.463"
+      android:strokeColor="@color/cacheMarker_icon"/>
+</vector>

@@ -1,0 +1,151 @@
+# We use the general android proguard config. See project.properties for details.
+
+# cgeo --------------------------------------------------------------------------------------------
+
+# Suppress notes about classes from the general config, which we don't use at all.
+-dontnote **.ILicensingService
+
+-printusage usage.txt
+
+-optimizationpasses 2
+-dontobfuscate
+-allowaccessmodification
+-optimizations !code/simplification/arithmetic,!code/allocation/variable
+
+-keep,includedescriptorclasses class cgeo.geocaching.** { *; }
+
+# The backup agent class is not called from our code.
+-keep public class cgeo.geocaching.backup.CentralBackupAgent
+
+# action providers are only referenced from XML
+-keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
+-keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
+
+# CustomProgressDialog accesses the standard dialog via reflection
+-dontnote cgeo.geocaching.ui.dialog.CustomProgressDialog
+
+# ignore warning: Ignoring InnerClasses attribute for an anonymous inner class...
+-keepattributes EnclosingMethod
+
+# Android -----------------------------------------------------------------------------------------
+
+-keep class androidx.appcompat.widget.ShareActionProvider { <init>(...); }
+
+# Apache commons ----------------------------------------------------------------------------------
+
+# apache.commons.collections has some bean related collections, which are undefined in Android
+-dontwarn java.beans.*
+# ignore reflection warnings
+-dontnote org.apache.commons.compress.**
+-dontwarn org.apache.commons.compress.**
+
+# keep some test only utils classes for the plain unit tests
+-keep class org.apache.commons.lang3.StringUtils { *; }
+-keep class org.apache.commons.io.IOUtils { *; }
+-keep class org.apache.commons.io.FileUtils { *; }
+-dontnote org.apache.commons.io.IOUtils
+-dontnote org.apache.commons.lang3.StringUtils
+# IOFileFilter references FileUtils, suppress related notes
+-dontnote org.apache.commons.io.FileUtils
+
+# commons compress
+-dontwarn java.nio.channels.SeekableByteChannel
+-dontwarn java.nio.file.attribute.FileAttribute
+-dontwarn java.io.File
+# https://issuetracker.google.com/issues/284656253#comment12
+-if class * extends org.apache.commons.compress.archivers.zip.ZipExtraField
+-keep class <1> { <init>(); }
+
+# commons text
+-dontwarn java.util.Base64
+-dontwarn java.util.Base64$Decoder
+-dontwarn java.util.Base64$Encoder
+-dontwarn javax.script.ScriptEngine
+-dontwarn javax.script.ScriptEngineManager
+
+# AssertJ -----------------------------------------------------------------------------------------
+# ignore all things in AssertJ, as long as tests are generally running fine
+-dontnote org.assertj.core.internal.**
+
+# Jackson XML -------------------------------------------------------------------------------------
+
+# jackson internal references
+-dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
+
+# this does not exist on jdk6 and is only loaded dynamically by jackson if needed
+-dontwarn java.nio.file.Path*
+
+# suggestion at https://github.com/FasterXML/jackson-docs/wiki/JacksonOnAndroid#proguard
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class com.fasterxml.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepclassmembers class * {
+     @com.fasterxml.jackson.annotation.* *;
+}
+
+# Junit -------------------------------------------------------------------------------------------
+
+# the Junit 4 library used for local tests conflicts with the Android bundled Junit 3 library
+-dontnote junit.**
+
+# Mapsforge ---------------------------------------------------------------------------------------
+
+-dontwarn com.caverock.androidsvg.R$styleable
+-dontwarn com.caverock.androidsvg.R
+-dontwarn org.kxml2.io.KXmlParser
+
+-dontnote com.caverock.androidsvg.SVG
+-dontnote org.mapsforge.map.android.input.MapZoomControls
+
+# Okhttp ------------------------------------------------------------------------------------------
+
+# OkHttp references unused classes
+-dontwarn java.nio.file.*
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.OkHttpClient$Builder
+
+# Play Services -----------------------------------------------------------------------------------
+
+# Play Service references to classes introduced in higher API levels
+-dontwarn com.google.android.gms.**
+
+# ignore reflection warnings
+-dontnote com.google.android.gms.**
+
+# RxJava ------------------------------------------------------------------------------------------
+
+# rxjava includes references to the test frameworks within their class files
+-dontwarn org.junit.**
+
+# used in tests
+-keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
+
+# Unsorted ----------------------------------------------------------------------------------------
+
+-dontwarn org.springframework.**
+-dontwarn org.tukaani.xz.**
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(...);
+}
+
+# keep Emma code coverage during debug builds, and ignore related warnings
+-dontwarn com.vladium.**
+
+# transitive needed using R8 (minifyEnabled)
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+
+# keep classes of metadata libaray (this lib heavily uses reflection)
+-keep class com.drew.** { *; }

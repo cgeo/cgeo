@@ -1,0 +1,30 @@
+O c:geo é uma aplicação de código aberto, repleta de funcionalidades e pronta a utilizar. É um utilitário não oficial para o serviço 'geocaching.com', mas também oferece suporte básico a outras plataformas de geocaching (como o Opencaching). Não precisa de um navegador web ou de exportar dados - basta instalar e começar a utilizar.
+
+Principais funcionalidades:
+- Ver caches num Mapa (em tempo real)
+- Usar o Google Maps ou o OpenStreetMap
+- Pesquisar por caches com diferentes critérios
+- Registar as caches que encontra, tanto em modo online como offline
+- Armazenar a informação de caches no seu dispositivo
+- Criar e fazer a gestão dos pontos adicionais
+- Navegar usando a bússola, mapa ou outras aplicações
+- Importar/Exportar ficheiros GPX
+- Suporte completo para trackables
+- Funcionalidades para fazer geocaching em modo offline, incluindo mapas offline
+
+O c:geo é um utilitário de geocaching poderoso, mas fácil de usar, com muitos recursos adicionais. Tudo o que precisa para começar é de uma conta em geocaching.com ou noutra plataforma de geocaching (como o Opencaching).
+Encontre caches utilizando o mapa em tempo real ou usando uma das várias funcionalidades de pesquisa.
+
+Navegue até uma cache ou a um ponto adicional de uma cache com a funcionalidade incorporada de bússola, via mapa ou transmitir as coordenadas para várias aplicações externas (ex: Radar, Google Navigation, StreetView, Locus, Navigon, Sygic e muitas mais).
+
+Armazene as informações da cache no seu dispositivo directamente de geocaching.com, bem como através da importação de ficheiros GPX para que estejam disponíveis sempre que desejar.
+Pode gerir as suas caches armazenados em diferentes listas e pode ordená-las e filtrá-las de acordo com suas necessidades.
+Caches armazenadas, juntamente com ficheiros de mapas offline ou mapas estáticos, podem ser usados para encontrar caches sem uma ligação à internet (por exemplo, quando em roaming).
+Os registos podem ser submetidos online ou armazenados offline para posterior submissão, ou exportados através de notas de campo.
+
+Procure e descubra TBs, faça a gestão do seu inventário de TBs e deixe um TB quando submete um registo de cache.
+
+Caso tenha problemas ao instalar ou a usar o c:geo, por favor veja primeiro as nossas FAQ (https://faq.cgeo.org) ou consulte o guia do utilizador (https://manual.cgeo.org).
+Se ainda tiver problemas, entre em contacto com o suporte via e-mail.
+
+Caso pretenda saber o porquê do c:geo precisar das permissões solicitadas, por favor verifique em https://www.cgeo.org/faq#permissions para uma explicação.

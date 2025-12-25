@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="84.058px"
+   height="100px"
+   viewBox="0 0 84.058 100"
+   enable-background="new 0 0 84.058 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="snowshoes.svg"><metadata
+   id="metadata2909"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2907"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="84.057999 : 50 : 1"
+     inkscape:persp3d-origin="42.028999 : 33.333333 : 1"
+     id="perspective2911" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2905"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="42.028999"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M62.235,16.116c4.445,0,8.034-3.613,8.034-8.058C70.27,3.613,66.681,0,62.235,0s-8.058,3.613-8.058,8.058  C54.178,12.503,57.79,16.116,62.235,16.116z"
+   id="path2901"
+   style="fill:#ffffff" />
+<path
+   d="M83.843,46.851c-1.402,3.232-4.397,2.258-4.397,2.258l-12.599-4.754c-1.26-0.452-2.234-1.498-2.566-2.781l-2.854-8.319  l-4.444,12.242l13.169,13.715c1.64,2.876,1.497,4.991,1.497,4.991v18.921l0,0c4.659,0,8.438,3.78,8.438,8.438  c0,4.659-3.779,8.438-8.438,8.438c-0.665,0-1.331-0.071-1.973-0.237l-27.687-6.156v-4.089l20.77-4.612V67.673L48.788,53.72  l-2.14,14.619c-0.356,1.854-1.688,3.589-2.448,4.444l-9.698,11.243c-0.143-0.119-0.333-0.119-0.523-0.095l0.523,0.095  c2.52,1.973,3.827,5.277,3.042,8.581c-1.07,4.54-5.633,7.345-10.15,6.275c-0.665-0.167-1.283-0.38-1.877-0.665L0,85.81l0.951-3.97  l23.402,0.333l11.124-12.859l3.446-25.292l7.227-19.135l-10.007,5.752l-5.966,11.695c-1.807,3.708-5.063,1.759-5.063,1.759  c-2.947-1.688-1.806-4.54-1.806-4.54l6.108-12.36c1.641-3.138,2.948-3.613,2.948-3.613l14.286-7.82  c3.108-2.139,6.721-0.475,6.721-0.475l8.225,3.114c4.112,1.474,4.278,3.779,4.278,3.779l5.087,16.282l10.958,3.875  C81.917,42.334,84.864,43.594,83.843,46.851z M71.007,96.173c0.214,0.023,0.428,0.048,0.642,0.048c2.567,0,4.659-2.092,4.659-4.659  c0-2.566-2.092-4.658-4.659-4.658v0.975c0,2.447-1.997,4.444-4.445,4.444c-2.163,0-3.874-1.569-4.278-3.613l-12.931,2.853  L71.007,96.173z M27.656,95.009c0.19,0.095,0.38,0.143,0.594,0.189c2.52,0.594,5.015-0.951,5.61-3.446  c0.451-1.901-0.333-3.804-1.83-4.873l-1.902,2.21c-1.617,1.854-4.421,2.068-6.275,0.452c-1.093-0.95-1.521-2.306-1.45-3.637  L8.248,85.667L27.656,95.009z"
+   id="path2903"
+   style="fill:#ffffff" />
+</svg>

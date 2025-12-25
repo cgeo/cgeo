@@ -1,0 +1,7 @@
+<root>
+  <item name='org.apache.commons.collections4.CollectionUtils boolean isNotEmpty(java.util.Collection&lt;?&gt;)'>
+    <annotation name='org.jetbrains.annotations.Contract'>
+      <val val="&quot;null -&gt; false&quot;" />
+    </annotation>
+  </item>
+</root>

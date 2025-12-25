@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/image_box"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:layout_marginBottom="10dip"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:visibility="visible">
+
+    <cgeo.geocaching.ui.SectionHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerAbove="true"
+        android:text="@string/log_images" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/image_add_multi"
+            style="@style/button_icon"
+            android:tooltipText="@string/log_image_selectfromstorage_tooltip"
+            android:layout_gravity="left"
+            app:icon="@drawable/ic_menu_image_multi" />
+
+        <Button
+            android:id="@+id/image_add_camera"
+            style="@style/button_icon"
+            android:tooltipText="@string/log_image_camera_tooltip"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/image_add_multi"
+            app:icon="@drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/image_add_own"
+            style="@style/button_icon"
+            android:tooltipText="@string/log_image_selectfromown_tooltip"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/image_add_camera"
+            android:visibility="gone"
+            app:icon="@drawable/ic_menu_folder_special" />
+
+    </RelativeLayout>
+
+    <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+       work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                           app:spanCount="1" -->
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/image_list"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:padding="4dip"
+            android:scrollbars="none"
+            tools:ignore="NestedScrolling"
+            tools:listitem="@layout/imagelist_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+</LinearLayout>
+

@@ -1,0 +1,30 @@
+c:geo er en opensource, uofficiel klient til geocaching.com med et fuldt sæt faciliteter, som ydermere tilbyder grundlæggende støtte til andre geocaching-platforme (såsom Opencaching). Det kræver ikke en webbrowser, og henter selv sine data. Bare start op og gå i gang.
+
+De vigtigste funktioner er:
+- Se cacher på et live-opdateret kort
+- Brug Google Maps eller OpenStreetMap
+- Find caches ud fra diverse kriterier
+- Log dine fund online eller offline
+- Gem cache-data på din smartphone/tablet
+- Opret og administrér waypoints
+- Navigér med kompas, kort eller andre apps
+- Importér/eksportér GPX-filer
+- Fuld understøttelse af trackables
+- Understøtter caching uden dataforbindelse, bl.a. med offline kort
+
+c:geo er en simpel, men stærk geocaching app med masser af muligheder. Du skal kun bruge en konto på geocaching.com eller en anden geocaching-service (som f.eks. opencaching).
+Find caches med det opdaterede kort eller med en af de mange søgefunktioner.
+
+Navigér til en geocache eller et waypoint med appens indbyggede kompas, med kortet, eller ved at sende koordinaterne til forskellige eksterne apps (f.eks. Radar, Google Navigation, Streetview, Locus, Navigon, Sygic og mange andre).
+
+Gem cachedata på din smartphone/tablet direkte fra geocaching.com eller fra en .GPX-fil, så de ligger klar når du skal bruge dem.
+Du kan organisere dine gemte caches i forskellige lister og filtrere dem efter behov.
+De gemte caches kan, sammen med offline kort eller statiske kort, bruges til at finde caches uden internetforbindelse (f.eks. under dataroaming).
+Logs kan sendes direkte eller gemmes lokalt til senere afsendelse, eller de kan eksporteres som field notes.
+
+Søg og find trackables, styr din trackable-beholdning og læg en trackable sammen med cache-logningen.
+
+Har du problemer med at installere eller bruge c:geo skal du først kigge i vores FAQ (https://faq.cgeo.org) eller brugervejledningen (https://manual.cgeo.org).
+Hvis du stadig har problemer kan du skrive til vores support på e-mail.
+
+Hvis du gerne vil vide hvorfor c:geo har brug for de tilladelser, der er anmodet om, så læs mere på: https://www.cgeo.org.

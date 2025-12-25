@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="859.72"
+    android:viewportHeight="859.72">
+  <path
+      android:pathData="m429.86,780c-93.92,-82.2 -164.06,-158.55 -210.44,-229.05 -46.38,-70.5 -69.56,-135.75 -69.56,-195.75 0,-90 28.15,-161.7 84.44,-215.1s121.48,-80.1 195.56,-80.1 139.27,26.7 195.56,80.1 84.44,125.1 84.44,215.1c0,60 -23.19,125.25 -69.56,195.75 -46.38,70.5 -116.52,146.85 -210.44,229.05z"
+      android:strokeWidth="85"
+      android:fillColor="@color/cacheMarker_border"
+      android:strokeColor="@color/cacheMarker_border"/>
+  <path
+      android:pathData="m429.86,780c-93.92,-82.2 -164.06,-158.55 -210.44,-229.05 -46.38,-70.5 -69.56,-135.75 -69.56,-195.75 0,-90 28.15,-161.7 84.44,-215.1s121.48,-80.1 195.56,-80.1 139.27,26.7 195.56,80.1 84.44,125.1 84.44,215.1c0,60 -23.19,125.25 -69.56,195.75 -46.38,70.5 -116.52,146.85 -210.44,229.05z"
+      android:strokeWidth="50"
+      android:fillColor="@color/cacheType_cgeo"
+      android:strokeColor="@color/cacheMarker_icon"/>
+  <path
+      android:pathData="m429.86,420c22,0 40.83,-7.83 56.5,-23.5s23.5,-34.5 23.5,-56.5 -7.83,-40.83 -23.5,-56.5 -34.5,-23.5 -56.5,-23.5 -40.83,7.83 -56.5,23.5 -23.5,34.5 -23.5,56.5 7.83,40.83 23.5,56.5 34.5,23.5 56.5,23.5z"
+      android:fillColor="@color/cacheMarker_icon"/>
+</vector>

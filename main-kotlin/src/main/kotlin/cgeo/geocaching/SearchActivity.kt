@@ -1,0 +1,628 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching
+
+import cgeo.geocaching.activity.AbstractNavigationBarActivity
+import cgeo.geocaching.activity.ActivityMixin
+import cgeo.geocaching.activity.Keyboard
+import cgeo.geocaching.address.AddressListActivity
+import cgeo.geocaching.connector.ConnectorFactory
+import cgeo.geocaching.connector.IConnector
+import cgeo.geocaching.connector.al.ALConnector
+import cgeo.geocaching.connector.capability.ISearchByGeocode
+import cgeo.geocaching.connector.gc.GCConnector
+import cgeo.geocaching.connector.internal.InternalConnector
+import cgeo.geocaching.connector.trackable.TrackableBrand
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode
+import cgeo.geocaching.databinding.SearchActivityBinding
+import cgeo.geocaching.filters.core.GeocacheFilterContext
+import cgeo.geocaching.filters.gui.GeocacheFilterActivity
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.search.GeocacheAutoCompleteAdapter
+import cgeo.geocaching.search.SearchAutoCompleteAdapter
+import cgeo.geocaching.search.SearchUtils
+import cgeo.geocaching.sensors.LocationDataProvider
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.storage.DataStore
+import cgeo.geocaching.ui.SearchCardView
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.ViewUtils
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.ClipboardUtils
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.utils.functions.Action1
+import cgeo.geocaching.utils.functions.Func0
+import cgeo.geocaching.utils.functions.Func1
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.SearchManager
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
+import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.ImageView
+import android.widget.ListAdapter
+import android.widget.TextView
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.cardview.widget.CardView
+
+import java.util.Locale
+import java.util.function.Consumer
+
+import de.k3b.geo.api.GeoPointDto
+import de.k3b.geo.api.IGeoPointInfo
+import de.k3b.geo.io.GeoUri
+import org.apache.commons.lang3.StringUtils
+
+class SearchActivity : AbstractNavigationBarActivity() {
+    private SearchActivityBinding binding
+
+    private static val GOOGLE_NOW_SEARCH_ACTION: String = "com.google.android.gms.actions.SEARCH_ACTION"
+    public static val ACTION_CLIPBOARD: String = "clipboard"
+    private AutoCompleteTextView searchView
+    private MenuItem searchViewItem
+    private MenuItem searchButtonItem
+    private Boolean searchPerformed
+
+    override     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
+    public final Unit onCreate(final Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState)
+
+        val intent: Intent = getIntent()
+
+        if (Intents.ACTION_GEOCACHE == (intent.getAction())) {
+            // search suggestion for a cache
+            CacheDetailActivity.startActivity(this, intent.getStringExtra(SearchManager.QUERY))
+            finish()
+            return
+        } else if (Intents.ACTION_TRACKABLE == (intent.getAction())) {
+            // search suggestion for a trackable
+            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null, null, TrackableBrand.UNKNOWN.getId())
+            finish()
+            return
+        } else if (Intent.ACTION_SEARCH == (intent.getAction()) || GOOGLE_NOW_SEARCH_ACTION == (intent.getAction()) || ACTION_CLIPBOARD == (intent.getAction())) {
+            // search query, from search toolbar or from google now
+            hideKeyboard()
+            val query: String = intent.getStringExtra(SearchManager.QUERY)
+            val isClipboardSearch: Boolean = ACTION_CLIPBOARD == (intent.getAction())
+            val keywordSearch: Boolean = (!isClipboardSearch && intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true))
+
+            if (instantSearch(query, keywordSearch, isClipboardSearch)) {
+                setResult(RESULT_OK)
+            } else {
+                // send intent back so query string is known.
+                // Strip away potential security-relevant things (see #12409)
+                intent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+
+                setResult(RESULT_CANCELED, intent)
+            }
+            finish()
+
+            return
+        }
+
+        // called from external app via
+        // * intent action view with geo: uri
+        // * click on http(s)-Link to internet map service (google-maps, openstreetmap, yandex or here)
+        val parser: GeoUri = GeoUri(GeoUri.OPT_DEFAULT)
+        val geo: IGeoPointInfo = parser.fromUri(getIntent().getDataString())
+        if (geo != null) {
+            String name = geo.getName()
+            if (name != null && name.trim().isEmpty()) {
+                name = null
+            }
+            Log.i("Received a geo intent: lat=" + geo.getLatitude() + ", lon=" + geo.getLongitude() + ", name=" + name
+                    + " form " + getIntent().getDataString())
+            if (!GeoPointDto.isEmpty(geo)) {
+                // non-fuzzy-geo that already has lat/lon => search via lat/lon
+                CacheListActivity.startActivityCoordinates(this, Geopoint(geo.getLatitude(), geo.getLongitude()), name)
+            } else if (name != null) {
+                // fuzzy geo with search-query and without lat/lon => search via address
+                findByAddressFn(name)
+            }
+            finish()
+        }
+
+        setTheme()
+        binding = SearchActivityBinding.inflate(getLayoutInflater())
+
+        // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
+        setContentView(binding.getRoot())
+
+        // set title in code, as the activity needs a hard coded title due to the intent filters
+        setTitle(res.getString(R.string.search))
+        init()
+    }
+
+    override     protected Unit onResume() {
+        super.onResume()
+        if (null != searchView) {
+            if (searchPerformed) {
+                // search triggered from search field -> return to main screen
+                searchViewItem.collapseActionView()
+            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput() == ("GC") && searchView.getHint() == (getString(R.string.search_geo))))) {
+                // search triggered from suggestion without any input in search field -> return to main screen
+                searchViewItem.collapseActionView()
+            } else if (searchViewItem.isActionViewExpanded()) {
+                // search triggered from suggestion -> hide keyboard
+                searchView.clearFocus()
+            } else {
+                binding.gridLayout.removeAllViews()
+                init()
+            }
+        }
+        searchPerformed = false
+    }
+
+    override     public Int getSelectedBottomItemId() {
+        return MENU_SEARCH
+    }
+
+    /**
+     * Performs a search for query either as geocode, trackable code or keyword
+     *
+     * @param nonTrimmedQuery   String to search for
+     * @param keywordSearch     Set to true if keyword search should be performed if query isn't GC or TB
+     * @param isClipboardSearch Set to true if search should try to extract a geocode from the search string
+     * @return true if a search was performed, else false
+     */
+    private Boolean instantSearch(final String nonTrimmedQuery, final Boolean keywordSearch, final Boolean isClipboardSearch) {
+        val query: String = StringUtils.trim(nonTrimmedQuery)
+
+        // try to interpret query as geocode
+        if (instantSearchGeocache(query, isClipboardSearch)) {
+            return true
+        }
+
+        // try to interpret query as geocode
+        if (instantSearchTrackable(query, keywordSearch)) {
+            return true
+        }
+
+        // keyword fallback, if desired by caller
+        if (keywordSearch) {
+            CacheListActivity.startActivityKeyword(this, query)
+            ActivityMixin.overrideTransitionToFade(this)
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     * try to interpret query as a geocode
+     *
+     * @param query             Trimmed string to search for
+     * @param isClipboardSearch Set to true if search should try to extract a geocode from the search string
+     * @return true if geocache was found
+     */
+    private Boolean instantSearchGeocache(final String query, final Boolean isClipboardSearch) {
+        IConnector connector = null
+
+        // first check if this was a scanned URL
+        String geocode = ConnectorFactory.getGeocodeFromURL(query)
+        if (!StringUtils.isEmpty(geocode)) {
+            connector = ConnectorFactory.getConnector(geocode)
+        }
+
+        // otherwise see if this is a pure geocode
+        if (!(connector is ISearchByGeocode)) {
+            geocode = StringUtils.upperCase(query)
+            connector = ConnectorFactory.getConnector(geocode)
+        }
+
+        // otherwise try to extract a geocode from text
+        if (!(connector is ISearchByGeocode) && isClipboardSearch) {
+            geocode = ConnectorFactory.getGeocodeFromText(query)
+            connector = ConnectorFactory.getConnector(geocode)
+        }
+
+        // Finally if a geocache was found load it
+        if (connector is ISearchByGeocode && geocode != null) {
+            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US))
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     * try to interpret query as trackable
+     *
+     * @param query         Trimmed string to search for
+     * @param keywordSearch Set to true if keyword search should be performed if query isn't GC or TB
+     * @return true if trackable was found
+     */
+    private Boolean instantSearchTrackable(final String query, final Boolean keywordSearch) {
+        String trackableCode = ""
+
+        // Check if the query is a TB code
+        TrackableBrand trackableBrand = ConnectorFactory.getTrackableConnector(query).getBrand()
+        if (trackableBrand != TrackableBrand.UNKNOWN) {
+            trackableCode = query
+        }
+
+        // otherwise check if the query contains a TB code
+        if (trackableBrand == TrackableBrand.UNKNOWN) {
+            val tbCode: String = ConnectorFactory.getTrackableFromURL(query)
+            if (StringUtils.isNotBlank(tbCode)) {
+                trackableBrand = ConnectorFactory.getTrackableConnector(tbCode).getBrand()
+                trackableCode = tbCode
+            }
+        }
+
+        // check if the query contains a TB tracking code
+        if (trackableBrand == TrackableBrand.UNKNOWN) {
+            val tbTrackingCode: TrackableTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(query)
+            if (!tbTrackingCode.isEmpty()) {
+                trackableBrand = tbTrackingCode.brand
+                trackableCode = tbTrackingCode.trackingCode
+            }
+        }
+
+        // Finally if a trackable was found load it
+        if (trackableBrand != TrackableBrand.UNKNOWN && !StringUtils.isEmpty(trackableCode)) {
+            val trackablesIntent: Intent = Intent(this, TrackableActivity.class)
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableCode.toUpperCase(Locale.US))
+            trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId())
+            if (keywordSearch) { // keyword fallback, if desired by caller
+                trackablesIntent.putExtra(Intents.EXTRA_KEYWORD, query)
+            }
+            startActivity(trackablesIntent)
+            return true
+        }
+
+        return false
+    }
+
+    @SuppressLint("SetTextI18n")
+    private SearchCardView addSearchCardWithField(final Int title, final Int suggestionIcon, @StringRes final Integer recentPostfix, final Consumer<String> searchFunction, final Func1<String, String[]> suggestionFunction, final Func0<String[]> historyFunction, final Action1<String> deleteFunction, final InputFilter inputFilter) {
+        return addSearchCard(title, suggestionIcon).addOnClickListener(() -> {
+            // show search field
+            searchViewItem.setVisible(true)
+            searchViewItem.expandActionView()
+            searchButtonItem.setVisible(true)
+            searchView.setMinWidth(((View) searchView.getParent()).getWidth())
+            binding.mostRecent.setVisibility(View.GONE)
+
+            // icon in search field
+            val drw: Drawable = AppCompatResources.getDrawable(this, suggestionIcon)
+            drw.setTint(getResources().getColor(R.color.colorTextActionBar))
+            drw.setBounds(0, 0, (Int) searchView.getTextSize(), (Int) searchView.getTextSize())
+            searchView.setCompoundDrawables(drw, null, null, null)
+            searchView.setCompoundDrawablePadding(16)
+            searchView.setHint(title)
+
+            // Submit function
+            searchView.setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH && (null == event || event.getAction() == KeyEvent.ACTION_DOWN)) {
+                    storeMostRecent(recentPostfix, getSearchFieldInput())
+                    searchFunction.accept(getSearchFieldInput())
+                    searchPerformed = true
+                    return true
+                }
+                return false
+            })
+            searchButtonItem.setOnMenuItemClickListener(v -> {
+                storeMostRecent(recentPostfix, getSearchFieldInput())
+                searchFunction.accept(getSearchFieldInput())
+                searchPerformed = true
+                return true
+            })
+
+            // Default value
+            searchView.setText("")
+
+            // suggestion handler
+            binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
+                val searchTerm: String = (String) parent.getItemAtPosition(position)
+                searchFunction.accept(searchTerm)
+            })
+            binding.suggestionList.setOnItemLongClickListener((parent, view, position, id) -> {
+                val searchTerm: String = (String) parent.getItemAtPosition(position)
+                searchView.setText(searchTerm)
+                searchView.setSelection(searchView.getText().length())
+                return true
+            })
+
+            if (title == R.string.search_geo) {
+                searchView.setText("GC")
+                binding.suggestionList.setAdapter(GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction))
+                val clipboardGeocode: String = getGeocodeFromClipboard()
+                if (null != clipboardGeocode) {
+                    binding.suggestionList.postDelayed(() -> {
+                        binding.clipboardGeocode.setVisibility(View.VISIBLE)
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.text)).setText(clipboardGeocode)
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.info)).setText(R.string.from_clipboard)
+                        ((ImageView) binding.clipboardGeocode.findViewById(R.id.icon)).setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.search_clipboard))
+                        binding.clipboardGeocode.setOnClickListener(v -> findByGeocodeFn(clipboardGeocode))
+                    }, 0)
+                }
+            } else if (title == R.string.search_kw) {
+                binding.suggestionList.setAdapter(GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction))
+                binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
+                    val searchTerm: String = (String) parent.getItemAtPosition(position)
+                    // suggestions are a mix of geocodes and keywords, differentiate them by layout used
+                    if (null == view.findViewById(R.id.info)) {
+                        findByKeywordFn(searchTerm)
+                    } else {
+                        findByGeocodeFn(searchTerm)
+                    }
+                })
+            } else {
+                binding.suggestionList.setAdapter(SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction, suggestionIcon, historyFunction, deleteFunction))
+            }
+            checkMostRecent(recentPostfix)
+            updateSuggestions()
+
+            // caps keyboard
+            if (inputFilter != null) {
+                searchView.setFilters(InputFilter[] { inputFilter })
+            } else {
+                searchView.setFilters(InputFilter[] { })
+            }
+
+            // show keyboard and place cursor
+            searchView.setSelection(searchView.getText().length())
+            Keyboard.show(this, searchView)
+        })
+    }
+
+    private Unit storeMostRecent(@StringRes final Integer recentPostfix, final String value) {
+        if (recentPostfix != null) {
+            Settings.putStringDirect("last_" + getString(recentPostfix), value)
+        }
+    }
+
+    private Unit checkMostRecent(@StringRes final Integer recentPostfix) {
+        if (recentPostfix != null) {
+            val mostRecent: String = Settings.getStringDirect("last_" + getString(recentPostfix), null)
+            if (mostRecent != null) {
+                binding.mostRecent.setVisibility(View.VISIBLE)
+                ((TextView) binding.mostRecent.findViewById(R.id.text)).setText(mostRecent)
+                ((TextView) binding.mostRecent.findViewById(R.id.info)).setText(R.string.most_recent)
+                ((ImageView) binding.mostRecent.findViewById(R.id.icon)).setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_menu_recent_history))
+
+                binding.mostRecent.setOnClickListener(v ->  {
+                    searchView.setText(mostRecent)
+                    searchView.setSelection(searchView.getText().length())
+                })
+            }
+        }
+    }
+
+    private Unit updateSuggestions() {
+        val adapter: ListAdapter = binding.suggestionList.getAdapter()
+
+        if (adapter is ArrayAdapter) {
+            ((ArrayAdapter<?>) adapter).getFilter().filter(searchView.getText())
+        }
+
+        binding.clipboardGeocode.setVisibility(View.GONE)
+    }
+
+    private SearchCardView addSearchCard(final Int title, final Int icon) {
+        val cardView: SearchCardView = (SearchCardView) getLayoutInflater().inflate(R.layout.search_card, binding.gridLayout, false)
+        cardView.setIcon(icon)
+        cardView.setTitle(title)
+        binding.gridLayout.addView(cardView)
+        return cardView
+    }
+
+    private Unit init() {
+
+        // don't populate if already populated
+        if (binding.gridLayout.getChildCount() > 0) {
+            return
+        }
+
+        val geocodeCard: CardView = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, R.string.pref_search_history_geocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode, GeocacheAutoCompleteAdapter::getLastOpenedCachesArray, null, InputFilter.AllCaps())
+        geocodeCard.setOnLongClickListener(v -> {
+            val geocode: String = getGeocodeFromClipboard()
+            if (null != geocode) {
+                findByGeocodeFn(geocode)
+                return true
+            }
+            return false
+        })
+
+        val kwCard: SearchCardView = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, null, this::findByKeywordFn, DataStore::getSuggestionsKeyword, () -> Settings.getHistoryList(R.string.pref_search_history_keyword), value -> Settings.removeFromHistoryList(R.string.pref_search_history_keyword, value), null)
+        // mitigation for #13312
+        if (!Settings.isGCPremiumMember()) {
+            val activeCount: Int = ConnectorFactory.getActiveConnectors().size()
+            val compareCount: Int = (GCConnector.getInstance().isActive() ? 1 : 0) + (ALConnector.getInstance().isActive() ? 1 : 0) + (InternalConnector.getInstance().isActive() ? 1 : 0)
+            if (GCConnector.getInstance().isActive() && (activeCount == compareCount)) {
+                // only gc.com connectors active, and user has basic member status => disable keyword search
+                kwCard.addOnClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_kw_disabled_hint)).show())
+                ((ImageView) kwCard.findViewById(R.id.icon)).getDrawable().setTint(getResources().getColor(R.color.colorTextHint))
+            }
+        }
+
+        addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
+                .addOnClickListener(this::onClickCoordinates)
+
+        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, R.string.pref_search_history_address, this::findByAddressFn, null, () -> Settings.getHistoryList(R.string.pref_search_history_address), value -> Settings.removeFromHistoryList(R.string.pref_search_history_address, value), null)
+
+        addSearchCardWithField(R.string.search_hbu, R.drawable.search_owner, null, this::findByOwnerFn, DataStore::getSuggestionsOwnerName, () -> Settings.getHistoryList(R.string.pref_search_history_owner), value -> Settings.removeFromHistoryList(R.string.pref_search_history_owner, value), null)
+
+        addSearchCardWithField(R.string.search_finder, R.drawable.search_finder, null, this::findByFinderFn, DataStore::getSuggestionsFinderName, () -> Settings.getHistoryList(R.string.pref_search_history_finder), value -> Settings.removeFromHistoryList(R.string.pref_search_history_finder, value), null)
+
+        addSearchCard(R.string.search_filter, R.drawable.ic_menu_filter)
+                .addOnClickListener(() -> GeocacheFilterActivity.selectFilter(this, GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE), null, false))
+                .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show())
+
+        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), InputFilter.AllCaps())
+
+        addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
+                .addOnClickListener(() -> findByOwnerFn(Settings.getUserName()))
+
+        addSearchCard(R.string.caches_history, R.drawable.ic_menu_recent_history)
+                .addOnClickListener(() -> startActivity(CacheListActivity.getHistoryIntent(this)))
+    }
+
+    private String getGeocodeFromClipboard() {
+        val clipboardText: String = ClipboardUtils.getText()
+
+        final String geocode
+        if (ConnectorFactory.getConnector(clipboardText) is ISearchByGeocode) {
+            geocode = clipboardText
+        } else {
+            geocode = ConnectorFactory.getGeocodeFromText(clipboardText)
+        }
+        if (!StringUtils.isEmpty(geocode)) {
+            return geocode
+        } else {
+            return null
+        }
+    }
+
+    private Unit onClickCoordinates() {
+        CoordinateInputDialog.showLocation(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords())
+    }
+
+    public Unit onUpdateCoordinates(final Geopoint input) {
+        try {
+            CacheListActivity.startActivityCoordinates(this, input, null)
+            ActivityMixin.overrideTransitionToFade(this)
+        } catch (final Geopoint.ParseException e) {
+            showToast(res.getString(e.resource))
+        }
+    }
+    private Unit findByKeywordFn(final String keyText) {
+        if (StringUtils.isBlank(keyText)) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show()
+            return
+        }
+
+        Settings.addToHistoryList(R.string.pref_search_history_keyword, keyText)
+        CacheListActivity.startActivityKeyword(this, keyText)
+        ActivityMixin.overrideTransitionToFade(this)
+    }
+
+    private Unit findByAddressFn(final String addressSearchText) {
+        if (StringUtils.isBlank(addressSearchText)) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show()
+            return
+        }
+
+        val addressesIntent: Intent = Intent(this, AddressListActivity.class)
+        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addressSearchText)
+        startActivity(addressesIntent)
+        ActivityMixin.overrideTransitionToFade(this)
+    }
+
+    private Unit findByOwnerFn(final String userName) {
+        if (StringUtils.isBlank(userName)) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show()
+            return
+        }
+
+        Settings.addToHistoryList(R.string.pref_search_history_owner, userName)
+        CacheListActivity.startActivityOwner(this, userName)
+        ActivityMixin.overrideTransitionToFade(this)
+    }
+
+    private Unit findByFinderFn(final String usernameText) {
+        if (StringUtils.isBlank(usernameText)) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show()
+            return
+        }
+
+        Settings.addToHistoryList(R.string.pref_search_history_finder, usernameText)
+
+        CacheListActivity.startActivityFinder(this, usernameText)
+        ActivityMixin.overrideTransitionToFade(this)
+    }
+
+    private Unit findByGeocodeFn(final String geocode) {
+        if (StringUtils.isBlank(geocode) || geocode.equalsIgnoreCase("GC")) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_gccode).show()
+            return
+        }
+
+        if (ConnectorFactory.anyConnectorActive()) {
+            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US))
+        } else {
+            showToast(getString(R.string.warn_no_connector))
+        }
+    }
+
+    private Unit findTrackableFn(final String trackableText) {
+        if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_tb).show()
+            return
+        }
+        Settings.addToHistoryList(R.string.pref_search_history_trackable, trackableText)
+        val trackablesIntent: Intent = Intent(this, TrackableActivity.class)
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US))
+        startActivity(trackablesIntent)
+    }
+
+    private String getSearchFieldInput() {
+        return StringUtils.trimToEmpty(searchView.getText().toString())
+    }
+
+    override     protected Unit onActivityResult(final Int requestCode, final Int resultCode, final Intent data) {
+        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            CacheListActivity.startActivityFilter(this)
+            ActivityMixin.overrideTransitionToFade(this)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    override     public final Boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.search_activity_options, menu)
+        searchViewItem = menu.findItem(R.id.menu_gosearch)
+        searchViewItem.setOnActionExpandListener(MenuItem.OnActionExpandListener() {
+            override             public Boolean onMenuItemActionExpand(final MenuItem item) {
+                binding.activityContent.showNext()
+                return true
+            }
+
+            override             public Boolean onMenuItemActionCollapse(final MenuItem item) {
+                searchViewItem.setVisible(false)
+                searchButtonItem.setVisible(false)
+                binding.activityContent.showPrevious()
+                return true
+            }
+        })
+        searchButtonItem = menu.findItem(R.id.menu_gosearch_icon)
+        searchView = (AutoCompleteTextView) searchViewItem.getActionView()
+        if (null != searchView) {
+            searchView.setBackground(AppCompatResources.getDrawable(this, R.drawable.mark_transparent))
+            SearchUtils.setSearchViewColor(searchView)
+
+            // configure keyboard
+            searchView.setInputType(InputType.TYPE_CLASS_TEXT)
+            searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH)
+            searchView.addTextChangedListener(ViewUtils.createSimpleWatcher((s) -> updateSuggestions()))
+        }
+        return true
+    }
+}

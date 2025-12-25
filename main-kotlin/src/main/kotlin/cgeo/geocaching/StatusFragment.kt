@@ -1,0 +1,93 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching
+
+import cgeo.geocaching.databinding.StatusBinding
+import cgeo.geocaching.network.StatusUpdater
+import cgeo.geocaching.network.StatusUpdater.Status
+import cgeo.geocaching.utils.AndroidRxUtils
+import cgeo.geocaching.utils.Log
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.res.Resources
+import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+import androidx.annotation.NonNull
+import androidx.fragment.app.Fragment
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+
+class StatusFragment : Fragment() {
+
+    private val statusSubscription: CompositeDisposable = CompositeDisposable()
+    private StatusBinding binding
+
+    override     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = StatusBinding.inflate(getLayoutInflater(), container, false)
+        val statusGroup: ViewGroup = binding.getRoot()
+        statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
+                .subscribe(status -> {
+                    if (status == Status.NO_STATUS) {
+                        statusGroup.setVisibility(View.GONE)
+                        return
+                    }
+
+                    val res: Resources = getResources()
+                    val packageName: String = getActivity().getPackageName()
+
+                    if (status.icon != null) {
+                        @SuppressLint("DiscouragedApi") // use of getIdentifier is intended to interact with our notification server
+                        val iconId: Int = res.getIdentifier(status.icon, "drawable", packageName)
+                        if (iconId != 0) {
+                            binding.statusIcon.setImageResource(iconId)
+                            binding.statusIcon.setVisibility(View.VISIBLE)
+                        } else {
+                            Log.w("StatusHandler: could not find icon corresponding to @drawable/" + status.icon)
+                            binding.statusIcon.setVisibility(View.GONE)
+                        }
+                    } else {
+                        binding.statusIcon.setVisibility(View.GONE)
+                    }
+
+                    String message = status.message
+                    if (status.messageId != null) {
+                        @SuppressLint("DiscouragedApi") // use of getIdentifier is intended to interact with our notification server
+                        val messageId: Int = res.getIdentifier(status.messageId, "string", packageName)
+                        if (messageId != 0) {
+                            message = res.getString(messageId)
+                        }
+                    }
+
+                    binding.statusMessage.setText(message)
+                    statusGroup.setVisibility(View.VISIBLE)
+
+                    if (status.url != null) {
+                        statusGroup.setOnClickListener(v -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(status.url)))); // don't use ShareUtils here. E.g. we want to redirect directly to PlayStore even if "use WebView" is set
+                    } else {
+                        statusGroup.setClickable(false)
+                    }
+                }))
+        return statusGroup
+    }
+
+    override     public Unit onDestroyView() {
+        statusSubscription.clear()
+        super.onDestroyView()
+    }
+
+}

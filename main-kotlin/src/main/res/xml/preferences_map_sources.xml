@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="@drawable/settings_map"
+    android:summary="@string/settings_summary_map_sources"
+    android:title="@string/settings_title_map_sources"
+    app:key="@string/preference_screen_map_sources">
+
+    <PreferenceCategory
+        android:title="@string/settings_title_map_data"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/init_mapsource_select"
+            android:key="@string/pref_tileprovider"
+            android:summary="%s"
+            android:title="@string/init_mapsource_select"
+            app:iconSpaceReserved="false" />
+        <MultiSelectListPreference
+            android:key="@string/pref_tileprovider_hidden"
+            android:title="@string/settings_hide_tileproviders_title"
+            android:summary="@string/settings_hide_tileproviders_summary"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/settings_unifiedMapVariants_title"
+            android:key="@string/pref_unifiedMapVariants"
+            android:summary="%s"
+            android:title="@string/settings_unifiedMapVariants_title"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:key="@string/pref_vtmBackgroundTransparent"
+            android:title="@string/settings_vtm_background_transparent_title"
+            android:summary="@string/settings_vtm_background_transparent_summary"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.TextPreference
+            android:defaultValue=""
+            android:key="@string/pref_userDefinedTileProviderUri"
+            android:title="@string/settings_userDefinedTileProvider"
+            android:summary="@string/settings_userDefinedTileProviderUri"
+            app:iconSpaceReserved="false" />
+
+        <!-- legacy map settings starting here -->
+        <CheckBoxPreference
+            android:key="@string/pref_useLegacyMap"
+            android:title="@string/init_title_useLegacyMap"
+            android:summary="@string/init_summary_useLegacyMap"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:title="@string/init_mapsource_select_legacy"
+            android:summary="%s"
+            android:defaultValue="0"
+            android:dialogTitle="@string/init_mapsource_select"
+            android:key="@string/pref_mapsource"
+            android:dependency="@string/pref_useLegacyMap"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_offline_maps"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="@string/pref_fakekey_info_offline_maps"
+            android:title="@string/settings_info_offline_maps_title"
+            android:summary="@string/settings_info_offline_maps"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_start_downloader"
+            android:title="@string/downloadmap_title"
+            android:summary="@string/downloadmap_info"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_mapDownloadsKeepTemporaryFiles"
+            android:summary="@string/downloadmap_keep_temporary_files_summary"
+            android:title="@string/downloadmap_keep_temporary_files"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_mapAutoDownloadsInterval"
+            android:summary="@string/init_updateinterval_description"
+            android:title="@string/init_updateinterval_title"
+            android:defaultValue="@integer/map_updateinterval_default"
+            app:max="@integer/map_updateinterval_max"
+            app:minValueDescription="@string/switch_off"
+            app:logScaling="true"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="@string/pref_persistablefolder_offlinemaps"
+            android:title="@string/init_map_directory_description"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_map_themes"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="@string/pref_fakekey_info_offline_mapthemes"
+            android:summary="@string/settings_info_themes"
+            android:title="@string/settings_info_themes_title"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_persistablefolder_offlinemapthemes"
+            android:title="@string/init_rendertheme_folder"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_renderthemefolder_synctolocal"
+            android:summary="@string/init_summary_renderthemefolder_synctolocal"
+            android:title="@string/init_renderthemefolder_synctolocal"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_map_hillshading"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="@string/pref_fakekey_info_offline_maphillshading"
+            android:summary="@string/settings_info_hillshading"
+            android:title="@string/settings_info_hillshading_title"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_persistablefolder_offlinemapshading"
+            android:title="@string/init_mapshading_folder"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:key="@string/pref_maphillshading_hq"
+            android:defaultValue="false"
+            android:title="@string/init_hillshading_hq"
+            android:summary="@string/init_summary_hillshading_hq"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_map_other"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_map_osm_multithreaded"
+            android:summary="@string/init_summary_map_osm_multithreaded"
+            android:title="@string/init_map_osm_multithreaded"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

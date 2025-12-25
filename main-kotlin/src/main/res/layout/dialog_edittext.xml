@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/input_frame"
+    style="@style/textinput_edittext_singleline">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input"
+        style="@style/textinput_embedded_singleline"
+        android:inputType="text"
+        android:hint="" tools:ignore="LabelFor" /> <!-- hint needs to be set by caller -->
+</com.google.android.material.textfield.TextInputLayout>

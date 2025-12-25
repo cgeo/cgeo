@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="36.583px"
+   viewBox="0 0 100 36.583"
+   enable-background="new 0 0 100 36.583"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="boat.svg"><metadata
+   id="metadata9"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs7"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 18.2915 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="100 : 18.2915 : 1"
+     inkscape:persp3d-origin="50 : 12.194333 : 1"
+     id="perspective11" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview5"
+   showgrid="false"
+   inkscape:zoom="5.35"
+   inkscape:cx="50"
+   inkscape:cy="18.2915"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M99.743,14.61l-25.45,0.674L65.058,0L33.012,0.582v4.932l7.549-0.209l6.165,10.573L0.867,16.982  c0,0-1.012-0.058-0.849,0.907l7.107,18.332c0.558,0.117,1.134,0.187,1.727,0.187c3.042,0,5.694-1.681,7.247-4.199  c1.541,2.577,4.246,4.292,7.328,4.292c2.838,0,5.362-1.465,6.944-3.699l-0.076-0.162c1.57,2.396,4.176,3.943,7.125,3.943  c3.071,0,5.77-1.699,7.305-4.27l-0.023,0.129c1.582,2.396,4.188,3.966,7.143,3.966c3.117,0,5.851-1.769,7.374-4.397l-0.023,0.047  c1.536,2.605,4.258,4.351,7.375,4.351c3.024,0,5.688-1.681,7.241-4.193c1.535,2.571,4.239,4.286,7.322,4.286  c2.838,0,5.362-1.465,6.944-3.699l0.081-0.104L99.65,15.494C99.65,15.494,100.372,14.47,99.743,14.61z M55.275,15.668L48.796,5.304  l14.447-0.442l6.281,10.422L55.275,15.668z"
+   id="path3"
+   style="fill:#ffffff" />
+</svg>

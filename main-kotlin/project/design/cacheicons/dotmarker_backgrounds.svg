@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 9.9999998 10"
+   id="dot_marker"
+   version="1.1"
+   sodipodi:docname="dot_background.svg"
+   width="10"
+   height="10"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="30.291667"
+     inkscape:cx="3.2352132"
+     inkscape:cy="9.309491"
+     inkscape:window-width="2472"
+     inkscape:window-height="1411"
+     inkscape:window-x="88"
+     inkscape:window-y="240"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="dot_marker"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       position="12.0124,11"
+       orientation="-1,0"
+       id="guide1698"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <g
+     id="g2453"
+     transform="matrix(0.5,0,0,0.5,-6.3933964,-0.99174701)"
+     style="stroke-width:2" />
+  <rect
+     id="dot_background_oc"
+     width="10"
+     height="10"
+     rx="2.5"
+     fill="#ffffff"
+     stroke-width="0"
+     x="0"
+     y="6.0395358e-08"
+     ry="2.5"
+     style="fill:#303f9f;fill-opacity:1" />
+  <path
+     d="M 11.0124,5 8.0062501,10 H 1.9937502 L -1.0124,5 1.9937502,0 h 6.0124999 z"
+     fill="#388e3c"
+     stroke-width="0.74998"
+     id="dot_background_other" />
+  <circle
+     fill="#f57c00"
+     cx="5"
+     cy="5"
+     r="5"
+     id="dot_background_gc"
+     style="stroke-width:1" />
+</svg>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_detailsPrimary"
+            android:paddingBottom="20dp">
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/copymovechoices"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/copymove_justselect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:checked="true"
+                android:text="@string/contentstorage_selectfolder_dialog_choice_justselect" />
+
+            <RadioButton
+                android:id="@+id/copymove_move"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:text="@string/contentstorage_selectfolder_dialog_choice_move" />
+
+            <RadioButton
+                android:id="@+id/copymove_copy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:text="@string/contentstorage_selectfolder_dialog_choice_copy" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+</ScrollView>

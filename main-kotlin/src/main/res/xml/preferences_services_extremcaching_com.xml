@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_ec"
+    android:title="@string/settings_title_ec" >
+
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_connectorECActive"
+            android:title="@string/settings_service_activate"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_title_appearance"
+        app:iconSpaceReserved="false" >
+        <ListPreference
+            android:defaultValue="1"
+            android:dependency="@string/pref_connectorECActive"
+            android:dialogTitle="@string/init_ec_icons"
+            android:entries="@array/ECIcons"
+            android:entryValues="@array/ECIconsValues"
+            android:key="@string/pref_ec_icons"
+            android:title="@string/init_ec_icons"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

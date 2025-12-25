@@ -1,0 +1,125 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.filters.gui
+
+import cgeo.geocaching.R
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.IConversion
+import cgeo.geocaching.sensors.LocationDataProvider
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.ui.ContinuousRangeSlider
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.ViewUtils
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog
+import cgeo.geocaching.ui.ViewUtils.dpToPixel
+
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.LinearLayout
+
+import org.apache.commons.lang3.tuple.ImmutablePair
+
+class DistanceFilterViewHolder : BaseFilterViewHolder()<DistanceGeocacheFilter> {
+
+
+    private val maxDistance: Int = Settings.useImperialUnits() ? Math.round(500f / IConversion.MILES_TO_KILOMETER) : 500
+    private val conversion: Float = Settings.useImperialUnits() ? IConversion.MILES_TO_KILOMETER : 1f
+
+    private ContinuousRangeSlider slider
+    private CheckBox useCurrentPosition
+    private Geopoint location
+    private Button setCoordsButton
+
+    override     public View createView() {
+
+        val ll: LinearLayout = LinearLayout(getActivity())
+        ll.setOrientation(LinearLayout.VERTICAL)
+
+        useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null)
+        useCurrentPosition.setChecked(true)
+        useCurrentPosition.setOnClickListener(v -> toggleCurrent())
+        location = LocationDataProvider.getInstance().currentGeo().getCoords()
+
+        setCoordsButton = ViewUtils.createButton(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_coordinates), R.layout.button_coordinate_view)
+        setCoordsButton.setEnabled(false)
+        final ViewGroup.LayoutParams ll1 = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        setCoordsButton.setLayoutParams(ll1)
+        ViewUtils.setCoordinates(location, setCoordsButton)
+        setCoordsButton.setOnClickListener(v -> setCoordinates())
+        ll.addView(setCoordsButton)
+
+        slider = ContinuousRangeSlider(getActivity())
+        slider.setScale(-0.2f, maxDistance + 0.2f, f -> {
+            if (f <= 0) {
+                return "0"
+            }
+            if (f > maxDistance) {
+                return ">" + maxDistance
+            }
+            return "" + Math.round(f)
+        }, 6, 1)
+        slider.setRange(-0.2f, maxDistance + 0.2f)
+
+        final LinearLayout.LayoutParams llp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(20))
+        ll.addView(slider, llp)
+
+        return ll
+    }
+
+    override     public Unit setViewFromFilter(final DistanceGeocacheFilter filter) {
+        useCurrentPosition.setChecked(filter.isUseCurrentPosition())
+        if (filter.getCoordinate() != null) {
+            location = filter.getCoordinate()
+        }
+        setCoordsButton.setEnabled(!filter.isUseCurrentPosition())
+        ViewUtils.setCoordinates(location, setCoordsButton)
+        slider.setRange(
+                filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
+                filter.getMaxRangeValue() == null ? maxDistance + 500f : filter.getMaxRangeValue() / conversion)
+    }
+
+    override     public DistanceGeocacheFilter createFilterFromView() {
+        val filter: DistanceGeocacheFilter = createFilter()
+        filter.setUseCurrentPosition(useCurrentPosition.isChecked())
+        filter.setCoordinate(location)
+        val range: ImmutablePair<Float, Float> = slider.getRange()
+        filter.setMinMaxRange(range.left, range.right , 0f, (Float) maxDistance, value -> (Float) Math.round(value * conversion))
+        return filter
+    }
+
+    private Unit toggleCurrent() {
+        if (useCurrentPosition.isChecked()) {
+            location = LocationDataProvider.getInstance().currentGeo().getCoords()
+            ViewUtils.setCoordinates(location, setCoordsButton)
+            setCoordsButton.setEnabled(false)
+        } else {
+            setCoordsButton.setEnabled(true)
+        }
+    }
+
+    private Unit setCoordinates() {
+
+        CoordinateInputDialog.showLocation(getActivity(), this::onDialogClosed, location)
+    }
+
+    public Unit onDialogClosed(final Geopoint input) {
+        // Handle the data from the dialog
+        if (input.isValid()) {
+            this.location = input
+            ViewUtils.setCoordinates(location, setCoordsButton)
+        }
+    }
+}

@@ -1,0 +1,30 @@
+c:geo açık kaynak kodlu, çok çeşitli özelliklere sahip, çalışmaya her zaman hazır, geocaching.com için resmi olmayan bir programdır ve diğer geocaching platformlarına (Opencaching gibi) temel destek sunar. Bir web tarayıcısı veya dışa aktarım gerektirmez - sadece kurun ve hemen başlayın.
+
+Temel özellikler:
+-Cache'leri canlı haritada görüntüleyin
+- Google Haritaları veya OpenStreetMap kullanın
+-Değişik kriterlere göre cache'leri arayın
+-Bulmalarınızı çevrimiçi veya çevrimdışı kaydedin
+-Cache bilgilerinizi cihazınıza kaydedin
+-Yol noktası oluşturun ve düzenleyin
+-Pusula, harita veya diğer uygulamaları kullanarak yönünüzü bulun
+-GPX dosyalarını içe/dışa aktarın
+- Trackablelar için tam destek
+-Çevrimdışı haritaları da içeren çevrimdışı özellikler
+
+Birçok ek özellikleriyle beraber c:geo basit ama güçlü bir Geocaching sağlayıcısıdır. Başlamak için tek ihtiyacınız olan şey geocaching.com veya başka geocaching platformunda (Opencaching gibi) bir hesabınızın olmasıdır.
+Canlı haritayı kullanarak ya da arama özelliklerinden birini kullanarak cache'leri bulun.
+
+Kutuya veya yol noktasına haritayla, dahili pusula özelliğiyle veya koordinatları harici uygulamalardan birine aktararak(örn. Radar, Google Haritalar, StreetView, Locus, Navigon, Sygic ve daha fazlası) gidiniz.
+
+Kutu bilgilerini doğrudan geocaching.com adresinden ve istediğiniz zaman kullanabilmeniz için GPX dosyasını içe aktarım yoluyla cihazınızda depolayın.
+Depolanmış kutularınızı farklı listelerde yönetebilir, ihtiyaçlarınıza göre sıralayabilir ve filtreleyebilirsiniz.
+Depolanmış kutularla birlikte, çevrim dışı harita dosyalarıyla veya statik haritalarla birlikte internet erişimi olmadığı zaman da kutuları bulabilirsiniz (örn. roaming yaparken).
+Kayıtlar çevrim içi olarak paylaşılabilir veya çevrim dışı olarak daha sonra bildirmek için veya saha notlarıyla birlikte dışa aktarılmak üzere depolanabilir.
+
+Trackable arayın ve keşfedin, trackable envanterinizi yönetin ve kutu kaydı girerken bir trackable bırakın.
+
+Eğer c:geo uygulamasını kullanırken veya kurulumunu yaparken bir problemle karşılaşırsanız lütfen önce SSS sayfamıza bakın (https://faq.cgeo.org) ya da kullanıcı rehberine göz atın (https://manual.cgeo.org).
+Hala sorunlarınız varsa, e-posta yoluyla destek ile iletişime geçiniz.
+
+c:geo uygulamasının neden istenen izinlere ihtiyacı olduğunu öğrenmek istiyorsanız, bir açıklama için lütfen https://www.cgeo.org/faq#permissions adresini kontrol edin.

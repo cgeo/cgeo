@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/author"
+        style="@style/logitem_author"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/detail_box"
+            android:layout_width="@dimen/logItemLeftColumnOuterWidth"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|top"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="@dimen/logItemLeftColumnInnerWidth"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:orientation="vertical"
+                android:padding="3dip" >
+
+                <TextView
+                    android:id="@+id/added"
+                    style="@style/logitem_property"/>
+
+                <TextView
+                    android:id="@+id/type"
+                    style="@style/logitem_property" />
+
+                <TextView
+                    android:id="@+id/count_or_location"
+                    style="@style/logitem_property"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/log_mark"
+                style="@style/logitem_mark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/log_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/detail_box"
+            android:orientation="vertical"
+            android:paddingTop="3dip"
+            android:paddingLeft="3dip">
+
+            <TextView
+                android:id="@+id/gcinfo"
+                style="@style/logitem_property"
+                android:visibility="gone"
+                android:gravity="left"
+                android:layout_gravity="left"
+                android:textSize="@dimen/textSize_detailsPrimary" />
+
+            <cgeo.geocaching.ui.ExpandableTextView
+                android:id="@+id/log"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"/>
+
+            <TextView
+                android:id="@+id/log_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_marginTop="3dip"
+                android:drawablePadding="3dip"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                app:drawableLeftCompat="@drawable/log_img_icon" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

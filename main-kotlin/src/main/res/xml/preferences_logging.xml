@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="@drawable/settings_pen"
+    android:summary="@string/settings_summary_logging"
+    android:title="@string/settings_title_logging"
+    app:key="@string/preference_screen_logging">
+
+    <PreferenceCategory
+        android:title="@string/init_signature"
+        app:iconSpaceReserved="false">
+        <cgeo.geocaching.settings.TemplateTextPreference
+            android:key="@string/pref_signature"
+            android:title="@string/init_signature"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_sigautoinsert"
+            android:title="@string/init_sigautoinsert"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/preference_category_logging_logtemplates"
+        android:title="@string/init_log_templates"
+        app:iconSpaceReserved="false">
+        <!-- Filled dynamically -->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_category_logging_other"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_trackautovisit"
+            android:summary="@string/init_summary_trackautovisit"
+            android:title="@string/init_trackautovisit"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_log_offline"
+            android:summary="@string/init_summary_log_offline"
+            android:title="@string/init_log_offline"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_offlinelogs_homescreen"
+            android:summary="@string/init_summary_offlinelogs_homescreen"
+            android:title="@string/init_offlinelogs_homescreen"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.TextPreference
+            android:defaultValue=""
+            android:key="@string/pref_log_image_default_prefix"
+            android:title="@string/init_log_image_default_prefix_title"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

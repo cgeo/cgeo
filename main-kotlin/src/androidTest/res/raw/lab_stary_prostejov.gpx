@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="GeoGet 2.11.4.816, plugin LabForGg, tulak" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xsi:schemaLocation="https://www.geoget.cz/GpxExtensions/v2 https://www.geoget.cz/GpxExtensions/v2/geoget.xsd http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www8.garmin.com/xmlschemas/GpxExtensionsv3.xsd">
+ <metadata>
+   <desc>Geoget data file</desc>
+   <time>2020-11-01T11:16:06.220</time>
+ </metadata>
+
+ <wpt lat="49.474266666667" lon="17.125233333333">
+  <time>2020-11-01T00:00:00.000</time>
+  <name>GC8DAEP-0</name>
+  <desc><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / První Wichterlova továrna - WI by marram.cz (1/1)]]></desc>
+  <url>https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b</url>
+  <urlname><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / První Wichterlova továrna - WI by marram.cz]]></urlname>
+  <link href="http://coord.info/GC8DAEP">
+    <text><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / První Wichterlova továrna - WI by marram.cz]]></text>
+  </link>
+  <sym>Geocache</sym>
+  <type>Geocache|Lab Cache</type>
+  <extensions>
+    <groundspeak:cache id="7374397"  available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / První Wichterlova továrna - WI]]></groundspeak:name>
+      <groundspeak:placed_by><![CDATA[marram.cz]]></groundspeak:placed_by>
+      <groundspeak:owner id="2218825"><![CDATA[marram.cz]]></groundspeak:owner>
+      <groundspeak:type>Lab Cache</groundspeak:type>
+      <groundspeak:container>Not chosen</groundspeak:container>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Czechia</groundspeak:country>
+      <groundspeak:state><![CDATA[Olomoucký kraj]]></groundspeak:state>
+      <groundspeak:short_description html="True"><![CDATA[<a href="https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b">Otevření série v oficiální aplikaci</a><br><hr>[CZ]
+Továrna na stroje Wichterle a Kovářík a.s. vznikla 22. prosince 1918 sloučením samostatných strojíren na výrobu zemědělských strojů F. Wichterle a F. a J. Kovařík, akc. spol. a stala se v tehdejším Československu největším producentem hospodářských strojů. V letech 1924-1940 vyráběla i automobily. V roce 1948 byla firma znárodněna a stal se z ní podnik Agrostroj Prostějov.
+
+Tyto LAB keše vás provedou po místech spojených s továrnou Wichterle a Kovářík a. s.
+
+[EN] 
+The Wichterle and Kovářík machinery factory, was created on 22 December 1918 by the merger of what were originally separate machinery plants to produce agricultural machinery F. Wichterle and F. and J. Kovařík, akc. spol. and became the largest producer of agricultural machinery in the Czechoslovakia. It also produced cars between 1924 and 1940. In 1948, the company was nationalized and became Agrostroj Prostějov.
+
+This LAB caches will take you around the sites associated with the Wichterle and Kovářík a.s. factory.]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[[CZ]
+František Wichterle (1840-1891) začal v roce 1882 na tomto místě stavět tovární budovy pro svou firmu "První prostějovská továrna na hospodářské stroje a parní motory, slévárna na kov a železo F. Wichterle". Právě tato továrna se později věnovala výrobě automobilů WIKOV.
+
+Úkol: nalevo od budov hledej rozváděče (u plotu stavebnin).
+
+[EN]
+František Wichterle (1840-1891) began building factory buildings on this site in 1882 for his company "The First Plain Factory for Agricultural Machines and Steam Engines, Metal Foundry and Iron F. Wichterle". It was this factory that later devoted itself to the production of WIKOV cars.
+
+Task: look for switchboards to the left of the buildings (by the fence of building materials).]]></groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gpxg:GeogetExtension xmlns:gpxg="https://www.geoget.cz/GpxExtensions/v2">
+      <gpxg:Tags>
+      <gpxg:Tag Category="LABid"><![CDATA[c4380f0f-d9af-402a-88fd-e5b39268f81b]]></gpxg:Tag>
+      <gpxg:Tag Category="LABsmartLink"><![CDATA[https://labs.geocaching.com/goto/0177e2b2-1522-489a-975f-efd626693c8c]]></gpxg:Tag>
+      <gpxg:Tag Category="LABcoord"><![CDATA[49.4742, 17.1248333333333]]></gpxg:Tag>
+      </gpxg:Tags>
+    </gpxg:GeogetExtension>
+  </extensions>
+ </wpt>
+
+ <wpt lat="49.473683333333" lon="17.122350000000">
+  <time>2020-11-01T00:00:00.000</time>
+  <name>GC8DAEP-1</name>
+  <desc><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Druhá Wichterlova továrna - WII by marram.cz (1/1)]]></desc>
+  <url>https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b</url>
+  <urlname><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Druhá Wichterlova továrna - WII by marram.cz]]></urlname>
+  <link href="http://coord.info/GC8DAEP">
+    <text><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Druhá Wichterlova továrna - WII by marram.cz]]></text>
+  </link>
+  <sym>Geocache</sym>
+  <type>Geocache|Lab Cache</type>
+  <extensions>
+    <groundspeak:cache id="7374398"  available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Druhá Wichterlova továrna - WII]]></groundspeak:name>
+      <groundspeak:placed_by><![CDATA[marram.cz]]></groundspeak:placed_by>
+      <groundspeak:owner id="2218825"><![CDATA[marram.cz]]></groundspeak:owner>
+      <groundspeak:type>Lab Cache</groundspeak:type>
+      <groundspeak:container>Not chosen</groundspeak:container>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Czechia</groundspeak:country>
+      <groundspeak:state><![CDATA[Olomoucký kraj]]></groundspeak:state>
+      <groundspeak:short_description html="True"><![CDATA[<a href="https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b">Otevření série v oficiální aplikaci</a><br><hr>[CZ]
+Továrna na stroje Wichterle a Kovářík a.s. vznikla 22. prosince 1918 sloučením samostatných strojíren na výrobu zemědělských strojů F. Wichterle a F. a J. Kovařík, akc. spol. a stala se v tehdejším Československu největším producentem hospodářských strojů. V letech 1924-1940 vyráběla i automobily. V roce 1948 byla firma znárodněna a stal se z ní podnik Agrostroj Prostějov.
+
+Tyto LAB keše vás provedou po místech spojených s továrnou Wichterle a Kovářík a. s.
+
+[EN] 
+The Wichterle and Kovářík machinery factory, was created on 22 December 1918 by the merger of what were originally separate machinery plants to produce agricultural machinery F. Wichterle and F. and J. Kovařík, akc. spol. and became the largest producer of agricultural machinery in the Czechoslovakia. It also produced cars between 1924 and 1940. In 1948, the company was nationalized and became Agrostroj Prostějov.
+
+This LAB caches will take you around the sites associated with the Wichterle and Kovářík a.s. factory.]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[[CZ]
+V roce 1888 František Wichterle odkoupil konkurenční podnik bývalých zaměstnanců "Továrna na hospodářské stroje Zaoral a spol.". Vznikla tak druhá Wichterlova továrna.
+
+Úkol: nalevo od vchodu hledej rozváděč firmy CETIN.
+
+[EN]
+In 1888, František Wichterle purchased a rival business of former employees, "The agriculturalc machine factory Zaoral and Associates." It created the second Wichterle's factory.
+
+Task: look for CETIN's switchboard to the left of the entrance.]]></groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gpxg:GeogetExtension xmlns:gpxg="https://www.geoget.cz/GpxExtensions/v2">
+      <gpxg:Tags>
+      <gpxg:Tag Category="LABid"><![CDATA[c4380f0f-d9af-402a-88fd-e5b39268f81b]]></gpxg:Tag>
+      <gpxg:Tag Category="LABsmartLink"><![CDATA[https://labs.geocaching.com/goto/0177e2b2-1522-489a-975f-efd626693c8c]]></gpxg:Tag>
+      <gpxg:Tag Category="LABcoord"><![CDATA[49.4742, 17.1248333333333]]></gpxg:Tag>
+      </gpxg:Tags>
+    </gpxg:GeogetExtension>
+  </extensions>
+ </wpt>
+
+ <wpt lat="49.475250000000" lon="17.129100000000">
+  <time>2020-11-01T00:00:00.000</time>
+  <name>GC8DAEP-2</name>
+  <desc><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Továrna F. a J. Kavářík - KOV by marram.cz (1/1)]]></desc>
+  <url>https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b</url>
+  <urlname><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Továrna F. a J. Kavářík - KOV by marram.cz]]></urlname>
+  <link href="http://coord.info/GC8DAEP">
+    <text><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Továrna F. a J. Kavářík - KOV by marram.cz]]></text>
+  </link>
+  <sym>Geocache</sym>
+  <type>Geocache|Lab Cache</type>
+  <extensions>
+    <groundspeak:cache id="7374399"  available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Továrna F. a J. Kavářík - KOV]]></groundspeak:name>
+      <groundspeak:placed_by><![CDATA[marram.cz]]></groundspeak:placed_by>
+      <groundspeak:owner id="2218825"><![CDATA[marram.cz]]></groundspeak:owner>
+      <groundspeak:type>Lab Cache</groundspeak:type>
+      <groundspeak:container>Not chosen</groundspeak:container>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Czechia</groundspeak:country>
+      <groundspeak:state><![CDATA[Olomoucký kraj]]></groundspeak:state>
+      <groundspeak:short_description html="True"><![CDATA[<a href="https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b">Otevření série v oficiální aplikaci</a><br><hr>[CZ]
+Továrna na stroje Wichterle a Kovářík a.s. vznikla 22. prosince 1918 sloučením samostatných strojíren na výrobu zemědělských strojů F. Wichterle a F. a J. Kovařík, akc. spol. a stala se v tehdejším Československu největším producentem hospodářských strojů. V letech 1924-1940 vyráběla i automobily. V roce 1948 byla firma znárodněna a stal se z ní podnik Agrostroj Prostějov.
+
+Tyto LAB keše vás provedou po místech spojených s továrnou Wichterle a Kovářík a. s.
+
+[EN] 
+The Wichterle and Kovářík machinery factory, was created on 22 December 1918 by the merger of what were originally separate machinery plants to produce agricultural machinery F. Wichterle and F. and J. Kovařík, akc. spol. and became the largest producer of agricultural machinery in the Czechoslovakia. It also produced cars between 1924 and 1940. In 1948, the company was nationalized and became Agrostroj Prostějov.
+
+This LAB caches will take you around the sites associated with the Wichterle and Kovářík a.s. factory.]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[[CZ]
+Josef Kovářík (1868-1940) založil v roce 1894 svoji dílnu na výrobu pluhů a secích strojů v nedalekém sousedství druhé Wichterlovy továrny. Po roce se k němu připojil bratr František (1865-1942) a vznikl tak podnik "F. a J. Kovářík Prostějov".
+
+Úkol: za pravou částí brány je pomník obětem druhé světové války, naproti němu hledej nade dveřmi bílou ceduli.
+
+[EN]
+Josef Kovářík (1868-1940) founded his workshop in 1894 to produce plows and seed machines in the nearby neighbourhood of the second Wichterle's factory. After a year, brother František (1865-1942) joined him, creating "F. and J. Kovářík Prostějov".
+
+Mission: Behind the right side of the gate is a monument to the victims of World War II, opposite it, look for a white sign above the door.]]></groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gpxg:GeogetExtension xmlns:gpxg="https://www.geoget.cz/GpxExtensions/v2">
+      <gpxg:Tags>
+      <gpxg:Tag Category="LABid"><![CDATA[c4380f0f-d9af-402a-88fd-e5b39268f81b]]></gpxg:Tag>
+      <gpxg:Tag Category="LABsmartLink"><![CDATA[https://labs.geocaching.com/goto/0177e2b2-1522-489a-975f-efd626693c8c]]></gpxg:Tag>
+      <gpxg:Tag Category="LABcoord"><![CDATA[49.4742, 17.1248333333333]]></gpxg:Tag>
+      </gpxg:Tags>
+    </gpxg:GeogetExtension>
+  </extensions>
+ </wpt>
+
+ <wpt lat="49.472600000000" lon="17.124566666667">
+  <time>2020-11-01T00:00:00.000</time>
+  <name>GC8DAEP-3</name>
+  <desc><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Reprezentativní prodejna automobilky by marram.cz (1/1)]]></desc>
+  <url>https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b</url>
+  <urlname><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Reprezentativní prodejna automobilky by marram.cz]]></urlname>
+  <link href="http://coord.info/GC8DAEP">
+    <text><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Reprezentativní prodejna automobilky by marram.cz]]></text>
+  </link>
+  <sym>Geocache</sym>
+  <type>Geocache|Lab Cache</type>
+  <extensions>
+    <groundspeak:cache id="7374400"  available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Reprezentativní prodejna automobilky]]></groundspeak:name>
+      <groundspeak:placed_by><![CDATA[marram.cz]]></groundspeak:placed_by>
+      <groundspeak:owner id="2218825"><![CDATA[marram.cz]]></groundspeak:owner>
+      <groundspeak:type>Lab Cache</groundspeak:type>
+      <groundspeak:container>Not chosen</groundspeak:container>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Czechia</groundspeak:country>
+      <groundspeak:state><![CDATA[Olomoucký kraj]]></groundspeak:state>
+      <groundspeak:short_description html="True"><![CDATA[<a href="https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b">Otevření série v oficiální aplikaci</a><br><hr>[CZ]
+Továrna na stroje Wichterle a Kovářík a.s. vznikla 22. prosince 1918 sloučením samostatných strojíren na výrobu zemědělských strojů F. Wichterle a F. a J. Kovařík, akc. spol. a stala se v tehdejším Československu největším producentem hospodářských strojů. V letech 1924-1940 vyráběla i automobily. V roce 1948 byla firma znárodněna a stal se z ní podnik Agrostroj Prostějov.
+
+Tyto LAB keše vás provedou po místech spojených s továrnou Wichterle a Kovářík a. s.
+
+[EN] 
+The Wichterle and Kovářík machinery factory, was created on 22 December 1918 by the merger of what were originally separate machinery plants to produce agricultural machinery F. Wichterle and F. and J. Kovařík, akc. spol. and became the largest producer of agricultural machinery in the Czechoslovakia. It also produced cars between 1924 and 1940. In 1948, the company was nationalized and became Agrostroj Prostějov.
+
+This LAB caches will take you around the sites associated with the Wichterle and Kovářík a.s. factory.]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[[CZ]
+K propagaci vyráběných automobilů, elektromotorů, odstředivých čerpadel aj. byl v areálu automobilky (první Wichterlova továrna), poblíž vjezdové brány ze Svatoplukovy ulice, vystavěn v roce 1928 reprezentativní "výstavní pavilon" - funkcionalisticky řešená firemní prodejna.
+
+Úkol: hledej kovové zábradlí na čelní straně budovy.
+
+[EN]
+To promote manufactured cars, electric motors, centrifugal pumps, etc., a representative "exhibition pavilion" - a functionalist-designed company shop - was built in 1928 on the grounds of the car factory (the first Wichterla factory), near the entrance gate from Svatoplukova street.
+
+Task: look for metal railings on the front of the building.]]></groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gpxg:GeogetExtension xmlns:gpxg="https://www.geoget.cz/GpxExtensions/v2">
+      <gpxg:Tags>
+      <gpxg:Tag Category="LABid"><![CDATA[c4380f0f-d9af-402a-88fd-e5b39268f81b]]></gpxg:Tag>
+      <gpxg:Tag Category="LABsmartLink"><![CDATA[https://labs.geocaching.com/goto/0177e2b2-1522-489a-975f-efd626693c8c]]></gpxg:Tag>
+      <gpxg:Tag Category="LABcoord"><![CDATA[49.4742, 17.1248333333333]]></gpxg:Tag>
+      </gpxg:Tags>
+    </gpxg:GeogetExtension>
+  </extensions>
+ </wpt>
+
+ <wpt lat="49.473383333333" lon="17.120600000000">
+  <time>2020-11-01T00:00:00.000</time>
+  <name>GC8DAEP-4</name>
+  <desc><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Vila F. Kováříka by marram.cz (1/1)]]></desc>
+  <url>https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b</url>
+  <urlname><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Vila F. Kováříka by marram.cz]]></urlname>
+  <link href="http://coord.info/GC8DAEP">
+    <text><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Vila F. Kováříka by marram.cz]]></text>
+  </link>
+  <sym>Geocache</sym>
+  <type>Geocache|Lab Cache</type>
+  <extensions>
+    <groundspeak:cache id="7374401"  available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name><![CDATA[Starý Prostějov - Wichterle a Kovářík a.s. (WIKOV) / Vila F. Kováříka]]></groundspeak:name>
+      <groundspeak:placed_by><![CDATA[marram.cz]]></groundspeak:placed_by>
+      <groundspeak:owner id="2218825"><![CDATA[marram.cz]]></groundspeak:owner>
+      <groundspeak:type>Lab Cache</groundspeak:type>
+      <groundspeak:container>Not chosen</groundspeak:container>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Czechia</groundspeak:country>
+      <groundspeak:state><![CDATA[Olomoucký kraj]]></groundspeak:state>
+      <groundspeak:short_description html="True"><![CDATA[<a href="https://labs.geocaching.com/adventures/details/c4380f0f-d9af-402a-88fd-e5b39268f81b">Otevření série v oficiální aplikaci</a><br><hr>[CZ]
+Továrna na stroje Wichterle a Kovářík a.s. vznikla 22. prosince 1918 sloučením samostatných strojíren na výrobu zemědělských strojů F. Wichterle a F. a J. Kovařík, akc. spol. a stala se v tehdejším Československu největším producentem hospodářských strojů. V letech 1924-1940 vyráběla i automobily. V roce 1948 byla firma znárodněna a stal se z ní podnik Agrostroj Prostějov.
+
+Tyto LAB keše vás provedou po místech spojených s továrnou Wichterle a Kovářík a. s.
+
+[EN] 
+The Wichterle and Kovářík machinery factory, was created on 22 December 1918 by the merger of what were originally separate machinery plants to produce agricultural machinery F. Wichterle and F. and J. Kovařík, akc. spol. and became the largest producer of agricultural machinery in the Czechoslovakia. It also produced cars between 1924 and 1940. In 1948, the company was nationalized and became Agrostroj Prostějov.
+
+This LAB caches will take you around the sites associated with the Wichterle and Kovářík a.s. factory.]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[[CZ]
+Majitelé továrny bydleli ve vilách, které stojí poblíž továren. Bratři Lambert a Karel Wichterlovi (vedli továrnu po smrti otce Františka) si postavili vilu v dnešní ulici Svatoplukova, poblíž později postavené podnikové prodejny. Josef Kovářík měl vilu na začátku dnešní ulice Vápenice. Tato Labka je věnována vile Františka Kováříka. Tu navrhl architekt Emil Králík v duchu wagneriánské moderny a byla postavena v letech 1910-1911.
+
+Úkol: za plotem hledej na levé straně na zdi plaketu s textem.
+
+[EN]
+The brothers Lambert and Karel Wichterle (they led the factory after father František died) built a villa in what is now Svatoplukova street, near a later-built company shop. Josef Kovářík had a villa at the beginning of today's Vápenice street. This Lab cache is dedicated to the villa of František Kovářík. Designed by architect Emil Králík in the spirit of Wagnerian modernity, it was built in 1910-1911.
+
+Task: Behind the fence, look for a plaque with text on the left.]]></groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gpxg:GeogetExtension xmlns:gpxg="https://www.geoget.cz/GpxExtensions/v2">
+      <gpxg:Tags>
+      <gpxg:Tag Category="LABid"><![CDATA[c4380f0f-d9af-402a-88fd-e5b39268f81b]]></gpxg:Tag>
+      <gpxg:Tag Category="LABsmartLink"><![CDATA[https://labs.geocaching.com/goto/0177e2b2-1522-489a-975f-efd626693c8c]]></gpxg:Tag>
+      <gpxg:Tag Category="LABcoord"><![CDATA[49.4742, 17.1248333333333]]></gpxg:Tag>
+      </gpxg:Tags>
+    </gpxg:GeogetExtension>
+  </extensions>
+ </wpt>
+
+</gpx>

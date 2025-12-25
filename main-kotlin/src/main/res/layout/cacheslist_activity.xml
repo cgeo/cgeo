@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_content"
+    tools:context=".CacheListActivity" >
+
+    <include layout="@layout/filter_sort_bar" />
+
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dip"
+        android:clipToPadding="false"
+        android:dividerHeight="1dip"
+        android:divider="@color/colorSeparator"
+        android:fastScrollEnabled="false"
+        android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay"
+        android:visibility="gone"
+        tools:listitem="@layout/cacheslist_item"
+        tools:visibility="visible"/>
+
+</LinearLayout>

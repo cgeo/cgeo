@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" creator="Groundspeak, Inc. All Rights Reserved. http://www.groundspeak.com" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Waypoints for Cache Listings Generated from Geocaching.com</name>
+  <desc>This is a list of supporting waypoints for caches generated from Geocaching.com</desc>
+  <author>Various users from Geocaching.com</author>
+  <email>contact@geocaching.com</email>
+  <url>http://www.geocaching.com</url>
+  <urlname>Geocaching - High Tech Treasure Hunting</urlname>
+  <time>2011-09-16T21:13:24.7355791Z</time>
+  <keywords>cache, geocache, waypoints</keywords>
+  <bounds minlat="49.317517" minlon="8.545083" maxlat="49.317517" maxlon="8.545083" />
+  <wpt lat="49.317517" lon="8.545083">
+    <time>2011-08-05T11:35:49.217</time>
+    <name>0031J2H</name>
+    <cmt>Original Coordinatesy</cmt>
+    <desc>Original Coordinates</desc>
+    <sym>Original Coordinates</sym>
+    <type>Waypoint|Original Coordinates</type>
+  </wpt>
+</gpx>

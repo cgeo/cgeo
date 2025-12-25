@@ -1,0 +1,30 @@
+c:geo este un client neoficial, open source, cu toate funcțiile și mereu gata de pornire pentru geocaching.com și oferă suport de bază pentru alte platforme de geocaching (cum ar fi Opencaching). Nu necesită browser web sau exporturi - doar instalează-l și poți începe imediat.
+
+Funcții principale:
+- Vizualizare geocutii pe o Hartă Live
+- Use Google Maps or OpenStreetMap
+- Căutare de geocutii în funcție de criterii diverse
+- Însemnări de jurnale online sau offline
+- Salvarea locală a informațiilor unei cutii pe dispozitivul dumneavoastră
+- Creare și administrare de Puncte Intermediare (waypoints)
+- Navigare folosind busola, harta sau alte aplicații
+- Import / Export de fișiere GPX
+Suport integral pentru obiecte călătoare (trackables)
+- Funcții de geocaching offline inclusiv hărți offline
+
+c:geo este un client geocaching simplu de folosit dar foarte performant și cu multiple funcții suplimentare. Tot ce ai nevoie pentru a începe este un cont existent pe geocaching.com sau pe o altă platformă de geocaching (cum ar fi opencaching).
+Găsește cache-uri folosind Harta Live sau una din multiplele opțiuni de căutare.
+
+Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+
+Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
+You can manage your stored caches in different lists and can sort and filter them according to your needs.
+Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
+Logs can be posted online or stored offline for later submission or exported via field notes.
+
+Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+
+If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
+If there are still problems, contact support via email.
+
+If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org/faq#permissions for an explanation.

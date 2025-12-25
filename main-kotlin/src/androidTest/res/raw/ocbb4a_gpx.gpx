@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - https://www.opencaching.de/" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd https://github.com/opencaching/gpx-extension-v1 https://raw.githubusercontent.com/opencaching/gpx-extension-v1/master/schema.xsd http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache listing generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>kontakt@opencaching.de</email>
+  <url>www.opencaching.de</url>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Österreich und der Schweiz</urlname>
+  <time>2017-10-22T18:05:59Z</time>
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+  <wpt lat="52.45687" lon="13.32267">
+    <time>2011-01-16T00:00:00Z</time>
+    <name>OCBB4A</name>
+    <desc>SSVC: Berlin - Spiegelwand</desc>
+    <src>www.opencaching.de</src>
+    <url>https://www.opencaching.de/viewcache.php?cacheid=151043</url>
+    <urlname>SSVC: Berlin - Spiegelwand</urlname>
+    <sym>Geocache</sym>
+    <type>Geocache|Virtual Cache</type>
+    <groundspeak:cache id="151043" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+      <groundspeak:name>SSVC: Berlin - Spiegelwand</groundspeak:name>
+      <groundspeak:placed_by>mic@</groundspeak:placed_by>
+      <groundspeak:owner id="103599">mic@</groundspeak:owner>
+      <groundspeak:type>Virtual Cache</groundspeak:type>
+      <groundspeak:container>Virtual</groundspeak:container>
+      <groundspeak:attributes>
+           <groundspeak:attribute id="106" inc="1">Only loggable at Opencaching</groundspeak:attribute>
+           <groundspeak:attribute id="130" inc="1">Point of interest</groundspeak:attribute>
+           <groundspeak:attribute id="135" inc="1">Without GPS</groundspeak:attribute>
+           <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
+           <groundspeak:attribute id="62" inc="0">Seasonal access</groundspeak:attribute>
+           <groundspeak:attribute id="15" inc="1">Available during winter</groundspeak:attribute>
+      </groundspeak:attributes>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Germany</groundspeak:country>
+      <groundspeak:state>Berlin</groundspeak:state>
+      <groundspeak:short_description html="True">Serie SightSeeingVirtuals Berlin</groundspeak:short_description>
+      <groundspeak:long_description html="True">&lt;p&gt;&lt;strong&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Die Serie SightSeeingVirtualCaches&lt;img title="SSVC" src="https://www.opencaching.de/images/uploads/8402FA22-E851-11DF-B2AC-00163E3AC09B.png" alt="SSVC" width="105" height="105" align="right" /&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;SightSeeingVirtualCaches sind virtuelle Caches, die euch Sehenswürdigkeiten in ganz Deutschland zeigen. Die Caches dieser Serie sind immer OC-Only und nur mit einem Passwort, das an der Cachelocation zu finden ist, logbar.&lt;br /&gt;&lt;span style="color:#ff0000;"&gt;Ihr könnt gerne mit einem Foto loggen&lt;/span&gt;, das ist aber keine Pflicht.&lt;br /&gt;Weitere Caches der Serie SightSeeingVirtualCaches findet ihr über diese &lt;a title="Suche" href="search.php?searchto=searchbyname&amp;amp;showresult=1&amp;amp;expert=0&amp;amp;output=HTML&amp;amp;utf8=1&amp;amp;sort=byname&amp;amp;orderRatingFirst=0&amp;amp;f_userowner=0&amp;amp;f_userfound=0&amp;amp;f_inactive=1&amp;amp;f_ignored=1&amp;amp;f_otherPlatforms=0&amp;amp;cachetype=4&amp;amp;cachesize=7&amp;amp;difficultymin=0&amp;amp;difficultymax=0&amp;amp;terrainmin=0&amp;amp;terrainmax=0&amp;amp;cache_attribs=30%3B6&amp;amp;cache_attribs_not=7&amp;amp;cachename=SSVC:"&gt;Suche&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;&lt;p&gt;&lt;br /&gt;&lt;strong&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Die Spiegelwand&lt;br /&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style="border:2px solid #000000;" title="Spiegelwand" src="https://www.opencaching.de/images/uploads/1B3657DA-24A8-11E0-B2AC-00163E3AC09B.jpg" border="2" alt="Spiegelwand" width="720" height="276" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Die Spiegelwand sollte an die Synagoge der jüdischen Bürger an der Düppelstraße und den Holocaust in Berlin erinnern. Nach einem Wettbewerb gewann 1992 der Entwurf über eine hochpolierte Chromstahlwand mit 1723 eingravierten Namen von jüdischen Bürgern aus Steglitz. &lt;/span&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;(Quelle: &lt;a href="http://de.wikipedia.org/wiki/Berlin-Steglitz"&gt;Wikipedia&lt;/a&gt;).&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Der Cache&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Um diesen virtuellen Cache zu loggen, begebt euch zu den Koordinaten und sucht nach Max Lewinski. Loggt mit dem Ort, nach dem die Sraße benannt ist, in der Max wohnte.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:arial, helvetica, sans-serif;font-size:small;"&gt;Bitte zeigt Respekt an diesem Ort der Erinnerung.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;© &lt;a href='https://www.opencaching.de/viewprofile.php?userid=103599' target='_blank'&gt;mic@&lt;/a&gt;, &lt;a href='https://www.opencaching.de/viewcache.php?cacheid=151043' target='_blank'&gt;Opencaching.de&lt;/a&gt;, &lt;a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/' target='_blank'&gt;CC BY-NC-ND&lt;/a&gt;, Stand: 22.10.2017; alle Logeinträge © jeweiliger Autor&lt;/em&gt;&lt;/p&gt;
+&lt;br /&gt;</groundspeak:long_description>
+      <groundspeak:logs>
+      <groundspeak:log id="1187179">
+        <groundspeak:date>2017-07-31T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="131120">Euni</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Heute bin ich an diesem Gedenkort vorbeigekommen. Es ist wichtig, an die Verbrechen, die wir Deutschen verübt haben, zu erinnern. Ich trauere um die Opfer.&lt;/p&gt;
+&lt;p&gt;Euni&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1175355">
+        <groundspeak:date>2017-05-06T14:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="339702">Alfons Zitterbacke</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;&lt;span style="font-size:small;"&gt;Als Newbie war das war mein erster Cache. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-size:small;"&gt;War gar nicht so schwer. Genau richtig für Anfänger.&lt;/span&gt;&lt;img title="Cool" src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" border="0" alt="Cool" /&gt;&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1169531">
+        <groundspeak:date>2017-04-01T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="310045">pix_1</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Kleiner "Cache" für zwischen durch, gesucht wurde auch nciht wirklich lange ;-)&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Danke fürs "legen"! :)&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Grüße&lt;/p&gt;
+&lt;p&gt;pix_1&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1168649">
+        <groundspeak:date>2017-03-26T10:00:58Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="328820">religk</groundspeak:finder>
+        <groundspeak:text encoded="False">Auch wenn ich früher öfters hier vorbei gekommen bin, war mir die Wand nie so richtig aufgefallen. Jetzt hatte ich mal die Zeit gefunden sie ernsthaft zu betrachten. Dabei ließ sich der Name dann auch recht schnell finden.</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1134450">
+        <groundspeak:date>2016-08-02T19:30:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="197648">kirchwitz</groundspeak:finder>
+        <groundspeak:text encoded="False">Die Gedenkwand war zwar bereits bekannt, jedoch nicht, dass auch ein Cache darauf Bezug nimmt. Aus über tausend Namen den gesuchten zu erspähen, schien zunächst wie eine abendfüllende Aufgabe zu klingen, doch unter der Annahme, dass die D/T-Wertung mit Bedacht gewählt worden ist, fand sich der gesuchte Name an sehr fairer Position und konnte nach kurzer Zeit entdeckt werden. Schöne Idee für einen virtuellen Cache an diesem Ort der Erinnerung.&lt;br /&gt;
+&lt;br /&gt;
+Dankeschön!&lt;br /&gt;
+</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1117956">
+        <groundspeak:date>2016-05-04T22:26:52Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="328547">Lining30</groundspeak:finder>
+        <groundspeak:text encoded="False">Danke fürs Zeigen. Ich bin zwar selten in der Gegend, aber als Berliner lerne ich in der Stadt doch immer noch gerne Neues kennen. &lt;br /&gt;
+Vielen Dank für Cache Nr. 153!</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1116269">
+        <groundspeak:date>2016-04-25T14:43:07Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="322018">niemandt</groundspeak:finder>
+        <groundspeak:text encoded="False">Heute wurde eine Regenpause im April Wetter genutzt, um die Gegend um den Fichteberg mit Smileys zu versehen. Das war mein erster virtueller. Wie oft habe ich schon vor der Wand gestanden, ohne zu ahnen, dass sich hier ein Cache verbirgt.&lt;br /&gt;
+Danke für den Cache</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1114724">
+        <groundspeak:date>2016-04-17T20:47:08Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="328316">Broesel01</groundspeak:finder>
+        <groundspeak:text encoded="False">tftc</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1114716">
+        <groundspeak:date>2016-04-17T20:10:46Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="328382">Majani4711</groundspeak:finder>
+        <groundspeak:text encoded="False">Schnell gefunden. Schöner Cache </groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1112893">
+        <groundspeak:date>2016-04-10T17:56:36Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="327884">brabax-4</groundspeak:finder>
+        <groundspeak:text encoded="False">Heute schnell gefunden. Danke für das Zeigen dieses geschichtsträchtigen Ortes.</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1108320">
+        <groundspeak:date>2016-03-22T13:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="305409">tebarius</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Danke für's Zeigen dieses Ortes den wir ansonsten wahrscheinlich sonst nie wirklich wahrgenommen hätten.&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1103251">
+        <groundspeak:date>2016-02-27T18:43:58Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="284018">Jörg-Wtal</groundspeak:finder>
+        <groundspeak:text encoded="False">So oft schon auf den X83 hier gewartet und von dieser Gedenkstätte nichts gewusst. SCHANDE. Danke fürs zeigen!</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1098896">
+        <groundspeak:date>2016-02-07T00:01:14Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="232119">iceman0815</groundspeak:finder>
+        <groundspeak:text encoded="False">Danke für das Herführen zu diesem geschichtsträchtigen Ort. Danke sagt das Team Iceman0815. </groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1031419">
+        <groundspeak:date>2015-03-13T22:27:44Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="311643">bergsteigermaus</groundspeak:finder>
+        <groundspeak:text encoded="False">Auf der Suche nach einem Namen für einen Stolperstein, hier gewesen und die Spiegelwand studiert.&lt;br /&gt;
+DfdC sagt die Bergsteigermaus</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1028803">
+        <groundspeak:date>2015-02-24T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="119429">martl</groundspeak:finder>
+        <groundspeak:text encoded="False">Danke für diese schöne kleine Aufgabe. Den Namen musste ich ein bissl suchen. &lt;br /&gt;
+&lt;br /&gt;
+TFTC&lt;br /&gt;
+Martina</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1028645">
+        <groundspeak:date>2015-02-24T17:50:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="310176">Linda.r318</groundspeak:finder>
+        <groundspeak:text encoded="False">Mal schnell in der Pause gesucht und gefunden..danke&lt;br /&gt;
+Linda.r318</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="986876">
+        <groundspeak:date>2014-07-10T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="305406">champagne_powder</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;unser erster... Vielen Dank&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="978951">
+        <groundspeak:date>2014-05-30T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="203687">Gisulf</groundspeak:finder>
+        <groundspeak:text encoded="False"></groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="978941">
+        <groundspeak:date>2014-05-30T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="201408">Yma</groundspeak:finder>
+        <groundspeak:text encoded="False"></groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="971570">
+        <groundspeak:date>2014-04-27T16:09:16Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="297170">basone</groundspeak:finder>
+        <groundspeak:text encoded="False">Basone sagt Danke </groundspeak:text>
+      </groundspeak:log>
+      </groundspeak:logs>
+      <groundspeak:travelbugs>
+      </groundspeak:travelbugs>
+    </groundspeak:cache>
+    <oc:cache xmlns:oc="https://github.com/opencaching/gpx-extension-v1">
+      <oc:type>Virtual Cache</oc:type>
+      <oc:size>No container</oc:size>
+      <oc:requires_password>true</oc:requires_password>
+      <oc:logs>
+        <oc:log id="1187179" uuid="37c651b1-76ae-11e7-b0d6-e297132bc419">
+        </oc:log>
+        <oc:log id="1175355" uuid="359bcd1c-3273-11e7-8e90-86c6a7325f31">
+        </oc:log>
+        <oc:log id="1169531" uuid="f44a67b8-170f-11e7-8e90-86c6a7325f31">
+        </oc:log>
+        <oc:log id="1168649" uuid="dba980d8-7884-4ba2-847d-b69d2ddb5cea">
+        </oc:log>
+        <oc:log id="1134450" uuid="82a1668c-bf8e-49da-b84e-c2a364b59c80">
+        </oc:log>
+        <oc:log id="1117956" uuid="b6cd8fcb-b8cc-4e3c-9f83-01e14bbd6683">
+        </oc:log>
+        <oc:log id="1116269" uuid="e07c5ebb-406e-4183-99dd-2a154adf30dd">
+        </oc:log>
+        <oc:log id="1114724" uuid="37906a13-bd9d-4614-b8be-3025abffa6d3">
+        </oc:log>
+        <oc:log id="1114716" uuid="56a9dad6-4155-4a44-ac22-d91a1cbec856">
+        </oc:log>
+        <oc:log id="1112893" uuid="db3e3130-bd46-47b7-9e42-3b1f0bf804fa">
+        </oc:log>
+        <oc:log id="1108320" uuid="49747e82-f062-11e5-9a9c-0a81d9c03cf3">
+        </oc:log>
+        <oc:log id="1103251" uuid="f74aad9d-7ca6-44d5-98d6-3ec638fd494a">
+        </oc:log>
+        <oc:log id="1098896" uuid="9eed4676-c4b5-4d38-a07b-b4de68be95bd">
+        </oc:log>
+        <oc:log id="1031419" uuid="5e3ca132-541b-44e1-9eaa-5ba367ba78c4">
+        </oc:log>
+        <oc:log id="1028803" uuid="2c8ca8c4-bd13-11e4-89ed-525400e33611">
+        </oc:log>
+        <oc:log id="1028645" uuid="72ea6644-bc46-11e4-89ed-525400e33611">
+        </oc:log>
+        <oc:log id="986876" uuid="d01d203e-0866-11e4-a0f2-525400e33611">
+        </oc:log>
+        <oc:log id="978951" uuid="0b5887a6-e8b4-11e3-a0f2-525400e33611">
+        </oc:log>
+        <oc:log id="978941" uuid="22486d96-e8af-11e3-a0f2-525400e33611">
+        </oc:log>
+        <oc:log id="971570" uuid="2a98b89d-18e4-4132-bc5a-8785d19e156e">
+        </oc:log>
+      </oc:logs>
+    </oc:cache>
+  </wpt>
+</gpx>

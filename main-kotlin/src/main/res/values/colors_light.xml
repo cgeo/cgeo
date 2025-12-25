@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- light theme-specific colors only -->
+
+    <color name="colorText">@color/just_black</color>
+    <color name="colorTextDark">#AA000000</color>
+    <color name="colorTextHint">#FF666666</color>
+    <color name="archived_cache_color">#FFAC0B0B</color>
+
+    <color name="colorTextHeadline">#88000000</color>
+    <color name="colorIconMenu">#FF3D3D3D</color>
+
+    <color name="colorBackground">#FFFFFFFF</color>
+    <color name="colorBackgroundTransparent">#44FFFFFF</color>
+    <color name="colorBackgroundDialog">#FFFFFFFF</color>
+    <color name="colorBackgroundSelected">#FFCCCCCC</color>
+
+    <color name="colorTextHintActionBar">#FFAAAAAA</color>
+    <color name="colorTextActionBar">#FFFFFFFF</color>
+    <color name="colorBackgroundActionBar">#FF2A2A2A</color>
+
+    <color name="colorTextTabBar">@color/colorTextDark</color>
+    <color name="colorBackgroundTabBar">#FFF3F3F3</color>
+
+    <color name="colorTextMainInfo">#FF3D3D3D</color>
+    <color name="colorBackgroundMainInfo">#FFDEDEDE</color>
+
+    <color name="colorSeparator">#33000000</color>
+
+    <color name="attribute_filter_disabled">#ffcccccc</color>
+    <color name="attribute_category_tools_disabled">#ffb26666</color>
+    <color name="attribute_category_type_disabled">#ff957e7a</color>
+    <color name="attribute_category_location_disabled">#ff769e79</color>
+    <color name="attribute_category_duration_disabled">#ff667caf</color>
+    <color name="attribute_category_surroundings_disabled">#ff848d91</color>
+    <color name="attribute_category_transport_disabled">#ff8a8a8a</color>
+
+</resources>

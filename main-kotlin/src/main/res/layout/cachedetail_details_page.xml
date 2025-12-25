@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    tools:context=".CacheDetailActivity$DetailsViewCreator">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dip" >
+
+        <!-- Details list -->
+
+        <LinearLayout
+            android:id="@+id/details_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <!-- Attributes box -->
+
+        <LinearLayout
+            android:id="@+id/attributes_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <cgeo.geocaching.ui.WrappingGridView
+                android:id="@+id/attributes_grid"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:columnWidth="32dip"
+                android:horizontalSpacing="2dip"
+                android:numColumns="auto_fit"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:scrollbars="none"
+                android:stretchMode="none"
+                android:verticalSpacing="2dip" />
+
+            <TextView
+                android:id="@+id/attributes_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:linksClickable="true"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                android:textColor="@color/colorText"
+                tools:text="attribute 1\nattribute 2\nattribute 3"/>
+        </LinearLayout>
+
+        <!-- Offline box -->
+
+        <View
+            style="@style/separator_horizontal"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="9dp" />
+
+        <include layout="@layout/cache_offlinebox" />
+
+        <!-- Watchlist box -->
+
+        <LinearLayout
+            android:id="@+id/watchlist_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/watchlist_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    tools:text="The cache may or may not be on your watch list."
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/add_to_watchlist"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_watch"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/remove_from_watchlist"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_watch_remove"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Internal Wherigo player box -->
+
+        <LinearLayout
+            android:id="@+id/wherigo_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/wherigo_text"
+                    android:text="@string/cache_wherigo_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="100dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/play_in_cgeo"
+                    android:layout_alignParentRight="true"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_wherigo"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- WhereYouGo box -->
+
+        <LinearLayout
+            android:id="@+id/whereyougo_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/whereyougo_text"
+                    android:text="@string/cache_whereyougo_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="100dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/send_to_whereyougo"
+                    style="@style/button_icon_colored"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/icon_whereyougo"
+                    android:visibility="visible"
+                    tools:visibility="visible"
+                    android:tooltipText="@string/cache_whereyougo_start"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Chirp box -->
+
+        <LinearLayout
+            android:id="@+id/chirp_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/chirp_text"
+                    android:text="@string/cache_chirpwolf_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    tools:text="Start Chirp Wolf"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/send_to_chirp"
+                    style="@style/button_icon_colored"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/icon_gc_chirpwolf"
+                    android:visibility="visible"
+                    tools:visibility="visible"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Adventure Lab box -->
+
+        <LinearLayout
+            android:id="@+id/alc_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/alc_text"
+                    android:text="@string/cache_alc_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    tools:text="Start Adventure Lab"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/send_to_alc"
+                    style="@style/button_icon_colored"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/icon_gc_alc"
+                    android:visibility="visible"
+                    tools:visibility="visible"
+                    android:tooltipText="@string/cache_alc_start"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Favorite points box -->
+
+        <LinearLayout
+            android:id="@+id/favpoint_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/favpoint_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    tools:text="Probably not on your favorite list. You may have some fav points remaining."
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/add_to_favpoint"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_favorite"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/remove_from_favpoint"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_favorite_remove"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- License Box -->
+
+        <LinearLayout
+            android:id="@+id/license_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <cgeo.geocaching.ui.SectionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerAbove="true"
+                android:text="@string/cache_license" />
+
+            <TextView
+                android:id="@+id/license"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:linksClickable="true"
+                android:padding="3dip"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                android:textColor="@color/colorText"
+                tools:text="some license text"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

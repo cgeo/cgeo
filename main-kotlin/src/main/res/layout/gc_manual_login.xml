@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/init_login_manual"
+        android:paddingVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_headingPrimary"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:text="@string/init_login_manual_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingVertical="5dp"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_headingSecondary"
+        android:layout_below="@+id/title"/>
+
+    <cgeo.geocaching.ui.DialogWebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/info"
+        />
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="@style/button"
+        android:text="@string/cancel"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/okButton"
+        style="@style/button"
+        android:text="@string/ok"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

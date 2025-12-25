@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:id="@+id/grid_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:elevation="0dp"
+            android:orientation="horizontal"
+            android:padding="8dp" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/mostRecent"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                layout="@layout/cacheslist_item_select"
+                />
+
+            <View style="@style/separator_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/clipboardGeocode"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                layout="@layout/cacheslist_item_select"
+                />
+
+            <View
+                android:id="@+id/line"
+                style="@style/separator_horizontal" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/suggestion_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</ViewFlipper>

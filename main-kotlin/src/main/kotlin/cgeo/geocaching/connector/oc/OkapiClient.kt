@@ -1,0 +1,1502 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.connector.oc
+
+import cgeo.geocaching.SearchCacheData
+import cgeo.geocaching.SearchResult
+import cgeo.geocaching.connector.ConnectorFactory
+import cgeo.geocaching.connector.IConnector
+import cgeo.geocaching.connector.ImageResult
+import cgeo.geocaching.connector.LogResult
+import cgeo.geocaching.connector.UserInfo
+import cgeo.geocaching.connector.UserInfo.UserInfoStatus
+import cgeo.geocaching.connector.gc.GCConnector
+import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport
+import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel
+import cgeo.geocaching.connector.trackable.TrackableBrand
+import cgeo.geocaching.enumerations.CacheAttribute
+import cgeo.geocaching.enumerations.CacheSize
+import cgeo.geocaching.enumerations.CacheType
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag
+import cgeo.geocaching.enumerations.StatusCode
+import cgeo.geocaching.enumerations.WaypointType
+import cgeo.geocaching.filters.core.BaseGeocacheFilter
+import cgeo.geocaching.filters.core.DifficultyAndTerrainGeocacheFilter
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter
+import cgeo.geocaching.filters.core.FavoritesGeocacheFilter
+import cgeo.geocaching.filters.core.GeocacheFilter
+import cgeo.geocaching.filters.core.GeocacheFilterType
+import cgeo.geocaching.filters.core.LogEntryGeocacheFilter
+import cgeo.geocaching.filters.core.LogsCountGeocacheFilter
+import cgeo.geocaching.filters.core.NameGeocacheFilter
+import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter
+import cgeo.geocaching.filters.core.OriginGeocacheFilter
+import cgeo.geocaching.filters.core.OwnerGeocacheFilter
+import cgeo.geocaching.filters.core.RatingGeocacheFilter
+import cgeo.geocaching.filters.core.SizeGeocacheFilter
+import cgeo.geocaching.filters.core.StatusGeocacheFilter
+import cgeo.geocaching.filters.core.TypeGeocacheFilter
+import cgeo.geocaching.location.Geopoint
+import cgeo.geocaching.location.GeopointFormatter
+import cgeo.geocaching.location.Viewport
+import cgeo.geocaching.log.LogEntry
+import cgeo.geocaching.log.LogType
+import cgeo.geocaching.log.ReportProblemType
+import cgeo.geocaching.models.Geocache
+import cgeo.geocaching.models.Image
+import cgeo.geocaching.models.Trackable
+import cgeo.geocaching.models.Waypoint
+import cgeo.geocaching.network.Network
+import cgeo.geocaching.network.OAuth
+import cgeo.geocaching.network.OAuthTokens
+import cgeo.geocaching.network.Parameters
+import cgeo.geocaching.sensors.LocationDataProvider
+import cgeo.geocaching.settings.Settings
+import cgeo.geocaching.storage.DataStore
+import cgeo.geocaching.utils.CollectionStream
+import cgeo.geocaching.utils.JsonUtils
+import cgeo.geocaching.utils.Log
+import cgeo.geocaching.utils.SynchronizedDateFormat
+import cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS
+
+import android.annotation.SuppressLint
+import android.net.Uri
+import android.os.Bundle
+import android.util.Base64
+import android.util.Pair
+import android.util.Base64.DEFAULT
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.annotation.WorkerThread
+
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
+import java.text.ParseException
+import java.util.ArrayList
+import java.util.Arrays
+import java.util.Collections
+import java.util.Date
+import java.util.EnumSet
+import java.util.LinkedHashMap
+import java.util.LinkedList
+import java.util.List
+import java.util.Locale
+import java.util.Map
+import java.util.TimeZone
+import java.util.regex.Pattern
+import java.lang.Boolean.FALSE
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.ObjectNode
+import okhttp3.Response
+import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
+
+/**
+ * Client for the OpenCaching API (Okapi).
+ *
+ * @see <a href="http://www.opencaching.de/okapi/introduction.html">Okapi overview</a>
+ */
+class OkapiClient {
+
+    private static val SEARCH_LOAD_INITIAL: Int = 200
+    private static val SEARCH_LOAD_NEXTPAGE: Int = 50
+
+    private static val PARAMETER_LOGCOUNT_KEY: String = "lpc"
+    private static val PARAMETER_LOGCOUNT_VALUE: String = "all"
+
+    private static val PARAMETER_LOG_FIELDS_KEY: String = "log_fields"
+    private static val PARAMETER_LOG_FIELDS_VALUE: String = "uuid|date|user|type|comment|images|internal_id"
+
+    private static val SEARCH_CONTEXT_FILTER: String = "sc_oc_filter"
+    private static val SEARCH_CONTEXT_TOOK_TOTAL: String = "sc_oc_took_total"
+
+    private static val SEPARATOR: Char = '|'
+    private static val SEPARATOR_STRING: String = Character.toString(SEPARATOR)
+    private static val LOG_DATE_FORMAT: SynchronizedDateFormat = SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US)
+    @SuppressLint("ConstantLocale")
+    private static val ISO8601DATEFORMAT: SynchronizedDateFormat = SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+
+    private static val CACHE_ATTRNAMES: String = "attrnames"
+    private static val CACHE_ATTR_ACODES: String = "attr_acodes"
+    private static val WPT_LOCATION: String = "location"
+    private static val WPT_DESCRIPTION: String = "description"
+    private static val WPT_TYPE: String = "type"
+    private static val WPT_NAME: String = "name"
+    private static val CACHE_IS_WATCHED: String = "is_watched"
+    private static val CACHE_IS_RECOMMENDED: String = "is_recommended"
+    private static val CACHE_WPTS: String = "alt_wpts"
+    private static val CACHE_STATUS_ARCHIVED: String = "Archived"
+    private static val CACHE_STATUS_DISABLED: String = "Temporarily unavailable"
+    private static val CACHE_IS_FOUND: String = "is_found"
+    private static val CACHE_SIZE_DEPRECATED: String = "size"
+    private static val CACHE_SIZE2: String = "size2"
+    private static val CACHE_VOTES: String = "rating_votes"
+    private static val CACHE_NOTFOUNDS: String = "notfounds"
+    private static val CACHE_FOUNDS: String = "founds"
+    private static val CACHE_WILLATTENDS: String = "willattends"
+    private static val CACHE_HIDDEN: String = "date_hidden"
+    private static val CACHE_LATEST_LOGS: String = "latest_logs"
+    private static val CACHE_IMAGE_URL: String = "url"
+    private static val CACHE_IMAGE_CAPTION: String = "caption"
+    private static val CACHE_IMAGES: String = "images"
+    private static val CACHE_HINT: String = "hint"
+    private static val CACHE_DESCRIPTION: String = "description"
+    private static val CACHE_SHORT_DESCRIPTION: String = "short_description"
+    private static val CACHE_RECOMMENDATIONS: String = "recommendations"
+    private static val CACHE_RATING: String = "rating"
+    private static val CACHE_TERRAIN: String = "terrain"
+    private static val CACHE_DIFFICULTY: String = "difficulty"
+    private static val CACHE_OWNER: String = "owner"
+    private static val CACHE_STATUS: String = "status"
+    private static val CACHE_TYPE: String = "type"
+    private static val CACHE_LOCATION: String = "location"
+    private static val CACHE_NAME: String = "name"
+    private static val CACHE_CODE: String = "code"
+    private static val CACHE_REQ_PASSWORD: String = "req_passwd"
+    private static val CACHE_MY_NOTES: String = "my_notes"
+    private static val CACHE_TRACKABLES_COUNT: String = "trackables_count"
+    private static val CACHE_TRACKABLES: String = "trackables"
+    private static val CACHE_USER_PROFILE: String = "profile_url"
+    private static val CACHE_REGION: String = "region"
+    private static val CACHE_COUNTRY: String = "country2"
+
+    private static val TRK_GEOCODE: String = "code"
+    private static val TRK_NAME: String = "name"
+
+    private static val LOG_UUID: String = "uuid"
+    private static val LOG_TYPE: String = "type"
+    private static val LOG_COMMENT: String = "comment"
+    private static val LOG_DATE: String = "date"
+    private static val LOG_USER: String = "user"
+    private static val LOG_IMAGES: String = "images"
+    private static val LOG_INTERNAL_ID: String = "internal_id"
+
+    private static val USER_UUID: String = "uuid"
+    private static val USER_USERNAME: String = "username"
+    private static val USER_CACHES_FOUND: String = "caches_found"
+    private static val USER_INTERNAL_ID: String = "internal_id"
+    private static val USER_FAV_LEFT: String = "rcmds_left"
+    private static val USER_INFO_FIELDS: String = "username|caches_found|rcmds_left"
+
+    private static val IMAGE_CAPTION: String = "caption"
+    private static val IMAGE_URL: String = "url"
+
+    // the several realms of possible fields for cache retrieval:
+    // Core: for livemap requests (L3 - only with level 3 auth)
+    // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
+    private static val SERVICE_CACHE_CORE_FIELDS: String = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2|attr_acodes|attrnames"
+    private static val SERVICE_CACHE_CORE_L3_FIELDS: String = "is_found|is_recommended"
+    private static val SERVICE_CACHE_CORE_CURRENT_L3_FIELDS: String = "is_watched"
+    private static val SERVICE_CACHE_ADDITIONAL_FIELDS: String = "description|hint|images|latest_logs|alt_wpts|req_passwd|trackables"
+    private static val SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS: String = "gc_code|attribution_note|willattends|short_description"
+    private static val SERVICE_CACHE_ADDITIONAL_L3_FIELDS: String = "my_notes"
+    private static val SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS: String = ""
+    private static val SERVICE_CACHE_FOUND_DATE_FIELDS: String = "code|name|is_found|latest_logs"
+
+    private static val METHOD_SEARCH_ALL: String = "services/caches/search/all"
+    private static val METHOD_SEARCH_BBOX: String = "services/caches/search/bbox"
+    private static val METHOD_SEARCH_NEAREST: String = "services/caches/search/nearest"
+    private static val METHOD_RETRIEVE_CACHES: String = "services/caches/geocaches"
+
+    private static val PATTERN_TIMEZONE: Pattern = Pattern.compile("([+-][01][0-9]):([03])0")
+
+    private static val MAPPER: ObjectMapper = ObjectMapper()
+    private static val DEFAULT_RADIUS: String = "200"
+
+    private OkapiClient() {
+        // utility class
+    }
+
+    @WorkerThread
+    public static Geocache getCache(final String geoCode) {
+        val connector: IConnector = ConnectorFactory.getConnector(geoCode)
+        if (!(connector is OCApiConnector)) {
+            return null
+        }
+
+        val ocapiConn: OCApiConnector = (OCApiConnector) connector
+
+        val params: Parameters = Parameters("cache_code", geoCode)
+        params.add("fields", getFullFields(ocapiConn))
+        params.add("attribution_append", "none")
+        params.add(PARAMETER_LOGCOUNT_KEY, PARAMETER_LOGCOUNT_VALUE)
+        params.add(PARAMETER_LOG_FIELDS_KEY, PARAMETER_LOG_FIELDS_VALUE)
+
+        val result: JSONResult = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params)
+
+        return result.isSuccess ? parseCache(result.data) : null
+    }
+
+    @WorkerThread
+    public static Long getCacheFoundDate(final String geoCode) {
+        val connector: IConnector = ConnectorFactory.getConnector(geoCode)
+        if (!(connector is OCApiConnector)) {
+            return 0
+        }
+
+        val ocapiConn: OCApiConnector = (OCApiConnector) connector
+
+        val params: Parameters = Parameters("cache_code", geoCode)
+        params.add("fields", SERVICE_CACHE_FOUND_DATE_FIELDS)
+        params.add("user_logs_only", "true")
+        params.add(PARAMETER_LOG_FIELDS_KEY, PARAMETER_LOG_FIELDS_VALUE)
+
+
+        val result: JSONResult = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params)
+        val logs: List<LogEntry> = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode)
+        for (LogEntry log : logs) {
+            if (log.logType.id == 2 || log.logType.id == 10) {
+                return log.date
+            }
+        }
+        return 0
+    }
+    @WorkerThread
+    public static List<Geocache> getCachesAround(final Geopoint center, final OCApiConnector connector) {
+        val centerString: String = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center)
+        val params: Parameters = Parameters("search_method", METHOD_SEARCH_NEAREST)
+        val valueMap: Map<String, String> = LinkedHashMap<>()
+        valueMap.put("center", centerString)
+        valueMap.put("limit", getCacheLimit())
+        valueMap.put("radius", DEFAULT_RADIUS)
+
+        return requestCaches(connector, params, valueMap, false)
+    }
+
+    @WorkerThread
+    public static List<Geocache> getCachesByOwner(final String username, final OCApiConnector connector) {
+        return getCachesByUser(username, connector, "owner_uuid")
+    }
+
+    @WorkerThread
+    public static List<Geocache> getCachesByFinder(final String username, final OCApiConnector connector) {
+        return getCachesByUser(username, connector, "found_by")
+    }
+
+    @WorkerThread
+    private static List<Geocache> getCachesByUser(final String username, final OCApiConnector connector, final String userRequestParam) {
+        val uuid: String = getUserUUID(connector, username)
+        if (StringUtils.isEmpty(uuid)) {
+            return Collections.emptyList()
+        }
+        val params: Parameters = Parameters("search_method", METHOD_SEARCH_ALL)
+        val valueMap: Map<String, String> = LinkedHashMap<>()
+        valueMap.put(userRequestParam, uuid)
+
+        return requestCaches(connector, params, valueMap, false)
+    }
+
+    @WorkerThread
+    public static List<Geocache> getCachesNamed(final Geopoint center, final String namePart, final OCApiConnector connector) {
+        val valueMap: Map<String, String> = LinkedHashMap<>()
+        final Parameters params
+
+        // search around current position, if there is a position
+        if (center != null) {
+            val centerString: String = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center)
+            params = Parameters("search_method", METHOD_SEARCH_NEAREST)
+            valueMap.put("center", centerString)
+        } else {
+            params = Parameters("search_method", METHOD_SEARCH_ALL)
+        }
+        valueMap.put("limit", getCacheLimit())
+
+        // full wildcard search, maybe we need to change this after some testing and evaluation
+        valueMap.put("name", "*" + namePart + "*")
+        return requestCaches(connector, params, valueMap, false)
+    }
+
+    @WorkerThread
+    public static SearchResult getCachesByFilter(final OCApiConnector connector, final GeocacheFilter filter) {
+        return retrieveCaches(connector, filter, SEARCH_LOAD_INITIAL, 0)
+    }
+
+    @WorkerThread
+    public static SearchResult getCachesByNextPage(final OCApiConnector connector, final Bundle context) {
+
+        val filterConfig: String = context.getString(SEARCH_CONTEXT_FILTER)
+        if (filterConfig == null) {
+            return SearchResult()
+        }
+        val filter: GeocacheFilter = GeocacheFilter.createFromConfig(filterConfig)
+        val origin: OriginGeocacheFilter = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class)
+        if (origin != null && !origin.allowsCachesOf(connector)) {
+            return SearchResult()
+        }
+        val alreadyTook: Int = context.getInt(SEARCH_CONTEXT_TOOK_TOTAL, 0)
+
+        return retrieveCaches(connector, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook)
+    }
+
+    @WorkerThread
+    private static SearchResult retrieveCaches(final OCApiConnector connector, final GeocacheFilter filter, final Int take, final Int skip) {
+
+        val filters: List<BaseGeocacheFilter> = filter.getAndChainIfPossible()
+
+        final Geopoint searchCoords
+        final String radius
+
+        val df: DistanceGeocacheFilter = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class)
+        if (df != null) {
+            searchCoords = df.getEffectiveCoordinate()
+            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000)
+        } else {
+            // search around current position by default
+            searchCoords = null
+            radius = DEFAULT_RADIUS
+        }
+
+        //fill in the defaults
+        val params: Parameters = Parameters("search_method", METHOD_SEARCH_ALL)
+        val valueMap: Map<String, String> = LinkedHashMap<>()
+        valueMap.put("limit", "" + take)
+        valueMap.put("offset", "" + skip)
+        fillSearchParameterCenter(valueMap, params, searchCoords, radius)
+
+        String finder = null
+
+        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
+            if (baseFilter is OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
+                return SearchResult(); //no need to search if connector is filtered out itself
+            }
+            if (baseFilter is LogEntryGeocacheFilter) {
+                finder = ((LogEntryGeocacheFilter) baseFilter).getFoundByUser()
+            }
+            fillForBasicFilter(baseFilter, params, valueMap, connector)
+        }
+
+        //do the search
+        final Pair<List<Geocache>, Boolean> rawResult = requestCachesWithMore(connector, params, valueMap, true)
+        val result: SearchResult = SearchResult(rawResult.first)
+
+        //store metainfo needed for later for paging
+        result.setLeftToFetch(connector, rawResult.second ? 1 : 0)
+        result.setPartialResult(connector, rawResult.second)
+        result.setToContext(connector, b -> b.putString(SEARCH_CONTEXT_FILTER, filter.toConfig()))
+        result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()))
+
+        if (finder != null) {
+            val scd: SearchCacheData = SearchCacheData()
+            scd.addFoundBy(finder)
+            result.setCacheData(scd)
+        }
+        return result
+
+    }
+
+    private static Unit fillForBasicFilter(final BaseGeocacheFilter basicFilter, final Parameters params, final Map<String, String> valueMap, final OCApiConnector connector) {
+        switch (basicFilter.getType()) {
+            case TYPE:
+                valueMap.put("type", CollectionStream.of(((TypeGeocacheFilter) basicFilter).getRawValues())
+                        .map(OkapiClient::getFilterFromType).filter(StringUtils::isNotBlank).toJoinedString("|"))
+                break
+            case NAME:
+                valueMap.put("name", "*" + ((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue().replace('?', '_') + "*")
+                break
+            case SIZE:
+                valueMap.put("size2", CollectionStream.of(((SizeGeocacheFilter) basicFilter).getRawValues())
+                        .map(CacheSize::getOcSize2).filter(StringUtils::isNotBlank).toJoinedString("|"))
+                break
+            case DISTANCE:
+                val distanceFilter: DistanceGeocacheFilter = (DistanceGeocacheFilter) basicFilter
+                val coord: Geopoint = distanceFilter.getEffectiveCoordinate()
+                if (distanceFilter.getMaxRangeValue() != null) {
+                    fillSearchParameterBox(valueMap, params, Viewport(coord, distanceFilter.getMaxRangeValue()))
+                } else {
+                    fillSearchParameterCenter(valueMap, params, coord, DEFAULT_RADIUS)
+                }
+                break
+            case DIFFICULTY:
+            case TERRAIN:
+                val nrFilter: NumberRangeGeocacheFilter<Float> = (NumberRangeGeocacheFilter<Float>) basicFilter
+                if (nrFilter.isFiltering()) {
+                    valueMap.put(nrFilter.getType() == GeocacheFilterType.DIFFICULTY ? "difficulty" : "terrain",
+                            (nrFilter.getMinRangeValue() == null ? "1" : ((Int) Math.floor(nrFilter.getMinRangeValue()))) + "-" + (nrFilter.getMaxRangeValue() == null ? "5" : Math.round(nrFilter.getMaxRangeValue())))
+                }
+                break
+            case DIFFICULTY_TERRAIN:
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, params, valueMap, connector)
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, params, valueMap, connector)
+                break
+            case RATING:
+                val ratingFilter: RatingGeocacheFilter = (RatingGeocacheFilter) basicFilter
+                if (ratingFilter.getMinRangeValue() != null) {
+                    valueMap.put("rating", (ratingFilter.getMinRangeValue() == null ? "1" : ((Int) Math.floor(ratingFilter.getMinRangeValue()))) + "-" + (ratingFilter.getMaxRangeValue() == null ? "5" : Math.round(ratingFilter.getMaxRangeValue())))
+                }
+                break
+            case OWNER:
+                val uuid: String = getUserUUID(connector, ((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue())
+                // If uuid ==null then user is not known on oc platform.
+                // In that case, set a nonexisting uuid so the search will return no result
+                valueMap.put("owner_uuid", uuid == null ? "unknown-user" : uuid)
+                break
+            case FAVORITES:
+                val favFilter: FavoritesGeocacheFilter = (FavoritesGeocacheFilter) basicFilter
+                if (favFilter.getMinRangeValue() != null) {
+                    valueMap.put("min_rcmds", ((Int) Math.round(favFilter.getMinRangeValue())) + (favFilter.isPercentage() ? "%" : ""))
+                }
+                break
+            case STATUS:
+                val statusFilter: StatusGeocacheFilter = (StatusGeocacheFilter) basicFilter
+                String value = ""
+                if (!statusFilter.isExcludeActive()) {
+                    value += "|Available"
+                }
+                if (!statusFilter.isExcludeDisabled()) {
+                    value += "|Temporarily unavailable"
+                }
+                //DON'T return archived caches even if the filter says so. See #11208 for explanation
+                //Note: if at a later point in time Archived shall be included, just add following codeline:
+                //   if (!statusFilter.isExcludeArchived()) {
+                //       value += "|Archived"
+                //   }
+                if (!value.isEmpty()) {
+                    valueMap.put("status", value.substring(1))
+                }
+
+                if (statusFilter.getStatusFound() != null) {
+                    valueMap.put("found_status", statusFilter.getStatusFound() ? "found_only" : "notfound_only")
+                }
+                if (FALSE == (statusFilter.getStatusOwned())) {
+                    valueMap.put("exclude_my_own", "true")
+                }
+                break
+            case LOGS_COUNT:
+                val logsCountFilter: LogsCountGeocacheFilter = (LogsCountGeocacheFilter) basicFilter
+                if (logsCountFilter.getLogType() == (LogType.FOUND_IT)) {
+                    if (logsCountFilter.getMinRangeValue() != null) {
+                        valueMap.put("min_founds", "" + logsCountFilter.getMinRangeValue())
+                    }
+                    if (logsCountFilter.getMaxRangeValue() != null) {
+                        valueMap.put("max_founds", "" + logsCountFilter.getMaxRangeValue())
+                    }
+                }
+                break
+            case LOG_ENTRY:
+                val logEntryFilter: LogEntryGeocacheFilter = (LogEntryGeocacheFilter) basicFilter
+                if (StringUtils.isNotBlank(logEntryFilter.getFoundByUser())) {
+                    String uuid2 = getUserUUID(connector, logEntryFilter.getFoundByUser())
+                    if (uuid2 == null) {
+                        uuid2 = "unknown-user"; //set a nonexisting uuid so the search will return nothing
+                    }
+                    if (logEntryFilter.isInverse()) {
+                        valueMap.put("not_found_by", uuid2)
+                    } else {
+                        valueMap.put("found_by", uuid2)
+                    }
+                }
+                break
+            default:
+                break
+        }
+
+    }
+
+    public static Unit fillSearchParameterCenter(final Map<String, String> valueMap, final Parameters params, final Geopoint center, final String radius) {
+        val usedCenter: Geopoint = center != null ? center : LocationDataProvider.getInstance().currentGeo().getCoords()
+        val centerString: String = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter)
+        valueMap.put("center", centerString)
+        valueMap.put("radius", radius)
+        params.removeKey("search_method")
+        params.put("search_method", METHOD_SEARCH_NEAREST)
+    }
+
+    public static Unit fillSearchParameterBox(final Map<String, String> valueMap, final Parameters params, final Viewport viewport) {
+
+        val bboxString: String = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight)
+        valueMap.put("bbox", bboxString)
+
+        fillSearchParameterCenter(valueMap, params, viewport.getCenter(), DEFAULT_RADIUS)
+        params.removeKey("search_method")
+        params.put("search_method", METHOD_SEARCH_BBOX)
+    }
+
+
+    /**
+     * pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags
+     */
+    @WorkerThread
+    private static List<Geocache> requestCaches(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap, final Boolean forFilterSearch) {
+        return requestCachesWithMore(connector, params, valueMap, forFilterSearch).first
+    }
+
+    @WorkerThread
+    private static Pair<List<Geocache>, Boolean> requestCachesWithMore(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap, final Boolean forFilterSearch) {
+
+        if (!forFilterSearch) {
+            addFilterParams(valueMap)
+        }
+        // OKAPI returns ignored caches, we have to actively suppress them
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            valueMap.put("ignored_status", "notignored_only")
+        }
+
+        try {
+            params.add("search_params", JsonUtils.writer.writeValueAsString(valueMap))
+        } catch (final JsonProcessingException e) {
+            Log.e("requestCaches", e)
+            return Pair<>(Collections.emptyList(), false)
+        }
+        addRetrieveParams(params, connector)
+
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data
+
+        if (data == null) {
+            return Pair<>(Collections.emptyList(), false)
+        }
+
+        return parseCaches(data)
+    }
+
+    /**
+     * Assumes level 3 OAuth.
+     */
+    @WorkerThread
+    public static List<Geocache> getCachesBBox(final Viewport viewport, final OCApiConnector connector) {
+
+        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+            return Collections.emptyList()
+        }
+
+        val bboxString: String = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight)
+        val params: Parameters = Parameters("search_method", METHOD_SEARCH_BBOX)
+        val valueMap: Map<String, String> = LinkedHashMap<>()
+        valueMap.put("bbox", bboxString)
+
+        return requestCaches(connector, params, valueMap, false)
+    }
+
+    @WorkerThread
+    public static Boolean setWatchState(final Geocache cache, final Boolean watched, final OCApiConnector connector) {
+        val params: Parameters = Parameters("cache_code", cache.getGeocode())
+        params.add("watched", watched ? "true" : "false")
+
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_MARK_CACHE, params).data
+
+        if (data == null) {
+            return false
+        }
+
+        cache.setOnWatchlist(watched)
+
+        return true
+    }
+
+    @WorkerThread
+    public static Boolean setIgnored(final Geocache cache, final OCApiConnector connector) {
+        val params: Parameters = Parameters("cache_code", cache.getGeocode())
+        params.add("ignored", "true")
+
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_MARK_CACHE, params).data
+
+        return data != null
+    }
+
+    @WorkerThread
+    @SuppressWarnings("PMD.NPathComplexity")
+    public static LogResult postLog(final Geocache cache, final LogType logType, final Date date, final String log, final String logPassword, final OCApiConnector connector, final ReportProblemType reportProblem, final Boolean addToFavorites, final Float rating) {
+        val params: Parameters = Parameters("cache_code", cache.getGeocode())
+        params.add("logtype", logType.ocType)
+        params.add("comment", log)
+        params.add("comment_format", "plaintext")
+        params.add("when", LOG_DATE_FORMAT.format(date))
+        if (logType == LogType.NEEDS_MAINTENANCE) {
+            params.add("needs_maintenance", "true")
+        }
+        if (logPassword != null) {
+            params.add("password", logPassword)
+        }
+        if (reportProblem == ReportProblemType.NEEDS_MAINTENANCE) { // OKAPI only knows this one problem type
+            params.add("needs_maintenance2", "true")
+        }
+        if (logType == LogType.FOUND_IT) {
+            if (addToFavorites) {
+                params.add("recommend", "true")
+            }
+            if ((Int) rating != 0) {
+                params.add("rating", String.valueOf((Int) rating))
+            }
+        }
+
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data
+
+        if (data == null) {
+            return LogResult.error(StatusCode.LOG_POST_ERROR)
+        }
+
+        try {
+            if (data.get("success").asBoolean()) {
+                //unfortunately we only have the uuid here (not the internal id)
+                return LogResult.ok(data.get("log_uuid").asText())
+            }
+
+            return LogResult.error(StatusCode.LOG_POST_ERROR, data.get("message").asText(), null)
+        } catch (final NullPointerException e) {
+            Log.e("OkapiClient.postLog", e)
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "OkapiClient.postLog", e)
+        }
+    }
+
+    @WorkerThread
+    public static ImageResult postLogImage(final String logId, final Image image, final OCApiConnector connector) {
+        val params: Parameters = Parameters("log_uuid", logId)
+        val file: File = image.getFile()
+        if (file == null) {
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, "image has no file", null)
+        }
+        FileInputStream fileStream = null
+        try {
+            fileStream = FileInputStream(file)
+            params.add("image", Base64.encodeToString(IOUtils.readFully(fileStream, (Int) file.length()), DEFAULT))
+            params.add("caption", createImageCaption(image))
+
+            val data: ObjectNode = postRequest(connector, OkapiService.SERVICE_ADD_LOG_IMAGE, params).data
+
+            if (data == null) {
+                return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR)
+            }
+
+            if (data.get("success").asBoolean()) {
+                return ImageResult.ok(data.get("image_url").asText())
+            }
+
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, data.get("message").asText(), null)
+        } catch (final Exception e) {
+            Log.e("OkapiClient.postLogImage", e)
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, "OkapiClient.postLogImage", e)
+        } finally {
+            IOUtils.closeQuietly(fileStream)
+        }
+
+    }
+
+    private static String createImageCaption(final Image image) {
+        val caption: StringBuilder = StringBuilder(StringUtils.trimToEmpty(image.getTitle()))
+        if (StringUtils.isNotEmpty(caption) && StringUtils.isNotBlank(image.getDescription())) {
+            caption.append(": ")
+        }
+        caption.append(StringUtils.trimToEmpty(image.getDescription()))
+        return caption.toString()
+    }
+
+    @WorkerThread
+    public static Boolean uploadPersonalNotes(final OCApiConnector connector, final Geocache cache) {
+        Log.d("Uploading personal note for opencaching")
+
+        val notesParam: Parameters = Parameters("cache_code", cache.getGeocode(), "fields", CACHE_MY_NOTES)
+        val notesData: ObjectNode = getRequest(connector, OkapiService.SERVICE_CACHE, notesParam).data
+
+        String prevNote = StringUtils.EMPTY
+
+        if (notesData != null && notesData.get(CACHE_MY_NOTES) != null) {
+            prevNote = notesData.get(CACHE_MY_NOTES).asText()
+        }
+
+        val currentNote: String = StringUtils.defaultString(cache.getPersonalNote())
+
+        val params: Parameters = Parameters("cache_code", cache.getGeocode(), "new_value", currentNote, "old_value", prevNote)
+        val data: ObjectNode = postRequest(connector, OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE, params).data
+
+        if (data == null) {
+            return false
+        }
+
+        if (data.get("replaced") != null && data.get("replaced").asBoolean()) {
+            Log.d("Successfully uploaded")
+            return true
+        }
+        return false
+    }
+
+    /**
+     * returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right)
+     */
+    private static Pair<List<Geocache>, Boolean> parseCaches(final ObjectNode response) {
+        try {
+            val moreNode: JsonNode = response.path("more")
+            val more: Boolean = moreNode != null && moreNode.isBoolean() && moreNode.asBoolean()
+
+            // Check for empty result
+            val results: JsonNode = response.path("results")
+            if (!results.isObject()) {
+                return Pair<>(Collections.emptyList(), more)
+            }
+
+            // Get and iterate result list
+            val caches: List<Geocache> = ArrayList<>(results.size())
+            for (final JsonNode cache : results) {
+                caches.add(parseSmallCache((ObjectNode) cache))
+            }
+            return Pair<>(caches, more)
+        } catch (ClassCastException | NullPointerException e) {
+            Log.e("OkapiClient.parseCachesResult", e)
+        }
+        return Pair<>(Collections.emptyList(), false)
+    }
+
+    private static Geocache parseSmallCache(final ObjectNode response) {
+        val cache: Geocache = Geocache()
+        try {
+            parseCoreCache(response, cache)
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE))
+        } catch (final NullPointerException e) {
+            // FIXME: here we may return a partially filled cache
+            Log.e("OkapiClient.parseSmallCache", e)
+        }
+        return cache
+    }
+
+
+    private static Geocache parseCache(final ObjectNode response) {
+        val cache: Geocache = Geocache()
+        try {
+
+            parseCoreCache(response, cache)
+
+            // not used: url
+            // not used: req_password
+            // Prepend gc-link to description if available
+            val description: StringBuilder = StringBuilder(500)
+            if (response.hasNonNull("gc_code")) {
+                val gccode: String = response.get("gc_code").asText()
+                description.append(Geocache.getAlternativeListingText(gccode))
+            }
+            description.append(response.get(CACHE_DESCRIPTION).asText())
+            cache.setDescription(description.toString())
+
+            if (response.has(CACHE_SHORT_DESCRIPTION)) {
+                val shortDescription: String = StringUtils.trim(response.get(CACHE_SHORT_DESCRIPTION).asText())
+                if (StringUtils.isNotEmpty(shortDescription)) {
+                    cache.setShortDescription(shortDescription)
+                }
+            }
+
+            // currently the hint is delivered as HTML (contrary to OKAPI documentation), so we can store it directly
+            cache.setHint(response.get(CACHE_HINT).asText())
+            // not used: hints
+
+            //set images
+            val cacheImages: List<Image> = ArrayList<>()
+            val images: ArrayNode = (ArrayNode) response.get(CACHE_IMAGES)
+            if (images != null) {
+                for (final JsonNode imageResponse : images) {
+                    val title: String = imageResponse.get(CACHE_IMAGE_CAPTION).asText()
+                    val url: String = absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(), cache.getGeocode())
+                    cacheImages.add(Image.Builder().setUrl(url).setTitle(title).build())
+                }
+            }
+            // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
+            cache.setSpoilers(cacheImages)
+
+            //TODO: Store license per cache
+            //cache.setLicense(response.getString("attribution_note"))
+
+            cache.mergeWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), true)
+
+            cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)), EnumSet.of(TrackableBrand.GEOKRETY))
+
+            if (response.has(CACHE_IS_WATCHED)) {
+                cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean())
+            }
+            if (response.hasNonNull(CACHE_MY_NOTES)) {
+                cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText(), true)
+            }
+            cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean())
+
+            cache.setDetailedUpdatedNow()
+            if (cache.isFound()) {
+                cache.setVisitedDate(getCacheFoundDate(cache.getGeocode()))
+            }
+            // save full detailed caches
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB))
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true)
+        } catch (ClassCastException | NullPointerException e) {
+            Log.e("OkapiClient.parseCache", e)
+        }
+        return cache
+    }
+
+    private static Unit parseCoreCache(final ObjectNode response, final Geocache cache) {
+        cache.setGeocode(response.get(CACHE_CODE).asText())
+        cache.setName(response.get(CACHE_NAME).asText())
+        // not used: names
+        setLocation(cache, response.get(CACHE_LOCATION).asText())
+        cache.setType(getCacheType(response.get(CACHE_TYPE).asText()))
+
+        val status: String = response.get(CACHE_STATUS).asText()
+        cache.setDisabled(status.equalsIgnoreCase(CACHE_STATUS_DISABLED))
+        cache.setArchived(status.equalsIgnoreCase(CACHE_STATUS_ARCHIVED))
+
+        cache.setSize(getCacheSize(response))
+        cache.setDifficulty((Float) response.get(CACHE_DIFFICULTY).asDouble())
+        cache.setTerrain((Float) response.get(CACHE_TERRAIN).asDouble())
+
+        cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt())
+
+        val region: String = response.get(CACHE_REGION) == null ? null : response.get(CACHE_REGION).asText()
+        val country: String = response.get(CACHE_COUNTRY) == null ? null : response.get(CACHE_COUNTRY).asText()
+        cache.setLocation(region == null ? country : (country == null ? region : region + ", " + country))
+
+        if (response.has(CACHE_IS_FOUND)) {
+            cache.setFound(response.get(CACHE_IS_FOUND).asBoolean())
+        }
+        if (response.has(CACHE_IS_WATCHED)) {
+            cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean())
+        }
+        if (response.has(CACHE_IS_RECOMMENDED)) {
+            cache.setFavorite(response.get(CACHE_IS_RECOMMENDED).asBoolean())
+        }
+        cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()))
+
+        val owner: String = parseUser(response.get(CACHE_OWNER))
+        cache.setOwnerDisplayName(owner)
+        // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
+        cache.setOwnerUserId(owner)
+        val profile: String = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText()
+        if (StringUtils.isNotEmpty(profile)) {
+            val id: String = StringUtils.substringAfter(profile, "userid=")
+            if (StringUtils.isNotEmpty(id)) {
+                cache.setOwnerUserId(id)
+            }
+        }
+
+        val logCounts: Map<LogType, Integer> = cache.getLogCounts()
+        logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt())
+        logCounts.put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt())
+        // only current Api
+        logCounts.put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt())
+        cache.setLogCounts(logCounts)
+
+        if (response.has(CACHE_RATING)) {
+            cache.setRating((Float) response.get(CACHE_RATING).asDouble())
+        }
+        cache.setVotes(response.get(CACHE_VOTES).asInt())
+
+        cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt())
+
+        //set basic properties which are constant / not used for OC platforms
+        cache.setPremiumMembersOnly(false)
+        cache.setUserModifiedCoords(false)
+
+        cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)))
+
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE))
+    }
+
+    private static String absoluteUrl(final String url, final String geocode) {
+        val uri: Uri = Uri.parse(url)
+
+        if (!uri.isAbsolute()) {
+            val connector: IConnector = ConnectorFactory.getConnector(geocode)
+            val hostUrl: String = connector.getHostUrl()
+            if (StringUtils.isNotBlank(hostUrl)) {
+                return hostUrl + "/" + url
+            }
+        }
+        return url
+    }
+
+    private static String parseUser(final JsonNode user) {
+        return user.get(USER_USERNAME).asText()
+    }
+
+    private static List<LogEntry> parseLogs(final ArrayNode logsJSON, final String geocode) {
+        val result: List<LogEntry> = LinkedList<>()
+        for (final JsonNode logResponse : logsJSON) {
+            try {
+                val date: Date = parseDate(logResponse.get(LOG_DATE).asText())
+                if (date == null) {
+                    continue
+                }
+                val log: LogEntry = LogEntry.Builder()
+                        .setServiceLogId(logResponse.get(LOG_UUID).asText().trim() + ":" + logResponse.get(LOG_INTERNAL_ID).asText().trim())
+                        .setAuthor(parseUser(logResponse.get(LOG_USER)))
+                        .setDate(date.getTime())
+                        .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
+                        .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES), geocode))
+                        .setLog(logResponse.get(LOG_COMMENT).asText().trim()).build()
+                result.add(log)
+            } catch (final NullPointerException e) {
+                Log.e("OkapiClient.parseLogs", e)
+            }
+        }
+        return result
+    }
+
+    private static List<Image> parseLogImages(final ArrayNode imagesNode, final String geocode) {
+        val images: List<Image> = ArrayList<>()
+        for (final JsonNode image : imagesNode) {
+            images.add(Image.Builder().setUrl(absoluteUrl(image.get(IMAGE_URL).asText(), geocode)).setTitle(image.get(IMAGE_CAPTION).asText()).build())
+        }
+        return images
+    }
+
+    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
+        List<Waypoint> result = null
+        val pt0: Geopoint = Geopoint(0, 0)
+        for (final JsonNode wptResponse : wptsJson) {
+            try {
+                val wpt: Waypoint = Waypoint(wptResponse.get(WPT_NAME).asText(),
+                        parseWptType(wptResponse.get(WPT_TYPE).asText()),
+                        false)
+                wpt.setNote(wptResponse.get(WPT_DESCRIPTION).asText())
+                val pt: Geopoint = parseCoords(wptResponse.get(WPT_LOCATION).asText())
+                if (pt != null && !pt == (pt0)) {
+                    wpt.setCoords(pt)
+                } else {
+                    wpt.setOriginalCoordsEmpty(true)
+                }
+                if (result == null) {
+                    result = ArrayList<>()
+                }
+                wpt.setPrefix(wpt.getName())
+                result.add(wpt)
+            } catch (final NullPointerException e) {
+                Log.e("OkapiClient.parseWaypoints", e)
+            }
+        }
+        return result
+    }
+
+    private static List<Trackable> parseTrackables(final ArrayNode trackablesJson) {
+        if (trackablesJson.isEmpty()) {
+            return Collections.emptyList()
+        }
+        val result: List<Trackable> = ArrayList<>()
+        for (final JsonNode trackableResponse : trackablesJson) {
+            try {
+                val trk: Trackable = Trackable()
+                trk.setGeocode(trackableResponse.get(TRK_GEOCODE).asText())
+                trk.setName(trackableResponse.get(TRK_NAME).asText())
+                result.add(trk)
+            } catch (final NullPointerException e) {
+                Log.e("OkapiClient.parseWaypoints", e)
+            }
+        }
+        return result
+    }
+
+    private static LogType parseLogType(final String logType) {
+        if ("Found it".equalsIgnoreCase(logType)) {
+            return LogType.FOUND_IT
+        }
+        if ("Didn't find it".equalsIgnoreCase(logType)) {
+            return LogType.DIDNT_FIND_IT
+        }
+        if ("Will attend".equalsIgnoreCase(logType)) {
+            return LogType.WILL_ATTEND
+        }
+        if ("Attended".equalsIgnoreCase(logType)) {
+            return LogType.ATTENDED
+        }
+        if ("Temporarily unavailable".equalsIgnoreCase(logType)) {
+            return LogType.TEMP_DISABLE_LISTING
+        }
+        if ("Ready to search".equalsIgnoreCase(logType)) {
+            return LogType.ENABLE_LISTING
+        }
+        if ("Archived".equalsIgnoreCase(logType)) {
+            return LogType.ARCHIVE
+        }
+        if ("Locked".equalsIgnoreCase(logType)) {
+            return LogType.ARCHIVE
+        }
+        if ("Needs maintenance".equalsIgnoreCase(logType)) {
+            return LogType.NEEDS_MAINTENANCE
+        }
+        if ("Maintenance performed".equalsIgnoreCase(logType)) {
+            return LogType.OWNER_MAINTENANCE
+        }
+        if ("Moved".equalsIgnoreCase(logType)) {
+            return LogType.UPDATE_COORDINATES
+        }
+        if ("OC Team comment".equalsIgnoreCase(logType)) {
+            return LogType.POST_REVIEWER_NOTE
+        }
+        return LogType.NOTE
+    }
+
+    private static WaypointType parseWptType(final String wptType) {
+        if ("parking".equalsIgnoreCase(wptType)) {
+            return WaypointType.PARKING
+        }
+        if ("path".equalsIgnoreCase(wptType)) {
+            return WaypointType.TRAILHEAD
+        }
+        if ("stage".equalsIgnoreCase(wptType)) {
+            return WaypointType.STAGE
+        }
+        if ("physical-stage".equalsIgnoreCase(wptType)) {
+            return WaypointType.STAGE
+        }
+        if ("virtual-stage".equalsIgnoreCase(wptType)) {
+            return WaypointType.PUZZLE
+        }
+        if ("final".equalsIgnoreCase(wptType)) {
+            return WaypointType.FINAL
+        }
+        if ("poi".equalsIgnoreCase(wptType)) {
+            return WaypointType.WAYPOINT
+        }
+        if ("trailhead".equalsIgnoreCase(wptType)) {
+            return WaypointType.TRAILHEAD
+        }
+        return WaypointType.WAYPOINT
+    }
+
+    private static Date parseDate(final String date) {
+        val strippedDate: String = PATTERN_TIMEZONE.matcher(date).replaceAll("$1$20")
+        try {
+            return ISO8601DATEFORMAT.parse(strippedDate)
+        } catch (final ParseException e) {
+            Log.e("OkapiClient.parseDate", e)
+        }
+        return null
+    }
+
+    private static Geopoint parseCoords(final String location) {
+        val latitude: String = StringUtils.substringBefore(location, SEPARATOR_STRING)
+        val longitude: String = StringUtils.substringAfter(location, SEPARATOR_STRING)
+        if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
+            return Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude))
+        }
+
+        return null
+    }
+
+    private static List<String> parseAttributes(final ArrayNode nameList, final ArrayNode acodeList) {
+
+        val result: List<String> = ArrayList<>()
+
+        for (Int i = 0; i < nameList.size(); i++) {
+            try {
+                val name: String = nameList.get(i).asText()
+                val acode: Int = acodeList != null ? Integer.parseInt(acodeList.get(i).asText().substring(1)) : CacheAttribute.NO_ID
+                val attr: CacheAttribute = CacheAttribute.getByOcACode(acode)
+
+                if (attr != null) {
+                    result.add(attr.rawName)
+                } else {
+                    result.add(name)
+                }
+            } catch (final NullPointerException e) {
+                Log.e("OkapiClient.parseAttributes", e)
+            }
+        }
+
+        return result
+    }
+
+    private static Unit setLocation(final Geocache cache, final String location) {
+        val latitude: String = StringUtils.substringBefore(location, SEPARATOR_STRING)
+        val longitude: String = StringUtils.substringAfter(location, SEPARATOR_STRING)
+        cache.setCoords(Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude)))
+    }
+
+    private static CacheSize getCacheSize(final ObjectNode response) {
+        if (!response.has(CACHE_SIZE2)) {
+            return getCacheSizeDeprecated(response)
+        }
+        try {
+            val size: String = response.get(CACHE_SIZE2).asText()
+            return CacheSize.getById(size)
+        } catch (final NullPointerException e) {
+            Log.e("OkapiClient.getCacheSize", e)
+            return getCacheSizeDeprecated(response)
+        }
+    }
+
+    private static CacheSize getCacheSizeDeprecated(final ObjectNode response) {
+        if (!response.has(CACHE_SIZE_DEPRECATED)) {
+            return CacheSize.NOT_CHOSEN
+        }
+        Double size = 0
+        try {
+            size = response.get(CACHE_SIZE_DEPRECATED).asDouble()
+        } catch (final NullPointerException e) {
+            Log.e("OkapiClient.getCacheSize", e)
+        }
+        switch ((Int) Math.round(size)) {
+            case 1:
+                return CacheSize.MICRO
+            case 2:
+                return CacheSize.SMALL
+            case 3:
+                return CacheSize.REGULAR
+            case 4:
+                return CacheSize.LARGE
+            case 5:
+                return CacheSize.VERY_LARGE
+            default:
+                break
+        }
+        return CacheSize.NOT_CHOSEN
+    }
+
+    private static CacheType getCacheType(final String cacheType) {
+        if ("Traditional".equalsIgnoreCase(cacheType)) {
+            return CacheType.TRADITIONAL
+        }
+        if ("Multi".equalsIgnoreCase(cacheType)) {
+            return CacheType.MULTI
+        }
+        if ("Quiz".equalsIgnoreCase(cacheType)) {
+            return CacheType.MYSTERY
+        }
+        if ("Virtual".equalsIgnoreCase(cacheType)) {
+            return CacheType.VIRTUAL
+        }
+        if ("Event".equalsIgnoreCase(cacheType)) {
+            return CacheType.EVENT
+        }
+        if ("Webcam".equalsIgnoreCase(cacheType)) {
+            return CacheType.WEBCAM
+        }
+        if ("Moving".equalsIgnoreCase(cacheType)) {
+            return CacheType.LOCATIONLESS
+        }
+        if ("Other".equalsIgnoreCase(cacheType)) {
+            return CacheType.UNKNOWN
+        }
+        if ("Podcast".equalsIgnoreCase(cacheType)) {
+            return CacheType.VIRTUAL
+        }
+        if ("Own".equalsIgnoreCase(cacheType)) {
+            return CacheType.LOCATIONLESS
+        }
+        if ("Math/Physics".equalsIgnoreCase(cacheType)) {
+            return CacheType.MYSTERY
+        }
+        if ("Drive-In".equalsIgnoreCase(cacheType)) {
+            return CacheType.TRADITIONAL
+        }
+        return CacheType.UNKNOWN
+    }
+
+    private static String getCoreFields(final OCApiConnector connector) {
+        val res: StringBuilder = StringBuilder(SERVICE_CACHE_CORE_FIELDS)
+
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS)
+
+            if (connector.getApiSupport() == ApiSupport.current) {
+                res.append(SEPARATOR).append(SERVICE_CACHE_CORE_CURRENT_L3_FIELDS)
+            }
+        }
+
+        return res.toString()
+    }
+
+    private static String getFullFields(final OCApiConnector connector) {
+        val res: StringBuilder = StringBuilder(500)
+
+        res.append(SERVICE_CACHE_CORE_FIELDS)
+        res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_FIELDS)
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS)
+            res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS)
+        }
+        if (connector.getApiSupport() == ApiSupport.current) {
+            res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS)
+            if (connector.getSupportedAuthLevel() == OAuthLevel.Level3 && !SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS.isEmpty()) {
+                res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS)
+            }
+        }
+
+        return res.toString()
+    }
+
+    @WorkerThread
+    private static JSONResult request(final OCApiConnector connector, final OkapiService service, final String method, final Parameters params) {
+        val host: String = connector.getHost()
+        if (StringUtils.isBlank(host)) {
+            return JSONResult("unknown OKAPI connector host")
+        }
+
+        params.add("langpref", getPreferredLanguage())
+
+        switch (connector.getSupportedAuthLevel()) {
+            case Level3: {
+                val tokens: OAuthTokens = OAuthTokens(connector)
+                if (!tokens.isValid()) {
+                    return JSONResult("invalid oauth tokens")
+                }
+                OAuth.signOAuth(host, service.methodName, method, connector.isHttps(), params, tokens, connector.getCK(), connector.getCS())
+                break
+            }
+            case Level1: {
+                connector.addAuthentication(params)
+                break
+            }
+            default:
+                // do nothing, anonymous access
+                break
+        }
+
+        val uri: String = connector.getHostUrl() + service.methodName
+        try {
+            if ("GET" == (method)) {
+                return JSONResult(Network.getRequest(uri, params).blockingGet())
+            }
+            return JSONResult(Network.postRequest(uri, params).blockingGet())
+        } catch (final Exception e) {
+            return JSONResult("connection error")
+        }
+    }
+
+    @WorkerThread
+    private static JSONResult getRequest(final OCApiConnector connector, final OkapiService service, final Parameters params) {
+        return request(connector, service, "GET", params)
+    }
+
+    @WorkerThread
+    private static JSONResult postRequest(final OCApiConnector connector, final OkapiService service, final Parameters params) {
+        return request(connector, service, "POST", params)
+    }
+
+    /**
+     * Return a pipe-separated list of preferred languages. English and the device default language (if different) will
+     * always be in the list. A user-set language will be first (if set).
+     */
+    static String getPreferredLanguage() {
+        val userLanguage: String = StringUtils.lowerCase(Settings.getApplicationLocale().getLanguage())
+        val defaultLanguage: String = StringUtils.defaultIfBlank(StringUtils.lowerCase(Locale.getDefault().getLanguage()), "en")
+        return userLanguage + (userLanguage == (defaultLanguage) ? "" : "|" + defaultLanguage) + ("en" == (userLanguage) || "en" == (defaultLanguage) ? "" : "|en")
+    }
+
+    private static Unit addFilterParams(final Map<String, String> valueMap) {
+        valueMap.put("status", "Available|Temporarily unavailable")
+    }
+
+    private static Unit addRetrieveParams(final Parameters params, final OCApiConnector connector) {
+        params.add("retr_method", METHOD_RETRIEVE_CACHES)
+        params.add("retr_params", "{\"fields\": \"" + getCoreFields(connector) + "\"}")
+        params.add("wrap", "true")
+    }
+
+    private static String getFilterFromType(final CacheType ct) {
+
+        switch (ct) {
+            case EVENT:
+                return "Event"
+            case MULTI:
+                return "Multi"
+            case MYSTERY:
+                return "Quiz"
+            case TRADITIONAL:
+                return "Traditional"
+            case VIRTUAL:
+                return "Virtual"
+            case WEBCAM:
+                return "Webcam"
+            default:
+                return ""
+        }
+    }
+
+    @WorkerThread
+    public static String getUserUUID(final OCApiConnector connector, final String userName) {
+        //try username as id
+        JSONResult result = getRequest(connector, OkapiService.SERVICE_USER_BY_USERID, Parameters("fields", USER_UUID, USER_INTERNAL_ID, userName))
+        if (!result.isSuccess) {
+            //try username as username
+            result = getRequest(connector, OkapiService.SERVICE_USER_BY_USERNAME, Parameters("fields", USER_UUID, USER_USERNAME, userName))
+            if (!result.isSuccess) {
+                val error: OkapiError = OkapiError(result.data)
+                Log.e("OkapiClient.getUserUUID: error getting user info via id or username: '" + error.getMessage() + "'")
+                return null
+            }
+        }
+
+        return result.data.path(USER_UUID).asText(null)
+    }
+
+    @WorkerThread
+    public static UserInfo getUserInfo(final OCApiLiveConnector connector) {
+        val params: Parameters = Parameters("fields", USER_INFO_FIELDS)
+
+        val result: JSONResult = getRequest(connector, OkapiService.SERVICE_USER, params)
+
+        if (!result.isSuccess) {
+            val error: OkapiError = OkapiError(result.data)
+            Log.w("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'")
+            return UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.getFromOkapiError(error.getResult()), UNKNOWN_FINDS)
+        }
+
+        val data: ObjectNode = result.data
+        val successUserName: Boolean = data.has(USER_USERNAME)
+        val name: String = data.path(USER_USERNAME).asText()
+        val successFinds: Boolean = data.has(USER_CACHES_FOUND)
+        val finds: Int = data.path(USER_CACHES_FOUND).asInt()
+        val remainingFavoritePoints: Int = data.path(USER_FAV_LEFT).asInt()
+
+        return UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED, remainingFavoritePoints)
+    }
+
+    /**
+     * Retrieves error information from an unsuccessful Okapi-response
+     *
+     * @param response response containing an error object
+     * @return OkapiError object with detailed information
+     */
+    public static OkapiError decodeErrorResponse(final Response response) {
+        val result: JSONResult = JSONResult(response)
+        if (!result.isSuccess) {
+            return OkapiError(result.data)
+        }
+        return OkapiError(ObjectNode(JsonUtils.factory))
+    }
+
+    /**
+     * Encapsulates response state and content of an HTTP-getRequest that expects a JSON result. {@code isSuccess} is
+     * only true, if the response state was success and {@code data} is not null.
+     */
+    private static class JSONResult {
+
+        public final Boolean isSuccess
+        public final ObjectNode data
+
+        JSONResult(final Response response) {
+            ObjectNode tempData = null
+            try {
+                tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().byteStream())
+            } catch (final Exception e) {
+                // ignore
+            } finally {
+                response.close()
+            }
+            data = tempData
+            isSuccess = response.isSuccessful() && tempData != null
+        }
+
+        JSONResult(final String errorMessage) {
+            isSuccess = false
+            data = ObjectNode(JsonUtils.factory)
+            data.putObject("error").put("developer_message", errorMessage)
+        }
+    }
+
+    /**
+     * extract the geocode from an URL, by using a backward mapping on the server
+     */
+    @WorkerThread
+    public static String getGeocodeByUrl(final OCApiConnector connector, final String url) {
+        val params: Parameters = Parameters("urls", url)
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_RESOLVE_URL, params).data
+
+        if (data == null) {
+            return null
+        }
+
+        return data.path("results").path(0).asText(null)
+    }
+
+    /**
+     * get the registration url for mobile devices
+     */
+    public static String getMobileRegistrationUrl(final OCApiConnector connector) {
+        return getInstallationInformation(connector).mobileRegistrationUrl
+    }
+
+    /**
+     * get the normal registration url
+     */
+    public static String getRegistrationUrl(final OCApiConnector connector) {
+        return getInstallationInformation(connector).registrationUrl
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class InstallationInformation {
+        @JsonProperty("site_url")
+        String siteUrl
+        @JsonProperty("okapi_base_url")
+        String okapiBaseUrl
+        @JsonProperty("okapi_base_urls")
+        String[] okapiBaseUrls
+        @JsonProperty("site_name")
+        String siteName
+        @JsonProperty("okapi_version_number")
+        String okapiVersionNumber
+        @JsonProperty("okapi_revision")
+        String okapiRevision
+        @JsonProperty("git_revision")
+        String gitRevision
+        @JsonProperty("registration_url")
+        String registrationUrl
+        @JsonProperty("mobile_registration_url")
+        String mobileRegistrationUrl
+        @JsonProperty("image_max_upload_size")
+        Long imageMaxUploadSize
+        @JsonProperty("image_rcmd_max_pixels")
+        Long imageRcmdMaxPixels
+
+        override         public String toString() {
+            return "InstallationInformation{" +
+                    "siteUrl='" + siteUrl + '\'' +
+                    ", okapiBaseUrl='" + okapiBaseUrl + '\'' +
+                    ", okapiBaseUrls=" + Arrays.toString(okapiBaseUrls) +
+                    ", siteName='" + siteName + '\'' +
+                    ", okapiVersionNumber='" + okapiVersionNumber + '\'' +
+                    ", okapiRevision='" + okapiRevision + '\'' +
+                    ", gitRevision='" + gitRevision + '\'' +
+                    ", registrationUrl='" + registrationUrl + '\'' +
+                    ", mobileRegistrationUrl='" + mobileRegistrationUrl + '\'' +
+                    ", imageMaxUploadSize=" + imageMaxUploadSize +
+                    ", imageRcmdMaxPixels=" + imageRcmdMaxPixels +
+                    '}'
+        }
+    }
+
+    @WorkerThread
+    static InstallationInformation getInstallationInformation(final OCApiConnector connector) {
+        if (connector.getInstallationInformation() != null) {
+            return connector.getInstallationInformation()
+        }
+        val data: ObjectNode = getRequest(connector, OkapiService.SERVICE_API_INSTALLATION, Parameters()).data
+
+        if (data == null) {
+            return InstallationInformation()
+        }
+
+        try {
+            val info: InstallationInformation = MAPPER.readValue(data.traverse(), InstallationInformation.class)
+            connector.setInstallationInformation(info)
+            Log.i("OkapiClient.getInstallationInformation: " + info)
+            return info
+        } catch (final IOException e) {
+            Log.e("OkapiClient.getInstallationInformation: Couldn't read InstallationInformation", e)
+        }
+
+        return InstallationInformation()
+    }
+
+    /**
+     * Fetch more caches, if the GC connector is not active at all.
+     */
+    private static String getCacheLimit() {
+        return GCConnector.getInstance().isActive() ? "20" : "100"
+    }
+}

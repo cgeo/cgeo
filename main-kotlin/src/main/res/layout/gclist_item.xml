@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gclist_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dip"
+    android:paddingBottom="7dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="7dip"
+    tools:context=".connector.gc.AbstractListAdapter">
+
+    <!-- selection mode checkbox -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:gravity="left|fill_vertical"
+        android:paddingTop="5dip"
+        android:paddingRight="5dip"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_alignParentLeft="true"/>
+
+    <LinearLayout android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/download"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_save"
+            android:text="@null"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/cachelist"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_search"
+            android:text="@null"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/checkbox">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        android:paddingRight="5dip"
+        tools:text="name"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:minLines="0"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        tools:text="info"
+        android:maxLines="2" />
+    </LinearLayout>
+
+</RelativeLayout>

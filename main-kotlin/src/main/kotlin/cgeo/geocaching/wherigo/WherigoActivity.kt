@@ -1,0 +1,326 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.wherigo
+
+import cgeo.geocaching.CacheDetailActivity
+import cgeo.geocaching.R
+import cgeo.geocaching.activity.ActivityMixin
+import cgeo.geocaching.activity.CustomMenuEntryActivity
+import cgeo.geocaching.connector.StatusResult
+import cgeo.geocaching.databinding.WherigoActivityBinding
+import cgeo.geocaching.databinding.WherigolistItemBinding
+import cgeo.geocaching.enumerations.QuickLaunchItem
+import cgeo.geocaching.location.Viewport
+import cgeo.geocaching.maps.DefaultMap
+import cgeo.geocaching.storage.ContentStorage
+import cgeo.geocaching.storage.PersistableFolder
+import cgeo.geocaching.storage.extension.OneTimeDialogs
+import cgeo.geocaching.ui.BadgeManager
+import cgeo.geocaching.ui.SimpleItemListModel
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.dialog.Dialogs
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.AudioManager
+import cgeo.geocaching.utils.LocalizationUtils
+import cgeo.geocaching.utils.MenuUtils
+import cgeo.geocaching.wherigo.openwig.Zone
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+
+import androidx.annotation.NonNull
+
+import java.util.Collections
+import java.util.Comparator
+import java.util.List
+import java.util.function.Consumer
+
+class WherigoActivity : CustomMenuEntryActivity() {
+
+    private static val PARAM_WHERIGO_GUID: String = "wherigo_guid"
+    private static val PARAM_WHERIGO_GEOCODE: String = "wherigo_geocode"
+
+    private val wherigoDownloader: WherigoDownloader = WherigoDownloader(this, this::handleDownloadResult)
+
+    private WherigoActivityBinding binding
+    private Int wherigoListenerId
+    private Int wherigoAudioManagerListenerId
+
+    private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel
+
+    public static Unit start(final Activity parent, final Boolean forceHideNavigationBar) {
+        startInternal(parent, null, forceHideNavigationBar)
+    }
+
+    public static Unit startForGuid(final Activity parent, final String guid, final String geocode, final Boolean forceHideNavigationBar) {
+        startInternal(parent, intent -> {
+            intent.putExtra(PARAM_WHERIGO_GUID, guid)
+            intent.putExtra(PARAM_WHERIGO_GEOCODE, geocode)
+        }, forceHideNavigationBar)
+    }
+
+    private static Unit startInternal(final Activity parent, final Consumer<Intent> intentModifier, final Boolean forceHideNavigationBar) {
+        val intent: Intent = Intent(parent, WherigoActivity.class)
+        if (intentModifier != null) {
+            intentModifier.accept(intent)
+        }
+        startActivityHelper(parent, intent, QuickLaunchItem.VALUES.WHERIGO, forceHideNavigationBar)
+    }
+
+    override     public QuickLaunchItem.VALUES getRelatedQuickLaunchItem() {
+        return QuickLaunchItem.VALUES.WHERIGO
+    }
+
+    override     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
+    public final Unit onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState)
+
+        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS)
+
+        this.wherigoListenerId = WherigoGame.get().addListener(this::refreshGui)
+        this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui())
+
+        binding = WherigoActivityBinding.inflate(getLayoutInflater())
+        setThemeAndContentView(binding)
+
+        wherigoThingTypeModel = WherigoViewUtils.createThingTypeTable(this, binding.wherigoThingTypeList, thing -> WherigoViewUtils.displayThing(this, thing, false))
+
+        refreshGui(null)
+        refreshMusicGui()
+
+        binding.viewCartridges.setOnClickListener(v -> startGame())
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog())
+        binding.loadGame.setOnClickListener(v -> loadGame())
+        binding.saveGame.setOnClickListener(v -> saveGame())
+        binding.stopGame.setOnClickListener(v -> stopGame())
+        binding.download.setOnClickListener(v -> manualCartridgeDownload())
+        binding.reportProblem.setOnClickListener(v -> WherigoViewUtils.showErrorDialog(this))
+        binding.map.setOnClickListener(v -> showOnMap())
+        binding.cacheContextGotocache.setOnClickListener(v -> goToCache(WherigoGame.get().getContextGeocode()))
+        binding.cacheContextRemove.setOnClickListener(v -> WherigoGame.get().setContextGeocode(null))
+        binding.revokeFixedLocation.setOnClickListener(v -> WherigoLocationProvider.get().setFixedLocation(null))
+
+        //see if we have a guid from intent parameter
+        String guid = null
+        if (getIntent().getExtras() != null) {
+            guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID)
+        }
+        //see if we have a guid from url
+        val uri: Uri = getIntent().getData()
+        if (uri != null) {
+            String guidCandidate = uri.getQueryParameter("CGUID")
+            if (guidCandidate == null) {
+                guidCandidate = uri.getQueryParameter("cguid")
+            }
+            if (guidCandidate != null) {
+                guid = guidCandidate
+            }
+        }
+        if (guid != null) {
+            handleCGuidInput(guid)
+        }
+        BadgeManager.get().setBadge(binding.resumeDialog, false, -1)
+
+        val audio: AudioManager = WherigoGame.get().getAudioManager()
+        binding.soundContinue.setOnClickListener(v -> audio.resume())
+        binding.soundPause.setOnClickListener(v -> audio.pause())
+        binding.soundRestart.setOnClickListener(v -> audio.reset())
+        binding.soundMute.setOnClickListener(v -> audio.setMute(true))
+        binding.soundUnmute.setOnClickListener(v -> audio.setMute(false))
+    }
+
+    override     public Boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.wherigo_options, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override     public Boolean onPrepareOptionsMenu(final Menu menu) {
+        MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying())
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+        override     public Boolean onOptionsItemSelected(final MenuItem item) {
+        val menuItem: Int = item.getItemId()
+        if (menuItem == R.id.menu_show_cartridge) {
+            val info: WherigoCartridgeInfo = WherigoGame.get().getCartridgeInfo()
+            if (info != null) {
+                WherigoDialogManager.displayDirect(this, WherigoCartridgeDialogProvider(info, true))
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private Unit startGame() {
+        chooseCartridge()
+    }
+
+    private Unit chooseCartridge() {
+        val cartridges: List<WherigoCartridgeInfo> = WherigoCartridgeInfo.getAvailableCartridges(null)
+        Collections.sort(cartridges, Comparator.comparing(f -> f.getCartridgeFile().name))
+
+        final SimpleDialog.ItemSelectModel<WherigoCartridgeInfo> model = SimpleDialog.ItemSelectModel<>()
+        model
+            .setItems(cartridges)
+            .setDisplayViewMapper(R.layout.wherigolist_item, (info, group, view) -> WherigoViewUtils.fillCartridgeSelectItem(WherigolistItemBinding.bind(view), info),
+            (item, itemGroup) -> item == null  ? "" : item.getName())
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+
+        SimpleDialog.of(this)
+            .setTitle(TextParam.id(R.string.wherigo_choose_cartridge))
+            .selectSingle(model, cartridgeInfo -> WherigoDialogManager.displayDirect(this, WherigoCartridgeDialogProvider(cartridgeInfo, false)))
+    }
+
+    private Unit loadGame() {
+        val cartridgeInfo: WherigoCartridgeInfo = WherigoGame.get().getCartridgeInfo()
+        if (cartridgeInfo == null) {
+            return
+        }
+        WherigoUtils.ensureNoGameRunning(this, () -> WherigoUtils.loadGame(this, cartridgeInfo))
+    }
+
+    private Unit saveGame() {
+        WherigoUtils.saveGame(this)
+    }
+
+    private Unit stopGame() {
+        WherigoUtils.ensureNoGameRunning(this, null)
+    }
+
+    private Unit showOnMap() {
+        if (!WherigoGame.get().isPlaying()) {
+            return
+        }
+        val zones: List<Zone> = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class)
+        val viewport: Viewport = WherigoUtils.getZonesViewport(zones, true)
+        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null)
+    }
+
+    private Unit goToCache(final String geocode) {
+        CacheDetailActivity.startActivity(this, geocode)
+    }
+
+    private Unit manualCartridgeDownload() {
+        SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_manual_download_title))
+            .input(SimpleDialog.InputOptions().setLabel(LocalizationUtils.getString(R.string.wherigo_manual_download_cguid_label)).setInitialValue(""), input -> wherigoDownloader.downloadWherigo(input, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name)))
+    }
+
+    private Unit handleCGuidInput(final String cguid) {
+        val cguidCartridge: WherigoCartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid)
+        if (cguidCartridge == null) {
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_title))
+                .setMessage(TextParam.id(R.string.wherigo_download_message, cguid))
+                .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+                .confirm(() -> wherigoDownloader.downloadWherigo(cguid, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name)))
+        } else {
+            val geocode: String = getStartingGeocode()
+            if (geocode != null) {
+                WherigoGame.get().setContextGeocode(geocode)
+            }
+            WherigoDialogManager.get().display(WherigoCartridgeDialogProvider(cguidCartridge, false))
+        }
+    }
+
+    private String getStartingGeocode() {
+        val intent: Intent = getIntent()
+        return intent == null || intent.getExtras() == null ? null : intent.getExtras().getString(PARAM_WHERIGO_GEOCODE)
+    }
+
+    private Unit handleDownloadResult(final String cguid, final StatusResult result) {
+        val cartridgeInfo: WherigoCartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid)
+        if (result.isOk() && cartridgeInfo != null) {
+            ActivityMixin.showToast(this, R.string.wherigo_download_successful_title)
+            val geocode: String = getStartingGeocode()
+            if (geocode != null) {
+                WherigoGame.get().setContextGeocode(geocode)
+            }
+            WherigoDialogManager.displayDirect(this, WherigoCartridgeDialogProvider(cartridgeInfo, false))
+        } else {
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_failed_title))
+                .setMessage(TextParam.id(R.string.wherigo_download_failed_message, cguid, String.valueOf(result)))
+                .show()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private Unit refreshGui(final WherigoGame.NotifyType type) {
+
+        if (type == null || type == WherigoGame.NotifyType.START || type == WherigoGame.NotifyType.END) {
+            invalidateOptionsMenuCompatible()
+        }
+
+        val game: WherigoGame = WherigoGame.get()
+
+        WherigoViewUtils.updateThingTypeTable(wherigoThingTypeModel, binding.wherigoThingTypeList)
+
+        binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE)
+
+        binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_filter_location) + ": " +
+                WherigoLocationProvider.get().toUserDisplayableString())
+        binding.revokeFixedLocation.setVisibility(game.isDebugModeForCartridge() && WherigoLocationProvider.get().hasFixedLocation() ? View.VISIBLE : View.GONE)
+
+        binding.viewCartridges.setEnabled(true)
+        binding.download.setEnabled(true)
+        binding.reportProblem.setEnabled(true)
+
+        binding.resumeDialog.setVisibility(game.dialogIsPaused() ? View.VISIBLE : View.GONE)
+        binding.saveGame.setEnabled(game.isPlaying())
+        binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo() != null && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1)
+        binding.stopGame.setEnabled(game.isPlaying())
+        binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty())
+
+        this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player))
+
+        binding.cacheContextBox.setVisibility(game.getContextGeocode() != null ? View.VISIBLE : View.GONE)
+        binding.cacheContextName.setText(game.getContextGeocacheName())
+
+        if (game.isLastErrorNotSeen()) {
+            BadgeManager.get().setBadge(binding.reportProblem, false, -1)
+        } else {
+            BadgeManager.get().removeBadge(binding.reportProblem)
+        }
+    }
+
+    private Unit refreshMusicGui() {
+        val audio: AudioManager = WherigoGame.get().getAudioManager()
+        final AudioManager.State state = audio.getState()
+
+        val songInProgress: Boolean = state == AudioManager.State.STOPPED || state == AudioManager.State.PLAYING
+        binding.soundBox.setVisibility(state != AudioManager.State.NO_SONG ? View.VISIBLE : View.GONE)
+        binding.soundRestart.setEnabled(songInProgress || state == AudioManager.State.COMPLETED)
+        binding.soundPause.setVisibility(state == AudioManager.State.PLAYING ? View.VISIBLE : View.GONE)
+        binding.soundContinue.setVisibility(state == AudioManager.State.STOPPED || state == AudioManager.State.COMPLETED ? View.VISIBLE : View.GONE)
+        binding.soundContinue.setEnabled(state == AudioManager.State.STOPPED)
+        binding.soundMute.setVisibility(!audio.isMute() ? View.VISIBLE : View.GONE)
+        binding.soundUnmute.setVisibility(audio.isMute() ? View.VISIBLE : View.GONE)
+
+        binding.soundInfo.setText(audio.getUserDisplayableShortState())
+    }
+
+    override     public final Unit onConfigurationChanged(final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig)
+    }
+
+    override     public final Unit onDestroy() {
+        super.onDestroy()
+        WherigoGame.get().removeListener(wherigoListenerId)
+        WherigoGame.get().getAudioManager().removeListener(wherigoAudioManagerListenerId)
+    }
+
+}

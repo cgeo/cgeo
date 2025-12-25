@@ -1,0 +1,30 @@
+c:geo ir open source, pilnvērtīgs un vienmēr gatavs lietošanai neoficiāls geocaching.com klients un kā arī piedāvā pamata atbalstu citām slēpņošanas platformām (piemēram, Opencaching). Tīmekļa pārlūkprogramma vai eksportēšana nav nepieciešama - vienkārši instalējiet to un sāciet lietot uzreiz.
+
+Galvenās funkcijas:
+- Apskatīt slēpņus tiešsaistes kartē
+- Use Google Maps or OpenStreetMap
+- Meklēt slēpņus pēc dažādiem kritērijiem
+- Reģistrēt savu apmeklējumu tiešsaistē vai saglabāt bezsaistē vēlākai reģistrēšanai
+- Saglabāt bezsaistē slēpņa informāciju savā ierīcē
+- Veidot un rediģēt starpposmus
+- Orientēties izmantojot kompasu, karti vai arī citas aplikācijas
+- Importēt/Eksportēt GPX failus
+- Pilnībā atbalsta darbības ar ceļotājiem (trackables)
+- Bezsaistes slēpņošanas funkcijas, tajā skaitā arī bezsaistes karšu izmantošanu
+
+c:geo ir vienkārši lietojams, bet spēcīgs slēpņošanas klients ar daudzām papildus funkcijām. Viss, kas ir nepieciešams, lai sāktu to lietot, ir eksistējošs geocaching.com vai citas slēpšņošanas platformas (piemēram, Opencaching) profils.
+Atrodi slēpņus tiešsaistes kartē vai lietojot kādu no daudzajām meklēšanas funkcijām.
+
+Vadies uz slēpni vai slēpņa pieturaspunktu, izmantojot iebūvēto kompasa funkciju, karti vai nododot koordinātas dažādām ārējām lietotnēm (piemēram, Radar, Google Navigation, StreetView, Locus, Navigon, Sygic un daudzām citām).
+
+Saglabā slēpņa informāciju mobilajā ierīcē no geocaching.com, kā arī importējot GPX failu, lai tā būtu pieejama, kad vien vēlies.
+Jūs varat pārvaldīt saglabātos slēpņus dažādos sarakstos, kā arī kārtot un filtrēt tos atbilstoši savām vajadzībām.
+Saglabātie slēpņi var tikt lietoti kopā ar bezsaistes vai statiskajām kartēm, lai tos atrastu bez interneta savienojuma (piemēram. viesabonēšanas laikā).
+Apmeklējuma ieraksts var tikt publicēts tiešsaistē vai saglabāts bezsaistē, lai to publicētu vēlāk, vai lai to eksportētu, izmantojot lauka piezīmes.
+
+Meklē un atklāj ceļotājus, pārvaldi savu ceļotāju inventāru un atstāj ceļotāju, kad publicē slēpņa atrašanas ierakstu.
+
+Ja jums ir problēmas ar c: geo instalēšanu vai lietošanu, lūdzu, vispirms apskatiet mūsu FAQ (https://faq.cgeo.org) vai skatiet lietotāja rokasgrāmatu (https://manual.cgeo.org).
+Ja joprojām ir problēmas, sazinies ar mūsu atbalsta centru, izmantojot e-pastu.
+
+Ja vēlies uzzināt, kāpēc šim c:geo spraudnim nepieciešamas pieprasītās atļaujas, lūdzu apskaties skaidrojumus šeit: https://www.cgeo.org/faq.html#plugin-contacts-privacy.

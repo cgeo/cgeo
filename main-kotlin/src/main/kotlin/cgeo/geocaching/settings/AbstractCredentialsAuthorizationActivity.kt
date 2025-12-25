@@ -1,0 +1,230 @@
+// Auto-converted from Java to Kotlin
+// WARNING: This code requires manual review and likely has compilation errors
+// Please review and fix:
+// - Method signatures (parameter types, return types)
+// - Field declarations without initialization
+// - Static members (use companion object)
+// - Try-catch-finally blocks
+// - Generics syntax
+// - Constructors
+// - And more...
+
+package cgeo.geocaching.settings
+
+import cgeo.geocaching.Intents
+import cgeo.geocaching.R
+import cgeo.geocaching.activity.AbstractActivity
+import cgeo.geocaching.activity.ActivityMixin
+import cgeo.geocaching.connector.ConnectorFactory
+import cgeo.geocaching.databinding.AuthorizationCredentialsActivityBinding
+import cgeo.geocaching.enumerations.StatusCode
+import cgeo.geocaching.ui.TextParam
+import cgeo.geocaching.ui.ViewUtils
+import cgeo.geocaching.ui.dialog.SimpleDialog
+import cgeo.geocaching.utils.AndroidRxUtils
+import cgeo.geocaching.utils.BundleUtils
+import cgeo.geocaching.utils.Log
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.text.TextWatcher
+import android.view.View
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+
+import io.reactivex.rxjava3.core.Observable
+import org.apache.commons.lang3.StringUtils
+
+abstract class AbstractCredentialsAuthorizationActivity : AbstractActivity() {
+
+    private var connectorUsername: String = StringUtils.EMPTY
+    private var connectorPassword: String = StringUtils.EMPTY
+
+    private AuthorizationCredentialsActivityBinding binding
+
+    override     public Unit onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState)
+        setTheme()
+        setUpNavigationEnabled(true)
+        binding = AuthorizationCredentialsActivityBinding.inflate(getLayoutInflater())
+        setContentView(binding.getRoot())
+
+        val extras: Bundle = getIntent().getExtras()
+        if (extras != null) {
+            connectorUsername = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, connectorUsername)
+            connectorPassword = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, connectorPassword)
+        }
+
+        setTitle(getAuthTitle())
+
+        binding.auth1.setText(getAuthExplainShort())
+        binding.auth2.setText(getAuthExplainLong())
+        binding.auth3.setText(getAuthRegisterExplain())
+
+        binding.check.setText(getAuthCheck())
+        binding.check.setOnClickListener(CheckListener())
+        enableCheckButtonIfReady()
+
+        binding.username.setText(connectorUsername)
+        binding.password.setText(connectorPassword)
+        enableCheckButtonIfReady()
+
+        if (StringUtils.isEmpty(getCreateAccountUrl())) {
+            binding.register.setVisibility(View.GONE)
+        } else {
+            binding.register.setText(getAuthRegister())
+            binding.register.setEnabled(true)
+            binding.register.setOnClickListener(RegisterListener())
+        }
+
+        val enableStartButtonWatcher: TextWatcher = ViewUtils.createSimpleWatcher(s -> enableCheckButtonIfReady())
+        binding.username.addTextChangedListener(enableStartButtonWatcher)
+        binding.password.addTextChangedListener(enableStartButtonWatcher)
+    }
+
+    override     public Unit onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);  // call super to make lint happy
+        setIntent(intent)
+    }
+
+    private Unit checkCredentials(final String username, final String password) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            ActivityMixin.showToast(this, R.string.err_missing_auth)
+            return
+        }
+
+        val nam: String = StringUtils.defaultString(username)
+        val pwd: String = StringUtils.defaultString(password)
+
+        val credentials: Credentials = Credentials(nam, pwd)
+        val authorizationActivity: AbstractCredentialsAuthorizationActivity = this
+
+        val loginDialog: ProgressDialog = ProgressDialog.show(authorizationActivity,
+                res.getString(R.string.init_login_popup), getAuthDialogWait(), true)
+        loginDialog.setCancelable(false)
+
+        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
+            loginDialog.dismiss()
+            setCredentials(credentials)
+            if (statusCode == StatusCode.NO_ERROR) {
+                ConnectorFactory.forceRelog()
+                showToast(getAuthDialogCompleted())
+                setResult(RESULT_OK)
+                finish()
+            } else {
+                SimpleDialog.of(authorizationActivity).setTitle(R.string.init_login_popup)
+                        .setMessage(TextParam.concat(TextParam.id(R.string.init_login_popup_failed_reason, ""),
+                                TextParam.id(statusCode.errorString)).setMovement(true))
+                        .show()
+                binding.check.setText(getAuthCheckAgain())
+                binding.check.setOnClickListener(CheckListener())
+                binding.check.setEnabled(true)
+            }
+        })
+    }
+
+    private class CheckListener : View.OnClickListener {
+
+        @SuppressLint("ClickableViewAccessibility")
+        override         public Unit onClick(final View view) {
+            hideKeyboard()
+
+            binding.check.setEnabled(false)
+            binding.check.setOnTouchListener(null)
+            binding.check.setOnClickListener(null)
+
+            val username: String = binding.username.getText().toString()
+            val password: String = binding.password.getText().toString()
+
+            checkCredentials(username, password)
+        }
+    }
+
+    private class RegisterListener : View.OnClickListener {
+
+        override         public Unit onClick(final View view) {
+            val activity: Activity = AbstractCredentialsAuthorizationActivity.this
+            try {
+                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getCreateAccountUrl())))
+            } catch (final ActivityNotFoundException e) {
+                Log.e("Cannot find suitable activity", e)
+                ActivityMixin.showToast(activity, R.string.err_application_no)
+            }
+        }
+    }
+
+    // get resources from derived class
+
+    protected abstract String getCreateAccountUrl()
+
+    protected abstract Unit setCredentials(Credentials credentials)
+
+    protected abstract StatusCode checkCredentials(Credentials credentials)
+
+    protected abstract String getAuthTitle()
+
+    protected String getAuthDialogCompleted() {
+        return res.getString(R.string.auth_dialog_completed_geokrety, getAuthTitle())
+    }
+
+    protected String getAuthDialogWait() {
+        return res.getString(R.string.auth_dialog_waiting, getAuthTitle())
+    }
+
+    protected String getAuthExplainShort() {
+        return res.getString(R.string.auth_credentials_explain_short, getAuthTitle())
+    }
+
+    protected String getAuthExplainLong() {
+        return res.getString(R.string.auth_credentials_explain_long, getAuthTitle())
+    }
+
+    protected String getAuthCheck() {
+        return res.getString(R.string.auth_check)
+    }
+
+    protected String getAuthCheckAgain() {
+        return res.getString(R.string.auth_check_again)
+    }
+
+    protected String getAuthRegisterExplain() {
+        return res.getString(R.string.auth_register_explain)
+    }
+
+    protected String getAuthRegister() {
+        return res.getString(R.string.auth_register)
+    }
+
+    /**
+     * Enable or disable the start button depending on login/password field.
+     * If both fields are not empty, button is enabled.
+     */
+    protected Unit enableCheckButtonIfReady() {
+        binding.check.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
+                StringUtils.isNotEmpty(binding.password.getText()))
+    }
+
+    public static class CredentialsAuthParameters {
+        public final String username
+        public final String password
+
+        public CredentialsAuthParameters(final String username, final String password) {
+            this.username = username
+            this.password = password
+        }
+
+        public Unit setCredentialsAuthExtras(final Intent intent) {
+            if (intent != null) {
+                intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, StringUtils.defaultIfBlank(username, StringUtils.EMPTY))
+                intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, StringUtils.defaultIfBlank(password, StringUtils.EMPTY))
+            }
+        }
+
+    }
+}

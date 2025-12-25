@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_al"
+    android:title="@string/settings_title_lc" >
+
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_connectorALActive"
+            android:title="@string/settings_service_activate"
+            app:iconSpaceReserved="false" />
+        <Preference
+            app:summary="@string/settings_lc_description"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_foundstate_al"
+            android:title="@string/settings_lc_found_state_title"
+            app:iconSpaceReserved="false" />
+        <Preference
+            app:summary="@string/settings_lc_found_state_handling"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
+        <Preference
+            android:key="@string/pref_fakekey_al_website"
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.CapabilitiesPreference
+            android:title="@string/settings_features"
+            app:connector="AL"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

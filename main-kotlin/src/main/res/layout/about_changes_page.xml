@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".AboutActivity$ChangeLogViewCreator">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/changelog_master"
+            style="@style/about_changes"
+            android:paddingBottom="20dip" />
+
+        <TextView
+            android:id="@+id/changelog_release"
+            style="@style/about_changes" />
+
+        <Button
+            android:id="@+id/changelog_github"
+            style="@style/button_full"
+            android:text="@string/about_changelog_full" />
+    </LinearLayout>
+
+</ScrollView>

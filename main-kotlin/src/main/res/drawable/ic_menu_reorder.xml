@@ -1,0 +1,11 @@
+<!-- taken from reorder-horizontal / materialdesignicons-google -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportHeight="24"
+    android:viewportWidth="24"
+    android:tint="?android:textColorPrimary">
+     <path
+      android:fillColor="#FF000000"
+      android:pathData="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z"/>
+</vector>

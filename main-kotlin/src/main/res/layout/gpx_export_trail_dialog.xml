@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dip"
+    tools:context=".export.GpxExport" >
+
+    <include layout="@layout/gpx_export_fragment" />
+
+    <CheckBox
+        android:id="@+id/clear_trailhistory_after_export"
+        style="@style/checkbox_full"
+        android:text="@string/export_trailhistory_clear_after_export" />
+</LinearLayout>

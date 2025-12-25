@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx version="1.0" creator="c:geo - http://www.cgeo.org/" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd http://www.gsak.net/xmlv1/6 http://www.gsak.net/xmlv1/6/gsak.xsd" xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1" xmlns:gsak="http://www.gsak.net/xmlv1/6" xmlns:cgeo="http://www.cgeo.org/wptext/1/0">
+  <wpt lat="0.0" lon="0.0">
+    <name>ZZ1000</name>
+    <desc>Test</desc>
+    <urlname>Test</urlname>
+    <sym>Geocache</sym>
+    <type>Geocache|User defined cache</type>
+    <groundspeak:cache id="" available="True" archived="False">
+      <groundspeak:name>Test</groundspeak:name>
+      <groundspeak:placed_by>You</groundspeak:placed_by>
+      <groundspeak:owner></groundspeak:owner>
+      <groundspeak:type>User defined cache</groundspeak:type>
+      <groundspeak:container>Unknown</groundspeak:container>
+      <groundspeak:difficulty>0</groundspeak:difficulty>
+      <groundspeak:terrain>0</groundspeak:terrain>
+      <groundspeak:country></groundspeak:country>
+      <groundspeak:state></groundspeak:state>
+      <groundspeak:short_description html="False"></groundspeak:short_description>
+      <groundspeak:long_description html="False">This is a user-defined cache</groundspeak:long_description>
+      <groundspeak:encoded_hints></groundspeak:encoded_hints>
+    </groundspeak:cache>
+    <gsak:wptExtension>
+      <gsak:Watch>false</gsak:Watch>
+      <gsak:IsPremium>false</gsak:IsPremium>
+      <gsak:FavPoints>-1</gsak:FavPoints>
+      <gsak:GcNote></gsak:GcNote>
+    </gsak:wptExtension>
+  </wpt>
+</gpx>

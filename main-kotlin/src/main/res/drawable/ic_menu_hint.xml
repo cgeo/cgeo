@@ -1,0 +1,14 @@
+<!-- taken (modified) from account, lightbulb-outline / materialdesignicons-google -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportHeight="24"
+    android:viewportWidth="24"
+    android:tint="?android:textColorPrimary">
+     <path
+      android:fillColor="#FF000000"
+      android:pathData="M10,4A4,4 0,0 1,14 8,4 4,0 0,1 10,12 4,4 0,0 1,6 8,4 4,0 0,1 10,4M10,14C14.4,14 18,15.8 18,18V20H2V18C2,15.8 5.58,14 10,14Z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M18,2A3.5,3.5 0,0 1,21.5 5.5C21.5,6.69 20.9,7.73 20,8.37V9.5A0.5,0.5 0,0 1,19.5 10H16.5A0.5,0.5 0,0 1,16 9.5V8.37C15.1,7.74 14.5,6.67 14.5,5.5A3.5,3.5 0,0 1,18 2M16.5,11.5V11H19.5V11.5A0.5,0.5 0,0 1,19 12H17A0.5,0.5 0,0 1,16.5 11.5M18,3A2.5,2.5 0,0 0,15.5 5.5C15.5,6.53 16.1,7.41 17,7.79V9H19V7.79C19.9,7.41 20.5,6.53 20.5,5.5A2.5,2.5 0,0 0,18 3Z"/>
+</vector>

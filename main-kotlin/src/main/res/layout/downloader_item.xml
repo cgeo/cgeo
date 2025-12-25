@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapdownloader_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dip"
+    android:paddingBottom="7dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="7dip"
+    android:background="?android:attr/selectableItemBackground"
+    tools:context=".downloader.DownloadSelectorActivity">
+
+    <ImageView
+        android:id="@+id/action"
+        style="@style/button_icon"
+        android:gravity="left|center_vertical"
+        android:text="@null"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/badge"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="right|bottom"
+        android:text="@null"
+        android:layout_alignBottom="@id/action"
+        android:layout_alignRight="@id/action" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:paddingLeft="10dip"
+        android:layout_toRightOf="@id/action"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        tools:text="name"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:paddingLeft="10dip"
+        android:layout_below="@id/label"
+        android:layout_toRightOf="@id/action"
+        android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        tools:text="info"
+        android:maxLines="2" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:visibility="gone"
+        android:id="@+id/progress_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/action"
+        android:indeterminate="true" />
+
+</RelativeLayout>

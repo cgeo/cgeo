@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/status"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/helper_bcg"
+    android:visibility="invisible"
+    tools:visibility="visible"
+    tools:context=".StatusFragment" >
+
+    <ImageView
+        android:id="@+id/status_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="4dip"
+        tools:src="@drawable/attribute_firstaid"/>
+
+    <TextView
+        android:id="@+id/status_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/status_icon"
+        android:gravity="center"
+        android:padding="4dip"
+        android:textColor="@color/colorTextMainInfo"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_detailsPrimary"
+        tools:text="status message"/>
+
+</RelativeLayout>
