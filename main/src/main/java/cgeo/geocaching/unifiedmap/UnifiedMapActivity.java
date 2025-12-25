@@ -662,27 +662,28 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return;
         }
 
-        final Set<Waypoint> waypoints;
-
         //show all waypoints be displayed or just the ones from visible caches?
-        final boolean showAll = viewModel.mapType.enableLiveMap();
-        if (showAll) {
-            waypoints = DataStore.loadWaypoints(viewport);
-        } else {
-            waypoints = viewModel.caches.readWithResult(caches -> {
-                final Set<Waypoint> wpSet = new HashSet<>();
-                for (final Geocache c : caches) {
-                    wpSet.addAll(c.getWaypoints());
-                }
-                return wpSet;
-            });
-        }
+        Schedulers.io().scheduleDirect(() -> {
+            final Set<Waypoint> waypoints;
+            final boolean showAll = viewModel.mapType.enableLiveMap();
+            if (showAll) {
+                waypoints = DataStore.loadWaypoints(viewport);
+            } else {
+                waypoints = viewModel.caches.readWithResult(caches -> {
+                    final Set<Waypoint> wpSet = new HashSet<>();
+                    for (final Geocache c : caches) {
+                        wpSet.addAll(c.getWaypoints());
+                    }
+                    return wpSet;
+                });
+            }
 
-        //filter waypoints
-        MapUtils.filter(waypoints, filter);
-        viewModel.waypoints.write(wps -> {
+            //filter waypoints
+            MapUtils.filter(waypoints, filter);
+            viewModel.waypoints.write(wps -> {
                 wps.clear();
                 wps.addAll(waypoints);
+            });
         });
     }
 
