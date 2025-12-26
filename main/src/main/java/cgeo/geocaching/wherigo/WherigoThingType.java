@@ -80,13 +80,11 @@ public enum WherigoThingType {
     public <T extends EventTable> List<T> getThingsForUserDisplay(final Class<T> clazz) {
         final boolean debugMode = WherigoGame.get().isDebugModeForCartridge();
 
-        final List<T> list = getAllThings().stream()
-            .map(t -> (T) t)
-            .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
-            .collect(Collectors.toCollection(ArrayList::new));
-
-        list.sort(WherigoUtils.getThingsComparator());
-        return list;
+        return getAllThings().stream()
+                .map(t -> (T) t)
+                .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
+                .sorted(WherigoUtils.getThingsComparator())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Nullable
