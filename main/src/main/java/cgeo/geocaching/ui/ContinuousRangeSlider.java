@@ -98,36 +98,31 @@ public class ContinuousRangeSlider extends LinearLayout {
                 // still on the same thumb, and not having moved it out of grace area?
                 if (slider.getFocusedThumbIndex() == lastThumb && lastThumb >= 0 && lastThumb < values.size() && Math.abs(lastValue - values.get(lastThumb)) < grace) {
                     final String defaultValue = String.format(Locale.getDefault(), "%d", Math.round(lastValue * factor));
-                    int inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                    if (slider.getValueFrom() < 0) {
-                        inputType |= InputType.TYPE_NUMBER_FLAG_SIGNED;
-                    }
-                    final java.util.function.Consumer<String> listener = input -> {
-                        try {
-                            final float newValue = Dialogs.checkInputRange(getContext(), Float.parseFloat(input), slider.getValueFrom() * factor, slider.getValueTo() * factor) / factor;
-                            if (lastThumb == 0) {
-                                // we want to set lower bound, but new value is larger than current upper bound, so swap
-                                if (newValue > values.get(1)) {
-                                    slider.setValues(values.get(1), newValue);
-                                } else {
-                                    slider.setValues(newValue, values.get(1));
-                                }
-                            } else {
-                                // we want to set upper bound, but new value is smaller than current lower bound, so swap
-                                if (newValue < values.get(0)) {
-                                    slider.setValues(newValue, values.get(0));
-                                } else {
-                                    slider.setValues(values.get(0), newValue);
-                                }
-                            }
-                        } catch (NumberFormatException e) {
-                            ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
-                        }
-                    };
-                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title))
-                            .setMessage(TextParam.id(R.string.number_input_range, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))
-                            .input(new SimpleDialog.InputOptions().setInputType(inputType).setInitialValue(defaultValue).setSuffix(""), listener);
+                    showInputDialog(slider, defaultValue, lastThumb == 0);
                 }
+            }
+        });
+
+        // add click listeners to labels for manual input
+        binding.labelMin.setOnClickListener(v -> showInputDialog(binding.sliderInternal, binding.labelMin.getText().toString(), true));
+        binding.labelMax.setOnClickListener(v -> showInputDialog(binding.sliderInternal, binding.labelMax.getText().toString(), false));
+        // Add listener to update labels dynamically
+        binding.sliderInternal.addOnChangeListener((slider, value, fromUser) -> {
+            final List<Float> values = slider.getValues();
+            if (values.size() >= 2) {
+                // update min label
+                final float minValue = values.get(0);
+                final boolean showMinValueLabel = minValue > min;
+                binding.labelMin.setVisibility(showMinValueLabel ? VISIBLE : GONE);
+                binding.spaceMin.setVisibility(showMinValueLabel ? GONE : VISIBLE);
+                binding.labelMin.setText(String.format(getLabel(minValue)));
+
+                // update max label
+                final float maxValue = values.get(1);
+                final boolean showMaxValueLabel = maxValue < max;
+                binding.labelMax.setVisibility(showMaxValueLabel ? VISIBLE : GONE);
+                binding.spaceMax.setVisibility(showMaxValueLabel ? GONE : VISIBLE);
+                binding.labelMax.setText(String.format(getLabel(maxValue)));
             }
         });
     }
@@ -163,6 +158,40 @@ public class ContinuousRangeSlider extends LinearLayout {
         buildScaleLegend(axisLabelCount);
 
         setRangeAll();
+    }
+
+    public void showInputDialog(final @NonNull RangeSlider slider, final String defaultValue, final boolean setLowerBound) {
+        final List<Float> values = slider.getValues();
+        int inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+        if (slider.getValueFrom() < 0) {
+            inputType |= InputType.TYPE_NUMBER_FLAG_SIGNED;
+        }
+        final java.util.function.Consumer<String> listener = input -> {
+            try {
+                final float newValue = Dialogs.checkInputRange(getContext(), Float.parseFloat(input), slider.getValueFrom() * factor, slider.getValueTo() * factor) / factor;
+                if (setLowerBound) {
+                    // we want to set lower bound, but new value is larger than current upper bound, so swap
+                    if (newValue > values.get(1)) {
+                        slider.setValues(values.get(1), newValue);
+                    } else {
+                        slider.setValues(newValue, values.get(1));
+                    }
+                } else {
+                    // we want to set upper bound, but new value is smaller than current lower bound, so swap
+                    if (newValue < values.get(0)) {
+                        slider.setValues(newValue, values.get(0));
+                    } else {
+                        slider.setValues(values.get(0), newValue);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
+            }
+        };
+        SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title))
+                .setMessage(TextParam.id(R.string.number_input_range, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))
+                .input(new SimpleDialog.InputOptions().setInputType(inputType).setInitialValue(defaultValue).setSuffix(""), listener);
+
     }
 
     private void buildScaleLegend(final int axisLabelCount) {
