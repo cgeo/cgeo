@@ -124,7 +124,8 @@ public class ContinuousRangeSlider extends LinearLayout {
                             ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
                         }
                     };
-                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))
+                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title))
+                            .setMessage(TextParam.id(R.string.number_input_range, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))
                             .input(new SimpleDialog.InputOptions().setInputType(inputType).setInitialValue(defaultValue).setSuffix(""), listener);
                 }
             }
