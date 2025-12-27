@@ -1295,6 +1295,7 @@
     <string name="map_source_google_terrain">Google: Teren</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
+    <string name="map_source_nomap">Brak mapy</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
