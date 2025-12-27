@@ -9,7 +9,7 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Naprawiono: Dublowanie poszczególnych pozycji trasy
 - Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
 - Nowość: Obsługa przezroczystego tła podczas wyświetlania map offline (tylko VTM)
-- New: NoMap tile provider (don't show map, just caches etc.)
+- Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
