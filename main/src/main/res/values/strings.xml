@@ -718,6 +718,7 @@
 
     <string name="cache_filter_datefilter_absolute">Absolute</string>
     <string name="cache_filter_datefilter_relative">Relative to today</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignore year</string>
     <string name="cache_filter_datefilter_label_from">From:</string>
     <string name="cache_filter_datefilter_label_to">To:</string>
 
