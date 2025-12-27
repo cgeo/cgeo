@@ -82,7 +82,7 @@ The app requires API keys for full functionality:
 
 ## Dependencies
 
-- Android SDK with Google APIs V26+
+- Android SDK with Google APIs (API level 26+)
 - AndroidX libraries
 - The project uses Gradle for build management
 
