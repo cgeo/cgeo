@@ -24,7 +24,7 @@ You are a highly capable and autonomous agent, and you can solve all assigned ta
 
 # Unit tests
 - For all new or modified code you write, please also write Unit tests if feasible.
-- Prefer writing pure unit tests (placed under main/src/test) before writing Android-instrumented tests (placed under main/src/AndroidTest)
+- Prefer writing pure unit tests (placed under main/src/test/java) before writing Android-instrumented tests (placed under main/src/AndroidTest/java)
 
 # Operational notes:
 - Prefer smaller, logically grouped commits while working; we will squash at the end.

@@ -10,8 +10,8 @@ c:geo is an open-source Android geocaching app written in Java. It's a full-feat
 
 - `main/` - Main application module
   - `src/main/java/` - Main application source code
-  - `src/test/` - Pure unit tests (JUnit)
-  - `src/androidTest/` - Android instrumented tests
+  - `src/test/java` - Pure unit tests (JUnit)
+  - `src/androidTest/java` - Android instrumented tests
   - `build.gradle` - Module build configuration
 - `checkstyle.xml` - Checkstyle configuration (code style rules)
 - `ruleset.xml` - PMD ruleset (code quality rules)
@@ -46,6 +46,8 @@ Apply all rules from:
 - `checkstyle.xml` - All rules with severity "warning" or higher
 - `ruleset.xml` - PMD rules for code quality
 
+To check quality of source code, use code inspection instead. Do not attempt to compile source code.
+
 ## Building and Testing
 
 ### Build Commands
@@ -61,17 +63,18 @@ Apply all rules from:
 ./gradlew connectedAndroidTest
 ```
 
+As of now, Copilot Agents should not attempt to execute gradle commands for this repository.
+
 ### API Keys Configuration
 
-The app requires API keys for full functionality:
-1. Copy `./templates/private.properties` to `./`
-2. Edit `private.properties` with your API keys (optional for development)
-3. The build system generates `keys.xml` automatically
+The app requires API keys for full functionality. However, those are not available to copilot
+as of now. They are not required for compiling and executing unit tests. They are necessary
+for some instrumented tests though, so if you execute them without keys then some will fail.
 
 ### Testing Guidelines
 
-- **Pure unit tests** go in `main/src/test/` - prefer these when possible
-- **Instrumented tests** go in `main/src/androidTest/` - use when Android framework is required
+- **Pure unit tests** go in `main/src/test/java` - prefer these when possible
+- **Instrumented tests** go in `main/src/androidTest/java` - use when Android framework is required
 - Test classes should be in the same package as the class under test
 - Tests that interact with geocaching.com require a configured account on the emulator
 
