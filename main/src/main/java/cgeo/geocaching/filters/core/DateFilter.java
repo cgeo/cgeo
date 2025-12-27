@@ -25,6 +25,7 @@ public class DateFilter {
 
     private static final DateFormat DAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     private static final DateFormat DAY_DATE_FORMAT_SQL = DAY_DATE_FORMAT;
+    private static final DateFormat DAY_MONTH_FORMAT = new SimpleDateFormat("MM-dd", Locale.US);
 
     public static final DateFormat DAY_DATE_FORMAT_USER_DISPLAY = DAY_DATE_FORMAT;
 
@@ -33,16 +34,47 @@ public class DateFilter {
     private boolean isRelative = false;
     private int minDateOffset = -1;
     private int maxDateOffset = -1;
+    private boolean ignoreYear = false;
 
     public Boolean matches(final Date value) {
         if (value == null) {
             return getMinDate() == null && getMaxDate() == null ? true : null;
         }
 
+        if (ignoreYear) {
+            return matchesDayOfYear(value);
+        }
+
         if (getMinDate() != null && getMinDate().getTime() / MILLIS_PER_DAY > value.getTime() / MILLIS_PER_DAY) {
             return false;
         }
         return getMaxDate() == null || getMaxDate().getTime() / MILLIS_PER_DAY >= value.getTime() / MILLIS_PER_DAY;
+    }
+
+    private Boolean matchesDayOfYear(final Date value) {
+        if (getMinDate() == null && getMaxDate() == null) {
+            return true;
+        }
+
+        final String valueDayOfYear = DAY_MONTH_FORMAT.format(value);
+        final String minDayOfYear = getMinDate() != null ? DAY_MONTH_FORMAT.format(getMinDate()) : null;
+        final String maxDayOfYear = getMaxDate() != null ? DAY_MONTH_FORMAT.format(getMaxDate()) : null;
+
+        if (minDayOfYear != null && maxDayOfYear != null) {
+            if (minDayOfYear.compareTo(maxDayOfYear) <= 0) {
+                // Normal range (e.g., 03-01 to 11-30)
+                return valueDayOfYear.compareTo(minDayOfYear) >= 0 &&
+                       valueDayOfYear.compareTo(maxDayOfYear) <= 0;
+            } else {
+                // Wraps around year boundary (e.g., 11-01 to 02-28)
+                return valueDayOfYear.compareTo(minDayOfYear) >= 0 ||
+                       valueDayOfYear.compareTo(maxDayOfYear) <= 0;
+            }
+        } else if (minDayOfYear != null) {
+            return valueDayOfYear.compareTo(minDayOfYear) >= 0;
+        } else {
+            return valueDayOfYear.compareTo(maxDayOfYear) <= 0;
+        }
     }
 
     public Date getMinDate() {
@@ -85,14 +117,17 @@ public class DateFilter {
     }
 
     public void setMinMaxDate(final Date min, final Date max) {
-        if (min != null && max != null && min.after(max)) {
-            this.minDate = max;
-            this.maxDate = min;
-        } else {
-            this.minDate = min;
-            this.maxDate = max;
-        }
+        this.minDate = min;
+        this.maxDate = max;
         this.isRelative = false;
+    }
+
+    public boolean isIgnoreYear() {
+        return ignoreYear;
+    }
+
+    public void setIgnoreYear(final boolean ignoreYear) {
+        this.ignoreYear = ignoreYear;
     }
 
     public void setRelativeDays(final int daysBeforeToday, final int daysAfterToday) {
@@ -132,6 +167,7 @@ public class DateFilter {
             isRelative = config.size() > 2 && Boolean.parseBoolean(config.get(2));
             minDateOffset = config.size() > 3 ? Integer.parseInt(config.get(3)) : -1;
             maxDateOffset = config.size() > 4 ? Integer.parseInt(config.get(4)) : -1;
+            ignoreYear = config.size() > 5 && Boolean.parseBoolean(config.get(5));
         }
     }
 
@@ -142,6 +178,7 @@ public class DateFilter {
         config.add(Boolean.toString(isRelative));
         config.add(String.valueOf(minDateOffset));
         config.add(String.valueOf(maxDateOffset));
+        config.add(Boolean.toString(ignoreYear));
         return config;
     }
 
@@ -164,6 +201,7 @@ public class DateFilter {
             isRelative = JsonUtils.getBoolean(node, "relative", false);
             minDateOffset = JsonUtils.getInt(node, "minOffset", -1);
             maxDateOffset = JsonUtils.getInt(node, "maxOffset", -1);
+            ignoreYear = JsonUtils.getBoolean(node, "ignoreYear", false);
         }
     }
 
@@ -175,6 +213,7 @@ public class DateFilter {
         JsonUtils.setBoolean(node, "relative", isRelative);
         JsonUtils.setInt(node, "minOffset", minDateOffset);
         JsonUtils.setInt(node, "maxOffset", maxDateOffset);
+        JsonUtils.setBoolean(node, "ignoreYear", ignoreYear);
         return node;
     }
 
@@ -189,11 +228,37 @@ public class DateFilter {
 
         if (valueExpression != null && (getMinDate() != null || getMaxDate() != null)) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-            if (getMinDate() != null) {
-                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(getMinDate()) + "'");
-            }
-            if (getMaxDate() != null) {
-                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(getMaxDate()) + "'");
+            
+            if (ignoreYear) {
+                // Extract month and day from the date value in SQLite
+                final String dayOfYearExpression = "strftime('%m-%d', date(" + valueExpression + "/1000, 'unixepoch'))";
+                final String minDayOfYear = getMinDate() != null ? DAY_MONTH_FORMAT.format(getMinDate()) : null;
+                final String maxDayOfYear = getMaxDate() != null ? DAY_MONTH_FORMAT.format(getMaxDate()) : null;
+                
+                if (minDayOfYear != null && maxDayOfYear != null) {
+                    if (minDayOfYear.compareTo(maxDayOfYear) <= 0) {
+                        // Normal range (doesn't wrap around year boundary)
+                        sqlBuilder.addWhere(dayOfYearExpression + " >= '" + minDayOfYear + "'");
+                        sqlBuilder.addWhere(dayOfYearExpression + " <= '" + maxDayOfYear + "'");
+                    } else {
+                        // Wraps around year boundary (e.g., 11-01 to 02-28)
+                        sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
+                        sqlBuilder.addWhere(dayOfYearExpression + " >= '" + minDayOfYear + "'");
+                        sqlBuilder.addWhere(dayOfYearExpression + " <= '" + maxDayOfYear + "'");
+                        sqlBuilder.closeWhere();
+                    }
+                } else if (minDayOfYear != null) {
+                    sqlBuilder.addWhere(dayOfYearExpression + " >= '" + minDayOfYear + "'");
+                } else {
+                    sqlBuilder.addWhere(dayOfYearExpression + " <= '" + maxDayOfYear + "'");
+                }
+            } else {
+                if (getMinDate() != null) {
+                    sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(getMinDate()) + "'");
+                }
+                if (getMaxDate() != null) {
+                    sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(getMaxDate()) + "'");
+                }
             }
             sqlBuilder.closeWhere();
         } else {
@@ -206,15 +271,18 @@ public class DateFilter {
         String maxValueString = null;
 
        if (getMinDate() != null) {
-            minValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(getMinDate());
+            minValueString = ignoreYear ? DAY_MONTH_FORMAT.format(getMinDate()) : DAY_DATE_FORMAT_USER_DISPLAY.format(getMinDate());
         }
         if (getMaxDate() != null) {
-            maxValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(getMaxDate());
+            maxValueString = ignoreYear ? DAY_MONTH_FORMAT.format(getMaxDate()) : DAY_DATE_FORMAT_USER_DISPLAY.format(getMaxDate());
         }
 
         String value = UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
         if (isRelative) {
             value += "(r)";
+        }
+        if (ignoreYear) {
+            value += "(y)";
         }
         return value;
     }
