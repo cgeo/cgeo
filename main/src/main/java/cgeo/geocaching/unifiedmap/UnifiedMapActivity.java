@@ -1457,6 +1457,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     protected void onResume() {
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
+            return; // prevent further execution on the old activity instance
         }
 
         super.onResume();
