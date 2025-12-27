@@ -52,7 +52,8 @@ import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class WherigoGame implements UI {
+public enum WherigoGame implements UI {
+    GET;
 
     private static final String LOG_PRAEFIX = "WHERIGOGAME: ";
 
@@ -88,12 +89,6 @@ public class WherigoGame implements UI {
     private Cartridge cartridge;
 
     private final ListenerHelper<Consumer<NotifyType>> listeners = new ListenerHelper<>();
-
-    private static final WherigoGame INSTANCE = new WherigoGame();
-
-    public static WherigoGame get() {
-        return INSTANCE;
-    }
 
     //singleton
     @SuppressWarnings("unchecked")

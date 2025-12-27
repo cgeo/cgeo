@@ -168,7 +168,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
             lastNotifyLongitude = currentLon;
             lastNotifyDirection = currentDir;
             lastNotifyTimestamp = currentTime;
-            WherigoGame.get().notifyListeners(WherigoGame.NotifyType.LOCATION);
+            WherigoGame.GET.notifyListeners(WherigoGame.NotifyType.LOCATION);
         }
     }
 

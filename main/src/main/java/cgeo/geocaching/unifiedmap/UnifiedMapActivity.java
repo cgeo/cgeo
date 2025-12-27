@@ -1209,9 +1209,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             } else if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             } else if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX) && !isLongTap) {
-                result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())),
+                result.add(new MapSelectableItem(WherigoGame.GET.getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())),
                         key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), // Zone name
-                        WherigoGame.get().getCartridgeName(), // Wherigo
+                        WherigoGame.GET.getCartridgeName(), // Wherigo
                         WherigoThingType.LOCATION.getIconId()));
             } else if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
                 result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString(), -1));
@@ -1430,7 +1430,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (!Settings.isFeatureEnabledDefaultTrue(R.string.pref_useDelayedMapFragment)) {
             destroyMapFragment();
         }
-        WherigoGame.get().removeListener(wherigoListenerId);
+        WherigoGame.GET.removeListener(wherigoListenerId);
         super.onPause();
     }
 
@@ -1471,10 +1471,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             tileProvider.onResume();
         }
 
-        wherigoListenerId = WherigoGame.get().addListener(nt -> {
+        wherigoListenerId = WherigoGame.GET.addListener(nt -> {
             final View view = findViewById(R.id.container_wherigo);
             if (view != null) {
-                view.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : GONE);
+                view.setVisibility(WherigoGame.GET.isPlaying() ? View.VISIBLE : GONE);
             }
         });
     }

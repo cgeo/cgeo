@@ -343,7 +343,7 @@ public final class SystemInformation {
     }
 
     private static void appendWherigo(final StringBuilder body) {
-        final WherigoGame game = WherigoGame.get();
+        final WherigoGame game = WherigoGame.GET;
         final ContentStorage.FileInformation  cartridgeFileInfo = game.getCartridgeInfo() == null ? null : game.getCartridgeInfo().getFileInfo();
         final CharSequence loadFileInfo = TextUtils.join(WherigoSavegameInfo.getAllSaveFiles(cartridgeFileInfo), WherigoSavegameInfo::toShortString, ", ");
         final CharSequence visibleThingsCounts = TextUtils.join(Arrays.asList(WherigoThingType.values()), tt -> tt.name() + ":" + tt.getThingsForUserDisplay().size(), ", ");

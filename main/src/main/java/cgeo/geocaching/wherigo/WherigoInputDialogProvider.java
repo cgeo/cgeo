@@ -62,7 +62,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
         control.setPauseOnDismiss(true);
 
-        final WherigoGame game = WherigoGame.get();
+        final WherigoGame game = WherigoGame.GET;
 
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player), binding.getRoot());
@@ -73,7 +73,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         binding.media.setMedia((Media) input.table.rawget("Media"));
         final Object descr = input.table.rawget("Text");
-        binding.description.setText(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
+        binding.description.setText(WherigoGame.GET.toDisplayText(descr == null ? "" : descr.toString()));
 
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {

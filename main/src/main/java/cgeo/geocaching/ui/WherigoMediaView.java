@@ -78,7 +78,7 @@ public class WherigoMediaView extends LinearLayout {
             return;
         }
 
-        final File cacheDir = WherigoGame.get().getCacheDirectory();
+        final File cacheDir = WherigoGame.GET.getCacheDirectory();
         final File mediaFile = cgeo.geocaching.utils.FileUtils.getOrCreate(cacheDir, "media-" + fileName, type, data);
 
         this.mediaId = mediaId;
