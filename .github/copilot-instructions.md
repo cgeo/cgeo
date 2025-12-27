@@ -29,6 +29,7 @@ Imports must be organized into the following groups, separated by empty lines:
 5. `javax.*` - Java extensions
 6. `*` - All other imports
 
+Static and non-static imports from the same group shall not be separated by empty line.
 Within each group, imports should be sorted alphabetically.
 
 ### Code Conventions

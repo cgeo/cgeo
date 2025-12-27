@@ -19,7 +19,7 @@ You are a highly capable and autonomous agent, and you can solve all assigned ta
 - Apply everything defined in https://raw.githubusercontent.com/cgeo/cgeo/refs/heads/master/ruleset.xml
 - Apply all checkstyle rules with at least "Warning" level defined in https://raw.githubusercontent.com/cgeo/cgeo/refs/heads/master/checkstyle.xml
 - For every modified code file, remove all unused imports.
-- For every created and modified code file, make sure that imports are ordered into the groups cgeo,android,androidx,java,javax,*. Groups shall be separated by an empty line. Imports inside each group shall be sorted alphabetically.
+- For every created and modified code file, make sure that imports are ordered into the groups cgeo,android,androidx,java,javax,*. Groups shall be separated by an empty line. Static and non-static imports from same group should not be separated though. Imports inside each group shall be sorted alphabetically.
 - For every new variable introduced, mark it as 'final' whenever possible.
 
 # Unit tests
