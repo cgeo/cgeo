@@ -47,3 +47,5 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
 - Novo: Pré-visualizar listas de marcadores
 - Alteração: Elevada a versão mínima necessária do Android para o Android 8
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
