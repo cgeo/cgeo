@@ -47,3 +47,5 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Selecteer meerdere bladwijzerlijsten / pocket queries om te downloaden
 - Nieuw: Voorbeeld van bladwijzerlijsten
 - Wijziging: Minimum vereiste Android versie naar Android 8 verhoogd
+- Nieuw: Standaard snelle knoppen voor nieuwe installaties
+- Oplossing: Titels in invoerdialoogvenster afgekapt
