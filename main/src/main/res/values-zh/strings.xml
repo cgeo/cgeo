@@ -1637,7 +1637,6 @@
     <string name="storage_permission_needed">需要储存权限来运行此功能</string>
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">请输入 %1$s和%2$s范围之间的值。</string>
     <string name="number_input_err_boundarymin">输入的值太小 - 重置为最小值</string>
     <string name="number_input_err_boundarymax">输入的值太大 - 重置为最大值</string>
     <string name="number_input_err_format">数字格式无效。</string>
