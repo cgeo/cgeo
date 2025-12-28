@@ -670,37 +670,39 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
         final Viewport viewport = viewModel.viewport.getValue();
 
-        final Set<Waypoint> waypoints = new HashSet<>();
+        Schedulers.io().scheduleDirect(() -> {
+            final Set<Waypoint> waypoints = new HashSet<>();
 
-        if (viewModel.mapType.hasTarget()) {
-            waypoints.addAll(viewModel.caches.readWithResult(caches -> {
-                final Set<Waypoint> wpSet = new HashSet<>();
-                final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
-                wpSet.addAll(cache.getWaypoints());
-                return wpSet;
-            }));
-        }
-
-        if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
-            //show all waypoints be displayed or just the ones from visible caches?
-            if (viewModel.mapType.enableLiveMap()) {
-                waypoints.addAll(DataStore.loadWaypoints(viewport));
-            } else {
+            if (viewModel.mapType.hasTarget()) {
                 waypoints.addAll(viewModel.caches.readWithResult(caches -> {
                     final Set<Waypoint> wpSet = new HashSet<>();
-                    for (final Geocache c : caches) {
-                        wpSet.addAll(c.getWaypoints());
-                    }
+                    final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                    wpSet.addAll(cache.getWaypoints());
                     return wpSet;
                 }));
             }
-        }
 
-        //filter waypoints
-        MapUtils.filter(waypoints, filter);
-        viewModel.waypoints.write(wps -> {
+            if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+                // should all waypoints be displayed or just the ones from visible caches?
+                if (viewModel.mapType.enableLiveMap()) {
+                    waypoints.addAll(DataStore.loadWaypoints(viewport));
+                } else {
+                    waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                        final Set<Waypoint> wpSet = new HashSet<>();
+                        for (final Geocache c : caches) {
+                            wpSet.addAll(c.getWaypoints());
+                        }
+                        return wpSet;
+                    }));
+                }
+            }
+
+            //filter waypoints
+            MapUtils.filter(waypoints, filter);
+            viewModel.waypoints.write(wps -> {
                 wps.clear();
                 wps.addAll(waypoints);
+            });
         });
     }
 
@@ -1462,7 +1464,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onResume();
         reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
-        
+
         if (Settings.removeFromRouteOnLog()) {
             viewModel.reloadIndividualRoute();
         }

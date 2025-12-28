@@ -41,7 +41,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // services (all)
             R.string.preference_screen_services,
             // appearance
-            R.string.pref_theme_setting,
+            R.string.pref_theme_setting, R.string.pref_quicklaunchitems,
             R.string.pref_selected_language, R.string.pref_units_imperial,
             R.string.pref_cacheListInfo,
             // cache details
