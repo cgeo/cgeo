@@ -9,7 +9,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Korrektur: Verdopplung einzelner Routenelemente
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
-- New: NoMap tile provider (don't show map, just caches etc.)
+- Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -25,12 +25,12 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Variablenansicht kann gefiltert werden
 - Neu: Hinweis in Wegpunkt-Liste bei Überlauf berechneter Koordinaten
 - Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Neu: Platzhalter für Trackable Logging (Geocache-Name, Geocache-Code, Benutzer)
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
 - Neu: Verbesserter Umgang mit Schaltflächen
-- New: Status auto-save
+- Neu: Automatische Speicherung des Status
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
@@ -46,4 +46,6 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Farbige Symbolleiste auf Cache-Detailseiten
 - Neu: Auswahl mehrerer Lesezeichenlisten / Pocket queries zum Herunterladen
 - Neu: Vorschau für Lesezeichen-Listen
-- Change: Increase minimum required Android version to Android 8
+- Änderung: Mindestens benötigte Android-Version auf Android 8 erhöht
+- Neu: Standard Schnellstart-Schaltflächen für Neuinstallationen
+- Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
