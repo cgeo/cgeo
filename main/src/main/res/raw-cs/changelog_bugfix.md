@@ -3,6 +3,7 @@
 - Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
 - Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
 - Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
 
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
@@ -49,6 +50,7 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
