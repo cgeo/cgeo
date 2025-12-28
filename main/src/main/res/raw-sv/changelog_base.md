@@ -47,3 +47,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Välj flera bokmärkeslistor / fickfrågor att ladda ner
 - New: Preview bookmark lists
 - Förändring: Öka den minsta nödvändiga Android-versionen till Android 8
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
