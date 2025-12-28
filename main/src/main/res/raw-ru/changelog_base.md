@@ -47,3 +47,5 @@
 - Новое: Выбор нескольких списков закладок/запросов для загрузки
 - Новое: Предварительный просмотр списков закладок
 - Изменение: C:geo теперь работает только на устройствах Android 8 и выше
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
