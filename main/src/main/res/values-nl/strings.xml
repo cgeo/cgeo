@@ -2435,7 +2435,8 @@
     <string name="preference_colorpicker_show_width">breedte: %d</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
-    <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
+    <string name="number_input_title">Waarde instellen</string>
+    <string name="number_input_range">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
