@@ -258,7 +258,7 @@ public final class Dialogs {
      * create a bottom sheet dialog with action bar
      */
     public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final @StringRes int titleResId) {
-        return bottomSheetDialogWithActionbar(context, contentView, LocalizationUtils.getString(titleResId));
+        return bottomSheetDialogWithActionbar(context, contentView, context.getString(titleResId));
     }
 
     public static BottomSheetDialog bottomSheetDialogWithActionbar(final Context context, final View contentView, final CharSequence title) {

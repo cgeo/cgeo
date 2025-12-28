@@ -151,7 +151,7 @@ public class MapSettingsUtils {
             dialogView.mapSettingsProximitynotificationMastertoggle.setChecked(Settings.isProximityNotificationMasterToggleOn());
         }
 
-        final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), activity.getString(R.string.quick_settings));
+        final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
             boolean filterChanged = false;
             final boolean circleChanged = circlesCb.valueChanged;
