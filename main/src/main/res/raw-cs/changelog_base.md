@@ -47,3 +47,5 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Vyberte více seznamů záložek / pocket queries ke stažení
 - New: Preview bookmark lists
 - Change: Increase minimum required Android version to Android 8
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
