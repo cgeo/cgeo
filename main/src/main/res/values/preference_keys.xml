@@ -247,6 +247,7 @@
     <!-- category map content -->
     <string translatable="false" name="pref_maptrail">maptrail</string>
     <string translatable="false" name="pref_maptrail_length">maptrail_length</string>
+    <string translatable="false" name="pref_maptrail_maxdistance">maptrail_maxdistance</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
     <string translatable="false" name="pref_showElevation">showElevation</string>
