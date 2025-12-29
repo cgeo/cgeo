@@ -46,7 +46,7 @@ Within each group, imports should be sorted alphabetically.
 Apply all rules from:
 - `checkstyle.xml` - All rules with severity "warning" or higher
 
-Use `./gradlew checkstyle` to check for those.
+Use `./gradlew --offline checkstyle` to check for those.
 
 ## Building and Testing
 
@@ -54,15 +54,16 @@ Use `./gradlew checkstyle` to check for those.
 
 ```bash
 # Build the system and check for compile errors
-./gradlew assembleBasicDebug
+./gradlew --offline assembleBasicDebug
 
 # Run unit tests
-./gradlew testBasicDebug
+./gradlew --offline testBasicDebug
 
 # Run checkstyle checks
-./gradlew checkstyle
+./gradlew --offline checkstyle
 ```
 Do not attempt to issue any other build commands. Do not attempt to run pmd checks or instrumented tests.
+Always run gradle commands in offline mode.
 
 ### Testing Guidelines
 
@@ -109,7 +110,7 @@ When working in the context of a github issue:
 - Every git branch created shall have the naming format: "copilot/issue-$ISSUE_NUMBER-$NAME", where $NAME is a meaningful name extracted from the issue title. You may postfix this name with a number if necessary to create a unique branch name.
 - Every github pull request created shall have the naming format "fix #$ISSUE_NUMBER: $TITLE", where $TITLE is a meaningful sort title subscribing what is done in the PR.
 - Every git commit created shall have the format "rel to #$ISSUE_NUMBER: $TITLE", where $DESCRIPTION is a meaningful short description of what is done in the commit
-- If an issue has label "Feature Request" and it is assigned on a base branch other than "master", then comment a warning to the user in the Pull Request.
-- If an issue has label "Bug" and it is assigned on a base branch other than "release", then comment a warning to the user in the Pull Request.
+- If an issue has label "Feature Request" or is of type "Feature", and it is assigned on a base branch other than "master", then comment a warning to the user in the Pull Request.
+- If an issue has label "Bug" or is of type "Bug", and it is assigned on a base branch other than "release", then comment a warning to the user in the Pull Request.
 
 
