@@ -188,11 +188,16 @@ public class ContentStorageActivityHelper {
         final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
                 folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
         final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
+        final String hint = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_hint);
+
+        final String message = folderData
+                + (folder.isUserDefined() ? "\n\n" + defaultFolder : "")
+                + "\n\n" + hint;
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog
                 .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
-                .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
+                .setMessage(message)
                 .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                     d.dismiss();
                     selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);

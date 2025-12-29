@@ -1400,6 +1400,7 @@
     <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
     <string name="contentstorage_selectfolder_dialog_msg_folderdata">The folder %1$s is currently set to \'%2$s\', contains %3$s and %4$s and has a total size of %5$s.</string>
     <string name="contentstorage_selectfolder_dialog_msg_defaultfolder">You may choose to use the default folder \'%s\' or pick a user-defined folder.</string>
+    <string name="contentstorage_selectfolder_dialog_msg_hint"><b>Important:</b> When selecting a folder, you need to create or select a subfolder within your device storage, not the root folder itself. If you see an error \"Can\'t use this folder\", use the menu to create a new subfolder (e.g., \"cgeo\") first, then select that folder.\n\nYou may also need to show internal storage using the menu (≡) in the file picker.</string>
     <string name="contentstorage_selectfolder_dialog_choice_copy">Copy all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_move">Move all content</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">No further action</string>
@@ -2942,7 +2943,7 @@
     <string name="wizard_permissions_title">Set app permissions</string>
     <string name="wizard_permissions_intro">c:geo needs certain permissions on your device to work correctly.\nI will explain more details in the next steps.</string>
     <string name="wizard_permissions_folder_title">Set folder: %s</string>
-    <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\nHint: You may need to unhide your device\'s internal storage first in the file selector being displayed next.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo needs a local folder to store data like GPX files, backups, field notes and logfiles. As per default those files are stored in folders beneath a so called "base folder". Select or create such a folder in the next step.\n\nIf you upgraded c:geo from a previous version, select the existing folder \"cgeo\" on root level of your device storage.\n\n<b>Important:</b> You must select or create a subfolder (like \"cgeo\"), not the device storage root itself. Use the menu (≡) in the file picker to show internal storage and create a new folder if needed.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo needs a local folder to store offline map files.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo needs a local folder to store theme files for offline maps.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo needs a local folder to store GPX files (e.g. for importing / exporting caches or tracks).</string>
