@@ -1143,6 +1143,10 @@ public class Settings {
         return getInt(R.string.pref_maptrail_length, getKeyInt(R.integer.historytrack_length_default));
     }
 
+    public static int getMaximumMapTrailDistance() {
+        return getInt(R.string.pref_maptrail_maxdistance, getKeyInt(R.integer.historytrack_mindistance_default));
+    }
+
     public static int getMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }

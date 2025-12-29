@@ -966,6 +966,7 @@
     <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
+    <string name="settings_title_maptrail">History track</string>
     <string name="settings_title_map_behavior">Map behavior</string>
     <string name="settings_title_map_style">Map style</string>
     <string name="settings_hide_tileproviders_title">Hide Map Sources</string>
@@ -1278,8 +1279,10 @@
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Show history track</string>
-    <string name="init_maptrail_length">History track max. length</string>
+    <string name="init_maptrail_length">Maximum length</string>
     <string name="init_maptrail_length_summary">Set maximum length of history track (enforced on each startup of c:geo). Default value is 700 points - adjust according to available memory.</string>
+    <string name="init_maptrail_maxdistance">Maximum distance</string>
+    <string name="init_maptrail_maxdistance_summary">Maximum distance until which two consecutive points of the history track get connected on the map</string>
     <string name="init_summary_maptrail">When activated (and GPS is on) c:geo saves the history of your movements as a track and displays it on the map.</string>
     <string name="init_trailappearance">History track appearance</string>
     <string name="init_trailappearance_summary">Select color, opaqueness and line width for history track line</string>
