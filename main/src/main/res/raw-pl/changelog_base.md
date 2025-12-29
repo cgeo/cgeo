@@ -47,5 +47,5 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Wybierz wiele zakładek / pocket queries do pobrania
 - Nowość: Podgląd list zakładek
 - Zmiana: Zwiększenie minimalnej wymaganej wersję Androida do Androida 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
+- Nowość: Domyślne szybkie przyciski dla nowych instalacji
+- Naprawiono: Tytuły w oknie dialogowym zakresu były przycięte
