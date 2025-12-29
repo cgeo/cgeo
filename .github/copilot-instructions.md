@@ -57,7 +57,7 @@ Use `./gradlew checkstyle` to check for those.
 ./gradlew assembleBasicDebug
 
 # Run unit tests
-./gradlew test
+./gradlew testBasicDebug
 
 # Run checkstyle checks
 ./gradlew checkstyle
