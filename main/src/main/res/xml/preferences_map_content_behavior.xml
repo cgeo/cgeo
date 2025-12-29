@@ -11,22 +11,6 @@
         app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_maptrail"
-            android:summary="@string/init_summary_maptrail"
-            android:title="@string/init_maptrail"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.SeekbarPreference
-            android:key="@string/pref_maptrail_length"
-            android:title="@string/init_maptrail_length"
-            android:summary="@string/init_maptrail_length_summary"
-            android:defaultValue="@integer/historytrack_length_default"
-            app:min="100"
-            app:max="@integer/historytrack_length_max"
-            app:stepSize="100"
-            app:logScaling="true"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_bigSmileysOnMap"
             android:summary="@string/init_summary_bigSmileysOnMap"
             android:title="@string/init_bigSmileysOnMap"
@@ -42,6 +26,39 @@
             android:key="@string/pref_showElevation"
             android:title="@string/init_showElevation"
             android:summary="@string/init_summary_showElevation"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_title_maptrail"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_maptrail"
+            android:summary="@string/init_summary_maptrail"
+            android:title="@string/init_maptrail"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_maptrail_length"
+            android:title="@string/init_maptrail_length"
+            android:summary="@string/init_maptrail_length_summary"
+            android:defaultValue="@integer/historytrack_length_default"
+            android:dependency="@string/pref_maptrail"
+            app:min="100"
+            app:max="@integer/historytrack_length_max"
+            app:stepSize="100"
+            app:logScaling="true"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_maptrail_maxdistance"
+            android:title="@string/init_maptrail_maxdistance"
+            android:summary="@string/init_maptrail_maxdistance_summary"
+            android:defaultValue="@integer/historytrack_mindistance_default"
+            android:dependency="@string/pref_maptrail"
+            app:min="10"
+            app:max="@integer/historytrack_mindistance_max"
+            app:stepSize="100"
+            app:logScaling="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
