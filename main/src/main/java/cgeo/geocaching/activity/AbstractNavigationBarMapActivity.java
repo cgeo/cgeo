@@ -123,7 +123,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
                         ActivityMixin.overrideTransitionToFade(that);
-                        ActivityMixin.postDelayed(() -> sheetRemoveFragment(), 500);
+                        ActivityMixin.postDelayed(AbstractNavigationBarMapActivity.this::sheetRemoveFragment, 500);
                     }
                 }
 
