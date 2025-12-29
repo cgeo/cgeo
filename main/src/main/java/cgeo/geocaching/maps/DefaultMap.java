@@ -45,6 +45,10 @@ public final class DefaultMap {
         return getLiveMapIntent(fromActivity, getDefaultMapClass());
     }
 
+    public static void startActivityLive(final Activity fromActivity) {
+        fromActivity.startActivity(getLiveMapIntent(fromActivity));
+    }
+
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
         if (Settings.useLegacyMaps()) {
             new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getPrefix(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
