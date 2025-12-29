@@ -47,5 +47,5 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: seleccioneu diverses llistes de marcadors / pocket queries per descarregar
 - Nou: Previsualitza les llistes de marcadors
 - Canvi: Augmentar la versió mínima requerida d'Android a Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
+- Nou: Botons ràpids predeterminats per a les noves instal·lacions
+- Correcció: Els títols dels diàlegs d'entrada de rang es tallen
