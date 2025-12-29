@@ -103,7 +103,6 @@ public class RouteItem implements Parcelable {
                         if (counter == 1) {
                             // unique prefix => use waypoint
                             setDetails(tempWaypoint);
-                            return;
                         } else if (counter > 1) {
                             // for non-unique prefixes try to find a user-defined waypoint with the same coordinates
                             for (Waypoint waypoint : waypoints) {

@@ -133,7 +133,7 @@ public class OfflineTranslateUtils {
                     downloadingModelConsumer.accept(missingLanguageModels);
                     OfflineTranslateUtils.getTranslator(sourceLngCode, translatorConsumer);
                 },
-                    () -> translationStatus.abortTranslation()
+                    translationStatus::abortTranslation
                 );
             }
         });

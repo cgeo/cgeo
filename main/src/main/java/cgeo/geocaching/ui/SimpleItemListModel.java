@@ -246,7 +246,7 @@ public class SimpleItemListModel<T> {
                 final JsonNode node = JsonUtils.stringToNode(Settings.getSimpleListModelConfig(this.reducedGroupSaveId));
                 if (node != null) {
                     final List<String> groupStrings = JsonUtils.getTextList(node, "groups");
-                    setReducedGroups(groupStrings.stream().map(s -> this.reducedGroupIdBackMapper.apply(s)).collect(Collectors.toList()));
+                    setReducedGroups(groupStrings.stream().map(this.reducedGroupIdBackMapper::apply).collect(Collectors.toList()));
                 }
             }
         }

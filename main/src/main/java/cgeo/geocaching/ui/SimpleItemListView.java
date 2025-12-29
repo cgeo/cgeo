@@ -456,7 +456,7 @@ public class SimpleItemListView extends LinearLayout {
         this.currentlyVisibleSelected = visibleSelected;
 
         //trigger re-filtering and re-drawing of list items
-        listAdapter.setFilter(t -> listAdapter.isDisplayed(t));
+        listAdapter.setFilter(listAdapter::isDisplayed);
         listAdapter.notifyItemRangeChanged(0, listAdapter.getItemCount());
     }
 

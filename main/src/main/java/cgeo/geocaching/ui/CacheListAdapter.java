@@ -538,7 +538,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             cache.setStatusChecked(checkNow);
             final CacheListAdapter adapter = adapterRef.get();
             if (adapter == null) {
-                return;
+                return; // NOPMD - Early return is appropriate for null check on WeakReference
             }
         }
     }

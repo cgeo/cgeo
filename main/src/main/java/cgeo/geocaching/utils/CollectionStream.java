@@ -59,6 +59,7 @@ public class CollectionStream<T> {
     /**
      * creates CollectionStream with an array as its source
      */
+    @SuppressWarnings("PMD.ConfusingArgumentToVarargsMethod")
     public static <TT> CollectionStream<TT> of(final TT[] coll) {
         return new CollectionStream<>(coll == null ? Collections.emptyList() : Arrays.asList(coll), false);
     }

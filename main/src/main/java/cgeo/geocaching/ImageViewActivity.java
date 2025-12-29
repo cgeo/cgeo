@@ -420,7 +420,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
             setFinishResult();
             finishAfterTransition();
-        }, () -> imageAdapter.toggleFullImageView());
+        }, imageAdapter::toggleFullImageView);
 
         //trigger enter transition if this is start
         if (pagerPos == startPagerPos) {
