@@ -19,8 +19,10 @@ import org.apache.commons.lang3.BooleanUtils;
 public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     private static final String CONFIG_KEY_PERCENTAGE = "percentage";
+    private static final String CONFIG_KEY_INCLUDE_NOT_SUPPORTING = "includeNotSupporting";
 
     private boolean percentage = false;
+    private boolean includeNotSupportingFavorites = false;
 
     public FavoritesGeocacheFilter() {
         super(Float::valueOf, f -> f);
@@ -32,6 +34,28 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     public void setPercentage(final boolean percentage) {
         this.percentage = percentage;
+    }
+
+    public boolean isIncludeNotSupportingFavorites() {
+        return includeNotSupportingFavorites;
+    }
+
+    public void setIncludeNotSupportingFavorites(final boolean includeNotSupportingFavorites) {
+        this.includeNotSupportingFavorites = includeNotSupportingFavorites;
+    }
+
+    @Override
+    public Boolean filter(final Geocache cache) {
+        if (cache == null) {
+            return null;
+        }
+        // Check if the cache's connector supports favorites
+        if (!cache.supportsFavoritePoints()) {
+            // Return true (include) if the checkbox is checked, null (inconclusive) otherwise
+            return includeNotSupportingFavorites ? true : null;
+        }
+        // For caches supporting favorites, use the normal range filtering
+        return super.filter(cache);
     }
 
     @Override
@@ -73,12 +97,14 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         percentage = config.getFirstValue(CONFIG_KEY_PERCENTAGE, false, BooleanUtils::toBoolean);
+        includeNotSupportingFavorites = config.getFirstValue(CONFIG_KEY_INCLUDE_NOT_SUPPORTING, false, BooleanUtils::toBoolean);
     }
 
     @Override
     public LegacyFilterConfig getConfig() {
         final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_PERCENTAGE, Boolean.toString(percentage));
+        config.putList(CONFIG_KEY_INCLUDE_NOT_SUPPORTING, Boolean.toString(includeNotSupportingFavorites));
         return config;
     }
 
@@ -87,6 +113,7 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     public ObjectNode getJsonConfig() {
         final ObjectNode node = super.getJsonConfig();
         JsonUtils.setBoolean(node, CONFIG_KEY_PERCENTAGE, percentage);
+        JsonUtils.setBoolean(node, CONFIG_KEY_INCLUDE_NOT_SUPPORTING, includeNotSupportingFavorites);
         return node;
     }
 
@@ -94,6 +121,7 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     public void setJsonConfig(@NonNull final ObjectNode config) {
         super.setJsonConfig(config);
         percentage = JsonUtils.getBoolean(config, CONFIG_KEY_PERCENTAGE, false);
+        includeNotSupportingFavorites = JsonUtils.getBoolean(config, CONFIG_KEY_INCLUDE_NOT_SUPPORTING, false);
     }
 
     @Override

@@ -728,6 +728,7 @@
 
     <string name="cache_filter_favorites_absolute">Absolute</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
+    <string name="cache_filter_favorites_include_not_supporting">Include caches not supporting favorites</string>
 
     <string name="cache_filter_distance_coordinates">Coordinates</string>
     <string name="cache_filter_distance_use_current_position">Use current position</string>

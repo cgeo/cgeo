@@ -4,10 +4,13 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -16,6 +19,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
     private ContinuousRangeSlider slider;
     private ButtonToggleGroup percentage;
+    private ImmutablePair<View, CheckBox> includeCheckbox = null;
 
     private float maxValue = 1000;
     private float granularity = 1;
@@ -26,6 +30,10 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
+
+        includeCheckbox = ViewUtils.createCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_favorites_include_not_supporting), null, null);
+        includeCheckbox.right.setChecked(false);
+        ll.addView(includeCheckbox.left);
 
         percentage = new ButtonToggleGroup(getActivity());
         percentage.addButtons(R.string.cache_filter_favorites_absolute, R.string.cache_filter_favorites_percentage);
@@ -81,6 +89,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
         percentage.setCheckedButtonByIndex(filter.isPercentage() ? 1 : 0, true);
         resetSliderScale();
         slider.setRange(filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue(), filter.getMaxRangeValue() == null ? 1500f : filter.getMaxRangeValue());
+        includeCheckbox.right.setChecked(filter.isIncludeNotSupportingFavorites());
     }
 
     @Override
@@ -89,6 +98,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
         filter.setPercentage(percentage.getCheckedButtonIndex() == 1);
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(range.left, range.right , 0f, maxValue, value -> Math.round(value * granularity) / granularity);
+        filter.setIncludeNotSupportingFavorites(includeCheckbox.right.isChecked());
         return filter;
     }
 
