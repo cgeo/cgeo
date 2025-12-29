@@ -170,6 +170,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding = CoordinatescalculateglobalDialogBinding.inflate(inflater, container, false);
         binding.NonPlainFormat.setVisibility(View.GONE);
+        binding.NonPlainFormat.setVariableList(varList);
         binding.ccSwitchGuided.setChecked(false);
         binding.ccGuidedFormat.setVisibility(View.GONE);
 
