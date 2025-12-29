@@ -3,7 +3,7 @@
 - Canvi: S'ha reduït a 100 el nombre màxim de visites de rastrejables de GC per registre de catxé (segons la sol·licitud de geocaching.com per reduir la càrrega del servidor causada pels amants extrems dels rastrejables)
 - Correcció: Algunes possibles excepcions de seguretat quan l'usuari no ha atorgat certs drets (per exemple: notificacions)
 - Correcció: Cercles de catxés incomplets en nivells de zoom baixos (només VTM)
-- Fix: Crash on reloading waypoints in certain load conditions
+- Correcció: Error en recarregar punts de referència en determinades condicions de càrrega
 
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
