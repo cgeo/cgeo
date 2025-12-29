@@ -362,7 +362,6 @@
     <string translatable="false" name="pref_navigation_menu_google_transit">navigationGoogleTransit</string>
     <string translatable="false" name="pref_navigation_menu_google_bike">navigationGoogleBike</string>
     <string translatable="false" name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
-    <string translatable="false" name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string translatable="false" name="pref_navigation_menu_pebble">navigationPebble</string>
     <string translatable="false" name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>
     <string translatable="false" name="pref_navigation_menu_organicmaps">navigationOrganicMaps</string>
