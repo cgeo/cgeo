@@ -219,6 +219,7 @@ public class GeocacheFilterTest {
                 break;
             case FAVORITES:
                 ((FavoritesGeocacheFilter) filter).setPercentage(true);
+                ((FavoritesGeocacheFilter) filter).setIncludeNotSupportingFavorites(true);
                 break;
             case DISTANCE:
                 ((DistanceGeocacheFilter) filter).setCoordinate(Geopoint.ZERO);
