@@ -570,23 +570,39 @@ project.afterEvaluate {
 tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
+    
+    // Capture file references as task properties to support configuration cache
+    def keysFileRef = keysFile
+    def privatePropertiesFileRef = privatePropertiesFile
+    def templatesFileRef = templatesFile
+    
     doFirst {
-        if (!keysFile.exists()) {
+        if (!keysFileRef.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
-            if (privatePropertiesFile.exists()) {
-                copy {
-                    from templatesFile
-                    into keysDirectory
-                    Properties properties = new Properties()
-                    privatePropertiesFile.withInputStream {
-                        properties.load(it)
-                    }
-                    filter(ReplaceTokens, tokens: properties)
-                    filter { it.replaceAll("@.+?@", "") }
+            if (privatePropertiesFileRef.exists()) {
+                final Properties properties = new Properties()
+                privatePropertiesFileRef.withInputStream {
+                    properties.load(it)
                 }
+                
+                // Read template file and apply token replacements
+                final String templateContent = templatesFileRef.text
+                String processedContent = templateContent
+                
+                // Replace tokens from properties
+                properties.each { key, value ->
+                    processedContent = processedContent.replace("@${key}@", value)
+                }
+                
+                // Remove any remaining unreplaced tokens
+                processedContent = processedContent.replaceAll("@.+?@", "")
+                
+                // Write to destination
+                keysFileRef.parentFile.mkdirs()
+                keysFileRef.text = processedContent
             }
         }
-        if (!keysFile.exists()) {
+        if (!keysFileRef.exists()) {
             throw new InvalidUserDataException("You must provide API keys for c:geo to compile successfully. Please read the 'API keys' section in the README.md file for further details.")
         }
     }
@@ -639,15 +655,18 @@ android.applicationVariants.configureEach { variant ->
             description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
             dependsOn tasks.named(variant.installProvider.name)
 
+            // Capture adb reference to support configuration cache
+            def adbRef = adb
+            
             doFirst {
                 String classpath = variant.applicationId
                 if (variant.buildType.applicationIdSuffix) {
                     classpath -= "${variant.buildType.applicationIdSuffix}"
                 }
-                GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
+                final GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
                     execOperations.exec {
-                        executable = adb
+                        executable = adbRef
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
                 }
@@ -688,8 +707,11 @@ if (privatePropertiesFile.exists()) {
 
 // check existence of private properties, show an error message
 tasks.register('verifyPrivateProperties') {
+    // Capture file reference to support configuration cache
+    def privatePropertiesFileRef = privatePropertiesFile
+    
     doLast {
-        if (!privatePropertiesFile.exists()) {
+        if (!privatePropertiesFileRef.exists()) {
             throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
         }
     }
@@ -702,32 +724,38 @@ interface Injected {
 // copy preferences containing user and password to the device
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
-    if (preferencesFile.exists()) {
-        Injected injected = project.objects.newInstance(Injected)
+    
+    // Capture file references to support configuration cache
+    def preferencesFileRef = preferencesFile
+    def preferencesXmlRef = preferencesXml
+    def adbRef = adb
+    
+    if (preferencesFileRef.exists()) {
+        final Injected injected = project.objects.newInstance(Injected)
         doFirst {
             try {
-                String debugBuildAppId = 'cgeo.geocaching.developer'
-                String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
-                String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
-                String tempDirectory = '/data/local/tmp/'
+                final String debugBuildAppId = 'cgeo.geocaching.developer'
+                final String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
+                final String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
+                final String tempDirectory = '/data/local/tmp/'
                 injected.execOperations.exec {
-                    executable = adb
-                    args = ['push', preferencesXml, tempDirectory + preferencesXml]
+                    executable = adbRef
+                    args = ['push', preferencesXmlRef, tempDirectory + preferencesXmlRef]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbRef
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
                 }
                 injected.execOperations.exec {
-                    executable = adb
-                    args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
+                    executable = adbRef
+                    args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXmlRef, prefDirectory + debugPreferencesXml]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbRef
                     args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbRef
                     args = ['shell', 'getprop', 'ro.build.version.release']
                 }
             }
