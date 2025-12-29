@@ -1,5 +1,4 @@
 import com.getkeepsafe.dexcount.OutputFormat
-import org.apache.tools.ant.filters.ReplaceTokens
 
 import javax.inject.Inject
 
@@ -832,21 +831,21 @@ apply plugin: 'pmd'
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
     consoleOutput = true
-    toolVersion = "7.16.0"
+    toolVersion = "6.55.0"
     rulesMinimumPriority = 5
-    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
+    ruleSets = [] // use ruleSetFiles instead
 }
 
 tasks.register('pmd', Pmd) {
     group = 'verification'
-    description = 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    description = 'PMD Static Source Code Analyzer'
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
 
     reports {
-        xml.required.set = true
-        html.required.set = true
+        xml.required = true
+        html.required = true
     }
 }
