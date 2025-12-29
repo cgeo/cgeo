@@ -3,7 +3,7 @@
 - Zmiana: Maksymalna liczba odwiedzin przedmiotów podróżnych GC na dziennik skrytki zmniejszona do 100 (wg żądania z geocaching.com, aby zmniejszyć obciążenie serwera spowodowane przez ekstremalnych miłośników „podróżników”)
 - Naprawiono: Niektóre możliwe wyjątki dotyczące bezpieczeństwa, gdy użytkownik nie przyznał pewnych praw (np. powiadomienia)
 - Naprawiono: Niekompletne okręgi wokół skrytek przy niskim poziomie powiększenia (tylko VTM)
-- Fix: Crash on reloading waypoints in certain load conditions
+- Naprawiono: Awaria przy przeładowaniu punktów nawigacji w niektórych sytuacjach
 
 ##
 - Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
