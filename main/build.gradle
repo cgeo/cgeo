@@ -575,32 +575,31 @@ tasks.register('verifyCgeoKeys') {
     def keysFileRef = keysFile
     def privatePropertiesFileRef = privatePropertiesFile
     def templatesFileRef = templatesFile
-    
+
     doFirst {
         if (!keysFileRef.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
+            // do NOT use copy task because this creates problems with gradle configuration cache
+            final String templateContent = templatesFileRef.text
+            String processedContent = templateContent
             if (privatePropertiesFileRef.exists()) {
                 final Properties properties = new Properties()
                 privatePropertiesFileRef.withInputStream {
                     properties.load(it)
                 }
-                
-                // Read template file and apply token replacements
-                final String templateContent = templatesFileRef.text
-                String processedContent = templateContent
-                
                 // Replace tokens from properties
                 properties.each { key, value ->
                     processedContent = processedContent.replace("@${key}@", value)
                 }
-                
-                // Remove any remaining unreplaced tokens
-                processedContent = processedContent.replaceAll("@.+?@", "")
-                
-                // Write to destination
-                keysFileRef.parentFile.mkdirs()
-                keysFileRef.text = processedContent
+                println("Created keys.xml here: " + keysFileRef.absolutePath)
+            } else {
+                println("WARNING: " + privatePropertiesFileRef.absolutePath + " does not exist, creating an empty keys.xml here: " + keysFileRef.absolutePath)
             }
+            // Remove any remaining unreplaced tokens
+            processedContent = processedContent.replaceAll("@.+?@", "")
+            // Write to destination
+            keysFileRef.parentFile.mkdirs()
+            keysFileRef.text = processedContent
         }
         if (!keysFileRef.exists()) {
             throw new InvalidUserDataException("You must provide API keys for c:geo to compile successfully. Please read the 'API keys' section in the README.md file for further details.")

@@ -87,7 +87,7 @@
             android:key="@string/pref_collapse_log_limit"
             android:title="@string/init_title_collapse_log_limit"
             android:summary="@string/init_summary_collapse_log_limit"
-            android:defaultValue="@integer/list_load_limit_default"
+            android:defaultValue="@integer/log_line_limit_default"
             app:min="0"
             app:max="@integer/log_line_limit_max"
             app:minValueDescription="@string/init_settings_description_unlimited"

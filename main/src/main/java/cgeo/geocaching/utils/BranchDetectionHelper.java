@@ -33,4 +33,13 @@ public class BranchDetectionHelper {
         return BuildConfig.BUILD_TYPE.equals("debug");
     }
 
+    /**
+     * @return true, if FLAVOR is a FOSS build (without Google Play Services and non-free libraries)
+     */
+    // FLAVOR is detected as constant but can change depending on the build configuration
+    @SuppressWarnings("ConstantConditions")
+    public static boolean isFossBuild() {
+        return BuildConfig.FLAVOR.equals("foss");
+    }
+
 }
