@@ -2871,6 +2871,12 @@
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">Open a local file</string>
     <string name="localfile_cannot_handle">Error reading file or c:geo cannot handle this file type.</string>
+    <string name="localfile_handler_settings_title">File handling</string>
+    <string name="localfile_handler_settings_summary">Configure which file types c:geo should handle</string>
+    <string name="localfile_handler_by_extension">Handle files by extension</string>
+    <string name="localfile_handler_by_extension_summary">Show c:geo for .gpx, .ggz, .map, .gwc files</string>
+    <string name="localfile_handler_by_mimetype">Handle files by MIME type</string>
+    <string name="localfile_handler_by_mimetype_summary">Show c:geo for XML and ZIP files (may show for many file types)</string>
 
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receive file</string>

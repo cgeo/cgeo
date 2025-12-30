@@ -27,6 +27,24 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/localfile_handler_settings_title"
+        android:summary="@string/localfile_handler_settings_summary"
+        app:iconSpaceReserved="false">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_localfile_handler_by_extension"
+            android:summary="@string/localfile_handler_by_extension_summary"
+            android:title="@string/localfile_handler_by_extension"
+            app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_localfile_handler_by_mimetype"
+            android:summary="@string/localfile_handler_by_mimetype_summary"
+            android:title="@string/localfile_handler_by_mimetype"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/init_dbonsdcard_title"
         app:iconSpaceReserved="false">
         <Preference android:summary="@string/init_dbonsdcard_note" app:iconSpaceReserved="false" />

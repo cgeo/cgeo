@@ -13,9 +13,12 @@ import cgeo.geocaching.utils.SettingsUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -25,6 +28,10 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_offlinedata, rootKey);
+
+        // File handling preferences
+        setupFileHandlingPreference(R.string.pref_localfile_handler_by_extension, "cgeo.geocaching.HandleLocalFilesByExtensionAlias");
+        setupFileHandlingPreference(R.string.pref_localfile_handler_by_mimetype, "cgeo.geocaching.HandleLocalFilesByMimeTypeAlias");
 
         PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
@@ -74,6 +81,47 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
                 return true;
             });
         }
+    }
+
+    /**
+     * Setup a preference to enable/disable an activity alias.
+     *
+     * @param preferenceKeyId The preference key resource ID
+     * @param aliasClassName  The fully qualified activity alias class name
+     */
+    private void setupFileHandlingPreference(final int preferenceKeyId, final String aliasClassName) {
+        final SwitchPreference preference = findPreference(getString(preferenceKeyId));
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener((pref, newValue) -> {
+                final boolean enabled = (Boolean) newValue;
+                setActivityAliasEnabled(aliasClassName, enabled);
+                return true;
+            });
+        }
+    }
+
+    /**
+     * Enable or disable an activity alias.
+     *
+     * @param aliasClassName The fully qualified activity alias class name
+     * @param enabled        Whether to enable or disable the alias
+     */
+    private void setActivityAliasEnabled(final String aliasClassName, final boolean enabled) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        final PackageManager pm = activity.getPackageManager();
+        final ComponentName alias = new ComponentName(activity, aliasClassName);
+
+        pm.setComponentEnabledSetting(
+                alias,
+                enabled
+                        ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+        );
     }
 
     @Override
