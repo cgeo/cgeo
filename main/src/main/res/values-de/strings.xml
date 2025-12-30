@@ -652,6 +652,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
     <string name="cache_filter_datefilter_absolute">Absolut</string>
     <string name="cache_filter_datefilter_relative">Relativ zu heute</string>
+    <string name="cache_filter_datefilter_ignoreyear">Jahr ignorieren</string>
     <string name="cache_filter_datefilter_label_from">Von:</string>
     <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
