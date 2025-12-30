@@ -49,3 +49,5 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Änderung: Mindestens benötigte Android-Version auf Android 8 erhöht
 - Neu: Standard Schnellstart-Schaltflächen für Neuinstallationen
 - Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
