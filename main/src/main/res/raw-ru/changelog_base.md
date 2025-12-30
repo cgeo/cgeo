@@ -49,3 +49,5 @@
 - Изменение: C:geo теперь работает только на устройствах Android 8 и выше
 - New: Default quick buttons for new installations
 - Fix: Titles in range input dialogs cut off
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
