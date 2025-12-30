@@ -21,7 +21,7 @@ abstract class OtherMapsApp extends AbstractPointNavigationApp {
     final boolean withLabel;
 
     OtherMapsApp(@StringRes final int title, final boolean withLabel) {
-        super(getString(title), null);
+        super(title, null);
         this.withLabel = withLabel;
     }
 

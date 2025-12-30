@@ -23,7 +23,7 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     private static final String INTENT_OFFLINE = "com.oruxmaps.VIEW_MAP_OFFLINE";
 
     private OruxMapsApp(@StringRes final int nameResourceId, final String intent) {
-        super(getString(nameResourceId), intent);
+        super(nameResourceId, intent);
     }
 
     private void navigate(@NonNull final Context context, @NonNull final Geopoint point, @Nullable final String name) {

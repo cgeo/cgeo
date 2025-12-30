@@ -19,7 +19,7 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
     private final boolean export;
 
     AbstractLocusCacheListApp(final boolean export) {
-        super(getString(export ? R.string.caches_map_locus_export : R.string.caches_map_locus), Intent.ACTION_VIEW);
+        super(export ? R.string.caches_map_locus_export : R.string.caches_map_locus, Intent.ACTION_VIEW);
         this.export = export;
     }
 
