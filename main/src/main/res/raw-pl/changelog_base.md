@@ -49,3 +49,5 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Zmiana: Zwiększenie minimalnej wymaganej wersję Androida do Androida 8
 - Nowość: Domyślne szybkie przyciski dla nowych instalacji
 - Naprawiono: Tytuły w oknie dialogowym zakresu były przycięte
+- Naprawiono: Powiadomienie o nocnych aktualizacjach punktów do zwykłego APK nawet dla wariantu FOSS
+- Nowość: Opcja „Ignoruj rok” dla filtrów dat
