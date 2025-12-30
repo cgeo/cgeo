@@ -49,3 +49,5 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Wijziging: Minimum vereiste Android versie naar Android 8 verhoogd
 - Nieuw: Standaard snelle knoppen voor nieuwe installaties
 - Oplossing: Titels in invoerdialoogvenster afgekapt
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
