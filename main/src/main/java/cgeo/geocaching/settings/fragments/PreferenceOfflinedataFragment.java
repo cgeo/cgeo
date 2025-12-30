@@ -112,16 +112,21 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             return;
         }
 
-        final PackageManager pm = activity.getPackageManager();
-        final ComponentName alias = new ComponentName(activity, aliasClassName);
+        try {
+            final PackageManager pm = activity.getPackageManager();
+            final ComponentName alias = new ComponentName(activity, aliasClassName);
 
-        pm.setComponentEnabledSetting(
-                alias,
-                enabled
-                        ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
-        );
+            pm.setComponentEnabledSetting(
+                    alias,
+                    enabled
+                            ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                            : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP
+            );
+        } catch (final Exception e) {
+            // Handle SecurityException or other potential issues
+            ActivityMixin.showToast(activity, "Error changing file handler setting: " + e.getMessage());
+        }
     }
 
     @Override

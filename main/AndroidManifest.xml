@@ -307,8 +307,9 @@
                 <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
+                <!-- Multiple pathPattern entries needed due to Android limitation with dot matching
+                     See: http://stackoverflow.com/q/3400072/44089 -->
                 <data android:pathPattern=".*\\.gpx" />
-                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
                 <data android:pathPattern=".*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
@@ -339,6 +340,8 @@
                 <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
+                <!-- Multiple pathPattern entries needed due to Android limitation with dot matching
+                     See: http://stackoverflow.com/q/3400072/44089 -->
                 <data android:pathPattern=".*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\..*\\.ggz" />
@@ -357,6 +360,8 @@
                 <data android:mimeType="*/*" />
                 <data android:scheme="file" />
                 <data android:host="*" />
+                <!-- Multiple pathPattern entries needed due to Android limitation with dot matching
+                     See: http://stackoverflow.com/q/3400072/44089 -->
                 <data android:pathPattern=".*\\.map" />
                 <data android:pathPattern=".*\\..*\\.map" />
                 <data android:pathPattern=".*\\..*\\..*\\.map" />
