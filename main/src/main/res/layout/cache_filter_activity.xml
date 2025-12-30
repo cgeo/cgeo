@@ -7,6 +7,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:layout_marginTop="10dip"
+    android:clipToPadding="false"
     tools:context=".filters.gui.GeocacheFilterActivity" >
 
     <LinearLayout
