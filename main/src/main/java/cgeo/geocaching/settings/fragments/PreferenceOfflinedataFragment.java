@@ -123,8 +123,11 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
                             : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP
             );
-        } catch (final Exception e) {
-            // Handle SecurityException or other potential issues
+        } catch (final SecurityException e) {
+            // Handle permission issues when trying to modify component state
+            ActivityMixin.showToast(activity, activity.getString(R.string.localfile_handler_setting_error, e.getMessage()));
+        } catch (final IllegalArgumentException e) {
+            // Handle case where component doesn't exist
             ActivityMixin.showToast(activity, activity.getString(R.string.localfile_handler_setting_error, e.getMessage()));
         }
     }
