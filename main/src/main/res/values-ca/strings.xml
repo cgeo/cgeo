@@ -653,6 +653,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Patró</string>
     <string name="cache_filter_datefilter_absolute">Complet</string>
     <string name="cache_filter_datefilter_relative">Relatiu a l\'actualitat</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignora l\'any</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar tot</string>
