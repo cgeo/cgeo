@@ -49,3 +49,5 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Canvi: Augmentar la versió mínima requerida d'Android a Android 8
 - Nou: Botons ràpids predeterminats per a les noves instal·lacions
 - Correcció: Els títols dels diàlegs d'entrada de rang es tallen
+- Correcció: La notificació d'actualització nocturna apunta a l'APK normal, fins i tot per a la variant FOSS.
+- Nou: opció "Ignora l'any" per als filtres de data
