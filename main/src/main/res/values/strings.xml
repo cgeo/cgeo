@@ -2877,6 +2877,7 @@
     <string name="localfile_handler_by_extension_summary">Show c:geo for .gpx, .ggz, .map, .gwc files</string>
     <string name="localfile_handler_by_mimetype">Handle files by MIME type</string>
     <string name="localfile_handler_by_mimetype_summary">Show c:geo for XML and ZIP files (may show for many file types)</string>
+    <string name="localfile_handler_setting_error">Error changing file handler setting: %s</string>
 
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Receive file</string>

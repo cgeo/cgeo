@@ -125,7 +125,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             );
         } catch (final Exception e) {
             // Handle SecurityException or other potential issues
-            ActivityMixin.showToast(activity, "Error changing file handler setting: " + e.getMessage());
+            ActivityMixin.showToast(activity, activity.getString(R.string.localfile_handler_setting_error, e.getMessage()));
         }
     }
 
