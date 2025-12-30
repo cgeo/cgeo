@@ -664,6 +664,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Wzorzec</string>
     <string name="cache_filter_datefilter_absolute">Bezwzględne</string>
     <string name="cache_filter_datefilter_relative">W stosunku do dzisiaj</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignoruj rok</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Zaznacz wszystkie</string>
