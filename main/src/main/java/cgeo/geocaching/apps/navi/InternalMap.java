@@ -17,12 +17,12 @@ class InternalMap extends AbstractPointNavigationApp {
     private final Class<?> cls;
 
     InternalMap(final Class<?> cls, final int name) {
-        super(getString(name), null);
+        super(name, null);
         this.cls = cls;
     }
 
     InternalMap() {
-        super(getString(R.string.cache_menu_map), null);
+        super(R.string.cache_menu_map, null);
         cls = null;
     }
 

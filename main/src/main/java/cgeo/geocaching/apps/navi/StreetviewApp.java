@@ -19,7 +19,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
     private static final boolean INSTALLED = ProcessUtils.isInstalled(PACKAGE_NAME_STREET_VIEW);
 
     StreetviewApp() {
-        super(getString(R.string.cache_menu_streetview), null);
+        super(R.string.cache_menu_streetview, null);
     }
 
     @Override

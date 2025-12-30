@@ -26,7 +26,7 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
     private static final String PACKAGE_VOUCHER = "com.sygic.aura_voucher";
 
     private SygicNavigationApp(@StringRes final int nameResourceId, final String mode) {
-        super(getString(nameResourceId), null, PACKAGE_NORMAL);
+        super(nameResourceId, null, PACKAGE_NORMAL);
         this.mode = mode;
     }
 

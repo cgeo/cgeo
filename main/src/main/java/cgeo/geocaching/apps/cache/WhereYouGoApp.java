@@ -18,7 +18,7 @@ import java.util.List;
 public class WhereYouGoApp extends AbstractGeneralApp {
 
     public WhereYouGoApp() {
-        super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
+        super(R.string.cache_menu_whereyougo, "menion.android.whereyougo");
     }
 
     @Override
