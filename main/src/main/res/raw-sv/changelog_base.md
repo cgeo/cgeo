@@ -49,3 +49,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Öka den minsta nödvändiga Android-versionen till Android 8
 - New: Default quick buttons for new installations
 - Fix: Titles in range input dialogs cut off
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters
