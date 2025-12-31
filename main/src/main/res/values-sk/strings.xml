@@ -1347,8 +1347,6 @@
     <string name="cache_recently_viewed">Nedávno zobrazené</string>
     <string name="cache_recently_viewed_empty">Žiadne nedávno prezerané kešky</string>
     <string name="cache_clear_recently_viewed">vymazať</string>
-    <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
-    <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu si môžete nainštalovať Chirp Wolf.</string>
     <string name="cache_alc_start">Otvorte aplikáciu Adventure Lab a začnite hrať túto adventúru</string>
