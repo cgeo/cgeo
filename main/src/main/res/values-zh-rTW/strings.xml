@@ -990,8 +990,6 @@
     <string name="cache_share_field">分享</string>
     <string name="cache_time_full_hours">小時</string>
     <string name="cache_listed_on">%s 列表</string>
-    <string name="cache_whereyougo_start">開啟WhereYouGo來下載cartridge</string>
-    <string name="cache_whereyougo_install">安裝WhereYouGo來下載並啟動這個cartridge</string>
     <string name="context_share_as_text">分享文字內容</string>
     <string name="context_share_as_link">分享連結</string>
     <string name="create_internal_cache">建立玩家自訂cache</string>
