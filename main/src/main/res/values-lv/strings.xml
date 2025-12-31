@@ -741,8 +741,6 @@
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
     <string name="cache_listed_on">Publicēts %s</string>
-    <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
-    <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\"Iet uz\" (\'Go to\') mērķi</string>
