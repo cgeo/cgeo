@@ -60,16 +60,21 @@ public class ActionBarUtils {
         ActionBarUtils.setSystemBarAppearance(activity, !isShown);
 
         final View spacer = activity.findViewById(R.id.actionBarSpacer);
-        final int height = !isShown ? 0 : -spacer.getHeight();
-        ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(height).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(height).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(height).start());
+        if (spacer != null) {
+            final int height = !isShown ? 0 : -spacer.getHeight();
+            ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(height).start());
+            ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(height).start());
+            ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(height).start());
+        }
 
         return !isShown;
     }
 
     private static void showActionBarSpacer(@NonNull final Activity activity, final boolean showSpacer) {
-        activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
+        final View spacerView = activity.findViewById(R.id.actionBarSpacer);
+        if (spacerView != null) {
+            spacerView.setVisibility(showSpacer ? View.VISIBLE : View.GONE);
+        }
     }
 
     public static void setSystemBarAppearance(@NonNull final Activity activity, final boolean isActionBarShown) {

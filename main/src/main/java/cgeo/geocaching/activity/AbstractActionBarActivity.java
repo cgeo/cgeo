@@ -65,8 +65,10 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (existingToolbar != null) {
             // The layout already has a toolbar, use it as-is
             super.setContentView(view);
-            toolbar = (Toolbar) existingToolbar;
-            setSupportActionBar(toolbar);
+            if (existingToolbar instanceof Toolbar) {
+                toolbar = (Toolbar) existingToolbar;
+                setSupportActionBar(toolbar);
+            }
             initUpAction();
             ActivityMixin.setTitle(this, getTitle());
             return;
