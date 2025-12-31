@@ -92,7 +92,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
         actionBar.show();
-        applyTranslation();
+        applyTranslation(abView);
         abView.setTranslationY(-getActionBarHeight() - this.actionBarSystemBarOverlapHeight);
         abView.animate().translationY(-this.actionBarSystemBarOverlapHeight).start();
     }
@@ -113,7 +113,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         
         final View actionBarView = getActionBarView();
         if (actionBarView != null) {
-            applyTranslation();
+            applyTranslation(actionBarView);
         }
         
         if (fixedActionBar) {
@@ -129,8 +129,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         return insets;
     }
 
-    private void applyTranslation() {
-        final View actionBar = getActionBarView();
+    private void applyTranslation(final View actionBar) {
         if (actionBar != null) {
             actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
             actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
