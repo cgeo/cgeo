@@ -1287,8 +1287,6 @@
     <string name="cache_image_title_camera_prefix">照片</string>
     <string name="cache_share_field">分享</string>
     <string name="cache_time_full_hours">点</string>
-    <string name="cache_whereyougo_start">打开 WhereYouGo来下载并启动此cartridge</string>
-    <string name="cache_whereyougo_install">安装WhereYouGo来下载并启动此cartridge</string>
     <string name="cache_alc_start">打开Adventure Lab来开始这个adventure</string>
     <string name="context_share_as_text">分享文本</string>
     <string name="context_share_as_link">分享链接</string>
