@@ -26,6 +26,7 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Wizualizuj przepełnienie obliczonych współrzędnych na liście punktów nawigacji
 - Nowość: Wpis menu na liście punktów nawigacji do oznaczania niektórych typów punktów nawigacji jako odwiedzone
 - Nowość: Teksty zastępcze przy logowaniu przedmiotów podróżnych (nazwa skrytki, kod skrytki, użytkownik)
+- Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
