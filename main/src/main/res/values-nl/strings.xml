@@ -652,6 +652,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
     <string name="cache_filter_datefilter_absolute">Absoluut</string>
     <string name="cache_filter_datefilter_relative">Ten opzichte van vandaag</string>
+    <string name="cache_filter_datefilter_ignoreyear">Jaar negeren</string>
     <string name="cache_filter_datefilter_label_from">Van:</string>
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
@@ -1643,8 +1644,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - niet gedownload</string>
     <string name="cache_wherigo_start">Download en speel deze Wherigo met c:geo\'s interne speler</string>
     <string name="cache_wherigo_credentials">Om deze Wherigo te spelen met behulp van c:geo\'s interne speler moet je eerst toestemming geven aan de geocaching.com service. Druk op de knop rechts om naar de configuratie te gaan.</string>
-    <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
-    <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
     <string name="cache_chirpwolf_install">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf installeren.</string>
     <string name="cache_alc_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
