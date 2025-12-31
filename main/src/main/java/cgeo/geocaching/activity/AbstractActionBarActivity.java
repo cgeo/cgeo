@@ -117,14 +117,13 @@ public class AbstractActionBarActivity extends AbstractActivity {
         }
         
         if (fixedActionBar) {
-            // If the action bar view was found and translation was applied, use the standard calculation
-            // Otherwise, we need to add extra padding to account for the action bar not overlapping
-            if (actionBarView != null) {
-                return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
-            } else {
-                // Action bar is not overlapping, so we need full height without subtraction
-                return Insets.of(insets.left, insets.top + getActionBarHeight() + actionBarSystemBarOverlapHeight, insets.right, insets.bottom);
-            }
+            // Calculate base padding: system bar + action bar height
+            final int basePadding = insets.top + getActionBarHeight();
+            
+            // If action bar view is found, it overlaps with the system bar, so use base padding
+            // If not found, the action bar doesn't overlap, so add extra padding to compensate
+            final int topPadding = actionBarView != null ? basePadding : basePadding + actionBarSystemBarOverlapHeight;
+            return Insets.of(insets.left, topPadding, insets.right, insets.bottom);
         }
         return insets;
     }
