@@ -1423,8 +1423,6 @@
     <string name="cachedetails_progress_watch">Įtraukta į stebimų sarašą</string>
     <string name="cachedetails_progress_unwatch">Pašalinta iš stebimų sąrašo</string>
     <string name="cachedetails_progress_favorite">Pridėta prie mėgstamiausių</string>
-    <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
-    <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
