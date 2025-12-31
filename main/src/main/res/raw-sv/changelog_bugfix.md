@@ -6,6 +6,9 @@
 - Fix: Crash on reloading waypoints in certain load conditions
 - Fix: Event date filter not working under certain conditions
 - Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
@@ -52,6 +55,7 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 
