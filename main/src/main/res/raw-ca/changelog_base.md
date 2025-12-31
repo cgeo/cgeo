@@ -26,6 +26,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Visualitza el desbordament de coordenades calculades a la llista de punts de referència
 - Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
 - Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
+- Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
