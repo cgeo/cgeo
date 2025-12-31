@@ -6,6 +6,9 @@
 - Naprawiono: Awaria przy przeładowaniu punktów nawigacji w niektórych sytuacjach
 - Naprawiono: W niektórych sytuacjach filtr daty wydarzenia nie działał
 - Naprawiono: Maksymalny limit logów nie działa niezawodnie przy ustawieniu „nieograniczona”
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
@@ -52,6 +55,7 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
