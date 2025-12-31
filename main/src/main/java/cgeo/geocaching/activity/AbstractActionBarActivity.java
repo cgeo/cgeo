@@ -60,6 +60,19 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     @Override
     public void setContentView(final View view) {
+        // Check if the view already contains a toolbar (e.g., from AbstractNavigationBarActivity)
+        final View existingToolbar = view.findViewById(R.id.toolbar);
+        if (existingToolbar != null) {
+            // The layout already has a toolbar, use it as-is
+            super.setContentView(view);
+            toolbar = (Toolbar) existingToolbar;
+            setSupportActionBar(toolbar);
+            initUpAction();
+            ActivityMixin.setTitle(this, getTitle());
+            return;
+        }
+
+        // Normal wrapping for views without toolbar
         super.setContentView(R.layout.activity_base_with_toolbar);
         toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {

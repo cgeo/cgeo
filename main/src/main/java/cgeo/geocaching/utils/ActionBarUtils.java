@@ -107,8 +107,9 @@ public class ActionBarUtils {
         supportActionBar.setTitle(titleString);
     }
 
-    // @todo remove after switching map ActionBar to Toolbar
-    // workaround for colored ActionBar titles/subtitles
+    // Workaround for colored Toolbar titles/subtitles
+    // The Toolbar style sets default colors, but this ensures colors are applied
+    // even for dynamically colored text (e.g., cache type colors)
     // Checking for an existing span of the given class
     private static SpannableString getSpannedTitle(final CharSequence spanText, final @ColorRes int colorRes) {
         // // If a Spanned is already present, check whether a ForegroundColorSpan covers the entire text
