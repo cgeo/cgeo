@@ -110,9 +110,21 @@ public class AbstractActionBarActivity extends AbstractActivity {
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
         this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
-        applyTranslation();
+        
+        final View actionBarView = getActionBarView();
+        if (actionBarView != null) {
+            applyTranslation();
+        }
+        
         if (fixedActionBar) {
-            return Insets.of(insets.left, insets.top + getActionBarHeight() - actionBarSystemBarOverlapHeight, insets.right, insets.bottom);
+            // If the action bar view was found and translation was applied, use the standard calculation
+            // Otherwise, we need to add extra padding to account for the action bar not overlapping
+            if (actionBarView != null) {
+                return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
+            } else {
+                // Action bar is not overlapping, so we need full height without subtraction
+                return Insets.of(insets.left, insets.top + getActionBarHeight() + actionBarSystemBarOverlapHeight, insets.right, insets.bottom);
+            }
         }
         return insets;
     }
