@@ -6,6 +6,9 @@
 - Fix: Crash on reloading waypoints in certain load conditions
 - Fix: Event date filter not working under certain conditions
 - Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Mudança: Mapa Unificado definido como mapa padrão para qualquer pessoa (como parte do nosso roteiro para o Mapa Unificado) Pode voltar ao anterior em "Definições" - "Provedores de mapas", por enquanto. A remoção dos mapas antigos está prevista para a primavera de 2026, nos nossos lançamentos regulares.
@@ -52,6 +55,7 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
 
 
 
