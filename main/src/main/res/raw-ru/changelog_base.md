@@ -26,6 +26,7 @@
 - Новое: Визуализация переполнения вычисленных координат в списке путевых точек
 - Новое: Пункт меню в списке путевых точек, позволяющий отмечать определенные типы путевых точек как посещенные
 - New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 
 ### Wherigo player
 - Новое: Оффлайн перевод для Wherigo
