@@ -26,6 +26,7 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Visualizar coordenadas calculadas que excedem os limites na lista de pontos adicionais
 - Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
 - New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
