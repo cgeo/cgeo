@@ -770,8 +770,6 @@
     <string name="cache_share_field">Поділитися</string>
     <string name="cache_time_full_hours">годин</string>
     <string name="cache_listed_on">Список %s</string>
-    <string name="cache_whereyougo_start">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
-    <string name="cache_whereyougo_install">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
     <string name="context_share_as_text">Поділитися текстом</string>
     <string name="context_share_as_link">Поділитись посиланням</string>
     <string name="create_internal_cache">Створіть кешований користувачем кеш</string>
