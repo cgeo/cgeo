@@ -1667,8 +1667,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - není stažené</string>
     <string name="cache_wherigo_start">Stáhnout a hrát toto Wherigo pomocí vestavěného přehrávače v c:geo</string>
     <string name="cache_wherigo_credentials">Abyste mohli hrát tuto hru Wherigo pomocí interního přehrávače c:geo, musíte se nejprve autorizovat proti službě geocaching.com. Klepnutím na tlačítko vpravo přejdete do konfigurace.</string>
-    <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
-    <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete nainstalovat aplikaci Chirp Wolf.</string>
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
