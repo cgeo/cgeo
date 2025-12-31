@@ -4,8 +4,11 @@
 - Oplossing: Enkele mogelijke beveiligingsuitzonderingen wanneer de gebruiker bepaalde permissies niet heeft toegekend (bv. meldingen)
 - Oplossing: Cache cirkels onvolledig op lage zoomniveaus (VTM alleen)
 - Oplossing: Crash bij het herladen van waypoints in bepaalde condities
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
+- Oplossing: Event datum filter werkt niet onder bepaalde omstandigheden
+- Oplossing: Maximale logregellimiet werkt niet betrouwbaar met de instelling "onbeperkt"
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
@@ -52,6 +55,7 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
 
 
 
