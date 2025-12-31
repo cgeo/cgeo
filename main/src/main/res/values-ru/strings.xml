@@ -1673,8 +1673,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - не загружен</string>
     <string name="cache_wherigo_start">Скачать и запустить этот Wherigo с помощью встроенного в c: geo проигрывателя</string>
     <string name="cache_wherigo_credentials">Чтобы играть в эту игру, используя внутренний проигрыватель c:geo, вам сначала необходимо авторизоваться на geocaching.com. Нажмите на кнопку справа, чтобы перейти к настройке.</string>
-    <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
-    <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Этот кэш может использовать либо chirp передатчик, либо другой тип беспроводного маяка. Для чтения данных chirp вы можете установить Chirp Wolf.</string>
     <string name="cache_alc_start">Откройте Adventure Lab, чтобы начать играть в это приключение</string>
