@@ -8,6 +8,9 @@
 - Fix: Crash on reloading waypoints in certain load conditions
 - Fix: Event date filter not working under certain conditions
 - Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap)
@@ -56,6 +59,7 @@
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
