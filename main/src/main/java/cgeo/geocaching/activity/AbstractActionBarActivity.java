@@ -112,7 +112,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
         applyTranslation();
         if (fixedActionBar) {
-            return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
+            return Insets.of(insets.left, insets.top + getActionBarHeight() - actionBarSystemBarOverlapHeight, insets.right, insets.bottom);
         }
         return insets;
     }
