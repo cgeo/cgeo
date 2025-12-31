@@ -26,6 +26,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Visualize calculated coordinates overflow in waypoint list
 - New: Menu entry in waypoint list to mark certain waypoint types as visited
 - New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 
 ### Ejecutador de Wherigos
 - Nuevo: Traducción sin conexión para Wherigos
