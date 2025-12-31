@@ -1576,8 +1576,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - ei ladattu</string>
     <string name="cache_wherigo_start">Lataa ja toista tämä Wherigo käyttämällä c:geon sisäistä toistinta</string>
     <string name="cache_wherigo_credentials">Jotta voit pelata tätä Wherigoa käyttäen c:geon sisäistä soitinta, sinun täytyy valtuuttaa geocaching.comin palvelut ensin. Paina oikealla olevaa painiketta siirtyäksesi asetuksiin.</string>
-    <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
-    <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
     <string name="cache_chirpwolf_install">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit asentaa Chirp Wolf -sovelluksen lukeaksesi Chirp-dataa.</string>
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
