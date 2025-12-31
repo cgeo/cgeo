@@ -9,19 +9,23 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Classes actually having an ActionBar (as opposed to the Dialog activities)
+ * Now using Toolbar instead of the native ActionBar
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
@@ -29,11 +33,47 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     private int actionBarSystemBarOverlapHeight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN);
     private boolean fixedActionBar = true;
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes final int layoutResID) {
+        super.setContentView(R.layout.activity_base_with_toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
+        final ViewGroup contentContainer = findViewById(R.id.activity_content_wrapper);
+        if (contentContainer != null) {
+            LayoutInflater.from(this).inflate(layoutResID, contentContainer, true);
+        }
+
         initUpAction();
+        // initialize the action bar title with the activity title for single source
+        ActivityMixin.setTitle(this, getTitle());
+    }
+
+    @Override
+    public void setContentView(final View view) {
+        super.setContentView(R.layout.activity_base_with_toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
+        final ViewGroup contentContainer = findViewById(R.id.activity_content_wrapper);
+        if (contentContainer != null) {
+            contentContainer.addView(view);
+        }
+
+        initUpAction();
+        // initialize the action bar title with the activity title for single source
+        ActivityMixin.setTitle(this, getTitle());
     }
 
     private void initUpAction() {
@@ -63,12 +103,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     @Nullable
-    @SuppressLint("DiscouragedApi")
     public View getActionBarView() {
-        //see https://stackoverflow.com/questions/20023483/how-to-get-actionbar-view
-        final String packageName = getPackageName();
-        final int resId = getResources().getIdentifier("action_bar_container", "id", packageName);
-        return getWindow().getDecorView().findViewById(resId);
+        return toolbar;
     }
 
     public int getActionBarHeight() {
