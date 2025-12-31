@@ -1643,8 +1643,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - não descarregado</string>
     <string name="cache_wherigo_start">Descarregue e jogue esta Wherigo utilizando o reprodutor interno do c:geo</string>
     <string name="cache_wherigo_credentials">Para jogar este cartucho Wherigo através do leitor integrado no c:geo, primeiro terá de autorizar o início de sessão no serviço de geocaching.com. Toque no botão à direita para aceder às configurações.</string>
-    <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
-    <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode instalar a aplicação Chirp Wolf.</string>
     <string name="cache_alc_start">Abrir a aplicação Adventure Lab para iniciar a aventura</string>
