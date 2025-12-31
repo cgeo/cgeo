@@ -1644,8 +1644,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - nicht heruntergeladen</string>
     <string name="cache_wherigo_start">Wherigo mit c:geo-internem Player herunterladen und spielen</string>
     <string name="cache_wherigo_credentials">Um diesen Wherigo mit dem integrierten Wherigo-Player spielen zu können, musst du dich bei geocaching.com anmelden. Über den Button rechts gelangst du zur Konfiguration.</string>
-    <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
-    <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
     <string name="cache_chirpwolf_install">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf installieren.</string>
     <string name="cache_alc_start">Öffne Adventure Lab um dieses Adventure zu spielen</string>
