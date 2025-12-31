@@ -26,6 +26,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Visualisera beräknat koordinat-spill i vägpunkt-listan
 - Nytt: Menypost i vägpunkt-listan för att markera vissa vägpunkt-typer som besökta
 - Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
