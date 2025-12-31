@@ -6,6 +6,9 @@
 - Fix: Crash on reloading waypoints in certain load conditions
 - Fix: Event date filter not working under certain conditions
 - Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Изменение: ЕдинаяКарта установлена в качестве карты по умолчанию для всех (как часть нашего плана по её развитию). На данный момент вы можете вернуть всё как было в меню "Настройки" - "Источники карт". Удаление устаревших карт запланировано на весну 2026 года в наших регулярных релизах.
@@ -52,6 +55,7 @@
 ##
 - Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
 - Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
 
 
 
