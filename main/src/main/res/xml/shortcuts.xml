@@ -45,4 +45,14 @@
             android:targetClass="cgeo.geocaching.SearchActivity">
         </intent>
     </shortcut>
+    <shortcut
+        android:shortcutId="wherigo"
+        android:enabled="true"
+        android:icon="@drawable/sc_wherigo"
+        android:shortcutShortLabel="@string/wherigo_player">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.wherigo.WherigoActivity" />
+    </shortcut>
 </shortcuts>
