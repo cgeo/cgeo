@@ -6,6 +6,9 @@
 - Correcció: Error en recarregar punts de referència en determinades condicions de càrrega
 - Correcció: El filtre de data d'esdeveniment no funciona en determinades condicions
 - Correcció: El límit màxim de línia de registre no funciona de manera fiable en la configuració "il·limitada"
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
 
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
@@ -52,6 +55,7 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
