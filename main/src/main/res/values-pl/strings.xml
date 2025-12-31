@@ -1674,8 +1674,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
     <string name="cache_wherigo_start">Pobierz i zagraj w Wherigo za pomocą wewnętrznego odtwarzacza c:geo</string>
     <string name="cache_wherigo_credentials">Aby grać w Wherigo za pomocą wewnętrznego odtwarzacza w c:geo, musisz najpierw dokonać autoryzacji w serwisie geocaching.com. Dotknij przycisku po prawej stronie, aby przejść do konfiguracji.</string>
-    <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
-    <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz zainstalować Chirp Wolf.</string>
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
