@@ -26,6 +26,7 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Visualiseer berekende coördinaten overloop in de lijst van waypoints
 - Nieuw: Menu optie in de waypointlijst om bepaalde waypoint types als bezocht te markeren
 - Nieuw: Plaatshouders voor trackable logging (geocache naam, geocache code, gebruiker)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
@@ -49,5 +50,5 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Wijziging: Minimum vereiste Android versie naar Android 8 verhoogd
 - Nieuw: Standaard snelle knoppen voor nieuwe installaties
 - Oplossing: Titels in invoerdialoogvenster afgekapt
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
+- Oplossing: Melding voor nightly update punten naar reguliere APK zelfs voor de FOSS-variant
+- Nieuw: "Negeer jaar" optie voor datumfilters
