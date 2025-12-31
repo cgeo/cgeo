@@ -32,6 +32,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### General
 - New: Share option after logging a cache
