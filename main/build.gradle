@@ -331,7 +331,7 @@ dependencies {
     // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
     // could be replaced by Storage Access Framework
     //noinspection GradleDependency
-    implementation 'commons-io:commons-io:2.5'
+    implementation 'commons-io:commons-io:2.21.0'
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
