@@ -1123,7 +1123,6 @@
     <string name="init_dataDir">Seleccionar carpeta de datos</string>
     <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de rutas</string>
-    <string name="init_maptrail_length">Longitud máxima de la pista de historial</string>
     <string name="init_maptrail_length_summary">Establece la longitud máxima de la pista de historia (ejecutada en cada inicio de c:geo). El valor predeterminado es de 700 puntos - ajuste de acuerdo a la memoria disponible.</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
     <string name="init_trailappearance">Apariencia del historial de ruta</string>
