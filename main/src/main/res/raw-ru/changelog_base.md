@@ -10,6 +10,7 @@
 - Новое: Поддержка темы Motorider (только VTM)
 - Новое: Поддержка прозрачного фонового отображения офлайн-карт (только для VTM)
 - New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Детали тайника
 - Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
@@ -32,6 +33,7 @@
 - Новое: Оффлайн перевод для Wherigo
 - Новое: Улучшено управление кнопками
 - New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Общее
 - Новое: возможность поделиться информацией после записи о посещении тайника
