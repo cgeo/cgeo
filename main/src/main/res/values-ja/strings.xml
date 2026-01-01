@@ -792,7 +792,6 @@
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
     <string name="init_maptrail">軌跡を表示</string>
-    <string name="init_maptrail_length">GPSログの最大ポイント数</string>
     <string name="init_maptrail_length_summary">GPSログを記録する際の(c:geo起動時からの)最大ポイント数。デフォルト値は700ポイント。空きメモリーに応じて調整してください</string>
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
