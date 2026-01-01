@@ -10,6 +10,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Support for Motorider theme (VTM only)
 - New: Support for transparent background display of offline maps (VTM only)
 - New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
