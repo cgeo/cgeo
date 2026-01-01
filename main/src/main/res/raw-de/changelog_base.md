@@ -10,6 +10,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -26,12 +27,13 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Hinweis in Wegpunkt-Liste bei Überlauf berechneter Koordinaten
 - Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
 - Neu: Platzhalter für Trackable Logging (Geocache-Name, Geocache-Code, Benutzer)
-- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
+- Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
 - Neu: Verbesserter Umgang mit Schaltflächen
 - Neu: Automatische Speicherung des Status
+- Neu: Option zum Erstellen einer Verknüpfung zum Wherigo-Player auf dem Startbildschirm des Handys
 
 ### Allgemein
 - Neu: Freigabeoption nach dem Loggen eines Caches
@@ -50,5 +52,5 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Änderung: Mindestens benötigte Android-Version auf Android 8 erhöht
 - Neu: Standard Schnellstart-Schaltflächen für Neuinstallationen
 - Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
+- Korrektur: Update-Hinweis für FOSS-nightly verweist auf Nicht-FOSS-APK
+- Neu: Option "Jahr ignorieren" für Datumsfilter
