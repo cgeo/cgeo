@@ -678,7 +678,6 @@
     <string name="init_dataDir">選擇資料夾</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_maptrail">顯示歷史軌跡</string>
-    <string name="init_maptrail_length">歷史軌跡的最大長度</string>
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_circlecolor">圓邊框顏色</string>
