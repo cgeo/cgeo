@@ -1136,7 +1136,6 @@
     <string name="init_dataDir">Välj datamapp</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
     <string name="init_maptrail">Visa historikspår</string>
-    <string name="init_maptrail_length">Historiskspår max. längd</string>
     <string name="init_maptrail_length_summary">Ange maximal längd på historikspår (tillämpas vid varje start av c:geo). Standardvärdet är 700 - justera efter tillgängligt minne.</string>
     <string name="init_summary_maptrail">När den aktiveras (och GPS är på) sparar c:geo historiken över dina rörelser som ett spår och visar den på kartan.</string>
     <string name="init_trailappearance">Utseende för historikspår</string>
