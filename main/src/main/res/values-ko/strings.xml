@@ -1016,7 +1016,6 @@
     <string name="init_dataDir">데이터 폴더 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">최근 역사 트랙 표시</string>
-    <string name="init_maptrail_length">역사 트랙 최대 길이</string>
     <string name="init_maptrail_length_summary">역사 트랙의 최대 길이를 설정합니다 (c:geo를 시작할 때마다 적용됨) 기본값은 700 포인트입니다. 사용 가능한 메모리에 따라 조정하십시오.</string>
     <string name="init_summary_maptrail">활성화되면 (및 GPS가 켜짐) c:geo는 이동 기록을 트랙으로 저장하고 지도에 표시합니다.</string>
     <string name="init_trailappearance">경로 역사 모습</string>
