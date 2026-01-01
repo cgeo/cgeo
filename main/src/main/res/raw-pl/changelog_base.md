@@ -10,6 +10,7 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
 - Nowość: Obsługa przezroczystego tła podczas wyświetlania map offline (tylko VTM)
 - Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -32,6 +33,7 @@ Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu A
 - Nowość: Tłumaczenie offline dla Wherigo
 - Nowość: Ulepszona obsługa przycisku
 - Nowość: Automatyczne zapisywanie statusu
+- Nowość: Opcja tworzenia skrótu do odtwarzacza Wherigo na ekranie głównym Twojego telefonu
 
 ### Ogólne
 - Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
