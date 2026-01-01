@@ -4,11 +4,11 @@
 - Korrektur: Mögliche Sicherheits-Abbrüche, wenn der Benutzer bestimmte Rechte nicht gewährt hat (z. B.: Benachrichtigungen)
 - Korrektur: Cache-Kreise unvollständig bei niedrigen Zoomstufen (nur VTM)
 - Korrektur: Absturz beim Laden von Wegpunkten unter bestimmten Lastbedingungen
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
+- Korrektur: Event-Filter funktioniert unter bestimmten Bedingungen nicht
+- Korrektur: Maximales Log-Limit funktioniert nicht zuverlässig in der "unbegrenzten" Einstellung
+- Korrektur: Absturz beim Öffnen OSM-basierter Karten unter bestimmten Bedingungen
+- Fix: Keine Karte angezeigt, wenn in Wherigo keine sichtbaren Zonen vorhanden sind
+- Korrektur: Absturz beim Bilder-Tab der Cache-Details unter bestimmten Bedingungen
 
 ##
 - Änderung: Die Vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (ein Schritt zur Ablösung der alten Karten). Kann vorläufig unter "Einstellungen" - "Kartenquellen" noch umgeschaltet werden. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
