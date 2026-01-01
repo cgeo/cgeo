@@ -10,6 +10,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nytt: Stöd för transparent bakgrundsvisning av offline-kartor (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -32,6 +33,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Offline-översättning för Wherigos
 - Nytt: Förbättrad knapphantering
 - Ny: Status auto-spara
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Allmänt
 - Nyhet: alternativ att dela efter att ha loggat en cache
