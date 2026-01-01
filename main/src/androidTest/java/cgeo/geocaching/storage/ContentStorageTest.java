@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -816,7 +817,7 @@ public class ContentStorageTest {
     private String readFromUri(final Uri uri) {
         try {
             return IOUtils.readLines(ContentStorage.get().openForRead(uri), "UTF-8").get(0);
-        } catch (IOException ioe) {
+        } catch (UncheckedIOException ioe) {
             throw new IllegalArgumentException("Could not read from " + uri, ioe);
         }
     }
