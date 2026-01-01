@@ -710,7 +710,6 @@
     <string name="init_gpx_importexportdir">GPX mappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
-    <string name="init_maptrail_length">Spor max. længde</string>
     <string name="init_maptrail_length_summary">Angiv sporets max. længde (ændring kræver genstart af c:geo). Standardværdien er 700 punkter - tilpas værdien men øje for mængden af ledig hukommelse.</string>
     <string name="init_summary_maptrail">Vis dit spor på kortet</string>
     <string name="init_circlecolor">Cirkel linjefarve</string>
