@@ -532,6 +532,10 @@ public class Settings {
         return getStringDirect(getKey(prefKeyId), defaultValue);
     }
 
+    public static boolean hasKey(final int prefKeyId) {
+        return hasKeyDirect(getKey(prefKeyId));
+    }
+
     private static boolean hasKeyDirect(final String prefKey) {
         return sharedPrefs != null && sharedPrefs.contains(prefKey);
     }
@@ -1408,8 +1412,16 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
-                DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
+        if (hasKey(R.string.pref_theme_setting)) {
+            return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+        }
+        // If there is legacy skin preference, try to migrate it
+        if (hasKey(R.string.old_pref_skin)) {
+            return DarkModeSetting.valueOf(getBoolean(R.string.old_pref_skin, false) ?
+                    DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context));
+        }
+        return DarkModeSetting.SYSTEM_DEFAULT;
+
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
