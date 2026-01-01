@@ -10,6 +10,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Support for Motorider theme (VTM only)
 - New: Support for transparent background display of offline maps (VTM only)
 - New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Slėptuvės detalės
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -32,6 +33,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Offline translation for Wherigos
 - New: Improved button handling
 - New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Bendras
 - New: Share option after logging a cache
