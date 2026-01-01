@@ -977,7 +977,6 @@
     <string name="init_dataDir">Pasirinkite duomenų aplanką</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus geoslėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
-    <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
     <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
     <string name="init_trailappearance">Istorijos pėdsako išvaizda</string>
