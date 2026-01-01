@@ -21,7 +21,7 @@ import com.mapswithme.maps.api.MapsWithMeApi;
 class MapsMeApp extends AbstractPointNavigationApp {
 
     protected MapsMeApp() {
-        super(getString(R.string.cache_menu_mapswithme), null);
+        super(R.string.cache_menu_mapswithme, null);
     }
 
     @Override

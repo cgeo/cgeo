@@ -19,6 +19,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -58,8 +59,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
     private final LocusVersion lv;
 
     @SuppressFBWarnings("NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
-    protected AbstractLocusApp(@NonNull final String text, @NonNull final String intent) {
-        super(text, intent);
+    protected AbstractLocusApp(@StringRes final int nameId, @NonNull final String intent) {
+        super(nameId, intent);
 
         try (ContextLogger cLog = new ContextLogger(true, "AbstractLocusApp.init (" + this.getClass().getName() + ")")) {
             lv = LocusUtils.INSTANCE.getActiveVersion(CgeoApplication.getInstance());

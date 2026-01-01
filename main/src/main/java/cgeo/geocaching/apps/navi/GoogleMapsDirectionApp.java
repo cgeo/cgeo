@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
 
     protected GoogleMapsDirectionApp() {
-        super(getString(R.string.cache_menu_maps_directions), null);
+        super(R.string.cache_menu_maps_directions, null);
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 
@@ -27,12 +28,12 @@ import java.util.ArrayList;
  */
 abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
-    protected AbstractPointNavigationApp(@NonNull final String name, @Nullable final String intent) {
-        super(name, intent);
+    protected AbstractPointNavigationApp(@StringRes final int nameId, @Nullable final String intent) {
+        super(nameId, intent);
     }
 
-    protected AbstractPointNavigationApp(@NonNull final String name, @Nullable final String intent, @Nullable final String packageName) {
-        super(name, intent, packageName);
+    protected AbstractPointNavigationApp(@StringRes final int nameId, @Nullable final String intent, @Nullable final String packageName) {
+        super(nameId, intent, packageName);
     }
 
     @Override
