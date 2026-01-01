@@ -1097,7 +1097,6 @@
     <string name="init_dataDir">Valitse datakansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
     <string name="init_maptrail">Näytä jälkihistoria</string>
-    <string name="init_maptrail_length">Jälkihistorian maksimipituus</string>
     <string name="init_maptrail_length_summary">Aseta jälkihistorian maksimipituus (pakotetaan jokaisen c:geon käynnistyksen yhteydessä). Oletusarvo on 700 - säädä saatavilla olevan muistin mukaisesti.</string>
     <string name="init_summary_maptrail">Kun tämä (sekä GPS) on aktivoitu, c:geo tallettaa liikkeidesi historian jälkenä ja näyttää sen kartalla.</string>
     <string name="init_trailappearance">Historiajäljen ulkoasu</string>
