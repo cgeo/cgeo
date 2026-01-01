@@ -875,7 +875,6 @@
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
     <string name="init_maptrail">Geçmiş İz\'i göster</string>
-    <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
     <string name="init_maptrail_length_summary">İz geçmişi maksimum uzunluğunu ayarlayın (c:geo\'nun her yeniden açılışında yeniden uygulanır) Mevcut hafızanıza göre ayarlanmak üzere varsayılan değer 700\'dür.</string>
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
