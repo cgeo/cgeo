@@ -1147,7 +1147,6 @@
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
-    <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
     <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
     <string name="init_summary_maptrail">Wenn aktiviert (und GPS eingeschaltet ist) speichert c:geo den Verlauf deiner Bewegung als Track und zeigt ihn auf der Karte an.</string>
     <string name="init_trailappearance">Erscheinungsbild des Positionsverlaufs</string>
