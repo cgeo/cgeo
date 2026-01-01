@@ -592,6 +592,15 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
         return isValidLatitude(getLatitude()) && isValidLongitude(getLongitude());
     }
 
+    public Geopoint toValid() {
+        if (isValid()) {
+            return this;
+        }
+        final int validLat = Math.min(Math.max(getLatitudeE6(), -90000000), 90000000);
+        final int validLon = Math.min(Math.max(getLongitudeE6(), -180000000), 180000000);
+        return new Geopoint(validLat, validLon, null);
+    }
+
     /**
      * Check whether two geopoints represent the same latitude and longitude or are both <tt>null</tt>.
      *

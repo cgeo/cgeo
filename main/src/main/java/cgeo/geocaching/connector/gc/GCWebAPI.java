@@ -407,8 +407,13 @@ public class GCWebAPI {
                     }
                     return new MapSearchResultSet();
                 }
-                params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
-                        ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
+                //Bounding box lat/long pairs separated by a ','
+                //where the first pair is upper left and the second lower right.
+                //Example: box=47.7341,-122.2365,47.4956,-122.4361
+                final Geopoint upperLeft = this.box.getTopLeft().toValid();
+                final Geopoint lowerRight = this.box.getBottomRight().toValid();
+                params.put("box", String.valueOf(upperLeft.getLatitude()) + ',' + upperLeft.getLongitude() +
+                        ',' + lowerRight.getLatitude() + ',' + lowerRight.getLongitude());
 
                 //6.4.24: seems like gc.com adds a strange "rad=16000" parameter to every box search. Always 16000, regardless of zoom level.
                 // Don't know why yet...
