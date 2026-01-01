@@ -10,6 +10,7 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Podpora zobrazení offline map s průhledným pozadím (pouze VTM)
 - New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -32,6 +33,7 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Offline překlad pro Wherigo
 - Novinka: Vylepšené ovládání tlačítek
 - New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky
