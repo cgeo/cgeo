@@ -10,6 +10,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Suport per al tema Motorider (només VTM)
 - Nou: Compatibilitat amb la visualització de fons transparent de mapes fora de línia (només VTM)
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -32,6 +33,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Traducció fora de línia per a Wherigos
 - Nou: Millora del maneig dels botons
 - Nou: Desament automàtic de l'estat
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### General
 - Nou: opció de compartir després de registrar un catxé
