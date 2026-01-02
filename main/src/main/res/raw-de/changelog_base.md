@@ -28,7 +28,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
 - Neu: Platzhalter für Trackable Logging (Geocache-Name, Geocache-Code, Benutzer)
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
+- Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
