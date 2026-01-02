@@ -861,6 +861,7 @@
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
+    <string name="settings_title_maptrail">Historia śladu</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
@@ -1159,7 +1160,10 @@
     <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrytek (spoilery, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię śladu</string>
+    <string name="init_maptrail_length">Maksymalna długość</string>
     <string name="init_maptrail_length_summary">Ustaw maksymalną długość historii śladu (wymuszaną przy każdym uruchomieniu c:geo). Wartość domyślna to 700 punktów – dostosuj w zależności od dostępnej pamięci.</string>
+    <string name="init_maptrail_maxdistance">Maksymalna odległość</string>
+    <string name="init_maptrail_maxdistance_summary">Maksymalna odległość, przy której dwa kolejne punkty historii śladu zostaną połączone na mapie</string>
     <string name="init_summary_maptrail">Gdy funkcja jest aktywna (i GPS jest włączony) c:geo zapisuje historię twoich ruchów jako ślad i wyświetla go na mapie.</string>
     <string name="init_trailappearance">Wygląd historii śladu</string>
     <string name="init_trailappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla linii historii śladu</string>
