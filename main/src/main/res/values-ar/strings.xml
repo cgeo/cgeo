@@ -119,8 +119,7 @@
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">قد تفشل الترجمة عند ترجمة نص طويل.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
     <string name="err_parse">أخفق تحليل صفحة تسجيل الدخول</string>
@@ -340,7 +339,6 @@
     <string name="init_summary_oc_uk">تحميل المخبآت من opencaching.uk</string>
     <string name="init_oc_uk_description">ترخيص لـ c:geo باستخدام opencache.uk للبحث عن المخبآت و الوصول/تصفية مخبآتك التي تم العثور عليها.</string>
     <string name="init_summary_su">تحميل المخبآت من opencaching.su</string>
-    <string name="init_gcvote_password_description">لتكون قادر على تقييم مخبئ، تحتاج إلى اتباع الإرشادات التي تظهر في GCvote.com و إدخال كلمة المرور الخاص بك في GCvote، هنا.</string>
     <string name="init_login_popup">تسجيل الدخول</string>
     <string name="init_login_popup_working">جاري تسجيل الدخول&#8230;</string>
     <string name="init_login_popup_ok">تم تسجيل الدخول</string>
@@ -362,8 +360,6 @@
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
-    <string name="init_ratingwanted">تقييم GcVote</string>
-    <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">إظهار زياراتك/ زيارات الأصدقاء</string>
     <string name="init_summary_friends_and_own_logs_wanted">عرض صفحة السجل الإضافي الخاص بتسجيل الزيارات الخاصة بك و بأصدقائك</string>
     <string name="init_openlastdetailspage">صفحة التفاصيل الأخيرة</string>
@@ -531,7 +527,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">تحميل الصور المفسدة</string>
     <string name="cache_dialog_loading_details_status_logs">تحميل تسجيل الزيارات</string>
     <string name="cache_dialog_loading_details_status_waypoints">معالجة إحدثيات الطريق</string>
-    <string name="cache_dialog_loading_details_status_gcvote">تحميل GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">تاريخ الإخفاء</string>
     <string name="cache_dialog_loading_details_status_render">عرض المستعرض</string>
     <string name="cache_dialog_offline_save_title">وضع عدم الاتصال</string>
@@ -565,14 +560,12 @@
     <string name="cache_menu_copy_list">النسخ إلى قائمة أخرى</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (اونلاين)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (في وضع عدم الاتصال)</string>
-    <string name="cache_menu_vote">قم بالتصويت</string>
     <string name="cache_menu_challenge_checker">البحث عن مدقق المخبآت</string>
     <string name="cache_menu_ignore">تجاهل المخبئ</string>
     <string name="ignore_confirm_title">انتبه</string>
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
-    <string name="cache_status_attended">تم حضورها</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
     <string name="cache_status_archived">تم أرشفته</string>
@@ -607,7 +600,7 @@
     <string name="cache_time_full_hours">ساعة</string>
     <string name="cache_listed_on">تم إدراجه على %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">تحميل المخبآت من %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">تحميل الإحدثيات من %1$s</string>

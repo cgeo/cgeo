@@ -1,80 +1,57 @@
-### Zawiadomienie o wycofaniu mapy drogowej i „starych” map UnifiedMap
-c:geo ma od pewnego czasu zupełnie nową implementację mapy o nazwie „UnifiedMap”, która ostatecznie zastąpi stare implementacje Google Maps i Mapsforge (OpenStreetMap). Jest to zawiadomienie o wycofaniu, aby poinformować Cię o dalszych działaniach.
-
-UnifiedMap został opublikowany około roku temu. Nadal obsługuje Google Maps i OpenStreetMap (online + offline), ale w całkowicie przerobiony sposób techniczny i z wieloma ekscytującymi nowymi funkcjami, których nie obsługują „stare” mapy, z których część to
-- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
-- Wyskakujące okienko klastra dla Google Maps
-- Ukrywanie źródeł map, których nie potrzebujesz
-- Wykres wysokości tras i ścieżek
-- Przełączanie pomiędzy listami bezpośrednio z mapy
-- „Tryb jazdy” dla map opartych na OpenStreetMap
-
-UnfiedMap okazała się stabilna od dłuższego czasu, dlatego usuniemy stare implementacje mapy, aby zmniejszyć wysiłek związany z utrzymaniem c:geo.
-
-Plan działania:
-- „Stare” mapy są teraz w trybie wycofywania – nie naprawimy już w nich błędów.
-- UnifiedMap stanie się domyślne dla wszystkich użytkowników jesienią 2025 r.
-- „Stare” implementacje mapy zostaną usunięte wiosną 2026 r.
-
-Do tego czasu możesz przełączać się między różnymi implementacjami w ustawieniach => źródła mapy.
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
-- Nowość: Pokaż granice udzialania odpowiedzi (geofence) dla etapów skrytek lab (UnifiedMap) - włącz „Okręgi” w szybkich ustawieniach mapy, aby je pokazać
-- Nowość: Opcja ustawiania okręgów z indywidualnym promieniem do punktów orientacyjnych („Geofence” w menu kontekstowym)
-- Naprawiono: Widok mapy nie zaktualizował się podczas usuwania skrytki z aktualnie wyświetlanej listy
-- Naprawiono: Liczba skrytek w wyborze listy nie była aktualizowana po zmianie zawartości listy
-- Zmiana: Zachowaj bieżący widok na mapowaniu listy, jeśli wszystkie skrytki mieszczą się w bieżącym widoku
-- Nowość: Śledź moją lokalizację na wykresie wysokości (UnifiedMap)
-- Nowość: Włączenie działań „przenieś do” / „skopiuj do” dla „Pokaż jako listę”
-- Nowość: Wsparcie dla motywu Elevate Winter przy pobieraniu map
-- Nowość: Adaptacyjne cieniowanie wzgórz, opcjonalny tryb wysokiej jakości (UnifiedMap Mapsforge)
-- Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
-- Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
-- Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
-- Nowość: Przytrzymaj dłużej przycisk „włącz online", aby załadować skrytki zapisane lokalnie
-- Nowość: Cieniowanie wzgórz offline dla UnifiedMap (wariant VTM)
-- Nowość: Obsługa map tła (UnifiedMap)
-- Naprawiono: Ikony kompaktowe nie wracały do dużych ikon przy powiększaniu w trybie automatycznym (UnifiedMap)
-- Nowość: Działania przy długim dotknięciu w arkuszu informacji o skrytce: kod GC, tytuł skrytki, współrzędne, notatka/podpowiedź
-- Zmiana: Wybór emoji ma zmienione wywołanie w celu rozwiązania kolizji (było długie dotknięcie w arkuszu informacji o skrytce, a teraz jest krótkie dotknięcie)
+- Nowość: Optymalizacja trasy buforuje obliczone dane
+- Nowość: Włączenie trybu na żywo utrzymuje punkty orientacyjne aktualnie ustawionego celu
+- Nowość: Długie dotknięcie na linii nawigacji otwiera wykres wysokości (UnifiedMap)
+- Nowość: Pokaż wygenerowane punkty nawigacji na mapie
+- Nowość: Pobierz skrytki uporządkowane według odległości
+- Naprawiono: Dublowanie poszczególnych pozycji trasy
+- Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
+- Nowość: Obsługa przezroczystego tła podczas wyświetlania map offline (tylko VTM)
+- Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
+- Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
 
 ### Szczegóły skrytki
-- Nowość: Tłumaczenie offline tekstu opisu i logów (eksperymentalne)
-- Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
-- Naprawiono: Usługa mowy była przerywana po obrócaniu ekranu
-- Naprawiono: Szczegóły skrytki: Listy skrytek nie aktualizowały się po dotknięciu na nazwę listy przy usuwaniu tej skrytki z listy
-- Naprawiono: Notatka użytkownika była tracona podczas odświeżania skrytki lab
-- Zmiana: Teksty zastępcze związane z datą logowania będą używały wybranej daty zamiast bieżącej daty
-- Nowość: Domyślne zwijanie długich wpisów dziennika
+- Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
+- Nowość: Zachowaj znacznik czasu z własnych logów przy odświeżeniu skrytki
+- Nowość: Opcjonalny widok kompasu (zobacz ustawienia => szczegóły skrytki => Pokaż kierunek w widoku szczegółów skrytki)
+- Nowość: Pokaż wpisy właścicieli na karcie „wpisy przyjaciół/własne”
+- Zmiana: Karta „Wpisy przyjaciół/własne” pokazuje liczbę wpisów dla tej karty, a nie globalne liczniki
+- Zmiana: Ulepszony nagłówek w zakładkach „Zmienne” i „Punkty nawigacji”
+- Naprawiono: Podwójne wyświetlanie elementu „Usuń wpis”
+- Naprawiono: Awaria c:geo podczas obracania ekranu w szczegółach skrytki
+- Zmiana: Bardziej kompaktowy układ dla „dodawania nowego punktu nawigacji”
+- Nowość: Możliwość załadowania obrazów dla skrytek geocaching.com o rozmiarze „niezmienione”
+- Nowość: Widok zmiennych może być filtrowany
+- Nowość: Wizualizuj przepełnienie obliczonych współrzędnych na liście punktów nawigacji
+- Nowość: Wpis menu na liście punktów nawigacji do oznaczania niektórych typów punktów nawigacji jako odwiedzone
+- Nowość: Teksty zastępcze przy logowaniu przedmiotów podróżnych (nazwa skrytki, kod skrytki, użytkownik)
+- Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Odtwarzacz Wherigo
-- Nowość: Zintegrowane sprawdzanie danych logowania przez odtwarzacz Wherigo
-- Zmiana: Usunięto raportowanie o błędzie Wherigo (ponieważ błędy są głównie związane z kartridżem, muszą być naprawione przez właściciela kartridża)
-- Nowość: Możliwość przejścia do strefy przy użyciu kompasu
-- Nowość: Możliwość kopiowania współrzędnych środka strefy do schowka
-- Nowość: Ustaw środek strefy jako cel podczas otwierania mapy (aby uzyskać informacje o trasie i odległości dla nich)
-- Nowość: Obsługa otwierania lokalnych plików Wherigo
-- Zmiana: Długie dotknięcie strefy na mapie nie jest już rozpoznawane. Pozwala to użytkownikom robić inne rzeczy w obszarze strefy mapy dostępnym przy długim dotknięciu, np. utwórz skrytkę zdefiniowaną przez użytkownika
-- Nowość: Wyświetlaj ostrzeżenie, jeśli wherigo.com zgłasza brak EULA (co prowadzi do nieudanego pobierania kartridża)
+- Nowość: Tłumaczenie offline dla Wherigo
+- Nowość: Ulepszona obsługa przycisku
+- Nowość: Automatyczne zapisywanie statusu
+- Nowość: Opcja tworzenia skrótu do odtwarzacza Wherigo na ekranie głównym Twojego telefonu
 
 ### Ogólne
-- Nowość: Przeprojektowana strona wyszukiwania
-- Nowość: Filtr stanu inwentarza
-- Nowość: Obsługa współrzędnych w formacie DD,DDDDDDD
-- Nowość: Pokaż ostatnio użytą nazwę filtra w oknie dialogowym
-- Nowość: Kalkulator współrzędnych: Funkcja do zastępowania „x” symbolem mnożenia
-- Naprawiono: Nieprawidłowa wysokość (nie używa średniej nad poziomem morza)
-- Naprawiono: Ustawienie limitu szukania w pobliżu nie działało poprawnie dla małych wartości
-- Naprawiono: Sortowanie list skrytek według odległości malejąco nie działało poprawnie
-- Naprawiono: Skrytki lab były wyłączone przez filtr D/T nawet z aktywnym „dołącz niepewność”
-- Naprawiono: Problemy z kolorami ikon menu w trybie jasnym
-- Nowość: Dodaj „Usuń przeszłe wydarzenia” do listy „wszystkie”
-- Nowość: Pokaż konektor dla „skrytek zdefiniowanych przez użytkownika” jako aktywny w filtrze źródłeł
-- Nowość: Eksport GPX: eksport dzienników / przedmiotów podróżnych jest teraz opcjonalny
-- Nowość: Dodano przycisk do usunięcia szablonów dzienników
-- Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
-- Naprawiono: Pobieranie mapy oferowało uszkodzone (0 bajtów) pliki do pobrania
-- Nowość: Dodano mapowanie dla niektórych brakujących typów skrzynek OC
-- Nowość: Przeniesiono listy „ostatnio używane” z oknie dialogowego wyboru listy na górę po naciśnięciu przycisku „ostatnio używane”
-- Nowość: Udostępnij listę geokodów z listy skrytek
-- Zmiana: „Nawigacja (samochód)” itp. używa parametru "q=" zamiast nieaktualnego parametru "ll="
+- Nowość: Opcja udostępniania po dokonaniu wpisu w dzienniku skrytki
+- Zmiana: Nie pokazuj opcji „wymaga konserwacji” lub „wymaga zarchiwizowania” dla własnych skrytek
+- Naprawiono: Przywracanie kopii zapasowej może duplikować pliki śladów w pamięci wewnętrznej i kolejnych kopiach zapasowych
+- Zmiana: Usunięte odwołania do Twittera
+- Nowość: Usuń osierocone pliki ścieżek przy czyszczeniu i przywracaniu kopii zapasowej
+- Nowość: Ostrzeżenie przy próbie dodania zbyt wielu skrytek do zakładek
+- Nowość: Funkcje listy obserwowanej/nieobserwowanej
+- Nowość: Oferuj tłumaczenie offline z aplikacjami Google Translate lub DeepL (jeśli zainstalowane)
+- Nowość: Usuń elementy z historii wyszukiwania
+- Zmiana: Usunięto GCVote (usługa przestała działać)
+- Nowość: Kolorowany pasek narzędzi na stronach szczegółów skrytki
+- Nowość: Wybierz wiele zakładek / pocket queries do pobrania
+- Nowość: Podgląd list zakładek
+- Zmiana: Zwiększenie minimalnej wymaganej wersję Androida do Androida 8
+- Nowość: Domyślne szybkie przyciski dla nowych instalacji
+- Naprawiono: Tytuły w oknie dialogowym zakresu były przycięte
+- Naprawiono: Powiadomienie o nocnych aktualizacjach punktów do zwykłego APK nawet dla wariantu FOSS
+- Nowość: Opcja „Ignoruj rok” dla filtrów dat
