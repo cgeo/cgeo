@@ -325,6 +325,8 @@
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
     <string name="err_trackable_log_not_anonymous">Não é possível registar %1$s de forma anónima a partir do c:geo. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
+    <string name="err_trackable_error">Erro no Trackable (TB)</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Demasiados rastreáveis (TB) marcados como \"visitar\" — permitidos %d, no máximo</string>
     <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
     <string name="confirm_discard_changes">Descartar as alterações não guardadas?</string>
     <string name="confirm_unsent_changes_title">Alterações não enviadas</string>
@@ -2394,7 +2396,6 @@
     <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
