@@ -849,6 +849,7 @@
     <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_waypoints">Wegpunkte</string>
     <string name="settings_title_map_content">Karteninhalt</string>
+    <string name="settings_title_maptrail">Positionsverlauf</string>
     <string name="settings_title_map_behavior">Kartenverhalten</string>
     <string name="settings_title_map_style">Kartenstil</string>
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
@@ -1147,7 +1148,10 @@
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
+    <string name="init_maptrail_length">Maximale Länge</string>
     <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
+    <string name="init_maptrail_maxdistance">Maximale Entfernung</string>
+    <string name="init_maptrail_maxdistance_summary">Maximale Distanz, bis zu der zwei aufeinanderfolgende Punkte des Positionsverlaufs auf der Karte verbunden werden</string>
     <string name="init_summary_maptrail">Wenn aktiviert (und GPS eingeschaltet ist) speichert c:geo den Verlauf deiner Bewegung als Track und zeigt ihn auf der Karte an.</string>
     <string name="init_trailappearance">Erscheinungsbild des Positionsverlaufs</string>
     <string name="init_trailappearance_summary">Wählen Sie Farbe, Deckkraft und Linienbreite für den Positionsverlauf</string>
@@ -1802,6 +1806,7 @@
     <string name="calccoord_guided_mode">Geführter Modus</string>
     <string name="calccoord_guided_edit">Zum Bearbeiten auf eine Ziffer tippen</string>
     <string name="calccoord_guided_value">Wert</string>
+    <string name="calccoord_select_variable">Variable wählen</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
