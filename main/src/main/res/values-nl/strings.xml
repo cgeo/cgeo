@@ -325,6 +325,8 @@
     <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
+    <string name="err_trackable_error">Trackable fout</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Te veel trackables gemarkeerd als \"bezocht\" - maximum van %d toegestaan</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
     <string name="confirm_discard_changes">Niet opgeslagen wijzigingen negeren?</string>
     <string name="confirm_unsent_changes_title">Niet-verzonden wijzigingen</string>

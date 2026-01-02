@@ -1,9 +1,23 @@
 ##
+- Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie konserwacyjne i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida 8 do Androida 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
+- Zmiana: Maksymalna liczba odwiedzin przedmiotów podróżnych GC na dziennik skrytki zmniejszona do 100 (wg żądania z geocaching.com, aby zmniejszyć obciążenie serwera spowodowane przez ekstremalnych miłośników „podróżników”)
+- Naprawiono: Niektóre możliwe wyjątki dotyczące bezpieczeństwa, gdy użytkownik nie przyznał pewnych praw (np. powiadomienia)
+- Naprawiono: Niekompletne okręgi wokół skrytek przy niskim poziomie powiększenia (tylko VTM)
+- Naprawiono: Awaria przy przeładowaniu punktów nawigacji w niektórych sytuacjach
+- Naprawiono: W niektórych sytuacjach filtr daty wydarzenia nie działał
+- Naprawiono: Maksymalny limit logów nie działa niezawodnie przy ustawieniu „nieograniczona”
+- Naprawiono: W określonych warunkach awaria przy otwarciu mapy
+- Naprawiono: Mapa się nie wyświetała jeśli wherigo nie miało widocznych stref
+- Naprawiono: W pewnych sytuacjach występował błąd na karcie obrazów w szczegółach skrytki
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
+
+##
 - Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
 - Naprawiono: Pole wyboru Ulubione było resetowane przy ponowym wejściu na ekran logowania offline
 - Naprawiono: Pole do wpisywania promienia geofence pokazuje liczbę dziesiętną
 - Naprawiono: Synchronizacja notatek osobistych nie działała
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Zmiana: Nowa ikona dla importu śladu GPX/trasy w szybkich ustawieniach śladu/trasy na mapie
 
 ##
 - Naprawiono: Wartości ujemne na wykresie wysokości nie są skalowane
@@ -43,6 +57,14 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
+
+
+
+
+
+
 
 
 

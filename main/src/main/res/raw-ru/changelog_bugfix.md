@@ -1,48 +1,70 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Время обновиться! Если вы всё ещё используете Android 7 или более ранние версии, возможно, это последнее обновление c:geo для вас! В нашем следующем релизе c:geo мы откажемся от поддержки Android 5-7, чтобы снизить нашу нагрузку на обслуживание и иметь возможность обновить некоторые внешние компоненты, используемые c:geo, которые мы в настоящее время не успеваем реализовать. Мы по-прежнему будем поддерживать версии от Android 8 до Android 16 (и более новые версии, когда они будут опубликованы), что соответствует более чем восьмилетней истории Android.
+- Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
+- Исправлено: Были возможны некоторые исключения из правил безопасности, когда пользователь не предоставлял определенные права (например, уведомления)
+- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
+
+##
+- Изменение: ЕдинаяКарта установлена в качестве карты по умолчанию для всех (как часть нашего плана по её развитию). На данный момент вы можете вернуть всё как было в меню "Настройки" - "Источники карт". Удаление устаревших карт запланировано на весну 2026 года в наших регулярных релизах.
+- Исправлено: Флажок с избранным сбрасывался при повторном входе на экран записи при работе в автономном режиме
+- Исправлено: В поле ввода радиуса геозоны отображаются десятичные числа
+- Исправлено: Не работала синхронизация личных заметок
+- Изменение: Новая иконка для импорта трека/маршрута в формате GPX в быстрых настройках трека/маршрута на карте
 
 ##
 - Исправлено: На диаграмме высот не отображались отрицательные значения
 - Исправлено: Координаты близкие к 0 повреждались при экспорте в GPX
-- Fix: Some crashes
-- Try to fix: ANR on startup
-- Try to fix: Missing geocache data on live map
+- Исправлено: Были некоторые сбои
+- Пытаемся исправить: ANR при запуске
+- Пытаемся исправить: Отсутствуют данные о тайнике на карте, работающей в режиме реального времени
 
 ##
-- Fix: Crash in keyword search
-- Fix: Crash in map
-- Fix: Hint text no longer selectable
-- Fix: Several Wherigo issues
+- Исправлено: Сбой в поиске ключевых слов
+- Исправлено: Сбой на карте
+- Исправлено: Нельзя было выбрать подсказку
+- Исправлено: Ряд проблем с Wherigo
 
 ##
 - Исправлено: для шифрования/расшифровки подсказки требовалось дополнительное нажатие
-- Fix: Wherigo crash on reading old saved games
-- Fix: Logging from within c:geo not remembered sometimes
-- Fix: Missing live data update for found & archived caches
-- Fix: Waypoints in offline map are not shown sometimes
+- Исправлено: при чтении старых сохраненных игр в Wherigo происходил сбой
+- Исправлено: авторизация на геокешинге через c:geo иногда слетала
+- Исправлено: Отсутствовало оперативное обновление данных для найденных и архивных тайников
+- Исправлено: иногда путевые точки не отображались на оффлайновой карте
 
 ##
-- Fix: Unencrypted cache hints (website change)
-- Fix: Lab Adventures not loading in app (website change, you will need to update stored lab adventures to be able to call them from c:geo again)
+- Исправлено: подсказки о незашифрованном тайнике (изменение веб-сайта)
+- Исправлено: Lab Adventures не загружались в приложении (изменение веб-сайта, вам нужно будет обновить сохраненные Lab Adventures, чтобы снова иметь возможность вызывать их из c:geo)
 - Исправлено: ЕдинаяКарта VTM: переключение на отображение 3D-зданий не работало для комбинированных карт
-- Fix: Offline translation: Listing language sometimes detected as --
+- Исправлено: Офлайн перевод: язык списка иногда определялся как --
 
 ##
 - Исправлено: Сбой в модуле перевода
-- Fix: Login detection fails (website change)
-- Fix: Crash on retrieving Wherigo cartridge
-- Fix: "Load more" does not respect offline filters
+- Исправлено: Ошибка обнаружения входа в систему (изменения веб-сайта)
+- Исправлено: Сбой при получении картриджа Wherigo
+- Исправлено: "Загрузить больше" не учитывало офлайн фильтры
 
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+- Исправлено: Геокроты и прочие трекаблы не попадали в меню "Инвентарь" после записи о посещении тайника
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
+- Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
+
+
+
+
+
+
+
 
 
 

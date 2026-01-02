@@ -1,4 +1,18 @@
 ##
+- Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
+- Änderung: Maximale Anzahl von "Besuchen" von GC-Trackables pro Cache-Log auf 100 reduziert (auf Bitte von geocaching.com hin, um die Serverlast zu reduzieren, die durch extreme Trackable-Liebhaber verursacht wird)
+- Korrektur: Mögliche Sicherheits-Abbrüche, wenn der Benutzer bestimmte Rechte nicht gewährt hat (z. B.: Benachrichtigungen)
+- Korrektur: Cache-Kreise unvollständig bei niedrigen Zoomstufen (nur VTM)
+- Korrektur: Absturz beim Laden von Wegpunkten unter bestimmten Lastbedingungen
+- Korrektur: Event-Filter funktioniert unter bestimmten Bedingungen nicht
+- Korrektur: Maximales Log-Limit funktioniert nicht zuverlässig in der "unbegrenzten" Einstellung
+- Korrektur: Absturz beim Öffnen OSM-basierter Karten unter bestimmten Bedingungen
+- Fix: Keine Karte angezeigt, wenn in Wherigo keine sichtbaren Zonen vorhanden sind
+- Korrektur: Absturz beim Bilder-Tab der Cache-Details unter bestimmten Bedingungen
+- Korrektur: Kartensuche mit ungültigen Koordinaten
+- Korrektur: Einige Übersetzungen berücksichtigen die c:geo-interne Sprachauswahl nicht
+
+##
 - Änderung: Die Vereinheitlichte Karte ist nun die Standardkarte für alle Nutzer (ein Schritt zur Ablösung der alten Karten). Kann vorläufig unter "Einstellungen" - "Kartenquellen" noch umgeschaltet werden. Das Entfernen der alten Kartenimplementierung ist im Rahmen unserer regulären Releases im Frühjahr 2026 geplant.
 - Korrektur: Favoriten-Checkbox wird beim erneuten Öffnen des Offline-Logs zurückgesetzt
 - Korrektur: Geofence Radius Eingabefeld zeigt Dezimalzahl an
@@ -43,6 +57,14 @@
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
+
+
+
+
+
+
+
 
 
 
