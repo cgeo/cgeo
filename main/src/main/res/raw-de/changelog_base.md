@@ -10,7 +10,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -28,6 +28,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Menüeintrag in Wegpunktliste, um bestimmte Wegpunkttypen als besucht zu markieren
 - Neu: Platzhalter für Trackable Logging (Geocache-Name, Geocache-Code, Benutzer)
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
