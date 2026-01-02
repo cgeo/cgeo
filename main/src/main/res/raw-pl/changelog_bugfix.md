@@ -9,6 +9,8 @@
 - Naprawiono: W określonych warunkach awaria przy otwarciu mapy
 - Naprawiono: Mapa się nie wyświetała jeśli wherigo nie miało widocznych stref
 - Naprawiono: W pewnych sytuacjach występował błąd na karcie obrazów w szczegółach skrytki
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
 - Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
@@ -55,6 +57,8 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
 
 
 
