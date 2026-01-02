@@ -40,12 +40,14 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
     PendingDownloadsAdapter adapter;
     DownloadManager downloadManager;
     ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads;
+    MaterialButton deleteAllButton;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generic_recyclerview);
+        setContentView(R.layout.pending_downloads_activity);
         setTitle(R.string.debug_current_downloads);
+        deleteAllButton = findViewById(R.id.delete_all_button);
         fillAdapter();
     }
 
@@ -159,6 +161,9 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             adapter.notifyDataSetChanged();
+
+            // setup delete all button
+            deleteAllButton.setOnClickListener(v -> showDeleteAllConfirmation());
         }
     }
 
@@ -183,6 +188,34 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
                 ViewUtils.showToast(this, R.string.downloader_cancelled_download, download.filename);
              }
         }
+    }
+
+    private void showDeleteAllConfirmation() {
+        final int count = pendingDownloads.size();
+        SimpleDialog.of(this)
+            .setTitle(R.string.downloader_delete_all_confirmation)
+            .setMessage(TextParam.text(getString(R.string.downloader_delete_all_message, count)))
+            .confirm(this::deleteAllDownloads);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void deleteAllDownloads() {
+        // Create a copy of the list to avoid concurrent modification
+        final ArrayList<PendingDownload.PendingDownloadDescriptor> downloadsToDelete = new ArrayList<>(pendingDownloads);
+
+        // Remove all downloads
+        for (PendingDownload.PendingDownloadDescriptor download : downloadsToDelete) {
+            PendingDownload.remove(download.id);
+            downloadManager.remove(download.id);
+        }
+
+        // Clear the list and update UI
+        pendingDownloads.clear();
+        adapter.notifyDataSetChanged();
+
+        // Show confirmation and finish activity
+        ViewUtils.showToast(this, R.string.downloader_deleted_all);
+        finish();
     }
 
     private static class PendingDownloadsViewHolder extends RecyclerView.ViewHolder {
