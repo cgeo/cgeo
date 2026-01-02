@@ -325,6 +325,8 @@
     <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
     <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
     <string name="err_trackable_no_preference_activity">Не удаётся найти подходящую страницу настроек.</string>
+    <string name="err_trackable_error">Ошибка в трекаблах/кротах</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Слишком много трекаблов/геокротов, помечены как \"погостил\" - максимально допустимо %d</string>
     <string name="confirm_unsaved_changes_title">Несохранённые изменения</string>
     <string name="confirm_discard_changes">Отменить несохранённые изменения?</string>
     <string name="confirm_unsent_changes_title">Неотправленные изменения</string>
@@ -1145,6 +1147,8 @@
     <string name="init_accuracycirclecolor">Цвет линии круга точности</string>
     <string name="init_accuracycirclecolor_summary">Выберите цвет и прозрачность границы круга точности. «Круг точности» используется для визуального представления степени точности сигнала геолокации.</string>
     <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
+    <string name="init_include_logs">Добавить записи</string>
+    <string name="init_include_travelbugs">Добавить трекаблы (кроты, Travel Bugs)</string>
     <string name="init_trackautovisit">Отмечать трекаблы</string>
     <string name="init_summary_trackautovisit">Выставлять \"Посетил\" для трекаблов по умолчанию</string>
     <string name="init_sigautoinsert">Вставлять автоматически</string>
@@ -1302,6 +1306,7 @@
     <string name="persistablefolder_base">Основная</string>
     <string name="persistablefolder_offline_maps">Офлайн-карты</string>
     <string name="persistablefolder_offline_maps_themes">Темы карты</string>
+    <string name="persistablefolder_backgroundmaps">Фоновые Карты</string>
     <string name="persistablefolder_offline_maps_shading">Файлы затенения карты</string>
     <string name="persistablefolder_backup">Резервное копирование</string>
     <string name="persistablefolder_logfiles">Логи</string>
@@ -1459,6 +1464,7 @@
     <string name="cache_description">Описание</string>
     <string name="cache_description_table_note">Описание содержит табличное форматирование, для корректного просмотра вам может понадобиться %s.</string>
     <string name="cache_description_rendering">Работаю над визуализацией. Подождите немного…</string>
+    <string name="cache_description_translating_and_rendering">Перевод и визуализация описания, пожалуйста, подождите…</string>
     <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Предупреждение: Очень длинное описание (%1$d символов). Отображаются только первые %2$d%%.</string>
     <string name="cache_description_render_fully">Описание визуализации завершено</string>
     <string name="cache_area_description">Описание местности</string>
@@ -1556,6 +1562,8 @@
     <string name="cache_menu_ignore">Игнорировать тайник</string>
     <string name="cache_log_menu_decrypt">Расшифровать/Зашифровать</string>
     <string name="cache_log_menu_edit">Редактировать запись</string>
+    <string name="menu_expand_log">Развернуть запись</string>
+    <string name="menu_collapse_log">Свернуть запись</string>
     <string name="cache_log_menu_delete">Удалить запись</string>
     <string name="cache_log_menu_popup_title">Запись %s</string>
     <string name="cache_log_delete_reason_default">Запись была удалена с помощью c:geo</string>
@@ -1628,6 +1636,7 @@
     <string name="cache_multiple_wherigo_cartridges_message">Обратитесь к списку тайников для получения дополнительной информации о картриджах.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - не загружен</string>
     <string name="cache_wherigo_start">Скачать и запустить этот Wherigo с помощью встроенного в c: geo проигрывателя</string>
+    <string name="cache_wherigo_credentials">Чтобы играть в эту игру, используя внутренний проигрыватель c:geo, вам сначала необходимо авторизоваться на geocaching.com. Нажмите на кнопку справа, чтобы перейти к настройке.</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
@@ -1676,6 +1685,7 @@
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
+    <string name="internal_connector_name">Пользовательские тайники</string>
     <!-- html styles -->
     <string name="html_style_default">По умолчанию</string>
     <string name="html_style_default_no_contrast_fix">По умолчанию без фиксации контраста</string>
@@ -1758,6 +1768,7 @@
     <string name="waypoint_coordinate_formats_plain">Текст</string>
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
+    <string name="copied_to_clipboard">Скопировано в буфер</string>
     <!-- Projection -->
     <string name="projection_type_none">Нет проекции</string>
     <string name="projection_type_bearing">Азимут</string>
@@ -2008,9 +2019,14 @@
     <string name="helper_gcwizard_description">GC Wizard содержит множество инструментов для базовой криптографии, геодезических и научных расчетов, а также сотни наборов различных символов.</string>
     <!-- export -->
     <string name="share_export">Поделиться / Экспорт</string>
+    <string name="export">Экспорт</string>
+    <string name="export_upload">Экспорт / Выгрузка</string>
     <string name="export_progress">Экспорт: %1$s</string>
     <string name="export_exportedto">экспортировано в</string>
     <string name="export_failed">Сбой экспорта</string>
+    <string name="export_gpx">Экспорт GPX</string>
+    <string name="export_fieldnotes">Экспорт полевых заметок</string>
+    <string name="fieldnotes">заметки</string>
     <string name="export_fieldnotes_info">Полевые заметки будут экспортированы в /sdcard/field-notes с текущей датой и временем в имени файла.</string>
     <string name="export_fieldnotes_upload">Загрузить на geocaching.com</string>
     <string name="export_fieldnotes_uploading">Загрузка…</string>
@@ -2020,6 +2036,7 @@
     <string name="export_gpx_info">GPX файл будет экспортирован в %1$s в файл с текущей датой и временем в имени.</string>
     <string name="export_confirm_title">Экспорт %1$s</string>
     <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
+    <string name="export_persnotes">Выгрузить личные заметки</string>
     <string name="export_persnotes_uploading">Загрузка личной заметки %1$d</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Успешно загружена %1$d заметка</item>
@@ -2436,7 +2453,6 @@
     <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
-    <string name="number_input_title">Введите значение между %1$s и %2$s</string>
     <string name="number_input_err_boundarymin">Введенное значение слишком мало - сброс до минимального значения</string>
     <string name="number_input_err_boundarymax">Введенное значение слишком велико - сброс до максимального значения</string>
     <string name="number_input_err_format">Неверный формат числа</string>
@@ -2460,6 +2476,7 @@
     <string name="map_refresh_individual_route">Обновить</string>
     <string name="map_export_route">Экспортировать как маршрут</string>
     <string name="map_export_track">Экспортировать как трек</string>
+    <string name="map_load_from_GPX">Загрузить из GPX</string>
     <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
     <string name="map_autotarget_individual_route">Установить начало маршрута как цель</string>
@@ -2563,6 +2580,7 @@
     <string name="receivedownload_integritycheck_failed">Ошибка проверки целостности</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Скачать офлайн-карту</string>
+    <string name="downloadbackground_title">Скачать фоновую карту</string>
     <string name="download_title">Скачать файл</string>
     <string name="downloadmap_info">Выберите файл с картой для вашего региона, нажав на значок «Сохранить».\n\nЗагрузка производится в фоновом режиме. Когда передача будет завершена, файл скопируется в папку карт c:geo и устанавится в качестве текущей карты.\n\nБудьте осторожны: загрузка карты может использовать много сетевого трафика!</string>
     <string name="downloadmap_filename">Загрузка %s</string>
@@ -2714,6 +2732,8 @@
     <string name="wherigo_author">Автор</string>
     <string name="wherigo_zone_inside">внутри</string>
     <string name="wherigo_zone_near">рядом</string>
+    <string name="wherigo_zone_navigate_compass">Направление компаса к центру</string>
+    <string name="wherigo_zone_copy_coordinates">Копировать координаты центра</string>
     <string name="wherigo_choose_cartridge">Выберите картридж</string>
     <string name="wherigo_choose_new_loadgame">Выберите новую игру или игру для загрузки</string>
     <string name="wherigo_choose_savegame_slot">Выберите слот для сохранения</string>
@@ -2732,6 +2752,7 @@
     <string name="wherigo_download_progress_login">Вход в систему…</string>
     <string name="wherigo_download_progress_started">Загрузка началась</string>
     <string name="wherigo_download_progress_download_status">Скачано %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_download_accept_eula">Пожалуйста, войдите на сайт www.wherigo.com и сначала примите их правила и условия</string>
     <string name="wherigo_error_title">Отчет по проблеме Wherigo</string>
     <string name="wherigo_error_game_noerror">Движок Wherigo не сообщает об ошибках.</string>
     <string name="wherigo_error_game_error">Движок Wherigo сообщает об ошибке:\n\n```\n%1$s\n```\nВы можете связаться с автором картриджа [здесь](%2$s)</string>
@@ -2772,6 +2793,7 @@
     <string name="close">Закрыть</string>
     <string name="delete">Удалить</string>
     <string name="play">Играть</string>
+    <string name="copy">Копировать</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
     <string name="multiselect_selectvisible">Выбрать видимое</string>

@@ -406,6 +406,15 @@ public class GCWebAPI {
                     }
                     return new MapSearchResultSet();
                 }
+                // on invalid coordinates range silently log stacktrace + return empty searchresult without calling search provider
+                if (box.hasInvalidRange()) {
+                    try {
+                        throw new RuntimeException("searching map with invalid coordinates");
+                    } catch (RuntimeException e) {
+                        Log.e("searching map with invalid viewport (" + box + ") " + ExceptionUtils.getStackTrace(e));
+                    }
+                    return new MapSearchResultSet();
+                }
                 params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
                         ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
 
@@ -413,7 +422,7 @@ public class GCWebAPI {
                 // Don't know why yet...
                 params.put("rad", "16000");
 
-                //set origin to middle of viewport (will be overridden if origin is set explicitely later)
+                //set origin to middle of viewport (will be overridden if origin is set explicitly later)
                 params.put("origin", String.valueOf(this.box.getCenter().getLatitude()) + ',' + this.box.getCenter().getLongitude());
             }
 
