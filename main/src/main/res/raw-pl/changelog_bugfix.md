@@ -4,6 +4,11 @@
 - Naprawiono: Niektóre możliwe wyjątki dotyczące bezpieczeństwa, gdy użytkownik nie przyznał pewnych praw (np. powiadomienia)
 - Naprawiono: Niekompletne okręgi wokół skrytek przy niskim poziomie powiększenia (tylko VTM)
 - Naprawiono: Awaria przy przeładowaniu punktów nawigacji w niektórych sytuacjach
+- Naprawiono: W niektórych sytuacjach filtr daty wydarzenia nie działał
+- Naprawiono: Maksymalny limit logów nie działa niezawodnie przy ustawieniu „nieograniczona”
+- Naprawiono: W określonych warunkach awaria przy otwarciu mapy
+- Naprawiono: Mapa się nie wyświetała jeśli wherigo nie miało widocznych stref
+- Naprawiono: W pewnych sytuacjach występował błąd na karcie obrazów w szczegółach skrytki
 
 ##
 - Zmiana: UnifiedMap ustawiona jako domyślna mapa dla każdego (jako część naszego harmonogramu dla UnifiedMap). Tymczasowo możesz to zmienić przez „Ustawienia” – „Źródła mapy”. W naszych regularnych wydaniach planowane jest usunięcie dotychczasowych map na wiosnę 2026 r.
@@ -50,6 +55,8 @@
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
 
 
 
