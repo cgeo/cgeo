@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.xml;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -115,6 +116,79 @@ public class XmlNode {
         return value;
     }
 
+    public void onDefinedIntegerValue (final String name, final Consumer<Integer> action) {
+        try {
+            action.accept(Integer.parseInt(get(name).getValue()));
+        } catch (NullPointerException | NumberFormatException ignore) {
+            // ignore
+        }
+    }
+
+    @Nullable
+    public Float getValueAsFloat(final String name) {
+        try {
+            return Float.parseFloat(get(name).getValue());
+        } catch (NullPointerException | NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @NonNull
+    public String getValueAsString(final String name) {
+        try {
+            return get(name).getValue();
+        } catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public void onNonBlankValue(final String name, final Consumer<String> action) {
+        final String temp = getValueAsString(name);
+        if (StringUtils.isNotBlank(temp)) {
+            action.accept(temp.trim());
+        }
+    }
+
+    public void onNonBlankAttribute(final String name, final Consumer<String> action) {
+        final String temp = getAttribute(name);
+        if (StringUtils.isNotBlank(temp)) {
+            action.accept(temp);
+        }
+    }
+
+    public void onDefinedIntegerAttribute(final String name, final Consumer<Integer> action) {
+        final Integer temp = getAttributeAsInteger(name);
+        if (temp != null) {
+            action.accept(temp);
+        }
+    }
+
+    @Nullable
+    public String getAttribute(final String name) {
+        final XmlNode temp = get(ATTRIBUTE_PRAEFIX + name);
+        return temp == null ? null : temp.getValue();
+    }
+
+    @Nullable
+    public Integer getAttributeAsInteger(final String name) {
+        final String temp = getAttribute(name);
+        try {
+            return temp == null ? null : Integer.parseInt(temp);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @Nullable
+    public Double getAttributeAsDouble(final String name) {
+        final String temp = getAttribute(name);
+        try {
+            return temp == null ? null : Double.parseDouble(temp);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public void forEach(final Consumer<XmlNode> action) {
         for (Map.Entry<String, Object> entry : childrenMap.entrySet()) {
@@ -122,6 +196,18 @@ public class XmlNode {
                 ((List<XmlNode>) entry.getValue()).forEach(action);
             } else {
                 action.accept((XmlNode) entry.getValue());
+            }
+        }
+    }
+
+    public static void forEach(@Nullable final List<XmlNode> nodes, final Consumer<String> action) {
+        if (nodes == null || nodes.isEmpty()) {
+            return;
+        }
+        for (XmlNode node : nodes) {
+            final String temp = node.getValue();
+            if (temp != null) {
+                action.accept(temp);
             }
         }
     }
