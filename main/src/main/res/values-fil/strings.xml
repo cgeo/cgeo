@@ -111,8 +111,7 @@
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Maaaring pumulya ang pagsasalin na may malaking halaga ng teksto.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Okay</string>
     <string name="err_parse">Nabigong pag-login sa isang pahina ng parsing</string>
@@ -330,7 +329,6 @@
     <string name="init_summary_oc_uk">Mag-load ng caches mula sa opencache.uk</string>
     <string name="init_oc_uk_description">Pahintulot c:geo may opencache.uk para mag hanap ng cache at access/filter para sa iyong caches.</string>
     <string name="init_summary_su">Mag-load ng caches mula sa Geocaching.su</string>
-    <string name="init_gcvote_password_description">Para mai-rate ang cache, kinakailangan mo sumunod sa mga tagubilin ng Gcvote.com at ipasok ang iyong GCvote password dito.</string>
     <string name="init_login_popup">Mag-login</string>
     <string name="init_login_popup_working">Naglo-login sa&#8230;</string>
     <string name="init_login_popup_ok">OK mag-login</string>
@@ -352,8 +350,6 @@
     <string name="init_signature_template_owner">Ang May-ari</string>
     <string name="init_signature_template_name">Pangalan</string>
     <string name="init_signature_template_log">Ang teksto ng log</string>
-    <string name="init_ratingwanted">Ang rate ng GCvote</string>
-    <string name="init_summary_ratingwanted">I-load ang rating ng cache mula sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ipakita ang mga Sarili at/mga Kaibigan</string>
     <string name="init_summary_friends_and_own_logs_wanted">Ang pagpapakita ng karagdagang talaan ng pahina para sa mga kaibigan at ang sariling mga log</string>
     <string name="init_openlastdetailspage">Ang Huling mga Detalye ng Pahina</string>
@@ -535,7 +531,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Ang mga imahe na spoiler ay nag-load</string>
     <string name="cache_dialog_loading_details_status_logs">Ang mga log ay nag-load</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pinoproseso ang mga waypoint</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Ang GCVote ay nag-load</string>
     <string name="cache_dialog_loading_details_status_cache">Ang Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">I-Render view</string>
     <string name="cache_dialog_offline_save_title">Ang offline</string>
@@ -569,14 +564,12 @@
     <string name="cache_menu_copy_list">Kopyahin sa ibang listahan</string>
     <string name="cache_menu_oruxmaps_online">Ang (Online) OruxMaps</string>
     <string name="cache_menu_oruxmaps_offline">Ang (Offline) OruxMaps</string>
-    <string name="cache_menu_vote">Ang Boto</string>
     <string name="cache_menu_challenge_checker">Paghahanap ng hamon checker</string>
     <string name="cache_menu_ignore">Ang cache ay huwag pansinin</string>
     <string name="ignore_confirm_title">Maging maingat ka</string>
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
     <string name="cache_status_archived">Ang naka-archive</string>
@@ -611,7 +604,7 @@
     <string name="cache_time_full_hours">ang oras</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nag-load ang cache mula sa %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nag-loading ang waypoints mula sa %1$s</string>
