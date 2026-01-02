@@ -1807,6 +1807,7 @@
     <string name="calccoord_guided_edit">Zum Bearbeiten auf eine Ziffer tippen</string>
     <string name="calccoord_guided_value">Wert</string>
     <string name="calccoord_select_variable">Variable wählen</string>
+    <string name="calccoord_new_variable">**%s** *(neu)*</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
     <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
