@@ -10,7 +10,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nytt: Stöd för transparent bakgrundsvisning av offline-kartor (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -27,7 +27,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Visualisera beräknat koordinat-spill i vägpunkt-listan
 - Nytt: Menypost i vägpunkt-listan för att markera vissa vägpunkt-typer som besökta
 - Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
-- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
+- Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
