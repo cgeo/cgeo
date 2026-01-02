@@ -9,6 +9,8 @@
 - Fix: Crash on opening map under certain conditions
 - Fix: No map shown if wherigo has no visible zones
 - Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
 - Wijziging: UnifiedMap ingesteld als standaard kaart voor iedereen (als onderdeel van onze roadmap naar UnifiedMap) Je kunt voorlopig terugschakelen in "instellingen" - "kaartbronnen". Het verwijderen van oudere kaarten is gepland voor de lente van 2026 in onze reguliere releases.
@@ -55,6 +57,8 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
+
 
 
 
