@@ -114,8 +114,7 @@
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>
     <string name="err_server_ec">Tidak dapat menghubungi Extremcaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
@@ -333,7 +332,6 @@
     <string name="init_summary_oc_uk">Muat cache dari opencache.uk</string>
     <string name="init_oc_uk_description">Otorisasi c:geo dengan opencache.uk untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="init_summary_su">Muat cache dari Geocaching.su</string>
-    <string name="init_gcvote_password_description">Untuk bisa menilai sebuah cache, anda perlu mengikuti petunjuk di GCVote.com dan masukkan kata sandi GCVote anda di sini.</string>
     <string name="init_login_popup_working">Sedang masuk&#8230;</string>
     <string name="init_login_popup_ok">Masuk Ok</string>
     <string name="init_login_popup_failed">Gagal masuk</string>
@@ -354,8 +352,6 @@
     <string name="init_signature_template_owner">Pemilik</string>
     <string name="init_signature_template_name">Nama</string>
     <string name="init_signature_template_log">Teks log</string>
-    <string name="init_ratingwanted">Rating GCvote</string>
-    <string name="init_summary_ratingwanted">Muat penilaian cache dari GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Tampilan Teman/Milik Sendiri</string>
     <string name="init_summary_friends_and_own_logs_wanted">Tampilan tambahan halaman logbook untuk teman dan log sendiri</string>
     <string name="init_openlastdetailspage">Halaman Rincian Terakhir</string>
@@ -536,7 +532,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Memuat gambar spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Memuat log</string>
     <string name="cache_dialog_loading_details_status_waypoints">Pengolahan titik arah</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Memuat GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Data caching</string>
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
@@ -566,13 +561,11 @@
     <string name="cache_menu_move_list">Pindahkan ke daftar yang berbeda</string>
     <string name="cache_menu_copy_list">Salin ke daftar yang berbeda</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
-    <string name="cache_menu_vote">Suara</string>
     <string name="cache_menu_challenge_checker">Cari pemeriksa penolakan</string>
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
-    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -607,7 +600,7 @@
     <string name="cache_time_full_hours">jam</string>
     <string name="cache_listed_on">Terdaftar %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Memuat cache dri %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Memuat waypoints dari %1$s</string>
