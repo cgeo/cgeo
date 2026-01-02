@@ -376,10 +376,6 @@
     <string name="use_slider_adjust_value">Use slider to adjust value</string>
     <string name="snackbar_action_share">Share</string>
 
-    <string name="warn_gm_not_available">Google Maps not available.</string>
-    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
-    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
-
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basic</string>
 
@@ -1267,7 +1263,6 @@
     <string name="init_hillshading_hq">High quality hillshading</string>
     <string name="init_summary_hillshading_hq">More detailed hillshading overlay but ~50%% slower rendering when zoomed out</string>
     <string name="init_mapsource_select">Select Map Source</string>
-    <string name="init_mapsource_select_legacy">Select Map Source (Legacy)</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
@@ -1393,8 +1388,6 @@
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
-    <string name="init_title_useLegacyMap">Use legacy map</string>
-    <string name="init_summary_useLegacyMap">Use legacy versions of Google Map / Mapsforge (OSM) maps instead of UnifiedMap</string>
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
@@ -1418,7 +1411,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_google_terrain">Google: Terrain</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_nomap">No map</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
@@ -2780,7 +2772,6 @@
     <string name="map_manual_targets_cleared">Manual targets cleared</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>
-    <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="sorted_route_saved">Individual route saved</string>
     <string name="load_individual_route_error">Error loading individual route</string>
     <string name="route_item_point">Route point</string>
@@ -2967,7 +2958,6 @@
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>
-    <string name="map_trailhistory_cleared">History track cleared</string>
     <string name="map_trail_show">Show history track</string>
     <string name="map_trail_hide">Hide history track</string>
 
@@ -3104,8 +3094,6 @@
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
-
-    <string name="wherigo_map_supported_for_unified_map_only">Displaying of Wherigo locations on map is not supported for your map settings. Please switch to unified map under Settings -> Map Sources -> %s</string>
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>

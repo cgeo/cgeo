@@ -34,7 +34,6 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
@@ -2493,11 +2492,6 @@ public class Geocache implements INamedGeoCoordinate {
     public void showHintToast(@NonNull final Activity activity) {
         final String hint = getHint();
         ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
-    }
-
-    @NonNull
-    public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().iconId);
     }
 
     @NonNull

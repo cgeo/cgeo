@@ -4,12 +4,12 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.MapActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.Intent;
@@ -80,7 +80,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, MapActivity.class), ID_FRAGMENT_MAP));
+        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, UnifiedMapActivity.class), ID_FRAGMENT_MAP));
         shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this), ID_FRAGMENT_NEARBY));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally

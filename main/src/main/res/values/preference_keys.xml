@@ -208,10 +208,6 @@
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 
-    <!-- category map data: legacy maps -->
-    <string translatable="false" name="pref_useLegacyMap">useLegacyMap</string>
-    <string translatable="false" name="pref_mapsource">mapsource</string>
-
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
     <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
@@ -659,14 +655,16 @@
 
     <!-- ============================================================================================================================================================================== -->
     <!-- old keys, used only for migration -->
+    <!-- prefix the key name with "old_", but leave the key value unchanged -->
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="old_pref_mapAutoDownloads">mapAutoDownloads</string>
     <string translatable="false" name="old_pref_skin">skin</string>
     <string translatable="false" name="old_pref_quicklaunchitems">quicklaunchitems</string>
     <string translatable="false" name="old_pref_showListsInCacheList">showListsInCacheList</string>
+    <string translatable="false" name="old_pref_useLegacyMap">useLegacyMap</string>
+    <string translatable="false" name="old_pref_mapsource">mapsource</string>
 
     <string translatable="false" name="pref_legacy_filter_config_migrated">legacy_filter_config_migrated</string>
     <string translatable="false" name="pref_last_used_date">last_used_logdate</string>
-
 </resources>

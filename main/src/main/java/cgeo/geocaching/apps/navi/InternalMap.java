@@ -3,10 +3,9 @@ package cgeo.geocaching.apps.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 
 import android.content.Context;
 
@@ -33,17 +32,17 @@ class InternalMap extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), coords, WaypointType.WAYPOINT);
+        DefaultMap.startActivityCoords(context, coords, WaypointType.WAYPOINT);
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
-        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), waypoint);
+        DefaultMap.startActivityCoords(context, waypoint);
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
-        DefaultMap.startActivityGeoCode(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), cache.getGeocode());
+        DefaultMap.startActivityGeoCode(context, cache.getGeocode());
     }
 
 }
