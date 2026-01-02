@@ -28,6 +28,7 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Položka v nabídce seznamu trasových bodů pro označení určitých typů trasových bodů jako navštívených
 - New: Placeholders for trackable logging (geocache name, geocache code, user)
 - Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
