@@ -850,6 +850,7 @@
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_waypoints">Punts de ruta</string>
     <string name="settings_title_map_content">Contingut del mapa</string>
+    <string name="settings_title_maptrail">Historial de track</string>
     <string name="settings_title_map_behavior">Comportament del mapa</string>
     <string name="settings_title_map_style">Estil de mapa</string>
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
@@ -1148,7 +1149,10 @@
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
     <string name="init_maptrail">Mostra el traçat</string>
+    <string name="init_maptrail_length">Longitud màxima</string>
     <string name="init_maptrail_length_summary">Estableix la longitud màxima del  recorregut del traçat (aplicada a cada inici de c: geo). El valor per defecte és de 700 punts: ajusteu-lo segons la memòria disponible.</string>
+    <string name="init_maptrail_maxdistance">Distància màxima</string>
+    <string name="init_maptrail_maxdistance_summary">Distància màxima fins a la qual dos punts consecutius del historial de tracks es connecten al mapa</string>
     <string name="init_summary_maptrail">Quan està activat (i el GPS en funcionament) c: geo desa l\'historial dels vostres moviments com a un traçat i el mostra al mapa.</string>
     <string name="init_trailappearance">Aspecte del track històric</string>
     <string name="init_trailappearance_summary">Seleccioneu el color, l\'opacitat i l\'amplada de línia per a la línia del track históric</string>
@@ -1803,6 +1807,8 @@
     <string name="calccoord_guided_mode">Mode guiat</string>
     <string name="calccoord_guided_edit">Toca un dígit per editar</string>
     <string name="calccoord_guided_value">Valor</string>
+    <string name="calccoord_select_variable">Selecciona una variable</string>
+    <string name="calccoord_new_variable">**%s** *(Nou)*</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina espais</string>
