@@ -10,7 +10,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Suport per al tema Motorider (només VTM)
 - Nou: Compatibilitat amb la visualització de fons transparent de mapes fora de línia (només VTM)
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -28,12 +28,13 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
 - Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
 - Nou: Millora del maneig dels botons
 - Nou: Desament automàtic de l'estat
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Nou: Opció per crear una drecera al reproductor Wherigo a la pantalla d'inici del mòbil
 
 ### General
 - Nou: opció de compartir després de registrar un catxé
