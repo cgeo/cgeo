@@ -4,6 +4,11 @@
 - Correcció: Algunes possibles excepcions de seguretat quan l'usuari no ha atorgat certs drets (per exemple: notificacions)
 - Correcció: Cercles de catxés incomplets en nivells de zoom baixos (només VTM)
 - Correcció: Error en recarregar punts de referència en determinades condicions de càrrega
+- Correcció: El filtre de data d'esdeveniment no funciona en determinades condicions
+- Correcció: El límit màxim de línia de registre no funciona de manera fiable en la configuració "il·limitada"
+- Correcció: Error en obrir el mapa sota certes condicions
+- Correcció: No es mostra el mapa si wherigo no té zones visibles
+- Correcció: Error a la pestanya d'imatge dels detalls de catxé en determinades condicions
 
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.
@@ -50,6 +55,8 @@
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
+
 
 
 
