@@ -643,6 +643,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Mönster</string>
     <string name="cache_filter_datefilter_absolute">Absolut</string>
     <string name="cache_filter_datefilter_relative">Relativt till idag</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignorera år</string>
     <string name="cache_filter_datefilter_label_from">Från:</string>
     <string name="cache_filter_datefilter_label_to">Till:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Markera alla</string>
@@ -839,6 +840,7 @@
     <string name="settings_summary_offline_routing">Offline navigering är tillgänglig om antingen hjälpappen \"BRouter\" är installerad och konfigurerad eller intern routing är aktiverad.</string>
     <string name="settings_title_waypoints">Vägpunkter</string>
     <string name="settings_title_map_content">Kartinnehåll</string>
+    <string name="settings_title_maptrail">Historikspår</string>
     <string name="settings_title_map_behavior">Kartbeteende</string>
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
@@ -1136,7 +1138,10 @@
     <string name="init_dataDir">Välj datamapp</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
     <string name="init_maptrail">Visa historikspår</string>
+    <string name="init_maptrail_length">Maximal längd</string>
     <string name="init_maptrail_length_summary">Ange maximal längd på historikspår (tillämpas vid varje start av c:geo). Standardvärdet är 700 - justera efter tillgängligt minne.</string>
+    <string name="init_maptrail_maxdistance">Maximalt avstånd</string>
+    <string name="init_maptrail_maxdistance_summary">Maximalt avstånd tills två punkter i historiebanan kopplas på kartan</string>
     <string name="init_summary_maptrail">När den aktiveras (och GPS är på) sparar c:geo historiken över dina rörelser som ett spår och visar den på kartan.</string>
     <string name="init_trailappearance">Utseende för historikspår</string>
     <string name="init_trailappearance_summary">Välj färg, genomskinlighet och linjebredd för historikspår</string>
@@ -1785,6 +1790,8 @@
     <string name="calccoord_guided_mode">Guide-läge</string>
     <string name="calccoord_guided_edit">Tryck på en siffra för att redigera</string>
     <string name="calccoord_guided_value">Värde</string>
+    <string name="calccoord_select_variable">Välj variabel</string>
+    <string name="calccoord_new_variable">**%s** *(Ny)*</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
     <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
@@ -2415,6 +2422,8 @@
     <string name="preference_colorpicker_show_width">bredd: %d</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
+    <string name="number_input_title">Ställ in värde</string>
+    <string name="number_input_range">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
     <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
     <string name="number_input_err_format">Ogiltigt nummerformat</string>
