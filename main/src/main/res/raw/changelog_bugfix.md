@@ -12,6 +12,7 @@
 - Fix: No map shown if wherigo has no visible zones
 - Fix: Crash on cache details' image tab under certain conditions
 - Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap)
@@ -60,6 +61,7 @@
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
