@@ -1457,12 +1457,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onResume() {
+        super.onResume();
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
             return; // prevent further execution on the old activity instance
         }
 
-        super.onResume();
         reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 
