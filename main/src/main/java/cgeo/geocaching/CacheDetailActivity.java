@@ -69,6 +69,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CompassMiniView;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -1307,8 +1308,24 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
+        private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
         private CacheDetailsCreator.NameValueLine favoriteLine;
         private Geocache cache;
+        private int coordinateFormatPosition = 0;
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
+        }
 
         @Override
         public CachedetailDetailsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -1401,7 +1418,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // cache coordinates
-            details.addCoordinates(cache.getCoords());
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+            }
 
             // Latest logs
             details.addLatestLogs(cache);
