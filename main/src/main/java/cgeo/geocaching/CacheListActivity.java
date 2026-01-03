@@ -11,6 +11,7 @@ import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.command.AbstractCachesCommand;
 import cgeo.geocaching.command.CopyToListCommand;
+import cgeo.geocaching.command.DeleteCachesCommand;
 import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
@@ -93,6 +94,7 @@ import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -129,9 +131,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1328,7 +1330,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
-        new DeleteCachesFromListCommand(this, caches, listId, removeFromAllLists).execute();
+        if (removeFromAllLists || removeWillDeleteFromDevice(listId)) {
+            new DeleteCachesCommand(this, new HashSet<>(caches), new DeleteCachesHandler(this)).execute();
+            return;
+        }
+        new DeleteCachesFromListCommand(this, caches, listId).execute();
     }
 
     private void shareGeocodes(@NonNull final Collection<Geocache> caches) {
@@ -1383,18 +1389,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
     }
 
+    private static final class DeleteCachesHandler extends ProgressBarDisposableHandler {
+
+        DeleteCachesHandler(final CacheListActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void handleMessage(final Message msg) {
+            new LastPositionHelper((CacheListActivity) activityRef.get()).refreshListAtLastPosition(true);
+            dismissProgress();
+        }
+    }
+
     private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
 
         private final LastPositionHelper lastPositionHelper;
         private final int listId;
-        private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
-        private final boolean removeFromAllLists;
 
-        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId, final boolean removeFromAllLists) {
+        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
             super(context, caches, R.string.command_delete_caches_progress);
             this.lastPositionHelper = new LastPositionHelper(context);
             this.listId = listId;
-            this.removeFromAllLists = removeFromAllLists;
         }
 
         @Override
@@ -1404,24 +1420,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected void doCommand() {
-            if (appliesToAllLists()) {
-                oldCachesLists.putAll(DataStore.markDropped(getCaches()));
-            } else {
-                DataStore.removeFromList(getCaches(), listId);
-            }
-        }
-
-        public boolean appliesToAllLists() {
-            return removeFromAllLists || removeWillDeleteFromDevice(listId);
+            DataStore.removeFromList(getCaches(), listId);
         }
 
         @Override
         protected void undoCommand() {
-            if (appliesToAllLists()) {
-                DataStore.addToLists(getCaches(), oldCachesLists);
-            } else {
-                DataStore.addToList(getCaches(), listId);
-            }
+            DataStore.addToList(getCaches(), listId);
         }
 
         @Override
