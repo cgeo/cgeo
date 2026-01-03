@@ -2233,6 +2233,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
+        private static final String STATE_WAYPOINT_IDS_SUFFIX = "_ids";
+        private static final String STATE_WAYPOINT_POSITIONS_SUFFIX = "_positions";
         private Geocache cache;
         private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
 
@@ -2240,8 +2242,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (savedInstanceState != null) {
-                final int[] waypointIds = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_ids");
-                final int[] positions = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_positions");
+                final int[] waypointIds = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + STATE_WAYPOINT_IDS_SUFFIX);
+                final int[] positions = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + STATE_WAYPOINT_POSITIONS_SUFFIX);
                 if (waypointIds != null && positions != null && waypointIds.length == positions.length) {
                     for (int i = 0; i < waypointIds.length; i++) {
                         waypointCoordinateFormatPositions.put(waypointIds[i], positions[i]);
@@ -2261,8 +2263,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 positions[index] = entry.getValue();
                 index++;
             }
-            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_ids", waypointIds);
-            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_positions", positions);
+            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + STATE_WAYPOINT_IDS_SUFFIX, waypointIds);
+            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + STATE_WAYPOINT_POSITIONS_SUFFIX, positions);
         }
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
