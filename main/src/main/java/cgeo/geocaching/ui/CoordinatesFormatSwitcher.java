@@ -10,6 +10,13 @@ import android.widget.TextView;
  */
 public class CoordinatesFormatSwitcher {
 
+    /**
+     * Callback interface for position changes
+     */
+    public interface OnPositionChangedListener {
+        void onPositionChanged(int position);
+    }
+
     private static final GeopointFormatter.Format[] availableFormats = {
             GeopointFormatter.Format.LAT_LON_DECMINUTE,
             GeopointFormatter.Format.LAT_LON_DECSECOND,
@@ -20,12 +27,16 @@ public class CoordinatesFormatSwitcher {
     private int position = 0;
     private Geopoint coordinates;
     private TextView view;
+    private OnPositionChangedListener positionChangedListener;
 
     public CoordinatesFormatSwitcher setView(final TextView view) {
         this.view = view;
         this.view.setOnClickListener(v -> {
             position = (position + 1) % availableFormats.length;
             renderView();
+            if (positionChangedListener != null) {
+                positionChangedListener.onPositionChanged(position);
+            }
         });
         renderView();
         return this;
@@ -40,6 +51,11 @@ public class CoordinatesFormatSwitcher {
     public CoordinatesFormatSwitcher setPosition(final int position) {
         this.position = position % availableFormats.length;
         renderView();
+        return this;
+    }
+
+    public CoordinatesFormatSwitcher setOnPositionChangedListener(final OnPositionChangedListener listener) {
+        this.positionChangedListener = listener;
         return this;
     }
 

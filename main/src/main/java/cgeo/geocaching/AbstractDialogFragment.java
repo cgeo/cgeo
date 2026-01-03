@@ -153,7 +153,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         details.addBetterCacher(cache);
         final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
         if (coordinateSwitcher != null) {
-            coordinateFormatPosition = coordinateSwitcher.getPosition();
+            coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
         }
 
         // Latest logs
