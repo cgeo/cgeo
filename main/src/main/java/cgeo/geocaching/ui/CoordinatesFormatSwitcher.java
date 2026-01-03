@@ -37,6 +37,16 @@ public class CoordinatesFormatSwitcher {
         return this;
     }
 
+    public CoordinatesFormatSwitcher setPosition(final int position) {
+        this.position = position % availableFormats.length;
+        renderView();
+        return this;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
     private void renderView() {
         if (this.view != null && this.coordinates != null) {
             this.view.setText(coordinates.format(availableFormats[position]));

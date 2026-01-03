@@ -339,14 +339,19 @@ public final class CacheDetailsCreator {
         return add(R.string.cache_distance, text).valueView;
     }
 
-    public TextView addCoordinates(@Nullable final Geopoint coords) {
+    public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords) {
+        return addCoordinates(coords, 0);
+    }
+
+    public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords, final int formatPosition) {
         if (coords == null) {
             return null;
         }
         final TextView valueView = add(R.string.cache_coordinates, coords.toString()).valueView;
-        new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(coords);
+        final CoordinatesFormatSwitcher switcher = new CoordinatesFormatSwitcher();
+        switcher.setView(valueView).setCoordinate(coords).setPosition(formatPosition);
         CacheDetailsCreator.addShareAction(activity, valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
-        return valueView;
+        return switcher;
     }
 
 
