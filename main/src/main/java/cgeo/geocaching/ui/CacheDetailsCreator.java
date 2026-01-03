@@ -341,8 +341,10 @@ public final class CacheDetailsCreator {
 
     /**
      * Add coordinates line with default format.
-     * Note: Return type changed from TextView to CoordinatesFormatSwitcher to support format persistence.
-     * Existing callers that don't use the return value are unaffected.
+     * <p>
+     * <strong>API Note:</strong> Return type changed from TextView to CoordinatesFormatSwitcher
+     * to support format persistence (see issue #4789). Existing callers that don't use the
+     * return value are unaffected.
      *
      * @param coords the coordinates to display
      * @return the CoordinatesFormatSwitcher instance, or null if coords is null
@@ -355,7 +357,7 @@ public final class CacheDetailsCreator {
      * Add coordinates line with specified format position.
      *
      * @param coords the coordinates to display
-     * @param formatPosition the initial format position (0-3)
+     * @param formatPosition the initial format position (will be normalized to valid range using modulo)
      * @return the CoordinatesFormatSwitcher instance, or null if coords is null
      */
     public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords, final int formatPosition) {
