@@ -2232,7 +2232,38 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
+        private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
         private Geocache cache;
+        private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                final int[] waypointIds = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_ids");
+                final int[] positions = savedInstanceState.getIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_positions");
+                if (waypointIds != null && positions != null && waypointIds.length == positions.length) {
+                    for (int i = 0; i < waypointIds.length; i++) {
+                        waypointCoordinateFormatPositions.put(waypointIds[i], positions[i]);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            final int[] waypointIds = new int[waypointCoordinateFormatPositions.size()];
+            final int[] positions = new int[waypointCoordinateFormatPositions.size()];
+            int index = 0;
+            for (Map.Entry<Integer, Integer> entry : waypointCoordinateFormatPositions.entrySet()) {
+                waypointIds[index] = entry.getKey();
+                positions[index] = entry.getValue();
+                index++;
+            }
+            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_ids", waypointIds);
+            outState.putIntArray(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS + "_positions", positions);
+        }
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -2412,6 +2443,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
+            // Set saved coordinate format position for this waypoint
+            final int waypointId = wpt.getId();
+            final int formatPosition = waypointCoordinateFormatPositions.getOrDefault(waypointId, 0);
+            holder.setCoordinateFormatPosition(formatPosition);
+            // Listen for format changes and save them
+            holder.setOnCoordinateFormatChangedListener(position -> waypointCoordinateFormatPositions.put(waypointId, position));
             CacheDetailsCreator.addShareAction(activity, coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
