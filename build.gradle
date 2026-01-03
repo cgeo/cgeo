@@ -97,12 +97,6 @@ allprojects {
                         if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
                             selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
                         }
-
-                        // Apache Commons IO 2.6 fails in FileUtils.deleteDirectory()
-                        // (uses java.nio.file.Path - which is first contained in Android API26)
-                        if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
-                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime untli API26.")
-                        }
                     }
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
