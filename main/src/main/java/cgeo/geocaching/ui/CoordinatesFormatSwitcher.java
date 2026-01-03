@@ -49,7 +49,11 @@ public class CoordinatesFormatSwitcher {
     }
 
     public CoordinatesFormatSwitcher setPosition(final int position) {
-        this.position = position % availableFormats.length;
+        if (position < 0) {
+            this.position = 0;
+        } else {
+            this.position = position % availableFormats.length;
+        }
         renderView();
         return this;
     }
