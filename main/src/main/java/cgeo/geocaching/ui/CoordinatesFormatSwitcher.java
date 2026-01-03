@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.utils.Log;
 
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class CoordinatesFormatSwitcher {
 
     public CoordinatesFormatSwitcher setPosition(final int position) {
         if (position < 0) {
+            Log.w("CoordinatesFormatSwitcher: Invalid negative position " + position + ", defaulting to 0");
             this.position = 0;
         } else {
             this.position = position % availableFormats.length;

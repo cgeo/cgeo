@@ -339,10 +339,25 @@ public final class CacheDetailsCreator {
         return add(R.string.cache_distance, text).valueView;
     }
 
+    /**
+     * Add coordinates line with default format.
+     * Note: Return type changed from TextView to CoordinatesFormatSwitcher to support format persistence.
+     * Existing callers that don't use the return value are unaffected.
+     *
+     * @param coords the coordinates to display
+     * @return the CoordinatesFormatSwitcher instance, or null if coords is null
+     */
     public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords) {
         return addCoordinates(coords, 0);
     }
 
+    /**
+     * Add coordinates line with specified format position.
+     *
+     * @param coords the coordinates to display
+     * @param formatPosition the initial format position (0-3)
+     * @return the CoordinatesFormatSwitcher instance, or null if coords is null
+     */
     public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords, final int formatPosition) {
         if (coords == null) {
             return null;
