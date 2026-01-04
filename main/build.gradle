@@ -48,6 +48,8 @@ android {
 
         // set the default test runner to be used by IDE and command line
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // add Parameter
+        testInstrumentationRunnerArguments.put("notAnnotation", "cgeo.geocaching.test.NotForIntegrationTests")
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         base.archivesName = "cgeo"
