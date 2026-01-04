@@ -10,7 +10,7 @@
 - Fix: Ingen karta visas om wherigo inte har några synliga zoner
 - Fix: Krasch på cachedetaljernas bildflik under vissa förutsättningar
 - Fix: Kartsökningar med ogiltiga koordinater
-- Fix: Some translations do not respect c:geo-internal language setting
+- Fix: Vissa översättningar respekterar inte c:geo-interna språkinställningar
 
 ##
 - Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
