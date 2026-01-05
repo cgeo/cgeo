@@ -1084,6 +1084,30 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static boolean useColoredStatusbar(final boolean isLightTheme) {
+        return getBoolean(isLightTheme ? R.string.pref_statusbar_light : R.string.pref_statusbar_dark,
+                isLightTheme);
+    }
+
+    public static float getSaturationOffset(final boolean isLightTheme) {
+        final int saturationOffset = getInt(isLightTheme ? R.string.pref_saturation_offset_light : R.string.pref_saturation_offset_dark,
+                getKeyInt(isLightTheme ? R.integer.saturation_offset_light_default : R.integer.saturation_offset_dark_default));
+        return saturationOffset / 100.0f;
+    }
+
+    public static float getLightnessOffset(final boolean isLightTheme) {
+        final int lightnessOffset = getInt(isLightTheme ? R.string.pref_lightness_offset_light : R.string.pref_lightness_offset_dark,
+                getKeyInt(isLightTheme ? R.integer.lightness_offset_light_default : R.integer.lightness_offset_dark_default));
+        return lightnessOffset / 100.0f;
+    }
+
+
+    public static int getColoredSpacerHeight(final boolean isLightTheme) {
+        final int spacerHeight = getInt(isLightTheme ? R.string.pref_colored_progressbar_height_light : R.string.pref_colored_progressbar_height_dark,
+                getKeyInt(isLightTheme ? R.integer.colored_progressbar_default_light : R.integer.colored_progressbar_default_dark));
+        return spacerHeight;
+    }
+
     public static int getLogLineLimit() {
         final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
         if (logLineLimit == getKeyInt(R.integer.log_line_limit_max)) {

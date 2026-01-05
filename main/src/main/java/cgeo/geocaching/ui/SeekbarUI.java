@@ -136,6 +136,9 @@ public class SeekbarUI extends LinearLayout {
         valueView.setOnClickListener(v2 -> {
             final String currentValue = valueToShownValue(progressToValue(seekBar.getProgress()));
             int inputType = InputType.TYPE_CLASS_NUMBER;
+            if (getMinValue() < 0) {
+                inputType |= InputType.TYPE_NUMBER_FLAG_SIGNED;
+            }
             if (getHasDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }

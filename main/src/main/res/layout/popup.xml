@@ -16,6 +16,14 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/actionbar_popup" />
+
+    <View
+        android:id="@+id/static_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="@color/colorBackgroundTransparent" />
+
     <ScrollView
         android:id="@+id/details_list_box"
         android:layout_width="match_parent"
