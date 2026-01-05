@@ -920,6 +920,10 @@
     <string name="downloader_pending_info">There is at least one pausing or failed download. Do you want to open the list of pending downloads?</string>
     <string name="downloader_retry_download">Retry download</string>
     <string name="downloader_retry_download_details">Do you want to retry the download of the following file?</string>
+    <string name="downloader_delete_all_pending">Delete all</string>
+    <string name="downloader_delete_all_confirmation">Delete all pending downloads?</string>
+    <string name="downloader_delete_all_message">This will cancel all %d pending downloads and remove the downloaded parts. This action cannot be undone.</string>
+    <string name="downloader_deleted_all">Deleted all pending downloads</string>
 
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
