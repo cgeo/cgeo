@@ -2232,8 +2232,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
-        private static final String STATE_WAYPOINT_IDS = "waypointCoordinateFormatPositions_ids";
-        private static final String STATE_WAYPOINT_POSITIONS = "waypointCoordinateFormatPositions_positions";
+        private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
         private Geocache cache;
         private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
 
@@ -2241,12 +2240,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (savedInstanceState != null) {
-                final int[] waypointIds = savedInstanceState.getIntArray(STATE_WAYPOINT_IDS);
-                final int[] positions = savedInstanceState.getIntArray(STATE_WAYPOINT_POSITIONS);
-                if (waypointIds != null && positions != null && waypointIds.length == positions.length) {
-                    for (int i = 0; i < waypointIds.length; i++) {
-                        waypointCoordinateFormatPositions.put(waypointIds[i], positions[i]);
-                    }
+                @SuppressWarnings("unchecked")
+                final HashMap<Integer, Integer> savedMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS);
+                if (savedMap != null) {
+                    waypointCoordinateFormatPositions.putAll(savedMap);
                 }
             }
         }
@@ -2254,16 +2251,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @Override
         public void onSaveInstanceState(@NonNull final Bundle outState) {
             super.onSaveInstanceState(outState);
-            final int[] waypointIds = new int[waypointCoordinateFormatPositions.size()];
-            final int[] positions = new int[waypointCoordinateFormatPositions.size()];
-            int index = 0;
-            for (Map.Entry<Integer, Integer> entry : waypointCoordinateFormatPositions.entrySet()) {
-                waypointIds[index] = entry.getKey();
-                positions[index] = entry.getValue();
-                index++;
-            }
-            outState.putIntArray(STATE_WAYPOINT_IDS, waypointIds);
-            outState.putIntArray(STATE_WAYPOINT_POSITIONS, positions);
+            outState.putSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS, new HashMap<>(waypointCoordinateFormatPositions));
         }
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
