@@ -183,8 +183,7 @@ android {
     }
 
     testOptions {
-        Provider<Directory> output = layout.buildDirectory.dir("test-results")
-        resultsDir = output.get().asFile
+        resultsDir = layout.buildDirectory.get().toString() + '/test-results'
     }
 
     lint {
