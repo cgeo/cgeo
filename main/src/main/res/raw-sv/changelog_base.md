@@ -1,4 +1,13 @@
-På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo-mål + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Kartrotation för OpenStreetMap-baserade kartor (online + offline)
+- Klusterpopup för Google Maps
+- Dölj kartkällor som du inte behöver
+- Höjddiagram för rutter och spår
+- Växla mellan listor direkt från kartan
+- "Körläge" för OpenStreetMap-baserade kartor
+- Long-tap on track / individual route for further options
 
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
