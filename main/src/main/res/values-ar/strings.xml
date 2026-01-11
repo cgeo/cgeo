@@ -453,7 +453,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">جوجل: خريطة</string>
     <string name="map_source_google_satellite">جوجل: القمر الصناعي</string>
-    <string name="map_source_osm_offline">وضع عدم الاتصال</string>
     <string name="init_sendToCgeo">إرسال إلى c:geo</string>
     <string name="settings_info_send2cgeo_title">معلومات عن send2cgeo</string>
     <string name="init_sendToCgeo_name">اسم جهازك</string>
