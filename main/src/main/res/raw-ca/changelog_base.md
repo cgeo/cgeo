@@ -1,4 +1,13 @@
-A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de la pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
+- Popup de clúster per a Google Maps
+- Amaga les fonts de mapes que no necessites
+- Carta de cotes de rutes i tracks
+- Canvia entre llistes directament des del mapa
+- "Mode de conducció" per a mapes basats en OpenStreetMap
+- Long-tap on track / individual route for further options
 
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
