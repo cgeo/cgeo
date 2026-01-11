@@ -357,7 +357,7 @@ public final class CacheDetailsCreator {
      * Add coordinates line with specified format position.
      *
      * @param coords the coordinates to display
-     * @param formatPosition the initial format position (will be normalized to valid range using modulo)
+     * @param formatPosition the initial format position (negative values default to 0; non-negative values are normalized to valid range using modulo)
      * @return the CoordinatesFormatSwitcher instance, or null if coords is null
      */
     public CoordinatesFormatSwitcher addCoordinates(@Nullable final Geopoint coords, final int formatPosition) {
