@@ -43,11 +43,19 @@ android {
         // NOTE: must match the package in the test directory and must be different from the app package
         testApplicationId applicationId + ".test"
 
-        //testHandlingProfiling true
+        // testHandlingProfiling true
         testFunctionalTest true
 
         // set the default test runner to be used by IDE and command line
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // CI Parameter for standard jobs
+        if (project.hasProperty('notAnnotation')) {
+            testInstrumentationRunnerArguments.put("notAnnotation", "cgeo.geocaching.test.NotForIntegrationTests")
+        }
+        // CI Parameter for watchdog jobs
+        if (project.hasProperty('WatchdogTest')) {
+            testInstrumentationRunnerArguments.put("class", "cgeo.watchdog.WatchdogTest")
+        }
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         base.archivesName = "cgeo"
