@@ -26,6 +26,7 @@ public class TypeGeocacheFilterTest {
     public void allNone() {
         singleType(c -> c.setType(CacheType.TRADITIONAL), null, true);
         singleType(c -> c.setType(CacheType.TRADITIONAL), f -> f.setValues(new HashSet<>(Arrays.asList(CacheType.values()))), true);
+        singleType(c -> c.setType(CacheType.TRADITIONAL), f -> f.setValues(new HashSet<>()), false);
     }
 
     @Test

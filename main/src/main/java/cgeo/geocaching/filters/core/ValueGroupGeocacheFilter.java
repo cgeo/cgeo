@@ -84,7 +84,7 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     @Override
     public Boolean filter(final Geocache cache) {
         if (values.isEmpty()) {
-            return true;
+            return false;
         }
         if (cache == null) {
             return null;
