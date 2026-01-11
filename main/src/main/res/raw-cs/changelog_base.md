@@ -1,4 +1,13 @@
-V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Android, na kterou se zaměřuje tato verze aplikace c:geo, a změnili jsme některé rutiny rozložení obrazovky. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
+- Vyskakovací okno pro Google mapy
+- Skrytí nepotřebných zdrojů map
+- Graf nadmořské výšky pro trasy a stopy
+- Přepínání mezi seznamy přímo z mapy
+- "Řidičský režim" pro mapy založené na OpenStreetMap
+- Long-tap on track / individual route for further options
 
 ### Mapa
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
@@ -9,8 +18,8 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Oprava: Zdvojnásobení jednotlivých položek trasy
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Podpora zobrazení offline map s průhledným pozadím (pouze VTM)
-- New: NoMap tile provider (don't show map, just caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
+- Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
+- Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -26,15 +35,15 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Novinka: Proměnné lze filtrovat
 - Novinka: Vizualizace vypočítaných souřadnic v seznamu trasových bodů
 - Novinka: Položka v nabídce seznamu trasových bodů pro označení určitých typů trasových bodů jako navštívených
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
-- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
+- Novinka: Zástupné symboly pro zápis sledovatelných předmětů (název kešky, kód kešky, uživatel)
+- Změna: Odstraněn odkaz na zastaralý přehrávač WhereYouGo. Integrovaný přehráč Wherigo je nyní výchozí pro Wherigo kešky.
+- Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
 - Novinka: Vylepšené ovládání tlačítek
-- New: Status auto-save
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Novinka: Automatické ukládání stavu
+- Novinka: Možnost vytvořit zástupce pro přehrávač Wherigo na domovské obrazovce vašeho mobilního telefonu
 
 ### Obecné
 - Nové: Sdílet možnost po zalogování kešky
@@ -49,9 +58,9 @@ V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Andro
 - Změna: Odebráno GCVote (služba pozastavena)
 - Novinka: Barevný panel nástrojů na stránkách s podrobnostmi o kešce
 - Novinka: Vyberte více seznamů záložek / pocket queries ke stažení
-- New: Preview bookmark lists
-- Change: Increase minimum required Android version to Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
+- Novinka: Náhled seznamů záložek
+- Změna: Zvýšení minimální požadované verze Androidu na Android 8
+- Novinka: Výchozí rychlá tlačítka pro nové instalace
+- Oprava: Dlaždice v dialogových oknech pro zadávání rozsahu jsou oříznuté
+- Oprava: Oznámení o noční aktualizaci odkazuje na běžný soubor APK i pro variantu FOSS
+- Novinka: Možnost „Ignorovat rok“ pro filtry data
