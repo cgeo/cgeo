@@ -1243,7 +1243,7 @@
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_google_terrain">Google : Terrain</string>
-    <string name="map_source_osm_offline">hors-ligne</string>
+    <string name="map_source_osm_offline">Hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
