@@ -168,7 +168,6 @@ import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 
 import java.lang.ref.WeakReference;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -2241,14 +2240,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (savedInstanceState != null) {
-                final Serializable serializable = savedInstanceState.getSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS);
-                if (serializable instanceof HashMap) {
-                    final HashMap<?, ?> rawMap = (HashMap<?, ?>) serializable;
-                    for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
-                        if (entry.getKey() instanceof Integer && entry.getValue() instanceof Integer) {
-                            waypointCoordinateFormatPositions.put((Integer) entry.getKey(), (Integer) entry.getValue());
-                        }
-                    }
+                @SuppressWarnings("unchecked")
+                final HashMap<Integer, Integer> savedMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS);
+                if (savedMap != null) {
+                    waypointCoordinateFormatPositions.putAll(savedMap);
                 }
             }
         }
