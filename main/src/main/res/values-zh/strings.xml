@@ -327,9 +327,6 @@
     <string name="dont_show_again">不再显示</string>
     <string name="tap_icon_more_info">点击图标以获取更多信息</string>
     <string name="use_slider_adjust_value">使用滑块调整值</string>
-    <string name="warn_gm_not_available">谷歌地图不可用。</string>
-    <string name="switch_to_mf">您的 Google Play 服务已过时。您想切换到 Mapsforge 地图提供商吗？</string>
-    <string name="switched_to_mf">默认地图已切换到 Mapsforge 地图提供商。现在重新启动您的地图。</string>
     <string name="gc_premium">付费会员</string>
     <string name="gc_basic">普通</string>
     <!-- location service -->
@@ -1133,7 +1130,6 @@
     <string name="map_source_google_map">谷歌地图：默认地图</string>
     <string name="map_source_google_satellite">谷歌地图：卫星地图</string>
     <string name="map_source_google_terrain">谷歌地图：地形</string>
-    <string name="map_source_osm_offline">离线</string>
     <string name="map_source_osm_offline_combined">合并(离线)</string>
     <string name="map_source_attribution_dialog_title">地图属性</string>
     <string name="init_sendToCgeo">发送至 c:geo</string>
