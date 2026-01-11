@@ -296,9 +296,6 @@
     <string name="more_information">Daha fazla bilgi</string>
     <string name="undo">Geri al</string>
     <string name="dont_show_again">Yeniden gösterme</string>
-    <string name="warn_gm_not_available">Google Maps mevcut değildir.</string>
-    <string name="switch_to_mf">Google Play hizmetiniz güncel değil. Bunun yerine harita sağlayıcınızı Mapsforge olarak değiştirmek ister misiniz?</string>
-    <string name="switched_to_mf">Varsayılan harita sağlayıcısı Mapsforge olarak belirlendi. Haritanızı yeniden başlatın.</string>
     <!-- location service -->
     <string name="loc_last">Bilinen son</string>
     <string name="loc_net">İletişim Ağı</string>
@@ -968,7 +965,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
-    <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="map_source_osm_offline_combined">Kombine (Çevrimdışı)</string>
     <string name="map_source_attribution_dialog_title">Harita Nitelikleri</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
@@ -1915,7 +1911,6 @@
     <string name="map_manual_targets_cleared">Elle seçilmiş hedefler temizlendi</string>
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
     <string name="map_clear_individual_route_confirm">Özel rotanızdan tüm cache/yol noktalarını kaldırmak istediğinize emin misiniz?</string>
-    <string name="map_individual_route_cleared">Özel rota temizlendi</string>
     <string name="sorted_route_saved">Özel rota kaydedildi</string>
     <string name="load_individual_route_error">Özel rota yüklenirken hata oluştu</string>
     <string name="route_item_not_yet_loaded">Rota henüz yüklenmedi</string>
@@ -2018,7 +2013,6 @@
     <string name="brouter_info">Çevrim dışı rotalama hizmeti</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">İz geçmişini sil</string>
-    <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
     <string name="map_trail_show">Geçmiş İz\'i göster</string>
     <string name="map_trail_hide">İz geçmişini sakla</string>
     <!-- history track export -->
