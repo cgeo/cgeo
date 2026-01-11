@@ -343,7 +343,7 @@ public final class CacheDetailsCreator {
      * Add coordinates line with default format.
      * <p>
      * <strong>API Note:</strong> Return type changed from TextView to CoordinatesFormatSwitcher
-     * to support format persistence (see issue #4789). Existing callers that don't use the
+     * to support format persistence (see issue #17418). Existing callers that don't use the
      * return value are unaffected.
      *
      * @param coords the coordinates to display
