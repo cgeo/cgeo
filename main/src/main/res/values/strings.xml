@@ -1873,8 +1873,6 @@
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user-defined cache / waypoint)</string>
     <string name="init_show_routing_menu">Show routing menu</string>
     <string name="init_summary_show_routing_menu">Long tap on a cache shows a menu with advanced options to add/remove the cache to/from a route. If disabled the cache is just added/removed to/from the route.</string>
-    <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
-    <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="init_autozoom_consider_lastcenter">Restore map position on mapping a list</string>
     <string name="init_summary_autozoom_consider_lastcenter_on">When a list of caches is mapped and map was previously left inside the list boundaries restore preview position, otherwise zoom to fit all caches.</string>
     <string name="init_summary_autozoom_consider_lastcenter_off">When a list of caches is mapped set map zoom and boundaries to fit all caches.</string>
