@@ -1460,12 +1460,19 @@ public class Settings {
         return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
+    public static boolean isSystemTheme(final @NonNull Context context) {
+        return getAppTheme(context) == DarkModeSetting.SYSTEM_DEFAULT;
+    }
+
     public static boolean isLightSkin(final @NonNull Context context) {
         return !isDarkSkinSetting(context, getAppTheme(context));
     }
 
     public static boolean useColoredActionBar(final @NonNull Context context) {
-        return getBoolean(R.string.pref_colored_theme, true);
+        if (isLightSkin(context)) {
+            return getBoolean(R.string.pref_colored_theme_light, true);
+        }
+        return getBoolean(R.string.pref_colored_theme_dark, true);
     }
 
     public static Intent getStartscreenIntent(final @NonNull Activity activity) {

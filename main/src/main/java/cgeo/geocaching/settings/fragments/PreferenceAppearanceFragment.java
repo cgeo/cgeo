@@ -19,6 +19,7 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -110,8 +111,14 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        requireActivity().setTitle(R.string.settings_title_appearance);
+        final FragmentActivity activity = requireActivity();
+        activity.setTitle(R.string.settings_title_appearance);
         findPreference(getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
+        final boolean systemTheme = Settings.isSystemTheme(activity);
+        final boolean lightSkin = Settings.isLightSkin(activity);
+        findPreference(getString(R.string.pref_colored_theme_light)).setVisible(systemTheme || lightSkin);
+        findPreference(getString(R.string.pref_colored_theme_dark)).setVisible(systemTheme || !lightSkin);
+
     }
 
     private void configCustomBNitemPreference() {

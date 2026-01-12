@@ -145,7 +145,8 @@
     <string translatable="false" name="preference_screen_appearance">preference_screen_appearance</string>
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_theme_setting">theme_setting</string>
-    <string translatable="false" name="pref_colored_theme">colored_actionbar</string>
+    <string translatable="false" name="pref_colored_theme_dark">colored_actionbar_dark</string>
+    <string translatable="false" name="pref_colored_theme_light">colored_actionbar_light</string>
     <string translatable="false" name="pref_wallpaper">wallpaper</string>
     <string translatable="false" name="pref_showaddress">showaddress</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
@@ -195,8 +196,11 @@
     <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
     <string translatable="false" name="pref_live_compass_in_navigation_action">live_compass_in_navigation_action</string>
     <string translatable="false" name="pref_collapse_log_limit">pref_collapse_log_limit</string>
-
-
+    
+    <string translatable="false" name="pref_saturation_offset_dark">saturation_offset_dark</string>
+    <string translatable="false" name="pref_lightness_offset_dark">lightness_offset_dark</string>
+    <string translatable="false" name="pref_saturation_offset_light">saturation_offset_light</string>
+    <string translatable="false" name="pref_lightness_offset_light">lightness_offset_light</string>
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for map sources screen -->
     <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
