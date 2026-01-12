@@ -3,6 +3,7 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ColorUtils;
 
 import android.content.Context;
@@ -207,8 +208,8 @@ public enum CacheType {
             final float[] hsl = ColorUtils.getHslValues(colorInt);
 
             // darker color by 15%
-            final float offSet1 = isLightSkin ? -0.2f : -0.7f;
-            final float offSet2 = isLightSkin ? -0.12f : -0.13f;
+            final float offSet1 = Settings.getSaturationOffset(isLightSkin);
+            final float offSet2 = Settings.getLightnessOffset(isLightSkin);
             hsl[1] = Math.max(0f, Math.min(1f, hsl[1] + offSet1));
             hsl[2] = Math.max(0f, Math.min(1f, hsl[2] + offSet2));
 
