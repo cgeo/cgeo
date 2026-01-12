@@ -9,7 +9,7 @@
 - Naprawiono: W określonych warunkach awaria przy otwarciu mapy
 - Naprawiono: Mapa się nie wyświetała jeśli wherigo nie miało widocznych stref
 - Naprawiono: W pewnych sytuacjach występował błąd na karcie obrazów w szczegółach skrytki
-- Fix: Map searches with invalid coordinates
+- Naprawiono: Wyszukiwanie na mapie z nieprawidłowymi współrzędnymi
 - Naprawiono: Niektóre tłumaczenia nie są zgodne z wewnętrznymi ustawieniami języka w c:geo
 
 ##
