@@ -1982,7 +1982,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                 unsupportedLng -> {
                     cda.translationStatus.abortTranslation();
-                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, unsupportedLng));
+                    binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng));
                 }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
     translator -> {
                     if (null == translator) {

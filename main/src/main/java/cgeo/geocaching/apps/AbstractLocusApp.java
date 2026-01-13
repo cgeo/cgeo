@@ -127,7 +127,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             try {
                 if (lv.isVersionValid(VersionCode.UPDATE_15)) {
                     // send file via FileProvider, you don't need WRITE_EXTERNAL_STORAGE permission for this
-                    final Uri uri = FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
+                    final Uri uri = FileProvider.getUriForFile(context, LocalizationUtils.getString(R.string.file_provider_authority), file);
                     ActionDisplayPoints.INSTANCE.sendPacksFile(context, lv, data, file, uri, export ? ActionDisplayVarious.ExtraAction.IMPORT : ActionDisplayVarious.ExtraAction.CENTER);
                 } else {
                     // send file old way, you need WRITE_EXTERNAL_STORAGE permission for this

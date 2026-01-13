@@ -49,12 +49,12 @@ public class ContextMenuDialog {
     }
 
     public ContextMenuDialog addItem(@StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(new Item(this.activity.getResources().getString(textId), icon, selectAction));
+        items.add(new Item(LocalizationUtils.getString(textId), icon, selectAction));
         return this;
     }
 
     public ContextMenuDialog addItem(final int pos, @StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(pos, new Item(this.activity.getResources().getString(textId), icon, selectAction));
+        items.add(pos, new Item(LocalizationUtils.getString(textId), icon, selectAction));
         return this;
     }
 

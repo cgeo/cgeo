@@ -32,7 +32,7 @@ abstract class OtherMapsApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
-        navigate(context, point, context.getString(R.string.waypoint));
+        navigate(context, point, LocalizationUtils.getString(R.string.waypoint));
     }
 
     private void navigate(final Context context, final Geopoint point, final String label) {
