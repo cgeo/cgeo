@@ -2675,21 +2675,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // show number of waypoints directly in waypoint title
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
-            return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
+            return String.format(LocalizationUtils.getString(R.string.waypoints_tabtitle), waypointCount);
         } else if (pageId == Page.VARIABLES.id) {
             final int varCount = cache == null ? 0 : cache.getVariables().size();
-            return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
+            return LocalizationUtils.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         } else if (pageId == Page.IMAGEGALLERY.id) {
-            String title = this.getString(Page.IMAGEGALLERY.titleStringId);
+            String title = LocalizationUtils.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {
             final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
-            return this.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
+            return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
-        return this.getString(Page.find(pageId).titleStringId);
+        return LocalizationUtils.getString(Page.find(pageId).titleStringId);
     }
 
     @NonNull
