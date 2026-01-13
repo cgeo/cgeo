@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -30,7 +31,7 @@ public class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineT
     private final List<ImmutablePair<String, Uri>> maps;
 
     MapsforgeMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
-        super(CgeoApplication.getInstance().getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
+        super(LocalizationUtils.getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
         this.maps = maps;
     }
 

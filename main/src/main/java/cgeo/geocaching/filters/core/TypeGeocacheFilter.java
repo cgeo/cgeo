@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import org.apache.commons.lang3.EnumUtils;
 
@@ -51,9 +52,9 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
 
     public static String valueDisplayTextGetter(final CacheType value) {
         if (CacheType.UNKNOWN == value) {
-            return CgeoApplication.getInstance().getString(R.string.other);
+            return LocalizationUtils.getString(R.string.other);
         } else if (CacheType.COMMUN_CELEBRATION == value) {
-            return CgeoApplication.getInstance().getString(R.string.event_special);
+            return LocalizationUtils.getString(R.string.event_special);
         }
         return value.getShortL10n();
     }

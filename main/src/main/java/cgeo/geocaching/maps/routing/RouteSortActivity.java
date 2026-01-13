@@ -21,6 +21,7 @@ import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
 import android.annotation.SuppressLint;
@@ -124,7 +125,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
-        setTitle(getString(R.string.map_sort_individual_route));
+        setTitle(LocalizationUtils.getString(R.string.map_sort_individual_route));
 
         listView = new RecyclerView(this, null);
         listView.setId(R.id.activity_content);

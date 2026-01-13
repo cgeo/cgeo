@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -33,7 +34,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
             context.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));
         } catch (final ActivityNotFoundException ignored) {
-            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.err_application_no));
+            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.err_application_no));
         }
     }
 }

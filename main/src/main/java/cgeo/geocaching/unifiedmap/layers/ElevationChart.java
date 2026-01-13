@@ -120,7 +120,7 @@ public class ElevationChart {
             collectData(route);
             formatChart(res);
             chart.invalidate();
-            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
+            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? LocalizationUtils.getString(R.string.individual_route) : route.getName());
             geoItemLayer.remove(ELEVATIONCHART_MARKER);
         }
     }

@@ -56,6 +56,7 @@ import cgeo.geocaching.utils.LazyInitializedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.app.Activity;
@@ -1696,7 +1697,7 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void createOriginalWaypoint(final Geopoint originalCoords) {
         if (originalCoords != null) {
-            final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+            final Waypoint waypoint = new Waypoint(LocalizationUtils.getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
             waypoint.setCoords(originalCoords);
             addOrChangeWaypoint(waypoint, false);
             setUserModifiedCoords(true);
@@ -1716,7 +1717,7 @@ public class Geocache implements INamedGeoCoordinate {
         }
         final int index = getWaypointIndex(original);
         final Waypoint copy = new Waypoint(original);
-        copy.setName((addPrefix ? CgeoApplication.getInstance().getString(R.string.waypoint_copy_of) + " " : "") + copy.getName());
+        copy.setName((addPrefix ? LocalizationUtils.getString(R.string.waypoint_copy_of) + " " : "") + copy.getName());
 
         // create unique prefix
         copy.setUserDefined();
@@ -1838,7 +1839,7 @@ public class Geocache implements INamedGeoCoordinate {
      * @param previousAllUserNotes if given, then a parse of previous notes is used to help in deciding which values potentially to overwrite
      */
     public boolean addCacheArtefactsFromNotes(@Nullable final String previousAllUserNotes) {
-        return addCacheArtefactsFromText(getAllUserNotes(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note), false, previousAllUserNotes);
+        return addCacheArtefactsFromText(getAllUserNotes(), false, LocalizationUtils.getString(R.string.cache_personal_note), false, previousAllUserNotes);
     }
 
     /** returns a concatenation of all user notes (Cache + waypoints) */
@@ -2491,13 +2492,12 @@ public class Geocache implements INamedGeoCoordinate {
      */
     public void showHintToast(@NonNull final Activity activity) {
         final String hint = getHint();
-        ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
+        ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, LocalizationUtils.getString(R.string.cache_hint_not_available)));
     }
 
     @NonNull
     public static String getAlternativeListingText(@NonNull final String alternativeCode) {
-        return CgeoApplication.getInstance().getResources()
-                .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) +
+        return LocalizationUtils.getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) +
                 ": <a href=\"https://coord.info/" +
                 alternativeCode +
                 "\">" +

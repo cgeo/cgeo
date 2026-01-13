@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TemplateTextPreference;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 
@@ -19,7 +20,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_logging, rootKey);
-        logTemplatesCategory = findPreference(getString(R.string.preference_category_logging_logtemplates));
+        logTemplatesCategory = findPreference(LocalizationUtils.getString(R.string.preference_category_logging_logtemplates));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
 
         // Update "Signature" preview
         SettingsUtils.setPrefSummary(this, R.string.pref_signature, Settings.getSignature());
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_signature)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_signature)), (preference, newValue) -> {
             SettingsUtils.setPrefSummary(this, R.string.pref_signature, Settings.getSignature());
             return true;
         });
@@ -39,7 +40,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
 
         // Update "Log Image Default Caption Prefix"
         SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefix());
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_log_image_default_prefix)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_log_image_default_prefix)), (preference, newValue) -> {
             SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefixFor(String.valueOf(newValue)));
             return true;
         });

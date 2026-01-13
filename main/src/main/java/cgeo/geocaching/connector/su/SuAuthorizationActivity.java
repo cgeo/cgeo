@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +20,8 @@ public class SuAuthorizationActivity extends OAuthAuthorizationActivity {
             "/api/oauth/authorize.php",
             "/api/oauth/access_token.php",
             SuConnector.getInstance().isHttps(),
-            CgeoApplication.getInstance().getString(R.string.su_consumer_key),
-            CgeoApplication.getInstance().getString(R.string.su_consumer_secret),
+            LocalizationUtils.getString(R.string.su_consumer_key),
+            LocalizationUtils.getString(R.string.su_consumer_secret),
             "callback://www.cgeo.org/geocachingsu/");
 
     @StringRes

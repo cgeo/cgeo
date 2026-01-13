@@ -106,7 +106,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getExtraDescription() {
-        return CgeoApplication.getInstance().getString(R.string.lc_default_description);
+        return LocalizationUtils.getString(R.string.lc_default_description);
     }
 
     @Override

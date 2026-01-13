@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -384,11 +385,11 @@ public final class StoredList extends AbstractList {
 
             final List<String> hierarchies = DataStore.getListHierarchy();
             if (hierarchies.isEmpty()) {
-                hierarchies.add(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+                hierarchies.add(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
             } else {
-                hierarchies.set(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
+                hierarchies.set(0, LocalizationUtils.getString(R.string.init_custombnitem_none)); // overwrite empty entry
             }
-            hierarchies.add(1, activity.getString(R.string.list_create_parent));
+            hierarchies.add(1, LocalizationUtils.getString(R.string.list_create_parent));
             listprefix.setVisibility(View.VISIBLE);
             listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
             listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
@@ -399,12 +400,12 @@ public final class StoredList extends AbstractList {
                     .setPositiveButton(buttonTitle, ((d, which) -> {
                             String prefix = "";
                             final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
-                            if (StringUtils.equals(temp, activity.getString(R.string.list_create_parent))) {
+                            if (StringUtils.equals(temp, LocalizationUtils.getString(R.string.list_create_parent))) {
                                 prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
                                 if (!StringUtils.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
                                     prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
-                            } else if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                            } else if (!StringUtils.equals(temp, LocalizationUtils.getString(R.string.init_custombnitem_none))) {
                                 prefix = temp;
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
@@ -459,7 +460,7 @@ public final class StoredList extends AbstractList {
                         final String to = title.getText().toString();
                         if (!StringUtils.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
-                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                    String.format(LocalizationUtils.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? LocalizationUtils.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
                                     DataStore.renameListPrefix(from, to);
                                     runAfterRename.run();

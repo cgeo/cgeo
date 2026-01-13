@@ -254,7 +254,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        String title = activity.getString(R.string.map_theme_select);
+        String title = LocalizationUtils.getString(R.string.map_theme_select);
         if (debugMode) {
             title = title + " (debug mode, sync = " + (isThemeSynchronizationActive() ? "ON" : "off") + ")";
         }

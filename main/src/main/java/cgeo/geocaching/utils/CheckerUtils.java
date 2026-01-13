@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.util.Pair;
 import android.util.Patterns;
@@ -67,7 +68,7 @@ public final class CheckerUtils {
             }
         }
         // GC's own checker
-        if (cache.getDescription().contains(CgeoApplication.getInstance().getString(R.string.link_gc_checker))) {
+        if (cache.getDescription().contains(LocalizationUtils.getString(R.string.link_gc_checker))) {
             return new Pair<>(cache.getUrl(), GC_CHECKER);
         }
         return null;

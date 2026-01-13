@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class NavigationTargetRoute extends Route {
 
     public NavigationTargetRoute() {
         super(false);
-        setName(CgeoApplication.getInstance().getString(R.string.map_manual_target_route_name));
+        setName(LocalizationUtils.getString(R.string.map_manual_target_route_name));
     }
 
     /**

@@ -40,6 +40,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
@@ -704,20 +705,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
             switch (msg.what) {
                 case UPLOAD_SUCCESS:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
                     break;
                 case SUCCESS:
                     break;
                 case UPLOAD_START:
                     break;
                 case UPLOAD_ERROR:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_upload_error));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_upload_error));
                     break;
                 case UPLOAD_NOT_POSSIBLE:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
                     break;
                 case SAVE_ERROR:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.err_waypoint_add_failed));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_waypoint_add_failed));
                     break;
                 default:
                     throw new IllegalStateException();
@@ -783,7 +784,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     final boolean result = deleteModifiedOnline ? deleteModifiedCoords(cache) : uploadModifiedCoords(cache, waypoint.getCoords());
                     finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
                 } else {
-                    ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
                     finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
                 }
             } else {

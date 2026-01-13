@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -55,7 +56,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     @Override
     @Nullable
     protected String getResultMessage() {
-        return getContext().getString(R.string.command_delete_list_result);
+        return LocalizationUtils.getString(R.string.command_delete_list_result);
     }
 
 }
