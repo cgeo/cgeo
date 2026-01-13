@@ -416,13 +416,13 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.IMAGEGALLERY.id) {
-            String title = this.getString(Page.find(pageId).resId);
+            String title = LocalizationUtils.getString(Page.find(pageId).resId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return title;
         }
-        return this.getString(Page.find(pageId).resId);
+        return LocalizationUtils.getString(Page.find(pageId).resId);
     }
 
     public static String getTranslationText(final Trackable trackable) {

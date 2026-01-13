@@ -126,7 +126,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         if (pageId == Page.VERSION.id) {
             return LocalizationUtils.getString(R.string.about_version) + " / " + LocalizationUtils.getString(R.string.about_help);
         }
-        return this.getString(Page.find(pageId).resourceId);
+        return LocalizationUtils.getString(Page.find(pageId).resourceId);
     }
 
     @Override

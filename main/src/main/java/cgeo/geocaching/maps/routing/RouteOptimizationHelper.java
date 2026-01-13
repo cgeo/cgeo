@@ -108,8 +108,8 @@ public class RouteOptimizationHelper {
                 synchronized (best) {
                     System.arraycopy(route, 0, best, 0, routeSize);
                 }
-                postAdditionalInfo(TextParam.text(String.format(dialog.getContext().getString(R.string.initial_route_length), initialLength.get())
-                        + (length != initialLength.get() ? "\n" + String.format(dialog.getContext().getString(R.string.optimized_route_length), length) : ""))
+                postAdditionalInfo(TextParam.text(String.format(LocalizationUtils.getString(R.string.initial_route_length), initialLength.get())
+                        + (length != initialLength.get() ? "\n" + String.format(LocalizationUtils.getString(R.string.optimized_route_length), length) : ""))
                 );
                 dialog.getButton(BUTTON_POSITIVE).setEnabled(true);
             }
