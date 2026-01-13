@@ -203,12 +203,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     /* creates user-defined cache list if requested */
     protected static int getUdcListId(final Context context) {
         for (StoredList list : DataStore.getLists()) {
-            if (list.getTitle().trim().equals(context.getString(R.string.goto_targets_list).trim())) {
+            if (list.getTitle().trim().equals(LocalizationUtils.getString(R.string.goto_targets_list).trim())) {
                 return list.id;
             }
         }
 
-        int newListId = DataStore.createList(context.getString(R.string.goto_targets_list));
+        int newListId = DataStore.createList(LocalizationUtils.getString(R.string.goto_targets_list));
         if (newListId == -1) {
             // fallback for errors during new list creation
             newListId = StoredList.STANDARD_LIST_ID;
@@ -238,9 +238,9 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // create new cache
             final Geocache cache = new Geocache();
             cache.setGeocode(geocode);
-            cache.setName(StringUtils.isEmpty(name) ? String.format(context.getString(R.string.internal_cache_default_names), geocode) : name);
-            cache.setOwnerDisplayName(context.getString(R.string.internal_cache_default_owner));
-            cache.setDescription(StringUtils.isEmpty(description) ? context.getString(R.string.internal_cache_default_description) : description);
+            cache.setName(StringUtils.isEmpty(name) ? String.format(LocalizationUtils.getString(R.string.internal_cache_default_names), geocode) : name);
+            cache.setOwnerDisplayName(LocalizationUtils.getString(R.string.internal_cache_default_owner));
+            cache.setDescription(StringUtils.isEmpty(description) ? LocalizationUtils.getString(R.string.internal_cache_default_description) : description);
             cache.setAssignedEmoji(assignedEmoji);
             cache.setDetailed(true);
             cache.setType(CacheType.USER_DEFINED);
@@ -262,7 +262,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, GEOCODE_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
+        assertCacheExists(context, GEOCODE_HISTORY_CACHE, LocalizationUtils.getString(R.string.internal_goto_targets_title), LocalizationUtils.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
     }
 
     /**

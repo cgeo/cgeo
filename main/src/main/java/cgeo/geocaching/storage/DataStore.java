@@ -1111,7 +1111,7 @@ public class DataStore {
                 final int backupDbVersion = backup.getVersion();
                 final int expectedDbVersion = DataStore.getExpectedDBVersion();
                 if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
-                    return String.format(context.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
+                    return String.format(LocalizationUtils.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
                 }
                 closeDb();
                 result = FileUtils.copy(tmpFile, databasePath()) ? DBRestoreResult.RESTORE_SUCCESSFUL : DBRestoreResult.RESTORE_FAILED_GENERAL;
@@ -1130,7 +1130,7 @@ public class DataStore {
             } finally {
                 tmpFile.delete();
             }
-            return context.getString(result.res);
+            return LocalizationUtils.getString(result.res);
         });
     }
 
@@ -5500,7 +5500,7 @@ public class DataStore {
                         statement.bindString(3, "waypoint");                         // type
                         statement.bindString(4, "00");                               // prefix
                         statement.bindString(5, "---");                              // lookup
-                        statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
+                        statement.bindString(6, LocalizationUtils.getString(R.string.wp_waypoint) + " " + sequence);      // name
                         statement.bindDouble(7, getDouble(cursor, "latitude"));      // latitude
                         statement.bindDouble(8, getDouble(cursor, "longitude"));     // longitude
                         statement.bindString(9, "");                                 // note

@@ -69,7 +69,7 @@ public class Notifications {
     }
 
     public static NotificationCompat.Builder createNotification(final Context context, final NotificationChannels channel, final int title) {
-        return createNotification(context, channel, context.getString(title));
+        return createNotification(context, channel, LocalizationUtils.getString(title));
     }
 
     public static NotificationCompat.Builder createTextContentNotification(final Context context, final NotificationChannels channel, final String title, final String text) {
@@ -79,7 +79,7 @@ public class Notifications {
     }
 
     public static NotificationCompat.Builder createTextContentNotification(final Context context, final NotificationChannels channel, final int title, final String text) {
-        return createTextContentNotification(context, channel, context.getString(title), text);
+        return createTextContentNotification(context, channel, LocalizationUtils.getString(title), text);
     }
 
     public static void cancel(@Nullable final Context context, final int id) {

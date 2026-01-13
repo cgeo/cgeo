@@ -60,7 +60,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     public static void downloadCaches(final Activity context, final Collection<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (geocodes.isEmpty()) {
-            ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
+            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.warn_save_nothing));
             return;
         }
         if (isOffline) {

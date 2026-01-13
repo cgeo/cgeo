@@ -1704,7 +1704,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Intents.putListType(cachesIntent, CacheListType.COORDINATE);
         cachesIntent.putExtra(Intents.EXTRA_COORDS, coords);
         if (StringUtils.isNotEmpty(name)) {
-            cachesIntent.putExtra(Intents.EXTRA_TITLE, context.getString(R.string.around, name));
+            cachesIntent.putExtra(Intents.EXTRA_TITLE, LocalizationUtils.getString(R.string.around, name));
         }
         context.startActivity(cachesIntent);
     }
