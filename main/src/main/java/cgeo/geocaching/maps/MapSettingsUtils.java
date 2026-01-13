@@ -125,7 +125,7 @@ public class MapSettingsUtils {
         boolean useUser1 = false;
         boolean useUser2 = false;
         if (useInternalRouting) {
-            final String profileNoneString = activity.getResources().getString(R.string.routingmode_none);
+            final String profileNoneString = LocalizationUtils.getString(R.string.routingmode_none);
             final StringBuilder sb = new StringBuilder();
             final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
             if (StringUtils.isNotBlank(temp1) && !temp1.equals(profileNoneString)) {

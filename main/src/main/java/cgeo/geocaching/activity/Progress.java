@@ -68,16 +68,16 @@ public class Progress {
         if (cancelMessage != null) {
             dialog.setCancelable(true);
             dialog.setCancelMessage(cancelMessage);
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelMessage);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, LocalizationUtils.getString(android.R.string.cancel), cancelMessage);
         } else if (cancelListener != null) {
             dialog.setCancelable(true);
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelListener);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, LocalizationUtils.getString(android.R.string.cancel), cancelListener);
         } else {
             dialog.setCancelable(false);
         }
         if (closeListener != null) {
             dialog.setCancelable(true);
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.done), closeListener);
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, LocalizationUtils.getString(R.string.done), closeListener);
         }
         if (dismissListener != null) {
             dialog.setOnDismissListener(dismissListener);
