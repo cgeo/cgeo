@@ -3,6 +3,7 @@ package cgeo.geocaching.helper;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.UsefulappsItemBinding;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -60,9 +61,9 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final HelperApp app = helperApps.get(position);
         final Resources resources = context.getResources();
-        holder.binding.title.setText(resources.getString(app.titleId));
+        holder.binding.title.setText(LocalizationUtils.getString(app.titleId));
         holder.binding.image.setImageDrawable(ResourcesCompat.getDrawable(resources, app.iconId, null));
-        holder.binding.description.setText(HtmlCompat.fromHtml(resources.getString(app.descriptionId), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        holder.binding.description.setText(HtmlCompat.fromHtml(LocalizationUtils.getString(app.descriptionId), HtmlCompat.FROM_HTML_MODE_LEGACY));
     }
 
 }

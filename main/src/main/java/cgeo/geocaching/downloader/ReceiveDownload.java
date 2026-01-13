@@ -96,7 +96,7 @@ class ReceiveDownload {
             }
         } else {
             Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                    context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(context.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
+                    context, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, String.format(LocalizationUtils.getString(R.string.downloadmap_target_not_writable), downloader.targetFolder)
             ));
         }
         return Worker.Result.failure();
@@ -153,7 +153,7 @@ class ReceiveDownload {
         }
         switch (status) {
             case SUCCESS:
-                resultMsg = String.format(context.getString(R.string.receivedownload_success), fileinfo);
+                resultMsg = String.format(LocalizationUtils.getString(R.string.receivedownload_success), fileinfo);
                 if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
                     CompanionFileUtils.writeInfo(sourceURL, filename, StringUtils.isNotBlank(displayName) ? displayName : CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                 }
@@ -161,19 +161,19 @@ class ReceiveDownload {
                 resultId = Worker.Result.success();
                 break;
             case CANCELLED:
-                resultMsg = context.getString(R.string.receivedownload_cancelled);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_cancelled);
                 break;
             case IO_EXCEPTION:
-                resultMsg = String.format(context.getString(R.string.receivedownload_error_io_exception), downloader.targetFolder.toUserDisplayableValue());
+                resultMsg = String.format(LocalizationUtils.getString(R.string.receivedownload_error_io_exception), downloader.targetFolder.toUserDisplayableValue());
                 break;
             case FILENOTFOUND_EXCEPTION:
-                resultMsg = context.getString(R.string.receivedownload_error_filenotfound_exception);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_error_filenotfound_exception);
                 break;
             case INTEGRITY_CHECK_ERROR:
-                resultMsg = context.getString(R.string.receivedownload_integritycheck_failed);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_integritycheck_failed);
                 break;
             default:
-                resultMsg = context.getString(R.string.receivedownload_error);
+                resultMsg = LocalizationUtils.getString(R.string.receivedownload_error);
                 break;
         }
         Notifications.send(context, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
@@ -288,7 +288,7 @@ class ReceiveDownload {
                 outputStream.write(buffer, 0, length);
                 bytesCopied += length;
                 if ((System.currentTimeMillis() - lastPublishTime) > 500) { // avoid message flooding
-                    notification.setContentText(context.getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)));
+                    notification.setContentText(LocalizationUtils.getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)));
                     updateForegroundNotification.run();
                     lastPublishTime = System.currentTimeMillis();
                 }

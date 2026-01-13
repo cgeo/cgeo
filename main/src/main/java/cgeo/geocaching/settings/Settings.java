@@ -192,7 +192,7 @@ public class Settings {
         }
 
         public String getPreferenceValue(final @NonNull Context context) {
-            return context.getString(preferenceValue);
+            return LocalizationUtils.getString(preferenceValue);
         }
     }
 
@@ -2460,15 +2460,15 @@ public class Settings {
     public static HashSet<String> getSensitivePreferenceKeys(final Context context) {
         final HashSet<String> sensitiveKeys = new HashSet<>();
         Collections.addAll(sensitiveKeys,
-                context.getString(R.string.pref_username), context.getString(R.string.pref_password),
-                context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
-                context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
-                context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
-                context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
-                context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
-                context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
-                context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
-                context.getString(R.string.pref_fakekey_geokrety_authorization)
+                LocalizationUtils.getString(R.string.pref_username), LocalizationUtils.getString(R.string.pref_password),
+                LocalizationUtils.getString(R.string.pref_ocde_tokensecret), LocalizationUtils.getString(R.string.pref_ocde_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocde_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocde_token_public),
+                LocalizationUtils.getString(R.string.pref_ocpl_tokensecret), LocalizationUtils.getString(R.string.pref_ocpl_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocpl_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocpl_token_public),
+                LocalizationUtils.getString(R.string.pref_ocnl_tokensecret), LocalizationUtils.getString(R.string.pref_ocnl_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocnl_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocnl_token_public),
+                LocalizationUtils.getString(R.string.pref_ocus_tokensecret), LocalizationUtils.getString(R.string.pref_ocus_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocus_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocus_token_public),
+                LocalizationUtils.getString(R.string.pref_ocro_tokensecret), LocalizationUtils.getString(R.string.pref_ocro_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocro_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocro_token_public),
+                LocalizationUtils.getString(R.string.pref_ocuk2_tokensecret), LocalizationUtils.getString(R.string.pref_ocuk2_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_ocuk2_token_secret), LocalizationUtils.getString(R.string.pref_temp_ocuk2_token_public),
+                LocalizationUtils.getString(R.string.pref_su_tokensecret), LocalizationUtils.getString(R.string.pref_su_tokenpublic), LocalizationUtils.getString(R.string.pref_temp_su_token_secret), LocalizationUtils.getString(R.string.pref_temp_su_token_public),
+                LocalizationUtils.getString(R.string.pref_fakekey_geokrety_authorization)
         );
         return sensitiveKeys;
     }
