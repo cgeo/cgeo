@@ -864,7 +864,7 @@ public final class ImageUtils {
             return null;
         }
         file.deleteOnExit();
-        final String authority = context.getString(R.string.file_provider_authority);
+        final String authority = LocalizationUtils.getString(R.string.file_provider_authority);
         return FileProvider.getUriForFile(context, authority, file);
 
     }

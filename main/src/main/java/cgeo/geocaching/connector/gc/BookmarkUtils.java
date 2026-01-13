@@ -27,7 +27,7 @@ public class BookmarkUtils {
     }
 
     public static void askAndUploadCachesToBookmarkList(final Context context, final List<Geocache> geocaches) {
-        final ProgressDialog waitDialog = ProgressDialog.show(context, context.getString(R.string.search_bookmark_list), context.getString(R.string.search_bookmark_loading), true, true);
+        final ProgressDialog waitDialog = ProgressDialog.show(context, LocalizationUtils.getString(R.string.search_bookmark_list), LocalizationUtils.getString(R.string.search_bookmark_loading), true, true);
         waitDialog.setCancelable(true);
         loadAndAskForSelection(context, geocaches, waitDialog);
     }
@@ -42,7 +42,7 @@ public class BookmarkUtils {
 
             final List<GCList> bmLists = GCParser.searchBookmarkLists();
             if (bmLists == null) {
-                ActivityMixin.showToast(context, context.getString(R.string.err_read_bookmark_list));
+                ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.err_read_bookmark_list));
                 return;
             }
 
@@ -79,7 +79,7 @@ public class BookmarkUtils {
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
                         final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
                         if (guid == null) {
-                            ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
+                            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.search_bookmark_create_new_failed));
                             return;
                         }
                         showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches).blockingGet());
@@ -91,6 +91,6 @@ public class BookmarkUtils {
     }
 
     private static void showResult(final Context context, final boolean success) {
-        ActivityMixin.showToast(context, context.getString(success ? R.string.search_bookmark_adding_caches_success : R.string.search_bookmark_adding_caches_failed));
+        ActivityMixin.showToast(context, LocalizationUtils.getString(success ? R.string.search_bookmark_adding_caches_success : R.string.search_bookmark_adding_caches_failed));
     }
 }
