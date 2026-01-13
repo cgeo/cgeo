@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -77,7 +78,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
     public HashMap<String, Download> getAvailableTiles() {
         final HashMap<String, Download> tiles = new HashMap<>();
 
-        final String url = CgeoApplication.getInstance().getString(R.string.brouter_downloadurl);
+        final String url = LocalizationUtils.getString(R.string.brouter_downloadurl);
         final String page = Network.getResponseData(Network.getRequest(url));
         final List<Download> list = new ArrayList<>();
         if (page != null) {

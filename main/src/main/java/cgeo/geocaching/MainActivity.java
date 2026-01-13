@@ -49,6 +49,7 @@ import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
@@ -141,8 +142,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
                         private void fillView(final View connectorInfo, final ILogin conn) {
 
                             final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
-                            final boolean isLoggingIn = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working));
-                            final boolean isLoggingOk = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_ok));
+                            final boolean isLoggingIn = StringUtils.equals(conn.getLoginStatusString(), LocalizationUtils.getString(R.string.init_login_popup_working));
+                            final boolean isLoggingOk = StringUtils.equals(conn.getLoginStatusString(), LocalizationUtils.getString(R.string.init_login_popup_ok));
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
                             if (conn instanceof GCConnector && Network.isConnected() && !isLoggingIn && !isLoggingOk) {
                                 final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
@@ -155,7 +156,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             connectorStatus.setOnClickListener(connectorConfig);
 
                             final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
-                            manualLogin.setVisibility(connInfo.toString().contains(activity.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
+                            manualLogin.setVisibility(connInfo.toString().contains(LocalizationUtils.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
                             manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
                                 if (!activity.isDestroyed() && !activity.isFinishing()) {
                                     activity.updateUserInfoHandler.sendEmptyMessage(-1);

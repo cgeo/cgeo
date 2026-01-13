@@ -12,6 +12,7 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -290,7 +291,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         setUpdateButtonVisibility();
         binding.checkForUpdates.setOnClickListener(v -> {
             binding.checkForUpdates.setVisibility(View.GONE);
-            new DownloadSelectorMapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates), current, this::setMaps).execute();
+            new DownloadSelectorMapUpdateCheckTask(this, installedOfflineMaps, LocalizationUtils.getString(R.string.downloadmap_available_updates), current, this::setMaps).execute();
         });
 
         DownloaderUtils.checkTargetDirectory(this, current.targetFolder, true, (path, isWritable) -> {
@@ -320,7 +321,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         adapter.notifyDataSetChanged();
         this.setTitle(selectionTitle);
 
-        final boolean showSpinner = !selectionTitle.equals(getString(R.string.downloadmap_available_updates));
+        final boolean showSpinner = !selectionTitle.equals(LocalizationUtils.getString(R.string.downloadmap_available_updates));
         binding.downloaderType.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
         binding.downloaderInfo.setVisibility(showSpinner ? View.VISIBLE : View.GONE);
 

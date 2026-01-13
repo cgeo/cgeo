@@ -12,6 +12,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.SettingsUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.SettingsUtils.getType;
 
 import android.app.Activity;
@@ -82,7 +83,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
-        setTitle(getString(R.string.view_settings));
+        setTitle(LocalizationUtils.getString(R.string.view_settings));
         setUpNavigationEnabled(true);
 
         allItems = new ArrayList<>();
@@ -274,7 +275,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                     inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
                     break;
             }
-            Dialogs.input(this, String.format(getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
+            Dialogs.input(this, String.format(LocalizationUtils.getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
         }
     }
 
@@ -288,7 +289,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
         } catch (XmlPullParserException e) {
             showToast(R.string.edit_setting_error_unknown_type);
         } catch (NumberFormatException e) {
-            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+            showToast(String.format(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data), newValue));
         }
     }
 
@@ -329,7 +330,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                             } catch (XmlPullParserException e) {
                                 showToast(R.string.edit_setting_error_unknown_type);
                             } catch (NumberFormatException e) {
-                                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), preferenceName));
+                                showToast(String.format(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data), preferenceName));
                             }
                         }
                     }

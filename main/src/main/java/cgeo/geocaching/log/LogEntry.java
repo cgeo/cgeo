@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -488,7 +489,7 @@ public class LogEntry implements Parcelable {
             }
         }
         if (titles.isEmpty()) {
-            titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
+            titles.add(LocalizationUtils.getString(R.string.cache_log_image_default_title));
         }
         return "• " + StringUtils.join(titles, "\n• ");
     }

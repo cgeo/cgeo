@@ -8,6 +8,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,7 +108,7 @@ class GeokretyParser {
                     }
                     final String ownerId = attributes.getValue("owner_id");
                     if (StringUtils.isNotBlank(ownerId)) {
-                        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, ownerId));
+                        trackable.setOwner(LocalizationUtils.getString(R.string.init_geokrety_userid, ownerId));
                     }
                     final String missing = attributes.getValue("missing");
                     if (StringUtils.isNotBlank(missing)) {
@@ -117,7 +118,7 @@ class GeokretyParser {
                 if (localName.equalsIgnoreCase("owner")) {
                     final String ownerId = attributes.getValue("id");
                     if (StringUtils.isNotBlank(ownerId)) {
-                        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, ownerId));
+                        trackable.setOwner(LocalizationUtils.getString(R.string.init_geokrety_userid, ownerId));
                     }
                 }
                 if (localName.equalsIgnoreCase("type")) {
@@ -153,7 +154,7 @@ class GeokretyParser {
                 if (localName.equalsIgnoreCase("user") && !isInComments) {
                     final String userId = attributes.getValue("id");
                     if (StringUtils.isNotBlank(userId)) {
-                        logEntryBuilder.setAuthor(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, userId));
+                        logEntryBuilder.setAuthor(LocalizationUtils.getString(R.string.init_geokrety_userid, userId));
                     }
                 }
                 if (localName.equalsIgnoreCase("comments")) {
@@ -399,7 +400,7 @@ class GeokretyParser {
 
             } catch (XmlPullParserException | IOException e) {
                 Log.e("GeokretyRuchyXmlParser: Error Parsing geokret", e);
-                errors.add(CgeoApplication.getInstance().getString(R.string.geokrety_parsing_failed));
+                errors.add(LocalizationUtils.getString(R.string.geokrety_parsing_failed));
             }
 
             return errors;
@@ -410,15 +411,15 @@ class GeokretyParser {
     protected static String getType(final int type) {
         switch (type) {
             case 0:
-                return CgeoApplication.getInstance().getString(R.string.geokret_type_traditional);
+                return LocalizationUtils.getString(R.string.geokret_type_traditional);
             case 1:
-                return CgeoApplication.getInstance().getString(R.string.geokret_type_book_or_media);
+                return LocalizationUtils.getString(R.string.geokret_type_book_or_media);
             case 2:
-                return CgeoApplication.getInstance().getString(R.string.geokret_type_human);
+                return LocalizationUtils.getString(R.string.geokret_type_human);
             case 3:
-                return CgeoApplication.getInstance().getString(R.string.geokret_type_coin);
+                return LocalizationUtils.getString(R.string.geokret_type_coin);
             case 4:
-                return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
+                return LocalizationUtils.getString(R.string.geokret_type_post);
         }
         return null;
     }
@@ -454,6 +455,6 @@ class GeokretyParser {
                 break;
             }
         }
-        return CgeoApplication.getInstance().getString(R.string.user_unknown);
+        return LocalizationUtils.getString(R.string.user_unknown);
     }
 }

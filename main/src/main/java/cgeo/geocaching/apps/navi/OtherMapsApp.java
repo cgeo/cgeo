@@ -50,7 +50,7 @@ abstract class OtherMapsApp extends AbstractPointNavigationApp {
         }
         Log.i("OtherMapsApp.navigate: No maps application available.");
 
-        ActivityMixin.showToast(context, getString(R.string.err_application_no));
+        ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.err_application_no));
     }
 
     @Override

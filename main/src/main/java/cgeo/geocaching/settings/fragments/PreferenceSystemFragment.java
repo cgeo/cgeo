@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PreferenceUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
@@ -46,19 +47,19 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_gui_testscreen, () -> SimpleDialogExamples.createTestDialog(activity));
 
         if (BranchDetectionHelper.isDeveloperBuild()) {
-            Preference testDir = findPreference(getString(R.string.pref_persistablefolder_testdir));
+            Preference testDir = findPreference(LocalizationUtils.getString(R.string.pref_persistablefolder_testdir));
             if (testDir == null) {
                 testDir = new Preference(getActivity());
-                testDir.setKey(getString(R.string.pref_persistablefolder_testdir));
+                testDir.setKey(LocalizationUtils.getString(R.string.pref_persistablefolder_testdir));
                 testDir.setTitle("Directory for Unit Tests. This setting is only needed for development and only visible in developer builds");
                 testDir.setIconSpaceReserved(false);
 
-                final PreferenceCategory localFileSystem = findPreference(getString(R.string.pref_fakekey_local_filesystem));
+                final PreferenceCategory localFileSystem = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_local_filesystem));
                 localFileSystem.addPreference(testDir);
             }
         }
 
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_debug)), (pref, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_debug)), (pref, newValue) -> {
             Log.setDebug((Boolean) newValue);
             return true;
         });

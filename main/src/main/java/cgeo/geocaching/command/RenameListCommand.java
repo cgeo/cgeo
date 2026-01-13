@@ -3,6 +3,7 @@ package cgeo.geocaching.command;
 import cgeo.geocaching.R;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -39,7 +40,7 @@ public abstract class RenameListCommand extends AbstractCommand {
     @Override
     @Nullable
     protected String getResultMessage() {
-        return getContext().getString(R.string.command_rename_list_result);
+        return LocalizationUtils.getString(R.string.command_rename_list_result);
     }
 
 }

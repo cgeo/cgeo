@@ -220,7 +220,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         final String currentThemeId = Settings.getSelectedMapRenderTheme(tileProvider);
 
         final List<String> names = new ArrayList<>();
-        names.add(activity.getString(R.string.switch_default));
+        names.add(LocalizationUtils.getString(R.string.switch_default));
         int currentItem = 0;
         int idx = 1;
         final List<ThemeData> selectableAvThemes = getAvailableThemes();
@@ -233,7 +233,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.map_theme_select));
+        builder.setTitle(LocalizationUtils.getString(R.string.map_theme_select));
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
             // Adjust index because of <default> selection
             setSelectedTheme(newItem > 0 ? selectableAvThemes.get(newItem - 1) : null);

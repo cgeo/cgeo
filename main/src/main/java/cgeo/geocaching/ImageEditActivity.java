@@ -87,7 +87,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
                 .setValues(Arrays.asList(ArrayUtils.toObject(getResources().getIntArray(R.array.log_image_scale_values))))
                 .setChangeListener(Settings::setLogImageScale);
 
-        setTitle(getString(R.string.log_edit_image));
+        setTitle(LocalizationUtils.getString(R.string.log_edit_image));
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();

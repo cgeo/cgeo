@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.ShareBroadcastReceiver;
 import cgeo.geocaching.settings.StartWebviewActivity;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.Activity;
@@ -270,7 +271,7 @@ public class ShareUtils {
         }
         final String shareText = data.getStringExtra("EXTRA_SHARE_TEXT");
         if (!StringUtils.isBlank(shareText)) {
-            Snackbar.make(activity.findViewById(android.R.id.content), activity.getString(R.string.info_log_posted), Snackbar.LENGTH_LONG)
+            Snackbar.make(activity.findViewById(android.R.id.content), LocalizationUtils.getString(R.string.info_log_posted), Snackbar.LENGTH_LONG)
                     .setAnchorView(anchor)
                     .setAction(R.string.snackbar_action_share, v -> {
                         final Intent shareIntent = new Intent(Intent.ACTION_SEND);

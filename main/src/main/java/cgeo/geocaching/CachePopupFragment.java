@@ -28,6 +28,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -286,7 +287,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                         CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 if (!Network.isConnected()) {
-                    showToast(getString(R.string.err_server_general));
+                    showToast(LocalizationUtils.getString(R.string.err_server_general));
                     return;
                 }
                 CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
@@ -298,7 +299,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         @Override
         public void onClick(final View arg0) {
             if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server_general));
+                showToast(LocalizationUtils.getString(R.string.err_server_general));
                 return;
             }
             CacheDownloaderService.refreshCache(getActivity(), cache.getGeocode(), true, () -> updateStoreRefreshButtons(false));

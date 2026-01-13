@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.OCPreferenceKeys;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 
@@ -19,7 +20,7 @@ public class PreferenceServiceOpencachingNlFragment extends PreferenceFragmentCo
         setPreferencesFromResource(R.xml.preferences_services_opencaching_nl, rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ocnl_website));
+        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_ocnl_website));
         final String urlOrHost = OCPreferenceKeys.OC_NL.authParams.host;
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;

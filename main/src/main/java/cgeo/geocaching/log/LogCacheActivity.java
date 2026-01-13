@@ -938,7 +938,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         @Override
         protected String getResultMessage() {
-            return getContext().getString(R.string.info_log_cleared);
+            return LocalizationUtils.getString(R.string.info_log_cleared);
         }
 
         @Override

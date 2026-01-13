@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -47,7 +48,7 @@ public class DBInspectionActivity extends AbstractActionBarActivity implements A
         if (toolkit == null) {
             toolkit = new DBInspectionToolkit();
         }
-        titleSelectTable = getString(R.string.dbi_select_title);
+        titleSelectTable = LocalizationUtils.getString(R.string.dbi_select_title);
         toolkit.init(this, DataStore.getDatabase(true), titleSelectTable, 10);
         toolkit.prepareBlankTable(binding.tableData.getId());
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class DBInspectionActivity extends AbstractActionBarActivity implements A
         binding.tableButtonBack.setEnabled(false);
         binding.tableButtonBack.setOnClickListener(v -> pagination(toolkit.getOffset() - toolkit.getItemsPerPage()));
         binding.tableButtonBack.setOnLongClickListener(v -> pagination(toolkit.getOffset() - FAST_JUMP_PAGES * toolkit.getItemsPerPage()));
-        final View.OnClickListener editSearch = v -> Dialogs.input(DBInspectionActivity.this, getString(R.string.dbi_search_title), toolkit.getSearchTerm(), "", n -> {
+        final View.OnClickListener editSearch = v -> Dialogs.input(DBInspectionActivity.this, LocalizationUtils.getString(R.string.dbi_search_title), toolkit.getSearchTerm(), "", n -> {
             final String newSearchTerm = n.trim();
             final boolean[] currentSelection = toolkit.getSearchColumnSelection();
             if (StringUtils.isBlank(newSearchTerm)) {
@@ -95,16 +96,16 @@ public class DBInspectionActivity extends AbstractActionBarActivity implements A
                 SimpleDialog
                         .of(this)
                         .setTitle(TextParam.id(R.string.dbi_columnproperties_title))
-                        .setMessage(TextParam.text(String.format(getString(R.string.dbi_columnproperties_message), columnInfo.name, columnInfo.type, columnInfo.storageClass)))
+                        .setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.dbi_columnproperties_message), columnInfo.name, columnInfo.type, columnInfo.storageClass)))
                         .show();
                 return true;
         });
         toolkit.setOnFieldLongClickListener((columnInfo, row, inputType, currentValue, isPartOfPrimaryKey) -> {
             if (isPartOfPrimaryKey) {
-                ViewUtils.showShortToast(null, String.format(getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
+                ViewUtils.showShortToast(null, String.format(LocalizationUtils.getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
                 return true;
             } else {
-                Dialogs.input(this, String.format(getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
+                Dialogs.input(this, String.format(LocalizationUtils.getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
                     if (toolkit.persistData(row, columnInfo.name, newValue)) {
                         ViewUtils.showShortToast(this, R.string.dbi_edit_ok);
                     } else {

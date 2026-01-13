@@ -16,6 +16,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -151,7 +152,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(LocalizationUtils.getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())

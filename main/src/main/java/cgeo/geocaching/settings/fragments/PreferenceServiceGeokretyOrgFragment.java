@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 
@@ -19,7 +20,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
         setPreferencesFromResource(R.xml.preferences_services_geokrety_org, rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_geokrety_website));
+        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_geokrety_website));
         final String urlOrHost = "https://geokrety.org";
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
@@ -28,7 +29,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
         });
 
         // Open website Map Preference
-        final Preference openWebsite2 = findPreference(getString(R.string.pref_fakekey_geokretymap_website));
+        final Preference openWebsite2 = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_geokretymap_website));
         final String urlOrHost2 = "https://geokretymap.org";
         PreferenceUtils.setOnPreferenceClickListener(openWebsite2, preference -> {
             final String url = StringUtils.startsWith(urlOrHost2, "http") ? urlOrHost2 : "http://" + urlOrHost2;

@@ -135,7 +135,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         ActionDisplayPoints.INSTANCE.sendPacksFile(context, lv, data, file, null, ActionDisplayVarious.ExtraAction.CENTER);
                     } else {
-                        ActivityMixin.showToast(context, getString(R.string.storage_permission_needed));
+                        ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.storage_permission_needed));
                     }
                 }
             } catch (final RequiredVersionMissingException e) {

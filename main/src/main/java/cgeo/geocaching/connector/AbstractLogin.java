@@ -77,7 +77,7 @@ public abstract class AbstractLogin {
         resetLoginStatus();
 
         setActualCachesFound(-1);
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
+        setActualStatus(LocalizationUtils.getString(R.string.err_login));
     }
 
     @NonNull

@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -13,7 +14,7 @@ import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
 
 public class UserDefinedMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnlineTileProvider {
     UserDefinedMapsforgeVTMOnlineSource() {
-        super(CgeoApplication.getInstance().getString(R.string.settings_userDefinedTileProvider), Uri.parse(Settings.getUserDefinedTileProviderUri()), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.settings_userDefinedTileProvider), true));
+        super(LocalizationUtils.getString(R.string.settings_userDefinedTileProvider), Uri.parse(Settings.getUserDefinedTileProviderUri()), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(LocalizationUtils.getString(R.string.settings_userDefinedTileProvider), true));
         final Uri fullUri = Uri.parse(Settings.getUserDefinedTileProviderUri());
 
         final String mapUri = fullUri.getScheme() + "://" + fullUri.getHost();

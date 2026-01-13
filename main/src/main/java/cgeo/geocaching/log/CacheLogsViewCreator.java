@@ -240,7 +240,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     private boolean isOfflineLog(final LogEntry log) {
-        return log.author.equals(getString(R.string.log_your_saved_log));
+        return log.author.equals(LocalizationUtils.getString(R.string.log_your_saved_log));
     }
 
     @Override

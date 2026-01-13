@@ -530,11 +530,11 @@ public class FolderUtils {
                         filesCopied, filesTotal, foldersCopied, foldersTotal);
 
         if (folderProcessResult.result != ProcessResult.OK) {
-            message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
+            message += "\n\n" + LocalizationUtils.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
                     folderProcessResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(folderProcessResult.failedFile.uri));
         }
 
-        message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);
+        message += "\n\n" + LocalizationUtils.getString(R.string.folder_move_finished_dialog_tap);
         return message;
     }
 
@@ -914,8 +914,8 @@ public class FolderUtils {
                 final String foldersCopied = ci.dirsProcessed < 0 ? "-" : "" + ci.dirsProcessed;
                 final String foldersTotal = ci.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, ci.dirsInSource);
 
-                final String statusString = activity.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
-                final String progressString = activity.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
+                final String statusString = LocalizationUtils.getString(R.string.folder_process_status_done, filesCopied, filesTotal, foldersCopied, foldersTotal);
+                final String progressString = LocalizationUtils.getString(R.string.folder_process_status_currentfile, ci.currentFile == null || ci.currentFile.name == null ? "" : ci.currentFile.name);
                 publishProgress(statusString + "\n" + progressString);
             });
         }

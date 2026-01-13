@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -73,13 +74,13 @@ public class GpxExport extends AbstractExport {
 
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.gpx)));
+        builder.setTitle(LocalizationUtils.getString(R.string.export_confirm_title, LocalizationUtils.getString(R.string.gpx)));
 
         final View layout = View.inflate(activity, R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), fileName));
+        text.setText(LocalizationUtils.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), fileName));
 
         final CheckBox includeFoundStatus = layout.findViewById(R.id.include_found_status);
         includeFoundStatus.setChecked(Settings.getIncludeFoundStatus());

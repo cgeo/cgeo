@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -204,7 +205,7 @@ public class GCLogin extends AbstractLogin {
 
         final String username = credentials.getUserName();
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_working));
         try {
             final String tryLoggedInData = getLoginPage();
 
@@ -332,7 +333,7 @@ public class GCLogin extends AbstractLogin {
             return false;
         }
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
+        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_ok));
 
         final String username = GCParser.getUsername(page);
         setActualLoginStatus(StringUtils.isNotBlank(username));
@@ -343,7 +344,7 @@ public class GCLogin extends AbstractLogin {
             return true;
         }
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+        setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_failed));
         return false;
     }
 
@@ -661,7 +662,7 @@ public class GCLogin extends AbstractLogin {
 
                 dialog.dismiss();
                 //set to state "logging in..."
-                setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+                setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_working));
                 callback.run();
 
                 //perform the log-in and set state afterwards
@@ -672,10 +673,10 @@ public class GCLogin extends AbstractLogin {
                             return;
                         }
                     } catch (final Exception ex) {
-                        logLastLoginError(CgeoApplication.getInstance().getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
+                        logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
                         Log.w("GCLogin: Exception on manual login", ex);
                     }
-                    setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+                    setActualStatus(LocalizationUtils.getString(R.string.init_login_popup_failed));
                 }, callback);
             });
             binding.cancelButton.setOnClickListener(bo -> dialog.dismiss());

@@ -19,6 +19,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.os.Build;
@@ -232,12 +233,12 @@ public class InstallWizardActivity extends AbstractActivity {
             case WIZARD_END: {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
-                info.append(getString(R.string.wizard_status_title)).append(":\n")
-                        .append(getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                info.append(LocalizationUtils.getString(R.string.wizard_status_title)).append(":\n")
+                        .append(LocalizationUtils.getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)).append("\n")
                         .append(DO_LEGACY_WRITE_STORAGE ?
-                                getString(R.string.permission_legacy_write_external_storage_explanation_title) + ": " + (hasLegacyWriteStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)) + "\n" : "")
-                        .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_platform));
+                                LocalizationUtils.getString(R.string.permission_legacy_write_external_storage_explanation_title) + ": " + (hasLegacyWriteStoragePermission() ? getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)) + "\n" : "")
+                        .append(LocalizationUtils.getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : LocalizationUtils.getString(R.string.status_not_ok)).append("\n")
+                        .append(LocalizationUtils.getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 final StringBuilder platforms = new StringBuilder();
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
@@ -250,7 +251,7 @@ public class InstallWizardActivity extends AbstractActivity {
                 if (platformConfigured) {
                     info.append(": ").append(getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
                 } else {
-                    info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
+                    info.append(": ").append(LocalizationUtils.getString(R.string.status_not_ok)).append("\n");
                 }
                 button1Info.setVisibility(View.VISIBLE);
                 button1Info.setText(info);
@@ -430,8 +431,8 @@ public class InstallWizardActivity extends AbstractActivity {
     // Android SAF-based permissions related methods
 
     private void setFolderInfo(final PersistableFolder folder, @StringRes final int info, final boolean addSelectOrCreateInfo) {
-        title.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
-        final String temp = getString(info) + (addSelectOrCreateInfo ? " " + getString(R.string.wizard_select_or_create) : "");
+        title.setText(String.format(LocalizationUtils.getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
+        final String temp = getString(info) + (addSelectOrCreateInfo ? " " + LocalizationUtils.getString(R.string.wizard_select_or_create) : "");
         text.setText(temp);
     }
 

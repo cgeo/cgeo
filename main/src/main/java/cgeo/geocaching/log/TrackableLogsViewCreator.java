@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.view.View;
 
@@ -90,7 +91,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
         final Trackable trackable = getTrackable();
         if (trackable != null && trackable.canShareLog(log)) {
-            ctxMenu.addItem(getActivity().getString(R.string.cache_menu_browser),
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_browser),
                     R.drawable.ic_menu_open_in_browser, it -> ShareUtils.openUrl(getActivity(), trackable.getServiceSpecificLogUrl(log)));
         }
         return ctxMenu;

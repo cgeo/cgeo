@@ -8,6 +8,7 @@ import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.Intents.EXTRA_PQ_LIST_IMPORT;
 
 import android.annotation.SuppressLint;
@@ -121,7 +122,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
         }, () -> {
             Collections.sort(allGCLists, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
             if (CollectionUtils.isEmpty(allGCLists)) {
-                ActivityMixin.showToast(AbstractListActivity.this, getString(R.string.warn_no_pocket_query_found));
+                ActivityMixin.showToast(AbstractListActivity.this, LocalizationUtils.getString(R.string.warn_no_pocket_query_found));
                 finish();
             }
             fillAdapter(adapter);

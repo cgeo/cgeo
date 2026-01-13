@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,7 +68,7 @@ public class SplashActivity extends AbstractActivity {
                 // initialize oneTimeMessages after fresh install
                 OneTimeDialogs.initializeOnFreshInstall();
                 // initialize useInternalRouting setting depending on whether BRouter app is installed or not
-                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(getString(R.string.package_brouter)));
+                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(LocalizationUtils.getString(R.string.package_brouter)));
             } else if (lastChecksum != checksum) {
                 // show change log page after update
                 AboutActivity.showChangeLog(this);

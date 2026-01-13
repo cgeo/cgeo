@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,23 +33,23 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         updateNotificationAudioInfo();
 
         // Clear icon cache when modifying settings that influence icon appearance
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_dtMarkerOnCacheIcon)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_dtMarkerOnCacheIcon)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_bigSmileysOnMap)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_bigSmileysOnMap)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_visitedWaypointsSemiTransparent)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_visitedWaypointsSemiTransparent)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_autozoom_consider_lastcenter)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_autozoom_consider_lastcenter)), (preference, newValue) -> {
             setAutozoomSummary(preference, (Boolean) newValue);
             return true;
         });
-        setAutozoomSummary(findPreference(getString(R.string.pref_autozoom_consider_lastcenter)), Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false));
+        setAutozoomSummary(findPreference(LocalizationUtils.getString(R.string.pref_autozoom_consider_lastcenter)), Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false));
     }
 
     public void updateNotificationAudioInfo() {
@@ -66,7 +67,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         assert bp != null;
         final String current = Settings.getString(keyId, "");
 
-        bp.setSummary(StringUtils.isNotBlank(current) ? Uri.parse(current).getLastPathSegment() : getString(R.string.proximitynotification_internal));
+        bp.setSummary(StringUtils.isNotBlank(current) ? Uri.parse(current).getLastPathSegment() : LocalizationUtils.getString(R.string.proximitynotification_internal));
         if (StringUtils.isNotBlank(current)) {
             bp.hideButton(false);
             bp.setCallback(() -> {

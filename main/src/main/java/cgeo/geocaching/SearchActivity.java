@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -156,7 +157,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             if (searchPerformed) {
                 // search triggered from search field -> return to main screen
                 searchViewItem.collapseActionView();
-            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo))))) {
+            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(LocalizationUtils.getString(R.string.search_geo))))) {
                 // search triggered from suggestion without any input in search field -> return to main screen
                 searchViewItem.collapseActionView();
             } else if (searchViewItem.isActionViewExpanded()) {
@@ -560,7 +561,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         if (ConnectorFactory.anyConnectorActive()) {
             CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
         } else {
-            showToast(getString(R.string.warn_no_connector));
+            showToast(LocalizationUtils.getString(R.string.warn_no_connector));
         }
     }
 

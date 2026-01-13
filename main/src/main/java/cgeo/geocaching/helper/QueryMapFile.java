@@ -3,6 +3,7 @@ package cgeo.geocaching.helper;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -21,7 +22,7 @@ public class QueryMapFile extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         final Bundle bundle = getIntent().getExtras();
-        final boolean forceAndFeedback = null != bundle && bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam));
+        final boolean forceAndFeedback = null != bundle && bundle.getBoolean(LocalizationUtils.getString(R.string.cgeo_queryMapFile_actionParam));
 
         String mapFile;
         try {
@@ -32,9 +33,9 @@ public class QueryMapFile extends AbstractActivity {
         if (forceAndFeedback || StringUtils.isNotEmpty(mapFile)) {
             try {
                 final Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setComponent(new ComponentName(getString(R.string.package_whereyougo), getString(R.string.whereyougo_action_Mapsforge)));
-                intent.putExtra(getString(R.string.cgeo_queryMapFile_resultParam), mapFile);
-                intent.putExtra(getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
+                intent.setComponent(new ComponentName(LocalizationUtils.getString(R.string.package_whereyougo), LocalizationUtils.getString(R.string.whereyougo_action_Mapsforge)));
+                intent.putExtra(LocalizationUtils.getString(R.string.cgeo_queryMapFile_resultParam), mapFile);
+                intent.putExtra(LocalizationUtils.getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
                 startActivity(intent);
             } catch (ActivityNotFoundException e) {
                 // oops? shouldn't happen, as we have been called from WhereYouGo

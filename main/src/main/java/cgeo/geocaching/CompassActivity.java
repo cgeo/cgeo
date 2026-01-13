@@ -27,6 +27,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -80,7 +81,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
-                .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -398,9 +399,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId));
         }
     }
 

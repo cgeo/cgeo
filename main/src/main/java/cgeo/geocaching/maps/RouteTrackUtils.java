@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -207,7 +208,7 @@ public class RouteTrackUtils {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
         } else if (id == R.id.menu_rename) {
             tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
-                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
+                    .setTitle(TextParam.text(LocalizationUtils.getString(R.string.routes_tracks_change_name)))
                     .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
                         if (StringUtils.isNotBlank(newName)) {
                             tracks.setDisplayname(key, newName);
@@ -242,7 +243,7 @@ public class RouteTrackUtils {
                     }
                 });
             } else {
-                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
+                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
                     tracks.remove(key);
                     updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
                     if (onDelete != null) {

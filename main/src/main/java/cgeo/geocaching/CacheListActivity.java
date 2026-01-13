@@ -880,7 +880,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isNonDefaultList && !preventAskForDeletion && adapter.isEmpty()
                 && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
-            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty),
+            Dialogs.confirmWithCheckbox(this, LocalizationUtils.getString(R.string.list_dialog_remove), LocalizationUtils.getString(R.string.list_dialog_remove_nowempty),
                     CheckboxDialogConfig.newCheckbox(R.string.list_dialog_do_not_ask_me_again)
                             .setActionButtonLabel(CheckboxDialogConfig.ActionButtonLabel.YES_NO)
                             .setPositiveButtonCheckCondition(CheckboxDialogConfig.CheckCondition.UNCHECKED),
@@ -1712,7 +1712,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static boolean isValidCoords(final AbstractActivity context, final Geopoint coords) {
         if (coords == null) {
-            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_coordinates));
+            context.showToast(LocalizationUtils.getString(R.string.warn_no_coordinates));
             return false;
         }
         return true;
@@ -1720,7 +1720,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static void startActivityKeyword(final AbstractActivity context, final String keyword) {
         if (keyword == null) {
-            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_keyword));
+            context.showToast(LocalizationUtils.getString(R.string.warn_no_keyword));
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
@@ -1803,7 +1803,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         final StoredList list = DataStore.getList(listId);
                         // list.id may be different if listId was not valid
                         if (list.id != listId) {
-                            showToast(getString(R.string.list_not_available));
+                            showToast(LocalizationUtils.getString(R.string.list_not_available));
                         }
                         listId = list.id;
                         title = list.title;

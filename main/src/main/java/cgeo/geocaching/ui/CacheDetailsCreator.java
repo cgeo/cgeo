@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.Formatter.SEPARATOR;
 import static cgeo.geocaching.utils.MapMarkerUtils.createDTRatingMarker;
 
@@ -140,7 +141,7 @@ public final class CacheDetailsCreator {
         final TextView valueView = layout.findViewById(R.id.value);
 
         nameView.setText(activity.getString(nameId));
-        valueView.setText(String.format(Locale.getDefault(), activity.getString(R.string.cache_rating_of_new), value, max));
+        valueView.setText(String.format(Locale.getDefault(), LocalizationUtils.getString(R.string.cache_rating_of_new), value, max));
 
         final RatingBar layoutStars = layout.findViewById(R.id.stars);
         layoutStars.setNumStars(max);

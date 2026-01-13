@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,7 +44,7 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
      * @param onlyNew  Upload/export only new logs since last export
      */
     FieldNoteExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew, final String title, final String filename, final String name) {
-        super(activity, title, CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
+        super(activity, title, LocalizationUtils.getString(R.string.export_fieldnotes_creating), true);
         this.upload = upload;
         this.onlyNew = onlyNew;
         this.filename = filename;

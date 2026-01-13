@@ -34,7 +34,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_appearence, rootKey);
 
-        final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
+        final Preference themePref = findPreference(LocalizationUtils.getString(R.string.pref_theme_setting));
         PreferenceUtils.setOnPreferenceChangeListener(themePref, (preference, newValue) -> {
             final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
             Settings.setAppTheme(darkTheme);
@@ -42,11 +42,11 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             return true;
         });
 
-        final ListPreference languagePref = findPreference(getString(R.string.pref_selected_language));
+        final ListPreference languagePref = findPreference(LocalizationUtils.getString(R.string.pref_selected_language));
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
 
-        entries[0] = getString(R.string.init_use_default_language);
+        entries[0] = LocalizationUtils.getString(R.string.init_use_default_language);
         entryValues[0] = "";
         for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
             entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
@@ -69,7 +69,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         setLanguageSummary(languagePref, userLanguage);
 
 
-        final ListPreference shortDateFormatPref = findPreference(getString(R.string.pref_short_date_format));
+        final ListPreference shortDateFormatPref = findPreference(LocalizationUtils.getString(R.string.pref_short_date_format));
         PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
             setDateSummary((ListPreference) preference, newValue.toString());
             return true;
@@ -82,7 +82,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         setDateSummary(shortDateFormatPref, shortDateFormat);
 
         //external translator
-        final ListPreference translatorExternalPref = findPreference(getString(R.string.pref_translator_external));
+        final ListPreference translatorExternalPref = findPreference(LocalizationUtils.getString(R.string.pref_translator_external));
         translatorExternalPref.setEntries(CollectionStream.of(TranslationUtils.Translator.values()).map(TranslationUtils.Translator::toUserDisplayableString).toArray(String.class));
         translatorExternalPref.setEntryValues(CollectionStream.of(TranslationUtils.Translator.values()).map(Enum::name).toArray(String.class));
         translatorExternalPref.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -101,8 +101,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             MapMarkerUtils.resetAllCaches();
             return true;
         };
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapCacheScaling)), pScaling);
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapWpScaling)), pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_mapCacheScaling)), pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_mapWpScaling)), pScaling);
 
         configCustomBNitemPreference();
 
@@ -114,29 +114,23 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         super.onResume();
         final FragmentActivity activity = requireActivity();
         activity.setTitle(R.string.settings_title_appearance);
-        findPreference(getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
+        findPreference(LocalizationUtils.getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
         final boolean systemTheme = Settings.isSystemTheme(activity);
         final boolean lightSkin = Settings.isLightSkin(activity);
         findPreference(getString(R.string.pref_colored_theme_light)).setVisible(systemTheme || lightSkin);
         findPreference(getString(R.string.pref_colored_theme_dark)).setVisible(systemTheme || !lightSkin);
-
-        // Animation beim Sichtbarkeitswechsel abschalten
-        final RecyclerView recyclerView = getView() != null ? (RecyclerView) getView().findViewById(androidx.preference.R.id.recycler_view) : null;
-        if (recyclerView != null) {
-            recyclerView.setItemAnimator(null);
-        }
     }
 
     private void configCustomBNitemPreference() {
-        final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
+        final ListPreference customBNitem = findPreference(LocalizationUtils.getString(R.string.pref_custombnitem));
         final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
         final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
-        int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
+        int i = addCustomBNSelectionItem(0, LocalizationUtils.getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
         for (InfoItem item : QuickLaunchItem.ITEMS) {
             i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
         }
-        i = addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
-        addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
+        i = addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
+        addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
         customBNitem.setEntries(cbniEntries);
         customBNitem.setEntryValues(cbniValues);
         setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
@@ -153,18 +147,18 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     }
 
     private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
-        customBNitem.setSummary(String.format(getString(R.string.init_custombnitem_description), newValue));
+        customBNitem.setSummary(String.format(LocalizationUtils.getString(R.string.init_custombnitem_description), newValue));
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {
         final Locale locale = Settings.getApplicationLocale();
-        languagePref.setSummary(StringUtils.isBlank(newValue) ? getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
+        languagePref.setSummary(StringUtils.isBlank(newValue) ? LocalizationUtils.getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
     }
 
     private void setDateSummary(final ListPreference datePref, final String newValue) {
         if (null != datePref) {
             final int valueIndex = datePref.findIndexOfValue(newValue);
-            String summaryString = getString(R.string.init_date_format_description);
+            String summaryString = LocalizationUtils.getString(R.string.init_date_format_description);
             if (valueIndex >= 0) {
                 final String prefEntry = String.valueOf(datePref.getEntries()[valueIndex]);
                 summaryString += ": \n" + prefEntry;
