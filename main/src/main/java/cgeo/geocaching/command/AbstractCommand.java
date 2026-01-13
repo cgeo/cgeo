@@ -28,7 +28,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NonNull final Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
-            this.progressMessage = context.getString(progressMessageId);
+            this.progressMessage = LocalizationUtils.getString(progressMessageId);
         }
     }
 
@@ -125,7 +125,7 @@ public abstract class AbstractCommand implements Command {
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
                 Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
-                        .setAction(context.getString(R.string.undo), this)
+                        .setAction(LocalizationUtils.getString(R.string.undo), this)
                         .setAnchorView(context.findViewById(R.id.activity_navigationBar))
                         .show();
             }
