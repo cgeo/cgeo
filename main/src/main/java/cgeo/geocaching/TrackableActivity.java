@@ -33,6 +33,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

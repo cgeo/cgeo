@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.notifications;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.NotificationChannel;
 import android.content.Context;
