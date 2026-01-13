@@ -7,6 +7,7 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -91,7 +92,7 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
 
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return CgeoApplication.getInstance().getString(R.string.mapserver_osmpaws_downloadurl);
+        return LocalizationUtils.getString(R.string.mapserver_osmpaws_downloadurl);
     }
 
     @Override
@@ -105,7 +106,7 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
 
     @Override
     public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
-        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_osmpaws_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_PAWS);
+        return getExtrafile(THEME_FILES, LocalizationUtils.getString(R.string.mapserver_osmpaws_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_PAWS);
     }
 
     @NonNull

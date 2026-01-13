@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action3;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 
@@ -27,7 +28,7 @@ public class DownloadSelectorMapUpdateCheckTask extends AsyncTaskWithProgressTex
     private final Action3<List<Download>, String, Boolean> setMaps;
 
     DownloadSelectorMapUpdateCheckTask(final Activity activity, final ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps, final String newSelectionTitle, final AbstractDownloader current, final Action3<List<Download>, String, Boolean> setMaps) {
-        super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_checking_for_updates));
+        super(activity, newSelectionTitle, LocalizationUtils.getString(R.string.downloadmap_checking_for_updates));
         this.installedOfflineMaps = installedOfflineMaps;
         this.newSelectionTitle = newSelectionTitle;
         this.current = current;
@@ -38,7 +39,7 @@ public class DownloadSelectorMapUpdateCheckTask extends AsyncTaskWithProgressTex
     @Override
     protected List<Download> doInBackgroundInternal(final Void[] none) {
         final List<Download> result = new ArrayList<>();
-        result.add(new Download(activity.getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, AbstractDownloader.ICONRES_FOLDER));
+        result.add(new Download(LocalizationUtils.getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, AbstractDownloader.ICONRES_FOLDER));
         for (CompanionFileUtils.DownloadedFileData installedOfflineMap : installedOfflineMaps) {
             final Download offlineMap = checkForUpdate(installedOfflineMap);
             if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {

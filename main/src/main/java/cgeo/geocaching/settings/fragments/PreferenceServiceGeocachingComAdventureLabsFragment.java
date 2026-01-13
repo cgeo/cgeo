@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 
@@ -22,7 +23,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
                 rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_al_website));
+        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_al_website));
         final String urlOrHost = ALConnector.getInstance().getHost();
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
@@ -43,7 +44,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
         PreferenceUtils.setSummary(findPreference(getString((R.string.preference_screen_al))), getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
         if (isActiveGCPM) {
-            PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_connectorALActive)), true);
+            PreferenceUtils.setEnabled(findPreference(LocalizationUtils.getString(R.string.pref_connectorALActive)), true);
         }
     }
 

@@ -216,7 +216,7 @@ public class MapUtils {
         } else {
             // if external routing configured: try to open BRouter downloader
             try {
-                final String bRouterPackage = activity.getString(R.string.package_brouter);
+                final String bRouterPackage = LocalizationUtils.getString(R.string.package_brouter);
                 final Intent intent = new Intent();
                 intent.setComponent(new ComponentName(bRouterPackage, bRouterPackage + ".BInstallerActivity"));
                 activity.startActivity(intent);
@@ -420,29 +420,29 @@ public class MapUtils {
             final String routeItemIdentifier = routeItem.getIdentifier();
             final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
             if (isStart) {
-                addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, 0, LocalizationUtils.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             for (int i = 1; i < segments.length - 1; i++) {
                 if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
-                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), LocalizationUtils.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
             isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
             if (isEnd) {
-                addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, segments.length - 1, LocalizationUtils.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             } else {
-                addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             if (!isStart) {
-                addMenuHelper(activity, menu, baseId, activity.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId, LocalizationUtils.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
         } else {
-            addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
         }
 
         final float elevation = Routing.getElevation(routeItem.getPoint());
         if (!Float.isNaN(elevation)) {
-            menu.addMenuItem(baseId + 100, activity.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
+            menu.addMenuItem(baseId + 100, LocalizationUtils.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
         }
     }
 

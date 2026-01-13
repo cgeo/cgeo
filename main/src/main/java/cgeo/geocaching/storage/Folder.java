@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 import android.os.Environment;
@@ -163,7 +164,7 @@ public class Folder {
         String result = "";
         if (addLegacyFlag && getBaseType() == Folder.FolderType.FILE) {
             result += "[" + (CgeoApplication.getInstance() == null || forceEnglish ? "Legacy" :
-                    CgeoApplication.getInstance().getApplicationContext().getString(R.string.persistablefolder_legacy)) + "]";
+                    LocalizationUtils.getString(R.string.persistablefolder_legacy)) + "]";
         }
         result += UriUtils.toUserDisplayableString(getBaseUri(), getSubdirsToBase());
         return result;

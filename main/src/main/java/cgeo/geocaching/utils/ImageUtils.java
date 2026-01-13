@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -758,7 +759,7 @@ public final class ImageUtils {
         //go through file provider so we can share the Uri with e.g. camera app
         return new ImmutablePair<>(imageFileName, FileProvider.getUriForFile(
                 CgeoApplication.getInstance().getApplicationContext(),
-                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
+                LocalizationUtils.getString(R.string.file_provider_authority),
                 image));
     }
 

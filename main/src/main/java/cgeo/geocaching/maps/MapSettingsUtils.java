@@ -56,10 +56,10 @@ public class MapSettingsUtils {
 
     public static void showRotationMenu(final Activity activity, final Action1<Integer> setRotationMode) {
         final ToggleButtonWrapper<Integer> rotationChoiceWrapper = new ToggleButtonWrapper<>(Settings.getMapRotation(), setRotationMode, activity.findViewById(R.id.rotation_mode_tooglegroup), true);
-        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_off, Settings.MAPROTATION_OFF, activity.getString(R.string.switch_off)));
-        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_manual, Settings.MAPROTATION_MANUAL, activity.getString(R.string.switch_manual)));
-        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_energy_saving, Settings.MAPROTATION_AUTO_LOWPOWER, activity.getString(R.string.switch_auto_lowpower)));
-        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_high_precision, Settings.MAPROTATION_AUTO_PRECISE, activity.getString(R.string.switch_auto_precise)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_off, Settings.MAPROTATION_OFF, LocalizationUtils.getString(R.string.switch_off)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_manual, Settings.MAPROTATION_MANUAL, LocalizationUtils.getString(R.string.switch_manual)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_energy_saving, Settings.MAPROTATION_AUTO_LOWPOWER, LocalizationUtils.getString(R.string.switch_auto_lowpower)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_high_precision, Settings.MAPROTATION_AUTO_PRECISE, LocalizationUtils.getString(R.string.switch_auto_precise)));
         rotationChoiceWrapper.init();
         for (ButtonChoiceModel<Integer> bcm : rotationChoiceWrapper.list) {
             bcm.button.setOnClickListener(v -> rotationChoiceWrapper.setValue());
@@ -112,9 +112,9 @@ public class MapSettingsUtils {
         circlesCb.addToViewGroup(activity, rightColumn);
 
         final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup, false);
-        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
-        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
-        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, LocalizationUtils.getString(R.string.switch_off)));
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, LocalizationUtils.getString(R.string.switch_auto)));
+        compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, LocalizationUtils.getString(R.string.switch_on)));
 
         final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup, false);
         for (RoutingMode mode : RoutingMode.values()) {

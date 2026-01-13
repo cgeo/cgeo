@@ -7,6 +7,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -125,7 +126,7 @@ public class DebugUtils {
     private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final Uri logfileUri) {
         final String systemInfo = SystemInformation.getSystemInformation(activity);
         final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
-        ShareUtils.shareAsEmail(activity, String.format(activity.getString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
+        ShareUtils.shareAsEmail(activity, String.format(LocalizationUtils.getString(R.string.mailsubject_problem_report), Version.getVersionName(activity)), emailText, logfileUri, R.string.about_system_info_send_chooser);
     }
 
 

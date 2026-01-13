@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class LogicalFilterViewHolder extends BaseFilterViewHolder<LogicalGeocach
     public void setViewFromFilter(final LogicalGeocacheFilter filter) {
         this.filter = filter != null ? filter : createFilter();
         final String text = this.filter.toUserDisplayableString(0);
-        textView.setText(StringUtils.isNotBlank(text) ? text : getActivity().getString(R.string.cache_filter_nested_filter_empty_filterconfic));
+        textView.setText(StringUtils.isNotBlank(text) ? text : LocalizationUtils.getString(R.string.cache_filter_nested_filter_empty_filterconfic));
     }
 
     @Override

@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFileUtils.isValidMapFile;
 
 import android.app.Activity;
@@ -77,7 +78,7 @@ public class TileProviderFactory {
         parentMenu.findItem(R.id.menu_backgroundmap).setCheckable(true).setChecked(Settings.getMapBackgroundMapLayer()).setVisible(ctp.supportsBackgroundMaps());
         parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getTileProvider().supportsHillshading());
         parentMenu.findItem(R.id.menu_download_backgroundmap).setVisible(ctp.supportsBackgroundMaps);
-        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
+        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(LocalizationUtils.getString(R.string.package_brouter)));
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
@@ -179,7 +180,7 @@ public class TileProviderFactory {
 
     private static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
+        final String mapsKey = LocalizationUtils.getString(R.string.maps_api2_key);
         if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;

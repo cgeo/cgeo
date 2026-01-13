@@ -37,6 +37,7 @@ import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
 import android.app.SearchManager;
@@ -193,7 +194,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             } else {
                 // Uri starting with "cgeo-setting://" + prefKey value
                 final String data = intent.getDataString();
-                final String scheme = getString(R.string.settings_scheme) + "://";
+                final String scheme = LocalizationUtils.getString(R.string.settings_scheme) + "://";
                 if (data != null && data.startsWith(scheme)) {
                     final String prefKey = data.substring(scheme.length()).replaceAll("[^A-Za-z0-9_]+", " ").trim();
                     if (StringUtils.isNotBlank(prefKey)) {
@@ -256,51 +257,51 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         Fragment preferenceFragment = new PreferencesFragmentRoot();
 
         // main configuration screens
-        if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
+        if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_appearance))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_appearance))) {
             preferenceFragment = new PreferenceAppearanceFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_cachedetails))) {
             preferenceFragment = new PreferenceCachedetailsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_sources))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_map_sources))) {
             preferenceFragment = new PreferenceMapSourcesFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_content_behavior))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_map_content_behavior))) {
             preferenceFragment = new PreferenceMapContentBehaviorFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_logging))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_logging))) {
             preferenceFragment = new PreferenceLoggingFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_offlinedata))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_offlinedata))) {
             preferenceFragment = new PreferenceOfflinedataFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_navigation))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_navigation))) {
             preferenceFragment = new PreferenceNavigationFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_system))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_system))) {
             preferenceFragment = new PreferenceSystemFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_backup))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_backup))) {
             preferenceFragment = new PreferenceBackupFragment();
 
         // service configuration screens
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_sendtocgeo))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_sendtocgeo))) {
             preferenceFragment = new PreferenceServiceSendToCgeoFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_geokrety))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_geokrety))) {
             preferenceFragment = new PreferenceServiceGeokretyOrgFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_gc))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_gc))) {
             preferenceFragment = new PreferenceServiceGeocachingComFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocde))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocde))) {
             preferenceFragment = new PreferenceServiceOpencachingDeFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocuk))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocuk))) {
             preferenceFragment = new PreferenceServiceOpencacheUkFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocnl))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocnl))) {
             preferenceFragment = new PreferenceServiceOpencachingNlFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocpl))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocpl))) {
             preferenceFragment = new PreferenceServiceOpencachingPlFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocus))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocus))) {
             preferenceFragment = new PreferenceServiceOpencachingUsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocro))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ocro))) {
             preferenceFragment = new PreferenceServiceOpencachingRoFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_al))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_al))) {
             preferenceFragment = new PreferenceServiceGeocachingComAdventureLabsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ec))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_ec))) {
             preferenceFragment = new PreferenceServiceExtremcachingComFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_su))) {
+        } else if (StringUtils.equals(baseKey, LocalizationUtils.getString(R.string.preference_screen_su))) {
             preferenceFragment = new PreferenceServiceGeocachingSuFragment();
         }
 
@@ -434,7 +435,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
         // in dual column mode open services section on start
         if (isInDualPaneMode()) {
-            openRequestedFragment(getString(R.string.preference_screen_services), null);
+            openRequestedFragment(LocalizationUtils.getString(R.string.preference_screen_services), null);
         } else {
             getSupportFragmentManager()
                     .beginTransaction()

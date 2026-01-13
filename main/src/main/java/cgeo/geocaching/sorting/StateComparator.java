@@ -3,6 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 
@@ -10,9 +11,9 @@ import androidx.annotation.NonNull;
  * sort caches by state (normal, disabled, archived)
  */
 class StateComparator extends AbstractCacheComparator {
-    private final String stateActive = CgeoApplication.getInstance().getString(R.string.cache_status_active);
-    private final String stateDisabled = CgeoApplication.getInstance().getString(R.string.cache_status_disabled);
-    private final String stateArchived = CgeoApplication.getInstance().getString(R.string.cache_status_archived);
+    private final String stateActive = LocalizationUtils.getString(R.string.cache_status_active);
+    private final String stateDisabled = LocalizationUtils.getString(R.string.cache_status_disabled);
+    private final String stateArchived = LocalizationUtils.getString(R.string.cache_status_archived);
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
