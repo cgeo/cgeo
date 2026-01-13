@@ -38,6 +38,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
@@ -356,7 +357,7 @@ public class MapUtils {
                     textview.set(tv1);
                     tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
                     tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
-                    TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
+                    TooltipCompat.setTooltipText(tv1, LocalizationUtils.getString(R.string.selected_position));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
 
                     final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
