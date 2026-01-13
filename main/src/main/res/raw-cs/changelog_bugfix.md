@@ -1,23 +1,23 @@
 ##
-- Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
-- Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
-- Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
-- Fix: Cache circles incomplete on low zoom levels (VTM only)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Čas na aktualizaci! Pokud stále používáte Android 7 nebo starší, tato aktualizace c:geo je pro vás možná poslední! S naší další verzí aplikace c:geo ukončíme podporu pro Android 5-7, abychom snížili zátěž spojenou s údržbou a mohli aktualizovat některé externí komponenty používané aplikací c:geo, které v současné době stále udržujeme. Budeme stále podporovat Android 8 až do Android 16 (a novější verze, až budou publikovány), tedy rozpětí více než osmi let historie Androidu.
+- Změna: Maximální počet sledovatelných GC navštěvujících v rámci jednoho logu kešky, byl snížen na 100 (na žádost geocaching.com, aby se snížilo zatížení jejich serverů způsobené extrémními milovníky trackables)
+- Oprava: Některé možné bezpečnostní výjimky, když uživatel neudělil určitá práva (např.: oznámení)
+- Oprava: Neúplné kruhy kešky při nízkých úrovních přiblížení (pouze VTM)
+- Oprava: Selhání při opětovném načítání trasových bodů za určitých podmínek načítání
+- Oprava: Filtr data události nefunguje za určitých podmínek
+- Oprava: Maximální limit řádků logu nefunguje spolehlivě v nastavení „neomezený“
+- Oprava: Selhání při otevření mapy za určitých podmínek
+- Oprava: Nezobrazovat mapu, pokud Wherigo nemá viditelné zóny
+- Oprava: Za určitých podmínek pád na kartě s podrobnostmi o kešce
+- Oprava: Vyhledávání na mapě s neplatnými souřadnicemi
+- Oprava: Některé překlady nerespektují interní nastavení jazyka c:geo
 
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Změna: Sjednocená mapa je nastavena jako výchozí mapa pro všechny (v rámci našeho plánu přechodu na Sjednocenou mapu) Prozatím můžete přepnout zpět v „nastavení“ – „zdroje map“. Odstranění starých map je naplánováno na jaro 2026 v našem pravidelném vydání.
+- Oprava: Při opětovném vstupu do obrazovky offline logu, se resetuje zaškrtávací políčko Oblíbené
+- Oprava: Pole pro zadání poloměru Geofence zobrazuje desetinné číslo
+- Oprava: Synchronizace osobních poznámek nefunguje
+- Změna: Nová ikona pro import GPX trasy/cesty v rychlém nastavení trasy/cesty
 
 ##
 - Oprava: Negativní hodnoty v nadmořské výškové mapě nejsou měřítkem
