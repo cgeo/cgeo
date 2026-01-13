@@ -18,6 +18,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;

@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 import android.app.Activity;

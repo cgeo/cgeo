@@ -2,6 +2,7 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

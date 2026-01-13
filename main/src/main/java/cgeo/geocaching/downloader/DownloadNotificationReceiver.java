@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;

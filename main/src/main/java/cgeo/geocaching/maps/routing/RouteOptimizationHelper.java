@@ -13,6 +13,7 @@ import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.view.View;

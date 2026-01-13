@@ -96,6 +96,7 @@ import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
