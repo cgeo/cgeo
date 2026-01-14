@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;

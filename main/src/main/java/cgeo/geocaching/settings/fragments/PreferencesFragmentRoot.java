@@ -2,8 +2,8 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.graphics.Color;
 import android.os.Bundle;

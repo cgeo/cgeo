@@ -15,8 +15,8 @@ import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.os.Bundle;

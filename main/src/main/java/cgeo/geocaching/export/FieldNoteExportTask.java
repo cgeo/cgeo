@@ -1,6 +1,5 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -13,10 +12,10 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;

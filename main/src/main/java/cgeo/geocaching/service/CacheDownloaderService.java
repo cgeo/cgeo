@@ -12,8 +12,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.PendingIntent;

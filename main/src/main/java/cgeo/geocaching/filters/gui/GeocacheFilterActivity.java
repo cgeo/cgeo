@@ -22,9 +22,9 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
 
 import android.app.Activity;

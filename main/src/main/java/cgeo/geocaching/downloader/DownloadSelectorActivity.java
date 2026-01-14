@@ -11,8 +11,8 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;

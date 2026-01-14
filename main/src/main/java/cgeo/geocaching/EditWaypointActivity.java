@@ -34,13 +34,13 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;

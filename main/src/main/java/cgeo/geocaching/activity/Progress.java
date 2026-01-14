@@ -2,8 +2,8 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.CustomProgressDialog;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
 import android.content.Context;

@@ -6,10 +6,10 @@ import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.os.Bundle;

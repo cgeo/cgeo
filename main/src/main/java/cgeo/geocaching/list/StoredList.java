@@ -15,8 +15,8 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ItemGroup;
-import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

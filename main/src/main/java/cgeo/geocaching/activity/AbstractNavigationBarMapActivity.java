@@ -10,8 +10,8 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
-import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.content.Context;

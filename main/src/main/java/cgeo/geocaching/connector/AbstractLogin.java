@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.StatusCode;

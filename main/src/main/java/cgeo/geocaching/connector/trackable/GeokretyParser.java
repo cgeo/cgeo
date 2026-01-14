@@ -1,14 +1,13 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

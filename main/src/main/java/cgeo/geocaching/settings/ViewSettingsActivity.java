@@ -11,8 +11,8 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.SettingsUtils;
 import static cgeo.geocaching.utils.SettingsUtils.getType;
 
 import android.app.Activity;

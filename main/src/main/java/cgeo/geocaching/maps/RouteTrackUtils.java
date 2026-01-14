@@ -29,12 +29,12 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

@@ -8,9 +8,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

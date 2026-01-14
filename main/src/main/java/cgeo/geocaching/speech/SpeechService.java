@@ -8,8 +8,8 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.notifications.Notifications;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.ui.notifications.NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION;
 import static cgeo.geocaching.ui.notifications.Notifications.ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE;
 

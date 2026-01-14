@@ -1,10 +1,9 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
-import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
 

@@ -2,9 +2,9 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 

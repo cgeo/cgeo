@@ -1,6 +1,5 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.mapaccess.PhysicalFile;
@@ -10,9 +9,9 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
