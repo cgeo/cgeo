@@ -1,13 +1,13 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: V souladu s pravidly Obchodu Play jsme aktualizovali úroveň API systému Android, na kterou se zaměřuje tato verze aplikace c:geo, a změnili jsme některé rutiny rozložení obrazovky. To může mít některé nežádoucí vedlejší účinky, zejména u novějších verzí systému Android. Pokud narazíte na problémy s touto verzí c:geo, nahlaste je prosím buď na [GitHub](https://github.com/cgeo/cgeo), nebo e-mailem na [support@cgeo.org](mailto:support@cgeo.org)
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně jsme odstranili starší implementace našich map. Budete automaticky převedeni na naši novou službu Sjednocená mapa a kromě několika nových funkcí, z nichž některé jsou
 - Otáčení mapy pro mapy založené na OpenStreetMap (online + offline)
 - Vyskakovací okno pro Google mapy
 - Skrytí nepotřebných zdrojů map
 - Graf nadmořské výšky pro trasy a stopy
 - Přepínání mezi seznamy přímo z mapy
 - "Řidičský režim" pro mapy založené na OpenStreetMap
-- Long-tap on track / individual route for further options
+- Dlouhým klepnutím na trasu / individuální trasu zobrazíte další možnosti
 
 ### Mapa
 - Novinka: Optimalizace trasy ukládá vypočítaná data do mezipaměti
