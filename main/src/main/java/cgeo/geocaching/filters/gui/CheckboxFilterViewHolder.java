@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.Nullable;
@@ -48,6 +50,9 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     private Map<T, Integer> statistics;
     private boolean statsAreComplete = false;
 
+    private BiConsumer<T, CheckBox> customCheckboxClickHandler = null;
+    private Predicate<T> customClickHandlerPredicate = null;
+
     public CheckboxFilterViewHolder(final ValueGroupFilterAccessor<T, F> filterAccessor) {
         this(filterAccessor, 1, null);
     }
@@ -59,6 +64,25 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             this.alwaysVisibleItems = new HashSet<>();
             this.alwaysVisibleItems.addAll(alwaysVisibleItems);
         }
+    }
+
+    /**
+     * Set a custom click handler for specific checkbox values.
+     * When set, clicking the checkbox will invoke this handler instead of the default toggle behavior.
+     * @param handler The handler to call when a checkbox is clicked
+     * @param predicate A predicate to determine which values should use the custom handler (if null, applies to all)
+     */
+    public CheckboxFilterViewHolder<T, F> setCustomCheckboxClickHandler(final BiConsumer<T, CheckBox> handler, final Predicate<T> predicate) {
+        this.customCheckboxClickHandler = handler;
+        this.customClickHandlerPredicate = predicate;
+        return this;
+    }
+
+    /**
+     * Set a custom click handler for all checkbox values.
+     */
+    public CheckboxFilterViewHolder<T, F> setCustomCheckboxClickHandler(final BiConsumer<T, CheckBox> handler) {
+        return setCustomCheckboxClickHandler(handler, null);
     }
 
 
@@ -181,6 +205,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     @NonNull
+    @NonNull
     ImmutablePair<View, CheckBox> getValueCheckbox(final T value) {
         ImmutablePair<View, CheckBox> cb = this.valueCheckboxes.get(value);
         if (cb == null) {
@@ -190,9 +215,25 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             cb = ViewUtils.createCheckboxItem(getActivity(), columns.get(0), TextParam.text(vText), this.filterAccessor.getIconFor(value), null);
             cb.right.setChecked(this.alwaysVisibleItems == null);
             this.valueCheckboxes.put(value, cb);
-            cb.right.setOnCheckedChangeListener((v, c) -> checkAndSetAllNoneValue());
+            
+            if (shouldUseCustomHandler(value)) {
+                // Use custom click handler - set on the checkbox itself to maintain accessibility
+                final ImmutablePair<View, CheckBox> finalCb = cb;
+                cb.right.setOnClickListener(v -> {
+                    // Call custom handler - checkbox state will be managed by the handler
+                    customCheckboxClickHandler.accept(value, finalCb.right);
+                });
+            } else {
+                // Use default checked change listener
+                cb.right.setOnCheckedChangeListener((v, c) -> checkAndSetAllNoneValue());
+            }
         }
         return cb;
+    }
+    
+    private boolean shouldUseCustomHandler(final T value) {
+        return customCheckboxClickHandler != null && 
+               (customClickHandlerPredicate == null || customClickHandlerPredicate.test(value));
     }
 
     @Nullable
@@ -216,7 +257,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return stats;
     }
 
-    private void checkAndSetAllNoneValue() {
+    public void checkAndSetAllNoneValue() {
         if (selectAllNoneCheckbox == null) {
             return;
         }
