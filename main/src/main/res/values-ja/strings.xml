@@ -278,9 +278,6 @@
     <string name="more_information">詳細…</string>
     <string name="undo">元に戻す</string>
     <string name="dont_show_again">今後表示しない</string>
-    <string name="warn_gm_not_available">Google マップは利用できません</string>
-    <string name="switch_to_mf">Google Playサービスが古くなっています。代わりにMapsforgeのマッププロバイダに切り替えますか?</string>
-    <string name="switched_to_mf">デフォルトのマップが Mapsforge マッププロバイダーに切り替えられました。 今すぐマップを再起動してください</string>
     <!-- location service -->
     <string name="loc_last">判明した最後の位置</string>
     <string name="loc_net">ネットワーク</string>
@@ -886,7 +883,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
-    <string name="map_source_osm_offline">オフライン</string>
     <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="map_source_attribution_dialog_title">地図の著作権</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
@@ -1834,7 +1830,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
-    <string name="map_individual_route_cleared">個別ルートを削除しました</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
     <string name="load_individual_route_error">個別ルートの読み込みに失敗しました</string>
     <string name="route_item_not_yet_loaded">ルートアイテムがまだ読み込まれていません</string>
@@ -1935,7 +1930,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="maptheme_elevate_categoryinfo">[A]:エリア、[P]:POI、[R]:ルート、[W]:道路</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
-    <string name="map_trailhistory_cleared">軌跡を削除しました</string>
     <string name="map_trail_show">軌跡を表示</string>
     <string name="map_trail_hide">軌跡を非表示</string>
     <!-- history track export -->

@@ -352,9 +352,6 @@
     <string name="tap_icon_more_info">Tocca l\'icona per maggiori informazioni</string>
     <string name="use_slider_adjust_value">Usa il cursore per regolare il valore</string>
     <string name="snackbar_action_share">Condividi</string>
-    <string name="warn_gm_not_available">Google Maps non disponibile.</string>
-    <string name="switch_to_mf">Il tuo servizio Google Play non è aggiornato. Vuoi passare al provider delle mappe di Mapsforge?</string>
-    <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Base</string>
     <string name="translator_preference_target_lng">Lingua di traduzione offline</string>
@@ -1124,7 +1121,6 @@
     <string name="init_hillshading_hq">Ombreggiatura di alta qualità</string>
     <string name="init_summary_hillshading_hq">Ombreggiatura più dettagliata ma rendering ~50%% più lento quando ingrandito</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
-    <string name="init_mapsource_select_legacy">Seleziona Sorgente Mappa (Legacy)</string>
     <string name="init_local_file_system">File System Locale</string>
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
@@ -1246,8 +1242,6 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Usa mappa legacy</string>
-    <string name="init_summary_useLegacyMap">Usa le versioni precedenti delle mappe Google Map / Mapsforge (OSM) invece di UnifiedMap</string>
     <string name="category_unifiedMap">Mappa Unificata</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
@@ -1269,7 +1263,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_google_terrain">Google: Terreno</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
@@ -2447,7 +2440,6 @@
     <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
-    <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
     <string name="sorted_route_saved">Percorso individuale salvato</string>
     <string name="load_individual_route_error">Errore caricando il percorso individuale</string>
     <string name="route_item_point">Punto del percorso</string>
@@ -2614,7 +2606,6 @@
     <string name="vtm_theme_variant">Variante Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
-    <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
     <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
     <string name="map_trail_hide">Nascondi traccia cronologia</string>
     <!-- history track export -->
@@ -2731,7 +2722,6 @@
     <string name="wherigo_toast_check_things">Wherigo: controlla il tuo %s per le modifiche</string>
     <string name="wherigo_otm_shortcuts_title">Scorciatoie Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Se desideri utilizzare il gestore c:geo Wherigo regolarmente, considera la creazione di un pulsante di avvio rapido o di un menu personalizzato Impostazioni -&gt; Aspetto</string>
-    <string name="wherigo_map_supported_for_unified_map_only">La visualizzazione delle posizioni di Wherigo non è supportata per le impostazioni della mappa. Passa alla mappa unificata in Impostazioni -&gt; Sorgenti mappa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Precedente</string>
     <string name="skip">Salta</string>

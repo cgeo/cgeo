@@ -237,9 +237,6 @@
     <string name="more_information">Більше інформації</string>
     <string name="undo">Скасування</string>
     <string name="dont_show_again">Не показувати знову</string>
-    <string name="warn_gm_not_available">Карти Google недоступні.</string>
-    <string name="switch_to_mf">Ваша служба Google Play застаріла. Ви хочете замість цього перейти на постачальника карт Mapsforge?</string>
-    <string name="switched_to_mf">Карта за замовчуванням змінена на провайдера Mapsforge карти. Перезавантажте карту зараз.</string>
     <!-- location service -->
     <string name="loc_last">Останній відомий</string>
     <string name="loc_net">Мережа</string>
@@ -597,7 +594,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Карти</string>
     <string name="map_source_google_satellite">Google: супутник</string>
-    <string name="map_source_osm_offline">Офлайн</string>
     <string name="map_source_osm_offline_combined">Комбіновані (офлайн)</string>
     <string name="map_source_attribution_dialog_title">атрибуція карти</string>
     <string name="init_sendToCgeo">Надіслати на c: geo</string>
@@ -1267,7 +1263,6 @@
     <string name="map_manual_targets_cleared">Елементи вручну очищено</string>
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_clear_individual_route_confirm">Чи хочете ви вилучити всі кешування/шляхові точки з вашого маршруту?</string>
-    <string name="map_individual_route_cleared">Індивідуальний маршрут очищено</string>
     <string name="sorted_route_saved">Окремий маршрут збережено</string>
     <string name="load_individual_route_error">Помилка при завантаженні окремого маршруту</string>
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
@@ -1313,7 +1308,6 @@
     <string name="button_continue">Продовжити</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистити історію маршруту</string>
-    <string name="map_trailhistory_cleared">Історія була вичещина</string>
     <string name="map_trail_show">показати історію треку</string>
     <string name="map_trail_hide">Очистити історію маршруту</string>
     <!-- history track export -->

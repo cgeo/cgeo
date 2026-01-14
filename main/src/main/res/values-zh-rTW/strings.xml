@@ -268,9 +268,6 @@
     <string name="more_information">更多資訊</string>
     <string name="undo">復原</string>
     <string name="dont_show_again">不要再顯示</string>
-    <string name="warn_gm_not_available">Google地圖不提供</string>
-    <string name="switch_to_mf">你的Google play服務已經過期。你想要切換到Mapsforge地圖嗎？</string>
-    <string name="switched_to_mf">預設地圖已切換到Mapsforge的地圖。 將重新啟動你的地圖。</string>
     <!-- location service -->
     <string name="loc_last">上一次</string>
     <string name="loc_net">網絡</string>
@@ -754,7 +751,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google map</string>
     <string name="map_source_google_satellite">Google map (衛星)</string>
-    <string name="map_source_osm_offline">離線</string>
     <string name="map_source_attribution_dialog_title">地圖屬性</string>
     <string name="init_sendToCgeo">傳送到c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeo的資訊</string>
@@ -1511,7 +1507,6 @@
     <string name="brouter_info">離線導航服務</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">清除歷史軌跡</string>
-    <string name="map_trailhistory_cleared">已清除歷程記錄</string>
     <string name="map_trail_show">顯示歷史軌跡</string>
     <string name="map_trail_hide">隱藏歷史軌跡</string>
     <!-- history track export -->

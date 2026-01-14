@@ -1,4 +1,13 @@
-A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android per a aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de la pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+De punta a punta: A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Android en aquesta versió dels objectius c:geo i hem canviat algunes de les rutines de disseny de la pantalla. Això pot tenir alguns efectes secundaris no desitjats, especialment en les versions més noves d'Android. Si teniu algun problema amb aquesta versió de c:geo, informeu-ne a [GitHub](https://github.com/cgeo/cgeo) o per correu electrònic a [support@cgeo.org](mailto:support@cgeo.org)
+
+Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, finalment hem eliminat les implementacions antigues dels nostres mapes. Canviareu automàticament al nostre nou UnifiedMap i no hauríeu de notar cap diferència, excepte un parell de funcions noves, algunes de les quals són
+- Rotació de mapes per a mapes basats en OpenStreetMap (en línia + fora de línia)
+- Popup de clúster per a Google Maps
+- Amaga les fonts de mapes que no necessites
+- Carta de cotes de rutes i tracks
+- Canvia entre llistes directament des del mapa
+- "Mode de conducció" per a mapes basats en OpenStreetMap
+- Toqueu llargament el track / ruta individual per veure més opcions
 
 ### Mapa
 - Nou: l'optimització de la ruta guarda les dades calculades
@@ -28,7 +37,7 @@ A causa de les polítiques de Play Store, hem actualitzat el nivell d'API d'Andr
 - Nou: Entrada de menú a la llista de punts de referència per marcar certs tipus de punts de referència com a visitats
 - Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
+- Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos

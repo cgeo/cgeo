@@ -209,7 +209,6 @@
     <string name="confirm_unsaved_changes_title">שינויים שלא נשמרו</string>
     <string name="confirm_discard_wp_changes">למחוק שינויי קואורדינטות שלא נשמרו?</string>
     <string name="more_information">עוד מידע</string>
-    <string name="warn_gm_not_available">מפות גוגל לא זמינות.</string>
     <!-- location service -->
     <string name="loc_last">מיקום אחרון ידוע</string>
     <string name="loc_net">רשת</string>

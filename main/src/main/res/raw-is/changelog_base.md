@@ -1,4 +1,13 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. This may come with some unwanted side effects, especially on newer Android versions. If you experience any problems with this version of c:geo, please report either on [GitHub](https://github.com/cgeo/cgeo) or via email to [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Map rotation for OpenStreetMap based maps (online + offline)
+- Cluster popup for Google Maps
+- Hide map sources you don't need
+- Elevation chart for routes and tracks
+- Switch between lists directly from map
+- "Driving mode" for OpenStreetMap based maps
+- Long-tap on track / individual route for further options
 
 ### Map
 - New: Route optimization caches calculated data

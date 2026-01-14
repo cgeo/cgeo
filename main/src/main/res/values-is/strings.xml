@@ -327,7 +327,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Loftmynd</string>
-    <string name="map_source_osm_offline">Utan netsambands</string>
     <string name="init_sendToCgeo">Senda til c:geo</string>
     <string name="settings_info_send2cgeo_title">Upplýsingar um að senda til c:geo</string>
     <string name="init_sendToCgeo_name">Nafn tækisins þíns</string>

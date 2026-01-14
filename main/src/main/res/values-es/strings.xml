@@ -343,9 +343,6 @@
     <string name="tap_icon_more_info">Pulsa sobre el icono para más información</string>
     <string name="use_slider_adjust_value">Desliza para ajustar el valor</string>
     <string name="snackbar_action_share">Compartir</string>
-    <string name="warn_gm_not_available">Google Maps no está disponible.</string>
-    <string name="switch_to_mf">Tu servicio de Google Play está desactualizado. ¿Quieres cambiar al proveedor de mapas de Mapsforge en su lugar?</string>
-    <string name="switched_to_mf">El mapa por defecto cambió al proveedor de mapas de Mapsforge. Reinicia el mapa ahora.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Básico</string>
     <string name="translator_preference_target_lng">Idioma para traducir sin conexión</string>
@@ -1112,7 +1109,6 @@
     <string name="init_hillshading_hq">Sombreado de relieve de alta calidad</string>
     <string name="init_summary_hillshading_hq">Sombreado de relieve más detallado pero ~50%% más lento renderizando al alejar el zoom</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
-    <string name="init_mapsource_select_legacy">Seleccionar Fuente de Mapa (Legado)</string>
     <string name="init_local_file_system">Sistema de archivos local</string>
     <string name="init_base_directory_description">Carpeta base para datos locales públicos</string>
     <string name="init_map_directory_description">Carpeta con mapas sin conexión</string>
@@ -1234,8 +1230,6 @@
     <string name="init_map_other">Otro</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar múltiples capas para dibujar mapas de OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Usar mapa de legado</string>
-    <string name="init_summary_useLegacyMap">Usar versiones antiguas de Google Maps / Mapsforge (OSM) maps en lugar de UnifiedMap</string>
     <string name="category_unifiedMap">Mapa unificado</string>
     <string name="localstorage_migrate_title">Migración de archivos locales</string>
     <string name="localstorage_migrate_status_major">Versión %1$d</string>
@@ -1257,7 +1251,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
     <string name="map_source_google_terrain">Google: Terreno</string>
-    <string name="map_source_osm_offline">Desconectado</string>
     <string name="map_source_osm_offline_combined">Combinado (sin conexión)</string>
     <string name="map_source_attribution_dialog_title">Atribuciones del mapa</string>
     <string name="init_sendToCgeo">Enviar a c:geo</string>
@@ -2434,7 +2427,6 @@ Nombre de archivo:%2$s</string>
     <string name="map_manual_targets_cleared">Objetivos manuales borrados</string>
     <string name="map_clear_individual_route">Borrar ruta individual</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
-    <string name="map_individual_route_cleared">Ruta individual borrada</string>
     <string name="sorted_route_saved">Ruta individual guardada</string>
     <string name="load_individual_route_error">Error al cargar la ruta individual</string>
     <string name="route_item_point">Punto de ruta</string>
@@ -2601,7 +2593,6 @@ Nombre de archivo:%2$s</string>
     <string name="vtm_theme_variant">Variantes del tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
-    <string name="map_trailhistory_cleared">historial de ruta borrado</string>
     <string name="map_trail_show">Mostrar el historial de la ruta</string>
     <string name="map_trail_hide">Ocultar historial</string>
     <!-- history track export -->
@@ -2718,7 +2709,6 @@ Nombre de archivo:%2$s</string>
     <string name="wherigo_toast_check_things">Wherigo: revisa %s por si hay cambios</string>
     <string name="wherigo_otm_shortcuts_title">Atajos del Ejecutador de Wherigos</string>
     <string name="wherigo_otm_shortcuts_message">Si quieres usar el Ejecutador de Wherigos de c:geo regularmente, considera crear un botón de inicio rápido o un elemento de menú personalizado para él en Ajustes -&gt; Apariencia</string>
-    <string name="wherigo_map_supported_for_unified_map_only">La visualización de las ubicaciones de Wherigo en el mapa no es compatible con tu configuración del mapa. Cambie a mapa unificado en Ajustes -&gt; Fuente del Mapa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Saltar</string>

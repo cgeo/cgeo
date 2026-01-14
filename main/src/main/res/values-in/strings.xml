@@ -443,7 +443,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: peta</string>
     <string name="map_source_google_satellite">Google: satelit</string>
-    <string name="map_source_osm_offline">Tidak aktif</string>
     <string name="init_sendToCgeo">Mengirim untuk c:geo</string>
     <string name="settings_info_send2cgeo_title">Info di send2cgeo</string>
     <string name="init_sendToCgeo_name">Nama perangkat anda</string>

@@ -276,9 +276,6 @@
     <string name="more_information">Mere information</string>
     <string name="undo">Fortryd</string>
     <string name="dont_show_again">Vis ikke dette igen</string>
-    <string name="warn_gm_not_available">Google Maps er ikke tilgængelig.</string>
-    <string name="switch_to_mf">Google Play Tjenesten er forældet. Ønsker du at skifte til Mapsforge korttjenesten i stedet?</string>
-    <string name="switched_to_mf">Standardkort er skiftet til Mapsforge korttjenesten. Genstart dit kort nu.</string>
     <!-- location service -->
     <string name="loc_last">Sidst kendte</string>
     <string name="loc_net">Netværk</string>
@@ -788,7 +785,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombineret (offline)</string>
     <string name="map_source_attribution_dialog_title">Kort-akkrediteringer</string>
     <string name="init_sendToCgeo">Send2c:geo</string>
@@ -1518,7 +1514,6 @@
     <string name="map_load_individual_route_confirm">Overskriv individuel rute?</string>
     <string name="map_clear_individual_route">Ryd individuel rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/rutepunkter fra din individuelle rute?</string>
-    <string name="map_individual_route_cleared">Individuel rute ryddet</string>
     <string name="sorted_route_saved">Individuel rute gemt</string>
     <string name="load_individual_route_error">Fejl ved indlæsning af individuel rute</string>
     <string name="route_item_not_yet_loaded">Rute element endnu ikke indlæst</string>
@@ -1580,7 +1575,6 @@
     <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer…</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
-    <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_trail_hide">Skjul spor</string>
     <!-- history track export -->

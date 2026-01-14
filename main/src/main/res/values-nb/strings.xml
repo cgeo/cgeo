@@ -304,9 +304,6 @@
     <string name="more_information">Mer informasjon</string>
     <string name="undo">Angre</string>
     <string name="dont_show_again">Ikke vis igjen</string>
-    <string name="warn_gm_not_available">Google Maps er ikke tilgjengelig.</string>
-    <string name="switch_to_mf">Google Play Service på din enhet er utdatert. Vil du endre karttjeneste til Mapsforge i stedet?</string>
-    <string name="switched_to_mf">Standard kart byttet til Mapsforge kartleverandør. Start kartet på nytt nå.</string>
     <!-- location service -->
     <string name="loc_last">Sist sett</string>
     <string name="loc_net">Nettverk</string>
@@ -883,7 +880,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
-    <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
@@ -1820,7 +1816,6 @@
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/veipunkter fra din individuelle rute?</string>
-    <string name="map_individual_route_cleared">Individuell rute fjernet</string>
     <string name="sorted_route_saved">Individuell rute lagret</string>
     <string name="load_individual_route_error">Feil ved lasting av individuell rute</string>
     <string name="route_item_not_yet_loaded">Rute element ikke lastet inn enda</string>
@@ -1907,7 +1902,6 @@
     <string name="mapserver_openandromaps_themes_info">Detaljert karttema, laget for \"OpenAndroMaps\"-kart</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slett sporhistorikk</string>
-    <string name="map_trailhistory_cleared">sporhistorikk slettet</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_trail_hide">Skjul sporhistorikk</string>
     <!-- history track export -->

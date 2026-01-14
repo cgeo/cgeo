@@ -338,9 +338,6 @@
     <string name="tap_icon_more_info">Napauta kuvaketta saadaksesi lisätietoja</string>
     <string name="use_slider_adjust_value">Säädä arvoa liukusäätimellä</string>
     <string name="snackbar_action_share">Jaa</string>
-    <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
-    <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
-    <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Perus</string>
     <string name="translator_preference_target_lng">Offline käännöksen kieli</string>
@@ -1086,7 +1083,6 @@
     <string name="init_hillshading_hq">Korkealaatuinen rinnevarjostus</string>
     <string name="init_summary_hillshading_hq">Tarkempi rinnevarjostus, mutta ~50%% hitaampi renderöinti ulos loitontaessa</string>
     <string name="init_mapsource_select">Karttalähde</string>
-    <string name="init_mapsource_select_legacy">Valitse karttalähde (Legacy)</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
     <string name="init_map_directory_description">Offline-kartat sisältävä kansio</string>
@@ -1200,8 +1196,6 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
-    <string name="init_title_useLegacyMap">Käytä vanhaa karttaa</string>
-    <string name="init_summary_useLegacyMap">Käytä vanhaa versiota Google Map / Mapsforge (OSM) karttoja UnifiedMapin sijasta</string>
     <string name="category_unifiedMap">Yhdistetty kartta</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
     <string name="localstorage_migrate_status_major">Versio %1$d</string>
@@ -1222,7 +1216,6 @@
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
     <string name="map_source_google_terrain">Google: Maasto</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartan attribuutiot</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
@@ -2382,7 +2375,6 @@
     <string name="map_manual_targets_cleared">Manuaaliset kohteet tyhjennetty</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
     <string name="map_clear_individual_route_confirm">Haluatko poistaa kaikki kätköt / reittipisteet yksittäiseltä reittiltäsi?</string>
-    <string name="map_individual_route_cleared">Yksittäinen reitti tyhjennetty</string>
     <string name="sorted_route_saved">Yksittäinen reitti tallennettu</string>
     <string name="load_individual_route_error">Virhe ladattaessa yksittäistä reittiä</string>
     <string name="route_item_point">Reittipiste</string>
@@ -2531,7 +2523,6 @@
     <string name="vtm_theme_variant">Teeman muunnelmat</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
-    <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
     <string name="map_trail_show">Näytä jälkihistoria</string>
     <string name="map_trail_hide">Piilota jälkihistoria</string>
     <!-- history track export -->
@@ -2646,7 +2637,6 @@
     <string name="wherigo_toast_check_things">Wherigo: tarkista %s muutosten varalta</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo -toistimen pikakomennot</string>
     <string name="wherigo_otm_shortcuts_message">Jos haluat käyttää c:geon Wherigo -toistinta säännöllisesti, harkitse nopean käynnistyksen painikkeen tai mukautetun valikkokuvakkeen luomista kohdassa Asetukset -&gt; Ulkonäkö</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Wherigon sijainnin näyttäminen kartalla ei ole tuettu karttasi asetuksissa. Vaihda yhdistettyyn karttaan Asetukset -&gt; Karttalähteet -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>

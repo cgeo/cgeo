@@ -355,9 +355,6 @@
     <string name="tap_icon_more_info">Für weitere Informationen tippe auf das Symbol</string>
     <string name="use_slider_adjust_value">Schieberegler verwenden, um den Wert anzupassen</string>
     <string name="snackbar_action_share">Teilen</string>
-    <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
-    <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
-    <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basis</string>
     <string name="translator_preference_target_lng">Sprache für Offline-Übersetzung</string>
@@ -1137,7 +1134,6 @@
     <string name="init_hillshading_hq">Kartenschattierung in hoher Qualität</string>
     <string name="init_summary_hillshading_hq">Detailliertere Kartenschattierung, aber ~50%% langsamere Darstellung beim Vergrößern</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
-    <string name="init_mapsource_select_legacy">Kartenquelle auswählen (Legacy)</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
@@ -1262,8 +1258,6 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
-    <string name="init_title_useLegacyMap">Alte Karte verwenden</string>
-    <string name="init_summary_useLegacyMap">Verwenden Sie alte Versionen von Google Map / Mapsforge (OSM) anstelle der Vereinheitlichten Karte (UnifiedMap)</string>
     <string name="category_unifiedMap">Vereinheitlichte Karte</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
@@ -1285,7 +1279,6 @@
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terrain</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_nomap">Keine Karte</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
@@ -2474,7 +2467,6 @@
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
-    <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
     <string name="load_individual_route_error">Fehler beim Laden der individuellen Route</string>
     <string name="route_item_point">Routenpunkt</string>
@@ -2641,7 +2633,6 @@
     <string name="vtm_theme_variant">Design-Variante</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
-    <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
     <string name="map_trail_show">Zeige Positionsverlauf</string>
     <string name="map_trail_hide">Positionsverlauf ausblenden</string>
     <!-- history track export -->
@@ -2758,7 +2749,6 @@
     <string name="wherigo_toast_check_things">Wherigo: Überprüfe deine %s auf Änderungen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Schnellstart</string>
     <string name="wherigo_otm_shortcuts_message">Wenn du den c:geo Wherigo Player regelmäßig verwenden möchtest, erwägen Sie eine Schnellstart-Schaltfläche oder einen benutzerdefinierten Menüpunkt dafür unter Einstellungen -&gt; Erscheinungsbild</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Die Anzeige von Wherigo-Standorten auf der Karte wird mit deinen Karteneinstellungen nicht unterstützt. Bitte wechsele zur Vereinheitlichten Karte unter Einstellungen -&gt; Kartenquellen -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>

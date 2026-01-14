@@ -216,7 +216,6 @@
     <string name="err_trackable_no_preference_activity">Žal, ni mogoče najti ustrezne nastavitve zaslona.</string>
     <string name="confirm_unsaved_changes_title">Spremembe niso shranjene</string>
     <string name="more_information">Več informacij</string>
-    <string name="warn_gm_not_available">Google Zemljevidi niso na voljo.</string>
     <!-- location service -->
     <string name="loc_last">Zadnja znana lokacija</string>
     <string name="loc_net">Omrežje</string>
@@ -454,7 +453,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
-    <string name="map_source_osm_offline">Zemljevid brez povezave</string>
     <string name="init_sendToCgeo">Pošlji v c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacije o send2cgeo</string>
     <string name="init_sendToCgeo_name">Ime naprave:</string>

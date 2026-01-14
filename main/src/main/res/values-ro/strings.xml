@@ -497,7 +497,6 @@
     <!-- proximity notification -->
     <!-- map sources -->
     <string name="map_source_google_map">Google: hartă</string>
-    <string name="map_source_osm_offline">Salvată</string>
     <string name="settings_info_send2cgeo_title">Info despre send2cgeo</string>
     <string name="init_sendToCgeo_name">Numele dispozitivului tău</string>
     <string name="init_sendToCgeo_register">Cere Înregistrare</string>

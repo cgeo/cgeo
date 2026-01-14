@@ -280,9 +280,6 @@
     <string name="more_information">Περισσότερες πληροφορίες</string>
     <string name="undo">Αναίρεση</string>
     <string name="dont_show_again">Να μην εμφανιστεί ξανά</string>
-    <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
-    <string name="switch_to_mf">Η υπηρεσία Google Play είναι παρωχημένη. Αντ\'αυτής θέλετε να χρησιμοποιήσετε τον πάροχο χαρτών Mapsforge;</string>
-    <string name="switched_to_mf">Ο προεπιλεγμένος χάρτης άλλαξε στον πάροχο χαρτών Mapsforge. Επανεκκινήστε τον χάρτη σας.</string>
     <!-- location service -->
     <string name="loc_last">Τελευταία γνωστή</string>
     <string name="loc_net">Δίκτυο</string>
@@ -955,7 +952,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
@@ -1957,7 +1953,6 @@
     <string name="map_manual_targets_cleared">Έγινε εκκαθάριση των χειροκίνητων στόχων</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
-    <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
     <string name="sorted_route_saved">Έγινε αποθήκευση της μεμονωμένης διαδρομής</string>
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
@@ -2069,7 +2064,6 @@
     <string name="maptheme_scale_symbol_summary">Επιπλέον κλιμακώνει ετικέτες κειμένου στο χάρτη; 100% = χωρίς κλιμάκωση</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
-    <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
     <string name="map_trail_show">Προβολή ιστορικού ιχνών</string>
     <string name="map_trail_hide">Απόκρυψη ιστορικού διαδρομών</string>
     <!-- history track export -->
