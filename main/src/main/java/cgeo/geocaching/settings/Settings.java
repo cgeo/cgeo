@@ -273,7 +273,7 @@ public class Settings {
     }
 
     public static Map<String, Object> getNonSharedPreferences() {
-        Map<String, Object> settingsMap = new HashMap<>();
+        final Map<String, Object> settingsMap = new HashMap<>();
         final String lightnessDarkKey = getKey(R.string.pref_lightness_offset_dark);
         if (!sharedPrefs.contains(lightnessDarkKey)) {
             settingsMap.put(lightnessDarkKey, getInt(R.string.pref_lightness_offset_dark, getKeyInt(R.integer.lightness_offset_dark_default)));
