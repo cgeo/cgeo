@@ -59,14 +59,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textSize_headingSecondary"
-                android:autoLink="web"
                 android:textIsSelectable="true"
                 android:text="@string/wherigo_controls_cache_context"/>
             <TextView
                 android:id="@+id/cache_context_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
                 android:textIsSelectable="true"/>
             <RelativeLayout
                 android:layout_width="match_parent"
