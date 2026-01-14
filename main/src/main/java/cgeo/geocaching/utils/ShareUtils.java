@@ -9,7 +9,7 @@ import cgeo.geocaching.settings.ShareBroadcastReceiver;
 import cgeo.geocaching.settings.StartWebviewActivity;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.LocalizationUtils;
+
 import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.Activity;

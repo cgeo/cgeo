@@ -13,7 +13,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.os.Build;
