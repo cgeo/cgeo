@@ -2,8 +2,8 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 
 import android.os.Bundle;
 

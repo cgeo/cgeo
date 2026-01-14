@@ -5,8 +5,8 @@ import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
-import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 

@@ -19,8 +19,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.view.Menu;

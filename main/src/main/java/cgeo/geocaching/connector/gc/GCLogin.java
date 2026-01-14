@@ -13,10 +13,10 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

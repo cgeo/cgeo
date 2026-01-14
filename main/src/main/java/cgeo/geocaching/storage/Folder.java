@@ -3,8 +3,8 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 import android.os.Environment;

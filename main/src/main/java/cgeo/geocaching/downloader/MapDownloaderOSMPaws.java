@@ -1,13 +1,12 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.net.Uri;

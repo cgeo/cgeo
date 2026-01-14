@@ -18,10 +18,10 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.Formatter.SEPARATOR;
 import static cgeo.geocaching.utils.MapMarkerUtils.createDTRatingMarker;
 

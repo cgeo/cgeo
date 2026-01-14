@@ -7,9 +7,9 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.view.View;
 

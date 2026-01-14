@@ -6,8 +6,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

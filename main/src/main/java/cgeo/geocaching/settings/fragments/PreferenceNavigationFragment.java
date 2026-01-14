@@ -9,9 +9,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
 import android.os.Bundle;

@@ -2,10 +2,10 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.OCPreferenceKeys;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 

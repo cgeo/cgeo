@@ -36,8 +36,8 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.BackupUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
 import android.app.SearchManager;

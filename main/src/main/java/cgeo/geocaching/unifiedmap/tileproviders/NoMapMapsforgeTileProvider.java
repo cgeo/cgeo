@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
 import cgeo.geocaching.utils.LocalizationUtils;

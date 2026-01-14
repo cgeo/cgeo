@@ -8,9 +8,9 @@ import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.brouter.BRouterConstants.PROFILE_PARAMTERKEY;
 
 import android.content.Context;

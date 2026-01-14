@@ -4,8 +4,8 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 
