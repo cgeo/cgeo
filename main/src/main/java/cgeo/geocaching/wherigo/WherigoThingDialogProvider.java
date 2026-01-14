@@ -109,7 +109,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         //title
         control.setTitle(eventTable.name);
         //description
-        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
+        WherigoViewUtils.setSelectableTextWithClickableLinks(binding.description, WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
