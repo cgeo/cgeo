@@ -10,7 +10,6 @@ import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
