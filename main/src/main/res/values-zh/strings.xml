@@ -217,8 +217,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">找不到别名/昵称为%s的联系人，请先将它添加到你的联系人应用中。</string>
     <string name="contact_multiple_matches">联系人: 多个匹配</string>
-    <!-- translation -->
-    <string name="translate_length_warning">对大量文本进行翻译可能会失败。</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
@@ -406,6 +405,7 @@
     <string name="caches_sort_geocode">藏点编码</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
+    <string name="caches_sort_inventory">可追踪物计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
     <string name="caches_sort_date_logged">记录日期（个人日志）</string>
     <string name="caches_sort_finds">查找</string>
@@ -517,6 +517,7 @@
     <string name="cache_filter_hidden">藏宝日期</string>
     <string name="cache_filter_eventdate">活动日期</string>
     <string name="cache_filter_logs_count">日志数量</string>
+    <string name="cache_filter_inventory_count">可追踪物计数</string>
     <string name="cache_filter_last_found">最后找到日期</string>
     <string name="cache_filter_log_entry">日志条目</string>
     <string name="cache_filter_location">位置</string>
@@ -816,9 +817,7 @@
     <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="init_gcvote_password_description">为了能够给藏点打分，您需要遵循 GCVote.com 的使用说明，然后在这里输入您的 GCVote 密码。</string>
     <string name="err_vote_send_rating">发送评分时出错。</string>
-    <string name="vote_sent">发送评分成功</string>
     <string name="init_login_popup">登录</string>
     <string name="init_login_popup_working">正在登录…</string>
     <string name="init_login_popup_ok">登录成功</string>
@@ -860,8 +859,6 @@
     <string name="init_signature_template_type">类型</string>
     <string name="init_signature_template_location">位置</string>
     <string name="init_signature_template_geocode">藏点编码</string>
-    <string name="init_ratingwanted">GCvote 评分</string>
-    <string name="init_summary_ratingwanted">从 GCvote.com 加载藏点评分</string>
     <string name="init_summary_bettercacher">从 BetterCacher.org 载入藏点等级和类别</string>
     <string name="init_friends_and_own_logs_wanted">显示好友的 / 自己的</string>
     <string name="init_summary_friends_and_own_logs_wanted">为朋友和自己的日志显示额外的日志页面</string>
@@ -1026,7 +1023,6 @@
     <string name="init_dataDir">选择数据文件夹</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_maptrail">显示历史轨迹</string>
-    <string name="init_maptrail_length">历史轨迹最大长度</string>
     <string name="init_maptrail_length_summary">设置历史轨迹最大长度 (c:geo 每次启动时强制执行)。默认值为 700点 - 根据可用内存进行调整。</string>
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
     <string name="init_trailappearance">历史轨迹外观</string>
@@ -1199,7 +1195,6 @@
     <string name="cache_favpoint_not_on">该藏点不在您的喜爱列表之中。</string>
     <string name="cache_images">图片</string>
     <string name="cache_waypoints_add">添加途经点</string>
-    <string name="cache_waypoints_add_currentLocation">添加当前位置</string>
     <string name="cache_waypoints_add_fromclipboard">从剪贴板中添加</string>
     <string name="cache_hint">提示</string>
     <string name="cache_hint_not_available">没有可用的提示</string>
@@ -1232,7 +1227,6 @@
     <string name="cache_menu_share">分享藏点</string>
     <string name="cache_menu_move_list">移动到另一个列表</string>
     <string name="cache_menu_copy_list">复制到另一个列表</string>
-    <string name="cache_menu_vote">投票</string>
     <string name="cache_menu_log_in_browser">在浏览器中写日志</string>
     <string name="cache_menu_ignore">忽略藏点</string>
     <string name="cache_log_menu_decrypt">解密/加密</string>
@@ -1243,7 +1237,6 @@
     <string name="ignore_confirm_title">小心</string>
     <string name="cache_status">状态</string>
     <string name="cache_status_offline_log">保存的日志</string>
-    <string name="cache_status_attended">已参加</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">已归档</string>
@@ -1293,8 +1286,6 @@
     <string name="cache_image_title_camera_prefix">照片</string>
     <string name="cache_share_field">分享</string>
     <string name="cache_time_full_hours">点</string>
-    <string name="cache_whereyougo_start">打开 WhereYouGo来下载并启动此cartridge</string>
-    <string name="cache_whereyougo_install">安装WhereYouGo来下载并启动此cartridge</string>
     <string name="cache_alc_start">打开Adventure Lab来开始这个adventure</string>
     <string name="context_share_as_text">分享文本</string>
     <string name="context_share_as_link">分享链接</string>
@@ -1305,7 +1296,7 @@
     <string name="html_style_default">默认</string>
     <string name="html_style_monochrome">黑白</string>
     <string name="html_style_source">HTML源</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
@@ -1409,7 +1400,6 @@
     <string name="search_kw">关键词</string>
     <string name="search_kw_disabled_hint">由于您是BASIC会员，该功能已被禁用</string>
     <string name="search_finder">发现者：</string>
-    <string name="search_filter">筛选器</string>
     <string name="search_tb">旅行虫</string>
     <string name="search_destination">在c:geo中打开目的地</string>
     <string name="search_address_started">搜索地点</string>
@@ -1637,7 +1627,6 @@
     <string name="storage_permission_needed">需要储存权限来运行此功能</string>
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">请输入 %1$s和%2$s范围之间的值。</string>
     <string name="number_input_err_boundarymin">输入的值太小 - 重置为最小值</string>
     <string name="number_input_err_boundarymax">输入的值太大 - 重置为最大值</string>
     <string name="number_input_err_format">数字格式无效。</string>
@@ -1734,12 +1723,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>原始坐标</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

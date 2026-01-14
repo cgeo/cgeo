@@ -155,8 +155,7 @@
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
     <string name="log_image_titleprefix">Imagine</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Pagina de autentificare nu a putut fi parcursă</string>
@@ -386,7 +385,6 @@
     <string name="init_summary_oc_uk">Încarcă geocutii de la opencache.uk</string>
     <string name="init_oc_uk_description">Autorizează c:geo cu opencache.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
     <string name="init_summary_su">Încarcă geocutii de la Geocaching.su</string>
-    <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
     <string name="init_login_popup">Autentificare</string>
     <string name="init_login_popup_working">Autentificare în curs…</string>
     <string name="init_login_popup_ok">Autentificare REUŞITĂ</string>
@@ -408,8 +406,6 @@
     <string name="init_signature_template_owner">Proprietar</string>
     <string name="init_signature_template_name">Nume</string>
     <string name="init_signature_template_log">Text însemnare</string>
-    <string name="init_ratingwanted">Voturi GCvote</string>
-    <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
     <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
@@ -594,7 +590,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Încărcare imagini (indicii?)</string>
     <string name="cache_dialog_loading_details_status_logs">Încărcare jurnal</string>
     <string name="cache_dialog_loading_details_status_waypoints">Procesare puncte</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Încărcare GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Informaţii cutie</string>
     <string name="cache_dialog_loading_details_status_render">Generez paginile</string>
     <string name="cache_dialog_offline_save_title">Cutie salvată</string>
@@ -625,14 +620,12 @@
     <string name="cache_menu_share">Distribuie geocutie</string>
     <string name="cache_menu_move_list">Mută în altă listă</string>
     <string name="cache_menu_copy_list">Copiază în altă listă</string>
-    <string name="cache_menu_vote">Votează</string>
     <string name="cache_menu_challenge_checker">Caută provocări</string>
     <string name="cache_menu_ignore">Ignoră geocutia</string>
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
-    <string name="cache_status_attended">A participat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_status_archived">Arhivată</string>
@@ -666,7 +659,7 @@
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Se încarcă punctele din %1$s</string>
@@ -1108,7 +1101,6 @@
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">Introduceți o valoare între %1$s și %2$s</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- changed permissions one time message -->

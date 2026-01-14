@@ -1,5 +1,6 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.AboutActivity;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.DBInspectionActivity;
@@ -47,7 +48,8 @@ public class QuickLaunchItem extends InfoItem {
         MESSAGECENTER(10),
         MANUAL(6),
         FAQ(7),
-        WHERIGO(11);
+        WHERIGO(11),
+        INFO(13);
 
         public final int id;
         VALUES(final int id) {
@@ -71,7 +73,8 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, VISIBILITY.GC),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, VISIBILITY.ALL),
         new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, VISIBILITY.ALL),
-        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications)
+        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, VISIBILITY.ALL, WherigoViewUtils::addWherigoBadgeNotifications),
+        new QuickLaunchItem(VALUES.INFO, R.string.about, R.drawable.cgeo_notification, VISIBILITY.ALL)
     ));
 
     @DrawableRes public int iconRes;
@@ -134,6 +137,8 @@ public class QuickLaunchItem extends InfoItem {
                         activity.startActivity(intent);
                     } else if (which == VALUES.VIEWDATABASE.id) {
                         activity.startActivity(new Intent(activity, DBInspectionActivity.class));
+                    } else if (which == VALUES.INFO.id) {
+                        activity.startActivity(new Intent(activity, AboutActivity.class));
                     } else {
                         throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
                     }

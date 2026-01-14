@@ -376,10 +376,6 @@
     <string name="use_slider_adjust_value">Use slider to adjust value</string>
     <string name="snackbar_action_share">Share</string>
 
-    <string name="warn_gm_not_available">Google Maps not available.</string>
-    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
-    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
-
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basic</string>
 
@@ -718,6 +714,7 @@
 
     <string name="cache_filter_datefilter_absolute">Absolute</string>
     <string name="cache_filter_datefilter_relative">Relative to today</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignore year</string>
     <string name="cache_filter_datefilter_label_from">From:</string>
     <string name="cache_filter_datefilter_label_to">To:</string>
 
@@ -965,6 +962,7 @@
     <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
+    <string name="settings_title_maptrail">History track</string>
     <string name="settings_title_map_behavior">Map behavior</string>
     <string name="settings_title_map_style">Map style</string>
     <string name="settings_hide_tileproviders_title">Hide Map Sources</string>
@@ -1265,7 +1263,6 @@
     <string name="init_hillshading_hq">High quality hillshading</string>
     <string name="init_summary_hillshading_hq">More detailed hillshading overlay but ~50%% slower rendering when zoomed out</string>
     <string name="init_mapsource_select">Select Map Source</string>
-    <string name="init_mapsource_select_legacy">Select Map Source (Legacy)</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
@@ -1277,8 +1274,10 @@
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Show history track</string>
-    <string name="init_maptrail_length">History track max. length</string>
+    <string name="init_maptrail_length">Maximum length</string>
     <string name="init_maptrail_length_summary">Set maximum length of history track (enforced on each startup of c:geo). Default value is 700 points - adjust according to available memory.</string>
+    <string name="init_maptrail_maxdistance">Maximum distance</string>
+    <string name="init_maptrail_maxdistance_summary">Maximum distance until which two consecutive points of the history track get connected on the map</string>
     <string name="init_summary_maptrail">When activated (and GPS is on) c:geo saves the history of your movements as a track and displays it on the map.</string>
     <string name="init_trailappearance">History track appearance</string>
     <string name="init_trailappearance_summary">Select color, opaqueness and line width for history track line</string>
@@ -1389,8 +1388,6 @@
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
-    <string name="init_title_useLegacyMap">Use legacy map</string>
-    <string name="init_summary_useLegacyMap">Use legacy versions of Google Map / Mapsforge (OSM) maps instead of UnifiedMap</string>
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
@@ -1414,7 +1411,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_google_terrain">Google: Terrain</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_nomap">No map</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
@@ -1834,8 +1830,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - not downloaded</string>
     <string name="cache_wherigo_start">Download and play this Wherigo using c:geo\'s internal player</string>
     <string name="cache_wherigo_credentials">In order to play this Wherigo using c:geo\'s internal player you need to authorize against geocaching.com service first. Tap on the button on the right to go to configuration.</string>
-    <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
-    <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
     <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can install Chirp Wolf.</string>
     <string name="cache_alc_start">Open Adventure Lab to start playing this adventure</string>
@@ -2020,6 +2014,8 @@
     <string name="calccoord_guided_mode">Guided Mode</string>
     <string name="calccoord_guided_edit">Tap a digit to edit</string>
     <string name="calccoord_guided_value">Value</string>
+    <string name="calccoord_select_variable">Select Variable</string>
+    <string name="calccoord_new_variable">**%s** *(New)*</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
     <string name="calccoord_plain_tools_title">Plain Tools</string>
     <string name="calccoord_remove_spaces">Remove spaces</string>
@@ -2739,7 +2735,8 @@
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_title">Set value</string>
+    <string name="number_input_range">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
@@ -2775,7 +2772,6 @@
     <string name="map_manual_targets_cleared">Manual targets cleared</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>
-    <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="sorted_route_saved">Individual route saved</string>
     <string name="load_individual_route_error">Error loading individual route</string>
     <string name="route_item_point">Route point</string>
@@ -2962,7 +2958,6 @@
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>
-    <string name="map_trailhistory_cleared">History track cleared</string>
     <string name="map_trail_show">Show history track</string>
     <string name="map_trail_hide">Hide history track</string>
 
@@ -3099,8 +3094,6 @@
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
-
-    <string name="wherigo_map_supported_for_unified_map_only">Displaying of Wherigo locations on map is not supported for your map settings. Please switch to unified map under Settings -> Map Sources -> %s</string>
 
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>

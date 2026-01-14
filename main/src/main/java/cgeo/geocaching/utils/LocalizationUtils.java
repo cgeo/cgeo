@@ -13,6 +13,7 @@ import android.net.Uri;
 
 import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.PluralsRes;
 import androidx.annotation.StringRes;
 
@@ -34,9 +35,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * All methods work also in unit-test environments (where there is no available context
  */
 public final class LocalizationUtils {
-
-    private static final Context APPLICATION_CONTEXT =
-            CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
 
     private static final Map<String, String> LANGUAGE_TO_MAIN_COUNTRY = new HashMap<>();
     private static final Map<String, Set<String>> LANGUAGE_TO_COUNTRIES = new HashMap<>();
@@ -86,23 +84,24 @@ public final class LocalizationUtils {
     }
 
     public static String getStringWithFallback(@StringRes final int resId, final String fallback, final Object... params) {
-        if ((APPLICATION_CONTEXT == null || resId == 0) && fallback == null) {
+        final Context localizationContext = getLocalizationContext();
+        if ((localizationContext == null || resId == 0) && fallback == null) {
             return "(NoCtx/NoResId/NoFallback)[" + StringUtils.join(params, ";") + "]";
         }
         try {
-            if (resId == 0 || APPLICATION_CONTEXT == null) {
+            if (resId == 0 || localizationContext == null) {
                 return params != null && params.length > 0 ? String.format(fallback, params) : fallback;
             }
-            return params != null && params.length > 0 ? APPLICATION_CONTEXT.getString(resId, params) : APPLICATION_CONTEXT.getString(resId);
+            return params != null && params.length > 0 ? localizationContext.getString(resId, params) : localizationContext.getString(resId);
         } catch (IllegalFormatException | Resources.NotFoundException e) {
             String resStringWoFormat = null;
             try {
-                resStringWoFormat = APPLICATION_CONTEXT == null ? null : APPLICATION_CONTEXT.getString(resId);
+                resStringWoFormat = localizationContext == null ? null : localizationContext.getString(resId);
             } catch (Exception ex) {
                 //ignore, this is for logging only!
             }
 
-            Log.w("Problem trying to format '" + resId + "/'" + resStringWoFormat + "'/" + fallback + "' with [" + StringUtils.join(params, ";") + "] (appContext valid: " + (APPLICATION_CONTEXT != null) + ")", e);
+            Log.w("Problem trying to format '" + resId + "/'" + resStringWoFormat + "'/" + fallback + "' with [" + StringUtils.join(params, ";") + "] (appContext valid: " + (localizationContext != null) + ")", e);
             return (fallback == null ? "" : fallback) + ":" + StringUtils.join(params, ";");
         }
     }
@@ -112,24 +111,27 @@ public final class LocalizationUtils {
     }
 
     public static String getPlural(@PluralsRes final int pluralId, final int quantity, final String fallback) {
-        if (APPLICATION_CONTEXT == null) {
+        final Context localizationContext = getLocalizationContext();
+        if (localizationContext == null) {
             return quantity + " " + fallback;
         }
-        return APPLICATION_CONTEXT.getResources().getQuantityString(pluralId, quantity, quantity);
+        return localizationContext.getResources().getQuantityString(pluralId, quantity, quantity);
     }
 
     public static String[] getStringArray(@ArrayRes final int arrayId, final String... fallback) {
-        if (APPLICATION_CONTEXT == null) {
+        final Context localizationContext = getLocalizationContext();
+        if (localizationContext == null) {
             return fallback == null ? new String[0] : fallback;
         }
-        return APPLICATION_CONTEXT.getResources().getStringArray(arrayId);
+        return localizationContext.getResources().getStringArray(arrayId);
     }
 
     public static int[] getIntArray(@ArrayRes final int arrayId, final int... fallback) {
-        if (APPLICATION_CONTEXT == null) {
+        final Context localizationContext = getLocalizationContext();
+        if (localizationContext == null) {
             return fallback == null ? new int[0] : fallback;
         }
-        return APPLICATION_CONTEXT.getResources().getIntArray(arrayId);
+        return localizationContext.getResources().getIntArray(arrayId);
     }
 
     /**
@@ -168,6 +170,11 @@ public final class LocalizationUtils {
             }
         }
         return new ImmutablePair<>(getStringWithFallback(messageId, fallback, paramsForUser), getStringWithFallback(messageId, fallback, paramsForLog));
+    }
+
+    @Nullable
+    private static Context getLocalizationContext() {
+        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
     }
 
     @NonNull

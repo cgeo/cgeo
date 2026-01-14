@@ -4,7 +4,6 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.search.BaseSearchSuggestionCursor;
 import cgeo.geocaching.search.BaseSuggestionsAdapter;
 import cgeo.geocaching.search.SearchUtils;
@@ -35,6 +34,7 @@ import cgeo.geocaching.settings.fragments.PreferencesFragmentRoot;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -116,7 +116,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                         }
                     }
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
-                        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+                        MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
                     }
                 })
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, file -> {

@@ -9,7 +9,6 @@ import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -18,6 +17,7 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MenuUtils;
@@ -198,11 +198,12 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void showOnMap() {
-        if (!WherigoGame.get().isPlaying()) {
-            return;
-        }
         final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
         final Viewport viewport = WherigoUtils.getZonesViewport(zones, true);
+        if (!WherigoGame.get().isPlaying() || viewport == null) {
+            DefaultMap.startActivityLive(this);
+            return;
+        }
         DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
     }
 
@@ -277,7 +278,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo() != null && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
-        binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
+        binding.map.setEnabled(game.isPlaying());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 

@@ -203,8 +203,7 @@
     <!-- Contacts -->
     <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
     <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
-    <!-- translation -->
-    <string name="translate_length_warning">Vertimas gali nepavykti jei tekstas labai ilgas.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
@@ -788,9 +787,7 @@
     <string name="init_summary_oc_uk">Įkelti slėptuves iš opencache.uk</string>
     <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencache.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
-    <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
     <string name="err_vote_send_rating">Siunčiant įvertinimą įvyko klaida.</string>
-    <string name="vote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="init_login_popup">Prisijungti</string>
     <string name="init_login_popup_working">Prisijungiama…</string>
     <string name="init_login_popup_ok">Prisijungta</string>
@@ -832,8 +829,6 @@
     <string name="init_signature_template_type">Tipas</string>
     <string name="init_signature_template_location">Vieta</string>
     <string name="init_signature_template_geocode">Geokodas</string>
-    <string name="init_ratingwanted">GCvote reitingas</string>
-    <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
     <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir asmeninių įrašų žurnalo papildomą puslapį</string>
     <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
@@ -982,7 +977,6 @@
     <string name="init_dataDir">Pasirinkite duomenų aplanką</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus geoslėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
-    <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
     <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
     <string name="init_trailappearance">Istorijos pėdsako išvaizda</string>
@@ -1295,9 +1289,7 @@
     <string name="cache_variables">Kintamieji</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Kelio taškai (%d)</string>
     <string name="cache_waypoints_add">Pridėti kelio tašką</string>
-    <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Slėpti aplankytus kelio taškus</string>
     <string name="cache_waypoints_remove_original_waypoint">Kelio taškas nukopijuotas iš iškarpinės į šią slėptuvę.\n\nPašalinti pradinį kelio tašką?</string>
     <string name="cache_hint">Užuomina</string>
     <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -1310,7 +1302,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Įkeliami užuominos vaizdai</string>
     <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apdorojami kelio taškai</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
     <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
     <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
     <string name="cache_dialog_offline_save_title">Išsaugoma</string>
@@ -1362,7 +1353,6 @@
     <string name="cache_menu_copy_list">Kopijuoti į kitą sąrašą</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (neprisijungus)</string>
-    <string name="cache_menu_vote">Balsuoti</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_log_in_browser">Užregistruoti naršyklėje</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
@@ -1374,7 +1364,6 @@
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
-    <string name="cache_status_attended">Dalyvavo</string>
     <string name="cache_status_found">Surasta</string>
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_status_archived">Archyvuota</string>
@@ -1433,8 +1422,6 @@
     <string name="cachedetails_progress_watch">Įtraukta į stebimų sarašą</string>
     <string name="cachedetails_progress_unwatch">Pašalinta iš stebimų sąrašo</string>
     <string name="cachedetails_progress_favorite">Pridėta prie mėgstamiausių</string>
-    <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
-    <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
@@ -1472,7 +1459,7 @@
     <string name="html_style_default">Numatytas</string>
     <string name="html_style_monochrome">Vienspalvė</string>
     <string name="html_style_source">HTML pirminis tekstas</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
     <string name="cc_hint_seconds">sekundės</string>
@@ -1667,7 +1654,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Didelis kontrastas</string>
     <string name="google_maps_style_auto">Įrenginio tema (Diena/Naktis)</string>
-    <string name="google_maps_option_group_theme">Temos parinktys</string>
     <!-- search -->
     <string name="geo_search_label">Ieškoti slėptuvių netoliese</string>
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
@@ -1678,7 +1664,6 @@
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_finder">Surado</string>
-    <string name="search_filter">Filtras</string>
     <string name="search_filter_info_message" formatted="false">**Ieškoti pagal filtrą** ieško visų aktyvių internetinių paslaugų (pvz., geocaching.com) slėptuvių, naudodama pateiktą filtrą. Tačiau šių paslaugų paieškos galimybės paprastai yra labiau ribotos nei c:geo filtrų galimybės.\n\n- Visos paslaugos palaiko tik filtrus IR (jokių ARBA filtrų ir jokios filtro inversijos).\n- Paprastesni filtrai, pvz., ** slėptuvės tipą** arba **slėptuvės dydį** palaiko visos paslaugos. Sudėtingesni filtrai dažnai nepalaikomi arba turi tam tikrų apribojimų, pvz. **mėgstamiausi** arba **paslėpimo data**.\n- Išsamų kiekvienos paslaugos palaikomų filtrų sąrašą rasite [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltrus, kurių nepalaiko internetinė paslauga, c:geo taikys gautuose rezultatuose.</string>
     <string name="search_tb">Keliauninkas</string>
     <string name="search_destination">Atidaryti tikslą su c:geo</string>
@@ -2172,7 +2157,6 @@
     <string name="preference_colorpicker_show_width">plotis: %d</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įveskite vertę tarp %1$s ir %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2267,7 +2251,6 @@
     <string name="add_setting_missing_type">Turite pasirinkti pageidaujamą tipą</string>
     <string name="add_setting_already_exists">Nuostata šiuo pavadinimu jau yra</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2414,12 +2397,6 @@
     <string name="smiley_question">Klausimas</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Originalus</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

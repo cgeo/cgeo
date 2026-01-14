@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Komentarz zespołu OC</string>
     <string name="log_your_saved_log">Twój zapisany wpis</string>
     <string name="log_empty_logbook">Dziennik tej skrytki jest pusty.</string>
+    <string name="log_empty_logbook_filtered">Wybrane filtry ukrywają wszystkie logi. Wybierz co najmniej jedną opcję.</string>
     <string name="log_image_selectfromstorage_tooltip">Wybierz obrazy z pamięci</string>
     <string name="log_image_camera_tooltip">Zrób zdjęcie za pomocą aparatu</string>
     <string name="log_image_selectfromown_tooltip">Wybierz obrazy z własnych obrazów</string>
@@ -216,15 +217,26 @@
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="log_offline_delete_confirm">Czy na pewno chcesz usunąć zapisany wpis typu \'%1$s\' z datą logowania \'%2$s\'?</string>
+    <string name="log_share_prefix_found">Znalazłem %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Nie mogłem znaleźć %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_note">Zostawiłem notatkę na %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_maintenance">Zgłosiłem konieczność konserwacji dla %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_archive">Myślę, że %1$s (%2$s) powinna zostać zarchiwizowana:\n\n</string>
+    <string name="log_share_prefix_default">Mój wpis dla %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
     <string name="contact_multiple_matches">Kontakt: wiele pasujących</string>
-    <!-- translation -->
-    <string name="translate">Tłumacz w aplikacji Google Translate</string>
-    <string name="translate_to_sys_lang">Przetłumacz na %s (Web)</string>
-    <string name="translate_to_english">Przetłumacz na angielski (Web)</string>
-    <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
+    <!-- External translation -->
+    <string name="translate">Przetłumacz</string>
+    <string name="translate_external_label">Przetłumacz z %s</string>
+    <string name="translate_external_variant_app">Aplikacja</string>
+    <string name="translate_external_variant_web">Strona www</string>
+    <string name="translate_external_none">&lt;Brak&gt;</string>
+    <string name="translate_external_app">Aplikacja zewnętrzna</string>
+    <string name="translate_external_google">Tłumacz Google</string>
+    <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_length_warning">Tłumaczenie przez stronę www może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
@@ -255,6 +267,7 @@
     <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
     <string name="err_detail_premium_log_found">Ta skrytka jest dostępna tylko dla członków premium geocaching.com. Dlatego nie można wyświetlić informacji o skrytce.\n\nJeśli jednak już znalazłeś tę skrytkę, możesz ją zalogować tutaj.</string>
     <string name="err_watchlist_failed">Zmiana listy obserwowanych zakończona niepowodzeniem.</string>
+    <string name="err_watchlist_failed_geocodes">Zmiana listy obserwowanych nie powiodła się dla geokodów: %s</string>
     <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
     <string name="err_auth_initialize">c:geo nie mógł rozpocząć autoryzacji.</string>
     <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
@@ -302,6 +315,7 @@
     <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład „TB29QMZ”.</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
+    <string name="warn_bookmarklist_select">Nie wybrano listy zakładek.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_notloggedin_title">Tryb offline</string>
@@ -309,6 +323,8 @@
     <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrytki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="err_read_bookmark_list">Błąd odczytywania list zakładek.</string>
+    <string name="err_bookmark_list_overfull">Zbyt wiele skrytek</string>
+    <string name="err_bookmark_list_overfull_description">Listy zakładek mogą przechowywać maksymalnie 1000 skrytek, próbujesz dodać więcej do listy.\n\nCzy chcesz kontynuować i dodać tylko tyle skrytek, ile zmieści się na liście?</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
@@ -325,6 +341,8 @@
     <string name="warn_calculator_state_save">Pamiętaj, aby zapisać punkt nawigacji jeśli chcesz zachować stan kalkulatora.</string>
     <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
+    <string name="err_trackable_error">Błąd przedmiotu podróżnego</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Zbyt wiele przedmiotór podróżnych zaznaczono jako „odwiedzono” – maksymalnie można %d</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
     <string name="confirm_unsent_changes_title">Niewysłane zmiany</string>
@@ -336,6 +354,7 @@
     <string name="dont_show_again">Nie wyświetlaj ponownie</string>
     <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
     <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
+    <string name="snackbar_action_share">Udostępnij</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
@@ -357,13 +376,13 @@
     <string name="translator_tooltip">Tłumaczenie offline z Google</string>
     <string name="translator_language_select">Wybierz język źródłowy</string>
     <string name="translator_language_target_select">Wybierz język docelowy</string>
-    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia.\nDotknij, aby wybrać język źródłowy.</string>
-    <string name="translator_language_unknown">Nie można rozpoznać języka.\nDotknij, aby wybrać język źródłowy.</string>
-    <string name="translator_language_detected">Tłumacz z „%s” za pomocą Google.\nDotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_unsupported">Język (%s) nie jest obsługiwany do tłumaczenia. Dotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_unknown">Nie można zidentyfikować języka. Dotknij, aby wybrać język źródłowy.</string>
+    <string name="translator_language_detected">Tłumacz z \"%s\". Dotknij, aby wybrać język źródłowy.</string>
     <string name="translator_target_language">Przetłumacz na \"%s\"</string>
     <string name="translator_translation_error">Nie udało się przetłumaczyć tekstu: %s</string>
     <string name="translator_translation_initerror">Nie udało się zainicjować tłumaczenia</string>
-    <string name="translator_translation_success">Przetłumaczone z „%s”.\nNaciśnij przycisk, aby przywrócić oryginał</string>
+    <string name="translator_translation_success">Przetłumaczone z \"%s\", naciśnij przycisk aby przywrócić oryginał</string>
     <string name="crash_activity_title">Ups! c:geo uległ awarii!</string>
     <string name="crash_activity_report">zgłoś problem</string>
     <!-- location service -->
@@ -474,6 +493,11 @@
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
     <string name="caches_upload_bookmarklist_all">Dodaj wszystkie do listy zakładek</string>
     <string name="caches_upload_bookmarklist_selected">Dodaj wybrane do listy zakładek</string>
+    <string name="caches_watch_all">Dodaj wszystkie do listy obserwowanych</string>
+    <string name="caches_unwatch_all">Usuń wszystkie z listy obserwowanych</string>
+    <string name="caches_watch_selected">Dodaj wybrane do listy obserwowanych</string>
+    <string name="caches_unwatch_selected">Usuń wybrane z listy obserwowanych</string>
+    <string name="watchlist_background_started">Aktualizacja listy obserwowanych rozpoczęta w tle</string>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać zmodyfikowane współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
@@ -551,6 +575,7 @@
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
     <string name="list_parent_list">Lista nadrzędna</string>
+    <string name="list_create_parent">&lt;Utwórz nową listę nadrzędną&gt;</string>
     <string name="list_name">Nazwa listy</string>
     <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
     <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
@@ -639,6 +664,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Wzorzec</string>
     <string name="cache_filter_datefilter_absolute">Bezwzględne</string>
     <string name="cache_filter_datefilter_relative">W stosunku do dzisiaj</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignoruj rok</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Zaznacz wszystkie</string>
@@ -835,11 +861,14 @@
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
+    <string name="settings_title_maptrail">Historia śladu</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
     <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
+    <string name="settings_vtm_background_transparent_title">Przezroczyste tło</string>
+    <string name="settings_vtm_background_transparent_summary">Pokaż przezroczyste tło map offline VTM (eksperymentalne)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -890,9 +919,7 @@
     <string name="init_summary_oc_uk">Załaduj skrzynki z opencache.uk</string>
     <string name="init_oc_uk_description">Autoryzuj c:geo z opencache.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
     <string name="init_summary_su">Załaduj skrzynki z Geocaching.su</string>
-    <string name="init_gcvote_password_description">Aby móc oceniać skrytki, należy postępować zgodnie z instrukcjami zawartymi na GCVote.com i podać swoje hasło do serwisu tutaj.</string>
     <string name="err_vote_send_rating">Błąd podczas wysyłania oceny.</string>
-    <string name="vote_sent">Ocena pomyślnie wysłana</string>
     <string name="init_login_popup">Nazwa użytkownika</string>
     <string name="init_login_popup_working">Logowanie…</string>
     <string name="init_login_popup_ok">Nazwa użytkownika OK</string>
@@ -937,8 +964,9 @@
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Lokalizacja</string>
     <string name="init_signature_template_geocode">Geokod</string>
-    <string name="init_ratingwanted">Ocena GCvote</string>
-    <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
+    <string name="init_signature_template_tblocation_geocache_code">Przedmiot podróżny – kod skrytki</string>
+    <string name="init_signature_template_tblocation_geocache_name">Przedmiot podróżny – nazwa skrytki</string>
+    <string name="init_signature_template_tblocation_user">Przedmiot podróżny – użytkownik</string>
     <string name="init_summary_bettercacher">Wczytaj kategorie i poziom skrytek z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
@@ -952,6 +980,8 @@
     <string name="init_translation_disabled">Tłumaczenie wyłączone</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
+    <string name="init_translator_external">Zewnętrzny tłumacz</string>
+    <string name="init_translator_external_description">Zewnętrzna aplikacja tłumacza</string>
     <string name="system_default">Domyślne systemowe</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
@@ -1013,6 +1043,8 @@
     <string name="init_summary_cacheListInfo">Wybierz dodatkowe informacje, które mają być wyświetlane dla każdej skrytki na listach skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
+    <string name="init_live_compass_in_navigation_action">Pokaż kierunek w widoku szczegółów skrytki</string>
+    <string name="init_summary_live_compass_in_navigation_action">Pokaż strzałkę z kierunkiem kompasu dla skrytek w widoku szczegółów</string>
     <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
     <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
     <string name="init_custombnitem">Własny element menu</string>
@@ -1045,6 +1077,8 @@
     <string name="settings_startscreen_title">Ekran domyślny</string>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
+    <string name="init_colored_theme">Kolorowy motyw</string>
+    <string name="init_summary_colored_theme">Użyj kolorowego motywu</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrytek, punktów nawigacji i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -1126,8 +1160,10 @@
     <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrytek (spoilery, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż historię śladu</string>
-    <string name="init_maptrail_length">Maks. długość historii śladu</string>
+    <string name="init_maptrail_length">Maksymalna długość</string>
     <string name="init_maptrail_length_summary">Ustaw maksymalną długość historii śladu (wymuszaną przy każdym uruchomieniu c:geo). Wartość domyślna to 700 punktów – dostosuj w zależności od dostępnej pamięci.</string>
+    <string name="init_maptrail_maxdistance">Maksymalna odległość</string>
+    <string name="init_maptrail_maxdistance_summary">Maksymalna odległość, przy której dwa kolejne punkty historii śladu zostaną połączone na mapie</string>
     <string name="init_summary_maptrail">Gdy funkcja jest aktywna (i GPS jest włączony) c:geo zapisuje historię twoich ruchów jako ślad i wyświetla go na mapie.</string>
     <string name="init_trailappearance">Wygląd historii śladu</string>
     <string name="init_trailappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla linii historii śladu</string>
@@ -1240,9 +1276,10 @@
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
     <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
-    <string name="category_unifiedMap">Ujednolicona mapa (UnifiedMap)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
+    <string name="gui_test_title">Testowy ekran interfejsu</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
     <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
@@ -1262,6 +1299,7 @@
     <string name="map_source_google_terrain">Google: Teren</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
+    <string name="map_source_nomap">Brak mapy</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
@@ -1404,6 +1442,13 @@
     <string name="cache_delete_generated_waypoints">Usuń wygenerowane punkty nawigacji</string>
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
     <string name="cache_delete_generated_waypoints_success">Usunięto wygenerowane punkty nawigacji</string>
+    <string name="cache_select_waypoint_types">Wybierz typy punktów</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">%d punkt nawigacji oznaczony jako odwiedzony</item>
+        <item quantity="few">%d punkty nawigacji oznaczone jako odwiedzone</item>
+        <item quantity="many">%d punktów nawigacji oznaczonych jako odwiedzone</item>
+        <item quantity="other">%d punktów nawigacji oznaczonych jako odwiedzone</item>
+    </plurals>
     <string name="cache_offline_store">Zapisz</string>
     <string name="cache_offline_stored_ago">Zapisano: %s</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
@@ -1480,24 +1525,23 @@
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
     <string name="cache_variables">Zmienne</string>
+    <string name="cache_variables_chip_completed_variables">Zakończone</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punkty nawigacji (%d)</string>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
-    <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Ukryj odwiedzone punkty nawigacji</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacji został skopiowany ze schowka do tej skrytki.\n\nUsunąć oryginalny punkt nawigacji?</string>
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak wskazówki</string>
     <string name="cache_logs">Dziennik</string>
     <string name="cache_latest_logs">Ostatnie wpisy</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
+    <string name="cache_logs_friends">Przyjaciele</string>
     <string name="cache_dialog_loading_details">Ładuję szczegóły skrytki…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
     <string name="cache_dialog_loading_details_status_details">Przetwarzam szczegóły</string>
     <string name="cache_dialog_loading_details_status_spoilers">Ładuję zdjęcia spoilerowe</string>
     <string name="cache_dialog_loading_details_status_logs">Ładuję wpisy</string>
     <string name="cache_dialog_loading_details_status_waypoints">Przetwarzam punkty nawigacji</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Ładuję GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Zapisuję dane</string>
     <string name="cache_dialog_loading_details_status_render">Renderuję widok</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -1553,7 +1597,6 @@
     <string name="cache_menu_copy_list">Skopiuj do innej listy</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_vote">Głosuj</string>
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
     <string name="cache_menu_log_in_browser">Utwórz wpis w dzienniku w przeglądarce</string>
     <string name="cache_menu_ignore">Ignoruj skrytkę</string>
@@ -1568,7 +1611,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1634,8 +1677,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
     <string name="cache_wherigo_start">Pobierz i zagraj w Wherigo za pomocą wewnętrznego odtwarzacza c:geo</string>
     <string name="cache_wherigo_credentials">Aby grać w Wherigo za pomocą wewnętrznego odtwarzacza w c:geo, musisz najpierw dokonać autoryzacji w serwisie geocaching.com. Dotknij przycisku po prawej stronie, aby przejść do konfiguracji.</string>
-    <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
-    <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz zainstalować Chirp Wolf.</string>
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
@@ -1689,11 +1730,12 @@
     <string name="html_style_monochrome">Monochromatyczny</string>
     <string name="html_style_source_formatted">Sformatowane źródło HTML</string>
     <string name="html_style_source">Źródło HTML</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">stopni(e)</string>
     <string name="cc_hint_minutes">minut(y)</string>
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
+    <string name="hash_symbol">#</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrytek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów nawigacji z %1$s</string>
@@ -1739,10 +1781,12 @@
     <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
     <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
     <string name="waypoint_added">Punkt dodany</string>
+    <string name="waypoint_added_current_location">Dodano punkt nawigacji (%1$s) (±%2$s)</string>
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
     <string name="waypoint_set_visited">Punkt nawigacji ustawiony jako odwiedzony</string>
+    <string name="waypoint_set_visited_types">Ustaw punkty nawigacji jako odwiedzone</string>
     <string name="waypoint_unset_visited">Punkt nawigacji ustawiony jako nieodwiedzony</string>
     <string name="waypoint_save">Zapisz</string>
     <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
@@ -1778,6 +1822,7 @@
     <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
     <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
+    <string name="variables_titletext_short">Wartości i obliczenia</string>
     <string name="variables_scanlisting">Skanuj wpis</string>
     <string name="variables_scanlisting_choosepattern_title">Wybierz znaleziony wzór</string>
     <string name="variables_scanlisting_nopatternfound">Nie znaleziono wzoru</string>
@@ -2450,7 +2495,8 @@
     <string name="preference_colorpicker_show_width">szerokość: %d</string>
     <string name="reset_to_default">Domyślny</string>
     <!-- number input -->
-    <string name="number_input_title">Wprowadź wartość między %1$s a %2$s</string>
+    <string name="number_input_title">Ustaw wartość</string>
+    <string name="number_input_range">Wprowadź wartość między %1$s a %2$s</string>
     <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
     <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
     <string name="number_input_err_format">Nieprawidłowy format numeru</string>
@@ -2479,6 +2525,7 @@
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
     <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
+    <string name="map_manual_target_route_name">Bieżąca nawigacja</string>
     <string name="map_clear_manual_targets">Wyczyść cel trasy</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
@@ -2564,7 +2611,6 @@
     <string name="add_setting_missing_type">Musisz wybrać typ preferencji</string>
     <string name="add_setting_already_exists">Preferencje o takiej nazwie już istnieją</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Obsługa plików lokalnych</string>
     <string name="localfile_title">Otwórz plik lokalny</string>
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2718,7 +2764,6 @@
     <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
     <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie „Wznów wstrzymane okno dialogowe”</string>
-    <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
     <string name="wherigo_locate_on_center">Umieść na środku</string>
     <string name="wherigo_revoke_fixed_location">Unieważnij stałą lokalizację</string>
@@ -2754,7 +2799,6 @@
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>
-    <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
     <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
@@ -2791,7 +2835,7 @@
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
-    <string name="copy">Kopiuj</string>
+    <string name="copy" tools:ignore="PrivateResource">Kopiuj</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
@@ -2827,13 +2871,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferowany rozmiar obrazu</string>
-    <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisach skrytek, dziennikach znalezień oraz i dziennikach przedmiotów podróżnych są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas ładowania i przechowywania skrytek.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Oryginalne</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisie, dzienniki znalezień i przedmioty podróżne są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas wczytywania i przechowywania skrytek. „Bez zmian” wczyta oryginalną wersję opisu/autora logowania dołączoną do strony.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Bez zmian</string>
+    <string name="settings_gc_imagesize_entry_original">Maksymalne</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Zobacz bazę danych</string>
     <string name="dbi_select_title">(Zaznacz tabelę)</string>

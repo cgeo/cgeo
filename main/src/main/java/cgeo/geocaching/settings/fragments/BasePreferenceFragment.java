@@ -41,7 +41,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // services (all)
             R.string.preference_screen_services,
             // appearance
-            R.string.pref_theme_setting,
+            R.string.pref_theme_setting, R.string.pref_quicklaunchitems,
             R.string.pref_selected_language, R.string.pref_units_imperial,
             R.string.pref_cacheListInfo,
             // cache details
@@ -50,10 +50,10 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             R.string.pref_live_compass_in_navigation_action,
             R.string.pref_rot13_hint,
             // map sources
-            R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
+            R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
             R.string.pref_persistablefolder_offlinemaps,
             R.string.pref_fakekey_info_offline_mapthemes, R.string.pref_persistablefolder_offlinemapthemes,
-            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden, R.string.pref_useLegacyMap,
+            R.string.pref_tileprovider, R.string.pref_tileprovider_hidden,
             // map content & behavior
             R.string.pref_maptrail,
             R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,

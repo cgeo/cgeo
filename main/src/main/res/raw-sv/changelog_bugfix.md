@@ -1,9 +1,23 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
-- Fix: Favorite checkbox gets reset on reentering offline log screen
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
+- Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
+- Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
+- Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Krasch när karta öppnas under vissa förutsättningar
+- Fix: Ingen karta visas om wherigo inte har några synliga zoner
+- Fix: Krasch på cachedetaljernas bildflik under vissa förutsättningar
+- Fix: Kartsökningar med ogiltiga koordinater
+- Fix: Vissa översättningar respekterar inte c:geo-interna språkinställningar
+
+##
+- Ändring: Sätt UnifiedMap som standardkarta för vem som helst (som del av vår färdplan till UnifiedMap) Du kan för tillfället byta tillbaka i "inställningar" - "kartkällor". Borttagning av äldre kartor är planerad till våren 2026 i våra ordinarie utgåvor.
+- Fix: Favorit-kryssrutan återställs när du återgår till offline-loggskärmen
+- Fix: Geofence-radie-inmatningsrutan visar decimaltal
+- Fix: Synkronisering av personliga anteckningar fungerar inte
+- Ändra: Ny ikon för GPX-spår/ruttimport i snabbinställningar för kartspår/rutt
 
 ##
 - Fix: Negativa värden i höjddiagram skalas inte
@@ -43,6 +57,14 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
+
+
+
+
+
+
+
 
 
 

@@ -139,7 +139,8 @@ public class SeekbarUI extends LinearLayout {
             if (getHasDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
-            SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue)))
+            SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title))
+                    .setMessage(TextParam.id(R.string.number_input_range, valueToShownValue(minValue), valueToShownValue(maxValue)))
                     .input(new SimpleDialog.InputOptions()
                             .setInputType(inputType)
                             .setInitialValue(currentValue)

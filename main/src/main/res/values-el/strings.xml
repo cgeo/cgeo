@@ -181,8 +181,7 @@
     <string name="log_image_titleprefix">Εικόνα</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Η μετάφραση ενδέχεται να αποτύχει σε μεγάλα κείμενα.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
@@ -685,9 +684,7 @@
     <string name="init_summary_oc_uk">Φόρτωση κρυπτών από opencaching.uk</string>
     <string name="init_oc_uk_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.uk, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
-    <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
     <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
-    <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
     <string name="init_login_popup_ok">Επιτυχής σύνδεση</string>
@@ -729,8 +726,6 @@
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
     <string name="init_signature_template_geocode">Γεωκωδικός</string>
-    <string name="init_ratingwanted">Βαθμολογία GCvote</string>
-    <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
     <string name="init_summary_friends_and_own_logs_wanted">Εμφάνιση επιπλέον σελίδας ημερολογίου για αρχεία καταγραφής φίλων και δικών μου</string>
     <string name="init_openlastdetailspage">Τελευταία καταχώρηση</string>
@@ -864,7 +859,6 @@
     <string name="init_dataDir">Επιλέξτε φάκελο</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
     <string name="init_maptrail">Προβολή ιστορικού ιχνών</string>
-    <string name="init_maptrail_length">Μέγιστο μήκος ιστορικών διαδρομών</string>
     <string name="init_maptrail_length_summary">Ορίστε το μέγιστο μήκος των ιστορικών διαδρομών (θα επιβάλλεται σε κάθε εκκίνηση του c:geo). Η προεπιλεγμένη τιμή είναι 700 - ρυθμίστε την ανάλογα με την διαθέσιμη μνήμη.</string>
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
@@ -1139,9 +1133,7 @@
     <string name="cache_variables">Μεταβλητές</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
     <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
-    <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
@@ -1154,7 +1146,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Φόρτωση εικόνων spoiler</string>
     <string name="cache_dialog_loading_details_status_logs">Φόρτωση καταγραφών</string>
     <string name="cache_dialog_loading_details_status_waypoints">Επεξεργασία σημείων αναφοράς</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Φόρτωση του GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Προσωρινή αποθήκευση δεδομένων</string>
     <string name="cache_dialog_loading_details_status_render">Εμφάνιση σελίδας</string>
     <string name="cache_dialog_offline_save_title">Εκτός σύνδεσης</string>
@@ -1202,7 +1193,6 @@
     <string name="cache_menu_copy_list">Αντιγραφή σε διαφορετική λίστα</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Σε σύνδεση)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (χωρίς σύνδεση)</string>
-    <string name="cache_menu_vote">Ψηφίστε</string>
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_log_in_browser">Συνδεθείτε στο πρόγραμμα περιήγησης</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
@@ -1212,7 +1202,6 @@
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
-    <string name="cache_status_attended">Συμμετείχα</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
@@ -1264,8 +1253,6 @@
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
-    <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
-    <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να εγκαταστησετε το Chirp Wolf.</string>
     <string name="cache_alc_start">Ανοίξτε το Adventure Lab, για να αρχίσετε να παίζετε αυτή την περιπέτεια</string>
@@ -1291,7 +1278,7 @@
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">Μοίρες</string>
     <string name="cc_hint_minutes">Λεπτά</string>
     <string name="cc_hint_seconds">Δευτερόλεπτα</string>
@@ -1472,7 +1459,6 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
-    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -1483,7 +1469,6 @@
     <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_finder">Βρέθηκε από</string>
-    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
@@ -1945,7 +1930,6 @@
     <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
     <string name="reset_to_default">Προεπιλογή</string>
     <!-- number input -->
-    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
     <string name="number_input_err_boundarymax">Δώσατε πολύ μεγάλη - Μειώστε στην Μέγιστη επιτρεπτή</string>
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
@@ -2021,7 +2005,6 @@
     <string name="add_setting_missing_type">Πρέπει να επιλέξετε έναν τύπο προτίμησης</string>
     <string name="add_setting_already_exists">Υπάρχει ήδη προτίμηση με το ίδιο όνομα</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo διαχειριστής τοπικού αρχείου</string>
     <string name="localfile_title">Άνοιγμα τοπικού αρχείου</string>
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2163,12 +2146,6 @@
     <string name="smiley_question">Ερώτηση</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Αρχικό</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

@@ -584,10 +584,6 @@ public class Waypoint implements INamedGeoCoordinate {
         return false;
     }
 
-    public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getFullGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
-    }
-
     public String getUserNote() {
         return userNote;
     }

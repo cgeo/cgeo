@@ -177,8 +177,7 @@
     <string name="log_image_titleprefix">Billede</string>
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Oversættelse af lange tekster kan fejle.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login-side kan ikke indlæses</string>
@@ -584,9 +583,7 @@
     <string name="init_summary_oc_uk">Indlæs cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencache.uk.</string>
     <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
-    <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
     <string name="err_vote_send_rating">Fejl under afsendelse af bedømmelse.</string>
-    <string name="vote_sent">Bedømmelse blev afsendt</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_ok">Login OK</string>
@@ -614,8 +611,6 @@
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
-    <string name="init_ratingwanted">GCVote vurdering</string>
-    <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
     <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -715,7 +710,6 @@
     <string name="init_gpx_importexportdir">GPX mappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
-    <string name="init_maptrail_length">Spor max. længde</string>
     <string name="init_maptrail_length_summary">Angiv sporets max. længde (ændring kræver genstart af c:geo). Standardværdien er 700 punkter - tilpas værdien men øje for mængden af ledig hukommelse.</string>
     <string name="init_summary_maptrail">Vis dit spor på kortet</string>
     <string name="init_circlecolor">Cirkel linjefarve</string>
@@ -900,7 +894,6 @@
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Rutepunkter</string>
-    <string name="cache_waypoints_add_currentLocation">Tilføj nuværende position</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
     <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
     <string name="cache_hint">Hint</string>
@@ -913,7 +906,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Loader spoilerbilleder</string>
     <string name="cache_dialog_loading_details_status_logs">Loader logbeskeder</string>
     <string name="cache_dialog_loading_details_status_waypoints">Bearbejder rutepunkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Loader GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Lagrer data</string>
     <string name="cache_dialog_loading_details_status_render">Tegner side</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -951,7 +943,6 @@
     <string name="cache_menu_copy_list">Kopiér til anden liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_vote">Bedøm</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
     <string name="cache_menu_ignore">Ignorér cache</string>
     <string name="cache_log_menu_decrypt">Dekryptér/kryptér</string>
@@ -959,7 +950,6 @@
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log gemt</string>
-    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
     <string name="cache_status_archived">Arkiveret</string>
@@ -997,8 +987,6 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Fra %s</string>
-    <string name="cache_whereyougo_start">Hent og start denne cartridge med WhereYouGo</string>
-    <string name="cache_whereyougo_install">Installér WhereYouGo for at hente og starte denne cartridge</string>
     <string name="context_share_as_text">Del tekst</string>
     <string name="context_share_as_link">Del link</string>
     <string name="create_internal_cache">Opret brugerdefineret cache</string>
@@ -1011,7 +999,7 @@
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
@@ -1099,7 +1087,6 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
-    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
@@ -1108,7 +1095,6 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_finder">Fundet af</string>
-    <string name="search_filter">Filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Åbn destinationen i c:geo</string>
     <string name="search_address_started">Søger efter steder</string>
@@ -1517,7 +1503,6 @@
     <string name="preference_colorpicker_select_opaqueness">Vælg uigennemsigtighed</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Indtast en værdi mellem %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Den indtastede værdi er for lav og er blevet erstattet af minimumsværdien</string>
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
@@ -1577,7 +1562,6 @@
     <string name="add_setting_missing_type">Du skal vælge en præferencetype</string>
     <string name="add_setting_already_exists">Der findes allerede en præference med dette navn</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">Intern filhåndtering</string>
     <string name="localfile_title">Åbn en lokal fil</string>
     <string name="localfile_cannot_handle">Fejl ved læsning af fil eller filen har et ukendt format.</string>
     <!-- ReceiveDownloadActivity -->
@@ -1638,12 +1622,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Oprindeligt</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

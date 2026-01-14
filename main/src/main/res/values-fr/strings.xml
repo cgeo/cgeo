@@ -192,6 +192,7 @@
     <string name="log_oc_team_comment">Commentaire de l\'équipe OC</string>
     <string name="log_your_saved_log">Visite enregistrée hors-ligne</string>
     <string name="log_empty_logbook">Le carnet de visites de cette cache est vide.</string>
+    <string name="log_empty_logbook_filtered">Les filtres sélectionnés masquent tous les logs. Sélectionnez au moins une option.</string>
     <string name="log_image_selectfromstorage_tooltip">Sélectionner une image depuis le stockage</string>
     <string name="log_image_camera_tooltip">Prendre une photo avec l\'appareil photo</string>
     <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis images éxitantes</string>
@@ -216,15 +217,17 @@
     <string name="log_image_titleprefix">Image</string>
     <string name="log_delete_confirm">Voulez-vous vraiment supprimer le log de type \'%1$s\' par l\'auteur \'%2$s\' en date du \'%3$s \' ?</string>
     <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' avec en date du \'%2$s \' ?</string>
+    <string name="log_share_prefix_found">J\'ai trouvé %1$s (%2$s):\n\n</string>
+    <string name="log_share_prefix_dnf">Je n\'ai pas pu trouver %1$s (%2$s) :\n\n</string>
+    <string name="log_share_prefix_note">J\'ai laissé une note sur %1$s (%2$s) :\n\n</string>
+    <string name="log_share_prefix_maintenance">J\'ai signalé que la maintenance était nécessaire pour %1$s (%2$s) :\n\n</string>
+    <string name="log_share_prefix_archive">Je pense que %1$s (%2$s) devrait être archivé :\n\n</string>
+    <string name="log_share_prefix_default">Mon journal pour %1$s (%2$s):\n\n</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
     <!-- Contacts -->
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
     <string name="contact_multiple_matches">Contact : correspondances multiples</string>
-    <!-- translation -->
-    <string name="translate">Traduire avec l\'application Google Translate</string>
-    <string name="translate_to_sys_lang">Traduire en %s (Web)</string>
-    <string name="translate_to_english">Traduire en Anglais (Web)</string>
-    <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
@@ -255,6 +258,7 @@
     <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
     <string name="err_detail_premium_log_found">Cette géocache est uniquement disponible pour les membres premium de geocaching.com. Les informations de la géocache ne peuvent donc pas être affichées.\n\nCependant, si vous avez déjà trouvé cette géocache, vous pouvez enregistrer votre visite ici.</string>
     <string name="err_watchlist_failed">Échec lors de la modification de votre liste de suivi.</string>
+    <string name="err_watchlist_failed_geocodes">La modification de votre liste de suivi a échoué pour les géocodes : %s</string>
     <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
     <string name="err_auth_initialize">c:geo a échoué dans la demande d\'autorisation.</string>
     <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
@@ -309,6 +313,8 @@
     <string name="warn_notloggedin_long">Non (encore) connecté. La carte en temps réel n\'affichera que les caches stockées localement et les fonctions en ligne ne fonctionneront pas.\n\nSoit il n\'y a pas de connexion réseau, soit il y a un problème de serveur ou bien vous devez (re)configurer vos services geocaching.\n\nSouhaitez-vous configurer les services maintenant ?</string>
     <string name="err_read_pocket_query_list">Erreur de lecture de la liste des Pocket Queries.</string>
     <string name="err_read_bookmark_list">Erreur pendant la lecture de la liste des favoris.</string>
+    <string name="err_bookmark_list_overfull">Trop de caches</string>
+    <string name="err_bookmark_list_overfull_description">Les listes de favoris peuvent stocker jusqu\'à 1000 caches, or vous essayez d\'en ajouter davantage à la liste.\n\nVoulez-vous continuer et ajouter seulement autant de caches que la liste peut en contenir ?</string>
     <string name="info_log_posted">Envoi de la visite réussi.</string>
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
     <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
@@ -336,6 +342,7 @@
     <string name="dont_show_again">Ne plus afficher</string>
     <string name="tap_icon_more_info">Appuyez sur l\'icône pour plus d\'informations</string>
     <string name="use_slider_adjust_value">Utiliser le curseur pour ajuster la valeur</string>
+    <string name="snackbar_action_share">Partager</string>
     <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
     <string name="switch_to_mf">Votre version de Google Play Services est obsolète. Voulez-vous basculer vers les cartes Mapsforge ?</string>
     <string name="switched_to_mf">Carte par défaut basculée à Mapsforge. Merci de redémarrer votre carte.</string>
@@ -356,9 +363,13 @@
     <string name="translator_model">Modèle de traduction</string>
     <string name="translator_language_select">Sélectionner la langue source</string>
     <string name="translator_language_target_select">Sélectionner la langue cible</string>
+    <string name="translator_language_unsupported">La langue (%s) n\'est pas prise en charge pour la traduction. Appuyez pour sélectionner la langue source.</string>
+    <string name="translator_language_unknown">Impossible d\'identifier la langue. Appuyez pour sélectionner la langue source.</string>
+    <string name="translator_language_detected">Traduire depuis «%s». Appuyez pour sélectionner la langue source.</string>
     <string name="translator_target_language">Traduire en \"%s\"</string>
     <string name="translator_translation_error">Échec de la traduction du texte : %s</string>
     <string name="translator_translation_initerror">Impossible d\'initialiser le traducteur</string>
+    <string name="translator_translation_success">Traduit de \"%s\", appuyez sur le bouton pour restaurer l\'original</string>
     <string name="crash_activity_title">Oups ! c:geo a planté !</string>
     <string name="crash_activity_report">signaler un problème</string>
     <!-- location service -->
@@ -465,6 +476,11 @@
     <string name="caches_upload_bookmarklist">Ajouter aux favoris</string>
     <string name="caches_upload_bookmarklist_all">Tout ajouter à la liste de favoris</string>
     <string name="caches_upload_bookmarklist_selected">Ajouter la sélection à la liste de favoris</string>
+    <string name="caches_watch_all">Ajouter tout à la liste de suivi</string>
+    <string name="caches_unwatch_all">Retirer tout de la liste de suivi</string>
+    <string name="caches_watch_selected">Ajouter la sélection à la liste de suivi</string>
+    <string name="caches_unwatch_selected">Retirer la sélection de la liste de suivi</string>
+    <string name="watchlist_background_started">La mise à jour de la Watchlist a commencé en arrière-plan</string>
     <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
     <string name="caches_upload_modifiedcoords_warning">Voulez-vous télécharger les coordonnées modifiées pour toutes les caches (sélectionnées) et écraser les coordonnées existantes sur le serveur ? Cela ne peut pas être annulé.</string>
     <string name="caches_upload_allcoords">Envoyer les coordonnées de toutes les caches</string>
@@ -873,9 +889,7 @@
     <string name="init_summary_oc_uk">Charger les caches depuis opencache.uk</string>
     <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencache.uk pour rechercher des caches et accéder / filtrer vos caches trouvées.</string>
     <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
-    <string name="init_gcvote_password_description">Afin de pouvoir attribuer un vote à une cache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
     <string name="err_vote_send_rating">Erreur à l’envoi de l\'évaluation.</string>
-    <string name="vote_sent">Évaluation envoyée</string>
     <string name="init_login_popup">Authentification</string>
     <string name="init_login_popup_working">Connexion…</string>
     <string name="init_login_popup_ok">Connecté</string>
@@ -920,8 +934,6 @@
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Emplacement</string>
     <string name="init_signature_template_geocode">Géocode</string>
-    <string name="init_ratingwanted">Vote GCvote.com</string>
-    <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
     <string name="init_summary_bettercacher">Charger le niveau de cache et les catégories de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
@@ -996,6 +1008,8 @@
     <string name="init_summary_cacheListInfo">Sélectionnez les informations supplémentaires à afficher pour chaque cache dans les listes de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
+    <string name="init_live_compass_in_navigation_action">Afficher la direction dans la vue détaillée de la cache</string>
+    <string name="init_summary_live_compass_in_navigation_action">Afficher une flèche avec la direction de la boussole pour les caches dans leur vue détaillée</string>
     <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
     <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
     <string name="init_custombnitem">Élément de menu personnalisé</string>
@@ -1093,7 +1107,7 @@
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
     <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
-    <string name="settings_info_hillshading">Hillshading est une technique permettant de créer des cartes topographiques de relief en ajoutant un effet d\'éclairage à la carte pour indiquer les changements d\'altitude. Les pentes seront assombries / éclairées pour générer un effet 3D.\nLes données de Hillshading peuvent être téléchargées à partir du menu de débordement de cartes.\nNon compatible avec la variante UnifiedMap VMC.</string>
+    <string name="settings_info_hillshading">Hillshading (l\'ombrage du relief) est une technique permettant de créer des cartes topographiques de relief en ajoutant un effet d\'éclairage à la carte pour indiquer les changements d\'altitude. Les pentes seront assombries ou éclairées pour générer un effet 3D.\nLes données de Hillshading peuvent être téléchargées à partir du menu de débordement de cartes.\nNon compatible avec la variante UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Ombrage du relief</string>
     <string name="init_hillshading_hq">Ombrage de haute qualité</string>
     <string name="init_summary_hillshading_hq">Surcouche d\'ombrage du relief plus détaillée, mais ~50%% rendu plus lent lors du zoom arrière</string>
@@ -1109,7 +1123,6 @@
     <string name="init_dataDir">Sélectionnez un dossier de données</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher l\'historique du parcours</string>
-    <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
     <string name="init_maptrail_length_summary">Définir la longueur maximale de l\'historique (obligatoire à chaque démarrage de c:geo). La valeur par défaut est de 700 - à ajuster en fonction de la mémoire disponible.</string>
     <string name="init_summary_maptrail">Lorsqu\'il est activé (et que le GPS est activé), c:geo enregistre l\'historique de vos mouvements en tant que piste et l\'affiche sur la carte.</string>
     <string name="init_trailappearance">Apparence de l\'historique du parcours</string>
@@ -1226,6 +1239,7 @@
     <string name="category_unifiedMap">Carte unifiée</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
+    <string name="gui_test_title">Écran de test de l\'interface</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notification de proximité</string>
     <string name="init_proximityNotificationGeneral">Notification générale de proximité sur la carte</string>
@@ -1447,24 +1461,23 @@
     <string name="cache_advanced">Avancé</string>
     <string name="cache_waypoints">Points de passage</string>
     <string name="cache_variables">Calculateur</string>
+    <string name="cache_variables_chip_completed_variables">Terminé</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Points de passage (%d)</string>
     <string name="cache_waypoints_add">Ajouter un point de passage</string>
-    <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Masquer les points de passage visités</string>
     <string name="cache_waypoints_remove_original_waypoint">Point de passage copié depuis le presse-papiers vers cette cache.\n\nSouhaitez-vous supprimer le point de passage d\'origine ?</string>
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
     <string name="cache_latest_logs">Visites récentes</string>
     <string name="cache_logs_friends_and_own">Vous / Amis</string>
+    <string name="cache_logs_friends">Amis</string>
     <string name="cache_dialog_loading_details">Chargement des détails…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
     <string name="cache_dialog_loading_details_status_details">Analyse</string>
     <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
     <string name="cache_dialog_loading_details_status_logs">Chargement des visites</string>
     <string name="cache_dialog_loading_details_status_waypoints">Traitement des points de passage</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
     <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
     <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
     <string name="cache_dialog_offline_save_title">Hors-ligne</string>
@@ -1520,7 +1533,6 @@
     <string name="cache_menu_copy_list">Copier dans une autre liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (en ligne)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (hors ligne)</string>
-    <string name="cache_menu_vote">Voter</string>
     <string name="cache_menu_challenge_checker">Chercher le vérificateur de défis</string>
     <string name="cache_menu_log_in_browser">Ouvrir dans un navigateur</string>
     <string name="cache_menu_ignore">Ignorer la cache</string>
@@ -1601,8 +1613,6 @@
     <string name="cache_wherigo_cartridge_not_downloaded">%s - non téléchargés</string>
     <string name="cache_wherigo_start">Télécharger et jouer cette cartouche Wherigo en utilisant le lecteur interne de c:geo</string>
     <string name="cache_wherigo_credentials">Afin de jouer à cette cartouche Wherigo en utilisant le joueur interne de c:go, vous devez d\'abord autoriser le service geocaching.com. Appuyez sur le bouton à droite pour accéder à la configuration.</string>
-    <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
-    <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_chirpwolf_start">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez utiliser l\'application Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez installer l\'application Chirp Wolf.</string>
     <string name="cache_alc_start">Ouvrez l\'application Adventure Lab pour jouer à cette aventure</string>
@@ -1656,7 +1666,7 @@
     <string name="html_style_monochrome">Monochrome</string>
     <string name="html_style_source_formatted">Code source HTML formaté</string>
     <string name="html_style_source">Source HTML</string>
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">degrés</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">secondes</string>
@@ -1743,6 +1753,7 @@
     <string name="projection_type_offset_hint_longitude">Décalage de longitude en Micro-Minutes</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
+    <string name="variables_titletext_short">Valeurs et calculs</string>
     <string name="variables_scanlisting">Scanner la liste</string>
     <string name="variables_scanlisting_choosepattern_title">Choisir le modèle trouvé</string>
     <string name="variables_scanlisting_nopatternfound">Aucun motif trouvé</string>
@@ -2389,7 +2400,6 @@
     <string name="preference_colorpicker_show_width">largeur : %d</string>
     <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
-    <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
     <string name="number_input_err_boundarymax">La valeur saisie est trop grande - réinitialisée à la valeur maximale</string>
     <string name="number_input_err_format">Format de nombre non valide</string>
@@ -2418,6 +2428,7 @@
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
     <string name="map_disable_autotarget_individual_route">\"Définir le départ de l\'itinéraire comme cible\" désactivé</string>
+    <string name="map_manual_target_route_name">Navigation actuelle</string>
     <string name="map_clear_manual_targets">Effacer la cible du routage</string>
     <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
@@ -2501,7 +2512,6 @@
     <string name="add_setting_missing_type">Vous devez sélectionner un type de préférence</string>
     <string name="add_setting_already_exists">Une préférence avec ce nom existe déjà</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2653,7 +2663,6 @@
     <string name="wherigo_sound_unmute">Rétablir le son</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprendre le dialogue en pause</string>
     <string name="wherigo_dialog_pause_info">Reprendre la boîte de dialogue dans Wherigo Player en appuyant sur \"Reprendre la fenêtre en pause\"</string>
-    <string name="wherigo_no_game_running">Aucune cartouche wherigo n\'est en cours d\'exécution</string>
     <string name="wherigo_currently_playing">En cours de jeu</string>
     <string name="wherigo_locate_on_center">Localiser au centre</string>
     <string name="wherigo_revoke_fixed_location">Révoquer l\'emplacement fixe</string>
@@ -2689,7 +2698,6 @@
     <string name="wherigo_error_title">Rapport de Problème Wherigo</string>
     <string name="wherigo_error_game_noerror">Aucune erreur signalée par le Moteur Wherigo.</string>
     <string name="wherigo_error_game_error">Erreur signalée par Wherigo Engine :\n\n```\n%1$s\n```\nVous pouvez contacter l\'auteur de la cartouche [here](%2$s)</string>
-    <string name="wherigo_error_email">Rapport d\'erreur Wherigo\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_error_toast">Le moteur Wherigo a signalé une erreur. Ouvrez la boîte de dialogue des bogues pour plus de détails.</string>
     <string name="wherigo_confirm_stop_running_game_title">Arrêter l\'exécution de la cartouche Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Une partie est en cours d\'exécution pour \"%s\". Voulez-vous arrêter cette partie?</string>
@@ -2726,7 +2734,7 @@
     <string name="close">Fermer</string>
     <string name="delete">Supprimer</string>
     <string name="play">Jouer</string>
-    <string name="copy">Copier</string>
+    <string name="copy" tools:ignore="PrivateResource">Copier</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Tout sélectionner</string>
     <string name="multiselect_selectvisible">Sélectionner les éléments visibles</string>
@@ -2760,13 +2768,13 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Taille d\'image préférée</string>
-    <string name="settings_gc_imagesize_summary">Les images en provenance de Geocaching.com dans la liste, les logs et les objets voyageurs sont disponibles en différentes tailles. Sélectionnez la taille à charger lors du chargement et du stockage d\'une cache.</string>
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Originale</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
+    <string name="settings_gc_imagesize_summary">Les images de Geocaching.com dans la liste, les logs et les objets voyageurs sont disponibles en différentes tailles. Sélectionnez la taille à charger lors du chargement et du stockage d\'une cache. \"Inchangé\" chargera la version de l\'auteur de la liste/log inclus dans la page.</string>
+    <string name="settings_gc_imagesize_entry_unchanged">Inchangé</string>
+    <string name="settings_gc_imagesize_entry_original">Maximum</string>
+    <string name="settings_gc_imagesize_entry_large">640px</string>
+    <string name="settings_gc_imagesize_entry_diplay">320px</string>
+    <string name="settings_gc_imagesize_entry_small">120px</string>
+    <string name="settings_gc_imagesize_entry_thumb">100px</string>
     <!-- db inspection -->
     <string name="view_database">Voir la base de données</string>
     <string name="dbi_select_title">(Sélectionnez la table)</string>

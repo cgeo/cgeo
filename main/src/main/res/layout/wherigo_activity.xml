@@ -13,21 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <!-- Experimental warning -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/experimental_warning"
-            android:textSize="@dimen/textSize_headingSecondary"
-            android:textColor="@color/archived_cache_color"
-            android:background="@drawable/mark_gray"
-            android:autoLink="web"
-            android:textIsSelectable="true"
-            tools:ignore="HardcodedText"
-            android:text="Beta version"/>
-
         <cgeo.geocaching.ui.SectionHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

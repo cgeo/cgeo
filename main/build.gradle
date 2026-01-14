@@ -1,5 +1,4 @@
 import com.getkeepsafe.dexcount.OutputFormat
-import org.apache.tools.ant.filters.ReplaceTokens
 
 import javax.inject.Inject
 
@@ -19,36 +18,36 @@ Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class
 String commitIdShort = gitCommitIdProvider.get()
 
 android {
-    namespace 'cgeo.geocaching'
-    compileSdk 36
+    namespace = 'cgeo.geocaching'
+    compileSdk = 36
 
     compileOptions {
         // https://developer.android.com/studio/write/java8-support
         // enable Java 8 APIs like Streams on older Android versions
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
         // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        minSdk 26
-        targetSdk 35
+        minSdk = 26
+        targetSdk = 35
 
-        versionName versionNameFromDate()
-        versionCode versionCodeFromDate(0)
+        versionName = versionNameFromDate()
+        versionCode = versionCodeFromDate(0)
 
         // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
         applicationId = "cgeo.geocaching"
 
         // NOTE: must match the package in the test directory and must be different from the app package
-        testApplicationId applicationId + ".test"
+        testApplicationId = applicationId + ".test"
 
         //testHandlingProfiling true
-        testFunctionalTest true
+        testFunctionalTest = true
 
         // set the default test runner to be used by IDE and command line
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         base.archivesName = "cgeo"
@@ -69,26 +68,26 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
         // Enable aidl, some modules in this project appear to be using AIDL
-        aidl true
+        aidl = true
         // Enable buildConfig build feature
-        buildConfig true
+        buildConfig = true
     }
 
     buildTypes {
         debug {
             // debug build name contains git commit for better reproduction of bugs
-            versionNameSuffix "-$commitIdShort developer build"
+            versionNameSuffix = "-$commitIdShort developer build"
 
-            applicationIdSuffix ".developer"
+            applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            enableUnitTestCoverage isContinuousIntegrationServer()
-            enableAndroidTestCoverage isContinuousIntegrationServer()
+            enableUnitTestCoverage = isContinuousIntegrationServer()
+            enableAndroidTestCoverage = isContinuousIntegrationServer()
 
             // replace in AndroidManifest.xml
             manifestPlaceholders = [
@@ -98,8 +97,8 @@ android {
         }
         nightly {
             String nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-$commitIdShort"
-            signingConfig signingConfigs.release
+            versionNameSuffix = "-$nightlyName-$commitIdShort"
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -109,8 +108,8 @@ android {
         }
         rc {
             String rcName = System.getenv('RC') // RC, RC1, RC2 ...
-            versionNameSuffix "-$rcName"
-            signingConfig signingConfigs.release
+            versionNameSuffix = "-$rcName"
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -119,7 +118,7 @@ android {
             ]
         }
         legacy {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
             manifestPlaceholders = [
@@ -128,7 +127,7 @@ android {
             ]
         }
         release {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
             manifestPlaceholders = [
                 appIcon:      "@mipmap/ic_launcher",
                 appIconRound: "@mipmap/ic_launcher_round"
@@ -140,17 +139,17 @@ android {
         // as it affects the build speed, do skip some steps for debug builds
         if (buildType.name != 'debug') {
             // enable proguard and remove unused code
-            minifyEnabled true
+            minifyEnabled = true
 
             // remove unused resources in addition to unused code
-            shrinkResources true
+            shrinkResources = true
         }
 
         // proguard rules
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
     }
 
-    testBuildType "debug" //the default BuildType
+    testBuildType = "debug" //the default BuildType
 
     sourceSets {
         // application sources in source set "main"
@@ -184,20 +183,19 @@ android {
     }
 
     testOptions {
-        Provider<Directory> output = layout.buildDirectory.dir("test-results")
-        resultsDir = output.get().asFile
+        resultsDir = layout.buildDirectory.get().toString() + '/test-results'
     }
 
     lint {
         // we do not accept lint errors when building
-        abortOnError true
+        abortOnError = true
         // Warnings shall not fail build
-        warningsAsErrors false
+        warningsAsErrors = false
 
         // abort release builds in case of FATAL errors
-        checkReleaseBuilds true
+        checkReleaseBuilds = true
 
-        absolutePaths false
+        absolutePaths = false
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
@@ -209,7 +207,7 @@ android {
 
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
-        checkDependencies true
+        checkDependencies = true
     }
 
     packagingOptions {
@@ -256,17 +254,17 @@ android {
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
 
         nojit {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
         }
 
         foss {
-            dimension "javaCompilerTime"
+            dimension = "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
@@ -313,33 +311,15 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     // Apache Commons
-    implementation 'org.apache.commons:commons-collections4:4.4'
-
-    // commons.compress 1.21+ relies on java.nio which is only supported on API26+
-    // See https://github.com/cgeo/cgeo/issues/13730 / 13731
-    //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-compress:1.20'
-
-    // commons-lang3 3.12.0 uses StringJoiner which is first contained in Android API24
-    // See https://github.com/cgeo/cgeo/issues/12577
-    //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-lang3:3.11'
-
-    // commons-text 1.10.0 uses commons-lang3 3.12.0 and commons-io 2.11.0, wait for updating both
-    //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-text:1.9'
-
-    // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
-    // could be replaced by Storage Access Framework
-    //noinspection GradleDependency
-    implementation 'commons-io:commons-io:2.5'
+    implementation 'org.apache.commons:commons-collections4:4.5.0'
+    implementation 'org.apache.commons:commons-compress:1.28.0'
+    implementation 'org.apache.commons:commons-lang3:3.20.0'
+    implementation 'org.apache.commons:commons-text:1.15.0'
+    implementation 'commons-io:commons-io:2.21.0'
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation('com.github.k3b:k3b-geoHelper:v1.1.12') {
-        // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
-        exclude group: 'commons-io', module: 'commons-io'
-    }
+    implementation 'com.github.k3b:k3b-geoHelper:v1.1.12'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     String assertJVersion = '2.9.1'
@@ -366,7 +346,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.21.1'
+    implementation 'org.jsoup:jsoup:1.22.1'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
@@ -461,18 +441,18 @@ dependencies {
     configurations.all*.exclude module: "play-services-measurement"
 
     // Support Library Design
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.13.0'
 
     // ProcessPhoenix, reliable process restart
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.11'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.12'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
     constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.21") {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0") {
             because 'align all versions of kotlin transitive dependencies'
         }
     }
@@ -486,7 +466,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.10.5"
+    implementation "androidx.work:work-runtime:2.11.0"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.7.1'
@@ -520,11 +500,11 @@ dependencies {
 
     // Support Annotations. use same version for the main app and the test app
     String annotationVersion = '1.9.1'
-    implementation "androidx.annotation:annotation:$annotationVersion"
+    implementation "androidx.annotation:annotation:annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
-    androidTestImplementation 'androidx.test:core:1.6.1'
+    androidTestImplementation 'androidx.test:core:1.7.0'
     androidTestImplementation 'androidx.test.ext:junit:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
@@ -579,21 +559,36 @@ project.afterEvaluate {
 tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
+
+    // Capture file references as task properties to support configuration cache
+    def keysFileRef = keysFile
+    def privatePropertiesFileRef = privatePropertiesFile
+    def templatesFileRef = templatesFile
+
     doFirst {
-        if (!keysFile.exists()) {
+        if (!keysFileRef.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
-            if (privatePropertiesFile.exists()) {
-                copy {
-                    from templatesFile
-                    into keysDirectory
-                    Properties properties = new Properties()
-                    privatePropertiesFile.withInputStream {
-                        properties.load(it)
-                    }
-                    filter(ReplaceTokens, tokens: properties)
-                    filter { it.replaceAll("@.+?@", "") }
+            // do NOT use copy task because this creates problems with gradle configuration cache
+            final String templateContent = templatesFileRef.text
+            String processedContent = templateContent
+            if (privatePropertiesFileRef.exists()) {
+                final Properties properties = new Properties()
+                privatePropertiesFileRef.withInputStream {
+                    properties.load(it)
                 }
+                // Replace tokens from properties
+                properties.each { key, value ->
+                    processedContent = processedContent.replace("@${key}@", value)
+                }
+                println("Created keys.xml here: " + keysFileRef.absolutePath)
+            } else {
+                println("WARNING: " + privatePropertiesFileRef.absolutePath + " does not exist, creating an empty keys.xml here: " + keysFileRef.absolutePath)
             }
+            // Remove any remaining unreplaced tokens
+            processedContent = processedContent.replaceAll("@.+?@", "")
+            // Write to destination
+            keysFileRef.parentFile.mkdirs()
+            keysFileRef.text = processedContent
         }
         if (!keysFile.exists()) {
             throw new InvalidUserDataException("You must provide API keys for c:geo to compile successfully. Please read the 'API keys' section in the README.md file for further details.")
@@ -644,8 +639,8 @@ static boolean isContinuousIntegrationServer() {
 android.applicationVariants.configureEach { variant ->
     if (variant.installProvider) {
         tasks.register("run${variant.name.capitalize()}") {
-            group 'cgeo'
-            description "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
+            group = 'cgeo'
+            description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
             dependsOn tasks.named(variant.installProvider.name)
 
             doFirst {
@@ -671,8 +666,8 @@ android.applicationVariants.configureEach { variant ->
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
 // This uses eager task creation API.
 tasks.register('testDebug') {
-    group 'verification'
-    description "Tests the debug build both with device-dependent and device-independent tests."
+    group = 'verification'
+    description = "Tests the debug build both with device-dependent and device-independent tests."
 
     dependsOn 'testBasicDebugUnitTest', 'connectedBasicDebugAndroidTest'
 }
@@ -686,13 +681,13 @@ if (privatePropertiesFile.exists()) {
     properties.load(new FileInputStream(privatePropertiesFile))
     android.signingConfigs {
         release {
-            storeFile file(properties.getProperty('key.store'))
-            storePassword properties.getProperty('key.store.password')
-            keyAlias properties.getProperty('key.alias')
-            keyPassword properties.getProperty('key.alias.password')
+            storeFile = file(properties.getProperty('key.store'))
+            storePassword = properties.getProperty('key.store.password')
+            keyAlias = properties.getProperty('key.alias')
+            keyPassword = properties.getProperty('key.alias.password')
         }
     }
-    android.buildTypes.release.signingConfig android.signingConfigs.release
+    android.buildTypes.release.signingConfig = android.signingConfigs.release
 }
 
 // check existence of private properties, show an error message
@@ -791,12 +786,12 @@ checkstyle {
 }
 
 tasks.register('checkstyle', Checkstyle) {
-    group 'verification'
-    description 'Check code standard'
+    group = 'verification'
+    description = 'Check code standard'
 
-    source 'src/main/java'
-    source 'src/test/java'
-    source 'src/androidTest/java'
+    source = 'src/main/java'
+    source = 'src/test/java'
+    source = 'src/androidTest/java'
     include '**/*.java'
 
     classpath = files()
@@ -814,21 +809,21 @@ apply plugin: 'pmd'
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
     consoleOutput = true
-    toolVersion = "7.16.0"
+    toolVersion = "6.55.0"
     rulesMinimumPriority = 5
-    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
+    ruleSets = [] // use ruleSetFiles instead
 }
 
 tasks.register('pmd', Pmd) {
-    group 'verification'
-    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    group = 'verification'
+    description = 'PMD Static Source Code Analyzer'
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
 
     reports {
-        xml.required.set true
-        html.required.set true
+        xml.required = true
+        html.required = true
     }
 }

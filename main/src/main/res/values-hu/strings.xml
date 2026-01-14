@@ -178,8 +178,7 @@
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">A fordítás sikertelen lehet hosszú szövegeknél.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
@@ -488,7 +487,6 @@
     <string name="init_summary_oc_uk">Ládák letöltése az opencache.uk-ról</string>
     <string name="init_oc_uk_description">A c:geo hitelesítése az opencache.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
     <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
-    <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
     <string name="init_login_popup">Bejelentkezés</string>
     <string name="init_login_popup_working">Bejelentkezés a geocaching.com-ra…</string>
     <string name="init_login_popup_ok">Bejelentkezés ok</string>
@@ -514,8 +512,6 @@
     <string name="init_signature_template_log">Log szöveg</string>
     <string name="init_signature_template_size">Méret</string>
     <string name="init_signature_template_type">Típus</string>
-    <string name="init_ratingwanted">GCVote értékelés</string>
-    <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése</string>
     <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
     <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
@@ -733,7 +729,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Spoiler képek betöltése</string>
     <string name="cache_dialog_loading_details_status_logs">Logok betöltése</string>
     <string name="cache_dialog_loading_details_status_waypoints">Útpontok feldolgozása</string>
-    <string name="cache_dialog_loading_details_status_gcvote">A GCVote betöltése</string>
     <string name="cache_dialog_loading_details_status_cache">Láda adatai</string>
     <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
     <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
@@ -762,14 +757,12 @@
     <string name="cache_menu_share">Láda megosztása</string>
     <string name="cache_menu_move_list">Mozgatás másik listára</string>
     <string name="cache_menu_copy_list">Másolás másik listára</string>
-    <string name="cache_menu_vote">Értékelés</string>
     <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése</string>
     <string name="cache_menu_ignore">Láda mellőzése</string>
     <string name="ignore_confirm_title">Légy óvatos</string>
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
-    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -805,7 +798,7 @@
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
@@ -878,7 +871,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_address">Cím</string>
@@ -1254,7 +1246,6 @@
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">Adj meg egy értéket %1$s és %2$s között</string>
     <string name="number_input_err_boundarymax">A megadott érték túl nagy - állítsd vissza a megengedett maximális értékre</string>
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
@@ -1283,12 +1274,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Eredeti</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

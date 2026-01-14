@@ -1,80 +1,57 @@
-### UnifiedMap roadmap & "old" maps deprecation notice
-c:geo has an all-new map implementation called "UnifiedMap" since some time, which will ultimately replace the old implementations of Google Maps and Mapsforge (OpenStreetMap). This is a deprecation notice to inform you about the further roadmap.
-
-UnifiedMap got published about a year ago. It still supports Google Maps and OpenStreetMap (online + offline), but in a completely reworked technical way, and with a lot of exciting new features that the "old" maps do not support, some of which are
-- Map rotation for OpenStreetMap based maps (online + offline)
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks
-- Switch between lists directly from map
-- "Driving mode" for OpenStreetMap based maps
-
-UnfiedMap has proven to be stable since quite some time, thus we will remove the old map implementations to reduce the efforts for maintaining c:geo.
-
-Roadmap:
-- "Old" maps are in deprecation mode now - we won't fix bugs for it anymore.
-- UnifiedMap will be made default for all users in fall of 2025.
-- "Old" map implementations will be removed in spring 2026.
-
-Until then, you can switch between the different implementations in settings => map sources.
+В соответствии с политикой Play Store мы обновили уровень API для Android в этой версии c: geo + мы изменили некоторые процедуры компоновки экрана. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Карта
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on changing list contents
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Follow my location in elevation chart (UnifiedMap)
-- New: Enable "move to" / "copy to" actions for "show as list"
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Long tap on "enable live button" to load offline caches
-- New: Offline hillshading for UnifiedMap (VTM variant)
-- New: Support for background maps (UnifiedMap)
-- Fix: Compact icons not returning to large icons on zooming in in auto mode (UnifiedMap)
-- New: Long-tap actions in cache infosheet: GC code, cache title, coordinates, personal note/hint
-- Change: Switches cache infosheet long-tap for emoji selector to short tap to resolve the collision
+- Новое: При оптимизации маршрута кэшируются данные расчетов
+- Новое: При включении режима реального времени путевые точки текущей установленной цели остаются видимыми
+- Новое: Длительное нажатие на навигационную линию открывает карту высот (ЕдинаяКарта)
+- Новое: Показать сгенерированные точки на карте
+- Новое: Загрузка тайников упорядочена по расстоянию
+- Исправлено: Дублирование отдельных пунктов маршрута
+- Новое: Поддержка темы Motorider (только VTM)
+- Новое: Поддержка прозрачного фонового отображения офлайн-карт (только для VTM)
+- New: NoMap tile provider (don't show map, just caches etc.)
+- Change: Max distance to connect points on history track lowered to 500m (configurable)
 
 ### Детали тайника
-- Новое: Офлайн-перевод текстов списков и записей (экспериментальная опция)
-- Новое: Возможность поделиться пользовательскими данными (координаты, личные заметки) вместе с тайником
-- Исправлено: Чтение текста прерывалось при повороте экрана
-- Исправлено: Сведения о тайнике: списки тайников не обновлялись после нажатия на имя списка и удаления тайника из этого списка
-- Исправлено: Заметка пользователя терялась при обновлении lab adventure (geocaching.com)
-- Изменение: Подстановки, связанные с датой записи, будут использовать выбранную дату вместо текущей
-- New: Collapse long log entries per default
+- Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
+- Новое: Сохранение временной метки для собственных записей при обновлении тайника
+- Новое: Дополнительный мини-вид компаса (смотрите Настройки => Детали тайника => Показать направление в описании тайника)
+- Новое: Показывать записи владельцев на вкладке "Свои записи и записи друзей"
+- Изменение: На вкладке "Свои записи и записи друзей" отображалось количество записей для этой вкладки вместо глобальных счетчиков
+- Изменение: Улучшен заголовок на вкладках переменных и путевых точек
+- Исправлено: Отображалось два элемента «удалить запись»
+- Исправлено: Сбой c:geo во время просмотра деталей тайника при повороте экрана
+- Изменение: Более компактное расположение для "добавления новой путевой точки"
+- Новое: Возможность загружать изображения для тайников geocaching.com в "неизмененном" размере
+- Новое: Просмотр переменных может быть отфильтрован
+- Новое: Визуализация переполнения вычисленных координат в списке путевых точек
+- Новое: Пункт меню в списке путевых точек, позволяющий отмечать определенные типы путевых точек как посещенные
+- New: Placeholders for trackable logging (geocache name, geocache code, user)
+- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Wherigo player
-- New: Integrated Wherigo player checking for missing credentials
-- Change: Removed Wherigo bug report (as errors are mostly cartridge-related, need to be fixed by cartridge owner)
-- New: Ability to navigate to a zone using compass
-- New: Ability to copy zone center coordinates to clipboard
-- New: Set zone center as target when opening map (to get routing and distance info for it)
-- Новое: Поддержка открытия локальных файлов Wherigo
-- Change: Long-tap on a zone on map is no longer recognized. This allows users to do other stuff in map zone area available on long-tap, eg: create user-defined cache
-- New: Display warning if wherigo.com reports missing EULA (which leads to failing download of cartridge)
+- Новое: Оффлайн перевод для Wherigo
+- Новое: Улучшено управление кнопками
+- New: Status auto-save
+- New: Option to create shortcout to Wherigo player on your mobile's home screen
 
 ### Общее
-- Новое: Переработана страница поиска
-- Новое: Фильтр количества трекаблов на руках
-- Новое: Поддержка координат в формате DD,DDDDDDD
-- Новое: Отображение последнего использованного имени фильтра в диалоговом окне фильтра
-- Новинка: Калькулятор координат: функция для замены "x" символом умножения
-- Fix: Incorrect altitude (not using mean above sea level)
-- Исправлено: Настройка ограничения расстояния до ближайшего объекта не работала должным образом при малых значениях
-- Fix: Sorting of cache lists by distance descending not working correctly
-- Исправлено: Тайники Adv Lab (Лаборатории Приключений) исключались фильтром D/T даже при активном "включать неопределенные"
-- Исправлено: проблемы с цветом значков меню в светлом режиме
-- New: Add "Remove past events" to list "all"
-- New: Show connector for "user-defined caches" as active in source filter
-- New: GPX export: exporting logs / trackables made optional
-- New: Added button to delete log templates
-- Исправлено: при импорте файла локальной карты имя карты выбиралось случайным образом
-- Fix: Map downloader offering broken (0 bytes) files for download
+- Новое: возможность поделиться информацией после записи о посещении тайника
+- Изменение: Не отображать параметры "нуждается в востановлении" или "нуждается в архивировании" для собственных тайников
+- Исправление: Восстановление резервной копии могло приводить к дублированию файлов трека во внутреннем хранилище и последующих резервных копиях
+- Изменение: Удалены ссылки на Twitter
+- Новое: Удаление треков (при очистке и при восстановлении резервной копии), которые не отслеживаются программой, но остаются в файловой системе и занимают место
 - New: Added mappings for some missing OC cache types
-- New: Move "recently used" lists in list selection dialog to the top on pressing "recently used" button
-- New: Share list of geocodes from cache list
-- Change: "Navigation (car)" etc. use "q=" parameter instead of outdated "ll=" parameter
+- Новое: Функции добавления/исключения тайников в списке наблюдения
+- Новое: Предложение автономного перевода с помощью приложений Google Переводчик или DeepL (если они установлены)
+- Новое: Удаление элементов из истории поиска
+- Изменение: Удален GCVote (сервис закрыт)
+- Новое: Раскрашенная панель инструментов на страницах с деталями тайников
+- Новое: Выбор нескольких списков закладок/запросов для загрузки
+- Новое: Предварительный просмотр списков закладок
+- Изменение: C:geo теперь работает только на устройствах Android 8 и выше
+- New: Default quick buttons for new installations
+- Fix: Titles in range input dialogs cut off
+- Fix: Notification for nightly update points to regular APK even for FOSS variant
+- New: "Ignore year" option for date filters

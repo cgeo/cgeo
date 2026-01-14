@@ -465,6 +465,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.filterListAdapter.notifyItemRangeChanged(0, this.filterListAdapter.getItemCount());
 
         adjustFilterEmptyView();
+        // Refresh window insets to ensure proper padding after view visibility changes
+        refreshActivityContentInsets();
     }
 
     private void switchToBasic() {
@@ -510,6 +512,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.filterListAdapter.notifyItemRangeChanged(0, this.filterListAdapter.getItemCount());
 
         adjustFilterEmptyView();
+        // Refresh window insets to ensure proper padding after view visibility changes
+        refreshActivityContentInsets();
     }
 
     private boolean isAdvancedView() {

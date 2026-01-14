@@ -143,8 +143,7 @@
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
     <string name="log_image_titleprefix">Імідж</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Переклад може виявити невдалим із великою кількістю тексту.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
     <string name="err_parse">Не вдалося проаналізувати сторінку входу</string>
@@ -411,9 +410,7 @@
     <string name="init_summary_oc_uk">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_uk_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="init_summary_su">Завантажте кеші з opencaching.de</string>
-    <string name="init_gcvote_password_description">Щоб мати можливість оцінити кеш, вам необхідно дотримуватися інструкцій в GCVote.com та ввести свій пароль до GCVote тут.</string>
     <string name="err_vote_send_rating">Помилка надсилання повідомлення.</string>
-    <string name="vote_sent">Голосування успішно відправлено</string>
     <string name="init_login_popup">логін</string>
     <string name="init_login_popup_working">вхід в систему…</string>
     <string name="init_login_popup_ok">Логін добре</string>
@@ -440,8 +437,6 @@
     <string name="init_signature_template_log">текст журналу</string>
     <string name="init_signature_template_size">Розмір</string>
     <string name="init_signature_template_type">Тип</string>
-    <string name="init_ratingwanted">Рейтинг GCvote</string>
-    <string name="init_summary_ratingwanted">Завантажте оцінку кешу від GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Показати друзів</string>
     <string name="init_summary_friends_and_own_logs_wanted">Відображати додаткову сторінку логів для друзів і власних журналів</string>
     <string name="init_openlastdetailspage">Сторінка останніх деталей</string>
@@ -524,7 +519,6 @@
     <string name="init_mapsource_select">виберіть джерела карт</string>
     <string name="init_dataDir_note">Ви можете зберегти додаткові дані для схованок (спойлери, зображення журналу, …) на зовнішній накопичувачі (емуляція або дійсна зовнішня SD-карта в залежності від пристрою).</string>
     <string name="init_maptrail">показати історію треку</string>
-    <string name="init_maptrail_length">Максимальна довжина історії тексту</string>
     <string name="init_maptrail_length_summary">Максимальна довжина історії маршрутів (примусово при кожному запуску c:geo). Значення за замовчуванням 700 балів - налаштувати відповідно до доступної пам\'яті.</string>
     <string name="init_summary_maptrail">При активації (а GPS увімкнено) c: geo зберігає історію ваших рухів як доріжку та відображає її на карті.</string>
     <string name="init_circlecolor">коло лінії кола</string>
@@ -685,7 +679,6 @@
     <string name="cache_list_select_last">останній відбір</string>
     <string name="cache_images">зображення</string>
     <string name="cache_waypoints">шляхові точки</string>
-    <string name="cache_waypoints_add_currentLocation">додати поточне місцезнаходження</string>
     <string name="cache_waypoints_add_fromclipboard">додати з буфера обміну</string>
     <string name="cache_waypoints_remove_original_waypoint">Точку шляху скопійовано з буфера обміну в цей кеш. \n\n Вилучити оригінальну точку маршруту?</string>
     <string name="cache_hint">підказка</string>
@@ -698,7 +691,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Завантаження зображень спойлера</string>
     <string name="cache_dialog_loading_details_status_logs">завантаження журналів</string>
     <string name="cache_dialog_loading_details_status_waypoints">обробка маршрутних точок</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Завантаження GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Кешування даних</string>
     <string name="cache_dialog_loading_details_status_render">візуалізувати подання</string>
     <string name="cache_dialog_offline_save_title">Офлайн</string>
@@ -735,7 +727,6 @@
     <string name="cache_menu_copy_list">скопіювати в інший список</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (онлайн)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (онлайн)</string>
-    <string name="cache_menu_vote">голосувати</string>
     <string name="cache_menu_challenge_checker">Перевірка завдання пошуку</string>
     <string name="cache_menu_ignore">ігнорувати кеш</string>
     <string name="cache_log_menu_decrypt">Дешифр/Шифрувати</string>
@@ -743,7 +734,6 @@
     <string name="ignore_confirm_message">Ігнорування кешу означає, що цей кеш ніколи не буде використовуватися знову під час завантаження даних із схованки. м.Ви зможете знову побачити кеш не ігноруючи його на сайті.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Зберегти у журнал</string>
-    <string name="cache_status_attended">Взяв участь</string>
     <string name="cache_status_found">Знайдено</string>
     <string name="cache_not_status_found">Не знайдено</string>
     <string name="cache_status_archived">Архівний</string>
@@ -779,8 +769,6 @@
     <string name="cache_share_field">Поділитися</string>
     <string name="cache_time_full_hours">годин</string>
     <string name="cache_listed_on">Список %s</string>
-    <string name="cache_whereyougo_start">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
-    <string name="cache_whereyougo_install">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
     <string name="context_share_as_text">Поділитися текстом</string>
     <string name="context_share_as_link">Поділитись посиланням</string>
     <string name="create_internal_cache">Створіть кешований користувачем кеш</string>
@@ -794,7 +782,7 @@
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">градуси</string>
     <string name="cc_hint_minutes">хвилини</string>
     <string name="cc_hint_seconds">секунди</string>
@@ -876,7 +864,6 @@
     <string name="map_as_list">показати як список</string>
     <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="quick_settings">Швидкі налаштування</string>
-    <string name="google_maps_option_group_theme">Параметри тем</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_address">Адреса</string>
@@ -1264,7 +1251,6 @@
     <string name="preference_colorpicker_select_opaqueness">Вибрати непрозорість</string>
     <string name="reset_to_default">за замовчуванням</string>
     <!-- number input -->
-    <string name="number_input_title">Виберіть час між %1$s та %2$s</string>
     <string name="number_input_err_boundarymin">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_boundarymax">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_format">Неприпустимий час формат</string>
@@ -1315,7 +1301,6 @@
     <string name="add_setting_missing_type">Необхідно вибрати ім\'я параметра</string>
     <string name="add_setting_already_exists">Сервер із таким іменем вже існує</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo локальний обробник файлів</string>
     <string name="localfile_title">Відкрити локальний файл</string>
     <string name="localfile_cannot_handle">Помилка читання файлу або c:geo не може обробляти цей тип файлу.</string>
     <!-- ReceiveDownloadActivity -->

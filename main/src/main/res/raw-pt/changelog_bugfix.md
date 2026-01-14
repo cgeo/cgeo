@@ -1,9 +1,23 @@
 ##
-- Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap) You can switch back in "settings" - "map sources" for the time being. Removal of legacy maps is planned for spring 2026 in our regular releases.
+- Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
+- Alteração: Número máximo de rastreáveis (TB) a visitar por registo de cache reduzido para 100 (por solicitação de geocaching.com, para reduzir a carga do servidor causado por amantes de TB extremos)
+- Correcção: Algumas possíveis excepções de segurança quando o utilizador não concedeu certas permissões (por exemplo: notificações)
+- Correcção: Círculos incompletos de caches em níveis de zoom baixos (apenas VTM)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
+
+##
+- Mudança: Mapa Unificado definido como mapa padrão para qualquer pessoa (como parte do nosso roteiro para o Mapa Unificado) Pode voltar ao anterior em "Definições" - "Provedores de mapas", por enquanto. A remoção dos mapas antigos está prevista para a primavera de 2026, nos nossos lançamentos regulares.
 - Correcção: A caixa de seleção de favorito é reposta ao regressar ao ecrã de registo offline
-- Fix: Geofence radius input box shows decimal number
-- Fix: Syncing of personal notes not working
-- Change: New icon for GPX track/route import in map track/route quick settings
+- Correcção: Caixa de introdução do raio do perímetro de resposta mostra um número decimal
+- Correcção: Sincronização das notas pessoais não funcionava
+- Alteração: Novo ícone para importar percurso/rota GPX nas definições rápidas do mapa
 
 ##
 - Correcção: Valores negativos no gráfico de altitude não eram dimensionados
@@ -43,6 +57,14 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
+
+
+
+
+
+
 
 
 

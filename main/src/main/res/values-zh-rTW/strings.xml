@@ -170,8 +170,7 @@
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">文字太多，翻譯失敗。</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">解析登入頁失敗</string>
@@ -546,9 +545,7 @@
     <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="init_gcvote_password_description">輸入GCVote.com的密碼，並根據GCVote.com的指示完成這個地理藏寶的評價。</string>
     <string name="err_vote_send_rating">發送評價時出現錯誤</string>
-    <string name="vote_sent">成功上傳您的投票</string>
     <string name="init_login_popup">登入</string>
     <string name="init_login_popup_working">登入中…</string>
     <string name="init_login_popup_ok">登入成功</string>
@@ -576,8 +573,6 @@
     <string name="init_signature_template_log">日誌文字</string>
     <string name="init_signature_template_size">大小</string>
     <string name="init_signature_template_type">類型</string>
-    <string name="init_ratingwanted">GCVoting的評價</string>
-    <string name="init_summary_ratingwanted">載入GCvote.com的評價</string>
     <string name="init_friends_and_own_logs_wanted">顯示朋友擁有的</string>
     <string name="init_summary_friends_and_own_logs_wanted">對於朋友寫的或是自己的日誌，顯示額外的日誌頁</string>
     <string name="init_openlastdetailspage">最後的詳細資訊頁面</string>
@@ -683,7 +678,6 @@
     <string name="init_dataDir">選擇資料夾</string>
     <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
     <string name="init_maptrail">顯示歷史軌跡</string>
-    <string name="init_maptrail_length">歷史軌跡的最大長度</string>
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_circlecolor">圓邊框顏色</string>
@@ -899,7 +893,6 @@
     <string name="cache_images">圖片</string>
     <string name="cache_advanced">進階</string>
     <string name="cache_waypoints">航點</string>
-    <string name="cache_waypoints_add_currentLocation">新增目前位置</string>
     <string name="cache_waypoints_add_fromclipboard">從剪貼簿新增</string>
     <string name="cache_waypoints_remove_original_waypoint">從剪貼簿複製到這個cache</string>
     <string name="cache_hint">提示</string>
@@ -912,7 +905,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">載入提示圖片</string>
     <string name="cache_dialog_loading_details_status_logs">讀取日誌</string>
     <string name="cache_dialog_loading_details_status_waypoints">處理航點</string>
-    <string name="cache_dialog_loading_details_status_gcvote">載入 GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">藏寶資料</string>
     <string name="cache_dialog_loading_details_status_render">渲染</string>
     <string name="cache_dialog_offline_save_title">離線</string>
@@ -953,7 +945,6 @@
     <string name="cache_menu_copy_list">複製到不同的列表上</string>
     <string name="cache_menu_oruxmaps_online">歐魯妹(線上)</string>
     <string name="cache_menu_oruxmaps_offline">歐魯妹(離線)</string>
-    <string name="cache_menu_vote">投票</string>
     <string name="cache_menu_challenge_checker">搜尋挑戰寶的檢查器</string>
     <string name="cache_menu_ignore">忽略藏寶</string>
     <string name="cache_log_menu_decrypt">解密/加密</string>
@@ -961,7 +952,6 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
-    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -999,8 +989,6 @@
     <string name="cache_share_field">分享</string>
     <string name="cache_time_full_hours">小時</string>
     <string name="cache_listed_on">%s 列表</string>
-    <string name="cache_whereyougo_start">開啟WhereYouGo來下載cartridge</string>
-    <string name="cache_whereyougo_install">安裝WhereYouGo來下載並啟動這個cartridge</string>
     <string name="context_share_as_text">分享文字內容</string>
     <string name="context_share_as_link">分享連結</string>
     <string name="create_internal_cache">建立玩家自訂cache</string>
@@ -1014,7 +1002,7 @@
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">角度</string>
     <string name="cc_hint_minutes">分鐘</string>
     <string name="cc_hint_seconds">秒</string>
@@ -1109,13 +1097,11 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
     <string name="search_address">地址</string>
     <string name="search_hbu">由藏寶</string>
-    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_destination">在c:geo開啟目的地</string>
     <string name="add_target_to">新增目標到</string>
@@ -1453,7 +1439,6 @@
     <string name="preference_colorpicker_select_opaqueness">選取不透明的</string>
     <string name="reset_to_default">預設</string>
     <!-- number input -->
-    <string name="number_input_title">輸入一個在%1$s到%2$s之間的數字</string>
     <string name="number_input_err_boundarymin">輸入的數字太小-設定到預設的最小值</string>
     <string name="number_input_err_boundarymax">輸入的數字太大-設定到預設的最大值</string>
     <!-- notification / channel texts -->
@@ -1565,12 +1550,6 @@
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>原始的</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

@@ -9,7 +9,7 @@ public class BranchDetectionHelper {
 
     // should contain version names of active bugfix releases since last feature release, oldest first
     // empty the part within curly brackets when creating a new release branch from master
-    public static final String[] BUGFIX_VERSION_NAME = new String[]{ "2025.07.20", "2025.07.25", "2025.08.05", "2025.08.26", "2025.08.31", "2025.09.19", "2025.10.31", "2025-12-01" };
+    public static final String[] BUGFIX_VERSION_NAME = new String[]{ "2025.07.20", "2025.07.25", "2025.08.05", "2025.08.26", "2025.08.31", "2025.09.19", "2025.10.31", "2025-12-01", "2026-01-02" };
 
     private BranchDetectionHelper() {
         // utility class
@@ -31,6 +31,15 @@ public class BranchDetectionHelper {
     @SuppressWarnings("ConstantConditions")
     public static boolean isDeveloperBuild() {
         return BuildConfig.BUILD_TYPE.equals("debug");
+    }
+
+    /**
+     * @return true, if FLAVOR is a FOSS build (without Google Play Services and non-free libraries)
+     */
+    // FLAVOR is detected as constant but can change depending on the build configuration
+    @SuppressWarnings("ConstantConditions")
+    public static boolean isFossBuild() {
+        return BuildConfig.FLAVOR.equals("foss");
     }
 
 }

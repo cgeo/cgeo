@@ -428,6 +428,17 @@ public final class Viewport implements Parcelable {
         return bottomLeft.equals(topRight);
     }
 
+    public boolean hasInvalidRange() {
+        return topRight.getLatitudeE6() > 90000000
+                | topRight.getLatitudeE6() < -90000000
+                | topRight.getLongitudeE6() > 180000000
+                | topRight.getLongitudeE6() < -180000000
+                | bottomLeft.getLatitudeE6() > 90000000
+                | bottomLeft.getLatitudeE6() < -90000000
+                | bottomLeft.getLongitudeE6() > 180000000
+                | bottomLeft.getLongitudeE6() < -180000000;
+    }
+
     public static boolean isValid(final Viewport viewport) {
         return viewport != null && !viewport.isJustADot();
     }

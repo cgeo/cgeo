@@ -178,8 +178,7 @@
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_nodateset_display">未設定</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
@@ -621,9 +620,7 @@
     <string name="init_summary_oc_uk">opencache.ukからキャッシュを読み込み</string>
     <string name="init_oc_uk_description">c:geoをopencache.ukで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="init_summary_su">Geocaching.suからキャッシュを読み込み</string>
-    <string name="init_gcvote_password_description">キャッシュを評価するにはGCVote.comに登録してGCVoteのパスワードを入力してください</string>
     <string name="err_vote_send_rating">評価を送信中にエラーが発生しました</string>
-    <string name="vote_sent">評価は正常に送信されました</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
@@ -662,8 +659,6 @@
     <string name="init_signature_template_log">ログの本文</string>
     <string name="init_signature_template_size">サイズ</string>
     <string name="init_signature_template_type">タイプ</string>
-    <string name="init_ratingwanted">GCvote評価</string>
-    <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_friends_and_own_logs_wanted">ジオ友達/自分のログを表示</string>
     <string name="init_summary_friends_and_own_logs_wanted">ジオ友達/自分のログの追加のページを表示</string>
     <string name="init_openlastdetailspage">最後に表示したページ</string>
@@ -797,7 +792,6 @@
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
     <string name="init_maptrail">軌跡を表示</string>
-    <string name="init_maptrail_length">GPSログの最大ポイント数</string>
     <string name="init_maptrail_length_summary">GPSログを記録する際の(c:geo起動時からの)最大ポイント数。デフォルト値は700ポイント。空きメモリーに応じて調整してください</string>
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
@@ -1054,9 +1048,7 @@
     <string name="cache_variables">変数</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
-    <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
-    <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
     <string name="cache_waypoints_remove_original_waypoint">ウェイポイントをクリップボードからこのキャッシュにコピーしました。\n\n元のウェイポイントを削除しますか?</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
@@ -1069,7 +1061,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">スポイラー画像を読み込み中</string>
     <string name="cache_dialog_loading_details_status_logs">ログを読み込み中</string>
     <string name="cache_dialog_loading_details_status_waypoints">ウェイポイントを処理中</string>
-    <string name="cache_dialog_loading_details_status_gcvote">GCVoteを読み込み中</string>
     <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
     <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
     <string name="cache_dialog_offline_save_title">オフライン</string>
@@ -1116,7 +1107,6 @@
     <string name="cache_menu_copy_list">ほかのリストにコピー</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (オンライン)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (オフライン)</string>
-    <string name="cache_menu_vote">評価を投稿</string>
     <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
     <string name="cache_menu_log_in_browser">ブラウザでログを書く</string>
     <string name="cache_menu_ignore">キャッシュを無視</string>
@@ -1126,7 +1116,6 @@
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
-    <string name="cache_status_attended">参加した</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>
@@ -1175,8 +1164,6 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
-    <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
-    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
     <string name="cache_chirpwolf_start">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。Chirp Wolfでchirpデータを読み込めます</string>
     <string name="cache_chirpwolf_install">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。chirpデータを読み込むにはChirp Wolfのインストールが必要です</string>
     <string name="cache_alc_start">Adventure Labアプリでこのアドベンチャーを始めます</string>
@@ -1202,7 +1189,7 @@
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
@@ -1367,7 +1354,6 @@
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
-    <string name="google_maps_option_group_theme">テーマのオプション</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1377,7 +1363,6 @@
     <string name="search_kw">キーワード</string>
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_finder">発見したユーザー名</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_destination">c:geo</string>
@@ -1827,7 +1812,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="preference_colorpicker_select_opaqueness">不透明度の選択</string>
     <string name="reset_to_default">デフォルト</string>
     <!-- number input -->
-    <string name="number_input_title">%1$s と %2$s の間で数値を入力してください</string>
     <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
@@ -1897,7 +1881,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="add_setting_missing_type">設定タイプを選択してください</string>
     <string name="add_setting_already_exists">同じ設定名がすでに存在しています</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
     <string name="localfile_title">ローカルファイルを開く</string>
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveDownloadActivity -->
@@ -2019,12 +2002,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_question">疑問</string>
     <!-- message center notifications -->
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>オリジナル</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

@@ -9,6 +9,7 @@ import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
     private DateRangeSelector dateRangeSelector;
     private ButtonToggleGroup absoluteRelative;
     private ItemRangeSlider<Integer> relativeSlider;
+    private CheckBox ignoreYearCheckbox;
 
     public DateRangeFilterViewHolder() {
         this(false, null, null, null);
@@ -46,15 +48,28 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
 
     @Override
     public View createView() {
+        final LinearLayout mainLayout = new LinearLayout(getActivity());
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+
+        // Add "Ignore Year" checkbox
+        ignoreYearCheckbox = new CheckBox(getActivity());
+        ignoreYearCheckbox.setText(R.string.cache_filter_datefilter_ignoreyear);
+        final LinearLayout.LayoutParams checkboxParams = new LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        checkboxParams.setMargins(0, dpToPixel(5), 0, dpToPixel(10));
+        mainLayout.addView(ignoreYearCheckbox, checkboxParams);
+
         dateRangeSelector = new DateRangeSelector(getActivity());
+        
+        final LinearLayout.LayoutParams dateRangeParams = new LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mainLayout.addView(dateRangeSelector, dateRangeParams);
+        
         if (!allowRelativeSelection) {
-            return dateRangeSelector;
+            return mainLayout;
         }
 
         //Build a view which allows toggling between absolute and relative date setting
-        final LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
-
         absoluteRelative = new ButtonToggleGroup(getActivity());
         absoluteRelative.addButtons(R.string.cache_filter_datefilter_absolute, R.string.cache_filter_datefilter_relative);
         absoluteRelative.addOnButtonCheckedListener((v, i, b) -> {
@@ -65,27 +80,24 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
-        ll.addView(absoluteRelative, llp);
-
-        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(0), 0, dpToPixel(5));
-        ll.addView(dateRangeSelector, llp);
+        mainLayout.addView(absoluteRelative, llp);
 
         relativeSlider = new ItemRangeSlider<>(getActivity());
         relativeSlider.setScale(Arrays.asList(relativeValues), (i, v) -> relativeLabels[i], (i, v) -> relativeShortLabels[i]);
 
         llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(0), 0, dpToPixel(5));
-        ll.addView(relativeSlider, llp);
+        mainLayout.addView(relativeSlider, llp);
 
         dateRangeSelector.setVisibility(View.GONE);
         absoluteRelative.setCheckedButtonByIndex(1, true);
-        return ll;
+        return mainLayout;
     }
 
     @Override
     public void setViewFromFilter(final DateRangeGeocacheFilter filter) {
         dateRangeSelector.setMinMaxDate(filter.getDateFilter().getConfiguredMinDate(), filter.getDateFilter().getConfiguredMaxDate());
+        ignoreYearCheckbox.setChecked(filter.getDateFilter().isIgnoreYear());
         if (absoluteRelative != null) {
             absoluteRelative.setCheckedButtonByIndex(filter.getDateFilter().isRelative() ? 1 : 0, true);
             Integer min = filter.getDateFilter().getMinDateOffset();
@@ -126,6 +138,7 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
         } else {
             filter.setMinMaxDate(dateRangeSelector.getMinDate(), dateRangeSelector.getMaxDate());
         }
+        filter.getDateFilter().setIgnoreYear(ignoreYearCheckbox.isChecked());
         return filter;
     }
 

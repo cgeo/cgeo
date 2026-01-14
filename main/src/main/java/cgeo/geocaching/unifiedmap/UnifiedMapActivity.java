@@ -19,7 +19,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
-import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.maps.MapUtils;
@@ -280,7 +279,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.zoomLevel.observe(this, zoomLevel -> refreshListChooser());
 
 
-        MapUtils.showMapOneTimeMessages(this, viewModel.mapType.type.compatibilityMapMode);
+        MapUtils.showMapOneTimeMessages(this, viewModel.mapType.type);
 
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
@@ -346,7 +345,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (oldFragment != null) {
             mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource));
         } else {
-            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode), null, () -> onMapReadyTasks(newSource));
+            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type), null, () -> onMapReadyTasks(newSource));
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -386,8 +385,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             case UMTT_PlainMap:
                 // restore last saved position and zoom
                 if (setDefaultCenterAndZoom) {
-                    mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode));
-                    mapFragment.setCenter(Settings.getUMMapCenter());
+                    mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type));
+                    mapFragment.setCenter(Settings.getMapCenter());
                 }
                 break;
             case UMTT_Viewport:
@@ -509,8 +508,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
 
         if (this.cacheReloadState == CacheReloadState.RESUME) {
-            mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode));
-            mapFragment.setCenter(Settings.getUMMapCenter());
+            mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type));
+            mapFragment.setCenter(Settings.getMapCenter());
         }
         //reset cacheReloadState
         this.cacheReloadState = CacheReloadState.REFRESH;
@@ -525,7 +524,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void restoreOrSetViewport(final Viewport vp) {
-        final Geopoint storedMapCenter = Settings.getUMMapCenter();
+        final Geopoint storedMapCenter = Settings.getMapCenter();
         if (Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false) && vp.contains(storedMapCenter)) {
             mapFragment.setCenter(storedMapCenter);
         } else {
@@ -670,37 +669,39 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final GeocacheFilter filter = viewModel.mapType.filterContext.get();
         final Viewport viewport = viewModel.viewport.getValue();
 
-        final Set<Waypoint> waypoints = new HashSet<>();
+        Schedulers.io().scheduleDirect(() -> {
+            final Set<Waypoint> waypoints = new HashSet<>();
 
-        if (viewModel.mapType.hasTarget()) {
-            waypoints.addAll(viewModel.caches.readWithResult(caches -> {
-                final Set<Waypoint> wpSet = new HashSet<>();
-                final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
-                wpSet.addAll(cache.getWaypoints());
-                return wpSet;
-            }));
-        }
-
-        if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
-            //show all waypoints be displayed or just the ones from visible caches?
-            if (viewModel.mapType.enableLiveMap()) {
-                waypoints.addAll(DataStore.loadWaypoints(viewport));
-            } else {
+            if (viewModel.mapType.hasTarget()) {
                 waypoints.addAll(viewModel.caches.readWithResult(caches -> {
                     final Set<Waypoint> wpSet = new HashSet<>();
-                    for (final Geocache c : caches) {
-                        wpSet.addAll(c.getWaypoints());
-                    }
+                    final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                    wpSet.addAll(cache.getWaypoints());
                     return wpSet;
                 }));
             }
-        }
 
-        //filter waypoints
-        MapUtils.filter(waypoints, filter);
-        viewModel.waypoints.write(wps -> {
+            if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+                // should all waypoints be displayed or just the ones from visible caches?
+                if (viewModel.mapType.enableLiveMap()) {
+                    waypoints.addAll(DataStore.loadWaypoints(viewport));
+                } else {
+                    waypoints.addAll(viewModel.caches.readWithResult(caches -> {
+                        final Set<Waypoint> wpSet = new HashSet<>();
+                        for (final Geocache c : caches) {
+                            wpSet.addAll(c.getWaypoints());
+                        }
+                        return wpSet;
+                    }));
+                }
+            }
+
+            //filter waypoints
+            MapUtils.filter(waypoints, filter);
+            viewModel.waypoints.write(wps -> {
                 wps.clear();
                 wps.addAll(waypoints);
+            });
         });
     }
 
@@ -902,7 +903,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
 
         // map rotation state
-        menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always (xml definition) when CGeoMap/NewMap is removed
         final int mapRotation = Settings.getMapRotation();
         switch (mapRotation) {
             case MAPROTATION_OFF:
@@ -1055,7 +1055,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // zoom, bearing & heading methods
 
     private void saveCenterAndZoom() {
-        Settings.setMapZoom(viewModel.mapType.type.compatibilityMapMode, mapFragment.getCurrentZoom());
+        Settings.setMapZoom(viewModel.mapType.type, mapFragment.getCurrentZoom());
         Settings.setMapCenter(mapFragment.getCenter());
     }
 
@@ -1225,7 +1225,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (result.isEmpty()) {
             if (isLongTap) {
                 viewModel.longTapCoords.setValue(touchedPoint);
-                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(null, "", viewModel.mapType.fromList), viewModel::setTarget)
+                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
@@ -1455,11 +1455,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onResume() {
+        super.onResume();
         if (mapFragment == null) {
             recreate(); // restart with a fresh MapView
+            return; // prevent further execution on the old activity instance
         }
 
-        super.onResume();
         reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
 

@@ -196,8 +196,7 @@
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">Çeviri, metin miktarının fazla olması durumunda başarısız olabilir.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
@@ -705,9 +704,7 @@
     <string name="init_summary_oc_uk">opencache.uk üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_uk_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencache.uk ile yetkilendirin.</string>
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
-    <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
     <string name="err_vote_send_rating">Puan gönderilirken hata oluştu.</string>
-    <string name="vote_sent">Puanlama başarıyla gönderildi</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
     <string name="init_login_popup_ok">Oturum açıldı</string>
@@ -745,8 +742,6 @@
     <string name="init_signature_template_size">Boyut</string>
     <string name="init_signature_template_type">Tür</string>
     <string name="init_signature_template_location">Konum</string>
-    <string name="init_ratingwanted">GCvote Puanlaması</string>
-    <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache puanlamasını yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
     <string name="init_summary_friends_and_own_logs_wanted">Arkadaşlarınızın ve kendinizin kayıt sayfasını görüntüle</string>
     <string name="init_openlastdetailspage">Son Ayrıntılar Sayfası</string>
@@ -880,7 +875,6 @@
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
     <string name="init_maptrail">Geçmiş İz\'i göster</string>
-    <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
     <string name="init_maptrail_length_summary">İz geçmişi maksimum uzunluğunu ayarlayın (c:geo\'nun her yeniden açılışında yeniden uygulanır) Mevcut hafızanıza göre ayarlanmak üzere varsayılan değer 700\'dür.</string>
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
@@ -1145,9 +1139,7 @@
     <string name="cache_variables">Değişkenler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Yol noktaları (%d)</string>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
-    <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
     <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Ziyaret edilen yol noktalarını gizle</string>
     <string name="cache_waypoints_remove_original_waypoint">Yol noktası panodan bu cache\'e kopyalandı.\n\nOrijinal yol noktası kaldırılsın mı?</string>
     <string name="cache_hint">İpucu</string>
     <string name="cache_hint_not_available">İpucu yok</string>
@@ -1160,7 +1152,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">İpucu görselleri yükleniyor</string>
     <string name="cache_dialog_loading_details_status_logs">Kayıtlar yükleniyor</string>
     <string name="cache_dialog_loading_details_status_waypoints">Yol noktaları işleniyor</string>
-    <string name="cache_dialog_loading_details_status_gcvote">GCVote yükleniyor</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Verisi</string>
     <string name="cache_dialog_loading_details_status_render">Görünüm oluştur</string>
     <string name="cache_dialog_offline_save_title">Çevrimdışı</string>
@@ -1206,7 +1197,6 @@
     <string name="cache_menu_copy_list">Farklı bir listeye kopyala</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Çevrimiçi)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Çevrimdışı)</string>
-    <string name="cache_menu_vote">Oyla</string>
     <string name="cache_menu_challenge_checker">Challenge Denetleyicisi ara</string>
     <string name="cache_menu_log_in_browser">Tarayıcıda aç</string>
     <string name="cache_menu_ignore">Geocache\'i yoksay</string>
@@ -1216,7 +1206,6 @@
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
-    <string name="cache_status_attended">Katıldım</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
     <string name="cache_status_archived">Arşivlendi</string>
@@ -1268,8 +1257,6 @@
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
     <string name="cache_recently_viewed">Son görüntülenenler</string>
-    <string name="cache_whereyougo_start">Bu kartuşu indirmek ve başlatmak için WhereYouGo\'yu açın</string>
-    <string name="cache_whereyougo_install">Bu kartuşu indirmek ve başlatmak için WhereYouGo oynatıcısını kurun</string>
     <string name="cache_alc_start">Bu macerayı oynayabilmek için Adventure Lab uygulamasını açın</string>
     <string name="cache_alc_install">Bu macerayı oynayabilmek için Adventure Lab uygulamasını yükleyin</string>
     <string name="context_share_as_text">Metni paylaş</string>
@@ -1290,7 +1277,7 @@
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">derece</string>
     <string name="cc_hint_minutes">dakika</string>
     <string name="cc_hint_seconds">saniye</string>
@@ -1434,7 +1421,6 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
-    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1445,7 +1431,6 @@
     <string name="search_kw">Anahtar kelime</string>
     <string name="search_hbu">Saklayan</string>
     <string name="search_finder">Bulan</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_destination">Hedefi c:geo olarak aç</string>
@@ -1904,7 +1889,6 @@
     <string name="preference_colorpicker_select_opaqueness">Saydamlığı ayarla</string>
     <string name="reset_to_default">Varsayılan</string>
     <!-- number input -->
-    <string name="number_input_title">%1$s ve %2$s arasında bir değer girin</string>
     <string name="number_input_err_boundarymin">Girilen rakam çok küçük-en küçük rakama ayarla</string>
     <string name="number_input_err_boundarymax">Girilen rakam çok büyük-en büyük rakama ayarla</string>
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
@@ -1986,7 +1970,6 @@
     <string name="add_setting_missing_type">Bir görünüm türü seçmeniz gerekmektedir</string>
     <string name="add_setting_already_exists">Bu isimle bir görünüm zaten mevcut</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo Yerel dosya işleyicisi</string>
     <string name="localfile_title">Yerel bir dosyayı aç</string>
     <string name="localfile_cannot_handle">Dosyayı okurken hata oluştu ya da c:geo bu dosya türünü işleyemiyor.</string>
     <!-- ReceiveDownloadActivity -->
@@ -2121,12 +2104,6 @@
     <!-- message center notifications -->
     <string name="mcpolling_title">Mesaj merkezi</string>
     <!-- GC image size conversion -->
-    <string-array name="settings_gc_imagesize_entries">
-        <item>Orijinal</item>
-        <item>640px</item>
-        <item>320px</item>
-        <item>120px</item>
-    </string-array>
     <!-- db inspection -->
     <!-- emoji categories -->
 </resources>

@@ -5,6 +5,14 @@
 - Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
 - Fix: Some possible security exceptions when user has not granted certain rights (eg.: notifications)
 - Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
 
 ##
 - Change: UnifiedMap set as default map for anyone (as part of our roadmap to UnifiedMap)
@@ -53,6 +61,11 @@
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
+
+
+
+
 
 
 

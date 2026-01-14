@@ -31,5 +31,7 @@
     <!-- history track -->
     <integer name="historytrack_length_default">700</integer>
     <integer name="historytrack_length_max">60000</integer>
+    <integer name="historytrack_mindistance_default">500</integer>
+    <integer name="historytrack_mindistance_max">20000</integer>
 
 </resources>
