@@ -1,7 +1,6 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import java.text.ParseException;
 import java.util.ArrayList;

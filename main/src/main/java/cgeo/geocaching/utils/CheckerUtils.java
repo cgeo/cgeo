@@ -5,7 +5,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.util.Pair;
 import android.util.Patterns;
