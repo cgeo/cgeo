@@ -22,11 +22,14 @@ import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.app.Activity;
+import android.widget.CheckBox;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -69,13 +72,7 @@ public class FilterViewHolderCreator {
                 result = new NumberCountFilterViewHolder(0, 100);
                 break;
             case TYPE:
-                result = new CheckboxFilterViewHolder<>(
-                        ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
-                                .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
-                                        CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
-                                .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
-                                .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
-                        2, null);
+                result = createTypeFilterViewHolder(activity);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -265,4 +262,84 @@ public class FilterViewHolderCreator {
 
         return new StoredListsFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
+
+    private static IFilterViewHolder<?> createTypeFilterViewHolder(final Activity activity) {
+        final CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter> holder = new CheckboxFilterViewHolder<>(
+                ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
+                        .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
+                                CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
+                        .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
+                        .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
+                2, null);
+
+        // Set up custom click handler ONLY for the "Specials" checkbox (COMMUN_CELEBRATION)
+        holder.setCustomCheckboxClickHandler(
+            (cacheType, checkbox) -> handleSpecialsCheckboxClick(activity, holder, checkbox),
+            cacheType -> cacheType == CacheType.COMMUN_CELEBRATION
+        );
+
+        return holder;
+    }
+
+    private static void handleSpecialsCheckboxClick(final Activity activity, 
+                                                     final CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter> holder,
+                                                     final CheckBox specialsCheckbox) {
+        // Define the special event types that can be individually selected
+        final Collection<CacheType> specialEventTypes = TypeGeocacheFilter.getAllSpecialEventTypes();
+
+        // Get current filter to see which special types are selected
+        final TypeGeocacheFilter currentFilter = holder.createFilterFromView();
+        final java.util.Set<CacheType> currentlySelected = currentFilter.getSelectedSpecialEventTypes();
+
+        // Create and show selection dialog
+        final SimpleDialog.ItemSelectModel<CacheType> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(specialEventTypes)
+                .setDisplayMapper(ct -> TextParam.text(ct.getShortL10n()))
+                .setChoiceMode(SimpleDialog.ItemSelectModel.ChoiceMode.MULTI_CHECKBOX)
+                .setSelectedItems(currentlySelected);
+
+        SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.event_special))
+                .selectMultiple(model, selectedTypes -> {
+                    // Update the filter with the selected special event types
+                    updateSpecialEventTypesInFilter(holder, specialEventTypes, selectedTypes, specialsCheckbox);
+                });
+    }
+
+    private static void updateSpecialEventTypesInFilter(final CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter> holder,
+                                                        final Collection<CacheType> allSpecialTypes,
+                                                        final Collection<CacheType> selectedSpecialTypes,
+                                                        final CheckBox specialsCheckbox) {
+        // Get current filter
+        final TypeGeocacheFilter currentFilter = holder.createFilterFromView();
+        
+        // Update the special event types selection
+        currentFilter.setSelectedSpecialEventTypes(new HashSet<>(selectedSpecialTypes));
+        
+        // Update the view from the modified filter
+        holder.setViewFromFilter(currentFilter);
+        
+        // Update the "Specials" checkbox state based on selection
+        updateSpecialsCheckboxState(specialsCheckbox, allSpecialTypes.size(), selectedSpecialTypes.size());
+        
+        // Update the select all/none checkbox
+        holder.checkAndSetAllNoneValue();
+    }
+
+    private static void updateSpecialsCheckboxState(final CheckBox specialsCheckbox,
+                                                     final int totalSpecialTypes,
+                                                     final int selectedCount) {
+        if (selectedCount == 0) {
+            // No special types selected - unchecked
+            specialsCheckbox.setChecked(false);
+        } else if (selectedCount == totalSpecialTypes) {
+            // All special types selected - checked
+            specialsCheckbox.setChecked(true);
+        } else {
+            // Partial selection - indeterminate state
+            // Android doesn't have built-in tri-state checkbox, so we use checked to indicate "some" are selected
+            specialsCheckbox.setChecked(true);
+        }
+    }
 }
+
