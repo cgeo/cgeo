@@ -283,7 +283,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 
         binding.cacheContextBox.setVisibility(game.getContextGeocode() != null ? View.VISIBLE : View.GONE);
-        binding.cacheContextName.setText(game.getContextGeocacheName());
+        WherigoViewUtils.setSelectableTextWithClickableLinks(binding.cacheContextName, game.getContextGeocacheName());
 
         if (game.isLastErrorNotSeen()) {
             BadgeManager.get().setBadge(binding.reportProblem, false, -1);

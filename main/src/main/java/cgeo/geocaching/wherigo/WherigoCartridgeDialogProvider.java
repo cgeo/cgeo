@@ -55,7 +55,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
         final List<WherigoSavegameInfo> saveGames = WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo());
 
-        binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
+        WherigoViewUtils.setSelectableTextWithClickableLinks(binding.description, WherigoGame.get().toDisplayText(cartridgeFile.description));
         //following info is debug -> no translation needed
         TextParam.text("- **CGUID:** " + cartridgeInfo.getCGuid() + "\n" +
             "- **Device:** " + cartridgeFile.device + "\n" +
@@ -79,7 +79,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             TranslationUtils.prepareForTranslation(cartridgeFile.name, cartridgeFile.description));
 
 
-        binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
+        WherigoViewUtils.setSelectableTextWithClickableLinks(binding.description, WherigoGame.get().toDisplayText(cartridgeFile.description));
 
         refreshGui(binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
