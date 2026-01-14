@@ -5,8 +5,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Context;
 import android.content.Intent;

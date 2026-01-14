@@ -1,6 +1,5 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -8,8 +7,8 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;

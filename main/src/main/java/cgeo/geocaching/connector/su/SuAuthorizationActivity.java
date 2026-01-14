@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.su;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;

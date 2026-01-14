@@ -1,6 +1,5 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.LocalizationUtils;

@@ -1,11 +1,10 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

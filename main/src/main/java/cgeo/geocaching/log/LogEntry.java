@@ -1,15 +1,14 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;

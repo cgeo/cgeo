@@ -1,9 +1,8 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 

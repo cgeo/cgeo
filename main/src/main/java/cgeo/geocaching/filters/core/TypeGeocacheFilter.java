@@ -1,6 +1,5 @@
 package cgeo.geocaching.filters.core;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;

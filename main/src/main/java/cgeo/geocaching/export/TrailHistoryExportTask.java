@@ -7,12 +7,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.net.Uri;

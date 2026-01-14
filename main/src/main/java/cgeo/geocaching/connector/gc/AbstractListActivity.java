@@ -7,8 +7,8 @@ import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.Intents.EXTRA_PQ_LIST_IMPORT;
 
 import android.annotation.SuppressLint;

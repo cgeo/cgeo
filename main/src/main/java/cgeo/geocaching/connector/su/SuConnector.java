@@ -29,8 +29,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

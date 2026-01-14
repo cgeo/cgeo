@@ -90,13 +90,13 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;

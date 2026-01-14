@@ -3,8 +3,8 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;

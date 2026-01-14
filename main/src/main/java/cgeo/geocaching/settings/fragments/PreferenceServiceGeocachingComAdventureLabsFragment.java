@@ -4,9 +4,9 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 

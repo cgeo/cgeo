@@ -20,8 +20,8 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
 import android.annotation.SuppressLint;

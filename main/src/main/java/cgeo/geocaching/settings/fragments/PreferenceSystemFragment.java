@@ -11,9 +11,9 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialogExamples;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PreferenceUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 

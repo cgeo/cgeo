@@ -7,8 +7,8 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;

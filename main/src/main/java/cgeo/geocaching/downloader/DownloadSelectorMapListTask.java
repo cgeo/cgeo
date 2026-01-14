@@ -5,10 +5,10 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action2;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.net.Uri;

@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.App;

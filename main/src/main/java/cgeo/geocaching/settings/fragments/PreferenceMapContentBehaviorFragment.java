@@ -4,9 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.ButtonPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 import android.os.Bundle;

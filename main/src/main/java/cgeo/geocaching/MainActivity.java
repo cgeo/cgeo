@@ -41,6 +41,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -49,7 +50,6 @@ import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;

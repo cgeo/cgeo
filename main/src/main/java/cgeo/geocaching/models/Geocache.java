@@ -53,10 +53,10 @@ import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.LazyInitializedSet;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.functions.Func1;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.app.Activity;

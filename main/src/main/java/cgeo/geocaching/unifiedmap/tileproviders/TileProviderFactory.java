@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
@@ -8,10 +7,10 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFileUtils.isValidMapFile;
 
 import android.app.Activity;

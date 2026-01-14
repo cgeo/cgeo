@@ -25,9 +25,9 @@ import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -46,7 +46,6 @@ import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.Locale;
-
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;

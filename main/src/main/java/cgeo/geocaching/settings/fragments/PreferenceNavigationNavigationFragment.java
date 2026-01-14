@@ -2,8 +2,8 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 
