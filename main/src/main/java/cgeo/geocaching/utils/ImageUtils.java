@@ -10,7 +10,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
