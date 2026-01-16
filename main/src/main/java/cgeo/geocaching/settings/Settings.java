@@ -309,7 +309,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), prefsV0.getInt(getKey(R.string.pref_livelist), 1) != 0);
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
-            e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
@@ -530,10 +529,6 @@ public class Settings {
 
     public static String getString(final int prefKeyId, final String defaultValue) {
         return getStringDirect(getKey(prefKeyId), defaultValue);
-    }
-
-    public static boolean hasKey(final int prefKeyId) {
-        return hasKeyDirect(getKey(prefKeyId));
     }
 
     private static boolean hasKeyDirect(final String prefKey) {
@@ -1412,16 +1407,7 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        if (hasKey(R.string.pref_theme_setting)) {
-            return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
-        }
-        // If there is legacy skin preference, try to migrate it
-        if (hasKey(R.string.old_pref_skin)) {
-            return DarkModeSetting.valueOf(getBoolean(R.string.old_pref_skin, false) ?
-                    DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context));
-        }
-        return DarkModeSetting.SYSTEM_DEFAULT;
-
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
