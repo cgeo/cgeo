@@ -165,16 +165,28 @@ public final class SumUtils {
     
     private static List<String> expandSingleLetterRange(final String start, final String end) {
         final List<String> variables = new ArrayList<>();
-        final char startChar = Character.toUpperCase(start.charAt(0));
-        final char endChar = Character.toUpperCase(end.charAt(0));
+        final char startChar = start.charAt(0);
+        final char endChar = end.charAt(0);
         
-        if (startChar > endChar) {
+        // Check that both are same case (both upper or both lower)
+        if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Cannot mix uppercase and lowercase in variable range: " + start + " to " + end);
+        }
+        
+        // Normalize to uppercase for comparison
+        final char startCharUpper = Character.toUpperCase(startChar);
+        final char endCharUpper = Character.toUpperCase(endChar);
+        
+        if (startCharUpper > endCharUpper) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 "Start variable must be <= end variable: " + startChar + " > " + endChar);
         }
         
-        for (char c = startChar; c <= endChar; c++) {
-            variables.add(String.valueOf(c));
+        // Generate range preserving the original case
+        final boolean isUpperCase = Character.isUpperCase(startChar);
+        for (char c = startCharUpper; c <= endCharUpper; c++) {
+            variables.add(String.valueOf(isUpperCase ? c : Character.toLowerCase(c)));
         }
         return variables;
     }
