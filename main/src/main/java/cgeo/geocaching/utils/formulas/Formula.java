@@ -19,6 +19,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.core.util.Supplier;
 
+import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -859,6 +860,11 @@ public final class Formula {
 
         final FormulaFunction formulaFunction = Objects.requireNonNull(FormulaFunction.findByName(functionName));
 
+        // Special handling for sum function with string parameters (variable ranges)
+        if ("sum".equals(functionName) && params.size() == 2) {
+            return parseSumFunction(params);
+        }
+
         return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
                 (n, v, ri) -> {
                     try {
@@ -873,6 +879,101 @@ public final class Formula {
                     valueListToCharSequence(valueList, "; ", paramsInError, true),
                     ")"), paramsInError));
 
+    }
+
+    @NonNull
+    private FormulaNode parseSumFunction(final List<FormulaNode> params) {
+        // Try to extract string literals from parameters
+        final String startVar = extractStringLiteral(params.get(0));
+        final String endVar = extractStringLiteral(params.get(1));
+
+        // If both parameters are string literals, expand to variable range
+        if (startVar != null && endVar != null) {
+            try {
+                final List<String> variables = FormulaUtils.expandVariableRange(startVar, endVar);
+                
+                // Create a sum node that references all variables in the range
+                return new FormulaNode("sum-var-range", null,
+                    (objs, vars, ri) -> {
+                        BigDecimal sum = BigDecimal.ZERO;
+                        final List<String> missingVars = new ArrayList<>();
+                        for (String varName : variables) {
+                            final Value value = vars.apply(varName);
+                            if (value == null) {
+                                missingVars.add(varName);
+                            } else {
+                                if (!value.isNumeric()) {
+                                    throw new FormulaException(OTHER, "Variable " + varName + " is not numeric");
+                                }
+                                sum = sum.add(value.getAsDecimal());
+                            }
+                        }
+                        if (!missingVars.isEmpty()) {
+                            Collections.sort(missingVars);
+                            throw new FormulaException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVars, ", "));
+                        }
+                        return Value.of(sum);
+                    },
+                    (objs, vars, ri, error) -> {
+                        // For display purposes
+                        final StringBuilder sb = new StringBuilder("sum(");
+                        boolean first = true;
+                        for (String varName : variables) {
+                            if (!first) {
+                                sb.append("+");
+                            }
+                            first = false;
+                            final Value value = vars.apply(varName);
+                            if (value == null) {
+                                sb.append(TextUtils.setSpan("?" + varName, createErrorSpan()));
+                            } else {
+                                sb.append(value.getAsString());
+                            }
+                        }
+                        sb.append(")");
+                        return sb.toString();
+                    },
+                    result -> result.addAll(variables)); // Add all variables as dependencies
+            } catch (FormulaException fe) {
+                // If expansion fails, re-throw the exception to fail at compile time
+                throw fe;
+            }
+        }
+
+        // Otherwise, handle as numeric range or pre-calculated variables
+        return new FormulaNode("f:sum", params.toArray(new FormulaNode[0]),
+            (n, v, ri) -> {
+                try {
+                    return FormulaFunction.SUM.execute(n);
+                } catch (FormulaException ce) {
+                    ce.setExpression(expression);
+                    ce.setFunction("sum");
+                    throw ce;
+                }
+            },
+            (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat("sum(",
+                valueListToCharSequence(valueList, "; ", paramsInError, true),
+                ")"), paramsInError));
+    }
+
+    /**
+     * Try to extract a string literal from a FormulaNode if it's a constant string
+     */
+    private String extractStringLiteral(final FormulaNode node) {
+        if (node == null) {
+            return null;
+        }
+        // Check if this is a string-literal node
+        if ("string-literal".equals(node.getId())) {
+            try {
+                // Evaluate the node without variables to get the constant string
+                final Value val = node.eval(x -> null, -1);
+                return val.getAsString();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**

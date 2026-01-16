@@ -235,6 +235,150 @@ public class FormulaUtils {
         return sb.toString();
     }
 
+    /**
+     * Implementation of sum function that supports ranges of variables or numeric ranges
+     */
+    public static Value sum(final ValueList valueList) {
+        valueList.assertCheckCount(2, 2, false);
+        
+        final Value start = valueList.get(0);
+        final Value end = valueList.get(1);
+        
+        // Both parameters must be of the same type
+        if (start.isNumeric() != end.isNumeric()) {
+            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
+                "Both parameters must be of the same type (both strings or both numeric)", 
+                start.getType() + " and " + end.getType(), 
+                "same type");
+        }
+        
+        // Handle numeric range: sum(1;5) -> 1+2+3+4+5
+        if (start.isNumeric() && end.isNumeric()) {
+            if (!start.isInteger() || !end.isInteger()) {
+                throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
+                    "Numeric ranges must use integer parameters", 
+                    start.getType() + " and " + end.getType(), 
+                    "Integer");
+            }
+            final long startVal = start.getAsLong();
+            final long endVal = end.getAsLong();
+            if (startVal > endVal) {
+                throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                    "Start value must be <= end value: " + startVal + " > " + endVal);
+            }
+            
+            BigDecimal sum = BigDecimal.ZERO;
+            for (long i = startVal; i <= endVal; i++) {
+                sum = sum.add(BigDecimal.valueOf(i));
+            }
+            return Value.of(sum);
+        }
+        
+        // This should never be reached in runtime as string parameters are handled at compile time
+        // but we provide a fallback error
+        throw new FormulaException(FormulaException.ErrorType.OTHER, 
+            "sum() with string parameters must be compiled with variable context");
+    }
+    
+    /**
+     * Generate list of variable names in a range for dependency tracking
+     * This is called at compile time to determine which variables are needed
+     */
+    public static List<String> expandVariableRange(final String startVar, final String endVar) {
+        final List<String> variables = new ArrayList<>();
+        
+        // Remove leading $ if present
+        final String start = startVar.startsWith("$") ? startVar.substring(1) : startVar;
+        final String end = endVar.startsWith("$") ? endVar.substring(1) : endVar;
+        
+        // Single-letter variable range: A-D
+        if (start.length() == 1 && end.length() == 1 && 
+            Character.isLetter(start.charAt(0)) && Character.isLetter(end.charAt(0))) {
+            final char startChar = Character.toUpperCase(start.charAt(0));
+            final char endChar = Character.toUpperCase(end.charAt(0));
+            if (startChar > endChar) {
+                throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                    "Start variable must be <= end variable: " + startChar + " > " + endChar);
+            }
+            for (char c = startChar; c <= endChar; c++) {
+                variables.add(String.valueOf(c));
+            }
+            return variables;
+        }
+        
+        // Two-letter variable with numeric suffix: A1-A5
+        if (start.length() >= 2 && end.length() >= 2) {
+            // Check if both have same prefix structure
+            final boolean startHasNumSuffix = Character.isDigit(start.charAt(start.length() - 1));
+            final boolean endHasNumSuffix = Character.isDigit(end.charAt(end.length() - 1));
+            
+            if (startHasNumSuffix && endHasNumSuffix) {
+                // Find prefix and numeric suffix
+                final String startPrefix = extractPrefix(start);
+                final String endPrefix = extractPrefix(end);
+                
+                if (!startPrefix.equalsIgnoreCase(endPrefix)) {
+                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                        "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
+                }
+                
+                final int startNum = Integer.parseInt(start.substring(startPrefix.length()));
+                final int endNum = Integer.parseInt(end.substring(endPrefix.length()));
+                
+                if (startNum > endNum) {
+                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                        "Start value must be <= end value: " + startNum + " > " + endNum);
+                }
+                
+                for (int i = startNum; i <= endNum; i++) {
+                    variables.add(startPrefix + i);
+                }
+                return variables;
+            }
+            
+            // Two-letter variable with letter suffix: NA-ND
+            if (!startHasNumSuffix && !endHasNumSuffix) {
+                // Check if last character is a letter
+                final char startLast = start.charAt(start.length() - 1);
+                final char endLast = end.charAt(end.length() - 1);
+                
+                if (Character.isLetter(startLast) && Character.isLetter(endLast)) {
+                    final String startPrefix = start.substring(0, start.length() - 1);
+                    final String endPrefix = end.substring(0, end.length() - 1);
+                    
+                    if (!startPrefix.equalsIgnoreCase(endPrefix)) {
+                        throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                            "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
+                    }
+                    
+                    final char startChar = Character.toUpperCase(startLast);
+                    final char endChar = Character.toUpperCase(endLast);
+                    
+                    if (startChar > endChar) {
+                        throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                            "Start variable must be <= end variable: " + startChar + " > " + endChar);
+                    }
+                    
+                    for (char c = startChar; c <= endChar; c++) {
+                        variables.add(startPrefix + c);
+                    }
+                    return variables;
+                }
+            }
+        }
+        
+        throw new FormulaException(FormulaException.ErrorType.OTHER, 
+            "Invalid variable range: " + startVar + " to " + endVar);
+    }
+    
+    private static String extractPrefix(final String varName) {
+        int i = varName.length() - 1;
+        while (i >= 0 && Character.isDigit(varName.charAt(i))) {
+            i--;
+        }
+        return varName.substring(0, i + 1);
+    }
+
     public static List<Pair<String, String>> scanForCoordinates(final Collection<String> texts, final Collection<Pair<String, String>> excludePairs) {
         final List<Pair<String, String>> result = new ArrayList<>();
         final Set<String> patternsFound = new HashSet<>();
