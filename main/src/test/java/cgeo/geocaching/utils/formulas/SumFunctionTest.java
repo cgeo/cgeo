@@ -88,10 +88,26 @@ public class SumFunctionTest {
 
     @Test
     public void testSumErrorPrefixMismatchLetter() {
-        // sum("A1";"B1") -> error: prefix must match
-        assertThatThrownBy(() -> Formula.compile("sum('A1';'B1')"))
+        // sum("$A1";"$B1") -> error: prefix must match (with proper $ prefix)
+        assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
             .hasMessageContaining("prefix");
+    }
+
+    @Test
+    public void testSumErrorMultiCharVariableWithoutDollar() {
+        // sum("A1";"A3") -> error: multi-character variables must have $ prefix
+        assertThatThrownBy(() -> Formula.compile("sum('A1';'A3')"))
+            .isInstanceOf(FormulaException.class)
+            .hasMessageContaining("must have $ prefix");
+    }
+
+    @Test
+    public void testSumErrorMultiCharVariableWithoutDollarLetterSuffix() {
+        // sum("NA";"ND") -> error: multi-character variables must have $ prefix
+        assertThatThrownBy(() -> Formula.compile("sum('NA';'ND')"))
+            .isInstanceOf(FormulaException.class)
+            .hasMessageContaining("must have $ prefix");
     }
 
     @Test

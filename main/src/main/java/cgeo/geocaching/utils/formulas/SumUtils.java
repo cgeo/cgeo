@@ -101,6 +101,10 @@ public final class SumUtils {
      * This is called at compile time to determine which variables are needed
      */
     public static List<String> expandVariableRange(final String startVar, final String endVar) {
+        // Validate that multi-character variables have $ prefix
+        validateVariableFormat(startVar);
+        validateVariableFormat(endVar);
+        
         // Remove leading $ if present
         final String start = startVar.startsWith("$") ? startVar.substring(1) : startVar;
         final String end = endVar.startsWith("$") ? endVar.substring(1) : endVar;
@@ -125,6 +129,20 @@ public final class SumUtils {
         
         throw new FormulaException(FormulaException.ErrorType.OTHER, 
             "Invalid variable range: " + startVar + " to " + endVar);
+    }
+    
+    private static void validateVariableFormat(final String varName) {
+        // Multi-character variables must have $ prefix
+        // Single-character variables can optionally have $ prefix
+        if (varName.length() > 1 && !varName.startsWith("$")) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Multi-character variable '" + varName + "' must have $ prefix (e.g., '$" + varName + "')");
+        }
+        // If it has $, make sure there's content after it
+        if (varName.equals("$")) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Invalid variable name: " + varName);
+        }
     }
     
     private static boolean isSingleLetterRange(final String start, final String end) {
