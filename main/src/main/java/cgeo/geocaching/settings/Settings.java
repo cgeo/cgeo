@@ -154,7 +154,7 @@ public class Settings {
     /**
      * Possible values of the Dark Mode Setting.
      * <p>
-     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue(Context)} and received via {@link DarkModeSetting#valueOf(String)}.
+     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue()} and received via {@link DarkModeSetting#valueOf(String)}.
      * <p>
      * Additionally, the equivalent {@link AppCompatDelegate}-Mode can be received via {@link #getModeId()}.
      *
@@ -191,7 +191,7 @@ public class Settings {
             return modeId;
         }
 
-        public String getPreferenceValue(final @NonNull Context context) {
+        public String getPreferenceValue() {
             return LocalizationUtils.getString(preferenceValue);
         }
     }
@@ -1434,7 +1434,7 @@ public class Settings {
 
 
     public static void setAppThemeAutomatically(final @NonNull Context context) {
-        setAppTheme(getAppTheme(context));
+        setAppTheme(getAppTheme());
     }
 
     public static void setAppTheme(final DarkModeSetting setting) {
@@ -1463,7 +1463,7 @@ public class Settings {
     }
 
     public static boolean isLightSkin(final @NonNull Context context) {
-        return !isDarkSkinSetting(context, getAppTheme(context));
+        return !isDarkSkinSetting(context, getAppTheme());
     }
 
     public static boolean useColoredActionBar(final @NonNull Context context) {
