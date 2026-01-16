@@ -895,24 +895,14 @@ public final class Formula {
                 // Create a sum node that references all variables in the range
                 return new FormulaNode("sum-var-range", null,
                     (objs, vars, ri) -> {
-                        BigDecimal sum = BigDecimal.ZERO;
-                        final List<String> missingVars = new ArrayList<>();
-                        for (String varName : variables) {
-                            final Value value = vars.apply(varName);
-                            if (value == null) {
-                                missingVars.add(varName);
-                            } else {
-                                if (!value.isNumeric()) {
-                                    throw new FormulaException(OTHER, "Variable " + varName + " is not numeric");
-                                }
-                                sum = sum.add(value.getAsDecimal());
-                            }
+                        final android.util.Pair<BigDecimal, List<String>> result = 
+                            FormulaUtils.sumVariables(variables, vars);
+                        if (!result.second.isEmpty()) {
+                            Collections.sort(result.second);
+                            throw new FormulaException(MISSING_VARIABLE_VALUE, 
+                                StringUtils.join(result.second, ", "));
                         }
-                        if (!missingVars.isEmpty()) {
-                            Collections.sort(missingVars);
-                            throw new FormulaException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVars, ", "));
-                        }
-                        return Value.of(sum);
+                        return Value.of(result.first);
                     },
                     (objs, vars, ri, error) -> {
                         // For display purposes

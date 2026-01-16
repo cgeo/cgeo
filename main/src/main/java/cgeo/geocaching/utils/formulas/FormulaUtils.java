@@ -267,10 +267,9 @@ public class FormulaUtils {
                     "Start value must be <= end value: " + startVal + " > " + endVal);
             }
             
-            BigDecimal sum = BigDecimal.ZERO;
-            for (long i = startVal; i <= endVal; i++) {
-                sum = sum.add(BigDecimal.valueOf(i));
-            }
+            // Use arithmetic series formula: n*(start+end)/2 for better performance
+            final long n = endVal - startVal + 1;
+            final long sum = n * (startVal + endVal) / 2;
             return Value.of(sum);
         }
         
@@ -278,6 +277,34 @@ public class FormulaUtils {
         // but we provide a fallback error
         throw new FormulaException(FormulaException.ErrorType.OTHER, 
             "sum() with string parameters must be compiled with variable context");
+    }
+    
+    /**
+     * Helper method to sum a list of variables
+     * @param variables List of variable names to sum
+     * @param varProvider Function to retrieve variable values
+     * @return Pair of sum and list of missing variables (if any)
+     */
+    public static android.util.Pair<BigDecimal, List<String>> sumVariables(
+            final List<String> variables,
+            final java.util.function.Function<String, Value> varProvider) {
+        BigDecimal sum = BigDecimal.ZERO;
+        final List<String> missingVars = new ArrayList<>();
+        
+        for (String varName : variables) {
+            final Value value = varProvider.apply(varName);
+            if (value == null) {
+                missingVars.add(varName);
+            } else {
+                if (!value.isNumeric()) {
+                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                        "Variable " + varName + " is not numeric");
+                }
+                sum = sum.add(value.getAsDecimal());
+            }
+        }
+        
+        return new android.util.Pair<>(sum, missingVars);
     }
     
     /**
