@@ -132,7 +132,7 @@ public class CgeoApplication extends Application {
             // error handlers
             CgeoUncaughtExceptionHandler.installUncaughtExceptionHandler(this);
 
-            Settings.setAppThemeAutomatically(this);
+            Settings.setAppThemeAutomatically();
 
             initApplicationLocale();
 
