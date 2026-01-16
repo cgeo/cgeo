@@ -1399,7 +1399,7 @@ public class Settings {
     }
 
 
-    public static void setAppThemeAutomatically(final @NonNull Context context) {
+    public static void setAppThemeAutomatically() {
         setAppTheme(getAppTheme());
     }
 
