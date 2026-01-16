@@ -282,8 +282,9 @@ public class FormulaUtils {
         }
         
         // Use arithmetic series formula: n*(start+end)/2 for better performance
-        final long n = endVal - startVal + 1;
-        final long sum = n * (startVal + endVal) / 2;
+        // Use BigInteger to avoid overflow for large ranges
+        final BigInteger n = BigInteger.valueOf(endVal - startVal + 1);
+        final BigInteger sum = n.multiply(BigInteger.valueOf(startVal + endVal)).divide(BigInteger.TWO);
         return Value.of(sum);
     }
     
