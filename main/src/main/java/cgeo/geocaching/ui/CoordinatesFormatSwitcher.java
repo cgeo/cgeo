@@ -51,7 +51,7 @@ public class CoordinatesFormatSwitcher {
 
     public CoordinatesFormatSwitcher setPosition(final int position) {
         if (position < 0) {
-            Log.w("CoordinatesFormatSwitcher: Invalid negative position " + position + ", defaulting to 0");
+            Log.w(String.format("CoordinatesFormatSwitcher: Invalid negative position %d, defaulting to 0", position));
             this.position = 0;
         } else {
             this.position = position % availableFormats.length;
