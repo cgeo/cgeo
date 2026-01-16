@@ -163,25 +163,33 @@ public final class SumUtils {
         return Character.isLetter(var.charAt(var.length() - 1));
     }
     
-    private static List<String> expandSingleLetterRange(final String start, final String end) {
-        final List<String> variables = new ArrayList<>();
-        final char startChar = start.charAt(0);
-        final char endChar = end.charAt(0);
-        
+    private static void validateSingleLetterRange(final char startChar, final char endChar, 
+            final String start, final String end) {
         // Check that both are same case (both upper or both lower)
         if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 "Cannot mix uppercase and lowercase in variable range: " + start + " to " + end);
         }
         
-        // Normalize to uppercase for comparison
+        // Check that start <= end
         final char startCharUpper = Character.toUpperCase(startChar);
         final char endCharUpper = Character.toUpperCase(endChar);
-        
         if (startCharUpper > endCharUpper) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 "Start variable must be <= end variable: " + startChar + " > " + endChar);
         }
+    }
+    
+    private static List<String> expandSingleLetterRange(final String start, final String end) {
+        final List<String> variables = new ArrayList<>();
+        final char startChar = start.charAt(0);
+        final char endChar = end.charAt(0);
+        
+        validateSingleLetterRange(startChar, endChar, start, end);
+        
+        // Normalize to uppercase for comparison and iteration
+        final char startCharUpper = Character.toUpperCase(startChar);
+        final char endCharUpper = Character.toUpperCase(endChar);
         
         // Generate range preserving the original case
         final boolean isUpperCase = Character.isUpperCase(startChar);
