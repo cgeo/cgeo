@@ -63,8 +63,10 @@ public final class SumUtils {
         
         // Use arithmetic series formula: n*(start+end)/2 for better performance
         // Use BigInteger to avoid overflow for large ranges
-        final BigInteger n = BigInteger.valueOf(endVal - startVal + 1);
-        final BigInteger sum = n.multiply(BigInteger.valueOf(startVal + endVal)).divide(BigInteger.TWO);
+        final BigInteger startBI = BigInteger.valueOf(startVal);
+        final BigInteger endBI = BigInteger.valueOf(endVal);
+        final BigInteger n = endBI.subtract(startBI).add(BigInteger.ONE);
+        final BigInteger sum = n.multiply(startBI.add(endBI)).divide(BigInteger.TWO);
         return Value.of(sum);
     }
     
