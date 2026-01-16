@@ -80,6 +80,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.util.Pair;
 import androidx.core.view.MenuCompat;
 
@@ -309,6 +310,12 @@ public class MainActivity extends AbstractNavigationBarActivity {
             binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreate"));
         }
 
+    }
+
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
     }
 
     private void configureMessageCenterPolling() {

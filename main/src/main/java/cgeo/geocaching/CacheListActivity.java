@@ -119,6 +119,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -440,6 +441,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
             }
         });
+    }
+
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
     }
 
     @Override
