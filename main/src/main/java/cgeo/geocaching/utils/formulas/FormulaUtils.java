@@ -312,90 +312,107 @@ public class FormulaUtils {
      * This is called at compile time to determine which variables are needed
      */
     public static List<String> expandVariableRange(final String startVar, final String endVar) {
-        final List<String> variables = new ArrayList<>();
-        
         // Remove leading $ if present
         final String start = startVar.startsWith("$") ? startVar.substring(1) : startVar;
         final String end = endVar.startsWith("$") ? endVar.substring(1) : endVar;
         
         // Single-letter variable range: A-D
-        if (start.length() == 1 && end.length() == 1 && 
-            Character.isLetter(start.charAt(0)) && Character.isLetter(end.charAt(0))) {
-            final char startChar = Character.toUpperCase(start.charAt(0));
-            final char endChar = Character.toUpperCase(end.charAt(0));
-            if (startChar > endChar) {
-                throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                    "Start variable must be <= end variable: " + startChar + " > " + endChar);
-            }
-            for (char c = startChar; c <= endChar; c++) {
-                variables.add(String.valueOf(c));
-            }
-            return variables;
+        if (isSingleLetterRange(start, end)) {
+            return expandSingleLetterRange(start, end);
         }
         
-        // Two-letter variable with numeric suffix: A1-A5
+        // Two-letter or longer variable ranges
         if (start.length() >= 2 && end.length() >= 2) {
-            // Check if both have same prefix structure
-            final boolean startHasNumSuffix = Character.isDigit(start.charAt(start.length() - 1));
-            final boolean endHasNumSuffix = Character.isDigit(end.charAt(end.length() - 1));
-            
-            if (startHasNumSuffix && endHasNumSuffix) {
-                // Find prefix and numeric suffix
-                final String startPrefix = extractPrefix(start);
-                final String endPrefix = extractPrefix(end);
-                
-                if (!startPrefix.equalsIgnoreCase(endPrefix)) {
-                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                        "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
-                }
-                
-                final int startNum = Integer.parseInt(start.substring(startPrefix.length()));
-                final int endNum = Integer.parseInt(end.substring(endPrefix.length()));
-                
-                if (startNum > endNum) {
-                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                        "Start value must be <= end value: " + startNum + " > " + endNum);
-                }
-                
-                for (int i = startNum; i <= endNum; i++) {
-                    variables.add(startPrefix + i);
-                }
-                return variables;
+            // Check if both have numeric suffix: A1-A5
+            if (hasNumericSuffix(start) && hasNumericSuffix(end)) {
+                return expandNumericSuffixRange(start, end);
             }
             
-            // Two-letter variable with letter suffix: NA-ND
-            if (!startHasNumSuffix && !endHasNumSuffix) {
-                // Check if last character is a letter
-                final char startLast = start.charAt(start.length() - 1);
-                final char endLast = end.charAt(end.length() - 1);
-                
-                if (Character.isLetter(startLast) && Character.isLetter(endLast)) {
-                    final String startPrefix = start.substring(0, start.length() - 1);
-                    final String endPrefix = end.substring(0, end.length() - 1);
-                    
-                    if (!startPrefix.equalsIgnoreCase(endPrefix)) {
-                        throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                            "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
-                    }
-                    
-                    final char startChar = Character.toUpperCase(startLast);
-                    final char endChar = Character.toUpperCase(endLast);
-                    
-                    if (startChar > endChar) {
-                        throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                            "Start variable must be <= end variable: " + startChar + " > " + endChar);
-                    }
-                    
-                    for (char c = startChar; c <= endChar; c++) {
-                        variables.add(startPrefix + c);
-                    }
-                    return variables;
-                }
+            // Check if both have letter suffix: NA-ND
+            if (hasLetterSuffix(start) && hasLetterSuffix(end)) {
+                return expandLetterSuffixRange(start, end);
             }
         }
         
         throw new FormulaException(FormulaException.ErrorType.OTHER, 
             "Invalid variable range: " + startVar + " to " + endVar);
+    }
+    
+    private static boolean isSingleLetterRange(final String start, final String end) {
+        return start.length() == 1 && end.length() == 1 && 
+               Character.isLetter(start.charAt(0)) && Character.isLetter(end.charAt(0));
+    }
+    
+    private static boolean hasNumericSuffix(final String var) {
+        return Character.isDigit(var.charAt(var.length() - 1));
+    }
+    
+    private static boolean hasLetterSuffix(final String var) {
+        return Character.isLetter(var.charAt(var.length() - 1));
+    }
+    
+    private static List<String> expandSingleLetterRange(final String start, final String end) {
+        final List<String> variables = new ArrayList<>();
+        final char startChar = Character.toUpperCase(start.charAt(0));
+        final char endChar = Character.toUpperCase(end.charAt(0));
+        
+        if (startChar > endChar) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Start variable must be <= end variable: " + startChar + " > " + endChar);
+        }
+        
+        for (char c = startChar; c <= endChar; c++) {
+            variables.add(String.valueOf(c));
+        }
+        return variables;
+    }
+    
+    private static List<String> expandNumericSuffixRange(final String start, final String end) {
+        final List<String> variables = new ArrayList<>();
+        final String startPrefix = extractPrefix(start);
+        final String endPrefix = extractPrefix(end);
+        
+        if (!startPrefix.equalsIgnoreCase(endPrefix)) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
+        }
+        
+        final int startNum = Integer.parseInt(start.substring(startPrefix.length()));
+        final int endNum = Integer.parseInt(end.substring(endPrefix.length()));
+        
+        if (startNum > endNum) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Start value must be <= end value: " + startNum + " > " + endNum);
+        }
+        
+        for (int i = startNum; i <= endNum; i++) {
+            variables.add(startPrefix + i);
+        }
+        return variables;
+    }
+    
+    private static List<String> expandLetterSuffixRange(final String start, final String end) {
+        final List<String> variables = new ArrayList<>();
+        final String startPrefix = start.substring(0, start.length() - 1);
+        final String endPrefix = end.substring(0, end.length() - 1);
+        
+        if (!startPrefix.equalsIgnoreCase(endPrefix)) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
+        }
+        
+        final char startChar = Character.toUpperCase(start.charAt(start.length() - 1));
+        final char endChar = Character.toUpperCase(end.charAt(end.length() - 1));
+        
+        if (startChar > endChar) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Start variable must be <= end variable: " + startChar + " > " + endChar);
+        }
+        
+        for (char c = startChar; c <= endChar; c++) {
+            variables.add(startPrefix + c);
+        }
+        return variables;
     }
     
     private static String extractPrefix(final String varName) {
