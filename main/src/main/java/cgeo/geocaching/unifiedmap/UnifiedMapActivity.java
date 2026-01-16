@@ -186,7 +186,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onCreate(savedInstanceState);
         acquireUnifiedMap(this);
 
-        ActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        setContentView(R.layout.unifiedmap_activity);
+        showSpacer(true);
         if (null != findViewById(R.id.live_map_status)) {
             findViewById(R.id.live_map_status).getBackground().mutate();
         }
