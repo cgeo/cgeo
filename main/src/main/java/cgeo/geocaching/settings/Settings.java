@@ -286,10 +286,9 @@ public class Settings {
             return;
         }
 
-        final CgeoApplication cgeoApplication = CgeoApplication.getInstance();
         // No need to migrate if we don't have older settings, defaults will be used instead.
         final String preferencesNameV0 = "cgeo.pref";
-        final SharedPreferences prefsV0 = cgeoApplication.getSharedPreferences(preferencesNameV0, Context.MODE_PRIVATE);
+        final SharedPreferences prefsV0 = CgeoApplication.getInstance().getSharedPreferences(preferencesNameV0, Context.MODE_PRIVATE);
         if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
             final Editor e = sharedPrefs.edit();
             e.putInt(getKey(R.string.pref_settingsversion), latestPreferencesVersion);
@@ -516,20 +515,6 @@ public class Settings {
                 Log.e("Migrated map mode to UnifiedMap: " + tileprovider);
             }
 
-            if (hasKeyDirect(getKey((R.string.old_pref_skin)))) {
-                final Context context = cgeoApplication.getApplicationContext();
-                final DarkModeSetting themeSetting = DarkModeSetting.valueOf(getBoolean(R.string.old_pref_skin, false) ?
-                        DarkModeSetting.LIGHT.getPreferenceValue(context) :
-                        DarkModeSetting.DARK.getPreferenceValue(context));
-                setAppTheme(themeSetting);
-
-                final String themeValue = themeSetting.getPreferenceValue(context);
-                final Editor e = sharedPrefs.edit();
-                e.putString(getKey(R.string.pref_theme_setting), themeValue);
-                e.apply();
-                Log.e("Migrated dark mode: " + themeValue);
-            }
-
             setActualVersion(11);
         }
 
@@ -545,6 +530,10 @@ public class Settings {
 
     public static String getString(final int prefKeyId, final String defaultValue) {
         return getStringDirect(getKey(prefKeyId), defaultValue);
+    }
+
+    public static boolean hasKey(final int prefKeyId) {
+        return hasKeyDirect(getKey(prefKeyId));
     }
 
     private static boolean hasKeyDirect(final String prefKey) {
@@ -1423,8 +1412,16 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting,
-                DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+        if (hasKey(R.string.pref_theme_setting)) {
+            return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+        }
+        // If there is legacy skin preference, try to migrate it
+        if (hasKey(R.string.old_pref_skin)) {
+            return DarkModeSetting.valueOf(getBoolean(R.string.old_pref_skin, false) ?
+                    DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context));
+        }
+        return DarkModeSetting.SYSTEM_DEFAULT;
+
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
