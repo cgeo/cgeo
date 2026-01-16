@@ -860,9 +860,9 @@ public final class Formula {
 
         final FormulaFunction formulaFunction = Objects.requireNonNull(FormulaFunction.findByName(functionName));
 
-        // Special handling for sum function with string parameters (variable ranges)
-        if ("sum".equals(functionName) && params.size() == 2) {
-            return parseSumFunction(params);
+        // Check if this function requires special parsing (e.g., for compile-time parameter expansion)
+        if (formulaFunction.requiresSpecialParsing()) {
+            return parseSpecialFunction(functionName, formulaFunction, params);
         }
 
         return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
@@ -879,6 +879,33 @@ public final class Formula {
                     valueListToCharSequence(valueList, "; ", paramsInError, true),
                     ")"), paramsInError));
 
+    }
+    
+    /**
+     * Handle special parsing for functions that need compile-time parameter processing
+     */
+    @NonNull
+    private FormulaNode parseSpecialFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
+        // Currently only sum function requires special parsing
+        if ("sum".equals(functionName) && params.size() == 2) {
+            return parseSumFunction(params);
+        }
+        
+        // If no special handling matched, fall back to standard parsing
+        // This shouldn't normally happen if requiresSpecialParsing is set correctly
+        return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
+                (n, v, ri) -> {
+                    try {
+                        return formulaFunction.execute(n);
+                    } catch (FormulaException ce) {
+                        ce.setExpression(expression);
+                        ce.setFunction(functionName);
+                        throw ce;
+                    }
+                },
+                (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat(functionName + "(",
+                    valueListToCharSequence(valueList, "; ", paramsInError, true),
+                    ")"), paramsInError));
     }
 
     @NonNull
