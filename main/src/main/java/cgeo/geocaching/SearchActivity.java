@@ -57,6 +57,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
 
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -147,6 +148,12 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
         init();
+    }
+
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
     }
 
     @Override
