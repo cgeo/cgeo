@@ -93,7 +93,6 @@ public enum FormulaFunction {
 
     private final String insertPattern;
     private final int insertIndex;
-    
     private final boolean requiresSpecialParsing;
 
     private static final Map<String, FormulaFunction> FUNC_BY_NAME = new HashMap<>();
@@ -145,7 +144,7 @@ public enum FormulaFunction {
     public FunctionGroup getGroup() {
         return group;
     }
-    
+
     public boolean requiresSpecialParsing() {
         return requiresSpecialParsing;
     }
