@@ -154,7 +154,7 @@ public class Settings {
     /**
      * Possible values of the Dark Mode Setting.
      * <p>
-     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue(Context)} and received via {@link DarkModeSetting#valueOf(String)}.
+     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue()} and received via {@link DarkModeSetting#valueOf(String)}.
      * <p>
      * Additionally, the equivalent {@link AppCompatDelegate}-Mode can be received via {@link #getModeId()}.
      *
@@ -191,7 +191,7 @@ public class Settings {
             return modeId;
         }
 
-        public String getPreferenceValue(final @NonNull Context context) {
+        public String getPreferenceValue() {
             return LocalizationUtils.getString(preferenceValue);
         }
     }
@@ -1400,16 +1400,16 @@ public class Settings {
 
 
     public static void setAppThemeAutomatically(final @NonNull Context context) {
-        setAppTheme(getAppTheme(context));
+        setAppTheme(getAppTheme());
     }
 
     public static void setAppTheme(final DarkModeSetting setting) {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
 
-    private static DarkModeSetting getAppTheme(final @NonNull Context context) {
+    private static DarkModeSetting getAppTheme() {
         return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
-                DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
+                DarkModeSetting.LIGHT.getPreferenceValue() : DarkModeSetting.DARK.getPreferenceValue()));
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
@@ -1426,7 +1426,7 @@ public class Settings {
     }
 
     public static boolean isLightSkin(final @NonNull Context context) {
-        return !isDarkThemeActive(context, getAppTheme(context));
+        return !isDarkThemeActive(context, getAppTheme());
     }
 
     public static boolean useColoredActionBar(final @NonNull Context context) {
