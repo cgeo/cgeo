@@ -1,9 +1,12 @@
 package cgeo.geocaching.utils.formulas;
 
+import android.util.Pair;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Utility methods for the sum() formula function.
@@ -76,13 +79,13 @@ public final class SumUtils {
      * @param varProvider Function to retrieve variable values
      * @return Pair of sum and list of missing variables (if any)
      */
-    public static android.util.Pair<BigDecimal, List<String>> sumVariables(
+    public static Pair<BigDecimal, List<String>> sumVariables(
             final List<String> variables,
-            final java.util.function.Function<String, Value> varProvider) {
+            final Function<String, Value> varProvider) {
         BigDecimal sum = BigDecimal.ZERO;
         final List<String> missingVars = new ArrayList<>();
         
-        for (String varName : variables) {
+        for (final String varName : variables) {
             final Value value = varProvider.apply(varName);
             if (value == null) {
                 missingVars.add(varName);
@@ -95,7 +98,7 @@ public final class SumUtils {
             }
         }
         
-        return new android.util.Pair<>(sum, missingVars);
+        return new Pair<>(sum, missingVars);
     }
     
     /**
@@ -186,8 +189,18 @@ public final class SumUtils {
                 "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
         }
         
-        final int startNum = Integer.parseInt(start.substring(startPrefix.length()));
-        final int endNum = Integer.parseInt(end.substring(endPrefix.length()));
+        final String startSuffix = start.substring(startPrefix.length());
+        final String endSuffix = end.substring(endPrefix.length());
+        
+        final int startNum;
+        final int endNum;
+        try {
+            startNum = Integer.parseInt(startSuffix);
+            endNum = Integer.parseInt(endSuffix);
+        } catch (final NumberFormatException e) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER,
+                "Variable suffixes must be numeric: '" + start + "', '" + end + "'");
+        }
         
         if (startNum > endNum) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 

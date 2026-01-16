@@ -929,7 +929,7 @@ public final class Formula {
             // Create a sum node that references all variables in the range
             return new FormulaNode("sum-var-range", null,
                 (objs, vars, ri) -> {
-                    final android.util.Pair<BigDecimal, List<String>> result = 
+                    final Pair<BigDecimal, List<String>> result = 
                         SumUtils.sumVariables(variables, vars);
                     if (!result.second.isEmpty()) {
                         Collections.sort(result.second);
@@ -949,7 +949,7 @@ public final class Formula {
     private CharSequence formatVariableRangeSumDisplay(final List<String> variables, final Function<String, Value> vars) {
         final StringBuilder sb = new StringBuilder("sum(");
         boolean first = true;
-        for (String varName : variables) {
+        for (final String varName : variables) {
             if (!first) {
                 sb.append("+");
             }
