@@ -17,6 +17,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.math.BigDecimal;
@@ -860,39 +861,36 @@ public final class Formula {
 
         final FormulaFunction formulaFunction = Objects.requireNonNull(FormulaFunction.findByName(functionName));
 
-        // Check if this function requires special parsing (e.g., for compile-time parameter expansion)
-        if (formulaFunction.requiresSpecialParsing()) {
-            return parseSpecialFunction(functionName, formulaFunction, params);
+        // Try special parsing first, fall back to standard parsing if not handled
+        final FormulaNode specialNode = tryParseSpecialFunction(functionName, formulaFunction, params);
+        if (specialNode != null) {
+            return specialNode;
         }
 
-        return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
-                (n, v, ri) -> {
-                    try {
-                        return formulaFunction.execute(n);
-                    } catch (FormulaException ce) {
-                        ce.setExpression(expression);
-                        ce.setFunction(functionName);
-                        throw ce;
-                    }
-                },
-                (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat(functionName + "(",
-                    valueListToCharSequence(valueList, "; ", paramsInError, true),
-                    ")"), paramsInError));
-
+        return createStandardFunctionNode(functionName, formulaFunction, params);
     }
 
     /**
-     * Handle special parsing for functions that need compile-time parameter processing
+     * Try to handle special parsing for functions that need compile-time parameter processing
+     * @return FormulaNode if special parsing was applied, null otherwise
      */
-    @NonNull
-    private FormulaNode parseSpecialFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
-        // Currently only sum function requires special parsing
-        if ("sum".equals(functionName) && params.size() == 2) {
-            return parseSumFunction(params);
+    @Nullable
+    private FormulaNode tryParseSpecialFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
+        if (!formulaFunction.requiresSpecialParsing()) {
+            return null;
         }
         
-        // If no special handling matched, fall back to standard parsing
-        // This shouldn't normally happen if requiresSpecialParsing is set correctly
+        // Currently only sum function requires special parsing
+        if ("sum".equals(functionName) && params.size() == 2) {
+            return parseSumFunction(functionName, formulaFunction, params);
+        }
+        
+        // If no special handling matched, return null to use standard parsing
+        return null;
+    }
+
+    @NonNull
+    private FormulaNode createStandardFunctionNode(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
         return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
                 (n, v, ri) -> {
                     try {
@@ -909,68 +907,62 @@ public final class Formula {
     }
 
     @NonNull
-    private FormulaNode parseSumFunction(final List<FormulaNode> params) {
+    private FormulaNode parseSumFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
         // Try to extract string literals from parameters
         final String startVar = extractStringLiteral(params.get(0));
         final String endVar = extractStringLiteral(params.get(1));
 
         // If both parameters are string literals, expand to variable range
         if (startVar != null && endVar != null) {
-            try {
-                final List<String> variables = FormulaUtils.expandVariableRange(startVar, endVar);
-                
-                // Create a sum node that references all variables in the range
-                return new FormulaNode("sum-var-range", null,
-                    (objs, vars, ri) -> {
-                        final android.util.Pair<BigDecimal, List<String>> result = 
-                            FormulaUtils.sumVariables(variables, vars);
-                        if (!result.second.isEmpty()) {
-                            Collections.sort(result.second);
-                            throw new FormulaException(MISSING_VARIABLE_VALUE, 
-                                StringUtils.join(result.second, ", "));
-                        }
-                        return Value.of(result.first);
-                    },
-                    (objs, vars, ri, error) -> {
-                        // For display purposes
-                        final StringBuilder sb = new StringBuilder("sum(");
-                        boolean first = true;
-                        for (String varName : variables) {
-                            if (!first) {
-                                sb.append("+");
-                            }
-                            first = false;
-                            final Value value = vars.apply(varName);
-                            if (value == null) {
-                                sb.append(TextUtils.setSpan("?" + varName, createErrorSpan()));
-                            } else {
-                                sb.append(value.getAsString());
-                            }
-                        }
-                        sb.append(")");
-                        return sb.toString();
-                    },
-                    result -> result.addAll(variables)); // Add all variables as dependencies
-            } catch (FormulaException fe) {
-                // If expansion fails, re-throw the exception to fail at compile time
-                throw fe;
-            }
+            return createVariableRangeSumNode(startVar, endVar);
         }
 
         // Otherwise, handle as numeric range or pre-calculated variables
-        return new FormulaNode("f:sum", params.toArray(new FormulaNode[0]),
-            (n, v, ri) -> {
-                try {
-                    return FormulaFunction.SUM.execute(n);
-                } catch (FormulaException ce) {
-                    ce.setExpression(expression);
-                    ce.setFunction("sum");
-                    throw ce;
-                }
-            },
-            (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat("sum(",
-                valueListToCharSequence(valueList, "; ", paramsInError, true),
-                ")"), paramsInError));
+        return createStandardFunctionNode(functionName, formulaFunction, params);
+    }
+
+    @NonNull
+    private FormulaNode createVariableRangeSumNode(final String startVar, final String endVar) {
+        try {
+            final List<String> variables = FormulaUtils.expandVariableRange(startVar, endVar);
+            
+            // Create a sum node that references all variables in the range
+            return new FormulaNode("sum-var-range", null,
+                (objs, vars, ri) -> {
+                    final android.util.Pair<BigDecimal, List<String>> result = 
+                        FormulaUtils.sumVariables(variables, vars);
+                    if (!result.second.isEmpty()) {
+                        Collections.sort(result.second);
+                        throw new FormulaException(MISSING_VARIABLE_VALUE, 
+                            StringUtils.join(result.second, ", "));
+                    }
+                    return Value.of(result.first);
+                },
+                (objs, vars, ri, error) -> formatVariableRangeSumDisplay(variables, vars),
+                result -> result.addAll(variables)); // Add all variables as dependencies
+        } catch (FormulaException fe) {
+            // If expansion fails, re-throw the exception to fail at compile time
+            throw fe;
+        }
+    }
+
+    private CharSequence formatVariableRangeSumDisplay(final List<String> variables, final Function<String, Value> vars) {
+        final StringBuilder sb = new StringBuilder("sum(");
+        boolean first = true;
+        for (String varName : variables) {
+            if (!first) {
+                sb.append("+");
+            }
+            first = false;
+            final Value value = vars.apply(varName);
+            if (value == null) {
+                sb.append(TextUtils.setSpan("?" + varName, createErrorSpan()));
+            } else {
+                sb.append(value.getAsString());
+            }
+        }
+        sb.append(")");
+        return sb.toString();
     }
 
     /**
