@@ -924,13 +924,13 @@ public final class Formula {
     @NonNull
     private FormulaNode createVariableRangeSumNode(final String startVar, final String endVar) {
         try {
-            final List<String> variables = FormulaUtils.expandVariableRange(startVar, endVar);
+            final List<String> variables = SumUtils.expandVariableRange(startVar, endVar);
             
             // Create a sum node that references all variables in the range
             return new FormulaNode("sum-var-range", null,
                 (objs, vars, ri) -> {
                     final android.util.Pair<BigDecimal, List<String>> result = 
-                        FormulaUtils.sumVariables(variables, vars);
+                        SumUtils.sumVariables(variables, vars);
                     if (!result.second.isEmpty()) {
                         Collections.sort(result.second);
                         throw new FormulaException(MISSING_VARIABLE_VALUE, 
