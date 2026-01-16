@@ -880,7 +880,7 @@ public final class Formula {
                     ")"), paramsInError));
 
     }
-    
+
     /**
      * Handle special parsing for functions that need compile-time parameter processing
      */
