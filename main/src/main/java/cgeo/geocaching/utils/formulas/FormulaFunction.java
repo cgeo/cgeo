@@ -58,7 +58,7 @@ public enum FormulaFunction {
             singleValueStringFunction(FormulaUtils::roman)),
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
             singleValueStringFunction(FormulaUtils::vanity)),
-    SUM(new String[]{"sum"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_sum, "Sum Range", "'A';'Z'", 1,
+    SUMRANGE(new String[]{"sum"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_sum, "Sum Range", "'A';'Z'", 1,
             SumUtils::sum, true);
 
     public enum FunctionGroup {

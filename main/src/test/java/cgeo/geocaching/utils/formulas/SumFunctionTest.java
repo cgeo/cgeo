@@ -162,6 +162,21 @@ public class SumFunctionTest {
     }
 
     @Test
+    public void testSumSingleLetterVariableRangeLowercase() {
+        // sum("a";"d") with a=1, b=2, c=3, d=4 -> 10
+        final Value result = Formula.evaluate("sum('a';'d')", "a", 1, "b", 2, "c", 3, "d", 4);
+        assertThat(result.getAsLong()).isEqualTo(10);
+    }
+
+    @Test
+    public void testSumErrorMixedCaseVariables() {
+        // sum("a";"D") -> error: cannot mix uppercase and lowercase
+        assertThatThrownBy(() -> Formula.compile("sum('a';'D')"))
+            .isInstanceOf(FormulaException.class)
+            .hasMessageContaining("Cannot mix uppercase and lowercase");
+    }
+
+    @Test
     public void testSumErrorNonNumericVariable() {
         // sum("A";"C") with A=1, B="text", C=3 -> error
         assertThatThrownBy(() -> Formula.evaluate("sum('A';'C')", "A", 1, "B", "text", "C", 3))
@@ -180,7 +195,7 @@ public class SumFunctionTest {
     @Test
     public void testSumLowercaseVariables() {
         // sum("a";"c") with a=1, b=2, c=3 -> 6
-        final Value result = Formula.evaluate("sum('a';'c')", "A", 1, "B", 2, "C", 3);
+        final Value result = Formula.evaluate("sum('a';'c')", "a", 1, "b", 2, "c", 3);
         assertThat(result.getAsLong()).isEqualTo(6);
     }
 
