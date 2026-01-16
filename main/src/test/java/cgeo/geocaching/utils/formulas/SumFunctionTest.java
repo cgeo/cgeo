@@ -212,4 +212,20 @@ public class SumFunctionTest {
         final Value result = Formula.evaluate("sum('A';'B') * 2", "A", 3, "B", 4);
         assertThat(result.getAsLong()).isEqualTo(14);
     }
+
+    @Test
+    public void testSumLetterSuffixCaseSensitive() {
+        // sum("$NA";"$NC") and sum("$na";"$nc") should not be allowed to mix
+        assertThatThrownBy(() -> Formula.evaluate("sum('$NA';'$Nc')"))
+            .isInstanceOf(FormulaException.class)
+            .hasMessageContaining("Cannot mix uppercase and lowercase");
+    }
+
+    @Test
+    public void testSumNumericSuffixCaseSensitive() {
+        // sum("$A1";"$A3") and sum("$a1";"$a3") should require matching case in prefix
+        assertThatThrownBy(() -> Formula.evaluate("sum('$A1';'$a3')"))
+            .isInstanceOf(FormulaException.class)
+            .hasMessageContaining("must match");
+    }
 }

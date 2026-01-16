@@ -187,27 +187,18 @@ public final class SumUtils {
         
         validateSingleLetterRange(startChar, endChar, start, end);
         
-        // Normalize to uppercase for comparison and iteration
-        final char startCharUpper = Character.toUpperCase(startChar);
-        final char endCharUpper = Character.toUpperCase(endChar);
-        
-        // Generate range preserving the original case
-        final boolean isUpperCase = Character.isUpperCase(startChar);
-        for (char c = startCharUpper; c <= endCharUpper; c++) {
-            variables.add(String.valueOf(isUpperCase ? c : Character.toLowerCase(c)));
+        // Generate range - iterate directly on the characters preserving case
+        for (char c = startChar; c <= endChar; c++) {
+            variables.add(String.valueOf(c));
         }
         return variables;
     }
     
     private static List<String> expandNumericSuffixRange(final String start, final String end) {
-        final List<String> variables = new ArrayList<>();
         final String startPrefix = extractPrefix(start);
         final String endPrefix = extractPrefix(end);
         
-        if (!startPrefix.equalsIgnoreCase(endPrefix)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
-        }
+        validatePrefixMatch(startPrefix, endPrefix);
         
         final String startSuffix = start.substring(startPrefix.length());
         final String endSuffix = end.substring(endPrefix.length());
@@ -227,6 +218,7 @@ public final class SumUtils {
                 "Start value must be <= end value: " + startNum + " > " + endNum);
         }
         
+        final List<String> variables = new ArrayList<>();
         for (int i = startNum; i <= endNum; i++) {
             variables.add(startPrefix + i);
         }
@@ -234,27 +226,47 @@ public final class SumUtils {
     }
     
     private static List<String> expandLetterSuffixRange(final String start, final String end) {
-        final List<String> variables = new ArrayList<>();
         final String startPrefix = start.substring(0, start.length() - 1);
         final String endPrefix = end.substring(0, end.length() - 1);
         
-        if (!startPrefix.equalsIgnoreCase(endPrefix)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Variable prefixes must match: " + startPrefix + " != " + endPrefix);
-        }
+        validatePrefixMatch(startPrefix, endPrefix);
         
-        final char startChar = Character.toUpperCase(start.charAt(start.length() - 1));
-        final char endChar = Character.toUpperCase(end.charAt(end.length() - 1));
+        final char startChar = start.charAt(start.length() - 1);
+        final char endChar = end.charAt(end.length() - 1);
         
-        if (startChar > endChar) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start variable must be <= end variable: " + startChar + " > " + endChar);
-        }
+        // Validate same case and range ordering
+        validateLetterSuffixRange(startChar, endChar, start, end);
         
+        final List<String> variables = new ArrayList<>();
         for (char c = startChar; c <= endChar; c++) {
             variables.add(startPrefix + c);
         }
         return variables;
+    }
+    
+    private static void validatePrefixMatch(final String startPrefix, final String endPrefix) {
+        // Prefixes must match exactly (including case)
+        if (!startPrefix.equals(endPrefix)) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Variable prefixes must match (including case): '" + startPrefix + "' != '" + endPrefix + "'");
+        }
+    }
+    
+    private static void validateLetterSuffixRange(final char startChar, final char endChar,
+            final String start, final String end) {
+        // Check that both are same case (both upper or both lower)
+        if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Cannot mix uppercase and lowercase in variable range: " + start + " to " + end);
+        }
+        
+        // Check that start <= end (compare normalized for correct ordering)
+        final char startCharUpper = Character.toUpperCase(startChar);
+        final char endCharUpper = Character.toUpperCase(endChar);
+        if (startCharUpper > endCharUpper) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Start variable must be <= end variable: " + startChar + " > " + endChar);
+        }
     }
     
     private static String extractPrefix(final String varName) {
