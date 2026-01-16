@@ -727,7 +727,7 @@ public class Settings {
     }
 
     public static String getUserName() {
-        return StringUtils.trim(LocalizationUtils.getString(R.string.pref_username, StringUtils.EMPTY));
+        return StringUtils.trim(getString(R.string.pref_username, StringUtils.EMPTY));
     }
 
     /** this method is to be solely used for auto-fixing GC username, see MainActivity.UpdateUserInfoHandler */
@@ -807,11 +807,11 @@ public class Settings {
     }
 
     public static String getALCLauncher() {
-        return LocalizationUtils.getString(R.string.pref_alc_launcher, "");
+        return getString(R.string.pref_alc_launcher, "");
     }
 
     public static GCMemberState getGCMemberStatus() {
-        return GCMemberState.fromString(LocalizationUtils.getString(R.string.pref_memberstatus, ""));
+        return GCMemberState.fromString(getString(R.string.pref_memberstatus, ""));
     }
 
     public static void setGCMemberStatus(final GCMemberState memberStatus) {
@@ -820,7 +820,7 @@ public class Settings {
 
     //solely to be used by class Cookies
     public static String getPersistentCookies() {
-        return LocalizationUtils.getString(R.string.pref_cookiejar, "");
+        return getString(R.string.pref_cookiejar, "");
     }
 
     //solely to be used by class Cookies
@@ -857,7 +857,7 @@ public class Settings {
 
     @NonNull
     public static String getSignature() {
-        return StringUtils.defaultString(LocalizationUtils.getString(R.string.pref_signature, StringUtils.EMPTY));
+        return StringUtils.defaultString(getString(R.string.pref_signature, StringUtils.EMPTY));
     }
 
     public static void setUseGooglePlayServices(final boolean value) {
@@ -926,7 +926,7 @@ public class Settings {
     }
 
     public static int getMapRotation() {
-        final String prefValue = LocalizationUtils.getString(R.string.pref_mapRotation, "");
+        final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
             return MAPROTATION_OFF;
         } else if (prefValue.equals(getKey(R.string.pref_maprotation_auto_lowpower))) {
@@ -998,7 +998,7 @@ public class Settings {
      */
     public static String getGcCustomDate() {
         // We might have some users whose stored value is null, which is invalid. In this case, we use the default.
-        return StringUtils.defaultString(LocalizationUtils.getString(R.string.pref_gccustomdate, GCConstants.DEFAULT_GC_DATE),
+        return StringUtils.defaultString(getString(R.string.pref_gccustomdate, GCConstants.DEFAULT_GC_DATE),
                 GCConstants.DEFAULT_GC_DATE);
     }
 
@@ -1035,7 +1035,7 @@ public class Settings {
     }
 
     public static String getGeokretySecId() {
-        return LocalizationUtils.getString(R.string.pref_fakekey_geokrety_authorization, null);
+        return getString(R.string.pref_fakekey_geokrety_authorization, null);
     }
 
     public static void setGeokretySecId(final String secid) {
@@ -1176,7 +1176,7 @@ public class Settings {
     }
 
     public static int getCompactIconMode() {
-        final String prefValue = LocalizationUtils.getString(R.string.pref_compactIconMode, "");
+        final String prefValue = getString(R.string.pref_compactIconMode, "");
         if (prefValue.equals(getKey(R.string.pref_compacticon_on))) {
             return COMPACTICON_ON;
         } else if (prefValue.equals(getKey(R.string.pref_compacticon_auto))) {
@@ -1271,7 +1271,7 @@ public class Settings {
         if (tileProvider != null) {
             return tileProvider;
         }
-        final String tileProviderId = LocalizationUtils.getString(R.string.pref_tileprovider, null);
+        final String tileProviderId = getString(R.string.pref_tileprovider, null);
         tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
         if (tileProvider == null /* || !tileProvider.isAvailable() */) {
             tileProvider = TileProviderFactory.getAnyTileProvider();
@@ -1293,7 +1293,7 @@ public class Settings {
     }
 
     public static AbstractTileProvider getPreviousTileProvider() {
-        final String tileProviderId = LocalizationUtils.getString(R.string.pref_previous_tileprovider, null);
+        final String tileProviderId = getString(R.string.pref_previous_tileprovider, null);
         tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
         if (tileProvider == null) {
             tileProvider = TileProviderFactory.getAnyTileProvider();
@@ -1311,7 +1311,7 @@ public class Settings {
 
     @Nullable
     public static String getUserDefinedTileProviderUri() {
-        return LocalizationUtils.getString(R.string.pref_userDefinedTileProviderUri, null);
+        return getString(R.string.pref_userDefinedTileProviderUri, null);
     }
 
     public static void setMapLanguage(@Nullable final String language) {
@@ -1320,7 +1320,7 @@ public class Settings {
 
     @Nullable
     public static String getMapLanguage() {
-        final String language = LocalizationUtils.getString(R.string.pref_mapLanguage, null);
+        final String language = getString(R.string.pref_mapLanguage, null);
         return StringUtils.isBlank(language) ? null : language;
     }
 
@@ -1342,7 +1342,7 @@ public class Settings {
     /** which variants are enabled for UnifiedMap */
     private static int getUnifiedMapVariant() {
         try {
-            return Integer.parseInt(LocalizationUtils.getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
+            return Integer.parseInt(getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
         } catch (NumberFormatException ignore) {
             return UNIFIEDMAP_VARIANT_MAPSFORGE;
         }
@@ -1489,7 +1489,7 @@ public class Settings {
     }
 
     public static String getWebDeviceCode() {
-        return LocalizationUtils.getString(R.string.pref_webDeviceCode, null);
+        return getString(R.string.pref_webDeviceCode, null);
     }
 
     public static boolean isRegisteredForSend2cgeo() {
@@ -1497,7 +1497,7 @@ public class Settings {
     }
 
     static String getWebDeviceName() {
-        return LocalizationUtils.getString(R.string.pref_webDeviceName, Build.MODEL);
+        return getString(R.string.pref_webDeviceName, Build.MODEL);
     }
 
     /**
@@ -1548,15 +1548,15 @@ public class Settings {
 
     public static String getRoutingProfile(final RoutingMode mode) {
         if (mode.equals(RoutingMode.CAR)) {
-            return LocalizationUtils.getString(R.string.pref_brouterProfileCar, BRouterConstants.BROUTER_PROFILE_CAR_DEFAULT);
+            return getString(R.string.pref_brouterProfileCar, BRouterConstants.BROUTER_PROFILE_CAR_DEFAULT);
         } else if (mode.equals(RoutingMode.BIKE)) {
-            return LocalizationUtils.getString(R.string.pref_brouterProfileBike, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT);
+            return getString(R.string.pref_brouterProfileBike, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT);
         } else if (mode.equals(RoutingMode.WALK)) {
-            return LocalizationUtils.getString(R.string.pref_brouterProfileWalk, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT);
+            return getString(R.string.pref_brouterProfileWalk, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT);
         } else if (mode.equals(RoutingMode.USER1)) {
-            return LocalizationUtils.getString(R.string.pref_brouterProfileUser1, null);
+            return getString(R.string.pref_brouterProfileUser1, null);
         } else if (mode.equals(RoutingMode.USER2)) {
-            return LocalizationUtils.getString(R.string.pref_brouterProfileUser2, null);
+            return getString(R.string.pref_brouterProfileUser2, null);
         } else {
             return null;
         }
@@ -1629,12 +1629,12 @@ public class Settings {
     }
 
     public static boolean isProximityNotificationTypeTone() {
-        final String pref = LocalizationUtils.getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
+        final String pref = getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
         return pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY) || pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_AND_TEXT);
     }
 
     public static boolean isProximityNotificationTypeText() {
-        final String pref = LocalizationUtils.getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
+        final String pref = getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
         return pref.equals(ProximityNotification.NOTIFICATION_TYPE_TEXT_ONLY) || pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_AND_TEXT);
     }
 
@@ -1708,7 +1708,7 @@ public class Settings {
     }
 
     public static String getExternalPrivateCgeoDirectory() {
-        return LocalizationUtils.getString(R.string.pref_dataDir, null);
+        return getString(R.string.pref_dataDir, null);
     }
 
     public static void setExternalPrivateCgeoDirectory(final String extDir) {
@@ -1753,7 +1753,7 @@ public class Settings {
      * @return The Trackable Sort Method previously used.
      */
     public static TrackableComparator getTrackableComparator() {
-        return TrackableComparator.findByName(LocalizationUtils.getString(R.string.pref_trackable_inventory_sort, ""));
+        return TrackableComparator.findByName(getString(R.string.pref_trackable_inventory_sort, ""));
     }
 
     /**
@@ -1787,7 +1787,7 @@ public class Settings {
      * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper}!
      */
     public static String getSelectedMapRenderTheme() {
-        return LocalizationUtils.getString(R.string.pref_renderthemefile, "");
+        return getString(R.string.pref_renderthemefile, "");
     }
 
     /**
@@ -1806,7 +1806,7 @@ public class Settings {
 
     /** to be called by {@link cgeo.geocaching.unifiedmap.mapsforgevtm.VtmThemes} solely! */
     public static String getVtmDefaultVariantName() {
-        return LocalizationUtils.getString(R.string.pref_vtm_default, "");
+        return getString(R.string.pref_vtm_default, "");
     }
 
     /**
@@ -2035,7 +2035,7 @@ public class Settings {
     }
 
     public static String getECIconSet() {
-        return LocalizationUtils.getString(R.string.pref_ec_icons, "1");
+        return getString(R.string.pref_ec_icons, "1");
     }
 
     /* Store last checksum of changelog for changelog display */
@@ -2085,11 +2085,11 @@ public class Settings {
     }
 
     private static boolean outdatedPhoneModelOrSdk() {
-        return !StringUtils.equals(PHONE_MODEL_AND_SDK, LocalizationUtils.getString(R.string.pref_phone_model_and_sdk, null));
+        return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }
 
     public static String getLastCacheLog() {
-        return LocalizationUtils.getString(R.string.pref_last_cache_log, StringUtils.EMPTY);
+        return getString(R.string.pref_last_cache_log, StringUtils.EMPTY);
     }
 
     public static void setLastCacheLog(final String log) {
@@ -2097,7 +2097,7 @@ public class Settings {
     }
 
     public static String getLastTrackableLog() {
-        return LocalizationUtils.getString(R.string.pref_last_trackable_log, StringUtils.EMPTY);
+        return getString(R.string.pref_last_trackable_log, StringUtils.EMPTY);
     }
 
     public static void setLastTrackableLog(final String log) {
@@ -2106,7 +2106,7 @@ public class Settings {
 
     @Nullable
     public static String getHomeLocation() {
-        return LocalizationUtils.getString(R.string.pref_home_location, null);
+        return getString(R.string.pref_home_location, null);
     }
 
     public static void setHomeLocation(@NonNull final String homeLocation) {
@@ -2163,7 +2163,7 @@ public class Settings {
     }
 
     public static String getUserLanguage() {
-        return LocalizationUtils.getString(R.string.pref_selected_language, Settings.getBoolean(R.string.old_pref_useenglish, false) ? "en" : "");
+        return getString(R.string.pref_selected_language, Settings.getBoolean(R.string.old_pref_useenglish, false) ? "en" : "");
     }
 
     public static void putUserLanguage(final String language) {
@@ -2225,7 +2225,7 @@ public class Settings {
     }
 
     public static int getCustomBNitem() {
-        final int item = Integer.parseInt(LocalizationUtils.getString(R.string.pref_custombnitem, "0"));
+        final int item = Integer.parseInt(getString(R.string.pref_custombnitem, "0"));
         if (item == CUSTOMBNITEM_NEARBY || item == CUSTOMBNITEM_NONE || item == CUSTOMBNITEM_PLACEHOLDER) {
             return item;
         }
@@ -2243,7 +2243,7 @@ public class Settings {
     }
 
     public static RoutingMode getRoutingMode() {
-        return RoutingMode.fromString(LocalizationUtils.getString(R.string.pref_map_routing, "foot"));
+        return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
     public static void setUseInternalRouting(final boolean useInternalRouting) {
@@ -2505,7 +2505,7 @@ public class Settings {
     @Nullable
     public static List<PrefLogTemplate> getLogTemplates() {
         try {
-            return MAPPER.readValue(LocalizationUtils.getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() {
+            return MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() {
             });
         } catch (JsonProcessingException e) {
             Log.e("Failure parsing log templates: " + e.getMessage());
@@ -2514,7 +2514,7 @@ public class Settings {
     }
 
     public static String getLogImageCaptionDefaultPraefix() {
-        final String praefix = LocalizationUtils.getString(R.string.pref_log_image_default_prefix, null);
+        final String praefix = getString(R.string.pref_log_image_default_prefix, null);
         return getLogImageCaptionDefaultPraefixFor(praefix);
     }
 
@@ -2560,7 +2560,7 @@ public class Settings {
     }
 
     public static String getSelectedGoogleMapTheme() {
-        return LocalizationUtils.getString(R.string.pref_google_map_theme, "DEFAULT");
+        return getString(R.string.pref_google_map_theme, "DEFAULT");
     }
 
     public static boolean isGoogleMapOptionEnabled(final String option, final boolean defaultValue) {
@@ -2630,19 +2630,19 @@ public class Settings {
     }
 
     public static String getShortDateFormat() {
-        return LocalizationUtils.getString(R.string.pref_short_date_format, "");
+        return getString(R.string.pref_short_date_format, "");
     }
 
     @NonNull
     public static TranslationUtils.Translator getTranslatorExternal() {
         final TranslationUtils.Translator defaultTranslator = TranslationUtils.Translator.GOOGLE;
         return EnumUtils.getEnum(TranslationUtils.Translator.class,
-            LocalizationUtils.getString(R.string.pref_translator_external, defaultTranslator.name()),
+            getString(R.string.pref_translator_external, defaultTranslator.name()),
                 defaultTranslator);
     }
 
     public static OfflineTranslateUtils.Language getTranslationTargetLanguageRaw() {
-        final String lngCode = LocalizationUtils.getString(R.string.pref_translation_language, null);
+        final String lngCode = getString(R.string.pref_translation_language, null);
         if (lngCode == null) {
             return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_AUTOMATIC);
         }
@@ -2653,7 +2653,7 @@ public class Settings {
     }
 
     public static String getTranslationTargetLanguageCode() {
-        return LocalizationUtils.getString(R.string.pref_translation_language, null);
+        return getString(R.string.pref_translation_language, null);
     }
 
     public static OfflineTranslateUtils.Language getApplicationLanguage() {
