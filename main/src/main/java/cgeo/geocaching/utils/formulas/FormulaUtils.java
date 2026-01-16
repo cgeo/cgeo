@@ -244,6 +244,20 @@ public class FormulaUtils {
         final Value start = valueList.get(0);
         final Value end = valueList.get(1);
         
+        validateSumParameters(start, end);
+        
+        // Handle numeric range: sum(1;5) -> 1+2+3+4+5
+        if (start.isNumeric() && end.isNumeric()) {
+            return sumNumericRange(start, end);
+        }
+        
+        // This should never be reached in runtime as string parameters are handled at compile time
+        // but we provide a fallback error
+        throw new FormulaException(FormulaException.ErrorType.OTHER, 
+            "sum() with string parameters must be compiled with variable context");
+    }
+
+    private static void validateSumParameters(final Value start, final Value end) {
         // Both parameters must be of the same type
         if (start.isNumeric() != end.isNumeric()) {
             throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
@@ -251,32 +265,26 @@ public class FormulaUtils {
                 start.getType() + " and " + end.getType(), 
                 "same type");
         }
-        
-        // Handle numeric range: sum(1;5) -> 1+2+3+4+5
-        if (start.isNumeric() && end.isNumeric()) {
-            if (!start.isInteger() || !end.isInteger()) {
-                throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
-                    "Numeric ranges must use integer parameters", 
-                    start.getType() + " and " + end.getType(), 
-                    "Integer");
-            }
-            final long startVal = start.getAsLong();
-            final long endVal = end.getAsLong();
-            if (startVal > endVal) {
-                throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                    "Start value must be <= end value: " + startVal + " > " + endVal);
-            }
-            
-            // Use arithmetic series formula: n*(start+end)/2 for better performance
-            final long n = endVal - startVal + 1;
-            final long sum = n * (startVal + endVal) / 2;
-            return Value.of(sum);
+    }
+
+    private static Value sumNumericRange(final Value start, final Value end) {
+        if (!start.isInteger() || !end.isInteger()) {
+            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
+                "Numeric ranges must use integer parameters", 
+                start.getType() + " and " + end.getType(), 
+                "Integer");
+        }
+        final long startVal = start.getAsLong();
+        final long endVal = end.getAsLong();
+        if (startVal > endVal) {
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
+                "Start value must be <= end value: " + startVal + " > " + endVal);
         }
         
-        // This should never be reached in runtime as string parameters are handled at compile time
-        // but we provide a fallback error
-        throw new FormulaException(FormulaException.ErrorType.OTHER, 
-            "sum() with string parameters must be compiled with variable context");
+        // Use arithmetic series formula: n*(start+end)/2 for better performance
+        final long n = endVal - startVal + 1;
+        final long sum = n * (startVal + endVal) / 2;
+        return Value.of(sum);
     }
     
     /**
