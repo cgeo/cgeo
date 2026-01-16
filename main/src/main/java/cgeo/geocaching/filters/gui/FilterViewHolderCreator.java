@@ -39,12 +39,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class FilterViewHolderCreator {
 
     private static boolean listInfoFilled = false;
     private static Collection<Geocache> listInfoFilteredList = Collections.emptyList();
     private static boolean listInfoIsComplete = false;
+
+    // Store partial special event type selections per holder to persist across view updates
+    private static final Map<CheckboxFilterViewHolder<?, ?>, Set<CacheType>> specialEventTypeSelections = new HashMap<>();
 
     private FilterViewHolderCreator() {
         //no instance
@@ -264,13 +268,42 @@ public class FilterViewHolderCreator {
     }
 
     private static IFilterViewHolder<?> createTypeFilterViewHolder(final Activity activity) {
-        final CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter> holder = new CheckboxFilterViewHolder<>(
+        final CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter> holder = new CheckboxFilterViewHolder<CacheType, TypeGeocacheFilter>(
                 ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                                 CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.COMMUN_CELEBRATION, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.UNKNOWN, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(TypeGeocacheFilter::valueDisplayTextGetter)
                         .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
-                2, null);
+                2, null) {
+            @Override
+            public TypeGeocacheFilter createFilterFromView() {
+                final TypeGeocacheFilter filter = super.createFilterFromView();
+                // Apply stored partial special event type selection if it exists
+                final Set<CacheType> storedSelection = specialEventTypeSelections.get(this);
+                if (storedSelection != null) {
+                    filter.setSelectedSpecialEventTypes(storedSelection);
+                }
+                return filter;
+            }
+
+            @Override
+            public void setViewFromFilter(final TypeGeocacheFilter filter) {
+                // Store the partial selection from the filter before setting view
+                final Set<CacheType> selection = filter.getSelectedSpecialEventTypes();
+                if (selection != null && !selection.isEmpty()) {
+                    specialEventTypeSelections.put(this, new HashSet<>(selection));
+                } else {
+                    specialEventTypeSelections.remove(this);
+                }
+                
+                super.setViewFromFilter(filter);
+                
+                // Update the Specials checkbox visual state based on selection
+                final CheckBox specialsCheckbox = getValueCheckbox(CacheType.COMMUN_CELEBRATION).right;
+                updateSpecialsCheckboxState(specialsCheckbox, TypeGeocacheFilter.getAllSpecialEventTypes().size(), 
+                                           selection != null ? selection.size() : 0);
+            }
+        };
 
         // Set up custom click handler ONLY for the "Specials" checkbox (COMMUN_CELEBRATION)
         holder.setCustomCheckboxClickHandler(
@@ -287,9 +320,18 @@ public class FilterViewHolderCreator {
         // Define the special event types that can be individually selected
         final Collection<CacheType> specialEventTypes = TypeGeocacheFilter.getAllSpecialEventTypes();
 
-        // Get current filter to see which special types are selected
-        final TypeGeocacheFilter currentFilter = holder.createFilterFromView();
-        final java.util.Set<CacheType> currentlySelected = currentFilter.getSelectedSpecialEventTypes();
+        // Get current selection from storage, or default based on checkbox state
+        Set<CacheType> currentlySelected = specialEventTypeSelections.get(holder);
+        if (currentlySelected == null) {
+            // If no stored selection, check if Specials checkbox is checked
+            if (specialsCheckbox.isChecked()) {
+                // Default to all special events if checkbox is checked
+                currentlySelected = new HashSet<>(specialEventTypes);
+            } else {
+                // Default to none if checkbox is unchecked
+                currentlySelected = new HashSet<>();
+            }
+        }
 
         // Create and show selection dialog
         final SimpleDialog.ItemSelectModel<CacheType> model = new SimpleDialog.ItemSelectModel<>();
@@ -310,14 +352,13 @@ public class FilterViewHolderCreator {
                                                         final Collection<CacheType> allSpecialTypes,
                                                         final Collection<CacheType> selectedSpecialTypes,
                                                         final CheckBox specialsCheckbox) {
-        // Get current filter
-        final TypeGeocacheFilter currentFilter = holder.createFilterFromView();
-        
-        // Update the special event types selection
-        currentFilter.setSelectedSpecialEventTypes(new HashSet<>(selectedSpecialTypes));
-        
-        // Update the view from the modified filter
-        holder.setViewFromFilter(currentFilter);
+        // Store the partial selection for this holder
+        final Set<CacheType> selectedSet = new HashSet<>(selectedSpecialTypes);
+        if (!selectedSet.isEmpty()) {
+            specialEventTypeSelections.put(holder, selectedSet);
+        } else {
+            specialEventTypeSelections.remove(holder);
+        }
         
         // Update the "Specials" checkbox state based on selection
         updateSpecialsCheckboxState(specialsCheckbox, allSpecialTypes.size(), selectedSpecialTypes.size());
@@ -332,13 +373,16 @@ public class FilterViewHolderCreator {
         if (selectedCount == 0) {
             // No special types selected - unchecked
             specialsCheckbox.setChecked(false);
+            specialsCheckbox.setAlpha(1.0f);
         } else if (selectedCount == totalSpecialTypes) {
             // All special types selected - checked
             specialsCheckbox.setChecked(true);
+            specialsCheckbox.setAlpha(1.0f);
         } else {
             // Partial selection - indeterminate state
-            // Android doesn't have built-in tri-state checkbox, so we use checked to indicate "some" are selected
+            // Use checked state with reduced alpha to indicate partial selection
             specialsCheckbox.setChecked(true);
+            specialsCheckbox.setAlpha(0.5f);
         }
     }
 }

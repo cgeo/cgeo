@@ -4,26 +4,33 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.JsonUtils;
 
-import org.apache.commons.lang3.EnumUtils;
+import static cgeo.geocaching.enumerations.CacheType.*;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.lang3.EnumUtils;
+
 public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, CacheType> {
 
     // All special event types that are part of the COMMUN_CELEBRATION group
     private static final Set<CacheType> ALL_SPECIAL_EVENT_TYPES = Collections.unmodifiableSet(EnumSet.of(
-            CacheType.MEGA_EVENT,
-            CacheType.GIGA_EVENT,
-            CacheType.COMMUN_CELEBRATION,
-            CacheType.GCHQ_CELEBRATION,
-            CacheType.GPS_EXHIBIT,
-            CacheType.BLOCK_PARTY
+            MEGA_EVENT,
+            GIGA_EVENT,
+            COMMUN_CELEBRATION,
+            GCHQ_CELEBRATION,
+            GPS_EXHIBIT,
+            BLOCK_PARTY
     ));
-    
+
     // Pre-computed array for efficient use in constructor
     private static final CacheType[] ALL_SPECIAL_EVENT_TYPES_ARRAY = ALL_SPECIAL_EVENT_TYPES.toArray(new CacheType[0]);
 
@@ -34,9 +41,9 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         //gc.com groups in their search their cache types as follows:
         //* "Unknown" is displayed as "Others" and includes: Unknown, GCHQ, PROJECT_APE
         //* "Celebration Event" is displayed as "Specials" and includes: mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
-        addDisplayValues(CacheType.UNKNOWN, CacheType.UNKNOWN, CacheType.GCHQ, CacheType.PROJECT_APE);
-        addDisplayValues(CacheType.COMMUN_CELEBRATION, ALL_SPECIAL_EVENT_TYPES_ARRAY);
-        addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
+        addDisplayValues(UNKNOWN, UNKNOWN, GCHQ, PROJECT_APE);
+        addDisplayValues(COMMUN_CELEBRATION, ALL_SPECIAL_EVENT_TYPES_ARRAY);
+        addDisplayValues(VIRTUAL, VIRTUAL, LOCATIONLESS);
     }
 
     /**
@@ -54,23 +61,23 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
      */
     public void setSelectedSpecialEventTypes(final Set<CacheType> specialTypes) {
         final Set<CacheType> allSpecialTypes = getAllSpecialEventTypes();
-        
+
         // Update the main values set
         final Set<CacheType> currentValues = new HashSet<>(getValues());
-        currentValues.remove(CacheType.COMMUN_CELEBRATION);
-        
+        currentValues.remove(COMMUN_CELEBRATION);
+
         if (specialTypes == null || specialTypes.isEmpty()) {
             // No special events selected
             this.selectedSpecialEventTypes = null;
         } else if (specialTypes.size() == allSpecialTypes.size() && specialTypes.containsAll(allSpecialTypes)) {
             // All special events selected - use the group
             this.selectedSpecialEventTypes = null;
-            currentValues.add(CacheType.COMMUN_CELEBRATION);
+            currentValues.add(COMMUN_CELEBRATION);
         } else {
             // Partial selection - store for custom filtering
             this.selectedSpecialEventTypes = new HashSet<>(specialTypes);
         }
-        
+
         setValues(currentValues);
     }
 
@@ -82,7 +89,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         if (selectedSpecialEventTypes != null) {
             return new HashSet<>(selectedSpecialEventTypes);
         }
-        if (getValues().contains(CacheType.COMMUN_CELEBRATION)) {
+        if (getValues().contains(COMMUN_CELEBRATION)) {
             return getAllSpecialEventTypes();
         }
         return new HashSet<>();
@@ -133,7 +140,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         if (cacheType == null) {
             return null;
         }
-        
+
         // Custom handling for partial special event type selection
         if (selectedSpecialEventTypes != null) {
             final Set<CacheType> allSpecialTypes = getAllSpecialEventTypes();
@@ -142,7 +149,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
                 return selectedSpecialEventTypes.contains(cacheType);
             }
         }
-        
+
         // Default filtering logic for non-special types or when using COMMUN_CELEBRATION group
         return super.filter(cache);
     }
@@ -150,7 +157,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
     @Override
     public Set<CacheType> getRawValues() {
         final Set<CacheType> rawValues = new HashSet<>(super.getRawValues());
-        
+
         // If partial special event types are selected, replace COMMUN_CELEBRATION group with individual selections
         if (selectedSpecialEventTypes != null) {
             final Set<CacheType> allSpecialTypes = getAllSpecialEventTypes();
@@ -159,8 +166,45 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
             // Then add only the selected ones
             rawValues.addAll(selectedSpecialEventTypes);
         }
-        
+
         return rawValues;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = super.getJsonConfig();
+
+        // Save partial special event type selections if they exist
+        if (selectedSpecialEventTypes != null && !selectedSpecialEventTypes.isEmpty()) {
+            final Set<String> specialTypeNames = new HashSet<>();
+            for (CacheType type : selectedSpecialEventTypes) {
+                specialTypeNames.add(type.name());
+            }
+            JsonUtils.setTextCollection(node, "selectedSpecialEventTypes", specialTypeNames);
+        }
+
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        super.setJsonConfig(node);
+
+        // Restore partial special event type selections if they exist
+        if (node.has("selectedSpecialEventTypes")) {
+            final java.util.List<String> specialTypeNames = JsonUtils.getTextList(node, "selectedSpecialEventTypes");
+            if (!specialTypeNames.isEmpty()) {
+                final Set<CacheType> specialTypes = new HashSet<>();
+                for (String typeName : specialTypeNames) {
+                    final CacheType type = EnumUtils.getEnum(CacheType.class, typeName);
+                    if (type != null) {
+                        specialTypes.add(type);
+                    }
+                }
+                setSelectedSpecialEventTypes(specialTypes);
+            }
+        }
     }
 
 }

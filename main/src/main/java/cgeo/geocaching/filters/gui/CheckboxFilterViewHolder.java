@@ -205,7 +205,6 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     @NonNull
-    @NonNull
     ImmutablePair<View, CheckBox> getValueCheckbox(final T value) {
         ImmutablePair<View, CheckBox> cb = this.valueCheckboxes.get(value);
         if (cb == null) {
