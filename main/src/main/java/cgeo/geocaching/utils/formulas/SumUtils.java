@@ -138,7 +138,7 @@ public final class SumUtils {
         }
         
         throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-            startVar + " to " + endVar);
+            startVar + " - " + endVar);
     }
     
     private static void validateVariableFormat(final String varName) {
