@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -89,6 +90,12 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         }).attach();
     }
 
+    @NonNull
+    @Override
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsForActivityContent(def);
+        return Insets.of(insets.left, actionBarSystemBarOverlapHeight, insets.right, 0);
+    }
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
 

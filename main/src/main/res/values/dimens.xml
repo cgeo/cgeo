@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <dimen name="actionbar_height">45dip</dimen>
+    <dimen name="actionbar_height">62dip</dimen>
 
     <dimen name="radioButtonCheckboxPreferredItemHeight">32dp</dimen>
 
