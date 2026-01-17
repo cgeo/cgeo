@@ -46,10 +46,10 @@ public final class SumUtils {
     private static void validateSumParameters(final Value start, final Value end) {
         // Both parameters must be of the same type
         if (start.isNumeric() != end.isNumeric()) {
-            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
-                "same type (both numeric or both string)", 
-                start.toUserDisplayableString(), 
-                start.getType());
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
+                    start.toUserDisplayableString(), 
+                    end.toUserDisplayableString()));
         }
     }
 
@@ -72,7 +72,7 @@ public final class SumUtils {
         final BigInteger startBI = BigInteger.valueOf(startVal);
         final BigInteger endBI = BigInteger.valueOf(endVal);
         final BigInteger n = endBI.subtract(startBI).add(BigInteger.ONE);
-        final BigInteger sum = n.multiply(startBI.add(endBI)).divide(BigInteger.TWO);
+        final BigInteger sum = n.multiply(startBI.add(endBI)).divide(BigInteger.valueOf(2));
         return Value.of(sum);
     }
     
@@ -144,14 +144,9 @@ public final class SumUtils {
     private static void validateVariableFormat(final String varName) {
         // Multi-character variables must have $ prefix
         // Single-character variables can optionally have $ prefix
-        if (varName.length() > 1 && !varName.startsWith("$")) {
+        if ((varName.length() > 1 && !varName.startsWith("$")) || varName.equals("$")) {
             throw new FormulaException(FormulaException.ErrorType.UNEXPECTED_TOKEN, 
-                "varname");
-        }
-        // If it has $, make sure there's content after it
-        if (varName.equals("$")) {
-            throw new FormulaException(FormulaException.ErrorType.UNEXPECTED_TOKEN, 
-                "$");
+                LocalizationUtils.getString(R.string.formula_varname));
         }
     }
     
