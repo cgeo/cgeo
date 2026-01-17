@@ -158,7 +158,7 @@ public final class MapMarkerUtils {
 
         // marker shape
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null), getCacheScalingFactor(applyScaling));
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight(), true);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
         if (showPin(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getCacheScalingFactor(applyScaling)));
         }
@@ -289,9 +289,8 @@ public final class MapMarkerUtils {
         final WaypointType waypointType = waypoint.getWaypointType();
 
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null), getWaypointScalingFactor(applyScaling));
-        final int size = marker.getIntrinsicWidth();
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, size, size, true);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
         if (forMap) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getWaypointScalingFactor(applyScaling)));
         }
@@ -435,7 +434,7 @@ public final class MapMarkerUtils {
         final Drawable dotBackground = ViewUtils.getDrawable(cache.getMapDotMarkerBackgroundId(), true);
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight(), true);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         if (dotIcon != -1) {
@@ -506,7 +505,7 @@ public final class MapMarkerUtils {
             }
         }
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight(), true);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
@@ -577,14 +576,10 @@ public final class MapMarkerUtils {
 
         int index = 0;
         for (final int[] temp : insets) {
-            if (Build.VERSION.SDK_INT > 22) {
-                if (temp[0] > 0) {
-                    ld.setLayerSize(index, temp[0], temp[0]);
-                }
-                ld.setLayerGravity(index, temp[1]);
-            } else {
-                ld.setLayerInset(index, temp[0], temp[1], temp[2], temp[3]);
+            if (temp[0] > 0) {
+                ld.setLayerSize(index, temp[0], temp[0]);
             }
+            ld.setLayerGravity(index, temp[1]);
             index++;
         }
         return ld;
@@ -723,7 +718,7 @@ public final class MapMarkerUtils {
 
     public static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final float scaling) {
         final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), scaling);
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
@@ -821,7 +816,7 @@ public final class MapMarkerUtils {
 
     private static Drawable getEmojiMarker(final Resources res, final int emoji, final boolean applyScaling) {
         final Drawable markerBg = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getWaypointScalingFactor(applyScaling));
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight(), true);
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, true);
         markerBuilder.withInset(new InsetBuilder(markerBg));
         markerBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, emoji, "iconMarkerForWaypoint", applyScaling)));
         return buildLayerDrawable(markerBuilder, 2, 2);
@@ -883,7 +878,7 @@ public final class MapMarkerUtils {
         } else {
             markerBg = ViewUtils.getDrawable(R.drawable.marker_background, scalingFactor, true);
         }
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight(), true);
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, true);
         markerBuilder.withInset(new InsetBuilder(markerBg));
         // cache type background color
         final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
