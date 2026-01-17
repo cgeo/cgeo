@@ -906,7 +906,7 @@ public final class Formula {
                     ")"), paramsInError));
     }
 
-    @NonNull
+    @Nullable
     private FormulaNode parseSumFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
         // Try to extract string literals from parameters
         final String startVar = extractStringLiteral(params.get(0));
@@ -968,6 +968,7 @@ public final class Formula {
     /**
      * Try to extract a string literal from a FormulaNode if it's a constant string
      */
+    @Nullable
     private String extractStringLiteral(final FormulaNode node) {
         if (node == null) {
             return null;

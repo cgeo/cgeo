@@ -46,7 +46,7 @@ public final class SumUtils {
     private static void validateSumParameters(final Value start, final Value end) {
         // Both parameters must be of the same type
         if (start.isNumeric() != end.isNumeric()) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
                     start.toUserDisplayableString(), 
                     end.toUserDisplayableString()));
@@ -171,7 +171,7 @@ public final class SumUtils {
         final char endCharUpper = Character.toUpperCase(endChar);
         
         if (isStartUpper != isEndUpper || startCharUpper > endCharUpper) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
                     String.valueOf(startChar), String.valueOf(endChar)));
         }
@@ -246,7 +246,7 @@ public final class SumUtils {
     private static void validatePrefixMatch(final String startPrefix, final String endPrefix) {
         // Prefixes must match exactly (including case)
         if (!startPrefix.equals(endPrefix)) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+            throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
                     startPrefix, endPrefix));
         }
