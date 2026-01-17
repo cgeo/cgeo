@@ -28,6 +28,11 @@
     <integer name="log_line_limit_default">15</integer>
     <integer name="log_line_limit_max">100</integer>
 
+    <integer name="saturation_offset_dark_default">-7</integer>
+    <integer name="lightness_offset_dark_default">-13</integer>
+    <integer name="saturation_offset_light_default">-2</integer>
+    <integer name="lightness_offset_light_default">-12</integer>
+
     <!-- history track -->
     <integer name="historytrack_length_default">700</integer>
     <integer name="historytrack_length_max">60000</integer>

@@ -20,9 +20,15 @@
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_colored_theme"
-            android:summary="@string/init_summary_colored_theme"
-            android:title="@string/init_colored_theme"
+            android:key="@string/pref_colored_theme_light"
+            android:summary="@string/init_summary_colored_theme_light"
+            android:title="@string/init_colored_theme_light"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_colored_theme_dark"
+            android:summary="@string/init_summary_colored_theme_dark"
+            android:title="@string/init_colored_theme_dark"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"

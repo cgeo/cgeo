@@ -96,6 +96,17 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 allItems.add(new KeyValue(key, value.toString(), type));
             }
         }
+
+        final Map<String, ?> nonConfigSettings = Settings.getNonSharedPreferences();
+        for (Map.Entry<String, ?> entry : nonConfigSettings.entrySet()) {
+            final Object value = entry.getValue();
+            final String key = entry.getKey();
+            final SettingsUtils.SettingsType type = getType(value);
+            if (value != null) { // should not happen, but...
+                allItems.add(new KeyValue(key, value.toString(), type));
+            }
+        }
+
         Collections.sort(allItems, Comparator.comparing(o -> o.key));
         filteredItems = new ArrayList<>();
         filteredItems.addAll(allItems);

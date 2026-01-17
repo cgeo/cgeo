@@ -175,7 +175,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
             return;
         }
 
-        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor);
+        final boolean isLightSkin = Settings.isLightSkin(this);
+        final int actionbarColor = CacheType.getActionBarColor(this, cacheType, useCacheColor, isLightSkin);
         actionBarView.setBackgroundColor(actionbarColor);
     }
 }
