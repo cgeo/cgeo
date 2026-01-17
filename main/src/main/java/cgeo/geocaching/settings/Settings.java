@@ -2561,10 +2561,6 @@ public class Settings {
         putBoolean(R.string.pref_mapbackgroundmap_show_layer, show);
     }
 
-    public static boolean getMapActionbarAutohide() {
-        return getBoolean(R.string.pref_mapActionbarAutohide, false);
-    }
-
     public static boolean extendedSettingsAreEnabled() {
         return getBoolean(R.string.pref_extended_settings_enabled, false);
     }

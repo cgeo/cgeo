@@ -11,8 +11,7 @@
     <Space
         android:id="@+id/actionBarSpacer"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:visibility="gone"/>
+        android:layout_height="?attr/actionBarSize"/>
 
     <cgeo.geocaching.wherigo.WherigoInfoBarView
         android:id="@+id/wherigo_info_bar"
