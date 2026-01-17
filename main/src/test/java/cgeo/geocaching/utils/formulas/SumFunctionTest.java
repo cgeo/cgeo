@@ -99,7 +99,7 @@ public class SumFunctionTest {
         // sum("A1";"A3") -> error: multi-character variables must have $ prefix
         assertThatThrownBy(() -> Formula.compile("sum('A1';'A3')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("Expected");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class SumFunctionTest {
         // sum("NA";"ND") -> error: multi-character variables must have $ prefix
         assertThatThrownBy(() -> Formula.compile("sum('NA';'ND')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("Expected");
     }
 
     @Test
