@@ -917,8 +917,8 @@ public final class Formula {
             return createVariableRangeSumNode(startVar, endVar);
         }
 
-        // Otherwise, handle as numeric range or pre-calculated variables
-        return createStandardFunctionNode(functionName, formulaFunction, params);
+        // Otherwise, return null for standard handling
+        return null;
     }
 
     @NonNull

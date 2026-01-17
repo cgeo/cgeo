@@ -145,13 +145,13 @@ public final class SumUtils {
         // Multi-character variables must have $ prefix
         // Single-character variables can optionally have $ prefix
         if (varName.length() > 1 && !varName.startsWith("$")) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                LocalizationUtils.getString(R.string.formula_error_range_invalid_variable, varName));
+            throw new FormulaException(FormulaException.ErrorType.UNEXPECTED_TOKEN, 
+                "varname");
         }
         // If it has $, make sure there's content after it
         if (varName.equals("$")) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                varName);
+            throw new FormulaException(FormulaException.ErrorType.UNEXPECTED_TOKEN, 
+                "$");
         }
     }
     
@@ -177,7 +177,7 @@ public final class SumUtils {
         
         if (isStartUpper != isEndUpper || startCharUpper > endCharUpper) {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                LocalizationUtils.getString(R.string.formula_error_range_case_mismatch, 
+                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
                     String.valueOf(startChar), String.valueOf(endChar)));
         }
     }
@@ -252,7 +252,7 @@ public final class SumUtils {
         // Prefixes must match exactly (including case)
         if (!startPrefix.equals(endPrefix)) {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                LocalizationUtils.getString(R.string.formula_error_range_prefix_mismatch, 
+                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
                     startPrefix, endPrefix));
         }
     }
