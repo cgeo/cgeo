@@ -103,7 +103,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getServiceTitle() {
-        return CgeoApplication.getInstance().getString(R.string.init_geokrety);
+        return LocalizationUtils.getString(R.string.init_geokrety);
     }
 
     @Override

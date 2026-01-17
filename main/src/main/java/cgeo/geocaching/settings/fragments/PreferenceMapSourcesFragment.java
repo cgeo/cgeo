@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -29,11 +30,11 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_map_sources, rootKey);
-        prefTileProvicers = findPreference(getString(R.string.pref_tileprovider));
+        prefTileProvicers = findPreference(LocalizationUtils.getString(R.string.pref_tileprovider));
 
         initMapSourcePreference();
 
-        final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
+        final MultiSelectListPreference hideTileprovidersPref = findPreference(LocalizationUtils.getString(R.string.pref_tileprovider_hidden));
         // new unified map providers
         final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
         final String[] tpEntries = new String[tileproviders.size()];
@@ -48,13 +49,13 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         hideTileprovidersPref.setEntryValues(tpValues);
 
         setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
             setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
             setFlagForRestartRequired();
             return true;
         });
 
-        final ListPreference unifiedMapVariants = findPreference(getString(R.string.pref_unifiedMapVariants));
+        final ListPreference unifiedMapVariants = findPreference(LocalizationUtils.getString(R.string.pref_unifiedMapVariants));
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
@@ -71,9 +72,9 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
         activity.setTitle(R.string.settings_title_map_sources);
-        setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, LocalizationUtils.getString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
-        setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, LocalizationUtils.getString(R.string.faq_url_settings_themes)));
 
         initPublicFolders(this, activity.getCsah());
     }
@@ -122,11 +123,11 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     }
 
     private void updateBackgroundTransparent(final String unifiedMapVariant) {
-        findPreference(getString(R.string.pref_vtmBackgroundTransparent)).setEnabled(!StringUtils.equals(unifiedMapVariant, "1")); // "1" is "Mapsforge only"
+        findPreference(LocalizationUtils.getString(R.string.pref_vtmBackgroundTransparent)).setEnabled(!StringUtils.equals(unifiedMapVariant, "1")); // "1" is "Mapsforge only"
     }
 
     private void setUserDefinedTileProviderUriSummary(final String uri) {
-        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
+        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, LocalizationUtils.getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
     }
 
 }

@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -429,7 +430,7 @@ public final class LocalStorage {
         MigrateTask(@NonNull final Activity activity, final int currentVersion, final int finalVersion) {
             super(
                     activity,
-                    activity.getString(R.string.localstorage_migrate_title),
+                    LocalizationUtils.getString(R.string.localstorage_migrate_title),
                     "---");
             this.currentVersion = currentVersion;
             this.finalVersion = finalVersion;
@@ -444,7 +445,7 @@ public final class LocalStorage {
 
         private void displayProgress(final String minorStatus) {
             publishProgress(
-                    activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
+                    LocalizationUtils.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
                             (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
                             (minorStatus == null ? "" : "\n" + minorStatus));
         }

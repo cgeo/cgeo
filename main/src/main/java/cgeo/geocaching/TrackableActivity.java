@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
@@ -415,13 +416,13 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.IMAGEGALLERY.id) {
-            String title = this.getString(Page.find(pageId).resId);
+            String title = LocalizationUtils.getString(Page.find(pageId).resId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return title;
         }
-        return this.getString(Page.find(pageId).resId);
+        return LocalizationUtils.getString(Page.find(pageId).resId);
     }
 
     public static String getTranslationText(final Trackable trackable) {
@@ -668,7 +669,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                     unsupportedLng -> {
                         cda.translationStatus.abortTranslation();
-                        binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, unsupportedLng));
+                        binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng));
                     }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
         translator -> {
                         if (null == translator) {
