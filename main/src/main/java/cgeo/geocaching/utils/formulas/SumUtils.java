@@ -1,5 +1,8 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
+
 import android.util.Pair;
 
 import java.math.BigDecimal;
@@ -44,24 +47,24 @@ public final class SumUtils {
         // Both parameters must be of the same type
         if (start.isNumeric() != end.isNumeric()) {
             throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
-                "Both parameters must be of the same type (both strings or both numeric)", 
-                start.getType() + " and " + end.getType(), 
-                "same type");
+                "same type (both numeric or both string)", 
+                start.toUserDisplayableString(), 
+                start.getType());
         }
     }
 
     private static Value sumNumericRange(final Value start, final Value end) {
         if (!start.isInteger() || !end.isInteger()) {
             throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
-                "Numeric ranges must use integer parameters", 
-                start.getType() + " and " + end.getType(), 
-                "Integer");
+                "Integer", 
+                start.toUserDisplayableString(), 
+                start.getType());
         }
         final long startVal = start.getAsLong();
         final long endVal = end.getAsLong();
         if (startVal > endVal) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start value must be <= end value: " + startVal + " > " + endVal);
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                startVal + " > " + endVal);
         }
         
         // Use arithmetic series formula: n*(start+end)/2 for better performance
@@ -91,8 +94,10 @@ public final class SumUtils {
                 missingVars.add(varName);
             } else {
                 if (!value.isNumeric()) {
-                    throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                        "Variable " + varName + " is not numeric");
+                    throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
+                        "Numeric", 
+                        varName, 
+                        value.getType());
                 }
                 sum = sum.add(value.getAsDecimal());
             }
@@ -132,21 +137,21 @@ public final class SumUtils {
             }
         }
         
-        throw new FormulaException(FormulaException.ErrorType.OTHER, 
-            "Invalid variable range: " + startVar + " to " + endVar);
+        throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+            startVar + " to " + endVar);
     }
     
     private static void validateVariableFormat(final String varName) {
         // Multi-character variables must have $ prefix
         // Single-character variables can optionally have $ prefix
         if (varName.length() > 1 && !varName.startsWith("$")) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Multi-character variable '" + varName + "' must have $ prefix (e.g., '$" + varName + "')");
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                LocalizationUtils.getString(R.string.formula_error_range_invalid_variable, varName));
         }
         // If it has $, make sure there's content after it
         if (varName.equals("$")) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Invalid variable name: " + varName);
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                varName);
         }
     }
     
@@ -164,18 +169,16 @@ public final class SumUtils {
     }
     
     private static void validateSingleLetterRange(final char startChar, final char endChar) {
-        // Check that both are same case (both upper or both lower)
-        if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Cannot mix uppercase and lowercase in variable range: '" + startChar + "' to '" + endChar + "'");
-        }
-        
-        // Check that start <= end
+        // Check that both are same case (both upper or both lower) and that start <= end
+        final boolean isStartUpper = Character.isUpperCase(startChar);
+        final boolean isEndUpper = Character.isUpperCase(endChar);
         final char startCharUpper = Character.toUpperCase(startChar);
         final char endCharUpper = Character.toUpperCase(endChar);
-        if (startCharUpper > endCharUpper) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start variable must be <= end variable: '" + startChar + "' > '" + endChar + "'");
+        
+        if (isStartUpper != isEndUpper || startCharUpper > endCharUpper) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                LocalizationUtils.getString(R.string.formula_error_range_case_mismatch, 
+                    String.valueOf(startChar), String.valueOf(endChar)));
         }
     }
     
@@ -208,13 +211,15 @@ public final class SumUtils {
             startNum = Integer.parseInt(startSuffix);
             endNum = Integer.parseInt(endSuffix);
         } catch (final NumberFormatException e) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER,
-                "Variable suffixes must be numeric: '" + start + "', '" + end + "'");
+            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
+                "Numeric suffix", 
+                start + ", " + end, 
+                "String");
         }
         
         if (startNum > endNum) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start value must be <= end value: " + startNum + " > " + endNum);
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                startNum + " > " + endNum);
         }
         
         final List<String> variables = new ArrayList<>();
@@ -246,8 +251,9 @@ public final class SumUtils {
     private static void validatePrefixMatch(final String startPrefix, final String endPrefix) {
         // Prefixes must match exactly (including case)
         if (!startPrefix.equals(endPrefix)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Variable prefixes must match (including case): '" + startPrefix + "' != '" + endPrefix + "'");
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
+                LocalizationUtils.getString(R.string.formula_error_range_prefix_mismatch, 
+                    startPrefix, endPrefix));
         }
     }
     
