@@ -58,11 +58,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
-        unifiedMapVariants.setOnPreferenceChangeListener((preference, newValue) -> {
-            updateBackgroundTransparent((String) newValue);
-            return true;
-        });
-        updateBackgroundTransparent(unifiedMapVariants.getValue());
     }
 
     @Override
@@ -119,10 +114,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
             return true;
         });
 
-    }
-
-    private void updateBackgroundTransparent(final String unifiedMapVariant) {
-        findPreference(getString(R.string.pref_vtmBackgroundTransparent)).setEnabled(!StringUtils.equals(unifiedMapVariant, "1")); // "1" is "Mapsforge only"
     }
 
     private void setUserDefinedTileProviderUriSummary(final String uri) {

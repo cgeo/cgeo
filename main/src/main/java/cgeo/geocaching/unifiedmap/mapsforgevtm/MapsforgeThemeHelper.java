@@ -141,18 +141,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
                 */
                 mTheme = map.setTheme(xmlRenderTheme);
-
-                if (Settings.getMapBackgroundMapLayer() && Settings.isFeatureEnabledDefaultFalse(R.string.pref_vtmBackgroundTransparent)) {
-                    map.setTheme(ThemeLoader.load(xmlRenderTheme, new ThemeCallbackAdapter() {
-                        @Override
-                        public int getColor(final String[] keys, final String[] values, final int color) {
-                            final List<String> k = Arrays.asList(keys);
-                            final List<String> v = Arrays.asList(values);
-                            return (((k.isEmpty() && v.isEmpty())) || (k.contains("natural") && (v.contains("sea") || v.contains("nosea")))) ? 0x0 : color;
-                        }
-                    }));
-                }
-
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));

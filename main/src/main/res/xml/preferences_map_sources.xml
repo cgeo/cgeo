@@ -28,11 +28,6 @@
             android:summary="%s"
             android:title="@string/settings_unifiedMapVariants_title"
             app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:key="@string/pref_vtmBackgroundTransparent"
-            android:title="@string/settings_vtm_background_transparent_title"
-            android:summary="@string/settings_vtm_background_transparent_summary"
-            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.TextPreference
             android:defaultValue=""
             android:key="@string/pref_userDefinedTileProviderUri"
