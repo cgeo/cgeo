@@ -180,9 +180,11 @@ public class InstallWizardActivity extends AbstractActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLegacyWriteStorage, 0);
                 break;
             case WIZARD_PERMISSIONS_NOTIFICATIONS:
-                title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
-                PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
+                    PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
+                    setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                }
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
