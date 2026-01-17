@@ -75,7 +75,7 @@ public class SumFunctionTest {
         // sum("A";5) -> error: mixed types
         assertThatThrownBy(() -> Formula.evaluate("sum('A';5)", "A", 1))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("INVALID_RANGE");
+            .hasMessageContaining("OTHER");
     }
 
     @Test
@@ -83,7 +83,7 @@ public class SumFunctionTest {
         // sum("$A1";"$B1") -> error: prefix must match
         assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("OTHER");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class SumFunctionTest {
         // sum("$A1";"$B1") -> error: prefix must match (with proper $ prefix)
         assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("OTHER");
     }
 
     @Test
@@ -173,7 +173,7 @@ public class SumFunctionTest {
         // sum("a";"D") -> error: cannot mix uppercase and lowercase
         assertThatThrownBy(() -> Formula.compile("sum('a';'D')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("OTHER");
     }
 
     @Test
@@ -218,7 +218,7 @@ public class SumFunctionTest {
         // sum("$NA";"$NC") and sum("$na";"$nc") should not be allowed to mix
         assertThatThrownBy(() -> Formula.evaluate("sum('$NA';'$Nc')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("OTHER");
     }
 
     @Test
@@ -226,6 +226,6 @@ public class SumFunctionTest {
         // sum("$A1";"$A3") and sum("$a1";"$a3") should require matching case in prefix
         assertThatThrownBy(() -> Formula.evaluate("sum('$A1';'$a3')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Invalid range");
+            .hasMessageContaining("OTHER");
     }
 }
