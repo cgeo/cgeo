@@ -163,12 +163,11 @@ public final class SumUtils {
         return Character.isLetter(var.charAt(var.length() - 1));
     }
     
-    private static void validateSingleLetterRange(final char startChar, final char endChar, 
-            final String start, final String end) {
+    private static void validateSingleLetterRange(final char startChar, final char endChar) {
         // Check that both are same case (both upper or both lower)
         if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Cannot mix uppercase and lowercase in variable range: " + start + " to " + end);
+                "Cannot mix uppercase and lowercase in variable range: '" + startChar + "' to '" + endChar + "'");
         }
         
         // Check that start <= end
@@ -176,7 +175,7 @@ public final class SumUtils {
         final char endCharUpper = Character.toUpperCase(endChar);
         if (startCharUpper > endCharUpper) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start variable must be <= end variable: " + startChar + " > " + endChar);
+                "Start variable must be <= end variable: '" + startChar + "' > '" + endChar + "'");
         }
     }
     
@@ -185,7 +184,7 @@ public final class SumUtils {
         final char startChar = start.charAt(0);
         final char endChar = end.charAt(0);
         
-        validateSingleLetterRange(startChar, endChar, start, end);
+        validateSingleLetterRange(startChar, endChar);
         
         // Generate range - iterate directly on the characters preserving case
         for (char c = startChar; c <= endChar; c++) {
@@ -235,7 +234,7 @@ public final class SumUtils {
         final char endChar = end.charAt(end.length() - 1);
         
         // Validate same case and range ordering
-        validateLetterSuffixRange(startChar, endChar, start, end);
+        validateSingleLetterRange(startChar, endChar);
         
         final List<String> variables = new ArrayList<>();
         for (char c = startChar; c <= endChar; c++) {
@@ -249,23 +248,6 @@ public final class SumUtils {
         if (!startPrefix.equals(endPrefix)) {
             throw new FormulaException(FormulaException.ErrorType.OTHER, 
                 "Variable prefixes must match (including case): '" + startPrefix + "' != '" + endPrefix + "'");
-        }
-    }
-    
-    private static void validateLetterSuffixRange(final char startChar, final char endChar,
-            final String start, final String end) {
-        // Check that both are same case (both upper or both lower)
-        if (Character.isUpperCase(startChar) != Character.isUpperCase(endChar)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Cannot mix uppercase and lowercase in variable range: " + start + " to " + end);
-        }
-        
-        // Check that start <= end (compare normalized for correct ordering)
-        final char startCharUpper = Character.toUpperCase(startChar);
-        final char endCharUpper = Character.toUpperCase(endChar);
-        if (startCharUpper > endCharUpper) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                "Start variable must be <= end variable: " + startChar + " > " + endChar);
         }
     }
     
