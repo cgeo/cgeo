@@ -83,7 +83,7 @@ public class SumFunctionTest {
         // sum("$A1";"$B1") -> error: prefix must match
         assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("prefix");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class SumFunctionTest {
         // sum("$A1";"$B1") -> error: prefix must match (with proper $ prefix)
         assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("prefix");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -99,7 +99,7 @@ public class SumFunctionTest {
         // sum("A1";"A3") -> error: multi-character variables must have $ prefix
         assertThatThrownBy(() -> Formula.compile("sum('A1';'A3')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("must have $ prefix");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class SumFunctionTest {
         // sum("NA";"ND") -> error: multi-character variables must have $ prefix
         assertThatThrownBy(() -> Formula.compile("sum('NA';'ND')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("must have $ prefix");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -173,7 +173,7 @@ public class SumFunctionTest {
         // sum("a";"D") -> error: cannot mix uppercase and lowercase
         assertThatThrownBy(() -> Formula.compile("sum('a';'D')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Cannot mix uppercase and lowercase");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -181,7 +181,7 @@ public class SumFunctionTest {
         // sum("A";"C") with A=1, B="text", C=3 -> error
         assertThatThrownBy(() -> Formula.evaluate("sum('A';'C')", "A", 1, "B", "text", "C", 3))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("not numeric");
+            .hasMessageContaining("Wrong type");
     }
 
     @Test
@@ -218,7 +218,7 @@ public class SumFunctionTest {
         // sum("$NA";"$NC") and sum("$na";"$nc") should not be allowed to mix
         assertThatThrownBy(() -> Formula.evaluate("sum('$NA';'$Nc')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("Cannot mix uppercase and lowercase");
+            .hasMessageContaining("Invalid range");
     }
 
     @Test
@@ -226,6 +226,6 @@ public class SumFunctionTest {
         // sum("$A1";"$A3") and sum("$a1";"$a3") should require matching case in prefix
         assertThatThrownBy(() -> Formula.evaluate("sum('$A1';'$a3')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("must match");
+            .hasMessageContaining("Invalid range");
     }
 }

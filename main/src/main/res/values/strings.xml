@@ -2077,6 +2077,10 @@
     <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
     <string name="formula_error_empty">Empty Formula</string>
     <string name="formula_error_numeric_overflow">Numeric overflow</string>
+    <string name="formula_error_invalid_range">Invalid range: %1$s</string>
+    <string name="formula_error_range_case_mismatch">Cannot mix uppercase and lowercase in range: \'%1$s\' to \'%2$s\'</string>
+    <string name="formula_error_range_prefix_mismatch">Variable prefixes must match: \'%1$s\' != \'%2$s\'</string>
+    <string name="formula_error_range_invalid_variable">Multi-character variable \'%1$s\' must have $ prefix</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
 
     <!-- ImageView -->
