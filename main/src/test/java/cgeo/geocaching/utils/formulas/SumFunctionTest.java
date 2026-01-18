@@ -1,9 +1,9 @@
 package cgeo.geocaching.utils.formulas;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
-import org.junit.Test;
-
+ 
 public class SumFunctionTest {
 
     @Test
