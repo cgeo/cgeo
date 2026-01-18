@@ -5,6 +5,7 @@ import cgeo.geocaching.SplashActivity;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -145,7 +146,10 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES), "Bytes Total", (i) -> formatBytes(c.getLong(i)));
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR), "Bytes Current", (i) -> formatBytes(c.getLong(i)));
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP), "Last Modified", (i) -> formatDateForFilename(c.getLong(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", c::getString);
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", (i) -> {
+                            final String uri = c.getString(i);
+                            return uri != null ? "[" + uri + "](" + uri + ")" : null;
+                        });
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI), "Local URI", c::getString);
                     }
                 }
@@ -195,6 +199,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             detail = itemView.findViewById(R.id.detail);
+            detail.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
             buttonResume = itemView.findViewById(R.id.button_left);
             buttonResume.setIconResource(R.drawable.ic_menu_refresh);
