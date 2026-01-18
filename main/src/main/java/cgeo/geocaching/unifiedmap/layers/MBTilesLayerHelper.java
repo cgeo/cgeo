@@ -1,7 +1,10 @@
 package cgeo.geocaching.unifiedmap.layers;
 
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.content.Context;
 
@@ -49,9 +52,29 @@ public class MBTilesLayerHelper {
         return result;
     }
 
-    /** returns a list of .mbtiles files found in app-specific media folder, typically /Android/media/(app-id)/*.mbtiles */
+    /** returns a list of .mbtiles files found in public folder with fallback to app-specific media folder */
     private static File[] getMBTilesSources(final Context context) {
-        return context.getExternalMediaDirs()[0].listFiles((dir, name) -> StringUtils.endsWith(name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION));
+        final ArrayList<File> result = new ArrayList<>();
+        
+        // First, try the new location: public offline maps folder
+        for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.BACKGROUND_MAPS)) {
+            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
+                final File file = UriUtils.toFile(fi.uri);
+                if (file != null && file.exists()) {
+                    result.add(file);
+                }
+            }
+        }
+        
+        // Fallback to old location: app-specific media folder
+        final File[] legacyFiles = context.getExternalMediaDirs()[0].listFiles((dir, name) -> StringUtils.endsWith(name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION));
+        if (legacyFiles != null) {
+            for (File file : legacyFiles) {
+                result.add(file);
+            }
+        }
+        
+        return result.toArray(new File[0]);
     }
 
 }
