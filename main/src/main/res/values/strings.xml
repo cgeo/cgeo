@@ -1331,6 +1331,7 @@
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
+    <string name="init_mbtiles_folder">Public MBTiles Folder</string>
     <string name="init_mapshading_folder">Map Shading Files Folder</string>
     <string name="init_iconsizes">Icon Sizes</string>
     <string name="init_mapCacheScaling_title">Cache icon scaling</string>
@@ -2105,6 +2106,8 @@
     <string name="map_showwp_visited">Visited</string>
     <string name="init_renderthemefolder_synctolocal">Synchronize themes</string>
     <string name="init_summary_renderthemefolder_synctolocal">This will synchronize your themes into an app-private folder to improve map viewer opening performance at the cost of some device storage space.</string>
+    <string name="init_mbtilesfolder_synctolocal">Synchronize MBTiles</string>
+    <string name="init_summary_mbtilesfolder_synctolocal">This will synchronize MBTiles files from the public folder into the app internal media directory, making them available as background map layers.</string>
     <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="map_theme_select">Select map theme</string>
