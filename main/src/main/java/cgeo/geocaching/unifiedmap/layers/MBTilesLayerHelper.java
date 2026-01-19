@@ -51,7 +51,7 @@ public class MBTilesLayerHelper {
         return result;
     }
 
-    /** returns a list of .mbtiles files found in app-specific media folder, or synced internal folder if sync is active */
+    /** returns a list of .mbtiles files found in app-specific media folder, typically /Android/media/(app-id)/*.mbtiles, or synced internal folder if sync is active */
     private static File[] getMBTilesSources(final Context context) {
         // If synchronization is active, use the internal sync directory
         if (MBTilesSynchronizer.isSynchronizationActive()) {
