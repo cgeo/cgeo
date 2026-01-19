@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.layers;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
