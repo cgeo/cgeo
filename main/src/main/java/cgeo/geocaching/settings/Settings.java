@@ -1798,6 +1798,13 @@ public class Settings {
     }
 
     /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.layers.MBTilesSynchronizer}!
+     */
+    public static boolean getSyncMBTilesFolder() {
+        return getBoolean(R.string.pref_mbtilesfolder_synctolocal, false);
+    }
+
+    /**
      * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeSettingsFragment}!
      */
     public static String getMapRenderScalePreferenceKey(final String themeStyleId, final RenderThemeScaleType scaleType) {

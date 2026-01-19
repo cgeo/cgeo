@@ -231,6 +231,10 @@
     <string translatable="false" name="pref_mapbackgroundmap_show_layer">mapbackgroundmap_show_layer</string>
     <string translatable="false" name="pref_persistablefolder_backgroundmaps">persistablefolder_backgroundmaps</string>
 
+    <!-- category public mbtiles -->
+    <string translatable="false" name="pref_persistablefolder_public_mbtiles">persistablefolder_public_mbtiles</string>
+    <string translatable="false" name="pref_mbtilesfolder_synctolocal">mbtilesfolder_synctolocal</string>
+
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
 

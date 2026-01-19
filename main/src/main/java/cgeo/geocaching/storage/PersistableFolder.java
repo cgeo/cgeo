@@ -36,6 +36,8 @@ public enum PersistableFolder {
     OFFLINE_MAP_SHADING(R.string.pref_persistablefolder_offlinemapshading, R.string.persistablefolder_offline_maps_shading, Folder.fromPersistableFolder(OFFLINE_MAPS, "_hgt")),
     /** Offline Maps: app-specific media folder */
     BACKGROUND_MAPS(R.string.pref_persistablefolder_backgroundmaps, R.string.persistablefolder_backgroundmaps, Folder.fromFile(CgeoApplication.getInstance().getApplicationContext().getExternalMediaDirs()[0])),
+    /** Public MBTiles folder for user-provided MBTiles files */
+    PUBLIC_MBTILES(R.string.pref_persistablefolder_public_mbtiles, R.string.persistablefolder_public_mbtiles, Folder.fromPersistableFolder(OFFLINE_MAPS, "_mbtiles")),
     /** Target folder for written logfiles */
     LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
     /** GPX Files */

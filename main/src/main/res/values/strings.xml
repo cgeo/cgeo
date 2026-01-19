@@ -1463,6 +1463,7 @@
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
     <string name="persistablefolder_backgroundmaps">Background Maps</string>
+    <string name="persistablefolder_public_mbtiles">Public MBTiles</string>
     <string name="persistablefolder_offline_maps_shading">Map Shading Files</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
@@ -3008,6 +3009,9 @@
 
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s folder synchronization finished after %2$s, %3$d of %4$s needed synchronization</string>
+
+    <!-- MBTiles helper -->
+    <string name="mbtiles_foldersync_finished_toast">%1$s folder synchronization finished after %2$s, %3$d of %4$s needed synchronization</string>
 
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>

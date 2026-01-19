@@ -47,6 +47,7 @@ public final class LocalStorage {
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
     private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
     private static final String MAP_THEME_INTERNAL_DIR_NAME = "MapThemeData";
+    private static final String MBTILES_INTERNAL_DIR_NAME = "MBTilesData";
     private static final String MAPSFORGE_SVG_CACHE_DIR_NAME = "mapsforge-svg-cache";
     private static final String TRACKFILE_CACHE_DIR_NAME = "trackfiles";
 
@@ -209,6 +210,13 @@ public final class LocalStorage {
     @NonNull
     public static File getMapThemeInternalSyncDir() {
         final File dir = new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
+        dir.mkdirs();
+        return dir;
+    }
+
+    @NonNull
+    public static File getMBTilesInternalSyncDir() {
+        final File dir = new File(getInternalCgeoDirectory(), MBTILES_INTERNAL_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
