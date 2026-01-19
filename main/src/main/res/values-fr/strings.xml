@@ -194,7 +194,7 @@
     <string name="log_empty_logbook">Le carnet de visites de cette cache est vide.</string>
     <string name="log_image_selectfromstorage_tooltip">Sélectionner une image depuis le stockage</string>
     <string name="log_image_camera_tooltip">Prendre une photo avec l\'appareil photo</string>
-    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis images éxitantes</string>
+    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis ses propres images</string>
     <string name="log_inventory">Inventaire</string>
     <string name="log_problem_none">Aucun problème</string>
     <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
