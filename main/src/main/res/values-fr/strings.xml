@@ -194,7 +194,7 @@
     <string name="log_empty_logbook">Le carnet de visites de cette cache est vide.</string>
     <string name="log_image_selectfromstorage_tooltip">Sélectionner une image depuis le stockage</string>
     <string name="log_image_camera_tooltip">Prendre une photo avec l\'appareil photo</string>
-    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis images éxitantes</string>
+    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis ses propres images</string>
     <string name="log_inventory">Inventaire</string>
     <string name="log_problem_none">Aucun problème</string>
     <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
@@ -215,7 +215,7 @@
     <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
     <string name="log_delete_confirm">Voulez-vous vraiment supprimer le log de type \'%1$s\' par l\'auteur \'%2$s\' en date du \'%3$s \' ?</string>
-    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' avec en date du \'%2$s \' ?</string>
+    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' en date du \'%2$s \' ?</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
     <!-- Contacts -->
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
@@ -1243,7 +1243,7 @@
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_google_terrain">Google : Terrain</string>
-    <string name="map_source_osm_offline">hors-ligne</string>
+    <string name="map_source_osm_offline">Hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>

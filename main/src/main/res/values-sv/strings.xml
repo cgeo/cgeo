@@ -1249,7 +1249,7 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terräng</string>
-    <string name="map_source_osm_offline">Frånkopplad</string>
+    <string name="map_source_osm_offline">Sparad lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>

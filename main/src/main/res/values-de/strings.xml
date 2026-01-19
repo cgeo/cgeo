@@ -1250,7 +1250,7 @@
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terrain</string>
-    <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline">Offline-Verwendung</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
