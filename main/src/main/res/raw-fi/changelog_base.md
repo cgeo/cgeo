@@ -64,3 +64,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Fix: Titles in range input dialogs cut off
 - Fix: Notification for nightly update points to regular APK even for FOSS variant
 - New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+
