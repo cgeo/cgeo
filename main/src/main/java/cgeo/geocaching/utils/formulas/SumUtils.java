@@ -13,8 +13,19 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Utility methods for the sum() formula function.
- * Handles variable range expansion, numeric range summation, and variable summation.
+ * Utility class for the implementation of the sum() formula function.
+ * <p>
+ * SumUtils provides static helper methods to support the sum() function in formulas, including:
+ * <ul>
+ *   <li>Summing numeric ranges (e.g. sum(1;5) → 1+2+3+4+5)</li>
+ *   <li>Summing variable ranges (e.g. sum(A;D) → A+B+C+D)</li>
+ *   <li>Expanding variable ranges for dependency tracking and evaluation</li>
+ *   <li>Validating and formatting variable and numeric ranges</li>
+ * </ul>
+ * The class is used internally by the formula parser and evaluator to handle sum operations with both
+ * numeric and variable arguments, including error handling for invalid ranges or types.
+ * <p>
+ * Instantiation is not intended (private constructor).
  */
 final class SumUtils {
 

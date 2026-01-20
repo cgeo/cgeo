@@ -7,6 +7,17 @@ import android.text.style.ForegroundColorSpan;
 
 import java.util.Set;
 
+/**
+ * Utility class for error and warning handling in formula evaluation and display.
+ * <p>
+ * FormulaError provides static helper methods and types to mark and visualize errors and warnings
+ * during formula processing and rendering. This includes methods to create error and warning spans
+ * for text display, as well as the {@link ErrorValue} class to represent error states in calculations.
+ * The class also offers methods to convert value lists to displayable character sequences, highlighting
+ * error states visually if needed.
+ * <p>
+ * Instantiation is not intended (private constructor).
+ */
 final class FormulaError {
 
     private FormulaError() {
