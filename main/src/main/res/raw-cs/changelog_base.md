@@ -64,3 +64,6 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Oprava: Dlaždice v dialogových oknech pro zadávání rozsahu jsou oříznuté
 - Oprava: Oznámení o noční aktualizaci odkazuje na běžný soubor APK i pro variantu FOSS
 - Novinka: Možnost „Ignorovat rok“ pro filtry data
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+
