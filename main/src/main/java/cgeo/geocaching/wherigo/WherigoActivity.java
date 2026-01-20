@@ -198,12 +198,13 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void showOnMap() {
-        if (!WherigoGame.GET.isPlaying()) {
-            return;
-        }
         final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
         final Viewport viewport = WherigoUtils.getZonesViewport(zones, true);
-        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.GET.getCartridgeName(), null);
+        if (!WherigoGame.get().isPlaying() || viewport == null) {
+            DefaultMap.startActivityLive(this);
+            return;
+        }
+        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
     }
 
     private void goToCache(final String geocode) {
@@ -277,7 +278,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo() != null && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
-        binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
+        binding.map.setEnabled(game.isPlaying());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 
