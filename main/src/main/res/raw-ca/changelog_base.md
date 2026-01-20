@@ -64,3 +64,6 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Correcció: Els títols dels diàlegs d'entrada de rang es tallen
 - Correcció: La notificació d'actualització nocturna apunta a l'APK normal, fins i tot per a la variant FOSS.
 - Nou: opció "Ignora l'any" per als filtres de data
+- Nou: Feu que l'URI remot sigui clicable a les descàrregues pendents
+- Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
+
