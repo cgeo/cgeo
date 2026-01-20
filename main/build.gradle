@@ -26,13 +26,13 @@ android {
         // enable Java 8 APIs like Streams on older Android versions
         coreLibraryDesugaringEnabled = true
         // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
 
         versionName = versionNameFromDate()
         versionCode = versionCodeFromDate(0)

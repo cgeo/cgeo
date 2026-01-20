@@ -104,7 +104,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
         //media
-        binding.media.setMedia((Media) eventTable.table.rawget("Media"));
+        binding.media.setMedia((Media) eventTable.rawget("Media"));
 
         //title
         control.setTitle(eventTable.name);
@@ -120,7 +120,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         //"actions" will be filled with instance of both "Action" and "ThingAction"
         final List<Object> actions = new ArrayList<>();
         if (eventTable instanceof Thing) {
-            actions.addAll(WherigoUtils.getActions((Thing) eventTable, .isDebugModeForCartridge()));
+            actions.addAll(WherigoUtils.getActions((Thing) eventTable, WherigoGame.GET.isDebugModeForCartridge()));
         }
         if (eventTable instanceof Zone) {
             actions.add(ThingAction.DISPLAY_ON_MAP);
