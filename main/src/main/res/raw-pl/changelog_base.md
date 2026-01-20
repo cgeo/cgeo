@@ -64,3 +64,6 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Tytuły w oknie dialogowym zakresu były przycięte
 - Naprawiono: Powiadomienie o nocnych aktualizacjach punktów do zwykłego APK nawet dla wariantu FOSS
 - Nowość: Opcja „Ignoruj rok” dla filtrów dat
+- Nowość: Zdalne URI w elementach oczekujących na pobranie są teraz klikalne
+- Zmiana: Użyj ustawień systemowych jako domyślnego motywu dla nowych instalacji
+
