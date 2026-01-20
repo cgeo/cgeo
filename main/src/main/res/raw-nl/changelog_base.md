@@ -64,3 +64,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Oplossing: Titels in invoerdialoogvenster afgekapt
 - Oplossing: Melding voor nightly update punten naar reguliere APK zelfs voor de FOSS-variant
 - Nieuw: "Negeer jaar" optie voor datumfilters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+
