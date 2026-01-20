@@ -195,7 +195,7 @@
     <string name="log_empty_logbook_filtered">Les filtres sélectionnés masquent tous les logs. Sélectionnez au moins une option.</string>
     <string name="log_image_selectfromstorage_tooltip">Sélectionner une image depuis le stockage</string>
     <string name="log_image_camera_tooltip">Prendre une photo avec l\'appareil photo</string>
-    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis images éxitantes</string>
+    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis ses propres images</string>
     <string name="log_inventory">Inventaire</string>
     <string name="log_problem_none">Aucun problème</string>
     <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
@@ -216,7 +216,7 @@
     <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
     <string name="log_delete_confirm">Voulez-vous vraiment supprimer le log de type \'%1$s\' par l\'auteur \'%2$s\' en date du \'%3$s \' ?</string>
-    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' avec en date du \'%2$s \' ?</string>
+    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' en date du \'%2$s \' ?</string>
     <string name="log_share_prefix_found">J\'ai trouvé %1$s (%2$s):\n\n</string>
     <string name="log_share_prefix_dnf">Je n\'ai pas pu trouver %1$s (%2$s) :\n\n</string>
     <string name="log_share_prefix_note">J\'ai laissé une note sur %1$s (%2$s) :\n\n</string>
