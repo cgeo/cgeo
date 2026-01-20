@@ -8,6 +8,7 @@ import android.util.Pair;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -15,7 +16,7 @@ import java.util.function.Function;
  * Utility methods for the sum() formula function.
  * Handles variable range expansion, numeric range summation, and variable summation.
  */
-public final class SumUtils {
+final class SumUtils {
 
     private SumUtils() {
         // Utility class, no instantiation
@@ -258,5 +259,82 @@ public final class SumUtils {
             i--;
         }
         return varName.substring(0, i + 1);
+    }
+
+    /**
+     * Parses a sum function with possible variable range parameters.
+     * Returns a FormulaNode for a variable range sum, or null for standard handling.
+     */
+    public static FormulaNode parseSumFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
+        // Try to extract string literals from parameters
+        final String startVar = extractStringLiteral(params.get(0));
+        final String endVar = extractStringLiteral(params.get(1));
+
+        // If both parameters are string literals, expand to variable range
+        if (startVar != null && endVar != null) {
+            return createVariableRangeSumNode(startVar, endVar);
+        }
+
+        // Otherwise, return null for standard handling
+        return null;
+    }
+
+    private static FormulaNode createVariableRangeSumNode(final String startVar, final String endVar) {
+        try {
+            final List<String> variables = expandVariableRange(startVar, endVar);
+            // Create a sum node that references all variables in the range
+            return new FormulaNode("sum-var-range", null,
+                    (objs, vars, ri) -> {
+                        final Pair<BigDecimal, List<String>> result =
+                                sumVariables(variables, vars);
+                        if (!result.second.isEmpty()) {
+                            Collections.sort(result.second);
+                            throw new FormulaException(FormulaException.ErrorType.MISSING_VARIABLE_VALUE,
+                                    org.apache.commons.lang3.StringUtils.join(result.second, ", "));
+                        }
+                        return Value.of(result.first);
+                    },
+                    (objs, vars, ri, error) -> formatVariableRangeSumDisplay(variables, vars),
+                    result -> result.addAll(variables)); // Add all variables as dependencies
+        } catch (FormulaException fe) {
+            // If expansion fails, re-throw the exception to fail at compile time
+            throw fe;
+        }
+    }
+
+    private static CharSequence formatVariableRangeSumDisplay(final List<String> variables, final java.util.function.Function<String, Value> vars) {
+        final StringBuilder sb = new StringBuilder("sum(");
+        boolean first = true;
+        for (final String varName : variables) {
+            if (!first) {
+                sb.append("+");
+            }
+            first = false;
+            final Value value = vars.apply(varName);
+            if (value == null) {
+                sb.append(cgeo.geocaching.utils.TextUtils.setSpan("?" + varName, Formula.createErrorSpan()));
+            } else {
+                sb.append(value.getAsString());
+            }
+        }
+        sb.append(")");
+        return sb.toString();
+    }
+
+    private static String extractStringLiteral(final FormulaNode node) {
+        if (node == null) {
+            return null;
+        }
+        // Check if this is a string-literal node
+        if ("string-literal".equals(node.getId())) {
+            try {
+                // Evaluate the node without variables to get the constant string
+                final Value val = node.eval(x -> null, -1);
+                return val.getAsString();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 }

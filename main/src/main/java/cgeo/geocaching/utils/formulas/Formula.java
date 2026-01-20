@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -687,7 +686,7 @@ public final class Formula {
 
         // Currently only sum function requires special parsing
         if ("sum".equals(functionName) && params.size() == 2) {
-            return parseSumFunction(functionName, formulaFunction, params);
+            return SumUtils.parseSumFunction(functionName, formulaFunction, params);
         }
 
         // If no special handling matched, return null to use standard parsing
@@ -711,85 +710,6 @@ public final class Formula {
                         ")"), paramsInError));
     }
 
-    @Nullable
-    private FormulaNode parseSumFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
-        // Try to extract string literals from parameters
-        final String startVar = extractStringLiteral(params.get(0));
-        final String endVar = extractStringLiteral(params.get(1));
-
-        // If both parameters are string literals, expand to variable range
-        if (startVar != null && endVar != null) {
-            return createVariableRangeSumNode(startVar, endVar);
-        }
-
-        // Otherwise, return null for standard handling
-        return null;
-    }
-
-    @NonNull
-    private FormulaNode createVariableRangeSumNode(final String startVar, final String endVar) {
-        try {
-            final List<String> variables = SumUtils.expandVariableRange(startVar, endVar);
-            
-            // Create a sum node that references all variables in the range
-            return new FormulaNode("sum-var-range", null,
-                (objs, vars, ri) -> {
-                    final Pair<BigDecimal, List<String>> result = 
-                        SumUtils.sumVariables(variables, vars);
-                    if (!result.second.isEmpty()) {
-                        Collections.sort(result.second);
-                        throw new FormulaException(FormulaException.ErrorType.MISSING_VARIABLE_VALUE,
-                            StringUtils.join(result.second, ", "));
-                    }
-                    return Value.of(result.first);
-                },
-                (objs, vars, ri, error) -> formatVariableRangeSumDisplay(variables, vars),
-                result -> result.addAll(variables)); // Add all variables as dependencies
-        } catch (FormulaException fe) {
-            // If expansion fails, re-throw the exception to fail at compile time
-            throw fe;
-        }
-    }
-
-    private CharSequence formatVariableRangeSumDisplay(final List<String> variables, final Function<String, Value> vars) {
-        final StringBuilder sb = new StringBuilder("sum(");
-        boolean first = true;
-        for (final String varName : variables) {
-            if (!first) {
-                sb.append("+");
-            }
-            first = false;
-            final Value value = vars.apply(varName);
-            if (value == null) {
-                sb.append(TextUtils.setSpan("?" + varName, createErrorSpan()));
-            } else {
-                sb.append(value.getAsString());
-            }
-        }
-        sb.append(")");
-        return sb.toString();
-    }
-
-    /**
-     * Try to extract a string literal from a FormulaNode if it's a constant string
-     */
-    @Nullable
-    private String extractStringLiteral(final FormulaNode node) {
-        if (node == null) {
-            return null;
-        }
-        // Check if this is a string-literal node
-        if ("string-literal".equals(node.getId())) {
-            try {
-                // Evaluate the node without variables to get the constant string
-                final Value val = node.eval(x -> null, -1);
-                return val.getAsString();
-            } catch (Exception e) {
-                return null;
-            }
-        }
-        return null;
-    }
 
     /**
      * for test/debug purposes only!
