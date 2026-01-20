@@ -64,3 +64,6 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
 - Korrektur: Update-Hinweis für FOSS-nightly verweist auf Nicht-FOSS-APK
 - Neu: Option "Jahr ignorieren" für Datumsfilter
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+
