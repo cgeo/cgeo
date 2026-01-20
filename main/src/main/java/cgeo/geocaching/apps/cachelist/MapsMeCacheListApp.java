@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
     protected MapsMeCacheListApp() {
-        super(getString(R.string.caches_map_mapswithme), Intent.ACTION_VIEW);
+        super(R.string.caches_map_mapswithme, Intent.ACTION_VIEW);
     }
 
     @Override

@@ -18,12 +18,12 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     final Class<?> cls;
 
     InternalCacheListMap(final Class<?> cls, final int name) {
-        super(getString(name), null);
+        super(name, null);
         this.cls = cls;
     }
 
     InternalCacheListMap() {
-        super(getString(R.string.cache_menu_map), null);
+        super(R.string.cache_menu_map, null);
         cls = null;
     }
 
