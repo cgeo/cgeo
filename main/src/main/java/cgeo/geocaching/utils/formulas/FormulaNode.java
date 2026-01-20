@@ -13,6 +13,18 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Represents a node in the abstract syntax tree (AST) of a parsed formula.
+ * <p>
+ * FormulaNode encapsulates a single operation, value, or subexpression within a formula. Each node
+ * contains references to its child nodes, the operation or function it represents, and the logic for
+ * evaluating itself and its children. Nodes can represent constants, variables, operators, or functions.
+ * <p>
+ * The class supports error propagation and formatted output for error visualization. It is used internally
+ * by the formula parser and evaluator to build and traverse the formula tree.
+ * <p>
+ * FormulaNode instances are package-private and are not intended to be used directly outside the formula package.
+ */
 final class FormulaNode {
     static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
     static public final String RANGE_NODE_ID = "range-node";
