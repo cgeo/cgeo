@@ -804,6 +804,10 @@
     <string name="downloader_pending_info">Hi ha almenys una descàrrega en pausa o fallada. Vols obrir la llista de baixades pendents?</string>
     <string name="downloader_retry_download">Torna a provar de descarregar</string>
     <string name="downloader_retry_download_details">Voleu tornar a provar la baixada del fitxer?</string>
+    <string name="downloader_delete_all_pending">Suprimeix-ho tot</string>
+    <string name="downloader_delete_all_confirmation">Voleu suprimir totes les baixades pendents?</string>
+    <string name="downloader_delete_all_message">Això cancel·larà totes les %d descàrregues pendents i eliminarà les parts descarregades. Aquesta acció no es pot desfer.</string>
+    <string name="downloader_deleted_all">S\'han suprimit totes les descàrregues pendents</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">La baixada ha fallat (i no es tornarà a provar)</string>
     <string name="asdm_status_paused">La baixada està esperant per tornar-ho a provar o reprendre</string>
