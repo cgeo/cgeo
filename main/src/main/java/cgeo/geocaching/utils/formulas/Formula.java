@@ -5,8 +5,6 @@ import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.graphics.Color;
-import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -69,13 +67,6 @@ public final class Formula {
     private int markedLevel;
 
     private int rangeIndexSize = 1;
-
-    public static Object createErrorSpan() {
-        return new ForegroundColorSpan(Color.RED);
-    }
-
-    // FormulaNode wurde extrahiert und ist jetzt eine package-private Klasse im selben Paket
-    // Alle Verwendungen bleiben erhalten, Import ist nicht nötig, da im selben Paket
 
     private FormulaNode createUnaryNumeric(final String operatorSymbol, final FormulaNode child, final boolean unaryBefore, final Function<Value, Number> function) {
         return createNumeric(operatorSymbol, new FormulaNode[]{child}, unaryBefore, valueList -> function.apply(valueList.get(0)));
@@ -170,16 +161,16 @@ public final class Formula {
         }
     }
 
-    public static Value evaluateWithRanges(final String expression, final int rangeIdx, final Object... vars) {
+    static Value evaluateWithRanges(final String expression, final int rangeIdx, final Object... vars) {
         return compile(expression).evaluate(toVarProvider(vars), rangeIdx);
     }
 
-    public static Value evaluate(final String expression, final Object... vars) {
+    static Value evaluate(final String expression, final Object... vars) {
         return compile(expression).evaluate(vars);
     }
 
 
-    public static double eval(final String expression, final Object... vars) {
+    static double eval(final String expression, final Object... vars) {
         return evaluate(expression, vars).getAsDouble();
     }
 
@@ -199,7 +190,7 @@ public final class Formula {
         return evaluate(toVarProvider(vars));
     }
 
-    public static Function<String, Value> toVarProvider(final Object... vars) {
+    static Function<String, Value> toVarProvider(final Object... vars) {
         if (vars == null || vars.length == 0) {
             return x -> null;
         }
@@ -222,7 +213,7 @@ public final class Formula {
         return evaluate(vars, 0);
     }
 
-    public Value evaluate(final Function<String, Value> vars, final int rangeIdx) throws FormulaException {
+    Value evaluate(final Function<String, Value> vars, final int rangeIdx) throws FormulaException {
         try {
             return compiledExpression.eval(vars == null ? x -> null : vars, rangeIdx);
         } catch (FormulaException ce) {
@@ -233,15 +224,15 @@ public final class Formula {
         }
     }
 
-    public String evaluateToString(final Function<String, Value> vars) {
+    String evaluateToString(final Function<String, Value> vars) {
         return evaluateToCharSequence(vars).toString();
     }
 
-    public CharSequence evaluateToCharSequence(final Function<String, Value> vars) {
+    CharSequence evaluateToCharSequence(final Function<String, Value> vars) {
         return evaluateToCharSequence(vars, 0);
     }
 
-    public CharSequence evaluateToCharSequence(final Function<String, Value> vars, final int rangeIdx) {
+    CharSequence evaluateToCharSequence(final Function<String, Value> vars, final int rangeIdx) {
         return compiledExpression.evalToCharSequence(vars == null ? x -> null : vars, rangeIdx);
     }
 
@@ -339,7 +330,7 @@ public final class Formula {
                     if (nextIsEqual) {
                         return createCompare("<=", x, y, comp -> comp <= 0);
                     } else if (nextIsGreaterThan) {
-                        return createCompare("<>", x, y, comp -> comp  != 0);
+                        return createCompare("<>", x, y, comp -> comp != 0);
                     } else {
                         return createCompare("<", x, y, comp -> comp < 0);
                     }
@@ -575,7 +566,7 @@ public final class Formula {
             if (value != null) {
                 return value.getAsString();
             }
-            return TextUtils.setSpan("?" + parsed, createErrorSpan());
+            return TextUtils.setSpan("?" + parsed, FormulaError.createErrorSpan());
         }, result -> result.add(parsed));
 
     }
@@ -627,7 +618,7 @@ public final class Formula {
             return concat(varValues);
         }, (objs, vars, ri, error) -> TextUtils.join(IteratorUtils.arrayIterator(varBlock.toCharArray()), c -> {
             final Value value = vars.apply("" + c);
-            return value == null ? TextUtils.setSpan("?" + c, createErrorSpan()) : value.getAsCharSequence();
+            return value == null ? TextUtils.setSpan("?" + c, FormulaError.createErrorSpan()) : value.getAsCharSequence();
         }, ""), result -> {
             for (char l : varBlock.toCharArray()) {
                 result.add("" + l);
@@ -680,13 +671,9 @@ public final class Formula {
      */
     @Nullable
     private FormulaNode tryParseSpecialFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
-        if (!formulaFunction.requiresSpecialParsing()) {
-            return null;
-        }
-
-        // Currently only sum function requires special parsing
-        if ("sum".equals(functionName) && params.size() == 2) {
-            return SumUtils.parseSumFunction(functionName, formulaFunction, params);
+        // Currently only sumrange function requires special parsing
+        if (FormulaFunction.SUMRANGE == formulaFunction && params.size() == 2) {
+            return SumUtils.parseSumFunction(params);
         }
 
         // If no special handling matched, return null to use standard parsing
@@ -714,7 +701,7 @@ public final class Formula {
     /**
      * for test/debug purposes only!
      */
-    public String toDebugString(final Function<String, Value> variables, final boolean includeId, final boolean recursive) {
+    String toDebugString(final Function<String, Value> variables, final boolean includeId, final boolean recursive) {
         return compiledExpression.toDebugString(variables == null ? x -> null : variables, 0, includeId, recursive);
     }
 

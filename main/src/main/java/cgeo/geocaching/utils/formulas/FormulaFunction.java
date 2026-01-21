@@ -59,7 +59,7 @@ public enum FormulaFunction {
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
             singleValueStringFunction(FormulaUtils::vanity)),
     SUMRANGE(new String[]{"sum"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_sum, "Sum Range", "'A';'Z'", 1,
-            SumUtils::sum, true);
+            SumUtils::sum);
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
@@ -93,7 +93,6 @@ public enum FormulaFunction {
 
     private final String insertPattern;
     private final int insertIndex;
-    private final boolean requiresSpecialParsing;
 
     private static final Map<String, FormulaFunction> FUNC_BY_NAME = new HashMap<>();
 
@@ -105,12 +104,7 @@ public enum FormulaFunction {
         }
     }
 
-
     FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function) {
-        this(names, group, resId, resFallback, insertPattern, insertIndex, function, false);
-    }
-
-    FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function, final boolean requiresSpecialParsing) {
         this.names = names;
         this.group = group;
         this.function = function;
@@ -118,7 +112,6 @@ public enum FormulaFunction {
         this.resFallback = resFallback;
         this.insertPattern = insertPattern;
         this.insertIndex = insertIndex;
-        this.requiresSpecialParsing = requiresSpecialParsing;
     }
 
     public String[] getNames() {
@@ -143,10 +136,6 @@ public enum FormulaFunction {
 
     public FunctionGroup getGroup() {
         return group;
-    }
-
-    public boolean requiresSpecialParsing() {
-        return requiresSpecialParsing;
     }
 
     public Value execute(final ValueList params) throws FormulaException {

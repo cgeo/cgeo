@@ -397,7 +397,7 @@ public class DegreeFormula {
     private static void addError(final List<CharSequence> css, final CharSequence... csse) {
         if (css != null) {
             for (CharSequence cs : csse) {
-                css.add(TextUtils.setSpan(cs.toString(), Formula.createErrorSpan()));
+                css.add(TextUtils.setSpan(cs.toString(), FormulaError.createErrorSpan()));
             }
         }
     }

@@ -12,9 +12,6 @@ import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
 
-/**
- * Unit tests for SumUtils class
- */
 public class SumUtilsTest {
 
     // ========== expandVariableRange() tests ==========
@@ -262,12 +259,12 @@ public class SumUtilsTest {
     @Test
     public void testSumNumericRangeLarge() {
         final ValueList valueList = new ValueList();
-        valueList.add(Value.of(1));
+        valueList.add(Value.of(10));
         valueList.add(Value.of(100));
 
         final Value result = SumUtils.sum(valueList);
-        // sum(1..100) = 100 * 101 / 2 = 5050
-        assertThat(result.getAsDecimal()).isEqualTo(new BigDecimal("5050"));
+        // sum(10..100) = (100-10) * 101 / 2 = 5005
+        assertThat(result.getAsDecimal()).isEqualTo(new BigDecimal("5005"));
     }
 
     @Test
@@ -362,9 +359,9 @@ public class SumUtilsTest {
     @Test
     public void testExpandNumericRangeWithLeadingZeros() {
         // Numbers with leading zeros should still be parsed correctly
-        final List<String> result = SumUtils.expandVariableRange("$X01", "$X03");
+        final List<String> result = SumUtils.expandVariableRange("$X02", "$X04");
         // Note: Integer.parseInt removes leading zeros
-        assertThat(result).isEqualTo(Arrays.asList("X1", "X2", "X3"));
+        assertThat(result).isEqualTo(Arrays.asList("X2", "X3", "X4"));
     }
 
     @Test

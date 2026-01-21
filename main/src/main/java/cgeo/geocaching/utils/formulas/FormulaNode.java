@@ -31,7 +31,7 @@ final class FormulaNode {
     private Func4<ValueList, Function<String, Value>, Integer, Set<Integer>, CharSequence> functionToErrorString;
     private FormulaNode[] children;
 
-    public final Set<String> neededVars;
+    private final Set<String> neededVars;
 
     FormulaNode(final String id, final FormulaNode[] children,
                 final Func3<ValueList, Function<String, Value>, Integer, Value> function) {
@@ -64,11 +64,11 @@ final class FormulaNode {
         }
     }
 
-    public String getId() {
+    String getId() {
         return this.id;
     }
 
-    public Set<String> getNeededVars() {
+    Set<String> getNeededVars() {
         return neededVars;
     }
 
@@ -121,7 +121,7 @@ final class FormulaNode {
         return evalInternal(variables == null ? x -> null : variables, rangeIdx);
     }
 
-    Value evalInternal(final Function<String, Value> variables, final int rangeIdx) throws FormulaException {
+    private Value evalInternal(final Function<String, Value> variables, final int rangeIdx) throws FormulaException {
         final ValueList childValues = new ValueList();
         for (FormulaNode child : children) {
             childValues.add(child.eval(variables, rangeIdx));
@@ -137,7 +137,7 @@ final class FormulaNode {
         return result.toString();
     }
 
-    Value evalToCharSequenceInternal(final Function<String, Value> variables, final int rangeIdx) {
+    private Value evalToCharSequenceInternal(final Function<String, Value> variables, final int rangeIdx) {
         final ValueList childValues = new ValueList();
         boolean hasError = false;
         for (FormulaNode child : children) {
@@ -171,7 +171,7 @@ final class FormulaNode {
     /**
      * for test/debug purposes only!
      */
-    public String toDebugString(final Function<String, Value> variables, final int rangeIdx, final boolean includeId, final boolean recursive) {
+    String toDebugString(final Function<String, Value> variables, final int rangeIdx, final boolean includeId, final boolean recursive) {
         final StringBuilder sb = new StringBuilder();
         if (includeId) {
             sb.append("[").append(getId()).append("]");

@@ -15,9 +15,9 @@ public class SumFunctionTest {
 
     @Test
     public void testSumNumericRangeLarger() {
-        // sum(1;10) -> 1+2+3+...+10 = 55
-        final Value result = Formula.evaluate("sum(1;10)");
-        assertThat(result.getAsLong()).isEqualTo(55);
+        // sum(10;100) -> 10+11+12+13+...+100 = 5005
+        final Value result = Formula.evaluate("sum(10;100)");
+        assertThat(result.getAsLong()).isEqualTo(5005);
     }
 
     @Test

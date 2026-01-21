@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Utility class for the implementation of the sum() formula function.
  * <p>
@@ -25,6 +27,9 @@ import java.util.function.Function;
  * The class is used internally by the formula parser and evaluator to handle sum operations with both
  * numeric and variable arguments, including error handling for invalid ranges or types.
  * <p>
+ * parseSumFunction is used for compile-time parsing of sum() functions with variable range parameters,
+ * creating appropriate FormulaNode instances for evaluation.
+ * <p>
  * Instantiation is not intended (private constructor).
  */
 final class SumUtils {
@@ -36,7 +41,7 @@ final class SumUtils {
     /**
      * Implementation of sum function that supports ranges of variables or numeric ranges
      */
-    public static Value sum(final ValueList valueList) {
+    static Value sum(final ValueList valueList) {
         valueList.assertCheckCount(2, 2, false);
         
         final Value start = valueList.get(0);
@@ -94,7 +99,7 @@ final class SumUtils {
      * @param varProvider Function to retrieve variable values
      * @return Pair of sum and list of missing variables (if any)
      */
-    public static Pair<BigDecimal, List<String>> sumVariables(
+    static Pair<BigDecimal, List<String>> sumVariables(
             final List<String> variables,
             final Function<String, Value> varProvider) {
         BigDecimal sum = BigDecimal.ZERO;
@@ -122,7 +127,7 @@ final class SumUtils {
      * Generate list of variable names in a range for dependency tracking
      * This is called at compile time to determine which variables are needed
      */
-    public static List<String> expandVariableRange(final String startVar, final String endVar) {
+    static List<String> expandVariableRange(final String startVar, final String endVar) {
         // Validate that multi-character variables have $ prefix
         validateVariableFormat(startVar);
         validateVariableFormat(endVar);
@@ -276,7 +281,7 @@ final class SumUtils {
      * Parses a sum function with possible variable range parameters.
      * Returns a FormulaNode for a variable range sum, or null for standard handling.
      */
-    public static FormulaNode parseSumFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
+    static FormulaNode parseSumFunction(final List<FormulaNode> params) {
         // Try to extract string literals from parameters
         final String startVar = extractStringLiteral(params.get(0));
         final String endVar = extractStringLiteral(params.get(1));
@@ -301,7 +306,7 @@ final class SumUtils {
                         if (!result.second.isEmpty()) {
                             Collections.sort(result.second);
                             throw new FormulaException(FormulaException.ErrorType.MISSING_VARIABLE_VALUE,
-                                    org.apache.commons.lang3.StringUtils.join(result.second, ", "));
+                                    StringUtils.join(result.second, ", "));
                         }
                         return Value.of(result.first);
                     },
@@ -313,8 +318,9 @@ final class SumUtils {
         }
     }
 
-    private static CharSequence formatVariableRangeSumDisplay(final List<String> variables, final java.util.function.Function<String, Value> vars) {
-        final StringBuilder sb = new StringBuilder("sum(");
+    private static CharSequence formatVariableRangeSumDisplay(final List<String> variables, final Function<String, Value> vars) {
+        final StringBuilder sb = new StringBuilder(FormulaFunction.SUMRANGE.getMainName());
+        sb.append("(");
         boolean first = true;
         for (final String varName : variables) {
             if (!first) {
@@ -323,7 +329,7 @@ final class SumUtils {
             first = false;
             final Value value = vars.apply(varName);
             if (value == null) {
-                sb.append(cgeo.geocaching.utils.TextUtils.setSpan("?" + varName, Formula.createErrorSpan()));
+                sb.append(cgeo.geocaching.utils.TextUtils.setSpan("?" + varName, FormulaError.createErrorSpan()));
             } else {
                 sb.append(value.getAsString());
             }
