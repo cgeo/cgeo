@@ -106,6 +106,15 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.includeInconclusiveFilterCheckbox = includeInconclusiveFilterCheckboxItem.right;
 
         filterListAdapter = new FilterListAdapter(binding.filterList);
+        
+        // Ensure RecyclerView doesn't intercept touch events when not needed for scrolling
+        // This fixes an issue where the parent ScrollView couldn't scroll on some devices
+        binding.filterList.setOnTouchListener((v, event) -> {
+            // Allow parent to intercept touch events for scrolling
+            v.getParent().requestDisallowInterceptTouchEvent(false);
+            return false;
+        });
+        
         initializeFilterAdd();
         initializeStorageOptions();
 
