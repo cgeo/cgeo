@@ -815,6 +815,10 @@
     <string name="downloader_pending_info">Existuje alespoň jedno pozastavené nebo neúspěšné stahování. Chcete otevřít seznam čekajících stahování?</string>
     <string name="downloader_retry_download">Opakovat stahování</string>
     <string name="downloader_retry_download_details">Chcete znovu zkusit stáhnout následující soubor?</string>
+    <string name="downloader_delete_all_pending">Odstranit vše</string>
+    <string name="downloader_delete_all_confirmation">Odstranit všechna čekající stahování?</string>
+    <string name="downloader_delete_all_message">Tímto zrušíte všechny %d čekající na stažení a odeberete stažené části. Tuto akci nelze vrátit zpět.</string>
+    <string name="downloader_deleted_all">Odstraněna všechna čekající stahování</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Stahování se nezdařilo (a nebude obnoveno)</string>
     <string name="asdm_status_paused">Stahování čeká na opakování nebo pokračování</string>
