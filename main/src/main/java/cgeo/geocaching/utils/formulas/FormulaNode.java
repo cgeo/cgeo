@@ -24,7 +24,7 @@ import java.util.function.Function;
  */
 final class FormulaNode {
     static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
-    static public final String RANGE_NODE_ID = "range-node";
+    static final String RANGE_NODE_ID = "range-node";
 
     private final String id;
     private Func3<ValueList, Function<String, Value>, Integer, Value> function;
