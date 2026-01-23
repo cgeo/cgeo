@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
@@ -207,6 +208,22 @@ public final class GpxSerializer {
                     gpx.startTag(NS_GSAK, "DNFDate");
                     gpx.text(dateFormatZ.format(new Date(visited)));
                     gpx.endTag(NS_GSAK, "DNFDate");
+                }
+            }
+        }
+        if (cache.hasUserModifiedCoords()) {
+            if (cache.hasWaypoints()) {
+                for (final Waypoint wp : cache.getWaypoints()) {
+                    if (wp.getWaypointType() == WaypointType.ORIGINAL) {
+                        if (wp.getCoords() != null) {
+                            gpx.startTag(NS_GSAK, "LatBeforeCorrect");
+                            gpx.text(Double.toString(wp.getCoords().getLatitude()));
+                            gpx.endTag(NS_GSAK, "LatBeforeCorrect");
+                            gpx.startTag(NS_GSAK, "LonBeforeCorrect");
+                            gpx.text(Double.toString(wp.getCoords().getLongitude()));
+                            gpx.endTag(NS_GSAK, "LonBeforeCorrect");
+                        }
+                    }
                 }
             }
         }
