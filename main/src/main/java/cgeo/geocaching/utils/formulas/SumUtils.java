@@ -219,12 +219,12 @@ final class SumUtils {
     private static List<String> expandNumericSuffixRange(final String start, final String end) {
         final String startPrefix = extractPrefix(start);
         final String endPrefix = extractPrefix(end);
-        
+
         validatePrefixMatch(startPrefix, endPrefix);
-        
+
         final String startSuffix = start.substring(startPrefix.length());
         final String endSuffix = end.substring(endPrefix.length());
-        
+
         final int startNum;
         final int endNum;
         try {
@@ -241,10 +241,23 @@ final class SumUtils {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
                 startNum + " > " + endNum);
         }
-        
+        if (startSuffix.length() > endSuffix.length()) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startSuffix + " != " + endSuffix);
+        }
+        if ((startSuffix.charAt(0) == '0' || endSuffix.charAt(0) == '0') && startSuffix.length() != endSuffix.length()) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startSuffix + " != " + endSuffix);
+        }
+
+        // Preserve leading zeros from the original suffix width
+        final int suffixWidth = startSuffix.length();
+        final String formatPattern = "%0" + suffixWidth + "d";
+
         final List<String> variables = new ArrayList<>();
         for (int i = startNum; i <= endNum; i++) {
-            variables.add(startPrefix + i);
+            final String formattedNumber = String.format(formatPattern, i);
+            variables.add(startPrefix + formattedNumber);
         }
         return variables;
     }
