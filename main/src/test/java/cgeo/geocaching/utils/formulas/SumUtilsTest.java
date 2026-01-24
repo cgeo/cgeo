@@ -263,7 +263,7 @@ public class SumUtilsTest {
         valueList.add(Value.of(100));
 
         final Value result = SumUtils.sum(valueList);
-        // sum(10..100) = (100-10) * 101 / 2 = 5005
+        // sum(10..100) = (10 + 100) * 91 / 2 = 5005
         assertThat(result.getAsDecimal()).isEqualTo(new BigDecimal("5005"));
     }
 
