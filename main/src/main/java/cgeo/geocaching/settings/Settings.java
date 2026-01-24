@@ -1441,8 +1441,8 @@ public class Settings {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
 
-    private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(LocalizationUtils.getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+    private static DarkModeSetting getAppTheme() {
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue()));
     }
 
     public static boolean isDarkSkinSetting(final @NonNull Context context, final DarkModeSetting setting) {
@@ -1458,8 +1458,8 @@ public class Settings {
         return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    public static boolean isSystemTheme(final @NonNull Context context) {
-        return getAppTheme(context) == DarkModeSetting.SYSTEM_DEFAULT;
+    public static boolean isSystemTheme() {
+        return getAppTheme() == DarkModeSetting.SYSTEM_DEFAULT;
     }
 
     public static boolean isLightSkin(final @NonNull Context context) {

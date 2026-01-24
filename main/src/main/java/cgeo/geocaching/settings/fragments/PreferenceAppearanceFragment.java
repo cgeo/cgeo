@@ -22,7 +22,6 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Locale;
 
@@ -115,7 +114,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final FragmentActivity activity = requireActivity();
         activity.setTitle(R.string.settings_title_appearance);
         findPreference(LocalizationUtils.getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
-        final boolean systemTheme = Settings.isSystemTheme(activity);
+        final boolean systemTheme = Settings.isSystemTheme();
         final boolean lightSkin = Settings.isLightSkin(activity);
         findPreference(getString(R.string.pref_colored_theme_light)).setVisible(systemTheme || lightSkin);
         findPreference(getString(R.string.pref_colored_theme_dark)).setVisible(systemTheme || !lightSkin);
