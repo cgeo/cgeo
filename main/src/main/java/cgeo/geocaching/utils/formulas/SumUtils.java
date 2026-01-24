@@ -77,17 +77,15 @@ final class SumUtils {
                 start.toUserDisplayableString(), 
                 start.getType());
         }
-        final long startVal = start.getAsLong();
-        final long endVal = end.getAsLong();
-        if (startVal > endVal) {
+        final BigInteger startBI = start.getAsInteger();
+        final BigInteger endBI = end.getAsInteger();
+        if (startBI.compareTo(endBI) > 0) {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                startVal + " > " + endVal);
+                startBI + " > " + endBI);
         }
         
         // Use arithmetic series formula: n*(start+end)/2 for better performance
         // Use BigInteger to avoid overflow for large ranges
-        final BigInteger startBI = BigInteger.valueOf(startVal);
-        final BigInteger endBI = BigInteger.valueOf(endVal);
         final BigInteger n = endBI.subtract(startBI).add(BigInteger.ONE);
         final BigInteger sum = n.multiply(startBI.add(endBI)).divide(BigInteger.valueOf(2));
         return Value.of(sum);
