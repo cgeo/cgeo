@@ -1406,8 +1406,8 @@ public class Settings {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
 
-    private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(LocalizationUtils.getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+    private static DarkModeSetting getAppTheme() {
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue()));
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
