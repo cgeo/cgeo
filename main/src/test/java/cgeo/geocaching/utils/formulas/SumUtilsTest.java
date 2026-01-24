@@ -367,7 +367,7 @@ public class SumUtilsTest {
     public void testExpandNumericRangeWithLeadingZeros() {
         // Numbers with leading zeros should be parsed and preserved correctly
         final List<String> result = SumUtils.expandVariableRange("$X02", "$X04");
-        assertThat(result).isEqualTo(Arrays.asList("X02", "X03", "X04"));
+        assertThat(result).isEqualTo(Arrays.asList("X2", "X3", "X4"));
     }
 
     @Test

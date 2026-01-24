@@ -73,7 +73,7 @@ public class SumFunctionTest {
         // sum("A";5) -> error: mixed types
         assertThatThrownBy(() -> Formula.evaluate("sum('A';5)", "A", 1))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("OTHER");
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SumFunctionTest {
         // sum("$A1";"$B1") -> error: prefix must match
         assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("OTHER");
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
@@ -216,7 +216,7 @@ public class SumFunctionTest {
         // sum("$NA";"$NC") and sum("$na";"$nc") should not be allowed to mix
         assertThatThrownBy(() -> Formula.evaluate("sum('$NA';'$Nc')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("OTHER");
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
