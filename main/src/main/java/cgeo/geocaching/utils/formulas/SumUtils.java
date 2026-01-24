@@ -72,18 +72,29 @@ final class SumUtils {
 
     private static Value sumNumericRange(final Value start, final Value end) {
         if (!start.isInteger() || !end.isInteger()) {
-            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE, 
-                "Integer", 
-                start.toUserDisplayableString(), 
-                start.getType());
+            if (!start.isInteger() && !end.isInteger()) {
+                throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
+                        "Integer",
+                        start.toUserDisplayableString() + ", " + end.toUserDisplayableString(),
+                        start.getType());
+            } else if (!start.isInteger()) {
+                throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
+                        "Integer",
+                        start.toUserDisplayableString(),
+                        start.getType());
+            } else {
+                throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
+                        "Integer",
+                        end.toUserDisplayableString(),
+                        end.getType());
+            }
         }
         final BigInteger startBI = start.getAsInteger();
         final BigInteger endBI = end.getAsInteger();
         if (startBI.compareTo(endBI) > 0) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                startBI + " > " + endBI);
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startBI + " > " + endBI);
         }
-        
         // Use arithmetic series formula: n*(start+end)/2 for better performance
         // Use BigInteger to avoid overflow for large ranges
         final BigInteger n = endBI.subtract(startBI).add(BigInteger.ONE);
