@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -67,7 +66,7 @@ public final class CheckerUtils {
             }
         }
         // GC's own checker
-        if (cache.getDescription().contains(CgeoApplication.getInstance().getString(R.string.link_gc_checker))) {
+        if (cache.getDescription().contains(LocalizationUtils.getString(R.string.link_gc_checker))) {
             return new Pair<>(cache.getUrl(), GC_CHECKER);
         }
         return null;

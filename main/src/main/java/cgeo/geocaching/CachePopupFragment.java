@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -286,7 +287,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                         CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 if (!Network.isConnected()) {
-                    showToast(getString(R.string.err_server_general));
+                    showToast(LocalizationUtils.getString(R.string.err_server_general));
                     return;
                 }
                 CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
@@ -298,7 +299,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         @Override
         public void onClick(final View arg0) {
             if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server_general));
+                showToast(LocalizationUtils.getString(R.string.err_server_general));
                 return;
             }
             CacheDownloaderService.refreshCache(getActivity(), cache.getGeocode(), true, () -> updateStoreRefreshButtons(false));

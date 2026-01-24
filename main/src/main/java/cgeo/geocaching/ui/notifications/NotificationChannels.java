@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.notifications;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.NotificationChannel;
 import android.content.Context;
@@ -32,10 +33,10 @@ public enum NotificationChannels {
         for (NotificationChannels channel : NotificationChannels.values()) {
             final NotificationChannel notificationChannel = new NotificationChannel(
                     channel.name(),
-                    context.getString(channel.channelDisplayableTitle),
+                    LocalizationUtils.getString(channel.channelDisplayableTitle),
                     channel.channelImportance
             );
-            notificationChannel.setDescription(context.getString(channel.channelDisplayableDescription));
+            notificationChannel.setDescription(LocalizationUtils.getString(channel.channelDisplayableDescription));
             manager.createNotificationChannel(notificationChannel);
         }
     }

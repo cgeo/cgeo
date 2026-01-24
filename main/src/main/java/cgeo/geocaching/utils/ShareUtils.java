@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.ShareBroadcastReceiver;
 import cgeo.geocaching.settings.StartWebviewActivity;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+
 import static cgeo.geocaching.utils.ProcessUtils.CHROME_PACKAGE_NAME;
 
 import android.app.Activity;
@@ -73,14 +74,14 @@ public class ShareUtils {
     }
 
     private static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId, final String receiver) {
-        final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
+        final String usedReceiver = receiver == null ? LocalizationUtils.getString(R.string.support_mail) : receiver;
         final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, uri, usedReceiver);
         shareInternal(context, intent, titleResourceId);
     }
 
     private static void shareInternal(final Context context, final Intent intent, @StringRes final int titleResourceId) {
         if (intent != null) {
-            final Intent share = Intent.createChooser(intent, context.getString(titleResourceId));
+            final Intent share = Intent.createChooser(intent, LocalizationUtils.getString(titleResourceId));
             final Intent clipboardIntent = createClipboardIntent(context, intent);
             if (clipboardIntent != null) {
                 share.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{ createClipboardIntent(context, intent) });
@@ -100,7 +101,7 @@ public class ShareUtils {
     private static Uri fileToUri(@NonNull final Context context, @Nullable final File file) {
         if (file != null) {
             try {
-                return FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
+                return FileProvider.getUriForFile(context, LocalizationUtils.getString(R.string.file_provider_authority), file);
             } catch (Exception e) {
                 Log.e("error converting file to uri:" + file, e);
             }
@@ -210,7 +211,7 @@ public class ShareUtils {
 
             // Always shows an application chooser with all possible targets
             if (forceIntentChooser) {
-                final Intent chooser = Intent.createChooser(viewIntent, context.getString(R.string.cache_menu_browser));
+                final Intent chooser = Intent.createChooser(viewIntent, LocalizationUtils.getString(R.string.cache_menu_browser));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 
                 final Intent customTabs = new Intent(context, StartWebviewActivity.class);
@@ -256,7 +257,7 @@ public class ShareUtils {
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
+        builder.addMenuItem(LocalizationUtils.getString(R.string.cache_menu_open_with), pendingIntent);
 
         final CustomTabsIntent customTabsIntent = builder.build();
         // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
@@ -270,7 +271,7 @@ public class ShareUtils {
         }
         final String shareText = data.getStringExtra("EXTRA_SHARE_TEXT");
         if (!StringUtils.isBlank(shareText)) {
-            Snackbar.make(activity.findViewById(android.R.id.content), activity.getString(R.string.info_log_posted), Snackbar.LENGTH_LONG)
+            Snackbar.make(activity.findViewById(android.R.id.content), LocalizationUtils.getString(R.string.info_log_posted), Snackbar.LENGTH_LONG)
                     .setAnchorView(anchor)
                     .setAction(R.string.snackbar_action_share, v -> {
                         final Intent shareIntent = new Intent(Intent.ACTION_SEND);
