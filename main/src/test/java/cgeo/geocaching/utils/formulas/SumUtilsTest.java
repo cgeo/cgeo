@@ -42,15 +42,16 @@ public class SumUtilsTest {
 
     @Test
     public void testExpandNumericSuffixRange() {
-        final List<String> result = SumUtils.expandVariableRange("$A1", "$A5");
-        assertThat(result).isEqualTo(Arrays.asList("A1", "A2", "A3", "A4", "A5"));
+        final List<String> resultX = SumUtils.expandVariableRange("$X8", "$X12");
+        final List<String> resultX0 = SumUtils.expandVariableRange("$X08", "$X12");
+        final List<String> resultXX = SumUtils.expandVariableRange("$XX10", "$XX12");
+        final List<String> resultX00 = SumUtils.expandVariableRange("$X5", "$X08");
+        assertThat(resultX).isEqualTo(Arrays.asList("X8", "X9", "X10", "X11", "X12"));
+        assertThat(resultX0).isEqualTo(Arrays.asList("X08", "X09", "X10", "X11", "X12"));
+        assertThat(resultXX).isEqualTo(Arrays.asList("XX10", "XX11", "XX12"));
+        assertThat(resultX00).isEqualTo(Arrays.asList("X5", "X6", "X7", "X8"));
     }
 
-    @Test
-    public void testExpandNumericSuffixRangeMultipleDigits() {
-        final List<String> result = SumUtils.expandVariableRange("$X10", "$X12");
-        assertThat(result).isEqualTo(Arrays.asList("X10", "X11", "X12"));
-    }
 
     @Test
     public void testExpandLetterSuffixRange() {
@@ -80,61 +81,79 @@ public class SumUtilsTest {
     @Test
     public void testExpandMixedCase() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("a", "D"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandReverseOrder() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("D", "A"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandNoDollarForMultiChar() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("A1", "A5"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("UNEXPECTED_TOKEN");
     }
 
     @Test
     public void testExpandOnlyDollar() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$", "$A"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("UNEXPECTED_TOKEN");
     }
 
     @Test
     public void testExpandPrefixMismatch() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A1", "$B1"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandPrefixCaseMismatch() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A1", "$a5"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandLetterSuffixPrefixMismatch() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$NA", "$MB"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandLetterSuffixCaseMismatch() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$NA", "$Nc"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandInvalidMixedTypes() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A1", "$AB"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
     public void testExpandNumericRangeReversed() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A5", "$A1"))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
+        ;
+    }
+
+    @Test
+    public void testExpandSuffixMismatch() {
+        assertThatThrownBy(() -> SumUtils.expandVariableRange("$A05", "$A8"))
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     // ========== sumVariables() tests ==========
@@ -222,7 +241,8 @@ public class SumUtilsTest {
         };
 
         assertThatThrownBy(() -> SumUtils.sumVariables(vars, provider))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("WRONG_TYPE");
     }
 
     @Test
@@ -303,7 +323,8 @@ public class SumUtilsTest {
         valueList.add(Value.of(1));
 
         assertThatThrownBy(() -> SumUtils.sum(valueList))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
@@ -313,7 +334,8 @@ public class SumUtilsTest {
         valueList.add(Value.of("text"));
 
         assertThatThrownBy(() -> SumUtils.sum(valueList))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
@@ -323,7 +345,8 @@ public class SumUtilsTest {
         valueList.add(Value.of(5.5));
 
         assertThatThrownBy(() -> SumUtils.sum(valueList))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("WRONG_TYPE");
     }
 
     @Test
@@ -332,7 +355,8 @@ public class SumUtilsTest {
         valueList.add(Value.of(1));
 
         assertThatThrownBy(() -> SumUtils.sum(valueList))
-            .isInstanceOf(FormulaException.class);
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("WRONG_PARAMETER_COUNT");
     }
 
     // ========== Edge case tests ==========
@@ -361,13 +385,6 @@ public class SumUtilsTest {
 
         final Value result = SumUtils.sum(valueList);
         assertThat(result.getAsDecimal()).isEqualTo(new BigDecimal("0"));
-    }
-
-    @Test
-    public void testExpandNumericRangeWithLeadingZeros() {
-        // Numbers with leading zeros should be parsed and preserved correctly
-        final List<String> result = SumUtils.expandVariableRange("$X02", "$X04");
-        assertThat(result).isEqualTo(Arrays.asList("X2", "X3", "X4"));
     }
 
     @Test
