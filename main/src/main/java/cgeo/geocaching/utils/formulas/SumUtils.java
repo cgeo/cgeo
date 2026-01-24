@@ -342,7 +342,7 @@ final class SumUtils {
             }
         }
         sb.append(")");
-        return sb.toString();
+        return sb;
     }
 
     private static String extractStringLiteral(final FormulaNode node) {
