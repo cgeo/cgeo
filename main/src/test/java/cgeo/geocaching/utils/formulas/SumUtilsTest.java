@@ -146,7 +146,6 @@ public class SumUtilsTest {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A5", "$A1"))
                 .isInstanceOf(FormulaException.class)
                 .hasMessageContaining("INVALID_RANGE");
-        ;
     }
 
     @Test
