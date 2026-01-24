@@ -225,6 +225,6 @@ public class SumFunctionTest {
         // sum("$A1";"$A3") and sum("$a1";"$a3") should require matching case in prefix
         assertThatThrownBy(() -> Formula.evaluate("sum('$A1';'$a3')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("OTHER");
+            .hasMessageContaining("INVALID_RANGE");
     }
 }
