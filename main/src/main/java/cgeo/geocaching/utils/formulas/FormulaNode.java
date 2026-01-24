@@ -165,7 +165,7 @@ final class FormulaNode {
         if (cs == null) {
             cs = FormulaError.optionalError(FormulaError.valueListToCharSequence(childValues), childsInError);
         }
-        return FormulaError.ErrorValue.of(cs);
+        return new FormulaError.ErrorValue(cs);
     }
 
     /**

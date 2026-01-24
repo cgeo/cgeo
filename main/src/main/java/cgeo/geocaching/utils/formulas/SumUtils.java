@@ -2,7 +2,9 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TextUtils;
 
+import android.text.SpannableStringBuilder;
 import android.util.Pair;
 
 import java.math.BigDecimal;
@@ -63,10 +65,8 @@ final class SumUtils {
     private static void validateSumParameters(final Value start, final Value end) {
         // Both parameters must be of the same type
         if (start.isNumeric() != end.isNumeric()) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
-                    start.toUserDisplayableString(), 
-                    end.toUserDisplayableString()));
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    start.toUserDisplayableString() + " != " + end.toUserDisplayableString());
         }
     }
 
@@ -186,9 +186,8 @@ final class SumUtils {
         final char endCharUpper = Character.toUpperCase(endChar);
         
         if (isStartUpper != isEndUpper || startCharUpper > endCharUpper) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
-                    String.valueOf(startChar), String.valueOf(endChar)));
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startChar + " != " + endChar);
         }
     }
     
@@ -261,9 +260,8 @@ final class SumUtils {
     private static void validatePrefixMatch(final String startPrefix, final String endPrefix) {
         // Prefixes must match exactly (including case)
         if (!startPrefix.equals(endPrefix)) {
-            throw new FormulaException(FormulaException.ErrorType.OTHER, 
-                LocalizationUtils.getString(R.string.formula_error_range_mismatch, 
-                    startPrefix, endPrefix));
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startPrefix + " != " + endPrefix);
         }
     }
     
@@ -317,7 +315,7 @@ final class SumUtils {
     }
 
     private static CharSequence formatVariableRangeSumDisplay(final List<String> variables, final Function<String, Value> vars) {
-        final StringBuilder sb = new StringBuilder(FormulaFunction.SUMRANGE.getMainName());
+        final SpannableStringBuilder sb = new SpannableStringBuilder(FormulaFunction.SUMRANGE.getMainName());
         sb.append("(");
         boolean first = true;
         for (final String varName : variables) {
@@ -327,7 +325,7 @@ final class SumUtils {
             first = false;
             final Value value = vars.apply(varName);
             if (value == null) {
-                sb.append(cgeo.geocaching.utils.TextUtils.setSpan("?" + varName, FormulaError.createErrorSpan()));
+                sb.append(TextUtils.setSpan("?" + varName, FormulaError.createErrorSpan()));
             } else {
                 sb.append(value.getAsString());
             }

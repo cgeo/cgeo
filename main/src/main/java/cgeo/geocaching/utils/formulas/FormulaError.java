@@ -29,10 +29,6 @@ final class FormulaError {
             super(errorString);
         }
 
-        static ErrorValue of(final CharSequence cs) {
-            return new ErrorValue(cs);
-        }
-
         static boolean isError(final Value v) {
             return v instanceof ErrorValue;
         }

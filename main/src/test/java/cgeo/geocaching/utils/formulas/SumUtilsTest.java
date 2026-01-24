@@ -70,6 +70,13 @@ public class SumUtilsTest {
         assertThat(result).isEqualTo(Arrays.asList("VARA", "VARB", "VARC"));
     }
 
+
+    @Test
+    public void testExpandLetterSuffixRangeLongerPrefixNumeric() {
+        final List<String> result = SumUtils.expandVariableRange("$VAR11", "$VAR13");
+        assertThat(result).isEqualTo(Arrays.asList("VAR11", "VAR12", "VAR13"));
+    }
+
     @Test
     public void testExpandMixedCase() {
         assertThatThrownBy(() -> SumUtils.expandVariableRange("a", "D"))
