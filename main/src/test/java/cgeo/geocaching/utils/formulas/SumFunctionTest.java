@@ -171,7 +171,7 @@ public class SumFunctionTest {
         // sum("a";"D") -> error: cannot mix uppercase and lowercase
         assertThatThrownBy(() -> Formula.compile("sum('a';'D')"))
             .isInstanceOf(FormulaException.class)
-            .hasMessageContaining("OTHER");
+            .hasMessageContaining("INVALID_RANGE");
     }
 
     @Test
