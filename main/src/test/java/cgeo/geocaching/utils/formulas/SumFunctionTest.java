@@ -87,8 +87,8 @@ public class SumFunctionTest {
 
     @Test
     public void testSumErrorPrefixMismatchLetter() {
-        // sum("$A1";"$B1") -> error: prefix must match (with proper $ prefix)
-        assertThatThrownBy(() -> Formula.compile("sum('$A1';'$B1')"))
+        // sum("$NA";"$MB") -> error: prefix must match for letter-suffix ranges
+        assertThatThrownBy(() -> Formula.compile("sum('$NA';'$MB')"))
             .isInstanceOf(FormulaException.class)
             .hasMessageContaining("OTHER");
     }
