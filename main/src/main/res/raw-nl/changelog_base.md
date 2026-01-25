@@ -17,7 +17,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nieuw: Download caches gesorteerd op afstand
 - Oplossing: Verdubbeling van individuele route items
 - Nieuw: Ondersteuning voor Motorider thema (alleen VTM)
-- Nieuw: Ondersteuning voor transparante achtergrond weergave van offline kaarten (alleen VTM)
 - Nieuw: NoMap tegel provider (kaart niet tonen, gewoon caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -66,4 +65,5 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nieuw: "Negeer jaar" optie voor datumfilters
 - New: Make remote URI clickable in pending downloads
 - Change: Use system-settings as default theme for new installations
-
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
