@@ -17,7 +17,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nyhet: Ladda ned cacher beställda på distans
 - Fix: Fördubbling av enskilda rutt-objekt
 - Nyhet: Stöd för Motorider-tema (endast VTM)
-- Nytt: Stöd för transparent bakgrundsvisning av offline-kartor (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 
@@ -66,4 +65,5 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: "Ignore year" option for date filters
 - Nyhet: Gör fjärr-URI klickbar i väntande nedladdningar
 - Ändring: Använd systeminställningar som standardtema för nya installationer
-
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
