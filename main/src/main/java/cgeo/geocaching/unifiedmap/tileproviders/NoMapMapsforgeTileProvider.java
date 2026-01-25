@@ -13,6 +13,7 @@ import org.mapsforge.map.view.MapView;
 public class NoMapMapsforgeTileProvider extends AbstractMapsforgeTileProvider {
     NoMapMapsforgeTileProvider() {
         super(CgeoApplication.getInstance().getString(R.string.map_source_nomap), Uri.parse(""), 0, 18, new Pair<>("", false));
+        supportsBackgroundMaps = true;
     }
 
     @Override
