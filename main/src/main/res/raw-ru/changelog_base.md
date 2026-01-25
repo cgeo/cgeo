@@ -17,7 +17,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Новое: Загрузка тайников упорядочена по расстоянию
 - Исправлено: Дублирование отдельных пунктов маршрута
 - Новое: Поддержка темы Motorider (только VTM)
-- Новое: Поддержка прозрачного фонового отображения офлайн-карт (только для VTM)
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -66,4 +65,5 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: "Ignore year" option for date filters
 - New: Make remote URI clickable in pending downloads
 - Change: Use system-settings as default theme for new installations
-
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
