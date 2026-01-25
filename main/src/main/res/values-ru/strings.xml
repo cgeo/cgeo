@@ -862,8 +862,6 @@
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
     <string name="settings_hide_tileproviders_summary">Исключить один или несколько источников карты из выбора источника карты</string>
     <string name="settings_unifiedMapVariants_title">Варианты ЕдинойКарты</string>
-    <string name="settings_vtm_background_transparent_title">Прозрачный фон</string>
-    <string name="settings_vtm_background_transparent_summary">Показывать фон оффлайн-карт VTM прозрачным (экспериментально)</string>
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
     <string name="settings_userDefinedTileProviderUri">Введите полный URI-адрес (без косой черты) поставщика плиток карт или введите полный URI-адрес с параметрами (включая {X}, {Y} и {Z}). Убедитесь, что вы проверили условия использования этих карт и соблюдаете их.</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
@@ -1073,8 +1071,6 @@
     <string name="settings_startscreen_title">Экран по умолчанию</string>
     <string name="init_wallpaper">Обои</string>
     <string name="init_summary_wallpaper">Использовать обои устройства в качестве фона на главном экране</string>
-    <string name="init_colored_theme">Цветная тема</string>
-    <string name="init_summary_colored_theme">Использовать цветную тему</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Создание резервных копий</string>
     <string name="init_backup_summary">Резервные копии сохраняют тексты тайников, точки и настройки приложения. Фотографии тайников НЕ будут сохранены.\nЧтобы восстановить данные даже после потери телефона, вам необходимо скопировать резервные копии на независимый носитель или другой телефон.</string>
