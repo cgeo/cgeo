@@ -573,7 +573,6 @@ public class Geocache implements INamedGeoCoordinate {
         LogCacheActivity.startForCreateForResult(fromActivity, geocode, requestCode);
     }
 
-
     public boolean hasLogOffline() {
         return BooleanUtils.isTrue(hasLogOffline);
     }
@@ -1047,6 +1046,20 @@ public class Geocache implements INamedGeoCoordinate {
             }
         }
         return result;
+    }
+
+    @NonNull
+    public List<Image> getWaypointImages() {
+        final List<Image> images = new ArrayList<>(5);
+
+        for (final Waypoint wpt: waypoints) {
+            final Image img = wpt.buildImage();
+            if (img != null) {
+                images.add(img);
+            }
+        }
+
+        return images;
     }
 
     /**
@@ -2289,7 +2302,7 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public Collection<Image> getImages() {
         final List<Image> images = new LinkedList<>();
-        //the order of adding imgaes will determine which duplicates will be removed. prio is to images further up
+        //the order of adding images will determine which duplicates will be removed. prio is to images further up
         for (final LogEntry log : getLogs()) {
             images.addAll(log.logImages);
         }
@@ -2301,6 +2314,9 @@ public class Geocache implements INamedGeoCoordinate {
                 getShortDescription(), getDescription()));
         images.addAll(getSpoilers()); //for gc.com this includes gallery images, spoilers and background
         addLocalSpoilersTo(images);
+
+        // images from lab waypoints
+        images.addAll(getWaypointImages());
 
         // Deduplicate images and return them in requested size
         ImageUtils.deduplicateImageList(images);
