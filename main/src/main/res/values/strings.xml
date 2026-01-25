@@ -1187,13 +1187,16 @@
         <item>Dark</item>
     </string-array>
 
+    <string name="init_colored_theme_dark">Colored dark theme</string>
+    <string name="init_colored_theme_light">Colored light theme</string>
+    <string name="init_summary_colored_theme_dark">Use colored toolbar in dark theme</string>
+    <string name="init_summary_colored_theme_light">Use colored toolbar in light theme</string>
+
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Default screen</string>
 
     <string name="init_wallpaper">Wallpaper</string>
     <string name="init_summary_wallpaper">Show device wallpaper as home screen background</string>
-    <string name="init_colored_theme">Colored theme</string>
-    <string name="init_summary_colored_theme">Use colored theme</string>
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>

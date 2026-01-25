@@ -272,6 +272,21 @@ public class Settings {
         return 11;
     }
 
+    public static Map<String, Object> getNonSharedPreferences() {
+        final Map<String, Object> settingsMap = new HashMap<>();
+        final String lightnessDarkKey = getKey(R.string.pref_lightness_offset_dark);
+        if (!sharedPrefs.contains(lightnessDarkKey)) {
+            settingsMap.put(lightnessDarkKey, getInt(R.string.pref_lightness_offset_dark, getKeyInt(R.integer.lightness_offset_dark_default)));
+        }
+
+        final String saturationDarkKey = getKey(R.string.pref_saturation_offset_dark);
+        if (!sharedPrefs.contains(saturationDarkKey)) {
+            settingsMap.put(saturationDarkKey, getInt(R.string.pref_saturation_offset_dark, getKeyInt(R.integer.saturation_offset_dark_default)));
+        }
+        return settingsMap;
+
+    }
+
     private static void migrateSettings() {
         //NO migration in NO_APP_MODE
         if (NO_APPLICATION_MODE) {
@@ -1065,6 +1080,26 @@ public class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
+    public static float getSaturationOffset(final boolean isLightTheme) {
+        final int saturationOffset;
+        if (isLightTheme) {
+            saturationOffset = getInt(R.string.pref_saturation_offset_light, getKeyInt(R.integer.saturation_offset_light_default));
+        } else {
+            saturationOffset = getInt(R.string.pref_saturation_offset_dark, getKeyInt(R.integer.saturation_offset_dark_default));
+        }
+        return saturationOffset / 100.0f;
+    }
+
+    public static float getLightnessOffset(final boolean isLightTheme) {
+        final int lightnessOffset;
+        if (isLightTheme) {
+            lightnessOffset = getInt(R.string.pref_lightness_offset_light, getKeyInt(R.integer.lightness_offset_light_default));
+        } else {
+            lightnessOffset = getInt(R.string.pref_lightness_offset_dark, getKeyInt(R.integer.lightness_offset_dark_default));
+        }
+        return lightnessOffset / 100.0f;
+    }
+
     public static int getLogLineLimit() {
         final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
         if (logLineLimit == getKeyInt(R.integer.log_line_limit_max)) {
@@ -1410,7 +1445,7 @@ public class Settings {
         return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
     }
 
-    private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
+    public static boolean isDarkSkinSetting(final @NonNull Context context, final DarkModeSetting setting) {
         if (setting == DarkModeSetting.SYSTEM_DEFAULT) {
             return isDarkThemeActive(context);
         } else {
@@ -1423,12 +1458,19 @@ public class Settings {
         return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
+    public static boolean isSystemTheme(final @NonNull Context context) {
+        return getAppTheme(context) == DarkModeSetting.SYSTEM_DEFAULT;
+    }
+
     public static boolean isLightSkin(final @NonNull Context context) {
-        return !isDarkThemeActive(context, getAppTheme(context));
+        return !isDarkSkinSetting(context, getAppTheme(context));
     }
 
     public static boolean useColoredActionBar(final @NonNull Context context) {
-        return getBoolean(R.string.pref_colored_theme, true);
+        if (isLightSkin(context)) {
+            return getBoolean(R.string.pref_colored_theme_light, true);
+        }
+        return getBoolean(R.string.pref_colored_theme_dark, true);
     }
 
     public static Intent getStartscreenIntent(final @NonNull Activity activity) {
