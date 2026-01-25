@@ -868,8 +868,6 @@
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
     <string name="settings_unifiedMapVariants_title">Varianty Sjednocené mapy</string>
-    <string name="settings_vtm_background_transparent_title">Průhledné pozadí</string>
-    <string name="settings_vtm_background_transparent_summary">Zobrazit pozadí offline map VTM jako průhledné (experimentální)</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
     <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
@@ -1078,8 +1076,6 @@
     <string name="settings_startscreen_title">Výchozí obrazovka</string>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
-    <string name="init_colored_theme">Barevné téma</string>
-    <string name="init_summary_colored_theme">Použít barevné téma</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
