@@ -374,10 +374,10 @@ public class DegreeFormula {
             return new Pair<>(unpaddedDigits, false);
         }
         if (targetSize < unpaddedDigits.length()) {
-            return new Pair<>(TextUtils.setSpan(unpaddedDigits, Formula.createWarningSpan(), targetSize, -1, 0), true);
+            return new Pair<>(TextUtils.setSpan(unpaddedDigits, FormulaError.createWarningSpan(), targetSize, -1, 0), true);
         }
         final String pad = TextUtils.getPad("0000000000", targetSize - unpaddedDigits.length());
-        return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, Formula.createWarningSpan(), 0, pad.length(), 0), true);
+        return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, FormulaError.createWarningSpan(), 0, pad.length(), 0), true);
     }
 
     private Value evaluateSingleFormula(final Formula f, final Function<String, Value> varMap) {
@@ -397,7 +397,7 @@ public class DegreeFormula {
     private static void addError(final List<CharSequence> css, final CharSequence... csse) {
         if (css != null) {
             for (CharSequence cs : csse) {
-                css.add(TextUtils.setSpan(cs.toString(), Formula.createErrorSpan()));
+                css.add(TextUtils.setSpan(cs.toString(), FormulaError.createErrorSpan()));
             }
         }
     }

@@ -57,7 +57,9 @@ public enum FormulaFunction {
     ROMAN(new String[]{"roman"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_roman, "Roman", "''", 1,
             singleValueStringFunction(FormulaUtils::roman)),
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
-            singleValueStringFunction(FormulaUtils::vanity));
+            singleValueStringFunction(FormulaUtils::vanity)),
+    SUMRANGE(new String[]{"sum"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_sum, "Sum Range", "'A';'Z'", 1,
+            SumUtils::sum);
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
@@ -101,7 +103,6 @@ public enum FormulaFunction {
             }
         }
     }
-
 
     FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function) {
         this.names = names;
