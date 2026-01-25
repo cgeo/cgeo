@@ -1,4 +1,13 @@
-Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Cela peut provoquer avec quelques effets secondaires indésirables, en particulier sur les nouvelles versions d'Android. Si vous rencontrez des problèmes avec cette version de c:geo, veuillez signaler soit sur [GitHub](https://github.com/cgeo/cgeo) ou par e-mail à [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Rotation de la carte pour les cartes basées sur OpenStreetMap (en ligne et hors ligne)
+- Pop-up de cluster pour Google Maps
+- Cacher les sources de carte dont vous n'avez pas besoin
+- Graphique d'altitude pour les routes et les pistes
+- Basculer entre les listes directement depuis la carte
+- Mode "Conduite" pour les cartes basées sur OpenStreetMap
+- Long-tap on track / individual route for further options
 
 ### Carte
 - Nouveau: L'optimisation des itinéraires met en cache les données calculées
@@ -8,7 +17,6 @@ Due to Play Store policies we have updated the Android API level this version of
 - New: Download caches ordered by distance
 - Fix: Doubling of individual route items
 - New: Support for Motorider theme (VTM only)
-- New: Support for transparent background display of offline maps (VTM only)
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -55,3 +63,7 @@ Due to Play Store policies we have updated the Android API level this version of
 - Fix: Titles in range input dialogs cut off
 - Fix: Notification for nightly update points to regular APK even for FOSS variant
 - New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map

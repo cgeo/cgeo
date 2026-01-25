@@ -1,4 +1,13 @@
-В соответствии с политикой Play Store мы обновили уровень API для Android в этой версии c: geo + мы изменили некоторые процедуры компоновки экрана. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Это может привести к некоторым нежелательным побочным эффектам, особенно в новых версиях Android. Если у вас возникнут какие-либо проблемы с этой версией c:geo, пожалуйста, сообщите об этом на [GitHub](https://github.com/cgeo/cgeo) или по электронной почте [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Поворот карты для карт на основе OpenStreetMap (онлайн + офлайн)
+- Всплывающее окно кластера для Google Maps
+- Возможность убрать ненужные вам источники карт
+- Диаграмма высот для маршрутов и треков
+- Переключение между списками непосредственно с карты
+- "Режим вождения" для карт на основе OpenStreetMap
+- Long-tap on track / individual route for further options
 
 ### Карта
 - Новое: При оптимизации маршрута кэшируются данные расчетов
@@ -8,7 +17,6 @@
 - Новое: Загрузка тайников упорядочена по расстоянию
 - Исправлено: Дублирование отдельных пунктов маршрута
 - Новое: Поддержка темы Motorider (только VTM)
-- Новое: Поддержка прозрачного фонового отображения офлайн-карт (только для VTM)
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -55,3 +63,7 @@
 - Fix: Titles in range input dialogs cut off
 - Fix: Notification for nightly update points to regular APK even for FOSS variant
 - New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map

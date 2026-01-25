@@ -355,9 +355,6 @@
     <string name="tap_icon_more_info">Toque no ícone para mais informações</string>
     <string name="use_slider_adjust_value">Use o controle deslizante para ajustar o valor</string>
     <string name="snackbar_action_share">Partilhar</string>
-    <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
-    <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
-    <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Básico</string>
     <string name="translator_preference_target_lng">Idioma de tradução offline</string>
@@ -853,8 +850,6 @@
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
     <string name="settings_unifiedMapVariants_title">Variantes do Mapa Unificado</string>
-    <string name="settings_vtm_background_transparent_title">Fundo transparente</string>
-    <string name="settings_vtm_background_transparent_summary">Mostrar fundo transparente nos mapas offline VTM (experimental)</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
     <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
@@ -1063,8 +1058,6 @@
     <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
     <string name="init_summary_wallpaper">Mostra a imagem de fundo do dispositivo como fundo no ecrã da página inicial</string>
-    <string name="init_colored_theme">Tema colorido</string>
-    <string name="init_summary_colored_theme">Usar tema colorido</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\nDica: Copie os ficheiros de backup p/ outro armazenamento, podendo assim restaura-los mesmo que perca o telemóvel.</string>
@@ -1135,7 +1128,6 @@
     <string name="init_hillshading_hq">Sombreado de altitude de alta qualidade</string>
     <string name="init_summary_hillshading_hq">Sobreposição de sombreado de altitude mais detalhada, mas com ~50%% de renderização mais lenta ao afastar zoom</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
-    <string name="init_mapsource_select_legacy">Seleccione Fonte do Mapa (Antigo)</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
@@ -1257,8 +1249,6 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Usar mapa antigo</string>
-    <string name="init_summary_useLegacyMap">Use versões antigas do Google Map / Mapsforge (OSM) mapas ao invés do Mapa Unificado</string>
     <string name="category_unifiedMap">Mapa unificado</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
@@ -1280,7 +1270,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
     <string name="map_source_google_terrain">Google: Terreno</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (Offline)</string>
     <string name="map_source_nomap">Sem mapa</string>
     <string name="map_source_attribution_dialog_title">Créditos do mapa</string>
@@ -2465,7 +2454,6 @@
     <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
-    <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
     <string name="route_item_point">Ponto da rota</string>
@@ -2632,7 +2620,6 @@
     <string name="vtm_theme_variant">Variante de Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
-    <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
     <string name="map_trail_show">Mostrar histórico de percurso</string>
     <string name="map_trail_hide">Ocultar histórico de percurso</string>
     <!-- history track export -->
@@ -2749,7 +2736,6 @@
     <string name="wherigo_toast_check_things">Wherigo: verifique o seu %s para obter as alterações</string>
     <string name="wherigo_otm_shortcuts_title">Atalhos do Leitor Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Se quiser usar o Leitor de Wherigo do c:geo regularmente, considere criar um botão de início rápido ou item de menu personalizado em Definições —&gt; Aparência</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Mostrar locais de Wherigo no mapa não é suportado para as suas configurações de mapa. Por favor, mude para o mapa unificado em Definições -&gt; Provedores de Mapas -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>

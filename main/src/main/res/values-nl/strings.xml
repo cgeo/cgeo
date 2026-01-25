@@ -355,9 +355,6 @@
     <string name="tap_icon_more_info">Tik op het pictogram voor meer informatie</string>
     <string name="use_slider_adjust_value">Gebruik de schuifregelaar om de waarde aan te passen</string>
     <string name="snackbar_action_share">Delen</string>
-    <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
-    <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
-    <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basis</string>
     <string name="translator_preference_target_lng">Offline vertalen taal</string>
@@ -854,8 +851,6 @@
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
-    <string name="settings_vtm_background_transparent_title">Transparante achtergrond</string>
-    <string name="settings_vtm_background_transparent_summary">Toon achtergrond van VTM offline kaarten transparant (experimenteel)</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -1064,8 +1059,6 @@
     <string name="settings_startscreen_title">Standaard scherm</string>
     <string name="init_wallpaper">Achtergrond</string>
     <string name="init_summary_wallpaper">Toon apparaat achtergrond als startscherm achtergrond</string>
-    <string name="init_colored_theme">Kleurig thema</string>
-    <string name="init_summary_colored_theme">Gekleurd thema gebruiken</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -1136,7 +1129,6 @@
     <string name="init_hillshading_hq">Hoge kwaliteit reliëfweergave</string>
     <string name="init_summary_hillshading_hq">Meer gedetailleerde reliëfweergave overlay maar ~50%% langzamere weergave bij het uitzoomen</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
-    <string name="init_mapsource_select_legacy">Selecteer Kaart Bron (Verouderd)</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
@@ -1258,8 +1250,6 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
-    <string name="init_title_useLegacyMap">Oudere kaart gebruiken</string>
-    <string name="init_summary_useLegacyMap">Gebruik oude versies van Google Map / Mapsforge (OSM) kaarten in plaats van UnifiedMap</string>
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
@@ -1281,7 +1271,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_google_terrain">Google: Terrein</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_nomap">Geen kaart</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
@@ -2468,7 +2457,6 @@
     <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
-    <string name="map_individual_route_cleared">Individuele route gewist</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
     <string name="load_individual_route_error">Fout bij laden individuele route</string>
     <string name="route_item_point">Route punt</string>
@@ -2635,7 +2623,6 @@
     <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
-    <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
     <string name="map_trail_show">Geschiedenisspoor tonen</string>
     <string name="map_trail_hide">Geschiedenisspoor verbergen</string>
     <!-- history track export -->
@@ -2752,7 +2739,6 @@
     <string name="wherigo_toast_check_things">Wherigo: controleer je %s op veranderingen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Speler Sneltoetsen</string>
     <string name="wherigo_otm_shortcuts_message">Als je c:geo Wherigo Speler regelmatig wil gebruiken, overweeg om een knop voor snelle lancering of aangepast menu-item te maken onder Instellingen -&gt; Uiterlijk</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Weergave van Wherigo locaties op de kaart wordt niet ondersteund voor jouw kaart instellingen. Gelieve over te schakelen naar een uniforme kaart onder Instellingen -&gt; Kaartbronnen -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>

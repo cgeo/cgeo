@@ -356,9 +356,6 @@
     <string name="tap_icon_more_info">Toqueu la icona per obtenir més informació</string>
     <string name="use_slider_adjust_value">Utilitzeu el control lliscant per ajustar el valor</string>
     <string name="snackbar_action_share">Comparteix</string>
-    <string name="warn_gm_not_available">Google Maps no està disponible.</string>
-    <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
-    <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Bàsic</string>
     <string name="translator_preference_target_lng">Idioma de traducció fora de línia</string>
@@ -807,6 +804,10 @@
     <string name="downloader_pending_info">Hi ha almenys una descàrrega en pausa o fallada. Vols obrir la llista de baixades pendents?</string>
     <string name="downloader_retry_download">Torna a provar de descarregar</string>
     <string name="downloader_retry_download_details">Voleu tornar a provar la baixada del fitxer?</string>
+    <string name="downloader_delete_all_pending">Suprimeix-ho tot</string>
+    <string name="downloader_delete_all_confirmation">Voleu suprimir totes les baixades pendents?</string>
+    <string name="downloader_delete_all_message">Això cancel·larà totes les %d descàrregues pendents i eliminarà les parts descarregades. Aquesta acció no es pot desfer.</string>
+    <string name="downloader_deleted_all">S\'han suprimit totes les descàrregues pendents</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">La baixada ha fallat (i no es tornarà a provar)</string>
     <string name="asdm_status_paused">La baixada està esperant per tornar-ho a provar o reprendre</string>
@@ -856,8 +857,6 @@
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
-    <string name="settings_vtm_background_transparent_title">Fons transparent</string>
-    <string name="settings_vtm_background_transparent_summary">Mostra el fons dels mapes fora de línia de VTM de manera transparent (experimental)</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
@@ -1066,8 +1065,6 @@
     <string name="settings_startscreen_title">Pantalla per defecte</string>
     <string name="init_wallpaper">Fons de pantalla</string>
     <string name="init_summary_wallpaper">Mostra el fons de pantalla del dispositiu com a fons de la pantalla d\'inici</string>
-    <string name="init_colored_theme">Tema de color</string>
-    <string name="init_summary_colored_theme">Utilitza un tema de color</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -1138,7 +1135,6 @@
     <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
     <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
-    <string name="init_mapsource_select_legacy">Seleccioneu la font del mapa (heretat)</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
@@ -1263,8 +1259,6 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Utilitzeu el mapa heretat</string>
-    <string name="init_summary_useLegacyMap">Utilitzeu versions heretades dels mapes de Google Map/Mapsforge (OSM) en comptes d\'UnifiedMap</string>
     <string name="category_unifiedMap">Mapa unificat</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
@@ -1286,7 +1280,6 @@
     <string name="map_source_google_map">Google: mapa</string>
     <string name="map_source_google_satellite">Google: satèl·lit</string>
     <string name="map_source_google_terrain">Google: Terreny</string>
-    <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_nomap">Sense mapa</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
@@ -2476,7 +2469,6 @@
     <string name="map_manual_targets_cleared">Objectius manuals esborrats</string>
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
     <string name="map_clear_individual_route_confirm">Voleu eliminar tots els catxés / waypoints de la vostra ruta individual?</string>
-    <string name="map_individual_route_cleared">Ruta individual esborrada</string>
     <string name="sorted_route_saved">Ruta individual desada</string>
     <string name="load_individual_route_error">Error en carregar la ruta individual</string>
     <string name="route_item_point">Punt de ruta</string>
@@ -2643,7 +2635,6 @@
     <string name="vtm_theme_variant">Variant del Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
-    <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
     <string name="map_trail_show">Mostra el traçat</string>
     <string name="map_trail_hide">Amaga el traçat</string>
     <!-- history track export -->
@@ -2760,7 +2751,6 @@
     <string name="wherigo_toast_check_things">Wherigo: comproveu si hi ha canvis al vostre %s</string>
     <string name="wherigo_otm_shortcuts_title">Dreceres del Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Si voleu utilitzar c:geo Wherigo Player amb regularitat, penseu a crear un botó d\'inici ràpid o un element de menú personalitzat a Configuració -&gt; Aparença</string>
-    <string name="wherigo_map_supported_for_unified_map_only">La visualització de les ubicacions de Wherigo al mapa no és compatible amb la configuració del vostre mapa. Si us plau, canvieu al mapa unificat a Configuració -&gt; Fonts del mapa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>

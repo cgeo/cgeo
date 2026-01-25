@@ -1,4 +1,13 @@
-Devido às políticas da Play Store, actualizámos o nível API do Android nesta versão dos alvos do c:geo + alterámos algumas das rotinas de esquema do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
+- Janela pendente de agrupamento para o Google Maps
+- Ocultar fontes de mapa de que não precisa
+- Gráfico de altitude para rotas e percursos
+- Alternar entre listas directamente do mapa
+- "Modo de condução" para mapas baseados no OpenStreetMap
+- Long-tap on track / individual route for further options
 
 ### Mapa
 - Novo: Optimização de rota armazena dados calculados
@@ -8,7 +17,6 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Novo: Transferência de caches ordenadas por distância
 - Correcção: duplicação de pontos individuais da rota
 - Novo: Suporte para o tema Motorider (apenas VTM)
-- Novo: Suporte para exibição de fundo transparente de mapas offline (apenas VTM)
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -55,3 +63,7 @@ Devido às políticas da Play Store, actualizámos o nível API do Android nesta
 - Fix: Titles in range input dialogs cut off
 - Fix: Notification for nightly update points to regular APK even for FOSS variant
 - New: "Ignore year" option for date filters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map

@@ -1,4 +1,13 @@
-Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met deze versie van c:geo doelen + we hebben een aantal van de scherm-lay-out routines veranderd. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Dit kan enkele ongewenste bijwerkingen hebben, vooral op nieuwere Android-versies. Als je problemen ondervindt met deze versie van c:geo, rapporteer dan op [GitHub](https://github.com/cgeo/cgeo) of via e-mail aan [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online + offline)
+- Cluster popup voor Google Maps
+- Verberg kaartbronnen die je niet nodig hebt
+- Hoogtegrafiek voor routes en tracks
+- Schakel tussen lijsten direct van kaart
+- "Rijden modus" voor OpenStreetMap gebaseerde kaarten
+- Long-tap on track / individual route for further options
 
 ### Kaart
 - Nieuw: Route optimalisatie caches berekende data
@@ -8,7 +17,6 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Nieuw: Download caches gesorteerd op afstand
 - Oplossing: Verdubbeling van individuele route items
 - Nieuw: Ondersteuning voor Motorider thema (alleen VTM)
-- Nieuw: Ondersteuning voor transparante achtergrond weergave van offline kaarten (alleen VTM)
 - Nieuw: NoMap tegel provider (kaart niet tonen, gewoon caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 
@@ -55,3 +63,7 @@ Als gevolg van Play Store beleid hebben we het Android-API niveau bijgewerkt met
 - Oplossing: Titels in invoerdialoogvenster afgekapt
 - Oplossing: Melding voor nightly update punten naar reguliere APK zelfs voor de FOSS-variant
 - Nieuw: "Negeer jaar" optie voor datumfilters
+- New: Make remote URI clickable in pending downloads
+- Change: Use system-settings as default theme for new installations
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map

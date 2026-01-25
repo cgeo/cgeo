@@ -1,4 +1,13 @@
-Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisiert + einige der Bildschirmlayout-Routinen geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Aufgrund der Richtlinien des Play Store haben wir die Android-API-Stufe dieser Version von c:geo aktualisiert und einige Routinen für das Bildschirmlayout geändert. Dies kann zu unerwünschten Nebeneffekten führen, insbesondere bei neueren Android-Versionen. Falls du Probleme mit dieser Version von c:geo hast, melde sie bitte entweder auf [GitHub](https://github.com/cgeo/cgeo) oder per E-Mail an [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, haben wir endgültig die Legacy-Implementierungen für unsere Karten entfernt. Sie werden automatisch zu unserem neuen UnifiedMap weitergeleitet und sollten außer einigen neuen Funktionen keine Unterschiede bemerken. Einige davon sind
+- Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
+- Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
+- Kartenquellen ausblenden, die nicht benötigt werden
+- Höhendiagramm für Routen und Tracks
+- Wechseln zwischen Listen direkt auf der Karte
+- "Fahrmodus" für OpenStreetMap-basierte Karten
+- Lange auf Strecke/einzelne Route tippen, um weitere Optionen anzuzeigen
 
 ### Karte
 - Neu: Routenoptimierung speichert Ergebnisse temporär
@@ -8,7 +17,6 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Neu: Caches nach Entfernung sortiert herunterladen
 - Korrektur: Verdopplung einzelner Routenelemente
 - Neu: Unterstützung für Motorider Design (nur VTM)
-- Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 
@@ -55,3 +63,7 @@ Aufgrund der Play Store-Richtlinien haben wir die Android-Zielversion aktualisie
 - Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
 - Korrektur: Update-Hinweis für FOSS-nightly verweist auf Nicht-FOSS-APK
 - Neu: Option "Jahr ignorieren" für Datumsfilter
+- Neu: Remote-URI bei ausstehenden Downloads anklickbar
+- Änderung: Systemeinstellung als Standard-Design für neue Installationen verwenden
+- Neu: GPX-Export: GSAK Lat/LonBeforeCorrect Tag beim Export von Original-Wegpunkten ergänzt
+- Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"

@@ -237,9 +237,6 @@
     <string name="more_information">Vairāk informācijas</string>
     <string name="undo">Atcelt</string>
     <string name="dont_show_again">Vairs nerādīt</string>
-    <string name="warn_gm_not_available">Google Maps nav pieejams.</string>
-    <string name="switch_to_mf">Tava Google Play Service versija ir novecojusi. Vai vēlies tā vietā pārslēgties uz Mapsforge karšu sniedzēju?</string>
-    <string name="switched_to_mf">Noklusējuma kartes pārslēgtas uz Mapsforge. Tagad pārstartējiet savu karti.</string>
     <!-- location service -->
     <string name="loc_last">Pēdējais zināmais</string>
     <string name="loc_net">Tīkls</string>
@@ -558,7 +555,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satelīta karte</string>
-    <string name="map_source_osm_offline">Bezsaistes režīmā</string>
     <string name="map_source_osm_offline_combined">Apvienota (Bezsaistes)</string>
     <string name="init_sendToCgeo">Sūtīt uz c:geo</string>
     <string name="settings_info_send2cgeo_title">Info par send2cgeo</string>
