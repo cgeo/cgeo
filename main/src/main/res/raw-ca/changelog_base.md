@@ -17,7 +17,6 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Descarrega els catxés ordenats per distància
 - Correcció: Duplicació d'elements de ruta individuals
 - Nou: Suport per al tema Motorider (només VTM)
-- Nou: Compatibilitat amb la visualització de fons transparent de mapes fora de línia (només VTM)
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
 - Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
 
@@ -66,4 +65,5 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: opció "Ignora l'any" per als filtres de data
 - Nou: Feu que l'URI remot sigui clicable a les descàrregues pendents
 - Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
-
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
