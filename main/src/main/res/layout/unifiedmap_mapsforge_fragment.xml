@@ -23,21 +23,4 @@
         android:src="@drawable/copyright"
         tools:src="@drawable/copyright"/>
 
-    <!--TODO remove as soon as Unified map is default-->
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/unifiedmap"/>
-
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textAlignment="center"
-        android:text="mapsforge"
-        android:textSize="8dp"
-        android:rotation="-45"
-        android:textColor="@color/just_white"
-        tools:ignore="HardcodedText,SpUsage" />
-    <!--End of TODO-->
-
 </RelativeLayout>
