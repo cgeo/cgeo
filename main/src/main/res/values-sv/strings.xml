@@ -842,8 +842,6 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
-    <string name="settings_vtm_background_transparent_title">Transparent bakgrund</string>
-    <string name="settings_vtm_background_transparent_summary">Visa bakgrunden för VTM offline-kartor transparent (experimentell)</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
@@ -1052,8 +1050,6 @@
     <string name="settings_startscreen_title">Standardskärm</string>
     <string name="init_wallpaper">Bakgrund</string>
     <string name="init_summary_wallpaper">Visa enhetens bakgrundsbild som startskärmens bakgrund</string>
-    <string name="init_colored_theme">Färgat tema</string>
-    <string name="init_summary_colored_theme">Använd färgat tema</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
