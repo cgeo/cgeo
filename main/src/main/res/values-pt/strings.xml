@@ -850,8 +850,6 @@
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
     <string name="settings_unifiedMapVariants_title">Variantes do Mapa Unificado</string>
-    <string name="settings_vtm_background_transparent_title">Fundo transparente</string>
-    <string name="settings_vtm_background_transparent_summary">Mostrar fundo transparente nos mapas offline VTM (experimental)</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
     <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
@@ -1060,8 +1058,6 @@
     <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
     <string name="init_summary_wallpaper">Mostra a imagem de fundo do dispositivo como fundo no ecrã da página inicial</string>
-    <string name="init_colored_theme">Tema colorido</string>
-    <string name="init_summary_colored_theme">Usar tema colorido</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\nDica: Copie os ficheiros de backup p/ outro armazenamento, podendo assim restaura-los mesmo que perca o telemóvel.</string>
