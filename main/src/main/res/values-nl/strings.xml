@@ -851,8 +851,6 @@
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
     <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
-    <string name="settings_vtm_background_transparent_title">Transparante achtergrond</string>
-    <string name="settings_vtm_background_transparent_summary">Toon achtergrond van VTM offline kaarten transparant (experimenteel)</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -1061,8 +1059,6 @@
     <string name="settings_startscreen_title">Standaard scherm</string>
     <string name="init_wallpaper">Achtergrond</string>
     <string name="init_summary_wallpaper">Toon apparaat achtergrond als startscherm achtergrond</string>
-    <string name="init_colored_theme">Kleurig thema</string>
-    <string name="init_summary_colored_theme">Gekleurd thema gebruiken</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
