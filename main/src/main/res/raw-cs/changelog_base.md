@@ -17,7 +17,6 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Stáhnout kešky seřazené podle vzdálenosti
 - Oprava: Zdvojnásobení jednotlivých položek trasy
 - Novinka: Podpora motivu Motorider (pouze VTM)
-- Novinka: Podpora zobrazení offline map s průhledným pozadím (pouze VTM)
 - Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
 
@@ -66,4 +65,5 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Možnost „Ignorovat rok“ pro filtry data
 - Novinka: Možnost kliknout na vzdálený URI v čekajících stahováních
 - Změna: Použít nastavení systému jako výchozí téma pro nové instalace
-
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map
