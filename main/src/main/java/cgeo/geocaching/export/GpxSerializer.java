@@ -210,6 +210,17 @@ public final class GpxSerializer {
                 }
             }
         }
+        if (cache.hasUserModifiedCoords() && cache.hasWaypoints()) {
+            final Waypoint wp = cache.getOriginalWaypoint();
+            if (wp != null && wp.getCoords() != null) {
+                gpx.startTag(NS_GSAK, "LatBeforeCorrect");
+                gpx.text(Double.toString(wp.getCoords().getLatitude()));
+                gpx.endTag(NS_GSAK, "LatBeforeCorrect");
+                gpx.startTag(NS_GSAK, "LonBeforeCorrect");
+                gpx.text(Double.toString(wp.getCoords().getLongitude()));
+                gpx.endTag(NS_GSAK, "LonBeforeCorrect");
+            }
+        }
         gpx.endTag(NS_GSAK, "wptExtension");
     }
 
