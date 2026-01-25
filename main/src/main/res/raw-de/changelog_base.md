@@ -17,7 +17,6 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Caches nach Entfernung sortiert herunterladen
 - Korrektur: Verdopplung einzelner Routenelemente
 - Neu: Unterstützung für Motorider Design (nur VTM)
-- Neu: Hintergrund von Offline-Karten transparent anzeigen (optional, nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 
@@ -64,6 +63,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Korrektur: Titel in Eingabedialogen für Zahlenbereiche abgeschnitten
 - Korrektur: Update-Hinweis für FOSS-nightly verweist auf Nicht-FOSS-APK
 - Neu: Option "Jahr ignorieren" für Datumsfilter
-- New: Make remote URI clickable in pending downloads
-- Change: Use system-settings as default theme for new installations
-
+- Neu: Remote-URI bei ausstehenden Downloads anklickbar
+- Änderung: Systemeinstellung als Standard-Design für neue Installationen verwenden
+- Neu: GPX-Export: GSAK Lat/LonBeforeCorrect Tag beim Export von Original-Wegpunkten ergänzt
+- Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"
