@@ -72,6 +72,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -1228,8 +1229,24 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
+        private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
         private CacheDetailsCreator.NameValueLine favoriteLine;
         private Geocache cache;
+        private int coordinateFormatPosition = 0;
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
+        }
 
         @Override
         public CachedetailDetailsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -1322,7 +1339,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // cache coordinates
-            details.addCoordinates(cache.getCoords());
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+            }
 
             // Latest logs
             details.addLatestLogs(cache);
@@ -2143,7 +2163,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
+        private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
         private Geocache cache;
+        private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                @SuppressWarnings("unchecked")
+                final HashMap<Integer, Integer> savedMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS);
+                if (savedMap != null) {
+                    waypointCoordinateFormatPositions.putAll(savedMap);
+                }
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS, new HashMap<>(waypointCoordinateFormatPositions));
+        }
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -2321,6 +2361,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
+            // Set saved coordinate format position for this waypoint
+            final int waypointId = wpt.getId();
+            final int formatPosition = waypointCoordinateFormatPositions.getOrDefault(waypointId, 0);
+            holder.setCoordinateFormatPosition(formatPosition);
+            // Listen for format changes and save them
+            holder.setOnCoordinateFormatChangedListener(position -> waypointCoordinateFormatPositions.put(waypointId, position));
             CacheDetailsCreator.addShareAction(activity, coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
