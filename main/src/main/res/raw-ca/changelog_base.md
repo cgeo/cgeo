@@ -65,5 +65,5 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: opció "Ignora l'any" per als filtres de data
 - Nou: Feu que l'URI remot sigui clicable a les descàrregues pendents
 - Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Nou: Exportació GPX: Escriu anotacions GSAK Lat/LonBeforeCorrect en exportar punts de referència originals
+- Nou: Mostra la barra de desfer en suprimir els catxés de la llista del mapa
