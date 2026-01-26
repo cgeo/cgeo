@@ -1723,7 +1723,10 @@ public final class GCParser {
 
         // merge time from offline log
         if (offlineLog != null) {
-            mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+            final boolean offlineMerged = mergeOfflineLogTime(ownLogEntriesBlocked, offlineLog);
+            if (offlineMerged) {
+                cache.clearOfflineLog(null);
+            }
         }
 
         // merge time from online-logs already stored in db (overrides possible offline log)
@@ -1871,15 +1874,16 @@ public final class GCParser {
         }
     }
 
-    private static void mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
+    private static boolean mergeOfflineLogTime(final List<LogEntry> mergedLogTimes, final @NonNull OfflineLogEntry logToMerge) {
         for (int i = 0; i < mergedLogTimes.size(); i++) {
             final LogEntry mergedLog = mergedLogTimes.get(i);
             if (logToMerge.isMatchingLog(mergedLog)) {
                 final LogEntry updatedTimeLog = mergedLog.buildUpon().setDate(logToMerge.date).build();
                 mergedLogTimes.set(i, updatedTimeLog);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     @NonNull
