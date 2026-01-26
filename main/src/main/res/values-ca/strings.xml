@@ -1061,6 +1061,10 @@
         <item>Clar</item>
         <item>Fosc</item>
     </string-array>
+    <string name="init_colored_theme_dark">Tema de color fosc</string>
+    <string name="init_colored_theme_light">Tema de color clar</string>
+    <string name="init_summary_colored_theme_dark">Utilitza la barra d\'eines de color en el tema fosc</string>
+    <string name="init_summary_colored_theme_light">Utilitza la barra d\'eines de colors en el tema clar</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Pantalla per defecte</string>
     <string name="init_wallpaper">Fons de pantalla</string>
