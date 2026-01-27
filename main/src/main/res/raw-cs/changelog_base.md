@@ -65,5 +65,5 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Možnost „Ignorovat rok“ pro filtry data
 - Novinka: Možnost kliknout na vzdálený URI v čekajících stahováních
 - Změna: Použít nastavení systému jako výchozí téma pro nové instalace
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Novinka: Export GPX: Při exportu původních trasových bodů zapisujte poznámky GSAK Lat/LonBeforeCorrect
+- Novinka: Zobrazit lištu pro vrácení zpět při mazání kešek ze seznamu na mapě
