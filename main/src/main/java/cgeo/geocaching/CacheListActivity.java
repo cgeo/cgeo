@@ -1616,6 +1616,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityOwner(final Context context, @NonNull final Map<String, String> connectorOwnerMap) {
+        if (connectorOwnerMap.isEmpty()) {
+            ActivityMixin.showToast(context, R.string.warn_no_username);
+            return;
+        }
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        Intents.putListType(cachesIntent, CacheListType.OWNER);
+        cachesIntent.putExtra(Intents.EXTRA_OWNER_MAP, new HashMap<>(connectorOwnerMap));
+        context.startActivity(cachesIntent);
+    }
+
     public static void startActivityFilter(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
@@ -1873,11 +1884,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
                 case OWNER:
                     final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                    title = listNameMemento.rememberTerm(ownerName);
-                    markerId = EmojiUtils.NO_EMOJI;
-                    if (ownerName != null) {
+                    @SuppressWarnings("unchecked") final HashMap<String, String> ownerMap = (HashMap<String, String>) extras.getSerializable(Intents.EXTRA_OWNER_MAP);
+
+                    if (ownerMap != null && !ownerMap.isEmpty()) {
+                        // Multiple connectors with different usernames
+                        title = listNameMemento.rememberTerm(res.getString(R.string.search_own_caches));
+                        loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), ownerMap);
+                    } else if (ownerName != null) {
+                        // Single username mode
+                        title = listNameMemento.rememberTerm(ownerName);
                         loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), ownerName);
                     }
+                    markerId = EmojiUtils.NO_EMOJI;
                     break;
                 case MAP:
                     title = res.getString(R.string.map_map);
