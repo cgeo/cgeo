@@ -51,6 +51,11 @@ public class FileTypeDetectorTest {
         assertFileType(R.raw.pq7545915, FileType.ZIP);
     }
 
+    @Test
+    public void testWherigoZip() throws Exception {
+        assertFileType(R.raw.test_wherigo, FileType.WHERIGO_ZIP);
+    }
+
     private void assertFileType(@RawRes final int resourceId, @NonNull final FileType fileType) {
         final Uri resourceURI = CgeoTestUtils.getResourceURI(resourceId);
         final FileContentResolver contentResolver = new FileContentResolver(InstrumentationRegistry.getInstrumentation().getContext());

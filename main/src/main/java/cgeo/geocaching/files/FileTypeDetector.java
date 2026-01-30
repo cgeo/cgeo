@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.Log;
 
 import android.content.ContentResolver;
@@ -38,6 +39,15 @@ public class FileTypeDetector {
             }
             reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             type = detectHeader(reader);
+            
+            // Check if it's a GWZ file (ZIP file with .gwz extension)
+            if (type == FileType.ZIP) {
+                final String uriString = uri.toString().toLowerCase();
+                final String filename = ContentStorage.get().getName(uri);
+                if (uriString.endsWith(".gwz") || (filename != null && filename.toLowerCase().endsWith(".gwz"))) {
+                    type = FileType.WHERIGO_ZIP;
+                }
+            }
         } catch (final IOException e) {
             if (!uri.toString().startsWith("http")) {
                 Log.e("FileTypeDetector", e);
