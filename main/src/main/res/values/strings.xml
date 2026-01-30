@@ -3188,4 +3188,11 @@
     <string name="emoji_category_people">People</string>
     <string name="emoji_category_numbers">Numbers</string>
 
+    <!-- GWZ compile service -->
+    <string name="wherigo_gwz_compile_service_url">GWZ compile service URL</string>
+    <string name="wherigo_gwz_compile_service_url_summary">Web service that compiles GWZ files to GWC format (leave empty to disable)</string>
+    <string name="wherigo_gwz_compile_service_compiling">Compiling GWZ file…</string>
+    <string name="wherigo_gwz_compile_service_error">GWZ compilation failed: %s</string>
+    <string name="wherigo_gwz_compile_service_success">GWZ compiled successfully</string>
+
 </resources>

@@ -797,6 +797,10 @@ public class Settings {
         return getBooleanDirect(getKey(R.string.pref_feature_wherigo_debug) + "_" + code, false);
     }
 
+    public static String getWherigoGwzCompileServiceUrl() {
+        return getString(R.string.pref_wherigo_gwz_compile_service_url, "https://wherigofoundation.com/tools/compiler.aspx");
+    }
+
 
     public static boolean isFeatureEnabledDefaultFalse(@StringRes final int featureKeyId) {
         return getBoolean(featureKeyId, false);
