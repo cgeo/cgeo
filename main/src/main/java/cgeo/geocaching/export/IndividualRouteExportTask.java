@@ -3,13 +3,17 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.xml.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
@@ -17,6 +21,7 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 import android.app.Activity;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.BufferedWriter;
@@ -26,8 +31,11 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
 public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegment, Uri> {
@@ -40,6 +48,16 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
 
     private static final String PREFIX_XSI = "xsi";
     private static final String NS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
+
+    private static final String PREFIX_GROUNDSPEAK = "groundspeak";
+    private static final String NS_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0/1";
+    private static final String GROUNDSPEAK_SCHEMA = NS_GROUNDSPEAK + "/cache.xsd";
+
+    private static final String PREFIX_GSAK = "gsak";
+    private static final String NS_GSAK = "http://www.gsak.net/xmlv1/6";
+    private static final String GSAK_SCHEMA = NS_GSAK + "/gsak.xsd";
+
+    private static final SynchronizedDateFormat dateFormatZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
     IndividualRouteExportTask(final Activity activity, final String filename, final boolean exportAsTrack) {
         super(activity, activity.getString(R.string.export_individualroute_title));
@@ -69,13 +87,15 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
             gpx.startDocument(StandardCharsets.UTF_8.name(), true);
             gpx.setPrefix(PREFIX_GPX, NS_GPX);
             gpx.setPrefix(PREFIX_XSI, NS_XSI);
+            gpx.setPrefix(PREFIX_GROUNDSPEAK, NS_GROUNDSPEAK);
+            gpx.setPrefix(PREFIX_GSAK, NS_GSAK);
 
             gpx.startTag(NS_GPX, "gpx");
             gpx.attribute("", "version", "1.1");
             gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
-            gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
+            gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA + " " + NS_GROUNDSPEAK + " " + GROUNDSPEAK_SCHEMA + " " + NS_GSAK + " " + GSAK_SCHEMA);
 
-            final String timeInfo = CalendarUtils.formatDateTime("yyyy-MM-dd") + "T" + CalendarUtils.formatDateTime("hh:mm:ss") + "Z";
+            final String timeInfo = CalendarUtils.formatDateTime("yyyy-MM-dd") + "T" + CalendarUtils.formatDateTime("HH:mm:ss") + "Z";
 
             gpx.startTag(NS_GPX, "metadata");
             XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo individual route");
@@ -83,7 +103,8 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
             gpx.endTag(NS_GPX, "metadata");
 
             for (RouteSegment loc : trail) {
-                exportPoint(gpx, "wpt", loc.getItem().getPoint(), loc.getItem().getIdentifier());
+                // Export waypoints with cache/waypoint name for better readability and GPX compatibility
+                exportWaypoint(gpx, loc.getItem());
             }
 
             gpx.startTag(NS_GPX, exportAsTrack ? "trk" : "rte");
@@ -132,6 +153,113 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
             XmlUtils.simpleText(gpx, null, "name", name);
         }
         gpx.endTag(null, tag);
+    }
+
+    private void exportWaypoint(final XmlSerializer gpx, @NonNull final RouteItem item) throws IOException {
+        final Geopoint point = item.getPoint();
+        if (point == null) {
+            return;
+        }
+
+        gpx.startTag(NS_GPX, "wpt");
+        gpx.attribute("", "lat", String.valueOf(point.getLatitude()));
+        gpx.attribute("", "lon", String.valueOf(point.getLongitude()));
+
+        // Add name
+        XmlUtils.simpleText(gpx, NS_GPX, "name", item.getIdentifier());
+
+        // Add description with cache/waypoint name
+        final String itemName = item.getName();
+        if (StringUtils.isNotBlank(itemName)) {
+            XmlUtils.simpleText(gpx, NS_GPX, "desc", itemName);
+        }
+
+        // Add type-specific information
+        if (item.getType() == RouteItem.RouteItemType.GEOCACHE) {
+            final Geocache cache = item.getGeocache();
+            if (cache != null) {
+                addGeocacheExtensions(gpx, cache);
+            }
+        } else if (item.getType() == RouteItem.RouteItemType.WAYPOINT) {
+            final Waypoint waypoint = item.getWaypoint();
+            if (waypoint != null) {
+                addWaypointExtensions(gpx, waypoint);
+            }
+        }
+
+        gpx.endTag(NS_GPX, "wpt");
+    }
+
+    private void addGeocacheExtensions(final XmlSerializer gpx, @NonNull final Geocache cache) throws IOException {
+        // Add groundspeak cache extension
+        gpx.startTag(NS_GROUNDSPEAK, "cache");
+        gpx.attribute("", "id", cache.getCacheId());
+        gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
+        gpx.attribute("", "archived", cache.isArchived() ? "True" : "False");
+
+        XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
+                "name", cache.getName(),
+                "placed_by", cache.getOwnerDisplayName(),
+                "type", cache.getType().pattern,
+                "container", cache.getSize().id,
+                "difficulty", integerIfPossible(cache.getDifficulty()),
+                "terrain", integerIfPossible(cache.getTerrain()));
+
+        gpx.endTag(NS_GROUNDSPEAK, "cache");
+
+        // Add GSAK extension
+        gpx.startTag(NS_GSAK, "wptExtension");
+        XmlUtils.multipleTexts(gpx, NS_GSAK,
+                "Watch", gpxBoolean(cache.isOnWatchlist()),
+                "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()),
+                "FavPoints", Integer.toString(cache.getFavoritePoints()),
+                "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
+
+        if (cache.isFound()) {
+            final long visited = cache.getVisitedDate();
+            if (0 != visited) {
+                gpx.startTag(NS_GSAK, "UserFound");
+                gpx.text(dateFormatZ.format(new Date(visited)));
+                gpx.endTag(NS_GSAK, "UserFound");
+            }
+        }
+
+        gpx.endTag(NS_GSAK, "wptExtension");
+    }
+
+    private void addWaypointExtensions(final XmlSerializer gpx, @NonNull final Waypoint waypoint) throws IOException {
+        // Add GSAK extension for waypoint parent reference
+        gpx.startTag(NS_GSAK, "wptExtension");
+
+        gpx.startTag(NS_GSAK, "Parent");
+        gpx.text(waypoint.getGeocode());
+        gpx.endTag(NS_GSAK, "Parent");
+
+        if (waypoint.isUserDefined()) {
+            gpx.startTag(NS_GSAK, "Child_ByGSAK");
+            gpx.text("true");
+            gpx.endTag(NS_GSAK, "Child_ByGSAK");
+        }
+
+        gpx.endTag(NS_GSAK, "wptExtension");
+    }
+
+    /**
+     * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
+     * but no other value (also not upper case True/False).
+     */
+    private static String gpxBoolean(final boolean boolFlag) {
+        return boolFlag ? "true" : "false";
+    }
+
+    private static String integerIfPossible(final double value) {
+        if (!Double.isFinite(value)) {
+            return String.format(Locale.ENGLISH, "%s", value);
+        }
+        if (value == (long) value) {
+            return String.format(Locale.ENGLISH, "%d", (long) value);
+        }
+        return String.format(Locale.ENGLISH, "%s", value);
     }
 
     @Override
