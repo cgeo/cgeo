@@ -39,6 +39,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -232,6 +233,20 @@ final class OkapiClient {
         final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
 
         return result.isSuccess ? parseCache(result.data) : null;
+    }
+
+    static void markOwnAndOwnerLogs(final Geocache cache, final List<LogEntry> parsedLogs) {
+        // Mark own and owner logs as friend logs for the friends tab
+        for (int i = 0; i < parsedLogs.size(); i++) {
+            final LogEntry log = parsedLogs.get(i);
+            final boolean isOwner = LogUtils.isOwnerLog(log, cache);
+            final boolean isOwn = LogUtils.isOwnLog(log, cache);
+
+            if ((isOwn || isOwner) && !log.friend) {
+                final LogEntry updatedLog = log.buildUpon().setFriend(true).build();
+                parsedLogs.set(i, updatedLog);
+            }
+        }
     }
 
     @WorkerThread
@@ -839,7 +854,11 @@ final class OkapiClient {
             }
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);
+
+            // save logs
+            final List<LogEntry> logs = parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode());
+            markOwnAndOwnerLogs(cache, logs);
+            DataStore.saveLogs(cache.getGeocode(), logs, true);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
@@ -879,15 +898,12 @@ final class OkapiClient {
         cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
 
         final String owner = parseUser(response.get(CACHE_OWNER));
+        final String ownerId = parseUserId(response.get(CACHE_OWNER));
         cache.setOwnerDisplayName(owner);
         // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
         cache.setOwnerUserId(owner);
-        final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
-        if (StringUtils.isNotEmpty(profile)) {
-            final String id = StringUtils.substringAfter(profile, "userid=");
-            if (StringUtils.isNotEmpty(id)) {
-                cache.setOwnerUserId(id);
-            }
+        if (StringUtils.isNotEmpty(ownerId)) {
+            cache.setOwnerGuid(ownerId);
         }
 
         final Map<LogType, Integer> logCounts = cache.getLogCounts();
@@ -930,6 +946,14 @@ final class OkapiClient {
         return user.get(USER_USERNAME).asText();
     }
 
+    private static String parseUserId(final JsonNode user) {
+        final String profile = user.get(CACHE_USER_PROFILE).asText();
+        if (StringUtils.isBlank(profile)) {
+            return "";
+        }
+        return StringUtils.substringAfter(profile, "userid=");
+    }
+
     @NonNull
     private static List<LogEntry> parseLogs(final ArrayNode logsJSON, final String geocode) {
         final List<LogEntry> result = new LinkedList<>();
@@ -942,10 +966,12 @@ final class OkapiClient {
                 final LogEntry log = new LogEntry.Builder()
                         .setServiceLogId(logResponse.get(LOG_UUID).asText().trim() + ":" + logResponse.get(LOG_INTERNAL_ID).asText().trim())
                         .setAuthor(parseUser(logResponse.get(LOG_USER)))
+                        .setAuthorGuid(parseUserId((logResponse.get(LOG_USER))))
                         .setDate(date.getTime())
                         .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
                         .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES), geocode))
-                        .setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
+                        .setLog(logResponse.get(LOG_COMMENT).asText().trim())
+                        .build();
                 result.add(log);
             } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);

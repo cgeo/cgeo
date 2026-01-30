@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.Log;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
@@ -64,6 +65,40 @@ public final class LogUtils {
             return imageTitlePrafix; // number is unnecessary if only one image is posted
         }
         return imageTitlePrafix + " " + (imagePos + 1);
+    }
+
+    /**
+     * Check if the LogEntry is owned by the current configured user of cache-connector.
+     *
+     * @return {@code true} if LogEntry is from current user
+     */
+    public static boolean isOwnLog(@NonNull final LogEntry logEntry, @NonNull final Geocache cache) {
+        final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
+        if (!(connector instanceof ILogin)) {
+            return false;
+        }
+
+        final String ownName = ((ILogin) connector).getUserName();
+        return logEntry.author.equalsIgnoreCase(ownName);
+    }
+
+    public static boolean isOwnerLog(@NonNull final LogEntry logEntry, @NonNull final Geocache cache) {
+        final String cacheOwnerGuid = cache.getOwnerGuid();
+        if (!StringUtils.isBlank(cacheOwnerGuid) && !StringUtils.isBlank(logEntry.authorGuid) && logEntry.authorGuid.equals(cacheOwnerGuid)) {
+            return true;
+        }
+
+        final String cacheOwnerUserId = cache.getOwnerUserId();
+        if (!StringUtils.isBlank(cacheOwnerUserId) && !StringUtils.isBlank(logEntry.authorGuid) && logEntry.authorGuid.equals(cacheOwnerUserId)) {
+            return true;
+        }
+
+        final String ownerName = cache.getOwnerDisplayName();
+        if (!StringUtils.isBlank(ownerName) && !StringUtils.isBlank(logEntry.author) && logEntry.author.equalsIgnoreCase(ownerName)) {
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
