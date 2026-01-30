@@ -32,6 +32,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.bettercacher.Category;
@@ -542,7 +543,7 @@ public class Geocache implements INamedGeoCoordinate {
             final LogType logType = logEntry.logType;
             if (logType == LogType.ATTENDED) {
                 return false;
-            } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
+            } else if (logType == LogType.WILL_ATTEND && LogUtils.isOwnLog(logEntry, this)) {
                 willAttend = true;
             }
         }
@@ -2359,7 +2360,7 @@ public class Geocache implements INamedGeoCoordinate {
      */
     public boolean hasOwnLog(@NonNull final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.logType == logType && logEntry.isOwn()) {
+            if (logEntry.logType == logType && LogUtils.isOwnLog(logEntry, this)) {
                 return true;
             }
         }

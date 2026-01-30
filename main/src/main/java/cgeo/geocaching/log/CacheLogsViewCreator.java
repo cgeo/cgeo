@@ -76,8 +76,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             return addOwnOfflineLog(cache, cache.getLogs());
         } else {
             final List<LogEntry> logs = addOwnOfflineLog(cache, cache.getFriendsLogs());
-            final List<LogEntry> ownLogs = addOwnOfflineLog(cache, logs.stream().filter(LogEntry::isOwn).collect(Collectors.toList()));
-            final List<LogEntry> ownerLogs = logs.stream().filter(log -> log.authorGuid.equals(getCache().getOwnerGuid())).collect(Collectors.toList());
+            final List<LogEntry> ownLogs = addOwnOfflineLog(cache, logs.stream().filter(log -> LogUtils.isOwnLog(log, cache)).collect(Collectors.toList()));
+            final List<LogEntry> ownerLogs = logs.stream().filter(log -> LogUtils.isOwnerLog(log, cache)).collect(Collectors.toList());
             final List<LogEntry> friendsLogs = new ArrayList<>(cache.getFriendsLogs());
             friendsLogs.removeAll(ownLogs);
             friendsLogs.removeAll(ownerLogs);

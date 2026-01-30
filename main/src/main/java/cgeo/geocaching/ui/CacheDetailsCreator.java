@@ -8,6 +8,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
@@ -166,7 +167,7 @@ public final class CacheDetailsCreator {
         }
         if (cache.isEventCache() && states.isEmpty()) {
             for (final LogEntry log : cache.getLogs()) {
-                if (log.logType == LogType.WILL_ATTEND && log.isOwn()) {
+                if (log.logType == LogType.WILL_ATTEND && LogUtils.isOwnLog(log, cache)) {
                     states.add(LogType.WILL_ATTEND.getL10n());
                 }
             }
