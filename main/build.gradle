@@ -60,6 +60,9 @@ android {
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
 
         resourceConfigurations += locales
+
+        // Library modules don't have flavor dimensions, so we need to specify which default to use
+        missingDimensionStrategy 'javaCompilerTime', 'basic'
     }
 
     // signing is handled via private.properties
