@@ -270,31 +270,31 @@ android {
     }
 
     // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
-    applicationVariants.configureEach { variant ->
-        variant.outputs.configureEach { output ->
-            outputFileName = outputFileName.replace('-basic-', '-')
+    androidComponents.onVariants { variant ->
+        variant.outputs.all { output ->
+            output.outputFileName.set(output.outputFileName.get().replace('-basic-', '-'))
         }
     }
 
     // special version code for nightly and rc builds
-    applicationVariants.configureEach { variant ->
-        if (variant.buildType.name == 'nightly') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(10000000))
+    androidComponents.onVariants { variant ->
+        if (variant.buildType == 'nightly') {
+            variant.outputs.all { output ->
+                output.versionCode.set(versionCodeFromDate(10000000))
             }
         }
-        if (variant.buildType.name == 'rc') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(-1))
+        if (variant.buildType == 'rc') {
+            variant.outputs.all { output ->
+                output.versionCode.set(versionCodeFromDate(-1))
             }
         }
-        if (variant.buildType.name == 'legacy') {
+        if (variant.buildType == 'legacy') {
             String legacyName = System.getenv('LEGACY_VERSION_NAME')
             Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
             if (legacyName != null && legacyVersion != null) {
-                variant.outputs.configureEach {
-                    setVersionNameOverride(legacyName)
-                    setVersionCodeOverride(legacyVersion)
+                variant.outputs.all { output ->
+                    output.versionName.set(legacyName)
+                    output.versionCode.set(legacyVersion)
                 }
             }
         }
@@ -639,19 +639,19 @@ static boolean isContinuousIntegrationServer() {
 }
 
 // have a run task for our builds to launch the app directly from gradle
-android.applicationVariants.configureEach { variant ->
-    if (variant.installProvider) {
+androidComponents.onVariants { variant ->
+    if (variant.installTask.isPresent()) {
         tasks.register("run${variant.name.capitalize()}") {
             group = 'cgeo'
             description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
-            dependsOn tasks.named(variant.installProvider.name)
+            dependsOn variant.installTask.get()
 
             doFirst {
-                String classpath = variant.applicationId
-                if (variant.buildType.applicationIdSuffix) {
-                    classpath -= "${variant.buildType.applicationIdSuffix}"
+                String classpath = variant.applicationId.get()
+                if (variant.buildType.applicationIdSuffix.isPresent()) {
+                    classpath -= "${variant.buildType.applicationIdSuffix.get()}"
                 }
-                GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
+                GString launchClass = "${variant.applicationId.get()}/${classpath}.MainActivity"
                 try {
                     execOperations.exec {
                         executable = adb
