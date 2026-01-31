@@ -315,6 +315,16 @@ android {
     useLibrary 'android.test.base'
 }
 
+// Enabling flag to compress JNI Libs to reduce APK size Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
+androidComponents {
+    onVariants(selector().withBuildType("debug")) {
+        packaging.jniLibs.useLegacyPackaging.set(true)
+    }
+    onVariants(selector().withBuildType("nightly")) {
+        packaging.jniLibs.useLegacyPackaging.set(true)
+    }
+}
+
 dependencies {
     // desugaring of Java 8 APIs
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
