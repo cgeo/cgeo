@@ -29,6 +29,9 @@ public class SumUtilsTest {
 
         final List<String> resultSingleRange = SumUtils.expandVariableRange("X", "X");
         assertThat(resultSingleRange).isEqualTo(Arrays.asList("X"));
+
+        final List<String> resultDollarMix = SumUtils.expandVariableRange("A", "$D");
+        assertThat(resultDollarMix).isEqualTo(Arrays.asList("A", "B", "C", "D"));
     }
 
     @Test
@@ -91,6 +94,10 @@ public class SumUtilsTest {
                 .hasMessageContaining("INVALID_RANGE");
 
         assertThatThrownBy(() -> SumUtils.expandVariableRange("$A1", "$a5"))
+                .isInstanceOf(FormulaException.class)
+                .hasMessageContaining("INVALID_RANGE");
+
+        assertThatThrownBy(() -> SumUtils.expandVariableRange("$VARA", "$VarC"))
                 .isInstanceOf(FormulaException.class)
                 .hasMessageContaining("INVALID_RANGE");
     }
@@ -308,7 +315,7 @@ public class SumUtilsTest {
 
         assertThatThrownBy(() -> SumUtils.sum(valueList))
                 .isInstanceOf(FormulaException.class)
-                .hasMessageContaining("INVALID_RANGE");
+                .hasMessageContaining("WRONG_TYPE");
     }
 
     @Test

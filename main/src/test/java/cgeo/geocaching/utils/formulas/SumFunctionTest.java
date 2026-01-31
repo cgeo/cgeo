@@ -73,7 +73,7 @@ public class SumFunctionTest {
         // sum("A";5) -> error: mixed types
         assertThatThrownBy(() -> Formula.evaluate("sum('A';5)", "A", 1))
             .isInstanceOf(FormulaException.class)
-                .hasMessageContaining("INVALID_RANGE");
+                .hasMessageContaining("WRONG_TYPE");
     }
 
     @Test

@@ -45,32 +45,18 @@ final class SumUtils {
      */
     static Value sum(final ValueList valueList) {
         valueList.assertCheckCount(2, 2, false);
-        
+
         final Value start = valueList.get(0);
         final Value end = valueList.get(1);
-        
+
         validateSumParameters(start, end);
-        
+
         // Handle numeric range: sum(1;5) -> 1+2+3+4+5
-        if (start.isNumeric() && end.isNumeric()) {
-            return sumNumericRange(start, end);
-        }
-        
-        // This should never be reached in runtime as string parameters are handled at compile time
-        // but we provide a fallback error
-        throw new FormulaException(FormulaException.ErrorType.OTHER, 
-            "sum() with string parameters must be compiled with variable context");
+        return Value.of(sumNumericRange(start.getAsInteger(), end.getAsInteger()));
     }
 
     private static void validateSumParameters(final Value start, final Value end) {
-        // Both parameters must be of the same type
-        if (start.isNumeric() != end.isNumeric()) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
-                    start.toUserDisplayableString() + " != " + end.toUserDisplayableString());
-        }
-    }
-
-    private static Value sumNumericRange(final Value start, final Value end) {
+        // Both parameters must be integer
         if (!start.isInteger() || !end.isInteger()) {
             if (!start.isInteger() && !end.isInteger()) {
                 throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
@@ -89,17 +75,19 @@ final class SumUtils {
                         end.getType());
             }
         }
-        final BigInteger startBI = start.getAsInteger();
-        final BigInteger endBI = end.getAsInteger();
-        if (startBI.compareTo(endBI) > 0) {
+    }
+
+    private static BigInteger sumNumericRange(final BigInteger start, final BigInteger end) {
+        if (start.compareTo(end) > 0) {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
-                    startBI + " > " + endBI);
+                    start + " > " + end);
         }
-        // Use arithmetic series formula: n*(start+end)/2 for better performance
+
+        // Use arithmetic series formula: (end-start+1)*(start+end)/2 for better performance
         // Use BigInteger to avoid overflow for large ranges
-        final BigInteger n = endBI.subtract(startBI).add(BigInteger.ONE);
-        final BigInteger sum = n.multiply(startBI.add(endBI)).divide(BigInteger.valueOf(2));
-        return Value.of(sum);
+        final BigInteger n = end.subtract(start).add(BigInteger.ONE);
+        final BigInteger sum = n.multiply(start.add(end)).divide(BigInteger.valueOf(2));
+        return sum;
     }
     
     /**
@@ -140,31 +128,24 @@ final class SumUtils {
         // Validate that multi-character variables have $ prefix
         validateVariableFormat(startVar);
         validateVariableFormat(endVar);
-        
+
         // Remove leading $ if present
         final String start = startVar.startsWith("$") ? startVar.substring(1) : startVar;
         final String end = endVar.startsWith("$") ? endVar.substring(1) : endVar;
-        
-        // Single-letter variable range: A-D
-        if (isSingleLetterRange(start, end)) {
-            return expandSingleLetterRange(start, end);
-        }
-        
+
         // Two-letter or longer variable ranges
-        if (start.length() >= 2 && end.length() >= 2) {
-            // Check if both have numeric suffix: A1-A5
-            if (hasNumericSuffix(start) && hasNumericSuffix(end)) {
-                return expandNumericSuffixRange(start, end);
-            }
-            
-            // Check if both have letter suffix: NA-ND
-            if (hasLetterSuffix(start) && hasLetterSuffix(end)) {
-                return expandLetterSuffixRange(start, end);
-            }
+        // Check if both have numeric suffix: A1-A5
+        if (hasNumericSuffix(start) && hasNumericSuffix(end)) {
+            return expandNumericSuffixRange(start, end);
         }
-        
-        throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-            startVar + " - " + endVar);
+
+        // Check if both have letter suffix: NA-ND
+        if (hasLetterSuffix(start) && hasLetterSuffix(end)) {
+            return expandLetterSuffixRange(start, end);
+        }
+
+        throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                startVar + " - " + endVar);
     }
     
     private static void validateVariableFormat(final String varName) {
@@ -175,106 +156,94 @@ final class SumUtils {
                 LocalizationUtils.getString(R.string.formula_varname));
         }
     }
-    
-    private static boolean isSingleLetterRange(final String start, final String end) {
-        return start.length() == 1 && end.length() == 1 && 
-               Character.isLetter(start.charAt(0)) && Character.isLetter(end.charAt(0));
-    }
-    
+
     private static boolean hasNumericSuffix(final String var) {
-        return Character.isDigit(var.charAt(var.length() - 1));
+        return !var.isEmpty() && Character.isDigit(var.charAt(var.length() - 1));
     }
-    
+
     private static boolean hasLetterSuffix(final String var) {
-        return Character.isLetter(var.charAt(var.length() - 1));
+        return !var.isEmpty() && Character.isLetter(var.charAt(var.length() - 1));
     }
-    
-    private static void validateSingleLetterRange(final char startChar, final char endChar) {
+
+    private static void validateLetterRange(final char startChar, final char endChar) {
         // Check that both are same case (both upper or both lower) and that start <= end
         final boolean isStartUpper = Character.isUpperCase(startChar);
         final boolean isEndUpper = Character.isUpperCase(endChar);
-        final char startCharUpper = Character.toUpperCase(startChar);
-        final char endCharUpper = Character.toUpperCase(endChar);
-        
-        if (isStartUpper != isEndUpper || startCharUpper > endCharUpper) {
+
+        if (isStartUpper != isEndUpper) {
             throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
                     startChar + " != " + endChar);
+        } else if (startChar > endChar) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startChar + " > " + endChar);
         }
     }
-    
-    private static List<String> expandSingleLetterRange(final String start, final String end) {
-        final List<String> variables = new ArrayList<>();
-        final char startChar = start.charAt(0);
-        final char endChar = end.charAt(0);
-        
-        validateSingleLetterRange(startChar, endChar);
-        
-        // Generate range - iterate directly on the characters preserving case
-        for (char c = startChar; c <= endChar; c++) {
-            variables.add(String.valueOf(c));
-        }
-        return variables;
-    }
-    
+
     private static List<String> expandNumericSuffixRange(final String start, final String end) {
         final String startPrefix = extractPrefix(start);
         final String endPrefix = extractPrefix(end);
-
         validatePrefixMatch(startPrefix, endPrefix);
 
         final String startSuffix = start.substring(startPrefix.length());
         final String endSuffix = end.substring(endPrefix.length());
 
-        final int startNum;
-        final int endNum;
-        try {
-            startNum = Integer.parseInt(startSuffix);
-            endNum = Integer.parseInt(endSuffix);
-        } catch (final NumberFormatException e) {
-            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
-                "Numeric suffix", 
-                start + ", " + end, 
-                "String");
-        }
-        
-        if (startNum > endNum) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE, 
-                startNum + " > " + endNum);
-        }
-        if (startSuffix.length() > endSuffix.length()) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
-                    startSuffix + " != " + endSuffix);
-        }
-        if ((startSuffix.charAt(0) == '0' || endSuffix.charAt(0) == '0') && startSuffix.length() != endSuffix.length()) {
-            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
-                    startSuffix + " != " + endSuffix);
-        }
+        final int startNum = parseNumericSuffix(startSuffix, start, end);
+        final int endNum = parseNumericSuffix(endSuffix, start, end);
 
-        // Preserve leading zeros from the original suffix width
-        final int suffixWidth = startSuffix.length();
-        final String formatPattern = "%0" + suffixWidth + "d";
+        validateNumericRange(startNum, endNum, startSuffix, endSuffix);
 
-        final List<String> variables = new ArrayList<>();
+        final String formatPattern = "%0" + startSuffix.length() + "d";
+
+        final List<String> variables = new ArrayList<>(endNum - startNum + 1);
         for (int i = startNum; i <= endNum; i++) {
-            final String formattedNumber = String.format(formatPattern, i);
-            variables.add(startPrefix + formattedNumber);
+            variables.add(startPrefix + String.format(formatPattern, i));
         }
         return variables;
     }
-    
+
+    private static int parseNumericSuffix(final String suffix, final String start, final String end) {
+        try {
+            return Integer.parseInt(suffix);
+        } catch (final NumberFormatException e) {
+            throw new FormulaException(FormulaException.ErrorType.WRONG_TYPE,
+                    "Numeric suffix", start + ", " + end, "String");
+        }
+    }
+
+    private static void validateNumericRange(final int startNum, final int endNum,
+                                             final String startSuffix, final String endSuffix) {
+        if (startNum > endNum) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startNum + " > " + endNum);
+        }
+
+        final int startLen = startSuffix.length();
+        final int endLen = endSuffix.length();
+
+        final boolean hasDifferentLength = startLen != endLen;
+        final boolean hasLeadingZero = startSuffix.startsWith("0") || endSuffix.startsWith("0");
+
+        if (startLen > endLen || (hasLeadingZero && hasDifferentLength)) {
+            throw new FormulaException(FormulaException.ErrorType.INVALID_RANGE,
+                    startSuffix + " != " + endSuffix);
+        }
+    }
+
     private static List<String> expandLetterSuffixRange(final String start, final String end) {
-        final String startPrefix = start.substring(0, start.length() - 1);
-        final String endPrefix = end.substring(0, end.length() - 1);
+        final int startPrefixLen = start.length() - 1;
+        final int endPrefixLen = end.length() - 1;
+        final String startPrefix = start.substring(0, startPrefixLen);
+        final String endPrefix = end.substring(0, endPrefixLen);
         
         validatePrefixMatch(startPrefix, endPrefix);
-        
-        final char startChar = start.charAt(start.length() - 1);
-        final char endChar = end.charAt(end.length() - 1);
+
+        final char startChar = start.charAt(startPrefixLen);
+        final char endChar = end.charAt(endPrefixLen);
         
         // Validate same case and range ordering
-        validateSingleLetterRange(startChar, endChar);
-        
-        final List<String> variables = new ArrayList<>();
+        validateLetterRange(startChar, endChar);
+
+        final List<String> variables = new ArrayList<>(endChar - startChar + 1);
         for (char c = startChar; c <= endChar; c++) {
             variables.add(startPrefix + c);
         }
@@ -288,13 +257,14 @@ final class SumUtils {
                     startPrefix + " != " + endPrefix);
         }
     }
-    
+
     private static String extractPrefix(final String varName) {
-        int i = varName.length() - 1;
-        while (i >= 0 && Character.isDigit(varName.charAt(i))) {
-            i--;
+        for (int i = varName.length() - 1; i >= 0; i--) {
+            if (!Character.isDigit(varName.charAt(i))) {
+                return varName.substring(0, i + 1);
+            }
         }
-        return varName.substring(0, i + 1);
+        return "";
     }
 
     /**
@@ -302,6 +272,10 @@ final class SumUtils {
      * Returns a FormulaNode for a variable range sum, or null for standard handling.
      */
     static FormulaNode parseSumFunction(final List<FormulaNode> params) {
+        if (params == null || params.size() != 2) {
+            return null;
+        }
+
         // Try to extract string literals from parameters
         final String startVar = extractStringLiteral(params.get(0));
         final String endVar = extractStringLiteral(params.get(1));
@@ -319,7 +293,7 @@ final class SumUtils {
         try {
             final List<String> variables = expandVariableRange(startVar, endVar);
             // Create a sum node that references all variables in the range
-            return new FormulaNode("sum-var-range", null,
+            return new FormulaNode(Formula.VAR_RANGE_ID, null,
                     (objs, vars, ri) -> {
                         final Pair<BigDecimal, List<String>> result =
                                 sumVariables(variables, vars);
@@ -359,19 +333,16 @@ final class SumUtils {
     }
 
     private static String extractStringLiteral(final FormulaNode node) {
-        if (node == null) {
+        // Check if this is a string-literal node
+        if (node == null || !Formula.STRING_LITERAL_ID.equals(node.getId())) {
             return null;
         }
-        // Check if this is a string-literal node
-        if ("string-literal".equals(node.getId())) {
-            try {
-                // Evaluate the node without variables to get the constant string
-                final Value val = node.eval(x -> null, -1);
-                return val.getAsString();
-            } catch (Exception e) {
-                return null;
-            }
+
+        try {
+            final Value val = node.eval(x -> null, -1);
+            return val.getAsString();
+        } catch (final Exception e) {
+            return null;
         }
-        return null;
     }
 }

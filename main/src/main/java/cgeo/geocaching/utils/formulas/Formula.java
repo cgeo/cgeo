@@ -47,11 +47,17 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class Formula {
 
+    public static final String STRING_LITERAL_ID = "string-literal";
+    public static final String VAR_ID = "var";
+    public static final String VARBLOCK_ID = "varblock";
+    public static final String VAR_RANGE_ID = "var-range";
+
     private static final Value OVERFLOW_VALUE = Value.of("");
 
     private static final Set<Integer> CHARS = new HashSet<>();
     private static final Set<Integer> CHARS_DIGITS = new HashSet<>();
     private static final Set<Integer> NUMBERS = new HashSet<>();
+
 
     // Sichtbarkeit für FormulaNode-Zugriffe anpassen
 
@@ -555,7 +561,7 @@ public final class Formula {
             throw fe;
         }
 
-        return new FormulaNode("var", null, (objs, vars, ri) -> {
+        return new FormulaNode(VAR_ID, null, (objs, vars, ri) -> {
             final Value value = vars.apply(parsed);
             if (value != null) {
                 return value;
@@ -606,7 +612,7 @@ public final class Formula {
     @NonNull
     private FormulaNode parseSingleLetterVariableBlock(final String varBlock) {
 
-        return new FormulaNode("varblock", null, (objs, vars, ri) -> {
+        return new FormulaNode(VARBLOCK_ID, null, (objs, vars, ri) -> {
             final ValueList varValues = new ValueList();
             for (char l : varBlock.toCharArray()) {
                 final Value value = vars.apply("" + l);
@@ -672,7 +678,7 @@ public final class Formula {
     @Nullable
     private FormulaNode tryParseSpecialFunction(final String functionName, final FormulaFunction formulaFunction, final List<FormulaNode> params) {
         // Currently only sumrange function requires special parsing
-        if (FormulaFunction.SUMRANGE == formulaFunction && params.size() == 2) {
+        if (FormulaFunction.SUMRANGE == formulaFunction) {
             return SumUtils.parseSumFunction(params);
         }
 
