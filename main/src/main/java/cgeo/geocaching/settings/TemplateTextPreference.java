@@ -60,7 +60,7 @@ public class TemplateTextPreference extends Preference {
                 launchEditTemplateDialog();
                 return false;
             });
-            if (!getKey().equals(LocalizationUtils.getString(R.string.pref_signature))) {
+            if (!getKey().equals(getContext().getString(R.string.pref_signature))) {
                 final MaterialButton button = (MaterialButton) holder.findViewById(R.id.iconview);
                 button.setIconResource(R.drawable.ic_menu_delete);
                 button.setOnClickListener(v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
@@ -72,7 +72,7 @@ public class TemplateTextPreference extends Preference {
     }
 
     public void launchEditTemplateDialog() {
-        final boolean isSignature = getKey().equals(LocalizationUtils.getString(R.string.pref_signature));
+        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
 
         final View v = LayoutInflater.from(getContext()).inflate(R.layout.template_preference_dialog, null);
         final TextInputLayout titleLayout = v.findViewById(R.id.titleLayout);
