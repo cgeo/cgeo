@@ -90,6 +90,49 @@ public class TypeGeocacheFilterTest {
         assertThat(filter.filter(megaEventCache)).isFalse();
     }
 
+    @Test
+    public void getRawValuesWithPartialSpecialSelection() {
+        // Test that getRawValues() correctly expands partial special event selections for API requests
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select only MEGA_EVENT and GIGA_EVENT
+        filter.setSelectedSpecialEventTypes(new HashSet<>(Arrays.asList(CacheType.MEGA_EVENT, CacheType.GIGA_EVENT)));
+        
+        // getRawValues should return MEGA_EVENT and GIGA_EVENT, NOT COMMUN_CELEBRATION
+        assertThat(filter.getRawValues()).contains(CacheType.MEGA_EVENT, CacheType.GIGA_EVENT);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.BLOCK_PARTY, CacheType.GPS_EXHIBIT, CacheType.GCHQ_CELEBRATION);
+    }
+
+    @Test
+    public void getRawValuesWithAllSpecialSelection() {
+        // Test that getRawValues() uses COMMUN_CELEBRATION when all special events are selected
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select all special events
+        filter.setSelectedSpecialEventTypes(TypeGeocacheFilter.getAllSpecialEventTypes());
+        
+        // getRawValues should return COMMUN_CELEBRATION (the group), not individual types
+        assertThat(filter.getRawValues()).contains(CacheType.COMMUN_CELEBRATION);
+        // Individual special event types should not be in getRawValues when using the group
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY);
+    }
+
+    @Test
+    public void getRawValuesWithMixedSelection() {
+        // Test that getRawValues() correctly handles mix of regular types and partial special selection
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select TRADITIONAL and partial special events (only MEGA_EVENT)
+        filter.setValues(new HashSet<>(Collections.singletonList(CacheType.TRADITIONAL)));
+        filter.setSelectedSpecialEventTypes(new HashSet<>(Collections.singletonList(CacheType.MEGA_EVENT)));
+        
+        // getRawValues should return TRADITIONAL and MEGA_EVENT
+        assertThat(filter.getRawValues()).contains(CacheType.TRADITIONAL, CacheType.MEGA_EVENT);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY);
+    }
+
     private void singleType(final Action1<Geocache> cacheSetter, final Action1<TypeGeocacheFilter> filterSetter, final Boolean expectedResult) {
         GeocacheFilterTestUtils.testSingle(GeocacheFilterType.TYPE, cacheSetter, filterSetter, expectedResult);
     }
