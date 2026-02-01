@@ -638,7 +638,7 @@ static boolean isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
-// Custom run tasks to launch the app directly from gradle - disabled for AGP 9.0 migration
+// Custom run tasks to launch the app directly from gradle
 androidComponents {
     onVariants(selector().all()) { variant ->
         def installTask = tasks.named("install${variant.name.capitalize()}")
