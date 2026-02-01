@@ -24,7 +24,6 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 
@@ -104,7 +103,7 @@ public enum VtmThemes implements ThemeFile {
         final ListPreference themeVariants = new ListPreference(context);
         themeVariants.setTitle(R.string.vtm_theme_variant);
         themeVariants.setSummary(getDefaultVariant().name());
-        themeVariants.setKey(LocalizationUtils.getString(R.string.pref_vtm_default));
+        themeVariants.setKey(context.getString(R.string.pref_vtm_default));
         final CharSequence[] variants = new CharSequence[VtmThemes.values().length];
         int i = 0;
         for (VtmThemes vtmTheme : VtmThemes.values()) {

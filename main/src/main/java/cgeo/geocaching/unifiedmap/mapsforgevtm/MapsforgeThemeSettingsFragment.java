@@ -2,7 +2,6 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -67,7 +66,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
 
         if (show3Doption) {
             final CheckBoxPreference cb3D = new CheckBoxPreference(activity);
-            cb3D.setKey(LocalizationUtils.getString(R.string.pref_buildingLayer3D));
+            cb3D.setKey(getString(R.string.pref_buildingLayer3D));
             cb3D.setTitle(R.string.maptheme_show3Dbuildings);
             cb3D.setChecked(Settings.getBuildings3D());
             cb3D.setIconSpaceReserved(false);
