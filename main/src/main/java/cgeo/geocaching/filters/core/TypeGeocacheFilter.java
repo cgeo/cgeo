@@ -163,8 +163,23 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
             final Set<CacheType> allSpecialTypes = getAllSpecialEventTypes();
             // Remove all special event types first
             rawValues.removeAll(allSpecialTypes);
-            // Then add only the selected ones
-            rawValues.addAll(selectedSpecialEventTypes);
+            
+            // If all special event types are selected, use COMMUN_CELEBRATION as group marker (optimization)
+            if (selectedSpecialEventTypes.equals(allSpecialTypes)) {
+                rawValues.add(COMMUN_CELEBRATION);
+            } else if (selectedSpecialEventTypes.size() == 1 && selectedSpecialEventTypes.contains(COMMUN_CELEBRATION)) {
+                // Special case: if ONLY COMMUN_CELEBRATION is selected, send it even though API will expand
+                // This is necessary because excluding it would result in no special events being returned
+                rawValues.add(COMMUN_CELEBRATION);
+            } else {
+                // Partial selection with multiple types: add individual types but exclude COMMUN_CELEBRATION to prevent API expansion
+                // The API treats COMMUN_CELEBRATION as a group marker that expands to all special event types
+                for (final CacheType type : selectedSpecialEventTypes) {
+                    if (type != COMMUN_CELEBRATION) {
+                        rawValues.add(type);
+                    }
+                }
+            }
         }
 
         return rawValues;

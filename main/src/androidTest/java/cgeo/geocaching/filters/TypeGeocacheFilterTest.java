@@ -133,6 +133,42 @@ public class TypeGeocacheFilterTest {
         assertThat(filter.getRawValues()).doesNotContain(CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY);
     }
 
+    @Test
+    public void getRawValuesWithPartialSelectionIncludingCommunCelebration() {
+        // Test edge case: partial selection that includes COMMUN_CELEBRATION itself
+        // COMMUN_CELEBRATION should be excluded from getRawValues to prevent API from expanding it to all special types
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select COMMUN_CELEBRATION and MEGA_EVENT (partial selection, not all special events)
+        final Set<CacheType> partialSelection = new HashSet<>();
+        partialSelection.add(CacheType.COMMUN_CELEBRATION);
+        partialSelection.add(CacheType.MEGA_EVENT);
+        filter.setSelectedSpecialEventTypes(partialSelection);
+        
+        // getRawValues should return only MEGA_EVENT, NOT COMMUN_CELEBRATION
+        // (to prevent API from expanding COMMUN_CELEBRATION to all special event types)
+        assertThat(filter.getRawValues()).contains(CacheType.MEGA_EVENT);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY, CacheType.GPS_EXHIBIT);
+    }
+
+    @Test
+    public void getRawValuesWithOnlyCommunCelebrationSelected() {
+        // Test edge case: only COMMUN_CELEBRATION selected (no other special events)
+        // In this case, we must send COMMUN_CELEBRATION even though API will expand it,
+        // because excluding it would result in no special events being returned
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select only COMMUN_CELEBRATION
+        final Set<CacheType> onlyCommunCeleb = new HashSet<>();
+        onlyCommunCeleb.add(CacheType.COMMUN_CELEBRATION);
+        filter.setSelectedSpecialEventTypes(onlyCommunCeleb);
+        
+        // getRawValues should return COMMUN_CELEBRATION (API will expand to all special types, but that's the best we can do)
+        assertThat(filter.getRawValues()).contains(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY);
+    }
+
     private void singleType(final Action1<Geocache> cacheSetter, final Action1<TypeGeocacheFilter> filterSetter, final Boolean expectedResult) {
         GeocacheFilterTestUtils.testSingle(GeocacheFilterType.TYPE, cacheSetter, filterSetter, expectedResult);
     }
