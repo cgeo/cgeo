@@ -239,7 +239,7 @@ public class WaypointTest {
     public void testBuildImageFromNote() {
         // Test that image can be extracted from note HTML
         final Waypoint waypoint = new Waypoint("Stage 1", WaypointType.PUZZLE, false);
-        waypoint.setNote("<img src=\"https://example.com/image.jpg\"></img><p>Description text</p>");
+        waypoint.setNote("<img src=\"https://example.com/image.jpg\"/>Description text");
         
         final Image img = waypoint.buildImage();
         
