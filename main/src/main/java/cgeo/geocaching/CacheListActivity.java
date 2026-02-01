@@ -1331,7 +1331,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
         if (removeFromAllLists || removeWillDeleteFromDevice(listId)) {
-            new DeleteCachesCommand(this, new HashSet<>(caches), new DeleteCachesHandler(this)).execute();
+            new DeleteCachesCommand(this, new HashSet<>(caches), new DeleteCachesHandler(this)).showDeleteAllDialogsAndExecute();
             return;
         }
         new DeleteCachesFromListCommand(this, caches, listId).execute();

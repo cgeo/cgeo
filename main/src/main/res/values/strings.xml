@@ -549,6 +549,7 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_warning_delete_all_caches">This will remove all caches from your device. Do you want to proceed?</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
