@@ -268,39 +268,41 @@ android {
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
+}
 
-    // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
-    applicationVariants.configureEach { variant ->
-        variant.outputs.configureEach { output ->
-            outputFileName = outputFileName.replace('-basic-', '-')
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
+        variant.outputs.forEach { output ->
+            output.outputFileName.set(output.outputFileName.get().replace('-basic-', '-'))
         }
-    }
-
-    // special version code for nightly and rc builds
-    applicationVariants.configureEach { variant ->
-        if (variant.buildType.name == 'nightly') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(10000000))
+        
+        // special version code for nightly and rc builds
+        if (variant.buildType == 'nightly') {
+            variant.outputs.forEach { output ->
+                output.versionCode.set(versionCodeFromDate(10000000))
             }
         }
-        if (variant.buildType.name == 'rc') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(-1))
+        if (variant.buildType == 'rc') {
+            variant.outputs.forEach { output ->
+                output.versionCode.set(versionCodeFromDate(-1))
             }
         }
-        if (variant.buildType.name == 'legacy') {
+        if (variant.buildType == 'legacy') {
             String legacyName = System.getenv('LEGACY_VERSION_NAME')
             Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
             if (legacyName != null && legacyVersion != null) {
-                variant.outputs.configureEach {
-                    setVersionNameOverride(legacyName)
-                    setVersionCodeOverride(legacyVersion)
+                variant.outputs.forEach { output ->
+                    output.versionName.set(legacyName)
+                    output.versionCode.set(legacyVersion)
                 }
             }
         }
         // debug and release builds have offset zero, no special handling here
     }
+}
 
+android {
     // tests rely on JUnit-based classes
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
@@ -635,20 +637,20 @@ static boolean isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
-// have a run task for our builds to launch the app directly from gradle
-android.applicationVariants.configureEach { variant ->
-    if (variant.installProvider) {
+// TODO: Re-enable run tasks for AGP 9.0
+// Custom run tasks to launch the app directly from gradle - disabled for AGP 9.0 migration
+/*
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        def installTask = tasks.named("install${variant.name.capitalize()}")
         tasks.register("run${variant.name.capitalize()}") {
             group = 'cgeo'
-            description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
-            dependsOn tasks.named(variant.installProvider.name)
+            description = "Installs the ${variant.name} and runs the main activity. Depends on 'adb' being on the PATH."
+            dependsOn installTask
 
             doFirst {
-                String classpath = variant.applicationId
-                if (variant.buildType.applicationIdSuffix) {
-                    classpath -= "${variant.buildType.applicationIdSuffix}"
-                }
-                GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
+                String classpath = variant.namespace
+                GString launchClass = "${variant.namespace}/${classpath}.MainActivity"
                 try {
                     execOperations.exec {
                         executable = adb
@@ -662,6 +664,7 @@ android.applicationVariants.configureEach { variant ->
         }
     }
 }
+*/
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
 // This uses eager task creation API.
