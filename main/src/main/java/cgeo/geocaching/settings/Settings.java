@@ -89,7 +89,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class Settings {
 
-    public static final int MAP_LANGUAGE_DEFAULT_ID = 432198765;
     private static final String LEGACY_UNUSED_MARKER = "unused::";
 
     /**
@@ -480,7 +479,7 @@ public class Settings {
         }
 
         if (currentVersion < 11) {
-            final String tileprovider = sharedPrefs.getString(getKey(R.string.old_pref_mapsource), "")
+            final String tileprovider = sharedPrefs.getString(getKey(R.string.pref_mapsource), "")
                 // Google Maps map sources
                 .replace("cgeo.geocaching.maps.google.v2.GoogleMapProvider$", "cgeo.geocaching.unifiedmap.tileproviders.")
                 // cgeo.geocaching.maps.google.v2.GoogleMapProvider$GoogleMapSource         => cgeo.geocaching.unifiedmap.tileproviders.GoogleMapSource
@@ -505,10 +504,10 @@ public class Settings {
                 .replace(".OfflineMultiMapSource", ".MapsforgeMultiOfflineTileProvider:null")
             ;
 
-            if (getBoolean(R.string.old_pref_useLegacyMap, false)) {
+            if (useLegacyMaps()) {
                 final Editor e = sharedPrefs.edit();
                 e.putString(getKey(R.string.pref_tileprovider), StringUtils.isBlank(tileprovider) ? "cgeo.geocaching.unifiedmap.tileproviders.GoogleMapSource" : tileprovider);
-                e.putBoolean(getKey(R.string.old_pref_useLegacyMap), false);
+                e.putBoolean(getKey(R.string.pref_useLegacyMap), false);
                 e.putString(getKey(R.string.pref_unifiedMapVariants), String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE));
                 e.apply();
                 Log.e("Migrated map mode to UnifiedMap: " + tileprovider);
@@ -910,6 +909,10 @@ public class Settings {
         putString(R.string.pref_webDeviceCode, code);
     }
 
+    public static MapProvider getMapProvider() {
+        return getMapSource().getMapProvider();
+    }
+
     public static int getMapRotation() {
         final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
@@ -1067,7 +1070,7 @@ public class Settings {
 
     public static int getLogLineLimit() {
         final int logLineLimit = getInt(R.string.pref_collapse_log_limit, getKeyInt(R.integer.log_line_limit_default));
-        if (logLineLimit == getKeyInt(R.integer.log_line_limit_max)) {
+        if (logLineLimit == getKeyInt(R.integer.list_load_limit_max)) {
             return 0;
         }
         return logLineLimit;
@@ -1124,10 +1127,6 @@ public class Settings {
         return getInt(R.string.pref_maptrail_length, getKeyInt(R.integer.historytrack_length_default));
     }
 
-    public static int getMaximumMapTrailDistance() {
-        return getInt(R.string.pref_maptrail_maxdistance, getKeyInt(R.integer.historytrack_mindistance_default));
-    }
-
     public static int getMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
@@ -1178,15 +1177,15 @@ public class Settings {
      * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
      * live map) and the map of a single cache (which is often zoomed in more deep).
      */
-    public static int getMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType) {
-        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
+    public static int getMapZoom(final MapMode mapMode) {
+        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
             return getCacheZoom();
         }
         return getMapZoom();
     }
 
-    public static void setMapZoom(final UnifiedMapType.UnifiedMapTypeType mapType, final int zoomLevel) {
-        if (mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords) {
+    public static void setMapZoom(final MapMode mapMode, final int zoomLevel) {
+        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
             setCacheZoom(zoomLevel);
         } else {
             setMapZoom(zoomLevel);
@@ -1215,7 +1214,14 @@ public class Settings {
         putInt(R.string.pref_cache_zoom, zoomLevel);
     }
 
-    public static Geopoint getMapCenter() {
+    public static GeoPointImpl getMapCenter() {
+        return getMapProvider().getMapItemFactory()
+                .getGeoPointBase(new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6,
+                        getInt(R.string.pref_lastmaplon, 0) / 1e6));
+    }
+
+    // temporary workaround for UnifiedMap necessary, as it is completely parallel to getMapProvider() currently
+    public static Geopoint getUMMapCenter() {
         return new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6, getInt(R.string.pref_lastmaplon, 0) / 1e6);
     }
 
@@ -1223,12 +1229,33 @@ public class Settings {
         return getBoolean(R.string.pref_zoomincludingwaypoints, false);
     }
 
-    public static void setMapCenter(final Geopoint mapViewCenter) {
+    public static void setMapCenter(final GeoPointImpl mapViewCenter) {
         if (mapViewCenter == null) {
             return;
         }
         putInt(R.string.pref_lastmaplat, mapViewCenter.getLatitudeE6());
         putInt(R.string.pref_lastmaplon, mapViewCenter.getLongitudeE6());
+    }
+
+    @NonNull
+    public static synchronized MapSource getMapSource() {
+        if (mapSource != null) {
+            return mapSource;
+        }
+        final String mapSourceId = getString(R.string.pref_mapsource, null);
+        mapSource = MapProviderFactory.getMapSource(mapSourceId);
+        if (mapSource == null || !mapSource.isAvailable()) {
+            mapSource = MapProviderFactory.getAnyMapSource();
+        }
+        return mapSource;
+    }
+
+    public static synchronized void setMapSource(final MapSource newMapSource) {
+        if (newMapSource != null && newMapSource.isAvailable()) {
+            putString(R.string.pref_mapsource, newMapSource.getId());
+            // cache the value
+            mapSource = newMapSource;
+        }
     }
 
     @NonNull
@@ -1292,6 +1319,11 @@ public class Settings {
     public static int getMapLanguageId() {
         final String language = getMapLanguage();
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
+    }
+
+    /** use legacy maps **/
+    public static boolean useLegacyMaps() {
+        return getBoolean(R.string.pref_useLegacyMap, false);
     }
 
     /** use Mapsforge as map view for UnifiedMap */
@@ -1407,7 +1439,8 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, DarkModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
+                DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
     }
 
     private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
@@ -1795,6 +1828,13 @@ public class Settings {
      */
     public static boolean getSyncMapRenderThemeFolder() {
         return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);
+    }
+
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.unifiedmap.layers.MBTilesSynchronizer}!
+     */
+    public static boolean getSyncMBTilesFolder() {
+        return getBoolean(R.string.pref_mbtilesfolder_synctolocal, false);
     }
 
     /**

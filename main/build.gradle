@@ -183,7 +183,8 @@ android {
     }
 
     testOptions {
-        resultsDir = layout.buildDirectory.get().toString() + '/test-results'
+        Provider<Directory> output = layout.buildDirectory.dir("test-results")
+        resultsDir = output.get().asFile
     }
 
     lint {
@@ -307,6 +308,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.annotation:annotation-jvm:1.9.1'
+
     // desugaring of Java 8 APIs
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
@@ -319,7 +322,10 @@ dependencies {
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation 'com.github.k3b:k3b-geoHelper:v1.1.12'
+    implementation('com.github.k3b:k3b-geoHelper:v1.1.12') {
+        // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
+        exclude group: 'commons-io', module: 'commons-io'
+    }
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     String assertJVersion = '2.9.1'
@@ -360,7 +366,7 @@ dependencies {
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api-android:0.9.55"
+    implementation "com.asamm:locus-api-android:0.9.64"
 
     // -- Mapsforge / Mapsforge --
 
@@ -426,20 +432,17 @@ dependencies {
     // Organic Maps integration
     implementation project(":organicmaps-api")
 
-    // openwig library
-    implementation project(":openwig")
-
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.19.0'
 
-    String okhttpVersion = '4.12.0'
+    String okhttpVersion = '4.9.1'  // 4.9.2+ uses Kotlin multiplatform which has issues with AGP 9.0
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:19.2.0'
+    implementation 'com.google.android.gms:play-services-maps:20.0.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -469,7 +472,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.11.0"
+    implementation "androidx.work:work-runtime:2.11.1"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.7.1'
@@ -487,10 +490,10 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.1.0'
 
     // Support Library swiperefreshlayout
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.4.1'
+    implementation 'androidx.exifinterface:exifinterface:1.4.2'
 
     // Support Library RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
@@ -499,11 +502,12 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
 
     // Altitude above MSL
-    implementation 'androidx.core:core-location-altitude:1.0.0-alpha03'
+    implementation 'androidx.core:core-location-altitude:1.0.0-beta01'
 
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.9.1'
-    implementation "androidx.annotation:annotation:annotationVersion"
+    // Using 1.8.2 - last version before Kotlin Multiplatform (1.9.0+ has KMP variant issues with AGP 9.0)
+    String annotationVersion = '1.8.2'
+    implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
@@ -523,7 +527,7 @@ dependencies {
 
     //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
     //See https://github.com/guardian/toolargetool
-    implementation 'com.gu.android:toolargetool:0.3.0'
+    implementation 'com.gu.android:toolargetool:0.3.2'
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
@@ -532,7 +536,7 @@ dependencies {
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.30'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -812,21 +816,21 @@ apply plugin: 'pmd'
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
     consoleOutput = true
-    toolVersion = "6.55.0"
+    toolVersion = "7.16.0"
     rulesMinimumPriority = 5
-    ruleSets = [] // use ruleSetFiles instead
+    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
 }
 
 tasks.register('pmd', Pmd) {
     group = 'verification'
-    description = 'PMD Static Source Code Analyzer'
+    description = 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
     ruleSetFiles = rootProject.files("ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**','**/brouter/**','**/openwig/**','**/kahlua/**'
 
     reports {
-        xml.required = true
-        html.required = true
+        xml.required.set = true
+        html.required.set = true
     }
 }
