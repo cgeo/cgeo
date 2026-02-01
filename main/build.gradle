@@ -506,8 +506,8 @@ dependencies {
     implementation 'androidx.core:core-location-altitude:1.0.0-beta01'
 
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.9.1'
-    implementation "androidx.annotation:annotation:annotationVersion"
+    String 1.9.1 = '1.9.1'
+    implementation "androidx.annotation:annotation:1.9.1"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
