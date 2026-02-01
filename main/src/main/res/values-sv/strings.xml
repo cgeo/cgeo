@@ -351,9 +351,6 @@
     <string name="tap_icon_more_info">Tryck på ikonen för mer information</string>
     <string name="use_slider_adjust_value">Använd reglaget för att justera värdet</string>
     <string name="snackbar_action_share">Dela</string>
-    <string name="warn_gm_not_available">Google Maps är inte tillgänglig.</string>
-    <string name="switch_to_mf">Din Google Play-tjänst är föråldrad. Vill du byta till Mapsforge kartleverantör istället?</string>
-    <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Grundläggande</string>
     <string name="translator_preference_target_lng">Offline översättningsspråk</string>
@@ -845,8 +842,6 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
-    <string name="settings_vtm_background_transparent_title">Transparent bakgrund</string>
-    <string name="settings_vtm_background_transparent_summary">Visa bakgrunden för VTM offline-kartor transparent (experimentell)</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
@@ -1055,8 +1050,6 @@
     <string name="settings_startscreen_title">Standardskärm</string>
     <string name="init_wallpaper">Bakgrund</string>
     <string name="init_summary_wallpaper">Visa enhetens bakgrundsbild som startskärmens bakgrund</string>
-    <string name="init_colored_theme">Färgat tema</string>
-    <string name="init_summary_colored_theme">Använd färgat tema</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
@@ -1127,7 +1120,6 @@
     <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
     <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
-    <string name="init_mapsource_select_legacy">Välj kartkälla (Äldre)</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
@@ -1252,8 +1244,6 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
-    <string name="init_title_useLegacyMap">Använd äldre karta</string>
-    <string name="init_summary_useLegacyMap">Använd äldre versioner av kartor från Google Map / Mapsforge (OSM) istället för UnifiedMap</string>
     <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
@@ -1275,7 +1265,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terräng</string>
-    <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_nomap">Ingen karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
@@ -2457,7 +2446,6 @@
     <string name="map_manual_targets_cleared">Manuella mål rensade</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_clear_individual_route_confirm">Vill du ta bort alla cacher/punkter från din individuella rutt?</string>
-    <string name="map_individual_route_cleared">Individuell rutt rensad</string>
     <string name="sorted_route_saved">Individuell rutt sparad</string>
     <string name="load_individual_route_error">Fel vid inläsning av individuell rutt</string>
     <string name="route_item_point">Ruttpunkt</string>
@@ -2621,7 +2609,6 @@
     <string name="vtm_theme_variant">Temavariant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Rensa historikspår</string>
-    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
     <string name="map_trail_show">Visa historikspår</string>
     <string name="map_trail_hide">Dölj historikspår</string>
     <!-- history track export -->
@@ -2697,7 +2684,6 @@
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Att visa platsen för Wherigo på kartan är inte supportat för dina kartinställningar. Ändra till unified map under inställningar -&gt; Kartkällor -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Föregående</string>
     <string name="skip">Hoppa över</string>

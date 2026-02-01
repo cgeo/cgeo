@@ -124,9 +124,12 @@ public abstract class AbstractCommand implements Command {
         @SuppressLint("WrongConstant")
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
+                final View navBar = context.findViewById(R.id.activity_navigationBar);
+                final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
+
                 Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
                         .setAction(context.getString(R.string.undo), this)
-                        .setAnchorView(context.findViewById(R.id.activity_navigationBar))
+                        .setAnchorView(isNavBarVisible ? navBar : context.findViewById(android.R.id.navigationBarBackground))
                         .show();
             }
         }

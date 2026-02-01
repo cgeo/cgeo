@@ -19,7 +19,9 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -203,12 +205,17 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     }
 
     protected void setToolbarBackgroundColor(@NonNull final Toolbar toolbar, @NonNull final View swipView, @Nullable final CacheType cacheType, final boolean isEnabled) {
-        if (!Settings.useColoredActionBar(toolbar.getContext())) {
+        final Context context = toolbar.getContext();
+        if (!Settings.useColoredActionBar(context)) {
             return;
         }
 
-        final int actionbarColor = CacheType.getActionBarColor(toolbar.getContext(), cacheType, isEnabled);
-        swipView.getBackground().mutate().setTint(actionbarColor);
+        final boolean isLightSkin = Settings.isLightSkin(context);
+        final int actionbarColor = CacheType.getActionBarColor(context, cacheType, isEnabled, isLightSkin);
+        final Drawable swipeBackground = swipView.getBackground();
+        if (null != swipeBackground) {
+            swipeBackground.mutate().setTint(actionbarColor);
+        }
         toolbar.setBackgroundColor(actionbarColor);
     }
 

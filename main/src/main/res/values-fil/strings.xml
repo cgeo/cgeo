@@ -441,7 +441,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Ang Google: Mapa</string>
     <string name="map_source_google_satellite">Ang Google: Satelayt</string>
-    <string name="map_source_osm_offline">Ang naka-offline</string>
     <string name="init_sendToCgeo">Ang ipadala sa c:geo</string>
     <string name="settings_info_send2cgeo_title">Ang impormasyon sa send2cgeo</string>
     <string name="init_sendToCgeo_name">Ang pangalan ng iyong device</string>

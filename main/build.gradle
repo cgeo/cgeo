@@ -83,7 +83,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -328,7 +328,7 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.9.4'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.9.8'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.1'
@@ -436,7 +436,7 @@ dependencies {
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:19.2.0'
+    implementation 'com.google.android.gms:play-services-maps:20.0.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -524,12 +524,12 @@ dependencies {
 
     // charting, based on com.github.PhilJay:MPAndroidChart
     // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
-    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.27'
+    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.31'
 
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.30'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 

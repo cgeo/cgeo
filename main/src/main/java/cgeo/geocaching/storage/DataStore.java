@@ -4945,6 +4945,7 @@ public class DataStore {
                         add.bindLong(1, listId);
                         add.bindString(2, cache.getGeocode());
                         add.execute();
+                        cache.getLists().add(listId);
                     }
 
                 }
