@@ -38,7 +38,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         // show 3D option for building layer
         show3Doption = requireActivity().getIntent().getBooleanExtra(SHOW3DOPTION, false);
         // the preference category serves as the hook to add a list preference to allow users to select a style
-        this.renderthemeMenu = findPreference(LocalizationUtils.getString(R.string.pref_theme_menu));
+        this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
     }
 

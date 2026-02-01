@@ -27,7 +27,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_offlinedata, rootKey);
 
-        PreferenceUtils.setOnPreferenceClickListener(findPreference(LocalizationUtils.getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
 
@@ -47,7 +47,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             return true;
         });
 
-        final Preference isDbOnSdCard = findPreference(LocalizationUtils.getString(R.string.pref_dbonsdcard));
+        final Preference isDbOnSdCard = findPreference(getString(R.string.pref_dbonsdcard));
         assert isDbOnSdCard != null;
         isDbOnSdCard.setPersistent(false);
         isDbOnSdCard.setOnPreferenceClickListener(preference -> {
@@ -56,7 +56,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             return oldValue != Settings.isDbOnSDCard();
         });
 
-        final Preference dataDirPreference = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_dataDir));
+        final Preference dataDirPreference = findPreference(getString(R.string.pref_fakekey_dataDir));
         assert dataDirPreference != null;
         dataDirPreference.setSummary(Settings.getExternalPrivateCgeoDirectory());
         if (LocalStorage.getAvailableExternalPrivateCgeoDirectories().size() < 2) {

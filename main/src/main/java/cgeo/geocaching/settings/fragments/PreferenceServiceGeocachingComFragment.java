@@ -29,7 +29,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         setPreferencesFromResource(R.xml.preferences_services_geocaching_com, rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_gc_website));
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
         final String urlOrHost = GCConnector.getInstance().getHost();
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
@@ -38,7 +38,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         });
 
         // Facebook Login Hint
-        final Preference loginFacebook = findPreference(LocalizationUtils.getString(R.string.pref_gc_fb_login_hint));
+        final Preference loginFacebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
         PreferenceUtils.setOnPreferenceClickListener(loginFacebook, preference -> {
             final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
             builder.setMessage(R.string.settings_info_facebook_login)
@@ -51,7 +51,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
             return true;
         });
 
-        final ListPreference imageSizePref = findPreference(LocalizationUtils.getString(R.string.pref_gc_imagesize));
+        final ListPreference imageSizePref = findPreference(getString(R.string.pref_gc_imagesize));
         imageSizePref.setEntries(Arrays.stream(ImageUtils.GCImageSize.values()).map(is -> LocalizationUtils.getString(is.getLabel())).toArray(String[]::new));
         imageSizePref.setEntryValues(Arrays.stream(ImageUtils.GCImageSize.values()).map(Enum::name).toArray(String[]::new));
     }
@@ -65,7 +65,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         final GCConnector connector = GCConnector.getInstance();
         final Credentials credentials = Settings.getCredentials(connector);
         SettingsUtils.setAuthTitle(this, R.string.pref_fakekey_gc_authorization, StringUtils.isNotBlank(credentials.getUsernameRaw()));
-        final CredentialsPreference credentialsPreference = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_gc_authorization));
+        final CredentialsPreference credentialsPreference = findPreference(getString(R.string.pref_fakekey_gc_authorization));
         assert credentialsPreference != null;
         if (credentials.isValid()) {
             credentialsPreference.setIcon(null);

@@ -20,7 +20,7 @@ public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompa
         setPreferencesFromResource(R.xml.preferences_services_send_to_cgeo, rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_sendtocgeo_website));
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_sendtocgeo_website));
         final String urlOrHost = "send2.cgeo.org";
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;

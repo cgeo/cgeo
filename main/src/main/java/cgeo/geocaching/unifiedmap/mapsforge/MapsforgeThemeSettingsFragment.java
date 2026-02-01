@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.SeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.SeekbarUI;
-import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,7 +39,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         // if the render theme has a style menu, its data is delivered via the intent
         renderthemeOptions = (XmlRenderThemeStyleMenu) requireActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
         // the preference category serves as the hook to add a list preference to allow users to select a style
-        this.renderthemeMenu = findPreference(LocalizationUtils.getString(R.string.pref_theme_menu));
+        this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
     }
 

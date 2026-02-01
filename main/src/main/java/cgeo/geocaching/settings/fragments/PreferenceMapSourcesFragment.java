@@ -22,19 +22,17 @@ import androidx.preference.MultiSelectListPreference;
 
 import java.util.HashMap;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     private ListPreference prefTileProvicers;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_map_sources, rootKey);
-        prefTileProvicers = findPreference(LocalizationUtils.getString(R.string.pref_tileprovider));
+        prefTileProvicers = findPreference(getString(R.string.pref_tileprovider));
 
         initMapSourcePreference();
 
-        final MultiSelectListPreference hideTileprovidersPref = findPreference(LocalizationUtils.getString(R.string.pref_tileprovider_hidden));
+        final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
         // new unified map providers
         final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
         final String[] tpEntries = new String[tileproviders.size()];
@@ -49,13 +47,13 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         hideTileprovidersPref.setEntryValues(tpValues);
 
         setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
             setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
             setFlagForRestartRequired();
             return true;
         });
 
-        final ListPreference unifiedMapVariants = findPreference(LocalizationUtils.getString(R.string.pref_unifiedMapVariants));
+        final ListPreference unifiedMapVariants = findPreference(getString(R.string.pref_unifiedMapVariants));
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);

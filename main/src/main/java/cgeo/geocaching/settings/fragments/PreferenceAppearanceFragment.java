@@ -33,7 +33,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_appearence, rootKey);
 
-        final Preference themePref = findPreference(LocalizationUtils.getString(R.string.pref_theme_setting));
+        final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
         PreferenceUtils.setOnPreferenceChangeListener(themePref, (preference, newValue) -> {
             final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
             Settings.setAppTheme(darkTheme);
@@ -41,7 +41,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             return true;
         });
 
-        final ListPreference languagePref = findPreference(LocalizationUtils.getString(R.string.pref_selected_language));
+        final ListPreference languagePref = findPreference(getString(R.string.pref_selected_language));
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
 
@@ -68,7 +68,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         setLanguageSummary(languagePref, userLanguage);
 
 
-        final ListPreference shortDateFormatPref = findPreference(LocalizationUtils.getString(R.string.pref_short_date_format));
+        final ListPreference shortDateFormatPref = findPreference(getString(R.string.pref_short_date_format));
         PreferenceUtils.setOnPreferenceChangeListener(shortDateFormatPref, (preference, newValue) -> {
             setDateSummary((ListPreference) preference, newValue.toString());
             return true;
@@ -81,7 +81,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         setDateSummary(shortDateFormatPref, shortDateFormat);
 
         //external translator
-        final ListPreference translatorExternalPref = findPreference(LocalizationUtils.getString(R.string.pref_translator_external));
+        final ListPreference translatorExternalPref = findPreference(getString(R.string.pref_translator_external));
         translatorExternalPref.setEntries(CollectionStream.of(TranslationUtils.Translator.values()).map(TranslationUtils.Translator::toUserDisplayableString).toArray(String.class));
         translatorExternalPref.setEntryValues(CollectionStream.of(TranslationUtils.Translator.values()).map(Enum::name).toArray(String.class));
         translatorExternalPref.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -100,8 +100,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             MapMarkerUtils.resetAllCaches();
             return true;
         };
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_mapCacheScaling)), pScaling);
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_mapWpScaling)), pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapCacheScaling)), pScaling);
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_mapWpScaling)), pScaling);
 
         configCustomBNitemPreference();
 
@@ -113,7 +113,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         super.onResume();
         final FragmentActivity activity = requireActivity();
         activity.setTitle(R.string.settings_title_appearance);
-        findPreference(LocalizationUtils.getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
+        findPreference(getString(R.string.pref_fakekey_vtmScaling)).setVisible(Settings.showVTMInUnifiedMap());
         final boolean systemTheme = Settings.isSystemTheme();
         final boolean lightSkin = Settings.isLightSkin(activity);
         findPreference(getString(R.string.pref_colored_theme_light)).setVisible(systemTheme || lightSkin);
@@ -121,7 +121,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     }
 
     private void configCustomBNitemPreference() {
-        final ListPreference customBNitem = findPreference(LocalizationUtils.getString(R.string.pref_custombnitem));
+        final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
         final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
         final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
         int i = addCustomBNSelectionItem(0, LocalizationUtils.getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);

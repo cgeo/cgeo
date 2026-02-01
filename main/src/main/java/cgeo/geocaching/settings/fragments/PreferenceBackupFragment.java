@@ -21,22 +21,22 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
-        PreferenceUtils.setOnPreferenceClickListener(findPreference(LocalizationUtils.getString(R.string.pref_fakekey_preference_startbackup)), preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_startbackup)), preference -> {
             backupUtils.backup(this::updateSummary, false);
             return true;
         });
 
-        PreferenceUtils.setOnPreferenceClickListener(findPreference(LocalizationUtils.getString(R.string.pref_fakekey_startrestore)), preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_startrestore)), preference -> {
             backupUtils.restore(BackupUtils.newestBackupFolder(false));
             return true;
         });
 
-        PreferenceUtils.setOnPreferenceClickListener(findPreference(LocalizationUtils.getString(R.string.pref_fakekey_startrestore_dirselect)), preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)), preference -> {
             backupUtils.selectBackupDirIntent();
             return true;
         });
 
-        final CheckBoxPreference loginData = findPreference(LocalizationUtils.getString(R.string.pref_backup_logins));
+        final CheckBoxPreference loginData = findPreference(getString(R.string.pref_backup_logins));
         PreferenceUtils.setOnPreferenceClickListener(loginData, preference -> {
             if (loginData.isChecked()) {
                 loginData.setChecked(false);
@@ -47,7 +47,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         updateSummary();
 
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_backup_backup_history_length)), (preference, value) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_backup_backup_history_length)), (preference, value) -> {
             backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value, false);
             return true;
         });
@@ -67,6 +67,6 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         } else {
             textRestore = LocalizationUtils.getString(R.string.init_backup_last_no);
         }
-        PreferenceUtils.setSummary(findPreference(LocalizationUtils.getString(R.string.pref_fakekey_startrestore)), textRestore);
+        PreferenceUtils.setSummary(findPreference(getString(R.string.pref_fakekey_startrestore)), textRestore);
     }
 }

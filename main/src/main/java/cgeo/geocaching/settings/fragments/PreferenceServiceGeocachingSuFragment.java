@@ -3,7 +3,6 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -21,7 +20,7 @@ public class PreferenceServiceGeocachingSuFragment extends PreferenceFragmentCom
         setPreferencesFromResource(R.xml.preferences_services_geocaching_su, rootKey);
 
         // Open website Preference
-        final Preference openWebsite = findPreference(LocalizationUtils.getString(R.string.pref_fakekey_su_website));
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_su_website));
         final String urlOrHost = SuConnector.getInstance().getHost();
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;

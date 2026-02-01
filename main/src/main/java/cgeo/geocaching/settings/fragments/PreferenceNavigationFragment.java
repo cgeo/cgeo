@@ -42,7 +42,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
         activity.setTitle(R.string.settings_title_navigation);
         initPublicFolders(this, activity.getCsah());
 
-        final Preference tool1 = findPreference(LocalizationUtils.getString(R.string.pref_defaultNavigationTool));
+        final Preference tool1 = findPreference(getString(R.string.pref_defaultNavigationTool));
         assert tool1 != null;
         setToolSummary(tool1, Settings.getDefaultNavigationTool());
         tool1.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -50,7 +50,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
             return true;
         });
 
-        final Preference tool2 = findPreference(LocalizationUtils.getString(R.string.pref_defaultNavigationTool2));
+        final Preference tool2 = findPreference(getString(R.string.pref_defaultNavigationTool2));
         assert tool2 != null;
         setToolSummary(tool2, Settings.getDefaultNavigationTool2());
         tool2.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -81,17 +81,17 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
             values[i] = String.valueOf(apps.get(i).id);
         }
 
-        final ListPreference defaultNavigationTool = findPreference(LocalizationUtils.getString(R.string.pref_defaultNavigationTool));
+        final ListPreference defaultNavigationTool = findPreference(getString(R.string.pref_defaultNavigationTool));
         defaultNavigationTool.setEntries(entries);
         defaultNavigationTool.setEntryValues(values);
-        final ListPreference defaultNavigationTool2 = findPreference(LocalizationUtils.getString(R.string.pref_defaultNavigationTool2));
+        final ListPreference defaultNavigationTool2 = findPreference(getString(R.string.pref_defaultNavigationTool2));
         defaultNavigationTool2.setEntries(entries);
         defaultNavigationTool2.setEntryValues(values);
     }
 
     private void initOfflineRoutingPreferences() {
         DefaultFilesUtils.checkDefaultFiles();
-        PreferenceUtils.setOnPreferenceChangeListener(findPreference(LocalizationUtils.getString(R.string.pref_useInternalRouting)), (preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_useInternalRouting)), (preference, newValue) -> {
             updateRoutingPrefs(!Settings.useInternalRouting());
             return true;
         });
@@ -150,7 +150,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(LocalizationUtils.getString(R.string.package_brouter));
-        PreferenceUtils.setEnabled(findPreference(LocalizationUtils.getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
-        PreferenceUtils.setEnabled(findPreference(LocalizationUtils.getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
     }
 }

@@ -23,7 +23,7 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
         final CharSequence[] languageNames = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::toString).toArray(CharSequence[]::new);
         final CharSequence[] languageCodes = OfflineTranslateUtils.getSupportedLanguages().stream().map(OfflineTranslateUtils.Language::getCode).toArray(CharSequence[]::new);
 
-        final ListPreference translateTargetLngPref = findPreference(LocalizationUtils.getString(R.string.pref_translation_language));
+        final ListPreference translateTargetLngPref = findPreference(getString(R.string.pref_translation_language));
         translateTargetLngPref.setEntries(ArrayUtils.insert(0, languageNames, LocalizationUtils.getString(R.string.translator_preference_disable), LocalizationUtils.getString(R.string.translator_preference_application_language)));
         translateTargetLngPref.setEntryValues(ArrayUtils.insert(0, languageCodes, OfflineTranslateUtils.LANGUAGE_INVALID, OfflineTranslateUtils.LANGUAGE_AUTOMATIC));
         translateTargetLngPref.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -38,7 +38,7 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
             translateTargetLngPref.setValue(rawCode);
         }
 
-        final MultiSelectListPreference noTranslateLngs = findPreference(LocalizationUtils.getString(R.string.pref_translation_notranslate));
+        final MultiSelectListPreference noTranslateLngs = findPreference(getString(R.string.pref_translation_notranslate));
         noTranslateLngs.setEntries(languageNames);
         noTranslateLngs.setEntryValues(languageCodes);
     }
