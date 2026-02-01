@@ -102,7 +102,8 @@ allprojects {
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
                 force 'com.google.guava:guava:26.0-jre'
                 // OkHttp 4.10.0+ uses Kotlin multiplatform which has variant resolution issues with AGP 9.0
-                force 'com.squareup.okhttp3:okhttp:4.9.3'
+                // Even 4.9.3 has KMP. Using 4.9.1 which is pure JVM
+                force 'com.squareup.okhttp3:okhttp:4.9.1'
             }
         }
     }

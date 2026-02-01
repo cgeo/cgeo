@@ -432,7 +432,7 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.19.0'
 
-    String okhttpVersion = '4.9.3'  // 4.10.0+ uses Kotlin multiplatform which has issues with AGP 9.0
+    String okhttpVersion = '4.9.1'  // 4.9.2+ uses Kotlin multiplatform which has issues with AGP 9.0
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
@@ -502,7 +502,8 @@ dependencies {
     implementation 'androidx.core:core-location-altitude:1.0.0-alpha03'
 
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.9.1'
+    // Using 1.8.2 - last version before Kotlin Multiplatform (1.9.0+ has KMP variant issues with AGP 9.0)
+    String annotationVersion = '1.8.2'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
