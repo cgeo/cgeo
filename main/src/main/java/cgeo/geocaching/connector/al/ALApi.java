@@ -343,7 +343,7 @@ final class ALApi {
                 
                 // Embed image in note HTML if present
                 if (StringUtils.isNotBlank(ilink)) {
-                    note.append("<img src=\"").append(ilink).append("\"></img><p><p>");
+                    note.append("<img src=\"").append(ilink).append("\"/><p></p>");
                 }
                 
                 note.append(desc);
