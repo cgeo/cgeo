@@ -56,7 +56,8 @@ public class FormulaUtils {
 
 
     private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9\\s°'\".,()\\[\\]" + F_OPS + "]";
-    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "([a-zA-Z]{0,3}" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+";
+    // Use lazy quantifier and lookahead to prevent matching across multiple coordinates
+    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "([a-zA-Z]{0,3}" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+?(?=\\s+[nNsSeEwWoO](?:\\h*[0-9]|\\h+[A-Za-z])|$)";
     private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
             "(?<lat>[nNsS](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\s*([a-zA-Z,()-]{2,}\\s+){0,3}(?<lon>[eEwWoO](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );

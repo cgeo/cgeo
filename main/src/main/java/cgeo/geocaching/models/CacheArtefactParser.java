@@ -60,8 +60,10 @@ public class CacheArtefactParser {
     //Constants for variable parsing
 
     private static final String PARSING_VAR_LETTERS_FULL = "\\$([a-zA-Z][a-zA-Z0-9]*)\\s*=([^\\n|]*)[\\n|]";
+    // Newline-terminated pattern: accepts formulas without $ prefix when ending with newline
+    private static final String PARSING_VAR_LETTERS_FORMULA = "[^A-Za-z0-9]([A-Za-z]+)\\s*=\\s*([^\\n|,]+?)[\\n|]";
     private static final String PARSING_VAR_LETTERS_NUMERIC = "[^A-Za-z0-9]([A-Za-z]+)\\s*=\\s*([0-9]+(?:[,.][0-9]+)?)[^0-9]";
-    private static final Pattern PARSING_VARS = Pattern.compile(PARSING_VAR_LETTERS_FULL + "|" + PARSING_VAR_LETTERS_NUMERIC);
+    private static final Pattern PARSING_VARS = Pattern.compile(PARSING_VAR_LETTERS_FULL + "|" + PARSING_VAR_LETTERS_FORMULA + "|" + PARSING_VAR_LETTERS_NUMERIC);
 
     //general members
     private final Geocache cache;
@@ -514,7 +516,8 @@ public class CacheArtefactParser {
         final Matcher matcher = PARSING_VARS.matcher(text);
         int pos = 0;
         while (matcher.find(pos)) {
-            final int group = matcher.group(1) == null ? 3 : 1;
+            // Determine which pattern matched: FULL (groups 1-2), FORMULA (groups 3-4), or NUMERIC (groups 5-6)
+            final int group = matcher.group(1) != null ? 1 : (matcher.group(3) != null ? 3 : 5);
             final String varName = matcher.group(group);
             final String value = matcher.group(group + 1);
             pos = matcher.end(group + 1);
