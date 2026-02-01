@@ -169,6 +169,85 @@ public class TypeGeocacheFilterTest {
         assertThat(filter.getRawValues()).doesNotContain(CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.BLOCK_PARTY);
     }
 
+    @Test
+    public void filterAPIResultsWhenOnlyCommunCelebrationSelected() {
+        // Test that when COMMUN_CELEBRATION is sent to API (which expands to all special events),
+        // the filter() method properly filters the results to show only COMMUN_CELEBRATION events
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select only COMMUN_CELEBRATION
+        final Set<CacheType> onlyCommunCeleb = new HashSet<>();
+        onlyCommunCeleb.add(CacheType.COMMUN_CELEBRATION);
+        filter.setSelectedSpecialEventTypes(onlyCommunCeleb);
+        
+        // Verify getRawValues sends COMMUN_CELEBRATION to API
+        assertThat(filter.getRawValues()).contains(CacheType.COMMUN_CELEBRATION);
+        
+        // Simulate API returning all special event types (which happens when COMMUN_CELEBRATION is sent)
+        // The filter should accept only COMMUN_CELEBRATION and reject the others
+        
+        // COMMUN_CELEBRATION cache should match
+        final Geocache communCelebCache = new Geocache();
+        communCelebCache.setType(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.filter(communCelebCache)).as("COMMUN_CELEBRATION should match").isTrue();
+        
+        // Other special event types returned by API should NOT match
+        final Geocache megaEventCache = new Geocache();
+        megaEventCache.setType(CacheType.MEGA_EVENT);
+        assertThat(filter.filter(megaEventCache)).as("MEGA_EVENT should be filtered out").isFalse();
+        
+        final Geocache gigaEventCache = new Geocache();
+        gigaEventCache.setType(CacheType.GIGA_EVENT);
+        assertThat(filter.filter(gigaEventCache)).as("GIGA_EVENT should be filtered out").isFalse();
+        
+        final Geocache blockPartyCache = new Geocache();
+        blockPartyCache.setType(CacheType.BLOCK_PARTY);
+        assertThat(filter.filter(blockPartyCache)).as("BLOCK_PARTY should be filtered out").isFalse();
+        
+        final Geocache gchqCelebCache = new Geocache();
+        gchqCelebCache.setType(CacheType.GCHQ_CELEBRATION);
+        assertThat(filter.filter(gchqCelebCache)).as("GCHQ_CELEBRATION should be filtered out").isFalse();
+        
+        final Geocache gpsExhibitCache = new Geocache();
+        gpsExhibitCache.setType(CacheType.GPS_EXHIBIT);
+        assertThat(filter.filter(gpsExhibitCache)).as("GPS_EXHIBIT should be filtered out").isFalse();
+    }
+
+    @Test
+    public void filterAPIResultsWhenPartialSelectionIncludesCommunCelebration() {
+        // Test that when COMMUN_CELEBRATION + MEGA_EVENT are selected,
+        // the filter properly accepts both (even though COMMUN_CELEBRATION is excluded from API request)
+        final TypeGeocacheFilter filter = new TypeGeocacheFilter();
+        
+        // Select COMMUN_CELEBRATION and MEGA_EVENT
+        final Set<CacheType> partialSelection = new HashSet<>();
+        partialSelection.add(CacheType.COMMUN_CELEBRATION);
+        partialSelection.add(CacheType.MEGA_EVENT);
+        filter.setSelectedSpecialEventTypes(partialSelection);
+        
+        // Verify COMMUN_CELEBRATION is excluded from getRawValues to prevent API expansion
+        assertThat(filter.getRawValues()).contains(CacheType.MEGA_EVENT);
+        assertThat(filter.getRawValues()).doesNotContain(CacheType.COMMUN_CELEBRATION);
+        
+        // The filter should accept both COMMUN_CELEBRATION and MEGA_EVENT
+        final Geocache communCelebCache = new Geocache();
+        communCelebCache.setType(CacheType.COMMUN_CELEBRATION);
+        assertThat(filter.filter(communCelebCache)).as("COMMUN_CELEBRATION should match").isTrue();
+        
+        final Geocache megaEventCache = new Geocache();
+        megaEventCache.setType(CacheType.MEGA_EVENT);
+        assertThat(filter.filter(megaEventCache)).as("MEGA_EVENT should match").isTrue();
+        
+        // Other special event types should NOT match
+        final Geocache gigaEventCache = new Geocache();
+        gigaEventCache.setType(CacheType.GIGA_EVENT);
+        assertThat(filter.filter(gigaEventCache)).as("GIGA_EVENT should be filtered out").isFalse();
+        
+        final Geocache blockPartyCache = new Geocache();
+        blockPartyCache.setType(CacheType.BLOCK_PARTY);
+        assertThat(filter.filter(blockPartyCache)).as("BLOCK_PARTY should be filtered out").isFalse();
+    }
+
     private void singleType(final Action1<Geocache> cacheSetter, final Action1<TypeGeocacheFilter> filterSetter, final Boolean expectedResult) {
         GeocacheFilterTestUtils.testSingle(GeocacheFilterType.TYPE, cacheSetter, filterSetter, expectedResult);
     }
