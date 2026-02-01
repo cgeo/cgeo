@@ -329,15 +329,30 @@ public class FormulaUtils {
      */
     private static boolean containsMultipleCoordinates(final String lat, final String lon) {
         // Count N/S in latitude (should have exactly 1 at the start)
-        final long latNSCount = lat.chars().filter(c -> c == 'N' || c == 'n' || c == 'S' || c == 's').count();
+        final long latNSCount = countDirectionIndicators(lat, 'N', 'S');
         // Count E/W/O in longitude (should have exactly 1 at the start)
-        final long lonEWCount = lon.chars().filter(c -> c == 'E' || c == 'e' || c == 'W' || c == 'w' || c == 'O' || c == 'o').count();
+        final long lonEWCount = countDirectionIndicators(lon, 'E', 'W', 'O');
         
         // Also check if latitude contains E/W/O or longitude contains N/S (cross-contamination)
-        final long latEWCount = lat.chars().filter(c -> c == 'E' || c == 'e' || c == 'W' || c == 'w' || c == 'O' || c == 'o').count();
-        final long lonNSCount = lon.chars().filter(c -> c == 'N' || c == 'n' || c == 'S' || c == 's').count();
+        final long latEWCount = countDirectionIndicators(lat, 'E', 'W', 'O');
+        final long lonNSCount = countDirectionIndicators(lon, 'N', 'S');
         
         return latNSCount > 1 || lonEWCount > 1 || latEWCount > 0 || lonNSCount > 0;
+    }
+    
+    /**
+     * Counts occurrences of specified direction indicators (case-insensitive).
+     */
+    private static long countDirectionIndicators(final String text, final char... indicators) {
+        return text.chars().filter(c -> {
+            final char upper = Character.toUpperCase((char) c);
+            for (char indicator : indicators) {
+                if (upper == Character.toUpperCase(indicator)) {
+                    return true;
+                }
+            }
+            return false;
+        }).count();
     }
     
     /**
@@ -353,62 +368,92 @@ public class FormulaUtils {
         final StringBuilder buffer = new StringBuilder();
         
         for (String line : lines) {
-            // Check if this line might contain multiple coordinates
-            // by looking for multiple latitude indicators (N/S followed by digit or space+letter)
-            final Pattern latStartPattern = Pattern.compile("[nNsS](?:\\h*[0-9]|\\h+[A-Za-z])");
-            final Matcher latMatcher = latStartPattern.matcher(line);
-            final List<Integer> latStarts = new ArrayList<>();
-            
-            while (latMatcher.find()) {
-                latStarts.add(latMatcher.start());
-            }
-            
-            // If multiple latitude starts found, split the line
-            if (latStarts.size() > 1) {
-                // Process any buffered content first
-                if (buffer.length() > 0) {
-                    scanSingleSegment(buffer.toString(), result, resultSet);
-                    buffer.setLength(0);
-                }
-                
-                // Split and process each segment
-                for (int i = 0; i < latStarts.size(); i++) {
-                    final int start = latStarts.get(i);
-                    final int end = (i + 1 < latStarts.size()) ? latStarts.get(i + 1) : line.length();
-                    final String segment = line.substring(start, end);
-                    scanSingleSegment(segment, result, resultSet);
-                }
-            } else {
-                // Single or no lat start - use buffering approach
-                if (buffer.length() > 0) {
-                    buffer.append(" ");
-                }
-                buffer.append(line);
-                
-                // Try to match coordinate in buffered content
-                final String text = preprocessScanText(buffer.toString());
-                final Matcher m = COORDINATE_SCAN_PATTERN.matcher(" " + text + " ");
-                
-                if (m.find()) {
-                    // Found a coordinate - process it
-                    final String lat = m.group(1);
-                    final String lon = m.group(5);
-                    final String latProcessed = processFoundDegree(lat);
-                    final String lonProcessed = processFoundDegree(lon);
-                    final String key = pairToKey(latProcessed, lonProcessed);
-                    
-                    if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
-                        result.add(new Pair<>(latProcessed, lonProcessed));
-                    }
-                    
-                    // Clear buffer for next coordinate
-                    buffer.setLength(0);
-                }
-                // If no match, keep buffering (for multi-line coordinates)
-            }
+            processLineForCoordinates(line, buffer, result, resultSet);
         }
         
         return result;
+    }
+    
+    /**
+     * Processes a single line for coordinates, either splitting it or buffering it.
+     */
+    private static void processLineForCoordinates(final String line, final StringBuilder buffer, 
+                                                   final List<Pair<String, String>> result, final Set<String> resultSet) {
+        final List<Integer> latStarts = findLatitudeStarts(line);
+        
+        if (latStarts.size() > 1) {
+            processMultipleCoordinatesOnLine(line, latStarts, buffer, result, resultSet);
+        } else {
+            processSingleCoordinateWithBuffering(line, buffer, result, resultSet);
+        }
+    }
+    
+    /**
+     * Finds all latitude start positions in a line.
+     */
+    private static List<Integer> findLatitudeStarts(final String line) {
+        final Pattern latStartPattern = Pattern.compile("[nNsS](?:\\h*[0-9]|\\h+[A-Za-z])");
+        final Matcher latMatcher = latStartPattern.matcher(line);
+        final List<Integer> latStarts = new ArrayList<>();
+        
+        while (latMatcher.find()) {
+            latStarts.add(latMatcher.start());
+        }
+        
+        return latStarts;
+    }
+    
+    /**
+     * Processes a line containing multiple coordinates by splitting it.
+     */
+    private static void processMultipleCoordinatesOnLine(final String line, final List<Integer> latStarts,
+                                                          final StringBuilder buffer, final List<Pair<String, String>> result,
+                                                          final Set<String> resultSet) {
+        // Process any buffered content first
+        if (buffer.length() > 0) {
+            scanSingleSegment(buffer.toString(), result, resultSet);
+            buffer.setLength(0);
+        }
+        
+        // Split and process each segment
+        for (int i = 0; i < latStarts.size(); i++) {
+            final int start = latStarts.get(i);
+            final int end = (i + 1 < latStarts.size()) ? latStarts.get(i + 1) : line.length();
+            final String segment = line.substring(start, end);
+            scanSingleSegment(segment, result, resultSet);
+        }
+    }
+    
+    /**
+     * Processes a line that might be part of a multi-line coordinate using buffering.
+     */
+    private static void processSingleCoordinateWithBuffering(final String line, final StringBuilder buffer,
+                                                              final List<Pair<String, String>> result, final Set<String> resultSet) {
+        if (buffer.length() > 0) {
+            buffer.append(" ");
+        }
+        buffer.append(line);
+        
+        // Try to match coordinate in buffered content
+        final String text = preprocessScanText(buffer.toString());
+        final Matcher m = COORDINATE_SCAN_PATTERN.matcher(" " + text + " ");
+        
+        if (m.find()) {
+            // Found a coordinate - process it
+            final String lat = m.group(1);
+            final String lon = m.group(5);
+            final String latProcessed = processFoundDegree(lat);
+            final String lonProcessed = processFoundDegree(lon);
+            final String key = pairToKey(latProcessed, lonProcessed);
+            
+            if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
+                result.add(new Pair<>(latProcessed, lonProcessed));
+            }
+            
+            // Clear buffer for next coordinate
+            buffer.setLength(0);
+        }
+        // If no match, keep buffering (for multi-line coordinates)
     }
     
     /**
