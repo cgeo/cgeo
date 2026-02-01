@@ -2,8 +2,10 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -29,17 +31,37 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         this.handler = handler;
     }
 
+    public void showDeleteAllDialogsAndExecute() {
+        final Collection<Geocache> caches = getCaches();
+
+        // Check if deleting all caches
+        if (caches.size() == PseudoList.ALL_LIST.getNumberOfCaches()) {
+            SimpleDialog.of(getContext())
+                    .setTitle(R.string.command_delete_caches_progress)
+                    .setMessage(R.string.caches_warning_delete_all_caches)
+                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+                    .confirm(this::execute);
+        } else {
+            execute();
+        }
+    }
+
     @Override
     protected void doCommand() {
-        final Set<String> geocodes = Geocache.getGeocodes(getCaches());
-        oldCachesLists.putAll(DataStore.markDropped(getCaches()));
+        final Collection<Geocache> caches = getCaches();
+
+        oldCachesLists.putAll(DataStore.markDropped(caches));
+
+        final Set<String> geocodes = Geocache.getGeocodes(caches);
         DataStore.removeCaches(geocodes, EnumSet.of(LoadFlags.RemoveFlag.CACHE));
     }
 
     @Override
     @SuppressWarnings("unused")
     protected void undoCommand() {
-        DataStore.addToLists(getCaches(), oldCachesLists);
+        final Collection<Geocache> caches = getCaches();
+
+        DataStore.addToLists(caches, oldCachesLists);
     }
 
     @Override
