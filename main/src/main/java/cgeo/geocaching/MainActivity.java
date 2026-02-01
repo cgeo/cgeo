@@ -48,6 +48,7 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
@@ -463,6 +464,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             // initialize menu items
             menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk());
             menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
+            menu.findItem(R.id.menu_download_language).setEnabled(!TranslateAccessor.get().getSupportedLanguages().isEmpty());
 
             final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();
             menu.findItem(R.id.menu_pocket_queries).setVisible(isPremiumActive);
