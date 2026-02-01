@@ -339,9 +339,14 @@ final class ALApi {
                 wpt.setPrefix(String.valueOf(stageCounter));
                 wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
-                wpt.setImage(ilink);
-
-                final StringBuilder note = new StringBuilder(desc);
+                final StringBuilder note = new StringBuilder();
+                
+                // Embed image in note HTML if present
+                if (StringUtils.isNotBlank(ilink)) {
+                    note.append("<img src=\"").append(ilink).append("\"></img><p><p>");
+                }
+                
+                note.append(desc);
 
                 if (Settings.isALCAdvanced()) {
                     note.append("<p><p>").append(wptResponse.get("Question").asText());

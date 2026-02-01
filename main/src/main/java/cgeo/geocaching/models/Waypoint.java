@@ -10,9 +10,7 @@ import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextParser;
@@ -21,9 +19,6 @@ import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
 import static cgeo.geocaching.models.Image.ImageCategory.WAYPOINT;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
-
-import android.graphics.drawable.BitmapDrawable;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,7 +37,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -73,10 +67,6 @@ public class Waypoint implements INamedGeoCoordinate {
     private Geopoint preprojectedCoords = null;
     @Nullable
     private Float geofence; // radius in meters
-    @Nullable
-    String image;
-    @Nullable
-    Image modelImage;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -180,8 +170,6 @@ public class Waypoint implements INamedGeoCoordinate {
             projectionFormula2 = old.projectionFormula2;
             projectionDistanceUnit = old.projectionDistanceUnit;
         }
-
-        image = old.image;
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -344,43 +332,21 @@ public class Waypoint implements INamedGeoCoordinate {
         this.geofence = geofence;
     }
 
-
-    @Nullable
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(@Nullable final String image) {
-        this.image = image;
-    }
-
     @Nullable
     public Image buildImage() {
-        if (image != null && modelImage == null) {
-            modelImage = new Image.Builder()
-                .setUrl(image)
-                .setTitle(name)
-                .setDescription(note)
-                .setCategory(WAYPOINT)
-                .build();
+        if (StringUtils.isBlank(note)) {
+            return null;
         }
-        return modelImage;
-    }
-
-    public void fetchImage(final View view) {
-        if (view == null) {
-            return;
-        }
-
-        parentCache = this.getParentGeocache();
-        final String geocode = parentCache == null ? "" : parentCache.getGeocode();
-
-        final HtmlImage htmlImage = new HtmlImage(geocode, true, false, false);
-        final Observable<BitmapDrawable> observable = htmlImage.fetchDrawable(getImage());
-        final BitmapDrawable drawable = observable.blockingFirst();
-
-        final ImageParam image = ImageParam.drawable(drawable);
-        image.applyTo(view.findViewById(R.id.waypoint_item_image));
+        // Extract first image from note HTML
+        final List<Image> images = cgeo.geocaching.utils.ImageUtils.getImagesFromHtml(
+            (url, builder) -> {
+                builder.setTitle(name);
+                builder.setDescription(note);
+                builder.setCategory(WAYPOINT);
+            },
+            note
+        );
+        return images.isEmpty() ? null : images.get(0);
     }
 
     public void setCoords(final Geopoint coords) {
