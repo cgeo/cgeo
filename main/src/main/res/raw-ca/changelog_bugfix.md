@@ -10,7 +10,7 @@
 - Correcció: No es mostra el mapa si wherigo no té zones visibles
 - Correcció: Error a la pestanya d'imatge dels detalls de catxé en determinades condicions
 - Correcció: Cerques de mapes amb coordenades no vàlides
-- Fix: Some translations do not respect c:geo-internal language setting
+- Correcció: Algunes traduccions no respecten la configuració d'idioma c:geo-intern
 
 ##
 - Canvi: UnifiedMap s'ha definit com a mapa predeterminat per a tothom (com a part del nostre full de ruta cap a UnifiedMap). Podeu tornar a canviar a "configuració" - "fonts del mapa" de moment. L'eliminació dels mapes antics està prevista per a la primavera del 2026 a les nostres versions habituals.

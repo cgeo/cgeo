@@ -154,8 +154,8 @@ public final class WherigoUtils {
 
     public static List<EventTable> getActionTargets(final Action action) {
         final List<Thing> targets = new ArrayList<>();
-        targets.addAll(WherigoGame.GET.getItems());
-        targets.addAll(WherigoGame.GET.getInventory());
+        targets.addAll(WherigoGame.get().getItems());
+        targets.addAll(WherigoGame.get().getInventory());
         return targets.stream().filter(t -> t.isVisible() && action.isTarget(t)).collect(Collectors.toList());
     }
 
@@ -183,8 +183,8 @@ public final class WherigoUtils {
             builder.add(WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points)));
         }
         if (includeCartridgeLocation) {
-            builder.add(WherigoGame.GET.getCartridgeInfo() == null ? null :
-                WherigoGame.GET.getCartridgeInfo().getCartridgeLocation());
+            builder.add(WherigoGame.get().getCartridgeInfo() == null ? null :
+                WherigoGame.get().getCartridgeInfo().getCartridgeLocation());
         }
         return builder.getViewport();
     }
@@ -326,7 +326,7 @@ public final class WherigoUtils {
     }
 
     public static void ensureNoGameRunning(final Activity activity, final Runnable runOnClosedGameOnly) {
-        if (!WherigoGame.GET.isPlaying()) {
+        if (!WherigoGame.get().isPlaying()) {
             if (runOnClosedGameOnly != null) {
                 runOnClosedGameOnly.run();
             }
@@ -334,19 +334,19 @@ public final class WherigoUtils {
         }
 
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_stop_running_game_title))
-            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.GET.getCartridgeName())).confirm(() -> {
+            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.get().getCartridgeName())).confirm(() -> {
                 if (runOnClosedGameOnly != null) {
 
                     //ensure that action is performed after game is REALLY stopped! -> add a listener to OpenWIG END notification
                     final int[] listenerId = new int[1];
-                    listenerId[0] = WherigoGame.GET.addListener(notifyType -> {
+                    listenerId[0] = WherigoGame.get().addListener(notifyType -> {
                         if (notifyType.equals(WherigoGame.NotifyType.END)) {
                             runOnClosedGameOnly.run();
-                            WherigoGame.GET.removeListener(listenerId[0]);
+                            WherigoGame.get().removeListener(listenerId[0]);
                         }
                     });
                 }
-                WherigoGame.GET.stopGame();
+                WherigoGame.get().stopGame();
             });
     }
 
@@ -453,11 +453,11 @@ public final class WherigoUtils {
 
         SimpleDialog.of(activity)
             .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
-            .selectSingle(model, s -> WherigoGame.GET.loadGame(cartridgeInfo.getFileInfo(), s));
+            .selectSingle(model, s -> WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s));
     }
 
     public static void saveGame(final Activity activity) {
-        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.GET.getCartridgeInfo();
+        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
         if (cartridgeInfo == null) {
             return;
         }
@@ -487,7 +487,7 @@ public final class WherigoUtils {
                     message = TextUtils.concat(message, "\n\n", TextUtils.setSpan(warningMessage, new StyleSpan(Typeface.BOLD)));
                 }
                 String initialValue = s.nameCustom;
-                final String geocode = WherigoGame.GET.getContextGeocode();
+                final String geocode = WherigoGame.get().getContextGeocode();
                 if (geocode != null && (initialValue == null || !initialValue.contains(geocode))) {
                     initialValue = geocode + (initialValue == null ? "" : " " + initialValue);
                 }
@@ -502,7 +502,7 @@ public final class WherigoUtils {
                             s.delete();
                         }
                         final WherigoSavegameInfo newSaveFile = WherigoSavegameInfo.getNewSavefile(s.cartridgeFileInfo, s.nameId, nameCustom);
-                        WherigoGame.GET.saveGame(newSaveFile);
+                        WherigoGame.get().saveGame(newSaveFile);
                     });
         });
     }
@@ -525,7 +525,7 @@ public final class WherigoUtils {
             return "--";
         }
         //translation
-        CharSequence name = WherigoGame.GET.toDisplayText(et.name);
+        CharSequence name = WherigoGame.get().toDisplayText(et.name);
         //special things for certain types of elements
         if (et instanceof Task) {
             switch (((Task) et).state()) {

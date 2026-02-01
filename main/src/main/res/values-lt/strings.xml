@@ -307,9 +307,6 @@
     <string name="dont_show_again">Daugiau neberodyti</string>
     <string name="tap_icon_more_info">Norėdami gauti daugiau informacijos, bakstelėkite piktogramą</string>
     <string name="use_slider_adjust_value">Norėdami sureguliuoti vertę, naudokite slankiklį</string>
-    <string name="warn_gm_not_available">Google Maps neprieinami.</string>
-    <string name="switch_to_mf">Jūsų Google Play Service pasenusi. Ar perjungti į Mapsforge žemėlapių tiekėją?</string>
-    <string name="switched_to_mf">Numatytasis žemėlapis perjungtas į Mapsforge žemėlapių teikėją. Iš naujo paleiskite žemėlapį dabar.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Pagrindinis</string>
     <!-- location service -->
@@ -1085,7 +1082,6 @@
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
     <string name="map_source_google_terrain">Google: Reljefas</string>
-    <string name="map_source_osm_offline">Neprisijungus</string>
     <string name="map_source_osm_offline_combined">Sujungtas (Neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio savybės</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
@@ -2185,7 +2181,6 @@
     <string name="map_manual_targets_cleared">Rankiniai tikslai išvalyti</string>
     <string name="map_clear_individual_route">Išvalyti asmeninį maršrutą</string>
     <string name="map_clear_individual_route_confirm">Ar norite pašalinti visas slėptuves/kelio taškus iš asmeninio maršruto?</string>
-    <string name="map_individual_route_cleared">Asmeninis maršrutas išvalytas</string>
     <string name="sorted_route_saved">Asmeninis maršrutas išsaugotas</string>
     <string name="load_individual_route_error">Klaida įkeliant asmeninį maršrutą</string>
     <string name="route_item_not_yet_loaded">Maršruto elementas dar neįkeltas</string>
@@ -2317,7 +2312,6 @@
     <string name="vtm_theme_variant">Temos variantai</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Išvalyti pėdsaką</string>
-    <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
     <string name="map_trail_show">Rodyti pėdsaką</string>
     <string name="map_trail_hide">Slėpti pėdsaką</string>
     <!-- history track export -->

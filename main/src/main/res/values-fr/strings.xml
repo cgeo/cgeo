@@ -195,7 +195,7 @@
     <string name="log_empty_logbook_filtered">Les filtres sélectionnés masquent tous les logs. Sélectionnez au moins une option.</string>
     <string name="log_image_selectfromstorage_tooltip">Sélectionner une image depuis le stockage</string>
     <string name="log_image_camera_tooltip">Prendre une photo avec l\'appareil photo</string>
-    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis images éxitantes</string>
+    <string name="log_image_selectfromown_tooltip">Sélectionner les images depuis ses propres images</string>
     <string name="log_inventory">Inventaire</string>
     <string name="log_problem_none">Aucun problème</string>
     <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
@@ -216,7 +216,7 @@
     <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
     <string name="log_delete_confirm">Voulez-vous vraiment supprimer le log de type \'%1$s\' par l\'auteur \'%2$s\' en date du \'%3$s \' ?</string>
-    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' avec en date du \'%2$s \' ?</string>
+    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' en date du \'%2$s \' ?</string>
     <string name="log_share_prefix_found">J\'ai trouvé %1$s (%2$s):\n\n</string>
     <string name="log_share_prefix_dnf">Je n\'ai pas pu trouver %1$s (%2$s) :\n\n</string>
     <string name="log_share_prefix_note">J\'ai laissé une note sur %1$s (%2$s) :\n\n</string>
@@ -343,9 +343,6 @@
     <string name="tap_icon_more_info">Appuyez sur l\'icône pour plus d\'informations</string>
     <string name="use_slider_adjust_value">Utiliser le curseur pour ajuster la valeur</string>
     <string name="snackbar_action_share">Partager</string>
-    <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
-    <string name="switch_to_mf">Votre version de Google Play Services est obsolète. Voulez-vous basculer vers les cartes Mapsforge ?</string>
-    <string name="switched_to_mf">Carte par défaut basculée à Mapsforge. Merci de redémarrer votre carte.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Basique</string>
     <string name="translator_preference_target_lng">Langue de traduction hors ligne</string>
@@ -1112,7 +1109,6 @@
     <string name="init_hillshading_hq">Ombrage de haute qualité</string>
     <string name="init_summary_hillshading_hq">Surcouche d\'ombrage du relief plus détaillée, mais ~50%% rendu plus lent lors du zoom arrière</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
-    <string name="init_mapsource_select_legacy">Sélectionner la source de la carte (ancienne version)</string>
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
@@ -1234,8 +1230,6 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Utiliser l\'ancienne carte</string>
-    <string name="init_summary_useLegacyMap">Utiliser les anciennes versions des cartes Google Map / Mapsforge (OSM) au lieu d\'UnifiedMap</string>
     <string name="category_unifiedMap">Carte unifiée</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
@@ -1257,7 +1251,6 @@
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_google_terrain">Google : Terrain</string>
-    <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="map_source_attribution_dialog_title">Crédits pour la carte</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
@@ -2433,7 +2426,6 @@
     <string name="map_manual_targets_cleared">Cibles manuelles supprimées</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
     <string name="map_clear_individual_route_confirm">Voulez-vous supprimer toutes les caches/points de passage de votre itinéraire individuel ?</string>
-    <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="sorted_route_saved">Itinéraire individuel sauvegardé</string>
     <string name="load_individual_route_error">Erreur lors du chargement de l\'itinéraire individuel</string>
     <string name="route_item_point">Point d\'itinéraire</string>
@@ -2600,7 +2592,6 @@
     <string name="vtm_theme_variant">Variante de thème</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
-    <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
     <string name="map_trail_show">Afficher l\'historique des parcours</string>
     <string name="map_trail_hide">Masquer l\'historique des parcours</string>
     <!-- history track export -->
@@ -2717,7 +2708,6 @@
     <string name="wherigo_toast_check_things">Cherino : vérifiez les changements pour votre %s</string>
     <string name="wherigo_otm_shortcuts_title">Raccourcis Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Si vous voulez utiliser c:geo Wherigo Player régulièrement, envisagez de créer un bouton de lancement rapide ou un lien de menu personnalisé dans Paramètres -&gt; Apparence</string>
-    <string name="wherigo_map_supported_for_unified_map_only">L\'affichage des emplacements Wherigo sur la carte n\'est pas pris en charge pour vos paramètres de carte. Veuillez passer à la carte unifiée dans Paramètres -&gt; Sources de Carte -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Précédent</string>
     <string name="skip">Passer</string>

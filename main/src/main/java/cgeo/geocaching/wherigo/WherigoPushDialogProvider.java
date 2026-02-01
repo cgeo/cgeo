@@ -90,13 +90,13 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         final String message = this.texts[pageDisplayed];
         final Media media = this.media == null || this.media.length == 0 ? null : (pageDisplayed >= this.media.length ? this.media[0] : this.media[pageDisplayed]);
 
-        binding.description.setText(WherigoGame.GET.toDisplayText(message));
+        binding.description.setText(WherigoGame.get().toDisplayText(message));
 
         if (media != null) {
             binding.media.setMedia(media);
         }
-        binding.debugBox.setVisibility(WherigoGame.GET.isDebugModeForCartridge() ? VISIBLE : GONE);
-        if (WherigoGame.GET.isDebugModeForCartridge()) {
+        binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? VISIBLE : GONE);
+        if (WherigoGame.get().isDebugModeForCartridge()) {
             //noinspection SetTextI18n (debug info only)
             binding.debugInfo.setText("Wherigo Dialog");
         }

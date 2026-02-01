@@ -355,9 +355,6 @@
     <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
     <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
     <string name="snackbar_action_share">Udostępnij</string>
-    <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
-    <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
-    <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Podstawowy</string>
     <string name="translator_preference_target_lng">Język tłumaczenia offline</string>
@@ -867,8 +864,6 @@
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
     <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
-    <string name="settings_vtm_background_transparent_title">Przezroczyste tło</string>
-    <string name="settings_vtm_background_transparent_summary">Pokaż przezroczyste tło map offline VTM (eksperymentalne)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -1077,8 +1072,6 @@
     <string name="settings_startscreen_title">Ekran domyślny</string>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
-    <string name="init_colored_theme">Kolorowy motyw</string>
-    <string name="init_summary_colored_theme">Użyj kolorowego motywu</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrytek, punktów nawigacji i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -1149,7 +1142,6 @@
     <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
     <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
-    <string name="init_mapsource_select_legacy">Wybierz źródło mapy (Legacy)</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
     <string name="init_map_directory_description">Folder z mapami offline</string>
@@ -1274,8 +1266,6 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
-    <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
     <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
@@ -1297,7 +1287,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
     <string name="map_source_google_terrain">Google: Teren</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_nomap">Brak mapy</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
@@ -1838,6 +1827,8 @@
     <string name="calccoord_guided_mode">Tryb z przewodnikiem</string>
     <string name="calccoord_guided_edit">Dotknij cyfry, aby edytować</string>
     <string name="calccoord_guided_value">Wartość</string>
+    <string name="calccoord_select_variable">Wybierz zmienną</string>
+    <string name="calccoord_new_variable">**%s** *(Nowa)*</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
@@ -2530,7 +2521,6 @@
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_clear_individual_route_confirm">Czy chcesz usunąć wszystkie skrytki/punkty nawigacji z Twojej trasy?</string>
-    <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <string name="sorted_route_saved">Indywidualna trasa zapisana</string>
     <string name="load_individual_route_error">Błąd ładowania indywidualnej trasy</string>
     <string name="route_item_point">Punkt trasy</string>
@@ -2701,7 +2691,6 @@
     <string name="vtm_theme_variant">Wariant motywu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię śladu</string>
-    <string name="map_trailhistory_cleared">Wyczyszczono historię śladu</string>
     <string name="map_trail_show">Pokaż historię śladu</string>
     <string name="map_trail_hide">Ukryj historię śladu</string>
     <!-- history track export -->
@@ -2818,7 +2807,6 @@
     <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
     <string name="wherigo_otm_shortcuts_title">Skróty Odtwarzacza Wherigo</string>
     <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać Odtwarzacz Wherigo w c:geo rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Wyświetlanie lokalizacji Wherigo na mapie nie jest obsługiwane dla twoich ustawień mapy. Proszę przełączyć się na ujednoliconą mapę w Ustawieniach -&gt; Źródła map -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
     <string name="skip">Pomiń</string>

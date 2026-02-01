@@ -12,19 +12,7 @@ android {
 
     defaultConfig {
         minSdk = 26
-    }
-
-    buildTypes {
-        debug {
-        }
-        legacy {
-        }
-        nightly {
-        }
-        rc {
-        }
-        release {
-        }
+        targetSdk = 35
     }
 
     sourceSets.main {
@@ -39,14 +27,10 @@ android {
 
         // abort release builds in case of FATAL errors
         checkReleaseBuilds = true
-        targetSdk 35
     }
 
     dependencies {
         // Android annotations
         implementation 'androidx.annotation:annotation:1.9.1'
-    }
-    testOptions {
-        targetSdk 35
     }
 }

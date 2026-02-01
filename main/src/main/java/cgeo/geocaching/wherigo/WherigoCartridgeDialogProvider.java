@@ -55,7 +55,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
         final List<WherigoSavegameInfo> saveGames = WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo());
 
-        binding.description.setText(WherigoGame.GET.toDisplayText(cartridgeFile.description));
+        binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
         //following info is debug -> no translation needed
         TextParam.text("- **CGUID:** " + cartridgeInfo.getCGuid() + "\n" +
             "- **Device:** " + cartridgeFile.device + "\n" +
@@ -65,7 +65,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             "- **Save Games** " + saveGames.size() + " (" + saveGames + ")\n" +
             "- **C:** " + cartridgeFile.code + "\n" +
             "- **Url:** " + cartridgeFile.url + "\n").setMarkdown(true).applyTo(binding.debugInfo);
-            binding.debugBox.setVisibility(WherigoGame.GET.isDebugMode() ? View.VISIBLE : View.GONE);
+            binding.debugBox.setVisibility(WherigoGame.get().isDebugMode() ? View.VISIBLE : View.GONE);
 
         byte[] mediaData = cartridgeInfo.getSplashData();
         if (mediaData == null) {
@@ -79,7 +79,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             TranslationUtils.prepareForTranslation(cartridgeFile.name, cartridgeFile.description));
 
 
-        binding.description.setText(WherigoGame.GET.toDisplayText(cartridgeFile.description));
+        binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
 
         refreshGui(binding);
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
@@ -134,7 +134,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         final List<WherigoSavegameInfo> loadGameList = WherigoSavegameInfo.getLoadableSavegames(this.cartridgeInfo.getFileInfo());
         if (loadGameList.size() == 1 && loadGameList.get(0).isNewGame()) {
             //no savegames present --> just start a new game
-            WherigoGame.GET.newGame(cartridgeInfo.getFileInfo());
+            WherigoGame.get().newGame(cartridgeInfo.getFileInfo());
             return;
         }
 

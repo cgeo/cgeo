@@ -30,7 +30,7 @@ public class WherigoLayer {
 
     private WherigoLayer() {
         //singleton
-        WherigoGame.GET.addListener(type -> {
+        WherigoGame.get().addListener(type -> {
             if (type == WherigoGame.NotifyType.START || type == WherigoGame.NotifyType.REFRESH || type == WherigoGame.NotifyType.END) {
                 refresh();
             }
@@ -67,7 +67,7 @@ public class WherigoLayer {
 
     private void addAllWherigoElements() {
         if (this.currentLayer != null) {
-            final List<Zone> zones = WherigoGame.GET.getZones();
+            final List<Zone> zones = WherigoGame.get().getZones();
             for (Zone zone : zones) {
                 final GeoItem zoneItem = zoneToGeoItem(zone);
                 if (zoneItem != null) {
@@ -82,7 +82,7 @@ public class WherigoLayer {
     }
 
     private GeoItem zoneToGeoItem(final Zone zone) {
-        if (zone == null || (!WherigoGame.GET.isDebugModeForCartridge() && !WherigoUtils.isVisibleToPlayer(zone))) {
+        if (zone == null || (!WherigoGame.get().isDebugModeForCartridge() && !WherigoUtils.isVisibleToPlayer(zone))) {
             return null;
         }
 

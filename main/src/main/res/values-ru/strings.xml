@@ -355,9 +355,6 @@
     <string name="tap_icon_more_info">Нажмите на иконку для подробностей</string>
     <string name="use_slider_adjust_value">Используйте ползунок для настройки значения</string>
     <string name="snackbar_action_share">Поделиться</string>
-    <string name="warn_gm_not_available">Карты Google недоступны.</string>
-    <string name="switch_to_mf">Ваш Google Play устарел. Хотите перейти на карты от Mapsforge?</string>
-    <string name="switched_to_mf">Карта по умолчанию переключена на Mapsforge. Перезапустите карту.</string>
     <string name="gc_premium">Премиум</string>
     <string name="gc_basic">Базовый</string>
     <string name="translator_preference_target_lng">Язык офлайн-перевода</string>
@@ -865,8 +862,6 @@
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
     <string name="settings_hide_tileproviders_summary">Исключить один или несколько источников карты из выбора источника карты</string>
     <string name="settings_unifiedMapVariants_title">Варианты ЕдинойКарты</string>
-    <string name="settings_vtm_background_transparent_title">Прозрачный фон</string>
-    <string name="settings_vtm_background_transparent_summary">Показывать фон оффлайн-карт VTM прозрачным (экспериментально)</string>
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
     <string name="settings_userDefinedTileProviderUri">Введите полный URI-адрес (без косой черты) поставщика плиток карт или введите полный URI-адрес с параметрами (включая {X}, {Y} и {Z}). Убедитесь, что вы проверили условия использования этих карт и соблюдаете их.</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
@@ -1076,8 +1071,6 @@
     <string name="settings_startscreen_title">Экран по умолчанию</string>
     <string name="init_wallpaper">Обои</string>
     <string name="init_summary_wallpaper">Использовать обои устройства в качестве фона на главном экране</string>
-    <string name="init_colored_theme">Цветная тема</string>
-    <string name="init_summary_colored_theme">Использовать цветную тему</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Создание резервных копий</string>
     <string name="init_backup_summary">Резервные копии сохраняют тексты тайников, точки и настройки приложения. Фотографии тайников НЕ будут сохранены.\nЧтобы восстановить данные даже после потери телефона, вам необходимо скопировать резервные копии на независимый носитель или другой телефон.</string>
@@ -1148,7 +1141,6 @@
     <string name="init_hillshading_hq">Высококачественное затенение высот</string>
     <string name="init_summary_hillshading_hq">Более детальное наложение теней высот, но на ~50% медленнее отрисовывается при уменьшении масштаба</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
-    <string name="init_mapsource_select_legacy">Выберите источник карты (Устаревший механизм)</string>
     <string name="init_local_file_system">Локальная файловая система</string>
     <string name="init_base_directory_description">\"Основная\" папка для публичных данных</string>
     <string name="init_map_directory_description">Папка с офлайн-картами</string>
@@ -1270,8 +1262,6 @@
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
-    <string name="init_title_useLegacyMap">Использовать устаревший вариант карт</string>
-    <string name="init_summary_useLegacyMap">Использовать старые версии Google Map / Mapsforge (OSM) карт вместо ЕдинойКарты</string>
     <string name="category_unifiedMap">ЕдинаяКарта</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
     <string name="localstorage_migrate_status_major">Версия %1$d</string>
@@ -1293,7 +1283,6 @@
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
     <string name="map_source_google_terrain">Google: ландшафт</string>
-    <string name="map_source_osm_offline">Офлайн</string>
     <string name="map_source_osm_offline_combined">Совмещённые (офлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
     <string name="init_sendToCgeo">Отправить в c:geo</string>
@@ -2523,7 +2512,6 @@
     <string name="map_manual_targets_cleared">Ручные цели очищены</string>
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
-    <string name="map_individual_route_cleared">Индивидуальный маршрут очищен</string>
     <string name="sorted_route_saved">Личный маршрут сохранён</string>
     <string name="load_individual_route_error">Ошибка загрузки персонального маршрута</string>
     <string name="route_item_point">Точка маршрута</string>
@@ -2694,7 +2682,6 @@
     <string name="vtm_theme_variant">Вариация темы оформления</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистить историю трека</string>
-    <string name="map_trailhistory_cleared">История трека очищена</string>
     <string name="map_trail_show">Показать историю трека</string>
     <string name="map_trail_hide">Скрыть историю трека</string>
     <!-- history track export -->
@@ -2811,7 +2798,6 @@
     <string name="wherigo_toast_check_things">Wherigo: проверьте %s на наличие изменений</string>
     <string name="wherigo_otm_shortcuts_title">Ярлыки Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Если вы хотите регулярно использовать Wherigo Player в c:geo, подумайте о создании кнопки быстрого запуска или пользовательского пункта меню для него в разделе Настройки -&gt; Оформление</string>
-    <string name="wherigo_map_supported_for_unified_map_only">Отображение местоположений Wherigo на карте не поддерживается в настройках вашей карты. Пожалуйста, переключитесь на унифицированную карту в Настройки -&gt; Источники карт -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Назад</string>
     <string name="skip">Пропустить</string>

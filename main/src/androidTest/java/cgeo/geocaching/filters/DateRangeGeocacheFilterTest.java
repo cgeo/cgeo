@@ -7,9 +7,11 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -43,6 +45,48 @@ public class DateRangeGeocacheFilterTest {
 
         assertSingle(c -> c.setHidden(dDaySameLater), dd -> dd.setMinMaxDate(null, d), true);
         assertSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(dDaySameLater, null), true);
+    }
+
+    /**
+     * Test for issue #17633: Events at midnight today should be included when filtering
+     * from "today" onwards using relative dates.
+     */
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void relativeDateTodayIncludesEventAtMidnight() {
+        // Create event date at midnight today
+        final Date todayMidnight = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+
+        // Filter from today (offset 0) to far future
+        assertSingle(c -> c.setHidden(todayMidnight), dd -> dd.setRelativeMinMaxDays(0, Integer.MAX_VALUE), true);
+    }
+
+    /**
+     * Test that events yesterday are excluded when filtering from today onwards.
+     */
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void relativeDateTodayExcludesYesterday() {
+        // Create event date yesterday
+        final Date todayMidnight = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+        final Date yesterday = DateUtils.addDays(todayMidnight, -1);
+
+        // Filter from today (offset 0) to far future
+        assertSingle(c -> c.setHidden(yesterday), dd -> dd.setRelativeMinMaxDays(0, Integer.MAX_VALUE), false);
+    }
+
+    /**
+     * Test that events tomorrow are included when filtering from today onwards.
+     */
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void relativeDateTodayIncludesTomorrow() {
+        // Create event date tomorrow
+        final Date todayMidnight = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+        final Date tomorrow = DateUtils.addDays(todayMidnight, 1);
+
+        // Filter from today (offset 0) to far future
+        assertSingle(c -> c.setHidden(tomorrow), dd -> dd.setRelativeMinMaxDays(0, Integer.MAX_VALUE), true);
     }
 
     @Test

@@ -1,0 +1,7 @@
+-dontnote com.google.common.reflect.**
+-dontwarn org.assertj.**
+-dontwarn cgeo.geocaching.**
+-dontwarn android.test.**
+
+-keep class cgeo.test.** { *; }
+-keep class android.support.test.runner.** { *; }

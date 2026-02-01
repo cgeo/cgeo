@@ -1261,7 +1261,6 @@
     <!-- Download map preference and menu entry -->
     <!-- history track -->
     <string name="map_clear_trailhistory">Nyomvonal-előzmények törlése</string>
-    <string name="map_trailhistory_cleared">Nyomvonal-előzmények törölve</string>
     <string name="map_trail_show">Ösvény be</string>
     <!-- history track export -->
     <!-- individual route export -->

@@ -57,28 +57,28 @@ public class WherigoInfoBarView extends RelativeLayout {
 
         BadgeManager.get().setBadge(binding.wherigoResumeDialogText, false, -1);
 
-        wherigoListenerId = WherigoGame.GET.addListener(nt -> refreshBar());
-        wherigoAudioListenerId = WherigoGame.GET.getAudioManager().addListener(st -> refreshBar());
+        wherigoListenerId = WherigoGame.get().addListener(nt -> refreshBar());
+        wherigoAudioListenerId = WherigoGame.get().getAudioManager().addListener(st -> refreshBar());
         refreshBar();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        WherigoGame.GET.removeListener(wherigoListenerId);
-        WherigoGame.GET.getAudioManager().removeListener(wherigoAudioListenerId);
+        WherigoGame.get().removeListener(wherigoListenerId);
+        WherigoGame.get().getAudioManager().removeListener(wherigoAudioListenerId);
     }
 
     private void refreshBar() {
-        final boolean isVisible = WherigoGame.GET.isPlaying() && !(activity instanceof WherigoActivity);
-        final boolean showResume = WherigoGame.GET.dialogIsPaused();
-        final boolean showSong = WherigoGame.GET.getAudioManager().getState() != AudioManager.State.NO_SONG;
+        final boolean isVisible = WherigoGame.get().isPlaying() && !(activity instanceof WherigoActivity);
+        final boolean showResume = WherigoGame.get().dialogIsPaused();
+        final boolean showSong = WherigoGame.get().getAudioManager().getState() != AudioManager.State.NO_SONG;
         binding.wherigoInfoBox.setVisibility(isVisible ? VISIBLE : GONE);
         binding.wherigoAdditionalInfoBox.setVisibility(isVisible && (showResume || showSong) ? VISIBLE : GONE);
         if (!isVisible) {
             return;
         }
-        binding.wherigoInfoText.setText(WherigoGame.GET.getCartridgeName());
+        binding.wherigoInfoText.setText(WherigoGame.get().getCartridgeName());
 
         binding.wherigoResumeDialogIcon.setVisibility(showResume ? VISIBLE : GONE);
         binding.wherigoResumeDialogText.setVisibility(showResume ? VISIBLE : GONE);
@@ -86,7 +86,7 @@ public class WherigoInfoBarView extends RelativeLayout {
         binding.wherigoSongInfoText.setVisibility(showSong ? VISIBLE : GONE);
 
         if (showSong) {
-            binding.wherigoSongInfoText.setText(WherigoGame.GET.getAudioManager().getUserDisplayableShortState());
+            binding.wherigoSongInfoText.setText(WherigoGame.get().getAudioManager().getUserDisplayableShortState());
         }
     }
 
@@ -95,11 +95,11 @@ public class WherigoInfoBarView extends RelativeLayout {
     }
 
     private void onResumeDialogClick() {
-        WherigoGame.GET.unpauseDialog();
+        WherigoGame.get().unpauseDialog();
     }
 
     private void onSongInfoClick() {
-        final AudioManager audio = WherigoGame.GET.getAudioManager();
+        final AudioManager audio = WherigoGame.get().getAudioManager();
         switch (audio.getState()) {
             case PLAYING:
                 audio.pause();

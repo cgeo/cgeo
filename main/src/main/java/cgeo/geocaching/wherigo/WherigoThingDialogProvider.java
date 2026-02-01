@@ -98,18 +98,18 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private void refreshGui(final Activity activity, final IWherigoDialogControl control, final WherigoThingDetailsBinding binding) {
         TextParam.text(WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo, false, true);
-        binding.debugBox.setVisibility(WherigoGame.GET.isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
+        binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
         binding.headerInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
         if (eventTable instanceof Zone) {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
         //media
-        binding.media.setMedia((Media) eventTable.rawget("Media"));
+        binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
         //title
         control.setTitle(eventTable.name);
         //description
-        binding.description.setText(WherigoGame.GET.toDisplayText(eventTable.description));
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
@@ -120,13 +120,13 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         //"actions" will be filled with instance of both "Action" and "ThingAction"
         final List<Object> actions = new ArrayList<>();
         if (eventTable instanceof Thing) {
-            actions.addAll(WherigoUtils.getActions((Thing) eventTable, WherigoGame.GET.isDebugModeForCartridge()));
+            actions.addAll(WherigoUtils.getActions((Thing) eventTable, WherigoGame.get().isDebugModeForCartridge()));
         }
         if (eventTable instanceof Zone) {
             actions.add(ThingAction.DISPLAY_ON_MAP);
             actions.add(ThingAction.COMPASS);
             actions.add(ThingAction.COPY_CENTER);
-            if (WherigoGame.GET.isDebugModeForCartridge()) {
+            if (WherigoGame.get().isDebugModeForCartridge()) {
                 actions.add(ThingAction.LOCATE_ON_CENTER);
             }
         }

@@ -237,9 +237,6 @@
     <string name="more_information">weider Informatiounen</string>
     <string name="undo">Réckgängeg</string>
     <string name="dont_show_again">Net méi uweisen</string>
-    <string name="warn_gm_not_available">Google Maps ass net verfügbar.</string>
-    <string name="switch_to_mf">De Google Play Service ass veraltert. Wëlls du op Mapsforge Kaarten ëmschalten?</string>
-    <string name="switched_to_mf">D\'Standard Kaart gouf op d\'Mapsforge Kaart ëmgeschalt. D\'Kaart wgl. nees nei starten.</string>
     <!-- location service -->
     <string name="loc_last">Läscht Positioun</string>
     <string name="loc_net">Netzwierk</string>

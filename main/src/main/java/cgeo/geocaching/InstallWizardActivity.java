@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 
 public class InstallWizardActivity extends AbstractActivity {
@@ -39,7 +40,7 @@ public class InstallWizardActivity extends AbstractActivity {
     private static final String BUNDLE_CSAH = "csah";
     private static final String BUNDLE_BACKUPUTILS = "backuputils";
 
-    private static final boolean DO_LEGACY_WRITE_STORAGE = android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q; // < SDK29
+    private static final boolean DO_LEGACY_WRITE_STORAGE = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q; // < SDK29
 
     public enum WizardMode {
         WIZARDMODE_DEFAULT(0),
@@ -71,7 +72,7 @@ public class InstallWizardActivity extends AbstractActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
     private final PermissionAction<Void> askLegacyStoragePermissionAction = PermissionAction.register(this, PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE, b -> gotoNext());
-    private final PermissionAction<Void> askNotificationsPermissionAction = PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext());
+    private final PermissionAction<Void> askNotificationsPermissionAction = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext()) : null);
 
     // dialog elements
     private TextView title = null;
@@ -180,9 +181,11 @@ public class InstallWizardActivity extends AbstractActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLegacyWriteStorage, 0);
                 break;
             case WIZARD_PERMISSIONS_NOTIFICATIONS:
-                title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
-                PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
+                    PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
+                    setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
+                }
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
@@ -409,17 +412,18 @@ public class InstallWizardActivity extends AbstractActivity {
         return !DO_LEGACY_WRITE_STORAGE || PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions();
     }
 
+    @RequiresApi(33)
     private void requestNotifications() {
         setSkip(this::gotoNext, 0);
         askNotificationsPermissionAction.launch(null, true);
     }
 
     private static boolean hasNotificationsPermission() {
-        return PermissionContext.NOTIFICATIONS.hasAllPermissions();
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || PermissionContext.NOTIFICATIONS.hasAllPermissions();
     }
 
     public static boolean needsNotificationsPermission() {
-        return android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationsPermission();
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationsPermission();
     }
 
     // -------------------------------------------------------------------

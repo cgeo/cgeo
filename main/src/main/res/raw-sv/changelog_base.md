@@ -1,4 +1,13 @@
-På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo-mål + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+
+Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+- Kartrotation för OpenStreetMap-baserade kartor (online + offline)
+- Klusterpopup för Google Maps
+- Dölj kartkällor som du inte behöver
+- Höjddiagram för rutter och spår
+- Växla mellan listor direkt från kartan
+- "Körläge" för OpenStreetMap-baserade kartor
+- Long-tap on track / individual route for further options
 
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
@@ -8,7 +17,6 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Ladda ned cacher beställda på distans
 - Fix: Fördubbling av enskilda rutt-objekt
 - Nyhet: Stöd för Motorider-tema (endast VTM)
-- Nytt: Stöd för transparent bakgrundsvisning av offline-kartor (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 
@@ -55,3 +63,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Titles in range input dialogs cut off
 - Fix: Notification for nightly update points to regular APK even for FOSS variant
 - New: "Ignore year" option for date filters
+- Nyhet: Gör fjärr-URI klickbar i väntande nedladdningar
+- Ändring: Använd systeminställningar som standardtema för nya installationer
+- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
+- New: Show undo bar when deleting caches from list from map

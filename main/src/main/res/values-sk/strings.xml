@@ -287,9 +287,6 @@
     <string name="dont_show_again">Nabudúce nezobrazovať</string>
     <string name="tap_icon_more_info">Ďalšie informácie ťuknutím na ikonu</string>
     <string name="use_slider_adjust_value">Posúvačom sa nastavuje hodnota</string>
-    <string name="warn_gm_not_available">Mapy Google sú nedostupné.</string>
-    <string name="switch_to_mf">Vaša služba Google Play je zastaraná. Chcete namiesto toho prepnúť na poskytovateľa mapy Mapsforge?</string>
-    <string name="switched_to_mf">Predvolená mapa zmenená na poskytovateľa Mapsforge. Teraz mapu reštartujte.</string>
     <string name="gc_premium">Premium</string>
     <string name="gc_basic">Základný</string>
     <!-- location service -->
@@ -1025,7 +1022,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelit</string>
     <string name="map_source_google_terrain">Google: Terén</string>
-    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (offline)</string>
     <string name="map_source_attribution_dialog_title">Autori máp</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
@@ -2092,7 +2088,6 @@
     <string name="map_manual_targets_cleared">Ručné ciele vymazané</string>
     <string name="map_clear_individual_route">Vymazať individuálnu trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete zo svojej indiviulduálnej trasy odstrániť všetky kešky/body trasy?</string>
-    <string name="map_individual_route_cleared">Individuálna trasa vymazaná</string>
     <string name="sorted_route_saved">Individuálna trasa uložená</string>
     <string name="load_individual_route_error">Chyba pri načítavaní individuálnej trasy</string>
     <string name="route_item_not_yet_loaded">Položka trasy zatiaľ nie je načítaná</string>
@@ -2224,7 +2219,6 @@
     <string name="vtm_theme_variant">Variant motívu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
-    <string name="map_trailhistory_cleared">História trasy vymazaná</string>
     <string name="map_trail_show">Zobraziť históriu trasy</string>
     <string name="map_trail_hide">Ukryť históriu trasy</string>
     <!-- history track export -->
