@@ -641,11 +641,13 @@ static boolean isContinuousIntegrationServer() {
 // Custom run tasks to launch the app directly from gradle
 androidComponents {
     onVariants(selector().all()) { variant ->
-        def installTask = tasks.named("install${variant.name.capitalize()}")
+        def installTaskName = "install${variant.name.capitalize()}"
         tasks.register("run${variant.name.capitalize()}") {
             group = 'cgeo'
             description = "Installs the ${variant.name} and runs the main activity. Depends on 'adb' being on the PATH."
-            dependsOn installTask
+            
+            // Use provider to resolve install task lazily
+            dependsOn(providers.provider { tasks.findByName(installTaskName) })
 
             doFirst {
                 String classpath = variant.namespace

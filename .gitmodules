@@ -1,4 +1,0 @@
-[submodule "openwig"]
-	path = openwig
-	url = https://github.com/JakeDot/openwig
-	branch = master
