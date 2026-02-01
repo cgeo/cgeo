@@ -274,7 +274,8 @@ androidComponents {
     onVariants(selector().all()) { variant ->
         // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
         variant.outputs.forEach { output ->
-            output.outputFileName.set(output.outputFileName.get().replace('-basic-', '-'))
+            var ofn = output.outputFileName
+            ofn.set(ofn.get().replace('-basic-', '-'))
         }
         
         // special version code for nightly and rc builds
