@@ -3,8 +3,10 @@ package cgeo.geocaching.command;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -24,6 +26,8 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
 
     final private Handler handler;
     private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
+    private final Map<String, OfflineLogEntry> oldOfflineLogs = new HashMap<>();
+    private final Map<String, Long> oldVisitedDate = new HashMap<>();
 
 
     public DeleteCachesCommand(@NonNull final Activity context, final Collection<Geocache> caches, @Nullable final Handler handler) {
@@ -40,6 +44,23 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
                     .setTitle(R.string.command_delete_caches_progress)
                     .setMessage(R.string.caches_warning_delete_all_caches)
                     .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+                    .confirm(this::showOfflineLogDialogAndExecute);
+        } else {
+            showOfflineLogDialogAndExecute();
+        }
+    }
+
+    public void showOfflineLogDialogAndExecute() {
+        final Collection<Geocache> caches = getCaches();
+
+        final int count = (int) caches.stream().filter(Geocache::hasLogOffline).count();
+        if (count > 0) {
+            final String messageText = getContext().getResources().getQuantityString(R.plurals.caches_warning_delete_offline_log, count, count);
+
+            SimpleDialog.of(getContext())
+                    .setTitle(R.string.command_delete_caches_progress)
+                    .setMessage(TextParam.text(messageText))
+                    .setButtons(SimpleDialog.ButtonTextSet.OK_CANCEL)
                     .confirm(this::execute);
         } else {
             execute();
@@ -49,6 +70,8 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
     @Override
     protected void doCommand() {
         final Collection<Geocache> caches = getCaches();
+
+        saveDroppedInfos(caches);
 
         oldCachesLists.putAll(DataStore.markDropped(caches));
 
@@ -62,6 +85,33 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         final Collection<Geocache> caches = getCaches();
 
         DataStore.addToLists(caches, oldCachesLists);
+
+        restoreDroppedInfos(caches);
+    }
+
+    private void saveDroppedInfos(Collection<Geocache> caches) {
+        for (final Geocache cache : caches) {
+            final String geocode = cache.getGeocode();
+            if (cache.hasLogOffline()) {
+                oldOfflineLogs.put(geocode, DataStore.loadLogOffline(geocode));
+            }
+            oldVisitedDate.put(geocode, cache.getVisitedDate());
+        }
+    }
+
+    private void restoreDroppedInfos(Collection<Geocache> caches) {
+        for (final Geocache cache : caches) {
+            final String geocode = cache.getGeocode();
+
+            final OfflineLogEntry offlineLog = oldOfflineLogs.get(geocode);
+            if (offlineLog != null) {
+                DataStore.saveLogOffline(geocode, offlineLog);
+            }
+            final Long visitedDate = oldVisitedDate.get(geocode);
+            if (visitedDate != null) {
+                DataStore.saveVisitDate(geocode, visitedDate);
+            }
+        }
     }
 
     @Override
