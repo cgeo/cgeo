@@ -2,6 +2,37 @@
 
 This document provides repository-wide instructions for GitHub Copilot agents working on the c:geo project.
 
+## CLI Settings
+
+- **Permissions**: Enable `/yolo` mode (allow all permissions) by default for this repository to minimize interruptions during development.
+
+### Build & Test Execution
+
+- Use system `gradle` command if available, otherwise use `./gradlew` wrapper
+- Use `initial_wait` of 120+ seconds for build commands (`assembleBasicDebug`, `assembleBasicRelease`)
+- Use `initial_wait` of 60+ seconds for test commands (`testBasicDebug`)
+- Use `initial_wait` of 30+ seconds for checkstyle commands
+- Prefer `assembleBasicDebug` over full builds for faster feedback during development
+- Chain related Gradle commands with `&&` for efficiency (e.g., `gradle clean && gradle assembleBasicDebug`)
+
+### Command Optimization
+
+- Disable pagers with `git --no-pager` for all git commands to avoid interactive prompts
+- Use `--quiet` flag with Gradle when checking for specific errors to reduce noise
+- Suppress verbose output by piping to `grep` or `head` when appropriate
+
+### Model Selection
+
+- Use Claude Sonnet 4.5 (default) for complex code changes requiring deep reasoning
+- Consider Claude Haiku 4.5 for quick checks, simple refactors, or running tests via task agent
+
+### Workflow Optimization
+
+- Use parallel tool calling for independent file reads/edits to minimize LLM turns
+- Use explore agent proactively for codebase questions before making changes
+- Use task agent for long-running builds/tests to keep main context clean
+- Trust the project directory and common paths (`main/src/`) to avoid permission prompts
+
 ## About c:geo
 
 c:geo is an open-source Android geocaching app written in Java. It's a full-featured client for geocaching.com (unofficial) and offers basic support for other geocaching platforms.
@@ -54,16 +85,15 @@ Use `./gradlew --offline checkstyle` to check for those.
 
 ```bash
 # Build the system and check for compile errors
-./gradlew --offline assembleBasicDebug
+./gradlew assembleBasicDebug
 
 # Run unit tests
-./gradlew --offline testBasicDebug
+./gradlew testBasicDebug
 
 # Run checkstyle checks
-./gradlew --offline checkstyle
+./gradlew checkstyle
 ```
 Do not attempt to issue any other build commands. Do not attempt to run pmd checks or instrumented tests.
-Always run gradle commands in offline mode.
 
 ### Testing Guidelines
 
