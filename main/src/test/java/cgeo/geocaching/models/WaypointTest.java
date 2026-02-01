@@ -234,4 +234,39 @@ public class WaypointTest {
         final String new8 = Waypoint.getDefaultWaypointName(cache, WaypointType.PUZZLE);
         assertThat(WaypointType.PUZZLE.getNameForNewWaypoint() + " 21").isEqualTo(new8);
     }
+
+    @Test
+    public void testBuildImageFromNote() {
+        // Test that image can be extracted from note HTML
+        final Waypoint waypoint = new Waypoint("Stage 1", WaypointType.PUZZLE, false);
+        waypoint.setNote("<img src=\"https://example.com/image.jpg\"></img><p>Description text</p>");
+        
+        final Image img = waypoint.buildImage();
+        
+        assertThat(img).isNotNull();
+        assertThat(img.getUrl()).isEqualTo("https://example.com/image.jpg");
+        assertThat(img.category).isEqualTo(Image.ImageCategory.WAYPOINT);
+    }
+
+    @Test
+    public void testBuildImageFromNoteNoImage() {
+        // Test that null is returned when note has no image
+        final Waypoint waypoint = new Waypoint("Stage 1", WaypointType.PUZZLE, false);
+        waypoint.setNote("Just text, no image");
+        
+        final Image img = waypoint.buildImage();
+        
+        assertThat(img).isNull();
+    }
+
+    @Test
+    public void testBuildImageFromEmptyNote() {
+        // Test that null is returned when note is empty
+        final Waypoint waypoint = new Waypoint("Stage 1", WaypointType.PUZZLE, false);
+        waypoint.setNote("");
+        
+        final Image img = waypoint.buildImage();
+        
+        assertThat(img).isNull();
+    }
 }
