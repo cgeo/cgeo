@@ -165,8 +165,8 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
         gpx.attribute("", "lat", String.valueOf(point.getLatitude()));
         gpx.attribute("", "lon", String.valueOf(point.getLongitude()));
 
-        // Add name
-        XmlUtils.simpleText(gpx, NS_GPX, "name", item.getIdentifier());
+        // Add name using GPX-compatible identifier (traditional waypoint IDs for waypoints)
+        XmlUtils.simpleText(gpx, NS_GPX, "name", item.getGpxIdentifier());
 
         // Add description with cache/waypoint name
         final String itemName = item.getName();

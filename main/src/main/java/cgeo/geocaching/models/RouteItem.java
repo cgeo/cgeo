@@ -178,6 +178,24 @@ public class RouteItem implements Parcelable {
         return identifier;
     }
 
+    /**
+     * Get the GPX-compatible identifier for this route item.
+     * For waypoints, returns the traditional GPX waypoint ID (e.g., "011TEST").
+     * For other types, returns the standard identifier.
+     *
+     * @return the GPX identifier
+     */
+    @NonNull
+    public String getGpxIdentifier() {
+        if (type == RouteItemType.WAYPOINT) {
+            final Waypoint waypoint = getWaypoint();
+            if (waypoint != null) {
+                return waypoint.getGpxId();
+            }
+        }
+        return identifier;
+    }
+
     public String getSortFilterString() {
         return sortFilterString;
     }
