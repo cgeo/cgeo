@@ -24,7 +24,7 @@ import java.util.Set;
 
 public class DeleteCachesCommand extends AbstractCachesCommand {
 
-    final private Handler handler;
+    private final Handler handler;
     private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
     private final Map<String, OfflineLogEntry> oldOfflineLogs = new HashMap<>();
     private final Map<String, Long> oldVisitedDate = new HashMap<>();
@@ -89,7 +89,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         restoreDroppedInfos(caches);
     }
 
-    private void saveDroppedInfos(Collection<Geocache> caches) {
+    private void saveDroppedInfos(final Collection<Geocache> caches) {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
             if (cache.hasLogOffline()) {
@@ -99,7 +99,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         }
     }
 
-    private void restoreDroppedInfos(Collection<Geocache> caches) {
+    private void restoreDroppedInfos(final Collection<Geocache> caches) {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
 
