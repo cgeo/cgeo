@@ -551,6 +551,10 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
             cLog.add("rth");
 
+            //sync MBTiles folder
+            cgeo.geocaching.unifiedmap.layers.MBTilesSynchronizer.resynchronizeOrDeleteMBTilesFolder();
+            cLog.add("mbt");
+
             // automated backup check
             if (Settings.automaticBackupDue()) {
                 new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);

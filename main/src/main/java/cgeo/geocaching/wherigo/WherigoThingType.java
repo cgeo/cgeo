@@ -66,10 +66,10 @@ public enum WherigoThingType {
     @NonNull
     @SuppressWarnings("unchecked")
     private List<EventTable> getAllThings() {
-        if (!WherigoGame.get().isPlaying()) {
+        if (!WherigoGame.GET.isPlaying()) {
             return Collections.emptyList();
         }
-        return (List<EventTable>) thingsGetter.apply(WherigoGame.get());
+        return (List<EventTable>) thingsGetter.apply(WherigoGame.GET);
     }
 
     public List<EventTable> getThingsForUserDisplay() {
@@ -78,15 +78,13 @@ public enum WherigoThingType {
 
     @SuppressWarnings("unchecked")
     public <T extends EventTable> List<T> getThingsForUserDisplay(final Class<T> clazz) {
-        final boolean debugMode = WherigoGame.get().isDebugModeForCartridge();
+        final boolean debugMode = WherigoGame.GET.isDebugModeForCartridge();
 
-        final List<T> list = getAllThings().stream()
-            .map(t -> (T) t)
-            .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
-            .collect(Collectors.toCollection(ArrayList::new));
-
-        list.sort(WherigoUtils.getThingsComparator());
-        return list;
+        return getAllThings().stream()
+                .map(t -> (T) t)
+                .filter(t -> debugMode || WherigoUtils.isVisibleToPlayer(t))
+                .sorted(WherigoUtils.getThingsComparator())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Nullable

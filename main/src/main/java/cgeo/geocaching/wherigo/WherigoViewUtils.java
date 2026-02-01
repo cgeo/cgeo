@@ -158,8 +158,8 @@ public final class WherigoViewUtils {
     }
 
     public static void updateThingTypeTable(final SimpleItemListModel<WherigoThingType> model, final SimpleItemListView target) {
-        model.setItems(WherigoGame.get().isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST);
-        target.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : View.GONE);
+        model.setItems(WherigoGame.GET.isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST);
+        target.setVisibility(WherigoGame.GET.isPlaying() ? View.VISIBLE : View.GONE);
     }
 
     private static void chooseThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType, final Consumer<EventTable> thingSelectAction) {
@@ -210,30 +210,30 @@ public final class WherigoViewUtils {
     public static Dialog getQuickViewDialog(final Activity activity) {
         final WherigoMapQuickinfosBinding binding = WherigoMapQuickinfosBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
         final SimpleItemListModel<WherigoThingType> model = createThingTypeTable(activity, binding.wherigoThingTypeList, thing -> displayThing(activity, thing, false));
-        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.GET.unpauseDialog());
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
-        binding.cacheContextGotocache.setOnClickListener(v -> CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode()));
+        binding.cacheContextGotocache.setOnClickListener(v -> CacheDetailActivity.startActivity(activity, WherigoGame.GET.getContextGeocode()));
         binding.goToWherigo.setOnClickListener(v -> WherigoActivity.start(activity, false));
 
         final Runnable refreshGui = () -> {
             updateThingTypeTable(model, binding.wherigoThingTypeList);
-            binding.resumeDialog.setVisibility(WherigoGame.get().dialogIsPaused() ? View.VISIBLE : View.GONE);
-            binding.cacheContextBox.setVisibility(WherigoGame.get().getContextGeocode() != null ? View.VISIBLE : View.GONE);
-            binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName());
+            binding.resumeDialog.setVisibility(WherigoGame.GET.dialogIsPaused() ? View.VISIBLE : View.GONE);
+            binding.cacheContextBox.setVisibility(WherigoGame.GET.getContextGeocode() != null ? View.VISIBLE : View.GONE);
+            binding.cacheContextName.setText(WherigoGame.GET.getContextGeocacheName());
         };
 
-        final int wherigoListenerId = WherigoGame.get().addListener(nt -> refreshGui.run());
+        final int wherigoListenerId = WherigoGame.GET.addListener(nt -> refreshGui.run());
         refreshGui.run();
 
-        final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, binding.getRoot(), WherigoGame.get().getCartridgeName());
-        dialog.setOnDismissListener(dl -> WherigoGame.get().removeListener(wherigoListenerId));
+        final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, binding.getRoot(), WherigoGame.GET.getCartridgeName());
+        dialog.setOnDismissListener(dl -> WherigoGame.GET.removeListener(wherigoListenerId));
 
         return dialog;
     }
 
     public static void showErrorDialog(final Activity activity) {
-        final String lastError = WherigoGame.get().getLastError();
-        final String lastErrorCartridgeLink = WherigoUtils.getWherigoDetailsUrl(WherigoGame.get().getLastErrorCGuid());
+        final String lastError = WherigoGame.GET.getLastError();
+        final String lastErrorCartridgeLink = WherigoUtils.getWherigoDetailsUrl(WherigoGame.GET.getLastErrorCGuid());
         final String dialogErrorMessage = (lastError == null ? LocalizationUtils.getString(R.string.wherigo_error_game_noerror) :
                 LocalizationUtils.getString(R.string.wherigo_error_game_error, lastError, lastErrorCartridgeLink));
 
@@ -245,7 +245,7 @@ public final class WherigoViewUtils {
         if (lastError != null) {
             dialog
                 .setNeutralButton(TextParam.id(R.string.log_clear))
-                .setNeutralAction(() -> WherigoGame.get().clearLastError());
+                .setNeutralAction(() -> WherigoGame.GET.clearLastError());
         }
         dialog.show(() -> {
             if (lastError != null) {
@@ -253,7 +253,7 @@ public final class WherigoViewUtils {
                 ActivityMixin.showToast(activity, R.string.copied_to_clipboard);
             }
         });
-        WherigoGame.get().clearLastErrorNotSeen();
+        WherigoGame.GET.clearLastErrorNotSeen();
     }
 
     /** adds badge logic to the given view to display current wherigo information as badges */
@@ -262,15 +262,15 @@ public final class WherigoViewUtils {
             return;
         }
         final Runnable refreshRoutine = () -> {
-            if (WherigoGame.get().isLastErrorNotSeen() || WherigoGame.get().dialogIsPaused()) {
+            if (WherigoGame.GET.isLastErrorNotSeen() || WherigoGame.GET.dialogIsPaused()) {
                 BadgeManager.get().setBadge(view, false, -1);
             } else {
                 BadgeManager.get().removeBadge(view);
             }
         };
 
-        final int listenerId = WherigoGame.get().addListener(nt -> refreshRoutine.run());
-        ViewUtils.addDetachListener(view, v -> WherigoGame.get().removeListener(listenerId));
+        final int listenerId = WherigoGame.GET.addListener(nt -> refreshRoutine.run());
+        ViewUtils.addDetachListener(view, v -> WherigoGame.GET.removeListener(listenerId));
         refreshRoutine.run();
     }
 

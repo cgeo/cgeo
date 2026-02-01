@@ -118,6 +118,9 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
                         MapsforgeThemeHelper.resynchronizeOrDeleteMapThemeFolder();
                     }
+                    if (PersistableFolder.PUBLIC_MBTILES.equals(folder)) {
+                        cgeo.geocaching.unifiedmap.layers.MBTilesSynchronizer.resynchronizeOrDeleteMBTilesFolder();
+                    }
                 })
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, file -> {
                     final List<Fragment> fragments = getSupportFragmentManager().getFragments();

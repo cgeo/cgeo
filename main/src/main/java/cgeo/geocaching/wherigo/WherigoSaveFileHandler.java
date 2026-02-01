@@ -83,7 +83,7 @@ public class WherigoSaveFileHandler implements FileHandle {
     }
 
     public void checkAutosave() {
-        if (!WherigoGame.get().isPlaying() || state != State.IDLE || System.currentTimeMillis() - lastSaveTime < 30000) {
+        if (!WherigoGame.GET.isPlaying() || state != State.IDLE || System.currentTimeMillis() - lastSaveTime < 30000) {
             return;
         }
         final boolean safeWorthyAction = lastUnsavedSafeWorthyAction > 0 && System.currentTimeMillis() - lastUnsavedSafeWorthyAction > 10000;

@@ -29,33 +29,12 @@ public class DateFilter {
 
     public static final DateFormat DAY_DATE_FORMAT_USER_DISPLAY = DAY_DATE_FORMAT;
 
-    private final boolean truncateToDays;
     private Date minDate;
     private Date maxDate;
     private boolean isRelative = false;
     private int minDateOffset = -1;
     private int maxDateOffset = -1;
     private boolean ignoreYear = false;
-
-    public DateFilter() {
-        this(true);
-    }
-
-    public DateFilter(final boolean truncateToDays) {
-        this.truncateToDays = truncateToDays;
-    }
-
-    private Date truncateToStartOfDay(final Date date) {
-        return date == null ? null : DateUtils.truncate(date, java.util.Calendar.DAY_OF_MONTH);
-    }
-
-    private Date truncateToEndOfDay(final Date date) {
-        if (date == null) {
-            return null;
-        }
-        final Date truncated = DateUtils.truncate(date, java.util.Calendar.DAY_OF_MONTH);
-        return DateUtils.addMilliseconds(DateUtils.addDays(truncated, 1), -1);
-    }
 
     public Boolean matches(final Date value) {
         if (value == null) {
@@ -100,24 +79,14 @@ public class DateFilter {
 
     public Date getMinDate() {
         if (isRelative) {
-            if (minDateOffset == Integer.MIN_VALUE) {
-                return null;
-            }
-            final Date today = truncateToDays ? truncateToStartOfDay(new Date()) : new Date();
-            return DateUtils.addDays(today, minDateOffset);
+            return minDateOffset == Integer.MIN_VALUE ? null : DateUtils.addDays(new Date(), minDateOffset);
         }
         return minDate;
     }
 
     public Date getMaxDate() {
         if (isRelative) {
-            if (maxDateOffset == Integer.MAX_VALUE) {
-                return null;
-            }
-            final Date today = truncateToDays ? truncateToStartOfDay(new Date()) : new Date();
-            final Date maxDay = DateUtils.addDays(today, maxDateOffset);
-            // If truncating to days, set to end of day (23:59:59.999) to include the entire day
-            return truncateToDays ? truncateToEndOfDay(maxDay) : maxDay;
+            return maxDateOffset == Integer.MAX_VALUE ? null :  DateUtils.addDays(new Date(), maxDateOffset);
         }
         return maxDate;
     }
@@ -148,14 +117,8 @@ public class DateFilter {
     }
 
     public void setMinMaxDate(final Date min, final Date max) {
-        if (truncateToDays) {
-            this.minDate = truncateToStartOfDay(min);
-            this.maxDate = truncateToEndOfDay(max);
-        } else {
-            this.minDate = min;
-            this.maxDate = max;
-        }
-
+        this.minDate = min;
+        this.maxDate = max;
         this.isRelative = false;
     }
 
@@ -173,6 +136,29 @@ public class DateFilter {
         this.isRelative = true;
     }
 
+//    public void setFromConfig(final String[] config, final int startPos) {
+//        if (config != null && config.length > startPos + 1) {
+//            minDate = parseDate(config[startPos]);
+//            maxDate = parseDate(config[startPos + 1]);
+//        }
+//        if (config != null && config.length > startPos + 4) {
+//            isRelative = Boolean.parseBoolean(config[startPos + 2]);
+//            minDateOffset = Integer.parseInt(config[startPos + 3]);
+//            maxDateOffset = Integer.parseInt(config[startPos + 4]);
+//        }
+//    }
+//
+//    public String[] addToConfig(final String[] config, final int startPos) {
+//        if (config == null || config.length <= startPos + 4) {
+//            return config;
+//        }
+//        config[startPos] = minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate);
+//        config[startPos + 1] = maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate);
+//        config[startPos + 2] = Boolean.toString(isRelative);
+//        config[startPos + 3] = String.valueOf(minDateOffset);
+//        config[startPos + 4] = String.valueOf(maxDateOffset);
+//        return config;
+//    }
 
     public void setConfig(final List<String> config) {
         if (config != null) {
@@ -242,13 +228,13 @@ public class DateFilter {
 
         if (valueExpression != null && (getMinDate() != null || getMaxDate() != null)) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-
+            
             if (ignoreYear) {
                 // Extract month and day from the date value in SQLite
                 final String dayOfYearExpression = "strftime('%m-%d', date(" + valueExpression + "/1000, 'unixepoch'))";
                 final String minDayOfYear = getMinDate() != null ? DAY_MONTH_FORMAT.format(getMinDate()) : null;
                 final String maxDayOfYear = getMaxDate() != null ? DAY_MONTH_FORMAT.format(getMaxDate()) : null;
-
+                
                 if (minDayOfYear != null && maxDayOfYear != null) {
                     if (minDayOfYear.compareTo(maxDayOfYear) <= 0) {
                         // Normal range (doesn't wrap around year boundary)

@@ -1,13 +1,4 @@
-Edge to Edge (od krawędzi do krawędzui): Ze względu na zasady Sklepu Play, zaktualizowaliśmy poziom API Androida w tej wersji celów c:geo + zmieniliśmy niektóre z zasad układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
-
-Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
-- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
-- Wyskakujące okienko klastra dla Google Maps
-- Ukrywanie źródeł map, których nie potrzebujesz
-- Wykres wysokości tras i ścieżek
-- Przełączanie pomiędzy listami bezpośrednio z mapy
-- „Tryb jazdy” dla map opartych na OpenStreetMap
-- Długie dotknięcie na śladzie / indywidualnej trasa daje dostęp do dalszych opcji
+Ze względu na zasady sklepu Google Play zaktualizowaliśmy poziom API systemu Android w tej wersji c:geo oraz zmieniliśmy niektóre procedury układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
 
 ### Mapa
 - Nowość: Optymalizacja trasy buforuje obliczone dane
@@ -17,6 +8,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Pobierz skrytki uporządkowane według odległości
 - Naprawiono: Dublowanie poszczególnych pozycji trasy
 - Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
+- Nowość: Obsługa przezroczystego tła podczas wyświetlania map offline (tylko VTM)
 - Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
 - Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
 
@@ -36,7 +28,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Wpis menu na liście punktów nawigacji do oznaczania niektórych typów punktów nawigacji jako odwiedzone
 - Nowość: Teksty zastępcze przy logowaniu przedmiotów podróżnych (nazwa skrytki, kod skrytki, użytkownik)
 - Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
-- Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
+- Fix: Missing quick toggle in guided mode of waypoint calculator
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -63,7 +55,3 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Tytuły w oknie dialogowym zakresu były przycięte
 - Naprawiono: Powiadomienie o nocnych aktualizacjach punktów do zwykłego APK nawet dla wariantu FOSS
 - Nowość: Opcja „Ignoruj rok” dla filtrów dat
-- Nowość: Zdalne URI w elementach oczekujących na pobranie są teraz klikalne
-- Zmiana: Użyj ustawień systemowych jako domyślnego motywu dla nowych instalacji
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map

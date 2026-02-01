@@ -847,7 +847,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
 
             }.execute();
-            invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_watch_all) {

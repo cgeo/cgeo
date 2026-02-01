@@ -26,13 +26,13 @@ android {
         // enable Java 8 APIs like Streams on older Android versions
         coreLibraryDesugaringEnabled = true
         // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
 
         versionName = versionNameFromDate()
         versionCode = versionCodeFromDate(0)
@@ -83,7 +83,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -146,7 +146,7 @@ android {
         }
 
         // proguard rules
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
     }
 
     testBuildType = "debug" //the default BuildType
@@ -426,6 +426,9 @@ dependencies {
     // Organic Maps integration
     implementation project(":organicmaps-api")
 
+    // openwig library
+    implementation project(":openwig")
+
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.19.0'
 
@@ -436,7 +439,7 @@ dependencies {
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:20.0.0'
+    implementation 'com.google.android.gms:play-services-maps:19.2.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -529,7 +532,7 @@ dependencies {
     // For Wherigos: GIF support
     // ani gif support
     // minSdk=17 from version 1.2.16
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.30'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 

@@ -84,8 +84,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS);
 
-        this.wherigoListenerId = WherigoGame.get().addListener(this::refreshGui);
-        this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui());
+        this.wherigoListenerId = WherigoGame.GET.addListener(this::refreshGui);
+        this.wherigoAudioManagerListenerId = WherigoGame.GET.getAudioManager().addListener(type -> refreshMusicGui());
 
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
@@ -96,15 +96,15 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         refreshMusicGui();
 
         binding.viewCartridges.setOnClickListener(v -> startGame());
-        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.GET.unpauseDialog());
         binding.loadGame.setOnClickListener(v -> loadGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
         binding.reportProblem.setOnClickListener(v -> WherigoViewUtils.showErrorDialog(this));
         binding.map.setOnClickListener(v -> showOnMap());
-        binding.cacheContextGotocache.setOnClickListener(v -> goToCache(WherigoGame.get().getContextGeocode()));
-        binding.cacheContextRemove.setOnClickListener(v -> WherigoGame.get().setContextGeocode(null));
+        binding.cacheContextGotocache.setOnClickListener(v -> goToCache(WherigoGame.GET.getContextGeocode()));
+        binding.cacheContextRemove.setOnClickListener(v -> WherigoGame.GET.setContextGeocode(null));
         binding.revokeFixedLocation.setOnClickListener(v -> WherigoLocationProvider.get().setFixedLocation(null));
 
         //see if we have a guid from intent parameter
@@ -128,7 +128,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         }
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
 
-        final AudioManager audio = WherigoGame.get().getAudioManager();
+        final AudioManager audio = WherigoGame.GET.getAudioManager();
         binding.soundContinue.setOnClickListener(v -> audio.resume());
         binding.soundPause.setOnClickListener(v -> audio.pause());
         binding.soundRestart.setOnClickListener(v -> audio.reset());
@@ -144,7 +144,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
-        MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying());
+        MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.GET.isPlaying());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -152,7 +152,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
         if (menuItem == R.id.menu_show_cartridge) {
-            final WherigoCartridgeInfo info = WherigoGame.get().getCartridgeInfo();
+            final WherigoCartridgeInfo info = WherigoGame.GET.getCartridgeInfo();
             if (info != null) {
                 WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(info, true));
             }
@@ -182,7 +182,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void loadGame() {
-        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
+        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.GET.getCartridgeInfo();
         if (cartridgeInfo == null) {
             return;
         }
@@ -226,7 +226,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         } else {
             final String geocode = getStartingGeocode();
             if (geocode != null) {
-                WherigoGame.get().setContextGeocode(geocode);
+                WherigoGame.GET.setContextGeocode(geocode);
             }
             WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cguidCartridge, false));
         }
@@ -243,7 +243,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             ActivityMixin.showToast(this, R.string.wherigo_download_successful_title);
             final String geocode = getStartingGeocode();
             if (geocode != null) {
-                WherigoGame.get().setContextGeocode(geocode);
+                WherigoGame.GET.setContextGeocode(geocode);
             }
             WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo, false));
         } else {
@@ -260,7 +260,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             invalidateOptionsMenuCompatible();
         }
 
-        final WherigoGame game = WherigoGame.get();
+        final WherigoGame game = WherigoGame.GET;
 
         WherigoViewUtils.updateThingTypeTable(wherigoThingTypeModel, binding.wherigoThingTypeList);
 
@@ -293,7 +293,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void refreshMusicGui() {
-        final AudioManager audio = WherigoGame.get().getAudioManager();
+        final AudioManager audio = WherigoGame.GET.getAudioManager();
         final AudioManager.State state = audio.getState();
 
         final boolean songInProgress = state == AudioManager.State.STOPPED || state == AudioManager.State.PLAYING;
@@ -316,8 +316,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public final void onDestroy() {
         super.onDestroy();
-        WherigoGame.get().removeListener(wherigoListenerId);
-        WherigoGame.get().getAudioManager().removeListener(wherigoAudioManagerListenerId);
+        WherigoGame.GET.removeListener(wherigoListenerId);
+        WherigoGame.GET.getAudioManager().removeListener(wherigoAudioManagerListenerId);
     }
 
 }

@@ -3,7 +3,6 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ColorUtils;
 
 import android.content.Context;
@@ -199,7 +198,7 @@ public enum CacheType {
         return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
     }
 
-    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isEnabled, final boolean isLightSkin) {
+    public static int getActionBarColor(final Context context, final CacheType cacheType, final boolean isEnabled) {
         final int actionbarColor;
         if (cacheType != null) {
             // convert to HSL
@@ -207,11 +206,12 @@ public enum CacheType {
 
             final float[] hsl = ColorUtils.getHslValues(colorInt);
 
-            // darker color by 15%
-            final float offSet1 = Settings.getSaturationOffset(isLightSkin);
-            final float offSet2 = Settings.getLightnessOffset(isLightSkin);
-            hsl[1] = Math.max(0f, Math.min(1f, hsl[1] + offSet1));
-            hsl[2] = Math.max(0f, Math.min(1f, hsl[2] + offSet2));
+            // less saturation
+            final float offSet1 = -0.02f;
+            // darker color
+            final float offSet2 = -0.12f;
+            hsl[1] = Math.min(1f, hsl[1] + offSet1);
+            hsl[2] = Math.min(1f, hsl[2] + offSet2);
 
             actionbarColor = ColorUtils.getColorFromHslValues(hsl);
         } else {

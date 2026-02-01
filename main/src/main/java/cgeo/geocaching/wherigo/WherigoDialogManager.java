@@ -74,7 +74,7 @@ public class WherigoDialogManager {
         private WherigoDialogControl(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onUserResultAction) {
             dialog = dialogProvider.createAndShowDialog(activity, this);
             if (gameListener != null) {
-                gameListenerId = WherigoGame.get().addListener(nt -> WherigoViewUtils.ensureRunOnUi(() -> {
+                gameListenerId = WherigoGame.GET.addListener(nt -> WherigoViewUtils.ensureRunOnUi(() -> {
                     if (!isDismissed) {
                         gameListener.accept(dialog, nt);
                     }
@@ -83,7 +83,7 @@ public class WherigoDialogManager {
 
             dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
                 Log.iForce("Wherigo: dismissing dialog");
-                WherigoGame.get().removeListener(gameListenerId);
+                WherigoGame.GET.removeListener(gameListenerId);
                 isDismissed = true;
                 dismissDisposables.dispose();
                 if (dismissListener != null) {
@@ -92,10 +92,10 @@ public class WherigoDialogManager {
                 if (onUserResultAction != null && !flaggedForNoUserResult) {
                     onUserResultAction.accept(pauseOnDismiss);
                 }
-                WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_CLOSE);
+                WherigoGame.GET.notifyListeners(WherigoGame.NotifyType.DIALOG_CLOSE);
                 dialog = null;
             }));
-            WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
+            WherigoGame.GET.notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
         }
 
         @Override
@@ -167,7 +167,7 @@ public class WherigoDialogManager {
 
             //check if maybe refresh of already opened dialog is sufficient
             if (state == State.DIALOG_DISPLAYED && currentDialogProvider != null && currentDialogProvider.canRefresh(dialogProvider)) {
-                WherigoGame.get().notifyListeners(WherigoGame.NotifyType.REFRESH);
+                WherigoGame.GET.notifyListeners(WherigoGame.NotifyType.REFRESH);
                 return;
             }
             //close existing dialog + trigger opening a new one
@@ -253,7 +253,7 @@ public class WherigoDialogManager {
     }
 
     private void createNotification() {
-        final String content = LocalizationUtils.getString(R.string.wherigo_notification_waiting, WherigoGame.get().getCartridgeName());
+        final String content = LocalizationUtils.getString(R.string.wherigo_notification_waiting, WherigoGame.GET.getCartridgeName());
         final Context context = CgeoApplication.getInstance();
         Notifications.send(context, Notifications.ID_WHERIGO_NEW_DIALOG_ID, NotificationChannels.WHERIGO_NOTIFICATION, builder -> builder
             .setSmallIcon(R.drawable.ic_menu_wherigo)
