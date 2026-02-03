@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+
+java {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+}
+
+// Checkstyle configuration
+checkstyle {
+    toolVersion = '10.26.1'
+    configDirectory = file('../../')
+    configFile = file('../../checkstyle.xml')
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.register('checkstyle', Checkstyle) {
+    group = 'verification'
+    description = 'Check code standard'
+
+    source = 'src'
+    include '**/*.java'
+
+    classpath = files()
+
+    doNotTrackState("unreadable input property 'configDirectory'")
+}

@@ -1,0 +1,14 @@
+/*
+ * The settings file is used to specify which projects to include in your build.
+ * Configuration based on bekuno's PR #20 to cgeo/openWIG
+ */
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'openWIG'
