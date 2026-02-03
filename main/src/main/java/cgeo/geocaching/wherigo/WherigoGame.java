@@ -277,7 +277,7 @@ public enum WherigoGame implements UI {
         if (!isPlaying()) {
             return null;
         }
-        return Engine.instance.player;
+        return Engine.getCurrentInstance().player;
     }
 
     @Nullable
@@ -327,7 +327,7 @@ public enum WherigoGame implements UI {
 
     @Override
     public void start() {
-        this.cartridge = Engine.instance.cartridge;
+        this.cartridge = Engine.getCurrentInstance().cartridge;
         isPlaying = true;
         Log.iForce(LOG_PRAEFIX + "pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);

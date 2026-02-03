@@ -71,8 +71,8 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
             TranslationUtils.prepareForTranslation(binding.description.getText()));
 
-        binding.media.setMedia((Media) input.table.rawget("Media"));
-        final Object descr = input.table.rawget("Text");
+        binding.media.setMedia((Media) input.rawget("Media"));
+        final Object descr = input.rawget("Text");
         binding.description.setText(WherigoGame.GET.toDisplayText(descr == null ? "" : descr.toString()));
 
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
@@ -109,7 +109,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             handled = true;
         }
         if ("MultipleChoice".equals(type)) {
-            final LuaTable choicesTable = (LuaTable) input.table.rawget("Choices");
+            final LuaTable choicesTable = (LuaTable) input.rawget("Choices");
             final List<String> choices = new ArrayList<>(choicesTable.len());
             for (int i = 0; i < choicesTable.len(); i++) {
                 final String choiceRaw = (String) choicesTable.rawget((double) (i + 1));
