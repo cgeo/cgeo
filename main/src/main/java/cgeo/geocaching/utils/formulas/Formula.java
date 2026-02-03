@@ -17,6 +17,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.math.MathContext;
@@ -111,6 +112,7 @@ public final class Formula {
         private FormulaNode[] children;
 
         public final Set<String> neededVars;
+        public final boolean hasRanges;
 
         FormulaNode(final String id, final FormulaNode[] children,
                     final Func3<ValueList, Function<String, Value>, Integer, Value> function) {
@@ -126,15 +128,16 @@ public final class Formula {
         FormulaNode(final String id, final FormulaNode[] children,
                     final Func3<ValueList, Function<String, Value>, Integer, Value> function,
                     final Func4<ValueList, Function<String, Value>, Integer, Set<Integer>, CharSequence> functionToErrorString,
-                    final Consumer<Set<String>> explicitelyNeeded) {
+                    final Consumer<Set<String>> explicitlyNeeded) {
 
             this.id = id;
             this.children = children == null ? FORMULA_NODE_EMPTY_ARRAY : children;
             this.function = function;
             this.functionToErrorString = functionToErrorString;
-            this.neededVars = Collections.unmodifiableSet(calculateNeededVars(explicitelyNeeded, children));
+            this.neededVars = Collections.unmodifiableSet(calculateNeededVars(explicitlyNeeded, children));
+            this.hasRanges = hasRanges(this);
 
-            if (this.neededVars.isEmpty() && !hasRanges(this)) {
+            if (isConstant()) {
                 //this means that function is constant!
                 this.function = createConstantFunction();
                 final CharSequence csResult = evalToCharSequenceInternal(y -> null, -1).getAsCharSequence();
@@ -145,6 +148,19 @@ public final class Formula {
 
         public String getId() {
             return this.id;
+        }
+
+        public boolean isConstant() {
+            return this.neededVars.isEmpty() && !this.hasRanges;
+        }
+
+        @Nullable
+        public Value getConstantValue() {
+            if (!isConstant()) {
+                return null;
+            }
+            //if this is a constant function, then the following call will work
+            return function.call(null, null, -1);
         }
 
         public Set<String> getNeededVars() {
@@ -858,11 +874,20 @@ public final class Formula {
         }
 
         final FormulaFunction formulaFunction = Objects.requireNonNull(FormulaFunction.findByName(functionName));
+        final FormulaNode[] paramNodes = params.toArray(new FormulaNode[0]);
+        final List<Value> constantParamValues = new ArrayList<>();
+        for (FormulaNode paramNode : paramNodes) {
+            constantParamValues.add(paramNode.getConstantValue());
+        }
 
-        return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
+        final Set<String> explicitlyNeededVars = formulaFunction.getExplicitlyNeededVars(constantParamValues);
+
+        return new FormulaNode("f:" + functionName, paramNodes,
                 (n, v, ri) -> {
+                    final Function<String, Value> neededVars =
+                        varName -> explicitlyNeededVars.contains(varName) ? v.apply(varName) : null;
                     try {
-                        return formulaFunction.execute(n);
+                        return formulaFunction.execute(neededVars, n);
                     } catch (FormulaException ce) {
                         ce.setExpression(expression);
                         ce.setFunction(functionName);
@@ -871,7 +896,8 @@ public final class Formula {
                 },
                 (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat(functionName + "(",
                     valueListToCharSequence(valueList, "; ", paramsInError, true),
-                    ")"), paramsInError));
+                    ")"), paramsInError),
+                neededVars -> neededVars.addAll(explicitlyNeededVars));
 
     }
 

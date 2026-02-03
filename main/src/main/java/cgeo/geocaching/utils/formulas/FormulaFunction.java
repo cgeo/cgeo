@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -59,6 +62,50 @@ public enum FormulaFunction {
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
             singleValueStringFunction(FormulaUtils::vanity));
 
+    /*
+
+    //TESTSUM EXAMPLE START
+
+    //1. define the function. Place two functions: one to calculate needed vars, one to calculate the sum
+    TESTSUM(new String[]{"testsum"}, FunctionGroup.COMPLEX_NUMERIC, 0, "Test", "'';1;2", 1,
+            FormulaFunction::testSumCalculate,
+            FormulaFunction::testSumNeededVars);
+
+    //2. define a function which returns needed variable values from constant parameter values
+    //   -> this function is called at COMPILE time (-> variable values known only for constant/literal parameters)
+    //   -> output is needed to control cyclic var dependencies
+    private static Set<String> testSumNeededVars(final List<Value> constantParamValues) {
+        //this dummy implementation adds all one-char-parameters as needed variables
+        return constantParamValues.stream().map(v -> v == null ? "" : v.getAsString())
+                .filter(s -> s.length() == 1 && Character.isLetter(s.charAt(0))).collect(Collectors.toSet());
+    }
+
+    //3. define the function implementing the summing.
+    //   -> this function is called at RUNTIME (-> variable values are known)
+    //   -> it provides access ONLY to var values defined in "testSumNeededVars" above!
+    //   -> it does NOT auto-check whether ALL of the needed vars are provided. It allows for "gaps"
+    private static Object testSumCalculate(final Function<String, Value> vars, final ValueList params) {
+        //this implementation sums up all integer values plus variable values of all one-char-strings
+        BigInteger sum = BigInteger.ZERO;
+        for (Value v : params) {
+            if (v.isInteger()) {
+                sum = sum.add(v.getAsInteger());
+            } else if (v.getAsString().length() == 1 && Character.isLetter(v.getAsString().charAt(0))) {
+                final Value singleV = vars.apply(v.getAsString());
+                //following check enforces that needed vars are all there. This can be omitted if not wanted
+                if (singleV == null) {
+                    throw new FormulaException(MISSING_VARIABLE_VALUE, v.getAsString());
+                }
+                sum = sum.add(singleV.getAsInteger());
+            }
+        }
+        return sum;
+    }
+
+    //TESTSUM EXAMPLE END
+
+     */
+
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
         COMPLEX_NUMERIC(R.string.formula_function_group_complexnumeric, "Complex Numeric"),
@@ -81,7 +128,8 @@ public enum FormulaFunction {
 
 
     private final String[] names;
-    private final Function<ValueList, Object> function;
+    private final BiFunction<Function<String, Value>, ValueList, Object> function;
+    private final Function<List<Value>, Set<String>> explicitlyNeededVars;
 
     private final FunctionGroup group;
 
@@ -104,6 +152,10 @@ public enum FormulaFunction {
 
 
     FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function) {
+        this(names, group, resId, resFallback, insertPattern, insertIndex, (v, p) -> function.apply(p), null);
+    }
+
+    FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final BiFunction<Function<String, Value>, ValueList, Object> function, final Function<List<Value>, Set<String>> explicitlyNeededVars) {
         this.names = names;
         this.group = group;
         this.function = function;
@@ -111,6 +163,7 @@ public enum FormulaFunction {
         this.resFallback = resFallback;
         this.insertPattern = insertPattern;
         this.insertIndex = insertIndex;
+        this.explicitlyNeededVars = explicitlyNeededVars;
     }
 
     public String[] getNames() {
@@ -137,9 +190,22 @@ public enum FormulaFunction {
         return group;
     }
 
+    @NonNull
+    public Set<String> getExplicitlyNeededVars(final List<Value> constantValues) {
+        if (this.explicitlyNeededVars == null || constantValues == null) {
+            return Collections.emptySet();
+        }
+        final Set<String> result = this.explicitlyNeededVars.apply(constantValues);
+        return result == null ? Collections.emptySet() : result;
+    }
+
     public Value execute(final ValueList params) throws FormulaException {
+        return execute(null, params);
+    }
+
+    public Value execute(final Function<String, Value> vars, final ValueList params) throws FormulaException {
         try {
-            final Object result = function.apply(params);
+            final Object result = function.apply(vars == null ? x -> null : vars, params);
             return result instanceof Value ? (Value) result : Value.of(result);
         } catch (FormulaException fe) {
             throw fe;
