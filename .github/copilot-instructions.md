@@ -11,7 +11,7 @@ This document provides repository-wide instructions for GitHub Copilot agents wo
 - Use `initial_wait` of 60+ seconds for test commands (`testBasicDebug`)
 - Use `initial_wait` of 30+ seconds for checkstyle commands
 - Prefer `assembleBasicDebug` over full builds for faster feedback during development
-- Chain related Gradle commands with `&&` for efficiency (e.g., `gradle --offline clean && gradle --offline assembleBasicDebug`, or `./gradlew --offline clean && ./gradlew --offline assembleBasicDebug`)
+- Chain related Gradle commands with `&&` for efficiency (e.g., `./gradlew --offline clean && ./gradlew --offline assembleBasicDebug`)
 
 ### Command Optimization
 
@@ -70,7 +70,7 @@ Within each group, imports should be sorted alphabetically.
 Apply all rules from:
 - `checkstyle.xml` - All rules with severity "warning" or higher
 
-Use `gradle --offline checkstyle` or `./gradlew --offline checkstyle` to check for those.
+Use `./gradlew --offline checkstyle` to check for those.
 
 ## Building and Testing
 
@@ -78,13 +78,13 @@ Use `gradle --offline checkstyle` or `./gradlew --offline checkstyle` to check f
 
 ```bash
 # Build the system and check for compile errors
-gradle --offline assembleBasicDebug or ./gradlew --offline assembleBasicDebug
+./gradlew --offline assembleBasicDebug
 
 # Run unit tests
-gradle --offline testBasicDebug or ./gradlew --offline testBasicDebug
+./gradlew --offline testBasicDebug
 
 # Run checkstyle checks
-gradle --offline checkstyle or ./gradlew --offline checkstyle
+./gradlew --offline checkstyle
 ```
 Do not attempt to issue any other build commands. Do not attempt to run pmd checks or instrumented tests.
 
@@ -135,4 +135,3 @@ When working in the context of a github issue:
 - Every git commit created shall have the format "rel to #$ISSUE_NUMBER: $TITLE", where $DESCRIPTION is a meaningful short description of what is done in the commit
 - If an issue has label "Feature Request" or is of type "Feature", and it is assigned on a base branch other than "master", then comment a warning to the user in the Pull Request.
 - If an issue has label "Bug" or is of type "Bug", and it is assigned on a base branch other than "release", then comment a warning to the user in the Pull Request.
-
