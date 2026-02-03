@@ -269,6 +269,7 @@ public class FormulaUtils {
         
         // Try standard scanning first
         final List<Pair<String, String>> standardResults = new ArrayList<>();
+        final Set<String> standardKeys = new HashSet<>();
         final String text = preprocessScanText(stext);
         final Matcher m = COORDINATE_SCAN_PATTERN.matcher(" " + text + " ");
         int start = 0;
@@ -288,8 +289,9 @@ public class FormulaUtils {
             final String lonProcessed = processFoundDegree(lon);
             final String key = pairToKey(latProcessed, lonProcessed);
             
-            if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
+            if (!resultSet.contains(key) && !standardKeys.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
                 standardResults.add(new Pair<>(latProcessed, lonProcessed));
+                standardKeys.add(key);
             }
             
             // Check if latitude or longitude contains additional direction indicators
@@ -448,6 +450,7 @@ public class FormulaUtils {
             
             if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
                 result.add(new Pair<>(latProcessed, lonProcessed));
+                resultSet.add(key);
             }
             
             // Clear buffer for next coordinate
@@ -472,6 +475,7 @@ public class FormulaUtils {
             
             if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
                 result.add(new Pair<>(latProcessed, lonProcessed));
+                resultSet.add(key);
             }
         }
     }

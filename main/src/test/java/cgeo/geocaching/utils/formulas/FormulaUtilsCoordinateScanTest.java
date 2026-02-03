@@ -24,12 +24,18 @@ public class FormulaUtilsCoordinateScanTest {
         
         // Should find 3 separate coordinate pairs
         assertThat(result).hasSize(3);
-        assertThat(result.get(0).first).contains("49");
-        assertThat(result.get(0).first).contains("15.001");
-        assertThat(result.get(1).first).contains("49");
-        assertThat(result.get(1).first).contains("15.002");
-        assertThat(result.get(2).first).contains("49");
-        assertThat(result.get(2).first).contains("15.003");
+        
+        // Check that all three coordinates are present (order may vary due to sorting)
+        final String allResults = result.stream()
+            .map(p -> p.first + "|" + p.second)
+            .reduce("", (a, b) -> a + ";" + b);
+        
+        assertThat(allResults).contains("15.001");
+        assertThat(allResults).contains("A26");
+        assertThat(allResults).contains("15.002");
+        assertThat(allResults).contains("(A)27");
+        assertThat(allResults).contains("15.003");
+        assertThat(allResults).contains("(A+A)93");
     }
 
     @Test

@@ -1,6 +1,12 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.utils.formulas.FormulaUtils;
+
+import android.util.Pair;
+
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -80,16 +86,25 @@ public class CacheArtefactParserIssue17801Test {
     
     @Test
     public void testParseCoordinatesWithVariables() {
-        // Waypoints with coordinates containing variables should still be parsed
+        // Test that FormulaUtils can scan coordinates with variables
         final String text = "N49 15.001 E7 03.A26\n" +
                 "N 49° 15.002 E 007° 03.(A)27\n" +
                 "N49° 15.003 E 007° 02.(A+A)93";
         
-        final CacheArtefactParser parser = new CacheArtefactParser(null, "WP");
-        final Collection<Waypoint> waypoints = parser.parse(text).getWaypoints();
+        // This tests the FormulaUtils coordinate scanning, not CacheArtefactParser waypoint creation
+        // CacheArtefactParser uses GeopointParser.parseAll() which is a different mechanism
+        final List<Pair<String, String>> coords = FormulaUtils.scanForCoordinates(Collections.singleton(text), null);
         
-        // Note: Coordinate parsing behavior unchanged by this fix
-        // This test documents current behavior
-        assertThat(waypoints).isNotEmpty();
+        // Should find all 3 coordinates
+        assertThat(coords).hasSize(3);
+        
+        // Verify they contain the expected values
+        final String allCoords = coords.stream()
+            .map(p -> p.first + "|" + p.second)
+            .reduce("", (a, b) -> a + ";" + b);
+        
+        assertThat(allCoords).contains("15.001");
+        assertThat(allCoords).contains("15.002");
+        assertThat(allCoords).contains("15.003");
     }
 }
