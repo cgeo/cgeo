@@ -270,15 +270,23 @@ android {
     }
 }
 
+    // tests rely on JUnit-based classes
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+}
+
+// remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
 androidComponents {
     onVariants(selector().all()) { variant ->
-        // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
         variant.outputs.forEach { output ->
-            var ofn = output.outputFileName
-            ofn.set(ofn.get().replace('-basic-', '-'))
+            output.outputFileName.set(output.outputFileName.get().replace('-basic-', '-'))
         }
-        
-        // special version code for nightly and rc builds
+    }
+}
+
+// special version code for nightly and rc builds  
+androidComponents {
+    onVariants(selector().all()) { variant ->
         if (variant.buildType == 'nightly') {
             variant.outputs.forEach { output ->
                 output.versionCode.set(versionCodeFromDate(10000000))
@@ -301,12 +309,6 @@ androidComponents {
         }
         // debug and release builds have offset zero, no special handling here
     }
-}
-
-android {
-    // tests rely on JUnit-based classes
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
 }
 
 dependencies {
@@ -428,6 +430,9 @@ dependencies {
 
     // Organic Maps integration
     implementation project(":organicmaps-api")
+
+    // OpenWIG integration for Wherigo support
+    implementation project(":openwig")
 
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.19.0'
@@ -552,7 +557,7 @@ File templatesFile = project.file(templatesDirectory + keysXml)
 File keysFile = project.file(keysDirectory + keysXml)
 String preferencesXml = 'cgeo.geocaching_preferences.xml'
 File preferencesFile = project.file(preferencesXml)
-String adb = android.getAdbExecutable().absolutePath
+// ADB path will be obtained from sdkComponents in AGP 9.0+
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -638,23 +643,21 @@ static boolean isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
-// Custom run tasks to launch the app directly from gradle
+// have a run task for our builds to launch the app directly from gradle
 androidComponents {
     onVariants(selector().all()) { variant ->
         def installTaskName = "install${variant.name.capitalize()}"
         tasks.register("run${variant.name.capitalize()}") {
             group = 'cgeo'
             description = "Installs the ${variant.name} and runs the main activity. Depends on 'adb' being on the PATH."
-            
-            // Use provider to resolve install task lazily
-            dependsOn(providers.provider { tasks.findByName(installTaskName) })
+            dependsOn installTaskName
 
             doFirst {
                 String classpath = variant.namespace
                 GString launchClass = "${variant.namespace}/${classpath}.MainActivity"
                 try {
                     execOperations.exec {
-                        executable = adb
+                        executable = androidComponents.sdkComponents.adb.get().asFile.absolutePath
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
                 }
@@ -713,28 +716,29 @@ tasks.register('copyDefaultPreferencesToAndroid') {
         Injected injected = project.objects.newInstance(Injected)
         doFirst {
             try {
+                String adbPath = androidComponents.sdkComponents.adb.get().asFile.absolutePath
                 String debugBuildAppId = 'cgeo.geocaching.developer'
                 String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
                 String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
                 String tempDirectory = '/data/local/tmp/'
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbPath
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbPath
                     args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbPath
                     args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbPath
                     args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
                 }
                 injected.execOperations.exec {
-                    executable = adb
+                    executable = adbPath
                     args = ['shell', 'getprop', 'ro.build.version.release']
                 }
             }
@@ -770,7 +774,9 @@ dexcount {
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
-apply plugin: 'de.mobilej.unmock'
+// TEMPORARILY DISABLED: unmock plugin is not compatible with AGP 9.0
+// TODO: Find alternative or wait for unmock plugin update
+// apply plugin: 'de.mobilej.unmock'
 
 /*
  * own checkstyle configuration

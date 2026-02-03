@@ -163,7 +163,7 @@ public class WherigoGame implements UI {
 
             this.lastPlayedCGuid = getCGuid();
 
-            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
+            final Engine engine = new Engine(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (loadGame) {
                 engine.restore();
             } else {
@@ -282,7 +282,7 @@ public class WherigoGame implements UI {
         if (!isPlaying()) {
             return null;
         }
-        return Engine.instance.player;
+        return Engine.getCurrentInstance().player;
     }
 
     @Nullable
@@ -332,7 +332,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void start() {
-        this.cartridge = Engine.instance.cartridge;
+        this.cartridge = Engine.getCurrentInstance().cartridge;
         isPlaying = true;
         Log.iForce(LOG_PRAEFIX + "pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);
