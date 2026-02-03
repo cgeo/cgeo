@@ -28,7 +28,7 @@ node('has-emulator') {
                     sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh'
 
                     // Ensure proper cleaning
-                    sh './gradlew --offline --no-daemon --scan  clean'
+                    sh './gradlew --no-daemon --scan  clean'
                     sh 'rm -fr build build-cache main/build || true'
 
                     // Accept Android licenses. these are the MD5 hashes of the license texts, so they may need to be adapted on license changes
