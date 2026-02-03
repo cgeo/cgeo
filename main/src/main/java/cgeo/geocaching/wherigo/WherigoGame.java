@@ -158,7 +158,7 @@ public enum WherigoGame implements UI {
 
             this.lastPlayedCGuid = getCGuid();
 
-            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
+            final Engine engine = new Engine(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (loadGame) {
                 engine.restore();
             } else {

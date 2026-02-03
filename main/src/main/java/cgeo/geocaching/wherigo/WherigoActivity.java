@@ -200,11 +200,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private void showOnMap() {
         final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
         final Viewport viewport = WherigoUtils.getZonesViewport(zones, true);
-        if (!WherigoGame.get().isPlaying() || viewport == null) {
+        if (!WherigoGame.GET.isPlaying() || viewport == null) {
             DefaultMap.startActivityLive(this);
             return;
         }
-        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
+        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.GET.getCartridgeName(), null);
     }
 
     private void goToCache(final String geocode) {
