@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
