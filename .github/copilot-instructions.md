@@ -4,8 +4,6 @@ This document provides repository-wide instructions for GitHub Copilot agents wo
 
 ## CLI Settings
 
-- **Permissions**: Enable `/yolo` mode (allow all permissions) by default for this repository to minimize interruptions during development.
-
 ### Build & Test Execution
 
 - Use system `gradle` command if available, otherwise use `./gradlew` wrapper
@@ -20,11 +18,6 @@ This document provides repository-wide instructions for GitHub Copilot agents wo
 - Disable pagers with `git --no-pager` for all git commands to avoid interactive prompts
 - Use `--quiet` flag with Gradle when checking for specific errors to reduce noise
 - Suppress verbose output by piping to `grep` or `head` when appropriate
-
-### Model Selection
-
-- Use Claude Sonnet 4.5 (default) for complex code changes requiring deep reasoning
-- Consider Claude Haiku 4.5 for quick checks, simple refactors, or running tests via task agent
 
 ### Workflow Optimization
 
