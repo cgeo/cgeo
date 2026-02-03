@@ -28,7 +28,7 @@ node('has-emulator') {
                     sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh'
 
                     // Ensure proper cleaning
-                    sh './gradlew --no-daemon --scan  clean'
+                    sh './gradlew --offline --no-daemon --scan  clean'
                     sh 'rm -fr build build-cache main/build || true'
 
                     // Accept Android licenses. these are the MD5 hashes of the license texts, so they may need to be adapted on license changes
@@ -51,13 +51,13 @@ node('has-emulator') {
                 timeout(15) {
                     // Build sequentially instead of in one command as this made problems in the past
                     stage ('Run emulator tests') {
-                        sh './gradlew --no-daemon --scan  testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests'
+                        sh './gradlew --offline --no-daemon --scan  testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests'
                     }
                     stage ('Run Checkstyle tests') {
-                        sh './gradlew --no-daemon --scan  checkstyle'
+                        sh './gradlew --offline --no-daemon --scan  checkstyle'
                     }
                    stage ('Run Lint tests') {
-                        sh './gradlew --no-daemon --scan  lintBasicDebug'
+                        sh './gradlew --offline --no-daemon --scan  lintBasicDebug'
                     }
                 }
             }

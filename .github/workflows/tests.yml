@@ -122,7 +122,7 @@ jobs:
           add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run checkstyle
-        run: ./gradlew --no-configuration-cache --no-daemon --scan checkstyle
+        run: ./gradlew --offline --no-configuration-cache --no-daemon --scan checkstyle
 
       - uses: lcollins/checkstyle-github-action@v3.1.0
         with:
@@ -184,7 +184,7 @@ jobs:
           add-job-summary-as-pr-comment: never  # Valid values are 'never' (default), 'always', and 'on-failure'
 
       - name: Run lintBasicDebug
-        run: ./gradlew --no-configuration-cache --no-daemon --scan lintBasicDebug
+        run: ./gradlew --offline --no-configuration-cache --no-daemon --scan lintBasicDebug
 
       - name: Check and report lint results
         uses: hidakatsuya/action-report-android-lint@v1
@@ -263,8 +263,8 @@ jobs:
 
       - name: Build binary
         run: |
-          ./gradlew --no-configuration-cache --scan packageBasicDebug
-          ./gradlew --no-configuration-cache packageBasicDebugAndroidTest
+          ./gradlew --offline --no-configuration-cache --scan packageBasicDebug
+          ./gradlew --offline --no-configuration-cache packageBasicDebugAndroidTest
 
       - name: Upload resulting APK
         uses: actions/upload-artifact@v4
@@ -329,7 +329,7 @@ jobs:
             # Capture logcat output ; see https://github.com/ReactiveCircus/android-emulator-runner/issues/228
             adb logcat -c || true
             adb logcat > /tmp/cgeo-apk-api${{ matrix.api-level }}.logcat.txt &
-            ./gradlew --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
+            ./gradlew --offline --no-configuration-cache --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
       - name: Unlock live tests

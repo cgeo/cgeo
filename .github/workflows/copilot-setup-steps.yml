@@ -33,7 +33,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Run Unit Tests to make sure all dependencies are installed
-        run: ./gradlew testBasicDebug
+        run: ./gradlew --offline testBasicDebug
 
       - name: Run Checkstyle to make sure all dependencies are installed
-        run: ./gradlew checkstyle
+        run: ./gradlew --offline checkstyle
