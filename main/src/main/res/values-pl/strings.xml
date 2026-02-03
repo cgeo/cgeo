@@ -815,6 +815,10 @@
     <string name="downloader_pending_info">Istnieje co najmniej jedno przerwane lub nieudane pobieranie. Czy chcesz otworzyć listę oczekujących pobrań?</string>
     <string name="downloader_retry_download">Ponów pobieranie</string>
     <string name="downloader_retry_download_details">Czy chcesz ponowić pobieranie następującego pliku?</string>
+    <string name="downloader_delete_all_pending">Usuń wszystkie</string>
+    <string name="downloader_delete_all_confirmation">Usunąć wszystkie oczekujące pobierania?</string>
+    <string name="downloader_delete_all_message">Spowoduje to anulowanie wszystkich oczekujących pobrań %d i usunięcie pobranych części. Tej akcji nie można cofnąć.</string>
+    <string name="downloader_deleted_all">Usunięto wszystkie oczekujące pobierania</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Pobieranie nie powiodło się (i nie zostanie ponowione)</string>
     <string name="asdm_status_paused">Pobieranie czeka na ponowną próbę lub wznowienie</string>
@@ -1068,6 +1072,10 @@
         <item>Jasny</item>
         <item>Ciemny</item>
     </string-array>
+    <string name="init_colored_theme_dark">Kolorowy ciemny motyw</string>
+    <string name="init_colored_theme_light">Kolorowy jasny motyw</string>
+    <string name="init_summary_colored_theme_dark">Użyj kolorowego paska narzędzi w ciemnym motywie</string>
+    <string name="init_summary_colored_theme_light">Użyj kolorowego paska narzędzi w jasnym motywie</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Ekran domyślny</string>
     <string name="init_wallpaper">Tapeta</string>
