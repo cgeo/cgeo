@@ -38,3 +38,18 @@ While this APK has been added to the repository in the artifacts folder, creatin
 ## Build Details
 
 This build was created from the c:geo Android application, which is a full-featured geocaching app for Android devices. The FOSS variant is the free and open-source version without proprietary Google services.
+
+## Important Note About Binary Artifacts in Git
+
+Storing binary artifacts (like APKs) in a git repository is generally not recommended as it:
+- Significantly increases repository size
+- Slows down cloning and fetching operations
+- Cannot be easily removed from git history once committed
+
+**Recommended Alternatives:**
+1. **GitHub Releases**: Use GitHub's release feature to attach binary artifacts without bloating the repository
+2. **CI/CD Artifacts**: Configure GitHub Actions or other CI systems to build and store APKs as artifacts
+3. **Build Documentation**: Provide clear build instructions so users can build the APK themselves
+4. **External Storage**: Use services like GitHub Packages, Maven repositories, or cloud storage for distributing builds
+
+This APK was added to the repository as a temporary solution per the specific requirements. For long-term distribution, consider migrating to one of the alternatives above.
