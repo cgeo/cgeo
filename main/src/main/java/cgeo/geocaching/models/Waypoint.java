@@ -50,7 +50,7 @@ public class Waypoint implements INamedGeoCoordinate {
     public static final int NEW_ID = -1;
 
     private int id = NEW_ID;
-    private String geocode = "geocode";
+    private String geocode = "";
     private Geocache parentCache = null;
     private WaypointType waypointType = WaypointType.WAYPOINT;
     @NonNull
