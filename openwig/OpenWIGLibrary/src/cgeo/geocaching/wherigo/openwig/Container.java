@@ -63,9 +63,9 @@ public class Container extends EventTable {
         Object key = null;
         while ((key = inventory.next(key)) != null) {
             Object value = inventory.rawget(key);
-            if (value instanceof Thing) {
+            if (value instanceof Thing thing) {
                 if (value == t) return true;
-                if (((Thing) value).contains(t)) return true;
+                if (thing.contains(t)) return true;
             }
         }
         return false;
@@ -74,8 +74,7 @@ public class Container extends EventTable {
     public boolean visibleToPlayer () {
         if (!isVisible()) return false;
         if (container == Engine.instance.player) return true;
-        if (container instanceof Zone) {
-            Zone z = (Zone) container;
+        if (container instanceof Zone z) {
             return z.showThings();
         }
         return false;
@@ -91,7 +90,7 @@ public class Container extends EventTable {
         super.deserialize(in);
         inventory = (LuaTable) table.rawget("Inventory");
         Object o = table.rawget("Container");
-        if (o instanceof Container) container = (Container) o;
+        if (o instanceof Container c) container = c;
         else container = null;
     }
 }

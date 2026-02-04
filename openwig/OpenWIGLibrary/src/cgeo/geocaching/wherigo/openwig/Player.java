@@ -64,7 +64,7 @@ public class Player extends Thing {
         Object key = null;
         while ((key = inventory.next(key)) != null) {
             Object o = inventory.rawget(key);
-            if (o instanceof Thing && ((Thing) o).isVisible()) count++;
+            if (o instanceof Thing thing && thing.isVisible()) count++;
         }
         return count;
     }

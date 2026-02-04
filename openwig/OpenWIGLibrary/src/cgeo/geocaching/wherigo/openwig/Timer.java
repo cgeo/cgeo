@@ -113,12 +113,8 @@ public class Timer extends EventTable {
         if (callEvent) callEvent("OnStart", null);
         updateRemaining();
         switch (type) {
-            case COUNTDOWN:
-                globalTimer.schedule(task, when);
-                break;
-            case INTERVAL:
-                globalTimer.scheduleAtFixedRate(task, when, duration);
-                break;
+            case COUNTDOWN -> globalTimer.schedule(task, when);
+            case INTERVAL -> globalTimer.scheduleAtFixedRate(task, when, duration);
         }
     }
     
