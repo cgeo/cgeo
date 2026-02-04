@@ -95,7 +95,10 @@ public class Action extends EventTable {
             LuaTable lt = (LuaTable) value;
             Object i = null;
             while ((i = lt.next(i)) != null) {
-                targets.add(lt.rawget(i));
+                Object target = lt.rawget(i);
+                if (target instanceof Thing thing) {
+                    targets.add(thing);
+                }
             }
             associateWithTargets();
         } else if ("MakeReciprocal".equals(key)) {

@@ -119,14 +119,14 @@ public class Cartridge extends EventTable {
     }
 
     private void sortObject (Object o) {
-        if (o instanceof Task) {
-            tasks.add(o);
-        } else if (o instanceof Zone) {
-            zones.add(o);
-        } else if (o instanceof Timer) {
-            timers.add(o);
-        } else if (o instanceof Thing) {
-            things.add(o);
+        if (o instanceof Task t) {
+            tasks.add(t);
+        } else if (o instanceof Zone z) {
+            zones.add(z);
+        } else if (o instanceof Timer t) {
+            timers.add(t);
+        } else if (o instanceof Thing t) {
+            things.add(t);
         }
     }
 
