@@ -5,6 +5,30 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 
+<<<<<<< HEAD
+=======
+import static cgeo.geocaching.enumerations.CacheType.BLOCK_PARTY;
+import static cgeo.geocaching.enumerations.CacheType.COMMUN_CELEBRATION;
+import static cgeo.geocaching.enumerations.CacheType.GCHQ;
+import static cgeo.geocaching.enumerations.CacheType.GCHQ_CELEBRATION;
+import static cgeo.geocaching.enumerations.CacheType.GIGA_EVENT;
+import static cgeo.geocaching.enumerations.CacheType.GPS_EXHIBIT;
+import static cgeo.geocaching.enumerations.CacheType.LOCATIONLESS;
+import static cgeo.geocaching.enumerations.CacheType.MEGA_EVENT;
+import static cgeo.geocaching.enumerations.CacheType.PROJECT_APE;
+import static cgeo.geocaching.enumerations.CacheType.UNKNOWN;
+import static cgeo.geocaching.enumerations.CacheType.VIRTUAL;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+>>>>>>> 0d90e2570 (fix: Replace wildcard static import with explicit imports per code guidelines)
 import org.apache.commons.lang3.EnumUtils;
 
 public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, CacheType> {
