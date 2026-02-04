@@ -21,9 +21,9 @@ android {
 
 
     compileOptions {
-        // Match main project's Java version
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        // OpenWIG uses Java 14+ features (switch expressions)
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     defaultConfig {
