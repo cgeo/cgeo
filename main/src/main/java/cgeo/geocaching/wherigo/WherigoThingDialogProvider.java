@@ -104,7 +104,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
         }
         //media
-        binding.media.setMedia((Media) eventTable.table.rawget("Media"));
+        binding.media.setMedia((Media) eventTable.rawget("Media"));
 
         //title
         control.setTitle(eventTable.name);

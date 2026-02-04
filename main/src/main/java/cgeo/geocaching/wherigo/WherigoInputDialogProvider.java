@@ -73,7 +73,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         binding.media.setMedia((Media) input.rawget("Media"));
         final Object descr = input.rawget("Text");
-        binding.description.setText(WherigoGame.GET.toDisplayText(descr == null ? "" : descr.toString()));
+        binding.description.setText(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
 
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {
