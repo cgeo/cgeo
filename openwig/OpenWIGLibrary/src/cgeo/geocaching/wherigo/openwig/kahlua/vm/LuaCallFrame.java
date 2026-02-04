@@ -141,7 +141,9 @@ public class LuaCallFrame {
     public void pushVarargs(int index, int n) {
         int nParams = closure.prototype.numParams;
         int nVarargs = nArguments - nParams;
-        if (nVarargs < 0) nVarargs = 0;
+        if (nVarargs < 0) {
+            nVarargs = 0;
+        }
         if (n == -1) {
             n = nVarargs;
             setTop(index + n);

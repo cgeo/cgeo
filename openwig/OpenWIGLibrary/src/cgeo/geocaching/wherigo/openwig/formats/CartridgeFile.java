@@ -53,7 +53,9 @@ public class CartridgeFile {
         CartridgeFile cf = new CartridgeFile();
         cf.source = source;
         
-        if (!cf.fileOk()) throw new IOException("invalid cartridge file");
+        if (!cf.fileOk()) {
+            throw new IOException("invalid cartridge file");
+        }
         
         cf.scanOffsets();
         cf.scanHeader();

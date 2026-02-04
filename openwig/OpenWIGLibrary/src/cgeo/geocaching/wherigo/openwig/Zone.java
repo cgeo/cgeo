@@ -362,9 +362,15 @@ public class Zone extends Thing {
         Object key = null;
         while ((key = inventory.next(key)) != null) {
             Object o = inventory.rawget(key);
-            if (o instanceof Player) continue;
-            if (!(o instanceof Thing thing)) continue;
-            if (thing.isVisible()) count++;
+            if (o instanceof Player) {
+                continue;
+            }
+            if (!(o instanceof Thing thing)) {
+                continue;
+            }
+            if (thing.isVisible()) {
+                count++;
+            }
         }
         return count;
     }

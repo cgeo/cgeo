@@ -369,9 +369,13 @@ public class Engine implements Runnable {
 
     /** fires the specified event on the specified object in the event thread */
     public static void callEvent (final EventTable subject, final String name, final Object param) {
-        if (!subject.hasEvent(name)) return;
+        if (!subject.hasEvent(name)) {
+            return;
+        }
         final Engine currentEngine = getCurrentInstance();
-        if (currentEngine == null) return;
+        if (currentEngine == null) {
+            return;
+        }
         currentEngine.eventRunner.perform(new Runnable() {
             public void run () {
                 subject.callEvent(name, param);
