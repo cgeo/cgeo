@@ -94,9 +94,8 @@ allprojects {
                         // see https://assertj.github.io/doc/#assertj-core-android
                         // AssertJ Core 3.x is compatible with Android API Level 26+, except for soft assertions and assumptions.
                         // AssertJ Core 2.x is Android compatible with Android API Level 26+ and API Level < 26 except for Path assertions.
-                        if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
-                            selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
-                        }
+                        // Since we use minSdk 26, we can use AssertJ 3.x
+                        // Rejection rule removed to allow upgrading to 3.27.7+ for security fixes
                     }
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw

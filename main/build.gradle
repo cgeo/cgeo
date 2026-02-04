@@ -268,7 +268,6 @@ android {
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
     }
-}
 
     // tests rely on JUnit-based classes
     useLibrary 'android.test.runner'
@@ -327,7 +326,7 @@ dependencies {
     implementation 'com.github.k3b:k3b-geoHelper:v1.1.12'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    String assertJVersion = '2.9.1'
+    String assertJVersion = '3.27.7'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 

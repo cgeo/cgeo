@@ -120,7 +120,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    String assertJVersion = '2.9.1'
+    String assertJVersion = '3.27.7'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
