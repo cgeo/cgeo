@@ -9,7 +9,8 @@ import java.io.*;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 
 /**
@@ -33,7 +34,7 @@ public class Thing extends Container {
 
     protected String luaTostring () { return character ? "a ZCharacter instance" : "a ZItem instance"; }
 
-    public Vector<Action> actions = new Vector<>();
+    public List<Action> actions = new ArrayList<>();
 
     public Thing () {
         // for serialization
@@ -60,10 +61,10 @@ public class Thing extends Container {
         if ("Commands".equals(key)) {
             // clear out existing actions
             for (int i = 0; i < actions.size(); i++) {
-                Action a = actions.elementAt(i);
+                Action a = actions.get(i);
                 a.dissociateFromTargets();
             }
-            actions.removeAllElements();
+            actions.clear();
 
             // add new actions
             LuaTable lt = (LuaTable)value;
@@ -74,7 +75,7 @@ public class Thing extends Container {
                 if (i instanceof Double) a.name = BaseLib.numberToString((Double)i);
                 else a.name = i.toString();
                 a.setActor(this);
-                actions.addElement(a);
+                actions.add(a);
                 a.associateWithTargets();
             }
         } else super.setItem(key, value);
@@ -83,7 +84,7 @@ public class Thing extends Container {
     public int visibleActions() {
         int count = 0;
         for (int i = 0; i < actions.size(); i++) {
-            Action c = actions.elementAt(i);
+            Action c = actions.get(i);
             if (!c.isEnabled()) continue;
             if (c.getActor() == this || c.getActor().visibleToPlayer()) count++;
         }

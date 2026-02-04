@@ -1,12 +1,12 @@
 package cgeo.geocaching.wherigo.openwig.util;
 
-import java.util.Vector;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BackgroundRunner extends Thread {
 
     private static BackgroundRunner instance;
 
-    private boolean paused = false;
+    private volatile boolean paused = false;
 
     public BackgroundRunner () {
         start();
@@ -27,14 +27,14 @@ public class BackgroundRunner extends Thread {
         notify();
     }
 
-    public static BackgroundRunner getInstance () {
+    public static synchronized BackgroundRunner getInstance () {
         if (instance == null) instance = new BackgroundRunner();
         return instance;
     }
     
-    private Vector queue = new Vector();
-    private boolean end = false;
-    private Runnable queueProcessedListener = null;
+    private final ConcurrentLinkedQueue<Runnable> queue = new ConcurrentLinkedQueue<>();
+    private volatile boolean end = false;
+    private volatile Runnable queueProcessedListener = null;
 
     public void setQueueListener (Runnable r) {
         queueProcessedListener = r;
@@ -50,8 +50,8 @@ public class BackgroundRunner extends Thread {
             events = false;
             while (!queue.isEmpty()) {
                 events = true;
-                Runnable c = (Runnable) queue.firstElement();
-                queue.removeElementAt(0);
+                Runnable c = queue.poll();
+                if (c == null) break;
                 try {
                     c.run();
                 } catch (Throwable t) {
@@ -69,7 +69,7 @@ public class BackgroundRunner extends Thread {
     }
 
     public synchronized void perform (Runnable c) {
-        queue.addElement(c);
+        queue.offer(c);
         notify();
     }
 

@@ -1,6 +1,7 @@
 package cgeo.geocaching.wherigo.openwig;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import cgeo.geocaching.wherigo.openwig.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.openwig.kahlua.vm.LuaTable;
@@ -12,7 +13,7 @@ public class Action extends EventTable {
     private boolean enabled;
 
     private Thing actor = null;
-    private Vector targets = new Vector();
+    private List<Thing> targets = new ArrayList<>();
     private boolean universal;
     
     public String text;
@@ -38,14 +39,14 @@ public class Action extends EventTable {
         }
         if (isReciprocal()) {
             for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing) targets.elementAt(j);
+                Thing t = targets.get(j);
                 if (!t.actions.contains(this)) {
-                    t.actions.addElement(this);
+                    t.actions.add(this);
                 }
             }
         }
         if (isUniversal() && !Engine.instance.cartridge.universalActions.contains(this)) {
-            Engine.instance.cartridge.universalActions.addElement(this);
+            Engine.instance.cartridge.universalActions.add(this);
         }
     }
 
@@ -55,12 +56,12 @@ public class Action extends EventTable {
         }
         if (isReciprocal()) {
             for (int j = 0; j < targets.size(); j++) {
-                Thing t = (Thing) targets.elementAt(j);
-                t.actions.removeElement(this);
+                Thing t = targets.get(j);
+                t.actions.remove(this);
             }
         }
         if (isUniversal()) {
-            Engine.instance.cartridge.universalActions.removeElement(this);
+            Engine.instance.cartridge.universalActions.remove(this);
         }
     }
 
@@ -94,7 +95,7 @@ public class Action extends EventTable {
             LuaTable lt = (LuaTable) value;
             Object i = null;
             while ((i = lt.next(i)) != null) {
-                targets.addElement(lt.rawget(i));
+                targets.add(lt.rawget(i));
             }
             associateWithTargets();
         } else if ("MakeReciprocal".equals(key)) {
@@ -142,7 +143,7 @@ public class Action extends EventTable {
         return targets.contains(t) || isUniversal();
     }
 
-    public Vector getTargets () {
+    public List<Thing> getTargets () {
         return targets;
     }
 
