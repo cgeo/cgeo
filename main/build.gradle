@@ -83,7 +83,7 @@ android {
             applicationIdSuffix = ".developer"
 
             // additional proguard rules just for the test code
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt', 'src/test/proguard-project.txt'
 
             // code coverage
             enableUnitTestCoverage = isContinuousIntegrationServer()
@@ -146,7 +146,7 @@ android {
         }
 
         // proguard rules
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
     }
 
     testBuildType = "debug" //the default BuildType
