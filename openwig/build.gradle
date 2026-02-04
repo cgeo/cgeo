@@ -5,8 +5,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // Android Gradle Plugin
-        classpath 'com.android.tools.build:gradle:9.0.0'
+        // Android Gradle Plugin - must match version in root build.gradle
+        classpath 'com.android.tools.build:gradle:8.13.2'
     }
 }
 
@@ -21,8 +21,9 @@ android {
 
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        // Match main project's Java version
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
