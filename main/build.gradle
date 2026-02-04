@@ -25,9 +25,9 @@ android {
         // https://developer.android.com/studio/write/java8-support
         // enable Java 8 APIs like Streams on older Android versions
         coreLibraryDesugaringEnabled = true
-        // use the diamond operator, lambdas and some other Java 8 language features in Android
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        // use Java 17 features (required for openwig module compatibility)
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
