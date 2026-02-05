@@ -24,6 +24,7 @@ public class FormulaException extends IllegalArgumentException {
         CYCLIC_DEPENDENCY(R.string.formula_error_cyclicdependency, "Cycle: %1$s"),
         EMPTY_FORMULA(R.string.formula_error_empty, "Empty Formula"),
         NUMERIC_OVERFLOW(R.string.formula_error_numeric_overflow, "Numeric overflow"),
+        INVALID_RANGE(R.string.formula_error_invalid_range, "Invalid range: '%1$s'"),
         OTHER(R.string.formula_error_other, "Error: '%1$s'");
 
         @StringRes

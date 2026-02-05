@@ -2064,6 +2064,12 @@
     <string name="formula_function_lettervalue">Word Value</string>
     <string name="formula_function_roman">Roman to Decimal</string>
     <string name="formula_function_vanity">Vanity Code</string>
+    <string name="formula_function_add">Add</string>
+    <string name="formula_function_multiply">Multiply</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Count</string>
+    <string name="formula_function_average">Average</string>
 
     <string name="formula_function_group_simplenumeric">Simple Numeric</string>
     <string name="formula_function_group_complexnumeric">Complex Numeric</string>
@@ -2077,6 +2083,7 @@
     <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
     <string name="formula_error_empty">Empty Formula</string>
     <string name="formula_error_numeric_overflow">Numeric overflow</string>
+    <string name="formula_error_invalid_range">Invalid range: %1$s</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
 
     <!-- ImageView -->
