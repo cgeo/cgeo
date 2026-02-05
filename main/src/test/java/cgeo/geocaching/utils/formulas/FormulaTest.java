@@ -362,6 +362,16 @@ public class FormulaTest {
     }
 
     @Test
+    public void rangeFunctions() {
+        assertThat(eval("add('0-5')")).isEqualTo(1 + 2 + 3 + 4 + 5);
+        assertThat(eval("multiply('1-5')")).isEqualTo(2 * 3 * 4 * 5);
+        assertThat(eval("min(-99;1;3;99)")).isEqualTo(-99);
+        assertThat(eval("max(-99;1;3;99)")).isEqualTo(99);
+        assertThat(eval("count(10;'1-5')")).isEqualTo(6);
+        assertThat(eval("avg(10;'1-4')")).isEqualTo((10 + 1 + 2 + 3 + 4) / 5d);
+    }
+
+    @Test
     public void neededVariables() {
         assertThat(neededVars("abcdef")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");
         assertThat(neededVars("abcdef")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");

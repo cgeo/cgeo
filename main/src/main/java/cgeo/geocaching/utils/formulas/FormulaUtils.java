@@ -235,6 +235,14 @@ public class FormulaUtils {
         return sb.toString();
     }
 
+    public static Value average(final ValueList valueList) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Value value : valueList) {
+            sum = sum.add(value.getAsDecimal());
+        }
+        return Value.of(sum.divide(BigDecimal.valueOf(valueList.size()), RoundingMode.HALF_UP));
+    }
+
     public static List<Pair<String, String>> scanForCoordinates(final Collection<String> texts, final Collection<Pair<String, String>> excludePairs) {
         final List<Pair<String, String>> result = new ArrayList<>();
         final Set<String> patternsFound = new HashSet<>();
