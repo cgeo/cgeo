@@ -70,30 +70,7 @@ public final class Formula {
 
     private int rangeIndexSize = 1;
 
-    public static Object createErrorSpan() {
-        return new ForegroundColorSpan(Color.RED);
-    }
-
-    public static Object createWarningSpan() {
-        return new ForegroundColorSpan(Color.GRAY);
-    }
-
-    public static class ErrorValue extends Value {
-
-        protected ErrorValue(final CharSequence errorString) {
-            super(errorString);
-        }
-
-        public static ErrorValue of(final CharSequence cs) {
-            return new ErrorValue(cs);
-        }
-
-        public static boolean isError(final Value v) {
-            return v instanceof ErrorValue;
-        }
-
-    }
-
+    @NonNull
     private FormulaNode createUnaryNumeric(final String operatorSymbol, final FormulaNode child, final boolean unaryBefore, final Function<Value, Number> function) {
         return createNumeric(operatorSymbol, new FormulaNode[]{child}, unaryBefore, valueList -> function.apply(valueList.get(0)));
     }
@@ -111,9 +88,9 @@ public final class Formula {
                 throw new FormulaException(FormulaException.ErrorType.NUMERIC_OVERFLOW);
             }
         }, (valueList, vars, rangeIdx, paramsInError) ->
-            optionalError(TextUtils.concat((valueList.size() == 1 && unaryBefore ? operatorSymbol : ""),
-            valueListToCharSequence(valueList, " " + operatorSymbol + " ", null, true),
-            (valueList.size() == 1 && !unaryBefore ? operatorSymbol : "")), paramsInError == null ? null : Collections.emptySet()));
+                FormulaError.optionalError(TextUtils.concat((valueList.size() == 1 && unaryBefore ? operatorSymbol : ""),
+                        FormulaError.valueListToCharSequence(valueList, " " + operatorSymbol + " ", null, true),
+                        (valueList.size() == 1 && !unaryBefore ? operatorSymbol : "")), paramsInError == null ? null : Collections.emptySet()));
     }
 
     static {
@@ -378,7 +355,7 @@ public final class Formula {
         return new FormulaNode(operatorSymbol, new FormulaNode[]{c1, c2}, (valueList, vars, rangeIdx) -> {
             final int compareResult = Value.compare(valueList.get(0), valueList.get(1));
             return Value.of(compareInterpretation.apply(compareResult) ? 1 : 0);
-        }, (valueList, vars, rangeIdx, paramsInError) -> valueListToCharSequence(valueList, " " + operatorSymbol + " "));
+        }, (valueList, vars, rangeIdx, paramsInError) -> FormulaError.valueListToCharSequence(valueList, " " + operatorSymbol + " "));
     }
 
     private FormulaNode parsePlusMinus() {
@@ -515,7 +492,7 @@ public final class Formula {
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()},
                         (o, v, ri) -> o.get(0),
-                        (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat("(", valueListToCharSequence(valueList), ")"), paramsInError)));
+                        (valueList, vars, rangeIdx, paramsInError) -> FormulaError.optionalError(TextUtils.concat("(", FormulaError.valueListToCharSequence(valueList), ")"), paramsInError)));
                 this.level--;
                 if (!p.eat(expectedClosingChar)) {
                     final FormulaException fe = new FormulaException(FormulaException.ErrorType.UNEXPECTED_TOKEN, "" + expectedClosingChar);
@@ -592,7 +569,7 @@ public final class Formula {
             if (value != null) {
                 return value.getAsString();
             }
-            return TextUtils.setSpan("?" + parsed, createErrorSpan());
+            return TextUtils.setSpan("?" + parsed, FormulaError.createErrorSpan());
         }, result -> result.add(parsed));
 
     }
@@ -644,7 +621,7 @@ public final class Formula {
             return concat(varValues);
         }, (objs, vars, ri, error) -> TextUtils.join(IteratorUtils.arrayIterator(varBlock.toCharArray()), c -> {
             final Value value = vars.apply("" + c);
-            return value == null ? TextUtils.setSpan("?" + c, createErrorSpan()) : value.getAsCharSequence();
+            return value == null ? TextUtils.setSpan("?" + c, FormulaError.createErrorSpan()) : value.getAsCharSequence();
         }, ""), result -> {
             for (char l : varBlock.toCharArray()) {
                 result.add("" + l);
@@ -701,8 +678,8 @@ public final class Formula {
                         throw ce;
                     }
                 },
-                (valueList, vars, rangeIdx, paramsInError) -> optionalError(TextUtils.concat(functionName + "(",
-                    valueListToCharSequence(valueList, "; ", paramsInError, true),
+                (valueList, vars, rangeIdx, paramsInError) -> FormulaError.optionalError(TextUtils.concat(functionName + "(",
+                        FormulaError.valueListToCharSequence(valueList, "; ", paramsInError, true),
                     ")"), paramsInError),
                 neededVars -> neededVars.addAll(explicitlyNeededVars));
 
@@ -719,17 +696,17 @@ public final class Formula {
         CharSequence ef = fe.getExpressionFormatted();
         if (ef == null) {
             //create initial formatted expression
-            ef = TextUtils.setSpan(p.getExpression(), createWarningSpan(), -1, -1, 1);
+            ef = TextUtils.setSpan(p.getExpression(), FormulaError.createWarningSpan(), -1, -1, 1);
             if (p.pos() < 0 || p.pos() >= ef.length()) {
-                ef = TextUtils.concat(ef, TextUtils.setSpan("?", createErrorSpan()));
+                ef = TextUtils.concat(ef, TextUtils.setSpan("?", FormulaError.createErrorSpan()));
             } else {
-                TextUtils.setSpan(ef, createErrorSpan(), p.pos(), p.pos() + 1, 0);
+                TextUtils.setSpan(ef, FormulaError.createErrorSpan(), p.pos(), p.pos() + 1, 0);
             }
         }
         if (start >= 0) {
             final int end = pend < 0 ? start + 1 : pend;
             if (start < ef.length() && end > start && end <= ef.length()) {
-                ef = TextUtils.setSpan(ef, createErrorSpan(), start, end, 0);
+                ef = TextUtils.setSpan(ef, FormulaError.createErrorSpan(), start, end, 0);
             }
         }
         fe.setExpressionFormatted(ef);
@@ -767,26 +744,6 @@ public final class Formula {
             }
         }
         return Value.of(sb.toString());
-    }
-
-    // Methoden für FormulaNode nutzbar machen
-    static CharSequence optionalError(final CharSequence value, final Set<Integer> childrenInError) {
-        return childrenInError != null && childrenInError.isEmpty() ? TextUtils.setSpan(value, createErrorSpan()) : value;
-    }
-
-    static CharSequence valueListToCharSequence(final ValueList valueList) {
-        return valueListToCharSequence(valueList, null);
-    }
-
-    static CharSequence valueListToCharSequence(final ValueList valueList, final CharSequence delim) {
-        return valueListToCharSequence(valueList, delim, null, false);
-    }
-
-    static CharSequence valueListToCharSequence(final ValueList valueList, final CharSequence delim, final Set<Integer> childrenInError, final boolean quoteTypes) {
-        final int[] idx = new int[]{0};
-        return TextUtils.join(valueList, v -> Formula.ErrorValue.isError(v) || childrenInError == null || !childrenInError.contains(idx[0]++) ?
-                        v.getAsTypedCharSequence(quoteTypes && !Formula.ErrorValue.isError(v)) : TextUtils.setSpan(TextUtils.concat("<", v.getAsTypedCharSequence(quoteTypes), ">"), createErrorSpan()),
-                delim == null ? "" : delim);
     }
 
 

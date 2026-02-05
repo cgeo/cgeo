@@ -136,8 +136,8 @@ final class FormulaNode {
     @NonNull
     CharSequence evalToCharSequence(final Function<String, Value> vars, final int rangeIdx) {
         final Object result = evalToCharSequenceInternal(vars == null ? x -> null : vars, rangeIdx);
-        if (result instanceof Formula.ErrorValue) {
-            return TextUtils.setSpan(((Formula.ErrorValue) result).getAsCharSequence(), Formula.createWarningSpan(), -1, -1, 5);
+        if (result instanceof FormulaError.ErrorValue) {
+            return TextUtils.setSpan(((FormulaError.ErrorValue) result).getAsCharSequence(), FormulaError.createWarningSpan(), -1, -1, 5);
         }
         return result.toString();
     }
@@ -157,7 +157,7 @@ final class FormulaNode {
         boolean hasError = false;
         for (FormulaNode child : children) {
             final Value v = child.evalToCharSequenceInternal(variables, rangeIdx);
-            if (v instanceof Formula.ErrorValue) {
+            if (v instanceof FormulaError.ErrorValue) {
                 hasError = true;
             }
             childValues.add(v);
@@ -178,9 +178,9 @@ final class FormulaNode {
             cs = this.functionToErrorString.call(childValues, variables, rangeIdx, childsInError);
         }
         if (cs == null) {
-            cs = Formula.optionalError(Formula.valueListToCharSequence(childValues), childsInError);
+            cs = FormulaError.optionalError(FormulaError.valueListToCharSequence(childValues), childsInError);
         }
-        return Formula.ErrorValue.of(cs);
+        return FormulaError.ErrorValue.of(cs);
     }
 
     /**
