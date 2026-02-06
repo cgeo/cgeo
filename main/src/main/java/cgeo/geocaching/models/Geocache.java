@@ -2237,6 +2237,10 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public int getEventEndTimeInMinutes() {
+        if (eventTimesInMin.end == null) {
+            // Ensure start time is computed first, which will also compute end time
+            getEventStartTimeInMinutes();
+        }
         return eventTimesInMin.end == null ? -1 : eventTimesInMin.end;
     }
 
@@ -2255,9 +2259,16 @@ public class Geocache implements INamedGeoCoordinate {
             eventTimesInMin.start = gcDates[0];
             eventTimesInMin.end = gcDates[1];
         } else {
-            // if not successful scan the whole description for what looks like a start time
+            // if not successful scan the whole description for what looks like start and end times
             final String searchText = getShortDescription() + ' ' + getDescription();
-            eventTimesInMin.start = EventTimeParser.guessEventTimeMinutes(searchText);
+            final int[] guessedTimes = EventTimeParser.guessEventTimesMinutes(searchText);
+            eventTimesInMin.start = guessedTimes[0];
+            if (guessedTimes[1] >= 0) {
+                eventTimesInMin.end = guessedTimes[1];
+            } else if (guessedTimes[0] >= 0) {
+                // If we have a start time but no end time, default to 1 hour duration
+                eventTimesInMin.end = guessedTimes[0] + 60;
+            }
         }
     }
 

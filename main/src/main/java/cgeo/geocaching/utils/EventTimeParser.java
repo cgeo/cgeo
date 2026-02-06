@@ -32,11 +32,31 @@ public class EventTimeParser {
     }
 
     public static int guessEventTimeMinutes(final String searchText) {
+        final int[] times = guessEventTimesMinutes(searchText);
+        return times[0];
+    }
+
+    /**
+     * Guess event start and end times from the description text.
+     * @param searchText the text to search for event times
+     * @return array with [startTimeMinutes, endTimeMinutes], where -1 indicates unknown
+     */
+    public static int[] guessEventTimesMinutes(final String searchText) {
+        final int[] result = new int[] { UNKNOWN, UNKNOWN };
+        
         final int eventTimeStandardFormat = getEventTimeStandardFormat(searchText);
         if (eventTimeStandardFormat != UNKNOWN) {
-            return eventTimeStandardFormat;
+            result[0] = eventTimeStandardFormat;
+            return result;
         }
 
+        // First try to find time ranges (e.g., "17-20 Uhr", "11 bis 13 Uhr")
+        final int[] timeRange = guessEventTimeRange(searchText);
+        if (timeRange[0] != UNKNOWN) {
+            return timeRange;
+        }
+
+        // If no range found, look for a single start time
         int start = UNKNOWN;
         int eventTimeMinutes = UNKNOWN;
         for (final Pattern pattern : getEventTimePatterns()) {
@@ -57,7 +77,86 @@ public class EventTimeParser {
                 }
             }
         }
-        return eventTimeMinutes;
+        result[0] = eventTimeMinutes;
+        return result;
+    }
+
+    /**
+     * Try to find a time range in the text (e.g., "17-20 Uhr", "11 bis 13 Uhr").
+     * @param searchText the text to search
+     * @return array with [startTimeMinutes, endTimeMinutes], where -1 indicates not found
+     */
+    private static int[] guessEventTimeRange(final String searchText) {
+        final int[] result = new int[] { UNKNOWN, UNKNOWN };
+        
+        // Get localized hour keyword - may be null in unit tests without Android context
+        final String hourLocalized;
+        try {
+            final CgeoApplication app = CgeoApplication.getInstance();
+            hourLocalized = app != null ? app.getString(R.string.cache_time_full_hours) : null;
+        } catch (final Exception e) {
+            // In unit tests, getInstance() may throw or return null
+            return result;
+        }
+        
+        if (StringUtils.isBlank(hourLocalized)) {
+            return result;
+        }
+
+        // Pattern to match time ranges like:
+        // "17-20 Uhr", "17:00-20:00 Uhr", "11 bis 13 Uhr", "from 11 to 13 o'clock"
+        // Capturing groups: (startHour) (startMin) (endHour) (endMin)
+        final List<Pattern> rangePatterns = new ArrayList<>();
+        
+        // Pattern: "17:00 - 20:30 Uhr" or "17-20 Uhr"
+        rangePatterns.add(Pattern.compile(
+            "\\b(\\d{1,2})(?::(\\d{2}))?\\s*-\\s*(\\d{1,2})(?::(\\d{2}))?\\s*" + Pattern.quote(hourLocalized),
+            Pattern.CASE_INSENSITIVE));
+        
+        // Pattern: "von 11 bis 13 Uhr" or "from 11 to 13 o'clock"
+        rangePatterns.add(Pattern.compile(
+            "\\b(?:von|from)\\s+(\\d{1,2})(?:\\.(\\d{2}))?\\s+(?:bis|to)\\s+(\\d{1,2})(?:\\.(\\d{2}))?\\s*" + Pattern.quote(hourLocalized),
+            Pattern.CASE_INSENSITIVE));
+
+        int earliestStart = Integer.MAX_VALUE;
+        
+        for (final Pattern pattern : rangePatterns) {
+            final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
+            while (matcher.find()) {
+                try {
+                    final int startHours = Integer.parseInt(matcher.group(1));
+                    int startMinutes = 0;
+                    if (matcher.groupCount() >= 2 && StringUtils.isNotEmpty(matcher.group(2))) {
+                        startMinutes = Integer.parseInt(matcher.group(2));
+                    }
+                    
+                    final int endHours = Integer.parseInt(matcher.group(3));
+                    int endMinutes = 0;
+                    if (matcher.groupCount() >= 4 && StringUtils.isNotEmpty(matcher.group(4))) {
+                        endMinutes = Integer.parseInt(matcher.group(4));
+                    }
+                    
+                    // Validate times
+                    if (startHours >= 0 && startHours < 24 && startMinutes >= 0 && startMinutes < 60 &&
+                        endHours >= 0 && endHours < 24 && endMinutes >= 0 && endMinutes < 60) {
+                        
+                        final int startTime = startHours * 60 + startMinutes;
+                        final int endTime = endHours * 60 + endMinutes;
+                        
+                        // Make sure end time is after start time (or at least equal)
+                        if (endTime >= startTime && matcher.start() < earliestStart) {
+                            result[0] = startTime;
+                            result[1] = endTime;
+                            earliestStart = matcher.start();
+                        }
+                    }
+                } catch (final NumberFormatException ignored) {
+                    // cannot happen, but static code analysis doesn't know
+                }
+            }
+        }
+        
+        return result;
     }
 
     public static int[] getEventTimesFromGcShortDesc(final String searchText) {
@@ -94,7 +193,15 @@ public class EventTimeParser {
      */
     private static List<Pattern> getEventTimePatterns() {
         if (EVENT_TIME_PATTERNS.isEmpty()) {
-            final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+            // Get localized hour keyword - may be null in unit tests without Android context
+            final String hourLocalized;
+            try {
+                final CgeoApplication app = CgeoApplication.getInstance();
+                hourLocalized = app != null ? app.getString(R.string.cache_time_full_hours) : null;
+            } catch (final Exception e) {
+                // In unit tests, getInstance() may throw or return null
+                return EVENT_TIME_PATTERNS; // Return empty list for now
+            }
 
             // 12:34
             EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
