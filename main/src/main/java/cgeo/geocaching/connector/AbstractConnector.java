@@ -411,7 +411,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @Nullable
-    public String geMyAccountUrl() {
+    public String getMyAccountUrl() {
         return null;
     }
 

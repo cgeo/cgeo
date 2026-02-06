@@ -86,7 +86,7 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
 
     @Override
     @Nullable
-    public String geMyAccountUrl() {
+    public String getMyAccountUrl() {
         return getSchemeAndHost() + "/myhome.php";
     }
 

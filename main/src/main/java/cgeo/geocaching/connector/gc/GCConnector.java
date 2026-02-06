@@ -611,8 +611,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @Nullable
-    public String geMyAccountUrl() {
-        return "https://www.geocaching.com/my/default.aspx";
+    public String getMyAccountUrl() {
+        return "https://www.geocaching.com/account/dashboard";
     }
 
     @Override
