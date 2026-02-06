@@ -143,8 +143,8 @@ public class EventTimeParser {
                         final int startTime = startHours * 60 + startMinutes;
                         final int endTime = endHours * 60 + endMinutes;
                         
-                        // Make sure end time is after start time (or at least equal)
-                        if (endTime >= startTime && matcher.start() < earliestStart) {
+                        // Make sure end time is after start time
+                        if (endTime > startTime && matcher.start() < earliestStart) {
                             result[0] = startTime;
                             result[1] = endTime;
                             earliestStart = matcher.start();

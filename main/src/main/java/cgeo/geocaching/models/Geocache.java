@@ -2237,8 +2237,8 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public int getEventEndTimeInMinutes() {
+        // Ensure times are computed (getEventStartTimeInMinutes computes both start and end)
         if (eventTimesInMin.end == null) {
-            // Ensure start time is computed first, which will also compute end time
             getEventStartTimeInMinutes();
         }
         return eventTimesInMin.end == null ? -1 : eventTimesInMin.end;
