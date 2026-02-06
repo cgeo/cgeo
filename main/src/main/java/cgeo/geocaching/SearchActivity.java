@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorUsernameMap;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -535,7 +536,9 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         }
 
         Settings.addToHistoryList(R.string.pref_search_history_owner, userName);
-        CacheListActivity.startActivityOwner(this, userName);
+        final ConnectorUsernameMap map = new ConnectorUsernameMap(1);
+        map.put(null, userName);
+        CacheListActivity.startActivityOwner(this, map);
         ActivityMixin.overrideTransitionToFade(this);
     }
 

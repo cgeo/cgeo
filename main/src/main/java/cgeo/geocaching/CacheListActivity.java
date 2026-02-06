@@ -18,6 +18,7 @@ import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorUsernameMap;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
@@ -1606,14 +1607,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(getActivityOfflineIntent(context));
     }
 
-    public static void startActivityOwner(final Context context, final String userName) {
-        if (!checkNonBlankUsername(context, userName)) {
+    public static void startActivityOwner(final Context context, @NonNull final ConnectorUsernameMap platformToOwnerMapping) {
+        if (platformToOwnerMapping.isEmpty()) {
             return;
         }
-        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        Intents.putListType(cachesIntent, CacheListType.OWNER);
-        cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
-        context.startActivity(cachesIntent);
+        final Intent intentForCaches = new Intent(context, CacheListActivity.class);
+        Intents.putListType(intentForCaches, CacheListType.OWNER);
+        intentForCaches.putExtra(Intents.EXTRA_CONNECTOR_USERNAMES, platformToOwnerMapping);
+        context.startActivity(intentForCaches);
     }
 
     public static void startActivityFilter(final Context context) {
@@ -1872,12 +1873,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get(), sortContext.getSort());
                     break;
                 case OWNER:
-                    final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                    title = listNameMemento.rememberTerm(ownerName);
-                    markerId = EmojiUtils.NO_EMOJI;
-                    if (ownerName != null) {
-                        loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), ownerName);
+                    final ConnectorUsernameMap connectorUsernames;
+                    try {
+                        final Object serializedMap = extras.getSerializable(Intents.EXTRA_CONNECTOR_USERNAMES);
+                        if (serializedMap instanceof ConnectorUsernameMap) {
+                            connectorUsernames = (ConnectorUsernameMap) serializedMap;
+                        } else {
+                            connectorUsernames = null;
+                        }
+                    } catch (final Exception e) {
+                        Log.w("CacheListActivity", "Failed to deserialize connector usernames map", e);
+                        connectorUsernames = null;
                     }
+                    
+                    if (connectorUsernames != null && !connectorUsernames.isEmpty()) {
+                        title = listNameMemento.rememberTerm(res.getString(R.string.search_own_caches));
+                        loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), connectorUsernames);
+                    }
+                    markerId = EmojiUtils.NO_EMOJI;
                     break;
                 case MAP:
                     title = res.getString(R.string.map_map);

@@ -363,7 +363,11 @@ public abstract class AbstractConnector implements IConnector {
         if (this instanceof ISearchByFilter) {
             final ISearchByFilter sbf = (ISearchByFilter) this;
             if (sbf.getFilterCapabilities().contains(GeocacheFilterType.OWNER)) {
-                actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.ic_menu_owned, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
+                actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.ic_menu_owned, context -> {
+                    final ConnectorUsernameMap map = new ConnectorUsernameMap(1);
+                    map.put(null, context.userName);
+                    CacheListActivity.startActivityOwner(context.getContext(), map);
+                }));
             }
             if (sbf.getFilterCapabilities().contains(GeocacheFilterType.LOG_ENTRY)) {
                 actions.add(new UserAction(R.string.user_menu_view_found, R.drawable.ic_menu_emoticons, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
