@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.util.Collections;
@@ -59,6 +60,7 @@ public class FormulaException extends IllegalArgumentException {
         this(null, null, errorType, errorParams);
     }
 
+    @NonNull
     public Set<Integer> getChildrenInError() {
         return childrenInError == null ? Collections.emptySet() : childrenInError;
     }
@@ -84,10 +86,12 @@ public class FormulaException extends IllegalArgumentException {
         this.evaluationContext = context;
     }
 
+    @NonNull
     public String getUserDisplayableErrorMessage() {
         return (this.functionContext == null ? "" : this.functionContext + ": ") + localizedMessage;
     }
 
+    @NonNull
     public CharSequence getUserDisplayableString() {
         final String errorMessage = getUserDisplayableErrorMessage();
         final CharSequence expression = getExpressionFormatted();
@@ -107,10 +111,12 @@ public class FormulaException extends IllegalArgumentException {
     }
 
     @Override
+    @NonNull
     public String getMessage() {
         return super.getMessage() + "/" + functionContext + "/ppos:" + parsingPos + "/pch:'" + (char) parsingChar + "'[" + expression + ": " + evaluationContext + "]";
     }
 
+    @NonNull
     public static String getUserDisplayableMessage(final ErrorType errorType, final Object... errorParams) {
         return LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams);
     }

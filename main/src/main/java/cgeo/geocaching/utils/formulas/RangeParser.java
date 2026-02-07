@@ -95,9 +95,7 @@ class RangeParser {
             return nameBuilder.toString();
         }
 
-        @Nullable
-
-        private static boolean areCompatible(final VariableComponents start, final VariableComponents end) {
+        private static boolean areCompatible(@NonNull final VariableComponents start, @NonNull final VariableComponents end) {
             // Must have same (multi-letter) prefix
             if (!start.prefix.equals(end.prefix)) {
                 return false;
@@ -126,7 +124,7 @@ class RangeParser {
             return false;
         }
 
-        private static int calculateRangeSize(final VariableComponents start, final VariableComponents end) {
+        private static int calculateRangeSize(@NonNull final VariableComponents start, @NonNull final VariableComponents end) {
             if (start.hasNumeric) {
                 // Numeric range
                 final int startNum = Integer.parseInt(start.numericPart);
@@ -139,7 +137,7 @@ class RangeParser {
             return 0;
         }
 
-        private static String incrementVariable(final VariableComponents baseVar, final int offset, final String paddingFormat) {
+        private static String incrementVariable(@NonNull final VariableComponents baseVar, final int offset, final String paddingFormat) {
             final StringBuilder varName = new StringBuilder(baseVar.prefix);
             if (offset == 0) {
                 if (baseVar.hasNumeric) {
@@ -362,7 +360,7 @@ class RangeParser {
     }
 
     @NonNull
-    private static String calculateVariablePadding(final VariableComponents startComp, final VariableComponents endComp) {
+    private static String calculateVariablePadding(@NonNull final VariableComponents startComp, @NonNull final VariableComponents endComp) {
         // Determine the maximum length needed for padding
         final int maxLen = Math.max(startComp.numericPart.length(), endComp.numericPart.length());
 

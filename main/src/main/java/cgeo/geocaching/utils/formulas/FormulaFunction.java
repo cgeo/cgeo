@@ -175,10 +175,12 @@ public enum FormulaFunction {
         return result == null ? Collections.emptySet() : result;
     }
 
+    @NonNull
     public Value execute(final ValueList params) throws FormulaException {
         return execute(null, params);
     }
 
+    @NonNull
     public Value execute(final Function<String, Value> vars, final ValueList params) throws FormulaException {
         try {
             final Object result = function.apply(vars == null ? x -> null : vars, params);
