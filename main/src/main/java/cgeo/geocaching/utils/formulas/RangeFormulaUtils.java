@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 /**
  * The RangeFormulaUtils class provides utility methods for handling ranges in formulas.
  * It includes methods for processing range expressions, extracting variables, and performing operations on ranges.
- *
  * Example usage:
  * <pre>
  *     // Get needed variables for a range
@@ -101,7 +100,7 @@ public class RangeFormulaUtils {
     }
 
     @NonNull
-    private static ValueList getValueList(final Function<String, Value> vars, final ValueList params) {
+    private static ValueList getValueList(final Function<String, Value> vars, @NonNull final ValueList params) {
         final List<String> missingVariables = new ArrayList<>();
         final ValueList valueList = new ValueList();
 
@@ -115,7 +114,7 @@ public class RangeFormulaUtils {
     }
 
     @NonNull
-    private static List<Value> getValueRanges(final Value paramValue) {
+    private static List<Value> getValueRanges(@NonNull final Value paramValue) {
         final List<Value> rangeValues = new ArrayList<>();
         final String varString = paramValue.getAsString();
         final List<Value> subRangeValues = parseValuesFromRange(varString);
@@ -132,7 +131,7 @@ public class RangeFormulaUtils {
         return rangeValues;
     }
 
-    private static void processValue(final Function<String, Value> vars, final Value paramValue, final ValueList valueList, final List<String> missingVariables) {
+    private static void processValue(final Function<String, Value> vars, @NonNull final Value paramValue, @NonNull final ValueList valueList, @NonNull final List<String> missingVariables) {
         if (paramValue.isNumeric()) {
             valueList.add(paramValue);
             return;
