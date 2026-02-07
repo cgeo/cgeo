@@ -19,6 +19,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
