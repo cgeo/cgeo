@@ -68,7 +68,7 @@ public enum FormulaFunction {
     MULTIPLY(new String[]{"multiply", "product", "prod"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_multiply, "Multiply", "'A-C';5", 1,
             RangeFormulaUtils.rangeOperationFunction(BigDecimal.ONE, BigDecimal::multiply),
             RangeFormulaUtils::getNeededVariablesForRange),
-    MIM(new String[]{"minimum", "min"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_min, "Min", "A;B;5", 1,
+    MIN(new String[]{"minimum", "min"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_min, "Min", "A;B;5", 1,
             RangeFormulaUtils.rangeOperationFunction(new BigDecimal("1E+1000"), BigDecimal::min),
             RangeFormulaUtils::getNeededVariablesForRange),
     MAX(new String[]{"maximum", "max"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_max, "Max", "A;B;5", 1,
