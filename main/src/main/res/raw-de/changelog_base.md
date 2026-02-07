@@ -19,6 +19,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
