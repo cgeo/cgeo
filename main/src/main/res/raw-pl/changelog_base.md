@@ -19,6 +19,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
 - Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
 - Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
+- Nowość: Zezwalaj na importowanie plików KML jako ścieżek (np. trasa przedmiotu podróżnego)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -65,5 +66,5 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Opcja „Ignoruj rok” dla filtrów dat
 - Nowość: Zdalne URI w elementach oczekujących na pobranie są teraz klikalne
 - Zmiana: Użyj ustawień systemowych jako domyślnego motywu dla nowych instalacji
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Nowość: Eksport GPX: Zapisz adnotacje GSAK Lat/LonBeforeCorrect podczas eksportowania oryginalnych punktów nawigacji
+- Nowość: Pokaż pasek cofania podczas usuwania skrytek z listy z mapy
