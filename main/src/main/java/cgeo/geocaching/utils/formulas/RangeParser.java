@@ -28,6 +28,11 @@ import java.util.regex.Pattern;
  */
 class RangeParser {
 
+
+    private RangeParser() {
+        //no instance
+    }
+
     static class VariableComponents {
         final String prefix; // prefix before char part (can be empty)
         final Character charPart; // Character portion, if it is a letter range (null for numeric-only variables)
@@ -66,7 +71,7 @@ class RangeParser {
                 }
             }
 
-            String letterString = letters.toString();
+            final String letterString = letters.toString();
             // Variable must have at least one letter
             if (letterString.isEmpty()) {
                 return null;
@@ -135,7 +140,7 @@ class RangeParser {
         }
 
         private static String incrementVariable(final VariableComponents baseVar, final int offset, final String paddingFormat) {
-            StringBuilder varName = new StringBuilder(baseVar.prefix);
+            final StringBuilder varName = new StringBuilder(baseVar.prefix);
             if (offset == 0) {
                 if (baseVar.hasNumeric) {
                     varName.append(baseVar.numericPart);

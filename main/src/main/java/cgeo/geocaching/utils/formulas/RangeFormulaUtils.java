@@ -31,6 +31,10 @@ import java.util.stream.Collectors;
  */
 public class RangeFormulaUtils {
 
+    private RangeFormulaUtils() {
+        //no instance
+    }
+
     /**
      * Creates a function to process a range list and apply a custom operation.
      *
@@ -97,7 +101,7 @@ public class RangeFormulaUtils {
     }
 
     @NonNull
-    private static ValueList getValueList(Function<String, Value> vars, ValueList params) {
+    private static ValueList getValueList(final Function<String, Value> vars, final ValueList params) {
         final List<String> missingVariables = new ArrayList<>();
         final ValueList valueList = new ValueList();
 
@@ -111,7 +115,7 @@ public class RangeFormulaUtils {
     }
 
     @NonNull
-    private static List<Value> getValueRanges(Value paramValue) {
+    private static List<Value> getValueRanges(final Value paramValue) {
         final List<Value> rangeValues = new ArrayList<>();
         final String varString = paramValue.getAsString();
         final List<Value> subRangeValues = parseValuesFromRange(varString);
@@ -128,7 +132,7 @@ public class RangeFormulaUtils {
         return rangeValues;
     }
 
-    private static void processValue(Function<String, Value> vars, Value paramValue, ValueList valueList, List<String> missingVariables) {
+    private static void processValue(final Function<String, Value> vars, final Value paramValue, final ValueList valueList, final List<String> missingVariables) {
         if (paramValue.isNumeric()) {
             valueList.add(paramValue);
             return;
