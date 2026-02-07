@@ -1,5 +1,10 @@
 ##
-- Время обновиться! Если вы всё ещё используете Android 7 или более ранние версии, возможно, это последнее обновление c:geo для вас! В нашем следующем релизе c:geo мы откажемся от поддержки Android 5-7, чтобы снизить нашу нагрузку на обслуживание и иметь возможность обновить некоторые внешние компоненты, используемые c:geo, которые мы в настоящее время не успеваем реализовать. Мы по-прежнему будем поддерживать версии от Android 8 до Android 16 (и более новые версии, когда они будут опубликованы), что соответствует более чем восьмилетней истории Android.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+
+##
 - Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
 - Исправлено: Были возможны некоторые исключения из правил безопасности, когда пользователь не предоставлял определенные права (например, уведомления)
 - Fix: Cache circles incomplete on low zoom levels (VTM only)
@@ -57,6 +62,7 @@
 ##
 - Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
 - Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
 
 
 
