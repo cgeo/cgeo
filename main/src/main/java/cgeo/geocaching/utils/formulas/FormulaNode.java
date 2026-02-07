@@ -26,8 +26,7 @@ import java.util.function.Function;
  * FormulaNode instances are package-private and are not intended to be used directly outside the formula package.
  */
 final class FormulaNode {
-    static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
-    static public final String RANGE_NODE_ID = "range-node";
+    public static final String RANGE_NODE_ID = "range-node";
 
     private final String id;
     private Func3<ValueList, Function<String, Value>, Integer, Value> function;
@@ -36,6 +35,8 @@ final class FormulaNode {
 
     private final Set<String> neededVars;
     private final boolean hasRanges;
+
+    private static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
 
     FormulaNode(final String id, final FormulaNode[] children,
                 final Func3<ValueList, Function<String, Value>, Integer, Value> function) {
