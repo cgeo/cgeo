@@ -19,6 +19,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Support for Motorider theme (VTM only)
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
