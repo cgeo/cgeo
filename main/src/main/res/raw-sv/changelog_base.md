@@ -19,6 +19,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
