@@ -38,7 +38,6 @@ public class FormulaException extends IllegalArgumentException {
 
     }
 
-    private final ErrorType errorType;
     private final String localizedMessage;
 
     //optional parameters
@@ -53,7 +52,6 @@ public class FormulaException extends IllegalArgumentException {
     public FormulaException(final Throwable cause, final Set<Integer> childrenInError, final ErrorType errorType, final Object... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
-        this.errorType = errorType;
         this.childrenInError = childrenInError;
     }
 

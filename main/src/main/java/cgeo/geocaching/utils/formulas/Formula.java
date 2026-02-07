@@ -632,12 +632,7 @@ public final class Formula {
     private FormulaException createMissingVarsException(final Function<String, Value> providedVars) {
         //find out ALL variable values missing for this formula for a better error message
         final Set<String> missingVars = new HashSet<>(this.getNeededVariables());
-        final Iterator<String> it = missingVars.iterator();
-        while (it.hasNext()) {
-            if (providedVars.apply(it.next()) != null) {
-                it.remove();
-            }
-        }
+        missingVars.removeIf(s -> providedVars.apply(s) != null);
         final List<String> missingVarsOrdered = new ArrayList<>(missingVars);
         Collections.sort(missingVarsOrdered);
         return new FormulaException(FormulaException.ErrorType.MISSING_VARIABLE_VALUE, StringUtils.join(missingVarsOrdered, ", "));

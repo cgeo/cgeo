@@ -120,11 +120,12 @@ public enum FormulaFunction {
     static {
         for (final FormulaFunction cf : values()) {
             for (String name : cf.names) {
-                FUNC_BY_NAME.put(name, cf);
+                if (null != FUNC_BY_NAME.put(name, cf)) {
+                    throw new IllegalStateException("Duplicate function name: " + name);
+                }
             }
         }
     }
-
 
     FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function) {
         this(names, group, resId, resFallback, insertPattern, insertIndex, (v, p) -> function.apply(p), null);
