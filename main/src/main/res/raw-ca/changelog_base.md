@@ -19,6 +19,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Suport per al tema Motorider (només VTM)
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
 - Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
+- Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
