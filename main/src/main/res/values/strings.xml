@@ -2075,6 +2075,7 @@
 
     <string name="formula_function_group_simplenumeric">Simple Numeric</string>
     <string name="formula_function_group_complexnumeric">Complex Numeric</string>
+    <string name="formula_function_group_aggregatenumeric">Aggregate Numeric</string>
     <string name="formula_function_group_simplestring">Simple String</string>
     <string name="formula_function_group_complexstring">Complex String</string>
 

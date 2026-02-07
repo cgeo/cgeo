@@ -62,28 +62,29 @@ public enum FormulaFunction {
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
             singleValueStringFunction(FormulaUtils::vanity)),
 
-    ADD(new String[]{"add", "sum"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_add, "Add", "'A-C';5", 1,
+    ADD(new String[]{"add", "sum"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_add, "Add", "'A-C';5", 1,
             RangeFormulaUtils.rangeOperationFunction(BigDecimal.ZERO, BigDecimal::add),
             RangeFormulaUtils::getNeededVariablesForRange),
-    MULTIPLY(new String[]{"multiply", "product", "prod"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_multiply, "Multiply", "'A-C';5", 1,
+    MULTIPLY(new String[]{"multiply", "product", "prod"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_multiply, "Multiply", "'A-C';5", 1,
             RangeFormulaUtils.rangeOperationFunction(BigDecimal.ONE, BigDecimal::multiply),
             RangeFormulaUtils::getNeededVariablesForRange),
-    MIN(new String[]{"minimum", "min"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_min, "Min", "A;B;5", 1,
+    MIN(new String[]{"minimum", "min"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_min, "Min", "A;B;5", 1,
             RangeFormulaUtils.rangeOperationFunction(new BigDecimal("1E+1000"), BigDecimal::min),
             RangeFormulaUtils::getNeededVariablesForRange),
-    MAX(new String[]{"maximum", "max"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_max, "Max", "A;B;5", 1,
+    MAX(new String[]{"maximum", "max"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_max, "Max", "A;B;5", 1,
             RangeFormulaUtils.rangeOperationFunction(new BigDecimal("-1E+1000"), BigDecimal::max),
             RangeFormulaUtils::getNeededVariablesForRange),
-    COUNT(new String[]{"count", "cnt"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_count, "Count", "'A-C';5", 1,
+    COUNT(new String[]{"count", "cnt"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_count, "Count", "'A-C';5", 1,
             RangeFormulaUtils.rangeOperationFunction(BigDecimal.ZERO, (a, b) -> a.add(BigDecimal.ONE)),
             RangeFormulaUtils::getNeededVariablesForRange),
-    AVERAGE(new String[]{"average", "avg"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_average, "Average", "'A-C';5", 1,
+    AVERAGE(new String[]{"average", "avg"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_average, "Average", "'A-C';5", 1,
             RangeFormulaUtils.rangeListFunction(FormulaUtils::average),
             RangeFormulaUtils::getNeededVariablesForRange);
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
         COMPLEX_NUMERIC(R.string.formula_function_group_complexnumeric, "Complex Numeric"),
+        AGGREGATE_NUMERIC(R.string.formula_function_group_aggregatenumeric, "Aggretate Numeric"),
         SIMPLE_STRING(R.string.formula_function_group_simplestring, "Simple String"),
         COMPLEX_STRING(R.string.formula_function_group_complexstring, "Complex String");
 
