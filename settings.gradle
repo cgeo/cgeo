@@ -26,5 +26,7 @@ develocity {
     buildScan {
         termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
         termsOfUseAgree = "yes"
+        // Publishing a Build only Scan on-demand (gradlew --scan)
+        publishing.onlyIf { false }
     }
 }

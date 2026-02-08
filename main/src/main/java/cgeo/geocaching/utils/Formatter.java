@@ -173,7 +173,7 @@ public final class Formatter {
         if (verbally != null) {
             return verbally;
         }
-        return formatShortDate(date);
+        return formatShortDate(date).replace("/", "/\u200B");
     }
 
     private static String formatDateVerbally(final long date) {
