@@ -39,11 +39,12 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         final Collection<Geocache> caches = getCaches();
 
         // Check if deleting all caches
-        if (caches.size() == PseudoList.ALL_LIST.getNumberOfCaches()) {
+        final int cacheCount = caches.size();
+        if (cacheCount == PseudoList.ALL_LIST.getNumberOfCaches()) {
             SimpleDialog.of(getContext())
                     .setTitle(R.string.command_delete_caches_progress)
-                    .setMessage(R.string.caches_warning_delete_all_caches)
-                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+                    .setMessage(R.string.caches_warning_delete_all_caches, cacheCount)
+                    .setButtons(SimpleDialog.ButtonTextSet.OK_CANCEL)
                     .confirm(this::showOfflineLogDialogAndExecute);
         } else {
             showOfflineLogDialogAndExecute();
