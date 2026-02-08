@@ -32,7 +32,7 @@ final class FormulaError {
             super(errorString);
         }
 
-        public static ErrorValue of(final CharSequence cs) {
+        public static ErrorValue create(final CharSequence cs) {
             return new ErrorValue(cs);
         }
 
