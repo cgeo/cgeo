@@ -39,7 +39,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 public class SuConnector extends AbstractConnector implements ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByFilter, IFavoriteCapability, IVotingCapability, IIgnoreCapability {
 
@@ -123,7 +122,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public void increaseCachesFound(final int by) {
-        //not supported
+        // not supported
     }
 
     @Override
@@ -162,7 +161,6 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         return null;
     }
 
-
     @Override
     @NonNull
     public String getHost() {
@@ -179,8 +177,8 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_GENERAL, PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST, PREFIX_MYSTERY, PREFIX_MYSTERY_VIRTUAL) && isNumericId(SuConnector.geocodeToId(geocode));
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{PREFIX_GENERAL + "%", PREFIX_TRADITIONAL + "%", PREFIX_MULTISTEP_VIRTUAL + "%", PREFIX_VIRTUAL + "%", PREFIX_MULTISTEP + "%", PREFIX_EVENT + "%", PREFIX_CONTEST + "%", PREFIX_MYSTERY + "%", PREFIX_MYSTERY_VIRTUAL + "%"};
     }
@@ -470,7 +468,6 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         return true;
     }
 
-
     @Override
     public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
         return true;
@@ -481,5 +478,4 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         SuApi.setIgnoreState(cache, false);
         return true;
     }
-
 }

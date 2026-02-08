@@ -62,7 +62,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.NotNull;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
@@ -110,12 +109,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"GC%"};
     }
-
 
     @Override
     @NonNull
@@ -137,8 +135,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return null;
     }
 
-    @NonNull
     @Override
+    @NonNull
     public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
         return GC_BASE_URL + "live/geocache/" + cache.getGeocode() + "/log";
     }
@@ -281,9 +279,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return GCMap.searchByViewport(this, viewport, filter);
     }
 
-
-    @NonNull
     @Override
+    @NonNull
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
                 GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
@@ -291,7 +288,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
                 GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN_MATRIX,
                 GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.EVENT_DATE, GeocacheFilterType.LOG_ENTRY);
     }
-
 
     @Override
     @NonNull
@@ -399,7 +395,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public int getPersonalNoteMaxChars() {
         return 2500;
     }
-
 
     @Override
     public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
@@ -549,8 +544,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return R.string.pref_gc_avatar;
     }
 
-    @NonNull
     @Override
+    @NonNull
     public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = super.getUserActions(user);
         actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))));
@@ -672,5 +667,4 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         @NonNull
         private static final GCConnector INSTANCE = new GCConnector();
     }
-
 }
