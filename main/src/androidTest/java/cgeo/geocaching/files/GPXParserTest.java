@@ -11,6 +11,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sorting.GeocodeComparator;
@@ -264,7 +265,7 @@ public class GPXParserTest  {
         assertThat(log.date).isEqualTo(parseTime("2011-09-11T07:00:00Z"));
         assertThat(log.found).isEqualTo(-1);
         assertThat(log.log).isEqualTo("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
-        assertThat(log.isOwn()).isFalse();
+        assertThat(LogUtils.isOwnLog(log, cache)).isFalse();
         assertThat(log.getDisplayText()).isEqualTo(log.log);
         assertThat(CalendarUtils.daysSince(log.date)).isGreaterThan(700);
 
