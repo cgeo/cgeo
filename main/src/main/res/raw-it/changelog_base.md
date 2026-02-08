@@ -38,6 +38,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Placeholders for trackable logging (geocache name, geocache code, user)
 - Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 - Fix: Missing quick toggle in guided mode of waypoint calculator
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo player
 - New: Offline translation for Wherigos
