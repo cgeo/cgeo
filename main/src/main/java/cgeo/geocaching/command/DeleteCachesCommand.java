@@ -5,9 +5,11 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -19,8 +21,11 @@ import androidx.annotation.Nullable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class DeleteCachesCommand extends AbstractCachesCommand {
 
@@ -39,28 +44,35 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         final Collection<Geocache> caches = getCaches();
 
         // Check if deleting all caches
-        if (caches.size() == PseudoList.ALL_LIST.getNumberOfCaches()) {
+        final int cacheCount = caches.size();
+        if (cacheCount == PseudoList.ALL_LIST.getNumberOfCaches()) {
             SimpleDialog.of(getContext())
                     .setTitle(R.string.command_delete_caches_progress)
-                    .setMessage(R.string.caches_warning_delete_all_caches)
-                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
-                    .confirm(this::showOfflineLogDialogAndExecute);
+                    .setMessage(R.string.caches_warning_delete_all_caches, cacheCount)
+                    .setButtons(SimpleDialog.ButtonTextSet.OK_CANCEL)
+                    .confirm(this::showUserDataDialogAndExecute);
         } else {
-            showOfflineLogDialogAndExecute();
+            showUserDataDialogAndExecute();
         }
     }
 
-    public void showOfflineLogDialogAndExecute() {
+    public void showUserDataDialogAndExecute() {
         final Collection<Geocache> caches = getCaches();
 
-        final int count = (int) caches.stream().filter(Geocache::hasLogOffline).count();
+        final List<Geocache> cachesWithUserData = caches.stream().filter(this::hasUserData).toList();
+        final int count = cachesWithUserData.size();
         if (count > 0) {
-            final String messageText = getContext().getResources().getQuantityString(R.plurals.caches_warning_delete_offline_log, count, count);
+            final String messageText = LocalizationUtils.getString(R.string.caches_warning_delete_user_data, count);
 
             SimpleDialog.of(getContext())
                     .setTitle(R.string.command_delete_caches_progress)
                     .setMessage(TextParam.text(messageText))
                     .setButtons(SimpleDialog.ButtonTextSet.OK_CANCEL)
+                    .setNeutralButton(TextParam.id(R.string.caches_warning_delete_user_data_others))
+                    .setNeutralAction(() -> {
+                        caches.removeAll(cachesWithUserData);
+                        execute();
+                    })
                     .confirm(this::execute);
         } else {
             execute();
@@ -89,6 +101,17 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         restoreDroppedInfos(caches);
     }
 
+    private boolean hasUserData(final Geocache cache) {
+        final boolean hasOfflineLog = cache.hasLogOffline();
+        final boolean hasPersonalNote = !StringUtils.isEmpty(cache.getPersonalNote());
+        final boolean hasUserdefinedWaypoints = cache.hasUserdefinedWaypoints();
+        final boolean hasUserModifiedCoords = cache.hasUserModifiedCoords();
+        final boolean hasVariables = !cache.getVariables().isEmpty();
+        final boolean hasUserModifiedWaypoints = cache.getWaypoints().stream().anyMatch(Waypoint::isUserModified);
+        return hasOfflineLog || hasPersonalNote || hasVariables
+                || hasUserdefinedWaypoints || hasUserModifiedWaypoints || hasUserModifiedCoords;
+    }
+
     private void saveDroppedInfos(final Collection<Geocache> caches) {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
@@ -101,6 +124,9 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
             if (0 < visitedDate) {
                 oldVisitedDate.put(geocode, visitedDate);
             }
+
+            // PersonalNote, Waypoint are saved with the cache and hence restored with it
+            // Variables are not deleted yet, so no need to save
         }
     }
 
@@ -112,10 +138,14 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
             if (offlineLog != null) {
                 DataStore.saveLogOffline(geocode, offlineLog);
             }
+
             final Long visitedDate = oldVisitedDate.get(geocode);
             if (visitedDate != null) {
                 DataStore.saveVisitDate(geocode, visitedDate);
             }
+
+            // PersonalNote, Waypoint are saved with the cache and hence restored with it
+            // Variables are not deleted yet, so no need to restore
         }
     }
 
