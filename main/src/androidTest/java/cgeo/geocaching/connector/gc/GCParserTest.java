@@ -24,6 +24,7 @@ import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
 import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -223,7 +223,7 @@ public class GCParserTest {
         Geocache cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
-        //make sure that waypoints are not duplicated
+        // make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
@@ -478,6 +478,5 @@ public class GCParserTest {
         assertThat(trackablesNew.get(1).getGuid()).isNull();
         assertThat(trackablesNew.get(1).getGeocode()).isEqualTo("TBABCD5");
         assertThat(trackablesNew.get(1).getName()).isEqualTo("the test tb");
-
     }
 }

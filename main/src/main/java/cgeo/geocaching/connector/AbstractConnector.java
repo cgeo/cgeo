@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -57,8 +56,8 @@ public abstract class AbstractConnector implements IConnector {
         return strippedList;
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"%"}; //will match everything
     }
@@ -80,7 +79,6 @@ public abstract class AbstractConnector implements IConnector {
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
         throw new UnsupportedOperationException();
     }
-
 
     @Override
     public boolean supportsLogging() {

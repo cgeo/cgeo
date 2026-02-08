@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 public class WaymarkingConnector extends AbstractConnector {
 
@@ -52,8 +51,8 @@ public class WaymarkingConnector extends AbstractConnector {
         return StringUtils.startsWith(geocode, "WM");
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"WM%"};
     }

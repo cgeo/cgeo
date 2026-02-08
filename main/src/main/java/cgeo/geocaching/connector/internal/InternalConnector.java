@@ -41,7 +41,6 @@ import java.util.regex.Pattern;
 
 import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 public class InternalConnector extends AbstractConnector implements ISearchByGeocode {
 
@@ -131,12 +130,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{PREFIX + "%"};
     }
-
 
     @Override
     public int getCacheMapMarkerId() {

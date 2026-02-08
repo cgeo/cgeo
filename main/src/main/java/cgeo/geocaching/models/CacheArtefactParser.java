@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Parses texts for cache artefacts. Currently supports:
@@ -134,7 +133,6 @@ public class CacheArtefactParser {
 
         //search calculated waypoints
         parseWaypointsWithSpecificCoords(text, PARSING_CALCULATED_COORD);
-
     }
 
     private void parseWaypointsWithCoords(final String text) {
@@ -284,7 +282,7 @@ public class CacheArtefactParser {
     /**
      * try to parse a name out of given words. If not possible, empty is returned
      */
-    @NotNull
+    @NonNull
     private ImmutablePair<String, String> parseNameAndPrefix(final String[] words, final WaypointType wpType) {
         if (words.length == 0 || !words[0].startsWith(PARSING_NAME_PRAEFIX)) {
             return new ImmutablePair<>("", "");
@@ -521,5 +519,4 @@ public class CacheArtefactParser {
             addVariable(varName, value, highPrio);
         }
     }
-
 }
