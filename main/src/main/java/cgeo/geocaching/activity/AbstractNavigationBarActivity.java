@@ -115,10 +115,19 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
 
+        // Set up the toolbar
+        setSupportActionBar(binding.toolbar.getRoot());
+
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
         // will be called if c:geo cannot log in
         startLoginIssueHandler();
+    }
+
+    @Override
+    @Nullable
+    public View getActionBarView() {
+        return binding.toolbar.getRoot();
     }
 
     @Nullable
