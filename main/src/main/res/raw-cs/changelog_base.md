@@ -38,6 +38,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Zástupné symboly pro zápis sledovatelných předmětů (název kešky, kód kešky, uživatel)
 - Změna: Odstraněn odkaz na zastaralý přehrávač WhereYouGo. Integrovaný přehráč Wherigo je nyní výchozí pro Wherigo kešky.
 - Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
