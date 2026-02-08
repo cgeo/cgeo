@@ -38,6 +38,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
