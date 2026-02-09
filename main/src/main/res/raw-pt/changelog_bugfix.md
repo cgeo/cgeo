@@ -1,5 +1,12 @@
 ##
-- Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
+
+##
 - Alteração: Número máximo de rastreáveis (TB) a visitar por registo de cache reduzido para 100 (por solicitação de geocaching.com, para reduzir a carga do servidor causado por amantes de TB extremos)
 - Correcção: Algumas possíveis excepções de segurança quando o utilizador não concedeu certas permissões (por exemplo: notificações)
 - Correcção: Círculos incompletos de caches em níveis de zoom baixos (apenas VTM)
@@ -57,6 +64,8 @@
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
 
 
 
