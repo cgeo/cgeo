@@ -3,6 +3,8 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
 - Correcció: Canvi de format de coordenades a la fitxa informativa del catxé/punt de referència
+- Correcció: Data de registre tallada a la llista de registres (segons el format de data i la mida de la lletra)
+- Correcció: No es detecten els horaris de les trobades en determinades condicions
 
 ##
 - Canvi: S'ha reduït a 100 el nombre màxim de visites de rastrejables de GC per registre de catxé (segons la sol·licitud de geocaching.com per reduir la càrrega del servidor causada pels amants extrems dels rastrejables)
@@ -62,6 +64,7 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
