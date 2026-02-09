@@ -3,6 +3,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Offline translation download dialog shown in installations without offline translation support
 - Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
 
 ##
 - Change: Maximum number of GC trackables visiting per cache log reduced to 100 (as per request from geocaching.com to reduce their server load caused by extreme trackable lovers)
@@ -62,6 +64,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
