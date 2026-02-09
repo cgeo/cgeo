@@ -3,6 +3,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Offline translation download dialog shown in installations without offline translation support
 - Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
 
 ##
 - Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
@@ -62,6 +64,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
 - Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
 
 
 
