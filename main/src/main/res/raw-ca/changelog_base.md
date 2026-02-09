@@ -38,7 +38,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
