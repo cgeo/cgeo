@@ -152,14 +152,14 @@ public class GPXImporter {
                 for (final GCList pq : pqList) {
                     importGPX(pq.getUri(), pq.getMimeType(), null);
                 }
+                return;
             }
-        } else {
-            final Uri uri = intent.getData();
-            final String actionType = intent.getAction();
-            if (Intent.ACTION_VIEW.equals(actionType) && null != uri) {
-                final String mimeType = intent.getType();
-                importGPX(uri, mimeType, null);
-            }
+        }
+        final Uri uri = intent.getData();
+        final String actionType = intent.getAction();
+        if (Intent.ACTION_VIEW.equals(actionType) && null != uri) {
+            final String mimeType = intent.getType();
+            importGPX(uri, mimeType, null);
         }
     }
 
