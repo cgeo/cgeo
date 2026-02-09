@@ -898,11 +898,12 @@ final class OkapiClient {
         cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
 
         final String owner = parseUser(response.get(CACHE_OWNER));
-        final String ownerId = parseUserId(response.get(CACHE_OWNER));
         cache.setOwnerDisplayName(owner);
         // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
         cache.setOwnerUserId(owner);
+        final String ownerId = parseUserId(response.get(CACHE_OWNER));
         if (StringUtils.isNotEmpty(ownerId)) {
+            cache.setOwnerUserId(ownerId);
             cache.setOwnerGuid(ownerId);
         }
 
