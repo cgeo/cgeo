@@ -1845,6 +1845,12 @@
     <string name="formula_function_lettervalue">Valor de paraula</string>
     <string name="formula_function_roman">Romà a Decimal</string>
     <string name="formula_function_vanity">Codi Vanity</string>
+    <string name="formula_function_add">Afegir</string>
+    <string name="formula_function_multiply">Multiplicar</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Màx</string>
+    <string name="formula_function_count">Compte</string>
+    <string name="formula_function_average">Mitjana</string>
     <string name="formula_function_group_simplenumeric">Numèric simple</string>
     <string name="formula_function_group_complexnumeric">Numèric complex</string>
     <string name="formula_function_group_simplestring">Cadena simple</string>
@@ -1856,6 +1862,7 @@
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
     <string name="formula_error_numeric_overflow">Desbordament numèric</string>
+    <string name="formula_error_invalid_range">Interval no vàlid: %1$s</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sense títol</string>
