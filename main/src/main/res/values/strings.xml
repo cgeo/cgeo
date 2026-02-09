@@ -215,6 +215,8 @@
     <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
     <string name="log_problem_log_full_label">Logbook is full</string>
     <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+    <string name="log_problem_log_wet_label">Logbook is wet</string>
+    <string name="log_problem_log_wet_text">This geocacher reported that the logbook is wet.</string>
     <string name="log_problem_damaged_label">Container is damaged</string>
     <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
     <string name="log_problem_missing_label">Cache might be missing</string>

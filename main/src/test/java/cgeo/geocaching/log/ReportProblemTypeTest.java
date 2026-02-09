@@ -21,6 +21,8 @@ public class ReportProblemTypeTest {
         assertThat(ReportProblemType.MISSING.isVisible(LogType.FOUND_IT, CacheType.TRADITIONAL)).isEqualTo(false);
         assertThat(ReportProblemType.LOG_FULL.isVisible(LogType.FOUND_IT, CacheType.TRADITIONAL)).isEqualTo(true);
         assertThat(ReportProblemType.LOG_FULL.isVisible(LogType.FOUND_IT, CacheType.EARTH)).isEqualTo(false);
+        assertThat(ReportProblemType.LOG_WET.isVisible(LogType.FOUND_IT, CacheType.MYSTERY)).isEqualTo(true);
+        assertThat(ReportProblemType.LOG_WET.isVisible(LogType.FOUND_IT, CacheType.VIRTUAL)).isEqualTo(false);
         assertThat(ReportProblemType.DAMAGED.isVisible(LogType.FOUND_IT, CacheType.WEBCAM)).isEqualTo(false);
         assertThat(ReportProblemType.MISSING.isVisible(LogType.FOUND_IT, CacheType.VIRTUAL)).isEqualTo(false);
     }
