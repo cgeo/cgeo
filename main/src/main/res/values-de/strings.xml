@@ -202,7 +202,7 @@
     <string name="log_problem_needs_maintenance_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
     <string name="log_problem_log_full_label">Logbuch ist voll</string>
     <string name="log_problem_log_full_text">Dieser Geocacher hat gemeldet, dass das Logbuch voll ist.</string>
-    <string name="log_problem_log_wet_label">Logbook ist nass</string>
+    <string name="log_problem_log_wet_label">Logbuch ist nass</string>
     <string name="log_problem_log_wet_text">Dieser Geocacher hat gemeldet, dass das Logbuch nass ist.</string>
     <string name="log_problem_damaged_label">Behälter ist beschädigt</string>
     <string name="log_problem_damaged_text">Dieser Geocacher hat gemeldet, dass der Behälter beschädigt ist.</string>
