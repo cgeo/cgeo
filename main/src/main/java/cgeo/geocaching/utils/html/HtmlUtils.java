@@ -237,9 +237,31 @@ public final class HtmlUtils {
         replaceSpans(spannable, BackgroundColorSpan.class, null);
     }
 
+    /**
+     * Prepares HTML for further processing by parsing it with Jsoup and returning the HTML content.
+     * Simply parsing with Jsoup already removes problematic zero-width spans, such as those created by HtmlCompat.fromHtml() for empty anchor tags.
+     *
+     * @param html the HTML string to process
+     * @return the Jsoup-parsed and cleaned HTML (without <body> tag)
+     */
+    @NonNull
+    private static String prepareParseBody(@Nullable final String html) {
+        if (StringUtils.isBlank(html)) {
+            return StringUtils.EMPTY;
+        }
+        try {
+            final Document doc = Jsoup.parseBodyFragment(html);
+            // Return the body HTML (without the wrapping <body> tag)
+            return doc.body().html();
+        } catch (Exception e) {
+            return html;
+        }
+    }
+
     public static Pair<Spannable, Boolean> renderHtml(final String html, final Function<String, Drawable> imageGetter) {
+        final String preparedHtml = prepareParseBody(html);
         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-        final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
+        final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(preparedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());
 
     }
@@ -436,3 +458,4 @@ public final class HtmlUtils {
     }
 
 }
+
