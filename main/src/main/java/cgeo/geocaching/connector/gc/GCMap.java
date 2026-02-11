@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.SelfOwnedGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.StringFilter;
@@ -38,6 +39,9 @@ import androidx.annotation.WorkerThread;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import static java.lang.Boolean.FALSE;
 
 public class GCMap {
@@ -190,6 +194,12 @@ public class GCMap {
                 break;
             case OWNER:
                 search.setHiddenBy(((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                break;
+            case SELF_OWNED:
+                final String ownUsername = SelfOwnedGeocacheFilter.getOwnerNameForOrigin("GC00000"); // GC prefix to identify GCConnector
+                if (StringUtils.isNotEmpty(ownUsername)) {
+                    search.setHiddenBy(ownUsername);
+                }
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
