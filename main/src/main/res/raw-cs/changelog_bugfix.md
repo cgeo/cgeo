@@ -5,6 +5,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Coordinate format changing in cache/waypoint info sheet
 - Fix: Log date cut off in list of logs (depending on date format and font size)
 - Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
 
 ##
 - Změna: Maximální počet sledovatelných GC navštěvujících v rámci jednoho logu kešky, byl snížen na 100 (na žádost geocaching.com, aby se snížilo zatížení jejich serverů způsobené extrémními milovníky trackables)
@@ -64,6 +66,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
