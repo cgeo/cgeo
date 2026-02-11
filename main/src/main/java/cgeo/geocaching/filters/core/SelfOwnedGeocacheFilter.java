@@ -125,7 +125,7 @@ public class SelfOwnedGeocacheFilter extends BaseGeocacheFilter {
      * @return the username of the current user on that platform, or null if not available
      */
     @Nullable
-    private static String getOwnerNameForConnector(@Nullable final IConnector connector) {
+    public static String getOwnerNameForConnector(@Nullable final IConnector connector) {
         if (connector == null) {
             return null;
         }

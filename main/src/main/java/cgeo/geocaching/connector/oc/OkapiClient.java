@@ -448,7 +448,7 @@ final class OkapiClient {
                 break;
             case SELF_OWNED:
                 // Get the owner name for this specific OC connector
-                final String ownName = SelfOwnedGeocacheFilter.getOwnerNameForOrigin(connector.getGeocodeSqlLikeExpressions()[0].replace("%", "XXXX")); // Use a sample geocode
+                final String ownName = SelfOwnedGeocacheFilter.getOwnerNameForConnector(connector);
                 if (StringUtils.isNotEmpty(ownName)) {
                     final String ownUuid = getUserUUID(connector, ownName);
                     valueMap.put("owner_uuid", ownUuid == null ? "unknown-user" : ownUuid);

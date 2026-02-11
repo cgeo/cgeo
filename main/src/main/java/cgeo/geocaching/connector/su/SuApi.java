@@ -184,7 +184,7 @@ public class SuApi {
         }
         final SelfOwnedGeocacheFilter sof = GeocacheFilter.findInChain(filters, SelfOwnedGeocacheFilter.class);
         if (sof != null) {
-            final String ownName = SelfOwnedGeocacheFilter.getOwnerNameForOrigin("SU0000"); // SU prefix for SuConnector
+            final String ownName = SelfOwnedGeocacheFilter.getOwnerNameForConnector(connector);
             if (StringUtils.isNotEmpty(ownName)) {
                 return searchByOwner(ownName, connector);
             }

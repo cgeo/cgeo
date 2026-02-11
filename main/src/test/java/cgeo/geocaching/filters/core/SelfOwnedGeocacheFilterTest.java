@@ -1,12 +1,8 @@
 package cgeo.geocaching.filters.core;
 
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 
 import org.junit.Test;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SelfOwnedGeocacheFilterTest {
