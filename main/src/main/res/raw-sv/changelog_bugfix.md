@@ -5,6 +5,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Coordinate format changing in cache/waypoint info sheet
 - Fix: Log date cut off in list of logs (depending on date format and font size)
 - Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
 
 ##
 - Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
@@ -64,6 +66,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 
