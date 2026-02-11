@@ -46,7 +46,7 @@ public class SelfOwnedGeocacheFilter extends BaseGeocacheFilter {
     public void addToSql(final SqlBuilder sqlBuilder) {
         // Build an SQL OR clause for all active connectors with valid credentials
         final List<String> conditions = new ArrayList<>();
-        final List<String> params = new ArrayList<>();
+        final List<String> allParams = new ArrayList<>();
 
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             final String ownerName = getOwnerNameForConnector(connector);
@@ -64,15 +64,16 @@ public class SelfOwnedGeocacheFilter extends BaseGeocacheFilter {
             for (final String pattern : geocodePatterns) {
                 conditions.add("(" + sqlBuilder.getMainTableId() + ".geocode LIKE ? AND " + 
                               sqlBuilder.getMainTableId() + ".owner = ?)");
-                params.add(pattern);
-                params.add(ownerName);
+                allParams.add(pattern);
+                allParams.add(ownerName);
             }
         }
 
         if (!conditions.isEmpty()) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
             for (int i = 0; i < conditions.size(); i++) {
-                sqlBuilder.addWhere(conditions.get(i), params.get(i * 2), params.get(i * 2 + 1));
+                final int paramIndex = i * 2;
+                sqlBuilder.addWhere(conditions.get(i), allParams.get(paramIndex), allParams.get(paramIndex + 1));
             }
             sqlBuilder.closeWhere();
         } else {

@@ -453,6 +453,7 @@ final class OkapiClient {
                     final String ownUuid = getUserUUID(connector, ownName);
                     valueMap.put("owner_uuid", ownUuid == null ? "unknown-user" : ownUuid);
                 }
+                // If ownName is empty (user not logged in), don't add any filter criterion
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
