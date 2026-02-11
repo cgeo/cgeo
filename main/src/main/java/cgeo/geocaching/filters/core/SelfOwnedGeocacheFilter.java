@@ -11,6 +11,9 @@ import cgeo.geocaching.storage.SqlBuilder;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,9 +45,9 @@ public class SelfOwnedGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         // Build an SQL OR clause for all active connectors with valid credentials
-        boolean hasAnyCondition = false;
+        final List<String> conditions = new ArrayList<>();
+        final List<String> params = new ArrayList<>();
 
-        // First collect all conditions
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             final String ownerName = getOwnerNameForConnector(connector);
             if (StringUtils.isEmpty(ownerName)) {
@@ -53,37 +56,24 @@ public class SelfOwnedGeocacheFilter extends BaseGeocacheFilter {
 
             // Get the geocode patterns for this connector (e.g., "GC%" for geocaching.com)
             final String[] geocodePatterns = connector.getGeocodeSqlLikeExpressions();
-            if (geocodePatterns != null && geocodePatterns.length > 0) {
-                hasAnyCondition = true;
-                break;
+            if (geocodePatterns == null || geocodePatterns.length == 0) {
+                continue;
+            }
+
+            // For each connector, create: (geocode LIKE 'pattern%' AND owner = 'username')
+            for (final String pattern : geocodePatterns) {
+                conditions.add("(" + sqlBuilder.getMainTableId() + ".geocode LIKE ? AND " + 
+                              sqlBuilder.getMainTableId() + ".owner = ?)");
+                params.add(pattern);
+                params.add(ownerName);
             }
         }
 
-        // If we have any conditions, create OR group
-        if (hasAnyCondition) {
+        if (!conditions.isEmpty()) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-
-            for (final IConnector connector : ConnectorFactory.getConnectors()) {
-                final String ownerName = getOwnerNameForConnector(connector);
-                if (StringUtils.isEmpty(ownerName)) {
-                    continue;
-                }
-
-                // Get the geocode patterns for this connector (e.g., "GC%" for geocaching.com)
-                final String[] geocodePatterns = connector.getGeocodeSqlLikeExpressions();
-                if (geocodePatterns == null || geocodePatterns.length == 0) {
-                    continue;
-                }
-
-                // For each connector, create: (geocode LIKE 'pattern%' AND owner = 'username')
-                for (final String pattern : geocodePatterns) {
-                    sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode LIKE ?", pattern);
-                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".owner = ?", ownerName);
-                    sqlBuilder.closeWhere();
-                }
+            for (int i = 0; i < conditions.size(); i++) {
+                sqlBuilder.addWhere(conditions.get(i), params.get(i * 2), params.get(i * 2 + 1));
             }
-
             sqlBuilder.closeWhere();
         } else {
             // If no conditions were added, add a true condition to ensure filter doesn't break OR statements

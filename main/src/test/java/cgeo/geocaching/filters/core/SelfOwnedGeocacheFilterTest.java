@@ -9,10 +9,12 @@ public class SelfOwnedGeocacheFilterTest {
 
     @Test
     public void testGetOwnerNameForOrigin() {
-        // Test with GC geocode - returns owner name or null if not logged in
+        // Test with GC geocode - should return owner name (string) or null if not logged in
         final String ownerNameGC = SelfOwnedGeocacheFilter.getOwnerNameForOrigin("GC12345");
-        // Should not crash, can be null or a string
-        assertThat(ownerNameGC == null || ownerNameGC instanceof String).isTrue();
+        // Should return null or a non-empty string, but not an empty string
+        if (ownerNameGC != null) {
+            assertThat(ownerNameGC).isNotEmpty();
+        }
     }
 
     @Test
