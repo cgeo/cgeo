@@ -1,10 +1,12 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
+- Korrektur: Download-Dialog für Offline-Übersetzungen wird auch in Installationen ohne Unterstützung von Offline-Übersetzungen angezeigt
+- Korrektur: Koordinatenformat wechselt auf Cache/Wegpunkt-Infoseite
+- Korrektur: Logdatum in Logliste abgeschnitten (je nach Datumsformat und Schriftgröße)
+- Korrektur: Event-Zeiten unter bestimmten Bedingungen nicht erkannt
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
 
 ##
 - Änderung: Maximale Anzahl von "Besuchen" von GC-Trackables pro Cache-Log auf 100 reduziert (auf Bitte von geocaching.com hin, um die Serverlast zu reduzieren, die durch extreme Trackable-Liebhaber verursacht wird)
@@ -64,6 +66,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
