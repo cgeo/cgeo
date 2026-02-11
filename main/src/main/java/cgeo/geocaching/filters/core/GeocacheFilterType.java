@@ -13,6 +13,7 @@ public enum GeocacheFilterType {
 
     NAME("name", R.string.cache_filter_name, R.string.cache_filtergroup_basic, NameGeocacheFilter::new),
     OWNER("owner", R.string.cache_filter_owner, R.string.cache_filtergroup_basic, OwnerGeocacheFilter::new),
+    SELF_OWNED("self_owned", R.string.cache_filter_self_owned, R.string.cache_filtergroup_userspecific, SelfOwnedGeocacheFilter::new),
     DESCRIPTION("description", R.string.cache_filter_description, R.string.cache_filtergroup_basic, DescriptionGeocacheFilter::new),
     TYPE("type", R.string.cache_filter_type, R.string.cache_filtergroup_basic, TypeGeocacheFilter::new),
     SIZE("size", R.string.cache_filter_size, R.string.cache_filtergroup_details, SizeGeocacheFilter::new),
