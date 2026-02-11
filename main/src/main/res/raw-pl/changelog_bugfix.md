@@ -3,8 +3,10 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
 - Naprawiono: Format współrzędnych zmieniający się w arkuszu informacji o skrytce/punkcie nawigacji
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
+- Naprawiono: Data logowania była przycinana na liście logowań (w zależności od formatu daty i rozmiaru czcionki)
+- Naprawiono: W pewnych sytuacjach nie był wykrywany czas wydarzenia
+- Naprawiono: W pewnych sytuacjach linki w opisie skrytki były nieklikalne
+- Naprawiono: Działania związane z logowaniem przedmiotów podróżnych czasami się mieszały
 
 ##
 - Zmiana: Maksymalna liczba odwiedzin przedmiotów podróżnych GC na dziennik skrytki zmniejszona do 100 (wg żądania z geocaching.com, aby zmniejszyć obciążenie serwera spowodowane przez ekstremalnych miłośników „podróżników”)
@@ -64,6 +66,7 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
