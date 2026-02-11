@@ -119,14 +119,18 @@ public class GCMap {
 
         final GeocacheFilter filter = pFilter != null ? pFilter : GeocacheFilter.createEmpty();
 
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(connector);
+        if (andChainForConnector == null) {
+            return null;
+        }
+
         //special case: if origin filter is present and excludes GCConnector, then skip search
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(andChainForConnector, OriginGeocacheFilter.class);
         if (origin != null && !origin.allowsCachesOf(connector)) {
             return null;
         }
 
-        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
-        for (BaseGeocacheFilter baseFilter : filterAndChain) {
+        for (BaseGeocacheFilter baseFilter : andChainForConnector) {
             fillForBasicFilter(baseFilter, search);
         }
 

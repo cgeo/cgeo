@@ -2,6 +2,8 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
@@ -71,7 +73,12 @@ public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
     private static IGeocacheFilter createFilterForConnector(@NonNull final IConnector connector) {
         if (connector instanceof ILogin) {
             final ILogin loginConnector = (ILogin) connector;
-            final String username = loginConnector.getUserName();
+            String username = loginConnector.getUserName();
+            if (connector instanceof OCDEConnector) {
+                username = "dogesu";
+            } else if (connector instanceof GCConnector) {
+                username = "lineflyer";
+            }
             if (StringUtils.isNotBlank(username)) {
                 final AndGeocacheFilter andGeocacheFilter = new AndGeocacheFilter();
 
