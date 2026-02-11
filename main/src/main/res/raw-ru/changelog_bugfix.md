@@ -5,6 +5,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Fix: Coordinate format changing in cache/waypoint info sheet
 - Fix: Log date cut off in list of logs (depending on date format and font size)
 - Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
 
 ##
 - Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
@@ -64,6 +66,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
 - Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
 
 
 
