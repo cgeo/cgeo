@@ -39,10 +39,9 @@ import androidx.annotation.WorkerThread;
 
 import java.util.List;
 import java.util.Map;
+import static java.lang.Boolean.FALSE;
 
 import org.apache.commons.lang3.StringUtils;
-
-import static java.lang.Boolean.FALSE;
 
 public class GCMap {
 
