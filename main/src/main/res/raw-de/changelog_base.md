@@ -19,7 +19,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Unterstützung für Motorider Design (nur VTM)
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -38,7 +38,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Platzhalter für Trackable Logging (Geocache-Name, Geocache-Code, Benutzer)
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
