@@ -762,10 +762,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_export).setVisible(true);
 
             // submenu advanced
-            if (connector instanceof IIgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IIgnoreCapability) connector).canIgnoreCache(cache));
-            }
-            menu.findItem(R.id.menu_set_cache_icon).setVisible(cache.isOffline());
+            menu.findItem(R.id.menu_ignore).setVisible(connector instanceof IIgnoreCapability && ((IIgnoreCapability) connector).canIgnoreCache(cache));
+            menu.findItem(R.id.menu_set_cache_icon).setVisible(true);
             menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
         }
 
@@ -857,6 +855,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void setCacheIcon(final int newCacheIcon) {
+        ensureSaved();
         cache.setAssignedEmoji(newCacheIcon);
         saveAndNotify(LoadFlags.SAVE_ALL);
         ViewUtils.showShortToast(this, R.string.cache_icon_updated);
