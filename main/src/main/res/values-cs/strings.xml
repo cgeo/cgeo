@@ -1072,6 +1072,10 @@
         <item>Světlý</item>
         <item>Tmavý</item>
     </string-array>
+    <string name="init_colored_theme_dark">Barevný tmavý motiv</string>
+    <string name="init_colored_theme_light">Barevný světlý motiv</string>
+    <string name="init_summary_colored_theme_dark">Použít barevný panel nástrojů v tmavém motivu</string>
+    <string name="init_summary_colored_theme_light">Použít barevný panel nástrojů ve světlém motivu</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Výchozí obrazovka</string>
     <string name="init_wallpaper">Tapeta</string>

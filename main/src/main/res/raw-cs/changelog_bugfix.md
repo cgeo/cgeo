@@ -1,5 +1,14 @@
 ##
-- Čas na aktualizaci! Pokud stále používáte Android 7 nebo starší, tato aktualizace c:geo je pro vás možná poslední! S naší další verzí aplikace c:geo ukončíme podporu pro Android 5-7, abychom snížili zátěž spojenou s údržbou a mohli aktualizovat některé externí komponenty používané aplikací c:geo, které v současné době stále udržujeme. Budeme stále podporovat Android 8 až do Android 16 (a novější verze, až budou publikovány), tedy rozpětí více než osmi let historie Androidu.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
+
+##
 - Změna: Maximální počet sledovatelných GC navštěvujících v rámci jednoho logu kešky, byl snížen na 100 (na žádost geocaching.com, aby se snížilo zatížení jejich serverů způsobené extrémními milovníky trackables)
 - Oprava: Některé možné bezpečnostní výjimky, když uživatel neudělil určitá práva (např.: oznámení)
 - Oprava: Neúplné kruhy kešky při nízkých úrovních přiblížení (pouze VTM)
@@ -57,6 +66,9 @@
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
+
+
 
 
 

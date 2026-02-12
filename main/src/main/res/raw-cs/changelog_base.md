@@ -19,6 +19,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -37,6 +38,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Zástupné symboly pro zápis sledovatelných předmětů (název kešky, kód kešky, uživatel)
 - Změna: Odstraněn odkaz na zastaralý přehrávač WhereYouGo. Integrovaný přehráč Wherigo je nyní výchozí pro Wherigo kešky.
 - Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -65,5 +67,5 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Možnost „Ignorovat rok“ pro filtry data
 - Novinka: Možnost kliknout na vzdálený URI v čekajících stahováních
 - Změna: Použít nastavení systému jako výchozí téma pro nové instalace
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Novinka: Export GPX: Při exportu původních trasových bodů zapisujte poznámky GSAK Lat/LonBeforeCorrect
+- Novinka: Zobrazit lištu pro vrácení zpět při mazání kešek ze seznamu na mapě

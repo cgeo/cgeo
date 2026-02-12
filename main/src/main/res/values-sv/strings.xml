@@ -1046,6 +1046,10 @@
         <item>Ljust</item>
         <item>Mörkt</item>
     </string-array>
+    <string name="init_colored_theme_dark">Mörkt tema</string>
+    <string name="init_colored_theme_light">Ljust tema</string>
+    <string name="init_summary_colored_theme_dark">Använd färgat verktygsfält i mörkt tema</string>
+    <string name="init_summary_colored_theme_light">Använd färgat verktygsfält i ljust tema</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Standardskärm</string>
     <string name="init_wallpaper">Bakgrund</string>
