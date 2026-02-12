@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
     <string name="log_problem_log_full_label">Dziennik jest pełny</string>
     <string name="log_problem_log_full_text">Ten geocacher poinformował, że dziennik jest pełny.</string>
+    <string name="log_problem_log_wet_label">Dziennik jest mokry</string>
+    <string name="log_problem_log_wet_text">Ten geocacher poinformował, że dziennik jest mokry.</string>
     <string name="log_problem_damaged_label">Pojemnik jest uszkodzony</string>
     <string name="log_problem_damaged_text">Ten geocacher poinformował, że pojemnik jest uszkodzony.</string>
     <string name="log_problem_missing_label">Skrytka mogła zniknąć</string>
