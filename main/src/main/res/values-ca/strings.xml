@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Aquest geocatxer va informar que hi ha un problema amb aquest catxé.</string>
     <string name="log_problem_log_full_label">El llibre de registre està ple</string>
     <string name="log_problem_log_full_text">Aquest geocatxer va informar que el llibre de registre és ple.</string>
+    <string name="log_problem_log_wet_label">El llibre de registre està mullat</string>
+    <string name="log_problem_log_wet_text">Aquest geocatxer ha informat que el llibre de registre està mullat.</string>
     <string name="log_problem_damaged_label">El contenidor està danyat</string>
     <string name="log_problem_damaged_text">Aquest geocatxer va informar que el contenidor està danyat.</string>
     <string name="log_problem_missing_label">El catxé pot haver estat espoliat</string>
