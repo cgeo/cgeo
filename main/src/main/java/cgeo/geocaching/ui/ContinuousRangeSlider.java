@@ -115,14 +115,14 @@ public class ContinuousRangeSlider extends LinearLayout {
                 final boolean showMinValueLabel = minValue > min;
                 binding.labelMin.setVisibility(showMinValueLabel ? VISIBLE : GONE);
                 binding.spaceMin.setVisibility(showMinValueLabel ? GONE : VISIBLE);
-                binding.labelMin.setText(String.format(getLabel(minValue)));
+                binding.labelMin.setText(getLabel(minValue));
 
                 // update max label
                 final float maxValue = values.get(1);
                 final boolean showMaxValueLabel = maxValue < max;
                 binding.labelMax.setVisibility(showMaxValueLabel ? VISIBLE : GONE);
                 binding.spaceMax.setVisibility(showMaxValueLabel ? GONE : VISIBLE);
-                binding.labelMax.setText(String.format(getLabel(maxValue)));
+                binding.labelMax.setText(getLabel(maxValue));
             }
         });
     }
