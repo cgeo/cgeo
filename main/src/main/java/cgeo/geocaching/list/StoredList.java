@@ -91,7 +91,7 @@ public final class StoredList extends AbstractList {
         private final WeakReference<Activity> activityRef;
         private final Resources res;
 
-        private static final String GROUP_SEPARATOR = ":";
+        public static final String GROUP_SEPARATOR = ":";
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
@@ -382,13 +382,10 @@ public final class StoredList extends AbstractList {
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
-            final List<String> hierarchies = DataStore.getListHierarchy();
-            if (hierarchies.isEmpty()) {
-                hierarchies.add(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
-            } else {
-                hierarchies.set(0, activity.getString(R.string.init_custombnitem_none)); // overwrite empty entry
-            }
+            final List<String> hierarchies = DataStore.getFullListHierarchy();
+            hierarchies.add(0, activity.getString(R.string.init_custombnitem_none));
             hierarchies.add(1, activity.getString(R.string.list_create_parent));
+
             listprefix.setVisibility(View.VISIBLE);
             listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
             listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
@@ -405,7 +402,7 @@ public final class StoredList extends AbstractList {
                                     prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
                             } else if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp;
+                                prefix = temp + (!StringUtils.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
                         }))
