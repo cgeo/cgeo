@@ -562,7 +562,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 if (coordinates != null) {
                     ClipboardUtils.copyToClipboard(
                             GeopointFormatter.reformatForClipboard(coordinates.toString()));
-                    showToast(getString(R.string.clipboard_copy_ok));
+                    showToast(LocalizationUtils.getString(R.string.clipboard_copy_ok));
                 }
             }
         } else if (itemId == R.id.menu_waypoint_clear_coordinates) {
@@ -587,7 +587,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (selectedWaypoint != null) {
                 ensureSaved();
                 ClipboardUtils.copyToClipboard(selectedWaypoint.reformatForClipboard());
-                showToast(getString(R.string.clipboard_copy_ok));
+                showToast(LocalizationUtils.getString(R.string.clipboard_copy_ok));
             }
         } else if (itemId == R.id.menu_waypoint_open_geochecker) {
             if (selectedWaypoint != null) {
@@ -705,7 +705,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         @Override
         protected String getResultMessage() {
-            return getContext().getString(R.string.info_waypoint_coordinates_cleared);
+            return LocalizationUtils.getString(R.string.info_waypoint_coordinates_cleared);
         }
     }
 
@@ -971,7 +971,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     return;
                 }
 
-                updateStatusMsg(activity.getString(R.string.cache_dialog_loading_details_status_render));
+                updateStatusMsg(LocalizationUtils.getString(R.string.cache_dialog_loading_details_status_render));
 
                 // Data loaded, we're ready to show it!
                 activity.notifyDataSetChanged();
@@ -983,7 +983,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (activity == null) {
                 return;
             }
-            setProgressMessage(activity.getString(R.string.cache_dialog_loading_details)
+            setProgressMessage(LocalizationUtils.getString(R.string.cache_dialog_loading_details)
                     + "\n\n"
                     + msg);
         }
@@ -1129,7 +1129,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         if (!Network.isConnected()) {
-            showToast(getString(R.string.err_server_general));
+            showToast(LocalizationUtils.getString(R.string.err_server_general));
             return;
         }
 
@@ -1151,9 +1151,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void dropUserdefinedWaypoints() {
         if (null != cache && cache.hasUserdefinedWaypoints()) {
-            String info = getString(R.string.cache_delete_userdefined_waypoints_confirm);
+            String info = LocalizationUtils.getString(R.string.cache_delete_userdefined_waypoints_confirm);
             if (!cache.isPreventWaypointsFromNote()) {
-                info += "\n\n" + getString(R.string.cache_delete_userdefined_waypoints_note);
+                info += "\n\n" + LocalizationUtils.getString(R.string.cache_delete_userdefined_waypoints_note);
             }
             SimpleDialog.of(this).setTitle(R.string.cache_delete_userdefined_waypoints).setMessage(TextParam.text(info)).confirm(() -> {
                 for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
@@ -1188,7 +1188,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void dropGeneratedWaypoints() {
         if (null != cache && cache.hasGeneratedWaypoints()) {
-            final String info = getString(R.string.cache_delete_generated_waypoints_confirm);
+            final String info = LocalizationUtils.getString(R.string.cache_delete_generated_waypoints_confirm);
             SimpleDialog.of(this).setTitle(R.string.cache_delete_generated_waypoints).setMessage(TextParam.text(info)).confirm(() -> {
                 for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
                     if (waypoint.getWaypointType() == WaypointType.GENERATED) {
@@ -1360,7 +1360,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
             details.addShareAction(cachename);
             if (cache.supportsNamechange()) {
-                cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
+                cachename.setOnClickListener(v -> Dialogs.input(activity, LocalizationUtils.getString(R.string.cache_name_set), cache.getName(), LocalizationUtils.getString(R.string.caches_sort_name), name -> {
                     cachename.setText(name);
                     cache.setName(name);
                     CacheDetailActivity.saveAndNotify(getContext(), cache, LoadFlags.SAVE_ALL);
@@ -1772,7 +1772,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateChirpWolfBox(final CacheDetailActivity activity) {
-            final Intent chirpWolf = ProcessUtils.getLaunchIntent(getString(R.string.package_chirpwolf));
+            final Intent chirpWolf = ProcessUtils.getLaunchIntent(LocalizationUtils.getString(R.string.package_chirpwolf));
             final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
             boolean isEnabled = false;
             for (String current : cache.getAttributes()) {
@@ -1786,12 +1786,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (isEnabled) {
                 binding.sendToChirp.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
-                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(getString(R.string.package_chirpwolf));
+                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(LocalizationUtils.getString(R.string.package_chirpwolf));
                     if (chirpWolf2 != null) {
                         chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(chirpWolf2);
                     } else {
-                        ProcessUtils.openMarket(activity, getString(R.string.package_chirpwolf));
+                        ProcessUtils.openMarket(activity, LocalizationUtils.getString(R.string.package_chirpwolf));
                     }
                 });
             }
@@ -1869,15 +1869,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
             binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             CacheDetailsCreator.addShareAction(activity, binding.personalnote);
-            TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
+            TooltipCompat.setTooltipText(binding.editPersonalnote, LocalizationUtils.getString(R.string.cache_personal_note_edit));
             binding.editPersonalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
             binding.personalnote.setOnClickListener(v -> editPersonalNote(cache, activity));
-            TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
+            TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, LocalizationUtils.getString(R.string.cache_personal_note_storewaypoints));
             binding.storewaypointsPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
                 activity.storeWaypointsInPersonalNote(cache);
             });
-            TooltipCompat.setTooltipText(binding.deleteewaypointsPersonalnote, getString(R.string.cache_personal_note_removewaypoints));
+            TooltipCompat.setTooltipText(binding.deleteewaypointsPersonalnote, LocalizationUtils.getString(R.string.cache_personal_note_removewaypoints));
             binding.deleteewaypointsPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
                 activity.removeWaypointsFromPersonalNote(cache);
@@ -1887,7 +1887,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 binding.uploadPersonalnote.setVisibility(View.VISIBLE);
-                TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
+                TooltipCompat.setTooltipText(binding.uploadPersonalnote, LocalizationUtils.getString(R.string.cache_personal_note_upload));
                 binding.uploadPersonalnote.setOnClickListener(v -> activity.checkAndUploadPersonalNote(connector));
             } else {
                 binding.uploadPersonalnote.setVisibility(View.GONE);
@@ -1945,14 +1945,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hintSpoilerlink.setOnClickListener(arg0 -> {
                     final List<Image> sis = cache.getFilteredSpoilers();
                     if (cache == null || sis.isEmpty()) {
-                        activity.showToast(getString(R.string.err_detail_no_spoiler));
+                        activity.showToast(LocalizationUtils.getString(R.string.err_detail_no_spoiler));
                         return;
                     }
                     ImageGalleryActivity.startActivity(activity, cache.getGeocode(), sis);
                 });
 
                 // if there is only a listing background image without other additional pictures, change the text to better explain the content.
-                if (spoilerImages.size() == 1 && getString(R.string.cache_image_background).equals(spoilerImages.get(0).title)) {
+                if (spoilerImages.size() == 1 && LocalizationUtils.getString(R.string.cache_image_background).equals(spoilerImages.get(0).title)) {
                     binding.hintSpoilerlink.setText(R.string.cache_image_background);
                 } else {
                     binding.hintSpoilerlink.setText(R.string.cache_menu_spoilers);
@@ -1993,7 +1993,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 } else {
                     binding.hint.setText(cache.getHint());
                 }
-                binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_language_detected), sourceLng));
+                binding.descriptionTranslateNote.setText(String.format(LocalizationUtils.getString(R.string.translator_language_detected), sourceLng));
                 return;
             }
 
@@ -2002,7 +2002,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                 unsupportedLng -> {
                     cda.translationStatus.abortTranslation();
-                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, unsupportedLng));
+                    binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_language_unsupported, unsupportedLng));
                 }, modelDownloading -> binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification),
     translator -> {
                     if (null == translator) {
@@ -2098,7 +2098,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 if (cache.supportsDescriptionchange()) {
                     descriptionView.setOnClickListener(v ->
-                            Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
+                            Dialogs.input(activity, LocalizationUtils.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
                                 descriptionView.setText(description);
                                 cache.setDescription(description);
                                 saveAndNotify(activity, cache, LoadFlags.SAVE_ALL);
@@ -2161,7 +2161,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 if (renderError) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
                     if (StringUtils.isNotEmpty(cache.getUrl())) {
-                        final Spanned tableNote = HtmlCompat.fromHtml(activity.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
+                        final Spanned tableNote = HtmlCompat.fromHtml(LocalizationUtils.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
                         description.append("\n\n").append(TextUtils.setSpan(tableNote, new StyleSpan(Typeface.ITALIC)));
                     }
                 }
@@ -2175,7 +2175,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return new Pair<>(description, textTooLong && restrictLength);
             } catch (final RuntimeException re) {
                 Log.e("Problems parsing cache description", re);
-                return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
+                return new Pair<>(LocalizationUtils.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
             }
         }
 
@@ -2200,7 +2200,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * @param activity calling activity
          */
         private static void fixOldGeocheckerLink(final Activity activity, final Geocache cache, final Spannable spannable) {
-            final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
+            final String gcLinkInfo = LocalizationUtils.getString(R.string.link_gc_checker);
             HtmlUtils.replaceUrlClickAction(spannable, gcLinkInfo, span -> openGeochecker(activity, cache));
         }
     }
@@ -2224,7 +2224,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected void ensureSaved() {
         if (!cache.isOffline()) {
-            showToast(getString(R.string.info_cache_saved));
+            showToast(LocalizationUtils.getString(R.string.info_cache_saved));
             cache.getLists().add(StoredList.STANDARD_LIST_ID);
             AndroidRxUtils.computationScheduler.scheduleDirect(() -> saveAndNotify(CacheDetailActivity.this, cache, LoadFlags.SAVE_ALL));
             notifyDataSetChanged();
@@ -2370,7 +2370,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     activity.selectedWaypoint = newWaypoint;
                     adapter.notifyDataSetChanged();
                     activity.reinitializePage(Page.WAYPOINTS.id);
-                    ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added_current_location, newWaypoint.getName(), currentAccuracy));
+                    ActivityMixin.showShortToast(activity, LocalizationUtils.getString(R.string.waypoint_added_current_location, newWaypoint.getName(), currentAccuracy));
                 }
             });
 
@@ -2465,7 +2465,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // title
-            holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
+            holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : LocalizationUtils.getString(R.string.waypoint));
             holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false, Settings.getIconScaleEverywhere()).getDrawable());
 
             // visited
@@ -2704,9 +2704,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                 runOnUiThread(() -> {
                     if (result) {
-                        showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
+                        showToast(LocalizationUtils.getString(R.string.waypoint_coordinates_has_been_reset_on_website));
                     } else {
-                        showToast(getString(R.string.waypoint_coordinates_upload_error));
+                        showToast(LocalizationUtils.getString(R.string.waypoint_coordinates_upload_error));
                     }
                     handler.sendEmptyMessage(HandlerResetCoordinates.ON_WEBSITE);
                     notifyDataSetChanged();
@@ -2721,21 +2721,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // show number of waypoints directly in waypoint title
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
-            return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
+            return String.format(LocalizationUtils.getString(R.string.waypoints_tabtitle), waypointCount);
         } else if (pageId == Page.VARIABLES.id) {
             final int varCount = cache == null ? 0 : cache.getVariables().size();
-            return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
+            return LocalizationUtils.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         } else if (pageId == Page.IMAGEGALLERY.id) {
-            String title = this.getString(Page.IMAGEGALLERY.titleStringId);
+            String title = LocalizationUtils.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {
             final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
-            return this.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
+            return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
-        return this.getString(Page.find(pageId).titleStringId);
+        return LocalizationUtils.getString(Page.find(pageId).titleStringId);
     }
 
     @NonNull
@@ -3064,7 +3064,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
         if (userModifiedWaypoints.isEmpty() && cache.getVariables().isEmpty()) {
-            showShortToast(getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
+            showShortToast(LocalizationUtils.getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
             return;
         }
 

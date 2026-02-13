@@ -66,7 +66,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
 
         if (show3Doption) {
             final CheckBoxPreference cb3D = new CheckBoxPreference(activity);
-            cb3D.setKey(activity.getString(R.string.pref_buildingLayer3D));
+            cb3D.setKey(getString(R.string.pref_buildingLayer3D));
             cb3D.setTitle(R.string.maptheme_show3Dbuildings);
             cb3D.setChecked(Settings.getBuildings3D());
             cb3D.setIconSpaceReserved(false);

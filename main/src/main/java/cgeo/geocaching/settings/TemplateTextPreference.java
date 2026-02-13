@@ -7,6 +7,7 @@ import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -105,9 +106,9 @@ public class TemplateTextPreference extends Preference {
             final String newText = editText.getText().toString();
             // check that for log templates both title and text are filled
             if (!isSignature && StringUtils.isEmpty(newTitle) && !StringUtils.isEmpty(newText)) {
-                editTitle.setError(getContext().getString(R.string.init_log_template_missing_error));
+                editTitle.setError(LocalizationUtils.getString(R.string.init_log_template_missing_error));
             } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
-                editText.setError(getContext().getString(R.string.init_log_template_missing_error));
+                editText.setError(LocalizationUtils.getString(R.string.init_log_template_missing_error));
             } else if (StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
                 // don't save empty templates
                 dialog.dismiss();

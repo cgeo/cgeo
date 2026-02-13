@@ -202,7 +202,7 @@ public class SettingsUtils {
         assert activity != null;
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        builder.setTitle(activity.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
+        builder.setTitle(LocalizationUtils.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
         builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(activity,
                 android.R.layout.simple_list_item_single_choice,
                 formatDirectoryNames(activity, directories, freeSpaces)) {
@@ -243,7 +243,7 @@ public class SettingsUtils {
         final List<CharSequence> truncated = Formatter.truncateCommonSubdir(directories);
         final List<CharSequence> formatted = new ArrayList<>(truncated.size());
         for (int i = 0; i < truncated.size(); i++) {
-            formatted.add(activity.getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
+            formatted.add(LocalizationUtils.getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
         }
         return formatted;
     }

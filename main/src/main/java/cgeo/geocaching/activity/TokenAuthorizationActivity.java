@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -238,15 +239,15 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthAgain() {
-        return getString(R.string.auth_again);
+        return LocalizationUtils.getString(R.string.auth_again);
     }
 
     protected String getErrAuthInitialize() {
-        return getString(R.string.err_auth_initialize);
+        return LocalizationUtils.getString(R.string.err_auth_initialize);
     }
 
     protected String getAuthStart() {
-        return getString(R.string.auth_start);
+        return LocalizationUtils.getString(R.string.auth_start);
     }
 
     protected abstract String getAuthDialogCompleted();
