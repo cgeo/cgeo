@@ -186,7 +186,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onCreate(savedInstanceState);
         acquireUnifiedMap(this);
 
-        ActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        setContentView(R.layout.unifiedmap_activity);
+        showSpacer(true);
         if (null != findViewById(R.id.live_map_status)) {
             findViewById(R.id.live_map_status).getBackground().mutate();
         }
@@ -200,7 +201,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.mapType = extraMapType;
         }
 
-        // set cache reload state according to whether this is a first map initialization or a resumte
+        // set cache reload state according to whether this is a first map initialization or a resume
         this.cacheReloadState = savedInstanceState == null ? CacheReloadState.INITIALIZE : CacheReloadState.RESUME;
 
         viewModel.followMyLocation.setValue(viewModel.mapType.followMyLocation);

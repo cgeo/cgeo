@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:minHeight="@dimen/actionbar_height"
+    android:background="@color/colorBackgroundActionBar"
+    android:elevation="4dp"
+    android:theme="@style/tool_bar"
+    app:popupTheme="@style/appToolbarPopup"/>

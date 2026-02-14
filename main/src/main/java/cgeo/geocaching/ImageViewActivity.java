@@ -229,7 +229,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setFixedActionBar(false);
-        getSupportActionBar().hide(); //do not use normal Action Bar
         setThemeAndContentView(R.layout.imageview_activity);
         enableViewTransitions(this);
         postponeEnterTransition();

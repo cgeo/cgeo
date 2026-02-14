@@ -6,18 +6,23 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.graphics.Insets;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -25,15 +30,44 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
 
-    private static final int ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN = 50; //dp
-
-    private int actionBarSystemBarOverlapHeight = ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN);
     private boolean fixedActionBar = true;
+    private MaterialToolbar toolbar;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUpAction();
+        showActionBar(true);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes final int layoutResID) {
+        Log.e("AbstractActionBarActivity.setContentView: inflating view #" + layoutResID);
+        setContentView(LayoutInflater.from(this).inflate(layoutResID, null));
+    }
+
+    @Override
+    public void setContentView(final View view) {
+        assert view != null;
+        toolbar = view.findViewById(R.id.appToolbar);
+        if (toolbar != null) {
+            // use existing toolbar
+            Log.e("AbstractActionBarActivity.setContentView: using given view");
+            super.setContentView(view);
+        } else {
+            // add toolbar above given view
+            Log.e("AbstractActionBarActivity.setContentView: creating new frame view");
+            super.setContentView(R.layout.activity_base_with_toolbar);
+            final ViewGroup contentContainer = findViewById(R.id.activity_content_wrapper);
+            if (contentContainer != null) {
+                contentContainer.addView(view);
+                toolbar = findViewById(R.id.appToolbar);
+            }
+        }
+        setSupportActionBar(toolbar);
+        initUpAction();
+        // initialize the action bar title with the activity title for single source
+        ActivityMixin.setTitle(this, getTitle());
     }
 
     private void initUpAction() {
@@ -57,74 +91,66 @@ public class AbstractActionBarActivity extends AbstractActivity {
         ActivityMixin.setTitle(this, title);
     }
 
-    /** call in onCreate to set fixed action bar. If fixed then show/hode won't work and content will NOT be extended behind action bar */
+    /** call in onCreate to set fixed action bar. If fixed then show/hide won't work and content will NOT be extended behind action bar */
     public void setFixedActionBar(final boolean fixedActionBar) {
         this.fixedActionBar = fixedActionBar;
     }
 
     @Nullable
-    @SuppressLint("DiscouragedApi")
     public View getActionBarView() {
-        //see https://stackoverflow.com/questions/20023483/how-to-get-actionbar-view
-        final String packageName = getPackageName();
-        final int resId = getResources().getIdentifier("action_bar_container", "id", packageName);
-        return getWindow().getDecorView().findViewById(resId);
+        return toolbar;
     }
 
-    public int getActionBarHeight() {
-        return (int) getResources().getDimension(R.dimen.actionbar_height) + ViewUtils.dpToPixel(10);
-    }
-
-    public void hideActionBar() {
+    public void showActionBar(final boolean show) {
         final ActionBar actionBar = getSupportActionBar();
-        final View abView = getActionBarView();
-        if (actionBar == null || abView == null || !actionBar.isShowing() || fixedActionBar) {
+        if (actionBar == null || show == actionBar.isShowing()) {
             return;
         }
-        abView.animate().translationY(- 2 * getActionBarHeight() - 2 * this.actionBarSystemBarOverlapHeight)
-            .withEndAction(actionBar::hide).start();
+        if (show || fixedActionBar) {
+            actionBar.show();
+            //@todo applyTranslation();
+        } else {
+            actionBar.hide();
+        }
+        showSpacer(show);
     }
 
-    public void showActionBar() {
-        final ActionBar actionBar = getSupportActionBar();
-        final View abView = getActionBarView();
-        if (actionBar == null || abView == null || actionBar.isShowing() || fixedActionBar) {
-            return;
-        }
-        actionBar.show();
-        applyTranslation();
-        abView.setTranslationY(-getActionBarHeight() - this.actionBarSystemBarOverlapHeight);
-        abView.animate().translationY(-this.actionBarSystemBarOverlapHeight).start();
+    public void showSpacer(final boolean show) {
+        ViewUtils.setVisibility(findViewById(R.id.spacer), show ? View.VISIBLE : View.GONE);
     }
 
     public boolean actionBarIsShowing() {
         final ActionBar actionBar = getSupportActionBar();
-        if (actionBar == null) {
-            return false;
-        }
-        return actionBar.isShowing();
+        return actionBar != null && actionBar.isShowing();
     }
 
     @Override
     @NonNull
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsForActivityContentHelper(def);
+    }
+
+    @NonNull
+    private Insets calculateInsetsForActivityContentHelper(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
-        this.actionBarSystemBarOverlapHeight = Math.min(insets.top, ViewUtils.dpToPixel(ACTION_BAR_SYSTEM_BAR_OVERLAP_HEIGHT_MIN));
-        applyTranslation();
+        final MaterialToolbar t = findViewById(R.id.appToolbar);
+        if (t != null) {
+            // make room for system bar
+            t.setTranslationY(insets.top);
+        }
+        Log.e("insets.top=" + insets.top + ", left=" + insets.left + ", right=" + insets.right + ", bottom=" + insets.bottom + ", ab=" + getResources().getDimension(R.dimen.actionbar_height));
         if (fixedActionBar) {
-            return Insets.of(insets.left, insets.top + getActionBarHeight(), insets.right, insets.bottom);
+            return Insets.of(insets.left, insets.top, insets.right, insets.bottom);
         }
         return insets;
     }
 
-    private void applyTranslation() {
-        final View actionBar = getActionBarView();
-        if (actionBar != null) {
-            actionBar.setTranslationY(-actionBarSystemBarOverlapHeight);
-            actionBar.setPadding(0, actionBarSystemBarOverlapHeight, 0, 0);
-        }
+    @NonNull
+    protected Insets calculateInsetsWithToolbarInPortrait(@NonNull final Insets def) {
+        final Insets insets = calculateInsetsForActivityContentHelper(def);
+        final int appToolbarHeight = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? (int) getResources().getDimension(R.dimen.actionbar_height) : 0;
+        return Insets.of(insets.left, insets.top + appToolbarHeight, insets.right, insets.bottom);
     }
-
 
     protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name) {
         final CharSequence title;

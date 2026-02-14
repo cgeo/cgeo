@@ -115,10 +115,19 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
 
+        // Set up the toolbar
+        setSupportActionBar(binding.appToolbar.getRoot());
+
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
         // will be called if c:geo cannot log in
         startLoginIssueHandler();
+    }
+
+    @Override
+    @Nullable
+    public View getActionBarView() {
+        return binding == null ? null : binding.appToolbar.getRoot();
     }
 
     @Nullable
@@ -230,6 +239,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
+        Log.e("insets.top=" + insets.top + ", left=" + insets.left + ", right=" + insets.right + ", bottom=" + insets.bottom + ", ab=" + getResources().getDimension(R.dimen.actionbar_height));
         if (hideNavigationBar || getSelectedBottomItemId() == MENU_HIDE_NAVIGATIONBAR) {
             //-> navbar is NOT shown, we have to handle all insets (including bottom)
             return insets;
@@ -238,6 +248,13 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             return Insets.of(0, insets.top, insets.right, insets.bottom);
         }
         return Insets.of(insets.left, insets.top, insets.right, 0);
+    }
+
+    @NonNull
+    protected Insets calculateInsetsWithToolbarInPortrait(@NonNull final Insets def) {
+        final Insets insets = super.calculateInsetsWithToolbarInPortrait(def);
+        final boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        return Insets.of(isPortrait ? insets.left : 0, insets.top, insets.right, isPortrait ? 0 : insets.bottom);
     }
 
     @Override
