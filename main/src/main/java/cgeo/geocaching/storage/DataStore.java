@@ -2915,7 +2915,7 @@ public class DataStore {
                     values.put("geocode", geocode);
                 } else {
                     final String spottedGeocode = trackable.getSpottedCacheGeocode();
-                    if (spottedGeocode != null) {
+                    if (StringUtils.isNotBlank(spottedGeocode)) {
                         values.put("geocode", spottedGeocode);
                     }
                 }
