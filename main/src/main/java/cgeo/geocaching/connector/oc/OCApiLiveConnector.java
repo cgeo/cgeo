@@ -36,6 +36,7 @@ import java.util.EnumSet;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability, IFavoriteCapability, IVotingCapability {
 
@@ -160,7 +161,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         final String userName = getUserName();
-        return StringUtils.isNotEmpty(userName) && StringUtils.equals(cache.getOwnerDisplayName(), userName);
+        return StringUtils.isNotEmpty(userName) && Strings.CS.equals(cache.getOwnerDisplayName(), userName);
     }
 
     @Override
@@ -172,7 +173,6 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     public void increaseCachesFound(final int by) {
         //not supported
     }
-
 
     @Override
     public int getCachesFound() {

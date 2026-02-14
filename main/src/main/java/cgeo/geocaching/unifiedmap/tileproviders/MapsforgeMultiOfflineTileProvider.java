@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.map.datastore.MultiMapDataStore;
@@ -85,7 +86,7 @@ public class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineT
             for (String language : languagesPreference.split(",")) {
                 boolean found = false;
                 for (String comp : languages) {
-                    if (StringUtils.equals(comp, language)) {
+                    if (Strings.CS.equals(comp, language)) {
                         found = true;
                         break;
                     }
@@ -96,5 +97,4 @@ public class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineT
             }
         }
     }
-
 }

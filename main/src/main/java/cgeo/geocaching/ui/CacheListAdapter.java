@@ -57,6 +57,7 @@ import java.util.Set;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionIndexer {
 
@@ -80,7 +81,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      * Resulting list of caches
      */
     private final List<Geocache> list;
-
 
     /**
      * time in milliseconds after which the list may be resorted due to position updates
@@ -538,7 +538,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             cache.setStatusChecked(checkNow);
             final CacheListAdapter adapter = adapterRef.get();
             if (adapter == null) {
-                return; // NOPMD - Early return is appropriate for null check on WeakReference
+                // NOPMD - Early return is appropriate for null check on WeakReference
             }
         }
     }
@@ -711,7 +711,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         String lastComparable = null;
         for (int x = 0; x < list.size(); x++) {
             final String comparable = getComparable(x);
-            if (!StringUtils.equals(lastComparable, comparable)) {
+            if (!Strings.CS.equals(lastComparable, comparable)) {
                 mapFirstPosition.put(comparable, x);
                 sectionList.add(comparable);
                 lastComparable = comparable;
@@ -753,5 +753,4 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return " ";
         }
     }
-
 }

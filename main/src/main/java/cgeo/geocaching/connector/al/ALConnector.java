@@ -27,6 +27,7 @@ import java.util.EnumSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort {
 
@@ -172,7 +173,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         final String user = Settings.getUserName();
-        return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), user);
+        return StringUtils.isNotEmpty(user) && Strings.CI.equals(cache.getOwnerDisplayName(), user);
     }
 
     @Override

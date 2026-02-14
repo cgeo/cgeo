@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
@@ -303,7 +304,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         final String user = Settings.getUserName();
-        return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), user);
+        return StringUtils.isNotEmpty(user) && Strings.CI.equals(cache.getOwnerUserId(), user);
     }
 
     @WorkerThread
@@ -623,7 +624,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isChallengeCache(@NonNull final Geocache cache) {
-        return cache.getType() == CacheType.MYSTERY && StringUtils.containsIgnoreCase(cache.getName(), "challenge");
+        return cache.getType() == CacheType.MYSTERY && Strings.CI.contains(cache.getName(), "challenge");
     }
 
     @Override

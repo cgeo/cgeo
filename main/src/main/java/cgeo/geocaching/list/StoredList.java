@@ -49,6 +49,7 @@ import java.util.stream.Stream;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
@@ -189,7 +190,7 @@ public final class StoredList extends AbstractList {
 
         private void configureListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model, final Set<Integer> selectedListIds) {
 
-            //Display for normal items
+            // Display for normal items
             model.setDisplayMapper((item, itemGroup) -> {
                 String title = item.getTitle();
                 if (item instanceof StoredList) {
@@ -203,8 +204,7 @@ public final class StoredList extends AbstractList {
             }, (item, itemGroup) -> item.getTitle(), null);
             model.setDisplayIconMapper((item) -> UserInterface.getImageForList(item, false));
 
-
-            //GROUPING
+            // GROUPING
             model.activateGrouping(item -> getGroupFromList(item, selectedListIds))
                     .setGroupGroupMapper(UserInterface::getGroupFromGroup)
                     .setItemGroupComparator(getGroupAwareListSorter(selectedListIds))
@@ -220,7 +220,6 @@ public final class StoredList extends AbstractList {
                     .setGroupPruner(gi -> gi.getSize() >= 2)
                     .setReducedGroupSaver("storedlist", g -> g, g -> g);
         }
-
 
         private Comparator<Object> getGroupAwareListSorter(final Set<Integer> selectedIds) {
             final Collator collator = Collator.getInstance();
@@ -268,8 +267,8 @@ public final class StoredList extends AbstractList {
             if (item instanceof StoredList) {
                 if (item.id == STANDARD_LIST_ID) {
                     return ImageParam.id(R.drawable.ic_menu_save);
-                } else if (((StoredList) item).markerId > 0) {
-                    return ImageParam.emoji(((StoredList) item).markerId, 30);
+                } else if (item.markerId > 0) {
+                    return ImageParam.emoji(item.markerId, 30);
                 }
             } else if (item instanceof PseudoList) {
                 return ImageParam.id(item.markerId);
@@ -285,7 +284,7 @@ public final class StoredList extends AbstractList {
             if (!(item instanceof StoredList)) {
                 return null;
             }
-            //selected lists are not in a group
+            // selected lists are not in a group
             if (selectedIds != null && selectedIds.contains(item.id)) {
                 return null;
             }
@@ -399,12 +398,12 @@ public final class StoredList extends AbstractList {
                     .setPositiveButton(buttonTitle, ((d, which) -> {
                             String prefix = "";
                             final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
-                            if (StringUtils.equals(temp, activity.getString(R.string.list_create_parent))) {
+                            if (Strings.CS.equals(temp, activity.getString(R.string.list_create_parent))) {
                                 prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
-                                if (!StringUtils.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
+                                if (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
                                     prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
-                            } else if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                            } else if (!Strings.CS.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
                                 prefix = temp;
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
@@ -457,7 +456,7 @@ public final class StoredList extends AbstractList {
                     .setPositiveButton(android.R.string.ok, ((d, which) -> {
                         final String from = listprefixView.getText().toString();
                         final String to = title.getText().toString();
-                        if (!StringUtils.equals(from, to)) {
+                        if (!Strings.CS.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
                                     String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
@@ -476,7 +475,6 @@ public final class StoredList extends AbstractList {
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
             }));
         }
-
     }
 
     /**

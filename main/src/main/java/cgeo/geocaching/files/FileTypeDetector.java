@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class FileTypeDetector {
 
@@ -66,9 +67,9 @@ public class FileTypeDetector {
         // scan at most 5 lines of a GPX file
         for (int i = 0; i < 5; i++) {
             line = StringUtils.trim(line);
-            if (StringUtils.contains(line, "<loc")) {
+            if (Strings.CS.contains(line, "<loc")) {
                 return FileType.LOC;
-            } else if (StringUtils.contains(line, "<gpx")) {
+            } else if (Strings.CS.contains(line, "<gpx")) {
                 return FileType.GPX;
             }
             line = reader.readLine();
@@ -78,20 +79,20 @@ public class FileTypeDetector {
 
     private static boolean isZip(final String line) {
         return StringUtils.length(line) >= 4
-                && StringUtils.startsWith(line, "PK") && line.charAt(2) == 3
+                && Strings.CS.startsWith(line, "PK") && line.charAt(2) == 3
                 && line.charAt(3) == 4;
     }
 
     private static boolean isMap(final String line) {
         return StringUtils.length(line) >= 20
-                && StringUtils.startsWith(line, "mapsforge binary OSM");
+                && Strings.CS.startsWith(line, "mapsforge binary OSM");
     }
 
     private static boolean isWherigo(final BufferedReader reader, final String line) {
         if (line.length() == 1 && line.charAt(0) == 0x02) {
             try {
                 final String line2 = reader.readLine();
-                return (StringUtils.equals(line2.substring(0, 4), "CART"));
+                return (Strings.CS.equals(line2.substring(0, 4), "CART"));
             } catch (IOException ignore) {
                 // ignore
             }

@@ -8,7 +8,7 @@ import android.content.Context;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.mbtiles.MBTilesFile;
 import org.mapsforge.map.android.mbtiles.TileMBTilesLayer;
@@ -51,7 +51,6 @@ public class MBTilesLayerHelper {
 
     /** returns a list of .mbtiles files found in app-specific media folder, typically /Android/media/(app-id)/*.mbtiles */
     private static File[] getMBTilesSources(final Context context) {
-        return context.getExternalMediaDirs()[0].listFiles((dir, name) -> StringUtils.endsWith(name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION));
+        return context.getExternalMediaDirs()[0].listFiles((dir, name) -> Strings.CS.endsWith(name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION));
     }
-
 }

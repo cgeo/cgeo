@@ -38,6 +38,7 @@ import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -552,7 +553,7 @@ public final class TextUtils {
             return false;
         }
 
-        return StringUtils.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0;
+        return Strings.CS.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0;
     }
 
     public static <E extends Enum<E>> E getEnumIgnoreCaseAndSpecialChars(final Class<E> enumClass, final String enumName, final E defaultEnum) {
@@ -705,6 +706,4 @@ public final class TextUtils {
         }
         return cs1.toString().equals(cs2.toString());
     }
-
-
 }

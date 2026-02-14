@@ -39,6 +39,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class SuConnector extends AbstractConnector implements ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByFilter, IFavoriteCapability, IVotingCapability, IIgnoreCapability {
 
@@ -169,7 +170,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
-        return StringUtils.isNotEmpty(getUserName()) && StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
+        return StringUtils.isNotEmpty(getUserName()) && Strings.CS.equals(cache.getOwnerDisplayName(), getUserName());
     }
 
     @Override

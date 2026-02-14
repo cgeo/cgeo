@@ -83,6 +83,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
@@ -366,7 +367,7 @@ public final class ImageUtils {
      */
     public static boolean containsPattern(final String url, final String[] patterns) {
         for (final String entry : patterns) {
-            if (StringUtils.containsIgnoreCase(url, entry)) {
+            if (Strings.CI.contains(url, entry)) {
                 return true;
             }
         }

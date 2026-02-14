@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class Waypoint implements INamedGeoCoordinate {
 
@@ -84,7 +85,7 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
@@ -148,7 +149,7 @@ public class Waypoint implements INamedGeoCoordinate {
         if (StringUtils.isBlank(userNote)) {
             userNote = old.userNote;
         }
-        if (StringUtils.equals(note, userNote)) {
+        if (Strings.CS.equals(note, userNote)) {
             userNote = "";
         }
 
@@ -706,7 +707,6 @@ public class Waypoint implements INamedGeoCoordinate {
         }
         return applyDistanceRule;
     }
-
 
     public int setProjectionFromConfig(final String config, final int startIdx) {
         if (config == null || startIdx < 0 || startIdx >= config.length()) {

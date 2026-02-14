@@ -140,7 +140,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.Strings;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -206,7 +206,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void updateGeoData(final GeoData geoData) {
             adapter.setActualCoordinates(geoData.getCoords());
         }
-
     };
 
     private ContextMenuInfo lastMenuInfo;
@@ -424,7 +423,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             } else {
                 final String data = ContentStorage.get().getName(getIntent().getData());
-                listNameMemento.rememberTerm(StringUtils.isNotBlank(data) && StringUtils.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
+                listNameMemento.rememberTerm(StringUtils.isNotBlank(data) && Strings.CS.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
             }
             importGpxAttachement();
         }
@@ -552,7 +551,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return this.coords;
     }
 
-
     /**
      * Menu items which are not at all usable with the current list type should be hidden.
      * Menu items which are usable with the current list type but not in the current situation should be disabled.
@@ -578,7 +576,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final boolean hasListNavigationApps = CacheListApps.getActiveApps().size() > 1;
         final int checkedCount = adapter.getCheckedCount();
-
 
         try {
             // toplevel menu items

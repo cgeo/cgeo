@@ -52,6 +52,7 @@ import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
@@ -194,7 +195,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
                 @Override
                 protected void onReceive(final Context context, final String geocode) {
-                    if (StringUtils.equals(geocode, CachePopupFragment.this.geocode)) {
+                    if (Strings.CS.equals(geocode, CachePopupFragment.this.geocode)) {
                         init();
                     }
                 }
@@ -257,7 +258,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
     }
 
-
     private void updateStoreRefreshButtons(final boolean enable) {
         final Activity activity = getActivity();
         if (activity != null) {
@@ -265,7 +265,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_refresh), enable);
         }
     }
-
 
     private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
         @Override
@@ -305,7 +304,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
     }
 
-
     private class MoveCacheClickListener implements View.OnLongClickListener {
 
         @Override
@@ -325,7 +323,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             doStoreCacheOnLists(Collections.singleton(listId));
         }
     }
-
 
     private class DropCacheClickListener implements View.OnClickListener {
         @Override
@@ -362,7 +359,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             }
         }
     }
-
 
     @Override
     public void showNavigationMenu() {

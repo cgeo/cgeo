@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class ECConnector extends AbstractConnector {
 
@@ -48,12 +49,11 @@ public class ECConnector extends AbstractConnector {
         return PATTERN_EC_CODE.matcher(geocode).matches();
     }
 
-    @NonNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"EC%"};
     }
-
 
     @Override
     @NonNull
@@ -98,7 +98,7 @@ public class ECConnector extends AbstractConnector {
     @Override
     public int getCacheMapMarkerId() {
         final String icons = Settings.getECIconSet();
-        if (StringUtils.equals(icons, "1")) {
+        if (Strings.CS.equals(icons, "1")) {
             return R.drawable.marker_other;
         }
         return R.drawable.marker_oc;
@@ -107,7 +107,7 @@ public class ECConnector extends AbstractConnector {
     @Override
     public int getCacheMapMarkerBackgroundId() {
         final String icons = Settings.getECIconSet();
-        if (StringUtils.equals(icons, "1")) {
+        if (Strings.CS.equals(icons, "1")) {
             return R.drawable.background_other;
         }
         return R.drawable.background_oc;
@@ -116,7 +116,7 @@ public class ECConnector extends AbstractConnector {
     @Override
     public int getCacheMapDotMarkerId() {
         final String icons = Settings.getECIconSet();
-        if (StringUtils.equals(icons, "1")) {
+        if (Strings.CS.equals(icons, "1")) {
             return R.drawable.dot_marker_other;
         }
         return R.drawable.dot_marker_oc;
@@ -125,7 +125,7 @@ public class ECConnector extends AbstractConnector {
     @Override
     public int getCacheMapDotMarkerBackgroundId() {
         final String icons = Settings.getECIconSet();
-        if (StringUtils.equals(icons, "1")) {
+        if (Strings.CS.equals(icons, "1")) {
             return R.drawable.dot_background_other;
         }
         return R.drawable.dot_background_oc;
