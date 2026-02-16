@@ -1,12 +1,12 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
+- Fix: Koordinatformat ändras i cache/vägpunkt informationsblad
+- Fix: Inloggningsdatum avskurna i listan över loggar (beroende på datumformat och teckenstorlek)
+- Fix: Händelsetider kan inte upptäckas under vissa förhållanden
+- Fix: Länk i listan inte klickbar under vissa villkor
+- Fix: Åtgärder vid loggning av spårbara objekt blandas ibland
 
 ##
 - Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
