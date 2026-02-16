@@ -19,7 +19,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -38,7 +38,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
