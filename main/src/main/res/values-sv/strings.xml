@@ -1824,8 +1824,15 @@
     <string name="formula_function_lettervalue">Ordvärde</string>
     <string name="formula_function_roman">Roman till decimal</string>
     <string name="formula_function_vanity">Vanity kod</string>
+    <string name="formula_function_add">Lägg till</string>
+    <string name="formula_function_multiply">Multiplicera</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Antal</string>
+    <string name="formula_function_average">Medel</string>
     <string name="formula_function_group_simplenumeric">Enkel numerisk</string>
     <string name="formula_function_group_complexnumeric">Komplext tal</string>
+    <string name="formula_function_group_aggregatenumeric">Aggregera numeriskt</string>
     <string name="formula_function_group_simplestring">Enkel sträng</string>
     <string name="formula_function_group_complexstring">Komplex sträng</string>
     <string name="formula_error_unexpectedtoken">Förväntade \'%1$s\'</string>
@@ -1835,6 +1842,7 @@
     <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
     <string name="formula_error_empty">Tom formel</string>
     <string name="formula_error_numeric_overflow">Numeriskt spill</string>
+    <string name="formula_error_invalid_range">Ogiltigt område: %1$s</string>
     <string name="formula_error_other">Fel: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Namnlös</string>
