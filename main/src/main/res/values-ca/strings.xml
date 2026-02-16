@@ -1855,6 +1855,7 @@
     <string name="formula_function_average">Mitjana</string>
     <string name="formula_function_group_simplenumeric">Numèric simple</string>
     <string name="formula_function_group_complexnumeric">Numèric complex</string>
+    <string name="formula_function_group_aggregatenumeric">Agregat numèric</string>
     <string name="formula_function_group_simplestring">Cadena simple</string>
     <string name="formula_function_group_complexstring">Cadena complexa</string>
     <string name="formula_error_unexpectedtoken">S\'està esperant \"%1$s\"</string>
