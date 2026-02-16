@@ -1886,6 +1886,7 @@
     <string name="formula_function_average">Średnia</string>
     <string name="formula_function_group_simplenumeric">Prosta wartość numeryczna</string>
     <string name="formula_function_group_complexnumeric">Złożona wartość numeryczna</string>
+    <string name="formula_function_group_aggregatenumeric">Zbiorcza wartość numeryczna</string>
     <string name="formula_function_group_simplestring">Prosty ciąg znaków</string>
     <string name="formula_function_group_complexstring">Złożony ciąg znaków</string>
     <string name="formula_error_unexpectedtoken">Oczekiwano \'%1$s\'</string>
