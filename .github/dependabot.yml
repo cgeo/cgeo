@@ -17,3 +17,7 @@ updates:
       # Ignore updates to the 'jts-core' package
       # jts-core 1.17.0 includes a API breaking change not supported by VTM
       - dependency-name: "org.locationtech.jts:jts-core"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
