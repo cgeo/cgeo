@@ -368,7 +368,7 @@ jobs:
           ./gradlew packageBasicDebugAndroidTest
 
       - name: Upload resulting APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: "cgeo-apk-api${{ matrix.api-level }}"
           path: '*/build/outputs/apk/basic/**/cgeo*.apk'
@@ -440,7 +440,7 @@ jobs:
           curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
 
       - name: Upload logcat
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: "cgeo-apk-api${{ matrix.api-level }}.logcat"
