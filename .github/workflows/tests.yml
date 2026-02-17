@@ -56,6 +56,20 @@ jobs:
           fi
           echo "::notice::Secrets seems available"
 
+      - name: Report Gradle cache key length
+        run: |
+          KEY="${{ secrets.GRADLE_ENCRYPTION_KEY }}"
+          if [ -z "$KEY" ]; then
+            echo "::warning::GRADLE_ENCRYPTION_KEY is empty"
+          else
+            KEY_LEN=${#KEY}
+            echo "::notice::GRADLE_ENCRYPTION_KEY length: ${KEY_LEN}"
+            if [ "$KEY_LEN" -ne 16 ] && [ "$KEY_LEN" -ne 24 ] && [ "$KEY_LEN" -ne 32 ]; then
+              echo "::error::GRADLE_ENCRYPTION_KEY length must be 16, 24, or 32 bytes"
+              exit 1
+            fi
+          fi
+
       - name: Get User Permission
         id: checkAccess
         uses: actions-cool/check-user-permission@v2
@@ -113,6 +127,20 @@ jobs:
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
+
+      - name: Report Gradle cache key length
+        run: |
+          KEY="${{ secrets.GRADLE_ENCRYPTION_KEY }}"
+          if [ -z "$KEY" ]; then
+            echo "::warning::GRADLE_ENCRYPTION_KEY is empty"
+          else
+            KEY_LEN=${#KEY}
+            echo "::notice::GRADLE_ENCRYPTION_KEY length: ${KEY_LEN}"
+            if [ "$KEY_LEN" -ne 16 ] && [ "$KEY_LEN" -ne 24 ] && [ "$KEY_LEN" -ne 32 ]; then
+              echo "::error::GRADLE_ENCRYPTION_KEY length must be 16, 24, or 32 bytes"
+              exit 1
+            fi
+          fi
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -175,6 +203,20 @@ jobs:
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
+
+      - name: Report Gradle cache key length
+        run: |
+          KEY="${{ secrets.GRADLE_ENCRYPTION_KEY }}"
+          if [ -z "$KEY" ]; then
+            echo "::warning::GRADLE_ENCRYPTION_KEY is empty"
+          else
+            KEY_LEN=${#KEY}
+            echo "::notice::GRADLE_ENCRYPTION_KEY length: ${KEY_LEN}"
+            if [ "$KEY_LEN" -ne 16 ] && [ "$KEY_LEN" -ne 24 ] && [ "$KEY_LEN" -ne 32 ]; then
+              echo "::error::GRADLE_ENCRYPTION_KEY length must be 16, 24, or 32 bytes"
+              exit 1
+            fi
+          fi
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -253,6 +295,20 @@ jobs:
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
+
+      - name: Report Gradle cache key length
+        run: |
+          KEY="${{ secrets.GRADLE_ENCRYPTION_KEY }}"
+          if [ -z "$KEY" ]; then
+            echo "::warning::GRADLE_ENCRYPTION_KEY is empty"
+          else
+            KEY_LEN=${#KEY}
+            echo "::notice::GRADLE_ENCRYPTION_KEY length: ${KEY_LEN}"
+            if [ "$KEY_LEN" -ne 16 ] && [ "$KEY_LEN" -ne 24 ] && [ "$KEY_LEN" -ne 32 ]; then
+              echo "::error::GRADLE_ENCRYPTION_KEY length must be 16, 24, or 32 bytes"
+              exit 1
+            fi
+          fi
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
