@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
   pull_request_target:
-    types: [labeled, opened, synchronize]
+    types: [labeled, synchronize]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
@@ -26,6 +26,15 @@ permissions:
 
 jobs:
   check-websites:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
@@ -37,6 +46,15 @@ jobs:
         uses: ./.github/actions/check-websites
 
   check-secrets:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Debug concurrency-group
@@ -84,6 +102,15 @@ jobs:
           exit 1
 
   checkstyle:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
     runs-on: ubuntu-latest
     needs: check-secrets
     steps:
@@ -160,6 +187,15 @@ jobs:
 
 
   lint:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
     runs-on: ubuntu-latest
     needs: check-secrets
     steps:
@@ -238,6 +274,15 @@ jobs:
 
 
   integration-tests:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
     # > It is now recommended to use the Ubuntu (ubuntu-latest) runners which
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
@@ -421,7 +466,18 @@ jobs:
 
   rerun-on-failure:
     needs: integration-tests
-    if: failure() && fromJSON(github.run_attempt) < 3
+    if: >
+      failure() && fromJSON(github.run_attempt) < 3 &&
+      (
+        github.event_name != 'pull_request_target' ||
+        (
+          github.event.pull_request.head.repo.full_name != github.repository &&
+          (
+            (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+          )
+        )
+      )
     runs-on: ubuntu-latest
     steps:
       - env:
