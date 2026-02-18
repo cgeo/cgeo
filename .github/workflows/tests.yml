@@ -106,6 +106,45 @@ jobs:
           echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
           exit 1
 
+  check-code-changed:
+    if: >
+      github.event_name != 'pull_request_target' ||
+      (
+        github.event.pull_request.head.repo.full_name != github.repository &&
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+        )
+      )
+    runs-on: ubuntu-latest
+    outputs:
+      code-changed: ${{ steps.detect.outputs.has-code-changes }}
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Detect code changes
+        id: detect
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            # For push events, compare with the previous commit
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} || git diff --name-only HEAD~1 HEAD)
+          else
+            # For PR events, use the changed_files_raw list
+            CHANGED_FILES="${{ github.event.pull_request.changed_files_raw }}"
+          fi
+
+          # Check if any files outside .github were changed (main/, gradle/, or root gradle files)
+          if echo "$CHANGED_FILES" | grep -vE '^\.github/' | grep -qE '(build\.gradle|settings\.gradle|gradle/|main/|mapswithme-api/|organicmaps-api/)';
+          then
+            echo "has-code-changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-code-changes=false" >> $GITHUB_OUTPUT
+          fi
+
   checkstyle:
     if: >
       github.event_name != 'pull_request_target' ||
@@ -280,19 +319,22 @@ jobs:
 
   integration-tests:
     if: >
-      github.event_name != 'pull_request_target' ||
+      needs.check-code-changed.outputs.code-changed == 'true' &&
       (
-        github.event.pull_request.head.repo.full_name != github.repository &&
+        github.event_name != 'pull_request_target' ||
         (
-          (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
-          (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+          github.event.pull_request.head.repo.full_name != github.repository &&
+          (
+            (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
+            (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
+          )
         )
       )
     # > It is now recommended to use the Ubuntu (ubuntu-latest) runners which
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
-    needs: [check-secrets, check-websites]
+    needs: [check-secrets, check-websites, check-code-changed]
     strategy:
       fail-fast: false
       matrix:
