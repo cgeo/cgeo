@@ -1309,6 +1309,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
         private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
         private CacheDetailsCreator.NameValueLine favoriteLine;
+        private CacheDetailsCreator.NameValueLine findsLine;
         private Geocache cache;
         private int coordinateFormatPosition = 0;
 
@@ -1380,6 +1381,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addDifficulty(cache);
             details.addTerrain(cache);
             details.addRating(cache);
+
+            // finds count
+            findsLine = details.add(R.string.caches_sort_finds, "");
 
             // favorite count
             favoriteLine = details.add(R.string.cache_favorite, "");
@@ -1721,10 +1725,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private void updateFavPointBox(final CacheDetailActivity activity) {
             // Favorite counts
             final int favCount = cache.getFavoritePoints();
+            final int findsCount = cache.getFindsCount();
             if (favCount >= 0 && !cache.isEventCache()) {
                 favoriteLine.layout.setVisibility(View.VISIBLE);
 
-                final int findsCount = cache.getFindsCount();
                 if (findsCount > 0) {
                     favoriteLine.valueView.setText(activity.res.getString(R.string.favorite_count_percent, favCount, Math.min((float) (favCount * 100) / findsCount, 100.0f)));
                 } else {
@@ -1732,6 +1736,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             } else {
                 favoriteLine.layout.setVisibility(View.GONE);
+            }
+
+            // Finds count
+            if (findsCount > 0) {
+                findsLine.layout.setVisibility(View.VISIBLE);
+                findsLine.valueView.setText(String.valueOf(findsCount));
+            } else {
+                findsLine.layout.setVisibility(View.GONE);
             }
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             binding.favpointBox.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
