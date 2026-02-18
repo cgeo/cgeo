@@ -3166,6 +3166,25 @@
         <item quantity="other">%d unread messages in message center</item>
     </plurals>
 
+    <!-- GC Live API -->
+    <string name="settings_gc_live_api_title">Use GC Live API</string>
+    <string name="settings_gc_live_api_summary">Use the official Geocaching API instead of web scraping. Faster, especially for bulk operations.</string>
+    <string name="settings_gc_live_auth_title">Authorize GC Live API</string>
+    <string name="settings_gc_live_auth_connected">Authorized</string>
+    <string name="settings_gc_live_auth_not_connected">Not authorized. Tap to authorize.</string>
+    <string name="gc_live_auth_failed">GC Live auth failed: %s</string>
+    <string name="gc_live_auth_failed_no_code">GC Live auth failed: no code</string>
+    <string name="gc_live_auth_failed_no_verifier">GC Live auth failed: no code verifier. Please try again.</string>
+    <string name="gc_live_auth_failed_http">GC Live auth failed (HTTP %d)</string>
+    <string name="gc_live_auth_failed_empty_token">GC Live auth failed: empty token</string>
+    <string name="gc_live_auth_success">GC Live API authorized!</string>
+    <string name="gc_live_status_not_authorized">Live API: not authorized</string>
+    <string name="gc_live_status_token_valid">Live API: token valid</string>
+    <string name="gc_live_status_refreshing_token">Live API: refreshing token\u2026</string>
+    <string name="gc_live_status_token_refresh_failed">Live API: token refresh failed</string>
+    <string name="gc_live_rate_limited">Rate limited, retrying in %ds\u2026</string>
+    <string name="gc_live_batch_progress">Fetching cache data: %1$d/%2$d\u2026</string>
+
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Preferred Image Size</string>
     <string name="settings_gc_imagesize_summary">Images from Geocaching.com in listing, logs and trackables are available in different sizes. Select the size to be loaded when loading and storing a cache. "Unchanged" will load the version the listing/log author included in the page.</string>

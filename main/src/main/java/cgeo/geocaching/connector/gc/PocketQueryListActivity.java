@@ -28,6 +28,9 @@ public class PocketQueryListActivity extends AbstractListActivity {
 
     @Override
     protected List<GCList> getList() {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.searchPocketQueries();
+        }
         return GCParser.searchPocketQueries();
     }
 

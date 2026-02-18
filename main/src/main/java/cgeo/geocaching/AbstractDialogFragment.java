@@ -141,10 +141,13 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             details.addRating(cache);
         }
 
-        // favorite count
+        // finds and favorite counts
         final int favCount = cache.getFavoritePoints();
+        final int findsCount = cache.getFindsCount();
+        if (findsCount > 0) {
+            details.add(R.string.caches_sort_finds, String.valueOf(findsCount));
+        }
         if (favCount >= 0) {
-            final int findsCount = cache.getFindsCount();
             if (findsCount > 0) {
                 details.add(R.string.cache_favorite, res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
             } else if (!cache.isEventCache()) {
