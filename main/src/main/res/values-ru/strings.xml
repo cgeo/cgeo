@@ -1263,7 +1263,7 @@
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
     <string name="map_source_google_terrain">Google: ландшафт</string>
-    <string name="map_source_osm_offline">Офлайн</string>
+    <string name="map_source_osm_offline">Сохранение</string>
     <string name="map_source_osm_offline_combined">Совмещённые (офлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
     <string name="init_sendToCgeo">Отправить в c:geo</string>
