@@ -32,6 +32,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TileProviderFactory {
@@ -54,7 +55,7 @@ public class TileProviderFactory {
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
             boolean hide = false;
             for (String comp : hideTileproviders) {
-                if (StringUtils.equals(comp, tileProvider.getId())) {
+                if (Strings.CS.equals(comp, tileProvider.getId())) {
                     hide = true;
                 }
             }
@@ -180,7 +181,7 @@ public class TileProviderFactory {
     private static boolean isGoogleMapsInstalled() {
         // Check if API key is available
         final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
-        if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
+        if (StringUtils.length(mapsKey) < 30 || Strings.CS.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;
         }
@@ -272,5 +273,4 @@ public class TileProviderFactory {
     public static void resetLanguages() {
         languages = new String[]{};
     }
-
 }

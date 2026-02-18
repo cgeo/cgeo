@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class GPXImporter {
     static final int IMPORT_STEP_START = 0;
@@ -98,11 +99,11 @@ public class GPXImporter {
     @NonNull
     private static FileType getFileTypeFromPathName(
             final String pathName) {
-        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.GPX_FILE_EXTENSION)) {
+        if (Strings.CI.endsWith(pathName, FileUtils.GPX_FILE_EXTENSION)) {
             return FileType.GPX;
         }
 
-        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.LOC_FILE_EXTENSION)) {
+        if (Strings.CI.endsWith(pathName, FileUtils.LOC_FILE_EXTENSION)) {
             return FileType.LOC;
         }
         return FileType.UNKNOWN;
@@ -271,7 +272,7 @@ public class GPXImporter {
         }
         final String gpxFileName = gpxfile.getName();
         for (final String filename : filenameList) {
-            if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
+            if (!Strings.CI.contains(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;
             }
             final String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)

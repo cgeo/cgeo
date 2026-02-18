@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class WaymarkingConnector extends AbstractConnector {
 
@@ -48,7 +49,7 @@ public class WaymarkingConnector extends AbstractConnector {
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return StringUtils.startsWith(geocode, "WM");
+        return Strings.CS.startsWith(geocode, "WM");
     }
 
     @Override

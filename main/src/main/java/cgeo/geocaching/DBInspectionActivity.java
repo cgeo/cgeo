@@ -25,6 +25,7 @@ import java.util.Arrays;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import net.movingbits.dbinspection.DBInspectionToolkit;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class DBInspectionActivity extends AbstractActionBarActivity implements AdapterView.OnItemSelectedListener {
 
@@ -118,7 +119,7 @@ public class DBInspectionActivity extends AbstractActionBarActivity implements A
     }
 
     private void onSearchConfirmed(final String newSearchTerm, final boolean[] newSearchColumnSelection) {
-        if (!StringUtils.equals(newSearchTerm, toolkit.getSearchTerm()) || (!Arrays.equals(toolkit.getSearchColumnSelection(), newSearchColumnSelection))) {
+        if (!Strings.CS.equals(newSearchTerm, toolkit.getSearchTerm()) || (!Arrays.equals(toolkit.getSearchColumnSelection(), newSearchColumnSelection))) {
             toolkit.setSearchTerm(newSearchTerm, newSearchColumnSelection);
             updateTableData(null);
         }
@@ -137,7 +138,7 @@ public class DBInspectionActivity extends AbstractActionBarActivity implements A
     @Override
     public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
         final String item = parent.getItemAtPosition(position).toString();
-        if (StringUtils.isBlank(item) || StringUtils.equals(item, titleSelectTable)) {
+        if (StringUtils.isBlank(item) || Strings.CS.equals(item, titleSelectTable)) {
             onNothingSelected(parent);
             return;
         }

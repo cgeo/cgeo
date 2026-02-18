@@ -136,6 +136,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
@@ -224,7 +225,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.followMyLocation.observe(this, this::initFollowMyLocation);
         viewModel.location.observe(this, this::handleLocUpdate);
 
-        //wherigo
+        // wherigo
         final View view = findViewById(R.id.map_wherigo_popup);
         if (view != null) {
             view.setOnClickListener(v -> openWherigoPopup());
@@ -507,7 +508,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 break;
         }
 
-
         if (this.cacheReloadState == CacheReloadState.RESUME) {
             mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type));
             mapFragment.setCenter(Settings.getMapCenter());
@@ -584,13 +584,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         liveMapStatus.setOnClickListener(v -> showLiveStatusDialog());
 
-        //hide status if we are live
+        // hide status if we are live
         if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
             spinner.setVisibility(View.GONE);
             liveMapStatus.setVisibility(View.GONE);
             return;
         }
-        //set live map status
+        // set live map status
         if (status.isError() || status.isPartial(viewport)) {
             liveMapStatus.setImageResource(status.isError() ? R.drawable.ic_menu_error : R.drawable.ic_menu_partial);
             liveMapStatus.getBackground().setTint(getResources().getColor(status.isError() ? R.color.cacheMarker_archived : R.color.osm_zoomcontrol));
@@ -598,7 +598,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else {
             liveMapStatus.setVisibility(View.GONE);
         }
-        //set spinner
+        // set spinner
         switch (status.loadState) {
             case RUNNING:
                 spinner.setVisibility(View.VISIBLE);
@@ -639,7 +639,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return;
         }
 
-        //build message
+        // build message
         final StringBuilder errors = new StringBuilder();
         final StringBuilder partials = new StringBuilder();
         final StringBuilder normals = new StringBuilder();
@@ -705,7 +705,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             });
         });
     }
-
 
     public void replaceSearchResultByGeocaches(final SearchResult searchResult) {
         Log.d(LOGPRAEFIX + "replace " + searchResult.getGeocodes());
@@ -1286,7 +1285,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             } else if (item.isRoute() && routeTrackUtils != null && item.getRoute() != null) {
                 // individual route or track
-                if (lastElevationChartRoute != null && StringUtils.equals(item.getRoute().getName(), lastElevationChartRoute)) {
+                if (lastElevationChartRoute != null && Strings.CS.equals(item.getRoute().getName(), lastElevationChartRoute)) {
                     elevationChartUtils.removeElevationChart();
                 } else {
                     routeTrackUtils.showRouteTrackContextMenu(tapX, tapY, this::showElevationChart,
@@ -1332,7 +1331,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (forceShowElevationChart && lastElevationChartRoute != null) {
             hideElevationChart(false);
         }
-        if (lastElevationChartRoute != null && StringUtils.equals(item.getName(), lastElevationChartRoute)) {
+        if (lastElevationChartRoute != null && Strings.CS.equals(item.getName(), lastElevationChartRoute)) {
             elevationChartUtils.removeElevationChart();
         } else {
             elevationChartUtils.showElevationChart(item, routeTrackUtils, () -> hideElevationChart(RouteTrackUtils.isNavigationTargetRoute(item)));
@@ -1353,7 +1352,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.trackUpdater.observe(this, event -> {
                     if (viewModel.getTracks().getRoute(event.peek()) instanceof Route) {
                         final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
-                        if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
+                        if (route != null && Strings.CS.equals(lastElevationChartRoute, route.getName())) {
                             elevationChartUtils.showElevationChart(route, routeTrackUtils, () -> hideElevationChart(false));
                         }
                     }

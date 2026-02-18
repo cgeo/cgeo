@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -40,7 +40,7 @@ public class DownloaderTest {
     @Nullable
     private static Download findByName(final List<Download> list, final String name) {
         for (Download d : list) {
-            if (StringUtils.equals(d.getName(), name)) {
+            if (Strings.CS.equals(d.getName(), name)) {
                 return d;
             }
         }
@@ -72,7 +72,7 @@ public class DownloaderTest {
     }
 
     @Test
-public void testOpenAndroMaps() {
+    public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)

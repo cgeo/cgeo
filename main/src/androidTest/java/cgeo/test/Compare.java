@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class Compare {
@@ -39,7 +39,7 @@ public abstract class Compare {
             assertThat(actual.getCoords()).as(cacheStr + "coords").isEqualTo(expected.getCoords());
             assertThat(actual.isOwner()).as(cacheStr + "owning status").isEqualTo(expected.isOwner());
             assertThat(actual.getOwnerUserId()).as(cacheStr + "owner user id").isEqualTo(expected.getOwnerUserId());
-            assertThat(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();
+            assertThat(Strings.CS.equals(expected.getHint(), actual.getHint()) || Strings.CS.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();
             assertThat(actual.getDescription()).as(cacheStr + "description").startsWith(expected.getDescription());
             assertThat(actual.getShortDescription()).as(cacheStr + "short description").isEqualTo(expected.getShortDescription());
             assertThat(actual.getCacheId()).as(cacheStr + "cache id").isEqualTo(expected.getCacheId());
@@ -70,5 +70,4 @@ public abstract class Compare {
             assertThat(actual.getSpoilers().size()).as(cacheStr + " spoilers").isGreaterThanOrEqualTo(expected.getSpoilers().size());
         }
     }
-
 }

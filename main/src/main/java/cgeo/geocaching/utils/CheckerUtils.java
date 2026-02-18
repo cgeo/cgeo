@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 
 import java.util.regex.Matcher;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.text.StringEscapeUtils;
 
 public final class CheckerUtils {
@@ -56,7 +56,7 @@ public final class CheckerUtils {
         while (matcher.find()) {
             String url = matcher.group();
             for (final GeoChecker checker : CHECKERS) {
-                if (StringUtils.containsIgnoreCase(url, checker.getUrlPattern())) {
+                if (Strings.CI.contains(url, checker.getUrlPattern())) {
                     if (checker.getCoordinateFormat() != null) {
                         if (coordinateToCheck != null) {
                             url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());

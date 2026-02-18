@@ -31,7 +31,7 @@ import androidx.preference.ListPreference;
 
 import java.io.InputStream;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.oscim.backend.AssetAdapter;
 import org.oscim.theme.IRenderTheme.ThemeException;
 import org.oscim.theme.ThemeFile;
@@ -125,7 +125,7 @@ public enum VtmThemes implements ThemeFile {
     public static VtmThemes getDefaultVariant() {
         final String vtmDefaultVariantName = Settings.getVtmDefaultVariantName();
         for (VtmThemes vtmTheme : VtmThemes.values()) {
-            if (StringUtils.equals(vtmTheme.name(), vtmDefaultVariantName)) {
+            if (Strings.CS.equals(vtmTheme.name(), vtmDefaultVariantName)) {
                 return vtmTheme;
             }
         }

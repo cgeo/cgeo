@@ -52,6 +52,7 @@ import java.util.Locale;
 
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public final class SystemInformation {
@@ -317,7 +318,7 @@ public final class SystemInformation {
     }
 
     private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
-        body.append("\n- ").append(StringUtils.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+        body.append("\n- ").append(Strings.CS.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {

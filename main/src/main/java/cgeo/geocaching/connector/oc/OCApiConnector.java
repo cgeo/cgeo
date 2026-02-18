@@ -18,6 +18,7 @@ import androidx.annotation.WorkerThread;
 
 import io.reactivex.rxjava3.core.Maybe;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOAuthCapability {
 
@@ -70,7 +71,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         }
         final String rotCK = CryptUtils.rot13(cK);
         // check that developers are not using the Ant defined properties without any values
-        if (StringUtils.startsWith(rotCK, "${")) {
+        if (Strings.CS.startsWith(rotCK, "${")) {
             throw new IllegalStateException("invalid OKAPI OAuth token '" + rotCK + "' for host " + getHost() + ". fix your keys.xml");
         }
         params.put(CryptUtils.rot13("pbafhzre_xrl"), rotCK);
@@ -158,7 +159,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
     @WorkerThread
     protected String getGeocodeFromCacheId(final String url, final String host) {
         final Uri uri = Uri.parse(url);
-        if (!StringUtils.containsIgnoreCase(uri.getHost(), host)) {
+        if (!Strings.CI.contains(uri.getHost(), host)) {
             return null;
         }
 
@@ -166,7 +167,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         final String id = uri.getPath().startsWith("/viewcache.php") ? uri.getQueryParameter("cacheid") : "";
         if (StringUtils.isNotBlank(id)) {
             final String geocode = Maybe.fromCallable(() -> {
-                final String normalizedUrl = StringUtils.replaceIgnoreCase(url, getShortHost(), getShortHost());
+                final String normalizedUrl = Strings.CI.replace(url, getShortHost(), getShortHost());
                 return OkapiClient.getGeocodeByUrl(OCApiConnector.this, normalizedUrl);
             }).subscribeOn(AndroidRxUtils.networkScheduler).blockingGet();
 
@@ -193,5 +194,4 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         // fall back to a simple host name based pattern
         return super.getCreateAccountUrl();
     }
-
 }

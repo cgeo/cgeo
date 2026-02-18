@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public final class Formatter {
 
@@ -221,7 +222,7 @@ public final class Formatter {
         boolean newlineRequested = false;
         for (SpannableString s : infos) {
             if (s.length() > 0) {
-                if (StringUtils.equals(s, "\n")) {
+                if (Strings.CS.equals(s, "\n")) {
                     if (sb.length() > 0) {
                         newlineRequested = true;
                     }
