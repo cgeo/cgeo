@@ -1,5 +1,14 @@
 ##
-- Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
+Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
+
+- Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
+- Fix: Koordinatformat ändras i cache/vägpunkt informationsblad
+- Fix: Inloggningsdatum avskurna i listan över loggar (beroende på datumformat och teckenstorlek)
+- Fix: Händelsetider kan inte upptäckas under vissa förhållanden
+- Fix: Länk i listan inte klickbar under vissa villkor
+- Fix: Åtgärder vid loggning av spårbara objekt blandas ibland
+
+##
 - Förändring: Maximalt antal GC-spårbara objekt som besöks per cache-logg reduceras till 100 (enligt begäran från geocaching.com för att minska deras server belastning som orsakas av extrema spårbara-älskare)
 - Fix: Några möjliga säkerhetsundantag när användaren inte har beviljat vissa rättigheter (t.ex.: notifieringar)
 - Fix: Cache-cirklar ofullständiga på låga zoomnivåer (endast VTM)
@@ -57,6 +66,9 @@
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
+
+
 
 
 

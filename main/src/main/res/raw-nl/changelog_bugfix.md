@@ -1,5 +1,14 @@
 ##
-- Tijd om te updaten! Als je nog steeds Android 7 of ouder gebruikt, is dit misschien de laatste c:geo update voor jou! Met onze volgende release van c:geo zullen we ondersteuning voor Android 5-7 stopzetten om onze onderhoudsbelasting te verminderen en om externe componenten te kunnen bijwerken die gebruikt worden door c:geo die we momenteel nog achterhouden. We ondersteunen nog steeds Android 8 tot en met Android 16 (en nieuwere versies wanneer ze gepubliceerd worden), een totaal van meer dan acht jaar Android geschiedenis.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
+
+##
 - Wijziging: Maximum aantal GC trackables die per cachelogboek op bezocht gezet kunnen worden, is teruggebracht tot 100 (op verzoek van geocaching.com om hun serverbelasting veroorzaakt door extreme trackable lovers te verminderen)
 - Oplossing: Enkele mogelijke beveiligingsuitzonderingen wanneer de gebruiker bepaalde permissies niet heeft toegekend (bv. meldingen)
 - Oplossing: Cache cirkels onvolledig op lage zoomniveaus (VTM alleen)
@@ -57,6 +66,9 @@
 ##
 - Oplossing: Migratie van door de gebruiker gedefinieerde caches tijdens c:geo opstarten mislukt => heeft het tijdelijk verwijderd
 - Oplossing: Voltooide Wherigo taken niet gemarkeerd als voltooid of mislukt
+
+
+
 
 
 

@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
     <string name="log_problem_log_full_label">Logbuch ist voll</string>
     <string name="log_problem_log_full_text">Dieser Geocacher hat gemeldet, dass das Logbuch voll ist.</string>
+    <string name="log_problem_log_wet_label">Logbuch ist nass</string>
+    <string name="log_problem_log_wet_text">Dieser Geocacher hat gemeldet, dass das Logbuch nass ist.</string>
     <string name="log_problem_damaged_label">Behälter ist beschädigt</string>
     <string name="log_problem_damaged_text">Dieser Geocacher hat gemeldet, dass der Behälter beschädigt ist.</string>
     <string name="log_problem_missing_label">Cache ist evtl. verschwunden</string>
@@ -1855,6 +1857,7 @@
     <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
     <string name="formula_error_empty">Leere Formel</string>
     <string name="formula_error_numeric_overflow">Numerischer Überlauf</string>
+    <string name="formula_error_invalid_range">Ungültiger Bereich: %1$s</string>
     <string name="formula_error_other">Fehler: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Ohne Titel</string>

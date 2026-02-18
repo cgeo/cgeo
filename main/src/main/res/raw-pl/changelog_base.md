@@ -1,4 +1,4 @@
-Edge to Edge (od krawędzi do krawędzui): Ze względu na zasady Sklepu Play, zaktualizowaliśmy poziom API Androida w tej wersji celów c:geo + zmieniliśmy niektóre z zasad układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
+Edge to Edge (od krawędzi do krawędzi): Ze względu na zasady Sklepu Play, zaktualizowaliśmy poziom API Androida w tej wersji celów c:geo + zmieniliśmy niektóre z zasad układu ekranu. Mogą pojawić się pewne niepożądane efekty uboczne, zwłaszcza na nowszych wersjach Androida. Jeśli napotkasz jakiekolwiek problemy z tą wersją c:geo, prosimy o zgłoszenie na [GitHub](https://github.com/cgeo/cgeo) lub poprzez e-mail [support@cgeo.org](mailto:support@cgeo.org)
 
 Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, usunęliśmy wreszcie stare wersje naszych map. Zostaniesz automatycznie przełączony na naszą nową mapę UnifiedMap i nie powinieneś zauważyć większych różnic poza kilkoma nowymi funkcjami, z których są
 - Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
@@ -19,6 +19,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Wsparcie dla motywu Motorider (Tylko VTM)
 - Nowość: Dostawca NoMap (nie pokazuj mapy, po prostu skrytki itp.)
 - Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
+- Nowość: Zezwalaj na importowanie plików KML jako ścieżek (np. trasa przedmiotu podróżnego)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -37,6 +38,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Teksty zastępcze przy logowaniu przedmiotów podróżnych (nazwa skrytki, kod skrytki, użytkownik)
 - Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
 - Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
+- Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -65,5 +67,5 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Opcja „Ignoruj rok” dla filtrów dat
 - Nowość: Zdalne URI w elementach oczekujących na pobranie są teraz klikalne
 - Zmiana: Użyj ustawień systemowych jako domyślnego motywu dla nowych instalacji
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Nowość: Eksport GPX: Zapisz adnotacje GSAK Lat/LonBeforeCorrect podczas eksportowania oryginalnych punktów nawigacji
+- Nowość: Pokaż pasek cofania podczas usuwania skrytek z listy z mapy
