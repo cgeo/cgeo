@@ -5,8 +5,8 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 - Korrektur: Koordinatenformat wechselt auf Cache/Wegpunkt-Infoseite
 - Korrektur: Logdatum in Logliste abgeschnitten (je nach Datumsformat und Schriftgröße)
 - Korrektur: Event-Zeiten unter bestimmten Bedingungen nicht erkannt
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Korrektur: Link in Listings unter bestimmten Bedingungen nicht anklickbar
+- Korrektur: Log-Aktionen für Trackables werden manchmal vertauscht
 
 ##
 - Änderung: Maximale Anzahl von "Besuchen" von GC-Trackables pro Cache-Log auf 100 reduziert (auf Bitte von geocaching.com hin, um die Serverlast zu reduzieren, die durch extreme Trackable-Liebhaber verursacht wird)
