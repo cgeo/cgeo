@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -40,7 +41,12 @@ public class BookmarkUtils {
 
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
 
-            final List<GCList> bmLists = GCParser.searchBookmarkLists();
+            final List<GCList> bmLists;
+            if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+                bmLists = GCLiveAPI.searchBookmarkLists();
+            } else {
+                bmLists = GCParser.searchBookmarkLists();
+            }
             if (bmLists == null) {
                 ActivityMixin.showToast(context, context.getString(R.string.err_read_bookmark_list));
                 return;
@@ -74,20 +80,33 @@ public class BookmarkUtils {
     }
 
     private static void processSelection(final Context context, final List<Geocache> geocaches, final GCList selection) {
+        final boolean useLiveApi = Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization();
         if (selection.getGuid().equals(NEW_LIST_GUID)) {
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(null,
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                        final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
+                        final String guid;
+                        if (useLiveApi) {
+                            guid = GCLiveAPI.createBookmarkList(name);
+                        } else {
+                            guid = GCParser.createBookmarkList(name, geocaches.get(0));
+                        }
                         if (guid == null) {
                             ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
                             return;
                         }
-                        showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches).blockingGet());
+                        showResult(context, addCachesToList(useLiveApi, guid, geocaches));
                     }));
         } else {
             AndroidRxUtils.networkScheduler.scheduleDirect(
-                    () -> showResult(context, GCParser.addCachesToBookmarkList(selection.getGuid(), geocaches).blockingGet()));
+                    () -> showResult(context, addCachesToList(useLiveApi, selection.getGuid(), geocaches)));
         }
+    }
+
+    private static boolean addCachesToList(final boolean useLiveApi, final String listGuid, final List<Geocache> geocaches) {
+        if (useLiveApi) {
+            return GCLiveAPI.addCachesToBookmarkList(listGuid, geocaches);
+        }
+        return GCParser.addCachesToBookmarkList(listGuid, geocaches).blockingGet();
     }
 
     private static void showResult(final Context context, final boolean success) {

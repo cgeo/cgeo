@@ -17,6 +17,19 @@ apply plugin: 'com.android.application'
 Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class) {}
 String commitIdShort = gitCommitIdProvider.get()
 
+// extract GC Live OAuth redirect scheme from private.properties for manifest placeholder
+String gcLiveRedirectScheme = ''
+File ppFile = rootProject.file('private.properties')
+if (ppFile.exists()) {
+    Properties pp = new Properties()
+    ppFile.withInputStream { pp.load(it) }
+    String redirectUri = pp.getProperty('gc.live.redirect.uri', '')
+    int idx = redirectUri.indexOf('://')
+    if (idx > 0) {
+        gcLiveRedirectScheme = redirectUri.substring(0, idx)
+    }
+}
+
 android {
     namespace = 'cgeo.geocaching'
     compileSdk = 36
@@ -69,6 +82,9 @@ android {
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
 
         resourceConfigurations += locales
+
+        // GC Live OAuth redirect scheme (parsed from private.properties)
+        manifestPlaceholders = [gcLiveRedirectScheme: gcLiveRedirectScheme]
     }
 
     // signing is handled via private.properties

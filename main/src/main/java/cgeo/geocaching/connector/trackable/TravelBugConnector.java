@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLiveAPI;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Trackable;
@@ -70,6 +71,9 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.searchTrackable(geocode, guid, id);
+        }
         return GCParser.searchTrackable(geocode, guid, id);
     }
 

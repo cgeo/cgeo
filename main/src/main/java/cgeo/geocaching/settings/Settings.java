@@ -819,6 +819,71 @@ public class Settings {
         putString(R.string.pref_memberstatus, memberStatus.id);
     }
 
+    // GC Live API OAuth2 tokens
+
+    public static String getGCLiveAccessToken() {
+        return getString(R.string.pref_gc_live_access_token, null);
+    }
+
+    public static void setGCLiveAccessToken(final String token) {
+        if (token == null) {
+            remove(R.string.pref_gc_live_access_token);
+        } else {
+            putString(R.string.pref_gc_live_access_token, token);
+        }
+    }
+
+    public static String getGCLiveRefreshToken() {
+        return getString(R.string.pref_gc_live_refresh_token, null);
+    }
+
+    public static void setGCLiveRefreshToken(final String token) {
+        if (token == null) {
+            remove(R.string.pref_gc_live_refresh_token);
+        } else {
+            putString(R.string.pref_gc_live_refresh_token, token);
+        }
+    }
+
+    public static long getGCLiveTokenIssuedAt() {
+        return getLong(R.string.pref_gc_live_token_issued_at, 0);
+    }
+
+    public static void setGCLiveTokenIssuedAt(final long issuedAt) {
+        putLong(R.string.pref_gc_live_token_issued_at, issuedAt);
+    }
+
+    public static String getGCLiveCodeVerifier() {
+        return getString(R.string.pref_gc_live_code_verifier, null);
+    }
+
+    public static void setGCLiveCodeVerifier(final String verifier) {
+        if (verifier == null) {
+            remove(R.string.pref_gc_live_code_verifier);
+        } else {
+            putString(R.string.pref_gc_live_code_verifier, verifier);
+        }
+    }
+
+    public static boolean hasGCLiveAuthorization() {
+        return StringUtils.isNotBlank(getGCLiveRefreshToken());
+    }
+
+    public static void clearGCLiveTokens() {
+        remove(R.string.pref_gc_live_access_token);
+        remove(R.string.pref_gc_live_refresh_token);
+        remove(R.string.pref_gc_live_token_issued_at);
+        remove(R.string.pref_gc_live_code_verifier);
+    }
+
+    public static boolean useGCLiveAPI() {
+        return getBoolean(R.string.pref_gc_use_live_api, false);
+    }
+
+    public static void setUseGCLiveAPI(final boolean value) {
+        putBoolean(R.string.pref_gc_use_live_api, value);
+    }
+
     //solely to be used by class Cookies
     public static String getPersistentCookies() {
         return getString(R.string.pref_cookiejar, "");

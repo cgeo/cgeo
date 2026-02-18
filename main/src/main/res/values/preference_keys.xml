@@ -66,6 +66,7 @@
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string translatable="false" name="pref_fakekey_gc_website">fakekey_gc_website</string>
+    <string translatable="false" name="pref_fakekey_gc_live_authorization">fakekey_gc_live_authorization</string>
 
     <!-- settings for geocaching.com lab adventures screen -->
     <string translatable="false" name="preference_screen_al">preference_screen_al</string>
@@ -516,6 +517,12 @@
     <string translatable="false" name="pref_gcLastLoginErrorStatus">gcLastLoginErrorStatus</string>
     <string translatable="false" name="pref_gcLastLoginError">gcLastLoginError</string>
     <string translatable="false" name="pref_gcLastLoginSuccess">gcLastLoginSuccess</string>
+
+    <string translatable="false" name="pref_gc_live_access_token">gc_live_access_token</string>
+    <string translatable="false" name="pref_gc_live_refresh_token">gc_live_refresh_token</string>
+    <string translatable="false" name="pref_gc_live_token_issued_at">gc_live_token_issued_at</string>
+    <string translatable="false" name="pref_gc_live_code_verifier">gc_live_code_verifier</string>
+    <string translatable="false" name="pref_gc_use_live_api">gc_use_live_api</string>
 
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
     <string translatable="false" name="pref_ocde_tokenpublic">ocde_tokenpublic</string>

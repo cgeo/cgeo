@@ -29,6 +29,9 @@ public class BookmarkListActivity extends AbstractListActivity {
 
     @Override
     protected List<GCList> getList() {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.searchBookmarkLists();
+        }
         return GCParser.searchBookmarkLists();
     }
 
