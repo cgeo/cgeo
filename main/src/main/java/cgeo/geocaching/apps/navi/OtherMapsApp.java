@@ -7,6 +7,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -32,7 +33,7 @@ abstract class OtherMapsApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
-        navigate(context, point, context.getString(R.string.waypoint));
+        navigate(context, point, LocalizationUtils.getString(R.string.waypoint));
     }
 
     private void navigate(final Context context, final Geopoint point, final String label) {

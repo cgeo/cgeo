@@ -25,7 +25,7 @@ public final class WatchListUtils {
     }
 
     private static void updateHandler(final Context context, final List<Geocache> caches, final boolean actionIsWatch) {
-        ActivityMixin.showToast(context, context.getString(R.string.watchlist_background_started));
+        ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.watchlist_background_started));
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             final List<String> failedCaches = new ArrayList<>();
             for (final Geocache cache : caches) {
@@ -36,7 +36,7 @@ public final class WatchListUtils {
                     }
                 }
             }
-            ActivityMixin.showToast(context, failedCaches.isEmpty() ? context.getString(actionIsWatch ? R.string.cachedetails_progress_watch : R.string.cachedetails_progress_unwatch) : context.getString(R.string.err_watchlist_failed_geocodes, String.join(",", failedCaches)));
+            ActivityMixin.showToast(context, failedCaches.isEmpty() ? context.getString(actionIsWatch ? R.string.cachedetails_progress_watch : R.string.cachedetails_progress_unwatch) : LocalizationUtils.getString(R.string.err_watchlist_failed_geocodes, String.join(",", failedCaches)));
         });
     }
 

@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -383,7 +384,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     protected abstract String getAuthDialogCompleted();
 
     private String getErrAuthProcess() {
-        return res.getString(R.string.err_auth_process);
+        return LocalizationUtils.getString(R.string.err_auth_process);
     }
 
     /**
@@ -397,27 +398,27 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     }
 
     private String getAuthDialogWait() {
-        return res.getString(R.string.auth_dialog_waiting, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_dialog_waiting, getAuthTitle());
     }
 
     private String getAuthExplainShort() {
-        return res.getString(R.string.auth_explain_short, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_explain_short, getAuthTitle());
     }
 
     private String getAuthExplainLong() {
-        return res.getString(R.string.auth_explain_long, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_explain_long, getAuthTitle());
     }
 
     private String getAuthAuthorize() {
-        return res.getString(R.string.auth_authorize);
+        return LocalizationUtils.getString(R.string.auth_authorize);
     }
 
     protected String getAuthRegisterExplain() {
-        return res.getString(R.string.auth_register_explain);
+        return LocalizationUtils.getString(R.string.auth_register_explain);
     }
 
     protected String getAuthRegister() {
-        return res.getString(R.string.auth_register);
+        return LocalizationUtils.getString(R.string.auth_register);
     }
 
     public static class OAuthParameters {

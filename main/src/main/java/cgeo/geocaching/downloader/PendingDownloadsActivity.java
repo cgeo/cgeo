@@ -9,10 +9,9 @@ import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.functions.Func1;
-import static cgeo.geocaching.utils.Formatter.formatBytes;
-import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -34,6 +33,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.button.MaterialButton;
 import io.noties.markwon.Markwon;
+import static cgeo.geocaching.utils.Formatter.formatBytes;
+import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 
 public class PendingDownloadsActivity extends AbstractActionBarActivity {
 
@@ -198,7 +199,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         final int count = pendingDownloads.size();
         SimpleDialog.of(this)
             .setTitle(R.string.downloader_delete_all_confirmation)
-            .setMessage(TextParam.text(getString(R.string.downloader_delete_all_message, count)))
+            .setMessage(TextParam.text(LocalizationUtils.getString(R.string.downloader_delete_all_message, count)))
             .confirm(this::deleteAllDownloads);
     }
 
@@ -271,7 +272,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             viewHolder.title.setText(download == null ? "" : download.filename + " (# " + download.id + ")");
             if (download != null) {
                 markwon.setMarkdown(viewHolder.detail, download.info);
-                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
+                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.downloader_cancel_file), download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
                 if (download.isFailedDownload) {
                     viewHolder.buttonResume.setVisibility(View.VISIBLE);
                     viewHolder.buttonResume.setOnClickListener(v -> {

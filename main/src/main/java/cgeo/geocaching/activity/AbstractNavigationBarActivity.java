@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.Version;
@@ -66,6 +67,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationBarView;
+
 
 public abstract class AbstractNavigationBarActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
     private static final String STATE_BACKUPUTILS = "backuputils";
@@ -589,8 +591,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
             restoreMessageShown = true;
             Dialogs.newBuilder(this)
-                    .setTitle(res.getString(R.string.init_backup_restore))
-                    .setMessage(res.getString(R.string.init_restore_confirm))
+                    .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))
+                    .setMessage(LocalizationUtils.getString(R.string.init_restore_confirm))
                     .setCancelable(false)
                     .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
                         dialog.dismiss();

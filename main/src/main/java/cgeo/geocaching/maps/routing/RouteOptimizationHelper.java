@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -107,8 +108,8 @@ public class RouteOptimizationHelper {
                 synchronized (best) {
                     System.arraycopy(route, 0, best, 0, routeSize);
                 }
-                postAdditionalInfo(TextParam.text(String.format(dialog.getContext().getString(R.string.initial_route_length), initialLength.get())
-                        + (length != initialLength.get() ? "\n" + String.format(dialog.getContext().getString(R.string.optimized_route_length), length) : ""))
+                postAdditionalInfo(TextParam.text(String.format(LocalizationUtils.getString(R.string.initial_route_length), initialLength.get())
+                        + (length != initialLength.get() ? "\n" + String.format(LocalizationUtils.getString(R.string.optimized_route_length), length) : ""))
                 );
                 dialog.getButton(BUTTON_POSITIVE).setEnabled(true);
             }
@@ -136,7 +137,7 @@ public class RouteOptimizationHelper {
             return;
         }
 
-        Dialogs.advancedOneTimeMessage(context, OneTimeDialogs.DialogType.ROUTE_OPTIMIZATION, context.getString(R.string.route_optimization), context.getString(R.string.route_optimization_info), "", true, null, () -> {
+        Dialogs.advancedOneTimeMessage(context, OneTimeDialogs.DialogType.ROUTE_OPTIMIZATION, LocalizationUtils.getString(R.string.route_optimization), LocalizationUtils.getString(R.string.route_optimization_info), "", true, null, () -> {
             final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             final TSPDialog dialog = new TSPDialog(context, executor, updateRoute);
             dialog.show();

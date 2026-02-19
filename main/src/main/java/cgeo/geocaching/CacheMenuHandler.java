@@ -19,6 +19,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
@@ -113,7 +114,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                 }
                 shareText.append(activity.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
                 if (null != cache.getPersonalNote()) {
-                    shareText.append("\n").append(activity.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
+                    shareText.append("\n").append(LocalizationUtils.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
                 }
                 ShareUtils.sharePlainText(activity, shareText.toString());
             }

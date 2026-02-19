@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
@@ -42,7 +43,7 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
     private static final String NS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
 
     IndividualRouteExportTask(final Activity activity, final String filename, final boolean exportAsTrack) {
-        super(activity, activity.getString(R.string.export_individualroute_title));
+        super(activity, LocalizationUtils.getString(R.string.export_individualroute_title));
         this.filename = filename;
         this.exportAsTrack = exportAsTrack;
     }
@@ -138,9 +139,9 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
     protected void onPostExecuteInternal(final Uri exportUri) {
         if (null != activity) {
             if (null != exportUri) {
-                ShareUtils.shareOrDismissDialog(activity, exportUri, ShareUtils.TYPE_XML, R.string.export, String.format(activity.getString(R.string.export_individualroute_success), UriUtils.toUserDisplayableString(exportUri)));
+                ShareUtils.shareOrDismissDialog(activity, exportUri, ShareUtils.TYPE_XML, R.string.export, String.format(LocalizationUtils.getString(R.string.export_individualroute_success), UriUtils.toUserDisplayableString(exportUri)));
             } else {
-                ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

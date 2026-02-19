@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -80,7 +81,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
-                .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -126,7 +127,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         if (cache != null) {
             setCacheTitleBar(cache);
         } else {
-            setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), res.getString(R.string.navigation)));
+            setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), LocalizationUtils.getString(R.string.navigation)));
         }
 
         // make sure we can control the TTS volume
@@ -398,9 +399,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId));
         }
     }
 

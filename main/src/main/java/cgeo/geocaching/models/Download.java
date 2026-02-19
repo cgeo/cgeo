@@ -20,6 +20,7 @@ import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsBackgroundMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -70,7 +71,7 @@ public class Download {
     }
 
     public Download(final Uri navigateUpUri, final DownloadType type) {
-        this.name = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
+        this.name = LocalizationUtils.getString(R.string.downloadmap_onedirup);
         this.uri = navigateUpUri;
         this.isDir = true;
         this.isBackDir = true;

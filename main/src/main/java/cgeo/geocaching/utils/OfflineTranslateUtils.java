@@ -232,10 +232,10 @@ public class OfflineTranslateUtils {
                     note.setText(R.string.translator_language_unknown);
                 } else if (!TranslationModelManager.get().getSupportedLanguages().contains(lng.getCode())) {
                     button.setEnabled(true);
-                    note.setText(cda.getResources().getString(R.string.translator_language_unsupported, lng.toString()));
+                    note.setText(LocalizationUtils.getString(R.string.translator_language_unsupported, lng.toString()));
                 } else {
                     button.setEnabled(true);
-                    note.setText(cda.getResources().getString(R.string.translator_language_detected, lng.toString()));
+                    note.setText(LocalizationUtils.getString(R.string.translator_language_detected, lng.toString()));
                 }
             }
             AndroidRxUtils.runOnUi(() -> translationBox.setVisibility(showTranslationBox ? View.VISIBLE : View.GONE));

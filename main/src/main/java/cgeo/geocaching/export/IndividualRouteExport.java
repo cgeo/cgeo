@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.text.InputFilter;
@@ -47,7 +48,7 @@ public class IndividualRouteExport {
         editFilename.setText(filename);
 
         final TextView text = binding.infoinclude.info;
-        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
+        text.setText(LocalizationUtils.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
                 .setPositiveButton(R.string.export, (dialog, which) -> {
