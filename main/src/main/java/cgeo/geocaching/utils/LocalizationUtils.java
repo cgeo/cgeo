@@ -107,10 +107,10 @@ public final class LocalizationUtils {
     }
 
     public static String getPlural(@PluralsRes final int pluralId, final int quantity) {
-        return getPlural(pluralId, quantity, "thing(s)");
+        return getPluralWithFallback(pluralId, quantity, "thing(s)");
     }
 
-    public static String getPlural(@PluralsRes final int pluralId, final int quantity, final String fallback) {
+    public static String getPluralWithFallback(@PluralsRes final int pluralId, final int quantity, final String fallback) {
         final Context localizationContext = getLocalizationContext();
         if (localizationContext == null) {
             return quantity + " " + fallback;
