@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.export.IndividualRouteExport;
@@ -29,6 +28,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.UriUtils;
@@ -184,7 +184,7 @@ public class RouteTrackUtils {
 
     private static void configureVisibility(final MenuItem item, final boolean isHidden) {
         item.setIcon(isHidden ? R.drawable.visibility_off : R.drawable.visibility);
-        item.setTitle(CgeoApplication.getInstance().getString(isHidden ? R.string.make_visible : R.string.hide));
+        item.setTitle(LocalizationUtils.getString(isHidden ? R.string.make_visible : R.string.hide));
     }
 
     public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
@@ -207,7 +207,7 @@ public class RouteTrackUtils {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
         } else if (id == R.id.menu_rename) {
             tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
-                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
+                    .setTitle(TextParam.text(LocalizationUtils.getString(R.string.routes_tracks_change_name)))
                     .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
                         if (StringUtils.isNotBlank(newName)) {
                             tracks.setDisplayname(key, newName);
@@ -242,7 +242,7 @@ public class RouteTrackUtils {
                     }
                 });
             } else {
-                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
+                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
                     tracks.remove(key);
                     updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
                     if (onDelete != null) {
