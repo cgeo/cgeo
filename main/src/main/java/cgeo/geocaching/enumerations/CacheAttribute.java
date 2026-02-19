@@ -1,8 +1,8 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.gui.AttributesFilterViewHolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.util.SparseArray;
 
@@ -186,7 +186,7 @@ public enum CacheAttribute {
      */
     @NonNull
     public String getL10n(final boolean enabled) {
-        return CgeoApplication.getInstance().getString(
+        return LocalizationUtils.getString(
                 enabled ? stringIdYes : stringIdNo);
     }
 

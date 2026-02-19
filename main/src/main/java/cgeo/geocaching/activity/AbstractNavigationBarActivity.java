@@ -594,12 +594,12 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                     .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))
                     .setMessage(LocalizationUtils.getString(R.string.init_restore_confirm))
                     .setCancelable(false)
-                    .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
+                    .setPositiveButton(LocalizationUtils.getString(android.R.string.ok), (dialog, id) -> {
                         dialog.dismiss();
                         DataStore.resetNewlyCreatedDatabase();
                         backupUtils.restore(BackupUtils.newestBackupFolder(false));
                     })
-                    .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
+                    .setNegativeButton(LocalizationUtils.getString(android.R.string.cancel), (dialog, id) -> {
                         dialog.cancel();
                         DataStore.resetNewlyCreatedDatabase();
                     })

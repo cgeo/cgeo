@@ -97,7 +97,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (popup == null || !popup.isAdded()) {
                 return;
             }
-            popup.progress.setMessage(popup.getString(progressMessage)
+            popup.progress.setMessage(LocalizationUtils.getString(progressMessage)
                     + "\n\n"
                     + msg);
         }

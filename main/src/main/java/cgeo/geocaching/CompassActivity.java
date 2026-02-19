@@ -47,7 +47,6 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Locale;
 
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
@@ -81,7 +80,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT))
-                .setDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -399,9 +398,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> LocalizationUtils.getString(R.string.device_orientation) + ": " + LocalizationUtils.getString(d.resId));
         }
     }
 

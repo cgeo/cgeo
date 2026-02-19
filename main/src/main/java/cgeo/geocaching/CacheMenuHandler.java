@@ -112,7 +112,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                     shareCoordText = R.string.cache_coordinates_original;
                     shareCoords = cache.getCoords();
                 }
-                shareText.append(activity.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
+                shareText.append(LocalizationUtils.getString(shareCoordText)).append(": ").append(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, shareCoords));
                 if (null != cache.getPersonalNote()) {
                     shareText.append("\n").append(LocalizationUtils.getString(R.string.cache_personal_note)).append(": ").append(cache.getPersonalNote());
                 }
