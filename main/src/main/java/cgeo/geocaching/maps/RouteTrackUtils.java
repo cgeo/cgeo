@@ -242,7 +242,7 @@ public class RouteTrackUtils {
                     }
                 });
             } else {
-                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
+                tracks.find(route, (key, routeForThisKey) -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(LocalizationUtils.getString(R.string.map_clear_track_confirm, tracks.getDisplayname(key)))).confirm(() -> {
                     tracks.remove(key);
                     updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
                     if (onDelete != null) {

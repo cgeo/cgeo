@@ -12,6 +12,8 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.utils.Formatter.formatBytes;
+import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -33,8 +35,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.button.MaterialButton;
 import io.noties.markwon.Markwon;
-import static cgeo.geocaching.utils.Formatter.formatBytes;
-import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 
 public class PendingDownloadsActivity extends AbstractActionBarActivity {
 
@@ -272,7 +272,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             viewHolder.title.setText(download == null ? "" : download.filename + " (# " + download.id + ")");
             if (download != null) {
                 markwon.setMarkdown(viewHolder.detail, download.info);
-                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(LocalizationUtils.getString(R.string.downloader_cancel_file), download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
+                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(LocalizationUtils.getString(R.string.downloader_cancel_file, download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
                 if (download.isFailedDownload) {
                     viewHolder.buttonResume.setVisibility(View.VISIBLE);
                     viewHolder.buttonResume.setOnClickListener(v -> {
