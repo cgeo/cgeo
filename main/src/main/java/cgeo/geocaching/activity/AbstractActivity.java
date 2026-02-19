@@ -83,7 +83,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showToast(final int textId) {
-        showToast(getString(textId));
+        showToast(LocalizationUtils.getString(textId));
     }
 
     @Override
@@ -92,7 +92,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showShortToast(final int textId) {
-        showShortToast(getString(textId));
+        showShortToast(LocalizationUtils.getString(textId));
     }
 
     @Override

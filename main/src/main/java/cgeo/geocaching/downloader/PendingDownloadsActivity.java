@@ -77,7 +77,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         } else if (statusCode == DownloadManager.STATUS_SUCCESSFUL) {
             value = R.string.asdm_status_successful;
         }
-        return (value > 0 ? getString(value) + " (" : "(") + statusCode + ")";
+        return (value > 0 ? LocalizationUtils.getString(value) + " (" : "(") + statusCode + ")";
     }
 
     private String formatReason(final int reasonCode) {
@@ -109,7 +109,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         } else if (reasonCode == DownloadManager.ERROR_UNKNOWN) {
             value = R.string.asdm_error_unknown;
         }
-        return (value > 0 ? getString(value) + " (" : "(") + reasonCode + ")";
+        return (value > 0 ? LocalizationUtils.getString(value) + " (" : "(") + reasonCode + ")";
     }
 
     private void append(final StringBuilder sb, final int colIndex, final String prefix, final Func1<Integer, String> formatter) {

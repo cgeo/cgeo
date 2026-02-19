@@ -7,6 +7,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -68,7 +69,7 @@ public final class LoggingUI extends AbstractUIFactory {
         }
 
         public String getL10n() {
-            return res.getString(stringId);
+            return LocalizationUtils.getString(stringId);
         }
     }
 

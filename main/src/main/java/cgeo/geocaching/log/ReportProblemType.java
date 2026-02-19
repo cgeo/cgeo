@@ -1,8 +1,8 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +66,7 @@ public enum ReportProblemType {
     }
 
     public String getL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(labelId);
+        return LocalizationUtils.getString(labelId);
     }
 
 }

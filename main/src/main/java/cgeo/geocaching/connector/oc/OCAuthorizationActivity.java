@@ -80,7 +80,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     @Override
     @NonNull
     protected String getAuthTitle() {
-        return res.getString(titleResId);
+        return LocalizationUtils.getString(titleResId);
     }
 
     @Override

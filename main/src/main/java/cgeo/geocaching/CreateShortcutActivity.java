@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.Intent;
@@ -63,7 +64,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         @Override
         @NonNull
         public String toString() {
-            return CgeoApplication.getInstance().getString(titleResourceId);
+            return LocalizationUtils.getString(titleResourceId);
         }
     }
 
@@ -105,8 +106,6 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
                 .selectSingle(model, (shortcut) -> {
-
-                    //Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
                     if (offlineShortcut.equals(shortcut)) {
                         promptForListShortcut();
                     } else {

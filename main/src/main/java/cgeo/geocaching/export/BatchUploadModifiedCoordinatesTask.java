@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Context;
 
 import androidx.annotation.Nullable;
 
@@ -55,13 +54,12 @@ public class BatchUploadModifiedCoordinatesTask extends AsyncTaskWithProgress<Ge
     @Override
     protected void onPostExecuteInternal(final Boolean result) {
         if (activity != null) {
-            final Context nonNullActivity = activity;
             if (result) {
                 ActivityMixin.showToast(activity, uploadFailed == 0
-                        ? nonNullActivity.getString(R.string.export_modifiedcoords_success)
-                        : nonNullActivity.getString(R.string.export_modifiedcoords_result, uploadFailed, uploadOk));
+                        ? LocalizationUtils.getString(R.string.export_modifiedcoords_success)
+                        : LocalizationUtils.getString(R.string.export_modifiedcoords_result, uploadFailed, uploadOk));
             } else {
-                ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_modifiedcoords_error));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_modifiedcoords_error));
             }
             Log.d("upload finished: ok=" + uploadOk + " / failed=" + uploadFailed + " / total=" + uploadProgress);
         }

@@ -1483,7 +1483,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 if (lastCategory != null) {
                                     attributesText.append("<br /><br />");
                                 }
-                                attributesText.append("<b><u>").append(category.getName(activity)).append("</u></b><br />");
+                                attributesText.append("<b><u>").append(category.getName()).append("</u></b><br />");
                                 lastCategory = category;
                             } else {
                                 attributesText.append("<br />");
@@ -2723,18 +2723,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return String.format(LocalizationUtils.getString(R.string.waypoints_tabtitle), waypointCount);
         } else if (pageId == Page.VARIABLES.id) {
             final int varCount = cache == null ? 0 : cache.getVariables().size();
-            return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
+            return LocalizationUtils.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         } else if (pageId == Page.IMAGEGALLERY.id) {
-            String title = this.getString(Page.IMAGEGALLERY.titleStringId);
+            String title = LocalizationUtils.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {
             final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
-            return this.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
+            return LocalizationUtils.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
-        return this.getString(Page.find(pageId).titleStringId);
+        return LocalizationUtils.getString(Page.find(pageId).titleStringId);
     }
 
     @NonNull

@@ -350,7 +350,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (QuickLaunchItem.conditionsFulfilled(item)) {
-                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), LocalizationUtils.getString(item.getTitleResId()), item.viewInitializer);
             }
         }
     }
@@ -638,7 +638,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
      * action callback accepts true, if action is to be performed / false if to be postponed
      */
     public void displayActionItem(final int layout, final @StringRes int info, final boolean withBadge, final Action1<Boolean> action) {
-        displayActionItem(layout, getString(info), withBadge, action);
+        displayActionItem(layout, LocalizationUtils.getString(info), withBadge, action);
     }
 
     public void displayActionItem(final int layout, final String info, final boolean withBadge, final Action1<Boolean> action) {

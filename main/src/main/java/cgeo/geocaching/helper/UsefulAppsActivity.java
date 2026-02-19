@@ -3,6 +3,7 @@ package cgeo.geocaching.helper;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -30,7 +31,7 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
 
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.apps_list, false, false);
         view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, helperApp -> {
-            final String packageName = getString(helperApp.packageNameResId);
+            final String packageName = LocalizationUtils.getPlainString(helperApp.packageNameResId);
             if (packageName.startsWith("http")) {
                 ShareUtils.openUrl(this, packageName);
             } else {

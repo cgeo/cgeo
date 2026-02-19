@@ -1,10 +1,10 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -61,7 +61,7 @@ public class LogEntryTest {
 
     @Test
     public void testGetImageTitles() {
-        final String defaultTitle = "• " + CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
+        final String defaultTitle = "\u2022 " + LocalizationUtils.getString(R.string.cache_log_image_default_title);
 
         LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 

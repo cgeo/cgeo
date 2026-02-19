@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.Nullable;
@@ -110,17 +109,16 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     @Override
     protected void onPostExecuteInternal(final Boolean result) {
         if (activity != null) {
-            final Context nonNullActivity = activity;
             if (result && exportUri != null) {
                 Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, name + " " + nonNullActivity.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
+                ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, name + " " + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
 
                 if (upload) {
-                    ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_success));
                 }
             } else {
-                ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_failed));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

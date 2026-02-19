@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -117,7 +118,7 @@ public class ImageListFragment extends Fragment {
                 }
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
-                ActivityMixin.showToast(getActivity(), getString(R.string.err_select_logimage_failed));
+                ActivityMixin.showToast(getActivity(), LocalizationUtils.getString(R.string.err_select_logimage_failed));
             }
             return true;
 
@@ -274,7 +275,7 @@ public class ImageListFragment extends Fragment {
                 scaledWidth = scaledImageSizes.left;
                 scaledHeight = scaledImageSizes.middle;
             }
-            final String isScaled = getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
+            final String isScaled = LocalizationUtils.getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
 
             final ContentStorage.FileInformation imageFileInfo = localImageUri == null ? null : ContentStorage.get().getFileInfo(localImageUri);
             final long fileSize = imageFileInfo == null ? 0 : imageFileInfo.size;
@@ -285,7 +286,7 @@ public class ImageListFragment extends Fragment {
             final long roughCompressedSize = width * height == 0 ? 0 :
                 ((fileSize * ((long) scaledHeight * scaledWidth) / 10 / ((long) width * height)) / 1024) * 1024;
 
-            return getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
+            return LocalizationUtils.getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
 
         @NonNull

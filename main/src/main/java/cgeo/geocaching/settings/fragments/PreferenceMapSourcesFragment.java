@@ -116,7 +116,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     }
 
     private void setUserDefinedTileProviderUriSummary(final String uri) {
-        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
+        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, LocalizationUtils.getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
     }
 
 }

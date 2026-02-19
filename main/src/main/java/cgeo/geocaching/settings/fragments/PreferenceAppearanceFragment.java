@@ -46,7 +46,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
 
-        entries[0] = getString(R.string.init_use_default_language);
+        entries[0] = LocalizationUtils.getString(R.string.init_use_default_language);
         entryValues[0] = "";
         for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
             entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
@@ -131,12 +131,12 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
         final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
         final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
-        int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
+        int i = addCustomBNSelectionItem(0, LocalizationUtils.getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
         for (InfoItem item : QuickLaunchItem.ITEMS) {
-            i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
+            i = addCustomBNSelectionItem(i, LocalizationUtils.getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
         }
-        i = addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
-        addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
+        i = addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
+        addCustomBNSelectionItem(i, LocalizationUtils.getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
         customBNitem.setEntries(cbniEntries);
         customBNitem.setEntryValues(cbniValues);
         setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
@@ -153,18 +153,18 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     }
 
     private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
-        customBNitem.setSummary(String.format(getString(R.string.init_custombnitem_description), newValue));
+        customBNitem.setSummary(LocalizationUtils.getString(R.string.init_custombnitem_description, newValue));
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {
         final Locale locale = Settings.getApplicationLocale();
-        languagePref.setSummary(StringUtils.isBlank(newValue) ? getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
+        languagePref.setSummary(StringUtils.isBlank(newValue) ? LocalizationUtils.getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
     }
 
     private void setDateSummary(final ListPreference datePref, final String newValue) {
         if (null != datePref) {
             final int valueIndex = datePref.findIndexOfValue(newValue);
-            String summaryString = getString(R.string.init_date_format_description);
+            String summaryString = LocalizationUtils.getString(R.string.init_date_format_description);
             if (valueIndex >= 0) {
                 final String prefEntry = String.valueOf(datePref.getEntries()[valueIndex]);
                 summaryString += ": \n" + prefEntry;

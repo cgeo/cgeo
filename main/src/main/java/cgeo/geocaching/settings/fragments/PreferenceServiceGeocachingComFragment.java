@@ -47,7 +47,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
                     .setTitle(R.string.settings_info_facebook_login_title)
                     .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                     .setNegativeButton(R.string.more_information,
-                            (dialog, id) -> ShareUtils.openUrl(getContext(), getString(R.string.settings_facebook_login_url)));
+                            (dialog, id) -> ShareUtils.openUrl(getContext(), LocalizationUtils.getPlainString(R.string.settings_facebook_login_url)));
             builder.create().show();
             return true;
         });
@@ -70,7 +70,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         assert credentialsPreference != null;
         if (credentials.isValid()) {
             credentialsPreference.setIcon(null);
-            credentialsPreference.setSummary(getString(R.string.auth_connected_as, credentials.getUserName()));
+            credentialsPreference.setSummary(LocalizationUtils.getString(R.string.auth_connected_as, credentials.getUserName()));
         } else {
             credentialsPreference.setIcon(R.drawable.attribute_firstaid);
             credentialsPreference.setSummary(R.string.auth_unconnected_tap_here);

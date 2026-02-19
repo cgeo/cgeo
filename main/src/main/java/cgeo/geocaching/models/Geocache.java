@@ -553,7 +553,7 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void logVisit(@NonNull final Activity fromActivity) {
         if (!getConnector().canLog(this)) {
-            ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
+            ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.err_cannot_log_visit));
             return;
         }
         String geocode = this.geocode;
@@ -565,7 +565,7 @@ public class Geocache implements INamedGeoCoordinate {
 
     public void logVisitForResult(@NonNull final Activity fromActivity, final int requestCode) {
         if (!getConnector().canLog(this)) {
-            ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
+            ActivityMixin.showToast(fromActivity, LocalizationUtils.getString(R.string.err_cannot_log_visit));
             return;
         }
         String geocode = this.geocode;
@@ -2498,8 +2498,7 @@ public class Geocache implements INamedGeoCoordinate {
 
     @NonNull
     public static String getAlternativeListingText(@NonNull final String alternativeCode) {
-        return CgeoApplication.getInstance().getResources()
-                .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) +
+        return LocalizationUtils.getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) +
                 ": <a href=\"https://coord.info/" +
                 alternativeCode +
                 "\">" +

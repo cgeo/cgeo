@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
@@ -185,7 +184,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @Override
     public String getLoginStatusString() {
-        return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
+        return LocalizationUtils.getString(userInfo.getStatus().resId);
     }
 
     @Override

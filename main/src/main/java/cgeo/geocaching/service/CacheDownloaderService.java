@@ -169,7 +169,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
-                .addAction(R.drawable.ic_menu_cancel, getString(android.R.string.cancel), actionCancelIntent);
+                .addAction(R.drawable.ic_menu_cancel, LocalizationUtils.getString(android.R.string.cancel), actionCancelIntent);
     }
 
     @Override
@@ -253,7 +253,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     @Override
     public void onDestroy() {
         if (!downloadQuery.isEmpty()) {
-            showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
+            showEndNotification(LocalizationUtils.getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else if (cachesDownloaded.get() != 1) { // see #15881
             showEndNotification(LocalizationUtils.getPlural(R.plurals.caches_store_background_result, cachesDownloaded.get()));

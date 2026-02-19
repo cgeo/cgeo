@@ -39,12 +39,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import static java.lang.Boolean.TRUE;
 
 public class MapSettingsUtils {
 
@@ -119,7 +119,7 @@ public class MapSettingsUtils {
 
         final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup, false);
         for (RoutingMode mode : RoutingMode.values()) {
-            routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+            routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, LocalizationUtils.getString(mode.infoResId)));
         }
 
         // routing profile legend for user-defined entries

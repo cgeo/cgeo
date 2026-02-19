@@ -11,7 +11,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Context;
 
 import androidx.annotation.Nullable;
 
@@ -50,11 +49,10 @@ public class PersonalNoteExportTask extends AsyncTaskWithProgress<Geocache, Bool
     @Override
     protected void onPostExecuteInternal(final Boolean result) {
         if (activity != null) {
-            final Context nonNullActivity = activity;
             if (result) {
                 ActivityMixin.showToast(activity, LocalizationUtils.getPlural(R.plurals.export_persnotes_upload_success, persNotesCount));
             } else {
-                ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_failed));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

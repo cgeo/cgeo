@@ -76,9 +76,9 @@ public class GpxExportTask extends AsyncTaskWithProgress<String, Uri> {
         final Activity activityLocal = activity;
         if (activityLocal != null) {
             if (uri != null) {
-                ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, name + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
+                ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, name + ' ' + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
             } else {
-                ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
+                ActivityMixin.showToast(activityLocal, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

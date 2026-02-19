@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
@@ -281,7 +280,7 @@ public class Download {
         @NonNull
         @Override
         public String toString() {
-            return CgeoApplication.getInstance().getString(name);
+            return LocalizationUtils.getString(name);
         }
 
         DownloadTypeDescriptor(final DownloadType type, final AbstractDownloader instance, final @StringRes int name) {

@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.databinding.GcManualLoginBinding;
@@ -21,7 +20,6 @@ import cgeo.geocaching.utils.TextUtils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
@@ -196,11 +194,9 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
-        final Context ctx = CgeoApplication.getInstance();
-
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            logLastLoginError(ctx.getString(R.string.err_auth_gc_missing_login), retry);
+            logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_missing_login), retry);
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
@@ -211,7 +207,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage1), retry);
+                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_loginpage1), retry);
                 return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
@@ -222,13 +218,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
+                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
+                logLastLoginError(LocalizationUtils.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }

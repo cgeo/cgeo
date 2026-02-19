@@ -316,7 +316,7 @@ public class DownloaderUtils {
         private final WeakReference<Activity> activityRef;
 
         CheckForDownloadsTask(final Activity activity, @StringRes final int title, final Download.DownloadType type) {
-            super(activity, activity.getString(title), LocalizationUtils.getString(R.string.downloadmap_checking_for_updates));
+            super(activity, LocalizationUtils.getString(title), LocalizationUtils.getString(R.string.downloadmap_checking_for_updates));
             this.activityRef = new WeakReference<>(activity);
             this.currentType = type;
         }
@@ -444,7 +444,7 @@ public class DownloaderUtils {
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                 .setItems(offlineItems)
                 .setDisplayMapper((item, itemGroup) -> TextParam.text(item.right), (item, itemGroup) -> String.valueOf(item.left), null)
-                .activateGrouping(item -> activity.getString(Download.DownloadType.getFromId(item.left).getTypeNameResId()))
+                .activateGrouping(item -> LocalizationUtils.getString(Download.DownloadType.getFromId(item.left).getTypeNameResId()))
                 .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
                 .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).left).getIconResId()));
 
