@@ -433,7 +433,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         }
 
         if (changed) {
-            ActivityMixin.showShortToast(this.getActivity(), getString(R.string.waypoint_added));
+            ActivityMixin.showShortToast(this.getActivity(), LocalizationUtils.getString(R.string.waypoint_added));
         }
     }
 

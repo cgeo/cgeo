@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -115,15 +116,15 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
     }
 
     private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final ArrayList<String> profiles, final int number) {
-        final String current = StringUtils.defaultIfBlank(Settings.getRoutingProfile(mode), getString(R.string.routingmode_none));
+        final String current = StringUtils.defaultIfBlank(Settings.getRoutingProfile(mode), LocalizationUtils.getString(R.string.routingmode_none));
         final ListPreference pref = findPreference(getString(prefId));
         assert pref != null;
 
         final ArrayList<String> prefProfiles = new ArrayList<>(profiles);
         if (number > 0) {
-            prefProfiles.add(getString(R.string.routingmode_none));
+            prefProfiles.add(LocalizationUtils.getString(R.string.routingmode_none));
 
-            final String title = String.format(getString(R.string.init_brouterProfileUserNumber), number);
+            final String title = LocalizationUtils.getString(R.string.init_brouterProfileUserNumber, number);
             pref.setDialogTitle(title);
             pref.setTitle(title);
         }
@@ -148,7 +149,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
     }
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
-        final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
+        final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter));
         PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
         PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
     }

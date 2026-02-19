@@ -370,15 +370,15 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     protected abstract String getAuthTitle();
 
     private String getAuthAgain() {
-        return getString(R.string.auth_again);
+        return LocalizationUtils.getString(R.string.auth_again);
     }
 
     private String getErrAuthInitialize() {
-        return getString(R.string.err_auth_initialize);
+        return LocalizationUtils.getString(R.string.err_auth_initialize);
     }
 
     private String getAuthStart() {
-        return getString(R.string.auth_start);
+        return LocalizationUtils.getString(R.string.auth_start);
     }
 
     protected abstract String getAuthDialogCompleted();

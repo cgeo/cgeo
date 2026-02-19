@@ -20,7 +20,7 @@ public class DownloadConfirmationActivity extends AbstractActivity {
         final Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             final Uri uri = Uri.parse(LocalizationUtils.getPlainString(R.string.brouter_downloadurl) + bundle.getString(BUNDLE_FILENAME));
-            DownloaderUtils.triggerDownload(this, R.string.downloadtile_title, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES.id, uri, getString(R.string.downloadtile_info), "", this::finish, null);
+            DownloaderUtils.triggerDownload(this, R.string.downloadtile_title, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES.id, uri, LocalizationUtils.getString(R.string.downloadtile_info), "", this::finish, null);
         }
     }
 

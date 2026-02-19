@@ -1,8 +1,8 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.EnumValueMapper;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -63,7 +63,7 @@ public enum LogTypeTrackable {
 
     @NonNull
     public String getLabel() {
-        return CgeoApplication.getInstance().getString(resourceId);
+        return LocalizationUtils.getString(resourceId);
     }
 
     public static LogTypeTrackable getById(final int id) {

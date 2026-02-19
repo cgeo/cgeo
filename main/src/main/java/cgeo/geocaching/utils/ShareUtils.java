@@ -80,7 +80,7 @@ public class ShareUtils {
 
     private static void shareInternal(final Context context, final Intent intent, @StringRes final int titleResourceId) {
         if (intent != null) {
-            final Intent share = Intent.createChooser(intent, context.getString(titleResourceId));
+            final Intent share = Intent.createChooser(intent, LocalizationUtils.getString(titleResourceId));
             final Intent clipboardIntent = createClipboardIntent(context, intent);
             if (clipboardIntent != null) {
                 share.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{ createClipboardIntent(context, intent) });

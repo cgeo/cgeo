@@ -1,9 +1,9 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TokenAuthorizationActivity.TokenAuthParameters;
 import cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +35,7 @@ public class TokenPreference extends AbstractClickablePreference {
     private TokenActivityMapping getAuthorization() {
         final String prefKey = getKey();
         for (final TokenActivityMapping auth : TokenActivityMapping.values()) {
-            if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
+            if (auth.prefKeyId != NO_KEY && prefKey.equals(LocalizationUtils.getPlainString(auth.prefKeyId))) {
                 return auth;
             }
         }

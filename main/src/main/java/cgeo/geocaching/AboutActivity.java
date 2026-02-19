@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
+import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,7 +51,6 @@ import java.util.regex.Pattern;
 import io.noties.markwon.Markwon;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 public class AboutActivity extends TabbedViewPagerActivity {
 
@@ -126,7 +126,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         if (pageId == Page.VERSION.id) {
             return LocalizationUtils.getString(R.string.about_version) + " / " + LocalizationUtils.getString(R.string.about_help);
         }
-        return this.getString(Page.find(pageId).resourceId);
+        return LocalizationUtils.getString(Page.find(pageId).resourceId);
     }
 
     @Override
@@ -387,11 +387,11 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {
-            return roles.indexOf(checkFor) >= 0 ? (s.isEmpty() ? "" : s + ", ") + getString(infoId) : s;
+            return roles.indexOf(checkFor) >= 0 ? (s.isEmpty() ? "" : s + ", ") + LocalizationUtils.getString(infoId) : s;
         }
 
         private String formatContributors(@StringRes final int resId) {
-            String s = getString(resId);
+            String s = LocalizationUtils.getPlainString(resId);
             final SpannableStringBuilder sb = new SpannableStringBuilder();
             int p1;
             int p2;
