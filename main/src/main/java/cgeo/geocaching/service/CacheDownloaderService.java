@@ -12,6 +12,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -60,7 +61,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     public static void downloadCaches(final Activity context, final Collection<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (geocodes.isEmpty()) {
-            ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
+            ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.warn_save_nothing));
             return;
         }
         if (isOffline) {
@@ -255,7 +256,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else if (cachesDownloaded.get() != 1) { // see #15881
-            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
+            showEndNotification(LocalizationUtils.getPlural(R.plurals.caches_store_background_result, cachesDownloaded.get()));
         }
         downloadQuery.clear();
         super.onDestroy();

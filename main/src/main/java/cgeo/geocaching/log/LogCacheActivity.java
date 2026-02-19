@@ -346,7 +346,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             final boolean editExistingFavorite = this.logEditMode == LogEditMode.EDIT_EXISTING && isFavorite;
 
             final int remainingPoints = availableFavoritePoints + (editExistingFavorite ? 1 : 0);
-            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
+            binding.favoriteCheck.setText(LocalizationUtils.getPlural(loggingManager.getFavoriteCheckboxText(), remainingPoints));
             // If fav check is set then ALWAYS make the checkbox visible and set the checked state accordingly
             // see https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609 and https://github.com/cgeo/cgeo/issues/17593
             if (availableFavoritePoints > 0 || editExistingFavorite || favIsChecked) {
@@ -938,7 +938,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         @Override
         protected String getResultMessage() {
-            return getContext().getString(R.string.info_log_cleared);
+            return LocalizationUtils.getString(R.string.info_log_cleared);
         }
 
         @Override
