@@ -400,7 +400,7 @@ public final class Formatter {
             ago = LocalizationUtils.getString(R.string.cache_offline_about_time_year);
         }
 
-        return String.format(LocalizationUtils.getString(R.string.cache_offline_stored_ago), ago);
+        return LocalizationUtils.getString(R.string.cache_offline_stored_ago, ago);
     }
 
     /**
