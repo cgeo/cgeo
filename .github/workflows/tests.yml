@@ -127,23 +127,22 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Detect code changes
-        id: detect
-        run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            # For push events, compare with the previous commit
-            CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} || git diff --name-only HEAD~1 HEAD)
-          else
-            # For PR events, use the changed_files_raw list
-            CHANGED_FILES="${{ github.event.pull_request.changed_files_raw }}"
-          fi
+        id: changes
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            main/**
+            gradle/**
+            build.gradle
+            settings.gradle
+            mapswithme-api/**
+            organicmaps-api/**
+          files_ignore: |
+            .github/**
 
-          # Check if any files outside .github were changed (main/, gradle/, or root gradle files)
-          if echo "$CHANGED_FILES" | grep -vE '^\.github/' | grep -qE '(build\.gradle|settings\.gradle|gradle/|main/|mapswithme-api/|organicmaps-api/)';
-          then
-            echo "has-code-changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "has-code-changes=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Set code-changed output
+        id: detect
+        run: echo "has-code-changes=${{ steps.changes.outputs.any_changed }}" >> $GITHUB_OUTPUT
 
   checkstyle:
     if: >
