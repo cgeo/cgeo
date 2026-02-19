@@ -455,7 +455,7 @@ public final class StoredList extends AbstractList {
                         final String to = title.getText().toString();
                         if (!Strings.CS.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
-                                    String.format(LocalizationUtils.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? LocalizationUtils.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                    LocalizationUtils.getString(R.string.list_confirm_rename, from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? LocalizationUtils.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
                                     DataStore.renameListPrefix(from, to);
                                     runAfterRename.run();

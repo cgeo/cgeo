@@ -276,7 +276,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                     inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
                     break;
             }
-            Dialogs.input(this, String.format(LocalizationUtils.getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
+            Dialogs.input(this, LocalizationUtils.getString(R.string.edit_setting, keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
         }
     }
 
@@ -290,7 +290,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
         } catch (XmlPullParserException e) {
             showToast(R.string.edit_setting_error_unknown_type);
         } catch (NumberFormatException e) {
-            showToast(String.format(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data), newValue));
+            showToast(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data, newValue));
         }
     }
 
@@ -331,7 +331,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                             } catch (XmlPullParserException e) {
                                 showToast(R.string.edit_setting_error_unknown_type);
                             } catch (NumberFormatException e) {
-                                showToast(String.format(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data), preferenceName));
+                                showToast(LocalizationUtils.getString(R.string.edit_setting_error_invalid_data, preferenceName));
                             }
                         }
                     }

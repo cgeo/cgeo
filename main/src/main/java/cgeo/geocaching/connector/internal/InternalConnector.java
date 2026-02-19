@@ -236,7 +236,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // create new cache
             final Geocache cache = new Geocache();
             cache.setGeocode(geocode);
-            cache.setName(StringUtils.isEmpty(name) ? String.format(LocalizationUtils.getString(R.string.internal_cache_default_names), geocode) : name);
+            cache.setName(StringUtils.isEmpty(name) ? LocalizationUtils.getString(R.string.internal_cache_default_names, geocode) : name);
             cache.setOwnerDisplayName(LocalizationUtils.getString(R.string.internal_cache_default_owner));
             cache.setDescription(StringUtils.isEmpty(description) ? LocalizationUtils.getString(R.string.internal_cache_default_description) : description);
             cache.setAssignedEmoji(assignedEmoji);

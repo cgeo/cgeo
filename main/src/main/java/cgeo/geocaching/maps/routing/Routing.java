@@ -307,7 +307,7 @@ public final class Routing {
                             getContext().startActivity(intent);
                         }
                     } else {
-                        ActivityMixin.showApplicationToast(String.format(LocalizationUtils.getString(R.string.brouter_missing_data), filename));
+                        ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.brouter_missing_data, filename));
                     }
                 }
             }
