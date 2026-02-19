@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -181,7 +182,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     @Override
     public void startDefaultNavigation2() {
         if (waypoint == null || waypoint.getCoords() == null) {
-            showToast(res.getString(R.string.cache_coordinates_no));
+            showToast(LocalizationUtils.getString(R.string.cache_coordinates_no));
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), waypoint);

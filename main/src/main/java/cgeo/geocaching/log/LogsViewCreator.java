@@ -177,7 +177,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             //Copy to clipboard
             ctxMenu.addItem(LocalizationUtils.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
                 ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
-                    activity.showToast(activity.getString(R.string.clipboard_copy_ok));
+                    activity.showToast(LocalizationUtils.getString(R.string.clipboard_copy_ok));
             });
 
             // translation

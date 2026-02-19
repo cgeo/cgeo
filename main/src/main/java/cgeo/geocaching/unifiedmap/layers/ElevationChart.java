@@ -16,6 +16,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import static cgeo.geocaching.unifiedmap.LayerHelper.ZINDEX_ELEVATIONCHARTMARKERPOSITION;
 import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
@@ -102,7 +103,7 @@ public class ElevationChart {
         if (chartBlock.getVisibility() != View.VISIBLE) {
             chartBlock.setVisibility(View.VISIBLE);
 
-            chart.setNoDataText(chart.getContext().getString(R.string.init_elevation_notAvailable));
+            chart.setNoDataText(LocalizationUtils.getString(R.string.init_elevation_notAvailable));
 
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -145,7 +146,7 @@ public class ElevationChart {
             collectData(route);
             formatChart(res);
             chart.invalidate();
-            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
+            toolbar.setTitle(RouteTrackUtils.isIndividualRoute(route) ? LocalizationUtils.getString(R.string.individual_route) : route.getName());
             geoItemLayer.remove(ELEVATIONCHART_MARKER);
         }
     }
