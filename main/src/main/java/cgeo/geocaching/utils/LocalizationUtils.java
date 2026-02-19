@@ -83,6 +83,34 @@ public final class LocalizationUtils {
         return getStringWithFallback(resId, null, params);
     }
 
+    /**
+     * Returns a plain (non-localized) string with optional formatting.
+     * This is a convenience method for consistent API usage with getString().
+     *
+     * @param resId  the string resource id to fetch
+     * @param params optional parameters for String.format()
+     * @return the formatted string, or empty string if text is null
+     */
+    public static String getPlainString(@StringRes final int resId, final Object... params) {
+        final Context applicationContext = getApplicationContext();
+        if ((applicationContext == null || resId == 0)) {
+            return "(NoCtx/NoResId)[" + StringUtils.join(params, ";") + "]";
+        }
+        try {
+            return params != null && params.length > 0 ? applicationContext.getString(resId, params) : applicationContext.getString(resId);
+        } catch (IllegalFormatException | Resources.NotFoundException e) {
+            String resStringWoFormat = null;
+            try {
+                resStringWoFormat = applicationContext.getString(resId);
+            } catch (Exception ex) {
+                //ignore, this is for logging only!
+            }
+
+            Log.w("Problem trying to format '" + resId + "/'" + resStringWoFormat + "'/" + "' with [" + StringUtils.join(params, ";") + "]", e);
+            return ":" + StringUtils.join(params, ";");
+        }
+    }
+
     public static String getStringWithFallback(@StringRes final int resId, final String fallback, final Object... params) {
         final Context localizationContext = getLocalizationContext();
         if ((localizationContext == null || resId == 0) && fallback == null) {
@@ -182,6 +210,11 @@ public final class LocalizationUtils {
 
     @Nullable
     private static Context getLocalizationContext() {
+        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
+    }
+
+    @Nullable
+    private static Context getApplicationContext() {
         return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
     }
 
