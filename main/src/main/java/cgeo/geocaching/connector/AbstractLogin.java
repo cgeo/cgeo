@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -77,7 +76,7 @@ public abstract class AbstractLogin {
         resetLoginStatus();
 
         setActualCachesFound(-1);
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
+        setActualStatus(LocalizationUtils.getString(R.string.err_login));
     }
 
     @NonNull
