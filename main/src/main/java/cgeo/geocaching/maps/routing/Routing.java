@@ -8,6 +8,7 @@ import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.brouter.BRouterConstants.PROFILE_PARAMTERKEY;
@@ -306,7 +307,7 @@ public final class Routing {
                             getContext().startActivity(intent);
                         }
                     } else {
-                        ActivityMixin.showApplicationToast(String.format(getContext().getString(R.string.brouter_missing_data), filename));
+                        ActivityMixin.showApplicationToast(String.format(LocalizationUtils.getString(R.string.brouter_missing_data), filename));
                     }
                 }
             }
@@ -396,7 +397,7 @@ public final class Routing {
      * Get Android package name for external routing app
      */
     public static String getExternalRoutingPackageName() {
-        return getContext().getString(R.string.package_brouter);
+        return LocalizationUtils.getPlainString(R.string.package_brouter);
     }
 
     private static class RoutingObserver implements DefaultLifecycleObserver {

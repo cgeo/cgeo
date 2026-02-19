@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -20,8 +21,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 
 import java.util.HashMap;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     private ListPreference prefTileProvicers;
@@ -66,9 +65,9 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
         activity.setTitle(R.string.settings_title_map_sources);
-        setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
-        setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.faq_url_settings_themes)));
 
         initPublicFolders(this, activity.getCsah());
     }

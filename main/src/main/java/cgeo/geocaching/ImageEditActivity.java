@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.ViewOrientation;
@@ -317,16 +318,16 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private void updateScaleValueDisplayIntern(final int width, final int height) {
         imageScale.setDisplayMapperPure(scaleSize -> {
             if (width < 0 || height < 0) {
-                return scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) :
-                        getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);
+                return scaleSize < 0 ? LocalizationUtils.getString(R.string.log_image_scale_option_noscaling) :
+                        LocalizationUtils.getPlainString(R.string.log_image_scale_option_entry_noimage, scaleSize);
             }
 
             final ImmutableTriple<Integer, Integer, Boolean> scales = ImageUtils.calculateScaledImageSizes(width, height, scaleSize, scaleSize);
-            String displayValue = getResources().getString(R.string.log_image_scale_option_entry, scales.left, scales.middle);
+            String displayValue = LocalizationUtils.getPlainString(R.string.log_image_scale_option_entry, scales.left, scales.middle);
             if (scaleSize < 0) {
-                displayValue += " (" + getResources().getString(R.string.log_image_scale_option_noscaling) + ")";
+                displayValue += " (" + LocalizationUtils.getString(R.string.log_image_scale_option_noscaling) + ")";
             } else if (width == scales.left && height == scales.middle) {
-                displayValue += " (<" + scaleSize + "," + getResources().getString(R.string.log_image_scale_option_noscaling) + ")";
+                displayValue += " (<" + scaleSize + "," + LocalizationUtils.getString(R.string.log_image_scale_option_noscaling) + ")";
             }
             return displayValue;
         });
