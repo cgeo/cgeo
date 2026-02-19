@@ -36,7 +36,7 @@ public final class WatchListUtils {
                     }
                 }
             }
-            ActivityMixin.showToast(context, failedCaches.isEmpty() ? context.getString(actionIsWatch ? R.string.cachedetails_progress_watch : R.string.cachedetails_progress_unwatch) : LocalizationUtils.getString(R.string.err_watchlist_failed_geocodes, String.join(",", failedCaches)));
+            ActivityMixin.showToast(context, failedCaches.isEmpty() ? LocalizationUtils.getString(actionIsWatch ? R.string.cachedetails_progress_watch : R.string.cachedetails_progress_unwatch) : LocalizationUtils.getString(R.string.err_watchlist_failed_geocodes, String.join(",", failedCaches)));
         });
     }
 

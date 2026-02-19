@@ -721,7 +721,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @NonNull
     private String calculateTitle() {
         if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
-            return getString(R.string.map_live);
+            return LocalizationUtils.getString(R.string.map_live);
         }
         if (viewModel.mapType.type == UMTT_TargetGeocode) {
             final Geocache cache = DataStore.loadCache(viewModel.mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
@@ -729,7 +729,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 return StringUtils.defaultIfBlank(cache.getName(), "");
             }
         }
-        return StringUtils.defaultIfEmpty(viewModel.mapType.title, getString(R.string.map_offline));
+        return StringUtils.defaultIfEmpty(viewModel.mapType.title, LocalizationUtils.getString(R.string.map_offline));
     }
 
     private void refreshListChooser() {

@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CgeoApplicationTest;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
@@ -18,6 +17,7 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.test.Compare;
 import static cgeo.geocaching.connector.gc.GCParser.deleteModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
@@ -276,7 +276,7 @@ public class GCParserTest {
         final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
         assertThat(trackable).isNotNull();
         assertThat(trackable.getGeocode()).isEqualTo("TB123E");
-        final String expectedDetails = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
+        final String expectedDetails = LocalizationUtils.getString(cgeo.geocaching.R.string.trackable_not_activated);
         assertThat(trackable.getDetails()).isEqualTo(expectedDetails);
     }
 

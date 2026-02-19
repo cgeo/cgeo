@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.su;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -129,7 +128,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getLoginStatusString() {
-        return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
+        return LocalizationUtils.getString(userInfo.getStatus().resId);
     }
 
     @Override

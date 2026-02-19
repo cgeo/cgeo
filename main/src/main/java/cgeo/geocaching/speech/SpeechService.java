@@ -177,7 +177,7 @@ public class SpeechService extends Service implements OnInitListener {
             final Activity startingActivityChecked = startingActivity;
             if (startingActivityChecked != null) {
                 initDisposable.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
-                ActivityMixin.showShortToast(startingActivity, startingActivityChecked.getString(R.string.tts_started));
+                ActivityMixin.showShortToast(startingActivity, LocalizationUtils.getString(R.string.tts_started));
             }
         }
     }

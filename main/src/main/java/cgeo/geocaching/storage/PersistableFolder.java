@@ -186,7 +186,7 @@ public enum PersistableFolder {
             //this codepath is only chosen if no translation is available (e.g. in local unit tests)
             return name();
         }
-        return CgeoApplication.getInstance().getApplicationContext().getString(this.nameKeyId);
+        return LocalizationUtils.getString(this.nameKeyId);
     }
 
     /**
