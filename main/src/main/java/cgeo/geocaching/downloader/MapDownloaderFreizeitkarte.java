@@ -1,11 +1,11 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -93,7 +93,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     // Freizeitkarte uses a repository, need to map here to its fixed address
     @Override
     protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl);
+        return LocalizationUtils.getPlainString(R.string.mapserver_freizeitkarte_downloadurl);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
 
     @Override
     public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
-        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE);
+        return getExtrafile(THEME_FILES, LocalizationUtils.getPlainString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE);
     }
 
     @NonNull

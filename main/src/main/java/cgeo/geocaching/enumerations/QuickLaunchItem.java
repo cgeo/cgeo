@@ -18,6 +18,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
 
@@ -126,11 +127,11 @@ public class QuickLaunchItem extends InfoItem {
                     } else if (which == VALUES.MESSAGECENTER.id) {
                         ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
                     } else if (which == VALUES.MANUAL.id) {
-                        ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full));
+                        ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.manual_link_full));
                     } else if (which == VALUES.WHERIGO.id) {
                         WherigoActivity.start(activity, hideNavigationBar);
                     } else if (which == VALUES.FAQ.id) {
-                        ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
+                        ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.faq_link_full));
                     } else if (which == VALUES.VIEWSETTINGS.id) {
                         final Intent intent = new Intent(activity, ViewSettingsActivity.class);
                         AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
