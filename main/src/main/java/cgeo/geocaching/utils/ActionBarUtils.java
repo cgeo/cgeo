@@ -37,22 +37,17 @@ public class ActionBarUtils {
         activity.showActionBar(!isShown);
 
         // adjust system bars appearance, depending on action bar color and visibility
-        ActionBarUtils.setSystemBarAppearance(activity, !isShown);
+        ActionBarUtils.setSystemBarAppearance(activity);
     }
 
-    public static void setSystemBarAppearance(@NonNull final Activity activity, final boolean isActionBarShown) {
+    public static void setSystemBarAppearance(@NonNull final Activity activity) {
         final Window currentWindow = activity.getWindow();
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
 
-        // set light/dark system bars depending on action bar colors
+        // TODO: set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
-        if (isLightSkin) {
-            windowInsetsController.setAppearanceLightStatusBars(!isActionBarShown);
-            windowInsetsController.setAppearanceLightNavigationBars(true);
-        } else {
-            windowInsetsController.setAppearanceLightStatusBars(false);
-            windowInsetsController.setAppearanceLightNavigationBars(false);
-        }
+        windowInsetsController.setAppearanceLightStatusBars(isLightSkin);
+        windowInsetsController.setAppearanceLightNavigationBars(isLightSkin);
     }
 
     public static void setSubtitle(@NonNull final AbstractActionBarActivity activity, @NonNull final CharSequence subtitleText) {
