@@ -118,6 +118,14 @@ public final class LocalizationUtils {
         return localizationContext.getResources().getQuantityString(pluralId, quantity, quantity);
     }
 
+    public static String getQuantityString(@PluralsRes final int resourceId, final int quantity, final Object... params) {
+        final Context localizationContext = getLocalizationContext();
+        if (localizationContext == null) {
+            return quantity + " " + (params != null && params.length > 0 ? StringUtils.join(params, ";") : "");
+        }
+        return localizationContext.getResources().getQuantityString(resourceId, quantity, params);
+    }
+
     public static String[] getStringArray(@ArrayRes final int arrayId, final String... fallback) {
         final Context localizationContext = getLocalizationContext();
         if (localizationContext == null) {
