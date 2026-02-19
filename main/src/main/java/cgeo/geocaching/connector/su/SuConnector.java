@@ -29,6 +29,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -196,11 +197,11 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     public final String getConsumerKey() {
-        return CgeoApplication.getInstance().getString(R.string.su_consumer_key);
+        return LocalizationUtils.getPlainString(R.string.su_consumer_key);
     }
 
     public final String getConsumerSecret() {
-        return CgeoApplication.getInstance().getString(R.string.su_consumer_secret);
+        return LocalizationUtils.getPlainString(R.string.su_consumer_secret);
     }
 
     @Override

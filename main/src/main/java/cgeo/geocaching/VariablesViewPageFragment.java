@@ -83,7 +83,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         });
 
         binding.variablesInfo.setOnClickListener(d -> ShareUtils.openUrl(
-                this.getContext(), LocalizationUtils.getString(R.string.formula_syntax_url), false));
+                this.getContext(), LocalizationUtils.getPlainString(R.string.formula_syntax_url), false));
 
         binding.chipCompletedVariables.setChecked(!Settings.getHideCompletedVariables());
         binding.chipCompletedVariables.setOnCheckedChangeListener((buttonView, isChecked) -> {

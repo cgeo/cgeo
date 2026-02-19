@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TokenAuthorizationActivity;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.Nullable;
 
@@ -39,7 +40,7 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(R.string.init_geokrety);
+        return LocalizationUtils.getPlainString(R.string.init_geokrety);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 
     @Override
     protected String getAuthDialogCompleted() {
-        return res.getString(R.string.auth_dialog_completed_geokrety, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_dialog_completed_geokrety, getAuthTitle());
     }
 
     @Override
@@ -66,9 +67,9 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
     @Override
     protected String getExtendedErrorMsg(@Nullable final String response) {
         if (Strings.CS.equals(response, "1")) {
-            return res.getString(R.string.err_auth_geokrety_bad_password);
+            return LocalizationUtils.getString(R.string.err_auth_geokrety_bad_password);
         }
 
-        return res.getString(R.string.err_auth_geokrety_unknown, getAuthTitle(), response);
+        return LocalizationUtils.getString(R.string.err_auth_geokrety_unknown, getAuthTitle(), response);
     }
 }

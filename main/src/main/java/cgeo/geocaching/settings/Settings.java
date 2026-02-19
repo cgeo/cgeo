@@ -1475,14 +1475,14 @@ public class Settings {
     }
 
     public static Intent getStartscreenIntent(final @NonNull Activity activity) {
-        final String startscreen = getString(R.string.pref_startscreen, activity.getString(R.string.pref_value_startscreen_home));
-        if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_stored))) {
+        final String startscreen = getString(R.string.pref_startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_home));
+        if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_stored))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_LIST);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_map))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_map))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_MAP);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_search))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_search))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_SEARCH);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_nearby))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_nearby))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_CUSTOM);
         } else {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_HOME);

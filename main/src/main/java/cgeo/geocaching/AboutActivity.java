@@ -16,11 +16,11 @@ import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MarkdownUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
-import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,6 +50,7 @@ import java.util.regex.Pattern;
 import io.noties.markwon.Markwon;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 public class AboutActivity extends TabbedViewPagerActivity {
 
@@ -115,7 +116,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
     }
 
     private void setActionBarTitle(final long currentPageId) {
-        final String prefix = getString(R.string.about);
+        final String prefix = LocalizationUtils.getString(R.string.about);
         final String title = (StringUtils.isNotBlank(prefix) ? (prefix + " - ") : "") + getTitle(currentPageId);
         ActionBarUtils.setTitle(this, title);
     }
@@ -123,7 +124,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.VERSION.id) {
-            return getResources().getString(R.string.about_version) + " / " + getResources().getString(R.string.about_help);
+            return LocalizationUtils.getString(R.string.about_version) + " / " + LocalizationUtils.getString(R.string.about_help);
         }
         return this.getString(Page.find(pageId).resourceId);
     }
@@ -198,8 +199,8 @@ public class AboutActivity extends TabbedViewPagerActivity {
             setClickListener(binding.website, "https://www.cgeo.org/");
             setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(binding.fangroup, "https://facebook.com/groups/cgeo.fangruppe");
-            setClickListener(binding.nutshellmanual, getString(R.string.manual_link_full));
-            setClickListener(binding.faq, getString(R.string.faq_link_full));
+            setClickListener(binding.nutshellmanual, LocalizationUtils.getPlainString(R.string.manual_link_full));
+            setClickListener(binding.faq, LocalizationUtils.getPlainString(R.string.faq_link_full));
             setClickListener(binding.github, "https://github.com/cgeo/cgeo/issues");
             binding.market.setOnClickListener(v -> ProcessUtils.openMarket(activity, activity.getPackageName()));
         }
@@ -231,17 +232,17 @@ public class AboutActivity extends TabbedViewPagerActivity {
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
                 if (StringUtils.isNotEmpty(changelogBugfix) && (!changelogBugfix.equals("##"))) {
-                    markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
+                    markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + LocalizationUtils.getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
                 } else {
                     binding.changelogMaster.setVisibility(View.GONE);
                 }
                 markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
             } else {
                 // we are on a non-release branch
-                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogBase);
+                markwon.setMarkdown(binding.changelogMaster, "## " + LocalizationUtils.getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogBase);
                 markwon.setMarkdown(binding.changelogRelease, changelogBugfix);
             }
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, getString(R.string.changelog_full)));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, LocalizationUtils.getPlainString(R.string.changelog_full)));
         }
     }
 
@@ -259,7 +260,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         int current = 0;
         final int max = BUGFIX_VERSION_NAME.length;
         for (Pair<Integer, Integer> pos : matches) {
-            changelog = changelog.substring(0, pos.first) + "\r\n## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + activity.getString(R.string.about_changelog_bugfix_release) : activity.getString(R.string.about_changelog_next_release)) + "\r\n" + changelog.substring(pos.second);
+            changelog = changelog.substring(0, pos.first) + "\r\n## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + LocalizationUtils.getString(R.string.about_changelog_bugfix_release) : LocalizationUtils.getString(R.string.about_changelog_next_release)) + "\r\n" + changelog.substring(pos.second);
             current++;
         }
         return changelog.trim();
@@ -280,10 +281,10 @@ public class AboutActivity extends TabbedViewPagerActivity {
                     binding.copy.setEnabled(true);
                     binding.copy.setOnClickListener(view -> {
                         ClipboardUtils.copyToClipboard(si);
-                        ActivityMixin.showShortToast(activity, getString(R.string.clipboard_copy_ok));
+                        ActivityMixin.showShortToast(activity, LocalizationUtils.getString(R.string.clipboard_copy_ok));
                     });
                     binding.share.setEnabled(true);
-                    binding.share.setOnClickListener(view -> ShareUtils.shareAsEmail(activity, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
+                    binding.share.setOnClickListener(view -> ShareUtils.shareAsEmail(activity, LocalizationUtils.getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
                 } else {
                     binding.system.setText(R.string.about_system_collecting);
                     binding.copy.setEnabled(false);
@@ -379,10 +380,10 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             markwon.setMarkdown(binding.aboutContributorsRecent, formatContributors(R.string.contributors_recent));
             markwon.setMarkdown(binding.aboutContributorsOthers, formatContributors(R.string.contributors_other));
-            markwon.setMarkdown(binding.aboutSpecialthanksdetails, getString(R.string.about_contributors_specialthanksdetails));
+            markwon.setMarkdown(binding.aboutSpecialthanksdetails, LocalizationUtils.getString(R.string.about_contributors_specialthanksdetails));
 
-            final String indentedList = "   " + getString(R.string.components2).replace("\n", "\n  ");
-            markwon.setMarkdown(binding.aboutComponents, getString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)));
+            final String indentedList = "   " + LocalizationUtils.getPlainString(R.string.components2).replace("\n", "\n  ");
+            markwon.setMarkdown(binding.aboutComponents, LocalizationUtils.getPlainString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)));
         }
 
         private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {
