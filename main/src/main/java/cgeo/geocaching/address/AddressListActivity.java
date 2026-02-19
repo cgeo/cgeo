@@ -10,8 +10,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
 import android.location.Address;
