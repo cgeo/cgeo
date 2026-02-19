@@ -126,7 +126,7 @@ public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryEl
     protected void onPostExecuteInternal(final Uri uri) {
         if (null != activity) {
             if (null != uri) {
-                ShareUtils.shareOrDismissDialog(activity, uri, ShareUtils.TYPE_XML, R.string.export, String.format(LocalizationUtils.getString(R.string.export_trailhistory_success), UriUtils.toUserDisplayableString(uri)));
+                ShareUtils.shareOrDismissDialog(activity, uri, ShareUtils.TYPE_XML, R.string.export, LocalizationUtils.getString(R.string.export_trailhistory_success, UriUtils.toUserDisplayableString(uri)));
                 if (Settings.getClearTrailAfterExportStatus()) {
                     clearTrailHistory.run();
                 }

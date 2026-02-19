@@ -1096,7 +1096,7 @@ public class DataStore {
                 final int backupDbVersion = backup.getVersion();
                 final int expectedDbVersion = DataStore.getExpectedDBVersion();
                 if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
-                    return String.format(LocalizationUtils.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
+                    return LocalizationUtils.getString(R.string.init_restore_version_error, expectedDbVersion, backupDbVersion);
                 }
                 closeDb();
                 result = FileUtils.copy(tmpFile, databasePath()) ? DBRestoreResult.RESTORE_SUCCESSFUL : DBRestoreResult.RESTORE_FAILED_GENERAL;

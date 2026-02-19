@@ -139,7 +139,7 @@ public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegmen
     protected void onPostExecuteInternal(final Uri exportUri) {
         if (null != activity) {
             if (null != exportUri) {
-                ShareUtils.shareOrDismissDialog(activity, exportUri, ShareUtils.TYPE_XML, R.string.export, String.format(LocalizationUtils.getString(R.string.export_individualroute_success), UriUtils.toUserDisplayableString(exportUri)));
+                ShareUtils.shareOrDismissDialog(activity, exportUri, ShareUtils.TYPE_XML, R.string.export, LocalizationUtils.getString(R.string.export_individualroute_success, UriUtils.toUserDisplayableString(exportUri)));
             } else {
                 ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }

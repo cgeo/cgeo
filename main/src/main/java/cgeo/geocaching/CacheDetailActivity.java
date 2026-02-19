@@ -1992,7 +1992,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 } else {
                     binding.hint.setText(cache.getHint());
                 }
-                binding.descriptionTranslateNote.setText(String.format(LocalizationUtils.getString(R.string.translator_language_detected), sourceLng));
+                binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_language_detected, sourceLng));
                 return;
             }
 
@@ -2720,7 +2720,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // show number of waypoints directly in waypoint title
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
-            return String.format(LocalizationUtils.getString(R.string.waypoints_tabtitle), waypointCount);
+            return LocalizationUtils.getString(R.string.waypoints_tabtitle, waypointCount);
         } else if (pageId == Page.VARIABLES.id) {
             final int varCount = cache == null ? 0 : cache.getVariables().size();
             return LocalizationUtils.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
