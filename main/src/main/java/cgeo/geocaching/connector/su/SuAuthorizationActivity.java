@@ -57,7 +57,7 @@ public class SuAuthorizationActivity extends OAuthAuthorizationActivity {
     @Override
     @NonNull
     protected final String getAuthTitle() {
-        return res.getString(titleResId);
+        return LocalizationUtils.getString(titleResId);
     }
 
     @Override

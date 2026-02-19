@@ -128,7 +128,7 @@ public class TemplateTextPreference extends Preference {
             final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature(null);
             final String[] items = new String[templates.size()];
             for (int i = 0; i < templates.size(); i++) {
-                items[i] = getContext().getString(templates.get(i).getResourceId());
+                items[i] = LocalizationUtils.getString(templates.get(i).getResourceId());
             }
             templateBuilder.setItems(items, (selectionDialog, position) -> {
                 selectionDialog.dismiss();

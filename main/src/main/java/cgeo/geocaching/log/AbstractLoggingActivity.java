@@ -13,6 +13,7 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +37,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
         for (final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature(getLogContext())) {
             if (template.getResourceId() == 0) {
-                menuLog.add(0, template.getItemId(), 0, getString(R.string.init_log_template_prefix) + template.getName());
+                menuLog.add(0, template.getItemId(), 0, LocalizationUtils.getString(R.string.init_log_template_prefix) + template.getName());
             } else {
                 menuLog.add(0, template.getItemId(), 0, template.getResourceId());
             }
@@ -44,7 +45,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
         final SubMenu menuSmileys = menu.findItem(R.id.menu_smileys).getSubMenu();
         for (final Smiley smiley : getSmileys()) {
-            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning));
+            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, smiley.emoji + "  [" + smiley.symbol + "]  " + LocalizationUtils.getString(smiley.meaning));
         }
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 

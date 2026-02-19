@@ -29,7 +29,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NonNull final Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
-            this.progressMessage = context.getString(progressMessageId);
+            this.progressMessage = LocalizationUtils.getString(progressMessageId);
         }
     }
 
