@@ -560,7 +560,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 showToast(R.string.mapthemes_foldersync_finished_toast,
                         LocalizationUtils.getString(R.string.persistablefolder_offline_maps_themes),
                         Formatter.formatDuration(System.currentTimeMillis() - startTime),
-                        result.filesModified, LocalizationUtils.getPlural(R.plurals.file_count, result.filesInSource, "file(s)"));
+                        result.filesModified, LocalizationUtils.getPluralWithFallback(R.plurals.file_count, result.filesInSource, "file(s)"));
             }
             Log.i("[MapThemeFolderSync] Finished synchronization callback");
         }
