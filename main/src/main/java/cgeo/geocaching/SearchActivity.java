@@ -28,6 +28,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
@@ -146,7 +147,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         setContentView(binding.getRoot());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
-        setTitle(res.getString(R.string.search));
+        setTitle(LocalizationUtils.getString(R.string.search));
         init();
     }
 

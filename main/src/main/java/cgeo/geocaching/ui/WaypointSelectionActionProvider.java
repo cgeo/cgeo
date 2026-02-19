@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.view.Menu;
@@ -60,7 +61,7 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
                 });
             }
         }
-        subMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, getContext().getString(R.string.cache)).setOnMenuItemClickListener(item -> {
+        subMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, LocalizationUtils.getString(R.string.cache)).setOnMenuItemClickListener(item -> {
             callback.onGeocacheSelected(geocache);
             return true;
         });
