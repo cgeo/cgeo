@@ -1295,6 +1295,7 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
     <string name="map_source_google_terrain">Google: Terén</string>
+    <string name="map_source_osm_offline">Offline použití</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_nomap">Žádná mapa</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>

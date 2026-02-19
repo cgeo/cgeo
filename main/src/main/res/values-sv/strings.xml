@@ -1269,6 +1269,7 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_google_terrain">Google: Terräng</string>
+    <string name="map_source_osm_offline">Sparad lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_nomap">Ingen karta</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>

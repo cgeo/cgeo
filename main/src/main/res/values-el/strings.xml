@@ -952,6 +952,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
+    <string name="map_source_osm_offline">Εκτός σύνδεσης</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="map_source_attribution_dialog_title">Χαρακτηριστικά χάρτη</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
