@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -157,7 +158,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (StringUtils.isNotBlank(name)) {
             title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
         } else {
-            title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
+            title = StringUtils.isNotBlank(geocode) ? geocode : LocalizationUtils.getString(R.string.cache);
         }
         setCacheTitleBar(title);
     }

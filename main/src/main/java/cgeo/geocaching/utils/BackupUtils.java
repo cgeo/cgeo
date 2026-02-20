@@ -126,7 +126,7 @@ public class BackupUtils {
 
             SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
-                    .setMessage(R.string.settings_folder_changed, activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                    .setMessage(R.string.settings_folder_changed, LocalizationUtils.getPlainString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), LocalizationUtils.getString(android.R.string.cancel), LocalizationUtils.getString(android.R.string.ok))
                     .confirm(() -> fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored)),
                             () -> {
                                 regrantAccessFolders.remove(0);
@@ -140,7 +140,7 @@ public class BackupUtils {
 
                 SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
-                    .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                        .setMessage(R.string.settings_file_changed, LocalizationUtils.getPlainString(data.left.getNameKeyId()), displayName, LocalizationUtils.getString(android.R.string.cancel), LocalizationUtils.getString(android.R.string.ok))
                     .confirm(() -> fileSelector.restorePersistableUri(data.left, uriToBeRestored),
                     () -> {
                         regrantAccessUris.remove(0);
@@ -193,28 +193,28 @@ public class BackupUtils {
         final TextView warningText = content.findViewById(R.id.warning);
 
         if (getDatabaseBackupTime(backupDir) != NO_ACCESSIBLE_FILE) {
-            databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + Formatter.formatShortDateTime(getDatabaseBackupTime(backupDir)) + ")");
+            databaseCheckbox.setText(LocalizationUtils.getString(R.string.init_backup_caches) + "\n(" + Formatter.formatShortDateTime(getDatabaseBackupTime(backupDir)) + ")");
             databaseCheckbox.setEnabled(true);
             databaseCheckbox.setChecked(true);
         } else {
-            databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + activityContext.getString(R.string.init_backup_unavailable) + ")");
+            databaseCheckbox.setText(LocalizationUtils.getString(R.string.init_backup_caches) + "\n(" + LocalizationUtils.getString(R.string.init_backup_unavailable) + ")");
         }
         if (getSettingsBackupTime(backupDir) != NO_ACCESSIBLE_FILE) {
-            settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + Formatter.formatShortDateTime(getSettingsBackupTime(backupDir)) + ")");
+            settingsCheckbox.setText(LocalizationUtils.getString(R.string.init_backup_program_settings) + "\n(" + Formatter.formatShortDateTime(getSettingsBackupTime(backupDir)) + ")");
             settingsCheckbox.setEnabled(true);
             settingsCheckbox.setChecked(true);
         } else {
-            settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + activityContext.getString(R.string.init_backup_unavailable) + ")");
+            settingsCheckbox.setText(LocalizationUtils.getString(R.string.init_backup_program_settings) + "\n(" + LocalizationUtils.getString(R.string.init_backup_unavailable) + ")");
         }
 
         final AlertDialog dialog = Dialogs.newBuilder(activityContext)
-                .setTitle(activityContext.getString(R.string.init_backup_restore))
+                .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))
                 .setView(content)
-                .setPositiveButton(activityContext.getString(android.R.string.yes), (alertDialog, id) -> {
+                .setPositiveButton(LocalizationUtils.getString(android.R.string.yes), (alertDialog, id) -> {
                     alertDialog.dismiss();
                     restoreInternal(activityContext, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
                 })
-                .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> alertDialog.cancel())
+                .setNegativeButton(LocalizationUtils.getString(android.R.string.no), (alertDialog, id) -> alertDialog.cancel())
                 .create();
 
         dialog.setOwnerActivity(activityContext);
@@ -234,7 +234,7 @@ public class BackupUtils {
         final int caches = DataStore.getAllCachesCount();
         if (databaseCheckbox.isChecked() && caches > 0) {
             warningText.setVisibility(View.VISIBLE);
-            warningText.setText(activityContext.getString(settingsCheckbox.isChecked() ? R.string.restore_confirm_overwrite_database_and_settings : R.string.restore_confirm_overwrite_database, activityContext.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)));
+            warningText.setText(LocalizationUtils.getString(settingsCheckbox.isChecked() ? R.string.restore_confirm_overwrite_database_and_settings : R.string.restore_confirm_overwrite_database, LocalizationUtils.getPlural(R.plurals.cache_counts, caches)));
         } else if (settingsCheckbox.isChecked() && caches > 0) {
             warningText.setVisibility(View.VISIBLE);
             warningText.setText(R.string.restore_confirm_overwrite_settings);
@@ -259,9 +259,9 @@ public class BackupUtils {
                 for (PersistableFolder folder : PersistableFolder.values()) {
                     final String value = Settings.getPersistableFolderRaw(folder);
                     if (value != null) {
-                        currentFolderValues.add(new ImmutableTriple<>(folder, activityContext.getString(folder.getPrefKeyId()), value));
+                        currentFolderValues.add(new ImmutableTriple<>(folder, LocalizationUtils.getPlainString(folder.getPrefKeyId()), value));
                     } else {
-                        unsetFolders.add(new ImmutablePair<>(folder, activityContext.getString(folder.getPrefKeyId())));
+                        unsetFolders.add(new ImmutablePair<>(folder, LocalizationUtils.getPlainString(folder.getPrefKeyId())));
                     }
                 }
 
@@ -270,9 +270,9 @@ public class BackupUtils {
                 for (PersistableUri uri : PersistableUri.values()) {
                     final String value = Settings.getPersistableUriRaw(uri);
                     if (value != null) {
-                        currentUriValues.add(new ImmutableTriple<>(uri, activityContext.getString(uri.getPrefKeyId()), value));
+                        currentUriValues.add(new ImmutableTriple<>(uri, LocalizationUtils.getPlainString(uri.getPrefKeyId()), value));
                     } else {
-                        unsetUris.add(new ImmutablePair<>(uri, activityContext.getString(uri.getPrefKeyId())));
+                        unsetUris.add(new ImmutablePair<>(uri, LocalizationUtils.getPlainString(uri.getPrefKeyId())));
                     }
                 }
 
@@ -282,7 +282,7 @@ public class BackupUtils {
                 settingsChanged = restoreSettingsInternal(backupDir, currentFolderValues, unsetFolders, currentUriValues, unsetUris);
 
                 if (!settingsChanged) {
-                    resultString += activityContext.getString(R.string.init_restore_settings_failed);
+                    resultString += LocalizationUtils.getString(R.string.init_restore_settings_failed);
                 }
             }
 
@@ -327,7 +327,7 @@ public class BackupUtils {
 
         // finish restore with restore if settings where changed
         if (settingsChanged && !(activityContext instanceof InstallWizardActivity)) {
-            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + activityContext.getString(R.string.settings_restart)))
+            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + LocalizationUtils.getString(R.string.settings_restart)))
                     .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> ProcessUtils.restartApplication(activityContext));
         } else {
             SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString)).show();
@@ -373,7 +373,7 @@ public class BackupUtils {
                 removeDirs(dirs);
                 backupInternal(runAfterwards, true);
             } else {
-                Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {
+                Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, LocalizationUtils.getString(R.string.init_backup_backup), LocalizationUtils.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {
                     removeDirs(dirs);
                     backupInternal(runAfterwards, false);
                 });
@@ -534,7 +534,7 @@ public class BackupUtils {
     private void restoreDatabaseInternal(final Folder backupDir, final Consumer<String> consumer) {
         final ContentStorage.FileInformation dbFile = getDatabaseFile(backupDir);
 
-        final ProgressDialog dialog = ProgressDialog.show(activityContext, activityContext.getString(R.string.init_backup_restore), activityContext.getString(R.string.init_restore_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(activityContext, LocalizationUtils.getString(R.string.init_backup_restore), LocalizationUtils.getString(R.string.init_restore_running), true, false);
         final StringBuilder stringBuilder = new StringBuilder();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> stringBuilder.append(DataStore.restoreDatabaseInternal(activityContext, dbFile.uri)), () -> {
             dialog.dismiss();
@@ -635,8 +635,8 @@ public class BackupUtils {
 
     private void createDatabaseBackupInternal(final Folder backupDir, final Consumer<Boolean> consumer) {
         final ProgressDialog dialog = ProgressDialog.show(activityContext,
-                activityContext.getString(R.string.init_backup),
-                activityContext.getString(R.string.init_backup_running), true, false);
+                LocalizationUtils.getString(R.string.init_backup),
+                LocalizationUtils.getString(R.string.init_backup_running), true, false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(backupDir), backupFile -> {
             dialog.dismiss();
             consumer.accept(backupFile != null);
@@ -650,27 +650,27 @@ public class BackupUtils {
             if (autobackup) {
                 return; // We don't need to inform the user if everything went right
             }
-            title = activityContext.getString(R.string.init_backup_finished);
-            msg = activityContext.getString(R.string.backup_saved) + "\n" + backupDir.toUserDisplayableString();
+            title = LocalizationUtils.getString(R.string.init_backup_finished);
+            msg = LocalizationUtils.getString(R.string.backup_saved) + "\n" + backupDir.toUserDisplayableString();
         } else {
-            title = activityContext.getString(R.string.init_backup_backup_failed);
+            title = LocalizationUtils.getString(R.string.init_backup_backup_failed);
 
             if (databaseResult != null) {
-                msg = activityContext.getString(R.string.init_backup_success) + "\n" + backupDir.toUserDisplayableString() + "/" + DataStore.DB_FILE_NAME_BACKUP;
+                msg = LocalizationUtils.getString(R.string.init_backup_success) + "\n" + backupDir.toUserDisplayableString() + "/" + DataStore.DB_FILE_NAME_BACKUP;
             } else {
-                msg = activityContext.getString(R.string.init_backup_failed);
+                msg = LocalizationUtils.getString(R.string.init_backup_failed);
             }
 
             msg += "\n\n";
 
             if (settingsResult) {
-                msg += activityContext.getString(R.string.settings_saved) + "\n" + backupDir.toUserDisplayableString() + "/" + SETTINGS_FILENAME;
+                msg += LocalizationUtils.getString(R.string.settings_saved) + "\n" + backupDir.toUserDisplayableString() + "/" + SETTINGS_FILENAME;
             } else {
-                msg += activityContext.getString(R.string.settings_savingerror);
+                msg += LocalizationUtils.getString(R.string.settings_savingerror);
             }
 
             if (!trackfilesResult) {
-                msg += "\n\n" + activityContext.getString(R.string.backup_tracks_error);
+                msg += "\n\n" + LocalizationUtils.getString(R.string.backup_tracks_error);
             }
         }
 

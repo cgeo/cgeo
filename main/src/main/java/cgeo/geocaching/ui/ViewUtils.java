@@ -790,7 +790,7 @@ public class ViewUtils {
         if (gp != null) {
             textView.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
         } else {
-            textView.setText(String.format("%s%n%s", LocalizationUtils.getString(R.string.waypoint_latitude_null), LocalizationUtils.getString(R.string.waypoint_longitude_null)));
+            textView.setText(String.format("%s%n%s", LocalizationUtils.getPlainString(R.string.waypoint_latitude_null), LocalizationUtils.getPlainString(R.string.waypoint_longitude_null)));
         }
     }
 
@@ -802,7 +802,7 @@ public class ViewUtils {
         final String latText = StringUtils.trim(latlonText[0]);
         final String lonText = StringUtils.trim(latlonText[1]);
 
-        if (!latText.equals(LocalizationUtils.getString(R.string.waypoint_latitude_null)) && !lonText.equals(LocalizationUtils.getString(R.string.waypoint_longitude_null))) {
+        if (!latText.equals(LocalizationUtils.getPlainString(R.string.waypoint_latitude_null)) && !lonText.equals(LocalizationUtils.getPlainString(R.string.waypoint_longitude_null))) {
             try {
                 return new Geopoint(latText, lonText);
             } catch (final Geopoint.ParseException e) {

@@ -1,11 +1,11 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
@@ -49,7 +49,7 @@ class FieldNotes {
                 .append(StringUtils.replaceChars(log.log, '"', '\''))
                 .append("\"\n");
         if (log.reportProblem.logType != LogType.UNKNOWN) {
-            add(cache, new LogEntry.Builder().setLog(CgeoApplication.getInstance().getString(log.reportProblem.textId)).setLogType(log.reportProblem.logType).setDate(log.date).build());
+            add(cache, new LogEntry.Builder().setLog(LocalizationUtils.getString(log.reportProblem.textId)).setLogType(log.reportProblem.logType).setDate(log.date).build());
         }
     }
 

@@ -536,7 +536,7 @@ public class Settings {
     }
 
     private static String getKey(final int prefKeyId) {
-        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getString(prefKeyId);
+        return CgeoApplication.getInstance() == null ? null : LocalizationUtils.getPlainString(prefKeyId);
     }
 
     public static int getKeyInt(final int prefKeyId) {
@@ -1475,14 +1475,14 @@ public class Settings {
     }
 
     public static Intent getStartscreenIntent(final @NonNull Activity activity) {
-        final String startscreen = getString(R.string.pref_startscreen, activity.getString(R.string.pref_value_startscreen_home));
-        if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_stored))) {
+        final String startscreen = getString(R.string.pref_startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_home));
+        if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_stored))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_LIST);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_map))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_map))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_MAP);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_search))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_search))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_SEARCH);
-        } else if (Strings.CS.equals(startscreen, activity.getString(R.string.pref_value_startscreen_nearby))) {
+        } else if (Strings.CS.equals(startscreen, LocalizationUtils.getPlainString(R.string.pref_value_startscreen_nearby))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_CUSTOM);
         } else {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_HOME);
@@ -1795,7 +1795,7 @@ public class Settings {
      * Variant used by UnifiedMap: try tileprovider-specifc first
      */
     public static String getSelectedMapRenderTheme(final AbstractTileProvider tileProvider) {
-        final String temp = getStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider.getId(), "");
+        final String temp = getStringDirect(LocalizationUtils.getPlainString(R.string.pref_renderthemefile) + "-" + tileProvider.getId(), "");
         final String temp2 = StringUtils.isNotBlank(temp) ? temp : getSelectedMapRenderTheme();
         Log.e("getTheme: " + temp2);
         return temp2;
@@ -1823,7 +1823,7 @@ public class Settings {
     public static void setSelectedMapRenderTheme(final String tileProvider, final String customRenderThemeFile) {
         Log.e("setTheme: " + tileProvider + " / " + customRenderThemeFile);
         setSelectedMapRenderTheme(customRenderThemeFile);
-        putStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider, customRenderThemeFile);
+        putStringDirect(LocalizationUtils.getPlainString(R.string.pref_renderthemefile) + "-" + tileProvider, customRenderThemeFile);
     }
 
     /**
@@ -2461,15 +2461,15 @@ public class Settings {
     public static HashSet<String> getSensitivePreferenceKeys(final Context context) {
         final HashSet<String> sensitiveKeys = new HashSet<>();
         Collections.addAll(sensitiveKeys,
-                context.getString(R.string.pref_username), context.getString(R.string.pref_password),
-                context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
-                context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
-                context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
-                context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
-                context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
-                context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
-                context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
-                context.getString(R.string.pref_fakekey_geokrety_authorization)
+                LocalizationUtils.getPlainString(R.string.pref_username), LocalizationUtils.getPlainString(R.string.pref_password),
+                LocalizationUtils.getPlainString(R.string.pref_ocde_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocde_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocde_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocde_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_ocpl_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocpl_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocpl_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocpl_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_ocnl_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocnl_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocnl_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocnl_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_ocus_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocus_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocus_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocus_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_ocro_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocro_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocro_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocro_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokensecret), LocalizationUtils.getPlainString(R.string.pref_ocuk2_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_ocuk2_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_su_tokensecret), LocalizationUtils.getPlainString(R.string.pref_su_tokenpublic), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_secret), LocalizationUtils.getPlainString(R.string.pref_temp_su_token_public),
+                LocalizationUtils.getPlainString(R.string.pref_fakekey_geokrety_authorization)
         );
         return sensitiveKeys;
     }

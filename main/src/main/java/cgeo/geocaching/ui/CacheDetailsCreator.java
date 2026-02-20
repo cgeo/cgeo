@@ -19,6 +19,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
@@ -104,7 +105,7 @@ public final class CacheDetailsCreator {
         final NameValueLine nameValue = createNameValueLine(nameId);
         nameValue.layout.findViewById(R.id.name).setVisibility(GONE);
         final TextView valueView = nameValue.valueView;
-        final String label = nameId > 0 ? res.getString(nameId) + ": " : "";
+        final String label = nameId > 0 ? LocalizationUtils.getString(nameId) + ": " : "";
         valueView.setText(HtmlCompat.fromHtml(label + value.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
     }
 
@@ -113,7 +114,7 @@ public final class CacheDetailsCreator {
         final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         final TextView nameView = layout.findViewById(R.id.name);
         if (nameId > 0) {
-            nameView.setText(res.getString(nameId));
+            nameView.setText(LocalizationUtils.getString(nameId));
         }
         final TextView valueView = layout.findViewById(R.id.value);
         parentView.addView(layout);
@@ -125,7 +126,7 @@ public final class CacheDetailsCreator {
         final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         parentView.addView(layout);
         final TextView nameView = layout.findViewById(R.id.name);
-        nameView.setText(res.getString(nameId));
+        nameView.setText(LocalizationUtils.getString(nameId));
         layout.findViewById(R.id.value).setVisibility(GONE);
         layout.findViewById(R.id.addition).setVisibility(GONE);
         return layout.findViewById(R.id.linearlayout);
@@ -140,8 +141,8 @@ public final class CacheDetailsCreator {
         final TextView nameView = layout.findViewById(R.id.name);
         final TextView valueView = layout.findViewById(R.id.value);
 
-        nameView.setText(activity.getString(nameId));
-        valueView.setText(String.format(Locale.getDefault(), activity.getString(R.string.cache_rating_of_new), value, max));
+        nameView.setText(LocalizationUtils.getString(nameId));
+        valueView.setText(String.format(Locale.getDefault(), LocalizationUtils.getString(R.string.cache_rating_of_new), value, max));
 
         final RatingBar layoutStars = layout.findViewById(R.id.stars);
         layoutStars.setNumStars(max);
@@ -156,14 +157,14 @@ public final class CacheDetailsCreator {
         final List<String> states = new ArrayList<>(5);
         String date = getVisitedDate(cache);
         if (cache.hasLogOffline()) {
-            states.add(res.getString(R.string.cache_status_offline_log) + date);
+            states.add(LocalizationUtils.getString(R.string.cache_status_offline_log) + date);
             // reset the found date, to avoid showing it twice
             date = "";
         }
         if (cache.isFound()) {
-            states.add(res.getString(cache.isEventCache() ? R.string.cache_status_attended : R.string.cache_status_found) + date);
+            states.add(LocalizationUtils.getString(cache.isEventCache() ? R.string.cache_status_attended : R.string.cache_status_found) + date);
         } else if (cache.isDNF()) {
-            states.add(res.getString(R.string.cache_not_status_found) + date);
+            states.add(LocalizationUtils.getString(R.string.cache_not_status_found) + date);
         }
         if (cache.isEventCache() && states.isEmpty()) {
             for (final LogEntry log : cache.getLogs()) {
@@ -173,13 +174,13 @@ public final class CacheDetailsCreator {
             }
         }
         if (cache.isArchived()) {
-            states.add(res.getString(R.string.cache_status_archived));
+            states.add(LocalizationUtils.getString(R.string.cache_status_archived));
         }
         if (cache.isDisabled()) {
-            states.add(res.getString(R.string.cache_status_disabled));
+            states.add(LocalizationUtils.getString(R.string.cache_status_disabled));
         }
         if (cache.isPremiumMembersOnly()) {
-            states.add(res.getString(R.string.cache_status_premium));
+            states.add(LocalizationUtils.getString(R.string.cache_status_premium));
         }
         if (!states.isEmpty()) {
             add(R.string.cache_status, StringUtils.join(states, ", "));
@@ -219,9 +220,9 @@ public final class CacheDetailsCreator {
     public void addAlcMode(final Geocache cache) {
         Log.d("_AL add mode to view: " + cache.isLinearAlc());
         if (cache.isLinearAlc()) {
-            add(R.string.cache_mode, res.getString(R.string.cache_mode_linear));
+            add(R.string.cache_mode, LocalizationUtils.getString(R.string.cache_mode_linear));
         } else {
-            add(R.string.cache_mode, res.getString(R.string.cache_mode_random));
+            add(R.string.cache_mode, LocalizationUtils.getString(R.string.cache_mode_random));
         }
     }
 
@@ -302,7 +303,7 @@ public final class CacheDetailsCreator {
         final Resources res = v.getResources();
 
         final ContextMenuDialog dialog = new ContextMenuDialog((Activity) context);
-        dialog.setTitle(res.getString(R.string.cache_bettercacher));
+        dialog.setTitle(LocalizationUtils.getString(R.string.cache_bettercacher));
         dialog.addItem(cache.getTier().getI18nText() + ": " + cache.getTier().getI18nDescription(), cache.getTier().getIconId());
         for (Category category : cache.getCategories()) {
             dialog.addItem(category.getI18nText() + ": " + category.getI18nDescription(), category.getIconId());

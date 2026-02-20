@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
@@ -62,9 +63,9 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
     private void updateSummary() {
         final String textRestore;
         if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
-            textRestore = getString(R.string.init_backup_last) + " " + BackupUtils.getNewestBackupDateTime(false);
+            textRestore = LocalizationUtils.getString(R.string.init_backup_last) + " " + BackupUtils.getNewestBackupDateTime(false);
         } else {
-            textRestore = getString(R.string.init_backup_last_no);
+            textRestore = LocalizationUtils.getString(R.string.init_backup_last_no);
         }
         PreferenceUtils.setSummary(findPreference(getString(R.string.pref_fakekey_startrestore)), textRestore);
     }
