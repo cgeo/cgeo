@@ -121,6 +121,11 @@
 # used in tests
 -keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
 
+# Locus -------------------------------------------------------------------------------------------
+
+# Keep Locus API objects
+-keep class locus.api.objects.** { *; }
+
 # Unsorted ----------------------------------------------------------------------------------------
 
 -dontwarn org.springframework.**
