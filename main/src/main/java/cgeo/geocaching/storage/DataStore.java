@@ -2890,6 +2890,11 @@ public class DataStore {
                 values.clear();
                 if (geocode != null) {
                     values.put("geocode", geocode);
+                } else {
+                    final String spottedGeocode = trackable.getSpottedCacheGeocode();
+                    if (StringUtils.isNotBlank(spottedGeocode)) {
+                        values.put("geocode", spottedGeocode);
+                    }
                 }
                 values.put("updated", timeStamp);
                 values.put("tbcode", tbCode);
