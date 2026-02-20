@@ -891,16 +891,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
-        final View liveButton = findViewById(R.id.menu_map_live);
-        if (liveButton != null) {
-            liveButton.setOnLongClickListener(v -> {
-                viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
-                viewModel.transientIsLiveEnabled.setValue(false);
-                Settings.setLiveMap(false);
-                reloadCachesAndWaypoints();
-                return true;
-            });
-        }
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -940,7 +930,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         FilterUtils.initializeFilterMenu(this, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
-        initializeMapViewLongClick();
+        initializeLongClicks();
         return result;
     }
 
@@ -1493,7 +1483,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onDestroy();
     }
 
-    private void initializeMapViewLongClick() {
+    private void initializeLongClicks() {
         new Handler().post(() -> {
             final View mapViewSelect = findViewById(R.id.menu_select_mapview);
             if (mapViewSelect != null) {
@@ -1501,6 +1491,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     final AbstractTileProvider localTileProvider = Settings.getPreviousTileProvider();
                     Settings.setPreviousTileProvider(tileProvider);
                     changeMapSource(localTileProvider);
+                    return true;
+                });
+            }
+
+            final View liveButton = findViewById(R.id.menu_map_live);
+            if (liveButton != null) {
+                liveButton.setOnLongClickListener(v -> {
+                    // viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
+                    //  viewModel.transientIsLiveEnabled.setValue(false);
+                    Settings.setLiveMap(false);
+                    // reloadCachesAndWaypoints();
                     return true;
                 });
             }
