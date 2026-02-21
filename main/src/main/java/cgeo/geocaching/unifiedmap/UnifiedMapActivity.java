@@ -1498,10 +1498,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final View liveButton = findViewById(R.id.menu_map_live);
             if (liveButton != null) {
                 liveButton.setOnLongClickListener(v -> {
-                    // viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
-                    //  viewModel.transientIsLiveEnabled.setValue(false);
+                    viewModel.mapType = UnifiedMapType.getPlainMapWithTarget(viewModel.mapType); // switch to PLAIN mode
+                    viewModel.transientIsLiveEnabled.setValue(false);
                     Settings.setLiveMap(false);
-                    // reloadCachesAndWaypoints();
+                    reloadCachesAndWaypoints();
                     return true;
                 });
             }
