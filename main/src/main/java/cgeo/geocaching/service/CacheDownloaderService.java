@@ -2,6 +2,7 @@ package cgeo.geocaching.service;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.gc.GCLiveAPI;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
@@ -30,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -186,16 +189,41 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
         Log.d("Download task started");
 
-        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
+        final ArrayList<String> allGeocodes = intent.getStringArrayListExtra(EXTRA_GEOCODES);
+        if (allGeocodes == null || allGeocodes.isEmpty()) {
+            return;
+        }
+
+        // Batch pre-fetch GC caches via Live API if enabled
+        final Set<String> batchFetched = new HashSet<>();
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            final ArrayList<String> gcGeocodes = new ArrayList<>();
+            for (final String geocode : allGeocodes) {
+                if (geocode != null && geocode.startsWith("GC")) {
+                    gcGeocodes.add(geocode);
+                }
+            }
+            if (!gcGeocodes.isEmpty()) {
+                // Phase 1: Batch fetch cache details (chunks of 50)
+                Log.i("GCLiveAPI: Batch pre-fetching " + gcGeocodes.size() + " GC caches");
+                final List<Geocache> fetched = GCLiveAPI.fetchGeocachesBatch(gcGeocodes);
+                for (final Geocache c : fetched) {
+                    batchFetched.add(c.getGeocode());
+                }
+                Log.i("GCLiveAPI: Batch pre-fetched " + batchFetched.size() + " caches successfully");
+            }
+        }
+
+        final Observable<String> geocodes = Observable.fromIterable(allGeocodes);
         geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            handleDownload(geocode);
+            handleDownload(geocode, batchFetched);
             emitter.onComplete();
         }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
 
         Log.d("Download task completed");
     }
 
-    private void handleDownload(final String geocode) {
+    private void handleDownload(final String geocode, final Set<String> batchFetched) {
         try {
             if (shouldStop) {
                 Log.i("download canceled");
@@ -219,26 +247,33 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             updateForegroundNotification();
 
             // merge current lists and additional lists
-            final Set<Integer> combinedListIds = new HashSet<>(properties.listIds);
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            if (cache != null && !cache.getLists().isEmpty()) {
-                if (properties.keepExistingLists) {
-                    combinedListIds.clear();
+            final Set<Integer> combinedListIds = resolveListIds(geocode, properties);
+
+            // Batch-fetched path: cache details already in DB. Let storeCache handle image downloading.
+            if (batchFetched.contains(geocode)) {
+                final Geocache batchCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                if (batchCache != null) {
+                    if (Geocache.storeCache(batchCache, geocode, combinedListIds, false, null)) {
+                        GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
+                        removeFromDownloadQueue(geocode);
+                        Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed (batch)");
+                        cachesDownloaded.incrementAndGet();
+                    } else {
+                        Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " failed (batch)");
+                    }
+                    return;
                 }
-                combinedListIds.addAll(cache.getLists());
+                // fall through to normal path if cache not found in DB
             }
 
-            // download...
-            if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
+            // Normal path: fetch + download images
+            final boolean forceDownload = properties.forceDownload;
+            if (Geocache.storeCache(null, geocode, combinedListIds, forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
-                synchronized (downloadQuery) {
-                    if (downloadQuery.get(geocode) == null) {
-                        downloadQuery.remove(geocode);
-                    }
-                }
+                removeFromDownloadQueue(geocode);
                 Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed");
                 cachesDownloaded.incrementAndGet();
             } else {
@@ -264,6 +299,26 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     private void showEndNotification(final String text) {
         Notifications.send(this, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
                 this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true));
+    }
+
+    private Set<Integer> resolveListIds(@NonNull final String geocode, @NonNull final DownloadTaskProperties properties) {
+        final Set<Integer> combinedListIds = new HashSet<>(properties.listIds);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache != null && !cache.getLists().isEmpty()) {
+            if (properties.keepExistingLists) {
+                combinedListIds.clear();
+            }
+            combinedListIds.addAll(cache.getLists());
+        }
+        return combinedListIds;
+    }
+
+    private void removeFromDownloadQueue(@NonNull final String geocode) {
+        synchronized (downloadQuery) {
+            if (downloadQuery.get(geocode) == null) {
+                downloadQuery.remove(geocode);
+            }
+        }
     }
 
     private static class DownloadTaskProperties {
