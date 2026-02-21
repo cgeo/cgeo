@@ -20,6 +20,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
 - New: Allow importing KML files as tracks (eg: trackable itinerary)
+- New: Offer to set cache icon even if cache is not yet stored
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -69,3 +70,5 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Změna: Použít nastavení systému jako výchozí téma pro nové instalace
 - Novinka: Export GPX: Při exportu původních trasových bodů zapisujte poznámky GSAK Lat/LonBeforeCorrect
 - Novinka: Zobrazit lištu pro vrácení zpět při mazání kešek ze seznamu na mapě
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
