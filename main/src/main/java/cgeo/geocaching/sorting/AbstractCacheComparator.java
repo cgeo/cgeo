@@ -7,12 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * abstract super implementation for all cache comparators
  */
 abstract class AbstractCacheComparator implements CacheComparator {
-
 
     @Override
     public final int compare(final Geocache cache1, final Geocache cache2) {
@@ -25,7 +25,7 @@ abstract class AbstractCacheComparator implements CacheComparator {
     }
 
     private static int fallbackToGeocode(final Geocache cache1, final Geocache cache2) {
-        final int comparePrefix = StringUtils.compareIgnoreCase(StringUtils.substring(cache1.getGeocode(), 0, 2), StringUtils.substring(cache2.getGeocode(), 0, 2));
+        final int comparePrefix = Strings.CI.compare(StringUtils.substring(cache1.getGeocode(), 0, 2), StringUtils.substring(cache2.getGeocode(), 0, 2));
         if (comparePrefix == 0) {
             final long l1 = GCUtils.gcLikeCodeToGcLikeId(cache1.getGeocode());
             final long l2 = GCUtils.gcLikeCodeToGcLikeId(cache2.getGeocode());
@@ -68,5 +68,4 @@ abstract class AbstractCacheComparator implements CacheComparator {
         Collections.sort(list, this);
         afterSort(list);
     }
-
 }

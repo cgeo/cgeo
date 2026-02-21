@@ -42,7 +42,7 @@ jobs:
         branch: [ "master" ]
     steps:
       - name: Checkout the latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ matrix.branch }}
 
@@ -90,18 +90,18 @@ jobs:
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
       - name: Gradle cache
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: AVD cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: avd-cache
         with:
           path: |
@@ -137,11 +137,11 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew --no-configuration-cache main:connectedBasicDebugAndroidTest --no-daemon --continue -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest || { killall -INT crashpad_handler; false; }
+            ./gradlew main:connectedBasicDebugAndroidTest --no-daemon --continue -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest || { killall -INT crashpad_handler; false; }
             killall -INT crashpad_handler || true
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v4
+        uses: mikepenz/action-junit-report@v6
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/build/test-results/**/*.xml'

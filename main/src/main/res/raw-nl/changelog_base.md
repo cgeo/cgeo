@@ -19,6 +19,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nieuw: Ondersteuning voor Motorider thema (alleen VTM)
 - Nieuw: NoMap tegel provider (kaart niet tonen, gewoon caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
+- New: Allow importing KML files as tracks (eg: trackable itinerary)
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
@@ -37,6 +38,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nieuw: Plaatshouders voor trackable logging (geocache naam, geocache code, gebruiker)
 - Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
 - Fix: Missing quick toggle in guided mode of waypoint calculator
+- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos

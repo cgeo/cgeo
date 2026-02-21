@@ -36,7 +36,7 @@ import java.util.List;
 import com.google.android.material.snackbar.Snackbar;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.Strings;
 
 public class ShareUtils {
 
@@ -165,7 +165,6 @@ public class ShareUtils {
 
     public static void openUrl(final Context context, final String url) {
         openUrl(context, url, false);
-
     }
 
     /**
@@ -201,7 +200,7 @@ public class ShareUtils {
 
         try {
             final Uri uri = Uri.parse(url);
-            if (Settings.getUseCustomTabs() && ProcessUtils.isChromeLaunchable() && !StringUtils.equals(uri.getScheme(), "mailto")) {
+            if (Settings.getUseCustomTabs() && ProcessUtils.isChromeLaunchable() && !Strings.CS.equals(uri.getScheme(), "mailto")) {
                 openCustomTab(context, url);
                 return;
             }

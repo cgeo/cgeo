@@ -1082,6 +1082,7 @@
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
     <string name="map_source_google_terrain">Google: Reljefas</string>
+    <string name="map_source_osm_offline">Išsaugoma</string>
     <string name="map_source_osm_offline_combined">Sujungtas (Neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio savybės</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>

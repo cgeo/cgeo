@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Provides all the available templates for logging.
@@ -122,7 +123,7 @@ public final class LogTemplateProvider {
 
             // check containment first to not unconditionally call the getValue(...) method
             if (input.contains(bracketedTemplate)) {
-                return StringUtils.replace(input, bracketedTemplate, getValue(context));
+                return Strings.CS.replace(input, bracketedTemplate, getValue(context));
             }
             return input;
         }
@@ -463,7 +464,7 @@ public final class LogTemplateProvider {
             @Override
             public String getValue(final LogContext context) {
                 final String nestedTemplate = Settings.getSignature();
-                if (StringUtils.contains(nestedTemplate, "SIGNATURE")) {
+                if (Strings.CS.contains(nestedTemplate, "SIGNATURE")) {
                     return "invalid signature template";
                 }
                 return applyTemplates(nestedTemplate, context);
@@ -473,7 +474,7 @@ public final class LogTemplateProvider {
             templates.add(index++, new LogTemplate("TEMPLATE" + template.getKey(), template.getTitle()) {
                 @Override
                 public String getValue(final LogContext context) {
-                    if (StringUtils.contains(template.getText(), "TEMPLATE" + template.getKey())) {
+                    if (Strings.CS.contains(template.getText(), "TEMPLATE" + template.getKey())) {
                         return "invalid template";
                     }
                     return applyTemplates(template.getText(), context);

@@ -33,6 +33,7 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 class ReceiveDownload {
     private Uri uri = null;
@@ -79,7 +80,7 @@ class ReceiveDownload {
                 while ((ze = zis.getNextEntry()) != null) {
                     String filename = ze.getName();
                     final int posExt = filename.lastIndexOf('.');
-                    if (posExt != -1 && ((StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (StringUtils.equalsIgnoreCase(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
+                    if (posExt != -1 && ((Strings.CI.equals(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (Strings.CI.equals(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
                         filename = downloader.toVisibleFilename(filename);
                         // found map file within zip
                         if (guessFilename(filename)) {
@@ -110,7 +111,7 @@ class ReceiveDownload {
             filename = FileUtils.getFilenameFromPath(filename);
             if (StringUtils.isNotBlank(downloader.forceExtension)) {
                 final int posExt = filename.lastIndexOf('.');
-                if (posExt == -1 || !(StringUtils.equalsIgnoreCase(downloader.forceExtension, filename.substring(posExt)))) {
+                if (posExt == -1 || !(Strings.CI.equals(downloader.forceExtension, filename.substring(posExt)))) {
                     filename += downloader.forceExtension;
                 }
             }
@@ -207,7 +208,7 @@ class ReceiveDownload {
     }
 
     private String normalized(final String filename) {
-        return StringUtils.replace(StringUtils.lowerCase(filename), "-", "_");
+        return Strings.CS.replace(StringUtils.lowerCase(filename), "-", "_");
     }
 
     private CopyStates copyInternal(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final boolean isZipFile, final String nameWithinZip, final boolean potentiallyKeepTemporaryFile) {
@@ -301,5 +302,4 @@ class ReceiveDownload {
             IOUtils.closeQuietly(inputStream, outputStream);
         }
     }
-
 }

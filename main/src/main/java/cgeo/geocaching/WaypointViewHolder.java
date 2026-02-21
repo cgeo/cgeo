@@ -21,4 +21,12 @@ public class WaypointViewHolder extends AbstractViewHolder {
         this.coordinateFormatSwitcher.setCoordinate(coordinate);
     }
 
+    public void setCoordinateFormatPosition(final int position) {
+        this.coordinateFormatSwitcher.setPosition(position);
+    }
+
+    public void setOnCoordinateFormatChangedListener(final CoordinatesFormatSwitcher.OnPositionChangedListener listener) {
+        this.coordinateFormatSwitcher.setOnPositionChangedListener(listener);
+    }
+
 }

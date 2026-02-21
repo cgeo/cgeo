@@ -131,7 +131,7 @@ public class LogActivityHelper {
             .setMessage(TextParam.id(R.string.log_delete_confirm,
                 entry.logType.getL10n(), entry.author, Formatter.formatShortDateVerbally(entry.date)))
             .setButtons(SimpleDialog.ButtonTextSet.YES_NO);
-        if (entry.isOwn()) {
+        if (LogUtils.isOwnLog(entry, cache)) {
             dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
         } else {
             dialog.input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));

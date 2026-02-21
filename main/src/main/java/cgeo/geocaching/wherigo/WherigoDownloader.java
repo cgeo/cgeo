@@ -36,7 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.oscim.utils.IOUtils;
 
 public class WherigoDownloader {
@@ -161,9 +161,9 @@ public class WherigoDownloader {
                 return cartridgeNotFound(type);
             }
             final Response response = downloadResponse.getResponse();
-            if (StringUtils.startsWith(type, "text/html")) {
+            if (Strings.CS.startsWith(type, "text/html")) {
                 final String body = downloadResponse.getBodyString();
-                if (StringUtils.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
+                if (Strings.CS.contains(body, "<textarea name=\"ctl00$ContentPlaceHolder1$EULAControl1$uxEulaText\"")) {
                     return new StatusResult(StatusCode.UNAPPROVED_LICENSE, LocalizationUtils.getString(R.string.wherigo_download_accept_eula));
                 } else {
                     return cartridgeNotFound(type);
@@ -221,6 +221,4 @@ public class WherigoDownloader {
             success = success & (completed == total);
             return success ? StatusResult.OK : new StatusResult(StatusCode.COMMUNICATION_ERROR, errorMsg);
     }
-
-
 }

@@ -78,6 +78,7 @@ import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.text.StringEscapeUtils;
@@ -214,7 +215,7 @@ public final class GCParser {
             return UNKNOWN_PARSE_ERROR;
         }
 
-        if (StringUtils.contains(pageIn, GCConstants.STRING_404_FILE_NOT_FOUND)) {
+        if (Strings.CS.contains(pageIn, GCConstants.STRING_404_FILE_NOT_FOUND)) {
             return ImmutablePair.of(StatusCode.CACHE_NOT_FOUND, null);
         }
 
@@ -378,7 +379,7 @@ public final class GCParser {
         if (result != null) {
             // replace linebreak and paragraph tags
             final String hint = GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
-            cache.setHint(StringUtils.replace(hint, "</p>", "").trim());
+            cache.setHint(Strings.CS.replace(hint, "</p>", "").trim());
         }
 
         cache.checkFields();
@@ -479,7 +480,7 @@ public final class GCParser {
             final String url = matcherBackgroundImage.group(1);
             boolean present = false;
             for (final Image image : cacheSpoilers) {
-                if (StringUtils.equals(image.getUrl(), url)) {
+                if (Strings.CS.equals(image.getUrl(), url)) {
                     present = true;
                     break;
                 }
@@ -587,7 +588,7 @@ public final class GCParser {
 
                     // waypoint latitude and longitude
                     latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
-                    if (!StringUtils.startsWith(latlon, "???")) {
+                    if (!Strings.CS.startsWith(latlon, "???")) {
                         waypoint.setCoords(new Geopoint(latlon));
                     } else {
                         waypoint.setOriginalCoordsEmpty(true);
@@ -1245,7 +1246,7 @@ public final class GCParser {
                 final String title = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE_TITLE, true, "");
                 if (StringUtils.isNotBlank(title)) {
                     final String nameWithHTML = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "");
-                    final int pos = StringUtils.lastIndexOfIgnoreCase(title, nameWithHTML);
+                    final int pos = Strings.CI.lastIndexOf(title, nameWithHTML);
                     if (pos != INDEX_NOT_FOUND) {
                         type = substring(title, 0, pos - 3);
                         type = TextUtils.stripHtml(type);
@@ -1360,9 +1361,9 @@ public final class GCParser {
                 final String details = StringUtils.trim(matcherDetailsImage.group(4));
 
                 if (StringUtils.isNotEmpty(image)) {
-                    trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
+                    trackable.setImage(Strings.CS.replace(image, "/display/", "/large/"));
                 }
-                if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
+                if (StringUtils.isNotEmpty(details) && !Strings.CS.equals(details, "No additional details available.")) {
                     trackable.setDetails(convertLinks(details));
                 }
             }
@@ -1441,7 +1442,7 @@ public final class GCParser {
         }
 
         // tracking code
-        if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(), possibleTrackingcode)) {
+        if (!Strings.CI.equals(trackable.getGeocode(), possibleTrackingcode)) {
             trackable.setTrackingcode(possibleTrackingcode);
         }
 
@@ -1456,7 +1457,7 @@ public final class GCParser {
         if (input == null) {
             return null;
         }
-        return StringUtils.replace(input, "../", GCConstants.GC_URL);
+        return Strings.CS.replace(input, "../", GCConstants.GC_URL);
     }
 
     public enum Logs {
@@ -1563,7 +1564,7 @@ public final class GCParser {
                         final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                         final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                         String description = image.path("Descr").asText();
-                        if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
+                        if (Strings.CS.contains(description, "Geocaching®") && description.length() < 60) {
                             description = null;
                         }
                         final Image logImage = new Image.Builder()
@@ -1966,7 +1967,7 @@ public final class GCParser {
         GCLogin.putViewstates(params, viewstates);
         final String response = Network.getResponseData(Network.postRequest(uri, params));
 
-        return StringUtils.contains(response, "<p class=\"Success\">");
+        return Strings.CS.contains(response, "<p class=\"Success\">");
     }
 
     @Nullable

@@ -34,6 +34,7 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlSerializer;
 
 public final class GpxSerializer {
@@ -300,7 +301,7 @@ public final class GpxSerializer {
         }
         // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase(Waypoint.PREFIX_OWN, wp.getPrefix())) {
+            if (StringUtils.isBlank(wp.getPrefix()) || Strings.CI.equals(Waypoint.PREFIX_OWN, wp.getPrefix())) {
                 maxPrefix++;
                 wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
             }
@@ -435,7 +436,7 @@ public final class GpxSerializer {
 
     private static String getLocationPart(@NonNull final Geocache cache, final int partIndex) {
         final String location = cache.getLocation();
-        if (StringUtils.contains(location, ", ")) {
+        if (Strings.CS.contains(location, ", ")) {
             final String[] parts = StringUtils.split(location, ',');
             if (parts.length == 2) {
                 return StringUtils.trim(parts[partIndex]);

@@ -304,7 +304,7 @@ public interface IConnector {
      * @return the URL to an account for a user or {@code null}
      */
     @Nullable
-    String geMyAccountUrl();
+    String getMyAccountUrl();
 
     /**
      * abbreviation of the connector name for shorter display, e.g. for main page login status

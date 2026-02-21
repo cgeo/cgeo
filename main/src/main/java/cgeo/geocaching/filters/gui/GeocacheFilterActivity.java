@@ -50,8 +50,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.NotNull;
-
 
 /**
  * Show a filter selection using an {@code ExpandableListView}.
@@ -160,7 +158,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void initializeStorageOptions() {
 
-        //handling of "save" button
+        // handling of "save" button
         binding.filterStorageSave.setOnClickListener(v -> {
             final String filterName = GeocacheFilter.getPurifiedFilterName(binding.filterStorageName.getText().toString());
             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_title)
@@ -176,7 +174,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         });
         ViewUtils.setTooltip(binding.filterStorageSave, TextParam.id(R.string.cache_filter_storage_save_title));
 
-        //handling of "load/delete" button
+        // handling of "load/delete" button
         binding.filterStorageManage.setOnClickListener(v -> {
             final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
 
@@ -187,7 +185,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 model
                     .setItemActionIconMapper((f) -> ImageParam.id(R.drawable.ic_menu_delete))
                     .setItemActionListener((f) -> {
-                        //DELETE action was tapped for a filter
+                        // DELETE action was tapped for a filter
                         model.getDialog().dismiss();
                         SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_delete_title)
                                 .setMessage(R.string.cache_filter_storage_delete_message)
@@ -205,7 +203,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             }
         });
         ViewUtils.setTooltip(binding.filterStorageManage, TextParam.id(R.string.cache_filter_storage_load_delete_title));
-
     }
 
     private void saveAs(final String newName) {
@@ -308,8 +305,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             }
         }
 
-
-        //set basic/advanced switch -> AFTER list is re-layouted
+        // set basic/advanced switch -> AFTER list is re-layouted
         if (!forceAdvanced && !setAdvanced && isBasicPossibleWithoutLoss()) {
             switchToBasic();
         } else {
@@ -334,7 +330,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                     binding.filterList.smoothScrollToPosition(0);
                     adjustFilterEmptyView();
                 }, false);
-
     }
 
     private void adjustFilterEmptyView() {
@@ -379,8 +374,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         super.onBackPressed();
     }
 
-
-    @NotNull
+    @NonNull
     private GeocacheFilter getFilterFromView() {
         IGeocacheFilter filter = null;
 
@@ -461,7 +455,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             }
         }
 
-        //repaint view
+        // repaint view
         this.filterListAdapter.notifyItemRangeChanged(0, this.filterListAdapter.getItemCount());
 
         adjustFilterEmptyView();
@@ -508,7 +502,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             this.filterListAdapter.removeItem(this.filterListAdapter.getItemCount() - 1);
         }
 
-        //repaint view
+        // repaint view
         this.filterListAdapter.notifyItemRangeChanged(0, this.filterListAdapter.getItemCount());
 
         adjustFilterEmptyView();
@@ -543,7 +537,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 ((ViewGroup) view.getParent()).removeAllViews();
             }
             insertPoint.addView(view);
-
         }
 
         public void setAdvancedMode(final boolean isAdvanced) {
@@ -551,11 +544,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             binding.filterDrag.setVisibility(isAdvanced ? View.VISIBLE : View.GONE);
             this.filterViewHolder.setAdvancedMode(isAdvanced);
         }
-
     }
 
     private final class FilterListAdapter extends ManagedListAdapter<IFilterViewHolder<?>, ItemHolder> {
-
 
         private FilterListAdapter(final RecyclerView recyclerView) {
             super(new ManagedListAdapter.Config(recyclerView)
@@ -571,8 +562,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             setTheme();
         }
 
-        @NonNull
         @Override
+        @NonNull
         public ItemHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cache_filter_list_item, parent, false);
             final ItemHolder viewHolder = new ItemHolder(view);
@@ -589,12 +580,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             fillViewHolder(holder, getItem(position));
             holder.setAdvancedMode(isAdvancedView());
         }
-
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
-
 }

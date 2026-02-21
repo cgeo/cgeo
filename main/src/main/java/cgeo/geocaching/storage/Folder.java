@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a concrete definite folder / directory on disk.
@@ -35,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
  * are NOT considered equal!
  */
 public class Folder {
-
 
     public enum FolderType {
         /**
@@ -85,7 +83,6 @@ public class Folder {
 
         this.subfolders = subfolders == null ? Collections.emptyList() : subfolders;
         this.subfolderString = CollectionStream.of(this.subfolders).toJoinedString("/");
-
     }
 
     /**
@@ -241,7 +238,6 @@ public class Folder {
 
         //we did our best, giving up now
         return null;
-
     }
 
     /**
@@ -316,8 +312,8 @@ public class Folder {
         return configString.toString();
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String toString() {
         //We can't print the REAL Uri this Folder points to since this would require a call to ContentStorage
         return toUserDisplayableString() +

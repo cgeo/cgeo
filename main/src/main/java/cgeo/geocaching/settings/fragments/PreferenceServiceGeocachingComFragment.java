@@ -22,6 +22,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCompat {
     @Override
@@ -32,7 +33,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
         final String urlOrHost = GCConnector.getInstance().getHost();
         PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
-            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            final String url = Strings.CS.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });

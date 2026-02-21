@@ -11,12 +11,20 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <include
+        android:id="@+id/appToolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignTop="@id/background"
+        android:layout_alignParentTop="true" />
+
     <FrameLayout
         android:id="@+id/activity_content"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/activity_navigationBar" />
+        android:layout_above="@id/activity_navigationBar" /><!-- android:layout_below="@id/appToolbar" -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activity_navigationBar"

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -105,7 +105,7 @@ public class FormatterTest  {
     @Test
     public void testFormatStoredAgo() {
         // skip test on non english device
-        if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+        if (!Strings.CS.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
             return;
         }
         assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored ");

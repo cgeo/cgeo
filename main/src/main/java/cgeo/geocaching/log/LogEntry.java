@@ -507,15 +507,6 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Check if the LogEntry is owned by the current configured user on geocaching.com connector.
-     *
-     * @return {@code true} if LogEntry is from current user
-     */
-    public boolean isOwn() {
-        return author.equalsIgnoreCase(Settings.getUserName());
-    }
-
-    /**
      * Checks, if the logs are representing the same log-entry.
      * Log-text can be empty (to deal with field-notes)
      */

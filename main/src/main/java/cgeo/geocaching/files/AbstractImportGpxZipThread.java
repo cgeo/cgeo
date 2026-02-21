@@ -21,7 +21,7 @@ import java.util.zip.ZipEntry;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.utils.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
@@ -37,12 +37,12 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
     protected Collection<Geocache> doImport(final GPXParser parser) throws IOException, ParserException {
         // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
         // 1. parse GPX files (all except waypoint files)
-        if (!parseZipFileGpxContent(parser, filename -> !StringUtils.endsWithIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION),
+        if (!parseZipFileGpxContent(parser, filename -> !Strings.CI.endsWith(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION),
                 GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename)) {
             throw new ParserException("Imported ZIP does not contain a GPX file.");
         }
         // 2. parse only waypoint files
-        parseZipFileGpxContent(parser, filename -> StringUtils.endsWithIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION),
+        parseZipFileGpxContent(parser, filename -> Strings.CI.endsWith(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION),
                 GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints_with_filename);
         return caches;
     }
@@ -63,7 +63,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
             int ignoredFiles = 0;
             for (ZipEntry zipEntry = zisPass.getNextZipEntry(); zipEntry != null; zipEntry = zisPass.getNextZipEntry()) {
                 gpxFileName = zipEntry.getName();
-                if (StringUtils.endsWithIgnoreCase(gpxFileName, FileUtils.GPX_FILE_EXTENSION)) {
+                if (Strings.CI.endsWith(gpxFileName, FileUtils.GPX_FILE_EXTENSION)) {
                     if (filenameMatcher.test(gpxFileName)) {
                         final long size = zipEntry.getSize();
                         importStepHandler.sendMessage(importStepHandler.obtainMessage(importStep, stepText, (int) (size == -1 ? getZipFileSize(gpxFileName) : size), getSourceDisplayName()));

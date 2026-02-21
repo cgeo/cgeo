@@ -68,6 +68,7 @@ import java.util.List;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class DownloaderUtils {
@@ -404,7 +405,7 @@ public class DownloaderUtils {
         final List<ImmutableTriple<Integer, String, CharSequence>> offlineItems = new ArrayList<>();
 
         for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS)) {
-            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.MAP_FILE_EXTENSION)) {
+            if (!fi.isDirectory && Strings.CI.endsWith(fi.name, FileUtils.MAP_FILE_EXTENSION)) {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOAD_TYPE_ALL_MAPS.id, fi.name, fi.name));
             }
         }
@@ -414,7 +415,7 @@ public class DownloaderUtils {
             }
         }
         for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.BACKGROUND_MAPS)) {
-            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
+            if (!fi.isDirectory && Strings.CI.endsWith(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id, fi.name, fi.name));
             }
         }
@@ -473,7 +474,7 @@ public class DownloaderUtils {
                         if (folder != null) {
                             final List<ContentStorage.FileInformation> files = cs.list(folder);
                             for (ContentStorage.FileInformation fi : files) {
-                                if (StringUtils.equals(fi.name, offlineItem.middle)) {
+                                if (Strings.CS.equals(fi.name, offlineItem.middle)) {
                                     cs.delete(fi.uri);
                                 }
                             }
@@ -618,5 +619,4 @@ public class DownloaderUtils {
 
         SimpleDialog.of(activity).setTitle(R.string.debug_current_downloads).setMessage(TextParam.text(sb.toString()).setMarkdown(true)).show();
     }
-
 }

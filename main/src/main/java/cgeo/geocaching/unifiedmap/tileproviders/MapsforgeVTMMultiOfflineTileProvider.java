@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.oscim.core.BoundingBox;
 import org.oscim.layers.tile.buildings.BuildingLayer;
@@ -88,7 +89,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             for (String language : languagesPreference.split(",")) {
                 boolean found = false;
                 for (String comp : languages) {
-                    if (StringUtils.equals(comp, language)) {
+                    if (Strings.CS.equals(comp, language)) {
                         found = true;
                         break;
                     }
@@ -99,5 +100,4 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             }
         }
     }
-
 }

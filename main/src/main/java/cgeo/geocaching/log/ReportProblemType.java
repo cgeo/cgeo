@@ -17,6 +17,7 @@ public enum ReportProblemType {
     NO_PROBLEM("noProblem", LogType.UNKNOWN, R.string.log_problem_none, R.string.log_problem_none),
     NEEDS_MAINTENANCE("needsMaintenance", LogType.NEEDS_MAINTENANCE, R.string.log_problem_needs_maintenance_label, R.string.log_problem_needs_maintenance_text), // OC only
     LOG_FULL("logFull", LogType.NEEDS_MAINTENANCE, R.string.log_problem_log_full_label, R.string.log_problem_log_full_text, new LogType[]{LogType.DIDNT_FIND_IT}, false),
+    LOG_WET("logWet", LogType.NEEDS_MAINTENANCE, R.string.log_problem_log_wet_label, R.string.log_problem_log_wet_text, new LogType[]{LogType.DIDNT_FIND_IT}, false),
     DAMAGED("damaged", LogType.NEEDS_MAINTENANCE, R.string.log_problem_damaged_label, R.string.log_problem_damaged_text, new LogType[]{LogType.DIDNT_FIND_IT}, false),
     MISSING("missing", LogType.NEEDS_MAINTENANCE, R.string.log_problem_missing_label, R.string.log_problem_missing_text, new LogType[]{LogType.FOUND_IT, LogType.WEBCAM_PHOTO_TAKEN}),
     OTHER("other", LogType.NEEDS_MAINTENANCE, R.string.log_problem_other_label, R.string.log_problem_other_text),

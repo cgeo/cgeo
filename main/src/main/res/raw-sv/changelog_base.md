@@ -1,13 +1,13 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
+På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna version av c:geo-mål + vi har ändrat några av skärmlayoutrutinerna. Detta kan komma med några oönskade biverkningar, särskilt på nyare Android-versioner. Om du har problem med denna version av c:geo, vänligen rapportera antingen på [GitHub](https://github.com/cgeo/cgeo) eller via e-post till [support@cgeo.org](mailto:support@cgeo.org)
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+Äldre kartor: Som meddelats med utgåvorna från 2025.07.17 och 2025.12.01, har vi äntligen tagit bort äldre implementationer för våra kartor. Du kommer att bytas till vår nya UnifiedMap automatiskt och bör inte märka några skillnader förutom ett par nya funktioner, varav några är
 - Kartrotation för OpenStreetMap-baserade kartor (online + offline)
 - Klusterpopup för Google Maps
 - Dölj kartkällor som du inte behöver
 - Höjddiagram för rutter och spår
 - Växla mellan listor direkt från kartan
 - "Körläge" för OpenStreetMap-baserade kartor
-- Long-tap on track / individual route for further options
+- Långtryck på spåret / individuell rutt för ytterligare alternativ
 
 ### Karta
 - Nyhet: Ruttoptimering cachar beräknade data
@@ -19,6 +19,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nyhet: Stöd för Motorider-tema (endast VTM)
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
+- Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -37,6 +38,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nytt: Platshållare för loggning av spårbara (geocache-namn, geocache-kod, användare)
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
+- Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -66,4 +68,4 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Nyhet: Gör fjärr-URI klickbar i väntande nedladdningar
 - Ändring: Använd systeminställningar som standardtema för nya installationer
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Nytt: Visa ångra-fältet när cacher tas bort från listan från kartan

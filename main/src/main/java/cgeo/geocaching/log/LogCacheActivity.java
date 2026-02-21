@@ -902,8 +902,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                     .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
                     .setDisplayMapperPure(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypesAllowedForInventory())
-                    .set(action)
-                    .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt));
+                    .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt))
+                    .set(action);
 
 
             holder.binding.info.setOnClickListener(view -> {

@@ -53,6 +53,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -409,7 +410,7 @@ public class GCLogin extends AbstractLogin {
 
     private void setHomeLocation() {
         final String homeLocationStr = retrieveHomeLocation();
-        if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+        if (StringUtils.isNotBlank(homeLocationStr) && !Strings.CS.equals(homeLocationStr, Settings.getHomeLocation())) {
             Log.i("Setting home location to " + homeLocationStr);
             Settings.setHomeLocation(homeLocationStr);
         }
@@ -611,7 +612,7 @@ public class GCLogin extends AbstractLogin {
      * remove the white space from cache details pages.
      */
     private static boolean canRemoveWhitespace(final String uri) {
-        return !StringUtils.contains(uri, "cache_details");
+        return !Strings.CS.contains(uri, "cache_details");
     }
 
     private StatusCode completeLoginProcess() {

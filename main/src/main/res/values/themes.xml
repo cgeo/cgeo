@@ -2,12 +2,7 @@
 <resources>
 
     <!-- theme for (nearly) all activities -->
-    <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Action bar theming -->
-        <item name="actionBarTheme">@style/actionBarTheme</item>
-        <item name="actionBarStyle">@style/actionBarStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>
-
+    <style name="cgeo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- UX component styles -->
         <item name="checkboxStyle">@style/checkboxStyle</item>
         <item name="radioButtonStyle">@style/radioButtonStyle</item>
@@ -15,6 +10,7 @@
         <item name="android:textAppearanceMedium">@style/text_default</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
         <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
+        <item name="actionBarPopupTheme">@style/appToolbarPopup</item>
 
         <!-- set Material theme colors -->
         <item name="colorOnBackground">@color/colorText</item>
@@ -37,17 +33,28 @@
 
     </style>
 
+    <style name="cgeo.withWallpaper" parent="cgeo">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowShowWallpaper">true</item>
+    </style>
+
+    <!-- toolbar formatting -->
+
     <style name="cgeo.coloredToolbar" parent="cgeo">
         <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow2</item>
     </style>
 
     <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="titleTextColor">@color/colorTextActionBar</item>
+        <item name="subtitleTextColor">@color/colorTextHintActionBar</item>
     </style>
 
-    <style name="cgeo.withWallpaper" parent="cgeo">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowShowWallpaper">true</item>
+    <!-- ensures correct color for headings of submenus in appToolbar -->
+    <style name="appToolbarPopup" parent="ThemeOverlay.MaterialComponents">
+        <item name="colorControlNormal">@color/colorText</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- theme for alert dialogs -->

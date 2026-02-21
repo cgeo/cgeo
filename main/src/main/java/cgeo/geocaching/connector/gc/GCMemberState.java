@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import androidx.annotation.NonNull;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public enum GCMemberState {
     UNKNOWN(""),
@@ -23,13 +23,12 @@ public enum GCMemberState {
 
     @NonNull
     public static GCMemberState fromString(final String id) {
-        if (StringUtils.containsIgnoreCase(id, PREMIUM.id)) {
+        if (Strings.CI.contains(id, PREMIUM.id)) {
             return PREMIUM;
         }
-        if (StringUtils.containsIgnoreCase(id, CHARTER.id)) {
+        if (Strings.CI.contains(id, CHARTER.id)) {
             return CHARTER;
         }
         return GCMemberState.BASIC;
     }
-
 }

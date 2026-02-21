@@ -15,6 +15,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -43,12 +44,14 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     public static final int REQUEST_CODE_TARGET_INFO = 1;
     protected static final String GEOCODE_ARG = "GEOCODE";
     protected static final String WAYPOINT_ARG = "WAYPOINT";
+    private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
     protected Geocache cache;
     private TextView cacheDistance = null;
+    private int coordinateFormatPosition = 0;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
@@ -70,6 +73,15 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         super.onCreate(savedInstanceState);
         res = getResources();
         setHasOptionsMenu(true);
+        if (savedInstanceState != null) {
+            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
     }
 
     @Override
@@ -141,7 +153,10 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         }
 
         details.addBetterCacher(cache);
-        details.addCoordinates(cache.getCoords());
+        final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+        if (coordinateSwitcher != null) {
+            coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+        }
 
         // Latest logs
         details.addLatestLogs(cache);

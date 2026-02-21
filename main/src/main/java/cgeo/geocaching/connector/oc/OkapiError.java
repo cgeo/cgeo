@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Handles the JSON error response from OKAPI
@@ -43,10 +44,10 @@ public class OkapiError {
                 // Check reason_stack element to look for the specific oauth problems we want to report back
                 if (error.has("reason_stack")) {
                     final String reason = error.get("reason_stack").asText();
-                    if (StringUtils.contains(reason, "invalid_oauth_request")) {
-                        if (StringUtils.contains(reason, "invalid_timestamp")) {
+                    if (Strings.CS.contains(reason, "invalid_oauth_request")) {
+                        if (Strings.CS.contains(reason, "invalid_timestamp")) {
                             localstate = OkapiErrors.INVALID_TIMESTAMP;
-                        } else if (StringUtils.contains(reason, "invalid_token")) {
+                        } else if (Strings.CS.contains(reason, "invalid_token")) {
                             localstate = OkapiErrors.INVALID_TOKEN;
                         }
                     }
@@ -83,5 +84,4 @@ public class OkapiError {
     public String getMessage() {
         return message;
     }
-
 }

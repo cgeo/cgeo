@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Aquest geocatxer va informar que hi ha un problema amb aquest catxé.</string>
     <string name="log_problem_log_full_label">El llibre de registre està ple</string>
     <string name="log_problem_log_full_text">Aquest geocatxer va informar que el llibre de registre és ple.</string>
+    <string name="log_problem_log_wet_label">El llibre de registre està mullat</string>
+    <string name="log_problem_log_wet_text">Aquest geocatxer ha informat que el llibre de registre està mullat.</string>
     <string name="log_problem_damaged_label">El contenidor està danyat</string>
     <string name="log_problem_damaged_text">Aquest geocatxer va informar que el contenidor està danyat.</string>
     <string name="log_problem_missing_label">El catxé pot haver estat espoliat</string>
@@ -1061,6 +1063,10 @@
         <item>Clar</item>
         <item>Fosc</item>
     </string-array>
+    <string name="init_colored_theme_dark">Tema de color fosc</string>
+    <string name="init_colored_theme_light">Tema de color clar</string>
+    <string name="init_summary_colored_theme_dark">Utilitza la barra d\'eines de color en el tema fosc</string>
+    <string name="init_summary_colored_theme_light">Utilitza la barra d\'eines de colors en el tema clar</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Pantalla per defecte</string>
     <string name="init_wallpaper">Fons de pantalla</string>
@@ -1841,8 +1847,15 @@
     <string name="formula_function_lettervalue">Valor de paraula</string>
     <string name="formula_function_roman">Romà a Decimal</string>
     <string name="formula_function_vanity">Codi Vanity</string>
+    <string name="formula_function_add">Afegir</string>
+    <string name="formula_function_multiply">Multiplicar</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Màx</string>
+    <string name="formula_function_count">Compte</string>
+    <string name="formula_function_average">Mitjana</string>
     <string name="formula_function_group_simplenumeric">Numèric simple</string>
     <string name="formula_function_group_complexnumeric">Numèric complex</string>
+    <string name="formula_function_group_aggregatenumeric">Agregat numèric</string>
     <string name="formula_function_group_simplestring">Cadena simple</string>
     <string name="formula_function_group_complexstring">Cadena complexa</string>
     <string name="formula_error_unexpectedtoken">S\'està esperant \"%1$s\"</string>
@@ -1852,6 +1865,7 @@
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
     <string name="formula_error_numeric_overflow">Desbordament numèric</string>
+    <string name="formula_error_invalid_range">Interval no vàlid: %1$s</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sense títol</string>

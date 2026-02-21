@@ -71,6 +71,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * An {@link AppCompatActivity} that presents a set of application settings. On
@@ -183,7 +184,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                 final String query = intent.getStringExtra(SearchManager.QUERY);
                 synchronized (searchIndex) {
                     for (BasePreferenceFragment.PrefSearchDescriptor item : searchIndex) {
-                        if (StringUtils.containsIgnoreCase(item.prefTitle, query) || StringUtils.containsIgnoreCase(item.prefSummary, query)) {
+                        if (Strings.CI.contains(item.prefTitle, query) || Strings.CI.contains(item.prefSummary, query)) {
                             openRequestedFragment(item.baseKey, item.prefKey);
                             found = true;
                             break;
@@ -223,7 +224,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         if (fragmentId < 0 && StringUtils.isNotBlank(preference)) {
             synchronized (searchIndex) {
                 for (BasePreferenceFragment.PrefSearchDescriptor pref : searchIndex) {
-                    if (StringUtils.equals(preference, pref.prefKey)) {
+                    if (Strings.CS.equals(preference, pref.prefKey)) {
                         fragment = pref.baseKey;
                         break;
                     }
@@ -239,7 +240,6 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             } catch (Exception ignore) {
                 fragment = "";
             }
-
         }
         openRequestedFragment(fragment, preference);
     }
@@ -256,51 +256,51 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         Fragment preferenceFragment = new PreferencesFragmentRoot();
 
         // main configuration screens
-        if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
+        if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_appearance))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_appearance))) {
             preferenceFragment = new PreferenceAppearanceFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
             preferenceFragment = new PreferenceCachedetailsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_sources))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_map_sources))) {
             preferenceFragment = new PreferenceMapSourcesFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_content_behavior))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_map_content_behavior))) {
             preferenceFragment = new PreferenceMapContentBehaviorFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_logging))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_logging))) {
             preferenceFragment = new PreferenceLoggingFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_offlinedata))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_offlinedata))) {
             preferenceFragment = new PreferenceOfflinedataFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_navigation))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_navigation))) {
             preferenceFragment = new PreferenceNavigationFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_system))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_system))) {
             preferenceFragment = new PreferenceSystemFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_backup))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_backup))) {
             preferenceFragment = new PreferenceBackupFragment();
 
         // service configuration screens
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_sendtocgeo))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_sendtocgeo))) {
             preferenceFragment = new PreferenceServiceSendToCgeoFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_geokrety))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_geokrety))) {
             preferenceFragment = new PreferenceServiceGeokretyOrgFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_gc))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_gc))) {
             preferenceFragment = new PreferenceServiceGeocachingComFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocde))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocde))) {
             preferenceFragment = new PreferenceServiceOpencachingDeFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocuk))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocuk))) {
             preferenceFragment = new PreferenceServiceOpencacheUkFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocnl))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocnl))) {
             preferenceFragment = new PreferenceServiceOpencachingNlFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocpl))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocpl))) {
             preferenceFragment = new PreferenceServiceOpencachingPlFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocus))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocus))) {
             preferenceFragment = new PreferenceServiceOpencachingUsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocro))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ocro))) {
             preferenceFragment = new PreferenceServiceOpencachingRoFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_al))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_al))) {
             preferenceFragment = new PreferenceServiceGeocachingComAdventureLabsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ec))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_ec))) {
             preferenceFragment = new PreferenceServiceExtremcachingComFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_su))) {
+        } else if (Strings.CS.equals(baseKey, getString(R.string.preference_screen_su))) {
             preferenceFragment = new PreferenceServiceGeocachingSuFragment();
         }
 
@@ -359,7 +359,6 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         }
         return super.onSupportNavigateUp();
     }
-
 
     @Override
     public boolean onPreferenceStartFragment(@NonNull final PreferenceFragmentCompat caller, @NonNull final Preference pref) {
@@ -449,7 +448,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             searchIndex.addAll(data);
             if (StringUtils.isNotBlank(delayedOpenPreference)) {
                 for (BasePreferenceFragment.PrefSearchDescriptor pref : data) {
-                    if (StringUtils.equals(delayedOpenPreference, pref.prefKey)) {
+                    if (Strings.CS.equals(delayedOpenPreference, pref.prefKey)) {
                         openRequestedFragment(pref.baseKey, delayedOpenPreference);
                         delayedOpenPreference = null;
                         break;
@@ -463,7 +462,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
     private void scrollToCallback(final String baseKey, final String prefKey) {
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             final PreferenceScreen prefScreen = ((PreferenceFragmentCompat) fragment).getPreferenceScreen();
-            if (prefScreen != null && StringUtils.equalsIgnoreCase(prefScreen.getKey(), baseKey)) {
+            if (prefScreen != null && Strings.CI.equals(prefScreen.getKey(), baseKey)) {
                 final Preference pref = prefScreen.findPreference(prefKey);
                 if (pref != null) {
                     ((PreferenceFragmentCompat) fragment).scrollToPreference(pref);
@@ -515,7 +514,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             if (searchTerm.length() > 2) {
                 synchronized (searchdata) {
                     for (BasePreferenceFragment.PrefSearchDescriptor item : searchdata) {
-                        if ((StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) && (showExtended || item.isBasicSetting)) {
+                        if ((Strings.CI.contains(item.prefTitle, searchTerm) || Strings.CI.contains(item.prefSummary, searchTerm)) && (showExtended || item.isBasicSetting)) {
                             resultCursor.addItem(item.prefTitle, item.prefSummary, item.prefKey, item.prefCategoryIconRes);
                         }
                     }
@@ -543,7 +542,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         if (StringUtils.isBlank(text)) {
             return null;
         }
-        final int iPos = StringUtils.indexOfIgnoreCase(text, searchTerm);
+        final int iPos = Strings.CI.indexOf(text, searchTerm);
         final Spannable s = new SpannableString(text);
         if (iPos >= 0) {
             s.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.colorAccent)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -563,7 +562,5 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             activity.findViewById(R.id.settings_fragment_divider).setVisibility(View.GONE);
             activity.findViewById(R.id.settings_fragment_content_root).setVisibility(View.GONE);
         }
-
     }
-
 }

@@ -30,7 +30,8 @@
 
                 <TextView
                     android:id="@+id/added"
-                    style="@style/logitem_property"/>
+                    style="@style/logitem_property"
+                    android:maxLines="2" />
 
                 <TextView
                     android:id="@+id/type"

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.Nullable;
 
 public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
@@ -61,7 +61,6 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         }
     }
 
-
     public View createView() {
 
         this.statistics = calculateStatistics();
@@ -71,7 +70,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        //selectall/none
+        // selectall/none
         ll.addView(ViewUtils.createColumnView(getActivity(), null, columnCount, false, i -> {
             if (i < columnCount - 1) {
                 return null;
@@ -87,7 +86,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             this.visibleValues.retainAll(this.alwaysVisibleItems);
         }
 
-        //addItems / addallItems
+        // addItems / addallItems
         final LinearLayout llButtons = new LinearLayout(getActivity());
         llButtons.setOrientation(LinearLayout.HORIZONTAL);
         llButtons.addView(createAddItemButton(ll));
@@ -154,7 +153,6 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
         return this.addAllItemsButton;
     }
-
 
     void relayout() {
 
@@ -229,7 +227,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
                 break;
             }
         }
-        //avoid that setting all/none-checkbox leads to setting other checkbox values here
+        // avoid that setting all/none-checkbox leads to setting other checkbox values here
         selectAllNoneBroadcast = false;
         selectAllNoneCheckbox.right.setChecked(allChecked);
         selectAllNoneBroadcast = true;

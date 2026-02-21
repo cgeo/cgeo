@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Provides access to Location Data (GNSS) via Android's Location Manager (Context.LOCATION_SERVICE)
@@ -69,7 +69,7 @@ public class GeoDataProvider {
 
         @Override
         public void onLocationChanged(final Location location) {
-            if (StringUtils.equals(location.getProvider(), LocationManager.GPS_PROVIDER)) {
+            if (Strings.CS.equals(location.getProvider(), LocationManager.GPS_PROVIDER)) {
                 latestGPSLocation.set(location);
                 assign(latestGPSLocation.get());
             } else {

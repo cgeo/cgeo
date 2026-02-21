@@ -21,6 +21,7 @@ import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
 import com.mapswithme.maps.api.MapsWithMeApi;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
@@ -53,7 +54,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
         if (point != null) {
             final String id = point.getId();
             // for unknown reason the ID is now actually a URI in recent maps.me versions
-            if (StringUtils.contains(id, "&id=")) {
+            if (Strings.CS.contains(id, "&id=")) {
                 return StringUtils.substringAfter(id, "&id=");
             }
             return id;
@@ -65,5 +66,4 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
         final Intent intent = new Intent(context, CacheDetailActivity.class);
         return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
     }
-
 }

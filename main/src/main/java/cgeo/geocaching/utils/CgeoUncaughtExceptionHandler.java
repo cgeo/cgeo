@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public final class CgeoUncaughtExceptionHandler {
 
@@ -24,7 +24,7 @@ public final class CgeoUncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
             // OkHttp threads can be interrupted when a request cancellation occurs, this should
             // be ignored.
-            if (StringUtils.startsWith(thread.getName(), "OkHttp ")) {
+            if (Strings.CS.startsWith(thread.getName(), "OkHttp ")) {
                 return;
             }
 
@@ -63,5 +63,4 @@ public final class CgeoUncaughtExceptionHandler {
             }
         });
     }
-
 }

@@ -19,6 +19,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Suport per al tema Motorider (només VTM)
 - Nou: Sense mapa (no mostra el mapa, només els catxés, etc.)
 - Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
+- Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -37,6 +38,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Espais reservats per al registre rastrejable (nom del geoamagatall, codi del geoamagatall, usuari)
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
+- Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -65,5 +67,5 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: opció "Ignora l'any" per als filtres de data
 - Nou: Feu que l'URI remot sigui clicable a les descàrregues pendents
 - Canvi: Utilitza la configuració del sistema com a tema per defecte per a les noves instal·lacions
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Nou: Exportació GPX: Escriu anotacions GSAK Lat/LonBeforeCorrect en exportar punts de referència originals
+- Nou: Mostra la barra de desfer en suprimir els catxés de la llista del mapa

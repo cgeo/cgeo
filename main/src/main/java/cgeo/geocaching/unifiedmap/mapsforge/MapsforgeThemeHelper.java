@@ -41,6 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.rendertheme.ContentRenderTheme;
@@ -247,7 +248,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         final List<ThemeData> selectableAvThemes = getAvailableThemes();
         for (final ThemeData theme : selectableAvThemes) {
             names.add(theme.userDisplayableName + (debugMode ? " (" + theme.id + ")" : ""));
-            if (StringUtils.equals(currentThemeId, theme.id)) {
+            if (Strings.CS.equals(currentThemeId, theme.id)) {
                 currentItem = idx;
             }
             idx++;
@@ -419,10 +420,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
      * @return user display theme name
      */
     private static String toUserDisplayableName(final FileInformation file, final String zipPath) {
-        String userDisplay = StringUtils.removeEnd(file.name, ".xml");
+        String userDisplay = Strings.CS.removeEnd(file.name, ".xml");
         if (zipPath != null) {
             final int idx = zipPath.lastIndexOf("/");
-            userDisplay = userDisplay + "/" + StringUtils.removeEnd(idx < 0 ? zipPath : zipPath.substring(idx + 1), ".xml");
+            userDisplay = userDisplay + "/" + Strings.CS.removeEnd(idx < 0 ? zipPath : zipPath.substring(idx + 1), ".xml");
         }
         return userDisplay;
     }
@@ -439,7 +440,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
         for (MapsforgeThemeHelper.RenderThemeType rtt : MapsforgeThemeHelper.RenderThemeType.values()) {
             for (String searchPath : rtt.searchPaths) {
-                if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
+                if (Strings.CI.contains(selectedMapRenderTheme, searchPath)) {
                     return rtt;
                 }
             }

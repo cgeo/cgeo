@@ -1072,6 +1072,10 @@
         <item>Světlý</item>
         <item>Tmavý</item>
     </string-array>
+    <string name="init_colored_theme_dark">Barevný tmavý motiv</string>
+    <string name="init_colored_theme_light">Barevný světlý motiv</string>
+    <string name="init_summary_colored_theme_dark">Použít barevný panel nástrojů v tmavém motivu</string>
+    <string name="init_summary_colored_theme_light">Použít barevný panel nástrojů ve světlém motivu</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Výchozí obrazovka</string>
     <string name="init_wallpaper">Tapeta</string>
@@ -1291,6 +1295,7 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
     <string name="map_source_google_terrain">Google: Terén</string>
+    <string name="map_source_osm_offline">Offline použití</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_nomap">Žádná mapa</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>

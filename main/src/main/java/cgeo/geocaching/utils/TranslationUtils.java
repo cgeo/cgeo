@@ -25,6 +25,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /** Utilities used for (c:geo-external) translation */
 public final class TranslationUtils {
@@ -109,8 +110,6 @@ public final class TranslationUtils {
         return getTranslator().getIcon();
     }
 
-
-
     public static void translate(final Activity activity, final String text) {
         final Translator translator = getTranslator();
         if (APP_PACKAGE_ANYAPP.equals(translator.appPackageName) || appIsAvailable(translator.appPackageName)) {
@@ -162,7 +161,7 @@ public final class TranslationUtils {
         }
         //build URL
         final String encodedText = Network.encode(text);
-        final String encodedTextWithSpace = StringUtils.replace(encodedText, "+", "%20");
+        final String encodedTextWithSpace = Strings.CS.replace(encodedText, "+", "%20");
         final String toLang = Locale.getDefault().getLanguage();
         final String url = String.format(urlPattern, encodedText, encodedTextWithSpace, toLang);
         //call actionView for URL

@@ -46,6 +46,10 @@ public class ValueList implements Iterable<Value> {
         return list.iterator();
     }
 
+    public List<Value> toList() {
+        return list.stream().toList();
+    }
+
     @NonNull
     public Value get(final int idx) {
         return isValidIdx(idx) ? list.get(idx) : Value.EMPTY;

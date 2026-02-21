@@ -3,17 +3,20 @@ package cgeo.geocaching.utils.formulas;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -57,11 +60,31 @@ public enum FormulaFunction {
     ROMAN(new String[]{"roman"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_roman, "Roman", "''", 1,
             singleValueStringFunction(FormulaUtils::roman)),
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
-            singleValueStringFunction(FormulaUtils::vanity));
+            singleValueStringFunction(FormulaUtils::vanity)),
+
+    ADD(new String[]{"add", "sum"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_add, "Add", "'A-C';5", 1,
+            RangeFormulaUtils.rangeOperationFunction(BigDecimal.ZERO, BigDecimal::add),
+            RangeFormulaUtils::getNeededVariablesForRange),
+    MULTIPLY(new String[]{"multiply", "product", "prod"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_multiply, "Multiply", "'A-C';5", 1,
+            RangeFormulaUtils.rangeOperationFunction(BigDecimal.ONE, BigDecimal::multiply),
+            RangeFormulaUtils::getNeededVariablesForRange),
+    MIN(new String[]{"minimum", "min"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_min, "Min", "A;B;5", 1,
+            RangeFormulaUtils.rangeOperationFunction(new BigDecimal("1E+1000"), BigDecimal::min),
+            RangeFormulaUtils::getNeededVariablesForRange),
+    MAX(new String[]{"maximum", "max"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_max, "Max", "A;B;5", 1,
+            RangeFormulaUtils.rangeOperationFunction(new BigDecimal("-1E+1000"), BigDecimal::max),
+            RangeFormulaUtils::getNeededVariablesForRange),
+    COUNT(new String[]{"count", "cnt"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_count, "Count", "'A-C';5", 1,
+            RangeFormulaUtils.rangeOperationFunction(BigDecimal.ZERO, (a, b) -> a.add(BigDecimal.ONE)),
+            RangeFormulaUtils::getNeededVariablesForRange),
+    AVERAGE(new String[]{"average", "avg"}, FunctionGroup.AGGREGATE_NUMERIC, R.string.formula_function_average, "Average", "'A-C';5", 1,
+            RangeFormulaUtils.rangeListFunction(FormulaUtils::average),
+            RangeFormulaUtils::getNeededVariablesForRange);
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
         COMPLEX_NUMERIC(R.string.formula_function_group_complexnumeric, "Complex Numeric"),
+        AGGREGATE_NUMERIC(R.string.formula_function_group_aggregatenumeric, "Aggretate Numeric"),
         SIMPLE_STRING(R.string.formula_function_group_simplestring, "Simple String"),
         COMPLEX_STRING(R.string.formula_function_group_complexstring, "Complex String");
 
@@ -81,7 +104,8 @@ public enum FormulaFunction {
 
 
     private final String[] names;
-    private final Function<ValueList, Object> function;
+    private final BiFunction<Function<String, Value>, ValueList, Object> function;
+    private final Function<List<Value>, Set<String>> explicitlyNeededVars;
 
     private final FunctionGroup group;
 
@@ -97,13 +121,18 @@ public enum FormulaFunction {
     static {
         for (final FormulaFunction cf : values()) {
             for (String name : cf.names) {
-                FUNC_BY_NAME.put(name, cf);
+                if (null != FUNC_BY_NAME.put(name, cf)) {
+                    throw new IllegalStateException("Duplicate function name: " + name);
+                }
             }
         }
     }
 
-
     FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Function<ValueList, Object> function) {
+        this(names, group, resId, resFallback, insertPattern, insertIndex, (v, p) -> function.apply(p), null);
+    }
+
+    FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final BiFunction<Function<String, Value>, ValueList, Object> function, final Function<List<Value>, Set<String>> explicitlyNeededVars) {
         this.names = names;
         this.group = group;
         this.function = function;
@@ -111,6 +140,7 @@ public enum FormulaFunction {
         this.resFallback = resFallback;
         this.insertPattern = insertPattern;
         this.insertIndex = insertIndex;
+        this.explicitlyNeededVars = explicitlyNeededVars;
     }
 
     public String[] getNames() {
@@ -137,14 +167,29 @@ public enum FormulaFunction {
         return group;
     }
 
+    @NonNull
+    public Set<String> getExplicitlyNeededVars(final List<Value> constantValues) {
+        if (this.explicitlyNeededVars == null || constantValues == null) {
+            return Collections.emptySet();
+        }
+        final Set<String> result = this.explicitlyNeededVars.apply(constantValues);
+        return result == null ? Collections.emptySet() : result;
+    }
+
+    @NonNull
     public Value execute(final ValueList params) throws FormulaException {
+        return execute(null, params);
+    }
+
+    @NonNull
+    public Value execute(final Function<String, Value> vars, final ValueList params) throws FormulaException {
         try {
-            final Object result = function.apply(params);
+            final Object result = function.apply(vars == null ? x -> null : vars, params);
             return result instanceof Value ? (Value) result : Value.of(result);
         } catch (FormulaException fe) {
             throw fe;
         } catch (RuntimeException re) {
-            throw new FormulaException(re, null, OTHER, re.getMessage());
+            throw new FormulaException(re, null, FormulaException.ErrorType.OTHER, re.getMessage());
         }
     }
 

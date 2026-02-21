@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
 
@@ -124,7 +125,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public static Trackable searchTrackable(final String geocode) {
         final int gkid;
 
-        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+        if (Strings.CI.startsWith(geocode, "GK")) {
             gkid = getId(geocode);
             if (gkid < 0) {
                 Log.d("GeokretyConnector.searchTrackable: Unable to retrieve GK numeric ID by ReferenceNumber");

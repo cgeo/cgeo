@@ -77,7 +77,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class MapUtils {
 
@@ -417,16 +417,16 @@ public class MapUtils {
 
         if (routeIsNotEmpty) {
             final String routeItemIdentifier = routeItem.getIdentifier();
-            final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
+            final boolean isStart = Strings.CS.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
             if (isStart) {
                 addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             for (int i = 1; i < segments.length - 1; i++) {
-                if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
+                if (Strings.CS.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
                     addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
-            isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
+            isEnd = (segments.length > 1) && Strings.CS.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
             if (isEnd) {
                 addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             } else {
@@ -492,9 +492,9 @@ public class MapUtils {
 
         final float textWidth = elevationTextPaint.measureText(info) + 10;
         final float yPos = height - 0.45f * textSizeInPx;
-        canvas.drawLine((float) (width - textWidth) / 2, yPos, (float) (width + textWidth) / 2, yPos, elevationPaint);
+        canvas.drawLine((width - textWidth) / 2, yPos, (width + textWidth) / 2, yPos, elevationPaint);
 
-        canvas.drawText(info, (int) (width / 2), height - 4, elevationTextPaint);
+        canvas.drawText(info, width / 2, height - 4, elevationTextPaint);
 
         return bm;
     }

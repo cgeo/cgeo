@@ -69,6 +69,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CompassMiniView;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
@@ -188,6 +189,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -307,7 +309,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             if (uriHost.contains("geocaching.com")) {
-                if (StringUtils.startsWith(uriPath, "/geocache/gc")) {
+                if (Strings.CS.startsWith(uriPath, "/geocache/gc")) {
                     geocode = StringUtils.substringBefore(uriPath.substring(10), "_").toUpperCase(Locale.US);
                 } else {
                     geocode = uri.getQueryParameter("wp");
@@ -417,7 +419,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
         }
 
-
         // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
@@ -429,7 +430,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         });
 
         // "go to" functionality deprecation notice
-        if (StringUtils.equals(geocode, InternalConnector.GEOCODE_HISTORY_CACHE)) {
+        if (Strings.CS.equals(geocode, InternalConnector.GEOCODE_HISTORY_CACHE)) {
             Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.GOTO_DEPRECATION_NOTICE);
         }
     }
@@ -1307,8 +1308,24 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
+        private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
         private CacheDetailsCreator.NameValueLine favoriteLine;
         private Geocache cache;
+        private int coordinateFormatPosition = 0;
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
+        }
 
         @Override
         public CachedetailDetailsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -1401,7 +1418,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             // cache coordinates
-            details.addCoordinates(cache.getCoords());
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+            }
 
             // Latest logs
             details.addLatestLogs(cache);
@@ -1756,7 +1776,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
             boolean isEnabled = false;
             for (String current : cache.getAttributes()) {
-                if (StringUtils.equals(current, compare)) {
+                if (Strings.CS.equals(current, compare)) {
                     isEnabled = true;
                     break;
                 }
@@ -2048,7 +2068,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         }
                         binding.descriptionTranslatedByGoogle.setVisibility(translator != null ? View.VISIBLE : View.GONE);
 
-                        if (status == null || StringUtils.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
+                        if (status == null || Strings.CS.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
                             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);
                         }
 
@@ -2212,7 +2232,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
+        private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS = "waypointCoordinateFormatPositions";
         private Geocache cache;
+        private final Map<Integer, Integer> waypointCoordinateFormatPositions = new HashMap<>();
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                @SuppressWarnings("unchecked")
+                final HashMap<Integer, Integer> savedMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS);
+                if (savedMap != null) {
+                    waypointCoordinateFormatPositions.putAll(savedMap);
+                }
+            }
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putSerializable(STATE_WAYPOINT_COORDINATE_FORMAT_POSITIONS, new HashMap<>(waypointCoordinateFormatPositions));
+        }
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -2392,6 +2432,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
+            // Set saved coordinate format position for this waypoint
+            final int waypointId = wpt.getId();
+            final int formatPosition = waypointCoordinateFormatPositions.getOrDefault(waypointId, 0);
+            holder.setCoordinateFormatPosition(formatPosition);
+            // Listen for format changes and save them
+            holder.setOnCoordinateFormatChangedListener(position -> waypointCoordinateFormatPositions.put(waypointId, position));
             CacheDetailsCreator.addShareAction(activity, coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
@@ -2450,7 +2496,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // user note
             final TextView userNoteView = holder.binding.userNote;
-            if (StringUtils.isNotBlank(wpt.getUserNote()) && !StringUtils.equals(wpt.getNote(), wpt.getUserNote())) {
+            if (StringUtils.isNotBlank(wpt.getUserNote()) && !Strings.CS.equals(wpt.getNote(), wpt.getUserNote())) {
                 userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
                 userNoteView.setVisibility(View.VISIBLE);
                 userNoteView.setText(wpt.getUserNote());
@@ -2709,7 +2755,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         String descriptionText = cache.getDescription();
         final String shortDescriptionText = cache.getShortDescription();
         if (StringUtils.isNotBlank(shortDescriptionText)) {
-            final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+            final int index = Strings.CS.indexOf(descriptionText, shortDescriptionText);
             // allow up to 200 characters of HTML formatting
             if (index < 0 || index > 200) {
                 descriptionText = shortDescriptionText + "\n" + descriptionText;
@@ -3112,5 +3158,4 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void setNeedsRefresh() {
         refreshOnResume = true;
     }
-
 }
