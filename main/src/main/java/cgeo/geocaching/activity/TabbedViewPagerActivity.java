@@ -91,14 +91,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         }).attach();
     }
 
-    @NonNull
-    @Override
-    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
-        final Insets skip = super.calculateInsetsForActivityContent(def); // only to trigger toolbar adjustment
-        Log.e("TabbedViewPagerActivity(given): left=" + def.left + ", top=" + def.top + ", right=" + def.right + ", bottom=" + def.bottom);
-        return def;
-    }
-
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
 
         @Override
