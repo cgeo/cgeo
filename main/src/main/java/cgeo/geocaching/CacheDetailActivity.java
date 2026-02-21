@@ -164,6 +164,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -433,6 +434,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (Strings.CS.equals(geocode, InternalConnector.GEOCODE_HISTORY_CACHE)) {
             Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.GOTO_DEPRECATION_NOTICE);
         }
+    }
+
+    @NonNull
+    @Override
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        if (Settings.useColoredActionBar(this)) {
+            final View ab = getActionBarView();
+            if (ab != null) {
+                // add statusbar height (= def.top) as padding to appBar, increasing its size accordingly, and set inset.top = 0
+                getActionBarView().setPadding(ab.getPaddingLeft(), def.top, ab.getPaddingRight(), ab.getPaddingBottom());
+                final ViewGroup.LayoutParams params = getActionBarView().getLayoutParams();
+                params.height = (int) (getResources().getDimension(R.dimen.actionbar_height) + def.top);
+                getActionBarView().setLayoutParams(params);
+                return Insets.of(def.left, 0, def.right, def.bottom);
+            }
+        }
+        return def;
     }
 
     @Override
