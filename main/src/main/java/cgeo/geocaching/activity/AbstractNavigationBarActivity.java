@@ -254,7 +254,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     protected Insets calculateInsetsWithToolbarInPortrait(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsWithToolbarInPortrait(def);
         final boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        return Insets.of(isPortrait ? insets.left : 0, insets.top, insets.right, isPortrait ? 0 : insets.bottom);
+        return Insets.of(isPortrait ? insets.left : 0, insets.top, insets.right, isPortrait && !hideNavigationBar ? 0 : insets.bottom);
     }
 
     @Override
