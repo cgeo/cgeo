@@ -65,6 +65,7 @@ import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
+import static cgeo.geocaching.list.StoredList.UserInterface.GROUP_SEPARATOR;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
 
@@ -2926,12 +2927,31 @@ public class DataStore {
         }
     }
 
+    /** returns names of parent lists only (without ending colons), sorted alphabetically */
     @NonNull
     public static List<String> getListHierarchy() {
         return withAccessLock(() -> {
-            final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists, new String[]{});
-            final List<String> result = cursorToColl(c, new ArrayList<>(), GET_STRING_0);
-            Collections.sort(result);
+            final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists + " ORDER BY title COLLATE NOCASE ASC", new String[]{});
+            return cursorToColl(c, new ArrayList<>(), GET_STRING_0);
+        });
+    }
+
+    /** returns all list names, grouped by parent/non-parent lists (parent list names ending with colon), each group sorted alphabetically */
+    @NonNull
+    public static List<String> getFullListHierarchy() {
+        return withAccessLock(() -> {
+            final List<String> result = new ArrayList<>();
+            // put entries containing a colon in first group, other elements in second; each group is sorted alphabetically
+            final String sql = "SELECT DISTINCT title FROM " + dbTableLists + " ORDER BY CASE WHEN title LIKE '%" + GROUP_SEPARATOR + "%' THEN 0 ELSE 1 END ASC, title COLLATE NOCASE ASC";
+            final Cursor c = database.rawQuery(sql, new String[]{});
+            for (String list : cursorToColl(c, new ArrayList<>(), GET_STRING_0)) {
+                final int prefix = list.lastIndexOf(GROUP_SEPARATOR);
+                if (prefix >= 0) {
+                    result.add(list.substring(0, prefix + 1));
+                } else if (!result.contains(list + GROUP_SEPARATOR)) {
+                    result.add(list);
+                }
+            }
             return result;
         });
     }
