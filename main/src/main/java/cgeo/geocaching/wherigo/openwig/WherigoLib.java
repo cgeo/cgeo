@@ -4,15 +4,16 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
+import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 import cgeo.geocaching.wherigo.openwig.platform.UI;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WherigoLib implements JavaFunction {
 
@@ -72,7 +73,7 @@ public class WherigoLib implements JavaFunction {
         names[GETVALUE] = "GetValue";
     }
 
-    public static final Hashtable env = new Hashtable(); /* Wherigo's Env table */
+    public static final Map<String, Object> env = new HashMap<>(); /* Wherigo's Env table */
     public static final String DEVICE_ID = "DeviceID";
     public static final String PLATFORM = "Platform";
     static {
@@ -85,7 +86,7 @@ public class WherigoLib implements JavaFunction {
         env.put("CartFilename", "cartridge.gwc");
         env.put("PathSep", "/"); // no. you may NOT do file i/o on this device.
         env.put("Version", "2.11-compatible(r"+Engine.VERSION+")");
-        env.put("Downloaded", new Double(0));
+        env.put("Downloaded", 0d);
     }
 
     private int index;
@@ -158,22 +159,20 @@ public class WherigoLib implements JavaFunction {
         wig.rawset("INVALID_ZONEPOINT", null);
 
         // screen constants
-        wig.rawset("MAINSCREEN", new Double(UI.MAINSCREEN));
-        wig.rawset("DETAILSCREEN", new Double(UI.DETAILSCREEN));
-        wig.rawset("ITEMSCREEN", new Double(UI.ITEMSCREEN));
-        wig.rawset("INVENTORYSCREEN", new Double(UI.INVENTORYSCREEN));
-        wig.rawset("LOCATIONSCREEN", new Double(UI.LOCATIONSCREEN));
-        wig.rawset("TASKSCREEN", new Double(UI.TASKSCREEN));
+        wig.rawset("MAINSCREEN", (double) UI.MAINSCREEN);
+        wig.rawset("DETAILSCREEN", (double) UI.DETAILSCREEN);
+        wig.rawset("ITEMSCREEN", (double) UI.ITEMSCREEN);
+        wig.rawset("INVENTORYSCREEN", (double) UI.INVENTORYSCREEN);
+        wig.rawset("LOCATIONSCREEN", (double) UI.LOCATIONSCREEN);
+        wig.rawset("TASKSCREEN", (double) UI.TASKSCREEN);
 
         LuaTable pack = (LuaTable)environment.rawget("package");
         LuaTable loaded = (LuaTable)pack.rawget("loaded");
         loaded.rawset("Wherigo", wig);
 
         LuaTable envtable = new LuaTableImpl(); /* Wherigo's Env table */
-        Enumeration e = env.keys();
-        while (e.hasMoreElements()) {
-            String key = (String)e.nextElement();
-            envtable.rawset(key, env.get(key));
+        for (final Map.Entry<String, Object> entry : env.entrySet()) {
+            envtable.rawset(entry.getKey(), entry.getValue());
         }
         envtable.rawset("Device", Engine.instance.gwcfile.device);
         environment.rawset("Env", envtable);
@@ -320,7 +319,7 @@ public class WherigoLib implements JavaFunction {
         String[] texts = new String[n];
         Media[] media = new Media[n];
         for (int i = 1; i <= n; i++) {
-            LuaTable item = (LuaTable)lt.rawget(new Double(i));
+            LuaTable item = (LuaTable)lt.rawget((double) i);
             texts[i-1] = Engine.removeHtml((String)item.rawget("Text"));
             media[i-1] = (Media)item.rawget("Media");
         }

@@ -26,6 +26,7 @@ package cgeo.geocaching.wherigo.kahlua.vm;
 
 
 
+@FunctionalInterface
 public interface JavaFunction {
     /**
      * General contract<br>
