@@ -20,14 +20,6 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
  * to reflect changes performed by Lua script.
  */
 public interface UI {
-    // showScreen codes
-    public static final int MAINSCREEN = 0;
-    public static final int DETAILSCREEN = 1;
-    public static final int INVENTORYSCREEN = 2;
-    public static final int ITEMSCREEN = 3;
-    public static final int LOCATIONSCREEN = 4;
-    public static final int TASKSCREEN = 5;
-
     /** Forces screen update for items that might have been changed.
      * Called after every Lua event that might have changed data
      * of displayed objects, so that the state of display always
@@ -118,10 +110,10 @@ public interface UI {
      * The screen specified by screenId should be made visible.
      * If a dialog or an input is open, it must be closed before
      * showing the screen.
-     * @param screenId the screen to be shown
-     * @param details if screenId is DETAILSCREEN, details of this object will be displayed
+     * @param screen the screen to be shown
+     * @param details if screen is {@link UIScreen#DETAILSCREEN}, details of this object will be displayed
      */
-    public void showScreen (int screenId, EventTable details);
+    public void showScreen (UIScreen screen, EventTable details);
 
     /** Plays a sound asynchronously
      * <p>

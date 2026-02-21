@@ -33,6 +33,7 @@ import cgeo.geocaching.wherigo.openwig.Zone;
 import cgeo.geocaching.wherigo.openwig.ZonePoint;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 import cgeo.geocaching.wherigo.openwig.platform.UI;
+import cgeo.geocaching.wherigo.openwig.platform.UIScreen;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -409,14 +410,19 @@ public class WherigoGame implements UI {
      * The screen specified by screenId should be made visible.
      * If a dialog or an input is open, it must be closed before
      * showing the screen.
-     * @param screenId the screen to be shown
-     * @param details if screenId is DETAILSCREEN, details of this object will be displayed
+     * @param screen the screen to be shown
+     * @param details if screen is {@link UIScreen#DETAILSCREEN}, details of this object will be displayed
      */
     @Override
-    public void showScreen(final int screenId, final EventTable details) {
-        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
+    public void showScreen(final UIScreen screen, final EventTable details) {
+        Log.iForce(LOG_PRAEFIX + "showScreen:" + screen + ":" + details);
 
-        switch (screenId) {
+        if (screen == null) {
+            Log.w(LOG_PRAEFIX + "showScreen called with unknown screenId");
+            return;
+        }
+
+        switch (screen) {
             case MAINSCREEN:
             case INVENTORYSCREEN:
             case ITEMSCREEN:
@@ -438,7 +444,7 @@ public class WherigoGame implements UI {
                     return;
                 }
                 //-> we can't jump to main screen eg maybe we are not currently inside c:geo. Issue a toast instead
-                final WherigoThingType type = WherigoThingType.getByWherigoScreenId(screenId);
+                final WherigoThingType type = WherigoThingType.getByWherigoScreen(screen);
                 if (type == null) {
                     ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_game));
                 } else {
@@ -451,8 +457,7 @@ public class WherigoGame implements UI {
                 }
                 break;
             default:
-                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
-                // do nothing
+                Log.w(LOG_PRAEFIX + "showScreen called with unhandled screen: " + screen + " [" + details + "]");
                 break;
         }
 
