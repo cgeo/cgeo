@@ -8,6 +8,7 @@ import cgeo.geocaching.databinding.WherigoMapQuickinfosBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
@@ -219,7 +220,7 @@ public final class WherigoViewUtils {
             updateThingTypeTable(model, binding.wherigoThingTypeList);
             binding.resumeDialog.setVisibility(WherigoGame.get().dialogIsPaused() ? View.VISIBLE : View.GONE);
             binding.cacheContextBox.setVisibility(WherigoGame.get().getContextGeocode() != null ? View.VISIBLE : View.GONE);
-            binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName());
+            setSelectableTextWithClickableLinks(binding.cacheContextName, WherigoGame.get().getContextGeocacheName());
         };
 
         final int wherigoListenerId = WherigoGame.get().addListener(nt -> refreshGui.run());
@@ -342,6 +343,20 @@ public final class WherigoViewUtils {
             final String guid = WherigoUtils.scanWherigoGuids(span.getURL()).get(0);
             WherigoActivity.startForGuid(activity, guid, geocode, false);
         });
+    }
+
+    /**
+     * Sets text on a TextView that is both selectable and has clickable links.
+     * This should be used for TextViews with textIsSelectable="true" that may contain HTML with links.
+     *
+     * @param textView the TextView to set text on
+     * @param text the text to set (may be plain text or CharSequence with spans)
+     */
+    public static void setSelectableTextWithClickableLinks(final TextView textView, final CharSequence text) {
+        textView.setText(text);
+        // Setting LinkMovementMethod makes links clickable while preserving text selection
+        // when combined with textIsSelectable="true" in XML (API 26+)
+        textView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
     }
 
 }
