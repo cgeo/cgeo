@@ -38,34 +38,31 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.function.Function;
 
-public final class BaseLib implements JavaFunction {
+public enum BaseLib implements JavaFunction {
+
+    PCALL,           // ordinal 0
+    PRINT,           // ordinal 1
+    SELECT,          // ordinal 2
+    TYPE,            // ordinal 3
+    TOSTRING,        // ordinal 4
+    TONUMBER,        // ordinal 5
+    GETMETATABLE,    // ordinal 6
+    SETMETATABLE,    // ordinal 7
+    ERROR,           // ordinal 8
+    UNPACK,          // ordinal 9
+    NEXT,            // ordinal 10
+    SETFENV,         // ordinal 11
+    GETFENV,         // ordinal 12
+    RAWEQUAL,        // ordinal 13
+    RAWSET,          // ordinal 14
+    RAWGET,          // ordinal 15
+    COLLECTGARBAGE,  // ordinal 16
+    DEBUGSTACKTRACE, // ordinal 17
+    BYTECODELOADER;  // ordinal 18
 
     private static final Runtime RUNTIME = Runtime.getRuntime();
-    private static final int PCALL = 0;
-    private static final int PRINT = 1;
-    private static final int SELECT = 2;
-    private static final int TYPE = 3;
-    private static final int TOSTRING = 4;
-    private static final int TONUMBER = 5;
-    private static final int GETMETATABLE = 6;
-    private static final int SETMETATABLE = 7;
-    private static final int ERROR = 8;
-    private static final int UNPACK = 9;
-    private static final int NEXT = 10;
-    private static final int SETFENV = 11;
-    private static final int GETFENV = 12;
-    private static final int RAWEQUAL = 13;
-    private static final int RAWSET = 14;
-    private static final int RAWGET = 15;
-    private static final int COLLECTGARBAGE = 16;
-    private static final int DEBUGSTACKTRACE = 17;
-    private static final int BYTECODELOADER = 18;
-
-    private static final int NUM_FUNCTIONS = 19;
-
-    private static final String[] names;
     public static final Object MODE_KEY = "__mode";
-    private static final Object DOUBLE_ONE = new Double(1.0);
+    private static final Object DOUBLE_ONE = 1.0d;
 
     public static final String TYPE_NIL = "nil";
     public static final String TYPE_STRING = "string";
@@ -76,87 +73,44 @@ public final class BaseLib implements JavaFunction {
     public static final String TYPE_THREAD = "thread";
     public static final String TYPE_USERDATA = "userdata";
 
-    static {
-        names = new String[NUM_FUNCTIONS];
-        names[PCALL] = "pcall";
-        names[PRINT] = "print";
-        names[SELECT] = "select";
-        names[TYPE] = "type";
-        names[TOSTRING] = "tostring";
-        names[TONUMBER] = "tonumber";
-        names[GETMETATABLE] = "getmetatable";
-        names[SETMETATABLE] = "setmetatable";
-        names[ERROR] = "error";
-        names[UNPACK] = "unpack";
-        names[NEXT] = "next";
-        names[SETFENV] = "setfenv";
-        names[GETFENV] = "getfenv";
-        names[RAWEQUAL] = "rawequal";
-        names[RAWSET] = "rawset";
-        names[RAWGET] = "rawget";
-        names[COLLECTGARBAGE] = "collectgarbage";
-        names[DEBUGSTACKTRACE] = "debugstacktrace";
-        names[BYTECODELOADER] = "bytecodeloader";
-    }
-
-    private int index;
-    private static BaseLib[] functions;
-
-    public BaseLib(int index) {
-        this.index = index;
-    }
-
-    public static void register(LuaState state) {
-        initFunctions();
-
-        for (int i = 0; i < NUM_FUNCTIONS; i++) {
-            state.getEnvironment().rawset(names[i], functions[i]);
+    public static void register(final LuaState state) {
+        for (final BaseLib f : values()) {
+            state.getEnvironment().rawset(f.name().toLowerCase(Locale.ROOT), f);
         }
     }
 
-    private static synchronized void initFunctions() {
-        if (functions == null) {
-            functions = new BaseLib[NUM_FUNCTIONS];
-            for (int i = 0; i < NUM_FUNCTIONS; i++) {
-                functions[i] = new BaseLib(i);
-            }
-        }
-    }
-
+    @Override
     public String toString() {
-        return names[index];
+        return name().toLowerCase(Locale.ROOT);
     }
 
-
-    public int call(LuaCallFrame callFrame, int nArguments) {
-        switch (index) {
-        case PCALL: return pcall(callFrame, nArguments);
-        case PRINT: return print(callFrame, nArguments);
-        case SELECT: return select(callFrame, nArguments);
-        case TYPE: return type(callFrame, nArguments);
-        case TOSTRING: return tostring(callFrame, nArguments);
-        case TONUMBER: return tonumber(callFrame, nArguments);
-        case GETMETATABLE: return getmetatable(callFrame, nArguments);
-        case SETMETATABLE: return setmetatable(callFrame, nArguments);
-        case ERROR: return error(callFrame, nArguments);
-        case UNPACK: return unpack(callFrame, nArguments);
-        case NEXT: return next(callFrame, nArguments);
-        case SETFENV: return setfenv(callFrame, nArguments);
-        case GETFENV: return getfenv(callFrame, nArguments);
-        case RAWEQUAL: return rawequal(callFrame, nArguments);
-        case RAWSET: return rawset(callFrame, nArguments);
-        case RAWGET: return rawget(callFrame, nArguments);
-        case COLLECTGARBAGE: return collectgarbage(callFrame, nArguments);
-        case DEBUGSTACKTRACE: return debugstacktrace(callFrame, nArguments);
-        case BYTECODELOADER: return bytecodeloader(callFrame, nArguments);
-        default:
-            // Should never happen
-            // throw new Error("Illegal function object");
-            return 0;
+    @Override
+    public int call(final LuaCallFrame callFrame, final int nArguments) {
+        switch (this) {
+            case PCALL: return pcall(callFrame, nArguments);
+            case PRINT: return print(callFrame, nArguments);
+            case SELECT: return select(callFrame, nArguments);
+            case TYPE: return type(callFrame, nArguments);
+            case TOSTRING: return tostring(callFrame, nArguments);
+            case TONUMBER: return tonumber(callFrame, nArguments);
+            case GETMETATABLE: return getmetatable(callFrame, nArguments);
+            case SETMETATABLE: return setmetatable(callFrame, nArguments);
+            case ERROR: return error(callFrame, nArguments);
+            case UNPACK: return unpack(callFrame, nArguments);
+            case NEXT: return next(callFrame, nArguments);
+            case SETFENV: return setfenv(callFrame, nArguments);
+            case GETFENV: return getfenv(callFrame, nArguments);
+            case RAWEQUAL: return rawequal(callFrame, nArguments);
+            case RAWSET: return rawset(callFrame, nArguments);
+            case RAWGET: return rawget(callFrame, nArguments);
+            case COLLECTGARBAGE: return collectgarbage(callFrame, nArguments);
+            case DEBUGSTACKTRACE: return debugstacktrace(callFrame, nArguments);
+            case BYTECODELOADER: return bytecodeloader(callFrame, nArguments);
+            default: return 0;
         }
     }
 
-    private int debugstacktrace(LuaCallFrame callFrame, int nArguments) {
+    private int debugstacktrace(final LuaCallFrame callFrame, final int nArguments) {
         LuaThread thread = (LuaThread) getOptArg(callFrame, 1, BaseLib.TYPE_THREAD);
         if (thread == null) {
             thread = callFrame.thread;
@@ -179,62 +133,54 @@ public final class BaseLib implements JavaFunction {
         return callFrame.push(thread.getCurrentStackTrace(level, count, haltAt));
     }
 
-    private int rawget(LuaCallFrame callFrame, int nArguments) {
+    private int rawget(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 2, "Not enough arguments");
-        LuaTable t = (LuaTable) callFrame.get(0);
-        Object key = callFrame.get(1);
-
+        final LuaTable t = (LuaTable) callFrame.get(0);
+        final Object key = callFrame.get(1);
         callFrame.push(t.rawget(key));
         return 1;
     }
 
-    private int rawset(LuaCallFrame callFrame, int nArguments) {
+    private int rawset(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 3, "Not enough arguments");
-        LuaTable t = (LuaTable) callFrame.get(0);
-        Object key = callFrame.get(1);
-        Object value = callFrame.get(2);
-
+        final LuaTable t = (LuaTable) callFrame.get(0);
+        final Object key = callFrame.get(1);
+        final Object value = callFrame.get(2);
         t.rawset(key, value);
         callFrame.setTop(1);
         return 1;
     }
 
-    private int rawequal(LuaCallFrame callFrame, int nArguments) {
+    private int rawequal(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 2, "Not enough arguments");
-        Object o1 = callFrame.get(0);
-        Object o2 = callFrame.get(1);
-
+        final Object o1 = callFrame.get(0);
+        final Object o2 = callFrame.get(1);
         callFrame.push(toBoolean(LuaState.luaEquals(o1, o2)));
         return 1;
     }
 
-    private static final Boolean toBoolean(boolean b) {
-        if (b) {
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
+    private static Boolean toBoolean(final boolean b) {
+        return b ? Boolean.TRUE : Boolean.FALSE;
     }
 
-    private int setfenv(LuaCallFrame callFrame, int nArguments) {
+    private int setfenv(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 2, "Not enough arguments");
-
-        LuaTable newEnv = (LuaTable) callFrame.get(1);
+        final LuaTable newEnv = (LuaTable) callFrame.get(1);
         luaAssert(newEnv != null, "expected a table");
 
         LuaClosure closure = null;
-
-        Object o = callFrame.get(0);
+        final Object o = callFrame.get(0);
         if (o instanceof LuaClosure) {
             closure = (LuaClosure) o;
         } else {
-            o = rawTonumber(o);
-            luaAssert(o != null, "expected a lua function or a number");
-            int level = ((Double) o).intValue();
+            final Object n = rawTonumber(o);
+            luaAssert(n != null, "expected a lua function or a number");
+            int level = ((Double) n).intValue();
             if (level == 0) {
                 callFrame.thread.environment = newEnv;
                 return 0;
             }
-            LuaCallFrame parentCallFrame = callFrame.thread.getParent(level);
+            final LuaCallFrame parentCallFrame = callFrame.thread.getParent(level);
             if (!parentCallFrame.isLua()) {
                 fail("No closure found at this level: " + level);
             }
@@ -242,64 +188,59 @@ public final class BaseLib implements JavaFunction {
         }
 
         closure.env = newEnv;
-
         callFrame.setTop(1);
         return 1;
     }
 
-    private int getfenv(LuaCallFrame callFrame, int nArguments) {
+    private int getfenv(final LuaCallFrame callFrame, final int nArguments) {
         Object o = DOUBLE_ONE;
         if (nArguments >= 1) {
             o = callFrame.get(0);
         }
 
-        Object res = null;
+        Object res;
         if (o == null || o instanceof JavaFunction) {
             res = callFrame.thread.environment;
         } else if (o instanceof LuaClosure) {
-            LuaClosure closure = (LuaClosure) o;
+            final LuaClosure closure = (LuaClosure) o;
             res = closure.env;
         } else {
-            Double d = rawTonumber(o);
+            final Double d = rawTonumber(o);
             luaAssert(d != null, "Expected number");
             int level = d.intValue();
             luaAssert(level >= 0, "level must be non-negative");
-            LuaCallFrame callFrame2 = callFrame.thread.getParent(level);
+            final LuaCallFrame callFrame2 = callFrame.thread.getParent(level);
             res = callFrame2.getEnvironment();
         }
         callFrame.push(res);
         return 1;
     }
 
-    private int next(LuaCallFrame callFrame, int nArguments) {
+    private int next(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-
-        LuaTable t = (LuaTable) callFrame.get(0);
+        final LuaTable t = (LuaTable) callFrame.get(0);
         Object key = null;
-
         if (nArguments >= 2) {
             key = callFrame.get(1);
         }
 
-        Object nextKey = t.next(key);
+        final Object nextKey = t.next(key);
         if (nextKey == null) {
             callFrame.setTop(1);
             callFrame.set(0, null);
             return 1;
         }
 
-        Object value = t.rawget(nextKey);
-
+        final Object value = t.rawget(nextKey);
         callFrame.setTop(2);
         callFrame.set(0, nextKey);
         callFrame.set(1, value);
         return 2;
     }
 
-    private int unpack(LuaCallFrame callFrame, int nArguments) {
+    private int unpack(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-
-        LuaTable t = (LuaTable) callFrame.get(0);
+        final LuaTable t = (LuaTable) callFrame.get(0);
 
         Object di = null, dj = null;
         if (nArguments >= 2) {
@@ -309,21 +250,10 @@ public final class BaseLib implements JavaFunction {
             dj = callFrame.get(2);
         }
 
-        int i, j;
-        if (di != null) {
-            i = (int) LuaState.fromDouble(di);
-        } else {
-            i = 1;
-        }
-
-        if (dj != null) {
-            j = (int) LuaState.fromDouble(dj);
-        } else {
-            j = t.len();
-        }
+        final int i = di != null ? (int) LuaState.fromDouble(di) : 1;
+        final int j = dj != null ? (int) LuaState.fromDouble(dj) : t.len();
 
         int nReturnValues = 1 + j - i;
-
         if (nReturnValues <= 0) {
             callFrame.setTop(0);
             return 0;
@@ -336,7 +266,7 @@ public final class BaseLib implements JavaFunction {
         return nReturnValues;
     }
 
-    private int error(LuaCallFrame callFrame, int nArguments) {
+    private int error(final LuaCallFrame callFrame, final int nArguments) {
         if (nArguments >= 1) {
             String stacktrace = (String) getOptArg(callFrame, 2, BaseLib.TYPE_STRING);
             if (stacktrace == null) {
@@ -348,38 +278,36 @@ public final class BaseLib implements JavaFunction {
         return 0;
     }
 
-    public static int pcall(LuaCallFrame callFrame, int nArguments) {
+    public static int pcall(final LuaCallFrame callFrame, final int nArguments) {
         return callFrame.thread.state.pcall(nArguments - 1);
     }
 
-    private static int print(LuaCallFrame callFrame, int nArguments) {
-        LuaState state = callFrame.thread.state;
-        LuaTable env = state.getEnvironment();
-        Object toStringFun = state.tableGet(env, "tostring");
-        StringBuffer sb = new StringBuffer();
+    private static int print(final LuaCallFrame callFrame, final int nArguments) {
+        final LuaState state = callFrame.thread.state;
+        final LuaTable env = state.getEnvironment();
+        final Object toStringFun = state.tableGet(env, "tostring");
+        final StringBuffer sb = new StringBuffer();
         for (int i = 0; i < nArguments; i++) {
             if (i > 0) {
                 sb.append("\t");
             }
-
-            Object res = state.call(toStringFun, callFrame.get(i), null, null);
-
+            final Object res = state.call(toStringFun, callFrame.get(i), null, null);
             sb.append(res);
         }
         state.getOut().println(sb.toString());
         return 0;
     }
 
-    private static int select(LuaCallFrame callFrame, int nArguments) {
+    private static int select(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-        Object arg1 = callFrame.get(0);
+        final Object arg1 = callFrame.get(0);
         if (arg1 instanceof String) {
             if (((String) arg1).startsWith("#")) {
                 callFrame.push(LuaState.toDouble(nArguments - 1));
                 return 1;
             }
         }
-        Double d_indexDouble = rawTonumber(arg1);
+        final Double d_indexDouble = rawTonumber(arg1);
         double d_index = LuaState.fromDouble(d_indexDouble);
         int index = (int) d_index;
         if (index >= 1 && index <= (nArguments - 1)) {
@@ -389,17 +317,17 @@ public final class BaseLib implements JavaFunction {
         return 0;
     }
 
-    public static void luaAssert(boolean b, String msg) {
+    public static void luaAssert(final boolean b, final String msg) {
         if (!b) {
             fail(msg);
         }
     }
 
-    public static void fail(String msg) {
+    public static void fail(final String msg) {
         throw new IllegalStateException(msg);
     }
 
-    public static String numberToString(Double num) {
+    public static String numberToString(final Double num) {
         if (num.isNaN()) {
             return "nan";
         }
@@ -416,7 +344,7 @@ public final class BaseLib implements JavaFunction {
         return num.toString();
     }
 
-    public static String luaTableToString(LuaTable table, Function<Object, String> valueMapper) {
+    public static String luaTableToString(final LuaTable table, final Function<Object, String> valueMapper) {
         if (table == null) {
             return "null";
         }
@@ -446,7 +374,7 @@ public final class BaseLib implements JavaFunction {
             }
         }
         return sb.append("]").toString();
-     }
+    }
 
     /**
      *
@@ -458,8 +386,8 @@ public final class BaseLib implements JavaFunction {
      * @param function name of the function that calls this. Only for pretty exceptions.
      * @return variable with index n on the stack, returned as type "type".
      */
-    public static Object getArg(LuaCallFrame callFrame, int n, String type,
-                String function) {
+    public static Object getArg(final LuaCallFrame callFrame, final int n, final String type,
+                final String function) {
         Object o = callFrame.get(n - 1);
         if (o == null) {
             throw new IllegalStateException("bad argument #" + n + "to '" + function +
@@ -483,21 +411,20 @@ public final class BaseLib implements JavaFunction {
             // type checking
             String isType = type(o);
             if (type != isType) {
-                fail("bad argument #" + n + " to '" + function +"' (" + type +
+                fail("bad argument #" + n + " to '" + function + "' (" + type +
                     " expected, got " + isType + ")");
             }
         }
         return o;
-
     }
 
-    public static Object getOptArg(LuaCallFrame callFrame, int n, String type) {
+    public static Object getOptArg(final LuaCallFrame callFrame, final int n, final String type) {
         // Outside of stack
         if (n - 1 >= callFrame.getTop()) {
             return null;
         }
 
-        Object o = callFrame.get(n-1);
+        Object o = callFrame.get(n - 1);
         if (o == null) {
             return null;
         }
@@ -511,28 +438,24 @@ public final class BaseLib implements JavaFunction {
         return o;
     }
 
-    private static int getmetatable(LuaCallFrame callFrame, int nArguments) {
+    private static int getmetatable(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-        Object o = callFrame.get(0);
-
-        Object metatable = callFrame.thread.state.getmetatable(o, false);
+        final Object o = callFrame.get(0);
+        final Object metatable = callFrame.thread.state.getmetatable(o, false);
         callFrame.push(metatable);
         return 1;
     }
 
-    private static int setmetatable(LuaCallFrame callFrame, int nArguments) {
+    private static int setmetatable(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 2, "Not enough arguments");
-
-        Object o = callFrame.get(0);
-
-        LuaTable newMeta = (LuaTable) (callFrame.get(1));
+        final Object o = callFrame.get(0);
+        final LuaTable newMeta = (LuaTable) (callFrame.get(1));
         setmetatable(callFrame.thread.state, o, newMeta, false);
-
         callFrame.setTop(1);
         return 1;
     }
 
-    public static void setmetatable(LuaState state, Object o, LuaTable newMeta, boolean raw) {
+    public static void setmetatable(final LuaState state, final Object o, final LuaTable newMeta, final boolean raw) {
         luaAssert(o != null, "Expected table, got nil");
         final Object oldMeta = state.getmetatable(o, raw);
 
@@ -543,14 +466,14 @@ public final class BaseLib implements JavaFunction {
         state.setmetatable(o, newMeta);
     }
 
-    private static int type(LuaCallFrame callFrame, int nArguments) {
+    private static int type(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-        Object o = callFrame.get(0);
+        final Object o = callFrame.get(0);
         callFrame.push(type(o));
         return 1;
     }
 
-    public static String type(Object o) {
+    public static String type(final Object o) {
         if (o == null) {
             return TYPE_NIL;
         }
@@ -575,15 +498,15 @@ public final class BaseLib implements JavaFunction {
         return TYPE_USERDATA;
     }
 
-    private static int tostring(LuaCallFrame callFrame, int nArguments) {
+    private static int tostring(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-        Object o = callFrame.get(0);
-        Object res = tostring(o, callFrame.thread.state);
+        final Object o = callFrame.get(0);
+        final Object res = tostring(o, callFrame.thread.state);
         callFrame.push(res);
         return 1;
     }
 
-    public static String tostring(Object o, LuaState state) {
+    public static String tostring(final Object o, final LuaState state) {
         if (o == null) {
             return TYPE_NIL;
         }
@@ -603,11 +526,9 @@ public final class BaseLib implements JavaFunction {
             return "function 0x" + System.identityHashCode(o);
         }
 
-        Object tostringFun = state.getMetaOp(o, "__tostring");
+        final Object tostringFun = state.getMetaOp(o, "__tostring");
         if (tostringFun != null) {
-            String res = (String) state.call(tostringFun, o, null, null);
-
-            return res;
+            return (String) state.call(tostringFun, o, null, null);
         }
 
         if (o instanceof LuaTable) {
@@ -616,19 +537,18 @@ public final class BaseLib implements JavaFunction {
         throw new IllegalStateException("no __tostring found on object");
     }
 
-    private static int tonumber(LuaCallFrame callFrame, int nArguments) {
+    private static int tonumber(final LuaCallFrame callFrame, final int nArguments) {
         luaAssert(nArguments >= 1, "Not enough arguments");
-        Object o = callFrame.get(0);
+        final Object o = callFrame.get(0);
 
         if (nArguments == 1) {
             callFrame.push(rawTonumber(o));
             return 1;
         }
 
-        String s = (String) o;
-
-        Object radixObj = callFrame.get(1);
-        Double radixDouble = rawTonumber(radixObj);
+        final String s = (String) o;
+        final Object radixObj = callFrame.get(1);
+        final Double radixDouble = rawTonumber(radixObj);
         luaAssert(radixDouble != null, "Argument 2 must be a number");
 
         double dradix = LuaState.fromDouble(radixDouble);
@@ -636,16 +556,16 @@ public final class BaseLib implements JavaFunction {
         if (radix != dradix) {
             throw new IllegalStateException("base is not an integer");
         }
-        Object res = tonumber(s, radix);
+        final Object res = tonumber(s, radix);
         callFrame.push(res);
         return 1;
     }
 
-    public static Double tonumber(String s) {
+    public static Double tonumber(final String s) {
         return tonumber(s, 10);
     }
 
-    public static Double tonumber(String s, int radix)  {
+    public static Double tonumber(final String s, final int radix)  {
         if (radix < 2 || radix > 36) {
             throw new IllegalStateException("base out of range");
         }
@@ -657,11 +577,11 @@ public final class BaseLib implements JavaFunction {
                 return LuaState.toDouble(Integer.parseInt(s, radix));
             }
         } catch (NumberFormatException e) {
-            s = s.toLowerCase(Locale.getDefault());
-            if (s.endsWith("nan")) {
+            final String lower = s.toLowerCase(Locale.getDefault());
+            if (lower.endsWith("nan")) {
                 return LuaState.toDouble(Double.NaN);
             }
-            if (s.endsWith("inf")) {
+            if (lower.endsWith("inf")) {
                 if (s.charAt(0) == '-') {
                     return LuaState.toDouble(Double.NEGATIVE_INFINITY);
                 }
@@ -671,7 +591,7 @@ public final class BaseLib implements JavaFunction {
         }
     }
 
-    public static int collectgarbage(LuaCallFrame callFrame, int nArguments) {
+    public static int collectgarbage(final LuaCallFrame callFrame, final int nArguments) {
         Object option = null;
         if (nArguments > 0) {
             option = callFrame.get(0);
@@ -694,11 +614,11 @@ public final class BaseLib implements JavaFunction {
         throw new IllegalStateException("invalid option: " + option);
     }
 
-    private static Double toKiloBytes(long freeMemory) {
+    private static Double toKiloBytes(final long freeMemory) {
         return LuaState.toDouble((freeMemory) / 1024.0);
     }
 
-    public static String rawTostring(Object o) {
+    public static String rawTostring(final Object o) {
         if (o instanceof String) {
             return (String) o;
         }
@@ -708,7 +628,7 @@ public final class BaseLib implements JavaFunction {
         return null;
     }
 
-    public static Double rawTonumber(Object o) {
+    public static Double rawTonumber(final Object o) {
         if (o instanceof Double) {
             return (Double) o;
         }
@@ -718,16 +638,14 @@ public final class BaseLib implements JavaFunction {
         return null;
     }
 
-    private static int bytecodeloader(LuaCallFrame callFrame, int nArguments) {
-        String modname = (String) getArg(callFrame, 1, "string", "loader");
-
-        LuaTable packageTable = (LuaTable) callFrame.getEnvironment().rawget("package");
-        String classpath = (String) packageTable.rawget("classpath");
+    private int bytecodeloader(final LuaCallFrame callFrame, final int nArguments) {
+        final String modname = (String) getArg(callFrame, 1, "string", "loader");
+        final LuaTable packageTable = (LuaTable) callFrame.getEnvironment().rawget("package");
+        final String classpath = (String) packageTable.rawget("classpath");
 
         int index = 0;
         while (index < classpath.length()) {
             int nextIndex = classpath.indexOf(";", index);
-
             if (nextIndex == -1) {
                 nextIndex = classpath.length();
             }
@@ -737,7 +655,7 @@ public final class BaseLib implements JavaFunction {
                 if (!path.endsWith("/")) {
                     path = path + "/";
                 }
-                LuaClosure closure = callFrame.thread.state.loadByteCodeFromResource(path + modname, callFrame.getEnvironment());
+                final LuaClosure closure = callFrame.thread.state.loadByteCodeFromResource(path + modname, callFrame.getEnvironment());
                 if (closure != null) {
                     return callFrame.push(closure);
                 }
@@ -746,6 +664,4 @@ public final class BaseLib implements JavaFunction {
         }
         return callFrame.push("Could not find the bytecode for '" + modname + "' in classpath");
     }
-
-
 }
