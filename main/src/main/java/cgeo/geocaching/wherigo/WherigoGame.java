@@ -33,7 +33,6 @@ import cgeo.geocaching.wherigo.openwig.Zone;
 import cgeo.geocaching.wherigo.openwig.ZonePoint;
 import cgeo.geocaching.wherigo.openwig.formats.CartridgeFile;
 import cgeo.geocaching.wherigo.openwig.platform.UI;
-import cgeo.geocaching.wherigo.openwig.platform.UIScreen;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -411,10 +410,10 @@ public class WherigoGame implements UI {
      * If a dialog or an input is open, it must be closed before
      * showing the screen.
      * @param screen the screen to be shown
-     * @param details if screen is {@link UIScreen#DETAILSCREEN}, details of this object will be displayed
+     * @param details if screen is {@link UI.Screen#DETAILSCREEN}, details of this object will be displayed
      */
     @Override
-    public void showScreen(final UIScreen screen, final EventTable details) {
+    public void showScreen(final UI.Screen screen, final EventTable details) {
         Log.iForce(LOG_PRAEFIX + "showScreen:" + screen + ":" + details);
 
         if (screen == null) {

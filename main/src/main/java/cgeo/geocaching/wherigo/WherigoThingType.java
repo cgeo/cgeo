@@ -7,7 +7,7 @@ import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Task;
 import cgeo.geocaching.wherigo.openwig.Thing;
 import cgeo.geocaching.wherigo.openwig.Zone;
-import cgeo.geocaching.wherigo.openwig.platform.UIScreen;
+import cgeo.geocaching.wherigo.openwig.platform.UI;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,19 +20,19 @@ import java.util.stream.Collectors;
 
 public enum WherigoThingType {
 
-    LOCATION(Zone.class, R.string.wherigo_thingtype_location, R.drawable.wherigo_icon_locations, UIScreen.LOCATIONSCREEN, WherigoGame::getZones),
-    ITEM(Thing.class, R.string.wherigo_thingtype_item, R.drawable.wherigo_icon_search, UIScreen.ITEMSCREEN, WherigoGame::getItems),           // surroundings, "You see"
-    INVENTORY(Thing.class, R.string.wherigo_thingtype_inventory, R.drawable.wherigo_icon_inventory, UIScreen.INVENTORYSCREEN, WherigoGame::getInventory),
-    TASK(Task.class, R.string.wherigo_thingtype_task, R.drawable.wherigo_icon_tasks, UIScreen.TASKSCREEN, WherigoGame::getTasks),
+    LOCATION(Zone.class, R.string.wherigo_thingtype_location, R.drawable.wherigo_icon_locations, UI.Screen.LOCATIONSCREEN, WherigoGame::getZones),
+    ITEM(Thing.class, R.string.wherigo_thingtype_item, R.drawable.wherigo_icon_search, UI.Screen.ITEMSCREEN, WherigoGame::getItems),           // surroundings, "You see"
+    INVENTORY(Thing.class, R.string.wherigo_thingtype_inventory, R.drawable.wherigo_icon_inventory, UI.Screen.INVENTORYSCREEN, WherigoGame::getInventory),
+    TASK(Task.class, R.string.wherigo_thingtype_task, R.drawable.wherigo_icon_tasks, UI.Screen.TASKSCREEN, WherigoGame::getTasks),
     THING(Thing.class, R.string.wherigo_thingtype_thing, R.drawable.ic_menu_list, null, WherigoGame::getThings);   // ALL Things in a cartridge
 
     private final Class<?> clazz;
     private final int displayResId;
     private final int iconId;
-    private final UIScreen screen;
+    private final UI.Screen screen;
     private final Function<WherigoGame, List<? extends EventTable>> thingsGetter;
 
-    private static final EnumValueMapper<UIScreen, WherigoThingType> SCREEN_TO_TYPE = new EnumValueMapper<>();
+    private static final EnumValueMapper<UI.Screen, WherigoThingType> SCREEN_TO_TYPE = new EnumValueMapper<>();
 
     static {
         for (WherigoThingType type : values()) {
@@ -42,7 +42,7 @@ public enum WherigoThingType {
         }
     }
 
-    WherigoThingType(final Class<?> clazz, final int displayResId, final int iconId, final UIScreen screen, final Function<WherigoGame, List<? extends EventTable>> thingsGetter) {
+    WherigoThingType(final Class<?> clazz, final int displayResId, final int iconId, final UI.Screen screen, final Function<WherigoGame, List<? extends EventTable>> thingsGetter) {
         this.clazz = clazz;
         this.displayResId = displayResId;
         this.iconId = iconId;
@@ -89,7 +89,7 @@ public enum WherigoThingType {
     }
 
     @Nullable
-    public static WherigoThingType getByWherigoScreen(final UIScreen screen) {
+    public static WherigoThingType getByWherigoScreen(final UI.Screen screen) {
         return SCREEN_TO_TYPE.get(screen);
     }
 

@@ -10,7 +10,7 @@ import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
-import cgeo.geocaching.wherigo.openwig.platform.UIScreen;
+import cgeo.geocaching.wherigo.openwig.platform.UI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -159,12 +159,12 @@ public class WherigoLib implements JavaFunction {
         wig.rawset("INVALID_ZONEPOINT", null);
 
         // screen constants
-        wig.rawset("MAINSCREEN", (double) UIScreen.MAINSCREEN.getId());
-        wig.rawset("DETAILSCREEN", (double) UIScreen.DETAILSCREEN.getId());
-        wig.rawset("ITEMSCREEN", (double) UIScreen.ITEMSCREEN.getId());
-        wig.rawset("INVENTORYSCREEN", (double) UIScreen.INVENTORYSCREEN.getId());
-        wig.rawset("LOCATIONSCREEN", (double) UIScreen.LOCATIONSCREEN.getId());
-        wig.rawset("TASKSCREEN", (double) UIScreen.TASKSCREEN.getId());
+        wig.rawset("MAINSCREEN", (double) UI.Screen.MAINSCREEN.ordinal());
+        wig.rawset("DETAILSCREEN", (double) UI.Screen.DETAILSCREEN.ordinal());
+        wig.rawset("ITEMSCREEN", (double) UI.Screen.ITEMSCREEN.ordinal());
+        wig.rawset("INVENTORYSCREEN", (double) UI.Screen.INVENTORYSCREEN.ordinal());
+        wig.rawset("LOCATIONSCREEN", (double) UI.Screen.LOCATIONSCREEN.ordinal());
+        wig.rawset("TASKSCREEN", (double) UI.Screen.TASKSCREEN.ordinal());
 
         LuaTable pack = (LuaTable)environment.rawget("package");
         LuaTable loaded = (LuaTable)pack.rawget("loaded");
@@ -344,7 +344,7 @@ public class WherigoLib implements JavaFunction {
 
     private int showscreen (LuaCallFrame callFrame, int nArguments) {
         final int screenId = (int) LuaState.fromDouble(callFrame.get(0));
-        final UIScreen screen = UIScreen.fromId(screenId);
+        final UI.Screen screen = UI.Screen.fromId(screenId);
         EventTable et = null;
         if (nArguments > 1) {
             Object o = callFrame.get(1);
