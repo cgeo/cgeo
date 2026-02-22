@@ -113,7 +113,7 @@ public enum OsLib implements JavaFunction {
             double t = (double) System.currentTimeMillis() * TIME_DIVIDEND_INVERTED;
             cf.push(LuaState.toDouble(t));
         } else {
-            LuaTable table = (LuaTable) BaseLib.getArg(cf, 1, BaseLib.TYPE_TABLE, "time");
+            LuaTable table = BaseLib.getArg(cf, 1, BaseLib.Type.TABLE, "time");
             double t = (double) getDateFromTable(table).getTime() * TIME_DIVIDEND_INVERTED;
             cf.push(LuaState.toDouble(t));
         }

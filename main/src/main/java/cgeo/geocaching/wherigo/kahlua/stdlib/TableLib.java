@@ -100,11 +100,11 @@ public enum TableLib implements JavaFunction {
         return callFrame.push(buffer.toString());
     }
 
-    public static void insert(final LuaState state, final LuaTable table, final Object element) {
+    static void insert(final LuaState state, final LuaTable table, final Object element) {
         append(state, table, element);
     }
 
-    public static void append(final LuaState state, final LuaTable table, final Object element) {
+    static void append(final LuaState state, final LuaTable table, final Object element) {
         int position = 1 + table.len();
         state.tableSet(table, LuaState.toDouble(position), element);
     }
@@ -114,7 +114,7 @@ public enum TableLib implements JavaFunction {
         table.rawset(LuaState.toDouble(position), element);
     }
 
-    public static void insert(final LuaState state, final LuaTable table, final int position, final Object element) {
+    static void insert(final LuaState state, final LuaTable table, final int position, final Object element) {
         int len = table.len();
         for (int i = len; i >= position; i--) {
             state.tableSet(table, LuaState.toDouble(i + 1), state.tableGet(table, LuaState.toDouble(i)));
@@ -122,7 +122,7 @@ public enum TableLib implements JavaFunction {
         state.tableSet(table, LuaState.toDouble(position), element);
     }
 
-    public static void rawinsert(final LuaTable table, final int position, final Object element) {
+    static void rawinsert(final LuaTable table, final int position, final Object element) {
         int len = table.len();
         if (position <= len) {
             Double dest = LuaState.toDouble(len + 1);
@@ -152,11 +152,11 @@ public enum TableLib implements JavaFunction {
         return 0;
     }
 
-    public static Object remove(final LuaState state, final LuaTable table) {
+    static Object remove(final LuaState state, final LuaTable table) {
         return remove(state, table, table.len());
     }
 
-    public static Object remove(final LuaState state, final LuaTable table, final int position) {
+    static Object remove(final LuaState state, final LuaTable table, final int position) {
         final Object ret = state.tableGet(table, LuaState.toDouble(position));
         final int len = table.len();
         for (int i = position; i < len; i++) {
@@ -166,7 +166,7 @@ public enum TableLib implements JavaFunction {
         return ret;
     }
 
-    public static Object rawremove(final LuaTable table, final int position) {
+    static Object rawremove(final LuaTable table, final int position) {
         final Object ret = table.rawget(LuaState.toDouble(position));
         final int len = table.len();
         for (int i = position; i <= len; i++) {
@@ -192,7 +192,7 @@ public enum TableLib implements JavaFunction {
         }
     }
 
-    public static void dumpTable(final LuaTable table) {
+    static void dumpTable(final LuaTable table) {
         System.out.print("table " + table + ": ");
         Object key = null;
         while ((key = table.next(key)) != null) {
@@ -227,7 +227,7 @@ public enum TableLib implements JavaFunction {
         return 1;
     }
 
-    public static Object find(final LuaTable table, final Object item) {
+    static Object find(final LuaTable table, final Object item) {
         if (item == null) return null;
         Object key = null;
         while ((key = table.next(key)) != null) {

@@ -25,28 +25,26 @@ Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.k
 */
 package cgeo.geocaching.wherigo.kahlua.stdlib;
 
-import java.util.Locale;
-
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-public final class StringLib implements JavaFunction {
+import java.util.Locale;
 
-    private static final int SUB = 0;
-    private static final int CHAR = 1;
-    private static final int BYTE = 2;
-    private static final int LOWER = 3;
-    private static final int UPPER = 4;
-    private static final int REVERSE = 5;
-    private static final int FORMAT = 6;
-    private static final int FIND = 7;
-    private static final int MATCH = 8;
-    private static final int GSUB = 9;
+public enum StringLib implements JavaFunction {
 
-    private static final int NUM_FUNCTIONS = 10;
+    SUB,     // ordinal 0
+    CHAR,    // ordinal 1
+    BYTE,    // ordinal 2
+    LOWER,   // ordinal 3
+    UPPER,   // ordinal 4
+    REVERSE, // ordinal 5
+    FORMAT,  // ordinal 6
+    FIND,    // ordinal 7
+    MATCH,   // ordinal 8
+    GSUB;    // ordinal 9
 
     private static final boolean[] SPECIALS = new boolean[256];
     static {
@@ -58,69 +56,43 @@ public final class StringLib implements JavaFunction {
 
     private static final int LUA_MAXCAPTURES = 32;
     private static final char L_ESC = '%';
-    private static final int CAP_UNFINISHED = ( -1 );
-    private static final int CAP_POSITION = ( -2 );
-
-    private static final String[] names;
-    private static StringLib[] functions;
+    private static final int CAP_UNFINISHED = (-1);
+    private static final int CAP_POSITION = (-2);
 
     // NOTE: String.class won't work in J2ME - so this is used as a workaround
     public static final Class STRING_CLASS = "".getClass();
 
     private static final char[] digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    static {
-        names = new String[NUM_FUNCTIONS];
-        names[SUB] = "sub";
-        names[CHAR] = "char";
-        names[BYTE] = "byte";
-        names[LOWER] = "lower";
-        names[UPPER] = "upper";
-        names[REVERSE] = "reverse";
-        names[FORMAT] = "format";
-        names[FIND] = "find";
-        names[MATCH] = "match";
-        names[GSUB] = "gsub";
-
-        functions = new StringLib[NUM_FUNCTIONS];
-        for (int i = 0; i < NUM_FUNCTIONS; i++) {
-            functions[i] = new StringLib(i);
-        }
-    }
-
-    private int methodId;
-    public StringLib(int index) {
-        this.methodId = index;
-    }
-
-    public static void register(LuaState state) {
-        LuaTable string = new LuaTableImpl();
+    public static void register(final LuaState state) {
+        final LuaTable string = new LuaTableImpl();
         state.getEnvironment().rawset("string", string);
-        for (int i = 0; i < NUM_FUNCTIONS; i++) {
-            string.rawset(names[i], functions[i]);
+        for (final StringLib f : values()) {
+            string.rawset(f.name().toLowerCase(Locale.ROOT), f);
         }
-
         string.rawset("__index", string);
         state.setClassMetatable(STRING_CLASS, string);
     }
 
+    @Override
     public String toString() {
-        return names[methodId];
+        return name().toLowerCase(Locale.ROOT);
     }
 
-    public int call(LuaCallFrame callFrame, int nArguments)  {
-        switch (methodId) {
-        case SUB: return sub(callFrame, nArguments);
-        case CHAR: return stringChar(callFrame, nArguments);
-        case BYTE: return stringByte(callFrame, nArguments);
-        case LOWER: return lower(callFrame, nArguments);
-        case UPPER: return upper(callFrame, nArguments);
-        case REVERSE: return reverse(callFrame, nArguments);
-        case FORMAT: return format(callFrame);
-        case FIND: return findAux(callFrame, true);
-        case MATCH: return findAux(callFrame, false);
-        case GSUB: return gsub(callFrame);
-        default: return 0; // Should never happen.
+    @Override
+    public int call(final LuaCallFrame callFrame, final int nArguments) {
+        switch (this) {
+            case SUB:     return sub(callFrame, nArguments);
+            case CHAR:    return stringChar(callFrame, nArguments);
+            case BYTE:    return stringByte(callFrame, nArguments);
+            case LOWER:   return lower(callFrame, nArguments);
+            case UPPER:   return upper(callFrame, nArguments);
+            case REVERSE: return reverse(callFrame, nArguments);
+            case FORMAT:  return format(callFrame);
+            case FIND:    return findAux(callFrame, true);
+            case MATCH:   return findAux(callFrame, false);
+            case GSUB:    return gsub(callFrame);
+            default: return 0; // Should never happen.
         }
     }
 
@@ -133,8 +105,8 @@ public final class StringLib implements JavaFunction {
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private int format(LuaCallFrame callFrame) {
-        String f = (String) BaseLib.getArg(callFrame, 1, BaseLib.TYPE_STRING, names[FORMAT]);
+    private int format(final LuaCallFrame callFrame) {
+        String f = BaseLib.getArg(callFrame, 1, BaseLib.Type.STRING, name().toLowerCase(Locale.ROOT));
 
         int len = f.length();
         int argc = 2;
@@ -657,57 +629,55 @@ public final class StringLib implements JavaFunction {
         stringBufferAppend(buffer, absExponent, 10, true, 2);
     }
 
-    private String getStringArg(LuaCallFrame callFrame, int argc) {
-        return getStringArg(callFrame, argc, names[FORMAT]);
+    private String getStringArg(final LuaCallFrame callFrame, final int argc) {
+        return getStringArg(callFrame, argc, name().toLowerCase(Locale.ROOT));
     }
 
-    private String getStringArg(LuaCallFrame callFrame, int argc, String funcname) {
-        return (String) BaseLib.getArg(callFrame, argc, BaseLib.TYPE_STRING, funcname);
+    private static String getStringArg(final LuaCallFrame callFrame, final int argc, final String funcname) {
+        return BaseLib.getArg(callFrame, argc, BaseLib.Type.STRING, funcname);
     }
 
-    private Double getDoubleArg(LuaCallFrame callFrame, int argc) {
-        return getDoubleArg(callFrame, argc, names[FORMAT]);
+    private Double getDoubleArg(final LuaCallFrame callFrame, final int argc) {
+        return getDoubleArg(callFrame, argc, name().toLowerCase(Locale.ROOT));
     }
 
-    private Double getDoubleArg(LuaCallFrame callFrame, int argc, String funcname) {
-        return (Double)BaseLib.getArg(callFrame, argc, BaseLib.TYPE_NUMBER, funcname);
+    private static Double getDoubleArg(final LuaCallFrame callFrame, final int argc, final String funcname) {
+        return BaseLib.getArg(callFrame, argc, BaseLib.Type.NUMBER, funcname);
     }
 
-    private int lower(LuaCallFrame callFrame, int nArguments) {
+    private int lower(final LuaCallFrame callFrame, final int nArguments) {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
-        String s = getStringArg(callFrame,1,names[LOWER]);
-
+        final String s = getStringArg(callFrame, 1);
         callFrame.push(s.toLowerCase(Locale.getDefault()));
         return 1;
     }
 
-    private int upper(LuaCallFrame callFrame, int nArguments) {
+    private int upper(final LuaCallFrame callFrame, final int nArguments) {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
-        String s = getStringArg(callFrame,1,names[UPPER]);
-
+        final String s = getStringArg(callFrame, 1);
         callFrame.push(s.toUpperCase(Locale.getDefault()));
         return 1;
     }
 
-    private int reverse(LuaCallFrame callFrame, int nArguments) {
+    private int reverse(final LuaCallFrame callFrame, final int nArguments) {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
-        String s = getStringArg(callFrame, 1, names[REVERSE]);
-        s = new StringBuffer(s).reverse().toString();
-        callFrame.push(s);
+        final String s = getStringArg(callFrame, 1);
+        callFrame.push(new StringBuilder(s).reverse().toString());
         return 1;
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private int stringByte(LuaCallFrame callFrame, int nArguments) {
+    private int stringByte(final LuaCallFrame callFrame, final int nArguments) {
         BaseLib.luaAssert(nArguments >= 1, "not enough arguments");
-        String s = getStringArg(callFrame, 1, names[BYTE]);
+        final String funcname = name().toLowerCase(Locale.ROOT);
+        final String s = getStringArg(callFrame, 1, funcname);
 
         Double di = null;
         Double dj = null;
         if (nArguments >= 2) {
-            di = getDoubleArg(callFrame, 2, names[BYTE]);
+            di = getDoubleArg(callFrame, 2, funcname);
             if (nArguments >= 3) {
-                dj = getDoubleArg(callFrame, 3, names[BYTE]);
+                dj = getDoubleArg(callFrame, 3, funcname);
             }
         }
         double di2 = 1;
@@ -722,7 +692,7 @@ public final class StringLib implements JavaFunction {
         int ii = (int) di2;
         int ij = (int) dj2;
 
-        int len = s.length();
+        final int len = s.length();
         if (ii < 0) {
             ii += len + 1;
         }
@@ -748,21 +718,23 @@ public final class StringLib implements JavaFunction {
         return nReturns;
     }
 
-    private int stringChar(LuaCallFrame callFrame, int nArguments) {
-        StringBuffer sb = new StringBuffer();
+    private int stringChar(final LuaCallFrame callFrame, final int nArguments) {
+        final String funcname = name().toLowerCase(Locale.ROOT);
+        final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nArguments; i++) {
-            int num = getDoubleArg(callFrame, i + 1, names[CHAR]).intValue();
+            final int num = getDoubleArg(callFrame, i + 1, funcname).intValue();
             sb.append((char) num);
         }
         return callFrame.push(sb.toString());
     }
 
-    private int sub(LuaCallFrame callFrame, int nArguments) {
-        String s = getStringArg(callFrame, 1, names[SUB]);
-        double start = getDoubleArg(callFrame, 2, names[SUB]).doubleValue();
+    private int sub(final LuaCallFrame callFrame, final int nArguments) {
+        final String funcname = name().toLowerCase(Locale.ROOT);
+        final String s = getStringArg(callFrame, 1, funcname);
+        double start = getDoubleArg(callFrame, 2, funcname).doubleValue();
         double end = -1;
         if (nArguments >= 3) {
-            end = getDoubleArg(callFrame, 3, names[SUB]).doubleValue();
+            end = getDoubleArg(callFrame, 3, funcname).doubleValue();
         }
         String res;
         int istart = (int) start;
@@ -966,12 +938,12 @@ public final class StringLib implements JavaFunction {
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private static int findAux (LuaCallFrame callFrame, boolean find ) {
-        String f = find ? names[FIND] : names[MATCH];
-        String source = (String) BaseLib.getArg(callFrame, 1, BaseLib.TYPE_STRING, f);
-        String pattern = (String) BaseLib.getArg(callFrame, 2, BaseLib.TYPE_STRING, f);
-        Double i = ((Double)(BaseLib.getOptArg(callFrame, 3, BaseLib.TYPE_NUMBER)));
-        boolean plain = LuaState.boolEval(BaseLib.getOptArg(callFrame, 4, BaseLib.TYPE_BOOLEAN));
+    private int findAux(final LuaCallFrame callFrame, final boolean find) {
+        final String f = name().toLowerCase(Locale.ROOT);
+        final String source = BaseLib.getArg(callFrame, 1, BaseLib.Type.STRING, f);
+        final String pattern = BaseLib.getArg(callFrame, 2, BaseLib.Type.STRING, f);
+        final Double i = BaseLib.getOptArg(callFrame, 3, BaseLib.Type.NUMBER);
+        final boolean plain = LuaState.boolEval(BaseLib.getOptArg(callFrame, 4, BaseLib.Type.BOOLEAN));
         int init = (i == null ? 0 : i.intValue() - 1);
 
         if ( init < 0 ) {
@@ -1381,34 +1353,35 @@ public final class StringLib implements JavaFunction {
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private static int gsub(LuaCallFrame cf) {
-        String srcTemp = (String)BaseLib.getArg(cf, 1, BaseLib.TYPE_STRING, names[GSUB]);
-        String pTemp = (String)BaseLib.getArg(cf, 2, BaseLib.TYPE_STRING, names[GSUB]);
-        Object repl = BaseLib.getArg(cf, 3, null, names[GSUB]);
+    private int gsub(final LuaCallFrame cf) {
+        final String funcname = name().toLowerCase(Locale.ROOT);
+        final String srcTemp = BaseLib.getArg(cf, 1, BaseLib.Type.STRING, funcname);
+        final String pTemp = BaseLib.getArg(cf, 2, BaseLib.Type.STRING, funcname);
+        Object repl = BaseLib.getArg(cf, 3, null, funcname);
         {
-            String tmp = BaseLib.rawTostring(repl);
+            final String tmp = BaseLib.rawTostring(repl);
             if (tmp != null) {
                 repl = tmp;
             }
         }
-        Double num = (Double)BaseLib.getOptArg(cf, 4, BaseLib.TYPE_NUMBER);
+        final Double num = BaseLib.getOptArg(cf, 4, BaseLib.Type.NUMBER);
         // if i isn't supplied, we want to substitute all occurrences of the pattern
-        int maxSubstitutions = (num == null) ? Integer.MAX_VALUE : num.intValue();
+        final int maxSubstitutions = (num == null) ? Integer.MAX_VALUE : num.intValue();
 
-        StringPointer pattern = new StringPointer (pTemp);
-        StringPointer src = new StringPointer (srcTemp);
+        final StringPointer pattern = new StringPointer(pTemp);
+        final StringPointer src = new StringPointer(srcTemp);
 
         boolean anchor = false;
         if (pattern.getChar() == '^') {
             anchor = true;
-            pattern.postIncrString ( 1 );
+            pattern.postIncrString(1);
         }
 
-        String replType = BaseLib.type(repl);
-        if (!(replType == BaseLib.TYPE_FUNCTION ||
-                        replType == BaseLib.TYPE_STRING ||
-                        replType == BaseLib.TYPE_TABLE)) {
-            BaseLib.fail(("string/function/table expected, got "+replType));
+        final BaseLib.Type replType = BaseLib.type(repl);
+        if (!(replType == BaseLib.Type.FUNCTION ||
+                        replType == BaseLib.Type.STRING ||
+                        replType == BaseLib.Type.TABLE)) {
+            BaseLib.fail(("string/function/table expected, got " + replType));
         }
 
         MatchState ms = new MatchState ();
@@ -1442,24 +1415,22 @@ public final class StringLib implements JavaFunction {
         return cf.push(b.append(src.getString()).toString(), new Double(n));
     }
 
-    private static void addValue(MatchState ms, Object repl, StringBuffer b, StringPointer src, StringPointer e) {
-        String type = BaseLib.type(repl);
-        if (type == BaseLib.TYPE_NUMBER || type == BaseLib.TYPE_STRING) {
-            b.append(addString (ms, repl, src, e));
+    private static void addValue(final MatchState ms, final Object repl, final StringBuffer b, final StringPointer src, final StringPointer e) {
+        final BaseLib.Type type = BaseLib.type(repl);
+        if (type == BaseLib.Type.NUMBER || type == BaseLib.Type.STRING) {
+            b.append(addString(ms, repl, src, e));
         } else {
-            String match = src.getString().substring(0, e.getIndex() - src.getIndex());
-            Object[] captures = ms.getCaptures();
-            if (captures != null) {
-                match = BaseLib.rawTostring(captures[0]);
-            }
+            final String match = src.getString().substring(0, e.getIndex() - src.getIndex());
+            final Object[] captures = ms.getCaptures();
+            final String matchStr = (captures != null) ? BaseLib.rawTostring(captures[0]) : match;
             Object res = null;
-            if (type == BaseLib.TYPE_FUNCTION) {
-                res = ms.callFrame.thread.state.call(repl, match, null, null);
-            } else if (type == BaseLib.TYPE_TABLE) {
-                res = ((LuaTable)repl).rawget(match);
+            if (type == BaseLib.Type.FUNCTION) {
+                res = ms.callFrame.thread.state.call(repl, matchStr, null, null);
+            } else if (type == BaseLib.Type.TABLE) {
+                res = ((LuaTable) repl).rawget(matchStr);
             }
             if (res == null) {
-                res = match;
+                res = matchStr;
             }
             b.append(BaseLib.rawTostring(res));
         }
