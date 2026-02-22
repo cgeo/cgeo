@@ -25,6 +25,7 @@ Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.k
 */
 package cgeo.geocaching.wherigo.kahlua.stdlib;
 
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
@@ -193,12 +194,12 @@ public enum TableLib implements JavaFunction {
     }
 
     static void dumpTable(final LuaTable table) {
-        System.out.print("table " + table + ": ");
+        final StringBuilder sb = new StringBuilder("table " + table + ": ");
         Object key = null;
         while ((key = table.next(key)) != null) {
-            System.out.print(key.toString() + " => " + table.rawget(key) + ", ");
+            sb.append(key).append(" => ").append(table.rawget(key)).append(", ");
         }
-        System.out.println();
+        Log.d(sb.toString());
     }
 
     private int removeLua(final LuaCallFrame callFrame, final int nArguments) {

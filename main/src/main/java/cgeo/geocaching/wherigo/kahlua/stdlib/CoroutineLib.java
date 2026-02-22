@@ -113,7 +113,7 @@ public enum CoroutineLib implements JavaFunction {
         final LuaThread t = getCoroutine(callFrame, nArguments);
         final String status = getStatus(t, callFrame.thread);
         // equals on strings works because they are both constants
-        if (!(status == "suspended")) {
+        if (!"suspended".equals(status)) {
             BaseLib.fail(("Can not resume thread that is in status: " + status));
         }
 
