@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.R.string;
@@ -34,8 +35,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.view.View;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
@@ -120,7 +121,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                     break;
                 }
             }
-            showToast(res.getString(R.string.info_log_type_changed));
+            showToast(LocalizationUtils.getString(R.string.info_log_type_changed));
         }
     }
 
@@ -167,7 +168,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
 
         // no given data
         if (geocode == null) {
-            showToast(res.getString(R.string.err_tb_display));
+            showToast(LocalizationUtils.getString(R.string.err_tb_display));
             finish();
             return;
         }
@@ -183,7 +184,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         loggingManager = connector.getTrackableLoggingManager(geocode);
 
         if (loggingManager == null) {
-            showToast(res.getString(R.string.err_tb_not_loggable));
+            showToast(LocalizationUtils.getString(R.string.err_tb_not_loggable));
             finish();
         }
 
@@ -202,9 +203,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                     showProgress(false);
 
                     if (StringUtils.isNotBlank(geocode)) {
-                        showToast(res.getString(R.string.err_tb_not_found, geocode));
+                        showToast(LocalizationUtils.getString(R.string.err_tb_not_found, geocode));
                     } else {
-                        showToast(res.getString(R.string.err_tb_find_that));
+                        showToast(LocalizationUtils.getString(R.string.err_tb_find_that));
                     }
 
                     setResult(RESULT_CANCELED);
@@ -223,12 +224,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         // We're in LogTrackableActivity, so trackable must be loggable ;)
         if (!trackable.isLoggable()) {
             showProgress(false);
-            showToast(res.getString(R.string.err_tb_not_loggable));
+            showToast(LocalizationUtils.getString(R.string.err_tb_not_loggable));
             finish();
             return;
         }
 
-        setTitle(res.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(), trackable.getName()));
+        setTitle(LocalizationUtils.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(), trackable.getName()));
 
         // Display tracking code if we have, and move cursor next
         if (trackingCode != null) {
@@ -404,12 +405,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
                 sendLog();
             } else {
                 // Redirect user to concerned connector settings
-                //Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                //Dialogs.confirmYesNo(this, LocalizationUtils.getString(R.string.settings_title_open_settings), LocalizationUtils.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
                 SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                     } else {
-                        showToast(res.getString(R.string.err_trackable_no_preference_activity));
+                        showToast(LocalizationUtils.getString(R.string.err_trackable_no_preference_activity));
                     }
                 });
             }
@@ -470,7 +471,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
 
     private void onPostExecuteInternal(final LogResult status) {
         if (status.isOk()) {
-            showToast(res.getString(R.string.info_log_posted));
+            showToast(LocalizationUtils.getString(R.string.info_log_posted));
             finish();
         } else {
             showToast(status.getErrorString());

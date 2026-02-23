@@ -1,9 +1,9 @@
 package cgeo.geocaching.settings.fragments;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -57,6 +57,6 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         final int lcStatusTextId = gcConnectorActive && Settings.isGCPremiumMember() ?
                 R.string.settings_service_active : R.string.settings_service_active_unavailable;
 
-        return CgeoApplication.getInstance().getString(lcStatusTextId);
+        return LocalizationUtils.getString(lcStatusTextId);
     }
 }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.al;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -47,7 +46,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private ALConnector() {
         // singleton
-        name = LocalizationUtils.getString(R.string.settings_title_lc);
+        name = LocalizationUtils.getPlainString(R.string.settings_title_lc);
         prefKey = R.string.preference_screen_al;
     }
 
@@ -105,7 +104,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getExtraDescription() {
-        return CgeoApplication.getInstance().getString(R.string.lc_default_description);
+        return LocalizationUtils.getString(R.string.lc_default_description);
     }
 
     @Override

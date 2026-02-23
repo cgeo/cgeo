@@ -34,6 +34,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -78,7 +79,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
-
 
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinateInputDialog.CoordinateUpdate {
 
@@ -235,16 +235,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         if (StringUtils.isBlank(geocode) && waypointId <= 0) {
-            showToast(res.getString(R.string.err_waypoint_cache_unknown));
+            showToast(LocalizationUtils.getString(R.string.err_waypoint_cache_unknown));
 
             finish();
             return;
         }
 
         if (waypointId <= 0) {
-            setTitle(res.getString(R.string.waypoint_add_title));
+            setTitle(LocalizationUtils.getString(R.string.waypoint_add_title));
         } else {
-            setTitle(res.getString(R.string.waypoint_edit_title));
+            setTitle(LocalizationUtils.getString(R.string.waypoint_edit_title));
         }
 
         binding.buttonLatLongitude.setOnClickListener(new CoordDialogListener());
@@ -277,7 +277,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         recalculateProjectionView();
 
         if (waypointId > 0) { // existing waypoint
-            waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
+            waitDialog = ProgressDialog.show(this, null, LocalizationUtils.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
             (new LoadWaypointThread()).start();
         } else { // new waypoint
@@ -550,13 +550,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         private void showCoordinateOptionsDialog(final View view, final Geopoint geopoint, final Geocache cache) {
             final AlertDialog.Builder builder = Dialogs.newBuilder(view.getContext());
-            builder.setTitle(res.getString(R.string.waypoint_coordinates));
+            builder.setTitle(LocalizationUtils.getString(R.string.waypoint_coordinates));
             builder.setItems(R.array.waypoint_coordinates_options, (dialog, item) -> {
                 final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
-                if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
+                if (LocalizationUtils.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
                     ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
-                    showToast(res.getString(R.string.clipboard_copy_ok));
-                } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
+                    showToast(LocalizationUtils.getString(R.string.clipboard_copy_ok));
+                } else if (LocalizationUtils.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
                     final Waypoint copy = cache.duplicateWaypoint(waypoint, true);
                     if (copy != null) {
                         CacheDetailActivity.saveAndNotify(EditWaypointActivity.this, cache);
@@ -704,20 +704,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
             switch (msg.what) {
                 case UPLOAD_SUCCESS:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
                     break;
                 case SUCCESS:
                     break;
                 case UPLOAD_START:
                     break;
                 case UPLOAD_ERROR:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_upload_error));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_upload_error));
                     break;
                 case UPLOAD_NOT_POSSIBLE:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
                     break;
                 case SAVE_ERROR:
-                    ActivityMixin.showApplicationToast(activity.getString(R.string.err_waypoint_add_failed));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_waypoint_add_failed));
                     break;
                 default:
                     throw new IllegalStateException();
@@ -783,7 +783,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     final boolean result = deleteModifiedOnline ? deleteModifiedCoords(cache) : uploadModifiedCoords(cache, waypoint.getCoords());
                     finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
                 } else {
-                    ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
                     finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
                 }
             } else {

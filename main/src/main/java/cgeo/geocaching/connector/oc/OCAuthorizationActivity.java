@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.os.Bundle;
 
@@ -79,13 +80,13 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     @Override
     @NonNull
     protected String getAuthTitle() {
-        return res.getString(titleResId);
+        return LocalizationUtils.getString(titleResId);
     }
 
     @Override
     @NonNull
     protected String getAuthDialogCompleted() {
-        return res.getString(R.string.auth_dialog_completed_oc, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_dialog_completed_oc, getAuthTitle());
     }
 
     /**
@@ -98,7 +99,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     protected String getExtendedErrorMsg(final Response response) {
         final OkapiError error = OkapiClient.decodeErrorResponse(response);
         if (error.getResult() == OkapiErrors.INVALID_TIMESTAMP) {
-            return res.getString(R.string.init_login_popup_invalid_timestamp);
+            return LocalizationUtils.getString(R.string.init_login_popup_invalid_timestamp);
         }
         return StringUtils.EMPTY;
     }

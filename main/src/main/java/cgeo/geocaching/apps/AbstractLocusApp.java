@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.Manifest;
@@ -127,14 +128,14 @@ public abstract class AbstractLocusApp extends AbstractApp {
             try {
                 if (lv.isVersionValid(VersionCode.UPDATE_15)) {
                     // send file via FileProvider, you don't need WRITE_EXTERNAL_STORAGE permission for this
-                    final Uri uri = FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
+                    final Uri uri = FileProvider.getUriForFile(context, LocalizationUtils.getPlainString(R.string.file_provider_authority), file);
                     ActionDisplayPoints.INSTANCE.sendPacksFile(context, lv, data, file, uri, export ? ActionDisplayVarious.ExtraAction.IMPORT : ActionDisplayVarious.ExtraAction.CENTER);
                 } else {
                     // send file old way, you need WRITE_EXTERNAL_STORAGE permission for this
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         ActionDisplayPoints.INSTANCE.sendPacksFile(context, lv, data, file, null, ActionDisplayVarious.ExtraAction.CENTER);
                     } else {
-                        ActivityMixin.showToast(context, getString(R.string.storage_permission_needed));
+                        ActivityMixin.showToast(context, LocalizationUtils.getString(R.string.storage_permission_needed));
                     }
                 }
             } catch (final RequiredVersionMissingException e) {

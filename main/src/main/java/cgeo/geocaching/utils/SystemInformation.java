@@ -136,7 +136,7 @@ public final class SystemInformation {
         if (gcSuccess != 0) {
             body.append("\n- Last successful login on geocaching.com: ").append(Formatter.formatDateForFilename(gcSuccess));
         }
-        body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
+        body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(LocalizationUtils.getPlainString(R.string.package_brouter)));
 
         appendPermissions(context, body);
 

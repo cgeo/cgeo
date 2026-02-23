@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -213,31 +214,31 @@ public class GPXImporter {
             switch (msg.what) {
                 case IMPORT_STEP_START:
                     final Message cancelMessage = obtainMessage(IMPORT_STEP_CANCEL);
-                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches_with_filename, msg.obj), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
+                    progress.show(fromActivity, LocalizationUtils.getString(R.string.gpx_import_title_reading_file), LocalizationUtils.getString(R.string.gpx_import_loading_caches_with_filename, msg.obj), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
                     break;
 
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
-                    progress.setMessage(res.getString(msg.arg1, msg.obj));
+                    progress.setMessage(LocalizationUtils.getString(msg.arg1, msg.obj));
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
 
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
                     disposeProgressHandler();
-                    SimpleDialog.of(fromActivity).setTitle(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
+                    SimpleDialog.of(fromActivity).setTitle(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(LocalizationUtils.getString(R.string.gpx_import_static_maps_skipped) + ", " + LocalizationUtils.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
-                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
+                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_imported).setMessage(TextParam.text(LocalizationUtils.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj))).show();
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED_WITH_ERROR:
                     progress.dismiss();
-                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_import_failed).setMessage(TextParam.text(res.getString(msg.arg1) + "\n\n" + msg.obj)).show();
+                    SimpleDialog.of(fromActivity).setMessage(R.string.gpx_import_title_caches_import_failed).setMessage(TextParam.text(LocalizationUtils.getString(msg.arg1) + "\n\n" + msg.obj)).show();
                     importFinished();
                     break;
 
@@ -247,7 +248,7 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_CANCELED:
-                    ActivityMixin.showShortToast(fromActivity, res.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
+                    ActivityMixin.showShortToast(fromActivity, LocalizationUtils.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
                     importFinished();
                     break;
 

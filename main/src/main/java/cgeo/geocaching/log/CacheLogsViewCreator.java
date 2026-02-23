@@ -103,7 +103,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
         final List<LogEntry> logs = new ArrayList<>(logsIn);
         if (log != null) {
-            logs.add(0, log.buildUpon().setAuthor(res.getString(R.string.log_your_saved_log)).build());
+            logs.add(0, log.buildUpon().setAuthor(LocalizationUtils.getString(R.string.log_your_saved_log)).build());
         }
         return logs;
     }
@@ -150,7 +150,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
                 countview1 = new LinearLayout(getActivity());
                 final TextView logtypes = new TextView(getActivity());
-                logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
+                logtypes.setText(LocalizationUtils.getString(R.string.cache_log_types) + ": ");
                 countview1.addView(logtypes);
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
                     final TextView tv = new TextView(getActivity());
@@ -174,7 +174,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
         if (getLogs().isEmpty()) {
             countview2 = new TextView(getActivity());
-            countview2.setText(allLogs ? res.getString(R.string.log_empty_logbook) : res.getString(R.string.log_empty_logbook_filtered));
+            countview2.setText(allLogs ? LocalizationUtils.getString(R.string.log_empty_logbook) : LocalizationUtils.getString(R.string.log_empty_logbook_filtered));
             binding.logsItems.addHeaderView(countview2, null, false);
         }
     }
@@ -216,7 +216,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             holder.binding.countOrLocation.setVisibility(View.GONE);
         } else {
             holder.binding.countOrLocation.setVisibility(View.VISIBLE);
-            holder.binding.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
+            holder.binding.countOrLocation.setText(LocalizationUtils.getPlural(R.plurals.cache_counts, log.found));
         }
     }
 
@@ -240,7 +240,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     private boolean isOfflineLog(final LogEntry log) {
-        return log.author.equals(getString(R.string.log_your_saved_log));
+        return log.author.equals(LocalizationUtils.getString(R.string.log_your_saved_log));
     }
 
     @Override

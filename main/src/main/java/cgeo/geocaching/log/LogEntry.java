@@ -1,11 +1,11 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -488,7 +488,7 @@ public class LogEntry implements Parcelable {
             }
         }
         if (titles.isEmpty()) {
-            titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
+            titles.add(LocalizationUtils.getString(R.string.cache_log_image_default_title));
         }
         return "• " + StringUtils.join(titles, "\n• ");
     }

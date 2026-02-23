@@ -1,11 +1,11 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -32,7 +32,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
     private final List<ImmutablePair<String, Uri>> maps;
 
     MapsforgeVTMMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
-        super(CgeoApplication.getInstance().getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
+        super(LocalizationUtils.getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
         this.maps = maps;
     }
 

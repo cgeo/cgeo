@@ -1,10 +1,10 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ColorUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 
@@ -158,12 +158,12 @@ public enum CacheType {
 
     @NonNull
     public final String getL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+        return LocalizationUtils.getString(stringId);
     }
 
     @NonNull
     public final String getShortL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getString(shortStringId);
+        return LocalizationUtils.getString(shortStringId);
     }
 
     public boolean isEvent() {

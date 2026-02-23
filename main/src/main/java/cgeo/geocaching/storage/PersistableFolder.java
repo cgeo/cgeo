@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
 import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
@@ -185,7 +186,7 @@ public enum PersistableFolder {
             //this codepath is only chosen if no translation is available (e.g. in local unit tests)
             return name();
         }
-        return CgeoApplication.getInstance().getApplicationContext().getString(this.nameKeyId);
+        return LocalizationUtils.getString(this.nameKeyId);
     }
 
     /**
@@ -209,7 +210,7 @@ public enum PersistableFolder {
             result += isUserDefined() ? "User-Defined" : "Default";
         } else {
             final Context ctx = CgeoApplication.getInstance().getApplicationContext();
-            result += isUserDefined() ? ctx.getString(R.string.persistablefolder_usertype_userdefined) : ctx.getString(R.string.persistablefolder_usertype_default);
+            result += isUserDefined() ? LocalizationUtils.getString(R.string.persistablefolder_usertype_userdefined) : LocalizationUtils.getString(R.string.persistablefolder_usertype_default);
         }
         result += ")";
         return result;

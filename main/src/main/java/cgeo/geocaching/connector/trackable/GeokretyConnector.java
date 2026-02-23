@@ -104,7 +104,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getServiceTitle() {
-        return CgeoApplication.getInstance().getString(R.string.init_geokrety);
+        return LocalizationUtils.getPlainString(R.string.init_geokrety);
     }
 
     @Override
@@ -410,7 +410,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "godzina", String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", trackableLog.getLog() == null ? "" : trackableLog.getLog(),
-                    "app", LocalizationUtils.getString(R.string.app_name),
+                    "app", LocalizationUtils.getPlainString(R.string.app_name),
                     "app_ver", Version.getVersionName(CgeoApplication.getInstance()),
                     "mobile_lang", Settings.getApplicationLocale() + ".UTF-8"
             );

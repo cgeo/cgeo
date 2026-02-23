@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -238,21 +239,21 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthAgain() {
-        return getString(R.string.auth_again);
+        return LocalizationUtils.getString(R.string.auth_again);
     }
 
     protected String getErrAuthInitialize() {
-        return getString(R.string.err_auth_initialize);
+        return LocalizationUtils.getString(R.string.err_auth_initialize);
     }
 
     protected String getAuthStart() {
-        return getString(R.string.auth_start);
+        return LocalizationUtils.getString(R.string.auth_start);
     }
 
     protected abstract String getAuthDialogCompleted();
 
     protected String getErrAuthProcess() {
-        return res.getString(R.string.err_auth_process);
+        return LocalizationUtils.getString(R.string.err_auth_process);
     }
 
     /**
@@ -270,27 +271,27 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthDialogWait() {
-        return res.getString(R.string.auth_dialog_waiting, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_dialog_waiting, getAuthTitle());
     }
 
     protected String getAuthExplainShort() {
-        return res.getString(R.string.auth_token_explain_short, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_token_explain_short, getAuthTitle());
     }
 
     protected String getAuthExplainLong() {
-        return res.getString(R.string.auth_token_explain_long, getAuthTitle());
+        return LocalizationUtils.getString(R.string.auth_token_explain_long, getAuthTitle());
     }
 
     protected String getAuthAuthorize() {
-        return res.getString(R.string.auth_authorize);
+        return LocalizationUtils.getString(R.string.auth_authorize);
     }
 
     protected String getAuthRegisterExplain() {
-        return res.getString(R.string.auth_register_explain);
+        return LocalizationUtils.getString(R.string.auth_register_explain);
     }
 
     protected String getAuthRegister() {
-        return res.getString(R.string.auth_register);
+        return LocalizationUtils.getString(R.string.auth_register);
     }
 
     /**

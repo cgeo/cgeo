@@ -1,16 +1,15 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Context;
 
 import androidx.annotation.Nullable;
 
@@ -24,7 +23,7 @@ public class BatchUploadModifiedCoordinatesTask extends AsyncTaskWithProgress<Ge
     private int uploadFailed = 0;
 
     BatchUploadModifiedCoordinatesTask(@Nullable final Activity activity, final String title, final boolean modifiedOnly) {
-        super(activity, title, CgeoApplication.getInstance().getString(R.string.export_modifiedcoords));
+        super(activity, title, LocalizationUtils.getString(R.string.export_modifiedcoords));
         this.modifiedOnly = modifiedOnly;
     }
 
@@ -55,13 +54,12 @@ public class BatchUploadModifiedCoordinatesTask extends AsyncTaskWithProgress<Ge
     @Override
     protected void onPostExecuteInternal(final Boolean result) {
         if (activity != null) {
-            final Context nonNullActivity = activity;
             if (result) {
                 ActivityMixin.showToast(activity, uploadFailed == 0
-                        ? nonNullActivity.getString(R.string.export_modifiedcoords_success)
-                        : nonNullActivity.getString(R.string.export_modifiedcoords_result, uploadFailed, uploadOk));
+                        ? LocalizationUtils.getString(R.string.export_modifiedcoords_success)
+                        : LocalizationUtils.getString(R.string.export_modifiedcoords_result, uploadFailed, uploadOk));
             } else {
-                ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_modifiedcoords_error));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_modifiedcoords_error));
             }
             Log.d("upload finished: ok=" + uploadOk + " / failed=" + uploadFailed + " / total=" + uploadProgress);
         }
@@ -70,7 +68,7 @@ public class BatchUploadModifiedCoordinatesTask extends AsyncTaskWithProgress<Ge
     @Override
     protected void onProgressUpdateInternal(final Integer status) {
         if (activity != null) {
-            setMessage(activity.getString(R.string.export_modifiedcoords_uploading, uploadProgress));
+            setMessage(LocalizationUtils.getString(R.string.export_modifiedcoords_uploading, uploadProgress));
         }
     }
 }

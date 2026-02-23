@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
@@ -118,13 +119,13 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             filterContext = new GeocacheFilterContext(TRANSIENT);
         }
 
-        setTitle(getString(filterContext.getType().titleId));
+        setTitle(LocalizationUtils.getString(filterContext.getType().titleId));
         fillViewFromFilter(filterContext.get().toConfig(), false);
         originalFilterConfig = getFilterFromView().toConfig();
 
         // Some features do not work / make no sense for nested filters
         if (isNested) {
-            setTitle(getString(R.string.cache_filter_contexttype_nestedfilter_title));
+            setTitle(LocalizationUtils.getString(R.string.cache_filter_contexttype_nestedfilter_title));
             binding.filterBasicAdvanced.setVisibility(View.GONE);
             binding.filterStorageOptions.setVisibility(View.GONE);
             binding.filterStorageOptionsLine.setVisibility(View.GONE);
@@ -162,7 +163,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding.filterStorageSave.setOnClickListener(v -> {
             final String filterName = GeocacheFilter.getPurifiedFilterName(binding.filterStorageName.getText().toString());
             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_title)
-                    .input(new SimpleDialog.InputOptions().setInitialValue(filterName).setHint(getString(R.string.cache_filter_storage_save_title)), newName -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(filterName).setHint(LocalizationUtils.getString(R.string.cache_filter_storage_save_title)), newName -> {
                         final GeocacheFilter filter = getFilterFromView();
                         if (GeocacheFilter.Storage.existsAndDiffers(newName, filter)) {
                             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_confirm_title).setMessage(R.string.cache_filter_storage_save_confirm_message, newName).confirm(
