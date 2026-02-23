@@ -20,6 +20,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 - Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
+- New: Offer to set cache icon even if cache is not yet stored
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -69,3 +70,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Ändring: Använd systeminställningar som standardtema för nya installationer
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
 - Nytt: Visa ångra-fältet när cacher tas bort från listan från kartan
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists

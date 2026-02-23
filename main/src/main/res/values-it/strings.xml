@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
     <string name="log_problem_log_full_label">Il logbook è pieno</string>
     <string name="log_problem_log_full_text">Questo geocacher ha segnalato che il logbook è pieno.</string>
+    <string name="log_problem_log_wet_label">Il logbook è pieno</string>
+    <string name="log_problem_log_wet_text">Questo geocacher ha segnalato che il logbook è bagnato.</string>
     <string name="log_problem_damaged_label">Il contenitore è danneggiato</string>
     <string name="log_problem_damaged_text">Questo geocacher ha segnalato che il contenitore è danneggiato.</string>
     <string name="log_problem_missing_label">Il cache potrebbe non essere presente</string>
@@ -315,6 +317,7 @@
     <string name="warn_search_help_user">Inserisci il nome dell\'utente di Geocaching.com.</string>
     <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
+    <string name="warn_bookmarklist_select">Nessuna lista di segnalibri selezionata.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
@@ -340,6 +343,8 @@
     <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
+    <string name="err_trackable_error">Errore trackable</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Troppi trackables contrassegnati come \"visit\" - massimo di %d consentito</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
     <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
     <string name="confirm_unsent_changes_title">Modifiche non inviate</string>
@@ -559,6 +564,7 @@
     <string name="list_dialog_rename">Rinomina</string>
     <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
     <string name="list_parent_list">Elenco principale</string>
+    <string name="list_create_parent">&lt;Crea nuova lista parent&gt;</string>
     <string name="list_name">Nome elenco</string>
     <string name="list_confirm_rename">Rinomina da \"%1$s\" in \"%2$s\"\n%3$s\nQuesta azione non può essere annullata!</string>
     <string name="list_confirm_no_hierarchy">\nNessun \":\" trovato - tutte gli elenchi corrispondenti saranno trasformati in elenchi di primo livello\n</string>
@@ -645,6 +651,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
     <string name="cache_filter_datefilter_absolute">Assoluto</string>
     <string name="cache_filter_datefilter_relative">Relativo ad oggi</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignora anno</string>
     <string name="cache_filter_datefilter_label_from">Da:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto</string>
@@ -798,6 +805,10 @@
     <string name="downloader_pending_info">C\'è almeno una pausa o uno scaricamento non riuscito. Vuoi aprire l\'elenco dei download in sospeso?</string>
     <string name="downloader_retry_download">Ritentare il download</string>
     <string name="downloader_retry_download_details">Vuoi riprovare il download del seguente file?</string>
+    <string name="downloader_delete_all_pending">Elimina tutto</string>
+    <string name="downloader_delete_all_confirmation">Eliminare tutti i download in sospeso?</string>
+    <string name="downloader_delete_all_message">Questo annullerà tutti i %d download in attesa e rimuoverà le parti scaricate. Questa azione non può essere annullata.</string>
+    <string name="downloader_deleted_all">Eliminato tutti i download in sospeso</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download non riuscito (e non verrà ritentato)</string>
     <string name="asdm_status_paused">Il download è in attesa di riprovare o riprendere</string>
@@ -841,6 +852,7 @@
     <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
+    <string name="settings_title_maptrail">Cronologia traccia</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
     <string name="settings_title_map_style">Stile della mappa</string>
     <string name="settings_hide_tileproviders_title">Nascondi Sorgenti Mappa</string>
@@ -941,6 +953,9 @@
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Luogo</string>
     <string name="init_signature_template_geocode">Geocode</string>
+    <string name="init_signature_template_tblocation_geocache_code">Trackable - Codice geocache</string>
+    <string name="init_signature_template_tblocation_geocache_name">Trackable - Nome geocache</string>
+    <string name="init_signature_template_tblocation_user">Trackable - Utente</string>
     <string name="init_summary_bettercacher">Carica categorie e livelli di cache da BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
     <string name="init_summary_friends_and_own_logs_wanted">Visualizza una pagina di log addizionale per i log dei tuoi amici e i tuoi log</string>
@@ -1047,6 +1062,10 @@
         <item>Chiaro</item>
         <item>Scuro</item>
     </string-array>
+    <string name="init_colored_theme_dark">Tema scuro colorato</string>
+    <string name="init_colored_theme_light">Tema chiaro colorato</string>
+    <string name="init_summary_colored_theme_dark">Usa la barra degli strumenti colorata nel tema scuro</string>
+    <string name="init_summary_colored_theme_light">Usa barra degli strumenti colorata nel tema chiaro</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Schermata predefinita</string>
     <string name="init_wallpaper">Sfondo</string>
@@ -1131,7 +1150,10 @@
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
     <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
+    <string name="init_maptrail_length">Lunghezza massima</string>
     <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 punti - regolato in base alla memoria disponibile.</string>
+    <string name="init_maptrail_maxdistance">Distanza massima</string>
+    <string name="init_maptrail_maxdistance_summary">Distanza massima fino alla quale due punti consecutivi del tracciato storico vengono collegati sulla mappa</string>
     <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
     <string name="init_trailappearance">Aspetto della traccia cronologia</string>
     <string name="init_trailappearance_summary">Seleziona colore, opacità e larghezza della linea per la linea della traccia cronologia</string>
@@ -1264,6 +1286,7 @@
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_google_terrain">Google: Terreno</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
+    <string name="map_source_nomap">Nessuna mappa</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
@@ -1398,6 +1421,11 @@
     <string name="cache_delete_generated_waypoints">Rimuovi waypoint generati</string>
     <string name="cache_delete_generated_waypoints_confirm">Rimuovere tutti i waypoint generati da questo cache?\n\nWaypoints verranno eliminati immediatamente, non è possibile annullare.</string>
     <string name="cache_delete_generated_waypoints_success">waypoint cancellati</string>
+    <string name="cache_select_waypoint_types">Seleziona tipi di waypoint</string>
+    <plurals name="cache_waypoints_marked_as_visited_success">
+        <item quantity="one">waypoint %d contrassegnato come visitato</item>
+        <item quantity="other">%d waypoint contrassegnati come visitati</item>
+    </plurals>
     <string name="cache_offline_store">Salva</string>
     <string name="cache_offline_stored_ago">Archiviato: %s</string>
     <string name="cache_offline_not_ready">Non disponibile offline</string>
@@ -1725,6 +1753,7 @@
     <string name="waypoint_user_note">Nota utente</string>
     <string name="waypoint_visited">Visitato</string>
     <string name="waypoint_set_visited">Waypoint settato come visitato</string>
+    <string name="waypoint_set_visited_types">Imposta i waypoint come visitati</string>
     <string name="waypoint_unset_visited">Waypoint settato come non visitato</string>
     <string name="waypoint_save">Salva</string>
     <string name="waypoint_loading">Caricamento waypoint…</string>
@@ -1776,6 +1805,8 @@
     <string name="calccoord_guided_mode">Modalità Guidata</string>
     <string name="calccoord_guided_edit">Tocca una cifra per modificare</string>
     <string name="calccoord_guided_value">Valore</string>
+    <string name="calccoord_select_variable">Seleziona Variabile</string>
+    <string name="calccoord_new_variable">**%s** *(Nuovo)*</string>
     <string name="calccoord_convert_to_plain">Converti in semplici coordinate</string>
     <string name="calccoord_plain_tools_title">Strumenti Semplici</string>
     <string name="calccoord_remove_spaces">Rimuovi Spazi</string>
@@ -1815,8 +1846,15 @@
     <string name="formula_function_lettervalue">Valore della parola</string>
     <string name="formula_function_roman">Da romano a decimale</string>
     <string name="formula_function_vanity">Codice Vanity</string>
+    <string name="formula_function_add">Somma</string>
+    <string name="formula_function_multiply">Moltiplica</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Conteggio</string>
+    <string name="formula_function_average">Media</string>
     <string name="formula_function_group_simplenumeric">Numerico semplice</string>
     <string name="formula_function_group_complexnumeric">Numerico semplice</string>
+    <string name="formula_function_group_aggregatenumeric">Numero Aggregato</string>
     <string name="formula_function_group_simplestring">Stringa semplice</string>
     <string name="formula_function_group_complexstring">Stringa complessa</string>
     <string name="formula_error_unexpectedtoken">Atteso \'%1$s\'</string>
@@ -1826,6 +1864,7 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Formula Vuota</string>
     <string name="formula_error_numeric_overflow">Overflow numerico</string>
+    <string name="formula_error_invalid_range">Range non valido: %1$s</string>
     <string name="formula_error_other">Errore: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Senza titolo</string>
@@ -2407,6 +2446,8 @@
     <string name="preference_colorpicker_show_width">larghezza: %d</string>
     <string name="reset_to_default">Predefinito</string>
     <!-- number input -->
+    <string name="number_input_title">Imposta valore</string>
+    <string name="number_input_range">Inserisci un valore tra %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
     <string name="number_input_err_boundarymax">Il valore inserito è troppo grande - resettato al valore massimo</string>
     <string name="number_input_err_format">Formato del numero non valido</string>
