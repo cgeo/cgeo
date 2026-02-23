@@ -37,11 +37,11 @@ import java.util.Locale;
 
 public enum CoroutineLib implements JavaFunction {
 
-    CREATE,   // ordinal 0
-    RESUME,   // ordinal 1
-    YIELD,    // ordinal 2
-    STATUS,   // ordinal 3
-    RUNNING;  // ordinal 4
+    CREATE,
+    RESUME,
+    YIELD,
+    STATUS,
+    RUNNING;
 
     private static final Class<LuaThread> LUA_THREAD_CLASS = LuaThread.class;
 

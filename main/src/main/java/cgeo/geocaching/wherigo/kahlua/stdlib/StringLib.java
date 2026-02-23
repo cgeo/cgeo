@@ -35,16 +35,16 @@ import java.util.Locale;
 
 public enum StringLib implements JavaFunction {
 
-    SUB,     // ordinal 0
-    CHAR,    // ordinal 1
-    BYTE,    // ordinal 2
-    LOWER,   // ordinal 3
-    UPPER,   // ordinal 4
-    REVERSE, // ordinal 5
-    FORMAT,  // ordinal 6
-    FIND,    // ordinal 7
-    MATCH,   // ordinal 8
-    GSUB;    // ordinal 9
+    SUB,
+    CHAR,
+    BYTE,
+    LOWER,
+    UPPER,
+    REVERSE,
+    FORMAT,
+    FIND,
+    MATCH,
+    GSUB;
 
     private static final boolean[] SPECIALS = new boolean[256];
     static {
@@ -106,7 +106,7 @@ public enum StringLib implements JavaFunction {
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private int format(final LuaCallFrame callFrame) {
-        String f = BaseLib.getArg(callFrame, 1, BaseLib.Type.STRING, name().toLowerCase(Locale.ROOT));
+        String f = BaseLib.getArg(callFrame, 1, LuaType.STRING, name().toLowerCase(Locale.ROOT));
 
         int len = f.length();
         int argc = 2;
@@ -634,7 +634,7 @@ public enum StringLib implements JavaFunction {
     }
 
     private static String getStringArg(final LuaCallFrame callFrame, final int argc, final String funcname) {
-        return BaseLib.getArg(callFrame, argc, BaseLib.Type.STRING, funcname);
+        return BaseLib.getArg(callFrame, argc, LuaType.STRING, funcname);
     }
 
     private Double getDoubleArg(final LuaCallFrame callFrame, final int argc) {
@@ -642,7 +642,7 @@ public enum StringLib implements JavaFunction {
     }
 
     private static Double getDoubleArg(final LuaCallFrame callFrame, final int argc, final String funcname) {
-        return BaseLib.getArg(callFrame, argc, BaseLib.Type.NUMBER, funcname);
+        return BaseLib.getArg(callFrame, argc, LuaType.NUMBER, funcname);
     }
 
     private int lower(final LuaCallFrame callFrame, final int nArguments) {
@@ -940,10 +940,10 @@ public enum StringLib implements JavaFunction {
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private int findAux(final LuaCallFrame callFrame, final boolean find) {
         final String f = name().toLowerCase(Locale.ROOT);
-        final String source = BaseLib.getArg(callFrame, 1, BaseLib.Type.STRING, f);
-        final String pattern = BaseLib.getArg(callFrame, 2, BaseLib.Type.STRING, f);
-        final Double i = BaseLib.getOptArg(callFrame, 3, BaseLib.Type.NUMBER);
-        final boolean plain = LuaState.boolEval(BaseLib.getOptArg(callFrame, 4, BaseLib.Type.BOOLEAN));
+        final String source = BaseLib.getArg(callFrame, 1, LuaType.STRING, f);
+        final String pattern = BaseLib.getArg(callFrame, 2, LuaType.STRING, f);
+        final Double i = BaseLib.getOptArg(callFrame, 3, LuaType.NUMBER);
+        final boolean plain = LuaState.boolEval(BaseLib.getOptArg(callFrame, 4, LuaType.BOOLEAN));
         int init = (i == null ? 0 : i.intValue() - 1);
 
         if ( init < 0 ) {
@@ -1355,8 +1355,8 @@ public enum StringLib implements JavaFunction {
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private int gsub(final LuaCallFrame cf) {
         final String funcname = name().toLowerCase(Locale.ROOT);
-        final String srcTemp = BaseLib.getArg(cf, 1, BaseLib.Type.STRING, funcname);
-        final String pTemp = BaseLib.getArg(cf, 2, BaseLib.Type.STRING, funcname);
+        final String srcTemp = BaseLib.getArg(cf, 1, LuaType.STRING, funcname);
+        final String pTemp = BaseLib.getArg(cf, 2, LuaType.STRING, funcname);
         Object repl = BaseLib.getArg(cf, 3, null, funcname);
         {
             final String tmp = BaseLib.rawTostring(repl);
@@ -1364,7 +1364,7 @@ public enum StringLib implements JavaFunction {
                 repl = tmp;
             }
         }
-        final Double num = BaseLib.getOptArg(cf, 4, BaseLib.Type.NUMBER);
+        final Double num = BaseLib.getOptArg(cf, 4, LuaType.NUMBER);
         // if i isn't supplied, we want to substitute all occurrences of the pattern
         final int maxSubstitutions = (num == null) ? Integer.MAX_VALUE : num.intValue();
 
@@ -1377,10 +1377,10 @@ public enum StringLib implements JavaFunction {
             pattern.postIncrString(1);
         }
 
-        final BaseLib.Type replType = BaseLib.type(repl);
-        if (!(replType == BaseLib.Type.FUNCTION ||
-                        replType == BaseLib.Type.STRING ||
-                        replType == BaseLib.Type.TABLE)) {
+        final LuaType replType = BaseLib.type(repl);
+        if (!(replType == LuaType.FUNCTION ||
+                        replType == LuaType.STRING ||
+                        replType == LuaType.TABLE)) {
             BaseLib.fail(("string/function/table expected, got " + replType));
         }
 
@@ -1416,17 +1416,17 @@ public enum StringLib implements JavaFunction {
     }
 
     private static void addValue(final MatchState ms, final Object repl, final StringBuilder b, final StringPointer src, final StringPointer e) {
-        final BaseLib.Type type = BaseLib.type(repl);
-        if (type == BaseLib.Type.NUMBER || type == BaseLib.Type.STRING) {
+        final LuaType type = BaseLib.type(repl);
+        if (type == LuaType.NUMBER || type == LuaType.STRING) {
             b.append(addString(ms, repl, src, e));
         } else {
             final String match = src.getString().substring(0, e.getIndex() - src.getIndex());
             final Object[] captures = ms.getCaptures();
             final String matchStr = (captures != null) ? BaseLib.rawTostring(captures[0]) : match;
             Object res = null;
-            if (type == BaseLib.Type.FUNCTION) {
+            if (type == LuaType.FUNCTION) {
                 res = ms.callFrame.thread.state.call(repl, matchStr, null, null);
-            } else if (type == BaseLib.Type.TABLE) {
+            } else if (type == LuaType.TABLE) {
                 res = ((LuaTable) repl).rawget(matchStr);
             }
             if (res == null) {

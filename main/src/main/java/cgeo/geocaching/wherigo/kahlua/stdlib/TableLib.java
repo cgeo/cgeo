@@ -36,10 +36,10 @@ import java.util.Locale;
 
 public enum TableLib implements JavaFunction {
 
-    CONCAT,  // ordinal 0
-    INSERT,  // ordinal 1
-    REMOVE,  // ordinal 2
-    MAXN;    // ordinal 3
+    CONCAT,
+    INSERT,
+    REMOVE,
+    MAXN;
 
     public static void register(final LuaState state) {
         final LuaTable table = new LuaTableImpl();

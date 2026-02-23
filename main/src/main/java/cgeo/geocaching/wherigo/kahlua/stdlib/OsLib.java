@@ -39,9 +39,9 @@ import java.util.TimeZone;
 
 public enum OsLib implements JavaFunction {
 
-    DATE,       // ordinal 0
-    DIFFTIME,   // ordinal 1
-    TIME;       // ordinal 2
+    DATE,
+    DIFFTIME,
+    TIME;
 
     private static final String TABLE_FORMAT = "*t";
     private static final String DEFAULT_FORMAT = "%c";
@@ -113,7 +113,7 @@ public enum OsLib implements JavaFunction {
             double t = (double) System.currentTimeMillis() * TIME_DIVIDEND_INVERTED;
             cf.push(LuaState.toDouble(t));
         } else {
-            LuaTable table = BaseLib.getArg(cf, 1, BaseLib.Type.TABLE, "time");
+            LuaTable table = BaseLib.getArg(cf, 1, LuaType.TABLE, "time");
             double t = (double) getDateFromTable(table).getTime() * TIME_DIVIDEND_INVERTED;
             cf.push(LuaState.toDouble(t));
         }

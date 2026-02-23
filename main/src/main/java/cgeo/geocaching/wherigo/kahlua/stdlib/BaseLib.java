@@ -40,35 +40,25 @@ import java.util.function.Function;
 
 public enum BaseLib implements JavaFunction {
 
-    PCALL,           // ordinal 0
-    PRINT,           // ordinal 1
-    SELECT,          // ordinal 2
-    TYPE,            // ordinal 3
-    TOSTRING,        // ordinal 4
-    TONUMBER,        // ordinal 5
-    GETMETATABLE,    // ordinal 6
-    SETMETATABLE,    // ordinal 7
-    ERROR,           // ordinal 8
-    UNPACK,          // ordinal 9
-    NEXT,            // ordinal 10
-    SETFENV,         // ordinal 11
-    GETFENV,         // ordinal 12
-    RAWEQUAL,        // ordinal 13
-    RAWSET,          // ordinal 14
-    RAWGET,          // ordinal 15
-    COLLECTGARBAGE,  // ordinal 16
-    DEBUGSTACKTRACE, // ordinal 17
-    BYTECODELOADER;  // ordinal 18
-
-    /** Lua type identifiers returned by the {@code type()} function. */
-    public enum Type {
-        NIL, STRING, NUMBER, BOOLEAN, FUNCTION, TABLE, THREAD, USERDATA;
-
-        @Override
-        public String toString() {
-            return name().toLowerCase(Locale.ROOT);
-        }
-    }
+    PCALL,
+    PRINT,
+    SELECT,
+    TYPE,
+    TOSTRING,
+    TONUMBER,
+    GETMETATABLE,
+    SETMETATABLE,
+    ERROR,
+    UNPACK,
+    NEXT,
+    SETFENV,
+    GETFENV,
+    RAWEQUAL,
+    RAWSET,
+    RAWGET,
+    COLLECTGARBAGE,
+    DEBUGSTACKTRACE,
+    BYTECODELOADER;
 
     private static final Runtime RUNTIME = Runtime.getRuntime();
     public static final Object MODE_KEY = "__mode";
@@ -112,21 +102,21 @@ public enum BaseLib implements JavaFunction {
     }
 
     private int debugstacktrace(final LuaCallFrame callFrame, final int nArguments) {
-        LuaThread thread = getOptArg(callFrame, 1, Type.THREAD);
+        LuaThread thread = getOptArg(callFrame, 1, LuaType.THREAD);
         if (thread == null) {
             thread = callFrame.thread;
         }
-        Double levelDouble = getOptArg(callFrame, 2, Type.NUMBER);
+        Double levelDouble = getOptArg(callFrame, 2, LuaType.NUMBER);
         int level = 0;
         if (levelDouble != null) {
             level = levelDouble.intValue();
         }
-        Double countDouble = getOptArg(callFrame, 3, Type.NUMBER);
+        Double countDouble = getOptArg(callFrame, 3, LuaType.NUMBER);
         int count = Integer.MAX_VALUE;
         if (countDouble != null) {
             count = countDouble.intValue();
         }
-        Double haltAtDouble = getOptArg(callFrame, 4, Type.NUMBER);
+        Double haltAtDouble = getOptArg(callFrame, 4, LuaType.NUMBER);
         int haltAt = 0;
         if (haltAtDouble != null) {
             haltAt = haltAtDouble.intValue();
@@ -269,7 +259,7 @@ public enum BaseLib implements JavaFunction {
 
     private int error(final LuaCallFrame callFrame, final int nArguments) {
         if (nArguments >= 1) {
-            String stacktrace = getOptArg(callFrame, 2, Type.STRING);
+            String stacktrace = getOptArg(callFrame, 2, LuaType.STRING);
             if (stacktrace == null) {
                 stacktrace = "";
             }
@@ -386,7 +376,7 @@ public enum BaseLib implements JavaFunction {
      * @return variable with index n on the stack, coerced/cast to T.
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getArg(final LuaCallFrame callFrame, final int n, final Type type,
+    public static <T> T getArg(final LuaCallFrame callFrame, final int n, final LuaType type,
                 final String function) {
         Object o = callFrame.get(n - 1);
         if (o == null) {
@@ -394,12 +384,12 @@ public enum BaseLib implements JavaFunction {
                 "' (" + type + " expected, got no value)");
         }
         // type coercion
-        if (type == Type.STRING) {
+        if (type == LuaType.STRING) {
             final String res = rawTostring(o);
             if (res != null) {
                 return (T) res;
             }
-        } else if (type == Type.NUMBER) {
+        } else if (type == LuaType.NUMBER) {
             final Double d = rawTonumber(o);
             if (d != null) {
                 return (T) d;
@@ -409,7 +399,7 @@ public enum BaseLib implements JavaFunction {
         }
         if (type != null) {
             // type checking
-            final Type isType = type(o);
+            final LuaType isType = type(o);
             if (type != isType) {
                 fail("bad argument #" + n + " to '" + function + "' (" + type +
                     " expected, got " + isType + ")");
@@ -419,7 +409,7 @@ public enum BaseLib implements JavaFunction {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T getOptArg(final LuaCallFrame callFrame, final int n, final Type type) {
+    public static <T> T getOptArg(final LuaCallFrame callFrame, final int n, final LuaType type) {
         // Outside of stack
         if (n - 1 >= callFrame.getTop()) {
             return null;
@@ -430,9 +420,9 @@ public enum BaseLib implements JavaFunction {
             return null;
         }
         // type coercion
-        if (type == Type.STRING) {
+        if (type == LuaType.STRING) {
             return (T) rawTostring(o);
-        } else if (type == Type.NUMBER) {
+        } else if (type == LuaType.NUMBER) {
             return (T) rawTonumber(o);
         }
         // no type checking, this is optional after all
@@ -474,29 +464,29 @@ public enum BaseLib implements JavaFunction {
         return 1;
     }
 
-    public static Type type(final Object o) {
+    public static LuaType type(final Object o) {
         if (o == null) {
-            return Type.NIL;
+            return LuaType.NIL;
         }
         if (o instanceof String) {
-            return Type.STRING;
+            return LuaType.STRING;
         }
         if (o instanceof Double) {
-            return Type.NUMBER;
+            return LuaType.NUMBER;
         }
         if (o instanceof Boolean) {
-            return Type.BOOLEAN;
+            return LuaType.BOOLEAN;
         }
         if (o instanceof JavaFunction || o instanceof LuaClosure) {
-            return Type.FUNCTION;
+            return LuaType.FUNCTION;
         }
         if (o instanceof LuaTable) {
-            return Type.TABLE;
+            return LuaType.TABLE;
         }
         if (o instanceof LuaThread) {
-            return Type.THREAD;
+            return LuaType.THREAD;
         }
-        return Type.USERDATA;
+        return LuaType.USERDATA;
     }
 
     private static int tostring(final LuaCallFrame callFrame, final int nArguments) {
@@ -509,7 +499,7 @@ public enum BaseLib implements JavaFunction {
 
     public static String tostring(final Object o, final LuaState state) {
         if (o == null) {
-            return Type.NIL.toString();
+            return LuaType.NIL.toString();
         }
         if (o instanceof String) {
             return (String) o;
@@ -640,7 +630,7 @@ public enum BaseLib implements JavaFunction {
     }
 
     private int bytecodeloader(final LuaCallFrame callFrame, final int nArguments) {
-        final String modname = getArg(callFrame, 1, Type.STRING, "loader");
+        final String modname = getArg(callFrame, 1, LuaType.STRING, "loader");
         final LuaTable packageTable = (LuaTable) callFrame.getEnvironment().rawget("package");
         final String classpath = (String) packageTable.rawget("classpath");
 

@@ -36,32 +36,32 @@ import java.util.Random;
 
 public enum MathLib implements JavaFunction {
 
-    ABS,        // ordinal 0
-    ACOS,       // ordinal 1
-    ASIN,       // ordinal 2
-    ATAN,       // ordinal 3
-    ATAN2,      // ordinal 4
-    CEIL,       // ordinal 5
-    COS,        // ordinal 6
-    COSH,       // ordinal 7
-    DEG,        // ordinal 8
-    EXP,        // ordinal 9
-    FLOOR,      // ordinal 10
-    FMOD,       // ordinal 11
-    FREXP,      // ordinal 12
-    LDEXP,      // ordinal 13
-    LOG,        // ordinal 14
-    LOG10,      // ordinal 15
-    MODF,       // ordinal 16
-    POW,        // ordinal 17
-    RAD,        // ordinal 18
-    RANDOM,     // ordinal 19
-    RANDOMSEED, // ordinal 20
-    SIN,        // ordinal 21
-    SINH,       // ordinal 22
-    SQRT,       // ordinal 23
-    TAN,        // ordinal 24
-    TANH;       // ordinal 25
+    ABS,
+    ACOS,
+    ASIN,
+    ATAN,
+    ATAN2,
+    CEIL,
+    COS,
+    COSH,
+    DEG,
+    EXP,
+    FLOOR,
+    FMOD,
+    FREXP,
+    LDEXP,
+    LOG,
+    LOG10,
+    MODF,
+    POW,
+    RAD,
+    RANDOM,
+    RANDOMSEED,
+    SIN,
+    SINH,
+    SQRT,
+    TAN,
+    TANH;
 
     public static final double EPS = 1e-15;
 
@@ -132,7 +132,7 @@ public enum MathLib implements JavaFunction {
     }
 
     private double getDoubleArg(final LuaCallFrame callFrame, final int argc) {
-        final Double d = BaseLib.getArg(callFrame, argc, BaseLib.Type.NUMBER, name().toLowerCase(Locale.ROOT));
+        final Double d = BaseLib.getArg(callFrame, argc, LuaType.NUMBER, name().toLowerCase(Locale.ROOT));
         return d.doubleValue();
     }
 

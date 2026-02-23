@@ -17,31 +17,30 @@ import java.util.Map;
 
 public enum WherigoLib implements JavaFunction {
 
-    // Declaration order defines ordinal() = Lua protocol value (0-23).
-    COMMAND("Command", WherigoLib.class),          // ordinal 0  - Wherigo.Command
-    ZONEPOINT("ZonePoint", ZonePoint.class),       // ordinal 1
-    DISTANCE("Distance", Double.class),            // ordinal 2
-    CARTRIDGE("ZCartridge", Cartridge.class),      // ordinal 3
-    MESSAGEBOX("MessageBox", WherigoLib.class),    // ordinal 4
-    ZONE("Zone", Zone.class),                      // ordinal 5
-    DIALOG("Dialog", WherigoLib.class),            // ordinal 6
-    ZCHARACTER("ZCharacter", Thing.class),         // ordinal 7
-    ZITEM("ZItem", Thing.class),                   // ordinal 8
-    ZCOMMAND("ZCommand", Action.class),            // ordinal 9
-    ZMEDIA("ZMedia", Media.class),                 // ordinal 10
-    ZINPUT("ZInput", EventTable.class),            // ordinal 11
-    ZTIMER("ZTimer", Timer.class),                 // ordinal 12
-    ZTASK("ZTask", Task.class),                    // ordinal 13
-    AUDIO("PlayAudio", WherigoLib.class),          // ordinal 14
-    GETINPUT("GetInput", WherigoLib.class),        // ordinal 15
-    NOCASEEQUALS("NoCaseEquals", WherigoLib.class),// ordinal 16
-    SHOWSCREEN("ShowScreen", WherigoLib.class),    // ordinal 17
-    TRANSLATEPOINT("TranslatePoint", WherigoLib.class), // ordinal 18
-    SHOWSTATUSTEXT("ShowStatusText", WherigoLib.class), // ordinal 19
-    VECTORTOPOINT("VectorToPoint", WherigoLib.class),   // ordinal 20
-    LOGMESSAGE("LogMessage", WherigoLib.class),    // ordinal 21
-    MADE("made", WherigoLib.class),                // ordinal 22
-    GETVALUE("GetValue", WherigoLib.class);        // ordinal 23
+    COMMAND("Command", WherigoLib.class),
+    ZONEPOINT("ZonePoint", ZonePoint.class),
+    DISTANCE("Distance", Double.class),
+    CARTRIDGE("ZCartridge", Cartridge.class),
+    MESSAGEBOX("MessageBox", WherigoLib.class),
+    ZONE("Zone", Zone.class),
+    DIALOG("Dialog", WherigoLib.class),
+    ZCHARACTER("ZCharacter", Thing.class),
+    ZITEM("ZItem", Thing.class),
+    ZCOMMAND("ZCommand", Action.class),
+    ZMEDIA("ZMedia", Media.class),
+    ZINPUT("ZInput", EventTable.class),
+    ZTIMER("ZTimer", Timer.class),
+    ZTASK("ZTask", Task.class),
+    AUDIO("PlayAudio", WherigoLib.class),
+    GETINPUT("GetInput", WherigoLib.class),
+    NOCASEEQUALS("NoCaseEquals", WherigoLib.class),
+    SHOWSCREEN("ShowScreen", WherigoLib.class),
+    TRANSLATEPOINT("TranslatePoint", WherigoLib.class),
+    SHOWSTATUSTEXT("ShowStatusText", WherigoLib.class),
+    VECTORTOPOINT("VectorToPoint", WherigoLib.class),
+    LOGMESSAGE("LogMessage", WherigoLib.class),
+    MADE("made", WherigoLib.class),
+    GETVALUE("GetValue", WherigoLib.class);
 
     public static final Map<String, Object> env = new HashMap<>(); /* Wherigo's Env table */
     public static final String DEVICE_ID = "DeviceID";
