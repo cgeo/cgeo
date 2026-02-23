@@ -15,9 +15,9 @@ public class GCConstantsTest {
     @Test
     public void testLocation() {
         // GC37GFJ
-        assertThat(parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />")).isEqualTo("Bretagne, France");
+        assertThat(parseLocation("<meta name=\"description\" content=\"Tintin et la trilogie du Névet : Pas si fous !!! (GC37GFJ) was created by yandens on 12/10/2011. It&#39;s a Large size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Bretagne, France.&#13;&#10; &#13;&#10;&#13;&#10;Générique Tintin&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ATTENTION : LES COORDONNEES DE LA PAGE NE SONT PAS LESCOORDONNEES REELES. LISEZ BIEN L&#39;ENIGME...\" />")).isEqualTo("Bretagne, France");
         // GCV2R9
-        assertThat(parseLocation("<span id=\"ctl00_ContentBody_Location\">In <a href=\"/map/beta/default.aspx?lat=37.4354&lng=-122.07745&z=16\" title=\"View Map\">California, United States</a></span><br />")).isEqualTo("California, United States");
+        assertThat(parseLocation("<meta name=\"description\" content=\"Burrowing Owls (GCV2R9) was created by caliseastar on 03/26/2006. It&#39;s a Micro size geocache, with difficulty of 1, terrain of 1. It&#39;s located in California, United States.This cache is located along a paved path in Shoreline park. Nearest&#13;&#10;parking is about half a mile away, but the cache is easily&#13;&#10;accessible by bike, rollerblade, stroller, or wheelchair. Park is&#13;&#10;open from dawn to dusk.\" />")).isEqualTo("California, United States");
     }
 
     private static String parseLocation(final String html) {
