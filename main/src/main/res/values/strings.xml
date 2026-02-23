@@ -551,6 +551,14 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <plurals name="caches_warning_delete_offline_log">
+        <item quantity="one">%d cache has an offline log. This will get lost on deleting the cache.</item>
+        <item quantity="two">%d caches have an offline log. Those will get lost on deleting the caches.</item>
+        <item quantity="few">%d caches have an offline log. Those will get lost on deleting the caches.</item>
+        <item quantity="many">%d caches have an offline log. Those will get lost on deleting the caches.</item>
+        <item quantity="other">%d caches have an offline log. Those will get lost on deleting the caches.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
