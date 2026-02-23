@@ -8,8 +8,6 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
@@ -89,15 +87,17 @@ public class SearchUtils {
                 searchAutoComplete.showDropDown();
             }
         });
+        // Prevent the parent layout from intercepting touch events on the search input field.
+        // This allows long-press to paste to work properly when suggestions are visible (#17895).
+        searchAutoComplete.setOnTouchListener((v, event) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
         // only for bottom navigation activities
         final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = activity.findViewById(R.id.bottomnavigation_activity_viewroot);
         if (activityViewroot != null) {
             activityViewroot.setOnInterceptTouchEventListener(ev -> {
                 if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                    // Allow touch events on the search input field itself (e.g., long-press to paste)
-                    if (isTouchInsideView(ev, searchAutoComplete)) {
-                        return false;
-                    }
                     menuSearch.collapseActionView();
                     searchView.setIconified(true);
                     return true; // intercept touch event to do not trigger an unwanted action
@@ -106,15 +106,6 @@ public class SearchUtils {
                 return false;
             });
         }
-    }
-
-    private static boolean isTouchInsideView(final MotionEvent ev, final View view) {
-        final int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        final float x = ev.getRawX();
-        final float y = ev.getRawY();
-        return x >= location[0] && x <= location[0] + view.getWidth()
-                && y >= location[1] && y <= location[1] + view.getHeight();
     }
 
     public static void setSearchViewColor(final SearchView searchView) {
