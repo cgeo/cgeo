@@ -43,8 +43,7 @@ public enum CoroutineLib implements JavaFunction {
     STATUS,   // ordinal 3
     RUNNING;  // ordinal 4
 
-    // NOTE: LuaThread.class won't work in J2ME - so this is used as a workaround
-    private static final Class LUA_THREAD_CLASS = new LuaThread(null, null).getClass();
+    private static final Class<LuaThread> LUA_THREAD_CLASS = LuaThread.class;
 
     public static void register(final LuaState state) {
         final LuaTable coroutine = new LuaTableImpl();

@@ -64,19 +64,19 @@ public enum OsLib implements JavaFunction {
     private static final int MILLIS_PER_DAY = TIME_DIVIDEND * 60 * 60 * 24;
     private static final int MILLIS_PER_WEEK = MILLIS_PER_DAY * 7;
 
-    private static String[] shortDayNames = new String[] {
+    private static final String[] SHORT_DAY_NAMES = new String[] {
         "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
     };
 
-    private static String[] longDayNames = new String[] {
+    private static final String[] LONG_DAY_NAMES = new String[] {
         "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     };
 
-    private static String[] shortMonthNames = new String[] {
+    private static final String[] SHORT_MONTH_NAMES = new String[] {
         "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
     };
 
-    private static String[] longMonthNames = new String[] {
+    private static final String[] LONG_MONTH_NAMES = new String[] {
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     };
@@ -179,10 +179,10 @@ public enum OsLib implements JavaFunction {
 
     private static String strftime(final char format, final Calendar cal) {
         switch (format) {
-            case 'a': return shortDayNames[cal.get(Calendar.DAY_OF_WEEK) - 1];
-            case 'A': return longDayNames[cal.get(Calendar.DAY_OF_WEEK) - 1];
-            case 'b': return shortMonthNames[cal.get(Calendar.MONTH)];
-            case 'B': return longMonthNames[cal.get(Calendar.MONTH)];
+            case 'a': return SHORT_DAY_NAMES[cal.get(Calendar.DAY_OF_WEEK) - 1];
+            case 'A': return LONG_DAY_NAMES[cal.get(Calendar.DAY_OF_WEEK) - 1];
+            case 'b': return SHORT_MONTH_NAMES[cal.get(Calendar.MONTH)];
+            case 'B': return LONG_MONTH_NAMES[cal.get(Calendar.MONTH)];
             case 'c': return cal.getTime().toString();
             case 'C': return Integer.toString(cal.get(Calendar.YEAR) / 100);
             case 'd': return Integer.toString(cal.get(Calendar.DAY_OF_MONTH));

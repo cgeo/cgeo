@@ -599,7 +599,7 @@ public enum BaseLib implements JavaFunction {
         }
 
         if (option == null || option.equals("step") || option.equals("collect")) {
-            System.gc();
+            RUNTIME.gc();
             return 0;
         }
 
