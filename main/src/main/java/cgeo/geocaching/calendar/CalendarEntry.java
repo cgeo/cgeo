@@ -17,7 +17,11 @@ import android.text.style.ImageSpan;
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
 
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +44,7 @@ class CalendarEntry {
     private final String coords;
     private final int startTimeMinutes;
     private final int endTimeMinutes;
+    private final ZoneId localZone;
 
     CalendarEntry(@NonNull final Geocache cache, @NonNull final Date hiddenDate) {
         this(TextUtils.stripHtml(StringUtils.defaultString(cache.getShortDescription())),
@@ -66,25 +71,17 @@ class CalendarEntry {
         this.coords = coords;
         this.startTimeMinutes = startTimeMinutes;
         this.endTimeMinutes = endTimeMinutes;
+        this.localZone = ZoneId.systemDefault();
     }
 
     /**
      * @return {@code Date} based on hidden date. Time is set to 00:00:00.
      */
     @NonNull
-    private Date parseDate() {
-        try {
-            final Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(hiddenDate.getTime());
-            cal.set(Calendar.HOUR_OF_DAY, 0);
-            cal.set(Calendar.MINUTE, 0);
-            cal.set(Calendar.SECOND, 0);
-
-            return cal.getTime();
-        } catch (final NumberFormatException e) {
-            // cannot happen normally, but static code analysis does not know
-            throw new IllegalStateException("hidden date must be a valid date for cache calendar entries");
-        }
+    private long getStartOfDay() {
+        final LocalDate localDate = hiddenDate.toInstant().atZone(ZoneOffset.UTC).toLocalDate();
+        final Instant midnight = localDate.atTime(LocalTime.MIDNIGHT).atZone(localZone).toInstant();
+        return midnight.toEpochMilli();
     }
 
     /**
@@ -120,7 +117,7 @@ class CalendarEntry {
     }
 
     private void addEntryToCalendarInternal(final Context context) {
-        final Date eventDate = parseDate();
+        final long eventTime = getStartOfDay();
         final String description = parseDescription();
 
         final Intent intent = new Intent(Intent.ACTION_INSERT)
@@ -128,8 +125,8 @@ class CalendarEntry {
                 .putExtra(CalendarContract.Events.TITLE, TextUtils.stripHtml(name))
                 .putExtra(CalendarContract.Events.DESCRIPTION, description)
                 .putExtra(CalendarContract.Events.HAS_ALARM, false)
-                .putExtra(CalendarContract.Events.EVENT_TIMEZONE, "UTC");
-        final long eventTime = eventDate.getTime();
+                .putExtra(CalendarContract.Events.EVENT_TIMEZONE, localZone.getId());
+
         final int entryStartTimeMinutes = startTimeMinutes;
         if (entryStartTimeMinutes >= 0) {
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventTime + entryStartTimeMinutes * 60000L);
