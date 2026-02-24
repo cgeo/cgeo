@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Strings;
 
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
