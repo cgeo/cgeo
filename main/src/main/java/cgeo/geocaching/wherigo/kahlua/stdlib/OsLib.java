@@ -36,6 +36,7 @@ import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.TextStyle;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
@@ -63,23 +64,6 @@ public enum OsLib implements JavaFunction {
 
     public static final int TIME_DIVIDEND = 1000; // number to divide by for converting from milliseconds.
     public static final double TIME_DIVIDEND_INVERTED = 1.0 / TIME_DIVIDEND; // number to divide by for converting from milliseconds.
-
-    private static final String[] SHORT_DAY_NAMES = new String[] {
-        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-    };
-
-    private static final String[] LONG_DAY_NAMES = new String[] {
-        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-    };
-
-    private static final String[] SHORT_MONTH_NAMES = new String[] {
-        "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
-    };
-
-    private static final String[] LONG_MONTH_NAMES = new String[] {
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    };
 
     public static void register(final LuaState state) {
         final LuaTable os = new LuaTableImpl();
@@ -179,10 +163,10 @@ public enum OsLib implements JavaFunction {
         // day-of-week array index: ISO Mon=1..Sun=7 → Sun=0..Sat=6
         final int dowIndex = zdt.getDayOfWeek().getValue() % 7;
         switch (format) {
-            case 'a': return SHORT_DAY_NAMES[dowIndex];
-            case 'A': return LONG_DAY_NAMES[dowIndex];
-            case 'b': return SHORT_MONTH_NAMES[zdt.getMonthValue() - 1];
-            case 'B': return LONG_MONTH_NAMES[zdt.getMonthValue() - 1];
+            case 'a': return zdt.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ROOT);
+            case 'A': return zdt.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ROOT);
+            case 'b': return zdt.getMonth().getDisplayName(TextStyle.SHORT, Locale.ROOT);
+            case 'B': return zdt.getMonth().getDisplayName(TextStyle.FULL, Locale.ROOT);
             case 'c': return zdt.toString();
             case 'C': return Integer.toString(zdt.getYear() / 100);
             case 'd': return Integer.toString(zdt.getDayOfMonth());
