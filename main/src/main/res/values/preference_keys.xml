@@ -305,6 +305,10 @@
     <!-- category gpx -->
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
 
+    <!-- category file handling -->
+    <string translatable="false" name="pref_localfile_handler_by_extension">localfile_handler_by_extension</string>
+    <string translatable="false" name="pref_localfile_handler_by_mimetype">localfile_handler_by_mimetype</string>
+
     <!-- category database location -->
     <string translatable="false" name="pref_dbonsdcard">dbonsdcard</string>
 
