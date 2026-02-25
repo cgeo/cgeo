@@ -673,4 +673,23 @@
         <item name="android:paddingLeft">3dip</item>
     </style>
 
+    <!-- elevation chart styles -->
+    <style name="elevation_infobox_symbol">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="elevation_infobox_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
