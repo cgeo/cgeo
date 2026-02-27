@@ -8,6 +8,8 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCLiveAPI;
+import cgeo.geocaching.connector.gc.GCLiveOAuth;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
@@ -56,6 +58,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -238,6 +241,30 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             } else {
                                 userAvatar.setVisibility(View.GONE);
                             }
+
+                            // GC Live API status line
+                            final TextView liveApiStatus = connectorInfo.findViewById(R.id.item_live_api_status);
+                            if (conn instanceof GCConnector && Settings.useGCLiveAPI()) {
+                                liveApiStatus.setVisibility(View.VISIBLE);
+                                if (!Settings.hasGCLiveAuthorization()) {
+                                    liveApiStatus.setText(R.string.gc_live_status_not_authorized);
+                                } else {
+                                    final long issuedAt = Settings.getGCLiveTokenIssuedAt();
+                                    final long age = System.currentTimeMillis() / 1000 - issuedAt;
+                                    if (age < 3600) {
+                                        liveApiStatus.setText(R.string.gc_live_status_token_valid);
+                                    } else {
+                                        liveApiStatus.setText(R.string.gc_live_status_refreshing_token);
+                                        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> GCLiveAPI.ensureTokenValid(), () -> {
+                                            final long newAge = System.currentTimeMillis() / 1000 - Settings.getGCLiveTokenIssuedAt();
+                                            liveApiStatus.setText(newAge < 3600 ? R.string.gc_live_status_token_valid : R.string.gc_live_status_token_refresh_failed);
+                                        });
+                                    }
+                                }
+                                liveApiStatus.setOnClickListener(connectorConfig);
+                            } else {
+                                liveApiStatus.setVisibility(View.GONE);
+                            }
                         }
                     });
                 }
@@ -317,6 +344,18 @@ public class MainActivity extends AbstractNavigationBarActivity {
     @NonNull
     protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
         return calculateInsetsWithToolbarInPortrait(def);
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        // Handle GC Live OAuth callback immediately for singleTop launch mode,
+        // since onResume() may not always be called after onNewIntent()
+        final android.net.Uri oauthData = intent.getData();
+        if (GCLiveOAuth.handleCallback(this, oauthData)) {
+            setIntent(new Intent());
+        }
     }
 
     private void configureMessageCenterPolling() {
@@ -426,6 +465,12 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
     @Override
     public void onResume() {
+        // Handle GC Live OAuth callback (browser redirects here via intent filter)
+        final android.net.Uri oauthData = getIntent().getData();
+        if (GCLiveOAuth.handleCallback(this, oauthData)) {
+            setIntent(new Intent()); // clear so we don't re-handle on next resume
+        }
+
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onResume")) {
 
             super.onResume();
@@ -474,7 +519,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             searchItem = menu.findItem(R.id.menu_gosearch);
             searchView = (SearchView) searchItem.getActionView();
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(
+                    new ComponentName(this, SearchActivity.class)));
             searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
             SearchUtils.setSearchViewColor(searchView);
 
