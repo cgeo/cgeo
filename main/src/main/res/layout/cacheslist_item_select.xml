@@ -40,6 +40,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
         android:textColor="@color/colorText_listsPrimary"
+        android:minHeight="0dip"
         tools:text="name"
         android:maxLines="1" />
 
@@ -63,6 +64,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
+        android:minHeight="0dip"
         tools:text="geocode"
         android:maxLines="3" />
 
