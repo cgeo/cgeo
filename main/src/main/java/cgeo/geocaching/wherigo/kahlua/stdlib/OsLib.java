@@ -26,25 +26,25 @@ Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.k
 
 package cgeo.geocaching.wherigo.kahlua.stdlib;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
 
-public class OsLib implements JavaFunction {
-    private static final int DATE = 0;
-    private static final int DIFFTIME = 1;
-    private static final int TIME = 2;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.TextStyle;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
-    private static final int NUM_FUNCS = 3;
+public enum OsLib implements JavaFunction {
 
-    private static String[] funcnames;
-    private static OsLib[] funcs;
+    DATE,
+    DIFFTIME,
+    TIME;
 
     private static final String TABLE_FORMAT = "*t";
     private static final String DEFAULT_FORMAT = "%c";
@@ -60,90 +60,56 @@ public class OsLib implements JavaFunction {
     private static final Object MILLISECOND = "milli";
     //private static final String ISDST = "isdst";
 
-    private static TimeZone tzone = TimeZone.getDefault();
+    private static ZoneId tzone = ZoneId.systemDefault();
 
     public static final int TIME_DIVIDEND = 1000; // number to divide by for converting from milliseconds.
     public static final double TIME_DIVIDEND_INVERTED = 1.0 / TIME_DIVIDEND; // number to divide by for converting from milliseconds.
-    private static final int MILLIS_PER_DAY = TIME_DIVIDEND * 60 * 60 * 24;
-    private static final int MILLIS_PER_WEEK = MILLIS_PER_DAY * 7;
 
-    private int methodId;
-
-    private static String[] shortDayNames = new String[] {
-        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-    };
-
-    private static String[] longDayNames = new String[] {
-        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-    };
-
-    private static String[] shortMonthNames = new String[] {
-        "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
-    };
-
-    private static String[] longMonthNames = new String[] {
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    };
-
-    static {
-        funcnames = new String[NUM_FUNCS];
-        funcnames[DATE] = "date";
-        funcnames[DIFFTIME] = "difftime";
-        funcnames[TIME] = "time";
-
-        funcs = new OsLib[NUM_FUNCS];
-        for (int i = 0; i < NUM_FUNCS; i++) {
-            funcs[i] = new OsLib(i);
-        }
-    }
-
-    public static void register(LuaState state) {
-        LuaTable os = new LuaTableImpl();
+    public static void register(final LuaState state) {
+        final LuaTable os = new LuaTableImpl();
         state.getEnvironment().rawset("os", os);
-
-        for (int i = 0; i < NUM_FUNCS; i++) {
-            os.rawset(funcnames[i], funcs[i]);
+        for (final OsLib f : values()) {
+            os.rawset(f.name().toLowerCase(Locale.ROOT), f);
         }
     }
 
-    public static void setTimeZone (TimeZone tz) {
+    public static void setTimeZone(final ZoneId tz) {
         tzone = tz;
     }
 
-    private OsLib(int methodId) {
-        this.methodId = methodId;
+    @Override
+    public String toString() {
+        return name().toLowerCase(Locale.ROOT);
     }
 
-    public int call(LuaCallFrame cf, int nargs) {
-        switch(methodId) {
-        case DATE: return date(cf, nargs);
-        case DIFFTIME: return difftime(cf);
-        case TIME: return time(cf, nargs);
-        default: throw new IllegalStateException("Undefined method called on os.");
+    @Override
+    public int call(final LuaCallFrame cf, final int nargs) {
+        switch (this) {
+            case DATE: return date(cf, nargs);
+            case DIFFTIME: return difftime(cf);
+            case TIME: return time(cf, nargs);
+            default: throw new IllegalStateException("Undefined method called on os.");
         }
     }
 
-    private int time(LuaCallFrame cf, int nargs) {
+    private int time(final LuaCallFrame cf, final int nargs) {
         if (nargs == 0) {
-            double t = (double) System.currentTimeMillis() * TIME_DIVIDEND_INVERTED;
-            cf.push(LuaState.toDouble(t));
+            cf.push(LuaState.toDouble((double) System.currentTimeMillis() * TIME_DIVIDEND_INVERTED));
         } else {
-            LuaTable table = (LuaTable) BaseLib.getArg(cf, 1, BaseLib.TYPE_TABLE, "time");
-            double t = (double) getDateFromTable(table).getTime() * TIME_DIVIDEND_INVERTED;
-            cf.push(LuaState.toDouble(t));
+            final LuaTable table = BaseLib.getArg(cf, 1, LuaType.TABLE, "time");
+            cf.push(LuaState.toDouble((double) getDateFromTable(table) * TIME_DIVIDEND_INVERTED));
         }
         return 1;
     }
 
-    private int difftime(LuaCallFrame cf) {
+    private int difftime(final LuaCallFrame cf) {
         double t2 = BaseLib.rawTonumber(cf.get(0)).doubleValue();
         double t1 = BaseLib.rawTonumber(cf.get(1)).doubleValue();
-        cf.push(LuaState.toDouble(t2-t1));
+        cf.push(LuaState.toDouble(t2 - t1));
         return 1;
     }
 
-    private int date(LuaCallFrame cf, int nargs) {
+    private int date(final LuaCallFrame cf, final int nargs) {
         if (nargs == 0) {
             return cf.push(getdate(DEFAULT_FORMAT));
         } else {
@@ -158,169 +124,109 @@ public class OsLib implements JavaFunction {
         }
     }
 
-    public static Object getdate(String format) {
-        return getdate(format, Calendar.getInstance().getTime().getTime());
+    public static Object getdate(final String format) {
+        return getdate(format, System.currentTimeMillis());
     }
 
-    public static Object getdate(String format, long time) {
-        //boolean universalTime = format.startsWith("!");
-        Calendar calendar = null;
+    public static Object getdate(final String format, final long time) {
         int si = 0;
+        final ZoneId zone;
         if (format.charAt(si) == '!') { // UTC?
-            calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            zone = ZoneId.of("UTC");
             si++;  // skip '!'
         } else {
-            calendar = Calendar.getInstance(tzone); // TODO: user-defined timezone
+            zone = tzone;
         }
-        calendar.setTime(new Date(time));
+        final ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(time), zone);
 
-        if (calendar == null) { // invalid calendar?
-            return null;
-        } else if (format.substring(si, 2 + si).equals(TABLE_FORMAT)) {
-            return getTableFromDate(calendar);
+        if (format.substring(si, 2 + si).equals(TABLE_FORMAT)) {
+            return getTableFromDate(zdt);
         } else {
-            return formatTime(format.substring(si), calendar);
+            return formatTime(format.substring(si), zdt);
         }
     }
 
-    public static String formatTime(String format, Calendar cal) {
-
-        StringBuffer buffer = new StringBuffer();
-        for (int stringIndex = 0; stringIndex < format.length(); stringIndex ++) {
-            if (format.charAt(stringIndex) != '%' || stringIndex + 1 == format.length()) { // no conversion specifier?
-                buffer.append(format.charAt(stringIndex));
+    public static String formatTime(final String format, final ZonedDateTime zdt) {
+        final StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < format.length(); i++) {
+            if (format.charAt(i) != '%' || i + 1 == format.length()) { // no conversion specifier?
+                buffer.append(format.charAt(i));
             } else {
-                ++stringIndex;
-                buffer.append(strftime(format.charAt(stringIndex), cal));
+                ++i;
+                buffer.append(strftime(format.charAt(i), zdt));
             }
         }
         return buffer.toString();
     }
 
-    private static String strftime(char format, Calendar cal) {
-        switch(format) {
-            case 'a': return shortDayNames[cal.get(Calendar.DAY_OF_WEEK)-1];
-            case 'A': return longDayNames[cal.get(Calendar.DAY_OF_WEEK)-1];
-            case 'b': return shortMonthNames[cal.get(Calendar.MONTH)];
-            case 'B': return longMonthNames[cal.get(Calendar.MONTH)];
-            case 'c': return cal.getTime().toString();
-            case 'C': return Integer.toString(cal.get(Calendar.YEAR) / 100);
-            case 'd': return Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
-            case 'D': return formatTime("%m/%d/%y",cal);
-            case 'e': return cal.get(Calendar.DAY_OF_MONTH) < 10 ?
-                            " " + strftime('d',cal) : strftime('d',cal);
-            case 'h': return strftime('b',cal);
-            case 'H': return Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
-            case 'I': return Integer.toString(cal.get(Calendar.HOUR));
-            case 'j': return Integer.toString(getDayOfYear(cal));
-            case 'm': return Integer.toString(cal.get(Calendar.MONTH) + 1);
-            case 'M': return Integer.toString(cal.get(Calendar.MINUTE));
+    private static String strftime(final char format, final ZonedDateTime zdt) {
+        // day-of-week array index: ISO Mon=1..Sun=7 → Sun=0..Sat=6
+        final int dowIndex = zdt.getDayOfWeek().getValue() % 7;
+        switch (format) {
+            case 'a': return zdt.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ROOT);
+            case 'A': return zdt.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ROOT);
+            case 'b': return zdt.getMonth().getDisplayName(TextStyle.SHORT, Locale.ROOT);
+            case 'B': return zdt.getMonth().getDisplayName(TextStyle.FULL, Locale.ROOT);
+            case 'c': return zdt.toString();
+            case 'C': return Integer.toString(zdt.getYear() / 100);
+            case 'd': return Integer.toString(zdt.getDayOfMonth());
+            case 'D': return formatTime("%m/%d/%y", zdt);
+            case 'e': return zdt.getDayOfMonth() < 10 ? " " + zdt.getDayOfMonth() : Integer.toString(zdt.getDayOfMonth());
+            case 'h': return strftime('b', zdt);
+            case 'H': return Integer.toString(zdt.getHour());
+            case 'I': return Integer.toString(zdt.getHour() % 12);
+            case 'j': return Integer.toString(zdt.getDayOfYear());
+            case 'm': return Integer.toString(zdt.getMonthValue());
+            case 'M': return Integer.toString(zdt.getMinute());
             case 'n': return "\n";
-            case 'p': return cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-            case 'r': return formatTime("%I:%M:%S %p",cal);
-            case 'R': return formatTime("%H:%M",cal);
-            case 'S': return Integer.toString(cal.get(Calendar.SECOND));
-            case 'U': return Integer.toString(getWeekOfYear(cal, true, false));
-            case 'V': return Integer.toString(getWeekOfYear(cal, false, true));
-            case 'w': return Integer.toString(cal.get(Calendar.DAY_OF_WEEK) - 1);
-            case 'W': return Integer.toString(getWeekOfYear(cal, false, false));
-            /* commented out until we have a way to define locale and get locale formats working
-            case 'x':
-                String str = Integer.toString(cal.get(Calendar.YEAR));
-                return Integer.toString(cal.get(Calendar.MONTH)) + "/" + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)) +
-                        "/" + str.substring(2, str.length());
-            case 'X': return Integer.toString(cal.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(cal.get(Calendar.MINUTE)) +
-                        ":" + Integer.toString(cal.get(Calendar.SECOND));
-            */
-            case 'y': return Integer.toString(cal.get(Calendar.YEAR) % 100);
-            case 'Y': return Integer.toString(cal.get(Calendar.YEAR));
-            case 'Z': return cal.getTimeZone().getID();
+            case 'p': return zdt.getHour() < 12 ? "AM" : "PM";
+            case 'r': return formatTime("%I:%M:%S %p", zdt);
+            case 'R': return formatTime("%H:%M", zdt);
+            case 'S': return Integer.toString(zdt.getSecond());
+            case 'U': return Integer.toString(zdt.get(WeekFields.SUNDAY_START.weekOfYear()));
+            case 'V': return Integer.toString(zdt.get(WeekFields.ISO.weekOfWeekBasedYear()));
+            case 'w': return Integer.toString(dowIndex);
+            case 'W': return Integer.toString(zdt.get(WeekFields.of(DayOfWeek.MONDAY, 1).weekOfYear()));
+            case 'y': return Integer.toString(zdt.getYear() % 100);
+            case 'Y': return Integer.toString(zdt.getYear());
+            case 'Z': return zdt.getZone().getId();
             default: return null; // bad input format.
         }
     }
 
-    public static LuaTable getTableFromDate(Calendar c) {
-        LuaTable time = new LuaTableImpl();
-        time.rawset(YEAR, LuaState.toDouble(c.get(Calendar.YEAR)));
-        time.rawset(MONTH, LuaState.toDouble(c.get(Calendar.MONTH)+1));
-        time.rawset(DAY, LuaState.toDouble(c.get(Calendar.DAY_OF_MONTH)));
-        time.rawset(HOUR, LuaState.toDouble(c.get(Calendar.HOUR_OF_DAY)));
-        time.rawset(MIN, LuaState.toDouble(c.get(Calendar.MINUTE)));
-        time.rawset(SEC, LuaState.toDouble(c.get(Calendar.SECOND)));
-        time.rawset(WDAY, LuaState.toDouble(c.get(Calendar.DAY_OF_WEEK)));
-        time.rawset(YDAY, LuaState.toDouble(getDayOfYear(c)));
-        time.rawset(MILLISECOND, LuaState.toDouble(c.get(Calendar.MILLISECOND)));
-        //time.rawset(ISDST, null);
+    public static LuaTable getTableFromDate(final ZonedDateTime zdt) {
+        final LuaTable time = new LuaTableImpl();
+        time.rawset(YEAR, LuaState.toDouble(zdt.getYear()));
+        time.rawset(MONTH, LuaState.toDouble(zdt.getMonthValue()));
+        time.rawset(DAY, LuaState.toDouble(zdt.getDayOfMonth()));
+        time.rawset(HOUR, LuaState.toDouble(zdt.getHour()));
+        time.rawset(MIN, LuaState.toDouble(zdt.getMinute()));
+        time.rawset(SEC, LuaState.toDouble(zdt.getSecond()));
+        time.rawset(WDAY, LuaState.toDouble(zdt.getDayOfWeek().getValue() % 7 + 1));
+        time.rawset(YDAY, LuaState.toDouble(zdt.getDayOfYear()));
+        time.rawset(MILLISECOND, LuaState.toDouble(zdt.getNano() / 1_000_000));
         return time;
     }
 
     /**
-     * converts the relevant fields in the given luatable to a Date object.
+     * Converts the relevant fields in the given LuaTable to epoch milliseconds.
      * @param time LuaTable with entries for year month and day, and optionally hour/min/sec
-     * @return a date object representing the date frim the luatable.
+     * @return epoch milliseconds representing the date from the LuaTable.
      */
-    public static Date getDateFromTable(LuaTable time) {
-        Calendar c = Calendar.getInstance(tzone);
-        c.set(Calendar.YEAR,(int)LuaState.fromDouble(time.rawget(YEAR)));
-        c.set(Calendar.MONTH,(int)LuaState.fromDouble(time.rawget(MONTH))-1);
-        c.set(Calendar.DAY_OF_MONTH,(int)LuaState.fromDouble(time.rawget(DAY)));
-        Object hour = time.rawget(HOUR);
-        Object minute = time.rawget(MIN);
-        Object seconds = time.rawget(SEC);
-        Object milliseconds = time.rawget(MILLISECOND);
-        //Object isDst = time.rawget(ISDST);
-        if (hour != null) {
-            c.set(Calendar.HOUR_OF_DAY,(int)LuaState.fromDouble(hour));
-        } else {
-            c.set(Calendar.HOUR_OF_DAY, 0);
-        }
-        if (minute != null) {
-            c.set(Calendar.MINUTE,(int)LuaState.fromDouble(minute));
-        } else {
-            c.set(Calendar.MINUTE, 0);
-        }
-        if (seconds != null) {
-            c.set(Calendar.SECOND,(int)LuaState.fromDouble(seconds));
-        } else {
-            c.set(Calendar.SECOND, 0);
-        }
-        if (milliseconds != null) {
-            c.set(Calendar.MILLISECOND, (int)LuaState.fromDouble(milliseconds));
-        } else {
-            c.set(Calendar.MILLISECOND, 0);
-        }
-        // TODO: daylight savings support(is it possible?)
-        return c.getTime();
-    }
-
-    public static int getDayOfYear(Calendar c) {
-        Calendar c2 = Calendar.getInstance(c.getTimeZone());
-        c2.setTime(c.getTime());
-        c2.set(Calendar.MONTH, Calendar.JANUARY);
-        c2.set(Calendar.DAY_OF_MONTH, 1);
-        long diff = c.getTime().getTime() - c2.getTime().getTime();
-
-        return (int)Math.ceil((double)diff / MILLIS_PER_DAY);
-    }
-
-    public static int getWeekOfYear(Calendar c, boolean weekStartsSunday, boolean jan1midweek) {
-        Calendar c2 = Calendar.getInstance(c.getTimeZone());
-        c2.setTime(c.getTime());
-        c2.set(Calendar.MONTH, Calendar.JANUARY);
-        c2.set(Calendar.DAY_OF_MONTH, 1);
-        int dayOfWeek = c2.get(Calendar.DAY_OF_WEEK);
-        if (weekStartsSunday && dayOfWeek != Calendar.SUNDAY) {
-            c2.set(Calendar.DAY_OF_MONTH,(7 - dayOfWeek) + 1);
-        } else if (dayOfWeek != Calendar.MONDAY) {
-            c2.set(Calendar.DAY_OF_MONTH,(7 - dayOfWeek + 1) + 1);
-        }
-        long diff = c.getTime().getTime() - c2.getTime().getTime();
-
-        int w = (int)(diff / MILLIS_PER_WEEK);
-
-        if (jan1midweek && 7-dayOfWeek >= 4)
-            w++;
-
-        return w;
+    public static long getDateFromTable(final LuaTable time) {
+        final int year = (int) LuaState.fromDouble(time.rawget(YEAR));
+        final int month = (int) LuaState.fromDouble(time.rawget(MONTH));
+        final int day = (int) LuaState.fromDouble(time.rawget(DAY));
+        final Object hourObj = time.rawget(HOUR);
+        final Object minObj = time.rawget(MIN);
+        final Object secObj = time.rawget(SEC);
+        final Object milliObj = time.rawget(MILLISECOND);
+        final int hour = hourObj != null ? (int) LuaState.fromDouble(hourObj) : 0;
+        final int min = minObj != null ? (int) LuaState.fromDouble(minObj) : 0;
+        final int sec = secObj != null ? (int) LuaState.fromDouble(secObj) : 0;
+        final int milli = milliObj != null ? (int) LuaState.fromDouble(milliObj) : 0;
+        return ZonedDateTime.of(year, month, day, hour, min, sec, milli * 1_000_000, tzone)
+                .toInstant().toEpochMilli();
     }
 }
+

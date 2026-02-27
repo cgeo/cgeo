@@ -4,15 +4,17 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import org.apache.commons.collections4.IteratorUtils;
-
-import java.io.*;
-
-import java.util.Hashtable;
-import java.util.Iterator;
-
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
+
+import org.apache.commons.collections4.IteratorUtils;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import cgeo.geocaching.wherigo.kahlua.stdlib.MathLib;
 
 public class ZonePoint implements LuaTable, Serializable {
@@ -81,19 +83,19 @@ public class ZonePoint implements LuaTable, Serializable {
         return distance(z.latitude, z.longitude, latitude, longitude);
     }
 
-    public static final Hashtable conversions = new Hashtable(6);
+    public static final Map<String, Double> conversions = new HashMap<>(6);
     static {
-        conversions.put("feet", new Double(0.3048));
-        conversions.put("ft", new Double(0.3048));
-        conversions.put("miles", new Double(1609.344));
-        conversions.put("meters", new Double(1));
-        conversions.put("kilometers", new Double(1000));
-        conversions.put("nauticalmiles", new Double(1852));
+        conversions.put("feet", 0.3048d);
+        conversions.put("ft", 0.3048d);
+        conversions.put("miles", 1609.344d);
+        conversions.put("meters", 1d);
+        conversions.put("kilometers", 1000d);
+        conversions.put("nauticalmiles", 1852d);
     }
 
     public static double convertDistanceTo (double value, String unit) {
         if (unit != null && conversions.containsKey(unit)) {
-            return value / ((Double)conversions.get(unit)).doubleValue();
+            return value / conversions.get(unit);
         } else {
             return value;
         }
@@ -101,7 +103,7 @@ public class ZonePoint implements LuaTable, Serializable {
 
     public static double convertDistanceFrom (double value, String unit) {
         if (unit != null && conversions.containsKey(unit)) {
-            return value * ((Double)conversions.get(unit)).doubleValue();
+            return value * conversions.get(unit);
         } else {
             return value;
         }

@@ -22,6 +22,7 @@ import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
+import cgeo.geocaching.wherigo.openwig.platform.UI;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -44,6 +45,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
     private static final String PARAM_WHERIGO_GEOCODE = "wherigo_geocode";
+    private static final String PARAM_WHERIGO_SCREEN = "wherigo_screen";
 
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
@@ -55,6 +57,10 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     public static void start(final Activity parent, final boolean forceHideNavigationBar) {
         startInternal(parent, null, forceHideNavigationBar);
+    }
+
+    public static void start(final Activity parent, final UI.Screen screen, final boolean forceHideNavigationBar) {
+        startInternal(parent, screen == null ? null : intent -> intent.putExtra(PARAM_WHERIGO_SCREEN, screen.ordinal()), forceHideNavigationBar);
     }
 
     public static void startForGuid(final Activity parent, final String guid, final String geocode, final boolean forceHideNavigationBar) {
@@ -126,6 +132,16 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         if (guid != null) {
             handleCGuidInput(guid);
         }
+
+        //open requested list screen if launched with a screen parameter
+        final UI.Screen requestedScreen = UI.Screen.fromId(getIntent().getIntExtra(PARAM_WHERIGO_SCREEN, -1));
+        if (requestedScreen != null) {
+            final WherigoThingType requestedType = WherigoThingType.getByWherigoScreen(requestedScreen);
+            if (requestedType != null) {
+                WherigoViewUtils.chooseThing(this, requestedType, thing -> WherigoViewUtils.displayThing(this, thing, false));
+            }
+        }
+
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
 
         final AudioManager audio = WherigoGame.get().getAudioManager();

@@ -6,7 +6,8 @@ package cgeo.geocaching.wherigo.openwig.formats;
 
 import cgeo.geocaching.wherigo.openwig.platform.FileHandle;
 import cgeo.geocaching.wherigo.openwig.platform.SeekableFile;
-import java.io.*;
+
+import java.io.IOException;
 
 /** Implementation of the GWC cartridge format.
  * <p>

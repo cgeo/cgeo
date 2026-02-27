@@ -4,9 +4,6 @@
  */
 package cgeo.geocaching.wherigo.openwig.formats;
 
-import java.io.*;
-import java.util.Hashtable;
-
 import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
@@ -19,6 +16,13 @@ import cgeo.geocaching.wherigo.openwig.Cartridge;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.Serializable;
 import cgeo.geocaching.wherigo.openwig.platform.FileHandle;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.UTFDataFormatException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Savegame {
 
@@ -86,8 +90,7 @@ public class Savegame {
     }
 
     protected void resetObjectStore () {
-        objectStore = new Hashtable(256);
-        // XXX why did i choose to use LuaTable over Hashtable?
+        objectStore = new HashMap<>(256);
         currentId = 0;
         level = 0;
     }
@@ -119,11 +122,11 @@ public class Savegame {
         }
     }
 
-    private Hashtable objectStore;
+    private Map<Object, Object> objectStore;
     private int currentId;
 
-    private Hashtable idToJavafuncMap = new Hashtable(128);
-    private Hashtable javafuncToIdMap = new Hashtable(128);
+    private Map<Integer, JavaFunction> idToJavafuncMap = new HashMap<>(128);
+    private Map<JavaFunction, Integer> javafuncToIdMap = new HashMap<>(128);
     private int currentJavafunc = 0;
 
     public void buildJavafuncMap (LuaTable environment) {
@@ -159,20 +162,19 @@ public class Savegame {
     private static final byte LUATABLE_END  = 0x11;
 
     public void addJavafunc (JavaFunction javafunc) {
-        Integer id = new Integer(currentJavafunc++);
+        final Integer id = Integer.valueOf(currentJavafunc++);
         idToJavafuncMap.put(id, javafunc);
         javafuncToIdMap.put(javafunc, id);
     }
 
     private int findJavafuncId (JavaFunction javafunc) {
-        Integer id = (Integer)javafuncToIdMap.get(javafunc);
-        if (id != null) return id.intValue();
+        final Integer id = javafuncToIdMap.get(javafunc);
+        if (id != null) return id;
         else throw new IllegalStateException("javafunc not found in map!");
     }
 
     private JavaFunction findJavafuncObject (int id) {
-        JavaFunction jf = (JavaFunction)idToJavafuncMap.get(new Integer(id));
-        return jf;
+        return idToJavafuncMap.get(id);
     }
 
     private void storeObject (Object obj, DataOutputStream out)
@@ -181,15 +183,15 @@ public class Savegame {
             out.writeByte(LUA_NIL);
             return;
         }
-        Integer i = (Integer)objectStore.get(obj);
+        Integer i = (Integer) objectStore.get(obj);
         if (i != null) {
             out.writeByte(LUA_REFERENCE);
-             if (debug) debug("reference "+i.intValue()+" ("+obj.toString()+")");
-            out.writeInt(i.intValue());
+             if (debug) debug("reference " + i + " (" + obj.toString() + ")");
+            out.writeInt(i);
         } else {
-            i = new Integer(currentId++);
+            i = Integer.valueOf(currentId++);
             objectStore.put(obj, i);
-            if (debug) debug("(ref"+i.intValue()+")");
+            if (debug) debug("(ref" + i + ")");
             if (obj instanceof Serializable) {
                 out.writeByte(LUA_OBJECT);
                 out.writeUTF(obj.getClass().getName());
@@ -287,9 +289,9 @@ public class Savegame {
     }
 
     private void restCache (Object o) {
-        Integer i = new Integer(currentId++);
+        final Integer i = Integer.valueOf(currentId++);
         objectStore.put(i, o);
-        if (debug) debug("(ref"+i.intValue()+")");
+        if (debug) debug("(ref" + i + ")");
     }
 
     private Object restoreObject (DataInputStream in, byte type, Object target)
@@ -329,15 +331,15 @@ public class Savegame {
                 }
                 return s;
             case LUA_REFERENCE:
-                Integer what = new Integer(in.readInt());
-                if (debug) debug("reference "+what.intValue());
-                Object result = objectStore.get(what);
+                final Integer what = Integer.valueOf(in.readInt());
+                if (debug) debug("reference " + what);
+                final Object result = objectStore.get(what);
                 if (result == null) {
-                    Engine.log("REST: not found reference "+what.toString()+" in object store", Engine.LOG_WARN);
+                    Engine.log("REST: not found reference " + what + " in object store", Engine.LOG_WARN);
                     if (debug) debug(" (which happens to be null?)");
                     return target;
                 } else {
-                    if (debug) debug(" : "+result.toString());
+                    if (debug) debug(" : " + result);
                 }
                 return result;
             default:

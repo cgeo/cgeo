@@ -4,23 +4,21 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.io.DataInputStream;
-import java.io.IOException;
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
-import cgeo.geocaching.wherigo.kahlua.vm.LuaCallFrame;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTableImpl;
+
+import java.io.DataInputStream;
+import java.io.IOException;
 
 public class Player extends Thing {
 
     private LuaTableImpl insideOfZones = new LuaTableImpl();
 
-    private static JavaFunction refreshLocation = new JavaFunction() {
-        public int call (LuaCallFrame callFrame, int nArguments) {
-            Engine.instance.player.refreshLocation();
-            return 0;
-        }
+    private static JavaFunction refreshLocation = (callFrame, nArguments) -> {
+        Engine.instance.player.refreshLocation();
+        return 0;
     };
 
     public static void register () {
@@ -52,7 +50,7 @@ public class Player extends Thing {
     public void leaveZone (Zone z) {
         TableLib.removeItem(insideOfZones, z);
         if (insideOfZones.len() > 0)
-            container = (Container)insideOfZones.rawget(new Double(insideOfZones.len()));
+            container = (Container)insideOfZones.rawget((double) insideOfZones.len());
         //TableLib.removeItem(z.inventory, this);
     }
 
