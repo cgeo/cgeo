@@ -80,6 +80,10 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding, control));
         refreshGui(binding, control);
+        for (int i = 0; i < this.texts.length; i++) {
+            final Media currentMedia = this.media == null || this.media.length == 0 ? null : (i >= this.media.length ? this.media[0] : this.media[i]);
+            WherigoUtils.saveDialogMediaToContextGeocache(currentMedia, String.valueOf(WherigoGame.get().toDisplayText(this.texts[i])));
+        }
 
         dialog.show();
         return dialog;

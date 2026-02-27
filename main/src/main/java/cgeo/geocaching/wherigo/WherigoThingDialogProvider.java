@@ -74,6 +74,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
             TranslationUtils.prepareForTranslation(eventTable.name, eventTable.description));
 
+        WherigoUtils.saveDialogMediaToContextGeocache((Media) eventTable.table.rawget("Media"), String.valueOf(WherigoGame.get().toDisplayText(eventTable.description)));
         refreshGui(activity, control, binding);
         control.setOnGameNotificationListener((d, nt) -> {
             if (nt == WherigoGame.NotifyType.REFRESH) {

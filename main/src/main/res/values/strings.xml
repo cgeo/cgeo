@@ -1851,6 +1851,7 @@
     <string name="image_category_own">Own</string>
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
+    <string name="image_category_wherigo">Wherigo</string>
 
     <string name="image_listing_spoiler">Spoiler</string>
     <string name="image_listing_background">Background</string>

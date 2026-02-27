@@ -71,9 +71,12 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
             TranslationUtils.prepareForTranslation(binding.description.getText()));
 
-        binding.media.setMedia((Media) input.table.rawget("Media"));
+        final Media media = (Media) input.table.rawget("Media");
+        binding.media.setMedia(media);
         final Object descr = input.table.rawget("Text");
-        binding.description.setText(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
+        final String description = String.valueOf(WherigoGame.get().toDisplayText(descr == null ? "" : descr.toString()));
+        binding.description.setText(description);
+        WherigoUtils.saveDialogMediaToContextGeocache(media, description);
 
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {

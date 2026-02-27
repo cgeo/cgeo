@@ -9,6 +9,7 @@ import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -18,6 +19,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -45,6 +47,7 @@ import android.text.style.StyleSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -518,6 +521,60 @@ public final class WherigoUtils {
             return geocode.trim();
         }
         return geocode.trim() + ": " + cache.getName().trim();
+    }
+
+    public static void saveDialogMediaToContextGeocache(@Nullable final Media media, @Nullable final String description) {
+        if (media == null || !isImageMediaType(media.type)) {
+            return;
+        }
+        final String geocode = WherigoGame.get().getContextGeocode();
+        if (StringUtils.isBlank(geocode)) {
+            return;
+        }
+        final byte[] mediaData;
+        try {
+            mediaData = Engine.mediaFile(media);
+        } catch (IOException e) {
+            Log.e("Wherigo dialog media can't be extracted", e);
+            return;
+        }
+        final File mediaFile = FileUtils.getOrCreate(WherigoGame.get().getCacheDirectory(), "media-" + media.jarFilename(), media.type, mediaData);
+        if (mediaFile == null) {
+            return;
+        }
+        final Image image = new Image.Builder()
+            .setUrl(Uri.fromFile(mediaFile))
+            .setTitle(media.name)
+            .setDescription(description)
+            .setCategory(Image.ImageCategory.WHERIGO)
+            .build();
+        final Geocache cache = DataStore.loadCache(geocode.trim(), EnumSet.of(LoadFlags.LoadFlag.CACHE_BEFORE, LoadFlags.LoadFlag.DB_MINIMAL, LoadFlags.LoadFlag.SPOILERS));
+        if (cache == null) {
+            return;
+        }
+        final List<Image> spoilers = new ArrayList<>(cache.getSpoilers());
+        if (spoilers.contains(image)) {
+            return;
+        }
+        spoilers.add(image);
+        cache.setSpoilers(spoilers);
+        DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
+    }
+
+    static boolean isImageMediaType(@Nullable final String type) {
+        if (StringUtils.isBlank(type)) {
+            return false;
+        }
+        switch (type.toLowerCase(Locale.US)) {
+            case "gif":
+            case "jpeg":
+            case "jpg":
+            case "png":
+            case "bmp":
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static CharSequence getUserDisplayableName(final EventTable et, final boolean doShort) {

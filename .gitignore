@@ -37,6 +37,7 @@ mapswithme-api/build/
 organicmaps-api/build/
 build
 build-cache/
+artifacts/
 # build system user specific files
 main/gradle.properties
 

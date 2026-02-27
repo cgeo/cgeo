@@ -38,4 +38,13 @@ public class WherigoUtilsTest {
         final String description = "<p><strong><a href=\"http://www.wherigo.com/cartridge/details.aspx?CGUID=bb9a7000-c59c-4822-9e10-d779c752345f\">http://www.wherigo.com/cartridge/download.aspx?CGUID=bb9a7000-c59c-4822-9e10-d779c752345f</a></strong></p>";
     }
 
+    @Test
+    public void testIsImageMediaType() {
+        assertThat(WherigoUtils.isImageMediaType("jpg")).isTrue();
+        assertThat(WherigoUtils.isImageMediaType("PNG")).isTrue();
+        assertThat(WherigoUtils.isImageMediaType("gif")).isTrue();
+        assertThat(WherigoUtils.isImageMediaType("mp4")).isFalse();
+        assertThat(WherigoUtils.isImageMediaType(null)).isFalse();
+    }
+
 }
