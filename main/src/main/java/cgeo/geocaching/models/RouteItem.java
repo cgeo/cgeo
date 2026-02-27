@@ -178,12 +178,58 @@ public class RouteItem implements Parcelable {
         return identifier;
     }
 
+    /**
+     * Get the GPX-compatible identifier for this route item.
+     * For waypoints, returns the traditional GPX waypoint ID (e.g., "011TEST").
+     * For other types, returns the standard identifier.
+     *
+     * @return the GPX identifier
+     */
+    @NonNull
+    public String getGpxIdentifier() {
+        if (type == RouteItemType.WAYPOINT) {
+            final Waypoint waypoint = getWaypoint();
+            if (waypoint != null) {
+                return waypoint.getGpxId();
+            }
+        }
+        return identifier;
+    }
+
     public String getSortFilterString() {
         return sortFilterString;
     }
 
     public Geopoint getPoint() {
         return point;
+    }
+
+    /**
+     * Get the display name for this route item.
+     * For geocaches and waypoints, returns the actual name.
+     * For coordinates, returns a formatted coordinate string.
+     *
+     * @return the display name, never null
+     */
+    @NonNull
+    public String getName() {
+        if (type == RouteItemType.GEOCACHE) {
+            final Geocache cache = getGeocache();
+            if (cache != null && cache.getName() != null) {
+                return cache.getName();
+            }
+            // Fallback to geocode if name not available
+            if (cacheGeocode != null) {
+                return cacheGeocode;
+            }
+        } else if (type == RouteItemType.WAYPOINT) {
+            final Waypoint waypoint = getWaypoint();
+            if (waypoint != null && waypoint.getName() != null) {
+                return waypoint.getName();
+            }
+        }
+        // For COORDS type or as final fallback, return the identifier
+        return StringUtils.defaultString(identifier);
     }
 
     private void setDetails(final INamedGeoCoordinate item) {
