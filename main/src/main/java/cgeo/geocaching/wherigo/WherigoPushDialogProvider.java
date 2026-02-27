@@ -81,7 +81,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         control.setOnGameNotificationListener((d, nt) -> refreshGui(binding, control));
         refreshGui(binding, control);
         for (int i = 0; i < this.texts.length; i++) {
-            final Media currentMedia = this.media == null || this.media.length == 0 ? null : (i >= this.media.length ? this.media[0] : this.media[i]);
+            final Media currentMedia = getMediaForPage(i);
             WherigoUtils.saveDialogMediaToContextGeocache(currentMedia, String.valueOf(WherigoGame.get().toDisplayText(this.texts[i])));
         }
 
@@ -92,7 +92,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     private void refreshGui(final WherigoThingDetailsBinding binding, final IWherigoDialogControl control) {
         this.pageDisplayed = pageDisplayed < 0 || pageDisplayed >= texts.length ? 0 : pageDisplayed;
         final String message = this.texts[pageDisplayed];
-        final Media media = this.media == null || this.media.length == 0 ? null : (pageDisplayed >= this.media.length ? this.media[0] : this.media[pageDisplayed]);
+        final Media media = getMediaForPage(pageDisplayed);
 
         binding.description.setText(WherigoGame.get().toDisplayText(message));
 
@@ -137,6 +137,14 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                 }
         );
 
+    }
+
+    @Nullable
+    private Media getMediaForPage(final int page) {
+        if (this.media == null || this.media.length == 0) {
+            return null;
+        }
+        return page >= this.media.length ? this.media[0] : this.media[page];
     }
 
 }
