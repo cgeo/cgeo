@@ -31,6 +31,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 public final class LuaPrototype {
     public int[] code;
@@ -195,7 +196,7 @@ public final class LuaPrototype {
         // in an unknown encoding. replace every non-ASCII with '?'
         for (int i = 2; i < bytes.length; i++)
             if ((bytes[i] & 0x80) == 0x80) bytes[i] = (byte)'?';
-        return new String(bytes, 2, bytes.length - 2);
+        return new String(bytes, 2, bytes.length - 2, StandardCharsets.US_ASCII);
     }
 
     public static int rev(int v) {
