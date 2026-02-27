@@ -106,6 +106,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -2940,7 +2941,7 @@ public class DataStore {
     @NonNull
     public static List<String> getFullListHierarchy() {
         return withAccessLock(() -> {
-            final List<String> result = new ArrayList<>();
+            final LinkedHashSet<String> result = new LinkedHashSet<>();
             // put entries containing a colon in first group, other elements in second; each group is sorted alphabetically
             final String sql = "SELECT DISTINCT title FROM " + dbTableLists + " ORDER BY CASE WHEN title LIKE '%" + GROUP_SEPARATOR + "%' THEN 0 ELSE 1 END ASC, title COLLATE NOCASE ASC";
             final Cursor c = database.rawQuery(sql, new String[]{});
@@ -2952,7 +2953,7 @@ public class DataStore {
                     result.add(list);
                 }
             }
-            return result;
+            return new ArrayList<>(result);
         });
     }
 

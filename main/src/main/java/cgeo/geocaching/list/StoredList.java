@@ -401,7 +401,7 @@ public final class StoredList extends AbstractList {
                                     prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
                             } else if (!Strings.CS.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                                prefix = temp + (Strings.CS.endsWith(temp.trim(), GROUP_SEPARATOR) ? "" : GROUP_SEPARATOR);
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
                         }))
