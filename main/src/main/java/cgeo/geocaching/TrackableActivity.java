@@ -151,6 +151,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 if (StringUtils.isBlank(geocode)) {
                     geocode = uri.getQueryParameter("TB");
                 }
+                if (StringUtils.isBlank(geocode)) {
+                    geocode = uri.getQueryParameter("tb");
+                }
                 guid = uri.getQueryParameter("guid");
                 id = uri.getQueryParameter("id");
 
