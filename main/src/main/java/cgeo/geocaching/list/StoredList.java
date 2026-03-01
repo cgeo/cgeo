@@ -378,6 +378,7 @@ public final class StoredList extends AbstractList {
             final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
             final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
             final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText listname = menu.findViewById(R.id.title);
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
@@ -401,7 +402,10 @@ public final class StoredList extends AbstractList {
                                     prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
                             } else if (!Strings.CS.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                prefix = temp + (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                                prefix = temp + (!Strings.CS.endsWith(temp.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                            }
+                            if (Strings.CS.equals(prefix, GROUP_SEPARATOR)) {
+                                prefix = "";
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
                         }))
@@ -410,6 +414,9 @@ public final class StoredList extends AbstractList {
             Keyboard.show(activity, menu.findViewById(R.id.title));
             final AlertDialog dialog = builder.show();
             ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
+
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0)));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
