@@ -65,8 +65,11 @@ import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -861,6 +864,14 @@ public class ViewUtils {
         final Drawable circularIcon = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec);
 
         return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
+    }
+
+    public static void preventKeyboardOverlap(final View view) {
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
+            final Insets newInsets = windowInsets.getInsets(WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.systemBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), newInsets.bottom);
+            return windowInsets;
+        });
     }
 
 }
