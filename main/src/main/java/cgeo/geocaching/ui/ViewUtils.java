@@ -143,6 +143,15 @@ public class ViewUtils {
     }
 
     /**
+     * Sets text for given TextView (without crashing on null view)
+     */
+    public static void setText(final TextView view, final String text) {
+        if (view != null) {
+            view.setText(text);
+        }
+    }
+
+    /**
      * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
      *
      * @param ctx           context to use for creating views
