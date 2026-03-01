@@ -369,6 +369,49 @@ public class DataStoreTest {
         }
     }
 
+    // Check that saving a trackable with spottedCacheGeocode doesn't remove it from the cache's inventory
+    @Test
+    public void testSaveTrackablePreservesInventory() {
+        final String trackableGeocode = "TB1234";
+
+        try {
+            // Create a cache with a trackable in its inventory
+            final Geocache cache = new Geocache();
+            cache.setGeocode(ARTIFICIAL_GEOCODE);
+            cache.setDetailed(true);
+
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(trackableGeocode);
+            trackable.setName("Test Trackable");
+            trackable.setSpottedCacheGeocode(ARTIFICIAL_GEOCODE);
+
+            final List<Trackable> inventory = new ArrayList<>();
+            inventory.add(trackable);
+            cache.setInventory(inventory);
+
+            // Save the cache with the trackable
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+
+            // Verify the cache has the trackable in its inventory
+            final Geocache loadedCache1 = DataStore.loadCache(ARTIFICIAL_GEOCODE, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertThat(loadedCache1).isNotNull();
+            assertThat(loadedCache1.getInventory()).hasSize(1);
+            assertThat(loadedCache1.getInventory().get(0).getGeocode()).isEqualTo(trackableGeocode);
+
+            // Now call saveTrackable with the trackable (simulating viewing trackable details)
+            DataStore.saveTrackable(trackable);
+
+            // Reload the cache and verify the trackable is still in the inventory
+            final Geocache loadedCache2 = DataStore.loadCache(ARTIFICIAL_GEOCODE, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertThat(loadedCache2).isNotNull();
+            assertThat(loadedCache2.getInventory()).as("Cache inventory should still contain the trackable").hasSize(1);
+            assertThat(loadedCache2.getInventory().get(0).getGeocode()).isEqualTo(trackableGeocode);
+
+        } finally {
+            DataStore.removeCache(ARTIFICIAL_GEOCODE, REMOVE_ALL);
+        }
+    }
+
     private static void assertEqualToBuilder(final OfflineLogEntry dbLogEntry, final OfflineLogEntry.Builder builder) {
         final OfflineLogEntry expectedLogEntry = builder.build();
 
