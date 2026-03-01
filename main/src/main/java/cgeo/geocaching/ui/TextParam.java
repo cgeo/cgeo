@@ -207,7 +207,7 @@ public class TextParam {
         if (StringUtils.isNotBlank(tooltip)) {
             TooltipCompat.setTooltipText(view, tooltip);
         } else if (tooltipId > 0) {
-            TooltipCompat.setTooltipText(view, view.getContext().getString(tooltipId));
+            TooltipCompat.setTooltipText(view, LocalizationUtils.getString(tooltipId));
         }
     }
 

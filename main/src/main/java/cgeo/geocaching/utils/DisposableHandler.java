@@ -1,7 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -128,13 +126,13 @@ public abstract class DisposableHandler extends Handler implements Disposable {
 
     public static void sendLoadProgressDetail(@Nullable final Handler handler, @StringRes final int resourceId) {
         if (handler != null) {
-            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
+            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, LocalizationUtils.getString(resourceId)).sendToTarget();
         }
     }
 
     public static void sendShowStatusToast(@Nullable final Handler handler, @StringRes final int resourceId) {
         if (handler != null) {
-            handler.obtainMessage(UPDATE_SHOW_STATUS_TOAST, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
+            handler.obtainMessage(UPDATE_SHOW_STATUS_TOAST, LocalizationUtils.getString(resourceId)).sendToTarget();
         }
     }
 }

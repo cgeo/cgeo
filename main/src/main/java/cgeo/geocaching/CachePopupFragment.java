@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -96,7 +97,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (popup == null || !popup.isAdded()) {
                 return;
             }
-            popup.progress.setMessage(popup.getString(progressMessage)
+            popup.progress.setMessage(LocalizationUtils.getString(progressMessage)
                     + "\n\n"
                     + msg);
         }
@@ -244,7 +245,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
-            progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
+            progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_offline_save_title), LocalizationUtils.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
                 activity.invalidateOptionsMenu();
                 final View view = getView();
@@ -285,7 +286,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                         CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 if (!Network.isConnected()) {
-                    showToast(getString(R.string.err_server_general));
+                    showToast(LocalizationUtils.getString(R.string.err_server_general));
                     return;
                 }
                 CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
@@ -297,7 +298,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         @Override
         public void onClick(final View arg0) {
             if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server_general));
+                showToast(LocalizationUtils.getString(R.string.err_server_general));
                 return;
             }
             CacheDownloaderService.refreshCache(getActivity(), cache.getGeocode(), true, () -> updateStoreRefreshButtons(false));
@@ -309,7 +310,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         @Override
         public boolean onLongClick(final View v) {
             if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
+                showToast(LocalizationUtils.getString(R.string.err_detail_still_working));
                 return false;
             }
 
@@ -328,12 +329,12 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         @Override
         public void onClick(final View arg0) {
             if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
+                showToast(LocalizationUtils.getString(R.string.err_detail_still_working));
                 return;
             }
 
             final DropCacheHandler dropCacheHandler = new DropCacheHandler(CachePopupFragment.this);
-            progress.show(getActivity(), res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
+            progress.show(getActivity(), LocalizationUtils.getString(R.string.cache_dialog_offline_drop_title), LocalizationUtils.getString(R.string.cache_dialog_offline_drop_message), true, null);
             cache.drop(dropCacheHandler);
         }
     }
@@ -380,7 +381,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     @Override
     public void startDefaultNavigation2() {
         if (cache == null || cache.getCoords() == null) {
-            showToast(res.getString(R.string.cache_coordinates_no));
+            showToast(LocalizationUtils.getString(R.string.cache_coordinates_no));
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), cache);

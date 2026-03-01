@@ -8,6 +8,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.ui.notifications.NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION;
 import static cgeo.geocaching.ui.notifications.Notifications.ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE;
@@ -126,7 +127,7 @@ public class SpeechService extends Service implements OnInitListener {
 
         startForeground(ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE, Notifications
                 .createNotification(this, FOREGROUND_SERVICE_NOTIFICATION, R.string.tts_service)
-                .setContentText(getString(R.string.tts_running))
+                .setContentText(LocalizationUtils.getString(R.string.tts_running))
                 .build());
     }
 
@@ -176,7 +177,7 @@ public class SpeechService extends Service implements OnInitListener {
             final Activity startingActivityChecked = startingActivity;
             if (startingActivityChecked != null) {
                 initDisposable.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
-                ActivityMixin.showShortToast(startingActivity, startingActivityChecked.getString(R.string.tts_started));
+                ActivityMixin.showShortToast(startingActivity, LocalizationUtils.getString(R.string.tts_started));
             }
         }
     }
@@ -209,7 +210,7 @@ public class SpeechService extends Service implements OnInitListener {
     private static void stopService(final Activity activity) {
         synchronized (startingActivityLock) {
             if (activity.stopService(new Intent(activity, SpeechService.class))) {
-                ActivityMixin.showShortToast(activity, activity.getString(R.string.tts_stopped));
+                ActivityMixin.showShortToast(activity, LocalizationUtils.getString(R.string.tts_stopped));
             }
             startingActivity = null;
         }

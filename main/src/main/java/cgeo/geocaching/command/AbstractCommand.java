@@ -2,6 +2,7 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +29,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NonNull final Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
-            this.progressMessage = context.getString(progressMessageId);
+            this.progressMessage = LocalizationUtils.getString(progressMessageId);
         }
     }
 
@@ -128,7 +129,7 @@ public abstract class AbstractCommand implements Command {
                 final boolean isNavBarVisible = navBar != null && navBar.getVisibility() == View.VISIBLE && navBar.getHeight() > 0;
 
                 Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
-                        .setAction(context.getString(R.string.undo), this)
+                        .setAction(LocalizationUtils.getString(R.string.undo), this)
                         .setAnchorView(isNavBarVisible ? navBar : context.findViewById(android.R.id.navigationBarBackground))
                         .show();
             }

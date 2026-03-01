@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -19,7 +20,7 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(R.string.settings_title_gc);
+        return LocalizationUtils.getPlainString(R.string.settings_title_gc);
     }
 
     @Override

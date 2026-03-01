@@ -7,6 +7,7 @@ import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,7 +60,7 @@ public class TemplateTextPreference extends Preference {
                 launchEditTemplateDialog();
                 return false;
             });
-            if (!getKey().equals(getContext().getString(R.string.pref_signature))) {
+            if (!getKey().equals(LocalizationUtils.getPlainString(R.string.pref_signature))) {
                 final MaterialButton button = (MaterialButton) holder.findViewById(R.id.iconview);
                 button.setIconResource(R.drawable.ic_menu_delete);
                 button.setOnClickListener(v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
@@ -71,7 +72,7 @@ public class TemplateTextPreference extends Preference {
     }
 
     public void launchEditTemplateDialog() {
-        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
+        final boolean isSignature = getKey().equals(LocalizationUtils.getPlainString(R.string.pref_signature));
 
         final View v = LayoutInflater.from(getContext()).inflate(R.layout.template_preference_dialog, null);
         final TextInputLayout titleLayout = v.findViewById(R.id.titleLayout);
@@ -105,9 +106,9 @@ public class TemplateTextPreference extends Preference {
             final String newText = editText.getText().toString();
             // check that for log templates both title and text are filled
             if (!isSignature && StringUtils.isEmpty(newTitle) && !StringUtils.isEmpty(newText)) {
-                editTitle.setError(getContext().getString(R.string.init_log_template_missing_error));
+                editTitle.setError(LocalizationUtils.getString(R.string.init_log_template_missing_error));
             } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
-                editText.setError(getContext().getString(R.string.init_log_template_missing_error));
+                editText.setError(LocalizationUtils.getString(R.string.init_log_template_missing_error));
             } else if (StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
                 // don't save empty templates
                 dialog.dismiss();
@@ -127,7 +128,7 @@ public class TemplateTextPreference extends Preference {
             final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature(null);
             final String[] items = new String[templates.size()];
             for (int i = 0; i < templates.size(); i++) {
-                items[i] = getContext().getString(templates.get(i).getResourceId());
+                items[i] = LocalizationUtils.getString(templates.get(i).getResourceId());
             }
             templateBuilder.setItems(items, (selectionDialog, position) -> {
                 selectionDialog.dismiss();

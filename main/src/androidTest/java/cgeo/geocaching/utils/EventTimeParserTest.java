@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
@@ -111,7 +110,7 @@ public class EventTimeParserTest {
     }
 
     private static String getHoursKeyword() {
-        return CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+        return LocalizationUtils.getString(R.string.cache_time_full_hours);
     }
 
 }

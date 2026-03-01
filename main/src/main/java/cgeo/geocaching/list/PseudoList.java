@@ -1,8 +1,8 @@
 package cgeo.geocaching.list;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -46,7 +46,7 @@ public abstract class PseudoList extends AbstractList {
      * private constructor to have all instances as constants in the class
      */
     private PseudoList(final int id, @StringRes final int titleResourceId, @DrawableRes final int iconResId) {
-        super(id, CgeoApplication.getInstance().getString(titleResourceId), iconResId);
+        super(id, LocalizationUtils.getString(titleResourceId), iconResId);
     }
 
     @Override
