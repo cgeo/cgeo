@@ -285,6 +285,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             binding.noteLayout.setVisibility(View.GONE);
             updateCoordinates(preprojectedCoords);
         }
+
+        ViewUtils.preventKeyboardOverlap(binding.userNote);
     }
 
     private void setCoordsModificationVisibility(final IConnector con) {
