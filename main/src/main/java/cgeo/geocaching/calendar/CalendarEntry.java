@@ -21,7 +21,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -79,7 +78,7 @@ class CalendarEntry {
      */
     @NonNull
     private long getStartOfDay() {
-        final LocalDate localDate = hiddenDate.toInstant().atZone(ZoneOffset.UTC).toLocalDate();
+        final LocalDate localDate = hiddenDate.toInstant().atZone(localZone).toLocalDate();
         final Instant midnight = localDate.atTime(LocalTime.MIDNIGHT).atZone(localZone).toInstant();
         return midnight.toEpochMilli();
     }
