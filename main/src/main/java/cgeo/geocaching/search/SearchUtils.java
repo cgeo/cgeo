@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.utils.ClipboardUtils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ import android.widget.AutoCompleteTextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class SearchUtils {
 
@@ -92,29 +93,28 @@ public class SearchUtils {
         });
 
         // only for bottom navigation activities
-        final View.OnTouchListener outsideSearchAutoCompleteTouchListener = (v, event) -> {
-            if (MotionEvent.ACTION_DOWN == event.getAction()) {
-                return true;
-            }
-            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
+        @SuppressLint("ClickableViewAccessibility") final View.OnTouchListener outsideSearchAutoCompleteTouchListener = (v, event) -> {
+            if (MotionEvent.ACTION_DOWN == event.getAction() && !searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
                 menuSearch.collapseActionView();
                 searchView.setIconified(true);
-                return true; // intercept touch event to do not trigger an unwanted action
+                return true;
             }
-            // In general, we don't want to intercept touch events...
-            v.performClick();
             return false;
         };
+
         final View fl = activity.findViewById(R.id.activity_content);
         if (null != fl) {
             fl.setOnTouchListener(outsideSearchAutoCompleteTouchListener);
         }
-        final BottomNavigationView bl = activity.findViewById(R.id.activity_navigationBar);
+        final NavigationBarView bl = activity.findViewById(R.id.activity_navigationBar);
         final Menu blMenu = bl.getMenu();
         for (int i = 0; i < blMenu.size(); i++) {
+            //bl.setOnClickListener(ocl);
             bl.setItemOnTouchListener(blMenu.getItem(i).getItemId(), outsideSearchAutoCompleteTouchListener);
         }
     }
+
+
     private static boolean isTouchInsideView(final MotionEvent ev, final View view) {
         final int[] location = new int[2];
         view.getLocationOnScreen(location);
