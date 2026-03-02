@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     tools:layout_height="60sp"
+    android:minHeight="0dip"
     android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
