@@ -2,6 +2,7 @@
 Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
 - Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
 
 ##
 - Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
@@ -69,6 +70,7 @@ Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta
 ##
 - Fix: Migrering av användardefinierade cacher under c:geo uppstart misslyckas => tog bort det tills vidare
 - Fix: Avslutade Wherigo-uppgifter inte markerade som färdiga eller misslyckade
+
 
 
 
