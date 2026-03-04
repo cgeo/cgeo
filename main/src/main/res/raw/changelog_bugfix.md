@@ -4,6 +4,7 @@ With our next feature release of c:geo we will drop support for Android 5-7 to r
 We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
 - Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
@@ -73,6 +74,7 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
