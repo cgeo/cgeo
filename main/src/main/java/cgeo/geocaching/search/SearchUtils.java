@@ -2,16 +2,20 @@ package cgeo.geocaching.search;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility;
 import cgeo.geocaching.utils.ClipboardUtils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 public class SearchUtils {
 
@@ -87,19 +91,37 @@ public class SearchUtils {
                 searchAutoComplete.showDropDown();
             }
         });
+
         // only for bottom navigation activities
-        final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = activity.findViewById(R.id.bottomnavigation_activity_viewroot);
-        if (activityViewroot != null) {
-            activityViewroot.setOnInterceptTouchEventListener(ev -> {
-                if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                    menuSearch.collapseActionView();
-                    searchView.setIconified(true);
-                    return true; // intercept touch event to do not trigger an unwanted action
-                }
-                // In general, we don't want to intercept touch events...
-                return false;
-            });
+        @SuppressLint("ClickableViewAccessibility") final View.OnTouchListener outsideSearchAutoCompleteTouchListener = (v, event) -> {
+            if (MotionEvent.ACTION_DOWN == event.getAction() && !searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
+                menuSearch.collapseActionView();
+                searchView.setIconified(true);
+                return true;
+            }
+            return false;
+        };
+
+        final View fl = activity.findViewById(R.id.activity_content);
+        if (null != fl) {
+            fl.setOnTouchListener(outsideSearchAutoCompleteTouchListener);
         }
+        final NavigationBarView bl = activity.findViewById(R.id.activity_navigationBar);
+        final Menu blMenu = bl.getMenu();
+        for (int i = 0; i < blMenu.size(); i++) {
+            //bl.setOnClickListener(ocl);
+            bl.setItemOnTouchListener(blMenu.getItem(i).getItemId(), outsideSearchAutoCompleteTouchListener);
+        }
+    }
+
+
+    private static boolean isTouchInsideView(final MotionEvent ev, final View view) {
+        final int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        final float x = ev.getRawX();
+        final float y = ev.getRawY();
+        return x >= location[0] && x <= location[0] + view.getWidth()
+                && y >= location[1] && y <= location[1] + view.getHeight();
     }
 
     public static void setSearchViewColor(final SearchView searchView) {
