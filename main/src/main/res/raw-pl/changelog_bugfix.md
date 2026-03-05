@@ -1,8 +1,8 @@
 ##
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie konserwacyjne i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
+- Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
+- Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
 
 ##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
