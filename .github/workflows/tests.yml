@@ -222,7 +222,7 @@ jobs:
       - name: Run checkstyle
         run: ./gradlew --no-daemon --scan checkstyle
 
-      - uses: lcollins/checkstyle-github-action@v3.1.0
+      - uses: lcollins/checkstyle-github-action@v3.2.0
         with:
           path: 'main/build/reports/checkstyle/checkstyle.xml'
 
