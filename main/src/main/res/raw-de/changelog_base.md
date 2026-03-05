@@ -21,6 +21,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 - Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
 - New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
