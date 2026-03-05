@@ -21,6 +21,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 - Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
 - New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
