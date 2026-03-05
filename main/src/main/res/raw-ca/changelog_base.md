@@ -21,6 +21,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Canvi: Distància màxima per connectar punts al historial de tracks reduïda a 500 m (configurable)
 - Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
 - Nou: Ofereix la possibilitat de definir la icona del catxé fins i tot si el catxé encara no s'ha desat
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
