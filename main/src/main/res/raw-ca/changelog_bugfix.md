@@ -1,8 +1,8 @@
 ##
 Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
+- Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
+- Correcció: Error en obrir un element rastrejable des de la llista de seguiment
 
 ##
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
