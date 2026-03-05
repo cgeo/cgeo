@@ -21,6 +21,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
 - New: Allow importing KML files as tracks (eg: trackable itinerary)
 - New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
