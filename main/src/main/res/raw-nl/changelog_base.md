@@ -21,6 +21,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 - New: Allow importing KML files as tracks (eg: trackable itinerary)
 - New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
 
 ### Cache details
 - Nieuw: Aanvullende tekens in formules detecteren: –, ⋅, ×
