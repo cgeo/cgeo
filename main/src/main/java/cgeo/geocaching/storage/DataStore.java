@@ -2947,7 +2947,9 @@ public class DataStore {
             for (String list : cursorToColl(c, new ArrayList<>(), GET_STRING_0)) {
                 final int prefix = list.lastIndexOf(GROUP_SEPARATOR);
                 if (prefix >= 0) {
-                    result.add(list.substring(0, prefix + 1));
+                    if (!result.contains(list.substring(0, prefix + 1))) {
+                        result.add(list.substring(0, prefix + 1));
+                    }
                 } else if (!result.contains(list + GROUP_SEPARATOR)) {
                     result.add(list);
                 }
