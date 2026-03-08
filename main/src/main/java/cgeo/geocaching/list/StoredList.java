@@ -377,6 +377,7 @@ public final class StoredList extends AbstractList {
             final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
             final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
             final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText listname = menu.findViewById(R.id.title);
 
             final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
 
@@ -410,6 +411,10 @@ public final class StoredList extends AbstractList {
                     .setView(menu);
             Keyboard.show(activity, menu.findViewById(R.id.title));
             builder.show();
+
+            ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
+            // uncomment for main branch
+            // ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
