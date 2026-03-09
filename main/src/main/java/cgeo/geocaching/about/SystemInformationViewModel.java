@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Stores system information for the about page.
+ * Used by the About screen to display device and app diagnostics.
  */
 public class SystemInformationViewModel extends AndroidViewModel {
 
