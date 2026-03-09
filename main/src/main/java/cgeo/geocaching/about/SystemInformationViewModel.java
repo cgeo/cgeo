@@ -13,7 +13,6 @@ import androidx.lifecycle.LiveDataReactiveStreams;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-/* Testing github processes */
 /**
  * Stores system information for the about page.
  */
