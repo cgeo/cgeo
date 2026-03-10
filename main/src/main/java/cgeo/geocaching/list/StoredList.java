@@ -417,6 +417,9 @@ public final class StoredList extends AbstractList {
 
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0)));
+
+            ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
+            ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
