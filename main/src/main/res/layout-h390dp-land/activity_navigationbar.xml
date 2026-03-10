@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottomnavigation_activity_viewroot"
     android:layout_width="match_parent"
@@ -38,4 +38,4 @@
         app:itemIconTint="@color/bottom_bar_selector"
         app:itemTextColor="@color/bottom_bar_selector"
         app:menu="@menu/activity_navigationbar_menu" />
-</cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>
+</RelativeLayout>
