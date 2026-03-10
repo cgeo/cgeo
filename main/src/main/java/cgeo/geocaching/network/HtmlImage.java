@@ -80,6 +80,8 @@ public class HtmlImage implements Html.ImageGetter {
 
     public static final ImageData IMAGE_ERROR_DATA = new ImageData(null, null, null);
 
+    private static final String IMAGE_ACCEPT_HEADER = "image/webp,image/png,image/jpeg,image/gif,*/*;q=0.8";
+
     @NonNull private final String geocode;
     /**
      * on error: return large error image, if {@code true}, otherwise empty 1x1 image
@@ -375,7 +377,8 @@ public class HtmlImage implements Html.ImageGetter {
 
         if (absoluteURL != null) {
             try {
-                final Response httpResponse = Network.getRequest(absoluteURL, null, file).blockingGet();
+                final Parameters imageHeaders = new Parameters("Accept", IMAGE_ACCEPT_HEADER);
+                final Response httpResponse = Network.getRequest(absoluteURL, null, imageHeaders, file).blockingGet();
                 if (httpResponse.isSuccessful()) {
                     FileUtils.saveEntityToFile(httpResponse, file);
                 } else if (httpResponse.code() == 304) {
@@ -436,7 +439,7 @@ public class HtmlImage implements Html.ImageGetter {
     private String makeAbsoluteURL(@NonNull final String url) {
         // Check if uri is absolute or not, if not attach the connector hostname
         if (Uri.parse(url).isAbsolute()) {
-            return url;
+            return ImageUtils.fixDropboxImageUrl(url);
         }
 
         final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();

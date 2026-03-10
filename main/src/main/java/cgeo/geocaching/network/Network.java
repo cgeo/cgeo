@@ -477,6 +477,20 @@ public final class Network {
     /**
      * GET HTTP request
      *
+     * @param uri       the URI to request
+     * @param params    the parameters to add to the GET request
+     * @param headers   the headers to add to the GET request
+     * @param cacheFile the name of the file storing the cached resource, or null not to use one
+     * @return a single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> getRequest(final String uri, @Nullable final Parameters params, @Nullable final Parameters headers, @Nullable final File cacheFile) {
+        return request("GET", uri, params, headers, cacheFile);
+    }
+
+    /**
+     * GET HTTP request
+     *
      * @param uri     the URI to request
      * @param params  the parameters to add to the GET request
      * @param headers the headers to add to the GET request

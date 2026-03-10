@@ -99,6 +99,7 @@ public final class ImageUtils {
     private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)((\\?|#|$|\\)|])\\S*)?)");
     static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z/]*)?/([^/]*)");
     static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*?)(?:_l|_d|_sm|_t)?(\\.jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)");
+    private static final Pattern PATTERN_DROPBOX_DL_PARAM = Pattern.compile("([?&])dl=\\d+");
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
@@ -550,6 +551,35 @@ public final class ImageUtils {
             //return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
         }
         return imageUrl;
+    }
+
+    /**
+     * Fix Dropbox image URLs to ensure they return the raw image content.
+     *
+     * Dropbox shared links (www.dropbox.com) return an HTML viewer page by default.
+     * Adding the {@code dl=1} query parameter forces a direct download of the file.
+     * This handles both the old format ({@code /s/}) and the new format ({@code /scl/fi/}).
+     *
+     * @param imageUrl the URL to potentially fix
+     * @return the URL with {@code dl=1} set, or the original URL if no fix is needed
+     */
+    @NonNull
+    public static String fixDropboxImageUrl(@NonNull final String imageUrl) {
+        // Only transform www.dropbox.com URLs; dl.dropboxusercontent.com and dl.dropbox.com
+        // already serve raw content and don't need this transformation.
+        if (!imageUrl.contains("://www.dropbox.com/")) {
+            return imageUrl;
+        }
+
+        // Replace existing dl parameter with dl=1 using regex to avoid replacing
+        // occurrences elsewhere in the URL (e.g., in a filename).
+        final Matcher matcher = PATTERN_DROPBOX_DL_PARAM.matcher(imageUrl);
+        if (matcher.find()) {
+            return matcher.replaceFirst("$1dl=1");
+        }
+
+        // No dl parameter present, append dl=1
+        return imageUrl + (imageUrl.contains("?") ? "&dl=1" : "?dl=1");
     }
 
     public enum GCImageSize {
