@@ -3,6 +3,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
+- FIx: Keyboard may be blocking list selection
 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
@@ -70,6 +71,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
 - Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
+
 
 
 
