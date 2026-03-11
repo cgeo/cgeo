@@ -2,14 +2,20 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoMediaViewBinding;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.openwig.Engine;
 import cgeo.geocaching.wherigo.openwig.Media;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -27,6 +33,9 @@ public class WherigoMediaView extends LinearLayout {
     private WherigoMediaViewBinding binding;
 
     private int mediaId = -1;
+    private File currentMediaFile;
+    private String mediaTitle;
+    private String mediaDescription;
 
     public WherigoMediaView(final Context context) {
         super(context);
@@ -57,6 +66,15 @@ public class WherigoMediaView extends LinearLayout {
 
     }
 
+    /**
+     * Sets metadata information for the currently displayed media.
+     * This metadata is used when saving the image to a geocache.
+     */
+    public void setMediaMetadata(@Nullable final String title, @Nullable final String description) {
+        this.mediaTitle = title;
+        this.mediaDescription = description;
+    }
+
     private void setMediaData(final int mediaId, final String type, final String fileName, final String altText, final Supplier<byte[]> dataSupplier) {
         if (mediaId == this.mediaId) {
             return;
@@ -82,6 +100,7 @@ public class WherigoMediaView extends LinearLayout {
         final File mediaFile = cgeo.geocaching.utils.FileUtils.getOrCreate(cacheDir, "media-" + fileName, type, data);
 
         this.mediaId = mediaId;
+        this.currentMediaFile = mediaFile;
 
         binding.mediaImageView.setVisibility(GONE);
         binding.mediaVideoView.setVisibility(GONE);
@@ -97,6 +116,7 @@ public class WherigoMediaView extends LinearLayout {
                 //gif
                 binding.mediaGifView.setImageURI(Uri.fromFile(mediaFile));
                 binding.mediaGifView.setVisibility(VISIBLE);
+                setupLongClickSave(binding.mediaGifView);
                 break;
             case "jpeg":
             case "jpg":
@@ -104,11 +124,44 @@ public class WherigoMediaView extends LinearLayout {
             case "bmp":
                 binding.mediaImageView.setImageURI(Uri.fromFile(mediaFile));
                 binding.mediaImageView.setVisibility(VISIBLE);
+                setupLongClickSave(binding.mediaImageView);
                 break;
             default:
                 //do nothing
                 break;
         }
+    }
+
+    private void setupLongClickSave(final View imageView) {
+        imageView.setOnLongClickListener(v -> {
+            showSaveContextMenu();
+            return true;
+        });
+    }
+
+    private void showSaveContextMenu() {
+        final Activity activity = getActivity();
+        if (activity == null || currentMediaFile == null) {
+            return;
+        }
+
+        final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
+        ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
+        ctxMenu.addItem(LocalizationUtils.getString(R.string.wherigo_save_image), R.drawable.ic_menu_save, item ->
+                WherigoUtils.saveImageToGeocache(currentMediaFile, mediaTitle, mediaDescription));
+        ctxMenu.show();
+    }
+
+    @Nullable
+    private Activity getActivity() {
+        Context ctx = getContext();
+        while (ctx instanceof ContextWrapper) {
+            if (ctx instanceof Activity) {
+                return (Activity) ctx;
+            }
+            ctx = ((ContextWrapper) ctx).getBaseContext();
+        }
+        return null;
     }
 
     public void setMediaData(final String type, final byte[] data, final String altText) {

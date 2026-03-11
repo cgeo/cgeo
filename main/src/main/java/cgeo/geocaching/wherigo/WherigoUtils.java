@@ -3,18 +3,22 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -45,6 +49,7 @@ import android.text.style.StyleSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -546,5 +551,96 @@ public final class WherigoUtils {
             name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
         }
         return name;
+    }
+
+    /**
+     * Saves a Wherigo media image to the geocache associated with the current Wherigo game.
+     * If no geocache association exists, creates a new user-defined geocache using the Wherigo CGUID.
+     *
+     * @param mediaFile   the image file to save
+     * @param title       the image title (e.g. thing name, dialog page info)
+     * @param description the image description (e.g. thing description, dialog text)
+     */
+    public static void saveImageToGeocache(@NonNull final File mediaFile, @Nullable final String title, @Nullable final String description) {
+        final WherigoGame game = WherigoGame.get();
+        if (!game.isPlaying()) {
+            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            return;
+        }
+
+        final String geocode = getOrCreateContextGeocode();
+        if (geocode == null) {
+            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            return;
+        }
+
+        // Load existing cache with spoilers
+        final Geocache cache = DataStore.loadCache(geocode, EnumSet.of(
+                LoadFlags.LoadFlag.CACHE_BEFORE, LoadFlags.LoadFlag.DB_MINIMAL, LoadFlags.LoadFlag.SPOILERS));
+        if (cache == null) {
+            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            return;
+        }
+
+        // Create the new image from the media file
+        final Image newImage = new Image.Builder()
+                .setUrl(Uri.fromFile(mediaFile))
+                .setTitle(StringUtils.defaultIfBlank(title, mediaFile.getName()))
+                .setDescription(StringUtils.defaultIfBlank(description, null))
+                .setCategory(Image.ImageCategory.OWN)
+                .build();
+
+        // Add to existing spoilers
+        final List<Image> spoilers = new ArrayList<>(cache.getSpoilers());
+        spoilers.add(newImage);
+        cache.setSpoilers(spoilers);
+
+        // Save to database
+        DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+        ViewUtils.showShortToast(null, LocalizationUtils.getString(R.string.wherigo_save_image_success, geocode));
+    }
+
+    /**
+     * Gets the context geocode for the current Wherigo game, creating a new user-defined
+     * geocache if no association exists.
+     */
+    @Nullable
+    private static String getOrCreateContextGeocode() {
+        final WherigoGame game = WherigoGame.get();
+        final String existingGeocode = game.getContextGeocode();
+        if (!StringUtils.isBlank(existingGeocode)) {
+            return existingGeocode;
+        }
+
+        // No geocache association exists - create a new user-defined geocache with the CGUID
+        final Context context = CgeoApplication.getInstance();
+        if (context == null) {
+            return null;
+        }
+
+        final String cguid = game.getCGuid();
+        final String geocode = cguid;
+
+        // Check if a cache with this geocode already exists
+        if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) != null) {
+            game.setContextGeocode(geocode);
+            return geocode;
+        }
+
+        // Create a new user-defined cache
+        final Geocache cache = new Geocache();
+        cache.setGeocode(geocode);
+        cache.setName(game.getCartridgeName());
+        cache.setDescription(LocalizationUtils.getString(R.string.wherigo) + ": " + cguid);
+        cache.setDetailed(true);
+        cache.setType(CacheType.USER_DEFINED);
+        final Set<Integer> lists = new HashSet<>(1);
+        lists.add(StoredList.getConcreteList(StoredList.STANDARD_LIST_ID));
+        cache.setLists(lists);
+        DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+        game.setContextGeocode(geocode);
+        return geocode;
     }
 }
