@@ -19,26 +19,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 --
+--
 File initially copied to c:geo from https://github.com/cgeo/openWIG in April 2025.
-Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.kahlua.vm
+Release 1.1.0 / 4386a025b88aac759e1e67cb27bcc50692d61d9a, Base Package se.krka.kahlua.stdlib
 */
-package cgeo.geocaching.wherigo.kahlua.vm;
+package cgeo.geocaching.wherigo.kahlua.stdlib;
 
+import java.util.Locale;
 
+/** Lua type identifiers returned by the {@code type()} function. */
+public enum LuaType {
+    NIL, STRING, NUMBER, BOOLEAN, FUNCTION, TABLE, THREAD, USERDATA;
 
-@FunctionalInterface
-public interface JavaFunction {
-    /**
-     * General contract<br>
-     * <br>
-     *  Input:<br>
-     *  callFrame = the frame that contains all the arguments, and where all the results should be put.<br>
-     *  nArgs = number of function arguments<br>
-     *  callFrame.get(i) = an argument (0 <= i < nArgs)<br>
-     *
-     * @param callFrame - the current callframe for the function
-     * @param nArguments - number of function arguments
-     * @return N - number of return values. The N top objects on the stack are considered the return values
-     */
-    public abstract int call(LuaCallFrame callFrame, int nArguments);
+    @Override
+    public String toString() {
+        return name().toLowerCase(Locale.ROOT);
+    }
 }
