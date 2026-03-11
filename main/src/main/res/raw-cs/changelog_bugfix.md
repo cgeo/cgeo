@@ -3,6 +3,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
+- FIx: Keyboard may be blocking list selection
 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
@@ -70,6 +71,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Oprava: Migrace uživatelsky definovaných kešek při spuštění c:geo selhala => je prozatím odstraněna
 - Oprava: Dokončené úlohy Wherigo nebyly označeny jako dokončené nebo neúspěšné
+
 
 
 
