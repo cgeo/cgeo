@@ -69,7 +69,7 @@ public final class Network {
     /**
      * User agent id
      */
-    public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1 cgeo/" + BuildConfig.VERSION_NAME;
+    public static final String USER_AGENT = "Mozilla/5.0 (Android 16; Mobile; rv:149.0) Gecko/149.0 cgeo/" + BuildConfig.VERSION_NAME;
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
