@@ -3,6 +3,7 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
+- FIx: Keyboard may be blocking list selection
 
 ##
 - Korrektur: Download-Dialog für Offline-Übersetzungen wird auch in Installationen ohne Unterstützung von Offline-Übersetzungen angezeigt
@@ -70,6 +71,7 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 ##
 - Korrektur: Migration von benutzerdefinierten Caches während des Starts von c:geo schlägt fehl, c:geo startet dann nicht mehr => Migration bis auf Weiteres entfernt
 - Korrektur: Beendete Wherigo Aufgaben nicht als beendet oder fehlgeschlagen markiert
+
 
 
 
