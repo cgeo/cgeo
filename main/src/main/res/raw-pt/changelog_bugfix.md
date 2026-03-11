@@ -1,6 +1,11 @@
 ##
 Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
 
+- Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
+- Correcção: A abertura de um TB a partir da lista de observação falhava
+- FIx: Keyboard may be blocking list selection
+
+##
 - Correcção: Janela de transferência de tradução off-line mostrada em instalações sem suporte a tradução offline
 - Correcção: Alteração do formato das coordenadas na página de informações da cache/ponto adicional
 - Correcção: Data de registo cortada na lista de registos (dependendo do formato da data e tamanho da fonte)
@@ -66,6 +71,9 @@ Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta p
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
+
 
 
 
