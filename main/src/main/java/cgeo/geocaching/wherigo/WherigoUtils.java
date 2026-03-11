@@ -620,27 +620,24 @@ public final class WherigoUtils {
         }
 
         final String cguid = game.getCGuid();
-        final String geocode = cguid;
 
         // Check if a cache with this geocode already exists
-        if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) != null) {
-            game.setContextGeocode(geocode);
-            return geocode;
+        if (DataStore.loadCache(cguid, LoadFlags.LOAD_CACHE_OR_DB) != null) {
+            game.setContextGeocode(cguid);
+            return cguid;
         }
 
         // Create a new user-defined cache
         final Geocache cache = new Geocache();
-        cache.setGeocode(geocode);
+        cache.setGeocode(cguid);
         cache.setName(game.getCartridgeName());
         cache.setDescription(LocalizationUtils.getString(R.string.wherigo) + ": " + cguid);
         cache.setDetailed(true);
         cache.setType(CacheType.USER_DEFINED);
-        final Set<Integer> lists = new HashSet<>(1);
-        lists.add(StoredList.getConcreteList(StoredList.STANDARD_LIST_ID));
-        cache.setLists(lists);
+        cache.setLists(Collections.singleton(StoredList.getConcreteList(StoredList.STANDARD_LIST_ID)));
         DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
 
-        game.setContextGeocode(geocode);
-        return geocode;
+        game.setContextGeocode(cguid);
+        return cguid;
     }
 }

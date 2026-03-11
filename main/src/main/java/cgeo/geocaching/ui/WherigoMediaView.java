@@ -33,9 +33,9 @@ public class WherigoMediaView extends LinearLayout {
     private WherigoMediaViewBinding binding;
 
     private int mediaId = -1;
-    private File currentMediaFile;
-    private String mediaTitle;
-    private String mediaDescription;
+    @Nullable private File currentMediaFile;
+    @Nullable private String mediaTitle;
+    @Nullable private String mediaDescription;
 
     public WherigoMediaView(final Context context) {
         super(context);
