@@ -21,7 +21,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Zmiana: Maksymalna odległość do połączenia punktów na historii śladu obniżona do 500 metrów (konfigurowalne)
 - Nowość: Zezwalaj na importowanie plików KML jako ścieżek (np. trasa przedmiotu podróżnego)
 - Nowość: Możliwość ustawienia ikony skrytki, nawet jeśli skrytka nie jest jeszcze zapisana
-- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- Nowość: Infoboks dla wykresu wysokości ukazującego pozostały dystans, podejścia, zejścia
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
