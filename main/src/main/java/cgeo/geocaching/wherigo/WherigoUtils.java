@@ -554,12 +554,12 @@ public final class WherigoUtils {
     }
 
     /**
-     * Saves a Wherigo media image to the geocache associated with the current Wherigo game.
+     * Saves a Wherigo media file to the geocache associated with the current Wherigo game.
      * If no geocache association exists, creates a new user-defined geocache using the Wherigo CGUID.
      *
-     * @param mediaFile   the image file to save
-     * @param title       the image title (e.g. thing name, dialog page info)
-     * @param description the image description (e.g. thing description, dialog text)
+     * @param mediaFile   the media file to save (image, video, or audio)
+     * @param title       the media title (e.g. thing name, dialog page info)
+     * @param description the media description (e.g. thing description, dialog text)
      */
     public static void saveImageToGeocache(@NonNull final File mediaFile, @Nullable final String title, @Nullable final String description) {
         final WherigoGame game = WherigoGame.get();

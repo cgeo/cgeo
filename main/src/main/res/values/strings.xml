@@ -3106,9 +3106,9 @@
     <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
     <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
 
-    <string name="wherigo_save_image">Save Image</string>
-    <string name="wherigo_save_image_success">Image saved to geocache %s</string>
-    <string name="wherigo_save_image_failed">Failed to save image</string>
+    <string name="wherigo_save_image">Save Media</string>
+    <string name="wherigo_save_image_success">Media saved to geocache %s</string>
+    <string name="wherigo_save_image_failed">Failed to save media</string>
 
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>

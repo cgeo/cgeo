@@ -68,7 +68,7 @@ public class WherigoMediaView extends LinearLayout {
 
     /**
      * Sets metadata information for the currently displayed media.
-     * This metadata is used when saving the image to a geocache.
+     * This metadata is used when saving the media to a geocache.
      */
     public void setMediaMetadata(@Nullable final String title, @Nullable final String description) {
         this.mediaTitle = title;
@@ -111,6 +111,7 @@ public class WherigoMediaView extends LinearLayout {
                 //Video
                 binding.mediaVideoView.setVideoURI(Uri.fromFile(mediaFile));
                 binding.mediaVideoView.setVisibility(VISIBLE);
+                setupLongClickSave(binding.mediaVideoView);
                 break;
             case "gif":
                 //gif
@@ -125,6 +126,11 @@ public class WherigoMediaView extends LinearLayout {
                 binding.mediaImageView.setImageURI(Uri.fromFile(mediaFile));
                 binding.mediaImageView.setVisibility(VISIBLE);
                 setupLongClickSave(binding.mediaImageView);
+                break;
+            case "wav":
+            case "mp3":
+                //Audio - no visual representation, but allow saving via alt text view
+                setupLongClickSave(binding.mediaTextView);
                 break;
             default:
                 //do nothing
