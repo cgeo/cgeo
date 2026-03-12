@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +27,7 @@ class MapsMeApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        navigate(context, coords, getString(R.string.unknown));
+        navigate(context, coords, LocalizationUtils.getString(R.string.unknown));
     }
 
     @Override

@@ -59,6 +59,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
@@ -1038,7 +1039,7 @@ public class DataStore {
      * showing a progress window
      */
     public static void moveDatabase(final Activity fromActivity) {
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, LocalizationUtils.getString(R.string.init_dbmove_dbmove), LocalizationUtils.getString(R.string.init_dbmove_running), true, false);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             if (!LocalStorage.isExternalStorageAvailable()) {
                 Log.w("Database was not moved: external memory not available");
@@ -1066,7 +1067,7 @@ public class DataStore {
             });
         }).subscribeOn(Schedulers.io())).subscribe(success -> {
             dialog.dismiss();
-            final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
+            final String message = success ? LocalizationUtils.getString(R.string.init_dbmove_success) : LocalizationUtils.getString(R.string.init_dbmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_dbmove_dbmove).setMessage(TextParam.text(message)).show();
         });
     }
@@ -1095,7 +1096,7 @@ public class DataStore {
                 final int backupDbVersion = backup.getVersion();
                 final int expectedDbVersion = DataStore.getExpectedDBVersion();
                 if (!DataStore.versionsAreCompatible(backup, backupDbVersion, expectedDbVersion)) {
-                    return String.format(context.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion);
+                    return LocalizationUtils.getString(R.string.init_restore_version_error, expectedDbVersion, backupDbVersion);
                 }
                 closeDb();
                 result = FileUtils.copy(tmpFile, databasePath()) ? DBRestoreResult.RESTORE_SUCCESSFUL : DBRestoreResult.RESTORE_FAILED_GENERAL;
@@ -1114,7 +1115,7 @@ public class DataStore {
             } finally {
                 tmpFile.delete();
             }
-            return context.getString(result.res);
+            return LocalizationUtils.getString(result.res);
         });
     }
 
@@ -4541,7 +4542,7 @@ public class DataStore {
             final Resources res = CgeoApplication.getInstance().getResources();
             final List<StoredList> lists = new ArrayList<>();
             if (listId == null) {
-                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
             }
 
             try {
@@ -4589,11 +4590,11 @@ public class DataStore {
 
             final Resources res = CgeoApplication.getInstance().getResources();
             if (id == PseudoList.ALL_LIST.id) {
-                return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
+                return new StoredList(PseudoList.ALL_LIST.id, LocalizationUtils.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
             }
 
             // fall back to standard list in case of invalid list id
-            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+            return new StoredList(StoredList.STANDARD_LIST_ID, LocalizationUtils.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
         });
     }
 
@@ -5492,7 +5493,7 @@ public class DataStore {
                         statement.bindString(3, "waypoint");                         // type
                         statement.bindString(4, "00");                               // prefix
                         statement.bindString(5, "---");                              // lookup
-                        statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
+                        statement.bindString(6, LocalizationUtils.getString(R.string.wp_waypoint) + " " + sequence);      // name
                         statement.bindDouble(7, getDouble(cursor, "latitude"));      // latitude
                         statement.bindDouble(8, getDouble(cursor, "longitude"));     // longitude
                         statement.bindString(9, "");                                 // note

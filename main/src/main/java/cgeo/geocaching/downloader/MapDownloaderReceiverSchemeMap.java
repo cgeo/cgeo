@@ -3,6 +3,7 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
@@ -23,7 +24,7 @@ public class MapDownloaderReceiverSchemeMap extends AbstractActivity {
         if (host.equals("download.openandromaps.org") && path.startsWith("/mapsV4/") && path.endsWith(".zip")) {
             // check for OpenAndroMaps - mf-v4-map://download.openandromaps.org/mapsV4/Germany/bayern.zip
             // remap Uri to their ftp server
-            final Uri newUri = Uri.parse(getString(R.string.mapserver_openandromaps_downloadurl) + path.substring(8));
+            final Uri newUri = Uri.parse(LocalizationUtils.getPlainString(R.string.mapserver_openandromaps_downloadurl) + path.substring(8));
             DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS.id, newUri, "", "", this::callback, null);
         } else if (host.equals("kartat-dl.hylly.org") && path.endsWith("/mtk_suomi.map")) {
             // check for Hylly maps - mf-v4-map://kartat-dl.hylly.org/2021-04-25/mtk_suomi.map
