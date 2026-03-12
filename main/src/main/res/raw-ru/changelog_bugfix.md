@@ -3,7 +3,8 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
-- FIx: Keyboard may be blocking list selection
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
@@ -71,6 +72,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
 - Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
 
 
 
