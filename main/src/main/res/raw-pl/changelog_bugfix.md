@@ -3,7 +3,8 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 
 - Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
 - Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
-- Naprawiono: Klawiatura może blokować wybór listy
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
 
 ##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
@@ -71,6 +72,7 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
 
 
 
