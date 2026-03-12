@@ -1628,7 +1628,7 @@ public final class GCParser {
         // Wait for completion of logs parsing, retrieving and merging
         mergedLogs.ignoreElement().blockingAwait();
 
-        List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
+        final List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
         if (!cacheInventory.isEmpty()) {
             cache.mergeInventory(GCWebAPI.convertTrackableInventory(cacheInventory), EnumSet.of(TrackableBrand.TRAVELBUG));
         }
