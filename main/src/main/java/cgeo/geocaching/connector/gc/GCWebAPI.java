@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -12,6 +13,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -603,6 +605,15 @@ public class GCWebAPI {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class TrackableInventoryEntryList {
+        @JsonProperty("total")
+        int total;
+        @JsonProperty("data")
+        List<TrackableInventoryEntry> data;
+    }
+
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static final class CacheOwner {
         @JsonProperty("code")
         String code;
@@ -917,6 +928,39 @@ public class GCWebAPI {
         return trackableInventoryEntries;
     }
 
+    /*
+     * https://www.geocaching.com/api/proxy/web/v1/trackables/geocache/...
+     */
+    static List<TrackableInventoryEntry> getTrackablesOfCache(final String geocode) {
+        final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
+        int skip = 0;
+        try {
+            TrackableInventoryEntryList result;
+            do {
+                result = apiProxyReq().uri("/web/v1/trackables/geocache/" + geocode + "?take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntryList.class).blockingGet();
+                if (result == null || result.data == null) {
+                    break;
+                }
+                trackableInventoryEntries.addAll(result.data);
+                skip += MAX_TAKE;
+            } while (result.data.size() == MAX_TAKE);
+        } catch (Exception e) {
+            Log.w("Problems getting trackables: " + e.getMessage());
+        }
+        return trackableInventoryEntries;
+    }
+
+    static List<Trackable> convertTrackableInventory(final List<TrackableInventoryEntry> trackableInventoryItems) {
+        final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setName(entry.name);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+        }).toList();
+        return trackables;
+    }
     /*
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */
