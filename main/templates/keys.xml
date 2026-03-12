@@ -33,4 +33,9 @@
 
     <!-- Geocaching.com public ALC API -->
     <string name="alc_consumer_key" translatable="false">@alc.consumer.key@</string>
+
+    <!-- Geocaching.com Live API (OAuth2) -->
+    <string name="gc_live_client_id" translatable="false">@gc.live.client.id@</string>
+    <string name="gc_live_client_secret" translatable="false">@gc.live.client.secret@</string>
+    <string name="gc_live_redirect_uri" translatable="false">@gc.live.redirect.uri@</string>
 </resources>
