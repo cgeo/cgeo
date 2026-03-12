@@ -138,8 +138,8 @@ public class WherigoMediaView extends LinearLayout {
         }
     }
 
-    private void setupLongClickSave(final View imageView) {
-        imageView.setOnLongClickListener(v -> {
+    private void setupLongClickSave(final View view) {
+        view.setOnLongClickListener(v -> {
             showSaveContextMenu();
             return true;
         });
@@ -153,8 +153,8 @@ public class WherigoMediaView extends LinearLayout {
 
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
-        ctxMenu.addItem(LocalizationUtils.getString(R.string.wherigo_save_image), R.drawable.ic_menu_save, item ->
-                WherigoUtils.saveImageToGeocache(currentMediaFile, mediaTitle, mediaDescription));
+        ctxMenu.addItem(LocalizationUtils.getString(R.string.wherigo_save_media), R.drawable.ic_menu_save, item ->
+                WherigoUtils.saveMediaToGeocache(currentMediaFile, mediaTitle, mediaDescription));
         ctxMenu.show();
     }
 

@@ -561,16 +561,16 @@ public final class WherigoUtils {
      * @param title       the media title (e.g. thing name, dialog page info)
      * @param description the media description (e.g. thing description, dialog text)
      */
-    public static void saveImageToGeocache(@NonNull final File mediaFile, @Nullable final String title, @Nullable final String description) {
+    public static void saveMediaToGeocache(@NonNull final File mediaFile, @Nullable final String title, @Nullable final String description) {
         final WherigoGame game = WherigoGame.get();
         if (!game.isPlaying()) {
-            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            ViewUtils.showShortToast(null, R.string.wherigo_save_media_failed);
             return;
         }
 
         final String geocode = getOrCreateContextGeocode();
         if (geocode == null) {
-            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            ViewUtils.showShortToast(null, R.string.wherigo_save_media_failed);
             return;
         }
 
@@ -578,7 +578,7 @@ public final class WherigoUtils {
         final Geocache cache = DataStore.loadCache(geocode, EnumSet.of(
                 LoadFlags.LoadFlag.CACHE_BEFORE, LoadFlags.LoadFlag.DB_MINIMAL, LoadFlags.LoadFlag.SPOILERS));
         if (cache == null) {
-            ViewUtils.showShortToast(null, R.string.wherigo_save_image_failed);
+            ViewUtils.showShortToast(null, R.string.wherigo_save_media_failed);
             return;
         }
 
@@ -598,7 +598,7 @@ public final class WherigoUtils {
         // Save to database
         DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
 
-        ViewUtils.showShortToast(null, LocalizationUtils.getString(R.string.wherigo_save_image_success, geocode));
+        ViewUtils.showShortToast(null, LocalizationUtils.getString(R.string.wherigo_save_media_success, geocode));
     }
 
     /**
