@@ -2684,4 +2684,14 @@ public class Settings {
         }
         return lngs;
     }
+
+    // File handling settings
+
+    public static boolean isLocalFileHandlerByExtensionEnabled() {
+        return getBoolean(R.string.pref_localfile_handler_by_extension, true);
+    }
+
+    public static boolean isLocalFileHandlerByMimeTypeEnabled() {
+        return getBoolean(R.string.pref_localfile_handler_by_mimetype, false);
+    }
 }
