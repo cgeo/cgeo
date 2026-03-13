@@ -3,8 +3,8 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 
 - Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
 - Correcció: Error en obrir un element rastrejable des de la llista de seguiment
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
+- Correcció: El teclat pot estar bloquejant la selecció de la llista
+- Correcció: El proveïdor definit per l'usuari no admet paràmetres d'URL addicionals
 
 ##
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
