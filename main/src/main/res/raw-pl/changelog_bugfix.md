@@ -3,8 +3,8 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 
 - Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
 - Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
+- Naprawiono: Klawiatura może blokować wybór listy
+- Naprawiono: Dostawca kafelków zdefiniowany przez użytkownika nie obsługuje dodatkowych parametrów URL
 
 ##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
