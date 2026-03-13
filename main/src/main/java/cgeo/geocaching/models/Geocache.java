@@ -313,7 +313,7 @@ public class Geocache implements INamedGeoCoordinate {
         if (cacheType == CacheType.UNKNOWN) {
             cacheType = other.cacheType;
         }
-        if (StringUtils.isBlank(name)) {
+        if (StringUtils.isBlank(name) || StringUtils.equalsIgnoreCase(name, geocode)) {
             name = other.name;
         }
         if (StringUtils.isBlank(ownerDisplayName)) {
