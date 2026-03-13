@@ -1,10 +1,16 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
 
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
+- Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
+- Correcção: A abertura de um TB a partir da lista de observação falhava
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+
+##
+- Correcção: Janela de transferência de tradução off-line mostrada em instalações sem suporte a tradução offline
+- Correcção: Alteração do formato das coordenadas na página de informações da cache/ponto adicional
+- Correcção: Data de registo cortada na lista de registos (dependendo do formato da data e tamanho da fonte)
+- Correcção: Horários dos eventos não eram detectados em certas condições
 - Fix: Link in listing not clickable under certain conditions
 - Fix: Logging actions for trackables get mixed up sometimes
 
@@ -12,14 +18,14 @@ Time to update! If you are still using Android 7 or older, this might be the las
 - Alteração: Número máximo de rastreáveis (TB) a visitar por registo de cache reduzido para 100 (por solicitação de geocaching.com, para reduzir a carga do servidor causado por amantes de TB extremos)
 - Correcção: Algumas possíveis excepções de segurança quando o utilizador não concedeu certas permissões (por exemplo: notificações)
 - Correcção: Círculos incompletos de caches em níveis de zoom baixos (apenas VTM)
-- Fix: Crash on reloading waypoints in certain load conditions
-- Fix: Event date filter not working under certain conditions
-- Fix: Max log line limit not working reliably in "unlimited" setting
-- Fix: Crash on opening map under certain conditions
-- Fix: No map shown if wherigo has no visible zones
-- Fix: Crash on cache details' image tab under certain conditions
-- Fix: Map searches with invalid coordinates
-- Fix: Some translations do not respect c:geo-internal language setting
+- Correcção: Falha ao recarregar pontos adicionais em certas condições de carga
+- Correcção: O filtro de data do evento não funciona em determinadas condições
+- Correcção: Limite máximo de linhas de registo não funcionava de forma confiável na configuração "ilimitado"
+- Correcção: Encerramento inesperado em certas condições ao abrir mapa
+- Correcção: O mapa não era mostrado caso a wherigo não tivesse zonas visíveis
+- Correcção: Falha no separador dos detalhes da cache em certas condições
+- Correcção: Pesquisas no mapa com coordenadas inválidas
+- Correcção: Algumas traduções não respeitam as definições da linguagem interna do c:geo
 
 ##
 - Mudança: Mapa Unificado definido como mapa padrão para qualquer pessoa (como parte do nosso roteiro para o Mapa Unificado) Pode voltar ao anterior em "Definições" - "Provedores de mapas", por enquanto. A remoção dos mapas antigos está prevista para a primavera de 2026, nos nossos lançamentos regulares.
@@ -66,6 +72,10 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
+
+
+
 
 
 
