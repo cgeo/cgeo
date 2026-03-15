@@ -4,6 +4,9 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 - Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
 - Correcció: Error en obrir un element rastrejable des de la llista de seguiment
 - Correcció: El teclat pot estar bloquejant la selecció de la llista
+- Correcció: El proveïdor definit per l'usuari no admet paràmetres d'URL addicionals
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
 
 ##
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
@@ -71,6 +74,7 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
 
 
 
