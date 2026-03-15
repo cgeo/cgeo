@@ -3,7 +3,10 @@ Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta p
 
 - Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
 - Correcção: A abertura de um TB a partir da lista de observação falhava
-- FIx: Keyboard may be blocking list selection
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
 
 ##
 - Correcção: Janela de transferência de tradução off-line mostrada em instalações sem suporte a tradução offline
@@ -71,6 +74,7 @@ Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta p
 ##
 - Correcção: Migração de caches definidas pelo utilizador durante a inicialização do c:geo falhava => removida a funcionalidade, por enquanto
 - Correcção: As tarefas Wherigo finalizadas não eram marcadas como terminadas ou falhadas
+
 
 
 
