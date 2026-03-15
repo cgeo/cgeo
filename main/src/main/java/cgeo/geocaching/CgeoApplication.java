@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -193,8 +194,12 @@ public class CgeoApplication extends Application {
      * Enforce a specific language if the user decided so.
      */
     public void initApplicationLocale() {
+        final Locale locale = Settings.getApplicationLocale();
+        // Set default locale for Java-side formatting (String.format, toLowerCase, etc.)
+        Locale.setDefault(locale);
+        // Create a locale-aware context for Android resource lookups (getString, etc.)
         final Configuration config = new Configuration(getResources().getConfiguration());
-        config.setLocale(Settings.getApplicationLocale());
+        config.setLocale(locale);
         localeContext = createConfigurationContext(config);
     }
 
