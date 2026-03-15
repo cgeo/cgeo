@@ -2024,6 +2024,7 @@
     <string name="calccoord_select_variable">Select Variable</string>
     <string name="calccoord_new_variable">**%s** *(New)*</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
+    <string name="calccoord_convert_to_plain_error">The formula does not evaluate to valid coordinates.\nConverting to plain coordinates will reset the waypoint to empty coordinates.</string>
     <string name="calccoord_plain_tools_title">Plain Tools</string>
     <string name="calccoord_remove_spaces">Remove spaces</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Replace \'x\' with \'*\'</string>
