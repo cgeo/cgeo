@@ -210,7 +210,7 @@ public final class LocalizationUtils {
 
     @Nullable
     private static Context getLocalizationContext() {
-        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
+        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getLocaleContext();
     }
 
     @Nullable

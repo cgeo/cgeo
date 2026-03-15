@@ -20,7 +20,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Looper;
 
@@ -40,6 +39,8 @@ public class CgeoApplication extends Application {
     private static CgeoApplication instance;
     private final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
     private final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
+
+    private Context localeContext;
 
     private final LifecycleInfo lifecycleInfo;
 
@@ -192,10 +193,21 @@ public class CgeoApplication extends Application {
      * Enforce a specific language if the user decided so.
      */
     public void initApplicationLocale() {
-        final Configuration config = getResources().getConfiguration();
-        config.locale = Settings.getApplicationLocale();
-        final Resources resources = getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        final Configuration config = new Configuration(getResources().getConfiguration());
+        config.setLocale(Settings.getApplicationLocale());
+        localeContext = createConfigurationContext(config);
+    }
+
+    /**
+     * Returns a Context configured with the user-selected application locale.
+     * Use this context for string resource lookups instead of getApplicationContext().
+     */
+    @NonNull
+    public Context getLocaleContext() {
+        if (localeContext == null) {
+            initApplicationLocale();
+        }
+        return localeContext;
     }
 
     public AtomicInteger getLowPrioNotificationCounter() {
