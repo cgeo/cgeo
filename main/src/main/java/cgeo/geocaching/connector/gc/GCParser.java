@@ -1695,6 +1695,12 @@ public final class GCParser {
 
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
+
+        // retrieve trackables
+        final List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
+        if (!cacheInventory.isEmpty()) {
+            cache.mergeInventory(GCWebAPI.convertTrackableInventory(cacheInventory), EnumSet.of(TrackableBrand.TRAVELBUG));
+        }
     }
 
     private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {

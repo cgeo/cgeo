@@ -5,8 +5,11 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
-- FIx: Keyboard may be blocking list selection
-
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
+ 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
 - Fix: Coordinate format changing in cache/waypoint info sheet
@@ -75,6 +78,7 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 ##
 - Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
 - Fix: Finished Wherigo tasks not marked as finished or failed
+
 
 
 
