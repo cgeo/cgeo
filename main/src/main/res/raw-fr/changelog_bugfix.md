@@ -3,7 +3,10 @@ Time to update! If you are still using Android 7 or older, this might be the las
 
 - Fix: Parsing cache location string fails for certain website languages
 - Fix: Opening trackable from watchlist fails
-- FIx: Keyboard may be blocking list selection
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
 
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
@@ -71,6 +74,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Correctif : La migration des caches définies par l'utilisateur au démarrage de c:geo échoue => retiré pour le moment
 - Correctif : Les tâches Wherigo terminées ne sont pas marquées comme terminées ou échouées
+
 
 
 
