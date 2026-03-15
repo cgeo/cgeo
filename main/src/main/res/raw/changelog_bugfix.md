@@ -9,6 +9,7 @@ We will still be supporting Android 8 up to Android 16 then (and newer versions 
 - Fix: User-defined tileprovider not supporting additional URL parameters
 - Fix: Inventory / Trackables of a cache not loaded anymore
 - Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
  
 ##
 - Fix: Offline translation download dialog shown in installations without offline translation support
