@@ -5,6 +5,9 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 - Fix: Opening trackable from watchlist fails
 - Fix: Keyboard may be blocking list selection
 - Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
 
 ##
 - Korrektur: Download-Dialog für Offline-Übersetzungen wird auch in Installationen ohne Unterstützung von Offline-Übersetzungen angezeigt
