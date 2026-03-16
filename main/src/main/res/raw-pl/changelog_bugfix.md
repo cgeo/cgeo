@@ -5,9 +5,9 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 - Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
 - Naprawiono: Klawiatura może blokować wybór listy
 - Naprawiono: Dostawca kafelków zdefiniowany przez użytkownika nie obsługuje dodatkowych parametrów URL
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+- Naprawiono: Inwentarz / Przedmioty podróżne ze skrytki nie są wczytywane
+- Zmiana: Zaktualizowano wpis user-agent w celu rozwiązania problemów z pobieraniem
+- Naprawiono: Przeglądanie szczegółów przedmiotów podróżnych usuwa je z inwentarza skrytki
 
 ##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
