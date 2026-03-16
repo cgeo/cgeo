@@ -20,8 +20,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 - Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
-- New: Offer to set cache icon even if cache is not yet stored
-- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
+- Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -71,5 +71,5 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Systemeinstellung als Standard-Design für neue Installationen verwenden
 - Neu: GPX-Export: GSAK Lat/LonBeforeCorrect Tag beim Export von Original-Wegpunkten ergänzt
 - Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"
-- Fix: Crahs in percentage favorite filter
-- New: Make it easier to use simple lists as parent lists
+- Korrektur: Absturz in Prozentsatz Favoritenfilter
+- Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
