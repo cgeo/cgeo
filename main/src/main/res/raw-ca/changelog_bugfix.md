@@ -1,6 +1,15 @@
 ##
 Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
+- Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
+- Correcció: Error en obrir un element rastrejable des de la llista de seguiment
+- Correcció: El teclat pot estar bloquejant la selecció de la llista
+- Correcció: El proveïdor definit per l'usuari no admet paràmetres d'URL addicionals
+- Correcció: L'inventari / els elements rastrejables d'un catxé ja no es carreguen
+- Canvi: S'ha actualitzat l'agent d'usuari intern per solucionar alguns problemes de descàrrega
+- Correcció: En visualitzar els detalls rastrejables, s'eliminen de l'inventari del catxé
+
+##
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
 - Correcció: Canvi de format de coordenades a la fitxa informativa del catxé/punt de referència
 - Correcció: Data de registre tallada a la llista de registres (segons el format de data i la mida de la lletra)
@@ -66,6 +75,10 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 ##
 - Correcció: La migració de catxés definits per l'usuari durant l'inici de c:geo falla => s'ha eliminat de moment'
 - Correcció: Les tasques de Wherigo finalitzades no es marquen com a finalitzades o fallides
+
+
+
+
 
 
 

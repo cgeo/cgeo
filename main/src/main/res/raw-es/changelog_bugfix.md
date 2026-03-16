@@ -1,6 +1,15 @@
 ##
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
+- Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
+
+##
 - Fix: Offline translation download dialog shown in installations without offline translation support
 - Fix: Coordinate format changing in cache/waypoint info sheet
 - Fix: Log date cut off in list of logs (depending on date format and font size)
@@ -66,6 +75,10 @@ Time to update! If you are still using Android 7 or older, this might be the las
 ##
 - Corregido: Migración de cachés definidos por el usuario durante el inicio de c:geo falla => eliminado por el momento
 - Corregido: Las tareas finalizadas del Wherigo no están marcadas como terminadas o fallaron
+
+
+
+
 
 
 

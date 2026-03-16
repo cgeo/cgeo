@@ -1,6 +1,15 @@
 ##
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie konserwacyjne i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
+- Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
+- Naprawiono: Otwieranie przedmiotów podróżnych z listy obserwowanych nie udawało się
+- Naprawiono: Klawiatura może blokować wybór listy
+- Naprawiono: Dostawca kafelków zdefiniowany przez użytkownika nie obsługuje dodatkowych parametrów URL
+- Naprawiono: Inwentarz / Przedmioty podróżne ze skrytki nie są wczytywane
+- Zmiana: Zaktualizowano wpis user-agent w celu rozwiązania problemów z pobieraniem
+- Naprawiono: Przeglądanie szczegółów przedmiotów podróżnych usuwa je z inwentarza skrytki
+
+##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
 - Naprawiono: Format współrzędnych zmieniający się w arkuszu informacji o skrytce/punkcie nawigacji
 - Naprawiono: Data logowania była przycinana na liście logowań (w zależności od formatu daty i rozmiaru czcionki)
@@ -66,6 +75,10 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 ##
 - Naprawiono: Migracja skrzynek zdefiniowanych przez użytkownika podczas uruchamiania c:geo nie powiodła się => tymczasowo usunięto
 - Naprawiono: Zakończone zadania Wherigo nie zostały oznaczone jako zakończone lub nieudane
+
+
+
+
 
 
 
