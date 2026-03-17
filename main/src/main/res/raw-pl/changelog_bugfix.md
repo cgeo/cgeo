@@ -7,6 +7,7 @@ Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może 
 - Naprawiono: Dostawca kafelków zdefiniowany przez użytkownika nie obsługuje dodatkowych parametrów URL
 - Naprawiono: Inwentarz / Przedmioty podróżne ze skrytki nie są wczytywane
 - Zmiana: Zaktualizowano wpis user-agent w celu rozwiązania problemów z pobieraniem
+- Naprawiono: Przeglądanie szczegółów przedmiotów podróżnych usuwa je z inwentarza skrytki
 
 ##
 - Naprawiono: Okno dialogowe pobierania tłumaczenia offline wyświetlane w instalacjach bez obsługi tłumaczeń offline
