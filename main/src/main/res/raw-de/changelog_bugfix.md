@@ -7,6 +7,7 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
 - Korrektur: Benutzerdefinierter Kartenanbieter unterstützt keine zusätzlichen URL-Parameter
 - Korrektur: Inventar / Trackables eines Caches werden nicht mehr geladen/aktualisiert
 - Änderung: Interner User-Agent aktualisiert, um einige Download-Probleme zu lösen
+- Korrektur: Ansehen der Trackable-Details entfernt ihn aus dem Cache-Inventar
 
 ##
 - Korrektur: Download-Dialog für Offline-Übersetzungen wird auch in Installationen ohne Unterstützung von Offline-Übersetzungen angezeigt
