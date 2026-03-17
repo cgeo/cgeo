@@ -7,6 +7,7 @@ Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aques
 - Correcció: El proveïdor definit per l'usuari no admet paràmetres d'URL addicionals
 - Correcció: L'inventari / els elements rastrejables d'un catxé ja no es carreguen
 - Canvi: S'ha actualitzat l'agent d'usuari intern per solucionar alguns problemes de descàrrega
+- Correcció: En visualitzar els detalls rastrejables, s'eliminen de l'inventari del catxé
 
 ##
 - Correcció: El quadre de diàleg de descàrrega de traducció fora de línia es mostra en instal·lacions sense suport de traducció fora de línia
