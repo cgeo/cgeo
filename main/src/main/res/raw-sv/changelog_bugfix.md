@@ -7,6 +7,7 @@ Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta
 - Fix: User-defined tileprovider not supporting additional URL parameters
 - Fix: Inventory / Trackables of a cache not loaded anymore
 - Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
 
 ##
 - Fix: dialogrutan för Offline-översättning som visas i installationer utan stöd för översättningar offline
