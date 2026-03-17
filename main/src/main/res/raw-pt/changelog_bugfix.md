@@ -7,6 +7,7 @@ Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta p
 - Fix: User-defined tileprovider not supporting additional URL parameters
 - Fix: Inventory / Trackables of a cache not loaded anymore
 - Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
 
 ##
 - Correcção: Janela de transferência de tradução off-line mostrada em instalações sem suporte a tradução offline
