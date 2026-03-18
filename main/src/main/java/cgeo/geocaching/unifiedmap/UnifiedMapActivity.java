@@ -918,7 +918,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
 
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return result;
     }
@@ -1037,7 +1037,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 return super.onOptionsItemSelected(item);
             }
         }
-        MenuUtils.tintToolbarAndOverflowIcons(toolbarMenu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
         return true;
     }
 
