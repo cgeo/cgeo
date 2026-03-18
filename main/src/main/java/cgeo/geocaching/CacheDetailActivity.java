@@ -768,7 +768,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         MenuUtils.enableIconsInOverflowMenu(menu);
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return super.onPrepareOptionsMenu(menu);
     }
