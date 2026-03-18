@@ -54,7 +54,8 @@
     <style name="appToolbarPopup" parent="ThemeOverlay.MaterialComponents">
         <item name="colorControlNormal">@color/colorText</item>
         <item name="android:background">@color/colorBackground</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/color_text_selector</item>
+        <item name="android:textColorPrimary">@color/color_text_selector</item>
         <item name="android:minHeight">0dp</item>
     </style>
 
