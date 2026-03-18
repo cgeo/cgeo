@@ -13,7 +13,7 @@
 
     <style name="text_default" parent="@style/text">
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/color_text_selector</item>
     </style>
 
     <style name="text_label" parent="text">
@@ -96,6 +96,7 @@
         <item name="colorControlNormal">@color/colorTextActionBar</item>
         <item name="colorOnPrimary">@color/colorTextActionBar</item>
         <item name="android:itemTextAppearance">@style/text_default</item>
+        <item name="android:actionMenuTextColor">@color/action_bar_item_text_selector</item>
     </style>
 
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -126,7 +127,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_buttonsPrimary</item>
         <item name="strokeColor">@color/button_strokecolor_selector</item>
-        <item name="iconTint">@color/colorText</item>
+        <item name="iconTint">@color/color_text_selector</item>
     </style>
 
     <style name="button_full_base" parent="button_base">
@@ -247,7 +248,7 @@
 
      <style name="IconButtonThemeOverlay">
         <!-- For filled buttons, your theme's colorPrimary provides the default background color of the component -->
-        <item name="colorPrimary">@color/colorText</item>
+         <item name="colorPrimary">@color/colorText</item>
     </style>
 
     <style name="shapeRoundedCorner" parent="">
