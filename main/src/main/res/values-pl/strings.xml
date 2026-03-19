@@ -1840,6 +1840,7 @@
     <string name="calccoord_select_variable">Wybierz zmienną</string>
     <string name="calccoord_new_variable">**%s** *(Nowa)*</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
+    <string name="calccoord_convert_to_plain_error">Wzór nie ocenia prawidłowych współrzędnych.\nKonwersja na współrzędne zwykłe zresetuje punkt nawigacji do pustych współrzędnych.</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>
