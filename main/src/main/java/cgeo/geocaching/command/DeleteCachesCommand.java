@@ -7,7 +7,8 @@ import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 
@@ -33,7 +34,6 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
     private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
     private final Map<String, OfflineLogEntry> oldOfflineLogs = new HashMap<>();
     private final Map<String, Long> oldVisitedDate = new HashMap<>();
-
 
     public DeleteCachesCommand(@NonNull final Activity context, final Collection<Geocache> caches, @Nullable final Handler handler) {
         super(context, caches, R.string.command_delete_caches_progress);
@@ -62,18 +62,15 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         final List<Geocache> cachesWithUserData = caches.stream().filter(this::hasUserData).toList();
         final int count = cachesWithUserData.size();
         if (count > 0) {
-            final String messageText = LocalizationUtils.getString(R.string.caches_warning_delete_user_data, count);
-
-            SimpleDialog.of(getContext())
-                    .setTitle(R.string.command_delete_caches_progress)
-                    .setMessage(TextParam.text(messageText))
-                    .setButtons(SimpleDialog.ButtonTextSet.OK_CANCEL)
-                    .setNeutralButton(TextParam.id(R.string.caches_warning_delete_user_data_others))
-                    .setNeutralAction(() -> {
+            Dialogs.advancedOneTimeMessage(getContext(), OneTimeDialogs.DialogType.DELETE_CACHES_USER_DATA_WARNING,
+                    LocalizationUtils.getString(R.string.command_delete_caches_progress), LocalizationUtils.getString(R.string.caches_warning_delete_user_data, count),
+                    true, this::execute,
+                    LocalizationUtils.getString(R.string.caches_warning_delete_user_data_others),
+                    () -> {
                         caches.removeAll(cachesWithUserData);
                         execute();
-                    })
-                    .confirm(this::execute);
+                    }
+            );
         } else {
             execute();
         }
