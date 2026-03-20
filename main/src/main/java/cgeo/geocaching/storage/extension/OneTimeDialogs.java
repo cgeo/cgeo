@@ -3,7 +3,10 @@ package cgeo.geocaching.storage.extension;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class OneTimeDialogs extends DataStore.DBExtension {
 
@@ -20,28 +23,31 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         // names must not be changed, as there are database entries depending on it
         // title and text must be set when using the Dialogs.basicOneTimeMessage() function
 
-        DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0),
-        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
-        MISSING_UNICODE_CHARACTERS(R.string.select_icon, R.string.onetime_missing_unicode_info, DefaultBehavior.SHOW_ALWAYS, 0),
-        MAP_THEME_FIX_SLOWNESS(R.string.onetime_mapthemefixslow_title, R.string.onetime_mapthemefixslow_message, DefaultBehavior.SHOW_ALWAYS, R.string.faq_url_settings_themes),
-        MAP_AUTOROTATION_DISABLE(R.string.map_autorotation, R.string.map_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0),
-        MAP_LIVE_DISABLED(R.string.map_live_disabled, R.string.map_live_disabled_hint, DefaultBehavior.SHOW_ALWAYS, 0),
-        ROUTE_OPTIMIZATION(R.string.route_optimization, R.string.route_optimization_info, DefaultBehavior.SHOW_ALWAYS, 0),
-        NOTIFICATION_PERMISSION(R.string.changed_permissions_title, R.string.changed_permissions_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
-        GOTO_DEPRECATION_NOTICE(R.string.goto_targets_deprecation_title, R.string.goto_targets_deprecation_notice, DefaultBehavior.SHOW_ALWAYS, 0),
-        WHERIGO_PLAYER_SHORTCUTS(R.string.wherigo_otm_shortcuts_title, R.string.wherigo_otm_shortcuts_message, DefaultBehavior.SHOW_ALWAYS, 0);
+        DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0, 0),
+        MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0, 0),
+        MISSING_UNICODE_CHARACTERS(R.string.select_icon, R.string.onetime_missing_unicode_info, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
+        MAP_THEME_FIX_SLOWNESS(R.string.onetime_mapthemefixslow_title, R.string.onetime_mapthemefixslow_message, DefaultBehavior.SHOW_ALWAYS, R.string.faq_url_settings_themes, R.drawable.ic_info_blue),
+        MAP_AUTOROTATION_DISABLE(R.string.map_autorotation, R.string.map_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0, 0),
+        MAP_LIVE_DISABLED(R.string.map_live_disabled, R.string.map_live_disabled_hint, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
+        ROUTE_OPTIMIZATION(R.string.route_optimization, R.string.route_optimization_info, DefaultBehavior.SHOW_ALWAYS, 0, 0),
+        NOTIFICATION_PERMISSION(R.string.changed_permissions_title, R.string.changed_permissions_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0, R.drawable.ic_info_blue),
+        GOTO_DEPRECATION_NOTICE(R.string.goto_targets_deprecation_title, R.string.goto_targets_deprecation_notice, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
+        WHERIGO_PLAYER_SHORTCUTS(R.string.wherigo_otm_shortcuts_title, R.string.wherigo_otm_shortcuts_message, DefaultBehavior.SHOW_ALWAYS, 0, R.drawable.ic_info_blue),
+        DELETE_CACHES_USER_DATA_WARNING(null, null, DefaultBehavior.SHOW_ALWAYS, 0, 0);
 
 
         public final Integer messageTitle;
         public final Integer messageText;
         public final DefaultBehavior defaultBehavior;
         public final int moreInfoURLResId;
+        public final int iconResId;
 
-        DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior, @StringRes final int moreInfoURLResId) {
+        DialogType(final Integer messageTitle, final Integer messageText, final DefaultBehavior defaultBehavior, @StringRes final int moreInfoURLResId, @DrawableRes final int iconResId) {
             this.messageTitle = messageTitle;
             this.messageText = messageText;
             this.defaultBehavior = defaultBehavior;
             this.moreInfoURLResId = moreInfoURLResId;
+            this.iconResId = iconResId;
         }
     }
 
@@ -154,5 +160,42 @@ public class OneTimeDialogs extends DataStore.DBExtension {
             removeAll(type, key.name());
         }
         initializeOnFreshInstall();
+    }
+
+    /**
+     * possible chosen actions for dialogs with "don't ask again" functionality.
+     * The chosen action is stored in string1 of the DB entry.
+     */
+    public enum ChosenAction {
+        OK,
+        NEUTRAL,
+        CANCEL
+    }
+
+    /**
+     * returns the chosen action for a specific dialog, or defaultAction if none has been stored yet
+     */
+    public static ChosenAction getChosenAction(final DialogType dialogType, final ChosenAction defaultAction) {
+        final DataStore.DBExtension temp = load(type, dialogType.name());
+        if (temp != null) {
+            final String stored = new OneTimeDialogs(temp).getString1();
+            if (StringUtils.isNotBlank(stored)) {
+                try {
+                    return ChosenAction.valueOf(stored);
+                } catch (final IllegalArgumentException e) {
+                    // stored value is not a valid ChosenAction, fall through to default
+                }
+            }
+        }
+        return defaultAction;
+    }
+
+    /**
+     * sets the chosen action for a specific dialog and simultaneously sets the dialog status to DIALOG_HIDE.
+     * This is an atomic operation - no separate setStatus call needed.
+     */
+    public static void setChosenAction(final DialogType dialogType, final ChosenAction action) {
+        removeAll(type, dialogType.name());
+        add(type, dialogType.name(), DialogStatus.DIALOG_HIDE.id, DialogStatus.NONE.id, 0, 0, action.name(), "", "", "");
     }
 }
