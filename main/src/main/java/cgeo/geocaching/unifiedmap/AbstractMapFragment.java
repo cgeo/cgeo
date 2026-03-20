@@ -243,7 +243,7 @@ public abstract class AbstractMapFragment extends Fragment {
             setBearing(0.0f);
             repaintRotationIndicator(0.0f);
             if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                Dialogs.advancedOneTimeMessage(getActivity(), MAP_AUTOROTATION_DISABLE, LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageTitle), LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
+                Dialogs.advancedOneTimeMessage(getActivity(), MAP_AUTOROTATION_DISABLE, LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageTitle), LocalizationUtils.getString(MAP_AUTOROTATION_DISABLE.messageText), true, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
             }
         });
         compassrose.setOnLongClickListener(v -> {

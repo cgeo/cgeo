@@ -40,7 +40,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
@@ -62,13 +61,15 @@ public final class Dialogs {
      * @param title          message dialog title
      * @param message        message dialog content
      * @param dialogType     the dialogs individual identification type
-     * @param iconObservable observable (may be <tt>null</tt>) containing the icon(s) to set
      * @param cancellable    if true, a cancel button will be displayed additionally
      * @param runAfterwards  runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards, final boolean disableCancelOnDAMA) {
+    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String footerUrl,
+                                               final OneTimeDialogs.DialogType dialogType,
+                                               final boolean cancellable, final Runnable runAfterwards, final boolean disableCancelOnDAMA,
+                                               @Nullable final String neutralButtonLabel, @Nullable final Runnable onNeutral) {
         final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
 
         content.message.setText(message);
@@ -81,12 +82,18 @@ public final class Dialogs {
         }
         */
 
+        if (footerUrl != null) {
+            content.footerMessage.setVisibility(View.VISIBLE);
+            content.footerMessage.setText(R.string.more_information);
+            content.footerMessage.setOnClickListener(v -> ShareUtils.openUrl(context, footerUrl));
+        }
+
         final AlertDialog.Builder builder = newBuilder(context)
                 .setView(content.getRoot())
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     if (content.checkBox.isChecked()) {
-                        OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                        OneTimeDialogs.setChosenAction(dialogType, OneTimeDialogs.ChosenAction.OK);
                     }
                     if (runAfterwards != null) {
                         runAfterwards.run();
@@ -97,24 +104,33 @@ public final class Dialogs {
             builder.setTitle(title);
         }
 
-        if (StringUtils.isNotBlank(moreInfoURL)) {
-            builder.setNeutralButton(R.string.more_information, (dialog, which) -> ShareUtils.openUrl(context, moreInfoURL));
+        if (neutralButtonLabel != null) {
+            builder.setNeutralButton(neutralButtonLabel, (dialog, which) -> {
+                if (content.checkBox.isChecked()) {
+                    OneTimeDialogs.setChosenAction(dialogType, OneTimeDialogs.ChosenAction.NEUTRAL);
+                }
+                if (onNeutral != null) {
+                    onNeutral.run();
+                }
+            });
         }
 
         if (cancellable) {
             builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 // reachable only when disableCancelOnDAMA is set to false
                 if (content.checkBox.isChecked()) {
-                    OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                    OneTimeDialogs.setChosenAction(dialogType, OneTimeDialogs.ChosenAction.CANCEL);
                 }
             });
         }
-
-        builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
+        if (dialogType.iconResId > 0) {
+            builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
+        }
 
         final AlertDialog dialog = builder.create();
 
-        if (iconObservable != null) {
+        if (dialogType.iconResId > 0) {
+            final Observable<Drawable> iconObservable = Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), dialogType.iconResId, context.getTheme())));
             iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
         }
         dialog.show();
@@ -140,8 +156,10 @@ public final class Dialogs {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
-                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null, true);
+            final String moreInfoURL = dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null;
+            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), moreInfoURL, dialogType,
+                    false, null, true,
+                    null, null);
         }
     }
 
@@ -155,8 +173,10 @@ public final class Dialogs {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
-                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), true, runOnOk, false);
+            final String moreInfoURL = dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null;
+
+            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), moreInfoURL, dialogType,
+                    true, runOnOk, false, null, null);
         }
     }
 
@@ -167,11 +187,50 @@ public final class Dialogs {
      *
      * @param dialogType used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */
-    public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
+    public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message,
+                                              final boolean cancellable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
-            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards, true);
+            final String moreInfoURL = dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null;
+            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, cancellable, runAfterwards, true,
+                    null, null);
         } else if (runAfterwards != null) {
             runAfterwards.run();
+        }
+    }
+
+    /**
+     * OK / neutral / cancel dialog which is shown, until "don't ask again" is checked. Title, text, icon and actions can be set.
+     * If "don't ask again" was selected previously, the stored chosen action is executed directly without showing the dialog.
+     *
+     * @param dialogType         used for storing the dialog status and chosen action in the DB
+     * @param onPositive         runnable executed when OK is clicked (or was previously chosen with "don't ask again")
+     * @param neutralButtonLabel label for the neutral button; if null, no neutral button is shown
+     * @param onNeutral          runnable executed when neutral button is clicked (or was previously chosen with "don't ask again")
+     */
+    public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message,
+                                              final boolean cancellable, @Nullable final Runnable onPositive,
+                                              @Nullable final String neutralButtonLabel, @Nullable final Runnable onNeutral) {
+        if (OneTimeDialogs.showDialog(dialogType)) {
+            final String moreInfoURL = dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null;
+            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, cancellable, onPositive, true, neutralButtonLabel, onNeutral);
+        } else {
+            final OneTimeDialogs.ChosenAction chosenAction = OneTimeDialogs.getChosenAction(dialogType, OneTimeDialogs.ChosenAction.OK);
+            switch (chosenAction) {
+                case OK:
+                    if (onPositive != null) {
+                        onPositive.run();
+                    }
+                    break;
+                case NEUTRAL:
+                    if (onNeutral != null) {
+                        onNeutral.run();
+                    }
+                    break;
+                case CANCEL:
+                default:
+                    // do nothing
+                    break;
+            }
         }
     }
 
