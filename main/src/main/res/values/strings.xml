@@ -514,6 +514,7 @@
     <string name="caches_remove_selected">Remove selected from list</string>
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
+    <string name="caches_remove_completely_ask">Ask before deleting user data</string>
     <string name="caches_remove_from_other_lists_selected">Remove selected from other lists</string>
     <string name="caches_remove_from_other_lists_all">Remove all from other lists</string>
     <string name="caches_append_to_route_selected">Append selected to individual route</string>
@@ -551,6 +552,9 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_warning_delete_user_data_others">Delete others</string>
+    <string name="caches_warning_delete_user_data">%d caches have user data. Those will get lost on deleting the caches.</string>
+    <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
