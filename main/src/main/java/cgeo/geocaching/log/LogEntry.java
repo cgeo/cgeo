@@ -509,11 +509,12 @@ public class LogEntry implements Parcelable {
     /**
      * Checks, if the logs are representing the same log-entry.
      * Log-text can be empty (to deal with field-notes)
+     * or is found log (should be only a unique one)
      */
     public boolean isMatchingLog(final LogEntry log) {
         return this.logType == log.logType &&
                 this.author.compareTo(log.author) == 0 &&
                 DateUtils.isSameDay(new Date(this.date), new Date(log.date)) &&
-                (this.log.isEmpty() || log.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log));
+                ((this.logType.isFoundLog() || this.log.isEmpty() || log.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log)));
     }
 }
