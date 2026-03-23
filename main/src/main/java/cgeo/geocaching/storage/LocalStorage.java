@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -353,7 +354,7 @@ public final class LocalStorage {
 
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
-        progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
+        progress.show(fromActivity, LocalizationUtils.getString(R.string.init_datadirmove_datadirmove), LocalizationUtils.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
             final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
@@ -376,7 +377,7 @@ public final class LocalStorage {
             return Observable.just(success);
         }).subscribeOn(Schedulers.io())).subscribe(success -> {
             progress.dismiss();
-            final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
+            final String message = success ? LocalizationUtils.getString(R.string.init_datadirmove_success) : LocalizationUtils.getString(R.string.init_datadirmove_failed);
             SimpleDialog.of(fromActivity).setTitle(R.string.init_datadirmove_datadirmove).setMessage(TextParam.text(message)).show();
         });
     }
@@ -429,7 +430,7 @@ public final class LocalStorage {
         MigrateTask(@NonNull final Activity activity, final int currentVersion, final int finalVersion) {
             super(
                     activity,
-                    activity.getString(R.string.localstorage_migrate_title),
+                    LocalizationUtils.getString(R.string.localstorage_migrate_title),
                     "---");
             this.currentVersion = currentVersion;
             this.finalVersion = finalVersion;
@@ -444,7 +445,7 @@ public final class LocalStorage {
 
         private void displayProgress(final String minorStatus) {
             publishProgress(
-                    activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
+                    LocalizationUtils.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
                             (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
                             (minorStatus == null ? "" : "\n" + minorStatus));
         }

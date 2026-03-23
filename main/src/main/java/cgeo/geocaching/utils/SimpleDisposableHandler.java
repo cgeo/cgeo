@@ -82,7 +82,7 @@ public class SimpleDisposableHandler extends DisposableHandler {
         if (activity != null) {
             final Message msg = obtainMessage(what);
             final Bundle bundle = new Bundle();
-            bundle.putString(MESSAGE_TEXT, activity.getString(resId));
+            bundle.putString(MESSAGE_TEXT, LocalizationUtils.getString(resId));
             msg.setData(bundle);
             msg.sendToTarget();
         }

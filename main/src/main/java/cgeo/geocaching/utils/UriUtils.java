@@ -255,7 +255,7 @@ public final class UriUtils {
             return uri;
         }
         if (isFileUri(uri)) {
-            return FileProvider.getUriForFile(ctx, ctx.getString(R.string.file_provider_authority), toFile(uri));
+            return FileProvider.getUriForFile(ctx, LocalizationUtils.getPlainString(R.string.file_provider_authority), toFile(uri));
         }
         return null;
     }

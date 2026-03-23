@@ -18,6 +18,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -73,7 +74,7 @@ public class CoordinateInputDialog {
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
-            final String label = context.getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy()));
+            final String label = LocalizationUtils.getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy()));
             binding.current.setText(label);
         }
     };

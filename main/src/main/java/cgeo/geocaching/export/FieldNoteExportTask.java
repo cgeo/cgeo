@@ -1,6 +1,5 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -13,12 +12,12 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.Nullable;
@@ -43,7 +42,7 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
      * @param onlyNew  Upload/export only new logs since last export
      */
     FieldNoteExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew, final String title, final String filename, final String name) {
-        super(activity, title, CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
+        super(activity, title, LocalizationUtils.getString(R.string.export_fieldnotes_creating), true);
         this.upload = upload;
         this.onlyNew = onlyNew;
         this.filename = filename;
@@ -110,17 +109,16 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     @Override
     protected void onPostExecuteInternal(final Boolean result) {
         if (activity != null) {
-            final Context nonNullActivity = activity;
             if (result && exportUri != null) {
                 Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, name + " " + nonNullActivity.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
+                ShareUtils.shareOrDismissDialog(activity, exportUri, "text/plain", R.string.export, name + " " + LocalizationUtils.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(exportUri));
 
                 if (upload) {
-                    ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
+                    ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_fieldnotes_upload_success));
                 }
             } else {
-                ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_failed));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }
@@ -128,7 +126,7 @@ class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     @Override
     protected void onProgressUpdateInternal(final Integer status) {
         if (activity != null) {
-            setMessage(activity.getString(status == STATUS_UPLOAD ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
+            setMessage(LocalizationUtils.getString(status == STATUS_UPLOAD ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
         }
     }
 }

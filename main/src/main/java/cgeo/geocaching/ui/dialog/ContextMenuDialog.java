@@ -4,6 +4,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -49,12 +50,12 @@ public class ContextMenuDialog {
     }
 
     public ContextMenuDialog addItem(@StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(new Item(this.activity.getResources().getString(textId), icon, selectAction));
+        items.add(new Item(LocalizationUtils.getString(textId), icon, selectAction));
         return this;
     }
 
     public ContextMenuDialog addItem(final int pos, @StringRes final int textId, @DrawableRes final int icon, final Action1<Item> selectAction) {
-        items.add(pos, new Item(this.activity.getResources().getString(textId), icon, selectAction));
+        items.add(pos, new Item(LocalizationUtils.getString(textId), icon, selectAction));
         return this;
     }
 
