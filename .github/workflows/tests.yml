@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
   pull_request_target:
-    types: [labeled, synchronize]
+    types: [opened, labeled, synchronize, reopened]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
@@ -51,6 +51,7 @@ jobs:
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
         (
+          github.event.action == 'opened' || github.event.action == 'reopened' ||
           (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
           (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
         )
