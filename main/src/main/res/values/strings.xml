@@ -3107,6 +3107,10 @@
     <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
     <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
 
+    <string name="wherigo_save_media">Save Media</string>
+    <string name="wherigo_save_media_success">Media saved to geocache %s</string>
+    <string name="wherigo_save_media_failed">Failed to save media</string>
+
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
