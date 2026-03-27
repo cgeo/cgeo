@@ -545,7 +545,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return true;
     }
@@ -666,7 +666,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return true;
     }
