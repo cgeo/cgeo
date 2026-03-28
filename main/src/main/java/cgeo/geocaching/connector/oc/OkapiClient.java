@@ -135,6 +135,7 @@ final class OkapiClient {
     private static final String CACHE_STATUS_ARCHIVED = "Archived";
     private static final String CACHE_STATUS_DISABLED = "Temporarily unavailable";
     private static final String CACHE_IS_FOUND = "is_found";
+    private static final String CACHE_IS_NOT_FOUND = "is_not_found";
     private static final String CACHE_SIZE_DEPRECATED = "size";
     private static final String CACHE_SIZE2 = "size2";
     private static final String CACHE_VOTES = "rating_votes";
@@ -192,7 +193,7 @@ final class OkapiClient {
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2|attr_acodes|attrnames";
-    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_recommended";
+    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_not_found|is_recommended";
     private static final String SERVICE_CACHE_CORE_CURRENT_L3_FIELDS = "is_watched";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|req_passwd|trackables";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|willattends|short_description";
@@ -267,7 +268,7 @@ final class OkapiClient {
         final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
         final List<LogEntry> logs = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode);
         for (LogEntry log : logs) {
-            if (log.logType.id == 2 || log.logType.id == 10) {
+            if (log.logType == LogType.FOUND_IT || log.logType == LogType.ATTENDED || log.logType == LogType.DIDNT_FIND_IT) {
                 return log.date;
             }
         }
@@ -849,7 +850,7 @@ final class OkapiClient {
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
-            if (cache.isFound()) {
+            if (cache.isFound() || cache.isDNF()) {
                 cache.setVisitedDate(getCacheFoundDate(cache.getGeocode()));
             }
             // save full detailed caches
@@ -887,7 +888,9 @@ final class OkapiClient {
         cache.setLocation(region == null ? country : (country == null ? region : region + ", " + country));
 
         if (response.has(CACHE_IS_FOUND)) {
-            cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
+            final boolean isFound = response.get(CACHE_IS_FOUND).asBoolean();
+            cache.setFound(isFound);
+            cache.setDNF(!isFound && response.has(CACHE_IS_NOT_FOUND) && response.get(CACHE_IS_NOT_FOUND).asBoolean());
         }
         if (response.has(CACHE_IS_WATCHED)) {
             cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
