@@ -7,12 +7,12 @@ This changelog contains all changes which are not intermediate developing steps.
 
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
-Fix: Inventory / Trackables of a cache not loaded anymore
-Fix: Parsing cache location string fails for certain website languages
-Fix: Opening trackable from watchlist fails
-Fix: Keyboard may be blocking list selection
-Fix: User-defined tileprovider not supporting additional URL parameters
-Fix: Viewing trackable details removes it from cache inventory
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Viewing trackable details removes it from cache inventory
 
 <!-- --------------------------------------------------------------------------------- --->
 
