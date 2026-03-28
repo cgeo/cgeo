@@ -258,6 +258,15 @@
 			android:text="@string/waypoint_calculated_coordinates_global" />
 
         <Button
+            android:id="@+id/map"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_menu_variable"
+            android:text="@string/waypoint_select_from_map" />
+
+
+    <Button
             android:id="@+id/clipboard"
             style="@style/button_full"
             android:layout_width="fill_parent"

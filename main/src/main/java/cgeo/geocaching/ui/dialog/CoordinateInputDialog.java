@@ -245,6 +245,7 @@ public class CoordinateInputDialog {
         final Button useCacheCoordinates = binding.cache;
         final Button calculateCoordinates = binding.calculate;
         final Button copyFromClipboard = binding.clipboard;
+        final Button setFromMap = binding.clipboard;
         final Button clearCoordinates = binding.clear;
 
         // Do noy display any option buttons if simple mode
@@ -253,6 +254,7 @@ public class CoordinateInputDialog {
             useCacheCoordinates.setVisibility(View.GONE);
             calculateCoordinates.setVisibility(View.GONE);
             copyFromClipboard.setVisibility(View.GONE);
+            setFromMap.setVisibility(View.GONE);
             clearCoordinates.setVisibility(View.GONE);
         } else {
             useCurrentLocation.setOnClickListener(v -> {
