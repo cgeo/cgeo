@@ -1946,6 +1946,7 @@
     </array>
     <string name="waypoint_cache_coordinates">Cache coordinates</string>
     <string name="waypoint_calculated_coordinates_global">Calculate coordinate</string>
+    <string name="waypoint_select_from_map">Select from map</string>
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>
     <string name="waypoint_my_coordinates_accuracy">My coordinates (±%s)</string>
