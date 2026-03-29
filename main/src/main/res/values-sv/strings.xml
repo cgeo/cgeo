@@ -1786,6 +1786,7 @@
     <string name="calccoord_select_variable">Välj variabel</string>
     <string name="calccoord_new_variable">**%s** *(Ny)*</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
+    <string name="calccoord_convert_to_plain_error">Formeln utvärderas inte till giltiga koordinater.\nKonvertering till oformaterade koordinater kommer att återställa vägpunkten till tomma koordinater.</string>
     <string name="calccoord_plain_tools_title">Enkla verktyg</string>
     <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Ersätt \'x\' med \'*\'</string>
