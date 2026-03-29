@@ -22,7 +22,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -47,7 +46,6 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     protected static final String WAYPOINT_ARG = "WAYPOINT";
     private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
     protected Geocache cache;
@@ -72,7 +70,6 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        res = getResources();
         setHasOptionsMenu(true);
         if (savedInstanceState != null) {
             coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
