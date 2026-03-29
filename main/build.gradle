@@ -51,7 +51,7 @@ android {
 
         // CI Parameter for standard jobs
         if (project.hasProperty('notAnnotation')) {
-            testInstrumentationRunnerArguments.put("notAnnotation", "cgeo.geocaching.test.NotForIntegrationTests")
+            testInstrumentationRunnerArguments.put("notAnnotation", testApplicationId + ".NotForIntegrationTests")
         }
         // CI Parameter for watchdog jobs
         if (project.hasProperty('WatchdogTest')) {
@@ -519,7 +519,7 @@ dependencies {
 
     // Support Annotations. use same version for the main app and the test app
     String annotationVersion = '1.9.1'
-    implementation "androidx.annotation:annotation:annotationVersion"
+    implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
@@ -580,9 +580,9 @@ tasks.register('verifyCgeoKeys') {
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
 
     // Capture file references as task properties to support configuration cache
-    def keysFileRef = keysFile
-    def privatePropertiesFileRef = privatePropertiesFile
-    def templatesFileRef = templatesFile
+    File keysFileRef = keysFile
+    File privatePropertiesFileRef = privatePropertiesFile
+    File templatesFileRef = templatesFile
 
     doFirst {
         if (!keysFileRef.exists()) {
