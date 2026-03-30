@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -33,10 +34,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
 
+    private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
+
     private int waypointId = 0;
     private Waypoint waypoint = null;
     private TextView waypointDistance = null;
     private WaypointPopupBinding binding;
+    private int coordinateFormatPosition = 0;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -48,6 +52,15 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
+        if (savedInstanceState != null) {
+            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
     }
 
     @Override
@@ -101,6 +114,12 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 details.add(R.string.cache_name, waypoint.getName());
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
+
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+            }
+
             details.addLatestLogs(cache);
 
             // addWideHTML should go to the end of the list
