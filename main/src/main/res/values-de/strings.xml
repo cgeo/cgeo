@@ -1848,6 +1848,7 @@
     <string name="formula_function_vanity">Vanity-Code</string>
     <string name="formula_function_group_simplenumeric">Einfache numerische Funktionen</string>
     <string name="formula_function_group_complexnumeric">Komplexe numerische Funktionen</string>
+    <string name="formula_function_group_aggregatenumeric">Numerisch zusammenfassen</string>
     <string name="formula_function_group_simplestring">Einfache Zeichenfunktionen</string>
     <string name="formula_function_group_complexstring">Komplexe Zeichenfunktionen</string>
     <string name="formula_error_unexpectedtoken">Erwartet \'%1$s\'</string>
