@@ -804,6 +804,30 @@ public class DataStore {
             });
         }
 
+        /**
+         * Atomically replaces all entries for the given key with a single new entry.
+         * Both the removal of existing entries and the insertion of the new entry are
+         * wrapped in a single database transaction, ensuring true atomicity.
+         */
+        protected static DBExtension replaceAll(final DBExtensionType type, final String key, final long long1, final long long2, final long long3, final long long4, final String string1, final String string2, final String string3, final String string4) {
+            return withAccessLock(() -> {
+                if (!init(false)) {
+                    return null;
+                }
+                database.beginTransaction();
+                try {
+                    removeAll(database, type, key);
+                    final DBExtension result = add(database, type, key, long1, long2, long3, long4, string1, string2, string3, string4);
+                    if (result != null) {
+                        database.setTransactionSuccessful();
+                    }
+                    return result;
+                } finally {
+                    database.endTransaction();
+                }
+            });
+        }
+
         private static void checkState(final DBExtensionType type, @Nullable final String key, final boolean nullable) {
             if (type == DBEXTENSION_INVALID) {
                 throw new IllegalStateException("DBExtension: type must be set to valid type");

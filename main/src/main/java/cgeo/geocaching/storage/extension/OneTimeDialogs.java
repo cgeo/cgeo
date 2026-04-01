@@ -191,11 +191,10 @@ public class OneTimeDialogs extends DataStore.DBExtension {
     }
 
     /**
-     * sets the chosen action for a specific dialog and simultaneously sets the dialog status to DIALOG_HIDE.
-     * This is an atomic operation - no separate setStatus call needed.
+     * Sets the chosen action for a specific dialog and simultaneously sets the dialog status to DIALOG_HIDE.
+     * Both operations are wrapped in a single database transaction to guarantee atomicity.
      */
     public static void setChosenAction(final DialogType dialogType, final ChosenAction action) {
-        removeAll(type, dialogType.name());
-        add(type, dialogType.name(), DialogStatus.DIALOG_HIDE.id, DialogStatus.NONE.id, 0, 0, action.name(), "", "", "");
+        replaceAll(type, dialogType.name(), DialogStatus.DIALOG_HIDE.id, DialogStatus.NONE.id, 0, 0, action.name(), "", "", "");
     }
 }

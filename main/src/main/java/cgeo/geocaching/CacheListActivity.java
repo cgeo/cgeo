@@ -95,7 +95,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -1336,7 +1335,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
         if (removeFromAllLists || removeWillDeleteFromDevice(listId)) {
-            new DeleteCachesCommand(this, new HashSet<>(caches), new DeleteCachesHandler(this)).showDeleteAllDialogsAndExecute();
+            final LastPositionHelper lastPositionHelper = new LastPositionHelper(this);
+            new DeleteCachesCommand(this, new HashSet<>(caches), () -> lastPositionHelper.refreshListAtLastPosition(true)).showDeleteAllDialogsAndExecute();
             return;
         }
         new DeleteCachesFromListCommand(this, caches, listId).execute();
@@ -1394,18 +1394,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
     }
 
-    private static final class DeleteCachesHandler extends ProgressBarDisposableHandler {
-
-        DeleteCachesHandler(final CacheListActivity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void handleMessage(final Message msg) {
-            new LastPositionHelper((CacheListActivity) activityRef.get()).refreshListAtLastPosition(true);
-            dismissProgress();
-        }
-    }
 
     private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
 
