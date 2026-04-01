@@ -616,6 +616,7 @@
     <string translatable="false" name="pref_last_selected_visited_waypointtypes">last_selected_visited_waypointtypes</string>
     <string translatable="false" name="pref_help_shown">helper</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
+    <string translatable="false" name="pref_coordDisplayFormat">coordDisplayFormat</string>
     <string translatable="false" name="pref_lastdetailspage">lastdetailspage</string>
     <string translatable="false" name="pref_logtrackablewithoutgeocodeshowcount">logtrackablewithoutgeocodeshowcount</string>
     <string translatable="false" name="pref_trackableaction">trackableaction</string>

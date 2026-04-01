@@ -34,6 +34,14 @@
             android:title="@string/init_live_compass_in_navigation_action"
             android:summary="@string/init_summary_live_compass_in_navigation_action"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/coord_display_format_types"
+            android:entryValues="@array/coord_display_format_values"
+            android:key="@string/pref_coordDisplayFormat"
+            android:summary="%s"
+            android:title="@string/init_coord_display_format"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
