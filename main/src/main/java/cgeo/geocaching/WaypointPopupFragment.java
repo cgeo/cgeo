@@ -19,6 +19,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import java.util.Optional;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,11 +54,9 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
-        if (savedInstanceState != null) {
-            waypointCoordinateFormatPosition = savedInstanceState.getInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
-        } else {
-            waypointCoordinateFormatPosition = Settings.getCoordDisplayFormat();
-        }
+        waypointCoordinateFormatPosition = Settings.getCoordDisplayFormat();
+        Optional.ofNullable(savedInstanceState).ifPresent(s ->
+                waypointCoordinateFormatPosition = s.getInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat()));
     }
 
     @Override

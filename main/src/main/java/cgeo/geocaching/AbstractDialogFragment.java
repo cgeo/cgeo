@@ -19,6 +19,8 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
+import java.util.Optional;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -73,11 +75,9 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         super.onCreate(savedInstanceState);
         res = getResources();
         setHasOptionsMenu(true);
-        if (savedInstanceState != null) {
-            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
-        } else {
-            coordinateFormatPosition = Settings.getCoordDisplayFormat();
-        }
+        coordinateFormatPosition = Settings.getCoordDisplayFormat();
+        Optional.ofNullable(savedInstanceState).ifPresent(s ->
+                coordinateFormatPosition = s.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat()));
     }
 
     @Override
