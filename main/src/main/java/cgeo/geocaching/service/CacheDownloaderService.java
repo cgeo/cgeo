@@ -2,6 +2,7 @@ package cgeo.geocaching.service;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.gc.GCLiveAPI;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -12,6 +13,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -24,12 +26,14 @@ import android.widget.RadioGroup;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -182,20 +186,71 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             return;
         }
 
-        // schedule download on multiple threads...
-
         Log.d("Download task started");
 
-        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
+        final ArrayList<String> allGeocodes = intent.getStringArrayListExtra(EXTRA_GEOCODES);
+        if (allGeocodes == null || allGeocodes.isEmpty()) {
+            return;
+        }
+
+        // Set rate limit callback for the entire download operation
+        GCLiveAPI.setRateLimitCallback(secondsRemaining -> {
+            if (secondsRemaining > 0) {
+                notification.setContentText(getString(R.string.gc_live_rate_limited, secondsRemaining));
+            } else {
+                notification.setContentText("");
+            }
+            updateForegroundNotification();
+        });
+
+        try {
+        // Batch pre-fetch GC caches via Live API if enabled
+        final Set<String> batchFetched = new HashSet<>();
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            final ArrayList<String> gcGeocodes = new ArrayList<>();
+            for (final String geocode : allGeocodes) {
+                if (geocode != null && geocode.startsWith("GC")) {
+                    gcGeocodes.add(geocode);
+                }
+            }
+            if (!gcGeocodes.isEmpty()) {
+                // Phase 1: Batch fetch cache details (chunks of 50)
+                Log.i("GCLiveAPI: Batch pre-fetching " + gcGeocodes.size() + " GC caches");
+                GCLiveAPI.setBatchProgressCallback((fetched, total) -> {
+                    notification.setContentText(getString(R.string.gc_live_batch_progress, fetched, total));
+                    notification.setProgress(total, fetched, false);
+                    updateForegroundNotification();
+                });
+                try {
+                    final List<Geocache> fetched = GCLiveAPI.fetchGeocachesBatch(gcGeocodes);
+                    for (final Geocache c : fetched) {
+                        batchFetched.add(c.getGeocode());
+                    }
+                } finally {
+                    GCLiveAPI.setBatchProgressCallback(null);
+                }
+                Log.i("GCLiveAPI: Batch pre-fetched " + batchFetched.size() + " caches successfully");
+
+                // Logs and spoilers are fetched on-demand when opening individual caches
+                // (via searchByGeocode → fetchAndSaveLogs/fetchAndSaveSpoilers).
+                // Bulk fetching them here would hit API rate limits heavily.
+            }
+        }
+
+        // Per-cache processing (list management, image download, notifications)
+        final Observable<String> geocodes = Observable.fromIterable(allGeocodes);
         geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
-            handleDownload(geocode);
+            handleDownload(geocode, batchFetched);
             emitter.onComplete();
         }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
 
         Log.d("Download task completed");
+        } finally {
+            GCLiveAPI.setRateLimitCallback(null);
+        }
     }
 
-    private void handleDownload(final String geocode) {
+    private void handleDownload(final String geocode, final Set<String> batchFetched) {
         try {
             if (shouldStop) {
                 Log.i("download canceled");
@@ -228,8 +283,43 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 combinedListIds.addAll(cache.getLists());
             }
 
-            // download...
-            if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
+            // Batch-fetched path: cache data already in DB from Live API batch fetch.
+            // Skip re-fetching via searchByGeocode — just download images and set lists.
+            if (batchFetched.contains(geocode)) {
+                final Geocache batchCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                if (batchCache != null) {
+                    // Download description images
+                    final HtmlImage imgGetter = new HtmlImage(batchCache.getGeocode(), false, true, false);
+                    if (org.apache.commons.lang3.StringUtils.isNotBlank(batchCache.getDescription())) {
+                        HtmlCompat.fromHtml(batchCache.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY, imgGetter, null);
+                    }
+                    // Download spoiler images
+                    if (batchCache.getSpoilers() != null) {
+                        for (final cgeo.geocaching.models.Image spoiler : batchCache.getSpoilers()) {
+                            imgGetter.getDrawable(spoiler.getUrl());
+                        }
+                    }
+                    imgGetter.waitForEndCompletable(null).blockingAwait();
+
+                    batchCache.setLists(combinedListIds);
+                    DataStore.saveCache(batchCache, java.util.EnumSet.of(LoadFlags.SaveFlag.DB));
+
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
+                    synchronized (downloadQuery) {
+                        if (downloadQuery.get(geocode) == null) {
+                            downloadQuery.remove(geocode);
+                        }
+                    }
+                    Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed (batch)");
+                    cachesDownloaded.incrementAndGet();
+                    return;
+                }
+                // fall through to normal path if cache not found in DB
+            }
+
+            // Normal path: fetch + download images
+            final boolean forceDownload = properties.forceDownload;
+            if (Geocache.storeCache(null, geocode, combinedListIds, forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,

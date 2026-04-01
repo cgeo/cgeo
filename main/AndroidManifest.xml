@@ -121,6 +121,15 @@
             android:windowSoftInputMode="adjustNothing" >
             <!-- 'adjustNothing' fixes the issue described in #11610 -->
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="${gcLiveRedirectScheme}"
+                    android:host="oauth2.callback"
+                    android:path="/callback" />
+            </intent-filter>
         </activity>
         <activity android:name=".DBInspectionActivity"
             android:exported="false"
@@ -882,6 +891,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".connector.su.SuAuthorizationActivity"

@@ -218,6 +218,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
 
+        // Use GC Live API if enabled and authorized
+        if (geocode != null && Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.searchByGeocode(geocode, handler);
+        }
+
+        // Fallback: HTML scraping
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         final String page = GCParser.requestHtmlPage(geocode, guid);
@@ -246,6 +252,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final String bmGuid = context.getString(SEARCH_CONTEXT_BOOKMARK);
         if (StringUtils.isNotEmpty(bmGuid)) {
             final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
+            if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+                return GCLiveAPI.searchByBookmarkList(this, bmGuid, alreadyTook);
+            }
             return GCParser.searchByBookmarkList(this, bmGuid, alreadyTook);
         }
 
@@ -264,8 +273,19 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return new SearchResult();
         }
 
+        final GeocacheFilter effectiveFilter = filter;
         final GeocacheSort sort = context.getParcelable(SEARCH_CONTEXT_SORT);
-        return GCMap.searchByNextPage(this, context, filter, sort == null ? new GeocacheSort() : sort);
+
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            final int alreadyTook = context.getInt(SEARCH_CONTEXT_TOOK_TOTAL, 0);
+            final SearchResult sr = GCLiveAPI.searchByFilter(effectiveFilter, sort == null ? new GeocacheSort() : sort, 100, alreadyTook);
+            sr.setToContext(this, b -> b.putString(SEARCH_CONTEXT_FILTER, effectiveFilter.toConfig()));
+            sr.setToContext(this, b -> b.putParcelable(SEARCH_CONTEXT_SORT, sort));
+            sr.setToContext(this, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, alreadyTook + sr.getCount()));
+            return sr;
+        }
+
+        return GCMap.searchByNextPage(this, context, effectiveFilter, sort == null ? new GeocacheSort() : sort);
     }
 
     @Override
@@ -277,6 +297,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.searchByViewport(viewport, filter);
+        }
         return GCMap.searchByViewport(this, viewport, filter);
     }
 
@@ -293,6 +316,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            final SearchResult sr = GCLiveAPI.searchByFilter(filter, sort, 100, 0);
+            sr.setToContext(this, b -> b.putString(SEARCH_CONTEXT_FILTER, filter.toConfig()));
+            sr.setToContext(this, b -> b.putParcelable(SEARCH_CONTEXT_SORT, sort));
+            sr.setToContext(this, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, sr.getCount()));
+            return sr;
+        }
         return GCMap.searchByFilter(this, filter, sort);
     }
 
@@ -310,7 +340,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean addToWatchlist(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToWatchlist(cache).blockingGet();
+        final boolean added;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            added = GCLiveAPI.addToWatchlist(cache.getGeocode());
+        } else {
+            added = GCParser.addToWatchlist(cache).blockingGet();
+        }
         if (added) {
             DataStore.saveChangedCache(cache);
         }
@@ -320,7 +355,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean removeFromWatchlist(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromWatchlist(cache).blockingGet();
+        final boolean removed;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            removed = GCLiveAPI.removeFromWatchlist(cache.getGeocode());
+        } else {
+            removed = GCParser.removeFromWatchlist(cache).blockingGet();
+        }
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
@@ -338,7 +378,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean addToFavorites(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToFavorites(cache).blockingGet();
+        final boolean added;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            added = GCLiveAPI.addToFavorites(cache.getGeocode());
+        } else {
+            added = GCParser.addToFavorites(cache).blockingGet();
+        }
         if (added) {
             DataStore.saveChangedCache(cache);
         }
@@ -355,7 +400,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @Override
     public boolean removeFromFavorites(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromFavorites(cache).blockingGet();
+        final boolean removed;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            removed = GCLiveAPI.removeFromFavorites(cache.getGeocode());
+        } else {
+            removed = GCParser.removeFromFavorites(cache).blockingGet();
+        }
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
@@ -365,7 +415,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean uploadModifiedCoordinates(@NonNull final Geocache cache, @NonNull final Geopoint wpt) {
-        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt).blockingGet();
+        final boolean uploaded;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            uploaded = GCLiveAPI.uploadModifiedCoordinates(cache.getGeocode(), wpt);
+        } else {
+            uploaded = GCParser.uploadModifiedCoordinates(cache, wpt).blockingGet();
+        }
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }
@@ -375,7 +430,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
-        final boolean deleted = GCParser.deleteModifiedCoordinates(cache).blockingGet();
+        final boolean deleted;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            deleted = GCLiveAPI.deleteModifiedCoordinates(cache.getGeocode());
+        } else {
+            deleted = GCParser.deleteModifiedCoordinates(cache).blockingGet();
+        }
         if (deleted) {
             DataStore.saveChangedCache(cache);
         }
@@ -385,7 +445,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @WorkerThread
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
-        final boolean uploaded = GCParser.uploadPersonalNote(cache).blockingGet();
+        final boolean uploaded;
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            final String note = cache.getPersonalNote() != null ? cache.getPersonalNote() : "";
+            uploaded = GCLiveAPI.uploadPersonalNote(cache.getGeocode(), note);
+        } else {
+            uploaded = GCParser.uploadPersonalNote(cache).blockingGet();
+        }
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }
@@ -559,6 +625,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean uploadFieldNotes(@NonNull final File exportFile) {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.uploadFieldNotes(exportFile);
+        }
+
         if (!GCLogin.getInstance().isActualLoginStatus()) {
             // no need to upload (possibly large file) if we're not logged in
             final StatusCode loginState = GCLogin.getInstance().login();
@@ -589,6 +659,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean addToIgnorelist(@NonNull final Geocache cache) {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.ignoreCache(cache.getGeocode());
+        }
         GCParser.ignoreCache(cache);
         return true;
     }
@@ -647,6 +720,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
+        if (Settings.useGCLiveAPI() && Settings.hasGCLiveAuthorization()) {
+            return GCLiveAPI.getNeededDifficultyTerrainCombisFor81Matrix();
+        }
         return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
     }
 
