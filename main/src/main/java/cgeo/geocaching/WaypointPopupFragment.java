@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -33,10 +34,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
 
+    private static final String STATE_WAYPOINT_COORDINATE_FORMAT_POSITION = "waypointCoordinateFormatPosition";
+
     private int waypointId = 0;
     private Waypoint waypoint = null;
     private TextView waypointDistance = null;
     private WaypointPopupBinding binding;
+    private int waypointCoordinateFormatPosition = 0;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -48,6 +52,17 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
+        if (savedInstanceState != null) {
+            waypointCoordinateFormatPosition = savedInstanceState.getInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
+        } else {
+            waypointCoordinateFormatPosition = Settings.getCoordDisplayFormat();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, waypointCoordinateFormatPosition);
     }
 
     @Override
@@ -101,6 +116,10 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 details.add(R.string.cache_name, waypoint.getName());
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(waypoint.getCoords(), waypointCoordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> waypointCoordinateFormatPosition = position);
+            }
             details.addLatestLogs(cache);
 
             // addWideHTML should go to the end of the list
