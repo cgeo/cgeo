@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
@@ -113,24 +114,30 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
 
 
     public void showUserDataDialogAndExecute() {
-        final List<Geocache> cachesWithUserData = deleteFromDeviceAction.getCachesWithUserData();
-        final int count = cachesWithUserData.size();
-        if (count > 0) {
-            final String title = LocalizationUtils.getString(R.string.command_delete_caches_progress);
-            final String warningMessage = LocalizationUtils.getPlural(R.plurals.caches_warning_delete_user_data, count);
-            final String othersButtonText = LocalizationUtils.getString(R.string.caches_warning_delete_user_data_others);
+        // Scanning caches for user data (notes, waypoints, variables, offline logs) can be slow
+        // for large selections — run it on a background thread and show the dialog on the UI thread.
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
+                deleteFromDeviceAction::getCachesWithUserData,
+                cachesWithUserData -> {
+                    final int count = cachesWithUserData.size();
+                    if (count > 0) {
+                        final String title = LocalizationUtils.getString(R.string.command_delete_caches_progress);
+                        final String warningMessage = LocalizationUtils.getPlural(R.plurals.caches_warning_delete_user_data, count);
+                        final String othersButtonText = LocalizationUtils.getString(R.string.caches_warning_delete_user_data_others);
 
-            Dialogs.advancedOneTimeMessage(getContext(), OneTimeDialogs.DialogType.DELETE_CACHES_USER_DATA_WARNING,
-                    title, warningMessage, true, this::execute,
-                    othersButtonText,
-                    () -> {
-                        deleteFromDeviceAction.removeCaches(cachesWithUserData);
+                        Dialogs.advancedOneTimeMessage(getContext(), OneTimeDialogs.DialogType.DELETE_CACHES_USER_DATA_WARNING,
+                                title, warningMessage, true, this::execute,
+                                othersButtonText,
+                                () -> {
+                                    deleteFromDeviceAction.removeCaches(cachesWithUserData);
+                                    execute();
+                                }
+                        );
+                    } else {
                         execute();
                     }
-            );
-        } else {
-            execute();
-        }
+                }
+        );
     }
 
     @Override
