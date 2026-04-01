@@ -19,8 +19,6 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
-import java.util.Optional;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -38,6 +36,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import java.util.Optional;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 

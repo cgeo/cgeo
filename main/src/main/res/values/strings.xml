@@ -1082,8 +1082,8 @@
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_coord_display_format">Default coordinate format</string>
     <string name="coord_display_format_deg_min">Degrees and decimal minutes (DD MM.MMM)</string>
-    <string name="coord_display_format_deg_min_sec">Degrees, minutes and seconds (DD MM SS)</string>
-    <string name="coord_display_format_decimal_deg">Decimal degrees (DD.DDDDD)</string>
+    <string name="coord_display_format_deg_min_sec">Degrees, minutes and seconds (DD MM SS.SSS)</string>
+    <string name="coord_display_format_decimal_deg">Decimal degrees (DD.DDDDDD)</string>
     <string name="coord_display_format_utm">UTM</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>

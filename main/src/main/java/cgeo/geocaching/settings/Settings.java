@@ -979,7 +979,7 @@ public class Settings {
     }
 
     public static int getCoordDisplayFormat() {
-        return getIntFromString(R.string.pref_coordDisplayFormat, 0);
+        return getIntFromString(R.string.pref_coorddisplayformat, 0);
     }
 
     public static boolean getLogOffline() {

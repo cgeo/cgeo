@@ -38,7 +38,7 @@
             android:defaultValue="0"
             android:entries="@array/coord_display_format_types"
             android:entryValues="@array/coord_display_format_values"
-            android:key="@string/pref_coordDisplayFormat"
+            android:key="@string/pref_coorddisplayformat"
             android:summary="%s"
             android:title="@string/init_coord_display_format"
             app:iconSpaceReserved="false" />
