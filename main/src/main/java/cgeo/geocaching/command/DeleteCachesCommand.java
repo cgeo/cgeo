@@ -13,8 +13,6 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Message;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,14 +28,15 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DeleteCachesCommand extends AbstractCachesCommand {
 
-    private final Handler handler;
+    @Nullable
+    private final Runnable onFinishedCallback;
     private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
     private final Map<String, OfflineLogEntry> oldOfflineLogs = new HashMap<>();
     private final Map<String, Long> oldVisitedDate = new HashMap<>();
 
-    public DeleteCachesCommand(@NonNull final Activity context, final Collection<Geocache> caches, @Nullable final Handler handler) {
+    public DeleteCachesCommand(@NonNull final Activity context, final Collection<Geocache> caches, @Nullable final Runnable onFinishedCallback) {
         super(context, caches, R.string.command_delete_caches_progress);
-        this.handler = handler;
+        this.onFinishedCallback = onFinishedCallback;
     }
 
     public void showDeleteAllDialogsAndExecute() {
@@ -148,15 +147,15 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
 
     @Override
     protected void onFinished() {
-        if (null != handler) {
-            handler.sendMessage(Message.obtain());
+        if (onFinishedCallback != null) {
+            onFinishedCallback.run();
         }
     }
 
     @Override
     protected void onFinishedUndo() {
-        if (null != handler) {
-            handler.sendMessage(Message.obtain());
+        if (onFinishedCallback != null) {
+            onFinishedCallback.run();
         }
     }
 
