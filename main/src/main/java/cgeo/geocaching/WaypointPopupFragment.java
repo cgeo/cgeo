@@ -30,8 +30,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import java.util.Optional;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
@@ -54,9 +52,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
-        waypointCoordinateFormatPosition = Settings.getCoordDisplayFormat();
-        Optional.ofNullable(savedInstanceState).ifPresent(s ->
-                waypointCoordinateFormatPosition = s.getInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat()));
+        if (savedInstanceState != null) {
+            waypointCoordinateFormatPosition = savedInstanceState.getInt(STATE_WAYPOINT_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
+        } else {
+            waypointCoordinateFormatPosition = Settings.getCoordDisplayFormat();
+        }
     }
 
     @Override

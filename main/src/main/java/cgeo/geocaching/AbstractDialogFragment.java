@@ -37,8 +37,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import java.util.Optional;
-
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public abstract class AbstractDialogFragment extends Fragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
@@ -75,9 +73,11 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         super.onCreate(savedInstanceState);
         res = getResources();
         setHasOptionsMenu(true);
-        coordinateFormatPosition = Settings.getCoordDisplayFormat();
-        Optional.ofNullable(savedInstanceState).ifPresent(s ->
-                coordinateFormatPosition = s.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat()));
+        if (savedInstanceState != null) {
+            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
+        } else {
+            coordinateFormatPosition = Settings.getCoordDisplayFormat();
+        }
     }
 
     @Override
