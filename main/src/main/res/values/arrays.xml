@@ -7,7 +7,7 @@
         <item>@string/coord_display_format_utm</item>
     </string-array>
 
-    <string-array name="coord_display_format_values">
+    <string-array name="coord_display_format_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
