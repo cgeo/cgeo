@@ -13,8 +13,12 @@ import cgeo.geocaching.wherigo.openwig.formats.Savegame;
 import cgeo.geocaching.wherigo.openwig.platform.LocationService;
 import cgeo.geocaching.wherigo.openwig.platform.UI;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Calendar;
 
 
 /** The OpenWIG Engine
@@ -141,11 +145,7 @@ public class Engine implements Runnable {
 
         ui.debugMsg("Building event queue...\n");
         eventRunner = new BackgroundRunner(true);
-        eventRunner.setQueueListener(new Runnable() {
-            public void run () {
-                ui.refresh();
-            }
-        });
+        eventRunner.setQueueListener(() -> ui.refresh());
     }
 
     /** invokes game restore */
@@ -268,8 +268,8 @@ public class Engine implements Runnable {
         String button1 = null, button2 = null;
         LuaTable buttons = (LuaTable)message.rawget("Buttons");
         if (buttons != null) {
-            button1 = (String)buttons.rawget(new Double(1));
-            button2 = (String)buttons.rawget(new Double(2));
+            button1 = (String)buttons.rawget(1d);
+            button2 = (String)buttons.rawget(2d);
         }
         LuaClosure callback = (LuaClosure)message.rawget("Callback");
         ui.pushDialog(texts, media, button1, button2, callback);
@@ -292,26 +292,22 @@ public class Engine implements Runnable {
     /** fires the specified event on the specified object in the event thread */
     public static void callEvent (final EventTable subject, final String name, final Object param) {
         if (!subject.hasEvent(name)) return;
-        instance.eventRunner.perform(new Runnable() {
-            public void run () {
-                subject.callEvent(name, param);
-                // callEvent handles its failures, so no catch here
-            }
+        instance.eventRunner.perform(() -> {
+            subject.callEvent(name, param);
+            // callEvent handles its failures, so no catch here
         });
     }
 
     /** invokes a Lua callback in the event thread */
     public static void invokeCallback (final LuaClosure callback, final Object value) {
-        instance.eventRunner.perform(new Runnable() {
-            public void run () {
-                try {
-                    Engine.log("BTTN: " + (value == null ? "(cancel)" : value.toString()) + " pressed", LOG_CALL);
-                    Engine.state.call(callback, value, null, null);
-                    Engine.log("BTTN END", LOG_CALL);
-                } catch (Throwable t) {
-                    stacktrace(t);
-                    Engine.log("BTTN FAIL", LOG_CALL);
-                }
+        instance.eventRunner.perform(() -> {
+            try {
+                Engine.log("BTTN: " + (value == null ? "(cancel)" : value.toString()) + " pressed", LOG_CALL);
+                Engine.state.call(callback, value, null, null);
+                Engine.log("BTTN END", LOG_CALL);
+            } catch (Throwable t) {
+                stacktrace(t);
+                Engine.log("BTTN FAIL", LOG_CALL);
             }
         });
     }
@@ -348,7 +344,7 @@ public class Engine implements Runnable {
         }
     }
 
-    private static void replace (String source, String pattern, String replace, StringBuffer builder) {
+    private static void replace (String source, String pattern, String replace, StringBuilder builder) {
         int pos = 0;
         int pl = pattern.length();
         builder.delete(0, builder.length());
@@ -367,7 +363,7 @@ public class Engine implements Runnable {
      */
     public static String removeHtml (String s) {
         if (s == null) return "";
-        StringBuffer sb = new StringBuffer(s.length());
+        final StringBuilder sb = new StringBuilder(s.length());
         replace(s, "<BR>", "\n", sb);
         replace(sb.toString(), "&nbsp;", " ", sb);
         replace(sb.toString(), "&lt;", "<", sb);
@@ -376,12 +372,10 @@ public class Engine implements Runnable {
         return sb.toString();
     }
 
-    private Runnable refresh = new Runnable() {
-        public void run () {
-            synchronized (instance) {
-                ui.refresh();
-                refreshScheduled = false;
-            }
+    private final Runnable refresh = () -> {
+        synchronized (instance) {
+            ui.refresh();
+            refreshScheduled = false;
         }
     };
     private boolean refreshScheduled = false;
@@ -395,18 +389,16 @@ public class Engine implements Runnable {
         }
     }
 
-    private Runnable store = new Runnable() {
-        public void run () {
-            // perform the actual sync
-            try {
-                ui.blockForSaving();
-                savegame.store(state.getEnvironment());
-            } catch (IOException e) {
-                log("STOR: save failed: "+e.toString(), LOG_WARN);
-                ui.showError("Sync failed.\n" + e.getMessage());
-            } finally {
-                ui.unblock();
-            }
+    private final Runnable store = () -> {
+        // perform the actual sync
+        try {
+            ui.blockForSaving();
+            savegame.store(state.getEnvironment());
+        } catch (IOException e) {
+            log("STOR: save failed: " + e.toString(), LOG_WARN);
+            ui.showError("Sync failed.\n" + e.getMessage());
+        } finally {
+            ui.unblock();
         }
     };
 
