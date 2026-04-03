@@ -27,6 +27,8 @@ public class UserDefinedMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnl
                 }
                 tilePath += "{Z}/{X}/{Y}.png";
             }
+            final String query = fullUri.getQuery();
+            setTilePath(tilePath + (StringUtils.isNotBlank(query) ? "?" + query : ""));
             setTilePath(tilePath);
         }
         supportsHillshading = true;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Class for hiding/showing the soft keyboard on Android.
@@ -20,8 +21,10 @@ public class Keyboard {
     }
 
     public static void hide(@NonNull final Activity activity) {
-        // Check if no view has focus:
-        final View view = activity.getCurrentFocus();
+        hide(activity, activity.getCurrentFocus());
+    }
+
+    public static void hide(@NonNull final Activity activity, @Nullable final View view) {
         if (view != null) {
             final InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

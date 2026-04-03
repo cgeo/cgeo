@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     tools:layout_height="60sp"
+    android:minHeight="0dip"
     android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
@@ -40,6 +41,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
         android:textColor="@color/colorText_listsPrimary"
+        android:minHeight="0dip"
         tools:text="name"
         android:maxLines="1" />
 
@@ -63,6 +65,7 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
+        android:minHeight="0dip"
         tools:text="geocode"
         android:maxLines="3" />
 

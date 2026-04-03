@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
   pull_request_target:
-    types: [labeled, synchronize]
+    types: [opened, labeled, synchronize, reopened]
   workflow_dispatch:
     inputs:
       JDK_VERSION:
@@ -51,6 +51,7 @@ jobs:
       (
         github.event.pull_request.head.repo.full_name != github.repository &&
         (
+          github.event.action == 'opened' || github.event.action == 'reopened' ||
           (github.event.action == 'labeled' && github.event.label.name == 'ok-to-test') ||
           (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ok-to-test'))
         )
@@ -105,6 +106,14 @@ jobs:
         run: |
           echo "::error::${{ github.triggering_actor }} does not have permissions on this repo.\nCurrent permission level is ${{ steps.checkAccess.outputs.user-permission }}\nJob originally triggered by ${{ github.actor }}"
           exit 1
+
+      # Using if to restrict to pull_request_target events, as the workflow will exit with error from previous step if the user does not have permissions,
+      # so we can be sure that only users with permissions will reach this step and get the label added
+      - name: Add ok-to-test label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: github.event_name == 'pull_request_target'
+        with:
+          labels: ok-to-test
 
   check-code-changed:
     if: >
@@ -222,7 +231,7 @@ jobs:
       - name: Run checkstyle
         run: ./gradlew --no-daemon --scan checkstyle
 
-      - uses: lcollins/checkstyle-github-action@v3.1.0
+      - uses: lcollins/checkstyle-github-action@v3.2.0
         with:
           path: 'main/build/reports/checkstyle/checkstyle.xml'
 
@@ -414,7 +423,7 @@ jobs:
           ./gradlew packageBasicDebugAndroidTest
 
       - name: Upload resulting APK
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: "cgeo-apk-api${{ matrix.api-level }}"
           path: '*/build/outputs/apk/basic/**/cgeo*.apk'
@@ -486,7 +495,7 @@ jobs:
           curl -X POST -qSs "https://mutex.kumy.org/api/client/${{ secrets.MUTEX_SECRET }}/mutex/unit-test?unlock"
 
       - name: Upload logcat
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: "cgeo-apk-api${{ matrix.api-level }}.logcat"

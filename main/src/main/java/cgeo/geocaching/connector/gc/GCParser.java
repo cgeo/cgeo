@@ -76,7 +76,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.time.DateUtils;
@@ -1695,6 +1695,12 @@ public final class GCParser {
 
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
+
+        // retrieve trackables
+        final List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
+        if (!cacheInventory.isEmpty()) {
+            cache.mergeInventory(GCWebAPI.convertTrackableInventory(cacheInventory), EnumSet.of(TrackableBrand.TRAVELBUG));
+        }
     }
 
     private static void mergeAndStoreLogEntries(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
