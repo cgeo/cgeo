@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +31,9 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     private boolean fixedActionBar = true;
     private MaterialToolbar toolbar;
+    private int statusBarHeight = 0;
+    private int actionBarHeightWithStatusBar = 0;
+    private boolean showSpacer = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -108,7 +110,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
         }
         if (show || fixedActionBar) {
             actionBar.show();
-            //@todo applyTranslation();
         } else {
             actionBar.hide();
         }
@@ -116,7 +117,8 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     public void showSpacer(final boolean show) {
-        ViewUtils.setVisibility(findViewById(R.id.spacer), show ? View.VISIBLE : View.GONE);
+        showSpacer = show;
+        setSpacerHeight();
     }
 
     public boolean actionBarIsShowing() {
@@ -133,14 +135,17 @@ public class AbstractActionBarActivity extends AbstractActivity {
     @NonNull
     private Insets calculateInsetsForActivityContentHelper(@NonNull final Insets def) {
         final Insets insets = super.calculateInsetsForActivityContent(def);
+        statusBarHeight = insets.top;
         final MaterialToolbar t = findViewById(R.id.appToolbar);
         if (t != null) {
-            // make room for system bar
-            t.setTranslationY(insets.top);
-        }
-        Log.e("insets.top=" + insets.top + ", left=" + insets.left + ", right=" + insets.right + ", bottom=" + insets.bottom + ", ab=" + getResources().getDimension(R.dimen.actionbar_height));
-        if (fixedActionBar) {
-            return Insets.of(insets.left, insets.top, insets.right, insets.bottom);
+            actionBarHeightWithStatusBar = (int) (getResources().getDimension(R.dimen.actionbar_height) + statusBarHeight);
+            // add statusbar height (= def.top) as padding to appBar, increasing its size accordingly, and set inset.top = 0
+            t.setPadding(t.getPaddingLeft(), statusBarHeight, t.getPaddingRight(), t.getPaddingBottom());
+            final ViewGroup.LayoutParams params = t.getLayoutParams();
+            params.height = actionBarHeightWithStatusBar;
+            t.setLayoutParams(params);
+            setSpacerHeight();
+            return Insets.of(insets.left, 0, insets.right, insets.bottom);
         }
         return insets;
     }
@@ -148,8 +153,18 @@ public class AbstractActionBarActivity extends AbstractActivity {
     @NonNull
     protected Insets calculateInsetsWithToolbarInPortrait(@NonNull final Insets def) {
         final Insets insets = calculateInsetsForActivityContentHelper(def);
-        final int appToolbarHeight = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? (int) getResources().getDimension(R.dimen.actionbar_height) : 0;
-        return Insets.of(insets.left, insets.top + appToolbarHeight, insets.right, insets.bottom);
+        return Insets.of(insets.left, actionBarHeightWithStatusBar, insets.right, insets.bottom);
+    }
+
+    private void setSpacerHeight() {
+        final View spacer = findViewById(R.id.spacer);
+        if (spacer != null) {
+            spacer.setPadding(spacer.getPaddingLeft(), statusBarHeight, spacer.getPaddingRight(), spacer.getPaddingBottom());
+            final ViewGroup.LayoutParams params = spacer.getLayoutParams();
+            params.height = showSpacer ? actionBarHeightWithStatusBar : statusBarHeight;
+            spacer.setLayoutParams(params);
+            ViewUtils.setVisibility(spacer, showSpacer || !fixedActionBar ? View.VISIBLE : View.GONE);
+        }
     }
 
     protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name) {

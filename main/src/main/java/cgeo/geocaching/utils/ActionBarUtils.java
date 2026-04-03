@@ -44,9 +44,8 @@ public class ActionBarUtils {
         final Window currentWindow = activity.getWindow();
         final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
 
-        // TODO: set light/dark system bars depending on action bar colors
         final boolean isLightSkin = Settings.isLightSkin(activity);
-        windowInsetsController.setAppearanceLightStatusBars(isLightSkin);
+        windowInsetsController.setAppearanceLightStatusBars(false);
         windowInsetsController.setAppearanceLightNavigationBars(isLightSkin);
     }
 

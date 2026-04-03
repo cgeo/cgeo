@@ -86,4 +86,8 @@ public class ColorUtils {
         return androidx.core.graphics.ColorUtils.HSLToColor(hslValues);
 
     }
+
+    public static int setAlpha(final int color, final int alpha) {
+        return ((alpha & 0xFF) << 24) + (color & 0xFFFFFF);
+    }
 }

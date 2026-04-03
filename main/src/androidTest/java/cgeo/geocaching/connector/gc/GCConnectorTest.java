@@ -34,7 +34,7 @@ public class GCConnectorTest  {
             final Viewport viewport = new Viewport(new Geopoint("N 51° 36.000 E 7° 50.500"), new Geopoint("N 51° 37.350 E7° 51.500"));
             final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(searchResult).isNotNull();
-            assertThat(searchResult.getGeocodes()).contains("GC75NF6"); // N 51° 37.320 E 007° 50.600
+            assertThat(searchResult.getGeocodes()).contains("GCA8D2H"); // N 51° 37.145 E 007° 51.350
 
             // redo search with a smaller viewport completely contained in the last one - should lead to an identical searchResult due to caching
             final Viewport viewport2 = new Viewport(new Geopoint("N 51° 36.500 E 7° 51.200"), new Geopoint("N 51° 36.750 E7° 51.400"));

@@ -26,7 +26,8 @@ public class UserDefinedMapsforgeOnlineSource extends AbstractMapsforgeOnlineTil
                 }
                 tilePath += "{Z}/{X}/{Y}.png";
             }
-            setTilePath(tilePath);
+            final String query = fullUri.getQuery();
+            setTilePath(tilePath + (StringUtils.isNotBlank(query) ? "?" + query : ""));
         }
     }
 

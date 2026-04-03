@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.location.Geopoint;
@@ -65,8 +66,11 @@ import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +144,15 @@ public class ViewUtils {
             return;
         }
         view.setVisibility(visibility);
+    }
+
+    /**
+     * Sets text for given TextView (without crashing on null view)
+     */
+    public static void setText(final TextView view, final String text) {
+        if (view != null) {
+            view.setText(text);
+        }
     }
 
     /**
@@ -372,6 +385,16 @@ public class ViewUtils {
             }
         });
     }
+
+    public static void closeKeyboardOnLosingFocus(@NonNull final Activity activity, @Nullable final View view) {
+        if (view != null) {
+            view.setOnFocusChangeListener((v, hasFocus) -> {
+                if (!hasFocus) {
+                    Keyboard.hide(activity, v);
+                }
+            });
+        }
+    };
 
     /** requests a layout change on given view and runs the given consumer once the view has been measured */
     public static void runOnViewMeasured(final View view, final Function<View, Boolean> action) {
@@ -861,6 +884,14 @@ public class ViewUtils {
         final Drawable circularIcon = IndeterminateDrawable.createCircularDrawable(button.getContext(), spec);
 
         return enable -> mButton.setIcon(enable ? circularIcon : originalIcon);
+    }
+
+    public static void preventKeyboardOverlap(final View view) {
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
+            final Insets newInsets = windowInsets.getInsets(WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.systemBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), newInsets.bottom);
+            return windowInsets;
+        });
     }
 
 }

@@ -340,6 +340,8 @@
     <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
+    <string name="err_trackable_error">Errore trackable</string>
+    <string name="err_trackable_too_many_visited" tools:ignore="PluralsCandidate">Troppi trackables contrassegnati come \"visit\" - massimo di %d consentito</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
     <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
     <string name="confirm_unsent_changes_title">Modifiche non inviate</string>
@@ -2407,6 +2409,7 @@
     <string name="preference_colorpicker_show_width">larghezza: %d</string>
     <string name="reset_to_default">Predefinito</string>
     <!-- number input -->
+    <string name="number_input_title">Inserisci un valore tra %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
     <string name="number_input_err_boundarymax">Il valore inserito è troppo grande - resettato al valore massimo</string>
     <string name="number_input_err_format">Formato del numero non valido</string>
