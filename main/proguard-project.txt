@@ -12,6 +12,7 @@
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic,!code/allocation/variable
 
+# Keep all cgeo classes to avoid issues with reflection/Jackson
 -keep,includedescriptorclasses class cgeo.geocaching.** { *; }
 
 # The backup agent class is not called from our code.
@@ -25,7 +26,7 @@
 -dontnote cgeo.geocaching.ui.dialog.CustomProgressDialog
 
 # ignore warning: Ignoring InnerClasses attribute for an anonymous inner class...
--keepattributes EnclosingMethod
+-keepattributes EnclosingMethod,Signature,AnnotationDefault,SourceFile,LineNumberTable,*Annotation*,InnerClasses
 
 # Android -----------------------------------------------------------------------------------------
 

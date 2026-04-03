@@ -4,15 +4,14 @@ android {
     namespace = 'com.mapwithme.maps.api'
     compileSdk = 36
 
+    defaultConfig {
+        minSdk = 26
+        targetSdk = 35
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    defaultConfig {
-        minSdk = 26
-        targetSdk = 35
     }
 
     sourceSets.main {
@@ -22,6 +21,8 @@ android {
     }
 
     lint {
+        targetSdk = 35
+
         // generally we accept lint errors when building
         abortOnError = false
 
