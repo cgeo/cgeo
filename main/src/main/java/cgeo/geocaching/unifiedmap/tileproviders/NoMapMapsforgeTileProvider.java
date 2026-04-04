@@ -1,8 +1,8 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -12,7 +12,7 @@ import org.mapsforge.map.view.MapView;
 
 public class NoMapMapsforgeTileProvider extends AbstractMapsforgeTileProvider {
     NoMapMapsforgeTileProvider() {
-        super(CgeoApplication.getInstance().getString(R.string.map_source_nomap), Uri.parse(""), 0, 18, new Pair<>("", false));
+        super(LocalizationUtils.getString(R.string.map_source_nomap), Uri.parse(""), 0, 18, new Pair<>("", false));
         supportsBackgroundMaps = true;
     }
 

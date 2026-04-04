@@ -322,7 +322,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                             if (lastCategory != null) {
                                 attributesText.append("<br /><br />");
                             }
-                            attributesText.append("<b><u>").append(category.getName(context)).append("</u></b><br />");
+                            attributesText.append("<b><u>").append(category.getName()).append("</u></b><br />");
                             lastCategory = category;
                         } else {
                             attributesText.append("<br />");

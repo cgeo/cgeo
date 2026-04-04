@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
@@ -20,6 +19,7 @@ import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsBackgroundMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -70,7 +70,7 @@ public class Download {
     }
 
     public Download(final Uri navigateUpUri, final DownloadType type) {
-        this.name = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
+        this.name = LocalizationUtils.getString(R.string.downloadmap_onedirup);
         this.uri = navigateUpUri;
         this.isDir = true;
         this.isBackDir = true;
@@ -280,7 +280,7 @@ public class Download {
         @NonNull
         @Override
         public String toString() {
-            return CgeoApplication.getInstance().getString(name);
+            return LocalizationUtils.getString(name);
         }
 
         DownloadTypeDescriptor(final DownloadType type, final AbstractDownloader instance, final @StringRes int name) {

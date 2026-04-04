@@ -40,6 +40,7 @@ import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -215,7 +216,7 @@ public class MapUtils {
         } else {
             // if external routing configured: try to open BRouter downloader
             try {
-                final String bRouterPackage = activity.getString(R.string.package_brouter);
+                final String bRouterPackage = LocalizationUtils.getPlainString(R.string.package_brouter);
                 final Intent intent = new Intent();
                 intent.setComponent(new ComponentName(bRouterPackage, bRouterPackage + ".BInstallerActivity"));
                 activity.startActivity(intent);
@@ -356,7 +357,7 @@ public class MapUtils {
                     textview.set(tv1);
                     tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
                     tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
-                    TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
+                    TooltipCompat.setTooltipText(tv1, LocalizationUtils.getString(R.string.selected_position));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
 
                     final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
@@ -419,29 +420,29 @@ public class MapUtils {
             final String routeItemIdentifier = routeItem.getIdentifier();
             final boolean isStart = Strings.CS.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
             if (isStart) {
-                addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, 0, LocalizationUtils.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             for (int i = 1; i < segments.length - 1; i++) {
                 if (Strings.CS.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
-                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), LocalizationUtils.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
             isEnd = (segments.length > 1) && Strings.CS.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
             if (isEnd) {
-                addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, segments.length - 1, LocalizationUtils.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             } else {
-                addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             if (!isStart) {
-                addMenuHelper(activity, menu, baseId, activity.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                addMenuHelper(activity, menu, baseId, LocalizationUtils.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
         } else {
-            addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            addMenuHelper(activity, menu, baseId + 1, LocalizationUtils.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
         }
 
         final float elevation = Routing.getElevation(routeItem.getPoint());
         if (!Float.isNaN(elevation)) {
-            menu.addMenuItem(baseId + 100, activity.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
+            menu.addMenuItem(baseId + 100, LocalizationUtils.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
         }
     }
 

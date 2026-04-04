@@ -83,7 +83,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showToast(final int textId) {
-        showToast(getString(textId));
+        showToast(LocalizationUtils.getString(textId));
     }
 
     @Override
@@ -92,7 +92,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     public final void showShortToast(final int textId) {
-        showShortToast(getString(textId));
+        showShortToast(LocalizationUtils.getString(textId));
     }
 
     @Override
@@ -246,14 +246,14 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {
         if (cache != null) {
             final int previousNumberOfWaypoints = cache.getWaypoints().size();
-            final boolean success = cache.addCacheArtefactsFromText(HtmlUtils.extractText(text), true, res.getString(R.string.cache_description), true, null);
+            final boolean success = cache.addCacheArtefactsFromText(HtmlUtils.extractText(text), true, LocalizationUtils.getString(R.string.cache_description), true, null);
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, waypointsAdded));
             if (success) {
                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
             }
         } else {
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, 0));
         }
     }
 
@@ -286,7 +286,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                         });
             }
         } else {
-            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+            showToast(LocalizationUtils.getPlural(R.plurals.extract_waypoints_result, 0));
         }
     }
 

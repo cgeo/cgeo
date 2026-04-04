@@ -1,9 +1,9 @@
 package cgeo.geocaching.downloader;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.net.Uri;
 
@@ -49,7 +49,7 @@ public class DownloaderTest {
 
     @Test
     public void testMapsforge() {
-        final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
+        final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), LocalizationUtils.getPlainString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
         assertThat(list.size()).isBetween(53, 57);
@@ -73,7 +73,7 @@ public class DownloaderTest {
 
     @Test
     public void testOpenAndroMaps() {
-        final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
+        final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), LocalizationUtils.getPlainString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
         assertThat(list.size()).isBetween(55, 65);
@@ -97,7 +97,7 @@ public class DownloaderTest {
 
     @Test
     public void testOpenAndroMapsThemes() {
-        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl));
+        final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), LocalizationUtils.getPlainString(R.string.mapserver_openandromaps_themes_downloadurl));
 
         // number of themes
         assertThat(list.size()).isEqualTo(3);
@@ -116,7 +116,7 @@ public class DownloaderTest {
 
     @Test
     public void testFreizeitkarte() {
-        final List<Download> list = getList(MapDownloaderFreizeitkarte.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
+        final List<Download> list = getList(MapDownloaderFreizeitkarte.getInstance(), LocalizationUtils.getPlainString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of maps found
         assertThat(list.size()).isBetween(80, 90);
@@ -137,7 +137,7 @@ public class DownloaderTest {
 
     @Test
     public void testFreizeitkarteThemes() {
-        final List<Download> list = getList(MapDownloaderFreizeitkarteThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
+        final List<Download> list = getList(MapDownloaderFreizeitkarteThemes.getInstance(), LocalizationUtils.getPlainString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of themes
         assertThat(list.size()).isGreaterThan(2);
@@ -158,7 +158,7 @@ public class DownloaderTest {
 
     @Test
     public void testBRouterTiles() {
-        final List<Download> list = getList(BRouterTileDownloader.getInstance(), CgeoApplication.getInstance().getString(R.string.brouter_downloadurl));
+        final List<Download> list = getList(BRouterTileDownloader.getInstance(), LocalizationUtils.getPlainString(R.string.brouter_downloadurl));
 
         // number of tiles
         assertThat(list.size()).isBetween(1100, 1300);
