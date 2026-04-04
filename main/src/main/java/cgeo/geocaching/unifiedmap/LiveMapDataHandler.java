@@ -1,11 +1,14 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +17,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LiveMapDataHandler {
+
+    private static final String LOGPRAEFIX = "LiveMapDataHandler:";
 
     private final Action action;
     private final Disposable actionDisposable;
@@ -50,18 +55,25 @@ public class LiveMapDataHandler {
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
             this.model = model;
-            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, this::updateLiveLoad);
+            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, caches -> updateCaches(caches, true));
         }
 
-        private void updateLiveLoad(final Set<Geocache> result) {
-            final GeocacheFilter filter = lastFilter;
+        private void updateCaches(final Set<Geocache> result, final boolean replaceExisting) {
+            final int before = result.size();
+            final GeocacheFilter filter = handler == null ? null : handler.params.filter;
             if (filter != null) {
                 filter.filterList(result);
             }
+            final int after = result.size();
+            Log.iForce(LOGPRAEFIX + "updating with " + before + "->" + after + " caches, replace=" + replaceExisting + ". filter = " + filter);
             model.caches.write(caches -> {
-                caches.removeAll(result);
+                if (replaceExisting) {
+                    caches.removeAll(result);
+                }
                 caches.addAll(result);
             });
+            //update global CacheCache. See #17492
+            DataStore.saveCaches(result, EnumSet.of(LoadFlags.SaveFlag.CACHE));
         }
 
         @Override
@@ -87,11 +99,12 @@ public class LiveMapDataHandler {
                 final boolean lastViewportContainsCurrent = lastViewport != null && lastViewport.includes(params.viewport);
 
                 //database refresh
-                if (filterChanged || !lastViewportContainsCurrent) {
+                if (params.viewport != null && (filterChanged || !lastViewportContainsCurrent)) {
                     //get a bit more than just the current viewport. This prevents immediate necessity for a db call on next (small) map move
                     final Viewport refreshedViewport = params.viewport.resize(1.5);
                     final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
-                    model.caches.write(caches -> caches.addAll(dbCaches));
+                    Log.d(LOGPRAEFIX + " queried DB data for filter:" + params.filter + " (" + dbCaches.size() + " result)");
+                    updateCaches(dbCaches, false);
                     lastViewport = refreshedViewport;
                 }
                 //live refresh

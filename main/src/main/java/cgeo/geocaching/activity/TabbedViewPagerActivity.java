@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -59,6 +60,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         this.onPageChangeListener = onPageChangeListener;
 
         setContentView(isRefreshable ? R.layout.tabbed_viewpager_activity_refreshable : R.layout.tabbed_viewpager_activity);
+        refreshActivityContentInsets();
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(this));
@@ -88,7 +90,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             tab.setText(getTitle(getItemId(position)));
         }).attach();
     }
-
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
 

@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
+import org.apache.commons.lang3.Strings;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -57,8 +57,8 @@ public abstract class AbstractConnector implements IConnector {
         return strippedList;
     }
 
-    @NotNull
     @Override
+    @NonNull
     public String[] getGeocodeSqlLikeExpressions() {
         return new String[]{"%"}; //will match everything
     }
@@ -80,7 +80,6 @@ public abstract class AbstractConnector implements IConnector {
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
         throw new UnsupportedOperationException();
     }
-
 
     @Override
     public boolean supportsLogging() {
@@ -157,7 +156,7 @@ public abstract class AbstractConnector implements IConnector {
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String urlPrefix = getCacheUrlPrefix();
-        if (StringUtils.isEmpty(urlPrefix) || StringUtils.startsWith(url, urlPrefix)) {
+        if (StringUtils.isEmpty(urlPrefix) || Strings.CS.startsWith(url, urlPrefix)) {
             final String geocode = url.substring(urlPrefix.length());
             if (canHandle(geocode)) {
                 return geocode;
@@ -400,12 +399,18 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     public String getShortHost() {
-        return StringUtils.remove(getHost(), "www.");
+        return Strings.CS.remove(getHost(), "www.");
     }
 
     @Override
     @Nullable
     public String getCreateAccountUrl() {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public String getMyAccountUrl() {
         return null;
     }
 

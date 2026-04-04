@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
@@ -34,7 +33,7 @@ import java.util.Map;
 
 class GCLoggingManager extends AbstractLoggingManager {
 
-    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
+    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.LOG_WET, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
 
     GCLoggingManager(final Geocache cache) {
         super(GCConnector.getInstance(), cache);
@@ -68,27 +67,19 @@ class GCLoggingManager extends AbstractLoggingManager {
             return result;
         }
 
-        final List<LogType> possibleLogTypes = GCParser.parseTypes(page);
-        result.setAvailableLogTypes(possibleLogTypes);
-
-        try {
-            final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
-            final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
-                final Trackable trackable = new Trackable();
-                trackable.setGeocode(entry.referenceCode);
-                trackable.setTrackingcode(entry.trackingNumber);
-                trackable.setName(entry.name);
-                trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
-                return trackable;
-                //new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, TrackableBrand.TRAVELBUG)
-            }).toList();
-            result.setAvailableTrackables(trackables);
-        } catch (final Exception e) {
-            result.setError();
-            Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
+        result.setAvailableLogTypes(GCParser.parseTypes(page));
+        final int totalTrackables = GCParser.parseTrackableCount(page);
+        // log page HTML contains up to 20 TBs
+        if (totalTrackables <= 20) {
+            result.setAvailableTrackables(GCParser.parseTrackables(page));
+        } else {
+            try {
+                result.setAvailableTrackables(loadTrackablesPaged(totalTrackables));
+            } catch (Exception e) {
+                result.setError();
+                Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
+            }
         }
-
-
 
         // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 
@@ -120,6 +111,20 @@ class GCLoggingManager extends AbstractLoggingManager {
         }
 
         return result;
+    }
+
+    private List<Trackable> loadTrackablesPaged(final int totalTrackables) {
+        final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory(totalTrackables);
+        final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.setName(entry.name);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+            //new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, TrackableBrand.TRAVELBUG)
+        }).toList();
+        return trackables;
     }
 
     @NonNull

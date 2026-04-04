@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import android.os.Build;
 
 import androidx.annotation.StringRes;
 import androidx.core.app.NotificationManagerCompat;
@@ -30,16 +29,14 @@ public enum NotificationChannels {
     public static void createNotificationChannels(final Context context) {
         final NotificationManagerCompat manager = Notifications.getNotificationManager(context);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            for (NotificationChannels channel : NotificationChannels.values()) {
-                final NotificationChannel notificationChannel = new NotificationChannel(
-                        channel.name(),
-                        context.getString(channel.channelDisplayableTitle),
-                        channel.channelImportance
-                );
-                notificationChannel.setDescription(context.getString(channel.channelDisplayableDescription));
-                manager.createNotificationChannel(notificationChannel);
-            }
+        for (NotificationChannels channel : NotificationChannels.values()) {
+            final NotificationChannel notificationChannel = new NotificationChannel(
+                    channel.name(),
+                    context.getString(channel.channelDisplayableTitle),
+                    channel.channelImportance
+            );
+            notificationChannel.setDescription(context.getString(channel.channelDisplayableDescription));
+            manager.createNotificationChannel(notificationChannel);
         }
     }
 }

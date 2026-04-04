@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -37,6 +36,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -55,8 +55,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextPaint;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -79,7 +77,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class MapUtils {
 
@@ -171,17 +169,11 @@ public class MapUtils {
     }
 
     // one-time messages to be shown for maps
-    public static void showMapOneTimeMessages(final Activity activity, final MapMode mapMode) {
+    public static void showMapOneTimeMessages(final Activity activity, final UnifiedMapType.UnifiedMapTypeType mapType) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
-        if (mapMode == MapMode.LIVE && !Settings.isLiveMap()) {
+        if ((mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap || mapType == UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport) && !Settings.isLiveMap()) {
             Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_LIVE_DISABLED);
         }
-    }
-
-    // workaround for colored ActionBar titles/subtitles
-    // @todo remove after switching map ActionBar to Toolbar
-    public static Spanned getColoredValue(final String value) {
-        return Html.fromHtml("<font color=\"" + String.format("#%06X", 0xFFFFFF & CgeoApplication.getInstance().getResources().getColor(R.color.colorTextActionBar)) + "\">" + value + "</font>");
     }
 
     // check whether routing tile data is available for the whole viewport given
@@ -336,7 +328,7 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final int fromList, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
@@ -346,7 +338,7 @@ public class MapUtils {
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
                     MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
                 })
-                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
+                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
                 .addItemClickListener(R.id.menu_coords, item -> {
                     final AtomicReference<TextView> textview = new AtomicReference<>();
@@ -425,16 +417,16 @@ public class MapUtils {
 
         if (routeIsNotEmpty) {
             final String routeItemIdentifier = routeItem.getIdentifier();
-            final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
+            final boolean isStart = Strings.CS.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
             if (isStart) {
                 addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             }
             for (int i = 1; i < segments.length - 1; i++) {
-                if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
+                if (Strings.CS.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
                     addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
-            isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
+            isEnd = (segments.length > 1) && Strings.CS.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
             if (isEnd) {
                 addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
             } else {
@@ -500,9 +492,9 @@ public class MapUtils {
 
         final float textWidth = elevationTextPaint.measureText(info) + 10;
         final float yPos = height - 0.45f * textSizeInPx;
-        canvas.drawLine((float) (width - textWidth) / 2, yPos, (float) (width + textWidth) / 2, yPos, elevationPaint);
+        canvas.drawLine((width - textWidth) / 2, yPos, (width + textWidth) / 2, yPos, elevationPaint);
 
-        canvas.drawText(info, (int) (width / 2), height - 4, elevationTextPaint);
+        canvas.drawText(info, width / 2, height - 4, elevationTextPaint);
 
         return bm;
     }

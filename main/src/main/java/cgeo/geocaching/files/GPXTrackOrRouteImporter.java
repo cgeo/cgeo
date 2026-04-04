@@ -78,6 +78,11 @@ public class GPXTrackOrRouteImporter {
             if (null == route) {
                 route = parse(new GPXWptAsTrackParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
             }
+            // try kml format
+            if (null == route) {
+                // route = parse(new KmlAsTrackParser("http://earth.google.com/kml/2.2", "2.2"), uri);
+                route = parse(new KmlAsTrackParser("http://earth.google.com/kml/2.2", "2.2"), uri);
+            }
             // as last resort ignore missing namespace identifier
             if (null == route) {
                 route = parse(new GPXTrackOrRouteParser("", "1.0"), uri);

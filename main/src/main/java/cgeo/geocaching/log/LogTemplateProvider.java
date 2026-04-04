@@ -18,11 +18,13 @@ import cgeo.geocaching.utils.Formatter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Provides all the available templates for logging.
@@ -121,7 +123,7 @@ public final class LogTemplateProvider {
 
             // check containment first to not unconditionally call the getValue(...) method
             if (input.contains(bracketedTemplate)) {
-                return StringUtils.replace(input, bracketedTemplate, getValue(context));
+                return Strings.CS.replace(input, bracketedTemplate, getValue(context));
             }
             return input;
         }
@@ -131,10 +133,14 @@ public final class LogTemplateProvider {
      * @return all user-facing templates, but not the signature template itself
      */
     @NonNull
-    public static List<LogTemplate> getTemplatesWithoutSignature() {
-        final List<LogTemplate> templates = new ArrayList<>();
-        templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
+    public static List<LogTemplate> getTemplatesWithoutSignature(@Nullable final LogContext context) {
 
+        final Trackable trackableOfContext = context != null ? context.getTrackable() : null;
+        final Geocache cacheOfContext = context != null ? context.getCache() : null;
+
+        final List<LogTemplate> templates = new ArrayList<>();
+
+        templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
             @Override
             public String getValue(final LogContext context) {
                 if (null != context.logEntry) {
@@ -144,8 +150,8 @@ public final class LogTemplateProvider {
                 }
             }
         });
-        templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
 
+        templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
             @Override
             public String getValue(final LogContext context) {
                 if (null != context.logEntry) {
@@ -155,8 +161,8 @@ public final class LogTemplateProvider {
                 }
             }
         });
-        templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
+        templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
             @Override
             public String getValue(final LogContext context) {
                 final long currentTime;
@@ -168,8 +174,8 @@ public final class LogTemplateProvider {
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
-        templates.add(new LogTemplate("DAYOFWEEK", R.string.init_signature_template_day_of_week) {
 
+        templates.add(new LogTemplate("DAYOFWEEK", R.string.init_signature_template_day_of_week) {
             @Override
             public String getValue(final LogContext context) {
                 if (null != context.logEntry) {
@@ -179,10 +185,18 @@ public final class LogTemplateProvider {
                 }
             }
         });
-        templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
 
+        templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
             @Override
             public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    final IConnector connector = ConnectorFactory.getConnector(trackable.getSpottedCacheGeocode());
+                    if (connector instanceof ILogin) {
+                        return ((ILogin) connector).getUserName();
+                    }
+                }
+
                 final Geocache cache = context.getCache();
                 if (cache != null) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -193,55 +207,56 @@ public final class LogTemplateProvider {
                 return Settings.getUserName();
             }
         });
-        templates.add(new LogTemplate("NUMBER", R.string.init_signature_template_number) {
 
-            @Override
-            public String getValue(final LogContext context) {
+        if (context == null || cacheOfContext != null) {
+            templates.add(new LogTemplate("NUMBER", R.string.init_signature_template_number) {
+                @Override
+                public String getValue(final LogContext context) {
 
-                final boolean increment;
-                increment = null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN;
+                    final boolean increment;
+                    increment = null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN;
 
-                final Geocache cache = context.getCache();
-                if (cache == null || !(ConnectorFactory.getConnector(cache) instanceof ILogin)) {
-                    return StringUtils.EMPTY;
+                    final Geocache cache = context.getCache();
+                    if (cache == null || !(ConnectorFactory.getConnector(cache) instanceof ILogin)) {
+                        return StringUtils.EMPTY;
+                    }
+                    final ILogin connector = (ILogin) ConnectorFactory.getConnector(cache);
+
+                    int counter;
+                    final String onlineNum = getCounter(context, false); // we increment the counter later on our self in this method.
+
+                    if (!onlineNum.equals(StringUtils.EMPTY)) {
+                        counter = Integer.parseInt(onlineNum);
+                    } else {
+                        counter = FoundNumCounter.getAndUpdateFoundNum(connector);
+                    }
+
+                    if (counter == -1) {
+                        return StringUtils.EMPTY;
+                    }
+
+                    counter += DataStore.getFoundsOffline(connector);
+
+                    if (increment) {
+                        counter += 1;
+                    }
+                    return String.valueOf(counter);
                 }
-                final ILogin connector = (ILogin) ConnectorFactory.getConnector(cache);
+            });
 
-                int counter;
-                final String onlineNum = getCounter(context, false); // we increment the counter later on our self in this method.
-
-                if (!onlineNum.equals(StringUtils.EMPTY)) {
-                    counter = Integer.parseInt(onlineNum);
-                } else {
-                    counter = FoundNumCounter.getAndUpdateFoundNum(connector);
+            templates.add(new LogTemplate("ONLINENUM", R.string.init_signature_template_number_legacy) {
+                @Override
+                public String getValue(final LogContext context) {
+                    if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
+                        return getCounter(context, true);
+                    } else {
+                        return getCounter(context, false);
+                    }
                 }
+            });
+        }
 
-                if (counter == -1) {
-                    return StringUtils.EMPTY;
-                }
-
-                counter += DataStore.getFoundsOffline(connector);
-
-                if (increment) {
-                    counter += 1;
-                }
-                return String.valueOf(counter);
-            }
-        });
-        templates.add(new LogTemplate("ONLINENUM", R.string.init_signature_template_number_legacy) {
-
-            @Override
-            public String getValue(final LogContext context) {
-
-                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
-                    return getCounter(context, true);
-                } else {
-                    return getCounter(context, false);
-                }
-            }
-        });
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
-
             @Override
             public String getValue(final LogContext context) {
                 final Trackable trackable = context.getTrackable();
@@ -255,6 +270,7 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+
         templates.add(new LogTemplate("NAME", R.string.init_signature_template_name) {
             @Override
             public String getValue(final LogContext context) {
@@ -269,38 +285,8 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
-        templates.add(new LogTemplate("DIFFICULTY", R.string.init_signature_template_difficulty) {
-            @Override
-            public String getValue(final LogContext context) {
-                final Geocache cache = context.getCache();
-                if (cache != null) {
-                    return String.valueOf(cache.getDifficulty());
-                }
-                return StringUtils.EMPTY;
-            }
-        });
-        templates.add(new LogTemplate("TERRAIN", R.string.init_signature_template_terrain) {
-            @Override
-            public String getValue(final LogContext context) {
-                final Geocache cache = context.getCache();
-                if (cache != null) {
-                    return String.valueOf(cache.getTerrain());
-                }
-                return StringUtils.EMPTY;
-            }
-        });
-        templates.add(new LogTemplate("SIZE", R.string.init_signature_template_size) {
-            @Override
-            public String getValue(final LogContext context) {
-                final Geocache cache = context.getCache();
-                if (cache != null) {
-                    return cache.getSize().getL10n();
-                }
-                return StringUtils.EMPTY;
-            }
-        });
-        templates.add(new LogTemplate("URL", R.string.init_signature_template_url) {
 
+        templates.add(new LogTemplate("URL", R.string.init_signature_template_url) {
             @Override
             public String getValue(final LogContext context) {
                 final Trackable trackable = context.getTrackable();
@@ -314,9 +300,50 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+
+        if (context == null || cacheOfContext != null) {
+            templates.add(new LogTemplate("DIFFICULTY", R.string.init_signature_template_difficulty) {
+                @Override
+                public String getValue(final LogContext context) {
+                    final Geocache cache = context.getCache();
+                    if (cache != null) {
+                        return String.valueOf(cache.getDifficulty());
+                    }
+                    return StringUtils.EMPTY;
+                }
+            });
+
+            templates.add(new LogTemplate("TERRAIN", R.string.init_signature_template_terrain) {
+                @Override
+                public String getValue(final LogContext context) {
+                    final Geocache cache = context.getCache();
+                    if (cache != null) {
+                        return String.valueOf(cache.getTerrain());
+                    }
+                    return StringUtils.EMPTY;
+                }
+            });
+
+            templates.add(new LogTemplate("SIZE", R.string.init_signature_template_size) {
+                @Override
+                public String getValue(final LogContext context) {
+                    final Geocache cache = context.getCache();
+                    if (cache != null) {
+                        return cache.getSize().getL10n();
+                    }
+                    return StringUtils.EMPTY;
+                }
+            });
+        }
+
         templates.add(new LogTemplate("TYPE", R.string.init_signature_template_type) {
             @Override
             public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    return trackable.getType();
+                }
+
                 final Geocache cache = context.getCache();
                 if (cache != null) {
                     final CacheType cacheType = cache.getType();
@@ -325,9 +352,14 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+
         templates.add(new LogTemplate("GEOCODE", R.string.init_signature_template_geocode) {
             @Override
             public String getValue(final LogContext context) {
+                final Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    return trackable.getGeocode();
+                }
                 final Geocache cache = context.getCache();
                 if (cache != null) {
                     return cache.getGeocode();
@@ -335,6 +367,59 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+
+        if (context == null || trackableOfContext != null) {
+
+            final int spottedType = trackableOfContext != null ? trackableOfContext.getSpottedType() : Trackable.SPOTTED_UNKNOWN;
+            if (trackableOfContext == null || spottedType == Trackable.SPOTTED_CACHE) {
+                templates.add(new LogTemplate("TB_LOCATION_GEOCODE", R.string.init_signature_template_tblocation_geocache_code) {
+                    @Override
+                    public String getValue(final LogContext context) {
+                        final Trackable trackable = context.getTrackable();
+                        if (trackable != null) {
+                            if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
+                                final String cacheGeocode = trackable.getSpottedCacheGeocode();
+                                return StringUtils.isNotBlank(cacheGeocode) ? cacheGeocode : trackable.getSpottedGuid();
+                            }
+                        }
+                        return StringUtils.EMPTY;
+                    }
+                });
+
+                templates.add(new LogTemplate("TB_LOCATION_CACHE", R.string.init_signature_template_tblocation_geocache_name) {
+                    @Override
+                    public String getValue(final LogContext context) {
+                        final Trackable trackable = context.getTrackable();
+                        if (trackable != null) {
+                            if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
+                                return HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
+                            }
+                        }
+                        return StringUtils.EMPTY;
+                    }
+                });
+            }
+
+            if (trackableOfContext == null || spottedType == Trackable.SPOTTED_USER || spottedType == Trackable.SPOTTED_OWNER) {
+                templates.add(new LogTemplate("TB_LOCATION_USER", R.string.init_signature_template_tblocation_user) {
+                    @Override
+                    public String getValue(final LogContext context) {
+                        final Trackable trackable = context.getTrackable();
+                        if (trackable != null) {
+                            switch (trackable.getSpottedType()) {
+                                case Trackable.SPOTTED_USER:
+                                    return trackable.getSpottedName();
+                                case Trackable.SPOTTED_OWNER:
+                                    return trackable.getOwner();
+                                default:
+                                    return StringUtils.EMPTY;
+                            }
+                        }
+                        return StringUtils.EMPTY;
+                    }
+                });
+            }
+        }
         return templates;
     }
 
@@ -372,14 +457,14 @@ public final class LogTemplateProvider {
      * @return all user-facing templates, including the signature template
      */
     @NonNull
-    public static List<LogTemplate> getTemplatesWithSignature() {
-        final List<LogTemplate> templates = getTemplatesWithoutSignature();
+    public static List<LogTemplate> getTemplatesWithSignature(@Nullable final LogContext context) {
+        final List<LogTemplate> templates = getTemplatesWithoutSignature(context);
         int index = 0;
         templates.add(index++, new LogTemplate("SIGNATURE", R.string.init_signature) {
             @Override
             public String getValue(final LogContext context) {
                 final String nestedTemplate = Settings.getSignature();
-                if (StringUtils.contains(nestedTemplate, "SIGNATURE")) {
+                if (Strings.CS.contains(nestedTemplate, "SIGNATURE")) {
                     return "invalid signature template";
                 }
                 return applyTemplates(nestedTemplate, context);
@@ -389,7 +474,7 @@ public final class LogTemplateProvider {
             templates.add(index++, new LogTemplate("TEMPLATE" + template.getKey(), template.getTitle()) {
                 @Override
                 public String getValue(final LogContext context) {
-                    if (StringUtils.contains(template.getText(), "TEMPLATE" + template.getKey())) {
+                    if (Strings.CS.contains(template.getText(), "TEMPLATE" + template.getKey())) {
                         return "invalid template";
                     }
                     return applyTemplates(template.getText(), context);
@@ -411,8 +496,8 @@ public final class LogTemplateProvider {
      * @return all user-facing templates, including the log text template
      */
     @NonNull
-    public static List<LogTemplate> getTemplatesWithSignatureAndLogText() {
-        final List<LogTemplate> templates = getTemplatesWithSignature();
+    public static List<LogTemplate> getTemplatesWithSignatureAndLogText(@Nullable final LogContext context) {
+        final List<LogTemplate> templates = getTemplatesWithSignature(context);
         templates.add(new LogTemplate("LOG", R.string.init_signature_template_log) {
             @Override
             public String getValue(final LogContext context) {
@@ -427,8 +512,8 @@ public final class LogTemplateProvider {
     }
 
     @NonNull
-    private static List<LogTemplate> getAllTemplates() {
-        final List<LogTemplate> templates = getTemplatesWithSignatureAndLogText();
+    private static List<LogTemplate> getAllTemplates(@Nullable final LogContext context) {
+        final List<LogTemplate> templates = getTemplatesWithSignatureAndLogText(context);
         templates.add(new LogTemplate("NUMBER$NOINC", -1 /* Never user facing */) {
             @Override
             public String getValue(final LogContext context) {
@@ -440,7 +525,7 @@ public final class LogTemplateProvider {
 
     @Nullable
     public static LogTemplate getTemplate(final int itemId) {
-        for (final LogTemplate template : getAllTemplates()) {
+        for (final LogTemplate template : getAllTemplates(null)) {
             if (template.getItemId() == itemId) {
                 return template;
             }
@@ -450,7 +535,7 @@ public final class LogTemplateProvider {
 
     public static String applyTemplates(@NonNull final String signature, final LogContext context) {
         String result = signature;
-        for (final LogTemplate template : getAllTemplates()) {
+        for (final LogTemplate template : getAllTemplates(context)) {
             result = template.apply(result, context);
         }
         return result;

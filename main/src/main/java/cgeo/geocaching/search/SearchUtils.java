@@ -102,4 +102,17 @@ public class SearchUtils {
         }
     }
 
+    public static void setSearchViewColor(final SearchView searchView) {
+        if (searchView != null) {
+            final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            setSearchViewColor(searchAutoComplete);
+        }
+    }
+
+    public static void setSearchViewColor(final AutoCompleteTextView searchAutoCompleteView) {
+        if (searchAutoCompleteView != null) {
+            searchAutoCompleteView.setTextColor(searchAutoCompleteView.getContext().getResources().getColor(R.color.colorTextActionBar));
+            searchAutoCompleteView.setHintTextColor(searchAutoCompleteView.getContext().getResources().getColor(R.color.colorTextActionBar));
+        }
+    }
 }

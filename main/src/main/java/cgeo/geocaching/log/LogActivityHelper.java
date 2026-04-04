@@ -14,8 +14,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
-import android.annotation.TargetApi;
-
 import androidx.activity.ComponentActivity;
 
 import java.util.Map;
@@ -24,7 +22,6 @@ import java.util.function.BiConsumer;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /** Helper class to use in Activities which want to use cache/trackable logging functionality */
-@TargetApi(24)
 public class LogActivityHelper {
 
     private final ComponentActivity activity;
@@ -134,7 +131,7 @@ public class LogActivityHelper {
             .setMessage(TextParam.id(R.string.log_delete_confirm,
                 entry.logType.getL10n(), entry.author, Formatter.formatShortDateVerbally(entry.date)))
             .setButtons(SimpleDialog.ButtonTextSet.YES_NO);
-        if (entry.isOwn()) {
+        if (LogUtils.isOwnLog(entry, cache)) {
             dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
         } else {
             dialog.input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));

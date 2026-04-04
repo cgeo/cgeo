@@ -12,7 +12,7 @@ import androidx.preference.MultiSelectListPreference;
 import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
@@ -51,9 +51,9 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     private void setTranslateLanguageSummary(final ListPreference languagePref, final String newValue) {
         final Locale appLocale = Settings.getApplicationLocale();
 
-        if (StringUtils.equals(newValue, OfflineTranslateUtils.LANGUAGE_INVALID)) {
+        if (Strings.CS.equals(newValue, OfflineTranslateUtils.LANGUAGE_INVALID)) {
             languagePref.setSummary(getString(R.string.init_translation_disabled));
-        } else if (StringUtils.equals(newValue, OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
+        } else if (Strings.CS.equals(newValue, OfflineTranslateUtils.LANGUAGE_AUTOMATIC)) {
             final OfflineTranslateUtils.Language systemLang = OfflineTranslateUtils.getAppLanguageOrDefault();
             final OfflineTranslateUtils.Language appLanguage = Settings.getApplicationLanguage();
             final String appLanguageDisplayName = appLanguage.getDisplayName();

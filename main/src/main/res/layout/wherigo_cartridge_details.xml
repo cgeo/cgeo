@@ -20,6 +20,8 @@
             <TextView
                 android:id="@+id/headerInformation"
                 android:textIsSelectable="true"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -29,21 +31,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- Translation -->
-            <Button
-                android:id="@+id/translation"
-                style="@style/button_icon_with_text"
-                app:icon="@drawable/ic_menu_translate"
-                android:layout_gravity="right"
-                />
-
             <!-- User description -->
             <TextView
                 android:id="@+id/description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 android:textIsSelectable="true"
                 android:autoLink="web" />
+
+            <!-- External Translation -->
+            <Button
+                android:id="@+id/translation_external"
+                style="@style/button_icon_with_text"
+                app:icon="@drawable/ic_menu_translate"
+                android:layout_gravity="right"
+                />
 
             <!-- Debug Infos -->
         <LinearLayout
@@ -57,7 +61,7 @@
                 android:id="@+id/debug_info_title"
                 android:paddingTop="5dp"
                 android:text="Debug Information"
-                android:textSize="@dimen/textSize_listsSecondary"
+                android:textSize="@dimen/textSize_listsPrimary"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
@@ -69,6 +73,8 @@
                 android:paddingTop="5dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:textColor="@color/colorText"
                 android:textIsSelectable="true"
                 android:autoLink="web" />
 

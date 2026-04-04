@@ -63,8 +63,6 @@ public enum PersistableFolder {
     private final int nameKeyId;
     private final boolean needsWrite;
 
-    private final Folder[] defaultFolderCandidates;
-
     private Folder userDefinedFolder;
     private Folder defaultFolder;
     private boolean defaultFolderInitialized;
@@ -81,13 +79,12 @@ public enum PersistableFolder {
         return nameKeyId;
     }
 
-    PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder... defaultFolderCandidates) {
+    PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @Nullable final Folder defaultFolder) {
         this.prefKeyId = prefKeyId;
         this.nameKeyId = nameKeyId;
         this.needsWrite = true;
 
-        this.defaultFolderCandidates = defaultFolderCandidates;
-        this.defaultFolder = this.defaultFolderCandidates[0];
+        this.defaultFolder = defaultFolder;
         this.defaultFolderInitialized = false;
         registerForIndirectChange(this.defaultFolder);
 
@@ -95,9 +92,9 @@ public enum PersistableFolder {
         this.userDefinedFolder = Folder.fromConfig(Settings.getPersistableFolder(this));
     }
 
-    private void registerForIndirectChange(final Folder folder) {
+    private void registerForIndirectChange(@Nullable final Folder folder) {
         //if this PersistableFolder's value is based on another PersistableFolder, then we have to notify on  indirect change
-        final PersistableFolder rootPersistableFolder = folder.getRootPersistableFolder();
+        final PersistableFolder rootPersistableFolder = folder == null ? null : folder.getRootPersistableFolder();
         if (rootPersistableFolder != null) {
             rootPersistableFolder.registerChangeListener(this, pf -> notifyChanged());
         }
@@ -142,7 +139,7 @@ public enum PersistableFolder {
     }
 
     public void reevaluateDefaultFolder() {
-        this.defaultFolder = ContentStorage.get().getAccessibleDefaultFolder(this.defaultFolderCandidates, needsWrite(), name());
+        this.defaultFolder = ContentStorage.get().getAccessibleDefaultFolder(this.defaultFolder, needsWrite(), name());
         defaultFolderInitialized = true;
         registerForIndirectChange(this.defaultFolder);
     }

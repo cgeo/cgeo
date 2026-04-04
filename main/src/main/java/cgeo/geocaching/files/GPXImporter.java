@@ -1,8 +1,10 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -15,6 +17,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -27,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class GPXImporter {
     static final int IMPORT_STEP_START = 0;
@@ -95,11 +99,11 @@ public class GPXImporter {
     @NonNull
     private static FileType getFileTypeFromPathName(
             final String pathName) {
-        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.GPX_FILE_EXTENSION)) {
+        if (Strings.CI.endsWith(pathName, FileUtils.GPX_FILE_EXTENSION)) {
             return FileType.GPX;
         }
 
-        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.LOC_FILE_EXTENSION)) {
+        if (Strings.CI.endsWith(pathName, FileUtils.LOC_FILE_EXTENSION)) {
             return FileType.LOC;
         }
         return FileType.UNKNOWN;
@@ -141,9 +145,23 @@ public class GPXImporter {
      */
     public void importGPX() {
         final Intent intent = fromActivity.getIntent();
+
+        final Bundle extras = intent.getExtras();
+        if (extras != null) {
+            final List<GCList> pqList = intent.getExtras().getParcelableArrayList(Intents.EXTRA_POCKET_LIST);
+            if (pqList != null && !pqList.isEmpty()) {
+                for (final GCList pq : pqList) {
+                    importGPX(pq.getUri(), pq.getMimeType(), null);
+                }
+                return;
+            }
+        }
         final Uri uri = intent.getData();
-        final String mimeType = intent.getType();
-        importGPX(uri, mimeType, null);
+        final String actionType = intent.getAction();
+        if (Intent.ACTION_VIEW.equals(actionType) && null != uri) {
+            final String mimeType = intent.getType();
+            importGPX(uri, mimeType, null);
+        }
     }
 
     private static final class ProgressHandler extends DisposableHandler {
@@ -254,7 +272,7 @@ public class GPXImporter {
         }
         final String gpxFileName = gpxfile.getName();
         for (final String filename : filenameList) {
-            if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
+            if (!Strings.CI.contains(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;
             }
             final String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)

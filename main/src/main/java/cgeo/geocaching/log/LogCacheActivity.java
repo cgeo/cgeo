@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
 import cgeo.geocaching.databinding.LogcacheTrackableItemBinding;
@@ -79,6 +80,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final String SAVED_STATE_FAVORITE = "cgeo.geocaching.saved_state_favorite";
+
+    private static final int MAX_GC_TRACKABLE_FOUNDS = 100; // maximum number of allowed trackables visiting per cache log for geocaching.com
 
     private enum LogEditMode {
         CREATE_NEW, // create/edit a new log entry (which may be stored offline)
@@ -179,7 +182,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
-        binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
+        binding = LogcacheActivityBinding.bind(findViewById(R.id.activity_content));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type)
@@ -249,11 +252,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
             this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
             if (savedInstanceState.getInt(SAVED_STATE_FAVORITE) > 0) {
-                cache.setFavorite(true);
+                this.binding.favoriteCheck.setChecked(true);
             }
         }
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
-
+        ViewUtils.preventKeyboardOverlap(binding.log);
         refreshGui();
 
         requestKeyboardForLogging();
@@ -302,10 +305,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             final OfflineLogEntry offlineLogEntry = (OfflineLogEntry) logEntry;
             cacheVotingBar.setRating(offlineLogEntry.rating == 0 ? cache.getMyVote() : offlineLogEntry.rating);
             binding.favoriteCheck.setChecked(offlineLogEntry.favorite);
-            //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
-            if (offlineLogEntry.favorite) {
-                binding.favoriteCheck.setVisibility(View.VISIBLE);
-            }
             binding.logPassword.setText(offlineLogEntry.password);
             inventoryAdapter.putActions(offlineLogEntry.inventoryActions);
             //CollectionStream.of(inventory).forEach(t -> initializeTrackableAction(t, offlineLogEntry));
@@ -342,11 +341,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
-            final int remainingPoints = availableFavoritePoints + (cache.isFavorite() ? 1 : 0);
+            final boolean isFavorite = cache.isFavorite();
+            final boolean favIsChecked = binding.favoriteCheck.isChecked() || isFavorite;
+            final boolean editExistingFavorite = this.logEditMode == LogEditMode.EDIT_EXISTING && isFavorite;
+
+            final int remainingPoints = availableFavoritePoints + (editExistingFavorite ? 1 : 0);
             binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), remainingPoints, remainingPoints));
-            if (availableFavoritePoints > 0 || (this.logEditMode == LogEditMode.EDIT_EXISTING && cache.isFavorite())) {
-                binding.favoriteCheck.setVisibility(availableFavoritePoints > 0 ? View.VISIBLE : View.GONE);
-                binding.favoriteCheck.setChecked(cache.isFavorite());
+            // If fav check is set then ALWAYS make the checkbox visible and set the checked state accordingly
+            // see https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609 and https://github.com/cgeo/cgeo/issues/17593
+            if (availableFavoritePoints > 0 || editExistingFavorite || favIsChecked) {
+                binding.favoriteCheck.setVisibility(View.VISIBLE);
+                binding.favoriteCheck.setChecked(favIsChecked);
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
@@ -425,9 +430,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
         outState.putInt(SAVED_STATE_FAVORITE, this.binding.favoriteCheck.isChecked() ? 1 : 0);
-        if (this.binding.favoriteCheck.isChecked()) {
-            cache.setFavorite(true);
-        }
     }
 
     public void setType(final LogType type) {
@@ -540,6 +542,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
         }
+        if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
+            SimpleDialog.of(this).setTitle(R.string.err_trackable_error).setMessage(R.string.err_trackable_too_many_visited, MAX_GC_TRACKABLE_FOUNDS).confirm(() -> { });
+            return;
+        }
         if (logType.get().mustConfirmLog()) {
             SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm(this::sendLogInternal);
         } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
@@ -550,6 +556,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sendLogInternal() {
+        if (inventoryAdapter.hastTooManyGCVisitedLogs()) {
+            return;
+        }
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
             logActivityHelper.editLog(cache, this.originalLogEntry,
                 getEntryFromView().buildUponOfflineLogEntry().setServiceLogId(this.originalLogEntry.serviceLogId).build());
@@ -777,6 +786,20 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             resortTrackables(Settings.getTrackableComparator());
         }
 
+        public boolean hastTooManyGCVisitedLogs() {
+            int count = 0;
+            for (int i = 0; i < getCount(); i++) {
+                final Trackable t = getItem(i);
+                if (t != null && t.getBrand() == TrackableBrand.TRAVELBUG && actionLogs.get(t.getGeocode()) == LogTypeTrackable.VISITED) {
+                    count++;
+                    if (count > MAX_GC_TRACKABLE_FOUNDS) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public void resortTrackables(final TrackableComparator comparator) {
 
             //sort trackables
@@ -879,8 +902,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                     .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
                     .setDisplayMapperPure(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypesAllowedForInventory())
-                    .set(action)
-                    .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt));
+                    .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt))
+                    .set(action);
 
 
             holder.binding.info.setOnClickListener(view -> {

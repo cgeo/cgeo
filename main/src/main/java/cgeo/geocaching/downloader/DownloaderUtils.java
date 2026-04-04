@@ -6,7 +6,6 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.DownloaderConfirmationBinding;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -28,6 +27,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
@@ -63,10 +63,12 @@ import androidx.work.WorkManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class DownloaderUtils {
@@ -238,7 +240,7 @@ public class DownloaderUtils {
     }
 
     private static long addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && !PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions()) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && !PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions()) {
             // those versions still need WRITE_EXTERNAL_STORAGE permission to enqueue a download
             SimpleDialog.ofContext(activity).setTitle(TextParam.id(R.string.permission_missing)).setMessage(TextParam.id(R.string.storage_permission_needed)).show();
             return -1;
@@ -403,7 +405,7 @@ public class DownloaderUtils {
         final List<ImmutableTriple<Integer, String, CharSequence>> offlineItems = new ArrayList<>();
 
         for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS)) {
-            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.MAP_FILE_EXTENSION)) {
+            if (!fi.isDirectory && Strings.CI.endsWith(fi.name, FileUtils.MAP_FILE_EXTENSION)) {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOAD_TYPE_ALL_MAPS.id, fi.name, fi.name));
             }
         }
@@ -413,7 +415,7 @@ public class DownloaderUtils {
             }
         }
         for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.BACKGROUND_MAPS)) {
-            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
+            if (!fi.isDirectory && Strings.CI.endsWith(fi.name, FileUtils.BACKGROUND_MAP_FILE_EXTENSION)) {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOADTYPE_MAP_OPENANDROMAPS_BACKGROUNDS.id, fi.name, fi.name));
             }
         }
@@ -429,6 +431,7 @@ public class DownloaderUtils {
                 offlineItems.add(new ImmutableTriple<>(DOWNLOADTYPE_LANGUAGE_MODEL.id, candidate, LocalizationUtils.getLocaleDisplayName(candidate, false, true)));
             }
         }
+        Collections.sort(offlineItems, (left, right) -> TextUtils.COLLATOR.compare(left.getRight(), right.getRight()));
         showDialog(activity, offlineItems);
     }
 
@@ -471,7 +474,7 @@ public class DownloaderUtils {
                         if (folder != null) {
                             final List<ContentStorage.FileInformation> files = cs.list(folder);
                             for (ContentStorage.FileInformation fi : files) {
-                                if (StringUtils.equals(fi.name, offlineItem.middle)) {
+                                if (Strings.CS.equals(fi.name, offlineItem.middle)) {
                                     cs.delete(fi.uri);
                                 }
                             }
@@ -481,7 +484,6 @@ public class DownloaderUtils {
                     }
                     ActivityMixin.showShortToast(activity, activity.getResources().getQuantityString(R.plurals.files_deleted, filesDeleted, filesDeleted));
                     // update map lists in case something has changed there
-                    MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
                     TileProviderFactory.buildTileProviderList(true);
                 });
     }
@@ -617,5 +619,4 @@ public class DownloaderUtils {
 
         SimpleDialog.of(activity).setTitle(R.string.debug_current_downloads).setMessage(TextParam.text(sb.toString()).setMarkdown(true)).show();
     }
-
 }

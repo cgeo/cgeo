@@ -13,7 +13,6 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -27,6 +26,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -58,7 +58,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         return isDownloadPending(geocache.getGeocode());
     }
 
-    public static void downloadCaches(final Activity context, final Set<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    public static void downloadCaches(final Activity context, final Collection<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (geocodes.isEmpty()) {
             ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
             return;
@@ -111,7 +111,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), isOffline, true, isOffline, onStartCallback);
     }
 
-    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    private static void askForListsIfNecessaryAndDownload(final Activity context, final Collection<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (isOffline) {
             downloadCachesInternal(context, geocodes, null, keepExistingLists, forceRedownload, onStartCallback);
         } else if (Settings.getChooseList()) {
@@ -122,7 +122,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         }
     }
 
-    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
+    private static void downloadCachesInternal(final Activity context, final Collection<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
 
         final ArrayList<String> newGeocodes = new ArrayList<>();
 
@@ -143,6 +143,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             return;
         }
 
+        Log.d("DOWNLOAD: " + newGeocodes);
+
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
         ContextCompat.startForegroundService(context, intent);
@@ -162,7 +164,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         shouldStop = false;
         final PendingIntent actionCancelIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(this, StopCacheDownloadServiceReceiver.class),
-                ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
@@ -260,9 +262,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     private void showEndNotification(final String text) {
-        notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true).build());
-
+        Notifications.send(this, Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
+                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true));
     }
 
     private static class DownloadTaskProperties {

@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -26,16 +27,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
 
+    private static final String STATE_COORDINATE_FORMAT_POSITION = "coordinateFormatPosition";
+
     private int waypointId = 0;
     private Waypoint waypoint = null;
     private TextView waypointDistance = null;
     private WaypointPopupBinding binding;
+    private int coordinateFormatPosition = 0;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -47,6 +52,15 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
+        if (savedInstanceState != null) {
+            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_COORDINATE_FORMAT_POSITION, coordinateFormatPosition);
     }
 
     @Override
@@ -79,10 +93,13 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
         try {
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
-            binding.toolbar.toolbar.setTitle(wpCode);
-            binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
-            onCreatePopupOptionsMenu(binding.toolbar.toolbar, this, cache);
-            binding.toolbar.toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
+            final Toolbar toolbar = binding.toolbar.toolbar;
+            toolbar.setTitle(wpCode);
+            setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
+
+            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            onCreatePopupOptionsMenu(toolbar, this, cache);
+            toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
@@ -97,6 +114,12 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 details.add(R.string.cache_name, waypoint.getName());
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
+
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            if (coordinateSwitcher != null) {
+                coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
+            }
+
             details.addLatestLogs(cache);
 
             // addWideHTML should go to the end of the list

@@ -38,7 +38,7 @@ public final class GCConstants {
     static final Pattern PATTERN_SIZE = Pattern.compile("/icons/container/([a-z_]+)\\.");
     static final Pattern PATTERN_LATLON = Pattern.compile("<span id=\"uxLatLon\"[^>]*>(.*?)</span>");
     static final Pattern PATTERN_LATLON_ORIG = Pattern.compile("\\{\"isUserDefined\":true[^}]+?\"oldLatLngDisplay\":\"([^\"]+)\"\\}");
-    static final Pattern PATTERN_LOCATION = Pattern.compile(Pattern.quote("<span id=\"ctl00_ContentBody_Location\">In ") + "(?:<a href=[^>]*>)?(.*?)<");
+    static final Pattern PATTERN_LOCATION = Pattern.compile("It&#39;s located in (.*?)\\.");
     // homeLocation: {"Latitude":50.12345,"Longitude":10.98765}
     static final Pattern PATTERN_LOCATION_LOGIN = Pattern.compile("homeLocation:\\s*\\{\\\"Latitude\\\":(-?\\d*\\.\\d*),\\\"Longitude\\\":(-?\\d*\\.\\d*)\\}");
     static final Pattern PATTERN_PERSONALNOTE = Pattern.compile("<div id=\"srOnlyCacheNote\"[^>]*>(.*?)</div>", Pattern.DOTALL);
@@ -102,11 +102,11 @@ public final class GCConstants {
     public static final Pattern PATTERN_FINDCOUNT = Pattern.compile("\"findCount\":\\s*([0-9]+)[,\\s]");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
+    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("window(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /**
      * Use replaceAll("[,.]","") on the resulting string before converting to an int
      */
-    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
+    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("window(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
 
     // Patterns for parsing trackables
 
@@ -176,6 +176,8 @@ public final class GCConstants {
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
     static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
+    static final Pattern PATTERN_TOTAL_TRACKABLES = Pattern.compile("\"totalTrackables\":\"([\\d]+)\"");
+    static final Pattern PATTERN_LOGPAGE_TRACKABLES = Pattern.compile("\"trackables\":\\[(.+?\\})\\],[\"_sentry|\\},\"__N_SSP]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);

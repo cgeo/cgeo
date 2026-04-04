@@ -9,7 +9,6 @@ import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -18,11 +17,10 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.offlinetranslate.Translator;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
 import cgeo.geocaching.wherigo.openwig.Zone;
 
 import android.annotation.SuppressLint;
@@ -42,8 +40,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
@@ -54,7 +50,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
     private int wherigoAudioManagerListenerId;
-    private final CompositeDisposable translationDisposables = new CompositeDisposable();
 
     private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
@@ -150,7 +145,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         MenuUtils.setVisible(menu, R.id.menu_show_cartridge, WherigoGame.get().isPlaying());
-        MenuUtils.setVisible(menu, R.id.menu_translate, WherigoGame.get().isPlaying() && Translator.isSupported());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -162,9 +156,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             if (info != null) {
                 WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(info, true));
             }
-            return true;
-        } else if (menuItem == R.id.menu_translate) {
-            TranslatorUtils.changeSettings(this, WherigoGame.get().getTranslator());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -207,14 +198,13 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void showOnMap() {
-        if (!WherigoGame.get().isPlaying()) {
+        final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
+        final Viewport viewport = WherigoUtils.getZonesViewport(zones, true);
+        if (!WherigoGame.get().isPlaying() || viewport == null) {
+            DefaultMap.startActivityLive(this);
             return;
         }
-        final List<Zone> zones = WherigoThingType.LOCATION.getThingsForUserDisplay(Zone.class);
-        final Viewport viewport = WherigoUtils.getZonesViewport(zones);
-        if (viewport != null && !viewport.isJustADot()) {
-            DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
-        }
+        DefaultMap.startActivityWherigoMap(this, viewport, WherigoGame.get().getCartridgeName(), null);
     }
 
     private void goToCache(final String geocode) {
@@ -288,7 +278,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo() != null && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
-        binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
+        binding.map.setEnabled(game.isPlaying());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 
@@ -321,20 +311,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public final void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public final void onResume() {
-        super.onResume();
-
-        translationDisposables.add(TranslatorUtils.initializeView("WherigoActivity", this, WherigoGame.get().getTranslator(), binding.translate, null, null));
-    }
-
-    @Override
-    public final void onPause() {
-        super.onPause();
-
-        translationDisposables.clear();
     }
 
     @Override

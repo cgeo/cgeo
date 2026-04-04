@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
@@ -60,11 +61,19 @@ public class TranslatorUtils {
         private Disposable disposable;
 
         public ChangeableText(final Translator translator) {
-            this.translator = translator;
+            this(translator, null);
         }
 
+        public ChangeableText(final Translator translator, final CompositeDisposable compositeDisposable) {
+            this.translator = translator;
+            if (compositeDisposable != null) {
+                compositeDisposable.add(this);
+            }
+        }
+
+
         public void set(final String text, final BiConsumer<String, Boolean> textAction) {
-            if (Objects.equals(this.text, text)) {
+           if (Objects.equals(this.text, text)) {
                 return;
             }
             if (this.disposable != null) {
@@ -73,7 +82,6 @@ public class TranslatorUtils {
             this.text = text;
             this.disposable = translator.addTranslation(this.text, textAction);
         }
-
 
         @Override
         public void dispose() {
@@ -90,6 +98,11 @@ public class TranslatorUtils {
 
     private TranslatorUtils() {
         //no instance
+    }
+
+    public static boolean isTranslationActive() {
+        //as of now, user deactivates translation by setting targetlanguagecode to empty...
+        return !StringUtils.isBlank(Settings.getTranslationTargetLanguageCode());
     }
 
     @Nullable
@@ -201,7 +214,7 @@ public class TranslatorUtils {
     public static Disposable initializeView(final String id, final Context context, final Translator translator,
                                             final Button button, final View box, final TextView status) {
 
-        final androidx.core.util.Consumer<Boolean> circularSetter = ViewUtils.createCircularProgressSetter(button);
+        final Consumer<Boolean> circularSetter = ViewUtils.createCircularProgressSetter(button);
 
         //changes on state
         final Disposable disposable = translator.addStateListener((s, e) -> {
@@ -219,7 +232,7 @@ public class TranslatorUtils {
             final View visibilityView = box != null ? box : button;
             final String srcLng = translator.getSourceLanguage();
             final String detSrcLng = translator.getSourceLanguageDetected();
-            visibilityView.setVisibility(Translator.isSupported() &&
+            visibilityView.setVisibility(Translator.isActive() &&
                 (translator.getEffectiveSourceLanguage() == null || translator.isEnabled() ||
                 srcLng != null || (detSrcLng != null && !Settings.getLanguagesToNotTranslate().contains(detSrcLng)))
                 ? View.VISIBLE : View.GONE);

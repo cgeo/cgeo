@@ -34,7 +34,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
         final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
-        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature()) {
+        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature(getLogContext())) {
             if (template.getResourceId() == 0) {
                 menuLog.add(0, template.getItemId(), 0, getString(R.string.init_log_template_prefix) + template.getName());
             } else {

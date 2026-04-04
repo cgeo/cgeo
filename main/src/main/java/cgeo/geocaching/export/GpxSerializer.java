@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -32,6 +34,7 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlSerializer;
 
 public final class GpxSerializer {
@@ -108,6 +111,14 @@ public final class GpxSerializer {
 
     private void exportBatch(final XmlSerializer gpx, @NonNull final Collection<String> geocodesOfBatch) throws IOException {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
+
+        // Define the DecimalFormat for corrected output (DDD.DDDDDD format)
+        final DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance();
+        dfs.setDecimalSeparator('.');
+        final DecimalFormat df = new DecimalFormat("#.######", dfs);
+        df.setMinimumFractionDigits(1);
+        df.setMaximumFractionDigits(6);
+
         for (final Geocache cache : caches) {
             if (cache == null) {
                 continue;
@@ -120,8 +131,8 @@ public final class GpxSerializer {
                 continue;
             }
             gpx.startTag(NS_GPX, "wpt");
-            gpx.attribute("", "lat", Double.toString(coords == null ? 0 : coords.getLatitude()));
-            gpx.attribute("", "lon", Double.toString(coords == null ? 0 : coords.getLongitude()));
+            gpx.attribute("", "lat", df.format(coords == null ? 0 : coords.getLatitude()));
+            gpx.attribute("", "lon", df.format(coords == null ? 0 : coords.getLongitude()));
 
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
@@ -198,6 +209,17 @@ public final class GpxSerializer {
                     gpx.text(dateFormatZ.format(new Date(visited)));
                     gpx.endTag(NS_GSAK, "DNFDate");
                 }
+            }
+        }
+        if (cache.hasUserModifiedCoords() && cache.hasWaypoints()) {
+            final Waypoint wp = cache.getOriginalWaypoint();
+            if (wp != null && wp.getCoords() != null) {
+                gpx.startTag(NS_GSAK, "LatBeforeCorrect");
+                gpx.text(Double.toString(wp.getCoords().getLatitude()));
+                gpx.endTag(NS_GSAK, "LatBeforeCorrect");
+                gpx.startTag(NS_GSAK, "LonBeforeCorrect");
+                gpx.text(Double.toString(wp.getCoords().getLongitude()));
+                gpx.endTag(NS_GSAK, "LonBeforeCorrect");
             }
         }
         gpx.endTag(NS_GSAK, "wptExtension");
@@ -279,7 +301,7 @@ public final class GpxSerializer {
         }
         // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase(Waypoint.PREFIX_OWN, wp.getPrefix())) {
+            if (StringUtils.isBlank(wp.getPrefix()) || Strings.CI.equals(Waypoint.PREFIX_OWN, wp.getPrefix())) {
                 maxPrefix++;
                 wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
             }
@@ -414,7 +436,7 @@ public final class GpxSerializer {
 
     private static String getLocationPart(@NonNull final Geocache cache, final int partIndex) {
         final String location = cache.getLocation();
-        if (StringUtils.contains(location, ", ")) {
+        if (Strings.CS.contains(location, ", ")) {
             final String[] parts = StringUtils.split(location, ',');
             if (parts.length == 2) {
                 return StringUtils.trim(parts[partIndex]);

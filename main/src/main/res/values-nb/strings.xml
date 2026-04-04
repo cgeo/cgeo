@@ -201,8 +201,7 @@
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- Contacts -->
     <string name="contact_multiple_matches">Kontakt: Flere treff</string>
-    <!-- translation -->
-    <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
@@ -305,9 +304,6 @@
     <string name="more_information">Mer informasjon</string>
     <string name="undo">Angre</string>
     <string name="dont_show_again">Ikke vis igjen</string>
-    <string name="warn_gm_not_available">Google Maps er ikke tilgjengelig.</string>
-    <string name="switch_to_mf">Google Play Service på din enhet er utdatert. Vil du endre karttjeneste til Mapsforge i stedet?</string>
-    <string name="switched_to_mf">Standard kart byttet til Mapsforge kartleverandør. Start kartet på nytt nå.</string>
     <!-- location service -->
     <string name="loc_last">Sist sett</string>
     <string name="loc_net">Nettverk</string>
@@ -341,9 +337,7 @@
     <string name="caches_no_cache">ingen cacher</string>
     <string name="caches_more_caches">flere cacher</string>
     <string name="caches_more_caches_no">ingen flere cacher</string>
-    <string name="caches_more_caches_loading">Laster cacher…</string>
     <string name="caches_more_caches_currently">for øyeblikket</string>
-    <string name="caches_more_caches_remaining">Last gjenværende cacher (%1$d / %2$d)</string>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>
@@ -633,9 +627,7 @@
     <string name="init_summary_oc_uk">Last cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencache.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
     <string name="init_summary_su">Last cacher fra Geocaching.su</string>
-    <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
     <string name="err_vote_send_rating">Feil under sending av vurdering.</string>
-    <string name="vote_sent">Stemmegivning sendt</string>
     <string name="init_login_popup">Logg inn</string>
     <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
     <string name="init_login_popup_ok">Innlogging fullført</string>
@@ -675,8 +667,6 @@
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Sted</string>
-    <string name="init_ratingwanted">GCvote-rangering</string>
-    <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners / egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
     <string name="init_openlastdetailspage">Sist brukte fane</string>
@@ -796,7 +786,6 @@
     <string name="init_dataDir">Velg mappe for data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
     <string name="init_maptrail">Vis spor</string>
-    <string name="init_maptrail_length">Historikkspor maks. lengde</string>
     <string name="init_maptrail_length_summary">Angi maksimal lengde på historiesporet (håndhevet ved hver oppstart av c:geo). Standardverdien er 700 poeng - juster i henhold til tilgjengelig minne.</string>
     <string name="init_summary_maptrail">Vis spor på kart</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
@@ -891,7 +880,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
-    <string name="map_source_osm_offline">Lagret lokalt</string>
     <string name="map_source_osm_offline_combined">Kombinert (Lagret lokalt)</string>
     <string name="map_source_attribution_dialog_title">Kart-rettigheter</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
@@ -1059,9 +1047,7 @@
     <string name="cache_variables">Variabler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Veipunkter (%d)</string>
     <string name="cache_waypoints_add">Legg til veipunkt</string>
-    <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Skjul besøkte veipunkter</string>
     <string name="cache_waypoints_remove_original_waypoint">Veipunkt kopiert fra utklippstavlen til denne cachen.\n\nFjern opprinnelige veipunkt?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
@@ -1074,7 +1060,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Laster spoiler-bilder</string>
     <string name="cache_dialog_loading_details_status_logs">Laster logger</string>
     <string name="cache_dialog_loading_details_status_waypoints">Behandler veipunkter</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Laster GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Bufrer data</string>
     <string name="cache_dialog_loading_details_status_render">Klargjør visning</string>
     <string name="cache_dialog_offline_save_title">Lagret lokalt</string>
@@ -1120,7 +1105,6 @@
     <string name="cache_menu_copy_list">Kopier til en annen liste</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (lokalt lagret)</string>
-    <string name="cache_menu_vote">Avgi stemme</string>
     <string name="cache_menu_challenge_checker">Søk etter utfordringssjekkere</string>
     <string name="cache_menu_ignore">Ignorer cache</string>
     <string name="cache_log_menu_decrypt">Dekryptering/Kryptering</string>
@@ -1129,7 +1113,6 @@
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
-    <string name="cache_status_attended">Deltok</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
     <string name="cache_status_archived">Arkivert</string>
@@ -1172,8 +1155,6 @@
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Oppført på %s</string>
     <string name="cache_recently_viewed">Nylig sett på</string>
-    <string name="cache_whereyougo_start">Åpne WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
-    <string name="cache_whereyougo_install">Installer WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
     <string name="cache_chirpwolf_start">Denne cachen bruker kanskje en chirp-sender eller en annen type trådløs signaler. For å lese chirp data kan du åpne Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Denne cachen bruker kanskje en chirp-sender eller en annen type trådløs signaler. For å lese chirp data kan du installere Chirp Wolf.</string>
     <string name="cache_alc_start">Åpne Adventure Lab for å begynne å spille dette eventyret</string>
@@ -1192,7 +1173,7 @@
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
     <string name="cc_hint_seconds">sekunder</string>
@@ -1351,7 +1332,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1361,7 +1341,6 @@
     <string name="search_kw">Nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
     <string name="search_finder">Funnet av</string>
-    <string name="search_filter">Filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_destination">Åpne mål i c:geo</string>
     <string name="add_target_to">Legg til mål til</string>
@@ -1815,7 +1794,6 @@
     <string name="preference_colorpicker_select_opaqueness">Velg gjennomsiktighet</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Skriv inn en verdi mellom %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>
     <string name="number_input_err_boundarymax">Verdien er for stor - settes til maksimalverdien</string>
     <string name="number_input_err_format">Feil tallformat</string>
@@ -1838,7 +1816,6 @@
     <string name="map_manual_targets_cleared">Manuelle mål slettet</string>
     <string name="map_clear_individual_route">Slett individuell rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/veipunkter fra din individuelle rute?</string>
-    <string name="map_individual_route_cleared">Individuell rute fjernet</string>
     <string name="sorted_route_saved">Individuell rute lagret</string>
     <string name="load_individual_route_error">Feil ved lasting av individuell rute</string>
     <string name="route_item_not_yet_loaded">Rute element ikke lastet inn enda</string>
@@ -1892,7 +1869,6 @@
     <string name="add_setting_missing_type">Du må velge en preferansetype</string>
     <string name="add_setting_already_exists">En preferanse med dette navnet finnes allerede</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_intenttitle">c:geo lokal filbehandler</string>
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
@@ -1926,7 +1902,6 @@
     <string name="mapserver_openandromaps_themes_info">Detaljert karttema, laget for \"OpenAndroMaps\"-kart</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slett sporhistorikk</string>
-    <string name="map_trailhistory_cleared">sporhistorikk slettet</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_trail_hide">Skjul sporhistorikk</string>
     <!-- history track export -->

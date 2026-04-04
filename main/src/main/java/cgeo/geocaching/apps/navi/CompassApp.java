@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 class CompassApp extends AbstractPointNavigationApp {
 
     CompassApp() {
-        super(getString(R.string.compass_title), null);
+        super(R.string.compass_title, null);
     }
 
     @Override

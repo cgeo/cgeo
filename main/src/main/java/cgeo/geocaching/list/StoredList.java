@@ -17,11 +17,14 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -46,18 +49,17 @@ import java.util.stream.Stream;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", EmojiUtils.NO_EMOJI, true, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
-    public final int markerId;
     public final boolean preventAskForDeletion;
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title);
-        this.markerId = markerId;
+        super(id, title, markerId);
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
@@ -90,7 +92,7 @@ public final class StoredList extends AbstractList {
         private final WeakReference<Activity> activityRef;
         private final Resources res;
 
-        private static final String GROUP_SEPARATOR = ":";
+        public static final String GROUP_SEPARATOR = ":";
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
@@ -188,7 +190,7 @@ public final class StoredList extends AbstractList {
 
         private void configureListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model, final Set<Integer> selectedListIds) {
 
-            //Display for normal items
+            // Display for normal items
             model.setDisplayMapper((item, itemGroup) -> {
                 String title = item.getTitle();
                 if (item instanceof StoredList) {
@@ -202,8 +204,7 @@ public final class StoredList extends AbstractList {
             }, (item, itemGroup) -> item.getTitle(), null);
             model.setDisplayIconMapper((item) -> UserInterface.getImageForList(item, false));
 
-
-            //GROUPING
+            // GROUPING
             model.activateGrouping(item -> getGroupFromList(item, selectedListIds))
                     .setGroupGroupMapper(UserInterface::getGroupFromGroup)
                     .setItemGroupComparator(getGroupAwareListSorter(selectedListIds))
@@ -219,7 +220,6 @@ public final class StoredList extends AbstractList {
                     .setGroupPruner(gi -> gi.getSize() >= 2)
                     .setReducedGroupSaver("storedlist", g -> g, g -> g);
         }
-
 
         private Comparator<Object> getGroupAwareListSorter(final Set<Integer> selectedIds) {
             final Collator collator = Collator.getInstance();
@@ -267,15 +267,11 @@ public final class StoredList extends AbstractList {
             if (item instanceof StoredList) {
                 if (item.id == STANDARD_LIST_ID) {
                     return ImageParam.id(R.drawable.ic_menu_save);
-                } else if (((StoredList) item).markerId > 0) {
-                    return ImageParam.emoji(((StoredList) item).markerId, 30);
+                } else if (item.markerId > 0) {
+                    return ImageParam.emoji(item.markerId, 30);
                 }
             } else if (item instanceof PseudoList) {
-                if (item.id == PseudoList.ALL_LIST.id) {
-                    return ImageParam.id(R.drawable.ic_menu_list_group);
-                } else if (item.id == PseudoList.HISTORY_LIST.id) {
-                    return ImageParam.id(R.drawable.ic_menu_recent_history);
-                }
+                return ImageParam.id(item.markerId);
             }
             if (isGroup) {
                 return ImageParam.id(R.drawable.downloader_folder);
@@ -288,7 +284,7 @@ public final class StoredList extends AbstractList {
             if (!(item instanceof StoredList)) {
                 return null;
             }
-            //selected lists are not in a group
+            // selected lists are not in a group
             if (selectedIds != null && selectedIds.contains(item.id)) {
                 return null;
             }
@@ -382,39 +378,48 @@ public final class StoredList extends AbstractList {
             final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
             final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
             final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText listname = menu.findViewById(R.id.title);
 
-            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim() : "";
+            final String current = defaultValue != null ? defaultValue.substring(defaultValue.lastIndexOf(GROUP_SEPARATOR) + 1).trim() : "";
 
-            final List<String> hierarchies = DataStore.getListHierarchy();
-            final boolean hasHierarchies = hierarchies.size() > 1;
-            if (hasHierarchies) {
-                if (StringUtils.isEmpty(hierarchies.get(0))) {
-                    hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
-                }
-                listprefix.setVisibility(View.VISIBLE);
-                listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
-                listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
-            } else {
-                listprefix.setVisibility(View.GONE);
-            }
+            final List<String> hierarchies = DataStore.getFullListHierarchy();
+            hierarchies.add(0, activity.getString(R.string.init_custombnitem_none));
+            hierarchies.add(1, activity.getString(R.string.list_create_parent));
+
+            listprefix.setVisibility(View.VISIBLE);
+            listprefixView.setText(defaultValue != null ? defaultValue.substring(0, defaultValue.length() - current.length()) : "");
+            listprefixView.setAdapter(new NewListAdapter(activity, R.layout.createlist_item , hierarchies));
 
             ((EditText) menu.findViewById(R.id.title)).setText(current);
             final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
                     .setTitle(dialogTitle)
                     .setPositiveButton(buttonTitle, ((d, which) -> {
                             String prefix = "";
-                            if (hasHierarchies) {
-                                final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
-                                if (!StringUtils.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
-                                    prefix = temp;
+                            final String temp = ((AutoCompleteTextView) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.listprefixView))).getText().toString();
+                            if (Strings.CS.equals(temp, activity.getString(R.string.list_create_parent))) {
+                                prefix = Objects.requireNonNull(((TextInputEditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.newParent))).getText()).toString();
+                                if (!Strings.CS.endsWith(prefix.trim(), GROUP_SEPARATOR)) {
+                                    prefix = prefix.trim() + GROUP_SEPARATOR;
                                 }
+                            } else if (!Strings.CS.equals(temp, activity.getString(R.string.init_custombnitem_none))) {
+                                prefix = temp + (!Strings.CS.endsWith(temp.trim(), GROUP_SEPARATOR) ? GROUP_SEPARATOR : "");
+                            }
+                            if (Strings.CS.equals(prefix, GROUP_SEPARATOR)) {
+                                prefix = "";
                             }
                             runnable.call(prefix + ((EditText) Objects.requireNonNull(((AlertDialog) d).findViewById(R.id.title))).getText().toString());
                         }))
                     .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                     .setView(menu);
             Keyboard.show(activity, menu.findViewById(R.id.title));
-            builder.show();
+            final AlertDialog dialog = builder.show();
+            ((NewListAdapter) listprefixView.getAdapter()).setNewParentInput(dialog.findViewById(R.id.newParentWrapper));
+
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            listname.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0)));
+
+            ViewUtils.closeKeyboardOnLosingFocus(activity, listname);
+            ViewUtils.closeKeyboardOnLosingFocus(activity, menu.findViewById(R.id.newParent));
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -458,9 +463,9 @@ public final class StoredList extends AbstractList {
                     .setPositiveButton(android.R.string.ok, ((d, which) -> {
                         final String from = listprefixView.getText().toString();
                         final String to = title.getText().toString();
-                        if (!StringUtils.equals(from, to)) {
+                        if (!Strings.CS.equals(from, to)) {
                             SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
-                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(":") < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(GROUP_SEPARATOR) < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
                                 ).confirm(() -> {
                                     DataStore.renameListPrefix(from, to);
                                     runAfterRename.run();
@@ -477,7 +482,6 @@ public final class StoredList extends AbstractList {
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
             }));
         }
-
     }
 
     /**
@@ -514,4 +518,29 @@ public final class StoredList extends AbstractList {
         return true;
     }
 
+    /** enable/disable given input field (for new parent list name) on tapping the "create new parent" entry (= entry on position 1) */
+    private static class NewListAdapter extends ArrayAdapter<String> {
+
+        View newParentInput = null;
+
+        NewListAdapter(final @NonNull Context context, final int resource, final @NonNull List<String> objects) {
+            super(context, resource, objects);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @NonNull
+        @Override
+        public View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
+            final View v = super.getView(position, convertView, parent);
+            v.setOnTouchListener((view, motionEvent) -> {
+                ViewUtils.setVisibility(newParentInput, position == 1 ? View.VISIBLE : View.GONE); // pos 1 is "new parent list"
+                return false;
+            });
+            return v;
+        }
+
+        public void setNewParentInput(final View newParentInput) {
+            this.newParentInput = newParentInput;
+        }
+    }
 }

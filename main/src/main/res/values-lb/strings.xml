@@ -143,8 +143,7 @@
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
     <!-- Contacts -->
-    <!-- translation -->
-    <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
+    <!-- External translation -->
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
@@ -238,9 +237,6 @@
     <string name="more_information">weider Informatiounen</string>
     <string name="undo">Réckgängeg</string>
     <string name="dont_show_again">Net méi uweisen</string>
-    <string name="warn_gm_not_available">Google Maps ass net verfügbar.</string>
-    <string name="switch_to_mf">De Google Play Service ass veraltert. Wëlls du op Mapsforge Kaarten ëmschalten?</string>
-    <string name="switched_to_mf">D\'Standard Kaart gouf op d\'Mapsforge Kaart ëmgeschalt. D\'Kaart wgl. nees nei starten.</string>
     <!-- location service -->
     <string name="loc_last">Läscht Positioun</string>
     <string name="loc_net">Netzwierk</string>
@@ -268,7 +264,6 @@
     <string name="caches_no_cache">Kee Cache</string>
     <string name="caches_more_caches">Méi Cachen lueden</string>
     <string name="caches_more_caches_no">Keng aner Cachen</string>
-    <string name="caches_more_caches_loading">Cachen gi gelueden…</string>
     <string name="caches_more_caches_currently">aktuell</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
@@ -411,9 +406,7 @@
     <string name="init_summary_oc_uk">Cachen vun opencaching.uk lueden</string>
     <string name="init_oc_uk_description">c:geo erlaben op opencaching.uk zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="init_summary_su">Cachen vu Geocaching.su lueden</string>
-    <string name="init_gcvote_password_description">Fir ee Cache bewäerten ze kënnen, folleg d\'Uleedung op GCVote.com a tipp däin GCVote-Passwort hei.</string>
     <string name="err_vote_send_rating">Feeler beim Verschécken vun der Bewäertung.</string>
-    <string name="vote_sent">Bewäertung erfollegräich verschéckt</string>
     <string name="init_login_popup">Umellen</string>
     <string name="init_login_popup_working">Umeldung…</string>
     <string name="init_login_popup_ok">Umellen OK</string>
@@ -440,8 +433,6 @@
     <string name="init_signature_template_log">Log Text</string>
     <string name="init_signature_template_size">Gréisst</string>
     <string name="init_signature_template_type">Typ</string>
-    <string name="init_ratingwanted">GCVote-Bewäertung</string>
-    <string name="init_summary_ratingwanted">Cache-Bewertung vu GCVote.com lueden</string>
     <string name="init_friends_and_own_logs_wanted">Eegen Logs a Logs vu Frënn uweisen</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zousätzlech Logbuchsäite fir Logs vun dir an denge Frënn uweisen</string>
     <string name="init_openlastdetailspage">Detailer uweisen vun der leschter Säit déi besicht gouf</string>
@@ -494,9 +485,8 @@
     <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
-    <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
-    <!-- coordinate calculator hints -->
+    <!-- coordinate input dialog -->
     <!-- gpx -->
     <!-- import -->
     <!-- popup -->
@@ -556,7 +546,6 @@
     <!-- colors -->
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- changed permissions one time message -->

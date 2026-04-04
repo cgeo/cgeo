@@ -21,7 +21,7 @@ import static app.organicmaps.api.OrganicMapsApi.showPointsOnMap;
 class OrganicMapsApp extends AbstractPointNavigationApp {
 
     protected OrganicMapsApp() {
-        super(getString(R.string.caches_menu_organicmaps), null);
+        super(R.string.caches_menu_organicmaps, null);
     }
 
     @Override

@@ -11,8 +11,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
@@ -51,6 +49,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -77,8 +76,9 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.text.StringEscapeUtils;
@@ -124,22 +124,24 @@ public final class GCParser {
         final JsonNode features = json.get("data").get("layer").get("features");
         for (int i = 0; i < features.size(); i++) {
             final JsonNode properties = features.get(i).get("properties");
-            final Geocache cache = new Geocache();
-            cache.setName(properties.get("name").asText());
-            cache.setGeocode(properties.get("key").asText());
-            cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
-            cache.setArchived(properties.get("archived").asBoolean());
-            cache.setDisabled(!properties.get("available").asBoolean());
-            cache.setCoords(new Geopoint(properties.get("lat").asDouble(), properties.get("lng").asDouble()));
-            final String icon = properties.get("icon").asText();
-            if ("MyHide".equals(icon)) {
-                cache.setOwnerUserId(Settings.getUserName());
-            } else if ("MyFind".equals(icon)) {
-                cache.setFound(true);
-            } else if (icon.startsWith("solved")) {
-                cache.setUserModifiedCoords(true);
+            if (properties != null) {
+                final Geocache cache = new Geocache();
+                cache.setName(properties.get("name").asText());
+                cache.setGeocode(properties.get("key").asText());
+                cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
+                cache.setArchived(properties.get("archived").asBoolean());
+                cache.setDisabled(!properties.get("available").asBoolean());
+                cache.setCoords(new Geopoint(properties.get("lat").asDouble(), properties.get("lng").asDouble()));
+                final String icon = properties.get("icon").asText();
+                if ("MyHide".equals(icon)) {
+                    cache.setOwnerUserId(Settings.getUserName());
+                } else if ("MyFind".equals(icon)) {
+                    cache.setFound(true);
+                } else if (icon.startsWith("solved")) {
+                    cache.setUserModifiedCoords(true);
+                }
+                caches.add(cache);
             }
-            caches.add(cache);
         }
 
         final SearchResult searchResult = new SearchResult();
@@ -213,7 +215,7 @@ public final class GCParser {
             return UNKNOWN_PARSE_ERROR;
         }
 
-        if (StringUtils.contains(pageIn, GCConstants.STRING_404_FILE_NOT_FOUND)) {
+        if (Strings.CS.contains(pageIn, GCConstants.STRING_404_FILE_NOT_FOUND)) {
             return ImmutablePair.of(StatusCode.CACHE_NOT_FOUND, null);
         }
 
@@ -377,7 +379,7 @@ public final class GCParser {
         if (result != null) {
             // replace linebreak and paragraph tags
             final String hint = GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
-            cache.setHint(StringUtils.replace(hint, "</p>", "").trim());
+            cache.setHint(Strings.CS.replace(hint, "</p>", "").trim());
         }
 
         cache.checkFields();
@@ -478,7 +480,7 @@ public final class GCParser {
             final String url = matcherBackgroundImage.group(1);
             boolean present = false;
             for (final Image image : cacheSpoilers) {
-                if (StringUtils.equals(image.getUrl(), url)) {
+                if (Strings.CS.equals(image.getUrl(), url)) {
                     present = true;
                     break;
                 }
@@ -586,7 +588,7 @@ public final class GCParser {
 
                     // waypoint latitude and longitude
                     latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
-                    if (!StringUtils.startsWith(latlon, "???")) {
+                    if (!Strings.CS.startsWith(latlon, "???")) {
                         waypoint.setCoords(new Geopoint(latlon));
                     } else {
                         waypoint.setOriginalCoordsEmpty(true);
@@ -682,7 +684,7 @@ public final class GCParser {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
     }
 
-    private static SearchResult searchByMap(final IConnector con, final Parameters params) {
+    private static SearchResult searchByMap(final IConnector con, final Parameters params, final String context) {
         final String page = GCLogin.getInstance().getRequestLogged(GCConstants.URL_LIVE_MAP, params);
 
         if (StringUtils.isBlank(page)) {
@@ -698,16 +700,16 @@ public final class GCParser {
 
         params.add("st", sessionToken);
 
-        final String pqJson = GCLogin.getInstance().getRequestLogged("https://tiles01.geocaching.com/map.pq", params);
+        final String pqJson = GCLogin.getInstance().getRequestLogged("https://tiles01.geocaching.com/map." + context, params);
 
         SearchResult searchResult;
         try {
-            searchResult = parseMap(con, "https://tiles01.geocaching.com/map.pq" + "?" + params, pqJson, 0);
+            searchResult = parseMap(con, "https://tiles01.geocaching.com/map." + context + "?" + params, pqJson, 0);
         } catch (JsonProcessingException e) {
             searchResult = null;
         }
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.w("GCParser.searchByAny: No cache parsed");
+            Log.w("GCParser.searchByMap : No cache parsed");
             return searchResult;
         }
 
@@ -725,7 +727,58 @@ public final class GCParser {
         }
 
         final Parameters params = new Parameters("pq", shortGuid, "hash", pqHash);
-        return searchByMap(con, params);
+        return searchByMap(con, params, "pq");
+    }
+
+    public static SearchResult searchByBookmarkList(final IConnector con, final String bmGuid, final int alreadyTaken) {
+        final Parameters params = new Parameters("skip", String.valueOf(alreadyTaken), "take", "1000");
+
+        final String url = "https://www.geocaching.com/api/proxy/web/v1/lists/" + bmGuid + "/geocaches";
+        final String page = GCLogin.getInstance().getRequestLogged(url, params);
+
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchByBookmarkList: No data from server");
+            return null;
+        }
+
+        final List<Geocache> caches = new ArrayList<>();
+        try {
+            final JsonNode json = JsonUtils.reader.readTree(page);
+
+            final int totalCount = json.get("total").asInt();
+            final JsonNode jsonData = json.get("data");
+            for (int i = 0; i < jsonData.size(); i++) {
+                final Geocache cache = new Geocache();
+                final JsonNode properties = jsonData.get(i);
+                final JsonNode stateProps = properties.get("state");
+                cache.setName(properties.get("name").asText());
+                cache.setGeocode(properties.get("referenceCode").asText());
+                cache.setOwnerDisplayName(properties.get("owner").asText());
+                cache.setDifficulty(properties.get("difficulty").floatValue());
+                cache.setTerrain(properties.get("terrain").floatValue());
+                cache.setSize(CacheSize.getByGcId(properties.get("containerType").asInt()));
+                cache.setType(CacheType.getByWaypointType(properties.get("geocacheType").asText()));
+
+                cache.setArchived(stateProps.get("isArchived").asBoolean());
+                cache.setDisabled(!stateProps.get("isAvailable").asBoolean());
+                cache.setPremiumMembersOnly(stateProps.get("isPremiumOnly").asBoolean());
+
+                caches.add(cache);
+            }
+
+            final int currentFetched = alreadyTaken + caches.size();
+            final SearchResult searchResult = new SearchResult(caches);
+            searchResult.setLeftToFetch(con, totalCount - currentFetched);
+            searchResult.setToContext(con, b -> {
+                b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, currentFetched);
+                b.putString(GCConnector.SEARCH_CONTEXT_BOOKMARK, bmGuid);
+            });
+
+            return searchResult;
+        } catch (final Exception e) {
+            Log.e("GCParser.searchByBookmarkLists: error parsing html page", e);
+            return null;
+        }
     }
 
     @Nullable
@@ -1063,17 +1116,16 @@ public final class GCParser {
     }
 
     @Nullable
-    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log) {
-        final Parameters params = new Parameters("decrypt", "y");
+    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid) {
         if (StringUtils.isNotBlank(geocode)) {
-            params.put("wp", geocode);
+            final Parameters params = new Parameters("decrypt", "y");
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/geocache/" + geocode, params, false);
         } else if (StringUtils.isNotBlank(guid)) {
+            final Parameters params = new Parameters("decrypt", "y");
             params.put("guid", guid);
+            return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
         }
-        params.put("log", log);
-        params.put("numlogs", "0");
-
-        return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
+        return null;
     }
 
     /**
@@ -1121,7 +1173,7 @@ public final class GCParser {
     }
 
     private static String getUserToken(@NonNull final String geocode) {
-        return parseUserToken(requestHtmlPage(geocode, null, "n"));
+        return parseUserToken(requestHtmlPage(geocode, null));
     }
 
     private static String parseUserToken(final String page) {
@@ -1129,7 +1181,7 @@ public final class GCParser {
     }
 
     private static String getRequestVerificationToken(@NonNull final Geocache cache) {
-        return parseRequestVerificationToken(requestHtmlPage(cache.getGeocode(), null, "n"));
+        return parseRequestVerificationToken(requestHtmlPage(cache.getGeocode(), null));
     }
 
     private static String parseRequestVerificationToken(final String page) {
@@ -1194,7 +1246,7 @@ public final class GCParser {
                 final String title = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE_TITLE, true, "");
                 if (StringUtils.isNotBlank(title)) {
                     final String nameWithHTML = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "");
-                    final int pos = StringUtils.lastIndexOfIgnoreCase(title, nameWithHTML);
+                    final int pos = Strings.CI.lastIndexOf(title, nameWithHTML);
                     if (pos != INDEX_NOT_FOUND) {
                         type = substring(title, 0, pos - 3);
                         type = TextUtils.stripHtml(type);
@@ -1309,9 +1361,9 @@ public final class GCParser {
                 final String details = StringUtils.trim(matcherDetailsImage.group(4));
 
                 if (StringUtils.isNotEmpty(image)) {
-                    trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
+                    trackable.setImage(Strings.CS.replace(image, "/display/", "/large/"));
                 }
-                if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
+                if (StringUtils.isNotEmpty(details) && !Strings.CS.equals(details, "No additional details available.")) {
                     trackable.setDetails(convertLinks(details));
                 }
             }
@@ -1390,7 +1442,7 @@ public final class GCParser {
         }
 
         // tracking code
-        if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(), possibleTrackingcode)) {
+        if (!Strings.CI.equals(trackable.getGeocode(), possibleTrackingcode)) {
             trackable.setTrackingcode(possibleTrackingcode);
         }
 
@@ -1405,7 +1457,7 @@ public final class GCParser {
         if (input == null) {
             return null;
         }
-        return StringUtils.replace(input, "../", GCConstants.GC_URL);
+        return Strings.CS.replace(input, "../", GCConstants.GC_URL);
     }
 
     public enum Logs {
@@ -1512,7 +1564,7 @@ public final class GCParser {
                         final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                         final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                         String description = image.path("Descr").asText();
-                        if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
+                        if (Strings.CS.contains(description, "Geocaching®") && description.length() < 60) {
                             description = null;
                         }
                         final Image logImage = new Image.Builder()
@@ -1558,21 +1610,21 @@ public final class GCParser {
 
     @NonNull
     static List<LogType> parseTypes(final String page) {
-            final AvailableLogType[] availableTypes = parseLogTypes(page);
-            if (availableTypes == null) {
-                return Collections.emptyList();
-            }
-            return CollectionStream.of(availableTypes)
-                    .filter(a -> a.value > 0)
-                    .map(a -> LogType.getById(a.value))
-                    .filter(t -> t != LogType.UPDATE_COORDINATES)
-                    .toList();
+        final AvailableLogType[] availableTypes = parseLogTypes(page);
+        if (availableTypes == null) {
+            return Collections.emptyList();
         }
+        return Arrays.asList(availableTypes).stream()
+                .filter(a -> a.value > 0)
+                .map(a -> LogType.getById(a.value))
+                .filter(t -> t != LogType.UPDATE_COORDINATES)
+                .toList();
+    }
 
     private static AvailableLogType[] parseLogTypes(final String page) {
         //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
         if (StringUtils.isBlank(page)) {
-            return new AvailableLogType[0];
+            return null;
         }
 
         final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
@@ -1583,7 +1635,49 @@ public final class GCParser {
             return MAPPER.readValue("[" + match + "]", AvailableLogType[].class);
         } catch (final Exception e) {
             Log.e("Error parsing log types from [" + match + "]", e);
-            return new AvailableLogType[0];
+            return null;
+        }
+    }
+
+    static int parseTrackableCount(final String page) {
+        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TOTAL_TRACKABLES, null);
+        try {
+            return Integer.parseInt(match);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    @NonNull
+    static List<Trackable> parseTrackables(final String page) {
+        final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = parseTrackablesJson(page);
+        if (trackableInventoryItems == null) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(trackableInventoryItems).stream().map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.setName(entry.name);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+        }).toList();
+    }
+
+    private static GCWebAPI.TrackableInventoryEntry[] parseTrackablesJson(final String page) {
+        if (StringUtils.isBlank(page)) {
+            return null;
+        }
+
+        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_LOGPAGE_TRACKABLES, null);
+        if (match == null) {
+            return null;
+        }
+        try {
+            return MAPPER.readValue("[" + match + "]", GCWebAPI.TrackableInventoryEntry[].class);
+        } catch (final Exception e) {
+            Log.e("Error parsing log types from [" + match + "]", e);
+            return null;
         }
     }
 
@@ -1602,14 +1696,10 @@ public final class GCParser {
         //add gallery images if wanted
         addImagesFromGallery(cache, handler);
 
-        if (Settings.isRatingWanted() && !DisposableHandler.isDisposed(handler)) {
-            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-            final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
-            if (rating != null) {
-                cache.setRating(rating.getRating());
-                cache.setVotes(rating.getVotes());
-                cache.setMyVote(rating.getMyVote());
-            }
+        // retrieve trackables
+        final List<GCWebAPI.TrackableInventoryEntry> cacheInventory = GCWebAPI.getTrackablesOfCache(cache.getGeocode());
+        if (!cacheInventory.isEmpty()) {
+            cache.mergeInventory(GCWebAPI.convertTrackableInventory(cacheInventory), EnumSet.of(TrackableBrand.TRAVELBUG));
         }
     }
 
@@ -1883,7 +1973,7 @@ public final class GCParser {
         GCLogin.putViewstates(params, viewstates);
         final String response = Network.getResponseData(Network.postRequest(uri, params));
 
-        return StringUtils.contains(response, "<p class=\"Success\">");
+        return Strings.CS.contains(response, "<p class=\"Success\">");
     }
 
     @Nullable
@@ -1896,7 +1986,7 @@ public final class GCParser {
             return username;
         }
 
-        //second try
+        // header in right top
         username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, null);
         if (StringUtils.isNotBlank(username)) {
             return username;

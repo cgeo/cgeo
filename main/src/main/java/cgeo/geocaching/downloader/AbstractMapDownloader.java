@@ -2,7 +2,6 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -30,8 +29,6 @@ abstract class AbstractMapDownloader extends AbstractDownloader {
 
     @Override
     protected void onSuccessfulReceive(final Uri result) {
-        // update list of offline maps
-        MapsforgeMapProvider.getInstance().updateOfflineMaps(null);
         LocalBroadcastManager.getInstance(CgeoApplication.getInstance()).sendBroadcast(new Intent(ACTION_INVALIDATE_MAPLIST));
     }
 

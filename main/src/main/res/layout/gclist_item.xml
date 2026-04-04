@@ -12,6 +12,19 @@
     android:paddingTop="7dip"
     tools:context=".connector.gc.AbstractListAdapter">
 
+    <!-- selection mode checkbox -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:gravity="left|fill_vertical"
+        android:paddingTop="5dip"
+        android:paddingRight="5dip"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_alignParentLeft="true"/>
+
     <LinearLayout android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +45,12 @@
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
+    <LinearLayout android:id="@+id/labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/checkbox">
+
     <TextView
         android:id="@+id/label"
         android:layout_width="fill_parent"
@@ -43,7 +62,6 @@
         android:textSize="@dimen/textSize_listsPrimary"
         android:textColor="@color/colorText_listsPrimary"
         android:paddingRight="5dip"
-        android:layout_toLeftOf="@id/buttons"
         tools:text="name"/>
 
     <TextView
@@ -57,10 +75,8 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
-        android:layout_below="@id/label"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/buttons"
         tools:text="info"
         android:maxLines="2" />
+    </LinearLayout>
 
 </RelativeLayout>

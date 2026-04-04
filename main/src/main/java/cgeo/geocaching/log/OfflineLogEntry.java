@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.Strings;
 
 /**
  * An offline log entry.
@@ -196,8 +196,8 @@ public final class OfflineLogEntry extends LogEntry {
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
-        boolean changed = StringUtils.isNotEmpty(log) && !StringUtils.equals(log, prev.log);
-        //other changes however lead to save anyway
+        boolean changed = StringUtils.isNotEmpty(log) && !Strings.CS.equals(log, prev.log);
+        // other changes however lead to save anyway
         changed |= !Objects.equals(logType, prev.logType);
         changed |= !Objects.equals(reportProblem, prev.reportProblem);
         changed |= !Objects.equals(date, prev.date);
@@ -220,7 +220,6 @@ public final class OfflineLogEntry extends LogEntry {
         }
 
         return changed;
-
     }
 
     private static boolean equalsFloat(final Float f1, final Float f2, final float prec) {

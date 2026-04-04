@@ -84,6 +84,12 @@ public class GeocacheFilterContext implements Parcelable {
         return GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig(type.name()));
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "FC:" + this.type + ":" + get();
+    }
+
     public static final Creator<GeocacheFilterContext> CREATOR = new Creator<GeocacheFilterContext>() {
         @Override
         public GeocacheFilterContext createFromParcel(final Parcel in) {

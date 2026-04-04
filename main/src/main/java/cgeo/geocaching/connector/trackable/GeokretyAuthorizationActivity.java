@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import java.util.regex.Pattern;
 
 import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 
@@ -65,11 +65,10 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 
     @Override
     protected String getExtendedErrorMsg(@Nullable final String response) {
-        if (StringUtils.equals(response, "1")) {
+        if (Strings.CS.equals(response, "1")) {
             return res.getString(R.string.err_auth_geokrety_bad_password);
         }
 
         return res.getString(R.string.err_auth_geokrety_unknown, getAuthTitle(), response);
     }
-
 }

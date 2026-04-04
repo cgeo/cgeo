@@ -27,12 +27,15 @@ public class UserDefinedMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnl
                 }
                 tilePath += "{Z}/{X}/{Y}.png";
             }
+            final String query = fullUri.getQuery();
+            setTilePath(tilePath + (StringUtils.isNotBlank(query) ? "?" + query : ""));
             setTilePath(tilePath);
         }
         supportsHillshading = true;
     }
 
     public static boolean isConfigured() {
-        return StringUtils.isNotBlank(Settings.getUserDefinedTileProviderUri());
+        final String uri = Settings.getUserDefinedTileProviderUri();
+        return StringUtils.isNotBlank(uri) && StringUtils.isNotBlank(Uri.parse(uri).getHost());
     }
 }

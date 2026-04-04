@@ -61,6 +61,12 @@ public class LiveMapGeocacheLoader {
             return this.cachedViewport != null && !cachedViewport.includes(viewport);
         }
 
+        @NonNull
+        @Override
+        public String toString() {
+            return loadState + "/vp:" + cachedViewport + "/conStates:" + connectorStates + "/conError:" + connectorInError;
+        }
+
     }
 
 
@@ -263,7 +269,7 @@ public class LiveMapGeocacheLoader {
                 this.lastConnectorStates = connStates;
             }
             final LiveDataState ldState = new LiveDataState(newState, this.cachedResultAvailableViewport, this.lastConnectorStates);
-            Log.iForce(LOGPRAEFIX + "set state to " + ldState);
+            Log.d(LOGPRAEFIX + "set state to " + ldState);
             onStateChange.accept(ldState);
         }
     }

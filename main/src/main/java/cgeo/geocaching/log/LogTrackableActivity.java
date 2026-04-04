@@ -12,7 +12,6 @@ import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
-import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
@@ -22,8 +21,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -34,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -135,7 +133,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logtrackable_activity);
-        binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
+        binding = LogtrackableActivityBinding.bind(findViewById(R.id.activity_content));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
 
@@ -286,7 +284,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
+        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode, null));
     }
 
     public void updateForNewType() {
@@ -331,7 +329,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
         @Override
         public void onClick(final View theView) {
 
-            NewCoordinateInputDialog.show(theView.getContext(), this::onCoordinatesUpdated, geopoint);
+            CoordinateInputDialog.showLocation(theView.getContext(), this::onCoordinatesUpdated, geopoint);
         }
 
         public void onCoordinatesUpdated(final Geopoint input) {
@@ -483,17 +481,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Loa
     public void finish() {
         super.finish();
         this.logActivityHelper.finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        final boolean result = super.onCreateOptionsMenu(menu);
-        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
-            if (template.getTemplateString().equals("NUMBER") || template.getTemplateString().equals("ONLINENUM")) {
-                menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());
-            }
-        }
-        return result;
     }
 
     @Override

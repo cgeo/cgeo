@@ -1,6 +1,7 @@
 package cgeo.geocaching.search;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -18,7 +19,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,10 +32,11 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     int historyIcon = R.drawable.ic_menu_recent_history;
     Context context;
     final Func0<String[]> historyFunction;
+    final Action1<String> deleteFunction;
     String searchTerm;
     boolean isShowingResultsFromHistory;
 
-    public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction) {
+    public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction, final Action1<String> deleteFunction) {
         super(context, textViewResourceId, suggestionFunction);
         if (null != suggestionFunction) {
             this.suggestionIcon = suggestionIcon;
@@ -40,6 +45,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
         }
         this.context = context;
         this.historyFunction = historyFunction;
+        this.deleteFunction = deleteFunction;
     }
 
     @NonNull
@@ -48,10 +54,20 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
         final View v = getOrCreateView(context, convertView, parent);
         final TextView textView = v.findViewById(R.id.text);
         final ImageView iconView = v.findViewById(R.id.icon);
+        final View deleteView = v.findViewById(R.id.delete);
 
         textView.setText(getItem(position));
         setHighLightedText(textView, searchTerm);
         iconView.setImageResource(isShowingResultsFromHistory ? historyIcon : suggestionIcon);
+        if (deleteFunction != null) {
+            deleteView.setOnClickListener(view -> {
+                deleteFunction.call(getItem(position));
+                final List<String> temp = new ArrayList<>(Arrays.asList(suggestions));
+                temp.remove(getItem(position));
+                suggestions = temp.toArray(String[]::new);
+                notifyDataSetChanged();
+            });
+        }
 
         return v;
     }
@@ -66,7 +82,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
      * Highlight the selected text (case insensitive) in the given TextView
      */
     void setHighLightedText(final TextView tv, final String textToHighlight) {
-        final String text = tv.getText().toString().toLowerCase();
+        final String text = tv.getText().toString().toLowerCase(Locale.getDefault());
         int ofe = text.indexOf(textToHighlight, 0);
         final Spannable wordToSpan = new SpannableString(tv.getText());
         for (int ofs = 0; ofs < text.length() && ofe != -1; ofs = ofe + 1) {
@@ -114,7 +130,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
             @Override
             protected void publishResults(final CharSequence constraint, final FilterResults filterResults) {
                 if (filterResults != null && filterResults.count > 0) {
-                    searchTerm = constraint.toString().toLowerCase();
+                    searchTerm = constraint.toString().toLowerCase(Locale.getDefault());
                     suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
                 } else {

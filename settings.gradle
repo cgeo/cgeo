@@ -2,7 +2,7 @@
  * Develocity Gradle plugin for build scan, see https://docs.gradle.com/develocity/gradle-plugin/current/
  */
 plugins {
-    id 'com.gradle.develocity' version '4.1'
+    id 'com.gradle.develocity' version '4.4.0'
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.
@@ -26,5 +26,7 @@ develocity {
     buildScan {
         termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
         termsOfUseAgree = "yes"
+        // Publishing a Build only Scan on-demand (gradlew --scan)
+        publishing.onlyIf { false }
     }
 }

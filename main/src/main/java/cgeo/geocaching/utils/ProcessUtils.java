@@ -11,8 +11,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -91,6 +91,15 @@ public final class ProcessUtils {
             return null;
         }
     }
+    @Nullable
+    public static Drawable getApplicationIcon(final String packageName) {
+        final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
+        try {
+            return packageManager.getApplicationIcon(packageName);
+        } catch (final Exception ignored) {
+            return null;
+        }
+    }
 
     public static boolean isIntentAvailable(@NonNull final String intent) {
         return isIntentAvailable(intent, null);
@@ -146,7 +155,7 @@ public final class ProcessUtils {
                     if (mStartActivity != null) {
                         mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         // create a pending intent so the application is restarted after System.exit(0) was called.
-                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, getFlagImmutable() | PendingIntent.FLAG_CANCEL_CURRENT);
+                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_CANCEL_CURRENT);
                         final AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
                         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                         System.exit(0);
@@ -162,11 +171,6 @@ public final class ProcessUtils {
         } catch (Exception ex) {
             Log.e("Was not able to restart application");
         }
-    }
-
-    // flag for declaring a PendingIntent as immutable (required since API 31, but supported only on API 23+)
-    public static int getFlagImmutable() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0;
     }
 
 }

@@ -2,6 +2,7 @@ package cgeo.geocaching.apps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Intent;
@@ -16,18 +17,18 @@ public abstract class AbstractApp implements App {
 
     @Nullable private final String packageName;
     @Nullable protected final String intent;
-    @NonNull
-    private final String name;
+    @StringRes
+    private final int nameId;
 
-    protected AbstractApp(@NonNull final String name, @Nullable final String intent,
+    protected AbstractApp(@StringRes final int nameId, @Nullable final String intent,
                           @Nullable final String packageName) {
-        this.name = name;
+        this.nameId = nameId;
         this.intent = intent;
         this.packageName = packageName;
     }
 
-    protected AbstractApp(@NonNull final String name, @Nullable final String intent) {
-        this(name, intent, null);
+    protected AbstractApp(@StringRes final int nameId, @Nullable final String intent) {
+        this(nameId, intent, null);
     }
 
     @Override
@@ -54,7 +55,7 @@ public abstract class AbstractApp implements App {
     @Override
     @NonNull
     public String getName() {
-        return name;
+        return LocalizationUtils.getString(nameId);
     }
 
     protected static String getString(@StringRes final int resourceId) {

@@ -56,7 +56,7 @@ public class ReceiveDownloadWorker extends Worker {
     }
 
     private void updateForegroundNotification() {
-        notificationManager.notify(getForegroundNotificationId(), notification.build());
+        Notifications.send(CgeoApplication.getInstance(), getForegroundNotificationId(), notification);
     }
 
 }

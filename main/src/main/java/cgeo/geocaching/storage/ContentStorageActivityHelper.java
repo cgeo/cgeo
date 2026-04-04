@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -306,8 +305,7 @@ public class ContentStorageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(type == null ? "*/*" : type);
-        if (startUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Attribute is supported starting SDK26 / O
+        if (startUri != null) {
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
         }
         if (action == SelectAction.SELECT_FILE_MULTIPLE) {
@@ -343,7 +341,7 @@ public class ContentStorageActivityHelper {
         // show internal storage
         intent.putExtra(Intents.EXTRA_SHOW_ADVANCED, true);
 
-        if (realStartUri != null && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (realStartUri != null) {
             if (UriUtils.isFileUri(realStartUri)) {
                 realStartUri = UriUtils.getPseudoTreeUriForFileUri(realStartUri);
             }

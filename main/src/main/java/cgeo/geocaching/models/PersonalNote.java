@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.Strings;
 
 public class PersonalNote {
 
@@ -60,9 +60,8 @@ public class PersonalNote {
                 }
             }
             this.note = newNote.toString();
-            //after above logic is applied, the resulting note is no longer the original one from provider
+            // after above logic is applied, the resulting note is no longer the original one from provider
             this.fromProvider = false;
-
         }
     }
 
@@ -76,7 +75,7 @@ public class PersonalNote {
         }
         final PersonalNote that = (PersonalNote) o;
         return fromProvider == that.fromProvider &&
-                StringUtils.equalsIgnoreCase(note, that.note);
+                Strings.CI.equals(note, that.note);
     }
 
     @Override
@@ -88,5 +87,4 @@ public class PersonalNote {
     public final String toString() {
         return note;
     }
-
 }

@@ -3,15 +3,16 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -55,7 +56,7 @@ public class GCWebAPI {
     /**
      * maximum number of elements to retrieve with one call
      */
-    private static final int MAX_TAKE = 50;
+    private static final int MAX_TAKE = 1000;
 
     private GCWebAPI() {
         // Utility class, do not instantiate
@@ -407,6 +408,15 @@ public class GCWebAPI {
                     }
                     return new MapSearchResultSet();
                 }
+                // on invalid coordinates range silently log stacktrace + return empty searchresult without calling search provider
+                if (box.hasInvalidRange()) {
+                    try {
+                        throw new RuntimeException("searching map with invalid coordinates");
+                    } catch (RuntimeException e) {
+                        Log.e("searching map with invalid viewport (" + box + ") " + ExceptionUtils.getStackTrace(e));
+                    }
+                    return new MapSearchResultSet();
+                }
                 params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
                         ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
 
@@ -414,7 +424,7 @@ public class GCWebAPI {
                 // Don't know why yet...
                 params.put("rad", "16000");
 
-                //set origin to middle of viewport (will be overridden if origin is set explicitely later)
+                //set origin to middle of viewport (will be overridden if origin is set explicitly later)
                 params.put("origin", String.valueOf(this.box.getCenter().getLatitude()) + ',' + this.box.getCenter().getLongitude());
             }
 
@@ -594,6 +604,15 @@ public class GCWebAPI {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class TrackableInventoryEntryList {
+        @JsonProperty("total")
+        int total;
+        @JsonProperty("data")
+        List<TrackableInventoryEntry> data;
+    }
+
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static final class CacheOwner {
         @JsonProperty("code")
         String code;
@@ -757,7 +776,7 @@ public class GCWebAPI {
     }
 
     @WorkerThread
-    static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
+    static SearchResult searchCaches(final IConnector con, final WebApiSearch search) {
         final SearchResult result = new SearchResult();
 
         try {
@@ -831,9 +850,6 @@ public class GCWebAPI {
             tryGuessMissingDistances(foundCaches, search);
 
             result.addAndPutInCache(foundCaches);
-            if (includeGcVote) {
-                GCVote.loadRatings(foundCaches);
-            }
         } catch (RuntimeException re) {
             Log.w("GCWebAPI: problem executing search", re);
             result.setError(GCConnector.getInstance(), StatusCode.COMMUNICATION_ERROR);
@@ -895,7 +911,7 @@ public class GCWebAPI {
      */
     @NonNull
     @WorkerThread
-    static List<TrackableInventoryEntry> getTrackableInventory() {
+    static List<TrackableInventoryEntry> getTrackableInventory(final int totalTrackables) {
         final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
         int skip = 0;
         TrackableInventoryEntry[] entries;
@@ -904,10 +920,43 @@ public class GCWebAPI {
             //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
             trackableInventoryEntries.addAll(Arrays.asList(entries));
             skip += MAX_TAKE;
-        } while (entries.length == MAX_TAKE);
+        } while (trackableInventoryEntries.size() < totalTrackables);
         return trackableInventoryEntries;
     }
 
+    /*
+     * https://www.geocaching.com/api/proxy/web/v1/trackables/geocache/...
+     */
+    static List<TrackableInventoryEntry> getTrackablesOfCache(final String geocode) {
+        final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
+        int skip = 0;
+        try {
+            TrackableInventoryEntryList result;
+            do {
+                result = apiProxyReq().uri("/web/v1/trackables/geocache/" + geocode + "?take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntryList.class).blockingGet();
+                if (result == null || result.data == null) {
+                    break;
+                }
+                trackableInventoryEntries.addAll(result.data);
+                skip += MAX_TAKE;
+            } while (result.data.size() == MAX_TAKE);
+        } catch (Exception e) {
+            Log.w("Problems getting trackables: " + e.getMessage());
+        }
+        return trackableInventoryEntries;
+    }
+
+    static List<Trackable> convertTrackableInventory(final List<TrackableInventoryEntry> trackableInventoryItems) {
+        final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
+            final Trackable trackable = new Trackable();
+            trackable.setGeocode(entry.referenceCode);
+            trackable.setName(entry.name);
+            trackable.setTrackingcode(entry.trackingNumber);
+            trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+            return trackable;
+        }).toList();
+        return trackables;
+    }
     /*
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */

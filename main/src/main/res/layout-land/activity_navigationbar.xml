@@ -11,21 +11,34 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <FrameLayout
-        android:id="@+id/activity_content"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/activity_navigationBar" />
-
     <!-- Show a navigation rail on landscape devices instead. On rather small screens, don't show labels to save some space -->
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/activity_navigationBar"
         style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/actionBarSpacer"
+        android:layout_below="@id/appToolbar"
         app:labelVisibilityMode="unlabeled"
+        android:background="@color/colorBackgroundTabBar"
+        app:itemIconTint="@color/bottom_bar_selector"
+        app:itemTextColor="@color/bottom_bar_selector"
+        app:paddingTopSystemWindowInsets="false"
         app:menu="@menu/activity_navigationbar_menu" />
+
+    <!-- make sure toolbar is placed above navigation rail -->
+    <include
+        android:id="@+id/appToolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignTop="@id/background"
+        android:layout_alignParentTop="true" />
+
+    <FrameLayout
+        android:id="@+id/activity_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/activity_navigationBar" /><!-- android:layout_below="@id/appToolbar" -->
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>

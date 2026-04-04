@@ -40,6 +40,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -79,15 +83,34 @@ public final class WherigoViewUtils {
         }
     }
 
-    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final CharSequence title) {
+    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final CharSequence title, @NonNull final View contentView) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         final AlertDialog dialog = builder.create();
-        if (!StringUtils.isBlank(title)) {
+        final boolean hasTitle = !StringUtils.isBlank(title);
+        if (hasTitle) {
             final WherigoDialogTitleViewBinding titleBinding = WherigoDialogTitleViewBinding.inflate(LayoutInflater.from(activity));
             titleBinding.dialogTitle.setText(title);
             dialog.setCustomTitle(titleBinding.getRoot());
             titleBinding.dialogBack.setOnClickListener(v -> WherigoViewUtils.safeDismissDialog(dialog));
         }
+        dialog.setView(contentView);
+
+        //apply edge2edge
+        WindowCompat.enableEdgeToEdge(activity.getWindow());
+        ViewCompat.setOnApplyWindowInsetsListener(contentView, (v, windowInsets) -> {
+            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+            //if dialog has a title then "divide" padding between title bar and content. Otherwise all to content
+            if (hasTitle) {
+                contentView.setPadding(innerPadding.left, 0, innerPadding.right, innerPadding.bottom);
+                final View titleView = dialog.findViewById(R.id.dialog_title_content);
+                titleView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, 0);
+            } else {
+                contentView.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
+            }
+
+            return windowInsets;
+        });
+
         return dialog;
     }
 

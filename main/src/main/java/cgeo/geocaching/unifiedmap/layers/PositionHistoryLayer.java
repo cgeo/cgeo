@@ -29,7 +29,7 @@ public class PositionHistoryLayer {
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
      */
-    private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
+    private static final float LINE_MAXIMUM_DISTANCE_METERS = Settings.getMaximumMapTrailDistance();
 
     private static final String KEY_HISTORY_LINE = "historyLine";
 

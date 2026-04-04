@@ -5,6 +5,7 @@ import cgeo.geocaching.SplashActivity;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -40,12 +41,14 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
     PendingDownloadsAdapter adapter;
     DownloadManager downloadManager;
     ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads;
+    MaterialButton deleteAllButton;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generic_recyclerview);
+        setContentView(R.layout.pending_downloads_activity);
         setTitle(R.string.debug_current_downloads);
+        deleteAllButton = findViewById(R.id.delete_all_button);
         fillAdapter();
     }
 
@@ -145,7 +148,10 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES), "Bytes Total", (i) -> formatBytes(c.getLong(i)));
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR), "Bytes Current", (i) -> formatBytes(c.getLong(i)));
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP), "Last Modified", (i) -> formatDateForFilename(c.getLong(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", c::getString);
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", (i) -> {
+                            final String uri = c.getString(i);
+                            return uri != null ? "[" + uri + "](" + uri + ")" : null;
+                        });
                         append(sb, c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI), "Local URI", c::getString);
                     }
                 }
@@ -159,6 +165,9 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             adapter.notifyDataSetChanged();
+
+            // setup delete all button
+            deleteAllButton.setOnClickListener(v -> showDeleteAllConfirmation());
         }
     }
 
@@ -185,6 +194,34 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         }
     }
 
+    private void showDeleteAllConfirmation() {
+        final int count = pendingDownloads.size();
+        SimpleDialog.of(this)
+            .setTitle(R.string.downloader_delete_all_confirmation)
+            .setMessage(TextParam.text(getString(R.string.downloader_delete_all_message, count)))
+            .confirm(this::deleteAllDownloads);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void deleteAllDownloads() {
+        // Create a copy of the list to avoid concurrent modification
+        final ArrayList<PendingDownload.PendingDownloadDescriptor> downloadsToDelete = new ArrayList<>(pendingDownloads);
+
+        // Remove all downloads
+        for (PendingDownload.PendingDownloadDescriptor download : downloadsToDelete) {
+            PendingDownload.remove(download.id);
+            downloadManager.remove(download.id);
+        }
+
+        // Clear the list and update UI
+        pendingDownloads.clear();
+        adapter.notifyDataSetChanged();
+
+        // Show confirmation and finish activity
+        ViewUtils.showToast(this, R.string.downloader_deleted_all);
+        finish();
+    }
+
     private static class PendingDownloadsViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView detail;
@@ -195,6 +232,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             detail = itemView.findViewById(R.id.detail);
+            detail.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
             buttonResume = itemView.findViewById(R.id.button_left);
             buttonResume.setIconResource(R.drawable.ic_menu_refresh);

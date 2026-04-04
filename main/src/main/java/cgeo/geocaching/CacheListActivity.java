@@ -17,6 +17,8 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -31,7 +33,9 @@ import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
@@ -39,17 +43,16 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
+import cgeo.geocaching.loaders.GCListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.LiveFilterGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
-import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.SearchFilterGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LoggingUI;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.DownloadProgress;
@@ -79,20 +82,21 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.DefaultMap;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.WatchListUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -115,7 +119,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.ActionBar;
+import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -137,6 +141,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -202,7 +207,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void updateGeoData(final GeoData geoData) {
             adapter.setActualCoordinates(geoData.getCoords());
         }
-
     };
 
     private ContextMenuInfo lastMenuInfo;
@@ -258,10 +262,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     protected void updateTitle() {
         setTitle(title);
         adapter.setCurrentListTitle(title);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setSubtitle(getCurrentSubtitle());
-        }
+        ActionBarUtils.setSubtitle(this, getCurrentSubtitle());
         refreshActionBarTitle();
     }
 
@@ -387,7 +388,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-        HideActionBarUtils.setContentView(this, R.layout.cacheslist_activity, false);
+        setContentView(R.layout.cacheslist_activity);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -423,7 +424,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             } else {
                 final String data = ContentStorage.get().getName(getIntent().getData());
-                listNameMemento.rememberTerm(StringUtils.isNotBlank(data) && StringUtils.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
+                listNameMemento.rememberTerm(StringUtils.isNotBlank(data) && Strings.CS.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
             }
             importGpxAttachement();
         }
@@ -439,6 +440,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
             }
         });
+    }
+
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
     }
 
     @Override
@@ -480,7 +487,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private boolean isInvokedFromAttachment() {
         final Intent intent = getIntent();
-        return Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null;
+        final String actionType = intent.getAction();
+        return Intent.ACTION_SEND_MULTIPLE.equals(actionType)
+                || (Intent.ACTION_VIEW.equals(actionType) && intent.getData() != null);
     }
 
     private void importGpxAttachement() {
@@ -536,7 +545,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return true;
     }
@@ -548,7 +557,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public Geopoint getReferencePoint() {
         return this.coords;
     }
-
 
     /**
      * Menu items which are not at all usable with the current list type should be hidden.
@@ -575,7 +583,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final boolean hasListNavigationApps = CacheListApps.getActiveApps().size() > 1;
         final int checkedCount = adapter.getCheckedCount();
-
 
         try {
             // toplevel menu items
@@ -616,8 +623,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely, checkedCount);
 
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
+            //MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, isGcPremiumMember, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, true, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_upload_bookmarklist, R.string.caches_upload_bookmarklist_selected, R.string.caches_upload_bookmarklist_all, checkedCount);
+
+            MenuUtils.setVisible(menu, R.id.menu_watch_management, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()));
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_watch_all, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()), WatchListUtils.anySupportsWatching(adapter.getCheckedOrAllCaches()));
+            setMenuItemLabel(menu, R.id.menu_watch_all, R.string.caches_watch_selected, R.string.caches_watch_all, checkedCount);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_unwatch_all, WatchListUtils.anySupportsWatchlist(adapter.getCheckedOrAllCaches()), WatchListUtils.anySupportsUnwatching(adapter.getCheckedOrAllCaches()));
+            setMenuItemLabel(menu, R.id.menu_unwatch_all, R.string.caches_unwatch_selected, R.string.caches_unwatch_all, checkedCount);
+
             MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_show_attributes, R.string.caches_show_attributes_selected, R.string.caches_show_attributes_all, checkedCount);
             MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
@@ -651,7 +666,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
-        MenuUtils.tintToolbarAndOverflowIcons(menu);
+        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
 
         return true;
     }
@@ -836,8 +851,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
 
             }.execute();
+            invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
+        } else if (menuItem == R.id.menu_watch_all) {
+            WatchListUtils.watchAll(this, adapter.getCheckedOrAllCaches());
+        } else if (menuItem == R.id.menu_unwatch_all) {
+            WatchListUtils.unwatchAll(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
             EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
@@ -1139,36 +1159,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshListFooter() {
-        refreshListFooter(false);
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void refreshListFooter(final boolean cachesAreLoading) {
         if (listFooter == null) {
             return;
         }
 
-        if (cachesAreLoading) {
-            setView(listFooterLine1, res.getString(R.string.caches_more_caches_loading), null);
-            setViewGone(listFooterLine2);
-            return;
-        }
+        if (type.isOnline) {
+            final int unfilteredListSize = search == null ? adapter.getOriginalListCount() : search.getCount();
+            final int totalAchievableListSize = search == null ? unfilteredListSize : Math.max(0, search.getTotalCount());
+            final boolean moreToShow = unfilteredListSize > 0 && totalAchievableListSize > unfilteredListSize;
 
-        final int unfilteredListSize = search == null ? adapter.getOriginalListCount() : search.getCount();
-        final int totalAchievableListSize = search == null ? unfilteredListSize : Math.max(0, search.getTotalCount());
-        final boolean moreToShow = unfilteredListSize > 0 && totalAchievableListSize > unfilteredListSize;
+            if (moreToShow) {
+                setViewGone(listFooterLine2);
+                setView(listFooterLine1, res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + unfilteredListSize + ")", v -> {
+                    showProgress(true);
+                    restartCacheLoader(true, null);
+                });
+            } else {
+                setViewGone(listFooterLine2);
+                setView(listFooterLine1, res.getString(adapter.isEmpty() ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
+            }
+        } else if (resultIsOfflineAndLimited()) {
+            final int missingCaches = search.getTotalCount() - search.getCount();
 
-        if (moreToShow && type.isOnline) {
-            setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + unfilteredListSize + ")", v -> {
-                showProgress(true);
-                restartCacheLoader(true, null);
-            });
-        } else if (type.isOnline) {
-            setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(adapter.isEmpty() ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
-        } else if (moreToShow && type.isStoredInDatabase) {
-            final int missingCaches = totalAchievableListSize - unfilteredListSize;
             if (missingCaches > getOfflineListLimitIncrease()) {
                 final String info = res.getQuantityString(R.plurals.caches_more_caches_next_x, getOfflineListLimitIncrease(), getOfflineListLimitIncrease());
                 setView(listFooterLine1, info, v -> {
@@ -1180,7 +1192,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else {
                 setViewGone(listFooterLine1);
             }
-            setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalAchievableListSize), v -> {
+            setView(listFooterLine2, res.getString(R.string.caches_more_caches_all_remaining), v -> {
                 offlineListLoadLimit = 0;
                 refreshCurrentList();
             });
@@ -1564,7 +1576,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        if (Settings.useLegacyMaps() || listId == 0) {
+        if (listId == 0) {
             DefaultMap.startActivitySearch(this, searchToUse, title, listId);
         } else {
             DefaultMap.startActivityList(this, listId, currentCacheFilter);
@@ -1667,6 +1679,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return Intents.putListType(new Intent(context, CacheListActivity.class), CacheListType.HISTORY);
     }
 
+    public static Intent getHistoryIntent(final Context context, @NonNull final IConnector connector) {
+        final Intent historyIntent = new Intent(context, CacheListActivity.class);
+        Intents.putListType(historyIntent, CacheListType.HISTORY);
+        historyIntent.putExtra(Intents.EXTRA_CONNECTOR, connector.getName());
+        return historyIntent;
+    }
+
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(addressIntent, CacheListType.ADDRESS);
@@ -1727,38 +1746,29 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityPocketDownload(@NonNull final Context context, @NonNull final GCList pocketQuery) {
-        final String guid = pocketQuery.getGuid();
-        if (guid == null) {
-            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+    public static void startActivityPocketDownload(@NonNull final Context context, @NonNull final List<GCList> pocketQueries) {
+        if (pocketQueries.isEmpty()) {
             return;
         }
-        startActivityWithAttachment(context, pocketQuery);
+
+        final Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        final String pqName = (1 == pocketQueries.size()) ? pocketQueries.get(0).getName() : "";
+        intent.putExtra(Intents.EXTRA_NAME, pqName);
+        intent.putParcelableArrayListExtra(Intents.EXTRA_POCKET_LIST, new ArrayList<>(pocketQueries));
+        intent.setClass(context, CacheListActivity.class);
+        context.startActivity(intent);
     }
 
-    public static void startActivityPocket(@NonNull final Context context, @NonNull final GCList pocketQuery) {
-        final String guid = pocketQuery.getGuid();
-        if (guid == null) {
-            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+    public static void startActivityPocket(@NonNull final Context context, @NonNull final List<GCList> pocketQueries) {
+        if (pocketQueries.isEmpty()) {
             return;
         }
-        startActivityPocket(context, pocketQuery, CacheListType.POCKET);
-    }
 
-    private static void startActivityWithAttachment(@NonNull final Context context, @NonNull final GCList pocketQuery) {
-        final Uri uri = pocketQuery.getUri();
-        final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
-        cachesIntent.setDataAndType(uri, pocketQuery.isBookmarkList() ? "application/xml" : "application/zip");
-        cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
-        context.startActivity(cachesIntent);
-    }
-
-    private static void startActivityPocket(@NonNull final Context context, @NonNull final GCList pocketQuery, final CacheListType cacheListType) {
+        final String pqName = (1 == pocketQueries.size()) ? pocketQueries.get(0).getName() : "";
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        Intents.putListType(cachesIntent, cacheListType);
-        cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
-        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, pocketQuery.getShortGuid());
-        cachesIntent.putExtra(Intents.EXTRA_POCKET_HASH, pocketQuery.getPqHash());
+        Intents.putListType(cachesIntent, CacheListType.POCKET);
+        cachesIntent.putExtra(Intents.EXTRA_NAME, pqName);
+        cachesIntent.putParcelableArrayListExtra(Intents.EXTRA_POCKET_LIST, new ArrayList<>(pocketQueries));
         context.startActivity(cachesIntent);
     }
 
@@ -1811,7 +1821,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = res.getString(R.string.caches_history);
                     listId = PseudoList.HISTORY_LIST.id;
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+
+                    final GeocacheFilter offlineFilter;
+                    final String connectorName = extras.getString(Intents.EXTRA_CONNECTOR);
+                    if (null == connectorName) {
+                        offlineFilter = currentCacheFilter.get();
+                    } else {
+                        final IConnector connector = ConnectorFactory.getConnectorByName(connectorName);
+                        final OriginGeocacheFilter connectorAddFilter = GeocacheFilterType.ORIGIN.create();
+                        connectorAddFilter.setValues(Collections.singletonList(connector));
+                        offlineFilter = GeocacheFilter.createEmpty().and(connectorAddFilter);
+                    }
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, offlineFilter, VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
+
                     break;
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);
@@ -1878,11 +1900,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     loader = new NullGeocacheListLoader(this, search);
                     break;
                 case POCKET:
-                    final String shortGuid = extras.getString(Intents.EXTRA_POCKET_GUID);
-                    final String pqHash = extras.getString(Intents.EXTRA_POCKET_HASH);
+                    final List<GCList> cachesLists = extras.getParcelableArrayList(Intents.EXTRA_POCKET_LIST);
                     title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new PocketGeocacheListLoader(this, shortGuid, pqHash);
+                    loader = new GCListLoader(this, cachesLists);
                     break;
                 default:
                     //can never happen, makes Codacy happy
@@ -1953,7 +1974,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Calculate the subtitle of the current list depending on (optional) filters.
      */
-    private CharSequence getCurrentSubtitle() {
+    private String getCurrentSubtitle() {
         if (search == null) {
             return getCacheNumberString(getResources(), 0);
         }

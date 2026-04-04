@@ -45,6 +45,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.BitmapCompat;
 import androidx.core.util.Predicate;
@@ -80,7 +81,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
@@ -364,7 +367,7 @@ public final class ImageUtils {
      */
     public static boolean containsPattern(final String url, final String[] patterns) {
         for (final String entry : patterns) {
-            if (StringUtils.containsIgnoreCase(url, entry)) {
+            if (Strings.CI.contains(url, entry)) {
                 return true;
             }
         }
@@ -532,7 +535,11 @@ public final class ImageUtils {
     public static String getGCFullScaleImageUrl(@NonNull final String imageUrl) {
         // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
         // Manipulate the URL to load the requested size.
-        final GCImageSize preferredSize = ImageUtils.GCImageSize.valueOf(Settings.getString(R.string.pref_gc_imagesize, "ORIGINAL"));
+        final GCImageSize preferredSize = EnumUtils.getEnum(ImageUtils.GCImageSize.class,
+                Settings.getString(R.string.pref_gc_imagesize, null), GCImageSize.ORIGINAL);
+        if (preferredSize == GCImageSize.UNCHANGED) {
+            return imageUrl;
+        }
         MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
         if (matcherViewstates.find()) {
             return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
@@ -546,18 +553,21 @@ public final class ImageUtils {
     }
 
     public enum GCImageSize {
-        ORIGINAL("", ""),
-        LARGE("_l", "large/"),
-        DISPLAY("_d", "display/"),
-        SMALL("_sm", "small/"),
-        THUMB("_t", "thumb/");
+        UNCHANGED("", "", R.string.settings_gc_imagesize_entry_unchanged),
+        ORIGINAL("", "", R.string.settings_gc_imagesize_entry_original),
+        LARGE("_l", "large/", R.string.settings_gc_imagesize_entry_large),
+        DISPLAY("_d", "display/", R.string.settings_gc_imagesize_entry_diplay),
+        SMALL("_sm", "small/", R.string.settings_gc_imagesize_entry_small),
+        THUMB("_t", "thumb/", R.string.settings_gc_imagesize_entry_thumb);
 
         private final String suffix;
         private final String pathname;
+        private final int label;
 
-        GCImageSize(final String suffix, final String pathname) {
+        GCImageSize(final String suffix, final String pathname, final @StringRes int label) {
             this.suffix = suffix;
             this.pathname = pathname;
+            this.label = label;
         }
 
         public String getPathname() {
@@ -566,6 +576,10 @@ public final class ImageUtils {
 
         public String getSuffix() {
             return suffix;
+        }
+
+        public int getLabel() {
+            return label;
         }
     }
 

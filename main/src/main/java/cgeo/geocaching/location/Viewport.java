@@ -191,8 +191,8 @@ public final class Viewport implements Parcelable {
      * @param points a collection of (possibly null) points
      * @return a new collection containing the points in the viewport
      */
-    public <T extends ICoordinate> Collection<T> filter(@NonNull final Collection<T> points) {
-        final Collection<T> result = new ArrayList<>();
+    public <T extends ICoordinate> List<T> filter(@NonNull final Collection<T> points) {
+        final List<T> result = new ArrayList<>();
         for (final T point : points) {
             if (point != null && contains(point)) {
                 result.add(point);
@@ -426,6 +426,17 @@ public final class Viewport implements Parcelable {
 
     public boolean isJustADot() {
         return bottomLeft.equals(topRight);
+    }
+
+    public boolean hasInvalidRange() {
+        return topRight.getLatitudeE6() > 90000000
+                | topRight.getLatitudeE6() < -90000000
+                | topRight.getLongitudeE6() > 180000000
+                | topRight.getLongitudeE6() < -180000000
+                | bottomLeft.getLatitudeE6() > 90000000
+                | bottomLeft.getLatitudeE6() < -90000000
+                | bottomLeft.getLongitudeE6() > 180000000
+                | bottomLeft.getLongitudeE6() < -180000000;
     }
 
     public static boolean isValid(final Viewport viewport) {

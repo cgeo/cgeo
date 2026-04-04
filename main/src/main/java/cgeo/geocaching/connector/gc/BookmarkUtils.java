@@ -17,6 +17,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookmarkUtils {
     private static final String NEW_LIST_GUID = "FakeList";
@@ -56,11 +57,18 @@ public class BookmarkUtils {
             final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((l) -> TextParam.text(l.getName()))
+                .setDisplayMapper((l) -> TextParam.text(l.getName() + (NEW_LIST_GUID.equals(l.getGuid()) ? "" : " (" + l.getCaches() + ")")))
+                .setDisabledItems(lists.stream().filter(l -> l.getCaches() >= 1000).collect(Collectors.toSet()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
-                    .selectSingle(model, l -> processSelection(context, geocaches, l));
+                    .selectSingle(model, l -> {
+                        if (geocaches.size() > (1000 - l.getCaches())) {
+                            SimpleDialog.ofContext(context).setTitle(R.string.err_bookmark_list_overfull).setMessage(R.string.err_bookmark_list_overfull_description).confirm(() -> processSelection(context, geocaches, l));
+                        } else {
+                            processSelection(context, geocaches, l);
+                        }
+                    });
 
         });
     }

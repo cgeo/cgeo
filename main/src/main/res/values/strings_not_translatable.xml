@@ -86,19 +86,21 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2025-04 to 2024-04 -->
+    <!-- currently listed: contributions 2025-03 to 2026-03 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
     eddiemuc|https://github.com/eddiemuc|cds|
     fm-sys|https://github.com/fm-sys|cg|
+    kennygchen|https://github.com/kennygchen|c|
     kumy|https://github.com/kumy|ci|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
-    murggel|https://github.com/murggel|cdg|
+    murggel|https://github.com/murggel|cdgs|
     okainov|https://github.com/okainov|c|
     ReggieDoodle|https://github.com/ReggieDoodle|c|
+    semantosoph|https://github.com/semantosoph|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -245,10 +247,8 @@
     <string translatable="false" name="auth_ocuk">opencache.uk</string>
     <string translatable="false" name="init_su">Geocaching.su</string>
     <string translatable="false" name="auth_su">geocaching.su</string>
-    <string translatable="false" name="init_gcvote">GCvote.com</string>
     <string translatable="false" name="init_bettercacher">BetterCacher.org</string>
     <string translatable="false" name="facebook_title">Facebook</string>
-    <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
     <string translatable="false" name="cache_menu_pebble">Pebble</string>
     <string translatable="false" name="init_geokrety">GeoKrety.org</string>
     <string translatable="false" name="trackable_geokrety">GeoKrety</string>
@@ -332,12 +332,6 @@
 
     <string translatable="false" name="mapserver_osmpaws_themes_name">Paws Themes</string>
     <string translatable="false" name="mapserver_osmpaws_themes_downloadurl">https://osm.paws.cz/paws_themes/</string>
-
-    <string translatable="false" name="maptheme_legend_elevate">https://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
-    <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
-    <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
-    <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
-    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>

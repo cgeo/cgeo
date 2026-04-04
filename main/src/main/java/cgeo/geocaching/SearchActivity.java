@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
@@ -17,16 +18,18 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.search.SearchAutoCompleteAdapter;
+import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.SearchCardView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.NewCoordinateInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinateInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -35,7 +38,6 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -55,6 +57,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
 
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -104,13 +107,8 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             } else {
                 // send intent back so query string is known.
                 // Strip away potential security-relevant things (see #12409)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    intent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    intent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                } else {
-                    intent.setFlags(intent.getFlags() & ~Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    intent.setFlags(intent.getFlags() & ~Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                }
+                intent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
                 setResult(RESULT_CANCELED, intent);
             }
@@ -150,6 +148,12 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
         init();
+    }
+
+    @Override
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets def) {
+        return calculateInsetsWithToolbarInPortrait(def);
     }
 
     @Override
@@ -296,7 +300,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private SearchCardView addSearchCardWithField(final int title, final int suggestionIcon, @Nullable @StringRes final Integer recentPostfix, @NonNull final Consumer<String> searchFunction, final Func1<String, String[]> suggestionFunction, final Func0<String[]> historyFunction, final InputFilter inputFilter) {
+    private SearchCardView addSearchCardWithField(final int title, final int suggestionIcon, @Nullable @StringRes final Integer recentPostfix, @NonNull final Consumer<String> searchFunction, final Func1<String, String[]> suggestionFunction, final Func0<String[]> historyFunction, final Action1<String> deleteFunction, final InputFilter inputFilter) {
         return addSearchCard(title, suggestionIcon).addOnClickListener(() -> {
             // show search field
             searchViewItem.setVisible(true);
@@ -347,7 +351,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
             if (title == R.string.search_geo) {
                 searchView.setText("GC");
-                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
+                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction));
                 final String clipboardGeocode = getGeocodeFromClipboard();
                 if (null != clipboardGeocode) {
                     binding.suggestionList.postDelayed(() -> {
@@ -359,7 +363,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                     }, 0);
                 }
             } else if (title == R.string.search_kw) {
-                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
+                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction, deleteFunction));
                 binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
                     final String searchTerm = (String) parent.getItemAtPosition(position);
                     // suggestions are a mix of geocodes and keywords, differentiate them by layout used
@@ -370,7 +374,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
                     }
                 });
             } else {
-                binding.suggestionList.setAdapter(new SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction, suggestionIcon, historyFunction));
+                binding.suggestionList.setAdapter(new SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction, suggestionIcon, historyFunction, deleteFunction));
             }
             checkMostRecent(recentPostfix);
             updateSuggestions();
@@ -436,7 +440,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             return;
         }
 
-        final CardView geocodeCard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, R.string.pref_search_history_geocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode, GeocacheAutoCompleteAdapter::getLastOpenedCachesArray, new InputFilter.AllCaps());
+        final CardView geocodeCard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, R.string.pref_search_history_geocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode, GeocacheAutoCompleteAdapter::getLastOpenedCachesArray, null, new InputFilter.AllCaps());
         geocodeCard.setOnLongClickListener(v -> {
             final String geocode = getGeocodeFromClipboard();
             if (null != geocode) {
@@ -446,11 +450,12 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             return false;
         });
 
-        final SearchCardView kwCard = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, null, this::findByKeywordFn, DataStore::getSuggestionsKeyword, () -> Settings.getHistoryList(R.string.pref_search_history_keyword), null);
+        final SearchCardView kwCard = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, null, this::findByKeywordFn, DataStore::getSuggestionsKeyword, () -> Settings.getHistoryList(R.string.pref_search_history_keyword), value -> Settings.removeFromHistoryList(R.string.pref_search_history_keyword, value), null);
         // mitigation for #13312
         if (!Settings.isGCPremiumMember()) {
             final int activeCount = ConnectorFactory.getActiveConnectors().size();
-            if (GCConnector.getInstance().isActive() && (activeCount == 1 || (activeCount == 2 && ALConnector.getInstance().isActive()))) {
+            final int compareCount = (GCConnector.getInstance().isActive() ? 1 : 0) + (ALConnector.getInstance().isActive() ? 1 : 0) + (InternalConnector.getInstance().isActive() ? 1 : 0);
+            if (GCConnector.getInstance().isActive() && (activeCount == compareCount)) {
                 // only gc.com connectors active, and user has basic member status => disable keyword search
                 kwCard.addOnClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_kw_disabled_hint)).show());
                 ((ImageView) kwCard.findViewById(R.id.icon)).getDrawable().setTint(getResources().getColor(R.color.colorTextHint));
@@ -460,17 +465,17 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
                 .addOnClickListener(this::onClickCoordinates);
 
-        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, R.string.pref_search_history_address, this::findByAddressFn, null, () -> Settings.getHistoryList(R.string.pref_search_history_address), null);
+        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, R.string.pref_search_history_address, this::findByAddressFn, null, () -> Settings.getHistoryList(R.string.pref_search_history_address), value -> Settings.removeFromHistoryList(R.string.pref_search_history_address, value), null);
 
-        addSearchCardWithField(R.string.search_hbu, R.drawable.search_owner, null, this::findByOwnerFn, DataStore::getSuggestionsOwnerName, () -> Settings.getHistoryList(R.string.pref_search_history_owner), null);
+        addSearchCardWithField(R.string.search_hbu, R.drawable.search_owner, null, this::findByOwnerFn, DataStore::getSuggestionsOwnerName, () -> Settings.getHistoryList(R.string.pref_search_history_owner), value -> Settings.removeFromHistoryList(R.string.pref_search_history_owner, value), null);
 
-        addSearchCardWithField(R.string.search_finder, R.drawable.search_finder, null, this::findByFinderFn, DataStore::getSuggestionsFinderName, () -> Settings.getHistoryList(R.string.pref_search_history_finder), null);
+        addSearchCardWithField(R.string.search_finder, R.drawable.search_finder, null, this::findByFinderFn, DataStore::getSuggestionsFinderName, () -> Settings.getHistoryList(R.string.pref_search_history_finder), value -> Settings.removeFromHistoryList(R.string.pref_search_history_finder, value), null);
 
         addSearchCard(R.string.search_filter, R.drawable.ic_menu_filter)
                 .addOnClickListener(() -> GeocacheFilterActivity.selectFilter(this, new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE), null, false))
                 .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
-        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), new InputFilter.AllCaps());
+        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
                 .addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
@@ -496,7 +501,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
     }
 
     private void onClickCoordinates() {
-        NewCoordinateInputDialog.show(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
+        CoordinateInputDialog.showLocation(this, this::onUpdateCoordinates, LocationDataProvider.getInstance().currentGeo().getCoords());
     }
 
     public void onUpdateCoordinates(final Geopoint input) {
@@ -598,7 +603,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         searchViewItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(@NonNull final MenuItem item) {
-                binding.flipper.showNext();
+                binding.activityContent.showNext();
                 return true;
             }
 
@@ -606,17 +611,21 @@ public class SearchActivity extends AbstractNavigationBarActivity {
             public boolean onMenuItemActionCollapse(@NonNull final MenuItem item) {
                 searchViewItem.setVisible(false);
                 searchButtonItem.setVisible(false);
-                binding.flipper.showPrevious();
+                binding.activityContent.showPrevious();
                 return true;
             }
         });
         searchButtonItem = menu.findItem(R.id.menu_gosearch_icon);
         searchView = (AutoCompleteTextView) searchViewItem.getActionView();
-        searchView.setBackground(AppCompatResources.getDrawable(this, R.drawable.mark_transparent));
-        // configure keyboard
-        searchView.setInputType(InputType.TYPE_CLASS_TEXT);
-        searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-        searchView.addTextChangedListener(ViewUtils.createSimpleWatcher((s) -> updateSuggestions()));
+        if (null != searchView) {
+            searchView.setBackground(AppCompatResources.getDrawable(this, R.drawable.mark_transparent));
+            SearchUtils.setSearchViewColor(searchView);
+
+            // configure keyboard
+            searchView.setInputType(InputType.TYPE_CLASS_TEXT);
+            searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+            searchView.addTextChangedListener(ViewUtils.createSimpleWatcher((s) -> updateSuggestions()));
+        }
         return true;
     }
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.oscim.core.BoundingBox;
 import org.oscim.layers.tile.buildings.BuildingLayer;
@@ -77,7 +78,8 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
         setMapAttribution(new Pair<>(mapAttribution.toString(), true));
 
         final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MultiMapFileTileSource) tileSource);
-        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        buildingLayer = new BuildingLayer(map, tileLayer);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, buildingLayer);
         fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         fragment.applyTheme();
     }
@@ -87,7 +89,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             for (String language : languagesPreference.split(",")) {
                 boolean found = false;
                 for (String comp : languages) {
-                    if (StringUtils.equals(comp, language)) {
+                    if (Strings.CS.equals(comp, language)) {
                         found = true;
                         break;
                     }
@@ -98,5 +100,4 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             }
         }
     }
-
 }

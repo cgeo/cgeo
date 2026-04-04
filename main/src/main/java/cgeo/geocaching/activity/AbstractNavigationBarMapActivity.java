@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -43,6 +44,12 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
     private static long close429warning = 0;
 
     private final ViewTreeObserver.OnGlobalLayoutListener[] layoutListeners = new ViewTreeObserver.OnGlobalLayoutListener[1];
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        setFixedActionBar(false);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onBackPressed() {
@@ -116,7 +123,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
                         ActivityMixin.overrideTransitionToFade(that);
-                        ActivityMixin.postDelayed(() -> sheetRemoveFragment(), 500);
+                        ActivityMixin.postDelayed(AbstractNavigationBarMapActivity.this::sheetRemoveFragment, 500);
                     }
                 }
 

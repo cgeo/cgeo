@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 abstract class AbstractRadarApp extends AbstractPointNavigationApp {
 
@@ -16,8 +17,8 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
 
     private final String intentAction;
 
-    protected AbstractRadarApp(final String name, final String intent, final String packageName) {
-        super(name, intent, packageName);
+    protected AbstractRadarApp(@StringRes final int nameId, final String intent, final String packageName) {
+        super(nameId, intent, packageName);
         this.intentAction = intent;
     }
 

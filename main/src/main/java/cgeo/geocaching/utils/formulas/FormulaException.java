@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.util.Collections;
@@ -24,6 +25,7 @@ public class FormulaException extends IllegalArgumentException {
         CYCLIC_DEPENDENCY(R.string.formula_error_cyclicdependency, "Cycle: %1$s"),
         EMPTY_FORMULA(R.string.formula_error_empty, "Empty Formula"),
         NUMERIC_OVERFLOW(R.string.formula_error_numeric_overflow, "Numeric overflow"),
+        INVALID_RANGE(R.string.formula_error_invalid_range, "Invalid range: '%1$s'"),
         OTHER(R.string.formula_error_other, "Error: '%1$s'");
 
         @StringRes
@@ -37,7 +39,6 @@ public class FormulaException extends IllegalArgumentException {
 
     }
 
-    private final ErrorType errorType;
     private final String localizedMessage;
 
     //optional parameters
@@ -52,7 +53,6 @@ public class FormulaException extends IllegalArgumentException {
     public FormulaException(final Throwable cause, final Set<Integer> childrenInError, final ErrorType errorType, final Object... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
-        this.errorType = errorType;
         this.childrenInError = childrenInError;
     }
 
@@ -60,6 +60,7 @@ public class FormulaException extends IllegalArgumentException {
         this(null, null, errorType, errorParams);
     }
 
+    @NonNull
     public Set<Integer> getChildrenInError() {
         return childrenInError == null ? Collections.emptySet() : childrenInError;
     }
@@ -85,10 +86,12 @@ public class FormulaException extends IllegalArgumentException {
         this.evaluationContext = context;
     }
 
+    @NonNull
     public String getUserDisplayableErrorMessage() {
         return (this.functionContext == null ? "" : this.functionContext + ": ") + localizedMessage;
     }
 
+    @NonNull
     public CharSequence getUserDisplayableString() {
         final String errorMessage = getUserDisplayableErrorMessage();
         final CharSequence expression = getExpressionFormatted();
@@ -108,10 +111,12 @@ public class FormulaException extends IllegalArgumentException {
     }
 
     @Override
+    @NonNull
     public String getMessage() {
         return super.getMessage() + "/" + functionContext + "/ppos:" + parsingPos + "/pch:'" + (char) parsingChar + "'[" + expression + ": " + evaluationContext + "]";
     }
 
+    @NonNull
     public static String getUserDisplayableMessage(final ErrorType errorType, final Object... errorParams) {
         return LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams);
     }

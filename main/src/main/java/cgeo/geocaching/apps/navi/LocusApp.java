@@ -17,7 +17,7 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
     private static final String INTENT = Intent.ACTION_VIEW;
 
     protected LocusApp() {
-        super(getString(R.string.caches_map_locus), INTENT);
+        super(R.string.caches_map_locus, INTENT);
     }
 
     @Override

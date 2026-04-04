@@ -3,7 +3,10 @@ package cgeo.geocaching.ui.notifications;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 
+import android.app.Notification;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -42,7 +45,17 @@ public class Notifications {
     }
 
     public static void send(@Nullable final Context context, @Nullable final Integer id, @NonNull final NotificationCompat.Builder notificationBuilder) {
-        getNotificationManager(context).notify(id == null ? Settings.getUniqueNotificationId() : id, notificationBuilder.build());
+        final Notification notification = notificationBuilder.build();
+        try {
+            getNotificationManager(context).notify(id == null ? Settings.getUniqueNotificationId() : id, notification);
+        } catch (SecurityException se) {
+            //happens eg when user doesn't give notification permission to c:geo
+            //-> try to issue a toast instead
+            final CharSequence text = notification.extras.getCharSequence(Notification.EXTRA_TEXT);
+            if (text != null) {
+                ViewUtils.showToast(context, TextParam.text(text), false);
+            }
+        }
     }
 
     public static NotificationCompat.Builder newBuilder(@Nullable final Context context, final NotificationChannels channel) {

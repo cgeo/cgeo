@@ -19,23 +19,19 @@ public class GCLoginTest {
         assertThat(instance.login()).isEqualTo(StatusCode.NO_ERROR);
     }
 
-    private static String blockingHomeLocation() {
-        return GCLogin.retrieveHomeLocation().blockingGet();
-    }
-
     @Test
     public void testRetrieveHomeLocation() {
-        assertThat(StringUtils.isNotBlank(blockingHomeLocation())).isTrue();
+        assertThat(StringUtils.isNotBlank(instance.retrieveHomeLocation())).isTrue();
     }
 
     @Test
     public void testValidHomeLocation() {
-        assertThat(new Geopoint(blockingHomeLocation())).isInstanceOf(Geopoint.class);
+        assertThat(new Geopoint(instance.retrieveHomeLocation())).isInstanceOf(Geopoint.class);
     }
 
     @Test
     public void testNoHtmlInHomeLocation() {
-        final String homeLocation = blockingHomeLocation();
+        final String homeLocation = instance.retrieveHomeLocation();
         assertThat(homeLocation).isEqualTo(TextUtils.stripHtml(homeLocation));
     }
 

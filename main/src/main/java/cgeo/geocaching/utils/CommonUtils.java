@@ -2,12 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.utils.functions.Func1;
 
-import android.os.Build;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Supplier;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -130,25 +128,6 @@ public class CommonUtils {
                 return source == null ? 0 : source.compare(g1, g2);
             }
             return g1Idx - g2Idx;
-        };
-    }
-
-
-    /** Returns a ThreadLocal with initial value given by passed Supplier.
-     * Use this method instead of ThreadLocal.withInitial() for SDK<26;
-     */
-    public static <T> ThreadLocal<T> threadLocalWithInitial(final Supplier<T> supplier) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return ThreadLocal.withInitial(supplier::get);
-        }
-
-        return new ThreadLocal<T>() {
-
-            @Override
-            protected T initialValue() {
-                return supplier.get();
-            }
         };
     }
 

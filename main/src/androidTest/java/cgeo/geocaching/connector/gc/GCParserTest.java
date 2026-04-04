@@ -24,6 +24,7 @@ import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
 import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -192,7 +192,7 @@ public class GCParserTest {
         // upload coordinates
         editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566")).blockingSubscribe();
         cache.dropSynchronous();
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n");
+        final String page = requestHtmlPage(cache.getGeocode(), null);
         final Geocache cache2 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache2).isNotNull();
         assertThat(cache2.hasUserModifiedCoords()).isTrue();
@@ -200,7 +200,7 @@ public class GCParserTest {
         // delete coordinates
         deleteModifiedCoordinates(cache2).blockingSubscribe();
         cache2.dropSynchronous();
-        final String page2 = requestHtmlPage(cache.getGeocode(), null, "n");
+        final String page2 = requestHtmlPage(cache.getGeocode(), null);
         final Geocache cache3 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache3).isNotNull();
         assertThat(cache3.hasUserModifiedCoords()).isFalse();
@@ -223,7 +223,7 @@ public class GCParserTest {
         Geocache cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
-        //make sure that waypoints are not duplicated
+        // make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
@@ -391,17 +391,32 @@ public class GCParserTest {
                 "\t</table>\n";
         final List<Image> images = GCParser.parseGalleryImages(html, url -> true);
         assertThat(images).hasSize(3);
-        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg");
+        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/cache/log/large/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg");
         assertThat(images.get(0).getTitle()).isEqualTo("Bild ");
         assertThat(images.get(0).getDescription()).isEqualTo("Gallery: 09.02.2025");    }
 
     @MediumTest
     @Test
-    public void testFullScaleImageUrl() {
+    public void testFullScaleImawhergeUrl() {
         assertThat(ImageUtils.getGCFullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.ORIGINAL.name());
         assertThat(ImageUtils.getGCFullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
                 .isEqualTo("https://img.geocaching.com/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.THUMB.name());
+        assertThat(ImageUtils.getGCFullScaleImageUrl("http://imgcdn.geocaching.com/track/log/large/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
+                .isEqualTo("https://img.geocaching.com/thumb/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.THUMB.name());
+        assertThat(ImageUtils.getGCFullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
+                .isEqualTo("https://img.geocaching.com/thumb/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.UNCHANGED.name());
+        assertThat(ImageUtils.getGCFullScaleImageUrl("https://s3.amazonaws.com/gs-geo-images/33cee358-f692-4f90-ace0-80c5a2c60a5c_t.jpg"))
+                .isEqualTo("https://s3.amazonaws.com/gs-geo-images/33cee358-f692-4f90-ace0-80c5a2c60a5c_t.jpg");
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.LARGE.name());
+        assertThat(ImageUtils.getGCFullScaleImageUrl("https://s3.amazonaws.com/gs-geo-images/33cee358-f692-4f90-ace0-80c5a2c60a5c_t.jpg"))
+                .isEqualTo("https://img.geocaching.com/large/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+        // return to the default UNCHANGED
+        Settings.putString(cgeo.geocaching.R.string.pref_gc_imagesize, ImageUtils.GCImageSize.UNCHANGED.name());
     }
 
     @MediumTest
@@ -463,6 +478,5 @@ public class GCParserTest {
         assertThat(trackablesNew.get(1).getGuid()).isNull();
         assertThat(trackablesNew.get(1).getGeocode()).isEqualTo("TBABCD5");
         assertThat(trackablesNew.get(1).getName()).isEqualTo("the test tb");
-
     }
 }

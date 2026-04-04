@@ -2,23 +2,18 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -30,6 +25,7 @@ import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
@@ -38,7 +34,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
@@ -47,7 +47,6 @@ import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
@@ -57,11 +56,19 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
+    protected Insets currentWindowInsets;
+
     private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
 
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
     }
+
+    // edge2edge parametrization, see configureEdge2Edge()
+    private static final int DEFAULT_INSETS =
+            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
+    //private int addInsets = 0;
+    //private boolean skipActionBarInsetCalculation = false;
 
     public void setUpNavigationEnabled(final boolean enabled) {
         final ActionBar actionBar = getSupportActionBar();
@@ -128,13 +135,80 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e(e.toString());
             throw e;
         }
-        onCreateCommon();
+
         this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 finish();
             }
         });
+
+        try {
+            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting indeterminate progress", ex);
+        }
+
+        // initialize commonly used members
+        res = this.getResources();
+        app = (CgeoApplication) this.getApplication();
+        ActivityMixin.onCreate(this, false);
+        initEdgeToEdge();
+    }
+
+    private void initEdgeToEdge() {
+        final Window currentWindow = getWindow();
+        //enable edge-to-edge downward-compatible
+        WindowCompat.enableEdgeToEdge(currentWindow);
+        //set window behaviour
+        final WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(currentWindow, currentWindow.getDecorView());
+
+        windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+        //apply edge2edge to activity content view
+        ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
+            final View activityContent = v.findViewById(R.id.activity_content);
+            if (activityContent == null) {
+                Log.w("edge2edge: activityContent not found in " + this);
+            } else {
+                //calculate and set the activity_content's insets
+                this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
+                //trigger insets recalculation
+                refreshActivityContentInsets();
+            }
+            return windowInsets;
+        });
+
+        // TODO: adjust system bars appearance, depending on action bar color and visibility
+        ActionBarUtils.setSystemBarAppearance(this);
+    }
+
+    /** Call if activityContent's edge-2-edge-padding needs to be reevaluated */
+    protected void refreshActivityContentInsets() {
+        if (this.currentWindowInsets == null) {
+            //method was called before insets were set
+            return;
+        }
+        final View activityContent = getWindow() == null || getWindow().getDecorView() == null ? null :
+            getWindow().getDecorView().findViewById(R.id.activity_content);
+        if (activityContent == null) {
+            return;
+        }
+
+        //let subclasses modify insets according to their needs
+        final Insets insets = calculateInsetsForActivityContent(this.currentWindowInsets);
+        //apply final insets to activity content
+        activityContent.setPadding(
+                insets.left < 0 ? this.currentWindowInsets.left : insets.left,
+                insets.top < 0 ? this.currentWindowInsets.top : insets.top,
+                insets.right < 0 ? this.currentWindowInsets.right : insets.right,
+                insets.bottom < 0 ? this.currentWindowInsets.bottom : insets.bottom);
+
+    }
+
+    /** Overwrite to manipulate edge-2-edge-insets for activitycontent in subclasses */
+    @NonNull
+    protected Insets calculateInsetsForActivityContent(@NonNull final Insets insets) {
+        return insets;
     }
 
     public void clearBackStack() {
@@ -154,28 +228,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         Log.v(logToken + ".setThemeAndContentView(resourceLayoutId=" + resourceLayoutID + ", isDialog= " + isDialog + ")");
         ActivityMixin.setTheme(this, isDialog);
         setContentView(resourceLayoutID);
-
-    }
-
-    /**
-     * Common actions for all onCreate functions.
-     */
-    private void onCreateCommon() {
-        try {
-            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        } catch (final AndroidRuntimeException ex) {
-            Log.e("Error requesting indeterminate progress", ex);
-        }
-        initializeCommonFields();
-    }
-
-    private void initializeCommonFields() {
-
-        // initialize commonly used members
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
-
-        ActivityMixin.onCreate(this, false);
     }
 
     @Override
@@ -236,56 +288,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
         }
-    }
-
-    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name, @Nullable final CacheType type) {
-        final CharSequence title;
-        if (StringUtils.isNotBlank(name)) {
-            title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
-        } else {
-            title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
-        }
-        setCacheTitleBar(title, type);
-    }
-
-    private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
-        setTitle(title);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (type != null) {
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.iconId, null));
-            } else {
-                actionBar.setIcon(android.R.color.transparent);
-            }
-        }
-    }
-
-    /**
-     * change the titlebar icon and text to show the current geocache
-     */
-    protected void setCacheTitleBar(@NonNull final Geocache cache) {
-        setTitle(TextUtils.coloredCacheText(this, cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
-        }
-    }
-
-    /**
-     * change the titlebar icon and text to show the current geocache
-     */
-    protected void setCacheTitleBar(@Nullable final String geocode) {
-        if (StringUtils.isEmpty(geocode)) {
-            return;
-        }
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        if (cache == null) {
-            Log.e("AbstractActivity.setCacheTitleBar: cannot find the cache " + geocode);
-            return;
-        }
-        setCacheTitleBar(cache);
     }
 
     @Override

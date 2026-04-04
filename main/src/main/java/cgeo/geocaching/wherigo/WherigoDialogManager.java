@@ -6,8 +6,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.offlinetranslate.Translator;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -50,7 +49,6 @@ public class WherigoDialogManager {
     private IWherigoDialogControl currentDialogControl; // filled in state DIALOG_DISPLAYED
     private final AtomicInteger currentDialogId = new AtomicInteger(0); // if DIALOG_DISPLAYED, then holds id of this dialog
 
-
     public enum State {
         NO_DIALOG, // no dialog is displayed and none is waiting to be displayed
         DIALOG_DISPLAYED, //a dialog is currently being displayed
@@ -84,6 +82,7 @@ public class WherigoDialogManager {
             }
 
             dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
+                Log.iForce("Wherigo: dismissing dialog");
                 WherigoGame.get().removeListener(gameListenerId);
                 isDismissed = true;
                 dismissDisposables.dispose();
@@ -138,11 +137,6 @@ public class WherigoDialogManager {
             this.dismissDisposables.add(disposable);
             return disposable;
         }
-
-        @Override
-        public Translator getTranslator() {
-            return WherigoGame.get().getTranslator();
-        }
     }
 
     private WherigoDialogManager() {
@@ -170,6 +164,13 @@ public class WherigoDialogManager {
     /** sets a new Wherigo Dialog to display. Removes/closes any other waiting/opened dialog */
     public void display(final IWherigoDialogProvider dialogProvider) {
         executeAction(() -> {
+
+            //check if maybe refresh of already opened dialog is sufficient
+            if (state == State.DIALOG_DISPLAYED && currentDialogProvider != null && currentDialogProvider.canRefresh(dialogProvider)) {
+                WherigoGame.get().notifyListeners(WherigoGame.NotifyType.REFRESH);
+                return;
+            }
+            //close existing dialog + trigger opening a new one
             clearInternal();
             this.currentDialogProvider = dialogProvider;
             state = State.DIALOG_WAITING;
@@ -260,7 +261,7 @@ public class WherigoDialogManager {
             // show title first (and content is cut off)
             .setContentTitle(content)
             .setContentText(content)
-            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, WherigoActivity.class), ProcessUtils.getFlagImmutable()))
+            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, WherigoActivity.class), PendingIntent.FLAG_IMMUTABLE))
             .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

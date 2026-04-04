@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -40,7 +40,7 @@ public class DownloaderTest {
     @Nullable
     private static Download findByName(final List<Download> list, final String name) {
         for (Download d : list) {
-            if (StringUtils.equals(d.getName(), name)) {
+            if (Strings.CS.equals(d.getName(), name)) {
                 return d;
             }
         }
@@ -72,7 +72,7 @@ public class DownloaderTest {
     }
 
     @Test
-public void testOpenAndroMaps() {
+    public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
@@ -172,8 +172,8 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "E5_N50.rd5");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 154.8 MB as of 2023-06-05
+        final String sizeInfoString = d.getSizeInfo(); // 178328254 byte as of 2025-10-07
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(120.0F, 170.0F);
+        assertThat(sizeInfoFloat).isBetween(120.0F, 250.0F);
     }
 }

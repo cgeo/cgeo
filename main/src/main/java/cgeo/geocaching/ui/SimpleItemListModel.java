@@ -57,6 +57,7 @@ public class SimpleItemListModel<T> {
     private String filterTerm = null;
 
     private final Set<T> selectedItems = new HashSet<>();
+    private final Set<T> disabledItems = new HashSet<>();
 
     private final List<Consumer<ChangeType>> changeListeners = new ArrayList<>();
 
@@ -78,7 +79,8 @@ public class SimpleItemListModel<T> {
         private Function<T, G> groupMapper = null;
         private Function<G, G> groupGroupMapper = null;
 
-        private Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper = (group, itemGroup, context, view, parent) -> null;
+        private Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper = constructGroupDisplayViewMapper((ig) -> TextParam.text(ig == null || ig.getGroup() == null ? "-" : ig.getGroup().toString()));
+            //(group, itemGroup, context, view, parent) -> null;
         private Function<ItemGroup<T, G>, ImageParam> groupDisplayIconMapper = (ig) -> null;
         private Comparator<Object> itemGroupComparator = null;
         private Comparator<G> groupComparator = null;
@@ -244,7 +246,7 @@ public class SimpleItemListModel<T> {
                 final JsonNode node = JsonUtils.stringToNode(Settings.getSimpleListModelConfig(this.reducedGroupSaveId));
                 if (node != null) {
                     final List<String> groupStrings = JsonUtils.getTextList(node, "groups");
-                    setReducedGroups(groupStrings.stream().map(s -> this.reducedGroupIdBackMapper.apply(s)).collect(Collectors.toList()));
+                    setReducedGroups(groupStrings.stream().map(this.reducedGroupIdBackMapper::apply).collect(Collectors.toList()));
                 }
             }
         }
@@ -472,6 +474,23 @@ public class SimpleItemListModel<T> {
      *  collection will always have 0 or 1 element only. */
     public Set<T> getSelectedItems() {
         return selectedItems;
+    }
+
+    /** Sets the currently selected items */
+    public SimpleItemListModel<T> setDisabledItems(final Iterable<T> disabled) {
+        if (disabled != null) {
+            disabledItems.clear();
+            for (T sel : disabled) {
+                disabledItems.add(sel);
+            }
+        }
+        return this;
+    }
+
+    /** Gets currently selected items. If ChoiceMode is a SINGLE mode then the returned
+     *  collection will always have 0 or 1 element only. */
+    public Set<T> getDisabledItems() {
+        return disabledItems;
     }
 
     /** Adds a model change listener */

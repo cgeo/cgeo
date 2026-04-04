@@ -27,6 +27,7 @@ import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Utility class for files
@@ -354,7 +355,7 @@ public final class FileUtils {
      * @return <tt>true</tt> if the URL scheme is <tt>file</tt>, <tt>false</tt> otherwise
      */
     public static boolean isFileUrl(final String url) {
-        return StringUtils.startsWith(url, FILE_PROTOCOL);
+        return Strings.CS.startsWith(url, FILE_PROTOCOL);
     }
 
     /**

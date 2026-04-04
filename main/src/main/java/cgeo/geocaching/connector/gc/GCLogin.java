@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -32,6 +33,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -43,22 +48,23 @@ import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivex.rxjava3.core.Single;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin?returnUrl=%2Faccount%2Fsettings%2Fhomelocation";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private ServerParameters serverParameters = null;
+    private String homeLocationPage = null;
 
     private static class StatusException extends RuntimeException {
         private static final long serialVersionUID = -597420116705938433L;
@@ -309,7 +315,11 @@ public class GCLogin extends AbstractLogin {
         Log.iForce("GCLogin: post credentials");
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
-        return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
+
+        final Response response = Network.postRequest(LOGIN_URI, params).blockingGet();
+        final String loginPageResponse = getResponseBodyOrStatus(response);
+        homeLocationPage = loginPageResponse;
+        return loginPageResponse;
     }
 
     /**
@@ -385,27 +395,25 @@ public class GCLogin extends AbstractLogin {
     /**
      * Retrieve the home location
      *
-     * @return a Single containing the home location, or IOException
+     * @return the home location, or IOException
      */
-    static Single<String> retrieveHomeLocation() {
-        return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
-                .map(document -> {
-
-                    final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, document.outerHtml());
-                    if (match.find()) {
-                        return match.group(1) + " " + match.group(2);
-                    }
-                    return "";
-                });
+    String retrieveHomeLocation() {
+        if (homeLocationPage == null || !homeLocationPage.contains("homeLocation")) {
+            homeLocationPage = getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/account/settings/homelocation").blockingGet());
+        }
+        final MatcherWrapper match = new MatcherWrapper(GCConstants.PATTERN_LOCATION_LOGIN, homeLocationPage);
+        if (match.find()) {
+            return match.group(1) + " " + match.group(2);
+        }
+        return "";
     }
 
-    private static void setHomeLocation() {
-        retrieveHomeLocation().subscribe(homeLocationStr -> {
-            if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
-                Log.i("Setting home location to " + homeLocationStr);
-                Settings.setHomeLocation(homeLocationStr);
-            }
-        }, throwable -> Log.w("Unable to retrieve the home location"));
+    private void setHomeLocation() {
+        final String homeLocationStr = retrieveHomeLocation();
+        if (StringUtils.isNotBlank(homeLocationStr) && !Strings.CS.equals(homeLocationStr, Settings.getHomeLocation())) {
+            Log.i("Setting home location to " + homeLocationStr);
+            Settings.setHomeLocation(homeLocationStr);
+        }
     }
 
     @WorkerThread
@@ -413,10 +421,11 @@ public class GCLogin extends AbstractLogin {
         if (serverParameters != null) {
             return serverParameters;
         }
+        return parseServerParams(getResponseBodyOrStatus(Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet()));
+    }
 
-        final Response response = Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet();
+    private ServerParameters parseServerParams(final String javascriptBody) {
         try {
-            final String javascriptBody = response.body().string();
             final String jsonBody = javascriptBody.subSequence(javascriptBody.indexOf('{'), javascriptBody.lastIndexOf(';')).toString();
             serverParameters = MAPPER.readValue(jsonBody, ServerParameters.class);
 
@@ -444,7 +453,6 @@ public class GCLogin extends AbstractLogin {
             Log.e("Error loading serverparameters", e);
             return null;
         }
-
         return serverParameters;
     }
 
@@ -569,9 +577,18 @@ public class GCLogin extends AbstractLogin {
     @Nullable
     @WorkerThread
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+        return getRequestLogged(uri, params, null);
+    }
+
+    /**
+     * GET HTTP request. Do the request a second time if the user is not logged in
+     */
+    @Nullable
+    @WorkerThread
+    String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params, @Nullable final Boolean removeWhitespace) {
         try {
             final Response response = Network.getRequest(uri, params).blockingGet();
-            final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
+            final String data = Network.getResponseData(response, removeWhitespace == null ? canRemoveWhitespace(uri) : removeWhitespace);
 
             // A page not found will not be found if the user logs in either
             if (response.code() == 404 || getLoginStatus(data)) {
@@ -595,7 +612,7 @@ public class GCLogin extends AbstractLogin {
      * remove the white space from cache details pages.
      */
     private static boolean canRemoveWhitespace(final String uri) {
-        return !StringUtils.contains(uri, "cache_details");
+        return !Strings.CS.contains(uri, "cache_details");
     }
 
     private StatusCode completeLoginProcess() {
@@ -612,12 +629,20 @@ public class GCLogin extends AbstractLogin {
     }
 
     @UiThread
-    public void performManualLogin(@NonNull final Context activity, final Runnable callback) {
+    public void performManualLogin(@NonNull final Activity activity, final Runnable callback) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
+
+        WindowCompat.enableEdgeToEdge(activity.getWindow());
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
+            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
+            return windowInsets;
+        });
+
         CookieManager.getInstance().removeAllCookies(b -> {
             final String url = "https://www.geocaching.com";
             binding.webview.loadUrl(url + "/account/signin");

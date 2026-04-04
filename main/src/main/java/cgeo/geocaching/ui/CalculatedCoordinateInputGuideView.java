@@ -5,10 +5,14 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.CalculatedCoordinateType;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.KeyableCharSet;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.FormulaException;
+import cgeo.geocaching.utils.formulas.VariableList;
+import cgeo.geocaching.utils.formulas.VariableMap;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
@@ -34,8 +38,10 @@ import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 import androidx.gridlayout.widget.GridLayout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -95,6 +101,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
     private Consumer<Pair<String, String>> changeListener = null;
     private boolean changeListenerActive = true;
+    private VariableList variableList = null;
 
     public CalculatedCoordinateInputGuideView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
@@ -113,6 +120,10 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
     public void setChangeListener(final Consumer<Pair<String, String>> changeListener) {
         this.changeListener = changeListener;
+    }
+
+    public void setVariableList(final VariableList variableList) {
+        this.variableList = variableList;
     }
 
     /**
@@ -452,6 +463,51 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         markButton(null);
     }
 
+    private void showVariableContextMenu(final CharButton button) {
+        if (variableList == null) {
+            return;
+        }
+
+        // Build list of options
+        final List<Pair<String, String>> options = new ArrayList<>();
+
+        // Add "Clear" option
+        options.add(new Pair<>("", LocalizationUtils.getString(R.string.log_clear)));
+
+        // Add "New: X" option (next unused variable)
+        final Character nextVar = variableList.getLowestMissingChar();
+        if (nextVar != null) {
+            options.add(new Pair<>("" + nextVar, LocalizationUtils.getString(R.string.calccoord_new_variable, nextVar)));
+        }
+
+        // Add existing variables with their values
+        final List<String> varList = variableList.asList();
+        for (final String varName : varList) {
+            if (!VariableList.isVisible(varName)) {
+                continue;
+            }
+            final VariableMap.VariableState state = variableList.getState(varName);
+            if (state == null) {
+                continue;
+            }
+            final String formula = state.getFormulaString();
+            if (StringUtils.isBlank(formula)) {
+                options.add(new Pair<>(varName, "**" + varName + "**"));
+            } else {
+                options.add(new Pair<>(varName, "**" + varName + "** = " + formula));
+            }
+        }
+
+        // Show selection dialog
+        final SimpleDialog.ItemSelectModel<Pair<String, String>> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(options)
+                .setDisplayMapper(opt -> TextParam.text(opt.second).setMarkdown(true))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+        SimpleDialog.ofContext(getContext())
+                .setTitle(R.string.calccoord_select_variable)
+                .selectSingle(model, opt -> button.setText(opt.first));
+    }
 
     private class CharButton extends RelativeLayout {
 
@@ -518,6 +574,10 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             butt.setText("0");
 
             super.setOnClickListener(v -> markButton(this));
+            super.setOnLongClickListener(v -> {
+                showVariableContextMenu(this);
+                return true;
+            });
         }
 
         private void initView() {

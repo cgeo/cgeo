@@ -35,6 +35,7 @@ import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
@@ -173,6 +174,7 @@ public class RouteTrackUtils {
         configureVisibility(menu.findItem(R.id.menu_visibility), route != null && route.isHidden());
     }
 
+    @SuppressLint("AlwaysShowAction")
     private static void configureMenuItem(final MenuItem item, final boolean visible, final Boolean hidePerDefault) {
         item.setVisible(visible);
         if (hidePerDefault != null) {

@@ -12,7 +12,6 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.MBTilesLayerHelper;
-import cgeo.geocaching.unifiedmap.layers.mbtiles.MBTilesLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -42,6 +41,7 @@ import org.mapsforge.core.util.LatLongUtils;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.mbtiles.TileMBTilesLayer;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
@@ -126,7 +126,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         mMapView.getMapScaleBar().setMarginHorizontal(mapAttPx);
 
         if (Settings.getMapBackgroundMapLayer() && currentTileProvider.supportsBackgroundMaps()) {
-            for (MBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
+            for (TileMBTilesLayer backgroundMap : MBTilesLayerHelper.getBitmapTileLayersMapsforge(requireActivity(), mMapView)) {
                 mMapView.getLayerManager().getLayers().add(backgroundMap);
             }
         }

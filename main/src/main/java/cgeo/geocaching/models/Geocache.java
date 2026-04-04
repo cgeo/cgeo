@@ -32,9 +32,9 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
@@ -102,7 +102,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.Strings;
 
 /**
  * Internal representation of a "cache"
@@ -251,7 +251,6 @@ public class Geocache implements INamedGeoCoordinate {
         }
 
         updated = System.currentTimeMillis();
-        //storageLocation.addAll(other.getStorageLocation()); // seems correct but has side effects / failing tests
 
         // if parsed cache is not yet detailed and stored is, the information of
         // the parsed cache will be overwritten
@@ -402,7 +401,7 @@ public class Geocache implements INamedGeoCoordinate {
             setCoords(other.getCoords());
         } else {
             if (coords == null) {
-                coords = other.coords;
+                setCoords(other.coords);
             }
         }
         // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
@@ -466,8 +465,8 @@ public class Geocache implements INamedGeoCoordinate {
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
-                StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
-                StringUtils.equalsIgnoreCase(name, other.name) &&
+                Strings.CI.equals(geocode, other.geocode) &&
+                Strings.CI.equals(name, other.name) &&
                 cacheType.equals(other.cacheType) &&
                 size == other.size &&
                 Objects.equals(found, other.found) &&
@@ -479,20 +478,20 @@ public class Geocache implements INamedGeoCoordinate {
                 Objects.equals(disabled, other.disabled) &&
                 Objects.equals(archived, other.archived) &&
                 Objects.equals(lists, other.lists) &&
-                StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
-                StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
-                StringUtils.equalsIgnoreCase(getDescription(), other.getDescription()) &&
+                Strings.CI.equals(ownerDisplayName, other.ownerDisplayName) &&
+                Strings.CI.equals(ownerUserId, other.ownerUserId) &&
+                Strings.CI.equals(getDescription(), other.getDescription()) &&
                 Objects.equals(personalNote, other.personalNote) &&
-                StringUtils.equalsIgnoreCase(getShortDescription(), other.getShortDescription()) &&
-                StringUtils.equalsIgnoreCase(getLocation(), other.getLocation()) &&
+                Strings.CI.equals(getShortDescription(), other.getShortDescription()) &&
+                Strings.CI.equals(getLocation(), other.getLocation()) &&
                 Objects.equals(favorite, other.favorite) &&
                 favoritePoints == other.favoritePoints &&
                 Objects.equals(onWatchlist, other.onWatchlist) &&
                 Objects.equals(hidden, other.hidden) &&
                 Objects.equals(lastFound, other.lastFound) &&
-                StringUtils.equalsIgnoreCase(guid, other.guid) &&
-                StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
-                StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
+                Strings.CI.equals(guid, other.guid) &&
+                Strings.CI.equals(getHint(), other.getHint()) &&
+                Strings.CI.equals(cacheId, other.cacheId) &&
                 Objects.equals(direction, other.direction) &&
                 Objects.equals(distance, other.distance) &&
                 rating == other.rating &&
@@ -544,7 +543,7 @@ public class Geocache implements INamedGeoCoordinate {
             final LogType logType = logEntry.logType;
             if (logType == LogType.ATTENDED) {
                 return false;
-            } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
+            } else if (logType == LogType.WILL_ATTEND && LogUtils.isOwnLog(logEntry, this)) {
                 willAttend = true;
             }
         }
@@ -783,6 +782,10 @@ public class Geocache implements INamedGeoCoordinate {
     public boolean isDisabled() {
         // a cache can never be disabled and archived at the same time, so the archived state should win (see #11428)
         return !isArchived() && BooleanUtils.isTrue(disabled);
+    }
+
+    public boolean isEnabled() {
+        return !isDisabled() && !isArchived();
     }
 
     public boolean isPremiumMembersOnly() {
@@ -1175,6 +1178,9 @@ public class Geocache implements INamedGeoCoordinate {
      * Set reliable coordinates
      */
     public void setCoords(final Geopoint coords) {
+        if (this.coords != null && coords == null) {
+            Log.w("Geocache: setting non-null-coordinates to null for cache´" + geocode + " (was: " + coords + ")");
+        }
         this.coords = coords;
     }
 
@@ -1375,6 +1381,15 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public List<Waypoint> getWaypoints() {
         return waypoints.getUnderlyingList();
+    }
+
+    public List<Waypoint> getSortedWaypointList() {
+        if (hasWaypoints()) {
+            final List<Waypoint> waypoints = getWaypoints();
+            Collections.sort(waypoints, getWaypointComparator());
+            return waypoints;
+        }
+        return Collections.emptyList();
     }
 
     /**
@@ -1607,7 +1622,7 @@ public class Geocache implements INamedGeoCoordinate {
                 waypoint.setPrefix(oldWaypoint.getPrefix());
                 //migration
                 if (StringUtils.isBlank(waypoint.getPrefix())
-                        || StringUtils.equalsIgnoreCase(waypoint.getPrefix(), Waypoint.PREFIX_OWN)) {
+                        || Strings.CI.equals(waypoint.getPrefix(), Waypoint.PREFIX_OWN)) {
                     assignUniquePrefix(waypoint);
                 }
             }
@@ -1712,7 +1727,7 @@ public class Geocache implements INamedGeoCoordinate {
         while (found) {
             found = false;
             for (Waypoint waypoint : waypoints) {
-                if (StringUtils.equals(waypoint.getPrefix(), copy.getPrefix())) {
+                if (Strings.CS.equals(waypoint.getPrefix(), copy.getPrefix())) {
                     found = true;
                     break;
                 }
@@ -2303,9 +2318,9 @@ public class Geocache implements INamedGeoCoordinate {
             // which is called by StringUtils.containsAny(CharSequence, CharSequence...).
             // Thus, we have to use StringUtils.contains(...) instead (see issue #5766).
             final String url = image.getUrl();
-            if (!StringUtils.contains(url, "/static") &&
-                    !StringUtils.contains(url, "/resource") &&
-                    !StringUtils.contains(url, "/icons/")) {
+            if (!Strings.CS.contains(url, "/static") &&
+                    !Strings.CS.contains(url, "/resource") &&
+                    !Strings.CS.contains(url, "/icons/")) {
                 result.add(image);
             }
         }
@@ -2345,7 +2360,7 @@ public class Geocache implements INamedGeoCoordinate {
      */
     public boolean hasOwnLog(@NonNull final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.logType == logType && logEntry.isOwn()) {
+            if (logEntry.logType == logType && LogUtils.isOwnLog(logEntry, this)) {
                 return true;
             }
         }
@@ -2458,14 +2473,18 @@ public class Geocache implements INamedGeoCoordinate {
      */
     @NonNull
     public static Set<String> getGeocodes(@NonNull final Collection<Geocache> caches) {
-        final Set<String> geocodes = new HashSet<>(caches.size());
+        return getGeocodes(caches, new HashSet<>(caches.size()));
+    }
+
+    @NonNull
+    public static <T extends Collection<String>> T getGeocodes(@NonNull final Iterable<Geocache> caches, final T result) {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode)) {
-                geocodes.add(geocode);
+                result.add(geocode);
             }
         }
-        return geocodes;
+        return result;
     }
 
     /**
@@ -2474,11 +2493,6 @@ public class Geocache implements INamedGeoCoordinate {
     public void showHintToast(@NonNull final Activity activity) {
         final String hint = getHint();
         ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
-    }
-
-    @NonNull
-    public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().iconId);
     }
 
     @NonNull

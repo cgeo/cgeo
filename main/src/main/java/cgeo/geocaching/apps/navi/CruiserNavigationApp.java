@@ -20,7 +20,7 @@ public class CruiserNavigationApp extends AbstractPointNavigationApp {
     static final String ACTION = "com.devemux86.intent.action.NAVIGATION";
 
     protected CruiserNavigationApp() {
-        super(getString(R.string.cache_menu_cruiser), null, getString(R.string.package_cruiser));
+        super(R.string.cache_menu_cruiser, null, getString(R.string.package_cruiser));
     }
 
     @Override

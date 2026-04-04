@@ -13,6 +13,7 @@ public class BookmarkListActivity extends AbstractListActivity {
         title = R.string.menu_lists_bookmarklists;
         progressInfo = R.string.search_bookmark_list;
         errorReadingList = R.string.err_read_bookmark_list;
+        warnNoSelectedList = R.string.warn_bookmarklist_select;
         switchLabel = R.string.lists_only_new;
     }
 
@@ -36,4 +37,9 @@ public class BookmarkListActivity extends AbstractListActivity {
         return PocketQueryHistory.isNew(list);
     }
 
+    @Override
+    boolean supportMultiPreview() {
+        // Now we are able to parse bookmark lists without download, but only for single list
+        return false;
+    }
 }

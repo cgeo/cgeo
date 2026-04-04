@@ -9,7 +9,6 @@ import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -27,6 +26,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class Waypoint implements INamedGeoCoordinate {
 
@@ -84,7 +85,7 @@ public class Waypoint implements INamedGeoCoordinate {
      * Sort waypoints by their probable order (e.g. parking first, final last).
      * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) Comparator.comparingInt(Waypoint::order);
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = Comparator.comparingInt(Waypoint::order);
 
     /**
      * Sort waypoints by internal id descending (results in newest on top)
@@ -148,7 +149,7 @@ public class Waypoint implements INamedGeoCoordinate {
         if (StringUtils.isBlank(userNote)) {
             userNote = old.userNote;
         }
-        if (StringUtils.equals(note, userNote)) {
+        if (Strings.CS.equals(note, userNote)) {
             userNote = "";
         }
 
@@ -310,9 +311,8 @@ public class Waypoint implements INamedGeoCoordinate {
         return preprojectedCoords;
     }
 
-    @Nullable
-    public Float getGeofence() {
-        return geofence;
+    public int getGeofence() {
+        return geofence == null ? 0 : Math.round(geofence);
     }
 
     public boolean canChangeGeofence() {
@@ -524,10 +524,6 @@ public class Waypoint implements INamedGeoCoordinate {
         return false;
     }
 
-    public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getFullGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
-    }
-
     public String getUserNote() {
         return userNote;
     }
@@ -651,6 +647,15 @@ public class Waypoint implements INamedGeoCoordinate {
         return type.getNameForNewWaypoint() + " " + (max + 1);
     }
 
+    public static Set<WaypointType> getWaypointTypes(final Iterable<Waypoint> waypoints) {
+        final Set<WaypointType> wpTypes = new LinkedHashSet<>();
+        for (Waypoint waypoint : waypoints) {
+            final WaypointType wpType = waypoint.getWaypointType();
+            wpTypes.add(wpType);
+        }
+        return wpTypes;
+    }
+
     /**
      * returns a string with current waypoint's id to clipboard, preceeded by internal prefix
      * this is to be pushed to clipboard
@@ -702,7 +707,6 @@ public class Waypoint implements INamedGeoCoordinate {
         }
         return applyDistanceRule;
     }
-
 
     public int setProjectionFromConfig(final String config, final int startIdx) {
         if (config == null || startIdx < 0 || startIdx >= config.length()) {

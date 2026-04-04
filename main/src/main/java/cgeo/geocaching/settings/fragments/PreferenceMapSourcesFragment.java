@@ -2,8 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
-import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -18,21 +16,19 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 
-import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
-    private ListPreference prefMapSources;
     private ListPreference prefTileProvicers;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_map_sources, rootKey);
-        prefMapSources = findPreference(getString(R.string.pref_mapsource));
         prefTileProvicers = findPreference(getString(R.string.pref_tileprovider));
 
         initMapSourcePreference();
@@ -62,19 +58,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         unifiedMapVariants.setEntries(new String[]{ "Mapsforge", "VTM", "Mapsforge + VTM" });
         unifiedMapVariants.setEntryValues(new String[]{ String.valueOf(Settings.UNIFIEDMAP_VARIANT_MAPSFORGE), String.valueOf(Settings.UNIFIEDMAP_VARIANT_VTM), String.valueOf(Settings.UNIFIEDMAP_VARIANT_BOTH) });
         setFlagForRestartRequired(R.string.pref_unifiedMapVariants);
-
-        // UnifiedMap/legacy maps switch
-        final CheckBoxPreference useLegacyMap = findPreference(getString(R.string.pref_useLegacyMap));
-        useLegacyMap.setOnPreferenceChangeListener((preference, newValue) -> {
-            final boolean useUnifiedMap = !((boolean) newValue);
-            findPreference(getString(R.string.pref_tileprovider)).setEnabled(useUnifiedMap);
-            findPreference(getString(R.string.pref_tileprovider_hidden)).setEnabled(useUnifiedMap);
-            findPreference(getString(R.string.pref_unifiedMapVariants)).setEnabled(useUnifiedMap);
-            findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setEnabled(useUnifiedMap);
-            findPreference(getString(R.string.pref_mapsource)).setEnabled(!useUnifiedMap);
-            return true;
-        });
-        useLegacyMap.setChecked(Settings.useLegacyMaps());
     }
 
     @Override
@@ -94,47 +77,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
      * Fill the choice list for map sources.
      */
     private void initMapSourcePreference() {
-
-        // old map ---------------------------------------------------------------------------------
-        final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
-        final CharSequence[] entries = new CharSequence[mapSources.size()];
-        final CharSequence[] values = new CharSequence[mapSources.size()];
-        int idx = 0;
-        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
-            entries[idx] = mapSource.getName();
-            values[idx] = mapSource.getId();
-            idx++;
-        }
-        prefMapSources.setEntries(entries);
-        prefMapSources.setEntryValues(values);
-        prefMapSources.setOnPreferenceChangeListener((preference, newValue) -> {
-            final String newMapSource = (String) newValue;
-
-            // reset the cached map source
-            MapSource mapSource;
-            try {
-                mapSource = MapProviderFactory.getMapSource(newMapSource);
-            } catch (final NumberFormatException e) {
-                Log.e("PreferenceMapFragment.onMapSourcesChange: bad source id '" + newMapSource + "'", e);
-                mapSource = null;
-            }
-            // If there is no corresponding map source (because some map sources were
-            // removed from the device since) then use the first one available.
-            if (mapSource == null) {
-                mapSource = MapProviderFactory.getAnyMapSource();
-                if (mapSource == null) {
-                    // There are no map source. There is little we can do here, except log an error and
-                    // return to avoid triggering a null pointer exception.
-                    Log.e("PreferenceMapFragment.onMapSourcesChange: no map source available");
-                    return true;
-                }
-            }
-            Settings.setMapSource(mapSource);
-            return true;
-        });
-
-
-        // UnifiedMap ------------------------------------------------------------------------------
         final HashMap<String, AbstractTileProvider> tileProviders = TileProviderFactory.getTileProviders();
         final CharSequence[] entriesUM = new CharSequence[tileProviders.size()];
         final CharSequence[] valuesUM = new CharSequence[tileProviders.size()];

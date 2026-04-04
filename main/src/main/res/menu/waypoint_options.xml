@@ -27,6 +27,9 @@
         android:title="@string/waypoint_toclipboard"
         android:visible="false"/>
     <item
+        android:id="@+id/menu_waypoint_translate"
+        android:title="@string/translate"/>
+    <item
         android:id="@+id/menu_waypoint_delete"
         android:title="@string/waypoint_delete"/>
     <item

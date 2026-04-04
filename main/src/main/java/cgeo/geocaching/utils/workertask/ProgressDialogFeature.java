@@ -3,14 +3,11 @@ package cgeo.geocaching.utils.workertask;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.utils.Log;
 
-import android.annotation.TargetApi;
-
 import androidx.activity.ComponentActivity;
 
 import java.util.function.Function;
 
 /** Feature to surround execution of a worker task visually with a progress dialog */
-@TargetApi(24)
 public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, P, Object> {
 
     private final ComponentActivity activity;

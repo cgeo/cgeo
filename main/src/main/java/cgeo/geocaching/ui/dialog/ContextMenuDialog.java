@@ -9,11 +9,12 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Represents a dialog usable as a context menu for various elements.
@@ -26,7 +27,7 @@ public class ContextMenuDialog {
     private String title;
 
     private final List<Item> items = new ArrayList<>();
-    private Action1<Integer> dialogClickAction;
+    private Consumer<Integer> dialogClickAction;
 
     public ContextMenuDialog setTitle(final String title) {
         this.title = title;
@@ -62,7 +63,7 @@ public class ContextMenuDialog {
         return this;
     }
 
-    public ContextMenuDialog setOnClickAction(final Action1<Integer> clickAction) {
+    public ContextMenuDialog setOnClickAction(final Consumer<Integer> clickAction) {
         this.dialogClickAction = clickAction;
         return this;
     }
@@ -78,7 +79,7 @@ public class ContextMenuDialog {
             if (dialogClickAction != null) {
                 final int pos = this.items.indexOf(it);
                 if (pos >= 0) {
-                    dialogClickAction.call(pos);
+                    dialogClickAction.accept(pos);
                 }
             }
         };
@@ -105,6 +106,7 @@ public class ContextMenuDialog {
             this.selectAction = selectAction;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return text;

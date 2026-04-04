@@ -26,7 +26,7 @@ import org.oscim.tiling.source.mapfile.MapInfo;
 public class AbstractMapsforgeVTMOfflineTileProvider extends AbstractMapsforgeVTMTileProvider {
 
     IMapFileTileSource tileSource;
-    private BuildingLayer buildingLayer;
+    protected BuildingLayer buildingLayer;
     private final String displayName;
 
     AbstractMapsforgeVTMOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {

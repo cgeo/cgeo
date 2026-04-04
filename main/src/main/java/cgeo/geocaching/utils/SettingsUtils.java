@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class SettingsUtils {
@@ -190,7 +190,7 @@ public class SettingsUtils {
         final List<Long> freeSpaces = new ArrayList<>();
         int selectedDirIndex = -1;
         for (final File dir : extDirs) {
-            if (StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+            if (Strings.CS.equals(currentExtDir, dir.getAbsolutePath())) {
                 selectedDirIndex = directories.size();
             }
             final long freeSpace = FileUtils.getFreeDiskSpace(dir);
@@ -227,7 +227,7 @@ public class SettingsUtils {
         }, selectedDirIndex, (dialog, itemId) -> {
             SimpleDialog.of(activity).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm(() -> {
                 final File dir = extDirs.get(itemId);
-                if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                if (!Strings.CS.equals(currentExtDir, dir.getAbsolutePath())) {
                     LocalStorage.changeExternalPrivateCgeoDir(activity, dir.getAbsolutePath());
                 }
                 Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
@@ -247,5 +247,4 @@ public class SettingsUtils {
         }
         return formatted;
     }
-
 }

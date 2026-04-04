@@ -118,11 +118,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             container.addView(binding.getRoot());
             final PageData pd = new PageData(binding);
 
-            final Image currentImage = imageList.get(imagePos);
+            // Safeguard against stale realImageSize after onRestoreInstanceState modifies imageList
+            final int safeImagePos = Math.max(0, Math.min(imagePos, imageList.size() - 1));
+            final Image currentImage = imageList.get(safeImagePos);
             pd.isBrowseable = currentImage != null && !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri());
 
             cachedPages.put(pagerPos, pd);
-            loadImageView(pagerPos, imagePos, binding);
+            loadImageView(pagerPos, safeImagePos, binding);
             return binding.getRoot();
         }
 
@@ -138,7 +140,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             setFullImageViewOnOff(ImageviewImageBinding.bind((View) object), fullImageView);
 
             cachedPosition = position;
-            imagePos = position % realImageSize;
+            // Safeguard against stale realImageSize after onRestoreInstanceState modifies imageList
+            final int calculatedPos = position % realImageSize;
+            imagePos = Math.max(0, Math.min(calculatedPos, imageList.size() - 1));
             final boolean hasImage = imageList.get(imagePos) != null;
             mainBinding.imageOpenBrowser.setEnabled(hasImage && cachedPages.get(cachedPosition).isBrowseable);
             mainBinding.imageOpenFile.setEnabled(hasImage);
@@ -224,7 +228,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide(); //do not use normal Action Bar
+        setFixedActionBar(false);
         setThemeAndContentView(R.layout.imageview_activity);
         enableViewTransitions(this);
         postponeEnterTransition();
@@ -264,7 +268,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         imageAdapter = new ImageAdapter(this);
 
-        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_activityroot));
+        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.activity_content));
         mainBinding.imageviewViewpager.setAdapter(imageAdapter);
         startPagerPos = imagePos + imageAdapter.getCount() / 2;
         mainBinding.imageviewViewpager.setCurrentItem(startPagerPos);
@@ -419,7 +423,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
             setFinishResult();
             finishAfterTransition();
-        }, () -> imageAdapter.toggleFullImageView());
+        }, imageAdapter::toggleFullImageView);
 
         //trigger enter transition if this is start
         if (pagerPos == startPagerPos) {

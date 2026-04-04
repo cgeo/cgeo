@@ -105,11 +105,11 @@ public class LegacyCalculatedCoordinateMigrator {
                 final MigrationCalculatedCoordinateType ccmType = MigrationCalculatedCoordinateType.fromMigration(json.optInt("format", 2));
                 ccm.type = ccmType.type;
                 if (ccm.type == CalculatedCoordinateType.PLAIN) {
-                    ccm.latPattern = convertPattern(json.optString("plainLat"));
-                    ccm.lonPattern = convertPattern(json.optString("plainLon"));
+                    ccm.latPattern = convertPattern(json.getString("plainLat"));
+                    ccm.lonPattern = convertPattern(json.getString("plainLon"));
                 } else {
-                    ccm.latPattern = convertPattern("" + (char) json.optInt("latHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 0, ccmType.latPattern));
-                    ccm.lonPattern = convertPattern("" + (char) json.optInt("lonHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 11, ccmType.lonPattern));
+                    ccm.latPattern = convertPattern("" + (char) json.optInt("latHemisphere") + parseButtonDataFromJson(json.getJSONArray("buttons"), 0, ccmType.latPattern));
+                    ccm.lonPattern = convertPattern("" + (char) json.optInt("lonHemisphere") + parseButtonDataFromJson(json.getJSONArray("buttons"), 11, ccmType.lonPattern));
                 }
 
                 addVariablesFromJson(ccm.variables, json.optJSONArray("equations"));
@@ -118,6 +118,7 @@ public class LegacyCalculatedCoordinateMigrator {
                 ccm.createMigNotes();
 
             } catch (JSONException je) {
+                //-> this is not a calculated waypoint to migrate
                 return null;
             }
 

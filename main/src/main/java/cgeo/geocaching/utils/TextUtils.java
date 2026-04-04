@@ -38,6 +38,7 @@ import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -298,6 +299,24 @@ public final class TextUtils {
         return span;
     }
 
+    // Checks whether a given span class covers the entire text
+    public static <T> boolean hasSpanCoveringWholeText(final CharSequence spanText, final Class<T> spanClass) {
+        final int length = spanText == null ? 0 : spanText.length();
+        if (length == 0 || !(spanText instanceof Spanned)) {
+            return false;
+        }
+        final Spanned spanned = (Spanned) spanText;
+        final T[] existing = spanned.getSpans(0, length, spanClass);
+        for (final T span : existing) {
+            final int start = spanned.getSpanStart(span);
+            final int end = spanned.getSpanEnd(span);
+            if (start == 0 && end == length) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @NonNull
     public static String getTextBeforeIndexUntil(final String text, final int idx, final String startToken) {
         return getTextBeforeIndexUntil(text, idx, startToken, -1);
@@ -534,7 +553,7 @@ public final class TextUtils {
             return false;
         }
 
-        return StringUtils.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0;
+        return Strings.CS.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0;
     }
 
     public static <E extends Enum<E>> E getEnumIgnoreCaseAndSpecialChars(final Class<E> enumClass, final String enumName, final E defaultEnum) {
@@ -687,6 +706,4 @@ public final class TextUtils {
         }
         return cs1.toString().equals(cs2.toString());
     }
-
-
 }

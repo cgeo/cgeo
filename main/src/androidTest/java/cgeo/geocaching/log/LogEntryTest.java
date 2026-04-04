@@ -2,6 +2,7 @@ package cgeo.geocaching.log;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
@@ -110,13 +111,15 @@ public class LogEntryTest {
 
     @Test
     public void testIsOwn() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
         final LogEntry logEntry1 = new LogEntry.Builder().setAuthor("userthatisnotthedefaultuser").setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry2 = new LogEntry.Builder().setAuthor(Settings.getUserName()).setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry3 = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
-        assertThat(logEntry1.isOwn()).isFalse();
-        assertThat(logEntry2.isOwn()).isTrue();
-        assertThat(logEntry3.isOwn()).isTrue();
+        assertThat(LogUtils.isOwnLog(logEntry1, cache)).isFalse();
+        assertThat(LogUtils.isOwnLog(logEntry2, cache)).isTrue();
+        assertThat(LogUtils.isOwnLog(logEntry3, cache)).isTrue();
     }
 
     @Test

@@ -209,7 +209,7 @@ public final class TextParser {
         while (ch != END_CHAR) {
             if (escapeChar != null && ch == escapeChar) {
                 if (escape) {
-                    sb.append(escapeChar.charValue());
+                    sb.append(escapeChar);
                     escape = false;
                 } else {
                     escape = true;

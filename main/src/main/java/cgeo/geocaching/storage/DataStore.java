@@ -65,6 +65,7 @@ import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
+import static cgeo.geocaching.list.StoredList.UserInterface.GROUP_SEPARATOR;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
 
@@ -111,6 +112,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -124,6 +126,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class DataStore {
@@ -303,47 +306,47 @@ public class DataStore {
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
-        @NonNull public static final String dbFieldCaches_type = "type";
-        @NonNull public static final String dbFieldCaches_owner_real = "owner_real";
-        @NonNull public static final String dbFieldCaches_favourite_cnt = "favourite_cnt";
-        @NonNull public static final String dbFieldCaches_myvote = "myvote";
-        @NonNull public static final String dbFieldCaches_disabled = "disabled";
-        @NonNull public static final String dbFieldCaches_archived = "archived";
-        @NonNull public static final String dbFieldCaches_members = "members";
-        @NonNull public static final String dbFieldCaches_found = "found";
-        @NonNull public static final String dbFieldCaches_favourite = "favourite";
-        @NonNull public static final String dbFieldCaches_inventoryunknown = "inventoryunknown";
-        @NonNull public static final String dbFieldCaches_onWatchList = "onWatchList";
-        @NonNull public static final String dbFieldCaches_coordsChanged = "coordsChanged";
+    @NonNull public static final String dbFieldCaches_type = "type";
+    @NonNull public static final String dbFieldCaches_owner_real = "owner_real";
+    @NonNull public static final String dbFieldCaches_favourite_cnt = "favourite_cnt";
+    @NonNull public static final String dbFieldCaches_myvote = "myvote";
+    @NonNull public static final String dbFieldCaches_disabled = "disabled";
+    @NonNull public static final String dbFieldCaches_archived = "archived";
+    @NonNull public static final String dbFieldCaches_members = "members";
+    @NonNull public static final String dbFieldCaches_found = "found";
+    @NonNull public static final String dbFieldCaches_favourite = "favourite";
+    @NonNull public static final String dbFieldCaches_inventoryunknown = "inventoryunknown";
+    @NonNull public static final String dbFieldCaches_onWatchList = "onWatchList";
+    @NonNull public static final String dbFieldCaches_coordsChanged = "coordsChanged";
     @NonNull public static final String dbTableLists = "cg_lists";
     @NonNull public static final String dbTableCachesLists = "cg_caches_lists";
-        @NonNull public static final String dbFieldCachesLists_list_id = "list_id";
+    @NonNull public static final String dbFieldCachesLists_list_id = "list_id";
     @NonNull public static final String dbTableAttributes = "cg_attributes";
-        @NonNull public static final String dbFieldAttributes_Attribute = "attribute";
+    @NonNull public static final String dbFieldAttributes_Attribute = "attribute";
     @NonNull public static final String dbTableWaypoints = "cg_waypoints";
-        @NonNull public static final String dbFieldWaypoints_type = "type";
-        @NonNull public static final String dbFieldWaypoints_own = "own";
+    @NonNull public static final String dbFieldWaypoints_type = "type";
+    @NonNull public static final String dbFieldWaypoints_own = "own";
     @NonNull private static final String dbTableVariables = "cg_variables";
     @NonNull public static final String dbTableCategories = "cg_categories";
-        @NonNull public static final String dbFieldCategories_Category = "category";
+    @NonNull public static final String dbFieldCategories_Category = "category";
     @NonNull private static final String dbTableSpoilers = "cg_spoilers";
     @NonNull public static final String dbTableLogs = "cg_logs";
-        @NonNull public static final String dbFieldLogs_Type = "type";
-        @NonNull public static final String dbFieldLogs_author = "author";
-        @NonNull public static final String dbFieldLogs_log = "log";
+    @NonNull public static final String dbFieldLogs_Type = "type";
+    @NonNull public static final String dbFieldLogs_author = "author";
+    @NonNull public static final String dbFieldLogs_log = "log";
     @NonNull public static final String dbTableLogCount = "cg_logCount";
-        @NonNull public static final String dbFieldLogCount_Type = "type";
-        @NonNull public static final String dbFieldLogCount_Count = "count";
+    @NonNull public static final String dbFieldLogCount_Type = "type";
+    @NonNull public static final String dbFieldLogCount_Count = "count";
     @NonNull private static final String dbTableLogImages = "cg_logImages";
     @NonNull public static final String dbTableLogsOffline = "cg_logs_offline";
-        @NonNull public static final String dbFieldLogsOffline_log = "log";
+    @NonNull public static final String dbFieldLogsOffline_log = "log";
     @NonNull private static final String dbTableLogsOfflineImages = "cg_logs_offline_images";
     @NonNull private static final String dbTableLogsOfflineTrackables = "cg_logs_offline_trackables";
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
     @NonNull public static final String dbTableRoute = "cg_route";
-        @NonNull public static final String dbFieldRoute_id = "id";
+    @NonNull public static final String dbFieldRoute_id = "id";
     @NonNull private static final String dbTableExtension = "cg_extension";
     @NonNull private static final String dbTableFilters = "cg_filters";
 
@@ -363,8 +366,7 @@ public class DataStore {
     @NonNull public static final String dbField_latitude = "latitude";
     @NonNull public static final String dbField_longitude = "longitude";
 
-    @NonNull private static final String dbCreateCaches = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableCaches + " ("
+    @NonNull private static final String dbCreateCaches = "CREATE TABLE IF NOT EXISTS " + dbTableCaches + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "updated LONG NOT NULL, "
             + "detailed INTEGER NOT NULL DEFAULT 0, "
@@ -415,8 +417,7 @@ public class DataStore {
             + "alcMode INTEGER DEFAULT 0,"
             + "tier TEXT"
             + "); ";
-    private static final String dbCreateLists = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
+    private static final String dbCreateLists = "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
@@ -424,22 +425,19 @@ public class DataStore {
             + "emoji INTEGER DEFAULT 0,"
             + FIELD_LISTS_PREVENTASKFORDELETION + " INTEGER DEFAULT 0"
             + "); ";
-    private static final String dbCreateCachesLists = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
+    private static final String dbCreateCachesLists = "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
             + dbFieldCachesLists_list_id + " INTEGER NOT NULL, "
             + "geocode TEXT NOT NULL, "
             + "PRIMARY KEY (list_id, geocode)"
             + "); ";
-    private static final String dbCreateAttributes = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableAttributes + " ("
+    private static final String dbCreateAttributes = "CREATE TABLE IF NOT EXISTS " + dbTableAttributes + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + dbField_Geocode + " TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
             + dbFieldAttributes_Attribute + " TEXT "
             + "); ";
 
-    private static final String dbCreateWaypoints = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableWaypoints + " ("
+    private static final String dbCreateWaypoints = "CREATE TABLE IF NOT EXISTS " + dbTableWaypoints + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -464,8 +462,7 @@ public class DataStore {
             + "geofence DOUBLE"
             + "); ";
 
-    private static final String dbCreateVariables = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableVariables + " ("
+    private static final String dbCreateVariables = "CREATE TABLE IF NOT EXISTS " + dbTableVariables + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "varname TEXT, "
@@ -473,15 +470,13 @@ public class DataStore {
             + "formula TEXT"
             + "); ";
 
-    private static final String dbCreateCategories = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableCategories + " ("
+    private static final String dbCreateCategories = "CREATE TABLE IF NOT EXISTS " + dbTableCategories + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + dbField_Geocode + " TEXT NOT NULL, "
             + dbFieldCategories_Category + " TEXT"
             + "); ";
 
-    private static final String dbCreateSpoilers = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableSpoilers + " ("
+    private static final String dbCreateSpoilers = "CREATE TABLE IF NOT EXISTS " + dbTableSpoilers + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -489,8 +484,7 @@ public class DataStore {
             + "title TEXT, "
             + "description TEXT "
             + "); ";
-    private static final String dbCreateLogs = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogs + " ("
+    private static final String dbCreateLogs = "CREATE TABLE IF NOT EXISTS " + dbTableLogs + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "service_log_id TEXT," //added with db version 86
@@ -504,16 +498,14 @@ public class DataStore {
             + "friend INTEGER "
             + "); ";
 
-    private static final String dbCreateLogCount = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogCount + " ("
+    private static final String dbCreateLogCount = "CREATE TABLE IF NOT EXISTS " + dbTableLogCount + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + dbField_Geocode + " TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
             + dbFieldLogCount_Type + " INTEGER NOT NULL DEFAULT 4, "
             + dbFieldLogCount_Count + " INTEGER NOT NULL DEFAULT 0 "
             + "); ";
-    private static final String dbCreateLogImages = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogImages + " ("
+    private static final String dbCreateLogImages = "CREATE TABLE IF NOT EXISTS " + dbTableLogImages + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "log_id INTEGER NOT NULL, "
             + "title TEXT NOT NULL, "
@@ -521,8 +513,7 @@ public class DataStore {
             + "description TEXT, "
             + "service_image_id TEXT"
             + "); ";
-    private static final String dbCreateLogsOffline = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOffline + " ("
+    private static final String dbCreateLogsOffline = "CREATE TABLE IF NOT EXISTS " + dbTableLogsOffline + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -539,8 +530,7 @@ public class DataStore {
             + "password TEXT, "
             + "tweet INTEGER" // no longer used
             + "); ";
-    private static final String dbCreateLogsOfflineImages = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineImages + " ("
+    private static final String dbCreateLogsOfflineImages = "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineImages + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "logoffline_id INTEGER NOT NULL, "
             + "url TEXT NOT NULL, "
@@ -548,16 +538,14 @@ public class DataStore {
             + "description TEXT, "
             + "scale INTEGER"
             + "); ";
-    private static final String dbCreateLogsOfflineTrackables = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineTrackables + " ("
+    private static final String dbCreateLogsOfflineTrackables = "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineTrackables + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "logoffline_id INTEGER NOT NULL, "
             + "tbcode TEXT NOT NULL, "
             + "actioncode INTEGER "
             + "); ";
 
-    private static final String dbCreateTrackables = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableTrackables + " ("
+    private static final String dbCreateTrackables = "CREATE TABLE IF NOT EXISTS " + dbTableTrackables + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "updated LONG NOT NULL, " // date of save
             + "tbcode TEXT NOT NULL, "
@@ -573,8 +561,7 @@ public class DataStore {
             + "log_guid TEXT "
             + "); ";
 
-    private static final String dbCreateSearchDestinationHistory = ""
-            + "CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
+    private static final String dbCreateSearchDestinationHistory = "CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "date LONG NOT NULL, "
             + dbField_latitude + " DOUBLE, "
@@ -864,7 +851,6 @@ public class DataStore {
         public String getString4() {
             return string4;
         }
-
     }
 
     public static class DBFilters {
@@ -894,7 +880,6 @@ public class DataStore {
         public static boolean delete(final String filterName) {
             return withAccessLock(() -> database.delete(dbTableFilters, "name = ?", new String[]{filterName}) > 0);
         }
-
     }
 
     private DataStore() {
@@ -1150,7 +1135,6 @@ public class DataStore {
             FileUtils.mkdirs(file.getParentFile());
             return SQLiteDatabase.openOrCreateDatabase(file, factory);
         }
-
     }
 
     private static class DbHelper extends SQLiteOpenHelper {
@@ -1337,8 +1321,7 @@ public class DataStore {
                             db.beginTransaction();
 
                             final String dbTableCachesTemp = dbTableCaches + "_temp";
-                            final String dbCreateCachesTemp = ""
-                                    + "CREATE TABLE " + dbTableCachesTemp + " ("
+                            final String dbCreateCachesTemp = "CREATE TABLE " + dbTableCachesTemp + " ("
                                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                     + "updated LONG NOT NULL, "
                                     + "detailed INTEGER NOT NULL DEFAULT 0, "
@@ -1391,8 +1374,7 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableCachesTemp + " RENAME TO " + dbTableCaches);
 
                             final String dbTableWaypointsTemp = dbTableWaypoints + "_temp";
-                            final String dbCreateWaypointsTemp = ""
-                                    + "CREATE TABLE " + dbTableWaypointsTemp + " ("
+                            final String dbCreateWaypointsTemp = "CREATE TABLE " + dbTableWaypointsTemp + " ("
                                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                     + "geocode TEXT NOT NULL, "
                                     + "updated LONG NOT NULL, " // date of save
@@ -2165,13 +2147,10 @@ public class DataStore {
                 return false;
             }
 
-            if (checkTime && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-                // we want to check time for detailed cache, but data are older than 3 days
-                return false;
-            }
+            // we want to check time for detailed cache, but data are older than 3 days
+            return !checkTime || dataDetailedUpdate >= (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED);
 
             // we have some cache
-            return true;
         });
     }
 
@@ -2210,7 +2189,7 @@ public class DataStore {
         });
     }
 
-    public static Set<String> getUnsavedGeocodes(@NonNull final Set<String> geocodes) {
+    public static Collection<String> getUnsavedGeocodes(@NonNull final Collection<String> geocodes) {
         return withAccessLock(() -> {
 
             final Set<String> unsavedGeocodes = new HashSet<>();
@@ -2323,7 +2302,7 @@ public class DataStore {
 
                 cLog.add("gc" + cLog.toStringLimited(caches, 10, c -> c == null ? "-" : c.getGeocode()));
 
-                final List<String> cachesFromDatabase = new ArrayList<>();
+                final List<String> cachesToLoadFromDatabase = new ArrayList<>();
                 final Map<String, Geocache> existingCaches = new HashMap<>();
 
                 // first check which caches are in the memory cache
@@ -2331,14 +2310,14 @@ public class DataStore {
                     final String geocode = cache.getGeocode();
                     final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
                     if (cacheFromCache == null) {
-                        cachesFromDatabase.add(geocode);
+                        cachesToLoadFromDatabase.add(geocode);
                     } else {
                         existingCaches.put(geocode, cacheFromCache);
                     }
                 }
 
                 // then load all remaining caches from the database in one step
-                for (final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
+                for (final Geocache cacheFromDatabase : loadCaches(cachesToLoadFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
                     existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
                 }
 
@@ -2367,8 +2346,8 @@ public class DataStore {
                     // the cache contains detailed information.
                     if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
                         toBeStored.add(cache);
-                    } else if (existingCache != null && existingCache.isDisabled() != cache.isDisabled()) {
-                        // Update the disabled status in the database if it changed
+                    } else if (existingCache != null && needsStatusUpdate(existingCache, cache)) {
+                        // Update the status in the database if it changed
                         toBeUpdated.add(cache);
                     }
                 }
@@ -2378,26 +2357,34 @@ public class DataStore {
                 }
 
                 for (final Geocache geocache : toBeUpdated) {
-                    updateDisabledStatus(geocache);
+                    updateCacheStatus(geocache);
                 }
             }
         });
-
     }
 
-    private static boolean updateDisabledStatus(final Geocache cache) {
-        cache.addStorageLocation(StorageLocation.DATABASE);
+    private static boolean needsStatusUpdate(final Geocache existingCache, final Geocache newCache) {
+        return existingCache.isDisabled() != newCache.isDisabled() ||
+            existingCache.isArchived() != newCache.isArchived() ||
+            existingCache.isFound() != newCache.isFound() ||
+            existingCache.isDNF() != newCache.isDNF();
+    }
+
+    private static boolean updateCacheStatus(final Geocache cache) {
         cacheCache.putCacheInCache(cache);
-        Log.d("Updating disabled status of " + cache + " in DB");
+        Log.d("Updating status of " + cache + " in DB");
 
         final ContentValues values = new ContentValues();
         values.put("disabled", cache.isDisabled() ? 1 : 0);
+        values.put("archived", cache.isArchived() ? 1 : 0);
+        values.put("found", cache.isFound() ? 1 : cache.isDNF() ? -1 : 0);
 
         init();
         try {
             database.beginTransaction();
             final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
             if (rows == 1) {
+                cache.addStorageLocation(StorageLocation.DATABASE);
                 database.setTransactionSuccessful();
                 return true;
             }
@@ -2904,6 +2891,11 @@ public class DataStore {
                 values.clear();
                 if (geocode != null) {
                     values.put("geocode", geocode);
+                } else {
+                    final String spottedGeocode = trackable.getSpottedCacheGeocode();
+                    if (StringUtils.isNotBlank(spottedGeocode)) {
+                        values.put("geocode", spottedGeocode);
+                    }
                 }
                 values.put("updated", timeStamp);
                 values.put("tbcode", tbCode);
@@ -2940,12 +2932,33 @@ public class DataStore {
         }
     }
 
+    /** returns names of parent lists only (without ending colons), sorted alphabetically */
     @NonNull
     public static List<String> getListHierarchy() {
         return withAccessLock(() -> {
-            final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists, new String[]{});
-            final List<String> result = cursorToColl(c, new ArrayList<>(), GET_STRING_0);
-            Collections.sort(result);
+            final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists + " ORDER BY title COLLATE NOCASE ASC", new String[]{});
+            return cursorToColl(c, new ArrayList<>(), GET_STRING_0);
+        });
+    }
+
+    /** returns all list names, grouped by parent/non-parent lists (parent list names ending with colon), each group sorted alphabetically */
+    @NonNull
+    public static List<String> getFullListHierarchy() {
+        return withAccessLock(() -> {
+            final List<String> result = new ArrayList<>();
+            // put entries containing a colon in first group, other elements in second; each group is sorted alphabetically
+            final String sql = "SELECT DISTINCT title FROM " + dbTableLists + " ORDER BY CASE WHEN title LIKE '%" + GROUP_SEPARATOR + "%' THEN 0 ELSE 1 END ASC, title COLLATE NOCASE ASC";
+            final Cursor c = database.rawQuery(sql, new String[]{});
+            for (String list : cursorToColl(c, new ArrayList<>(), GET_STRING_0)) {
+                final int prefix = list.lastIndexOf(GROUP_SEPARATOR);
+                if (prefix >= 0) {
+                    if (!result.contains(list.substring(0, prefix + 1))) {
+                        result.add(list.substring(0, prefix + 1));
+                    }
+                } else if (!result.contains(list + GROUP_SEPARATOR)) {
+                    result.add(list);
+                }
+            }
             return result;
         });
     }
@@ -3766,15 +3779,17 @@ public class DataStore {
 
                 String whereFriendSql = "";
                 if (whereFriend != null) {
-                    whereFriendSql = "AND friend = ";
+                    whereFriendSql = " AND friend = ";
                     whereFriendSql += whereFriend ? "1" : "0";
                 }
 
+                final long offsetMillis = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+                final String dateOrderSql = " ORDER BY Date((date+" + offsetMillis + ")/1000, 'unixepoch') DESC, service_log_id DESC, cg_logs._id ASC";
                 final Cursor cursor = database.rawQuery(
                         //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
                         "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"
                                 + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + " ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
+                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + dateOrderSql, new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
 
                 LogEntry.Builder log = null;
                 int cnt = 0;
@@ -4362,7 +4377,7 @@ public class DataStore {
                                 counter++;
                                 final String newPrefix = duplicate + "-" + counter;
                                 for (String usedPrefix : usedPrefixes) {
-                                    if (StringUtils.equals(usedPrefix, newPrefix)) {
+                                    if (Strings.CS.equals(usedPrefix, newPrefix)) {
                                         found = true;
                                         break;
                                     }
@@ -4542,7 +4557,7 @@ public class DataStore {
                         " COUNT(c.geocode) AS count" +
                         " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                         " ON l._id + " + customListIdOffset + " = c.list_id" +
-                        (listId == null ? "" : " WHERE l._id = " + String.valueOf(listId - customListIdOffset)) +
+                        (listId == null ? "" : " WHERE l._id = " + (listId - customListIdOffset)) +
                         " GROUP BY l._id" +
                         " ORDER BY l.title COLLATE NOCASE ASC";
 
@@ -4648,7 +4663,6 @@ public class DataStore {
 
         return withAccessLock(() -> {
 
-
             init();
 
             database.beginTransaction();
@@ -4679,7 +4693,6 @@ public class DataStore {
         }
 
         return withAccessLock(() -> {
-
 
             init();
 
@@ -4929,8 +4942,8 @@ public class DataStore {
                         add.bindLong(1, listId);
                         add.bindString(2, cache.getGeocode());
                         add.execute();
+                        cache.getLists().add(listId);
                     }
-
                 }
                 database.setTransactionSuccessful();
             } finally {
@@ -5052,7 +5065,6 @@ public class DataStore {
 
         return withAccessLock(() -> {
 
-
             init();
 
             try {
@@ -5139,7 +5151,7 @@ public class DataStore {
     }
 
     public static void saveChangedCache(final Geocache cache) {
-        saveCache(cache, cache.inDatabase() ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
+        saveCache(cache, cache.getLists().isEmpty() ? EnumSet.of(SaveFlag.CACHE) : LoadFlags.SAVE_ALL);
     }
 
     private enum PreparedStatement {
@@ -5464,7 +5476,6 @@ public class DataStore {
         });
     }
 
-
     /**
      * migrate most recent history waypoints (up to 5)
      * (temporary workaround for on demand migration of the old "go to" history,
@@ -5741,7 +5752,6 @@ public class DataStore {
 
             return withAccessLock(() -> {
 
-
                 init();
 
                 final String[] geocodeWhereArgs = {geocode};
@@ -5755,7 +5765,6 @@ public class DataStore {
             }
 
             return withAccessLock(() -> {
-
 
                 init();
 
@@ -5847,7 +5856,6 @@ public class DataStore {
         public <T> T selectFirstRow(final SQLiteDatabase db, final Func1<Cursor, T> mapper) {
 
             return withAccessLock(() -> {
-
 
                 try (Cursor c = openCursorFor(db, "1")) {
                     final List<T> result = new ArrayList<>();
@@ -5949,5 +5957,4 @@ public class DataStore {
         }
         Log.d("unlock db");
     }
-
 }

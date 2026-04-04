@@ -8,8 +8,6 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.playservices.GooglePlayServices;
@@ -24,6 +22,7 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeThemeHelper;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -53,6 +52,7 @@ import java.util.Locale;
 
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public final class SystemInformation {
@@ -104,6 +104,7 @@ public final class SystemInformation {
                 .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
                 .append("\n- System date format: ").append(Formatter.getShortDateFormat())
                 .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
+                .append("\n- Translator(external): ").append(Settings.getTranslatorExternal())
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
                 .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
                 .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
@@ -147,7 +148,7 @@ public final class SystemInformation {
         appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
-        appendDirectory(body, "\n- Internal theme sync (is turned " + (RenderThemeHelper.isThemeSynchronizationActive() ? "ON" : "off") + "): ", LocalStorage.getMapThemeInternalSyncDir());
+        appendDirectory(body, "\n- Internal theme sync (is turned " + (MapsforgeThemeHelper.isThemeSynchronizationActive() ? "ON" : "off") + "): ", LocalStorage.getMapThemeInternalSyncDir());
         body.append("\n- Map render theme path: ").append(Settings.getSelectedMapRenderTheme());
         appendPublicFolders(body);
         appendPersistedDocumentUris(body);
@@ -268,29 +269,19 @@ public final class SystemInformation {
 
     private static void appendMapModeSettings(@NonNull final StringBuilder body) {
         body
-            .append("\n- Map mode: ")
-            .append(Settings.useLegacyMaps() ? "legacy" : "UnifiedMap")
+            .append("\n- Map mode: UnifiedMap")
             .append(Settings.isLiveMap() ? " / live" : "")
             .append(" / OSM multi-threading: ").append(Settings.hasOSMMultiThreading() ? Settings.getMapOsmThreads() : "off");
     }
 
     private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {
         body.append("\n- Map: ");
-        if (Settings.useLegacyMaps()) {
-            final MapSource source = Settings.getMapSource();
-            final ImmutablePair<String, Boolean> mapAttrs = source.calculateMapAttribution(ctx);
-            body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
-                    .append("\n  - Id: ").append(source.getId())
-                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.left).replace("\n", " / "))
-                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
-        } else {
-            final AbstractTileProvider tileProvider = Settings.getTileProvider();
-            final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
-            body.append(tileProvider.getTileProviderName())
-                    .append("\n  - Id: ").append(tileProvider.getId())
-                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
-                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
-        }
+        final AbstractTileProvider tileProvider = Settings.getTileProvider();
+        final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
+        body.append(tileProvider.getTileProviderName())
+                .append("\n  - Id: ").append(tileProvider.getId())
+                .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
+                .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
     }
 
 
@@ -327,7 +318,7 @@ public final class SystemInformation {
     }
 
     private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
-        body.append("\n- ").append(StringUtils.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+        body.append("\n- ").append(Strings.CS.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {

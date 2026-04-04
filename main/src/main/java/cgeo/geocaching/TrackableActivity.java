@@ -26,9 +26,11 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
@@ -61,6 +63,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class TrackableActivity extends TabbedViewPagerActivity {
 
@@ -140,7 +143,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             // check if port part needs to be removed
             String address = uri.toString();
             if (uri.getPort() > 0) {
-                address = StringUtils.remove(address, ":" + uri.getPort());
+                address = Strings.CS.remove(address, ":" + uri.getPort());
             }
             geocode = ConnectorFactory.getTrackableFromURL(address);
             final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(address);
@@ -150,6 +153,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 geocode = uri.getQueryParameter("tracker");
                 if (StringUtils.isBlank(geocode)) {
                     geocode = uri.getQueryParameter("TB");
+                }
+                if (StringUtils.isBlank(geocode)) {
+                    geocode = uri.getQueryParameter("tb");
                 }
                 guid = uri.getQueryParameter("guid");
                 id = uri.getQueryParameter("id");
@@ -271,6 +277,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             ShareUtils.openUrl(this, trackable.getUrl(), true);
         } else if (itemId == R.id.menu_refresh_trackable) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+        } else if (itemId == R.id.menu_translate) {
+            TranslationUtils.translate(this, getTranslationText(trackable));
+            refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -284,6 +293,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
             menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
         }
+        MenuUtils.setVisible(menu.findItem(R.id.menu_translate), trackable != null && TranslationUtils.isEnabled());
+        menu.findItem(R.id.menu_translate).setTitle(TranslationUtils.getTranslationLabel());
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -401,7 +413,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
         }
-
     }
 
     @Override
@@ -414,6 +425,13 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             return title;
         }
         return this.getString(Page.find(pageId).resId);
+    }
+
+    public static String getTranslationText(final Trackable trackable) {
+        if (trackable == null) {
+            return "";
+        }
+        return TranslationUtils.prepareForTranslation(trackable.getGoal(), trackable.getDetails());
     }
 
     protected long[] getOrderedPages() {
@@ -433,7 +451,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     }
 
     public static class DetailsViewCreator extends TabbedViewPagerFragment<TrackableDetailsViewBinding> {
-        private boolean descriptionTranslated = false;
+        private final boolean descriptionTranslated = false;
 
         @Override
         public TrackableDetailsViewBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -621,6 +639,14 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.image.addView(trackableImage);
             }
 
+            //external translation
+            TranslationUtils.registerTranslation(
+                getActivity(),
+                binding.descriptionTranslateExternalButton,
+                binding.descriptionTranslateExternal,
+                binding.descriptionTranslateExternalNote,
+                () -> getTranslationText(trackable));
+
             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
 
             final OfflineTranslateUtils.Status currentTranslationStatus = activity.translationStatus;
@@ -661,7 +687,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                         }
                     });
         }
-
     }
 
     public void addShareAction(final TextView view) {

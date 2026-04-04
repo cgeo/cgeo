@@ -37,6 +37,7 @@ import java.util.List;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class DownloadSelectorActivity extends AbstractActionBarActivity {
 
@@ -97,7 +98,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                 boolean isInstalled = false;
                 boolean needsUpdate = false;
                 for (CompanionFileUtils.DownloadedFileData existing : existingFiles) {
-                    if (offlineMap.getType().id == existing.remoteParsetype && StringUtils.equals(offlineMap.getUri().toString(), existing.remotePage + "/" + existing.remoteFile)) {
+                    if (offlineMap.getType().id == existing.remoteParsetype && Strings.CS.equals(offlineMap.getUri().toString(), existing.remotePage + "/" + existing.remoteFile)) {
                         isInstalled = true;
                         needsUpdate = offlineMap.getDateInfo() > existing.remoteDate;
                     }
@@ -207,7 +208,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.downloader_activity);
-        binding = DownloaderActivityBinding.bind(findViewById(R.id.mapdownloader_activity_viewroot));
+        binding = DownloaderActivityBinding.bind(findViewById(R.id.activity_content));
 
         int fixedDownloadType = 0;
         final Intent intent = getIntent();
@@ -252,7 +253,6 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             });
             existingFiles = CompanionFileUtils.availableOfflineMapRelatedFiles();
         }
-
     }
 
     @Override

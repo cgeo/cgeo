@@ -110,12 +110,6 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
-        android:key="@string/pref_navigation_menu_where_you_go"
-        android:title="@string/cache_menu_whereyougo"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:enabled="false"
         android:key="@string/pref_navigation_menu_pebble"
         android:title="@string/cache_menu_pebble"
         app:iconSpaceReserved="false" />

@@ -26,12 +26,14 @@ public class UserDefinedMapsforgeOnlineSource extends AbstractMapsforgeOnlineTil
                 }
                 tilePath += "{Z}/{X}/{Y}.png";
             }
-            setTilePath(tilePath);
+            final String query = fullUri.getQuery();
+            setTilePath(tilePath + (StringUtils.isNotBlank(query) ? "?" + query : ""));
         }
     }
 
     public static boolean isConfigured() {
-        return StringUtils.isNotBlank(Settings.getUserDefinedTileProviderUri());
+        final String uri = Settings.getUserDefinedTileProviderUri();
+        return StringUtils.isNotBlank(uri) && StringUtils.isNotBlank(Uri.parse(uri).getHost());
     }
 
 }

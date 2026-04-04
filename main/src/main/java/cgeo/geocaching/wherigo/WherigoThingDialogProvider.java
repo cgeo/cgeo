@@ -5,12 +5,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.offlinetranslate.TranslatorUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.wherigo.openwig.Action;
 import cgeo.geocaching.wherigo.openwig.EventTable;
 import cgeo.geocaching.wherigo.openwig.Media;
@@ -25,16 +25,15 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
+    private static final Set<Dialog> openThingDialogs = Collections.synchronizedSet(new HashSet<>());
+
     private final EventTable eventTable;
-
-    //private CompositeDisposable translatorDisposables;
-    private TranslatorUtils.ChangeableText titleText;
-    private TranslatorUtils.ChangeableText descriptionText;
-
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -54,6 +53,13 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         }
     }
 
+    public static void closeAllThingDialogs() {
+        synchronized (openThingDialogs) {
+            for (Dialog d : openThingDialogs) {
+                WherigoViewUtils.safeDismissDialog(d);
+            }
+        }
+    }
 
     public WherigoThingDialogProvider(final EventTable et) {
         this.eventTable = et;
@@ -61,21 +67,33 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--");
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        dialog.setView(binding.getRoot());
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, "--", binding.getRoot());
 
-        //translator
-        control.disposeOnDismiss(TranslatorUtils.initializeView("ThingDialog", activity, control.getTranslator(),
-                binding.translation, null, null));
-        descriptionText = control.createChangeableTranslation();
-        titleText = control.createChangeableTranslation();
+        //external translator
+        TranslationUtils.registerTranslation(activity, binding.translationExternal, () ->
+            TranslationUtils.prepareForTranslation(eventTable.name, eventTable.description));
 
         refreshGui(activity, control, binding);
-        control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
+        control.setOnGameNotificationListener((d, nt) -> {
+            if (nt == WherigoGame.NotifyType.REFRESH) {
+                refreshGui(activity, control, binding);
+            }
+        });
+        openThingDialogs.add(dialog);
+        control.setOnDismissListener(d -> openThingDialogs.remove(dialog));
 
         dialog.show();
         return dialog;
+    }
+
+    @Override
+    public boolean canRefresh(final IWherigoDialogProvider otherDialog) {
+        //if a "thing" dialog is open and should be opened again for the same thing
+        //-> then just refresh, do not close the old dialog just to open a new one for same thing
+        //-> this enables Wherigo Cartridges to have media animations, see #17439
+        return otherDialog instanceof WherigoThingDialogProvider &&
+            ((WherigoThingDialogProvider) otherDialog).eventTable == this.eventTable;
     }
 
     private void refreshGui(final Activity activity, final IWherigoDialogControl control, final WherigoThingDetailsBinding binding) {
@@ -89,10 +107,9 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
         //title
-        titleText.set(eventTable.name, (tr, t) -> control.setTitle(tr));
+        control.setTitle(eventTable.name);
         //description
-        descriptionText.set(eventTable.description, (tr, t) ->
-            binding.description.setText(WherigoGame.get().toDisplayText(tr)));
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
         refreshActionList(activity, control, binding);
@@ -129,7 +146,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
                             control.dismiss();
-                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
+                            DefaultMap.startActivityWherigoMap(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable), false), eventTable.name, WherigoUtils.getZoneCenter((Zone) eventTable));
                             break;
                         case COMPASS:
                             control.dismiss();

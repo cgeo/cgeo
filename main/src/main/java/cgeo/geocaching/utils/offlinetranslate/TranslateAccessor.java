@@ -17,6 +17,9 @@ public class TranslateAccessor {
                         Class.forName("cgeo.geocaching.utils.offlinetranslate.MLKitTranslateAccessor");
                 if (mlkitClass != null) {
                     instance = mlkitClass.newInstance();
+                    Log.iForce("TranslateAccessor: MLKit instance created");
+                } else {
+                    Log.iForce("TranslateAccessor: MLKit class not found");
                 }
             } catch (Exception re) {
                 //mlkit not found

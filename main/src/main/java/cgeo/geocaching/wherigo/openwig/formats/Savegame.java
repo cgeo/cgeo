@@ -7,6 +7,7 @@ package cgeo.geocaching.wherigo.openwig.formats;
 import java.io.*;
 import java.util.Hashtable;
 
+import cgeo.geocaching.wherigo.kahlua.stdlib.BaseLib;
 import cgeo.geocaching.wherigo.kahlua.vm.JavaFunction;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaClosure;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaPrototype;
@@ -42,7 +43,17 @@ public class Savegame {
     protected void debug (String s) { }
 
     protected Class classForName (String s) throws ClassNotFoundException {
-        return Class.forName(s);
+        try {
+            return Class.forName(s);
+        } catch (ClassNotFoundException cnfe) {
+            //handle old savefiles with maybe wrong package names
+            // e.g. cz.matejcik.openwig.Media -> needs to be cgeo.geocaching.wherigo.openwig.Media
+            final int idx = s.indexOf(".openwig.");
+            if (idx >= 0) {
+                return Class.forName("cgeo.geocaching.wherigo" + (s.substring(idx)));
+            }
+            throw cnfe;
+        }
     }
 
     protected boolean versionOk (String ver) {
@@ -310,6 +321,7 @@ public class Savegame {
                 } catch (Throwable e) {
                     if (debug) debug("(failed to deserialize "+cls+")\n");
                     Engine.log("REST: while trying to deserialize "+cls+":\n"+e.toString(), Engine.LOG_ERROR);
+                    BaseLib.fail("Could not deserialize object of class '" + cls + "': " + e);
                 }
                 if (s != null) {
                     restCache(s);

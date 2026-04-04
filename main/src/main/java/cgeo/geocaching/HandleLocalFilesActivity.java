@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.ContentResolver;
@@ -19,8 +20,11 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
+
+    private static final String LOGPRAEFIX = "HandleLocalFilesActivity: ";
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         final Intent intent = getIntent();
         final Uri uri = intent.getData();
         boolean finished = false;
+
+        Log.iForce(LOGPRAEFIX + "called for URI:" + uri);
 
         final ContentResolver contentResolver = getContentResolver();
         final FileType fileType = new FileTypeDetector(uri, contentResolver).getFileType();
@@ -61,6 +67,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
     }
 
     private void continueWith(@SuppressWarnings("rawtypes") final Class clazz, final Intent intent) {
+        Log.iForce(LOGPRAEFIX + "continueWith:" + clazz);
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
         startActivity(forwarder);
@@ -68,6 +75,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
     }
 
     private void continueWithForegroundService(@SuppressWarnings("rawtypes") final Class clazz, final Intent intent) {
+        Log.iForce(LOGPRAEFIX + "continueWithForegroundService:" + clazz);
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
         ContextCompat.startForegroundService(this, forwarder);
@@ -85,13 +93,16 @@ public class HandleLocalFilesActivity extends AbstractActivity {
      */
     @Nullable
     private String copyToWherigoFolder(final Uri uri) {
-        String filename = ContentStorage.get().getName(uri).replace("_", "-");
+        String filename = ContentStorage.get().getName(uri);
+        Log.iForce(LOGPRAEFIX + "expect Wherigo, raw filename:" + filename);
         if (StringUtils.isBlank(filename)) {
-            return null;
+            filename = FileNameCreator.WHERIGO.createName();
         }
-        if (StringUtils.equalsAnyIgnoreCase(filename.substring(filename.length() - 4), ".gwc")) {
+        filename = filename.replace("_", "-");
+        if (Strings.CI.equalsAny(filename.substring(filename.length() - 4), ".gwc")) {
             filename = filename.substring(0, filename.length() - 4);
         }
+        Log.iForce(LOGPRAEFIX + "Wherigo final filename:" + filename);
         ContentStorage.get().copy(uri, PersistableFolder.WHERIGO.getFolder(), FileNameCreator.forName(filename + ".gwc"), false);
         return filename;
     }

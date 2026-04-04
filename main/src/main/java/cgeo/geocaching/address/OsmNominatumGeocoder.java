@@ -80,7 +80,7 @@ public class OsmNominatumGeocoder {
 
     public static String getMethod(final String search, final int latE6, final int lonE6) {
         try {
-            final String info = "q=" + search.toLowerCase() + ",lat=" + latE6 + ",lon=" + lonE6 + ",ua=" + Network.USER_AGENT + ",api=1";
+            final String info = "q=" + search.toLowerCase(Locale.getDefault()) + ",lat=" + latE6 + ",lon=" + lonE6 + ",ua=" + Network.USER_AGENT + ",api=1";
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
             final byte[] temp = digest.digest(info.getBytes(StandardCharsets.UTF_8));
             final StringBuilder hexString = new StringBuilder(2 * temp.length);

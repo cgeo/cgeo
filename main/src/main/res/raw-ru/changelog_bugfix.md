@@ -1,6 +1,108 @@
 ##
-- Fix: Trackable inventory not loaded while logging a cache
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+
+- Fix: Parsing cache location string fails for certain website languages
+- Fix: Opening trackable from watchlist fails
+- Fix: Keyboard may be blocking list selection
+- Fix: User-defined tileprovider not supporting additional URL parameters
+- Fix: Inventory / Trackables of a cache not loaded anymore
+- Change: Updated internal user-agent to address some download issues
+- Fix: Viewing trackable details removes it from cache inventory
 
 ##
-- Fix: Migration of user-defined caches during c:geo startup fails => removed it for the time being
-- Fix: Finished Wherigo tasks not marked as finished or failed
+- Fix: Offline translation download dialog shown in installations without offline translation support
+- Fix: Coordinate format changing in cache/waypoint info sheet
+- Fix: Log date cut off in list of logs (depending on date format and font size)
+- Fix: Event times not detected in certain conditions
+- Fix: Link in listing not clickable under certain conditions
+- Fix: Logging actions for trackables get mixed up sometimes
+
+##
+- Изменение: Максимальное количество посещений трекаблов/геокротов в записи тайника уменьшено до 100 (согласно запросу от geocaching.com, чтобы уменьшить нагрузку на сервер)
+- Исправлено: Были возможны некоторые исключения из правил безопасности, когда пользователь не предоставлял определенные права (например, уведомления)
+- Fix: Cache circles incomplete on low zoom levels (VTM only)
+- Fix: Crash on reloading waypoints in certain load conditions
+- Fix: Event date filter not working under certain conditions
+- Fix: Max log line limit not working reliably in "unlimited" setting
+- Fix: Crash on opening map under certain conditions
+- Fix: No map shown if wherigo has no visible zones
+- Fix: Crash on cache details' image tab under certain conditions
+- Fix: Map searches with invalid coordinates
+- Fix: Some translations do not respect c:geo-internal language setting
+
+##
+- Изменение: ЕдинаяКарта установлена в качестве карты по умолчанию для всех (как часть нашего плана по её развитию). На данный момент вы можете вернуть всё как было в меню "Настройки" - "Источники карт". Удаление устаревших карт запланировано на весну 2026 года в наших регулярных релизах.
+- Исправлено: Флажок с избранным сбрасывался при повторном входе на экран записи при работе в автономном режиме
+- Исправлено: В поле ввода радиуса геозоны отображаются десятичные числа
+- Исправлено: Не работала синхронизация личных заметок
+- Изменение: Новая иконка для импорта трека/маршрута в формате GPX в быстрых настройках трека/маршрута на карте
+
+##
+- Исправлено: На диаграмме высот не отображались отрицательные значения
+- Исправлено: Координаты близкие к 0 повреждались при экспорте в GPX
+- Исправлено: Были некоторые сбои
+- Пытаемся исправить: ANR при запуске
+- Пытаемся исправить: Отсутствуют данные о тайнике на карте, работающей в режиме реального времени
+
+##
+- Исправлено: Сбой в поиске ключевых слов
+- Исправлено: Сбой на карте
+- Исправлено: Нельзя было выбрать подсказку
+- Исправлено: Ряд проблем с Wherigo
+
+##
+- Исправлено: для шифрования/расшифровки подсказки требовалось дополнительное нажатие
+- Исправлено: при чтении старых сохраненных игр в Wherigo происходил сбой
+- Исправлено: авторизация на геокешинге через c:geo иногда слетала
+- Исправлено: Отсутствовало оперативное обновление данных для найденных и архивных тайников
+- Исправлено: иногда путевые точки не отображались на оффлайновой карте
+
+##
+- Исправлено: подсказки о незашифрованном тайнике (изменение веб-сайта)
+- Исправлено: Lab Adventures не загружались в приложении (изменение веб-сайта, вам нужно будет обновить сохраненные Lab Adventures, чтобы снова иметь возможность вызывать их из c:geo)
+- Исправлено: ЕдинаяКарта VTM: переключение на отображение 3D-зданий не работало для комбинированных карт
+- Исправлено: Офлайн перевод: язык списка иногда определялся как --
+
+##
+- Исправлено: Сбой в модуле перевода
+- Исправлено: Ошибка обнаружения входа в систему (изменения веб-сайта)
+- Исправлено: Сбой при получении картриджа Wherigo
+- Исправлено: "Загрузить больше" не учитывало офлайн фильтры
+
+##
+- Исправлено: Геокроты и прочие трекаблы не попадали в меню "Инвентарь" после записи о посещении тайника
+
+##
+- Исправлено: Миграция пользовательских тайников во время запуска c:geo завершилась ошибкой => временно удалено
+- Исправлено: Завершеные задания Wherigo не помечались как завершенные или завершенные с ошибкой
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

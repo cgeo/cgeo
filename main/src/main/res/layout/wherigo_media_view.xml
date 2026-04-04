@@ -31,6 +31,8 @@
 
     <TextView
         android:id="@+id/mediaTextView"
+        android:textSize="@dimen/textSize_detailsPrimary"
+        android:textColor="@color/colorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </merge>

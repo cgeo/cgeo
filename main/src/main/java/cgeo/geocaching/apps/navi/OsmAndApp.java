@@ -26,7 +26,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
     private static final String ADD_MAP_MARKER = "add_map_marker";
 
     protected OsmAndApp() {
-        super(getString(R.string.cache_menu_osmand), null);
+        super(R.string.cache_menu_osmand, null);
     }
 
     @Override

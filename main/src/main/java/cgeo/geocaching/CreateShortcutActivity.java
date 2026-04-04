@@ -4,12 +4,13 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.MapActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
+import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private static final String ID_FRAGMENT_SEARCH = "SEARCH";
     private static final String ID_FRAGMENT_GO_TO = "GO TO";
     private static final String ID_FRAGMENT_HISTORY = "HISTORY";
+    private static final String ID_FRAGMENT_WHERIGO = "WHERIGO";
 
     private static class Shortcut {
 
@@ -78,7 +80,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, MapActivity.class), ID_FRAGMENT_MAP));
+        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, UnifiedMapActivity.class), ID_FRAGMENT_MAP));
         shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this), ID_FRAGMENT_NEARBY));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally
@@ -93,6 +95,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.sc_search, new Intent(this, SearchActivity.class), ID_FRAGMENT_SEARCH));
         shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class), ID_FRAGMENT_GO_TO));
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this), ID_FRAGMENT_HISTORY));
+        shortcuts.add(new Shortcut(R.string.wherigo_player, R.drawable.sc_wherigo, new Intent(this, WherigoActivity.class), ID_FRAGMENT_WHERIGO));
 
         final SimpleDialog.ItemSelectModel<Shortcut> model = new SimpleDialog.ItemSelectModel<>();
         model

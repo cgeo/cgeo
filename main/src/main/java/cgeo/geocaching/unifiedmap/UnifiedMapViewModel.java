@@ -13,7 +13,6 @@ import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.livedata.CollectionLiveData;
 import cgeo.geocaching.utils.livedata.ConstantLiveData;
@@ -30,7 +29,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.Set;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
-    public static final int MAX_CACHES = 2000;
+    public static final int MAX_CACHES = 5000;
 
     public static final String CACHE_KEY_PREFIX = "CACHE_";
     public static final String CACHE_STAR_KEY_PREFIX = "CACHE_STAR_";
@@ -61,7 +60,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     //Viewport will be refreshed ONLY if the map was not moved for 500ms. Only valid viewports are used.
     public final MutableLiveData<Viewport> viewportIdle = new MutableLiveData<>(Viewport.EMPTY);
 
-    public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));
     public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
     public final MutableLiveData<LiveMapGeocacheLoader.LiveDataState> liveLoadStatus = new MutableLiveData<>(new LiveMapGeocacheLoader.LiveDataState(LiveMapGeocacheLoader.LoadState.STOPPED, null, null));
     public final LiveMapDataHandler liveMapHandler = new LiveMapDataHandler(this);

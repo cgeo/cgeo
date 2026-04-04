@@ -86,6 +86,10 @@
         android:title="@string/cache_personal_note"
         android:visible="false"/>
     <item
+        android:id="@+id/menu_translate"
+        android:icon="@drawable/ic_menu_translate"
+        android:title="@string/translate" />
+    <item
         android:id="@+id/menu_set_coordinates"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_set_coordinates"
@@ -115,6 +119,11 @@
                 android:title="@string/cache_menu_scan_calculated_waypoints"
                 app:showAsAction="ifRoom"
                 android:visible="false"/>
+            <item
+                android:id="@+id/menu_set_waypoints_to_visited"
+                android:title="@string/waypoint_set_visited_types"
+                app:showAsAction="ifRoom|withText"
+                android:visible="false" />
             <item
                 android:id="@+id/menu_toggleWaypointsFromNote"
                 android:title="@string/cache_menu_preventWaypointsFromNote"
@@ -171,11 +180,6 @@
                 android:id="@+id/menu_caches_around"
                 android:title="@string/cache_menu_around"
                 android:icon="@drawable/ic_menu_nearby"/>
-            <item
-                android:id="@+id/menu_gcvote"
-                android:title="@string/cache_menu_vote"
-                android:icon="@drawable/ic_menu_vote"
-                android:visible="false"/>
             <item
                 android:id="@+id/menu_ignore"
                 android:title="@string/cache_menu_ignore"
