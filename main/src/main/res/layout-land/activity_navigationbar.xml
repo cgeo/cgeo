@@ -16,13 +16,14 @@
         android:id="@+id/activity_navigationBar"
         style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@id/appToolbar"
         app:labelVisibilityMode="unlabeled"
         android:background="@color/colorBackgroundTabBar"
         app:itemIconTint="@color/bottom_bar_selector"
         app:itemTextColor="@color/bottom_bar_selector"
+        app:paddingTopSystemWindowInsets="false"
         app:menu="@menu/activity_navigationbar_menu" />
 
     <!-- make sure toolbar is placed above navigation rail -->
