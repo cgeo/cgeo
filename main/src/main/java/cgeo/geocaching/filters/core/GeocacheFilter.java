@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
@@ -291,6 +292,151 @@ public class GeocacheFilter implements Cloneable {
         return result;
     }
 
+    public List<BaseGeocacheFilter> getAndChainIfPossibleForConnector(final IConnector connector) {
+        final IGeocacheFilter filteredTree = keepFilterForConnector(this.getTree(), connector);
+        if (filteredTree == null) {
+            return null;
+        }
+        final List<BaseGeocacheFilter> result = new ArrayList<>();
+            getAndChainIfPossibleInternal(filteredTree, result);
+        return result;
+    }
+
+    /**
+     * Removes connector-specific filters from the given filter tree that are redundant or not applicable.
+     * <p>
+     * For OriginGeocacheFilter:
+     * - If it allows the given connector: removes it (returns null) because it's redundant
+     * - If it doesn't allow the given connector: returns null to signal "no results for this connector"
+     * <p>
+     * For AND filters: If any child becomes null due to connector exclusion, the entire AND is invalid
+     * For OR filters: Branches that become null are simply removed
+     * <p>
+     * For other BaseGeocacheFilters: returns unchanged (they are connector-agnostic)
+     *
+     * @param filter    The filter to process
+     * @param connector The connector to check against
+     * @return The filtered IGeocacheFilter tree, or null if the filter is redundant or excludes this connector
+     */
+    @Nullable
+    private IGeocacheFilter keepFilterForConnector(@Nullable final IGeocacheFilter filter, final IConnector connector) {
+        if (filter == null) {
+            return null;
+        }
+
+        // Handle OriginGeocacheFilter
+        if (filter instanceof OriginGeocacheFilter) {
+            // Always return null:
+            // - If it allows the connector: redundant (connector-specific search handles this)
+            // - If it doesn't allow the connector: this branch can't produce results
+            if (!((OriginGeocacheFilter) filter).allowsCachesOf(connector)) {
+                return null;
+            }
+        }
+
+        // Handle LogicalGeocacheFilter
+        if (filter instanceof LogicalGeocacheFilter) {
+            return keepLogicalGeocacheFilterForConnector((LogicalGeocacheFilter) filter, connector);
+        }
+
+        // For all other BaseGeocacheFilters, return unchanged (they are connector-agnostic)
+        return filter;
+    }
+
+    @Nullable
+    private IGeocacheFilter keepLogicalGeocacheFilterForConnector(@NonNull final LogicalGeocacheFilter filter, final IConnector connector) {
+        // Handle NotGeocacheFilter (extends AndGeocacheFilter, so check it first)
+        if (filter instanceof NotGeocacheFilter) {
+            // Check if there's an OriginFilter that includes this connector, which would invalidate the NOT
+            for (final IGeocacheFilter child : filter.getChildren()) {
+                if (child instanceof OriginGeocacheFilter) {
+                    final OriginGeocacheFilter originFilter = (OriginGeocacheFilter) child;
+                    if (originFilter.allowsCachesOf(connector)) {
+                        return null;
+                    }
+                }
+            }
+        } else if (filter instanceof AndGeocacheFilter) {
+            // Check if there's an OriginFilter or NOT(OriginFilter) that invalidates this AND
+            if (!isFilterValidForConnector(filter, connector)) {
+                return null;
+            }
+        }
+
+        return processLogicalFilterForConnector(filter, connector, LogicalFilterType.getLogicalFilterType(filter));
+    }
+
+
+    /**
+     * Checks if an AND filter is valid for the given connector.
+     * An AND filter is invalid if it contains an OriginFilter that excludes the connector,
+     * or a NOT(OriginFilter) that includes the connector.
+     */
+    private boolean isFilterValidForConnector(@NonNull final IGeocacheFilter filter, final IConnector connector) {
+        if (filter.getChildren() == null) {
+            return true;
+        }
+        for (final IGeocacheFilter child : filter.getChildren()) {
+            if (child instanceof OriginGeocacheFilter) {
+                final OriginGeocacheFilter originFilter = (OriginGeocacheFilter) child;
+                if (!originFilter.allowsCachesOf(connector)) {
+                    return false;
+                }
+            } else if (child instanceof NotGeocacheFilter && child.getChildren() != null) {
+                for (final IGeocacheFilter grandChild : child.getChildren()) {
+                    if (grandChild instanceof OriginGeocacheFilter) {
+                        final OriginGeocacheFilter originFilter = (OriginGeocacheFilter) grandChild;
+                        if (originFilter.allowsCachesOf(connector)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Generic helper to process logical filters (AND, OR, NOT) for a specific connector.
+     *
+     * @param filter     The filter to process
+     * @param connector  The connector to filter for
+     * @param filterType Type of logical filter to create
+     * @return The processed filter or null
+     */
+    @Nullable
+    private IGeocacheFilter processLogicalFilterForConnector(@NonNull final IGeocacheFilter filter, final IConnector connector,
+                                                             final LogicalFilterType filterType) {
+        final List<IGeocacheFilter> processedChildren = new ArrayList<>();
+        if (filter.getChildren() != null) {
+            for (final IGeocacheFilter child : filter.getChildren()) {
+                final IGeocacheFilter processedChild = keepFilterForConnector(child, connector);
+                if (processedChild != null) {
+                    processedChildren.add(processedChild);
+                }
+            }
+        }
+
+        // If no children remain, return null (except for NOT filters with empty children)
+        if (processedChildren.isEmpty()) {
+            return null;
+        }
+
+        // If only one child remains, return it directly (optimization) - except for NOT filters
+        if (processedChildren.size() == 1 && filterType != LogicalFilterType.NOT) {
+            return processedChildren.get(0);
+        }
+
+        // Create a new filter with the remaining children
+        final IGeocacheFilter newFilter = filterType.create();
+        for (final IGeocacheFilter child : processedChildren) {
+            newFilter.addChild(child);
+        }
+
+        // Return null if no children remain (safety check)
+        return newFilter.getChildren().isEmpty() ? null : newFilter;
+    }
+
     /**
      * Helper method to be used in conjunction with {@link #getAndChainIfPossible()} by search providers
      * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
@@ -449,13 +595,11 @@ public class GeocacheFilter implements Cloneable {
         final JsonNode treeNode = node.get(CONFIG_KEY_TREE);
         if (treeNode != null) {
             tree = JsonConfigurationUtils.fromJsonConfig(treeNode, id -> {
-                switch (id) {
-                    case "AND": return new AndGeocacheFilter();
-                    case "OR": return new OrGeocacheFilter();
-                    case "NOT": return new NotGeocacheFilter();
-                    default:
-                        break;
+                final LogicalFilterType logicalFilterType = LogicalFilterType.getByTypeId(id);
+                if (logicalFilterType != null) {
+                    return logicalFilterType.create();
                 }
+
                 final GeocacheFilterType filterType = GeocacheFilterType.getByTypeId(id);
                 if (filterType == null) {
                     return null;
