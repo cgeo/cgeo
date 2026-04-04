@@ -20,6 +20,9 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: NoMap tile provider (don't show map, just caches etc.)
 - Change: Max distance to connect points on history track lowered to 500m (configurable)
 - New: Allow importing KML files as tracks (eg: trackable itinerary)
+- New: Offer to set cache icon even if cache is not yet stored
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- New: Display coordinates of waypoints in waypoint popup
 
 ### Λεπτομέρειες κρύπτης
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -69,3 +72,6 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Change: Use system-settings as default theme for new installations
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
 - New: Show undo bar when deleting caches from list from map
+- Fix: Crahs in percentage favorite filter
+- New: Make it easier to use simple lists as parent lists
+- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)

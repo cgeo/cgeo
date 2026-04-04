@@ -1809,6 +1809,7 @@
     <string name="calccoord_select_variable">Selecciona una variable</string>
     <string name="calccoord_new_variable">**%s** *(Nou)*</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_convert_to_plain_error">La fórmula no s\'avalua en coordenades vàlides.\nLa conversió a coordenades planes restablirà el punt de referència a coordenades buides.</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina espais</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
