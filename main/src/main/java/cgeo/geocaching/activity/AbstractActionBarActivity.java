@@ -140,7 +140,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         if (t != null) {
             actionBarHeightWithStatusBar = (int) (getResources().getDimension(R.dimen.actionbar_height) + statusBarHeight);
             // add statusbar height (= def.top) as padding to appBar, increasing its size accordingly, and set inset.top = 0
-            t.setPadding(t.getPaddingLeft(), statusBarHeight, t.getPaddingRight(), t.getPaddingBottom());
+            t.setPadding(currentWindowInsets.left, statusBarHeight, currentWindowInsets.right, t.getPaddingBottom());
             final ViewGroup.LayoutParams params = t.getLayoutParams();
             params.height = actionBarHeightWithStatusBar;
             t.setLayoutParams(params);
