@@ -56,7 +56,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
-    private Insets currentWindowInsets;
+    protected Insets currentWindowInsets;
 
     private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
 
