@@ -62,6 +62,11 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             DocumentsContract.Document.COLUMN_SIZE
     };
 
+    /**
+     * Lock object used to serialize directory creation operations and avoid duplicate directories
+     * when multiple threads attempt to create the same subdirectory concurrently (e.g. parallel Wherigo downloads).
+     */
+    private final Object subdirCreationLock = new Object();
 
     /**
      * cache for Uri permissions
@@ -361,23 +366,49 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     }
 
     private Uri findCreateSubdirectory(final Uri dirUri, final String dirName, final boolean createIfNotExisting) throws IOException {
-        final List<Uri> result = queryDir(dirUri, new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE}, c -> {
-            if (dirName.equals(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
-                return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
+        synchronized (subdirCreationLock) {
+            final Uri existing = findSubdirectoryByName(dirUri, dirName);
+            if (existing != null) {
+                return existing;
             }
-            return null;
 
-        });
-        for (Uri uri : result) {
-            if (uri != null) {
-                return uri;
+            if (!createIfNotExisting) {
+                return null;
             }
-        }
-        if (createIfNotExisting) {
+
             try {
-                return DocumentsContract.createDocument(getContext().getContentResolver(), dirUri, DocumentsContract.Document.MIME_TYPE_DIR, dirName);
+                final Uri created = DocumentsContract.createDocument(getContext().getContentResolver(), dirUri, DocumentsContract.Document.MIME_TYPE_DIR, dirName);
+                if (created != null) {
+                    Log.d("Create dir '" + dirName + "' in '" + dirUri + "': " + created.getPath());
+                } else {
+                    Log.d("Failed to create dir '" + dirName + "' in '" + dirUri + "'");
+                }
+                return created;
             } catch (RuntimeException re) {
                 Log.e("Could not create dir '" + dirName + "' in '" + dirUri + "'", re);
+            }
+            return null;
+        }
+    }
+
+    /**
+     * Returns the URI of the first child directory of {@code dirUri} whose display name matches
+     * {@code dirName} case-insensitively, or {@code null} if no such child exists.
+     */
+    private Uri findSubdirectoryByName(final Uri dirUri, final String dirName) throws IOException {
+        final List<Uri> result = queryDir(dirUri,
+                new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE},
+                c -> {
+                    // lookup – case-insensitive to cope with SAF provider quirks
+                    if (dirName.equalsIgnoreCase(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
+                        return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
+                    }
+                    return null;
+                });
+
+        for (final Uri uri : result) {
+            if (uri != null) {
+                return uri;
             }
         }
         return null;
