@@ -11,6 +11,21 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <!-- Show a navigation rail on landscape devices instead. -->
+    <com.google.android.material.navigationrail.NavigationRailView
+        android:id="@+id/activity_navigationBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/appToolbar"
+        app:labelVisibilityMode="labeled"
+        android:background="@color/colorBackgroundTabBar"
+        app:itemIconTint="@color/bottom_bar_selector"
+        app:itemTextColor="@color/bottom_bar_selector"
+        app:paddingTopSystemWindowInsets="false"
+        app:menu="@menu/activity_navigationbar_menu" />
+
+    <!-- make sure toolbar is placed above navigation rail -->
     <include
         android:id="@+id/appToolbar"
         layout="@layout/toolbar"
@@ -26,16 +41,4 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/activity_navigationBar" /><!-- android:layout_below="@id/appToolbar" -->
 
-    <!-- Show a navigation rail on landscape devices instead. -->
-    <com.google.android.material.navigationrail.NavigationRailView
-        android:id="@+id/activity_navigationBar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/appToolbar"
-        app:labelVisibilityMode="labeled"
-        android:background="@color/colorBackgroundTabBar"
-        app:itemIconTint="@color/bottom_bar_selector"
-        app:itemTextColor="@color/bottom_bar_selector"
-        app:menu="@menu/activity_navigationbar_menu" />
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>
