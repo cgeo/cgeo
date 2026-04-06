@@ -6,6 +6,7 @@ package dev.davidv.bergamot;
  * Java_dev_davidv_bergamot_NativeLib_*
  * We load the same .so but map it into cgeo's package via a shim approach.
  */
+@SuppressWarnings("PMD.AvoidUsingNativeCode")
 public class NativeLib {
 
     static {
