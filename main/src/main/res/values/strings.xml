@@ -253,10 +253,12 @@
     <string name="translate_external_label">Translate with %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Website</string>
+    <string name="translate_external_variant_unavailable">Unavailable</string>
     <string name="translate_external_none">&lt;None&gt;</string>
     <string name="translate_external_app">External App</string>
     <string name="translate_external_google">Google Translate</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Translate</string>
     <string name="translate_length_warning">Translation via Website may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->
