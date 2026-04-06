@@ -42,6 +42,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
