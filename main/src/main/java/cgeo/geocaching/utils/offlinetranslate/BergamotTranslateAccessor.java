@@ -1,17 +1,10 @@
 package cgeo.geocaching.utils.offlinetranslate;
 
 import cgeo.geocaching.utils.Log;
-import dev.davidv.bergamot.DetectionResult;
-import dev.davidv.bergamot.LangDetect;
-import dev.davidv.bergamot.NativeLib;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,9 +23,15 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.zip.GZIPInputStream;
 
+import dev.davidv.bergamot.DetectionResult;
+import dev.davidv.bergamot.LangDetect;
+import dev.davidv.bergamot.NativeLib;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Bergamot-based offline translation backend for cgeo.
