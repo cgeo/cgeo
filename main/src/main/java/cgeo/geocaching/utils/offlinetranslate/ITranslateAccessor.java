@@ -31,4 +31,12 @@ public interface ITranslateAccessor {
         return false;
     }
 
+    /**
+     * Returns the display name of this translator backend, or null if no attribution label should be shown.
+     * Example: "Bergamot", "ML Kit"
+     */
+    default String getTranslatorName() {
+        return null;
+    }
+
 }

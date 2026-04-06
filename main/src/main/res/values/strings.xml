@@ -404,6 +404,7 @@
     <string name="translator_translation_error">Failed to translate text: %s</string>
     <string name="translator_translation_initerror">Failed to initialize translator</string>
     <string name="translator_translation_success">Translated from "%s", tap button to restore original</string>
+    <string name="translator_attributed_to">Translated by %s</string>
     <string name="crash_activity_title">Oops! c:geo crashed!</string>
     <string name="crash_activity_report">report problem</string>
 

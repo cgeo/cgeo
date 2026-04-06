@@ -2116,6 +2116,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
                         binding.descriptionTranslatedByGoogle.setVisibility(translator != null && TranslateAccessor.get().requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
+                        final String translatorName = TranslateAccessor.get().getTranslatorName();
+                        if (translator != null && translatorName != null) {
+                            binding.descriptionTranslatedByBergamot.setText(LocalizationUtils.getString(R.string.translator_attributed_to, translatorName));
+                            binding.descriptionTranslatedByBergamot.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.descriptionTranslatedByBergamot.setVisibility(View.GONE);
+                        }
 
                         if (status == null || Strings.CS.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
                             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);

@@ -13,6 +13,10 @@ public class NativeLib {
         System.loadLibrary("bergamot-sys");
     }
 
+    /**
+     * Bootstraps the Bergamot translation engine.
+     * Must be called exactly once before any {@link #loadModelIntoCache} or {@link #translateMultiple} calls.
+     */
     public native void initializeService();
 
     public native void loadModelIntoCache(String config, String key);

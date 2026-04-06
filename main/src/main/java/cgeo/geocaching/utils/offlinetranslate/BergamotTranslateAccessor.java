@@ -1,18 +1,14 @@
 package cgeo.geocaching.utils.offlinetranslate;
 
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.Log;
-
-import android.content.Context;
-
-import androidx.annotation.NonNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,27 +51,36 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private static final String PIVOT_LANGUAGE = "en";
 
-    // Supported language pairs available in Mozilla's registry
+    // All language codes with Release-status models in both directions in Mozilla's registry.
+    // Verified against https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json
+    // "zh-hant" maps to registry key "zh_hant" (Traditional Chinese); see toRegistryKey().
     private static final Set<String> SUPPORTED_LANGUAGES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        "en", "de", "fr", "es", "it", "pl", "cs", "nl", "pt", "ru",
-        "bg", "et", "fi", "hu", "lt", "lv", "ro", "sk", "sl", "sv",
-        "zh", "ar", "uk", "ca", "is", "nb", "nn"
+        "en",
+        // European
+        "bg", "ca", "cs", "da", "de", "el", "es", "et", "fi", "fr",
+        "hu", "is", "it", "lt", "lv", "nb", "nl", "no", "pl", "pt",
+        "ro", "ru", "sk", "sl", "sv", "uk",
+        // Middle East / Central Asia
+        "ar", "fa", "he",
+        // South / Southeast / East Asia
+        "bn", "gu", "hi", "id", "ja", "kn", "ko", "ml", "ms", "te", "th", "tr", "vi", "zh", "zh-hant"
     )));
 
     /** Resolved download URLs for one translation direction (gzip-compressed on server) */
     private static final class PairUrls {
         final String modelUrl;
-        final String vocabUrl;
+        final String vocabSrcUrl;
+        final String vocabTrgUrl;  // same as vocabSrcUrl when the model uses a shared vocabulary
         final String lexUrl;
 
-        PairUrls(final String modelUrl, final String vocabUrl, final String lexUrl) {
-            this.modelUrl = modelUrl;
-            this.vocabUrl = vocabUrl;
-            this.lexUrl   = lexUrl;
+        PairUrls(final String modelUrl, final String vocabSrcUrl, final String vocabTrgUrl, final String lexUrl) {
+            this.modelUrl    = modelUrl;
+            this.vocabSrcUrl = vocabSrcUrl;
+            this.vocabTrgUrl = vocabTrgUrl;
+            this.lexUrl      = lexUrl;
         }
     }
 
-    private final Context context;
     private final NativeLib nativeLib;
     private final LangDetect langDetect;
     private Scheduler callbackScheduler;
@@ -91,13 +96,17 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     private final Map<String, PairUrls> pairUrlsCache = new HashMap<>();
     private final Object pairUrlsCacheLock = new Object();
 
-    public BergamotTranslateAccessor(@NonNull final Context context) {
-        this.context = context;
+    public BergamotTranslateAccessor() {
         this.nativeLib = new NativeLib();
         this.langDetect = new LangDetect();
         nativeLib.initializeService();
         // Run on IO thread — loading 30MB models per pair is too heavy for main thread
         Schedulers.io().createWorker().schedule(this::scanAvailableModels);
+    }
+
+    @Override
+    public String getTranslatorName() {
+        return "Bergamot";
     }
 
     @Override
@@ -110,7 +119,23 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         if (tag == null) {
             return null;
         }
-        return tag.contains("-") ? tag.split("-")[0].toLowerCase() : tag.toLowerCase();
+        // Map Traditional Chinese variants (zh-Hant, zh-TW, zh-HK, zh-MO) to our "zh-hant" code
+        final String lower = tag.toLowerCase();
+        if (lower.startsWith("zh-")) {
+            final String sub = lower.substring(3);
+            if ("hant".equals(sub) || "tw".equals(sub) || "hk".equals(sub) || "mo".equals(sub)) {
+                return "zh-hant";
+            }
+        }
+        return tag.contains("-") ? tag.split("-")[0].toLowerCase() : lower;
+    }
+
+    /**
+     * Converts our internal language code to the Mozilla registry key format.
+     * Most codes are identical; "zh-hant" is stored as "zh_hant" in the registry.
+     */
+    private static String toRegistryKey(final String lang) {
+        return lang.replace("-", "_");
     }
 
     @Override
@@ -268,7 +293,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
             @Override
             public void dispose() {
-                // Models remain in native cache; nothing to clean up per-translator
+                // Models remain in native memory until the process exits.
+                // NativeLib.cleanup() exists but is not called: reloading all models
+                // after a cleanup would require reinitializing the service, which is
+                // not yet implemented. Acceptable since users typically have 1-2 pairs loaded.
             }
         };
     }
@@ -277,19 +305,20 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         return from + "-" + to;
     }
 
-    private File getPairDir(final String from, final String to) {
-        return new File(context.getFilesDir(), "bergamot/" + from + "-" + to);
+    private static File getPairDir(final String from, final String to) {
+        return new File(LocalStorage.getBergamotDirectory(), from + "-" + to);
     }
 
     /**
-     * Local file names for a pair direction, using Mozilla's combined language code convention.
-     * E.g. for pl→en: "plen" → model.plen.intgemm.alphas.bin, vocab.plen.spm, lex.50.50.plen.s2t.bin
+     * Local file names for a pair direction.
+     * Separate src/trg vocab files accommodate models with either shared or split vocabularies.
      */
     private static List<String> pairFileNames(final String from, final String to) {
-        final String lc = from + to; // e.g. "plen", "deen", "ende"
+        final String lc = from + to;
         return Arrays.asList(
             "model." + lc + ".intgemm.alphas.bin",
-            "vocab." + lc + ".spm",
+            "vocab." + lc + ".src.spm",
+            "vocab." + lc + ".trg.spm",
             "lex.50.50." + lc + ".s2t.bin"
         );
     }
@@ -347,9 +376,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         final PairUrls urls = resolveModelUrls(from, to);
         final String lc = from + to;
 
-        downloadFileIfMissing(urls.modelUrl, new File(dir, "model." + lc + ".intgemm.alphas.bin"));
-        downloadFileIfMissing(urls.vocabUrl, new File(dir, "vocab." + lc + ".spm"));
-        downloadFileIfMissing(urls.lexUrl,   new File(dir, "lex.50.50." + lc + ".s2t.bin"));
+        downloadFileIfMissing(urls.modelUrl,    new File(dir, "model." + lc + ".intgemm.alphas.bin"));
+        downloadFileIfMissing(urls.vocabSrcUrl, new File(dir, "vocab." + lc + ".src.spm"));
+        downloadFileIfMissing(urls.vocabTrgUrl, new File(dir, "vocab." + lc + ".trg.spm"));
+        downloadFileIfMissing(urls.lexUrl,      new File(dir, "lex.50.50." + lc + ".s2t.bin"));
     }
 
     /**
@@ -365,6 +395,8 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             }
         }
 
+        // Registry uses underscore notation (e.g. "zh_hant-en"), our internal codes use hyphens
+        final String registryKey = toRegistryKey(from) + "-" + toRegistryKey(to);
         final String json = fetchRegistryJson();
         PairUrls result = null;
         try {
@@ -372,13 +404,13 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             final JSONObject root = new JSONObject(json);
             final JSONObject modelsObj = root.optJSONObject("models");
             if (modelsObj != null) {
-                final JSONArray arr = modelsObj.optJSONArray(key);
+                final JSONArray arr = modelsObj.optJSONArray(registryKey);
                 if (arr != null) {
                     result = pickBestModel(arr);
                 }
             } else {
                 // Fallback: root might directly be the pair map, or a flat array
-                final JSONArray arr = root.optJSONArray(key);
+                final JSONArray arr = root.optJSONArray(registryKey);
                 if (arr != null) {
                     result = pickBestModel(arr);
                 }
@@ -393,7 +425,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         }
 
         if (result == null) {
-            throw new IOException("No model found in registry for pair: " + key);
+            throw new IOException("No model found in registry for pair: " + registryKey);
         }
 
         synchronized (pairUrlsCacheLock) {
@@ -453,20 +485,37 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             return null;
         }
         final JSONObject modelObj = files.optJSONObject("model");
-        final JSONObject vocabObj = files.optJSONObject("vocab");
         final JSONObject lexObj   = files.optJSONObject("lexicalShortlist");
-        if (modelObj == null || vocabObj == null || lexObj == null) {
+        if (modelObj == null || lexObj == null) {
             return null;
         }
         final String modelPath = modelObj.optString("path");
-        final String vocabPath = vocabObj.optString("path");
         final String lexPath   = lexObj.optString("path");
-        if (modelPath.isEmpty() || vocabPath.isEmpty() || lexPath.isEmpty()) {
+        if (modelPath.isEmpty() || lexPath.isEmpty()) {
+            return null;
+        }
+        // Mozilla registry uses either a shared "vocab" or separate "srcVocab"/"trgVocab"
+        final JSONObject vocabObj    = files.optJSONObject("vocab");
+        final JSONObject srcVocabObj = files.optJSONObject("srcVocab");
+        final JSONObject trgVocabObj = files.optJSONObject("trgVocab");
+        final String vocabSrcPath;
+        final String vocabTrgPath;
+        if (vocabObj != null) {
+            vocabSrcPath = vocabObj.optString("path");
+            vocabTrgPath = vocabSrcPath; // shared vocabulary
+        } else if (srcVocabObj != null && trgVocabObj != null) {
+            vocabSrcPath = srcVocabObj.optString("path");
+            vocabTrgPath = trgVocabObj.optString("path");
+        } else {
+            return null;
+        }
+        if (vocabSrcPath.isEmpty() || vocabTrgPath.isEmpty()) {
             return null;
         }
         return new PairUrls(
             MODEL_BUCKET_URL + modelPath,
-            MODEL_BUCKET_URL + vocabPath,
+            MODEL_BUCKET_URL + vocabSrcPath,
+            MODEL_BUCKET_URL + vocabTrgPath,
             MODEL_BUCKET_URL + lexPath
         );
     }
@@ -478,21 +527,19 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
                 return cachedRegistryJson;
             }
             Log.i(TAG + ": Fetching model registry");
-            final HttpURLConnection conn = (HttpURLConnection) new URL(MODEL_REGISTRY_URL).openConnection();
-            conn.setConnectTimeout(30_000);
-            conn.setReadTimeout(30_000);
-            try (InputStream in = conn.getInputStream()) {
-                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                final byte[] buf = new byte[8192];
-                int n;
-                while ((n = in.read(buf)) != -1) {
-                    baos.write(buf, 0, n);
-                }
-                cachedRegistryJson = baos.toString("UTF-8");
-                return cachedRegistryJson;
-            } finally {
-                conn.disconnect();
+            final InputStream stream = Network.getResponseStream(Network.getRequest(MODEL_REGISTRY_URL));
+            if (stream == null) {
+                throw new IOException("Failed to fetch model registry");
             }
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            final byte[] buf = new byte[8192];
+            int n;
+            while ((n = stream.read(buf)) != -1) {
+                baos.write(buf, 0, n);
+            }
+            stream.close();
+            cachedRegistryJson = baos.toString("UTF-8");
+            return cachedRegistryJson;
         }
     }
 
@@ -506,19 +553,17 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     /** Download a single file, automatically decompressing if the URL ends in .gz */
     private void downloadFile(final String fileUrl, final File dest) throws IOException {
-        final HttpURLConnection conn = (HttpURLConnection) new URL(fileUrl).openConnection();
-        conn.setConnectTimeout(30_000);
-        conn.setReadTimeout(120_000);
-        try (InputStream raw = conn.getInputStream();
-             InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
+        final InputStream raw = Network.getResponseStream(Network.getRequest(fileUrl));
+        if (raw == null) {
+            throw new IOException("Failed to download: " + dest.getName());
+        }
+        try (InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
              FileOutputStream out = new FileOutputStream(dest)) {
             final byte[] buf = new byte[65536];
             int read;
             while ((read = in.read(buf)) != -1) {
                 out.write(buf, 0, read);
             }
-        } finally {
-            conn.disconnect();
         }
     }
 
@@ -535,10 +580,10 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
 
     private String buildModelConfig(final String from, final String to, final File dir) {
         final String lc = from + to;
-        final String modelFile = new File(dir, "model." + lc + ".intgemm.alphas.bin").getAbsolutePath();
-        final String lexFile   = new File(dir, "lex.50.50." + lc + ".s2t.bin").getAbsolutePath();
-        final String vocabFile = new File(dir, "vocab." + lc + ".spm").getAbsolutePath();
-        // Both vocab entries reference the same joint sentencepiece vocabulary file.
+        final String modelFile    = new File(dir, "model." + lc + ".intgemm.alphas.bin").getAbsolutePath();
+        final String lexFile      = new File(dir, "lex.50.50." + lc + ".s2t.bin").getAbsolutePath();
+        final String vocabSrcFile = new File(dir, "vocab." + lc + ".src.spm").getAbsolutePath();
+        final String vocabTrgFile = new File(dir, "vocab." + lc + ".trg.spm").getAbsolutePath();
         return "beam-size: 1\n"
             + "normalize: 1.0\n"
             + "word-penalty: 0\n"
@@ -554,8 +599,8 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             + "models:\n"
             + "  - " + modelFile + "\n"
             + "vocabs:\n"
-            + "  - " + vocabFile + "\n"
-            + "  - " + vocabFile + "\n"
+            + "  - " + vocabSrcFile + "\n"
+            + "  - " + vocabTrgFile + "\n"
             + "shortlist:\n"
             + "  - " + lexFile + "\n"
             + "  - false\n";
