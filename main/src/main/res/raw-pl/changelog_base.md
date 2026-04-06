@@ -42,6 +42,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
 - Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
 - Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
