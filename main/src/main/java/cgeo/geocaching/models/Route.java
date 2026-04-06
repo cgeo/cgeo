@@ -179,7 +179,7 @@ public class Route implements IGeoItemSupplier, Parcelable {
                 // calculate route for segment between current point and its predecessor
                 if (pos > 0) {
                     final ArrayList<Float> elevation = new ArrayList<>();
-                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
+                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation, null);
                     for (Geopoint geopoint : temp) {
                         segment.addPoint(geopoint);
                     }

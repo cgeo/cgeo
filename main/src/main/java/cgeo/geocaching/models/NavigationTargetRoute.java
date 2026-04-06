@@ -25,9 +25,9 @@ public class NavigationTargetRoute extends Route {
      * @param start the start point of the route
      * @param target the target point of the route
      */
-    public void update(final Geopoint start, final Geopoint target) {
+    public void update(final Geopoint start, final Geopoint target, final Routing.TurnInstruction turnInstruction) {
         final ArrayList<Float> elevation = new ArrayList<>();
-        final Geopoint[] routingPoints = Routing.getTrack(start, target, elevation);
+        final Geopoint[] routingPoints = Routing.getTrack(start, target, elevation, turnInstruction);
 
         if (elevation.isEmpty() && routingPoints.length > 2 && getNumSegments() > 0
                 && routingPoints.length == segments.get(0).getPoints().size()) {

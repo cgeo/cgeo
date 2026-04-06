@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.brouter.core.RoutingEngine;
 import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
@@ -20,16 +21,20 @@ import android.sax.Element;
 import android.sax.RootElement;
 import android.util.Xml;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -43,6 +48,7 @@ public final class Routing {
     private static AbstractServiceConnection routingServiceConnection;
     private static Geopoint lastDirectionUpdatePoint;
     @Nullable private static Geopoint[] lastRoutingPoints = null;
+    @Nullable private static final TurnInstruction lastTurnInstruction = new TurnInstruction();
     private static Geopoint lastDestination;
     private static long timeLastUpdate;
     private static int connectCount = 0;
@@ -60,6 +66,55 @@ public final class Routing {
 
     private Routing() {
         // utility class
+    }
+
+    public static class TurnInstruction {
+        public int resultPosition;
+        public float distanceFromStart;
+        public String instruction;
+        public static Map<String, Integer> instructionMapper = new HashMap<>();
+
+        public void copyFrom(@Nullable final TurnInstruction turnInstruction) {
+            resultPosition = turnInstruction != null ? turnInstruction.resultPosition : -1;
+            distanceFromStart = turnInstruction != null ? turnInstruction.distanceFromStart : 0.0f;
+            instruction = turnInstruction != null ? turnInstruction.instruction : null;
+        }
+
+        /* translates symbols from VoiceHint.getLocusSymbolString to drawable resource ids */
+        public @DrawableRes int getSymbolFromInstruction() {
+            if (instructionMapper.isEmpty()) {
+                instructionMapper.put("u-turn_left", R.drawable.navigation_u_turn_left);
+                instructionMapper.put("u-turn", R.drawable.navigation_u_turn_left);
+                instructionMapper.put("left_sharp", R.drawable.navigation_turn_sharp_left);
+                instructionMapper.put("left", R.drawable.navigation_turn_left);
+                instructionMapper.put("left_slight", R.drawable.navigation_turn_slight_left);
+                instructionMapper.put("stay_left", R.drawable.navigation_turn_slight_left);
+                instructionMapper.put("straight", R.drawable.navigation_straight);
+                instructionMapper.put("stay_right", R.drawable.navigation_turn_slight_right);
+                instructionMapper.put("right_slight", R.drawable.navigation_turn_slight_right);
+                instructionMapper.put("right", R.drawable.navigation_turn_right);
+                instructionMapper.put("right_sharp", R.drawable.navigation_turn_sharp_right);
+                instructionMapper.put("u-turn_right", R.drawable.navigation_u_turn_right);
+            }
+            Integer result = instructionMapper.get(instruction);
+            // check for roundabouts (a number should follow the string currently being tested for)
+            if (result == null) {
+                if (Strings.CS.startsWith(instruction, "roundabout_e-")) {
+                    result = R.drawable.navigation_roundabout_left;
+                } else if (Strings.CS.startsWith(instruction, "roundabout_e")) {
+                    result = R.drawable.navigation_roundabout_right;
+                } else {
+                    result = R.drawable.navigation_straight; // default
+                }
+            }
+            return result;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return resultPosition > -1 ? instruction + " @" + Units.getDistanceFromKilometers(distanceFromStart) + " [#" + resultPosition + "]" : "---";
+        }
     }
 
     public static synchronized void connect() {
@@ -142,7 +197,7 @@ public final class Routing {
      * @return a track with at least two points including the start and destination points
      */
     @NonNull
-    public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
+    public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation, @Nullable final TurnInstruction turnInstruction) {
         if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
@@ -150,6 +205,9 @@ public final class Routing {
         // avoid updating to frequently
         final long timeNow = System.currentTimeMillis();
         if ((timeNow - timeLastUpdate) < 1000 * UPDATE_MIN_DELAY_SECONDS) {
+            if (turnInstruction != null) {
+                turnInstruction.copyFrom(lastTurnInstruction);
+            }
             return ensureTrack(lastRoutingPoints, start, destination);
         }
 
@@ -157,23 +215,29 @@ public final class Routing {
         final int maxThresholdKm = Settings.getBrouterThreshold();
         final float targetDistance = start.distanceTo(destination);
         if (targetDistance > maxThresholdKm) {
+            lastTurnInstruction.copyFrom(null);
             return defaultTrack(start, destination);
         }
 
         // disable routing when near the target
         if (targetDistance < MIN_ROUTING_DISTANCE_KILOMETERS) {
+            lastTurnInstruction.copyFrom(null);
             return defaultTrack(start, destination);
         }
 
         // Use cached route if current position has not changed more than 5m and we had a route
         // TODO: Maybe adjust this to current zoomlevel
         if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS && lastRoutingPoints != null) {
+            if (turnInstruction != null) {
+                turnInstruction.copyFrom(lastTurnInstruction);
+            }
             return lastRoutingPoints;
         }
 
         // now really calculate a new route
         lastDestination = destination;
-        lastRoutingPoints = calculateRouting(start, destination, elevation);
+        lastRoutingPoints = calculateRouting(start, destination, elevation, turnInstruction);
+        lastTurnInstruction.copyFrom(turnInstruction);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return ensureTrack(lastRoutingPoints, start, destination);
@@ -231,7 +295,7 @@ public final class Routing {
      * @return a track with at least two points including the start and destination points
      */
     @NonNull
-    public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
+    public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation, @Nullable final TurnInstruction turnInstruction) {
         if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
@@ -249,7 +313,7 @@ public final class Routing {
         }
 
         // now calculate a new route
-        final Geopoint[] track = calculateRouting(start, destination, elevation);
+        final Geopoint[] track = calculateRouting(start, destination, elevation, turnInstruction);
         return ensureTrack(track, start, destination);
     }
 
@@ -265,15 +329,23 @@ public final class Routing {
 
     @Nullable
     @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up would not improve readability
-    private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest, @Nullable final ArrayList<Float> elevation) {
+    private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest, @Nullable final ArrayList<Float> elevation, @Nullable final TurnInstruction turnInstruction) {
+        if (turnInstruction == null) {
+            Log.e("no turnInstruction given:\n" + Arrays.toString(Thread.currentThread().getStackTrace()));
+        }
+
         final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
+        if (turnInstruction != null) {
+            params.putString("turnInstructionFormat", "locus");
+        }
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
         params.putString("v", Settings.getRoutingMode().parameterValue);
         params.putString(PROFILE_PARAMTERKEY, Settings.getRoutingProfile()); // profile filename, used only by internal routing engine
 
         final String gpx = routingServiceConnection == null ? null : routingServiceConnection.getTrackFromParams(params);
+        Log.e("gpx=" + gpx);
 
         if (gpx == null) {
             Log.i("brouter returned no data");
@@ -318,13 +390,16 @@ public final class Routing {
             return null;
         }
 
-        return parseGpxTrack(gpx, dest, elevation);
+        return parseGpxTrack(gpx, dest, elevation, turnInstruction);
     }
 
     @Nullable
-    private static Geopoint[] parseGpxTrack(@NonNull final String gpx, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
+    private static Geopoint[] parseGpxTrack(@NonNull final String gpx, final Geopoint destination, @Nullable final ArrayList<Float> elevation, @Nullable final TurnInstruction turnInstruction) {
         try {
             final LinkedList<Geopoint> result = new LinkedList<>();
+            if (turnInstruction != null) {
+                turnInstruction.resultPosition = -1; // marker: no turn instruction
+            }
 
             final String namespace = "http://www.topografix.com/GPX/1/1";
             final RootElement root = new RootElement(namespace, "gpx");
@@ -332,6 +407,17 @@ public final class Routing {
             final Element trkseg = trk.getChild(namespace, "trkseg");
             final Element trkpt = trkseg.getChild(namespace, "trkpt");
             final Element ele = trkpt.getChild(namespace, "ele");
+            if (turnInstruction != null) {
+                final Element ti = trkpt.getChild(namespace, "sym");
+
+                ti.setEndTextElementListener(body -> {
+                    if (result.size() > 1 && turnInstruction.resultPosition == -1 && StringUtils.isNotBlank(body)) {
+                        // take first instruction _after_ starting point
+                        turnInstruction.resultPosition = result.size() - 1;
+                        turnInstruction.instruction = body;
+                    }
+                });
+            }
 
             trkpt.setStartElementListener(attributes -> {
                 final String lat = attributes.getValue("lat");
@@ -350,6 +436,23 @@ public final class Routing {
             });
 
             Xml.parse(gpx, root.getContentHandler());
+
+            // calculate turn instruction distance
+            if (turnInstruction != null && turnInstruction.resultPosition > 0) {
+                turnInstruction.distanceFromStart = 0.0f;
+                Geopoint last = result.get(0);
+                int current = 0;
+                for (Geopoint point : result) {
+                    if (current > 0) {
+                        turnInstruction.distanceFromStart += point.distanceTo(last);
+                    }
+                    current++;
+                    last = point;
+                    if (current == turnInstruction.resultPosition) {
+                        break;
+                    }
+                }
+            }
 
             // artificial straight line from track to target
             if (destination != null) {

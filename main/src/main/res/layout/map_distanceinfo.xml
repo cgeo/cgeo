@@ -76,6 +76,15 @@
             android:layout_margin="0dp"
             style="@style/map_distanceinfo"
             android:background="@drawable/icon_bcg" />
+
+        <TextView
+            android:id="@+id/turnByTurnInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
     </LinearLayout>
 
     <LinearLayout
