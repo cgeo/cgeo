@@ -42,6 +42,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
+- Fix: Incorrect handling of DNF status for opencaching platforms
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
