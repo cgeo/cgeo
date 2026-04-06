@@ -42,6 +42,7 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Alteração: Removida a hiperligação desactualizada do leitor WhereYouGo. O leitor Wherigo interno é agora o padrão para Wherigos.
 - Fix: Missing quick toggle in guided mode of waypoint calculator
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
