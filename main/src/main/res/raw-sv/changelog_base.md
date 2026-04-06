@@ -42,6 +42,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
 - Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
+- Fix: Incorrect handling of DNF status for opencaching platforms
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
