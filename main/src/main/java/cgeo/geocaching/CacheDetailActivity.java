@@ -116,6 +116,7 @@ import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import cgeo.geocaching.utils.offlinetranslate.ITranslatorImpl;
+import cgeo.geocaching.utils.offlinetranslate.TranslateAccessor;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -1987,16 +1988,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cda.translationStatus.isTranslated()) {
                 cda.translationStatus.setNotTranslated();
                 reloadDescription(cda, cache, true, 0, cda.descriptionStyle, null, null, null);
-                if (TextUtils.containsHtml(cache.getHint())) {
-                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                } else {
-                    binding.hint.setText(cache.getHint());
-                }
+                restoreHint(cache);
                 binding.descriptionTranslateNote.setText(String.format(getString(R.string.translator_language_detected), sourceLng));
                 return;
             }
 
-            cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
+            // Only the description counts towards progress; hint is translated on-demand when clicked.
+            cda.translationStatus.startTranslation(1, cda, cda.findViewById(R.id.description_translate_button));
 
             OfflineTranslateUtils.getTranslator(cda, cda.translationStatus, sourceLng,
                 unsupportedLng -> {
@@ -2014,8 +2012,60 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         binding.descriptionTranslateButton.setEnabled(false);
                     };
                     reloadDescription(cda, cache, true, 0, cda.descriptionStyle, translator, cda.translationStatus, errorConsumer);
-                    OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, binding.hint.getText().toString(), binding.hint::setText, errorConsumer);
+                    setHintTranslateOnClickListener(cache, translator);
                 });
+        }
+
+        /**
+         * Replaces the hint click listener so that the first click reveals the hint AND translates it,
+         * and a subsequent click re-hides the hint (restoring the encrypted state while keeping the
+         * translate-on-click behaviour active).
+         */
+        private void setHintTranslateOnClickListener(final Geocache cache, final ITranslatorImpl translator) {
+            if (StringUtils.isBlank(cache.getHint())) {
+                return;
+            }
+            final boolean[] hintRevealed = {false};
+            final View.OnClickListener listener = v -> {
+                if (!hintRevealed[0]) {
+                    hintRevealed[0] = true;
+                    // Decode rot13 if the hint is currently shown encrypted (rot13 is self-inverse)
+                    final String hintPlain = Settings.getHintAsRot13()
+                            ? CryptUtils.rot13(binding.hint.getText().toString())
+                            : binding.hint.getText().toString();
+                    translator.translate(hintPlain,
+                            translated -> binding.hint.setText(OfflineTranslateUtils.getTextWithTranslatedByLogo(translated)),
+                            e -> binding.hint.setText(hintPlain)); // show plain text on translation error
+                } else {
+                    hintRevealed[0] = false;
+                    resetHintText(cache); // re-hide (restore encrypted/original state), keep this listener
+                }
+            };
+            binding.hint.setOnClickListener(listener);
+            binding.hintBox.setOnClickListener(listener);
+        }
+
+        /** Resets the hint text to the original cache value, re-applying rot13 if configured. */
+        private void resetHintText(final Geocache cache) {
+            if (TextUtils.containsHtml(cache.getHint())) {
+                binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
+            } else {
+                binding.hint.setText(cache.getHint());
+            }
+            if (Settings.getHintAsRot13()) {
+                binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
+            }
+        }
+
+        /** Resets hint text and restores the standard decrypt-only click listener (used when undoing translation). */
+        private void restoreHint(final Geocache cache) {
+            if (StringUtils.isBlank(cache.getHint())) {
+                return;
+            }
+            resetHintText(cache);
+            final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
+            binding.hint.setOnClickListener(decryptListener);
+            binding.hintBox.setOnClickListener(decryptListener);
         }
 
         @Override
@@ -2065,7 +2115,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         if (translator != null) {
                             binding.descriptionTranslateNote.setText(LocalizationUtils.getString(R.string.translator_translation_success, status.getSourceLanguage()));
                         }
-                        binding.descriptionTranslatedByGoogle.setVisibility(translator != null ? View.VISIBLE : View.GONE);
+                        binding.descriptionTranslatedByGoogle.setVisibility(translator != null && TranslateAccessor.get().requiresGoogleAttribution() ? View.VISIBLE : View.GONE);
 
                         if (status == null || Strings.CS.equals(status.getSourceLanguage().getCode(), OfflineTranslateUtils.LANGUAGE_INVALID)) {
                             OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((CacheDetailActivity) getActivity(), binding.descriptionTranslate, binding.description.getText().toString() + " " + binding.hint.getText().toString(), this::translateListing);

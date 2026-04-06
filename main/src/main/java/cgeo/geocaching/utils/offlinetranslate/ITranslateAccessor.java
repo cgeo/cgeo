@@ -26,4 +26,9 @@ public interface ITranslateAccessor {
 
     void getTranslatorWithDownload(String sourceLanguage, String targetLanguage, Consumer<ITranslatorImpl> onSuccess, Consumer<Exception> onError);
 
+    /** Returns true if the translator requires a "Translated by Google" attribution to be shown. */
+    default boolean requiresGoogleAttribution() {
+        return false;
+    }
+
 }

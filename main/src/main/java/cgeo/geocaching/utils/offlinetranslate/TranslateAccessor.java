@@ -1,28 +1,31 @@
 package cgeo.geocaching.utils.offlinetranslate;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.Log;
 
 public class TranslateAccessor {
 
     private static final ITranslateAccessor INSTANCE;
-    private static final boolean DO_TEST = false;
 
     static {
         ITranslateAccessor instance = null;
-        if (DO_TEST) {
-            instance = new DevTranslateAccessor();
-        } else {
+        // Try Bergamot first (open-source, works in all builds including FOSS)
+        try {
+            instance = new BergamotTranslateAccessor(CgeoApplication.getInstance());
+            Log.iForce("TranslateAccessor: Bergamot instance created");
+        } catch (Exception e) {
+            Log.iForce("TranslateAccessor: Could not initialize Bergamot: " + e.getMessage());
+        }
+        // Fall back to MLKit if Bergamot failed (e.g. .so not bundled yet)
+        if (instance == null) {
             try {
                 final Class<ITranslateAccessor> mlkitClass = (Class<ITranslateAccessor>)
                         Class.forName("cgeo.geocaching.utils.offlinetranslate.MLKitTranslateAccessor");
                 if (mlkitClass != null) {
                     instance = mlkitClass.newInstance();
-                    Log.iForce("TranslateAccessor: MLKit instance created");
-                } else {
-                    Log.iForce("TranslateAccessor: MLKit class not found");
+                    Log.iForce("TranslateAccessor: MLKit instance created (fallback)");
                 }
             } catch (Exception re) {
-                //mlkit not found
                 Log.iForce("TranslateAccessor: Could not find MLKit");
             }
         }
