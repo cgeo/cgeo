@@ -59,7 +59,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     private static final Set<String> SUPPORTED_LANGUAGES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         "en", "de", "fr", "es", "it", "pl", "cs", "nl", "pt", "ru",
         "bg", "et", "fi", "hu", "lt", "lv", "ro", "sk", "sl", "sv",
-        "zh", "ja", "ko", "ar", "uk", "ca", "is", "nb", "nn"
+        "zh", "ar", "uk", "ca", "is", "nb", "nn"
     )));
 
     /** Resolved download URLs for one translation direction (gzip-compressed on server) */
@@ -481,7 +481,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
             final HttpURLConnection conn = (HttpURLConnection) new URL(MODEL_REGISTRY_URL).openConnection();
             conn.setConnectTimeout(30_000);
             conn.setReadTimeout(30_000);
-            try (final InputStream in = conn.getInputStream()) {
+            try (InputStream in = conn.getInputStream()) {
                 final ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 final byte[] buf = new byte[8192];
                 int n;
@@ -509,9 +509,9 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         final HttpURLConnection conn = (HttpURLConnection) new URL(fileUrl).openConnection();
         conn.setConnectTimeout(30_000);
         conn.setReadTimeout(120_000);
-        try (final InputStream raw = conn.getInputStream();
-             final InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
-             final FileOutputStream out = new FileOutputStream(dest)) {
+        try (InputStream raw = conn.getInputStream();
+             InputStream in = fileUrl.endsWith(".gz") ? new GZIPInputStream(raw) : raw;
+             FileOutputStream out = new FileOutputStream(dest)) {
             final byte[] buf = new byte[65536];
             int read;
             while ((read = in.read(buf)) != -1) {
@@ -570,7 +570,7 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
     }
 
     private void ensureOrDownload(final String language) throws IOException {
-        boolean available;
+        final boolean available;
         synchronized (availableLock) {
             available = availableLanguages.contains(language);
         }

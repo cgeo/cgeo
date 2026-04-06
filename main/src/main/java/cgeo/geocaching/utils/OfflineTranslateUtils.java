@@ -172,7 +172,7 @@ public class OfflineTranslateUtils {
         }
 
         TranslateAccessor.get().getTranslatorWithDownload(lng, targetLng, consumer, e -> {
-            Log.e("Failed to initialize MLKit Translator", e);
+            Log.e("Failed to initialize translator", e);
             consumer.accept(null);
         });
     }
