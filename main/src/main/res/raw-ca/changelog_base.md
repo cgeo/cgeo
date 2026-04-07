@@ -22,7 +22,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Permet la importació de fitxers KML com a rutes (per exemple: itinerari rastrejable)
 - Nou: Ofereix la possibilitat de definir la icona del catxé fins i tot si el catxé encara no s'ha desat
 - Nou: Infobox per al gràfic d'elevació que mostra la distància restant, l'ascens i el descens
-- New: Display coordinates of waypoints in waypoint popup
+- Nou: Mostra les coordenades dels punts de referència a la finestra emergent de punts de referència
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -42,7 +42,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Canvi: S'ha eliminat l'enllaç al reproductor WhereYouGo obsolet. El reproductor Wherigo integrat ara és el predeterminat per a Wherigos.
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
-- Fix: Incorrect handling of DNF status for opencaching platforms
+- Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -75,4 +75,4 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Mostra la barra de desfer en suprimir els catxés de la llista del mapa
 - Correcció: Error en el filtre de percentatge de preferits
 - Nou: Facilita l'ús de llistes simples com a llistes principals
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
