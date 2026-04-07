@@ -22,7 +22,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Zezwalaj na importowanie plików KML jako ścieżek (np. trasa przedmiotu podróżnego)
 - Nowość: Możliwość ustawienia ikony skrytki, nawet jeśli skrytka nie jest jeszcze zapisana
 - Nowość: Infoboks dla wykresu wysokości ukazującego pozostały dystans, podejścia, zejścia
-- New: Display coordinates of waypoints in waypoint popup
+- Nowość: Wyświetlanie współrzędnych punktów nawigacji w wyskakującym okienku punktu nawigacji
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -42,7 +42,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Zmiana: Usunięto link do przestarzałego odtwarzacza WhereYouGo. Zintegrowany odtwarzacz Wherigo jest teraz domyślny dla skrytek Wherigo.
 - Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
 - Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
-- Fix: Incorrect handling of DNF status for opencaching platforms
+- Naprawiono: Nieprawidłową obsługę statusu DNF dla platform opencaching
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -75,4 +75,4 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Pokaż pasek cofania podczas usuwania skrytek z listy z mapy
 - Naprawiono: Awarie w filtrowaniu ulubionych wg procentów
 - Nowość: Łatwiejsze korzystanie z prostych list jako list nadrzędnych
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
