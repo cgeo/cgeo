@@ -840,14 +840,26 @@ public class GeocacheTest {
     public void testGetPossibleLogTypes() {
         final Geocache gcCache = new Geocache();
         gcCache.setGeocode("GC123");
+        gcCache.setType(CacheType.TRADITIONAL);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible log-types").contains(LogType.DIDNT_FIND_IT);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible log-types").contains(LogType.NOTE);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible log-types").doesNotContain(LogType.NEEDS_MAINTENANCE);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible log-types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
         gcCache.setType(CacheType.WEBCAM);
-        assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.WEBCAM_PHOTO_TAKEN);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible webcam log-types").contains(LogType.WEBCAM_PHOTO_TAKEN);
+        assertThat(gcCache.getPossibleLogTypes()).as("GC cache possible webcam log-types").doesNotContain(LogType.NEEDS_MAINTENANCE);
 
         final Geocache ocCache = new Geocache();
         ocCache.setGeocode("OC1234");
         ocCache.setType(CacheType.TRADITIONAL);
-        assertThat(ocCache.getPossibleLogTypes()).as("traditional cache possible log types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
-        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log types").doesNotContain(LogType.NEEDS_MAINTENANCE);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.DIDNT_FIND_IT);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.NOTE);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").contains(LogType.NEEDS_MAINTENANCE);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log-types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
+
+        ocCache.setType(CacheType.WEBCAM);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible webcam log-types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible webcam log-types").contains(LogType.NEEDS_MAINTENANCE);
     }
 
     @Test

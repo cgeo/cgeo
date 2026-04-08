@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -184,6 +185,20 @@ public class OkapiClientTest {
         } finally {
             cache.setPersonalNote(oldPersonalNote);
             OkapiClient.uploadPersonalNotes(ocConnector, cache);
+        }
+    }
+
+    @Test
+    @Ignore("This tests needs a working OC account on the CI AVD")
+    public void testGetOwnerLogTypes() {
+        final OCApiLiveConnector ocConnector = getConnectorOCDE();
+        if (ocConnector != null) {
+            final Geocache ocCache = new Geocache();
+            ocCache.setGeocode("OC1234");
+            ocCache.setType(CacheType.WEBCAM);
+            final String ownerUserName = ocConnector.getUserName();
+            ocCache.setOwnerDisplayName(ownerUserName);
+            assertThat(ocCache.getPossibleLogTypes()).as("Owner log types").contains(LogType.OWNER_MAINTENANCE);
         }
     }
 }
