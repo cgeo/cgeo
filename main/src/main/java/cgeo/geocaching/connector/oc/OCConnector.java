@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -63,12 +64,24 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
 
     @Override
     @NonNull
-    public final List<LogType> getPossibleLogTypes(@NonNull final Geocache cache) {
-        if (cache.isEventCache()) {
-            return EVENT_LOG_TYPES;
+    public final List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
+        final List<LogType> logTypes = new ArrayList<>();
+        if (geocache.isEventCache()) {
+            logTypes.addAll(EVENT_LOG_TYPES);
+        } else {
+            logTypes.addAll(STANDARD_LOG_TYPES);
         }
 
-        return STANDARD_LOG_TYPES;
+        if (geocache.isOwner()) {
+            logTypes.add(LogType.OWNER_MAINTENANCE);
+            if (geocache.isDisabled()) {
+                logTypes.add(LogType.ENABLE_LISTING);
+            } else {
+                logTypes.add(LogType.TEMP_DISABLE_LISTING);
+            }
+            logTypes.add(LogType.ARCHIVE);
+        }
+        return logTypes;
     }
 
     @Override
