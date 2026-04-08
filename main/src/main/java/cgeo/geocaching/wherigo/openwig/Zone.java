@@ -4,10 +4,13 @@
  */
 package cgeo.geocaching.wherigo.openwig;
 
-import java.io.*;
 import cgeo.geocaching.wherigo.kahlua.stdlib.TableLib;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaState;
 import cgeo.geocaching.wherigo.kahlua.vm.LuaTable;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Zone extends Thing {
 
@@ -66,7 +69,7 @@ public class Zone extends Thing {
             int n = lt.len();
             points = new ZonePoint[n];
             for (int i = 1; i <= n; i++) {
-                ZonePoint zp = (ZonePoint) lt.rawget(new Double(i));
+                ZonePoint zp = (ZonePoint) lt.rawget((double) i);
                 points[i-1] = zp;
             }
             if (active) {
