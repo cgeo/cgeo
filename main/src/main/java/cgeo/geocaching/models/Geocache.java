@@ -680,6 +680,11 @@ public class Geocache implements INamedGeoCoordinate {
         return getConnector().getPossibleLogTypes(this);
     }
 
+    @NonNull
+    public List<LogType> getPossibleOfflineLogTypes() {
+        return getConnector().getPossibleOfflineLogTypes(this);
+    }
+
     /**
      * Get the browser URL for the given LogEntry. May return null if no url available or identifiable.
      */

@@ -3,6 +3,7 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -133,6 +134,12 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @NonNull
     public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
         return Collections.emptyList();
+    }
+
+    @Override
+    @NonNull
+    public ReportProblemType getDefaultReportProblemTypes(@NonNull final LogType logType) {
+        return ReportProblemType.NO_PROBLEM;
     }
 
     @NonNull

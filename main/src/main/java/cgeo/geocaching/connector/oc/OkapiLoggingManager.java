@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
@@ -84,6 +85,16 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
         }
 
         return Collections.singletonList(ReportProblemType.NEEDS_MAINTENANCE);
+    }
+
+    @NonNull
+    @Override
+    public ReportProblemType getDefaultReportProblemTypes(@NonNull final LogType logType) {
+        if (LogType.NEEDS_MAINTENANCE == logType) {
+            return ReportProblemType.NEEDS_MAINTENANCE;
+        }
+
+        return ReportProblemType.NO_PROBLEM;
     }
 
     @Override

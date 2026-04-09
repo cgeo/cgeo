@@ -286,6 +286,12 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
+    public List<LogType> getPossibleOfflineLogTypes(@NonNull final Geocache geocache) {
+        return getPossibleLogTypes(geocache);
+    }
+
+    @Override
+    @NonNull
     public String getWaypointGpxId(@NonNull final String prefix, @NonNull final String geocode) {
         // Default: just return the prefix
         return prefix;
