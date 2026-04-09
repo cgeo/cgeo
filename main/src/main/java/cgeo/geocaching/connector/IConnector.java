@@ -257,6 +257,9 @@ public interface IConnector {
     @NonNull
     List<LogType> getPossibleLogTypes(@NonNull Geocache geocache);
 
+    @NonNull
+    List<LogType> getPossibleOfflineLogTypes(@NonNull Geocache geocache);
+
     /**
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'.

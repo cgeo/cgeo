@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
@@ -96,6 +97,9 @@ public interface ILoggingManager {
 
     @NonNull
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
+
+    @NonNull
+    ReportProblemType getDefaultReportProblemTypes(@NonNull LogType logType);
 
     int getFavoriteCheckboxText();
 
