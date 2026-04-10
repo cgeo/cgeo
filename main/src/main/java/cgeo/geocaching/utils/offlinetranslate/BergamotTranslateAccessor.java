@@ -210,7 +210,11 @@ public class BergamotTranslateAccessor implements ITranslateAccessor {
         Schedulers.computation().createWorker().schedule(() -> {
             try {
                 final DetectionResult result = langDetect.detectLanguage(source, null);
-                final String lang = (result != null && result.isReliable) ? result.language : null;
+                // Always return the top-ranked language, even if isReliable=false.
+                // "un" means CLD2 could not determine any language at all (e.g. random chars).
+                final String lang = (result != null && result.language != null
+                        && !result.language.isEmpty() && !"un".equals(result.language))
+                        ? result.language : null;
                 runCallback(() -> onSuccess.accept(lang));
             } catch (final Exception e) {
                 Log.e(TAG + ": Language detection failed", e);

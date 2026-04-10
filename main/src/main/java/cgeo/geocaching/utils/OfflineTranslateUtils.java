@@ -96,8 +96,12 @@ public class OfflineTranslateUtils {
     }
 
     public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
-        // identify listing language
-        TranslateAccessor.get().guessLanguage(text.replaceAll("[\\s\\ufffc]+", " ").trim(),
+        // Use only the first 500 characters for language detection. Cache listings often contain
+        // the same text in multiple languages (e.g. EN + DE + FR + VI); CLD2 would return
+        // isReliable=false for the full text. The primary language is almost always first.
+        final String normalized = text.replaceAll("[\\s\\ufffc]+", " ").trim();
+        final String sample = normalized.length() > 500 ? normalized.substring(0, 500) : normalized;
+        TranslateAccessor.get().guessLanguage(sample,
             lngCode -> successConsumer.accept(new Language(lngCode)),
                 e -> errorConsumer.accept(e.getMessage()));
     }
