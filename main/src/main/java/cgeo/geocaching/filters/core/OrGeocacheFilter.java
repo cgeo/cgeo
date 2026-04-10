@@ -5,6 +5,14 @@ import cgeo.geocaching.storage.SqlBuilder;
 
 public class OrGeocacheFilter extends LogicalGeocacheFilter {
 
+    public static OrGeocacheFilter create(final IGeocacheFilter... children) {
+        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
+        for (final IGeocacheFilter child : children) {
+            orFilter.addChild(child);
+        }
+        return orFilter;
+    }
+
     @Override
     public String getId() {
         return "OR";
@@ -42,4 +50,6 @@ public class OrGeocacheFilter extends LogicalGeocacheFilter {
     public String getUserDisplayableType() {
         return " OR ";
     }
+
+
 }
