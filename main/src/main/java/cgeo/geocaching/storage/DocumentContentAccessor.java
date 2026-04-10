@@ -379,7 +379,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             try {
                 final Uri created = DocumentsContract.createDocument(getContext().getContentResolver(), dirUri, DocumentsContract.Document.MIME_TYPE_DIR, dirName);
                 if (created != null) {
-                    Log.d("Create dir '" + dirName + "' in '" + dirUri + "': " + created.getPath());
+                    Log.d("Create dir '" + dirName + "' in '" + dirUri + "': " + created);
                 } else {
                     Log.d("Failed to create dir '" + dirName + "' in '" + dirUri + "'");
                 }
