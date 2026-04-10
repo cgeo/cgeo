@@ -367,9 +367,18 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
     private Uri findCreateSubdirectory(final Uri dirUri, final String dirName, final boolean createIfNotExisting) throws IOException {
         synchronized (subdirCreationLock) {
-            final Uri existing = findSubdirectoryByName(dirUri, dirName);
+            final Uri existing = findDocumentByName(dirUri, dirName);
             if (existing != null) {
-                return existing;
+                // Check whether the existing document is actually a directory
+                final ContentStorage.FileInformation info = getFileInfo(existing, null);
+                if (info != null && info.isDirectory) {
+                    return existing;
+                }
+
+                // A non-directory document with the same name exists – creating a directory would
+                // cause the provider to auto-rename it (e.g. "wherigo (1)"). Bail out instead.
+                Log.w("Cannot create dir '" + dirName + "' in '" + dirUri + "': a non-directory document with that name already exists");
+                return null;
             }
 
             if (!createIfNotExisting) {
@@ -381,26 +390,26 @@ class DocumentContentAccessor extends AbstractContentAccessor {
                 if (created != null) {
                     Log.d("Create dir '" + dirName + "' in '" + dirUri + "': " + created);
                 } else {
-                    Log.d("Failed to create dir '" + dirName + "' in '" + dirUri + "'");
+                    Log.w("Cannot create dir '" + dirName + "' in '" + dirUri + "': DocumentsContract.createDocument returned null");
                 }
                 return created;
             } catch (RuntimeException re) {
-                Log.e("Could not create dir '" + dirName + "' in '" + dirUri + "'", re);
+                Log.e("Cannot create dir '" + dirName + "' in '" + dirUri + "'", re);
             }
             return null;
         }
     }
 
     /**
-     * Returns the URI of the first child directory of {@code dirUri} whose display name matches
-     * {@code dirName} case-insensitively, or {@code null} if no such child exists.
+     * Returns the URI of the first child document (file or directory) of {@code dirUri} whose
+     * display name matches {@code name} case-insensitively, or {@code null} if no such child exists.
      */
-    private Uri findSubdirectoryByName(final Uri dirUri, final String dirName) throws IOException {
+    private Uri findDocumentByName(final Uri dirUri, final String name) throws IOException {
         final List<Uri> result = queryDir(dirUri,
-                new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE},
+                new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME},
                 c -> {
                     // lookup – case-insensitive to cope with SAF provider quirks
-                    if (dirName.equalsIgnoreCase(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
+                    if (name.equalsIgnoreCase(c.getString(1))) {
                         return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
                     }
                     return null;
