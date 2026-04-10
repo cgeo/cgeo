@@ -5,6 +5,14 @@ import cgeo.geocaching.storage.SqlBuilder;
 
 public class AndGeocacheFilter extends LogicalGeocacheFilter {
 
+    public static AndGeocacheFilter create(final IGeocacheFilter... children) {
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        for (final IGeocacheFilter child : children) {
+            andFilter.addChild(child);
+        }
+        return andFilter;
+    }
+
     @Override
     public String getId() {
         return "AND";
