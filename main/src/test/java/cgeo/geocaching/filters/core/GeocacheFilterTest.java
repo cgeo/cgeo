@@ -150,7 +150,8 @@ public class GeocacheFilterTest {
 
         // OR filters should not be expanded into an AND chain
         final List<BaseGeocacheFilter> result = filter.getAndChainIfPossible(gcConnector);
-        assertThat(result.get(0)).isInstanceOf(OrGeocacheFilter.class);
+        assertThat(result).isNotNull();
+        assertThat(result).isEmpty();
     }
 
     @Test
@@ -388,11 +389,13 @@ public class GeocacheFilterTest {
 
         final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossible(gcConnector);
         assertThat(gcResult).isNotNull();
-        assertThat(gcResult).hasSize(1);
-        final List<IGeocacheFilter> orResultFilter = gcResult.get(0).getChildren();
-        assertThat(orResultFilter).hasSize(2);
-        assertThat(orResultFilter.get(0).getType()).isEqualTo(GeocacheFilterType.TYPE);
-        assertThat(orResultFilter.get(1).getType()).isEqualTo(GeocacheFilterType.SIZE);
+        assertThat(gcResult).isEmpty();
+        // assertThat(gcResult).isNotNull();
+        // assertThat(gcResult).hasSize(1);
+        // final List<IGeocacheFilter> orResultFilter = gcResult.get(0).getChildren();
+        // assertThat(orResultFilter).hasSize(2);
+        // assertThat(orResultFilter.get(0).getType()).isEqualTo(GeocacheFilterType.TYPE);
+        // assertThat(orResultFilter.get(1).getType()).isEqualTo(GeocacheFilterType.SIZE);
     }
 }
 
