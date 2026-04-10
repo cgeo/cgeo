@@ -11,7 +11,6 @@ import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DateRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -208,10 +207,9 @@ final class ALApi {
 
         final GeocacheFilter filter = pFilter == null ? GeocacheFilter.createEmpty() : pFilter;
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-        // Origin excludes Lab
-        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
-        if (of != null && !of.allowsCachesOf(connector)) {
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        // Connector excluded by Origin filter
+        if (filters == null) {
             return new ArrayList<>();
         }
         // Type excludes Lab
