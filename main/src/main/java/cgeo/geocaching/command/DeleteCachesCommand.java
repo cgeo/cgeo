@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,8 +44,9 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
                                @Nullable final Runnable onFinishedCallback) {
         super(context, caches, R.string.command_delete_caches_progress);
         this.onFinishedCallback = onFinishedCallback;
-
-        deleteFromDeviceAction = new DeleteFromDeviceAction(caches);
+        
+        final List<Geocache> toDelete = new ArrayList<>(caches);
+        deleteFromDeviceAction = new DeleteFromDeviceAction(toDelete);
         removeFromListAction = null;
     }
 
@@ -115,8 +117,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         }
     }
 
-
-    public void showUserDataDialogAndExecute() {
+    private void showUserDataDialogAndExecute() {
         // Scanning caches for user data (notes, waypoints, variables, offline logs) can be slow
         // for large selections — run it on a background thread and show the dialog on the UI thread.
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
@@ -207,7 +208,7 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
         }
 
         private List<Geocache> getCachesWithUserData() {
-            return caches.stream().filter(this::hasUserData).toList();
+            return caches.stream().filter(this::hasUserData).collect(Collectors.toList());
         }
 
         private int getCacheCount() {
