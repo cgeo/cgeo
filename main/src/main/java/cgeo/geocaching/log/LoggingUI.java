@@ -125,7 +125,7 @@ public final class LoggingUI {
             } else {
                 final List<LogType> onlineLogTypes = cache.getPossibleLogTypes();
                 final ILoggingManager loggingManager = cache.getLoggingManager();
-                final ReportProblemType reportProblem = loggingManager.getDefaultReportProblemTypes(logTypeEntry.logType);
+                final ReportProblemType reportProblem = loggingManager.getDefaultReportProblemType(logTypeEntry.logType);
                 final LogType logType;
                 if (!onlineLogTypes.contains(logTypeEntry.logType)) {
                     logType = LogType.NOTE;

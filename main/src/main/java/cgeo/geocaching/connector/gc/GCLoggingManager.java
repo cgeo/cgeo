@@ -252,7 +252,7 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public ReportProblemType getDefaultReportProblemTypes(@NonNull final LogType logType) {
+    public ReportProblemType getDefaultReportProblemType(@NonNull final LogType logType) {
         switch (logType) {
             case NEEDS_MAINTENANCE:
                 return ReportProblemType.OTHER;
