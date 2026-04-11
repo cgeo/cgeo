@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -108,7 +109,7 @@ public class GeocacheFilterTest {
 
     @Test
     public void getAndChainIfPossibleForConnectorWithNoFilter() {
-        // empty filter => null
+        // empty filter => empty list (not null, but no filters to chain)
         final IConnector gcConnector = GCConnector.getInstance();
 
         final GeocacheFilter filter = GeocacheFilter.createEmpty();
@@ -120,7 +121,7 @@ public class GeocacheFilterTest {
 
     @Test
     public void getAndChainIfPossibleForConnectorWithOnlyConnectorFilter() {
-        // empty filter => null
+        // only matching connector filter => empty list
         final IConnector gcConnector = GCConnector.getInstance();
 
         final OriginGeocacheFilter originFilter = GeocacheFilterType.ORIGIN.create();
@@ -180,9 +181,9 @@ public class GeocacheFilterTest {
         assertThat(gcResult.get(0).getType()).isEqualTo(GeocacheFilterType.DISTANCE);
 
         // When filtering for SU connector, the AND filter contains an OriginFilter that excludes SU
-        // so the entire filter becomes invalid and returns empty list
-        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossible(suConnector);
-        assertThat(ocResult).isNull();
+        // so the entire filter becomes invalid and returns null
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossible(suConnector);
+        assertThat(suResult).isNull();
     }
 
     @Test
@@ -264,9 +265,9 @@ public class GeocacheFilterTest {
 
     @Test
     public void getAndChainIfPossibleWithMultipleOriginFilters() {
-        // Create a filter with OriginGeocacheFilter allowing both GC and OC
-        // (GC / OC AND Distance) => GC: return Distance-Filter
-        // (GC / OC AND Distance) => SU: return Distance-Filter
+        // Create a filter with OriginGeocacheFilter allowing both GC and SU
+        // (GC / SU AND Distance) => GC: return Distance-Filter
+        // (GC / SU AND Distance) => SU: return Distance-Filter
 
         final IConnector gcConnector = GCConnector.getInstance();
         final IConnector suConnector = SuConnector.getInstance();
@@ -287,10 +288,10 @@ public class GeocacheFilterTest {
         assertThat(gcResult).hasSize(1);
         assertThat(gcResult.get(0)).isInstanceOf(DistanceGeocacheFilter.class);
 
-        // When filtering for OC connector, the origin filter should also be removed
-        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossible(suConnector);
-        assertThat(ocResult).hasSize(1);
-        assertThat(ocResult.get(0)).isInstanceOf(DistanceGeocacheFilter.class);
+        // When filtering for SU connector, the origin filter should also be removed
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossible(suConnector);
+        assertThat(suResult).hasSize(1);
+        assertThat(suResult.get(0)).isInstanceOf(DistanceGeocacheFilter.class);
     }
 
     @Test
@@ -332,23 +333,22 @@ public class GeocacheFilterTest {
         // When filtering for GC connector:
         // - Branch1: OriginFilter(GC) is removed (redundant), OwnerFilter(Owner1) remains
         // - Branch2: OriginFilter(SU) doesn't allow GC, so entire branch is kept with OriginFilter
-        // Result: OR filter with one AND branch and one OriginFilter -> no AND chain possible
-        // BUT: if Branch2 contains an OriginFilter that doesn't allow GC, the entire branch
-        // should be removed because it can't produce results for GC
-        // So we should get: just OwnerFilter(Owner1) from Branch1
+        // Old behavior: OR filter with one AND branch and one OriginFilter -> no AND chain possible
+        // New behavior: if Branch2 contains an OriginFilter that doesn't allow GC,
+        // the entire branch is removed. So we get just OwnerFilter(Owner1) from Branch1
         final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossible(gcConnector);
         assertThat(gcResult).hasSize(1);
         assertThat(gcResult.get(0)).isInstanceOf(OwnerGeocacheFilter.class);
         assertThat(((OwnerGeocacheFilter) gcResult.get(0)).getStringFilter().getTextValue()).isEqualTo("Owner1");
 
         // When filtering for SU connector:
-        // - Branch1: OriginFilter(GC) doesn't allow OC, so entire branch should be removed
+        // - Branch1: OriginFilter(GC) doesn't allow SU, so entire branch should be removed
         // - Branch2: OriginFilter(SU) is removed (redundant), OwnerFilter(Owner2) remains
         // Result: just OwnerFilter(Owner2) from Branch2
-        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossible(suConnector);
-        assertThat(ocResult).hasSize(1);
-        assertThat(ocResult.get(0)).isInstanceOf(OwnerGeocacheFilter.class);
-        assertThat(((OwnerGeocacheFilter) ocResult.get(0)).getStringFilter().getTextValue()).isEqualTo("Owner2");
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossible(suConnector);
+        assertThat(suResult).hasSize(1);
+        assertThat(suResult.get(0)).isInstanceOf(OwnerGeocacheFilter.class);
+        assertThat(((OwnerGeocacheFilter) suResult.get(0)).getStringFilter().getTextValue()).isEqualTo("Owner2");
     }
 
     @Test
@@ -387,16 +387,47 @@ public class GeocacheFilterTest {
         assertThat(relevantFilter.getTree()).isNotNull();
         assertThat(relevantFilter.getTree()).isInstanceOf(OrGeocacheFilter.class);
 
+        // Old behavior: The OR filter was flattened.
+        // New behavior: The OR filter should not be flattened, but the OriginFilter should be removed from both branches
         final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossible(gcConnector);
         assertThat(gcResult).isNotNull();
         assertThat(gcResult).isEmpty();
-        // assertThat(gcResult).isNotNull();
-        // assertThat(gcResult).hasSize(1);
-        // final List<IGeocacheFilter> orResultFilter = gcResult.get(0).getChildren();
-        // assertThat(orResultFilter).hasSize(2);
-        // assertThat(orResultFilter.get(0).getType()).isEqualTo(GeocacheFilterType.TYPE);
-        // assertThat(orResultFilter.get(1).getType()).isEqualTo(GeocacheFilterType.SIZE);
     }
+
+
+    @Test
+    public void getAndChainIfPossible() {
+        //AND(NOT(Origin=GC), OR(Origin=SU, Name="su-test"))
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+        final IConnector ocConnector = new OCDEConnector();
+
+        final NotGeocacheFilter gcBranch = NotGeocacheFilter.create(OriginGeocacheFilter.create(gcConnector));
+        final OrGeocacheFilter suBranch = OrGeocacheFilter.create(OriginGeocacheFilter.create(suConnector), NameGeocacheFilter.create("su-test"));
+        final AndGeocacheFilter andBranch = AndGeocacheFilter.create(gcBranch, suBranch);
+
+        final GeocacheFilter filter = GeocacheFilter.create(null, false, false, andBranch);
+
+        // Old behavior: The OR- and NOT-filter was flattened.
+        // New behavior: The OR- and NOT-filter should not be flattened, but the OriginFilter should be removed from both branches
+        final List<BaseGeocacheFilter> result = filter.getAndChainIfPossible();
+        assertThat(result).isNotNull();
+        assertThat(result).isEmpty();
+
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossible(gcConnector);
+        assertThat(gcResult).isNull();
+
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossible(suConnector);
+        assertThat(suResult).isNotNull();
+        assertThat(suResult).isEmpty();
+
+        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossible(ocConnector);
+        assertThat(ocResult).isNotNull();
+        assertThat(ocResult).hasSize(1);
+        assertThat(ocResult.get(0).getType()).isEqualTo(GeocacheFilterType.NAME);
+    }
+
 }
 
 
