@@ -507,7 +507,7 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Checks, if the logs are representing the same log-entry:
+     * Checks if the logs represent the same log entry:
      * Same log type, same author, same day (ignoring time).
      * Same log-text (or one can be empty). Ignore log-text for found logs
      * (as there should be only a unique one - at least for that day)
