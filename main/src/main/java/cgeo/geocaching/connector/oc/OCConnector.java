@@ -70,7 +70,6 @@ public class OCConnector extends OCBaseConnector implements SmileyCapability {
             logTypes.addAll(EVENT_LOG_TYPES);
         } else {
             logTypes.addAll(STANDARD_LOG_TYPES);
-            logTypes.add(LogType.NEEDS_MAINTENANCE);
         }
 
         if (geocache.isOwner()) {
