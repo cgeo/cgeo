@@ -138,7 +138,7 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
 
     @Override
     @NonNull
-    public ReportProblemType getDefaultReportProblemTypes(@NonNull final LogType logType) {
+    public ReportProblemType getDefaultReportProblemType(@NonNull final LogType logType) {
         return ReportProblemType.NO_PROBLEM;
     }
 

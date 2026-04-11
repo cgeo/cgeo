@@ -143,7 +143,7 @@ public class OkapiClientTest {
     }
 
     @Test
-    @Ignore("This tests needs a working OC account on the CI AVD")
+    @Ignore("This test needs a working OC account on the CI AVD")
     public void testUploadPersonalNote() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
@@ -189,16 +189,16 @@ public class OkapiClientTest {
     }
 
     @Test
-    @Ignore("This tests needs a working OC account on the CI AVD")
+    @Ignore("This test needs a working OC account on the CI AVD")
     public void testGetOwnerLogTypes() {
         final OCApiLiveConnector ocConnector = getConnectorOCDE();
-        if (ocConnector != null) {
-            final Geocache ocCache = new Geocache();
-            ocCache.setGeocode("OC1234");
-            ocCache.setType(CacheType.WEBCAM);
-            final String ownerUserName = ocConnector.getUserName();
-            ocCache.setOwnerDisplayName(ownerUserName);
-            assertThat(ocCache.getPossibleLogTypes()).as("Owner log types").contains(LogType.OWNER_MAINTENANCE);
-        }
+        final String ownerUserName = ocConnector.getUserName();
+        assertThat(ownerUserName).as("Valid user name").isNotEmpty();
+
+        final Geocache ocCache = new Geocache();
+        ocCache.setGeocode("OC1234");
+        ocCache.setType(CacheType.TRADITIONAL);
+        ocCache.setOwnerDisplayName(ownerUserName);
+        assertThat(ocCache.getPossibleLogTypes()).as("Owner log types").contains(LogType.OWNER_MAINTENANCE);
     }
 }

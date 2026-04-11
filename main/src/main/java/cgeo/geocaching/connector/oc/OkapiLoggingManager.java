@@ -89,7 +89,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public ReportProblemType getDefaultReportProblemTypes(@NonNull final LogType logType) {
+    public ReportProblemType getDefaultReportProblemType(@NonNull final LogType logType) {
         if (LogType.NEEDS_MAINTENANCE == logType) {
             return ReportProblemType.NEEDS_MAINTENANCE;
         }

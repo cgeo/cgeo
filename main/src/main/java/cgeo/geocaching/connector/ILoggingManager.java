@@ -99,7 +99,7 @@ public interface ILoggingManager {
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
 
     @NonNull
-    ReportProblemType getDefaultReportProblemTypes(@NonNull LogType logType);
+    ReportProblemType getDefaultReportProblemType(@NonNull LogType logType);
 
     int getFavoriteCheckboxText();
 
