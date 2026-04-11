@@ -56,7 +56,7 @@ public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
                     orFilter.addChild(connectorFilter);
                 }
             }
-            return orFilter;
+            return orFilter.isFiltering() ? orFilter : GeocacheFilterType.OWNER.create();
         } else if (username != null) {
             // Single username mode (backward compatible)
             final OwnerGeocacheFilter ownerFilter = GeocacheFilterType.OWNER.create();
@@ -73,7 +73,7 @@ public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
         if (connector instanceof ILogin) {
             final ILogin loginConnector = (ILogin) connector;
             final String username = loginConnector.getUserName();
-            if (StringUtils.isNotBlank(username)) {
+            if (StringUtils.isNotEmpty(username)) {
                 final AndGeocacheFilter andGeocacheFilter = new AndGeocacheFilter();
 
                 final OwnerGeocacheFilter ownerFilter = GeocacheFilterType.OWNER.create();

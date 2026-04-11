@@ -133,8 +133,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1589,7 +1587,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.OWNER);
-        cachesIntent.putExtra(Intents.EXTRA_CONNECTOR_LIST, new ArrayList<>(connectorList.stream().map(IConnector::getName).collect(Collectors.toList())));
+        cachesIntent.putStringArrayListExtra(Intents.EXTRA_CONNECTOR_LIST, new ArrayList<>(connectorList.stream().map(IConnector::getName).collect(Collectors.toList())));
         context.startActivity(cachesIntent);
     }
 
@@ -1850,9 +1848,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
                 case OWNER:
                     final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                    @SuppressWarnings("unchecked") final ArrayList<String> connectorNameList = (ArrayList<String>) extras.getSerializable(Intents.EXTRA_CONNECTOR_LIST);
+                    final ArrayList<String> connectorNameList = extras.getStringArrayList(Intents.EXTRA_CONNECTOR_LIST);
                     final List<IConnector> connectorList = connectorNameList == null ? null :
-                            connectorNameList.stream().map(ConnectorFactory::getConnectorByName).filter(Objects::nonNull).collect(Collectors.toList());
+                            connectorNameList.stream().map(ConnectorFactory::getConnectorByName).collect(Collectors.toList());
 
                     if (connectorList != null && !connectorList.isEmpty()) {
                         // Multiple connectors with different usernames

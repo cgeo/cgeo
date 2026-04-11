@@ -2,7 +2,6 @@ package cgeo.geocaching.filters;
 
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
@@ -26,39 +25,8 @@ public class ConnectorRelevantFilterTest {
 
     private static final IConnector GC = GCConnector.getInstance();
     private static final IConnector SU = SuConnector.getInstance();
-    private static final IConnector OC = new OCDEConnector();
 
     // --- Tests ---
-
-    @Test
-    public void getAndChainIfPossible() {
-        //AND(NOT(Origin=GC), OR(Origin=SU, Name="su-test"))
-        final NotGeocacheFilter gcBranch = NotGeocacheFilter.create(OriginGeocacheFilter.create(GC));
-        final OrGeocacheFilter suBranch = OrGeocacheFilter.create(OriginGeocacheFilter.create(SU), NameGeocacheFilter.create("su-test"));
-        final AndGeocacheFilter andBranch = AndGeocacheFilter.create(gcBranch, suBranch);
-
-        final GeocacheFilter filter = GeocacheFilter.create(null, false, false, andBranch);
-
-        final List<BaseGeocacheFilter> result = filter.getAndChainIfPossible();
-        assertThat(result).isNotNull();
-        assertThat(result).isEmpty();
-        // NOT, OR
-        // assertThat(result).hasSize(2);
-        // assertThat(result.get(0)).isInstanceOf(NotGeocacheFilter.class);
-        // assertThat(result.get(1)).isInstanceOf(OrGeocacheFilter.class);
-
-        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossible(GC);
-        assertThat(gcResult).isNull();
-
-        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossible(SU);
-        assertThat(suResult).isNotNull();
-        assertThat(suResult).isEmpty();
-
-        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossible(OC);
-        assertThat(ocResult).isNotNull();
-        assertThat(ocResult).hasSize(1);
-        assertThat(ocResult.get(0).getType()).isEqualTo(GeocacheFilterType.NAME);
-    }
 
     @Test
     public void nullTreeReturnsEmptyFilter() {

@@ -492,7 +492,12 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         // Collect all active ILogin connectors with their usernames
         final List<IConnector> connectorList = new ArrayList<>();
         for (final IConnector connector : ConnectorFactory.getActiveConnectors()) {
-            if (connector instanceof ILogin) {
+            if (!(connector instanceof ILogin)) {
+                continue;
+            }
+
+            final ILogin loginConnector = (ILogin) connector;
+            if (StringUtils.isNotEmpty(loginConnector.getUserName())) {
                 connectorList.add(connector);
             }
         }
@@ -500,7 +505,7 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         if (connectorList.isEmpty()) {
             // Fallback to the old behavior if no connectors have usernames
             final String defaultUsername = Settings.getUserName();
-            if (StringUtils.isNotBlank(defaultUsername)) {
+            if (StringUtils.isNotEmpty(defaultUsername)) {
                 findByOwnerFn(defaultUsername);
             } else {
                 SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();

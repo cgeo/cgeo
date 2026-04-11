@@ -550,7 +550,7 @@ public class GeocacheFilter implements Cloneable {
         }
         // Wrap the simplified inner in a new NOT
         final NotGeocacheFilter newNot = new NotGeocacheFilter();
-        if (innerSimplified instanceof AndGeocacheFilter) {
+        if (innerSimplified instanceof AndGeocacheFilter && !(innerSimplified instanceof NotGeocacheFilter)) {
             for (final IGeocacheFilter child : ((AndGeocacheFilter) innerSimplified).getChildren()) {
                 newNot.addChild(child);
             }
