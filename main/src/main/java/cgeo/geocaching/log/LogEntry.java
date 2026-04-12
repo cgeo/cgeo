@@ -507,13 +507,23 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Checks, if the logs are representing the same log-entry.
-     * Log-text can be empty (to deal with field-notes)
+     * Checks if the logs represent the same log entry:
+     * Same log type, same author, same day (ignoring time).
+     * Same log-text (or one can be empty). Ignore log-text for found logs
+     * (as there should be only a unique one - at least for that day)
      */
     public boolean isMatchingLog(final LogEntry log) {
-        return this.logType == log.logType &&
-                this.author.compareTo(log.author) == 0 &&
-                DateUtils.isSameDay(new Date(this.date), new Date(log.date)) &&
-                (this.log.isEmpty() || log.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log));
+        final boolean sameType = this.logType == log.logType;
+        final boolean sameAuthor = this.author.compareTo(log.author) == 0;
+
+        if (!sameType || !sameAuthor) {
+            return false;
+        }
+
+        final boolean sameLogText = this.logType.isFoundLog()
+                || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log)
+                || this.log.isEmpty() || log.log.isEmpty();
+        return DateUtils.isSameDay(new Date(this.date), new Date(log.date))
+                && sameLogText;
     }
 }
