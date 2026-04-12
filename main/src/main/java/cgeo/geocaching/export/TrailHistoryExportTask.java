@@ -7,6 +7,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
@@ -42,7 +43,7 @@ public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryEl
     private final Runnable clearTrailHistory;
 
     TrailHistoryExportTask(final Activity activity, final Runnable clearTrailHistory, final String filename) {
-        super(activity, activity.getString(R.string.export_trailhistory_title));
+        super(activity, LocalizationUtils.getString(R.string.export_trailhistory_title));
         this.clearTrailHistory = clearTrailHistory;
         this.filename = filename;
     }
@@ -125,12 +126,12 @@ public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryEl
     protected void onPostExecuteInternal(final Uri uri) {
         if (null != activity) {
             if (null != uri) {
-                ShareUtils.shareOrDismissDialog(activity, uri, ShareUtils.TYPE_XML, R.string.export, String.format(activity.getString(R.string.export_trailhistory_success), UriUtils.toUserDisplayableString(uri)));
+                ShareUtils.shareOrDismissDialog(activity, uri, ShareUtils.TYPE_XML, R.string.export, LocalizationUtils.getString(R.string.export_trailhistory_success, UriUtils.toUserDisplayableString(uri)));
                 if (Settings.getClearTrailAfterExportStatus()) {
                     clearTrailHistory.run();
                 }
             } else {
-                ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
+                ActivityMixin.showToast(activity, LocalizationUtils.getString(R.string.export_failed));
             }
         }
     }

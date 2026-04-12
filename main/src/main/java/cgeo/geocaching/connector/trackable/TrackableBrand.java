@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -34,7 +34,7 @@ public enum TrackableBrand {
     }
 
     public String getLabel() {
-        return CgeoApplication.getInstance().getString(stringId);
+        return LocalizationUtils.getString(stringId);
     }
 
     @NonNull

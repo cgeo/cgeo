@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -224,7 +225,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                         if (v != null) {
                             v.setImageResource(R.drawable.warning);
                             v.getBackground().setTint(getResources().getColor(R.color.colorAccent));
-                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_http429), intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
+                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(LocalizationUtils.getString(R.string.live_map_status_http429, intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
                             new Handler(Looper.getMainLooper()).post(() -> v.setVisibility(View.VISIBLE));
                         }
                     }
