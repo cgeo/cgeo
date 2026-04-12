@@ -615,6 +615,7 @@
     <string name="cache_filter_description">Cache Description</string>
     <string name="cache_filter_offlinelog">Offline Log</string>
     <string name="cache_filter_owner">Cache Owner</string>
+    <string name="cache_filter_self_owned">Own Caches</string>
     <string name="cache_filter_difficulty">Difficulty</string>
     <string name="cache_filter_terrain">Terrain</string>
     <string name="cache_filter_difficulty_terrain">Difficulty / Terrain</string>
