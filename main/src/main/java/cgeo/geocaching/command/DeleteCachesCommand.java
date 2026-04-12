@@ -96,9 +96,12 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
     private void showRemoveFromListDialogsAndExecute() {
         final int cacheCount = deleteFromDeviceAction.getCacheCount();
         if (cacheCount > 0) {
+            final int allCacheCount = getCaches().size();
             final String title = LocalizationUtils.getString(R.string.command_remove_caches_from_list_progress);
-            final String warningMessage = LocalizationUtils.getString(R.string.caches_warning_remove_caches_from_single_list, cacheCount, getCaches().size());
-            final String othersButtonText = LocalizationUtils.getString(R.string.caches_warning_remove_from_list_user_data_others);
+            final String warningMessage = LocalizationUtils.getString(R.string.caches_warning_remove_caches_from_single_list, cacheCount, allCacheCount);
+
+            final boolean hasCachesToRemoveFromListOnly = allCacheCount > cacheCount;
+            final String othersButtonText = hasCachesToRemoveFromListOnly ? LocalizationUtils.getString(R.string.caches_warning_remove_from_list_user_data_others) : null;
             Dialogs.advancedOneTimeMessage(getContext(), OneTimeDialogs.DialogType.REMOVE_CACHES_FROM_LIST_WARNING,
                     title, warningMessage, true, this::showUserDataDialogAndExecute,
                     othersButtonText,
@@ -121,9 +124,12 @@ public class DeleteCachesCommand extends AbstractCachesCommand {
                 cachesWithUserData -> {
                     final int count = cachesWithUserData.size();
                     if (count > 0) {
+                        final int countToDelete = deleteFromDeviceAction.getCacheCount();
                         final String title = LocalizationUtils.getString(R.string.command_delete_caches_progress);
-                        final String warningMessage = LocalizationUtils.getPlural(R.plurals.caches_warning_delete_user_data, count);
-                        final String othersButtonText = LocalizationUtils.getString(R.string.caches_warning_delete_user_data_others);
+                        final String warningMessage = LocalizationUtils.getPlural(R.plurals.caches_warning_delete_user_data, count, count, countToDelete);
+
+                        final boolean hasCachesToRemoveFromDevice = count < countToDelete;
+                        final String othersButtonText = hasCachesToRemoveFromDevice ? LocalizationUtils.getString(R.string.caches_warning_delete_user_data_others) : null;
 
                         Dialogs.advancedOneTimeMessage(getContext(), OneTimeDialogs.DialogType.DELETE_CACHES_USER_DATA_WARNING,
                                 title, warningMessage, true, this::execute,
