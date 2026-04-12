@@ -16,7 +16,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -38,7 +37,7 @@ import java.util.Collections;
  * Shared menu handling for all activities having menu items related to a cache. <br>
  * TODO: replace by a fragment
  */
-public final class CacheMenuHandler extends AbstractUIFactory {
+public final class CacheMenuHandler {
 
     private CacheMenuHandler() {
         // utility class

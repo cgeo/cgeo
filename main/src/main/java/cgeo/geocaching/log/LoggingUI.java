@@ -5,7 +5,6 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.LocalizationUtils;
 
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public final class LoggingUI extends AbstractUIFactory {
+public final class LoggingUI {
     public static final int REQUEST_CODE_LOG = 1001;
 
     private LoggingUI() {
