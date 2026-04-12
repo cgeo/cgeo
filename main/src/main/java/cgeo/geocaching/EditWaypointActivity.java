@@ -554,7 +554,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final AlertDialog.Builder builder = Dialogs.newBuilder(view.getContext());
             builder.setTitle(LocalizationUtils.getString(R.string.waypoint_coordinates));
             builder.setItems(R.array.waypoint_coordinates_options, (dialog, item) -> {
-                final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
+                final String selectedOption = LocalizationUtils.getStringArray(R.array.waypoint_coordinates_options)[item];
                 if (LocalizationUtils.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
                     ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
                     showToast(LocalizationUtils.getString(R.string.clipboard_copy_ok));

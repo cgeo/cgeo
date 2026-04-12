@@ -84,7 +84,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         binding = ImageeditActivityBinding.bind(findViewById(R.id.activity_content));
 
         imageScale.setSpinner(findViewById(R.id.logImageScale))
-                .setValues(Arrays.asList(ArrayUtils.toObject(getResources().getIntArray(R.array.log_image_scale_values))))
+                .setValues(Arrays.asList(ArrayUtils.toObject(LocalizationUtils.getIntArray(R.array.log_image_scale_values))))
                 .setChangeListener(Settings::setLogImageScale);
 
         setTitle(LocalizationUtils.getString(R.string.log_edit_image));
