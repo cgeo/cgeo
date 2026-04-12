@@ -2,13 +2,14 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.test.mock.ConfigurableMockedCache;
 
 import java.util.List;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeocacheTest {
+public class GeocacheUnitTest {
 
     @Test
     public void testGetPossibleLogTypes() {
@@ -57,4 +58,21 @@ public class GeocacheTest {
         assertThat(ocOnlineLogTypes.containsAll(ocOfflineLogTypes)).isTrue();
     }
 
+    @Test
+    public void testGetPossibleOwnerLogTypes() {
+        final ConfigurableMockedCache gcCache = new ConfigurableMockedCache("GC123");
+        gcCache.setIsOwner(true);
+        gcCache.setDisabled(true);
+        final List<LogType> gcOnlineLogTypes = gcCache.getPossibleLogTypes();
+        assertThat(gcOnlineLogTypes).as("GC cache online-possible log-types").contains(LogType.ARCHIVE);
+        assertThat(gcOnlineLogTypes).as("GC cache online-possible log-types").contains(LogType.OWNER_MAINTENANCE);
+        assertThat(gcOnlineLogTypes).as("GC cache online-possible log-types").contains(LogType.ENABLE_LISTING);
+
+        final ConfigurableMockedCache ocCache = new ConfigurableMockedCache("OC123");
+        ocCache.setIsOwner(true);
+        final List<LogType> ocOnlineLogTypes = ocCache.getPossibleLogTypes();
+        assertThat(ocOnlineLogTypes).as("OC cache online-possible log-types").contains(LogType.ARCHIVE);
+        assertThat(ocOnlineLogTypes).as("OC cache online-possible log-types").contains(LogType.OWNER_MAINTENANCE);
+        assertThat(ocOnlineLogTypes).as("OC cache online-possible log-types").contains(LogType.TEMP_DISABLE_LISTING);
+    }
 }
