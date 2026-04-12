@@ -30,6 +30,11 @@ public class MLKitTranslateAccessor implements ITranslateAccessor {
     }
 
     @Override
+    public boolean requiresGoogleAttribution() {
+        return true;
+    }
+
+    @Override
     public void setCallbackScheduler(final Scheduler scheduler) {
         this.scheduler = scheduler;
     }

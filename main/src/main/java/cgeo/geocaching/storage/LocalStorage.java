@@ -51,6 +51,7 @@ public final class LocalStorage {
     private static final String TRACKFILE_CACHE_DIR_NAME = "trackfiles";
 
     private static final String WHERIGO_DIRNAME = "wherigo";
+    private static final String BERGAMOT_DIR_NAME = "bergamot";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
@@ -204,6 +205,14 @@ public final class LocalStorage {
         final File dir = new File(getGeocacheDataDirectory(geocode == null ? "shared" : geocode), OFFLINE_LOG_IMAGES_DIR_NAME);
         dir.mkdirs();
         return dir;
+    }
+
+    /**
+     * Directory for Bergamot offline translation model files.
+     */
+    @NonNull
+    public static File getBergamotDirectory() {
+        return new File(getInternalCgeoDirectory(), BERGAMOT_DIR_NAME);
     }
 
     @NonNull
