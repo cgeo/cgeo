@@ -556,11 +556,11 @@
     <string name="caches_warning_delete_user_data_others">Delete others</string>
     <plurals name="caches_warning_delete_user_data">
         <item quantity="zero">No caches have user data. All caches can be removed safely.</item>
-        <item quantity="one">%d cache has user data. The user data will get lost on deleting the cache.</item>
-        <item quantity="two">%d caches have user data. The user data will get lost on deleting the caches.</item>
-        <item quantity="few">%d caches have user data. The user data will get lost on deleting the caches.</item>
-        <item quantity="many">%d caches have user data. The user data will get lost on deleting the caches.</item>
-        <item quantity="other">%d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="one">%1$d/%2$d cache has user data. The user data will get lost on deleting the cache.</item>
+        <item quantity="two">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="few">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="many">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="other">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
     </plurals>
     <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
     <string name="caches_warning_remove_from_list_user_data_others">Remove others</string>
