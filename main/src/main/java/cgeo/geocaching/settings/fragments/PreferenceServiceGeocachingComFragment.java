@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLiveOAuth;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.CredentialsPreference;
 import cgeo.geocaching.settings.Settings;
@@ -15,6 +16,7 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -52,6 +54,21 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
             return true;
         });
 
+        // GC Live API authorization (visible only when "Use GC Live API" is checked)
+        final Preference gcLiveAuth = findPreference(getString(R.string.pref_fakekey_gc_live_authorization));
+        PreferenceUtils.setOnPreferenceClickListener(gcLiveAuth, preference -> {
+            GCLiveOAuth.startAuthorization(requireContext());
+            return true;
+        });
+        final CheckBoxPreference gcLiveToggle = findPreference(getString(R.string.pref_gc_use_live_api));
+        if (gcLiveAuth != null && gcLiveToggle != null) {
+            gcLiveAuth.setVisible(gcLiveToggle.isChecked());
+            gcLiveToggle.setOnPreferenceChangeListener((preference, newValue) -> {
+                gcLiveAuth.setVisible((Boolean) newValue);
+                return true;
+            });
+        }
+
         final ListPreference imageSizePref = findPreference(getString(R.string.pref_gc_imagesize));
         imageSizePref.setEntries(Arrays.stream(ImageUtils.GCImageSize.values()).map(is -> LocalizationUtils.getString(is.getLabel())).toArray(String[]::new));
         imageSizePref.setEntryValues(Arrays.stream(ImageUtils.GCImageSize.values()).map(Enum::name).toArray(String[]::new));
@@ -75,6 +92,15 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
             credentialsPreference.setIcon(R.drawable.attribute_firstaid);
             credentialsPreference.setSummary(R.string.auth_unconnected_tap_here);
         }
+        // Update GC Live API authorization summary and visibility
+        final Preference gcLiveAuth = findPreference(getString(R.string.pref_fakekey_gc_live_authorization));
+        final CheckBoxPreference gcLiveToggle = findPreference(getString(R.string.pref_gc_use_live_api));
+        if (gcLiveAuth != null && gcLiveToggle != null) {
+            final boolean hasLiveAuth = Settings.hasGCLiveAuthorization();
+            gcLiveAuth.setSummary(hasLiveAuth ? R.string.settings_gc_live_auth_connected : R.string.settings_gc_live_auth_not_connected);
+            gcLiveAuth.setVisible(gcLiveToggle.isChecked());
+        }
+
         initBasicMemberPreferences();
     }
 

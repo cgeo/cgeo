@@ -29,6 +29,21 @@
 
         <CheckBoxPreference
             android:dependency="@string/pref_connectorGCActive"
+            android:defaultValue="false"
+            android:key="@string/pref_gc_use_live_api"
+            android:title="@string/settings_gc_live_api_title"
+            android:summary="@string/settings_gc_live_api_summary"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dependency="@string/pref_connectorGCActive"
+            android:key="@string/pref_fakekey_gc_live_authorization"
+            android:title="@string/settings_gc_live_auth_title"
+            app:summary="@string/settings_gc_live_auth_not_connected"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:dependency="@string/pref_connectorGCActive"
             android:key="@string/pref_pollMessageCenter"
             android:title="@string/mcpolling_title"
             android:summary="@string/mcpolling_summary"
