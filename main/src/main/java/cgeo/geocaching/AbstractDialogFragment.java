@@ -17,6 +17,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -94,7 +95,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
-            ((AbstractActivity) requireActivity()).showToast(res.getString(R.string.err_detail_cache_find));
+            ((AbstractActivity) requireActivity()).showToast(LocalizationUtils.getString(R.string.err_detail_cache_find));
 
             ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
             return;
@@ -146,9 +147,9 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         if (favCount >= 0) {
             final int findsCount = cache.getFindsCount();
             if (findsCount > 0) {
-                details.add(R.string.cache_favorite, res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
+                details.add(R.string.cache_favorite, LocalizationUtils.getPlainString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
             } else if (!cache.isEventCache()) {
-                details.add(R.string.cache_favorite, res.getString(R.string.favorite_count, favCount));
+                details.add(R.string.cache_favorite, LocalizationUtils.getPlainString(R.string.favorite_count, favCount));
             }
         }
 
@@ -245,7 +246,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     public void cachesAround() {
         final TargetInfo targetInfo = getTargetInfo();
         if (targetInfo == null || targetInfo.coords == null) {
-            showToast(res.getString(R.string.err_location_unknown));
+            showToast(LocalizationUtils.getString(R.string.err_location_unknown));
             return;
         }
         CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);

@@ -5,8 +5,8 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public final class LoggingUI extends AbstractUIFactory {
+public final class LoggingUI {
     public static final int REQUEST_CODE_LOG = 1001;
 
     private LoggingUI() {
@@ -68,7 +68,7 @@ public final class LoggingUI extends AbstractUIFactory {
         }
 
         public String getL10n() {
-            return res.getString(stringId);
+            return LocalizationUtils.getString(stringId);
         }
     }
 

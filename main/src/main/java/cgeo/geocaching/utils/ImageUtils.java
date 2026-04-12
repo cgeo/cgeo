@@ -759,7 +759,7 @@ public final class ImageUtils {
         //go through file provider so we can share the Uri with e.g. camera app
         return new ImmutablePair<>(imageFileName, FileProvider.getUriForFile(
                 CgeoApplication.getInstance().getApplicationContext(),
-                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
+                LocalizationUtils.getPlainString(R.string.file_provider_authority),
                 image));
     }
 
@@ -865,7 +865,7 @@ public final class ImageUtils {
             return null;
         }
         file.deleteOnExit();
-        final String authority = context.getString(R.string.file_provider_authority);
+        final String authority = LocalizationUtils.getPlainString(R.string.file_provider_authority);
         return FileProvider.getUriForFile(context, authority, file);
 
     }
