@@ -60,7 +60,7 @@ public final class StoredList extends AbstractList {
     private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
-        super(id, title, markerId);
+        super(id, title, 0, markerId);
         this.preventAskForDeletion = preventAskForDeletion;
         this.count = count;
     }
