@@ -43,6 +43,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -76,3 +77,4 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Korrektur: Absturz in Prozentsatz Favoritenfilter
 - Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts stay ignore language switching
