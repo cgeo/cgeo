@@ -1,6 +1,10 @@
 ##
 Čas na aktualizaci! Pokud stále používáte Android 7 nebo starší, tato aktualizace c:geo je pro vás možná poslední! S naší další verzí aplikace c:geo ukončíme podporu pro Android 5-7, abychom snížili zátěž spojenou s údržbou a mohli aktualizovat některé externí komponenty používané aplikací c:geo, které v současné době stále udržujeme. Budeme stále podporovat Android 8 až do Android 16 (a novější verze, až budou publikovány), tedy rozpětí více než osmi let historie Androidu.
 
+ - Fix: Log delete reason does not enforce lengh limit
+ - New: Extended logging for crashes in download manager
+
+##
 - Oprava: U některých jazyků webových stránek selhává analýza řetězce s umístěním kešky
 - Oprava: Selhání otevření sledovatelné položky ze seznamu sledovatelných položek
 - Řešení: Výběru položky ze seznamu může bránit klávesnice
