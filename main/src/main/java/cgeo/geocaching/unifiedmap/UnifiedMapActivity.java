@@ -172,6 +172,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private int wherigoListenerId;
     private Menu toolbarMenu;
 
+    // return to Coordinate input dialog after selected point from map
+    private boolean selectPointOnMap = false;
+
     private final CacheListActionBarChooser listChooser = new CacheListActionBarChooser(this, this::getSupportActionBar, newListId -> {
         final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
         if (lNew.isPresent()) {
@@ -1215,7 +1218,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (result.isEmpty()) {
             if (isLongTap) {
                 viewModel.longTapCoords.setValue(touchedPoint);
-                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget)
+                if (getIntent().hasExtra("SelectCoordinates")) {
+                    selectPointOnMap = getIntent().getBooleanExtra("SelectCoordinates", false);
+                }
+                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), viewModel.mapType.fromList, viewModel::setTarget, selectPointOnMap)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
