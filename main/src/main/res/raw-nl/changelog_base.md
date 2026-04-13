@@ -43,6 +43,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Fix: Missing quick toggle in guided mode of waypoint calculator
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
 
 ### Wherigo speler
 - Nieuw: Offline vertaling voor Wherigos
@@ -76,3 +77,4 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Fix: Crahs in percentage favorite filter
 - New: Make it easier to use simple lists as parent lists
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts stay ignore language switching
