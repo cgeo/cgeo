@@ -23,6 +23,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
+
+import java.util.Locale;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -123,12 +125,19 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     @Override
+    protected void attachBaseContext(final Context newBase) {
+        // Apply user-selected locale to activity context
+        final Locale locale = Settings.getApplicationLocale();
+        final Configuration configuration = new Configuration(newBase.getResources().getConfiguration());
+        configuration.setLocale(locale);
+        final Context localeContext = newBase.createConfigurationContext(configuration);
+        super.attachBaseContext(localeContext);
+    }
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
 
-        final Configuration conf = getResources().getConfiguration();
-        conf.setLocale(Settings.getApplicationLocale());
-        getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
 
         try {
             super.onCreate(savedInstanceState);
