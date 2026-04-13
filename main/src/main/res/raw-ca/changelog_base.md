@@ -43,6 +43,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Correcció: Falta l'interruptor ràpid en el mode guiat de la calculadora de punts de referència
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
 - Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
+- New: Delete offline log after merge with online log
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -76,3 +77,4 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Correcció: Error en el filtre de percentatge de preferits
 - Nou: Facilita l'ús de llistes simples com a llistes principals
 - Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
+- Fix: Some texts stay ignore language switching
