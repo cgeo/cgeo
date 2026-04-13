@@ -43,6 +43,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
 - Novinka: Souhrnné funkce s podporou rozsahu: add/součet, min/minimum, max/maximum, cnt/počet, avg/průměr, multiply/součin/pro
 - Oprava: Nesprávné zpracování stavu DNF pro platformy opencaching
+- New: Delete offline log after merge with online log
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -76,3 +77,4 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Oprava: Pád aplikace při použití filtru podle procentuální obliby
 - Novinka: Usnadnění používání jednoduchých seznamů jako nadřazených seznamů
 - Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
+- Fix: Some texts stay ignore language switching
