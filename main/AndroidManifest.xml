@@ -77,7 +77,7 @@
 		<!-- Register for global search in Android. https://developer.android.com/guide/topics/search/search-dialog.html -->
         <meta-data
             android:name="android.app.default_searchable"
-            android:value=".SearchActivity" />
+            android:value="cgeo.geocaching.SearchActivity" />
 
         <!-- Android Backup Service, to restore settings on new devices. https://developer.android.com/google/backup/index.html -->
         <meta-data
