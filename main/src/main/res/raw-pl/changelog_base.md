@@ -43,6 +43,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Brak szybkiego przełącznika w kalkulatorze punktów nawigacyjnych
 - Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
 - Naprawiono: Nieprawidłową obsługę statusu DNF dla platform opencaching
+- New: Delete offline log after merge with online log
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -76,3 +77,4 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Awarie w filtrowaniu ulubionych wg procentów
 - Nowość: Łatwiejsze korzystanie z prostych list jako list nadrzędnych
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
+- Fix: Some texts stay ignore language switching
