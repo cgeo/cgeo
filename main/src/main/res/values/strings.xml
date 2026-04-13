@@ -1766,6 +1766,7 @@
     <string name="menu_collapse_log">Collapse log</string>
     <string name="cache_log_menu_delete">Delete Log</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>
+    <string name="cache_log_delete_reason">Reason (max. %d characters)</string>
     <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
