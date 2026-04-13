@@ -33,9 +33,26 @@ unzip -p app/bergamot/build/outputs/aar/bergamot-release.aar \
   jni/<ABI>/libbergamot-sys.so > libbergamot-sys.so
 ```
 
-Note: the x86_64 build uses `BUILD_ARCH=x86-64` (SSE2 baseline, no AVX2) to ensure
-compatibility with all x86_64 Android emulators regardless of hypervisor backend.
-This patch is applied in `app/bergamot/src/main/cpp/CMakeLists.txt`.
+### x86_64 patch (required)
+
+Before building for x86_64, apply the following change to
+`app/bergamot/src/main/cpp/CMakeLists.txt` in the cloned repository.
+Add the highlighted block after the existing `armeabi-v7a` block:
+
+```cmake
+if (ANDROID_ABI STREQUAL "armeabi-v7a")
+  set(BUILD_ARCH "armv7-a" CACHE STRING "Build architecture" FORCE)
+endif ()
+# Add this:
+if (ANDROID_ABI STREQUAL "x86_64")
+  set(BUILD_ARCH "x86-64" CACHE STRING "Build architecture" FORCE)
+endif ()
+```
+
+This sets the compiler target to the SSE2 baseline (no AVX2), which is required
+for compatibility with all x86_64 Android emulators regardless of hypervisor.
+Without this patch the build machine's native CPU features (e.g. AVX2) are used,
+causing SIGILL crashes on emulators that do not expose AVX2 (WHPX, KVM).
 
 ## SHA256 checksums
 
