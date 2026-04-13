@@ -43,6 +43,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
 - Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -76,3 +77,4 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Krascher i procentuellt favoritfilter
 - Nyhet: Gör det enklare att använda enkla listor som överordnade listor
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts stay ignore language switching
