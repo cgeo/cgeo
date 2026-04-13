@@ -143,6 +143,8 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                 setTitle(R.string.settings_titlebar);
             }
         });
+        setTitle(R.string.settings_titlebar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setResult(NO_RESTART_NEEDED);
