@@ -43,6 +43,7 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Fix: Missing quick toggle in guided mode of waypoint calculator
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
+- New: Delete offline log after merge with online log
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
@@ -76,3 +77,4 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Fix: Crahs in percentage favorite filter
 - New: Make it easier to use simple lists as parent lists
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Fix: Some texts stay ignore language switching
