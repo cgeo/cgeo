@@ -307,6 +307,7 @@ public class Settings {
         final SharedPreferences prefsV0 = CgeoApplication.getInstance().getSharedPreferences(preferencesNameV0, Context.MODE_PRIVATE);
         if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
             final Editor e = sharedPrefs.edit();
+            e.putBoolean(getKey(R.string.pref_units_imperial), useImperialUnitsByDefault());
             e.putInt(getKey(R.string.pref_settingsversion), latestPreferencesVersion);
             e.apply();
             return;
