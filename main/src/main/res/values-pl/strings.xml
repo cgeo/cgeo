@@ -234,10 +234,12 @@
     <string name="translate_external_label">Przetłumacz z %s</string>
     <string name="translate_external_variant_app">Aplikacja</string>
     <string name="translate_external_variant_web">Strona www</string>
+    <string name="translate_external_variant_unavailable">Niedostępne</string>
     <string name="translate_external_none">&lt;Brak&gt;</string>
     <string name="translate_external_app">Aplikacja zewnętrzna</string>
     <string name="translate_external_google">Tłumacz Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Tłumaczenie offline DavidV</string>
     <string name="translate_length_warning">Tłumaczenie przez stronę www może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -1605,6 +1607,7 @@
     <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
+    <string name="cache_log_delete_reason">Powód (maks. %d znaków)</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -1840,6 +1843,7 @@
     <string name="calccoord_select_variable">Wybierz zmienną</string>
     <string name="calccoord_new_variable">**%s** *(Nowa)*</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
+    <string name="calccoord_convert_to_plain_error">Wzór nie ocenia prawidłowych współrzędnych.\nKonwersja na współrzędne zwykłe zresetuje punkt nawigacji do pustych współrzędnych.</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>

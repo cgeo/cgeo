@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Tento hráč oznámil problém s keškou.</string>
     <string name="log_problem_log_full_label">Logbook je plný</string>
     <string name="log_problem_log_full_text">Tento hráč oznámil plný logbook.</string>
+    <string name="log_problem_log_wet_label">Logbook je mokrý</string>
+    <string name="log_problem_log_wet_text">Tento kešer nahlásil, že logbook je mokrý.</string>
     <string name="log_problem_damaged_label">Schránka je poškozená</string>
     <string name="log_problem_damaged_text">Tento hráč oznámil poškození schránky.</string>
     <string name="log_problem_missing_label">Keška může být ztracená</string>
@@ -1295,7 +1297,6 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
     <string name="map_source_google_terrain">Google: Terén</string>
-    <string name="map_source_osm_offline">Offline použití</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_nomap">Žádná mapa</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
@@ -1839,6 +1840,7 @@
     <string name="calccoord_select_variable">Vybrat proměnnou</string>
     <string name="calccoord_new_variable">**%s** *(Nové)*</string>
     <string name="calccoord_convert_to_plain">Převod na prosté souřadnice</string>
+    <string name="calccoord_convert_to_plain_error">Vzorec nevyhodnocuje platné souřadnice.\nKonverze na obyčejné souřadnice vynuluje trasový bod na prázdné souřadnice.</string>
     <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
     <string name="calccoord_remove_spaces">Odstranit mezery</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Nahradit \'x\' symbolem \'*\'</string>
@@ -1877,8 +1879,15 @@
     <string name="formula_function_lettervalue">Hodnota slova</string>
     <string name="formula_function_roman">Římské na arabské</string>
     <string name="formula_function_vanity">Kód vanity</string>
+    <string name="formula_function_add">Přidat</string>
+    <string name="formula_function_multiply">Násobit</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Max</string>
+    <string name="formula_function_count">Součet</string>
+    <string name="formula_function_average">Průměr</string>
     <string name="formula_function_group_simplenumeric">Jednoduchý číselný</string>
     <string name="formula_function_group_complexnumeric">Komplexní číselný</string>
+    <string name="formula_function_group_aggregatenumeric">Souhrnné číselné</string>
     <string name="formula_function_group_simplestring">Jednoduchý řetězec</string>
     <string name="formula_function_group_complexstring">Komplexní řetězec</string>
     <string name="formula_error_unexpectedtoken">Očekáváno \'%1$s\'</string>
@@ -1888,6 +1897,7 @@
     <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
     <string name="formula_error_empty">Prázdný vzorec</string>
     <string name="formula_error_numeric_overflow">Číselný přepad</string>
+    <string name="formula_error_invalid_range">Neplatný rozsah: %1$s</string>
     <string name="formula_error_other">Chyba: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Bez názvu</string>

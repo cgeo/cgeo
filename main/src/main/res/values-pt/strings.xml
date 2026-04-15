@@ -202,6 +202,8 @@
     <string name="log_problem_needs_maintenance_text">Este geocacher reportou que existe um problema com esta cache.</string>
     <string name="log_problem_log_full_label">O logbook está cheio</string>
     <string name="log_problem_log_full_text">Este geocacher reportou que o logbook está cheio.</string>
+    <string name="log_problem_log_wet_label">O livro de registos está molhado</string>
+    <string name="log_problem_log_wet_text">Este geocacher reportou que o livro de registos está molhado.</string>
     <string name="log_problem_damaged_label">O recipiente está danificado</string>
     <string name="log_problem_damaged_text">Este geocacher reportou que o recipiente está danificado.</string>
     <string name="log_problem_missing_label">A geocache poderá não estar no local</string>
@@ -649,6 +651,7 @@
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
     <string name="cache_filter_datefilter_absolute">Absoluto</string>
     <string name="cache_filter_datefilter_relative">Relativo a hoje</string>
+    <string name="cache_filter_datefilter_ignoreyear">Ignorar ano</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
@@ -802,6 +805,10 @@
     <string name="downloader_pending_info">Há pelo menos uma transferência em pausa ou com falhas. Deseja abrir a lista de transferências pendentes?</string>
     <string name="downloader_retry_download">Tentar de novo a transferência</string>
     <string name="downloader_retry_download_details">Quer tentar novamente a transferência do seguinte ficheiro?</string>
+    <string name="downloader_delete_all_pending">Apagar tudo</string>
+    <string name="downloader_delete_all_confirmation">Apagar todas as transferências pendentes?</string>
+    <string name="downloader_delete_all_message">Isto cancelará todas as %d transferências pendentes e removerá as partes já transferidas. Esta acção não pode ser anulada.</string>
+    <string name="downloader_deleted_all">Apagadas todas as transferências pendentes</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
     <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
@@ -845,6 +852,7 @@
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
+    <string name="settings_title_maptrail">Histórico de percurso</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
@@ -1054,6 +1062,10 @@
         <item>Claro</item>
         <item>Escuro</item>
     </string-array>
+    <string name="init_colored_theme_dark">Tema escuro colorido</string>
+    <string name="init_colored_theme_light">Tema claro colorido</string>
+    <string name="init_summary_colored_theme_dark">Usar barra de ferramentas colorida no tema escuro</string>
+    <string name="init_summary_colored_theme_light">Usar barra de ferramentas colorida no tema claro</string>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
@@ -1138,7 +1150,10 @@
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
+    <string name="init_maptrail_length">Comprimento Máximo</string>
     <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos — ajustar conforme a memória disponível.</string>
+    <string name="init_maptrail_maxdistance">Distância máxima</string>
+    <string name="init_maptrail_maxdistance_summary">Distância máxima até que dois pontos consecutivos do histórico do percurso fiquem conectados no mapa</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
     <string name="init_trailappearance">Aparência do histórico de percurso</string>
     <string name="init_trailappearance_summary">Seleccionar cor, opacidade e largura para a linha do histórico de percurso</string>
@@ -1790,6 +1805,8 @@
     <string name="calccoord_guided_mode">Modo Guia</string>
     <string name="calccoord_guided_edit">Toque num dígito para editar</string>
     <string name="calccoord_guided_value">Valor</string>
+    <string name="calccoord_select_variable">Seleccionar a Variável</string>
+    <string name="calccoord_new_variable">**%s** *(Novo)*</string>
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
     <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
     <string name="calccoord_remove_spaces">Remover espaços</string>
@@ -1829,8 +1846,15 @@
     <string name="formula_function_lettervalue">Valor da Palavra</string>
     <string name="formula_function_roman">Romano para Decimal</string>
     <string name="formula_function_vanity">Código Vanity</string>
+    <string name="formula_function_add">Adicionar</string>
+    <string name="formula_function_multiply">Multiplicar</string>
+    <string name="formula_function_min">Min</string>
+    <string name="formula_function_max">Máx</string>
+    <string name="formula_function_count">Contar</string>
+    <string name="formula_function_average">Média</string>
     <string name="formula_function_group_simplenumeric">Número Simples</string>
     <string name="formula_function_group_complexnumeric">Número Complexo</string>
+    <string name="formula_function_group_aggregatenumeric">Agregado numérico</string>
     <string name="formula_function_group_simplestring">Sequência de Caracteres Simples</string>
     <string name="formula_function_group_complexstring">Sequência de Caracteres Complexa</string>
     <string name="formula_error_unexpectedtoken">Esperado \'%1$s\'</string>
@@ -1840,6 +1864,7 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Fórmula vazia</string>
     <string name="formula_error_numeric_overflow">Numeração excedida</string>
+    <string name="formula_error_invalid_range">Intervalo inválido: %1$s</string>
     <string name="formula_error_other">Erro: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sem título</string>
@@ -2421,7 +2446,8 @@
     <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
+    <string name="number_input_title">Definir valor</string>
+    <string name="number_input_range">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>

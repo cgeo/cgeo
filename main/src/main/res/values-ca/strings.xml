@@ -234,10 +234,12 @@
     <string name="translate_external_label">Tradueix amb %s</string>
     <string name="translate_external_variant_app">Applicació</string>
     <string name="translate_external_variant_web">Lloc web</string>
+    <string name="translate_external_variant_unavailable">No disponible</string>
     <string name="translate_external_none">&lt;Cap&gt;</string>
     <string name="translate_external_app">Aplicació externa</string>
     <string name="translate_external_google">Google Translate</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Traductor fora de línia DavidV</string>
     <string name="translate_length_warning">La traducció a través del lloc web pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -1576,6 +1578,7 @@
     <string name="menu_collapse_log">Redueix el registre</string>
     <string name="cache_log_menu_delete">Suprimeix el registre</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
+    <string name="cache_log_delete_reason">Motiu (màx. %d caràcters)</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
@@ -1809,6 +1812,7 @@
     <string name="calccoord_select_variable">Selecciona una variable</string>
     <string name="calccoord_new_variable">**%s** *(Nou)*</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_convert_to_plain_error">La fórmula no s\'avalua en coordenades vàlides.\nLa conversió a coordenades planes restablirà el punt de referència a coordenades buides.</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina espais</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
