@@ -10,7 +10,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.Insets;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;

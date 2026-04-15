@@ -6,7 +6,6 @@ import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.Gravity;
 
 import java.util.List;
