@@ -503,6 +503,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
         imageListFragment.onParentActivityResult(requestCode, resultCode, data);
+        saveLog();
     }
 
     @Override
