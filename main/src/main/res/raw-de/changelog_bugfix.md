@@ -1,6 +1,10 @@
 ##
 Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
+ - Fix: Log delete reason does not enforce lengh limit
+ - New: Extended logging for crashes in download manager
+
+##
 - Korrektur: Erkennung der Cacheregion schlägt bei manchen Website-Sprachen fehl
 - Korrektur: Öffnen von Trackables aus der Watchlist schlägt fehl
 - Korrektur: Die Tastatur blockiert ggf. die Listenauswahl

@@ -1,21 +1,25 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Čas na aktualizaci! Pokud stále používáte Android 7 nebo starší, tato aktualizace c:geo je pro vás možná poslední! S naší další verzí aplikace c:geo ukončíme podporu pro Android 5-7, abychom snížili zátěž spojenou s údržbou a mohli aktualizovat některé externí komponenty používané aplikací c:geo, které v současné době stále udržujeme. Budeme stále podporovat Android 8 až do Android 16 (a novější verze, až budou publikovány), tedy rozpětí více než osmi let historie Androidu.
 
-- Fix: Parsing cache location string fails for certain website languages
-- Fix: Opening trackable from watchlist fails
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+ - Fix: Log delete reason does not enforce lengh limit
+ - New: Extended logging for crashes in download manager
 
 ##
-- Fix: Offline translation download dialog shown in installations without offline translation support
-- Fix: Coordinate format changing in cache/waypoint info sheet
-- Fix: Log date cut off in list of logs (depending on date format and font size)
-- Fix: Event times not detected in certain conditions
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Oprava: U některých jazyků webových stránek selhává analýza řetězce s umístěním kešky
+- Oprava: Selhání otevření sledovatelné položky ze seznamu sledovatelných položek
+- Řešení: Výběru položky ze seznamu může bránit klávesnice
+- Oprava: Uživatelem definovaný poskytovatel dlaždic nepodporuje další parametry URL
+- Oprava: Inventář / sledovatelné položky keše se již nenačítají
+- Změna: Aktualizován interní user-agent za účelem vyřešení některých problémů se stahováním
+- Oprava: Zobrazení podrobností o sledovatelném předmětu způsobí jeho odstranění z inventáře kešky
+
+##
+- Oprava: Dialogové okno pro stažení offline překladu se zobrazovalo v instalacích bez podpory offline překladů
+- Oprava: Změna formátu souřadnic v informačním listu ke kešce/trasovému bodu
+- Oprava: Zkrácené datum logu v seznamu logů (v závislosti na formátu data a velikosti písma)
+- Oprava: Za určitých podmínek se nezjistily časy událostí
+- Oprava: Odkaz v seznamu není za určitých podmínek funkční
+- Oprava: Akce související se sledovatelnými položkami se někdy zaměňují
 
 ##
 - Změna: Maximální počet sledovatelných GC navštěvujících v rámci jednoho logu kešky, byl snížen na 100 (na žádost geocaching.com, aby se snížilo zatížení jejich serverů způsobené extrémními milovníky trackables)
