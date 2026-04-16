@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Looper;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -83,6 +84,7 @@ import java.util.function.Predicate;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec;
 import com.google.android.material.progressindicator.IndeterminateDrawable;
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -152,6 +154,18 @@ public class ViewUtils {
     public static void setText(final TextView view, final String text) {
         if (view != null) {
             view.setText(text);
+        }
+    }
+
+    public static void setMaxTextLength(@NonNull final EditText textField, @Nullable final TextInputLayout textLayout, final int maxLength) {
+        if (textLayout != null) {
+            textLayout.setCounterEnabled(maxLength > 0);
+            textLayout.setCounterMaxLength(maxLength);
+        }
+
+        if (maxLength > 0) {
+            final InputFilter.LengthFilter lengthFilter = new InputFilter.LengthFilter(maxLength);
+            textField.setFilters(new InputFilter[]{lengthFilter});
         }
     }
 
