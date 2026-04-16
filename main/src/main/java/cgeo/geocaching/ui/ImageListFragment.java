@@ -4,9 +4,13 @@ import cgeo.geocaching.ImageEditActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.databinding.ImagelistFragmentBinding;
 import cgeo.geocaching.databinding.ImagelistItemBinding;
 import cgeo.geocaching.log.LogUtils;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -318,6 +322,16 @@ public class ImageListFragment extends Fragment {
         selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
+
+        // Get max lengths from logging manager based on connector
+        if (geocode != null) {
+            final IConnector connector = ConnectorFactory.getConnector(geocode);
+            final Geocache cache = new Geocache();
+            cache.setGeocode(geocode);
+            final ILoggingManager loggingManager = connector.getLoggingManager(cache);
+            selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_CAPTION_LENGTH, loggingManager.getMaxImageCaptionLength());
+            selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_DESCRIPTION_LENGTH, loggingManager.getMaxImageDescriptionLength());
+        }
 
         requireActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }

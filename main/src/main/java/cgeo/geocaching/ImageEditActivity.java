@@ -54,6 +54,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGE_INDEX = "cgeo.geocaching.saved_state_image_index";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
+    private static final String SAVED_STATE_MAX_CAPTION_LENGTH = "cgeo.geocaching.saved_state_max_caption_length";
+    private static final String SAVED_STATE_MAX_DESCRIPTION_LENGTH = "cgeo.geocaching.saved_state_max_description_length";
     private static final String SAVED_STATE_GEOCODE = "cgeo.geocaching.saved_state_geocode";
     private static final String SAVED_STATE_IMAGE_ORIENTATION = "cgeo.geocaching.saved_state_image_orientation";
     private static final String SAVED_STATE_SAVED_IMAGE_ORIENTATION = "cgeo.geocaching.saved_state_saved_image_orientation";
@@ -66,6 +68,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private ViewOrientation savedImageOrientation;
     private int imageIndex = -1;
     private long maxImageUploadSize;
+    private int maxCaptionLength;
+    private int maxDescriptionLength;
 
     @Nullable private String geocode;
 
@@ -97,6 +101,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             originalLocalUri = UriUtils.isLocalUri(originalImageUri) ? originalImageUri : null;
             imageIndex = extras.getInt(Intents.EXTRA_INDEX, -1);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
+            maxCaptionLength = extras.getInt(Intents.EXTRA_MAX_IMAGE_CAPTION_LENGTH, 50);
+            maxDescriptionLength = extras.getInt(Intents.EXTRA_MAX_IMAGE_DESCRIPTION_LENGTH, 250);
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             imageOrientation = ImageUtils.getImageOrientation(image.getUri());
             savedImageOrientation = imageOrientation.clone();
@@ -111,6 +117,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             imageIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_INDEX, -1);
             imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
+            maxCaptionLength = savedInstanceState.getInt(SAVED_STATE_MAX_CAPTION_LENGTH, 50);
+            maxDescriptionLength = savedInstanceState.getInt(SAVED_STATE_MAX_DESCRIPTION_LENGTH, 250);
             geocode = savedInstanceState.getString(SAVED_STATE_GEOCODE);
             imageOrientation = savedInstanceState.getParcelable(SAVED_STATE_IMAGE_ORIENTATION);
             savedImageOrientation = savedInstanceState.getParcelable(SAVED_STATE_SAVED_IMAGE_ORIENTATION);
@@ -124,11 +132,15 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         } else {
             imageScale.set(image.targetScale);
         }
+
         imageCache.setCode(geocode);
 
         binding.imageRotate.setOnClickListener(view -> rotate90Clockwise());
         binding.imageFlip.setOnClickListener(view -> flipHorizontal());
         binding.imageEditExternal.setOnClickListener(view -> editExternal());
+
+        // Apply restrictions for length
+        applyLengthRestrictions();
 
         if (image.hasTitle()) {
             binding.caption.setText(image.getTitle());
@@ -180,6 +192,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         outState.putInt(SAVED_STATE_IMAGE_INDEX, imageIndex);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
+        outState.putInt(SAVED_STATE_MAX_CAPTION_LENGTH, maxCaptionLength);
+        outState.putInt(SAVED_STATE_MAX_DESCRIPTION_LENGTH, maxDescriptionLength);
         outState.putString(SAVED_STATE_GEOCODE, geocode);
         outState.putParcelable(SAVED_STATE_IMAGE_ORIENTATION, imageOrientation);
         outState.putParcelable(SAVED_STATE_SAVED_IMAGE_ORIENTATION, savedImageOrientation);
@@ -360,6 +374,15 @@ public class ImageEditActivity extends AbstractActionBarActivity {
                 })
                 .start();
 
+    }
+
+    private void applyLengthRestrictions() {
+        // Set default values if not loaded from intent or savedInstanceState
+        final int validMaxCaptionLength = maxCaptionLength != 0 ? maxCaptionLength : 50;
+        ViewUtils.setMaxTextLength(binding.caption, binding.captionLayout, validMaxCaptionLength);
+
+        final int validMaxDescriptionLength = maxDescriptionLength != 0 ? maxDescriptionLength : 250;
+        ViewUtils.setMaxTextLength(binding.description, binding.descriptionLayout, validMaxDescriptionLength);
     }
 
 }
