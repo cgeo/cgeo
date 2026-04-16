@@ -233,6 +233,12 @@ class GCLoggingManager extends AbstractLoggingManager {
     public boolean supportsLogWithTrackables() {
         return true;
     }
+
+    @Override
+    public int getMaxImageDescriptionLength() {
+        return 125;
+    }
+
     @NonNull
     @Override
     public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
