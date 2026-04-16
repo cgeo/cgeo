@@ -66,6 +66,7 @@
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/captionLayout"
             style="@style/textinput_edittext_singleline"
             app:counterEnabled="true"
             app:counterMaxLength="50">
@@ -76,11 +77,11 @@
                 android:hint="@string/log_image_caption"
                 android:autofillHints="@string/log_image_caption"
                 android:inputType="textCapSentences"
-                android:maxLength="50"
                 android:minLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionLayout"
             style="@style/textinput_edittext"
             app:counterEnabled="true"
             app:counterMaxLength="250">
@@ -91,7 +92,6 @@
                 android:hint="@string/log_image_description"
                 android:autofillHints="@string/log_image_description"
                 android:inputType="textMultiLine|textCapSentences"
-                android:maxLength="250"
                 android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
