@@ -137,6 +137,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -1625,6 +1626,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityOwner(final Context context, @NonNull final List<IConnector> connectorList) {
+        if (connectorList.isEmpty()) {
+            ActivityMixin.showToast(context, R.string.warn_no_username);
+            return;
+        }
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        Intents.putListType(cachesIntent, CacheListType.OWNER);
+        cachesIntent.putStringArrayListExtra(Intents.EXTRA_CONNECTOR_LIST, new ArrayList<>(connectorList.stream().map(IConnector::getName).collect(Collectors.toList())));
+        context.startActivity(cachesIntent);
+    }
+
     public static void startActivityFilter(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
@@ -1882,11 +1894,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
                 case OWNER:
                     final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                    title = listNameMemento.rememberTerm(ownerName);
-                    markerId = EmojiUtils.NO_EMOJI;
-                    if (ownerName != null) {
+                    final ArrayList<String> connectorNameList = extras.getStringArrayList(Intents.EXTRA_CONNECTOR_LIST);
+                    final List<IConnector> connectorList = connectorNameList == null ? null :
+                            connectorNameList.stream().map(ConnectorFactory::getConnectorByName).collect(Collectors.toList());
+
+                    if (connectorList != null && !connectorList.isEmpty()) {
+                        // Multiple connectors with different usernames
+                        title = listNameMemento.rememberTerm(res.getString(R.string.search_own_caches));
+                        loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), connectorList);
+                    } else if (ownerName != null) {
+                        // Single username mode
+                        title = listNameMemento.rememberTerm(ownerName);
                         loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), ownerName);
                     }
+                    markerId = EmojiUtils.NO_EMOJI;
                     break;
                 case MAP:
                     title = LocalizationUtils.getString(R.string.map_map);

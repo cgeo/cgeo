@@ -28,7 +28,6 @@ import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
-import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.RatingGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
@@ -349,12 +348,7 @@ final class OkapiClient {
             return new SearchResult();
         }
         final GeocacheFilter filter = GeocacheFilter.createFromConfig(filterConfig);
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
-        if (origin != null && !origin.allowsCachesOf(connector)) {
-            return new SearchResult();
-        }
         final int alreadyTook = context.getInt(SEARCH_CONTEXT_TOOK_TOTAL, 0);
-
         return retrieveCaches(connector, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook);
     }
 
@@ -362,34 +356,28 @@ final class OkapiClient {
     @WorkerThread
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-
-        final Geopoint searchCoords;
-        final String radius;
-
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
-        } else {
-            // search around current position by default
-            searchCoords = null;
-            radius = DEFAULT_RADIUS;
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible(connector);
+        if (filters == null) {
+            return new SearchResult(); //connector is excluded by origin filter
         }
 
-        //fill in the defaults
+        // fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("limit", "" + take);
         valueMap.put("offset", "" + skip);
-        fillSearchParameterCenter(valueMap, params, searchCoords, radius);
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            final String radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
+            fillSearchParameterCenter(valueMap, params, df.getEffectiveCoordinate(), radius);
+        } else {
+            // search around current position by default
+            //fillSearchParameterCenter(valueMap, params, null, DEFAULT_RADIUS);
+        }
 
         String finder = null;
-
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
-            if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
-                return new SearchResult(); //no need to search if connector is filtered out itself
-            }
+        for (final BaseGeocacheFilter baseFilter : filters) {
             if (baseFilter instanceof LogEntryGeocacheFilter) {
                 finder = ((LogEntryGeocacheFilter) baseFilter).getFoundByUser();
             }
