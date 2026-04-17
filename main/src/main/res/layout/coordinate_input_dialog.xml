@@ -3,16 +3,67 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="match_parent"
 	android:orientation="vertical">
 
 	<include android:id="@+id/actionbar" layout="@layout/actionbar_popup" />
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dialogSpinner"
-        android:padding="8dp" />
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="8dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginBottom="4dp">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:background="@drawable/border"
+			android:paddingStart="8dp"
+			android:paddingTop="14dp"
+			android:paddingEnd="8dp"
+			android:paddingBottom="8dp">
+
+			<Spinner
+				android:id="@+id/dialogSpinner"
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:layout_centerVertical="true"
+				android:layout_toStartOf="@id/dialogSpinnerArrow"
+				android:background="@android:color/transparent"
+				android:gravity="center_vertical"
+				android:paddingStart="4dp"
+				android:paddingEnd="4dp"
+				android:spinnerMode="dropdown" />
+
+			<ImageView
+				android:id="@+id/dialogSpinnerArrow"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_alignParentEnd="true"
+				android:layout_centerVertical="true"
+				android:contentDescription="@null"
+				android:importantForAccessibility="no"
+				android:tint="@color/colorText_listsSecondary"
+				app:srcCompat="@drawable/outline_arrow_drop_down_24" />
+
+		</RelativeLayout>
+
+		<TextView
+			android:id="@+id/coordFormatLabel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top|start"
+			android:layout_marginStart="12dp"
+			android:background="@color/colorBackgroundDialog"
+			android:paddingStart="4dp"
+			android:paddingEnd="4dp"
+			android:text="@string/coord_input_format"
+			android:textColor="@color/colorText_listsSecondary"
+			android:textSize="@dimen/textSize_listsSecondary" />
+
+	</FrameLayout>
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -252,58 +303,81 @@
             android:layout_height="wrap_content"
             android:text="@string/waypoint_my_coordinates" />
 
-		<RelativeLayout
+		<FrameLayout
 			android:id="@+id/quickMapTargetButton"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="8dp"
-			android:layout_marginTop="4dp"
+			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
-			android:background="@drawable/border_active"
 			android:clickable="true"
 			android:focusable="true"
-			android:padding="8dp"
 			android:visibility="gone">
 
-			<TextView
-				android:id="@+id/quickMapDistanceDirection"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
-				android:maxLines="1"
-				android:textColor="@color/colorText_listsSecondary"
-				android:textSize="@dimen/textSize_listsSecondary"
-				tools:text="12.4 km NW" />
-
-			<LinearLayout
+			<RelativeLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_toLeftOf="@id/quickMapDistanceDirection"
-				android:orientation="vertical"
-				android:paddingRight="8dp">
+				android:layout_marginTop="12dp"
+				android:background="@drawable/border"
+				android:paddingLeft="8dp"
+				android:paddingTop="14dp"
+				android:paddingRight="8dp"
+				android:paddingBottom="8dp">
 
 				<TextView
-					android:id="@+id/quickMapCoordinates"
-					android:layout_width="match_parent"
+					android:id="@+id/quickMapDistanceDirection"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:maxLines="2"
-					android:textColor="@color/colorText_listsPrimary"
-					android:textSize="@dimen/textSize_listsPrimary"
-					tools:text="N 50° 08.030 E 008° 40.982" />
-
-				<TextView
-					android:id="@+id/quickMapCountry"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_centerVertical="true"
 					android:maxLines="1"
 					android:textColor="@color/colorText_listsSecondary"
 					android:textSize="@dimen/textSize_listsSecondary"
-					tools:text="Duitsland" />
+					tools:text="12.4 km NW" />
 
-			</LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_toLeftOf="@id/quickMapDistanceDirection"
+					android:orientation="vertical"
+					android:paddingRight="8dp">
 
-		</RelativeLayout>
+					<TextView
+						android:id="@+id/quickMapCoordinates"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:maxLines="2"
+						android:textColor="@color/colorText_listsPrimary"
+						android:textSize="@dimen/textSize_listsPrimary"
+						tools:text="N 50° 08.030 E 008° 40.982" />
+
+					<TextView
+						android:id="@+id/quickMapCountry"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:textColor="@color/colorText_listsSecondary"
+						android:textSize="@dimen/textSize_listsSecondary"
+						tools:text="Duitsland" />
+
+				</LinearLayout>
+
+			</RelativeLayout>
+
+			<TextView
+				android:id="@+id/quickMapActionLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|start"
+				android:layout_marginStart="12dp"
+				android:background="@color/colorBackgroundDialog"
+				android:paddingStart="4dp"
+				android:paddingEnd="4dp"
+				android:text="@string/coord_input_show_on_map"
+				android:textColor="@color/colorText_listsSecondary"
+				android:textSize="@dimen/textSize_listsSecondary" />
+
+		</FrameLayout>
 
 		<Button
 			android:id="@+id/cache"

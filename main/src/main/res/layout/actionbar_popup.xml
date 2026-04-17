@@ -5,6 +5,9 @@
     android:id="@+id/toolbar"
     android:theme="@style/tool_bar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/actionbar_height"
+    android:minHeight="@dimen/actionbar_height"
     android:background="@color/colorBackgroundActionBar"
-    app:contentInsetStart="8dp" />
+    android:elevation="4dp"
+    app:contentInsetStart="8dp"
+    app:popupTheme="@style/appToolbarPopup"/>
