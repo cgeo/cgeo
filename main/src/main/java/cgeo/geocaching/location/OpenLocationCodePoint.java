@@ -3,6 +3,7 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -23,39 +24,63 @@ public class OpenLocationCodePoint {
     private static final int GRID_ROWS = 5;
     private static final int GRID_COLUMNS = 4;
 
-        //                                              (1)            (2)
+        //                                                         (1)            (2)
         static final Pattern PATTERN_OLC = Pattern.compile(
-            "(^|\\s)([23456789CFGHJMPQRVWX]{8}\\+[23456789CFGHJMPQRVWX]{2,7})(?=$|\\s|[.,;:])",
+            "(^|[^23456789CFGHJMPQRVWX])([23456789CFGHJMPQRVWX]{2,8}\\+[23456789CFGHJMPQRVWX]{2,7})(?=$|[^23456789CFGHJMPQRVWX])",
             Pattern.CASE_INSENSITIVE
         );
 
     private final String code;
     private final Geopoint center;
+    private final double latitudeResolutionDeg;
+    private final double longitudeResolutionDeg;
 
     public OpenLocationCodePoint(final String codeText) {
+        this(codeText, null);
+    }
+
+    public OpenLocationCodePoint(final String codeText, @Nullable final Geopoint referencePoint) {
         final MatcherWrapper matcher = new MatcherWrapper(PATTERN_OLC, codeText);
         if (!matcher.find()) {
             throw new ParseException("Unable to recognize OLC format in String '" + codeText + "'");
         }
 
-        this.code = normalizeFullCode(matcher.group(2));
-        this.center = decode(this.code);
+        final String normalizedCode = normalizeCode(matcher.group(2));
+        this.code = isShortCode(normalizedCode)
+                ? recoverNearestFullCode(normalizedCode, referencePoint, codeText)
+                : normalizeFullCode(normalizedCode);
+        final DecodedCode decodedCode = decode(this.code);
+        this.center = decodedCode.center;
+        this.latitudeResolutionDeg = decodedCode.latitudeResolutionDeg;
+        this.longitudeResolutionDeg = decodedCode.longitudeResolutionDeg;
     }
 
-    private OpenLocationCodePoint(final String code, final Geopoint center) {
+    private OpenLocationCodePoint(final String code, final Geopoint center,
+                                  final double latitudeResolutionDeg, final double longitudeResolutionDeg) {
         this.code = code;
         this.center = center;
+        this.latitudeResolutionDeg = latitudeResolutionDeg;
+        this.longitudeResolutionDeg = longitudeResolutionDeg;
     }
 
     @NonNull
     public static OpenLocationCodePoint latLong2OLC(final Geopoint geopoint) {
         final String code = encode(geopoint.getLatitude(), geopoint.getLongitude(), DEFAULT_CODE_LENGTH);
-        return new OpenLocationCodePoint(code, decode(code));
+        final DecodedCode decodedCode = decode(code);
+        return new OpenLocationCodePoint(code, decodedCode.center, decodedCode.latitudeResolutionDeg, decodedCode.longitudeResolutionDeg);
     }
 
     @NonNull
     public Geopoint toLatLong() {
         return center;
+    }
+
+    public double getLatitudeResolutionDeg() {
+        return latitudeResolutionDeg;
+    }
+
+    public double getLongitudeResolutionDeg() {
+        return longitudeResolutionDeg;
     }
 
     @Override
@@ -121,7 +146,7 @@ public class OpenLocationCodePoint {
     }
 
     @NonNull
-    private static Geopoint decode(final String codeText) {
+    private static DecodedCode decode(final String codeText) {
         final String normalized = normalizeFullCode(codeText);
         final String code = normalized.replace(String.valueOf(SEPARATOR), "");
 
@@ -149,12 +174,16 @@ public class OpenLocationCodePoint {
             longitude += col * lonPlaceValue;
         }
 
-        return new Geopoint(latitude + latPlaceValue / 2.0d, longitude + lonPlaceValue / 2.0d);
+        return new DecodedCode(
+            new Geopoint(latitude + latPlaceValue / 2.0d, longitude + lonPlaceValue / 2.0d),
+            latPlaceValue,
+            lonPlaceValue
+        );
     }
 
     @NonNull
     private static String normalizeFullCode(final String codeText) {
-        final String trimmed = codeText.trim().toUpperCase(Locale.US).replace(" ", "");
+        final String trimmed = normalizeCode(codeText);
         final int separatorIndex = trimmed.indexOf(SEPARATOR);
 
         if (separatorIndex != SEPARATOR_POSITION || separatorIndex != trimmed.lastIndexOf(SEPARATOR)) {
@@ -178,6 +207,78 @@ public class OpenLocationCodePoint {
         }
 
         return trimmed;
+    }
+
+    @NonNull
+    private static String normalizeCode(final String codeText) {
+        return codeText.trim().toUpperCase(Locale.US).replace(" ", "");
+    }
+
+    private static boolean isShortCode(final String codeText) {
+        final int separatorIndex = codeText.indexOf(SEPARATOR);
+        return separatorIndex >= 0 && separatorIndex < SEPARATOR_POSITION;
+    }
+
+    @NonNull
+    private static String normalizeShortCode(final String codeText, final String originalCodeText) {
+        final String trimmed = normalizeCode(codeText);
+        final int separatorIndex = trimmed.indexOf(SEPARATOR);
+
+        if (separatorIndex < 2 || separatorIndex >= SEPARATOR_POSITION || separatorIndex % 2 != 0 ||
+                separatorIndex != trimmed.lastIndexOf(SEPARATOR)) {
+            throw new ParseException("Invalid short OLC separator position in String '" + originalCodeText + "'");
+        }
+
+        final int suffixLength = trimmed.length() - separatorIndex - 1;
+        if (suffixLength < 2 || suffixLength > 7) {
+            throw new ParseException("Short OLC requires 2-7 characters after separator in String '" + originalCodeText + "'");
+        }
+
+        final String code = trimmed.replace(String.valueOf(SEPARATOR), "");
+        for (int i = 0; i < code.length(); i++) {
+            if (getCodeIndex(code.charAt(i)) < 0) {
+                throw new ParseException("Invalid OLC character in String '" + originalCodeText + "'");
+            }
+        }
+
+        return trimmed;
+    }
+
+    @NonNull
+    private static String recoverNearestFullCode(@NonNull final String shortCodeText,
+                                                 @Nullable final Geopoint referencePoint,
+                                                 @NonNull final String originalCodeText) {
+        if (referencePoint == null) {
+            throw new ParseException("Short OLC requires a reference location in String '" + originalCodeText + "'");
+        }
+
+        final String shortCode = normalizeShortCode(shortCodeText, originalCodeText);
+        final int separatorIndex = shortCode.indexOf(SEPARATOR);
+        final int paddingLength = SEPARATOR_POSITION - separatorIndex;
+        final int recoveredCodeLength = shortCode.replace(String.valueOf(SEPARATOR), "").length() + paddingLength;
+
+        final String referenceCode = encode(referencePoint.getLatitude(), referencePoint.getLongitude(), DEFAULT_CODE_LENGTH);
+        final String recoveredCandidate = referenceCode.substring(0, paddingLength) + shortCode;
+        final DecodedCode recoveredCode = decode(recoveredCandidate);
+
+        final double resolution = Math.pow(20.0d, 2.0d - (paddingLength / 2.0d));
+        final double areaToEdge = resolution / 2.0d;
+
+        double recoveredLatitude = recoveredCode.center.getLatitude();
+        if (referencePoint.getLatitude() + areaToEdge < recoveredLatitude && recoveredLatitude - resolution >= -90.0d) {
+            recoveredLatitude -= resolution;
+        } else if (referencePoint.getLatitude() - areaToEdge > recoveredLatitude && recoveredLatitude + resolution <= 90.0d) {
+            recoveredLatitude += resolution;
+        }
+
+        double recoveredLongitude = recoveredCode.center.getLongitude();
+        if (referencePoint.getLongitude() + areaToEdge < recoveredLongitude) {
+            recoveredLongitude -= resolution;
+        } else if (referencePoint.getLongitude() - areaToEdge > recoveredLongitude) {
+            recoveredLongitude += resolution;
+        }
+
+        return encode(clipLatitude(recoveredLatitude), normalizeLongitude(recoveredLongitude), recoveredCodeLength);
     }
 
     private static int getCodeIndex(final char character) {
@@ -204,6 +305,18 @@ public class OpenLocationCodePoint {
 
         ParseException(final String message) {
             super(message);
+        }
+    }
+
+    private static class DecodedCode {
+        private final Geopoint center;
+        private final double latitudeResolutionDeg;
+        private final double longitudeResolutionDeg;
+
+        DecodedCode(final Geopoint center, final double latitudeResolutionDeg, final double longitudeResolutionDeg) {
+            this.center = center;
+            this.latitudeResolutionDeg = latitudeResolutionDeg;
+            this.longitudeResolutionDeg = longitudeResolutionDeg;
         }
     }
 }

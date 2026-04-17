@@ -8,6 +8,7 @@ import cgeo.geocaching.databinding.CoordinateInputDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.OpenLocationCodePoint;
 import cgeo.geocaching.location.RDPoint;
 import cgeo.geocaching.location.SwissGridPoint;
 import cgeo.geocaching.location.UTMPoint;
@@ -26,8 +27,10 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.text.Editable;
@@ -37,6 +40,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,18 +54,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import com.google.android.material.textfield.TextInputLayout;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
 // A recreation of the original coordinate dialog as an Alert based dialog
 public class CoordinateInputDialog {
+
+    private static final int OLC_SEPARATOR_POSITION = 8;
+    private static final String MGRS_LABEL = "Military Grid Reference System (MGRS)";
+    private static final String OLC_LABEL = "Open Location Code (OLC)";
+    private static final String RD_COORD_X_LABEL = "X";
+    private static final String RD_COORD_Y_LABEL = "Y";
+    private static final Pattern PATTERN_OLC_WITH_SUFFIX = Pattern.compile(
+            "(^|[^23456789CFGHJMPQRVWX])([23456789CFGHJMPQRVWX]{2,8}\\+[23456789CFGHJMPQRVWX]{2,7})(.*)$",
+            Pattern.CASE_INSENSITIVE
+    );
 
     private final Context context;
     private final DialogCallback callback;
@@ -87,6 +107,10 @@ public class CoordinateInputDialog {
     private static Geopoint cacheCoordinates;
     private Geopoint quickMapTarget;
     private Geopoint quickMapCountryTarget;
+    private String quickMapAreaText;
+    private Disposable olcReferenceDisposable;
+    private String olcReferenceQuery;
+    private Geopoint olcReferencePoint;
     private Disposable geoDisposable;
     private Disposable reverseGeocodeDisposable;
     private CoordinateDialogDisplayModeEnum waypointOptions = CoordinateDialogDisplayModeEnum.Normal;
@@ -154,7 +178,7 @@ public class CoordinateInputDialog {
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View theView = inflater.inflate(R.layout.coordinate_input_dialog, null);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.cgeo_fullScreenDialog);
         builder.setView(theView);
 
         final AlertDialog dialog = builder.create();
@@ -165,7 +189,15 @@ public class CoordinateInputDialog {
         // Show title and action buttons
         final Toolbar toolbar = binding.actionbar.toolbar;
         toolbar.setTitle(R.string.cache_coordinates);
+        toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.setNavigationOnClickListener(v -> {
+            disposeDialogResources();
+            dialog.dismiss();
+        });
         toolbar.inflateMenu(R.menu.menu_ok_cancel);
+        if (toolbar.getMenu().findItem(R.id.menu_item_cancel) != null) {
+            toolbar.getMenu().findItem(R.id.menu_item_cancel).setVisible(false);
+        }
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
                if (saveAndFinishDialog()) {
@@ -370,9 +402,28 @@ public class CoordinateInputDialog {
 
         dialog.show();
 
+        applyToolbarInsets(toolbar);
+
         // Make this dialog completely fill the screen
         if (dialog.getWindow() != null) {
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setDimAmount(0f);
+
+            int dialogHeight = ViewGroup.LayoutParams.MATCH_PARENT;
+            if (context instanceof Activity) {
+                final View footer = ((Activity) context).findViewById(R.id.activity_navigationBar);
+                if (footer != null && footer.getVisibility() == View.VISIBLE) {
+                    final int footerHeight = footer.getHeight() > 0
+                            ? footer.getHeight()
+                            : context.getResources().getDimensionPixelSize(com.google.android.material.R.dimen.design_bottom_navigation_height);
+                    final int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
+                    dialogHeight = Math.max(1, screenHeight - footerHeight);
+                }
+            }
+
+            dialog.getWindow().setGravity(Gravity.TOP);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, dialogHeight);
         }
 
         refreshQuickMapTargetButton();
@@ -380,8 +431,36 @@ public class CoordinateInputDialog {
         geoDisposable = geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
     }
 
+    private void applyToolbarInsets(@NonNull final Toolbar toolbar) {
+        final int baseToolbarHeight = context.getResources().getDimensionPixelSize(R.dimen.actionbar_height);
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar, (view, windowInsets) -> {
+            final Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout());
+            final ViewGroup.LayoutParams params = view.getLayoutParams();
+            final int targetToolbarHeight = baseToolbarHeight + insets.top;
+
+            if (params.height != targetToolbarHeight) {
+                params.height = targetToolbarHeight;
+                view.setLayoutParams(params);
+            }
+
+            view.setPadding(insets.left, insets.top, insets.right, view.getPaddingBottom());
+            return windowInsets;
+        });
+        ViewCompat.requestApplyInsets(toolbar);
+    }
+
     // Close dialog and return selected coordinates to caller
     private boolean saveAndFinishDialog() {
+
+        if (currentFormat == Settings.CoordInputFormatEnum.OLC) {
+            final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(true);
+            if (olcPoint != null) {
+                callback.onDialogClosed(olcPoint.toLatLong());
+                return true;
+            }
+            Toast.makeText(context, R.string.err_parse_lat_lon, Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         final String result = readGui();
 
@@ -406,11 +485,152 @@ public class CoordinateInputDialog {
             return null;
         }
 
+        if (currentFormat == Settings.CoordInputFormatEnum.OLC) {
+            final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(false);
+            return olcPoint == null ? null : olcPoint.toLatLong();
+        }
+
         try {
             final Geopoint entered = new Geopoint(result);
             return entered.isValid() ? entered : null;
         } catch (final Geopoint.ParseException ignored) {
             return null;
+        }
+    }
+
+    @Nullable
+    private OpenLocationCodePoint parseCurrentInputAsOlcPoint(final boolean allowBlockingLookup) {
+        if (currentFormat != Settings.CoordInputFormatEnum.OLC) {
+            clearOlcReferenceLookupState();
+            return null;
+        }
+
+        final String result = StringUtils.trimToEmpty(readGui());
+        if (StringUtils.isBlank(result)) {
+            clearOlcReferenceLookupState();
+            return null;
+        }
+
+        final OlcInputInfo olcInputInfo = parseOlcInput(result);
+        Geopoint referencePoint = currentCoords();
+
+        if (olcInputInfo != null && olcInputInfo.isShortCode && StringUtils.isNotBlank(olcInputInfo.localityText)) {
+            referencePoint = getReferencePointForShortOlc(olcInputInfo.localityText, allowBlockingLookup);
+            if (referencePoint == null) {
+                return null;
+            }
+        } else {
+            clearOlcReferenceLookupState();
+        }
+
+        try {
+            return new OpenLocationCodePoint(result, referencePoint);
+        } catch (final OpenLocationCodePoint.ParseException ignored) {
+            return null;
+        }
+    }
+
+    @Nullable
+    private Geopoint getReferencePointForShortOlc(@NonNull final String localityText, final boolean allowBlockingLookup) {
+        final String normalizedLocality = StringUtils.trimToEmpty(StringUtils.normalizeSpace(localityText));
+        if (StringUtils.isBlank(normalizedLocality)) {
+            clearOlcReferenceLookupState();
+            return currentCoords();
+        }
+
+        if (StringUtils.equalsIgnoreCase(normalizedLocality, olcReferenceQuery) && olcReferencePoint != null) {
+            return olcReferencePoint;
+        }
+
+        if (!allowBlockingLookup) {
+            triggerOlcReferenceLookup(normalizedLocality);
+            return null;
+        }
+
+        final Geopoint resolvedReference = lookupOlcReferenceBlocking(normalizedLocality);
+        if (resolvedReference == null) {
+            return null;
+        }
+
+        olcReferenceQuery = normalizedLocality;
+        olcReferencePoint = resolvedReference;
+        return resolvedReference;
+    }
+
+    private void triggerOlcReferenceLookup(@NonNull final String localityText) {
+        if (StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)
+                && olcReferenceDisposable != null && !olcReferenceDisposable.isDisposed()) {
+            return;
+        }
+
+        clearOlcReferenceLookupDisposable();
+        olcReferenceQuery = localityText;
+        olcReferencePoint = null;
+
+        olcReferenceDisposable = createOlcReferenceLookup(localityText)
+                .observeOn(AndroidRxUtils.mainThreadScheduler)
+                .subscribe(reference -> {
+                    if (!StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)) {
+                        return;
+                    }
+                    olcReferencePoint = reference;
+                    refreshQuickMapTargetButton();
+                }, throwable -> {
+                    if (StringUtils.equalsIgnoreCase(localityText, olcReferenceQuery)) {
+                        olcReferencePoint = null;
+                    }
+                });
+    }
+
+    @Nullable
+    private Geopoint lookupOlcReferenceBlocking(@NonNull final String localityText) {
+        try {
+            return createOlcReferenceLookup(localityText).blockingGet();
+        } catch (final RuntimeException ignored) {
+            return null;
+        }
+    }
+
+    @NonNull
+    private Single<Geopoint> createOlcReferenceLookup(@NonNull final String localityText) {
+        return new AndroidGeocoder(context)
+                .getFromLocationName(localityText)
+                .firstOrError()
+                .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocationName(localityText).firstOrError())
+                .map(address -> new Geopoint(address.getLatitude(), address.getLongitude()));
+    }
+
+    @Nullable
+    private static OlcInputInfo parseOlcInput(@NonNull final String inputText) {
+        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_OLC_WITH_SUFFIX, inputText);
+        if (!matcher.find()) {
+            return null;
+        }
+
+        final String codeText = StringUtils.trimToEmpty(matcher.group(2));
+        final int separatorIndex = codeText.indexOf('+');
+        final boolean isShortCode = separatorIndex >= 0 && separatorIndex < OLC_SEPARATOR_POSITION;
+        final String localityText = sanitizeOlcLocality(matcher.group(3));
+        return new OlcInputInfo(isShortCode, localityText);
+    }
+
+    @Nullable
+    private static String sanitizeOlcLocality(@Nullable final String rawSuffix) {
+        final String cleaned = StringUtils.trimToEmpty(rawSuffix)
+                .replaceFirst("^[\\s,;:()\\-+]+", "");
+        return StringUtils.trimToNull(cleaned);
+    }
+
+    private void clearOlcReferenceLookupState() {
+        clearOlcReferenceLookupDisposable();
+        olcReferenceQuery = null;
+        olcReferencePoint = null;
+    }
+
+    private void clearOlcReferenceLookupDisposable() {
+        if (olcReferenceDisposable != null) {
+            olcReferenceDisposable.dispose();
+            olcReferenceDisposable = null;
         }
     }
 
@@ -424,7 +644,8 @@ public class CoordinateInputDialog {
             return;
         }
 
-        final Geopoint parsedInput = parseCurrentInputAsGeopoint();
+        final OpenLocationCodePoint olcPoint = parseCurrentInputAsOlcPoint(false);
+        final Geopoint parsedInput = olcPoint == null ? parseCurrentInputAsGeopoint() : olcPoint.toLatLong();
         if (parsedInput == null) {
             hideQuickMapTargetButton();
             return;
@@ -432,14 +653,15 @@ public class CoordinateInputDialog {
 
         quickMapTarget = parsedInput;
         quickMapTargetButton.setVisibility(View.VISIBLE);
-        quickMapCoordinates.setText(parsedInput.format(getQuickMapPreviewFormat(currentFormat)));
+        quickMapCoordinates.setText(olcPoint == null ? parsedInput.format(getQuickMapPreviewFormat(currentFormat)) : olcPoint.toString());
         updateQuickMapDistanceAndDirection(parsedInput, currentCoords());
-        resolveQuickMapCountry(parsedInput);
+        resolveQuickMapCountry(parsedInput, getOlcAreaText(olcPoint));
     }
 
     private void hideQuickMapTargetButton() {
         quickMapTarget = null;
         quickMapCountryTarget = null;
+        quickMapAreaText = null;
         if (reverseGeocodeDisposable != null) {
             reverseGeocodeDisposable.dispose();
             reverseGeocodeDisposable = null;
@@ -455,17 +677,44 @@ public class CoordinateInputDialog {
         }
 
         final String distance = Units.getDistanceFromKilometers(source.distanceTo(target));
-        final String direction = Units.getDirectionFromBearing(source.bearingTo(target));
-        quickMapDistanceDirection.setText(StringUtils.isBlank(direction) ? distance : distance + " " + direction);
+        final String directionArrow = getDirectionArrowFromBearing(source.bearingTo(target));
+        quickMapDistanceDirection.setText(StringUtils.isBlank(directionArrow) ? distance : distance + " " + directionArrow);
     }
 
-    private void resolveQuickMapCountry(@NonNull final Geopoint target) {
-        if (quickMapCountryTarget != null && quickMapCountryTarget.equals(target)) {
+    private static String getDirectionArrowFromBearing(final float rawBearing) {
+        final float bearing = (rawBearing + 360.0f) % 360.0f;
+        final int segment = Math.round(bearing / 45.0f) % 8;
+
+        switch (segment) {
+            case 0:
+                return "\u2191";
+            case 1:
+                return "\u2197";
+            case 2:
+                return "\u2192";
+            case 3:
+                return "\u2198";
+            case 4:
+                return "\u2193";
+            case 5:
+                return "\u2199";
+            case 6:
+                return "\u2190";
+            case 7:
+            default:
+                return "\u2196";
+        }
+    }
+
+    private void resolveQuickMapCountry(@NonNull final Geopoint target, @Nullable final String areaText) {
+        if (quickMapCountryTarget != null && quickMapCountryTarget.equals(target) &&
+                StringUtils.equals(quickMapAreaText, areaText)) {
             return;
         }
 
         quickMapCountryTarget = target;
-        quickMapCountry.setText(R.string.coord_input_country_loading);
+        quickMapAreaText = areaText;
+        quickMapCountry.setText(composeCountryAreaText(LocalizationUtils.getString(R.string.coord_input_country_loading), areaText));
 
         if (reverseGeocodeDisposable != null) {
             reverseGeocodeDisposable.dispose();
@@ -480,13 +729,40 @@ public class CoordinateInputDialog {
                         return;
                     }
                     final String countryName = getLocalizedCountryName(address);
-                    quickMapCountry.setText(StringUtils.defaultIfBlank(countryName,
-                            LocalizationUtils.getString(R.string.coord_input_country_unknown)));
+                    final String displayCountry = StringUtils.defaultIfBlank(countryName,
+                            LocalizationUtils.getString(R.string.coord_input_country_unknown));
+                    quickMapCountry.setText(composeCountryAreaText(displayCountry, areaText));
                 }, throwable -> {
                     if (quickMapTarget != null && quickMapTarget.equals(target)) {
-                        quickMapCountry.setText(R.string.coord_input_country_unknown);
+                        quickMapCountry.setText(composeCountryAreaText(
+                                LocalizationUtils.getString(R.string.coord_input_country_unknown), areaText));
                     }
                 });
+    }
+
+    @Nullable
+    private String getOlcAreaText(@Nullable final OpenLocationCodePoint olcPoint) {
+        if (olcPoint == null) {
+            return null;
+        }
+
+        final Geopoint center = olcPoint.toLatLong();
+        final double latMeters = olcPoint.getLatitudeResolutionDeg() * 111320.0d;
+        final double lonMeters = olcPoint.getLongitudeResolutionDeg() * 111320.0d
+                * Math.cos(Math.toRadians(center.getLatitude()));
+
+        final long widthMeters = Math.max(1L, Math.round(Math.abs(lonMeters)));
+        final long heightMeters = Math.max(1L, Math.round(Math.abs(latMeters)));
+
+        return LocalizationUtils.getString(R.string.coord_input_olc_area, widthMeters, heightMeters);
+    }
+
+    @NonNull
+    private static String composeCountryAreaText(@NonNull final String countryText, @Nullable final String areaText) {
+        if (StringUtils.isBlank(areaText)) {
+            return countryText;
+        }
+        return countryText + " - " + areaText;
     }
 
     private static String getLocalizedCountryName(@NonNull final Address address) {
@@ -531,6 +807,17 @@ public class CoordinateInputDialog {
         if (reverseGeocodeDisposable != null) {
             reverseGeocodeDisposable.dispose();
             reverseGeocodeDisposable = null;
+        }
+        clearOlcReferenceLookupState();
+    }
+
+    private static class OlcInputInfo {
+        private final boolean isShortCode;
+        private final String localityText;
+
+        OlcInputInfo(final boolean isShortCode, @Nullable final String localityText) {
+            this.isShortCode = isShortCode;
+            this.localityText = localityText;
         }
     }
 
@@ -626,7 +913,7 @@ public class CoordinateInputDialog {
 
         if (isSingleInputFormat(currentFormat)) {
             final GeopointFormatter.Format format = getSingleInputGeopointFormat(currentFormat);
-            showSinglePlainInput(geopoint.format(format), getSingleInputHint(currentFormat));
+            showSinglePlainInput(geopoint.format(format), getSingleInputHintLabel(currentFormat));
             return;
         }
 
@@ -646,8 +933,8 @@ public class CoordinateInputDialog {
             showDualPlainInput(
                     Long.toString(Math.round(rdPoint.getX())),
                     Long.toString(Math.round(rdPoint.getY())),
-                    R.string.coord_input_x,
-                    R.string.coord_input_y
+                    RD_COORD_X_LABEL,
+                    RD_COORD_Y_LABEL
             );
             return;
         }
@@ -789,7 +1076,36 @@ public class CoordinateInputDialog {
         configurableLongitude.setVisibility(View.GONE);
     }
 
+    private void showDualPlainInput(final String latitudeText, final String longitudeText,
+                                    @NonNull final String latitudeHint, @NonNull final String longitudeHint) {
+        eLatFrame.setVisibility(View.VISIBLE);
+        eLonFrame.setVisibility(View.VISIBLE);
+        eThirdFrame.setVisibility(View.GONE);
+        plainLatitude.setVisibility(View.VISIBLE);
+        plainLongitude.setVisibility(View.VISIBLE);
+        plainThird.setVisibility(View.GONE);
+        setFrameHint(eLatFrame, plainLatitude, latitudeHint);
+        setFrameHint(eLonFrame, plainLongitude, longitudeHint);
+        plainLatitude.setText(latitudeText);
+        plainLongitude.setText(longitudeText);
+        configurableLatitude.setVisibility(View.GONE);
+        configurableLongitude.setVisibility(View.GONE);
+    }
+
     private void showSinglePlainInput(final String coordinateText, @StringRes final int coordinateHint) {
+        eLatFrame.setVisibility(View.VISIBLE);
+        eLonFrame.setVisibility(View.GONE);
+        eThirdFrame.setVisibility(View.GONE);
+        plainLatitude.setVisibility(View.VISIBLE);
+        plainLongitude.setVisibility(View.GONE);
+        plainThird.setVisibility(View.GONE);
+        setFrameHint(eLatFrame, plainLatitude, coordinateHint);
+        plainLatitude.setText(coordinateText);
+        configurableLatitude.setVisibility(View.GONE);
+        configurableLongitude.setVisibility(View.GONE);
+    }
+
+    private void showSinglePlainInput(final String coordinateText, @NonNull final String coordinateHint) {
         eLatFrame.setVisibility(View.VISIBLE);
         eLonFrame.setVisibility(View.GONE);
         eThirdFrame.setVisibility(View.GONE);
@@ -838,6 +1154,11 @@ public class CoordinateInputDialog {
         field.setHint(hintText);
     }
 
+    private static void setFrameHint(final TextInputLayout frame, final EditText field, @NonNull final String hintText) {
+        frame.setHint(hintText);
+        field.setHint(hintText);
+    }
+
     private static boolean isSingleInputFormat(final Settings.CoordInputFormatEnum format) {
         switch (format) {
             case MGRS:
@@ -859,14 +1180,15 @@ public class CoordinateInputDialog {
         }
     }
 
-    private static int getSingleInputHint(final Settings.CoordInputFormatEnum format) {
+    @NonNull
+    private static String getSingleInputHintLabel(final Settings.CoordInputFormatEnum format) {
         switch (format) {
             case MGRS:
-                return R.string.coord_input_mgrs;
+                return MGRS_LABEL;
             case OLC:
-                return R.string.coord_input_olc;
+                return OLC_LABEL;
             default:
-                return R.string.latitude;
+                return LocalizationUtils.getString(R.string.latitude);
         }
     }
 
