@@ -32,7 +32,7 @@ public enum LogType {
     ANNOUNCEMENT(74, "74", "Announcement", "", R.string.log_announcement, R.drawable.mark_gray, R.drawable.marker_announcement),
     TEMP_DISABLE_LISTING(22, "22", "Temporarily Disable Listing", "Temporarily unavailable", R.string.log_disabled, R.drawable.mark_red_more, R.drawable.marker_disable),
     ENABLE_LISTING(23, "23", "Enable Listing", "Ready to search", R.string.log_enabled, R.drawable.mark_green_more, R.drawable.marker_visited),
-    OWNER_MAINTENANCE(46, "46", "Owner Maintenance", "", R.string.log_maintained, R.drawable.mark_green_more, R.drawable.marker_owner_maintenance),
+    OWNER_MAINTENANCE(46, "46", "Owner Maintenance", "Maintenance performed", R.string.log_maintained, R.drawable.mark_green_more, R.drawable.marker_owner_maintenance),
     UPDATE_COORDINATES(47, "47", "Update Coordinates", "Moved", R.string.log_update, R.drawable.mark_green_more, R.drawable.marker_update_coordinates),
     ARCHIVE(5, "5", "Archive", "Archived", R.string.log_archived, R.drawable.mark_red_more, R.drawable.marker_archive),
     // reviewer logs

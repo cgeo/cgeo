@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
@@ -233,6 +234,7 @@ class GCLoggingManager extends AbstractLoggingManager {
     public boolean supportsLogWithTrackables() {
         return true;
     }
+
     @NonNull
     @Override
     public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
@@ -248,4 +250,16 @@ class GCLoggingManager extends AbstractLoggingManager {
         return possibleReportProblemTypes;
     }
 
+    @NonNull
+    @Override
+    public ReportProblemType getDefaultReportProblemType(@NonNull final LogType logType) {
+        switch (logType) {
+            case NEEDS_MAINTENANCE:
+                return ReportProblemType.OTHER;
+            case NEEDS_ARCHIVE:
+                return ReportProblemType.ARCHIVE;
+            default:
+                return ReportProblemType.NO_PROBLEM;
+        }
+    }
 }
