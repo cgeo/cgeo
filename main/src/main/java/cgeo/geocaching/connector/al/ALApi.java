@@ -208,14 +208,19 @@ final class ALApi {
 
         final GeocacheFilter filter = pFilter == null ? GeocacheFilter.createEmpty() : pFilter;
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(connector);
+        if (andChainForConnector == null) {
+            return new ArrayList<>();
+        }
+
         // Origin excludes Lab
-        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
+        final OriginGeocacheFilter of = GeocacheFilter.findInChain(andChainForConnector, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
         }
+
         // Type excludes Lab
-        final TypeGeocacheFilter tf = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
+        final TypeGeocacheFilter tf = GeocacheFilter.findInChain(andChainForConnector, TypeGeocacheFilter.class);
         if (tf != null && tf.isFiltering() && !tf.getRawValues().contains(ADVLAB)) {
             return new ArrayList<>();
         }
@@ -227,7 +232,7 @@ final class ALApi {
             searchCoords = viewport.getCenter();
             radius = (int) (viewport.bottomLeft.distanceTo(viewport.topRight) * 500); // we get diameter in km, need radius in m
         } else  {
-            final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+            final DistanceGeocacheFilter df = GeocacheFilter.findInChain(andChainForConnector, DistanceGeocacheFilter.class);
             if (df != null) {
                 searchCoords = df.getEffectiveCoordinate();
                 radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
@@ -236,7 +241,7 @@ final class ALApi {
 
         //days since publish
         final Integer daysSincePublish;
-        final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
+        final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(andChainForConnector, DateRangeGeocacheFilter.class);
         if (dr != null) {
             daysSincePublish = dr.getDaysSinceMinDate() == 0 ? null : dr.getDaysSinceMinDate();
         } else {

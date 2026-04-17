@@ -7,6 +7,7 @@ import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -60,6 +61,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -479,10 +482,33 @@ public class SearchActivity extends AbstractNavigationBarActivity {
         addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, null, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, () -> Settings.getHistoryList(R.string.pref_search_history_trackable), value -> Settings.removeFromHistoryList(R.string.pref_search_history_trackable, value), new InputFilter.AllCaps());
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned)
-                .addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
+                .addOnClickListener(this::searchOwnCaches);
 
         addSearchCard(R.string.caches_history, R.drawable.ic_menu_recent_history)
                 .addOnClickListener(() -> startActivity(CacheListActivity.getHistoryIntent(this)));
+    }
+
+    private void searchOwnCaches() {
+        // Collect all active ILogin connectors with their usernames
+        final List<IConnector> connectorList = new ArrayList<>();
+        for (final IConnector connector : ConnectorFactory.getActiveConnectors()) {
+            if (connector instanceof ILogin) {
+                connectorList.add(connector);
+            }
+        }
+
+        if (connectorList.isEmpty()) {
+            // Fallback to the old behavior if no connectors have usernames
+            final String defaultUsername = Settings.getUserName();
+            if (StringUtils.isNotBlank(defaultUsername)) {
+                findByOwnerFn(defaultUsername);
+            } else {
+                SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
+            }
+            return;
+        }
+
+        findByOwnerFn(connectorList);
     }
 
     private String getGeocodeFromClipboard() {
@@ -544,6 +570,16 @@ public class SearchActivity extends AbstractNavigationBarActivity {
 
         Settings.addToHistoryList(R.string.pref_search_history_owner, userName);
         CacheListActivity.startActivityOwner(this, userName);
+        ActivityMixin.overrideTransitionToFade(this);
+    }
+
+    private void findByOwnerFn(final List<IConnector> connectorList) {
+        if (connectorList == null || connectorList.isEmpty()) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
+            return;
+        }
+
+        CacheListActivity.startActivityOwner(this, connectorList);
         ActivityMixin.overrideTransitionToFade(this);
     }
 

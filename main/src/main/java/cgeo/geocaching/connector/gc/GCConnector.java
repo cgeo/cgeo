@@ -23,6 +23,7 @@ import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -253,14 +254,18 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         GeocacheFilter filter = null;
         if (filterConfig != null) {
             filter = GeocacheFilter.createFromConfig(filterConfig);
-            final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
-            if (origin != null && !origin.allowsCachesOf(this)) {
-                return new SearchResult();
-            }
         }
-
         if (filter == null) {
             //we need a filter to proceed. If none is there then return empty result
+            return new SearchResult();
+        }
+
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(this);
+        if (andChainForConnector == null) {
+            return new SearchResult();
+        }
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(andChainForConnector, OriginGeocacheFilter.class);
+        if (origin != null && !origin.allowsCachesOf(this)) {
             return new SearchResult();
         }
 

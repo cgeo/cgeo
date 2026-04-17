@@ -1,7 +1,13 @@
 package cgeo.geocaching.filters.core;
+
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.models.Geocache;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -97,4 +103,248 @@ public class GeocacheFilterTest {
 
         assertThat(caches).containsExactly(g1, g2);
     }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithNoFilter() {
+        // empty filter => null
+        final IConnector gcConnector = GCConnector.getInstance();
+
+        final GeocacheFilter filter = GeocacheFilter.createEmpty();
+        final List<BaseGeocacheFilter> result = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(result).isNull();
+    }
+
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithOnlyConnectorFilter() {
+        // empty filter => null
+        final IConnector gcConnector = GCConnector.getInstance();
+
+        final OriginGeocacheFilter originFilter = new OriginGeocacheFilter();
+        originFilter.setValues(Collections.singleton(gcConnector));
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, originFilter);
+        final List<BaseGeocacheFilter> result = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(result.get(0)).isInstanceOf(OriginGeocacheFilter.class);
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithOrFilter() {
+        // Create an OR filter with two distance filters
+        // (Distance1 OR Distance2) => GC: (Distance1 OR Distance2)
+
+        final IConnector gcConnector = GCConnector.getInstance();
+
+        final DistanceGeocacheFilter distance1 = new DistanceGeocacheFilter();
+        final DistanceGeocacheFilter distance2 = new DistanceGeocacheFilter();
+
+        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
+        orFilter.addChild(distance1);
+        orFilter.addChild(distance2);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, orFilter);
+
+        // OR filters should not be expanded into an AND chain
+        final List<BaseGeocacheFilter> result = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(result.get(0)).isInstanceOf(OrGeocacheFilter.class);
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorRemovesMatchingOriginFilter() {
+        // Create a filter with OriginGeocacheFilter allowing GC and a DistanceFilter
+        // (GC AND Distance) => GC: Distance
+        // (GC AND Distance) => SU: null
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+
+        final OriginGeocacheFilter originFilter = new OriginGeocacheFilter();
+        originFilter.setValues(Collections.singleton(gcConnector));
+
+        final DistanceGeocacheFilter distanceFilter = new DistanceGeocacheFilter();
+
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        andFilter.addChild(originFilter);
+        andFilter.addChild(distanceFilter);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, andFilter);
+
+        // When filtering for GC connector, the origin filter should be removed (redundant)
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(gcResult).hasSize(2);
+        assertThat(gcResult.get(1)).isInstanceOf(DistanceGeocacheFilter.class);
+
+        // When filtering for SU connector, the AND filter contains an OriginFilter that excludes SU
+        // so the entire filter becomes invalid and returns empty list
+        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossibleForConnector(suConnector);
+        assertThat(ocResult).isNull();
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithNotFilter() {
+        // Create a AND filter with a NOT filter (origin) and a Distance filter
+        // NOT(GC) AND Distance => GC: null
+        // NOT(GC) AND Distance => SU: Distance
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+
+        final OriginGeocacheFilter originFilter = new OriginGeocacheFilter();
+        originFilter.setValues(Collections.singleton(gcConnector));
+
+        final NotGeocacheFilter notFilter = new NotGeocacheFilter();
+        notFilter.addChild(originFilter);
+
+        final DistanceGeocacheFilter distanceFilter = new DistanceGeocacheFilter();
+
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        andFilter.addChild(notFilter);
+        andFilter.addChild(distanceFilter);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, andFilter);
+
+        // For GC connector: NOT(GC) contains OriginFilter(GC) which allows GC
+        // So the NOT filter becomes invalid for GC -> entire AND is invalid
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(gcResult).isNull();
+
+        // For SU connector: NOT(GC) contains OriginFilter(GC) which doesn't allow SU
+        // So the OriginFilter is removed from NOT, but NOT becomes empty -> NOT is removed
+        // Result: just the Distance filter remains
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossibleForConnector(suConnector);
+        assertThat(suResult.size()).isEqualTo(1);
+        assertThat(suResult.get(0)).isInstanceOf(DistanceGeocacheFilter.class);
+
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithNestedAndFilters() {
+        // Create nested AND filters
+        // (Distance1 AND Distance2) AND Type AND GC => GC: (Distance1 AND Distance2) AND Type
+        // (Distance1 AND Distance2) AND Type AND GC => SU: null
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+
+        final DistanceGeocacheFilter distance1 = new DistanceGeocacheFilter();
+        final DistanceGeocacheFilter distance2 = new DistanceGeocacheFilter();
+        final TypeGeocacheFilter typeFilter = new TypeGeocacheFilter();
+        final OriginGeocacheFilter originFilter = new OriginGeocacheFilter();
+        originFilter.setValues(Collections.singleton(gcConnector));
+
+        final AndGeocacheFilter innerAnd = new AndGeocacheFilter();
+        innerAnd.addChild(distance1);
+        innerAnd.addChild(distance2);
+
+        final AndGeocacheFilter outerAnd = new AndGeocacheFilter();
+        outerAnd.addChild(innerAnd);
+        outerAnd.addChild(typeFilter);
+        outerAnd.addChild(originFilter);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, outerAnd);
+
+        // All filters should be flattened into the AND chain
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(gcResult).hasSize(4);
+
+        final long distanceCount = gcResult.stream().filter(f -> f instanceof DistanceGeocacheFilter).count();
+        final long typeCount = gcResult.stream().filter(f -> f instanceof TypeGeocacheFilter).count();
+
+        assertThat(distanceCount).isEqualTo(2);
+        assertThat(typeCount).isEqualTo(1);
+
+        final List<BaseGeocacheFilter> suResult = filter.getAndChainIfPossibleForConnector(suConnector);
+        assertThat(suResult).isNull();
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithMultipleOriginFilters() {
+        // Create a filter with OriginGeocacheFilter allowing both GC and OC
+        // (GC / OC AND Distance) => GC: return Distance-Filter
+        // (GC / OC AND Distance) => SU: return Distance-Filter
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+
+        final OriginGeocacheFilter originFilter = new OriginGeocacheFilter();
+        originFilter.setValues(Arrays.asList(gcConnector, suConnector));
+
+        final DistanceGeocacheFilter distanceFilter = new DistanceGeocacheFilter();
+
+        final AndGeocacheFilter andFilter = new AndGeocacheFilter();
+        andFilter.addChild(originFilter);
+        andFilter.addChild(distanceFilter);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, andFilter);
+
+        // When filtering for GC connector, the origin filter should be removed
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(gcResult).hasSize(2);
+        assertThat(gcResult.get(1)).isInstanceOf(DistanceGeocacheFilter.class);
+
+        // When filtering for OC connector, the origin filter should also be removed
+        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossibleForConnector(suConnector);
+        assertThat(ocResult).hasSize(2);
+        assertThat(ocResult.get(1)).isInstanceOf(DistanceGeocacheFilter.class);
+    }
+
+    @Test
+    public void getAndChainIfPossibleForConnectorWithComplexOrStructure() {
+        // (OriginFilter(GC) AND OwnerFilter(Owner1)) OR (OriginFilter(SU) AND OwnerFilter(Owner2))
+
+        final IConnector gcConnector = GCConnector.getInstance();
+        final IConnector suConnector = SuConnector.getInstance();
+
+        // Create first branch: (OriginFilter(GC) AND OwnerFilter(Owner1))
+        final OriginGeocacheFilter originFilter1 = new OriginGeocacheFilter();
+        originFilter1.setValues(Collections.singleton(gcConnector));
+
+        final OwnerGeocacheFilter ownerFilter1 = new OwnerGeocacheFilter();
+        ownerFilter1.getStringFilter().setTextValue("Owner1");
+
+        final AndGeocacheFilter andBranch1 = new AndGeocacheFilter();
+        andBranch1.addChild(originFilter1);
+        andBranch1.addChild(ownerFilter1);
+
+        // Create second branch: (OriginFilter(SU) AND OwnerFilter(Owner2))
+        final OriginGeocacheFilter originFilter2 = new OriginGeocacheFilter();
+        originFilter2.setValues(Collections.singleton(suConnector));
+
+        final OwnerGeocacheFilter ownerFilter2 = new OwnerGeocacheFilter();
+        ownerFilter2.getStringFilter().setTextValue("Owner2");
+
+        final AndGeocacheFilter andBranch2 = new AndGeocacheFilter();
+        andBranch2.addChild(originFilter2);
+        andBranch2.addChild(ownerFilter2);
+
+        // Combine with OR: (Branch1 OR Branch2)
+        final OrGeocacheFilter orFilter = new OrGeocacheFilter();
+        orFilter.addChild(andBranch1);
+        orFilter.addChild(andBranch2);
+
+        final GeocacheFilter filter = GeocacheFilter.create("Test", false, false, orFilter);
+
+        // When filtering for GC connector:
+        // - Branch1: OriginFilter(GC) is removed (redundant), OwnerFilter(Owner1) remains
+        // - Branch2: OriginFilter(SU) doesn't allow GC, so entire branch is kept with OriginFilter
+        // Result: OR filter with one AND branch and one OriginFilter -> no AND chain possible
+        // BUT: if Branch2 contains an OriginFilter that doesn't allow GC, the entire branch
+        // should be removed because it can't produce results for GC
+        // So we should get: just OwnerFilter(Owner1) from Branch1
+        final List<BaseGeocacheFilter> gcResult = filter.getAndChainIfPossibleForConnector(gcConnector);
+        assertThat(gcResult).hasSize(2);
+        assertThat(gcResult.get(1)).isInstanceOf(OwnerGeocacheFilter.class);
+        assertThat(((OwnerGeocacheFilter) gcResult.get(1)).getStringFilter().getTextValue()).isEqualTo("Owner1");
+
+        // When filtering for SU connector:
+        // - Branch1: OriginFilter(GC) doesn't allow OC, so entire branch should be removed
+        // - Branch2: OriginFilter(SU) is removed (redundant), OwnerFilter(Owner2) remains
+        // Result: just OwnerFilter(Owner2) from Branch2
+        final List<BaseGeocacheFilter> ocResult = filter.getAndChainIfPossibleForConnector(suConnector);
+        assertThat(ocResult).hasSize(2);
+        assertThat(ocResult.get(1)).isInstanceOf(OwnerGeocacheFilter.class);
+        assertThat(((OwnerGeocacheFilter) ocResult.get(1)).getStringFilter().getTextValue()).isEqualTo("Owner2");
+    }
 }
+
+
