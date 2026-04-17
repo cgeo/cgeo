@@ -1905,6 +1905,15 @@
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
+    <string name="coord_input_zone">Zone</string>
+    <string name="coord_input_easting">Easting</string>
+    <string name="coord_input_northing">Northing</string>
+    <string name="coord_input_x">X</string>
+    <string name="coord_input_y">Y</string>
+    <string name="coord_input_mgrs">MGRS</string>
+    <string name="coord_input_olc">Open Location Code (OLC)</string>
+    <string name="coord_input_country_loading">Resolving country…</string>
+    <string name="coord_input_country_unknown">Unknown country</string>
     <string name="hash_symbol">#</string>
 
     <!-- gpx -->

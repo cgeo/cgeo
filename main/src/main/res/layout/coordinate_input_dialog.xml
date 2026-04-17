@@ -38,6 +38,16 @@
 				android:hint="@string/longitude" />
 		</com.google.android.material.textfield.TextInputLayout>
 
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/thirdCoordinateFrame"
+			style="@style/textinput_edittext_singleline">
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/thirdCoordinate"
+				style="@style/textinput_embedded_singleline"
+				android:hint="@string/coord_input_northing"
+				android:inputType="textNoSuggestions" />
+		</com.google.android.material.textfield.TextInputLayout>
+
 		<LinearLayout
 			android:id="@+id/configurableLatitude"
 			android:layout_width="match_parent"
@@ -241,6 +251,59 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/waypoint_my_coordinates" />
+
+		<RelativeLayout
+			android:id="@+id/quickMapTargetButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="8dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="8dp"
+			android:background="@drawable/border_active"
+			android:clickable="true"
+			android:focusable="true"
+			android:padding="8dp"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/quickMapDistanceDirection"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:maxLines="1"
+				android:textColor="@color/colorText_listsSecondary"
+				android:textSize="@dimen/textSize_listsSecondary"
+				tools:text="12.4 km NW" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_toLeftOf="@id/quickMapDistanceDirection"
+				android:orientation="vertical"
+				android:paddingRight="8dp">
+
+				<TextView
+					android:id="@+id/quickMapCoordinates"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:maxLines="2"
+					android:textColor="@color/colorText_listsPrimary"
+					android:textSize="@dimen/textSize_listsPrimary"
+					tools:text="N 50° 08.030 E 008° 40.982" />
+
+				<TextView
+					android:id="@+id/quickMapCountry"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:maxLines="1"
+					android:textColor="@color/colorText_listsSecondary"
+					android:textSize="@dimen/textSize_listsSecondary"
+					tools:text="Duitsland" />
+
+			</LinearLayout>
+
+		</RelativeLayout>
 
 		<Button
 			android:id="@+id/cache"
