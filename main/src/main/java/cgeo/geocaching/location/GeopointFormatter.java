@@ -109,6 +109,26 @@ public class GeopointFormatter {
         UTM,
 
         /**
+         * Example: "32U NU 49996 00860"
+         */
+        MGRS,
+
+        /**
+         * Example: "9F4MGC2M+H4"
+         */
+        OLC,
+
+        /**
+         * Example: "LV95 E 2600072 N 1200147"
+         */
+        SWISS_GRID,
+
+        /**
+         * Example: "RD X 155000 Y 463000"
+         */
+        RD,
+
+        /**
          * Example: N48+12.345+E11+12.345
          **/
         GEOCHECKERCOM,
@@ -204,6 +224,22 @@ public class GeopointFormatter {
 
             case UTM: {
                 return UTMPoint.latLong2UTM(gp).toString();
+            }
+
+            case MGRS: {
+                return MGRSPoint.latLong2MGRS(gp).toString();
+            }
+
+            case OLC: {
+                return OpenLocationCodePoint.latLong2OLC(gp).toString();
+            }
+
+            case SWISS_GRID: {
+                return SwissGridPoint.latLong2SwissGrid(gp).toString();
+            }
+
+            case RD: {
+                return RDPoint.latLong2RD(gp).toString();
             }
 
             case GEOCHECKERCOM:

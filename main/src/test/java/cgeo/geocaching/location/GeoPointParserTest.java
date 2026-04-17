@@ -223,6 +223,34 @@ public class GeoPointParserTest {
     }
 
     @Test
+    public void testMGRS() {
+        final Geopoint reference = new Geopoint(52.520008, 13.404954);
+        final String mgrs = reference.format(GeopointFormatter.Format.MGRS);
+        assertGeopointEquals(reference, GeopointParser.parse(mgrs), 2.0f);
+    }
+
+    @Test
+    public void testOpenLocationCode() {
+        final Geopoint reference = new Geopoint(47.36559, 8.524997);
+        final String olc = reference.format(GeopointFormatter.Format.OLC);
+        assertGeopointEquals(reference, GeopointParser.parse(olc), 20.0f);
+    }
+
+    @Test
+    public void testSwissGrid() {
+        final Geopoint parsed = GeopointParser.parse("LV95 E 2600000 N 1200000");
+        final Geopoint reference = new Geopoint(46.951082877, 7.438632495);
+        assertGeopointEquals(reference, parsed, 3.0f);
+    }
+
+    @Test
+    public void testRD() {
+        final Geopoint parsed = GeopointParser.parse("RD X 155000 Y 463000");
+        final Geopoint reference = new Geopoint(52.15517440, 5.38720621);
+        assertGeopointEquals(reference, parsed, 1.0f);
+    }
+
+    @Test
     public void testZero() {
         GeopointParser.parse("00° 00.000′ 000° 00.00′");
         GeopointParser.parse("00° 00′ 00.00″ 000° 00′ 00.00″");
