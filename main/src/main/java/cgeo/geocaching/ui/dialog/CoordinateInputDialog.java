@@ -280,7 +280,7 @@ public class CoordinateInputDialog {
                     final androidx.fragment.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
                     final CalculatedCoordinate cc = new CalculatedCoordinate();
-                    cc.setType(CalculatedCoordinateType.values()[spinner.getSelectedItemPosition()]);
+                    cc.setType(getCalculatedCoordinateTypeForCurrentFormat());
 
                     //try to set patterns from GUI
                     final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
@@ -349,7 +349,14 @@ public class CoordinateInputDialog {
     private String readGui() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
+            if (StringUtils.isBlank(plainLongitude.getText())) {
+                return plainLatitude.getText().toString();
+            }
             return plainLatitude.getText().toString() + " " + plainLongitude.getText().toString();
+        }
+
+        if (isSingleInputFormat(currentFormat)) {
+            return plainLatitude.getText().toString();
         }
 
         String lat = bLatitude.getText().toString();
@@ -376,6 +383,8 @@ public class CoordinateInputDialog {
                 lat += "." + latitudeFraction.getText();
                 lon += "." + longitudeFraction.getText();
                 break;
+            default:
+                break;
         }
         return lat + " " + lon;
     }
@@ -384,23 +393,22 @@ public class CoordinateInputDialog {
     private void updateGui() {
 
         if (currentFormat.equals(Settings.CoordInputFormatEnum.Plain)) {
-            eLatFrame.setVisibility(View.VISIBLE);
-            eLonFrame.setVisibility(View.VISIBLE);
-            plainLatitude.setVisibility(View.VISIBLE);
-            plainLongitude.setVisibility(View.VISIBLE);
-            plainLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-            plainLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-            configurableLatitude.setVisibility(View.GONE);
-            configurableLongitude.setVisibility(View.GONE);
+            final Geopoint geopoint = gp != null ? gp : currentCoords();
+            showDualPlainInput(
+                    geopoint.format(GeopointFormatter.Format.LAT_DECMINUTE),
+                    geopoint.format(GeopointFormatter.Format.LON_DECMINUTE)
+            );
             return;
         }
 
-        plainLatitude.setVisibility(View.GONE);
-        plainLongitude.setVisibility(View.GONE);
-        eLatFrame.setVisibility(View.GONE);
-        eLonFrame.setVisibility(View.GONE);
-        configurableLatitude.setVisibility(View.VISIBLE);
-        configurableLongitude.setVisibility(View.VISIBLE);
+        if (isSingleInputFormat(currentFormat)) {
+            final Geopoint geopoint = gp != null ? gp : currentCoords();
+            final GeopointFormatter.Format format = getSingleInputGeopointFormat(currentFormat);
+            showSinglePlainInput(geopoint.format(format));
+            return;
+        }
+
+        showStructuredInput();
 
         if (gp != null) {
             bLatitude.setText(String.valueOf(gp.getLatDir()));
@@ -521,6 +529,79 @@ public class CoordinateInputDialog {
         }
     }
 
+    private void showDualPlainInput(final String latitudeText, final String longitudeText) {
+        eLatFrame.setVisibility(View.VISIBLE);
+        eLonFrame.setVisibility(View.VISIBLE);
+        plainLatitude.setVisibility(View.VISIBLE);
+        plainLongitude.setVisibility(View.VISIBLE);
+        plainLatitude.setText(latitudeText);
+        plainLongitude.setText(longitudeText);
+        configurableLatitude.setVisibility(View.GONE);
+        configurableLongitude.setVisibility(View.GONE);
+    }
+
+    private void showSinglePlainInput(final String coordinateText) {
+        eLatFrame.setVisibility(View.VISIBLE);
+        eLonFrame.setVisibility(View.GONE);
+        plainLatitude.setVisibility(View.VISIBLE);
+        plainLongitude.setVisibility(View.GONE);
+        plainLatitude.setText(coordinateText);
+        configurableLatitude.setVisibility(View.GONE);
+        configurableLongitude.setVisibility(View.GONE);
+    }
+
+    private void showStructuredInput() {
+        plainLatitude.setVisibility(View.GONE);
+        plainLongitude.setVisibility(View.GONE);
+        eLatFrame.setVisibility(View.GONE);
+        eLonFrame.setVisibility(View.GONE);
+        configurableLatitude.setVisibility(View.VISIBLE);
+        configurableLongitude.setVisibility(View.VISIBLE);
+    }
+
+    private static boolean isSingleInputFormat(final Settings.CoordInputFormatEnum format) {
+        switch (format) {
+            case UTM:
+            case MGRS:
+            case OLC:
+            case SwissGrid:
+            case RD:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static GeopointFormatter.Format getSingleInputGeopointFormat(final Settings.CoordInputFormatEnum format) {
+        switch (format) {
+            case UTM:
+                return GeopointFormatter.Format.UTM;
+            case MGRS:
+                return GeopointFormatter.Format.MGRS;
+            case OLC:
+                return GeopointFormatter.Format.OLC;
+            case SwissGrid:
+                return GeopointFormatter.Format.SWISS_GRID;
+            case RD:
+                return GeopointFormatter.Format.RD;
+            default:
+                return GeopointFormatter.Format.LAT_LON_DECMINUTE;
+        }
+    }
+
+    private CalculatedCoordinateType getCalculatedCoordinateTypeForCurrentFormat() {
+        switch (currentFormat) {
+            case Deg:
+                return CalculatedCoordinateType.DEGREE;
+            case Min:
+                return CalculatedCoordinateType.DEGREE_MINUTE;
+            case Sec:
+                return CalculatedCoordinateType.DEGREE_MINUTE_SEC;
+            default:
+                return CalculatedCoordinateType.PLAIN;
+        }
+    }
+
     // Following methods lifted from existing code with minimal changes
     private static String addZeros(final int value, final int len) {
 
@@ -568,6 +649,14 @@ public class CoordinateInputDialog {
                 lat = bLatitude.getText().toString() + latitudeDegree.getText() + "°" + latitudeMinutes.getText() + "'" + latitudeSeconds.getText() + "." + latitudeFraction.getText() + "\"";
                 lon = bLongitude.getText().toString() + longitudeDegree.getText() + "°" + longitudeMinutes.getText() + "'" + longitudeSeconds.getText() + "." + longitudeFraction.getText() + "\"";
                 break;
+            case UTM:
+            case MGRS:
+            case OLC:
+            case SwissGrid:
+            case RD:
+                lat = plainLatitude.getText().toString();
+                lon = "";
+                break;
             case Plain:
             default:
                 lat = plainLatitude.getText().toString();
@@ -611,7 +700,7 @@ public class CoordinateInputDialog {
 
         @Override
         public void afterTextChanged(final Editable s) {
-            if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
+            if (currentFormat == Settings.CoordInputFormatEnum.Plain || isSingleInputFormat(currentFormat)) {
                 return;
             }
 

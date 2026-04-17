@@ -22,7 +22,11 @@ public class CoordinatesFormatSwitcher {
             GeopointFormatter.Format.LAT_LON_DECMINUTE,
             GeopointFormatter.Format.LAT_LON_DECSECOND,
             GeopointFormatter.Format.LAT_LON_DECDEGREE,
-            GeopointFormatter.Format.UTM
+            GeopointFormatter.Format.UTM,
+            GeopointFormatter.Format.MGRS,
+            GeopointFormatter.Format.OLC,
+            GeopointFormatter.Format.SWISS_GRID,
+            GeopointFormatter.Format.RD
     };
 
     private int position = 0;
