@@ -329,15 +329,58 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final int fromList, final Action2<Geopoint, String> setTarget) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final int fromList, final Action2<Geopoint, String> setTarget, final boolean selectPoint) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
                 .setPosition(new Point(tapXY.x, tapXY.y - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
-                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
-                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_select_point), selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_udc), !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null && !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_coords), !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route), !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0 && !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_target), !selectPoint);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_navigate), !selectPoint);
+
+                })
+                .addItemClickListener(R.id.menu_select_point, item -> {
+                    final AtomicReference<TextView> textview = new AtomicReference<>();
+                    final AlertDialog dialog = Dialogs.newBuilder(activity)
+                            .setTitle(R.string.selected_position)
+                            .setView(R.layout.dialog_selected_position)
+                            .setPositiveButton(R.string.cancel, null)
+                            .setNegativeButton(R.string.copy_coordinates, (d, which) -> {
+                                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
+                                ViewUtils.showShortToast(activity, R.string.clipboard_copy_ok);
+                                /* finish to do */
+                                activity.finish();
+                            })
+                            .show();
+                    final TextView tv1 = dialog.findViewById(R.id.tv1);
+                    assert tv1 != null;
+                    textview.set(tv1);
+                    tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
+                    tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
+                    TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
+                    new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
+
+                    final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
+                    final float distance = longClickGeopoint.distanceTo(currentPosition);
+                    TextParam.text(Units.getDistanceFromKilometers(distance)).setImage(ImageParam.id(R.drawable.routing_straight)).setTooltip(R.string.distance).applyTo(dialog.findViewById(R.id.tv2));
+
+                    final float elevation = Routing.getElevation(longClickGeopoint);
+                    if (!Float.isNaN(elevation)) {
+                        TextParam.text(Units.formatElevation(elevation)).setImage(ImageParam.id(R.drawable.elevation)).setTooltip(R.string.elevation_selected).applyTo(dialog.findViewById(R.id.tv4));
+
+                        final float elevationCurrent = Routing.getElevation(currentPosition);
+                        if (!Float.isNaN(elevationCurrent)) {
+                            TextParam.text(Units.formatElevation(elevation - elevationCurrent)).setImage(ImageParam.id(R.drawable.height)).setTooltip(R.string.elevation_difference).applyTo(dialog.findViewById(R.id.tv3));
+                        }
+                    }
+
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))

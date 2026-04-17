@@ -125,6 +125,14 @@ public class UnifiedMapType implements Parcelable {
         fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
 
+    /** launch fresh map to select coordinates from map */
+    public void launchMapWithSelectCoordinates(final Context fromActivity) {
+        final Intent intent = getLaunchMapIntent(fromActivity);
+        intent.putExtra("SelectCoordinates", true);
+        fromActivity.startActivity(intent);
+    }
+
+
     public boolean enableLiveMap() {
         return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
     }

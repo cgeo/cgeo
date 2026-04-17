@@ -16,10 +16,12 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
@@ -246,6 +248,7 @@ public class CoordinateInputDialog {
         final Button useCacheCoordinates = binding.cache;
         final Button calculateCoordinates = binding.calculate;
         final Button copyFromClipboard = binding.clipboard;
+        final Button setFromMap = binding.map;
         final Button clearCoordinates = binding.clear;
 
         // Do noy display any option buttons if simple mode
@@ -254,12 +257,21 @@ public class CoordinateInputDialog {
             useCacheCoordinates.setVisibility(View.GONE);
             calculateCoordinates.setVisibility(View.GONE);
             copyFromClipboard.setVisibility(View.GONE);
+            setFromMap.setVisibility(View.GONE);
             clearCoordinates.setVisibility(View.GONE);
         } else {
             useCurrentLocation.setOnClickListener(v -> {
                 gp = currentCoords();
                 updateGui();
             });
+
+            // For waypoints only - option to select coordinates from map
+            if (waypointOptions == CoordinateDialogDisplayModeEnum.Waypoint) {
+                setFromMap.setVisibility(View.VISIBLE);
+                setFromMap.setOnClickListener(v -> DefaultMap.startActivitySelectCoords((Activity) context, currentCoords()));
+            } else {
+                setFromMap.setVisibility(View.GONE);
+            }
 
             if (cacheCoordinates == null) {
                 useCacheCoordinates.setVisibility(View.GONE);
