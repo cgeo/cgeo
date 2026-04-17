@@ -360,22 +360,39 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         return dir;
     }
 
-    private Uri findCreateSubdirectory(final Uri dirUri, final String dirName, final boolean createIfNotExisting) throws IOException {
+    private Uri findSubdirectoryInQuery(final Uri dirUri, final String dirName) throws IOException {
         final List<Uri> result = queryDir(dirUri, new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE}, c -> {
             if (dirName.equals(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
                 return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
             }
             return null;
-
         });
         for (Uri uri : result) {
             if (uri != null) {
                 return uri;
             }
         }
+        return null;
+    }
+
+    private Uri findCreateSubdirectory(final Uri dirUri, final String dirName, final boolean createIfNotExisting) throws IOException {
+        final Uri found = findSubdirectoryInQuery(dirUri, dirName);
+        if (found != null) {
+            return found;
+        }
         if (createIfNotExisting) {
             try {
-                return DocumentsContract.createDocument(getContext().getContentResolver(), dirUri, DocumentsContract.Document.MIME_TYPE_DIR, dirName);
+                final Uri created = DocumentsContract.createDocument(getContext().getContentResolver(), dirUri, DocumentsContract.Document.MIME_TYPE_DIR, dirName);
+                if (created != null) {
+                    // Some providers (stale cache) rename the new dir (e.g. "wherigo (1)") when the real one already exists.
+                    // If that happened, delete the duplicate and re-query to return the existing dir.
+                    final ContentStorage.FileInformation fi = getFileInfo(created, null);
+                    if (fi != null && !dirName.equals(fi.name)) {
+                        DocumentsContract.deleteDocument(getContext().getContentResolver(), created);
+                        return findSubdirectoryInQuery(dirUri, dirName);
+                    }
+                }
+                return created;
             } catch (RuntimeException re) {
                 Log.e("Could not create dir '" + dirName + "' in '" + dirUri + "'", re);
             }
