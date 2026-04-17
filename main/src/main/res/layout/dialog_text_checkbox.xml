@@ -29,4 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="-5dp"
         android:text="@string/dont_show_again" />
+
+    <Button
+        android:id="@+id/footer_message"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:visibility="gone" />
 </LinearLayout>

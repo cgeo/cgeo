@@ -134,16 +134,20 @@ public final class LocalizationUtils {
         }
     }
 
-    public static String getPlural(@PluralsRes final int pluralId, final int quantity) {
-        return getPluralWithFallback(pluralId, quantity, "thing(s)");
+    public static String getPlural(@PluralsRes final int pluralId, final int quantity, final Object... params) {
+        return getPluralWithFallback(pluralId, quantity, "thing(s)", params);
     }
 
-    public static String getPluralWithFallback(@PluralsRes final int pluralId, final int quantity, final String fallback) {
+    public static String getPluralWithFallback(@PluralsRes final int pluralId, final int quantity, final String fallback, final Object... params) {
         final Context localizationContext = getLocalizationContext();
         if (localizationContext == null) {
             return quantity + " " + fallback;
         }
-        return localizationContext.getResources().getQuantityString(pluralId, quantity, quantity);
+        if (params != null && params.length > 0) {
+            return localizationContext.getResources().getQuantityString(pluralId, quantity, params);
+        } else {
+            return localizationContext.getResources().getQuantityString(pluralId, quantity, quantity);
+        }
     }
 
     public static String getQuantityString(@PluralsRes final int resourceId, final int quantity, final Object... params) {

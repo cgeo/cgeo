@@ -373,7 +373,7 @@ public class BackupUtils {
                 removeDirs(dirs);
                 backupInternal(runAfterwards, true);
             } else {
-                Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, LocalizationUtils.getString(R.string.init_backup_backup), LocalizationUtils.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {
+                Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, LocalizationUtils.getString(R.string.init_backup_backup), LocalizationUtils.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), true, () -> {
                     removeDirs(dirs);
                     backupInternal(runAfterwards, false);
                 });

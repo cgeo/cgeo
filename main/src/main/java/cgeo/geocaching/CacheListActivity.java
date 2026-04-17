@@ -9,8 +9,8 @@ import cgeo.geocaching.apps.cachelist.CacheListAppUtils;
 import cgeo.geocaching.apps.cachelist.CacheListApps;
 import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.command.AbstractCachesCommand;
 import cgeo.geocaching.command.CopyToListCommand;
+import cgeo.geocaching.command.DeleteCachesCommand;
 import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
@@ -133,7 +133,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1333,7 +1332,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
-        new DeleteCachesFromListCommand(this, caches, listId, removeFromAllLists).execute();
+        final LastPositionHelper lastPositionHelper = new LastPositionHelper(this);
+        final Runnable onFinished = () -> lastPositionHelper.refreshListAtLastPosition(true);
+        final DeleteCachesCommand deleteCachesCommand;
+        if (removeFromAllLists || removeWillDeleteFromDevice(listId)) {
+            deleteCachesCommand = new DeleteCachesCommand(this, caches, onFinished);
+        } else {
+            deleteCachesCommand = new DeleteCachesCommand(this, caches, listId, onFinished);
+        }
+        deleteCachesCommand.showAllDialogsAndExecute();
     }
 
     private void shareGeocodes(@NonNull final Collection<Geocache> caches) {
@@ -1386,55 +1393,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static boolean removeWillDeleteFromDevice(final int listId) {
         return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
-    }
-
-    private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
-
-        private final LastPositionHelper lastPositionHelper;
-        private final int listId;
-        private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
-        private final boolean removeFromAllLists;
-
-        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId, final boolean removeFromAllLists) {
-            super(context, caches, R.string.command_delete_caches_progress);
-            this.lastPositionHelper = new LastPositionHelper(context);
-            this.listId = listId;
-            this.removeFromAllLists = removeFromAllLists;
-        }
-
-        @Override
-        public void onFinished() {
-            lastPositionHelper.refreshListAtLastPosition(true);
-        }
-
-        @Override
-        protected void doCommand() {
-            if (appliesToAllLists()) {
-                oldCachesLists.putAll(DataStore.markDropped(getCaches()));
-            } else {
-                DataStore.removeFromList(getCaches(), listId);
-            }
-        }
-
-        public boolean appliesToAllLists() {
-            return removeFromAllLists || removeWillDeleteFromDevice(listId);
-        }
-
-        @Override
-        protected void undoCommand() {
-            if (appliesToAllLists()) {
-                DataStore.addToLists(getCaches(), oldCachesLists);
-            } else {
-                DataStore.addToList(getCaches(), listId);
-            }
-        }
-
-        @Override
-        @NonNull
-        protected String getResultMessage() {
-            final int size = getCaches().size();
-            return LocalizationUtils.getPlural(R.plurals.command_delete_caches_result, size);
-        }
     }
 
     private static void clearOfflineLogs(final Handler handler, final Collection<Geocache> selectedCaches) {
