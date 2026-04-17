@@ -59,6 +59,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             Settings.putUserLanguage(newValue.toString());
             setLanguageSummary(languagePref, newValue.toString());
             CgeoApplication.getInstance().initApplicationLocale();
+            requireActivity().recreate();
+
             return true;
         });
 

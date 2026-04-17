@@ -1,15 +1,14 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ActionBarUtils;
-import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -20,10 +19,12 @@ import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
+
+import java.util.Locale;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -50,8 +51,6 @@ import io.reactivex.rxjava3.disposables.Disposable;
 
 public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
-    protected CgeoApplication app = null;
-    protected Resources res = null;
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
@@ -126,9 +125,20 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     @Override
+    protected void attachBaseContext(final Context newBase) {
+        // Apply user-selected locale to activity context
+        final Locale locale = Settings.getApplicationLocale();
+        final Configuration configuration = new Configuration(newBase.getResources().getConfiguration());
+        configuration.setLocale(locale);
+        final Context localeContext = newBase.createConfigurationContext(configuration);
+        super.attachBaseContext(localeContext);
+    }
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
-        ApplicationSettings.setLocale(this);
+
+
         try {
             super.onCreate(savedInstanceState);
         } catch (Exception e) {
@@ -149,9 +159,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             Log.e("Error requesting indeterminate progress", ex);
         }
 
-        // initialize commonly used members
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
         ActivityMixin.onCreate(this, false);
         initEdgeToEdge();
     }
