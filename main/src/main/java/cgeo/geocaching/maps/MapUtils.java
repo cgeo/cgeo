@@ -358,7 +358,7 @@ public class MapUtils {
                     tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
                     tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
                     TooltipCompat.setTooltipText(tv1, LocalizationUtils.getString(R.string.selected_position));
-                    new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
+                    new CoordinatesFormatSwitcher().setAvailableFormatCount(3).setView(textview.get()).setCoordinate(longClickGeopoint);
 
                     final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
                     final float distance = longClickGeopoint.distanceTo(currentPosition);
