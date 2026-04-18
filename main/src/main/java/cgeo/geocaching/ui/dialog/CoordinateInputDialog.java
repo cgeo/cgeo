@@ -31,7 +31,6 @@ import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.text.Editable;
@@ -278,8 +277,7 @@ public class CoordinateInputDialog {
                 hideQuickMapTargetButton();
                 return;
             }
-            disposeDialogResources();
-            dialog.dismiss();
+            // Keep this dialog in the back stack so pressing back from map returns here.
             DefaultMap.startActivityInitialCoords(context, parsedInput);
         });
 
