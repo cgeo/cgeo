@@ -368,7 +368,7 @@ public final class CacheDetailsCreator {
         }
         final TextView valueView = add(R.string.cache_coordinates, coords.toString()).valueView;
         final CoordinatesFormatSwitcher switcher = new CoordinatesFormatSwitcher();
-        switcher.setView(valueView).setCoordinate(coords).setPosition(formatPosition);
+        switcher.setAvailableFormatCount(3).setView(valueView).setCoordinate(coords).setPosition(formatPosition);
         CacheDetailsCreator.addShareAction(activity, valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
         return switcher;
     }
