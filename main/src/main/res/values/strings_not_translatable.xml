@@ -8,6 +8,11 @@
         <item>DDD.DDDDD°</item>
         <item>DDD°MM.MMM\'</item>
         <item>DDD°MM\'SS.SSS\"</item>
+        <item>Universal Transverse Mercator (UTM)</item>
+        <item>Military Grid Reference System (MGRS)</item>
+        <item>Open Location Code (OLC)</item>
+        <item>@string/waypoint_coordinate_formats_swiss_grid</item>
+        <item>@string/waypoint_coordinate_formats_rd</item>
     </string-array>
 
     <string-array translatable="false" name="init_date_format_values">
