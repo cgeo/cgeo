@@ -14,7 +14,7 @@
         android:id="@+id/toolbar"
         layout="@layout/actionbar_popup" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/details_list_box"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -73,6 +73,6 @@
                 android:text="@string/cache" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
