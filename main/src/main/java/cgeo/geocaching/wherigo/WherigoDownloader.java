@@ -11,13 +11,18 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.util.Pair;
 
@@ -95,7 +100,7 @@ public class WherigoDownloader {
         }
     }
 
-    public static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
+    private static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
 
         progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_login));
 
@@ -220,6 +225,22 @@ public class WherigoDownloader {
             errorMsg += " (c=" + completed + ", t=" + total + ")";
             success = success & (completed == total);
             return success ? StatusResult.OK : new StatusResult(StatusCode.COMMUNICATION_ERROR, errorMsg);
+    }
+
+    public static void guideManualDownload(final Context ctx, final String cguid) {
+        final String downloadUrl = DOWNLOAD + "?CGUID=" + cguid;
+        SimpleDialog.ofContext(ctx)
+            .setTitle(TextParam.id(R.string.wherigo_download_manualguide_title))
+            .setMessage(TextParam.id(R.string.wherigo_download_manualguide_text, downloadUrl, cguid).setMarkdown(true))
+            .setNeutralButton(TextParam.id(R.string.wherigo_download_manualguide_copy_cguid_to_clipboard))
+            .setButtonClickAction(which -> {
+               if (which == DialogInterface.BUTTON_NEUTRAL) {
+                   ClipboardUtils.copyToClipboard(cguid);
+                   return true;
+               }
+               return false;
+            })
+            .show();
     }
 
 
