@@ -18,6 +18,12 @@ The build uses Docker and the Android NDK to produce `.so` files for each ABI.
 git clone --recurse-submodules https://github.com/DavidVentura/offline-translator
 cd offline-translator
 
+# The bergamot subproject lives on the armv7-2 branch, not on master.
+# master's settings.gradle.kts only contains `include(":app")`, so without
+# this checkout Gradle fails with "project 'bergamot' not found in project ':app'".
+git checkout armv7-2
+git submodule update --init --recursive
+
 # Build the Docker image (one-time setup, ~20-40 min)
 docker build -t bergamot-builder .
 
