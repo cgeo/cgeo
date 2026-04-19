@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -76,8 +77,8 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
 
         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        final SwipeToOpenFragment swipeToOpenFragment = isBottomSheet ? new SwipeToOpenFragment() : null;
-        if (isBottomSheet) {
+        final SwipeToOpenFragment swipeToOpenFragment = isBottomSheet && fragment instanceof CachePopupFragment ? new SwipeToOpenFragment() : null;
+        if (isBottomSheet && swipeToOpenFragment != null) {
             ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
             ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
         } else {
@@ -86,6 +87,11 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         ft.commit();
 
         if (isBottomSheet) { // portrait mode uses BottomSheet
+            // limit content height
+            final DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            ((BottomSheetBehavior<?>) behavior).setMaxHeight((int) (displayMetrics.heightPixels * 0.7f));
+
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
             b.setHideable(true);
             b.setSkipCollapsed(false);
@@ -95,7 +101,9 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             ft.runOnCommit(() -> {
                 final View view = fragment.requireView();
                 // make bottom sheet fill whole screen
-                swipeToOpenFragment.requireView().setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+                if (swipeToOpenFragment != null) {
+                    swipeToOpenFragment.requireView().setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+                }
                 // set the height of collapsed state to height of the details fragment
                 synchronized (layoutListeners) {
                     if (layoutListeners[0] != null) {
@@ -106,28 +114,30 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 }
             });
 
-            final Activity that = this;
-            final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
-                @Override
-                public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
-                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                        sheetRemoveFragment();
+            if (swipeToOpenFragment != null) {
+                final Activity that = this;
+                final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
+                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            sheetRemoveFragment();
+                        }
+                        if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
+                            onUpSwipeAction.run();
+                            ActivityMixin.overrideTransitionToFade(that);
+                            ActivityMixin.postDelayed(() -> sheetRemoveFragment(), 500);
+                        }
                     }
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
-                        onUpSwipeAction.run();
-                        ActivityMixin.overrideTransitionToFade(that);
-                        ActivityMixin.postDelayed(() -> sheetRemoveFragment(), 500);
+
+                    @Override
+                    public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                        swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
                     }
-                }
+                };
 
-                @Override
-                public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                    swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
-                }
-            };
-
-            b.addBottomSheetCallback(callback);
-            swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
+                b.addBottomSheetCallback(callback);
+                swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
+            }
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
             b.setState(SideSheetBehavior.STATE_EXPANDED);
