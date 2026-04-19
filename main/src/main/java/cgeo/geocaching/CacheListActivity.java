@@ -1489,10 +1489,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 preventAskForDeletion = true;
             } else {
                 final StoredList list = DataStore.getList(id);
-                // list.id may be different if listId was not valid
-                if (list.id != listId) {
-                    showToast(LocalizationUtils.getString(R.string.list_not_available));
-                }
                 listId = list.id;
                 title = list.title;
                 markerId = list.markerId;
