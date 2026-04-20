@@ -22,7 +22,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
 - Nytt: Erbjud att ställa in cache-ikonen även om cachen ännu inte är lagrad
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
-- New: Display coordinates of waypoints in waypoint popup
+- Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -42,8 +42,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
 - Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
-- Fix: Incorrect handling of DNF status for opencaching platforms
-- New: Delete offline log after merge with online log
+- Fix: Felaktig hantering av DNF-status för opencaching-plattformar
+- Nytt: Ta bort offline-logg efter sammanslagning med online-logg
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -76,5 +76,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Visa ångra-fältet när cacher tas bort från listan från kartan
 - Fix: Krascher i procentuellt favoritfilter
 - Nyhet: Gör det enklare att använda enkla listor som överordnade listor
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts stay ignore language switching
+- Ändra: Använd lokal tidszon (för enheten, inte event) för kalenderposter (istället för UTC)
+- Fix: Vissa texter ignorerar språkväxling
