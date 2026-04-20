@@ -231,10 +231,12 @@
     <string name="translate_external_label">Översätt med %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Webbsida</string>
+    <string name="translate_external_variant_unavailable">Inte tillgänglig</string>
     <string name="translate_external_none">&lt;Ingen&gt;</string>
     <string name="translate_external_app">Extern app</string>
     <string name="translate_external_google">Google Översätt</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Översätt</string>
     <string name="translate_length_warning">Översättning via webbsida kan misslyckas med en stor mängd text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
@@ -1557,6 +1559,7 @@
     <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
+    <string name="cache_log_delete_reason">Orsak (max. %d tecken)</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
