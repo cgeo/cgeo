@@ -10,10 +10,22 @@ import static org.gradle.api.provider.ValueSourceParameters.None
  */
 
 
-/*
- * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
- */
-apply plugin: 'com.android.application'
+plugins {
+    // Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
+    id 'com.android.application'
+
+    // monitor our application method limit, https://github.com/KeepSafe/dexcount-gradle-plugin
+    id 'com.getkeepsafe.dexcount' version '4.0.0'
+
+    // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
+    id 'de.mobilej.unmock'
+
+    // checkstyle tasks
+    id 'checkstyle'
+
+    // PMD Static Source Code Analyzer
+    id 'pmd'
+}
 
 Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class) {}
 String commitIdShort = gitCommitIdProvider.get()
@@ -774,27 +786,15 @@ tasks.configureEach { theTask ->
     }
 }
 
-/*
- * dex counting - start it manually, when necessary
- * https://github.com/KeepSafe/dexcount-gradle-plugin
- */
-apply plugin: 'com.getkeepsafe.dexcount'
-
+// dex counting - start it manually, when necessary
 dexcount {
     format = OutputFormat.LIST
     includeClassCount = true
     includeTotalMethodCount = true
 }
 
-// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
-apply plugin: 'de.mobilej.unmock'
-
-/*
- * own checkstyle configuration
- * Android plugin doesn't interoperate with the Checkstyle plugin
- */
-apply plugin: 'checkstyle'
-
+// own checkstyle configuration
+// Android plugin doesn't interoperate with the Checkstyle plugin
 checkstyle {
     // align checkstyle with codacy (https://github.com/codacy/codacy-checkstyle)
     // - assign the checkstyle version explicitly here
@@ -823,8 +823,6 @@ tasks.register('checkstyle', Checkstyle) {
 tasks.named('check') {
     mustRunAfter tasks.named('checkstyle')
 }
-
-apply plugin: 'pmd'
 
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
