@@ -1,8 +1,10 @@
 ##
 Czas na aktualizację! Jeśli nadal używasz Androida 7 lub starszego, to może być ostatnia aktualizacja c:geo dla Ciebie! Wraz z następnym wydaniem c:geo usuniemy wsparcie dla Androida 5-7, aby zmniejszyć nasze obciążenie konserwacyjne i zaktualizować niektóre zewnętrzne komponenty używane przez c:geo, które wciąż wstrzymujemy. Wciąż będziemy wspierać Androida od wersji 8 do 16 (i nowsze wersje, kiedy zostaną opublikowane), zakres ponad ośmiu lat historii Androida.
 
+ - Zmiana: Pliki Wherigo nie mogą być obecnie pobierane, zamiast tego wyświetlana jest dokładna instrukcja
  - Naprawiono: Powód usunięcia dziennika nie wymusza ograniczenia długości
  - Nowość: Rozszerzone logowanie błędów dla awarii w menedżerze pobierania
+ - Naprawiono: Informacje o punkcie nawigacji czasami były zbyt długie, a przyciski nieosiągalne
 
 ##
 - Naprawiono: Parsowanie lokalizacji skrytki nie zawsze się udawało dla niektórych języków strony internetowej
