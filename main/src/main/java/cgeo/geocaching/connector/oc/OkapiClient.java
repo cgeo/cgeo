@@ -349,7 +349,11 @@ final class OkapiClient {
             return new SearchResult();
         }
         final GeocacheFilter filter = GeocacheFilter.createFromConfig(filterConfig);
-        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(connector);
+        if (andChainForConnector == null) {
+            return new SearchResult();
+        }
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(andChainForConnector, OriginGeocacheFilter.class);
         if (origin != null && !origin.allowsCachesOf(connector)) {
             return new SearchResult();
         }
@@ -362,19 +366,9 @@ final class OkapiClient {
     @WorkerThread
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-
-        final Geopoint searchCoords;
-        final String radius;
-
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
-        } else {
-            // search around current position by default
-            searchCoords = null;
-            radius = DEFAULT_RADIUS;
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(connector);
+        if (andChainForConnector == null) {
+            return new SearchResult();
         }
 
         //fill in the defaults
@@ -382,11 +376,19 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("limit", "" + take);
         valueMap.put("offset", "" + skip);
-        fillSearchParameterCenter(valueMap, params, searchCoords, radius);
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(andChainForConnector, DistanceGeocacheFilter.class);
+        if (df != null) {
+            final String radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
+            fillSearchParameterCenter(valueMap, params, df.getEffectiveCoordinate(), radius);
+        } else {
+            // search around current position by default
+            // fillSearchParameterCenter(valueMap, params, null, DEFAULT_RADIUS);
+        }
 
         String finder = null;
 
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
+        for (BaseGeocacheFilter baseFilter : andChainForConnector) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return new SearchResult(); //no need to search if connector is filtered out itself
             }
@@ -412,7 +414,6 @@ final class OkapiClient {
             result.setCacheData(scd);
         }
         return result;
-
     }
 
     private static void fillForBasicFilter(final BaseGeocacheFilter basicFilter, final Parameters params, final Map<String, String> valueMap, @NonNull final OCApiConnector connector) {

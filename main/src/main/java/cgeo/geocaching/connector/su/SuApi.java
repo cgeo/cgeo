@@ -163,21 +163,24 @@ public class SuApi {
     public static List<Geocache> searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final SuConnector connector) throws SuApiException {
 
         //for now we have to assume that SUConnector supports only SINGLE criteria search
+        final List<BaseGeocacheFilter> andChainForConnector = filter.getAndChainIfPossibleForConnector(connector);
+        if (andChainForConnector == null) {
+            return new ArrayList<>();
+        }
 
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
+        final OriginGeocacheFilter of = GeocacheFilter.findInChain(andChainForConnector, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
         }
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(andChainForConnector, DistanceGeocacheFilter.class);
         if (df != null) {
             return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 20f : df.getMaxRangeValue(), connector);
         }
-        final NameGeocacheFilter nf = GeocacheFilter.findInChain(filters, NameGeocacheFilter.class);
+        final NameGeocacheFilter nf = GeocacheFilter.findInChain(andChainForConnector, NameGeocacheFilter.class);
         if (nf != null && !StringUtils.isEmpty(nf.getStringFilter().getTextValue())) {
             return searchByKeyword(nf.getStringFilter().getTextValue(), connector);
         }
-        final OwnerGeocacheFilter ownf = GeocacheFilter.findInChain(filters, OwnerGeocacheFilter.class);
+        final OwnerGeocacheFilter ownf = GeocacheFilter.findInChain(andChainForConnector, OwnerGeocacheFilter.class);
         if (ownf != null && !StringUtils.isEmpty(ownf.getStringFilter().getTextValue())) {
             return searchByOwner(ownf.getStringFilter().getTextValue(), connector);
         }
