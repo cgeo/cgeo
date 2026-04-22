@@ -1,8 +1,10 @@
 ##
 Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
 
+ - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
  - Fix: Log delete reason does not enforce lengh limit
  - New: Extended logging for crashes in download manager
+ - Fix: Waypoint infosheet can become too long, buttons unreachable
 
 ##
 - Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
