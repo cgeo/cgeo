@@ -2696,6 +2696,9 @@
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
+    <string name="wherigo_download_manualguide_title">Descàrrega de cartutxos</string>
+    <string name="wherigo_download_manualguide_text">Segueix aquests passos per descarregar el cartutx i fer-lo disponible per a c:geo.\n\n**1. Descarrega el cartutx al navegador:**\n* Obre aquest [link](%1$s)\n* Segueix les instruccions per iniciar la sessió in\n* Per a l\'opció \"Descarrega el fitxer del cartutx per a\", tria \"Dispositiu Pocket PC\"\n* Toca \"Descarrega ara\"\n\n**2. Fes que el cartutx estigui disponible per a c:geo**\n* Obre la carpeta \"Descàrregues\" del teu dispositiu amb l\'aplicació Fitxers que triïs i localitza el fitxer que s\'acaba de descarregar (acaba amb .gwc)\n* Canvia el nom del fitxer perquè comenci amb el CGUID \"%2$s\" (utilitza \"Copia el CGUID al porta-retalls\" a continuació) però que encara acabi amb \".gwc\"\n* Mou el fitxer a la carpeta cgeo/wherigo\n\n**3. Torna a obrir el reproductor c:geo Wherigo pel catxé**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copia el CGUID al porta-retalls</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
     <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>
