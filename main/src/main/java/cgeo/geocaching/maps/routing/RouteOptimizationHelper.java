@@ -137,7 +137,7 @@ public class RouteOptimizationHelper {
             return;
         }
 
-        Dialogs.advancedOneTimeMessage(context, OneTimeDialogs.DialogType.ROUTE_OPTIMIZATION, LocalizationUtils.getString(R.string.route_optimization), LocalizationUtils.getString(R.string.route_optimization_info), "", true, null, () -> {
+        Dialogs.advancedOneTimeMessage(context, OneTimeDialogs.DialogType.ROUTE_OPTIMIZATION, LocalizationUtils.getString(R.string.route_optimization), LocalizationUtils.getString(R.string.route_optimization_info), true, () -> {
             final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             final TSPDialog dialog = new TSPDialog(context, executor, updateRoute);
             dialog.show();
