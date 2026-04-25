@@ -518,6 +518,14 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
     <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
+    <string name="caches_warning_delete_user_data_others">Suprimeix altres</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">El catxé %1$d/%2$d conté dades d\'usuari. Les dades d\'usuari es perdran en suprimir el catxé.</item>
+        <item quantity="other">Els catxés %1$d/%2$d tenen dades d\'usuari. Les dades d\'usuari es perdran en suprimir els catxés.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Aquesta acció eliminarà tots els catxés (%d) del dispositiu.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Elimina altres</string>
+    <string name="caches_warning_remove_caches_from_single_list">Els catxés %1$d/%2$d només són en aquesta llista. Si elimineu aquests catxés de la llista, s\'eliminaran del dispositiu.</string>
     <string name="caches_show_attributes_all">Mostra la visió general d\'atributs per a tots els catxés</string>
     <string name="caches_show_attributes_selected">Mostra la visió general d\'atributs per els catxés seleccionats</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
@@ -2381,6 +2389,11 @@
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
     <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
     <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Eliminació dels catxés</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">S\'ha eliminat el catxé %d</item>
+        <item quantity="other">S\'ha eliminat els catxés %d</item>
+    </plurals>
     <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d catxé mogut</item>
