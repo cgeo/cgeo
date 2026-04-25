@@ -1,27 +1,27 @@
 ##
 Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
 
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
- - Fix: Log delete reason does not enforce lengh limit
- - New: Extended logging for crashes in download manager
- - Fix: Waypoint infosheet can become too long, buttons unreachable
+ - Alteração: Os ficheiros Wherigo não podem ser transferidos de momento. Visualizar instruções de mitigação
+ - Correcção: O motivo da eliminação do registo não dava ênfase ao limite de comprimento
+ - Novo: Registo alargado para falhas no gestor de transferências
+ - Correcção: Informações do Ponto Adicional pode tornar-se muito longa, botões inacessíveis
 
 ##
 - Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
 - Correcção: A abertura de um TB a partir da lista de observação falhava
-- Fix: Keyboard may be blocking list selection
-- Fix: User-defined tileprovider not supporting additional URL parameters
-- Fix: Inventory / Trackables of a cache not loaded anymore
-- Change: Updated internal user-agent to address some download issues
-- Fix: Viewing trackable details removes it from cache inventory
+- Correcção: O teclado podia bloquear a seleção da lista
+- Correcção: O fornecedor de blocos definido pelo utilizador não suportava parâmetros URL adicionais
+- Correcção: Inventário / TBs (Trackables) numa cache não era(m) carregado(s)
+- Alteração: O agente de utilizador interno foi actualizado para corrigir alguns problemas de transferências
+- Correcção: visualização de detalhes do TB removia-o do inventário da cache
 
 ##
 - Correcção: Janela de transferência de tradução off-line mostrada em instalações sem suporte a tradução offline
 - Correcção: Alteração do formato das coordenadas na página de informações da cache/ponto adicional
 - Correcção: Data de registo cortada na lista de registos (dependendo do formato da data e tamanho da fonte)
 - Correcção: Horários dos eventos não eram detectados em certas condições
-- Fix: Link in listing not clickable under certain conditions
-- Fix: Logging actions for trackables get mixed up sometimes
+- Correcção: Ligação na listagem não era clicável sob certas condições
+- Correcção: Por vezes, acções de registo para TBs (trackables) ficavam misturadas
 
 ##
 - Alteração: Número máximo de rastreáveis (TB) a visitar por registo de cache reduzido para 100 (por solicitação de geocaching.com, para reduzir a carga do servidor causado por amantes de TB extremos)
