@@ -44,6 +44,8 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
 - Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
 - Nou: Suprimeix el registre fora de línia després de fusionar-lo amb el registre en línia
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
