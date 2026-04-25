@@ -186,18 +186,20 @@ public class ElevationChart {
 
         // prepare data for infobox
         final ListIterator<Entry> listIterator = entries.listIterator(entries.size());
-        Data nextData = (Data) listIterator.previous().getData();
-        if (nextData != null) {
-            final int totalDistance = (int) (100000f * distance);
-            while (listIterator.hasPrevious()) {
-                final Entry current = listIterator.previous();
-                final Data currentData = (Data) current.getData();
-                assert currentData != null;
-                currentData.upRemaining += nextData.upRemaining;
-                currentData.downRemaining += nextData.downRemaining;
-                currentData.distanceRemaining = totalDistance - currentData.distanceRemaining;
-                current.setData(currentData);
-                nextData = currentData;
+        if (listIterator.hasPrevious()) {
+            Data nextData = (Data) listIterator.previous().getData();
+            if (nextData != null) {
+                final int totalDistance = (int) (100000f * distance);
+                while (listIterator.hasPrevious()) {
+                    final Entry current = listIterator.previous();
+                    final Data currentData = (Data) current.getData();
+                    assert currentData != null;
+                    currentData.upRemaining += nextData.upRemaining;
+                    currentData.downRemaining += nextData.downRemaining;
+                    currentData.distanceRemaining = totalDistance - currentData.distanceRemaining;
+                    current.setData(currentData);
+                    nextData = currentData;
+                }
             }
         }
     }
