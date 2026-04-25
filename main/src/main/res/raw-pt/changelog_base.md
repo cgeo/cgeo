@@ -22,7 +22,7 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Novo: Permitir a importação de ficheiros KML como percursos (por exemplo: itinerário de TB)
 - Novo: Possibilidade para definir o ícone da cache mesmo que ela ainda não esteja armazenada
 - Novo: Caixa de informação para o gráfico de elevação que mostra a distância restante, a subida e a descida
-- New: Display coordinates of waypoints in waypoint popup
+- Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -40,16 +40,18 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
 - Novo: Espaços para registo de TB (nome da geocache, código da geocache, utilizador)
 - Alteração: Removida a hiperligação desactualizada do leitor WhereYouGo. O leitor Wherigo interno é agora o padrão para Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
-- Fix: Incorrect handling of DNF status for opencaching platforms
-- New: Delete offline log after merge with online log
+- Correcção: Em ausência o botão de activação/desactivação no modo guiado da calculadora de pontos adicionais
+- Novo: Agregar funções com suporte de intervalo: som/soma, min/mínimo, máx/máximo, cnt/contar, méd/média, multiplicar/produto/prod
+- Correcção: manipulação incorreta do estado de DNF para plataformas de opencaching
+- Novo: Eliminar o registo offline após junção com o registo online
+- Novo: É pedida uma confirmação ao eliminar caches com registos offline
+- Novo: É pedida uma confirmação ao eliminar todas das caches da lista "Todas as caches"
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
 - Novo: Melhorado o funcionamento dos botões
-- New: Status auto-save
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Novo: Gravação automática do estado
+- Novo: Opção de criar atalho para o módulo Wherigo no ecrã inicial do seu smartphone
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
@@ -66,15 +68,15 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
 - Novo: Pré-visualizar listas de marcadores
 - Alteração: Elevada a versão mínima necessária do Android para o Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
-- New: Make remote URI clickable in pending downloads
-- Change: Use system-settings as default theme for new installations
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
-- Fix: Crahs in percentage favorite filter
-- New: Make it easier to use simple lists as parent lists
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts stay ignore language switching
+- Novo: Botões rápidos padrão para novas instalações
+- Correcção: Títulos incompletos em caixas de inserção de dados
+- Correcção: Notificação actualização de versão noturna da variante FOSS apontava para o APK normal
+- Novo: Opção de "Ignorar ano" para filtros de datas
+- Novo: Tornar URI remoto clicável em transferências pendentes
+- Alteração: Usar definições de sistema como tema padrão para novas instalações
+- Novo: Exportação GPX: Escrita das anotações GSAK "Lat/LonBeforeCorrect" na exportação de pontos adicionais originais
+- Novo: Exibir barra de anular quando apagar caches da lista do mapa
+- Correcção: Falha ao filtrar por percentagem de favoritos
+- Novidade: Agora é mais fácil utilizar listas simples como listas principais
+- Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
+- Correcção: Alguns textos continuavam a ignorar a alteração de idioma
