@@ -44,6 +44,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
 - New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
