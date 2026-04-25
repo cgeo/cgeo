@@ -44,6 +44,8 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
 - New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo -toistin
 - New: Offline translation for Wherigos
