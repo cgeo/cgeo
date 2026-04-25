@@ -44,6 +44,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
 - Fix: Felaktig hantering av DNF-status för opencaching-plattformar
 - Nytt: Ta bort offline-logg efter sammanslagning med online-logg
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
