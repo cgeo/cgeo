@@ -234,10 +234,12 @@
     <string name="translate_external_label">Traduzir com %s</string>
     <string name="translate_external_variant_app">Aplicação</string>
     <string name="translate_external_variant_web">Página da Internet</string>
+    <string name="translate_external_variant_unavailable">Não disponível</string>
     <string name="translate_external_none">&lt;Nenhum&gt;</string>
     <string name="translate_external_app">Aplicação externa</string>
     <string name="translate_external_google">Tradutor Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Traduzir Offline com o tradutor DavidV</string>
     <string name="translate_length_warning">A tradução através da página da Internet pode falhar com grandes quantidades de texto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -515,6 +517,14 @@
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_overwrite_offline_log">Sobrescrever o registo offline</string>
     <string name="caches_overwrite_offline_log_question">A cache possui registo offline do tipo \"%1$s\" com um texto de registo. Deseja substituir este registo?</string>
+    <string name="caches_warning_delete_user_data_others">Apagar outras</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">A cache %1$d/%2$d tem dados do utilizador. Os dados do utilizador serão perdidos ao apagar a cache.</item>
+        <item quantity="other">As caches %1$d/%2$d têm dados do utilizador. Os dados do utilizador serão perdidos ao apagar as caches.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Esta acção apagará todas as caches (%d) do seu dispositivo.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Remover outras</string>
+    <string name="caches_warning_remove_caches_from_single_list">As caches %1$d/%2$d estão apenas nesta lista. Remover essas caches da lista irá apagá-las do seu dispositivo.</string>
     <string name="caches_show_attributes_all">Mostrar visão geral de atributos para todas as caches</string>
     <string name="caches_show_attributes_selected">Mostrar visão geral de atributos para caches seleccionadas</string>
     <string name="caches_set_cache_icon">Definir ícone da cache</string>
@@ -1575,6 +1585,7 @@
     <string name="menu_collapse_log">Encurtar registo</string>
     <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
+    <string name="cache_log_delete_reason">Motivo (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
@@ -1808,6 +1819,7 @@
     <string name="calccoord_select_variable">Seleccionar a Variável</string>
     <string name="calccoord_new_variable">**%s** *(Novo)*</string>
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
+    <string name="calccoord_convert_to_plain_error">A fórmula não resulta em coordenadas válidas. \nA conversão para coordenadas simples irá repor o ponto adicional para coordenadas vazias.</string>
     <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
     <string name="calccoord_remove_spaces">Remover espaços</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substituir \'x\' por \'*\'</string>
@@ -2375,6 +2387,11 @@
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adicioná-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">A remover caches</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">%d cache removida</item>
+        <item quantity="other">%d caches removidas</item>
+    </plurals>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d cache movida</item>
@@ -2741,6 +2758,9 @@
     <string name="wherigo_download_progress_started">Transferência iniciada</string>
     <string name="wherigo_download_progress_download_status">Transferido %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Por favor, inicie a sessão em www.wherigo.com e primeiro aceite os termos e condições</string>
+    <string name="wherigo_download_manualguide_title">Transferência do Cartucho</string>
+    <string name="wherigo_download_manualguide_text">Siga estes passos para transferir o Cartucho e disponibilizá-lo para o c:geo.\n\n**1. Transferir o cartucho no navegador:**\n* Abrir este [link](%1$s)\n* Seguir as instruções para iniciar a sessão\n* Para a opção \"Transferir ficheiro do cartucho para\", escolha \"Pocket PC Device\"\n* Toque em \"Transferir agora\"\n\n**2. Tornar o cartucho disponível para o c:geo**\n* Abra a pasta \"Transferências\" do seu dispositivo, com um explorador de ficheiros à sua escolha e localize o ficheiro acabado de transferir (termina em .gwc)\n* Renomear o ficheiro para que comece com CGUID \"%2$s\" (use \"Copiar CGUID para área de transferência\" abaixo), certificando que termina com \".gwc\"\n* Mover o ficheiro para a pasta cgeo/wherigo\n\n**3. Reabrir o leitor Wherigo do c:geo para a cache**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copiar CGUID para a área de transferência</string>
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor do Wherigo:\n\n```\n%1$s\n```\nPode contactar o autor do cartucho [aqui](%2$s)</string>
