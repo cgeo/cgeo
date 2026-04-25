@@ -44,6 +44,8 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Souhrnné funkce s podporou rozsahu: add/součet, min/minimum, max/maximum, cnt/počet, avg/průměr, multiply/součin/pro
 - Oprava: Nesprávné zpracování stavu DNF pro platformy opencaching
 - New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
