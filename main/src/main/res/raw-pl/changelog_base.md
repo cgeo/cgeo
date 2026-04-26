@@ -79,4 +79,5 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Awarie w filtrowaniu ulubionych wg procentów
 - Nowość: Łatwiejsze korzystanie z prostych list jako list nadrzędnych
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
-- Naprawiono: Niektóre teksty ignorowały zmianę języka
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
