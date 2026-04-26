@@ -79,4 +79,5 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Correcção: Falha ao filtrar por percentagem de favoritos
 - Novidade: Agora é mais fácil utilizar listas simples como listas principais
 - Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
-- Correcção: Alguns textos continuavam a ignorar a alteração de idioma
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
