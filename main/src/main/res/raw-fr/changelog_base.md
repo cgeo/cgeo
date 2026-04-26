@@ -79,4 +79,5 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Fix: Crahs in percentage favorite filter
 - New: Make it easier to use simple lists as parent lists
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts stay ignore language switching
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
