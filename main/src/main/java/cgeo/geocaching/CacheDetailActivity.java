@@ -1316,7 +1316,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (savedInstanceState != null) {
-                coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+                coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
+            } else {
+                coordinateFormatPosition = Settings.getCoordDisplayFormat();
             }
         }
 
@@ -2433,7 +2435,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             holder.setCoordinate(coordinates);
             // Set saved coordinate format position for this waypoint
             final int waypointId = wpt.getId();
-            final int formatPosition = waypointCoordinateFormatPositions.getOrDefault(waypointId, 0);
+            final int formatPosition = waypointCoordinateFormatPositions.getOrDefault(waypointId, Settings.getCoordDisplayFormat());
             holder.setCoordinateFormatPosition(formatPosition);
             // Listen for format changes and save them
             holder.setOnCoordinateFormatChangedListener(position -> waypointCoordinateFormatPositions.put(waypointId, position));

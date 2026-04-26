@@ -979,6 +979,10 @@ public class Settings {
         putInt(R.string.pref_coordinputformat, format.ordinal());
     }
 
+    public static int getCoordDisplayFormat() {
+        return getIntFromString(R.string.pref_coorddisplayformat, 0);
+    }
+
     public static boolean getLogOffline() {
         return getBoolean(R.string.pref_log_offline, false);
     }

@@ -75,7 +75,9 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         res = getResources();
         setHasOptionsMenu(true);
         if (savedInstanceState != null) {
-            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, 0);
+            coordinateFormatPosition = savedInstanceState.getInt(STATE_COORDINATE_FORMAT_POSITION, Settings.getCoordDisplayFormat());
+        } else {
+            coordinateFormatPosition = Settings.getCoordDisplayFormat();
         }
     }
 
