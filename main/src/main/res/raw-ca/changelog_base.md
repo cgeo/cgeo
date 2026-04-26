@@ -79,4 +79,5 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Correcció: Error en el filtre de percentatge de preferits
 - Nou: Facilita l'ús de llistes simples com a llistes principals
 - Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
-- Correcció: Alguns textos romanen ignorant el canvi d'idioma
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
