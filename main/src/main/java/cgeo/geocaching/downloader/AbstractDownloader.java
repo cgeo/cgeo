@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
@@ -36,8 +37,20 @@ public abstract class AbstractDownloader {
     public static final int ICONRES_FOLDER = R.drawable.downloader_folder;
 
     AbstractDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
+        this(
+                offlineMapType,
+                mapBase == 0 ? Uri.parse("") : Uri.parse(/* LocalizationUtils.getPlainString(mapBase) */ LocalizationUtils.getString(mapBase)),
+                mapSourceName,
+                mapSourceInfo,
+                projectUrl,
+                likeItUrl,
+                targetFolder
+        );
+    }
+
+    AbstractDownloader(final Download.DownloadType offlineMapType, final Uri mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;
-        this.mapBase = mapBase == 0 ? Uri.parse("") : Uri.parse(CgeoApplication.getInstance().getString(mapBase));
+        this.mapBase = mapBase;
         this.mapSourceName = mapSourceName == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceName);
         this.mapSourceInfo = mapSourceInfo == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceInfo);
         this.projectUrl = projectUrl == 0 ? "" : CgeoApplication.getInstance().getString(projectUrl);
