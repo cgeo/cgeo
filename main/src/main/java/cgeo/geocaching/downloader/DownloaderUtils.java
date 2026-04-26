@@ -30,6 +30,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_LANGUAGE_MODEL;
@@ -98,6 +99,7 @@ public class DownloaderUtils {
     public static void checkForRoutingTileUpdates(final MainActivity activity) {
         if (Settings.useInternalRouting() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, DOWNLOADTYPE_BROUTER_LOOKUPS, R.string.updates_check, R.string. tileupdate_info, null);
         }
     }
 
@@ -290,12 +292,14 @@ public class DownloaderUtils {
      * if yes: ask user to download them all
      * if yes: trigger download(s)
      */
-    public static void checkForUpdatesAndDownloadAll(final MainActivity activity, final int layout, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
+    public static void checkForUpdatesAndDownloadAll(final MainActivity activity, final int layout, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, @Nullable final Action1<Boolean> callback) {
         activity.displayActionItem(layout, info, true, (actionRequested) -> {
             if (actionRequested) {
                 new CheckForDownloadsTask(activity, title, type).execute();
             }
-            callback.call(actionRequested);
+            if (callback != null) {
+                callback.call(actionRequested);
+            }
         });
     }
 
