@@ -79,4 +79,5 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Fix: Krascher i procentuellt favoritfilter
 - Nyhet: Gör det enklare att använda enkla listor som överordnade listor
 - Ändra: Använd lokal tidszon (för enheten, inte event) för kalenderposter (istället för UTC)
-- Fix: Vissa texter ignorerar språkväxling
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
