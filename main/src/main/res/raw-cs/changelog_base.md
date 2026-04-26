@@ -79,4 +79,5 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Oprava: Pád aplikace při použití filtru podle procentuální obliby
 - Novinka: Usnadnění používání jednoduchých seznamů jako nadřazených seznamů
 - Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
-- Fix: Some texts stay ignore language switching
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
