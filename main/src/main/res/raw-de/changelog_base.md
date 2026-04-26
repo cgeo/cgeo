@@ -79,4 +79,5 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Korrektur: Absturz in Prozentsatz Favoritenfilter
 - Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts stay ignore language switching
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
