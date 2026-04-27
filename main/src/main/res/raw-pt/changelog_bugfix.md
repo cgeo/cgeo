@@ -1,10 +1,14 @@
 ##
-Altura de actualizar! Se ainda estiver a usar o Android 7 ou mais antigo, esta pode ser a última actualização do c:geo para si! Com a nossa próxima versão do c:geo, deixaremos o suporte para o Android 5–7 para reduzir a carga de manutenção e para podermos actualizar alguns componentes externos usados pelo c:geo que ainda mantemos, no momento. Ainda suportaremos o Android 8 até ao Android 16 (e versões mais recentes, quando forem publicadas), um período de mais de oito anos de história do Android.
+Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
  - Alteração: Os ficheiros Wherigo não podem ser transferidos de momento. Visualizar instruções de mitigação
  - Correcção: O motivo da eliminação do registo não dava ênfase ao limite de comprimento
  - Novo: Registo alargado para falhas no gestor de transferências
  - Correcção: Informações do Ponto Adicional pode tornar-se muito longa, botões inacessíveis
+ - Fix: Some location info gets truncated
+ - Fix: Internal routing no longer working, only straight line shown
+
+Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
 
 ##
 - Correcção: A análise da localização da cache falha, para determinados idiomas do sítio web
