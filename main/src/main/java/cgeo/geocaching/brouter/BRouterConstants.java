@@ -10,6 +10,7 @@ public class BRouterConstants {
     public static final String BROUTER_PROFILE_ELEVATION_ONLY = "dummy.brf";
 
     public static final String BROUTER_TILE_FILEEXTENSION = ".rd5";
+    public static final String BROUTER_LOOKUPS_FILEEXTENSION = ".dat";
 
     public static final String PROFILE_PARAMTERKEY = "internal_routing_profile";
 

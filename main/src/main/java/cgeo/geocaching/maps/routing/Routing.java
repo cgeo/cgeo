@@ -315,7 +315,7 @@ public final class Routing {
 
         // other error
         if (!gpx.startsWith("<?xml")) {
-            Log.w("brouter returned an error message: " + gpx);
+            Log.e("brouter returned an error message: " + gpx);
             return null;
         }
 

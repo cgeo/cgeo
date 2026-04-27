@@ -14,10 +14,11 @@ public class GCConstantsTest {
 
     @Test
     public void testLocation() {
-        // GC37GFJ
-        assertThat(parseLocation("<meta name=\"description\" content=\"Tintin et la trilogie du Névet : Pas si fous !!! (GC37GFJ) was created by yandens on 12/10/2011. It&#39;s a Large size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Bretagne, France.&#13;&#10; &#13;&#10;&#13;&#10;Générique Tintin&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ATTENTION : LES COORDONNEES DE LA PAGE NE SONT PAS LESCOORDONNEES REELES. LISEZ BIEN L&#39;ENIGME...\" />")).isEqualTo("Bretagne, France");
+        // GCBNA5C
+        assertThat(parseLocation("<title>GCBNA5C \uD83C\uDFA3  Angel  \uD83C\uDFA3  Cache  \uD83C\uDFA3 (Traditional Cache) in St. Gallen, Switzerland created by rokleg</title>")).isEqualTo("St. Gallen, Switzerland");
         // GCV2R9
-        assertThat(parseLocation("<meta name=\"description\" content=\"Burrowing Owls (GCV2R9) was created by caliseastar on 03/26/2006. It&#39;s a Micro size geocache, with difficulty of 1, terrain of 1. It&#39;s located in California, United States.This cache is located along a paved path in Shoreline park. Nearest&#13;&#10;parking is about half a mile away, but the cache is easily&#13;&#10;accessible by bike, rollerblade, stroller, or wheelchair. Park is&#13;&#10;open from dawn to dusk.\" />")).isEqualTo("California, United States");
+        assertThat(parseLocation("<title>GCV2R9 Burrowing Owls (Traditional Cache) in California, United States created by caliseastar</title>")).isEqualTo("California, United States");
+        assertThat(parseLocation("<title>GC123 Name (with brackets))) in stuff (Traditional Cache) in California, United States created by caliseastar</title>")).isEqualTo("California, United States");
     }
 
     private static String parseLocation(final String html) {

@@ -541,6 +541,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
         } else if (id == R.id.menu_update_routingdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_LOOKUPS, R.string.updates_check, updateCheckAllowed -> { });
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
         } else if (id == R.id.menu_download_language) {
