@@ -5,6 +5,10 @@ Time to update! If you are still using Android 7 or older, this might be the las
  - Fix: Log delete reason does not enforce lengh limit
  - New: Extended logging for crashes in download manager
  - Fix: Waypoint infosheet can become too long, buttons unreachable
+ - Fix: Some location info gets truncated
+ - Fix: Internal routing no longer working, only straight line shown
+
+Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
 
 ##
 - Fix: Parsing cache location string fails for certain website languages
