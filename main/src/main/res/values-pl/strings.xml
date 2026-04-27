@@ -521,6 +521,16 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_overwrite_offline_log">Nadpisz dziennik offline</string>
     <string name="caches_overwrite_offline_log_question">Skrytka ma istniejący dziennik offline typu \"%1$s\" z wpisem. Czy chcesz nadpisać ten wpis?</string>
+    <string name="caches_warning_delete_user_data_others">Usuń inne</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d skrytka ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytki.</item>
+        <item quantity="few">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="many">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="other">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">To działanie usunie wszystkie skrytki (%d) z twojego urządzenia.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Usuń inne</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d skrytek jest tylko na tej liście. Usunięcie tych skrytek z listy usunie je z twojego urządzenia.</string>
     <string name="caches_show_attributes_all">Pokaż przegląd atrybutów dla wszystkich skrytek</string>
     <string name="caches_show_attributes_selected">Pokaż przegląd atrybutów dla wybranych skrytek</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
@@ -2423,6 +2433,13 @@
     <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
     <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
     <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Usuwanie skrytek</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Usunięto %d skrytkę</item>
+        <item quantity="few">Usunięto %d skrytki</item>
+        <item quantity="many">Usunięto %d skrytek</item>
+        <item quantity="other">Usunięto %d skrytek</item>
+    </plurals>
     <string name="command_move_caches_progress">Przenoszę skrytki do listy %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrytkę</item>
