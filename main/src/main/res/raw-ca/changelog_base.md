@@ -44,8 +44,8 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Funcions agregades amb suport per rangs: sumar/suma, mín./mínim, màx./màxim, cnt./recompte, mitjana/mitjana, multiplicar/producte/prod.
 - Correcció: Gestió incorrecta de l'estat DNF per a plataformes opencaching
 - Nou: Suprimeix el registre fora de línia després de fusionar-lo amb el registre en línia
-- New: Show confirmation when deleting caches with offline logs
-- New: Show confirmation when deleting all caches from "All" list
+- Nou: Mostra la confirmació en suprimir els catxés amb registres fora de línia
+- Nou: Mostra la confirmació en suprimir tots els catxés de la llista "Tot"
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
@@ -79,5 +79,5 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Correcció: Error en el filtre de percentatge de preferits
 - Nou: Facilita l'ús de llistes simples com a llistes principals
 - Canvi: Utilitza la zona horària local (del dispositiu, no de l'esdeveniment) per a les entrades del calendari (en lloc de l'UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Correcció: Alguns textos ignoren el canvi d'idioma
+- Correcció: "Utilitza la configuració imperial" no s'inicialitza correctament en instal·lacions noves
