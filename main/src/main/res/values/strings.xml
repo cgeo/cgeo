@@ -1914,7 +1914,7 @@
     <string name="coord_input_country_loading">Resolving country…</string>
     <string name="coord_input_country_unknown">Unknown country</string>
     <string name="hash_symbol">#</string>
-    <string name="waypoint_coordinate_formats_swiss_grid">Swiss Grid (CH1903+)</string>
+    <string name="waypoint_coordinate_formats_swiss_grid">Swiss Grid</string>
     <string name="waypoint_coordinate_formats_rd">Dutch Grid (RD)</string>
 
     <!-- gpx -->
