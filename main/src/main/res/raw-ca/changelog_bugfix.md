@@ -1,14 +1,14 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
  - Canvi: Actualment no es poden descarregar els fitxers de Wherigo, mostreu les instruccions de mitigació
  - Correcció: El motiu de l'eliminació del registre no aplica el límit de longitud
  - Nou: Registre ampliat per a errors al gestor de descàrregues
  - Correcció: El full d'informació dels punts de referència pot arribar a ser massa llarg i els botons són inaccessibles
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
+ - Correcció: Alguna informació d'ubicació es trunca
+ - Correcció: L'encaminament intern ja no funciona, només es mostra la línia recta
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+Nota: Si feu servir l'encaminament intern, haureu d'executar el pas següent un cop instal·lat aquesta versió: Aneu a la pantalla d'inici de c:geo, obriu "Gestiona dades fora de línia" - "Actualitza dades d'encaminament" i deixeu que c:geo instal·li els fitxers actualitzats. (Motiu: L'estructura del fitxer de dades d'encaminament de BRouter ha canviat i tots els fitxers de dades d'encaminament han de complir la mateixa versió.)
 
 ##
 - Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
