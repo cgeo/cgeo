@@ -506,6 +506,14 @@
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
     <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
+    <string name="caches_warning_delete_user_data_others">Ta bort andra</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d cacher har användardata. Användardata försvinner när cachen tas bort.</item>
+        <item quantity="other">%1$d/%2$d cacher har användardata. Användardata försvinner när cacherna tas bort.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Denna åtgärd kommer att ta bort alla cacher (%d) från din enhet.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Ta bort andra</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d cacher finns bara på denna lista. Borttagning av dessa cacher från listan kommer att ta bort dem från din enhet.</string>
     <string name="caches_show_attributes_all">Visa attributöversikt för alla cacher</string>
     <string name="caches_show_attributes_selected">Visa attributöversikt för valda cacher</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
@@ -2357,6 +2365,11 @@
     <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
     <string name="do_not_ask_me_again">Fråga mig inte igen</string>
     <string name="geokrety_parsing_failed">Förstod inte svaret från GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Tar bort cacher</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Tog bort %d cache</item>
+        <item quantity="other">Tog bort %d cacher</item>
+    </plurals>
     <string name="command_move_caches_progress">Flytta cacher till listan %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Flyttade %d cache</item>
@@ -2688,6 +2701,7 @@
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiera CGUID till urklipp</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
