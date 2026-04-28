@@ -883,6 +883,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
+        final Geocache targetCache = getCurrentTargetCache();
+        if (targetCache != null) {
+            menu.findItem(R.id.menu_hint).setVisible(StringUtils.isNotEmpty(targetCache.getHint()));
+        } else {
+            menu.findItem(R.id.menu_hint).setVisible(false);
+        }
+
         // init followMyLocation
         initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
 
@@ -990,6 +997,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     mapFragment.getViewport().filter(caches));
             new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
+        } else if (id == R.id.menu_hint) {
+            final Geocache targetCache = getCurrentTargetCache();
+            final String targetHint = targetCache != null ? targetCache.getHint() : LocalizationUtils.getString(R.string.cache_hint_not_available);
+            this.showToast(targetHint);
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
