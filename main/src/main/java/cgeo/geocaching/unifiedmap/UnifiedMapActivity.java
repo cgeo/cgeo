@@ -21,6 +21,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.maps.MapUtils;
@@ -891,6 +892,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
+        final Geocache targetCache = getCurrentTargetCache();
+        if (targetCache != null) {
+            menu.findItem(R.id.menu_log_visit).setVisible(targetCache.supportsLogging() && !Settings.getLogOffline());
+            menu.findItem(R.id.menu_log_visit_offline).setVisible(targetCache.supportsLogging() && Settings.getLogOffline());
+        } else {
+            menu.findItem(R.id.menu_log_visit).setVisible(false);
+            menu.findItem(R.id.menu_log_visit_offline).setVisible(false);
+        }
+
+
         // init followMyLocation
         initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
 
@@ -1047,11 +1058,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 Settings.setPreviousTileProvider(tileProvider);
                 changeMapSource(tileProviderLocal);
             }
+
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
-            } else {
-                return super.onOptionsItemSelected(item);
+            } else if (viewModel.mapType.type == UMTT_TargetGeocode) {
+                if (LoggingUI.isMenuItemSelected(item)) {
+                    final Geocache targetCache = getCurrentTargetCache();
+                    if (targetCache != null) {
+                        return LoggingUI.onMenuItemSelected(item, this, targetCache, null);
+                    }
+                }
             }
+            return super.onOptionsItemSelected(item);
         }
         MenuUtils.tintToolbarAndOverflowIconsAndTitles(toolbarMenu);
         return true;
