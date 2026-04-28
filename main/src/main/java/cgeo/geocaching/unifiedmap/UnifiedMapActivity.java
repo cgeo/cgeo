@@ -1006,7 +1006,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_hint) {
             final Geocache targetCache = getCurrentTargetCache();
             final String targetHint = targetCache != null ? targetCache.getHint() : LocalizationUtils.getString(R.string.cache_hint_not_available);
-            this.showToast(targetHint);
+            if (targetHint.length() < 100) {
+                this.showToast(targetHint);
+            } else {
+                SimpleDialog.ofContext(this).setTitle(R.string.cache_hint).setMessage(TextParam.text(targetHint)).show();
+            }
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
