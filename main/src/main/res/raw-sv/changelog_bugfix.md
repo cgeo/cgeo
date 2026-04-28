@@ -1,10 +1,10 @@
 ##
 Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
- - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
+ - Ändra: Wherigo-filer kan inte laddas ner för närvarande, visa instruktioner för åtgärder
  - Fix: Orsak till radering av logg upprätthåller inte längdgräns
  - Nytt: Utökad loggning för krascher i nedladdningshanteraren
- - Fix: Waypoint infosheet can become too long, buttons unreachable
+ - Fix: Waypoint infosheet kan bli för lång, knappar oåtkomliga
 
 ##
 - Fix: Tolkning av cache-platssträng misslyckas för vissa språk på webbplatsen
