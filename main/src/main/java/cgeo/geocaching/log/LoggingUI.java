@@ -72,7 +72,7 @@ public final class LoggingUI {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, @NonNull final Geocache cache, final DialogInterface.OnDismissListener listener) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_log_visit) {
             cache.logVisitForResult(activity, REQUEST_CODE_LOG);

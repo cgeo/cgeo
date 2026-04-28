@@ -19,6 +19,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.maps.MapUtils;
@@ -886,9 +887,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final Geocache targetCache = getCurrentTargetCache();
         if (targetCache != null) {
             menu.findItem(R.id.menu_hint).setVisible(StringUtils.isNotEmpty(targetCache.getHint()));
+            menu.findItem(R.id.menu_log_visit).setVisible(targetCache.supportsLogging() && !Settings.getLogOffline());
+            menu.findItem(R.id.menu_log_visit_offline).setVisible(targetCache.supportsLogging() && Settings.getLogOffline());
         } else {
             menu.findItem(R.id.menu_hint).setVisible(false);
+            menu.findItem(R.id.menu_log_visit).setVisible(false);
+            menu.findItem(R.id.menu_log_visit_offline).setVisible(false);
         }
+
 
         // init followMyLocation
         initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
@@ -1042,8 +1048,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 Settings.setPreviousTileProvider(tileProvider);
                 changeMapSource(tileProviderLocal);
             }
+
+            final Geocache targetCache = getCurrentTargetCache();
+
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
+            } else if (targetCache != null && LoggingUI.onMenuItemSelected(item, this, targetCache, null)) {
+                return true; // to satisfy static code analysis
             } else {
                 return super.onOptionsItemSelected(item);
             }
