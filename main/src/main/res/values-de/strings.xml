@@ -234,10 +234,12 @@
     <string name="translate_external_label">Übersetze mit %s</string>
     <string name="translate_external_variant_app">App</string>
     <string name="translate_external_variant_web">Webseite</string>
+    <string name="translate_external_variant_unavailable">Nicht verfügbar</string>
     <string name="translate_external_none">&lt;Keine&gt;</string>
     <string name="translate_external_app">Externe App</string>
     <string name="translate_external_google">Google Übersetzer</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">DavidV Offline Übersetzer</string>
     <string name="translate_length_warning">Die Übersetzung über eine Webseite kann bei langen Texten evtl. fehlschlagen.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -1575,6 +1577,7 @@
     <string name="menu_collapse_log">Log einklappen</string>
     <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
+    <string name="cache_log_delete_reason">Grund (max. %d Zeichen)</string>
     <string name="cache_log_delete_reason_default">Log wurde mit c:geo gelöscht</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -2735,6 +2738,8 @@
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
     <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
     <string name="wherigo_download_accept_eula">Bitte logge dich auf www.wherigo.com ein und akzeptiere zuerst deren Allgemeine Geschäftsbedingungen</string>
+    <string name="wherigo_download_manualguide_text">Führe folgende Schritte durch, um die Cartridge herunterzuladen und in c:geo verfügbar zu machen:\n\n**1. Lade die Cartridge im Browser herunter:**\n* Öffne diesen [Link](%1$s)\n* Folge den Anweisungen zum Einloggen\n* Wähle \"Pocket PC Device\" in \"Download cartridge file for\"\n* Wähle \"Download Now\"\n\n**2 Cartridge für c:geo verfügbar machen**\n* Öffne den \"Download\"-Ordner Deines Geräts mit einer Dateimanager App deiner Wahl und suche die gerade heruntergeladene Datei (Name endet auf .gwc)\n* Benenne die Datei um, so dass sie mit CGUID \"%2$s\" beginnt (verwendet \"Kopiere CGUID in Zwischenablage\" unten) und mit \".gwc\" endet\n* Verschiebe die Datei in den cgeo/wherigo Ordner\n\n**3. Öffne c:geo Wherigo Player für diesen Cache**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiere CGUID in Zwischenablage</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
     <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```\nDu kannst den Autor der Cartridge [hier](%2$s) kontaktieren</string>
