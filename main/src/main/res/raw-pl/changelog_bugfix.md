@@ -7,6 +7,7 @@ Time to update! If you are still using Android 7 or older, this might be the las
  - Naprawiono: Informacje o punkcie nawigacji czasami były zbyt długie, a przyciski nieosiągalne
  - Fix: Some location info gets truncated
  - Fix: Internal routing no longer working, only straight line shown
+ - Fix: Some folder creation issues
 
 Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
 
