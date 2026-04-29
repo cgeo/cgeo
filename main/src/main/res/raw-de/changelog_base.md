@@ -22,7 +22,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
 - Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
 - Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
-- New: Display coordinates of waypoints in waypoint popup
+- Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -42,8 +42,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
-- Fix: Incorrect handling of DNF status for opencaching platforms
-- New: Delete offline log after merge with online log
+- Korrektur: Falsche Behandlung des DNF-Status für Opencaching-Plattformen
+- Neu: Lösche das Offline-Log nach dem Zusammenführen mit dem Online-Log
 - New: Show confirmation when deleting caches with offline logs
 - New: Show confirmation when deleting all caches from "All" list
 
@@ -78,6 +78,6 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"
 - Korrektur: Absturz in Prozentsatz Favoritenfilter
 - Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
-- Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
+- Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
 - Fix: Some texts ignore language switching
 - Fix: "Use imperial settings" not initialized correctly on fresh installs
