@@ -364,7 +364,7 @@ dependencies {
     implementation 'com.github.moving-bits:dbinspection:v0.1.2'
 
     // Jackson XML processing
-    String jacksonVersion = '2.21.2'
+    String jacksonVersion = '2.21.3'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
