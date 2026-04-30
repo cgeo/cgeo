@@ -1,6 +1,17 @@
 ##
 Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies möglicherweise das letzte c:geo Update für dich! Mit unserem nächsten Feature Release von c:geo werden wir die Unterstützung für Android 5-7 einstellen, um unseren Wartungsaufwand zu reduzieren und einige von c:geo verwendete externe Komponenten aktualisieren zu können, die wir derzeit noch zurückhalten. Wir werden dann weiterhin Android 8 bis Android 16 unterstützen (und neuere Versionen, wenn sie veröffentlicht werden), was mehr als acht Jahre Android-Geschichte umfasst.
 
+ - Änderung: Wherigo-Dateien können momentan nicht heruntergeladen werden, zeige Umgehungslösung an
+ - Korrektur: Grund für das Löschen von Logs erzwingt keine Längenbegrenzung
+ - Neu: Erweitertes Logging für Abstürze im Download-Manager
+ - Korrektur: Wegpunktpopup kann zu lang werden, Buttons nicht erreichbar
+ - Korrektur: Bestimmte Standortinformationen werden abgeschnitten
+ - Korrektur: Internes Routing funktioniert nicht mehr, nur gerade Linie angezeigt
+ - Korrektur: Probleme beim Erstellen von Ordnern
+
+Hinweis: Wenn du das interne Routing verwendest, führe nach der Installation dieser Version einmalig folgenden Schritt aus: Gehe zum c:geo Startbildschirm, öffne "Offline-Daten verwalten" - "Routingdaten aktualisieren" und lass c:geo die Updates installieren. (Grund: BRouter Routing Datenstruktur hat sich geändert und alle Routing-Datendateien müssen der gleichen Version entsprechen.)
+
+##
 - Korrektur: Erkennung der Cacheregion schlägt bei manchen Website-Sprachen fehl
 - Korrektur: Öffnen von Trackables aus der Watchlist schlägt fehl
 - Korrektur: Die Tastatur blockiert ggf. die Listenauswahl

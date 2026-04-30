@@ -1560,6 +1560,7 @@
     <string name="menu_collapse_log">Encurtar registo</string>
     <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
+    <string name="cache_log_delete_reason">Motivo (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
@@ -2715,6 +2716,9 @@
     <string name="wherigo_download_progress_started">Transferência iniciada</string>
     <string name="wherigo_download_progress_download_status">Transferido %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Por favor, inicie a sessão em www.wherigo.com e primeiro aceite os termos e condições</string>
+    <string name="wherigo_download_manualguide_title">Transferência do Cartucho</string>
+    <string name="wherigo_download_manualguide_text">Siga estes passos para transferir o Cartucho e disponibilizá-lo para o c:geo.\n\n**1. Transferir o cartucho no navegador:**\n* Abrir este [link](%1$s)\n* Seguir as instruções para iniciar a sessão\n* Para a opção \"Transferir ficheiro do cartucho para\", escolha \"Pocket PC Device\"\n* Toque em \"Transferir agora\"\n\n**2. Tornar o cartucho disponível para o c:geo**\n* Abra a pasta \"Transferências\" do seu dispositivo, com um explorador de ficheiros à sua escolha e localize o ficheiro acabado de transferir (termina em .gwc)\n* Renomear o ficheiro para que comece com CGUID \"%2$s\" (use \"Copiar CGUID para área de transferência\" abaixo), certificando que termina com \".gwc\"\n* Mover o ficheiro para a pasta cgeo/wherigo\n\n**3. Reabrir o leitor Wherigo do c:geo para a cache**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copiar CGUID para a área de transferência</string>
     <string name="wherigo_error_title">Relatório de problemas Wherigo</string>
     <string name="wherigo_error_game_noerror">Nenhum erro indicado pelo motor do Wherigo.</string>
     <string name="wherigo_error_game_error">Erro reportado pelo motor do Wherigo:\n\n```\n%1$s\n```\nPode contactar o autor do cartucho [aqui](%2$s)</string>
