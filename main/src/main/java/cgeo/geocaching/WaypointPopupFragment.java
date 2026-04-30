@@ -191,7 +191,8 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
     @Override
     public void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(getActivity(), null, waypoint, null);
+        ViewUtils.setEnabled(requireView().findViewById(R.id.menu_navigate), false);
+        NavigationAppFactory.showNavigationMenu(getActivity(), null, waypoint, null, true, true, R.id.menu_navigate);
     }
 
     @Override
