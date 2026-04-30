@@ -1,13 +1,13 @@
-Edge to Edge: Due to Play Store policies we have updated the Android API level this version of c:geo targets + we have changed some of the screen layout routines. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
+De ponta a ponta: Devido às políticas da Play Store, actualizámos o nível API do Android nesta versão dos alvos do c:geo e alterámos algumas das rotinas de esquema do ecrã. Isto pode trazer alguns efeitos colaterais indesejados, especialmente nas versões mais recentes do Android. Se tiver algum problema com esta versão do c:geo, por favor informe em [GitHub](https://github.com/cgeo/cgeo) ou por e-mail para [support@cgeo.org](mailto:support@cgeo.org)
 
-Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have finally removed the legacy implementations for our maps. You will be switched to our new UnifiedMap automatically and should notice no differences except a couple of new features, some of which are
+Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, finalmente removemos as implementações antigas para os nossos mapas. O seu mapa será alterado automaticamente para o nosso novo Mapa Unificado e não deverá notar diferenças, excepto algumas das novas funcionalidades, algumas das quais são
 - Rotação do mapa para mapas baseados em OpenStreetMap (online e offline)
 - Janela pendente de agrupamento para o Google Maps
 - Ocultar fontes de mapa de que não precisa
 - Gráfico de altitude para rotas e percursos
 - Alternar entre listas directamente do mapa
 - "Modo de condução" para mapas baseados no OpenStreetMap
-- Long-tap on track / individual route for further options
+- Toque longo no percurso / rota individual para mais opções
 
 ### Mapa
 - Novo: Optimização de rota armazena dados calculados
@@ -17,9 +17,12 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Novo: Transferência de caches ordenadas por distância
 - Correcção: duplicação de pontos individuais da rota
 - Novo: Suporte para o tema Motorider (apenas VTM)
-- New: NoMap tile provider (don't show map, just caches etc.)
-- Change: Max distance to connect points on history track lowered to 500m (configurable)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Novo: Tipo de mapas: Sem Mapa (não mostra mapa, apenas caches etc.)
+- Alteração: Distância máxima para conectar pontos no histórico do percurso reduzido para 500m (configurável)
+- Novo: Permitir a importação de ficheiros KML como percursos (por exemplo: itinerário de TB)
+- Novo: Possibilidade para definir o ícone da cache mesmo que ela ainda não esteja armazenada
+- Novo: Caixa de informação para o gráfico de elevação que mostra a distância restante, a subida e a descida
+- Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
@@ -35,16 +38,20 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Novo: Visualização de variáveis pode ser filtrada
 - Novo: Visualizar coordenadas calculadas que excedem os limites na lista de pontos adicionais
 - Novo: Opção de marcar alguns tipos de pontos adicionais como visitados na lista de pontos adicionais
-- New: Placeholders for trackable logging (geocache name, geocache code, user)
-- Change: Removed the link to outdated WhereYouGo player. Integrated Wherigo player is now default for Wherigos.
-- Fix: Missing quick toggle in guided mode of waypoint calculator
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Novo: Espaços para registo de TB (nome da geocache, código da geocache, utilizador)
+- Alteração: Removida a hiperligação desactualizada do leitor WhereYouGo. O leitor Wherigo interno é agora o padrão para Wherigos.
+- Correcção: Em ausência o botão de activação/desactivação no modo guiado da calculadora de pontos adicionais
+- Novo: Agregar funções com suporte de intervalo: som/soma, min/mínimo, máx/máximo, cnt/contar, méd/média, multiplicar/produto/prod
+- Correcção: manipulação incorreta do estado de DNF para plataformas de opencaching
+- Novo: Eliminar o registo offline após junção com o registo online
+- Novo: É pedida uma confirmação ao eliminar caches com registos offline
+- Novo: É pedida uma confirmação ao eliminar todas das caches da lista "Todas as caches"
 
 ### Wherigo
 - Novo: Tradução offline para Wherigos
 - Novo: Melhorado o funcionamento dos botões
-- New: Status auto-save
-- New: Option to create shortcout to Wherigo player on your mobile's home screen
+- Novo: Gravação automática do estado
+- Novo: Opção de criar atalho para o módulo Wherigo no ecrã inicial do seu smartphone
 
 ### Geral
 - Novo: Opção de partilhar depois de registar uma cache
@@ -61,11 +68,16 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Novo: Selecção de múltiplas listas de favoritos / pocket queries para transferência
 - Novo: Pré-visualizar listas de marcadores
 - Alteração: Elevada a versão mínima necessária do Android para o Android 8
-- New: Default quick buttons for new installations
-- Fix: Titles in range input dialogs cut off
-- Fix: Notification for nightly update points to regular APK even for FOSS variant
-- New: "Ignore year" option for date filters
-- New: Make remote URI clickable in pending downloads
-- Change: Use system-settings as default theme for new installations
-- New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
-- New: Show undo bar when deleting caches from list from map
+- Novo: Botões rápidos padrão para novas instalações
+- Correcção: Títulos incompletos em caixas de inserção de dados
+- Correcção: Notificação actualização de versão noturna da variante FOSS apontava para o APK normal
+- Novo: Opção de "Ignorar ano" para filtros de datas
+- Novo: Tornar URI remoto clicável em transferências pendentes
+- Alteração: Usar definições de sistema como tema padrão para novas instalações
+- Novo: Exportação GPX: Escrita das anotações GSAK "Lat/LonBeforeCorrect" na exportação de pontos adicionais originais
+- Novo: Exibir barra de anular quando apagar caches da lista do mapa
+- Correcção: Falha ao filtrar por percentagem de favoritos
+- Novidade: Agora é mais fácil utilizar listas simples como listas principais
+- Alteração: Usar fuso horário local (do dispositivo, não do evento) para entradas do calendário (em vez de UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs

@@ -234,10 +234,12 @@
     <string name="translate_external_label">Tradueix amb %s</string>
     <string name="translate_external_variant_app">Applicació</string>
     <string name="translate_external_variant_web">Lloc web</string>
+    <string name="translate_external_variant_unavailable">No disponible</string>
     <string name="translate_external_none">&lt;Cap&gt;</string>
     <string name="translate_external_app">Aplicació externa</string>
     <string name="translate_external_google">Google Translate</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Traductor fora de línia DavidV</string>
     <string name="translate_length_warning">La traducció a través del lloc web pot fallar amb una gran quantitat de text.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
@@ -516,6 +518,14 @@
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
     <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
+    <string name="caches_warning_delete_user_data_others">Suprimeix altres</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">El catxé %1$d/%2$d conté dades d\'usuari. Les dades d\'usuari es perdran en suprimir el catxé.</item>
+        <item quantity="other">Els catxés %1$d/%2$d tenen dades d\'usuari. Les dades d\'usuari es perdran en suprimir els catxés.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">Aquesta acció eliminarà tots els catxés (%d) del dispositiu.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Elimina altres</string>
+    <string name="caches_warning_remove_caches_from_single_list">Els catxés %1$d/%2$d només són en aquesta llista. Si elimineu aquests catxés de la llista, s\'eliminaran del dispositiu.</string>
     <string name="caches_show_attributes_all">Mostra la visió general d\'atributs per a tots els catxés</string>
     <string name="caches_show_attributes_selected">Mostra la visió general d\'atributs per els catxés seleccionats</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
@@ -1576,6 +1586,7 @@
     <string name="menu_collapse_log">Redueix el registre</string>
     <string name="cache_log_menu_delete">Suprimeix el registre</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
+    <string name="cache_log_delete_reason">Motiu (màx. %d caràcters)</string>
     <string name="cache_log_delete_reason_default">El registre s\'ha suprimit amb c:geo</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
@@ -1809,6 +1820,7 @@
     <string name="calccoord_select_variable">Selecciona una variable</string>
     <string name="calccoord_new_variable">**%s** *(Nou)*</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_convert_to_plain_error">La fórmula no s\'avalua en coordenades vàlides.\nLa conversió a coordenades planes restablirà el punt de referència a coordenades buides.</string>
     <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina espais</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Substitueix \"x\" per \"*\"</string>
@@ -2377,6 +2389,11 @@
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
     <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
     <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Eliminació dels catxés</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">S\'ha eliminat el catxé %d</item>
+        <item quantity="other">S\'ha eliminat els catxés %d</item>
+    </plurals>
     <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d catxé mogut</item>
@@ -2743,6 +2760,9 @@
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Inicieu sessió a www.wherigo.com i accepteu primer els seus termes i condicions</string>
+    <string name="wherigo_download_manualguide_title">Descàrrega de cartutxos</string>
+    <string name="wherigo_download_manualguide_text">Segueix aquests passos per descarregar el cartutx i fer-lo disponible per a c:geo.\n\n**1. Descarrega el cartutx al navegador:**\n* Obre aquest [link](%1$s)\n* Segueix les instruccions per iniciar la sessió in\n* Per a l\'opció \"Descarrega el fitxer del cartutx per a\", tria \"Dispositiu Pocket PC\"\n* Toca \"Descarrega ara\"\n\n**2. Fes que el cartutx estigui disponible per a c:geo**\n* Obre la carpeta \"Descàrregues\" del teu dispositiu amb l\'aplicació Fitxers que triïs i localitza el fitxer que s\'acaba de descarregar (acaba amb .gwc)\n* Canvia el nom del fitxer perquè comenci amb el CGUID \"%2$s\" (utilitza \"Copia el CGUID al porta-retalls\" a continuació) però que encara acabi amb \".gwc\"\n* Mou el fitxer a la carpeta cgeo/wherigo\n\n**3. Torna a obrir el reproductor c:geo Wherigo pel catxé**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copia el CGUID al porta-retalls</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
     <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
     <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```\nPodeu contactar amb l\'autor del cartutx [aquí](%2$s)</string>

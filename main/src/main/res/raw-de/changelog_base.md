@@ -20,6 +20,9 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: "Keine Karte"-Kartenauswahl (zeigt keine Karte, nur Caches etc.)
 - Änderung: Maximale Distanz zum Verbinden von Punkten im Positionsverlauf auf 500m gesenkt (konfigurierbar)
 - Neu: Importieren von KML-Dateien als Tracks (z. B.: Trackable Route)
+- Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
+- Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
+- Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -39,6 +42,10 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Link zum veralteten WhereYouGo Player entfernt. Verwende standardmäßig integrierten Player für Wherigos.
 - Korrektur: Fehlender Umschalter im geführten Modus des Wegpunktrechners
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Korrektur: Falsche Behandlung des DNF-Status für Opencaching-Plattformen
+- Neu: Lösche das Offline-Log nach dem Zusammenführen mit dem Online-Log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
@@ -69,3 +76,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Änderung: Systemeinstellung als Standard-Design für neue Installationen verwenden
 - Neu: GPX-Export: GSAK Lat/LonBeforeCorrect Tag beim Export von Original-Wegpunkten ergänzt
 - Neu: Undo-Leiste beim Löschen von Caches aus "Liste von Karte"
+- Korrektur: Absturz in Prozentsatz Favoritenfilter
+- Neu: Einfache Listen einfacher als übergeordnete Listen nutzen
+- Änderung: Lokale Zeitzone (des Geräts, nicht des Events) für Kalendereinträge verwenden (anstelle von UTC)
+- Korrektur: Einige Texte ignorieren den Sprachwechsel
+- Korrektur: "Imperiale Einheiten verwenden" nicht korrekt initialisiert bei neuen Installationen

@@ -20,6 +20,9 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nyhet: NoMap tile provider (visa inte karta, bara cacher osv.)
 - Förändring: Max avstånd för att ansluta punkter på historikspår sänkt till 500m (konfigurerbart)
 - Nyhet: Tillåt import av KML-filer som spår (t.ex. spårbar resväg)
+- Nytt: Erbjud att ställa in cache-ikonen även om cachen ännu inte är lagrad
+- New: Infobox for elevation chart showing remaining distance, ascent, descent
+- Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -39,6 +42,10 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Förändring: Länken till föråldrad WhereYouGo-spelare borttagen. Integrerad Wherigo-spelare är nu standard för Wherigos.
 - Fix: Saknar snabbväxling i styrt läge av vägpunkt-kalkylatorn
 - Nyhet: Aggregerade funktioner med intervallstöd: add/sum, min/minimum, max/maximum, cnt/count, avg/genomsnitt, multiply/product/prod
+- Fix: Felaktig hantering av DNF-status för opencaching-plattformar
+- Nytt: Ta bort offline-logg efter sammanslagning med online-logg
+- Nyhet: Visa bekräftelse vid borttagning av cacher med offlineloggar
+- Nyhet: Visa bekräftelse när du tar bort alla cacher från listan "Alla"
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
@@ -69,3 +76,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Ändring: Använd systeminställningar som standardtema för nya installationer
 - New: GPX export: Write GSAK Lat/LonBeforeCorrect annotations when exporting original waypoints
 - Nytt: Visa ångra-fältet när cacher tas bort från listan från kartan
+- Fix: Krascher i procentuellt favoritfilter
+- Nyhet: Gör det enklare att använda enkla listor som överordnade listor
+- Ändra: Använd lokal tidszon (för enheten, inte event) för kalenderposter (istället för UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs

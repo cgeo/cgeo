@@ -234,10 +234,12 @@
     <string name="translate_external_label">Przetłumacz z %s</string>
     <string name="translate_external_variant_app">Aplikacja</string>
     <string name="translate_external_variant_web">Strona www</string>
+    <string name="translate_external_variant_unavailable">Niedostępne</string>
     <string name="translate_external_none">&lt;Brak&gt;</string>
     <string name="translate_external_app">Aplikacja zewnętrzna</string>
     <string name="translate_external_google">Tłumacz Google</string>
     <string name="translate_external_deepl">DeepL</string>
+    <string name="translate_external_davidv">Tłumaczenie offline DavidV</string>
     <string name="translate_length_warning">Tłumaczenie przez stronę www może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
@@ -519,6 +521,16 @@
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_overwrite_offline_log">Nadpisz dziennik offline</string>
     <string name="caches_overwrite_offline_log_question">Skrytka ma istniejący dziennik offline typu \"%1$s\" z wpisem. Czy chcesz nadpisać ten wpis?</string>
+    <string name="caches_warning_delete_user_data_others">Usuń inne</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="one">%1$d/%2$d skrytka ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytki.</item>
+        <item quantity="few">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="many">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+        <item quantity="other">%1$d/%2$d skrytek ma dane użytkownika. Te dane zostaną utracone po usunięciu skrytek.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">To działanie usunie wszystkie skrytki (%d) z twojego urządzenia.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Usuń inne</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d skrytek jest tylko na tej liście. Usunięcie tych skrytek z listy usunie je z twojego urządzenia.</string>
     <string name="caches_show_attributes_all">Pokaż przegląd atrybutów dla wszystkich skrytek</string>
     <string name="caches_show_attributes_selected">Pokaż przegląd atrybutów dla wybranych skrytek</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
@@ -1605,6 +1617,7 @@
     <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
+    <string name="cache_log_delete_reason">Powód (maks. %d znaków)</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -1840,6 +1853,7 @@
     <string name="calccoord_select_variable">Wybierz zmienną</string>
     <string name="calccoord_new_variable">**%s** *(Nowa)*</string>
     <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
+    <string name="calccoord_convert_to_plain_error">Wzór nie ocenia prawidłowych współrzędnych.\nKonwersja na współrzędne zwykłe zresetuje punkt nawigacji do pustych współrzędnych.</string>
     <string name="calccoord_plain_tools_title">Zwykłe narzędzia</string>
     <string name="calccoord_remove_spaces">Usuń spacje</string>
     <string name="calccoord_replace_x_with_multiplication_symbol">Zastąp „x” znakiem „*”</string>
@@ -2419,6 +2433,13 @@
     <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
     <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
     <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
+    <string name="command_remove_caches_from_list_progress">Usuwanie skrytek</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="one">Usunięto %d skrytkę</item>
+        <item quantity="few">Usunięto %d skrytki</item>
+        <item quantity="many">Usunięto %d skrytek</item>
+        <item quantity="other">Usunięto %d skrytek</item>
+    </plurals>
     <string name="command_move_caches_progress">Przenoszę skrytki do listy %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrytkę</item>
@@ -2803,6 +2824,9 @@
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Zaloguj się najpierw na www.wherigo.com i zaakceptuj ich warunki i postanowienia</string>
+    <string name="wherigo_download_manualguide_title">Pobieranie kartridża</string>
+    <string name="wherigo_download_manualguide_text">Wykonaj poniższe kroki, aby pobrać kartridż i udostępnić go dla c:geo.\n\n**1. Pobierz kartridż w przeglądarce:**\n* Otwórz ten [link](%1$s)\n* Postępuj zgodnie z instrukcjami, aby zalogować się w\n* Aby uzyskać opcję „Pobierz plik kartridża dla”, wybierz „Pocket PC Device”\n* Naciśnij „Download Now”\n\n**2. Udostępnij kartridż dla c:geo**\n* Otwórz folder „Pobierz” w wybranym menedżerze plików i zlokalizuj pobrany plik (kończy się .gwc)\n* Zmień nazwę pliku, aby zaczyna się od CGUID \"%2$s\" (użyj „Kopiuj CGUID do schowka” poniżej), ale aby wciąż miała rozszerzenie „.gwc”\n* Przenieś plik do folderu cgeo/wherigo\n\n**3. Otwórz ponownie c:geo Wherigo Player dla skrytki**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiuj CGUID do schowka</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>

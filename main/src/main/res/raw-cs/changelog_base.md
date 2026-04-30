@@ -19,7 +19,10 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Podpora motivu Motorider (pouze VTM)
 - Novinka: Poskytovatel dlaždic NoMap (nezobrazovat mapu, jen kešky atd.)
 - Změna: Maximální vzdálenost pro propojení bodů na historii trasy snížena na 500m (konfigurovatelné)
-- New: Allow importing KML files as tracks (eg: trackable itinerary)
+- Novinka: Možnost importovat soubory KML jako trasy (např. trasu s možností sledování)
+- Novinka: Nabídka nastavení ikony kešky i v případě, že keška ještě není uložena
+- Novinka: Infobox pro výškový graf zobrazující zbývající vzdálenost, stoupající, klesající
+- Novinka: Zobrazení souřadnic trasových bodů ve vyskakovacím okně trasového bodu
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -38,7 +41,11 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Zástupné symboly pro zápis sledovatelných předmětů (název kešky, kód kešky, uživatel)
 - Změna: Odstraněn odkaz na zastaralý přehrávač WhereYouGo. Integrovaný přehráč Wherigo je nyní výchozí pro Wherigo kešky.
 - Oprava: Chybějící rychlé přepínání v režimu průvodce kalkulátoru trasových bodů
-- New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
+- Novinka: Souhrnné funkce s podporou rozsahu: add/součet, min/minimum, max/maximum, cnt/počet, avg/průměr, multiply/součin/pro
+- Oprava: Nesprávné zpracování stavu DNF pro platformy opencaching
+- New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
@@ -69,3 +76,8 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Změna: Použít nastavení systému jako výchozí téma pro nové instalace
 - Novinka: Export GPX: Při exportu původních trasových bodů zapisujte poznámky GSAK Lat/LonBeforeCorrect
 - Novinka: Zobrazit lištu pro vrácení zpět při mazání kešek ze seznamu na mapě
+- Oprava: Pád aplikace při použití filtru podle procentuální obliby
+- Novinka: Usnadnění používání jednoduchých seznamů jako nadřazených seznamů
+- Změna: Pro položky v kalendáři používat místní časové pásmo (zařízení, nikoli události) (namísto UTC)
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs
