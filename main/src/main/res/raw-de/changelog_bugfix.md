@@ -7,7 +7,7 @@ Zeit zum Aktualisieren! Wenn du noch Android 7 oder älter verwendest, ist dies 
  - Korrektur: Wegpunktpopup kann zu lang werden, Buttons nicht erreichbar
  - Korrektur: Bestimmte Standortinformationen werden abgeschnitten
  - Korrektur: Internes Routing funktioniert nicht mehr, nur gerade Linie angezeigt
- - Fix: Some folder creation issues
+ - Korrektur: Probleme beim Erstellen von Ordnern
 
 Hinweis: Wenn du das interne Routing verwendest, führe nach der Installation dieser Version einmalig folgenden Schritt aus: Gehe zum c:geo Startbildschirm, öffne "Offline-Daten verwalten" - "Routingdaten aktualisieren" und lass c:geo die Updates installieren. (Grund: BRouter Routing Datenstruktur hat sich geändert und alle Routing-Datendateien müssen der gleichen Version entsprechen.)
 
