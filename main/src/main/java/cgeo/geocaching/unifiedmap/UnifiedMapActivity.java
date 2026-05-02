@@ -884,17 +884,35 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
-        final Geocache targetCache = getCurrentTargetCache();
-        if (targetCache != null) {
-            menu.findItem(R.id.menu_hint).setVisible(StringUtils.isNotEmpty(targetCache.getHint()));
-            menu.findItem(R.id.menu_log_visit).setVisible(targetCache.supportsLogging() && !Settings.getLogOffline());
-            menu.findItem(R.id.menu_log_visit_offline).setVisible(targetCache.supportsLogging() && Settings.getLogOffline());
-        } else {
-            menu.findItem(R.id.menu_hint).setVisible(false);
-            menu.findItem(R.id.menu_log_visit).setVisible(false);
-            menu.findItem(R.id.menu_log_visit_offline).setVisible(false);
-        }
+        // Avoid blocking UI thread by not calling DataStore.loadCache() directly here.
+        // Instead load cache data asynchronously if a target geocode is set and
+        // update menu items on the UI thread when the load completes.
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
+        final MenuItem hintItem = menu.findItem(R.id.menu_hint);
+        final MenuItem logVisitItem = menu.findItem(R.id.menu_log_visit);
+        final MenuItem logVisitOfflineItem = menu.findItem(R.id.menu_log_visit_offline);
+        hintItem.setVisible(false);
+        logVisitItem.setVisible(false);
+        logVisitOfflineItem.setVisible(false);
 
+        if (target != null && StringUtils.isNotBlank(target.geocode)) {
+            // hide until we know the cache details
+            final String geocode = target.geocode;
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.loadCacheTexts(geocode), cache -> {
+                // ensure target did not change while we were loading
+                final UnifiedMapViewModel.Target currentTarget = viewModel.target.getValue();
+                if (currentTarget == null || !Strings.CS.equals(currentTarget.geocode, geocode)) {
+                    return;
+                }
+                if (cache != null) {
+                    hintItem.setVisible(StringUtils.isNotEmpty(cache.getHint()));
+                    final boolean supportsLogging = cache.supportsLogging();
+                    logVisitItem.setVisible(supportsLogging && !Settings.getLogOffline());
+                    logVisitOfflineItem.setVisible(supportsLogging && Settings.getLogOffline());
+                }
+                MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
+            });
+        }
 
         // init followMyLocation
         initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
@@ -903,7 +921,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
-
 
         // map rotation state
         final int mapRotation = Settings.getMapRotation();
@@ -1049,12 +1066,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 changeMapSource(tileProviderLocal);
             }
 
-            final Geocache targetCache = getCurrentTargetCache();
-
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
-            } else if (targetCache != null && LoggingUI.onMenuItemSelected(item, this, targetCache, null)) {
-                return true; // to satisfy static code analysis
+            } else if (viewModel.mapType.type == UMTT_TargetGeocode) {
+                final Geocache targetCache = getCurrentTargetCache();
+                if (targetCache != null && LoggingUI.onMenuItemSelected(item, this, targetCache, null)) {
+                    return true; // to satisfy static code analysis
+                } else {
+                    return super.onOptionsItemSelected(item);
+                }
             } else {
                 return super.onOptionsItemSelected(item);
             }
