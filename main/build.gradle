@@ -370,7 +370,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.22.1'
+    implementation 'org.jsoup:jsoup:1.22.2'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
