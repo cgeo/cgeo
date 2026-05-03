@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class OsmTrack {
-    static final String version = "1.7.5";
 
     // csv-header-line
     public MatchedWaypoint endPoint;
