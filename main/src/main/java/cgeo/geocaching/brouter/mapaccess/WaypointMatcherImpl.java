@@ -28,13 +28,24 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     private boolean anyUpdate;
     private int lonLast;
     private int latLast;
+    boolean useAsStartWay = true;
+    private final int maxWptIdx;
+    private double maxDistance;
+    public boolean useDynamicRange = false;
 
     private final Comparator<MatchedWaypoint> comparator;
 
-    public WaypointMatcherImpl(final List<MatchedWaypoint> waypoints, final double maxDistance, final OsmNodePairSet islandPairs) {
+    public WaypointMatcherImpl(final List<MatchedWaypoint> waypoints, double maxDistance, final OsmNodePairSet islandPairs) {
         this.waypoints = waypoints;
         this.islandPairs = islandPairs;
         MatchedWaypoint last = null;
+        this.maxDistance = maxDistance;
+        if (maxDistance < 0.) {
+            this.maxDistance *= -1;
+            maxDistance *= -1;
+            useDynamicRange = true;
+        }
+
         for (MatchedWaypoint mwp : waypoints) {
             mwp.radius = maxDistance;
             if (last != null && mwp.directionToNext == -1) {
@@ -49,6 +60,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
         } else {
             last.directionToNext = CheapAngleMeter.getDirection(last.waypoint.ilon, last.waypoint.ilat, waypoints.get(lastidx).waypoint.ilon, waypoints.get(lastidx).waypoint.ilat);
         }
+        maxWptIdx = waypoints.size() - 1;
 
         // sort result list
         comparator = Comparator.comparingDouble((MatchedWaypoint mw) -> mw.radius).thenComparingDouble(mw -> mw.directionDiff);
@@ -72,9 +84,13 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
 
         //for ( MatchedWaypoint mwp : waypoints )
         for (int i = 0; i < waypoints.size(); i++) {
+            if (!useAsStartWay && i == 0) {
+                continue;
+            }
             final MatchedWaypoint mwp = waypoints.get(i);
 
-            if (mwp.direct && (i == 0 || waypoints.get(i - 1).direct)) {
+            if (mwp.wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT &&
+                    (i == 0 || waypoints.get(i - 1).wpttype == MatchedWaypoint.WAYPOINT_TYPE_DIRECT)) {
                 if (mwp.crosspoint == null) {
                     mwp.crosspoint = new OsmNode();
                     mwp.crosspoint.ilon = mwp.waypoint.ilon;
@@ -135,7 +151,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
     }
 
     @Override
-    public boolean start(final int ilonStart, final int ilatStart, final int ilonTarget, final int ilatTarget) {
+    public boolean start(int ilonStart, int ilatStart, int ilonTarget, int ilatTarget, boolean useAsStartWay) {
         if (islandPairs.size() > 0) {
             final long n1 = ((long) ilonStart) << 32 | ilatStart;
             final long n2 = ((long) ilonTarget) << 32 | ilatTarget;
@@ -150,6 +166,7 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
         lonTarget = ilonTarget;
         latTarget = ilatTarget;
         anyUpdate = false;
+        this.useAsStartWay = useAsStartWay;
         return true;
     }
 
@@ -219,6 +236,16 @@ public final class WaypointMatcherImpl implements WaypointMatcher {
         }
     }
 
+    @Override
+    public boolean hasMatch(int lon, int lat) {
+        for (MatchedWaypoint mwp : waypoints) {
+            if (mwp.waypoint.ilon == lon && mwp.waypoint.ilat == lat &&
+                    (mwp.radius < this.maxDistance || mwp.crosspoint != null)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // check limit of list size (avoid long runs)
     void updateWayList(List<MatchedWaypoint> ways, MatchedWaypoint mw) {

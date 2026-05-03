@@ -13,7 +13,10 @@ assign   allow_steps              = true   # %allow_steps% | Set false to disall
 assign   allow_ferries            = true   # %allow_ferries% | Set false to disallow ferries | boolean
 assign   ignore_cycleroutes       = false  # %ignore_cycleroutes% | Set true for better elevation results | boolean
 assign   stick_to_cycleroutes     = false  # %stick_to_cycleroutes% | Set true to just follow cycleroutes | boolean
+assign   use_proposed_cycleroutes = false  # %use_proposed_cycleroutes% | Set to true to consider proposed and regular cycleroutes as equals | boolean
 assign   avoid_unsafe             = false  # %avoid_unsafe% | Set true to avoid standard highways | boolean
+
+assign   add_beeline              = false  # %add_beeline% | Enable beeline on distant start/end points | boolean
 
 assign   consider_noise           = false  # %consider_noise% | Activate to prefer a low-noise route | boolean
 assign   consider_river           = false  # %consider_river% | Activate to prefer a route along rivers, lakes, etc. | boolean
@@ -47,6 +50,10 @@ assign turnInstructionCatchingRange = 40    # %turnInstructionCatchingRange% | W
 assign turnInstructionRoundabouts   = true  # %turnInstructionRoundabouts% | Set "false" to avoid generating special turning instructions for roundabouts | boolean
 assign considerTurnRestrictions     = true  # %considerTurnRestrictions% | Set true to take turn restrictions into account | boolean
 
+# with engine defaults, long parts of routing to via points may be removed
+assign correctMisplacedViaPoints = false # %correctMisplacedViaPoints% | Set to true to remove detours due to via points (going back and forth on the same route) | boolean
+assign correctMisplacedViaPointsDistance = 400 # %correctMisplacedViaPointsDistance% | Only remove detours shorter than this (one-way) distance (in m) (engine defaults to 0 which removes detours whatever their length) | number
+
 assign processUnusedTags            = false # %processUnusedTags% | Set true to output unused tags in data tab | boolean
 
 ---context:way   # following code refers to way-tags
@@ -60,10 +67,17 @@ assign classifier_ferry = 2
 #
 
 assign any_cycleroute =
+  if not use_proposed_cycleroutes then
      if      route_bicycle_icn=yes then true
      else if route_bicycle_ncn=yes then true
      else if route_bicycle_rcn=yes then true
      else if route_bicycle_lcn=yes then true
+     else false
+  else
+     if      route_bicycle_icn=yes|proposed then true
+     else if route_bicycle_ncn=yes|proposed then true
+     else if route_bicycle_rcn=yes|proposed then true
+     else if route_bicycle_lcn=yes|proposed then true
      else false
 
 assign nodeaccessgranted =
@@ -74,9 +88,17 @@ assign is_ldcr =
      if ignore_cycleroutes then false
      else any_cycleroute
 
-assign isbike = or bicycle_road=yes or bicycle=yes or or bicycle=permissive bicycle=designated lcn=yes
-assign ispaved = surface=paved|asphalt|concrete|paving_stones|sett
-assign isunpaved = not or surface= or ispaved surface=fine_gravel|cobblestone
+# set isbike considering access, local cycle route or the presence of a cycleway on the highway
+assign hasbikerouteoraccess =
+       or bicycle_road=yes or cyclestreet=yes or bicycle=yes|permissive|designated lcn=yes
+
+assign hascycleway = not
+  and ( or cycleway= cycleway=no|none ) and ( or cycleway:left= cycleway:left=no ) and ( or cycleway:right= cycleway:right=no ) ( or cycleway:both= cycleway:both=no )
+
+assign isbike = or hasbikerouteoraccess hascycleway
+
+assign ispaved = or surface=paved|asphalt|concrete|paving_stones|sett smoothness=excellent|good
+assign isunpaved = not or ispaved or ( and surface= smoothness= ) or surface=fine_gravel|cobblestone smoothness=intermediate|bad
 assign probablyGood = or ispaved and ( or isbike highway=footway ) not isunpaved
 
 
@@ -133,19 +155,19 @@ assign bikeaccess =
 # calculate logical foot access
 #
 assign footaccess =
-       if bikeaccess then true
-       else if bicycle=dismount then true
+       if bicycle=dismount then true
        else if foot= then defaultaccess
-       else not foot=private|no
+       else not foot=private|no|use_sidepath
 
 #
-# if not bike-, but foot-acess, just a moderate penalty,
+# if not bike-, but foot-access, just a moderate penalty,
 # otherwise access is forbidden
 #
 assign accesspenalty =
        if bikeaccess then 0
        else if footaccess then 4
        else if any_cycleroute then 15
+       else if bicycle=use_sidepath then 25
        else 10000
 
 #
@@ -153,7 +175,8 @@ assign accesspenalty =
 # be close to forbidden, while on other ways we just add
 # 4 to the costfactor (making it at least 5 - you are allowed
 # to push your bike)
-#
+
+# are we against legal direction on a oneway?
 assign badoneway =
        if reversedirection=yes then
          if oneway:bicycle=yes then true
@@ -164,12 +187,22 @@ assign badoneway =
 assign onewaypenalty =
        if ( badoneway ) then
        (
-         if      ( cycleway=opposite|opposite_lane|opposite_track       ) then 0
-         else if ( cycleway:left=opposite|opposite_lane|opposite_track  ) then 0
-         else if ( cycleway:right=opposite|opposite_lane|opposite_track ) then 0
+         if (
+           and hascycleway
+           or and cycleway:left=lane|track|shared_lane|share_busway
+                  cycleway:left:oneway=no|-1
+           or and cycleway:right=lane|track|shared_lane|share_busway
+                  cycleway:right:oneway=no|-1
+           or and cycleway:both=lane|track|shared_lane|share_busway
+                  #or cycleway:both:oneway=no|-1
+                  or cycleway:left:oneway=no|-1
+                     cycleway:right:oneway=no|-1
+           or cycleway=opposite|opposite_lane|opposite_track
+           or cycleway:left=opposite|opposite_lane|opposite_track
+              cycleway:right=opposite|opposite_lane|opposite_track
+                                                             ) then 0
          else if ( oneway:bicycle=no                         ) then 0
-         else if ( cycleway:left:oneway=no                   ) then 0
-         else if ( cycleway:right:oneway=no                  ) then 0
+         else if ( not footaccess                            ) then 100
          else if ( junction=roundabout|circular              ) then 60
          else if ( highway=primary|primary_link              ) then 50
          else if ( highway=secondary|secondary_link          ) then 30
@@ -245,10 +278,10 @@ assign costfactor
   if ( and highway= not route=ferry ) then 10000
 
   #
-  # exclude motorways and proposed roads
+  # exclude motorways and proposed, abandoned under construction roads
   #
-  else if ( highway=motorway|motorway_link ) then   10000
-  else if ( highway=proposed|abandoned     ) then   10000
+  else if ( highway=motorway|motorway_link          ) then   10000
+  else if ( highway=proposed|abandoned|construction ) then   10000
 
   #
   # all other exclusions below (access, steps, ferries,..)
@@ -271,7 +304,7 @@ assign costfactor
   #
   # steps and ferries are special. Note this is handled
   # before the cycleroute-switch, to be able
-  # to really exlude them be setting cost to infinity
+  # to really exclude them be setting cost to infinity
   #
   if ( highway=steps ) then ( if allow_steps then 40 else 10000 )
   else if ( route=ferry   ) then ( if allow_ferries then 5.67 else 10000 )
@@ -286,7 +319,7 @@ assign costfactor
   #
   # some other highway types
   #
-  if      ( highway=pedestrian                ) then 3
+  if      ( highway=pedestrian                ) then ( if isbike then ( if hascycleway then 1.1 else 2.2 ) else 3 )
   else if ( highway=bridleway                 ) then 5
   else if ( highway=cycleway                  ) then 1
   else if ( isresidentialorliving             ) then ( if isunpaved then 1.5 else 1.1 )
@@ -397,5 +430,7 @@ assign footaccess =
        else not foot=private|no
 
 assign initialcost =
+       if or highway=traffic_signals and highway=crossing crossing=traffic_signals then 20
+       else
        if bikeaccess then 0
        else ( if footaccess then 100 else 1000000 )

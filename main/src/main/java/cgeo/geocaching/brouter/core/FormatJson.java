@@ -40,13 +40,13 @@ public class FormatJson extends Formatter {
             for (VoiceHint hint : t.voiceHints.list) {
                 sb.append("          [");
                 sb.append(hint.indexInTrack);
-                sb.append(',').append(hint.getJsonCommandIndex());
+                sb.append(',').append(hint.getJsonCommandIndex(turnInstructionMode));
                 sb.append(',').append(hint.getExitNumber());
                 sb.append(',').append(hint.distanceToNext);
                 sb.append(',').append((int) hint.angle);
 
                 // not always include geometry because longer and only needed for comment style
-                if (turnInstructionMode == 4) { // comment style
+                if (turnInstructionMode == 4 || turnInstructionMode == 9) { // comment style
                     sb.append(",\"").append(hint.formatGeometry()).append("\"");
                 }
 
@@ -125,33 +125,51 @@ public class FormatJson extends Formatter {
 
         sb.append("        ]\n");
         sb.append("      }\n");
-        if (t.exportWaypoints || !t.pois.isEmpty()) {
+        if (t.exportWaypoints || t.exportCorrectedWaypoints || !t.pois.isEmpty()) {
             sb.append("    },\n");
             for (int i = 0; i <= t.pois.size() - 1; i++) {
                 final OsmNodeNamed poi = t.pois.get(i);
-                addFeature(sb, "poi", poi.name, poi.ilat, poi.ilon);
-                if (i < t.matchedWaypoints.size() - 1) {
+                addFeature(sb, "poi", poi.name, poi.ilat, poi.ilon, poi.getSElev());
+                if (i < t.pois.size() - 1) {
                     sb.append(",");
                 }
                 sb.append("    \n");
             }
             if (t.exportWaypoints) {
+                if (!t.pois.isEmpty()) {
+                    sb.append("    ,\n");
+                }
                 for (int i = 0; i <= t.matchedWaypoints.size() - 1; i++) {
-                    final String type;
-                    if (i == 0) {
-                        type = "from";
-                    } else if (i == t.matchedWaypoints.size() - 1) {
-                        type = "to";
-                    } else {
-                        type = "via";
-                    }
-
                     final MatchedWaypoint wp = t.matchedWaypoints.get(i);
-                    addFeature(sb, type, wp.name, wp.waypoint.ilat, wp.waypoint.ilon);
+                    final String type;
+                    switch (wp.wpttype) {
+                        case MatchedWaypoint.WAYPOINT_TYPE_DIRECT: type = "beeline"; break;
+                        case MatchedWaypoint.WAYPOINT_TYPE_MEETING: type = "via"; break;
+                        default: type = "shaping";
+                    }
+                    addFeature(sb, type, wp.name, wp.waypoint.ilat, wp.waypoint.ilon, wp.waypoint.getSElev());
                     if (i < t.matchedWaypoints.size() - 1) {
                         sb.append(",");
                     }
                     sb.append("    \n");
+                }
+            }
+            if (t.exportCorrectedWaypoints) {
+                if (t.exportWaypoints) {
+                    sb.append("    ,\n");
+                }
+                boolean hasCorrPoints = false;
+                for (int i = 0; i <= t.matchedWaypoints.size() - 1; i++) {
+                    final String type = "via_corr";
+                    final MatchedWaypoint wp = t.matchedWaypoints.get(i);
+                    if (wp.correctedpoint != null) {
+                        if (hasCorrPoints) {
+                            sb.append(",");
+                        }
+                        addFeature(sb, type, wp.name + "_corr", wp.correctedpoint.ilat, wp.correctedpoint.ilon, wp.correctedpoint.getSElev());
+                        sb.append("    \n");
+                        hasCorrPoints = true;
+                    }
                 }
             }
         } else {
@@ -163,7 +181,7 @@ public class FormatJson extends Formatter {
         return sb.toString();
     }
 
-    private void addFeature(final StringBuilder sb, final String type, final String name, final int ilat, final int ilon) {
+    private void addFeature(final StringBuilder sb, final String type, final String name, final int ilat, final int ilon, final short selev) {
         sb.append("    {\n");
         sb.append("      \"type\": \"Feature\",\n");
         sb.append("      \"properties\": {\n");
@@ -174,7 +192,7 @@ public class FormatJson extends Formatter {
         sb.append("        \"type\": \"Point\",\n");
         sb.append("        \"coordinates\": [\n");
         sb.append("          ").append(formatILon(ilon)).append(",\n");
-        sb.append("          ").append(formatILat(ilat)).append("\n");
+        sb.append("          ").append(formatILat(ilat)).append(selev != Short.MIN_VALUE ? ",\n          " + selev / 4. : "").append("\n");
         sb.append("        ]\n");
         sb.append("      }\n");
         sb.append("    }");

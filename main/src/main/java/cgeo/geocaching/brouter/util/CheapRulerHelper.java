@@ -80,4 +80,21 @@ public final class CheapRulerHelper {
         final double dlat = (ilat1 - ilat2) * kxky[1];
         return Math.sqrt(dlat * dlat + dlon * dlon); // in m
     }
+
+    public static int[] destination(int lon1, int lat1, double distance, double angle) {
+
+        final double[] lonlat2m = getLonLatToMeterScales(lat1);
+        final double lon2m = lonlat2m[0];
+        final double lat2m = lonlat2m[1];
+        angle = 90. - angle;
+        final double st = Math.sin(angle * Math.PI / 180.);
+        final double ct = Math.cos(angle * Math.PI / 180.);
+
+        final int lon2 = (int) (0.5 + lon1 + ct * distance / lon2m);
+        final int lat2 = (int) (0.5 + lat1 + st * distance / lat2m);
+        final int[] ret = new int[2];
+        ret[0] = lon2;
+        ret[1] = lat2;
+        return ret;
+    }
 }

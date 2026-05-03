@@ -30,7 +30,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private static final String CONTEXT_TAG = "---context:";
     private static final String MODEL_TAG = "---model:";
     public boolean useKinematicModel;
-    public BExpressionMetaData meta;
+    public final BExpressionMetaData meta;
     private String context;
     private boolean inOurContext = false;
     private BufferedReader br = null;
@@ -47,7 +47,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private final BitCoderContext ctxDecode = new BitCoderContext(new byte[0]);
     private final Map<String, Integer> variableNumbers = new HashMap<>();
     List<BExpression> lastAssignedExpression = new ArrayList<>();
-    boolean skipConstantExpressionOptimizations = false;
+    final boolean skipConstantExpressionOptimizations = false;
     int expressionNodeCount;
     private float[] variableData;
     // hash-cache for function results
@@ -63,6 +63,9 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private float[] currentVars;
     private int currentVarOffset;
     private BExpressionContext foreignContext;
+    public int[] noStartWays = new int[0];
+    final boolean showErrors = Boolean.getBoolean("showErrors");
+
     private int linenr;
     private boolean lookupDataValid = false;
     private int parsedLines = 0;
@@ -175,7 +178,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
      */
     // external code, do not refactor
     @SuppressWarnings("PMD.NPathComplexity")
-    private void decode(final int[] ld, final boolean inverseDirection, final byte[] ab) {
+    public void decode(final int[] ld, final boolean inverseDirection, final byte[] ab) {
         final BitCoderContext ctx = ctxDecode;
         ctx.reset(ab);
 
@@ -233,7 +236,17 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         if (val == 0) {
             return Float.NaN;
         }
-        res = (val - 1000) / 100f;
+        if (val < 900) {
+            try {
+                final BExpressionLookupValue[] va = lookupValues.get(key);
+                final String sval = va[val].toString();
+                res = Float.parseFloat(sval);
+            } catch (NumberFormatException e) {
+                res = 0f;
+            }
+        } else {
+            res = (val - 1000) / 100f;
+        }
         return res;
     }
 
@@ -553,7 +566,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                             }
                             final float cm = Float.parseFloat(valueMutable);
                             valueMutable = String.format(Locale.US, "%3.1f", cm / 100f);
-                        } else if (valueMutable.contains("meter")) {
+                        } else if (value.contains("metre") || value.contains("meter")) {
                             valueMutable = valueMutable.substring(0, valueMutable.indexOf("m"));
                         } else if (valueMutable.contains("mph")) {
                             final String[] sa = valueMutable.split("mph");
@@ -578,6 +591,32 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                             valueMutable = valueMutable.substring(0, valueMutable.indexOf("m"));
                         } else if (valueMutable.contains("(")) {
                             valueMutable = valueMutable.substring(0, valueMutable.indexOf("("));
+                        } else if (value.contains("st")) {
+                            final String[] sa = value.split("st");
+                            if (sa.length >= 1) {
+                                valueMutable = sa[0];
+                            }
+                            final float st = Float.parseFloat(value);
+                            valueMutable = String.format(Locale.US, "%3.1f", st * 0.907f);
+                        } else if (value.contains("kg")) {
+                            final String[] sa = value.split("kg");
+                            if (sa.length >= 1) {
+                                valueMutable = sa[0];
+                            }
+                            final float kg = Float.parseFloat(value);
+                            valueMutable = String.format(Locale.US, "%3.1f", kg / 1000f);
+                        } else if (value.contains("lbs")) {
+                            final String[] sa = value.split("lbs");
+                            if (sa.length >= 1) {
+                                valueMutable = sa[0];
+                            }
+                            final float lbs = Float.parseFloat(value);
+                            valueMutable = String.format(Locale.US, "%3.1f", lbs / 2204f);
+                        } else if (value.contains("t")) {
+                            final String[] sa = value.split("t");
+                            if (sa.length >= 1) {
+                                valueMutable = sa[0];
+                            }
                         }
                         // found negative maxdraft values
                         // no negative values
@@ -585,7 +624,9 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                         lookupData2[num] = 1000 + (int) (Math.abs(Float.parseFloat(valueMutable)) * 100f);
                     } catch (Exception e) {
                         // ignore errors
-                        System.err.println("error for " + name + "  " + value /* original value */ + " trans " + valueMutable + " " + e.getMessage());
+                        if (showErrors) {
+                            System.err.println("error for " + name + "  " + value /* original value */ + " trans " + valueMutable + " " + e.getMessage());
+                        }
                         lookupData2[num] = 0;
                     }
                 }
@@ -813,6 +854,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
 
     private String parseTokenHelper() throws Exception {
         final StringBuilder sb = new StringBuilder(32);
+        final StringBuilder sbcom = new StringBuilder(32);
         boolean inComment = false;
         for (; ; ) {
             final int ic = readerDone ? -1 : br.read();
@@ -829,8 +871,38 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             }
 
             if (inComment) {
+                sbcom.append(c);
                 if (c == '\r' || c == '\n') {
                     inComment = false;
+                }
+                if (!inComment) {
+                    final Integer num = variableNumbers.get("check_start_way");
+                    if (num != null && noStartWays.length == 0 && sbcom.toString().contains("noStartWay")) {
+                        String var = sbcom.toString().trim();
+                        final String[] savar = var.split("\\|");
+                        if (savar.length == 4) {
+                            var = savar[3].substring(savar[3].indexOf("=") + 1).trim();
+                            final String[] sa = var.split(";");
+                            for (String s: sa) {
+                                final String[] sa2 = s.split(",");
+                                final String name = sa2[0];
+                                final String value = sa2[1];
+                                final int nidx = getLookupNameIdx(name);
+                                if (nidx == -1) {
+                                    break;
+                                }
+                                final int vidx = getLookupValueIdx(nidx, value);
+                                final int[] tmp = new int[noStartWays.length + 2];
+                                if (noStartWays.length > 0) {
+                                    System.arraycopy(noStartWays, 0, tmp, 0, noStartWays.length);
+                                }
+                                noStartWays = tmp;
+                                noStartWays[noStartWays.length - 2] = nidx;
+                                noStartWays[noStartWays.length - 1] = vidx;
+                            }
+                        }
+                    }
+                    sbcom.setLength(0);
                 }
                 continue;
             }
@@ -852,6 +924,27 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     public float assign(final int variableIdx, final float value) {
         variableData[variableIdx] = value;
         return value;
+    }
+
+    final int[] ld2 = new int[512];
+    public boolean checkStartWay(byte[] ab) {
+        if (ab == null) {
+            return true;
+        }
+        Arrays.fill(ld2, 0);
+        decode(ld2, false, ab);
+        for (int i = 0; i < noStartWays.length; i += 2) {
+            final int key = noStartWays[i];
+            final int value = noStartWays[i + 1];
+            if (ld2[key] == value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void freeNoWays() {
+        noStartWays = new int[0];
     }
 
 }
