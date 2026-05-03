@@ -4,6 +4,7 @@ import cgeo.geocaching.about.SystemInformationViewModel;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.databinding.AboutChangesPageBinding;
 import cgeo.geocaching.databinding.AboutContributorsPageBinding;
 import cgeo.geocaching.databinding.AboutLicensePageBinding;
@@ -383,7 +384,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             markwon.setMarkdown(binding.aboutSpecialthanksdetails, LocalizationUtils.getString(R.string.about_contributors_specialthanksdetails));
 
             final String indentedList = "   " + LocalizationUtils.getPlainString(R.string.components2).replace("\n", "\n  ");
-            markwon.setMarkdown(binding.aboutComponents, LocalizationUtils.getPlainString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)));
+            markwon.setMarkdown(binding.aboutComponents, LocalizationUtils.getPlainString(R.string.components).replace("%1", indentedList.substring(0, indentedList.length() - 2)).replace("%2", BRouterConstants.version));
         }
 
         private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {

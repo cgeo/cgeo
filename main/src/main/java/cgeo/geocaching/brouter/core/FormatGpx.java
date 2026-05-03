@@ -1,5 +1,6 @@
 package cgeo.geocaching.brouter.core;
 
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.mapaccess.MatchedWaypoint;
 import cgeo.geocaching.brouter.util.StringUtils;
 
@@ -71,7 +72,7 @@ public class FormatGpx extends Formatter {
         if (turnInstructionMode == 3) {
             sb.append(" creator=\"OsmAndRouter\" version=\"1.1\">\n");
         } else {
-            sb.append(" creator=\"BRouter-" + OsmTrack.version + "\" version=\"1.1\">\n");
+            sb.append(" creator=\"BRouter-" + BRouterConstants.version + "\" version=\"1.1\">\n");
         }
         if (turnInstructionMode == 9) {
             sb.append(" <metadata>\n");
@@ -476,7 +477,7 @@ public class FormatGpx extends Formatter {
         sb.append(" xmlns=\"http://www.topografix.com/GPX/1/1\" \n");
         sb.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n");
         sb.append(" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\" \n");
-        sb.append(" creator=\"BRouter-" + OsmTrack.version + "\" version=\"1.1\">\n");
+        sb.append(" creator=\"BRouter-" + BRouterConstants.version + "\" version=\"1.1\">\n");
     }
 
     public void formatGpxFooter(BufferedWriter sb) throws IOException {
