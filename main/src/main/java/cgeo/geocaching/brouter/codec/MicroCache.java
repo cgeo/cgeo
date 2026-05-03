@@ -20,7 +20,7 @@ import cgeo.geocaching.brouter.util.ByteDataWriter;
  */
 public class MicroCache extends ByteDataWriter {
     public static final MicroCache emptyNonVirgin = new MicroCache(null);
-    public static boolean debug = false;
+    public static final boolean debug = false;
 
     static {
         emptyNonVirgin.virgin = false;

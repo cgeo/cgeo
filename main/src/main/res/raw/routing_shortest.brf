@@ -7,15 +7,25 @@ assign downhillcutoff 1.5
 assign uphillcost 0
 assign uphillcutoff 1.5
 
-assign   turnInstructionMode  = 1  # 0=none, 1=auto-choose, 2=locus-style, 3=osmand-style
+assign   turnInstructionMode  = 1  # %turnInstructionMode% | Mode for the generated turn instructions | [0=none, 1=auto-choose, 2=locus-style, 3=osmand-style, 4=comment-style, 5=gpsies-style, 6=orux-style, 7=locus-old-style]
 assign   validForFoot        1
+
+assign use_proposed_cycleroutes = false  # %use_proposed_cycleroutes% | Set to true to consider proposed and regular cycleroutes as equals | boolean
 
 ---context:way   # following code refers to way-tags
 
-assign any_cycleroute or route_bicycle_icn=yes or route_bicycle_ncn=yes or route_bicycle_rcn=yes route_bicycle_lcn=yes
+assign any_cycleroute
+  switch not use_proposed_cycleroutes
+    or route_bicycle_icn=yes or route_bicycle_ncn=yes or route_bicycle_rcn=yes route_bicycle_lcn=yes
+    or route_bicycle_icn=yes|proposed or route_bicycle_ncn=yes|proposed or route_bicycle_rcn=yes|proposed route_bicycle_lcn=yes|proposed
+
 assign nodeaccessgranted or any_cycleroute lcn=yes
 
 assign turncost 0
+
+assign initialclassifier =
+     if route=ferry then 1
+     else 0
 
 assign initialcost switch route=ferry 10000 0
 
@@ -25,35 +35,35 @@ assign initialcost switch route=ferry 10000 0
 #
 assign defaultaccess
        switch access=
-              not motorroad=yes
+              (
+                    if motorroad=yes then false
+                    else if highway=motorway|motorway_link then false
+                    else true
+              )
               switch or access=private access=no
-                     0
-                     1
+                     false
+                     true
 
 #
 # calculate logical bike access
 #
 assign bikeaccess
-       or any_cycleroute
-          switch bicycle=
-                 switch bicycle_road=yes
-                    1
-                    switch vehicle=
-                            defaultaccess
-                            switch or vehicle=private vehicle=no
-                                0
-                                1
-                 not or bicycle=private or bicycle=no bicycle=dismount
+       switch bicycle=
+              switch bicycle_road=yes
+                 true
+                 switch vehicle=
+                        ( if highway=footway then false else defaultaccess )
+                        not vehicle=private|no
+              not or bicycle=private or bicycle=no or bicycle=dismount bicycle=use_sidepath
 
 #
 # calculate logical foot access
 #
 assign footaccess
-       or bikeaccess
-          or bicycle=dismount
-             switch foot=
-                    defaultaccess
-                    not or foot=private foot=no
+       or bicycle=dismount
+          switch foot=
+                 defaultaccess
+                 not or foot=private or foot=no foot=use_sidepath
 
 assign accesspenalty switch or bikeaccess footaccess 0 100000
 
@@ -109,6 +119,9 @@ assign isgoodforcars = if greater priorityclassifier 6 then true
 assign classifiermask add multiply isroundabout   4
                       add multiply islinktype     8
                           multiply isgoodforcars 16
+
+# include `smoothness=` tags in the response's WayTags for track analysis
+assign dummyUsage = smoothness=
 
 ---context:node  # following code refers to node tags
 

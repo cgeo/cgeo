@@ -2,7 +2,7 @@ package cgeo.geocaching.brouter;
 
 public class BRouterConstants {
     // BRouter basis for c:geo's implementation
-    public static final String version = "1.7.5";
+    public static final String version = "1.7.9";
 
     public static final String BROUTER_LOOKUPS_FILENAME = "lookups.dat";
 

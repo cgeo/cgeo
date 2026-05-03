@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class BExpressionLookupValue {
-    public String value;
+    public final String value;
     public List<String> aliases;
 
     BExpressionLookupValue(final String value) {
