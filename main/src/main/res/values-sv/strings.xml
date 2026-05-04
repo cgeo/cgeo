@@ -201,6 +201,8 @@
     <string name="log_problem_needs_maintenance_text">Denna geocacharen rapporterade att det finns ett problem med denna cache.</string>
     <string name="log_problem_log_full_label">Loggboken är full</string>
     <string name="log_problem_log_full_text">Denna geocacharen rapporterade att loggboken är full.</string>
+    <string name="log_problem_log_wet_label">Loggboken är våt</string>
+    <string name="log_problem_log_wet_text">Denna geocachare rapporterade att behållaren är våt.</string>
     <string name="log_problem_damaged_label">Behållaren är skadad</string>
     <string name="log_problem_damaged_text">Denna geocacharen rapporterade att behållaren är skadad.</string>
     <string name="log_problem_missing_label">Cachen är kanske borta</string>
