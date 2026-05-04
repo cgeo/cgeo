@@ -50,6 +50,10 @@ public class Route implements IGeoItemSupplier, Parcelable {
         this.routeable = routeable;
     }
 
+    public boolean isRouteable() {
+        return routeable;
+    }
+
     public String getName() {
         return name;
     }

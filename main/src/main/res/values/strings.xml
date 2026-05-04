@@ -2959,7 +2959,7 @@
     <string name="check_hillshading_found">Hillshading data already present</string>
     <string name="check_hillshading_missing">Found missing hillshading data:</string>
     <string name="check_hillshading_unsupported">Warning: Hillshading data is at least partly not available for the selected region</string>
-    <string name="check_hillshading_tiles_menu">Check for missing hillshading data</string>
+    <string name="check_hillshading_tiles_menu">Check for missing elevation data</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>
