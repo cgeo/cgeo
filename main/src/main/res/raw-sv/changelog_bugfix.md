@@ -1,15 +1,15 @@
 ##
-Time to update! If you are still using Android 7 or older, this might be the last c:geo update for you! With our next feature release of c:geo we will drop support for Android 5-7 to reduce our maintenance load and to be able to update some external components used by c:geo which we are currently still holding back. We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
+Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
  - Ändra: Wherigo-filer kan inte laddas ner för närvarande, visa instruktioner för åtgärder
  - Fix: Orsak till radering av logg upprätthåller inte längdgräns
  - Nytt: Utökad loggning för krascher i nedladdningshanteraren
  - Fix: Waypoint infosheet kan bli för lång, knappar oåtkomliga
- - Fix: Some location info gets truncated
- - Fix: Internal routing no longer working, only straight line shown
- - Fix: Some folder creation issues
+ - Fix: Viss platsinformation blir trunkerad
+ - Fix: Intern routing fungerar inte längre, endast rak linje visas
+ - Fix: Några problem med att skapa mappar
 
-Note: If you are using internal routing, you will need to execute the following step once after installing this release: Go to c:geo home screen, open "Manage offline data" - "Update routing data", and let c:geo install the updated files. (Reason: BRouter routing data file structure has changed and all routing data files must comply to the same version.)
+Obs: Om du använder intern routing måste du köra följande steg en gång efter installationen av denna utgåva: Gå till c:geo startskärm, öppna "Hantera offline data" - "Uppdatera routing data" och låt c:geo installera de uppdaterade filerna. (Orsak: BRouter routing datafil-struktur har förändrats och alla routing datafiler måste följa samma version.)
 
 ##
 - Fix: Tolkning av cache-platssträng misslyckas för vissa språk på webbplatsen
