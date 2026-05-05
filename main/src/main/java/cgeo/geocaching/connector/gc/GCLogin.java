@@ -671,7 +671,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private static void initializeWebview(final WebView webView) {
+    public static void initializeWebview(final WebView webView) {
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
         final WebSettings webSettings = webView.getSettings();
