@@ -44,8 +44,8 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Zagregowane funkcje z obsługą zakresu: dodaj/suma, min/minimum, maks/maksimum, cnt/licznik, avg/średnia, pomnóż/produkt/prod
 - Naprawiono: Nieprawidłową obsługę statusu DNF dla platform opencaching
 - Nowość: Usuwanie logowania offline po scaleniu z dziennikiem online
-- New: Show confirmation when deleting caches with offline logs
-- New: Show confirmation when deleting all caches from "All" list
+- Nowość: Pokaż potwierdzenie podczas usuwania skrytek z logowaniami offline
+- Nowość: Pokaż potwierdzenie podczas usuwania wszystkich skrytek z listy „Wszystkie”
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
@@ -79,5 +79,5 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Naprawiono: Awarie w filtrowaniu ulubionych wg procentów
 - Nowość: Łatwiejsze korzystanie z prostych list jako list nadrzędnych
 - Zmiana: Użycie lokalnej strefy czasowej (urządzenia, nie zdarzenia) dla wpisów kalendarza (zamiast UTC)
-- Fix: Some texts ignore language switching
-- Fix: "Use imperial settings" not initialized correctly on fresh installs
+- Naprawiono: Niektóre teksty ignorowały zmianę języka
+- Naprawiono: Opcja „Używaj angielskich jednostek miary” na świeżych instalacjach nie była poprawnie inicjowana
