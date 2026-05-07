@@ -181,8 +181,11 @@ public final class LoggingUI {
         if (cache == null) {
             return;
         }
-        menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
+
+        final boolean supportsLogging = cache.supportsLogging();
+        final boolean isOfflineLogging = Settings.getLogOffline();
+        menu.findItem(R.id.menu_log_visit).setVisible(supportsLogging && !isOfflineLogging);
+        menu.findItem(R.id.menu_log_visit_offline).setVisible(supportsLogging && isOfflineLogging);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {

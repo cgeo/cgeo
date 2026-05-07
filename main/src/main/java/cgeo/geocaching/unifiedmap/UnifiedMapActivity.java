@@ -905,10 +905,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     return;
                 }
                 if (cache != null) {
-                    hintItem.setVisible(StringUtils.isNotEmpty(cache.getHint()));
-                    final boolean supportsLogging = cache.supportsLogging();
-                    logVisitItem.setVisible(supportsLogging && !Settings.getLogOffline());
-                    logVisitOfflineItem.setVisible(supportsLogging && Settings.getLogOffline());
+                    // show hint if cache is detailed, otherwise show disabled
+                    final boolean hasHint = StringUtils.isNotEmpty(cache.getHint());
+                    hintItem.setEnabled(hasHint);
+                    hintItem.setVisible(!cache.isDetailed() || hasHint);
+
+                    LoggingUI.onPrepareOptionsMenu(menu, cache);
                 }
                 MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
             });
