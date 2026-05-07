@@ -7,13 +7,12 @@ import cgeo.geocaching.utils.Log;
 import android.location.Address;
 import android.location.Geocoder;
 
-import androidx.test.filters.Suppress;
-
 import java.util.Locale;
 
 import io.reactivex.rxjava3.core.Single;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.data.Offset;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -43,7 +42,7 @@ public class GeocoderTest {
         }
     }
 
-    @Suppress // Suppress test for now as our CI cannot connect to our api server currently
+    @Ignore // Ignore test for now as our CI cannot connect to our api server currently
     @Test
     public void testOsmNominatumGeocoder() {
         final Locale locale = Locale.getDefault();
