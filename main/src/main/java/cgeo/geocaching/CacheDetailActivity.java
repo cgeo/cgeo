@@ -2589,6 +2589,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
                 ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
+                // Make sure the cache is in the local DB before the user adds images to its image folder.
+                imageGallery.setBeforeImageAddAction(activity::ensureSaved);
                 activity.imageGallery = imageGallery;
                 activity.imageGallery.initializeToPosition(activity.imageGalleryPos);
                 reinitializeTitle();
