@@ -30,10 +30,6 @@ import android.webkit.CookieManager;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.UiThread;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -159,13 +155,6 @@ public class WherigoDownloader {
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
-
-        WindowCompat.enableEdgeToEdge(this.activity.getWindow());
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
-            final Insets innerPadding = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
-            v.setPadding(innerPadding.left, innerPadding.top, innerPadding.right, innerPadding.bottom);
-            return windowInsets;
-        });
 
         // Confirmed = OK with a usable cookie. Anything else (cancel, back, outside-tap, activity destroy) is treated as cancelled.
         final AtomicBoolean confirmed = new AtomicBoolean(false);
