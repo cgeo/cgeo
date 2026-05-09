@@ -23,6 +23,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
 - Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
 - Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
