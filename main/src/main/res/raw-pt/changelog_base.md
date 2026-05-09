@@ -23,6 +23,7 @@ Mapas antigos: Como anunciado nos lançamentos de 2025-07-17 e 2025-12-01, final
 - Novo: Possibilidade para definir o ícone da cache mesmo que ela ainda não esteja armazenada
 - Novo: Caixa de informação para o gráfico de elevação que mostra a distância restante, a subida e a descida
 - Novo: São mostradas as coordenadas dos pontos adicionais em janelas pop-up de pontos adicionais
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Detalhes da cache
 - Novo: Detecção de caracteres adicionais nas fórmulas: –, ⋅, ×
