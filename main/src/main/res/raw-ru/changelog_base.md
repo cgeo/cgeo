@@ -23,6 +23,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Offer to set cache icon even if cache is not yet stored
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - New: Display coordinates of waypoints in waypoint popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Детали тайника
 - Новое: Обнаружение дополнительных символов в формулах: –, ⋅, ×
