@@ -23,6 +23,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Możliwość ustawienia ikony skrytki, nawet jeśli skrytka nie jest jeszcze zapisana
 - Nowość: Infoboks dla wykresu wysokości ukazującego pozostały dystans, podejścia, zejścia
 - Nowość: Wyświetlanie współrzędnych punktów nawigacji w wyskakującym okienku punktu nawigacji
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
