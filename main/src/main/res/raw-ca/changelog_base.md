@@ -23,6 +23,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Ofereix la possibilitat de definir la icona del catxé fins i tot si el catxé encara no s'ha desat
 - Nou: Infobox per al gràfic d'elevació que mostra la distància restant, l'ascens i el descens
 - Nou: Mostra les coordenades dels punts de referència a la finestra emergent de punts de referència
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
