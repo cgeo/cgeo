@@ -23,6 +23,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Erbjud att ställa in cache-ikonen även om cachen ännu inte är lagrad
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
