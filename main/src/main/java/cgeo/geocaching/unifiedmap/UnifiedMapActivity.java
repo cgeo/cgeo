@@ -1406,6 +1406,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     protected void onStop() {
         this.resumeDisposables.clear();
+        sheetManageLifecycleOnStop(viewModel);
         super.onStop();
     }
 

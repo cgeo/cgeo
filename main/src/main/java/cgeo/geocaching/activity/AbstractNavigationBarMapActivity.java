@@ -219,9 +219,14 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
     // - restore current value
     // - open new sheet (if non-empty)
     public void sheetManageLifecycleOnStart(@Nullable final UnifiedMapViewModel.SheetInfo sheetInfo, @NonNull final Action1<UnifiedMapViewModel.SheetInfo> setSheetInfo) {
-        sheetRemoveFragment();
         setSheetInfo.call(sheetInfo);
         sheetShowDetails(sheetInfo);
+    }
+
+    public void sheetManageLifecycleOnStop(@Nullable final UnifiedMapViewModel viewModel) {
+        final UnifiedMapViewModel.SheetInfo si = viewModel.sheetInfo.getValue();
+        sheetRemoveFragment();
+        viewModel.sheetInfo.setValue(si);
     }
 
     // handling of http429 warning message
