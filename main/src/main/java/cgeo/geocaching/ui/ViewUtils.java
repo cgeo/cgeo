@@ -42,6 +42,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -167,6 +168,17 @@ public class ViewUtils {
             final InputFilter.LengthFilter lengthFilter = new InputFilter.LengthFilter(maxLength);
             textField.setFilters(new InputFilter[]{lengthFilter});
         }
+    }
+
+    /** implicitly sets focus on touch + forwards touch event to trigger original action */
+    @SuppressLint("ClickableViewAccessibility")
+    public static void setImplicitFocusOnTouch(@NonNull final TextView tv) {
+        tv.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.requestFocus();
+            }
+            return false;
+        });
     }
 
     /**
