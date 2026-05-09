@@ -134,7 +134,7 @@ public class LogActivityHelper {
         if (LogUtils.isOwnLog(entry, cache)) {
             dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
         } else {
-            dialog.input(new SimpleDialog.InputOptions().setInputChecker(s -> s.length() <= MAX_ALLOWED_CHARS_DELETE_REASON).setLabel(String.format(activity.getString(R.string.cache_log_delete_reason), MAX_ALLOWED_CHARS_DELETE_REASON)), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));
+            dialog.input(new SimpleDialog.InputOptions().setMaxAllowedLength(MAX_ALLOWED_CHARS_DELETE_REASON), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));
         }
     }
 
