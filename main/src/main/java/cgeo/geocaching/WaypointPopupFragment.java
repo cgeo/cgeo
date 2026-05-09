@@ -116,7 +116,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
 
-            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(cache.getCoords(), coordinateFormatPosition);
+            final CoordinatesFormatSwitcher coordinateSwitcher = details.addCoordinates(waypoint.getCoords(), coordinateFormatPosition);
             if (coordinateSwitcher != null) {
                 coordinateSwitcher.setOnPositionChangedListener(position -> coordinateFormatPosition = position);
             }
