@@ -192,6 +192,7 @@ public class OkapiClientTest {
     @Ignore("This test needs a working OC account on the CI AVD")
     public void testGetOwnerLogTypes() {
         final OCApiLiveConnector ocConnector = getConnectorOCDE();
+        assertThat(ocConnector.login()).as("Login to OC connector").isTrue();
         final String ownerUserName = ocConnector.getUserName();
         assertThat(ownerUserName).as("Valid user name").isNotEmpty();
 
