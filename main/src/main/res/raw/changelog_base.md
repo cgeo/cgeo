@@ -23,6 +23,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Offer to set cache icon even if cache is not yet stored
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - New: Display coordinates of waypoints in waypoint popup
+- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
 
 ### Cache details
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -44,6 +45,8 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Aggregate functions with range support: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Fix: Incorrect handling of DNF status for opencaching platforms
 - New: Delete offline log after merge with online log
+- New: Show confirmation when deleting caches with offline logs
+- New: Show confirmation when deleting all caches from "All" list
 
 ### Wherigo player
 - New: Offline translation for Wherigos
@@ -77,4 +80,5 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - Fix: Crahs in percentage favorite filter
 - New: Make it easier to use simple lists as parent lists
 - Change: Use local timezone (of device, not event) for calendar entries (instead of UTC)
-- Fix: Some texts stay ignore language switching
+- Fix: Some texts ignore language switching
+- Fix: "Use imperial settings" not initialized correctly on fresh installs

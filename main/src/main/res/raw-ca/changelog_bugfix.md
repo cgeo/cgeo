@@ -1,6 +1,17 @@
 ##
 Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
+ - Canvi: Actualment no es poden descarregar els fitxers de Wherigo, mostreu les instruccions de mitigació
+ - Correcció: El motiu de l'eliminació del registre no aplica el límit de longitud
+ - Nou: Registre ampliat per a errors al gestor de descàrregues
+ - Correcció: El full d'informació dels punts de referència pot arribar a ser massa llarg i els botons són inaccessibles
+ - Correcció: Alguna informació d'ubicació es trunca
+ - Correcció: L'encaminament intern ja no funciona, només es mostra la línia recta
+ - Correcció: Alguns problemes de creació de carpetes
+
+Nota: Si feu servir l'encaminament intern, haureu d'executar el pas següent un cop instal·lat aquesta versió: Aneu a la pantalla d'inici de c:geo, obriu "Gestiona dades fora de línia" - "Actualitza dades d'encaminament" i deixeu que c:geo instal·li els fitxers actualitzats. (Motiu: L'estructura del fitxer de dades d'encaminament de BRouter ha canviat i tots els fitxers de dades d'encaminament han de complir la mateixa versió.)
+
+##
 - Correcció: L'anàlisi de la cadena d'ubicació del catxé falla per a determinats idiomes de llocs web
 - Correcció: Error en obrir un element rastrejable des de la llista de seguiment
 - Correcció: El teclat pot estar bloquejant la selecció de la llista

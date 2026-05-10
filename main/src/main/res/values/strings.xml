@@ -553,6 +553,18 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_overwrite_offline_log">Overwrite offline log</string>
     <string name="caches_overwrite_offline_log_question">Cache has existing offline log of type "%1$s" with a log text. Do you want to overwrite this log?</string>
+    <string name="caches_warning_delete_user_data_others">Delete others</string>
+    <plurals name="caches_warning_delete_user_data">
+        <item quantity="zero">No caches have user data. All caches can be removed safely.</item>
+        <item quantity="one">%1$d/%2$d cache has user data. The user data will get lost on deleting the cache.</item>
+        <item quantity="two">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="few">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="many">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+        <item quantity="other">%1$d/%2$d caches have user data. The user data will get lost on deleting the caches.</item>
+    </plurals>
+    <string name="caches_warning_delete_all_caches">This action will delete all caches (%d) from your device.</string>
+    <string name="caches_warning_remove_from_list_user_data_others">Remove others</string>
+    <string name="caches_warning_remove_caches_from_single_list">%1$d/%2$d caches are only on this list. Removing those caches from the list will delete them from your device.</string>
     <string name="caches_show_attributes_all">Show attribute overview for all caches</string>
     <string name="caches_show_attributes_selected">Show attribute overview for selected caches</string>
     <string name="caches_set_cache_icon">Set cache icon</string>
@@ -1766,6 +1778,7 @@
     <string name="menu_collapse_log">Collapse log</string>
     <string name="cache_log_menu_delete">Delete Log</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>
+    <string name="cache_log_delete_reason">Reason (max. %d characters)</string>
     <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
@@ -2646,6 +2659,15 @@
     <string name="do_not_ask_me_again">Do not ask me again</string>
     <string name="geokrety_parsing_failed">Failed to parse GeoKrety response.</string>
 
+    <string name="command_remove_caches_from_list_progress">Removing caches</string>
+    <plurals name="command_remove_caches_result">
+        <item quantity="zero">Removed %d caches</item>
+        <item quantity="one">Removed %d cache</item>
+        <item quantity="two">Removed %d caches</item>
+        <item quantity="few">Removed %d caches</item>
+        <item quantity="many">Removed %d caches</item>
+        <item quantity="other">Removed %d caches</item>
+    </plurals>
     <string name="command_move_caches_progress">Moving caches to list %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="zero">Moved %d caches</item>
@@ -3083,6 +3105,10 @@
     <string name="wherigo_download_progress_started">Download started</string>
     <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Please log in to www.wherigo.com and accept their terms and conditions first</string>
+
+    <string name="wherigo_download_manualguide_title">Cartridge download</string>
+    <string name="wherigo_download_manualguide_text">Follow these steps to download cartridge and make it available for c:geo.\n\n**1. Download cartridge in browser:**\n* Open this [link](%1$s)\n* Follow instructions to log in\n* For option \"Download cartridge file for\", choose \"Pocket PC Device\"\n* Tap \"Download Now\"\n\n**2. Make cartridge available for c:geo**\n* Open your device\'s \"Download\" folder with Files app of your choosing and locate the just downloaded file (ends with .gwc)\n* Rename file so it starts with CGUID \"%2$s\" (use \"Copy CGUID to clipboard\" below) but still ends with \".gwc\"\n* Move file to cgeo/wherigo folder\n\n**3. Reopen c:geo Wherigo Player for cache**</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Copy CGUID to clipboard</string>
 
     <string name="wherigo_error_title">Wherigo Problem report</string>
     <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>

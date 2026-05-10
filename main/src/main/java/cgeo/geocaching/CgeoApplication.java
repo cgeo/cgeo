@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.TransactionSizeLogger;
+import cgeo.geocaching.utils.buildconfig.BuildConfigHooks;
 import cgeo.geocaching.utils.offlinetranslate.TranslationModelManager;
 
 import android.annotation.SuppressLint;
@@ -158,6 +159,9 @@ public class CgeoApplication extends Application {
 
             //initialize TranslationModelManager
             TranslationModelManager.get().initialize();
+
+            //specific hooks
+            BuildConfigHooks.get().initializeApp();
         }
     }
 

@@ -1,3 +1,4 @@
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.getkeepsafe.dexcount.OutputFormat
 
 import javax.inject.Inject
@@ -9,10 +10,22 @@ import static org.gradle.api.provider.ValueSourceParameters.None
  */
 
 
-/*
- * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
- */
-apply plugin: 'com.android.application'
+plugins {
+    // Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
+    id 'com.android.application'
+
+    // monitor our application method limit, https://github.com/KeepSafe/dexcount-gradle-plugin
+    id 'com.getkeepsafe.dexcount' version '4.0.0'
+
+    // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
+    id 'de.mobilej.unmock'
+
+    // checkstyle tasks
+    id 'checkstyle'
+
+    // PMD Static Source Code Analyzer
+    id 'pmd'
+}
 
 Provider<String> gitCommitIdProvider = providers.of(GitCommitIdValueSource.class) {}
 String commitIdShort = gitCommitIdProvider.get()
@@ -278,51 +291,45 @@ android {
         }
     }
 
-    // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
-    applicationVariants.configureEach { variant ->
-        variant.outputs.configureEach { output ->
-            outputFileName = outputFileName.replace('-basic-', '-')
-        }
-    }
-
-    // special version code for nightly and rc builds
-    applicationVariants.configureEach { variant ->
-        if (variant.buildType.name == 'nightly') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(10000000))
-            }
-        }
-        if (variant.buildType.name == 'rc') {
-            variant.outputs.configureEach {
-                setVersionCodeOverride(versionCodeFromDate(-1))
-            }
-        }
-        if (variant.buildType.name == 'legacy') {
-            String legacyName = System.getenv('LEGACY_VERSION_NAME')
-            Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
-            if (legacyName != null && legacyVersion != null) {
-                variant.outputs.configureEach {
-                    setVersionNameOverride(legacyName)
-                    setVersionCodeOverride(legacyVersion)
-                }
-            }
-        }
-        // debug and release builds have offset zero, no special handling here
-    }
-
     // tests rely on JUnit-based classes
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
 }
 
-// Enabling flag to compress JNI Libs to reduce APK size Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
-androidComponents {
-    onVariants(selector().withBuildType("debug")) {
-        packaging.jniLibs.useLegacyPackaging.set(true)
+ApplicationAndroidComponentsExtension androidComponentsExt = project.extensions.getByType(ApplicationAndroidComponentsExtension)
+
+// remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
+// and set special version codes for nightly, rc and legacy builds
+androidComponentsExt.onVariants(androidComponentsExt.selector().all()) { variant ->
+    variant.outputs.forEach { output ->
+        // remove the "-basic" flavour name from the generated APK
+        // We use a temporary variable to avoid circular reference in the property's lazy evaluation
+        String currentFileName = output.outputFileName.get()
+        output.outputFileName.set(currentFileName.replace("-basic-", "-"))
+
+        // special version code for nightly, rc and legacy builds
+        if (variant.buildType == 'nightly') {
+            output.versionCode.set(versionCodeFromDate(10000000))
+        } else if (variant.buildType == 'rc') {
+            output.versionCode.set(versionCodeFromDate(-1))
+        } else if (variant.buildType == 'legacy') {
+            String legacyName = System.getenv('LEGACY_VERSION_NAME')
+            Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
+            if (legacyName != null && legacyVersion != null) {
+                output.versionName.set(legacyName)
+                output.versionCode.set(legacyVersion)
+            }
+        }
     }
-    onVariants(selector().withBuildType("nightly")) {
-        packaging.jniLibs.useLegacyPackaging.set(true)
-    }
+}
+
+// Enabling flag to compress JNI Libs to reduce APK size, but only for `debug` and `nightly` builds.
+// Ref: https://developer.android.com/studio/releases/gradle-plugin#compress-native-libs-dsl
+androidComponentsExt.onVariants(androidComponentsExt.selector().withBuildType("debug")) {
+    packaging.jniLibs.useLegacyPackaging.set(true)
+}
+androidComponentsExt.onVariants(androidComponentsExt.selector().withBuildType("nightly")) {
+    packaging.jniLibs.useLegacyPackaging.set(true)
 }
 
 dependencies {
@@ -357,13 +364,13 @@ dependencies {
     implementation 'com.github.moving-bits:dbinspection:v0.1.2'
 
     // Jackson XML processing
-    String jacksonVersion = '2.21.2'
+    String jacksonVersion = '2.21.3'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.22.1'
+    implementation 'org.jsoup:jsoup:1.22.2'
 
      // GeoJson parsing: https://github.com/cocoahero/android-geojson
     implementation 'com.cocoahero.android:geojson:1.0.1@jar'
@@ -430,8 +437,8 @@ dependencies {
 
     implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
-    configurations {
-        all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
+    configurations.configureEach {
+        exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
 
     // used by mapsforge
@@ -455,7 +462,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'com.google.android.gms:play-services-maps:20.0.0'
     // somehow there is a transitive play service dependency which we don't want
-    configurations.all*.exclude module: "play-services-measurement"
+    configurations.configureEach {
+        exclude module: "play-services-measurement"
+    }
 
     // Support Library Design
     implementation 'com.google.android.material:material:1.13.0'
@@ -566,7 +575,10 @@ File templatesFile = project.file(templatesDirectory + keysXml)
 File keysFile = project.file(keysDirectory + keysXml)
 String preferencesXml = 'cgeo.geocaching_preferences.xml'
 File preferencesFile = project.file(preferencesXml)
-String adb = android.getAdbExecutable().absolutePath
+
+// Use AndroidComponentsExtension to get the ADB executable provider (stable API)
+// We get the provider here, but we MUST resolve it only at execution time (inside task actions)
+Provider adbExecutableProvider = androidComponentsExt.getSdkComponents().getAdb()
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -653,28 +665,29 @@ static boolean isContinuousIntegrationServer() {
 }
 
 // have a run task for our builds to launch the app directly from gradle
-android.applicationVariants.configureEach { variant ->
-    if (variant.installProvider) {
-        tasks.register("run${variant.name.capitalize()}") {
-            group = 'cgeo'
-            description = "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
-            dependsOn tasks.named(variant.installProvider.name)
+androidComponentsExt.onVariants(androidComponentsExt.selector().all()) { variant ->
+    tasks.register("run${variant.name.capitalize()}") {
+        group = 'cgeo'
+        description = "Installs the ${variant.name} variant and runs the main activity. Depends on 'adb' being on the PATH."
 
-            doFirst {
-                String classpath = variant.applicationId
-                if (variant.buildType.applicationIdSuffix) {
-                    classpath -= "${variant.buildType.applicationIdSuffix}"
+        // Depend on the install task for this variant
+        dependsOn tasks.named("install${variant.name.capitalize()}")
+
+        doFirst {
+            String classpath = variant.applicationId
+            if (variant.buildType?.applicationIdSuffix) {
+                classpath -= variant.buildType.applicationIdSuffix
+            }
+            String launchClass = "${variant.applicationId}/${classpath}.MainActivity"
+            try {
+                execOperations.exec {
+                    // Resolve ADB path at execution time
+                    executable = adbExecutableProvider.get().asFile.absolutePath
+                    args = ['shell', 'am', 'start', '-n', launchClass]
                 }
-                GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
-                try {
-                    execOperations.exec {
-                        executable = adb
-                        args = ['shell', 'am', 'start', '-n', launchClass]
-                    }
-                }
-                catch (RuntimeException e) {
-                    throw new IllegalStateException("Cannot execute 'adb'. Please add %ANDROID_HOME%\\platform-tools to the PATH environment variable and restart your IDE", e)
-                }
+            }
+            catch (RuntimeException e) {
+                throw new IllegalStateException("Cannot execute 'adb'. Please add %ANDROID_HOME%\\platform-tools to the PATH environment variable and restart your IDE", e)
             }
         }
     }
@@ -731,6 +744,8 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
                 String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
                 String tempDirectory = '/data/local/tmp/'
+                // Resolve ADB path at execution time
+                String adb = adbExecutableProvider.get().asFile.absolutePath
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
@@ -771,27 +786,15 @@ tasks.configureEach { theTask ->
     }
 }
 
-/*
- * dex counting - start it manually, when necessary
- * https://github.com/KeepSafe/dexcount-gradle-plugin
- */
-apply plugin: 'com.getkeepsafe.dexcount'
-
+// dex counting - start it manually, when necessary
 dexcount {
     format = OutputFormat.LIST
     includeClassCount = true
     includeTotalMethodCount = true
 }
 
-// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
-apply plugin: 'de.mobilej.unmock'
-
-/*
- * own checkstyle configuration
- * Android plugin doesn't interoperate with the Checkstyle plugin
- */
-apply plugin: 'checkstyle'
-
+// own checkstyle configuration
+// Android plugin doesn't interoperate with the Checkstyle plugin
 checkstyle {
     // align checkstyle with codacy (https://github.com/codacy/codacy-checkstyle)
     // - assign the checkstyle version explicitly here
@@ -820,8 +823,6 @@ tasks.register('checkstyle', Checkstyle) {
 tasks.named('check') {
     mustRunAfter tasks.named('checkstyle')
 }
-
-apply plugin: 'pmd'
 
 // align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {

@@ -1558,6 +1558,7 @@
     <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
+    <string name="cache_log_delete_reason">Orsak (max. %d tecken)</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
@@ -2685,6 +2686,7 @@
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
+    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiera CGUID till urklipp</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>

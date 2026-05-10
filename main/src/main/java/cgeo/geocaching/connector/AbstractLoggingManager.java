@@ -126,6 +126,16 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     }
 
     @Override
+    public int getMaxImageCaptionLength() {
+        return 50;
+    }
+
+    @Override
+    public int getMaxImageDescriptionLength() {
+        return 250;
+    }
+
+    @Override
     public boolean canLogReportType(@NonNull final ReportProblemType reportType) {
         return false;
     }

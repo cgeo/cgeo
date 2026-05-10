@@ -46,17 +46,21 @@ public abstract class PseudoList extends AbstractList {
      * private constructor to have all instances as constants in the class
      */
     private PseudoList(final int id, @StringRes final int titleResourceId, @DrawableRes final int iconResId) {
-        super(id, LocalizationUtils.getString(titleResourceId), iconResId);
+        super(id, "", titleResourceId, iconResId);
     }
 
     @Override
     public String getTitleAndCount() {
-        return "<" + title + ">";
+        return "<" + getTitle() + ">";
     }
 
     @Override
     @NonNull
     public String getTitle() {
+        // Dynamically retrieve the localized string to support language changes
+        if (titleResourceId != 0) {
+            return LocalizationUtils.getString(titleResourceId);
+        }
         return title;
     }
 
