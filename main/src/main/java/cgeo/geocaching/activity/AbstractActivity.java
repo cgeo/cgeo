@@ -173,15 +173,10 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         //apply edge2edge to activity content view
         ViewCompat.setOnApplyWindowInsetsListener(currentWindow.getDecorView(), (v, windowInsets) -> {
-            final View activityContent = v.findViewById(R.id.activity_content);
-            if (activityContent == null) {
-                Log.w("edge2edge: activityContent not found in " + this);
-            } else {
-                //calculate and set the activity_content's insets
-                this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
-                //trigger insets recalculation
-                refreshActivityContentInsets();
-            }
+            //calculate and set the activity_content's insets
+            this.currentWindowInsets = windowInsets.getInsets(DEFAULT_INSETS);
+            //trigger insets recalculation
+            refreshActivityContentInsets();
             return windowInsets;
         });
 
@@ -195,16 +190,22 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             //method was called before insets were set
             return;
         }
-        final View activityContent = getWindow() == null || getWindow().getDecorView() == null ? null :
-            getWindow().getDecorView().findViewById(R.id.activity_content);
-        if (activityContent == null) {
+        final View decorView = getWindow() == null ? null : getWindow().getDecorView();
+        if (decorView == null) {
+            return;
+        }
+        final View activityContent = decorView.findViewById(R.id.activity_content);
+        final View activityWrapper = decorView.findViewById(R.id.activity_content_wrapper);
+        final View root = activityWrapper != null ? activityWrapper : activityContent;
+
+        if (root == null) {
             return;
         }
 
         //let subclasses modify insets according to their needs
         final Insets insets = calculateInsetsForActivityContent(this.currentWindowInsets);
         //apply final insets to activity content
-        activityContent.setPadding(
+        root.setPadding(
                 insets.left < 0 ? this.currentWindowInsets.left : insets.left,
                 insets.top < 0 ? this.currentWindowInsets.top : insets.top,
                 insets.right < 0 ? this.currentWindowInsets.right : insets.right,

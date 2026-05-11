@@ -241,7 +241,7 @@
         <activity
             android:name=".EditWaypointActivity"
             android:label="@string/waypoint_edit_title"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name=".NavigateAnyPointActivity"
@@ -454,7 +454,8 @@
             />
         <activity
             android:name=".log.LogCacheActivity"
-            android:label="@string/log_new_log" >
+            android:label="@string/log_new_log"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".log.LogTrackableActivity"
