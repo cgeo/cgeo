@@ -1569,7 +1569,6 @@
     <string name="menu_collapse_log">Fäll ihop logg</string>
     <string name="cache_log_menu_delete">Radera logg</string>
     <string name="cache_log_menu_popup_title">Logg av %s</string>
-    <string name="cache_log_delete_reason">Orsak (max. %d tecken)</string>
     <string name="cache_log_delete_reason_default">Loggen har tagits bort med c:geo</string>
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
@@ -2607,7 +2606,6 @@
     <string name="check_hillshading_found">Terrängskuggningsdata finns redan</string>
     <string name="check_hillshading_missing">Saknar terrängskuggningsdata:</string>
     <string name="check_hillshading_unsupported">Varning: Terrängskuggningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
-    <string name="check_hillshading_tiles_menu">Sök efter saknad terrängskuggningsdata</string>
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
