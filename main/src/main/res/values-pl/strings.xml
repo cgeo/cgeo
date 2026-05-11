@@ -1617,7 +1617,6 @@
     <string name="menu_collapse_log">Zwiń dziennik</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
-    <string name="cache_log_delete_reason">Powód (maks. %d znaków)</string>
     <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -2695,7 +2694,6 @@
     <string name="check_hillshading_found">Dane cieniowania szczytów już istnieją</string>
     <string name="check_hillshading_missing">Znaleziono brakujące dane cieniowania szczytów:</string>
     <string name="check_hillshading_unsupported">Ostrzeżenie: Dane cieniowania szczytów są przynajmniej częściowo niedostępne dla wybranego regionu</string>
-    <string name="check_hillshading_tiles_menu">Sprawdź brakujące dane cieniowania szczytów</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
