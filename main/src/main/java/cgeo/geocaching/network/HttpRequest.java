@@ -35,7 +35,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class HttpRequest {
 
-    public enum Method { GET, POST, PATCH, PUT }
+    public enum Method { GET, POST, PATCH, PUT, DELETE }
 
     private static final ObjectMapper JSON_MAPPER = JsonUtils.mapper;
 
@@ -219,6 +219,13 @@ public class HttpRequest {
                 break;
             case PUT:
                 builder.put(rbs.get());
+                break;
+            case DELETE:
+                if (requestBodySupplier != null) {
+                    builder.delete(rbs.get());
+                } else {
+                    builder.delete();
+                }
                 break;
             case GET:
             default:
