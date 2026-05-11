@@ -172,11 +172,11 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             // Wherigo
             final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
             if (!wherigoGuis.isEmpty()) {
-                binding.sendToWherigo.setVisibility(View.VISIBLE);
-                binding.sendToWherigo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(requireActivity(), wherigoGuis, guid ->
+                binding.playInCgeo.setVisibility(View.VISIBLE);
+                binding.playInCgeo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(requireActivity(), wherigoGuis, guid ->
                         WherigoActivity.startForGuid(requireActivity(), guid, cache.getGeocode(), true)));
             } else {
-                binding.sendToWherigo.setVisibility(View.GONE);
+                binding.playInCgeo.setVisibility(View.GONE);
             }
 
             // ALC
