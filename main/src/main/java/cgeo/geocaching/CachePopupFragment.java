@@ -188,9 +188,9 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             }
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
 
-            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res, null);
+            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, null);
 
             updateStoreRefreshButtons(true);
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
@@ -238,10 +238,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), listIds);
-            CacheDetailActivity.updateOfflineBox(getView(), cache, res,
+            CacheDetailActivity.updateOfflineBox(getView(), cache,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(getView(), cache, res, null);
+            CacheDetailActivity.updateCacheLists(getView(), cache, null);
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
@@ -250,10 +250,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 activity.invalidateOptionsMenu();
                 final View view = getView();
                 if (view != null) {
-                    CacheDetailActivity.updateOfflineBox(view, cache, res,
+                    CacheDetailActivity.updateOfflineBox(view, cache,
                             new RefreshCacheClickListener(), new DropCacheClickListener(),
                             new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-                    CacheDetailActivity.updateCacheLists(view, cache, res, null);
+                    CacheDetailActivity.updateCacheLists(view, cache, null);
                 }
             });
         }

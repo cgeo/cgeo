@@ -1265,7 +1265,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, res, null);
+                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, null);
             }
         }.execute();
     }
@@ -1429,11 +1429,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             updateAttributes(activity);
             binding.attributesBox.setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
-            updateOfflineBox(binding.getRoot(), cache, activity.res, new RefreshCacheClickListener(), new DropCacheClickListener(),
+            updateOfflineBox(binding.getRoot(), cache, new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), null, new MoveCacheClickListener(), new StoreCacheClickListener());
 
             // list
-            updateCacheLists(binding.getRoot(), cache, activity.res, activity);
+            updateCacheLists(binding.getRoot(), cache, activity);
 
             // watchlist
 
@@ -2465,7 +2465,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // title
             holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : LocalizationUtils.getString(R.string.waypoint));
-            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false, Settings.getIconScaleEverywhere()).getDrawable());
+            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.getResources(), wpt, false, Settings.getIconScaleEverywhere()).getDrawable());
 
             // visited
             /* @todo
@@ -2826,7 +2826,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return false;
     }
 
-    static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
+    static void updateOfflineBox(final View view, final Geocache cache,
                                  final OnClickListener refreshCacheClickListener,
                                  final OnClickListener dropCacheClickListener,
                                  final OnClickListener storeCacheClickListener,
@@ -2891,7 +2891,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    static void updateCacheLists(final View view, final Geocache cache, final Resources res, @Nullable final CacheDetailActivity cacheDetailActivity) {
+    static void updateCacheLists(final View view, final Geocache cache, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final SpannableStringBuilder builder = new SpannableStringBuilder();
         for (final Integer listId : cache.getLists()) {
             if (builder.length() > 0) {

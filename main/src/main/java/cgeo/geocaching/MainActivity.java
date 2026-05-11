@@ -431,6 +431,15 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
             super.onResume();
 
+            // Check if locale has changed and recreate activity if necessary
+            final java.util.Locale currentLocale = getResources().getConfiguration().getLocales().get(0);
+            final java.util.Locale desiredLocale = Settings.getApplicationLocale();
+            if (!currentLocale.equals(desiredLocale)) {
+                Log.d("Locale changed, recreating MainActivity");
+                recreate();
+                return;
+            }
+
             resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
             resumeDisposables.add(LocationDataProvider.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
 

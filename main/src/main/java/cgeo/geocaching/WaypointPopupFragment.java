@@ -98,7 +98,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             toolbar.setTitle(wpCode);
             setToolbarBackgroundColor(toolbar, binding.swipeUpIndicator.swipeUpIndicator, cache.getType(), cache.isEnabled());
 
-            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            toolbar.setLogo(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 

@@ -291,12 +291,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         progress.setMessage(LocalizationUtils.getString(R.string.web_import_waiting));
                         break;
                     case DownloadProgress.MSG_LOADING: {  //cache downloading
-                        final Resources res = activity.res;
                         progress.setMessage(LocalizationUtils.getString(R.string.web_downloading) + ' ' + msg.obj + LocalizationUtils.getPlainString(R.string.ellipsis));
                         break;
                     }
                     case DownloadProgress.MSG_LOADED: {  //Cache downloaded
-                        final Resources res = activity.res;
                         progress.setMessage(LocalizationUtils.getString(R.string.web_downloaded) + ' ' + msg.obj + LocalizationUtils.getPlainString(R.string.ellipsis));
                         activity.refreshCurrentList();
                         break;
@@ -1072,7 +1070,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (selectedView != null) {
                     final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
                     if (holder != null) {
-                        CacheListAdapter.updateViewHolder(holder, cache, res);
+                        CacheListAdapter.updateViewHolder(holder, cache, getResources());
                     }
                 }
             });
