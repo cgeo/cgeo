@@ -256,7 +256,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             }
         }
         inventoryAdapter.putActions(lastSavedState.inventoryActions);
-        ViewUtils.preventKeyboardOverlap(binding.log);
         refreshGui();
 
         requestKeyboardForLogging();
