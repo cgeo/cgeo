@@ -2647,7 +2647,6 @@
     <string name="check_hillshading_found">Данные о затенении высот уже есть</string>
     <string name="check_hillshading_missing">Найдены недостающие данные затенения высот:</string>
     <string name="check_hillshading_unsupported">Предупреждение: Данные о затенении высот недоступны для выбранного региона (по крайней мере частично)</string>
-    <string name="check_hillshading_tiles_menu">Проверка отсутств. данных о затенении высот</string>
     <string name="mapupdate_info">Проверить наличие обновлений для карт и тем. Долгое нажатие — напомнить позже.</string>
     <string name="no_updates_found">Обновления не найдены</string>
     <string name="updates_check">Проверка обновлений</string>
