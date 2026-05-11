@@ -2590,7 +2590,6 @@
     <string name="check_hillshading_found">Reliëfweergave-gegevens reeds aanwezig</string>
     <string name="check_hillshading_missing">Ontbrekende reliëfweergave-gegevens gevonden:</string>
     <string name="check_hillshading_unsupported">Waarschuwing: Reliëfweergave gegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
-    <string name="check_hillshading_tiles_menu">Controleer op ontbrekende reliëfweergave gegevens</string>
     <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
     <string name="no_updates_found">Geen updates gevonden</string>
     <string name="updates_check">Controle op updates</string>
