@@ -1052,7 +1052,8 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_not_logged_in">Not logged in</string>
     <string name="init_login_manual">Manual Login</string>
-    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'ok\' button below.</string>
+    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'Ok\' button below.</string>
+    <string name="init_login_manual_wig_description">Please log into your Geocaching.com account and continue to authorize the Wherigo login. Wait until the Wherigo homepage is visible, then click the \'Ok\' button below.</string>
     <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>

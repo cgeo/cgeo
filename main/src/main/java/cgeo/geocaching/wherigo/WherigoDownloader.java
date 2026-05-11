@@ -156,6 +156,7 @@ public class WherigoDownloader {
     private void performManualLogin(final Consumer<Boolean> onResult) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this.activity, R.style.cgeo_fullScreenDialog);
         final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(this.activity));
+        binding.info.setText(R.string.init_login_manual_wig_description);
         final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         initializeWebview(binding.webview);
