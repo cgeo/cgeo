@@ -28,6 +28,8 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class UnifiedTargetAndDistancesHandler {
@@ -39,6 +41,7 @@ public class UnifiedTargetAndDistancesHandler {
     private final TextView distanceStraight;
     private final TextView distanceRouted;
     private final TextView distanceIndividualRoute;
+    private final TextView turnByTurnInfo;
     private final TextView distanceSupersizeView;
     private final TextView targetView;
     private boolean bothViewsNeeded = false;
@@ -47,6 +50,8 @@ public class UnifiedTargetAndDistancesHandler {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
+    private @DrawableRes int turnInstructionResId = 0;
+    private float turnInstructionDistance = 0.0f;
 
     private static final float MIN_DISTANCE = 0.0005f;
 
@@ -54,43 +59,48 @@ public class UnifiedTargetAndDistancesHandler {
         distanceStraight = root.findViewById(R.id.distanceStraight);
         distanceRouted = root.findViewById(R.id.distanceRouted);
         distanceIndividualRoute = root.findViewById(R.id.distanceIndividualRoute);
+        turnByTurnInfo = root.findViewById(R.id.turnByTurnInfo);
         targetView = root.findViewById(R.id.target);
         distanceSupersizeView = root.findViewById(R.id.distanceSupersize);
 
         distanceStraight.setOnClickListener(v -> swap());
         distanceRouted.setOnClickListener(v -> swap());
         distanceIndividualRoute.setOnClickListener(v -> swap());
+        turnByTurnInfo.setOnClickListener(v -> swap());
         distanceSupersizeView.setOnClickListener(v -> swap());
     }
 
     // distances handling -------------------------------------------------------------------------------------------
 
-    public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
+    public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance, @DrawableRes final int turnInstructionResId, final float turnInstructionDistance) {
         this.showBothDistances = showBothDistances;
         this.distance = distance;
         this.realDistance = realDistance;
+        this.turnInstructionResId = turnInstructionResId;
+        this.turnInstructionDistance = turnInstructionDistance;
         updateDistanceViews();
     }
 
     public void drawRouteDistance(final float routeDistance) {
         this.routeDistance = routeDistance;
-        drawDistance(showBothDistances, distance, realDistance);
+        drawDistance(showBothDistances, distance, realDistance, turnInstructionResId, turnInstructionDistance);
     }
 
     private void swap() {
-        final int supersize = (Settings.getSupersizeDistance() + 1) % (bothViewsNeeded ? 3 : 2);
+        final int supersize = (Settings.getSupersizeDistance() + 1) % (bothViewsNeeded ? 4 : 3); // including turn by turn
         Settings.setSupersizeDistance(supersize);
         updateDistanceViews();
     }
 
     private void updateDistanceViews() {
-        updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distanceStraight, distanceRouted, distanceIndividualRoute, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, turnInstructionResId, turnInstructionDistance, distanceStraight, distanceRouted, distanceIndividualRoute, turnByTurnInfo, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
             final float distance, final float realDistance, final float routeDistance, final boolean showBothDistances,
-            final TextView distanceStraight, final TextView distanceRouted, final TextView distanceIndividualRoute,
+            @DrawableRes final int turnInstructionResId, final float turnInstructionDistance,
+            final TextView distanceStraight, final TextView distanceRouted, final TextView distanceIndividualRoute, final TextView turnByTurnInfo,
             final TextView distanceSupersizeView, final TextView targetView,
             final Action1<Boolean> updateBothViewNeeded
     ) {
@@ -99,12 +109,21 @@ public class UnifiedTargetAndDistancesHandler {
         final boolean showRouted = updateTextView(distanceRouted, routingMode != RoutingMode.STRAIGHT, realDistance, routingMode.drawableId);
         updateTextView(distanceIndividualRoute, true, routeDistance, R.drawable.map_quick_route);
 
-        final int supersize = Settings.getSupersizeDistance();
-        if (updateTextView(distanceSupersizeView, supersize > 0, supersize == 1 ? realDistance : supersize == 2 ? distance : routeDistance, supersize == 1 ? routingMode.drawableId : supersize == 2 ? RoutingMode.STRAIGHT.drawableId : R.drawable.map_quick_route)) {
+        int supersize = Settings.getSupersizeDistance();
+        if (supersize == 2 && !showBothDistances) {
+            supersize = 3;
+        }
+        if (supersize == 3 && turnInstructionResId == 0) {
+            supersize = 0;
+        }
+        if (updateTextView(distanceSupersizeView, supersize > 0,
+                supersize == 1 ? realDistance : supersize == 2 ? distance : supersize == 3 ? turnInstructionDistance : routeDistance,
+                supersize == 1 ? routingMode.drawableId : supersize == 2 ? RoutingMode.STRAIGHT.drawableId : supersize == 3 ? turnInstructionResId : R.drawable.map_quick_route)) {
             targetView.setBackground(null);
         } else {
             targetView.setBackgroundResource(R.drawable.icon_bcg);
         }
+        updateTextView(turnByTurnInfo, turnInstructionResId != 0, turnInstructionDistance, turnInstructionResId);
 
         updateBothViewNeeded.call(showStraight && showRouted);
     }
