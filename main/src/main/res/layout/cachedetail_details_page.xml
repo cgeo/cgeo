@@ -155,8 +155,8 @@
                 <Button
                     android:id="@+id/play_in_cgeo"
                     android:layout_alignParentRight="true"
-                    style="@style/button_icon_colored"
-                    app:icon="@drawable/icon_whereyougo"/>
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_wherigo" />
             </RelativeLayout>
         </LinearLayout>
 

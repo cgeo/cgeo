@@ -95,8 +95,8 @@
                     android:visibility="gone"
                     tools:visibility="visible"/>
                 <Button
-                    android:id="@+id/send_to_wherigo"
-                    style="@style/button_icon_colored"
+                    android:id="@+id/play_in_cgeo"
+                    style="@style/button_icon"
                     app:icon="@drawable/ic_menu_wherigo"
                     android:visibility="gone"
                     tools:visibility="visible"/>
