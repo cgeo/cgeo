@@ -2560,7 +2560,6 @@ Nombre de archivo:%2$s</string>
     <string name="check_hillshading_found">Los datos de sombreado de relieve ya están presentes</string>
     <string name="check_hillshading_missing">Encontrados datos de sombreado de relieve:</string>
     <string name="check_hillshading_unsupported">Advertencia: Los datos de relieve no están disponibles al menos parcialmente para la región elegida</string>
-    <string name="check_hillshading_tiles_menu">Comprobar datos de relieve faltantes</string>
     <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
     <string name="updates_check">Comprobar actualizaciones</string>
