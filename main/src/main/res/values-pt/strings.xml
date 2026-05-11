@@ -1585,7 +1585,6 @@
     <string name="menu_collapse_log">Encurtar registo</string>
     <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
-    <string name="cache_log_delete_reason">Motivo (máx. %d caracteres)</string>
     <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
@@ -2631,7 +2630,6 @@
     <string name="check_hillshading_found">Já existem dados do sombreado da altitude</string>
     <string name="check_hillshading_missing">Encontrados dados do sombreado da altitude:</string>
     <string name="check_hillshading_unsupported">Aviso: Os dados do sombreado da altitude não estão disponíveis, pelo menos em parte, para a região seleccionada</string>
-    <string name="check_hillshading_tiles_menu">Verificar dados do sombreado da altitude em falta</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
