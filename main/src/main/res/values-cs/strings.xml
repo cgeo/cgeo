@@ -2675,7 +2675,6 @@
     <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
     <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
     <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
-    <string name="check_hillshading_tiles_menu">Zkontrolovat chybějící data stínování kopců</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
