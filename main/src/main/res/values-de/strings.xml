@@ -1578,7 +1578,6 @@
     <string name="menu_collapse_log">Log einklappen</string>
     <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
-    <string name="cache_log_delete_reason">Grund (max. %d Zeichen)</string>
     <string name="cache_log_delete_reason_default">Log wurde mit c:geo gelöscht</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -2612,7 +2611,6 @@
     <string name="check_hillshading_found">Daten für Kartenschattierung bereits vorhanden</string>
     <string name="check_hillshading_missing">Fehlende Daten für Kartenschattierung:</string>
     <string name="check_hillshading_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Daten zur Kartenschattierung verfügbar</string>
-    <string name="check_hillshading_tiles_menu">Auf fehlende Daten für Kartenschattierung prüfen</string>
     <string name="mapupdate_info">Tippe hier, um nach Aktualisierungen von Karten- und Design-Dateien zu suchen. Lange Tippen um später erinnert zu werden.</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
     <string name="updates_check">Prüfe auf Aktualisierungen</string>
