@@ -2614,7 +2614,6 @@
     <string name="check_hillshading_found">Datisi ombreggiatura già presenti</string>
     <string name="check_hillshading_missing">Trovati dati di ombreggiatura mancanti:</string>
     <string name="check_hillshading_unsupported">Attenzione: i dati di ombreggiatura, o una parte di essi, non sono disponibili per la regione scelta</string>
-    <string name="check_hillshading_tiles_menu">Controllo dei dati di ombreggiatura mancanti</string>
     <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>
     <string name="updates_check">Controlla aggiornamenti</string>
