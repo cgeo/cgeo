@@ -2558,7 +2558,6 @@
     <string name="check_hillshading_found">Données d\'ombrage du relief déjà présentes</string>
     <string name="check_hillshading_missing">Données d\'ombrage du relief manquantes:</string>
     <string name="check_hillshading_unsupported">Attention : toutes les données d\'ombrage du relief ne sont pas disponibles pour la région sélectionnée</string>
-    <string name="check_hillshading_tiles_menu">Vérifier les données d\'ombrage du relief</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
