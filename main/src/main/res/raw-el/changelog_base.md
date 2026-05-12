@@ -24,6 +24,7 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - New: Display coordinates of waypoints in waypoint popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 
 ### Λεπτομέρειες κρύπτης
 - New: Detect additional characters in formulas: –, ⋅, ×
@@ -47,6 +48,8 @@ Legacy Maps: As announced with 2025.07.17 and 2025.12.01 releases, we have final
 - New: Delete offline log after merge with online log
 - New: Show confirmation when deleting caches with offline logs
 - New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
 
 ### Wherigo player
 - New: Offline translation for Wherigos
