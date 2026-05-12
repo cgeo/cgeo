@@ -24,6 +24,7 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Infoboks dla wykresu wysokości ukazującego pozostały dystans, podejścia, zejścia
 - Nowość: Wyświetlanie współrzędnych punktów nawigacji w wyskakującym okienku punktu nawigacji
 - Naprawiono: Szybkie ustawienia mapy mogły pokazywać przyciski "1"/"2" dla pustych profili routingu po zmianie języka
+- Nowość: Oblicz brakujące dane wysokości na zaimportowanych ścieżkach (jeśli pobierane są dane wysokości)
 
 ### Szczegóły skrytki
 - Nowość: Wykrywaj dodatkowe znaki w formułach: –, ⋅, ×
@@ -47,6 +48,8 @@ Starsze mapy (Legacy): Jak zapowiedziano w wydaniach 2025.07.17 i 2025.12.01, us
 - Nowość: Usuwanie logowania offline po scaleniu z dziennikiem online
 - Nowość: Pokaż potwierdzenie podczas usuwania skrytek z logowaniami offline
 - Nowość: Pokaż potwierdzenie podczas usuwania wszystkich skrytek z listy „Wszystkie”
+- Nowość: Zezwalaj na formatowanie Markdown dla tekstu opisu w skrytkach zdefiniowanych przez użytkownika
+- Zmiana: Zapisz skrytkę przed dodaniem obrazu użytkownika
 
 ### Odtwarzacz Wherigo
 - Nowość: Tłumaczenie offline dla Wherigo
