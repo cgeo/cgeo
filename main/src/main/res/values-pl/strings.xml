@@ -2694,6 +2694,7 @@
     <string name="check_hillshading_found">Dane cieniowania szczytów już istnieją</string>
     <string name="check_hillshading_missing">Znaleziono brakujące dane cieniowania szczytów:</string>
     <string name="check_hillshading_unsupported">Ostrzeżenie: Dane cieniowania szczytów są przynajmniej częściowo niedostępne dla wybranego regionu</string>
+    <string name="check_hillshading_tiles_menu">Sprawdź brakujące dane wysokości</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
