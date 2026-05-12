@@ -24,6 +24,7 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - New: Infobox for elevation chart showing remaining distance, ascent, descent
 - Nyhet: Visa koordinater för vägpunkter i vägpunkt-popup
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 
 ### Cachedetaljer
 - Nytt: Upptäck ytterligare tecken i formler: –, ⋅, ×
@@ -47,6 +48,8 @@ På grund av Play Store-policyer har vi uppdaterat Android API-nivån denna vers
 - Nytt: Ta bort offline-logg efter sammanslagning med online-logg
 - Nyhet: Visa bekräftelse vid borttagning av cacher med offlineloggar
 - Nyhet: Visa bekräftelse när du tar bort alla cacher från listan "Alla"
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
 
 ### Wherigo player
 - Nyhet: Offline-översättning för Wherigos
