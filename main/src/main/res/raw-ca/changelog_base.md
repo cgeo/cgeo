@@ -24,6 +24,7 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Infobox per al gràfic d'elevació que mostra la distància restant, l'ascens i el descens
 - Nou: Mostra les coordenades dels punts de referència a la finestra emergent de punts de referència
 - Correcció: La configuració ràpida del mapa pot mostrar els botons "1"/"2" per als perfils d'enrutament buits després de canviar d'idioma
+- Nou: Calcula les dades d'elevació que falten en importar rutes (si es descarreguen les dades d'elevació)
 
 ### Detalls del catxé
 - Nou: Detecteu caràcters addicionals a les fórmules: –, ⋅, ×
@@ -47,6 +48,8 @@ Mapes antics: Tal com vam anunciar amb les versions 2025.07.17 i 2025.12.01, fin
 - Nou: Suprimeix el registre fora de línia després de fusionar-lo amb el registre en línia
 - Nou: Mostra la confirmació en suprimir els catxés amb registres fora de línia
 - Nou: Mostra la confirmació en suprimir tots els catxés de la llista "Tot"
+- Nou: Permet el format Markdown per al text de llistat als catxés definides per l'usuari
+- Canvi: Emmagatzema el catxé abans d'afegir la imatge de l'usuari
 
 ### Wherigo Player
 - Nou: Traducció fora de línia per a Wherigos
