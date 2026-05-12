@@ -24,6 +24,7 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - Novinka: Infobox pro výškový graf zobrazující zbývající vzdálenost, stoupající, klesající
 - Novinka: Zobrazení souřadnic trasových bodů ve vyskakovacím okně trasového bodu
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 
 ### Detaily kešky
 - Novinka: Detekce dalších znaků ve vzorcích: –, ⋅, ×
@@ -47,6 +48,8 @@ Starší mapy: Jak bylo oznámeno ve verzích 2025.07.17 a 2025.12.01, konečně
 - New: Delete offline log after merge with online log
 - New: Show confirmation when deleting caches with offline logs
 - New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
 
 ### Wherigo přehrávač
 - Novinka: Offline překlad pro Wherigo
