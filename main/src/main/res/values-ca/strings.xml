@@ -290,6 +290,7 @@
     <string name="err_rendertheme_file_unreadable">No s\'ha pogut carregar el tema de la representació seleccionada. S\'utilitzarà el predefinit.</string>
     <string name="err_rendertheme_invalid">El tema de representació seleccionat no és vàlid per aquesta versió de mapsforge. S\'utilitzarà el predefinit.</string>
     <string name="err_invalid_filename_char">No es permet el caràcter \'%c\'</string>
+    <string name="err_center_coordinates_invalid">No es pot definir el centre del mapa, les coordenades no són vàlides</string>
     <string name="warn_save_nothing">No hi ha res per desar.</string>
     <string name="warn_no_cache_coord">No hi ha cap catxé amb les coordenades.</string>
     <string name="warn_no_coordinates">No s\'han indicat les coordenades.</string>
