@@ -2632,6 +2632,7 @@
     <string name="check_hillshading_found">Dades d\'ombrejat ja presents</string>
     <string name="check_hillshading_missing">S\'han trobat dades d\'ombrejats que falten:</string>
     <string name="check_hillshading_unsupported">Avís: les dades d\'ombrejats no estan disponibles almenys en part per a la regió seleccionada</string>
+    <string name="check_hillshading_tiles_menu">Comprova si falten dades d\'elevació</string>
     <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
     <string name="updates_check">Revisió de les actualitzacions</string>
