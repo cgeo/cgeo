@@ -24,6 +24,7 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
 - Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
 - Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
+- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -47,6 +48,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Lösche das Offline-Log nach dem Zusammenführen mit dem Online-Log
 - New: Show confirmation when deleting caches with offline logs
 - New: Show confirmation when deleting all caches from "All" list
+- New: Allow Markdown formatting for listing text in user-defined caches
+- Change: Store cache before adding user image
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
