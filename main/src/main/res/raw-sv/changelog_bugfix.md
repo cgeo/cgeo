@@ -1,6 +1,9 @@
 ##
 Dags att uppdatera! Om du fortfarande använder Android 7 eller äldre kan detta vara den sista uppdateringen av c:geo för dig! Med vår nästa version av c:geo kommer vi att släppa stödet för Android 5-7 för att minska vår underhållsbelastning och för att kunna uppdatera några externa komponenter som används av c:geo som vi för närvarande fortfarande håller tillbaka. Vi kommer fortfarande att stödja Android 8 upp till Android 16 (och nyare versioner när de publiceras), en spännvidd av mer än åtta år av Android-historia.
 
+- Fix: Crash in cache infosheet
+
+##
  - Ändra: Wherigo-filer kan inte laddas ner för närvarande, visa instruktioner för åtgärder
  - Fix: Orsak till radering av logg upprätthåller inte längdgräns
  - Nytt: Utökad loggning för krascher i nedladdningshanteraren
