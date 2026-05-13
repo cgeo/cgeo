@@ -85,4 +85,7 @@ public final class DefaultMap {
         mapType.coords = coords;
         mapType.launchMap(fromActivity);
     }
+    public static void startActivitySelectCoords(final Activity fromActivity, final Geopoint coord) {
+        new UnifiedMapType(coord).launchMapWithSelectCoordinates(fromActivity);
+    }
 }

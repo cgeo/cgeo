@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_select_point"
+        android:title="@string/select_coordinate_from_map"/>
+    <item
         android:id="@+id/menu_add_waypoint"
         android:title="@string/cache_waypoints_add"/>
     <item
