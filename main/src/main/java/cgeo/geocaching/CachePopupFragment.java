@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.PopupBinding;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
@@ -24,6 +25,7 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
@@ -32,6 +34,7 @@ import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Message;
@@ -177,6 +180,31 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                         WherigoActivity.startForGuid(requireActivity(), guid, cache.getGeocode(), true)));
             } else {
                 binding.playInCgeo.setVisibility(View.GONE);
+            }
+
+            // ChirpWolf
+            final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
+            boolean isEnabled = false;
+            for (String current : cache.getAttributes()) {
+                if (Strings.CS.equals(current, compare)) {
+                    isEnabled = true;
+                    break;
+                }
+            }
+            binding.sendToChirp.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            if (isEnabled) {
+                final Intent chirpWolf = ProcessUtils.getLaunchIntent(LocalizationUtils.getPlainString(R.string.package_chirpwolf));
+                binding.sendToChirp.setHint(chirpWolf != null ? R.string.cache_chirpwolf_start : R.string.cache_chirpwolf_install);
+                binding.sendToChirp.setOnClickListener(v -> {
+                    // re-check installation state, might have changed since creating the view
+                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(LocalizationUtils.getPlainString(R.string.package_chirpwolf));
+                    if (chirpWolf2 != null) {
+                        chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        requireActivity().startActivity(chirpWolf2);
+                    } else {
+                        ProcessUtils.openMarket(requireActivity(), LocalizationUtils.getPlainString(R.string.package_chirpwolf));
+                    }
+                });
             }
 
             // ALC
