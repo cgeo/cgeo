@@ -630,17 +630,27 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
+        final List<LogType> result = getPossibleOfflineLogTypes(geocache);
+        // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
+        result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
+        return result;
+    }
+
+    @Override
+    @NonNull
+    public List<LogType> getPossibleOfflineLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> result = super.getPossibleLogTypes(geocache);
+
         // since May 2017 finding own caches is not allowed (except for events)
         if (geocache.isOwner()) {
             result.removeAll(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.WEBCAM_PHOTO_TAKEN, LogType.NEEDS_ARCHIVE, LogType.NEEDS_MAINTENANCE));
         }
+
         // since May 2017 only one found log is allowed
         if (geocache.isFound()) {
             result.removeAll(Arrays.asList(LogType.FOUND_IT, LogType.ATTENDED, LogType.WEBCAM_PHOTO_TAKEN));
         }
-        // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
-        result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
+
         return result;
     }
 
