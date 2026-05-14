@@ -24,6 +24,7 @@ import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.unifiedmap.DefaultMap;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -36,6 +37,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -218,7 +220,12 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_hint).setVisible(cache != null && StringUtils.isNotEmpty(cache.getHint()));
+
+        final MenuItem hintItem = menu.findItem(R.id.menu_hint);
+        final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
+        final boolean showHintButton = StringUtils.isNotEmpty(title);
+        hintItem.setVisible(showHintButton);
+        hintItem.setTitle(title);
 
         final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
         ttsMenuItem.setVisible(cache != null);
@@ -247,10 +254,11 @@ public class CompassActivity extends AbstractActionBarActivity {
                 binding.hint.offlineHintSeparator2.setVisibility(View.GONE);
                 binding.hint.offlineHintText.setVisibility(View.GONE);
             } else {
+                final Pair<CharSequence, CharSequence> hintTexts = CacheUtils.getHintTitleAndMessage(cache);
                 binding.hint.offlineHintSeparator1.setVisibility(View.VISIBLE);
                 binding.hint.offlineHintSeparator2.setVisibility(View.VISIBLE);
                 binding.hint.offlineHintText.setVisibility(View.VISIBLE);
-                binding.hint.offlineHintText.setText(cache.getHint());
+                binding.hint.offlineHintText.setText(hintTexts.second);
             }
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             return true; // to satisfy static code analysis

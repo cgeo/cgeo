@@ -65,6 +65,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.ActionBarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -105,6 +106,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -898,22 +900,30 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (target != null && StringUtils.isNotBlank(target.geocode)) {
             // hide until we know the cache details
             final String geocode = target.geocode;
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.loadCacheTexts(geocode), cache -> {
-                // ensure target did not change while we were loading
-                final UnifiedMapViewModel.Target currentTarget = viewModel.target.getValue();
-                if (currentTarget == null || !Strings.CS.equals(currentTarget.geocode, geocode)) {
-                    return;
-                }
-                if (cache != null) {
-                    // show hint if cache is detailed, otherwise show disabled
-                    final boolean hasHint = StringUtils.isNotEmpty(cache.getHint());
-                    hintItem.setEnabled(hasHint);
-                    hintItem.setVisible(!cache.isDetailed() || hasHint);
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                        Geocache dbCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                        if (dbCache == null) {
+                            dbCache = DataStore.loadCacheTexts(geocode);
+                        }
+                        return dbCache;
+                    },
+                    cache -> {
+                        // ensure target did not change while we were loading
+                        final UnifiedMapViewModel.Target currentTarget = viewModel.target.getValue();
+                        if (currentTarget == null || !Strings.CS.equals(currentTarget.geocode, geocode)) {
+                            return;
+                        }
 
-                    LoggingUI.onPrepareOptionsMenu(menu, cache);
-                }
-                MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
-            });
+                        // show hint if cache is detailed, otherwise show disabled
+                        final CharSequence title = CacheUtils.getHintTitleAndMessage(cache).first;
+                        final boolean showHintButton = StringUtils.isNotEmpty(title);
+                        hintItem.setEnabled(showHintButton);
+                        hintItem.setVisible(!cache.isDetailed() || showHintButton);
+                        hintItem.setTitle(title);
+
+                        LoggingUI.onPrepareOptionsMenu(menu, cache);
+                        MenuUtils.tintToolbarAndOverflowIconsAndTitles(menu);
+                    });
         }
 
         // init followMyLocation
@@ -1023,9 +1033,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             new TargetDistanceComparator(LocationDataProvider.getInstance().currentGeo().getCoords()).sort(list);
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(list, new ArrayList<>()), false, false, () -> viewModel.caches.notifyDataChanged(false));
         } else if (id == R.id.menu_hint) {
+            boolean hintShown = false;
             final Geocache targetCache = getCurrentTargetCache();
-            final String targetHint = targetCache != null ? targetCache.getHint() : LocalizationUtils.getString(R.string.cache_hint_not_available);
-            SimpleDialog.ofContext(this).setTitle(R.string.cache_hint).setMessage(TextParam.text(targetHint)).show();
+            if (targetCache != null) {
+                final Pair<CharSequence, CharSequence> hintTitleAndMessage = CacheUtils.getHintTitleAndMessage(targetCache);
+                if (StringUtils.isNotEmpty(hintTitleAndMessage.second)) {
+                    hintShown = true;
+                    SimpleDialog.ofContext(this).setTitle(TextParam.text(hintTitleAndMessage.first)).setMessage(TextParam.text(hintTitleAndMessage.second)).show();
+                }
+            }
+
+            if (!hintShown) {
+                SimpleDialog.ofContext(this).setTitle(R.string.cache_hint).setMessage(TextParam.text(LocalizationUtils.getString(R.string.cache_hint_not_available))).show();
+            }
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {

@@ -744,7 +744,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
-            menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
+            menu.findItem(R.id.menu_edit_personalnote).setVisible(true);
 
             // submenu waypoints
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
@@ -818,7 +818,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             new FieldNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
             new PersonalNoteExport().export(Collections.singletonList(cache), this);
-        } else if (menuItem == R.id.menu_edit_fieldnote) {
+        } else if (menuItem == R.id.menu_edit_personalnote) {
             editPersonalNote(cache, this);
         } else if (menuItem == R.id.menu_navigate) {
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
@@ -2813,17 +2813,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    @SuppressLint("SetTextI18n")
-    static boolean setOfflineHintText(final OnClickListener showHintClickListener, final TextView offlineHintTextView, final String hint, final String personalNote) {
+    static void updateOfflineHintText(final OnClickListener showHintClickListener, final View offlineHintView, final TextView offlineHintTextView, final Geocache cache) {
+        boolean showHint = false;
         if (null != showHintClickListener) {
-            final boolean hintGiven = StringUtils.isNotEmpty(hint);
-            final boolean personalNoteGiven = StringUtils.isNotEmpty(personalNote);
-            if (hintGiven || personalNoteGiven) {
-                offlineHintTextView.setText((hintGiven ? hint + (personalNoteGiven ? "\r\n" : "") : "") + (personalNoteGiven ? personalNote : ""));
-                return true;
+            final Pair<CharSequence, CharSequence> hintTexts = CacheUtils.getHintTitleAndMessage(cache);
+            if (StringUtils.isNotEmpty(hintTexts.second)) {
+                offlineHintTextView.setText(hintTexts.second);
+                if (null != offlineHintView) {
+                    offlineHintView.setVisibility(View.VISIBLE);
+                    offlineHintView.setTooltipText(hintTexts.first);
+                    offlineHintView.setClickable(true);
+                    offlineHintView.setOnClickListener(showHintClickListener);
+                }
+                return;
             }
         }
-        return false;
+
+        if (null != offlineHintView) {
+            offlineHintView.setVisibility(View.GONE);
+            offlineHintView.setClickable(false);
+            offlineHintView.setOnClickListener(null);
+        }
     }
 
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
@@ -2845,19 +2855,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final View offlineEdit = view.findViewById(R.id.offline_edit);
 
         // check if hint is available and set onClickListener and hint button visibility accordingly
-        final boolean hintButtonEnabled = setOfflineHintText(showHintClickListener, view.findViewById(R.id.offline_hint_text), cache.getHint(), cache.getPersonalNote());
-        final View offlineHint = view.findViewById(R.id.offline_hint);
-        if (null != offlineHint) {
-            if (hintButtonEnabled) {
-                offlineHint.setVisibility(View.VISIBLE);
-                offlineHint.setClickable(true);
-                offlineHint.setOnClickListener(showHintClickListener);
-            } else {
-                offlineHint.setVisibility(View.GONE);
-                offlineHint.setClickable(false);
-                offlineHint.setOnClickListener(null);
-            }
-        }
+        updateOfflineHintText(showHintClickListener, view.findViewById(R.id.offline_hint), view.findViewById(R.id.offline_hint_text), cache);
 
         offlineStore.setClickable(true);
         offlineStore.setOnClickListener(storeCacheClickListener);
