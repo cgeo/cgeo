@@ -588,7 +588,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private void checkRestore() {
-        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+        if (DataStore.isNewlyCreatedDatabase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
             restoreMessageShown = true;
             Dialogs.newBuilder(this)
                     .setTitle(LocalizationUtils.getString(R.string.init_backup_restore))

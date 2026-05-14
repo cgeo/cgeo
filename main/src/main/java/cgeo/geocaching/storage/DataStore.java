@@ -5056,11 +5056,6 @@ public class DataStore {
      */
     @NonNull
     public static Geocache loadCacheTexts(final String geocode) {
-        final Geocache cache = cacheCache.getCacheFromCache(geocode);
-        if (cache != null && StringUtils.isNotEmpty(cache.getDescription())) {
-            return cache;
-        }
-
         final Geocache partial = new Geocache();
         partial.setGeocode(geocode);
 
@@ -5106,7 +5101,7 @@ public class DataStore {
     /**
      * checks if this is a newly created database
      */
-    public static boolean isNewlyCreatedDatebase() {
+    public static boolean isNewlyCreatedDatabase() {
         return newlyCreatedDatabase;
     }
 
