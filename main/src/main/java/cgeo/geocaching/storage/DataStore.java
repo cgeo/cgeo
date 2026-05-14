@@ -2962,7 +2962,17 @@ public class DataStore {
     public static List<String> getListHierarchy() {
         return withAccessLock(() -> {
             final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists + " ORDER BY title COLLATE NOCASE ASC", new String[]{});
-            return cursorToColl(c, new ArrayList<>(), GET_STRING_0);
+            final Set<String> result = new HashSet<>();
+            while (c.moveToNext()) {
+                final String temp = c.getString(0).trim().replaceAll(":+$", "").trim();
+                if (!temp.isEmpty()) {
+                    result.add(temp);
+                }
+            }
+            c.close();
+            final ArrayList<String> result2 = new ArrayList<>(result);
+            Collections.sort(result2);
+            return result2;
         });
     }
 
