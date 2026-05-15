@@ -890,7 +890,6 @@
     <string name="init_login_popup_not_authorized">Ej godkänd</string>
     <string name="init_login_popup_not_logged_in">Inte inloggad</string>
     <string name="init_login_manual">Manuell inloggning</string>
-    <string name="init_login_manual_description">Vänta på att en webbplats ska visas och logga in på ditt konto. Vänta tills inloggningen har slutförts. Klicka sedan på \"ok\"-knappen nedan.</string>
     <string name="init_login_manual_error_nocookie">Ingen auktoriseringstoken hittades. Vänligen utför inloggning eller \'avbryt\' manuell inloggning.</string>
     <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
     <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
@@ -2652,7 +2651,6 @@
     <string name="wherigo_zone_copy_coordinates">Kopiera centrumkoordinater</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Logga in på www.wherigo.com och acceptera deras villkor först</string>
-    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiera CGUID till urklipp</string>
     <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo Engine:\n\n```\n%1$s\n```\nDu kan kontakta utgivaren till patronen [här](%2$s)</string>
