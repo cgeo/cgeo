@@ -90,7 +90,7 @@
                 <Button
                     android:id="@+id/edit_personalnote"
                     style="@style/button_icon"
-                    android:tooltipText="@string/cache_personal_note"
+                    android:tooltipText="@string/cache_personal_note_edit_pn"
                     app:icon="@drawable/ic_menu_note_edit"
                     android:visibility="gone"
                     tools:visibility="visible"/>

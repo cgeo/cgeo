@@ -72,7 +72,7 @@ public final class LoggingUI {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, @NonNull final Geocache cache, final DialogInterface.OnDismissListener listener) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_log_visit) {
             cache.logVisitForResult(activity, REQUEST_CODE_LOG);
@@ -181,8 +181,11 @@ public final class LoggingUI {
         if (cache == null) {
             return;
         }
-        menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
+
+        final boolean supportsLogging = cache.supportsLogging();
+        final boolean isOfflineLogging = Settings.getLogOffline();
+        menu.findItem(R.id.menu_log_visit).setVisible(supportsLogging && !isOfflineLogging);
+        menu.findItem(R.id.menu_log_visit_offline).setVisible(supportsLogging && isOfflineLogging);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {

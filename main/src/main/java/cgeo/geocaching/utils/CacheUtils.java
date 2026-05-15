@@ -7,12 +7,15 @@ import cgeo.geocaching.models.Geocache;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,5 +65,31 @@ public class CacheUtils {
             return urls.iterator().next();
         }
         return null;
+    }
+
+    /**
+     * Returns a Pair of (title, message) for the hint/personal-note dialog.
+     * title combines "Hint" and/or "Personal note" labels separated by " / ".
+     * message combines hint and/or personal note text separated by a divider line.
+     * Message may be empty if neither hint nor personal note is set.
+     */
+    @NonNull
+    public static Pair<CharSequence, CharSequence> getHintTitleAndMessage(@NonNull final Geocache cache) {
+        final String hint = cache.getHint();
+        final boolean hasHint = StringUtils.isNotEmpty(hint);
+        final String personalNote = cache.getPersonalNote();
+        final boolean hasPersonalNote = StringUtils.isNotEmpty(personalNote);
+
+        final List<String> titleList = new ArrayList<>();
+        titleList.add(hasHint ? LocalizationUtils.getString(R.string.cache_hint) : null);
+        titleList.add(hasPersonalNote ? LocalizationUtils.getString(R.string.cache_personal_note) : null);
+        final CharSequence title = TextUtils.join(titleList, s -> s, " / ");
+
+        final List<String> messageList = new ArrayList<>();
+        messageList.add(hasHint ? hint : null);
+        messageList.add(hasPersonalNote ? personalNote : null);
+        final CharSequence message = TextUtils.join(messageList, s -> s, "\r\n──────────\r\n");
+
+        return Pair.create(title, message);
     }
 }
