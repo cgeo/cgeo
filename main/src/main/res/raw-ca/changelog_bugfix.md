@@ -1,6 +1,9 @@
 ##
 Hora d'actualitzar! Si encara feu servir Android 7 o una versió anterior, aquesta podria ser la darrera actualització de c:geo! Amb la propera versió de c:geo, deixarem de tenir compatibilitat amb Android 5-7 per reduir la càrrega de manteniment i poder actualitzar alguns components externs que utilitza c:geo i que actualment encara estem retenint. Continuarem donant suport a Android 8 fins a Android 16 aleshores (i a les versions més noves quan es publiquin), un període de més de vuit anys d'història d'Android.
 
+- Correcció: Error a la fitxa informativa del catxé
+
+##
  - Canvi: Actualment no es poden descarregar els fitxers de Wherigo, mostreu les instruccions de mitigació
  - Correcció: El motiu de l'eliminació del registre no aplica el límit de longitud
  - Nou: Registre ampliat per a errors al gestor de descàrregues
