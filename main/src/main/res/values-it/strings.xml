@@ -917,7 +917,6 @@
     <string name="init_login_popup_not_authorized">Non autorizzato</string>
     <string name="init_login_popup_not_logged_in">Login non effettuato</string>
     <string name="init_login_manual">Login Manuale</string>
-    <string name="init_login_manual_description">Attendere che un sito web appaia e acceda al tuo account. Attendere che il login sia completato. Quindi fare clic sul pulsante \'ok\' qui sotto.</string>
     <string name="init_login_manual_error_nocookie">Non è stato trovato alcun token di autorizzazione. Effettua login o \'annulla\' login manuale.</string>
     <string name="init_login_popup_invalid_timestamp">Ora locale non valida, regolare l\'orologio del dispositivo</string>
     <string name="init_login_popup_invalid_token">Autorizzazione non valida, ri-autorizzare</string>
