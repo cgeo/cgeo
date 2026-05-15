@@ -875,7 +875,6 @@
     <string name="init_login_popup_not_authorized">Ei valtuutettu</string>
     <string name="init_login_popup_not_logged_in">Ei sisäänkirjautuneena</string>
     <string name="init_login_manual">Manuaalinen Kirjautuminen</string>
-    <string name="init_login_manual_description">Odota, että sivusto näkyy ja kirjaudu tilillesi. Odota, kunnes kirjautuminen on valmis. Klikkaa sitten alla olevaa \'ok\' painiketta.</string>
     <string name="init_login_popup_invalid_timestamp">Paikallinen aika virheellinen, tarkista laitteesi aika</string>
     <string name="init_login_popup_invalid_token">Valtuutus epäonnistui, yritä uudestaan</string>
     <string name="init_authorization_credential_username">Käyttäjätunnus</string>
