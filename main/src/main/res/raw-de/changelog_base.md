@@ -23,8 +23,8 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Cache-Symbol kann gesetzt werden, auch wenn Cache noch nicht gespeichert ist
 - Neu: Infobox für Höhendiagramm mit verbleibender Distanz, Aufstieg, Abstieg
 - Neu: Koordinaten von Wegpunkten im Wegpunkt-Popup anzeigen
-- Fix: Map quick settings may show buttons "1"/"2" for empty routing profiles after switching language
-- New: Calculate missing elevation data on importing tracks (if elevation data is downloaded)
+- Korrektur: Kartenschnelleinstellungen zeigen nach Wechsel der App-Sprache Buttons "1"/"2" für leere Routing-Profile
+- Neu: Berechne fehlende Höhenangaben beim Importieren von Tracks (falls Dateien mit Höheninformationen heruntergeladen wurden)
 
 ### Cache-Details
 - Neu: Erkenne zusätzliche Zeichen in Formeln: –, ⋅, ×
@@ -46,10 +46,10 @@ Legacy-Karten: Wie in den Versionen 2025.07.17 und 2025.12.01 angekündigt, habe
 - Neu: Aggregatfunktionen mit Unterstützung von Bereichen: add/sum, min/minimum, max/maximum, cnt/count, avg/average, multiply/product/prod
 - Korrektur: Falsche Behandlung des DNF-Status für Opencaching-Plattformen
 - Neu: Lösche das Offline-Log nach dem Zusammenführen mit dem Online-Log
-- New: Show confirmation when deleting caches with offline logs
-- New: Show confirmation when deleting all caches from "All" list
-- New: Allow Markdown formatting for listing text in user-defined caches
-- Change: Store cache before adding user image
+- Neu: Bestätigung beim Löschen von Caches mit Offline-Logs
+- Neu: Bestätigung beim Löschen aller Caches aus der "Alle" Liste
+- Neu: Erlaube Markdown-Formatierung für Listingtext in benutzerdefinierten Caches
+- Änderung: Cache wird beim Hinzufügen von benutzerdefinierten Bildern gespeichert
 
 ### Wherigo Player
 - Neu: Offline-Übersetzung für Wherigos
