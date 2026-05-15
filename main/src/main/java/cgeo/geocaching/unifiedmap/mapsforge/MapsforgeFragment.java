@@ -32,6 +32,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.Dimension;
@@ -245,7 +247,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setCenter(final Geopoint geopoint) {
-        mMapView.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+        try {
+            mMapView.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+        } catch (IllegalArgumentException e) {
+            Log.e("MapsforgeFragment.setCenter: Invalid geopoint (lat=" + geopoint.getLatitude() + ", lon=" + geopoint.getLongitude() + ")\n" + Arrays.toString(e.getStackTrace()));
+            ViewUtils.showShortToast(getActivity(), R.string.err_center_coordinates_invalid);
+            mMapView.setCenter(new LatLong(41.89018, 12.49237)); // Use Rome, Colosseo as visual indicator for error case
+        }
     }
 
     @Override
