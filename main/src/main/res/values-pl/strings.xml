@@ -306,6 +306,7 @@
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
     <string name="err_invalid_filename_char">Niedozwolony znak \'%c\'</string>
+    <string name="err_center_coordinates_invalid">Nie można ustawić centrum mapy, współrzędne są nieprawidłowe</string>
     <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
     <string name="warn_no_cache_coord">Brak skrytek ze współrzędnymi.</string>
     <string name="warn_no_coordinates">Brak współrzędnych.</string>
