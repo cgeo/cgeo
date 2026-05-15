@@ -942,6 +942,8 @@
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
     <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
     <string name="init_login_manual">Logowanie ręczne</string>
+    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \"OK\" poniżej.</string>
+    <string name="init_login_manual_wig_description">Zaloguj się na swoje konto Geocaching.com i kontynuuj autoryzację logowania Wherigo. Poczekaj, aż strona główna Wherigo będzie widoczna, a następnie kliknij przycisk \"OK\" poniżej.</string>
     <string name="init_login_manual_error_nocookie">Nie znaleziono tokenu autoryzacyjnego. Proszę wykonać logowanie lub \'anuluj\' manualne logowanie.</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
