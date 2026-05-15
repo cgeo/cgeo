@@ -884,7 +884,6 @@
     <string name="init_login_popup_not_authorized">Non autorisé</string>
     <string name="init_login_popup_not_logged_in">Non connecté</string>
     <string name="init_login_manual">Connexion manuelle</string>
-    <string name="init_login_manual_description">Veuillez attendre qu\'un site web apparaisse et se connecte à votre compte. Attendez que la connexion soit terminée. Puis cliquez sur le bouton \'OK\' ci-dessous.</string>
     <string name="init_login_manual_error_nocookie">Aucun jeton d\'autorisation n\'a été trouvé. Veuillez ouvrir une session ou annuler la connexion manuelle.</string>
     <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
     <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
