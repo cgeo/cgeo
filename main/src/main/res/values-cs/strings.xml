@@ -903,7 +903,6 @@
     <string name="init_login_popup_not_authorized">Neautorizováno</string>
     <string name="init_login_popup_not_logged_in">Nepřihlášen</string>
     <string name="init_login_manual">Manuální přihlášení</string>
-    <string name="init_login_manual_description">Počkejte prosím, než se webová stránka zobrazí a přihlaste se k vašemu účtu. Počkejte, dokud není přihlášení dokončeno. Poté klikněte na tlačítko \'ok\' níže.</string>
     <string name="init_login_manual_error_nocookie">Nebyl nalezen žádný autorizační token. Proveďte prosím přihlášení nebo \'zrušte\' manuální přihlášení.</string>
     <string name="init_login_popup_invalid_timestamp">Místní čas je neplatný, nastav systémový čas</string>
     <string name="init_login_popup_invalid_token">Neplatná autorizace, opakuj akci</string>

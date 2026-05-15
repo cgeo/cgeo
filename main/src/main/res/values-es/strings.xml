@@ -884,7 +884,6 @@
     <string name="init_login_popup_not_authorized">No autorizado</string>
     <string name="init_login_popup_not_logged_in">No has iniciado sesión</string>
     <string name="init_login_manual">Inicio de sesión manual</string>
-    <string name="init_login_manual_description">Por favor espere a que aparezca un sitio web e inicie sesión en su cuenta. Espere hasta que se haya completado el inicio de sesión. Luego haga clic en el botón \'ok\' de abajo.</string>
     <string name="init_login_manual_error_nocookie">No se ha encontrado ningún token de autorización. Por favor inicie sesión o cancele el inicio de sesión manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
     <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>

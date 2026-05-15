@@ -289,6 +289,7 @@
     <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
     <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
     <string name="err_invalid_filename_char">Zeichen \'%c\' nicht erlaubt</string>
+    <string name="err_center_coordinates_invalid">Kann Kartenzentrum nicht setzen, Koordinaten ungültig</string>
     <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
     <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
     <string name="warn_no_coordinates">Keine Koordinaten angegeben.</string>
@@ -891,7 +892,8 @@
     <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
     <string name="init_login_popup_not_logged_in">Nicht angemeldet</string>
     <string name="init_login_manual">Manuelle Anmeldung</string>
-    <string name="init_login_manual_description">Bitte warte, bis eine Webseite erscheint, und melde dich bei deinem Konto an. Warte, bis die Anmeldung abgeschlossen ist. Klicke dann auf den Button \'ok\'.</string>
+    <string name="init_login_manual_description">Bitte warte, bis die Webseite erscheint, und melde dich bei deinem Konto an. Warte, bis die Anmeldung abgeschlossen ist. Wähle dann \'OK\'.</string>
+    <string name="init_login_manual_wig_description">Bitte melde dich bei deinem geocaching.com-Konto an und erlaube dann den Wherigo-Login. Warte, bis die Wherigo Homepage sichtbar ist, und klicke dann auf \'OK\'.</string>
     <string name="init_login_manual_error_nocookie">Autorisierungs-Token nicht gefunden. Bitte melde dich an oder brich die manuelle Anmeldung ab.</string>
     <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
     <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
@@ -2694,9 +2696,6 @@
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
     <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
     <string name="wherigo_download_accept_eula">Bitte logge dich auf www.wherigo.com ein und akzeptiere zuerst deren Allgemeine Geschäftsbedingungen</string>
-    <string name="wherigo_download_manualguide_title">Catridge Download</string>
-    <string name="wherigo_download_manualguide_text">Führe folgende Schritte durch, um die Cartridge herunterzuladen und in c:geo verfügbar zu machen:\n\n**1. Lade die Cartridge im Browser herunter:**\n* Öffne diesen [Link](%1$s)\n* Folge den Anweisungen zum Einloggen\n* Wähle \"Pocket PC Device\" in \"Download cartridge file for\"\n* Wähle \"Download Now\"\n\n**2 Cartridge für c:geo verfügbar machen**\n* Öffne den \"Download\"-Ordner Deines Geräts mit einer Dateimanager App deiner Wahl und suche die gerade heruntergeladene Datei (Name endet auf .gwc)\n* Benenne die Datei um, so dass sie mit CGUID \"%2$s\" beginnt (verwendet \"Kopiere CGUID in Zwischenablage\" unten) und mit \".gwc\" endet\n* Verschiebe die Datei in den cgeo/wherigo Ordner\n\n**3. Öffne c:geo Wherigo Player für diesen Cache**</string>
-    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiere CGUID in Zwischenablage</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
     <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```\nDu kannst den Autor der Cartridge [hier](%2$s) kontaktieren</string>

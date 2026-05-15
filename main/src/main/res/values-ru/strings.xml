@@ -903,7 +903,6 @@
     <string name="init_login_popup_not_authorized">Не авторизован</string>
     <string name="init_login_popup_not_logged_in">Вход не выполнен</string>
     <string name="init_login_manual">Вход вручную</string>
-    <string name="init_login_manual_description">Пожалуйста, дождитесь появления веб-сайта и войдите в свою учетную запись. Дождитесь завершения входа в систему. Затем нажмите кнопку \"ок\" ниже.</string>
     <string name="init_login_manual_error_nocookie">Не найден токен авторизации. Пожалуйста, выполните вход в систему или \"отмените\" вход вручную.</string>
     <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
     <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
