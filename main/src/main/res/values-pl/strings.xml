@@ -304,6 +304,7 @@
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
     <string name="err_invalid_filename_char">Niedozwolony znak \'%c\'</string>
+    <string name="err_center_coordinates_invalid">Nie można ustawić centrum mapy, współrzędne są nieprawidłowe</string>
     <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
     <string name="warn_no_cache_coord">Brak skrytek ze współrzędnymi.</string>
     <string name="warn_no_coordinates">Brak współrzędnych.</string>
@@ -929,7 +930,8 @@
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
     <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
     <string name="init_login_manual">Logowanie ręczne</string>
-    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \'ok\' poniżej.</string>
+    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \"OK\" poniżej.</string>
+    <string name="init_login_manual_wig_description">Zaloguj się na swoje konto Geocaching.com i kontynuuj autoryzację logowania Wherigo. Poczekaj, aż strona główna Wherigo będzie widoczna, a następnie kliknij przycisk \"OK\" poniżej.</string>
     <string name="init_login_manual_error_nocookie">Nie znaleziono tokenu autoryzacyjnego. Proszę wykonać logowanie lub \'anuluj\' manualne logowanie.</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
@@ -2804,9 +2806,6 @@
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_download_accept_eula">Zaloguj się najpierw na www.wherigo.com i zaakceptuj ich warunki i postanowienia</string>
-    <string name="wherigo_download_manualguide_title">Pobieranie kartridża</string>
-    <string name="wherigo_download_manualguide_text">Wykonaj poniższe kroki, aby pobrać kartridż i udostępnić go dla c:geo.\n\n**1. Pobierz kartridż w przeglądarce:**\n* Otwórz ten [link](%1$s)\n* Postępuj zgodnie z instrukcjami, aby zalogować się w\n* Aby uzyskać opcję „Pobierz plik kartridża dla”, wybierz „Pocket PC Device”\n* Naciśnij „Download Now”\n\n**2. Udostępnij kartridż dla c:geo**\n* Otwórz folder „Pobierz” w wybranym menedżerze plików i zlokalizuj pobrany plik (kończy się .gwc)\n* Zmień nazwę pliku, aby zaczyna się od CGUID \"%2$s\" (użyj „Kopiuj CGUID do schowka” poniżej), ale aby wciąż miała rozszerzenie „.gwc”\n* Przenieś plik do folderu cgeo/wherigo\n\n**3. Otwórz ponownie c:geo Wherigo Player dla skrytki**</string>
-    <string name="wherigo_download_manualguide_copy_cguid_to_clipboard">Kopiuj CGUID do schowka</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
     <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```\nMożesz skontaktować się z autorem kartridża [tutaj](%2$s)</string>

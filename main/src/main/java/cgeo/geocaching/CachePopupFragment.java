@@ -238,24 +238,25 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), listIds);
-            CacheDetailActivity.updateOfflineBox(getView(), cache,
-                    new RefreshCacheClickListener(), new DropCacheClickListener(),
-                    new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(getView(), cache, null);
+            updateViewInfoAfterStore();
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
             progress.show(activity, LocalizationUtils.getString(R.string.cache_dialog_offline_save_title), LocalizationUtils.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
                 activity.invalidateOptionsMenu();
-                final View view = getView();
-                if (view != null) {
-                    CacheDetailActivity.updateOfflineBox(view, cache,
-                            new RefreshCacheClickListener(), new DropCacheClickListener(),
-                            new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-                    CacheDetailActivity.updateCacheLists(view, cache, null);
-                }
+                updateViewInfoAfterStore();
             });
+        }
+    }
+
+    private void updateViewInfoAfterStore() {
+        final View view = getView();
+        if (view != null) {
+            CacheDetailActivity.updateOfflineBox(view, cache,
+                    new RefreshCacheClickListener(), new DropCacheClickListener(),
+                    new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateCacheLists(view, cache, null);
         }
     }
 
