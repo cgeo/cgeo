@@ -4,6 +4,7 @@ With our next feature release of c:geo we will drop support for Android 5-7 to r
 We will still be supporting Android 8 up to Android 16 then (and newer versions when they will be published), a span of more than eight years of Android history.
 
 - Fix: Crash in cache infosheet
+- Fix: Wherigo cartridges cannot be downloaded anymore (website change)
 
 ##
  - Change: Wherigo files cannot be downloaded currently, display mitigation instructions
